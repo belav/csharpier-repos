@@ -19,7 +19,8 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             MetadataReader reader,
             TypeDefinitionHandle typeDefinitionHandle,
             RuntimeTypeHandle typeHandle
-        ) : base(typeHandle)
+        )
+            : base(typeHandle)
         {
             _reader = reader;
             _typeDefinitionHandle = typeDefinitionHandle;

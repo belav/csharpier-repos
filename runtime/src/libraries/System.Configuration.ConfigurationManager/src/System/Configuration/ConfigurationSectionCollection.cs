@@ -15,7 +15,8 @@ namespace System.Configuration
         internal ConfigurationSectionCollection(
             MgmtConfigurationRecord configRecord,
             ConfigurationSectionGroup configSectionGroup
-        ) : base(StringComparer.Ordinal)
+        )
+            : base(StringComparer.Ordinal)
         {
             _configRecord = configRecord;
             _configSectionGroup = configSectionGroup;
@@ -31,7 +32,8 @@ namespace System.Configuration
         private ConfigurationSectionCollection(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }

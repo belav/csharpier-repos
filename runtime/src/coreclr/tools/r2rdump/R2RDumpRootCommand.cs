@@ -123,7 +123,8 @@ namespace R2RDump
 
         public ParseResult Result;
 
-        public R2RDumpRootCommand() : base("Parses and outputs the contents of a ReadyToRun image")
+        public R2RDumpRootCommand()
+            : base("Parses and outputs the contents of a ReadyToRun image")
         {
             AddOption(In);
             AddOption(Out);

@@ -59,12 +59,14 @@ namespace Microsoft.DotNet.CoreSetup.Test
             string projectDirectory,
             string outputDirectory = null,
             string assemblyName = null
-        ) : base(projectDirectory)
+        )
+            : base(projectDirectory)
         {
             Initialize(outputDirectory, assemblyName);
         }
 
-        public TestProject(TestProject source) : base(source)
+        public TestProject(TestProject source)
+            : base(source)
         {
             Initialize(null, source.AssemblyName);
         }

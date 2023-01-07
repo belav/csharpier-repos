@@ -18,7 +18,8 @@ namespace System.Xml
         private XmlAttributeCollection? _attributes;
         private XmlLinkedNode? _lastChild; // == this for empty elements otherwise it is the last child
 
-        internal XmlElement(XmlName name, bool empty, XmlDocument doc) : base(doc)
+        internal XmlElement(XmlName name, bool empty, XmlDocument doc)
+            : base(doc)
         {
             Debug.Assert(name != null);
             this.parentNode = null;
@@ -42,7 +43,8 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             XmlDocument doc
-        ) : this(doc.AddXmlName(prefix, localName, namespaceURI, null), true, doc) { }
+        )
+            : this(doc.AddXmlName(prefix, localName, namespaceURI, null), true, doc) { }
 
         internal XmlName XmlName
         {

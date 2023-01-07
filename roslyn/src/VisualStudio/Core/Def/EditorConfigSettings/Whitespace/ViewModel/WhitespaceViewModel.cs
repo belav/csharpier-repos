@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
             ISettingsProvider<WhitespaceSetting> data,
             IWpfTableControlProvider controlProvider,
             ITableManagerProvider tableMangerProvider
-        ) : base(data, controlProvider, tableMangerProvider) { }
+        )
+            : base(data, controlProvider, tableMangerProvider) { }
 
         public override string Identifier => "Whitespace";
 

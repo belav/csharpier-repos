@@ -186,7 +186,8 @@ namespace System.Xml
             XmlDocument ownerDoc,
             XmlName next,
             IXmlSchemaInfo schemaInfo
-        ) : base(prefix, localName, ns, hashCode, ownerDoc, next)
+        )
+            : base(prefix, localName, ns, hashCode, ownerDoc, next)
         {
             SetValidity(schemaInfo.Validity);
             SetIsDefault(schemaInfo.IsDefault);

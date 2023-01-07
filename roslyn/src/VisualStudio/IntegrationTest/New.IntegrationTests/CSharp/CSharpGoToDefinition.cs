@@ -20,7 +20,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpGoToDefinition() : base(nameof(CSharpGoToDefinition)) { }
+        public CSharpGoToDefinition()
+            : base(nameof(CSharpGoToDefinition)) { }
 
         [IdeFact]
         public async Task GoToClassDeclaration()

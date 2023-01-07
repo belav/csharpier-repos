@@ -16,7 +16,8 @@ namespace Roslyn.Utilities
                     ISet<T>,
                     IReadOnlySet<T> where TUnderlying : ISet<T>
             {
-                public Set(TUnderlying underlying) : base(underlying) { }
+                public Set(TUnderlying underlying)
+                    : base(underlying) { }
 
                 public new bool Add(T item)
                 {

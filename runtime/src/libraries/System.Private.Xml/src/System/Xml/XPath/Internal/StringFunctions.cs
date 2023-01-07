@@ -23,7 +23,8 @@ namespace MS.Internal.Xml.XPath
             _argList = argList;
         }
 
-        private StringFunctions(StringFunctions other) : base(other)
+        private StringFunctions(StringFunctions other)
+            : base(other)
         {
             _funcType = other._funcType;
             Query[] tmp = new Query[other._argList.Count];

@@ -763,7 +763,8 @@ namespace System.Xml.Serialization
 
         internal AccessorMapping() { }
 
-        protected AccessorMapping(AccessorMapping mapping) : base(mapping)
+        protected AccessorMapping(AccessorMapping mapping)
+            : base(mapping)
         {
             _typeDesc = mapping._typeDesc;
             _attribute = mapping._attribute;
@@ -988,7 +989,8 @@ namespace System.Xml.Serialization
 
         internal MemberMapping() { }
 
-        private MemberMapping(MemberMapping mapping) : base(mapping)
+        private MemberMapping(MemberMapping mapping)
+            : base(mapping)
         {
             _name = mapping._name;
             _checkShouldPersist = mapping._checkShouldPersist;

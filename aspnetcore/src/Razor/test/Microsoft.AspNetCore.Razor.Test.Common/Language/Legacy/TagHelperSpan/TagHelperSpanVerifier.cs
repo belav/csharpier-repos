@@ -80,7 +80,8 @@ internal class TagHelperSpanVerifier
                 string expected,
                 string actual,
                 string userMessage
-            ) : base(Format(span, expected, actual, userMessage))
+            )
+                : base(Format(span, expected, actual, userMessage))
             {
                 Span = span;
                 Expected = expected;

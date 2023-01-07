@@ -14,7 +14,8 @@ public class RelationalCompiledQueryCacheKeyGenerator : CompiledQueryCacheKeyGen
     public RelationalCompiledQueryCacheKeyGenerator(
         CompiledQueryCacheKeyGeneratorDependencies dependencies,
         RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

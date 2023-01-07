@@ -36,7 +36,8 @@ public class NewtonsoftJsonPatchInputFormatter : NewtonsoftJsonInputFormatter
         ObjectPoolProvider objectPoolProvider,
         MvcOptions options,
         MvcNewtonsoftJsonOptions jsonOptions
-    ) : base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
+    )
+        : base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
     {
         // Clear all values and only include json-patch+json value.
         SupportedMediaTypes.Clear();

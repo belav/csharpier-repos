@@ -16,7 +16,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 {
     public class TrailingHeadersTest : HttpClientHandlerTestBase
     {
-        public TrailingHeadersTest(ITestOutputHelper output) : base(output) { }
+        public TrailingHeadersTest(ITestOutputHelper output)
+            : base(output) { }
 
         // Build number suggested by the WinHttp team.
         // It can be reduced after the backport of WINHTTP_QUERY_FLAG_TRAILERS is finished,

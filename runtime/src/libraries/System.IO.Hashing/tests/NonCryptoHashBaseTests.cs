@@ -496,7 +496,8 @@ namespace System.IO.Hashing.Tests
         {
             private int _count;
 
-            public CountingAlgorithm() : base(sizeof(int)) { }
+            public CountingAlgorithm()
+                : base(sizeof(int)) { }
 
             public override void Append(ReadOnlySpan<byte> source)
             {
@@ -519,7 +520,8 @@ namespace System.IO.Hashing.Tests
             public bool IsReset { get; private set; }
             public int GetCurrentHashCoreCallCount { get; private set; }
 
-            public FlexibleAlgorithm(int hashLengthInBytes) : base(hashLengthInBytes)
+            public FlexibleAlgorithm(int hashLengthInBytes)
+                : base(hashLengthInBytes)
             {
                 Reset();
             }
@@ -551,7 +553,8 @@ namespace System.IO.Hashing.Tests
             public int GetCurrentHashCoreCallCount { get; private set; }
             public int GetHashAndResetCoreCallCount { get; private set; }
 
-            public FlexibleAlgorithmOverride(int hashLengthInBytes) : base(hashLengthInBytes)
+            public FlexibleAlgorithmOverride(int hashLengthInBytes)
+                : base(hashLengthInBytes)
             {
                 Reset();
             }

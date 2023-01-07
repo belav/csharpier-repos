@@ -4791,7 +4791,8 @@ public class FixupTest
         private readonly IInterceptor[] _interceptors;
         private readonly string _databaseName;
 
-        public FixupContext(params IInterceptor[] interceptors) : this(null, interceptors) { }
+        public FixupContext(params IInterceptor[] interceptors)
+            : this(null, interceptors) { }
 
         public FixupContext(string databaseName, params IInterceptor[] interceptors)
         {

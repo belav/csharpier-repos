@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Syntax.InternalSyntax.DirectiveStack directives,
                 ImmutableDictionary<string, ReportDiagnostic>? diagnosticOptions,
                 bool cloneRoot
-            ) : base(directives)
+            )
+                : base(directives)
             {
                 Debug.Assert(root != null);
                 Debug.Assert(options != null);

@@ -97,7 +97,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             IThreadingContext threadingContext,
             VisualStudioWorkspace workspace,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
             _serviceProvider = serviceProvider;

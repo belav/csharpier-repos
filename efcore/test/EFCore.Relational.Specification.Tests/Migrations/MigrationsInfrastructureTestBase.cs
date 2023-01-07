@@ -352,12 +352,14 @@ public abstract class MigrationsInfrastructureFixtureBase
 
     public class EmptyMigrationsContext : DbContext
     {
-        public EmptyMigrationsContext(DbContextOptions options) : base(options) { }
+        public EmptyMigrationsContext(DbContextOptions options)
+            : base(options) { }
     }
 
     public class MigrationsContext : PoolableDbContext
     {
-        public MigrationsContext(DbContextOptions options) : base(options) { }
+        public MigrationsContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Foo> Foos { get; set; }
     }

@@ -17,7 +17,8 @@ namespace System.Web.Mvc
             ViewContext viewContext,
             IViewDataContainer viewDataContainer,
             RouteCollection routeCollection
-        ) : base(viewContext, viewDataContainer, routeCollection)
+        )
+            : base(viewContext, viewDataContainer, routeCollection)
         {
             _viewData = new ViewDataDictionary<TModel>(viewDataContainer.ViewData);
         }

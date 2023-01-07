@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.CompositeKeysModel;
 
 public class CompositeKeysContext : PoolableDbContext
 {
-    public CompositeKeysContext(DbContextOptions options) : base(options) { }
+    public CompositeKeysContext(DbContextOptions options)
+        : base(options) { }
 
     public DbSet<CompositeOne> CompositeOnes { get; set; }
     public DbSet<CompositeTwo> CompositeTwos { get; set; }

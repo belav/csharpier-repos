@@ -24,7 +24,8 @@ public class MigrationAssemblyEventData : MigratorEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IMigrator migrator,
         IMigrationsAssembly migrationsAssembly
-    ) : base(eventDefinition, messageGenerator, migrator)
+    )
+        : base(eventDefinition, messageGenerator, migrator)
     {
         MigrationsAssembly = migrationsAssembly;
     }

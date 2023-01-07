@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     public class TypeWithParameterizedAndNullaryConstructor
     {
-        public TypeWithParameterizedAndNullaryConstructor() : this(new FakeService()) { }
+        public TypeWithParameterizedAndNullaryConstructor()
+            : this(new FakeService()) { }
 
         public TypeWithParameterizedAndNullaryConstructor(IFakeService fakeService) { }
     }

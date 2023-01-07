@@ -15,7 +15,8 @@ namespace System.Collections.Frozen
         private protected readonly FrozenHashTable _hashTable;
         private protected readonly T[] _items;
 
-        protected ItemsFrozenSet(HashSet<T> source, IEqualityComparer<T> comparer) : base(comparer)
+        protected ItemsFrozenSet(HashSet<T> source, IEqualityComparer<T> comparer)
+            : base(comparer)
         {
             Debug.Assert(source.Count != 0);
 

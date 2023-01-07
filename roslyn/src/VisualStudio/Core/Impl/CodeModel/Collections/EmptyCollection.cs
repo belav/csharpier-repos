@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private EmptyCollection(CodeModelState state, object parent) : base(state, parent) { }
+        private EmptyCollection(CodeModelState state, object parent)
+            : base(state, parent) { }
 
         internal override Snapshot CreateSnapshot() => s_snapshot;
 

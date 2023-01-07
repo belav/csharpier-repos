@@ -76,7 +76,8 @@ namespace System.IO
         // StreamReader though for different reason). Either way, the buffered data will be lost!
         private static Encoding UTF8NoBOM => EncodingCache.UTF8NoBOM;
 
-        public StreamWriter(Stream stream) : this(stream, UTF8NoBOM, DefaultBufferSize, false) { }
+        public StreamWriter(Stream stream)
+            : this(stream, UTF8NoBOM, DefaultBufferSize, false) { }
 
         public StreamWriter(Stream stream, Encoding encoding)
             : this(stream, encoding, DefaultBufferSize, false) { }
@@ -93,7 +94,8 @@ namespace System.IO
             Encoding? encoding = null,
             int bufferSize = -1,
             bool leaveOpen = false
-        ) : base(null) // Ask for CurrentCulture all the time
+        )
+            : base(null) // Ask for CurrentCulture all the time
         {
             if (stream == null)
             {
@@ -131,7 +133,8 @@ namespace System.IO
             _closable = !leaveOpen;
         }
 
-        public StreamWriter(string path) : this(path, false, UTF8NoBOM, DefaultBufferSize) { }
+        public StreamWriter(string path)
+            : this(path, false, UTF8NoBOM, DefaultBufferSize) { }
 
         public StreamWriter(string path, bool append)
             : this(path, append, UTF8NoBOM, DefaultBufferSize) { }
@@ -147,8 +150,8 @@ namespace System.IO
                 leaveOpen: false
             ) { }
 
-        public StreamWriter(string path, FileStreamOptions options) : this(path, UTF8NoBOM, options)
-        { }
+        public StreamWriter(string path, FileStreamOptions options)
+            : this(path, UTF8NoBOM, options) { }
 
         public StreamWriter(string path, Encoding encoding, FileStreamOptions options)
             : this(

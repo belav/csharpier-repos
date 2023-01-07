@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos;
 public class CustomConvertersCosmosTest
     : CustomConvertersTestBase<CustomConvertersCosmosTest.CustomConvertersCosmosFixture>
 {
-    public CustomConvertersCosmosTest(CustomConvertersCosmosFixture fixture) : base(fixture)
+    public CustomConvertersCosmosTest(CustomConvertersCosmosFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

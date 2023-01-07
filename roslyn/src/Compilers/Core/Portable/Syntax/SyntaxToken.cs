@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis
             Index = index;
         }
 
-        internal SyntaxToken(GreenNode? token) : this()
+        internal SyntaxToken(GreenNode? token)
+            : this()
         {
             Debug.Assert(token == null || token.IsToken, "token must be a token");
             Node = token;

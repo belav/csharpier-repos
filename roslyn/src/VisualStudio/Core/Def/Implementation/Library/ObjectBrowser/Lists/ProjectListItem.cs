@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
     {
         private readonly string _displayText;
 
-        public ProjectListItem(Project project) : base(project.Id, GetProjectGlyph(project))
+        public ProjectListItem(Project project)
+            : base(project.Id, GetProjectGlyph(project))
         {
             _displayText = project.GetProjectDisplayName();
         }

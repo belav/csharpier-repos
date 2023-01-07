@@ -15,7 +15,8 @@ namespace System.Web.Razor.Tokenizer
     {
         private const char TransitionChar = '@';
 
-        public HtmlTokenizer(ITextDocument source) : base(source)
+        public HtmlTokenizer(ITextDocument source)
+            : base(source)
         {
             CurrentState = Data;
         }

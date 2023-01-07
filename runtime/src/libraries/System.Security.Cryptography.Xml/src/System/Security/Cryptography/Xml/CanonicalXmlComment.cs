@@ -17,7 +17,8 @@ namespace System.Security.Cryptography.Xml
             XmlDocument doc,
             bool defaultNodeSetInclusionState,
             bool includeComments
-        ) : base(comment, doc)
+        )
+            : base(comment, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
             _includeComments = includeComments;

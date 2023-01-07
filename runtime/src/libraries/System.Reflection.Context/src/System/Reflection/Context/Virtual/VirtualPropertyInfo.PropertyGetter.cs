@@ -19,7 +19,8 @@ namespace System.Reflection.Context.Virtual
                 VirtualPropertyBase property,
                 Func<object, object?> getter,
                 IEnumerable<Attribute>? getterAttributes
-            ) : base(property)
+            )
+                : base(property)
             {
                 Debug.Assert(null != getter);
 

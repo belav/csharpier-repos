@@ -179,7 +179,8 @@ namespace System.Xml.Serialization
             Type[]? extraTypes,
             XmlRootAttribute? root,
             string? defaultNamespace
-        ) : this(type, overrides, extraTypes, root, defaultNamespace, null) { }
+        )
+            : this(type, overrides, extraTypes, root, defaultNamespace, null) { }
 
         [RequiresUnreferencedCode(TrimSerializationWarning)]
         public XmlSerializer(Type type, XmlRootAttribute? root)
@@ -206,7 +207,8 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode(TrimSerializationWarning)]
-        public XmlSerializer(Type type) : this(type, (string?)null) { }
+        public XmlSerializer(Type type)
+            : this(type, (string?)null) { }
 
         [RequiresUnreferencedCode(TrimSerializationWarning)]
         public XmlSerializer(Type type, string? defaultNamespace)

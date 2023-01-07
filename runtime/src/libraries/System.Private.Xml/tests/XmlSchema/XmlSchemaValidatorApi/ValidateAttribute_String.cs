@@ -17,7 +17,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateAttribute_String(ITestOutputHelper output) : base(output)
+        public TCValidateAttribute_String(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);

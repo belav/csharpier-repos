@@ -11,9 +11,11 @@ namespace System.Reflection
     )]
     public class InvalidFilterCriteriaException : ApplicationException
     {
-        public InvalidFilterCriteriaException() : this(SR.Arg_InvalidFilterCriteriaException) { }
+        public InvalidFilterCriteriaException()
+            : this(SR.Arg_InvalidFilterCriteriaException) { }
 
-        public InvalidFilterCriteriaException(string? message) : this(message, null) { }
+        public InvalidFilterCriteriaException(string? message)
+            : this(message, null) { }
 
         public InvalidFilterCriteriaException(string? message, Exception? inner)
             : base(message, inner)

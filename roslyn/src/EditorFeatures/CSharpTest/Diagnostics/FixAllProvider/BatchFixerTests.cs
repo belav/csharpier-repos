@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
 {
     public partial class BatchFixerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public BatchFixerTests(ITestOutputHelper logger) : base(logger) { }
+        public BatchFixerTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

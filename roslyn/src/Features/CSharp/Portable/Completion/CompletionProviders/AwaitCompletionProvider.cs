@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AwaitCompletionProvider() : base(CSharpSyntaxFacts.Instance) { }
+        public AwaitCompletionProvider()
+            : base(CSharpSyntaxFacts.Instance) { }
 
         internal override string Language => LanguageNames.CSharp;
         public override ImmutableHashSet<char> TriggerCharacters =>

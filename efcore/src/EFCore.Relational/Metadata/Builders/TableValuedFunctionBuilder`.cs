@@ -21,7 +21,8 @@ public class TableValuedFunctionBuilder<TEntity>
     public TableValuedFunctionBuilder(
         IMutableDbFunction function,
         EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) : base(function, entityTypeBuilder) { }
+    )
+        : base(function, entityTypeBuilder) { }
 
     private EntityTypeBuilder<TEntity> EntityTypeBuilder =>
         (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).Instance;

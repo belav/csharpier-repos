@@ -52,7 +52,8 @@ namespace System.Xml.Schema
             get { return _column; }
         }
 
-        internal LocatedActiveAxis(Asttree astfield, KeySequence ks, int column) : base(astfield)
+        internal LocatedActiveAxis(Asttree astfield, KeySequence ks, int column)
+            : base(astfield)
         {
             this.Ks = ks;
             _column = column;
@@ -87,7 +88,8 @@ namespace System.Xml.Schema
             get { return (_KSpointer == 0) ? -1 : ((KSStruct)_KSs[_KSpointer - 1]!).depth; }
         }
 
-        public SelectorActiveAxis(Asttree axisTree, ConstraintStruct cs) : base(axisTree)
+        public SelectorActiveAxis(Asttree axisTree, ConstraintStruct cs)
+            : base(axisTree)
         {
             _KSs = new ArrayList();
             _cs = cs;

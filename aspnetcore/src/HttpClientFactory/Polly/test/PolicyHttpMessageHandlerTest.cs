@@ -429,12 +429,13 @@ public class PolicyHttpMessageHandlerTest
             Task<HttpResponseMessage>
         > OnSendAsync { get; set; }
 
-        public TestPolicyHttpMessageHandler(IAsyncPolicy<HttpResponseMessage> policy) : base(policy)
-        { }
+        public TestPolicyHttpMessageHandler(IAsyncPolicy<HttpResponseMessage> policy)
+            : base(policy) { }
 
         public TestPolicyHttpMessageHandler(
             Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
-        ) : base(policySelector) { }
+        )
+            : base(policySelector) { }
 
         public new Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
@@ -475,7 +476,8 @@ public class PolicyHttpMessageHandlerTest
 
     private class FakeContent : StringContent
     {
-        public FakeContent() : base("hello world") { }
+        public FakeContent()
+            : base("hello world") { }
 
         public bool Disposed { get; set; }
 

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationScope scope,
             string name,
             ImmutableArray<Location> locations
-        ) : base(owner, parameterType, ordinal, refKind, scope, name, locations) { }
+        )
+            : base(owner, parameterType, ordinal, refKind, scope, name, locations) { }
 
         public override bool IsDiscard => false;
 

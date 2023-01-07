@@ -39,8 +39,13 @@ namespace Microsoft.CodeAnalysis
             string nameOfLocalizableResource,
             ResourceManager resourceManager,
             Type resourceSource
-        ) : this(nameOfLocalizableResource, resourceManager, resourceSource, Array.Empty<string>())
-        { }
+        )
+            : this(
+                nameOfLocalizableResource,
+                resourceManager,
+                resourceSource,
+                Array.Empty<string>()
+            ) { }
 
         /// <summary>
         /// Creates a localizable resource string that may possibly be formatted differently depending on culture.

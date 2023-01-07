@@ -1126,7 +1126,8 @@ namespace System.ComponentModel.Composition.Hosting
                 ComposablePartDefinition part,
                 PartQueryStateNode? previousNode,
                 AtomicCompositionQueryState state
-            ) : base(previousNode, state)
+            )
+                : base(previousNode, state)
             {
                 _part = part;
                 _hashCode = part.GetHashCode();
@@ -1153,7 +1154,8 @@ namespace System.ComponentModel.Composition.Hosting
                 HashSet<ComposablePartDefinition> parts,
                 PartQueryStateNode? previousNode,
                 AtomicCompositionQueryState state
-            ) : base(previousNode, state)
+            )
+                : base(previousNode, state)
             {
                 _parts = parts;
             }

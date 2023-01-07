@@ -35,7 +35,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     ///     <see href="https://aka.ms/efcore-docs-conventions">EF Core model-building conventions</see> for more information and examples.
     /// </remarks>
     /// <param name="conventions">The conventions to be applied to the model.</param>
-    public ModelBuilder(ConventionSet conventions) : this(conventions, null, null) { }
+    public ModelBuilder(ConventionSet conventions)
+        : this(conventions, null, null) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="ModelBuilder" /> class that will

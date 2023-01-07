@@ -24,7 +24,8 @@ namespace Roslyn.Test.Utilities
             Encoding? encoding = null,
             string path = "dummy",
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
-        ) : this(path, new StringText(text, encoding, checksumAlgorithm: checksumAlgorithm)) { }
+        )
+            : this(path, new StringText(text, encoding, checksumAlgorithm: checksumAlgorithm)) { }
 
         public override string Path { get; }
 

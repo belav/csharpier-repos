@@ -65,7 +65,8 @@ public class SqlServerUdtTypeMapping : RelationalTypeMapping
         RelationalTypeMappingParameters parameters,
         Func<object, Expression> literalGenerator,
         string? udtTypeName
-    ) : base(parameters)
+    )
+        : base(parameters)
     {
         LiteralGenerator = literalGenerator;
         UdtTypeName = udtTypeName ?? parameters.StoreType;

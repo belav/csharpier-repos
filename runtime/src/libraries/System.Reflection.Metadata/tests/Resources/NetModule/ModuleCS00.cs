@@ -26,7 +26,8 @@ namespace NS.Module
 
     public struct ModStruct
     {
-        public ModStruct(ModClass p = default(ModClass)) : this()
+        public ModStruct(ModClass p = default(ModClass))
+            : this()
         {
             SField = p;
         }

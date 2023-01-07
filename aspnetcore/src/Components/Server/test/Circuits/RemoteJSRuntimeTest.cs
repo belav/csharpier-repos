@@ -132,7 +132,8 @@ public class RemoteJSRuntimeTest
             IOptions<CircuitOptions> circuitOptions,
             IOptions<HubOptions<ComponentHub>> hubOptions,
             ILogger<RemoteJSRuntime> logger
-        ) : base(circuitOptions, hubOptions, logger) { }
+        )
+            : base(circuitOptions, hubOptions, logger) { }
 
         public void TestReceiveByteArray(int id, byte[] data)
         {

@@ -20,7 +20,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
         public NonGenericStringTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure
-        ) : base(testHelpers, configure) { }
+        )
+            : base(testHelpers, configure) { }
 
         public override TestEntityTypeBuilder<TEntity> Entity<TEntity>() =>
             new NonGenericStringTestEntityTypeBuilder<TEntity>(
@@ -177,7 +178,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
     {
         public NonGenericStringTestReferenceNavigationBuilder(
             ReferenceNavigationBuilder referenceNavigationBuilder
-        ) : base(referenceNavigationBuilder) { }
+        )
+            : base(referenceNavigationBuilder) { }
 
         public override TestReferenceReferenceBuilder<TEntity, TRelatedEntity> WithOne(
             Expression<Func<TRelatedEntity, TEntity?>>? navigationExpression = null
@@ -196,7 +198,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
     {
         public NonGenericStringTestReferenceReferenceBuilder(
             ReferenceReferenceBuilder referenceReferenceBuilder
-        ) : base(referenceReferenceBuilder) { }
+        )
+            : base(referenceReferenceBuilder) { }
 
         protected override NonGenericTestReferenceReferenceBuilder<TEntity, TRelatedEntity> Wrap(
             ReferenceReferenceBuilder referenceReferenceBuilder
@@ -267,7 +270,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
     {
         public NonGenericStringTestOwnedNavigationBuilder(
             OwnedNavigationBuilder ownedNavigationBuilder
-        ) : base(ownedNavigationBuilder) { }
+        )
+            : base(ownedNavigationBuilder) { }
 
         protected override NonGenericTestOwnedNavigationBuilder<
             TNewEntity,

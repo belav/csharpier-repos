@@ -30,7 +30,8 @@ public struct HealthReportEntry
         TimeSpan duration,
         Exception? exception,
         IReadOnlyDictionary<string, object>? data
-    ) : this(status, description, duration, exception, data, null) { }
+    )
+        : this(status, description, duration, exception, data, null) { }
 
     /// <summary>
     /// Creates a new <see cref="HealthReportEntry"/> with the specified values for <paramref name="status"/>, <paramref name="exception"/>,

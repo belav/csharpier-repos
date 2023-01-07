@@ -82,7 +82,8 @@ public abstract class ConnectionInterceptionSqlServerTestBase : ConnectionInterc
     {
         public ConnectionInterceptionWithConnectionStringSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
@@ -100,7 +101,8 @@ public abstract class ConnectionInterceptionSqlServerTestBase : ConnectionInterc
     {
         public ConnectionInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {

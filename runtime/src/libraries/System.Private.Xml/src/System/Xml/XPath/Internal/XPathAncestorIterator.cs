@@ -15,9 +15,11 @@ namespace MS.Internal.Xml.XPath
             string name,
             string namespaceURI,
             bool matchSelf
-        ) : base(nav, name, namespaceURI, matchSelf) { }
+        )
+            : base(nav, name, namespaceURI, matchSelf) { }
 
-        public XPathAncestorIterator(XPathAncestorIterator other) : base(other) { }
+        public XPathAncestorIterator(XPathAncestorIterator other)
+            : base(other) { }
 
         public override bool MoveNext()
         {

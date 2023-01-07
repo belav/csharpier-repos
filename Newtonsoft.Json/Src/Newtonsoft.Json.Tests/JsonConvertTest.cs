@@ -2083,7 +2083,8 @@ namespace Newtonsoft.Json.Tests
             int _precision;
             MidpointRounding _rounding;
 
-            public RoundingJsonConverter() : this(2) { }
+            public RoundingJsonConverter()
+                : this(2) { }
 
             public RoundingJsonConverter(int precision)
                 : this(precision, MidpointRounding.AwayFromZero) { }

@@ -13,7 +13,8 @@ namespace System.Data.Common
             Type propertyType,
             bool isReadOnly,
             Attribute[] attributes
-        ) : base(propertyName, attributes)
+        )
+            : base(propertyName, attributes)
         {
             ComponentType = componentType;
             PropertyType = propertyType;

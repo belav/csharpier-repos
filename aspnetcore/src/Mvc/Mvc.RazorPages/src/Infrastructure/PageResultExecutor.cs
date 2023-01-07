@@ -37,7 +37,8 @@ public class PageResultExecutor : ViewExecutor
         IRazorPageActivator razorPageActivator,
         DiagnosticListener diagnosticListener,
         HtmlEncoder htmlEncoder
-    ) : base(writerFactory, compositeViewEngine, diagnosticListener)
+    )
+        : base(writerFactory, compositeViewEngine, diagnosticListener)
     {
         _razorViewEngine = razorViewEngine;
         _htmlEncoder = htmlEncoder;

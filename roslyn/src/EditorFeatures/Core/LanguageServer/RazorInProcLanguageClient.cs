@@ -54,7 +54,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             IThreadingContext threadingContext,
             ILspServiceLoggerFactory lspLoggerFactory,
             [Import(AllowDefault = true)] AbstractLanguageClientMiddleLayer middleLayer
-        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext, middleLayer)
+        )
+            : base(
+                lspServiceProvider,
+                globalOptions,
+                lspLoggerFactory,
+                threadingContext,
+                middleLayer
+            )
         {
             _experimentalCapabilitiesProvider = experimentalCapabilitiesProvider;
         }

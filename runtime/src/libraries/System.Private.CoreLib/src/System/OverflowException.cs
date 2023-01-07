@@ -20,12 +20,14 @@ namespace System
     )]
     public class OverflowException : ArithmeticException
     {
-        public OverflowException() : base(SR.Arg_OverflowException)
+        public OverflowException()
+            : base(SR.Arg_OverflowException)
         {
             HResult = HResults.COR_E_OVERFLOW;
         }
 
-        public OverflowException(string? message) : base(message)
+        public OverflowException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_OVERFLOW;
         }

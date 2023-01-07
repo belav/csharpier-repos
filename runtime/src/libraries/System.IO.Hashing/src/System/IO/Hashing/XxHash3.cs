@@ -27,10 +27,12 @@ namespace System.IO.Hashing
         private State _state;
 
         /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the default seed value 0.</summary>
-        public XxHash3() : this(0) { }
+        public XxHash3()
+            : this(0) { }
 
         /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the specified seed.</summary>
-        public XxHash3(long seed) : base(HashLengthInBytes)
+        public XxHash3(long seed)
+            : base(HashLengthInBytes)
         {
             Initialize(ref _state, (ulong)seed);
         }

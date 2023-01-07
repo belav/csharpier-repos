@@ -194,7 +194,8 @@ namespace Microsoft.CodeAnalysis
             bool isWarningAsError,
             int errorCode,
             params object[] arguments
-        ) : this(messageProvider, errorCode, arguments)
+        )
+            : this(messageProvider, errorCode, arguments)
         {
             Debug.Assert(!isWarningAsError || _defaultSeverity == DiagnosticSeverity.Warning);
 

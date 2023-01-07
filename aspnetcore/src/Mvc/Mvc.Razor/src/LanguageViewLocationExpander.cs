@@ -25,7 +25,8 @@ public class LanguageViewLocationExpander : IViewLocationExpander
     /// <summary>
     /// Instantiates a new <see cref="LanguageViewLocationExpander"/> instance.
     /// </summary>
-    public LanguageViewLocationExpander() : this(LanguageViewLocationExpanderFormat.Suffix) { }
+    public LanguageViewLocationExpander()
+        : this(LanguageViewLocationExpanderFormat.Suffix) { }
 
     /// <summary>
     /// Instantiates a new <see cref="LanguageViewLocationExpander"/> instance.

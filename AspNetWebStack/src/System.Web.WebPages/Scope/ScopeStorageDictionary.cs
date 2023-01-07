@@ -15,7 +15,8 @@ namespace System.Web.WebPages.Scope
         private readonly IDictionary<object, object> _baseScope;
         private readonly IDictionary<object, object> _backingStore;
 
-        public ScopeStorageDictionary() : this(baseScope: null) { }
+        public ScopeStorageDictionary()
+            : this(baseScope: null) { }
 
         public ScopeStorageDictionary(IDictionary<object, object> baseScope)
             : this(

@@ -42,7 +42,8 @@ namespace Microsoft.Extensions.Options
             string? name,
             IConfiguration config,
             Action<BinderOptions>? configureBinder
-        ) : base(name, options => config.Bind(options, configureBinder))
+        )
+            : base(name, options => config.Bind(options, configureBinder))
         {
             ThrowHelper.ThrowIfNull(config);
         }

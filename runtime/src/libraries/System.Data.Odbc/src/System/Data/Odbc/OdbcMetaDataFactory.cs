@@ -36,7 +36,8 @@ namespace System.Data.Odbc
             string serverVersion,
             string serverVersionNormalized,
             OdbcConnection connection
-        ) : base(XMLStream, serverVersion, serverVersionNormalized)
+        )
+            : base(XMLStream, serverVersion, serverVersionNormalized)
         {
             // set up the colletion name ODBC function mapping guid mapping
             _schemaMapping = new SchemaFunctionName[]

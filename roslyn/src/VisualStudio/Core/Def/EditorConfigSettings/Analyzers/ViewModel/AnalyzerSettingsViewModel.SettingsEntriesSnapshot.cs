@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             public SettingsEntriesSnapshot(
                 ImmutableArray<AnalyzerSetting> data,
                 int currentVersionNumber
-            ) : base(data, currentVersionNumber) { }
+            )
+                : base(data, currentVersionNumber) { }
 
             protected override bool TryGetValue(
                 AnalyzerSetting result,

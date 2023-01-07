@@ -17,7 +17,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         public static bool DowngradeToHTTP1IfClientCertSet =>
             PlatformDetection.WindowsVersion < 2004;
 
-        public ClientCertificateTest(ITestOutputHelper output) : base(output) { }
+        public ClientCertificateTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(ServerCertificateTest), nameof(DowngradeToHTTP1IfClientCertSet))]
         public async Task UseClientCertOnHttp2_DowngradedToHttp1MutualAuth_Success()

@@ -5,7 +5,8 @@ namespace System.Web.Http.ContentNegotiation
 {
     public abstract class ContentNegotiationTestBase : HttpServerTestBase
     {
-        protected ContentNegotiationTestBase() : base("http://localhost/Conneg") { }
+        protected ContentNegotiationTestBase()
+            : base("http://localhost/Conneg") { }
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {

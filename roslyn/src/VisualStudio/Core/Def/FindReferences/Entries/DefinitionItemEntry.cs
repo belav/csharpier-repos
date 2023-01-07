@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 Guid projectGuid,
                 SourceText lineText,
                 MappedSpanResult mappedSpanResult
-            ) : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
+            )
+                : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
             {
                 _projectName = projectName;
             }

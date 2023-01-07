@@ -517,7 +517,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
                 Node = node.Save();
             }
 
-            public Entry(int id, IXmlNode node) : this(node)
+            public Entry(int id, IXmlNode node)
+                : this(node)
             {
                 Id = id;
             }

@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public IsPatternExpressionGeneralLocalRewriter(
                 SyntaxNode node,
                 LocalRewriter localRewriter
-            ) : base(node, localRewriter, generateInstrumentation: false) { }
+            )
+                : base(node, localRewriter, generateInstrumentation: false) { }
 
             protected override ArrayBuilder<BoundStatement> BuilderForSection(SyntaxNode section) =>
                 _statements;
@@ -205,7 +206,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             public IsPatternExpressionLinearLocalRewriter(
                 BoundIsPatternExpression node,
                 LocalRewriter localRewriter
-            ) : base(node.Syntax, localRewriter, generateInstrumentation: false)
+            )
+                : base(node.Syntax, localRewriter, generateInstrumentation: false)
             {
                 _conjunctBuilder = ArrayBuilder<BoundExpression>.GetInstance();
                 _sideEffectBuilder = ArrayBuilder<BoundExpression>.GetInstance();

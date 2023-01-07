@@ -10,7 +10,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     internal sealed class DateTimeArgBuilder : SimpleArgBuilder
     {
-        internal DateTimeArgBuilder(Type parameterType) : base(parameterType)
+        internal DateTimeArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(DateTime));
         }

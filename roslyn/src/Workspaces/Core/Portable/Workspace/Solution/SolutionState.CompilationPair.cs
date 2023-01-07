@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
                 public CompilationPair(
                     Compilation withoutGeneratedDocuments,
                     Compilation withGeneratedDocuments
-                ) : this()
+                )
+                    : this()
                 {
                     CompilationWithoutGeneratedDocuments = withoutGeneratedDocuments;
                     CompilationWithGeneratedDocuments = withGeneratedDocuments;

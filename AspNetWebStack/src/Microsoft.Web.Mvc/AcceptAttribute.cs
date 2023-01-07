@@ -17,7 +17,8 @@ namespace Microsoft.Web.Mvc
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public sealed class AcceptAttribute : DataTypeAttribute, IClientValidatable
     {
-        public AcceptAttribute() : base("upload")
+        public AcceptAttribute()
+            : base("upload")
         {
             ErrorMessage = MvcResources.FileExtensionsAttribute_Invalid;
             ErrorMessage = MvcResources.AcceptAttribute_Invalid;

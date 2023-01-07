@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             CodeGenerationContext context,
             CSharpCodeGenerationOptions options,
             LanguageVersion languageVersion
-        ) : base(context)
+        )
+            : base(context)
         {
             Options = options;
             LanguageVersion = languageVersion;

@@ -46,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             bool onDependent,
             PropertyAccessMode propertyAccessMode,
             bool eagerLoaded
-        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+        )
+            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             ClrType = clrType;
             DeclaringEntityType = declaringEntityType;

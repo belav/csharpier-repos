@@ -9,7 +9,8 @@ public class CompositeKeysQueryInMemoryTest
     public CompositeKeysQueryInMemoryTest(
         CompositeKeysQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

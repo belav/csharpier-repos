@@ -20,7 +20,8 @@ namespace System.Web.Mvc
             string viewPath,
             string masterPath,
             IViewPageActivator viewPageActivator
-        ) : base(controllerContext, viewPath, viewPageActivator)
+        )
+            : base(controllerContext, viewPath, viewPageActivator)
         {
             MasterPath = masterPath ?? String.Empty;
         }

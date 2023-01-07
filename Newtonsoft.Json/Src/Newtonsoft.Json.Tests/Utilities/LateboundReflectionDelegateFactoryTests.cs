@@ -29,13 +29,15 @@ namespace Newtonsoft.Json.Tests.Utilities
             value = "Output";
         }
 
-        public OutAndRefTestClass(ref string value, out bool b1) : this(ref value)
+        public OutAndRefTestClass(ref string value, out bool b1)
+            : this(ref value)
         {
             b1 = true;
             B1 = true;
         }
 
-        public OutAndRefTestClass(ref string value, ref bool b1, ref bool b2) : this(ref value)
+        public OutAndRefTestClass(ref string value, ref bool b1, ref bool b2)
+            : this(ref value)
         {
             B1 = b1;
             B2 = b2;
@@ -52,7 +54,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             Value = value;
         }
 
-        public InTestClass(in string value, in bool b1) : this(in value)
+        public InTestClass(in string value, in bool b1)
+            : this(in value)
         {
             B1 = b1;
         }

@@ -64,7 +64,8 @@ public class ValueComparer<
     public ValueComparer(
         Expression<Func<T?, T?, bool>> equalsExpression,
         Expression<Func<T, int>> hashCodeExpression
-    ) : this(equalsExpression, hashCodeExpression, CreateDefaultSnapshotExpression(false)) { }
+    )
+        : this(equalsExpression, hashCodeExpression, CreateDefaultSnapshotExpression(false)) { }
 
     /// <summary>
     ///     Creates a new <see cref="ValueComparer{T}" /> with the given comparison and
@@ -83,7 +84,8 @@ public class ValueComparer<
         Expression<Func<T?, T?, bool>> equalsExpression,
         Expression<Func<T, int>> hashCodeExpression,
         Expression<Func<T, T>> snapshotExpression
-    ) : base(equalsExpression, hashCodeExpression, snapshotExpression) { }
+    )
+        : base(equalsExpression, hashCodeExpression, snapshotExpression) { }
 
     /// <summary>
     ///     Creates an expression for equality.

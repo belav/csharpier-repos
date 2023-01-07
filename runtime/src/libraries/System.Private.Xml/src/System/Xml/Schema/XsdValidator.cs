@@ -44,7 +44,8 @@ namespace System.Xml.Schema
         private string _xsiNoNamespaceSchemaLocation;
         private string _xsdSchema;
 
-        internal XsdValidator(BaseValidator validator) : base(validator)
+        internal XsdValidator(BaseValidator validator)
+            : base(validator)
         {
             Init();
         }
@@ -53,7 +54,8 @@ namespace System.Xml.Schema
             XmlValidatingReaderImpl reader,
             XmlSchemaCollection schemaCollection,
             IValidationEventHandling eventHandling
-        ) : base(reader, schemaCollection, eventHandling)
+        )
+            : base(reader, schemaCollection, eventHandling)
         {
             Init();
         }

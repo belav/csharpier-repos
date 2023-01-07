@@ -35,7 +35,8 @@ namespace System.Net.Mime
         /// </summary>
         internal const string Default = "application/octet-stream";
 
-        public ContentType() : this(Default) { }
+        public ContentType()
+            : this(Default) { }
 
         /// <summary>
         /// ctor.

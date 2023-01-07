@@ -11,7 +11,8 @@ namespace Moq.Language.Flow
             ISetupGetter<T, TResult>,
             IReturnsResult<T> where T : class
     {
-        public NonVoidSetupPhrase(MethodCall setup) : base(setup) { }
+        public NonVoidSetupPhrase(MethodCall setup)
+            : base(setup) { }
 
         public new IReturnsThrows<T, TResult> Callback(InvocationAction action)
         {

@@ -16,9 +16,11 @@ namespace System.ServiceModel.Syndication
         private XmlBuffer _buffer;
         private readonly bool _initialized;
 
-        internal SyndicationElementExtensionCollection() : this((XmlBuffer)null) { }
+        internal SyndicationElementExtensionCollection()
+            : this((XmlBuffer)null) { }
 
-        internal SyndicationElementExtensionCollection(XmlBuffer buffer) : base()
+        internal SyndicationElementExtensionCollection(XmlBuffer buffer)
+            : base()
         {
             _buffer = buffer;
             if (_buffer != null)

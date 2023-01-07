@@ -45,7 +45,8 @@ namespace System.DirectoryServices.AccountManagement
             DirectorySearcher queryMembersSearcher,
             bool recursive,
             ADStoreCtx storeCtx
-        ) : base(groupDN, members, primaryGroupDN, queryMembersSearcher, recursive, storeCtx)
+        )
+            : base(groupDN, members, primaryGroupDN, queryMembersSearcher, recursive, storeCtx)
         {
             Debug.Assert(constraintData != null);
 

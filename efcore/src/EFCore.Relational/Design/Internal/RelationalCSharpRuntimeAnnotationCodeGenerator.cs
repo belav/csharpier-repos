@@ -20,7 +20,8 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
     public RelationalCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies,
         RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

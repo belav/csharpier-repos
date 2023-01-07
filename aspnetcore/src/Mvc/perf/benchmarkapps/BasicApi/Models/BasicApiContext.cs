@@ -7,7 +7,8 @@ namespace BasicApi.Models
 {
     public class BasicApiContext : DbContext
     {
-        public BasicApiContext(DbContextOptions options) : base(options) { }
+        public BasicApiContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Category> Categories { get; set; }
 

@@ -14,7 +14,8 @@ namespace System.Net.Quic
 
         private sealed class UnsupportedQuicImplementationProvider : QuicImplementationProvider
         {
-            internal UnsupportedQuicImplementationProvider() : base(false) { }
+            internal UnsupportedQuicImplementationProvider()
+                : base(false) { }
 
             public override bool IsSupported => false;
         }

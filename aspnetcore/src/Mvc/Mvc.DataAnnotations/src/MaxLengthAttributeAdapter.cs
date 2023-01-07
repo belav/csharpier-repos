@@ -15,7 +15,8 @@ internal sealed class MaxLengthAttributeAdapter : AttributeAdapterBase<MaxLength
     public MaxLengthAttributeAdapter(
         MaxLengthAttribute attribute,
         IStringLocalizer? stringLocalizer
-    ) : base(attribute, stringLocalizer)
+    )
+        : base(attribute, stringLocalizer)
     {
         _max = Attribute.Length.ToString(CultureInfo.InvariantCulture);
     }

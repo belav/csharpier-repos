@@ -30,7 +30,8 @@ public class StoreStoredProcedureParameter
         StoreStoredProcedure storedProcedure,
         ParameterDirection direction,
         RelationalTypeMapping? storeTypeMapping = null
-    ) : base(name, type, storedProcedure)
+    )
+        : base(name, type, storedProcedure)
     {
         Position = position;
         Direction = direction;

@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
 public class ServerStreamingServerCallHandlerTests : LoggedTest
 {
-    public ServerStreamingServerCallHandlerTests(ITestOutputHelper output) : base(output) { }
+    public ServerStreamingServerCallHandlerTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Fact]
     public async Task HandleCallAsync_WriteMultipleMessages_Returned()

@@ -29,7 +29,8 @@ public class PageHandlerExecutedContext : FilterContext
         IList<IFilterMetadata> filters,
         HandlerMethodDescriptor? handlerMethod,
         object handlerInstance
-    ) : base(pageContext, filters)
+    )
+        : base(pageContext, filters)
     {
         if (handlerInstance == null)
         {

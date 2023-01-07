@@ -30,7 +30,8 @@ namespace System
         // Creates a new ApplicationException with its message string set to
         // the empty string, its HRESULT set to COR_E_APPLICATION,
         // and its ExceptionInfo reference set to null.
-        public ApplicationException() : base(SR.Arg_ApplicationException)
+        public ApplicationException()
+            : base(SR.Arg_ApplicationException)
         {
             HResult = HResults.COR_E_APPLICATION;
         }
@@ -39,7 +40,8 @@ namespace System
         // message, its HRESULT set to COR_E_APPLICATION,
         // and its ExceptionInfo reference set to null.
         //
-        public ApplicationException(string? message) : base(message)
+        public ApplicationException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_APPLICATION;
         }

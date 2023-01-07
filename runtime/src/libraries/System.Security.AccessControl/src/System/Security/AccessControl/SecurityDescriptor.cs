@@ -465,7 +465,8 @@ namespace System.Security.AccessControl
             SecurityIdentifier? group,
             RawAcl? systemAcl,
             RawAcl? discretionaryAcl
-        ) : base()
+        )
+            : base()
         {
             CreateFromParts(flags, owner, group, systemAcl, discretionaryAcl);
         }
@@ -474,15 +475,16 @@ namespace System.Security.AccessControl
         // Creates a security descriptor from an SDDL string
         //
 
-        public RawSecurityDescriptor(string sddlForm) : this(BinaryFormFromSddlForm(sddlForm), 0)
-        { }
+        public RawSecurityDescriptor(string sddlForm)
+            : this(BinaryFormFromSddlForm(sddlForm), 0) { }
 
         //
         // Creates a security descriptor from its binary representation
         // Important: the representation must be in self-relative format
         //
 
-        public RawSecurityDescriptor(byte[] binaryForm, int offset) : base()
+        public RawSecurityDescriptor(byte[] binaryForm, int offset)
+            : base()
         {
             ArgumentNullException.ThrowIfNull(binaryForm);
 
@@ -952,7 +954,8 @@ namespace System.Security.AccessControl
             bool isContainer,
             bool isDS,
             RawSecurityDescriptor rawSecurityDescriptor
-        ) : this(isContainer, isDS, rawSecurityDescriptor, false) { }
+        )
+            : this(isContainer, isDS, rawSecurityDescriptor, false) { }
 
         internal CommonSecurityDescriptor(
             bool isContainer,

@@ -76,7 +76,8 @@ namespace System.Reflection.Metadata
             int length,
             MetadataReaderOptions options,
             MetadataStringDecoder? utf8Decoder
-        ) : this(metadata, length, options, utf8Decoder, memoryOwner: null) { }
+        )
+            : this(metadata, length, options, utf8Decoder, memoryOwner: null) { }
 
         internal unsafe MetadataReader(
             byte* metadata,

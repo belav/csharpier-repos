@@ -13,7 +13,8 @@ namespace System.Tests
         public ThreadCultureChange(string? cultureName)
             : this(cultureName != null ? new CultureInfo(cultureName) : null) { }
 
-        public ThreadCultureChange(CultureInfo? newCulture) : this(newCulture, null) { }
+        public ThreadCultureChange(CultureInfo? newCulture)
+            : this(newCulture, null) { }
 
         public ThreadCultureChange(CultureInfo? newCulture, CultureInfo? newUICulture)
         {

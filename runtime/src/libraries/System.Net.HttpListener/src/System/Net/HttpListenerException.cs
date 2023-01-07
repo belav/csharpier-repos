@@ -13,19 +13,22 @@ namespace System.Net
     )]
     public class HttpListenerException : Win32Exception
     {
-        public HttpListenerException() : base(Marshal.GetLastPInvokeError())
+        public HttpListenerException()
+            : base(Marshal.GetLastPInvokeError())
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
-        public HttpListenerException(int errorCode) : base(errorCode)
+        public HttpListenerException(int errorCode)
+            : base(errorCode)
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
         }
 
-        public HttpListenerException(int errorCode, string message) : base(errorCode, message)
+        public HttpListenerException(int errorCode, string message)
+            : base(errorCode, message)
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");
@@ -34,7 +37,8 @@ namespace System.Net
         protected HttpListenerException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");

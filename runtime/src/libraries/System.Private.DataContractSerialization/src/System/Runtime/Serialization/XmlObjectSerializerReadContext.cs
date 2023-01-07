@@ -112,13 +112,16 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject
-        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject) { }
+        )
+            : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
+        { }
 
         internal XmlObjectSerializerReadContext(
             DataContractSerializer serializer,
             DataContract rootTypeDataContract,
             DataContractResolver? dataContractResolver
-        ) : base(serializer, rootTypeDataContract, dataContractResolver)
+        )
+            : base(serializer, rootTypeDataContract, dataContractResolver)
         {
             this.attributes = new Attributes();
         }

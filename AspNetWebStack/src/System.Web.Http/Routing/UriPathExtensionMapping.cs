@@ -35,7 +35,8 @@ namespace System.Net.Http.Formatting
             "CA1054:UriParametersShouldNotBeStrings",
             Justification = "There is no meaningful System.Uri representation for a path suffix such as '.xml'"
         )]
-        public UriPathExtensionMapping(string uriPathExtension, string mediaType) : base(mediaType)
+        public UriPathExtensionMapping(string uriPathExtension, string mediaType)
+            : base(mediaType)
         {
             Initialize(uriPathExtension);
         }

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly ImmutableArray<LocalSymbol> _locals;
 
-        public SimpleLocalScopeBinder(ImmutableArray<LocalSymbol> locals, Binder next) : base(next)
+        public SimpleLocalScopeBinder(ImmutableArray<LocalSymbol> locals, Binder next)
+            : base(next)
         {
             _locals = locals;
         }

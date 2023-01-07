@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
     {
         private readonly ImmutableArray<FixAllScope> _supportedFixAllScopes;
 
-        protected DocumentBasedFixAllProvider() : this(DefaultSupportedFixAllScopes) { }
+        protected DocumentBasedFixAllProvider()
+            : this(DefaultSupportedFixAllScopes) { }
 
         protected DocumentBasedFixAllProvider(ImmutableArray<FixAllScope> supportedFixAllScopes)
         {

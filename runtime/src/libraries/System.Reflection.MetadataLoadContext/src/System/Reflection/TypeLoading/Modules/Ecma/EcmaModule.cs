@@ -27,7 +27,8 @@ namespace System.Reflection.TypeLoading.Ecma
             string fullyQualifiedName,
             PEReader peReader,
             MetadataReader reader
-        ) : base(fullyQualifiedName)
+        )
+            : base(fullyQualifiedName)
         {
             Debug.Assert(assembly != null);
             Debug.Assert(fullyQualifiedName != null);

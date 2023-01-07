@@ -24,7 +24,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class.
         /// </summary>
-        public AggregateCatalog() : this((IEnumerable<ComposablePartCatalog>?)null) { }
+        public AggregateCatalog()
+            : this((IEnumerable<ComposablePartCatalog>?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class

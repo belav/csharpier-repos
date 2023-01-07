@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="node">The underlying syntax node.</param>
         /// <param name="index">The index.</param>
-        internal SyntaxNodeOrTokenList(SyntaxNode? node, int index) : this()
+        internal SyntaxNodeOrTokenList(SyntaxNode? node, int index)
+            : this()
         {
             Debug.Assert(node != null || index == 0);
             if (node != null)
@@ -519,7 +520,8 @@ namespace Microsoft.CodeAnalysis
             private readonly SyntaxNodeOrTokenList _list;
             private int _index;
 
-            internal Enumerator(in SyntaxNodeOrTokenList list) : this()
+            internal Enumerator(in SyntaxNodeOrTokenList list)
+                : this()
             {
                 _list = list;
                 _index = -1;

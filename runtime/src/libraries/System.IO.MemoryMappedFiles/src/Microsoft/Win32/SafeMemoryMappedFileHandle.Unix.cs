@@ -42,7 +42,8 @@ namespace Microsoft.Win32.SafeHandles
             MemoryMappedFileAccess access,
             MemoryMappedFileOptions options,
             long capacity
-        ) : base(ownsHandle: true)
+        )
+            : base(ownsHandle: true)
         {
             Debug.Assert(
                 !ownsFileHandle || fileHandle != null,

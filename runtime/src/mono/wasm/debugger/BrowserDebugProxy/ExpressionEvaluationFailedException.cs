@@ -9,7 +9,8 @@ namespace Microsoft.WebAssembly.Diagnostics;
 
 public class ExpressionEvaluationFailedException : Exception
 {
-    public ExpressionEvaluationFailedException(string message) : base(message) { }
+    public ExpressionEvaluationFailedException(string message)
+        : base(message) { }
 
     public ExpressionEvaluationFailedException(string? message, Exception? innerException)
         : base(message, innerException) { }

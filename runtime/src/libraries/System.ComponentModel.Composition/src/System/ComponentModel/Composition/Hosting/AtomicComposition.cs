@@ -43,7 +43,8 @@ namespace System.ComponentModel.Composition.Hosting
         private bool _isCompleted;
         private bool _containsInnerAtomicComposition;
 
-        public AtomicComposition() : this(null) { }
+        public AtomicComposition()
+            : this(null) { }
 
         public AtomicComposition(AtomicComposition? outerAtomicComposition)
         {

@@ -15,7 +15,8 @@ namespace DebuggerTests
 {
     public class MiscTests : DebuggerTests
     {
-        public MiscTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public MiscTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         [Fact]
         public void CheckThatAllSourcesAreSent()

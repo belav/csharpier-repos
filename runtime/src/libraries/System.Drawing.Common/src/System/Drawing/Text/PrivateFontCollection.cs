@@ -17,7 +17,8 @@ namespace System.Drawing.Text
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Drawing.Text.PrivateFontCollection'/> class.
         /// </summary>
-        public PrivateFontCollection() : base()
+        public PrivateFontCollection()
+            : base()
         {
             int status = Gdip.GdipNewPrivateFontCollection(out _nativeFontCollection);
             Gdip.CheckStatus(status);

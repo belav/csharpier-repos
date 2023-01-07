@@ -32,7 +32,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             FieldInfo? fieldInfo,
             SlimEntityType declaringEntityType,
             PropertyAccessMode propertyAccessMode
-        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+        )
+            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             Check.NotNull(declaringEntityType, nameof(declaringEntityType));
 

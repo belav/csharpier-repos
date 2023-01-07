@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
         public RemoteExtensionMethodImportCompletionService(
             in ServiceConstructionArguments arguments
-        ) : base(arguments) { }
+        )
+            : base(arguments) { }
 
         public ValueTask<SerializableUnimportedExtensionMethods?> GetUnimportedExtensionMethodsAsync(
             Checksum solutionChecksum,

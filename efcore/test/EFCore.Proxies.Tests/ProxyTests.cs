@@ -475,7 +475,8 @@ public class ProxyTests
             string dbName = null,
             bool useLazyLoading = true,
             bool useChangeDetection = false
-        ) : this(dbName, useLazyLoading, useChangeDetection)
+        )
+            : this(dbName, useLazyLoading, useChangeDetection)
         {
             _internalServiceProvider = internalServiceProvider;
         }

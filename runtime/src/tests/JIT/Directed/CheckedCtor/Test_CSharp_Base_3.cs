@@ -36,6 +36,7 @@ namespace Test
     public class DerivedClass : BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(int selector) : base(() => selector) { }
+        public DerivedClass(int selector)
+            : base(() => selector) { }
     }
 }

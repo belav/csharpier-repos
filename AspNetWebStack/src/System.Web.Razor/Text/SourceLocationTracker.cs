@@ -12,7 +12,8 @@ namespace System.Web.Razor.Text
         private int _lineIndex = 0;
         private SourceLocation _currentLocation;
 
-        public SourceLocationTracker() : this(SourceLocation.Zero) { }
+        public SourceLocationTracker()
+            : this(SourceLocation.Zero) { }
 
         public SourceLocationTracker(SourceLocation currentLocation)
         {

@@ -8,7 +8,8 @@ public abstract class StoreGeneratedFixupRelationalTestBase<TFixture>
     where TFixture : StoreGeneratedFixupRelationalTestBase<TFixture>.StoreGeneratedFixupRelationalFixtureBase,
         new()
 {
-    protected StoreGeneratedFixupRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected StoreGeneratedFixupRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public abstract class StoreGeneratedFixupRelationalFixtureBase : StoreGeneratedFixupFixtureBase
     {

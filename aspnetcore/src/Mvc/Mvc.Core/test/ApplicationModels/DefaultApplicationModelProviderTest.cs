@@ -2017,6 +2017,7 @@ public class DefaultApplicationModelProviderTest
         public TestApplicationModelProvider(
             MvcOptions options,
             IModelMetadataProvider modelMetadataProvider
-        ) : base(Options.Create(options), modelMetadataProvider) { }
+        )
+            : base(Options.Create(options), modelMetadataProvider) { }
     }
 }

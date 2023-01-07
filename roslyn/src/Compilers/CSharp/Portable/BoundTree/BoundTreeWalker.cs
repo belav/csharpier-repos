@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected BoundTreeWalkerWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(
             int recursionDepth
-        ) : base(recursionDepth) { }
+        )
+            : base(recursionDepth) { }
 
         public sealed override BoundNode? VisitBinaryOperator(BoundBinaryOperator node)
         {

@@ -34,7 +34,8 @@ public class TransactionStartingEventData : DbContextEventData
         Guid connectionId,
         bool async,
         DateTimeOffset startTime
-    ) : base(eventDefinition, messageGenerator, context)
+    )
+        : base(eventDefinition, messageGenerator, context)
     {
         IsolationLevel = isolationLevel;
         TransactionId = transactionId;

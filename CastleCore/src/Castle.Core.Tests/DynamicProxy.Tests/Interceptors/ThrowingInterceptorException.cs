@@ -18,6 +18,7 @@ namespace Castle.DynamicProxy.Tests.Interceptors
 
     public class ThrowingInterceptorException : Exception
     {
-        public ThrowingInterceptorException(string message) : base(message) { }
+        public ThrowingInterceptorException(string message)
+            : base(message) { }
     }
 }

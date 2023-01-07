@@ -39,7 +39,8 @@ namespace System.Web.Mvc.Async.Test
         // Assists in mocking a Task by passing a dummy action to the Task constructor [which defers execution]
         public class MyTask : Task, IAsyncResult
         {
-            public MyTask() : base(() => { }) { }
+            public MyTask()
+                : base(() => { }) { }
 
             public new virtual object AsyncState
             {

@@ -372,7 +372,8 @@ namespace System.Text.Json.SourceGeneration.Tests
         internal SerializationContextTests(
             ITestContext defaultContext,
             Func<JsonSerializerOptions, ITestContext> contextCreator
-        ) : base(defaultContext, contextCreator) { }
+        )
+            : base(defaultContext, contextCreator) { }
 
         [Fact]
         public override void EnsureFastPathGeneratedAsExpected()

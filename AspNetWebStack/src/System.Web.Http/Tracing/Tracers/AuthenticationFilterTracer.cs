@@ -26,7 +26,8 @@ namespace System.Web.Http.Tracing.Tracers
         public AuthenticationFilterTracer(
             IAuthenticationFilter innerFilter,
             ITraceWriter traceWriter
-        ) : base(innerFilter, traceWriter)
+        )
+            : base(innerFilter, traceWriter)
         {
             _innerFilter = innerFilter;
         }

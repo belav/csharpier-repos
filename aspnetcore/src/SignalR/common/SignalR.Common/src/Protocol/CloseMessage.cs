@@ -33,7 +33,8 @@ public class CloseMessage : HubMessage
     /// Initializes a new instance of the <see cref="CloseMessage"/> class with an optional error message and <see cref="AllowReconnect"/> set to <see langword="false"/>.
     /// </summary>
     /// <param name="error">An optional error message.</param>
-    public CloseMessage(string? error) : this(error, allowReconnect: false) { }
+    public CloseMessage(string? error)
+        : this(error, allowReconnect: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CloseMessage"/> class with an optional error message and a <see cref="bool"/> indicating whether or not a client with

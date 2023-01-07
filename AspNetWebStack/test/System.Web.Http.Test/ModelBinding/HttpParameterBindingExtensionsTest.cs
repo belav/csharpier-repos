@@ -110,7 +110,8 @@ namespace System.Web.Http.ModelBinding
             public HttpValueProviderParameterBindingTestDouble(
                 HttpParameterDescriptor descriptor,
                 IEnumerable<ValueProviderFactory> factories
-            ) : base(descriptor)
+            )
+                : base(descriptor)
             {
                 Factories = factories;
             }

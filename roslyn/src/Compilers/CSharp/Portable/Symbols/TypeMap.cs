@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeParameterSymbol> from,
             ImmutableArray<TypeWithAnnotations> to,
             bool allowAlpha = false
-        ) : base(ConstructMapping(from, to))
+        )
+            : base(ConstructMapping(from, to))
         {
             // mapping contents are read-only hereafter
             Debug.Assert(
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeParameterSymbol> from,
             ImmutableArray<TypeParameterSymbol> to,
             bool allowAlpha = false
-        ) : this(from, TypeParametersAsTypeSymbolsWithAnnotations(to), allowAlpha)
+        )
+            : this(from, TypeParametersAsTypeSymbolsWithAnnotations(to), allowAlpha)
         {
             // mapping contents are read-only hereafter
         }
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol containingType,
             ImmutableArray<TypeParameterSymbol> typeParameters,
             ImmutableArray<TypeWithAnnotations> typeArguments
-        ) : base(ForType(containingType))
+        )
+            : base(ForType(containingType))
         {
             for (int i = 0; i < typeParameters.Length; i++)
             {
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ReferenceEqualityComparer.Instance
         );
 
-        private TypeMap() : base(s_emptyDictionary)
+        private TypeMap()
+            : base(s_emptyDictionary)
         {
             Debug.Assert(s_emptyDictionary.IsEmpty());
         }

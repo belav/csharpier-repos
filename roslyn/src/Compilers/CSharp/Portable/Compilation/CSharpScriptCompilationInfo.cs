@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation? previousCompilationOpt,
             Type? returnType,
             Type? globalsType
-        ) : base(returnType, globalsType)
+        )
+            : base(returnType, globalsType)
         {
             Debug.Assert(
                 previousCompilationOpt == null

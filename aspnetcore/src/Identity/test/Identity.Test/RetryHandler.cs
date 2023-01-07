@@ -17,7 +17,8 @@ internal class RetryHandler : DelegatingHandler
         ITestOutputHelper output,
         TimeSpan initialWaitTime,
         int maxAttempts
-    ) : base(httpClientHandler)
+    )
+        : base(httpClientHandler)
     {
         _waitIntervalBeforeRetry = initialWaitTime;
         _output = output;

@@ -26,7 +26,8 @@ public class CookieSlidingExpirationContext : PrincipalContext<CookieAuthenticat
         AuthenticationTicket ticket,
         TimeSpan elapsedTime,
         TimeSpan remainingTime
-    ) : base(context, scheme, options, ticket?.Properties)
+    )
+        : base(context, scheme, options, ticket?.Properties)
     {
         if (ticket == null)
         {

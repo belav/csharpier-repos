@@ -43,10 +43,12 @@ namespace System.Management
         }
 
         //default constructor
-        internal ManagementQuery() : this(DEFAULTQUERYLANGUAGE, null) { }
+        internal ManagementQuery()
+            : this(DEFAULTQUERYLANGUAGE, null) { }
 
         //parameterized constructors
-        internal ManagementQuery(string query) : this(DEFAULTQUERYLANGUAGE, query) { }
+        internal ManagementQuery(string query)
+            : this(DEFAULTQUERYLANGUAGE, query) { }
 
         internal ManagementQuery(string language, string query)
         {
@@ -223,7 +225,8 @@ namespace System.Management
         /// class with no initialized values. This
         /// is the default constructor.</para>
         /// </summary>
-        public ObjectQuery() : base() { }
+        public ObjectQuery()
+            : base() { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ObjectQuery'/>
@@ -231,7 +234,8 @@ namespace System.Management
         /// for a specific query string.</para>
         /// </summary>
         /// <param name='query'>The string representation of the query.</param>
-        public ObjectQuery(string query) : base(query) { }
+        public ObjectQuery(string query)
+            : base(query) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ObjectQuery'/>
@@ -240,7 +244,8 @@ namespace System.Management
         /// </summary>
         /// <param name='language'>The query language in which this query is specified.</param>
         /// <param name=' query'>The string representation of the query.</param>
-        public ObjectQuery(string language, string query) : base(language, query) { }
+        public ObjectQuery(string language, string query)
+            : base(language, query) { }
 
         //ICloneable
         /// <summary>
@@ -436,14 +441,16 @@ namespace System.Management
         /// class. This is the
         /// default constructor.</para>
         /// </summary>
-        public EventQuery() : base() { }
+        public EventQuery()
+            : base() { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventQuery'/>
         /// class for the specified query.</para>
         /// </summary>
         /// <param name='query'>A textual representation of the event query.</param>
-        public EventQuery(string query) : base(query) { }
+        public EventQuery(string query)
+            : base(query) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventQuery'/>
@@ -452,7 +459,8 @@ namespace System.Management
         /// </summary>
         /// <param name='language'>The language in which the query string is specified. </param>
         /// <param name=' query'>The string representation of the query.</param>
-        public EventQuery(string language, string query) : base(language, query) { }
+        public EventQuery(string language, string query)
+            : base(language, query) { }
 
         //ICloneable
         /// <summary>
@@ -526,14 +534,16 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.WqlObjectQuery'/> class. This is the
         ///    default constructor.</para>
         /// </summary>
-        public WqlObjectQuery() : base(null) { }
+        public WqlObjectQuery()
+            : base(null) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.WqlObjectQuery'/> class initialized to the
         ///    specified query.</para>
         /// </summary>
         /// <param name='query'><para> The representation of the data query.</para></param>
-        public WqlObjectQuery(string query) : base(query) { }
+        public WqlObjectQuery(string query)
+            : base(query) { }
 
         //QueryLanguage property is read-only in this class (does this work ??)
         /// <summary>
@@ -623,7 +633,8 @@ namespace System.Management
         /// class. This is the
         /// default constructor.</para>
         /// </summary>
-        public SelectQuery() : this(null) { }
+        public SelectQuery()
+            : this(null) { }
 
         //parameterized constructors
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -697,8 +708,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New SelectQuery("Win32_Process", "HandleID=1234")
         ///    </code>
         /// </example>
-        public SelectQuery(string className, string condition) : this(className, condition, null)
-        { }
+        public SelectQuery(string className, string condition)
+            : this(className, condition, null) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.SelectQuery'/>
@@ -722,7 +733,8 @@ namespace System.Management
         ///                          properties)
         ///    </code>
         /// </example>
-        public SelectQuery(string className, string condition, string[] selectedProperties) : base()
+        public SelectQuery(string className, string condition, string[] selectedProperties)
+            : base()
         {
             this.isSchemaQuery = false;
             this.className = className;
@@ -748,7 +760,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New SelectQuery(true, "__CLASS = ""Win32_Service""")
         ///    </code>
         /// </example>
-        public SelectQuery(bool isSchemaQuery, string condition) : base()
+        public SelectQuery(bool isSchemaQuery, string condition)
+            : base()
         {
             if (isSchemaQuery == false)
                 throw new ArgumentException(SR.InvalidQuery, nameof(isSchemaQuery));
@@ -1321,7 +1334,8 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.RelatedObjectQuery'/> class. This is the
         ///    default constructor.</para>
         /// </summary>
-        public RelatedObjectQuery() : this(null) { }
+        public RelatedObjectQuery()
+            : this(null) { }
 
         //parameterized constructor
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -2187,7 +2201,8 @@ namespace System.Management
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.RelationshipQuery'/> class. This is the default constructor.</para>
         /// </summary>
-        public RelationshipQuery() : this(null) { }
+        public RelationshipQuery()
+            : this(null) { }
 
         //parameterized constructor
         //ISSUE : We have 2 possible constructors that take a single string :
@@ -2929,7 +2944,8 @@ namespace System.Management
         /// class. This is the default
         /// constructor.</para>
         /// </summary>
-        public WqlEventQuery() : this(null, TimeSpan.Zero, null, TimeSpan.Zero, null, null) { }
+        public WqlEventQuery()
+            : this(null, TimeSpan.Zero, null, TimeSpan.Zero, null, null) { }
 
         //parameterized constructors
         //ISSUE : We have 2 possible constructors that take a single string :

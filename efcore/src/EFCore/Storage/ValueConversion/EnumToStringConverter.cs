@@ -20,7 +20,8 @@ public class EnumToStringConverter<TEnum> : StringEnumConverter<TEnum, string, T
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public EnumToStringConverter() : this(null) { }
+    public EnumToStringConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter does not preserve order.

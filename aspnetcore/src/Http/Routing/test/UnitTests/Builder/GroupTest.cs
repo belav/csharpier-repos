@@ -446,7 +446,8 @@ public class GroupTest
 
     private sealed class TestCustomEndpoint : Endpoint
     {
-        public TestCustomEndpoint() : base(null, null, null) { }
+        public TestCustomEndpoint()
+            : base(null, null, null) { }
     }
 
     private sealed class TestCustomEndpintDataSource : EndpointDataSource

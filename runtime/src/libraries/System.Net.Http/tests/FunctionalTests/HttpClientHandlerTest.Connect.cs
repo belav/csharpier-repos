@@ -12,7 +12,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClientHandler_Connect_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Connect_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Connect_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task ConnectMethod_Success()

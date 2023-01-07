@@ -849,9 +849,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : AtomPub10CategoriesDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(CategoriesDocument documentToWrite) : base(documentToWrite) { }
+            public Formatter(CategoriesDocument documentToWrite)
+                : base(documentToWrite) { }
 
             public Formatter(Type inlineDocumentType, Type referencedDocumentType)
                 : base(inlineDocumentType, referencedDocumentType) { }

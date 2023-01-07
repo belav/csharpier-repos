@@ -400,7 +400,8 @@ namespace R2RTest
             CompilerRunner runner,
             string outputFileName,
             IEnumerable<string> inputAssemblyFileNames
-        ) : base(runner)
+        )
+            : base(runner)
         {
             _outputFileName = outputFileName;
             _inputAssemblyFileNames = inputAssemblyFileNames;
@@ -421,7 +422,8 @@ namespace R2RTest
             CompilerRunner runner,
             string compiledExecutable,
             bool naked
-        ) : base(runner)
+        )
+            : base(runner)
         {
             _compiledExecutable = compiledExecutable;
             _naked = naked;
@@ -446,7 +448,8 @@ namespace R2RTest
             string scriptPath,
             IEnumerable<string> modules,
             IEnumerable<string> folders
-        ) : base(runner)
+        )
+            : base(runner)
         {
             _outputRoot = outputRoot;
             _scriptPath = scriptPath;
@@ -479,7 +482,8 @@ namespace R2RTest
             string appPath,
             IEnumerable<string> modules,
             IEnumerable<string> folders
-        ) : base(runner)
+        )
+            : base(runner)
         {
             _outputRoot = outputRoot;
             _appPath = appPath;

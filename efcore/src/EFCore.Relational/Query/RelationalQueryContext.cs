@@ -28,7 +28,8 @@ public class RelationalQueryContext : QueryContext
     public RelationalQueryContext(
         QueryContextDependencies dependencies,
         RelationalQueryContextDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

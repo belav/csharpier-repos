@@ -262,7 +262,8 @@ namespace System.ComponentModel.Composition
 
         public class RawMetadata : Dictionary<string, object>
         {
-            public RawMetadata(IDictionary<string, object> dictionary) : base(dictionary) { }
+            public RawMetadata(IDictionary<string, object> dictionary)
+                : base(dictionary) { }
         }
 
         public abstract class AbstractClassMetadataView

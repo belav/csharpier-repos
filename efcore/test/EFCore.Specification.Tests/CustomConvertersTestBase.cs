@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestBase<TFixture>
     where TFixture : BuiltInDataTypesTestBase<TFixture>.BuiltInDataTypesFixtureBase, new()
 {
-    protected CustomConvertersTestBase(TFixture fixture) : base(fixture) { }
+    protected CustomConvertersTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Can_query_and_update_with_nullable_converter_on_unique_index()
@@ -1650,7 +1651,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
 
         private class OrderIdEntityFrameworkValueConverter : ValueConverter<OrderId, string>
         {
-            public OrderIdEntityFrameworkValueConverter() : this(null) { }
+            public OrderIdEntityFrameworkValueConverter()
+                : this(null) { }
 
             public OrderIdEntityFrameworkValueConverter(ConverterMappingHints mappingHints)
                 : base(
@@ -1662,7 +1664,8 @@ public abstract class CustomConvertersTestBase<TFixture> : BuiltInDataTypesTestB
 
         private class UrlSchemeRemover : ValueConverter<string, string>
         {
-            public UrlSchemeRemover() : base(x => x.Remove(0, 7), x => "http://" + x) { }
+            public UrlSchemeRemover()
+                : base(x => x.Remove(0, 7), x => "http://" + x) { }
         }
 
         private class RolesToStringConveter : ValueConverter<ICollection<Roles>, string>

@@ -94,7 +94,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         HtmlEncoder htmlEncoder,
         JavaScriptEncoder javaScriptEncoder,
         IUrlHelperFactory urlHelperFactory
-    ) : base(urlHelperFactory, htmlEncoder)
+    )
+        : base(urlHelperFactory, htmlEncoder)
     {
         HostingEnvironment = hostingEnvironment;
         Cache = cacheProvider.Cache;

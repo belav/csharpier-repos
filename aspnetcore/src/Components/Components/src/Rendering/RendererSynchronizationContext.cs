@@ -26,7 +26,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
 
     public event UnhandledExceptionEventHandler UnhandledException;
 
-    public RendererSynchronizationContext() : this(new State()) { }
+    public RendererSynchronizationContext()
+        : this(new State()) { }
 
     private RendererSynchronizationContext(State state)
     {

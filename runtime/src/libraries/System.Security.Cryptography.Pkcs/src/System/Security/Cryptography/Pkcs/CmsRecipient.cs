@@ -38,7 +38,8 @@ namespace System.Security.Cryptography.Pkcs
             SubjectIdentifierType recipientIdentifierType,
             X509Certificate2 certificate,
             RSAEncryptionPadding rsaEncryptionPadding
-        ) : this(recipientIdentifierType, certificate)
+        )
+            : this(recipientIdentifierType, certificate)
         {
             if (rsaEncryptionPadding is null)
             {

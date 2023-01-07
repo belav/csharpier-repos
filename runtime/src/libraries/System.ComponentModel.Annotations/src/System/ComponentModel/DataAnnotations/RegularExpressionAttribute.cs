@@ -22,7 +22,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="pattern">The regular expression to use.  It cannot be null.</param>
         public RegularExpressionAttribute(
             [StringSyntax(StringSyntaxAttribute.Regex)] string pattern
-        ) : base(() => SR.RegexAttribute_ValidationError)
+        )
+            : base(() => SR.RegexAttribute_ValidationError)
         {
             Pattern = pattern;
             MatchTimeoutInMilliseconds = 2000;

@@ -12,7 +12,8 @@ namespace DllImportGenerator.IntegrationTests
     {
         public partial class NativeExportsSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            private NativeExportsSafeHandle() : base(ownsHandle: true) { }
+            private NativeExportsSafeHandle()
+                : base(ownsHandle: true) { }
 
             protected override bool ReleaseHandle()
             {

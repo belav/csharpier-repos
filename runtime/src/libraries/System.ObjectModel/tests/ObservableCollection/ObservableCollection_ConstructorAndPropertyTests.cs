@@ -176,7 +176,8 @@ namespace System.Collections.ObjectModel.Tests
 
         private partial class ObservableCollectionSubclass<T> : ObservableCollection<T>
         {
-            public ObservableCollectionSubclass(IEnumerable<T> collection) : base(collection) { }
+            public ObservableCollectionSubclass(IEnumerable<T> collection)
+                : base(collection) { }
 
             public List<T> InnerList => (List<T>)base.Items;
         }
@@ -212,7 +213,8 @@ namespace System.Collections.ObjectModel.Tests
 
         private partial class ObservableCollectionSubclass<T> : ObservableCollection<T>
         {
-            public ObservableCollectionSubclass(List<T> list) : base(list) { }
+            public ObservableCollectionSubclass(List<T> list)
+                : base(list) { }
         }
     }
 }

@@ -24,7 +24,8 @@ public class RetryLimitExceededException : Exception
     ///     Initializes a new instance of the <see cref="RetryLimitExceededException" /> class with a specified error message.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
-    public RetryLimitExceededException(string message) : base(message) { }
+    public RetryLimitExceededException(string message)
+        : base(message) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="RetryLimitExceededException" /> class.

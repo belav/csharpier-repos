@@ -12,7 +12,8 @@ namespace System.Net.Http.Headers
     {
         internal static readonly DateHeaderParser Parser = new DateHeaderParser();
 
-        private DateHeaderParser() : base(false) { }
+        private DateHeaderParser()
+            : base(false) { }
 
         public override string ToString(object value)
         {

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     /// </summary>
     internal sealed class EEConstructorSymbol : SynthesizedInstanceConstructor
     {
-        internal EEConstructorSymbol(NamedTypeSymbol containingType) : base(containingType) { }
+        internal EEConstructorSymbol(NamedTypeSymbol containingType)
+            : base(containingType) { }
 
         internal override void GenerateMethodBody(
             TypeCompilationState compilationState,

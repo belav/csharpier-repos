@@ -51,7 +51,8 @@ namespace System
             Host = hostName;
         }
 
-        public UriBuilder(string? scheme, string? host, int portNumber) : this(scheme, host)
+        public UriBuilder(string? scheme, string? host, int portNumber)
+            : this(scheme, host)
         {
             Port = portNumber;
         }

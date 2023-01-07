@@ -1008,12 +1008,14 @@ namespace System.Data.Tests
 
             public class OrderDetailsDataTable : DataTable, IEnumerable
             {
-                internal OrderDetailsDataTable() : base("Order Details")
+                internal OrderDetailsDataTable()
+                    : base("Order Details")
                 {
                     InitClass();
                 }
 
-                internal OrderDetailsDataTable(DataTable table) : base(table.TableName)
+                internal OrderDetailsDataTable(DataTable table)
+                    : base(table.TableName)
                 {
                     if ((table.CaseSensitive != table.DataSet.CaseSensitive))
                     {
@@ -1242,7 +1244,8 @@ namespace System.Data.Tests
             {
                 private OrderDetailsDataTable _tableOrderDetails;
 
-                internal OrderDetailsRow(DataRowBuilder rb) : base(rb)
+                internal OrderDetailsRow(DataRowBuilder rb)
+                    : base(rb)
                 {
                     _tableOrderDetails = ((OrderDetailsDataTable)(Table));
                 }
@@ -1329,12 +1332,14 @@ namespace System.Data.Tests
 
             public class OrdersDataTable : DataTable, IEnumerable
             {
-                internal OrdersDataTable() : base("Orders")
+                internal OrdersDataTable()
+                    : base("Orders")
                 {
                     InitClass();
                 }
 
-                internal OrdersDataTable(DataTable table) : base(table.TableName)
+                internal OrdersDataTable(DataTable table)
+                    : base(table.TableName)
                 {
                     if ((table.CaseSensitive != table.DataSet.CaseSensitive))
                     {
@@ -1669,7 +1674,8 @@ namespace System.Data.Tests
             {
                 private OrdersDataTable _tableOrders;
 
-                internal OrdersRow(DataRowBuilder rb) : base(rb)
+                internal OrdersRow(DataRowBuilder rb)
+                    : base(rb)
                 {
                     _tableOrders = ((OrdersDataTable)(Table));
                 }

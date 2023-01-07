@@ -16,7 +16,8 @@ namespace System.Web.Http.Validation.Validators
         public ErrorModelValidator(
             IEnumerable<ModelValidatorProvider> validatorProviders,
             string errorMessage
-        ) : base(validatorProviders)
+        )
+            : base(validatorProviders)
         {
             if (errorMessage == null)
             {

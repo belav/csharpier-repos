@@ -788,7 +788,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             public List<SyntaxNodeOrToken> NodeOrTokens { get; }
             public List<SyntaxTrivia> Trivia { get; }
 
-            public Collector() : base(SyntaxWalkerDepth.StructuredTrivia)
+            public Collector()
+                : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 this.NodeOrTokens = new List<SyntaxNodeOrToken>();
                 this.Trivia = new List<SyntaxTrivia>();
@@ -931,7 +932,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             public CopyAnnotationRewriter(
                 Dictionary<SyntaxNodeOrToken, SyntaxNodeOrToken> nodeOrTokenMap,
                 Dictionary<SyntaxTrivia, SyntaxTrivia> triviaMap
-            ) : base(visitIntoStructuredTrivia: true)
+            )
+                : base(visitIntoStructuredTrivia: true)
             {
                 _nodeOrTokenMap = nodeOrTokenMap;
                 _triviaMap = triviaMap;

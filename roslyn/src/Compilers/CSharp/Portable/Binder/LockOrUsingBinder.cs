@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableHashSet<Symbol> _lazyLockedOrDisposedVariables;
         private ExpressionAndDiagnostics _lazyExpressionAndDiagnostics;
 
-        internal LockOrUsingBinder(Binder enclosing) : base(enclosing) { }
+        internal LockOrUsingBinder(Binder enclosing)
+            : base(enclosing) { }
 
         protected abstract ExpressionSyntax TargetExpressionSyntax { get; }
 

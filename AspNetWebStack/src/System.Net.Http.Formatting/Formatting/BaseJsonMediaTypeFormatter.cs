@@ -65,7 +65,8 @@ namespace System.Net.Http.Formatting
             Justification = "MaxDepth is sealed in existing subclasses and its documentation carries warnings."
         )]
 #endif
-        protected BaseJsonMediaTypeFormatter(BaseJsonMediaTypeFormatter formatter) : base(formatter)
+        protected BaseJsonMediaTypeFormatter(BaseJsonMediaTypeFormatter formatter)
+            : base(formatter)
         {
             Contract.Assert(formatter != null);
             SerializerSettings = formatter.SerializerSettings;

@@ -275,7 +275,8 @@ namespace Moq.Tests
 
         public sealed class PickyIntOrString : Picky
         {
-            public PickyIntOrString() : base(typeof(int), typeof(string)) { }
+            public PickyIntOrString()
+                : base(typeof(int), typeof(string)) { }
         }
 
         [TypeMatcher]

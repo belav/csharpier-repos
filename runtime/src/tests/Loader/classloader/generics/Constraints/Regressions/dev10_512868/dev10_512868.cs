@@ -22,12 +22,14 @@ public static class FactoryGenerator<TNode> where TNode : GenericNode
 
 public class ItemX : InternalItemServices<ContainerX, ItemX>
 {
-    public ItemX() : base() { }
+    public ItemX()
+        : base() { }
 }
 
 public class ContainerX : InternalContainerServices<ContainerX, ItemX>
 {
-    public ContainerX() : base() { }
+    public ContainerX()
+        : base() { }
 }
 
 public abstract class InternalItemServices<TContainer, TItem>
@@ -46,14 +48,16 @@ public abstract class ExternalItemServices<TContainer, TItem> : GenericNode
     protected ExternalItemServices(
         IFactory<TContainer> containerFactory,
         IFactory<TItem> itemFactory
-    ) : base() { }
+    )
+        : base() { }
 }
 
 public abstract class ExternalContainerServices<TContainer, TItem> : GenericNode
     where TContainer : GenericNode
     where TItem : ExternalItemServices<TContainer, TItem>
 {
-    protected ExternalContainerServices(IFactory<TItem> itemFactory) : base() { }
+    protected ExternalContainerServices(IFactory<TItem> itemFactory)
+        : base() { }
 }
 
 public abstract class InternalContainerServices<TContainer, TItem>
@@ -61,7 +65,8 @@ public abstract class InternalContainerServices<TContainer, TItem>
     where TContainer : GenericNode
     where TItem : ExternalItemServices<TContainer, TItem>
 {
-    protected InternalContainerServices() : base(FactoryGenerator<TItem>.Instance) { }
+    protected InternalContainerServices()
+        : base(FactoryGenerator<TItem>.Instance) { }
 }
 
 class Test

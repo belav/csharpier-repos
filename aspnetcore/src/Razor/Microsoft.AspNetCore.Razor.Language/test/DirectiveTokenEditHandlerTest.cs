@@ -80,7 +80,8 @@ public class DirectiveTokenEditHandlerTest
 
     private class TestDirectiveTokenEditHandler : DirectiveTokenEditHandler
     {
-        public TestDirectiveTokenEditHandler() : base(content => TestTokenizer(content)) { }
+        public TestDirectiveTokenEditHandler()
+            : base(content => TestTokenizer(content)) { }
 
         public new PartialParseResultInternal CanAcceptChange(
             SyntaxNode target,

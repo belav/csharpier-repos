@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 IVsSearchCallback pSearchCallback,
                 IWpfTableControl[] controls,
                 IThreadingContext threadingContext
-            ) : base(dwCookie, pSearchQuery, pSearchCallback)
+            )
+                : base(dwCookie, pSearchQuery, pSearchCallback)
             {
                 _threadingContext = threadingContext;
                 _controls = controls;

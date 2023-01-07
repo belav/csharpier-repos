@@ -7,7 +7,8 @@ public class Gearbox
 {
     public class GearboxProxy : Gearbox, IF1Proxy
     {
-        public GearboxProxy(int id, string name) : base(id, name) { }
+        public GearboxProxy(int id, string name)
+            : base(id, name) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }

@@ -31,7 +31,8 @@ public class StringGuidConverter<TModel, TProvider> : ValueConverter<TModel, TPr
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
         ConverterMappingHints? mappingHints = null
-    ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
+    )
+        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

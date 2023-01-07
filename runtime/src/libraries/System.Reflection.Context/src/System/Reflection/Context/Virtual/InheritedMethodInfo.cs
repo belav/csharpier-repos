@@ -12,7 +12,8 @@ namespace System.Reflection.Context.Virtual
     {
         private readonly Type _reflectedType;
 
-        public InheritedMethodInfo(MethodInfo baseMethod, Type reflectedType) : base(baseMethod)
+        public InheritedMethodInfo(MethodInfo baseMethod, Type reflectedType)
+            : base(baseMethod)
         {
             Debug.Assert(reflectedType != null);
             Debug.Assert(reflectedType.IsSubclassOf(baseMethod.DeclaringType!));

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
                 TBinaryExpressionSyntax binaryExpression,
                 ImmutableArray<SyntaxNodeOrToken> exprsAndOperators,
                 CancellationToken cancellationToken
-            ) : base(service, document, originalSourceText, options, cancellationToken)
+            )
+                : base(service, document, originalSourceText, options, cancellationToken)
             {
                 _exprsAndOperators = exprsAndOperators;
 

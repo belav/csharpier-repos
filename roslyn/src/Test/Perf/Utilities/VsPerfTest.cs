@@ -44,7 +44,8 @@ namespace Roslyn.Test.Performance.Utilities
             string[] scenarios,
             string zipFileToDownload = "RoslynSolutions",
             int zipFileVersion = 2
-        ) : base()
+        )
+            : base()
         {
             _testTemplateName = testTemplateName;
             _testName = testName;

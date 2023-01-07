@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public TestDesktopStrongNameProvider(
             ImmutableArray<string> keyFileSearchPaths = default,
             StrongNameFileSystem fileSystem = null
-        ) : base(keyFileSearchPaths, fileSystem)
+        )
+            : base(keyFileSearchPaths, fileSystem)
         {
             ReadKeysFromContainerFunc = base.ReadKeysFromContainer;
             SignBuilderFunc = base.SignBuilder;

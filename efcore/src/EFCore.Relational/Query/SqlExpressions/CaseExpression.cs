@@ -26,7 +26,8 @@ public class CaseExpression : SqlExpression
         SqlExpression operand,
         IReadOnlyList<CaseWhenClause> whenClauses,
         SqlExpression? elseResult = null
-    ) : base(whenClauses[0].Result.Type, whenClauses[0].Result.TypeMapping)
+    )
+        : base(whenClauses[0].Result.Type, whenClauses[0].Result.TypeMapping)
     {
         Operand = operand;
         _whenClauses.AddRange(whenClauses);
@@ -41,7 +42,8 @@ public class CaseExpression : SqlExpression
     public CaseExpression(
         IReadOnlyList<CaseWhenClause> whenClauses,
         SqlExpression? elseResult = null
-    ) : base(whenClauses[0].Result.Type, whenClauses[0].Result.TypeMapping)
+    )
+        : base(whenClauses[0].Result.Type, whenClauses[0].Result.TypeMapping)
     {
         _whenClauses.AddRange(whenClauses);
         ElseResult = elseResult;

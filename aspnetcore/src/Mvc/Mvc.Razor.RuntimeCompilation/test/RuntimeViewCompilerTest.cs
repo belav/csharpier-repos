@@ -989,7 +989,14 @@ this should fail";
             CSharpCompiler csharpCompiler,
             IList<CompiledViewDescriptor> precompiledViews,
             Func<string, CompiledViewDescriptor> compile = null
-        ) : base(fileProvider, projectEngine, csharpCompiler, precompiledViews, NullLogger.Instance)
+        )
+            : base(
+                fileProvider,
+                projectEngine,
+                csharpCompiler,
+                precompiledViews,
+                NullLogger.Instance
+            )
         {
             Compile = compile;
             if (Compile == null)
@@ -1012,7 +1019,8 @@ this should fail";
         public TestCSharpCompiler(
             RazorReferenceManager manager,
             IWebHostEnvironment hostingEnvironment
-        ) : base(manager, hostingEnvironment) { }
+        )
+            : base(manager, hostingEnvironment) { }
 
         public EmitOptions EmitOptionsSettable { get; set; }
 

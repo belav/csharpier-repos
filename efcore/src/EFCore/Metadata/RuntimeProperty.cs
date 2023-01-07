@@ -60,7 +60,8 @@ public class RuntimeProperty : RuntimePropertyBase, IProperty
         ValueComparer? keyValueComparer,
         ValueComparer? providerValueComparer,
         CoreTypeMapping? typeMapping
-    ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+    )
+        : base(name, propertyInfo, fieldInfo, propertyAccessMode)
     {
         DeclaringEntityType = declaringEntityType;
         ClrType = clrType;

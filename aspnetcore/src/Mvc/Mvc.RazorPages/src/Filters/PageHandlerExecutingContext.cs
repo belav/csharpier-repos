@@ -27,7 +27,8 @@ public class PageHandlerExecutingContext : FilterContext
         HandlerMethodDescriptor? handlerMethod,
         IDictionary<string, object?> handlerArguments,
         object handlerInstance
-    ) : base(pageContext, filters)
+    )
+        : base(pageContext, filters)
     {
         if (handlerArguments == null)
         {

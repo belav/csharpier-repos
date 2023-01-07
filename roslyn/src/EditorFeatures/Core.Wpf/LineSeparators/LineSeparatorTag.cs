@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
     /// </summary>
     internal class LineSeparatorTag : GraphicsTag
     {
-        public LineSeparatorTag(IEditorFormatMap editorFormatMap) : base(editorFormatMap) { }
+        public LineSeparatorTag(IEditorFormatMap editorFormatMap)
+            : base(editorFormatMap) { }
 
         protected override Color? GetColor(IWpfTextView view, IEditorFormatMap editorFormatMap)
         {

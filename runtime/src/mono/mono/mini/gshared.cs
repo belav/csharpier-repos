@@ -3078,7 +3078,8 @@ internal struct SparseArrayBuilder<T>
 {
     private ArrayBuilder<Marker> _markers;
 
-    public SparseArrayBuilder(bool initialize) : this()
+    public SparseArrayBuilder(bool initialize)
+        : this()
     {
         _markers = new ArrayBuilder<Marker>(10);
     }

@@ -37,7 +37,8 @@ namespace System.Threading.Tasks.Dataflow
         /// <summary>Initializes this <see cref="BatchBlock{T}"/> with the specified batch size.</summary>
         /// <param name="batchSize">The number of items to group into a batch.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">The <paramref name="batchSize"/> must be positive.</exception>
-        public BatchBlock(int batchSize) : this(batchSize, GroupingDataflowBlockOptions.Default) { }
+        public BatchBlock(int batchSize)
+            : this(batchSize, GroupingDataflowBlockOptions.Default) { }
 
         /// <summary>Initializes this <see cref="BatchBlock{T}"/> with the  specified batch size, declining option, and block options.</summary>
         /// <param name="batchSize">The number of items to group into a batch.</param>

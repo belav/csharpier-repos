@@ -54,7 +54,8 @@ namespace System.Text
         protected char[]? arrayUnicodeBestFit;
         protected char[]? arrayBytesBestFit;
 
-        internal BaseCodePageEncoding(int codepage) : this(codepage, codepage) { }
+        internal BaseCodePageEncoding(int codepage)
+            : this(codepage, codepage) { }
 
         internal BaseCodePageEncoding(int codepage, int dataCodePage)
             : base(
@@ -76,7 +77,8 @@ namespace System.Text
             int dataCodePage,
             EncoderFallback enc,
             DecoderFallback dec
-        ) : base(codepage, enc, dec)
+        )
+            : base(codepage, enc, dec)
         {
             // Remember number of code pages that we'll be using the table for.
             dataTableCodePage = dataCodePage;

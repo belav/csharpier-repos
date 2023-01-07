@@ -56,7 +56,8 @@ internal sealed partial class RedirectToRouteResult : IResult
         object? routeValues,
         bool permanent,
         bool preserveMethod
-    ) : this(routeName, routeValues, permanent, preserveMethod, fragment: null) { }
+    )
+        : this(routeName, routeValues, permanent, preserveMethod, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values
@@ -81,7 +82,8 @@ internal sealed partial class RedirectToRouteResult : IResult
         object? routeValues,
         bool permanent,
         string? fragment
-    ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
+    )
+        : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> with the values

@@ -53,7 +53,8 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        public HttpClientHandler_Authentication_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Authentication_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [MemberData(nameof(Authentication_SocketsHttpHandler_TestData))]

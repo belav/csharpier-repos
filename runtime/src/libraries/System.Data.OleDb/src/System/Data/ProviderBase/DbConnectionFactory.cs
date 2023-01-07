@@ -27,8 +27,8 @@ namespace System.Data.ProviderBase
             new Task<DbConnectionInternal?>[Environment.ProcessorCount];
         private static Task<DbConnectionInternal?>? s_completedTask;
 
-        protected DbConnectionFactory() : this(DbConnectionPoolCountersNoCounters.SingletonInstance)
-        { }
+        protected DbConnectionFactory()
+            : this(DbConnectionPoolCountersNoCounters.SingletonInstance) { }
 
         protected DbConnectionFactory(DbConnectionPoolCounters performanceCounters)
         {

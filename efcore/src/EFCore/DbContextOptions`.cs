@@ -37,7 +37,8 @@ public class DbContextOptions<TContext> : DbContextOptions where TContext : DbCo
             Type,
             (IDbContextOptionsExtension Extension, int Ordinal)
         > extensions
-    ) : base(extensions) { }
+    )
+        : base(extensions) { }
 
     /// <inheritdoc />
     public override DbContextOptions WithExtension<TExtension>(TExtension extension)

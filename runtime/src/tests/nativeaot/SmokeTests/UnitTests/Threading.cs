@@ -1731,9 +1731,11 @@ internal class AssertionFailureException : Exception
 {
     public AssertionFailureException() { }
 
-    public AssertionFailureException(string message) : base(message) { }
+    public AssertionFailureException(string message)
+        : base(message) { }
 
-    public AssertionFailureException(Exception innerException) : base(null, innerException) { }
+    public AssertionFailureException(Exception innerException)
+        : base(null, innerException) { }
 }
 
 internal class FactAttribute : Attribute { }

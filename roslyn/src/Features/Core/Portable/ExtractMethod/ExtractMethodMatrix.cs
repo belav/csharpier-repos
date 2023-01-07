@@ -1100,7 +1100,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 bool writtenInside,
                 bool readOutside,
                 bool writtenOutside
-            ) : this()
+            )
+                : this()
             {
                 DataFlowIn = dataFlowIn;
                 DataFlowOut = dataFlowOut;

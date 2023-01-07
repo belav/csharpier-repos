@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class BloggingContextWithPendingModelChanges : BloggingContext
 {
-    public BloggingContextWithPendingModelChanges(DbContextOptions options) : base(options) { }
+    public BloggingContextWithPendingModelChanges(DbContextOptions options)
+        : base(options) { }
 
     [DbContext(typeof(BloggingContextWithPendingModelChanges))]
     public class BloggingModelSnapshot : ModelSnapshot

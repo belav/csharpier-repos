@@ -42,7 +42,8 @@ public abstract class NavigationEntry : MemberEntry
         InternalEntityEntry internalEntry,
         INavigationBase navigationBase,
         bool collection
-    ) : base(internalEntry, navigationBase)
+    )
+        : base(internalEntry, navigationBase)
     {
         if (collection && !navigationBase.IsCollection)
         {

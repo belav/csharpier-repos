@@ -25,7 +25,8 @@ internal sealed class Http1ContentLengthMessageBody : Http1MessageBody
         Http1Connection context,
         long contentLength,
         bool keepAlive
-    ) : base(context, keepAlive)
+    )
+        : base(context, keepAlive)
     {
         _contentLength = contentLength;
         _unexaminedInputLength = contentLength;

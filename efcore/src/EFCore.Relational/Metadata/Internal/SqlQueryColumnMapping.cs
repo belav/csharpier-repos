@@ -21,7 +21,8 @@ public class SqlQueryColumnMapping : ColumnMappingBase, ISqlQueryColumnMapping
         IProperty property,
         SqlQueryColumn column,
         SqlQueryMapping sqlQueryMapping
-    ) : base(property, column, sqlQueryMapping) { }
+    )
+        : base(property, column, sqlQueryMapping) { }
 
     /// <inheritdoc />
     public virtual ISqlQueryMapping SqlQueryMapping => (ISqlQueryMapping)TableMapping;

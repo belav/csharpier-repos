@@ -17,7 +17,8 @@ namespace System.Security.Cryptography
         private uint _flags;
         private bool _fPersistKeyInCsp;
 
-        public SafeProvHandle() : base(true)
+        public SafeProvHandle()
+            : base(true)
         {
             SetHandle(IntPtr.Zero);
             _containerName = null;

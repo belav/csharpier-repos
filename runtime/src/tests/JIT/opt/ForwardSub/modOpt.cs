@@ -17,7 +17,8 @@ public struct S0
     public int F7;
     public short F9;
 
-    public S0(uint f2, int f7) : this()
+    public S0(uint f2, int f7)
+        : this()
     {
         F7 = f7;
     }

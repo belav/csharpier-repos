@@ -25,7 +25,8 @@ namespace System.Xml.Schema
         private Parser? _inlineSchemaParser;
         private const string x_schema = "x-schema:";
 
-        internal XdrValidator(BaseValidator validator) : base(validator)
+        internal XdrValidator(BaseValidator validator)
+            : base(validator)
         {
             Init();
         }
@@ -34,7 +35,8 @@ namespace System.Xml.Schema
             XmlValidatingReaderImpl reader,
             XmlSchemaCollection schemaCollection,
             IValidationEventHandling? eventHandling
-        ) : base(reader, schemaCollection, eventHandling)
+        )
+            : base(reader, schemaCollection, eventHandling)
         {
             Init();
         }

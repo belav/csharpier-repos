@@ -69,7 +69,8 @@ namespace FractalPerf
 
     public class Mandelbrot : Fractal
     {
-        public Mandelbrot() : base(-2.0, -1.5, 1.0, 1.5) { }
+        public Mandelbrot()
+            : base(-2.0, -1.5, 1.0, 1.5) { }
 
         public override double Render()
         {
@@ -102,7 +103,8 @@ namespace FractalPerf
         private double Real;
         double Imaginary;
 
-        public Julia(double real, double imaginary) : base(-2.0, -1.5, 1.0, 1.5)
+        public Julia(double real, double imaginary)
+            : base(-2.0, -1.5, 1.0, 1.5)
         {
             Real = real;
             Imaginary = imaginary;

@@ -20,7 +20,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             DenormMeth = denormMeth;
         }
 
-        public SubstContext(AggregateType type) : this(type, null, false) { }
+        public SubstContext(AggregateType type)
+            : this(type, null, false) { }
 
         public SubstContext(AggregateType type, TypeArray typeArgsMeth)
             : this(type, typeArgsMeth, false) { }

@@ -4,7 +4,8 @@ using Mono.Linker.Steps;
 
 public class MyDispatcher : SubStepsDispatcher
 {
-    public MyDispatcher() : base(GetSubSteps()) { }
+    public MyDispatcher()
+        : base(GetSubSteps()) { }
 
     static IEnumerable<ISubStep> GetSubSteps()
     {

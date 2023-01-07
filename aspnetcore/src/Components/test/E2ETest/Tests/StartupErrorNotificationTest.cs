@@ -16,7 +16,8 @@ public class StartupErrorNotificationTest : ServerTestBase<BlazorWasmTestAppFixt
         BrowserFixture browserFixture,
         BlazorWasmTestAppFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output)
+    )
+        : base(browserFixture, serverFixture, output)
     {
         _serverFixture.PathBase = ServerPathBase;
     }

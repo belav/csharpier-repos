@@ -194,9 +194,11 @@ namespace System.Net.Http.Functional.Tests
             public int SendAsyncCount { get; private set; }
             public int DisposeCount { get; private set; }
 
-            public MockHandler() : base() { }
+            public MockHandler()
+                : base() { }
 
-            public MockHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+            public MockHandler(HttpMessageHandler innerHandler)
+                : base(innerHandler) { }
 
             protected override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SubstitutedEventSymbol(
             SubstitutedNamedTypeSymbol containingType,
             EventSymbol originalDefinition
-        ) : base(originalDefinition)
+        )
+            : base(originalDefinition)
         {
             Debug.Assert(originalDefinition.IsDefinition);
             _containingType = containingType;

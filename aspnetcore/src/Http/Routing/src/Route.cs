@@ -77,7 +77,15 @@ public class Route : RouteBase
         IDictionary<string, object>? constraints,
         RouteValueDictionary? dataTokens,
         IInlineConstraintResolver inlineConstraintResolver
-    ) : base(routeTemplate, routeName, inlineConstraintResolver, defaults, constraints, dataTokens)
+    )
+        : base(
+            routeTemplate,
+            routeName,
+            inlineConstraintResolver,
+            defaults,
+            constraints,
+            dataTokens
+        )
     {
         if (target == null)
         {

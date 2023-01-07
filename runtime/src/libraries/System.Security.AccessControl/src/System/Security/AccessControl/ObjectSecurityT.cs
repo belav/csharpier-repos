@@ -56,7 +56,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, type) { }
+        )
+            : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, type)
+        { }
 
         public AccessRule(
             string identity,
@@ -86,7 +88,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         #endregion
 
@@ -112,7 +115,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, flags)
+        )
+            : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, flags)
         { }
 
         public AuditRule(string identity, T rights, AuditFlags flags)
@@ -147,7 +151,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         #endregion
 
@@ -172,7 +177,8 @@ namespace System.Security.AccessControl
             ResourceType resourceType,
             string? name,
             AccessControlSections includeSections
-        ) : base(isContainer, resourceType, name, includeSections, null, null) { }
+        )
+            : base(isContainer, resourceType, name, includeSections, null, null) { }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -196,7 +202,8 @@ namespace System.Security.AccessControl
             ResourceType resourceType,
             SafeHandle? safeHandle,
             AccessControlSections includeSections
-        ) : base(isContainer, resourceType, safeHandle, includeSections, null, null) { }
+        )
+            : base(isContainer, resourceType, safeHandle, includeSections, null, null) { }
 
         protected ObjectSecurity(
             bool isContainer,

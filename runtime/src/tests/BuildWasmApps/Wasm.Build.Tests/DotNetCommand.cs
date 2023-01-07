@@ -15,7 +15,8 @@ namespace Wasm.Build.Tests
             ITestOutputHelper _testOutput,
             bool useDefaultArgs = true,
             string label = ""
-        ) : base(buildEnv.DotNet, _testOutput, label)
+        )
+            : base(buildEnv.DotNet, _testOutput, label)
         {
             _buildEnvironment = buildEnv;
             _useDefaultArgs = useDefaultArgs;

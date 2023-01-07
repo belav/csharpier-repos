@@ -651,9 +651,11 @@ namespace System.DirectoryServices.AccountManagement
         //
         private sealed class SafeMemoryPtr : SafeHandle
         {
-            public SafeMemoryPtr() : base(IntPtr.Zero, true) { }
+            public SafeMemoryPtr()
+                : base(IntPtr.Zero, true) { }
 
-            internal SafeMemoryPtr(IntPtr handle) : base(IntPtr.Zero, true)
+            internal SafeMemoryPtr(IntPtr handle)
+                : base(IntPtr.Zero, true)
             {
                 SetHandle(handle);
             }

@@ -59,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
             OptionStore optionStore,
             INotificationService notificationService,
             string languageName
-        ) : base(optionStore)
+        )
+            : base(optionStore)
         {
             _languageName = languageName;
             _notificationService = notificationService;

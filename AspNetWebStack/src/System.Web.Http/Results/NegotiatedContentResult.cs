@@ -52,7 +52,8 @@ namespace System.Web.Http.Results
             HttpStatusCode statusCode,
             T content,
             ApiController controller
-        ) : this(statusCode, content, new ApiControllerDependencyProvider(controller)) { }
+        )
+            : this(statusCode, content, new ApiControllerDependencyProvider(controller)) { }
 
         private NegotiatedContentResult(
             HttpStatusCode statusCode,

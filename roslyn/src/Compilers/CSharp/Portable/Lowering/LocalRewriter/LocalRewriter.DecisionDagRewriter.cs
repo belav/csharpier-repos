@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxNode node,
                 LocalRewriter localRewriter,
                 bool generateInstrumentation
-            ) : base(node, localRewriter, generateInstrumentation) { }
+            )
+                : base(node, localRewriter, generateInstrumentation) { }
 
             private void ComputeLabelSet(BoundDecisionDag decisionDag)
             {

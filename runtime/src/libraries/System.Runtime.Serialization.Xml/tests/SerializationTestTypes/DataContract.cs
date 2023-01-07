@@ -735,7 +735,8 @@ namespace SerializationTestTypes
             isValueType = type.IsValueType;
         }
 
-        public DataContract(Type type, bool supportCollectionDataContract) : this(type)
+        public DataContract(Type type, bool supportCollectionDataContract)
+            : this(type)
         {
             this.supportCollectionDataContract = supportCollectionDataContract;
         }
@@ -853,7 +854,8 @@ namespace SerializationTestTypes
         bool isISerializable;
         bool hasDataContract;
 
-        public ClassDataContract(Type type) : this(type, false) { }
+        public ClassDataContract(Type type)
+            : this(type, false) { }
 
         public ClassDataContract(Type type, bool supportCollectionDataContract)
             : base(type, supportCollectionDataContract)
@@ -1397,7 +1399,8 @@ namespace SerializationTestTypes
             return retVal;
         }
 
-        PrimitiveDataContract(Type type) : base(type)
+        PrimitiveDataContract(Type type)
+            : base(type)
         {
             string name = null;
             string ns = Globals.SchemaNamespace;
@@ -1498,7 +1501,8 @@ namespace SerializationTestTypes
             StableName = DataContract.GetStableName(type, supportCollectionDataContract);
         }
 
-        public ArrayDataContract(Type type) : this(type, false) { }
+        public ArrayDataContract(Type type)
+            : this(type, false) { }
 
         public DataContract ItemContract
         {
@@ -1552,7 +1556,8 @@ namespace SerializationTestTypes
             IsValueType = true;
         }
 
-        public EnumDataContract(Type type) : base(type)
+        public EnumDataContract(Type type)
+            : base(type)
         {
             StableName = DataContract.GetStableName(type, out hasDataContract);
             Type baseType = Enum.GetUnderlyingType(type);
@@ -1800,7 +1805,8 @@ namespace SerializationTestTypes
             MethodInfo getEnumeratorMethod,
             MethodInfo addMethod,
             ConstructorInfo constructor
-        ) : base(type)
+        )
+            : base(type)
         {
             this.supportCollectionDataContract = true;
             StableName = DataContract.GetStableName(type, true); //TODO

@@ -36,7 +36,8 @@ public sealed partial class FileContentHttpResult : IResult, IFileHttpResult, IC
         ReadOnlyMemory<byte> fileContents,
         string? contentType,
         string? fileDownloadName
-    ) : this(fileContents, contentType, fileDownloadName, enableRangeProcessing: false) { }
+    )
+        : this(fileContents, contentType, fileDownloadName, enableRangeProcessing: false) { }
 
     /// <summary>
     /// Creates a new <see cref="FileContentHttpResult"/> instance with the provided values.

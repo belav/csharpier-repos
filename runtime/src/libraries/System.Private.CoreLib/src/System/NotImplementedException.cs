@@ -21,17 +21,20 @@ namespace System
     )]
     public class NotImplementedException : SystemException
     {
-        public NotImplementedException() : base(SR.Arg_NotImplementedException)
+        public NotImplementedException()
+            : base(SR.Arg_NotImplementedException)
         {
             HResult = HResults.E_NOTIMPL;
         }
 
-        public NotImplementedException(string? message) : base(message)
+        public NotImplementedException(string? message)
+            : base(message)
         {
             HResult = HResults.E_NOTIMPL;
         }
 
-        public NotImplementedException(string? message, Exception? inner) : base(message, inner)
+        public NotImplementedException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.E_NOTIMPL;
         }

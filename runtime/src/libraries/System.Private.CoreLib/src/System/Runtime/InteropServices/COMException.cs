@@ -18,22 +18,26 @@ namespace System.Runtime.InteropServices
     )]
     public class COMException : ExternalException
     {
-        public COMException() : base(SR.Arg_COMException)
+        public COMException()
+            : base(SR.Arg_COMException)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public COMException(string? message) : base(message)
+        public COMException(string? message)
+            : base(message)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public COMException(string? message, Exception? inner) : base(message, inner)
+        public COMException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public COMException(string? message, int errorCode) : base(message)
+        public COMException(string? message, int errorCode)
+            : base(message)
         {
             HResult = errorCode;
         }

@@ -27,7 +27,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public TestCaseCompiler(
             TestCaseSandbox sandbox,
             TestCaseCompilationMetadataProvider metadataProvider
-        ) : this(sandbox, metadataProvider, new ILCompiler()) { }
+        )
+            : this(sandbox, metadataProvider, new ILCompiler()) { }
 
         public TestCaseCompiler(
             TestCaseSandbox sandbox,

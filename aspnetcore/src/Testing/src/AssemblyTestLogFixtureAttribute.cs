@@ -5,5 +5,6 @@ namespace Microsoft.AspNetCore.Testing;
 
 public class AssemblyTestLogFixtureAttribute : AssemblyFixtureAttribute
 {
-    public AssemblyTestLogFixtureAttribute() : base(typeof(AssemblyTestLog)) { }
+    public AssemblyTestLogFixtureAttribute()
+        : base(typeof(AssemblyTestLog)) { }
 }

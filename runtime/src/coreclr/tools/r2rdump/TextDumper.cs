@@ -21,7 +21,8 @@ namespace R2RDump
             TextWriter writer,
             Disassembler disassembler,
             DumpModel model
-        ) : base(r2r, writer, disassembler, model) { }
+        )
+            : base(r2r, writer, disassembler, model) { }
 
         public override void Begin()
         {

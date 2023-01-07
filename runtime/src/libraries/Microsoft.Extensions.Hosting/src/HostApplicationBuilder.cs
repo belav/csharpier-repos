@@ -47,7 +47,8 @@ namespace Microsoft.Extensions.Hosting
         ///   </list>
         /// </remarks>
         [RequiresDynamicCode(Host.RequiresDynamicCodeMessage)]
-        public HostApplicationBuilder() : this(args: null) { }
+        public HostApplicationBuilder()
+            : this(args: null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HostApplicationBuilder"/> class with preconfigured defaults.

@@ -28,7 +28,8 @@ namespace Castle.Services.Logging.Log4netIntegration
         internal const string defaultConfigFileName = "log4net.config";
         static readonly Assembly _callingAssembly = typeof(Log4netFactory).Assembly;
 
-        public Log4netFactory() : this(defaultConfigFileName) { }
+        public Log4netFactory()
+            : this(defaultConfigFileName) { }
 
         public Log4netFactory(string configFile)
         {

@@ -36,7 +36,8 @@ namespace System.Web.Mvc
             bool runViewStartPages,
             IEnumerable<string> viewStartFileExtensions,
             IViewPageActivator viewPageActivator
-        ) : base(controllerContext, viewPath, viewPageActivator)
+        )
+            : base(controllerContext, viewPath, viewPageActivator)
         {
             LayoutPath = layoutPath ?? String.Empty;
             RunViewStartPages = runViewStartPages;

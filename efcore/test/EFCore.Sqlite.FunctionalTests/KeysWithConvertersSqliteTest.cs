@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class KeysWithConvertersSqliteTest
     : KeysWithConvertersTestBase<KeysWithConvertersSqliteTest.KeysWithConvertersSqliteFixture>
 {
-    public KeysWithConvertersSqliteTest(KeysWithConvertersSqliteFixture fixture) : base(fixture) { }
+    public KeysWithConvertersSqliteTest(KeysWithConvertersSqliteFixture fixture)
+        : base(fixture) { }
 
     public class KeysWithConvertersSqliteFixture : KeysWithConvertersFixtureBase
     {

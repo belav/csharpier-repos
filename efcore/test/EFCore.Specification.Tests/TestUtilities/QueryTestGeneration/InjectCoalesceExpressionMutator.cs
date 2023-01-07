@@ -7,7 +7,8 @@ public class InjectCoalesceExpressionMutator : ExpressionMutator
 {
     private readonly ExpressionFinder _expressionFinder = new();
 
-    public InjectCoalesceExpressionMutator(DbContext context) : base(context) { }
+    public InjectCoalesceExpressionMutator(DbContext context)
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {

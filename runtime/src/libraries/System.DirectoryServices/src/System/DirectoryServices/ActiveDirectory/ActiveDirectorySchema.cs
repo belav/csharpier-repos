@@ -42,7 +42,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string distinguishedName,
             DirectoryEntryManager directoryEntryMgr
-        ) : base(context, distinguishedName)
+        )
+            : base(context, distinguishedName)
         {
             this.directoryEntryMgr = directoryEntryMgr;
             _schemaEntry = DirectoryEntryManager.GetDirectoryEntry(context, distinguishedName);

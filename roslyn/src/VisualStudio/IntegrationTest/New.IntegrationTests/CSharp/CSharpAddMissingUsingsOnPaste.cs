@@ -21,7 +21,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.AddMissingImports)]
     public class CSharpAddMissingUsingsOnPaste : AbstractEditorTest
     {
-        public CSharpAddMissingUsingsOnPaste() : base(nameof(CSharpAddMissingUsingsOnPaste)) { }
+        public CSharpAddMissingUsingsOnPaste()
+            : base(nameof(CSharpAddMissingUsingsOnPaste)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

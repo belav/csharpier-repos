@@ -289,11 +289,14 @@ namespace System.Xml
             0x100,
         };
 
-        public UniqueId() : this(Guid.NewGuid()) { }
+        public UniqueId()
+            : this(Guid.NewGuid()) { }
 
-        public UniqueId(Guid guid) : this(guid.ToByteArray()) { }
+        public UniqueId(Guid guid)
+            : this(guid.ToByteArray()) { }
 
-        public UniqueId(byte[] guid) : this(guid, 0) { }
+        public UniqueId(byte[] guid)
+            : this(guid, 0) { }
 
         public unsafe UniqueId(byte[] guid, int offset)
         {

@@ -42,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
             _listener = listenerProvider.GetListener(FeatureAttribute.InfoBar);

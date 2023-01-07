@@ -16,7 +16,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             string displayText,
             string fullNameText,
             string searchText
-        ) : base(projectId, namespaceSymbol, displayText, fullNameText, searchText, isHidden: false)
-        { }
+        )
+            : base(
+                projectId,
+                namespaceSymbol,
+                displayText,
+                fullNameText,
+                searchText,
+                isHidden: false
+            ) { }
     }
 }

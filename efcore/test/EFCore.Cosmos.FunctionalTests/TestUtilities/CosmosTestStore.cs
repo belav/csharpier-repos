@@ -43,7 +43,8 @@ public class CosmosTestStore : TestStore
         bool shared = true,
         string dataFilePath = null,
         Action<CosmosDbContextOptionsBuilder> extensionConfiguration = null
-    ) : base(CreateName(name), shared)
+    )
+        : base(CreateName(name), shared)
     {
         ConnectionUri = TestEnvironment.DefaultConnection;
         AuthToken = TestEnvironment.AuthToken;

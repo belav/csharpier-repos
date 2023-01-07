@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis
             Func<TKey, TValue> valueFactory,
             Func<TKey, int> keyHash,
             Func<TKey, TValue, bool> keyValueEquality
-        ) : base(size)
+        )
+            : base(size)
         {
             _size = size;
             _valueFactory = valueFactory;
@@ -138,7 +139,8 @@ namespace Microsoft.CodeAnalysis
             internal TValue value;
         }
 
-        public CachingIdentityFactory(int size, Func<TKey, TValue> valueFactory) : base(size)
+        public CachingIdentityFactory(int size, Func<TKey, TValue> valueFactory)
+            : base(size)
         {
             _valueFactory = valueFactory;
         }
@@ -147,7 +149,8 @@ namespace Microsoft.CodeAnalysis
             int size,
             Func<TKey, TValue> valueFactory,
             ObjectPool<CachingIdentityFactory<TKey, TValue>> pool
-        ) : this(size, valueFactory)
+        )
+            : this(size, valueFactory)
         {
             _pool = pool;
         }

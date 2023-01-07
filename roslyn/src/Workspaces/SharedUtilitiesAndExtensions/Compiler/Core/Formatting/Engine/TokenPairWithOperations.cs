@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             int tokenPairIndex,
             AdjustSpacesOperation? spaceOperations,
             AdjustNewLinesOperation? lineOperations
-        ) : this()
+        )
+            : this()
         {
             Contract.ThrowIfNull(tokenStream);
 

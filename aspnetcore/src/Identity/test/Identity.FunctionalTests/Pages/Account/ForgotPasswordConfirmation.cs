@@ -12,5 +12,6 @@ public class ForgotPasswordConfirmation : DefaultUIPage
         HttpClient client,
         IHtmlDocument document,
         DefaultUIContext context
-    ) : base(client, document, context) { }
+    )
+        : base(client, document, context) { }
 }

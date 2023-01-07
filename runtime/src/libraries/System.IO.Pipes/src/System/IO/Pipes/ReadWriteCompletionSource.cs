@@ -18,7 +18,8 @@ namespace System.IO.Pipes
             PipeStream stream,
             ReadOnlyMemory<byte> bufferToPin,
             bool isWrite
-        ) : base(stream._threadPoolBinding!, bufferToPin)
+        )
+            : base(stream._threadPoolBinding!, bufferToPin)
         {
             _pipeStream = stream;
             _isWrite = isWrite;

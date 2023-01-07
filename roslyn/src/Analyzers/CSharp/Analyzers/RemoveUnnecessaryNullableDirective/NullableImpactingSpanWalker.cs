@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.RemoveUnnecessaryNullableDirec
             int positionOfFirstReducingNullableDirective,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? ignoredSpans,
             CancellationToken cancellationToken
-        ) : base(SyntaxWalkerDepth.StructuredTrivia)
+        )
+            : base(SyntaxWalkerDepth.StructuredTrivia)
         {
             _semanticModel = semanticModel;
             _positionOfFirstReducingNullableDirective = positionOfFirstReducingNullableDirective;

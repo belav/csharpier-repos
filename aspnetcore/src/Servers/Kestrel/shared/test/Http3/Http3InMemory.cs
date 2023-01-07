@@ -779,7 +779,8 @@ internal class Http3RequestStream : Http3StreamBase, IHttpStreamHeadersHandler
         Http3Connection connection,
         TestStreamContext testStreamContext,
         Http3RequestHeaderHandler headerHandler
-    ) : base(testStreamContext)
+    )
+        : base(testStreamContext)
     {
         TestBase = testBase;
         Connection = connection;
@@ -939,7 +940,8 @@ internal class Http3RequestStream : Http3StreamBase, IHttpStreamHeadersHandler
 
 internal class Http3FrameWithPayload : Http3RawFrame
 {
-    public Http3FrameWithPayload() : base() { }
+    public Http3FrameWithPayload()
+        : base() { }
 
     // This does not contain extended headers
     public Memory<byte> Payload { get; set; }

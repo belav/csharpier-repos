@@ -30,7 +30,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             string name,
             RelationalTypeMapping relationalTypeMapping,
             IProperty property
-        ) : base(invariantName, name, relationalTypeMapping, property.IsNullable)
+        )
+            : base(invariantName, name, relationalTypeMapping, property.IsNullable)
         {
             _clrPropertyGetter = property.GetGetter();
         }

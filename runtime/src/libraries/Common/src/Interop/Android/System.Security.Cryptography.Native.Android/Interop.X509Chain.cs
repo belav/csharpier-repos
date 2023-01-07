@@ -148,7 +148,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeX509ChainContextHandle : SafeHandle
     {
-        public SafeX509ChainContextHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeX509ChainContextHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

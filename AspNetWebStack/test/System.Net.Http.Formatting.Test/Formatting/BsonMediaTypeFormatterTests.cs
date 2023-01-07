@@ -699,7 +699,8 @@ namespace System.Net.Http.Formatting
 
         private class TestBsonMediaTypeFormatter : BsonMediaTypeFormatter
         {
-            public TestBsonMediaTypeFormatter() : base() { }
+            public TestBsonMediaTypeFormatter()
+                : base() { }
 
             public TestBsonMediaTypeFormatter(TestBsonMediaTypeFormatter formatter)
                 : base(formatter) { }

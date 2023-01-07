@@ -22,7 +22,8 @@ namespace System.DirectoryServices.AccountManagement
             this.unpersisted = true;
         }
 
-        public GroupPrincipal(PrincipalContext context, string samAccountName) : this(context)
+        public GroupPrincipal(PrincipalContext context, string samAccountName)
+            : this(context)
         {
             if (samAccountName == null)
                 throw new ArgumentException(SR.NullArguments);

@@ -18,7 +18,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
     //
     internal sealed class StaticMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
-        public StaticMethodInvoker(MethodInvokeInfo methodInvokeInfo) : base(methodInvokeInfo) { }
+        public StaticMethodInvoker(MethodInvokeInfo methodInvokeInfo)
+            : base(methodInvokeInfo) { }
 
         [DebuggerGuidedStepThroughAttribute]
         protected sealed override object? Invoke(

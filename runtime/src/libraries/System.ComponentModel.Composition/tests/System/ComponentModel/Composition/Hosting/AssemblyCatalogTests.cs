@@ -60,7 +60,8 @@ namespace System.ComponentModel.Composition
 
         protected class DerivedAssemblyCatalog : AssemblyCatalog
         {
-            public DerivedAssemblyCatalog(Assembly assembly) : base(assembly) { }
+            public DerivedAssemblyCatalog(Assembly assembly)
+                : base(assembly) { }
         }
     }
 

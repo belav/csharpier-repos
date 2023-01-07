@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.StaticKeyword
         };
 
-        public PartialKeywordRecommender() : base(SyntaxKind.PartialKeyword) { }
+        public PartialKeywordRecommender()
+            : base(SyntaxKind.PartialKeyword) { }
 
         protected override bool IsValidContext(
             int position,

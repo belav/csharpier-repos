@@ -38,8 +38,8 @@ public abstract class ConnectionInterceptionSqliteTestBase : ConnectionIntercept
         : ConnectionInterceptionSqliteTestBase,
             IClassFixture<ConnectionInterceptionSqliteTest.InterceptionSqliteFixture>
     {
-        public ConnectionInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
-        { }
+        public ConnectionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

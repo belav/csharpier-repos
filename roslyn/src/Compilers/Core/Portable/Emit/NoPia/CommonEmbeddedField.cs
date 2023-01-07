@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected CommonEmbeddedField(
                 TEmbeddedType containingType,
                 TFieldSymbol underlyingField
-            ) : base(underlyingField)
+            )
+                : base(underlyingField)
             {
                 this.ContainingType = containingType;
             }

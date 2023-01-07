@@ -25,7 +25,8 @@ namespace System.Runtime.Serialization
             DataContractSerializer serializer,
             DataContract rootTypeDataContract,
             DataContractResolver? dataContractResolver
-        ) : base(serializer, rootTypeDataContract, dataContractResolver)
+        )
+            : base(serializer, rootTypeDataContract, dataContractResolver)
         {
             this.preserveObjectReferences = serializer.PreserveObjectReferences;
             _serializationSurrogateProvider = serializer.SerializationSurrogateProvider;
@@ -36,7 +37,9 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject
-        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject) { }
+        )
+            : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
+        { }
 
         internal override bool WriteClrTypeInfo(
             XmlWriterDelegator xmlWriter,

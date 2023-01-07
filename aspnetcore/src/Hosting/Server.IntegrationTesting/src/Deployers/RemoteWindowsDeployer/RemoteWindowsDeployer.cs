@@ -26,7 +26,8 @@ public class RemoteWindowsDeployer : ApplicationDeployer
     public RemoteWindowsDeployer(
         RemoteWindowsDeploymentParameters deploymentParameters,
         ILoggerFactory loggerFactory
-    ) : base(deploymentParameters, loggerFactory)
+    )
+        : base(deploymentParameters, loggerFactory)
     {
         _deploymentParameters = deploymentParameters;
 

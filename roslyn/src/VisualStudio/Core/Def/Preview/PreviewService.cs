@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         public PreviewDialogService(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _previewChanges = (IVsPreviewChangesService)
                 serviceProvider.GetService(typeof(SVsPreviewChangesService));

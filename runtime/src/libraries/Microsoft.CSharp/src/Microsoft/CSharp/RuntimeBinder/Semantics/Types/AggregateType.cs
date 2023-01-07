@@ -27,7 +27,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             AggregateSymbol parent,
             TypeArray typeArgsThis,
             AggregateType outerType
-        ) : base(TypeKind.TK_AggregateType)
+        )
+            : base(TypeKind.TK_AggregateType)
         {
             Debug.Assert(typeArgsThis != null);
             OuterType = outerType;

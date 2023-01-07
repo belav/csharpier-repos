@@ -47,7 +47,8 @@ namespace CoreFXTestLibrary.Internal
             get { return _isValueCreated; }
         }
 
-        public ClassInfo(Func<T> Factory) : base()
+        public ClassInfo(Func<T> Factory)
+            : base()
         {
             _factory = Factory;
         }

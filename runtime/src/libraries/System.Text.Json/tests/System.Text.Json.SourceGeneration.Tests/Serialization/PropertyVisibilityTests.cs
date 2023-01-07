@@ -23,7 +23,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         protected PropertyVisibilityTests_Metadata(
             Serialization.Tests.JsonSerializerWrapper serializerWrapper
-        ) : base(serializerWrapper) { }
+        )
+            : base(serializerWrapper) { }
 
         [Theory]
         [InlineData(typeof(ClassWithBadIgnoreAttribute))]

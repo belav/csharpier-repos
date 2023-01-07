@@ -23,7 +23,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             ExprMemberGroup pMemberGroup,
             PropWithType pwtSlot,
             MethWithType mwtSet
-        ) : base(ExpressionKind.Property, type)
+        )
+            : base(ExpressionKind.Property, type)
         {
             OptionalObjectThrough = pOptionalObjectThrough;
             OptionalArguments = pOptionalArguments;

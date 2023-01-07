@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
     internal partial class CSharpLanguageService
         : AbstractLanguageService<CSharpPackage, CSharpLanguageService>
     {
-        internal CSharpLanguageService(CSharpPackage package) : base(package) { }
+        internal CSharpLanguageService(CSharpPackage package)
+            : base(package) { }
 
         protected override Guid DebuggerLanguageId
         {

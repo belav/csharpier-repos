@@ -86,9 +86,11 @@ namespace System.Collections.Generic
             this.comparer = comparer ?? Comparer<T>.Default;
         }
 
-        public SortedSet(IEnumerable<T> collection) : this(collection, Comparer<T>.Default) { }
+        public SortedSet(IEnumerable<T> collection)
+            : this(collection, Comparer<T>.Default) { }
 
-        public SortedSet(IEnumerable<T> collection, IComparer<T>? comparer) : this(comparer)
+        public SortedSet(IEnumerable<T> collection, IComparer<T>? comparer)
+            : this(comparer)
         {
             ArgumentNullException.ThrowIfNull(collection);
 
@@ -1917,7 +1919,8 @@ namespace System.Collections.Generic
 
             private readonly bool _reverse;
 
-            internal Enumerator(SortedSet<T> set) : this(set, reverse: false) { }
+            internal Enumerator(SortedSet<T> set)
+                : this(set, reverse: false) { }
 
             internal Enumerator(SortedSet<T> set, bool reverse)
             {

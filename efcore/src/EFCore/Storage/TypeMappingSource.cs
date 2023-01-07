@@ -37,7 +37,8 @@ public abstract class TypeMappingSource : TypeMappingSourceBase
     ///     Initializes a new instance of the this class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    protected TypeMappingSource(TypeMappingSourceDependencies dependencies) : base(dependencies) { }
+    protected TypeMappingSource(TypeMappingSourceDependencies dependencies)
+        : base(dependencies) { }
 
     private CoreTypeMapping? FindMappingWithConversion(
         in TypeMappingInfo mappingInfo,

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateDec
     public class GenerateDeconstructMethodTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateDeconstructMethodTests(ITestOutputHelper logger) : base(logger) { }
+        public GenerateDeconstructMethodTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

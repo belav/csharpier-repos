@@ -12,7 +12,8 @@ public class GearsOfWarQueryInMemoryTest : GearsOfWarQueryTestBase<GearsOfWarQue
     public GearsOfWarQueryInMemoryTest(
         GearsOfWarQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

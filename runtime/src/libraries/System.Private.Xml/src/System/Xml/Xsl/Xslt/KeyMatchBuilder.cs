@@ -19,7 +19,8 @@ namespace System.Xml.Xsl.Xslt
         private int _depth;
         private readonly PathConvertor _convertor;
 
-        public KeyMatchBuilder(IXPathEnvironment env) : base(env)
+        public KeyMatchBuilder(IXPathEnvironment env)
+            : base(env)
         {
             _convertor = new PathConvertor(env.Factory);
         }
@@ -67,7 +68,8 @@ namespace System.Xml.Xsl.Xslt
             private new readonly XPathQilFactory f;
             private QilNode? _fixup;
 
-            public PathConvertor(XPathQilFactory f) : base(f.BaseFactory)
+            public PathConvertor(XPathQilFactory f)
+                : base(f.BaseFactory)
             {
                 this.f = f;
             }

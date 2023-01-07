@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             string text,
             DiagnosticInfo[]? diagnostics = null,
             SyntaxAnnotation[]? annotations = null
-        ) : base(kind, diagnostics, annotations, text.Length)
+        )
+            : base(kind, diagnostics, annotations, text.Length)
         {
             this.Text = text;
             if (kind == SyntaxKind.PreprocessingMessageTrivia)
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
         }
 
-        internal SyntaxTrivia(ObjectReader reader) : base(reader)
+        internal SyntaxTrivia(ObjectReader reader)
+            : base(reader)
         {
             this.Text = reader.ReadString();
             this.FullWidth = this.Text.Length;

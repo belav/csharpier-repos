@@ -11,7 +11,8 @@ public class NorthwindKeylessEntitiesQueryCosmosTest
     public NorthwindKeylessEntitiesQueryCosmosTest(
         NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

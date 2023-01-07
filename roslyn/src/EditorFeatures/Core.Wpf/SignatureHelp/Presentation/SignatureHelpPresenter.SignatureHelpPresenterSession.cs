@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                 IThreadingContext threadingContext,
                 ISignatureHelpBroker sigHelpBroker,
                 ITextView textView
-            ) : base(threadingContext)
+            )
+                : base(threadingContext)
             {
                 _sigHelpBroker = sigHelpBroker;
                 _textView = textView;

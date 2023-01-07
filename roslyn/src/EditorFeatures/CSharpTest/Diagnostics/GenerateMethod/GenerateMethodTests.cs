@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateMet
     [Trait(Traits.Feature, Traits.Features.CodeActionsGenerateMethod)]
     public class GenerateMethodTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateMethodTests(ITestOutputHelper logger) : base(logger) { }
+        public GenerateMethodTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

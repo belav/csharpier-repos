@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
                 typeof(TestFormattingRuleFactoryServiceFactory)
             );
 
-        public SmartIndenterTests(ITestOutputHelper output) : base(output) { }
+        public SmartIndenterTests(ITestOutputHelper output)
+            : base(output) { }
 
         [WpfFact]
         [Trait(Traits.Feature, Traits.Features.SmartIndent)]

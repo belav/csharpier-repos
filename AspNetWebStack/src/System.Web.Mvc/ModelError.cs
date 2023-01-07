@@ -12,7 +12,8 @@ namespace System.Web.Mvc
                 null /* errorMessage */
             ) { }
 
-        public ModelError(Exception exception, string errorMessage) : this(errorMessage)
+        public ModelError(Exception exception, string errorMessage)
+            : this(errorMessage)
         {
             if (exception == null)
             {

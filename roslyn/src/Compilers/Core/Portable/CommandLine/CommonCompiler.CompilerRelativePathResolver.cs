@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
                 ICommonCompilerFileSystem fileSystem,
                 ImmutableArray<string> searchPaths,
                 string? baseDirectory
-            ) : base(searchPaths, baseDirectory)
+            )
+                : base(searchPaths, baseDirectory)
             {
                 FileSystem = fileSystem;
             }

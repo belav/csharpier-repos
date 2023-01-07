@@ -222,28 +222,34 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
     {
         public S S { get; }
 
-        public ClassWithABCS(A a, B b, C c, S s) : base(a, b, c)
+        public ClassWithABCS(A a, B b, C c, S s)
+            : base(a, b, c)
         {
             S = s;
         }
 
-        public ClassWithABCS(A a, C c, S s) : this(a, null, c, s) { }
+        public ClassWithABCS(A a, C c, S s)
+            : this(a, null, c, s) { }
     }
 
     internal class ClassWithABC_FirstConstructorWithAttribute : ClassWithABC
     {
         [ActivatorUtilitiesConstructor]
-        public ClassWithABC_FirstConstructorWithAttribute(A a, B b, C c) : base(a, b, c) { }
+        public ClassWithABC_FirstConstructorWithAttribute(A a, B b, C c)
+            : base(a, b, c) { }
 
-        public ClassWithABC_FirstConstructorWithAttribute(B b, C c) : this(null, b, c) { }
+        public ClassWithABC_FirstConstructorWithAttribute(B b, C c)
+            : this(null, b, c) { }
     }
 
     internal class ClassWithABC_LastConstructorWithAttribute : ClassWithABC
     {
-        public ClassWithABC_LastConstructorWithAttribute(B b, C c) : this(null, b, c) { }
+        public ClassWithABC_LastConstructorWithAttribute(B b, C c)
+            : this(null, b, c) { }
 
         [ActivatorUtilitiesConstructor]
-        public ClassWithABC_LastConstructorWithAttribute(A a, B b, C c) : base(a, b, c) { }
+        public ClassWithABC_LastConstructorWithAttribute(A a, B b, C c)
+            : base(a, b, c) { }
     }
 
     internal class FakeServiceProvider : IServiceProvider
@@ -326,23 +332,29 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
     internal class ABCS1 : ABCS
     {
-        public ABCS1(A a, B b, C c) : base(a, b, c) { }
+        public ABCS1(A a, B b, C c)
+            : base(a, b, c) { }
 
-        public ABCS1(B b, C c, S s) : base(b, c, s) { }
+        public ABCS1(B b, C c, S s)
+            : base(b, c, s) { }
     }
 
     internal class ABCS2 : ABCS
     {
-        public ABCS2(B b, A a, C c) : base(a, b, c) { }
+        public ABCS2(B b, A a, C c)
+            : base(a, b, c) { }
 
-        public ABCS2(B b, S s, C c) : base(b, c, s) { }
+        public ABCS2(B b, S s, C c)
+            : base(b, c, s) { }
     }
 
     internal class ABCS3 : ABCS
     {
-        public ABCS3(B b, S s, C c) : base(b, c, s) { }
+        public ABCS3(B b, S s, C c)
+            : base(b, c, s) { }
 
-        public ABCS3(A a, B b, C c) : base(a, b, c) { }
+        public ABCS3(A a, B b, C c)
+            : base(a, b, c) { }
     }
 
     internal class ClassWithABC
@@ -374,32 +386,43 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
     internal class ClassWithABC_MultipleCtorsWithSameLength : ClassWithABC
     {
-        public ClassWithABC_MultipleCtorsWithSameLength() : base() { }
+        public ClassWithABC_MultipleCtorsWithSameLength()
+            : base() { }
 
-        public ClassWithABC_MultipleCtorsWithSameLength(A a) : base(a, null) { }
+        public ClassWithABC_MultipleCtorsWithSameLength(A a)
+            : base(a, null) { }
 
-        public ClassWithABC_MultipleCtorsWithSameLength(B b) : base(null, b) { }
+        public ClassWithABC_MultipleCtorsWithSameLength(B b)
+            : base(null, b) { }
     }
 
     internal class ClassWithABC_DefaultConstructorFirst : ClassWithABC
     {
-        public ClassWithABC_DefaultConstructorFirst() : base() { }
+        public ClassWithABC_DefaultConstructorFirst()
+            : base() { }
 
-        public ClassWithABC_DefaultConstructorFirst(A a) : base(a) { }
+        public ClassWithABC_DefaultConstructorFirst(A a)
+            : base(a) { }
 
-        public ClassWithABC_DefaultConstructorFirst(A a, B b) : base(a, b) { }
+        public ClassWithABC_DefaultConstructorFirst(A a, B b)
+            : base(a, b) { }
 
-        public ClassWithABC_DefaultConstructorFirst(A a, B b, C c) : base(a, b, c) { }
+        public ClassWithABC_DefaultConstructorFirst(A a, B b, C c)
+            : base(a, b, c) { }
     }
 
     internal class ClassWithABC_DefaultConstructorLast : ClassWithABC
     {
-        public ClassWithABC_DefaultConstructorLast(A a, B b, C c) : base(a, b, c) { }
+        public ClassWithABC_DefaultConstructorLast(A a, B b, C c)
+            : base(a, b, c) { }
 
-        public ClassWithABC_DefaultConstructorLast(A a, B b) : base(a, b) { }
+        public ClassWithABC_DefaultConstructorLast(A a, B b)
+            : base(a, b) { }
 
-        public ClassWithABC_DefaultConstructorLast(A a) : base(a) { }
+        public ClassWithABC_DefaultConstructorLast(A a)
+            : base(a) { }
 
-        public ClassWithABC_DefaultConstructorLast() : base() { }
+        public ClassWithABC_DefaultConstructorLast()
+            : base() { }
     }
 }

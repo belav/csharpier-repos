@@ -19,7 +19,8 @@ internal sealed class TestW3CLoggerProcessor : W3CLoggerProcessor
         IOptionsMonitor<W3CLoggerOptions> options,
         IHostEnvironment environment,
         ILoggerFactory factory
-    ) : base(options, environment, factory)
+    )
+        : base(options, environment, factory)
     {
         Lines = new List<string>();
     }

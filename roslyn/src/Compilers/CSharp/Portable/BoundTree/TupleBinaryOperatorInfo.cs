@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundValuePlaceholder? conversionForBoolPlaceholder,
                 BoundExpression? conversionForBool,
                 UnaryOperatorSignature boolOperator
-            ) : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
+            )
+                : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
             {
                 Kind = kind;
                 MethodSymbolOpt = methodSymbolOpt;
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<TupleBinaryOperatorInfo> operators,
                 TypeSymbol? leftConvertedTypeOpt,
                 TypeSymbol? rightConvertedTypeOpt
-            ) : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
+            )
+                : base(leftConvertedTypeOpt, rightConvertedTypeOpt)
             {
                 Debug.Assert(
                     leftConvertedTypeOpt is null || leftConvertedTypeOpt.StrippedType().IsTupleType

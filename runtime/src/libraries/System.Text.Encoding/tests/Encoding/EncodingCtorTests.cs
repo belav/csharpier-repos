@@ -104,15 +104,18 @@ namespace System.Text.Tests
 
         private sealed class CustomEncoding : Encoding
         {
-            public CustomEncoding() : base() { }
+            public CustomEncoding()
+                : base() { }
 
-            public CustomEncoding(int codePage) : base(codePage) { }
+            public CustomEncoding(int codePage)
+                : base(codePage) { }
 
             public CustomEncoding(
                 int codePage,
                 EncoderFallback encoderFallback,
                 DecoderFallback decoderFallback
-            ) : base(codePage, encoderFallback, decoderFallback) { }
+            )
+                : base(codePage, encoderFallback, decoderFallback) { }
 
             public override int GetByteCount(char[] chars, int index, int count) => 1;
 

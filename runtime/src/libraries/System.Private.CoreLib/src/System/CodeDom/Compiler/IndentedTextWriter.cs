@@ -19,7 +19,8 @@ namespace System.CodeDom.Compiler
 
         public const string DefaultTabString = "    ";
 
-        public IndentedTextWriter(TextWriter writer) : this(writer, DefaultTabString) { }
+        public IndentedTextWriter(TextWriter writer)
+            : this(writer, DefaultTabString) { }
 
         public IndentedTextWriter(TextWriter writer, string tabString)
             : base(CultureInfo.InvariantCulture)

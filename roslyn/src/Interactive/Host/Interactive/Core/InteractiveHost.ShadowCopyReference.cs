@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 MetadataShadowCopyProvider provider,
                 string originalPath,
                 MetadataReferenceProperties properties
-            ) : base(properties, originalPath)
+            )
+                : base(properties, originalPath)
             {
                 _provider = provider;
             }

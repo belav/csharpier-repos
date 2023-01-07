@@ -22,7 +22,8 @@ namespace System.Net
 
         public WebException() { }
 
-        public WebException(string? message) : base(message) { }
+        public WebException(string? message)
+            : base(message) { }
 
         public WebException(string? message, Exception? innerException)
             : this(message, innerException, DefaultStatus, null) { }
@@ -35,7 +36,8 @@ namespace System.Net
             Exception? innerException,
             WebExceptionStatus status,
             WebResponse? response
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _status = status;
             _response = response;
@@ -49,7 +51,8 @@ namespace System.Net
         protected WebException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
 
         public WebExceptionStatus Status => _status;
 

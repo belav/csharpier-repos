@@ -25,7 +25,8 @@ namespace System.Reflection
         private AssemblyVersionCompatibility _versionCompatibility;
         private AssemblyNameFlags _flags;
 
-        public AssemblyName(string assemblyName) : this()
+        public AssemblyName(string assemblyName)
+            : this()
         {
             ArgumentException.ThrowIfNullOrEmpty(assemblyName);
             if (assemblyName[0] == '\0')

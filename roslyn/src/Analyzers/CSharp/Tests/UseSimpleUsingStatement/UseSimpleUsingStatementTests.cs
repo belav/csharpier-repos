@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSimpleUsingStatement
     public partial class UseSimpleUsingStatementTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseSimpleUsingStatementTests(ITestOutputHelper logger) : base(logger) { }
+        public UseSimpleUsingStatementTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

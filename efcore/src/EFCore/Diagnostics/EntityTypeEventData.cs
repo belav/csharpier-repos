@@ -22,7 +22,8 @@ public class EntityTypeEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IReadOnlyEntityType entityType
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         EntityType = entityType;
     }

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
+        )
+            : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
         protected override void EnterRegion()
         {

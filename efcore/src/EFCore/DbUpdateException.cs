@@ -26,7 +26,8 @@ public class DbUpdateException : Exception
     ///     Initializes a new instance of the <see cref="DbUpdateException" /> class.
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
-    public DbUpdateException(string message) : base(message) { }
+    public DbUpdateException(string message)
+        : base(message) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateException" /> class.
@@ -54,7 +55,8 @@ public class DbUpdateException : Exception
         string message,
         Exception? innerException,
         IReadOnlyList<IUpdateEntry> entries
-    ) : base(message, innerException)
+    )
+        : base(message, innerException)
     {
         _entries = entries
             .Where(e => e.EntityState != EntityState.Unchanged)
@@ -80,7 +82,8 @@ public class DbUpdateException : Exception
         string message,
         Exception? innerException,
         IReadOnlyList<EntityEntry> entries
-    ) : base(message, innerException)
+    )
+        : base(message, innerException)
     {
         _entries = entries;
     }
@@ -90,8 +93,8 @@ public class DbUpdateException : Exception
     /// </summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context being used.</param>
-    public DbUpdateException(SerializationInfo info, StreamingContext context) : base(info, context)
-    { }
+    public DbUpdateException(SerializationInfo info, StreamingContext context)
+        : base(info, context) { }
 
     /// <summary>
     ///     Gets the entries that were involved in the error. Typically this is a single entry, but in some cases it

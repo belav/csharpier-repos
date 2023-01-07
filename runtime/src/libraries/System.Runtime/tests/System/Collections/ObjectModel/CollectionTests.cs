@@ -399,7 +399,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             public TestCollection() { }
 
-            public TestCollection(IList<T> items) : base(items) { }
+            public TestCollection(IList<T> items)
+                : base(items) { }
 
             public IList<T> GetItems() => Items;
         }

@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
 

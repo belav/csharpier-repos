@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isAdder,
             bool isIterator,
             bool isNullableAnalysisEnabled
-        ) : base(@event.containingType, syntaxReference, locations, isIterator)
+        )
+            : base(@event.containingType, syntaxReference, locations, isIterator)
         {
             _event = @event;
 

@@ -257,7 +257,8 @@ namespace Moq
 
         private readonly MockExceptionReasons reasons;
 
-        private MockException(MockExceptionReasons reasons, string message) : base(message)
+        private MockException(MockExceptionReasons reasons, string message)
+            : base(message)
         {
             this.reasons = reasons;
         }
@@ -287,7 +288,8 @@ namespace Moq
         protected MockException(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(info, context)
+        )
+            : base(info, context)
         {
             this.reasons = (MockExceptionReasons)
                 info.GetValue(nameof(this.reasons), typeof(MockExceptionReasons));

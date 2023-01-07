@@ -21,7 +21,8 @@ namespace System.Web.Mvc.Test
             StringComparer.OrdinalIgnoreCase
         );
 
-        public MockBuildManager() : this(new Assembly[] { typeof(MockBuildManager).Assembly }) { }
+        public MockBuildManager()
+            : this(new Assembly[] { typeof(MockBuildManager).Assembly }) { }
 
         public MockBuildManager(Assembly[] referencedAssemblies)
         {

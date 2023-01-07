@@ -21,7 +21,8 @@ namespace System.Security.Permissions
     )]
     public sealed class KeyContainerPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public KeyContainerPermissionAttribute(SecurityAction action) : base(action) { }
+        public KeyContainerPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public string KeyStore { get; set; }
         public string ProviderName { get; set; }

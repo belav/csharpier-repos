@@ -221,7 +221,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         public class SharedTestState : ComponentSharedTestStateBase
         {
-            public SharedTestState() : base() { }
+            public SharedTestState()
+                : base() { }
         }
     }
 
@@ -230,7 +231,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         : RidAssetResolutionBase,
             IClassFixture<RidAssetResolutionBase.SharedTestState>
     {
-        public PortableAppRidAssetResolution(SharedTestState sharedState) : base(sharedState) { }
+        public PortableAppRidAssetResolution(SharedTestState sharedState)
+            : base(sharedState) { }
 
         protected override void RunTest(
             Action<NetCoreAppBuilder.RuntimeLibraryBuilder> assetsCustomizer,
@@ -276,7 +278,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
     {
         public PortableComponentOnFrameworkDependentAppRidAssetResolution(
             SharedTestState sharedState
-        ) : base(sharedState) { }
+        )
+            : base(sharedState) { }
 
         protected override void RunTest(
             Action<NetCoreAppBuilder.RuntimeLibraryBuilder> assetsCustomizer,
@@ -322,7 +325,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         public PortableComponentOnSelfContainedAppRidAssetResolution(
             ComponentSharedTestState sharedState
-        ) : base(sharedState)
+        )
+            : base(sharedState)
         {
             ComponentSharedState = sharedState;
         }
@@ -405,7 +409,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 
         public PortableComponentOnSelfContainedAppRidAssetResolutionWithRidFallbackGraph(
             ComponentSharedTestState sharedState
-        ) : base(sharedState)
+        )
+            : base(sharedState)
         {
             ComponentSharedState = sharedState;
         }

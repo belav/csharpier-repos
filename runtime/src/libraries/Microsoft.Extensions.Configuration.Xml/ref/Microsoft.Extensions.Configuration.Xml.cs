@@ -71,7 +71,8 @@ namespace Microsoft.Extensions.Configuration.Xml
     {
         public XmlConfigurationProvider(
             Microsoft.Extensions.Configuration.Xml.XmlConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
 
         public override void Load(System.IO.Stream stream) { }
     }
@@ -117,7 +118,8 @@ namespace Microsoft.Extensions.Configuration.Xml
     {
         public XmlStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Xml.XmlStreamConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
 
         public override void Load(System.IO.Stream stream) { }
 

@@ -23,7 +23,8 @@ public class OutputFormatterWriteContext : OutputFormatterCanWriteContext
         Func<Stream, Encoding, TextWriter> writerFactory,
         Type? objectType,
         object? @object
-    ) : base(httpContext)
+    )
+        : base(httpContext)
     {
         if (writerFactory == null)
         {

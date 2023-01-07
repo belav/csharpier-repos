@@ -19,7 +19,8 @@ public class ProtectedBrowserStorageUsageTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<BasicTestApp.Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     public override async Task InitializeAsync()
     {

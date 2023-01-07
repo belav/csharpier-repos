@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis
             Action? onDispose,
             bool includeEmbeddedInteropTypes,
             bool ignoreAssemblyRefs
-        ) : base(isImageOwner: true, id: MetadataId.CreateNewId())
+        )
+            : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
             _module = new PEModule(
                 this,
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         // creates a copy
-        private ModuleMetadata(ModuleMetadata metadata) : base(isImageOwner: false, id: metadata.Id)
+        private ModuleMetadata(ModuleMetadata metadata)
+            : base(isImageOwner: false, id: metadata.Id)
         {
             _module = metadata.Module;
 

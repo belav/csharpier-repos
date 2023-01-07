@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     public abstract partial class AbstractUserDiagnosticTest
         : AbstractCodeActionOrUserDiagnosticTest
     {
-        protected AbstractUserDiagnosticTest(ITestOutputHelper logger) : base(logger) { }
+        protected AbstractUserDiagnosticTest(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal abstract Task<(
             ImmutableArray<Diagnostic>,

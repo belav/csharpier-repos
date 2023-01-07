@@ -284,19 +284,22 @@ namespace System.Net.Mail
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(string fileName) : base(fileName)
+        public Attachment(string fileName)
+            : base(fileName)
         {
             Name = Path.GetFileName(fileName);
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(string fileName, string? mediaType) : base(fileName, mediaType)
+        public Attachment(string fileName, string? mediaType)
+            : base(fileName, mediaType)
         {
             Name = Path.GetFileName(fileName);
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(string fileName, ContentType contentType) : base(fileName, contentType)
+        public Attachment(string fileName, ContentType contentType)
+            : base(fileName, contentType)
         {
             if (string.IsNullOrEmpty(contentType.Name))
             {
@@ -309,7 +312,8 @@ namespace System.Net.Mail
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, string? name) : base(contentStream, null, null)
+        public Attachment(Stream contentStream, string? name)
+            : base(contentStream, null, null)
         {
             Name = name;
             MimePart.ContentDisposition = new ContentDisposition();

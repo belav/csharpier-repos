@@ -15,7 +15,8 @@ internal sealed class MinLengthAttributeAdapter : AttributeAdapterBase<MinLength
     public MinLengthAttributeAdapter(
         MinLengthAttribute attribute,
         IStringLocalizer? stringLocalizer
-    ) : base(attribute, stringLocalizer)
+    )
+        : base(attribute, stringLocalizer)
     {
         _min = Attribute.Length.ToString(CultureInfo.InvariantCulture);
     }

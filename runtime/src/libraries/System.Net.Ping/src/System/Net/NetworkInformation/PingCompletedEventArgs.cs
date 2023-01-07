@@ -14,7 +14,8 @@ namespace System.Net.NetworkInformation
             Exception? error,
             bool cancelled,
             object? userToken
-        ) : base(error, cancelled, userToken)
+        )
+            : base(error, cancelled, userToken)
         {
             Reply = reply;
         }

@@ -72,7 +72,8 @@ namespace System.DirectoryServices.Protocols
             int portNumber,
             bool fullyQualifiedDnsHostName,
             bool connectionless
-        ) : this(servers, fullyQualifiedDnsHostName, connectionless)
+        )
+            : this(servers, fullyQualifiedDnsHostName, connectionless)
         {
             PortNumber = portNumber;
         }

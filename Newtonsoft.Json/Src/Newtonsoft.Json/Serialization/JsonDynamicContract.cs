@@ -89,7 +89,8 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonDynamicContract"/> class.
         /// </summary>
         /// <param name="underlyingType">The underlying type for the contract.</param>
-        public JsonDynamicContract(Type underlyingType) : base(underlyingType)
+        public JsonDynamicContract(Type underlyingType)
+            : base(underlyingType)
         {
             ContractType = JsonContractType.Dynamic;
 

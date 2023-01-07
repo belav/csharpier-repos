@@ -9,7 +9,8 @@ public class TPCInheritanceBulkUpdatesSqliteTest
     public TPCInheritanceBulkUpdatesSqliteTest(
         TPCInheritanceBulkUpdatesSqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
         // Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

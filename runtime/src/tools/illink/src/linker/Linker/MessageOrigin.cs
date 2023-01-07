@@ -24,7 +24,8 @@ namespace Mono.Linker
         public MessageOrigin(IMemberDefinition? memberDefinition, int? ilOffset = null)
             : this(memberDefinition as ICustomAttributeProvider, ilOffset) { }
 
-        public MessageOrigin(ICustomAttributeProvider? provider) : this(provider, null) { }
+        public MessageOrigin(ICustomAttributeProvider? provider)
+            : this(provider, null) { }
 
         public MessageOrigin(string fileName, int sourceLine = 0, int sourceColumn = 0)
             : this(fileName, sourceLine, sourceColumn, null) { }

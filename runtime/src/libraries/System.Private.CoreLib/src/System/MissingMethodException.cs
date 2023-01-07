@@ -20,17 +20,20 @@ namespace System
     )]
     public class MissingMethodException : MissingMemberException
     {
-        public MissingMethodException() : base(SR.Arg_MissingMethodException)
+        public MissingMethodException()
+            : base(SR.Arg_MissingMethodException)
         {
             HResult = HResults.COR_E_MISSINGMETHOD;
         }
 
-        public MissingMethodException(string? message) : base(message)
+        public MissingMethodException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_MISSINGMETHOD;
         }
 
-        public MissingMethodException(string? message, Exception? inner) : base(message, inner)
+        public MissingMethodException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_MISSINGMETHOD;
         }

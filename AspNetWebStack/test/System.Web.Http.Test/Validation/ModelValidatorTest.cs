@@ -99,7 +99,8 @@ namespace System.Web.Http.Validation
             {
                 public ObservableModelValidator(
                     IEnumerable<ModelValidatorProvider> validatorProviders
-                ) : base(validatorProviders) { }
+                )
+                    : base(validatorProviders) { }
 
                 public override IEnumerable<ModelValidationResult> Validate(
                     ModelMetadata metadata,

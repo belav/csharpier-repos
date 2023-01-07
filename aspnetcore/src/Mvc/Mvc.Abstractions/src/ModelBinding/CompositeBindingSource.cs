@@ -71,7 +71,8 @@ public class CompositeBindingSource : BindingSource
         string id,
         string displayName,
         IEnumerable<BindingSource> bindingSources
-    ) : base(id, displayName, isGreedy: false, isFromRequest: true)
+    )
+        : base(id, displayName, isGreedy: false, isFromRequest: true)
     {
         if (id == null)
         {

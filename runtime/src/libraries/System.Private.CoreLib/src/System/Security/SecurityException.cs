@@ -19,28 +19,33 @@ namespace System.Security
         private const string PermitOnlyName = "PermitOnly";
         private const string UrlName = "Url";
 
-        public SecurityException() : base(SR.Arg_SecurityException)
+        public SecurityException()
+            : base(SR.Arg_SecurityException)
         {
             HResult = HResults.COR_E_SECURITY;
         }
 
-        public SecurityException(string? message) : base(message)
+        public SecurityException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_SECURITY;
         }
 
-        public SecurityException(string? message, Exception? inner) : base(message, inner)
+        public SecurityException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_SECURITY;
         }
 
-        public SecurityException(string? message, Type? type) : base(message)
+        public SecurityException(string? message, Type? type)
+            : base(message)
         {
             HResult = HResults.COR_E_SECURITY;
             PermissionType = type;
         }
 
-        public SecurityException(string? message, Type? type, string? state) : base(message)
+        public SecurityException(string? message, Type? type, string? state)
+            : base(message)
         {
             HResult = HResults.COR_E_SECURITY;
             PermissionType = type;

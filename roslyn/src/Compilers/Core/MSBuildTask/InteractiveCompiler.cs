@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
     {
         internal readonly PropertyDictionary _store = new PropertyDictionary();
 
-        public InteractiveCompiler() : base(ErrorString.ResourceManager) { }
+        public InteractiveCompiler()
+            : base(ErrorString.ResourceManager) { }
 
         #region Properties - Please keep these alphabetized.
         public string[]? AdditionalLibPaths

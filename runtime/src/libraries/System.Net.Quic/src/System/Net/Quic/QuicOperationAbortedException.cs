@@ -5,8 +5,10 @@ namespace System.Net.Quic
 {
     public class QuicOperationAbortedException : QuicException
     {
-        internal QuicOperationAbortedException() : base(SR.net_quic_operationaborted) { }
+        internal QuicOperationAbortedException()
+            : base(SR.net_quic_operationaborted) { }
 
-        public QuicOperationAbortedException(string message) : base(message) { }
+        public QuicOperationAbortedException(string message)
+            : base(message) { }
     }
 }

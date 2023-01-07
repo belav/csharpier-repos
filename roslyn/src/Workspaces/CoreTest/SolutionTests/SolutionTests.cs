@@ -3941,8 +3941,8 @@ public class C : A {
 
         private class TestSmallFileTextLoader : FileTextLoader
         {
-            public TestSmallFileTextLoader(string path, Encoding encoding) : base(path, encoding)
-            { }
+            public TestSmallFileTextLoader(string path, Encoding encoding)
+                : base(path, encoding) { }
 
             // set max file length to 1 byte
             internal override int MaxFileLength => 1;

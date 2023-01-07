@@ -18,7 +18,8 @@ namespace System.Security.Authentication
     {
         public AuthenticationException() { }
 
-        public AuthenticationException(string? message) : base(message) { }
+        public AuthenticationException(string? message)
+            : base(message) { }
 
         public AuthenticationException(string? message, Exception? innerException)
             : base(message, innerException) { }
@@ -26,7 +27,8 @@ namespace System.Security.Authentication
         protected AuthenticationException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 
     /// <summary>
@@ -44,7 +46,8 @@ namespace System.Security.Authentication
     {
         public InvalidCredentialException() { }
 
-        public InvalidCredentialException(string? message) : base(message) { }
+        public InvalidCredentialException(string? message)
+            : base(message) { }
 
         public InvalidCredentialException(string? message, Exception? innerException)
             : base(message, innerException) { }
@@ -52,6 +55,7 @@ namespace System.Security.Authentication
         protected InvalidCredentialException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 }

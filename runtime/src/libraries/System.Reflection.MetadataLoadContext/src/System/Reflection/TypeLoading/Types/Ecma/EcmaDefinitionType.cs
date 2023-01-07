@@ -15,7 +15,8 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly EcmaModule _module;
         private readonly TypeDefinitionHandle _handle;
 
-        internal EcmaDefinitionType(TypeDefinitionHandle handle, EcmaModule module) : base()
+        internal EcmaDefinitionType(TypeDefinitionHandle handle, EcmaModule module)
+            : base()
         {
             Debug.Assert(module != null);
             Debug.Assert(!handle.IsNil);

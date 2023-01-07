@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
             RetargetingModuleSymbol retargetingModule,
             NamedTypeSymbol underlyingType,
             TupleExtraData tupleData = null
-        ) : base(underlyingType, tupleData)
+        )
+            : base(underlyingType, tupleData)
         {
             Debug.Assert((object)retargetingModule != null);
             Debug.Assert(!(underlyingType is RetargetingNamedTypeSymbol));

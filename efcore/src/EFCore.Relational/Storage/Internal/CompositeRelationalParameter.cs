@@ -20,7 +20,8 @@ public class CompositeRelationalParameter : RelationalParameterBase
     public CompositeRelationalParameter(
         string invariantName,
         IReadOnlyList<IRelationalParameter> relationalParameters
-    ) : base(invariantName)
+    )
+        : base(invariantName)
     {
         RelationalParameters = relationalParameters;
     }

@@ -20,7 +20,8 @@ public class AreaAttribute : RouteValueAttribute
     /// Initializes a new <see cref="AreaAttribute"/> instance.
     /// </summary>
     /// <param name="areaName">The area containing the controller or action.</param>
-    public AreaAttribute(string areaName) : base("area", areaName)
+    public AreaAttribute(string areaName)
+        : base("area", areaName)
     {
         if (string.IsNullOrEmpty(areaName))
         {

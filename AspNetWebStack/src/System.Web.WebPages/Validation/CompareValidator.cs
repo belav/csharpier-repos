@@ -11,7 +11,8 @@ namespace System.Web.WebPages
         private readonly string _otherField;
         private readonly ModelClientValidationEqualToRule _clientValidationRule;
 
-        public CompareValidator(string otherField, string errorMessage) : base(errorMessage)
+        public CompareValidator(string otherField, string errorMessage)
+            : base(errorMessage)
         {
             Debug.Assert(!String.IsNullOrEmpty(otherField));
             _otherField = otherField;

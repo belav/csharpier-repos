@@ -18,9 +18,11 @@ namespace System.Security.Cryptography.Xml
     )]
     public class CryptoSignedXmlRecursionException : XmlException
     {
-        public CryptoSignedXmlRecursionException() : base() { }
+        public CryptoSignedXmlRecursionException()
+            : base() { }
 
-        public CryptoSignedXmlRecursionException(string message) : base(message) { }
+        public CryptoSignedXmlRecursionException(string message)
+            : base(message) { }
 
         public CryptoSignedXmlRecursionException(string message, Exception inner)
             : base(message, inner) { }
@@ -28,6 +30,7 @@ namespace System.Security.Cryptography.Xml
         protected CryptoSignedXmlRecursionException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 }

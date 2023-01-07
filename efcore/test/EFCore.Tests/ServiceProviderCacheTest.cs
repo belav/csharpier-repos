@@ -335,7 +335,8 @@ public class ServiceProviderCacheTest
 
         public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
-        public FakeDbContextOptionsExtension1() : this(new List<string>()) { }
+        public FakeDbContextOptionsExtension1()
+            : this(new List<string>()) { }
 
         public FakeDbContextOptionsExtension1(List<string> log)
         {
@@ -349,7 +350,8 @@ public class ServiceProviderCacheTest
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension)
+                : base(extension) { }
 
             public override bool IsDatabaseProvider => false;
 
@@ -373,7 +375,8 @@ public class ServiceProviderCacheTest
 
         public DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
-        public FakeDbContextOptionsExtension2() : this(new List<string>()) { }
+        public FakeDbContextOptionsExtension2()
+            : this(new List<string>()) { }
 
         public FakeDbContextOptionsExtension2(List<string> log)
         {
@@ -387,7 +390,8 @@ public class ServiceProviderCacheTest
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension)
+                : base(extension) { }
 
             public override bool IsDatabaseProvider => false;
 

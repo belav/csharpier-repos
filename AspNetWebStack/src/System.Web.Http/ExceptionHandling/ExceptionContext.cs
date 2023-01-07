@@ -42,7 +42,8 @@ namespace System.Web.Http.ExceptionHandling
             Exception exception,
             ExceptionContextCatchBlock catchBlock,
             HttpActionContext actionContext
-        ) : this(exception, catchBlock)
+        )
+            : this(exception, catchBlock)
         {
             if (actionContext == null)
             {
@@ -98,7 +99,8 @@ namespace System.Web.Http.ExceptionHandling
             Exception exception,
             ExceptionContextCatchBlock catchBlock,
             HttpRequestMessage request
-        ) : this(exception, catchBlock)
+        )
+            : this(exception, catchBlock)
         {
             if (request == null)
             {
@@ -121,7 +123,8 @@ namespace System.Web.Http.ExceptionHandling
             ExceptionContextCatchBlock catchBlock,
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) : this(exception, catchBlock)
+        )
+            : this(exception, catchBlock)
         {
             if (request == null)
             {

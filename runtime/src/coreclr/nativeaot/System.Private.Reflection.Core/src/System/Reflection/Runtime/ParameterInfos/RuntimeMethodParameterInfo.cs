@@ -22,7 +22,8 @@ namespace System.Reflection.Runtime.ParameterInfos
             int position,
             QSignatureTypeHandle qualifiedParameterTypeHandle,
             TypeContext typeContext
-        ) : base(member, position)
+        )
+            : base(member, position)
         {
             QualifiedParameterTypeHandle = qualifiedParameterTypeHandle;
             _typeContext = typeContext;

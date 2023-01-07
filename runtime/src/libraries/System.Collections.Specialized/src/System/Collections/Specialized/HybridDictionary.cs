@@ -34,7 +34,8 @@ namespace System.Collections.Specialized
 
         public HybridDictionary() { }
 
-        public HybridDictionary(int initialSize) : this(initialSize, false) { }
+        public HybridDictionary(int initialSize)
+            : this(initialSize, false) { }
 
         public HybridDictionary(bool caseInsensitive)
         {

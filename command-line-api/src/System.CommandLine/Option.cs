@@ -17,7 +17,8 @@ namespace System.CommandLine
     {
         private List<Action<OptionResult>>? _validators;
 
-        private protected Option(string name, string? description) : base(description)
+        private protected Option(string name, string? description)
+            : base(description)
         {
             if (name is null)
             {
@@ -27,7 +28,8 @@ namespace System.CommandLine
             AddAlias(name);
         }
 
-        private protected Option(string[] aliases, string? description) : base(description)
+        private protected Option(string[] aliases, string? description)
+            : base(description)
         {
             if (aliases is null)
             {

@@ -833,7 +833,8 @@ table was set.
         {
             private TextWriter _w;
 
-            public ComplexEventSequence1View(DataTable dt, TextWriter w) : base()
+            public ComplexEventSequence1View(DataTable dt, TextWriter w)
+                : base()
             {
                 _w = w;
                 w.WriteLine("setting table...");

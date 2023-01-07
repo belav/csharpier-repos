@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceLocation nameLocation,
             ImmutableArray<SingleNamespaceOrTypeDeclaration> children,
             ImmutableArray<Diagnostic> diagnostics
-        ) : base(name, syntaxReference, nameLocation, children, diagnostics)
+        )
+            : base(name, syntaxReference, nameLocation, children, diagnostics)
         {
             _hasUsings = hasUsings;
             _hasExternAliases = hasExternAliases;

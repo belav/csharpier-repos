@@ -1214,7 +1214,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlNumeric10Converter : XmlBaseConverter
     {
-        private XmlNumeric10Converter(XmlSchemaType schemaType) : base(schemaType) { }
+        private XmlNumeric10Converter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1593,7 +1594,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlNumeric2Converter : XmlBaseConverter
     {
-        private XmlNumeric2Converter(XmlSchemaType schemaType) : base(schemaType) { }
+        private XmlNumeric2Converter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -1812,7 +1814,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlDateTimeConverter : XmlBaseConverter
     {
-        private XmlDateTimeConverter(XmlSchemaType schemaType) : base(schemaType) { }
+        private XmlDateTimeConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -2086,7 +2089,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlBooleanConverter : XmlBaseConverter
     {
-        private XmlBooleanConverter(XmlSchemaType schemaType) : base(schemaType) { }
+        private XmlBooleanConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -2272,7 +2276,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlMiscConverter : XmlBaseConverter
     {
-        private XmlMiscConverter(XmlSchemaType schemaType) : base(schemaType) { }
+        private XmlMiscConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -2571,7 +2576,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlStringConverter : XmlBaseConverter
     {
-        private XmlStringConverter(XmlSchemaType schemaType) : base(schemaType) { }
+        private XmlStringConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlSchemaType schemaType)
         {
@@ -2657,7 +2663,8 @@ namespace System.Xml.Schema
     {
         private readonly bool _allowListToList;
 
-        private XmlUntypedConverter() : base(DatatypeImplementation.UntypedAtomicType) { }
+        private XmlUntypedConverter()
+            : base(DatatypeImplementation.UntypedAtomicType) { }
 
         private XmlUntypedConverter(XmlUntypedConverter atomicConverter, bool allowListToList)
             : base(
@@ -3334,7 +3341,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlAnyConverter : XmlBaseConverter
     {
-        private XmlAnyConverter(XmlTypeCode typeCode) : base(typeCode) { }
+        private XmlAnyConverter(XmlTypeCode typeCode)
+            : base(typeCode) { }
 
         public static readonly XmlValueConverter Item = new XmlAnyConverter(XmlTypeCode.Item);
         public static readonly XmlValueConverter AnyAtomic = new XmlAnyConverter(
@@ -3863,7 +3871,8 @@ namespace System.Xml.Schema
 
     internal sealed class XmlAnyListConverter : XmlListConverter
     {
-        private XmlAnyListConverter(XmlBaseConverter atomicConverter) : base(atomicConverter) { }
+        private XmlAnyListConverter(XmlBaseConverter atomicConverter)
+            : base(atomicConverter) { }
 
         public static readonly XmlValueConverter ItemList = new XmlAnyListConverter(
             (XmlBaseConverter)XmlAnyConverter.Item
@@ -3904,7 +3913,8 @@ namespace System.Xml.Schema
     {
         protected XmlValueConverter? atomicConverter;
 
-        protected XmlListConverter(XmlBaseConverter atomicConverter) : base(atomicConverter)
+        protected XmlListConverter(XmlBaseConverter atomicConverter)
+            : base(atomicConverter)
         {
             this.atomicConverter = atomicConverter;
         }
@@ -3913,12 +3923,14 @@ namespace System.Xml.Schema
             XmlBaseConverter atomicConverter,
             Type clrTypeDefault,
             Type clrListTypeDefault
-        ) : base(atomicConverter, clrTypeDefault, clrListTypeDefault)
+        )
+            : base(atomicConverter, clrTypeDefault, clrListTypeDefault)
         {
             this.atomicConverter = atomicConverter;
         }
 
-        protected XmlListConverter(XmlSchemaType schemaType) : base(schemaType) { }
+        protected XmlListConverter(XmlSchemaType schemaType)
+            : base(schemaType) { }
 
         public static XmlValueConverter Create(XmlValueConverter atomicConverter)
         {
@@ -4208,7 +4220,8 @@ namespace System.Xml.Schema
         private readonly bool _hasAtomicMember,
             _hasListMember;
 
-        private XmlUnionConverter(XmlSchemaType schemaType) : base(schemaType)
+        private XmlUnionConverter(XmlSchemaType schemaType)
+            : base(schemaType)
         {
             // Skip restrictions. It is safe to do that because this is a union, so it's not a built-in type
             while (schemaType.DerivedBy == XmlSchemaDerivationMethod.Restriction)

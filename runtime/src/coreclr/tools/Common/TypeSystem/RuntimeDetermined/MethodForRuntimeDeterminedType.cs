@@ -28,7 +28,8 @@ namespace Internal.TypeSystem
             MethodDesc typicalMethodDef,
             RuntimeDeterminedType rdType,
             int hashcode
-        ) : this(typicalMethodDef, rdType)
+        )
+            : this(typicalMethodDef, rdType)
         {
             SetHashCode(hashcode);
         }

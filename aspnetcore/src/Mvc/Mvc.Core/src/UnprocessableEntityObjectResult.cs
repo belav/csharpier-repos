@@ -21,13 +21,15 @@ public class UnprocessableEntityObjectResult : ObjectResult
     /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
     public UnprocessableEntityObjectResult(
         [ActionResultObjectValue] ModelStateDictionary modelState
-    ) : this(new SerializableError(modelState)) { }
+    )
+        : this(new SerializableError(modelState)) { }
 
     /// <summary>
     /// Creates a new <see cref="UnprocessableEntityObjectResult"/> instance.
     /// </summary>
     /// <param name="error">Contains errors to be returned to the client.</param>
-    public UnprocessableEntityObjectResult([ActionResultObjectValue] object? error) : base(error)
+    public UnprocessableEntityObjectResult([ActionResultObjectValue] object? error)
+        : base(error)
     {
         StatusCode = DefaultStatusCode;
     }

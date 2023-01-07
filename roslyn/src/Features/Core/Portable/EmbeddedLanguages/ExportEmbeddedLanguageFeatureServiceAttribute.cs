@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             string name,
             string[] languages,
             params string[] identifiers
-        ) : this(contractType, name, languages, supportsUnannotatedAPIs: false, identifiers) { }
+        )
+            : this(contractType, name, languages, supportsUnannotatedAPIs: false, identifiers) { }
 
         internal ExportEmbeddedLanguageFeatureServiceAttribute(
             Type contractType,
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             string[] languages,
             bool supportsUnannotatedAPIs,
             params string[] identifiers
-        ) : base(contractType)
+        )
+            : base(contractType)
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Languages = languages ?? throw new ArgumentNullException(nameof(languages));

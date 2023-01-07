@@ -9,7 +9,8 @@ namespace Microsoft.DotNet.OpenApi.Add.Tests;
 
 public class OpenApiAddURLTests : OpenApiTestBase
 {
-    public OpenApiAddURLTests(ITestOutputHelper output) : base(output) { }
+    public OpenApiAddURLTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Fact]
     public async Task OpenApi_Add_Url_WithContentDisposition()

@@ -26,7 +26,8 @@ public class AtTimeZoneExpression : SqlExpression
         SqlExpression timeZone,
         Type type,
         RelationalTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         Operand = operand;
         TimeZone = timeZone;

@@ -22,7 +22,8 @@ namespace System.Formats.Tar
             string entryName,
             TarEntryFormat format,
             bool isGea
-        ) : base(entryType, entryName, format, isGea)
+        )
+            : base(entryType, entryName, format, isGea)
         {
             _header._uName = string.Empty;
             _header._gName = string.Empty;
@@ -31,7 +32,8 @@ namespace System.Formats.Tar
         }
 
         // Constructor called when converting an entry to the selected format.
-        internal PosixTarEntry(TarEntry other, TarEntryFormat format) : base(other, format)
+        internal PosixTarEntry(TarEntry other, TarEntryFormat format)
+            : base(other, format)
         {
             if (other is PosixTarEntry)
             {

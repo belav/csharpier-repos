@@ -88,7 +88,8 @@ public partial class ModelValidatorTest : ModelValidatorTestBase
 
     public class CustomValueComparer<T> : ValueComparer<T> // Doesn't implement IComparer
     {
-        public CustomValueComparer() : base(false) { }
+        public CustomValueComparer()
+            : base(false) { }
     }
 
     [ConditionalFact]

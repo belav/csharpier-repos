@@ -22,7 +22,8 @@ public class IPAddressToBytesConverter : ValueConverter<IPAddress?, byte[]?>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public IPAddressToBytesConverter() : this(null) { }
+    public IPAddressToBytesConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

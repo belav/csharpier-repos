@@ -638,7 +638,8 @@ namespace XmlCoreTest.Common
 
         private XsltRuntimeException() { } // no op, do not call
 
-        public XsltRuntimeException(string a, bool d) : this(a, XMLUSEREX, string.Empty, d) { }
+        public XsltRuntimeException(string a, bool d)
+            : this(a, XMLUSEREX, string.Empty, d) { }
 
         public XsltRuntimeException(string a, string b, string c, bool d)
         {

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             IGlobalOperationNotificationService globalOperationNotificationService,
             TimeSpan backOffTimeSpan,
             CancellationToken shutdownToken
-        ) : base(listener, backOffTimeSpan, shutdownToken)
+        )
+            : base(listener, backOffTimeSpan, shutdownToken)
         {
             _globalOperationNotificationService = globalOperationNotificationService;
             _globalOperationNotificationService.Started += OnGlobalOperationStarted;

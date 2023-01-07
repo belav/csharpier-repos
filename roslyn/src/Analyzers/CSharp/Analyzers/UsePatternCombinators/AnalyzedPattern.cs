@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
 
             public readonly TypeSyntax TypeSyntax;
 
-            private Type(TypeSyntax type, IOperation target) : base(target) => TypeSyntax = type;
+            private Type(TypeSyntax type, IOperation target)
+                : base(target) => TypeSyntax = type;
         }
 
         /// <summary>
@@ -98,8 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly PatternSyntax PatternSyntax;
 
-            public Source(PatternSyntax patternSyntax, IOperation target) : base(target) =>
-                PatternSyntax = patternSyntax;
+            public Source(PatternSyntax patternSyntax, IOperation target)
+                : base(target) => PatternSyntax = patternSyntax;
         }
 
         /// <summary>
@@ -109,8 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly ExpressionSyntax ExpressionSyntax;
 
-            public Constant(ExpressionSyntax expression, IOperation target) : base(target) =>
-                ExpressionSyntax = expression;
+            public Constant(ExpressionSyntax expression, IOperation target)
+                : base(target) => ExpressionSyntax = expression;
         }
 
         /// <summary>
@@ -125,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 BinaryOperatorKind operatorKind,
                 ExpressionSyntax value,
                 IOperation target
-            ) : base(target)
+            )
+                : base(target)
             {
                 OperatorKind = operatorKind;
                 Value = value;
@@ -148,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 bool isDisjunctive,
                 SyntaxToken token,
                 IOperation target
-            ) : base(target)
+            )
+                : base(target)
             {
                 Left = leftPattern;
                 Right = rightPattern;
@@ -206,8 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
         {
             public readonly AnalyzedPattern Pattern;
 
-            private Not(AnalyzedPattern pattern, IOperation target) : base(target) =>
-                Pattern = pattern;
+            private Not(AnalyzedPattern pattern, IOperation target)
+                : base(target) => Pattern = pattern;
 
             private static BinaryOperatorKind Negate(BinaryOperatorKind kind)
             {

@@ -12,7 +12,8 @@ namespace System.Diagnostics.Eventing.Reader
     /// </summary>
     public class EventLogQuery
     {
-        public EventLogQuery(string path, PathType pathType) : this(path, pathType, null) { }
+        public EventLogQuery(string path, PathType pathType)
+            : this(path, pathType, null) { }
 
         public EventLogQuery(string path, PathType pathType, string query)
         {

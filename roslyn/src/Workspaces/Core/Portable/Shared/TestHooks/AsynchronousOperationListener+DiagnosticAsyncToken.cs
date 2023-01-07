@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 object? tag,
                 string filePath,
                 int lineNumber
-            ) : base(listener)
+            )
+                : base(listener)
             {
                 Name = name;
                 Tag = tag;

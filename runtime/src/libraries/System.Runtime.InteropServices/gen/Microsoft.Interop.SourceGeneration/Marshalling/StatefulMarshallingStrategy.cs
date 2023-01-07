@@ -446,7 +446,8 @@ namespace Microsoft.Interop
             TypeSyntax managedElementType,
             TypeSyntax unmanagedElementType,
             ExpressionSyntax numElementsExpression
-        ) : base(managedElementType, unmanagedElementType)
+        )
+            : base(managedElementType, unmanagedElementType)
         {
             _innerMarshaller = innerMarshaller;
             _shape = shape;
@@ -681,7 +682,8 @@ namespace Microsoft.Interop
             IMarshallingGenerator elementMarshaller,
             TypePositionInfo elementInfo,
             ExpressionSyntax numElementsExpression
-        ) : base(unmanagedElementType, elementMarshaller, elementInfo)
+        )
+            : base(unmanagedElementType, elementMarshaller, elementInfo)
         {
             _innerMarshaller = innerMarshaller;
             _shape = shape;

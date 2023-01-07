@@ -106,7 +106,8 @@ namespace System.Management
             object context,
             int status,
             ManagementBaseObject wmiStatusObject
-        ) : base(context)
+        )
+            : base(context)
         {
             wmiObject = wmiStatusObject;
             this.status = status;
@@ -152,7 +153,8 @@ namespace System.Management
         /// from the operation which trigerred the event.</param>
         /// <param name="path">The WmiPath representing the identity of the
         /// object that has been put.</param>
-        internal ObjectPutEventArgs(object context, ManagementPath path) : base(context)
+        internal ObjectPutEventArgs(object context, ManagementPath path)
+            : base(context)
         {
             wmiPath = path;
         }
@@ -271,7 +273,8 @@ namespace System.Management
     {
         private readonly int status;
 
-        internal StoppedEventArgs(object context, int status) : base(context)
+        internal StoppedEventArgs(object context, int status)
+            : base(context)
         {
             this.status = status;
         }

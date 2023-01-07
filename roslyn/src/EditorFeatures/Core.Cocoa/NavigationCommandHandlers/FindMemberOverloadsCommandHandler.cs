@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         public FindMemberOverloadsCommandHandler(
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(streamingPresenters)
+        )
+            : base(streamingPresenters)
         {
             Contract.ThrowIfNull(listenerProvider);
 

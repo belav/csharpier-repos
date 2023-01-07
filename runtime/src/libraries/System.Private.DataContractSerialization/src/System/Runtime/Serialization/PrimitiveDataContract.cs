@@ -26,7 +26,8 @@ namespace System.Runtime.Serialization.DataContracts
                 Type type,
             XmlDictionaryString name,
             XmlDictionaryString ns
-        ) : base(new PrimitiveDataContractCriticalHelper(type, name, ns))
+        )
+            : base(new PrimitiveDataContractCriticalHelper(type, name, ns))
         {
             _helper = (base.Helper as PrimitiveDataContractCriticalHelper)!;
         }
@@ -189,7 +190,8 @@ namespace System.Runtime.Serialization.DataContracts
                     Type type,
                 XmlDictionaryString name,
                 XmlDictionaryString ns
-            ) : base(type)
+            )
+                : base(type)
             {
                 SetDataContractName(name, ns);
             }

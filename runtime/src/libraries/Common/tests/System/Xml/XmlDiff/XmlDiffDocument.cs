@@ -100,7 +100,8 @@ namespace System.Xml.XmlDiff
         private bool _bNormalizeNewline;
         public XmlNameTable nameTable;
 
-        public XmlDiffDocument() : base()
+        public XmlDiffDocument()
+            : base()
         {
             _bLoaded = false;
             _bIgnoreAttributeOrder = false;
@@ -1349,7 +1350,8 @@ namespace System.Xml.XmlDiff
         private int _endLineNumber,
             _endLinePosition;
 
-        public XmlDiffElement(string localName, string prefix, string ns) : base()
+        public XmlDiffElement(string localName, string prefix, string ns)
+            : base()
         {
             this._lName = localName;
             this._prefix = prefix;
@@ -1591,7 +1593,8 @@ namespace System.Xml.XmlDiff
         private string _ns;
         private string _value;
 
-        public XmlDiffAttribute(string localName, string prefix, string ns, string value) : base()
+        public XmlDiffAttribute(string localName, string prefix, string ns, string value)
+            : base()
         {
             this._lName = localName;
             this._prefix = prefix;
@@ -1655,7 +1658,8 @@ namespace System.Xml.XmlDiff
     {
         private string _name;
 
-        public XmlDiffEntityReference(string name) : base()
+        public XmlDiffEntityReference(string name)
+            : base()
         {
             this._name = name;
         }

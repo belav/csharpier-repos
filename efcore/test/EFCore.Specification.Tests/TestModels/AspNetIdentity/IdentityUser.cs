@@ -11,7 +11,8 @@ public class IdentityUser : IdentityUser<string>
         SecurityStamp = Guid.NewGuid().ToString();
     }
 
-    public IdentityUser(string userName) : this()
+    public IdentityUser(string userName)
+        : this()
     {
         UserName = userName;
     }

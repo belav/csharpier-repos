@@ -95,7 +95,8 @@ namespace System.Security.Cryptography.Tests
             ),
         };
 
-        public HmacSha256Tests() : base(s_testMacs4231) { }
+        public HmacSha256Tests()
+            : base(s_testMacs4231) { }
 
         [Fact]
         public void HmacSha256_Rfc4231_1()

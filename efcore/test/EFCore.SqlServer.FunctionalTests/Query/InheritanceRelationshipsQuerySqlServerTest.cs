@@ -9,7 +9,8 @@ public class InheritanceRelationshipsQuerySqlServerTest
     public InheritanceRelationshipsQuerySqlServerTest(
         InheritanceRelationshipsQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }

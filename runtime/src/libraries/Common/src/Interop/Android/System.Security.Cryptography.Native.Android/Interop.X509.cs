@@ -150,6 +150,7 @@ namespace System.Security.Cryptography.X509Certificates
     {
         public SafeX509Handle() { }
 
-        internal SafeX509Handle(IntPtr ptr) : base(ptr) { }
+        internal SafeX509Handle(IntPtr ptr)
+            : base(ptr) { }
     }
 }

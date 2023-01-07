@@ -124,7 +124,8 @@ namespace System.ComponentModel.Composition.Primitives
             string? message,
             ICompositionElement? element,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _element = element;
         }

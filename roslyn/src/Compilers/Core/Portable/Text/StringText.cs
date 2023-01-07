@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Text
             ImmutableArray<byte> checksum = default(ImmutableArray<byte>),
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1,
             ImmutableArray<byte> embeddedTextBlob = default(ImmutableArray<byte>)
-        ) : base(checksum, checksumAlgorithm, embeddedTextBlob)
+        )
+            : base(checksum, checksumAlgorithm, embeddedTextBlob)
         {
             RoslynDebug.Assert(source != null);
 

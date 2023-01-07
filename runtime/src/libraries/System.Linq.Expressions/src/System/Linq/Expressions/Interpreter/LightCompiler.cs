@@ -245,7 +245,8 @@ namespace System.Linq.Expressions.Interpreter
     [Serializable]
     internal sealed class RethrowException : Exception
     {
-        public RethrowException() : base() { }
+        public RethrowException()
+            : base() { }
 
         internal RethrowException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
@@ -355,7 +356,8 @@ namespace System.Linq.Expressions.Interpreter
             _instructions = new InstructionList();
         }
 
-        private LightCompiler(LightCompiler parent) : this()
+        private LightCompiler(LightCompiler parent)
+            : this()
         {
             _parent = parent;
         }
@@ -3591,7 +3593,8 @@ namespace System.Linq.Expressions.Interpreter
             LocalDefinition[] args,
             MethodInfo indexer,
             int argumentIndex
-        ) : base(argumentIndex)
+        )
+            : base(argumentIndex)
         {
             _obj = obj;
             _args = args;

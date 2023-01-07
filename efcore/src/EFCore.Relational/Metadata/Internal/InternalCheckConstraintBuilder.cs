@@ -22,7 +22,8 @@ public class InternalCheckConstraintBuilder
     public InternalCheckConstraintBuilder(
         CheckConstraint checkConstraint,
         IConventionModelBuilder modelBuilder
-    ) : base(checkConstraint, modelBuilder) { }
+    )
+        : base(checkConstraint, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

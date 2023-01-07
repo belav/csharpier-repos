@@ -11,7 +11,8 @@ namespace System.Net.Http
     {
         private sealed class ConnectionCloseReadStream : HttpContentReadStream
         {
-            public ConnectionCloseReadStream(HttpConnection connection) : base(connection) { }
+            public ConnectionCloseReadStream(HttpConnection connection)
+                : base(connection) { }
 
             public override int Read(Span<byte> buffer)
             {

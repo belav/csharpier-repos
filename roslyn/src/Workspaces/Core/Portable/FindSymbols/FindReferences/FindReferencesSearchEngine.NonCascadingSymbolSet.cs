@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public NonCascadingSymbolSet(
                 FindReferencesSearchEngine engine,
                 MetadataUnifyingSymbolHashSet searchSymbols
-            ) : base(engine) => _symbols = searchSymbols.ToImmutableArray();
+            )
+                : base(engine) => _symbols = searchSymbols.ToImmutableArray();
 
             public override ImmutableArray<ISymbol> GetAllSymbols() => _symbols;
 

@@ -69,7 +69,8 @@ namespace System.Diagnostics.Tracing
             string name,
             EventTags tags,
             params TraceLoggingTypeInfo[] typeInfos
-        ) : this(tags, name, MakeArray(typeInfos)) { }
+        )
+            : this(tags, name, MakeArray(typeInfos)) { }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"

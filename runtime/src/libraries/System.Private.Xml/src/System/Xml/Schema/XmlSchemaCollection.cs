@@ -35,7 +35,8 @@ namespace System.Xml.Schema
         /// <summary>
         /// Construct a new empty schema collection.
         /// </summary>
-        public XmlSchemaCollection() : this(new NameTable()) { }
+        public XmlSchemaCollection()
+            : this(new NameTable()) { }
 
         /// <summary>
         /// Construct a new empty schema collection with associated XmlNameTable.

@@ -267,7 +267,8 @@ namespace System.ComponentModel.Composition
             public MetadataStoreProvider(
                 Type forType,
                 Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider
-            ) : base(TypeDescriptor.GetProvider(forType))
+            )
+                : base(TypeDescriptor.GetProvider(forType))
             {
                 this.provider = provider;
             }
@@ -292,7 +293,8 @@ namespace System.ComponentModel.Composition
                 Type targetType,
                 ICustomTypeDescriptor parent,
                 Func<MemberInfo, IEnumerable<Attribute>, IEnumerable<Attribute>> provider
-            ) : base(parent)
+            )
+                : base(parent)
             {
                 this.targetType = targetType;
                 this.provider = provider;

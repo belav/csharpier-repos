@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 public class JsonUpdateSqlServerTest : JsonUpdateTestBase<JsonUpdateSqlServerFixture>
 {
-    public JsonUpdateSqlServerTest(JsonUpdateSqlServerFixture fixture) : base(fixture)
+    public JsonUpdateSqlServerTest(JsonUpdateSqlServerFixture fixture)
+        : base(fixture)
     {
         ClearLog();
     }

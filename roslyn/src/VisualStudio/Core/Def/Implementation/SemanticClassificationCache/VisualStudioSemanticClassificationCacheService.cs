@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SemanticClassif
         public VisualStudioSemanticClassificationCacheService(
             VisualStudioWorkspaceImpl workspace,
             IThreadingContext threadingContext
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
         }

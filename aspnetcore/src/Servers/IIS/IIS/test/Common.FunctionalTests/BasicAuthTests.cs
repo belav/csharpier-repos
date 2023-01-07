@@ -34,7 +34,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class BasicAuthTests : IISFunctionalTestBase
 {
-    public BasicAuthTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public BasicAuthTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     public static TestMatrix TestVariants =>
         TestMatrix

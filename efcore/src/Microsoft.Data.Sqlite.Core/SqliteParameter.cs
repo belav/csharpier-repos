@@ -63,8 +63,8 @@ namespace Microsoft.Data.Sqlite
         /// <param name="type">The type of the parameter.</param>
         /// <param name="size">The maximum size, in bytes, of the parameter.</param>
         /// <seealso href="https://docs.microsoft.com/dotnet/standard/data/sqlite/parameters">Parameters</seealso>
-        public SqliteParameter(string? name, SqliteType type, int size) : this(name, type) =>
-            Size = size;
+        public SqliteParameter(string? name, SqliteType type, int size)
+            : this(name, type) => Size = size;
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteParameter" /> class.

@@ -104,8 +104,8 @@ namespace System.Net.Http.Functional.Tests
             private readonly TaskCompletionSource<bool> _tcs;
             public long Ticks;
 
-            public SetTcsContent(Stream stream, TaskCompletionSource<bool> tcs) : base(stream) =>
-                _tcs = tcs;
+            public SetTcsContent(Stream stream, TaskCompletionSource<bool> tcs)
+                : base(stream) => _tcs = tcs;
 
             protected override void SerializeToStream(
                 Stream stream,

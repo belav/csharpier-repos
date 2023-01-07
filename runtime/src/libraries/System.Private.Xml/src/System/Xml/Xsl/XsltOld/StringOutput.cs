@@ -17,7 +17,8 @@ namespace System.Xml.Xsl.XsltOld
             get { return _result; }
         }
 
-        internal StringOutput(Processor processor) : base(processor)
+        internal StringOutput(Processor processor)
+            : base(processor)
         {
             _builder = new StringBuilder();
         }

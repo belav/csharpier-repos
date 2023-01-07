@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
             IFakeService singleService,
             IEnumerable<IFakeMultipleService> multipleServices,
             FakeDisposeCallback callback
-        ) : base(callback)
+        )
+            : base(callback)
         {
             SingleService = singleService;
             MultipleServices = multipleServices.ToArray();

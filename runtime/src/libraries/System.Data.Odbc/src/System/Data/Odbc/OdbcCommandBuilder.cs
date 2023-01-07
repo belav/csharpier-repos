@@ -9,12 +9,14 @@ namespace System.Data.Odbc
 {
     public sealed class OdbcCommandBuilder : DbCommandBuilder
     {
-        public OdbcCommandBuilder() : base()
+        public OdbcCommandBuilder()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OdbcCommandBuilder(OdbcDataAdapter? adapter) : this()
+        public OdbcCommandBuilder(OdbcDataAdapter? adapter)
+            : this()
         {
             DataAdapter = adapter;
         }

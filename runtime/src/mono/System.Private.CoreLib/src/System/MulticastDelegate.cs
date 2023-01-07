@@ -14,12 +14,14 @@ namespace System
         private Delegate[]? delegates;
 
         [RequiresUnreferencedCode("The target method might be removed")]
-        protected MulticastDelegate(object target, string method) : base(target, method) { }
+        protected MulticastDelegate(object target, string method)
+            : base(target, method) { }
 
         protected MulticastDelegate(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
             string method
-        ) : base(target, method) { }
+        )
+            : base(target, method) { }
 
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

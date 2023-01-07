@@ -9,7 +9,8 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal SemanticTag(ParseElement parent, Backend backend) : base(parent._rule) { }
+        internal SemanticTag(ParseElement parent, Backend backend)
+            : base(parent._rule) { }
 
         #endregion
 

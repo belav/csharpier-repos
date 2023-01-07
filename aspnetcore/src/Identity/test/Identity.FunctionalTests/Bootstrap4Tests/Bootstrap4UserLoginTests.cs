@@ -10,7 +10,8 @@ public class Bootstrap4LoginTests : LoginTests<ApplicationUserStartup, Applicati
 {
     public Bootstrap4LoginTests(
         ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
-    ) : base(serverFactory)
+    )
+        : base(serverFactory)
     {
         serverFactory.BootstrapFrameworkVersion = "V4";
     }

@@ -72,7 +72,8 @@ namespace System.IO.Tests
         {
             public bool DisposeInvoked;
 
-            public OverridesDisposeFileStream(string path, FileMode mode) : base(path, mode) { }
+            public OverridesDisposeFileStream(string path, FileMode mode)
+                : base(path, mode) { }
 
             protected override void Dispose(bool disposing)
             {

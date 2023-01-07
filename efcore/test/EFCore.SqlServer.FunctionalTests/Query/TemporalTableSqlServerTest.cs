@@ -424,7 +424,8 @@ ORDER BY [t].[Id], [o].[MainEntityManyId]
 
     public class MyContext26451 : DbContext
     {
-        public MyContext26451(DbContextOptions options) : base(options) { }
+        public MyContext26451(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<MainEntityDifferentTable> MainEntitiesDifferentTable { get; set; }
         public DbSet<MainEntitySameTable> MainEntitiesSameTable { get; set; }

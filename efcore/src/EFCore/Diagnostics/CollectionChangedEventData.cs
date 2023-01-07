@@ -28,7 +28,8 @@ public class CollectionChangedEventData : NavigationEventData, ICollectionChange
         INavigation navigation,
         IEnumerable<object> added,
         IEnumerable<object> removed
-    ) : base(eventDefinition, messageGenerator, navigation)
+    )
+        : base(eventDefinition, messageGenerator, navigation)
     {
         EntityEntry = entityEntry;
         Added = added;

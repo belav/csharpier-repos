@@ -22,7 +22,8 @@ namespace ILCompiler
             InteropStateManager interopStateManager,
             PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration,
             Logger logger
-        ) : base(interopStateManager, pInvokeILEmitterConfiguration)
+        )
+            : base(interopStateManager, pInvokeILEmitterConfiguration)
         {
             _logger = logger;
         }

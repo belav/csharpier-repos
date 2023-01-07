@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 public class IISCompressionSiteFixture : IISTestSiteFixture
 {
-    public IISCompressionSiteFixture() : base(Configure) { }
+    public IISCompressionSiteFixture()
+        : base(Configure) { }
 
     private static void Configure(IISDeploymentParameters deploymentParameters)
     {

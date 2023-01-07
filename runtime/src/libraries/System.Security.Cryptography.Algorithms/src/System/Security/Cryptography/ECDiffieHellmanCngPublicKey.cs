@@ -28,7 +28,8 @@ namespace System.Security.Cryptography
                 throw new PlatformNotSupportedException();
             }
 
-            internal ECDiffieHellmanCngPublicKey(byte[] keyBlob, string? curveName) : base(keyBlob)
+            internal ECDiffieHellmanCngPublicKey(byte[] keyBlob, string? curveName)
+                : base(keyBlob)
             {
                 Debug.Assert(keyBlob != null);
 

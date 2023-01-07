@@ -436,7 +436,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class XmlSyndicationContentSubclass : XmlSyndicationContent
         {
-            public XmlSyndicationContentSubclass(XmlSyndicationContent source) : base(source) { }
+            public XmlSyndicationContentSubclass(XmlSyndicationContent source)
+                : base(source) { }
 
             public XmlSyndicationContentSubclass(string type, SyndicationElementExtension extension)
                 : base(type, extension) { }

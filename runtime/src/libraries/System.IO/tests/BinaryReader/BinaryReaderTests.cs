@@ -498,7 +498,8 @@ namespace System.IO.Tests
 
         private class DerivedBinaryReader : BinaryReader
         {
-            public DerivedBinaryReader(Stream input) : base(input) { }
+            public DerivedBinaryReader(Stream input)
+                : base(input) { }
 
             public void CallFillBuffer0()
             {

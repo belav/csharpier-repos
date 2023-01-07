@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
         [Required]
         public string DestinationPath { get; set; }
 
-        public CopyRefAssembly() : base(ErrorString.ResourceManager)
+        public CopyRefAssembly()
+            : base(ErrorString.ResourceManager)
         {
             // These required properties will all be assigned by MSBuild. Suppress warnings about leaving them with
             // their default values.

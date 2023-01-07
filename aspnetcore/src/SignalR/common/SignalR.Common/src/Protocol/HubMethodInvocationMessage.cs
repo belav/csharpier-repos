@@ -38,7 +38,8 @@ public abstract class HubMethodInvocationMessage : HubInvocationMessage
         string target,
         object?[] arguments,
         string[]? streamIds
-    ) : this(invocationId, target, arguments)
+    )
+        : this(invocationId, target, arguments)
     {
         StreamIds = streamIds;
     }
@@ -72,7 +73,8 @@ public class InvocationMessage : HubMethodInvocationMessage
     /// </summary>
     /// <param name="target">The target method name.</param>
     /// <param name="arguments">The target method arguments.</param>
-    public InvocationMessage(string target, object?[] arguments) : this(null, target, arguments) { }
+    public InvocationMessage(string target, object?[] arguments)
+        : this(null, target, arguments) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="InvocationMessage"/> class.
@@ -95,7 +97,8 @@ public class InvocationMessage : HubMethodInvocationMessage
         string target,
         object?[] arguments,
         string[]? streamIds
-    ) : base(invocationId, target, arguments, streamIds) { }
+    )
+        : base(invocationId, target, arguments, streamIds) { }
 
     /// <inheritdoc />
     public override string ToString()
@@ -156,7 +159,8 @@ public class StreamInvocationMessage : HubMethodInvocationMessage
         string target,
         object?[] arguments,
         string[]? streamIds
-    ) : base(invocationId, target, arguments, streamIds) { }
+    )
+        : base(invocationId, target, arguments, streamIds) { }
 
     /// <inheritdoc />
     public override string ToString()

@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 public abstract class InheritanceBulkUpdatesTestBase<TFixture> : BulkUpdatesTestBase<TFixture>
     where TFixture : InheritanceBulkUpdatesFixtureBase, new()
 {
-    protected InheritanceBulkUpdatesTestBase(TFixture fixture) : base(fixture) { }
+    protected InheritanceBulkUpdatesTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

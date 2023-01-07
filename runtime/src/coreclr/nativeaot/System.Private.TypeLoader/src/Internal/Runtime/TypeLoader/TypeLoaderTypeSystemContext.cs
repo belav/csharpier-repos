@@ -19,7 +19,8 @@ namespace Internal.Runtime.TypeLoader
         private static readonly NativeLayoutInterfacesAlgorithm s_nativeLayoutInterfacesAlgorithm =
             new NativeLayoutInterfacesAlgorithm();
 
-        public TypeLoaderTypeSystemContext(TargetDetails targetDetails) : base(targetDetails) { }
+        public TypeLoaderTypeSystemContext(TargetDetails targetDetails)
+            : base(targetDetails) { }
 
         protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
             DefType type

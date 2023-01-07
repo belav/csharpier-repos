@@ -27,7 +27,8 @@ public class StoreStoredProcedureResultColumn
         int position,
         StoreStoredProcedure storedProcedure,
         RelationalTypeMapping? storeTypeMapping = null
-    ) : base(name, type, storedProcedure)
+    )
+        : base(name, type, storedProcedure)
     {
         Position = position;
         _storeTypeMapping = storeTypeMapping;

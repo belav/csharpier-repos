@@ -12,7 +12,8 @@ public class TemporalComplexNavigationsCollectionsQuerySqlServerTest
     public TemporalComplexNavigationsCollectionsQuerySqlServerTest(
         TemporalComplexNavigationsQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

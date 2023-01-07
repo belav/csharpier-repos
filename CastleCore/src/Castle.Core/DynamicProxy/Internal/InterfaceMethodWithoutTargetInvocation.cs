@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy.Internal
             IInterceptor[] interceptors,
             MethodInfo proxiedMethod,
             object[] arguments
-        ) : base(proxy, interceptors, proxiedMethod, arguments)
+        )
+            : base(proxy, interceptors, proxiedMethod, arguments)
         {
             // This invocation type is suitable for interface method invocations that cannot proceed
             // to a target, i.e. where `InvokeMethodOnTarget` will always throw:

@@ -223,7 +223,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             );
         }
 
-        public PreviewPane(NativeHandle ptr) : base(ptr) { }
+        public PreviewPane(NativeHandle ptr)
+            : base(ptr) { }
 
         private static NSAttributedString? GenerateAttributeString(
             string? id,

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             Id<Vertex> outVertex,
             Id<Vertex>[] inVertices,
             IdFactory idFactory
-        ) : base(type: "edge", label: label, idFactory)
+        )
+            : base(type: "edge", label: label, idFactory)
         {
             OutVertex = outVertex;
             InVertices = inVertices;

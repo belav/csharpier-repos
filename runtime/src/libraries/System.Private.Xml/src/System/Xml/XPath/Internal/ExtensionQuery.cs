@@ -15,13 +15,15 @@ namespace MS.Internal.Xml.XPath
         protected XsltContext? xsltContext;
         private ResettableIterator? _queryIterator;
 
-        public ExtensionQuery(string prefix, string name) : base()
+        public ExtensionQuery(string prefix, string name)
+            : base()
         {
             this.prefix = prefix;
             this.name = name;
         }
 
-        protected ExtensionQuery(ExtensionQuery other) : base(other)
+        protected ExtensionQuery(ExtensionQuery other)
+            : base(other)
         {
             this.prefix = other.prefix;
             this.name = other.name;

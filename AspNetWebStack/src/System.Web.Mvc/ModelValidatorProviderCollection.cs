@@ -14,12 +14,14 @@ namespace System.Web.Mvc
 
         public ModelValidatorProviderCollection() { }
 
-        public ModelValidatorProviderCollection(IList<ModelValidatorProvider> list) : base(list) { }
+        public ModelValidatorProviderCollection(IList<ModelValidatorProvider> list)
+            : base(list) { }
 
         internal ModelValidatorProviderCollection(
             IList<ModelValidatorProvider> list,
             IDependencyResolver dependencyResolver
-        ) : base(list)
+        )
+            : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }

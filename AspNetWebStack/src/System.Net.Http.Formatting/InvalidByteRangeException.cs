@@ -45,7 +45,8 @@ namespace System.Net.Http
             ContentRangeHeaderValue contentRange,
             string message,
             Exception innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             Initialize(contentRange);
         }
@@ -54,7 +55,8 @@ namespace System.Net.Http
             ContentRangeHeaderValue contentRange,
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context)
+        )
+            : base(info, context)
         {
             Initialize(contentRange);
         }

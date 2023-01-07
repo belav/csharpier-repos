@@ -580,7 +580,8 @@ namespace System.Web.Mvc.Test
                 string action,
                 string controller,
                 AreaReference areaReference
-            ) : base(action, controller, areaReference) { }
+            )
+                : base(action, controller, areaReference) { }
 
             public TestableRemoteAttribute(string action, string controller, string areaName)
                 : base(action, controller, areaName) { }
@@ -588,7 +589,8 @@ namespace System.Web.Mvc.Test
             public TestableRemoteAttribute(string action, string controller)
                 : base(action, controller) { }
 
-            public TestableRemoteAttribute(string routeName) : base(routeName) { }
+            public TestableRemoteAttribute(string routeName)
+                : base(routeName) { }
 
             protected override RouteCollection Routes
             {

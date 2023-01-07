@@ -2003,7 +2003,8 @@ namespace ILCompiler
         {
             private readonly TargetDetails _target;
 
-            public Stack(int capacity, TargetDetails target) : base(capacity)
+            public Stack(int capacity, TargetDetails target)
+                : base(capacity)
             {
                 _target = target;
             }
@@ -2681,7 +2682,8 @@ namespace ILCompiler
                 MethodDesc methodPointed,
                 ReferenceTypeValue firstParameter,
                 AllocationSite allocationSite
-            ) : base(delegateType, allocationSite)
+            )
+                : base(delegateType, allocationSite)
             {
                 _methodPointed = methodPointed;
                 _firstParameter = firstParameter;
@@ -2878,7 +2880,8 @@ namespace ILCompiler
                 TypeDesc type,
                 AllocationSite allocationSite,
                 ReferenceTypeValue data
-            ) : base(type, allocationSite)
+            )
+                : base(type, allocationSite)
             {
                 Data = data;
             }
@@ -2928,7 +2931,8 @@ namespace ILCompiler
                 }
             }
 
-            public StringInstance(TypeDesc stringType, string value) : base(stringType)
+            public StringInstance(TypeDesc stringType, string value)
+                : base(stringType)
             {
                 _value = ConstructStringInstance(stringType, value);
             }

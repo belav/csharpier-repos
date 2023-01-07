@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 SemanticDocument document,
                 State state,
                 IMethodSymbol methodSymbol
-            ) : base(document, state)
+            )
+                : base(document, state)
             {
                 _methodSymbol = methodSymbol;
             }

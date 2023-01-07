@@ -58,7 +58,8 @@ public class OpenIdConnectHandler
         HtmlEncoder htmlEncoder,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock)
+    )
+        : base(options, logger, encoder, clock)
     {
         HtmlEncoder = htmlEncoder;
     }

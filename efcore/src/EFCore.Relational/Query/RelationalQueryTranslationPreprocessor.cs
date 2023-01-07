@@ -20,7 +20,8 @@ public class RelationalQueryTranslationPreprocessor : QueryTranslationPreprocess
         QueryTranslationPreprocessorDependencies dependencies,
         RelationalQueryTranslationPreprocessorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext)
+    )
+        : base(dependencies, queryCompilationContext)
     {
         RelationalDependencies = relationalDependencies;
         _relationalQueryCompilationContext =

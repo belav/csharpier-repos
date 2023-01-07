@@ -78,7 +78,8 @@ public abstract class OverzealousInitializationTestBase<TFixture> : IClassFixtur
 
     public class AlbumViewerContext : PoolableDbContext
     {
-        public AlbumViewerContext(DbContextOptions<AlbumViewerContext> options) : base(options) { }
+        public AlbumViewerContext(DbContextOptions<AlbumViewerContext> options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

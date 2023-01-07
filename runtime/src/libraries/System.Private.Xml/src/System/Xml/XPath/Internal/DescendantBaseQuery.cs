@@ -19,13 +19,15 @@ namespace MS.Internal.Xml.XPath
             XPathNodeType Type,
             bool matchSelf,
             bool abbrAxis
-        ) : base(qyParent, Name, Prefix, Type)
+        )
+            : base(qyParent, Name, Prefix, Type)
         {
             this.matchSelf = matchSelf;
             this.abbrAxis = abbrAxis;
         }
 
-        public DescendantBaseQuery(DescendantBaseQuery other) : base(other)
+        public DescendantBaseQuery(DescendantBaseQuery other)
+            : base(other)
         {
             this.matchSelf = other.matchSelf;
             this.abbrAxis = other.abbrAxis;

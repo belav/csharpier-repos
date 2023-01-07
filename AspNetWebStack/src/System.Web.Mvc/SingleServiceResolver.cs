@@ -41,7 +41,8 @@ namespace System.Web.Mvc
             TService defaultValue,
             IDependencyResolver resolver,
             string callerMethodName
-        ) : this(staticAccessor, defaultValue, callerMethodName)
+        )
+            : this(staticAccessor, defaultValue, callerMethodName)
         {
             if (resolver != null)
             {

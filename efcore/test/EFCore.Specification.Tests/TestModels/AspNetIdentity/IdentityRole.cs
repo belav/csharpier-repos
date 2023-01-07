@@ -7,7 +7,8 @@ public class IdentityRole<TKey> where TKey : IEquatable<TKey>
 {
     public IdentityRole() { }
 
-    public IdentityRole(string roleName) : this()
+    public IdentityRole(string roleName)
+        : this()
     {
         Name = roleName;
     }
@@ -30,7 +31,8 @@ public class IdentityRole : IdentityRole<string>
         Id = Guid.NewGuid().ToString();
     }
 
-    public IdentityRole(string roleName) : this()
+    public IdentityRole(string roleName)
+        : this()
     {
         Name = roleName;
     }

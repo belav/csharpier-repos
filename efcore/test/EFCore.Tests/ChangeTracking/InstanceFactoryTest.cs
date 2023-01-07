@@ -246,7 +246,8 @@ public class InstanceFactoryTest
             LazyLoader = lazyLoader;
         }
 
-        public WithServiceAndWithProperties(ILazyLoader lazyLoader, int id) : this(lazyLoader)
+        public WithServiceAndWithProperties(ILazyLoader lazyLoader, int id)
+            : this(lazyLoader)
         {
             Id = id;
         }

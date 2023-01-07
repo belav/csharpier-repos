@@ -16,7 +16,8 @@ namespace DebuggerTests
     // TODO: static async, static method args
     public class EvaluateOnCallFrameTests : DebuggerTests
     {
-        public EvaluateOnCallFrameTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public EvaluateOnCallFrameTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         public static IEnumerable<object[]> InstanceMethodsTestData(string type_name)
         {

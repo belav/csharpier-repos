@@ -17,17 +17,20 @@ namespace System.Data
         protected DataException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public DataException() : base(SR.DataSet_DefaultDataException)
+        public DataException()
+            : base(SR.DataSet_DefaultDataException)
         {
             HResult = HResults.Data;
         }
 
-        public DataException(string? s) : base(s)
+        public DataException(string? s)
+            : base(s)
         {
             HResult = HResults.Data;
         }
 
-        public DataException(string? s, Exception? innerException) : base(s, innerException) { }
+        public DataException(string? s, Exception? innerException)
+            : base(s, innerException) { }
     };
 
     [Serializable]
@@ -39,12 +42,14 @@ namespace System.Data
         protected ConstraintException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public ConstraintException() : base(SR.DataSet_DefaultConstraintException)
+        public ConstraintException()
+            : base(SR.DataSet_DefaultConstraintException)
         {
             HResult = HResults.DataConstraint;
         }
 
-        public ConstraintException(string? s) : base(s)
+        public ConstraintException(string? s)
+            : base(s)
         {
             HResult = HResults.DataConstraint;
         }
@@ -77,7 +82,8 @@ namespace System.Data
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DeletedRowInaccessibleException'/> class with the specified string.
         /// </summary>
-        public DeletedRowInaccessibleException(string? s) : base(s)
+        public DeletedRowInaccessibleException(string? s)
+            : base(s)
         {
             HResult = HResults.DataDeletedRowInaccessible;
         }
@@ -98,12 +104,14 @@ namespace System.Data
         protected DuplicateNameException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public DuplicateNameException() : base(SR.DataSet_DefaultDuplicateNameException)
+        public DuplicateNameException()
+            : base(SR.DataSet_DefaultDuplicateNameException)
         {
             HResult = HResults.DataDuplicateName;
         }
 
-        public DuplicateNameException(string? s) : base(s)
+        public DuplicateNameException(string? s)
+            : base(s)
         {
             HResult = HResults.DataDuplicateName;
         }
@@ -124,12 +132,14 @@ namespace System.Data
         protected InRowChangingEventException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public InRowChangingEventException() : base(SR.DataSet_DefaultInRowChangingEventException)
+        public InRowChangingEventException()
+            : base(SR.DataSet_DefaultInRowChangingEventException)
         {
             HResult = HResults.DataInRowChangingEvent;
         }
 
-        public InRowChangingEventException(string? s) : base(s)
+        public InRowChangingEventException(string? s)
+            : base(s)
         {
             HResult = HResults.DataInRowChangingEvent;
         }
@@ -150,12 +160,14 @@ namespace System.Data
         protected InvalidConstraintException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public InvalidConstraintException() : base(SR.DataSet_DefaultInvalidConstraintException)
+        public InvalidConstraintException()
+            : base(SR.DataSet_DefaultInvalidConstraintException)
         {
             HResult = HResults.DataInvalidConstraint;
         }
 
-        public InvalidConstraintException(string? s) : base(s)
+        public InvalidConstraintException(string? s)
+            : base(s)
         {
             HResult = HResults.DataInvalidConstraint;
         }
@@ -176,12 +188,14 @@ namespace System.Data
         protected MissingPrimaryKeyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public MissingPrimaryKeyException() : base(SR.DataSet_DefaultMissingPrimaryKeyException)
+        public MissingPrimaryKeyException()
+            : base(SR.DataSet_DefaultMissingPrimaryKeyException)
         {
             HResult = HResults.DataMissingPrimaryKey;
         }
 
-        public MissingPrimaryKeyException(string? s) : base(s)
+        public MissingPrimaryKeyException(string? s)
+            : base(s)
         {
             HResult = HResults.DataMissingPrimaryKey;
         }
@@ -202,12 +216,14 @@ namespace System.Data
         protected NoNullAllowedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public NoNullAllowedException() : base(SR.DataSet_DefaultNoNullAllowedException)
+        public NoNullAllowedException()
+            : base(SR.DataSet_DefaultNoNullAllowedException)
         {
             HResult = HResults.DataNoNullAllowed;
         }
 
-        public NoNullAllowedException(string? s) : base(s)
+        public NoNullAllowedException(string? s)
+            : base(s)
         {
             HResult = HResults.DataNoNullAllowed;
         }
@@ -228,12 +244,14 @@ namespace System.Data
         protected ReadOnlyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public ReadOnlyException() : base(SR.DataSet_DefaultReadOnlyException)
+        public ReadOnlyException()
+            : base(SR.DataSet_DefaultReadOnlyException)
         {
             HResult = HResults.DataReadOnly;
         }
 
-        public ReadOnlyException(string? s) : base(s)
+        public ReadOnlyException(string? s)
+            : base(s)
         {
             HResult = HResults.DataReadOnly;
         }
@@ -254,12 +272,14 @@ namespace System.Data
         protected RowNotInTableException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public RowNotInTableException() : base(SR.DataSet_DefaultRowNotInTableException)
+        public RowNotInTableException()
+            : base(SR.DataSet_DefaultRowNotInTableException)
         {
             HResult = HResults.DataRowNotInTable;
         }
 
-        public RowNotInTableException(string? s) : base(s)
+        public RowNotInTableException(string? s)
+            : base(s)
         {
             HResult = HResults.DataRowNotInTable;
         }
@@ -280,12 +300,14 @@ namespace System.Data
         protected VersionNotFoundException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public VersionNotFoundException() : base(SR.DataSet_DefaultVersionNotFoundException)
+        public VersionNotFoundException()
+            : base(SR.DataSet_DefaultVersionNotFoundException)
         {
             HResult = HResults.DataVersionNotFound;
         }
 
-        public VersionNotFoundException(string? s) : base(s)
+        public VersionNotFoundException(string? s)
+            : base(s)
         {
             HResult = HResults.DataVersionNotFound;
         }

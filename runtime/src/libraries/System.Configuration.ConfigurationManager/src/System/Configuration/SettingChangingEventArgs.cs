@@ -21,7 +21,8 @@ namespace System.Configuration
             string settingKey,
             object newValue,
             bool cancel
-        ) : base(cancel)
+        )
+            : base(cancel)
         {
             _settingName = settingName;
             _settingClass = settingClass;

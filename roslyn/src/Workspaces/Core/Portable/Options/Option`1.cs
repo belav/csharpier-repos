@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Options
         public ImmutableArray<OptionStorageLocation> StorageLocations { get; }
 
         [Obsolete("Use a constructor that specifies an explicit default value.")]
-        public Option(string feature, string name) : this(feature, name, default!)
+        public Option(string feature, string name)
+            : this(feature, name, default!)
         {
             // This constructor forwards to the next one; it exists to maintain source-level compatibility with older callers.
         }
@@ -78,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations
-        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
+        )
+            : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
 
         internal Option(
             string feature,

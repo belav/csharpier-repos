@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             IServiceProvider serviceProvider,
             IComponentModel componentModel,
             VisualStudioWorkspace workspace
-        ) : base(libraryGuid, componentModel, serviceProvider)
+        )
+            : base(libraryGuid, componentModel, serviceProvider)
         {
             _languageName = languageName;
 

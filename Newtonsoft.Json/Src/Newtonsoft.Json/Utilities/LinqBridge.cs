@@ -3093,7 +3093,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             Func<T, K> keySelector,
             IComparer<K> comparer,
             bool descending
-        ) : this(source, null, keySelector, comparer, descending) { }
+        )
+            : this(source, null, keySelector, comparer, descending) { }
 
         private OrderedEnumerable(
             IEnumerable<T> source,
@@ -3214,7 +3215,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         public TFirst First { get; }
         public TSecond Second { get; }
 
-        public Tuple(TFirst first, TSecond second) : this()
+        public Tuple(TFirst first, TSecond second)
+            : this()
         {
             First = first;
             Second = second;

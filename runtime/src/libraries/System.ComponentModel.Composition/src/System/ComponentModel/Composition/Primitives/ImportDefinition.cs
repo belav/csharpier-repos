@@ -103,7 +103,8 @@ namespace System.ComponentModel.Composition.Primitives
             bool isRecomposable,
             bool isPrerequisite,
             IDictionary<string, object?>? metadata
-        ) : this(contractName, cardinality, isRecomposable, isPrerequisite, metadata)
+        )
+            : this(contractName, cardinality, isRecomposable, isPrerequisite, metadata)
         {
             Requires.NotNull(constraint, nameof(constraint));
 

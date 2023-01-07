@@ -514,7 +514,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private sealed class IfActionDbg : IfAction
         {
-            internal IfActionDbg(ConditionType type) : base(type) { }
+            internal IfActionDbg(ConditionType type)
+                : base(type) { }
 
             internal override void Compile(Compiler compiler)
             {
@@ -735,7 +736,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private sealed class VariableActionDbg : VariableAction
         {
-            internal VariableActionDbg(VariableType type) : base(type) { }
+            internal VariableActionDbg(VariableType type)
+                : base(type) { }
 
             private DbgData? _dbgData;
 
@@ -783,7 +785,8 @@ namespace System.Xml.Xsl.XsltOld
                 get { return _dbgData; }
             }
 
-            public BeginEventDbg(Compiler compiler) : base(compiler)
+            public BeginEventDbg(Compiler compiler)
+                : base(compiler)
             {
                 _dbgData = new DbgData(compiler);
             }
@@ -803,7 +806,8 @@ namespace System.Xml.Xsl.XsltOld
                 get { return _dbgData; }
             }
 
-            public TextEventDbg(Compiler compiler) : base(compiler)
+            public TextEventDbg(Compiler compiler)
+                : base(compiler)
             {
                 _dbgData = new DbgData(compiler);
             }

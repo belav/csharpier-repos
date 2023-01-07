@@ -54,7 +54,8 @@ public class ChangedOnlyMonsterContext
         ChangedOnlyMonsterContext.ProductPageView
     >
 {
-    public ChangedOnlyMonsterContext(DbContextOptions options) : base(options) { }
+    public ChangedOnlyMonsterContext(DbContextOptions options)
+        : base(options) { }
 
     public class NotificationEntity : INotifyPropertyChanged
     {

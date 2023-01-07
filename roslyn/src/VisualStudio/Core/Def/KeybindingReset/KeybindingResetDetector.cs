@@ -101,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
             IGlobalOptionService globalOptions,
             SVsServiceProvider serviceProvider,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _globalOptions = globalOptions;
             _serviceProvider = serviceProvider;

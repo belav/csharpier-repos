@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ExpressionSyntax selectExpression,
             ExpressionSyntax modifyingExpression,
             SyntaxTrivia[] trivia
-        ) : base(forEachInfo)
+        )
+            : base(forEachInfo)
         {
             _selectExpression = selectExpression;
             _modifyingExpression = modifyingExpression;

@@ -20,7 +20,8 @@ public abstract class ServerTestBase<TServerFixture>
         BrowserFixture browserFixture,
         TServerFixture serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, output)
+    )
+        : base(browserFixture, output)
     {
         _serverFixture = serverFixture;
     }

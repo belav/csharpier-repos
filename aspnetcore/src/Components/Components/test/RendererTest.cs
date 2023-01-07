@@ -5971,7 +5971,8 @@ public class RendererTest
 
     private class NoOpRenderer : Renderer
     {
-        public NoOpRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public NoOpRenderer()
+            : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

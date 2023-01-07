@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.EditAndContinue
     {
         private sealed class EventSource : AbstractWorkspaceTrackingTaggerEventSource
         {
-            public EventSource(ITextBuffer subjectBuffer) : base(subjectBuffer) { }
+            public EventSource(ITextBuffer subjectBuffer)
+                : base(subjectBuffer) { }
 
             protected override void ConnectToWorkspace(Workspace workspace)
             {

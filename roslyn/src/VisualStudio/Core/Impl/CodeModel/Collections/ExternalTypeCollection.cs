@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             ProjectId projectId,
             ImmutableArray<INamedTypeSymbol> typeSymbols
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             _projectId = projectId;
             _typeSymbols = typeSymbols;

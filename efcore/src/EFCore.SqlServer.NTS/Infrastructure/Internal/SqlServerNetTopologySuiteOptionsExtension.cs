@@ -59,7 +59,8 @@ public class SqlServerNetTopologySuiteOptionsExtension : IDbContextOptionsExtens
 
     private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
     {
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         private new SqlServerNetTopologySuiteOptionsExtension Extension =>
             (SqlServerNetTopologySuiteOptionsExtension)base.Extension;

@@ -17,7 +17,8 @@ namespace Roslyn.Test.Performance.Utilities
         /// Constructor for PerfTest that sets up the correct working path location.
         /// </summary>
         /// <param name="workingFile"></param>
-        public PerfTest([CallerFilePath] string workingFile = "") : base(workingFile) { }
+        public PerfTest([CallerFilePath] string workingFile = "")
+            : base(workingFile) { }
 
         /// <summary>
         /// Setup is called once for every test on a run.  This is where you should do all

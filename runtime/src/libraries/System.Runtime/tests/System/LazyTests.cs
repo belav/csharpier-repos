@@ -321,7 +321,8 @@ namespace System.Tests
 
         public class ExceptionInCtor
         {
-            public ExceptionInCtor() : this(99) { }
+            public ExceptionInCtor()
+                : this(99) { }
 
             public ExceptionInCtor(int value)
             {

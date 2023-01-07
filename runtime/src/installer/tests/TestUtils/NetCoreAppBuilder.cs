@@ -65,7 +65,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public abstract class FileBuilder<T> : FileBuilder where T : FileBuilder
         {
-            public FileBuilder(string path) : base(path) { }
+            public FileBuilder(string path)
+                : base(path) { }
 
             public T CopyFromFile(string sourcePath)
             {
@@ -91,7 +92,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
             public string AssemblyVersion { get; set; }
             public string FileVersion { get; set; }
 
-            public RuntimeFileBuilder(string path) : base(path) { }
+            public RuntimeFileBuilder(string path)
+                : base(path) { }
 
             public RuntimeFileBuilder WithVersion(string assemblyVersion, string fileVersion)
             {
@@ -111,7 +113,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         {
             public string Locale { get; set; }
 
-            public ResourceAssemblyBuilder(string path) : base(path)
+            public ResourceAssemblyBuilder(string path)
+                : base(path)
             {
                 int i = path.IndexOf('/');
                 if (i > 0)

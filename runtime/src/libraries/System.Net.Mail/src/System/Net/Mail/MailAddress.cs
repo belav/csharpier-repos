@@ -44,7 +44,8 @@ namespace System.Net.Mail
             Debug.Assert(displayName != null, "displayName was null in internal constructor");
         }
 
-        public MailAddress(string address) : this(address, null, (Encoding?)null) { }
+        public MailAddress(string address)
+            : this(address, null, (Encoding?)null) { }
 
         public MailAddress(string address, string? displayName)
             : this(address, displayName, (Encoding?)null) { }

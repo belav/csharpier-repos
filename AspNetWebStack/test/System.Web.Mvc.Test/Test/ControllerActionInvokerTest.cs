@@ -3656,7 +3656,8 @@ namespace System.Web.Mvc.Test
                 DescriptorCache = new ControllerDescriptorCache();
             }
 
-            public ControllerActionInvokerHelper(params object[] filters) : base(filters)
+            public ControllerActionInvokerHelper(params object[] filters)
+                : base(filters)
             {
                 // set instance caches to prevent modifying global test application state
                 DescriptorCache = new ControllerDescriptorCache();

@@ -33,7 +33,8 @@ namespace System.Xml
             bool checkNames,
             bool replaceNewLines,
             string newLineChars
-        ) : base(baseWriter)
+        )
+            : base(baseWriter)
         {
             Debug.Assert(checkValues || replaceNewLines);
             _checkValues = checkValues;

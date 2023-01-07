@@ -8,5 +8,6 @@ public class NorthwindCompiledQueryInMemoryTest
 {
     public NorthwindCompiledQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 }

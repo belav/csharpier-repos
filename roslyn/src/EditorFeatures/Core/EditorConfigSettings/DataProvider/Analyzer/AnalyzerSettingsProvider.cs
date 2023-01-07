@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
             AnalyzerSettingsUpdater settingsUpdater,
             Workspace workspace,
             IDiagnosticAnalyzerService analyzerService
-        ) : base(fileName, settingsUpdater, workspace)
+        )
+            : base(fileName, settingsUpdater, workspace)
         {
             _analyzerService = analyzerService;
             Update();

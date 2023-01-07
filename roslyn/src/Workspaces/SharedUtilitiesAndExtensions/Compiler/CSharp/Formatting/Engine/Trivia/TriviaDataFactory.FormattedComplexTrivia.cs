@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 int spaces,
                 string originalString,
                 CancellationToken cancellationToken
-            ) : base(context.Options, LanguageNames.CSharp)
+            )
+                : base(context.Options, LanguageNames.CSharp)
             {
                 Contract.ThrowIfNull(context);
                 Contract.ThrowIfNull(formattingRules);

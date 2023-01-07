@@ -35,12 +35,14 @@ public partial class IISExpressDeployer : IISDeployerBase
     public IISExpressDeployer(
         DeploymentParameters deploymentParameters,
         ILoggerFactory loggerFactory
-    ) : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
+    )
+        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
 
     public IISExpressDeployer(
         IISDeploymentParameters deploymentParameters,
         ILoggerFactory loggerFactory
-    ) : base(deploymentParameters, loggerFactory) { }
+    )
+        : base(deploymentParameters, loggerFactory) { }
 
     protected override string ApplicationHostConfigPath =>
         DeploymentParameters.ServerConfigLocation;

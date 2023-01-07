@@ -43,7 +43,8 @@ namespace System.Data
             string columnName,
             bool local,
             string? relationName
-        ) : base(table)
+        )
+            : base(table)
         {
             Debug.Assert(columnName != null, "Invalid parameter column name (null).");
             _aggregate = (Aggregate)(int)aggregateType;

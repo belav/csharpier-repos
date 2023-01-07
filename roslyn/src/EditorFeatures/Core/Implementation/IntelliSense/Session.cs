@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             TController controller,
             ModelComputation<TModel> computation,
             TPresenterSession presenterSession
-        ) : base(computation.ThreadingContext)
+        )
+            : base(computation.ThreadingContext)
         {
             this.Controller = controller;
             this.Computation = computation;

@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             IVsHierarchyItem item,
             IAnalyzersCommandHandler commandHandler,
             IDiagnosticAnalyzerService analyzerService
-        ) : base(workspace, projectId, commandHandler, analyzerService)
+        )
+            : base(workspace, projectId, commandHandler, analyzerService)
         {
             _item = item;
             _projectDirectoryPath = Path.GetDirectoryName(projectPath);

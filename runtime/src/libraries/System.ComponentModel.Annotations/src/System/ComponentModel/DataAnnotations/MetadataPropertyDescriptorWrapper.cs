@@ -11,7 +11,8 @@ namespace System.ComponentModel.DataAnnotations
         public MetadataPropertyDescriptorWrapper(
             PropertyDescriptor descriptor,
             Attribute[] newAttributes
-        ) : base(descriptor, newAttributes)
+        )
+            : base(descriptor, newAttributes)
         {
             _descriptor = descriptor;
 

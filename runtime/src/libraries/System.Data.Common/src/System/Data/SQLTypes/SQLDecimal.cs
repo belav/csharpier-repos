@@ -669,7 +669,8 @@ namespace System.Data.SqlTypes
                 throw new OverflowException(SQLResource.ArithOverflowMessage);
         }
 
-        public SqlDecimal(double dVal) : this(false)
+        public SqlDecimal(double dVal)
+            : this(false)
         {
             // set the null bit
             _bStatus = s_bNotNull;

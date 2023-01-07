@@ -544,7 +544,8 @@ namespace UniversalGen
             Func<object, IList, T, U, IComparer<T>, IDisposable> action,
             T tValue,
             IComparer<T> comparer
-        ) : base(tValue, comparer)
+        )
+            : base(tValue, comparer)
         {
             if (iListObject == null)
             {
@@ -564,7 +565,8 @@ namespace UniversalGen
             U uValue,
             Func<object, IList, T, U, IComparer<T>, IDisposable> action,
             T tValue
-        ) : this(iListObject, uValue, action, tValue, Comparer<T>.Default)
+        )
+            : this(iListObject, uValue, action, tValue, Comparer<T>.Default)
         {
             action(this._myString, this._iListObject, this._tValue, this._uValue, this._comparer);
         }
@@ -6288,7 +6290,8 @@ namespace FieldLayoutBugRepro
             TValue state,
             Func<IInterface, TValue, string> action,
             TAbsolute dueTime
-        ) : this(scheduler, state, action, dueTime, new MyComparer<TAbsolute>()) { }
+        )
+            : this(scheduler, state, action, dueTime, new MyComparer<TAbsolute>()) { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         public ScheduledItem(
@@ -6297,7 +6300,8 @@ namespace FieldLayoutBugRepro
             Func<IInterface, TValue, string> action,
             TAbsolute dueTime,
             IMyComparer<TAbsolute> comparer
-        ) : base(dueTime, comparer)
+        )
+            : base(dueTime, comparer)
         {
             this._scheduler = scheduler;
             this._state = state;

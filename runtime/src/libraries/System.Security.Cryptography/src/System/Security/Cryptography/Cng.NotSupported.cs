@@ -12,13 +12,15 @@ namespace Microsoft.Win32.SafeHandles
     public abstract partial class SafeNCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle() : base(default(bool))
+        protected SafeNCryptHandle()
+            : base(default(bool))
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle) : base(default(bool))
+        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle)
+            : base(default(bool))
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }

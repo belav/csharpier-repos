@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting.Indentation
 {
     public class SmartIndenterEnterOnTokenTests : CSharpFormatterTestsBase
     {
-        public SmartIndenterEnterOnTokenTests(ITestOutputHelper output) : base(output) { }
+        public SmartIndenterEnterOnTokenTests(ITestOutputHelper output)
+            : base(output) { }
 
         [WorkItem(537808, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537808")]
         [WpfFact]

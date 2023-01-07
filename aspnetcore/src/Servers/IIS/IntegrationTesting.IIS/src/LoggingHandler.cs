@@ -12,7 +12,8 @@ public class LoggingHandler : DelegatingHandler
     private readonly int _maxBodyLogSize = 16 * 1024;
     private readonly ILogger _logger;
 
-    public LoggingHandler(HttpMessageHandler innerHandler, ILogger logger) : base(innerHandler)
+    public LoggingHandler(HttpMessageHandler innerHandler, ILogger logger)
+        : base(innerHandler)
     {
         _logger = logger;
     }

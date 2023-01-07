@@ -484,7 +484,8 @@ namespace System.Net
                 object myObject,
                 object? myState,
                 AsyncCallback? myCallBack
-            ) : base(myObject, myState, myCallBack) { }
+            )
+                : base(myObject, myState, myCallBack) { }
         }
     }
 }

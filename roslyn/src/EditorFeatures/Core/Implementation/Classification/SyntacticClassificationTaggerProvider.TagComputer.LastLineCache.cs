@@ -26,8 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 private SnapshotSpan _span;
                 private readonly ArrayBuilder<ClassifiedSpan> _classifications = new();
 
-                public LastLineCache(IThreadingContext threadingContext) : base(threadingContext)
-                { }
+                public LastLineCache(IThreadingContext threadingContext)
+                    : base(threadingContext) { }
 
                 private void Clear()
                 {

@@ -25,7 +25,8 @@ public class StoredProcedureMapping
         IStoredProcedure storedProcedure,
         ITableMapping? tableMapping,
         bool includesDerivedTypes
-    ) : base(entityType, storeStoredProcedure, includesDerivedTypes)
+    )
+        : base(entityType, storeStoredProcedure, includesDerivedTypes)
     {
         StoredProcedure = storedProcedure;
         StoredProcedureIdentifier = storedProcedure.GetStoreIdentifier();

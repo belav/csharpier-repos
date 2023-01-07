@@ -81,7 +81,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             IComponentModel componentModel,
             IVsImageService2 imageService,
             bool showCheckBoxes = true
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _topLevelName = topLevelItemName;
             _topLevelGlyph = topLevelGlyph;
@@ -382,7 +383,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         private class NoChange : AbstractChange
         {
-            public NoChange(PreviewEngine engine) : base(engine) { }
+            public NoChange(PreviewEngine engine)
+                : base(engine) { }
 
             public override int GetText(out VSTREETEXTOPTIONS tto, out string ppszText)
             {

@@ -819,7 +819,8 @@ namespace System.ComponentModel
 
     public partial class ComponentConverter : System.ComponentModel.ReferenceConverter
     {
-        public ComponentConverter(System.Type type) : base(default(System.Type)) { }
+        public ComponentConverter(System.Type type)
+            : base(default(System.Type)) { }
 
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute(
             "The Type of value cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
@@ -1594,10 +1595,11 @@ namespace System.ComponentModel
         protected EventDescriptor(
             System.ComponentModel.MemberDescriptor descr,
             System.Attribute[]? attrs
-        ) : base(default(string)) { }
+        )
+            : base(default(string)) { }
 
-        protected EventDescriptor(string name, System.Attribute[]? attrs) : base(default(string))
-        { }
+        protected EventDescriptor(string name, System.Attribute[]? attrs)
+            : base(default(string)) { }
 
         public abstract System.Type ComponentType { get; }
         public abstract System.Type EventType { get; }
@@ -3561,10 +3563,11 @@ namespace System.ComponentModel
         protected PropertyDescriptor(
             System.ComponentModel.MemberDescriptor descr,
             System.Attribute[]? attrs
-        ) : base(default(string)) { }
+        )
+            : base(default(string)) { }
 
-        protected PropertyDescriptor(string name, System.Attribute[]? attrs) : base(default(string))
-        { }
+        protected PropertyDescriptor(string name, System.Attribute[]? attrs)
+            : base(default(string)) { }
 
         public abstract System.Type ComponentType { get; }
         public virtual System.ComponentModel.TypeConverter Converter
@@ -4724,14 +4727,16 @@ namespace System.ComponentModel
                 System.Type componentType,
                 string name,
                 System.Type propertyType
-            ) : base(default(string), default(System.Attribute[])) { }
+            )
+                : base(default(string), default(System.Attribute[])) { }
 
             protected SimplePropertyDescriptor(
                 System.Type componentType,
                 string name,
                 System.Type propertyType,
                 System.Attribute[]? attributes
-            ) : base(default(string), default(System.Attribute[])) { }
+            )
+                : base(default(string), default(System.Attribute[])) { }
 
             public override System.Type ComponentType
             {
@@ -6230,7 +6235,9 @@ namespace System.ComponentModel.Design
             string text,
             System.EventHandler handler,
             System.ComponentModel.Design.CommandID startCommandID
-        ) : base(default(System.EventHandler), default(System.ComponentModel.Design.CommandID)) { }
+        )
+            : base(default(System.EventHandler), default(System.ComponentModel.Design.CommandID))
+        { }
 
         public string Description
         {

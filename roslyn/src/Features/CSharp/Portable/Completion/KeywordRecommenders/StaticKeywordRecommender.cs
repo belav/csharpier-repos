@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.UnsafeKeyword
             };
 
-        public StaticKeywordRecommender() : base(SyntaxKind.StaticKeyword) { }
+        public StaticKeywordRecommender()
+            : base(SyntaxKind.StaticKeyword) { }
 
         protected override bool IsValidContext(
             int position,

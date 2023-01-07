@@ -104,31 +104,35 @@ namespace System.Diagnostics.Tracing
             _scalarLength = scalarLength;
         }
 
-        private PropertyValue(bool value) : this(new Scalar() { AsBoolean = value }, sizeof(bool))
-        { }
+        private PropertyValue(bool value)
+            : this(new Scalar() { AsBoolean = value }, sizeof(bool)) { }
 
-        private PropertyValue(byte value) : this(new Scalar() { AsByte = value }, sizeof(byte)) { }
+        private PropertyValue(byte value)
+            : this(new Scalar() { AsByte = value }, sizeof(byte)) { }
 
-        private PropertyValue(sbyte value) : this(new Scalar() { AsSByte = value }, sizeof(sbyte))
-        { }
+        private PropertyValue(sbyte value)
+            : this(new Scalar() { AsSByte = value }, sizeof(sbyte)) { }
 
-        private PropertyValue(char value) : this(new Scalar() { AsChar = value }, sizeof(char)) { }
+        private PropertyValue(char value)
+            : this(new Scalar() { AsChar = value }, sizeof(char)) { }
 
-        private PropertyValue(short value) : this(new Scalar() { AsInt16 = value }, sizeof(short))
-        { }
+        private PropertyValue(short value)
+            : this(new Scalar() { AsInt16 = value }, sizeof(short)) { }
 
         private PropertyValue(ushort value)
             : this(new Scalar() { AsUInt16 = value }, sizeof(ushort)) { }
 
-        private PropertyValue(int value) : this(new Scalar() { AsInt32 = value }, sizeof(int)) { }
+        private PropertyValue(int value)
+            : this(new Scalar() { AsInt32 = value }, sizeof(int)) { }
 
-        private PropertyValue(uint value) : this(new Scalar() { AsUInt32 = value }, sizeof(uint))
-        { }
+        private PropertyValue(uint value)
+            : this(new Scalar() { AsUInt32 = value }, sizeof(uint)) { }
 
-        private PropertyValue(long value) : this(new Scalar() { AsInt64 = value }, sizeof(long)) { }
+        private PropertyValue(long value)
+            : this(new Scalar() { AsInt64 = value }, sizeof(long)) { }
 
-        private PropertyValue(ulong value) : this(new Scalar() { AsUInt64 = value }, sizeof(ulong))
-        { }
+        private PropertyValue(ulong value)
+            : this(new Scalar() { AsUInt64 = value }, sizeof(ulong)) { }
 
         private PropertyValue(IntPtr value)
             : this(new Scalar() { AsIntPtr = value }, sizeof(IntPtr)) { }
@@ -136,13 +140,14 @@ namespace System.Diagnostics.Tracing
         private PropertyValue(UIntPtr value)
             : this(new Scalar() { AsUIntPtr = value }, sizeof(UIntPtr)) { }
 
-        private PropertyValue(float value) : this(new Scalar() { AsSingle = value }, sizeof(float))
-        { }
+        private PropertyValue(float value)
+            : this(new Scalar() { AsSingle = value }, sizeof(float)) { }
 
         private PropertyValue(double value)
             : this(new Scalar() { AsDouble = value }, sizeof(double)) { }
 
-        private PropertyValue(Guid value) : this(new Scalar() { AsGuid = value }, sizeof(Guid)) { }
+        private PropertyValue(Guid value)
+            : this(new Scalar() { AsGuid = value }, sizeof(Guid)) { }
 
         private PropertyValue(DateTime value)
             : this(new Scalar() { AsDateTime = value }, sizeof(DateTime)) { }

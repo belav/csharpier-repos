@@ -520,7 +520,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             IntermediateNodeBuilder builder,
             string tagHelperPrefix,
             RazorParserFeatureFlags featureFlags
-        ) : base(document, builder, featureFlags)
+        )
+            : base(document, builder, featureFlags)
         {
             _tagHelperPrefix = tagHelperPrefix;
         }
@@ -1336,7 +1337,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             DocumentIntermediateNode document,
             IntermediateNodeBuilder builder,
             RazorParserFeatureFlags featureFlags
-        ) : base(document, builder, featureFlags) { }
+        )
+            : base(document, builder, featureFlags) { }
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -2517,7 +2519,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             DocumentIntermediateNode document,
             IntermediateNodeBuilder builder,
             RazorParserFeatureFlags featureFlags
-        ) : base(document, builder, featureFlags) { }
+        )
+            : base(document, builder, featureFlags) { }
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -2665,7 +2668,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase
             DocumentIntermediateNode document,
             IntermediateNodeBuilder builder,
             RazorParserFeatureFlags featureFlags
-        ) : base(document, new ImportBuilder(builder), featureFlags) { }
+        )
+            : base(document, new ImportBuilder(builder), featureFlags) { }
 
         private class ImportBuilder : IntermediateNodeBuilder
         {

@@ -12,7 +12,8 @@ namespace System.Net.Http.Formatting.DataSets.Types
 
         public DerivedWcfPocoType() { }
 
-        public DerivedWcfPocoType(int id, string name, WcfPocoType reference) : base(id, name)
+        public DerivedWcfPocoType(int id, string name, WcfPocoType reference)
+            : base(id, name)
         {
             this.reference = reference;
         }

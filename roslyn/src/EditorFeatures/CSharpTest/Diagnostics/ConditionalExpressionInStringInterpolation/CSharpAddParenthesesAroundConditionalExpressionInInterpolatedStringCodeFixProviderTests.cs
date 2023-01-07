@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Conditional
     {
         public CSharpAddParenthesesAroundConditionalExpressionInInterpolatedStringCodeFixProviderTests(
             ITestOutputHelper logger
-        ) : base(logger) { }
+        )
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

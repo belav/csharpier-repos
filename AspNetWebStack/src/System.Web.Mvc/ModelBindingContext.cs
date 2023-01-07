@@ -17,7 +17,8 @@ namespace System.Web.Mvc
         private Predicate<string> _propertyFilter;
         private Dictionary<string, ModelMetadata> _propertyMetadata;
 
-        public ModelBindingContext() : this(null) { }
+        public ModelBindingContext()
+            : this(null) { }
 
         // copies certain values that won't change between parent and child objects,
         // e.g. ValueProvider, ModelState

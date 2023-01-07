@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteDesignerAttributeDiscoveryService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteDesignerAttributeDiscoveryService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

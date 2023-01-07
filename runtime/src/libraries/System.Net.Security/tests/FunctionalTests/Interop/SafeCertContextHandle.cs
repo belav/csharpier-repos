@@ -10,9 +10,11 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed class SafeCertContextHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeCertContextHandle() : base(ownsHandle: true) { }
+        public SafeCertContextHandle()
+            : base(ownsHandle: true) { }
 
-        public SafeCertContextHandle(IntPtr handle, bool ownsHandle) : base(ownsHandle)
+        public SafeCertContextHandle(IntPtr handle, bool ownsHandle)
+            : base(ownsHandle)
         {
             SetHandle(handle);
         }

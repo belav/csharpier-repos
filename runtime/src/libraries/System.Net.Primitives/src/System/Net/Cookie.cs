@@ -114,7 +114,8 @@ namespace System.Net
             Value = value;
         }
 
-        public Cookie(string name, string? value, string? path) : this(name, value)
+        public Cookie(string name, string? value, string? path)
+            : this(name, value)
         {
             Path = path;
         }

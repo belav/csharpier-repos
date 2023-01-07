@@ -21,12 +21,14 @@ namespace System.Threading
     )]
     public class ThreadStateException : SystemException
     {
-        public ThreadStateException() : base(SR.Arg_ThreadStateException)
+        public ThreadStateException()
+            : base(SR.Arg_ThreadStateException)
         {
             HResult = HResults.COR_E_THREADSTATE;
         }
 
-        public ThreadStateException(string? message) : base(message)
+        public ThreadStateException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_THREADSTATE;
         }

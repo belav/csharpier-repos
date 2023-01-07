@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class InheritanceRelationalQueryTestBase<TFixture>
     : InheritanceQueryTestBase<TFixture> where TFixture : InheritanceQueryRelationalFixture, new()
 {
-    protected InheritanceRelationalQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected InheritanceRelationalQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void FromSql_on_root()

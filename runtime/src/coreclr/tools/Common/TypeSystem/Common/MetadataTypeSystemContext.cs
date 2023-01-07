@@ -45,7 +45,8 @@ namespace Internal.TypeSystem
 
         public MetadataTypeSystemContext() { }
 
-        public MetadataTypeSystemContext(TargetDetails details) : base(details) { }
+        public MetadataTypeSystemContext(TargetDetails details)
+            : base(details) { }
 
         public virtual void SetSystemModule(ModuleDesc systemModule)
         {

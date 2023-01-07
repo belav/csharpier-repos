@@ -10,7 +10,8 @@ namespace System.Data
     internal sealed class PrimaryKeyTypeConverter : ReferenceConverter
     {
         // converter classes should have public ctor
-        public PrimaryKeyTypeConverter() : base(typeof(DataColumn[])) { }
+        public PrimaryKeyTypeConverter()
+            : base(typeof(DataColumn[])) { }
 
         public override bool GetPropertiesSupported(ITypeDescriptorContext? context) => false;
 

@@ -23,7 +23,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 {
     public class CSharpCodeActions : AbstractEditorTest
     {
-        public CSharpCodeActions() : base(nameof(CSharpCodeActions)) { }
+        public CSharpCodeActions()
+            : base(nameof(CSharpCodeActions)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

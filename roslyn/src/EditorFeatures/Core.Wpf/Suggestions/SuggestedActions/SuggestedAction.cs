@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             object provider,
             CodeAction codeAction
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             Contract.ThrowIfNull(provider);
             Contract.ThrowIfNull(codeAction);

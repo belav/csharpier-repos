@@ -32,7 +32,8 @@ public class MigratorConnectionEventData : MigratorEventData
         IMigrator migrator,
         DbConnection connection,
         Guid connectionId
-    ) : base(eventDefinition, messageGenerator, migrator)
+    )
+        : base(eventDefinition, messageGenerator, migrator)
     {
         Connection = connection;
         ConnectionId = connectionId;

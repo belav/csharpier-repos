@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         public InteractiveWindowWorkspace(
             HostServices hostServices,
             IGlobalOptionService globalOptions
-        ) : base(hostServices, globalOptions) { }
+        )
+            : base(hostServices, globalOptions) { }
     }
 }

@@ -97,7 +97,8 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         Model model,
         bool owned,
         ConfigurationSource configurationSource
-    ) : base(type, model, configurationSource)
+    )
+        : base(type, model, configurationSource)
     {
         if (!type.IsValidEntityType())
         {
@@ -131,7 +132,8 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
         Model model,
         bool owned,
         ConfigurationSource configurationSource
-    ) : base(name, type, model, configurationSource)
+    )
+        : base(name, type, model, configurationSource)
     {
         if (!type.IsValidEntityType())
         {

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             ExperimentalCapabilitiesProvider experimentalCapabilitiesProvider,
             ILspServiceLoggerFactory lspLoggerFactory,
             IThreadingContext threadingContext
-        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
+        )
+            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
         {
             _experimentalCapabilitiesProvider = experimentalCapabilitiesProvider;
         }

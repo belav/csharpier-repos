@@ -7,7 +7,8 @@ public abstract class NorthwindSetOperationsQueryRelationalTestBase<TFixture>
     : NorthwindSetOperationsQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindSetOperationsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindSetOperationsQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override async Task Collection_projection_after_set_operation_fails_if_distinct(
         bool async

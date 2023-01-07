@@ -20,7 +20,8 @@ namespace System.Net.Mail
             _innerExceptions = Array.Empty<SmtpFailedRecipientException>();
         }
 
-        public SmtpFailedRecipientsException(string? message) : base(message)
+        public SmtpFailedRecipientsException(string? message)
+            : base(message)
         {
             _innerExceptions = Array.Empty<SmtpFailedRecipientException>();
         }

@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractInterface
         public ExtractInterfaceCommandHandler(
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext, globalOptions) { }
+        )
+            : base(threadingContext, globalOptions) { }
     }
 }

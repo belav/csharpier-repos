@@ -59,7 +59,8 @@ public class MediaTypeHeaderValue
     /// <param name="mediaType">A <see cref="StringSegment"/> representation of a media type.
     /// The text provided must be a single media type without parameters. </param>
     /// <param name="quality">The <see cref="double"/> with the quality of the media type.</param>
-    public MediaTypeHeaderValue(StringSegment mediaType, double quality) : this(mediaType)
+    public MediaTypeHeaderValue(StringSegment mediaType, double quality)
+        : this(mediaType)
     {
         Quality = quality;
     }

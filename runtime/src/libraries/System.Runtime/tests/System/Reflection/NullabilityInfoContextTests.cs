@@ -3316,7 +3316,8 @@ namespace System.Reflection.Tests
             List<string[]> item1,
             Dictionary<object[], List<object>> item2,
             IDisposable[]? item3
-        ) : base(item1, item2, item3) { }
+        )
+            : base(item1, item2, item3) { }
     }
 
     public class TypeWithPropertiesNestingItsGenericTypeArgument<T>

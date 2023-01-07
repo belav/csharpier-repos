@@ -7,7 +7,8 @@ internal readonly struct SyntaxListBuilder<TNode> where TNode : GreenNode
 {
     private readonly SyntaxListBuilder _builder;
 
-    public SyntaxListBuilder(int size) : this(new SyntaxListBuilder(size)) { }
+    public SyntaxListBuilder(int size)
+        : this(new SyntaxListBuilder(size)) { }
 
     public static SyntaxListBuilder<TNode> Create()
     {

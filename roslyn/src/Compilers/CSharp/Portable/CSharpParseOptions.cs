@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SourceCodeKind kind,
             ImmutableArray<string> preprocessorSymbols,
             IReadOnlyDictionary<string, string>? features
-        ) : base(kind, documentationMode)
+        )
+            : base(kind, documentationMode)
         {
             this.SpecifiedLanguageVersion = languageVersion;
             this.LanguageVersion = languageVersion.MapSpecifiedToEffectiveVersion();

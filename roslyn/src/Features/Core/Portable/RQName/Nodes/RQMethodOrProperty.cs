@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             RQMethodPropertyOrEventName memberName,
             int typeParameterCount,
             IList<RQParameter> parameters
-        ) : base(containingType, memberName)
+        )
+            : base(containingType, memberName)
         {
             TypeParameterCount = typeParameterCount;
             Parameters = new ReadOnlyCollection<RQParameter>(parameters);

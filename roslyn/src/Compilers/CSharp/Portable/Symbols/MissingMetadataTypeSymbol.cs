@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int arity,
             bool mangleName,
             TupleExtraData? tupleData = null
-        ) : base(tupleData)
+        )
+            : base(tupleData)
         {
             RoslynDebug.Assert(name != null);
 
@@ -186,21 +187,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ModuleSymbol module,
                 ref MetadataTypeName fullName,
                 DiagnosticInfo? errorInfo = null
-            ) : this(module, ref fullName, -1, errorInfo) { }
+            )
+                : this(module, ref fullName, -1, errorInfo) { }
 
             public TopLevel(
                 ModuleSymbol module,
                 ref MetadataTypeName fullName,
                 SpecialType specialType,
                 DiagnosticInfo? errorInfo = null
-            ) : this(module, ref fullName, (int)specialType, errorInfo) { }
+            )
+                : this(module, ref fullName, (int)specialType, errorInfo) { }
 
             public TopLevel(
                 ModuleSymbol module,
                 ref MetadataTypeName fullName,
                 WellKnownType wellKnownType,
                 DiagnosticInfo? errorInfo = null
-            ) : this(module, ref fullName, (int)wellKnownType, errorInfo) { }
+            )
+                : this(module, ref fullName, (int)wellKnownType, errorInfo) { }
 
             private TopLevel(
                 ModuleSymbol module,
@@ -247,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamespaceSymbol? containingNamespace,
                 int typeId,
                 TupleExtraData? tupleData
-            ) : base(name, arity, mangleName, tupleData)
+            )
+                : base(name, arity, mangleName, tupleData)
             {
                 RoslynDebug.Assert((object)module != null);
                 RoslynDebug.Assert(@namespace != null);

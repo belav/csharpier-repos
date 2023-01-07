@@ -38,7 +38,8 @@ public class AcceptedAtRouteResult : ObjectResult
         string? routeName,
         object? routeValues,
         [ActionResultObjectValue] object? value
-    ) : base(value)
+    )
+        : base(value)
     {
         RouteName = routeName;
         RouteValues = routeValues == null ? null : new RouteValueDictionary(routeValues);

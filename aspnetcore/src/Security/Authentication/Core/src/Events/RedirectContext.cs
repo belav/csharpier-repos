@@ -25,7 +25,8 @@ public class RedirectContext<TOptions> : PropertiesContext<TOptions>
         TOptions options,
         AuthenticationProperties properties,
         string redirectUri
-    ) : base(context, scheme, options, properties)
+    )
+        : base(context, scheme, options, properties)
     {
         Properties = properties;
         RedirectUri = redirectUri;

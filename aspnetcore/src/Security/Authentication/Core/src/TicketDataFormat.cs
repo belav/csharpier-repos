@@ -15,6 +15,6 @@ public class TicketDataFormat : SecureDataFormat<AuthenticationTicket>
     /// Initializes a new instance of <see cref="TicketDataFormat"/>.
     /// </summary>
     /// <param name="protector">The <see cref="IDataProtector"/>.</param>
-    public TicketDataFormat(IDataProtector protector) : base(TicketSerializer.Default, protector)
-    { }
+    public TicketDataFormat(IDataProtector protector)
+        : base(TicketSerializer.Default, protector) { }
 }

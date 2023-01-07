@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             IdentifierInfo identifierInfo,
             ContextInfo contextInfo,
             HashSet<(string alias, string name, int arity)>? globalAliasInfo
-        ) : base(checksum)
+        )
+            : base(checksum)
         {
             _literalInfo = literalInfo;
             _identifierInfo = identifierInfo;

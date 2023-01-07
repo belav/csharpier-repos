@@ -29,7 +29,8 @@ namespace System
 
         // Creates a new ArgumentOutOfRangeException with its message
         // string set to a default message explaining an argument was out of range.
-        public ArgumentOutOfRangeException() : base(SR.Arg_ArgumentOutOfRangeException)
+        public ArgumentOutOfRangeException()
+            : base(SR.Arg_ArgumentOutOfRangeException)
         {
             HResult = HResults.COR_E_ARGUMENTOUTOFRANGE;
         }

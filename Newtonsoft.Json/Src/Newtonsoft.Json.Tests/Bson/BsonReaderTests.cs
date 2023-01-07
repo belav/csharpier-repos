@@ -1652,12 +1652,14 @@ namespace Newtonsoft.Json.Tests.Bson
 
         class Dog : Animal
         {
-            public Dog(string name) : base(name) { }
+            public Dog(string name)
+                : base(name) { }
         }
 
         class Cat : Animal
         {
-            public Cat(string name) : base(name) { }
+            public Cat(string name)
+                : base(name) { }
         }
 
         public class MyBinder : DefaultSerializationBinder

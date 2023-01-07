@@ -21,7 +21,8 @@ public class ApiScopeCollection : Collection<ApiScope>
     /// API scopes in <paramref name="list"/>.
     /// </summary>
     /// <param name="list">The initial list of <see cref="ApiScope"/>.</param>
-    public ApiScopeCollection(IList<ApiScope> list) : base(list) { }
+    public ApiScopeCollection(IList<ApiScope> list)
+        : base(list) { }
 
     /// <summary>
     /// Gets an API resource given its name.

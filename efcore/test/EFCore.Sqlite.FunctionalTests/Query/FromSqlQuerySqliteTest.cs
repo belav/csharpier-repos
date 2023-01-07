@@ -11,7 +11,8 @@ public class FromSqlQuerySqliteTest
     public FromSqlQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }

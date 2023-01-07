@@ -31,7 +31,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextIdentity : ContextBase
     {
-        public BlogContextIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextIdentity(string databaseName)
+            : base(databaseName) { }
     }
 
     [ConditionalFact]
@@ -123,7 +124,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextIntEnumToIdentity : ContextBase
     {
-        public BlogContextIntEnumToIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextIntEnumToIdentity(string databaseName)
+            : base(databaseName) { }
 
         public DbSet<BlogWithIntEnumKey> EnumBlogs { get; set; }
 
@@ -178,7 +180,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextUShortEnumToIdentity : ContextBase
     {
-        public BlogContextUShortEnumToIdentity(string databaseName) : base(databaseName) { }
+        public BlogContextUShortEnumToIdentity(string databaseName)
+            : base(databaseName) { }
 
         public DbSet<BlogWithUShortEnumKey> EnumBlogs { get; set; }
 
@@ -296,7 +299,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNoKeyGeneration : ContextBase
     {
-        public BlogContextNoKeyGeneration(string databaseName) : base(databaseName) { }
+        public BlogContextNoKeyGeneration(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -341,7 +345,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNoKeyGenerationNullableKey : ContextBase
     {
-        public BlogContextNoKeyGenerationNullableKey(string databaseName) : base(databaseName) { }
+        public BlogContextNoKeyGenerationNullableKey(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -426,7 +431,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNonKeyDefaultValue : ContextBase
     {
-        public BlogContextNonKeyDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextNonKeyDefaultValue(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -504,7 +510,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextNonKeyReadOnlyDefaultValue : ContextBase
     {
-        public BlogContextNonKeyReadOnlyDefaultValue(string databaseName) : base(databaseName) { }
+        public BlogContextNonKeyReadOnlyDefaultValue(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -560,7 +567,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextClientGuidKey : ContextBase
     {
-        public BlogContextClientGuidKey(string databaseName) : base(databaseName) { }
+        public BlogContextClientGuidKey(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -576,7 +584,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextClientGuidNonKey : ContextBase
     {
-        public BlogContextClientGuidNonKey(string databaseName) : base(databaseName) { }
+        public BlogContextClientGuidNonKey(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -608,7 +617,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContext : ContextBase
     {
-        public BlogContext(string databaseName) : base(databaseName) { }
+        public BlogContext(string databaseName)
+            : base(databaseName) { }
     }
 
     [ConditionalFact]
@@ -646,7 +656,8 @@ public class SqliteValueGenerationScenariosTest
 
     public class BlogContextSpecifyKeysUsingDefault : ContextBase
     {
-        public BlogContextSpecifyKeysUsingDefault(string databaseName) : base(databaseName) { }
+        public BlogContextSpecifyKeysUsingDefault(string databaseName)
+            : base(databaseName) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

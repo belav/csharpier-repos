@@ -19,7 +19,8 @@ namespace System.Data.OleDb
         private DbConnectionInternal _innerConnection;
         private int _closeCount; // used to distinguish between different uses of this object, so we don't have to maintain a list of it's children
 
-        public OleDbConnection() : base()
+        public OleDbConnection()
+            : base()
         {
             GC.SuppressFinalize(this);
             _innerConnection = DbConnectionClosedNeverOpened.SingletonInstance;

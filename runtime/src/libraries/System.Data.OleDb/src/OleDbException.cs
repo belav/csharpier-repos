@@ -35,7 +35,8 @@ namespace System.Data.OleDb
             string? source,
             OleDbHResult errorCode,
             OleDbErrorCollection errors
-        ) : base(message, inner)
+        )
+            : base(message, inner)
         {
             Debug.Assert(null != errors, "OleDbException without OleDbErrorCollection");
             Source = source;

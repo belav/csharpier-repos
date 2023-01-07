@@ -19,7 +19,8 @@ namespace Moq
             Expression originalExpression,
             Mock mock,
             MethodExpectation expectation
-        ) : base(originalExpression, mock, expectation)
+        )
+            : base(originalExpression, mock, expectation)
         {
             Debug.Assert(expectation != null);
 

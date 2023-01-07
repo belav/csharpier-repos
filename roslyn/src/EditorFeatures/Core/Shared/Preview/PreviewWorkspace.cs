@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
 {
     internal class PreviewWorkspace : Workspace
     {
-        public PreviewWorkspace() : base(MefHostServices.DefaultHost, WorkspaceKind.Preview) { }
+        public PreviewWorkspace()
+            : base(MefHostServices.DefaultHost, WorkspaceKind.Preview) { }
 
         public PreviewWorkspace(HostServices hostServices)
             : base(hostServices, WorkspaceKind.Preview) { }

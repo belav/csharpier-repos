@@ -91,7 +91,8 @@ namespace System.ServiceModel.Syndication
             Extension = extension;
         }
 
-        protected XmlSyndicationContent(XmlSyndicationContent source) : base(source)
+        protected XmlSyndicationContent(XmlSyndicationContent source)
+            : base(source)
         {
             Debug.Assert(source != null, "The base constructor already checks if source is valid.");
             _contentBuffer = source._contentBuffer;

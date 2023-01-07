@@ -23,7 +23,8 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
         string name,
         string applicationBase = null,
         string[] paths = null
-    ) : base(true)
+    )
+        : base(true)
     {
         FriendlyName = name;
 

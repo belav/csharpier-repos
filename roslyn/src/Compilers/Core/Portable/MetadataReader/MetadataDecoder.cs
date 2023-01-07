@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis
             AssemblyIdentity containingAssemblyIdentity,
             SymbolFactory<ModuleSymbol, TypeSymbol> factory,
             ModuleSymbol moduleSymbol
-        ) : base(factory, moduleSymbol)
+        )
+            : base(factory, moduleSymbol)
         {
             Debug.Assert(module != null);
             this.Module = module;

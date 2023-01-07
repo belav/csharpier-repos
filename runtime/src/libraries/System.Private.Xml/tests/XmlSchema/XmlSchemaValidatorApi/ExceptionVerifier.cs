@@ -452,6 +452,7 @@ namespace System.Xml.Tests
 
     public class VerifyException : Exception
     {
-        public VerifyException(string msg) : base(msg) { }
+        public VerifyException(string msg)
+            : base(msg) { }
     }
 }

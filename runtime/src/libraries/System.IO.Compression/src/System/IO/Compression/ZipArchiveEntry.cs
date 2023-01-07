@@ -98,7 +98,8 @@ namespace System.IO.Compression
             ZipArchive archive,
             string entryName,
             CompressionLevel compressionLevel
-        ) : this(archive, entryName)
+        )
+            : this(archive, entryName)
         {
             _compressionLevel = compressionLevel;
             if (_compressionLevel == CompressionLevel.NoCompression)

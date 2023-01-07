@@ -30,7 +30,8 @@ namespace System.Xml.Xsl.Xslt
 
         private readonly XsltQilFactory _fac;
 
-        public InvokeGenerator(XsltQilFactory f, bool debug) : base(f.BaseFactory)
+        public InvokeGenerator(XsltQilFactory f, bool debug)
+            : base(f.BaseFactory)
         {
             _debug = debug;
             _fac = f;

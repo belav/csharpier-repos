@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class SeparatedSyntaxListParsingTests : ParsingTests
     {
-        public SeparatedSyntaxListParsingTests(ITestOutputHelper output) : base(output) { }
+        public SeparatedSyntaxListParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

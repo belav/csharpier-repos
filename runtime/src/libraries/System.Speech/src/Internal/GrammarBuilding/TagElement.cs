@@ -17,12 +17,14 @@ namespace System.Speech.Internal.GrammarBuilding
             _value = value;
         }
 
-        internal TagElement(GrammarBuilderBase builder, object value) : this(value)
+        internal TagElement(GrammarBuilderBase builder, object value)
+            : this(value)
         {
             Add(builder);
         }
 
-        internal TagElement(GrammarBuilder builder, object value) : this(value)
+        internal TagElement(GrammarBuilder builder, object value)
+            : this(value)
         {
             Add(builder);
         }

@@ -61,7 +61,8 @@ public abstract class SqlStoreTestBase<TUser, TRole, TKey>
 
     public class TestDbContext : IdentityDbContext<TUser, TRole, TKey>
     {
-        public TestDbContext(DbContextOptions options) : base(options) { }
+        public TestDbContext(DbContextOptions options)
+            : base(options) { }
     }
 
     protected override TUser CreateTestUser(

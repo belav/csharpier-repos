@@ -470,7 +470,8 @@ namespace System.Threading.RateLimiting
                 int permitCount,
                 ConcurrencyLimiter limiter,
                 CancellationToken cancellationToken
-            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            )
+                : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _permitCount = permitCount;
                 _limiter = limiter;

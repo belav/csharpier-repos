@@ -75,7 +75,8 @@ namespace System.Reflection.Context.Tests
 
     internal class FaultyTestCustomReflectionContext : CustomReflectionContext
     {
-        public FaultyTestCustomReflectionContext() : base(null) { }
+        public FaultyTestCustomReflectionContext()
+            : base(null) { }
     }
 
     internal class VirtualPropertyInfoCustomReflectionContext : CustomReflectionContext
@@ -170,7 +171,8 @@ namespace System.Reflection.Context.Tests
         [Test]
         public int field = 2;
 
-        public SecondTestObject(string a) : base(a) { }
+        public SecondTestObject(string a)
+            : base(a) { }
     }
 
     [AttributeUsage(AttributeTargets.Field)]

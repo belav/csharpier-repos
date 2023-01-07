@@ -18,7 +18,8 @@ internal sealed class InvalidUrlRewriteFormatException : FormatException
         XElement element,
         string message,
         Exception innerException
-    ) : base(FormatMessage(element, message), innerException)
+    )
+        : base(FormatMessage(element, message), innerException)
     {
         var xmlLineInfo = (IXmlLineInfo)element;
         LineNumber = xmlLineInfo.LineNumber;

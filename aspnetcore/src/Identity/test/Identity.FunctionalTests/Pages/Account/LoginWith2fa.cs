@@ -18,7 +18,8 @@ public class LoginWith2fa : DefaultUIPage
         HttpClient client,
         IHtmlDocument loginWithTwoFactor,
         DefaultUIContext context
-    ) : base(client, loginWithTwoFactor, context)
+    )
+        : base(client, loginWithTwoFactor, context)
     {
         _twoFactorForm = HtmlAssert.HasForm(loginWithTwoFactor);
         _loginWithRecoveryCodeLink = HtmlAssert.HasLink("#recovery-code-login", loginWithTwoFactor);

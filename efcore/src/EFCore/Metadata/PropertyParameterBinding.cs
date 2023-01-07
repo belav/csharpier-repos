@@ -16,7 +16,8 @@ public class PropertyParameterBinding : ParameterBinding
     ///     Creates a new <see cref="PropertyParameterBinding" /> instance for the given <see cref="IProperty" />.
     /// </summary>
     /// <param name="property">The property to bind.</param>
-    public PropertyParameterBinding(IProperty property) : base(property.ClrType, property) { }
+    public PropertyParameterBinding(IProperty property)
+        : base(property.ClrType, property) { }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a

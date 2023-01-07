@@ -17,7 +17,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 {
     public class BidirectionStreamingTest : HttpClientHandlerTestBase
     {
-        public BidirectionStreamingTest(ITestOutputHelper output) : base(output) { }
+        public BidirectionStreamingTest(ITestOutputHelper output)
+            : base(output) { }
 
         // Build number suggested by the WinHttp team.
         // It can be reduced if bidirectional streaming is backported.

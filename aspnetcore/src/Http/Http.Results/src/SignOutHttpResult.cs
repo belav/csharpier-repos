@@ -16,7 +16,8 @@ public sealed partial class SignOutHttpResult : IResult
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutHttpResult"/> with the default sign out scheme.
     /// </summary>
-    internal SignOutHttpResult() : this(Array.Empty<string>()) { }
+    internal SignOutHttpResult()
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutHttpResult"/> with the

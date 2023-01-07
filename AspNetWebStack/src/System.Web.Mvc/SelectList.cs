@@ -13,7 +13,8 @@ namespace System.Web.Mvc
     )]
     public class SelectList : MultiSelectList
     {
-        public SelectList(IEnumerable items) : this(items, selectedValue: null) { }
+        public SelectList(IEnumerable items)
+            : this(items, selectedValue: null) { }
 
         public SelectList(IEnumerable items, object selectedValue)
             : this(items, dataValueField: null, dataTextField: null, selectedValue: selectedValue)
@@ -45,7 +46,8 @@ namespace System.Web.Mvc
             string dataValueField,
             string dataTextField,
             object selectedValue
-        ) : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
+        )
+            : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue))
         {
             SelectedValue = selectedValue;
         }
@@ -69,7 +71,14 @@ namespace System.Web.Mvc
             string dataTextField,
             string dataGroupField,
             object selectedValue
-        ) : base(items, dataValueField, dataTextField, dataGroupField, ToEnumerable(selectedValue))
+        )
+            : base(
+                items,
+                dataValueField,
+                dataTextField,
+                dataGroupField,
+                ToEnumerable(selectedValue)
+            )
         {
             SelectedValue = selectedValue;
         }
@@ -93,7 +102,14 @@ namespace System.Web.Mvc
             string dataTextField,
             object selectedValue,
             IEnumerable disabledValues
-        ) : base(items, dataValueField, dataTextField, ToEnumerable(selectedValue), disabledValues)
+        )
+            : base(
+                items,
+                dataValueField,
+                dataTextField,
+                ToEnumerable(selectedValue),
+                disabledValues
+            )
         {
             SelectedValue = selectedValue;
         }

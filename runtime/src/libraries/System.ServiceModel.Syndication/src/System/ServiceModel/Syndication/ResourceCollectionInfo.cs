@@ -27,7 +27,9 @@ namespace System.ServiceModel.Syndication
             Uri link,
             IEnumerable<CategoriesDocument> categories,
             bool allowsNewEntries
-        ) : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept()) { }
+        )
+            : this(title, link, categories, (allowsNewEntries) ? null : CreateSingleEmptyAccept())
+        { }
 
         public ResourceCollectionInfo(
             TextSyndicationContent title,

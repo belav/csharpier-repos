@@ -7,7 +7,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private Expr _lhs;
 
-        public ExprAssignment(Expr lhs, Expr rhs) : base(ExpressionKind.Assignment)
+        public ExprAssignment(Expr lhs, Expr rhs)
+            : base(ExpressionKind.Assignment)
         {
             LHS = lhs;
             RHS = rhs;

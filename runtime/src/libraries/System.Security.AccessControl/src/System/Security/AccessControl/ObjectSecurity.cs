@@ -61,7 +61,8 @@ namespace System.Security.AccessControl
 
         protected ObjectSecurity() { }
 
-        protected ObjectSecurity(bool isContainer, bool isDS) : this()
+        protected ObjectSecurity(bool isContainer, bool isDS)
+            : this()
         {
             // we will create an empty DACL, denying anyone any access as the default. 5 is the capacity.
             DiscretionaryAcl dacl = new DiscretionaryAcl(isContainer, isDS, 5);
@@ -76,7 +77,8 @@ namespace System.Security.AccessControl
             );
         }
 
-        protected ObjectSecurity(CommonSecurityDescriptor securityDescriptor) : this()
+        protected ObjectSecurity(CommonSecurityDescriptor securityDescriptor)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(securityDescriptor);
 

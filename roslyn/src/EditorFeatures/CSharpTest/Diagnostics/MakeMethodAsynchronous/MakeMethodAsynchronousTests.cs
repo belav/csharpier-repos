@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeMethodA
     public partial class MakeMethodAsynchronousTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeMethodAsynchronousTests(ITestOutputHelper logger) : base(logger) { }
+        public MakeMethodAsynchronousTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

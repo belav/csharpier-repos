@@ -20,7 +20,8 @@ namespace Roslyn.Test.Utilities
             Metadata metadata = null,
             string fullPath = null,
             string display = null
-        ) : base(MetadataReferenceProperties.Assembly, fullPath)
+        )
+            : base(MetadataReferenceProperties.Assembly, fullPath)
         {
             _metadata = metadata;
             _display = display;

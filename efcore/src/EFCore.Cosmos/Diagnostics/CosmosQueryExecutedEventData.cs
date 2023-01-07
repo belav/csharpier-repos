@@ -35,7 +35,8 @@ public class CosmosQueryExecutedEventData : EventData
         IReadOnlyList<(string Name, object? Value)> parameters,
         string querySql,
         bool logSensitiveData
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         Elapsed = elapsed;
         RequestCharge = requestCharge;

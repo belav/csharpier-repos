@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         public NonErrorNamedTypeSymbol(
             Symbols.NamedTypeSymbol underlying,
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) : base(nullableAnnotation)
+        )
+            : base(nullableAnnotation)
         {
             Debug.Assert(underlying is object);
             Debug.Assert(!underlying.IsErrorType());

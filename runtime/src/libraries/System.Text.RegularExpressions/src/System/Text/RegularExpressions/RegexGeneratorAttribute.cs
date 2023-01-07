@@ -22,7 +22,8 @@ public sealed class RegexGeneratorAttribute : Attribute
     public RegexGeneratorAttribute(
         [StringSyntax(StringSyntaxAttribute.Regex, "options")] string pattern,
         RegexOptions options
-    ) : this(pattern, options, Timeout.Infinite) { }
+    )
+        : this(pattern, options, Timeout.Infinite) { }
 
     /// <summary>Initializes a new instance of the <see cref="RegexGeneratorAttribute"/> with the specified pattern, options, and timeout.</summary>
     /// <param name="pattern">The regular expression pattern to match.</param>

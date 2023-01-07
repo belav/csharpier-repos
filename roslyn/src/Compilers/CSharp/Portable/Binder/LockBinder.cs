@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly LockStatementSyntax _syntax;
 
-        public LockBinder(Binder enclosing, LockStatementSyntax syntax) : base(enclosing)
+        public LockBinder(Binder enclosing, LockStatementSyntax syntax)
+            : base(enclosing)
         {
             _syntax = syntax;
         }

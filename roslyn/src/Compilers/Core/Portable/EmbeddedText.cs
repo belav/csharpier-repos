@@ -423,7 +423,8 @@ namespace Microsoft.CodeAnalysis
                 Stream stream,
                 CompressionLevel compressionLevel,
                 bool leaveOpen
-            ) : base(stream, compressionLevel, leaveOpen) { }
+            )
+                : base(stream, compressionLevel, leaveOpen) { }
 
             public int BytesWritten { get; private set; }
 

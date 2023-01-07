@@ -41,7 +41,8 @@ namespace System.IO.Compression
             Stream baseStream,
             ZipArchiveEntry entry,
             Action<ZipArchiveEntry?>? onClosed
-        ) : this(baseStream, false, entry, onClosed) { }
+        )
+            : this(baseStream, false, entry, onClosed) { }
 
         public override long Length
         {

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string name,
             MethodSymbol topLevelMethod,
             MethodSymbol containingMethod
-        ) : base(name, containingMethod)
+        )
+            : base(name, containingMethod)
         {
             Debug.Assert(topLevelMethod != null);
             _topLevelMethod = topLevelMethod;

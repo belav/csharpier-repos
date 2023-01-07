@@ -10,7 +10,8 @@ namespace System.Xml
     // interpreted as markup language.
     public class XmlCDataSection : XmlCharacterData
     {
-        protected internal XmlCDataSection(string? data, XmlDocument doc) : base(data, doc) { }
+        protected internal XmlCDataSection(string? data, XmlDocument doc)
+            : base(data, doc) { }
 
         // Gets the name of the node.
         public override string Name

@@ -794,7 +794,8 @@ public class ViewDataDictionaryTest
         public TestViewDataDictionary(
             IModelMetadataProvider metadataProvider,
             Type declaredModelType
-        ) : base(metadataProvider, declaredModelType) { }
+        )
+            : base(metadataProvider, declaredModelType) { }
 
         public void SetModelPublic(object value)
         {

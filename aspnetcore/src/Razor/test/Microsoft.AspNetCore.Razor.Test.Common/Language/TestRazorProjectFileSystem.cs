@@ -13,9 +13,11 @@ internal class TestRazorProjectFileSystem : DefaultRazorProjectFileSystem
 
     private readonly Dictionary<string, RazorProjectItem> _lookup;
 
-    public TestRazorProjectFileSystem() : this(new RazorProjectItem[0]) { }
+    public TestRazorProjectFileSystem()
+        : this(new RazorProjectItem[0]) { }
 
-    public TestRazorProjectFileSystem(IList<RazorProjectItem> items) : base("/")
+    public TestRazorProjectFileSystem(IList<RazorProjectItem> items)
+        : base("/")
     {
         _lookup = items.ToDictionary(item => item.FilePath);
     }

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class InheritanceRelationshipsQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : InheritanceRelationshipsQueryFixtureBase, new()
 {
-    protected InheritanceRelationshipsQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected InheritanceRelationshipsQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Changes_in_derived_related_entities_are_detected()

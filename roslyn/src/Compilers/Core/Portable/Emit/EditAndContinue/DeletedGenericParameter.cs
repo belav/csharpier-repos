@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             IGenericMethodParameter oldParameter,
             DeletedMethodDefinition method,
             Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
-        ) : base(oldParameter, typesUsedByDeletedMembers)
+        )
+            : base(oldParameter, typesUsedByDeletedMembers)
         {
             _method = method;
         }

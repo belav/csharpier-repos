@@ -337,16 +337,22 @@ namespace System.IO.IsolatedStorage
             string path,
             System.IO.FileMode mode,
             System.IO.FileAccess access
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
             System.IO.FileMode mode,
             System.IO.FileAccess access,
             System.IO.FileShare share
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
@@ -354,8 +360,11 @@ namespace System.IO.IsolatedStorage
             System.IO.FileAccess access,
             System.IO.FileShare share,
             int bufferSize
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
@@ -364,8 +373,11 @@ namespace System.IO.IsolatedStorage
             System.IO.FileShare share,
             int bufferSize,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
@@ -373,23 +385,32 @@ namespace System.IO.IsolatedStorage
             System.IO.FileAccess access,
             System.IO.FileShare share,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
             System.IO.FileMode mode,
             System.IO.FileAccess access,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public IsolatedStorageFileStream(
             string path,
             System.IO.FileMode mode,
             System.IO.IsolatedStorage.IsolatedStorageFile? isf
-        ) : base(default(Microsoft.Win32.SafeHandles.SafeFileHandle), default(System.IO.FileAccess))
-        { }
+        )
+            : base(
+                default(Microsoft.Win32.SafeHandles.SafeFileHandle),
+                default(System.IO.FileAccess)
+            ) { }
 
         public override bool CanRead
         {

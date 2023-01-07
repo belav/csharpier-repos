@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             string hintName,
             string languageName,
             Workspace workspace
-        ) : base(name: hintName)
+        )
+            : base(name: hintName)
         {
             _threadingContext = threadingContext;
             DocumentId = documentId;

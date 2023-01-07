@@ -32,7 +32,8 @@ namespace System.Linq.Parallel
             ParallelQuery<TInputOutput> left,
             ParallelQuery<TInputOutput> right,
             IEqualityComparer<TInputOutput>? comparer
-        ) : base(left, right)
+        )
+            : base(left, right)
         {
             Debug.Assert(left != null && right != null, "child data sources cannot be null");
             _comparer = comparer;

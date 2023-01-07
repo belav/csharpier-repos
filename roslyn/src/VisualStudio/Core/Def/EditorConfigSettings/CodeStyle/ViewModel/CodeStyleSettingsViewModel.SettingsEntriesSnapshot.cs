@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.CodeStyle
             public SettingsEntriesSnapshot(
                 ImmutableArray<CodeStyleSetting> data,
                 int currentVersionNumber
-            ) : base(data, currentVersionNumber) { }
+            )
+                : base(data, currentVersionNumber) { }
 
             protected override bool TryGetValue(
                 CodeStyleSetting result,

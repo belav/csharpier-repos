@@ -21,7 +21,8 @@ namespace System.Reflection.TypeLoading
             RoType declaringType,
             int uniquifier,
             params RoType[] parameterTypes
-        ) : base()
+        )
+            : base()
         {
             Debug.Assert(declaringType != null);
             _declaringType = declaringType;

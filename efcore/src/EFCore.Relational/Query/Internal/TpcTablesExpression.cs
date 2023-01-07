@@ -24,7 +24,8 @@ public class TpcTablesExpression : TableExpressionBase
         string? alias,
         IEntityType entityType,
         IReadOnlyList<SelectExpression> subSelectExpressions
-    ) : base(alias)
+    )
+        : base(alias)
     {
         EntityType = entityType;
         SelectExpressions = subSelectExpressions;
@@ -41,7 +42,8 @@ public class TpcTablesExpression : TableExpressionBase
         IEntityType entityType,
         IReadOnlyList<SelectExpression> subSelectExpressions,
         IEnumerable<IAnnotation>? annotations
-    ) : base(alias, annotations)
+    )
+        : base(alias, annotations)
     {
         EntityType = entityType;
         SelectExpressions = subSelectExpressions;

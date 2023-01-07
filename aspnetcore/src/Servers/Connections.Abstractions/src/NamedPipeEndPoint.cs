@@ -17,7 +17,8 @@ public sealed class NamedPipeEndPoint : EndPoint
     /// Initializes a new instance of the <see cref="NamedPipeEndPoint"/> class.
     /// </summary>
     /// <param name="pipeName">The name of the pipe.</param>
-    public NamedPipeEndPoint(string pipeName) : this(pipeName, LocalComputerServerName) { }
+    public NamedPipeEndPoint(string pipeName)
+        : this(pipeName, LocalComputerServerName) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NamedPipeEndPoint"/> class.

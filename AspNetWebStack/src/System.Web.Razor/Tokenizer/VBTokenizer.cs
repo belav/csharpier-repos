@@ -44,7 +44,8 @@ namespace System.Web.Razor.Tokenizer
             { '$', VBSymbolType.Dollar },
         };
 
-        public VBTokenizer(ITextDocument source) : base(source)
+        public VBTokenizer(ITextDocument source)
+            : base(source)
         {
             CurrentState = Data;
         }

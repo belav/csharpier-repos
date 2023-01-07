@@ -18,7 +18,8 @@ public class OuterApplyExpression : JoinExpressionBase
     ///     Creates a new instance of the <see cref="OuterApplyExpression" /> class.
     /// </summary>
     /// <param name="table">A table source to OUTER APPLY with.</param>
-    public OuterApplyExpression(TableExpressionBase table) : this(table, annotations: null) { }
+    public OuterApplyExpression(TableExpressionBase table)
+        : this(table, annotations: null) { }
 
     private OuterApplyExpression(TableExpressionBase table, IEnumerable<IAnnotation>? annotations)
         : base(table, annotations) { }

@@ -104,7 +104,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <summary>
         /// Initializes an instance of <see cref="Matcher" /> using case-insensitive matching
         /// </summary>
-        public Matcher() : this(StringComparison.OrdinalIgnoreCase) { }
+        public Matcher()
+            : this(StringComparison.OrdinalIgnoreCase) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Matcher" /> using the string comparison method specified

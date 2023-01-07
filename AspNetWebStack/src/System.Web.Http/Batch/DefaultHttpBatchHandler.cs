@@ -30,7 +30,8 @@ namespace System.Web.Http.Batch
         /// Initializes a new instance of the <see cref="DefaultHttpBatchHandler"/> class.
         /// </summary>
         /// <param name="httpServer">The <see cref="HttpServer"/> for handling the individual batch requests.</param>
-        public DefaultHttpBatchHandler(HttpServer httpServer) : base(httpServer)
+        public DefaultHttpBatchHandler(HttpServer httpServer)
+            : base(httpServer)
         {
             ExecutionOrder = BatchExecutionOrder.Sequential;
             SupportedContentTypes = new List<string>() { MultiPartMixed };

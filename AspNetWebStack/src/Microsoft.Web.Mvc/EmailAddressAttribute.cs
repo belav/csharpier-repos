@@ -18,7 +18,8 @@ namespace Microsoft.Web.Mvc
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture
         );
 
-        public EmailAddressAttribute() : base(DataType.EmailAddress)
+        public EmailAddressAttribute()
+            : base(DataType.EmailAddress)
         {
             ErrorMessage = MvcResources.EmailAddressAttribute_Invalid;
         }

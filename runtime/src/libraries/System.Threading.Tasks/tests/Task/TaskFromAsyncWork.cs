@@ -101,7 +101,8 @@ namespace System.Threading.Tasks.Tests
 
         // a general action to take-in inputs upfront rather than delayed until BeginInvoke
         // for testing the overload taking IAsyncResult
-        public AsyncAction(object[] inputs, bool throwing) : base()
+        public AsyncAction(object[] inputs, bool throwing)
+            : base()
         {
             _action = () =>
             {
@@ -114,7 +115,8 @@ namespace System.Threading.Tasks.Tests
             };
         }
 
-        public AsyncAction(bool throwing) : base()
+        public AsyncAction(bool throwing)
+            : base()
         {
             _action = () =>
             {
@@ -155,7 +157,8 @@ namespace System.Threading.Tasks.Tests
 
         private Action<T> _action;
 
-        public AsyncAction(bool throwing) : base()
+        public AsyncAction(bool throwing)
+            : base()
         {
             _action = (o) =>
             {
@@ -196,7 +199,8 @@ namespace System.Threading.Tasks.Tests
     {
         private Action<T1, T2> _action;
 
-        public AsyncAction(bool throwing) : base()
+        public AsyncAction(bool throwing)
+            : base()
         {
             _action = (o1, o2) =>
             {
@@ -238,7 +242,8 @@ namespace System.Threading.Tasks.Tests
     {
         private Action<T1, T2, T3> _action;
 
-        public AsyncAction(bool throwing) : base()
+        public AsyncAction(bool throwing)
+            : base()
         {
             _action = (o1, o2, o3) =>
             {
@@ -287,7 +292,8 @@ namespace System.Threading.Tasks.Tests
 
         // a general func to take-in inputs upfront rather than delayed until BeginInvoke
         // for testing the overload taking IAsyncResult
-        public AsyncFunc(object[] inputs, bool throwing) : base()
+        public AsyncFunc(object[] inputs, bool throwing)
+            : base()
         {
             _func = () =>
             {
@@ -300,7 +306,8 @@ namespace System.Threading.Tasks.Tests
             };
         }
 
-        public AsyncFunc(bool throwing) : base()
+        public AsyncFunc(bool throwing)
+            : base()
         {
             _func = () =>
             {
@@ -339,7 +346,8 @@ namespace System.Threading.Tasks.Tests
     {
         private Func<T, ReadOnlyCollection<object>> _func;
 
-        public AsyncFunc(bool throwing) : base()
+        public AsyncFunc(bool throwing)
+            : base()
         {
             _func = (o) =>
             {
@@ -380,7 +388,8 @@ namespace System.Threading.Tasks.Tests
     {
         private Func<T1, T2, ReadOnlyCollection<object>> _func;
 
-        public AsyncFunc(bool throwing) : base()
+        public AsyncFunc(bool throwing)
+            : base()
         {
             _func = (o1, o2) =>
             {
@@ -422,7 +431,8 @@ namespace System.Threading.Tasks.Tests
     {
         private Func<T1, T2, T3, ReadOnlyCollection<object>> _func;
 
-        public AsyncFunc(bool throwing) : base()
+        public AsyncFunc(bool throwing)
+            : base()
         {
             _func = (o1, o2, o3) =>
             {

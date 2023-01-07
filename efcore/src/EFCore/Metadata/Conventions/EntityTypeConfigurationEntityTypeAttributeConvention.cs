@@ -23,7 +23,8 @@ public class EntityTypeConfigurationEntityTypeAttributeConvention
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public EntityTypeConfigurationEntityTypeAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an entity type is added to the model if it has an attribute.

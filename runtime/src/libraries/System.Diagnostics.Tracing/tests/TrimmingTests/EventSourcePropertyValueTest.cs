@@ -31,7 +31,8 @@ internal class Program
         public const string EventSourceName = "MyTest";
         public static TestEventSource Log = new TestEventSource();
 
-        public TestEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+        public TestEventSource()
+            : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         [Event(1)]
         public void LogData(TestData data)

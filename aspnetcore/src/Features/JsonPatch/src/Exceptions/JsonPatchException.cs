@@ -20,7 +20,8 @@ public class JsonPatchException : Exception
         AffectedObject = jsonPatchError.AffectedObject;
     }
 
-    public JsonPatchException(JsonPatchError jsonPatchError) : this(jsonPatchError, null) { }
+    public JsonPatchException(JsonPatchError jsonPatchError)
+        : this(jsonPatchError, null) { }
 
     public JsonPatchException(string message, Exception innerException)
         : base(message, innerException) { }

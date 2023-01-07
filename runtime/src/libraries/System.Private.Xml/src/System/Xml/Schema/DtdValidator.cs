@@ -39,7 +39,8 @@ namespace System.Xml.Schema
             XmlValidatingReaderImpl reader,
             IValidationEventHandling eventHandling,
             bool processIdentityConstraints
-        ) : base(reader, null, eventHandling)
+        )
+            : base(reader, null, eventHandling)
         {
             _processIdentityConstraints = processIdentityConstraints;
             Init();

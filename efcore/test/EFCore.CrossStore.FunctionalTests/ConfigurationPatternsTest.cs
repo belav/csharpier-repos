@@ -60,7 +60,8 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
     {
         private readonly DbContextOptions<MultipleContext1> _options;
 
-        public MultipleContext1(DbContextOptions<MultipleContext1> options) : base(options)
+        public MultipleContext1(DbContextOptions<MultipleContext1> options)
+            : base(options)
         {
             _options = options;
         }
@@ -82,7 +83,8 @@ public class ConfigurationPatternsTest : IClassFixture<CrossStoreFixture>, IDisp
     {
         private readonly DbContextOptions<MultipleContext2> _options;
 
-        public MultipleContext2(DbContextOptions<MultipleContext2> options) : base(options)
+        public MultipleContext2(DbContextOptions<MultipleContext2> options)
+            : base(options)
         {
             _options = options;
         }

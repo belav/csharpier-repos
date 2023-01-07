@@ -24,7 +24,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilUnary(QilNodeType nodeType, QilNode child) : base(nodeType)
+        public QilUnary(QilNodeType nodeType, QilNode child)
+            : base(nodeType)
         {
             _child = child;
         }

@@ -17,7 +17,8 @@ public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvi
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public BoolToZeroOneConverter() : this(null) { }
+    public BoolToZeroOneConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter preserves order.

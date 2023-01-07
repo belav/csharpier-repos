@@ -47,7 +47,8 @@ namespace System.Web.Http
             "CA2000:Dispose objects before losing scope",
             Justification = "The route collection is disposed as part of this class."
         )]
-        public HttpConfiguration() : this(new HttpRouteCollection(String.Empty)) { }
+        public HttpConfiguration()
+            : this(new HttpRouteCollection(String.Empty)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpConfiguration"/> class.

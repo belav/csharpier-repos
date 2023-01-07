@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class FieldMappingSqlServerTest
     : FieldMappingTestBase<FieldMappingSqlServerTest.FieldMappingSqlServerFixture>
 {
-    public FieldMappingSqlServerTest(FieldMappingSqlServerFixture fixture) : base(fixture) { }
+    public FieldMappingSqlServerTest(FieldMappingSqlServerFixture fixture)
+        : base(fixture) { }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

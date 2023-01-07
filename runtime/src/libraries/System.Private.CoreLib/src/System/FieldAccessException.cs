@@ -18,17 +18,20 @@ namespace System
     )]
     public class FieldAccessException : MemberAccessException
     {
-        public FieldAccessException() : base(SR.Arg_FieldAccessException)
+        public FieldAccessException()
+            : base(SR.Arg_FieldAccessException)
         {
             HResult = HResults.COR_E_FIELDACCESS;
         }
 
-        public FieldAccessException(string? message) : base(message)
+        public FieldAccessException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_FIELDACCESS;
         }
 
-        public FieldAccessException(string? message, Exception? inner) : base(message, inner)
+        public FieldAccessException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_FIELDACCESS;
         }

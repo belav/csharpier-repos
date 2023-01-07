@@ -33,7 +33,8 @@ namespace System.Text.Json
 #endif
         }
 
-        public PooledByteBufferWriter(int initialCapacity) : this()
+        public PooledByteBufferWriter(int initialCapacity)
+            : this()
         {
             Debug.Assert(initialCapacity > 0);
 

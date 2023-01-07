@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MoveToNamespace
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpMoveToNamespaceService(
             [Import(AllowDefault = true)] IMoveToNamespaceOptionsService optionsService
-        ) : base(optionsService) { }
+        )
+            : base(optionsService) { }
 
         protected override string GetNamespaceName(SyntaxNode container) =>
             container switch

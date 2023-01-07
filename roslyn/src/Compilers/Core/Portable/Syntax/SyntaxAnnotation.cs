@@ -40,12 +40,14 @@ namespace Microsoft.CodeAnalysis
             _id = System.Threading.Interlocked.Increment(ref s_nextId);
         }
 
-        public SyntaxAnnotation(string? kind) : this()
+        public SyntaxAnnotation(string? kind)
+            : this()
         {
             this.Kind = kind;
         }
 
-        public SyntaxAnnotation(string? kind, string? data) : this(kind)
+        public SyntaxAnnotation(string? kind, string? data)
+            : this(kind)
         {
             this.Data = data;
         }

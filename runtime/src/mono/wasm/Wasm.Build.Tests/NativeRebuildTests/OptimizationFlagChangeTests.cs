@@ -18,7 +18,8 @@ public class OptimizationFlagChangeTests : NativeRebuildTestsBase
     public OptimizationFlagChangeTests(
         ITestOutputHelper output,
         SharedBuildPerTestClassFixture buildContext
-    ) : base(output, buildContext) { }
+    )
+        : base(output, buildContext) { }
 
     public static IEnumerable<object?[]> FlagsOnlyChangeData(bool aot) =>
         ConfigWithAOTData(aot, config: "Release")

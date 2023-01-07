@@ -22,7 +22,8 @@ public class CosmosQueryTranslationPreprocessor : QueryTranslationPreprocessor
     public CosmosQueryTranslationPreprocessor(
         QueryTranslationPreprocessorDependencies dependencies,
         CosmosQueryCompilationContext cosmosQueryCompilationContext
-    ) : base(dependencies, cosmosQueryCompilationContext)
+    )
+        : base(dependencies, cosmosQueryCompilationContext)
     {
         _queryCompilationContext = cosmosQueryCompilationContext;
     }

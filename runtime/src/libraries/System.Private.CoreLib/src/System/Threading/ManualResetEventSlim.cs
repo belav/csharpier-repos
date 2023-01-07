@@ -174,7 +174,8 @@ namespace System.Threading
         /// Initializes a new instance of the <see cref="ManualResetEventSlim"/>
         /// class with an initial state of nonsignaled.
         /// </summary>
-        public ManualResetEventSlim() : this(false) { }
+        public ManualResetEventSlim()
+            : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualResetEventSlim"/>

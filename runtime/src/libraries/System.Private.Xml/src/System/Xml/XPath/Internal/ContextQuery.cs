@@ -14,7 +14,8 @@ namespace MS.Internal.Xml.XPath
             this.count = 0;
         }
 
-        protected ContextQuery(ContextQuery other) : base(other)
+        protected ContextQuery(ContextQuery other)
+            : base(other)
         {
             this.contextNode = other.contextNode; // Don't need to clone here
         }

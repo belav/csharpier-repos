@@ -26,7 +26,8 @@ public class MinBatchSizeEventData : BatchEventData
         IEnumerable<IUpdateEntry> entries,
         int commandCount,
         int minBatchSize
-    ) : base(eventDefinition, messageGenerator, entries, commandCount)
+    )
+        : base(eventDefinition, messageGenerator, entries, commandCount)
     {
         MinBatchSize = minBatchSize;
     }

@@ -6,7 +6,8 @@ namespace System
     public partial class BadImageFormatException
     {
         // Do not delete: this is invoked from native code.
-        private BadImageFormatException(string? fileName, int hResult) : base(null)
+        private BadImageFormatException(string? fileName, int hResult)
+            : base(null)
         {
             HResult = hResult;
             _fileName = fileName;

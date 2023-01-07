@@ -56,7 +56,8 @@ public sealed partial class RedirectToRouteHttpResult : IResult
         object? routeValues,
         bool permanent,
         string? fragment
-    ) : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
+    )
+        : this(routeName, routeValues, permanent, preserveMethod: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToRouteHttpResult"/> with the values

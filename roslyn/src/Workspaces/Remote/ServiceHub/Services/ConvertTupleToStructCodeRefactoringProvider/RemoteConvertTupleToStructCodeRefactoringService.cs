@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteConvertTupleToStructCodeRefactoringService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteConvertTupleToStructCodeRefactoringService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

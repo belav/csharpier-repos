@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             int fileHeaderStart,
             int fileHeaderEnd,
             int commentPrefixLength
-        ) : this(fileHeaderStart, isMissing: false)
+        )
+            : this(fileHeaderStart, isMissing: false)
         {
             // Currently unused
             _ = fileHeaderEnd;

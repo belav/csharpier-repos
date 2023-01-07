@@ -816,7 +816,8 @@ public class SqlServerDatabaseCreatorTest
     {
         private readonly string _connectionString;
 
-        public BloggingContext(SqlServerTestStore testStore) : this(testStore.ConnectionString) { }
+        public BloggingContext(SqlServerTestStore testStore)
+            : this(testStore.ConnectionString) { }
 
         public BloggingContext(string connectionString)
         {
@@ -862,7 +863,8 @@ public class SqlServerDatabaseCreatorTest
             RelationalDatabaseCreatorDependencies dependencies,
             ISqlServerConnection connection,
             IRawSqlCommandBuilder rawSqlCommandBuilder
-        ) : base(dependencies, connection, rawSqlCommandBuilder) { }
+        )
+            : base(dependencies, connection, rawSqlCommandBuilder) { }
 
         public bool HasTablesBase() => HasTables();
 

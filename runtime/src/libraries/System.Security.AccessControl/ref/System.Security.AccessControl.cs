@@ -931,14 +931,16 @@ namespace System.Security.AccessControl
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             System.Runtime.InteropServices.SafeHandle? handle,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -947,21 +949,24 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             string? name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -970,7 +975,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected sealed override void Persist(
             System.Runtime.InteropServices.SafeHandle handle,
@@ -1318,14 +1324,16 @@ namespace System.Security.AccessControl
         protected ObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         protected ObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             System.Runtime.InteropServices.SafeHandle? safeHandle,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -1334,14 +1342,16 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         protected ObjectSecurity(
             bool isContainer,
             System.Security.AccessControl.ResourceType resourceType,
             string? name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         protected ObjectSecurity(
             bool isContainer,
@@ -1350,7 +1360,8 @@ namespace System.Security.AccessControl
             System.Security.AccessControl.AccessControlSections includeSections,
             System.Security.AccessControl.NativeObjectSecurity.ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         public override System.Type AccessRightType
         {

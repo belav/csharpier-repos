@@ -19,7 +19,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         private AggregateType _ats;
 
-        public NullableType(CType underlyingType) : base(TypeKind.TK_NullableType)
+        public NullableType(CType underlyingType)
+            : base(TypeKind.TK_NullableType)
         {
             UnderlyingType = underlyingType;
         }

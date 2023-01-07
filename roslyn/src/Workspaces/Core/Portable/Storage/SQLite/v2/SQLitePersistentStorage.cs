@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             string databaseFile,
             IAsynchronousOperationListener asyncListener,
             IPersistentStorageFaultInjector? faultInjector
-        ) : base(workingFolderPath, solutionFilePath, databaseFile)
+        )
+            : base(workingFolderPath, solutionFilePath, databaseFile)
         {
             _connectionPoolService = connectionPoolService;
 

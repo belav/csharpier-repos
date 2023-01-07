@@ -12,9 +12,11 @@ namespace System.Net.Http
 {
     public class MockMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
     {
-        public MockMultipartFormDataStreamProvider() : base(Path.GetTempPath()) { }
+        public MockMultipartFormDataStreamProvider()
+            : base(Path.GetTempPath()) { }
 
-        public MockMultipartFormDataStreamProvider(string rootPath) : base(rootPath) { }
+        public MockMultipartFormDataStreamProvider(string rootPath)
+            : base(rootPath) { }
 
         public MockMultipartFormDataStreamProvider(string rootPath, int bufferSize)
             : base(rootPath, bufferSize) { }
@@ -215,7 +217,8 @@ namespace System.Net.Http
 
         private class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
         {
-            public CustomMultipartFormDataStreamProvider(string rootPath) : base(rootPath) { }
+            public CustomMultipartFormDataStreamProvider(string rootPath)
+                : base(rootPath) { }
 
             public CustomMultipartFormDataStreamProvider(string rootPath, int bufferSize)
                 : base(rootPath, bufferSize) { }

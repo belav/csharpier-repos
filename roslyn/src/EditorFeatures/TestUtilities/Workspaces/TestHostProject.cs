@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             CompilationOptions compilationOptions,
             ParseOptions parseOptions,
             params MetadataReference[] references
-        ) : this(languageServices, compilationOptions, parseOptions, "Test", references) { }
+        )
+            : this(languageServices, compilationOptions, parseOptions, "Test", references) { }
 
         internal TestHostProject(
             HostLanguageServices languageServices,

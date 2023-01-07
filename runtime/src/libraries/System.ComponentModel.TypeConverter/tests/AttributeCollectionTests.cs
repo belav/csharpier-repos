@@ -641,9 +641,11 @@ namespace System.ComponentModel.Tests
 
         public class SubAttributeCollection : AttributeCollection
         {
-            public SubAttributeCollection() : base() { }
+            public SubAttributeCollection()
+                : base() { }
 
-            public SubAttributeCollection(params Attribute[] attributes) : base(attributes) { }
+            public SubAttributeCollection(params Attribute[] attributes)
+                : base(attributes) { }
 
             public new Attribute[] Attributes => base.Attributes;
 

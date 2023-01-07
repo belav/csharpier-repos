@@ -29,7 +29,8 @@ public class HtmlFormattableString : IHtmlContent
     public HtmlFormattableString(
         [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
         params object?[] args
-    ) : this(formatProvider: null, format: format, args: args) { }
+    )
+        : this(formatProvider: null, format: format, args: args) { }
 
     /// <summary>
     /// Creates a new <see cref="HtmlFormattableString"/> with the given <paramref name="formatProvider"/>,

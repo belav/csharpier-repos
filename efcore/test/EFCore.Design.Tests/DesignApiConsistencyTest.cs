@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class DesignApiConsistencyTest
     : ApiConsistencyTestBase<DesignApiConsistencyTest.DesignApiConsistencyFixture>
 {
-    public DesignApiConsistencyTest(DesignApiConsistencyFixture fixture) : base(fixture) { }
+    public DesignApiConsistencyTest(DesignApiConsistencyFixture fixture)
+        : base(fixture) { }
 
     protected override void AddServices(ServiceCollection serviceCollection) { }
 

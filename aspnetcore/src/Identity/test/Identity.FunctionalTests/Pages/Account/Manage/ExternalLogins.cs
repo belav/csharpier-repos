@@ -12,7 +12,8 @@ public class ExternalLogins : DefaultUIPage
         HttpClient client,
         IHtmlDocument externalLoginDocument,
         DefaultUIContext context
-    ) : base(client, externalLoginDocument, context)
+    )
+        : base(client, externalLoginDocument, context)
     {
         if (context.SocialLoginProvider != null && context.PasswordLoginEnabled)
         {

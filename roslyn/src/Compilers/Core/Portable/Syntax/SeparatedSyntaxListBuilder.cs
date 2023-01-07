@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Syntax
         private readonly SyntaxListBuilder _builder;
         private bool _expectedSeparator;
 
-        public SeparatedSyntaxListBuilder(int size) : this(new SyntaxListBuilder(size)) { }
+        public SeparatedSyntaxListBuilder(int size)
+            : this(new SyntaxListBuilder(size)) { }
 
         public static SeparatedSyntaxListBuilder<TNode> Create()
         {

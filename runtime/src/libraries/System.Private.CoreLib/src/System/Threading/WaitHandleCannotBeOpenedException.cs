@@ -17,7 +17,8 @@ namespace System.Threading
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
 
-        public WaitHandleCannotBeOpenedException(string? message) : base(message)
+        public WaitHandleCannotBeOpenedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
@@ -31,6 +32,7 @@ namespace System.Threading
         protected WaitHandleCannotBeOpenedException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 }

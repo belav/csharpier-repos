@@ -94,7 +94,8 @@ public class GoTPerson
 
 public class GoTContext : DbContext
 {
-    public GoTContext(DbContextOptions options) : base(options) { }
+    public GoTContext(DbContextOptions options)
+        : base(options) { }
 
     public DbSet<GoTPerson> People { get; set; }
     public Func<ModelBuilder, int> ConfigAction { get; set; }

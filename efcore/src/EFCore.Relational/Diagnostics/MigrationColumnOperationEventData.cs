@@ -18,7 +18,8 @@ public class MigrationColumnOperationEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         ColumnOperation columnOperation
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         ColumnOperation = columnOperation;
     }

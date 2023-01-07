@@ -20,5 +20,6 @@ public sealed class BindRequiredAttribute : BindingBehaviorAttribute
     /// <summary>
     /// Initializes a new <see cref="BindRequiredAttribute"/> instance.
     /// </summary>
-    public BindRequiredAttribute() : base(BindingBehavior.Required) { }
+    public BindRequiredAttribute()
+        : base(BindingBehavior.Required) { }
 }

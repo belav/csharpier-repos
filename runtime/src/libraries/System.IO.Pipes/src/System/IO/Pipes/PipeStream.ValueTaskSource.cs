@@ -184,8 +184,8 @@ namespace System.IO.Pipes
         {
             internal readonly bool _isWrite;
 
-            internal ReadWriteValueTaskSource(PipeStream stream, bool isWrite) : base(stream) =>
-                _isWrite = isWrite;
+            internal ReadWriteValueTaskSource(PipeStream stream, bool isWrite)
+                : base(stream) => _isWrite = isWrite;
 
             private protected override void CompleteCore(uint errorCode, uint numBytes)
             {
@@ -237,7 +237,8 @@ namespace System.IO.Pipes
 
         internal sealed class ConnectionValueTaskSource : PipeValueTaskSource
         {
-            internal ConnectionValueTaskSource(NamedPipeServerStream server) : base(server) { }
+            internal ConnectionValueTaskSource(NamedPipeServerStream server)
+                : base(server) { }
 
             private protected override void CompleteCore(uint errorCode, uint numBytes)
             {

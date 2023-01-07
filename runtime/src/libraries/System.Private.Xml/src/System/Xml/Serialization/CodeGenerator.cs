@@ -1630,7 +1630,8 @@ namespace System.Xml.Serialization
             _locals = new Dictionary<string, LocalBuilder>();
         }
 
-        public LocalScope(LocalScope? parent) : this()
+        public LocalScope(LocalScope? parent)
+            : this()
         {
             this.parent = parent;
         }
@@ -1727,7 +1728,8 @@ namespace System.Xml.Serialization
             Type targetType,
             bool isAddress,
             string reason
-        ) : base()
+        )
+            : base()
         {
             _sourceType = sourceType;
             _targetType = targetType;

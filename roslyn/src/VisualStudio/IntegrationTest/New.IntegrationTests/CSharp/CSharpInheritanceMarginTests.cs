@@ -20,7 +20,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     {
         protected override string LanguageName => LanguageNames.CSharp;
 
-        public CSharpInheritanceMarginTests() : base(nameof(CSharpInheritanceMarginTests)) { }
+        public CSharpInheritanceMarginTests()
+            : base(nameof(CSharpInheritanceMarginTests)) { }
 
         [IdeFact]
         public async Task TestNavigateInSource()

@@ -46,7 +46,8 @@ public abstract class RelationalTypeMappingSource
     protected RelationalTypeMappingSource(
         TypeMappingSourceDependencies dependencies,
         RelationalTypeMappingSourceDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

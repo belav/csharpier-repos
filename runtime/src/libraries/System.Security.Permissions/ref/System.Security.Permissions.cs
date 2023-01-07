@@ -773,7 +773,8 @@ namespace System.Diagnostics
     {
         public PerformanceCounterPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public string CategoryName
         {
@@ -1514,7 +1515,8 @@ namespace System.Net.NetworkInformation
     {
         public NetworkInformationPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public string Access
         {
@@ -1683,7 +1685,8 @@ namespace System.Net.PeerToPeer.Collaboration
     {
         public PeerCollaborationPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -3020,8 +3023,8 @@ namespace System.Security.Permissions
     public sealed partial class HostProtectionAttribute
         : System.Security.Permissions.CodeAccessSecurityAttribute
     {
-        public HostProtectionAttribute() : base(default(System.Security.Permissions.SecurityAction))
-        { }
+        public HostProtectionAttribute()
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public HostProtectionAttribute(System.Security.Permissions.SecurityAction action)
             : base(default(System.Security.Permissions.SecurityAction)) { }
@@ -3189,7 +3192,8 @@ namespace System.Security.Permissions
     {
         public IsolatedStorageFilePermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public override System.Security.IPermission CreatePermission()
         {
@@ -3246,7 +3250,8 @@ namespace System.Security.Permissions
     {
         protected IsolatedStoragePermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public System.Security.Permissions.IsolatedStorageContainment UsageAllowed
         {
@@ -3995,7 +4000,8 @@ namespace System.Security.Permissions
     {
         public PublisherIdentityPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public string CertFile
         {
@@ -4788,7 +4794,8 @@ namespace System.Security.Permissions
     {
         public StrongNameIdentityPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public string Name
         {
@@ -7207,7 +7214,8 @@ namespace System.ServiceProcess
     {
         public ServiceControllerPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public string MachineName
         {
@@ -7371,7 +7379,8 @@ namespace System.Transactions
     {
         public DistributedTransactionPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public new bool Unrestricted
         {

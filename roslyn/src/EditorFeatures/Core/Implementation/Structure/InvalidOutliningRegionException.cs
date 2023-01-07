@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Structure
             ITextSnapshot snapshot,
             Span snapshotSpan,
             Span regionSpan
-        ) : base(GetExceptionMessage(service, snapshotSpan, regionSpan))
+        )
+            : base(GetExceptionMessage(service, snapshotSpan, regionSpan))
         {
             _service = service;
             _snapshot = snapshot;

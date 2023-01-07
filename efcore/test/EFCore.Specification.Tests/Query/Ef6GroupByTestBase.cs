@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : Ef6GroupByTestBase<TFixture>.Ef6GroupByFixtureBase, new()
 {
-    protected Ef6GroupByTestBase(TFixture fixture) : base(fixture) { }
+    protected Ef6GroupByTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1069,7 +1070,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
 
     public class ArubaContext : PoolableDbContext
     {
-        public ArubaContext(DbContextOptions options) : base(options) { }
+        public ArubaContext(DbContextOptions options)
+            : base(options) { }
     }
 
     public class ArubaOwner

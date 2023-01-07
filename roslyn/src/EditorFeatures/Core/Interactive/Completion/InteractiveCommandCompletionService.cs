@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 );
         }
 
-        private InteractiveCommandCompletionService(SolutionServices services) : base(services) { }
+        private InteractiveCommandCompletionService(SolutionServices services)
+            : base(services) { }
 
         public override string Language => InteractiveLanguageNames.InteractiveCommand;
 

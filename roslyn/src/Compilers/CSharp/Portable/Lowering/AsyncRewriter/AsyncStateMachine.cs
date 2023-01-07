@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol asyncMethod,
             int asyncMethodOrdinal,
             TypeKind typeKind
-        ) : base(variableAllocatorOpt, compilationState, asyncMethod, asyncMethodOrdinal)
+        )
+            : base(variableAllocatorOpt, compilationState, asyncMethod, asyncMethodOrdinal)
         {
             _typeKind = typeKind;
             CSharpCompilation compilation = asyncMethod.DeclaringCompilation;

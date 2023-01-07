@@ -125,7 +125,8 @@ namespace System.Buffers
         private sealed class AllocHGlobalHandle : SafeHandle
         {
             // Called by P/Invoke when returning SafeHandles
-            private AllocHGlobalHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+            private AllocHGlobalHandle()
+                : base(IntPtr.Zero, ownsHandle: true) { }
 
             internal static AllocHGlobalHandle Allocate(nint byteLength)
             {

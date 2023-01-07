@@ -566,7 +566,8 @@ namespace System.Reflection.Emit
     //--------------------------------------------------------------------------------------
     internal sealed class PunkSafeHandle : SafeHandle
     {
-        public PunkSafeHandle() : base((IntPtr)0, true) { }
+        public PunkSafeHandle()
+            : base((IntPtr)0, true) { }
 
         protected override bool ReleaseHandle()
         {

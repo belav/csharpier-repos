@@ -21,7 +21,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CXsltSettings(ITestOutputHelper output) : base(output)
+        public CXsltSettings(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

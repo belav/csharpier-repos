@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 Diagnostic diagnostic,
                 AbstractSuppressionCodeFixProvider fixer,
                 CodeActionOptionsProvider fallbackOptions
-            ) : base(fixer, project)
+            )
+                : base(fixer, project)
             {
                 _targetSymbol = targetSymbol;
                 _suppressMessageAttribute = suppressMessageAttribute;

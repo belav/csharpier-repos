@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             SyntaxTree compilationUnit,
             TextSpan? filterSpan = null
-        ) : base(compilation)
+        )
+            : base(compilation)
         {
             Debug.Assert(compilation.ContainsSyntaxTree(compilationUnit));
 

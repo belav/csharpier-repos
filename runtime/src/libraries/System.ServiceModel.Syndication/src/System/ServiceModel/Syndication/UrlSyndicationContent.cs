@@ -11,7 +11,8 @@ namespace System.ServiceModel.Syndication
     {
         private readonly string _mediaType;
 
-        public UrlSyndicationContent(Uri url, string mediaType) : base()
+        public UrlSyndicationContent(Uri url, string mediaType)
+            : base()
         {
             if (url is null)
             {
@@ -22,7 +23,8 @@ namespace System.ServiceModel.Syndication
             _mediaType = mediaType;
         }
 
-        protected UrlSyndicationContent(UrlSyndicationContent source) : base(source)
+        protected UrlSyndicationContent(UrlSyndicationContent source)
+            : base(source)
         {
             Debug.Assert(source != null, "The base constructor already checks if source is valid.");
             Url = source.Url;

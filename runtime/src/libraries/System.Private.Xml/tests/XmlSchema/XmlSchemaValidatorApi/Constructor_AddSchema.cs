@@ -14,7 +14,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCConstructor(ITestOutputHelper output) : base(output)
+        public TCConstructor(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -228,7 +229,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCAddSchema(ITestOutputHelper output) : base(output)
+        public TCAddSchema(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

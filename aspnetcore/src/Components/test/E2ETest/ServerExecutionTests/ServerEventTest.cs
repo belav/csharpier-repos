@@ -15,7 +15,8 @@ public class ServerEventTest : EventTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     [Fact]
     public override void EventDuringBatchRendering_CanTriggerDOMEvents()

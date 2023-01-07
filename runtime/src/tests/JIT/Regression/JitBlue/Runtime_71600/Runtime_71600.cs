@@ -14,7 +14,8 @@ public struct S0
     public long F0;
     public long F1;
 
-    public S0(long f1) : this()
+    public S0(long f1)
+        : this()
     {
         F1 = f1;
     }
@@ -26,7 +27,8 @@ public struct S1
     public ushort F2;
     public S0 F4;
 
-    public S1(ulong f5) : this() { }
+    public S1(ulong f5)
+        : this() { }
 
     public long M82(ref short[] arg0)
     {

@@ -59,7 +59,8 @@ namespace System.Net
         protected FileWebResponse(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }

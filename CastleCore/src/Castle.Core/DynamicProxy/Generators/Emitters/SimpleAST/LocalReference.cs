@@ -23,7 +23,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
     {
         private LocalBuilder localbuilder;
 
-        public LocalReference(Type type) : base(type) { }
+        public LocalReference(Type type)
+            : base(type) { }
 
         public override void Generate(ILGenerator gen)
         {

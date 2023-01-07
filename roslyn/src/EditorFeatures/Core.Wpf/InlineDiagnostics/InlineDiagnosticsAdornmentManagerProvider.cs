@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             IClassificationTypeRegistryService classificationTypeRegistryService,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider)
+        )
+            : base(threadingContext, tagAggregatorFactoryService, globalOptions, listenerProvider)
         {
             _classificationFormatMapService = classificationFormatMapService;
             _classificationTypeRegistryService = classificationTypeRegistryService;

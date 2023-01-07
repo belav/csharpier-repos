@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Emit
             EmitBaseline? baseline,
             ImmutableArray<MethodDefinitionHandle> updatedMethods,
             ImmutableArray<TypeDefinitionHandle> changedTypes
-        ) : base(success, diagnostics)
+        )
+            : base(success, diagnostics)
         {
             Baseline = baseline;
             UpdatedMethods = updatedMethods;

@@ -42,7 +42,8 @@ public class HubInvocationContext
         IServiceProvider serviceProvider,
         Hub hub,
         object?[] hubMethodArguments
-    ) : this(context, serviceProvider, hub, objectMethodExecutor.MethodInfo, hubMethodArguments)
+    )
+        : this(context, serviceProvider, hub, objectMethodExecutor.MethodInfo, hubMethodArguments)
     {
         ObjectMethodExecutor = objectMethodExecutor;
     }

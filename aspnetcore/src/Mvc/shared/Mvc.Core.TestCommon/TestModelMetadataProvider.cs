@@ -110,7 +110,8 @@ public class TestModelMetadataProvider : DefaultModelMetadataProvider
 
     private readonly TestModelMetadataDetailsProvider _detailsProvider;
 
-    public TestModelMetadataProvider() : this(new TestModelMetadataDetailsProvider()) { }
+    public TestModelMetadataProvider()
+        : this(new TestModelMetadataDetailsProvider()) { }
 
     private TestModelMetadataProvider(TestModelMetadataDetailsProvider detailsProvider)
         : base(

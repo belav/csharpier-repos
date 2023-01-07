@@ -20,13 +20,15 @@ namespace System.Speech.Recognition.SrgsGrammar
             _elements = new SrgsElementList();
         }
 
-        public SrgsRule(string id) : this()
+        public SrgsRule(string id)
+            : this()
         {
             XmlParser.ValidateRuleId(id);
             Id = id;
         }
 
-        public SrgsRule(string id, params SrgsElement[] elements) : this()
+        public SrgsRule(string id, params SrgsElement[] elements)
+            : this()
         {
             Helpers.ThrowIfNull(elements, nameof(elements));
 

@@ -24,7 +24,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilLiteral(QilNodeType nodeType, object? value) : base(nodeType)
+        public QilLiteral(QilNodeType nodeType, object? value)
+            : base(nodeType)
         {
             Value = value;
         }

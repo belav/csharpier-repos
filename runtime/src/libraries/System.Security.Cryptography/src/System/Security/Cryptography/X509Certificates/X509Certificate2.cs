@@ -58,25 +58,29 @@ namespace System.Security.Cryptography.X509Certificates
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2() : base() { }
+        public X509Certificate2()
+            : base() { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(byte[] rawData) : base(rawData) { }
+        public X509Certificate2(byte[] rawData)
+            : base(rawData) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(byte[] rawData, string? password) : base(rawData, password) { }
+        public X509Certificate2(byte[] rawData, string? password)
+            : base(rawData, password) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
-        public X509Certificate2(byte[] rawData, SecureString? password) : base(rawData, password)
-        { }
+        public X509Certificate2(byte[] rawData, SecureString? password)
+            : base(rawData, password) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(
             byte[] rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(rawData, password, keyStorageFlags) { }
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
@@ -84,7 +88,8 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] rawData,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(rawData, password, keyStorageFlags) { }
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Certificate2"/> class from certificate data.
@@ -94,7 +99,8 @@ namespace System.Security.Cryptography.X509Certificates
         /// </param>
         /// <exception cref="CryptographicException">An error with the certificate occurs.</exception>
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(ReadOnlySpan<byte> rawData) : base(rawData) { }
+        public X509Certificate2(ReadOnlySpan<byte> rawData)
+            : base(rawData) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Certificate2"/> class from certificate data,
@@ -115,30 +121,36 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) : base(rawData, password, keyStorageFlags) { }
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(IntPtr handle) : base(handle) { }
+        public X509Certificate2(IntPtr handle)
+            : base(handle) { }
 
-        internal X509Certificate2(ICertificatePal pal) : base(pal) { }
+        internal X509Certificate2(ICertificatePal pal)
+            : base(pal) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(string fileName) : base(fileName) { }
+        public X509Certificate2(string fileName)
+            : base(fileName) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(string fileName, string? password) : base(fileName, password) { }
+        public X509Certificate2(string fileName, string? password)
+            : base(fileName, password) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
-        public X509Certificate2(string fileName, SecureString? password) : base(fileName, password)
-        { }
+        public X509Certificate2(string fileName, SecureString? password)
+            : base(fileName, password) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(
             string fileName,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(fileName, password, keyStorageFlags) { }
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         [CLSCompliantAttribute(false)]
@@ -146,17 +158,20 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(fileName, password, keyStorageFlags) { }
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
         public X509Certificate2(
             string fileName,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) : base(fileName, password, keyStorageFlags) { }
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate2(X509Certificate certificate) : base(certificate) { }
+        public X509Certificate2(X509Certificate certificate)
+            : base(certificate) { }
 
         protected X509Certificate2(SerializationInfo info, StreamingContext context)
             : base(info, context)

@@ -18,7 +18,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal
         public CSharpDbContextGeneratorTest(
             ModelCodeGeneratorTestFixture fixture,
             ITestOutputHelper output
-        ) : base(fixture, output) { }
+        )
+            : base(fixture, output) { }
 
         [ConditionalFact]
         public Task Empty_model() =>
@@ -1637,7 +1638,8 @@ public partial class TestDbContext : DbContext
         {
             public TestModelAnnotationProvider(
                 RelationalAnnotationProviderDependencies dependencies
-            ) : base(dependencies) { }
+            )
+                : base(dependencies) { }
 
             public override IEnumerable<IAnnotation> For(IRelationalModel database, bool designTime)
             {
@@ -1663,7 +1665,8 @@ public partial class TestDbContext : DbContext
 
             public TestModelAnnotationCodeGenerator(
                 AnnotationCodeGeneratorDependencies dependencies
-            ) : base(dependencies) { }
+            )
+                : base(dependencies) { }
 
             protected override MethodCallCodeFragment GenerateFluentApi(
                 IModel model,

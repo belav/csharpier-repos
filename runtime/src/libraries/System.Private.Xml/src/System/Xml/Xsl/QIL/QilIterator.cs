@@ -20,7 +20,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct an iterator
         /// </summary>
-        public QilIterator(QilNodeType nodeType, QilNode? binding) : base(nodeType)
+        public QilIterator(QilNodeType nodeType, QilNode? binding)
+            : base(nodeType)
         {
             Binding = binding;
         }

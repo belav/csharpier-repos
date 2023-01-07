@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             ITextBuffer subjectBuffer,
             string fieldName,
             string fullyQualifiedName
-        ) : base(snippetExpansionClient, subjectBuffer)
+        )
+            : base(snippetExpansionClient, subjectBuffer)
         {
             _fieldName = fieldName;
             _fullyQualifiedName = fullyQualifiedName;

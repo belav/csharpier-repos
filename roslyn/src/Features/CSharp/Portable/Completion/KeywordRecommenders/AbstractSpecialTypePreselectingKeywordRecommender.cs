@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind keywordKind,
             bool isValidInPreprocessorContext = false,
             bool shouldFormatOnCommit = false
-        ) : base(keywordKind, isValidInPreprocessorContext, shouldFormatOnCommit) { }
+        )
+            : base(keywordKind, isValidInPreprocessorContext, shouldFormatOnCommit) { }
 
         protected abstract SpecialType SpecialType { get; }
         protected abstract bool IsValidContextWorker(

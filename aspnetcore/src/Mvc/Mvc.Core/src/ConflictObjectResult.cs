@@ -19,7 +19,8 @@ public class ConflictObjectResult : ObjectResult
     /// Creates a new <see cref="ConflictObjectResult"/> instance.
     /// </summary>
     /// <param name="error">Contains the errors to be returned to the client.</param>
-    public ConflictObjectResult([ActionResultObjectValue] object? error) : base(error)
+    public ConflictObjectResult([ActionResultObjectValue] object? error)
+        : base(error)
     {
         StatusCode = DefaultStatusCode;
     }

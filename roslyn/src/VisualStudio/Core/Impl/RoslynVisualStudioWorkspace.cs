@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             IThreadingContext threadingContext,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter,
             [Import(typeof(SVsServiceProvider))] IAsyncServiceProvider asyncServiceProvider
-        ) : base(exportProvider, asyncServiceProvider)
+        )
+            : base(exportProvider, asyncServiceProvider)
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;

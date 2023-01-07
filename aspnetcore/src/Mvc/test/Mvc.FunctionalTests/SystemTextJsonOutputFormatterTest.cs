@@ -13,7 +13,8 @@ public class SystemTextJsonOutputFormatterTest
 {
     public SystemTextJsonOutputFormatterTest(
         MvcTestFixture<FormatterWebSite.StartupWithJsonFormatter> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     [Fact]
     public override Task SerializableErrorIsReturnedInExpectedFormat() =>

@@ -26,13 +26,15 @@ namespace System.IO.Tests
 
         private class MyFileStream : FileStream
         {
-            public MyFileStream(string path, FileMode mode) : base(path, mode) { }
+            public MyFileStream(string path, FileMode mode)
+                : base(path, mode) { }
 
             public MyFileStream(
                 SafeFileHandle handle,
                 FileAccess access,
                 Action<bool> disposeMethod
-            ) : base(handle, access)
+            )
+                : base(handle, access)
             {
                 DisposeMethod = disposeMethod;
             }
@@ -270,14 +272,16 @@ namespace System.IO.Tests
                 FileShare share,
                 int bufferSize,
                 FileOptions options
-            ) : base(path, mode, access, share, bufferSize, options) { }
+            )
+                : base(path, mode, access, share, bufferSize, options) { }
 
             public DerivedFileStreamWithFinalizer(
                 SafeFileHandle handle,
                 FileAccess access,
                 int bufferSize,
                 bool isAsync
-            ) : base(handle, access, bufferSize, isAsync) { }
+            )
+                : base(handle, access, bufferSize, isAsync) { }
 
             public DerivedFileStreamWithFinalizer(IntPtr handle, FileAccess access, bool ownsHandle)
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -314,14 +318,16 @@ namespace System.IO.Tests
                 FileShare share,
                 int bufferSize,
                 FileOptions options
-            ) : base(path, mode, access, share, bufferSize, options) { }
+            )
+                : base(path, mode, access, share, bufferSize, options) { }
 
             public DerivedFileStreamWithoutFinalizer(
                 SafeFileHandle handle,
                 FileAccess access,
                 int bufferSize,
                 bool isAsync
-            ) : base(handle, access, bufferSize, isAsync) { }
+            )
+                : base(handle, access, bufferSize, isAsync) { }
 
             public DerivedFileStreamWithoutFinalizer(
                 IntPtr handle,
@@ -526,7 +532,8 @@ namespace System.IO.Tests
                 FileShare share,
                 int bufferSize,
                 FileOptions options
-            ) : base(path, mode, access, share, bufferSize, options) { }
+            )
+                : base(path, mode, access, share, bufferSize, options) { }
         }
 
         public static IEnumerable<object[]> GetFileStreamDisposeSuppressesStrategyFinalizationArgs()

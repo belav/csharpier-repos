@@ -11,7 +11,8 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given event
     internal class ProjectingEventInfo : DelegatingEventInfo, IProjectable
     {
-        public ProjectingEventInfo(EventInfo @event, Projector projector) : base(@event)
+        public ProjectingEventInfo(EventInfo @event, Projector projector)
+            : base(@event)
         {
             Debug.Assert(null != projector);
 

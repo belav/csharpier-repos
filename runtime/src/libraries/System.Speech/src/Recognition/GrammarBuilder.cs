@@ -24,37 +24,44 @@ namespace System.Speech.Recognition
             _grammarBuilder = new InternalGrammarBuilder();
         }
 
-        public GrammarBuilder(string phrase) : this()
+        public GrammarBuilder(string phrase)
+            : this()
         {
             Append(phrase);
         }
 
-        public GrammarBuilder(string phrase, SubsetMatchingMode subsetMatchingCriteria) : this()
+        public GrammarBuilder(string phrase, SubsetMatchingMode subsetMatchingCriteria)
+            : this()
         {
             Append(phrase, subsetMatchingCriteria);
         }
 
-        public GrammarBuilder(string phrase, int minRepeat, int maxRepeat) : this()
+        public GrammarBuilder(string phrase, int minRepeat, int maxRepeat)
+            : this()
         {
             Append(phrase, minRepeat, maxRepeat);
         }
 
-        public GrammarBuilder(GrammarBuilder builder, int minRepeat, int maxRepeat) : this()
+        public GrammarBuilder(GrammarBuilder builder, int minRepeat, int maxRepeat)
+            : this()
         {
             Append(builder, minRepeat, maxRepeat);
         }
 
-        public GrammarBuilder(Choices alternateChoices) : this()
+        public GrammarBuilder(Choices alternateChoices)
+            : this()
         {
             Append(alternateChoices);
         }
 
-        public GrammarBuilder(SemanticResultKey key) : this()
+        public GrammarBuilder(SemanticResultKey key)
+            : this()
         {
             Append(key);
         }
 
-        public GrammarBuilder(SemanticResultValue value) : this()
+        public GrammarBuilder(SemanticResultValue value)
+            : this()
         {
             Append(value);
         }

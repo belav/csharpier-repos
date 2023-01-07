@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
         public FindDerivedSymbolsCommandHandler(
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(streamingPresenters)
+        )
+            : base(streamingPresenters)
         {
             Contract.ThrowIfNull(listenerProvider);
 

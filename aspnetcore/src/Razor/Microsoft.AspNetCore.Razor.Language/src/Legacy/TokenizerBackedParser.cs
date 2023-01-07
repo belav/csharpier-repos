@@ -41,7 +41,8 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase where TTo
     protected TokenizerBackedParser(
         LanguageCharacteristics<TTokenizer> language,
         ParserContext context
-    ) : base(context)
+    )
+        : base(context)
     {
         Language = language;
         LanguageTokenizeString = Language.TokenizeString;

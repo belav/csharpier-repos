@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.StoreValueGenerationModel;
 
 public class StoreValueGenerationContext : PoolableDbContext
 {
-    public StoreValueGenerationContext(DbContextOptions options) : base(options) { }
+    public StoreValueGenerationContext(DbContextOptions options)
+        : base(options) { }
 
     public DbSet<StoreValueGenerationData> WithSomeDatabaseGenerated =>
         Set<StoreValueGenerationData>(nameof(WithSomeDatabaseGenerated));

@@ -19,7 +19,8 @@ namespace System.Net
             Socket socket,
             string host,
             X509CertificateCollection? clientCertificates
-        ) : base(socket)
+        )
+            : base(socket)
         {
             _sslStream = new SslStream(
                 stream,

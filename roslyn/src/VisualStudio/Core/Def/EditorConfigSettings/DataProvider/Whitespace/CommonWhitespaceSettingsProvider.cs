@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Whites
             string fileName,
             OptionUpdater settingsUpdater,
             Workspace workspace
-        ) : base(fileName, settingsUpdater, workspace)
+        )
+            : base(fileName, settingsUpdater, workspace)
         {
             Update();
         }

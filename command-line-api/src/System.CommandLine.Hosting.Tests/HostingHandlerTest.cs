@@ -160,7 +160,8 @@ namespace System.CommandLine.Hosting.Tests
 
         public class MyCommand : Command
         {
-            public MyCommand() : base(name: "mycommand")
+            public MyCommand()
+                : base(name: "mycommand")
             {
                 Options.Add(new Option<int>("--int-option")); // or nameof(Handler.IntOption).ToKebabCase() if you don't like the string literal
             }
@@ -209,7 +210,8 @@ namespace System.CommandLine.Hosting.Tests
 
         public class MyOtherCommand : Command
         {
-            public MyOtherCommand() : base(name: "myothercommand")
+            public MyOtherCommand()
+                : base(name: "myothercommand")
             {
                 Options.Add(new Option<int>("--int-option")); // or nameof(Handler.IntOption).ToKebabCase() if you don't like the string literal
                 Arguments.Add(new Argument<string>("One"));

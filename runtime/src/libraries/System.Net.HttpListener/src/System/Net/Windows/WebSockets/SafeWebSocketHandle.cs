@@ -9,7 +9,8 @@ namespace System.Net.WebSockets
     // but we use a SafeHandle because it provides us the guarantee that WebSocketDeleteHandle will always get called.
     internal sealed class SafeWebSocketHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeWebSocketHandle() : base(true) { }
+        public SafeWebSocketHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

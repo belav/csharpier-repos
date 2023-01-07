@@ -580,7 +580,8 @@ namespace System.Threading
             : Dictionary<IAsyncLocal, object?>,
                 IAsyncLocalValueMap
         {
-            public ManyElementAsyncLocalValueMap(int capacity) : base(capacity) { }
+            public ManyElementAsyncLocalValueMap(int capacity)
+                : base(capacity) { }
 
             public IAsyncLocalValueMap Set(
                 IAsyncLocal key,

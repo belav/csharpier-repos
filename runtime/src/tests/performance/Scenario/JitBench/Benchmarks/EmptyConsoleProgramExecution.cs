@@ -11,7 +11,8 @@ namespace JitBench
     {
         private const string ExecutableName = "console.dll";
 
-        public EmptyConsoleProgramExecution() : base("Empty Console Program")
+        public EmptyConsoleProgramExecution()
+            : base("Empty Console Program")
         {
             ExePath = ExecutableName;
         }

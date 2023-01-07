@@ -285,7 +285,8 @@ namespace System.Net.Mail
             string? deliveryNotify,
             AsyncCallback? callback,
             object? state
-        ) : base(null, state, callback)
+        )
+            : base(null, state, callback)
         {
             _toCollection = toCollection;
             _connection = connection;

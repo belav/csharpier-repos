@@ -159,7 +159,8 @@ namespace System.Web.Http
 
         internal class MockAsyncResult : AsyncResult
         {
-            public MockAsyncResult(AsyncCallback callback, object state) : base(callback, state) { }
+            public MockAsyncResult(AsyncCallback callback, object state)
+                : base(callback, state) { }
 
             public new void Complete(bool completedSynchronously)
             {

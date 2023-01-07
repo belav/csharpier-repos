@@ -317,7 +317,8 @@ namespace Microsoft.Web.Utility
                 double paddingLengthRatio,
                 string baseName,
                 Assembly assembly
-            ) : base(baseName, assembly)
+            )
+                : base(baseName, assembly)
             {
                 _paddingLengthRatio = paddingLengthRatio;
             }

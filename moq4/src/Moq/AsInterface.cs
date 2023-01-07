@@ -10,7 +10,8 @@ namespace Moq
     {
         private Mock owner;
 
-        public AsInterface(Mock owner) : base(true)
+        public AsInterface(Mock owner)
+            : base(true)
         {
             this.owner = owner;
         }

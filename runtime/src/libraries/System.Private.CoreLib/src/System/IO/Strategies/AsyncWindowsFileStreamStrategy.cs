@@ -21,7 +21,8 @@ namespace System.IO.Strategies
             FileOptions options,
             long preallocationSize,
             UnixFileMode? unixCreateMode
-        ) : base(path, mode, access, share, options, preallocationSize, unixCreateMode) { }
+        )
+            : base(path, mode, access, share, options, preallocationSize, unixCreateMode) { }
 
         internal override bool IsAsync => true;
 

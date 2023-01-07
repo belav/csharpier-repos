@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis
             string toolFileVersion,
             Version toolAssemblyVersion,
             CultureInfo culture
-        ) : base(stream, culture)
+        )
+            : base(stream, culture)
         {
             _descriptors = new DiagnosticDescriptorSet();
 

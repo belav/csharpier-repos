@@ -81,7 +81,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             new Dictionary<Guid, ComTypeDesc>();
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal IDispatchComObject(IDispatch rcw) : base(rcw)
+        internal IDispatchComObject(IDispatch rcw)
+            : base(rcw)
         {
             DispatchObject = rcw;
         }

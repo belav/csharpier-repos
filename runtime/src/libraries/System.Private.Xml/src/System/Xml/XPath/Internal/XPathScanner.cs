@@ -22,7 +22,8 @@ namespace MS.Internal.Xml.XPath
         private double _numberValue;
         private bool _canBeFunction;
 
-        public XPathScanner(string xpathExpr) : this()
+        public XPathScanner(string xpathExpr)
+            : this()
         {
             if (xpathExpr == null)
             {

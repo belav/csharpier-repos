@@ -47,7 +47,8 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
     /// Creates a new <see cref="EndpointMetadataCollection"/>.
     /// </summary>
     /// <param name="items">The metadata items.</param>
-    public EndpointMetadataCollection(params object[] items) : this((IEnumerable<object>)items) { }
+    public EndpointMetadataCollection(params object[] items)
+        : this((IEnumerable<object>)items) { }
 
     /// <summary>
     /// Gets the item at <paramref name="index"/>.

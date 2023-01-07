@@ -23,7 +23,8 @@ public class UserInformationReceivedContext : RemoteAuthenticationContext<OpenId
         OpenIdConnectOptions options,
         ClaimsPrincipal principal,
         AuthenticationProperties properties
-    ) : base(context, scheme, options, properties) => Principal = principal;
+    )
+        : base(context, scheme, options, properties) => Principal = principal;
 
     /// <summary>
     /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

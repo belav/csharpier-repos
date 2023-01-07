@@ -71,9 +71,11 @@ namespace System.Xml.Schema
             info.AddValue("version", "2.0");
         }
 
-        public XmlSchemaException() : this(null) { }
+        public XmlSchemaException()
+            : this(null) { }
 
-        public XmlSchemaException(string? message) : this(message, ((Exception?)null), 0, 0)
+        public XmlSchemaException(string? message)
+            : this(message, ((Exception?)null), 0, 0)
         {
 #if DEBUG
             Debug.Assert(
@@ -114,14 +116,16 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : this(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
+        )
+            : this(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
 
         internal XmlSchemaException(
             string? res,
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : this(res, (string?[]?)null, null, sourceUri, lineNumber, linePosition, null) { }
+        )
+            : this(res, (string?[]?)null, null, sourceUri, lineNumber, linePosition, null) { }
 
         internal XmlSchemaException(
             string? res,
@@ -129,7 +133,8 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : this(res, args, null, sourceUri, lineNumber, linePosition, null) { }
+        )
+            : this(res, args, null, sourceUri, lineNumber, linePosition, null) { }
 
         internal XmlSchemaException(string? res, XmlSchemaObject source)
             : this(res, (string?[]?)null, source) { }
@@ -156,7 +161,8 @@ namespace System.Xml.Schema
             int lineNumber,
             int linePosition,
             XmlSchemaObject? source
-        ) : base(CreateMessage(res, args), innerException)
+        )
+            : base(CreateMessage(res, args), innerException)
         {
             HResult = HResults.XmlSchema;
             _res = res;

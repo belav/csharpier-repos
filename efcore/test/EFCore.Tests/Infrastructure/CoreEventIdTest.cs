@@ -146,7 +146,8 @@ public class CoreEventIdTest : EventIdTestBase
             string name,
             ConfigurationSource configurationSource,
             EntityType entityType
-        ) : base(name, null, null, configurationSource)
+        )
+            : base(name, null, null, configurationSource)
         {
             DeclaringType = entityType;
         }

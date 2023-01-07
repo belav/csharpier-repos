@@ -51,7 +51,8 @@ namespace XmlCoreTest.Common
     {
         public class ReaderUtilException : XmlException
         {
-            public ReaderUtilException(string msg) : base(msg) { }
+            public ReaderUtilException(string msg)
+                : base(msg) { }
         }
     }
 

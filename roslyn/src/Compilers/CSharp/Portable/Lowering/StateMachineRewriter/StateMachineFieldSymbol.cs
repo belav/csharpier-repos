@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             LocalSlotDebugInfo slotDebugInfo,
             int slotIndex,
             bool isPublic
-        ) : base(stateMachineType, name, isPublic: isPublic, isReadOnly: false, isStatic: false)
+        )
+            : base(stateMachineType, name, isPublic: isPublic, isReadOnly: false, isStatic: false)
         {
             Debug.Assert((object)type != null);
             Debug.Assert(slotDebugInfo.SynthesizedKind.IsLongLived() == (slotIndex >= 0));

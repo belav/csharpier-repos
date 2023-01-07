@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime.Language
             EmbeddedLanguageInfo info,
             INamedTypeSymbol? dateTimeType,
             INamedTypeSymbol? dateTimeOffsetType
-        ) : base(info, LanguageIdentifiers)
+        )
+            : base(info, LanguageIdentifiers)
         {
             _dateTimeType = dateTimeType;
             _dateTimeOffsetType = dateTimeOffsetType;

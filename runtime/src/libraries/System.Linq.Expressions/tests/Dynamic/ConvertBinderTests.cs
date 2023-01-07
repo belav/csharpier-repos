@@ -13,8 +13,8 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideConvertBinder : ConvertBinder
         {
-            public MinimumOverrideConvertBinder(Type type, bool @explicit) : base(type, @explicit)
-            { }
+            public MinimumOverrideConvertBinder(Type type, bool @explicit)
+                : base(type, @explicit) { }
 
             public override DynamicMetaObject FallbackConvert(
                 DynamicMetaObject target,

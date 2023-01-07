@@ -440,7 +440,8 @@ public class RemoteJSDataStreamTest
             IOptions<CircuitOptions> circuitOptions,
             IOptions<HubOptions<ComponentHub>> hubOptions,
             ILogger<RemoteJSRuntime> logger
-        ) : base(circuitOptions, hubOptions, logger) { }
+        )
+            : base(circuitOptions, hubOptions, logger) { }
 
         public new ValueTask<TValue> InvokeAsync<TValue>(string identifier, object[] args)
         {

@@ -21,7 +21,8 @@ internal sealed class WorkspaceDocumentDiagnosticSource
         TextDocument document,
         bool includeTaskListItems,
         bool includeStandardDiagnostics
-    ) : base(document)
+    )
+        : base(document)
     {
         Contract.ThrowIfFalse(
             includeTaskListItems || includeStandardDiagnostics,

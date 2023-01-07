@@ -9,7 +9,8 @@ namespace JitBench
 {
     class CscHelloWorldBenchmark : CscBenchmark
     {
-        public CscHelloWorldBenchmark() : base("Csc_Hello_World") { }
+        public CscHelloWorldBenchmark()
+            : base("Csc_Hello_World") { }
 
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         protected override async Task SetupSourceToCompile(

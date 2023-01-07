@@ -672,7 +672,8 @@ namespace System.Net
 
         private sealed class ReadOnlyIPAddress : IPAddress
         {
-            public ReadOnlyIPAddress(ReadOnlySpan<byte> newAddress) : base(newAddress) { }
+            public ReadOnlyIPAddress(ReadOnlySpan<byte> newAddress)
+                : base(newAddress) { }
         }
     }
 }

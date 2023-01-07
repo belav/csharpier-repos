@@ -37,7 +37,8 @@ public class MultiApplicationTests : IISFunctionalTestBase
     private PublishedApplication _publishedApplication;
     private PublishedApplication _rootApplication;
 
-    public MultiApplicationTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public MultiApplicationTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task RunsTwoOutOfProcessApps()

@@ -7,7 +7,8 @@ namespace System.ServiceModel.Syndication
     {
         public ReferencedCategoriesDocument() { }
 
-        public ReferencedCategoriesDocument(Uri link) : base()
+        public ReferencedCategoriesDocument(Uri link)
+            : base()
         {
             if (link is null)
             {

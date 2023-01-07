@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Completion
 {
     internal abstract partial class CommonCompletionService : CompletionService
     {
-        protected CommonCompletionService(SolutionServices services) : base(services) { }
+        protected CommonCompletionService(SolutionServices services)
+            : base(services) { }
 
         protected override CompletionItem GetBetterItem(
             CompletionItem item,

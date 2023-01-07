@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             AbstractCodeMember parent,
             MethodKind kind
-        ) : base(state, parent.FileCodeModel)
+        )
+            : base(state, parent.FileCodeModel)
         {
             Debug.Assert(
                 kind

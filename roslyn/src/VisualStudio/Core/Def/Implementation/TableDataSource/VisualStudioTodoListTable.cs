@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 Workspace workspace,
                 ITodoListProvider todoListProvider,
                 ITableManagerProvider provider
-            ) : base(workspace, todoListProvider, IdentifierString, provider)
+            )
+                : base(workspace, todoListProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();
             }

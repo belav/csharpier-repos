@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             AbstractCodeMember parent,
             string namespaceName,
             int ordinal
-        ) : base(state, parent.FileCodeModel)
+        )
+            : base(state, parent.FileCodeModel)
         {
             _parentHandle = new ParentHandle<AbstractCodeMember>(parent);
             _namespaceName = namespaceName;
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) : base(state, fileCodeModel, nodeKind)
+        )
+            : base(state, fileCodeModel, nodeKind)
         {
             _namespaceName = name;
         }

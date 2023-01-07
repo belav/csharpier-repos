@@ -99,7 +99,8 @@ namespace System.Text.Json.Serialization.Tests
 
     public class UsaCustomer : Customer, ITestClass
     {
-        public UsaCustomer() : base()
+        public UsaCustomer()
+            : base()
         {
             Address = new UsaAddress();
         }

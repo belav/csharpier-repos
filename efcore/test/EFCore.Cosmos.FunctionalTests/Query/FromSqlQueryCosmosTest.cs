@@ -13,7 +13,8 @@ public class FromSqlQueryCosmosTest
     public FromSqlQueryCosmosTest(
         NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

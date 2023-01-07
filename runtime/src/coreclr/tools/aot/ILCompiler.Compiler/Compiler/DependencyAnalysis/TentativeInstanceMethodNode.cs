@@ -21,7 +21,8 @@ namespace ILCompiler.DependencyAnalysis
     /// we can get the generic dictionary out of it, etc.).
     public class TentativeInstanceMethodNode : TentativeMethodNode
     {
-        public TentativeInstanceMethodNode(IMethodBodyNode methodNode) : base(methodNode)
+        public TentativeInstanceMethodNode(IMethodBodyNode methodNode)
+            : base(methodNode)
         {
             Debug.Assert(!methodNode.Method.Signature.IsStatic);
             Debug.Assert(!methodNode.Method.OwningType.IsValueType);

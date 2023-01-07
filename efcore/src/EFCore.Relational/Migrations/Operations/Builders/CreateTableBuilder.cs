@@ -20,7 +20,8 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
     public CreateTableBuilder(
         CreateTableOperation operation,
         IReadOnlyDictionary<PropertyInfo, AddColumnOperation> columnMap
-    ) : base(operation)
+    )
+        : base(operation)
     {
         Check.NotNull(columnMap, nameof(columnMap));
 

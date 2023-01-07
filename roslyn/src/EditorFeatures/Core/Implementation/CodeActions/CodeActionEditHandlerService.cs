@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CodeActions
             IPreviewFactoryService previewService,
             IInlineRenameService renameService,
             ITextBufferAssociatedViewService associatedViewService
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _previewService = previewService;
             _renameService = renameService;

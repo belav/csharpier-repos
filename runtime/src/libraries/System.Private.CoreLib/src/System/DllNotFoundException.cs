@@ -21,17 +21,20 @@ namespace System
     )]
     public class DllNotFoundException : TypeLoadException
     {
-        public DllNotFoundException() : base(SR.Arg_DllNotFoundException)
+        public DllNotFoundException()
+            : base(SR.Arg_DllNotFoundException)
         {
             HResult = HResults.COR_E_DLLNOTFOUND;
         }
 
-        public DllNotFoundException(string? message) : base(message)
+        public DllNotFoundException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_DLLNOTFOUND;
         }
 
-        public DllNotFoundException(string? message, Exception? inner) : base(message, inner)
+        public DllNotFoundException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_DLLNOTFOUND;
         }

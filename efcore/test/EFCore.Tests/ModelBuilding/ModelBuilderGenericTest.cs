@@ -124,7 +124,8 @@ public class ModelBuilderGenericTest : ModelBuilderTest
         public GenericTestModelBuilder(
             TestHelpers testHelpers,
             Action<ModelConfigurationBuilder>? configure
-        ) : base(testHelpers, configure) { }
+        )
+            : base(testHelpers, configure) { }
 
         public override TestEntityTypeBuilder<TEntity> Entity<TEntity>() =>
             new GenericTestEntityTypeBuilder<TEntity>(ModelBuilder.Entity<TEntity>());

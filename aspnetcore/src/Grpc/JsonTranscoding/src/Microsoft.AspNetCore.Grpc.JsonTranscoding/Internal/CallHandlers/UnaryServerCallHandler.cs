@@ -23,7 +23,8 @@ internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse>
         ILoggerFactory loggerFactory,
         CallHandlerDescriptorInfo descriptorInfo,
         JsonSerializerOptions options
-    ) : base(unaryMethodInvoker, loggerFactory, descriptorInfo, options)
+    )
+        : base(unaryMethodInvoker, loggerFactory, descriptorInfo, options)
     {
         _invoker = unaryMethodInvoker;
     }

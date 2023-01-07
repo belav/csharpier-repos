@@ -15,7 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
     {
         public ModelBinderProviderCollection() { }
 
-        public ModelBinderProviderCollection(IList<ModelBinderProvider> list) : base(list) { }
+        public ModelBinderProviderCollection(IList<ModelBinderProvider> list)
+            : base(list) { }
 
         private static void EnsureNoBindAttribute(Type modelType)
         {

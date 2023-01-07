@@ -357,7 +357,8 @@ public class DefaultFileVersionProviderTest
 
     private class TestableMemoryStream : MemoryStream
     {
-        public TestableMemoryStream(byte[] buffer) : base(buffer) { }
+        public TestableMemoryStream(byte[] buffer)
+            : base(buffer) { }
 
         public bool Disposed { get; private set; }
 

@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             ITextBuffer subjectBuffer,
             IOleCommandTarget nextCommandTarget,
             IComponentModel componentModel
-        ) : base(wpfTextView, componentModel)
+        )
+            : base(wpfTextView, componentModel)
         {
             Contract.ThrowIfNull(wpfTextView);
             Contract.ThrowIfNull(subjectBuffer);

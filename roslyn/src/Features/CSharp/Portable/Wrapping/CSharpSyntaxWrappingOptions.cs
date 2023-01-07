@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Wrapping
             int wrappingColumn,
             OperatorPlacementWhenWrappingPreference operatorPlacement,
             bool newLinesForBracesInObjectCollectionArrayInitializers
-        ) : base(formattingOptions, wrappingColumn, operatorPlacement)
+        )
+            : base(formattingOptions, wrappingColumn, operatorPlacement)
         {
             NewLinesForBracesInObjectCollectionArrayInitializers =
                 newLinesForBracesInObjectCollectionArrayInitializers;

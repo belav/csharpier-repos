@@ -19,7 +19,8 @@ internal sealed partial class RequestContext<TContext> : RequestContext where TC
         HttpSysListener server,
         uint? bufferSize,
         ulong requestId
-    ) : base(server, bufferSize, requestId)
+    )
+        : base(server, bufferSize, requestId)
     {
         _application = application;
         _messagePump = messagePump;

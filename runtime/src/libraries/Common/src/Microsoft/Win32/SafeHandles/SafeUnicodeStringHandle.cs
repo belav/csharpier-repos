@@ -14,7 +14,8 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         ///     Marshal a String to a native LPCWSTR. It is permitted to pass "null" for the string.
         /// </summary>
-        public SafeUnicodeStringHandle(string s) : base(IntPtr.Zero, ownsHandle: true)
+        public SafeUnicodeStringHandle(string s)
+            : base(IntPtr.Zero, ownsHandle: true)
         {
             handle = Marshal.StringToHGlobalUni(s);
         }

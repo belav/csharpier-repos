@@ -440,7 +440,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunHelperId helperId,
             object target,
             TypeSystemEntity dictionaryOwner
-        ) : base(factory, helperId, target, dictionaryOwner) { }
+        )
+            : base(factory, helperId, target, dictionaryOwner) { }
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
@@ -464,7 +465,8 @@ namespace ILCompiler.DependencyAnalysis
             ReadyToRunHelperId helperId,
             object target,
             TypeSystemEntity dictionaryOwner
-        ) : base(factory, helperId, target, dictionaryOwner) { }
+        )
+            : base(factory, helperId, target, dictionaryOwner) { }
 
         public override void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {

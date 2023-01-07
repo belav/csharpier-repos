@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed class HostObjectModelBinder : Binder
     {
-        public HostObjectModelBinder(Binder next) : base(next) { }
+        public HostObjectModelBinder(Binder next)
+            : base(next) { }
 
         private TypeSymbol GetHostObjectType()
         {

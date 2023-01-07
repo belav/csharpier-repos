@@ -549,17 +549,20 @@ public class PropertyTest
 
     private abstract class AbstractValueComparer : ValueComparer<string>
     {
-        public AbstractValueComparer() : base(false) { }
+        public AbstractValueComparer()
+            : base(false) { }
     }
 
     private class StaticValueComparer : ValueComparer<string>
     {
-        private StaticValueComparer() : base(false) { }
+        private StaticValueComparer()
+            : base(false) { }
     }
 
     private class PrivateValueComparer : ValueComparer<string>
     {
-        private PrivateValueComparer() : base(false) { }
+        private PrivateValueComparer()
+            : base(false) { }
     }
 
     private class NonParameterlessValueComparer : ValueComparer<string>

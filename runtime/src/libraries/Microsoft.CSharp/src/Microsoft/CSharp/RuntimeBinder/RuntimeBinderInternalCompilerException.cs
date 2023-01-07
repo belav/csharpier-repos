@@ -23,7 +23,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new instance of the <see cref="RuntimeBinderInternalCompilerException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public RuntimeBinderInternalCompilerException(string? message) : base(message) { }
+        public RuntimeBinderInternalCompilerException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="RuntimeBinderInternalCompilerException"/> class with a specified error message
@@ -42,6 +43,7 @@ namespace Microsoft.CSharp.RuntimeBinder
         protected RuntimeBinderInternalCompilerException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 }

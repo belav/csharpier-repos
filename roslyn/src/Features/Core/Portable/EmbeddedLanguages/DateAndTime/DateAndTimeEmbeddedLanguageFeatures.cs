@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
         public IDocumentHighlightsService? DocumentHighlightsService { get; }
         public EmbeddedLanguageCompletionProvider CompletionProvider { get; }
 
-        public DateAndTimeEmbeddedLanguageFeatures(EmbeddedLanguageInfo info) : base(info)
+        public DateAndTimeEmbeddedLanguageFeatures(EmbeddedLanguageInfo info)
+            : base(info)
         {
             CompletionProvider = new DateAndTimeEmbeddedCompletionProvider(this);
         }

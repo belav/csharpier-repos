@@ -16,7 +16,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
             SelectExpression selectExpression,
             ParameterExpression jObjectParameter,
             bool trackQueryResults
-        ) : base(jObjectParameter, trackQueryResults)
+        )
+            : base(jObjectParameter, trackQueryResults)
         {
             _selectExpression = selectExpression;
         }

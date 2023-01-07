@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             AbstractChange parent,
             PreviewEngine engine,
             IVsImageService2 imageService
-        ) : base(engine)
+        )
+            : base(engine)
         {
             Contract.ThrowIfFalse(left != null || right != null);
 

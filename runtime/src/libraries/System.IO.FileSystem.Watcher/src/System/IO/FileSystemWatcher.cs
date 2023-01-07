@@ -726,7 +726,8 @@ namespace System.IO
 
         private sealed class NormalizedFilterCollection : Collection<string>
         {
-            internal NormalizedFilterCollection() : base(new ImmutableStringList()) { }
+            internal NormalizedFilterCollection()
+                : base(new ImmutableStringList()) { }
 
             protected override void InsertItem(int index, string item)
             {

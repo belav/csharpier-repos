@@ -28,7 +28,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         protected XmlNodeAccessor(Type type, IXmlContext context)
             : this(context.GetDefaultXsiType(type).LocalName, type, context) { }
 
-        protected XmlNodeAccessor(string name, Type type, IXmlContext context) : base(type, context)
+        protected XmlNodeAccessor(string name, Type type, IXmlContext context)
+            : base(type, context)
         {
             if (name == null)
                 throw Error.ArgumentNull(nameof(name));

@@ -24,7 +24,8 @@ namespace System.Net.Sockets
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="path"/> is of an invalid length for use with domain sockets on this platform. The length must be between 1 and the allowed native path length.</exception>
         /// <exception cref="PlatformNotSupportedException">The current OS does not support Unix Domain Sockets.</exception>
-        public UnixDomainSocketEndPoint(string path) : this(path, null) { }
+        public UnixDomainSocketEndPoint(string path)
+            : this(path, null) { }
 
         private UnixDomainSocketEndPoint(string path, string? boundFileName)
         {

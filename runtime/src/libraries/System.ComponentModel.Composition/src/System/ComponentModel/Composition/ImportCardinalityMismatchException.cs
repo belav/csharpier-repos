@@ -19,7 +19,8 @@ namespace System.ComponentModel.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class.
         /// </summary>
-        public ImportCardinalityMismatchException() : this((string?)null, (Exception?)null) { }
+        public ImportCardinalityMismatchException()
+            : this((string?)null, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
@@ -30,8 +31,8 @@ namespace System.ComponentModel.Composition
         ///     <see cref="ImportCardinalityMismatchException"/>; or <see langword="null"/> to set
         ///     the <see cref="Exception.Message"/> property to its default value.
         /// </param>
-        public ImportCardinalityMismatchException(string? message) : this(message, (Exception?)null)
-        { }
+        public ImportCardinalityMismatchException(string? message)
+            : this(message, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportCardinalityMismatchException"/> class
@@ -75,6 +76,7 @@ namespace System.ComponentModel.Composition
         protected ImportCardinalityMismatchException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 }

@@ -29,19 +29,22 @@ namespace System.Threading
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class.
         /// </summary>
-        public BarrierPostPhaseException() : this((string?)null) { }
+        public BarrierPostPhaseException()
+            : this((string?)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with the specified inner exception.
         /// </summary>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
-        public BarrierPostPhaseException(Exception? innerException) : this(null, innerException) { }
+        public BarrierPostPhaseException(Exception? innerException)
+            : this(null, innerException) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">A string that describes the exception.</param>
-        public BarrierPostPhaseException(string? message) : this(message, null) { }
+        public BarrierPostPhaseException(string? message)
+            : this(message, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with a specified error message and inner exception.
@@ -181,7 +184,8 @@ namespace System.Threading
         /// <param name="participantCount">The number of participating threads.</param>
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="participantCount"/> is less than 0
         /// or greater than <see cref="short.MaxValue"/>.</exception>
-        public Barrier(int participantCount) : this(participantCount, null) { }
+        public Barrier(int participantCount)
+            : this(participantCount, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Barrier"/> class.

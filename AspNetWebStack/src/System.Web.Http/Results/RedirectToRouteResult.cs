@@ -34,7 +34,8 @@ namespace System.Web.Http.Results
             IDictionary<string, object> routeValues,
             UrlHelper urlFactory,
             HttpRequestMessage request
-        ) : this(routeName, routeValues, new DirectDependencyProvider(urlFactory, request)) { }
+        )
+            : this(routeName, routeValues, new DirectDependencyProvider(urlFactory, request)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> class with the values provided.
@@ -46,7 +47,8 @@ namespace System.Web.Http.Results
             string routeName,
             IDictionary<string, object> routeValues,
             ApiController controller
-        ) : this(routeName, routeValues, new ApiControllerDependencyProvider(controller)) { }
+        )
+            : this(routeName, routeValues, new ApiControllerDependencyProvider(controller)) { }
 
         private RedirectToRouteResult(
             string routeName,

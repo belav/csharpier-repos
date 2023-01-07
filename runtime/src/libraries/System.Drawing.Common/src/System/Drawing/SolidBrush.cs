@@ -30,7 +30,8 @@ namespace System.Drawing
             }
         }
 
-        internal SolidBrush(Color color, bool immutable) : this(color)
+        internal SolidBrush(Color color, bool immutable)
+            : this(color)
         {
             _immutable = immutable;
         }

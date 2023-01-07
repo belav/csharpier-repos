@@ -26,6 +26,7 @@ namespace System.Web.Razor.Editor
         public SingleLineMarkupEditHandler(
             Func<string, IEnumerable<ISymbol>> tokenizer,
             AcceptedCharacters accepted
-        ) : base(tokenizer, accepted) { }
+        )
+            : base(tokenizer, accepted) { }
     }
 }

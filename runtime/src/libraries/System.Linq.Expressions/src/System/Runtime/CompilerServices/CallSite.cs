@@ -171,12 +171,14 @@ namespace System.Runtime.CompilerServices
         // Cached noMatch delegate for all sites with a given T
         private static volatile T? s_cachedNoMatch;
 
-        private CallSite(CallSiteBinder binder) : base(binder)
+        private CallSite(CallSiteBinder binder)
+            : base(binder)
         {
             Target = GetUpdateDelegate();
         }
 
-        private CallSite() : base(null) { }
+        private CallSite()
+            : base(null) { }
 
         internal static CallSite<T> CreateMatchMaker()
         {

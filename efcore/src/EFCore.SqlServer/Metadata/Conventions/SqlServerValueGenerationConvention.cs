@@ -28,7 +28,8 @@ public class SqlServerValueGenerationConvention : RelationalValueGenerationConve
     public SqlServerValueGenerationConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <summary>
     ///     Called after an annotation is changed on a property.

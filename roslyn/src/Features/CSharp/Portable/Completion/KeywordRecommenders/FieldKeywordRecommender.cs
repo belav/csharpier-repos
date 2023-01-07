@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.EnumDeclaration,
         };
 
-        public FieldKeywordRecommender() : base(SyntaxKind.FieldKeyword) { }
+        public FieldKeywordRecommender()
+            : base(SyntaxKind.FieldKeyword) { }
 
         protected override bool IsValidContext(
             int position,

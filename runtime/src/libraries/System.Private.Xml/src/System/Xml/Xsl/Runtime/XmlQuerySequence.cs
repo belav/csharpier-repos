@@ -445,17 +445,20 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Construct sequence from the specified array.
         /// </summary>
-        public XmlQueryItemSequence() : base() { }
+        public XmlQueryItemSequence()
+            : base() { }
 
         /// <summary>
         /// Construct sequence with the specified initial capacity.
         /// </summary>
-        public XmlQueryItemSequence(int capacity) : base(capacity) { }
+        public XmlQueryItemSequence(int capacity)
+            : base(capacity) { }
 
         /// <summary>
         /// Construct singleton sequence from a single item.
         /// </summary>
-        public XmlQueryItemSequence(XPathItem item) : base(1)
+        public XmlQueryItemSequence(XPathItem item)
+            : base(1)
         {
             AddClone(item);
         }
@@ -518,17 +521,20 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Construct sequence with the specified initial capacity.
         /// </summary>
-        public XmlQueryNodeSequence() : base() { }
+        public XmlQueryNodeSequence()
+            : base() { }
 
         /// <summary>
         /// Construct sequence from the specified array.
         /// </summary>
-        public XmlQueryNodeSequence(int capacity) : base(capacity) { }
+        public XmlQueryNodeSequence(int capacity)
+            : base(capacity) { }
 
         /// <summary>
         /// Construct sequence from the specified array, cloning each navigator before adding it.
         /// </summary>
-        public XmlQueryNodeSequence(IList<XPathNavigator> list) : base(list.Count)
+        public XmlQueryNodeSequence(IList<XPathNavigator> list)
+            : base(list.Count)
         {
             for (int idx = 0; idx < list.Count; idx++)
                 AddClone(list[idx]);
@@ -537,12 +543,14 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Construct sequence from the specified array.
         /// </summary>
-        public XmlQueryNodeSequence(XPathNavigator[] array, int size) : base(array, size) { }
+        public XmlQueryNodeSequence(XPathNavigator[] array, int size)
+            : base(array, size) { }
 
         /// <summary>
         /// Construct singleton sequence from a single navigator.
         /// </summary>
-        public XmlQueryNodeSequence(XPathNavigator navigator) : base(1)
+        public XmlQueryNodeSequence(XPathNavigator navigator)
+            : base(1)
         {
             AddClone(navigator);
         }

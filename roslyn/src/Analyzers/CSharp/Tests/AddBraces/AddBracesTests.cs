@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddBraces
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddBraces)]
     public partial class AddBracesTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddBracesTests(ITestOutputHelper logger) : base(logger) { }
+        public AddBracesTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

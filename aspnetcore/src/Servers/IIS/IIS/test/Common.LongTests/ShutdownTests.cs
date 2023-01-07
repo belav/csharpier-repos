@@ -33,7 +33,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class ShutdownTests : IISFunctionalTestBase
 {
-    public ShutdownTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public ShutdownTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task ShutdownTimeoutIsApplied()

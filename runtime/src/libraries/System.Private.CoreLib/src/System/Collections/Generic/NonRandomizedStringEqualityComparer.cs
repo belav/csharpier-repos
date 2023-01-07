@@ -40,7 +40,8 @@ namespace System.Collections.Generic
         protected NonRandomizedStringEqualityComparer(
             SerializationInfo information,
             StreamingContext context
-        ) : this(EqualityComparer<string?>.Default) { }
+        )
+            : this(EqualityComparer<string?>.Default) { }
 
         public virtual bool Equals(string? x, string? y)
         {

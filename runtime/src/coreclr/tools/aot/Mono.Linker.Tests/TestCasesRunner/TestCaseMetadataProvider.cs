@@ -17,7 +17,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public TestCaseMetadataProvider(
             TestCase testCase,
             AssemblyDefinition fullTestCaseAssemblyDefinition
-        ) : base(testCase, fullTestCaseAssemblyDefinition) { }
+        )
+            : base(testCase, fullTestCaseAssemblyDefinition) { }
 
         public virtual TestCaseLinkerOptions GetLinkerOptions(NPath inputPath)
         {

@@ -24,7 +24,8 @@ public class ProducesResponseTypeAttribute : Attribute, IApiResponseMetadataProv
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.
     /// </summary>
     /// <param name="statusCode">The HTTP response status code.</param>
-    public ProducesResponseTypeAttribute(int statusCode) : this(typeof(void), statusCode)
+    public ProducesResponseTypeAttribute(int statusCode)
+        : this(typeof(void), statusCode)
     {
         IsResponseTypeSetByDefault = true;
     }

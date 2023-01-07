@@ -751,7 +751,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                 MetadataReferenceProperties properties,
                 string? fullPath,
                 DocumentationProvider initialDocumentation
-            ) : base(properties, fullPath, initialDocumentation)
+            )
+                : base(properties, fullPath, initialDocumentation)
             {
                 // TODO: doc comment provider is a bit weird.
                 _provider = initialDocumentation;
@@ -794,7 +795,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                 Metadata metadata,
                 ImmutableArray<ITemporaryStreamStorageInternal> storagesOpt,
                 DocumentationProvider initialDocumentation
-            ) : base(properties, fullPath, initialDocumentation)
+            )
+                : base(properties, fullPath, initialDocumentation)
             {
                 _metadata = metadata;
                 _storagesOpt = storagesOpt;

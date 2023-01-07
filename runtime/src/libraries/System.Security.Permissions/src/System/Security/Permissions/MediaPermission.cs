@@ -136,7 +136,8 @@ namespace System.Security.Permissions
     )]
     public sealed class MediaPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public MediaPermissionAttribute(SecurityAction action) : base(action) { }
+        public MediaPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public override IPermission CreatePermission()
         {

@@ -24,7 +24,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             Value = value;
         }
 
-        public SrgsNameValueTag(string name, object value) : this(value)
+        public SrgsNameValueTag(string name, object value)
+            : this(value)
         {
             _name = GetTrimmedName(name, "name");
         }

@@ -8,12 +8,14 @@ namespace System.Configuration
 {
     public class SettingsContext : Hashtable
     {
-        public SettingsContext() : base() { }
+        public SettingsContext()
+            : base() { }
 
         protected SettingsContext(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }

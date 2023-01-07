@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             IThreadingContext threadingContext,
             SignatureHelpControllerProvider controllerProvider,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _controllerProvider = controllerProvider;
             _globalOptions = globalOptions;

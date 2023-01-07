@@ -43,7 +43,8 @@ internal readonly struct SyntaxTriviaList
     /// Creates a list of trivia.
     /// </summary>
     /// <param name="trivias">An array of trivia.</param>
-    public SyntaxTriviaList(params SyntaxTrivia[] trivias) : this(CreateNode(trivias), 0, 0) { }
+    public SyntaxTriviaList(params SyntaxTrivia[] trivias)
+        : this(CreateNode(trivias), 0, 0) { }
 
     /// <summary>
     /// Creates a list of trivia.
@@ -566,7 +567,8 @@ internal readonly struct SyntaxTriviaList
             private SyntaxNode _current;
             private int _position;
 
-            public Enumerator(in SyntaxTriviaList list) : this()
+            public Enumerator(in SyntaxTriviaList list)
+                : this()
             {
                 if (list.Any())
                 {

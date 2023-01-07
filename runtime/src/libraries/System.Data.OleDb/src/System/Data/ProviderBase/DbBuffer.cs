@@ -14,7 +14,8 @@ namespace System.Data.ProviderBase
     {
         private readonly int _bufferLength;
 
-        private DbBuffer(int initialSize, bool zeroBuffer) : base(IntPtr.Zero, true)
+        private DbBuffer(int initialSize, bool zeroBuffer)
+            : base(IntPtr.Zero, true)
         {
             if (0 < initialSize)
             {
@@ -36,7 +37,8 @@ namespace System.Data.ProviderBase
             }
         }
 
-        protected DbBuffer(int initialSize) : this(initialSize, true) { }
+        protected DbBuffer(int initialSize)
+            : this(initialSize, true) { }
 
         protected DbBuffer(IntPtr invalidHandleValue, bool ownsHandle)
             : base(invalidHandleValue, ownsHandle) { }

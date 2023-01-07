@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class ManyToManyFieldsLoadSqliteTest
     : ManyToManyFieldsLoadTestBase<ManyToManyFieldsLoadSqliteTest.ManyToManyFieldsLoadSqliteFixture>
 {
-    public ManyToManyFieldsLoadSqliteTest(ManyToManyFieldsLoadSqliteFixture fixture) : base(fixture)
-    { }
+    public ManyToManyFieldsLoadSqliteTest(ManyToManyFieldsLoadSqliteFixture fixture)
+        : base(fixture) { }
 
     public class ManyToManyFieldsLoadSqliteFixture : ManyToManyFieldsLoadFixtureBase
     {

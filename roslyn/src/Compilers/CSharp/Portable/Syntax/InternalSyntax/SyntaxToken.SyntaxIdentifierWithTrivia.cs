@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 string valueText,
                 GreenNode leading,
                 GreenNode trailing
-            ) : base(contextualKind, text, valueText)
+            )
+                : base(contextualKind, text, valueText)
             {
                 if (leading != null)
                 {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 GreenNode trailing,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(contextualKind, text, valueText, diagnostics, annotations)
+            )
+                : base(contextualKind, text, valueText, diagnostics, annotations)
             {
                 if (leading != null)
                 {
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            internal SyntaxIdentifierWithTrivia(ObjectReader reader) : base(reader)
+            internal SyntaxIdentifierWithTrivia(ObjectReader reader)
+                : base(reader)
             {
                 var leading = (GreenNode)reader.ReadValue();
                 if (leading != null)

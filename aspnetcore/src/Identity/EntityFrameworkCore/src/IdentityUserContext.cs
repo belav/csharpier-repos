@@ -21,7 +21,8 @@ public class IdentityUserContext<TUser> : IdentityUserContext<TUser, string>
     /// Initializes a new instance of <see cref="IdentityUserContext{TUser}"/>.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityUserContext(DbContextOptions options) : base(options) { }
+    public IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="IdentityUserContext{TUser}" /> class.
@@ -49,7 +50,8 @@ public class IdentityUserContext<TUser, TKey>
     /// Initializes a new instance of the db context.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityUserContext(DbContextOptions options) : base(options) { }
+    public IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     /// <summary>
     /// Initializes a new instance of the class.
@@ -77,7 +79,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     /// Initializes a new instance of the class.
     /// </summary>
     /// <param name="options">The options to be used by a <see cref="DbContext"/>.</param>
-    public IdentityUserContext(DbContextOptions options) : base(options) { }
+    public IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     /// <summary>
     /// Initializes a new instance of the class.

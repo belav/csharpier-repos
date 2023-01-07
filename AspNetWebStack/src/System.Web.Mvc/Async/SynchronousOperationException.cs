@@ -16,7 +16,8 @@ namespace System.Web.Mvc.Async
         private SynchronousOperationException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public SynchronousOperationException(string message) : base(message) { }
+        public SynchronousOperationException(string message)
+            : base(message) { }
 
         public SynchronousOperationException(string message, Exception innerException)
             : base(message, innerException) { }

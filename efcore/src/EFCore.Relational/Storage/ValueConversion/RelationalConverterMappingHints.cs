@@ -28,7 +28,8 @@ public class RelationalConverterMappingHints : ConverterMappingHints
         bool? unicode = null,
         bool? fixedLength = null,
         Func<IProperty, IEntityType, ValueGenerator>? valueGeneratorFactory = null
-    ) : base(size, precision, scale, unicode, valueGeneratorFactory)
+    )
+        : base(size, precision, scale, unicode, valueGeneratorFactory)
     {
         IsFixedLength = fixedLength;
     }

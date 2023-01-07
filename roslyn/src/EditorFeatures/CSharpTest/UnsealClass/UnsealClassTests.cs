@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
     [Trait(Traits.Feature, Traits.Features.CodeActionsUnsealClass)]
     public sealed class UnsealClassTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UnsealClassTests(ITestOutputHelper logger) : base(logger) { }
+        public UnsealClassTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

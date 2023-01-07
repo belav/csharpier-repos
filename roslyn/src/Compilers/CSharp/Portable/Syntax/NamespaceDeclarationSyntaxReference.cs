@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal sealed class NamespaceDeclarationSyntaxReference : TranslationSyntaxReference
     {
-        public NamespaceDeclarationSyntaxReference(SyntaxReference reference) : base(reference) { }
+        public NamespaceDeclarationSyntaxReference(SyntaxReference reference)
+            : base(reference) { }
 
         protected override SyntaxNode Translate(
             SyntaxReference reference,

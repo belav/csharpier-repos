@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Project project,
                 bool exact,
                 CancellationToken cancellationToken
-            ) : base(provider, exact, cancellationToken)
+            )
+                : base(provider, exact, cancellationToken)
             {
                 _project = project;
             }

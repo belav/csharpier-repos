@@ -197,7 +197,8 @@ public class BodyControlTests
 
     private class MockMessageBody : MessageBody
     {
-        public MockMessageBody(bool upgradeable = false) : base(null)
+        public MockMessageBody(bool upgradeable = false)
+            : base(null)
         {
             RequestUpgrade = upgradeable;
         }

@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CommandLine.UnitTests
                 Dictionary<string, string[]> patterns = null,
                 Dictionary<string, string[]> recursivePatterns = null,
                 bool isInteractive = false
-            ) : base(isInteractive)
+            )
+                : base(isInteractive)
             {
                 _responseFiles = responseFiles;
                 _recursivePatterns = recursivePatterns;

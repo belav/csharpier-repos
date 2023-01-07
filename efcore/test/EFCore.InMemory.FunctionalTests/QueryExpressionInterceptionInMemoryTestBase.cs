@@ -65,7 +65,8 @@ public abstract class QueryExpressionInterceptionInMemoryTestBase
     {
         public QueryExpressionInterceptionWithDiagnosticsInMemoryTest(
             InterceptionInMemoryFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {

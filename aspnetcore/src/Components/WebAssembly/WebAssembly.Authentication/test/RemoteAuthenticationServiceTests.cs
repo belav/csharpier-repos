@@ -756,8 +756,8 @@ public class RemoteAuthenticationServiceTests
 
 internal class TestAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<CoolRoleAccount>
 {
-    public TestAccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor) : base(accessor)
-    { }
+    public TestAccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor)
+        : base(accessor) { }
 
     public override async ValueTask<ClaimsPrincipal> CreateUserAsync(
         CoolRoleAccount account,

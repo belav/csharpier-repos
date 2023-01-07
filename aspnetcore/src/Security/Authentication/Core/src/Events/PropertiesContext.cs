@@ -23,7 +23,8 @@ public abstract class PropertiesContext<TOptions> : BaseContext<TOptions>
         AuthenticationScheme scheme,
         TOptions options,
         AuthenticationProperties? properties
-    ) : base(context, scheme, options)
+    )
+        : base(context, scheme, options)
     {
         Properties = properties ?? new AuthenticationProperties();
     }

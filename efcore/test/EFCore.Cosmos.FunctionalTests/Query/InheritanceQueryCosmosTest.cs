@@ -8,7 +8,8 @@ public class InheritanceQueryCosmosTest : InheritanceQueryTestBase<InheritanceQu
     public InheritanceQueryCosmosTest(
         InheritanceQueryCosmosFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;

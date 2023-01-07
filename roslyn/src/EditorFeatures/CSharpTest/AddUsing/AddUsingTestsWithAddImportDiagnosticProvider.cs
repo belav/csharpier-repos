@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
     public partial class AddUsingTestsWithAddImportDiagnosticProvider
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddUsingTestsWithAddImportDiagnosticProvider(ITestOutputHelper logger) : base(logger)
-        { }
+        public AddUsingTestsWithAddImportDiagnosticProvider(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

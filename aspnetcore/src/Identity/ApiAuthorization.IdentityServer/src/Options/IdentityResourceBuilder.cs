@@ -47,7 +47,8 @@ public class IdentityResourceBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityResourceBuilder"/>.
     /// </summary>
-    public IdentityResourceBuilder() : this(new IdentityResource()) { }
+    public IdentityResourceBuilder()
+        : this(new IdentityResource()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityResourceBuilder"/>.

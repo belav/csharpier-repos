@@ -21,9 +21,11 @@ public class InMemoryTypeMapping : CoreTypeMapping
         Type clrType,
         ValueComparer? comparer = null,
         ValueComparer? keyComparer = null
-    ) : base(new CoreTypeMappingParameters(clrType, converter: null, comparer, keyComparer)) { }
+    )
+        : base(new CoreTypeMappingParameters(clrType, converter: null, comparer, keyComparer)) { }
 
-    private InMemoryTypeMapping(CoreTypeMappingParameters parameters) : base(parameters) { }
+    private InMemoryTypeMapping(CoreTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

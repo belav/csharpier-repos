@@ -406,7 +406,8 @@ namespace System.Text.RegularExpressions
             int capcount,
             string? text,
             int textLength
-        ) : base(regex, capcount, text, textLength)
+        )
+            : base(regex, capcount, text, textLength)
         {
             _caps = caps;
         }

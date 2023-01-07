@@ -471,7 +471,8 @@ namespace System.ComponentModel.Tests
 
         private class SubReferenceConverter : ReferenceConverter
         {
-            public SubReferenceConverter(Type type) : base(type) { }
+            public SubReferenceConverter(Type type)
+                : base(type) { }
 
             public List<object> DisallowedValues { get; } = new List<object>();
 

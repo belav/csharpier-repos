@@ -31,7 +31,8 @@ public class SqliteConventionSetBuilder : RelationalConventionSetBuilder
     public SqliteConventionSetBuilder(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <summary>
     ///     Builds and returns the convention set for the current database provider.

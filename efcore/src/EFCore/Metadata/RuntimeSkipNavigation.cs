@@ -45,7 +45,8 @@ public class RuntimeSkipNavigation : RuntimePropertyBase, IRuntimeSkipNavigation
         PropertyAccessMode propertyAccessMode,
         bool eagerLoaded,
         bool lazyLoadingEnabled
-    ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+    )
+        : base(name, propertyInfo, fieldInfo, propertyAccessMode)
     {
         ClrType = clrType;
         DeclaringEntityType = declaringEntityType;

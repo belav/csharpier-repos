@@ -20,12 +20,14 @@ namespace System
     )]
     public class DivideByZeroException : ArithmeticException
     {
-        public DivideByZeroException() : base(SR.Arg_DivideByZero)
+        public DivideByZeroException()
+            : base(SR.Arg_DivideByZero)
         {
             HResult = HResults.COR_E_DIVIDEBYZERO;
         }
 
-        public DivideByZeroException(string? message) : base(message)
+        public DivideByZeroException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_DIVIDEBYZERO;
         }

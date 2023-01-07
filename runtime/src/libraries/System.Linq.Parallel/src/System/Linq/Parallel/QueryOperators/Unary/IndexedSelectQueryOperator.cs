@@ -44,7 +44,8 @@ namespace System.Linq.Parallel
         internal IndexedSelectQueryOperator(
             IEnumerable<TInput> child,
             Func<TInput, int, TOutput> selector
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(selector != null, "need a selector function");
@@ -251,7 +252,8 @@ namespace System.Linq.Parallel
                 IndexedSelectQueryOperator<TInput, TOutput> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) : base(childQueryResults, op, settings, preferStriping)
+            )
+                : base(childQueryResults, op, settings, preferStriping)
             {
                 _selectOp = op;
                 Debug.Assert(_childQueryResults.IsIndexible);

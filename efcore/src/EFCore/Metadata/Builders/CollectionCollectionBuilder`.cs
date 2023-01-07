@@ -39,7 +39,8 @@ public class CollectionCollectionBuilder<
         IMutableEntityType rightEntityType,
         IMutableSkipNavigation leftNavigation,
         IMutableSkipNavigation rightNavigation
-    ) : base(leftEntityType, rightEntityType, leftNavigation, rightNavigation) { }
+    )
+        : base(leftEntityType, rightEntityType, leftNavigation, rightNavigation) { }
 
     /// <summary>
     ///     Configures the join entity type implementing the many-to-many relationship.

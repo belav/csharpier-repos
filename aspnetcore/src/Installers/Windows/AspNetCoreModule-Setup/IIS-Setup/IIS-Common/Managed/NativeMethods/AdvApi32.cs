@@ -406,10 +406,12 @@ namespace Microsoft.Web.Management.PInvoke.AdvApi32
     internal sealed class SafeRegistryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         [SecurityCritical]
-        internal SafeRegistryHandle() : base(true) { }
+        internal SafeRegistryHandle()
+            : base(true) { }
 
         [SecurityCritical]
-        public SafeRegistryHandle(IntPtr preexistingHandle, bool ownsHandle) : base(ownsHandle)
+        public SafeRegistryHandle(IntPtr preexistingHandle, bool ownsHandle)
+            : base(ownsHandle)
         {
             SetHandle(preexistingHandle);
         }

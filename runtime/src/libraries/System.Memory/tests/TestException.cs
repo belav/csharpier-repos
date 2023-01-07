@@ -9,7 +9,8 @@ using System;
 //
 internal sealed class TestException : Exception
 {
-    public TestException(string message) : base(message)
+    public TestException(string message)
+        : base(message)
     {
         // This explicit exception type exists mostly so we can do the one useful thing that we can't do with downloaded xunit binaries:
         // put a BREAKPOINT to catch a test failure.

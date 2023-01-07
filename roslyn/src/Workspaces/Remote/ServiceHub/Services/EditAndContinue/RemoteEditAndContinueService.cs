@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public RemoteEditAndContinueService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteEditAndContinueService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

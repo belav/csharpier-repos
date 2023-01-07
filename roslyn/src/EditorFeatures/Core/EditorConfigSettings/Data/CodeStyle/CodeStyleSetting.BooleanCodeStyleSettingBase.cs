@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 string? trueValueDescription,
                 string? falseValueDescription,
                 OptionUpdater updater
-            ) : base(description, updater)
+            )
+                : base(description, updater)
             {
                 Category = category;
                 _trueValueDescription = trueValueDescription ?? EditorFeaturesResources.Yes;

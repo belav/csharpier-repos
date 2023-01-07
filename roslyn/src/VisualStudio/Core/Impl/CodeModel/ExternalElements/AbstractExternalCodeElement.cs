@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             ISymbol symbol
-        ) : base(state)
+        )
+            : base(state)
         {
             Debug.Assert(projectId != null);
             Debug.Assert(symbol != null);

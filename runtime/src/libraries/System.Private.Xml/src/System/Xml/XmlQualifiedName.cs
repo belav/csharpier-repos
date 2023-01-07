@@ -20,12 +20,14 @@ namespace System.Xml
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName() : this(string.Empty, string.Empty) { }
+        public XmlQualifiedName()
+            : this(string.Empty, string.Empty) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName(string? name) : this(name, string.Empty) { }
+        public XmlQualifiedName(string? name)
+            : this(name, string.Empty) { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
         public PreviewPaneService(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
         }

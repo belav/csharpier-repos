@@ -341,8 +341,8 @@ namespace System.Web.WebPages.Administration.Test
 
         private class NeverCloseMemoryStream : MemoryStream
         {
-            public NeverCloseMemoryStream(string content) : base(Encoding.UTF8.GetBytes(content))
-            { }
+            public NeverCloseMemoryStream(string content)
+                : base(Encoding.UTF8.GetBytes(content)) { }
 
             protected override void Dispose(bool disposing)
             {

@@ -146,9 +146,11 @@ namespace System.Net.Http
 
         #region Constructors
 
-        public HttpClient() : this(new HttpClientHandler()) { }
+        public HttpClient()
+            : this(new HttpClientHandler()) { }
 
-        public HttpClient(HttpMessageHandler handler) : this(handler, true) { }
+        public HttpClient(HttpMessageHandler handler)
+            : this(handler, true) { }
 
         public HttpClient(HttpMessageHandler handler, bool disposeHandler)
             : base(handler, disposeHandler)

@@ -16,7 +16,8 @@ namespace System.Collections.Frozen
         internal DefaultFrozenDictionary(
             Dictionary<TKey, TValue> source,
             IEqualityComparer<TKey> comparer
-        ) : base(source, comparer) { }
+        )
+            : base(source, comparer) { }
 
         /// <inheritdoc />
         private protected override ref readonly TValue GetValueRefOrNullRefCore(TKey key)

@@ -21,7 +21,8 @@ namespace Internal.Cryptography
 
         private sealed class WindowsCryptographicException : CryptographicException
         {
-            public WindowsCryptographicException(int hr, string message) : base(message)
+            public WindowsCryptographicException(int hr, string message)
+                : base(message)
             {
                 HResult = hr;
             }

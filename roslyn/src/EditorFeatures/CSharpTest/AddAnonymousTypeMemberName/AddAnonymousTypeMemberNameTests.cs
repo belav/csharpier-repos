@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAnonymousTypeMemberN
     public class AddAnonymousTypeMemberNameTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddAnonymousTypeMemberNameTests(ITestOutputHelper logger) : base(logger) { }
+        public AddAnonymousTypeMemberNameTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

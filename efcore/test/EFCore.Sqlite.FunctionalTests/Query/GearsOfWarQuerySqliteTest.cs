@@ -13,7 +13,8 @@ public class GearsOfWarQuerySqliteTest
     public GearsOfWarQuerySqliteTest(
         GearsOfWarQuerySqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

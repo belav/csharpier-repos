@@ -19,7 +19,8 @@ internal sealed class ProjectCommandLineApplication : CommandLineApplication
         bool throwOnUnexpectedArg = true,
         bool continueAfterUnexpectedArg = false,
         bool treatUnmatchedOptionsAsArguments = false
-    ) : base(throwOnUnexpectedArg, continueAfterUnexpectedArg, treatUnmatchedOptionsAsArguments)
+    )
+        : base(throwOnUnexpectedArg, continueAfterUnexpectedArg, treatUnmatchedOptionsAsArguments)
     {
         ProjectOption = Option(
             "-p|--project",

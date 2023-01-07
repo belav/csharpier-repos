@@ -3,7 +3,8 @@
 
 class WriterGen : CsWriter
 {
-    public WriterGen(string fileName) : base(fileName) { }
+    public WriterGen(string fileName)
+        : base(fileName) { }
 
     public void EmitSource()
     {

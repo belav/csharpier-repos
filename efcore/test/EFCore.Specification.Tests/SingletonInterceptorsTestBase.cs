@@ -48,7 +48,8 @@ public abstract class SingletonInterceptorsTestBase
 
     public class LibraryContext : PoolableDbContext
     {
-        public LibraryContext(DbContextOptions options) : base(options) { }
+        public LibraryContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

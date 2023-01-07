@@ -12,7 +12,8 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideGetIndexBinder : GetIndexBinder
         {
-            public MinimumOverrideGetIndexBinder(CallInfo callInfo) : base(callInfo) { }
+            public MinimumOverrideGetIndexBinder(CallInfo callInfo)
+                : base(callInfo) { }
 
             public override DynamicMetaObject FallbackGetIndex(
                 DynamicMetaObject target,

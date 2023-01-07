@@ -4,8 +4,8 @@ namespace System.CommandLine.Generator.Parameters
 {
     internal class BindingContextParameter : Parameter, IEquatable<BindingContextParameter>
     {
-        public BindingContextParameter(ITypeSymbol bindingContextType) : base(bindingContextType)
-        { }
+        public BindingContextParameter(ITypeSymbol bindingContextType)
+            : base(bindingContextType) { }
 
         public override string GetValueFromContext() => "context.BindingContext";
 

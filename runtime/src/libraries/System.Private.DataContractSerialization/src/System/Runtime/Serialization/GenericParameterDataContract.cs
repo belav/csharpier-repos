@@ -33,7 +33,8 @@ namespace System.Runtime.Serialization.DataContracts
             internal GenericParameterDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type
-            ) : base(type)
+            )
+                : base(type)
             {
                 SetDataContractName(DataContract.GetXmlName(type));
                 _parameterPosition = type.GenericParameterPosition;

@@ -20,7 +20,8 @@ public class RemoteRendererBufferLimitTest : IgnitorTest<ServerStartup>
     public RemoteRendererBufferLimitTest(
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(serverFixture, output) { }
+    )
+        : base(serverFixture, output) { }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
     public async Task DispatchedEventsWillKeepBeingProcessed_ButUpdatedWillBeDelayedUntilARenderIsAcknowledged()

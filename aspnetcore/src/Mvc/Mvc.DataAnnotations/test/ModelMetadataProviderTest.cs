@@ -945,7 +945,8 @@ public class ModelMetadataProviderTest
 
     private class DataTypeWithCustomDisplayFormat : DataTypeAttribute
     {
-        public DataTypeWithCustomDisplayFormat() : base("Custom datatype")
+        public DataTypeWithCustomDisplayFormat()
+            : base("Custom datatype")
         {
             DisplayFormat = new DisplayFormatAttribute { DataFormatString = "value", };
         }
@@ -953,7 +954,8 @@ public class ModelMetadataProviderTest
 
     private class DataTypeWithCustomEditFormat : DataTypeAttribute
     {
-        public DataTypeWithCustomEditFormat() : base("Custom datatype")
+        public DataTypeWithCustomEditFormat()
+            : base("Custom datatype")
         {
             DisplayFormat = new DisplayFormatAttribute
             {

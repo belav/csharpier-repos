@@ -312,7 +312,8 @@ namespace System.Web.Mvc.Test
 
         private sealed class SimpleModelValidator : ModelValidator
         {
-            public SimpleModelValidator() : base(GetMetadata(), new ControllerContext()) { }
+            public SimpleModelValidator()
+                : base(GetMetadata(), new ControllerContext()) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {

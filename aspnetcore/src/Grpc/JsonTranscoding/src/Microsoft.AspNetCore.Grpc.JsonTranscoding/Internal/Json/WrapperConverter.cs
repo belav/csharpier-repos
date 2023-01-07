@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 internal sealed class WrapperConverter<TMessage> : SettingsConverterBase<TMessage>
     where TMessage : IMessage, new()
 {
-    public WrapperConverter(JsonContext context) : base(context) { }
+    public WrapperConverter(JsonContext context)
+        : base(context) { }
 
     public override TMessage? Read(
         ref Utf8JsonReader reader,

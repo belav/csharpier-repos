@@ -297,14 +297,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ForegroundNotification
                 Action work,
                 IAsyncToken asyncToken,
                 CancellationToken cancellationToken
-            ) : this(minimumRunPointInMS, work, null, asyncToken, cancellationToken) { }
+            )
+                : this(minimumRunPointInMS, work, null, asyncToken, cancellationToken) { }
 
             public PendingWork(
                 int minimumRunPointInMS,
                 Func<bool> work,
                 IAsyncToken asyncToken,
                 CancellationToken cancellationToken
-            ) : this(minimumRunPointInMS, null, work, asyncToken, cancellationToken) { }
+            )
+                : this(minimumRunPointInMS, null, work, asyncToken, cancellationToken) { }
 
             public PendingWork UpdateToCurrentTime() =>
                 new(Environment.TickCount, DoWorkAction, DoWorkFunc, AsyncToken, CancellationToken);

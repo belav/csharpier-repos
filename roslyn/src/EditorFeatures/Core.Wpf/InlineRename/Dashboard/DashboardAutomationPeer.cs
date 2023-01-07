@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
     {
         private readonly string _identifier;
 
-        public DashboardAutomationPeer(UserControl owner, string identifier) : base(owner) =>
-            _identifier = identifier;
+        public DashboardAutomationPeer(UserControl owner, string identifier)
+            : base(owner) => _identifier = identifier;
 
         protected override bool HasKeyboardFocusCore() => true;
 

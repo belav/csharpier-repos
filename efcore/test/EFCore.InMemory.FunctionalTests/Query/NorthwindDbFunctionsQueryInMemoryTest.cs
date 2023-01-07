@@ -9,7 +9,8 @@ public class NorthwindDbFunctionsQueryInMemoryTest
     public NorthwindDbFunctionsQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestSqlLoggerFactory.CaptureOutput(testOutputHelper);
     }

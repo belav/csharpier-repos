@@ -33,7 +33,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
         /// <param name="content">The content to assign to the new <see cref="XStreamingElement"/> node</param>
-        public XStreamingElement(XName name, object? content) : this(name)
+        public XStreamingElement(XName name, object? content)
+            : this(name)
         {
             this.content = content is List<object?> ? new object?[] { content } : content;
         }
@@ -43,7 +44,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
         /// <param name="content">An array containing content to assign to the new <see cref="XStreamingElement"/> node</param>
-        public XStreamingElement(XName name, params object?[] content) : this(name)
+        public XStreamingElement(XName name, params object?[] content)
+            : this(name)
         {
             this.content = content;
         }

@@ -16,9 +16,11 @@ namespace System.Data.Odbc
 #endif
     public sealed class OdbcPermission : DBDataPermission
     {
-        public OdbcPermission() : base(default(PermissionState)) { }
+        public OdbcPermission()
+            : base(default(PermissionState)) { }
 
-        public OdbcPermission(PermissionState state) : base(default(PermissionState)) { }
+        public OdbcPermission(PermissionState state)
+            : base(default(PermissionState)) { }
 
         public OdbcPermission(PermissionState state, bool allowBlankPassword)
             : base(default(PermissionState)) { }

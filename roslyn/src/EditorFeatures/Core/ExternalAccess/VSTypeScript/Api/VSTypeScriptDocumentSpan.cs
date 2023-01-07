@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
             SourceSpan = sourceSpan;
         }
 
-        internal VSTypeScriptDocumentSpan(DocumentSpan span) : this(span.Document, span.SourceSpan)
-        { }
+        internal VSTypeScriptDocumentSpan(DocumentSpan span)
+            : this(span.Document, span.SourceSpan) { }
 
         internal DocumentSpan ToDocumentSpan() => new(Document, SourceSpan);
     }

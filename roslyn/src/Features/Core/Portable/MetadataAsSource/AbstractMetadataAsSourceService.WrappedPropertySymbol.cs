@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 IPropertySymbol propertySymbol,
                 bool canImplementImplicitly,
                 IDocumentationCommentFormattingService docCommentFormattingService
-            ) : base(propertySymbol, canImplementImplicitly, docCommentFormattingService)
+            )
+                : base(propertySymbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = propertySymbol;
             }

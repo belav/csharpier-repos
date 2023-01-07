@@ -51,7 +51,8 @@ namespace System.Net.Mail
                 NetEventSource.Associate(this, _message);
         }
 
-        public MailMessage(string from, string to, string? subject, string? body) : this(from, to)
+        public MailMessage(string from, string to, string? subject, string? body)
+            : this(from, to)
         {
             Subject = subject;
             Body = body;

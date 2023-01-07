@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Text
             ImmutableArray<byte> checksum,
             SourceHashAlgorithm checksumAlgorithm,
             ImmutableArray<byte> embeddedTextBlob
-        ) : this(checksum, checksumAlgorithm, container: null)
+        )
+            : this(checksum, checksumAlgorithm, container: null)
         {
             // We should never have precomputed the embedded text blob without precomputing the checksum.
             Debug.Assert(embeddedTextBlob.IsDefault || !checksum.IsDefault);

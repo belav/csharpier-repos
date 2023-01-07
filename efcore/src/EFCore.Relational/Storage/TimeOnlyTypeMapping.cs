@@ -32,7 +32,8 @@ public class TimeOnlyTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="TimeOnlyTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected TimeOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected TimeOnlyTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

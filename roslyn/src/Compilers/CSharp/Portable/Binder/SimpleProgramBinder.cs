@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public SimpleProgramBinder(
             Binder enclosing,
             SynthesizedSimpleProgramEntryPointSymbol entryPoint
-        ) : base(enclosing, enclosing.Flags)
+        )
+            : base(enclosing, enclosing.Flags)
         {
             _entryPoint = entryPoint;
         }

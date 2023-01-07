@@ -23,7 +23,8 @@ namespace System.Net.Sockets
         private bool Disposed => _disposed != 0;
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class.
-        public TcpClient() : this(AddressFamily.Unknown) { }
+        public TcpClient()
+            : this(AddressFamily.Unknown) { }
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class.
         public TcpClient(AddressFamily family)
@@ -64,7 +65,8 @@ namespace System.Net.Sockets
 
         // Initializes a new instance of the System.Net.Sockets.TcpClient class and connects to the specified port on
         // the specified host.
-        public TcpClient(string hostname, int port) : this(AddressFamily.Unknown)
+        public TcpClient(string hostname, int port)
+            : this(AddressFamily.Unknown)
         {
             ArgumentNullException.ThrowIfNull(hostname);
 

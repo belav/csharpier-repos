@@ -599,7 +599,8 @@ namespace Tests.Integration
             private string _version;
             private string _id;
 
-            public AddinAttribute(string name, string version, string id) : base(typeof(IAddin))
+            public AddinAttribute(string name, string version, string id)
+                : base(typeof(IAddin))
             {
                 this._name = name;
                 this._version = version;

@@ -18,7 +18,8 @@ namespace Moq
             Mock mock,
             MethodExpectation expectation,
             object returnValue
-        ) : base(originalExpression, mock, expectation)
+        )
+            : base(originalExpression, mock, expectation)
         {
             Debug.Assert(Awaitable.TryGetResultRecursive(returnValue) is IMocked);
 

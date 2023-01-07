@@ -53,7 +53,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected class Context20277 : DbContext
     {
-        public Context20277(DbContextOptions options) : base(options) { }
+        public Context20277(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Entity20277> Entities => Set<Entity20277>();
 
@@ -140,7 +141,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected class SomeDbContext22089 : DbContext
     {
-        public SomeDbContext22089(DbContextOptions options) : base(options) { }
+        public SomeDbContext22089(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Contact22089> Contacts { get; set; }
 
@@ -184,7 +186,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected class MyContext24133 : DbContext
     {
-        public MyContext24133(DbContextOptions options) : base(options) { }
+        public MyContext24133(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Blog24133>(blog =>
@@ -260,7 +263,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected class MyContext18582 : DbContext
     {
-        public MyContext18582(DbContextOptions options) : base(options) { }
+        public MyContext18582(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Warehouse> Warehouses { get; set; }
 
@@ -349,7 +353,8 @@ public abstract class OwnedEntityQueryTestBase : NonSharedModelTestBase
 
     protected abstract class MyContext26592Base : DbContext
     {
-        protected MyContext26592Base(DbContextOptions options) : base(options) { }
+        protected MyContext26592Base(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Company> Companies { get; set; }
         public DbSet<Owner> Owners { get; set; }

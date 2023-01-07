@@ -475,7 +475,8 @@ namespace System.Runtime.Serialization.Tests
             string name,
             bool isCollectible,
             string mainAssemblyToLoadPath = null
-        ) : base(name, isCollectible)
+        )
+            : base(name, isCollectible)
         {
             if (!PlatformDetection.IsBrowser)
                 _resolver = new AssemblyDependencyResolver(

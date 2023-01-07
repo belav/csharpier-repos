@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             IGlobalOptionService globalOptions,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             SignatureHelpControllerProvider = signatureHelpControllerProvider;
             EditorCommandHandlerServiceFactory = editorCommandHandlerServiceFactory;

@@ -28,7 +28,8 @@ namespace Castle.Components.DictionaryAdapter
 
         public EditableBindingList() { }
 
-        public EditableBindingList(IList<T> initial) : base(initial) { }
+        public EditableBindingList(IList<T> initial)
+            : base(initial) { }
 
         public bool IsChanged
         {

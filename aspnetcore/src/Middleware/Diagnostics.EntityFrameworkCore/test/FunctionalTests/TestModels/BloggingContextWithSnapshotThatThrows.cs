@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.Tests;
 
 public class BloggingContextWithSnapshotThatThrows : BloggingContext
 {
-    public BloggingContextWithSnapshotThatThrows(DbContextOptions options) : base(options) { }
+    public BloggingContextWithSnapshotThatThrows(DbContextOptions options)
+        : base(options) { }
 
     [DbContext(typeof(BloggingContextWithSnapshotThatThrows))]
     public class BloggingContextWithSnapshotThatThrowsModelSnapshot : ModelSnapshot

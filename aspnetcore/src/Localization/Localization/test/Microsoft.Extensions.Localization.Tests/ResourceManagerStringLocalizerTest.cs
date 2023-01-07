@@ -316,14 +316,17 @@ public class ResourceManagerStringLocalizerTest
             TestResourceManager resourceManager,
             Assembly assembly,
             string resourceBaseName
-        ) : base(resourceCache, resourceManager, assembly, resourceBaseName) { }
+        )
+            : base(resourceCache, resourceManager, assembly, resourceBaseName) { }
     }
 
     internal class TestAssemblyWrapper : AssemblyWrapper
     {
-        public TestAssemblyWrapper() : this(typeof(TestAssemblyWrapper)) { }
+        public TestAssemblyWrapper()
+            : this(typeof(TestAssemblyWrapper)) { }
 
-        public TestAssemblyWrapper(Type type) : base(type.Assembly) { }
+        public TestAssemblyWrapper(Type type)
+            : base(type.Assembly) { }
 
         public bool HasResources { get; set; } = true;
 

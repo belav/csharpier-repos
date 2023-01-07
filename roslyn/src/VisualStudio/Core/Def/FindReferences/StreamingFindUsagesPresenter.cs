@@ -123,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             IClassificationFormatMapService classificationFormatMapService,
             IEnumerable<ITableColumnDefinition> columns,
             IAsynchronousOperationListenerProvider asyncListenerProvider
-        ) : base(threadingContext, assertIsForeground: false)
+        )
+            : base(threadingContext, assertIsForeground: false)
         {
             _workspace = workspace;
             _globalOptions = optionService;

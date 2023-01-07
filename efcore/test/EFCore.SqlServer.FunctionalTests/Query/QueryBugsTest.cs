@@ -181,7 +181,8 @@ WHERE [d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:10', '197
 
     protected class DateTimeContext : DbContext
     {
-        public DateTimeContext(DbContextOptions options) : base(options) { }
+        public DateTimeContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<DatesAndPrunes> Dates { get; set; }
 
@@ -280,7 +281,8 @@ WHERE [d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:10', '197
 
     protected class Issue6091Context : DbContext
     {
-        public Issue6091Context(DbContextOptions options) : base(options) { }
+        public Issue6091Context(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -394,7 +396,8 @@ WHERE [d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:10', '197
 
     protected class DeadlockContext : DbContext
     {
-        public DeadlockContext(DbContextOptions options) : base(options) { }
+        public DeadlockContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Person> Persons { get; set; }
         public DbSet<Address> Addresses { get; set; }
@@ -492,7 +495,8 @@ INSERT ZeroKey VALUES (NULL)"
 
     protected class NullKeyContext : DbContext
     {
-        public NullKeyContext(DbContextOptions options) : base(options) { }
+        public NullKeyContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -545,7 +549,8 @@ INSERT ZeroKey VALUES (NULL)"
 
     protected class MyContext603 : DbContext
     {
-        public MyContext603(DbContextOptions options) : base(options) { }
+        public MyContext603(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Product> Products { get; set; }
 
@@ -620,7 +625,8 @@ LEFT JOIN [Customer] AS [c] ON [o].[CustomerFirstName] = [c].[FirstName] AND [o]
 
     private class MyContext925 : DbContext
     {
-        public MyContext925(DbContextOptions options) : base(options) { }
+        public MyContext925(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -760,7 +766,8 @@ LEFT JOIN [Customer] AS [c] ON [o].[CustomerFirstName] = [c].[FirstName] AND [o]
 
     protected class MyContext963 : DbContext
     {
-        public MyContext963(DbContextOptions options) : base(options) { }
+        public MyContext963(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Targaryen> Targaryens { get; set; }
 
@@ -925,7 +932,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     protected class MyContext3758 : DbContext
     {
-        public MyContext3758(DbContextOptions options) : base(options) { }
+        public MyContext3758(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Customer3758> Customers { get; set; }
         public DbSet<Order3758> Orders { get; set; }
@@ -1124,7 +1132,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
         public DbSet<Parent3409> Parents { get; set; }
         public DbSet<Child3409> Children { get; set; }
 
-        public MyContext3409(DbContextOptions options) : base(options) { }
+        public MyContext3409(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -1378,7 +1387,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     private class MyContext3101 : DbContext
     {
-        public MyContext3101(DbContextOptions options) : base(options) { }
+        public MyContext3101(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Entity3101> Entities { get; set; }
         public DbSet<Child3101> Children { get; set; }
@@ -1477,7 +1487,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     private class ReproContext6986 : DbContext
     {
-        public ReproContext6986(DbContextOptions options) : base(options) { }
+        public ReproContext6986(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Contact6986> Contacts { get; set; }
         public DbSet<EmployerContact6986> EmployerContacts { get; set; }
@@ -1660,7 +1671,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     protected class MyContext5456 : DbContext
     {
-        public MyContext5456(DbContextOptions options) : base(options) { }
+        public MyContext5456(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog5456> Blogs { get; set; }
         public DbSet<Post5456> Posts { get; set; }
@@ -1743,7 +1755,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     protected class MyContext7359 : DbContext
     {
-        public MyContext7359(DbContextOptions options) : base(options) { }
+        public MyContext7359(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Product> Products { get; set; }
 
@@ -1796,7 +1809,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     private class MyContext7312 : DbContext
     {
-        public MyContext7312(DbContextOptions options) : base(options) { }
+        public MyContext7312(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Proposal7312> Proposal { get; set; }
         public DbSet<ProposalCustom7312> ProposalCustoms { get; set; }
@@ -1858,7 +1872,8 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
     private class MyContext8282 : DbContext
     {
-        public MyContext8282(DbContextOptions options) : base(options) { }
+        public MyContext8282(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Entity8282> Entity { get; set; }
 
@@ -1970,7 +1985,8 @@ WHERE ([e].[PermissionByte] & [e].[PermissionByte]) = [e].[PermissionByte]
 
     private class MyContext8538 : DbContext
     {
-        public MyContext8538(DbContextOptions options) : base(options) { }
+        public MyContext8538(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Entity8538> Entity { get; set; }
 
@@ -2255,7 +2271,8 @@ WHERE [e].[Name] IS NULL
 
     protected class MyContext8909 : DbContext
     {
-        public MyContext8909(DbContextOptions options) : base(options) { }
+        public MyContext8909(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Entity8909> Entities { get; set; }
 
@@ -2338,7 +2355,8 @@ ORDER BY [m].[Id]
 
     protected class MyContext9202 : DbContext
     {
-        public MyContext9202(DbContextOptions options) : base(options) { }
+        public MyContext9202(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Movie9202> Movies { get; set; }
         public DbSet<Actor9202> Actors { get; set; }
@@ -2462,7 +2480,8 @@ WHERE [w].[Val] = 1
         public static int AddThree(int num) => throw new Exception();
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        public MyContext9214(DbContextOptions options) : base(options) { }
+        public MyContext9214(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -2546,7 +2565,8 @@ WHERE [w].[Val] = 1
 
     protected class MyContext9277 : DbContext
     {
-        public MyContext9277(DbContextOptions options) : base(options) { }
+        public MyContext9277(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog9277> Blogs { get; set; }
 
@@ -2624,7 +2644,8 @@ BEGIN
 
     protected class MyContext9038 : DbContext
     {
-        public MyContext9038(DbContextOptions options) : base(options) { }
+        public MyContext9038(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Person9038> People { get; set; }
 
@@ -2762,7 +2783,8 @@ LEFT JOIN [Configuration9468] AS [c0] ON [c].[ConfigurationId] = [c0].[Id]
 
     protected class MyContext9468 : DbContext
     {
-        public MyContext9468(DbContextOptions options) : base(options) { }
+        public MyContext9468(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Cart9468> Carts { get; set; }
 
@@ -2835,7 +2857,8 @@ ORDER BY [p].[Id]
 
     private class MyContext10635 : DbContext
     {
-        public MyContext10635(DbContextOptions options) : base(options) { }
+        public MyContext10635(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Parent10635> Parents { get; set; }
         public DbSet<Child10635> Children { get; set; }
@@ -2925,7 +2948,8 @@ WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
     {
         public int Tenant { get; set; }
 
-        public FilterContextBase10301(DbContextOptions options) : base(options) { }
+        public FilterContextBase10301(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog10301> Blogs { get; set; }
 
@@ -2952,7 +2976,8 @@ WHERE [b].[SomeValue] = @__ef_filter__Tenant_0
 
     protected class FilterContext10301 : FilterContextBase10301
     {
-        public FilterContext10301(DbContextOptions options) : base(options) { }
+        public FilterContext10301(DbContextOptions options)
+            : base(options) { }
     }
 
     #endregion
@@ -2984,7 +3009,8 @@ FROM [Bases] AS [b]
     {
         public DbSet<Base> Bases { get; set; }
 
-        public MyContext11104(DbContextOptions options) : base(options) { }
+        public MyContext11104(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -3155,7 +3181,8 @@ GROUP BY [t0].[AnotherEntity11818_Name], [t2].[MaumarEntity11818_Name]
 
     protected class MyContext11818 : DbContext
     {
-        public MyContext11818(DbContextOptions options) : base(options) { }
+        public MyContext11818(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -3256,7 +3283,8 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
         public DbSet<Leader> Leaders { get; set; }
         public DbSet<LeaderQuery> LeadersQuery { get; set; }
 
-        public MyContext11803(DbContextOptions options) : base(options) { }
+        public MyContext11803(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -3379,7 +3407,8 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL
         public DbSet<Post11923> Posts { get; set; }
         public DbSet<Comment11923> Comments { get; set; }
 
-        public MyContext11923(DbContextOptions options) : base(options) { }
+        public MyContext11923(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -3589,7 +3618,8 @@ FROM [Prices] AS [p]
     {
         public DbSet<Price11885> Prices { get; set; }
 
-        public MyContext11885(DbContextOptions options) : base(options) { }
+        public MyContext11885(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Price11885>(b =>
@@ -3705,7 +3735,8 @@ FROM [Prices] AS [p]
         public DbSet<Employee12582> Employees { get; set; }
         public DbSet<EmployeeDevice12582> Devices { get; set; }
 
-        public MyContext12582(DbContextOptions options) : base(options) { }
+        public MyContext12582(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -3776,7 +3807,8 @@ FROM [Prices] AS [p]
         public DbSet<Blog12748> Blogs { get; set; }
         public DbSet<Comment12748> Comments { get; set; }
 
-        public MyContext12748(DbContextOptions options) : base(options) { }
+        public MyContext12748(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
@@ -3828,7 +3860,8 @@ FROM [Prices] AS [p]
         public DbSet<Employee13025> Employees { get; set; }
         public DbSet<EmployeeDevice13025> EmployeeDevices { get; set; }
 
-        public MyContext13025(DbContextOptions options) : base(options) { }
+        public MyContext13025(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
@@ -3893,7 +3926,8 @@ FROM [Prices] AS [p]
         public virtual DbSet<Definition12170> Definitions { get; set; }
         public virtual DbSet<DefinitionHistory12170> DefinitionHistories { get; set; }
 
-        public MyContext12170(DbContextOptions options) : base(options) { }
+        public MyContext12170(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -3983,7 +4017,8 @@ FROM [Prices] AS [p]
         public DbSet<School11944> Schools { get; set; }
         public DbSet<ElementarySchool11944> ElementarySchools { get; set; }
 
-        public MyContext11944(DbContextOptions options) : base(options) { }
+        public MyContext11944(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -4059,7 +4094,8 @@ WHERE [r].[MyTime] = '2018-10-07T00:00:00'
     {
         public virtual DbSet<ReproEntity13118> ReproEntity { get; set; }
 
-        public MyContext13118(DbContextOptions options) : base(options) { }
+        public MyContext13118(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<ReproEntity13118>(
@@ -4123,7 +4159,8 @@ END IN ('0a47bcb7-a1cb-4345-8944-c58f82d6aac7', '5f221fb9-66f4-442a-92c9-d97ed59
     {
         public DbSet<Todo> Todos { get; set; }
 
-        public MyContext12732(DbContextOptions options) : base(options) { }
+        public MyContext12732(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -4206,7 +4243,8 @@ ORDER BY [p].[Id]
     {
         public virtual DbSet<Partner13157> Partners { get; set; }
 
-        public MyContext13157(DbContextOptions options) : base(options) { }
+        public MyContext13157(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Address13157>().OwnsOne(x => x.Turnovers);
@@ -4277,7 +4315,8 @@ VALUES (@p0);
     {
         public virtual DbSet<BaseEntity13079> BaseEntities { get; set; }
 
-        public MyContext13079(DbContextOptions options) : base(options) { }
+        public MyContext13079(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -4333,7 +4372,8 @@ FROM [InventoryPools] AS [i]
     {
         public virtual DbSet<InventoryPool13587> InventoryPools { get; set; }
 
-        public MyContext13587(DbContextOptions options) : base(options) { }
+        public MyContext13587(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -4401,7 +4441,8 @@ ORDER BY [p].[Id]
         public virtual DbSet<Parent12518> Parents { get; set; }
         public virtual DbSet<Child12518> Children { get; set; }
 
-        public MyContext12518(DbContextOptions options) : base(options) { }
+        public MyContext12518(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -4483,7 +4524,8 @@ ORDER BY [p].[Id]
         public DbSet<Table1_12549> Table1 { get; set; }
         public DbSet<Table2_12549> Table2 { get; set; }
 
-        public MyContext12549(DbContextOptions options) : base(options) { }
+        public MyContext12549(DbContextOptions options)
+            : base(options) { }
 
         public class Table1_12549
         {
@@ -4564,7 +4606,8 @@ ORDER BY [b].[Id]
         public virtual DbSet<BaseType16233> Bases { get; set; }
         public virtual DbSet<DerivedType16233> Derived { get; set; }
 
-        public MyContext16233(DbContextOptions options) : base(options) { }
+        public MyContext16233(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -4642,7 +4685,8 @@ LEFT JOIN [Categories] AS [c] ON [p].[CategoryId] = [c].[Id]
         public DbSet<Category15684> Categories { get; set; }
         public DbSet<Product15684> Products { get; set; }
 
-        public MyContext15684(DbContextOptions options) : base(options) { }
+        public MyContext15684(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -4789,7 +4833,8 @@ WHERE [c].[Name] = N'Leeds'
         public DbSet<TBuilder15204> Builder { get; set; }
         public DbSet<TCity15204> City { get; set; }
 
-        public MyContext15204(DbContextOptions options) : base(options)
+        public MyContext15204(DbContextOptions options)
+            : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             ChangeTracker.AutoDetectChangesEnabled = false;
@@ -4926,7 +4971,8 @@ WHERE [c].[Name] = N'Leeds'
     {
         public DbSet<Repo15518> Repos { get; set; }
 
-        public MyContext15518(DbContextOptions options) : base(options) { }
+        public MyContext15518(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -4970,7 +5016,8 @@ WHERE [c].[Name] = N'Leeds'
     {
         public DbSet<Customer8864> Customers { get; set; }
 
-        public MyContext8864(DbContextOptions options) : base(options) { }
+        public MyContext8864(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -5019,7 +5066,8 @@ FROM [Posts] AS [p]
         public DbSet<Blog7983> Blogs { get; set; }
         public DbSet<Post7983> Posts { get; set; }
 
-        public MyContext7983(DbContextOptions options) : base(options) { }
+        public MyContext7983(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -5125,7 +5173,8 @@ WHERE EXISTS (
         public DbSet<EntityWithQueryFilterCycle2> EntitiesWithQueryFilterCycle2 { get; set; }
         public DbSet<EntityWithQueryFilterCycle3> EntitiesWithQueryFilterCycle3 { get; set; }
 
-        public MyContext17253(DbContextOptions options) : base(options) { }
+        public MyContext17253(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -5302,7 +5351,8 @@ WHERE [p].[Id] = @__id_0
         public DbSet<RemovableEntity17276> RemovableEntities { get; set; }
         public DbSet<Parent17276> Parents { get; set; }
 
-        public MyContext17276(DbContextOptions options) : base(options) { }
+        public MyContext17276(DbContextOptions options)
+            : base(options) { }
 
         public static List<T> List17276<T>(IQueryable<T> query) where T : IRemovable17276 =>
             query.Where(x => !x.IsRemoved).ToList();
@@ -5475,7 +5525,8 @@ WHERE [f].[String] = N'1337'
     {
         public DbSet<FooEntity6864> Foos { get; set; }
 
-        public MyContext6864(DbContextOptions options) : base(options) { }
+        public MyContext6864(DbContextOptions options)
+            : base(options) { }
 
         public class FooEntity6864
         {
@@ -5531,7 +5582,8 @@ WHERE [t].[Nombre] LIKE '%lla%'
 
     protected class MyContext9582 : DbContext
     {
-        public MyContext9582(DbContextOptions options) : base(options) { }
+        public MyContext9582(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -5591,7 +5643,8 @@ FROM [Blogs] AS [b]
     {
         public DbSet<Blog7222> Blogs { get; set; }
 
-        public MyContext7222(DbContextOptions options) : base(options) { }
+        public MyContext7222(DbContextOptions options)
+            : base(options) { }
 
         public void RunQuery() => Blogs.Select(b => ClientMethod(b)).ToList();
 
@@ -5734,7 +5787,8 @@ ORDER BY [p].[Id] DESC
     {
         public DbSet<Person17644> Persons { get; set; }
 
-        public MyContext17644(DbContextOptions options) : base(options) { }
+        public MyContext17644(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -5820,7 +5874,8 @@ ORDER BY [e].[Id], [t0].[Id]
         public DbSet<Thing11023> Things { get; set; }
         public DbSet<Subthing11023> Subthings { get; set; }
 
-        public MyContext11023(DbContextOptions options) : base(options) { }
+        public MyContext11023(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -5919,7 +5974,8 @@ CROSS JOIN (
         public DbSet<User7973> Users { get; set; }
         public DbSet<Organisation7973> Organisations { get; set; }
 
-        public MyContext7973(DbContextOptions options) : base(options) { }
+        public MyContext7973(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -6006,7 +6062,8 @@ CROSS JOIN (
     {
         public DbSet<Blog10447> Blogs { get; set; }
 
-        public MyContext10447(DbContextOptions options) : base(options) { }
+        public MyContext10447(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
@@ -6140,7 +6197,8 @@ INNER JOIN [ActivityType12456] AS [a0] ON [a].[ActivityTypeId] = [a0].[Id]
         public DbSet<Activity12456> Activities { get; set; }
         public DbSet<CompetitionSeason12456> CompetitionSeasons { get; set; }
 
-        public MyContext12456(DbContextOptions options) : base(options) { }
+        public MyContext12456(DbContextOptions options)
+            : base(options) { }
 
         public class CompetitionSeason12456
         {
@@ -6257,7 +6315,8 @@ ORDER BY [t0].[Id], [t1].[Id], [t1].[Id0]
     {
         public DbSet<DbTrade> Trades { get; set; }
 
-        public MyContext15137(DbContextOptions options) : base(options) { }
+        public MyContext15137(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -6375,7 +6434,8 @@ WHERE [e].[Id] = 1
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<IssueRefEntity13517>().HasQueryFilter(f => f.Public);
 
-        public IssueContext13517(DbContextOptions options) : base(options) { }
+        public IssueContext13517(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -6452,7 +6512,8 @@ WHERE EXISTS (
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
-        public IssueContext17794(DbContextOptions options) : base(options) { }
+        public IssueContext17794(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -6584,7 +6645,8 @@ FROM [MockEntities] AS [m]
 
     protected class IssueContext18087 : DbContext
     {
-        public IssueContext18087(DbContextOptions options) : base(options) { }
+        public IssueContext18087(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<MockEntity> MockEntities { get; set; }
 
@@ -6649,7 +6711,8 @@ WHERE [u].[Id] IS NOT NULL
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Person18759>().HasQueryFilter(p => p.UserDelete != null);
 
-        public IssueContext18759(DbContextOptions options) : base(options) { }
+        public IssueContext18759(DbContextOptions options)
+            : base(options) { }
 
         public class Person18759
         {
@@ -6716,7 +6779,8 @@ LEFT JOIN (
             modelBuilder.Entity<OtherEntity19138>();
         }
 
-        public IssueContext19138(DbContextOptions options) : base(options) { }
+        public IssueContext19138(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -6818,7 +6882,8 @@ LEFT JOIN [CustomerMemberships] AS [c0] ON [c].[Id] = [c0].[CustomerId]
 
     protected class IssueContext19708 : DbContext
     {
-        public IssueContext19708(DbContextOptions options) : base(options) { }
+        public IssueContext19708(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Customer19708> Customers { get; set; }
         public DbSet<CustomerMembership19708> CustomerMemberships { get; set; }
@@ -7044,7 +7109,8 @@ WHERE [e].[Id] = CAST(1 AS bigint)
 
     protected class IssueContext20097 : DbContext
     {
-        public IssueContext20097(DbContextOptions options) : base(options) { }
+        public IssueContext20097(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Entity20097> Entities { get; set; }
 
@@ -7094,7 +7160,8 @@ WHERE [e].[Id] = CAST(1 AS bigint)
 
     protected class IssueContext20609 : DbContext
     {
-        public IssueContext20609(DbContextOptions options) : base(options) { }
+        public IssueContext20609(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<BaseClass> BaseClasses { get; set; }
         public DbSet<SubA> SubAs { get; set; }
@@ -7425,7 +7492,8 @@ ORDER BY [p].[Id], [c].[Id]
 
     protected class IssueContext21355 : DbContext
     {
-        public IssueContext21355(DbContextOptions options) : base(options) { }
+        public IssueContext21355(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Parent21355> Parents { get; set; }
 
@@ -7524,7 +7592,8 @@ FROM [Parents] AS [p]
     {
         public DbSet<Parent21540> Parents { get; set; }
 
-        public MyContext21540(DbContextOptions options) : base(options) { }
+        public MyContext21540(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -7632,7 +7701,8 @@ FROM [Businesses] AS [b]
     {
         public DbSet<Business18346> Businesses { get; set; }
 
-        public MyContext18346(DbContextOptions options) : base(options) { }
+        public MyContext18346(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -7705,7 +7775,8 @@ FROM [Businesses] AS [b]
     {
         public DbSet<List21666> Lists { get; set; }
 
-        public MyContext21666(DbContextOptions options) : base(options) { }
+        public MyContext21666(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
@@ -7777,7 +7848,8 @@ WHERE [b].[Id] = 1
         public DbSet<BookCover21768> BookCovers { get; set; }
         public DbSet<CoverIllustration21768> CoverIllustrations { get; set; }
 
-        public MyContext21768(DbContextOptions options) : base(options) { }
+        public MyContext21768(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -7915,7 +7987,8 @@ CROSS JOIN (
     {
         public DbSet<Test19206> Tests { get; set; }
 
-        public MyContext19206(DbContextOptions options) : base(options) { }
+        public MyContext19206(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
@@ -7985,7 +8058,8 @@ WHERE ([e].[Name] <> N'Foo' OR ([e].[Name] IS NULL)) AND [e].[TenantId] = @__ef_
 
         public int TenantId { get; set; }
 
-        public MyContext18510(DbContextOptions options) : base(options) { }
+        public MyContext18510(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -8111,7 +8185,8 @@ ORDER BY [e].[Id]
     {
         public DbSet<AppEntity21803> Entities { get; set; }
 
-        public MyContext21803(DbContextOptions options) : base(options) { }
+        public MyContext21803(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -8171,7 +8246,8 @@ FROM [Entity21807] AS [e]
 
     protected class MyContext21807 : DbContext
     {
-        public MyContext21807(DbContextOptions options) : base(options) { }
+        public MyContext21807(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Entity21807>(builder =>
@@ -8262,7 +8338,8 @@ ORDER BY [u].[Id] DESC
 
     protected class MyContext22054 : DbContext
     {
-        public MyContext22054(DbContextOptions options) : base(options) { }
+        public MyContext22054(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<User22054>(builder =>
@@ -8431,7 +8508,8 @@ ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]
 
     protected class MyContext14911 : DbContext
     {
-        public MyContext14911(DbContextOptions options) : base(options) { }
+        public MyContext14911(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Aggregate14911>(builder =>
@@ -8634,7 +8712,8 @@ WHERE ([a].[Id] = @__entity_equality_a_0_Id AND [a0].[Id] = @__entity_equality_b
 
     protected class MyContext15215 : DbContext
     {
-        public MyContext15215(DbContextOptions options) : base(options) { }
+        public MyContext15215(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Auto15215> Autos { get; set; }
         public DbSet<EqualAuto15215> EqualAutos { get; set; }
@@ -8707,7 +8786,8 @@ ORDER BY [t].[Id], [t].[MasterTrunk22340Id], [t].[MasterTrunk22340Id0], [f0].[Cu
 
     protected class MyContext22340 : DbContext
     {
-        public MyContext22340(DbContextOptions options) : base(options) { }
+        public MyContext22340(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<MasterTrunk22340> MasterTrunk { get; set; }
 
@@ -8958,7 +9038,8 @@ FROM [CycleC] AS [c]
 
     protected class MyContext22568 : DbContext
     {
-        public MyContext22568(DbContextOptions options) : base(options) { }
+        public MyContext22568(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -9088,7 +9169,8 @@ FROM [CycleC] AS [c]
     {
         public DbSet<MyEntity12274> Entities { get; set; }
 
-        public MyContext12274(DbContextOptions options) : base(options) { }
+        public MyContext12274(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -9187,7 +9269,8 @@ FROM [Blogs] AS [b]
         public DbSet<Blog11835> Blogs { get; set; }
         public DbSet<Post11835> Posts { get; set; }
 
-        public MyContext11835(DbContextOptions options) : base(options) { }
+        public MyContext11835(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -9310,7 +9393,8 @@ ORDER BY [t].[Id], [t].[SecondOwner23211Id]
 
     protected class MyContext23211 : DbContext
     {
-        public MyContext23211(DbContextOptions options) : base(options) { }
+        public MyContext23211(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -9404,7 +9488,8 @@ WHERE [e].[Id] NOT IN (1, 7)
 
         public DbSet<MyEntity10295> Entities { get; set; }
 
-        public MyContext10295(DbContextOptions options) : base(options) { }
+        public MyContext10295(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<MyEntity10295>().HasQueryFilter(x => !_ids.Contains(x.Id));
@@ -9457,7 +9542,8 @@ WHERE [l].[Name] = N'My Location'
     {
         public DbSet<Location23282> Locations { get; set; }
 
-        public MyContext23282(DbContextOptions options) : base(options) { }
+        public MyContext23282(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -9772,7 +9858,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
         public DbSet<A19253> A { get; set; }
         public DbSet<B19253> B { get; set; }
 
-        public MyContext19253(DbContextOptions options) : base(options) { }
+        public MyContext19253(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -9878,7 +9965,8 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'
     {
         public DbSet<Blog23410> Blogs { get; set; }
 
-        public MyContext23410(DbContextOptions options) : base(options) { }
+        public MyContext23410(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -10043,7 +10131,8 @@ WHERE JSON_VALUE([b].[JObject], '$.Author') = N'Maumar'
 
     protected class MyContext22841 : DbContext
     {
-        public MyContext22841(DbContextOptions options) : base(options) { }
+        public MyContext22841(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -10118,7 +10207,8 @@ OUTPUT INSERTED.[Id], i._Position;
     {
         public virtual DbSet<BaseEntity12482> BaseEntities { get; set; }
 
-        public MyContext12482(DbContextOptions options) : base(options) { }
+        public MyContext12482(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<BaseEntity12482>();
@@ -10250,7 +10340,8 @@ OUTPUT INSERTED.[Id], i._Position;
 
     private class MyContext23674 : DbContext
     {
-        public MyContext23674(DbContextOptions options) : base(options) { }
+        public MyContext23674(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Principal23674>();
@@ -10430,7 +10521,8 @@ ORDER BY [t].[Id], [t].[Id0], [t].[Id1], [p0].[Id]
 
     private class MyContext23676 : DbContext
     {
-        public MyContext23676(DbContextOptions options) : base(options) { }
+        public MyContext23676(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<PersonEntity> Persons { get; set; }
 
@@ -10579,7 +10671,8 @@ ORDER BY [t].[Id], [t1].[DateArrived] DESC, [t1].[Id], [t1].[Id0]
 
     private class MyContext19947 : DbContext
     {
-        public MyContext19947(DbContextOptions options) : base(options) { }
+        public MyContext19947(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<EUser> Users { get; set; }
         public DbSet<Car> Cars { get; set; }
@@ -10696,7 +10789,8 @@ ORDER BY [t].[Id], [t0].[Id], [t0].[Id0]
 
     private class MyContext20813 : DbContext
     {
-        public MyContext20813(DbContextOptions options) : base(options) { }
+        public MyContext20813(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Order> Orders { get; set; }
     }
@@ -10786,7 +10880,8 @@ ORDER BY [t].[Id]
 
     private class MyContext18738 : DbContext
     {
-        public MyContext18738(DbContextOptions options) : base(options) { }
+        public MyContext18738(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<StudentGameMapper> StudentGameMapper { get; set; }
         public DbSet<InDoorSports> InDoorSports { get; set; }
@@ -10890,7 +10985,8 @@ ORDER BY [t].[Id]
 
     private class MyContext24216 : DbContext
     {
-        public MyContext24216(DbContextOptions options) : base(options) { }
+        public MyContext24216(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Gender> Gender { get; set; }
 
@@ -11002,7 +11098,8 @@ CROSS APPLY OPENJSON([c].[Json], N'$.items') AS [o]
     {
         public DbSet<Car24569> Cars { get; set; }
 
-        public MyContext24569(DbContextOptions options) : base(options) { }
+        public MyContext24569(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder
@@ -11079,7 +11176,8 @@ ORDER BY [t].[Id]
     {
         public DbSet<Test25400> Tests { get; set; }
 
-        public MyContext25400(DbContextOptions options) : base(options) { }
+        public MyContext25400(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Test25400>().HasKey(e => e.Id);
@@ -11209,7 +11307,8 @@ ORDER BY [t].[Id]
         public static readonly Guid Collection2Id = new("d347bbd5-003a-441f-a148-df8ab8ac4a29");
         public DbSet<Parent25225> Parents { get; set; }
 
-        public MyContext25225(DbContextOptions options) : base(options) { }
+        public MyContext25225(DbContextOptions options)
+            : base(options) { }
 
         public void Seed()
         {
@@ -11408,7 +11507,8 @@ WHERE [e].[TimeSpan] = @__parameter_0
     {
         public DbSet<Entity> Entities { get; set; }
 
-        public MyContext_26742(DbContextOptions options) : base(options) { }
+        public MyContext_26742(DbContextOptions options)
+            : base(options) { }
 
         public class Entity
         {

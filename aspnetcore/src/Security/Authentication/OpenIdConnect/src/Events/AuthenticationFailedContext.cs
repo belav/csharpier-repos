@@ -19,7 +19,8 @@ public class AuthenticationFailedContext : RemoteAuthenticationContext<OpenIdCon
         HttpContext context,
         AuthenticationScheme scheme,
         OpenIdConnectOptions options
-    ) : base(context, scheme, options, new AuthenticationProperties()) { }
+    )
+        : base(context, scheme, options, new AuthenticationProperties()) { }
 
     /// <summary>
     /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

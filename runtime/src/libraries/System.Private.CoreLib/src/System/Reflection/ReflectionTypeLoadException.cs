@@ -20,7 +20,8 @@ namespace System.Reflection
             Type?[]? classes,
             Exception?[]? exceptions,
             string? message
-        ) : base(message)
+        )
+            : base(message)
         {
             Types = classes ?? Type.EmptyTypes;
             LoaderExceptions = exceptions ?? Array.Empty<Exception>();

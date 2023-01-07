@@ -12,13 +12,14 @@ namespace System.ComponentModel.Composition
 {
     public class FilteringCollection<T, M> : AdaptingCollection<T, M>
     {
-        public FilteringCollection(Func<Lazy<T, M>, bool> filter) : base(e => e.Where(filter)) { }
+        public FilteringCollection(Func<Lazy<T, M>, bool> filter)
+            : base(e => e.Where(filter)) { }
     }
 
     public class OrderingCollection<T, M> : AdaptingCollection<T, M>
     {
-        public OrderingCollection(Func<Lazy<T, M>, object> keySelector) : this(keySelector, false)
-        { }
+        public OrderingCollection(Func<Lazy<T, M>, object> keySelector)
+            : this(keySelector, false) { }
 
         public OrderingCollection(Func<Lazy<T, M>, object> keySelector, bool descending)
             : base(e => descending ? e.OrderByDescending(keySelector) : e.OrderBy(keySelector)) { }
@@ -31,7 +32,8 @@ namespace System.ComponentModel.Composition
                 IEnumerable<Lazy<T, IDictionary<string, object>>>,
                 IEnumerable<Lazy<T, IDictionary<string, object>>>
             > adaptor
-        ) : base(adaptor) { }
+        )
+            : base(adaptor) { }
     }
 
     public class AdaptingCollection<T, M> : ICollection<Lazy<T, M>>, INotifyCollectionChanged
@@ -40,7 +42,8 @@ namespace System.ComponentModel.Composition
         private readonly Func<IEnumerable<Lazy<T, M>>, IEnumerable<Lazy<T, M>>> _adaptor = null;
         private List<Lazy<T, M>> _adaptedItems = null;
 
-        public AdaptingCollection() : this(null) { }
+        public AdaptingCollection()
+            : this(null) { }
 
         public AdaptingCollection(Func<IEnumerable<Lazy<T, M>>, IEnumerable<Lazy<T, M>>> adaptor)
         {

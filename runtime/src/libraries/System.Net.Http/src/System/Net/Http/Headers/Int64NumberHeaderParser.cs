@@ -16,7 +16,8 @@ namespace System.Net.Http.Headers
 
         internal static readonly Int64NumberHeaderParser Parser = new Int64NumberHeaderParser();
 
-        private Int64NumberHeaderParser() : base(false) { }
+        private Int64NumberHeaderParser()
+            : base(false) { }
 
         public override string ToString(object value)
         {

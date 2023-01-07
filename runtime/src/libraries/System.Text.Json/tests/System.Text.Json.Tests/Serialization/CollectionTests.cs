@@ -7,7 +7,8 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed partial class CollectionTestsDynamic_String : CollectionTests
     {
-        public CollectionTestsDynamic_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public CollectionTestsDynamic_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public sealed partial class CollectionTestsDynamic_AsyncStream : CollectionTests

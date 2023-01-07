@@ -1072,7 +1072,8 @@ public class RemoteAuthenticatorCoreTests
     private class TestSignOutSessionStateManager : SignOutSessionStateManager
 #pragma warning restore CS0618 // Type or member is obsolete, we keep it for now for backwards compatibility
     {
-        public TestSignOutSessionStateManager() : base(null) { }
+        public TestSignOutSessionStateManager()
+            : base(null) { }
 
         public bool SignOutState { get; set; } = true;
 
@@ -1216,8 +1217,8 @@ public class RemoteAuthenticatorCoreTests
 
     private class TestRenderer : Renderer
     {
-        public TestRenderer(IServiceProvider services) : base(services, NullLoggerFactory.Instance)
-        { }
+        public TestRenderer(IServiceProvider services)
+            : base(services, NullLoggerFactory.Instance) { }
 
         public int Attach(IComponent component) => AssignRootComponentId(component);
 

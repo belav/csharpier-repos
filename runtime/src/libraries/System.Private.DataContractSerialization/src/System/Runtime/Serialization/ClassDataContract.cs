@@ -36,7 +36,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal ClassDataContract(Type type) : base(new ClassDataContractCriticalHelper(type))
+        internal ClassDataContract(Type type)
+            : base(new ClassDataContractCriticalHelper(type))
         {
             InitClassDataContract();
         }
@@ -747,7 +748,8 @@ namespace System.Runtime.Serialization.DataContracts
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             internal ClassDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(DataContractPreserveMemberTypes)] Type type
-            ) : base(type)
+            )
+                : base(type)
             {
                 XmlQualifiedName xmlName = GetXmlNameAndSetHasDataContract(type);
                 if (type == Globals.TypeOfDBNull)
@@ -901,7 +903,8 @@ namespace System.Runtime.Serialization.DataContracts
                 [DynamicallyAccessedMembers(DataContractPreserveMemberTypes)] Type type,
                 XmlDictionaryString ns,
                 string[] memberNames
-            ) : base(type)
+            )
+                : base(type)
             {
                 XmlName = new XmlQualifiedName(
                     GetXmlNameAndSetHasDataContract(type).Name,

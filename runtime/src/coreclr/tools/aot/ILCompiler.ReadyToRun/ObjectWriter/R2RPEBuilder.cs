@@ -175,7 +175,8 @@ namespace ILCompiler.PEWriter
             Func<RuntimeFunctionsTableNode> getRuntimeFunctionsTable,
             int customPESectionAlignment,
             Func<IEnumerable<Blob>, BlobContentId> deterministicIdProvider
-        ) : base(peHeaderBuilder, deterministicIdProvider: deterministicIdProvider)
+        )
+            : base(peHeaderBuilder, deterministicIdProvider: deterministicIdProvider)
         {
             _target = target;
             _getRuntimeFunctionsTable = getRuntimeFunctionsTable;

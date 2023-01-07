@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.TaskList
             Solution solution,
             DocumentId documentId,
             ImmutableArray<TaskListItem> items
-        ) : base(id, solution.Workspace, documentId.ProjectId, documentId)
+        )
+            : base(id, solution.Workspace, documentId.ProjectId, documentId)
         {
             Solution = solution;
             TaskListItems = items;

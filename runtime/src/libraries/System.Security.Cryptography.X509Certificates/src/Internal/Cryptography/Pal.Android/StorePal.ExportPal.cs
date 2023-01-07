@@ -12,9 +12,11 @@ namespace Internal.Cryptography.Pal
     {
         private sealed class AndroidExportProvider : UnixExportProvider
         {
-            public AndroidExportProvider(ICertificatePalCore cert) : base(cert) { }
+            public AndroidExportProvider(ICertificatePalCore cert)
+                : base(cert) { }
 
-            public AndroidExportProvider(X509Certificate2Collection certs) : base(certs) { }
+            public AndroidExportProvider(X509Certificate2Collection certs)
+                : base(certs) { }
 
             protected override byte[] ExportPkcs7()
             {

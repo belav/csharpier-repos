@@ -24,10 +24,11 @@ public class TestApplicationPart : ApplicationPart, IApplicationPartTypeProvider
         Types = types;
     }
 
-    public TestApplicationPart(IEnumerable<Type> types) : this(types.Select(t => t.GetTypeInfo()))
-    { }
+    public TestApplicationPart(IEnumerable<Type> types)
+        : this(types.Select(t => t.GetTypeInfo())) { }
 
-    public TestApplicationPart(params Type[] types) : this(types.Select(t => t.GetTypeInfo())) { }
+    public TestApplicationPart(params Type[] types)
+        : this(types.Select(t => t.GetTypeInfo())) { }
 
     public override string Name => "Test part";
 

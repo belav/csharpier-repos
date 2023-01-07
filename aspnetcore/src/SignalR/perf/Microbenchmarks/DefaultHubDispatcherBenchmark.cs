@@ -101,7 +101,8 @@ public class DefaultHubDispatcherBenchmark
             ConnectionContext connectionContext,
             HubConnectionContextOptions contextOptions,
             ILoggerFactory loggerFactory
-        ) : base(connectionContext, contextOptions, loggerFactory) { }
+        )
+            : base(connectionContext, contextOptions, loggerFactory) { }
 
         public override ValueTask WriteAsync(
             HubMessage message,

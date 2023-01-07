@@ -41,7 +41,8 @@ namespace System.Web.Http.SelfHost.Channels
         /// specifies the type of security that is used to configure a service endpoint using the
         /// <see cref="HttpBinding"/> binding.
         /// </param>
-        public HttpBinding(HttpBindingSecurityMode securityMode) : this()
+        public HttpBinding(HttpBindingSecurityMode securityMode)
+            : this()
         {
             _security.Mode = securityMode;
         }

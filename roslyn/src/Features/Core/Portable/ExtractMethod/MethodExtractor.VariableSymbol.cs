@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 Compilation compilation,
                 IParameterSymbol parameterSymbol,
                 ITypeSymbol type
-            ) : base(compilation, type)
+            )
+                : base(compilation, type)
             {
                 Contract.ThrowIfNull(parameterSymbol);
                 _parameterSymbol = parameterSymbol;
@@ -216,7 +217,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 ILocalSymbol localSymbol,
                 ITypeSymbol type,
                 HashSet<int> nonNoisySet
-            ) : base(compilation, type)
+            )
+                : base(compilation, type)
             {
                 Contract.ThrowIfNull(localSymbol);
                 Contract.ThrowIfNull(nonNoisySet);
@@ -350,7 +352,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 Compilation compilation,
                 IRangeVariableSymbol symbol,
                 ITypeSymbol type
-            ) : base(compilation, type)
+            )
+                : base(compilation, type)
             {
                 Contract.ThrowIfNull(symbol);
                 _symbol = symbol;

@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal abstract class SyntaxList : GreenNode
 {
-    internal SyntaxList() : base(SyntaxKind.List) { }
+    internal SyntaxList()
+        : base(SyntaxKind.List) { }
 
     internal SyntaxList(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
         : base(SyntaxKind.List, diagnostics, annotations) { }
@@ -212,7 +213,8 @@ internal abstract class SyntaxList : GreenNode
             GreenNode child0,
             GreenNode child1,
             GreenNode child2
-        ) : base(diagnostics, annotations)
+        )
+            : base(diagnostics, annotations)
         {
             SlotCount = 3;
             AdjustFlagsAndWidth(child0);
@@ -275,7 +277,8 @@ internal abstract class SyntaxList : GreenNode
             RazorDiagnostic[] diagnostics,
             SyntaxAnnotation[] annotations,
             ArrayElement<GreenNode>[] children
-        ) : base(diagnostics, annotations)
+        )
+            : base(diagnostics, annotations)
         {
             this.children = children;
             this.InitializeChildren();
@@ -322,13 +325,15 @@ internal abstract class SyntaxList : GreenNode
 
     internal sealed class WithManyChildren : WithManyChildrenBase
     {
-        internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children) { }
+        internal WithManyChildren(ArrayElement<GreenNode>[] children)
+            : base(children) { }
 
         internal WithManyChildren(
             RazorDiagnostic[] diagnostics,
             SyntaxAnnotation[] annotations,
             ArrayElement<GreenNode>[] children
-        ) : base(diagnostics, annotations, children) { }
+        )
+            : base(diagnostics, annotations, children) { }
 
         internal override GreenNode SetDiagnostics(RazorDiagnostic[] errors)
         {
@@ -345,7 +350,8 @@ internal abstract class SyntaxList : GreenNode
     {
         private readonly int[] _childOffsets;
 
-        internal WithLotsOfChildren(ArrayElement<GreenNode>[] children) : base(children)
+        internal WithLotsOfChildren(ArrayElement<GreenNode>[] children)
+            : base(children)
         {
             _childOffsets = CalculateOffsets(children);
         }
@@ -355,7 +361,8 @@ internal abstract class SyntaxList : GreenNode
             SyntaxAnnotation[] annotations,
             ArrayElement<GreenNode>[] children,
             int[] childOffsets
-        ) : base(diagnostics, annotations, children)
+        )
+            : base(diagnostics, annotations, children)
         {
             _childOffsets = childOffsets;
         }

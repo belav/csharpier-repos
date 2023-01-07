@@ -28,7 +28,8 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
     public InMemoryQueryableMethodTranslatingExpressionVisitor(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext, subquery: false)
+    )
+        : base(dependencies, queryCompilationContext, subquery: false)
     {
         _expressionTranslator = new InMemoryExpressionTranslatingExpressionVisitor(
             queryCompilationContext,
@@ -52,7 +53,8 @@ public class InMemoryQueryableMethodTranslatingExpressionVisitor
     /// </summary>
     protected InMemoryQueryableMethodTranslatingExpressionVisitor(
         InMemoryQueryableMethodTranslatingExpressionVisitor parentVisitor
-    ) : base(parentVisitor.Dependencies, parentVisitor.QueryCompilationContext, subquery: true)
+    )
+        : base(parentVisitor.Dependencies, parentVisitor.QueryCompilationContext, subquery: true)
     {
         _expressionTranslator = new InMemoryExpressionTranslatingExpressionVisitor(
             QueryCompilationContext,

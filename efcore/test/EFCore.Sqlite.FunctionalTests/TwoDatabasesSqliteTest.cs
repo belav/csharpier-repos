@@ -7,7 +7,8 @@ public class TwoDatabasesSqliteTest
     : TwoDatabasesTestBase,
         IClassFixture<TwoDatabasesSqliteTest.TwoDatabasesFixture>
 {
-    public TwoDatabasesSqliteTest(TwoDatabasesFixture fixture) : base(fixture) { }
+    public TwoDatabasesSqliteTest(TwoDatabasesFixture fixture)
+        : base(fixture) { }
 
     protected new TwoDatabasesFixture Fixture => (TwoDatabasesFixture)base.Fixture;
 

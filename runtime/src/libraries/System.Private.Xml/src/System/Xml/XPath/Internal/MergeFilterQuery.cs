@@ -12,12 +12,14 @@ namespace MS.Internal.Xml.XPath
     {
         private readonly Query _child;
 
-        public MergeFilterQuery(Query input, Query child) : base(input)
+        public MergeFilterQuery(Query input, Query child)
+            : base(input)
         {
             _child = child;
         }
 
-        private MergeFilterQuery(MergeFilterQuery other) : base(other)
+        private MergeFilterQuery(MergeFilterQuery other)
+            : base(other)
         {
             _child = Clone(other._child);
         }

@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
             string debuggeeSideVisualizerTypeName,
             string debuggeeSideVisualizerAssemblyName,
             string visualizerDescription
-        ) : base(null)
+        )
+            : base(null)
         {
             UISideVisualizerTypeName = uiSideVisualizerTypeName;
             UISideVisualizerAssemblyName = uiSideVisualizerAssemblyName;

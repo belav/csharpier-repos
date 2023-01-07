@@ -15,7 +15,8 @@ namespace System.DirectoryServices
     {
         public DirectoryServicesCOMException() { }
 
-        public DirectoryServicesCOMException(string? message) : base(message) { }
+        public DirectoryServicesCOMException(string? message)
+            : base(message) { }
 
         public DirectoryServicesCOMException(string? message, Exception? inner)
             : base(message, inner) { }
@@ -27,7 +28,8 @@ namespace System.DirectoryServices
             string? extendedMessage,
             int extendedError,
             COMException e
-        ) : base(e.Message, e.ErrorCode)
+        )
+            : base(e.Message, e.ErrorCode)
         {
             ExtendedError = extendedError;
             ExtendedErrorMessage = extendedMessage;

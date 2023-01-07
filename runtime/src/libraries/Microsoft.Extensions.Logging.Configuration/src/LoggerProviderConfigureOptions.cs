@@ -18,6 +18,7 @@ namespace Microsoft.Extensions.Logging.Configuration
         [RequiresUnreferencedCode(LoggerProviderOptions.TrimmingRequiresUnreferencedCodeMessage)]
         public LoggerProviderConfigureOptions(
             ILoggerProviderConfiguration<TProvider> providerConfiguration
-        ) : base(providerConfiguration.Configuration) { }
+        )
+            : base(providerConfiguration.Configuration) { }
     }
 }

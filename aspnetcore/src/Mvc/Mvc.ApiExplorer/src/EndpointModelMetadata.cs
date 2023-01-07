@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 
 internal sealed class EndpointModelMetadata : ModelMetadata
 {
-    public EndpointModelMetadata(ModelMetadataIdentity identity) : base(identity)
+    public EndpointModelMetadata(ModelMetadataIdentity identity)
+        : base(identity)
     {
         IsBindingAllowed = true;
     }

@@ -60,7 +60,8 @@ internal sealed class CompareAttributeAdapter : AttributeAdapterBase<CompareAttr
     {
         public ModelValidationContextBase ValidationContext { get; set; } = default!;
 
-        public CompareAttributeWrapper(CompareAttribute attribute) : base(attribute.OtherProperty)
+        public CompareAttributeWrapper(CompareAttribute attribute)
+            : base(attribute.OtherProperty)
         {
             // Copy settable properties from wrapped attribute. Don't reset default message accessor (set as
             // CompareAttribute constructor calls ValidationAttribute constructor) when all properties are null to

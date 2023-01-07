@@ -79,7 +79,8 @@ namespace System.Runtime.Serialization
             return true;
         }
 
-        public DataContractSerializer(Type type) : this(type, (IEnumerable<Type>?)null) { }
+        public DataContractSerializer(Type type)
+            : this(type, (IEnumerable<Type>?)null) { }
 
         public DataContractSerializer(Type type, IEnumerable<Type>? knownTypes)
             : this(type, knownTypes, int.MaxValue, false, false) { }
@@ -92,7 +93,8 @@ namespace System.Runtime.Serialization
             string rootName,
             string rootNamespace,
             IEnumerable<Type>? knownTypes
-        ) : this(type, rootName, rootNamespace, knownTypes, false, false) { }
+        )
+            : this(type, rootName, rootNamespace, knownTypes, false, false) { }
 
         internal DataContractSerializer(
             Type type,
@@ -121,7 +123,8 @@ namespace System.Runtime.Serialization
             Type type,
             XmlDictionaryString rootName,
             XmlDictionaryString rootNamespace
-        ) : this(type, rootName, rootNamespace, null) { }
+        )
+            : this(type, rootName, rootNamespace, null) { }
 
         public DataContractSerializer(
             Type type,

@@ -39,7 +39,8 @@ namespace System.Xml.Xsl.Qil
             QilNode definition,
             QilNode sideEffects,
             XmlQueryType resultType
-        ) : base(nodeType)
+        )
+            : base(nodeType)
         {
             _arguments = arguments;
             _definition = definition;

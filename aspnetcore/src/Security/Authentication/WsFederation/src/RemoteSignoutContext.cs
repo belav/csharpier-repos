@@ -23,7 +23,9 @@ public class RemoteSignOutContext : RemoteAuthenticationContext<WsFederationOpti
         AuthenticationScheme scheme,
         WsFederationOptions options,
         WsFederationMessage message
-    ) : base(context, scheme, options, new AuthenticationProperties()) => ProtocolMessage = message;
+    )
+        : base(context, scheme, options, new AuthenticationProperties()) =>
+        ProtocolMessage = message;
 
     /// <summary>
     /// The signout message.

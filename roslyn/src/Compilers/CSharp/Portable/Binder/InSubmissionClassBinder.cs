@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder next,
             CompilationUnitSyntax declarationSyntax,
             bool inUsings
-        ) : base(submissionClass, next)
+        )
+            : base(submissionClass, next)
         {
             Debug.Assert(submissionClass.IsSubmissionClass);
             _declarationSyntax = declarationSyntax;

@@ -19,7 +19,8 @@ public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServ
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void LoadingApp_FrenchLanguage_Works()

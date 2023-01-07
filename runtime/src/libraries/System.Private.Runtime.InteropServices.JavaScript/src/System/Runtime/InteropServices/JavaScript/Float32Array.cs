@@ -9,23 +9,29 @@ namespace System.Runtime.InteropServices.JavaScript
     {
         public Float32Array() { }
 
-        public Float32Array(int length) : base(length) { }
+        public Float32Array(int length)
+            : base(length) { }
 
-        public Float32Array(ArrayBuffer buffer) : base(buffer) { }
+        public Float32Array(ArrayBuffer buffer)
+            : base(buffer) { }
 
-        public Float32Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
+        public Float32Array(ArrayBuffer buffer, int byteOffset)
+            : base(buffer, byteOffset) { }
 
         public Float32Array(ArrayBuffer buffer, int byteOffset, int length)
             : base(buffer, byteOffset, length) { }
 
-        public Float32Array(SharedArrayBuffer buffer) : base(buffer) { }
+        public Float32Array(SharedArrayBuffer buffer)
+            : base(buffer) { }
 
-        public Float32Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
+        public Float32Array(SharedArrayBuffer buffer, int byteOffset)
+            : base(buffer, byteOffset) { }
 
         public Float32Array(SharedArrayBuffer buffer, int byteOffset, int length)
             : base(buffer, byteOffset, length) { }
 
-        internal Float32Array(IntPtr jsHandle) : base(jsHandle) { }
+        internal Float32Array(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of Float32Array class to a float

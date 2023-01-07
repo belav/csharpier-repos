@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             SyntacticClassificationTypeMap typeMap,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext, assertIsForeground: false)
+        )
+            : base(threadingContext, assertIsForeground: false)
         {
             _typeMap = typeMap;
             _globalOptions = globalOptions;

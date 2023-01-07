@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             IClassificationTypeRegistryService classificationTypeRegistryService,
             InlineDiagnosticsLocations location,
             INavigateToLinkService navigateToLinkService
-        ) : base(editorFormatMap)
+        )
+            : base(editorFormatMap)
         {
             ErrorType = errorType;
             _diagnostic = diagnostic;

@@ -32,7 +32,8 @@ namespace System.Net.Http.Handlers
             ProgressMessageHandler handler,
             HttpRequestMessage request,
             HttpResponseMessage response
-        ) : base(innerStream)
+        )
+            : base(innerStream)
         {
             Contract.Assert(handler != null);
             Contract.Assert(request != null);

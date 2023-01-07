@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             VirtualCharSequence text,
             JsonCompilationUnit root,
             ImmutableArray<EmbeddedDiagnostic> diagnostics
-        ) : base(text, root, diagnostics) { }
+        )
+            : base(text, root, diagnostics) { }
     }
 }

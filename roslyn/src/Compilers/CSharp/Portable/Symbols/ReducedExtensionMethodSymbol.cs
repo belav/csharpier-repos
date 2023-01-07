@@ -680,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             public ReducedExtensionMethodParameterSymbol(
                 ReducedExtensionMethodSymbol containingMethod,
                 ParameterSymbol underlyingParameter
-            ) : base(underlyingParameter)
+            )
+                : base(underlyingParameter)
             {
                 Debug.Assert(containingMethod != null);
                 Debug.Assert(underlyingParameter.Ordinal > 0);

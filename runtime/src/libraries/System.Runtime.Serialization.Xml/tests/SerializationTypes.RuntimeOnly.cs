@@ -560,7 +560,8 @@ namespace SerializationTypes
     {
         public CircularLinkDerived() { }
 
-        public CircularLinkDerived(bool init) : base(init) { }
+        public CircularLinkDerived(bool init)
+            : base(init) { }
     }
 
     [DataContract]
@@ -617,7 +618,8 @@ namespace SerializationTypes
 
         public SimpleBaseDerived() { }
 
-        public SimpleBaseDerived(bool init) : base(init) { }
+        public SimpleBaseDerived(bool init)
+            : base(init) { }
     }
 
     [DataContract(IsReference = true)]
@@ -628,7 +630,8 @@ namespace SerializationTypes
 
         public SimpleBaseDerived2() { }
 
-        public SimpleBaseDerived2(bool init) : base(init) { }
+        public SimpleBaseDerived2(bool init)
+            : base(init) { }
     }
 
     [DataContract(IsReference = true)]
@@ -1293,7 +1296,8 @@ namespace SerializationTypes
     [DataContract]
     public class ArticleBase : IArticle
     {
-        public ArticleBase() : this("Untitled", "Uncategorized") { }
+        public ArticleBase()
+            : this("Untitled", "Uncategorized") { }
 
         public ArticleBase(string title, string category)
         {
@@ -1327,12 +1331,14 @@ namespace SerializationTypes
 
     public class NewsArticle : ArticleBase
     {
-        public NewsArticle() : base("Untitled News", "News") { }
+        public NewsArticle()
+            : base("Untitled News", "News") { }
     }
 
     public class SummaryArticle : ArticleBase
     {
-        public SummaryArticle() : base("Untitled Summary", "Summary") { }
+        public SummaryArticle()
+            : base("Untitled Summary", "Summary") { }
     }
 
     [DataContract]
@@ -1687,7 +1693,8 @@ namespace SerializationTypes
 
     public class CollectionWithoutDefaultConstructor : MyCollection<string>
     {
-        internal CollectionWithoutDefaultConstructor(string name) : base()
+        internal CollectionWithoutDefaultConstructor(string name)
+            : base()
         {
             Name = name;
         }
@@ -2244,9 +2251,11 @@ public class TypeWithCompilerGeneratedAttributeButWithoutPublicSetter
 
 public class TestableDerivedException : System.Exception
 {
-    public TestableDerivedException() : base() { }
+    public TestableDerivedException()
+        : base() { }
 
-    public TestableDerivedException(string message) : base(message) { }
+    public TestableDerivedException(string message)
+        : base(message) { }
 
     public TestableDerivedException(string message, Exception innerException)
         : base(message, innerException) { }
@@ -4228,7 +4237,8 @@ public class EmployeeC
 [DataContract]
 public class Manager : EmployeeC
 {
-    public Manager(string name) : base(name) { }
+    public Manager(string name)
+        : base(name) { }
 
     [DataMember]
     public int age;
@@ -4242,11 +4252,14 @@ public class MyArgumentException : Exception, ISerializable
 {
     private string _paramName;
 
-    public MyArgumentException() : base() { }
+    public MyArgumentException()
+        : base() { }
 
-    public MyArgumentException(string message) : base(message) { }
+    public MyArgumentException(string message)
+        : base(message) { }
 
-    public MyArgumentException(string message, string paramName) : base(message)
+    public MyArgumentException(string message, string paramName)
+        : base(message)
     {
         _paramName = paramName;
     }

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 GreenNode child0,
                 GreenNode child1,
                 GreenNode child2
-            ) : base(diagnostics, annotations)
+            )
+                : base(diagnostics, annotations)
             {
                 this.SlotCount = 3;
                 this.AdjustFlagsAndWidth(child0);
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 _child2 = child2;
             }
 
-            internal WithThreeChildren(ObjectReader reader) : base(reader)
+            internal WithThreeChildren(ObjectReader reader)
+                : base(reader)
             {
                 this.SlotCount = 3;
                 _child0 = (GreenNode)reader.ReadValue();

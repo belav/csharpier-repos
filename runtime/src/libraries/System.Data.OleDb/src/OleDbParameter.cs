@@ -22,11 +22,13 @@ namespace System.Data.OleDb
 
         private NativeDBType? _coerceMetaType;
 
-        public OleDbParameter() : base()
+        public OleDbParameter()
+            : base()
         { // V1.0 nothing
         }
 
-        public OleDbParameter(string? name, object? value) : this()
+        public OleDbParameter(string? name, object? value)
+            : this()
         {
             Debug.Assert(!(value is OleDbType), "use OleDbParameter(string, OleDbType)");
             Debug.Assert(!(value is SqlDbType), "use OleDbParameter(string, OleDbType)");
@@ -35,13 +37,15 @@ namespace System.Data.OleDb
             Value = value;
         }
 
-        public OleDbParameter(string? name, OleDbType dataType) : this()
+        public OleDbParameter(string? name, OleDbType dataType)
+            : this()
         {
             ParameterName = name;
             OleDbType = dataType;
         }
 
-        public OleDbParameter(string? name, OleDbType dataType, int size) : this()
+        public OleDbParameter(string? name, OleDbType dataType, int size)
+            : this()
         {
             ParameterName = name;
             OleDbType = dataType;
@@ -69,7 +73,8 @@ namespace System.Data.OleDb
             string? srcColumn,
             DataRowVersion srcVersion,
             object? value
-        ) : this()
+        )
+            : this()
         { // V1.0 everything
             ParameterName = parameterName;
             OleDbType = dbType;
@@ -95,7 +100,8 @@ namespace System.Data.OleDb
             DataRowVersion sourceVersion,
             bool sourceColumnNullMapping,
             object? value
-        ) : this()
+        )
+            : this()
         { // V2.0 everything - round trip all browsable properties + precision/scale
             ParameterName = parameterName;
             OleDbType = dbType;

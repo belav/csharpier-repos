@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class DescendingKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public DescendingKeywordRecommender() : base(SyntaxKind.DescendingKeyword) { }
+        public DescendingKeywordRecommender()
+            : base(SyntaxKind.DescendingKeyword) { }
 
         protected override bool IsValidContext(
             int position,

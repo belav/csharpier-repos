@@ -24,7 +24,8 @@ internal sealed class ConcurrencyLimiterEventSource : EventSource
     private long _rejectedRequests;
     private int _queueLength;
 
-    internal ConcurrencyLimiterEventSource() : base("Microsoft.AspNetCore.ConcurrencyLimiter") { }
+    internal ConcurrencyLimiterEventSource()
+        : base("Microsoft.AspNetCore.ConcurrencyLimiter") { }
 
     // Used for testing
     internal ConcurrencyLimiterEventSource(string eventSourceName)

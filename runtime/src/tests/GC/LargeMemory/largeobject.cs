@@ -13,7 +13,8 @@ public sealed class LargeObject
 
     public const long MB = 1024 * 1024;
 
-    public LargeObject(uint sizeInMB) : this(sizeInMB, false) { }
+    public LargeObject(uint sizeInMB)
+        : this(sizeInMB, false) { }
 
     public LargeObject(uint sizeInMB, bool finalize)
     {

@@ -12,7 +12,8 @@ namespace System.ComponentModel
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class DataObjectFieldAttribute : Attribute
     {
-        public DataObjectFieldAttribute(bool primaryKey) : this(primaryKey, false, false, -1) { }
+        public DataObjectFieldAttribute(bool primaryKey)
+            : this(primaryKey, false, false, -1) { }
 
         public DataObjectFieldAttribute(bool primaryKey, bool isIdentity)
             : this(primaryKey, isIdentity, false, -1) { }

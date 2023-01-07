@@ -23,7 +23,8 @@ public class ActionExecutedContext : FilterContext
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
         object controller
-    ) : base(actionContext, filters)
+    )
+        : base(actionContext, filters)
     {
         Controller = controller;
     }

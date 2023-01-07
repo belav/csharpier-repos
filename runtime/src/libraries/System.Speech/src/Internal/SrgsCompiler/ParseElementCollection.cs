@@ -9,7 +9,8 @@ namespace System.Speech.Internal.SrgsCompiler
 {
     internal abstract class ParseElementCollection : ParseElement
     {
-        protected ParseElementCollection(Backend backend, Rule rule) : base(rule)
+        protected ParseElementCollection(Backend backend, Rule rule)
+            : base(rule)
         {
             _backend = backend;
         }

@@ -130,7 +130,8 @@ namespace System.Linq.Expressions
             Expression lambda,
             IReadOnlyList<Expression> arguments,
             Type returnType
-        ) : base(lambda, returnType)
+        )
+            : base(lambda, returnType)
         {
             _arguments = arguments;
         }
@@ -155,8 +156,8 @@ namespace System.Linq.Expressions
 
     internal sealed class InvocationExpression0 : InvocationExpression
     {
-        public InvocationExpression0(Expression lambda, Type returnType) : base(lambda, returnType)
-        { }
+        public InvocationExpression0(Expression lambda, Type returnType)
+            : base(lambda, returnType) { }
 
         internal override ReadOnlyCollection<Expression> GetOrMakeArguments()
         {
@@ -226,7 +227,8 @@ namespace System.Linq.Expressions
             Type returnType,
             Expression arg0,
             Expression arg1
-        ) : base(lambda, returnType)
+        )
+            : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -276,7 +278,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) : base(lambda, returnType)
+        )
+            : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -331,7 +334,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) : base(lambda, returnType)
+        )
+            : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -397,7 +401,8 @@ namespace System.Linq.Expressions
             Expression arg2,
             Expression arg3,
             Expression arg4
-        ) : base(lambda, returnType)
+        )
+            : base(lambda, returnType)
         {
             _arg0 = arg0;
             _arg1 = arg1;

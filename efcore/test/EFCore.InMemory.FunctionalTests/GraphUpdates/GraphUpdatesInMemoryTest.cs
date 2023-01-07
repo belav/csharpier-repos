@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class GraphUpdatesInMemoryTest
     : GraphUpdatesTestBase<GraphUpdatesInMemoryTest.InMemoryFixture>
 {
-    public GraphUpdatesInMemoryTest(InMemoryFixture fixture) : base(fixture) { }
+    public GraphUpdatesInMemoryTest(InMemoryFixture fixture)
+        : base(fixture) { }
 
     // In-memory database does not have database default values
     public override Task Can_insert_when_composite_FK_has_default_value_for_one_part(bool async) =>

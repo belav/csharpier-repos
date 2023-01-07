@@ -290,7 +290,8 @@ public struct RenderTreeFrame
         int elementSubtreeLength,
         string elementName,
         object elementKey
-    ) : this()
+    )
+        : this()
     {
         SequenceField = sequence;
         FrameTypeField = RenderTreeFrameType.Element;
@@ -306,7 +307,8 @@ public struct RenderTreeFrame
         [DynamicallyAccessedMembers(LinkerFlags.Component)] Type componentType,
         ComponentState componentState,
         object componentKey
-    ) : this()
+    )
+        : this()
     {
         SequenceField = sequence;
         FrameTypeField = RenderTreeFrameType.Component;
@@ -322,7 +324,8 @@ public struct RenderTreeFrame
     }
 
     // Region constructor
-    private RenderTreeFrame(int sequence, int regionSubtreeLength) : this()
+    private RenderTreeFrame(int sequence, int regionSubtreeLength)
+        : this()
     {
         SequenceField = sequence;
         FrameTypeField = RenderTreeFrameType.Region;
@@ -330,7 +333,8 @@ public struct RenderTreeFrame
     }
 
     // Text/markup constructor
-    private RenderTreeFrame(int sequence, bool isMarkup, string textOrMarkup) : this()
+    private RenderTreeFrame(int sequence, bool isMarkup, string textOrMarkup)
+        : this()
     {
         SequenceField = sequence;
         if (isMarkup)
@@ -352,7 +356,8 @@ public struct RenderTreeFrame
         object attributeValue,
         ulong attributeEventHandlerId,
         string attributeEventUpdatesAttributeName
-    ) : this()
+    )
+        : this()
     {
         FrameTypeField = RenderTreeFrameType.Attribute;
         SequenceField = sequence;
@@ -367,7 +372,8 @@ public struct RenderTreeFrame
         int sequence,
         Action<ElementReference> elementReferenceCaptureAction,
         string elementReferenceCaptureId
-    ) : this()
+    )
+        : this()
     {
         FrameTypeField = RenderTreeFrameType.ElementReferenceCapture;
         SequenceField = sequence;
@@ -380,7 +386,8 @@ public struct RenderTreeFrame
         int sequence,
         Action<object> componentReferenceCaptureAction,
         int parentFrameIndex
-    ) : this()
+    )
+        : this()
     {
         FrameTypeField = RenderTreeFrameType.ComponentReferenceCapture;
         SequenceField = sequence;

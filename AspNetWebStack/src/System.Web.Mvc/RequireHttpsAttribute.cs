@@ -18,7 +18,8 @@ namespace System.Web.Mvc
     )]
     public class RequireHttpsAttribute : FilterAttribute, IAuthorizationFilter
     {
-        public RequireHttpsAttribute() : this(permanent: false) { }
+        public RequireHttpsAttribute()
+            : this(permanent: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RequireHttpsAttribute"/> class.

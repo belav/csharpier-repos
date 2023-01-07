@@ -438,7 +438,8 @@ namespace System.Reflection.Emit
 #endregion
 
         [DynamicDependency(nameof(rank))] // Automatically keeps all previous fields too due to StructLayout
-        internal ArrayType(Type elementType, int rank) : base(elementType)
+        internal ArrayType(Type elementType, int rank)
+            : base(elementType)
         {
             this.rank = rank;
         }
@@ -498,7 +499,8 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class ByRefType : SymbolType
     {
-        internal ByRefType(Type elementType) : base(elementType) { }
+        internal ByRefType(Type elementType)
+            : base(elementType) { }
 
         internal override Type InternalResolve()
         {
@@ -542,7 +544,8 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class PointerType : SymbolType
     {
-        internal PointerType(Type elementType) : base(elementType) { }
+        internal PointerType(Type elementType)
+            : base(elementType) { }
 
         internal override Type InternalResolve()
         {

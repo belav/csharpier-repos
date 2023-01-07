@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class GlobalVersionTests : IISFunctionalTestBase
 {
-    public GlobalVersionTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public GlobalVersionTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     private const string _handlerVersion20 = "2.0.0";
     private const string _helloWorldRequest = "HelloWorld";

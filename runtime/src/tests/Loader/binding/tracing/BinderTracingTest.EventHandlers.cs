@@ -15,7 +15,8 @@ namespace BinderTracingTests
 {
     public class BinderTestException : Exception
     {
-        public BinderTestException(string message) : base(message) { }
+        public BinderTestException(string message)
+            : base(message) { }
     }
 
     partial class BinderTracingTest

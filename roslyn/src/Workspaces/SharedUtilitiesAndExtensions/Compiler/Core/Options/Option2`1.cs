@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             OptionStorageLocation2 storageLocation
-        ) : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation)) { }
+        )
+            : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation)) { }
 
         public Option2(
             string feature,
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation2> storageLocations
-        ) : this(feature, group, name, defaultValue, storageLocations, null) { }
+        )
+            : this(feature, group, name, defaultValue, storageLocations, null) { }
 
         public Option2(
             string feature,

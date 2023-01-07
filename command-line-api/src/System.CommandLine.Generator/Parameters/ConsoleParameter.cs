@@ -4,7 +4,8 @@ namespace System.CommandLine.Generator.Parameters
 {
     internal class ConsoleParameter : Parameter, IEquatable<ConsoleParameter>
     {
-        public ConsoleParameter(ITypeSymbol consoleType) : base(consoleType) { }
+        public ConsoleParameter(ITypeSymbol consoleType)
+            : base(consoleType) { }
 
         public override string GetValueFromContext() => "context.Console";
 

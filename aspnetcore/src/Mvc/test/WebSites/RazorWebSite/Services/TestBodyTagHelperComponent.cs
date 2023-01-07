@@ -12,7 +12,8 @@ public class TestBodyTagHelperComponent : ITagHelperComponent
     private readonly int _order;
     private readonly string _html;
 
-    public TestBodyTagHelperComponent() : this(1, "<script>'This was injected!!'</script>") { }
+    public TestBodyTagHelperComponent()
+        : this(1, "<script>'This was injected!!'</script>") { }
 
     public TestBodyTagHelperComponent(int order, string html)
     {

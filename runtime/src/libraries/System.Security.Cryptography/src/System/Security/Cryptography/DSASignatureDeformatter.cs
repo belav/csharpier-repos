@@ -9,7 +9,8 @@ namespace System.Security.Cryptography
 
         public DSASignatureDeformatter() { }
 
-        public DSASignatureDeformatter(AsymmetricAlgorithm key) : this()
+        public DSASignatureDeformatter(AsymmetricAlgorithm key)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(key);
 

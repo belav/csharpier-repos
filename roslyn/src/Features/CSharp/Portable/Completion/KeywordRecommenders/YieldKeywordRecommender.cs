@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class YieldKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public YieldKeywordRecommender() : base(SyntaxKind.YieldKeyword) { }
+        public YieldKeywordRecommender()
+            : base(SyntaxKind.YieldKeyword) { }
 
         protected override bool IsValidContext(
             int position,

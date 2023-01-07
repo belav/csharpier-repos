@@ -10,7 +10,8 @@ namespace System.Xml
     // Represents the text content of an element or attribute.
     public class XmlWhitespace : XmlCharacterData
     {
-        protected internal XmlWhitespace(string? strData, XmlDocument doc) : base(strData, doc)
+        protected internal XmlWhitespace(string? strData, XmlDocument doc)
+            : base(strData, doc)
         {
             if (!doc.IsLoading && !CheckOnData(strData))
                 throw new ArgumentException(SR.Xdom_WS_Char);

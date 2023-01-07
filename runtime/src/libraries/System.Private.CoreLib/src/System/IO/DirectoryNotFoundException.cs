@@ -17,12 +17,14 @@ namespace System.IO
     )]
     public class DirectoryNotFoundException : IOException
     {
-        public DirectoryNotFoundException() : base(SR.Arg_DirectoryNotFoundException)
+        public DirectoryNotFoundException()
+            : base(SR.Arg_DirectoryNotFoundException)
         {
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }
 
-        public DirectoryNotFoundException(string? message) : base(message)
+        public DirectoryNotFoundException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }

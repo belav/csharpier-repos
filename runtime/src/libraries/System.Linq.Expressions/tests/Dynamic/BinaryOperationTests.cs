@@ -14,8 +14,8 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideBinaryOperationBinder : BinaryOperationBinder
         {
-            public MinimumOverrideBinaryOperationBinder(ExpressionType operation) : base(operation)
-            { }
+            public MinimumOverrideBinaryOperationBinder(ExpressionType operation)
+                : base(operation) { }
 
             public override DynamicMetaObject FallbackBinaryOperation(
                 DynamicMetaObject target,
@@ -799,7 +799,8 @@ namespace System.Dynamic.Tests
 
         private class BinaryCallSiteBinder : BinaryOperationBinder
         {
-            public BinaryCallSiteBinder() : base(ExpressionType.Add) { }
+            public BinaryCallSiteBinder()
+                : base(ExpressionType.Add) { }
 
             public override DynamicMetaObject FallbackBinaryOperation(
                 DynamicMetaObject target,

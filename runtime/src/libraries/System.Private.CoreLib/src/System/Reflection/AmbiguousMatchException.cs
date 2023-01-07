@@ -11,17 +11,20 @@ namespace System.Reflection
     )]
     public sealed class AmbiguousMatchException : SystemException
     {
-        public AmbiguousMatchException() : base(SR.Arg_AmbiguousMatchException)
+        public AmbiguousMatchException()
+            : base(SR.Arg_AmbiguousMatchException)
         {
             HResult = HResults.COR_E_AMBIGUOUSMATCH;
         }
 
-        public AmbiguousMatchException(string? message) : base(message)
+        public AmbiguousMatchException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_AMBIGUOUSMATCH;
         }
 
-        public AmbiguousMatchException(string? message, Exception? inner) : base(message, inner)
+        public AmbiguousMatchException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_AMBIGUOUSMATCH;
         }

@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.GoToDefinition
         public CSharpGoToDefinitionService(
             IThreadingContext threadingContext,
             IStreamingFindUsagesPresenter streamingPresenter
-        ) : base(threadingContext, streamingPresenter) { }
+        )
+            : base(threadingContext, streamingPresenter) { }
     }
 }

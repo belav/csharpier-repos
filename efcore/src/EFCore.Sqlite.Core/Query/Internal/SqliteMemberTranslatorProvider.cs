@@ -19,7 +19,8 @@ public class SqliteMemberTranslatorProvider : RelationalMemberTranslatorProvider
     /// </summary>
     public SqliteMemberTranslatorProvider(
         RelationalMemberTranslatorProviderDependencies dependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         var sqlExpressionFactory = (SqliteSqlExpressionFactory)dependencies.SqlExpressionFactory;
 

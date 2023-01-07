@@ -2403,7 +2403,8 @@ class TypeInGeneratedFile { }
             public GeneratedCodeAnalyzer(
                 GeneratedCodeAnalysisFlags? generatedCodeAnalysisFlags,
                 bool testIsGeneratedCodeInCallbacks = false
-            ) : base(generatedCodeAnalysisFlags, testIsGeneratedCodeInCallbacks) { }
+            )
+                : base(generatedCodeAnalysisFlags, testIsGeneratedCodeInCallbacks) { }
 
             protected override SyntaxKind ClassDeclarationSyntaxKind => SyntaxKind.ClassDeclaration;
         }

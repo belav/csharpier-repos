@@ -11,7 +11,8 @@ public class GeoPointConverter : ValueConverter<GeoPoint, Point>
     private static readonly GeometryFactory _geometryFactory =
         NtsGeometryServices.Instance.CreateGeometryFactory(srid: 0);
 
-    public GeoPointConverter() : this(_geometryFactory) { }
+    public GeoPointConverter()
+        : this(_geometryFactory) { }
 
     public GeoPointConverter(GeometryFactory geoFactory)
         : base(

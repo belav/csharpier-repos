@@ -28,7 +28,8 @@ public class SkipCollectionChangedEventData : SkipNavigationEventData, ICollecti
         ISkipNavigation navigation,
         IEnumerable<object> added,
         IEnumerable<object> removed
-    ) : base(eventDefinition, messageGenerator, navigation)
+    )
+        : base(eventDefinition, messageGenerator, navigation)
     {
         EntityEntry = entityEntry;
         Added = added;

@@ -37,7 +37,8 @@ namespace System.IO
 
         private const int MemStreamMaxLength = int.MaxValue;
 
-        public MemoryStream() : this(0) { }
+        public MemoryStream()
+            : this(0) { }
 
         public MemoryStream(int capacity)
         {
@@ -51,7 +52,8 @@ namespace System.IO
             _isOpen = true;
         }
 
-        public MemoryStream(byte[] buffer) : this(buffer, true) { }
+        public MemoryStream(byte[] buffer)
+            : this(buffer, true) { }
 
         public MemoryStream(byte[] buffer, bool writable)
         {

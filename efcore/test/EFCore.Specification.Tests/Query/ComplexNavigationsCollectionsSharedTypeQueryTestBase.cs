@@ -7,8 +7,8 @@ public abstract class ComplexNavigationsCollectionsSharedTypeQueryTestBase<TFixt
     : ComplexNavigationsCollectionsQueryTestBase<TFixture>
     where TFixture : ComplexNavigationsSharedTypeQueryFixtureBase, new()
 {
-    protected ComplexNavigationsCollectionsSharedTypeQueryTestBase(TFixture fixture) : base(fixture)
-    { }
+    protected ComplexNavigationsCollectionsSharedTypeQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override async Task Multiple_complex_includes_self_ref(bool async) =>
         Assert.Equal(

@@ -19,7 +19,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandlerTest_Headers : HttpClientHandlerTestBase
     {
-        public HttpClientHandlerTest_Headers(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Headers(ITestOutputHelper output)
+            : base(output) { }
 
         private sealed class DerivedHttpHeaders : HttpHeaders { }
 

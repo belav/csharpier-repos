@@ -813,7 +813,8 @@ public partial class DbContextTest
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 

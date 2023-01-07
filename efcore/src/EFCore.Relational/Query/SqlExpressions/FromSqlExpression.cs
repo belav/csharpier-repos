@@ -56,7 +56,8 @@ public class FromSqlExpression : TableExpressionBase, IClonableTableExpressionBa
         string sql,
         Expression arguments,
         IEnumerable<IAnnotation>? annotations
-    ) : base(alias, annotations)
+    )
+        : base(alias, annotations)
     {
         Table = tableBase;
         Sql = sql;

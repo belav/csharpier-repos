@@ -26,7 +26,8 @@ struct S1
     public S0 F3;
     public int F4;
 
-    public S1(int f4) : this()
+    public S1(int f4)
+        : this()
     {
         F4 = f4;
     }

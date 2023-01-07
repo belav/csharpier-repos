@@ -36,7 +36,9 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
         Func<Stream, Task> streamWriterCallback,
         string? contentType,
         string? fileDownloadName
-    ) : this(streamWriterCallback, contentType, fileDownloadName, enableRangeProcessing: false) { }
+    )
+        : this(streamWriterCallback, contentType, fileDownloadName, enableRangeProcessing: false)
+    { }
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with the provided values.

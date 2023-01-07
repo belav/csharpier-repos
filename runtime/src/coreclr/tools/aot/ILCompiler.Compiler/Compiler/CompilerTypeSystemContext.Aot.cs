@@ -43,7 +43,8 @@ namespace ILCompiler
             SharedGenericsMode genericsMode,
             DelegateFeature delegateFeatures,
             int genericCycleCutoffPoint = DefaultGenericCycleCutoffPoint
-        ) : base(details)
+        )
+            : base(details)
         {
             _genericsMode = genericsMode;
 

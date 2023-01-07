@@ -19,7 +19,8 @@ namespace System.Net.Http.Headers
         private MediaTypeHeaderParser(
             bool supportsMultipleValues,
             Func<MediaTypeHeaderValue> mediaTypeCreator
-        ) : base(supportsMultipleValues)
+        )
+            : base(supportsMultipleValues)
         {
             Debug.Assert(mediaTypeCreator != null);
             _mediaTypeCreator = mediaTypeCreator;

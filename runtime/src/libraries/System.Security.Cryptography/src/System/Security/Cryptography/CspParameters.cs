@@ -51,9 +51,11 @@ namespace System.Security.Cryptography
         [CLSCompliantAttribute(false)]
         public SecureString? KeyPassword { get; set; }
 
-        public CspParameters() : this(CapiHelper.DefaultRsaProviderType, null, null) { }
+        public CspParameters()
+            : this(CapiHelper.DefaultRsaProviderType, null, null) { }
 
-        public CspParameters(int dwTypeIn) : this(dwTypeIn, null, null) { }
+        public CspParameters(int dwTypeIn)
+            : this(dwTypeIn, null, null) { }
 
         public CspParameters(int dwTypeIn, string? strProviderNameIn)
             : this(dwTypeIn, strProviderNameIn, null) { }

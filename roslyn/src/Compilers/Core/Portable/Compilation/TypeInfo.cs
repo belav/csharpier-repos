@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis
             ITypeSymbol? convertedType,
             NullabilityInfo nullability,
             NullabilityInfo convertedNullability
-        ) : this()
+        )
+            : this()
         {
             Debug.Assert(
                 type is null || type.NullableAnnotation == nullability.FlowState.ToAnnotation()

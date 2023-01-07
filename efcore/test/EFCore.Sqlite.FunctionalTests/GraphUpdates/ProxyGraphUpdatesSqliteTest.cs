@@ -11,7 +11,8 @@ public class ProxyGraphUpdatesSqliteTest
         where TFixture : ProxyGraphUpdatesSqliteTestBase<TFixture>.ProxyGraphUpdatesSqliteFixtureBase,
             new()
     {
-        protected ProxyGraphUpdatesSqliteTestBase(TFixture fixture) : base(fixture) { }
+        protected ProxyGraphUpdatesSqliteTestBase(TFixture fixture)
+            : base(fixture) { }
 
         protected override void UseTransaction(
             DatabaseFacade facade,
@@ -31,8 +32,8 @@ public class ProxyGraphUpdatesSqliteTest
     public class LazyLoading
         : ProxyGraphUpdatesSqliteTestBase<LazyLoading.ProxyGraphUpdatesWithLazyLoadingSqliteFixture>
     {
-        public LazyLoading(ProxyGraphUpdatesWithLazyLoadingSqliteFixture fixture) : base(fixture)
-        { }
+        public LazyLoading(ProxyGraphUpdatesWithLazyLoadingSqliteFixture fixture)
+            : base(fixture) { }
 
         protected override bool DoesLazyLoading => true;
 
@@ -84,7 +85,8 @@ public class ProxyGraphUpdatesSqliteTest
     {
         public ChangeTrackingAndLazyLoading(
             ProxyGraphUpdatesWithChangeTrackingAndLazyLoadingSqliteFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         protected override bool DoesLazyLoading => true;
 

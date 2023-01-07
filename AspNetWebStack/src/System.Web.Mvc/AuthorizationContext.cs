@@ -13,8 +13,8 @@ namespace System.Web.Mvc
         [Obsolete(
             "The recommended alternative is the constructor AuthorizationContext(ControllerContext controllerContext, ActionDescriptor actionDescriptor)."
         )]
-        public AuthorizationContext(ControllerContext controllerContext) : base(controllerContext)
-        { }
+        public AuthorizationContext(ControllerContext controllerContext)
+            : base(controllerContext) { }
 
         [SuppressMessage(
             "Microsoft.Usage",
@@ -24,7 +24,8 @@ namespace System.Web.Mvc
         public AuthorizationContext(
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (actionDescriptor == null)
             {

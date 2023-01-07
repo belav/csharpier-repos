@@ -22,7 +22,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
     public class Derived : Parent
     {
-        public Derived(int y = 0) : base(x: 0) { }
+        public Derived(int y = 0)
+            : base(x: 0) { }
     }
 
     public class Test
@@ -61,7 +62,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
     public class Derived : Parent
     {
-        public Derived(dynamic y = null) : base(x: 0) { }
+        public Derived(dynamic y = null)
+            : base(x: 0) { }
     }
 
     public class Test
@@ -100,7 +102,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
     public class Derived : Parent
     {
-        public Derived(int y = 0) : base() { }
+        public Derived(int y = 0)
+            : base() { }
     }
 
     public class Test
@@ -139,7 +142,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
     public class Derived : Parent
     {
-        public Derived(dynamic y = null) : base() { }
+        public Derived(dynamic y = null)
+            : base() { }
     }
 
     public class Test
@@ -178,7 +182,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
     public class Derived : Parent
     {
-        public Derived(int y = 0) : base(1, y: 0) { }
+        public Derived(int y = 0)
+            : base(1, y: 0) { }
     }
 
     public class Test
@@ -217,7 +222,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
     public class Derived : Parent
     {
-        public Derived(dynamic y = null) : base(1, y: 0) { }
+        public Derived(dynamic y = null)
+            : base(1, y: 0) { }
     }
 
     public class Test

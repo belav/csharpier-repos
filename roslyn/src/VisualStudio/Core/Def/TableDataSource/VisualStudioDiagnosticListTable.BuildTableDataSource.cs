@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     Workspace workspace,
                     IThreadingContext threadingContext,
                     ExternalErrorDiagnosticUpdateSource errorSource
-                ) : base(workspace, threadingContext)
+                )
+                    : base(workspace, threadingContext)
                 {
                     _buildErrorSource = errorSource;
 
@@ -165,7 +166,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         DiagnosticTableEntriesSource source,
                         int version,
                         ImmutableArray<DiagnosticTableItem> items
-                    ) : base(threadingContext, version, items, ImmutableArray<ITrackingPoint>.Empty)
+                    )
+                        : base(
+                            threadingContext,
+                            version,
+                            items,
+                            ImmutableArray<ITrackingPoint>.Empty
+                        )
                     {
                         _source = source;
                     }

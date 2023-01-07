@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         internal SignatureHelpTriggerInfo(
             SignatureHelpTriggerReason triggerReason,
             char? triggerCharacter = null
-        ) : this()
+        )
+            : this()
         {
             Contract.ThrowIfTrue(
                 triggerReason == SignatureHelpTriggerReason.TypeCharCommand

@@ -119,7 +119,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         : PerAssemblyVersionResolutionBase,
             IClassFixture<PerAssemblyVersionResolutionBase.SharedTestState>
     {
-        public AppPerAssemblyVersionResolution(SharedTestState sharedState) : base(sharedState) { }
+        public AppPerAssemblyVersionResolution(SharedTestState sharedState)
+            : base(sharedState) { }
 
         protected override void RunTest(
             string testAssemblyName,

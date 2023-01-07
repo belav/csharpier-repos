@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class SizeOfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public SizeOfKeywordRecommender() : base(SyntaxKind.SizeOfKeyword) { }
+        public SizeOfKeywordRecommender()
+            : base(SyntaxKind.SizeOfKeyword) { }
 
         protected override bool IsValidContext(
             int position,

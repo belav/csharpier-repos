@@ -79,7 +79,8 @@ namespace System.Net
             SSLHandshakeCallback
         );
 
-        internal FtpControlStream(NetworkStream client) : base(client) { }
+        internal FtpControlStream(NetworkStream client)
+            : base(client) { }
 
         /// <summary>
         ///    <para>Closes the connecting socket to generate an error.</para>

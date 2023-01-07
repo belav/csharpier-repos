@@ -20,7 +20,8 @@ internal class DefaultTagHelperDescriptor : TagHelperDescriptor
         AllowedChildTagDescriptor[] allowedChildTags,
         Dictionary<string, string> metadata,
         RazorDiagnostic[] diagnostics
-    ) : base(kind)
+    )
+        : base(kind)
     {
         Name = name;
         AssemblyName = assemblyName;

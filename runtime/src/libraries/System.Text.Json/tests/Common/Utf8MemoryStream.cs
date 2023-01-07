@@ -11,12 +11,14 @@ namespace System.Text.Json.Serialization.Tests
     {
         private readonly bool _ignoreCancellationTokenOnWriteAsync;
 
-        public Utf8MemoryStream(bool ignoreCancellationTokenOnWriteAsync = false) : base()
+        public Utf8MemoryStream(bool ignoreCancellationTokenOnWriteAsync = false)
+            : base()
         {
             _ignoreCancellationTokenOnWriteAsync = ignoreCancellationTokenOnWriteAsync;
         }
 
-        public Utf8MemoryStream(string text) : base(Encoding.UTF8.GetBytes(text)) { }
+        public Utf8MemoryStream(string text)
+            : base(Encoding.UTF8.GetBytes(text)) { }
 
 #if NETCOREAPP
         public override ValueTask WriteAsync(

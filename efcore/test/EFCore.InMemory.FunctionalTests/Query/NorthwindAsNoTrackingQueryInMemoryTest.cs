@@ -8,5 +8,6 @@ public class NorthwindAsNoTrackingQueryInMemoryTest
 {
     public NorthwindAsNoTrackingQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 }

@@ -23,7 +23,8 @@ namespace System.Data.OleDb
 
         private object? _coercedValue;
 
-        private OleDbParameter(OleDbParameter source) : this()
+        private OleDbParameter(OleDbParameter source)
+            : this()
         { // V1.2.3300, Clone
             ADP.CheckArgumentNull(source, "source");
 

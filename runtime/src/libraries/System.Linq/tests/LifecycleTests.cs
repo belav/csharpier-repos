@@ -385,7 +385,8 @@ namespace System.Linq.Tests
                 string name,
                 Func<IEnumerable<int>, IEnumerable<int>> unary,
                 bool shortCircuits = false
-            ) : base(name, unary, shortCircuits) { }
+            )
+                : base(name, unary, shortCircuits) { }
         }
 
         private sealed class Binary
@@ -395,7 +396,8 @@ namespace System.Linq.Tests
                 string name,
                 Func<IEnumerable<int>, IEnumerable<int>, IEnumerable<int>> binary,
                 bool shortCircuits = false
-            ) : base(name, binary, shortCircuits) { }
+            )
+                : base(name, binary, shortCircuits) { }
         }
 
         private sealed class Sink : Operation<Action<IEnumerable<int>>>

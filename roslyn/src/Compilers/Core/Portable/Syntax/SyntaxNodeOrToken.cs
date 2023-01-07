@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis
         // For regular nodes it is set to -1 to distinguish from default(SyntaxToken)
         private readonly int _tokenIndex;
 
-        internal SyntaxNodeOrToken(SyntaxNode node) : this()
+        internal SyntaxNodeOrToken(SyntaxNode node)
+            : this()
         {
             Debug.Assert(!node.Green.IsList, "node cannot be a list");
             _position = node.Position;

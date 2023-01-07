@@ -270,7 +270,8 @@ namespace System.Net.Http
             public MockCompleteTaskOnCloseStream(
                 Stream innerStream,
                 TaskCompletionSource<bool> serializeToStreamTask
-            ) : base(innerStream, serializeToStreamTask) { }
+            )
+                : base(innerStream, serializeToStreamTask) { }
         }
 
         private class MockHttpClient : HttpClient

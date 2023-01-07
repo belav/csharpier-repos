@@ -604,7 +604,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class FakeSafeHandle : SafeHandle
         {
-            public FakeSafeHandle() : base(IntPtr.Zero, false) { }
+            public FakeSafeHandle()
+                : base(IntPtr.Zero, false) { }
 
             public override bool IsInvalid => throw new NotImplementedException();
 
@@ -615,7 +616,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class FakeCriticalHandle : CriticalHandle
         {
-            public FakeCriticalHandle() : base(IntPtr.Zero) { }
+            public FakeCriticalHandle()
+                : base(IntPtr.Zero) { }
 
             public override bool IsInvalid => true;
 

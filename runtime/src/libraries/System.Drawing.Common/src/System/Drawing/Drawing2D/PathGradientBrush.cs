@@ -11,7 +11,8 @@ namespace System.Drawing.Drawing2D
 {
     public sealed class PathGradientBrush : Brush
     {
-        public PathGradientBrush(PointF[] points) : this(points, WrapMode.Clamp) { }
+        public PathGradientBrush(PointF[] points)
+            : this(points, WrapMode.Clamp) { }
 
         public unsafe PathGradientBrush(PointF[] points, WrapMode wrapMode)
         {
@@ -40,7 +41,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        public PathGradientBrush(Point[] points) : this(points, WrapMode.Clamp) { }
+        public PathGradientBrush(Point[] points)
+            : this(points, WrapMode.Clamp) { }
 
         public unsafe PathGradientBrush(Point[] points, WrapMode wrapMode)
         {

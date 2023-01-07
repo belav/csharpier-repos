@@ -9,7 +9,8 @@ public abstract class ConcurrencyDetectorEnabledRelationalTestBase<TFixture>
     : ConcurrencyDetectorEnabledTestBase<TFixture>
     where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
 {
-    protected ConcurrencyDetectorEnabledRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected ConcurrencyDetectorEnabledRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected string NormalizeDelimitersInRawString(string sql) =>
         (Fixture.TestStore as RelationalTestStore)?.NormalizeDelimitersInRawString(sql) ?? sql;

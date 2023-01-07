@@ -18,7 +18,8 @@ namespace System.IO
                 DisposeAsyncFunc = () => ValueTask.CompletedTask
             };
 
-        public DelegateDelegatingStream(Stream innerStream) : base(innerStream) { }
+        public DelegateDelegatingStream(Stream innerStream)
+            : base(innerStream) { }
 
         public Func<bool> CanReadFunc { get; set; }
         public Func<bool> CanSeekFunc { get; set; }

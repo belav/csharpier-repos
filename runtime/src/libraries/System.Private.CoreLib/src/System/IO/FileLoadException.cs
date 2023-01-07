@@ -11,22 +11,26 @@ namespace System.IO
     )]
     public partial class FileLoadException : IOException
     {
-        public FileLoadException() : base(SR.IO_FileLoad)
+        public FileLoadException()
+            : base(SR.IO_FileLoad)
         {
             HResult = HResults.COR_E_FILELOAD;
         }
 
-        public FileLoadException(string? message) : base(message)
+        public FileLoadException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_FILELOAD;
         }
 
-        public FileLoadException(string? message, Exception? inner) : base(message, inner)
+        public FileLoadException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_FILELOAD;
         }
 
-        public FileLoadException(string? message, string? fileName) : base(message)
+        public FileLoadException(string? message, string? fileName)
+            : base(message)
         {
             HResult = HResults.COR_E_FILELOAD;
             FileName = fileName;

@@ -46,7 +46,8 @@ namespace System.Drawing
         /// </summary>
         internal sealed class WeakRefCollection : IList
         {
-            internal WeakRefCollection() : this(4) { }
+            internal WeakRefCollection()
+                : this(4) { }
 
             internal WeakRefCollection(int size) => InnerList = new ArrayList(size);
 

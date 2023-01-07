@@ -17,7 +17,8 @@ namespace Microsoft.Cci
         private static readonly ObjectPool<PooledBlobBuilder> s_chunkPool =
             new ObjectPool<PooledBlobBuilder>(() => new PooledBlobBuilder(ChunkSize), PoolSize);
 
-        private PooledBlobBuilder(int size) : base(size) { }
+        private PooledBlobBuilder(int size)
+            : base(size) { }
 
         public static PooledBlobBuilder GetInstance(int size = ChunkSize)
         {

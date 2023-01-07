@@ -128,7 +128,8 @@ namespace System.Data.ProviderBase
 
         private sealed class CommonLanguageSubsetDataReader : DataReaderContainer
         {
-            internal CommonLanguageSubsetDataReader(IDataReader dataReader) : base(dataReader)
+            internal CommonLanguageSubsetDataReader(IDataReader dataReader)
+                : base(dataReader)
             {
                 _fieldCount = VisibleFieldCount;
             }

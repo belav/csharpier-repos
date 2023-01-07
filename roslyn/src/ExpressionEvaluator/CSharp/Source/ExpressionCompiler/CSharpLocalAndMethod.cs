@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string displayName,
             MethodSymbol method,
             DkmClrCompilationResultFlags flags
-        ) : base(name, displayName, method.Name, flags)
+        )
+            : base(name, displayName, method.Name, flags)
         {
             Debug.Assert(method is EEMethodSymbol); // Expected but not required.
             _method = method;

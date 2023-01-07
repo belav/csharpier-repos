@@ -7,7 +7,8 @@ public abstract class ComplexNavigationsSharedTypeQueryTestBase<TFixture>
     : ComplexNavigationsQueryTestBase<TFixture>
     where TFixture : ComplexNavigationsSharedTypeQueryFixtureBase, new()
 {
-    protected ComplexNavigationsSharedTypeQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected ComplexNavigationsSharedTypeQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override Task Join_navigation_self_ref(bool async) =>
         AssertTranslationFailed(() => base.Join_navigation_self_ref(async));

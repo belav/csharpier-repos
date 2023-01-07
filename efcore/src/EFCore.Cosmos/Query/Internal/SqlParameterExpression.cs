@@ -23,7 +23,8 @@ public sealed class SqlParameterExpression : SqlExpression
     public SqlParameterExpression(
         ParameterExpression parameterExpression,
         CoreTypeMapping? typeMapping
-    ) : base(parameterExpression.Type, typeMapping)
+    )
+        : base(parameterExpression.Type, typeMapping)
     {
         Check.DebugAssert(parameterExpression.Name != null, "Parameter must have name.");
 

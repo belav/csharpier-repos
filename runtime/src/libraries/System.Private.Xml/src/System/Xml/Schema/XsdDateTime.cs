@@ -165,7 +165,8 @@ namespace System.Xml.Schema
         /// <summary>
         /// Constructs an XsdDateTime from a string using specific format.
         /// </summary>
-        public XsdDateTime(string text, XsdDateTimeFlags kinds) : this()
+        public XsdDateTime(string text, XsdDateTimeFlags kinds)
+            : this()
         {
             Parser parser = default;
             if (!parser.Parse(text, kinds))
@@ -175,7 +176,8 @@ namespace System.Xml.Schema
             InitiateXsdDateTime(parser);
         }
 
-        private XsdDateTime(Parser parser) : this()
+        private XsdDateTime(Parser parser)
+            : this()
         {
             InitiateXsdDateTime(parser);
         }

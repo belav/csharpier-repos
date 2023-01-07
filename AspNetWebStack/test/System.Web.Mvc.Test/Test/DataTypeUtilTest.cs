@@ -11,7 +11,8 @@ namespace System.Web.Mvc.Test
     {
         private class DerivedDataTypeAttribute : DataTypeAttribute
         {
-            public DerivedDataTypeAttribute(DataType dataType) : base(dataType) { }
+            public DerivedDataTypeAttribute(DataType dataType)
+                : base(dataType) { }
 
             public override string GetDataTypeName()
             {

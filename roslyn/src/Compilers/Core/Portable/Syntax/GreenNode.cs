@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis
             ushort kind,
             DiagnosticInfo[]? diagnostics,
             SyntaxAnnotation[]? annotations
-        ) : this(kind, diagnostics)
+        )
+            : this(kind, diagnostics)
         {
             if (annotations?.Length > 0)
             {
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticInfo[]? diagnostics,
             SyntaxAnnotation[]? annotations,
             int fullWidth
-        ) : this(kind, diagnostics, fullWidth)
+        )
+            : this(kind, diagnostics, fullWidth)
         {
             if (annotations?.Length > 0)
             {

@@ -148,7 +148,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         public VisualStudioWorkspaceImpl(
             ExportProvider exportProvider,
             IAsyncServiceProvider asyncServiceProvider
-        ) : base(VisualStudioMefHostServices.Create(exportProvider))
+        )
+            : base(VisualStudioMefHostServices.Create(exportProvider))
         {
             _threadingContext = exportProvider.GetExportedValue<IThreadingContext>();
             _globalOptions = exportProvider.GetExportedValue<IGlobalOptionService>();

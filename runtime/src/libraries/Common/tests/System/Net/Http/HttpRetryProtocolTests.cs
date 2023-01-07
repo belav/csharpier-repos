@@ -17,7 +17,8 @@ namespace System.Net.Http.Functional.Tests
     {
         private static readonly string s_simpleContent = "Hello World\r\n";
 
-        public HttpRetryProtocolTests(ITestOutputHelper output) : base(output) { }
+        public HttpRetryProtocolTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task GetAsync_RetryOnConnectionClosed_Success()

@@ -88,12 +88,14 @@ namespace System.Text
         private readonly char _charUnknownLow;
         private readonly int _index;
 
-        public EncoderFallbackException() : base(SR.Arg_ArgumentException)
+        public EncoderFallbackException()
+            : base(SR.Arg_ArgumentException)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
 
-        public EncoderFallbackException(string? message) : base(message)
+        public EncoderFallbackException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -116,7 +118,8 @@ namespace System.Text
             char charUnknownHigh,
             char charUnknownLow,
             int index
-        ) : base(message)
+        )
+            : base(message)
         {
             if (!char.IsHighSurrogate(charUnknownHigh))
             {
@@ -141,7 +144,8 @@ namespace System.Text
         private EncoderFallbackException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
 
         public char CharUnknown => _charUnknown;
 

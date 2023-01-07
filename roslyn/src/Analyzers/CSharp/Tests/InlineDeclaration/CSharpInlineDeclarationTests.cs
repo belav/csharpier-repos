@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineDeclaration
     public partial class CSharpInlineDeclarationTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public CSharpInlineDeclarationTests(ITestOutputHelper logger) : base(logger) { }
+        public CSharpInlineDeclarationTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

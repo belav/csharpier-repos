@@ -7,7 +7,8 @@ namespace System.Web.Mvc
 {
     public class FileContentResult : FileResult
     {
-        public FileContentResult(byte[] fileContents, string contentType) : base(contentType)
+        public FileContentResult(byte[] fileContents, string contentType)
+            : base(contentType)
         {
             if (fileContents == null)
             {

@@ -34,7 +34,8 @@ namespace ILCompiler.DependencyAnalysis
                 MethodDesc implementationMethod,
                 TypeDesc implementationType,
                 DefaultInterfaceMethodResolution defaultResolution
-            ) : base(callingMethod, implementationMethod)
+            )
+                : base(callingMethod, implementationMethod)
             {
                 ImplementationType = implementationType;
                 DefaultResolution = defaultResolution;

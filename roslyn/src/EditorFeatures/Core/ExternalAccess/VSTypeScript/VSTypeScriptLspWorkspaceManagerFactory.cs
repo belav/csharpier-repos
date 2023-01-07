@@ -22,5 +22,6 @@ internal class VSTypeScriptLspWorkspaceManagerFactory : LspWorkspaceManagerFacto
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public VSTypeScriptLspWorkspaceManagerFactory(
         LspWorkspaceRegistrationService lspWorkspaceRegistrationService
-    ) : base(lspWorkspaceRegistrationService) { }
+    )
+        : base(lspWorkspaceRegistrationService) { }
 }

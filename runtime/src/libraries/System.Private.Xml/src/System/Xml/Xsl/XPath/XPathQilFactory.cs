@@ -11,7 +11,8 @@ namespace System.Xml.Xsl.XPath
 {
     internal class XPathQilFactory : QilPatternFactory
     {
-        public XPathQilFactory(QilFactory f, bool debug) : base(f, debug) { }
+        public XPathQilFactory(QilFactory f, bool debug)
+            : base(f, debug) { }
 
         // Helper methods used in addition to QilPatternFactory's ones
 

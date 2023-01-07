@@ -1249,7 +1249,8 @@ namespace System.Tests
     {
         public int TestVal2;
 
-        public TestAttribute2(int i) : base(i + 10) { }
+        public TestAttribute2(int i)
+            : base(i + 10) { }
     }
 
     [TestAttribute(1)]

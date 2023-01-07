@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder rootBinder,
             int position,
             SpeculativeBindingOption bindingOption
-        ) : base(parentSemanticModel.Compilation, parentSemanticModel.SyntaxTree, root.SyntaxTree)
+        )
+            : base(parentSemanticModel.Compilation, parentSemanticModel.SyntaxTree, root.SyntaxTree)
         {
             _parentSemanticModel = parentSemanticModel;
             _root = root;

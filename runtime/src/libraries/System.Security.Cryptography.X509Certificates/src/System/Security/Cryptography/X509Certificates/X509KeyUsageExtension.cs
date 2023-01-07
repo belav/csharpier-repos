@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509KeyUsageExtension : X509Extension
     {
-        public X509KeyUsageExtension() : base(Oids.KeyUsageOid)
+        public X509KeyUsageExtension()
+            : base(Oids.KeyUsageOid)
         {
             _decoded = true;
         }

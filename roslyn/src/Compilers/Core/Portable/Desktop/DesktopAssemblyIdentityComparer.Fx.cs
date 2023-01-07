@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
         private sealed class FrameworkAssemblyDictionary
             : Dictionary<string, FrameworkAssemblyDictionary.Value>
         {
-            public FrameworkAssemblyDictionary() : base(SimpleNameComparer) { }
+            public FrameworkAssemblyDictionary()
+                : base(SimpleNameComparer) { }
 
             public readonly struct Value
             {

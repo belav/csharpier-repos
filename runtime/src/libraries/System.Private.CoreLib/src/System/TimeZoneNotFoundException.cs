@@ -13,7 +13,8 @@ namespace System
     {
         public TimeZoneNotFoundException() { }
 
-        public TimeZoneNotFoundException(string? message) : base(message) { }
+        public TimeZoneNotFoundException(string? message)
+            : base(message) { }
 
         public TimeZoneNotFoundException(string? message, Exception? innerException)
             : base(message, innerException) { }

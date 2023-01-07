@@ -22,7 +22,8 @@ namespace DebuggerTests
             Unset,
         }
 
-        public GetPropertiesTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public GetPropertiesTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         public static TheoryData<
             string,

@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class RefFieldParsingTests : ParsingTests
     {
-        public RefFieldParsingTests(ITestOutputHelper output) : base(output) { }
+        public RefFieldParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(LanguageVersion.CSharp10)]

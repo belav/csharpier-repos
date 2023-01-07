@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         protected AbstractFixAllCodeFixCodeAction(
             IFixAllState fixAllState,
             bool showPreviewChangesDialog
-        ) : base(fixAllState, showPreviewChangesDialog) { }
+        )
+            : base(fixAllState, showPreviewChangesDialog) { }
 
         protected override IFixAllContext CreateFixAllContext(
             IFixAllState fixAllState,

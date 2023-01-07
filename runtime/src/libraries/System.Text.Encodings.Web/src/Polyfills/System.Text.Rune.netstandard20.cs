@@ -45,7 +45,8 @@ namespace System.Text
         /// <exception cref="ArgumentOutOfRangeException">
         /// If <paramref name="value"/> does not represent a value Unicode scalar value.
         /// </exception>
-        public Rune(int value) : this((uint)value) { }
+        public Rune(int value)
+            : this((uint)value) { }
 
         // non-validating ctor
         private Rune(uint scalarValue, bool _)

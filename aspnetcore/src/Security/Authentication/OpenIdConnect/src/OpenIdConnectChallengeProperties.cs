@@ -30,7 +30,8 @@ public class OpenIdConnectChallengeProperties : OAuthChallengeProperties
     /// Initializes a new instance of <see cref="OpenIdConnectChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
-    public OpenIdConnectChallengeProperties(IDictionary<string, string?> items) : base(items) { }
+    public OpenIdConnectChallengeProperties(IDictionary<string, string?> items)
+        : base(items) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OpenIdConnectChallengeProperties"/>.
@@ -39,7 +40,8 @@ public class OpenIdConnectChallengeProperties : OAuthChallengeProperties
     public OpenIdConnectChallengeProperties(
         IDictionary<string, string?> items,
         IDictionary<string, object?> parameters
-    ) : base(items, parameters) { }
+    )
+        : base(items, parameters) { }
 
     /// <summary>
     /// The "max_age" parameter value being used for a challenge request.

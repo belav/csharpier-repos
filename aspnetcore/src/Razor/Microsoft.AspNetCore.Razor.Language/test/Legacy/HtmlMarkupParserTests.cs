@@ -214,7 +214,8 @@ public class HtmlMarkupParserTests
             return base.IsHtmlCommentAhead();
         }
 
-        public TestHtmlMarkupParser(ParserContext context) : base(context)
+        public TestHtmlMarkupParser(ParserContext context)
+            : base(context)
         {
             EnsureCurrent();
         }

@@ -12,7 +12,8 @@ public class FunctionalTestsBase : LoggedTest
 {
     private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";
 
-    public FunctionalTestsBase(ITestOutputHelper output = null) : base(output) { }
+    public FunctionalTestsBase(ITestOutputHelper output = null)
+        : base(output) { }
 
     protected IISDeployerBase _deployer;
 

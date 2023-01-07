@@ -35,7 +35,8 @@ public class RuntimeNavigation : RuntimePropertyBase, INavigation
         PropertyAccessMode propertyAccessMode,
         bool eagerLoaded,
         bool lazyLoadingEnabled
-    ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+    )
+        : base(name, propertyInfo, fieldInfo, propertyAccessMode)
     {
         ClrType = clrType;
         ForeignKey = foreignKey;

@@ -21,7 +21,8 @@ namespace Wasm.Build.NativeRebuild.Tests
         public NativeRebuildTestsBase(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext)
+        )
+            : base(output, buildContext)
         {
             _enablePerTestCleanup = true;
         }

@@ -164,7 +164,8 @@ public class ServerSentEventsTests : VerifiableLoggedTest
     {
         public bool ResponseBufferingDisabled { get; set; }
 
-        public HttpBufferingFeature(Stream stream) : base(stream) { }
+        public HttpBufferingFeature(Stream stream)
+            : base(stream) { }
 
         public override void DisableBuffering()
         {

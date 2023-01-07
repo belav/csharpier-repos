@@ -95,7 +95,8 @@ namespace System.Security.Cryptography.Tests
             ),
         };
 
-        public HmacSha384Tests() : base(s_testMacs4231) { }
+        public HmacSha384Tests()
+            : base(s_testMacs4231) { }
 
         [Fact]
         public void ProduceLegacyHmacValues()

@@ -25,8 +25,8 @@ public sealed class DesignTimeServicesReferenceAttribute : Attribute
     ///     The assembly-qualified name of the type that can be used to add additional design time services to a <see cref="ServiceCollection" />.
     ///     This type should implement <see cref="IDesignTimeServices" />.
     /// </param>
-    public DesignTimeServicesReferenceAttribute(string typeName) : this(typeName, forProvider: null)
-    { }
+    public DesignTimeServicesReferenceAttribute(string typeName)
+        : this(typeName, forProvider: null) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DesignTimeServicesReferenceAttribute" /> class.

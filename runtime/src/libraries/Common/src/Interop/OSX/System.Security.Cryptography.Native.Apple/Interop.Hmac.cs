@@ -65,7 +65,8 @@ namespace System.Security.Cryptography.Apple
 {
     internal sealed class SafeHmacHandle : SafeHandle
     {
-        public SafeHmacHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeHmacHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

@@ -15,7 +15,8 @@ namespace Wasm.Build.Tests
         public WasmBuildAppTest(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [MemberData(
@@ -300,7 +301,8 @@ namespace Wasm.Build.Tests
         public WasmBuildAppBase(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         protected void TestMain(
             string projectName,

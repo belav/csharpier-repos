@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.UnsafeKeyword,
         };
 
-        public FixedKeywordRecommender() : base(SyntaxKind.FixedKeyword) { }
+        public FixedKeywordRecommender()
+            : base(SyntaxKind.FixedKeyword) { }
 
         protected override bool IsValidContext(
             int position,

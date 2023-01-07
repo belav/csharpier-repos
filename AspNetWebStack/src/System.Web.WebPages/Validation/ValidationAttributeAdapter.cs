@@ -15,14 +15,16 @@ namespace System.Web.WebPages
             ValidationAttribute attribute,
             string errorMessage,
             ModelClientValidationRule clientValidationRule
-        ) : this(attribute, errorMessage, clientValidationRule, useUnvalidatedValues: false) { }
+        )
+            : this(attribute, errorMessage, clientValidationRule, useUnvalidatedValues: false) { }
 
         public ValidationAttributeAdapter(
             ValidationAttribute attribute,
             string errorMessage,
             ModelClientValidationRule clientValidationRule,
             bool useUnvalidatedValues
-        ) : base(errorMessage, useUnvalidatedValues)
+        )
+            : base(errorMessage, useUnvalidatedValues)
         {
             _attribute = attribute;
             _clientValidationRule = clientValidationRule;

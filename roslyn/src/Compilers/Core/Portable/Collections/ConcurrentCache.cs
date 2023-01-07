@@ -36,12 +36,14 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public ConcurrentCache(int size, IEqualityComparer<TKey> keyComparer) : base(size)
+        public ConcurrentCache(int size, IEqualityComparer<TKey> keyComparer)
+            : base(size)
         {
             _keyComparer = keyComparer;
         }
 
-        public ConcurrentCache(int size) : this(size, EqualityComparer<TKey>.Default) { }
+        public ConcurrentCache(int size)
+            : this(size, EqualityComparer<TKey>.Default) { }
 
         public bool TryAdd(TKey key, TValue value)
         {

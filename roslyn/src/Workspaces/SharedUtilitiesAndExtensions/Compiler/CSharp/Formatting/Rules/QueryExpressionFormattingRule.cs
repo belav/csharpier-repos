@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public QueryExpressionFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
+        public QueryExpressionFormattingRule()
+            : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private QueryExpressionFormattingRule(CSharpSyntaxFormattingOptions options)
         {

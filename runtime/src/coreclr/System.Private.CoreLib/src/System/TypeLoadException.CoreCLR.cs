@@ -14,7 +14,8 @@ namespace System
             string? assemblyName,
             string? messageArg,
             int resourceId
-        ) : base(null)
+        )
+            : base(null)
         {
             HResult = HResults.COR_E_TYPELOAD;
             _className = className;

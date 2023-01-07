@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 StateMachine stateMachine,
                 SnapshotSpan snapshotSpan,
                 IAsynchronousOperationListener asyncListener
-            ) : base(stateMachine.ThreadingContext)
+            )
+                : base(stateMachine.ThreadingContext)
             {
                 AssertIsForeground();
 

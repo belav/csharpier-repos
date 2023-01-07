@@ -10,7 +10,8 @@ public abstract class RelationalTypeMappingTest
 {
     protected class FakeValueConverter<TModel, TProvider> : ValueConverter<TModel, TProvider>
     {
-        public FakeValueConverter() : base(_ => (TProvider)(object)_, _ => (TModel)(object)_) { }
+        public FakeValueConverter()
+            : base(_ => (TProvider)(object)_, _ => (TModel)(object)_) { }
 
         public override Type ModelClrType { get; } = typeof(TModel);
         public override Type ProviderClrType { get; } = typeof(TProvider);
@@ -18,7 +19,8 @@ public abstract class RelationalTypeMappingTest
 
     protected class FakeValueComparer<T> : ValueComparer<T>
     {
-        public FakeValueComparer() : base(false) { }
+        public FakeValueComparer()
+            : base(false) { }
 
         public override Type Type { get; } = typeof(T);
     }
@@ -250,9 +252,11 @@ public abstract class RelationalTypeMappingTest
 
     protected class FakeTypeMapping : RelationalTypeMapping
     {
-        private FakeTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+        private FakeTypeMapping(RelationalTypeMappingParameters parameters)
+            : base(parameters) { }
 
-        public FakeTypeMapping() : base("storeType", typeof(object)) { }
+        public FakeTypeMapping()
+            : base("storeType", typeof(object)) { }
 
         public static object CreateParameters(
             Type type,
@@ -669,7 +673,8 @@ public abstract class RelationalTypeMappingTest
 
     private class FruityContext : DbContext
     {
-        public FruityContext(DbContextOptions options) : base(options) { }
+        public FruityContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Banana> Bananas { get; set; }
         public DbSet<Kiwi> Kiwi { get; set; }
@@ -694,7 +699,8 @@ public abstract class RelationalTypeMappingTest
 
     private class MismatchedFruityContext : FruityContext
     {
-        public MismatchedFruityContext(DbContextOptions options) : base(options) { }
+        public MismatchedFruityContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

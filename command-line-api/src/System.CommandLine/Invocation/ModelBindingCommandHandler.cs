@@ -41,7 +41,8 @@ namespace System.CommandLine.Invocation
         internal ModelBindingCommandHandler(
             MethodInfo handlerMethodInfo,
             IMethodDescriptor methodDescriptor
-        ) : this(handlerMethodInfo, methodDescriptor, null) { }
+        )
+            : this(handlerMethodInfo, methodDescriptor, null) { }
 
         internal ModelBindingCommandHandler(
             Delegate handlerDelegate,

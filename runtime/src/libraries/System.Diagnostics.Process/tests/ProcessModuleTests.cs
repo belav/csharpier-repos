@@ -82,7 +82,8 @@ namespace System.Diagnostics.Tests
 
         public class ModuleCollectionSubClass : ProcessModuleCollection
         {
-            public ModuleCollectionSubClass() : base() { }
+            public ModuleCollectionSubClass()
+                : base() { }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

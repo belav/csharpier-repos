@@ -14,7 +14,8 @@ internal class ShowRecoveryCodes : DefaultUIPage
         HttpClient client,
         IHtmlDocument showRecoveryCodes,
         DefaultUIContext context
-    ) : base(client, showRecoveryCodes, context)
+    )
+        : base(client, showRecoveryCodes, context)
     {
         _recoveryCodeElements = HtmlAssert.HasElements(".recovery-code", showRecoveryCodes);
         Context.RecoveryCodes = Codes.ToArray();

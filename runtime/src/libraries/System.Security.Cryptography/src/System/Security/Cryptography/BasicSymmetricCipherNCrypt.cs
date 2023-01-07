@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
             byte[]? iv,
             bool encrypting,
             int paddingSizeInBytes
-        ) : base(iv, blockSizeInBytes, paddingSizeInBytes)
+        )
+            : base(iv, blockSizeInBytes, paddingSizeInBytes)
         {
             _cipher = new BasicSymmetricCipherLiteNCrypt(
                 cngKeyFactory,

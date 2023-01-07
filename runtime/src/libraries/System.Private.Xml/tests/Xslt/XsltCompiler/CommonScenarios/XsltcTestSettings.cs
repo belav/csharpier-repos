@@ -11,7 +11,8 @@ namespace System.Xml.Tests
     {
         private ITestOutputHelper _output;
 
-        public XsltcTestSettings(ITestOutputHelper output) : base(output)
+        public XsltcTestSettings(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

@@ -34,7 +34,8 @@ internal class MPair<R, S> : MCell<R>
 {
     private S _s;
 
-    public MPair(R r, S s) : base(r)
+    public MPair(R r, S s)
+        : base(r)
     {
         _s = s;
     }

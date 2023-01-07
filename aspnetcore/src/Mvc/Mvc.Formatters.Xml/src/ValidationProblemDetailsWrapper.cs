@@ -17,7 +17,8 @@ public class ValidationProblemDetailsWrapper : ProblemDetailsWrapper, IUnwrappab
     /// <summary>
     /// Initializes a new instance of <see cref="ValidationProblemDetailsWrapper"/>.
     /// </summary>
-    public ValidationProblemDetailsWrapper() : this(new ValidationProblemDetails()) { }
+    public ValidationProblemDetailsWrapper()
+        : this(new ValidationProblemDetails()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ValidationProblemDetailsWrapper"/> for the specified

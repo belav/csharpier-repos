@@ -15,7 +15,8 @@ internal sealed class Http2MessageBody : MessageBody
     private readonly Http2Stream _context;
     private ReadResult _readResult;
 
-    public Http2MessageBody(Http2Stream context) : base(context)
+    public Http2MessageBody(Http2Stream context)
+        : base(context)
     {
         _context = context;
         ExtendedConnect = _context.IsExtendedConnectRequest;

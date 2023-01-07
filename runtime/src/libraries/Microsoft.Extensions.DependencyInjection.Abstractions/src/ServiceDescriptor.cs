@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 Type implementationType,
             ServiceLifetime lifetime
-        ) : this(serviceType, lifetime)
+        )
+            : this(serviceType, lifetime)
         {
             ThrowHelper.ThrowIfNull(serviceType);
             ThrowHelper.ThrowIfNull(implementationType);
@@ -59,7 +60,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type serviceType,
             Func<IServiceProvider, object> factory,
             ServiceLifetime lifetime
-        ) : this(serviceType, lifetime)
+        )
+            : this(serviceType, lifetime)
         {
             ThrowHelper.ThrowIfNull(serviceType);
             ThrowHelper.ThrowIfNull(factory);

@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 IFixAllProvider fixAllProvider,
                 IEnumerable<string> supportedDiagnosticIds,
                 ImmutableArray<FixAllScope> supportedScopes
-            ) : base(fixAllProvider, supportedScopes)
+            )
+                : base(fixAllProvider, supportedScopes)
             {
                 _supportedDiagnosticIds = supportedDiagnosticIds;
             }
@@ -142,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 IFixAllProvider fixAllProvider,
                 IConfigurationFixProvider suppressionFixer,
                 ImmutableArray<FixAllScope> supportedScopes
-            ) : base(fixAllProvider, supportedScopes)
+            )
+                : base(fixAllProvider, supportedScopes)
             {
                 _canBeSuppressedOrUnsuppressed = suppressionFixer.IsFixableDiagnostic;
             }
@@ -156,7 +158,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             public CodeRefactoringFixAllProviderInfo(
                 IFixAllProvider fixAllProvider,
                 ImmutableArray<FixAllScope> supportedScopes
-            ) : base(fixAllProvider, supportedScopes) { }
+            )
+                : base(fixAllProvider, supportedScopes) { }
 
             public override bool CanBeFixed(Diagnostic diagnostic) =>
                 throw ExceptionUtilities.Unreachable();

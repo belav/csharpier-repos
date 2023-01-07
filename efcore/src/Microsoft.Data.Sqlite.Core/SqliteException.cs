@@ -19,8 +19,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="message">The message to display for the exception. Can be null.</param>
         /// <param name="errorCode">The SQLite error code.</param>
-        public SqliteException(string? message, int errorCode) : this(message, errorCode, errorCode)
-        { }
+        public SqliteException(string? message, int errorCode)
+            : this(message, errorCode, errorCode) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteException" /> class.

@@ -21,7 +21,8 @@ namespace System.Security.Permissions
     )]
     public sealed class StorePermissionAttribute : CodeAccessSecurityAttribute
     {
-        public StorePermissionAttribute(SecurityAction action) : base(action) { }
+        public StorePermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public StorePermissionFlags Flags { get; set; }
         public bool CreateStore { get; set; }

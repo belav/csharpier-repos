@@ -33,7 +33,8 @@ namespace System.Diagnostics.Tracing
             string name,
             EventSource eventSource,
             Func<double> totalValueProvider
-        ) : base(name, eventSource)
+        )
+            : base(name, eventSource)
         {
             ArgumentNullException.ThrowIfNull(totalValueProvider);
 

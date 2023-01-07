@@ -321,7 +321,8 @@ namespace System.Management
             object context,
             ManagementScope scope,
             ManagementObject managementObject
-        ) : base(watcher, context, scope, null, null)
+        )
+            : base(watcher, context, scope, null, null)
         {
             this.managementObject = managementObject;
         }

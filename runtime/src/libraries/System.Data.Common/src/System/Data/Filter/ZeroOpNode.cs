@@ -15,7 +15,8 @@ namespace System.Data
         internal const int zop_False = 0;
         internal const int zop_Null = -1;
 
-        internal ZeroOpNode(int op) : base(null)
+        internal ZeroOpNode(int op)
+            : base(null)
         {
             _op = op;
             Debug.Assert(

@@ -15,7 +15,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         protected LayeredChannelAcceptor(
             ChannelManagerBase channelManager,
             IChannelListener<TInnerChannel> innerListener
-        ) : base(channelManager)
+        )
+            : base(channelManager)
         {
             _innerListener = innerListener;
         }

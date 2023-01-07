@@ -93,14 +93,16 @@ namespace System.Xml.Schema
             XmlNameTable nameTable,
             SchemaNames schemaNames,
             ValidationEventHandler? eventHandler
-        ) : this(nameTable, schemaNames, eventHandler, new XmlSchemaCompilationSettings()) { }
+        )
+            : this(nameTable, schemaNames, eventHandler, new XmlSchemaCompilationSettings()) { }
 
         public Preprocessor(
             XmlNameTable nameTable,
             SchemaNames schemaNames,
             ValidationEventHandler? eventHandler,
             XmlSchemaCompilationSettings compilationSettings
-        ) : base(nameTable, schemaNames, eventHandler, compilationSettings)
+        )
+            : base(nameTable, schemaNames, eventHandler, compilationSettings)
         {
             _referenceNamespaces = new Hashtable();
             _processedExternals = new Hashtable();

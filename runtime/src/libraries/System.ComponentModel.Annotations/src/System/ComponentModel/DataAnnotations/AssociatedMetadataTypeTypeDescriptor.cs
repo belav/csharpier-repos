@@ -21,7 +21,8 @@ namespace System.ComponentModel.DataAnnotations
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 Type? associatedMetadataType
-        ) : base(parent)
+        )
+            : base(parent)
         {
             AssociatedMetadataType =
                 associatedMetadataType ?? TypeDescriptorCache.GetAssociatedMetadataType(type);

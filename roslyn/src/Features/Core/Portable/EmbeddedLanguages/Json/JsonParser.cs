@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         private bool _inArray;
         private bool _inConstructor;
 
-        private JsonParser(VirtualCharSequence text) : this()
+        private JsonParser(VirtualCharSequence text)
+            : this()
         {
             _lexer = new JsonLexer(text);
 

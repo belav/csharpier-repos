@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.InMemory.Test;
 
 public class InMemoryContext : InMemoryContext<IdentityUser, IdentityRole, string>
 {
-    private InMemoryContext(DbConnection connection) : base(connection) { }
+    private InMemoryContext(DbConnection connection)
+        : base(connection) { }
 
     public static new InMemoryContext Create(DbConnection connection) =>
         Initialize(new InMemoryContext(connection));
@@ -75,5 +76,6 @@ public abstract class InMemoryContext<
     where TRoleClaim : IdentityRoleClaim<TKey>
     where TUserToken : IdentityUserToken<TKey>
 {
-    protected InMemoryContext(DbContextOptions options) : base(options) { }
+    protected InMemoryContext(DbContextOptions options)
+        : base(options) { }
 }

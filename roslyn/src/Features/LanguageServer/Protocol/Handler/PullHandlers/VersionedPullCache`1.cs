@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     internal class VersionedPullCache<TVersion> : VersionedPullCache<TVersion, object?>
     {
-        public VersionedPullCache(string uniqueKey) : base(uniqueKey) { }
+        public VersionedPullCache(string uniqueKey)
+            : base(uniqueKey) { }
 
         public Task<string?> GetNewResultIdAsync(
             Dictionary<Document, PreviousPullResult> documentToPreviousDiagnosticParams,

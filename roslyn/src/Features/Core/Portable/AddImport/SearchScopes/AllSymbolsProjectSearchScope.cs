@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Project project,
                 bool exact,
                 CancellationToken cancellationToken
-            ) : base(provider, project, exact, cancellationToken) { }
+            )
+                : base(provider, project, exact, cancellationToken) { }
 
             protected override async Task<ImmutableArray<ISymbol>> FindDeclarationsAsync(
                 SymbolFilter filter,

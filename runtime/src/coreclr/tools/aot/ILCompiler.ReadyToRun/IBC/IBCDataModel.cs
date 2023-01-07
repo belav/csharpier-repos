@@ -10,7 +10,8 @@ namespace ILCompiler.IBC
 {
     public class IBCException : Exception
     {
-        public IBCException(string message) : base(message) { }
+        public IBCException(string message)
+            : base(message) { }
     }
 
     public static class IBCData

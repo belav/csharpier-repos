@@ -71,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             Shell.SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
             _serviceProvider = serviceProvider;

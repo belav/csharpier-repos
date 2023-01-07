@@ -14,7 +14,8 @@ namespace System.Net.Http
     {
         public Http3ErrorCode ErrorCode { get; }
 
-        protected Http3ProtocolException(string message, Http3ErrorCode errorCode) : base(message)
+        protected Http3ProtocolException(string message, Http3ErrorCode errorCode)
+            : base(message)
         {
             ErrorCode = errorCode;
         }

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public SerializableSourceText(ITemporaryTextStorageWithName storage)
             : this(storage, text: null) { }
 
-        public SerializableSourceText(SourceText text) : this(storage: null, text) { }
+        public SerializableSourceText(SourceText text)
+            : this(storage: null, text) { }
 
         private SerializableSourceText(ITemporaryTextStorageWithName? storage, SourceText? text)
         {

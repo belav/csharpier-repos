@@ -85,7 +85,8 @@ namespace System.Web.Http.SelfHost
         /// Initializes a new instance of the <see cref="HttpSelfHostServer"/> class.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
-        public HttpSelfHostServer(HttpSelfHostConfiguration configuration) : base(configuration)
+        public HttpSelfHostServer(HttpSelfHostConfiguration configuration)
+            : base(configuration)
         {
             if (configuration == null)
             {
@@ -104,7 +105,8 @@ namespace System.Web.Http.SelfHost
         public HttpSelfHostServer(
             HttpSelfHostConfiguration configuration,
             HttpMessageHandler dispatcher
-        ) : base(configuration, dispatcher)
+        )
+            : base(configuration, dispatcher)
         {
             if (configuration == null)
             {

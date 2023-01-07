@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SourceNamespaceSymbol declaringSymbol,
                 CSharpSyntaxNode declarationSyntax,
                 WithUsingNamespacesAndTypesBinder next
-            ) : base(next)
+            )
+                : base(next)
             {
                 Debug.Assert(
                     declarationSyntax.Kind()
@@ -314,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<AliasAndExternAliasDirective> externAliases,
                 ImmutableDictionary<string, AliasAndUsingDirective> usingAliases,
                 WithUsingNamespacesAndTypesBinder next
-            ) : base(next)
+            )
+                : base(next)
             {
                 Debug.Assert(!externAliases.IsDefault);
                 _externAliases = externAliases;

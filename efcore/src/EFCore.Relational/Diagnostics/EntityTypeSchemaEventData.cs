@@ -24,7 +24,8 @@ public class EntityTypeSchemaEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEntityType entityType,
         string schema
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         EntityType = entityType;
         Schema = schema;

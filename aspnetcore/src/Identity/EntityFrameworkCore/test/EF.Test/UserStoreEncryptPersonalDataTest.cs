@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class ProtectedUserStoreTest : SqlStoreTestBase<IdentityUser, IdentityRole, string>
 {
-    public ProtectedUserStoreTest(ScratchDatabaseFixture fixture) : base(fixture) { }
+    public ProtectedUserStoreTest(ScratchDatabaseFixture fixture)
+        : base(fixture) { }
 
     protected override void SetupAddIdentity(IServiceCollection services)
     {

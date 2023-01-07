@@ -143,7 +143,8 @@ public sealed class XmlKeyManager : IKeyManager, IInternalXmlKeyManager
         IActivator activator,
         ILoggerFactory loggerFactory,
         IInternalXmlKeyManager internalXmlKeyManager
-    ) : this(keyManagementOptions, activator, loggerFactory)
+    )
+        : this(keyManagementOptions, activator, loggerFactory)
     {
         _internalKeyManager = internalXmlKeyManager;
     }

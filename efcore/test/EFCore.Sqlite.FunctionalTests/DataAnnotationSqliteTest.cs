@@ -10,7 +10,8 @@ public class DataAnnotationSqliteTest
     public DataAnnotationSqliteTest(
         DataAnnotationSqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

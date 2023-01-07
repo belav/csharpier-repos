@@ -13,7 +13,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         private readonly bool _isWrapper;
 
-        internal StringArgBuilder(Type parameterType) : base(parameterType)
+        internal StringArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(string) || parameterType == typeof(BStrWrapper));
             _isWrapper = parameterType == typeof(BStrWrapper);

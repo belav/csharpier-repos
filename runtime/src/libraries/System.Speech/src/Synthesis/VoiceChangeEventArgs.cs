@@ -6,7 +6,8 @@ namespace System.Speech.Synthesis
     public class VoiceChangeEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal VoiceChangeEventArgs(Prompt prompt, VoiceInfo voice) : base(prompt)
+        internal VoiceChangeEventArgs(Prompt prompt, VoiceInfo voice)
+            : base(prompt)
         {
             _voice = voice;
         }

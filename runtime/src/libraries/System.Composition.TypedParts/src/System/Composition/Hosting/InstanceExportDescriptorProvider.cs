@@ -15,7 +15,8 @@ namespace System.Composition.Hosting
             Type contractType,
             string contractName,
             IDictionary<string, object> metadata
-        ) : base(contractType, contractName, metadata)
+        )
+            : base(contractType, contractName, metadata)
         {
             _exportedInstance = exportedInstance;
         }

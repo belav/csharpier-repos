@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingPropertySymbol(
             RetargetingModuleSymbol retargetingModule,
             PropertySymbol underlyingProperty
-        ) : base(underlyingProperty)
+        )
+            : base(underlyingProperty)
         {
             Debug.Assert((object)retargetingModule != null);
             Debug.Assert(!(underlyingProperty is RetargetingPropertySymbol));

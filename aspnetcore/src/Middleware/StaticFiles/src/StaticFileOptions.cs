@@ -19,13 +19,15 @@ public class StaticFileOptions : SharedOptionsBase
     /// <summary>
     /// Defaults to all request paths
     /// </summary>
-    public StaticFileOptions() : this(new SharedOptions()) { }
+    public StaticFileOptions()
+        : this(new SharedOptions()) { }
 
     /// <summary>
     /// Defaults to all request paths
     /// </summary>
     /// <param name="sharedOptions"></param>
-    public StaticFileOptions(SharedOptions sharedOptions) : base(sharedOptions)
+    public StaticFileOptions(SharedOptions sharedOptions)
+        : base(sharedOptions)
     {
         OnPrepareResponse = _defaultOnPrepareResponse;
         OnPrepareResponseAsync = _defaultOnPrepareResponseAsync;

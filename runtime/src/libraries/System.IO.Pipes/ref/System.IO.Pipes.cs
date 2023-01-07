@@ -9,7 +9,8 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafePipeHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafePipeHandle() : base(default(bool)) { }
+        public SafePipeHandle()
+            : base(default(bool)) { }
 
         public SafePipeHandle(System.IntPtr preexistingHandle, bool ownsHandle)
             : base(default(bool)) { }
@@ -33,12 +34,14 @@ namespace System.IO.Pipes
         public AnonymousPipeClientStream(
             System.IO.Pipes.PipeDirection direction,
             Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public AnonymousPipeClientStream(
             System.IO.Pipes.PipeDirection direction,
             string pipeHandleAsString
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public AnonymousPipeClientStream(string pipeHandleAsString)
             : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
@@ -67,18 +70,21 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeDirection direction,
             Microsoft.Win32.SafeHandles.SafePipeHandle serverSafePipeHandle,
             Microsoft.Win32.SafeHandles.SafePipeHandle clientSafePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public AnonymousPipeServerStream(
             System.IO.Pipes.PipeDirection direction,
             System.IO.HandleInheritability inheritability
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public AnonymousPipeServerStream(
             System.IO.Pipes.PipeDirection direction,
             System.IO.HandleInheritability inheritability,
             int bufferSize
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public Microsoft.Win32.SafeHandles.SafePipeHandle ClientSafePipeHandle
         {
@@ -112,7 +118,8 @@ namespace System.IO.Pipes
             bool isAsync,
             bool isConnected,
             Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeClientStream(string pipeName)
             : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
@@ -124,14 +131,16 @@ namespace System.IO.Pipes
             string serverName,
             string pipeName,
             System.IO.Pipes.PipeDirection direction
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeClientStream(
             string serverName,
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
             System.IO.Pipes.PipeOptions options
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeClientStream(
             string serverName,
@@ -139,7 +148,8 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeDirection direction,
             System.IO.Pipes.PipeOptions options,
             System.Security.Principal.TokenImpersonationLevel impersonationLevel
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeClientStream(
             string serverName,
@@ -148,7 +158,8 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeOptions options,
             System.Security.Principal.TokenImpersonationLevel impersonationLevel,
             System.IO.HandleInheritability inheritability
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         public int NumberOfServerInstances
@@ -209,7 +220,8 @@ namespace System.IO.Pipes
             bool isAsync,
             bool isConnected,
             Microsoft.Win32.SafeHandles.SafePipeHandle safePipeHandle
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeServerStream(string pipeName)
             : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
@@ -221,14 +233,16 @@ namespace System.IO.Pipes
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
             int maxNumberOfServerInstances
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeServerStream(
             string pipeName,
             System.IO.Pipes.PipeDirection direction,
             int maxNumberOfServerInstances,
             System.IO.Pipes.PipeTransmissionMode transmissionMode
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -236,7 +250,8 @@ namespace System.IO.Pipes
             int maxNumberOfServerInstances,
             System.IO.Pipes.PipeTransmissionMode transmissionMode,
             System.IO.Pipes.PipeOptions options
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public NamedPipeServerStream(
             string pipeName,
@@ -246,7 +261,8 @@ namespace System.IO.Pipes
             System.IO.Pipes.PipeOptions options,
             int inBufferSize,
             int outBufferSize
-        ) : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
+        )
+            : base(default(System.IO.Pipes.PipeDirection), default(int)) { }
 
         public System.IAsyncResult BeginWaitForConnection(
             System.AsyncCallback? callback,

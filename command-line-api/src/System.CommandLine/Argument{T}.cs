@@ -19,7 +19,8 @@ namespace System.CommandLine
         public Argument() { }
 
         /// <inheritdoc />
-        public Argument(string? name, string? description = null) : base(name, description) { }
+        public Argument(string? name, string? description = null)
+            : base(name, description) { }
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
@@ -51,7 +52,8 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="defaultValueFactory">The delegate to invoke to return the default value.</param>
         /// <exception cref="ArgumentNullException">Thrown when <paramref name="defaultValueFactory"/> is null.</exception>
-        public Argument(Func<T> defaultValueFactory) : this()
+        public Argument(Func<T> defaultValueFactory)
+            : this()
         {
             SetDefaultValueFactory(defaultValueFactory);
         }
@@ -69,7 +71,8 @@ namespace System.CommandLine
             Func<ArgumentResult, T> parse,
             bool isDefault = false,
             string? description = null
-        ) : this(name, description)
+        )
+            : this(name, description)
         {
             if (parse is null)
             {

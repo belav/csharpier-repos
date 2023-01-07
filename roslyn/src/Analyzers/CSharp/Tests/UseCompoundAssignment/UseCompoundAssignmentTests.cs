@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
     public class UseCompoundAssignmentTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseCompoundAssignmentTests(ITestOutputHelper logger) : base(logger) { }
+        public UseCompoundAssignmentTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

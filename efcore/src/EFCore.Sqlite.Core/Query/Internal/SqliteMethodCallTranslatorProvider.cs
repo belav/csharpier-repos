@@ -19,7 +19,8 @@ public class SqliteMethodCallTranslatorProvider : RelationalMethodCallTranslator
     /// </summary>
     public SqliteMethodCallTranslatorProvider(
         RelationalMethodCallTranslatorProviderDependencies dependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         var sqlExpressionFactory = (SqliteSqlExpressionFactory)dependencies.SqlExpressionFactory;
 

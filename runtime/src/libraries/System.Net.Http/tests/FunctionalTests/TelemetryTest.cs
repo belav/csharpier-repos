@@ -19,7 +19,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class TelemetryTest : HttpClientHandlerTestBase
     {
-        public TelemetryTest(ITestOutputHelper output) : base(output) { }
+        public TelemetryTest(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public static void EventSource_ExistsWithCorrectId()
@@ -1147,14 +1148,16 @@ namespace System.Net.Http.Functional.Tests
 
     public sealed class TelemetryTest_Http11 : TelemetryTest
     {
-        public TelemetryTest_Http11(ITestOutputHelper output) : base(output) { }
+        public TelemetryTest_Http11(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class TelemetryTest_Http20 : TelemetryTest
     {
         protected override Version UseVersion => HttpVersion.Version20;
 
-        public TelemetryTest_Http20(ITestOutputHelper output) : base(output) { }
+        public TelemetryTest_Http20(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [Collection(nameof(DisableParallelization))]
@@ -1163,6 +1166,7 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion.Version30;
 
-        public TelemetryTest_Http30(ITestOutputHelper output) : base(output) { }
+        public TelemetryTest_Http30(ITestOutputHelper output)
+            : base(output) { }
     }
 }

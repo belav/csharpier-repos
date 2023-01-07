@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 IMethodSymbol methodSymbol,
                 bool canImplementImplicitly,
                 IDocumentationCommentFormattingService docCommentFormattingService
-            ) : base(methodSymbol, canImplementImplicitly, docCommentFormattingService)
+            )
+                : base(methodSymbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = methodSymbol;
             }

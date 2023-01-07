@@ -21,12 +21,14 @@ namespace System.Data.Odbc
 
         private OdbcConnectionHandle? _connectionHandle;
 
-        public OdbcConnection(string? connectionString) : this()
+        public OdbcConnection(string? connectionString)
+            : this()
         {
             ConnectionString = connectionString;
         }
 
-        private OdbcConnection(OdbcConnection connection) : this()
+        private OdbcConnection(OdbcConnection connection)
+            : this()
         { // Clone
             CopyFrom(connection);
             _connectionTimeout = connection._connectionTimeout;

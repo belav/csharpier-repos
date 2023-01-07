@@ -43,7 +43,8 @@ namespace System.Linq.Parallel
             QueryTaskGroupState taskGroupState,
             AsynchronousChannel<T>[] channels,
             IntValueEvent? consumerEvent
-        ) : base(taskGroupState)
+        )
+            : base(taskGroupState)
         {
             Debug.Assert(channels != null);
 #if DEBUG

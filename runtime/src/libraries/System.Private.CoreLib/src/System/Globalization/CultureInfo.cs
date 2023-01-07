@@ -171,7 +171,8 @@ namespace System.Globalization
                 ? SR.Argument_CultureNotSupportedInInvariantMode
                 : SR.Argument_CultureNotSupported;
 
-        public CultureInfo(string name) : this(name, true) { }
+        public CultureInfo(string name)
+            : this(name, true) { }
 
         public CultureInfo(string name, bool useUserOverride)
         {
@@ -214,7 +215,8 @@ namespace System.Globalization
             return new CultureInfo(cultureData);
         }
 
-        public CultureInfo(int culture) : this(culture, true) { }
+        public CultureInfo(int culture)
+            : this(culture, true) { }
 
         public CultureInfo(int culture, bool useUserOverride)
         {

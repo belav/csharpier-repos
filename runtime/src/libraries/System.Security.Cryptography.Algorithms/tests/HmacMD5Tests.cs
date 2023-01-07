@@ -33,7 +33,8 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
             ByteUtils.HexToByteArray("6f630fad67cda0ee1fb1f562db3aa53e"),
         };
 
-        public HmacMD5Tests() : base(s_testKeys2202, s_testMacs2202) { }
+        public HmacMD5Tests()
+            : base(s_testKeys2202, s_testMacs2202) { }
 
         protected override int BlockSize => 64;
         protected override int MacSize => 16;

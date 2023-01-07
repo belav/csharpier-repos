@@ -23,7 +23,8 @@ public class CosmosCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnotatio
     /// </summary>
     public CosmosCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 
     /// <inheritdoc />
     public override void Generate(

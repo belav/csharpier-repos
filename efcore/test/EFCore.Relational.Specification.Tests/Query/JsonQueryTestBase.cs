@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class JsonQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : JsonQueryFixtureBase, new()
 {
-    protected JsonQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected JsonQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

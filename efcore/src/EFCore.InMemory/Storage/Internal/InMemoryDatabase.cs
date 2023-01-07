@@ -29,7 +29,8 @@ public class InMemoryDatabase : Database, IInMemoryDatabase
         IDesignTimeModel designTimeModel,
         IUpdateAdapterFactory updateAdapterFactory,
         IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _store = storeCache.GetStore(options);
         _designTimeModel = designTimeModel;

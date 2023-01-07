@@ -839,7 +839,8 @@ public class HostingApplicationDiagnosticsTests
     {
         private readonly bool _isEnabled;
 
-        public NoopDiagnosticListener(bool isEnabled = false) : base("DummyListener")
+        public NoopDiagnosticListener(bool isEnabled = false)
+            : base("DummyListener")
         {
             _isEnabled = isEnabled;
         }

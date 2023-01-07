@@ -26,7 +26,8 @@ public class SimpleNullableDependentKeyValueFactory<TKey>
     public SimpleNullableDependentKeyValueFactory(
         IForeignKey foreignKey,
         IPrincipalKeyValueFactory<TKey> principalKeyValueFactory
-    ) : base(foreignKey, principalKeyValueFactory)
+    )
+        : base(foreignKey, principalKeyValueFactory)
     {
         var property = foreignKey.Properties.Single();
         _propertyAccessors = property.GetPropertyAccessors();

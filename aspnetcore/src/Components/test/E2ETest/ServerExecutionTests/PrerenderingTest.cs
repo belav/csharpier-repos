@@ -19,7 +19,8 @@ public class PrerenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<Pre
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<PrerenderedStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void CanTransitionFromPrerenderedToInteractiveMode()

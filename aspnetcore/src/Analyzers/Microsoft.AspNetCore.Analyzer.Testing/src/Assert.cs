@@ -46,7 +46,8 @@ public class AnalyzerAssert
             DiagnosticLocation expected,
             Location actual,
             string message
-        ) : base(expected, actual)
+        )
+            : base(expected, actual)
         {
             Message = message;
         }

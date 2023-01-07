@@ -27,7 +27,8 @@ namespace System.Collections.Generic
     {
         private const int DefaultSize = 17;
 
-        public LowLevelDictionary() : this(DefaultSize) { }
+        public LowLevelDictionary()
+            : this(DefaultSize) { }
 
         public LowLevelDictionary(int capacity)
         {

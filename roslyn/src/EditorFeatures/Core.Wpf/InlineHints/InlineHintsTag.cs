@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             SnapshotSpan span,
             InlineHint hint,
             InlineHintsTaggerProvider taggerProvider
-        ) : base(adornment, removalCallback: null, PositionAffinity.Predecessor)
+        )
+            : base(adornment, removalCallback: null, PositionAffinity.Predecessor)
         {
             _textView = textView;
             _span = span;

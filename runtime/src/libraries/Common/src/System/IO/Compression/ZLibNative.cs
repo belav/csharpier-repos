@@ -201,7 +201,8 @@ namespace System.IO.Compression
 
             private volatile State _initializationState;
 
-            public ZLibStreamHandle() : base(new IntPtr(-1), true)
+            public ZLibStreamHandle()
+                : base(new IntPtr(-1), true)
             {
                 _initializationState = State.NotInitialized;
                 SetHandle(IntPtr.Zero);

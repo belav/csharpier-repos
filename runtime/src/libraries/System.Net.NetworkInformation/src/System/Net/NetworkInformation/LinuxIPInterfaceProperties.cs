@@ -19,7 +19,8 @@ namespace System.Net.NetworkInformation
         public LinuxIPInterfaceProperties(
             LinuxNetworkInterface lni,
             LinuxNetworkInterface.LinuxNetworkInterfaceSystemProperties systemProperties
-        ) : base(lni, globalConfig: true)
+        )
+            : base(lni, globalConfig: true)
         {
             _linuxNetworkInterface = lni;
             _gatewayAddresses = GetGatewayAddresses(systemProperties);

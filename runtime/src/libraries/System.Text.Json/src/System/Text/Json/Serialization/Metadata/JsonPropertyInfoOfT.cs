@@ -19,7 +19,8 @@ namespace System.Text.Json.Serialization.Metadata
             Type declaringType,
             JsonTypeInfo? declaringTypeInfo,
             JsonSerializerOptions options
-        ) : base(declaringType, propertyType: typeof(T), declaringTypeInfo, options) { }
+        )
+            : base(declaringType, propertyType: typeof(T), declaringTypeInfo, options) { }
 
         internal new Func<object, T>? Get
         {
@@ -187,7 +188,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal JsonPropertyInfo(
             JsonPropertyInfoValues<T> propertyInfo,
             JsonSerializerOptions options
-        ) : this(propertyInfo.DeclaringType, declaringTypeInfo: null, options)
+        )
+            : this(propertyInfo.DeclaringType, declaringTypeInfo: null, options)
         {
             string? name;
 

@@ -100,13 +100,15 @@ namespace System.Net.Http.Headers
         private GenericHeaderParser(
             bool supportsMultipleValues,
             GetParsedValueLengthDelegate getParsedValueLength
-        ) : this(supportsMultipleValues, getParsedValueLength, null) { }
+        )
+            : this(supportsMultipleValues, getParsedValueLength, null) { }
 
         private GenericHeaderParser(
             bool supportsMultipleValues,
             GetParsedValueLengthDelegate getParsedValueLength,
             IEqualityComparer? comparer
-        ) : base(supportsMultipleValues)
+        )
+            : base(supportsMultipleValues)
         {
             Debug.Assert(getParsedValueLength != null);
 

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor
             int indent,
             bool bolded,
             bool grayed
-        ) : base(textVersion, text, glyph, spans, childItems, indent, bolded, grayed) { }
+        )
+            : base(textVersion, text, glyph, spans, childItems, indent, bolded, grayed) { }
 
         public override bool Equals(object? obj) => Equals(obj as SimpleNavigationBarItem);
 

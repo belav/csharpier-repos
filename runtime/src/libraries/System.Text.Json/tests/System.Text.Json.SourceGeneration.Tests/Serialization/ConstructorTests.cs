@@ -192,8 +192,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public abstract partial class ConstructorTests_Default : ConstructorTests_Metadata
     {
-        public ConstructorTests_Default(JsonSerializerWrapper jsonSerializer) : base(jsonSerializer)
-        { }
+        public ConstructorTests_Default(JsonSerializerWrapper jsonSerializer)
+            : base(jsonSerializer) { }
 
         [JsonSerializable(typeof(PrivateParameterlessCtor))]
         [JsonSerializable(typeof(InternalParameterlessCtor))]

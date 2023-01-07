@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             string singleLineCommentString,
             string blockCommentStartString,
             string blockCommentEndString
-        ) : this()
+        )
+            : this()
         {
             SupportsSingleLineComment = supportsSingleLineComment;
             SupportsBlockComment = supportsBlockComment;

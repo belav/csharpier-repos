@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.RegularExpressions
         public RegexEmbeddedLanguageEditorFeatures(
             AbstractEmbeddedLanguageFeaturesProvider provider,
             EmbeddedLanguageInfo info
-        ) : base(provider, info)
+        )
+            : base(provider, info)
         {
             BraceMatcher = new RegexBraceMatcher(this);
         }

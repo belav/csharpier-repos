@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DocumentId? documentId,
             ImmutableArray<DiagnosticData> diagnostics,
             DiagnosticsUpdatedKind kind
-        ) : base(id, workspace, projectId, documentId)
+        )
+            : base(id, workspace, projectId, documentId)
         {
             // TODO: This assert fails for EditAndContinueDiagnosticUpdateSource. See https://github.com/dotnet/roslyn/issues/36246.
             // Debug.Assert(diagnostics.All(d => d.ProjectId == projectId && d.DocumentId == documentId));

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class CustomConvertersSqlServerTest
     : CustomConvertersTestBase<CustomConvertersSqlServerTest.CustomConvertersSqlServerFixture>
 {
-    public CustomConvertersSqlServerTest(CustomConvertersSqlServerFixture fixture) : base(fixture)
+    public CustomConvertersSqlServerTest(CustomConvertersSqlServerFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

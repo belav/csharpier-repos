@@ -26,7 +26,8 @@ namespace System.Net.Security
         //
         internal Interop.SspiCli.CredHandle _handle;
 
-        protected SafeDeleteContext() : base(IntPtr.Zero, true)
+        protected SafeDeleteContext()
+            : base(IntPtr.Zero, true)
         {
             _handle = default;
         }

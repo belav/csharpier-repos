@@ -109,7 +109,8 @@ namespace System.Linq.Expressions
             Type type,
             ReadOnlyCollection<Expression> arguments,
             ReadOnlyCollection<MemberInfo>? members
-        ) : base(null, arguments, members)
+        )
+            : base(null, arguments, members)
         {
             Type = type;
         }

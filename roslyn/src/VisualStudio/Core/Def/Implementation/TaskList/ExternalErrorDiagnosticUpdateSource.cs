@@ -1144,7 +1144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
         private sealed class ArgumentKey : BuildToolId.Base<object>
         {
-            public ArgumentKey(object? key) : base(key) { }
+            public ArgumentKey(object? key)
+                : base(key) { }
 
             public override string BuildTool
             {

@@ -100,7 +100,8 @@ namespace Internal.TypeSystem.Ecma
                 AssemblyHashAlgorithm hashAlgorithm,
                 Func<ModuleDesc, int> moduleToIndex,
                 MutableModule mutableModule
-            ) : base(assemblyName, typeSystemContext, assemblyFlags, publicKeyArray)
+            )
+                : base(assemblyName, typeSystemContext, assemblyFlags, publicKeyArray)
             {
                 _moduleToIndex = moduleToIndex;
                 _mutableModule = mutableModule;
@@ -371,7 +372,8 @@ namespace Internal.TypeSystem.Ecma
             AssemblyHashAlgorithm hashAlgorithm,
             Func<ModuleDesc, int> moduleToIndex,
             ReadyToRunCompilationModuleGroupBase compilationGroup
-        ) : base(context, null)
+        )
+            : base(context, null)
         {
             _compilationGroup = compilationGroup;
             _cache = new Cache(

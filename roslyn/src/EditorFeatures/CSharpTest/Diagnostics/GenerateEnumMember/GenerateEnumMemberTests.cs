@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.GenerateEnu
     [Trait(Traits.Feature, Traits.Features.CodeActionsGenerateEnumMember)]
     public class GenerateEnumMemberTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public GenerateEnumMemberTests(ITestOutputHelper logger) : base(logger) { }
+        public GenerateEnumMemberTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

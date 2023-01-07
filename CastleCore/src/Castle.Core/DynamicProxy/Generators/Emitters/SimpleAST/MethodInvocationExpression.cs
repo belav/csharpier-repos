@@ -33,7 +33,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
             Reference owner,
             MethodEmitter method,
             params IExpression[] args
-        ) : this(owner, method.MethodBuilder, args) { }
+        )
+            : this(owner, method.MethodBuilder, args) { }
 
         public MethodInvocationExpression(
             Reference owner,

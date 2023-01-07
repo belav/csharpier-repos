@@ -58,7 +58,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCFDateHandle : SafeHandle
     {
-        public SafeCFDateHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeCFDateHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

@@ -14,7 +14,8 @@ namespace System.Net.WebSockets.Client.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "KeepAlive not supported on browser")]
     public class KeepAliveTest : ClientWebSocketTestBase
     {
-        public KeepAliveTest(ITestOutputHelper output) : base(output) { }
+        public KeepAliveTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
         [OuterLoop] // involves long delay

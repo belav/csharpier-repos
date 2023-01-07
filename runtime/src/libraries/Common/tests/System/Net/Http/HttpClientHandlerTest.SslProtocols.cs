@@ -23,7 +23,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract partial class HttpClientHandler_SslProtocols_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_SslProtocols_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_SslProtocols_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void DefaultProtocols_MatchesExpected()

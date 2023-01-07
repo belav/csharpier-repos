@@ -103,7 +103,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             return true;
         }
 
-        public DotnetObjectId(string scheme, int value) : this(scheme, value.ToString()) { }
+        public DotnetObjectId(string scheme, int value)
+            : this(scheme, value.ToString()) { }
 
         public DotnetObjectId(string scheme, string value)
         {

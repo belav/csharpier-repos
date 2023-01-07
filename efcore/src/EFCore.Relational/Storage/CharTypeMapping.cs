@@ -32,7 +32,8 @@ public class CharTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="CharTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected CharTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected CharTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

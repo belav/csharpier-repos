@@ -15,7 +15,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol method,
             AggregateType methodType,
             TypeArray methodParameters
-        ) : base(ExpressionKind.MethodInfo, type)
+        )
+            : base(ExpressionKind.MethodInfo, type)
         {
             Debug.Assert(method != null);
             Debug.Assert(methodType != null);

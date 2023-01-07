@@ -34,7 +34,8 @@ internal sealed class ObjectCollection<T> : Collection<T>
         }
     }
 
-    public ObjectCollection() : this(DefaultValidator) { }
+    public ObjectCollection()
+        : this(DefaultValidator) { }
 
     public ObjectCollection(Action<T> validator, bool isReadOnly = false)
         : base(CreateInnerList(isReadOnly))

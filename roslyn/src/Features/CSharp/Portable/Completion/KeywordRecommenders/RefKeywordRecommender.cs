@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class RefKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public RefKeywordRecommender() : base(SyntaxKind.RefKeyword) { }
+        public RefKeywordRecommender()
+            : base(SyntaxKind.RefKeyword) { }
 
         /// <summary>
         /// Same as <see cref="SyntaxKindSet.AllMemberModifiers"/> with ref specific exclusions

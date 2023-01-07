@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             Id<LsifDocument> document,
             IdFactory idFactory,
             string? property = null
-        ) : base(label: "item", outVertex, new[] { range.As<Range, Vertex>() }, idFactory)
+        )
+            : base(label: "item", outVertex, new[] { range.As<Range, Vertex>() }, idFactory)
         {
             Shard = document;
             Property = property;

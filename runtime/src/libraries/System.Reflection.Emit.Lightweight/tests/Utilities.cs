@@ -81,7 +81,8 @@ namespace System.Reflection.Emit.Tests
             _id = id;
         }
 
-        public IDClass() : this(0) { }
+        public IDClass()
+            : this(0) { }
 
         public int ID => _id;
     }

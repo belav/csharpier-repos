@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int? nodeKind = null
-        ) : base(state)
+        )
+            : base(state)
         {
             Debug.Assert(fileCodeModel != null);
 

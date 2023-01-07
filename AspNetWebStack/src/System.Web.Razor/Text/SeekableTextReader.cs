@@ -18,9 +18,11 @@ namespace System.Web.Razor.Text
             UpdateState();
         }
 
-        public SeekableTextReader(TextReader source) : this(source.ReadToEnd()) { }
+        public SeekableTextReader(TextReader source)
+            : this(source.ReadToEnd()) { }
 
-        public SeekableTextReader(ITextBuffer buffer) : this(buffer.ReadToEnd()) { }
+        public SeekableTextReader(ITextBuffer buffer)
+            : this(buffer.ReadToEnd()) { }
 
         public SourceLocation Location
         {

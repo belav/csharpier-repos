@@ -180,7 +180,8 @@ namespace System.Web.Mvc.Test
 
         class DerivedDataTypeAttribute : DataTypeAttribute
         {
-            public DerivedDataTypeAttribute() : base(DataType.Time)
+            public DerivedDataTypeAttribute()
+                : base(DataType.Time)
             {
                 DisplayFormat = new DisplayFormatAttribute
                 {

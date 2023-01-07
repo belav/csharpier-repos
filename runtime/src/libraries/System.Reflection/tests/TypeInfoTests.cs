@@ -3119,13 +3119,15 @@ namespace System.Reflection.Tests
 
     public class TI_TypeDerivedFromGenericTypeWithAllMembers<T> : TI_GenericTypeWithAllMembers<T>
     {
-        public TI_TypeDerivedFromGenericTypeWithAllMembers(T t) : base(t) { }
+        public TI_TypeDerivedFromGenericTypeWithAllMembers(T t)
+            : base(t) { }
     }
 
     public class TI_TypeDerivedFromGenericTypeWithAllMembersClosed
         : TI_TypeDerivedFromGenericTypeWithAllMembers<int>
     {
-        public TI_TypeDerivedFromGenericTypeWithAllMembersClosed(int t) : base(t) { }
+        public TI_TypeDerivedFromGenericTypeWithAllMembersClosed(int t)
+            : base(t) { }
     }
 
 #pragma warning restore 0067, 0169

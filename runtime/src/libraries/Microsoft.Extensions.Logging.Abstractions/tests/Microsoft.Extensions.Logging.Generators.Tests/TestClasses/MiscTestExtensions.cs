@@ -20,7 +20,8 @@ public partial class DerivedClassWithPrivateLogger : BaseClassWithPrivateLogger
 {
     private ILogger _logger;
 
-    public DerivedClassWithPrivateLogger(ILogger logger) : base(logger)
+    public DerivedClassWithPrivateLogger(ILogger logger)
+        : base(logger)
     {
         _logger = logger;
     }
@@ -38,7 +39,8 @@ public class BaseClass
 
 public partial class DerivedClass : BaseClass
 {
-    public DerivedClass(ILogger logger) : base(logger) { }
+    public DerivedClass(ILogger logger)
+        : base(logger) { }
 
     [LoggerMessage(0, LogLevel.Debug, "Test.")]
     public partial void Test();

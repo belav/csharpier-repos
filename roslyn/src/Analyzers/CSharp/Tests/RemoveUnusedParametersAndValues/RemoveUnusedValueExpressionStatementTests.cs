@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnusedValues)]
     public partial class RemoveUnusedValueExpressionStatementTests : RemoveUnusedValuesTestsBase
     {
-        public RemoveUnusedValueExpressionStatementTests(ITestOutputHelper logger) : base(logger)
-        { }
+        public RemoveUnusedValueExpressionStatementTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         private protected override OptionsCollection PreferNone =>
             Option(

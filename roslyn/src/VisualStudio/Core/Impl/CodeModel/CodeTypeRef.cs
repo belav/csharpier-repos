@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             object parent,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) : base(state)
+        )
+            : base(state)
         {
             _parentHandle = new ParentHandle<object>(parent);
             _projectId = projectId;

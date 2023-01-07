@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Syntax
                 InternalSyntax.SyntaxList.WithManyChildrenBase green,
                 SyntaxNode parent,
                 int position
-            ) : base(green, parent, position)
+            )
+                : base(green, parent, position)
             {
                 int count = green.SlotCount;
                 _children = new ArrayElement<WeakReference<SyntaxNode>?>[count];

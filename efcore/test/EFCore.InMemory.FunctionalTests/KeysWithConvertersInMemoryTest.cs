@@ -6,8 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class KeysWithConvertersInMemoryTest
     : KeysWithConvertersTestBase<KeysWithConvertersInMemoryTest.KeysWithConvertersInMemoryFixture>
 {
-    public KeysWithConvertersInMemoryTest(KeysWithConvertersInMemoryFixture fixture) : base(fixture)
-    { }
+    public KeysWithConvertersInMemoryTest(KeysWithConvertersInMemoryFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact(Skip = "Issue #26238")]
     public override void Can_insert_and_read_back_with_bare_class_key_and_optional_dependents() =>

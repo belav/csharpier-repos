@@ -15,7 +15,8 @@ namespace System.Net.Http
         private readonly bool _disposeHandler;
         private readonly HttpMessageHandler _handler;
 
-        public HttpMessageInvoker(HttpMessageHandler handler) : this(handler, true) { }
+        public HttpMessageInvoker(HttpMessageHandler handler)
+            : this(handler, true) { }
 
         public HttpMessageInvoker(HttpMessageHandler handler, bool disposeHandler)
         {

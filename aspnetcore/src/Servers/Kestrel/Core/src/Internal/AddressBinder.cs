@@ -212,7 +212,8 @@ internal sealed class AddressBinder
         public OverrideWithEndpointsStrategy(
             IReadOnlyCollection<ListenOptions> endpoints,
             string[] originalAddresses
-        ) : base(endpoints)
+        )
+            : base(endpoints)
         {
             _originalAddresses = originalAddresses;
         }

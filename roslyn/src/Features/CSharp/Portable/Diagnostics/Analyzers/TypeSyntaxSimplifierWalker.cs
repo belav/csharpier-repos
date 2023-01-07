@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.SimplifyTypeNames
             CSharpSimplifierOptions options,
             SimpleIntervalTree<TextSpan, TextSpanIntervalIntrospector>? ignoredSpans,
             CancellationToken cancellationToken
-        ) : base(SyntaxWalkerDepth.StructuredTrivia)
+        )
+            : base(SyntaxWalkerDepth.StructuredTrivia)
         {
             _analyzer = analyzer;
             _semanticModel = semanticModel;

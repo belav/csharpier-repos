@@ -16,7 +16,8 @@ public class UpdatesContext : PoolableDbContext
     public DbSet<ProductTableView> ProductTableView { get; set; } = null!;
     public DbSet<Rodney> Trotters { get; set; } = null!;
 
-    public UpdatesContext(DbContextOptions options) : base(options) { }
+    public UpdatesContext(DbContextOptions options)
+        : base(options) { }
 
     public static void Seed(UpdatesContext context)
     {

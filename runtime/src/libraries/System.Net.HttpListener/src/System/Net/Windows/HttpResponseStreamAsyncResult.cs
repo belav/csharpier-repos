@@ -53,7 +53,8 @@ namespace System.Net
             object asyncObject,
             object? userState,
             AsyncCallback? callback
-        ) : base(asyncObject, userState, callback) { }
+        )
+            : base(asyncObject, userState, callback) { }
 
         private static byte[] GetChunkHeader(int size, out int offset)
         {
@@ -125,7 +126,8 @@ namespace System.Net
             bool chunked,
             bool sentHeaders,
             ThreadPoolBoundHandle boundHandle
-        ) : base(asyncObject, userState, callback)
+        )
+            : base(asyncObject, userState, callback)
         {
             _boundHandle = boundHandle;
             _sentHeaders = sentHeaders;

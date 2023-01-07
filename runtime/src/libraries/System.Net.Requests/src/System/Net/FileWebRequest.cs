@@ -39,7 +39,8 @@ namespace System.Net
         protected FileWebRequest(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             throw new PlatformNotSupportedException();
         }
@@ -373,7 +374,8 @@ namespace System.Net
             FileMode mode,
             FileAccess access,
             FileShare sharing
-        ) : base(path, mode, access, sharing)
+        )
+            : base(path, mode, access, sharing)
         {
             _request = request;
         }
@@ -386,7 +388,8 @@ namespace System.Net
             FileShare sharing,
             int length,
             bool async
-        ) : base(path, mode, access, sharing, length, async)
+        )
+            : base(path, mode, access, sharing, length, async)
         {
             _request = request;
         }

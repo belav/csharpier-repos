@@ -27,11 +27,14 @@ namespace Castle.Core.Internal
         private int age; // Incremented by operations
         private const int AgeThreshold = 128; // Age at which to trim dead objects
 
-        public WeakKeyDictionary() : this(0, EqualityComparer<TKey>.Default) { }
+        public WeakKeyDictionary()
+            : this(0, EqualityComparer<TKey>.Default) { }
 
-        public WeakKeyDictionary(int capacity) : this(capacity, EqualityComparer<TKey>.Default) { }
+        public WeakKeyDictionary(int capacity)
+            : this(capacity, EqualityComparer<TKey>.Default) { }
 
-        public WeakKeyDictionary(IEqualityComparer<TKey> comparer) : this(0, comparer) { }
+        public WeakKeyDictionary(IEqualityComparer<TKey> comparer)
+            : this(0, comparer) { }
 
         public WeakKeyDictionary(int capacity, IEqualityComparer<TKey> comparer)
         {

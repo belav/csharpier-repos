@@ -336,7 +336,8 @@ namespace System.Web.Mvc.Html
 
         internal class ChildActionMvcHandler : MvcHandler
         {
-            public ChildActionMvcHandler(RequestContext context) : base(context) { }
+            public ChildActionMvcHandler(RequestContext context)
+                : base(context) { }
 
             protected internal override void AddVersionHeader(HttpContextBase httpContext)
             {

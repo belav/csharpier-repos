@@ -25,7 +25,8 @@ namespace System.Xml.Xsl.Qil
             QilNode method,
             QilNode arguments,
             XmlQueryType resultType
-        ) : base(nodeType, name, method, arguments)
+        )
+            : base(nodeType, name, method, arguments)
         {
             this.xmlType = resultType;
         }

@@ -398,7 +398,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 IteratorAndAsyncCaptureWalker analyzer,
                 MethodSymbol topLevelMethod,
                 IteratorAndAsyncCaptureWalker parent
-            ) : base(parent._recursionDepth)
+            )
+                : base(parent._recursionDepth)
             {
                 _analyzer = analyzer;
                 _topLevelMethod = topLevelMethod;

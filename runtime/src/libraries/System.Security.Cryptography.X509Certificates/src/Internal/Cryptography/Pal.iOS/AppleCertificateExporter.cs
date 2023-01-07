@@ -13,7 +13,8 @@ namespace Internal.Cryptography.Pal
     {
         private AsymmetricAlgorithm? _privateKey;
 
-        public AppleCertificateExporter(ICertificatePalCore cert) : base(cert) { }
+        public AppleCertificateExporter(ICertificatePalCore cert)
+            : base(cert) { }
 
         public AppleCertificateExporter(ICertificatePalCore cert, AsymmetricAlgorithm privateKey)
             : base(cert)
@@ -21,7 +22,8 @@ namespace Internal.Cryptography.Pal
             _privateKey = privateKey;
         }
 
-        public AppleCertificateExporter(X509Certificate2Collection certs) : base(certs) { }
+        public AppleCertificateExporter(X509Certificate2Collection certs)
+            : base(certs) { }
 
         protected override byte[] ExportPkcs7()
         {

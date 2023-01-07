@@ -31,7 +31,8 @@ public class EventDefinition<TParam> : EventDefinitionBase
         LogLevel level,
         string eventIdCode,
         Func<LogLevel, Action<ILogger, TParam, Exception?>> logActionFunc
-    ) : base(loggingOptions, eventId, level, eventIdCode)
+    )
+        : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
     }

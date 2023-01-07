@@ -27,7 +27,8 @@ namespace System.Xml.Serialization
             _shareTypes = shareTypes;
         }
 
-        internal ImportContext() : this(null, false) { }
+        internal ImportContext()
+            : this(null, false) { }
 
         internal SchemaObjectCache Cache => _cache ??= new SchemaObjectCache();
 

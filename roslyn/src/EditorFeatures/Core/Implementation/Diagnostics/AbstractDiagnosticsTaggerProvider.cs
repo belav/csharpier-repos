@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
             IDiagnosticService diagnosticService,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListener listener
-        ) : base(threadingContext, globalOptions, listener)
+        )
+            : base(threadingContext, globalOptions, listener)
         {
             _diagnosticService = diagnosticService;
             _diagnosticService.DiagnosticsUpdated += OnDiagnosticsUpdated;

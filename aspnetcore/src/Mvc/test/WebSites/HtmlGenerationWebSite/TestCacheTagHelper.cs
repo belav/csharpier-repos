@@ -17,7 +17,8 @@ public class TestCacheTagHelper : CacheTagHelper
         CacheTagHelperMemoryCacheFactory factory,
         HtmlEncoder htmlEncoder,
         ILoggerFactory loggerFactory
-    ) : base(factory, htmlEncoder)
+    )
+        : base(factory, htmlEncoder)
     {
         if (loggerFactory == null)
         {

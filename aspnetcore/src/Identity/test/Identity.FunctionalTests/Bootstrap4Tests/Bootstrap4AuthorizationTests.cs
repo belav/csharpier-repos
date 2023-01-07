@@ -11,7 +11,8 @@ public class Bootstrap4AuthorizationTests
 {
     public Bootstrap4AuthorizationTests(
         ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
-    ) : base(serverFactory)
+    )
+        : base(serverFactory)
     {
         serverFactory.BootstrapFrameworkVersion = "V4";
     }

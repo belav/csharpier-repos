@@ -22,7 +22,8 @@ namespace System.Reflection.Runtime.ParameterInfos
             int position,
             QSignatureTypeHandle qualifiedParameterTypeHandle,
             TypeContext typeContext
-        ) : base(member, position, qualifiedParameterTypeHandle, typeContext) { }
+        )
+            : base(member, position, qualifiedParameterTypeHandle, typeContext) { }
 
         public sealed override ParameterAttributes Attributes
         {

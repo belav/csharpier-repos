@@ -57,7 +57,8 @@ namespace Microsoft.Cci
             Guid language,
             ImmutableArray<byte> checksum,
             Guid algorithm
-        ) : this(location, language)
+        )
+            : this(location, language)
         {
             _sourceInfo = Task.FromResult(new DebugSourceInfo(checksum, algorithm));
         }

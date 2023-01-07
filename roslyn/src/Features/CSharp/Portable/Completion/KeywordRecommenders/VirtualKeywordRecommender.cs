@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.UnsafeKeyword,
             };
 
-        public VirtualKeywordRecommender() : base(SyntaxKind.VirtualKeyword) { }
+        public VirtualKeywordRecommender()
+            : base(SyntaxKind.VirtualKeyword) { }
 
         protected override bool IsValidContext(
             int position,

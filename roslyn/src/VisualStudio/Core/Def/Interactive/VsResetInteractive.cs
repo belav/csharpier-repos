@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
             IVsSolutionBuildManager buildManager,
             Func<string, string> createReference,
             Func<string, string> createImport
-        ) : base(componentModel.GetService<EditorOptionsService>(), createReference, createImport)
+        )
+            : base(componentModel.GetService<EditorOptionsService>(), createReference, createImport)
         {
             _workspace = workspace;
             _dte = dte;

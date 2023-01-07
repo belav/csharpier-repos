@@ -21,7 +21,8 @@ namespace System.Web.Http.Validation.Validators
         public DataAnnotationsModelValidator(
             IEnumerable<ModelValidatorProvider> validatorProviders,
             ValidationAttribute attribute
-        ) : base(validatorProviders)
+        )
+            : base(validatorProviders)
         {
             if (attribute == null)
             {

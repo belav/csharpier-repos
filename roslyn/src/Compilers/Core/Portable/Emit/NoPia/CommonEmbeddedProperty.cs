@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TPropertySymbol underlyingProperty,
                 TEmbeddedMethod getter,
                 TEmbeddedMethod setter
-            ) : base(underlyingProperty)
+            )
+                : base(underlyingProperty)
             {
                 Debug.Assert(getter != null || setter != null);
 

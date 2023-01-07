@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         private PooledHashSet(
             ObjectPool<PooledHashSet<T>> pool,
             IEqualityComparer<T> equalityComparer
-        ) : base(equalityComparer)
+        )
+            : base(equalityComparer)
         {
             _pool = pool;
         }

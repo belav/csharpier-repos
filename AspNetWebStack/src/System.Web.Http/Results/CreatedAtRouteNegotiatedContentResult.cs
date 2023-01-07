@@ -66,7 +66,8 @@ namespace System.Web.Http.Results
             IDictionary<string, object> routeValues,
             T content,
             ApiController controller
-        ) : this(routeName, routeValues, content, new ApiControllerDependencyProvider(controller))
+        )
+            : this(routeName, routeValues, content, new ApiControllerDependencyProvider(controller))
         { }
 
         private CreatedAtRouteNegotiatedContentResult(

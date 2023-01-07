@@ -13,7 +13,8 @@ namespace Roslyn.Test.PdbUtilities
     {
         public SymUnmanagedWriterWithoutSourceLinkSupport(
             ISymWriterMetadataProvider metadataProvider
-        ) : base(SymUnmanagedWriterFactory.CreateWriter(metadataProvider)) { }
+        )
+            : base(SymUnmanagedWriterFactory.CreateWriter(metadataProvider)) { }
 
         public override void SetSourceLinkData(byte[] data) =>
             throw new SymUnmanagedWriterException("xxx", new NotSupportedException(), "<lib name>");

@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             ITextView textView,
             RecentItemsManager recentItemsManager,
             IThreadingContext threadingContext
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _recentItemsManager = recentItemsManager;
             _textView = textView;

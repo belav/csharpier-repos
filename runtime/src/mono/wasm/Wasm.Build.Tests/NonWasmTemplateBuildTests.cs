@@ -16,7 +16,8 @@ public class NonWasmTemplateBuildTests : BuildTestBase
     public NonWasmTemplateBuildTests(
         ITestOutputHelper output,
         SharedBuildPerTestClassFixture buildContext
-    ) : base(output, buildContext) { }
+    )
+        : base(output, buildContext) { }
 
     // For building non-wasm project with the sdk installed, we need to
     // patch the framework references. But we want to maintain the versions.

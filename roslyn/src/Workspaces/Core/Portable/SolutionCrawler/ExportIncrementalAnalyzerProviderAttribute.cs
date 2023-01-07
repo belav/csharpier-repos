@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             bool highPriorityForActiveFile,
             string name,
             string[] workspaceKinds
-        ) : this(name, workspaceKinds)
+        )
+            : this(name, workspaceKinds)
         {
             this.HighPriorityForActiveFile = highPriorityForActiveFile;
         }

@@ -32,7 +32,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Tests;
 
 public class UnaryServerCallHandlerTests : LoggedTest
 {
-    public UnaryServerCallHandlerTests(ITestOutputHelper output) : base(output) { }
+    public UnaryServerCallHandlerTests(ITestOutputHelper output)
+        : base(output) { }
 
     private static RouteParameter CreateRouteParameter(List<FieldDescriptor> descriptorPath)
     {

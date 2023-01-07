@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string groupName,
             List<CodeStylePreference> preferences = null,
             List<NotificationOptionViewModel> notificationPreferences = null
-        ) : base(option, description, info, groupName, preferences, notificationPreferences)
+        )
+            : base(option, description, info, groupName, preferences, notificationPreferences)
         {
             _truePreview = truePreview;
             _falsePreview = falsePreview;

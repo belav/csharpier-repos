@@ -99,7 +99,8 @@ namespace System.Transactions
         ///
         /// </summary>
         /// <param name="message"></param>
-        public TransactionException(string? message) : base(message) { }
+        public TransactionException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///
@@ -242,13 +243,15 @@ namespace System.Transactions
         /// <summary>
         ///
         /// </summary>
-        public TransactionAbortedException() : base(SR.TransactionAborted) { }
+        public TransactionAbortedException()
+            : base(SR.TransactionAborted) { }
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="message"></param>
-        public TransactionAbortedException(string? message) : base(message) { }
+        public TransactionAbortedException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///
@@ -336,13 +339,15 @@ namespace System.Transactions
         /// <summary>
         ///
         /// </summary>
-        public TransactionInDoubtException() : base(SR.TransactionIndoubt) { }
+        public TransactionInDoubtException()
+            : base(SR.TransactionIndoubt) { }
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="message"></param>
-        public TransactionInDoubtException(string? message) : base(message) { }
+        public TransactionInDoubtException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///
@@ -403,7 +408,8 @@ namespace System.Transactions
         ///
         /// </summary>
         /// <param name="message"></param>
-        public TransactionManagerCommunicationException(string? message) : base(message) { }
+        public TransactionManagerCommunicationException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///
@@ -421,7 +427,8 @@ namespace System.Transactions
         protected TransactionManagerCommunicationException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 
     [Serializable]
@@ -433,13 +440,15 @@ namespace System.Transactions
         /// <summary>
         ///
         /// </summary>
-        public TransactionPromotionException() : this(SR.PromotionFailed) { }
+        public TransactionPromotionException()
+            : this(SR.PromotionFailed) { }
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="message"></param>
-        public TransactionPromotionException(string? message) : base(message) { }
+        public TransactionPromotionException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///

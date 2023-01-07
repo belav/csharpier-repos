@@ -786,7 +786,8 @@ namespace System.Web.Http.Routing
 
         private class ConstrainedRouteAttribute : RouteFactoryAttribute
         {
-            public ConstrainedRouteAttribute() : base(null) { }
+            public ConstrainedRouteAttribute()
+                : base(null) { }
 
             public bool ConstraintMatches { get; set; }
 

@@ -80,7 +80,8 @@ namespace System.IO.Tests
             FileShare share,
             int bufferSize,
             FileOptions options
-        ) : base(path, mode, access, share, bufferSize, options) { }
+        )
+            : base(path, mode, access, share, bufferSize, options) { }
 
         public override int Read(byte[] array, int offset, int count)
         {

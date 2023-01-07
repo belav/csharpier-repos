@@ -11,7 +11,8 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal sealed class SidList
     {
-        internal SidList(List<byte[]> sidListByteFormat) : this(sidListByteFormat, null, null) { }
+        internal SidList(List<byte[]> sidListByteFormat)
+            : this(sidListByteFormat, null, null) { }
 
         internal SidList(List<byte[]> sidListByteFormat, string target, NetCred credentials)
         {

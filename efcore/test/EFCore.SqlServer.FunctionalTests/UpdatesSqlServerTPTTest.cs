@@ -14,7 +14,8 @@ public class UpdatesSqlServerTPTTest
     public UpdatesSqlServerTPTTest(
         UpdatesSqlServerTPTFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture, testOutputHelper) { }
+    )
+        : base(fixture, testOutputHelper) { }
 
     [ConditionalTheory(
         Skip = "Issue #29874. Skipped because the database is in a bad state, but the test may or may not fail."

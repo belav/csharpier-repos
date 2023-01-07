@@ -34,9 +34,11 @@ namespace System.Data.Common
             internal Exception? _errors;
         }
 
-        protected DbDataAdapter() : base() { }
+        protected DbDataAdapter()
+            : base() { }
 
-        protected DbDataAdapter(DbDataAdapter adapter) : base(adapter)
+        protected DbDataAdapter(DbDataAdapter adapter)
+            : base(adapter)
         {
             CloneFrom(adapter);
         }

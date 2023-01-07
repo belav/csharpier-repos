@@ -130,7 +130,8 @@ namespace System.Web.Http.Owin
             OwinMiddleware next,
             HttpMessageHandler messageHandler,
             IHostBufferPolicySelector bufferPolicySelector
-        ) : this(next, CreateOptions(messageHandler, bufferPolicySelector)) { }
+        )
+            : this(next, CreateOptions(messageHandler, bufferPolicySelector)) { }
 
         /// <summary>Gets the <see cref="HttpMessageHandler"/> to submit requests to.</summary>
         public HttpMessageHandler MessageHandler

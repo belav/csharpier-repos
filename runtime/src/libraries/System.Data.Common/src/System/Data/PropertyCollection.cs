@@ -16,7 +16,8 @@ namespace System.Data
     )]
     public class PropertyCollection : Hashtable, ICloneable
     {
-        public PropertyCollection() : base() { }
+        public PropertyCollection()
+            : base() { }
 
         protected PropertyCollection(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

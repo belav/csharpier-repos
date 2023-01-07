@@ -48,9 +48,11 @@ namespace Microsoft.Win32.SafeHandles
         private bool _deleteOnClose;
         private bool _isLocked;
 
-        public SafeFileHandle() : this(ownsHandle: true) { }
+        public SafeFileHandle()
+            : this(ownsHandle: true) { }
 
-        private SafeFileHandle(bool ownsHandle) : base(ownsHandle)
+        private SafeFileHandle(bool ownsHandle)
+            : base(ownsHandle)
         {
             SetHandle(new IntPtr(-1));
         }

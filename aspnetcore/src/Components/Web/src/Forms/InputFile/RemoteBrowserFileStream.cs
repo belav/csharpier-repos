@@ -29,7 +29,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             BrowserFile file,
             RemoteBrowserFileStreamOptions options,
             CancellationToken cancellationToken
-        ) : base(file)
+        )
+            : base(file)
         {
             _jsRuntime = jsRuntime;
             _inputFileElement = inputFileElement;

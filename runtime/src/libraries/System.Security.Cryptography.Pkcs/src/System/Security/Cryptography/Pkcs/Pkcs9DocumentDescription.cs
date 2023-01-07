@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9DocumentDescription() : base(Oids.DocumentDescriptionOid.CopyOid()) { }
+        public Pkcs9DocumentDescription()
+            : base(Oids.DocumentDescriptionOid.CopyOid()) { }
 
         public Pkcs9DocumentDescription(string documentDescription)
             : base(Oids.DocumentDescriptionOid.CopyOid(), Encode(documentDescription))

@@ -5,5 +5,6 @@ namespace Microsoft.AspNetCore.Http.Result;
 
 internal class NoContentResult : StatusCodeResult
 {
-    public NoContentResult() : base(StatusCodes.Status204NoContent) { }
+    public NoContentResult()
+        : base(StatusCodes.Status204NoContent) { }
 }

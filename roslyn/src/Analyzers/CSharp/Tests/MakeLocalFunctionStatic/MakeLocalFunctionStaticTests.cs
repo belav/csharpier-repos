@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeLocalFunctionStatic
     public partial class MakeLocalFunctionStaticTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public MakeLocalFunctionStaticTests(ITestOutputHelper logger) : base(logger) { }
+        public MakeLocalFunctionStaticTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

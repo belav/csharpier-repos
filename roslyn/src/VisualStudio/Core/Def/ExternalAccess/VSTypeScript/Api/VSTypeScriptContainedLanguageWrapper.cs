@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             IVsHierarchy hierarchy,
             uint itemid,
             Guid languageServiceGuid
-        ) : this(bufferCoordinator, componentModel, project, languageServiceGuid) { }
+        )
+            : this(bufferCoordinator, componentModel, project, languageServiceGuid) { }
 
         [Obsolete(
             "Use the constructor that omits the IVsHierarchy and uint parameters instead.",
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             IVsHierarchy hierarchy,
             uint itemid,
             Guid languageServiceGuid
-        ) : this(bufferCoordinator, componentModel, workspace, languageServiceGuid) { }
+        )
+            : this(bufferCoordinator, componentModel, workspace, languageServiceGuid) { }
 
         public VSTypeScriptContainedLanguageWrapper(
             IVsTextBufferCoordinator bufferCoordinator,

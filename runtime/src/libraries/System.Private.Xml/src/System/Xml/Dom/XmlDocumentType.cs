@@ -26,7 +26,8 @@ namespace System.Xml
             string? systemId,
             string? internalSubset,
             XmlDocument doc
-        ) : base(doc)
+        )
+            : base(doc)
         {
             _name = name;
             _publicId = publicId;

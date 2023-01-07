@@ -292,7 +292,8 @@ namespace System.Runtime.Serialization
         }
 
 #if CODEDOM
-        public CodeTypeReference(CodeTypeParameter typeParameter) : this(typeParameter?.Name)
+        public CodeTypeReference(CodeTypeParameter typeParameter)
+            : this(typeParameter?.Name)
         {
             Options = CodeTypeReferenceOptions.GenericTypeParameter;
         }

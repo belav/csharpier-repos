@@ -413,8 +413,8 @@ public abstract class RelationalOptionsExtension : IDbContextOptionsExtension
         ///     info/metadata for the given extension.
         /// </summary>
         /// <param name="extension">The extension.</param>
-        protected RelationalExtensionInfo(IDbContextOptionsExtension extension) : base(extension)
-        { }
+        protected RelationalExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         /// <summary>
         ///     The extension for which this instance contains metadata.

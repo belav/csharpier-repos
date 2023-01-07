@@ -384,7 +384,8 @@ namespace System.Web.Mvc.Async
                 EndInvokeDelegate<TResult> endDelegate,
                 object tag,
                 SynchronizationContext callbackSyncContext
-            ) : base(tag, callbackSyncContext)
+            )
+                : base(tag, callbackSyncContext)
             {
                 _beginDelegate = beginDelegate;
                 _endDelegate = endDelegate;
@@ -416,7 +417,8 @@ namespace System.Web.Mvc.Async
                 TState state,
                 object tag,
                 SynchronizationContext callbackSyncContext
-            ) : base(tag, callbackSyncContext)
+            )
+                : base(tag, callbackSyncContext)
             {
                 _beginDelegate = beginDelegate;
                 _endDelegate = endDelegate;
@@ -449,7 +451,8 @@ namespace System.Web.Mvc.Async
                 TState state,
                 object tag,
                 SynchronizationContext callbackSyncContext
-            ) : base(tag, callbackSyncContext)
+            )
+                : base(tag, callbackSyncContext)
             {
                 _beginDelegate = beginDelegate;
                 _endDelegate = endDelegate;

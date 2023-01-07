@@ -9,7 +9,8 @@ namespace System.Diagnostics.Tracing
     {
         private readonly string _eventFilter;
 
-        public ConsoleEventListener() : this(string.Empty) { }
+        public ConsoleEventListener()
+            : this(string.Empty) { }
 
         public ConsoleEventListener(string filter)
         {

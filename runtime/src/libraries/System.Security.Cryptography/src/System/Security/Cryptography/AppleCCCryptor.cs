@@ -29,7 +29,8 @@ namespace System.Security.Cryptography
             bool encrypting,
             int feedbackSizeInBytes,
             int paddingSizeInBytes
-        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+        )
+            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _encrypting = encrypting;
 

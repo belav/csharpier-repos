@@ -34,8 +34,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public abstract partial class ReferenceHandlerTests_Metadata : ReferenceHandlerTests
     {
-        public ReferenceHandlerTests_Metadata(JsonSerializerWrapper serializer) : base(serializer)
-        { }
+        public ReferenceHandlerTests_Metadata(JsonSerializerWrapper serializer)
+            : base(serializer) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(Employee))]
@@ -178,8 +178,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public abstract partial class ReferenceHandlerTests_Default : ReferenceHandlerTests
     {
-        public ReferenceHandlerTests_Default(JsonSerializerWrapper serializer) : base(serializer)
-        { }
+        public ReferenceHandlerTests_Default(JsonSerializerWrapper serializer)
+            : base(serializer) { }
 
         [JsonSerializable(typeof(Employee))]
         [JsonSerializable(typeof(KeyValuePair<string, string>))]

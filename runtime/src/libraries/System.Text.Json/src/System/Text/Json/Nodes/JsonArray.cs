@@ -27,14 +27,16 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that is empty.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonArray(JsonNodeOptions? options = null) : base(options) { }
+        public JsonArray(JsonNodeOptions? options = null)
+            : base(options) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that contains items from the specified params array.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
         /// <param name="items">The items to add to the new <see cref="JsonArray"/>.</param>
-        public JsonArray(JsonNodeOptions options, params JsonNode?[] items) : base(options)
+        public JsonArray(JsonNodeOptions options, params JsonNode?[] items)
+            : base(options)
         {
             InitializeFromArray(items);
         }
@@ -43,7 +45,8 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that contains items from the specified array.
         /// </summary>
         /// <param name="items">The items to add to the new <see cref="JsonArray"/>.</param>
-        public JsonArray(params JsonNode?[] items) : base()
+        public JsonArray(params JsonNode?[] items)
+            : base()
         {
             InitializeFromArray(items);
         }
@@ -88,7 +91,8 @@ namespace System.Text.Json.Nodes
             );
         }
 
-        internal JsonArray(JsonElement element, JsonNodeOptions? options = null) : base(options)
+        internal JsonArray(JsonElement element, JsonNodeOptions? options = null)
+            : base(options)
         {
             Debug.Assert(element.ValueKind == JsonValueKind.Array);
             _jsonElement = element;

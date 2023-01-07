@@ -172,7 +172,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceMemberContainerTypeSymbol containingEnum,
                 EnumMemberDeclarationSyntax syntax,
                 BindingDiagnosticBag diagnostics
-            ) : base(containingEnum, syntax, diagnostics) { }
+            )
+                : base(containingEnum, syntax, diagnostics) { }
 
             protected override ConstantValue MakeConstantValue(
                 HashSet<SourceFieldSymbolWithSyntaxReference> dependencies,
@@ -194,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 EnumMemberDeclarationSyntax syntax,
                 EqualsValueClauseSyntax initializer,
                 BindingDiagnosticBag diagnostics
-            ) : base(containingEnum, syntax, diagnostics)
+            )
+                : base(containingEnum, syntax, diagnostics)
             {
                 _equalsValueNodeRef = initializer.GetReference();
             }
@@ -226,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceEnumConstantSymbol otherConstant,
                 uint otherConstantOffset,
                 BindingDiagnosticBag diagnostics
-            ) : base(containingEnum, syntax, diagnostics)
+            )
+                : base(containingEnum, syntax, diagnostics)
             {
                 Debug.Assert((object)otherConstant != null);
                 Debug.Assert(otherConstantOffset > 0);

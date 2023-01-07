@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             IEditorOperationsFactoryService editorOperationsFactoryService,
             ITextStructureNavigatorSelectorService navigatorSelectorService,
             EditorOptionsService editorOptionsService
-        ) : base(undoHistoryRegistry, editorOperationsFactoryService, editorOptionsService)
+        )
+            : base(undoHistoryRegistry, editorOperationsFactoryService, editorOptionsService)
         {
             _navigatorSelectorService = navigatorSelectorService;
         }

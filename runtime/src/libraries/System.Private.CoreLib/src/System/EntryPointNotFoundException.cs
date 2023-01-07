@@ -20,17 +20,20 @@ namespace System
     )]
     public class EntryPointNotFoundException : TypeLoadException
     {
-        public EntryPointNotFoundException() : base(SR.Arg_EntryPointNotFoundException)
+        public EntryPointNotFoundException()
+            : base(SR.Arg_EntryPointNotFoundException)
         {
             HResult = HResults.COR_E_ENTRYPOINTNOTFOUND;
         }
 
-        public EntryPointNotFoundException(string? message) : base(message)
+        public EntryPointNotFoundException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_ENTRYPOINTNOTFOUND;
         }
 
-        public EntryPointNotFoundException(string? message, Exception? inner) : base(message, inner)
+        public EntryPointNotFoundException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_ENTRYPOINTNOTFOUND;
         }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ExpressionSyntax selectExpression,
             ExpressionSyntax modifyingExpression,
             SyntaxTrivia[] trivia
-        ) : base(forEachInfo, selectExpression, modifyingExpression, trivia) { }
+        )
+            : base(forEachInfo, selectExpression, modifyingExpression, trivia) { }
 
         protected override string MethodName => nameof(Enumerable.Count);
 

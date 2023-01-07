@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             return builder.ToString();
         }
 
-        private NativeIntegerAttributesVisitor(StringBuilder builder) : base(builder) { }
+        private NativeIntegerAttributesVisitor(StringBuilder builder)
+            : base(builder) { }
 
         protected override SymbolDisplayFormat DisplayFormat =>
             SymbolDisplayFormat.TestFormatWithConstraints

@@ -708,7 +708,8 @@ namespace System.Text.Json.Serialization.Tests
                 public class DerivedClass : DerivedClassWithConstructor_TypeDiscriminator
                 {
                     [JsonConstructor]
-                    public DerivedClass(int number, string extraProperty) : base(number)
+                    public DerivedClass(int number, string extraProperty)
+                        : base(number)
                     {
                         ExtraProperty = extraProperty;
                     }
@@ -1665,7 +1666,8 @@ namespace System.Text.Json.Serialization.Tests
 
             public class DerivedClass : PolymorphicClassWithConstructor
             {
-                public DerivedClass() : base(0) { }
+                public DerivedClass()
+                    : base(0) { }
 
                 public string String { get; set; }
             }
@@ -1673,7 +1675,8 @@ namespace System.Text.Json.Serialization.Tests
             public class DerivedClassWithConstructor : PolymorphicClassWithConstructor
             {
                 [JsonConstructor]
-                public DerivedClassWithConstructor(int number, bool boolean) : base(number)
+                public DerivedClassWithConstructor(int number, bool boolean)
+                    : base(number)
                 {
                     Boolean = boolean;
                 }
@@ -1685,7 +1688,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 private List<int> _list = new();
 
-                public DerivedCollection() : base(0) { }
+                public DerivedCollection()
+                    : base(0) { }
 
                 bool ICollection<int>.IsReadOnly => false;
 
@@ -1713,7 +1717,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 private Dictionary<string, int> _dict = new();
 
-                public DerivedDictionary() : base(0) { }
+                public DerivedDictionary()
+                    : base(0) { }
 
                 public int this[string key]
                 {
@@ -3682,7 +3687,8 @@ namespace System.Text.Json.Serialization.Tests
         public class CustomPolymorphismResolver<TBaseType> : CustomPolymorphismResolver
             where TBaseType : class
         {
-            public CustomPolymorphismResolver() : base(typeof(TBaseType)) { }
+            public CustomPolymorphismResolver()
+                : base(typeof(TBaseType)) { }
 
             public CustomPolymorphismResolver<TBaseType> WithDerivedType<TDerivedType>()
                 where TDerivedType : TBaseType

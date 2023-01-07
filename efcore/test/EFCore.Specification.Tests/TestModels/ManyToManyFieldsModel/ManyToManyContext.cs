@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ManyToManyFieldsModel;
 
 public class ManyToManyContext : PoolableDbContext
 {
-    public ManyToManyContext(DbContextOptions options) : base(options) { }
+    public ManyToManyContext(DbContextOptions options)
+        : base(options) { }
 
     public DbSet<EntityOne> EntityOnes { get; set; }
     public DbSet<EntityTwo> EntityTwos { get; set; }

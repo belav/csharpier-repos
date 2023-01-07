@@ -200,7 +200,8 @@ public class CustomValueGeneratorTest
         public CustomInMemoryValueGeneratorSelector(
             ValueGeneratorSelectorDependencies dependencies,
             IInMemoryDatabase inMemoryDatabase
-        ) : base(dependencies, inMemoryDatabase) { }
+        )
+            : base(dependencies, inMemoryDatabase) { }
 
         public override ValueGenerator Create(IProperty property, IEntityType entityType) =>
             _factory.Create(property, entityType);

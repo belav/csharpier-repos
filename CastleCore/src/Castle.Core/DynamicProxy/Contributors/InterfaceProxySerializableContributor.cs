@@ -28,7 +28,8 @@ namespace Castle.DynamicProxy.Contributors
             Type targetType,
             string proxyGeneratorId,
             Type[] interfaces
-        ) : base(targetType, interfaces, proxyGeneratorId) { }
+        )
+            : base(targetType, interfaces, proxyGeneratorId) { }
 
         protected override void CustomizeGetObjectData(
             CodeBuilder codebuilder,

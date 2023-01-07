@@ -24,7 +24,8 @@ namespace System.Net.Sockets.Tests
                 ? new IPEndPoint(IPAddress.Parse("1.2.3.4"), 1234)
                 : new IPEndPoint(IPAddress.Parse("1:2:3::4"), 1234);
 
-        protected SendTo(ITestOutputHelper output) : base(output) { }
+        protected SendTo(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(1, -1, 0)] // offset low
@@ -147,28 +148,33 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendTo_SyncSpan : SendTo<SocketHelperSpanSync>
     {
-        public SendTo_SyncSpan(ITestOutputHelper output) : base(output) { }
+        public SendTo_SyncSpan(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendTo_SyncSpanForceNonBlocking
         : SendTo<SocketHelperSpanSyncForceNonBlocking>
     {
-        public SendTo_SyncSpanForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public SendTo_SyncSpanForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendTo_ArraySync : SendTo<SocketHelperArraySync>
     {
-        public SendTo_ArraySync(ITestOutputHelper output) : base(output) { }
+        public SendTo_ArraySync(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendTo_SyncForceNonBlocking : SendTo<SocketHelperSyncForceNonBlocking>
     {
-        public SendTo_SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public SendTo_SyncForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendTo_Apm : SendTo<SocketHelperApm>
     {
-        public SendTo_Apm(ITestOutputHelper output) : base(output) { }
+        public SendTo_Apm(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void EndSendTo_NullAsyncResult_Throws_ArgumentNullException()
@@ -190,7 +196,8 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendTo_Eap : SendTo<SocketHelperEap>
     {
-        public SendTo_Eap(ITestOutputHelper output) : base(output) { }
+        public SendTo_Eap(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void SendToAsync_NullAsyncEventArgs_Throws_ArgumentNullException()
@@ -202,12 +209,14 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendTo_Task : SendTo<SocketHelperTask>
     {
-        public SendTo_Task(ITestOutputHelper output) : base(output) { }
+        public SendTo_Task(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendTo_CancellableTask : SendTo<SocketHelperCancellableTask>
     {
-        public SendTo_CancellableTask(ITestOutputHelper output) : base(output) { }
+        public SendTo_CancellableTask(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task PreCanceled_Throws()
@@ -238,11 +247,13 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendTo_MemoryArrayTask : SendTo<SocketHelperMemoryArrayTask>
     {
-        public SendTo_MemoryArrayTask(ITestOutputHelper output) : base(output) { }
+        public SendTo_MemoryArrayTask(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendTo_MemoryNativeTask : SendTo<SocketHelperMemoryNativeTask>
     {
-        public SendTo_MemoryNativeTask(ITestOutputHelper output) : base(output) { }
+        public SendTo_MemoryNativeTask(ITestOutputHelper output)
+            : base(output) { }
     }
 }

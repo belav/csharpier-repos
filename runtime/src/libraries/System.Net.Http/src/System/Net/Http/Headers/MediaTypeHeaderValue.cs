@@ -93,7 +93,8 @@ namespace System.Net.Http.Headers
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
         /// <param name="mediaType">The source represented as a string to initialize the new instance.</param>
-        public MediaTypeHeaderValue(string mediaType) : this(mediaType, charSet: null) { }
+        public MediaTypeHeaderValue(string mediaType)
+            : this(mediaType, charSet: null) { }
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
         /// <param name="mediaType">The source represented as a string to initialize the new instance.</param>

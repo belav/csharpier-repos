@@ -103,7 +103,8 @@ namespace System.Net.Http
                 string
 #nullable restore
             >> nameValueCollection
-        ) : base(default(byte[])) { }
+        )
+            : base(default(byte[])) { }
 
         protected override System.Threading.Tasks.Task SerializeToStreamAsync(
             System.IO.Stream stream,
@@ -122,7 +123,8 @@ namespace System.Net.Http
 
     public partial class HttpClient : System.Net.Http.HttpMessageInvoker
     {
-        public HttpClient() : base(default(System.Net.Http.HttpMessageHandler)) { }
+        public HttpClient()
+            : base(default(System.Net.Http.HttpMessageHandler)) { }
 
         public HttpClient(System.Net.Http.HttpMessageHandler handler)
             : base(default(System.Net.Http.HttpMessageHandler)) { }
@@ -1765,19 +1767,21 @@ namespace System.Net.Http
 
     public partial class StringContent : System.Net.Http.ByteArrayContent
     {
-        public StringContent(string content) : base(default(byte[])) { }
+        public StringContent(string content)
+            : base(default(byte[])) { }
 
         public StringContent(string content, System.Net.Http.Headers.MediaTypeHeaderValue mediaType)
             : base(default(byte[])) { }
 
-        public StringContent(string content, System.Text.Encoding? encoding) : base(default(byte[]))
-        { }
+        public StringContent(string content, System.Text.Encoding? encoding)
+            : base(default(byte[])) { }
 
         public StringContent(
             string content,
             System.Text.Encoding? encoding,
             System.Net.Http.Headers.MediaTypeHeaderValue mediaType
-        ) : base(default(byte[])) { }
+        )
+            : base(default(byte[])) { }
 
         public StringContent(string content, System.Text.Encoding? encoding, string mediaType)
             : base(default(byte[])) { }
@@ -2945,9 +2949,11 @@ namespace System.Net.Http.Headers
     {
         protected NameValueWithParametersHeaderValue(
             System.Net.Http.Headers.NameValueWithParametersHeaderValue source
-        ) : base(default(string)) { }
+        )
+            : base(default(string)) { }
 
-        public NameValueWithParametersHeaderValue(string name) : base(default(string)) { }
+        public NameValueWithParametersHeaderValue(string name)
+            : base(default(string)) { }
 
         public NameValueWithParametersHeaderValue(string name, string? value)
             : base(default(string)) { }

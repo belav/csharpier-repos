@@ -11,7 +11,8 @@ namespace Internal.TypeSystem
             TargetOS targetOS,
             TargetAbi abi,
             SimdVectorLength simdVectorLength
-        ) : this(architecture, targetOS, abi)
+        )
+            : this(architecture, targetOS, abi)
         {
             MaximumSimdVectorLength = simdVectorLength;
         }

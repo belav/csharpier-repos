@@ -8,7 +8,8 @@ namespace System.IO.Tests
 {
     internal class FakeSafeBuffer : SafeBuffer
     {
-        public FakeSafeBuffer(ulong size) : base(true)
+        public FakeSafeBuffer(ulong size)
+            : base(true)
         {
             Initialize(size);
         }
@@ -23,7 +24,8 @@ namespace System.IO.Tests
     {
         private bool _isDisposed;
 
-        public TestSafeBuffer(int capacity) : base(true)
+        public TestSafeBuffer(int capacity)
+            : base(true)
         {
             Assert.True(capacity >= 0);
             Initialize((ulong)capacity);
@@ -40,7 +42,8 @@ namespace System.IO.Tests
             }
         }
 
-        public TestSafeBuffer(byte[] seedData) : base(true)
+        public TestSafeBuffer(byte[] seedData)
+            : base(true)
         {
             int capacity = seedData.Length;
             Initialize((ulong)capacity);

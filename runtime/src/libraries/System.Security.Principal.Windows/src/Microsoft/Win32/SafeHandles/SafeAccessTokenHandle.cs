@@ -12,13 +12,15 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle" />.
         /// </summary>
-        public SafeAccessTokenHandle() : base(IntPtr.Zero, true) { }
+        public SafeAccessTokenHandle()
+            : base(IntPtr.Zero, true) { }
 
         /// <summary>
         /// Creates a <see cref="T:Microsoft.Win32.SafeHandles.SafeAccessTokenHandle" /> around a Windows thread or process access token.
         /// </summary>
         /// <param name="handle">Handle to wrap</param>
-        public SafeAccessTokenHandle(IntPtr handle) : base(handle, true) { }
+        public SafeAccessTokenHandle(IntPtr handle)
+            : base(handle, true) { }
 
         public static SafeAccessTokenHandle InvalidHandle
         {

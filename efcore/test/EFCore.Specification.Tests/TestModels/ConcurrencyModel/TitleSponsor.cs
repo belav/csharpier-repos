@@ -7,7 +7,8 @@ public class TitleSponsor : Sponsor
 {
     public class TitleSponsorProxy : TitleSponsor, IF1Proxy
     {
-        public TitleSponsorProxy(ILazyLoader loader) : base(loader) { }
+        public TitleSponsorProxy(ILazyLoader loader)
+            : base(loader) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }

@@ -32,7 +32,8 @@ namespace System.Net.Mime
             byte[]? header,
             byte[]? footer,
             int maxLineLength
-        ) : this(bufferSize, header, footer, maxLineLength, 0) { }
+        )
+            : this(bufferSize, header, footer, maxLineLength, 0) { }
 
         internal WriteStateInfoBase(
             int bufferSize,

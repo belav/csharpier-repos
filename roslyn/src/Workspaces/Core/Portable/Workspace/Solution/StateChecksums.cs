@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                 )
             ) { }
 
-        public SolutionStateChecksums(ImmutableArray<object> children) : base(children) { }
+        public SolutionStateChecksums(ImmutableArray<object> children)
+            : base(children) { }
 
         public Checksum Attributes => (Checksum)Children[0];
         public ChecksumCollection Projects => (ChecksumCollection)Children[1];
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Serialization
                 )
             ) { }
 
-        public ProjectStateChecksums(ImmutableArray<object> children) : base(children) { }
+        public ProjectStateChecksums(ImmutableArray<object> children)
+            : base(children) { }
 
         public Checksum Info => (Checksum)Children[0];
         public Checksum CompilationOptions => (Checksum)Children[1];
@@ -280,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public DocumentStateChecksums(Checksum infoChecksum, Checksum textChecksum)
             : this(ImmutableArray.Create<object>(infoChecksum, textChecksum)) { }
 
-        public DocumentStateChecksums(ImmutableArray<object> children) : base(children) { }
+        public DocumentStateChecksums(ImmutableArray<object> children)
+            : base(children) { }
 
         public Checksum Info => (Checksum)Children[0];
         public Checksum Text => (Checksum)Children[1];

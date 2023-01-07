@@ -35,7 +35,8 @@ namespace System.DirectoryServices.Protocols
     {
         public AddRequest() { }
 
-        public AddRequest(string distinguishedName, params DirectoryAttribute[] attributes) : this()
+        public AddRequest(string distinguishedName, params DirectoryAttribute[] attributes)
+            : this()
         {
             DistinguishedName = distinguishedName;
 
@@ -48,7 +49,8 @@ namespace System.DirectoryServices.Protocols
             }
         }
 
-        public AddRequest(string distinguishedName, string objectClass) : this()
+        public AddRequest(string distinguishedName, string objectClass)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(objectClass);
 
@@ -72,7 +74,8 @@ namespace System.DirectoryServices.Protocols
         public ModifyRequest(
             string distinguishedName,
             params DirectoryAttributeModification[] modifications
-        ) : this()
+        )
+            : this()
         {
             DistinguishedName = distinguishedName;
             Modifications.AddRange(modifications);
@@ -83,7 +86,8 @@ namespace System.DirectoryServices.Protocols
             DirectoryAttributeOperation operation,
             string attributeName,
             params object[] values
-        ) : this()
+        )
+            : this()
         {
             ArgumentNullException.ThrowIfNull(attributeName);
 
@@ -195,7 +199,8 @@ namespace System.DirectoryServices.Protocols
             RequestName = requestName;
         }
 
-        public ExtendedRequest(string requestName, byte[] requestValue) : this(requestName)
+        public ExtendedRequest(string requestName, byte[] requestValue)
+            : this(requestName)
         {
             _requestValue = requestValue;
         }
@@ -231,7 +236,8 @@ namespace System.DirectoryServices.Protocols
             string ldapFilter,
             SearchScope searchScope,
             params string[] attributeList
-        ) : this()
+        )
+            : this()
         {
             DistinguishedName = distinguishedName;
 

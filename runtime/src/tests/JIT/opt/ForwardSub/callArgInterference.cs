@@ -17,7 +17,8 @@ public struct S0 : I1
     public static bool result;
     public short F5;
 
-    public S0(short f5) : this()
+    public S0(short f5)
+        : this()
     {
         F5 = f5;
     }

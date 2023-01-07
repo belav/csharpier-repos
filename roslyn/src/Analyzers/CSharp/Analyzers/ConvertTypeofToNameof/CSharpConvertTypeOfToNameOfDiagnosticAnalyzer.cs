@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
         private static readonly string s_title =
             CSharpAnalyzersResources.typeof_can_be_converted__to_nameof;
 
-        public CSharpConvertTypeOfToNameOfDiagnosticAnalyzer() : base(s_title) { }
+        public CSharpConvertTypeOfToNameOfDiagnosticAnalyzer()
+            : base(s_title) { }
 
         protected override bool IsValidTypeofAction(OperationAnalysisContext context)
         {

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 CopyPasteAndPrintingClassificationBufferTaggerProvider owner,
                 ITextBuffer subjectBuffer,
                 IAsynchronousOperationListener asyncListener
-            ) : base(owner.ThreadingContext)
+            )
+                : base(owner.ThreadingContext)
             {
                 _owner = owner;
                 _subjectBuffer = subjectBuffer;

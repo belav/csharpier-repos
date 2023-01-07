@@ -2282,7 +2282,8 @@ class C
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public AnalyzerProvider2() : base(new Analyzer2()) { }
+            public AnalyzerProvider2()
+                : base(new Analyzer2()) { }
         }
 
         internal static class Metadata

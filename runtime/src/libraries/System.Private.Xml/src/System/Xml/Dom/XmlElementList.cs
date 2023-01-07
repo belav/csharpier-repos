@@ -73,7 +73,8 @@ namespace System.Xml
             _matchCount = -1;
         }
 
-        internal XmlElementList(XmlNode parent, string name) : this(parent)
+        internal XmlElementList(XmlNode parent, string name)
+            : this(parent)
         {
             Debug.Assert(parent.Document != null);
             XmlNameTable nt = parent.Document.NameTable;

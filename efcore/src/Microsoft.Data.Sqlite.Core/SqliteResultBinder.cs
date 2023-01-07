@@ -10,7 +10,8 @@ namespace Microsoft.Data.Sqlite
     {
         private readonly sqlite3_context _ctx;
 
-        public SqliteResultBinder(sqlite3_context ctx, object? value) : base(value)
+        public SqliteResultBinder(sqlite3_context ctx, object? value)
+            : base(value)
         {
             _ctx = ctx;
         }

@@ -19,7 +19,8 @@ namespace System.IO
     {
         private FileInfo() { }
 
-        public FileInfo(string fileName) : this(fileName, isNormalized: false) { }
+        public FileInfo(string fileName)
+            : this(fileName, isNormalized: false) { }
 
         internal FileInfo(
             string originalPath,

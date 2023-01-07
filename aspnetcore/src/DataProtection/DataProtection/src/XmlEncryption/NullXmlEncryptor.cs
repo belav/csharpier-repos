@@ -17,7 +17,8 @@ public sealed class NullXmlEncryptor : IXmlEncryptor
     /// <summary>
     /// Creates a new instance of <see cref="NullXmlEncryptor"/>.
     /// </summary>
-    public NullXmlEncryptor() : this(services: null) { }
+    public NullXmlEncryptor()
+        : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="NullXmlEncryptor"/>.

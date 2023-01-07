@@ -78,7 +78,8 @@ namespace System.Data.SqlTypes
         }
 
         // Create a SqlChars from a SqlString
-        public SqlChars(SqlString value) : this(value.IsNull ? null : value.Value.ToCharArray()) { }
+        public SqlChars(SqlString value)
+            : this(value.IsNull ? null : value.Value.ToCharArray()) { }
 
         // Create a SqlChars from a SqlStreamChars
         internal SqlChars(SqlStreamChars s)

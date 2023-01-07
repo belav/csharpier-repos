@@ -4,7 +4,8 @@
     {
         public LatLong() { }
 
-        public LatLong(double latitude, double longitude) : this()
+        public LatLong(double latitude, double longitude)
+            : this()
         {
             Latitude = latitude;
             Longitude = longitude;

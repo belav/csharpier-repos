@@ -22,7 +22,8 @@ public class SecurityTokenValidatedContext : RemoteAuthenticationContext<WsFeder
         WsFederationOptions options,
         ClaimsPrincipal principal,
         AuthenticationProperties properties
-    ) : base(context, scheme, options, properties) => Principal = principal;
+    )
+        : base(context, scheme, options, properties) => Principal = principal;
 
     /// <summary>
     /// The <see cref="WsFederationMessage"/> received on this request.

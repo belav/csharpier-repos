@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             IClassificationFormatMapService classificationFormatMapService,
             ClassificationTypeMap classificationTypeMap,
             IThreadingContext threadingContext
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _classificationFormatMap = classificationFormatMapService.GetClassificationFormatMap(
                 "tooltip"

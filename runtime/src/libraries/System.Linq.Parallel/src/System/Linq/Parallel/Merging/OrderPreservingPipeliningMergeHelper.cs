@@ -260,7 +260,8 @@ namespace System.Linq.Parallel
             internal OrderedPipeliningMergeEnumerator(
                 OrderPreservingPipeliningMergeHelper<TOutput, TKey> mergeHelper,
                 IComparer<Producer<TKey>> producerComparer
-            ) : base(mergeHelper._taskGroupState)
+            )
+                : base(mergeHelper._taskGroupState)
             {
                 int partitionCount = mergeHelper._partitions.PartitionCount;
 

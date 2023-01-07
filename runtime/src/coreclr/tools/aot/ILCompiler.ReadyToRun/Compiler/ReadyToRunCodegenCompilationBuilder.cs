@@ -59,7 +59,8 @@ namespace ILCompiler
             ReadyToRunCompilationModuleGroupBase group,
             IEnumerable<string> inputFiles,
             string compositeRootPath
-        ) : base(context, group, new NativeAotNameMangler())
+        )
+            : base(context, group, new NativeAotNameMangler())
         {
             _ilProvider = new ReadyToRunILProvider(group);
             _inputFiles = inputFiles;

@@ -27,7 +27,8 @@ internal sealed class EndpointRoutingUrlHelper : UrlHelperBase
         ActionContext actionContext,
         LinkGenerator linkGenerator,
         ILogger<EndpointRoutingUrlHelper> logger
-    ) : base(actionContext)
+    )
+        : base(actionContext)
     {
         if (linkGenerator == null)
         {

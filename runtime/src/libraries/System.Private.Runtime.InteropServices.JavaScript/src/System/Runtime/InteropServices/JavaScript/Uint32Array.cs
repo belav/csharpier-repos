@@ -10,23 +10,29 @@ namespace System.Runtime.InteropServices.JavaScript
     {
         public Uint32Array() { }
 
-        public Uint32Array(int length) : base(length) { }
+        public Uint32Array(int length)
+            : base(length) { }
 
-        public Uint32Array(ArrayBuffer buffer) : base(buffer) { }
+        public Uint32Array(ArrayBuffer buffer)
+            : base(buffer) { }
 
-        public Uint32Array(ArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
+        public Uint32Array(ArrayBuffer buffer, int byteOffset)
+            : base(buffer, byteOffset) { }
 
         public Uint32Array(ArrayBuffer buffer, int byteOffset, int length)
             : base(buffer, byteOffset, length) { }
 
-        public Uint32Array(SharedArrayBuffer buffer) : base(buffer) { }
+        public Uint32Array(SharedArrayBuffer buffer)
+            : base(buffer) { }
 
-        public Uint32Array(SharedArrayBuffer buffer, int byteOffset) : base(buffer, byteOffset) { }
+        public Uint32Array(SharedArrayBuffer buffer, int byteOffset)
+            : base(buffer, byteOffset) { }
 
         public Uint32Array(SharedArrayBuffer buffer, int byteOffset, int length)
             : base(buffer, byteOffset, length) { }
 
-        internal Uint32Array(IntPtr jsHandle) : base(jsHandle) { }
+        internal Uint32Array(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// Defines an implicit conversion of Uint32Array class to a uint

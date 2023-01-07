@@ -32,7 +32,16 @@ public class ConnectionEndEventData : ConnectionEventData
         bool async,
         DateTimeOffset startTime,
         TimeSpan duration
-    ) : base(eventDefinition, messageGenerator, connection, context, connectionId, async, startTime)
+    )
+        : base(
+            eventDefinition,
+            messageGenerator,
+            connection,
+            context,
+            connectionId,
+            async,
+            startTime
+        )
     {
         Duration = duration;
     }

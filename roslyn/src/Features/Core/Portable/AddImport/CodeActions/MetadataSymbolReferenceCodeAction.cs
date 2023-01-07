@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             public MetadataSymbolReferenceCodeAction(
                 Document originalDocument,
                 AddImportFixData fixData
-            ) : base(originalDocument, fixData)
+            )
+                : base(originalDocument, fixData)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.MetadataSymbol);
             }

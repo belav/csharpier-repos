@@ -438,7 +438,8 @@ namespace System.Net.Http.Formatting
         {
             public TestMediaTypeFormatter() { }
 
-            public TestMediaTypeFormatter(TestMediaTypeFormatter formatter) : base(formatter) { }
+            public TestMediaTypeFormatter(TestMediaTypeFormatter formatter)
+                : base(formatter) { }
 
             public override bool CanReadType(Type type)
             {

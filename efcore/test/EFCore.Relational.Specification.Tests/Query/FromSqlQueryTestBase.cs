@@ -19,7 +19,8 @@ public abstract class FromSqlQueryTestBase<TFixture> : QueryTestBase<TFixture>
     // ReSharper disable once StaticMemberInGenericType
     private static readonly string _eol = Environment.NewLine;
 
-    protected FromSqlQueryTestBase(TFixture fixture) : base(fixture)
+    protected FromSqlQueryTestBase(TFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys.NonHelixTests;
 
 public class DelegateOutOfProcTests : LoggedTest
 {
-    public DelegateOutOfProcTests(ITestOutputHelper output) : base(output) { }
+    public DelegateOutOfProcTests(ITestOutputHelper output)
+        : base(output) { }
 
     [ConditionalFact]
     [DelegateSupportedCondition(true)]

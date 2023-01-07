@@ -24,7 +24,8 @@ public class BinaryExpressionEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         Expression left,
         Expression right
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         Left = left;
         Right = right;

@@ -1230,7 +1230,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ImmutableArray<Location?> elementLocations,
                 ImmutableArray<bool> errorPositions,
                 ImmutableArray<Location> locations
-            ) : this(underlyingType)
+            )
+                : this(underlyingType)
             {
                 ElementNames = elementNames;
                 ElementLocations = elementLocations;

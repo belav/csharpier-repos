@@ -65,7 +65,8 @@ namespace Castle.DynamicProxy
         /// <summary>
         ///   Initializes a new instance of the <see cref = "ProxyGenerationOptions" /> class.
         /// </summary>
-        public ProxyGenerationOptions() : this(new AllMethodsHook()) { }
+        public ProxyGenerationOptions()
+            : this(new AllMethodsHook()) { }
 
 #if FEATURE_SERIALIZATION
         private ProxyGenerationOptions(SerializationInfo info, StreamingContext context)

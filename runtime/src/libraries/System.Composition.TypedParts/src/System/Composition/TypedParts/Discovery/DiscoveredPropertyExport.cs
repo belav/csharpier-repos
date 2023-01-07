@@ -22,7 +22,8 @@ namespace System.Composition.TypedParts.Discovery
             CompositionContract contract,
             IDictionary<string, object> metadata,
             PropertyInfo property
-        ) : base(contract, metadata)
+        )
+            : base(contract, metadata)
         {
             _property = property;
         }

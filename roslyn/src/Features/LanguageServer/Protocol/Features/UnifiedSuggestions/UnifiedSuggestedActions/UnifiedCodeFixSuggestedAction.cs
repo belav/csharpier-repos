@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeFix codeFix,
             object provider,
             UnifiedSuggestedActionSet? fixAllFlavors
-        ) : base(workspace, codeAction, codeActionPriority)
+        )
+            : base(workspace, codeAction, codeActionPriority)
         {
             CodeFix = codeFix;
             Provider = provider;

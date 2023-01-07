@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 IEnumerable<KeyValuePair<ISymbol, ImmutableArray<Diagnostic>>> diagnosticsBySymbol,
                 Project project,
                 CodeActionOptionsProvider fallbackOptions
-            ) : base(fixer, project)
+            )
+                : base(fixer, project)
             {
                 _suppressMessageAttribute = suppressMessageAttribute;
                 _diagnosticsBySymbol = diagnosticsBySymbol;
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     string title,
                     Func<CancellationToken, Task<Solution>> createChangedSolution,
                     string equivalenceKey
-                ) : base(title, createChangedSolution, equivalenceKey) { }
+                )
+                    : base(title, createChangedSolution, equivalenceKey) { }
 
                 protected override Task<Document> PostProcessChangesAsync(
                     Document document,

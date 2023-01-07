@@ -1325,14 +1325,16 @@ namespace System.ComponentModel.Tests
 
         class DerivedUri : Uri
         {
-            protected DerivedUri() : base("https://hello") { }
+            protected DerivedUri()
+                : base("https://hello") { }
         }
 
         class TwiceDerivedUri : DerivedUri { }
 
         class DerivedCultureInfo : CultureInfo
         {
-            protected DerivedCultureInfo() : base("hello") { }
+            protected DerivedCultureInfo()
+                : base("hello") { }
         }
 
         class TwiceDerivedCultureInfo : DerivedCultureInfo { }

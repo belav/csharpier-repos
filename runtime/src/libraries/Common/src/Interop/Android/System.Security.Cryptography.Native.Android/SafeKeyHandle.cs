@@ -8,7 +8,8 @@ namespace System.Security.Cryptography
 {
     internal abstract class SafeKeyHandle : SafeHandle
     {
-        protected SafeKeyHandle() : base(IntPtr.Zero, true) { }
+        protected SafeKeyHandle()
+            : base(IntPtr.Zero, true) { }
 
         public override bool IsInvalid
         {

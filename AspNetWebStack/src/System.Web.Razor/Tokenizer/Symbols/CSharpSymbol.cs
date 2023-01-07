@@ -29,14 +29,16 @@ namespace System.Web.Razor.Tokenizer.Symbols
             string content,
             CSharpSymbolType type,
             IEnumerable<RazorError> errors
-        ) : base(new SourceLocation(offset, line, column), content, type, errors) { }
+        )
+            : base(new SourceLocation(offset, line, column), content, type, errors) { }
 
         public CSharpSymbol(
             SourceLocation start,
             string content,
             CSharpSymbolType type,
             IEnumerable<RazorError> errors
-        ) : base(start, content, type, errors) { }
+        )
+            : base(start, content, type, errors) { }
 
         public bool? EscapedIdentifier { get; set; }
         public CSharpKeyword? Keyword { get; set; }

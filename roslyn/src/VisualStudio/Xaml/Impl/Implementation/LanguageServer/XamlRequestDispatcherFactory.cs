@@ -71,7 +71,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
                 IXamlLanguageServerFeedbackService? feedbackService,
                 ILspLogger logger,
                 IHandlerProvider handlerProvider
-            ) : base(logger, handlerProvider)
+            )
+                : base(logger, handlerProvider)
             {
                 _projectService = projectService;
                 _feedbackService = feedbackService;

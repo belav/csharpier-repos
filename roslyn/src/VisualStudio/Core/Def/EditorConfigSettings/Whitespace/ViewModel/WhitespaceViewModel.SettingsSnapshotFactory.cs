@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
         internal sealed class SettingsSnapshotFactory
             : SettingsSnapshotFactoryBase<WhitespaceSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<WhitespaceSetting> data) : base(data)
-            { }
+            public SettingsSnapshotFactory(ISettingsProvider<WhitespaceSetting> data)
+                : base(data) { }
 
             protected override SettingsEntriesSnapshot CreateSnapshot(
                 ImmutableArray<WhitespaceSetting> data,

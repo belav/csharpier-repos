@@ -586,7 +586,8 @@ namespace Roslyn.Utilities
             // first Request was then blocking waiting for a later Request, we would hang. It also could cause performance
             // issues. If the first request then consumes a lot of CPU time, we're not letting other Requests complete that
             // could use another CPU core at the same time.
-            public Request() : base(TaskCreationOptions.RunContinuationsAsynchronously) { }
+            public Request()
+                : base(TaskCreationOptions.RunContinuationsAsynchronously) { }
 
             public void RegisterForCancellation(
                 Action<object?> callback,

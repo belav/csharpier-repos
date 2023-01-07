@@ -17,7 +17,8 @@ namespace System.Runtime
             HResult = HResults.COR_E_AMBIGUOUSIMPLEMENTATION;
         }
 
-        public AmbiguousImplementationException(string? message) : base(message)
+        public AmbiguousImplementationException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_AMBIGUOUSIMPLEMENTATION;
         }

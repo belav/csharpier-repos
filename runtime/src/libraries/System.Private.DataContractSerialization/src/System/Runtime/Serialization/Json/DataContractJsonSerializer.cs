@@ -41,12 +41,13 @@ namespace System.Runtime.Serialization.Json
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public DataContractJsonSerializer(Type type) : this(type, (IEnumerable<Type>?)null) { }
+        public DataContractJsonSerializer(Type type)
+            : this(type, (IEnumerable<Type>?)null) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public DataContractJsonSerializer(Type type, string? rootName) : this(type, rootName, null)
-        { }
+        public DataContractJsonSerializer(Type type, string? rootName)
+            : this(type, rootName, null) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -80,7 +81,8 @@ namespace System.Runtime.Serialization.Json
             Type type,
             XmlDictionaryString? rootName,
             IEnumerable<Type>? knownTypes
-        ) : this(type, rootName, knownTypes, int.MaxValue, false, false) { }
+        )
+            : this(type, rootName, knownTypes, int.MaxValue, false, false) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]

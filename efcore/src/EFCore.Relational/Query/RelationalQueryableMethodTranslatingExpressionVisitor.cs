@@ -30,7 +30,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext, subquery: false)
+    )
+        : base(dependencies, queryCompilationContext, subquery: false)
     {
         RelationalDependencies = relationalDependencies;
 
@@ -62,7 +63,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     /// <param name="parentVisitor">A parent visitor to create subquery visitor for.</param>
     protected RelationalQueryableMethodTranslatingExpressionVisitor(
         RelationalQueryableMethodTranslatingExpressionVisitor parentVisitor
-    ) : base(parentVisitor.Dependencies, parentVisitor.QueryCompilationContext, subquery: true)
+    )
+        : base(parentVisitor.Dependencies, parentVisitor.QueryCompilationContext, subquery: true)
     {
         RelationalDependencies = parentVisitor.RelationalDependencies;
         _queryCompilationContext = parentVisitor._queryCompilationContext;

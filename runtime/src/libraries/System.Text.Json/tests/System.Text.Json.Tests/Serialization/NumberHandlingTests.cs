@@ -2393,22 +2393,26 @@ namespace System.Text.Json.Serialization.Tests
 
     public class NumberHandlingTests_SyncOverload : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_SyncOverload() : base(JsonSerializerWrapper.StringSerializer) { }
+        public NumberHandlingTests_SyncOverload()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class NumberHandlingTests_Document : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Document() : base(JsonSerializerWrapper.DocumentSerializer) { }
+        public NumberHandlingTests_Document()
+            : base(JsonSerializerWrapper.DocumentSerializer) { }
     }
 
     public class NumberHandlingTests_Element : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Element() : base(JsonSerializerWrapper.ElementSerializer) { }
+        public NumberHandlingTests_Element()
+            : base(JsonSerializerWrapper.ElementSerializer) { }
     }
 
     public class NumberHandlingTests_Node : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public NumberHandlingTests_Node()
+            : base(JsonSerializerWrapper.NodeSerializer) { }
     }
 
     public abstract class NumberHandlingTests_OverloadSpecific

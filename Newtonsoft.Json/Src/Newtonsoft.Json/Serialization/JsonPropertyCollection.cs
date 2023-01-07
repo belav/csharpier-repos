@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Serialization
         /// Initializes a new instance of the <see cref="JsonPropertyCollection"/> class.
         /// </summary>
         /// <param name="type">The type.</param>
-        public JsonPropertyCollection(Type type) : base(StringComparer.Ordinal)
+        public JsonPropertyCollection(Type type)
+            : base(StringComparer.Ordinal)
         {
             ValidationUtils.ArgumentNotNull(type, "type");
             _type = type;

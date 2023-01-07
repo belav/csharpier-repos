@@ -402,7 +402,8 @@ public class ConnectionSpecificationTest
     {
         private readonly DbContextOptions _options;
 
-        public NonGenericOptionsContext(DbContextOptions options) : base(options)
+        public NonGenericOptionsContext(DbContextOptions options)
+            : base(options)
         {
             _options = options;
         }
@@ -461,14 +462,16 @@ public class ConnectionSpecificationTest
 
     private class UseConfigurationContext : NorthwindContextBase
     {
-        public UseConfigurationContext(DbContextOptions options) : base(options) { }
+        public UseConfigurationContext(DbContextOptions options)
+            : base(options) { }
     }
 
     private class NorthwindContextBase : DbContext
     {
         protected NorthwindContextBase() { }
 
-        protected NorthwindContextBase(DbContextOptions options) : base(options) { }
+        protected NorthwindContextBase(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Customer> Customers { get; set; }
 

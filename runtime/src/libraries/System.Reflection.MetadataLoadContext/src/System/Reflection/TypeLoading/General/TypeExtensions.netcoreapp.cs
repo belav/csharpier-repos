@@ -30,7 +30,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class LeveledTypeInfo : TypeInfo
     {
-        protected LeveledTypeInfo() : base() { }
+        protected LeveledTypeInfo()
+            : base() { }
     }
 
     internal abstract class LeveledAssembly : Assembly { }

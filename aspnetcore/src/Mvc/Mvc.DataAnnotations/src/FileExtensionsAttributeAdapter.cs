@@ -16,7 +16,8 @@ internal sealed class FileExtensionsAttributeAdapter : AttributeAdapterBase<File
     public FileExtensionsAttributeAdapter(
         FileExtensionsAttribute attribute,
         IStringLocalizer? stringLocalizer
-    ) : base(attribute, stringLocalizer)
+    )
+        : base(attribute, stringLocalizer)
     {
         // Build the extension list based on how the JQuery Validation's 'extension' method expects it
         // https://jqueryvalidation.org/extension-method/

@@ -9,5 +9,6 @@ public abstract class TPTRelationshipsQueryTestBase<TFixture>
     : InheritanceRelationshipsQueryRelationalTestBase<TFixture>
     where TFixture : TPTRelationshipsQueryRelationalFixture, new()
 {
-    protected TPTRelationshipsQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected TPTRelationshipsQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 }

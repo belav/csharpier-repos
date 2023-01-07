@@ -137,7 +137,8 @@ namespace System.Web.Mvc.Test
                 public ObservableModelValidator(
                     ModelMetadata metadata,
                     ControllerContext controllerContext
-                ) : base(metadata, controllerContext) { }
+                )
+                    : base(metadata, controllerContext) { }
 
                 public override IEnumerable<ModelValidationResult> Validate(object container)
                 {

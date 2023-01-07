@@ -42,7 +42,8 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4, TParam5> : Even
             LogLevel,
             Action<ILogger, TParam1, TParam2, TParam3, TParam4, TParam5, Exception?>
         > logActionFunc
-    ) : base(loggingOptions, eventId, level, eventIdCode)
+    )
+        : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
     }

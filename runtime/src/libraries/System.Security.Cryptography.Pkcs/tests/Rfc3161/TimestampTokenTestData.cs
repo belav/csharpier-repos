@@ -29,7 +29,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
         internal byte[] ExternalCertificateBytes { get; private set; }
 
-        private TimestampTokenTestData(string inputHex) : this(inputHex.HexToByteArray()) { }
+        private TimestampTokenTestData(string inputHex)
+            : this(inputHex.HexToByteArray()) { }
 
         private TimestampTokenTestData(ReadOnlyMemory<byte> fullTokenBytes)
         {

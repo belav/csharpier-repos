@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
             string filePath,
             OptionUpdater updaterService,
             Workspace workspace
-        ) : base(filePath, updaterService, workspace)
+        )
+            : base(filePath, updaterService, workspace)
         {
             Update();
         }

@@ -84,7 +84,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public unsafe int Size => PerfMapEntrySize;
 
-        public PerfMapDebugDirectoryEntryNode(string entryName) : base(null)
+        public PerfMapDebugDirectoryEntryNode(string entryName)
+            : base(null)
         {
             _entryName = entryName;
         }
@@ -164,7 +165,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public const uint RsdsMagic = 0x53445352; // R2RM
 
-        public NativeDebugDirectoryEntryNode(string pdbName) : base(null)
+        public NativeDebugDirectoryEntryNode(string pdbName)
+            : base(null)
         {
             _pdbName = pdbName;
         }

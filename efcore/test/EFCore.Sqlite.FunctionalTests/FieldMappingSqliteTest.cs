@@ -8,7 +8,8 @@ public abstract class FieldMappingSqliteTest
     public abstract class FieldMappingSqliteTestBase<TFixture> : FieldMappingTestBase<TFixture>
         where TFixture : FieldMappingSqliteTestBase<TFixture>.FieldMappingSqliteFixtureBase, new()
     {
-        protected FieldMappingSqliteTestBase(TFixture fixture) : base(fixture) { }
+        protected FieldMappingSqliteTestBase(TFixture fixture)
+            : base(fixture) { }
 
         protected override void UseTransaction(
             DatabaseFacade facade,
@@ -25,14 +26,16 @@ public abstract class FieldMappingSqliteTest
     public class DefaultMappingTest
         : FieldMappingSqliteTestBase<DefaultMappingTest.DefaultMappingFixture>
     {
-        public DefaultMappingTest(DefaultMappingFixture fixture) : base(fixture) { }
+        public DefaultMappingTest(DefaultMappingFixture fixture)
+            : base(fixture) { }
 
         public class DefaultMappingFixture : FieldMappingSqliteFixtureBase { }
     }
 
     public class EnforceFieldTest : FieldMappingSqliteTestBase<EnforceFieldTest.EnforceFieldFixture>
     {
-        public EnforceFieldTest(EnforceFieldFixture fixture) : base(fixture) { }
+        public EnforceFieldTest(EnforceFieldFixture fixture)
+            : base(fixture) { }
 
         public class EnforceFieldFixture : FieldMappingSqliteFixtureBase
         {
@@ -49,7 +52,8 @@ public abstract class FieldMappingSqliteTest
     public class EnforceFieldForQueryTest
         : FieldMappingSqliteTestBase<EnforceFieldForQueryTest.EnforceFieldForQueryFixture>
     {
-        public EnforceFieldForQueryTest(EnforceFieldForQueryFixture fixture) : base(fixture) { }
+        public EnforceFieldForQueryTest(EnforceFieldForQueryFixture fixture)
+            : base(fixture) { }
 
         public class EnforceFieldForQueryFixture : FieldMappingSqliteFixtureBase
         {
@@ -66,7 +70,8 @@ public abstract class FieldMappingSqliteTest
     public class EnforcePropertyTest
         : FieldMappingSqliteTestBase<EnforcePropertyTest.EnforcePropertyFixture>
     {
-        public EnforcePropertyTest(EnforcePropertyFixture fixture) : base(fixture) { }
+        public EnforcePropertyTest(EnforcePropertyFixture fixture)
+            : base(fixture) { }
 
         // Cannot force property access when properties missing getter/setter
         public override void Simple_query_read_only_props(bool tracking) { }

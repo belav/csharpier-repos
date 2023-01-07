@@ -19,7 +19,8 @@ public class SqlServerMethodCallTranslatorProvider : RelationalMethodCallTransla
     /// </summary>
     public SqlServerMethodCallTranslatorProvider(
         RelationalMethodCallTranslatorProviderDependencies dependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
         var typeMappingSource = dependencies.RelationalTypeMappingSource;

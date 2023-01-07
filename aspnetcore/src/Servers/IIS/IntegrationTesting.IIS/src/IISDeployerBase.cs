@@ -15,7 +15,8 @@ public abstract class IISDeployerBase : ApplicationDeployer
     public IISDeployerBase(
         IISDeploymentParameters deploymentParameters,
         ILoggerFactory loggerFactory
-    ) : base(deploymentParameters, loggerFactory)
+    )
+        : base(deploymentParameters, loggerFactory)
     {
         IISDeploymentParameters = deploymentParameters;
     }

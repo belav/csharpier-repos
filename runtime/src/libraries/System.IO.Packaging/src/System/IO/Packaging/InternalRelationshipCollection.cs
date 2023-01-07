@@ -60,13 +60,15 @@ namespace System.IO.Packaging
         /// Constructor
         /// </summary>
         /// <remarks>For use by PackagePart</remarks>
-        internal InternalRelationshipCollection(PackagePart part) : this(part.Package, part) { }
+        internal InternalRelationshipCollection(PackagePart part)
+            : this(part.Package, part) { }
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <remarks>For use by Package</remarks>
-        internal InternalRelationshipCollection(Package package) : this(package, null) { }
+        internal InternalRelationshipCollection(Package package)
+            : this(package, null) { }
 
         /// <summary>
         /// Add new relationship

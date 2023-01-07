@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol containingType,
             TypeSymbol objectType,
             TypeSymbol intPtrType
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             _parameters = ImmutableArray.Create<ParameterSymbol>(
                 SynthesizedParameterSymbol.Create(

@@ -18,7 +18,8 @@ namespace System.Data.Odbc
         private DbConnectionInternal _innerConnection;
         private int _closeCount;
 
-        public OdbcConnection() : base()
+        public OdbcConnection()
+            : base()
         {
             GC.SuppressFinalize(this);
             _innerConnection = DbConnectionClosedNeverOpened.SingletonInstance;

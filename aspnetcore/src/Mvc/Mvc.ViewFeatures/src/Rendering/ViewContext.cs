@@ -50,7 +50,8 @@ public class ViewContext : ActionContext
         ITempDataDictionary tempData,
         TextWriter writer,
         HtmlHelperOptions htmlHelperOptions
-    ) : base(actionContext)
+    )
+        : base(actionContext)
     {
         if (actionContext == null)
         {
@@ -108,7 +109,8 @@ public class ViewContext : ActionContext
         IView view,
         ViewDataDictionary viewData,
         TextWriter writer
-    ) : base(viewContext)
+    )
+        : base(viewContext)
     {
         if (viewContext == null)
         {

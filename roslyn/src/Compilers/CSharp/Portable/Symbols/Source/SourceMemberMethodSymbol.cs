@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxReference syntaxReferenceOpt,
             Location location,
             bool isIterator
-        ) : this(containingType, syntaxReferenceOpt, ImmutableArray.Create(location), isIterator)
+        )
+            : this(containingType, syntaxReferenceOpt, ImmutableArray.Create(location), isIterator)
         { }
 
         protected SourceMemberMethodSymbol(
@@ -276,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SyntaxReference syntaxReferenceOpt,
             ImmutableArray<Location> locations,
             bool isIterator
-        ) : base(syntaxReferenceOpt)
+        )
+            : base(syntaxReferenceOpt)
         {
             Debug.Assert((object)containingType != null);
             Debug.Assert(!locations.IsEmpty);

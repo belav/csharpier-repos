@@ -38,7 +38,8 @@ namespace Newtonsoft.Json.Linq
         /// Initializes a new instance of the <see cref="JPropertyDescriptor"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        public JPropertyDescriptor(string name) : base(name, null) { }
+        public JPropertyDescriptor(string name)
+            : base(name, null) { }
 
         private static JObject CastInstance(object instance)
         {

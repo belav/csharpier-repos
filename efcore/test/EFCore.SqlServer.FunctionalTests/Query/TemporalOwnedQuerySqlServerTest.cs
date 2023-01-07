@@ -10,7 +10,8 @@ public class TemporalOwnedQuerySqlServerTest
     public TemporalOwnedQuerySqlServerTest(
         TemporalOwnedQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }

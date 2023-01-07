@@ -43,7 +43,8 @@ namespace ILCompiler
             SharedGenericsMode genericsMode,
             bool bubbleIncludesCorelib,
             CompilerTypeSystemContext oldTypeSystemContext = null
-        ) : base(details, genericsMode)
+        )
+            : base(details, genericsMode)
         {
             _r2rFieldLayoutAlgorithm = new ReadyToRunMetadataFieldLayoutAlgorithm();
             _systemObjectFieldLayoutAlgorithm = new SystemObjectFieldLayoutAlgorithm(

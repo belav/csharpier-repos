@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IServiceProvider serviceProvider,
             OptionStore optionStore,
             Func<OptionStore, IServiceProvider, AbstractOptionPreviewViewModel> createViewModel
-        ) : base(optionStore)
+        )
+            : base(optionStore)
         {
             InitializeComponent();
 

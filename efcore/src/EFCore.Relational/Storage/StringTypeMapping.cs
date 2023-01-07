@@ -48,7 +48,8 @@ public class StringTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="StringTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected StringTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected StringTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
         public AdhocWorkspace(HostServices host, string workspaceKind = WorkspaceKind.Custom)
             : base(host, workspaceKind) { }
 
-        public AdhocWorkspace() : this(Host.Mef.MefHostServices.DefaultHost) { }
+        public AdhocWorkspace()
+            : this(Host.Mef.MefHostServices.DefaultHost) { }
 
         public override bool CanApplyChange(ApplyChangesKind feature)
         {

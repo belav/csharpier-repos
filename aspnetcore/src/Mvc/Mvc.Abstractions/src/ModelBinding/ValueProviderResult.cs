@@ -36,7 +36,8 @@ public readonly struct ValueProviderResult : IEquatable<ValueProviderResult>, IE
     /// Creates a new <see cref="ValueProviderResult"/> using <see cref="CultureInfo.InvariantCulture"/>.
     /// </summary>
     /// <param name="values">The submitted values.</param>
-    public ValueProviderResult(StringValues values) : this(values, _invariantCulture) { }
+    public ValueProviderResult(StringValues values)
+        : this(values, _invariantCulture) { }
 
     /// <summary>
     /// Creates a new <see cref="ValueProviderResult"/>.

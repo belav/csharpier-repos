@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         bool ActivateTab = true
     )
     {
-        public UnitTestingNavigationOptions() : this(PreferProvisionalTab: false) { }
+        public UnitTestingNavigationOptions()
+            : this(PreferProvisionalTab: false) { }
     }
 }

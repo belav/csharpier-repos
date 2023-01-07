@@ -23,7 +23,8 @@ namespace System.Net.Security
 
         public DateTime Expiry => _expiry;
 
-        protected SafeFreeCredentials(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        protected SafeFreeCredentials(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle)
         {
             _expiry = DateTime.MaxValue;
         }

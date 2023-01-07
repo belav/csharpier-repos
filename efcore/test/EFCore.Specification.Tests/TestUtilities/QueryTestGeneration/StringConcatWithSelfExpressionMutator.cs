@@ -7,7 +7,8 @@ public class StringConcatWithSelfExpressionMutator : ExpressionMutator
 {
     private readonly ExpressionFinder _expressionFinder = new();
 
-    public StringConcatWithSelfExpressionMutator(DbContext context) : base(context) { }
+    public StringConcatWithSelfExpressionMutator(DbContext context)
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {

@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations
-        ) : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
+        )
+            : this(feature, OptionGroup.Default, name, defaultValue, storageLocations) { }
 
         internal PerLanguageOption(
             string feature,

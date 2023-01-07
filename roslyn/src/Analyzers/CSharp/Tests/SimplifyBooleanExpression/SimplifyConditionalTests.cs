@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpressi
     public partial class SimplifyConditionalTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public SimplifyConditionalTests(ITestOutputHelper logger) : base(logger) { }
+        public SimplifyConditionalTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             protected AbstractRemoveDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 DocumentId documentId
-            ) : base(workspace, documentId.ProjectId)
+            )
+                : base(workspace, documentId.ProjectId)
             {
                 DocumentId = documentId;
             }

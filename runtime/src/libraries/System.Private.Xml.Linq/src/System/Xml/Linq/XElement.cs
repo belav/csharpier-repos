@@ -73,7 +73,8 @@ namespace System.Xml.Linq
         /// See XContainer.Add(object content) for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XElement(XName name, object? content) : this(name)
+        public XElement(XName name, object? content)
+            : this(name)
         {
             AddContentSkipNotify(content);
         }
@@ -91,7 +92,8 @@ namespace System.Xml.Linq
         /// See XContainer.Add(object content) for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XElement(XName name, params object?[] content) : this(name, (object)content) { }
+        public XElement(XName name, params object?[] content)
+            : this(name, (object)content) { }
 
         /// <summary>
         /// Initializes a new instance of the XElement class from another XElement object.
@@ -102,7 +104,8 @@ namespace System.Xml.Linq
         /// <remarks>
         /// This constructor makes a deep copy from one element to another.
         /// </remarks>
-        public XElement(XElement other) : base(other)
+        public XElement(XElement other)
+            : base(other)
         {
             this.name = other.name;
             XAttribute? a = other.lastAttr;
@@ -131,9 +134,11 @@ namespace System.Xml.Linq
             AddContentSkipNotify(other.content);
         }
 
-        internal XElement() : this("default"!) { }
+        internal XElement()
+            : this("default"!) { }
 
-        internal XElement(XmlReader r) : this(r, LoadOptions.None) { }
+        internal XElement(XmlReader r)
+            : this(r, LoadOptions.None) { }
 
         private XElement(AsyncConstructionSentry _)
         {

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             IThreadingContext threadingContext,
             SignatureHelpControllerProvider controllerProvider,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext, controllerProvider, globalOptions) { }
+        )
+            : base(threadingContext, controllerProvider, globalOptions) { }
 
         private bool TryGetControllerCommandHandler<TCommandArgs>(
             TCommandArgs args,

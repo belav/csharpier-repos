@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Rename
             private SyncNamespaceDocumentAction(
                 AnalysisResult analysis,
                 CodeCleanupOptionsProvider fallbackOptions
-            ) : base(ImmutableArray<ErrorResource>.Empty)
+            )
+                : base(ImmutableArray<ErrorResource>.Empty)
             {
                 _analysis = analysis;
                 _fallbackOptions = fallbackOptions;

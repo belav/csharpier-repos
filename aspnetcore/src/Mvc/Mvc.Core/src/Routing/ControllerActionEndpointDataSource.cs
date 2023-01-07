@@ -22,7 +22,8 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
         IActionDescriptorCollectionProvider actions,
         ActionEndpointFactory endpointFactory,
         OrderedEndpointsSequenceProvider orderSequence
-    ) : base(actions)
+    )
+        : base(actions)
     {
         _endpointFactory = endpointFactory;
 

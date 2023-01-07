@@ -549,7 +549,8 @@ public class ObjectMethodExecutorTest
         {
             private TestAwaitable<T> _owner;
 
-            public TestAwaiter(TestAwaitable<T> owner) : this()
+            public TestAwaiter(TestAwaitable<T> owner)
+                : this()
             {
                 _owner = owner;
             }

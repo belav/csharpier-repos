@@ -34,7 +34,8 @@ public class DateTimeTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="DateTimeTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DateTimeTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DateTimeTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

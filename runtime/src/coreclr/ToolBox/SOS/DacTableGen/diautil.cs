@@ -882,7 +882,8 @@ namespace Dia.Util
 
     public class DiaDataSymbol : DiaSymbol
     {
-        public DiaDataSymbol(IDiaSymbol symbol) : base(symbol)
+        public DiaDataSymbol(IDiaSymbol symbol)
+            : base(symbol)
         {
             if ((SymTagEnum)symbol.symTag != SymTagEnum.SymTagData)
                 throw new Exception("Not a data symbol.");

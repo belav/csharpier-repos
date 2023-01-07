@@ -203,7 +203,8 @@ namespace System.Linq.Expressions
     /// </remarks>
     public class Expression<TDelegate> : LambdaExpression
     {
-        internal Expression(Expression body) : base(body) { }
+        internal Expression(Expression body)
+            : base(body) { }
 
         internal sealed override Type TypeCore => typeof(TDelegate);
 
@@ -388,7 +389,8 @@ namespace System.Linq.Expressions
 
     internal sealed class Expression0<TDelegate> : Expression<TDelegate>
     {
-        public Expression0(Expression body) : base(body) { }
+        public Expression0(Expression body)
+            : base(body) { }
 
         internal override int ParameterCount => 0;
 
@@ -419,7 +421,8 @@ namespace System.Linq.Expressions
     {
         private object _par0;
 
-        public Expression1(Expression body, ParameterExpression par0) : base(body)
+        public Expression1(Expression body, ParameterExpression par0)
+            : base(body)
         {
             _par0 = par0;
         }
@@ -550,7 +553,8 @@ namespace System.Linq.Expressions
             ParameterExpression par0,
             ParameterExpression par1,
             ParameterExpression par2
-        ) : base(body)
+        )
+            : base(body)
         {
             _par0 = par0;
             _par1 = par1;
@@ -659,7 +663,8 @@ namespace System.Linq.Expressions
             string? name,
             bool tailCall,
             IReadOnlyList<ParameterExpression> parameters
-        ) : base(body, parameters)
+        )
+            : base(body, parameters)
         {
             NameCore = name;
             TailCallCore = tailCall;

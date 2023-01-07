@@ -25,7 +25,8 @@ namespace System.Net.Http.Functional.Tests
 
         public HttpClientHandler_DangerousAcceptAllCertificatesValidator_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
 #if !WINHTTPHANDLER_TEST
         [Fact]

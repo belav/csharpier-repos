@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         [DataMember(Order = 1)]
         public AspNetCoreHighlightSpanKind Kind { get; }
 
-        public AspNetCoreHighlightSpan(TextSpan textSpan, AspNetCoreHighlightSpanKind kind) : this()
+        public AspNetCoreHighlightSpan(TextSpan textSpan, AspNetCoreHighlightSpanKind kind)
+            : this()
         {
             TextSpan = textSpan;
             Kind = kind;

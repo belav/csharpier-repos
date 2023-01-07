@@ -18,7 +18,8 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public sealed class CanonicalEETypeNode : EETypeNode
     {
-        public CanonicalEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public CanonicalEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(!type.IsCanonicalDefinitionType(CanonicalFormKind.Any));
             Debug.Assert(type.IsCanonicalSubtype(CanonicalFormKind.Any));

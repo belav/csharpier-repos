@@ -1047,9 +1047,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class RefCountedList<T> : List<T>, IEnumerable<T> //  Reimplement interface.
         {
-            public RefCountedList() : base() { }
+            public RefCountedList()
+                : base() { }
 
-            public RefCountedList(IEnumerable<T> collection) : base(collection) { }
+            public RefCountedList(IEnumerable<T> collection)
+                : base(collection) { }
 
             public int RefCount { get; private set; }
 
@@ -1067,7 +1069,8 @@ namespace System.Text.Json.Serialization.Tests
             : Dictionary<TKey, TValue>,
                 IEnumerable<KeyValuePair<TKey, TValue>> //  Reimplement interface.
         {
-            public RefCountedDictionary() : base() { }
+            public RefCountedDictionary()
+                : base() { }
 
             public RefCountedDictionary(IEnumerable<KeyValuePair<TKey, TValue>> collection)
             {
@@ -1094,9 +1097,11 @@ namespace System.Text.Json.Serialization.Tests
 
         private class RefCountedSet<T> : HashSet<T>, IEnumerable<T> // Reimplement interface.
         {
-            public RefCountedSet() : base() { }
+            public RefCountedSet()
+                : base() { }
 
-            public RefCountedSet(IEnumerable<T> collection) : base(collection) { }
+            public RefCountedSet(IEnumerable<T> collection)
+                : base(collection) { }
 
             public int RefCount { get; private set; }
 

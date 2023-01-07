@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         : SynthesizedInstanceConstructor,
             ISynthesizedMethodBodyImplementationSymbol
     {
-        internal AsyncConstructor(AsyncStateMachine stateMachineType) : base(stateMachineType) { }
+        internal AsyncConstructor(AsyncStateMachine stateMachineType)
+            : base(stateMachineType) { }
 
         IMethodSymbolInternal ISynthesizedMethodBodyImplementationSymbol.Method
         {

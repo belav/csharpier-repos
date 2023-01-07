@@ -23,7 +23,8 @@ namespace System.Web.Razor.Text
             ITextBuffer oldBuffer,
             int newLength,
             ITextBuffer newBuffer
-        ) : this(position, oldLength, oldBuffer, position, newLength, newBuffer) { }
+        )
+            : this(position, oldLength, oldBuffer, position, newLength, newBuffer) { }
 
         public TextChange(
             int oldPosition,
@@ -32,7 +33,8 @@ namespace System.Web.Razor.Text
             int newPosition,
             int newLength,
             ITextBuffer newBuffer
-        ) : this()
+        )
+            : this()
         {
             if (oldPosition < 0)
             {

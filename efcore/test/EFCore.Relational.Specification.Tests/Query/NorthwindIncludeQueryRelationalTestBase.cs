@@ -7,7 +7,8 @@ public abstract class NorthwindIncludeQueryRelationalTestBase<TFixture>
     : NorthwindIncludeQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindIncludeQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindIncludeQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override async Task Include_collection_with_last_no_orderby(bool async) =>
         Assert.Equal(

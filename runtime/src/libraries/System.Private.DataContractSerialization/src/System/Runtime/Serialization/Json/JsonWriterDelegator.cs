@@ -10,9 +10,11 @@ namespace System.Runtime.Serialization.Json
     {
         private readonly DateTimeFormat? _dateTimeFormat;
 
-        public JsonWriterDelegator(XmlWriter writer) : base(writer) { }
+        public JsonWriterDelegator(XmlWriter writer)
+            : base(writer) { }
 
-        public JsonWriterDelegator(XmlWriter writer, DateTimeFormat? dateTimeFormat) : this(writer)
+        public JsonWriterDelegator(XmlWriter writer, DateTimeFormat? dateTimeFormat)
+            : this(writer)
         {
             _dateTimeFormat = dateTimeFormat;
         }

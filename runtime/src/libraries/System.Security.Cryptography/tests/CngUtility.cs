@@ -52,7 +52,8 @@ namespace System.Security.Cryptography.Tests
 
         internal sealed class SafeBCryptAlgorithmHandle : SafeHandle
         {
-            public SafeBCryptAlgorithmHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+            public SafeBCryptAlgorithmHandle()
+                : base(IntPtr.Zero, ownsHandle: true) { }
 
             public override bool IsInvalid => handle == IntPtr.Zero;
 

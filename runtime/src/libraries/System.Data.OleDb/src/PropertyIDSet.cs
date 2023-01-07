@@ -17,7 +17,8 @@ namespace System.Data.OleDb
 
         // the PropertyID is stored at the end of the tagDBPROPIDSET structure
         // this way only a single memory allocation is required instead of two
-        internal PropertyIDSet(Guid propertySet, int propertyID) : base(PropertyIDSetAndValueSize)
+        internal PropertyIDSet(Guid propertySet, int propertyID)
+            : base(PropertyIDSetAndValueSize)
         {
             _count = 1;
 
@@ -44,7 +45,8 @@ namespace System.Data.OleDb
         }
 
         // no propertyIDs, just the propertyset guids
-        internal PropertyIDSet(Guid[] propertySets) : base(PropertyIDSetSize * propertySets.Length)
+        internal PropertyIDSet(Guid[] propertySets)
+            : base(PropertyIDSetSize * propertySets.Length)
         {
             _count = propertySets.Length;
             for (int i = 0; i < propertySets.Length; ++i)

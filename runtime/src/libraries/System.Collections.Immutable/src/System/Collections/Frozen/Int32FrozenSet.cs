@@ -12,7 +12,8 @@ namespace System.Collections.Frozen
     {
         private readonly FrozenHashTable _hashTable;
 
-        internal Int32FrozenSet(HashSet<int> source) : base(EqualityComparer<int>.Default)
+        internal Int32FrozenSet(HashSet<int> source)
+            : base(EqualityComparer<int>.Default)
         {
             Debug.Assert(source.Count != 0);
 

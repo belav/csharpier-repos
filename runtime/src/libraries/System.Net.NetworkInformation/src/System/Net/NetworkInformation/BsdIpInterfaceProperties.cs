@@ -16,7 +16,8 @@ namespace System.Net.NetworkInformation
         private readonly BsdIPv6InterfaceProperties _ipv6Properties;
         private readonly GatewayIPAddressInformationCollection _gatewayAddresses;
 
-        public BsdIpInterfaceProperties(BsdNetworkInterface oni, int mtu) : base(oni)
+        public BsdIpInterfaceProperties(BsdNetworkInterface oni, int mtu)
+            : base(oni)
         {
             _ipv4Properties = new BsdIPv4InterfaceProperties(oni, mtu);
             _ipv6Properties = new BsdIPv6InterfaceProperties(oni, mtu);

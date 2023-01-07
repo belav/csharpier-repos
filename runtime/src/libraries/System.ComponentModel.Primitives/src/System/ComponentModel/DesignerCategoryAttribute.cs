@@ -45,7 +45,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.DesignerCategoryAttribute'/> class with the
         /// default category.
         /// </summary>
-        public DesignerCategoryAttribute() : this(string.Empty) { }
+        public DesignerCategoryAttribute()
+            : this(string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DesignerCategoryAttribute'/> class with

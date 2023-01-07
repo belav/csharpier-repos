@@ -59,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 ImmutableArray<IOption> options
             )> groupedEditorConfigOptions,
             string language
-        ) : base(optionStore)
+        )
+            : base(optionStore)
         {
             InitializeComponent();
 

@@ -352,7 +352,8 @@ public class TagHelperComponentTagHelperTest
         public TestTagHelperComponentTagHelper(
             ITagHelperComponentManager manager,
             ILoggerFactory loggerFactory
-        ) : base(manager, loggerFactory)
+        )
+            : base(manager, loggerFactory)
         {
             ViewContext = CreateViewContext();
         }

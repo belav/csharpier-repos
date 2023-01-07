@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class ConvertToProviderTypesTestBase<TFixture> : BuiltInDataTypesTestBase<TFixture>
     where TFixture : BuiltInDataTypesTestBase<TFixture>.BuiltInDataTypesFixtureBase, new()
 {
-    protected ConvertToProviderTypesTestBase(TFixture fixture) : base(fixture) { }
+    protected ConvertToProviderTypesTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Equals_method_over_enum_works()

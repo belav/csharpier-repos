@@ -11,7 +11,8 @@ public class TestFeatureProvider : IApplicationFeatureProvider<ControllerFeature
 {
     private readonly Func<TypeInfo, bool> _filter;
 
-    public TestFeatureProvider() : this(t => true) { }
+    public TestFeatureProvider()
+        : this(t => true) { }
 
     public TestFeatureProvider(Func<TypeInfo, bool> filter)
     {

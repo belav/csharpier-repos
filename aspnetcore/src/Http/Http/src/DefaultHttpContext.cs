@@ -59,7 +59,8 @@ public sealed class DefaultHttpContext : HttpContext
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultHttpContext"/> class.
     /// </summary>
-    public DefaultHttpContext() : this(new FeatureCollection(DefaultFeatureCollectionSize))
+    public DefaultHttpContext()
+        : this(new FeatureCollection(DefaultFeatureCollectionSize))
     {
         Features.Set<IHttpRequestFeature>(new HttpRequestFeature());
         Features.Set<IHttpResponseFeature>(new HttpResponseFeature());

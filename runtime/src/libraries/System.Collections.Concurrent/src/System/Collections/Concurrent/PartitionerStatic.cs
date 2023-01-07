@@ -401,7 +401,8 @@ namespace System.Collections.Concurrent
             protected DynamicPartitionEnumerator_Abstract(
                 TSourceReader sharedReader,
                 SharedLong sharedIndex
-            ) : this(sharedReader, sharedIndex, false) { }
+            )
+                : this(sharedReader, sharedIndex, false) { }
 
             protected DynamicPartitionEnumerator_Abstract(
                 TSourceReader sharedReader,
@@ -572,7 +573,8 @@ namespace System.Collections.Concurrent
             internal DynamicPartitionerForIEnumerable(
                 IEnumerable<TSource> source,
                 EnumerablePartitionerOptions partitionerOptions
-            ) : base(true, false, true)
+            )
+                : base(true, false, true)
             {
                 _source = source;
                 _useSingleChunking = (
@@ -1057,7 +1059,8 @@ namespace System.Collections.Concurrent
                     SharedInt? activePartitionCount,
                     InternalPartitionEnumerable enumerable,
                     bool useSingleChunking
-                ) : base(sharedReader, sharedIndex, useSingleChunking)
+                )
+                    : base(sharedReader, sharedIndex, useSingleChunking)
                 {
                     _hasNoElementsLeft = hasNoElementsLeft;
                     _enumerable = enumerable;
@@ -1250,7 +1253,8 @@ namespace System.Collections.Concurrent
             protected DynamicPartitionEnumeratorForIndexRange_Abstract(
                 TSourceReader sharedReader,
                 SharedLong sharedIndex
-            ) : base(sharedReader, sharedIndex) { }
+            )
+                : base(sharedReader, sharedIndex) { }
 
             //abstract methods
             //the Current property is still abstract, and will be implemented by derived classes
@@ -1350,7 +1354,8 @@ namespace System.Collections.Concurrent
             : DynamicPartitionerForIndexRange_Abstract<TSource, IList<TSource>>
         {
             //constructor
-            internal DynamicPartitionerForIList(IList<TSource> source) : base(source) { }
+            internal DynamicPartitionerForIList(IList<TSource> source)
+                : base(source) { }
 
             //override methods
             protected override IEnumerable<
@@ -1400,7 +1405,8 @@ namespace System.Collections.Concurrent
                 internal InternalPartitionEnumerator(
                     IList<TSource> sharedReader,
                     SharedLong sharedIndex
-                ) : base(sharedReader, sharedIndex) { }
+                )
+                    : base(sharedReader, sharedIndex) { }
 
                 //overriding methods
                 protected override int SourceCount
@@ -1445,7 +1451,8 @@ namespace System.Collections.Concurrent
             : DynamicPartitionerForIndexRange_Abstract<TSource, TSource[]>
         {
             //constructor
-            internal DynamicPartitionerForArray(TSource[] source) : base(source) { }
+            internal DynamicPartitionerForArray(TSource[] source)
+                : base(source) { }
 
             //override methods
             protected override IEnumerable<
@@ -1541,7 +1548,8 @@ namespace System.Collections.Concurrent
         private abstract class StaticIndexRangePartitioner<TSource, TCollection>
             : OrderablePartitioner<TSource>
         {
-            protected StaticIndexRangePartitioner() : base(true, true, true) { }
+            protected StaticIndexRangePartitioner()
+                : base(true, true, true) { }
 
             /// <summary>
             /// Abstract method to return the number of elements in the source data
@@ -1701,7 +1709,8 @@ namespace System.Collections.Concurrent
         {
             private readonly IList<TSource> _list;
 
-            internal StaticIndexRangePartitionerForIList(IList<TSource> list) : base()
+            internal StaticIndexRangePartitionerForIList(IList<TSource> list)
+                : base()
             {
                 Debug.Assert(list != null);
                 _list = list;
@@ -1736,7 +1745,8 @@ namespace System.Collections.Concurrent
                 IList<TSource> list,
                 int startIndex,
                 int endIndex
-            ) : base(startIndex, endIndex)
+            )
+                : base(startIndex, endIndex)
             {
                 Debug.Assert(startIndex >= 0 && endIndex <= list.Count - 1);
                 _list = list;
@@ -1771,7 +1781,8 @@ namespace System.Collections.Concurrent
         {
             private readonly TSource[] _array;
 
-            internal StaticIndexRangePartitionerForArray(TSource[] array) : base()
+            internal StaticIndexRangePartitionerForArray(TSource[] array)
+                : base()
             {
                 Debug.Assert(array != null);
                 _array = array;
@@ -1805,7 +1816,8 @@ namespace System.Collections.Concurrent
                 TSource[] array,
                 int startIndex,
                 int endIndex
-            ) : base(startIndex, endIndex)
+            )
+                : base(startIndex, endIndex)
             {
                 Debug.Assert(startIndex >= 0 && endIndex <= array.Length - 1);
                 _array = array;

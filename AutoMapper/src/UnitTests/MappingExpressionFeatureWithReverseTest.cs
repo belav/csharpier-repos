@@ -181,7 +181,8 @@ public class MappingExpressionFeatureWithReverseTest
             int value,
             TFeature feature,
             Func<IMappingFeature> reverseMappingExpressionFeature
-        ) : base(value, reverseMappingExpressionFeature)
+        )
+            : base(value, reverseMappingExpressionFeature)
         {
             _feature = feature;
         }
@@ -222,12 +223,14 @@ public class MappingExpressionFeatureWithReverseTest
 
     public class TypeMapFeatureA : TypeMapFeatureBase
     {
-        public TypeMapFeatureA(int value) : base(value) { }
+        public TypeMapFeatureA(int value)
+            : base(value) { }
     }
 
     public class TypeMapFeatureB : TypeMapFeatureBase
     {
-        public TypeMapFeatureB(int value) : base(value) { }
+        public TypeMapFeatureB(int value)
+            : base(value) { }
     }
 
     public abstract class TypeMapFeatureBase : IRuntimeFeature

@@ -22,7 +22,8 @@ internal class SyntaxToken : RazorSyntaxNode
         string content,
         GreenNode leadingTrivia,
         GreenNode trailingTrivia
-    ) : base(kind, content.Length)
+    )
+        : base(kind, content.Length)
     {
         Content = content;
         _leadingTrivia = leadingTrivia;
@@ -38,7 +39,8 @@ internal class SyntaxToken : RazorSyntaxNode
         GreenNode trailingTrivia,
         RazorDiagnostic[] diagnostics,
         SyntaxAnnotation[] annotations
-    ) : base(kind, content.Length, diagnostics, annotations)
+    )
+        : base(kind, content.Length, diagnostics, annotations)
     {
         Content = content;
         _leadingTrivia = leadingTrivia;
@@ -260,7 +262,8 @@ internal class SyntaxToken : RazorSyntaxNode
             GreenNode trailing,
             RazorDiagnostic[] diagnostics,
             SyntaxAnnotation[] annotations
-        ) : base(kind, string.Empty, leading, trailing, diagnostics, annotations)
+        )
+            : base(kind, string.Empty, leading, trailing, diagnostics, annotations)
         {
             Flags |= NodeFlags.IsMissing;
         }

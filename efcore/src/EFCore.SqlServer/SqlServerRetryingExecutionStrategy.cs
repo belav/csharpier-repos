@@ -72,7 +72,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     public SqlServerRetryingExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
         int maxRetryCount
-    ) : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
+    )
+        : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -85,7 +86,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     public SqlServerRetryingExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
         IEnumerable<int> errorNumbersToAdd
-    ) : this(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, errorNumbersToAdd) { }
+    )
+        : this(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, errorNumbersToAdd) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -99,7 +101,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
         int maxRetryCount,
         TimeSpan maxRetryDelay,
         IEnumerable<int>? errorNumbersToAdd
-    ) : base(context, maxRetryCount, maxRetryDelay)
+    )
+        : base(context, maxRetryCount, maxRetryDelay)
     {
         _additionalErrorNumbers = errorNumbersToAdd?.ToHashSet();
     }
@@ -116,7 +119,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
         int maxRetryCount,
         TimeSpan maxRetryDelay,
         IEnumerable<int>? errorNumbersToAdd
-    ) : base(dependencies, maxRetryCount, maxRetryDelay)
+    )
+        : base(dependencies, maxRetryCount, maxRetryDelay)
     {
         _additionalErrorNumbers = errorNumbersToAdd?.ToHashSet();
     }

@@ -51,7 +51,8 @@ namespace Newtonsoft.Json.Tests
     {
         public class LazyStringWriter : StringWriter
         {
-            public LazyStringWriter(IFormatProvider formatProvider) : base(formatProvider) { }
+            public LazyStringWriter(IFormatProvider formatProvider)
+                : base(formatProvider) { }
 
             public override Task FlushAsync()
             {
@@ -1933,7 +1934,8 @@ null//comment
 
         private class NoOverridesDerivedJsonTextWriter : JsonTextWriter
         {
-            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
+            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter)
+                : base(textWriter) { }
         }
 
         private class MinimalOverridesDerivedJsonWriter : JsonWriter
@@ -2147,7 +2149,8 @@ null//comment
 
     public class CustomAsyncJsonTextWriter : CustomJsonTextWriter
     {
-        public CustomAsyncJsonTextWriter(TextWriter textWriter) : base(textWriter) { }
+        public CustomAsyncJsonTextWriter(TextWriter textWriter)
+            : base(textWriter) { }
 
         public override Task WritePropertyNameAsync(
             string name,

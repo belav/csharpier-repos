@@ -7,9 +7,11 @@ namespace SafeHandleTests
 {
     public class TestSafeHandle : SafeHandle
     {
-        public TestSafeHandle() : base(IntPtr.Zero, true) { }
+        public TestSafeHandle()
+            : base(IntPtr.Zero, true) { }
 
-        public TestSafeHandle(IntPtr handleValue) : this()
+        public TestSafeHandle(IntPtr handleValue)
+            : this()
         {
             handle = handleValue;
         }
@@ -25,14 +27,17 @@ namespace SafeHandleTests
 
     public abstract class AbstractDerivedSafeHandle : SafeHandle
     {
-        public AbstractDerivedSafeHandle() : base(IntPtr.Zero, true) { }
+        public AbstractDerivedSafeHandle()
+            : base(IntPtr.Zero, true) { }
     }
 
     public class AbstractDerivedSafeHandleImplementation : AbstractDerivedSafeHandle
     {
-        public AbstractDerivedSafeHandleImplementation() : base() { }
+        public AbstractDerivedSafeHandleImplementation()
+            : base() { }
 
-        public AbstractDerivedSafeHandleImplementation(IntPtr handleValue) : this()
+        public AbstractDerivedSafeHandleImplementation(IntPtr handleValue)
+            : this()
         {
             handle = handleValue;
         }
@@ -48,7 +53,8 @@ namespace SafeHandleTests
 
     public class NoDefaultConstructorSafeHandle : SafeHandle
     {
-        public NoDefaultConstructorSafeHandle(IntPtr handleValue) : base(IntPtr.Zero, true)
+        public NoDefaultConstructorSafeHandle(IntPtr handleValue)
+            : base(IntPtr.Zero, true)
         {
             handle = handleValue;
         }

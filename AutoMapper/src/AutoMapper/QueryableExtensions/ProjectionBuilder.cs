@@ -339,7 +339,8 @@ public class ProjectionBuilder : IProjectionBuilder
             IGlobalConfiguration configuration,
             MemberPath parentPath,
             TypePairCount builtProjections
-        ) : base(configuration, builtProjections) => _parentPath = parentPath;
+        )
+            : base(configuration, builtProjections) => _parentPath = parentPath;
 
         public override Expression GetSubQueryMarker(LambdaExpression letExpression)
         {

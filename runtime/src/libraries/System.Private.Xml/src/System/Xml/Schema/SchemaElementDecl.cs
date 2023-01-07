@@ -41,7 +41,8 @@ namespace System.Xml.Schema
             _contentValidator = ContentValidator.TextOnly;
         }
 
-        internal SchemaElementDecl(XmlQualifiedName name, string? prefix) : base(name, prefix) { }
+        internal SchemaElementDecl(XmlQualifiedName name, string? prefix)
+            : base(name, prefix) { }
 
         //
         // Static methods

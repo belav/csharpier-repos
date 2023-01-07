@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TreeData treeInfo,
                 SyntaxToken token1,
                 SyntaxToken token2
-            ) : base(options, token1.Language)
+            )
+                : base(options, token1.Language)
             {
                 Contract.ThrowIfNull(treeInfo);
 

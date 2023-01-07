@@ -24,7 +24,8 @@ namespace System.Net.Http.Functional.Tests
 
         public static bool SupportsAlpn => PlatformDetection.SupportsAlpn;
 
-        public HttpClientHandlerTest_Http2(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Http2(ITestOutputHelper output)
+            : base(output) { }
 
         private async Task AssertProtocolErrorAsync(Task task, ProtocolErrors errorCode)
         {

@@ -100,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
             public InlineRenameUndoManager(
                 InlineRenameService inlineRenameService,
                 IVsEditorAdaptersFactoryService editorAdaptersFactoryService
-            ) : base(inlineRenameService) =>
+            )
+                : base(inlineRenameService) =>
                 _editorAdaptersFactoryService = editorAdaptersFactoryService;
 
             public void CreateStartRenameUndoTransaction(

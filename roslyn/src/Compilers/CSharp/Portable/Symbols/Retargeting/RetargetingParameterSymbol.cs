@@ -146,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingMethodParameterSymbol(
             RetargetingMethodSymbol retargetingMethod,
             ParameterSymbol underlyingParameter
-        ) : base(underlyingParameter)
+        )
+            : base(underlyingParameter)
         {
             Debug.Assert((object)retargetingMethod != null);
             _retargetingMethod = retargetingMethod;
@@ -188,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingPropertyParameterSymbol(
             RetargetingPropertySymbol retargetingProperty,
             ParameterSymbol underlyingParameter
-        ) : base(underlyingParameter)
+        )
+            : base(underlyingParameter)
         {
             Debug.Assert((object)retargetingProperty != null);
             _retargetingProperty = retargetingProperty;

@@ -17,7 +17,8 @@ public class UrlHelper : UrlHelperBase
     /// <paramref name="actionContext"/>.
     /// </summary>
     /// <param name="actionContext">The <see cref="Mvc.ActionContext"/> for the current request.</param>
-    public UrlHelper(ActionContext actionContext) : base(actionContext) { }
+    public UrlHelper(ActionContext actionContext)
+        : base(actionContext) { }
 
     /// <summary>
     /// Gets the <see cref="Http.HttpContext"/> associated with the current request.

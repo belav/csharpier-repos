@@ -18,7 +18,8 @@ namespace System.Globalization
 
         private int[]? _indexes;
 
-        public StringInfo() : this(string.Empty) { }
+        public StringInfo()
+            : this(string.Empty) { }
 
         public StringInfo(string value)
         {

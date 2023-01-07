@@ -29,7 +29,8 @@ namespace System.Linq.Parallel
         // Constructs a new repeat enumerable object for the repeat operation.
         //
 
-        internal RepeatEnumerable(TResult element, int count) : base(QuerySettings.Empty)
+        internal RepeatEnumerable(TResult element, int count)
+            : base(QuerySettings.Empty)
         {
             Debug.Assert(count >= 0, "count not within range (must be >= 0)");
             _element = element;

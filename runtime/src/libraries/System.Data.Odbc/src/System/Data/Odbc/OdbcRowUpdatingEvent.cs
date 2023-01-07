@@ -24,7 +24,8 @@ namespace System.Data.Odbc
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) : base(row, command, statementType, tableMapping) { }
+        )
+            : base(row, command, statementType, tableMapping) { }
 
         public new OdbcCommand? Command
         {
@@ -50,7 +51,8 @@ namespace System.Data.Odbc
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) : base(row, command, statementType, tableMapping) { }
+        )
+            : base(row, command, statementType, tableMapping) { }
 
         public new OdbcCommand? Command
         {

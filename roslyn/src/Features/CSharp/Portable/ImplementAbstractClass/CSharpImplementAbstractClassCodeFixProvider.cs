@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementAbstractClass
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpImplementAbstractClassCodeFixProvider() : base(CS0534) { }
+        public CSharpImplementAbstractClassCodeFixProvider()
+            : base(CS0534) { }
 
         protected override SyntaxToken GetClassIdentifier(TypeDeclarationSyntax classNode) =>
             classNode.Identifier;

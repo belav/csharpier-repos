@@ -26,6 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             VisualStudioWorkspaceImpl workspace,
             IVsHierarchyItemManager vsHierarchyItemManager,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext, workspace, vsHierarchyItemManager, globalOptions) { }
+        )
+            : base(threadingContext, workspace, vsHierarchyItemManager, globalOptions) { }
     }
 }

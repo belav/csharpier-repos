@@ -478,7 +478,8 @@ namespace Microsoft.EntityFrameworkCore
             public TestScopedService(
                 ICurrentDbContext currentContext,
                 IEntityEntryGraphIterator graphIterator
-            ) : base(graphIterator)
+            )
+                : base(graphIterator)
             {
                 _currentContext = currentContext;
             }
@@ -492,7 +493,8 @@ namespace Microsoft.EntityFrameworkCore
             public TestTransientService(
                 ICurrentDbContext currentContext,
                 IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
-            ) : base(currentContext, logger) { }
+            )
+                : base(currentContext, logger) { }
 
             public ApplicationService ApplicationService =>
                 Context!.GetService<ApplicationService>();
@@ -502,7 +504,8 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ServiceResolutionContext : DbContext
         {
-            public ServiceResolutionContext(DbContextOptions options) : base(options) { }
+            public ServiceResolutionContext(DbContextOptions options)
+                : base(options) { }
         }
 
         [ConditionalFact]
@@ -3399,7 +3402,8 @@ namespace Microsoft.EntityFrameworkCore
             public CustomInMemoryValueGeneratorSelector(
                 ValueGeneratorSelectorDependencies dependencies,
                 IInMemoryDatabase inMemoryDatabase
-            ) : base(dependencies, inMemoryDatabase) { }
+            )
+                : base(dependencies, inMemoryDatabase) { }
         }
 
         private class CustomInMemoryTableFactory : InMemoryTableFactory
@@ -3407,7 +3411,8 @@ namespace Microsoft.EntityFrameworkCore
             public CustomInMemoryTableFactory(
                 ILoggingOptions loggingOptions,
                 IInMemorySingletonOptions options
-            ) : base(loggingOptions, options) { }
+            )
+                : base(loggingOptions, options) { }
         }
 
         [ConditionalFact]
@@ -4256,12 +4261,14 @@ namespace Microsoft.EntityFrameworkCore
 
         private class ConstructorTestContext1A : DbContext
         {
-            public ConstructorTestContext1A(DbContextOptions options) : base(options) { }
+            public ConstructorTestContext1A(DbContextOptions options)
+                : base(options) { }
         }
 
         private class ConstructorTestContextWithSets : DbContext
         {
-            public ConstructorTestContextWithSets(DbContextOptions options) : base(options) { }
+            public ConstructorTestContextWithSets(DbContextOptions options)
+                : base(options) { }
 
             public DbSet<Product> Products { get; set; }
         }
@@ -4304,7 +4311,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContextOptions options,
                 ILoggerFactory loggerFactory = null,
                 IMemoryCache memoryCache = null
-            ) : base(options)
+            )
+                : base(options)
             {
                 _loggerFactory = loggerFactory;
                 _memoryCache = memoryCache;
@@ -4363,7 +4371,8 @@ namespace Microsoft.EntityFrameworkCore
             : ConstructorTestContextWithOCBase,
                 IConstructorTestContextWithOC3A
         {
-            public ConstructorTestContextWithOC3A(DbContextOptions options) : base(options) { }
+            public ConstructorTestContextWithOC3A(DbContextOptions options)
+                : base(options) { }
         }
 
         private class ConstructorTestContextWithOC1B : ConstructorTestContextWithOCBase
@@ -4371,7 +4380,8 @@ namespace Microsoft.EntityFrameworkCore
             public ConstructorTestContextWithOC1B(
                 ILoggerFactory loggerFactory,
                 IMemoryCache memoryCache
-            ) : base(loggerFactory, memoryCache) { }
+            )
+                : base(loggerFactory, memoryCache) { }
         }
 
         private class ConstructorTestContextWithOC2B : ConstructorTestContextWithOCBase
@@ -4380,7 +4390,8 @@ namespace Microsoft.EntityFrameworkCore
                 IServiceProvider internalServicesProvider,
                 ILoggerFactory loggerFactory,
                 IMemoryCache memoryCache
-            ) : base(internalServicesProvider, loggerFactory, memoryCache) { }
+            )
+                : base(internalServicesProvider, loggerFactory, memoryCache) { }
         }
 
         [ConditionalFact]
@@ -4429,12 +4440,14 @@ namespace Microsoft.EntityFrameworkCore
 
         private class NonGenericOptions1 : DbContext
         {
-            public NonGenericOptions1(DbContextOptions options) : base(options) { }
+            public NonGenericOptions1(DbContextOptions options)
+                : base(options) { }
         }
 
         private class NonGenericOptions2 : DbContext
         {
-            public NonGenericOptions2(DbContextOptions options) : base(options) { }
+            public NonGenericOptions2(DbContextOptions options)
+                : base(options) { }
         }
 
         [ConditionalFact]
@@ -4511,14 +4524,17 @@ namespace Microsoft.EntityFrameworkCore
 
         private class DerivedContext1 : DbContext
         {
-            public DerivedContext1(DbContextOptions<DerivedContext1> options) : base(options) { }
+            public DerivedContext1(DbContextOptions<DerivedContext1> options)
+                : base(options) { }
 
-            protected DerivedContext1(DbContextOptions options) : base(options) { }
+            protected DerivedContext1(DbContextOptions options)
+                : base(options) { }
         }
 
         private class DerivedContext2 : DerivedContext1
         {
-            public DerivedContext2(DbContextOptions<DerivedContext2> options) : base(options) { }
+            public DerivedContext2(DbContextOptions<DerivedContext2> options)
+                : base(options) { }
         }
     }
 }

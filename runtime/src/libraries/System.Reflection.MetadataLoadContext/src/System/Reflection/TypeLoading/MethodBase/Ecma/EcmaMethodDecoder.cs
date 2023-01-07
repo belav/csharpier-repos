@@ -13,7 +13,8 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly MethodDefinitionHandle _handle;
         private readonly EcmaModule _module;
 
-        internal EcmaMethodDecoder(MethodDefinitionHandle handle, EcmaModule module) : this()
+        internal EcmaMethodDecoder(MethodDefinitionHandle handle, EcmaModule module)
+            : this()
         {
             _handle = handle;
             _module = module;

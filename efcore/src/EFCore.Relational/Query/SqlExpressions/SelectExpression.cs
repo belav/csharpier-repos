@@ -83,7 +83,8 @@ public sealed partial class SelectExpression : TableExpressionBase
         List<SqlExpression> groupBy,
         List<OrderingExpression> orderings,
         IEnumerable<IAnnotation> annotations
-    ) : base(alias)
+    )
+        : base(alias)
     {
         _projection = projections;
         _tables = tables;
@@ -101,9 +102,11 @@ public sealed partial class SelectExpression : TableExpressionBase
         }
     }
 
-    private SelectExpression(string? alias) : base(alias) { }
+    private SelectExpression(string? alias)
+        : base(alias) { }
 
-    internal SelectExpression(SqlExpression? projection) : base(null)
+    internal SelectExpression(SqlExpression? projection)
+        : base(null)
     {
         if (projection != null)
         {
@@ -115,7 +118,8 @@ public sealed partial class SelectExpression : TableExpressionBase
         Type type,
         RelationalTypeMapping typeMapping,
         FromSqlExpression fromSqlExpression
-    ) : base(null)
+    )
+        : base(null)
     {
         var tableReferenceExpression = new TableReferenceExpression(this, fromSqlExpression.Alias!);
         AddTable(fromSqlExpression, tableReferenceExpression);

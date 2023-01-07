@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Host
     {
         public string Service { get; }
 
-        public EventListenerMetadata(IDictionary<string, object> data) : base(data)
+        public EventListenerMetadata(IDictionary<string, object> data)
+            : base(data)
         {
             this.Service = (string)data.GetValueOrDefault("Service");
         }

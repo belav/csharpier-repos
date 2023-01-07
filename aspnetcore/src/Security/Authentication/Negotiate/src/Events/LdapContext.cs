@@ -19,7 +19,8 @@ public class LdapContext : ResultContext<NegotiateOptions>
         AuthenticationScheme scheme,
         NegotiateOptions options,
         LdapSettings settings
-    ) : base(context, scheme, options)
+    )
+        : base(context, scheme, options)
     {
         LdapSettings = settings;
     }

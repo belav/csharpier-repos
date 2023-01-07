@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
 {
     public class PatternContextRaggedExclude : PatternContextRagged
     {
-        public PatternContextRaggedExclude(IRaggedPattern pattern) : base(pattern) { }
+        public PatternContextRaggedExclude(IRaggedPattern pattern)
+            : base(pattern) { }
 
         public override bool Test(DirectoryInfoBase directory)
         {

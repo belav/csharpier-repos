@@ -13,7 +13,8 @@ namespace System.Xml.Tests
     {
         private ITestOutputHelper _output;
 
-        public XsltcAPITest(ITestOutputHelper output) : base(output)
+        public XsltcAPITest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

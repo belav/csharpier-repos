@@ -45,7 +45,8 @@ namespace System.Xml
     {
         private XmlLinkedNode? _lastChild;
 
-        protected internal XmlDocumentFragment(XmlDocument ownerDocument) : base()
+        protected internal XmlDocumentFragment(XmlDocument ownerDocument)
+            : base()
         {
             if (ownerDocument == null)
                 throw new ArgumentException(SR.Xdom_Node_Null_Doc);

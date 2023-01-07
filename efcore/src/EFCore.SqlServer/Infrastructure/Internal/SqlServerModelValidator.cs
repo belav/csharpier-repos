@@ -26,7 +26,8 @@ public class SqlServerModelValidator : RelationalModelValidator
     public SqlServerModelValidator(
         ModelValidatorDependencies dependencies,
         RelationalModelValidatorDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

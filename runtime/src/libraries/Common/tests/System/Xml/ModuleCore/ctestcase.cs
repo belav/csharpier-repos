@@ -19,17 +19,20 @@ namespace OLEDB.Test.ModuleCore
         private CVariation _curvariation;
 
         //Constructor
-        public CTestCase() : this(null)
+        public CTestCase()
+            : this(null)
         {
             //Delegate
         }
 
-        public CTestCase(string desc) : this(null, desc)
+        public CTestCase(string desc)
+            : this(null, desc)
         {
             //Delegate
         }
 
-        public CTestCase(CTestModule parent, string desc) : base(desc)
+        public CTestCase(CTestModule parent, string desc)
+            : base(desc)
         {
             Parent = parent;
         }

@@ -13,7 +13,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class ArrayType : CType
     {
-        public ArrayType(CType elementType, int rank, bool isSZArray) : base(TypeKind.TK_ArrayType)
+        public ArrayType(CType elementType, int rank, bool isSZArray)
+            : base(TypeKind.TK_ArrayType)
         {
             Rank = rank;
             IsSZArray = isSZArray;

@@ -9,7 +9,8 @@ public class InheritanceBulkUpdatesSqlServerTest
     public InheritanceBulkUpdatesSqlServerTest(
         InheritanceBulkUpdatesSqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
         // Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public GoToTypeDefinitionHandler(
             IMetadataAsSourceFileService metadataAsSourceFileService,
             IGlobalOptionService globalOptions
-        ) : base(metadataAsSourceFileService, globalOptions) { }
+        )
+            : base(metadataAsSourceFileService, globalOptions) { }
 
         public override Task<LSP.Location[]?> HandleRequestAsync(
             LSP.TextDocumentPositionParams request,

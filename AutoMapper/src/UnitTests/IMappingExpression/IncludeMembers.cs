@@ -2389,7 +2389,8 @@ public class IncludeMembersMultipleConstructorMapping : AutoMapperSpecBase
         public Destination(Level2 fieldLevel2, long level1Field)
             : this(-1, fieldLevel2.TheField, level1Field) { }
 
-        public Destination(long theField) : this(-2, theField, -2) { }
+        public Destination(long theField)
+            : this(-2, theField, -2) { }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>

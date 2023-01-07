@@ -11,7 +11,8 @@ public class StoreValueGenerationIdentitySqlServerTest
     public StoreValueGenerationIdentitySqlServerTest(
         StoreValueGenerationIdentitySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         // Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

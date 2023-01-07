@@ -672,7 +672,8 @@ namespace System.Runtime.Serialization.DataContracts
             internal CollectionDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type
-            ) : base(type)
+            )
+                : base(type)
             {
                 if (type == Globals.TypeOfArray)
                     type = Globals.TypeOfObjectArray;
@@ -690,7 +691,8 @@ namespace System.Runtime.Serialization.DataContracts
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type,
                 CollectionKind kind
-            ) : base(type)
+            )
+                : base(type)
             {
                 XmlName = DataContract.GetXmlName(type);
                 Init(kind, type.GetElementType(), null);
@@ -703,7 +705,8 @@ namespace System.Runtime.Serialization.DataContracts
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type,
                 DataContract itemContract
-            ) : base(type)
+            )
+                : base(type)
             {
                 if (type.GetArrayRank() > 1)
                     throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -728,7 +731,8 @@ namespace System.Runtime.Serialization.DataContracts
                 MethodInfo getEnumeratorMethod,
                 string? serializationExceptionMessage,
                 string? deserializationExceptionMessage
-            ) : base(type)
+            )
+                : base(type)
             {
                 if (getEnumeratorMethod == null)
                     throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -770,7 +774,8 @@ namespace System.Runtime.Serialization.DataContracts
                 MethodInfo getEnumeratorMethod,
                 MethodInfo? addMethod,
                 ConstructorInfo? constructor
-            ) : this(type, kind, itemType, getEnumeratorMethod, (string?)null, (string?)null)
+            )
+                : this(type, kind, itemType, getEnumeratorMethod, (string?)null, (string?)null)
             {
                 if (addMethod == null && !type.IsInterface)
                     throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -797,7 +802,8 @@ namespace System.Runtime.Serialization.DataContracts
                 MethodInfo? addMethod,
                 ConstructorInfo? constructor,
                 bool isConstructorCheckRequired
-            ) : this(type, kind, itemType, getEnumeratorMethod, addMethod, constructor)
+            )
+                : this(type, kind, itemType, getEnumeratorMethod, addMethod, constructor)
             {
                 _isConstructorCheckRequired = isConstructorCheckRequired;
             }
@@ -808,7 +814,8 @@ namespace System.Runtime.Serialization.DataContracts
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type,
                 string invalidCollectionInSharedContractMessage
-            ) : base(type)
+            )
+                : base(type)
             {
                 Init(
                     CollectionKind.Collection,

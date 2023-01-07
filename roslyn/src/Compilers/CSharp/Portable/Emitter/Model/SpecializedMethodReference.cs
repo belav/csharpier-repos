@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// </summary>
     internal class SpecializedMethodReference : MethodReference, Cci.ISpecializedMethodReference
     {
-        public SpecializedMethodReference(MethodSymbol underlyingMethod) : base(underlyingMethod)
-        { }
+        public SpecializedMethodReference(MethodSymbol underlyingMethod)
+            : base(underlyingMethod) { }
 
         public override void Dispatch(Cci.MetadataVisitor visitor)
         {

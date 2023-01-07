@@ -28,8 +28,8 @@ public abstract class SaveChangesInterceptionSqliteTestBase : SaveChangesInterce
         : SaveChangesInterceptionSqliteTestBase,
             IClassFixture<SaveChangesInterceptionSqliteTest.InterceptionSqliteFixture>
     {
-        public SaveChangesInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
-        { }
+        public SaveChangesInterceptionSqliteTest(InterceptionSqliteFixture fixture)
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

@@ -158,9 +158,11 @@ namespace V8.Crypto
 
     internal class ListX<T> : List<T>
     {
-        public ListX() : base() { }
+        public ListX()
+            : base() { }
 
-        public ListX(int cap) : base(cap) { }
+        public ListX(int cap)
+            : base(cap) { }
 
         public new T this[int index]
         {

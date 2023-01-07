@@ -14,12 +14,14 @@ namespace System.Web.Mvc
 
         public ModelBinderProviderCollection() { }
 
-        public ModelBinderProviderCollection(IList<IModelBinderProvider> list) : base(list) { }
+        public ModelBinderProviderCollection(IList<IModelBinderProvider> list)
+            : base(list) { }
 
         internal ModelBinderProviderCollection(
             IList<IModelBinderProvider> list,
             IDependencyResolver dependencyResolver
-        ) : base(list)
+        )
+            : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }

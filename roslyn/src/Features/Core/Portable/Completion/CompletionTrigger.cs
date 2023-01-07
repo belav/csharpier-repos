@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         public char Character { get; }
 
-        internal CompletionTrigger(CompletionTriggerKind kind, char character = (char)0) : this()
+        internal CompletionTrigger(CompletionTriggerKind kind, char character = (char)0)
+            : this()
         {
             Kind = kind;
             Character = character;

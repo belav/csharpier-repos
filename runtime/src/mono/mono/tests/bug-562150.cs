@@ -33,7 +33,8 @@ namespace Application
             m_action = action;
         }
 
-        private FooClass(S source, string name, Action<S> action) : this(name, action)
+        private FooClass(S source, string name, Action<S> action)
+            : this(name, action)
         {
             m_source = source;
         }

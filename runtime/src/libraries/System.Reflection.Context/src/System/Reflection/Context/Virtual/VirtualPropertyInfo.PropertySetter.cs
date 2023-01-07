@@ -20,7 +20,8 @@ namespace System.Reflection.Context.Virtual
                 VirtualPropertyBase property,
                 Action<object, object?> setter,
                 IEnumerable<Attribute>? setterAttributes
-            ) : base(property)
+            )
+                : base(property)
             {
                 Debug.Assert(null != setter);
 

@@ -511,7 +511,8 @@ namespace System.Drawing
 
         public class FontUnitConverter : EnumConverter
         {
-            public FontUnitConverter() : base(typeof(GraphicsUnit)) { }
+            public FontUnitConverter()
+                : base(typeof(GraphicsUnit)) { }
 
             public override StandardValuesCollection GetStandardValues(
                 ITypeDescriptorContext? context

@@ -34,7 +34,8 @@ namespace System.Net.Http.Functional.Tests
 
         private static readonly Uri InvalidUri = new("http://nosuchhost.invalid");
 
-        public DiagnosticsTest(ITestOutputHelper output) : base(output) { }
+        public DiagnosticsTest(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/71877", TestPlatforms.Browser)]

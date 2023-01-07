@@ -32,7 +32,8 @@ namespace System.Net
 
         private const int BlockSize = 16 * 1024;
 
-        public MultiArrayBuffer(int initialBufferSize) : this()
+        public MultiArrayBuffer(int initialBufferSize)
+            : this()
         {
             // 'initialBufferSize' is ignored for now. Some callers are passing useful info here that we might want to act on in the future.
             Debug.Assert(initialBufferSize >= 0);

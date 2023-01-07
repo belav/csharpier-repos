@@ -79,7 +79,8 @@ public class ValidationProblemDetails : HttpValidationProblemDetails
     /// Initializes a new instance of <see cref="ValidationProblemDetails"/> using the specified <paramref name="errors"/>.
     /// </summary>
     /// <param name="errors">The validation errors.</param>
-    public ValidationProblemDetails(IDictionary<string, string[]> errors) : base(errors) { }
+    public ValidationProblemDetails(IDictionary<string, string[]> errors)
+        : base(errors) { }
 
     /// <summary>
     /// Gets the validation errors associated with this instance of <see cref="HttpValidationProblemDetails"/>.

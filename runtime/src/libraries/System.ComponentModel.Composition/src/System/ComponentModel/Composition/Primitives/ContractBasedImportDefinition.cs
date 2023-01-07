@@ -182,7 +182,8 @@ namespace System.ComponentModel.Composition.Primitives
             bool isPrerequisite,
             CreationPolicy requiredCreationPolicy,
             IDictionary<string, object?> metadata
-        ) : base(contractName, cardinality, isRecomposable, isPrerequisite, metadata)
+        )
+            : base(contractName, cardinality, isRecomposable, isPrerequisite, metadata)
         {
             Requires.NotNullOrEmpty(contractName, nameof(contractName));
 

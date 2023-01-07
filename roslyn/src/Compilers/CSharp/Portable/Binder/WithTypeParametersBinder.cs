@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal abstract class WithTypeParametersBinder : Binder
     {
-        internal WithTypeParametersBinder(Binder next) : base(next) { }
+        internal WithTypeParametersBinder(Binder next)
+            : base(next) { }
 
         // TODO: Change this to a data structure that won't allocate enumerators
         protected abstract MultiDictionary<string, TypeParameterSymbol> TypeParameterMap { get; }

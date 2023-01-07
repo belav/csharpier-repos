@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.Cose
             byte[] signature,
             byte[] protectedHeaderAsBstr,
             bool isTagged
-        ) : base(protectedHeader, unprotectedHeader, content, protectedHeaderAsBstr, isTagged)
+        )
+            : base(protectedHeader, unprotectedHeader, content, protectedHeaderAsBstr, isTagged)
         {
             _signature = signature;
         }

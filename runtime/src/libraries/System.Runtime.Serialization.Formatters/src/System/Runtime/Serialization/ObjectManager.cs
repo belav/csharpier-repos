@@ -1260,7 +1260,8 @@ namespace System.Runtime.Serialization
         private TypeLoadExceptionHolder? _typeLoad;
         private bool _reachable;
 
-        internal ObjectHolder(long objID) : this(null, objID, null, null, 0, null, null) { }
+        internal ObjectHolder(long objID)
+            : this(null, objID, null, null, 0, null, null) { }
 
         internal ObjectHolder(
             object? obj,
@@ -1685,7 +1686,8 @@ namespace System.Runtime.Serialization
         internal FixupHolder?[] _values;
         internal int _count;
 
-        internal FixupHolderList() : this(InitialSize) { }
+        internal FixupHolderList()
+            : this(InitialSize) { }
 
         internal FixupHolderList(int startingSize)
         {
@@ -1727,7 +1729,8 @@ namespace System.Runtime.Serialization
 
         // An m_currentItem of -1 indicates that the enumeration hasn't been started.
         // An m_values[xx] of -1 indicates that the item has been deleted.
-        internal LongList() : this(InitialSize) { }
+        internal LongList()
+            : this(InitialSize) { }
 
         internal LongList(int startingSize)
         {
@@ -1809,7 +1812,8 @@ namespace System.Runtime.Serialization
         internal ObjectHolder[] _values;
         internal int _count;
 
-        internal ObjectHolderList() : this(DefaultInitialSize) { }
+        internal ObjectHolderList()
+            : this(DefaultInitialSize) { }
 
         internal ObjectHolderList(int startingSize)
         {

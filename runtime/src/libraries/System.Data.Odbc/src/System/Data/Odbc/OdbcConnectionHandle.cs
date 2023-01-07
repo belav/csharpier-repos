@@ -24,7 +24,8 @@ namespace System.Data.Odbc
             OdbcConnection connection,
             OdbcConnectionString constr,
             OdbcEnvironmentHandle environmentHandle
-        ) : base(ODBC32.SQL_HANDLE.DBC, environmentHandle)
+        )
+            : base(ODBC32.SQL_HANDLE.DBC, environmentHandle)
         {
             if (null == connection)
             {

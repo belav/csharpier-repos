@@ -337,7 +337,8 @@ namespace Moq.Tests
 
         public class ClassWithoutParameterlessConstructor : BaseClass
         {
-            public ClassWithoutParameterlessConstructor(string value) : base(value) { }
+            public ClassWithoutParameterlessConstructor(string value)
+                : base(value) { }
         }
     }
 }

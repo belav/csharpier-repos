@@ -9,7 +9,8 @@ public class IncludeOneToOneSqlServerTest
     public IncludeOneToOneSqlServerTest(
         OneToOneQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }

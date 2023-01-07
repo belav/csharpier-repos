@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private class OptionalCustomModifier : CSharpCustomModifier
         {
-            public OptionalCustomModifier(NamedTypeSymbol modifier) : base(modifier) { }
+            public OptionalCustomModifier(NamedTypeSymbol modifier)
+                : base(modifier) { }
 
             public override bool IsOptional
             {
@@ -95,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private class RequiredCustomModifier : CSharpCustomModifier
         {
-            public RequiredCustomModifier(NamedTypeSymbol modifier) : base(modifier) { }
+            public RequiredCustomModifier(NamedTypeSymbol modifier)
+                : base(modifier) { }
 
             public override bool IsOptional
             {

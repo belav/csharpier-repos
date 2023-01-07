@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QualifyMemberAccess
     public partial class QualifyMemberAccessTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public QualifyMemberAccessTests(ITestOutputHelper logger) : base(logger) { }
+        public QualifyMemberAccessTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

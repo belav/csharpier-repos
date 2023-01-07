@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DiagnosticInfo errorInfo,
             int arity,
             bool unreported = false
-        ) : this(containingSymbol, candidateSymbols[0].Name, arity, errorInfo, unreported)
+        )
+            : this(containingSymbol, candidateSymbols[0].Name, arity, errorInfo, unreported)
         {
             _candidateSymbols = UnwrapErrorCandidates(candidateSymbols);
             _resultKind = resultKind;

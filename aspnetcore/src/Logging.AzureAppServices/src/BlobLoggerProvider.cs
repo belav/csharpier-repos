@@ -32,7 +32,8 @@ public class BlobLoggerProvider : BatchingLoggerProvider
         "RS0022:Constructor make noninheritable base class inheritable",
         Justification = "Required for backwards compatibility"
     )]
-    public BlobLoggerProvider(IOptionsMonitor<AzureBlobLoggerOptions> options) : this(options, null)
+    public BlobLoggerProvider(IOptionsMonitor<AzureBlobLoggerOptions> options)
+        : this(options, null)
     {
         _blobReferenceFactory = name =>
             new BlobAppendReferenceWrapper(options.CurrentValue.ContainerUrl, name, _httpClient);
@@ -46,7 +47,8 @@ public class BlobLoggerProvider : BatchingLoggerProvider
     internal BlobLoggerProvider(
         IOptionsMonitor<AzureBlobLoggerOptions> options,
         Func<string, ICloudAppendBlob> blobReferenceFactory
-    ) : base(options)
+    )
+        : base(options)
     {
         _options = options;
         _blobReferenceFactory = blobReferenceFactory;

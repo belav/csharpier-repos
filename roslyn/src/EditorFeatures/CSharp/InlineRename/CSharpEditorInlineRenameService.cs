@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.InlineRename
         public CSharpEditorInlineRenameService(
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             IGlobalOptionService globalOptions
-        ) : base(refactorNotifyServices, globalOptions) { }
+        )
+            : base(refactorNotifyServices, globalOptions) { }
 
         protected override bool CheckLanguageSpecificIssues(
             SemanticModel semanticModel,

@@ -22,7 +22,8 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
     /// </summary>
-    public EncryptedXmlDecryptor() : this(services: null) { }
+    public EncryptedXmlDecryptor()
+        : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of an <see cref="EncryptedXmlDecryptor"/>.
@@ -83,7 +84,8 @@ public sealed class EncryptedXmlDecryptor : IInternalEncryptedXmlDecryptor, IXml
         public EncryptedXmlWithCertificateKeys(
             XmlKeyDecryptionOptions? options,
             XmlDocument document
-        ) : base(document)
+        )
+            : base(document)
         {
             _options = options;
         }

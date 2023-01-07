@@ -528,7 +528,8 @@ namespace System.Threading.RateLimiting
                 int permitCount,
                 SlidingWindowRateLimiter limiter,
                 CancellationToken cancellationToken
-            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            )
+                : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _permitCount = permitCount;
                 _limiter = limiter;

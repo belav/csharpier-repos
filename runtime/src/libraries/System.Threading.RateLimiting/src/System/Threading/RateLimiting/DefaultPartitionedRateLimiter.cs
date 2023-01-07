@@ -37,7 +37,8 @@ namespace System.Threading.RateLimiting
         public DefaultPartitionedRateLimiter(
             Func<TResource, RateLimitPartition<TKey>> partitioner,
             IEqualityComparer<TKey>? equalityComparer = null
-        ) : this(partitioner, equalityComparer, TimeSpan.FromMilliseconds(100)) { }
+        )
+            : this(partitioner, equalityComparer, TimeSpan.FromMilliseconds(100)) { }
 
         // Extra ctor for testing purposes, primarily used when wanting to test the timer manually
         private DefaultPartitionedRateLimiter(

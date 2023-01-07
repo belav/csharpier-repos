@@ -30,7 +30,8 @@ namespace System.Configuration
 
         public SettingElement() { }
 
-        public SettingElement(string name, SettingsSerializeAs serializeAs) : this()
+        public SettingElement(string name, SettingsSerializeAs serializeAs)
+            : this()
         {
             Name = name;
             SerializeAs = serializeAs;

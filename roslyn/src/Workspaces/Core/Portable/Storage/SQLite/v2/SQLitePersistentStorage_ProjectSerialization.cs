@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
                 long
             >
         {
-            public ProjectAccessor(SQLitePersistentStorage storage) : base(storage) { }
+            public ProjectAccessor(SQLitePersistentStorage storage)
+                : base(storage) { }
 
             protected override Table Table => Table.Project;
 

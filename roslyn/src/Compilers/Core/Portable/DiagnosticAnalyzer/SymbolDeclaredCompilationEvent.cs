@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             ISymbol symbol,
             SemanticModel? semanticModelWithCachedBoundNodes = null
-        ) : base(compilation)
+        )
+            : base(compilation)
         {
             Symbol = symbol;
             SemanticModelWithCachedBoundNodes = semanticModelWithCachedBoundNodes;

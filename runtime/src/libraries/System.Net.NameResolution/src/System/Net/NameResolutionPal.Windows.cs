@@ -476,7 +476,8 @@ namespace System.Net
             private object? _result;
             private volatile bool _completed;
 
-            public GetAddrInfoExState(string hostName, bool justAddresses) : base(true)
+            public GetAddrInfoExState(string hostName, bool justAddresses)
+                : base(true)
             {
                 HostName = hostName;
                 JustAddresses = justAddresses;

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
             PropertySymbolAdapter underlyingProperty,
             EmbeddedMethod getter,
             EmbeddedMethod setter
-        ) : base(underlyingProperty, getter, setter) { }
+        )
+            : base(underlyingProperty, getter, setter) { }
 
         protected override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
             PEModuleBuilder moduleBuilder

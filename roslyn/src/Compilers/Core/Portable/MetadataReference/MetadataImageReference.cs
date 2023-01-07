@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis
             DocumentationProvider? documentation,
             string? filePath,
             string? display
-        ) : base(properties, filePath, documentation ?? DocumentationProvider.Default)
+        )
+            : base(properties, filePath, documentation ?? DocumentationProvider.Default)
         {
             _display = display;
             _metadata = metadata;

@@ -25,7 +25,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             context
         ) => new XmlDefaultBehaviorAccessor(name, type, context);
 
-        public XmlDefaultBehaviorAccessor(Type type, IXmlContext context) : base(type, context) { }
+        public XmlDefaultBehaviorAccessor(Type type, IXmlContext context)
+            : base(type, context) { }
 
         public XmlDefaultBehaviorAccessor(string name, Type type, IXmlContext context)
             : base(name, type, context) { }

@@ -19,8 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
     public class CSharpMakeStatementAsynchronousCodeFixTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public CSharpMakeStatementAsynchronousCodeFixTests(ITestOutputHelper logger) : base(logger)
-        { }
+        public CSharpMakeStatementAsynchronousCodeFixTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

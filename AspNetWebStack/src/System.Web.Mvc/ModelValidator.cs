@@ -58,7 +58,8 @@ namespace System.Web.Mvc
             public CompositeModelValidator(
                 ModelMetadata metadata,
                 ControllerContext controllerContext
-            ) : base(metadata, controllerContext) { }
+            )
+                : base(metadata, controllerContext) { }
 
             private static ModelValidationResult CreateSubPropertyResult(
                 ModelMetadata propertyMetadata,

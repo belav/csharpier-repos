@@ -43,7 +43,8 @@ internal class ExportStatelessLspServiceAttribute : ExportAttribute
         Type type,
         string contractName,
         WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.Any
-    ) : base(contractName, typeof(ILspService))
+    )
+        : base(contractName, typeof(ILspService))
     {
         Contract.ThrowIfFalse(
             type.GetInterfaces().Contains(typeof(ILspService)),

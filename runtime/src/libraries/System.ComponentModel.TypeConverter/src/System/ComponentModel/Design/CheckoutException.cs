@@ -36,13 +36,15 @@ namespace System.ComponentModel.Design
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.CheckoutException'/>
         /// class with the specified message.
         /// </summary>
-        public CheckoutException(string? message) : base(message) { }
+        public CheckoutException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.Design.CheckoutException'/>
         /// class with the specified message and error code.
         /// </summary>
-        public CheckoutException(string? message, int errorCode) : base(message, errorCode) { }
+        public CheckoutException(string? message, int errorCode)
+            : base(message, errorCode) { }
 
         /// <summary>
         /// Need this constructor since Exception implements ISerializable. We don't have any fields,

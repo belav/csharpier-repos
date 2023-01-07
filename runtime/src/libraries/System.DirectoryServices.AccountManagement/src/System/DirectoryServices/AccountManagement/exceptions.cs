@@ -17,9 +17,11 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public abstract class PrincipalException : SystemException
     {
-        internal PrincipalException() : base() { }
+        internal PrincipalException()
+            : base() { }
 
-        internal PrincipalException(string message) : base(message) { }
+        internal PrincipalException(string message)
+            : base(message) { }
 
         internal PrincipalException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -34,9 +36,11 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class MultipleMatchesException : PrincipalException
     {
-        public MultipleMatchesException() : base() { }
+        public MultipleMatchesException()
+            : base() { }
 
-        public MultipleMatchesException(string message) : base(message) { }
+        public MultipleMatchesException(string message)
+            : base(message) { }
 
         public MultipleMatchesException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -51,9 +55,11 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class NoMatchingPrincipalException : PrincipalException
     {
-        public NoMatchingPrincipalException() : base() { }
+        public NoMatchingPrincipalException()
+            : base() { }
 
-        public NoMatchingPrincipalException(string message) : base(message) { }
+        public NoMatchingPrincipalException(string message)
+            : base(message) { }
 
         public NoMatchingPrincipalException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -71,9 +77,11 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class PasswordException : PrincipalException
     {
-        public PasswordException() : base() { }
+        public PasswordException()
+            : base() { }
 
-        public PasswordException(string message) : base(message) { }
+        public PasswordException(string message)
+            : base(message) { }
 
         public PasswordException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -88,9 +96,11 @@ namespace System.DirectoryServices.AccountManagement
     )]
     public class PrincipalExistsException : PrincipalException
     {
-        public PrincipalExistsException() : base() { }
+        public PrincipalExistsException()
+            : base() { }
 
-        public PrincipalExistsException(string message) : base(message) { }
+        public PrincipalExistsException(string message)
+            : base(message) { }
 
         public PrincipalExistsException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -108,14 +118,17 @@ namespace System.DirectoryServices.AccountManagement
         private readonly int _errorCode;
         private readonly string _serverName;
 
-        public PrincipalServerDownException() : base() { }
+        public PrincipalServerDownException()
+            : base() { }
 
-        public PrincipalServerDownException(string message) : base(message) { }
+        public PrincipalServerDownException(string message)
+            : base(message) { }
 
         public PrincipalServerDownException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        public PrincipalServerDownException(string message, int errorCode) : base(message)
+        public PrincipalServerDownException(string message, int errorCode)
+            : base(message)
         {
             _errorCode = errorCode;
         }
@@ -131,7 +144,8 @@ namespace System.DirectoryServices.AccountManagement
             Exception innerException,
             int errorCode,
             string serverName
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _errorCode = errorCode;
             _serverName = serverName;
@@ -160,14 +174,17 @@ namespace System.DirectoryServices.AccountManagement
     {
         private readonly int _errorCode;
 
-        public PrincipalOperationException() : base() { }
+        public PrincipalOperationException()
+            : base() { }
 
-        public PrincipalOperationException(string message) : base(message) { }
+        public PrincipalOperationException(string message)
+            : base(message) { }
 
         public PrincipalOperationException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        public PrincipalOperationException(string message, int errorCode) : base(message)
+        public PrincipalOperationException(string message, int errorCode)
+            : base(message)
         {
             _errorCode = errorCode;
         }

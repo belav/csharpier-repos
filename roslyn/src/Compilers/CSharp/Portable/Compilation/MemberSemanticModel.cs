@@ -3049,7 +3049,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             private readonly MemberSemanticModel _semanticModel;
 
-            internal IncrementalBinder(MemberSemanticModel semanticModel, Binder next) : base(next)
+            internal IncrementalBinder(MemberSemanticModel semanticModel, Binder next)
+                : base(next)
             {
                 _semanticModel = semanticModel;
             }

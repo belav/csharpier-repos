@@ -74,7 +74,8 @@ namespace System.ServiceModel.Syndication.Tests
         private bool _bLoaded;
         public XmlNameTable nameTable;
 
-        public XmlDiffDocument() : base()
+        public XmlDiffDocument()
+            : base()
         {
             _bLoaded = false;
             IgnoreAttributeOrder = false;
@@ -1383,7 +1384,8 @@ namespace System.ServiceModel.Syndication.Tests
     {
         private int _attrC;
 
-        public XmlDiffElement(string localName, string prefix, string ns) : base()
+        public XmlDiffElement(string localName, string prefix, string ns)
+            : base()
         {
             LocalName = localName;
             Prefix = prefix;
@@ -1600,7 +1602,8 @@ namespace System.ServiceModel.Syndication.Tests
         internal XmlDiffElement _ownerElement;
         private readonly string _value;
 
-        public XmlDiffAttribute(string localName, string prefix, string ns, string value) : base()
+        public XmlDiffAttribute(string localName, string prefix, string ns, string value)
+            : base()
         {
             LocalName = localName;
             Prefix = prefix;
@@ -1673,7 +1676,8 @@ namespace System.ServiceModel.Syndication.Tests
 
     public class XmlDiffEntityReference : XmlDiffNode
     {
-        public XmlDiffEntityReference(string name) : base()
+        public XmlDiffEntityReference(string name)
+            : base()
         {
             Name = name;
         }

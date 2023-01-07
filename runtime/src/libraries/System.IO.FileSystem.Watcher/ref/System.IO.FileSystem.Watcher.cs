@@ -201,7 +201,8 @@ namespace System.IO
             string directory,
             string? name,
             string? oldName
-        ) : base(default(System.IO.WatcherChangeTypes), default(string), default(string)) { }
+        )
+            : base(default(System.IO.WatcherChangeTypes), default(string), default(string)) { }
 
         public string OldFullPath
         {

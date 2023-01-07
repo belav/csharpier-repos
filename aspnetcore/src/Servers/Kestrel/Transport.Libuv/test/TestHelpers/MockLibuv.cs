@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests.TestHelpers
 
         private readonly string _stackTrace;
 
-        unsafe public MockLibuv() : base(onlyForTesting: true)
+        unsafe public MockLibuv()
+            : base(onlyForTesting: true)
         {
             _stackTrace = Environment.StackTrace;
 

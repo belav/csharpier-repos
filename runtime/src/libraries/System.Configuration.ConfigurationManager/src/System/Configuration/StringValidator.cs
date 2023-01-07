@@ -9,9 +9,11 @@ namespace System.Configuration
         private readonly int _maxLength;
         private readonly int _minLength;
 
-        public StringValidator(int minLength) : this(minLength, int.MaxValue, null) { }
+        public StringValidator(int minLength)
+            : this(minLength, int.MaxValue, null) { }
 
-        public StringValidator(int minLength, int maxLength) : this(minLength, maxLength, null) { }
+        public StringValidator(int minLength, int maxLength)
+            : this(minLength, maxLength, null) { }
 
         public StringValidator(int minLength, int maxLength, string invalidCharacters)
         {

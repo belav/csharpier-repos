@@ -92,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider,
                 IErrorList errorList
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 _errorList = errorList;
 
@@ -132,7 +133,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IGlobalOptionService globalOptions,
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 AddInitialTableSource(
                     workspace.CurrentSolution,
@@ -150,7 +152,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 Workspace workspace,
                 ExternalErrorDiagnosticUpdateSource errorSource,
                 ITableManagerProvider provider
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 AddInitialTableSource(
                     workspace.CurrentSolution,

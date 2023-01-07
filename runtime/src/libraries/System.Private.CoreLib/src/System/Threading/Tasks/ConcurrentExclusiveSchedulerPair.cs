@@ -101,7 +101,8 @@ namespace System.Threading.Tasks
         public ConcurrentExclusiveSchedulerPair(
             TaskScheduler taskScheduler,
             int maxConcurrencyLevel
-        ) : this(taskScheduler, maxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
+        )
+            : this(taskScheduler, maxConcurrencyLevel, DEFAULT_MAXITEMSPERTASK) { }
 
         /// <summary>
         /// Initializes the ConcurrentExclusiveSchedulerPair to target the specified scheduler with a maximum

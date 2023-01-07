@@ -21,7 +21,8 @@ namespace System.Web.Mvc
         private IResolver<IViewPageActivator> _activatorResolver;
         private FileExistenceCache _fileExistsCache;
 
-        protected BuildManagerViewEngine() : this(null, null, null, null) { }
+        protected BuildManagerViewEngine()
+            : this(null, null, null, null) { }
 
         protected BuildManagerViewEngine(IViewPageActivator viewPageActivator)
             : this(viewPageActivator, null, null, null) { }
@@ -130,7 +131,8 @@ namespace System.Web.Mvc
         {
             private Func<IDependencyResolver> _resolverThunk;
 
-            public DefaultViewPageActivator() : this(null) { }
+            public DefaultViewPageActivator()
+                : this(null) { }
 
             public DefaultViewPageActivator(IDependencyResolver resolver)
             {

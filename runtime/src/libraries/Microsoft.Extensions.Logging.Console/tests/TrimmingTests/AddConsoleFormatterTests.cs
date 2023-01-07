@@ -39,7 +39,8 @@ class Program
 
     private class CustomFormatter : ConsoleFormatter
     {
-        public CustomFormatter() : base("Custom")
+        public CustomFormatter()
+            : base("Custom")
         {
             ConstructorCallCount++;
         }

@@ -15,7 +15,8 @@ namespace System.Data.ProviderBase
     {
         private readonly int _defaultLocaleID;
 
-        public FieldNameLookup(string[] fieldNames, int defaultLocaleID) : base(fieldNames)
+        public FieldNameLookup(string[] fieldNames, int defaultLocaleID)
+            : base(fieldNames)
         {
             _defaultLocaleID = defaultLocaleID;
         }
@@ -23,12 +24,14 @@ namespace System.Data.ProviderBase
         public FieldNameLookup(
             System.Collections.ObjectModel.ReadOnlyCollection<string> columnNames,
             int defaultLocaleID
-        ) : base(columnNames)
+        )
+            : base(columnNames)
         {
             _defaultLocaleID = defaultLocaleID;
         }
 
-        public FieldNameLookup(IDataReader reader, int defaultLocaleID) : base(reader)
+        public FieldNameLookup(IDataReader reader, int defaultLocaleID)
+            : base(reader)
         {
             _defaultLocaleID = defaultLocaleID;
         }

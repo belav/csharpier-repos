@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SynthesizedRecordConstructor(
             SourceMemberContainerTypeSymbol containingType,
             TypeDeclarationSyntax syntax
-        ) : base(containingType, syntax.Identifier.GetLocation(), syntax, isIterator: false)
+        )
+            : base(containingType, syntax.Identifier.GetLocation(), syntax, isIterator: false)
         {
             Debug.Assert(
                 syntax.Kind() is SyntaxKind.RecordDeclaration or SyntaxKind.RecordStructDeclaration

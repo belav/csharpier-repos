@@ -22,7 +22,8 @@ public class NonNullableReferencePropertyConvention
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public NonNullableReferencePropertyConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 
     private void Process(IConventionPropertyBuilder propertyBuilder)
     {

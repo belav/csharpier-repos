@@ -9,7 +9,8 @@ namespace System.IO
     public partial class FileLoadException
     {
         // Do not delete: this is invoked from native code.
-        private FileLoadException(string? fileName, int hResult) : base(null)
+        private FileLoadException(string? fileName, int hResult)
+            : base(null)
         {
             HResult = hResult;
             FileName = fileName;

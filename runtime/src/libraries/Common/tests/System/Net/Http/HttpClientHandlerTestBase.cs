@@ -104,7 +104,8 @@ namespace System.Net.Http.Functional.Tests
             public VersionCheckerHttpHandler(
                 HttpMessageHandler innerHandler,
                 Version expectedVersion
-            ) : base(innerHandler)
+            )
+                : base(innerHandler)
             {
                 _expectedVersion = expectedVersion;
             }

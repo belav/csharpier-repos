@@ -46,7 +46,8 @@ namespace System.Web.Http
             "CA2000:Dispose objects before losing scope",
             Justification = "The configuration object is disposed as part of this class."
         )]
-        public HttpServer() : this(new HttpConfiguration()) { }
+        public HttpServer()
+            : this(new HttpConfiguration()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpServer"/> class with default dispatcher.
@@ -69,8 +70,8 @@ namespace System.Web.Http
             "CA2000:Dispose objects before losing scope",
             Justification = "The configuration object is disposed as part of this class."
         )]
-        public HttpServer(HttpMessageHandler dispatcher) : this(new HttpConfiguration(), dispatcher)
-        { }
+        public HttpServer(HttpMessageHandler dispatcher)
+            : this(new HttpConfiguration(), dispatcher) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpServer"/> class.

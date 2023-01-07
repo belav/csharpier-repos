@@ -40,7 +40,8 @@ namespace System.Linq.Tests
                 _source = source;
             }
 
-            public ShuffledEnumerable(IEnumerable<T> source, int seed) : this(source)
+            public ShuffledEnumerable(IEnumerable<T> source, int seed)
+                : this(source)
             {
                 _seed = seed;
             }

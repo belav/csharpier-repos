@@ -52,7 +52,8 @@ namespace System.Xml
             bool ignoreComments,
             bool ignorePis,
             DtdProcessing dtdProcessing
-        ) : base(reader)
+        )
+            : base(reader)
         {
             Debug.Assert(
                 checkCharacters

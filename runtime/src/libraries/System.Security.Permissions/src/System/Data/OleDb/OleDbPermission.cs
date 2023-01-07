@@ -16,9 +16,11 @@ namespace System.Data.OleDb
 #endif
     public sealed class OleDbPermission : DBDataPermission
     {
-        public OleDbPermission() : base(default(PermissionState)) { }
+        public OleDbPermission()
+            : base(default(PermissionState)) { }
 
-        public OleDbPermission(PermissionState state) : base(default(PermissionState)) { }
+        public OleDbPermission(PermissionState state)
+            : base(default(PermissionState)) { }
 
         public OleDbPermission(PermissionState state, bool allowBlankPassword)
             : base(default(PermissionState)) { }

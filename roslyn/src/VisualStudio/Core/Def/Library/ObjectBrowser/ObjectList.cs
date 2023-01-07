@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             uint flags,
             AbstractObjectBrowserLibraryManager manager,
             ImmutableArray<ObjectListItem> items
-        ) : this(kind, flags, null, null, manager, items) { }
+        )
+            : this(kind, flags, null, null, manager, items) { }
 
         public ObjectList(
             ObjectListKind kind,
@@ -46,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ObjectListItem parentListItem,
             AbstractObjectBrowserLibraryManager manager,
             ImmutableArray<ObjectListItem> items
-        ) : base(manager)
+        )
+            : base(manager)
         {
             _kind = kind;
             _flags = flags;

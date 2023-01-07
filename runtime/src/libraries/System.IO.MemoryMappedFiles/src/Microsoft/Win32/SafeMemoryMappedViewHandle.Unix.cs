@@ -7,7 +7,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed partial class SafeMemoryMappedViewHandle
     {
-        internal SafeMemoryMappedViewHandle(IntPtr handle, bool ownsHandle) : base(ownsHandle)
+        internal SafeMemoryMappedViewHandle(IntPtr handle, bool ownsHandle)
+            : base(ownsHandle)
         {
             base.SetHandle(handle);
         }

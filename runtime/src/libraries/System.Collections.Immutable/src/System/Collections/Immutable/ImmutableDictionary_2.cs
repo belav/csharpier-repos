@@ -59,7 +59,8 @@ namespace System.Collections.Immutable
             SortedInt32KeyNode<HashBucket> root,
             Comparers comparers,
             int count
-        ) : this(Requires.NotNullPassthrough(comparers, nameof(comparers)))
+        )
+            : this(Requires.NotNullPassthrough(comparers, nameof(comparers)))
         {
             Requires.NotNull(root, nameof(root));
 

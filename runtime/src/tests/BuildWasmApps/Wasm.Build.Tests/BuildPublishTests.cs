@@ -18,7 +18,8 @@ namespace Wasm.Build.Tests
         public BuildPublishTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [BuildAndRun(host: RunHost.V8, aot: false, config: "Release")]

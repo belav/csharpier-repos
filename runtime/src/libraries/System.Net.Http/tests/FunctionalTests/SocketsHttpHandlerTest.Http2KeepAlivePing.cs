@@ -36,8 +36,8 @@ namespace System.Net.Http.Functional.Tests
 
         private static readonly TimeSpan TestTimeout = TimeSpan.FromSeconds(60);
 
-        public SocketsHttpHandler_Http2KeepAlivePing_Test(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandler_Http2KeepAlivePing_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [OuterLoop("Runs long")]
         [Fact]

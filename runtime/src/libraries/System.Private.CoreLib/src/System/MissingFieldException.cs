@@ -11,17 +11,20 @@ namespace System
     )]
     public class MissingFieldException : MissingMemberException, ISerializable
     {
-        public MissingFieldException() : base(SR.Arg_MissingFieldException)
+        public MissingFieldException()
+            : base(SR.Arg_MissingFieldException)
         {
             HResult = HResults.COR_E_MISSINGFIELD;
         }
 
-        public MissingFieldException(string? message) : base(message)
+        public MissingFieldException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_MISSINGFIELD;
         }
 
-        public MissingFieldException(string? message, Exception? inner) : base(message, inner)
+        public MissingFieldException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_MISSINGFIELD;
         }

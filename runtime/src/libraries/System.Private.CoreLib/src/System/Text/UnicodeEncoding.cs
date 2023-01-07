@@ -37,9 +37,11 @@ namespace System.Text
         // Unicode version 2.0 character size in bytes
         public const int CharSize = 2;
 
-        public UnicodeEncoding() : this(false, true) { }
+        public UnicodeEncoding()
+            : this(false, true) { }
 
-        public UnicodeEncoding(bool bigEndian, bool byteOrderMark) : base(bigEndian ? 1201 : 1200) // Set the data item.
+        public UnicodeEncoding(bool bigEndian, bool byteOrderMark)
+            : base(bigEndian ? 1201 : 1200) // Set the data item.
         {
             this.bigEndian = bigEndian;
             this.byteOrderMark = byteOrderMark;
@@ -2123,7 +2125,8 @@ namespace System.Text
             internal int lastByte = -1;
             internal char lastChar;
 
-            public Decoder(UnicodeEncoding encoding) : base(encoding)
+            public Decoder(UnicodeEncoding encoding)
+                : base(encoding)
             {
                 // base calls reset
             }

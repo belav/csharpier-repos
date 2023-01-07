@@ -51,7 +51,8 @@ namespace System.Reflection
                 long length,
                 long capacity,
                 FileAccess access
-            ) : base(pointer, length, capacity, access)
+            )
+                : base(pointer, length, capacity, access)
             {
                 _manifestAssembly = manifestAssembly;
             }

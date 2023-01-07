@@ -24,7 +24,9 @@ public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestConte
         AuthenticationScheme scheme,
         TOptions options,
         AuthenticationProperties? properties
-    ) : base(context, scheme, options) => Properties = properties ?? new AuthenticationProperties();
+    )
+        : base(context, scheme, options) =>
+        Properties = properties ?? new AuthenticationProperties();
 
     /// <summary>
     /// Gets the <see cref="ClaimsPrincipal"/> containing the user claims.

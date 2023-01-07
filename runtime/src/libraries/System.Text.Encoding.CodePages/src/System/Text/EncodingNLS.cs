@@ -25,7 +25,8 @@ namespace System.Text
         private string? _encodingName;
         private string? _webName;
 
-        protected EncodingNLS(int codePage) : base(codePage) { }
+        protected EncodingNLS(int codePage)
+            : base(codePage) { }
 
         protected EncodingNLS(int codePage, EncoderFallback enc, DecoderFallback dec)
             : base(codePage, enc, dec) { }

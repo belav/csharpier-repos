@@ -44,7 +44,8 @@ namespace System.Collections.Specialized
         public NotifyCollectionChangedEventArgs(
             NotifyCollectionChangedAction action,
             object? changedItem
-        ) : this(action, changedItem, -1) { }
+        )
+            : this(action, changedItem, -1) { }
 
         /// <summary>
         /// Construct a NotifyCollectionChangedEventArgs that describes a one-item change.
@@ -102,7 +103,8 @@ namespace System.Collections.Specialized
         public NotifyCollectionChangedEventArgs(
             NotifyCollectionChangedAction action,
             IList? changedItems
-        ) : this(action, changedItems, -1) { }
+        )
+            : this(action, changedItems, -1) { }
 
         /// <summary>
         /// Construct a NotifyCollectionChangedEventArgs that describes a multi-item change (or a reset).
@@ -175,7 +177,8 @@ namespace System.Collections.Specialized
             NotifyCollectionChangedAction action,
             object? newItem,
             object? oldItem
-        ) : this(action, newItem, oldItem, -1) { }
+        )
+            : this(action, newItem, oldItem, -1) { }
 
         /// <summary>
         /// Construct a NotifyCollectionChangedEventArgs that describes a one-item Replace event.
@@ -215,7 +218,8 @@ namespace System.Collections.Specialized
             NotifyCollectionChangedAction action,
             IList newItems,
             IList oldItems
-        ) : this(action, newItems, oldItems, -1) { }
+        )
+            : this(action, newItems, oldItems, -1) { }
 
         /// <summary>
         /// Construct a NotifyCollectionChangedEventArgs that describes a multi-item Replace event.

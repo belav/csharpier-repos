@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             IContentTypeRegistryService contentTypeRegistryService,
             EditorOptionsService editorOptionsService,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) : base(contentTypeRegistryService, editorOptionsService, editorOperationsFactoryService)
+        )
+            : base(contentTypeRegistryService, editorOptionsService, editorOperationsFactoryService)
         {
             _interactiveWindowProvider = interactiveWindowProvider;
             _sendToInteractiveSubmissionProvider = sendToInteractiveSubmissionProvider;

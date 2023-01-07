@@ -24,7 +24,8 @@ namespace System.Linq.Parallel
         // Constructs a new range enumerable object for the specified range.
         //
 
-        internal RangeEnumerable(int from, int count) : base(QuerySettings.Empty)
+        internal RangeEnumerable(int from, int count)
+            : base(QuerySettings.Empty)
         {
             // Transform the from and to indices into low and highs.
             _from = from;

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
         public DeletedParameterDefinition(
             IParameterDefinition oldParameter,
             Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
-        ) : base(oldParameter, typesUsedByDeletedMembers) { }
+        )
+            : base(oldParameter, typesUsedByDeletedMembers) { }
 
         public bool HasDefaultValue => OldDefinition.HasDefaultValue;
 

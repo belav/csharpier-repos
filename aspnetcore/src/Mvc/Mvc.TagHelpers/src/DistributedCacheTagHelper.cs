@@ -33,7 +33,8 @@ public class DistributedCacheTagHelper : CacheTagHelperBase
     public DistributedCacheTagHelper(
         IDistributedCacheTagHelperService distributedCacheService,
         HtmlEncoder htmlEncoder
-    ) : base(htmlEncoder)
+    )
+        : base(htmlEncoder)
     {
         _distributedCacheService = distributedCacheService;
     }

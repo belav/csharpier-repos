@@ -23,7 +23,8 @@ public class MigrationsSqlServerTest
     public MigrationsSqlServerTest(
         MigrationsSqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

@@ -65,7 +65,8 @@ namespace CompareExchangeLong
         private int numberOfIterations;
         private long valueToAdd;
 
-        public ThreadSafe() : this(100, Int64.MaxValue) { }
+        public ThreadSafe()
+            : this(100, Int64.MaxValue) { }
 
         public ThreadSafe(int loops, long value)
         {

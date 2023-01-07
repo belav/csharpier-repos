@@ -32,7 +32,8 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
             IdentityUserToken<string>
         >.AspNetIdentityFixtureBase
 {
-    protected AspNetIdentityDefaultTestBase(TFixture fixture) : base(fixture) { }
+    protected AspNetIdentityDefaultTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected override List<EntityTypeMapping> ExpectedMappings =>
         new()

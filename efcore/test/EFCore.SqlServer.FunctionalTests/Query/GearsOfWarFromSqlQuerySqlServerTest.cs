@@ -9,7 +9,8 @@ public class GearsOfWarFromSqlQuerySqlServerTest
     public GearsOfWarFromSqlQuerySqlServerTest(
         GearsOfWarQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }

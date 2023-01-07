@@ -25,7 +25,8 @@ namespace System.Xml.Xsl.Qil
             QilNode? defaultValue,
             QilNode? name,
             XmlQueryType xmlType
-        ) : base(nodeType, defaultValue)
+        )
+            : base(nodeType, defaultValue)
         {
             _name = name;
             this.xmlType = xmlType;

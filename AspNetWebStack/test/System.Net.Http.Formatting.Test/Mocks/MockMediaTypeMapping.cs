@@ -7,7 +7,8 @@ namespace System.Net.Http.Formatting.Mocks
 {
     public class MockMediaTypeMapping : MediaTypeMapping
     {
-        public MockMediaTypeMapping(string mediaType, double matchQuality) : base(mediaType)
+        public MockMediaTypeMapping(string mediaType, double matchQuality)
+            : base(mediaType)
         {
             MatchQuality = matchQuality;
         }

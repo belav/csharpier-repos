@@ -550,7 +550,8 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafeSslHandle() : base(IntPtr.Zero, true) { }
+        public SafeSslHandle()
+            : base(IntPtr.Zero, true) { }
 
         internal SafeSslHandle(IntPtr validSslPointer, bool ownsHandle)
             : base(IntPtr.Zero, ownsHandle)

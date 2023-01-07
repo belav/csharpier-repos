@@ -15,7 +15,8 @@ namespace Program
 
     public class AxControlEventArgs : AxControlEventArgs<WindowlessControl>
     {
-        public AxControlEventArgs(WindowlessControl c) : base(c) { }
+        public AxControlEventArgs(WindowlessControl c)
+            : base(c) { }
     }
 
     public class AlignPadLayoutPanel : AlignPadLayoutPanel<WindowlessControl> { }
@@ -99,7 +100,8 @@ namespace Program
     {
         public T DefaultValue { get; private set; }
 
-        public AttachedProperty(T defaultValue) : this()
+        public AttachedProperty(T defaultValue)
+            : this()
         {
             DefaultValue = defaultValue;
         }

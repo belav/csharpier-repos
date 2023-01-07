@@ -36,7 +36,8 @@ public class ListenOptions : IConnectionBuilder, IMultiplexedConnectionBuilder
         EndPoint = new UnixDomainSocketEndPoint(socketPath);
     }
 
-    internal ListenOptions(ulong fileHandle) : this(fileHandle, FileHandleType.Auto) { }
+    internal ListenOptions(ulong fileHandle)
+        : this(fileHandle, FileHandleType.Auto) { }
 
     internal ListenOptions(ulong fileHandle, FileHandleType handleType)
     {

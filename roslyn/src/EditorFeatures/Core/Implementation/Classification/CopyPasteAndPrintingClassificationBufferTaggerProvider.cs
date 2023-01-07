@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             IThreadingContext threadingContext,
             ClassificationTypeMap typeMap,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _typeMap = typeMap;
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.Classification);

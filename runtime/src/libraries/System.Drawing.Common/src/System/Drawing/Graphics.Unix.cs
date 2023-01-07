@@ -55,7 +55,8 @@ namespace System.Drawing
 
         internal Graphics(IntPtr nativeGraphics) => NativeGraphics = nativeGraphics;
 
-        internal Graphics(IntPtr nativeGraphics, Image image) : this(nativeGraphics)
+        internal Graphics(IntPtr nativeGraphics, Image image)
+            : this(nativeGraphics)
         {
             if (image is Metafile mf)
             {

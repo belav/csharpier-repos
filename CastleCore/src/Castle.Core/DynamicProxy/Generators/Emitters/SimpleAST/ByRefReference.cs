@@ -23,7 +23,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
     {
         private readonly LocalReference localReference;
 
-        public ByRefReference(LocalReference localReference) : base(localReference.Type)
+        public ByRefReference(LocalReference localReference)
+            : base(localReference.Type)
         {
             this.localReference = localReference;
         }

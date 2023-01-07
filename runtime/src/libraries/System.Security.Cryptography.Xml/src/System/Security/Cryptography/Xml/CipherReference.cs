@@ -9,12 +9,14 @@ namespace System.Security.Cryptography.Xml
     {
         private byte[]? _cipherValue;
 
-        public CipherReference() : base()
+        public CipherReference()
+            : base()
         {
             ReferenceType = "CipherReference";
         }
 
-        public CipherReference(string uri) : base(uri)
+        public CipherReference(string uri)
+            : base(uri)
         {
             ReferenceType = "CipherReference";
         }

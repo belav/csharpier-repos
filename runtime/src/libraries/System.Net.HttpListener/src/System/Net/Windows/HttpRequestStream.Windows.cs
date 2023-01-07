@@ -373,14 +373,16 @@ namespace System.Net
                 object asyncObject,
                 object? userState,
                 AsyncCallback? callback
-            ) : base(asyncObject, userState, callback) { }
+            )
+                : base(asyncObject, userState, callback) { }
 
             internal HttpRequestStreamAsyncResult(
                 object asyncObject,
                 object? userState,
                 AsyncCallback? callback,
                 uint dataAlreadyRead
-            ) : base(asyncObject, userState, callback)
+            )
+                : base(asyncObject, userState, callback)
             {
                 _dataAlreadyRead = dataAlreadyRead;
             }
@@ -393,7 +395,8 @@ namespace System.Net
                 byte[] buffer,
                 int offset,
                 uint dataAlreadyRead
-            ) : base(asyncObject, userState, callback)
+            )
+                : base(asyncObject, userState, callback)
             {
                 _dataAlreadyRead = dataAlreadyRead;
                 _boundHandle = boundHandle;

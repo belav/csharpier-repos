@@ -15,12 +15,14 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Initializes a new instance of the EventSourceException class.
         /// </summary>
-        public EventSourceException() : base(SR.EventSource_ListenerWriteFailure) { }
+        public EventSourceException()
+            : base(SR.EventSource_ListenerWriteFailure) { }
 
         /// <summary>
         /// Initializes a new instance of the EventSourceException class with a specified error message.
         /// </summary>
-        public EventSourceException(string? message) : base(message) { }
+        public EventSourceException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the EventSourceException class with a specified error message

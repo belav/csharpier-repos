@@ -49,7 +49,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             set { _context = value; }
         }
 
-        public BinaryFormatter() : this(null, new StreamingContext(StreamingContextStates.All)) { }
+        public BinaryFormatter()
+            : this(null, new StreamingContext(StreamingContextStates.All)) { }
 
         public BinaryFormatter(ISurrogateSelector? selector, StreamingContext context)
         {

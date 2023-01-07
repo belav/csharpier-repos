@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class CatchKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public CatchKeywordRecommender() : base(SyntaxKind.CatchKeyword) { }
+        public CatchKeywordRecommender()
+            : base(SyntaxKind.CatchKeyword) { }
 
         protected override bool IsValidContext(
             int position,

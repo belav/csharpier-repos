@@ -11,12 +11,14 @@ namespace System.Security
     )]
     public class VerificationException : SystemException
     {
-        public VerificationException() : base(SR.Verification_Exception)
+        public VerificationException()
+            : base(SR.Verification_Exception)
         {
             HResult = HResults.COR_E_VERIFICATION;
         }
 
-        public VerificationException(string? message) : base(message)
+        public VerificationException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_VERIFICATION;
         }

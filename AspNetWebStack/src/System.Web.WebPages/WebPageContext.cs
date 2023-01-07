@@ -18,7 +18,8 @@ namespace System.Web.WebPages
         private ValidationHelper _validation;
         private ModelStateDictionary _modelStateDictionary;
 
-        public WebPageContext() : this(context: null, page: null, model: null) { }
+        public WebPageContext()
+            : this(context: null, page: null, model: null) { }
 
         public WebPageContext(HttpContextBase context, WebPageRenderingBase page, object model)
         {

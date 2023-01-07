@@ -12,7 +12,8 @@ public class ControllerRouteTokenTransformerConvention : RouteTokenTransformerCo
     public ControllerRouteTokenTransformerConvention(
         Type controllerType,
         IOutboundParameterTransformer parameterTransformer
-    ) : base(parameterTransformer)
+    )
+        : base(parameterTransformer)
     {
         if (parameterTransformer == null)
         {

@@ -11,7 +11,8 @@ public class NorthwindBulkUpdatesSqlServerTest
     public NorthwindBulkUpdatesSqlServerTest(
         NorthwindBulkUpdatesSqlServerFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
         // Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

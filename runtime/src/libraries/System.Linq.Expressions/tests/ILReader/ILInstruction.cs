@@ -24,7 +24,8 @@ namespace System.Linq.Expressions.Tests
 
     public sealed class InlineNoneInstruction : ILInstruction
     {
-        internal InlineNoneInstruction(int offset, OpCode opCode) : base(offset, opCode) { }
+        internal InlineNoneInstruction(int offset, OpCode opCode)
+            : base(offset, opCode) { }
 
         public override void Accept(ILInstructionVisitor visitor) =>
             visitor.VisitInlineNoneInstruction(this);
@@ -95,7 +96,8 @@ namespace System.Linq.Expressions.Tests
 
     public sealed class InlineIInstruction : ILInstruction
     {
-        internal InlineIInstruction(int offset, OpCode opCode, int value) : base(offset, opCode)
+        internal InlineIInstruction(int offset, OpCode opCode, int value)
+            : base(offset, opCode)
         {
             Value = value;
         }
@@ -108,7 +110,8 @@ namespace System.Linq.Expressions.Tests
 
     public sealed class InlineI8Instruction : ILInstruction
     {
-        internal InlineI8Instruction(int offset, OpCode opCode, long value) : base(offset, opCode)
+        internal InlineI8Instruction(int offset, OpCode opCode, long value)
+            : base(offset, opCode)
         {
             Value = value;
         }
@@ -135,7 +138,8 @@ namespace System.Linq.Expressions.Tests
 
     public sealed class InlineRInstruction : ILInstruction
     {
-        internal InlineRInstruction(int offset, OpCode opCode, double value) : base(offset, opCode)
+        internal InlineRInstruction(int offset, OpCode opCode, double value)
+            : base(offset, opCode)
         {
             Value = value;
         }
@@ -170,7 +174,8 @@ namespace System.Linq.Expressions.Tests
             int offset,
             OpCode opCode,
             int token
-        ) : base(offset, opCode)
+        )
+            : base(offset, opCode)
         {
             _resolver = resolver;
             Token = token;
@@ -193,7 +198,8 @@ namespace System.Linq.Expressions.Tests
             OpCode opCode,
             int token,
             ITokenResolver resolver
-        ) : base(offset, opCode)
+        )
+            : base(offset, opCode)
         {
             _resolver = resolver;
             Token = token;
@@ -216,7 +222,8 @@ namespace System.Linq.Expressions.Tests
             OpCode opCode,
             int token,
             ITokenResolver resolver
-        ) : base(offset, opCode)
+        )
+            : base(offset, opCode)
         {
             _resolver = resolver;
             Token = token;
@@ -277,7 +284,8 @@ namespace System.Linq.Expressions.Tests
             OpCode opCode,
             int token,
             ITokenResolver resolver
-        ) : base(offset, opCode)
+        )
+            : base(offset, opCode)
         {
             _resolver = resolver;
             Token = token;

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 Project project,
                 bool ignoreCase,
                 CancellationToken cancellationToken
-            ) : base(provider, project, ignoreCase, cancellationToken)
+            )
+                : base(provider, project, ignoreCase, cancellationToken)
             {
                 _projectToAssembly = projectToAssembly;
             }

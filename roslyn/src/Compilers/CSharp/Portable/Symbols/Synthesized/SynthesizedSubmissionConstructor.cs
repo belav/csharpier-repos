@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SynthesizedSubmissionConstructor(
             NamedTypeSymbol containingType,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             Debug.Assert(containingType.TypeKind == TypeKind.Submission);
             Debug.Assert(diagnostics != null);

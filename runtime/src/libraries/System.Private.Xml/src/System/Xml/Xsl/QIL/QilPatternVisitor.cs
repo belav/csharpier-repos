@@ -14,7 +14,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Constructor.
         /// </summary>
-        public QilPatternVisitor(QilPatterns patterns, QilFactory f) : base(f)
+        public QilPatternVisitor(QilPatterns patterns, QilFactory f)
+            : base(f)
         {
             Patterns = patterns;
         }

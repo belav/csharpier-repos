@@ -18,7 +18,8 @@ internal sealed class DevToolsDebuggerConnection : WasmDebuggerConnection
     public WebSocket WebSocket { get; init; }
     private readonly ILogger _logger;
 
-    public DevToolsDebuggerConnection(WebSocket webSocket, string id, ILogger logger) : base(id)
+    public DevToolsDebuggerConnection(WebSocket webSocket, string id, ILogger logger)
+        : base(id)
     {
         ArgumentNullException.ThrowIfNull(webSocket);
         ArgumentNullException.ThrowIfNull(logger);

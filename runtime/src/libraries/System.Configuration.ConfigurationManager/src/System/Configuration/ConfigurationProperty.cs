@@ -45,7 +45,8 @@ namespace System.Configuration
             Type type,
             object defaultValue,
             ConfigurationPropertyOptions options
-        ) : this(name, type, defaultValue, null, null, options) { }
+        )
+            : this(name, type, defaultValue, null, null, options) { }
 
         public ConfigurationProperty(
             string name,
@@ -54,7 +55,8 @@ namespace System.Configuration
             TypeConverter typeConverter,
             ConfigurationValidatorBase validator,
             ConfigurationPropertyOptions options
-        ) : this(name, type, defaultValue, typeConverter, validator, options, null) { }
+        )
+            : this(name, type, defaultValue, typeConverter, validator, options, null) { }
 
         public ConfigurationProperty(
             string name,

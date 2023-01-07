@@ -169,7 +169,8 @@ namespace System.Data.SqlTypes
             byte[]? data,
             int index,
             int count
-        ) : this(lcid, compareOptions, data, index, count, true) { }
+        )
+            : this(lcid, compareOptions, data, index, count, true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
@@ -201,7 +202,8 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.
         /// </summary>
-        public SqlString(string? data, int lcid) : this(data, lcid, s_iDefaultFlag) { }
+        public SqlString(string? data, int lcid)
+            : this(data, lcid, s_iDefaultFlag) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.SqlTypes.SqlString'/> class.

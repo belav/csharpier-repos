@@ -66,7 +66,8 @@ namespace System.IO.IsolatedStorage
             FileMode mode,
             FileAccess access,
             FileShare share
-        ) : this(path, mode, access, share, DefaultBufferSize, null) { }
+        )
+            : this(path, mode, access, share, DefaultBufferSize, null) { }
 
         public IsolatedStorageFileStream(
             string path,
@@ -74,7 +75,8 @@ namespace System.IO.IsolatedStorage
             FileAccess access,
             FileShare share,
             IsolatedStorageFile? isf
-        ) : this(path, mode, access, share, DefaultBufferSize, isf) { }
+        )
+            : this(path, mode, access, share, DefaultBufferSize, isf) { }
 
         public IsolatedStorageFileStream(
             string path,
@@ -82,7 +84,8 @@ namespace System.IO.IsolatedStorage
             FileAccess access,
             FileShare share,
             int bufferSize
-        ) : this(path, mode, access, share, bufferSize, null) { }
+        )
+            : this(path, mode, access, share, bufferSize, null) { }
 
         public IsolatedStorageFileStream(
             string path,

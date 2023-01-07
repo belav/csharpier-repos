@@ -89,7 +89,8 @@ namespace System.Diagnostics
                 string? message,
                 string? detailMessage,
                 string? stackTrace
-            ) : base(Terminate(message) + Terminate(detailMessage) + stackTrace) { }
+            )
+                : base(Terminate(message) + Terminate(detailMessage) + stackTrace) { }
 
             private static string? Terminate(string? s)
             {

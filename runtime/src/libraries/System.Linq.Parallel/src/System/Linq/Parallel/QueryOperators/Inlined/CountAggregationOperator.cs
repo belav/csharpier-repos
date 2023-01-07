@@ -25,7 +25,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of the operator.
         //
 
-        internal CountAggregationOperator(IEnumerable<TSource> child) : base(child) { }
+        internal CountAggregationOperator(IEnumerable<TSource> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -95,7 +96,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<TSource, TKey> source,
                 int partitionIndex,
                 CancellationToken cancellationToken
-            ) : base(partitionIndex, cancellationToken)
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

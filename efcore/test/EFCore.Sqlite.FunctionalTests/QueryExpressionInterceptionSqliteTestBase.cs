@@ -44,7 +44,8 @@ public abstract class QueryExpressionInterceptionSqliteTestBase
     {
         public QueryExpressionInterceptionWithDiagnosticsSqliteTest(
             InterceptionSqliteFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

@@ -1119,7 +1119,8 @@ namespace System.DirectoryServices
     {
         public DirectoryServicesPermissionAttribute(
             System.Security.Permissions.SecurityAction action
-        ) : base(default(System.Security.Permissions.SecurityAction)) { }
+        )
+            : base(default(System.Security.Permissions.SecurityAction)) { }
 
         public string? Path
         {

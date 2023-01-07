@@ -19,7 +19,8 @@ namespace System.Web.Mvc
             Type modelType,
             string propertyName,
             DisplayColumnAttribute displayColumnAttribute
-        ) : base(provider, containerType, modelAccessor, modelType, propertyName)
+        )
+            : base(provider, containerType, modelAccessor, modelType, propertyName)
         {
             _displayColumnAttribute = displayColumnAttribute;
         }

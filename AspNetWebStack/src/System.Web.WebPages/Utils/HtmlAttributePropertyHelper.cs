@@ -22,7 +22,8 @@ namespace System.Web.WebPages
             return new HtmlAttributePropertyHelper(property);
         }
 
-        public HtmlAttributePropertyHelper(PropertyInfo property) : base(property) { }
+        public HtmlAttributePropertyHelper(PropertyInfo property)
+            : base(property) { }
 
         public override string Name
         {

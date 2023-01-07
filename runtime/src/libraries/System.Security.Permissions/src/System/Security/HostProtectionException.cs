@@ -24,21 +24,24 @@ namespace System.Security
         private const string DemandedResourcesName = "DemandedResources";
         private const int E_HostProtection = -2146232768;
 
-        public HostProtectionException() : base()
+        public HostProtectionException()
+            : base()
         {
             HResult = E_HostProtection;
             ProtectedResources = HostProtectionResource.None;
             DemandedResources = HostProtectionResource.None;
         }
 
-        public HostProtectionException(string message) : base(message)
+        public HostProtectionException(string message)
+            : base(message)
         {
             HResult = E_HostProtection;
             ProtectedResources = HostProtectionResource.None;
             DemandedResources = HostProtectionResource.None;
         }
 
-        public HostProtectionException(string message, Exception e) : base(message, e)
+        public HostProtectionException(string message, Exception e)
+            : base(message, e)
         {
             HResult = E_HostProtection;
             ProtectedResources = HostProtectionResource.None;
@@ -49,7 +52,8 @@ namespace System.Security
             string message,
             HostProtectionResource protectedResources,
             HostProtectionResource demandedResources
-        ) : base(message)
+        )
+            : base(message)
         {
             HResult = E_HostProtection;
             ProtectedResources = protectedResources;

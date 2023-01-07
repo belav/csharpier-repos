@@ -34,14 +34,16 @@ namespace System.Net.Sockets
         /// <summary>
         /// Creates a <see cref="T:System.Net.Sockets.SafeSocketHandle" />.
         /// </summary>
-        public SafeSocketHandle() : base(ownsHandle: true) => OwnsHandle = true;
+        public SafeSocketHandle()
+            : base(ownsHandle: true) => OwnsHandle = true;
 
         /// <summary>
         /// Creates a <see cref="T:System.Net.Sockets.SafeSocketHandle" /> around a socket handle.
         /// </summary>
         /// <param name="preexistingHandle">Handle to wrap</param>
         /// <param name="ownsHandle">Whether to control the handle lifetime</param>
-        public SafeSocketHandle(IntPtr preexistingHandle, bool ownsHandle) : base(ownsHandle: true) // To support canceling on-going operations we need to detect
+        public SafeSocketHandle(IntPtr preexistingHandle, bool ownsHandle)
+            : base(ownsHandle: true) // To support canceling on-going operations we need to detect
         // there are no more on-going operations.
         // For that the base-SafeHandle needs to be owning even
         // when the SafeSocketHandle is not.

@@ -47,7 +47,8 @@ namespace Mono.Linker.Tests
 
         public class MemberAssertions : MemberAssertionsCollector
         {
-            public MemberAssertions() : base(typeof(DocumentationSignatureParserTests)) { }
+            public MemberAssertions()
+                : base(typeof(DocumentationSignatureParserTests)) { }
         }
 
         private static void CheckUniqueParsedString(TypeSystemEntity member, string input)

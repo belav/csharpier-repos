@@ -100,7 +100,8 @@ namespace System.Data.SqlTypes
         /// <summary>
         /// Initializes a new instance of the <see cref='SqlMoney'/> class with the value given.
         /// </summary>
-        public SqlMoney(double value) : this(new decimal(value)) { }
+        public SqlMoney(double value)
+            : this(new decimal(value)) { }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref='Value'/>

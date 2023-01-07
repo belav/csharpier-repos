@@ -19,7 +19,8 @@ namespace Microsoft.TestCommon
         /// Instantiates a new <see cref="TheoryDiscoverer"/> instance.
         /// </summary>
         /// <param name="diagnosticMessageSink">The <see cref="IMessageSink"/> used to send diagnostic messages.</param>
-        public TheoryDiscoverer(IMessageSink diagnosticMessageSink) : base(diagnosticMessageSink)
+        public TheoryDiscoverer(IMessageSink diagnosticMessageSink)
+            : base(diagnosticMessageSink)
         {
             _diagnosticMessageSink = diagnosticMessageSink;
         }

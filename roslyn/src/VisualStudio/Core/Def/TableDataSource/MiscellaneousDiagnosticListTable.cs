@@ -62,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IThreadingContext threadingContext,
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 _source = new LiveTableDataSource(
                     workspace,

@@ -57,7 +57,8 @@ public class SqlBinaryExpression : SqlExpression
         SqlExpression right,
         Type type,
         CoreTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         OperatorType = VerifyOperator(operatorType);
 

@@ -129,7 +129,8 @@ namespace System.Linq.Parallel
                 int partitionIndex,
                 int sign,
                 CancellationToken cancellationToken
-            ) : base(partitionIndex, cancellationToken)
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

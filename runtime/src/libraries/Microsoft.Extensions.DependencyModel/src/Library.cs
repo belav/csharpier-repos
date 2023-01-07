@@ -16,7 +16,8 @@ namespace Microsoft.Extensions.DependencyModel
             string? hash,
             IEnumerable<Dependency> dependencies,
             bool serviceable
-        ) : this(type, name, version, hash, dependencies, serviceable, path: null, hashPath: null)
+        )
+            : this(type, name, version, hash, dependencies, serviceable, path: null, hashPath: null)
         { }
 
         public Library(

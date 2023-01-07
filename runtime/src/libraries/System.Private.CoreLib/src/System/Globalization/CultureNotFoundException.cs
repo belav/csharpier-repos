@@ -14,9 +14,11 @@ namespace System.Globalization
         private readonly string? _invalidCultureName; // unrecognized culture name
         private readonly int? _invalidCultureId; // unrecognized culture Lcid
 
-        public CultureNotFoundException() : base(DefaultMessage) { }
+        public CultureNotFoundException()
+            : base(DefaultMessage) { }
 
-        public CultureNotFoundException(string? message) : base(message) { }
+        public CultureNotFoundException(string? message)
+            : base(message) { }
 
         public CultureNotFoundException(string? paramName, string? message)
             : base(message, paramName) { }
@@ -28,7 +30,8 @@ namespace System.Globalization
             string? paramName,
             string? invalidCultureName,
             string? message
-        ) : base(message, paramName)
+        )
+            : base(message, paramName)
         {
             _invalidCultureName = invalidCultureName;
         }
@@ -37,7 +40,8 @@ namespace System.Globalization
             string? message,
             string? invalidCultureName,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _invalidCultureName = invalidCultureName;
         }
@@ -46,7 +50,8 @@ namespace System.Globalization
             string? message,
             int invalidCultureId,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _invalidCultureId = invalidCultureId;
         }

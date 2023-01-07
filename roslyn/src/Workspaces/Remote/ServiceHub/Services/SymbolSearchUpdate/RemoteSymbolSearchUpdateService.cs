@@ -68,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteSymbolSearchUpdateService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteSymbolSearchUpdateService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _updateEngine = SymbolSearchUpdateEngineFactory.CreateEngineInProcess(
                 FileDownloader.Factory.Instance

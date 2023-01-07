@@ -79,7 +79,8 @@ namespace Roslyn.Utilities
         // TODO: consider whether a counter is random enough
         private Random? _random;
 
-        internal TextKeyedCache() : this(null) { }
+        internal TextKeyedCache()
+            : this(null) { }
 
         // implement Poolable object pattern
         #region "Poolable"

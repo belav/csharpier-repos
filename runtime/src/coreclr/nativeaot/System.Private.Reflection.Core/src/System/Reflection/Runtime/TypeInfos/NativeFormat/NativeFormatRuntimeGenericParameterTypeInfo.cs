@@ -24,7 +24,8 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             MetadataReader reader,
             GenericParameterHandle genericParameterHandle,
             GenericParameter genericParameter
-        ) : base(genericParameter.Number)
+        )
+            : base(genericParameter.Number)
         {
             Reader = reader;
             GenericParameterHandle = genericParameterHandle;

@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.FileProviders
 {
     public class MockFileSystemWatcher : FileSystemWatcher
     {
-        public MockFileSystemWatcher(string root) : base(root) { }
+        public MockFileSystemWatcher(string root)
+            : base(root) { }
 
         public void CallOnChanged(FileSystemEventArgs e)
         {

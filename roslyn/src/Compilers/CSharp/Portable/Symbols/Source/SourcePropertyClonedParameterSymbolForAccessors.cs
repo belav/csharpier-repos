@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SourcePropertyClonedParameterSymbolForAccessors(
             SourceParameterSymbol originalParam,
             Symbol newOwner
-        ) : base(originalParam, newOwner, originalParam.Ordinal, suppressOptional: false) { }
+        )
+            : base(originalParam, newOwner, originalParam.Ordinal, suppressOptional: false) { }
 
         internal override bool IsCallerFilePath => _originalParam.IsCallerFilePath;
 

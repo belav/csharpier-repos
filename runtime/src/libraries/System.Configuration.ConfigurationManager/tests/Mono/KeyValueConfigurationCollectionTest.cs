@@ -40,7 +40,8 @@ namespace MonoTests.System.Configuration
         {
             bool useElementPoker;
 
-            public Poker() : this(false) { }
+            public Poker()
+                : this(false) { }
 
             public Poker(bool useElementPoker)
             {
@@ -78,7 +79,8 @@ namespace MonoTests.System.Configuration
 
         class ElementPoker : KeyValueConfigurationElement
         {
-            public ElementPoker(string name, string value) : base(name, value) { }
+            public ElementPoker(string name, string value)
+                : base(name, value) { }
 
             protected override void InitializeDefault()
             {

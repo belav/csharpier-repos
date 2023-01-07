@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.RemoveNewMo
     public class RemoveNewModifierCodeFixProviderTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveNewModifierCodeFixProviderTests(ITestOutputHelper logger) : base(logger) { }
+        public RemoveNewModifierCodeFixProviderTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

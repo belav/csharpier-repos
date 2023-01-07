@@ -28,10 +28,12 @@ namespace System.IO.Hashing
         private State _state;
 
         /// <summary>Initializes a new instance of the <see cref="XxHash128"/> class using the default seed value 0.</summary>
-        public XxHash128() : this(0) { }
+        public XxHash128()
+            : this(0) { }
 
         /// <summary>Initializes a new instance of the <see cref="XxHash128"/> class using the specified seed.</summary>
-        public XxHash128(long seed) : base(HashLengthInBytes)
+        public XxHash128(long seed)
+            : base(HashLengthInBytes)
         {
             Initialize(ref _state, (ulong)seed);
         }

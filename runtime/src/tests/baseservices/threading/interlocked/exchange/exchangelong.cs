@@ -43,7 +43,8 @@ namespace Exchange
         private long newValueB = Int64.MinValue;
         private bool success;
 
-        public ThreadSafe() : this(10000) { }
+        public ThreadSafe()
+            : this(10000) { }
 
         public ThreadSafe(int loops)
         {

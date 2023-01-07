@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             SQLiteConnectionPoolService connectionPoolService,
             IPersistentStorageConfiguration configuration,
             IAsynchronousOperationListener asyncListener
-        ) : base(configuration)
+        )
+            : base(configuration)
         {
             _connectionPoolService = connectionPoolService;
             _asyncListener = asyncListener;
@@ -93,7 +94,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             IPersistentStorageConfiguration configuration,
             IAsynchronousOperationListener asyncListener,
             IPersistentStorageFaultInjector? faultInjector
-        ) : this(connectionPoolService, configuration, asyncListener)
+        )
+            : this(connectionPoolService, configuration, asyncListener)
         {
             _faultInjector = faultInjector;
         }

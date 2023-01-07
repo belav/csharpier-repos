@@ -19,7 +19,8 @@ public class Table : TableBase, ITable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public Table(string name, string? schema, RelationalModel model) : base(name, schema, model)
+    public Table(string name, string? schema, RelationalModel model)
+        : base(name, schema, model)
     {
         Columns = new SortedDictionary<string, IColumnBase>(new ColumnNameComparer(this));
     }

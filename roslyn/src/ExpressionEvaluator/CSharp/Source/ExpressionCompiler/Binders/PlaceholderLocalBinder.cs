@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             MethodSymbol containingMethod,
             EETypeNameDecoder typeNameDecoder,
             Binder next
-        ) : base(next)
+        )
+            : base(next)
         {
             _syntax = syntax;
             _containingMethod = containingMethod;

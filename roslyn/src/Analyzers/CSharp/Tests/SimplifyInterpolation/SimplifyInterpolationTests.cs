@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
     public partial class SimplifyInterpolationTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public SimplifyInterpolationTests(ITestOutputHelper logger) : base(logger) { }
+        public SimplifyInterpolationTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

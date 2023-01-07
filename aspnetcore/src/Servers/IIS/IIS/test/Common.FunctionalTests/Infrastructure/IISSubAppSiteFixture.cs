@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 public class IISSubAppSiteFixture : IISTestSiteFixture
 {
-    public IISSubAppSiteFixture() : base(Configure) { }
+    public IISSubAppSiteFixture()
+        : base(Configure) { }
 
     private static void Configure(IISDeploymentParameters deploymentParameters)
     {

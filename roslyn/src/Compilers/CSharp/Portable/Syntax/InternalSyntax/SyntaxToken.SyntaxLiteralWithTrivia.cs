@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 T value,
                 GreenNode leading,
                 GreenNode trailing
-            ) : base(kind, text, value)
+            )
+                : base(kind, text, value)
             {
                 if (leading != null)
                 {
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 GreenNode trailing,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(kind, text, value, diagnostics, annotations)
+            )
+                : base(kind, text, value, diagnostics, annotations)
             {
                 if (leading != null)
                 {
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            internal SyntaxTokenWithValueAndTrivia(ObjectReader reader) : base(reader)
+            internal SyntaxTokenWithValueAndTrivia(ObjectReader reader)
+                : base(reader)
             {
                 var leading = (GreenNode)reader.ReadValue();
                 if (leading != null)

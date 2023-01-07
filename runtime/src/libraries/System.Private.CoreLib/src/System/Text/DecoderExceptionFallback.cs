@@ -79,12 +79,14 @@ namespace System.Text
         private readonly byte[]? _bytesUnknown;
         private readonly int _index;
 
-        public DecoderFallbackException() : base(SR.Arg_ArgumentException)
+        public DecoderFallbackException()
+            : base(SR.Arg_ArgumentException)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
 
-        public DecoderFallbackException(string? message) : base(message)
+        public DecoderFallbackException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -105,7 +107,8 @@ namespace System.Text
         private DecoderFallbackException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
 
         public byte[]? BytesUnknown => _bytesUnknown;
 

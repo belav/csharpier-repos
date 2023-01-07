@@ -8,7 +8,8 @@ public class FiltersInheritanceBulkUpdatesSqliteTest
 {
     public FiltersInheritanceBulkUpdatesSqliteTest(
         FiltersInheritanceBulkUpdatesSqliteFixture fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
     }

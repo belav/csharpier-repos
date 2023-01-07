@@ -122,7 +122,8 @@ namespace ILLink.Tasks.Tests
             }
         }
 
-        public MockDriver(Queue<string> arguments) : base(arguments)
+        public MockDriver(Queue<string> arguments)
+            : base(arguments)
         {
             // Always set up the context early on.
             Logger = new CustomLogger();

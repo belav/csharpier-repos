@@ -59,28 +59,33 @@ namespace System.Security.Cryptography.X509Certificates
             DiagnosticId = Obsoletions.X509CertificateImmutableDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public X509Certificate2() : base() { }
+        public X509Certificate2()
+            : base() { }
 
-        public X509Certificate2(byte[] rawData) : base(rawData) { }
+        public X509Certificate2(byte[] rawData)
+            : base(rawData) { }
 
-        public X509Certificate2(byte[] rawData, string? password) : base(rawData, password) { }
+        public X509Certificate2(byte[] rawData, string? password)
+            : base(rawData, password) { }
 
         [System.CLSCompliantAttribute(false)]
-        public X509Certificate2(byte[] rawData, SecureString? password) : base(rawData, password)
-        { }
+        public X509Certificate2(byte[] rawData, SecureString? password)
+            : base(rawData, password) { }
 
         public X509Certificate2(
             byte[] rawData,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(rawData, password, keyStorageFlags) { }
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate2(
             byte[] rawData,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(rawData, password, keyStorageFlags) { }
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Certificate2"/> class from certificate data.
@@ -89,7 +94,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   The certificate data to process.
         /// </param>
         /// <exception cref="CryptographicException">An error with the certificate occurs.</exception>
-        public X509Certificate2(ReadOnlySpan<byte> rawData) : base(rawData) { }
+        public X509Certificate2(ReadOnlySpan<byte> rawData)
+            : base(rawData) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="X509Certificate2"/> class from certificate data,
@@ -109,40 +115,49 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) : base(rawData, password, keyStorageFlags) { }
+        )
+            : base(rawData, password, keyStorageFlags) { }
 
-        public X509Certificate2(IntPtr handle) : base(handle) { }
+        public X509Certificate2(IntPtr handle)
+            : base(handle) { }
 
-        internal X509Certificate2(ICertificatePal pal) : base(pal) { }
+        internal X509Certificate2(ICertificatePal pal)
+            : base(pal) { }
 
-        public X509Certificate2(string fileName) : base(fileName) { }
+        public X509Certificate2(string fileName)
+            : base(fileName) { }
 
-        public X509Certificate2(string fileName, string? password) : base(fileName, password) { }
+        public X509Certificate2(string fileName, string? password)
+            : base(fileName, password) { }
 
         [System.CLSCompliantAttribute(false)]
-        public X509Certificate2(string fileName, SecureString? password) : base(fileName, password)
-        { }
+        public X509Certificate2(string fileName, SecureString? password)
+            : base(fileName, password) { }
 
         public X509Certificate2(
             string fileName,
             string? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(fileName, password, keyStorageFlags) { }
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         [System.CLSCompliantAttribute(false)]
         public X509Certificate2(
             string fileName,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : base(fileName, password, keyStorageFlags) { }
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
         public X509Certificate2(
             string fileName,
             ReadOnlySpan<char> password,
             X509KeyStorageFlags keyStorageFlags = 0
-        ) : base(fileName, password, keyStorageFlags) { }
+        )
+            : base(fileName, password, keyStorageFlags) { }
 
-        public X509Certificate2(X509Certificate certificate) : base(certificate) { }
+        public X509Certificate2(X509Certificate certificate)
+            : base(certificate) { }
 
         protected X509Certificate2(SerializationInfo info, StreamingContext context)
             : base(info, context)

@@ -55,7 +55,8 @@ namespace System.Linq.Expressions
 
     internal sealed class SymbolDocumentWithGuids : SymbolDocumentInfo
     {
-        internal SymbolDocumentWithGuids(string fileName, ref Guid language) : base(fileName)
+        internal SymbolDocumentWithGuids(string fileName, ref Guid language)
+            : base(fileName)
         {
             Language = language;
             DocumentType = DocumentType_Text;
@@ -74,7 +75,8 @@ namespace System.Linq.Expressions
             ref Guid language,
             ref Guid vendor,
             ref Guid documentType
-        ) : base(fileName)
+        )
+            : base(fileName)
         {
             Language = language;
             LanguageVendor = vendor;

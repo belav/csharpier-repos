@@ -89,7 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             OptionStore optionStore,
             string groupName,
             List<CodeStylePreference> preferences
-        ) : base(option, description, info, groupName, preferences)
+        )
+            : base(option, description, info, groupName, preferences)
         {
             Debug.Assert(preferences.Count == enumValues.Length);
             Debug.Assert(previews.Length == enumValues.Length);

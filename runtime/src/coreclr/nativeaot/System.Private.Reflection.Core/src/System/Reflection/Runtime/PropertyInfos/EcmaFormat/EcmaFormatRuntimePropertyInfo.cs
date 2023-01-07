@@ -57,7 +57,8 @@ namespace System.Reflection.Runtime.PropertyInfos.EcmaFormat
             EcmaFormatRuntimeNamedTypeInfo definingTypeInfo,
             RuntimeTypeInfo contextTypeInfo,
             RuntimeTypeInfo reflectedType
-        ) : base(contextTypeInfo, reflectedType)
+        )
+            : base(contextTypeInfo, reflectedType)
         {
             _propertyHandle = propertyHandle;
             _definingTypeInfo = definingTypeInfo;

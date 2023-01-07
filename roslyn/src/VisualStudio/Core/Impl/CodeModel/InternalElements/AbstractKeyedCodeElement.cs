@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) : base(state, fileCodeModel, nodeKind)
+        )
+            : base(state, fileCodeModel, nodeKind)
         {
             _nodeKey = nodeKey;
             _name = null;
@@ -38,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) : base(state, fileCodeModel, nodeKind)
+        )
+            : base(state, fileCodeModel, nodeKind)
         {
             _nodeKey = new SyntaxNodeKey(name, -1);
             _name = name;

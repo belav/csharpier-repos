@@ -18,12 +18,14 @@ namespace System
     )]
     public sealed class DataMisalignedException : SystemException
     {
-        public DataMisalignedException() : base(SR.Arg_DataMisalignedException)
+        public DataMisalignedException()
+            : base(SR.Arg_DataMisalignedException)
         {
             HResult = HResults.COR_E_DATAMISALIGNED;
         }
 
-        public DataMisalignedException(string? message) : base(message)
+        public DataMisalignedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_DATAMISALIGNED;
         }

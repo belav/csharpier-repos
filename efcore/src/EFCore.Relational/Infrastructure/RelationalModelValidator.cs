@@ -31,7 +31,8 @@ public class RelationalModelValidator : ModelValidator
     public RelationalModelValidator(
         ModelValidatorDependencies dependencies,
         RelationalModelValidatorDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

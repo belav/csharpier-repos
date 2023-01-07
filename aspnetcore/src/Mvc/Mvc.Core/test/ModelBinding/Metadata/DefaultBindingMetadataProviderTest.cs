@@ -845,9 +845,11 @@ public class DefaultModelMetadataBindingDetailsProviderTest
 
     private record RecordTypeWithMultipleConstructors(string Name)
     {
-        public RecordTypeWithMultipleConstructors(string Name, int age) : this(Name) => Age = age;
+        public RecordTypeWithMultipleConstructors(string Name, int age)
+            : this(Name) => Age = age;
 
-        public RecordTypeWithMultipleConstructors(int age) : this(string.Empty, age) { }
+        public RecordTypeWithMultipleConstructors(int age)
+            : this(string.Empty, age) { }
 
         public int Age { get; set; }
     }

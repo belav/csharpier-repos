@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities
             Func<string> generateParameterName,
             bool sensitiveLoggingEnabled,
             IReadOnlyList<ColumnModification> columnModifications
-        ) : base(name, schema, generateParameterName, sensitiveLoggingEnabled, null)
+        )
+            : base(name, schema, generateParameterName, sensitiveLoggingEnabled, null)
         {
             ColumnModifications = columnModifications;
         }

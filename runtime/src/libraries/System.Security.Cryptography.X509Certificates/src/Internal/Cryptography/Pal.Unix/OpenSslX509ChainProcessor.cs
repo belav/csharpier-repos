@@ -1361,7 +1361,8 @@ namespace Internal.Cryptography.Pal
             internal bool AbortedForSignatureError { get; private set; }
             internal int LastError { get; private set; }
 
-            internal WorkingChain() : this(s_defaultAbort)
+            internal WorkingChain()
+                : this(s_defaultAbort)
             {
                 LastError = -1;
             }

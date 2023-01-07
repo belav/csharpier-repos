@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class GotoKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public GotoKeywordRecommender() : base(SyntaxKind.GotoKeyword) { }
+        public GotoKeywordRecommender()
+            : base(SyntaxKind.GotoKeyword) { }
 
         protected override bool IsValidContext(
             int position,

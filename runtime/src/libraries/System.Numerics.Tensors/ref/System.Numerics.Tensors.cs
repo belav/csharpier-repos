@@ -107,18 +107,21 @@ namespace System.Numerics.Tensors
             int nonZeroCount,
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        )
+            : base(default(System.Array), default(bool)) { }
 
         public CompressedSparseTensor(
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        )
+            : base(default(System.Array), default(bool)) { }
 
         public CompressedSparseTensor(
             System.ReadOnlySpan<int> dimensions,
             int capacity,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        )
+            : base(default(System.Array), default(bool)) { }
 
         public int Capacity
         {
@@ -190,13 +193,15 @@ namespace System.Numerics.Tensors
 
     public partial class DenseTensor<T> : System.Numerics.Tensors.Tensor<T>
     {
-        public DenseTensor(int length) : base(default(System.Array), default(bool)) { }
+        public DenseTensor(int length)
+            : base(default(System.Array), default(bool)) { }
 
         public DenseTensor(
             System.Memory<T> memory,
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(default(System.Array), default(bool)) { }
+        )
+            : base(default(System.Array), default(bool)) { }
 
         public DenseTensor(System.ReadOnlySpan<int> dimensions, bool reverseStride = false)
             : base(default(System.Array), default(bool)) { }
@@ -246,7 +251,8 @@ namespace System.Numerics.Tensors
             System.ReadOnlySpan<int> dimensions,
             bool reverseStride = false,
             int capacity = 0
-        ) : base(default(System.Array), default(bool)) { }
+        )
+            : base(default(System.Array), default(bool)) { }
 
         public int NonZeroCount
         {

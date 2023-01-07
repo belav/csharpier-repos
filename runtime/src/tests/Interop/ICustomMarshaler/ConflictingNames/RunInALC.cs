@@ -58,7 +58,8 @@ public class RunInALC
 
 class UnloadableLoadContext : AssemblyLoadContext
 {
-    public UnloadableLoadContext() : base(true) { }
+    public UnloadableLoadContext()
+        : base(true) { }
 
     protected override Assembly Load(AssemblyName assemblyName)
     {

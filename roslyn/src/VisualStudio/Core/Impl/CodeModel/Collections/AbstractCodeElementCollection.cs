@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     {
         private readonly ParentHandle<object> _parentHandle;
 
-        internal AbstractCodeElementCollection(CodeModelState state, object parent) : base(state)
+        internal AbstractCodeElementCollection(CodeModelState state, object parent)
+            : base(state)
         {
             Debug.Assert(parent != null);
 

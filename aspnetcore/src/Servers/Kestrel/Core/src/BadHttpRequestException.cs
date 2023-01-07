@@ -23,7 +23,8 @@ public sealed class BadHttpRequestException : Microsoft.AspNetCore.Http.BadHttpR
         int statusCode,
         RequestRejectionReason reason,
         HttpMethod? requiredMethod
-    ) : base(message, statusCode)
+    )
+        : base(message, statusCode)
     {
         Reason = reason;
 

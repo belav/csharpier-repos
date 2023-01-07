@@ -14,7 +14,8 @@ public class RemoveExternalLogin : DefaultUIPage
         HttpClient client,
         IHtmlDocument externalLogin,
         DefaultUIContext context
-    ) : base(client, externalLogin, context)
+    )
+        : base(client, externalLogin, context)
     {
         _removeLoginForm = HtmlAssert.HasForm($"#remove-login-Contoso", externalLogin);
     }

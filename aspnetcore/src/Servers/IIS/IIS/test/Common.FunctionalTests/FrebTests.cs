@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class FrebTests : IISFunctionalTestBase
 {
-    public FrebTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public FrebTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     public static IList<FrebLogItem> FrebChecks()
     {

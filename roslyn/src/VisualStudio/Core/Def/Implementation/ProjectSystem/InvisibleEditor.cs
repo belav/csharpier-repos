@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IVsHierarchy? hierarchy,
             bool needsSave,
             bool needsUndoDisabled
-        ) : base(serviceProvider.GetMefService<IThreadingContext>(), assertIsForeground: true)
+        )
+            : base(serviceProvider.GetMefService<IThreadingContext>(), assertIsForeground: true)
         {
             _serviceProvider = serviceProvider;
             _filePath = filePath;

@@ -972,7 +972,8 @@ public class Picard { }
                 new DkmException(DkmExceptionCode.E_PROCESS_DESTROYED)
             );
 
-            public BadType(System.Type innerType) : base((TypeImpl)innerType) { }
+            public BadType(System.Type innerType)
+                : base((TypeImpl)innerType) { }
 
             public override VisualStudio.Debugger.Metadata.Type GetLmrType()
             {

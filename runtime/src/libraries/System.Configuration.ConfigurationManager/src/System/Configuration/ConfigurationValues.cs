@@ -13,7 +13,8 @@ namespace System.Configuration
         private volatile bool _containsElement;
         private volatile bool _containsInvalidValue;
 
-        internal ConfigurationValues() : base(StringComparer.Ordinal) { }
+        internal ConfigurationValues()
+            : base(StringComparer.Ordinal) { }
 
         internal object this[string key]
         {

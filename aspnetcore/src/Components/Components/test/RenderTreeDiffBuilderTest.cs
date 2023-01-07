@@ -2513,7 +2513,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
 
     private class FakeRenderer : Renderer
     {
-        public FakeRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public FakeRenderer()
+            : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

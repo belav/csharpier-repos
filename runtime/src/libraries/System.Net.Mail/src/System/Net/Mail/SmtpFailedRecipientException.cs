@@ -19,9 +19,11 @@ namespace System.Net.Mail
         internal bool fatal;
 #pragma warning restore CS0649
 
-        public SmtpFailedRecipientException() : base() { }
+        public SmtpFailedRecipientException()
+            : base() { }
 
-        public SmtpFailedRecipientException(string? message) : base(message) { }
+        public SmtpFailedRecipientException(string? message)
+            : base(message) { }
 
         public SmtpFailedRecipientException(string? message, Exception? innerException)
             : base(message, innerException) { }
@@ -42,7 +44,8 @@ namespace System.Net.Mail
             SmtpStatusCode statusCode,
             string? failedRecipient,
             string? serverResponse
-        ) : base(statusCode, serverResponse, true)
+        )
+            : base(statusCode, serverResponse, true)
         {
             _failedRecipient = failedRecipient;
         }
@@ -51,7 +54,8 @@ namespace System.Net.Mail
             string? message,
             string? failedRecipient,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _failedRecipient = failedRecipient;
         }

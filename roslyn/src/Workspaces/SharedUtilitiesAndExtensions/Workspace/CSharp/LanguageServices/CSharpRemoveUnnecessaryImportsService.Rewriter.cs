@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryImports
             public Rewriter(
                 ISet<UsingDirectiveSyntax> unnecessaryUsings,
                 CancellationToken cancellationToken
-            ) : base(visitIntoStructuredTrivia: true)
+            )
+                : base(visitIntoStructuredTrivia: true)
             {
                 _unnecessaryUsingsDoNotAccessDirectly = unnecessaryUsings;
                 _cancellationToken = cancellationToken;

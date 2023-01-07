@@ -27,7 +27,8 @@ internal struct ArrayBuilder<T>
     /// Initializes the <see cref="ArrayBuilder{T}"/> with a specified capacity.
     /// </summary>
     /// <param name="capacity">The capacity of the array to allocate.</param>
-    public ArrayBuilder(int capacity) : this()
+    public ArrayBuilder(int capacity)
+        : this()
     {
         Debug.Assert(capacity >= 0);
         if (capacity > 0)

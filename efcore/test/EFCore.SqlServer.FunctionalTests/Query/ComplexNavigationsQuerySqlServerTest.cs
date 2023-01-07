@@ -11,7 +11,8 @@ public class ComplexNavigationsQuerySqlServerTest
     public ComplexNavigationsQuerySqlServerTest(
         ComplexNavigationsQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

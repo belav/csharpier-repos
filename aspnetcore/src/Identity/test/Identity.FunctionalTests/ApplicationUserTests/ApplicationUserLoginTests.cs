@@ -10,5 +10,6 @@ public class ApplicationUserLoginTests : LoginTests<ApplicationUserStartup, Appl
 {
     public ApplicationUserLoginTests(
         ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
-    ) : base(serverFactory) { }
+    )
+        : base(serverFactory) { }
 }

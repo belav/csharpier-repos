@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     /// </summary>
     internal sealed class ReferenceResult : Vertex
     {
-        public ReferenceResult(IdFactory idFactory) : base(label: "referenceResult", idFactory) { }
+        public ReferenceResult(IdFactory idFactory)
+            : base(label: "referenceResult", idFactory) { }
     }
 }

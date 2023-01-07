@@ -28,7 +28,8 @@ public class ControllerContext : ActionContext
     /// Creates a new <see cref="ControllerContext"/>.
     /// </summary>
     /// <param name="context">The <see cref="ActionContext"/> associated with the current request.</param>
-    public ControllerContext(ActionContext context) : base(context)
+    public ControllerContext(ActionContext context)
+        : base(context)
     {
         if (!(context.ActionDescriptor is ControllerActionDescriptor))
         {
@@ -51,7 +52,8 @@ public class ControllerContext : ActionContext
         HttpContext httpContext,
         RouteData routeData,
         ControllerActionDescriptor actionDescriptor
-    ) : base(httpContext, routeData, actionDescriptor) { }
+    )
+        : base(httpContext, routeData, actionDescriptor) { }
 
     /// <summary>
     /// Gets or sets the <see cref="ControllerActionDescriptor"/> associated with the current request.

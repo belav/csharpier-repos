@@ -14,12 +14,14 @@ internal class AutoCompleteEditHandler : SpanEditHandler
 
     public AutoCompleteEditHandler(
         Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer
-    ) : base(tokenizer) { }
+    )
+        : base(tokenizer) { }
 
     public AutoCompleteEditHandler(
         Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,
         bool autoCompleteAtEndOfSpan
-    ) : this(tokenizer)
+    )
+        : this(tokenizer)
     {
         AutoCompleteAtEndOfSpan = autoCompleteAtEndOfSpan;
     }
@@ -27,7 +29,8 @@ internal class AutoCompleteEditHandler : SpanEditHandler
     public AutoCompleteEditHandler(
         Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,
         AcceptedCharactersInternal accepted
-    ) : base(tokenizer, accepted) { }
+    )
+        : base(tokenizer, accepted) { }
 
     public bool AutoCompleteAtEndOfSpan { get; }
 

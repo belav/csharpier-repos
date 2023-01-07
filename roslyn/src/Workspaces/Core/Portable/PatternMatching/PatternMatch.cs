@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             bool punctuationStripped,
             bool isCaseSensitive,
             ImmutableArray<TextSpan> matchedSpans
-        ) : this()
+        )
+            : this()
         {
             this.Kind = resultType;
             this.IsCaseSensitive = isCaseSensitive;

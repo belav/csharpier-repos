@@ -52,7 +52,8 @@ namespace Exchange
         private int numberOfIterations;
         private float valueToAdd;
 
-        public ThreadSafe() : this(100, 10.12345F) { }
+        public ThreadSafe()
+            : this(100, 10.12345F) { }
 
         public ThreadSafe(int loops, float addend)
         {

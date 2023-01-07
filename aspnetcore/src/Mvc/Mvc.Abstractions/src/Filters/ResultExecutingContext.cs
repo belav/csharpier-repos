@@ -21,7 +21,8 @@ public class ResultExecutingContext : FilterContext
         IList<IFilterMetadata> filters,
         IActionResult result,
         object controller
-    ) : base(actionContext, filters)
+    )
+        : base(actionContext, filters)
     {
         Result = result;
         Controller = controller;

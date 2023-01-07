@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
         public MoveStaticMembersDialogViewModel ViewModel { get; }
         public StaticMemberSelection MemberSelectionControl { get; }
 
-        internal MoveStaticMembersDialog(MoveStaticMembersDialogViewModel viewModel) : base()
+        internal MoveStaticMembersDialog(MoveStaticMembersDialogViewModel viewModel)
+            : base()
         {
             ViewModel = viewModel;
             DataContext = viewModel;

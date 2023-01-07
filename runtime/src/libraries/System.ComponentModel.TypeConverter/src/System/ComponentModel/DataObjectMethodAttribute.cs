@@ -8,8 +8,8 @@ namespace System.ComponentModel
     [AttributeUsage(AttributeTargets.Method)]
     public sealed class DataObjectMethodAttribute : Attribute
     {
-        public DataObjectMethodAttribute(DataObjectMethodType methodType) : this(methodType, false)
-        { }
+        public DataObjectMethodAttribute(DataObjectMethodType methodType)
+            : this(methodType, false) { }
 
         public DataObjectMethodAttribute(DataObjectMethodType methodType, bool isDefault)
         {

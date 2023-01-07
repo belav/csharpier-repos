@@ -18,13 +18,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
 
         public string AssemblyName { get; }
 
-        public TestApp(string basePath, string assemblyName = null) : base(basePath)
+        public TestApp(string basePath, string assemblyName = null)
+            : base(basePath)
         {
             AssemblyName = assemblyName ?? Name;
             LoadAssets();
         }
 
-        public TestApp(TestApp source) : base(source)
+        public TestApp(TestApp source)
+            : base(source)
         {
             AssemblyName = source.AssemblyName;
             LoadAssets();

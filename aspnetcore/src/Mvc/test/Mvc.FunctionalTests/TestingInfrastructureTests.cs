@@ -272,7 +272,8 @@ public class TestingInfrastructureTests
     {
         public TestHandler() { }
 
-        public TestHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+        public TestHandler(HttpMessageHandler innerHandler)
+            : base(innerHandler) { }
 
         public bool HeaderAdded { get; set; }
 

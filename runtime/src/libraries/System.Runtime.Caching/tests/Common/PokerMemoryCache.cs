@@ -64,8 +64,8 @@ namespace MonoTests.Common
             }
         }
 
-        public PokerMemoryCache(string name, NameValueCollection config = null) : base(name, config)
-        { }
+        public PokerMemoryCache(string name, NameValueCollection config = null)
+            : base(name, config) { }
 
         public override CacheItem AddOrGetExisting(CacheItem item, CacheItemPolicy policy)
         {

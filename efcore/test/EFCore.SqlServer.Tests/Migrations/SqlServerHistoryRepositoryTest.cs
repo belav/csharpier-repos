@@ -181,7 +181,8 @@ public class SqlServerHistoryRepositoryTest
 
     private class TestDbContext : DbContext
     {
-        public TestDbContext(DbContextOptions options) : base(options) { }
+        public TestDbContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog> Blogs { get; set; }
 

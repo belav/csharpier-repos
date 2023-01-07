@@ -2917,7 +2917,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             public sealed class AndSequence : SequenceTests
             {
-                private AndSequence(ImmutableArray<Tests> remainingTests) : base(remainingTests) { }
+                private AndSequence(ImmutableArray<Tests> remainingTests)
+                    : base(remainingTests) { }
 
                 public override Tests Update(ArrayBuilder<Tests> remainingTests) =>
                     Create(remainingTests);
@@ -3004,7 +3005,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             public sealed class OrSequence : SequenceTests
             {
-                private OrSequence(ImmutableArray<Tests> remainingTests) : base(remainingTests) { }
+                private OrSequence(ImmutableArray<Tests> remainingTests)
+                    : base(remainingTests) { }
 
                 public override BoundDagTest ComputeSelectedTest() =>
                     this.RemainingTests[0].ComputeSelectedTest();

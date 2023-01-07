@@ -31,7 +31,8 @@ public class CreatedAtActionResult : ObjectResult
         string? controllerName,
         object? routeValues,
         [ActionResultObjectValue] object? value
-    ) : base(value)
+    )
+        : base(value)
     {
         ActionName = actionName;
         ControllerName = controllerName;

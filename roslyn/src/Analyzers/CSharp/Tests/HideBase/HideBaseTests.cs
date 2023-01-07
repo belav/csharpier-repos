@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.HideBase
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddNew)]
     public class HideBaseTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public HideBaseTests(ITestOutputHelper logger) : base(logger) { }
+        public HideBaseTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

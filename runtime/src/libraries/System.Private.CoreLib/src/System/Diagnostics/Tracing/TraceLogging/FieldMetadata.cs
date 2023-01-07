@@ -61,7 +61,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingDataType type,
             EventFieldTags tags,
             ushort fixedCount
-        ) : this(name, type, tags, Statics.InTypeFixedCountFlag, fixedCount, null) { }
+        )
+            : this(name, type, tags, Statics.InTypeFixedCountFlag, fixedCount, null) { }
 
         /// <summary>
         /// Custom serializer

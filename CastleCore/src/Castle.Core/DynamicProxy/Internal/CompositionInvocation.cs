@@ -27,7 +27,8 @@ namespace Castle.DynamicProxy.Internal
             IInterceptor[] interceptors,
             MethodInfo proxiedMethod,
             object[] arguments
-        ) : base(proxy, interceptors, proxiedMethod, arguments)
+        )
+            : base(proxy, interceptors, proxiedMethod, arguments)
         {
             this.target = target;
         }

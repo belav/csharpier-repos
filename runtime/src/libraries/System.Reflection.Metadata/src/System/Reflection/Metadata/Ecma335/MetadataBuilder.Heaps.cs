@@ -16,7 +16,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             private int _capacityExpansion;
 
-            public HeapBlobBuilder(int capacity) : base(capacity) { }
+            public HeapBlobBuilder(int capacity)
+                : base(capacity) { }
 
             protected override BlobBuilder AllocateChunk(int minimalSize)
             {

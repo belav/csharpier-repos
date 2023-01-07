@@ -64,7 +64,8 @@ namespace System.Formats.Asn1
         ///   Specifying <paramref name="initialCapacity" /> with a value of zero behaves as if no initial capacity were
         ///   specified.
         /// </remarks>
-        public AsnWriter(AsnEncodingRules ruleSet, int initialCapacity) : this(ruleSet)
+        public AsnWriter(AsnEncodingRules ruleSet, int initialCapacity)
+            : this(ruleSet)
         {
             if (initialCapacity < 0)
                 throw new ArgumentOutOfRangeException(

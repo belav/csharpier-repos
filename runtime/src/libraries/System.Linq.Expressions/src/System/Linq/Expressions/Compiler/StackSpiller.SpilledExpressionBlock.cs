@@ -47,8 +47,8 @@ namespace System.Linq.Expressions.Compiler
     /// </summary>
     internal sealed class SpilledExpressionBlock : BlockN
     {
-        internal SpilledExpressionBlock(IReadOnlyList<Expression> expressions) : base(expressions)
-        { }
+        internal SpilledExpressionBlock(IReadOnlyList<Expression> expressions)
+            : base(expressions) { }
 
         [ExcludeFromCodeCoverage(Justification = "Unreachable")]
         internal override BlockExpression Rewrite(

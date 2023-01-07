@@ -101,7 +101,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal sealed class SafeOcspRequestHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeOcspRequestHandle() : base(true) { }
+        public SafeOcspRequestHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -113,7 +114,8 @@ namespace System.Security.Cryptography.X509Certificates
 
     internal sealed class SafeOcspResponseHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeOcspResponseHandle() : base(true) { }
+        public SafeOcspResponseHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

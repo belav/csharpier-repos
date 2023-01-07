@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CapturedToFrameSymbolReplacement(
             LambdaCapturedVariable hoistedField,
             bool isReusable
-        ) : base(isReusable)
+        )
+            : base(isReusable)
         {
             this.HoistedField = hoistedField;
         }
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public CapturedToStateMachineFieldReplacement(
             StateMachineFieldSymbol hoistedField,
             bool isReusable
-        ) : base(isReusable)
+        )
+            : base(isReusable)
         {
             this.HoistedField = hoistedField;
         }
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression replacement,
             ImmutableArray<StateMachineFieldSymbol> hoistedFields,
             bool isReusable
-        ) : base(isReusable)
+        )
+            : base(isReusable)
         {
             _replacement = replacement;
             this.HoistedFields = hoistedFields;

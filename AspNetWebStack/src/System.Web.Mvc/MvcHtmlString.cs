@@ -16,7 +16,8 @@ namespace System.Web.Mvc
 
         private readonly string _value;
 
-        public MvcHtmlString(string value) : base(value ?? String.Empty)
+        public MvcHtmlString(string value)
+            : base(value ?? String.Empty)
         {
             _value = value ?? String.Empty;
         }

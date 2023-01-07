@@ -138,7 +138,8 @@ namespace System.Data.Common
             Type type,
             object? defaultValue,
             StorageType storageType
-        ) : this(column, type, defaultValue, DBNull.Value, false, storageType) { }
+        )
+            : this(column, type, defaultValue, DBNull.Value, false, storageType) { }
 
         protected DataStorage(
             DataColumn column,
@@ -146,7 +147,8 @@ namespace System.Data.Common
             object? defaultValue,
             object nullValue,
             StorageType storageType
-        ) : this(column, type, defaultValue, nullValue, false, storageType) { }
+        )
+            : this(column, type, defaultValue, nullValue, false, storageType) { }
 
         protected DataStorage(
             DataColumn column,

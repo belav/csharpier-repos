@@ -162,7 +162,8 @@ namespace System.IO
             FileAccess access,
             FileShare share,
             int bufferSize
-        ) : this(path, mode, access, share, bufferSize, DefaultIsAsync) { }
+        )
+            : this(path, mode, access, share, bufferSize, DefaultIsAsync) { }
 
         public FileStream(
             string path,
@@ -188,7 +189,8 @@ namespace System.IO
             FileShare share,
             int bufferSize,
             FileOptions options
-        ) : this(path, mode, access, share, bufferSize, options, 0) { }
+        )
+            : this(path, mode, access, share, bufferSize, options, 0) { }
 
         ~FileStream()
         {

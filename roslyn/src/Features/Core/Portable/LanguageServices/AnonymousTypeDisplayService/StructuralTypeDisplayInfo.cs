@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
         public StructuralTypeDisplayInfo(
             IDictionary<INamedTypeSymbol, string> structuralTypeToName,
             IList<SymbolDisplayPart> typesParts
-        ) : this()
+        )
+            : this()
         {
             StructuralTypeToName = structuralTypeToName;
             TypesParts = typesParts;

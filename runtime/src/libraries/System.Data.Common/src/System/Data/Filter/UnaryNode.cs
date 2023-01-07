@@ -15,7 +15,8 @@ namespace System.Data
 
         internal ExpressionNode _right;
 
-        internal UnaryNode(DataTable? table, int op, ExpressionNode right) : base(table)
+        internal UnaryNode(DataTable? table, int op, ExpressionNode right)
+            : base(table)
         {
             _op = op;
             _right = right;

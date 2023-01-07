@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Remote
             string? workspaceKind,
             SolutionInfo solutionInfo,
             SerializableOptionSet options
-        ) : base(hostServices, workspaceKind)
+        )
+            : base(hostServices, workspaceKind)
         {
             SetOptions(Options.WithChangedOption(CacheOptions.RecoverableTreeLengthThreshold, 0));
 

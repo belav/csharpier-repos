@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class ManyToManyTrackingSqliteTest
     : ManyToManyTrackingRelationalTestBase<ManyToManyTrackingSqliteTest.ManyToManyTrackingSqliteFixture>
 {
-    public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture) : base(fixture) { }
+    public ManyToManyTrackingSqliteTest(ManyToManyTrackingSqliteFixture fixture)
+        : base(fixture) { }
 
     public class ManyToManyTrackingSqliteFixture : ManyToManyTrackingRelationalFixture
     {

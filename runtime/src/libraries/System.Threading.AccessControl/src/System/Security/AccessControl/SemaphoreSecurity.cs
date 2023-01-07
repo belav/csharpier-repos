@@ -79,7 +79,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         public SemaphoreRights SemaphoreRights
         {
@@ -110,7 +111,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         public SemaphoreRights SemaphoreRights
         {
@@ -120,7 +122,8 @@ namespace System.Security.AccessControl
 
     public sealed class SemaphoreSecurity : NativeObjectSecurity
     {
-        public SemaphoreSecurity() : base(true, ResourceType.KernelObject) { }
+        public SemaphoreSecurity()
+            : base(true, ResourceType.KernelObject) { }
 
         public SemaphoreSecurity(string name, AccessControlSections includeSections)
             : base(true, ResourceType.KernelObject, name, includeSections, HandleErrorCode, null)

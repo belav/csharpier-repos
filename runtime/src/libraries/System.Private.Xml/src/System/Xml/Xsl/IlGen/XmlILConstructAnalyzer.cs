@@ -843,7 +843,8 @@ namespace System.Xml.Xsl.IlGen
         /// <summary>
         /// Constructor.
         /// </summary>
-        public XmlILElementAnalyzer(QilFactory fac) : base(fac) { }
+        public XmlILElementAnalyzer(QilFactory fac)
+            : base(fac) { }
 
         /// <summary>
         /// Analyze the content argument of the ElementCtor.  Try to eliminate as many runtime checks as possible,

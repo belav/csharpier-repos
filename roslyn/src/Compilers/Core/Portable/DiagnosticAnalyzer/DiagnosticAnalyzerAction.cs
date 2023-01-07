@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<SymbolAnalysisContext> action,
             ImmutableArray<SymbolKind> kinds,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
             Kinds = kinds;
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<SymbolStartAnalysisContext> action,
             SymbolKind kind,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
             Kind = kind;
@@ -57,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SymbolEndAnalyzerAction(
             Action<SymbolAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -73,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> kinds,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
             Kinds = kinds;
@@ -87,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public OperationBlockStartAnalyzerAction(
             Action<OperationBlockStartAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -100,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public OperationBlockAnalyzerAction(
             Action<OperationBlockAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -115,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Action<OperationAnalysisContext> action,
             ImmutableArray<OperationKind> kinds,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
             Kinds = kinds;
@@ -129,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public CompilationStartAnalyzerAction(
             Action<CompilationStartAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -142,7 +150,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public CompilationAnalyzerAction(
             Action<CompilationAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -155,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SemanticModelAnalyzerAction(
             Action<SemanticModelAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -168,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public SyntaxTreeAnalyzerAction(
             Action<SyntaxTreeAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -181,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public AdditionalFileAnalyzerAction(
             Action<AdditionalFileAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -195,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public CodeBlockStartAnalyzerAction(
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }
@@ -208,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public CodeBlockAnalyzerAction(
             Action<CodeBlockAnalysisContext> action,
             DiagnosticAnalyzer analyzer
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Action = action;
         }

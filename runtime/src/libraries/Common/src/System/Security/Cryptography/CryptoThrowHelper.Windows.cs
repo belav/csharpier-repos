@@ -48,7 +48,8 @@ namespace Internal.Cryptography
                 throw new NotImplementedException();
             }
 
-            public WindowsCryptographicException(int hr, string message) : base(message)
+            public WindowsCryptographicException(int hr, string message)
+                : base(message)
             {
                 HResult = hr;
             }

@@ -22,7 +22,8 @@ namespace System.CodeDom
             CodeExpression targetObject,
             string eventName,
             CodeExpression listener
-        ) : this(new CodeEventReferenceExpression(targetObject, eventName), listener) { }
+        )
+            : this(new CodeEventReferenceExpression(targetObject, eventName), listener) { }
 
         public CodeEventReferenceExpression Event
         {

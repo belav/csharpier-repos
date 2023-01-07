@@ -21,7 +21,8 @@ namespace System.CommandLine.Help
             AddValidators();
         }
 
-        public VersionOption(string[] aliases, CommandLineBuilder builder) : base(aliases)
+        public VersionOption(string[] aliases, CommandLineBuilder builder)
+            : base(aliases)
         {
             _builder = builder;
 

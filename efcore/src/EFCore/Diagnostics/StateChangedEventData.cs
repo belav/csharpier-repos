@@ -26,7 +26,8 @@ public class StateChangedEventData : EntityEntryEventData
         EntityEntry entityEntry,
         EntityState oldState,
         EntityState newState
-    ) : base(eventDefinition, messageGenerator, entityEntry)
+    )
+        : base(eventDefinition, messageGenerator, entityEntry)
     {
         OldState = oldState;
         NewState = newState;

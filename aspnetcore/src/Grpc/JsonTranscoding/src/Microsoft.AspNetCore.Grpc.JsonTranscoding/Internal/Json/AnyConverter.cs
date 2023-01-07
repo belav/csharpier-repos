@@ -15,7 +15,8 @@ internal sealed class AnyConverter<TMessage> : SettingsConverterBase<TMessage>
     internal const string AnyTypeUrlField = "@type";
     internal const string AnyWellKnownTypeValueField = "value";
 
-    public AnyConverter(JsonContext context) : base(context) { }
+    public AnyConverter(JsonContext context)
+        : base(context) { }
 
     public override TMessage? Read(
         ref Utf8JsonReader reader,

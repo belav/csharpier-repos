@@ -8,7 +8,8 @@ public class ManyToManyQueryInMemoryTest : ManyToManyQueryTestBase<ManyToManyQue
     public ManyToManyQueryInMemoryTest(
         ManyToManyQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

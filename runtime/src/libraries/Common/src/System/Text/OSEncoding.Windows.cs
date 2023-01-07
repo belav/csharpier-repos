@@ -12,7 +12,8 @@ namespace System.Text
         private readonly int _codePage;
         private string? _encodingName;
 
-        internal OSEncoding(int codePage) : base(codePage)
+        internal OSEncoding(int codePage)
+            : base(codePage)
         {
             _codePage = codePage;
         }

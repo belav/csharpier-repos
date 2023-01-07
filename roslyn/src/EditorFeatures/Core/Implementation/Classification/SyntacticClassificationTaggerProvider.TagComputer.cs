@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
                 IAsynchronousOperationListener asyncListener,
                 IClassificationTypeMap typeMap,
                 TimeSpan diffTimeout
-            ) : base(taggerProvider.ThreadingContext, assertIsForeground: false)
+            )
+                : base(taggerProvider.ThreadingContext, assertIsForeground: false)
             {
                 _taggerProvider = taggerProvider;
                 _subjectBuffer = subjectBuffer;

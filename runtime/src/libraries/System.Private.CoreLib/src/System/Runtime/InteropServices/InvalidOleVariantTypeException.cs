@@ -15,12 +15,14 @@ namespace System.Runtime.InteropServices
     )]
     public class InvalidOleVariantTypeException : SystemException
     {
-        public InvalidOleVariantTypeException() : base(SR.Arg_InvalidOleVariantTypeException)
+        public InvalidOleVariantTypeException()
+            : base(SR.Arg_InvalidOleVariantTypeException)
         {
             HResult = HResults.COR_E_INVALIDOLEVARIANTTYPE;
         }
 
-        public InvalidOleVariantTypeException(string? message) : base(message)
+        public InvalidOleVariantTypeException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_INVALIDOLEVARIANTTYPE;
         }

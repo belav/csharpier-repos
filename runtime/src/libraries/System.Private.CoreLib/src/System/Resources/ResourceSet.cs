@@ -38,7 +38,8 @@ namespace System.Resources
         // implementation.  Use this constructor to open & read from a file
         // on disk.
         //
-        public ResourceSet(string fileName) : this()
+        public ResourceSet(string fileName)
+            : this()
         {
             Reader = new ResourceReader(fileName);
             ReadResources();
@@ -48,13 +49,15 @@ namespace System.Resources
         // implementation.  Use this constructor to read from an open stream
         // of data.
         //
-        public ResourceSet(Stream stream) : this()
+        public ResourceSet(Stream stream)
+            : this()
         {
             Reader = new ResourceReader(stream);
             ReadResources();
         }
 
-        public ResourceSet(IResourceReader reader) : this()
+        public ResourceSet(IResourceReader reader)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(reader);
 

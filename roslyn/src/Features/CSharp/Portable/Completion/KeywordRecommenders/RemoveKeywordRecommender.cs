@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class RemoveKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public RemoveKeywordRecommender() : base(SyntaxKind.RemoveKeyword) { }
+        public RemoveKeywordRecommender()
+            : base(SyntaxKind.RemoveKeyword) { }
 
         protected override bool IsValidContext(
             int position,

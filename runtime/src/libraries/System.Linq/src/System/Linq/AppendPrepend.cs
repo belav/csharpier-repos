@@ -211,7 +211,8 @@ namespace System.Linq
                 SingleLinkedNode<TSource>? appended,
                 int prependCount,
                 int appendCount
-            ) : base(source)
+            )
+                : base(source)
             {
                 Debug.Assert(prepended != null || appended != null);
                 Debug.Assert(prependCount > 0 || appendCount > 0);

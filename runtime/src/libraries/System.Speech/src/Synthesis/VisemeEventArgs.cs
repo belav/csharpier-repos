@@ -13,7 +13,8 @@ namespace System.Speech.Synthesis
             TimeSpan duration,
             SynthesizerEmphasis emphasis,
             int nextViseme
-        ) : base(speakPrompt)
+        )
+            : base(speakPrompt)
         {
             _currentViseme = currentViseme;
             _audioPosition = audioPosition;

@@ -19,7 +19,8 @@ public class UpgradeFeatureDetectionTests : IISFunctionalTestBase
     private readonly string _isWebsocketsSupported =
         Environment.OSVersion.Version >= new Version(6, 2) ? "Enabled" : "Disabled";
 
-    public UpgradeFeatureDetectionTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public UpgradeFeatureDetectionTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public Task UpgradeFeatureDetectionDisabled_InProcess()

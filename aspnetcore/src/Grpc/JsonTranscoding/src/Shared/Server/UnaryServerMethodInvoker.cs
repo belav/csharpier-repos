@@ -50,7 +50,8 @@ internal sealed class UnaryServerMethodInvoker<TService, TRequest, TResponse>
         Method<TRequest, TResponse> method,
         MethodOptions options,
         IGrpcServiceActivator<TService> serviceActivator
-    ) : base(method, options, serviceActivator)
+    )
+        : base(method, options, serviceActivator)
     {
         _invoker = invoker;
 

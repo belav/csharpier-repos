@@ -26,7 +26,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal
             string invariantName,
             string name,
             IRelationalTypeMappingSource typeMappingSource
-        ) : base(invariantName)
+        )
+            : base(invariantName)
         {
             Name = name;
             _typeMappingSource = typeMappingSource;

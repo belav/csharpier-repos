@@ -1841,7 +1841,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
             IConsole errorConsole,
             ConsoleLoggerQueueFullMode fullMode,
             int maxQueueLength
-        ) : base(console, errorConsole, fullMode, maxQueueLength) { }
+        )
+            : base(console, errorConsole, fullMode, maxQueueLength) { }
 
         public override void EnqueueMessage(LogMessageEntry message)
         {

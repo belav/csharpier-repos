@@ -1125,9 +1125,11 @@ namespace System.ComponentModel.Tests
 
         private class SubTypeDescriptionProvider : TypeDescriptionProvider
         {
-            public SubTypeDescriptionProvider() : base() { }
+            public SubTypeDescriptionProvider()
+                : base() { }
 
-            public SubTypeDescriptionProvider(TypeDescriptionProvider parent) : base(parent) { }
+            public SubTypeDescriptionProvider(TypeDescriptionProvider parent)
+                : base(parent) { }
 
             public new IExtenderProvider[] GetExtenderProviders(object instance) =>
                 base.GetExtenderProviders(instance);

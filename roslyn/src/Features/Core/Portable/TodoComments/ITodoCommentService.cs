@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
         public string Message { get; }
         public int Position { get; }
 
-        public TodoComment(TodoCommentDescriptor descriptor, string message, int position) : this()
+        public TodoComment(TodoCommentDescriptor descriptor, string message, int position)
+            : this()
         {
             Descriptor = descriptor;
             Message = message;

@@ -1241,7 +1241,8 @@ namespace System.Xml.Xsl.XsltOld
                 string baseUri,
                 int lineNumber,
                 int linePosition
-            ) : base(null!, expression, false)
+            )
+                : base(null!, expression, false)
             {
                 _baseUri = baseUri;
                 _lineNumber = lineNumber;

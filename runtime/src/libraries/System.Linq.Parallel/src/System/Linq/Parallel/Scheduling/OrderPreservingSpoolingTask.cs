@@ -45,7 +45,8 @@ namespace System.Linq.Parallel
             QueryTaskGroupState groupState,
             Shared<TInputOutput[]?> results,
             SortHelper<TInputOutput> sortHelper
-        ) : base(taskIndex, groupState)
+        )
+            : base(taskIndex, groupState)
         {
             Debug.Assert(groupState != null);
             Debug.Assert(results != null);

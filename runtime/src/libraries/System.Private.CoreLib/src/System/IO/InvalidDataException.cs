@@ -15,12 +15,14 @@ namespace System.IO
     {
         /// <summary>Initializes a new instance of the <see cref="System.IO.InvalidDataException" /> class.</summary>
         /// <remarks>This constructor initializes the <see cref="System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "An invalid argument was specified." This message is localized based on the current system culture.</remarks>
-        public InvalidDataException() : base(SR.GenericInvalidData) { }
+        public InvalidDataException()
+            : base(SR.GenericInvalidData) { }
 
         /// <summary>Initializes a new instance of the <see cref="System.IO.InvalidDataException" /> class with a specified error message.</summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <remarks>This constructor initializes the <see cref="System.Exception.Message" /> property of the new instance to a system-supplied message that describes the error, such as "An invalid argument was specified." This message is localized based on the current system culture.</remarks>
-        public InvalidDataException(string? message) : base(message) { }
+        public InvalidDataException(string? message)
+            : base(message) { }
 
         /// <summary>Initializes a new instance of the <see cref="System.IO.InvalidDataException" /> class with a reference to the inner exception that is the cause of this exception.</summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>

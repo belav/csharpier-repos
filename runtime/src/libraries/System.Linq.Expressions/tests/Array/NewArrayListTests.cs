@@ -1015,7 +1015,8 @@ namespace System.Linq.Expressions.Tests
 
         private class BogusReadOnlyCollection<T> : ReadOnlyCollection<T>
         {
-            public BogusReadOnlyCollection() : base(new BogusCollection<T>()) { }
+            public BogusReadOnlyCollection()
+                : base(new BogusCollection<T>()) { }
         }
 
         private static void CheckGenericArrayListHelper<T>(bool useInterpreter)

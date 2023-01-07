@@ -19,14 +19,16 @@ public readonly struct MemberIdentity : IEquatable<MemberIdentity>
     /// </summary>
     /// <param name="name">The member name.</param>
     [DebuggerStepThrough]
-    public MemberIdentity(string name) : this((object)name) { }
+    public MemberIdentity(string name)
+        : this((object)name) { }
 
     /// <summary>
     ///     Constructs a new <see cref="MemberIdentity" /> from the given <see cref="MemberInfo" />.
     /// </summary>
     /// <param name="memberInfo">The member.</param>
     [DebuggerStepThrough]
-    public MemberIdentity(MemberInfo memberInfo) : this((object)memberInfo) { }
+    public MemberIdentity(MemberInfo memberInfo)
+        : this((object)memberInfo) { }
 
     [DebuggerStepThrough]
     private MemberIdentity(object? nameOrMember)

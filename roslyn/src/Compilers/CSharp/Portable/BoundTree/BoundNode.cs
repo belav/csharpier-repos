@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             this.Syntax = syntax;
         }
 
-        protected BoundNode(BoundKind kind, SyntaxNode syntax, bool hasErrors) : this(kind, syntax)
+        protected BoundNode(BoundKind kind, SyntaxNode syntax, bool hasErrors)
+            : this(kind, syntax)
         {
             if (hasErrors)
             {
@@ -361,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #if DEBUG
         private class MyTreeDumper : TreeDumper
         {
-            private MyTreeDumper() : base() { }
+            private MyTreeDumper()
+                : base() { }
 
             public static new string DumpCompact(TreeDumperNode root)
             {

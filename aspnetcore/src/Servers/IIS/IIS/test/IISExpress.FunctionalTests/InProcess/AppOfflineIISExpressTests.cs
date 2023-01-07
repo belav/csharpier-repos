@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class AppOfflineIISExpressTests : IISFunctionalTestBase
 {
-    public AppOfflineIISExpressTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public AppOfflineIISExpressTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task AppOfflineDroppedWhileSiteStarting_SiteShutsDown_InProcess()

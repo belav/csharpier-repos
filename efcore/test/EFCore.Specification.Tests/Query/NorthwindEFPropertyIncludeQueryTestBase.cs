@@ -13,7 +13,8 @@ public abstract class NorthwindEFPropertyIncludeQueryTestBase<TFixture>
     private static readonly IncludeRewritingExpressionVisitor _includeRewritingExpressionVisitor =
         new();
 
-    protected NorthwindEFPropertyIncludeQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindEFPropertyIncludeQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

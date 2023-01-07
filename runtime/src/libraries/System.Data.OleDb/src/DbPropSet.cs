@@ -16,12 +16,14 @@ namespace System.Data.OleDb
         // stores the exception with last error.HRESULT from IDBProperties.GetProperties
         private Exception? lastErrorFromProvider;
 
-        public DBPropSet() : base(IntPtr.Zero, true)
+        public DBPropSet()
+            : base(IntPtr.Zero, true)
         {
             propertySetCount = 0;
         }
 
-        internal DBPropSet(int propertysetCount) : this()
+        internal DBPropSet(int propertysetCount)
+            : this()
         {
             this.propertySetCount = propertysetCount;
             nuint countOfBytes = (nuint)(propertysetCount * ODB.SizeOf_tagDBPROPSET);
@@ -45,7 +47,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.IDBProperties properties,
             PropertyIDSet? propidset,
             out OleDbHResult hr
-        ) : this()
+        )
+            : this()
         {
             Debug.Assert(null != properties, "null IDBProperties");
 
@@ -72,7 +75,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.IRowsetInfo properties,
             PropertyIDSet? propidset,
             out OleDbHResult hr
-        ) : this()
+        )
+            : this()
         {
             Debug.Assert(null != properties, "null IRowsetInfo");
 
@@ -99,7 +103,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.ICommandProperties properties,
             PropertyIDSet? propidset,
             out OleDbHResult hr
-        ) : this()
+        )
+            : this()
         {
             Debug.Assert(null != properties, "null ICommandProperties");
 

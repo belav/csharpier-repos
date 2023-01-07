@@ -13,7 +13,8 @@ namespace Microsoft.Interop.JavaScript
     {
         private MarshalerType _elementMarshalerType;
 
-        public ArrayJSGenerator(MarshalerType elementMarshalerType) : base(MarshalerType.Array)
+        public ArrayJSGenerator(MarshalerType elementMarshalerType)
+            : base(MarshalerType.Array)
         {
             _elementMarshalerType = elementMarshalerType;
         }

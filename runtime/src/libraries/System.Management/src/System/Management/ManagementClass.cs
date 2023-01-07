@@ -144,7 +144,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim c As New ManagementClass()
         ///    </code>
         /// </example>
-        public ManagementClass() : this((ManagementScope)null, (ManagementPath)null, null) { }
+        public ManagementClass()
+            : this((ManagementScope)null, (ManagementPath)null, null) { }
 
         //parameterized constructors
         /// <summary>
@@ -164,7 +165,8 @@ namespace System.Management
         ///     New ManagementPath("Win32_LogicalDisk"))
         ///    </code>
         /// </example>
-        public ManagementClass(ManagementPath path) : this(null, path, null) { }
+        public ManagementClass(ManagementPath path)
+            : this(null, path, null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class initialized to the given path.</para>
@@ -177,7 +179,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim c As New ManagementClass("Win32_LogicalDisk")
         ///    </code>
         /// </example>
-        public ManagementClass(string path) : this(null, new ManagementPath(path), null) { }
+        public ManagementClass(string path)
+            : this(null, new ManagementPath(path), null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementClass'/> class initialized to the

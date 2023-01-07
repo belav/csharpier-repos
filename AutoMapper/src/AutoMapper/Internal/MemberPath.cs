@@ -5,7 +5,8 @@ public readonly record struct MemberPath(MemberInfo[] Members)
 {
     public static readonly MemberPath Empty = new(Array.Empty<MemberInfo>());
 
-    public MemberPath(Stack<Member> members) : this(members.ToMemberInfos()) { }
+    public MemberPath(Stack<Member> members)
+        : this(members.ToMemberInfos()) { }
 
     public MemberInfo Last => Members[^1];
     public MemberInfo First => Members[0];

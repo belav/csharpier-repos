@@ -15,7 +15,8 @@ public class PublishedApplicationPublisher : ApplicationPublisher
 {
     private readonly string _applicationName;
 
-    public PublishedApplicationPublisher(string applicationName) : base(applicationName)
+    public PublishedApplicationPublisher(string applicationName)
+        : base(applicationName)
     {
         _applicationName = applicationName;
     }

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 internal sealed class ListValueConverter<TMessage> : SettingsConverterBase<TMessage>
     where TMessage : IMessage, new()
 {
-    public ListValueConverter(JsonContext context) : base(context) { }
+    public ListValueConverter(JsonContext context)
+        : base(context) { }
 
     public override TMessage? Read(
         ref Utf8JsonReader reader,

@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis
         internal AssemblyMetadata(
             ModuleMetadata manifestModule,
             Func<string, ModuleMetadata> moduleFactory
-        ) : base(isImageOwner: true, id: MetadataId.CreateNewId())
+        )
+            : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
             Debug.Assert(manifestModule != null);
             Debug.Assert(moduleFactory != null);

@@ -22,7 +22,8 @@ namespace System.Web.Mvc
             ActionDescriptor actionDescriptor,
             bool canceled,
             Exception exception
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (actionDescriptor == null)
             {

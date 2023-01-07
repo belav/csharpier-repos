@@ -23,7 +23,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Value must be greater than or equal to zero.
         /// </param>
         [RequiresUnreferencedCode(CountPropertyHelper.RequiresUnreferencedCodeMessage)]
-        public MinLengthAttribute(int length) : base(SR.MinLengthAttribute_ValidationError)
+        public MinLengthAttribute(int length)
+            : base(SR.MinLengthAttribute_ValidationError)
         {
             Length = length;
         }

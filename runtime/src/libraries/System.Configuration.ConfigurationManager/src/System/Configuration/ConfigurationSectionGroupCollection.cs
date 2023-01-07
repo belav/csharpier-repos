@@ -15,7 +15,8 @@ namespace System.Configuration
         internal ConfigurationSectionGroupCollection(
             MgmtConfigurationRecord configRecord,
             ConfigurationSectionGroup configSectionGroup
-        ) : base(StringComparer.Ordinal)
+        )
+            : base(StringComparer.Ordinal)
         {
             _configRecord = configRecord;
             _configSectionGroup = configSectionGroup;

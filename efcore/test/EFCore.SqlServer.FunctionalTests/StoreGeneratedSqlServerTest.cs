@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class StoreGeneratedSqlServerTest
     : StoreGeneratedTestBase<StoreGeneratedSqlServerTest.StoreGeneratedSqlServerFixture>
 {
-    public StoreGeneratedSqlServerTest(StoreGeneratedSqlServerFixture fixture) : base(fixture) { }
+    public StoreGeneratedSqlServerTest(StoreGeneratedSqlServerFixture fixture)
+        : base(fixture) { }
 
     protected class WrappedIntHiLoClass
     {

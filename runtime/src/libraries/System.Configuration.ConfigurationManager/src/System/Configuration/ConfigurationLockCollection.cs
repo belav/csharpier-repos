@@ -22,13 +22,15 @@ namespace System.Configuration
         internal ConfigurationLockCollection(
             ConfigurationElement thisElement,
             ConfigurationLockCollectionType lockType
-        ) : this(thisElement, lockType, string.Empty) { }
+        )
+            : this(thisElement, lockType, string.Empty) { }
 
         internal ConfigurationLockCollection(
             ConfigurationElement thisElement,
             ConfigurationLockCollectionType lockType,
             string ignoreName
-        ) : this(thisElement, lockType, ignoreName, null) { }
+        )
+            : this(thisElement, lockType, ignoreName, null) { }
 
         internal ConfigurationLockCollection(
             ConfigurationElement thisElement,

@@ -73,7 +73,8 @@ namespace System.Data.Tests
 
         public class TestTypedTable<T> : TypedTableBase<T> where T : DataRow
         {
-            public TestTypedTable() : base() { }
+            public TestTypedTable()
+                : base() { }
         }
 
         [Fact]

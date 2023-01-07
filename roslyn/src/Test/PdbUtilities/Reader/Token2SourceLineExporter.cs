@@ -477,7 +477,8 @@ namespace Roslyn.Test.PdbUtilities
             // Constructs a new hashtable. The hashtable is created with an initial
             // capacity of zero and a load factor of 1.0.
             //| <include path='docs/doc[@for="IntHashTable.IntHashTable"]/*' />
-            internal IntHashTable() : this(0, 100) { }
+            internal IntHashTable()
+                : this(0, 100) { }
 
             internal IntHashTable(int capacity, int loadFactorPerc)
             {

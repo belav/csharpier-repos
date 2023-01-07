@@ -24,6 +24,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.ChangeSignature
         public CSharpChangeSignatureCommandHandler(
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext, globalOptions) { }
+        )
+            : base(threadingContext, globalOptions) { }
     }
 }

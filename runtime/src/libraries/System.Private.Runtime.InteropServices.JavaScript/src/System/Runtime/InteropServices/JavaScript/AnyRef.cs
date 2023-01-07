@@ -14,9 +14,11 @@ namespace System.Runtime.InteropServices.JavaScript
         private GCHandle AnyRefHandle;
         public int JSHandle => (int)handle;
 
-        internal AnyRef(int jsHandle, bool ownsHandle) : this((IntPtr)jsHandle, ownsHandle) { }
+        internal AnyRef(int jsHandle, bool ownsHandle)
+            : this((IntPtr)jsHandle, ownsHandle) { }
 
-        internal AnyRef(IntPtr jsHandle, bool ownsHandle) : base(ownsHandle)
+        internal AnyRef(IntPtr jsHandle, bool ownsHandle)
+            : base(ownsHandle)
         {
             SetHandle(jsHandle);
             AnyRefHandle = GCHandle.Alloc(

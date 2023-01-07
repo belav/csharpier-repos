@@ -121,7 +121,8 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ArrayTypeName : HasElementTypeName
     {
-        public ArrayTypeName(TypeName elementTypeName) : base(elementTypeName) { }
+        public ArrayTypeName(TypeName elementTypeName)
+            : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
@@ -134,7 +135,8 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class MultiDimArrayTypeName : HasElementTypeName
     {
-        public MultiDimArrayTypeName(TypeName elementTypeName, int rank) : base(elementTypeName)
+        public MultiDimArrayTypeName(TypeName elementTypeName, int rank)
+            : base(elementTypeName)
         {
             Rank = rank;
         }
@@ -152,7 +154,8 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class ByRefTypeName : HasElementTypeName
     {
-        public ByRefTypeName(TypeName elementTypeName) : base(elementTypeName) { }
+        public ByRefTypeName(TypeName elementTypeName)
+            : base(elementTypeName) { }
 
         public sealed override string ToString()
         {
@@ -165,7 +168,8 @@ namespace System.Reflection.Runtime.TypeParsing
     //
     internal sealed class PointerTypeName : HasElementTypeName
     {
-        public PointerTypeName(TypeName elementTypeName) : base(elementTypeName) { }
+        public PointerTypeName(TypeName elementTypeName)
+            : base(elementTypeName) { }
 
         public sealed override string ToString()
         {

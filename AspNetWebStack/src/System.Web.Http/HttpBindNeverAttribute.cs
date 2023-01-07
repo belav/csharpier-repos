@@ -12,6 +12,7 @@ namespace System.Web.Http
     )]
     public sealed class HttpBindNeverAttribute : HttpBindingBehaviorAttribute
     {
-        public HttpBindNeverAttribute() : base(HttpBindingBehavior.Never) { }
+        public HttpBindNeverAttribute()
+            : base(HttpBindingBehavior.Never) { }
     }
 }

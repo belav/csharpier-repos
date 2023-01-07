@@ -144,7 +144,8 @@ namespace System.IO.Pipes
             int inBufferSize,
             int outBufferSize,
             HandleInheritability inheritability
-        ) : base(direction, transmissionMode, outBufferSize)
+        )
+            : base(direction, transmissionMode, outBufferSize)
         {
             ValidateParameters(
                 pipeName,
@@ -255,7 +256,8 @@ namespace System.IO.Pipes
             bool isAsync,
             bool isConnected,
             SafePipeHandle safePipeHandle
-        ) : base(direction, PipeTransmissionMode.Byte, 0)
+        )
+            : base(direction, PipeTransmissionMode.Byte, 0)
         {
             ArgumentNullException.ThrowIfNull(safePipeHandle);
 

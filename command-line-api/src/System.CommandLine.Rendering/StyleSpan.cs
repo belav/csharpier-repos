@@ -5,8 +5,8 @@ namespace System.CommandLine.Rendering
 {
     public class StyleSpan : ControlSpan
     {
-        public StyleSpan(string name, AnsiControlCode ansiControlCode) : base(name, ansiControlCode)
-        { }
+        public StyleSpan(string name, AnsiControlCode ansiControlCode)
+            : base(name, ansiControlCode) { }
 
         public static StyleSpan AttributesOff() =>
             new(nameof(AttributesOff), Ansi.Text.AttributesOff);

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Binder next,
             WithTypeParametersBinder? withTypeParametersBinder,
             Binder? withParametersBinder
-        ) : base(next)
+        )
+            : base(next)
         {
             _nameofArgument = nameofArgument;
             _withTypeParametersBinder = withTypeParametersBinder;

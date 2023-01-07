@@ -17,7 +17,8 @@ public class RevalidatingIdentityAuthenticationStateProvider<TUser>
         ILoggerFactory loggerFactory,
         IServiceScopeFactory scopeFactory,
         IOptions<IdentityOptions> optionsAccessor
-    ) : base(loggerFactory)
+    )
+        : base(loggerFactory)
     {
         _scopeFactory = scopeFactory;
         _options = optionsAccessor.Value;

@@ -591,7 +591,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool withDependencies,
             NullableWalker.VariableState? nullableState,
             bool hasErrors
-        ) : this(syntax, state, functionType, withDependencies, hasErrors)
+        )
+            : this(syntax, state, functionType, withDependencies, hasErrors)
         {
             this._nullableState = nullableState;
         }
@@ -1997,7 +1998,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isAsync,
             bool isStatic,
             bool includeCache
-        ) : base(binder, includeCache)
+        )
+            : base(binder, includeCache)
         {
             _returnRefKind = returnRefKind;
             _returnType = returnType;

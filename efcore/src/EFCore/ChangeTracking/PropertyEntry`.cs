@@ -29,8 +29,8 @@ public class PropertyEntry<TEntity, TProperty> : PropertyEntry where TEntity : c
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public PropertyEntry(InternalEntityEntry internalEntry, string name) : base(internalEntry, name)
-    { }
+    public PropertyEntry(InternalEntityEntry internalEntry, string name)
+        : base(internalEntry, name) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

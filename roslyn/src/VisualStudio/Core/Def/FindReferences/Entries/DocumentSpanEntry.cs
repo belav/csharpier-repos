@@ -63,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 SymbolUsageInfo symbolUsageInfo,
                 ImmutableDictionary<string, string> customColumnsData,
                 IThreadingContext threadingContext
-            ) : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
+            )
+                : base(context, definitionBucket, projectGuid, lineText, mappedSpanResult)
             {
                 _spanKind = spanKind;
                 _excerptResult = excerptResult;

@@ -72,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<SingleTypeDeclaration> children,
             ImmutableArray<Diagnostic> diagnostics,
             QuickAttributes quickAttributes
-        ) : base(name, syntaxReference, nameLocation, diagnostics)
+        )
+            : base(name, syntaxReference, nameLocation, diagnostics)
         {
             Debug.Assert(kind != DeclarationKind.Namespace);
 

@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             EmbeddedLanguageInfo info,
             INamedTypeSymbol? regexType,
             HashSet<string> methodNamesOfInterest
-        ) : base(info, LanguageIdentifiers)
+        )
+            : base(info, LanguageIdentifiers)
         {
             _regexType = regexType;
             _methodNamesOfInterest = methodNamesOfInterest;

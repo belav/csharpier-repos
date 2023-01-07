@@ -17,7 +17,8 @@ struct S2
     public short F3;
     public bool F4;
 
-    public S2(uint f0, uint f2) : this()
+    public S2(uint f0, uint f2)
+        : this()
     {
         F0 = f0;
         F2 = f2;

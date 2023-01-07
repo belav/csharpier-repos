@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor
         [property: DataMember(Order = 0)] HighlightingOptions HighlightingOptions
     )
     {
-        public BraceMatchingOptions() : this(HighlightingOptions.Default) { }
+        public BraceMatchingOptions()
+            : this(HighlightingOptions.Default) { }
 
         public static readonly BraceMatchingOptions Default = new();
     }

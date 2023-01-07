@@ -24,7 +24,8 @@ public class SaveChangesEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEnumerable<IUpdateEntry> entries,
         int rowsAffected
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         Entries = entries;
         RowsAffected = rowsAffected;

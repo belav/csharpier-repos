@@ -70,9 +70,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         public static JsonContext Default =>
             s_defaultContext ??= new JsonContext(new JsonSerializerOptions(s_defaultOptions));
 
-        public JsonContext() : base(null) { }
+        public JsonContext()
+            : base(null) { }
 
-        public JsonContext(JsonSerializerOptions options) : base(options) { }
+        public JsonContext(JsonSerializerOptions options)
+            : base(options) { }
 
         protected override JsonSerializerOptions? GeneratedSerializerOptions => s_defaultOptions;
 

@@ -37,9 +37,11 @@ namespace System.Security.Cryptography
             ? s_legalKeySizesAndroid
             : s_legalKeySizesWindowsCsp;
 
-        public DSACryptoServiceProvider() : this(DefaultKeySize) { }
+        public DSACryptoServiceProvider()
+            : this(DefaultKeySize) { }
 
-        public DSACryptoServiceProvider(int dwKeySize) : base()
+        public DSACryptoServiceProvider(int dwKeySize)
+            : base()
         {
             if (dwKeySize < 0)
                 throw new ArgumentOutOfRangeException(

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         public ExportWorkspaceServiceAttribute(
             Type serviceType,
             string layer = ServiceLayer.Default
-        ) : base(typeof(IWorkspaceService))
+        )
+            : base(typeof(IWorkspaceService))
         {
             if (serviceType == null)
             {

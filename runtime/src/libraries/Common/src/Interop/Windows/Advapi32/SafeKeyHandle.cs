@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
         private bool _fPublicOnly;
         private SafeProvHandle? _parent;
 
-        public SafeCapiKeyHandle() : base(true)
+        public SafeCapiKeyHandle()
+            : base(true)
         {
             SetHandle(IntPtr.Zero);
             _keySpec = 0;

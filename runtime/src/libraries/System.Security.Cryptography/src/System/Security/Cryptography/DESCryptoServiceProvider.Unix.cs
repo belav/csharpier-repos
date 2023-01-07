@@ -21,7 +21,8 @@ namespace System.Security.Cryptography
             "CA5351",
             Justification = "This is the implementation of DESCryptoServiceProvider"
         )]
-        public DESCryptoServiceProvider() : base()
+        public DESCryptoServiceProvider()
+            : base()
         {
             // This class wraps DES
             _impl = DES.Create();

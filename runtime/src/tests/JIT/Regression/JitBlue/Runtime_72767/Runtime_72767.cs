@@ -15,7 +15,8 @@ public struct S0
     public short F0;
     public sbyte F1;
 
-    public S0(short f0, sbyte f1) : this()
+    public S0(short f0, sbyte f1)
+        : this()
     {
         F0 = f0;
         F1 = f1;
@@ -30,7 +31,8 @@ public struct S1
     public S0 F4;
     public int F5;
 
-    public S1(ushort f0, uint f2, S0 f3, S0 f4, int f5) : this()
+    public S1(ushort f0, uint f2, S0 f3, S0 f4, int f5)
+        : this()
     {
         F0 = f0;
         F2 = f2;

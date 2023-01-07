@@ -1255,7 +1255,8 @@ namespace System.Threading
             public ReaderWriterLockApplicationException(
                 SerializationInfo info,
                 StreamingContext context
-            ) : base(info, context) { }
+            )
+                : base(info, context) { }
         }
 
         private static ApplicationException GetTimeoutException()

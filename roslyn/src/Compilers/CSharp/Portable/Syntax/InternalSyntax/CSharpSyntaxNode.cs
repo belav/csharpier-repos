@@ -17,12 +17,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     internal abstract class CSharpSyntaxNode : GreenNode
     {
-        internal CSharpSyntaxNode(SyntaxKind kind) : base((ushort)kind)
+        internal CSharpSyntaxNode(SyntaxKind kind)
+            : base((ushort)kind)
         {
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(SyntaxKind kind, int fullWidth) : base((ushort)kind, fullWidth)
+        internal CSharpSyntaxNode(SyntaxKind kind, int fullWidth)
+            : base((ushort)kind, fullWidth)
         {
             GreenStats.NoteGreen(this);
         }
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind kind,
             DiagnosticInfo[] diagnostics,
             SyntaxAnnotation[] annotations
-        ) : base((ushort)kind, diagnostics, annotations)
+        )
+            : base((ushort)kind, diagnostics, annotations)
         {
             GreenStats.NoteGreen(this);
         }
@@ -53,12 +56,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             DiagnosticInfo[] diagnostics,
             SyntaxAnnotation[] annotations,
             int fullWidth
-        ) : base((ushort)kind, diagnostics, annotations, fullWidth)
+        )
+            : base((ushort)kind, diagnostics, annotations, fullWidth)
         {
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(ObjectReader reader) : base(reader) { }
+        internal CSharpSyntaxNode(ObjectReader reader)
+            : base(reader) { }
 
         public override string Language
         {

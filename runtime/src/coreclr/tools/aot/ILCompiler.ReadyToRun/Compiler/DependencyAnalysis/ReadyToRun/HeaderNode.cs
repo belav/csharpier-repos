@@ -158,7 +158,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
     public class GlobalHeaderNode : HeaderNode
     {
-        public GlobalHeaderNode(ReadyToRunFlags flags) : base(flags) { }
+        public GlobalHeaderNode(ReadyToRunFlags flags)
+            : base(flags) { }
 
         protected override void AppendMangledHeaderName(
             NameMangler nameMangler,
@@ -186,7 +187,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         private readonly int _index;
 
-        public AssemblyHeaderNode(ReadyToRunFlags flags, int index) : base(flags)
+        public AssemblyHeaderNode(ReadyToRunFlags flags, int index)
+            : base(flags)
         {
             _index = index;
         }

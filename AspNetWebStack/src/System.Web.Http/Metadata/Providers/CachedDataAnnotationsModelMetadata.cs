@@ -12,7 +12,8 @@ namespace System.Web.Http.Metadata.Providers
         public CachedDataAnnotationsModelMetadata(
             CachedDataAnnotationsModelMetadata prototype,
             Func<object> modelAccessor
-        ) : base(prototype, modelAccessor) { }
+        )
+            : base(prototype, modelAccessor) { }
 
         public CachedDataAnnotationsModelMetadata(
             DataAnnotationsModelMetadataProvider provider,

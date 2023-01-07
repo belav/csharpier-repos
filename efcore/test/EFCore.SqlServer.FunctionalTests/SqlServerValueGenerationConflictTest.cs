@@ -12,7 +12,8 @@ public class SqlServerValueGenerationStrategyThrowTest
 {
     public SqlServerValueGenerationStrategyThrowTest(
         SqlServerValueGenerationStrategyFixture<ThrowContext> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void SqlServerValueGeneration_conflicting_with_existing_ValueGeneration_strategy_throws()
@@ -66,7 +67,8 @@ public class SqlServerValueGenerationStrategyThrowTest
 
     public class ThrowContext : DbContext
     {
-        public ThrowContext(DbContextOptions options) : base(options) { }
+        public ThrowContext(DbContextOptions options)
+            : base(options) { }
 
         public virtual DbSet<Fred> Freds { get; set; }
 
@@ -82,7 +84,8 @@ public class SqlServerValueGenerationStrategyNoThrowTest
 {
     public SqlServerValueGenerationStrategyNoThrowTest(
         SqlServerValueGenerationStrategyFixture<NoThrowContext> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void SqlServerValueGeneration_conflicting_with_existing_ValueGeneration_strategy_warns()
@@ -115,7 +118,8 @@ public class SqlServerValueGenerationStrategyNoThrowTest
 
     public class NoThrowContext : DbContext
     {
-        public NoThrowContext(DbContextOptions options) : base(options) { }
+        public NoThrowContext(DbContextOptions options)
+            : base(options) { }
 
         public virtual DbSet<Fred> Freds { get; set; }
 

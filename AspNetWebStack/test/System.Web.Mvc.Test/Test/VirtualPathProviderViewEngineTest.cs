@@ -1347,7 +1347,8 @@ namespace System.Web.Mvc.Test
                 MockBehavior.Strict
             );
 
-            public TestableVirtualPathProviderViewEngine() : this(skipVPPInitialization: false) { }
+            public TestableVirtualPathProviderViewEngine()
+                : this(skipVPPInitialization: false) { }
 
             public TestableVirtualPathProviderViewEngine(bool skipVPPInitialization)
             {

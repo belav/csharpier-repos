@@ -120,7 +120,8 @@ namespace System.Runtime.Serialization.DataContracts
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type,
                 ISerializationSurrogate serializationSurrogate
-            ) : base(type)
+            )
+                : base(type)
             {
                 this.serializationSurrogate = serializationSurrogate;
                 string name,

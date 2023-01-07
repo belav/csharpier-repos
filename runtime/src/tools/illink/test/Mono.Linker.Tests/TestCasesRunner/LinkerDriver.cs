@@ -11,7 +11,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         {
             readonly LinkerCustomizations _customization;
 
-            public TestDriver(Queue<string> args, LinkerCustomizations customizations) : base(args)
+            public TestDriver(Queue<string> args, LinkerCustomizations customizations)
+                : base(args)
             {
                 _customization = customizations;
             }

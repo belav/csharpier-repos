@@ -14,7 +14,8 @@ public class ExpectedFilteredInclude<TEntity, TIncluded> : ExpectedInclude<TEnti
         string navigationPath = "",
         Func<IEnumerable<TIncluded>, IEnumerable<TIncluded>> includeFilter = null,
         bool assertOrder = false
-    ) : base(Convert(include), navigationPath)
+    )
+        : base(Convert(include), navigationPath)
     {
         IncludeFilter = includeFilter;
         AssertOrder = assertOrder;

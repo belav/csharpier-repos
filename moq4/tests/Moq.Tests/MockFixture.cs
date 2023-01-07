@@ -1065,7 +1065,8 @@ namespace Moq.Tests
 
         public class Foo
         {
-            public Foo() : this(new Bar()) { }
+            public Foo()
+                : this(new Bar()) { }
 
             public Foo(IBar bar)
             {

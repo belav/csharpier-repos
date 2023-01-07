@@ -161,8 +161,8 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
 
     private class ExposedTokenizer : Tokenizer
     {
-        public ExposedTokenizer(string input) : base(new SeekableTextReader(input, filePath: null))
-        { }
+        public ExposedTokenizer(string input)
+            : base(new SeekableTextReader(input, filePath: null)) { }
 
         public new StringBuilder Buffer
         {
@@ -209,7 +209,8 @@ public class TokenizerLookaheadTest : HtmlTokenizerTestBase
         internal TestTokenizerBackedParser(
             LanguageCharacteristics<HtmlTokenizer> language,
             ParserContext context
-        ) : base(language, context) { }
+        )
+            : base(language, context) { }
 
         internal new bool LookaheadUntil(
             Func<SyntaxToken, IEnumerable<SyntaxToken>, bool> condition

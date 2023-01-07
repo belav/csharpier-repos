@@ -9,7 +9,8 @@ public class ManyToManyNoTrackingQueryInMemoryTest
     public ManyToManyNoTrackingQueryInMemoryTest(
         ManyToManyQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

@@ -20,7 +20,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         Dictionary<string, Dictionary<string, TypeRefTypeSystemType>> _namespacedTypes =
             new Dictionary<string, Dictionary<string, TypeRefTypeSystemType>>();
 
-        public TypeRefTypeSystemModule(TypeSystemContext tsc, AssemblyName name) : base(tsc, null)
+        public TypeRefTypeSystemModule(TypeSystemContext tsc, AssemblyName name)
+            : base(tsc, null)
         {
             _name = name;
         }

@@ -16,14 +16,16 @@ namespace OLEDB.Test.ModuleCore
     public class CTestSkippedException : CTestException
     {
         //Constructor
-        public CTestSkippedException(string message) : this(message, false, true, null) { }
+        public CTestSkippedException(string message)
+            : this(message, false, true, null) { }
 
         public CTestSkippedException(
             string message,
             object actual,
             object expected,
             Exception inner
-        ) : base(CTestBase.TEST_SKIPPED, message, actual, expected, inner) { }
+        )
+            : base(CTestBase.TEST_SKIPPED, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -33,7 +35,8 @@ namespace OLEDB.Test.ModuleCore
     public class CTestFailedException : CTestException
     {
         //Constructor
-        public CTestFailedException(string message) : this(message, false, true, null) { }
+        public CTestFailedException(string message)
+            : this(message, false, true, null) { }
 
         public CTestFailedException(string message, object actual, object expected, Exception inner)
             : base(CTestBase.TEST_FAIL, message, actual, expected, inner) { }
@@ -52,7 +55,8 @@ namespace OLEDB.Test.ModuleCore
         public object Expected;
 
         //Constructor
-        public CTestException(string message) : this(CTestBase.TEST_FAIL, message)
+        public CTestException(string message)
+            : this(CTestBase.TEST_FAIL, message)
         {
             if (message is null)
             {
@@ -60,7 +64,8 @@ namespace OLEDB.Test.ModuleCore
             }
         }
 
-        public CTestException(int result, string message) : this(result, message, false, true, null)
+        public CTestException(int result, string message)
+            : this(result, message, false, true, null)
         {
             if (message is null)
             {
@@ -74,7 +79,8 @@ namespace OLEDB.Test.ModuleCore
             object actual,
             object expected,
             Exception inner
-        ) : base(message, inner)
+        )
+            : base(message, inner)
         {
             if (message is null)
             {

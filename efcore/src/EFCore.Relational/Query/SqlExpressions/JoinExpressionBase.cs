@@ -18,7 +18,8 @@ public abstract class JoinExpressionBase : TableExpressionBase
     ///     Creates a new instance of the <see cref="JoinExpressionBase" /> class.
     /// </summary>
     /// <param name="table">A table source to join with.</param>
-    protected JoinExpressionBase(TableExpressionBase table) : this(table, annotations: null) { }
+    protected JoinExpressionBase(TableExpressionBase table)
+        : this(table, annotations: null) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="JoinExpressionBase" /> class.

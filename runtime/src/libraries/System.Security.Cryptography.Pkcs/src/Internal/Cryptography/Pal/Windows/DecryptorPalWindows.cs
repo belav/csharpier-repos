@@ -13,7 +13,8 @@ namespace Internal.Cryptography.Pal.Windows
             SafeCryptMsgHandle hCryptMsg,
             RecipientInfoCollection recipientInfos,
             AlgorithmIdentifierAsn contentEncryptionAlgorithm
-        ) : base(recipientInfos)
+        )
+            : base(recipientInfos)
         {
             _hCryptMsg = hCryptMsg;
             _contentEncryptionAlgorithm = contentEncryptionAlgorithm;

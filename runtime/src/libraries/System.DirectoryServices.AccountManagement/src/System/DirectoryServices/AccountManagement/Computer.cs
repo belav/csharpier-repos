@@ -13,7 +13,8 @@ namespace System.DirectoryServices.AccountManagement
         //
         // Public constructors
         //
-        public ComputerPrincipal(PrincipalContext context) : base(context)
+        public ComputerPrincipal(PrincipalContext context)
+            : base(context)
         {
             if (
                 Context.ContextType == ContextType.ApplicationDirectory
@@ -30,7 +31,8 @@ namespace System.DirectoryServices.AccountManagement
             string samAccountName,
             string password,
             bool enabled
-        ) : this(context)
+        )
+            : this(context)
         {
             if (samAccountName == null || password == null)
                 throw new ArgumentException(SR.NullArguments);

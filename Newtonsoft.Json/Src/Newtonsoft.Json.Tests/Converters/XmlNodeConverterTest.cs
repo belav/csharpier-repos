@@ -1233,7 +1233,8 @@ namespace Newtonsoft.Json.Tests.Converters
                 get { return Encoding.UTF8; }
             }
 
-            public Utf8StringWriter(StringBuilder sb) : base(sb) { }
+            public Utf8StringWriter(StringBuilder sb)
+                : base(sb) { }
         }
 
 #if !NET20

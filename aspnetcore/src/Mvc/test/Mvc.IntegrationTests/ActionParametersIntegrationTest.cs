@@ -567,7 +567,8 @@ public class ActionParameterIntegrationTest
 
     public record ActionParameter_RecordTypeWithMultipleConstructors(string Name, int Age)
     {
-        public ActionParameter_RecordTypeWithMultipleConstructors(string Name) : this(Name, 0) { }
+        public ActionParameter_RecordTypeWithMultipleConstructors(string Name)
+            : this(Name, 0) { }
     }
 
     [Fact]
@@ -962,7 +963,8 @@ public class ActionParameterIntegrationTest
     {
         private readonly string _name;
 
-        public AbstractClassWithNoDefaultConstructor() : this("James") { }
+        public AbstractClassWithNoDefaultConstructor()
+            : this("James") { }
 
         public AbstractClassWithNoDefaultConstructor(string name)
         {
@@ -1028,7 +1030,8 @@ public class ActionParameterIntegrationTest
     {
         private readonly ICollection<T> _original;
 
-        public CustomReadOnlyCollection() : this(new List<T>()) { }
+        public CustomReadOnlyCollection()
+            : this(new List<T>()) { }
 
         public CustomReadOnlyCollection(ICollection<T> original)
         {
@@ -1092,7 +1095,8 @@ public class ActionParameterIntegrationTest
     {
         public CustomComplexTypeModelBinder(
             IDictionary<ModelMetadata, IModelBinder> propertyBinders
-        ) : base(propertyBinders, NullLoggerFactory.Instance) { }
+        )
+            : base(propertyBinders, NullLoggerFactory.Instance) { }
 
         protected override object CreateModel(ModelBindingContext bindingContext)
         {

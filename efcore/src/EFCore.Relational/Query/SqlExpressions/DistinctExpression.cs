@@ -18,7 +18,8 @@ public class DistinctExpression : SqlExpression
     ///     Creates a new instance of the <see cref="DistinctExpression" /> class.
     /// </summary>
     /// <param name="operand">An expression on which DISTINCT is applied.</param>
-    public DistinctExpression(SqlExpression operand) : base(operand.Type, operand.TypeMapping)
+    public DistinctExpression(SqlExpression operand)
+        : base(operand.Type, operand.TypeMapping)
     {
         Check.NotNull(operand, nameof(operand));
 

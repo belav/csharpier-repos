@@ -282,7 +282,8 @@ public abstract class RelationalTypeMapping : CoreTypeMapping
 
     private sealed class NullTypeMapping : RelationalTypeMapping
     {
-        public NullTypeMapping(string storeType) : base(storeType, typeof(object)) { }
+        public NullTypeMapping(string storeType)
+            : base(storeType, typeof(object)) { }
 
         protected override RelationalTypeMapping Clone(
             RelationalTypeMappingParameters parameters

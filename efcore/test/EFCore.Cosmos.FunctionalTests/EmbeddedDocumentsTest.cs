@@ -743,7 +743,8 @@ public class EmbeddedDocumentsTest : IClassFixture<EmbeddedDocumentsTest.CosmosF
 
     protected class EmbeddedTransportationContext : TransportationContext
     {
-        public EmbeddedTransportationContext(DbContextOptions options) : base(options) { }
+        public EmbeddedTransportationContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

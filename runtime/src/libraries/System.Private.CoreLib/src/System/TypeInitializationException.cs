@@ -27,7 +27,8 @@ namespace System
 
         // This exception is not creatable without specifying the
         //    inner exception.
-        private TypeInitializationException() : base(SR.TypeInitialization_Default)
+        private TypeInitializationException()
+            : base(SR.TypeInitialization_Default)
         {
             HResult = HResults.COR_E_TYPEINITIALIZATION;
         }
@@ -41,7 +42,8 @@ namespace System
 
         // This is called from within the runtime.  I believe this is necessary
         // for Interop only, though it's not particularly useful.
-        internal TypeInitializationException(string? message) : base(message)
+        internal TypeInitializationException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_TYPEINITIALIZATION;
         }
@@ -50,7 +52,8 @@ namespace System
             string? fullTypeName,
             string? message,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _typeName = fullTypeName;
             HResult = HResults.COR_E_TYPEINITIALIZATION;

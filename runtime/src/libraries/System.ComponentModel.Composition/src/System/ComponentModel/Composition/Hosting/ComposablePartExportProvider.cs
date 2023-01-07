@@ -26,7 +26,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="ComposablePartExportProvider"/> class.
         /// </summary>
-        public ComposablePartExportProvider() : this(false) { }
+        public ComposablePartExportProvider()
+            : this(false) { }
 
         public ComposablePartExportProvider(bool isThreadSafe)
             : this(isThreadSafe ? CompositionOptions.IsThreadSafe : CompositionOptions.Default) { }

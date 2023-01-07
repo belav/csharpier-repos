@@ -54,7 +54,8 @@ namespace System.Security.Cryptography
             : this(dwKeySize, parameters, false) { }
 
         [SupportedOSPlatform("windows")]
-        public RSACryptoServiceProvider(CspParameters? parameters) : this(0, parameters, true) { }
+        public RSACryptoServiceProvider(CspParameters? parameters)
+            : this(0, parameters, true) { }
 
         private RSACryptoServiceProvider(
             int keySize,

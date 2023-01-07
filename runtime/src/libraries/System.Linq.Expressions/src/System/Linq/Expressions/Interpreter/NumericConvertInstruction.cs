@@ -298,7 +298,8 @@ namespace System.Linq.Expressions.Interpreter
         {
             public override string InstructionName => "ConvertToUnderlying";
 
-            public ToUnderlying(TypeCode to, bool isLiftedToNull) : base(to, to, isLiftedToNull) { }
+            public ToUnderlying(TypeCode to, bool isLiftedToNull)
+                : base(to, to, isLiftedToNull) { }
 
             protected override object Convert(object obj)
             {

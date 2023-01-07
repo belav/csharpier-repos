@@ -27,7 +27,9 @@ namespace Microsoft.Extensions.Options
         public OptionsFactory(
             IEnumerable<IConfigureOptions<TOptions>> setups,
             IEnumerable<IPostConfigureOptions<TOptions>> postConfigures
-        ) : this(setups, postConfigures, validations: Array.Empty<IValidateOptions<TOptions>>()) { }
+        )
+            : this(setups, postConfigures, validations: Array.Empty<IValidateOptions<TOptions>>())
+        { }
 
         /// <summary>
         /// Initializes a new instance with the specified options configurations.

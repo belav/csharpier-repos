@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class TwoDatabasesSqlServerTest : TwoDatabasesTestBase, IClassFixture<SqlServerFixture>
 {
-    public TwoDatabasesSqlServerTest(SqlServerFixture fixture) : base(fixture) { }
+    public TwoDatabasesSqlServerTest(SqlServerFixture fixture)
+        : base(fixture) { }
 
     protected new SqlServerFixture Fixture => (SqlServerFixture)base.Fixture;
 

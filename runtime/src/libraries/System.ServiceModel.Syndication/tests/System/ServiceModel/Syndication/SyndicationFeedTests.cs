@@ -611,7 +611,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class SyndicationFeedSubclass : SyndicationFeed
         {
-            public SyndicationFeedSubclass() : base() { }
+            public SyndicationFeedSubclass()
+                : base() { }
 
             public SyndicationFeedSubclass(SyndicationFeed source, bool cloneItems)
                 : base(source, cloneItems) { }

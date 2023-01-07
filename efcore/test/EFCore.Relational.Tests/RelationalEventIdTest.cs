@@ -168,7 +168,8 @@ public class RelationalEventIdTest : EventIdTestBase
 
     private class FakeSqlExpression : SqlExpression
     {
-        public FakeSqlExpression() : base(typeof(object), null) { }
+        public FakeSqlExpression()
+            : base(typeof(object), null) { }
 
         protected override void Print(ExpressionPrinter expressionPrinter) =>
             expressionPrinter.Append("FakeSqlExpression");

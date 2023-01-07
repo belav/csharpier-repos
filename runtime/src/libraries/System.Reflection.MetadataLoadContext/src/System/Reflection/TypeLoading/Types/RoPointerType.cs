@@ -11,7 +11,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal sealed class RoPointerType : RoHasElementType
     {
-        internal RoPointerType(RoType elementType) : base(elementType)
+        internal RoPointerType(RoType elementType)
+            : base(elementType)
         {
             Debug.Assert(elementType != null);
         }

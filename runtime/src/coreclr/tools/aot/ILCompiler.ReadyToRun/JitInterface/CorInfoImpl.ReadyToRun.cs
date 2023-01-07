@@ -520,7 +520,8 @@ namespace Internal.JitInterface
 
     public class RequiresRuntimeJitException : Exception
     {
-        public RequiresRuntimeJitException(object reason) : base(reason.ToString()) { }
+        public RequiresRuntimeJitException(object reason)
+            : base(reason.ToString()) { }
     }
 
     unsafe partial class CorInfoImpl
@@ -543,7 +544,8 @@ namespace Internal.JitInterface
 
         public bool HasColdCode { get; private set; }
 
-        public CorInfoImpl(ReadyToRunCodegenCompilation compilation) : this()
+        public CorInfoImpl(ReadyToRunCodegenCompilation compilation)
+            : this()
         {
             _compilation = compilation;
         }

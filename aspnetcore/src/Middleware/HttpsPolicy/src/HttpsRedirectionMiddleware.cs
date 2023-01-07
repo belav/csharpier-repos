@@ -74,7 +74,8 @@ public class HttpsRedirectionMiddleware
         IConfiguration config,
         ILoggerFactory loggerFactory,
         IServerAddressesFeature serverAddressesFeature
-    ) : this(next, options, config, loggerFactory)
+    )
+        : this(next, options, config, loggerFactory)
     {
         _serverAddressesFeature =
             serverAddressesFeature

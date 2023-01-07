@@ -69,7 +69,8 @@ namespace ExchangeAdd
         private long valueToAdd;
         private long valueToSubtract;
 
-        public ThreadSafe() : this(100, 100) { }
+        public ThreadSafe()
+            : this(100, 100) { }
 
         public ThreadSafe(int loops, long iAdd)
         {

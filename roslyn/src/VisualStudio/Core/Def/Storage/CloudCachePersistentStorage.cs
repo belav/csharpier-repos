@@ -57,7 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
             string workingFolderPath,
             string relativePathBase,
             string databaseFilePath
-        ) : base(workingFolderPath, relativePathBase, databaseFilePath)
+        )
+            : base(workingFolderPath, relativePathBase, databaseFilePath)
         {
             _cacheService = cacheService;
             _projectToContainerKeyCacheCallback = ps =>

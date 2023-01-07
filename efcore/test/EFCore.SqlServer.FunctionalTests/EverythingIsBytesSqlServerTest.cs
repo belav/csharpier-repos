@@ -10,8 +10,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class EverythingIsBytesSqlServerTest
     : BuiltInDataTypesTestBase<EverythingIsBytesSqlServerTest.EverythingIsBytesSqlServerFixture>
 {
-    public EverythingIsBytesSqlServerTest(EverythingIsBytesSqlServerFixture fixture) : base(fixture)
-    { }
+    public EverythingIsBytesSqlServerTest(EverythingIsBytesSqlServerFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Columns_have_expected_data_types()
@@ -251,7 +251,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
         public SqlServerBytesTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
             RelationalTypeMappingSourceDependencies relationalDependencies
-        ) : base(dependencies, relationalDependencies)
+        )
+            : base(dependencies, relationalDependencies)
         {
             _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
                 StringComparer.OrdinalIgnoreCase

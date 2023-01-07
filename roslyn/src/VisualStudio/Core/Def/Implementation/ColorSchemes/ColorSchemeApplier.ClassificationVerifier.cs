@@ -76,7 +76,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ColorSchemes
                 IThreadingContext threadingContext,
                 IServiceProvider serviceProvider,
                 ImmutableDictionary<SchemeName, ColorScheme> colorSchemes
-            ) : base(threadingContext)
+            )
+                : base(threadingContext)
             {
                 _serviceProvider = serviceProvider;
 

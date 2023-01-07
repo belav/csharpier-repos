@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 SymbolResult<INamespaceOrTypeSymbol> symbolResult,
                 ProjectId referenceProjectId,
                 PortableExecutableReference reference
-            ) : base(provider, symbolResult)
+            )
+                : base(provider, symbolResult)
             {
                 _referenceProjectId = referenceProjectId;
                 _reference = reference;

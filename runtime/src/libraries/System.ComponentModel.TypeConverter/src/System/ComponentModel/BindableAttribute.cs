@@ -35,7 +35,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.BindableAttribute'/> class.
         /// </summary>
-        public BindableAttribute(bool bindable) : this(bindable, BindingDirection.OneWay) { }
+        public BindableAttribute(bool bindable)
+            : this(bindable, BindingDirection.OneWay) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.BindableAttribute'/> class.
@@ -49,7 +50,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.BindableAttribute'/> class.
         /// </summary>
-        public BindableAttribute(BindableSupport flags) : this(flags, BindingDirection.OneWay) { }
+        public BindableAttribute(BindableSupport flags)
+            : this(flags, BindingDirection.OneWay) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.BindableAttribute'/> class.

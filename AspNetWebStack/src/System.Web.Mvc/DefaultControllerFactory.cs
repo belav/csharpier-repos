@@ -29,7 +29,8 @@ namespace System.Web.Mvc
         private ControllerBuilder _controllerBuilder;
         private ControllerTypeCache _instanceControllerTypeCache;
 
-        public DefaultControllerFactory() : this(null, null, null) { }
+        public DefaultControllerFactory()
+            : this(null, null, null) { }
 
         public DefaultControllerFactory(IControllerActivator controllerActivator)
             : this(controllerActivator, null, null) { }
@@ -443,7 +444,8 @@ namespace System.Web.Mvc
         {
             private Func<IDependencyResolver> _resolverThunk;
 
-            public DefaultControllerActivator() : this(null) { }
+            public DefaultControllerActivator()
+                : this(null) { }
 
             public DefaultControllerActivator(IDependencyResolver resolver)
             {

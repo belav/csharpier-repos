@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class TransactionInterceptionTestBase : InterceptionTestBase
 {
-    protected TransactionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
+    protected TransactionInterceptionTestBase(InterceptionFixtureBase fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false)]

@@ -31,7 +31,8 @@ namespace ILCompiler.DependencyAnalysis
             string startSymbolMangledName,
             string endSymbolMangledName,
             IComparer<TEmbedded> nodeSorter
-        ) : base(startSymbolMangledName, endSymbolMangledName)
+        )
+            : base(startSymbolMangledName, endSymbolMangledName)
         {
             _sorter = nodeSorter;
         }

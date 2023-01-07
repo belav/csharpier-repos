@@ -29,7 +29,8 @@ namespace MS.Internal.Xml.XPath
             _ancestorStk = new StackNav();
         }
 
-        private PrecedingQuery(PrecedingQuery other) : base(other)
+        private PrecedingQuery(PrecedingQuery other)
+            : base(other)
         {
             _workIterator = Clone(other._workIterator);
             _ancestorStk = other._ancestorStk.Clone();

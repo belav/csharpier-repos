@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         public ArrayTypeSymbol(
             Symbols.ArrayTypeSymbol underlying,
             CodeAnalysis.NullableAnnotation nullableAnnotation
-        ) : base(nullableAnnotation)
+        )
+            : base(nullableAnnotation)
         {
             RoslynDebug.Assert(underlying is object);
             _underlying = underlying;

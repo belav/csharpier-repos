@@ -36,7 +36,8 @@ public class ServiceProperty
         Type serviceType,
         EntityType declaringEntityType,
         ConfigurationSource configurationSource
-    ) : base(name, propertyInfo, fieldInfo, configurationSource)
+    )
+        : base(name, propertyInfo, fieldInfo, configurationSource)
     {
         DeclaringEntityType = declaringEntityType;
         ClrType = serviceType;

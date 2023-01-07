@@ -10935,7 +10935,8 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
 
     private class RightmostValueComparer : ValueComparer<byte[]>
     {
-        public RightmostValueComparer() : base(false) { }
+        public RightmostValueComparer()
+            : base(false) { }
 
         public override bool Equals(byte[] left, byte[] right) =>
             object.Equals(left[^1], right[^1]);

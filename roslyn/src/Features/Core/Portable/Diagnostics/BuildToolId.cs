@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             private readonly T1? _Field2;
 
-            public Base(T1? field1, T2? field2) : base(field2) => _Field2 = field1;
+            public Base(T1? field1, T2? field2)
+                : base(field2) => _Field2 = field1;
 
             public override bool Equals(object? obj)
             {

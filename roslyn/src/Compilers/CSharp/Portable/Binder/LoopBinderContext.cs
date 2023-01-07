@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly GeneratedLabelSymbol _breakLabel;
         private readonly GeneratedLabelSymbol _continueLabel;
 
-        protected LoopBinder(Binder enclosing) : base(enclosing)
+        protected LoopBinder(Binder enclosing)
+            : base(enclosing)
         {
             _breakLabel = new GeneratedLabelSymbol("break");
             _continueLabel = new GeneratedLabelSymbol("continue");

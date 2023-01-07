@@ -8,7 +8,8 @@ namespace System.Web.Http.ModelBinding
     /// </summary>
     public abstract class ModelBindingTests : HttpServerTestBase
     {
-        protected ModelBindingTests() : base("http://localhost/") { }
+        protected ModelBindingTests()
+            : base("http://localhost/") { }
 
         protected override void ApplyConfiguration(HttpConfiguration configuration)
         {

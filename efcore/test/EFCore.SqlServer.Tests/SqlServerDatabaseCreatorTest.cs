@@ -136,7 +136,8 @@ public class SqlServerDatabaseCreatorTest
         public FakeSqlServerConnection(
             IDbContextOptions options,
             RelationalConnectionDependencies dependencies
-        ) : base(dependencies)
+        )
+            : base(dependencies)
         {
             _options = options;
         }

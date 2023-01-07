@@ -7,7 +7,8 @@ namespace Microsoft.Web.FxCop
 {
     public class DoNotConstructTaskInstancesRule : IntrospectionRule
     {
-        public DoNotConstructTaskInstancesRule() : base("DoNotConstructTaskInstances") { }
+        public DoNotConstructTaskInstancesRule()
+            : base("DoNotConstructTaskInstances") { }
 
         public override ProblemCollection Check(Member member)
         {

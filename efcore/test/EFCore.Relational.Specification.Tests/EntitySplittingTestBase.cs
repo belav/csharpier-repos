@@ -217,7 +217,8 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
 
     protected class EntitySplittingContext : PoolableDbContext
     {
-        public EntitySplittingContext(DbContextOptions options) : base(options) { }
+        public EntitySplittingContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<MeterReading> MeterReadings { get; set; }
     }

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder binder,
             Symbol containingSymbol,
             LocalFunctionStatementSyntax syntax
-        ) : base(syntax.GetReference())
+        )
+            : base(syntax.GetReference())
         {
             Debug.Assert(containingSymbol.DeclaringCompilation == binder.Compilation);
             _containingSymbol = containingSymbol;

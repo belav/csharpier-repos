@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             EmptyStructTypeCache emptyStructs,
             bool trackUnassignments
-        ) : base(compilation, member, node, nonMonotonicTransferFunction: trackUnassignments)
+        )
+            : base(compilation, member, node, nonMonotonicTransferFunction: trackUnassignments)
         {
             Debug.Assert(emptyStructs != null);
             _emptyStructTypeCache = emptyStructs;

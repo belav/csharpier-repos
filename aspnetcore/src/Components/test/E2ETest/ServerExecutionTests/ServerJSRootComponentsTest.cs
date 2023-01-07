@@ -16,7 +16,8 @@ public class ServerJSRootComponentsTest : JSRootComponentsTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     [Fact]
     public void CannotExceedTheConfiguredNumberOfJSComponents()

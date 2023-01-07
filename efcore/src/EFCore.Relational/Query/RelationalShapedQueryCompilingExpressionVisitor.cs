@@ -27,7 +27,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
         ShapedQueryCompilingExpressionVisitorDependencies dependencies,
         RelationalShapedQueryCompilingExpressionVisitorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext)
+    )
+        : base(dependencies, queryCompilationContext)
     {
         RelationalDependencies = relationalDependencies;
 

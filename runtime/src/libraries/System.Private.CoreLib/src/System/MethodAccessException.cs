@@ -18,17 +18,20 @@ namespace System
     )]
     public class MethodAccessException : MemberAccessException
     {
-        public MethodAccessException() : base(SR.Arg_MethodAccessException)
+        public MethodAccessException()
+            : base(SR.Arg_MethodAccessException)
         {
             HResult = HResults.COR_E_METHODACCESS;
         }
 
-        public MethodAccessException(string? message) : base(message)
+        public MethodAccessException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_METHODACCESS;
         }
 
-        public MethodAccessException(string? message, Exception? inner) : base(message, inner)
+        public MethodAccessException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_METHODACCESS;
         }

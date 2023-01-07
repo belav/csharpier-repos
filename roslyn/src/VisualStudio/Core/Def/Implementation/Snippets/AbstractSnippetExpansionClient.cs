@@ -101,7 +101,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             ImmutableArray<Lazy<ArgumentProvider, OrderableLanguageMetadata>> argumentProviders,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             LanguageServiceGuid = languageServiceGuid;
             TextView = textView;

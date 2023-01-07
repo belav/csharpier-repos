@@ -23,7 +23,8 @@ public class CompositeDependentKeyValueFactory : CompositeValueFactory
     public CompositeDependentKeyValueFactory(
         IForeignKey foreignKey,
         IPrincipalKeyValueFactory<IReadOnlyList<object?>> principalKeyValueFactory
-    ) : base(foreignKey.Properties)
+    )
+        : base(foreignKey.Properties)
     {
         _foreignKey = foreignKey;
         _principalKeyValueFactory = principalKeyValueFactory;

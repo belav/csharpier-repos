@@ -49,7 +49,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of an event descriptor collection, and allows you to mark the
         /// collection as read-only so it cannot be modified.
         /// </summary>
-        public EventDescriptorCollection(EventDescriptor[]? events, bool readOnly) : this(events)
+        public EventDescriptorCollection(EventDescriptor[]? events, bool readOnly)
+            : this(events)
         {
             _readOnly = readOnly;
         }

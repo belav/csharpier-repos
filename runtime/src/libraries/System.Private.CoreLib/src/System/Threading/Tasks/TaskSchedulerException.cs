@@ -26,7 +26,8 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/> class.
         /// </summary>
-        public TaskSchedulerException() : base(SR.TaskSchedulerException_ctor_DefaultMessage) //
+        public TaskSchedulerException()
+            : base(SR.TaskSchedulerException_ctor_DefaultMessage) //
         { }
 
         /// <summary>
@@ -34,7 +35,8 @@ namespace System.Threading.Tasks
         /// class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public TaskSchedulerException(string? message) : base(message) { }
+        public TaskSchedulerException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskSchedulerException"/>

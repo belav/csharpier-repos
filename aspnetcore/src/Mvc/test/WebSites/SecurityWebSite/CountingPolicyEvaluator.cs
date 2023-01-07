@@ -11,7 +11,8 @@ public class CountingPolicyEvaluator : PolicyEvaluator
 {
     public int AuthorizeCount { get; private set; }
 
-    public CountingPolicyEvaluator(IAuthorizationService authorization) : base(authorization) { }
+    public CountingPolicyEvaluator(IAuthorizationService authorization)
+        : base(authorization) { }
 
     public override Task<PolicyAuthorizationResult> AuthorizeAsync(
         AuthorizationPolicy policy,

@@ -147,7 +147,8 @@ namespace System.Web.Mvc.Routing
 
         public class InvalidConstraintRouteAttribute : RouteFactoryAttribute
         {
-            public InvalidConstraintRouteAttribute(string template) : base(template) { }
+            public InvalidConstraintRouteAttribute(string template)
+                : base(template) { }
 
             public override RouteValueDictionary Constraints
             {

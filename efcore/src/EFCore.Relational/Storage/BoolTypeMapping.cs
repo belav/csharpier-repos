@@ -32,7 +32,8 @@ public class BoolTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="BoolTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected BoolTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected BoolTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

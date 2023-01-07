@@ -255,7 +255,8 @@ public class UserStoreWithGenerics
 {
     public string LoginContext { get; set; }
 
-    public UserStoreWithGenerics(ContextWithGenerics context, string loginContext) : base(context)
+    public UserStoreWithGenerics(ContextWithGenerics context, string loginContext)
+        : base(context)
     {
         LoginContext = loginContext;
     }
@@ -331,7 +332,8 @@ public class RoleStoreWithGenerics
 {
     private string _loginContext;
 
-    public RoleStoreWithGenerics(ContextWithGenerics context, string loginContext) : base(context)
+    public RoleStoreWithGenerics(ContextWithGenerics context, string loginContext)
+        : base(context)
     {
         _loginContext = loginContext;
     }
@@ -389,12 +391,14 @@ public class IdentityUserRoleWithDate : IdentityUserRole<string>
 
 public class MyIdentityRole : IdentityRole<string>
 {
-    public MyIdentityRole() : base()
+    public MyIdentityRole()
+        : base()
     {
         Id = Guid.NewGuid().ToString();
     }
 
-    public MyIdentityRole(string roleName) : this()
+    public MyIdentityRole(string roleName)
+        : this()
     {
         Name = roleName;
     }
@@ -422,7 +426,8 @@ public class ContextWithGenerics
         IdentityUserTokenWithStuff
     >
 {
-    public ContextWithGenerics(DbContextOptions options) : base(options) { }
+    public ContextWithGenerics(DbContextOptions options)
+        : base(options) { }
 }
 
 #endregion

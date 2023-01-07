@@ -74,7 +74,8 @@ namespace System.Net.Internals
             }
         }
 
-        public SocketAddress(AddressFamily family) : this(family, MaxSize) { }
+        public SocketAddress(AddressFamily family)
+            : this(family, MaxSize) { }
 
         public SocketAddress(AddressFamily family, int size)
         {
@@ -124,7 +125,8 @@ namespace System.Net.Internals
             }
         }
 
-        internal SocketAddress(IPAddress ipaddress, int port) : this(ipaddress)
+        internal SocketAddress(IPAddress ipaddress, int port)
+            : this(ipaddress)
         {
             SocketAddressPal.SetPort(Buffer, unchecked((ushort)port));
         }

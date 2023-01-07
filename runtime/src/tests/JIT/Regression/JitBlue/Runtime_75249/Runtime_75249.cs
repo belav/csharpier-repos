@@ -31,7 +31,8 @@ public struct S2
     public S1 F0;
     public short F1;
 
-    public S2(short f1) : this()
+    public S2(short f1)
+        : this()
     {
         F1 = f1;
     }

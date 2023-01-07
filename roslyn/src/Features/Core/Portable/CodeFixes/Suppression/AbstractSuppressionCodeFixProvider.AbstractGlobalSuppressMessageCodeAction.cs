@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             protected AbstractGlobalSuppressMessageCodeAction(
                 AbstractSuppressionCodeFixProvider fixer,
                 Project project
-            ) : base(fixer, title: FeaturesResources.in_Suppression_File)
+            )
+                : base(fixer, title: FeaturesResources.in_Suppression_File)
             {
                 _project = project;
             }

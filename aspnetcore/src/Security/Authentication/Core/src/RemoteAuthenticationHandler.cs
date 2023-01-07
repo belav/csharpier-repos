@@ -50,7 +50,8 @@ public abstract class RemoteAuthenticationHandler<TOptions>
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc />
     protected override Task<object> CreateEventsAsync() =>

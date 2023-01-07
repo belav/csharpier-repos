@@ -22,7 +22,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static readonly XmlIgnoreBehaviorAccessor Instance = new XmlIgnoreBehaviorAccessor();
 
-        private XmlIgnoreBehaviorAccessor() : base(typeof(object), DummyContext.Instance) { }
+        private XmlIgnoreBehaviorAccessor()
+            : base(typeof(object), DummyContext.Instance) { }
 
         public override bool IsIgnored
         {

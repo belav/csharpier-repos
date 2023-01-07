@@ -9,7 +9,8 @@ class MyProxy : RealProxy
 {
     readonly MarshalByRefObject target;
 
-    public MyProxy(MarshalByRefObject target) : base(target.GetType())
+    public MyProxy(MarshalByRefObject target)
+        : base(target.GetType())
     {
         this.target = target;
     }
@@ -62,7 +63,8 @@ class MyProxy : RealProxy
 
 public class EmptyProxy : RealProxy
 {
-    public EmptyProxy(Type type) : base(type) { }
+    public EmptyProxy(Type type)
+        : base(type) { }
 
     public override IMessage Invoke(IMessage msg)
     {

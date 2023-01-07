@@ -16,8 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     internal abstract class AbstractRoslynTableDataSource<TItem, TData>
         : AbstractTableDataSource<TItem, TData> where TItem : TableItem
     {
-        public AbstractRoslynTableDataSource(Workspace workspace) : base(workspace) =>
-            ConnectToSolutionCrawlerService(workspace);
+        public AbstractRoslynTableDataSource(Workspace workspace)
+            : base(workspace) => ConnectToSolutionCrawlerService(workspace);
 
         protected ImmutableArray<DocumentId> GetDocumentsWithSameFilePath(
             Solution solution,

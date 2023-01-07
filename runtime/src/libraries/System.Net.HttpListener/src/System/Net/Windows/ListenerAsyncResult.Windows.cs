@@ -19,7 +19,8 @@ namespace System.Net
             HttpListenerSession session,
             object? userState,
             AsyncCallback? callback
-        ) : base(session, userState, callback)
+        )
+            : base(session, userState, callback)
         {
             _requestContext = new AsyncRequestContext(session.RequestQueueBoundHandle, this);
         }

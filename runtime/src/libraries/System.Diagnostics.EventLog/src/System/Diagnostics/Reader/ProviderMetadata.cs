@@ -43,13 +43,15 @@ namespace System.Diagnostics.Eventing.Reader
 
         private readonly object _syncObject;
 
-        public ProviderMetadata(string providerName) : this(providerName, null, null, null) { }
+        public ProviderMetadata(string providerName)
+            : this(providerName, null, null, null) { }
 
         public ProviderMetadata(
             string providerName,
             EventLogSession session,
             CultureInfo targetCultureInfo
-        ) : this(providerName, session, targetCultureInfo, null) { }
+        )
+            : this(providerName, session, targetCultureInfo, null) { }
 
         internal ProviderMetadata(
             string providerName,

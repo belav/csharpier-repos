@@ -242,7 +242,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
 
         #endregion
 
-        public UDFSqlContext(DbContextOptions options) : base(options) { }
+        public UDFSqlContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

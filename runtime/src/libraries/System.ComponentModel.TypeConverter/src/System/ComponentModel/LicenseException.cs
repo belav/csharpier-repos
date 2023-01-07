@@ -44,7 +44,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseException'/> class for the
         /// specified type and instance with the specified message.
         /// </summary>
-        public LicenseException(Type? type, object? instance, string? message) : base(message)
+        public LicenseException(Type? type, object? instance, string? message)
+            : base(message)
         {
             LicensedType = type;
             _instance = instance;
@@ -60,7 +61,8 @@ namespace System.ComponentModel
             object? instance,
             string? message,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             LicensedType = type;
             _instance = instance;

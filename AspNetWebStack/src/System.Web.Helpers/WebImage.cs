@@ -1147,7 +1147,8 @@ namespace System.Web.Helpers
                 VerticalAlign verticalAlign,
                 int opacity,
                 int padding
-            ) : base(horizontalAlign, verticalAlign, padding)
+            )
+                : base(horizontalAlign, verticalAlign, padding)
             {
                 WatermarkImage = image;
                 Width = width;
@@ -1219,7 +1220,8 @@ namespace System.Web.Helpers
                 HorizontalAlign alignX,
                 VerticalAlign alignY,
                 int padding
-            ) : base(alignX, alignY, padding)
+            )
+                : base(alignX, alignY, padding)
             {
                 Text = text;
                 FontColor = fontColor;

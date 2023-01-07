@@ -10,7 +10,8 @@ namespace System.Configuration
             bool moved,
             string updatedXml,
             SectionRecord sectionRecord
-        ) : base(configKey, moved, updatedXml)
+        )
+            : base(configKey, moved, updatedXml)
         {
             SectionRecord = sectionRecord;
         }

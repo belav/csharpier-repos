@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     {
         private readonly Func<string, Assembly, Assembly> _assemblyResolveHandlerOpt;
 
-        public DesktopAssemblyLoaderImpl(InteractiveAssemblyLoader loader) : base(loader)
+        public DesktopAssemblyLoaderImpl(InteractiveAssemblyLoader loader)
+            : base(loader)
         {
             _assemblyResolveHandlerOpt = loader.ResolveAssembly;
             CoreLightup.Desktop.AddAssemblyResolveHandler(_assemblyResolveHandlerOpt);

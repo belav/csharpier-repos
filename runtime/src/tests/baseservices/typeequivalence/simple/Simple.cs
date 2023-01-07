@@ -80,7 +80,8 @@ public class Simple
             return new MethodTestDerived(scaleValue, baseScaleValue);
         }
 
-        private MethodTestDerived(int scaleValue, int baseScaleValue) : base(baseScaleValue)
+        private MethodTestDerived(int scaleValue, int baseScaleValue)
+            : base(baseScaleValue)
         {
             this.scaleValue = scaleValue;
         }

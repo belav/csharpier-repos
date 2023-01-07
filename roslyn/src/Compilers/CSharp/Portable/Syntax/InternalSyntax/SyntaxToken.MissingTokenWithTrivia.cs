@@ -25,12 +25,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 GreenNode trailing,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(kind, leading, trailing, diagnostics, annotations)
+            )
+                : base(kind, leading, trailing, diagnostics, annotations)
             {
                 this.flags &= ~NodeFlags.IsNotMissing;
             }
 
-            internal MissingTokenWithTrivia(ObjectReader reader) : base(reader)
+            internal MissingTokenWithTrivia(ObjectReader reader)
+                : base(reader)
             {
                 this.flags &= ~NodeFlags.IsNotMissing;
             }

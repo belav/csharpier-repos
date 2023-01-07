@@ -24,7 +24,8 @@ public class ProblemDetailsWrapper : IXmlSerializable, IUnwrappable
     /// <summary>
     /// Initializes a new instance of <see cref="ProblemDetailsWrapper"/>.
     /// </summary>
-    public ProblemDetailsWrapper() : this(new ProblemDetails()) { }
+    public ProblemDetailsWrapper()
+        : this(new ProblemDetails()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ProblemDetailsWrapper"/>.

@@ -8,7 +8,8 @@ public class AspNetIdentityCustomTypesIntKeyInMemoryTest
 {
     public AspNetIdentityCustomTypesIntKeyInMemoryTest(
         AspNetIdentityCustomTypesIntKeyInMemoryFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

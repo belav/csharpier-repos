@@ -11,7 +11,8 @@ public class ComplexNavigationsCollectionsQueryInMemoryTest
     public ComplexNavigationsCollectionsQueryInMemoryTest(
         ComplexNavigationsQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

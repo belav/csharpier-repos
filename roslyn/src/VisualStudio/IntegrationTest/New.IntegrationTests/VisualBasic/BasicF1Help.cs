@@ -16,7 +16,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     {
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        public BasicF1Help() : base(nameof(BasicF1Help)) { }
+        public BasicF1Help()
+            : base(nameof(BasicF1Help)) { }
 
         [IdeFact]
         private async Task F1Help()

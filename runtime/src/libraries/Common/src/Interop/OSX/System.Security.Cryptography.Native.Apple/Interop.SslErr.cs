@@ -11,7 +11,8 @@ internal static partial class Interop
         {
             internal SslException() { }
 
-            internal SslException(int errorCode, string? message) : base(message)
+            internal SslException(int errorCode, string? message)
+                : base(message)
             {
                 HResult = errorCode;
             }

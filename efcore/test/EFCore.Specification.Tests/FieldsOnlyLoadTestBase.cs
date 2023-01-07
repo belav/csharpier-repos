@@ -4987,7 +4987,8 @@ public abstract class FieldsOnlyLoadTestBase<TFixture> : IClassFixture<TFixture>
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 

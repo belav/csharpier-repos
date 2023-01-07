@@ -16,7 +16,8 @@ public class DeleteClaimAction : ClaimAction
     /// Creates a new DeleteClaimAction.
     /// </summary>
     /// <param name="claimType">The ClaimType of Claims to delete.</param>
-    public DeleteClaimAction(string claimType) : base(claimType, ClaimValueTypes.String) { }
+    public DeleteClaimAction(string claimType)
+        : base(claimType, ClaimValueTypes.String) { }
 
     /// <inheritdoc />
     public override void Run(JsonElement userData, ClaimsIdentity identity, string issuer)

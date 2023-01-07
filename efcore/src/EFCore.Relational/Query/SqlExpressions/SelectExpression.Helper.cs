@@ -520,7 +520,8 @@ public sealed partial class SelectExpression
             string? alias,
             IEntityType entityType,
             IReadOnlyList<SelectExpression> subSelectExpressions
-        ) : base(alias)
+        )
+            : base(alias)
         {
             EntityType = entityType;
             SelectExpressions = subSelectExpressions;
@@ -531,7 +532,8 @@ public sealed partial class SelectExpression
             IEntityType entityType,
             IReadOnlyList<SelectExpression> subSelectExpressions,
             IEnumerable<IAnnotation>? annotations
-        ) : base(alias, annotations)
+        )
+            : base(alias, annotations)
         {
             EntityType = entityType;
             SelectExpressions = subSelectExpressions;
@@ -664,7 +666,8 @@ public sealed partial class SelectExpression
             Type type,
             RelationalTypeMapping typeMapping,
             bool nullable
-        ) : base(type, typeMapping)
+        )
+            : base(type, typeMapping)
         {
             Name = name;
             _table = table;

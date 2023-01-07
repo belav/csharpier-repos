@@ -13,7 +13,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage.Controllers
     {
         private const string ErrorViewName = "Error";
 
-        public HelpController() : this(GlobalConfiguration.Configuration) { }
+        public HelpController()
+            : this(GlobalConfiguration.Configuration) { }
 
         public HelpController(HttpConfiguration config)
         {

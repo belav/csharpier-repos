@@ -21,7 +21,8 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,
         ISet<string> keywords,
         bool acceptTrailingDot
-    ) : base(tokenizer)
+    )
+        : base(tokenizer)
     {
         _keywords = keywords ?? new HashSet<string>();
 

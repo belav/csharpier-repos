@@ -1624,7 +1624,8 @@ namespace Tests.Collections
             bool isResetNotSupported,
             bool isGenericCompatibility,
             bool itemsMustBeUnique
-        ) : base(isSynchronized, isReadOnly, isFixedSize)
+        )
+            : base(isSynchronized, isReadOnly, isFixedSize)
         {
             _isResetNotSupported = isResetNotSupported;
             _isGenericCompatibility = isGenericCompatibility;

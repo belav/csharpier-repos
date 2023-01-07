@@ -15,7 +15,8 @@ internal sealed class GridScenario : ComponentRenderingScenarioBase
         CommandOptionType.SingleValue
     );
 
-    public GridScenario() : base("grid")
+    public GridScenario()
+        : base("grid")
     {
         Options.Add(_gridTypeOption);
     }

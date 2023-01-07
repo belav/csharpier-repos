@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             ImageMoniker imageMoniker,
             string automationName,
             ImmutableArray<MenuItemViewModel> targets
-        ) : base(displayContent, imageMoniker, automationName)
+        )
+            : base(displayContent, imageMoniker, automationName)
         {
             Targets = targets;
         }

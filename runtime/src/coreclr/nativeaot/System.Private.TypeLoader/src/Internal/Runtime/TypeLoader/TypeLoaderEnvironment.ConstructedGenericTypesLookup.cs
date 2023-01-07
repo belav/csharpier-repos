@@ -173,7 +173,8 @@ namespace Internal.Runtime.TypeLoader
             private RuntimeTypeHandle _genericTypeDefinitionHandle;
             private RuntimeTypeHandle[] _genericTypeArgumentHandles;
 
-            internal HandleBasedGenericTypeLookup(DefType typeToLookup) : base(typeToLookup)
+            internal HandleBasedGenericTypeLookup(DefType typeToLookup)
+                : base(typeToLookup)
             {
                 Debug.Assert(typeToLookup != null);
                 _genericTypeDefinitionHandle = _typeToLookup.GetTypeDefinition().RuntimeTypeHandle;
@@ -183,7 +184,8 @@ namespace Internal.Runtime.TypeLoader
             internal HandleBasedGenericTypeLookup(
                 RuntimeTypeHandle genericTypeDefinitionHandle,
                 RuntimeTypeHandle[] genericTypeArgumentHandles
-            ) : base(null)
+            )
+                : base(null)
             {
                 Debug.Assert(genericTypeArgumentHandles != null);
                 _genericTypeDefinitionHandle = genericTypeDefinitionHandle;

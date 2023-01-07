@@ -35,7 +35,8 @@ namespace System.Web.Mvc
 
         public ControllerActionInvoker() { }
 
-        internal ControllerActionInvoker(params object[] filters) : this()
+        internal ControllerActionInvoker(params object[] filters)
+            : this()
         {
             if (filters != null)
             {

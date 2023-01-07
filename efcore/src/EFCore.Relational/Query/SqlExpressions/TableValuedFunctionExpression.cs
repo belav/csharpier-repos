@@ -37,7 +37,8 @@ public class TableValuedFunctionExpression : TableExpressionBase, ITableBasedExp
         IStoreFunction storeFunction,
         IReadOnlyList<SqlExpression> arguments,
         IEnumerable<IAnnotation>? annotations
-    ) : base(alias, annotations)
+    )
+        : base(alias, annotations)
     {
         StoreFunction = storeFunction;
         Arguments = arguments;

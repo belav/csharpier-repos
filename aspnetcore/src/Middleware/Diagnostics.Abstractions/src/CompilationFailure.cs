@@ -21,7 +21,9 @@ public class CompilationFailure
         string? sourceFileContent,
         string? compiledContent,
         IEnumerable<DiagnosticMessage>? messages
-    ) : this(sourceFilePath, sourceFileContent, compiledContent, messages, failureSummary: null) { }
+    )
+        : this(sourceFilePath, sourceFileContent, compiledContent, messages, failureSummary: null)
+    { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="CompilationFailure"/>.

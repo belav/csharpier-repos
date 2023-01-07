@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class BoolKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public BoolKeywordRecommender() : base(SyntaxKind.BoolKeyword) { }
+        public BoolKeywordRecommender()
+            : base(SyntaxKind.BoolKeyword) { }
 
         protected override bool IsValidContextWorker(
             int position,

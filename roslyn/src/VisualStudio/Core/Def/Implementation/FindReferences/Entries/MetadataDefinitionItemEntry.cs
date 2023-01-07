@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public MetadataDefinitionItemEntry(
                 AbstractTableDataSourceFindUsagesContext context,
                 RoslynDefinitionBucket definitionBucket
-            ) : base(definitionBucket, context.Presenter) { }
+            )
+                : base(definitionBucket, context.Presenter) { }
 
             protected override object? GetValueWorker(string keyName)
             {

@@ -281,7 +281,8 @@ namespace System.Net.Mime
         private readonly WriteStateInfoBase _writeState;
         private readonly IByteEncoder _encoder;
 
-        internal QEncodedStream(WriteStateInfoBase wsi) : base(new MemoryStream())
+        internal QEncodedStream(WriteStateInfoBase wsi)
+            : base(new MemoryStream())
         {
             _writeState = wsi;
             _encoder = new QEncoder(_writeState);
@@ -510,7 +511,8 @@ namespace System.Net.Mime
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;

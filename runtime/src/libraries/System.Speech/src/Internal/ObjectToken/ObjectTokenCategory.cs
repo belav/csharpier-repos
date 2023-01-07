@@ -13,7 +13,8 @@ namespace System.Speech.Internal.ObjectTokens
     {
         #region Constructors
 
-        protected ObjectTokenCategory(string keyId, RegistryDataKey key) : base(keyId, key) { }
+        protected ObjectTokenCategory(string keyId, RegistryDataKey key)
+            : base(keyId, key) { }
 
         internal static ObjectTokenCategory Create(string sCategoryId)
         {

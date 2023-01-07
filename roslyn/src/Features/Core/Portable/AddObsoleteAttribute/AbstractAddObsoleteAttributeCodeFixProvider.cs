@@ -116,7 +116,8 @@ namespace Microsoft.CodeAnalysis.AddObsoleteAttribute
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(title, createChangedDocument, title) { }
+            )
+                : base(title, createChangedDocument, title) { }
         }
     }
 }

@@ -42,7 +42,8 @@ namespace System.Linq.Parallel
             Func<TRightInput, TKey> rightKeySelector,
             Func<TLeftInput, IEnumerable<TRightInput>, TOutput> resultSelector,
             IEqualityComparer<TKey>? keyComparer
-        ) : base(left, right)
+        )
+            : base(left, right)
         {
             Debug.Assert(left != null && right != null, "child data sources cannot be null");
             Debug.Assert(leftKeySelector != null, "left key selector must not be null");

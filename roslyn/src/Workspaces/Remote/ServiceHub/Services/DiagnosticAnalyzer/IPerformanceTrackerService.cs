@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             double lof_value,
             double average,
             double stddev
-        ) : this()
+        )
+            : this()
         {
             BuiltIn = builtIn;
             AnalyzerId = analyzerId;

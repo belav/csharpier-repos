@@ -11,7 +11,8 @@ namespace System.Net.Http.HPack
     {
         public HuffmanDecodingException() { }
 
-        public HuffmanDecodingException(string message) : base(message) { }
+        public HuffmanDecodingException(string message)
+            : base(message) { }
 
         private HuffmanDecodingException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

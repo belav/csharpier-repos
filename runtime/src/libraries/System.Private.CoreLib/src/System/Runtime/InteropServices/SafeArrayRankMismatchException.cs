@@ -15,12 +15,14 @@ namespace System.Runtime.InteropServices
     )]
     public class SafeArrayRankMismatchException : SystemException
     {
-        public SafeArrayRankMismatchException() : base(SR.Arg_SafeArrayRankMismatchException)
+        public SafeArrayRankMismatchException()
+            : base(SR.Arg_SafeArrayRankMismatchException)
         {
             HResult = HResults.COR_E_SAFEARRAYRANKMISMATCH;
         }
 
-        public SafeArrayRankMismatchException(string? message) : base(message)
+        public SafeArrayRankMismatchException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_SAFEARRAYRANKMISMATCH;
         }

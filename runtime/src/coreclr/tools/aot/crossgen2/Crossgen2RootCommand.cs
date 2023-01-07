@@ -240,7 +240,8 @@ namespace ILCompiler
 
         public static bool IsArmel { get; private set; }
 
-        public Crossgen2RootCommand(string[] args) : base(SR.Crossgen2BannerText)
+        public Crossgen2RootCommand(string[] args)
+            : base(SR.Crossgen2BannerText)
         {
             AddArgument(InputFilePaths);
             AddOption(UnrootedInputFilePaths);

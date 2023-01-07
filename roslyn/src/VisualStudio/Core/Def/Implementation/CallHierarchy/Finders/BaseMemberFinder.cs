@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
             ProjectId projectId,
             IAsynchronousOperationListener asyncListener,
             CallHierarchyProvider provider
-        ) : base(symbol, projectId, asyncListener, provider)
+        )
+            : base(symbol, projectId, asyncListener, provider)
         {
             _text = string.Format(
                 EditorFeaturesResources.Calls_To_Base_Member_0,

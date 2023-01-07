@@ -21,7 +21,8 @@ namespace System.Security.Permissions
     )]
     public sealed class IsolatedStorageFilePermissionAttribute : IsolatedStoragePermissionAttribute
     {
-        public IsolatedStorageFilePermissionAttribute(SecurityAction action) : base(action) { }
+        public IsolatedStorageFilePermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public override IPermission CreatePermission()
         {

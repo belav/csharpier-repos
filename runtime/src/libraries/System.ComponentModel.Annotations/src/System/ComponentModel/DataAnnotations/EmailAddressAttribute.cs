@@ -9,7 +9,8 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed class EmailAddressAttribute : DataTypeAttribute
     {
-        public EmailAddressAttribute() : base(DataType.EmailAddress)
+        public EmailAddressAttribute()
+            : base(DataType.EmailAddress)
         {
             // Set DefaultErrorMessage not ErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.

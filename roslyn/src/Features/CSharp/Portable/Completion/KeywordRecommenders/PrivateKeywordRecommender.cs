@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class PrivateKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public PrivateKeywordRecommender() : base(SyntaxKind.PrivateKeyword) { }
+        public PrivateKeywordRecommender()
+            : base(SyntaxKind.PrivateKeyword) { }
 
         protected override bool IsValidContext(
             int position,

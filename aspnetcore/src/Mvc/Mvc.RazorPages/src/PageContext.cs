@@ -31,7 +31,8 @@ public class PageContext : ActionContext
     /// Initializes a new instance of <see cref="PageContext"/>.
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
-    public PageContext(ActionContext actionContext) : base(actionContext) { }
+    public PageContext(ActionContext actionContext)
+        : base(actionContext) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="PageContext"/>.
@@ -43,7 +44,8 @@ public class PageContext : ActionContext
         HttpContext httpContext,
         RouteData routeData,
         CompiledPageActionDescriptor actionDescriptor
-    ) : base(httpContext, routeData, actionDescriptor)
+    )
+        : base(httpContext, routeData, actionDescriptor)
     {
         _actionDescriptor = actionDescriptor;
     }

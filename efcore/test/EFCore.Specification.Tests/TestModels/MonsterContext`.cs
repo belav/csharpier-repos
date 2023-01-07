@@ -86,7 +86,8 @@ public class MonsterContext<
     where TDiscontinuedProduct : class, TProduct, IDiscontinuedProduct, new()
     where TProductPageView : class, TPageView, IProductPageView, new()
 {
-    public MonsterContext(DbContextOptions options) : base(options) { }
+    public MonsterContext(DbContextOptions options)
+        : base(options) { }
 
     public override IQueryable<ICustomer> Customers => Set<TCustomer>();
 

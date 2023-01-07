@@ -29,7 +29,8 @@ namespace System.DirectoryServices.AccountManagement
             string password,
             string serverName,
             ContextOptions options
-        ) : base(ctxBase, ownCtxBase, username, password, options)
+        )
+            : base(ctxBase, ownCtxBase, username, password, options)
         {
             this.userSuppliedServerName = serverName;
         }

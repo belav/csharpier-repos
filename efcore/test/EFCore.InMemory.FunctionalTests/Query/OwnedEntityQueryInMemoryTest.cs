@@ -22,7 +22,8 @@ public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
 
     protected class MyContext : DbContext
     {
-        public MyContext(DbContextOptions options) : base(options) { }
+        public MyContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Warehouse> Warehouses { get; set; }
 
@@ -97,6 +98,7 @@ public class OwnedEntityQueryInMemoryTest : OwnedEntityQueryTestBase
 
     protected class MyContext26592 : MyContext26592Base
     {
-        public MyContext26592(DbContextOptions options) : base(options) { }
+        public MyContext26592(DbContextOptions options)
+            : base(options) { }
     }
 }

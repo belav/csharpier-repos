@@ -10,7 +10,8 @@ namespace Microsoft.Web.FxCop
     {
         private readonly Dictionary<string, string> _problematicTypes = GetProblematicTypes();
 
-        public DoNotUseProblematicTaskTypesRule() : base("DoNotUseProblematicTaskTypes") { }
+        public DoNotUseProblematicTaskTypesRule()
+            : base("DoNotUseProblematicTaskTypes") { }
 
         public override ProblemCollection Check(Member member)
         {

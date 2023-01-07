@@ -25,7 +25,8 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonObject"/> class that is empty.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonObject(JsonNodeOptions? options = null) : base(options) { }
+        public JsonObject(JsonNodeOptions? options = null)
+            : base(options) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains the specified <paramref name="properties"/>.
@@ -35,7 +36,8 @@ namespace System.Text.Json.Nodes
         public JsonObject(
             IEnumerable<KeyValuePair<string, JsonNode?>> properties,
             JsonNodeOptions? options = null
-        ) : this(options)
+        )
+            : this(options)
         {
             foreach (KeyValuePair<string, JsonNode?> node in properties)
             {
@@ -69,7 +71,8 @@ namespace System.Text.Json.Nodes
             );
         }
 
-        internal JsonObject(JsonElement element, JsonNodeOptions? options = null) : this(options)
+        internal JsonObject(JsonElement element, JsonNodeOptions? options = null)
+            : this(options)
         {
             Debug.Assert(element.ValueKind == JsonValueKind.Object);
             _jsonElement = element;

@@ -28,7 +28,8 @@ namespace Internal.Cryptography
             byte[]? iv,
             bool encrypting,
             int paddingSize
-        ) : base(iv, blockSizeInBytes, paddingSize)
+        )
+            : base(iv, blockSizeInBytes, paddingSize)
         {
             _encrypting = encrypting;
             _cngKey = cngKeyFactory();

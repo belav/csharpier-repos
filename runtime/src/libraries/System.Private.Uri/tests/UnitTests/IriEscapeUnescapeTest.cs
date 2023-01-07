@@ -242,7 +242,8 @@ namespace System.Net.Test.Uri.IriTest
                 Array.Fill(Buffer, PaddingValue);
             }
 
-            public HeapCheck(string input) : this(input.Length)
+            public HeapCheck(string input)
+                : this(input.Length)
             {
                 input.CopyTo(0, Buffer, PaddingLength, _length);
             }

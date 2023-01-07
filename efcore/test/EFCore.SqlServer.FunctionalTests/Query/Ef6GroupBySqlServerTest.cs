@@ -9,7 +9,8 @@ public class Ef6GroupBySqlServerTest
     public Ef6GroupBySqlServerTest(
         Ef6GroupBySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

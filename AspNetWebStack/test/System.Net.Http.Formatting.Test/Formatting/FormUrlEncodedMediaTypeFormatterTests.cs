@@ -291,7 +291,8 @@ namespace System.Net.Http.Formatting
 
             public TestFormUrlEncodedMediaTypeFormatter(
                 TestFormUrlEncodedMediaTypeFormatter formatter
-            ) : base(formatter) { }
+            )
+                : base(formatter) { }
 
             public new bool CanReadType(Type type)
             {

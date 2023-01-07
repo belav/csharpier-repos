@@ -32,7 +32,8 @@ namespace System.Security.Cryptography
         ///     Create an ECDsaCng algorithm with a random 521 bit key pair.
         /// </summary>
         [SupportedOSPlatform("windows")]
-        public ECDsaCng() : this(521) { }
+        public ECDsaCng()
+            : this(521) { }
 
         /// <summary>
         ///     Creates a new ECDsaCng object that will use a randomly generated key of the specified size.

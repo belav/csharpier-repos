@@ -134,7 +134,8 @@ namespace System.Xml.Serialization
             TypeKind kind,
             TypeDesc? baseTypeDesc,
             TypeFlags flags
-        ) : this(name, fullName, (XmlSchemaType?)null, kind, baseTypeDesc, flags, null) { }
+        )
+            : this(name, fullName, (XmlSchemaType?)null, kind, baseTypeDesc, flags, null) { }
 
         internal TypeDesc(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
@@ -165,7 +166,8 @@ namespace System.Xml.Serialization
             TypeDesc? baseTypeDesc,
             TypeFlags flags,
             TypeDesc? arrayElementTypeDesc
-        ) : this(name, fullName, null, kind, baseTypeDesc, flags, null)
+        )
+            : this(name, fullName, null, kind, baseTypeDesc, flags, null)
         {
             _arrayElementTypeDesc = arrayElementTypeDesc;
             _type = type;

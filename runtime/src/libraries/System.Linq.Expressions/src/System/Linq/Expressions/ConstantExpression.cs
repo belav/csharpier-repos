@@ -57,7 +57,8 @@ namespace System.Linq.Expressions
 
     internal sealed class TypedConstantExpression : ConstantExpression
     {
-        internal TypedConstantExpression(object? value, Type type) : base(value)
+        internal TypedConstantExpression(object? value, Type type)
+            : base(value)
         {
             Type = type;
         }

@@ -19,7 +19,8 @@ namespace Microsoft.Web.Mvc
     {
         private string _extensions;
 
-        public FileExtensionsAttribute() : base("upload")
+        public FileExtensionsAttribute()
+            : base("upload")
         {
             ErrorMessage = MvcResources.FileExtensionsAttribute_Invalid;
         }

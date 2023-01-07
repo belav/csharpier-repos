@@ -41,7 +41,8 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentException"><para><paramref name="other"/> is a <see cref="PaxGlobalExtendedAttributesTarEntry"/> and cannot be converted.</para>
         /// <para>-or-</para>
         /// <para>The entry type of <paramref name="other"/> is not supported for conversion to the GNU format.</para></exception>
-        public GnuTarEntry(TarEntry other) : base(other, TarEntryFormat.Gnu)
+        public GnuTarEntry(TarEntry other)
+            : base(other, TarEntryFormat.Gnu)
         {
             if (other is GnuTarEntry gnuOther)
             {

@@ -14,7 +14,8 @@ public class ResendEmailConfirmation : DefaultUIPage
         HttpClient client,
         IHtmlDocument document,
         DefaultUIContext context
-    ) : base(client, document, context)
+    )
+        : base(client, document, context)
     {
         _resendForm = HtmlAssert.HasForm(document);
     }

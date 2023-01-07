@@ -20,7 +20,8 @@ namespace Roslyn.Test.Utilities
             IEnumerable<string> existingFullPaths,
             string baseDirectory = null,
             ImmutableArray<string> searchPaths = default(ImmutableArray<string>)
-        ) : base(searchPaths.NullToEmpty(), baseDirectory)
+        )
+            : base(searchPaths.NullToEmpty(), baseDirectory)
         {
             _existingFullPaths = new HashSet<string>(existingFullPaths, StringComparer.Ordinal);
         }

@@ -34,7 +34,8 @@ public class CosmosDatabaseWrapper : Database
         DatabaseDependencies dependencies,
         ICosmosClientWrapper cosmosClient,
         ILoggingOptions loggingOptions
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _cosmosClient = cosmosClient;
 

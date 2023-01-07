@@ -15,7 +15,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             int initialSize,
             int maxSize,
             BufferManager bufferManager
-        ) : base(initialSize, maxSize, bufferManager)
+        )
+            : base(initialSize, maxSize, bufferManager)
         {
             _quotaExceededString = quotaExceededString;
         }

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 ComplexTrivia original,
                 int lineBreaks,
                 int space
-            ) : base(options, original.Token1.Language)
+            )
+                : base(options, original.Token1.Language)
             {
                 Contract.ThrowIfNull(original);
 

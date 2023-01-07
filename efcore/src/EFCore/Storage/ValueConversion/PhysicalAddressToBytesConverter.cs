@@ -21,7 +21,8 @@ public class PhysicalAddressToBytesConverter : ValueConverter<PhysicalAddress?, 
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public PhysicalAddressToBytesConverter() : this(null) { }
+    public PhysicalAddressToBytesConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

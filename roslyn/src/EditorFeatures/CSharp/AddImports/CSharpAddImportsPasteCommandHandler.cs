@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AddImports
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listnerProvider
-        ) : base(threadingContext, globalOptions, listnerProvider) { }
+        )
+            : base(threadingContext, globalOptions, listnerProvider) { }
 
         public override string DisplayName => CSharpEditorResources.Add_Missing_Usings_on_Paste;
         protected override string DialogText => CSharpEditorResources.Adding_missing_usings;

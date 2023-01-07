@@ -15,7 +15,8 @@ namespace System.Web.Mvc
         private IModelBinder _defaultBinder;
         private ModelBinderProviderCollection _modelBinderProviders;
 
-        public ModelBinderDictionary() : this(ModelBinderProviders.BinderProviders) { }
+        public ModelBinderDictionary()
+            : this(ModelBinderProviders.BinderProviders) { }
 
         internal ModelBinderDictionary(ModelBinderProviderCollection modelBinderProviders)
         {

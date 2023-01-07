@@ -9,7 +9,8 @@ public class Ef6GroupByInMemoryTest
     public Ef6GroupByInMemoryTest(
         Ef6GroupByInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public class Ef6GroupByInMemoryFixture : Ef6GroupByFixtureBase
     {

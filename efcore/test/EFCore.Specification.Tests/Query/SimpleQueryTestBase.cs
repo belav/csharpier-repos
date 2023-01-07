@@ -39,7 +39,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context24368 : DbContext
     {
-        public Context24368(DbContextOptions options) : base(options) { }
+        public Context24368(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Appraisal> Appraisals { get; set; }
         public DbSet<Staff> Staff { get; set; }
@@ -213,7 +214,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context21770 : DbContext
     {
-        public Context21770(DbContextOptions options) : base(options) { }
+        public Context21770(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<IceCream> IceCreams { get; set; }
         public DbSet<Food> Food { get; set; }
@@ -286,7 +288,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context24657 : DbContext
     {
-        public Context24657(DbContextOptions options) : base(options) { }
+        public Context24657(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Author> Authors { get; set; }
 
@@ -353,7 +356,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context26433 : DbContext
     {
-        public Context26433(DbContextOptions options) : base(options) { }
+        public Context26433(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Book26433> Books { get; set; }
         public DbSet<Author26433> Authors { get; set; }
@@ -417,7 +421,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context26428 : DbContext
     {
-        public Context26428(DbContextOptions options) : base(options) { }
+        public Context26428(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Supplier> Suppliers => Set<Supplier>();
 
@@ -550,7 +555,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context26593 : DbContext
     {
-        public Context26593(DbContextOptions options) : base(options) { }
+        public Context26593(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -626,7 +632,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context26587 : DbContext
     {
-        public Context26587(DbContextOptions options) : base(options) { }
+        public Context26587(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<OrderItem> OrderItems { get; set; }
     }
@@ -669,7 +676,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context26472 : DbContext
     {
-        public Context26472(DbContextOptions options) : base(options) { }
+        public Context26472(DbContextOptions options)
+            : base(options) { }
 
         public virtual DbSet<Order26472> Orders { get; set; }
         public virtual DbSet<OrderItem26472> OrderItems { get; set; }
@@ -776,7 +784,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context27083 : DbContext
     {
-        public Context27083(DbContextOptions options) : base(options) { }
+        public Context27083(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<TimeSheet> TimeSheets { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -906,7 +915,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context27094 : DbContext
     {
-        public Context27094(DbContextOptions options) : base(options) { }
+        public Context27094(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Table> Table { get; set; }
     }
@@ -963,7 +973,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context27163 : DbContext
     {
-        public Context27163(DbContextOptions options) : base(options) { }
+        public Context27163(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Parent> Parents { get; set; }
 
@@ -1065,7 +1076,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context26744 : DbContext
     {
-        public Context26744(DbContextOptions options) : base(options) { }
+        public Context26744(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Parent26744> Parents { get; set; }
 
@@ -1128,7 +1140,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context27343 : DbContext
     {
-        public Context27343(DbContextOptions options) : base(options) { }
+        public Context27343(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Parent27343> Parents { get; set; }
 
@@ -1178,7 +1191,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context28196 : DbContext
     {
-        public Context28196(DbContextOptions options) : base(options) { }
+        public Context28196(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Animal> Animals { get; set; }
 
@@ -1257,7 +1271,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
     protected class Context28039 : DbContext
     {
-        public Context28039(DbContextOptions options) : base(options) { }
+        public Context28039(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<IndexData> IndexData { get; set; }
         public DbSet<TableData> TableData { get; set; }

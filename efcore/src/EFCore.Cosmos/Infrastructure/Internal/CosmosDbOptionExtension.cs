@@ -563,7 +563,8 @@ public class CosmosOptionsExtension : IDbContextOptionsExtension
         private string? _logFragment;
         private int? _serviceProviderHash;
 
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         private new CosmosOptionsExtension Extension => (CosmosOptionsExtension)base.Extension;
 

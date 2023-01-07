@@ -23,7 +23,8 @@ public class InMemoryQueryTranslationPreprocessor : QueryTranslationPreprocessor
     public InMemoryQueryTranslationPreprocessor(
         QueryTranslationPreprocessorDependencies dependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext) { }
+    )
+        : base(dependencies, queryCompilationContext) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

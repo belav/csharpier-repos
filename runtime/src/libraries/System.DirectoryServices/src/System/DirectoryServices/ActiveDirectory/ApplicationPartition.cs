@@ -65,7 +65,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? dnsName,
             ApplicationPartitionType appType,
             DirectoryEntryManager directoryEntryMgr
-        ) : base(context, distinguishedName)
+        )
+            : base(context, distinguishedName)
         {
             this.directoryEntryMgr = directoryEntryMgr;
             _appType = appType;

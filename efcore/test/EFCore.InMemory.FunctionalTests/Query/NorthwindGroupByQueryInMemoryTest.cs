@@ -11,7 +11,8 @@ public class NorthwindGroupByQueryInMemoryTest
     public NorthwindGroupByQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

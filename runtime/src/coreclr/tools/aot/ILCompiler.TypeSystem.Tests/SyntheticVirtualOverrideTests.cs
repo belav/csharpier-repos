@@ -157,8 +157,8 @@ namespace TypeSystemTests
             private Dictionary<TypeDesc, MethodDesc> _equalsMethods =
                 new Dictionary<TypeDesc, MethodDesc>();
 
-            public SyntheticVirtualOverrideTypeSystemContext() : base(TargetArchitecture.Unknown)
-            { }
+            public SyntheticVirtualOverrideTypeSystemContext()
+                : base(TargetArchitecture.Unknown) { }
 
             private MethodDesc GetGetHashCodeMethod(TypeDesc type)
             {

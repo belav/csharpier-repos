@@ -67,7 +67,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TodoComments
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
             [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
             _eventListenerTracker = new EventListenerTracker<ITodoListProvider>(

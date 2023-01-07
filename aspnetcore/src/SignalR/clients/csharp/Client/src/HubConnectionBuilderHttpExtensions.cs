@@ -202,7 +202,8 @@ public static class HubConnectionBuilderHttpExtensions
     {
         public HttpConnectionOptionsDerivedHttpEndPoint(
             IOptions<HttpConnectionOptions> httpConnectionOptions
-        ) : base(httpConnectionOptions.Value.Url!) { }
+        )
+            : base(httpConnectionOptions.Value.Url!) { }
     }
 
     private sealed class HubProtocolDerivedHttpOptionsConfigurer

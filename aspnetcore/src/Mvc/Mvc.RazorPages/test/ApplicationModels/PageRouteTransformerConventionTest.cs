@@ -52,7 +52,8 @@ public class PageRouteTransformerConventionTest
     {
         public CustomPageRouteTransformerConvention(
             IOutboundParameterTransformer parameterTransformer
-        ) : base(parameterTransformer) { }
+        )
+            : base(parameterTransformer) { }
 
         protected override bool ShouldApply(PageRouteModel action)
         {

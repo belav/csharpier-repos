@@ -734,7 +734,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             ParameterSymbol parameterSymbol,
             bool hasErrors = false
-        ) : this(syntax, parameterSymbol, parameterSymbol.Type, hasErrors) { }
+        )
+            : this(syntax, parameterSymbol, parameterSymbol.Type, hasErrors) { }
 
         public BoundParameter(SyntaxNode syntax, ParameterSymbol parameterSymbol)
             : this(syntax, parameterSymbol, parameterSymbol.Type) { }
@@ -784,14 +785,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             AliasSymbol? aliasOpt,
             TypeWithAnnotations typeWithAnnotations,
             bool hasErrors = false
-        ) : this(syntax, aliasOpt, null, typeWithAnnotations, hasErrors) { }
+        )
+            : this(syntax, aliasOpt, null, typeWithAnnotations, hasErrors) { }
 
         public BoundTypeExpression(
             SyntaxNode syntax,
             AliasSymbol? aliasOpt,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(syntax, aliasOpt, null, TypeWithAnnotations.Create(type), hasErrors) { }
+        )
+            : this(syntax, aliasOpt, null, TypeWithAnnotations.Create(type), hasErrors) { }
 
         public BoundTypeExpression(
             SyntaxNode syntax,
@@ -799,7 +802,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> dimensionsOpt,
             TypeWithAnnotations typeWithAnnotations,
             bool hasErrors = false
-        ) : this(syntax, aliasOpt, null, dimensionsOpt, typeWithAnnotations, hasErrors) { }
+        )
+            : this(syntax, aliasOpt, null, dimensionsOpt, typeWithAnnotations, hasErrors) { }
     }
 
     internal sealed partial class BoundNamespaceExpression
@@ -808,7 +812,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             NamespaceSymbol namespaceSymbol,
             bool hasErrors = false
-        ) : this(syntax, namespaceSymbol, null, hasErrors) { }
+        )
+            : this(syntax, namespaceSymbol, null, hasErrors) { }
 
         public BoundNamespaceExpression(SyntaxNode syntax, NamespaceSymbol namespaceSymbol)
             : this(syntax, namespaceSymbol, null) { }
@@ -828,7 +833,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             bool isRef = false,
             bool hasErrors = false
-        ) : this(syntax, left, right, isRef, type, hasErrors) { }
+        )
+            : this(syntax, left, right, isRef, type, hasErrors) { }
     }
 
     internal sealed partial class BoundBadExpression
@@ -839,7 +845,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<Symbol?> symbols,
             ImmutableArray<BoundExpression> childBoundNodes,
             TypeSymbol type
-        ) : this(syntax, resultKind, symbols, childBoundNodes, type, true)
+        )
+            : this(syntax, resultKind, symbols, childBoundNodes, type, true)
         {
             Debug.Assert((object)type != null);
         }
@@ -931,7 +938,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<LocalSymbol> locals,
             ImmutableArray<BoundStatement> statements,
             bool hasErrors = false
-        ) : this(syntax, locals, ImmutableArray<LocalFunctionSymbol>.Empty, statements, hasErrors)
+        )
+            : this(syntax, locals, ImmutableArray<LocalFunctionSymbol>.Empty, statements, hasErrors)
         { }
 
         public static BoundBlock SynthesizedNoLocals(SyntaxNode syntax, BoundStatement statement)
@@ -1008,7 +1016,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression operand,
             TypeSymbol type,
             bool hasErrors = false
-        ) : this(syntax, operand, isManaged: false, type, hasErrors) { }
+        )
+            : this(syntax, operand, isManaged: false, type, hasErrors) { }
     }
 
     internal partial class BoundDagTemp

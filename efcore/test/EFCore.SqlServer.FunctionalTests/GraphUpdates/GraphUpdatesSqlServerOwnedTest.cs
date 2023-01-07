@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class GraphUpdatesSqlServerOwnedTest
     : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerOwnedTest.SqlServerFixture>
 {
-    public GraphUpdatesSqlServerOwnedTest(SqlServerFixture fixture) : base(fixture) { }
+    public GraphUpdatesSqlServerOwnedTest(SqlServerFixture fixture)
+        : base(fixture) { }
 
     // Owned dependents are always loaded
     public override void Required_one_to_one_are_cascade_deleted_in_store(

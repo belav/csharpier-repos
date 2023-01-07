@@ -14,7 +14,8 @@ namespace System.Web.WebPages.Scope
     {
         private readonly Lazy<Dictionary<object, object>> _items;
 
-        public WebConfigScopeDictionary() : this(WebConfigurationManager.AppSettings) { }
+        public WebConfigScopeDictionary()
+            : this(WebConfigurationManager.AppSettings) { }
 
         public WebConfigScopeDictionary(NameValueCollection appSettings)
         {

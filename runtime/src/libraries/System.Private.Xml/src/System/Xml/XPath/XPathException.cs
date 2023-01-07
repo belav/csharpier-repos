@@ -60,9 +60,11 @@ namespace System.Xml.XPath
             info.AddValue("version", "2.0");
         }
 
-        public XPathException() : this(string.Empty, (Exception?)null) { }
+        public XPathException()
+            : this(string.Empty, (Exception?)null) { }
 
-        public XPathException(string? message) : this(message, (Exception?)null) { }
+        public XPathException(string? message)
+            : this(message, (Exception?)null) { }
 
         public XPathException(string? message, Exception? innerException)
             : this(SR.Xml_UserException, new string?[] { message }, innerException) { }
@@ -87,7 +89,8 @@ namespace System.Xml.XPath
             return new XPathException(res, new string[] { arg }, innerException);
         }
 
-        private XPathException(string res, string[]? args) : this(res, args, null) { }
+        private XPathException(string res, string[]? args)
+            : this(res, args, null) { }
 
         private XPathException(string res, string?[]? args, Exception? inner)
             : base(CreateMessage(res, args), inner)

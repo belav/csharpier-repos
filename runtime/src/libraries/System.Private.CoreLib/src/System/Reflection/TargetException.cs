@@ -11,11 +11,14 @@ namespace System.Reflection
     )]
     public class TargetException : ApplicationException
     {
-        public TargetException() : this(null) { }
+        public TargetException()
+            : this(null) { }
 
-        public TargetException(string? message) : this(message, null) { }
+        public TargetException(string? message)
+            : this(message, null) { }
 
-        public TargetException(string? message, Exception? inner) : base(message, inner)
+        public TargetException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_TARGET;
         }

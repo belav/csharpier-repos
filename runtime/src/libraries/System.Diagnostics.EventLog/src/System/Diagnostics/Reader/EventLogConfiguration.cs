@@ -47,7 +47,8 @@ namespace System.Diagnostics.Eventing.Reader
 
         private readonly EventLogSession _session;
 
-        public EventLogConfiguration(string logName) : this(logName, null) { }
+        public EventLogConfiguration(string logName)
+            : this(logName, null) { }
 
         public EventLogConfiguration(string logName, EventLogSession session)
         {

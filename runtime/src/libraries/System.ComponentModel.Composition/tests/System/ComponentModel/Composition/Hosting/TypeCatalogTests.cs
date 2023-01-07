@@ -696,7 +696,8 @@ namespace System.ComponentModel.Composition
 
         private class DerivedTypeCatalog : TypeCatalog
         {
-            public DerivedTypeCatalog(params Type[] types) : base(types) { }
+            public DerivedTypeCatalog(params Type[] types)
+                : base(types) { }
         }
     }
 }

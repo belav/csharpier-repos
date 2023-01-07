@@ -14,12 +14,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind kind,
             DiagnosticInfo[] diagnostics = null,
             SyntaxAnnotation[] annotations = null
-        ) : base(kind, diagnostics, annotations)
+        )
+            : base(kind, diagnostics, annotations)
         {
             this.Initialize();
         }
 
-        internal StructuredTriviaSyntax(ObjectReader reader) : base(reader)
+        internal StructuredTriviaSyntax(ObjectReader reader)
+            : base(reader)
         {
             this.Initialize();
         }

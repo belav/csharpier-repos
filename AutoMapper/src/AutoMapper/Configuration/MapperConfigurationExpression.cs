@@ -96,7 +96,8 @@ public class MapperConfigurationExpression : Profile, IGlobalConfigurationExpres
     private Func<Type, object> _serviceCtor = Activator.CreateInstance;
     private List<IProjectionMapper> _projectionMappers;
 
-    public MapperConfigurationExpression() : base() => _mappers = MapperRegistry.Mappers();
+    public MapperConfigurationExpression()
+        : base() => _mappers = MapperRegistry.Mappers();
 
     /// <summary>
     /// Add an action to be called when validating the configuration.

@@ -11,7 +11,8 @@ namespace System.Data
     {
         public class TestTypedTable<T> : TypedTableBase<T> where T : DataRow
         {
-            public TestTypedTable() : base() { }
+            public TestTypedTable()
+                : base() { }
         }
 
         private class TestDataRowComparer<T> : Comparer<T> where T : DataRow

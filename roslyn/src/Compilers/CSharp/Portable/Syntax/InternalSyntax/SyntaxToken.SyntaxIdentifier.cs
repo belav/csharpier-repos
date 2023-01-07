@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             protected readonly string TextField;
 
-            internal SyntaxIdentifier(string text) : base(SyntaxKind.IdentifierToken, text.Length)
+            internal SyntaxIdentifier(string text)
+                : base(SyntaxKind.IdentifierToken, text.Length)
             {
                 this.TextField = text;
             }
@@ -32,12 +33,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 string text,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(SyntaxKind.IdentifierToken, text.Length, diagnostics, annotations)
+            )
+                : base(SyntaxKind.IdentifierToken, text.Length, diagnostics, annotations)
             {
                 this.TextField = text;
             }
 
-            internal SyntaxIdentifier(ObjectReader reader) : base(reader)
+            internal SyntaxIdentifier(ObjectReader reader)
+                : base(reader)
             {
                 this.TextField = reader.ReadString();
                 this.FullWidth = this.TextField.Length;

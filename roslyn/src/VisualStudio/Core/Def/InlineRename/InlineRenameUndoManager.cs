@@ -109,7 +109,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                 InlineRenameService inlineRenameService,
                 IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
                 IGlobalOptionService globalOptionService
-            ) : base(inlineRenameService, globalOptionService) =>
+            )
+                : base(inlineRenameService, globalOptionService) =>
                 _editorAdaptersFactoryService = editorAdaptersFactoryService;
 
             public void CreateStartRenameUndoTransaction(

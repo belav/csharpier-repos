@@ -13,7 +13,8 @@ namespace System.Net.Mime
             byte[] footer,
             int maxLineLength,
             int mimeHeaderLength
-        ) : base(bufferSize, header, footer, maxLineLength, mimeHeaderLength) { }
+        )
+            : base(bufferSize, header, footer, maxLineLength, mimeHeaderLength) { }
 
         internal int Padding { get; set; }
         internal byte LastBits { get; set; }

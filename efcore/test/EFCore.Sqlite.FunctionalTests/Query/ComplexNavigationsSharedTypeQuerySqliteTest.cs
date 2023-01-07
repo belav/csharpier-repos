@@ -11,7 +11,8 @@ public class ComplexNavigationsSharedTypeQuerySqliteTest
     public ComplexNavigationsSharedTypeQuerySqliteTest(
         ComplexNavigationsSharedTypeQuerySqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public override Task GroupJoin_client_method_in_OrderBy(bool async) =>
         AssertTranslationFailedWithDetails(

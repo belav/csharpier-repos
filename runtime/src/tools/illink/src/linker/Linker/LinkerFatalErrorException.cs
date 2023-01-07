@@ -14,7 +14,8 @@ namespace Mono.Linker
         public MessageContainer MessageContainer { get; }
 
         /// <param name="message">Error message with a description of what went wrong</param>
-        public LinkerFatalErrorException(MessageContainer message) : base(message.ToString())
+        public LinkerFatalErrorException(MessageContainer message)
+            : base(message.ToString())
         {
             if (message.Category != MessageCategory.Error)
                 throw new ArgumentException(

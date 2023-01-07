@@ -45,7 +45,8 @@ namespace System.Web.Http.Controllers
             Principal = Thread.CurrentPrincipal;
         }
 
-        public RequestBackedHttpRequestContext(HttpRequestMessage request) : this()
+        public RequestBackedHttpRequestContext(HttpRequestMessage request)
+            : this()
         {
             if (request == null)
             {

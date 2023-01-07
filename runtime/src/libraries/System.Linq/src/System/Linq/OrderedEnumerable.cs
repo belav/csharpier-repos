@@ -130,7 +130,8 @@ namespace System.Linq
             IComparer<TKey>? comparer,
             bool descending,
             OrderedEnumerable<TElement>? parent
-        ) : base(source)
+        )
+            : base(source)
         {
             if (source is null)
             {
@@ -319,7 +320,8 @@ namespace System.Linq
             IComparer<TKey> comparer,
             bool descending,
             CachingComparer<TElement> child
-        ) : base(keySelector, comparer, descending)
+        )
+            : base(keySelector, comparer, descending)
         {
             _child = child;
         }

@@ -16,7 +16,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Process the 'one-of' element.
         /// </summary>
-        public OneOf(Rule rule, Backend backend) : base(backend, rule)
+        public OneOf(Rule rule, Backend backend)
+            : base(backend, rule)
         {
             // Create a start and end start.
             _startState = _backend.CreateNewState(rule);

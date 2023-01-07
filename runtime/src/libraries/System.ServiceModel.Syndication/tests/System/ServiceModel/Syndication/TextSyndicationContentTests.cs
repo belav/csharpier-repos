@@ -110,7 +110,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class TextSyndicationContentSubclass : TextSyndicationContent
         {
-            public TextSyndicationContentSubclass(TextSyndicationContent source) : base(source) { }
+            public TextSyndicationContentSubclass(TextSyndicationContent source)
+                : base(source) { }
         }
     }
 }

@@ -123,7 +123,8 @@ namespace System.Text
         internal EncoderFallback encoderFallback;
         internal DecoderFallback decoderFallback;
 
-        protected Encoding() : this(0) { }
+        protected Encoding()
+            : this(0) { }
 
         protected Encoding(int codePage)
         {

@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
 
         private readonly UnusedReferencesTableProvider _tableProvider;
 
-        public RemoveUnusedReferencesDialog(UnusedReferencesTableProvider tableProvider) : base()
+        public RemoveUnusedReferencesDialog(UnusedReferencesTableProvider tableProvider)
+            : base()
         {
             _tableProvider = tableProvider;
 

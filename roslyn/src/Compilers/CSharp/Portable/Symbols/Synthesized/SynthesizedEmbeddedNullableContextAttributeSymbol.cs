@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType,
             TypeSymbol systemByteType
-        ) : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
+        )
+            : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _fields = ImmutableArray.Create<FieldSymbol>(
                 new SynthesizedFieldSymbol(

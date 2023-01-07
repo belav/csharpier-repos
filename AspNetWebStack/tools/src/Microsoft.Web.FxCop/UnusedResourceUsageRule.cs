@@ -16,7 +16,8 @@ namespace Microsoft.Web.FxCop
         private static readonly IDictionary<AssemblyNode, ISet<PropertyNode>> _usedResources =
             new ConcurrentDictionary<AssemblyNode, ISet<PropertyNode>>();
 
-        public UnusedResourceUsageRule() : base("UnusedResourceUsageRule") { }
+        public UnusedResourceUsageRule()
+            : base("UnusedResourceUsageRule") { }
 
         public override TargetVisibilities TargetVisibility
         {

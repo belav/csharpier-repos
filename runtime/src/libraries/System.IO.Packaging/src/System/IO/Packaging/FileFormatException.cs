@@ -21,14 +21,16 @@ namespace System.IO
         /// such as "An input file or a data stream does not conform to the expected file format specification."
         /// This message takes into account the current system culture.
         /// </summary>
-        public FileFormatException() : base(SR.FileFormatException) { }
+        public FileFormatException()
+            : base(SR.FileFormatException) { }
 
         /// <summary>
         /// Creates a new instance of FileFormatException class.
         /// This constructor initializes the Message property of the new instance with a specified error message.
         /// </summary>
         /// <param name="message">The message that describes the error.</param>
-        public FileFormatException(string? message) : base(message) { }
+        public FileFormatException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Creates a new instance of FileFormatException class.
@@ -67,7 +69,8 @@ namespace System.IO
         /// </summary>
         /// <param name="sourceUri">The Uri of a file that caused this error.</param>
         /// <param name="message">The message that describes the error.</param>
-        public FileFormatException(Uri? sourceUri, string? message) : base(message)
+        public FileFormatException(Uri? sourceUri, string? message)
+            : base(message)
         {
             _sourceUri = sourceUri;
         }

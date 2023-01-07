@@ -20,7 +20,8 @@ internal sealed partial class LocalRedirectResult : IResult
     /// provided.
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
-    public LocalRedirectResult(string localUrl) : this(localUrl, permanent: false) { }
+    public LocalRedirectResult(string localUrl)
+        : this(localUrl, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values

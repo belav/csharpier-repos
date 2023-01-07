@@ -38,7 +38,8 @@ namespace System.Net
 
         public SafeSslHandle SslContext => _sslContext;
 
-        public SafeDeleteSslContext(SslAuthenticationOptions authOptions) : base(IntPtr.Zero)
+        public SafeDeleteSslContext(SslAuthenticationOptions authOptions)
+            : base(IntPtr.Zero)
         {
             try
             {

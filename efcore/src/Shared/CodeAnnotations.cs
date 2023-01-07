@@ -20,7 +20,8 @@ internal sealed class ContractAnnotationAttribute : Attribute
 
     public bool ForceFullStates { get; }
 
-    public ContractAnnotationAttribute(string contract) : this(contract, false) { }
+    public ContractAnnotationAttribute(string contract)
+        : this(contract, false) { }
 
     public ContractAnnotationAttribute(string contract, bool forceFullStates)
     {

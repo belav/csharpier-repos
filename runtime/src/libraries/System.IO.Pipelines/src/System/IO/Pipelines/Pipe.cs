@@ -91,7 +91,8 @@ namespace System.IO.Pipelines
         internal long Length => _unconsumedBytes;
 
         /// <summary>Initializes a new instance of the <see cref="System.IO.Pipelines.Pipe" /> class using <see cref="System.IO.Pipelines.PipeOptions.Default" /> as options.</summary>
-        public Pipe() : this(PipeOptions.Default) { }
+        public Pipe()
+            : this(PipeOptions.Default) { }
 
         /// <summary>Initializes a new instance of the <see cref="System.IO.Pipelines.Pipe" /> class with the specified options.</summary>
         /// <param name="options">The set of options for this pipe.</param>

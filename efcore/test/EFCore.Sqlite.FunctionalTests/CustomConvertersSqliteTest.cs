@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class CustomConvertersSqliteTest
     : CustomConvertersTestBase<CustomConvertersSqliteTest.CustomConvertersSqliteFixture>
 {
-    public CustomConvertersSqliteTest(CustomConvertersSqliteFixture fixture) : base(fixture)
+    public CustomConvertersSqliteTest(CustomConvertersSqliteFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

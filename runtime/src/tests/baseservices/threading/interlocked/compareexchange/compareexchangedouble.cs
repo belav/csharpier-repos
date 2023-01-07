@@ -72,7 +72,8 @@ namespace CompareExchangeDouble
         private int numberOfIterations;
         private double valueToAdd;
 
-        public ThreadSafe() : this(100, 1E+100) { }
+        public ThreadSafe()
+            : this(100, 1E+100) { }
 
         public ThreadSafe(int loops, double addend)
         {

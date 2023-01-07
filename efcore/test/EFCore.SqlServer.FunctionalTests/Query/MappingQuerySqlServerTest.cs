@@ -54,7 +54,8 @@ FROM [dbo].[Orders] AS [o]
         );
     }
 
-    public MappingQuerySqlServerTest(MappingQuerySqlServerFixture fixture) : base(fixture)
+    public MappingQuerySqlServerTest(MappingQuerySqlServerFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

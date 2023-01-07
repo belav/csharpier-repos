@@ -739,7 +739,8 @@ namespace AutoMapper.UnitTests
                     _addend = addend;
                 }
 
-                public Dest() : this(0) { }
+                public Dest()
+                    : this(0) { }
             }
 
             protected override MapperConfiguration CreateConfiguration() =>

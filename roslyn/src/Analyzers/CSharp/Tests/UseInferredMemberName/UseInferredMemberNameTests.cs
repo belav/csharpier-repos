@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InferredMemberName
     public class UseInferredMemberNameTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseInferredMemberNameTests(ITestOutputHelper logger) : base(logger) { }
+        public UseInferredMemberNameTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

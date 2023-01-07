@@ -64,8 +64,8 @@ public class ConfigPatternsInMemoryTest
 
     private class ImplicitServicesExplicitConfigBlogContext : DbContext
     {
-        public ImplicitServicesExplicitConfigBlogContext(DbContextOptions options) : base(options)
-        { }
+        public ImplicitServicesExplicitConfigBlogContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog> Blogs { get; set; }
     }
@@ -147,7 +147,8 @@ public class ConfigPatternsInMemoryTest
 
     private class ExplicitServicesAndConfigBlogContext : DbContext
     {
-        public ExplicitServicesAndConfigBlogContext(DbContextOptions options) : base(options) { }
+        public ExplicitServicesAndConfigBlogContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog> Blogs { get; set; }
     }
@@ -310,7 +311,8 @@ public class ConfigPatternsInMemoryTest
 
     private class InjectContextAndConfigurationBlogContext : DbContext
     {
-        public InjectContextAndConfigurationBlogContext(DbContextOptions options) : base(options)
+        public InjectContextAndConfigurationBlogContext(DbContextOptions options)
+            : base(options)
         {
             Assert.NotNull(options);
         }
@@ -366,7 +368,8 @@ public class ConfigPatternsInMemoryTest
 
     private class InjectConfigurationBlogContext : DbContext
     {
-        public InjectConfigurationBlogContext(DbContextOptions options) : base(options)
+        public InjectConfigurationBlogContext(DbContextOptions options)
+            : base(options)
         {
             Assert.NotNull(options);
         }
@@ -463,7 +466,8 @@ public class ConfigPatternsInMemoryTest
     {
         public InjectDifferentConfigurationsBlogContext(
             DbContextOptions<InjectDifferentConfigurationsBlogContext> options
-        ) : base(options)
+        )
+            : base(options)
         {
             Assert.NotNull(options);
         }
@@ -475,7 +479,8 @@ public class ConfigPatternsInMemoryTest
     {
         public InjectDifferentConfigurationsAccountContext(
             DbContextOptions<InjectDifferentConfigurationsAccountContext> options
-        ) : base(options)
+        )
+            : base(options)
         {
             Assert.NotNull(options);
         }

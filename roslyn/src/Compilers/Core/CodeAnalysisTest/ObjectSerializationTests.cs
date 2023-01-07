@@ -1407,7 +1407,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 this.Children = children;
             }
 
-            public Node(string name, bool isReusable) : this(name)
+            public Node(string name, bool isReusable)
+                : this(name)
             {
                 this._isReusable = isReusable;
             }

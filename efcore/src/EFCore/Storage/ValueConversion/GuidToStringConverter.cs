@@ -20,7 +20,8 @@ public class GuidToStringConverter : StringGuidConverter<Guid, string>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public GuidToStringConverter() : this(null) { }
+    public GuidToStringConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

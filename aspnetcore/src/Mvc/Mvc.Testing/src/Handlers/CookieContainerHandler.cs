@@ -16,7 +16,8 @@ public class CookieContainerHandler : DelegatingHandler
     /// <summary>
     /// Creates a new instance of <see cref="CookieContainerHandler"/>.
     /// </summary>
-    public CookieContainerHandler() : this(new CookieContainer()) { }
+    public CookieContainerHandler()
+        : this(new CookieContainer()) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="CookieContainerHandler"/>.

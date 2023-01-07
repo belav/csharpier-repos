@@ -58,7 +58,8 @@ namespace JitBench
             string name,
             string executableName,
             string[] projectFileRelativePaths
-        ) : base(name)
+        )
+            : base(name)
         {
             ExePath = executableName;
             _projectFileRelativePaths = projectFileRelativePaths;

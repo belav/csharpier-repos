@@ -247,7 +247,8 @@ namespace System.Linq
                 IEnumerable<TSource> first,
                 IEnumerable<TSource> second,
                 IEqualityComparer<TSource>? comparer
-            ) : base(comparer)
+            )
+                : base(comparer)
             {
                 Debug.Assert(first != null);
                 Debug.Assert(second != null);
@@ -291,7 +292,8 @@ namespace System.Linq
                 SingleLinkedNode<IEnumerable<TSource>> sources,
                 int headIndex,
                 IEqualityComparer<TSource>? comparer
-            ) : base(comparer)
+            )
+                : base(comparer)
             {
                 Debug.Assert(headIndex >= 2);
                 Debug.Assert(sources?.GetCount() == headIndex + 1);

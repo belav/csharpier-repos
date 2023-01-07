@@ -57,7 +57,8 @@ namespace System.Net.Http.Headers
         private readonly HttpHeaderType _allowedHeaderTypes;
         private readonly HttpHeaderType _treatAsCustomHeaderTypes;
 
-        protected HttpHeaders() : this(HttpHeaderType.All, HttpHeaderType.None) { }
+        protected HttpHeaders()
+            : this(HttpHeaderType.All, HttpHeaderType.None) { }
 
         internal HttpHeaders(
             HttpHeaderType allowedHeaderTypes,

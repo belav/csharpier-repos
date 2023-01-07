@@ -7,7 +7,8 @@ public class InjectWhereExpressionMutator : ExpressionMutator
 {
     private ExpressionFinder _expressionFinder;
 
-    public InjectWhereExpressionMutator(DbContext context) : base(context) { }
+    public InjectWhereExpressionMutator(DbContext context)
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {

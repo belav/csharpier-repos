@@ -33,7 +33,8 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
         IAsyncQueryProvider queryProvider,
         IEntityType entityType,
         DateTime pointInTime
-    ) : base(queryProvider, entityType)
+    )
+        : base(queryProvider, entityType)
     {
         PointInTime = pointInTime;
     }

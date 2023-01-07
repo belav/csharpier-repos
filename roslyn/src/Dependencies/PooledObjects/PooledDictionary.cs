@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         private PooledDictionary(
             ObjectPool<PooledDictionary<K, V>> pool,
             IEqualityComparer<K> keyComparer
-        ) : base(keyComparer)
+        )
+            : base(keyComparer)
         {
             _pool = pool;
         }

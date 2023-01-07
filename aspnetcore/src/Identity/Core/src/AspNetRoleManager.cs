@@ -30,7 +30,8 @@ public class AspNetRoleManager<TRole> : RoleManager<TRole>, IDisposable where TR
         IdentityErrorDescriber errors,
         ILogger<RoleManager<TRole>> logger,
         IHttpContextAccessor contextAccessor
-    ) : base(store, roleValidators, keyNormalizer, errors, logger)
+    )
+        : base(store, roleValidators, keyNormalizer, errors, logger)
     {
         _cancel = contextAccessor?.HttpContext?.RequestAborted ?? CancellationToken.None;
     }

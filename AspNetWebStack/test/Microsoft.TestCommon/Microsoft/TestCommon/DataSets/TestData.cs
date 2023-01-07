@@ -437,7 +437,8 @@ namespace Microsoft.TestCommon
         /// <summary>
         /// Initializes a new instance of the <see cref="TestData&lt;T&gt;"/> class.
         /// </summary>
-        protected TestData() : base(typeof(T))
+        protected TestData()
+            : base(typeof(T))
         {
             Type[] typeParams = new Type[] { this.Type };
             Type[] dictionaryTypeParams = new Type[] { typeof(string), this.Type };

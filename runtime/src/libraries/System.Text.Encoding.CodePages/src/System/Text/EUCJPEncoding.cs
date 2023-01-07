@@ -47,7 +47,8 @@ namespace System.Text
     internal sealed class EUCJPEncoding : DBCSCodePageEncoding
     {
         // This pretends to be CP 932 as far as memory tables are concerned.
-        public EUCJPEncoding() : base(51932, 932) { }
+        public EUCJPEncoding()
+            : base(51932, 932) { }
 
         // Clean up characters for EUC-JP code pages, etc.
         protected override bool CleanUpBytes(ref int bytes)

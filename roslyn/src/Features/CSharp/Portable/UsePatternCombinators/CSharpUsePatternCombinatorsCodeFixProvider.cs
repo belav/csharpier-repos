@@ -189,7 +189,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternCombinators
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string equivalenceKey
-            ) : base(title, createChangedDocument, equivalenceKey) { }
+            )
+                : base(title, createChangedDocument, equivalenceKey) { }
 
             internal override CodeActionPriority Priority => CodeActionPriority.Low;
         }

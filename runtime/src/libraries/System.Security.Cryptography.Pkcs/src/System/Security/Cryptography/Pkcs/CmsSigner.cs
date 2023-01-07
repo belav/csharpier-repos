@@ -72,7 +72,8 @@ namespace System.Security.Cryptography.Pkcs
             }
         }
 
-        public CmsSigner() : this(SubjectIdentifierType.IssuerAndSerialNumber, null) { }
+        public CmsSigner()
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, null) { }
 
         public CmsSigner(SubjectIdentifierType signerIdentifierType)
             : this(signerIdentifierType, null) { }
@@ -97,7 +98,8 @@ namespace System.Security.Cryptography.Pkcs
             SubjectIdentifierType signerIdentifierType,
             X509Certificate2? certificate,
             AsymmetricAlgorithm? privateKey
-        ) : this(signerIdentifierType, certificate, privateKey, signaturePadding: null) { }
+        )
+            : this(signerIdentifierType, certificate, privateKey, signaturePadding: null) { }
 
         /// <summary>
         /// Initializes a new instance of the CmsSigner class with a specified signer

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public XmlDocCommentCompletionProvider() : base(s_defaultRules) { }
+        public XmlDocCommentCompletionProvider()
+            : base(s_defaultRules) { }
 
         internal override string Language => LanguageNames.CSharp;
 

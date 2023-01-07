@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             VSUtilities.IUIThreadOperationExecutor operationExecutor,
             IAsynchronousOperationListener asyncListener,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _textView = textView;
             _streamingPresenter = streamingPresenter;

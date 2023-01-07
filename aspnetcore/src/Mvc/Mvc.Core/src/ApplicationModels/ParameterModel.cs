@@ -28,7 +28,8 @@ public class ParameterModel : ParameterModelBase, ICommonModel
     /// Initializes a new <see cref="ParameterModel"/>.
     /// </summary>
     /// <param name="other">The parameter model to copy.</param>
-    public ParameterModel(ParameterModel other) : base(other)
+    public ParameterModel(ParameterModel other)
+        : base(other)
     {
         if (other == null)
         {

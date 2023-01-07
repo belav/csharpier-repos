@@ -62,7 +62,8 @@ namespace System.Runtime.Loader.Tests
             protected Type[] _testClassTypes;
             protected CollectibleChecker _checker;
 
-            public TestBase() : this(1) { }
+            public TestBase()
+                : this(1) { }
 
             public TestBase(int numContexts)
             {
@@ -368,7 +369,8 @@ namespace System.Runtime.Loader.Tests
         {
             object _instance1 = null;
 
-            public TwoCollectibleWithOneAssemblyAndOneInstanceReferencingAnotherTest() : base(2) { }
+            public TwoCollectibleWithOneAssemblyAndOneInstanceReferencingAnotherTest()
+                : base(2) { }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public void Execute()

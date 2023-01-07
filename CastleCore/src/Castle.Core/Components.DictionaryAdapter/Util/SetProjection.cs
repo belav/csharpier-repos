@@ -22,7 +22,8 @@ namespace Castle.Components.DictionaryAdapter
     {
         private readonly HashSet<T> set;
 
-        public SetProjection(ICollectionAdapter<T> adapter) : base(adapter)
+        public SetProjection(ICollectionAdapter<T> adapter)
+            : base(adapter)
         {
             set = new HashSet<T>();
             Repopulate();

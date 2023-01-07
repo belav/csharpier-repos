@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
     )]
     public sealed class MSBuildFactAttribute : ConditionalFactAttribute
     {
-        public MSBuildFactAttribute(params Type[] skipConditions) : base(skipConditions) { }
+        public MSBuildFactAttribute(params Type[] skipConditions)
+            : base(skipConditions) { }
     }
 }

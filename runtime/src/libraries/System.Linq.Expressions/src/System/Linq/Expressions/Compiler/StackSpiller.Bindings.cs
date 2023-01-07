@@ -66,7 +66,8 @@ namespace System.Linq.Expressions.Compiler
                 MemberMemberBinding binding,
                 StackSpiller spiller,
                 Stack stack
-            ) : base(binding, spiller)
+            )
+                : base(binding, spiller)
             {
                 _bindings = binding.Bindings;
 
@@ -148,7 +149,8 @@ namespace System.Linq.Expressions.Compiler
                 MemberListBinding binding,
                 StackSpiller spiller,
                 Stack stack
-            ) : base(binding, spiller)
+            )
+                : base(binding, spiller)
             {
                 _inits = binding.Initializers;
 
@@ -251,7 +253,8 @@ namespace System.Linq.Expressions.Compiler
                 MemberAssignment binding,
                 StackSpiller spiller,
                 Stack stack
-            ) : base(binding, spiller)
+            )
+                : base(binding, spiller)
             {
                 Result result = spiller.RewriteExpression(binding.Expression, stack);
                 _action = result.Action;

@@ -23,7 +23,8 @@ namespace System.ServiceModel.Syndication
         public AtomPub10CategoriesDocumentFormatter(
             Type inlineDocumentType,
             Type referencedDocumentType
-        ) : base()
+        )
+            : base()
         {
             if (inlineDocumentType == null)
             {

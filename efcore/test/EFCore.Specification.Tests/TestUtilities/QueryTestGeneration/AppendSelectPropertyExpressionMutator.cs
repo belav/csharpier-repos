@@ -8,7 +8,8 @@ public class AppendSelectPropertyExpressionMutator : ExpressionMutator
     private bool HasValidPropertyToSelect(Expression expression) =>
         expression.Type.GetGenericArguments()[0].GetProperties().Any(p => !p.GetMethod.IsStatic);
 
-    public AppendSelectPropertyExpressionMutator(DbContext context) : base(context) { }
+    public AppendSelectPropertyExpressionMutator(DbContext context)
+        : base(context) { }
 
     public override bool IsValid(Expression expression) =>
         IsQueryableResult(expression) && HasValidPropertyToSelect(expression);

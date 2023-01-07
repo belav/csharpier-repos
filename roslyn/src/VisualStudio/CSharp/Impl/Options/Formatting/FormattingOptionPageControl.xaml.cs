@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
     /// </summary>
     internal partial class FormattingOptionPageControl : AbstractOptionPageControl
     {
-        public FormattingOptionPageControl(OptionStore optionStore) : base(optionStore)
+        public FormattingOptionPageControl(OptionStore optionStore)
+            : base(optionStore)
         {
             InitializeComponent();
 

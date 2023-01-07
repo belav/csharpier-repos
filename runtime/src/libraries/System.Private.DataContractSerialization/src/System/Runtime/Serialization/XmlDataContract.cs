@@ -31,7 +31,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal XmlDataContract(Type type) : base(new XmlDataContractCriticalHelper(type))
+        internal XmlDataContract(Type type)
+            : base(new XmlDataContractCriticalHelper(type))
         {
             _helper = (base.Helper as XmlDataContractCriticalHelper)!;
         }
@@ -146,7 +147,8 @@ namespace System.Runtime.Serialization.DataContracts
             internal XmlDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type
-            ) : base(type)
+            )
+                : base(type)
             {
                 if (type.IsDefined(Globals.TypeOfDataContractAttribute, false))
                     throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(

@@ -20,7 +20,8 @@ public class RedirectToPageResult : ActionResult, IKeepTempDataResult
     /// provided.
     /// </summary>
     /// <param name="pageName">The page to redirect to.</param>
-    public RedirectToPageResult(string? pageName) : this(pageName, routeValues: null) { }
+    public RedirectToPageResult(string? pageName)
+        : this(pageName, routeValues: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -63,7 +64,8 @@ public class RedirectToPageResult : ActionResult, IKeepTempDataResult
         string? pageHandler,
         object? routeValues,
         bool permanent
-    ) : this(pageName, pageHandler, routeValues, permanent, fragment: null) { }
+    )
+        : this(pageName, pageHandler, routeValues, permanent, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values provided.
@@ -79,7 +81,8 @@ public class RedirectToPageResult : ActionResult, IKeepTempDataResult
         object? routeValues,
         bool permanent,
         bool preserveMethod
-    ) : this(pageName, pageHandler, routeValues, permanent, preserveMethod, fragment: null) { }
+    )
+        : this(pageName, pageHandler, routeValues, permanent, preserveMethod, fragment: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values
@@ -94,7 +97,8 @@ public class RedirectToPageResult : ActionResult, IKeepTempDataResult
         string? pageHandler,
         object? routeValues,
         string? fragment
-    ) : this(pageName, pageHandler, routeValues, permanent: false, fragment: fragment) { }
+    )
+        : this(pageName, pageHandler, routeValues, permanent: false, fragment: fragment) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectToPageResult"/> with the values

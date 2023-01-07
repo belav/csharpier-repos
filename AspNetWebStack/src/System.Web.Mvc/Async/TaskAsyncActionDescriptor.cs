@@ -36,7 +36,8 @@ namespace System.Web.Mvc.Async
             MethodInfo taskMethodInfo,
             string actionName,
             ControllerDescriptor controllerDescriptor
-        ) : this(taskMethodInfo, actionName, controllerDescriptor, validateMethod: true) { }
+        )
+            : this(taskMethodInfo, actionName, controllerDescriptor, validateMethod: true) { }
 
         internal TaskAsyncActionDescriptor(
             MethodInfo taskMethodInfo,

@@ -22,7 +22,8 @@ public class OAuthChallengeProperties : AuthenticationProperties
     /// Initializes a new instance of <see cref="OAuthChallengeProperties" />.
     /// </summary>
     /// <inheritdoc />
-    public OAuthChallengeProperties(IDictionary<string, string?> items) : base(items) { }
+    public OAuthChallengeProperties(IDictionary<string, string?> items)
+        : base(items) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OAuthChallengeProperties" />.
@@ -31,7 +32,8 @@ public class OAuthChallengeProperties : AuthenticationProperties
     public OAuthChallengeProperties(
         IDictionary<string, string?>? items,
         IDictionary<string, object?>? parameters
-    ) : base(items, parameters) { }
+    )
+        : base(items, parameters) { }
 
     /// <summary>
     /// The "scope" parameter value being used for a challenge request.

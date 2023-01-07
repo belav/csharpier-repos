@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             IIndentationService indentationService,
             ISyntaxFacts syntaxFacts,
             IPrecedenceService precedenceService
-        ) : base(indentationService)
+        )
+            : base(indentationService)
         {
             _syntaxFacts = syntaxFacts;
             _precedenceService = precedenceService;

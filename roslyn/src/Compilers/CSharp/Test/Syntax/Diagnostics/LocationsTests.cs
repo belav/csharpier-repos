@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private class TestSourceResolver : SourceFileResolver
         {
-            public TestSourceResolver() : base(ImmutableArray<string>.Empty, null) { }
+            public TestSourceResolver()
+                : base(ImmutableArray<string>.Empty, null) { }
 
             public override string NormalizePath(string path, string baseFilePath)
             {

@@ -42,7 +42,8 @@ public class ViewExecutor
         ITempDataDictionaryFactory tempDataFactory,
         DiagnosticListener diagnosticListener,
         IModelMetadataProvider modelMetadataProvider
-    ) : this(writerFactory, viewEngine, diagnosticListener)
+    )
+        : this(writerFactory, viewEngine, diagnosticListener)
     {
         if (viewOptions == null)
         {

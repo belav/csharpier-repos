@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 SyntaxKind contextualKind,
                 string text,
                 string valueText
-            ) : base(text)
+            )
+                : base(text)
             {
                 this.contextualKind = contextualKind;
                 this.valueText = valueText;
@@ -32,13 +33,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 string valueText,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(text, diagnostics, annotations)
+            )
+                : base(text, diagnostics, annotations)
             {
                 this.contextualKind = contextualKind;
                 this.valueText = valueText;
             }
 
-            internal SyntaxIdentifierExtended(ObjectReader reader) : base(reader)
+            internal SyntaxIdentifierExtended(ObjectReader reader)
+                : base(reader)
             {
                 this.contextualKind = (SyntaxKind)reader.ReadInt16();
                 this.valueText = reader.ReadString();

@@ -50,7 +50,8 @@ internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TRe
         Method<TRequest, TResponse> method,
         MethodOptions options,
         IGrpcServiceActivator<TService> serviceActivator
-    ) : base(method, options, serviceActivator)
+    )
+        : base(method, options, serviceActivator)
     {
         _invoker = invoker;
 

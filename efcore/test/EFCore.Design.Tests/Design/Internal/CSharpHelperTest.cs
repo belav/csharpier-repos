@@ -943,7 +943,8 @@ public class CSharpHelperTest
 
     private class SimpleTestNonImplementedTypeMapping : RelationalTypeMapping
     {
-        public SimpleTestNonImplementedTypeMapping() : base("storeType", typeof(SimpleTestType)) { }
+        public SimpleTestNonImplementedTypeMapping()
+            : base("storeType", typeof(SimpleTestType)) { }
 
         protected override RelationalTypeMapping Clone(
             RelationalTypeMappingParameters parameters
@@ -969,7 +970,8 @@ internal class SimpleTestType
 
     public SimpleTestType() { }
 
-    public SimpleTestType(string arg1) : this(arg1, null) { }
+    public SimpleTestType(string arg1)
+        : this(arg1, null) { }
 
     public SimpleTestType(string arg1, int? arg2)
     {

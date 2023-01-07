@@ -12,32 +12,38 @@ namespace System.Memory.Tests
     {
         public class Array : ReadOnlySequenceTestsByte
         {
-            public Array() : base(ReadOnlySequenceFactory<byte>.ArrayFactory) { }
+            public Array()
+                : base(ReadOnlySequenceFactory<byte>.ArrayFactory) { }
         }
 
         public class Memory : ReadOnlySequenceTestsByte
         {
-            public Memory() : base(ReadOnlySequenceFactory<byte>.MemoryFactory) { }
+            public Memory()
+                : base(ReadOnlySequenceFactory<byte>.MemoryFactory) { }
         }
 
         public class MemoryManager : ReadOnlySequenceTestsByte
         {
-            public MemoryManager() : base(ReadOnlySequenceFactory<byte>.MemoryManagerFactory) { }
+            public MemoryManager()
+                : base(ReadOnlySequenceFactory<byte>.MemoryManagerFactory) { }
         }
 
         public class SingleSegment : ReadOnlySequenceTestsByte
         {
-            public SingleSegment() : base(ReadOnlySequenceFactory<byte>.SingleSegmentFactory) { }
+            public SingleSegment()
+                : base(ReadOnlySequenceFactory<byte>.SingleSegmentFactory) { }
         }
 
         public class SegmentPerByte : ReadOnlySequenceTestsByte
         {
-            public SegmentPerByte() : base(ReadOnlySequenceFactory<byte>.SegmentPerItemFactory) { }
+            public SegmentPerByte()
+                : base(ReadOnlySequenceFactory<byte>.SegmentPerItemFactory) { }
         }
 
         public class SplitInThreeSegments : ReadOnlySequenceTestsByte
         {
-            public SplitInThreeSegments() : base(ReadOnlySequenceFactory<byte>.SplitInThree) { }
+            public SplitInThreeSegments()
+                : base(ReadOnlySequenceFactory<byte>.SplitInThree) { }
         }
 
         internal ReadOnlySequenceFactory<byte> Factory { get; }

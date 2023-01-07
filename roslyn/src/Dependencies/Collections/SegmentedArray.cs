@@ -549,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 SegmentedArray<T> first,
                 SegmentedArray<T> second,
                 int length
-            ) : this(first, 0, second, 0, length) { }
+            )
+                : this(first, 0, second, 0, length) { }
 
             public AlignedSegmentEnumerable(
                 SegmentedArray<T> first,
@@ -672,7 +673,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 SegmentedArray<T> first,
                 SegmentedArray<T> second,
                 int length
-            ) : this(first, 0, second, 0, length) { }
+            )
+                : this(first, 0, second, 0, length) { }
 
             public UnalignedSegmentEnumerable(
                 SegmentedArray<T> first,

@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core;
 
 internal sealed class LocalhostListenOptions : ListenOptions
 {
-    internal LocalhostListenOptions(int port) : base(new IPEndPoint(IPAddress.Loopback, port))
+    internal LocalhostListenOptions(int port)
+        : base(new IPEndPoint(IPAddress.Loopback, port))
     {
         if (port == 0)
         {

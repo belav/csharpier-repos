@@ -2705,7 +2705,8 @@ public class ValidationIntegrationTests
             IModelMetadataProvider modelMetadataProvider,
             IList<IModelValidatorProvider> validatorProviders,
             MvcOptions mvcOptions
-        ) : base(modelMetadataProvider, validatorProviders, mvcOptions) { }
+        )
+            : base(modelMetadataProvider, validatorProviders, mvcOptions) { }
 
         public RecordingValidationVisitor ValidationVisitor { get; private set; }
 

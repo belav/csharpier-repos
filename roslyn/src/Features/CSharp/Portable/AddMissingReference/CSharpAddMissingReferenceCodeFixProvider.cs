@@ -47,6 +47,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddMissingReference
         internal CSharpAddMissingReferenceCodeFixProvider(
             IPackageInstallerService installerService,
             ISymbolSearchService symbolSearchService
-        ) : base(installerService, symbolSearchService) { }
+        )
+            : base(installerService, symbolSearchService) { }
     }
 }

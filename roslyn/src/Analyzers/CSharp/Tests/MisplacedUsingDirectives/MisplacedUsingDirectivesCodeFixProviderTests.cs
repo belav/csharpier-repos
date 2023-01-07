@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
     {
         public MisplacedUsingDirectivesInCompilationUnitCodeFixProviderTests(
             ITestOutputHelper logger
-        ) : base(logger) { }
+        )
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

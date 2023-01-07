@@ -20,7 +20,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             string viewPath,
             IViewPageActivator viewPageActivator
-        ) : this(controllerContext, viewPath, viewPageActivator, null) { }
+        )
+            : this(controllerContext, viewPath, viewPageActivator, null) { }
 
         internal BuildManagerCompiledView(
             ControllerContext controllerContext,

@@ -35,7 +35,8 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
         ModelCodeGeneratorDependencies dependencies,
         IOperationReporter reporter,
         IServiceProvider serviceProvider
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _reporter = reporter;
         _serviceProvider = serviceProvider;

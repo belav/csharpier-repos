@@ -107,7 +107,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<decimal?, TKey> source,
                 int partitionIndex,
                 CancellationToken cancellationToken
-            ) : base(partitionIndex, cancellationToken)
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

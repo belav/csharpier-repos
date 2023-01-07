@@ -20,7 +20,8 @@ namespace System.Security.Cryptography
         private const int HmacSizeBits = 160;
         private const int HmacSizeBytes = HmacSizeBits / 8;
 
-        public HMACSHA1() : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
+        public HMACSHA1()
+            : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         public HMACSHA1(byte[] key)
         {
@@ -45,7 +46,8 @@ namespace System.Security.Cryptography
             DiagnosticId = Obsoletions.UseManagedSha1DiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public HMACSHA1(byte[] key, bool useManagedSha1) : this(key)
+        public HMACSHA1(byte[] key, bool useManagedSha1)
+            : this(key)
         {
             // useManagedSha1 is ignored
         }

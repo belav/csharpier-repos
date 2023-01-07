@@ -118,7 +118,8 @@ namespace ILCompiler.Dataflow
             FlowAnnotations annotations,
             Logger logger,
             MessageOrigin origin
-        ) : base(annotations)
+        )
+            : base(annotations)
         {
             _logger = logger;
             _factory = factory;

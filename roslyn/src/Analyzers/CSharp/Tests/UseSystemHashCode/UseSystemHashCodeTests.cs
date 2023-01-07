@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseSystemHashCode
     public partial class UseSystemHashCodeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseSystemHashCodeTests(ITestOutputHelper logger) : base(logger) { }
+        public UseSystemHashCodeTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

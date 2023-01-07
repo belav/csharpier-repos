@@ -25,7 +25,8 @@ namespace Castle.Components.DictionaryAdapter
 
         public EditableList() { }
 
-        public EditableList(IEnumerable<T> collection) : base(collection) { }
+        public EditableList(IEnumerable<T> collection)
+            : base(collection) { }
 
         public void BeginEdit()
         {
@@ -92,6 +93,7 @@ namespace Castle.Components.DictionaryAdapter
     {
         public EditableList() { }
 
-        public EditableList(IEnumerable<object> collection) : base(collection) { }
+        public EditableList(IEnumerable<object> collection)
+            : base(collection) { }
     }
 }

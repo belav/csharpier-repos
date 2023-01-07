@@ -10,7 +10,8 @@ public abstract class ConcurrencyDetectorDisabledTestBase<TFixture>
     : ConcurrencyDetectorTestBase<TFixture>
     where TFixture : ConcurrencyDetectorTestBase<TFixture>.ConcurrencyDetectorFixtureBase, new()
 {
-    protected ConcurrencyDetectorDisabledTestBase(TFixture fixture) : base(fixture) { }
+    protected ConcurrencyDetectorDisabledTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

@@ -15,7 +15,8 @@ namespace System.ComponentModel
             ListChangedType listChangedType,
             int newIndex,
             PropertyDescriptor? propDesc
-        ) : this(listChangedType, newIndex)
+        )
+            : this(listChangedType, newIndex)
         {
             PropertyDescriptor = propDesc;
             OldIndex = newIndex;

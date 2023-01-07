@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Classification
             ISyntaxKinds syntaxKinds,
             IEmbeddedLanguageClassifier fallbackClassifier,
             IEnumerable<Lazy<IEmbeddedLanguageClassifier, EmbeddedLanguageMetadata>> allClassifiers
-        ) : base(languageName, info, syntaxKinds, allClassifiers)
+        )
+            : base(languageName, info, syntaxKinds, allClassifiers)
         {
             _fallbackClassifier = fallbackClassifier;
         }

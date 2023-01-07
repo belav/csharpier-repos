@@ -32,7 +32,8 @@ public abstract class WebRenderer : Renderer
         ILoggerFactory loggerFactory,
         JsonSerializerOptions jsonOptions,
         JSComponentInterop jsComponentInterop
-    ) : base(serviceProvider, loggerFactory)
+    )
+        : base(serviceProvider, loggerFactory)
     {
         _serviceProvider = serviceProvider;
         _interopMethodsReference = DotNetObjectReference.Create(

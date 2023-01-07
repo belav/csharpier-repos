@@ -655,11 +655,14 @@ namespace System.Collections.Tests
         // CollectionBase is provided to be used as the base class for strongly typed collections. Lets use one of our own here
         private class MyCollection : CollectionBase
         {
-            public MyCollection() : base() { }
+            public MyCollection()
+                : base() { }
 
-            public MyCollection(int capacity) : base(capacity) { }
+            public MyCollection(int capacity)
+                : base(capacity) { }
 
-            public MyCollection(ICollection collection) : base()
+            public MyCollection(ICollection collection)
+                : base()
             {
                 foreach (object obj in collection)
                 {

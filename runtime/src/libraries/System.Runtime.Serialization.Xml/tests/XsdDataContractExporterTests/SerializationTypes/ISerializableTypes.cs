@@ -29,14 +29,15 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     [Serializable]
     public class DerivedISerializable : BaseISerializable
     {
-        DerivedISerializable(SerializationInfo info, StreamingContext context) : base(info, context)
-        { }
+        DerivedISerializable(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 
     [Serializable]
     public class MyUri : Uri
     {
-        protected MyUri(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected MyUri(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 
     [Serializable]

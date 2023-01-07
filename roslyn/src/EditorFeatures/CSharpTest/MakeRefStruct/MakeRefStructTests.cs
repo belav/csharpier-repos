@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         private static readonly CSharpParseOptions s_parseOptions =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3);
 
-        public MakeRefStructTests(ITestOutputHelper logger) : base(logger) { }
+        public MakeRefStructTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         private const string SpanDeclarationSourceText =
             @"

@@ -18,7 +18,8 @@ class Program
     {
         private readonly EndPoint? _endPoint;
 
-        public ExtendedSocketException(EndPoint? endPoint) : base(0)
+        public ExtendedSocketException(EndPoint? endPoint)
+            : base(0)
         {
             _endPoint = endPoint;
         }

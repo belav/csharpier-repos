@@ -141,6 +141,7 @@ internal sealed class Selenium
             Uri remoteAddress,
             ICapabilities desiredCapabilities,
             TimeSpan commandTimeout
-        ) : base(remoteAddress, desiredCapabilities, commandTimeout) { }
+        )
+            : base(remoteAddress, desiredCapabilities, commandTimeout) { }
     }
 }

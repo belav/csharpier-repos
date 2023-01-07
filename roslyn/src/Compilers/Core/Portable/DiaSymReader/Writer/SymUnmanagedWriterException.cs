@@ -20,7 +20,8 @@ namespace Microsoft.DiaSymReader
 
         public SymUnmanagedWriterException() { }
 
-        public SymUnmanagedWriterException(string message) : base(message) { }
+        public SymUnmanagedWriterException(string message)
+            : base(message) { }
 
         public SymUnmanagedWriterException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -29,7 +30,8 @@ namespace Microsoft.DiaSymReader
             string message,
             Exception innerException,
             string implementationModuleName
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             ImplementationModuleName = implementationModuleName;
         }
@@ -37,6 +39,7 @@ namespace Microsoft.DiaSymReader
         internal SymUnmanagedWriterException(
             Exception innerException,
             string implementationModuleName
-        ) : this(innerException.Message, innerException, implementationModuleName) { }
+        )
+            : this(innerException.Message, innerException, implementationModuleName) { }
     }
 }

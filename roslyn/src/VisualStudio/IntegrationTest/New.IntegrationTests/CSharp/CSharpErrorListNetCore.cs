@@ -13,8 +13,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.NetCore)]
     public class CSharpErrorListNetCore : CSharpErrorListCommon
     {
-        public CSharpErrorListNetCore() : base(WellKnownProjectTemplates.CSharpNetCoreClassLibrary)
-        { }
+        public CSharpErrorListNetCore()
+            : base(WellKnownProjectTemplates.CSharpNetCoreClassLibrary) { }
 
         public override async Task InitializeAsync()
         {

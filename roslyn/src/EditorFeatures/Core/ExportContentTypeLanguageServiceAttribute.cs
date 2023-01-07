@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor
             string defaultContentType,
             string language,
             string layer = ServiceLayer.Default
-        ) : base(typeof(IContentTypeLanguageService), language, layer)
+        )
+            : base(typeof(IContentTypeLanguageService), language, layer)
         {
             this.DefaultContentType =
                 defaultContentType ?? throw new ArgumentNullException(nameof(defaultContentType));

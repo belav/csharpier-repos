@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class NorthwindNavigationsQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindNavigationsQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindNavigationsQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected NorthwindContext CreateContext() => Fixture.CreateContext();
 

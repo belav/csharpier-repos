@@ -20,7 +20,8 @@ internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
         return builder.ToString();
     }
 
-    private RequiredMemberAttributesVisitor(StringBuilder builder) : base(builder) { }
+    private RequiredMemberAttributesVisitor(StringBuilder builder)
+        : base(builder) { }
 
     protected override SymbolDisplayFormat DisplayFormat => SymbolDisplayFormat.TestFormat;
 

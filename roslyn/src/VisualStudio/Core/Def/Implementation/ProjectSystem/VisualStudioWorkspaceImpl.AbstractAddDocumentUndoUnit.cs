@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 VisualStudioWorkspaceImpl workspace,
                 DocumentInfo docInfo,
                 SourceText text
-            ) : base(workspace, docInfo.Id.ProjectId)
+            )
+                : base(workspace, docInfo.Id.ProjectId)
             {
                 DocumentInfo = docInfo;
                 Text = text;

@@ -30,7 +30,8 @@ namespace System.Net.Quic.Implementations.MsQuic.Internal
             QUIC_HANDLE* handle,
             Action<IntPtr> releaseAction,
             SafeHandleType safeHandleType
-        ) : base((IntPtr)handle, ownsHandle: true)
+        )
+            : base((IntPtr)handle, ownsHandle: true)
         {
             _releaseAction = releaseAction;
             _traceId = $"[{TypeName[(int)safeHandleType]}][0x{DangerousGetHandle():X11}]";

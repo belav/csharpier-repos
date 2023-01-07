@@ -68,7 +68,8 @@ public class SqlServerTestStore : RelationalTestStore
         string initScript = null,
         string scriptPath = null,
         bool shared = true
-    ) : base(name, shared)
+    )
+        : base(name, shared)
     {
         if (useFileName)
         {

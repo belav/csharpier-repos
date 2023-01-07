@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol newOwner,
             int newOrdinal,
             bool suppressOptional
-        ) : base(newOwner, newOrdinal)
+        )
+            : base(newOwner, newOrdinal)
         {
             Debug.Assert((object)originalParam != null);
             _suppressOptional = suppressOptional;

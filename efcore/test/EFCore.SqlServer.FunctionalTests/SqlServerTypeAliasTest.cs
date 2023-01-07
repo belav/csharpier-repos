@@ -177,7 +177,8 @@ CREATE TYPE stringAlias FROM nvarchar(50);"
 
     private class TypeAliasContext : DbContext
     {
-        public TypeAliasContext(DbContextOptions options) : base(options) { }
+        public TypeAliasContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

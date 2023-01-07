@@ -474,7 +474,8 @@ namespace TestNamespace
 
         private class FakeValueComparer : ValueComparer<int>
         {
-            public FakeValueComparer() : base(false) { }
+            public FakeValueComparer()
+                : base(false) { }
 
             public override Type Type { get; } = typeof(int);
 
@@ -3592,7 +3593,8 @@ namespace TestNamespace
 
         public class CustomValueComparer<T> : ValueComparer<T>
         {
-            public CustomValueComparer() : base(false) { }
+            public CustomValueComparer()
+                : base(false) { }
         }
 
         public abstract class AbstractBase
@@ -3635,7 +3637,8 @@ namespace TestNamespace
 
         public class DependentDerived<TKey> : DependentBase<TKey>
         {
-            public DependentDerived(TKey id) : base(id) { }
+            public DependentDerived(TKey id)
+                : base(id) { }
 
             private string Data { get; set; }
         }
@@ -5692,7 +5695,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.TestModel.Internal
     public class SelfReferentialPropertyValueConverter
         : ValueConverter<SelfReferentialProperty, string>
     {
-        public SelfReferentialPropertyValueConverter() : this(null) { }
+        public SelfReferentialPropertyValueConverter()
+            : this(null) { }
 
         public SelfReferentialPropertyValueConverter(ConverterMappingHints hints)
             : base(v => null, v => null, hints) { }

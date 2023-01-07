@@ -18,7 +18,8 @@ namespace System.Speech.Recognition
             Exception error,
             bool cancelled,
             object userState
-        ) : base(error, cancelled, userState)
+        )
+            : base(error, cancelled, userState)
         {
             _result = result;
             _initialSilenceTimeout = initialSilenceTimeout;

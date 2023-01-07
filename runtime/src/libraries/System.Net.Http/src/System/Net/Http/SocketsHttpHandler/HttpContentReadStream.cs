@@ -13,7 +13,8 @@ namespace System.Net.Http
         {
             private int _disposed; // 0==no, 1==yes
 
-            public HttpContentReadStream(HttpConnection connection) : base(connection) { }
+            public HttpContentReadStream(HttpConnection connection)
+                : base(connection) { }
 
             public sealed override bool CanRead => _disposed == 0;
             public sealed override bool CanWrite => false;

@@ -54,7 +54,8 @@ namespace System.Management
         private readonly string propertyOrMethodName;
         private readonly QualifierType qualifierSetType;
 
-        internal QualifierDataCollection(ManagementBaseObject parent) : base()
+        internal QualifierDataCollection(ManagementBaseObject parent)
+            : base()
         {
             this.parent = parent;
             this.qualifierSetType = QualifierType.ObjectQualifier;
@@ -65,7 +66,8 @@ namespace System.Management
             ManagementBaseObject parent,
             string propertyOrMethodName,
             QualifierType type
-        ) : base()
+        )
+            : base()
         {
             this.parent = parent;
             this.propertyOrMethodName = propertyOrMethodName;

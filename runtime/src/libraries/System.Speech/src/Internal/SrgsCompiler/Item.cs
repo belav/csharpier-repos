@@ -16,7 +16,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int maxRepeat,
             float repeatProbability,
             float weight
-        ) : base(backend, rule)
+        )
+            : base(backend, rule)
         {
             // Validated by the caller
             _minRepeat = minRepeat;

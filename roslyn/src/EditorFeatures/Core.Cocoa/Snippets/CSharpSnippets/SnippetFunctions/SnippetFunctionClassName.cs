@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             SnippetExpansionClient snippetExpansionClient,
             ITextBuffer subjectBuffer,
             string fieldName
-        ) : base(snippetExpansionClient, subjectBuffer, fieldName) { }
+        )
+            : base(snippetExpansionClient, subjectBuffer, fieldName) { }
 
         protected override void GetContainingClassName(
             Document document,

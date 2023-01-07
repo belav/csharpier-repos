@@ -14,7 +14,8 @@ public class LoginWithRecoveryCode : DefaultUIPage
         HttpClient client,
         IHtmlDocument loginWithRecoveryCode,
         DefaultUIContext context
-    ) : base(client, loginWithRecoveryCode, context)
+    )
+        : base(client, loginWithRecoveryCode, context)
     {
         _loginWithRecoveryCodeForm = HtmlAssert.HasForm(loginWithRecoveryCode);
     }

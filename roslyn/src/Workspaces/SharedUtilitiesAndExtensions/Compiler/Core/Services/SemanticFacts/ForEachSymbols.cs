@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             IPropertySymbol currentProperty,
             IMethodSymbol disposeMethod,
             ITypeSymbol elementType
-        ) : this()
+        )
+            : this()
         {
             this.GetEnumeratorMethod = getEnumeratorMethod;
             this.MoveNextMethod = moveNextMethod;

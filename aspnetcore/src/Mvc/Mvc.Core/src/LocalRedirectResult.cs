@@ -23,7 +23,8 @@ public class LocalRedirectResult : ActionResult
     /// <param name="localUrl">The local URL to redirect to.</param>
     public LocalRedirectResult(
         [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl
-    ) : this(localUrl, permanent: false) { }
+    )
+        : this(localUrl, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -34,7 +35,8 @@ public class LocalRedirectResult : ActionResult
     public LocalRedirectResult(
         [StringSyntax(StringSyntaxAttribute.Uri, UriKind.Relative)] string localUrl,
         bool permanent
-    ) : this(localUrl, permanent, preserveMethod: false) { }
+    )
+        : this(localUrl, permanent, preserveMethod: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values

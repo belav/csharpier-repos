@@ -470,7 +470,8 @@ namespace System.Net.Sockets
     public sealed partial class SafeSocketHandle
         : Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid
     {
-        public SafeSocketHandle() : base(default(bool)) { }
+        public SafeSocketHandle()
+            : base(default(bool)) { }
 
         public SafeSocketHandle(System.IntPtr preexistingHandle, bool ownsHandle)
             : base(default(bool)) { }

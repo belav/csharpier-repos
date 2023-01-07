@@ -28,7 +28,8 @@ public class EntityEntry<TEntity> : EntityEntry where TEntity : class
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public EntityEntry(InternalEntityEntry internalEntry) : base(internalEntry) { }
+    public EntityEntry(InternalEntityEntry internalEntry)
+        : base(internalEntry) { }
 
     /// <summary>
     ///     Gets the entity being tracked by this entry.

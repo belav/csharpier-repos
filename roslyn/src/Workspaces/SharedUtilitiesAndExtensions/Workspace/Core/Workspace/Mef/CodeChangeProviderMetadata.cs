@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
     {
         public IEnumerable<string> Languages { get; }
 
-        public CodeChangeProviderMetadata(IDictionary<string, object> data) : base(data)
+        public CodeChangeProviderMetadata(IDictionary<string, object> data)
+            : base(data)
         {
             this.Languages = (
                 (IReadOnlyDictionary<string, object>)data
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             IEnumerable<string> after = null,
             IEnumerable<string> before = null,
             params string[] languages
-        ) : base(name, after, before)
+        )
+            : base(name, after, before)
         {
             this.Languages = languages;
         }

@@ -20,7 +20,8 @@ public class ColumnsEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         StoreObjectIdentifier storeObject,
         IReadOnlyList<string> columns
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         StoreObject = storeObject;
         Columns = columns;

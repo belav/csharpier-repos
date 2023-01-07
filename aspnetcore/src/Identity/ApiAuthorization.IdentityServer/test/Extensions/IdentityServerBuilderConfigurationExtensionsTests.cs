@@ -100,7 +100,8 @@ public static class IdentityServerBuilderConfigurationExtensionsTests
 
     private class MyUserContext : DbContext, IPersistedGrantDbContext
     {
-        public MyUserContext(DbContextOptions options) : base(options) { }
+        public MyUserContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<PersistedGrant> PersistedGrants { get; set; }
 

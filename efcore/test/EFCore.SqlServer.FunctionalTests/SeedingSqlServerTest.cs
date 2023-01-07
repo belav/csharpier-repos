@@ -12,7 +12,8 @@ public class SeedingSqlServerTest : SeedingTestBase
 
     protected class SeedingSqlServerContext : SeedingContext
     {
-        public SeedingSqlServerContext(string testId) : base(testId) { }
+        public SeedingSqlServerContext(string testId)
+            : base(testId) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlServer(

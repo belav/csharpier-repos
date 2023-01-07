@@ -47,7 +47,8 @@ namespace System.Linq.Parallel
             IComparer<TOrderKey> orderKeyComparer,
             IEqualityComparer<THashKey>? hashKeyComparer,
             IEqualityComparer<TInputOutput>? elementComparer
-        ) : base(partitionsCount, orderKeyComparer, OrdinalIndexState.Shuffled)
+        )
+            : base(partitionsCount, orderKeyComparer, OrdinalIndexState.Shuffled)
         {
             // elementComparer is used by operators that use elements themselves as the hash keys.
             // When elements are used as keys, THashKey should be NoKeyMemoizationRequired.

@@ -26,7 +26,8 @@ public class IndexBuilder<T> : IndexBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public IndexBuilder(IMutableIndex index) : base(index) { }
+    public IndexBuilder(IMutableIndex index)
+        : base(index) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the index. If an annotation with the key specified in

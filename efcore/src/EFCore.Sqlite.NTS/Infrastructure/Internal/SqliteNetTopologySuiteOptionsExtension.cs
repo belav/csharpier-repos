@@ -59,7 +59,8 @@ public class SqliteNetTopologySuiteOptionsExtension : IDbContextOptionsExtension
 
     private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
     {
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         private new SqliteNetTopologySuiteOptionsExtension Extension =>
             (SqliteNetTopologySuiteOptionsExtension)base.Extension;

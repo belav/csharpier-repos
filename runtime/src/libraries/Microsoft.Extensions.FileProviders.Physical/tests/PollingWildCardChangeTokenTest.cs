@@ -231,7 +231,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 DirectoryInfoBase directoryInfo,
                 string pattern,
                 IClock clock
-            ) : base(directoryInfo, pattern, clock) { }
+            )
+                : base(directoryInfo, pattern, clock) { }
 
             public Dictionary<string, DateTime> FileTimestampLookup { get; } =
                 new Dictionary<string, DateTime>(StringComparer.OrdinalIgnoreCase);

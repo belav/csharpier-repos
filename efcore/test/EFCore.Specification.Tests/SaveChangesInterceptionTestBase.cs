@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 {
-    protected SaveChangesInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
+    protected SaveChangesInterceptionTestBase(InterceptionFixtureBase fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]

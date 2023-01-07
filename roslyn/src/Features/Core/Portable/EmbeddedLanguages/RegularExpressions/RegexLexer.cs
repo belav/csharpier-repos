@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
         public readonly VirtualCharSequence Text;
         public int Position;
 
-        public RegexLexer(VirtualCharSequence text) : this() => Text = text;
+        public RegexLexer(VirtualCharSequence text)
+            : this() => Text = text;
 
         public VirtualChar CurrentChar => Position < Text.Length ? Text[Position] : default;
 

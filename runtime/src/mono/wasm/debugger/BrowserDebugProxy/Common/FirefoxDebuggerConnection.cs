@@ -20,7 +20,8 @@ internal sealed class FirefoxDebuggerConnection : WasmDebuggerConnection
     private bool _isDisposed;
     private readonly byte[] _lengthBuffer;
 
-    public FirefoxDebuggerConnection(TcpClient tcpClient, string id, ILogger logger) : base(id)
+    public FirefoxDebuggerConnection(TcpClient tcpClient, string id, ILogger logger)
+        : base(id)
     {
         ArgumentNullException.ThrowIfNull(tcpClient);
         ArgumentNullException.ThrowIfNull(logger);

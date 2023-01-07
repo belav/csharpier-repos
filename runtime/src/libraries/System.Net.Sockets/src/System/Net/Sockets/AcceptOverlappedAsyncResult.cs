@@ -13,7 +13,8 @@ namespace System.Net.Sockets
             Socket listenSocket,
             object? asyncState,
             AsyncCallback? asyncCallback
-        ) : base(listenSocket, asyncState, asyncCallback)
+        )
+            : base(listenSocket, asyncState, asyncCallback)
         {
             _listenSocket = listenSocket;
         }

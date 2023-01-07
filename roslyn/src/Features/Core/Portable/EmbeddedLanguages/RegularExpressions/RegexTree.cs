@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             ImmutableArray<EmbeddedDiagnostic> diagnostics,
             ImmutableDictionary<string, TextSpan> captureNamesToSpan,
             ImmutableDictionary<int, TextSpan> captureNumbersToSpan
-        ) : base(text, root, diagnostics)
+        )
+            : base(text, root, diagnostics)
         {
             CaptureNamesToSpan = captureNamesToSpan;
             CaptureNumbersToSpan = captureNumbersToSpan;

@@ -25,7 +25,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgIntegrity(ITestOutputHelper output) : base(output)
+        public CArgIntegrity(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -646,7 +647,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgGetExtObj(ITestOutputHelper output) : base(output)
+        public CArgGetExtObj(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -1159,7 +1161,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgAddParam(ITestOutputHelper output) : base(output)
+        public CArgAddParam(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -2685,7 +2688,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgAddParamMisc(ITestOutputHelper output) : base(output)
+        public CArgAddParamMisc(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -7406,7 +7410,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgAddExtObj(ITestOutputHelper output) : base(output)
+        public CArgAddExtObj(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -10364,7 +10369,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public ExObj(int i, ITestOutputHelper output) : base(output)
+        public ExObj(int i, ITestOutputHelper output)
+            : base(output)
         {
             count = 0;
             _output = output;
@@ -10404,7 +10410,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         private ITestOutputHelper _output;
 
-        public CArgRemoveParam(ITestOutputHelper output) : base(output)
+        public CArgRemoveParam(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -11361,7 +11368,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgRemoveExtObj(ITestOutputHelper output) : base(output)
+        public CArgRemoveExtObj(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -11868,7 +11876,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgClear(ITestOutputHelper output) : base(output)
+        public CArgClear(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -12240,7 +12249,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         private ITestOutputHelper _output;
 
-        public XsltEvents(ITestOutputHelper output) : base(output)
+        public XsltEvents(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -12369,7 +12379,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public XPathNodeIteratorTests(ITestOutputHelper output) : base(output)
+        public XPathNodeIteratorTests(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

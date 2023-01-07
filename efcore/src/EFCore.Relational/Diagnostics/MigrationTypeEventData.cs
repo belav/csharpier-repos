@@ -22,7 +22,8 @@ public class MigrationTypeEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         TypeInfo migrationType
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         MigrationType = migrationType;
     }

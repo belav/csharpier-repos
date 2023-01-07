@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 CultureInfo culture,
                 bool includeMatchedSpans,
                 bool allowFuzzyMatching
-            ) : base(includeMatchedSpans, culture, allowFuzzyMatching)
+            )
+                : base(includeMatchedSpans, culture, allowFuzzyMatching)
             {
                 pattern = pattern.Trim();
 

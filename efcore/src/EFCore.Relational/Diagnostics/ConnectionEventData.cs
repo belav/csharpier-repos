@@ -30,7 +30,8 @@ public class ConnectionEventData : DbContextEventData
         Guid connectionId,
         bool async,
         DateTimeOffset startTime
-    ) : base(eventDefinition, messageGenerator, context)
+    )
+        : base(eventDefinition, messageGenerator, context)
     {
         Connection = connection;
         ConnectionId = connectionId;

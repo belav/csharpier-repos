@@ -52,7 +52,8 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchResultEntry
     {
-        internal SearchResultEntry(string dn) : this(dn, new SearchResultAttributeCollection()) { }
+        internal SearchResultEntry(string dn)
+            : this(dn, new SearchResultAttributeCollection()) { }
 
         internal SearchResultEntry(string dn, SearchResultAttributeCollection attrs)
         {

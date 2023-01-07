@@ -22,7 +22,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public CalleeSavedRegister() { }
 
-        public CalleeSavedRegister(int codeOffset, CalleeSavedRegisters reg) : base(codeOffset)
+        public CalleeSavedRegister(int codeOffset, CalleeSavedRegisters reg)
+            : base(codeOffset)
         {
             Register = reg;
         }
@@ -39,7 +40,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public IPtrMask() { }
 
-        public IPtrMask(int codeOffset, uint imask) : base(codeOffset)
+        public IPtrMask(int codeOffset, uint imask)
+            : base(codeOffset)
         {
             IMask = imask;
         }
@@ -67,7 +69,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             bool isThis = false,
             bool iptr = false,
             int pushCountOrPopSize = -1
-        ) : base(codeOffset)
+        )
+            : base(codeOffset)
         {
             Register = reg;
             IsLive = isLive;
@@ -123,7 +126,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             bool isThis = false,
             bool iptr = false,
             bool isPtr = true
-        ) : base(codeOffset)
+        )
+            : base(codeOffset)
         {
             _isEbpFrame = isEbpFrame;
             CodeOffset = codeOffset;
@@ -212,7 +216,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 
         public GcTransitionCall() { }
 
-        public GcTransitionCall(int codeOffset) : base(codeOffset)
+        public GcTransitionCall(int codeOffset)
+            : base(codeOffset)
         {
             CallRegisters = new List<CallRegister>();
             PtrArgs = new List<PtrArg>();

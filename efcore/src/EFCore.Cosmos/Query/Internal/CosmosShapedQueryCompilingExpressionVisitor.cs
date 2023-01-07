@@ -33,7 +33,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
         CosmosQueryCompilationContext cosmosQueryCompilationContext,
         ISqlExpressionFactory sqlExpressionFactory,
         IQuerySqlGeneratorFactory querySqlGeneratorFactory
-    ) : base(dependencies, cosmosQueryCompilationContext)
+    )
+        : base(dependencies, cosmosQueryCompilationContext)
     {
         _sqlExpressionFactory = sqlExpressionFactory;
         _querySqlGeneratorFactory = querySqlGeneratorFactory;

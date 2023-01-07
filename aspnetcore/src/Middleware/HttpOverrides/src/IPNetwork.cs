@@ -18,7 +18,8 @@ public class IPNetwork
     /// <param name="prefix">The <see cref="IPAddress"/>.</param>
     /// <param name="prefixLength">The prefix length.</param>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="prefixLength"/> is out of range.</exception>
-    public IPNetwork(IPAddress prefix, int prefixLength) : this(prefix, prefixLength, true) { }
+    public IPNetwork(IPAddress prefix, int prefixLength)
+        : this(prefix, prefixLength, true) { }
 
     private IPNetwork(IPAddress prefix, int prefixLength, bool checkPrefixLengthRange)
     {

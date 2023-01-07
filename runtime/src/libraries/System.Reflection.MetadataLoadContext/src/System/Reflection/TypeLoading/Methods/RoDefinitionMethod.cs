@@ -13,7 +13,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class RoDefinitionMethod : RoMethod
     {
-        protected RoDefinitionMethod(Type reflectedType) : base(reflectedType)
+        protected RoDefinitionMethod(Type reflectedType)
+            : base(reflectedType)
         {
             Debug.Assert(reflectedType != null);
         }
@@ -38,7 +39,8 @@ namespace System.Reflection.TypeLoading
             RoInstantiationProviderType declaringType,
             Type reflectedType,
             TMethodDecoder decoder
-        ) : base(reflectedType)
+        )
+            : base(reflectedType)
         {
             Debug.Assert(declaringType != null);
             _declaringType = declaringType;

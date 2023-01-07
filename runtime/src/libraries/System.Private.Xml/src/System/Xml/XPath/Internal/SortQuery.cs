@@ -26,7 +26,8 @@ namespace MS.Internal.Xml.XPath
             count = 0;
         }
 
-        private SortQuery(SortQuery other) : base(other)
+        private SortQuery(SortQuery other)
+            : base(other)
         {
             _results = new List<SortKey>(other._results);
             _comparer = other._comparer.Clone();
@@ -186,7 +187,8 @@ namespace MS.Internal.Xml.XPath
             _comparers = new IComparer[size];
         }
 
-        public XPathSortComparer() : this(minSize) { }
+        public XPathSortComparer()
+            : this(minSize) { }
 
         public void AddSort(Query evalQuery, IComparer comparer)
         {

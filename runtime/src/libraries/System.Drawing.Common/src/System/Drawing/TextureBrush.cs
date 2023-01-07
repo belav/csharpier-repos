@@ -18,7 +18,8 @@ namespace System.Drawing
         // It is NOT used to crop the metafile image, so only the width
         // and height values matter for metafiles.
 
-        public TextureBrush(Image bitmap) : this(bitmap, WrapMode.Tile) { }
+        public TextureBrush(Image bitmap)
+            : this(bitmap, WrapMode.Tile) { }
 
         public TextureBrush(Image image, WrapMode wrapMode)
         {
@@ -100,7 +101,8 @@ namespace System.Drawing
             SetNativeBrushInternal(brush);
         }
 
-        public TextureBrush(Image image, RectangleF dstRect) : this(image, dstRect, null) { }
+        public TextureBrush(Image image, RectangleF dstRect)
+            : this(image, dstRect, null) { }
 
         public TextureBrush(Image image, RectangleF dstRect, ImageAttributes? imageAttr)
         {
@@ -124,7 +126,8 @@ namespace System.Drawing
             SetNativeBrushInternal(brush);
         }
 
-        public TextureBrush(Image image, Rectangle dstRect) : this(image, dstRect, null) { }
+        public TextureBrush(Image image, Rectangle dstRect)
+            : this(image, dstRect, null) { }
 
         public TextureBrush(Image image, Rectangle dstRect, ImageAttributes? imageAttr)
         {

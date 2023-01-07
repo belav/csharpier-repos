@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.PrivateKeyword,
         };
 
-        public ConstKeywordRecommender() : base(SyntaxKind.ConstKeyword) { }
+        public ConstKeywordRecommender()
+            : base(SyntaxKind.ConstKeyword) { }
 
         protected override bool IsValidContext(
             int position,

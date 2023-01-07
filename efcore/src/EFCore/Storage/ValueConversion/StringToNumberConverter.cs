@@ -19,7 +19,8 @@ public class StringToNumberConverter<TNumber> : StringNumberConverter<string, TN
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public StringToNumberConverter() : this(null) { }
+    public StringToNumberConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

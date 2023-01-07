@@ -28,7 +28,8 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
     /// This API supports framework infrastructure and is not intended to be used
     /// directly from application code.
     /// </summary>
-    public HttpParser() : this(showErrorDetails: true) { }
+    public HttpParser()
+        : this(showErrorDetails: true) { }
 
     /// <summary>
     /// This API supports framework infrastructure and is not intended to be used

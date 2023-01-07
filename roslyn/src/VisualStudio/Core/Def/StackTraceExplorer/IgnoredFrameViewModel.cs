@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             IgnoredFrame frame,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap
-        ) : base(formatMap, typeMap)
+        )
+            : base(formatMap, typeMap)
         {
             _frame = frame;
         }

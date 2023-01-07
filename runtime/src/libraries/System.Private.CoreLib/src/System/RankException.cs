@@ -21,12 +21,14 @@ namespace System
     )]
     public class RankException : SystemException
     {
-        public RankException() : base(SR.Arg_RankException)
+        public RankException()
+            : base(SR.Arg_RankException)
         {
             HResult = HResults.COR_E_RANK;
         }
 
-        public RankException(string? message) : base(message)
+        public RankException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_RANK;
         }

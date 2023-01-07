@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             public ProjectSymbolReferenceCodeAction(
                 Document originalDocument,
                 AddImportFixData fixData
-            ) : base(originalDocument, fixData)
+            )
+                : base(originalDocument, fixData)
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.ProjectSymbol);
             }

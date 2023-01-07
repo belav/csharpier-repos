@@ -33,7 +33,8 @@ public class DoubleTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="DoubleTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DoubleTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DoubleTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

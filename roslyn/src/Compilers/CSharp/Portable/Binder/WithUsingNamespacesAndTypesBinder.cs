@@ -358,7 +358,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpSyntaxNode declarationSyntax,
                 Binder next,
                 bool withImportChainEntry
-            ) : base(next, withImportChainEntry)
+            )
+                : base(next, withImportChainEntry)
             {
                 Debug.Assert(
                     declarationSyntax.Kind()
@@ -406,7 +407,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CSharpSyntaxNode declarationSyntax,
                 Binder next,
                 bool withImportChainEntry
-            ) : base(next, withImportChainEntry)
+            )
+                : base(next, withImportChainEntry)
             {
                 Debug.Assert(
                     declarationSyntax.IsKind(SyntaxKind.CompilationUnit)
@@ -455,7 +457,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<NamespaceOrTypeAndUsingDirective> namespacesOrTypes,
                 Binder next,
                 bool withImportChainEntry
-            ) : base(next, withImportChainEntry)
+            )
+                : base(next, withImportChainEntry)
             {
                 Debug.Assert(!namespacesOrTypes.IsDefault);
                 _usings = namespacesOrTypes;

@@ -22,7 +22,8 @@ namespace System
             _HResult = HResults.COR_E_EXCEPTION;
         }
 
-        public Exception(string? message) : this()
+        public Exception(string? message)
+            : this()
         {
             _message = message;
         }
@@ -32,7 +33,8 @@ namespace System
         // Note: the stack trace is not started until the exception
         // is thrown
         //
-        public Exception(string? message, Exception? innerException) : this()
+        public Exception(string? message, Exception? innerException)
+            : this()
         {
             _message = message;
             _innerException = innerException;

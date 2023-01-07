@@ -44,7 +44,8 @@ public class FakeRelationalOptionsExtension : RelationalOptionsExtension
 
     private sealed class ExtensionInfo : RelationalExtensionInfo
     {
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) { }
     }

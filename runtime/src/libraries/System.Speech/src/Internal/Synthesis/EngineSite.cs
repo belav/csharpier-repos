@@ -387,7 +387,8 @@ namespace System.Speech.Internal.Synthesis
             ITtsEventSink sink,
             PhonemeConversion conversion,
             AlphabetConverter alphabetConverter
-        ) : base(sink)
+        )
+            : base(sink)
         {
             _queue = new Queue();
             _phonemeQueue = new Queue();

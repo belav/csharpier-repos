@@ -18,7 +18,8 @@ namespace System.Reflection.Runtime.ParameterInfos
         private RuntimePropertyIndexParameterInfo(
             RuntimePropertyInfo member,
             RuntimeParameterInfo backingParameter
-        ) : base(member, backingParameter.Position)
+        )
+            : base(member, backingParameter.Position)
         {
             _backingParameter = backingParameter;
         }

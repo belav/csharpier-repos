@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         SyntaxNode syntax,
                         ImmutableArray<(ConstantValue value, LabelSymbol label)> dispatches,
                         LabelSymbol otherwise
-                    ) : base(syntax)
+                    )
+                        : base(syntax)
                     {
                         this.Cases = dispatches;
                         this.Otherwise = otherwise;
@@ -59,8 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     public readonly LabelSymbol Label;
 
-                    public LeafDispatchNode(SyntaxNode syntax, LabelSymbol Label) : base(syntax) =>
-                        this.Label = Label;
+                    public LeafDispatchNode(SyntaxNode syntax, LabelSymbol Label)
+                        : base(syntax) => this.Label = Label;
 
                     public override string ToString() => "Leaf";
                 }
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         BinaryOperatorKind op,
                         ValueDispatchNode left,
                         ValueDispatchNode right
-                    ) : base(syntax)
+                    )
+                        : base(syntax)
                     {
                         Debug.Assert(op.OperandTypes() != 0);
                         this.Value = value;

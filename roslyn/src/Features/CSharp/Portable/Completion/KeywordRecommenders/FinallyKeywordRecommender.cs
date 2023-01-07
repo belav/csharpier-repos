@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class FinallyKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public FinallyKeywordRecommender() : base(SyntaxKind.FinallyKeyword) { }
+        public FinallyKeywordRecommender()
+            : base(SyntaxKind.FinallyKeyword) { }
 
         protected override bool IsValidContext(
             int position,

@@ -87,7 +87,8 @@ namespace Microsoft.Cci
             int tryEndOffset,
             int handlerStartOffset,
             int handlerEndOffset
-        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset) { }
+        )
+            : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset) { }
 
         public override ExceptionRegionKind HandlerKind
         {
@@ -102,7 +103,8 @@ namespace Microsoft.Cci
             int tryEndOffset,
             int handlerStartOffset,
             int handlerEndOffset
-        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset) { }
+        )
+            : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset) { }
 
         public override ExceptionRegionKind HandlerKind
         {
@@ -120,7 +122,8 @@ namespace Microsoft.Cci
             int handlerStartOffset,
             int handlerEndOffset,
             ITypeReference exceptionType
-        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset)
+        )
+            : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset)
         {
             _exceptionType = exceptionType;
         }
@@ -146,7 +149,8 @@ namespace Microsoft.Cci
             int handlerStartOffset,
             int handlerEndOffset,
             int filterDecisionStartOffset
-        ) : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset)
+        )
+            : base(tryStartOffset, tryEndOffset, handlerStartOffset, handlerEndOffset)
         {
             Debug.Assert(filterDecisionStartOffset >= 0);
 

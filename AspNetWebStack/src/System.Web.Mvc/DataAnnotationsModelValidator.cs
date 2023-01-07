@@ -13,7 +13,8 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             ValidationAttribute attribute
-        ) : base(metadata, context)
+        )
+            : base(metadata, context)
         {
             if (attribute == null)
             {

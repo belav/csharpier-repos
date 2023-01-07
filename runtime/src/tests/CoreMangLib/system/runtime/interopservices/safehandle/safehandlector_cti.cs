@@ -13,10 +13,12 @@ public class MySafeHandle : SafeHandle
     }
 
     [SecurityCritical]
-    public MySafeHandle() : base(IntPtr.Zero, true) { }
+    public MySafeHandle()
+        : base(IntPtr.Zero, true) { }
 
     [SecurityCritical]
-    public MySafeHandle(IntPtr handleValue) : base(handleValue, true) { }
+    public MySafeHandle(IntPtr handleValue)
+        : base(handleValue, true) { }
 
     public override bool IsInvalid
     {

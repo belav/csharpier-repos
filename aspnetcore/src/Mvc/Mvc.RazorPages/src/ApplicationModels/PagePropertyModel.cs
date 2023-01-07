@@ -28,7 +28,8 @@ public class PagePropertyModel : ParameterModelBase, ICommonModel
     /// Creates a new instance of <see cref="PagePropertyModel"/> from a given <see cref="PagePropertyModel"/>.
     /// </summary>
     /// <param name="other">The <see cref="PagePropertyModel"/> which needs to be copied.</param>
-    public PagePropertyModel(PagePropertyModel other) : base(other)
+    public PagePropertyModel(PagePropertyModel other)
+        : base(other)
     {
         if (other == null)
         {

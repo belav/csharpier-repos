@@ -71,7 +71,8 @@ namespace Microsoft.Extensions.Configuration.Json
     {
         public JsonConfigurationProvider(
             Microsoft.Extensions.Configuration.Json.JsonConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
 
         public override void Load(System.IO.Stream stream) { }
     }
@@ -94,7 +95,8 @@ namespace Microsoft.Extensions.Configuration.Json
     {
         public JsonStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Json.JsonStreamConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
 
         public override void Load(System.IO.Stream stream) { }
     }

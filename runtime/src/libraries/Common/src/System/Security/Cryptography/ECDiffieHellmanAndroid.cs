@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
                 KeySizeValue = _key.KeySize;
             }
 
-            public ECDiffieHellmanAndroid() : this(521) { }
+            public ECDiffieHellmanAndroid()
+                : this(521) { }
 
             public ECDiffieHellmanAndroid(int keySize)
             {

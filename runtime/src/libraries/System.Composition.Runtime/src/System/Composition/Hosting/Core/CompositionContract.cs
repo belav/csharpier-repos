@@ -21,7 +21,8 @@ namespace System.Composition.Hosting.Core
         /// Construct a <see cref="CompositionContract"/>.
         /// </summary>
         /// <param name="contractType">The type shared between the exporter and importer.</param>
-        public CompositionContract(Type contractType) : this(contractType, null) { }
+        public CompositionContract(Type contractType)
+            : this(contractType, null) { }
 
         /// <summary>
         /// Construct a <see cref="CompositionContract"/>.

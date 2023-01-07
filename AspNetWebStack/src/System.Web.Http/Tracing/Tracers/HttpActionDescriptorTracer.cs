@@ -32,7 +32,8 @@ namespace System.Web.Http.Tracing.Tracers
             HttpControllerContext controllerContext,
             HttpActionDescriptor innerDescriptor,
             ITraceWriter traceWriter
-        ) : base(controllerContext.ControllerDescriptor)
+        )
+            : base(controllerContext.ControllerDescriptor)
         {
             Contract.Assert(innerDescriptor != null);
             Contract.Assert(traceWriter != null);

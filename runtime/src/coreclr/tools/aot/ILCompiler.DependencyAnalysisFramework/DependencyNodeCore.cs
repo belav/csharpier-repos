@@ -35,8 +35,8 @@ namespace ILCompiler.DependencyAnalysisFramework
         {
             public DependencyList() { }
 
-            public DependencyList(IEnumerable<DependencyListEntry> collection) : base(collection)
-            { }
+            public DependencyList(IEnumerable<DependencyListEntry> collection)
+                : base(collection) { }
 
             public void Add(DependencyNodeCore<DependencyContextType> node, string reason)
             {

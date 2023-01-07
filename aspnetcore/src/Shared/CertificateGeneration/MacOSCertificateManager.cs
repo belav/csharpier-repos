@@ -86,7 +86,8 @@ internal sealed class MacOSCertificateManager : CertificateManager
 
     public MacOSCertificateManager() { }
 
-    internal MacOSCertificateManager(string subject, int version) : base(subject, version) { }
+    internal MacOSCertificateManager(string subject, int version)
+        : base(subject, version) { }
 
     protected override void TrustCertificateCore(X509Certificate2 publicCertificate)
     {

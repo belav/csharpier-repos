@@ -20,7 +20,8 @@ public class IPAddressToStringConverter : ValueConverter<IPAddress?, string?>
     /// <summary>
     ///     Creates a new instance of this converter.
     /// </summary>
-    public IPAddressToStringConverter() : this(null) { }
+    public IPAddressToStringConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

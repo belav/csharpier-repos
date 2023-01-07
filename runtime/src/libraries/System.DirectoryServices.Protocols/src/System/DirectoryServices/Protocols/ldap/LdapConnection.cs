@@ -64,7 +64,8 @@ namespace System.DirectoryServices.Protocols
         private bool _connected;
         internal QUERYCLIENTCERT _clientCertificateRoutine;
 
-        public LdapConnection(string server) : this(new LdapDirectoryIdentifier(server)) { }
+        public LdapConnection(string server)
+            : this(new LdapDirectoryIdentifier(server)) { }
 
         public LdapConnection(LdapDirectoryIdentifier identifier)
             : this(identifier, null, AuthType.Negotiate) { }

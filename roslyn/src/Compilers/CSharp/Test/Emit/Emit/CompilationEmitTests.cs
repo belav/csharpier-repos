@@ -738,7 +738,8 @@ public class C
                 MetadataRootBuilder metadataRootBuilder,
                 BlobBuilder ilStream,
                 ResourceSectionBuilder nativeResources
-            ) : base(header, metadataRootBuilder, ilStream, nativeResources: nativeResources) { }
+            )
+                : base(header, metadataRootBuilder, ilStream, nativeResources: nativeResources) { }
 
             protected override ImmutableArray<Section> CreateSections()
             {

@@ -248,9 +248,11 @@ namespace System.Web.Mvc.Test
         {
             public bool WasWriteFileCalled;
 
-            public EmptyFileResult() : this(MediaTypeNames.Application.Octet) { }
+            public EmptyFileResult()
+                : this(MediaTypeNames.Application.Octet) { }
 
-            public EmptyFileResult(string contentType) : base(contentType) { }
+            public EmptyFileResult(string contentType)
+                : base(contentType) { }
 
             protected override void WriteFile(HttpResponseBase response)
             {

@@ -24,7 +24,8 @@ internal sealed class VirtualFileResult : FileResult, IResult
     /// </summary>
     /// <param name="fileName">The path to the file. The path must be relative/virtual.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
-    public VirtualFileResult(string fileName, string? contentType) : base(contentType)
+    public VirtualFileResult(string fileName, string? contentType)
+        : base(contentType)
     {
         FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
     }

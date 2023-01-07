@@ -43,7 +43,8 @@ namespace System.Data.SqlTypes
             }
         }
 
-        public SqlSingle(double value) : this(checked((float)value)) { }
+        public SqlSingle(double value)
+            : this(checked((float)value)) { }
 
         // INullable
         public bool IsNull

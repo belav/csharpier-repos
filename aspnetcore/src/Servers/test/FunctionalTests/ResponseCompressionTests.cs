@@ -28,7 +28,8 @@ public class ResponseCompressionTests : LoggedTest
     // NGinx's default min size is 20 bytes
     private static readonly string HelloWorldBody = "Hello World;" + new string('a', 20);
 
-    public ResponseCompressionTests(ITestOutputHelper output) : base(output) { }
+    public ResponseCompressionTests(ITestOutputHelper output)
+        : base(output) { }
 
     public static TestMatrix NoCompressionTestVariants =>
         TestMatrix

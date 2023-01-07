@@ -45,7 +45,8 @@ namespace System.Web.Mvc
             HttpContextBase httpContext,
             RouteData routeData,
             ControllerBase controller
-        ) : this(new RequestContext(httpContext, routeData), controller) { }
+        )
+            : this(new RequestContext(httpContext, routeData), controller) { }
 
         [SuppressMessage(
             "Microsoft.Usage",

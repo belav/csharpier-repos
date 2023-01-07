@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expression,
             NullableAnnotation nullableAnnotation,
             TypeSymbol? type
-        ) : this(syntax, expression, nullableAnnotation, type, hasErrors: false)
+        )
+            : this(syntax, expression, nullableAnnotation, type, hasErrors: false)
         {
             IsSuppressed = expression.IsSuppressed;
         }

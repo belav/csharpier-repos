@@ -5,9 +5,11 @@ namespace System.Web.Mvc
 {
     public class WebFormViewEngine : BuildManagerViewEngine
     {
-        public WebFormViewEngine() : this(null) { }
+        public WebFormViewEngine()
+            : this(null) { }
 
-        public WebFormViewEngine(IViewPageActivator viewPageActivator) : base(viewPageActivator)
+        public WebFormViewEngine(IViewPageActivator viewPageActivator)
+            : base(viewPageActivator)
         {
             MasterLocationFormats = new[] { "~/Views/{1}/{0}.master", "~/Views/Shared/{0}.master" };
 

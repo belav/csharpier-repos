@@ -156,7 +156,8 @@ namespace System.Linq.Expressions
     {
         private readonly Expression _instance;
 
-        public InstanceMethodCallExpression(MethodInfo method, Expression instance) : base(method)
+        public InstanceMethodCallExpression(MethodInfo method, Expression instance)
+            : base(method)
         {
             Debug.Assert(instance != null);
 
@@ -210,7 +211,8 @@ namespace System.Linq.Expressions
             MethodInfo method,
             Expression instance,
             IReadOnlyList<Expression> args
-        ) : base(method, instance)
+        )
+            : base(method, instance)
         {
             _arguments = args;
         }
@@ -241,7 +243,8 @@ namespace System.Linq.Expressions
 
     internal sealed class MethodCallExpression0 : MethodCallExpression, IArgumentProvider
     {
-        public MethodCallExpression0(MethodInfo method) : base(method) { }
+        public MethodCallExpression0(MethodInfo method)
+            : base(method) { }
 
         public override Expression GetArgument(int index)
         {
@@ -274,7 +277,8 @@ namespace System.Linq.Expressions
     {
         private object _arg0; // storage for the 1st argument or a read-only collection.  See IArgumentProvider
 
-        public MethodCallExpression1(MethodInfo method, Expression arg0) : base(method)
+        public MethodCallExpression1(MethodInfo method, Expression arg0)
+            : base(method)
         {
             _arg0 = arg0;
         }
@@ -403,7 +407,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) : base(method)
+        )
+            : base(method)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -489,7 +494,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) : base(method)
+        )
+            : base(method)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -584,7 +590,8 @@ namespace System.Linq.Expressions
             Expression arg2,
             Expression arg3,
             Expression arg4
-        ) : base(method)
+        )
+            : base(method)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -716,7 +723,8 @@ namespace System.Linq.Expressions
             MethodInfo method,
             Expression instance,
             Expression arg0
-        ) : base(method, instance)
+        )
+            : base(method, instance)
         {
             _arg0 = arg0;
         }
@@ -783,7 +791,8 @@ namespace System.Linq.Expressions
             Expression instance,
             Expression arg0,
             Expression arg1
-        ) : base(method, instance)
+        )
+            : base(method, instance)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -864,7 +873,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) : base(method, instance)
+        )
+            : base(method, instance)
         {
             _arg0 = arg0;
             _arg1 = arg1;

@@ -59,7 +59,8 @@ namespace System.Security.AccessControl
             ResourceType resourceType,
             ExceptionFromErrorCode? exceptionFromErrorCode,
             object? exceptionContext
-        ) : this(isContainer, resourceType)
+        )
+            : this(isContainer, resourceType)
         {
             _exceptionContext = exceptionContext;
             _exceptionFromErrorCode = exceptionFromErrorCode;
@@ -68,13 +69,15 @@ namespace System.Security.AccessControl
         internal NativeObjectSecurity(
             ResourceType resourceType,
             CommonSecurityDescriptor securityDescriptor
-        ) : this(resourceType, securityDescriptor, null) { }
+        )
+            : this(resourceType, securityDescriptor, null) { }
 
         internal NativeObjectSecurity(
             ResourceType resourceType,
             CommonSecurityDescriptor securityDescriptor,
             ExceptionFromErrorCode? exceptionFromErrorCode
-        ) : base(securityDescriptor)
+        )
+            : base(securityDescriptor)
         {
             _resourceType = resourceType;
             _exceptionFromErrorCode = exceptionFromErrorCode;
@@ -108,7 +111,8 @@ namespace System.Security.AccessControl
             ResourceType resourceType,
             string? name,
             AccessControlSections includeSections
-        ) : this(isContainer, resourceType, name, includeSections, null, null) { }
+        )
+            : this(isContainer, resourceType, name, includeSections, null, null) { }
 
         protected NativeObjectSecurity(
             bool isContainer,
@@ -138,7 +142,8 @@ namespace System.Security.AccessControl
             ResourceType resourceType,
             SafeHandle? handle,
             AccessControlSections includeSections
-        ) : this(isContainer, resourceType, handle, includeSections, null, null) { }
+        )
+            : this(isContainer, resourceType, handle, includeSections, null, null) { }
 
         #endregion
 

@@ -42,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
             RemoteLanguageServiceWorkspace workspace,
             IDiagnosticService diagnosticService,
             ITableManagerProvider provider
-        ) : base(workspace, provider)
+        )
+            : base(workspace, provider)
         {
             _source = new LiveTableDataSource(
                 workspace,

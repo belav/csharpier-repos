@@ -27,7 +27,8 @@ namespace System.Security.Cryptography
         /// </summary>
         public const int HashSizeInBytes = HashSizeInBits / 8;
 
-        public HMACSHA384() : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
+        public HMACSHA384()
+            : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         public HMACSHA384(byte[] key)
         {

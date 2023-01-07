@@ -31,7 +31,8 @@ namespace Castle.DynamicProxy.Contributors
             Type proxyTargetType,
             bool canChangeTarget,
             INamingScope namingScope
-        ) : base(namingScope)
+        )
+            : base(namingScope)
         {
             this.proxyTargetType = proxyTargetType;
             this.canChangeTarget = canChangeTarget;

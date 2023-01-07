@@ -370,25 +370,29 @@ namespace System.Reflection.Tests
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
     public class MyAttribute_Single_M : MyAttributeBase_M
     {
-        public MyAttribute_Single_M(string name) : base(name) { }
+        public MyAttribute_Single_M(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class MyAttribute_AllowMultiple_M : MyAttributeBase_M
     {
-        public MyAttribute_AllowMultiple_M(string name) : base(name) { }
+        public MyAttribute_AllowMultiple_M(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
     public class MyAttribute_Single_Inherited : MyAttributeBase_M
     {
-        public MyAttribute_Single_Inherited(string name) : base(name) { }
+        public MyAttribute_Single_Inherited(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class MyAttribute_AllowMultiple_Inherited : MyAttributeBase_M
     {
-        public MyAttribute_AllowMultiple_Inherited(string name) : base(name) { }
+        public MyAttribute_AllowMultiple_Inherited(string name)
+            : base(name) { }
     }
 
     public class TestClassWithoutAttribute { }

@@ -668,7 +668,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
         public class CustomImportAttributeInvalidTarget : ImportAttribute
         {
-            public CustomImportAttributeInvalidTarget() : base(typeof(IContract)) { }
+            public CustomImportAttributeInvalidTarget()
+                : base(typeof(IContract)) { }
         }
 
         [PartNotDiscoverable]
@@ -754,21 +755,24 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = false, Inherited = false)]
         public class CustomImportingConstructorAttribute : ImportingConstructorAttribute
         {
-            public CustomImportingConstructorAttribute() : base() { }
+            public CustomImportingConstructorAttribute()
+                : base() { }
         }
 
         [AttributeUsage(AttributeTargets.Constructor, AllowMultiple = true, Inherited = false)]
         public class CustomImportingConstructorAllowMultipleAttribute
             : ImportingConstructorAttribute
         {
-            public CustomImportingConstructorAllowMultipleAttribute() : base() { }
+            public CustomImportingConstructorAllowMultipleAttribute()
+                : base() { }
         }
 
         [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
         public class CustomImportingConstructorInvalidTargetAttribute
             : ImportingConstructorAttribute
         {
-            public CustomImportingConstructorInvalidTargetAttribute() : base() { }
+            public CustomImportingConstructorInvalidTargetAttribute()
+                : base() { }
         }
 
         [PartNotDiscoverable]

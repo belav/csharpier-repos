@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public NewLineUserSettingFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
+        public NewLineUserSettingFormattingRule()
+            : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private NewLineUserSettingFormattingRule(CSharpSyntaxFormattingOptions options)
         {

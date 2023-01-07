@@ -241,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MergedTypeDeclaration declaration,
             BindingDiagnosticBag diagnostics,
             TupleExtraData? tupleData = null
-        ) : base(tupleData)
+        )
+            : base(tupleData)
         {
             // If we're dealing with a simple program, then we must be in the global namespace
             Debug.Assert(

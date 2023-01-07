@@ -31,10 +31,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
                 Analyzers = analyzers;
             }
 
-            public MockAnalyzerReference() : this(s_defaultFixer, s_defaultAnalyzers) { }
+            public MockAnalyzerReference()
+                : this(s_defaultFixer, s_defaultAnalyzers) { }
 
-            public MockAnalyzerReference(CodeFixProvider? fixer) : this(fixer, s_defaultAnalyzers)
-            { }
+            public MockAnalyzerReference(CodeFixProvider? fixer)
+                : this(fixer, s_defaultAnalyzers) { }
 
             public override string Display => "MockAnalyzerReference";
 
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
                 public MockDiagnosticAnalyzer(ImmutableArray<string> reportedDiagnosticIds)
                     : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory"))) { }
 
-                public MockDiagnosticAnalyzer() : this(ImmutableArray.Create(MockFixer.Id)) { }
+                public MockDiagnosticAnalyzer()
+                    : this(ImmutableArray.Create(MockFixer.Id)) { }
 
                 private static ImmutableArray<DiagnosticDescriptor> CreateSupportedDiagnostics(
                     ImmutableArray<(string id, string category)> reportedDiagnosticIdsWithCategories

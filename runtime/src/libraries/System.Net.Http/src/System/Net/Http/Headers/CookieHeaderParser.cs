@@ -11,7 +11,8 @@ namespace System.Net.Http.Headers
 
         // According to RFC 6265 Section 4.2 multiple cookies have
         // to be concatenated using "; " as the separator.
-        private CookieHeaderParser() : base(true, "; ") { }
+        private CookieHeaderParser()
+            : base(true, "; ") { }
 
         public override bool TryParseValue(
             string? value,

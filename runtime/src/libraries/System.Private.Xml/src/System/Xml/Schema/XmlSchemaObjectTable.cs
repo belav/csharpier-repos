@@ -337,7 +337,8 @@ namespace System.Xml.Schema
                 List<XmlSchemaObjectEntry> entries,
                 int size,
                 EnumeratorType enumType
-            ) : base(entries, size, enumType) { }
+            )
+                : base(entries, size, enumType) { }
 
             //IDictionaryEnumerator members
             public DictionaryEntry Entry

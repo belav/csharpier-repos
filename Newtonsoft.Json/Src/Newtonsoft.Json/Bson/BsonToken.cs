@@ -117,7 +117,8 @@ namespace Newtonsoft.Json.Bson
         public static readonly BsonBoolean False = new BsonBoolean(false);
         public static readonly BsonBoolean True = new BsonBoolean(true);
 
-        private BsonBoolean(bool value) : base(value, BsonType.Boolean) { }
+        private BsonBoolean(bool value)
+            : base(value, BsonType.Boolean) { }
     }
 
     internal class BsonString : BsonValue
@@ -125,7 +126,8 @@ namespace Newtonsoft.Json.Bson
         public int ByteCount { get; set; }
         public bool IncludeLength { get; }
 
-        public BsonString(object value, bool includeLength) : base(value, BsonType.String)
+        public BsonString(object value, bool includeLength)
+            : base(value, BsonType.String)
         {
             IncludeLength = includeLength;
         }
@@ -135,7 +137,8 @@ namespace Newtonsoft.Json.Bson
     {
         public BsonBinaryType BinaryType { get; set; }
 
-        public BsonBinary(byte[] value, BsonBinaryType binaryType) : base(value, BsonType.Binary)
+        public BsonBinary(byte[] value, BsonBinaryType binaryType)
+            : base(value, BsonType.Binary)
         {
             BinaryType = binaryType;
         }

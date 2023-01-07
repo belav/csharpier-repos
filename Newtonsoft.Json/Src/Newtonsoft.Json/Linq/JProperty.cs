@@ -186,12 +186,14 @@ namespace Newtonsoft.Json.Linq
         /// Initializes a new instance of the <see cref="JProperty"/> class from another <see cref="JProperty"/> object.
         /// </summary>
         /// <param name="other">A <see cref="JProperty"/> object to copy from.</param>
-        public JProperty(JProperty other) : base(other, settings: null)
+        public JProperty(JProperty other)
+            : base(other, settings: null)
         {
             _name = other.Name;
         }
 
-        internal JProperty(JProperty other, JsonCloneSettings? settings) : base(other, settings)
+        internal JProperty(JProperty other, JsonCloneSettings? settings)
+            : base(other, settings)
         {
             _name = other.Name;
         }
@@ -339,7 +341,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <param name="name">The property name.</param>
         /// <param name="content">The property content.</param>
-        public JProperty(string name, params object[] content) : this(name, (object)content) { }
+        public JProperty(string name, params object[] content)
+            : this(name, (object)content) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JProperty"/> class.

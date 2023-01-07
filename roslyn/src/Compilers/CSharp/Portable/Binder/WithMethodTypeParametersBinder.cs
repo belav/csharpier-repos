@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly MethodSymbol _methodSymbol;
         private MultiDictionary<string, TypeParameterSymbol> _lazyTypeParameterMap;
 
-        internal WithMethodTypeParametersBinder(MethodSymbol methodSymbol, Binder next) : base(next)
+        internal WithMethodTypeParametersBinder(MethodSymbol methodSymbol, Binder next)
+            : base(next)
         {
             _methodSymbol = methodSymbol;
         }

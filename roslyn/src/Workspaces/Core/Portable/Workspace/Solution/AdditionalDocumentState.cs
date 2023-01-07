@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis
         public AdditionalDocumentState(
             DocumentInfo documentInfo,
             HostWorkspaceServices solutionServices
-        ) : base(documentInfo, solutionServices)
+        )
+            : base(documentInfo, solutionServices)
         {
             _additionalText = new AdditionalTextWithState(this);
         }

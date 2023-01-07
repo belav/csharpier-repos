@@ -287,9 +287,11 @@ namespace OLEDB.Test.ModuleCore
         private string _modified;
 
         //Constructors
-        public TestModule() : base() { }
+        public TestModule()
+            : base() { }
 
-        public TestModule(string desc) : base(desc)
+        public TestModule(string desc)
+            : base(desc)
         {
             //NOTE: For all other params, just simply use the named attributes:
             //[TestModule(Desc="desc", Version=1)]
@@ -344,9 +346,11 @@ namespace OLEDB.Test.ModuleCore
     public class TestCase : CAttrBase
     {
         //Constructors
-        public TestCase() : base() { }
+        public TestCase()
+            : base() { }
 
-        public TestCase(string desc) : base(desc)
+        public TestCase(string desc)
+            : base(desc)
         {
             //NOTE: For all other params, just simply use the named attributes:
             //[TestCase(Desc="desc", Name="name")]
@@ -362,9 +366,11 @@ namespace OLEDB.Test.ModuleCore
         //Data
 
         //Constructors
-        public Variation() : base() { }
+        public Variation()
+            : base() { }
 
-        public Variation(string desc) : base(desc)
+        public Variation(string desc)
+            : base(desc)
         {
             //NOTE: For all other params, just simply use the named attributes:
             //[Variation(Desc="desc", id=1)]

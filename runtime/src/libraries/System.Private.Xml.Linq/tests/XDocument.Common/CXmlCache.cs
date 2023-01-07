@@ -62,8 +62,8 @@ public abstract class CXmlBase
     public CXmlBase(string strPrefix, string strName, XmlNodeType NodeType)
         : this(strPrefix, strName, strName, NodeType, "") { }
 
-    public CXmlBase(string strName, XmlNodeType NodeType) : this("", strName, strName, NodeType, "")
-    { }
+    public CXmlBase(string strName, XmlNodeType NodeType)
+        : this("", strName, strName, NodeType, "") { }
 
     //
     // Virtual Methods and Properties

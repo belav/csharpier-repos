@@ -34,7 +34,8 @@ public abstract class JsonTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="JsonTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected JsonTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected JsonTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <inheritdoc />
     protected override string GenerateNonNullSqlLiteral(object value) =>

@@ -7,7 +7,8 @@ public abstract class TPCInheritanceBulkUpdatesTestBase<TFixture>
     : InheritanceBulkUpdatesTestBase<TFixture>
     where TFixture : TPCInheritanceBulkUpdatesFixture, new()
 {
-    protected TPCInheritanceBulkUpdatesTestBase(TFixture fixture) : base(fixture) { }
+    protected TPCInheritanceBulkUpdatesTestBase(TFixture fixture)
+        : base(fixture) { }
 
     // Keyless entities are mapped as TPH only
     public override Task Delete_where_keyless_entity_mapped_to_sql_query(bool async) =>

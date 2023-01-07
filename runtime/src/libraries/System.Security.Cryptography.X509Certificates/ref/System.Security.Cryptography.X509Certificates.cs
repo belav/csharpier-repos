@@ -9,7 +9,8 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeX509ChainHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeX509ChainHandle() : base(default(bool)) { }
+        public SafeX509ChainHandle()
+            : base(default(bool)) { }
 
         protected override void Dispose(bool disposing) { }
 

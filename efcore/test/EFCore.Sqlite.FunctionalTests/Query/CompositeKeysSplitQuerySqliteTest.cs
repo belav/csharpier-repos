@@ -9,5 +9,6 @@ public class CompositeKeysSplitQuerySqliteTest
     public CompositeKeysSplitQuerySqliteTest(
         CompositeKeysQuerySqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 }

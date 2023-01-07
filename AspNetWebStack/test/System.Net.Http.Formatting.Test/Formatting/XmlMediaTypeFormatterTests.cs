@@ -1035,8 +1035,8 @@ namespace System.Net.Http.Formatting
         {
             public TestXmlMediaTypeFormatter() { }
 
-            public TestXmlMediaTypeFormatter(TestXmlMediaTypeFormatter formatter) : base(formatter)
-            { }
+            public TestXmlMediaTypeFormatter(TestXmlMediaTypeFormatter formatter)
+                : base(formatter) { }
 
             public bool ThrowAnExceptionOnCreate { get; set; }
             public bool ReturnNullOnCreate { get; set; }

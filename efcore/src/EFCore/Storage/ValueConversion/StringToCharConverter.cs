@@ -21,7 +21,8 @@ public class StringToCharConverter : StringCharConverter<string, char>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public StringToCharConverter() : this(null) { }
+    public StringToCharConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter preserves order.

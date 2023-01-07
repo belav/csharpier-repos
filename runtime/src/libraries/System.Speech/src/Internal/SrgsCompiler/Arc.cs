@@ -20,7 +20,8 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal Arc() { }
 
-        internal Arc(Arc arc) : this()
+        internal Arc(Arc arc)
+            : this()
         {
             _start = arc._start;
             _end = arc._end;
@@ -37,13 +38,15 @@ namespace System.Speech.Internal.SrgsCompiler
 #endif
         }
 
-        internal Arc(Arc arc, State start, State end) : this(arc)
+        internal Arc(Arc arc, State start, State end)
+            : this(arc)
         {
             _start = start;
             _end = end;
         }
 
-        internal Arc(Arc arc, State start, State end, int wordId) : this(arc, start, end)
+        internal Arc(Arc arc, State start, State end, int wordId)
+            : this(arc, start, end)
         {
             _iWord = wordId;
         }
@@ -80,7 +83,8 @@ namespace System.Speech.Internal.SrgsCompiler
             uint iSerialize,
             MatchMode matchMode,
             ref bool fNeedWeightTable
-        ) : this(0, flWeight, confidence, 0, matchMode, ref fNeedWeightTable)
+        )
+            : this(0, flWeight, confidence, 0, matchMode, ref fNeedWeightTable)
         {
             _ruleRef = ruleRef;
             _iSerialize = iSerialize;
@@ -110,7 +114,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int ulSpecialTransitionIndex,
             MatchMode matchMode,
             ref bool fNeedWeightTable
-        ) : this()
+        )
+            : this()
         {
             _confidence = confidence;
             _iWord = iWord;

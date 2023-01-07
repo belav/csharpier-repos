@@ -141,7 +141,8 @@ public class DatabaseErrorLogStateTest
 
         public class Blog
         {
-            public Blog() : this(true) { }
+            public Blog()
+                : this(true) { }
 
             public Blog(bool jimSaysThrow)
             {

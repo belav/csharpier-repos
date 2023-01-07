@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor
             IThreadingContext threadingContext,
             SolutionPreviewItem preview,
             SolutionChangeSummary? changeSummary = null
-        ) : this(threadingContext, new List<SolutionPreviewItem> { preview }, changeSummary) { }
+        )
+            : this(threadingContext, new List<SolutionPreviewItem> { preview }, changeSummary) { }
 
         public SolutionPreviewResult(
             IThreadingContext threadingContext,

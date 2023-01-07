@@ -35,7 +35,8 @@ namespace System.Linq.Parallel
             Func<TInputOutput, TSortKey> keySelector,
             IComparer<TSortKey>? comparer,
             bool descending
-        ) : base(source, true)
+        )
+            : base(source, true)
         {
             Debug.Assert(keySelector != null, "key selector must not be null");
 

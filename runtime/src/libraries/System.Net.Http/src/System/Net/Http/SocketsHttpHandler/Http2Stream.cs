@@ -1694,7 +1694,8 @@ namespace System.Net.Http
 
             private sealed class Http2ReadStream : Http2ReadWriteStream
             {
-                public Http2ReadStream(Http2Stream http2Stream) : base(http2Stream)
+                public Http2ReadStream(Http2Stream http2Stream)
+                    : base(http2Stream)
                 {
                     base.CloseResponseBodyOnDispose = true;
                 }

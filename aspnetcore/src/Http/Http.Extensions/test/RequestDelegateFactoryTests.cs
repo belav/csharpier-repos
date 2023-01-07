@@ -3116,7 +3116,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
 
     private record BadArgumentListRecord(int Foo)
     {
-        public BadArgumentListRecord(int foo, int bar) : this(foo) { }
+        public BadArgumentListRecord(int foo, int bar)
+            : this(foo) { }
 
         public int Bar { get; set; }
     }

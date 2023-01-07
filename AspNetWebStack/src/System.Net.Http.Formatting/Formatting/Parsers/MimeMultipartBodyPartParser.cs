@@ -44,7 +44,8 @@ namespace System.Net.Http.Formatting.Parsers
         public MimeMultipartBodyPartParser(
             HttpContent content,
             MultipartStreamProvider streamProvider
-        ) : this(content, streamProvider, DefaultMaxMessageSize, DefaultMaxBodyPartHeaderSize) { }
+        )
+            : this(content, streamProvider, DefaultMaxMessageSize, DefaultMaxBodyPartHeaderSize) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MimeMultipartBodyPartParser"/> class.

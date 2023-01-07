@@ -48,7 +48,8 @@ namespace System.Web.Razor
             IList<RazorError> parserErrors,
             CodeCompileUnit generatedCode,
             IDictionary<int, GeneratedCodeMapping> designTimeLineMappings
-        ) : base(success, document, parserErrors)
+        )
+            : base(success, document, parserErrors)
         {
             GeneratedCode = generatedCode;
             DesignTimeLineMappings = designTimeLineMappings;

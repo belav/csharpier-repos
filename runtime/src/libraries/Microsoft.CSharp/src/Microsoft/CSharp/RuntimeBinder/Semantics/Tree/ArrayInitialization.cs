@@ -10,7 +10,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arguments,
             Expr argumentDimensions,
             int[] dimensionSizes
-        ) : base(ExpressionKind.ArrayInit, type)
+        )
+            : base(ExpressionKind.ArrayInit, type)
         {
             OptionalArguments = arguments;
             OptionalArgumentDimensions = argumentDimensions;

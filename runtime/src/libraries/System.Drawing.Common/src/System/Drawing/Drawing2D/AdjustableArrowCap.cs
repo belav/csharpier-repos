@@ -8,9 +8,11 @@ namespace System.Drawing.Drawing2D
 {
     public sealed partial class AdjustableArrowCap : CustomLineCap
     {
-        internal AdjustableArrowCap(IntPtr nativeCap) : base(nativeCap) { }
+        internal AdjustableArrowCap(IntPtr nativeCap)
+            : base(nativeCap) { }
 
-        public AdjustableArrowCap(float width, float height) : this(width, height, true) { }
+        public AdjustableArrowCap(float width, float height)
+            : this(width, height, true) { }
 
         public AdjustableArrowCap(float width, float height, bool isFilled)
         {

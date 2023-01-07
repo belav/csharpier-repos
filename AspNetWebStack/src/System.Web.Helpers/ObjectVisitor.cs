@@ -491,10 +491,11 @@ namespace System.Web.Helpers
         {
             public ObjectVisitorException() { }
 
-            public ObjectVisitorException(string message) : base(message) { }
+            public ObjectVisitorException(string message)
+                : base(message) { }
 
-            public ObjectVisitorException(string message, Exception inner) : base(message, inner)
-            { }
+            public ObjectVisitorException(string message, Exception inner)
+                : base(message, inner) { }
 
             protected ObjectVisitorException(SerializationInfo info, StreamingContext context)
                 : base(info, context) { }

@@ -21,7 +21,8 @@ public class MultipleComponentsTest
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<MultipleComponents> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     public DateTime LastLogTimeStamp { get; set; } = DateTime.MinValue;
 

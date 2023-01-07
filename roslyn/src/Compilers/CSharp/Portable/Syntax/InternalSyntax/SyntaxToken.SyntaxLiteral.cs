@@ -30,13 +30,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 T value,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(kind, text.Length, diagnostics, annotations)
+            )
+                : base(kind, text.Length, diagnostics, annotations)
             {
                 this.TextField = text;
                 this.ValueField = value;
             }
 
-            internal SyntaxTokenWithValue(ObjectReader reader) : base(reader)
+            internal SyntaxTokenWithValue(ObjectReader reader)
+                : base(reader)
             {
                 this.TextField = reader.ReadString();
                 this.FullWidth = this.TextField.Length;

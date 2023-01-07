@@ -12,7 +12,8 @@ namespace System.Security.Cryptography.X509Certificates
         private string? _subjectKeyIdentifierString;
         private bool _decoded;
 
-        public X509SubjectKeyIdentifierExtension() : base(Oids.SubjectKeyIdentifierOid)
+        public X509SubjectKeyIdentifierExtension()
+            : base(Oids.SubjectKeyIdentifierOid)
         {
             _decoded = true;
         }
@@ -20,7 +21,8 @@ namespace System.Security.Cryptography.X509Certificates
         public X509SubjectKeyIdentifierExtension(
             AsnEncodedData encodedSubjectKeyIdentifier,
             bool critical
-        ) : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical) { }
+        )
+            : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical) { }
 
         public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical)
             : this(

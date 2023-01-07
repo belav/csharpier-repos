@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             this.ForceUpdate = false;
         }
 
-        public LineColumnDelta(int lines, int spaces, bool whitespaceOnly) : this(lines, spaces)
+        public LineColumnDelta(int lines, int spaces, bool whitespaceOnly)
+            : this(lines, spaces)
         {
             this.WhitespaceOnly = whitespaceOnly;
             this.ForceUpdate = false;

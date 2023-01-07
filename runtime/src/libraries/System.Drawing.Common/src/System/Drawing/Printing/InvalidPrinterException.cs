@@ -16,7 +16,8 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of the <see cref='InvalidPrinterException'/> class.
         /// </summary>
-        public InvalidPrinterException(PrinterSettings settings) : base(GenerateMessage(settings))
+        public InvalidPrinterException(PrinterSettings settings)
+            : base(GenerateMessage(settings))
         {
             _settings = settings;
         }

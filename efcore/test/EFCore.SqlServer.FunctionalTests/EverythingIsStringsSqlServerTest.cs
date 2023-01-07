@@ -251,7 +251,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
         public SqlServerStringsTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
             RelationalTypeMappingSourceDependencies relationalDependencies
-        ) : base(dependencies, relationalDependencies)
+        )
+            : base(dependencies, relationalDependencies)
         {
             _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
                 StringComparer.OrdinalIgnoreCase

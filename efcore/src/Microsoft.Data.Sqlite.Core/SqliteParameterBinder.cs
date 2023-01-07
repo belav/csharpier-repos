@@ -19,7 +19,8 @@ namespace Microsoft.Data.Sqlite
             object value,
             int? size,
             SqliteType? sqliteType
-        ) : base(value, sqliteType)
+        )
+            : base(value, sqliteType)
         {
             _stmt = stmt;
             _index = index;

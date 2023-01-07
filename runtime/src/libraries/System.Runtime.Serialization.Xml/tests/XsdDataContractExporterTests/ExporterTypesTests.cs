@@ -950,7 +950,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             int level;
 
-            public RefNestedNode_ContainsBackpointer(int level) : this(level, null) { }
+            public RefNestedNode_ContainsBackpointer(int level)
+                : this(level, null) { }
 
             public RefNestedNode_ContainsBackpointer(
                 int level,

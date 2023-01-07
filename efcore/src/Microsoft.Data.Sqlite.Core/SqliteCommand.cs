@@ -50,7 +50,8 @@ namespace Microsoft.Data.Sqlite
         /// </summary>
         /// <param name="commandText">The SQL to execute against the database.</param>
         /// <param name="connection">The connection used by the command.</param>
-        public SqliteCommand(string? commandText, SqliteConnection? connection) : this(commandText)
+        public SqliteCommand(string? commandText, SqliteConnection? connection)
+            : this(commandText)
         {
             Connection = connection;
         }
@@ -65,7 +66,8 @@ namespace Microsoft.Data.Sqlite
             string? commandText,
             SqliteConnection? connection,
             SqliteTransaction? transaction
-        ) : this(commandText, connection) => Transaction = transaction;
+        )
+            : this(commandText, connection) => Transaction = transaction;
 
         /// <summary>
         ///     Gets or sets a value indicating how <see cref="CommandText" /> is interpreted. Only

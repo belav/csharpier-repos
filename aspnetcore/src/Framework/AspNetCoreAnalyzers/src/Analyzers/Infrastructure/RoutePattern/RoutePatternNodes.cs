@@ -16,7 +16,8 @@ internal sealed class RoutePatternCompilationUnit : RoutePatternNode
     public RoutePatternCompilationUnit(
         ImmutableArray<RoutePatternRootPartNode> parts,
         RoutePatternToken endOfFileToken
-    ) : base(RoutePatternKind.CompilationUnit)
+    )
+        : base(RoutePatternKind.CompilationUnit)
     {
         Debug.Assert(parts != null);
         Debug.Assert(endOfFileToken.Kind == RoutePatternKind.EndOfFile);
@@ -68,7 +69,8 @@ internal sealed class RoutePatternReplacementNode : RoutePatternSegmentPartNode
         RoutePatternToken openBracketToken,
         RoutePatternToken textToken,
         RoutePatternToken closeBracketToken
-    ) : base(RoutePatternKind.Replacement)
+    )
+        : base(RoutePatternKind.Replacement)
     {
         Debug.Assert(openBracketToken.Kind == RoutePatternKind.OpenBracketToken);
         Debug.Assert(textToken.Kind == RoutePatternKind.ReplacementToken);
@@ -105,7 +107,8 @@ internal sealed class RoutePatternParameterNode : RoutePatternSegmentPartNode
         RoutePatternToken openBraceToken,
         ImmutableArray<RoutePatternParameterPartNode> parameterPartNodes,
         RoutePatternToken closeBraceToken
-    ) : base(RoutePatternKind.Parameter)
+    )
+        : base(RoutePatternKind.Parameter)
     {
         Debug.Assert(openBraceToken.Kind == RoutePatternKind.OpenBraceToken);
         Debug.Assert(closeBraceToken.Kind == RoutePatternKind.CloseBraceToken);
@@ -141,7 +144,8 @@ internal sealed class RoutePatternParameterNode : RoutePatternSegmentPartNode
 
 internal sealed class RoutePatternLiteralNode : RoutePatternSegmentPartNode
 {
-    public RoutePatternLiteralNode(RoutePatternToken literalToken) : base(RoutePatternKind.Literal)
+    public RoutePatternLiteralNode(RoutePatternToken literalToken)
+        : base(RoutePatternKind.Literal)
     {
         Debug.Assert(literalToken.Kind == RoutePatternKind.Literal);
         LiteralToken = literalToken;
@@ -258,7 +262,8 @@ internal sealed class RoutePatternDefaultValueParameterPartNode : RoutePatternPa
     public RoutePatternDefaultValueParameterPartNode(
         RoutePatternToken equalsToken,
         RoutePatternToken defaultValueToken
-    ) : base(RoutePatternKind.DefaultValue)
+    )
+        : base(RoutePatternKind.DefaultValue)
     {
         Debug.Assert(equalsToken.Kind == RoutePatternKind.EqualsToken);
         Debug.Assert(defaultValueToken.Kind == RoutePatternKind.DefaultValueToken);
@@ -310,7 +315,8 @@ internal sealed class RoutePatternPolicyParameterPartNode : RoutePatternParamete
     public RoutePatternPolicyParameterPartNode(
         RoutePatternToken colonToken,
         ImmutableArray<RoutePatternNode> policyFragments
-    ) : base(RoutePatternKind.ParameterPolicy)
+    )
+        : base(RoutePatternKind.ParameterPolicy)
     {
         Debug.Assert(colonToken.Kind == RoutePatternKind.ColonToken);
         ColonToken = colonToken;
@@ -338,7 +344,8 @@ internal sealed class RoutePatternPolicyFragmentEscapedNode : RoutePatternNode
         RoutePatternToken openParenToken,
         RoutePatternToken argumentToken,
         RoutePatternToken closeParenToken
-    ) : base(RoutePatternKind.PolicyFragmentEscaped)
+    )
+        : base(RoutePatternKind.PolicyFragmentEscaped)
     {
         Debug.Assert(openParenToken.Kind == RoutePatternKind.OpenParenToken);
         Debug.Assert(argumentToken.Kind == RoutePatternKind.PolicyFragmentToken);
@@ -391,15 +398,18 @@ internal sealed class RoutePatternPolicyFragment : RoutePatternNode
 
 internal abstract class RoutePatternRootPartNode : RoutePatternNode
 {
-    protected RoutePatternRootPartNode(RoutePatternKind kind) : base(kind) { }
+    protected RoutePatternRootPartNode(RoutePatternKind kind)
+        : base(kind) { }
 }
 
 internal abstract class RoutePatternSegmentPartNode : RoutePatternNode
 {
-    protected RoutePatternSegmentPartNode(RoutePatternKind kind) : base(kind) { }
+    protected RoutePatternSegmentPartNode(RoutePatternKind kind)
+        : base(kind) { }
 }
 
 internal abstract class RoutePatternParameterPartNode : RoutePatternNode
 {
-    protected RoutePatternParameterPartNode(RoutePatternKind kind) : base(kind) { }
+    protected RoutePatternParameterPartNode(RoutePatternKind kind)
+        : base(kind) { }
 }

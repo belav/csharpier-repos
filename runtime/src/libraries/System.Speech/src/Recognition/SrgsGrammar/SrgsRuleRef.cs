@@ -49,14 +49,16 @@ namespace System.Speech.Recognition.SrgsGrammar
             _uri = new Uri("#" + rule.Id, UriKind.Relative);
         }
 
-        public SrgsRuleRef(SrgsRule rule, string semanticKey) : this(rule)
+        public SrgsRuleRef(SrgsRule rule, string semanticKey)
+            : this(rule)
         {
             Helpers.ThrowIfEmptyOrNull(semanticKey, nameof(semanticKey));
 
             _semanticKey = semanticKey;
         }
 
-        public SrgsRuleRef(SrgsRule rule, string semanticKey, string parameters) : this(rule)
+        public SrgsRuleRef(SrgsRule rule, string semanticKey, string parameters)
+            : this(rule)
         {
             Helpers.ThrowIfEmptyOrNull(parameters, nameof(parameters));
 

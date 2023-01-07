@@ -45,7 +45,8 @@ namespace R2RTest
             Crossgen2RunnerOptions crossgen2RunnerOptions,
             IEnumerable<string> references,
             string overrideOutputPath = null
-        ) : base(options, references, overrideOutputPath)
+        )
+            : base(options, references, overrideOutputPath)
         {
             Crossgen2RunnerOptions = crossgen2RunnerOptions;
 

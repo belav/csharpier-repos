@@ -92,7 +92,8 @@ namespace System.Text.Json.Serialization.Tests
         private class InvalidConverterAttribute : JsonConverterAttribute
         {
             // converterType is not valid since typeof(int) is not a type that derives from JsonConverter.
-            public InvalidConverterAttribute() : base(converterType: typeof(int)) { }
+            public InvalidConverterAttribute()
+                : base(converterType: typeof(int)) { }
         }
 
         private class PocoWithInvalidConverter
@@ -103,7 +104,8 @@ namespace System.Text.Json.Serialization.Tests
 
         private class NullConverterAttribute : JsonConverterAttribute
         {
-            public NullConverterAttribute() : base(null) { }
+            public NullConverterAttribute()
+                : base(null) { }
 
             public override JsonConverter CreateConverter(Type typeToConvert)
             {

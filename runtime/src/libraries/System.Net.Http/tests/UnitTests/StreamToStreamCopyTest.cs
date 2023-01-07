@@ -378,7 +378,8 @@ namespace System.Net.Http.Tests
 
         private sealed class WrapperStream : DelegatingStream
         {
-            public WrapperStream(Stream wrapped) : base(wrapped) { }
+            public WrapperStream(Stream wrapped)
+                : base(wrapped) { }
         }
 
         private sealed class NonSeekableMemoryStream : MemoryStream

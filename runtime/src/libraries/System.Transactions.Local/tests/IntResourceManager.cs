@@ -206,7 +206,8 @@ namespace System.Transactions.Tests
 
     public class SinglePhaseNotification : EnlistmentNotification, ISinglePhaseNotification
     {
-        public SinglePhaseNotification(IntResourceManager resource) : base(resource) { }
+        public SinglePhaseNotification(IntResourceManager resource)
+            : base(resource) { }
 
         public void SinglePhaseCommit(SinglePhaseEnlistment enlistment)
         {
@@ -233,7 +234,8 @@ namespace System.Transactions.Tests
         : SinglePhaseNotification,
             IPromotableSinglePhaseNotification
     {
-        public PromotableSinglePhaseNotification(IntResourceManager resource) : base(resource) { }
+        public PromotableSinglePhaseNotification(IntResourceManager resource)
+            : base(resource) { }
 
         public void Initialize()
         {

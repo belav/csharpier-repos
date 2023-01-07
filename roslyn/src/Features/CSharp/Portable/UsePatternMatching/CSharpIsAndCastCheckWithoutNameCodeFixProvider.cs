@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpIsAndCastCheckWithoutNameCodeFixProvider() : base(supportsFixAll: false) { }
+        public CSharpIsAndCastCheckWithoutNameCodeFixProvider()
+            : base(supportsFixAll: false) { }
 
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.InlineIsTypeWithoutNameCheckDiagnosticsId);

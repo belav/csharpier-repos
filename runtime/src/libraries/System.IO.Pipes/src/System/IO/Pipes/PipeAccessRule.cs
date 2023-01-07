@@ -18,7 +18,8 @@ namespace System.IO.Pipes
             IdentityReference identity,
             PipeAccessRights rights,
             AccessControlType type
-        ) : this(identity, AccessMaskFromRights(rights, type), false, type) { }
+        )
+            : this(identity, AccessMaskFromRights(rights, type), false, type) { }
 
         //
         // Internal constructor to be called by public constructors

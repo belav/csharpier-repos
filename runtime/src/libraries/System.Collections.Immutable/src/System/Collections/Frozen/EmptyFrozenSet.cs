@@ -10,7 +10,8 @@ namespace System.Collections.Frozen
     /// <summary>Provides an empty <see cref="FrozenSet{T}"/> to use when there are zero values to be stored.</summary>
     internal sealed class EmptyFrozenSet<T> : FrozenSet<T>
     {
-        internal EmptyFrozenSet() : base(EqualityComparer<T>.Default) { }
+        internal EmptyFrozenSet()
+            : base(EqualityComparer<T>.Default) { }
 
         /// <inheritdoc />
         private protected override T[] ItemsCore => Array.Empty<T>();

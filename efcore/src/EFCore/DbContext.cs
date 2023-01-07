@@ -84,7 +84,8 @@ public class DbContext
             + "Some specific coding pattern are usually required to make trimming work properly, see https://aka.ms/efcore-docs-trimming for "
             + "more details."
     )]
-    protected DbContext() : this(new DbContextOptions<DbContext>()) { }
+    protected DbContext()
+        : this(new DbContextOptions<DbContext>()) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContext" /> class using the specified options.

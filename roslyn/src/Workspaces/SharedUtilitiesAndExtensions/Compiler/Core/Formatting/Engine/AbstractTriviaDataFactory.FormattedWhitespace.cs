@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int lineBreaks,
                 int indentation,
                 string language
-            ) : base(options, language)
+            )
+                : base(options, language)
             {
                 this.LineBreaks = Math.Max(0, lineBreaks);
                 this.Spaces = Math.Max(0, indentation);

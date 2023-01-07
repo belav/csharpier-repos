@@ -53,7 +53,8 @@ public class StreamResponseBodyFeatureTests
 
 public class TestStreamResponseBodyFeature : StreamResponseBodyFeature
 {
-    public TestStreamResponseBodyFeature(Stream stream) : base(stream) { }
+    public TestStreamResponseBodyFeature(Stream stream)
+        : base(stream) { }
 
     public override Task StartAsync(CancellationToken cancellationToken = default)
     {

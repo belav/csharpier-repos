@@ -15,7 +15,8 @@ namespace System.Web.WebPages
     {
         private readonly string _suffix;
 
-        public DefaultDisplayMode() : this(DisplayModeProvider.DefaultDisplayModeId) { }
+        public DefaultDisplayMode()
+            : this(DisplayModeProvider.DefaultDisplayModeId) { }
 
         public DefaultDisplayMode(string suffix)
         {

@@ -16,7 +16,8 @@ namespace System.Drawing.Drawing2D
 
         private const float Flatness = (float)2.0 / (float)3.0;
 
-        public GraphicsPath() : this(FillMode.Alternate) { }
+        public GraphicsPath()
+            : this(FillMode.Alternate) { }
 
         public GraphicsPath(FillMode fillMode)
         {
@@ -24,7 +25,8 @@ namespace System.Drawing.Drawing2D
             _nativePath = nativePath;
         }
 
-        public GraphicsPath(PointF[] pts, byte[] types) : this(pts, types, FillMode.Alternate) { }
+        public GraphicsPath(PointF[] pts, byte[] types)
+            : this(pts, types, FillMode.Alternate) { }
 
         public unsafe GraphicsPath(PointF[] pts, byte[] types, FillMode fillMode)
         {
@@ -44,7 +46,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        public GraphicsPath(Point[] pts, byte[] types) : this(pts, types, FillMode.Alternate) { }
+        public GraphicsPath(Point[] pts, byte[] types)
+            : this(pts, types, FillMode.Alternate) { }
 
         public unsafe GraphicsPath(Point[] pts, byte[] types, FillMode fillMode)
         {

@@ -130,7 +130,8 @@ namespace System.Numerics
         /// <returns>A new <see cref="Vector{T}" /> with its elements set to the first <see cref="Vector{T}.Count" /> elements from <paramref name="values" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" /> is less than <see cref="Vector{T}.Count" />.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector(Span<T> values) : this((ReadOnlySpan<T>)values) { }
+        public Vector(Span<T> values)
+            : this((ReadOnlySpan<T>)values) { }
 
         /// <summary>Gets a new <see cref="Vector{T}" /> with all bits set to 1.</summary>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>

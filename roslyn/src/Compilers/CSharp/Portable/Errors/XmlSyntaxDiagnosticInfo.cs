@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int width,
             XmlParseErrorCode code,
             params object[] args
-        ) : base(offset, width, ErrorCode.WRN_XMLParseError, args)
+        )
+            : base(offset, width, ErrorCode.WRN_XMLParseError, args)
         {
             _xmlErrorCode = code;
         }
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             writer.WriteUInt32((uint)_xmlErrorCode);
         }
 
-        private XmlSyntaxDiagnosticInfo(ObjectReader reader) : base(reader)
+        private XmlSyntaxDiagnosticInfo(ObjectReader reader)
+            : base(reader)
         {
             _xmlErrorCode = (XmlParseErrorCode)reader.ReadUInt32();
         }

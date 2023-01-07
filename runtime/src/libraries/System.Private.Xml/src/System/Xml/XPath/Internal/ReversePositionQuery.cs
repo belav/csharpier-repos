@@ -7,9 +7,11 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class ReversePositionQuery : ForwardPositionQuery
     {
-        public ReversePositionQuery(Query input) : base(input) { }
+        public ReversePositionQuery(Query input)
+            : base(input) { }
 
-        private ReversePositionQuery(ReversePositionQuery other) : base(other) { }
+        private ReversePositionQuery(ReversePositionQuery other)
+            : base(other) { }
 
         public override XPathNodeIterator Clone()
         {

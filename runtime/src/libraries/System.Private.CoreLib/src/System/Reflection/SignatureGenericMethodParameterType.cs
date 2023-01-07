@@ -5,7 +5,8 @@ namespace System.Reflection
 {
     internal sealed class SignatureGenericMethodParameterType : SignatureGenericParameterType
     {
-        internal SignatureGenericMethodParameterType(int position) : base(position) { }
+        internal SignatureGenericMethodParameterType(int position)
+            : base(position) { }
 
         public sealed override bool IsGenericTypeParameter => false;
         public sealed override bool IsGenericMethodParameter => true;

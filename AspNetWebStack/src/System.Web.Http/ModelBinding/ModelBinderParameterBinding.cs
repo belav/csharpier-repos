@@ -25,7 +25,8 @@ namespace System.Web.Http.ModelBinding
             HttpParameterDescriptor descriptor,
             IModelBinder modelBinder,
             IEnumerable<ValueProviderFactory> valueProviderFactories
-        ) : base(descriptor)
+        )
+            : base(descriptor)
         {
             if (modelBinder == null)
             {

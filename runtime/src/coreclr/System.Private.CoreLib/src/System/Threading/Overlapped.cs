@@ -171,7 +171,8 @@ namespace System.Threading
             _overlappedData = new OverlappedData(this);
         }
 
-        public Overlapped(int offsetLo, int offsetHi, IntPtr hEvent, IAsyncResult? ar) : this()
+        public Overlapped(int offsetLo, int offsetHi, IntPtr hEvent, IAsyncResult? ar)
+            : this()
         {
             Debug.Assert(_overlappedData != null, "Initialized in delegated ctor");
             _overlappedData.OffsetLow = offsetLo;

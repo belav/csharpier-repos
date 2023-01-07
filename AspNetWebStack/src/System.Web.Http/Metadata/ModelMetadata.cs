@@ -59,7 +59,8 @@ namespace System.Web.Http.Metadata
             Type modelType,
             string propertyName,
             EfficientTypePropertyKey<Type, string> cacheKey
-        ) : this(provider, containerType, modelAccessor, modelType, propertyName)
+        )
+            : this(provider, containerType, modelAccessor, modelType, propertyName)
         {
             if (cacheKey == null)
             {

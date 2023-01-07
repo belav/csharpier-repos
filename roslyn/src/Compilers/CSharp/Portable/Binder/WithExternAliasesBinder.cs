@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal abstract class WithExternAliasesBinder : Binder
     {
-        internal WithExternAliasesBinder(Binder next) : base(next) { }
+        internal WithExternAliasesBinder(Binder next)
+            : base(next) { }
 
         internal abstract override ImmutableArray<AliasAndExternAliasDirective> ExternAliases { get; }
 
@@ -108,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SourceNamespaceSymbol declaringSymbol,
                 CSharpSyntaxNode declarationSyntax,
                 Binder next
-            ) : base(next)
+            )
+                : base(next)
             {
                 Debug.Assert(
                     declarationSyntax.Kind()
@@ -144,7 +146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal FromSymbols(
                 ImmutableArray<AliasAndExternAliasDirective> externAliases,
                 Binder next
-            ) : base(next)
+            )
+                : base(next)
             {
                 Debug.Assert(!externAliases.IsDefault);
                 _externAliases = externAliases;

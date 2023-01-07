@@ -14,7 +14,8 @@ namespace System.Net.Http.Functional.Tests
     // This class is dedicated to SocketHttpHandler tests specific to HTTP/1.x.
     public class HttpClientHandlerTest_Http1 : HttpClientHandlerTestBase
     {
-        public HttpClientHandlerTest_Http1(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Http1(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNodeJS))]
         public async Task SendAsync_HostHeader_First()

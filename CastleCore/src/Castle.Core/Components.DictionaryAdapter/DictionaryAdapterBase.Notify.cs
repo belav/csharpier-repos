@@ -155,7 +155,8 @@ namespace Castle.Components.DictionaryAdapter
                 DictionaryAdapterBase adapter,
                 PropertyDescriptor property,
                 object existingValue
-            ) : this(adapter)
+            )
+                : this(adapter)
             {
                 this.property = property;
                 this.existingValue = existingValue;

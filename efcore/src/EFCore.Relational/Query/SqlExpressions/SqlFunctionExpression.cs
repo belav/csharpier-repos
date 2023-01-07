@@ -253,7 +253,8 @@ public class SqlFunctionExpression : SqlExpression
         bool builtIn,
         Type type,
         RelationalTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         Instance = instance;
         Name = name;

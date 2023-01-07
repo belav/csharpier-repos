@@ -22,7 +22,8 @@ namespace System.Reflection.Runtime.ParameterInfos
             MemberInfo memberInfo,
             int position,
             RuntimeTypeInfo parameterType
-        ) : base(memberInfo, position)
+        )
+            : base(memberInfo, position)
         {
             _parameterType = parameterType;
         }

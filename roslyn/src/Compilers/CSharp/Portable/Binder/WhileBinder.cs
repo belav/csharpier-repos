@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly StatementSyntax _syntax;
 
-        public WhileBinder(Binder enclosing, StatementSyntax syntax) : base(enclosing)
+        public WhileBinder(Binder enclosing, StatementSyntax syntax)
+            : base(enclosing)
         {
             Debug.Assert(
                 syntax != null

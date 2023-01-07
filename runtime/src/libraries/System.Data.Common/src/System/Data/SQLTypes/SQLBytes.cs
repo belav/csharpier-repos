@@ -87,7 +87,8 @@ namespace System.Data.SqlTypes
         }
 
         // Create a SqlBytes from a SqlBinary
-        public SqlBytes(SqlBinary value) : this(value.IsNull ? null : value.Value!) { }
+        public SqlBytes(SqlBinary value)
+            : this(value.IsNull ? null : value.Value!) { }
 
         public SqlBytes(Stream? s)
         {

@@ -13,7 +13,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClientHandler_Finalization_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Finalization_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Finalization_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Task GetAndDropResponse(HttpClient client, Uri url)

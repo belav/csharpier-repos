@@ -28,7 +28,8 @@ namespace System.Net.Http
         /// Initializes a new instance of the <see cref="MultipartFormDataStreamProvider"/> class.
         /// </summary>
         /// <param name="rootPath">The root path where the content of MIME multipart body parts are written to.</param>
-        public MultipartFormDataStreamProvider(string rootPath) : base(rootPath)
+        public MultipartFormDataStreamProvider(string rootPath)
+            : base(rootPath)
         {
             FormData = HttpValueCollection.Create();
         }

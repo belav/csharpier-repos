@@ -30,7 +30,8 @@ namespace MS.Internal.Xml.XPath
     {
         public Query() { }
 
-        protected Query(Query other) : base(other) { }
+        protected Query(Query other)
+            : base(other) { }
 
         // -- XPathNodeIterator --
         public override bool MoveNext()

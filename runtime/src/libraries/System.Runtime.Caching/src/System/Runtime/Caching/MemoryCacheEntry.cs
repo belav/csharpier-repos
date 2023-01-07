@@ -117,7 +117,8 @@ namespace System.Runtime.Caching
             Collection<ChangeMonitor> dependencies,
             CacheEntryRemovedCallback removedCallback,
             MemoryCache cache
-        ) : base(key)
+        )
+            : base(key)
         {
             if (value is null)
             {

@@ -10,7 +10,8 @@ public abstract class CompositeKeysQueryTestBase<TFixture> : QueryTestBase<TFixt
 {
     protected CompositeKeysContext CreateContext() => Fixture.CreateContext();
 
-    protected CompositeKeysQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected CompositeKeysQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected override Expression RewriteExpectedQueryExpression(
         Expression expectedQueryExpression

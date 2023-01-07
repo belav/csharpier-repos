@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         public RQMethodPropertyOrEvent(
             RQUnconstructedType containingType,
             RQMethodPropertyOrEventName memberName
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             RqMemberName = memberName;
         }

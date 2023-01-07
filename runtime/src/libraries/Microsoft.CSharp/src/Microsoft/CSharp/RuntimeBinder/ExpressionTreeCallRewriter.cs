@@ -20,7 +20,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             public readonly Expression Expression;
 
-            public ExpressionExpr(Expression e) : base(0)
+            public ExpressionExpr(Expression e)
+                : base(0)
             {
                 Expression = e;
             }

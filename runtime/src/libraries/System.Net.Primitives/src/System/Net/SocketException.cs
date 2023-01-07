@@ -18,7 +18,8 @@ namespace System.Net.Sockets
         private readonly SocketError _errorCode;
 
         /// <summary>Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code.</summary>
-        public SocketException(int errorCode) : this((SocketError)errorCode)
+        public SocketException(int errorCode)
+            : this((SocketError)errorCode)
         {
             // NOTE: SocketException(SocketError) isn't exposed publicly.  As a result, code with a SocketError calls
             // this ctor, e.g.
@@ -57,7 +58,8 @@ namespace System.Net.Sockets
         protected SocketException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, $"{NativeErrorCode}:{Message}");

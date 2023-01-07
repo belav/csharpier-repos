@@ -245,7 +245,8 @@ namespace System.Linq.Parallel
             QueryTaskGroupState groupState,
             QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source,
             SynchronousChannel<TInputOutput> destination
-        ) : base(taskIndex, groupState)
+        )
+            : base(taskIndex, groupState)
         {
             Debug.Assert(source != null);
             _source = source;
@@ -334,7 +335,8 @@ namespace System.Linq.Parallel
             QueryTaskGroupState groupState,
             QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source,
             AsynchronousChannel<TInputOutput> destination
-        ) : base(taskIndex, groupState)
+        )
+            : base(taskIndex, groupState)
         {
             Debug.Assert(source != null);
             _source = source;
@@ -419,7 +421,8 @@ namespace System.Linq.Parallel
             int taskIndex,
             QueryTaskGroupState groupState,
             QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source
-        ) : base(taskIndex, groupState)
+        )
+            : base(taskIndex, groupState)
         {
             Debug.Assert(source != null);
             _source = source;

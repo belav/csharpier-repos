@@ -68,7 +68,8 @@ public abstract class GenBase<T, U>
 
 public class Gen<T, U> : GenBase<T, U>
 {
-    public Gen(T fld1, U fld2) : base(fld1, fld2) { }
+    public Gen(T fld1, U fld2)
+        : base(fld1, fld2) { }
 
     new public bool InstVerify(System.Type t1, System.Type t2)
     {

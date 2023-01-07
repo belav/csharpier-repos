@@ -387,7 +387,8 @@ namespace System.Net
 {
     internal sealed class SafeSslHandle : SafeHandle
     {
-        public SafeSslHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSslHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

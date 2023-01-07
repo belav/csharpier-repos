@@ -59,7 +59,8 @@ namespace System.Globalization
             }
         }
 
-        private TextInfo(CultureData cultureData, bool readOnly) : this(cultureData)
+        private TextInfo(CultureData cultureData, bool readOnly)
+            : this(cultureData)
         {
             SetReadOnlyState(readOnly);
         }

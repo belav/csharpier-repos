@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public AnonymousTypeDisplayInfo(
             IDictionary<INamedTypeSymbol, string> anonymousTypeToName,
             IList<SymbolDisplayPart> anonymousTypesParts
-        ) : this()
+        )
+            : this()
         {
             AnonymousTypeToName = anonymousTypeToName;
             AnonymousTypesParts = anonymousTypesParts;

@@ -9,9 +9,11 @@ namespace System.IO.IsolatedStorage
     {
         private class TestStorage : IsolatedStorage
         {
-            public TestStorage() : base() { }
+            public TestStorage()
+                : base() { }
 
-            public TestStorage(IsolatedStorageScope scope) : this()
+            public TestStorage(IsolatedStorageScope scope)
+                : this()
             {
                 InitStore(scope, null);
             }

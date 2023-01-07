@@ -535,7 +535,8 @@ namespace System.Text.Json.Serialization.Tests
 
         private class MyJsonContext : JsonSerializerContext
         {
-            public MyJsonContext(JsonSerializerOptions options) : base(options) { }
+            public MyJsonContext(JsonSerializerOptions options)
+                : base(options) { }
 
             public override JsonTypeInfo? GetTypeInfo(Type _) => null;
 

@@ -24,7 +24,8 @@ public class RelationalNavigationJsonPropertyNameAttributeConvention
     public RelationalNavigationJsonPropertyNameAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

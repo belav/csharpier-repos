@@ -25,6 +25,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         public CSharpSyncClassViewCommandHandler(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext, serviceProvider) { }
+        )
+            : base(threadingContext, serviceProvider) { }
     }
 }

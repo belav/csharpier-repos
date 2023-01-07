@@ -38,7 +38,8 @@ public class CollectionNavigationBuilder<
         MemberIdentity navigation,
         IMutableForeignKey? foreignKey,
         IMutableSkipNavigation? skipNavigation
-    ) : base(declaringEntityType, relatedEntityType, navigation, foreignKey, skipNavigation) { }
+    )
+        : base(declaringEntityType, relatedEntityType, navigation, foreignKey, skipNavigation) { }
 
     /// <summary>
     ///     Configures this as a one-to-many relationship.

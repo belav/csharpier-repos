@@ -41,7 +41,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Initializes a new instance of the <see cref="Builder"/> class.
             /// </summary>
-            internal Builder() : this(8) { }
+            internal Builder()
+                : this(8) { }
 
             /// <summary>
             /// Get and sets the length of the internal array.  When set the internal array is

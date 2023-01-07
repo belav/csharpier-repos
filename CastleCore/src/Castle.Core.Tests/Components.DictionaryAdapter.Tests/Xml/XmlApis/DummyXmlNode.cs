@@ -21,7 +21,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
     {
         private Type clrType;
 
-        public DummyXmlNode() : this(typeof(object)) { }
+        public DummyXmlNode()
+            : this(typeof(object)) { }
 
         public DummyXmlNode(Type clrType)
         {

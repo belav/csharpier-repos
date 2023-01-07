@@ -12,7 +12,8 @@ struct S0
     public short F1;
     public ushort F4;
 
-    public S0(short f1) : this()
+    public S0(short f1)
+        : this()
     {
         F1 = f1;
     }
@@ -22,7 +23,8 @@ struct S1
 {
     public S0 F0;
 
-    public S1(S0 f0) : this()
+    public S1(S0 f0)
+        : this()
     {
         F0 = f0;
     }
@@ -33,7 +35,8 @@ struct S2
     public S1 F1;
     public S0 F2;
 
-    public S2(S1 f1) : this()
+    public S2(S1 f1)
+        : this()
     {
         F1 = f1;
     }
@@ -43,7 +46,8 @@ struct S3
 {
     public S2 F0;
 
-    public S3(S2 f0) : this()
+    public S3(S2 f0)
+        : this()
     {
         F0 = f0;
     }
@@ -54,7 +58,8 @@ struct S4
     public sbyte F4;
     public S3 F5;
 
-    public S4(S3 f5) : this()
+    public S4(S3 f5)
+        : this()
     {
         F5 = f5;
     }

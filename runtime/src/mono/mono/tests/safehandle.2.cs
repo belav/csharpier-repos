@@ -8,9 +8,11 @@ public class Tests
 {
     public class MyHandle : SafeHandle
     {
-        public MyHandle() : base(IntPtr.Zero, true) { }
+        public MyHandle()
+            : base(IntPtr.Zero, true) { }
 
-        public MyHandle(IntPtr x) : base(x, true) { }
+        public MyHandle(IntPtr x)
+            : base(x, true) { }
 
         public override bool IsInvalid
         {
@@ -29,7 +31,8 @@ public class Tests
     //
     public class MyHandleNoCtor : SafeHandle
     {
-        public MyHandleNoCtor(IntPtr handle) : base(handle, true) { }
+        public MyHandleNoCtor(IntPtr handle)
+            : base(handle, true) { }
 
         public override bool IsInvalid
         {

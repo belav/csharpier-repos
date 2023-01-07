@@ -19,7 +19,8 @@ namespace CSharpSyntaxGenerator
             TextWriter writer,
             Tree tree,
             CancellationToken cancellationToken = default
-        ) : base(writer, tree, cancellationToken) { }
+        )
+            : base(writer, tree, cancellationToken) { }
 
         public static void WriteMain(
             TextWriter writer,

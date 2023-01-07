@@ -57,7 +57,8 @@ namespace System.Runtime.Serialization
             DataContractSerializer serializer,
             DataContract rootTypeDataContract,
             DataContractResolver? resolver
-        ) : base(serializer, rootTypeDataContract, resolver)
+        )
+            : base(serializer, rootTypeDataContract, resolver)
         {
             this.serializeReadOnlyTypes = serializer.SerializeReadOnlyTypes;
             // Known types restricts the set of types that can be deserialized
@@ -69,7 +70,8 @@ namespace System.Runtime.Serialization
             int maxItemsInObjectGraph,
             StreamingContext streamingContext,
             bool ignoreExtensionDataObject
-        ) : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
+        )
+            : base(serializer, maxItemsInObjectGraph, streamingContext, ignoreExtensionDataObject)
         {
             // Known types restricts the set of types that can be deserialized
             _unsafeTypeForwardingEnabled = true;

@@ -31,7 +31,8 @@ namespace System.Collections
         **
         ** Exceptions: ArgumentException if length < 0.
         =========================================================================*/
-        public BitArray(int length) : this(length, false) { }
+        public BitArray(int length)
+            : this(length, false) { }
 
         /*=========================================================================
         ** Allocates space to hold length bit values. All of the values in the bit

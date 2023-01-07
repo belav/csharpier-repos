@@ -5877,14 +5877,16 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
     protected class Deposit : RootClass
     {
-        private Deposit(Action<object, string> lazyLoader) : base(lazyLoader) { }
+        private Deposit(Action<object, string> lazyLoader)
+            : base(lazyLoader) { }
 
         public Deposit() { }
     }
 
     protected abstract class Product : RootClass
     {
-        protected Product(Action<object, string> lazyLoader) : base(lazyLoader) { }
+        protected Product(Action<object, string> lazyLoader)
+            : base(lazyLoader) { }
 
         protected Product() { }
 
@@ -5901,7 +5903,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
 
     protected class SimpleProduct : Product
     {
-        private SimpleProduct(Action<object, string> lazyLoader) : base(lazyLoader) { }
+        private SimpleProduct(Action<object, string> lazyLoader)
+            : base(lazyLoader) { }
 
         public SimpleProduct() { }
     }
@@ -6360,7 +6363,8 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 

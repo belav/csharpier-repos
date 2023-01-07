@@ -26,7 +26,8 @@ public class LikeExpression : SqlExpression
         SqlExpression pattern,
         SqlExpression? escapeChar,
         RelationalTypeMapping? typeMapping
-    ) : base(typeof(bool), typeMapping)
+    )
+        : base(typeof(bool), typeMapping)
     {
         Match = match;
         Pattern = pattern;

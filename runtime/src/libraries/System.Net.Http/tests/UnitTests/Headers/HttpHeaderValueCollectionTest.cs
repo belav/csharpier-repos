@@ -692,9 +692,11 @@ namespace System.Net.Http.Tests
         {
             public MockException() { }
 
-            public MockException(string message) : base(message) { }
+            public MockException(string message)
+                : base(message) { }
 
-            public MockException(string message, Exception inner) : base(message, inner) { }
+            public MockException(string message, Exception inner)
+                : base(message, inner) { }
         }
 
         private class MockHeaders : HttpHeaders
@@ -712,7 +714,8 @@ namespace System.Net.Http.Tests
                 get { return comparer; }
             }
 
-            public MockHeaderParser(Type valueType) : base(true)
+            public MockHeaderParser(Type valueType)
+                : base(true)
             {
                 Assert.Contains(valueType, new[] { typeof(string), typeof(Uri) });
                 this.valueType = valueType;

@@ -489,7 +489,8 @@ namespace Microsoft.CodeAnalysis.Host
         private char* _position;
         private readonly char* _end;
 
-        public DirectMemoryAccessStreamReader(char* src, int length) : base(length)
+        public DirectMemoryAccessStreamReader(char* src, int length)
+            : base(length)
         {
             RoslynDebug.Assert(src != null);
             RoslynDebug.Assert(length >= 0);

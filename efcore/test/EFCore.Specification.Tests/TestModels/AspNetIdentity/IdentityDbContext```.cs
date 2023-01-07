@@ -18,7 +18,8 @@ public class IdentityDbContext<TUser, TRole, TKey>
     where TRole : IdentityRole<TKey>
     where TKey : IEquatable<TKey>
 {
-    public IdentityDbContext(DbContextOptions options) : base(options) { }
+    public IdentityDbContext(DbContextOptions options)
+        : base(options) { }
 
     protected IdentityDbContext() { }
 }

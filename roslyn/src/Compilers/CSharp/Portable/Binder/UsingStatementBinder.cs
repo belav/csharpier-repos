@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly UsingStatementSyntax _syntax;
 
-        public UsingStatementBinder(Binder enclosing, UsingStatementSyntax syntax) : base(enclosing)
+        public UsingStatementBinder(Binder enclosing, UsingStatementSyntax syntax)
+            : base(enclosing)
         {
             _syntax = syntax;
         }

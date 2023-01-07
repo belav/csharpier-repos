@@ -22,7 +22,8 @@ namespace System.Xml.Schema
             Clear();
         }
 
-        internal XmlSchemaInfo(XmlSchemaValidity validity) : this()
+        internal XmlSchemaInfo(XmlSchemaValidity validity)
+            : this()
         {
             _validity = validity;
         }

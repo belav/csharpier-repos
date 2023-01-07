@@ -106,7 +106,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         protected AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer(
             ImmutableArray<DiagnosticDescriptor> descriptors,
             PerLanguageOption2<bool> fadingOption
-        ) : base(descriptors)
+        )
+            : base(descriptors)
         {
             foreach (var descriptor in descriptors)
             {

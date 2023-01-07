@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeMap map,
             TypeParameterSymbol substitutedFrom,
             int ordinal
-        ) : base(substitutedFrom)
+        )
+            : base(substitutedFrom)
         {
             _container = newContainer;
             // it is important that we don't use the map here in the constructor, as the map is still being filled

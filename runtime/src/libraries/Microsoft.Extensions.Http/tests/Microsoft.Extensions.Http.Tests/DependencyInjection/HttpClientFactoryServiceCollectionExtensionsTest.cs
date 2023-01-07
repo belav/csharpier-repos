@@ -1530,7 +1530,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private class TestGenericTypedClient<T> : TestTypedClient
         {
-            public TestGenericTypedClient(HttpClient httpClient) : base(httpClient) { }
+            public TestGenericTypedClient(HttpClient httpClient)
+                : base(httpClient) { }
         }
 
         private class SingletonService { }

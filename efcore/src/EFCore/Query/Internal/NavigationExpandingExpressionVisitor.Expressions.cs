@@ -91,7 +91,8 @@ public partial class NavigationExpandingExpressionVisitor
     {
         private EntityReference? _entityReference;
 
-        public IncludeTreeNode(IEntityType entityType) : this(entityType, null, setLoaded: true) { }
+        public IncludeTreeNode(IEntityType entityType)
+            : this(entityType, null, setLoaded: true) { }
 
         public IncludeTreeNode(
             IEntityType entityType,
@@ -395,7 +396,8 @@ public partial class NavigationExpandingExpressionVisitor
     /// </summary>
     private sealed class NavigationTreeExpression : NavigationTreeNode, IPrintableExpression
     {
-        public NavigationTreeExpression(Expression value) : base(null, null)
+        public NavigationTreeExpression(Expression value)
+            : base(null, null)
         {
             Value = value;
         }

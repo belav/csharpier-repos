@@ -24,7 +24,8 @@ public class RowNumberExpression : SqlExpression
         IReadOnlyList<SqlExpression>? partitions,
         IReadOnlyList<OrderingExpression> orderings,
         RelationalTypeMapping? typeMapping
-    ) : base(typeof(long), typeMapping)
+    )
+        : base(typeof(long), typeMapping)
     {
         Partitions = partitions ?? Array.Empty<SqlExpression>();
         Orderings = orderings;

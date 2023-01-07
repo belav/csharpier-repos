@@ -13,17 +13,20 @@ namespace System.Security.Principal
     {
         private IdentityReferenceCollection? _unmappedIdentities;
 
-        public IdentityNotMappedException() : base(SR.IdentityReference_IdentityNotMapped) { }
+        public IdentityNotMappedException()
+            : base(SR.IdentityReference_IdentityNotMapped) { }
 
-        public IdentityNotMappedException(string? message) : base(message) { }
+        public IdentityNotMappedException(string? message)
+            : base(message) { }
 
-        public IdentityNotMappedException(string? message, Exception? inner) : base(message, inner)
-        { }
+        public IdentityNotMappedException(string? message, Exception? inner)
+            : base(message, inner) { }
 
         internal IdentityNotMappedException(
             string? message,
             IdentityReferenceCollection? unmappedIdentities
-        ) : this(message)
+        )
+            : this(message)
         {
             _unmappedIdentities = unmappedIdentities;
         }

@@ -17,12 +17,14 @@ namespace System
     )]
     public class InvalidCastException : SystemException
     {
-        public InvalidCastException() : base(SR.Arg_InvalidCastException)
+        public InvalidCastException()
+            : base(SR.Arg_InvalidCastException)
         {
             HResult = HResults.COR_E_INVALIDCAST;
         }
 
-        public InvalidCastException(string? message) : base(message)
+        public InvalidCastException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_INVALIDCAST;
         }
@@ -33,7 +35,8 @@ namespace System
             HResult = HResults.COR_E_INVALIDCAST;
         }
 
-        public InvalidCastException(string? message, int errorCode) : base(message)
+        public InvalidCastException(string? message, int errorCode)
+            : base(message)
         {
             HResult = errorCode;
         }

@@ -36,7 +36,8 @@ public class EntityTagHeaderValue
     /// Initializes a new instance of the <see cref="EntityTagHeaderValue"/>.
     /// </summary>
     /// <param name="tag">A <see cref="StringSegment"/> that contains an <see cref="EntityTagHeaderValue"/>.</param>
-    public EntityTagHeaderValue(StringSegment tag) : this(tag, isWeak: false) { }
+    public EntityTagHeaderValue(StringSegment tag)
+        : this(tag, isWeak: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EntityTagHeaderValue"/>.

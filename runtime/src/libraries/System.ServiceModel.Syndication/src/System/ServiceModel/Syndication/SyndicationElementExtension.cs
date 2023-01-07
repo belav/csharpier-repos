@@ -48,13 +48,15 @@ namespace System.ServiceModel.Syndication
         public SyndicationElementExtension(
             object dataContractExtension,
             XmlObjectSerializer dataContractSerializer
-        ) : this(null, null, dataContractExtension, dataContractSerializer) { }
+        )
+            : this(null, null, dataContractExtension, dataContractSerializer) { }
 
         public SyndicationElementExtension(
             string outerName,
             string outerNamespace,
             object dataContractExtension
-        ) : this(outerName, outerNamespace, dataContractExtension, null) { }
+        )
+            : this(outerName, outerNamespace, dataContractExtension, null) { }
 
         public SyndicationElementExtension(
             string outerName,

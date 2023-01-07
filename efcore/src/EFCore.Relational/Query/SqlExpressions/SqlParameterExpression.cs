@@ -20,7 +20,8 @@ public sealed class SqlParameterExpression : SqlExpression
     internal SqlParameterExpression(
         ParameterExpression parameterExpression,
         RelationalTypeMapping? typeMapping
-    ) : base(parameterExpression.Type.UnwrapNullableType(), typeMapping)
+    )
+        : base(parameterExpression.Type.UnwrapNullableType(), typeMapping)
     {
         Check.DebugAssert(parameterExpression.Name != null, "Parameter must have name.");
 

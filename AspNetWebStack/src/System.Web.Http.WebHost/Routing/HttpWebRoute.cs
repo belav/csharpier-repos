@@ -41,7 +41,8 @@ namespace System.Web.Http.WebHost.Routing
             RouteValueDictionary dataTokens,
             IRouteHandler routeHandler,
             IHttpRoute httpRoute
-        ) : base(url, defaults, constraints, dataTokens, routeHandler)
+        )
+            : base(url, defaults, constraints, dataTokens, routeHandler)
         {
             if (httpRoute == null)
             {

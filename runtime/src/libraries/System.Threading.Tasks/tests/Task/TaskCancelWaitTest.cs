@@ -593,7 +593,8 @@ namespace System.Threading.Tasks.Tests.CancelWait
             WorkloadType workType,
             string optionsString,
             bool cancelChildren
-        ) : this(parent, TaskInfo_CancelWaitName, workType, optionsString)
+        )
+            : this(parent, TaskInfo_CancelWaitName, workType, optionsString)
         {
             CancelChildren = cancelChildren;
         }

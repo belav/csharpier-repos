@@ -210,6 +210,7 @@ namespace System.Reflection.Emit.Tests
             _value = value;
         }
 
-        public IntPropertyAttribute() : this(0) { }
+        public IntPropertyAttribute()
+            : this(0) { }
     }
 }

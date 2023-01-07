@@ -37,7 +37,8 @@ namespace System.Net
             object? userState,
             AsyncCallback? callback,
             uint size
-        ) : base(asyncObject, userState, callback)
+        )
+            : base(asyncObject, userState, callback)
         {
             // we will use this overlapped structure to issue async IO to ul
             // the event handle will be put in by the BeginHttpApi2.ERROR_SUCCESS() method

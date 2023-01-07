@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             Guid projectGuid,
             string[] projectNames,
             Guid[] projectGuids
-        ) : base(workspace, projectName, projectGuid, projectNames, projectGuids)
+        )
+            : base(workspace, projectName, projectGuid, projectNames, projectGuids)
         {
             Contract.ThrowIfNull(data);
             Data = data;

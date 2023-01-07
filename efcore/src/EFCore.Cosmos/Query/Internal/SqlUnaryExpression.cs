@@ -41,7 +41,8 @@ public class SqlUnaryExpression : SqlExpression
         SqlExpression operand,
         Type type,
         CoreTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         OperatorType = VerifyOperator(operatorType);
         Operand = operand;

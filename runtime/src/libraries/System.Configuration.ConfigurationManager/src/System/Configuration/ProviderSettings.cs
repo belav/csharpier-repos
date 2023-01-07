@@ -35,7 +35,8 @@ namespace System.Configuration
             _propertyNameCollection = null;
         }
 
-        public ProviderSettings(string name, string type) : this()
+        public ProviderSettings(string name, string type)
+            : this()
         {
             Name = name;
             Type = type;

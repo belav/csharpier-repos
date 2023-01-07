@@ -23,6 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeCleanup
         public CSharpCodeCleanUpFixerProvider(
             [ImportMany]
                 IEnumerable<Lazy<AbstractCodeCleanUpFixer, ContentTypeMetadata>> codeCleanUpFixers
-        ) : base(codeCleanUpFixers) { }
+        )
+            : base(codeCleanUpFixers) { }
     }
 }

@@ -44,7 +44,8 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         ArraySegment<byte> data,
         bool chunked,
         CancellationToken cancellationToken
-    ) : this(responseStream, cancellationToken)
+    )
+        : this(responseStream, cancellationToken)
     {
         var boundHandle = _responseStream.RequestContext.Server.RequestQueue.BoundHandle;
         object[] objectsToPin;
@@ -124,7 +125,8 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         long count,
         bool chunked,
         CancellationToken cancellationToken
-    ) : this(responseStream, cancellationToken)
+    )
+        : this(responseStream, cancellationToken)
     {
         var boundHandle = responseStream.RequestContext.Server.RequestQueue.BoundHandle;
 

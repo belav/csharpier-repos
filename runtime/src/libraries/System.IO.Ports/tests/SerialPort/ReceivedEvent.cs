@@ -465,7 +465,8 @@ namespace System.IO.Ports.Tests
             private int _numBytesRead;
             private byte[] _bytesRead;
 
-            public ReadInReceivedEventHandler(SerialPort com) : base(com)
+            public ReadInReceivedEventHandler(SerialPort com)
+                : base(com)
             {
                 _numBytesRead = 0;
                 _bytesRead = new byte[4];

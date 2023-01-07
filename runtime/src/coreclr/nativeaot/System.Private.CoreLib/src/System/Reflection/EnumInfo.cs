@@ -34,7 +34,8 @@ namespace System.Reflection
             TUnderlyingValue[] values,
             string[] names,
             bool isFlags
-        ) : base(underlyingType, names, isFlags)
+        )
+            : base(underlyingType, names, isFlags)
         {
             Debug.Assert(values.Length == names.Length);
             Debug.Assert(Enum.AreSorted(values));

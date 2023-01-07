@@ -3367,7 +3367,8 @@ public class HubConnectionTests : FunctionalTestBase
     {
         public Task<HttpResponseMessage> ActivePoll { get; private set; }
 
-        public PollTrackingMessageHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+        public PollTrackingMessageHandler(HttpMessageHandler innerHandler)
+            : base(innerHandler) { }
 
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,

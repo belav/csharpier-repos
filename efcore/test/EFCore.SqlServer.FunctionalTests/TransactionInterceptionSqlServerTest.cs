@@ -46,7 +46,8 @@ public abstract class TransactionInterceptionSqlServerTestBase : TransactionInte
     {
         public TransactionInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         // ReleaseSavepoint is unsupported by SQL Server and is ignored
         public override Task Intercept_ReleaseSavepoint(bool async) => Task.CompletedTask;

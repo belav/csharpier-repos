@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicit
     public partial class UseImplicitTypeTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseImplicitTypeTests(ITestOutputHelper logger = null) : base(logger) { }
+        public UseImplicitTypeTests(ITestOutputHelper logger = null)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

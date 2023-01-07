@@ -12,7 +12,8 @@ namespace System.IO.Pipelines.Tests
 {
     public class PipeWriterTests : PipeTest
     {
-        public PipeWriterTests() : base(0, 0) { }
+        public PipeWriterTests()
+            : base(0, 0) { }
 
         private byte[] Read()
         {

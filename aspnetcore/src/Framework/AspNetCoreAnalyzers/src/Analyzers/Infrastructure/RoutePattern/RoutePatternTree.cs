@@ -19,7 +19,8 @@ internal sealed class RoutePatternTree
         RoutePatternCompilationUnit root,
         ImmutableArray<EmbeddedDiagnostic> diagnostics,
         ImmutableArray<RouteParameter> routeParameters
-    ) : base(text, root, diagnostics)
+    )
+        : base(text, root, diagnostics)
     {
         RouteParameters = routeParameters;
     }

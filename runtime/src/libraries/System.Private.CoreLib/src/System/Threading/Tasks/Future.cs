@@ -89,7 +89,8 @@ namespace System.Threading.Tasks
             : base(state, options, promiseStyle: true) { }
 
         // Construct a pre-completed Task<TResult>
-        internal Task(TResult result) : base(false, TaskCreationOptions.None, default)
+        internal Task(TResult result)
+            : base(false, TaskCreationOptions.None, default)
         {
             m_result = result;
         }
@@ -99,7 +100,8 @@ namespace System.Threading.Tasks
             TResult? result,
             TaskCreationOptions creationOptions,
             CancellationToken ct
-        ) : base(canceled, creationOptions, ct)
+        )
+            : base(canceled, creationOptions, ct)
         {
             if (!canceled)
             {

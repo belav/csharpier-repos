@@ -463,7 +463,8 @@ namespace System.Xml
         }
 
         // Creates an instance of the XmlTextWriter class using the specified stream.
-        public XmlTextWriter(Stream w, Encoding? encoding) : this()
+        public XmlTextWriter(Stream w, Encoding? encoding)
+            : this()
         {
             _encoding = encoding;
             if (encoding != null)
@@ -482,7 +483,8 @@ namespace System.Xml
             ) { }
 
         // Creates an instance of the XmlTextWriter class using the specified TextWriter.
-        public XmlTextWriter(TextWriter w) : this()
+        public XmlTextWriter(TextWriter w)
+            : this()
         {
             _textWriter = w;
 

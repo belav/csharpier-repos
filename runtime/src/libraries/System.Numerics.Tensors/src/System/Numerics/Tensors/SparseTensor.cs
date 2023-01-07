@@ -23,7 +23,8 @@ namespace System.Numerics.Tensors
             ReadOnlySpan<int> dimensions,
             bool reverseStride = false,
             int capacity = 0
-        ) : base(dimensions, reverseStride)
+        )
+            : base(dimensions, reverseStride)
         {
             values = new Dictionary<int, T>(capacity);
         }
@@ -32,7 +33,8 @@ namespace System.Numerics.Tensors
             Dictionary<int, T> values,
             ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(dimensions, reverseStride)
+        )
+            : base(dimensions, reverseStride)
         {
             this.values = values;
         }

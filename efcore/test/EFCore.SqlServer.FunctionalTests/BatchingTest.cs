@@ -410,7 +410,8 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
 
     private class BloggingContext : PoolableDbContext
     {
-        public BloggingContext(DbContextOptions options) : base(options) { }
+        public BloggingContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

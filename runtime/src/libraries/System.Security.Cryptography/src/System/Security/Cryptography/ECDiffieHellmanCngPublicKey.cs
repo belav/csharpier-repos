@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
             byte[] keyBlob,
             string? curveName,
             CngKeyBlobFormat format
-        ) : base(keyBlob)
+        )
+            : base(keyBlob)
 #pragma warning restore SYSLIB0043
         {
             _format = format;

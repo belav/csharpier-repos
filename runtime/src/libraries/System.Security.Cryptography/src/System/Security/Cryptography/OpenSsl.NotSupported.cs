@@ -255,7 +255,8 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public SafeEvpPKeyHandle() : base(IntPtr.Zero, false)
+        public SafeEvpPKeyHandle()
+            : base(IntPtr.Zero, false)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
         }
@@ -265,7 +266,8 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
-        public SafeEvpPKeyHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
+        public SafeEvpPKeyHandle(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyOpenSSL);
         }

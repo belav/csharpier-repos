@@ -42,7 +42,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private Dictionary<Type, XmlMetadata> secondaryXmlMetas;
         private readonly bool isRoot;
 
-        public XmlAdapter() : this(new XmlDocument()) { }
+        public XmlAdapter()
+            : this(new XmlDocument()) { }
 
         public XmlAdapter(XmlNode node)
         {

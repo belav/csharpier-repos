@@ -27,7 +27,8 @@ namespace System.Data.OleDb
                 UnsafeNativeMethods.ITransactionLocal transaction,
                 int isolevel,
                 out OleDbHResult hr
-            ) : base(transaction)
+            )
+                : base(transaction)
             {
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }

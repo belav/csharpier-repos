@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
                 TListSyntax listSyntax,
                 SeparatedSyntaxList<TListItemSyntax> listItems,
                 CancellationToken cancellationToken
-            ) : base(service, document, sourceText, options, cancellationToken)
+            )
+                : base(service, document, sourceText, options, cancellationToken)
             {
                 _listSyntax = listSyntax;
                 _listItems = listItems;

@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpAddExplicitCastCodeFixProvider() : base(CSharpSyntaxFacts.Instance)
+        public CSharpAddExplicitCastCodeFixProvider()
+            : base(CSharpSyntaxFacts.Instance)
         {
             _argumentFixer = new ArgumentFixer(this);
             _attributeArgumentFixer = new AttributeArgumentFixer(this);

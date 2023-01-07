@@ -538,9 +538,11 @@ public class FileResultTest
     {
         public bool WasWriteFileCalled;
 
-        public EmptyFileResult() : base("application/octet") { }
+        public EmptyFileResult()
+            : base("application/octet") { }
 
-        public EmptyFileResult(string contentType) : base(contentType) { }
+        public EmptyFileResult(string contentType)
+            : base(contentType) { }
 
         public override Task ExecuteResultAsync(ActionContext context)
         {

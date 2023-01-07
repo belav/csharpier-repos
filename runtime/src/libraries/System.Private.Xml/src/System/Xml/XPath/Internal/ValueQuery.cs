@@ -11,7 +11,8 @@ namespace MS.Internal.Xml.XPath
     {
         public ValueQuery() { }
 
-        protected ValueQuery(ValueQuery other) : base(other) { }
+        protected ValueQuery(ValueQuery other)
+            : base(other) { }
 
         public sealed override void Reset() { }
 

@@ -114,7 +114,8 @@ namespace System.Collections.Concurrent
         public ConcurrentDictionary(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
             IEqualityComparer<TKey>? comparer
-        ) : this(comparer)
+        )
+            : this(comparer)
         {
             ArgumentNullException.ThrowIfNull(collection);
 
@@ -140,7 +141,8 @@ namespace System.Collections.Concurrent
             int concurrencyLevel,
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
             IEqualityComparer<TKey>? comparer
-        ) : this(concurrencyLevel, DefaultCapacity, growLockArray: false, comparer)
+        )
+            : this(concurrencyLevel, DefaultCapacity, growLockArray: false, comparer)
         {
             ArgumentNullException.ThrowIfNull(collection);
 
@@ -193,7 +195,8 @@ namespace System.Collections.Concurrent
             int concurrencyLevel,
             int capacity,
             IEqualityComparer<TKey>? comparer
-        ) : this(concurrencyLevel, capacity, growLockArray: false, comparer) { }
+        )
+            : this(concurrencyLevel, capacity, growLockArray: false, comparer) { }
 
         internal ConcurrentDictionary(
             int concurrencyLevel,

@@ -11,17 +11,20 @@ namespace System.IO
     )]
     public class IOException : SystemException
     {
-        public IOException() : base(SR.Arg_IOException)
+        public IOException()
+            : base(SR.Arg_IOException)
         {
             HResult = HResults.COR_E_IO;
         }
 
-        public IOException(string? message) : base(message)
+        public IOException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_IO;
         }
 
-        public IOException(string? message, int hresult) : base(message)
+        public IOException(string? message, int hresult)
+            : base(message)
         {
             HResult = hresult;
         }

@@ -29,7 +29,8 @@ namespace ILVerify
         private ILVerifyTypeSystemContext _typeSystemContext;
         private VerifierOptions _verifierOptions;
 
-        public Verifier(IResolver resolver) : this(resolver, null) { }
+        public Verifier(IResolver resolver)
+            : this(resolver, null) { }
 
         public Verifier(IResolver resolver, VerifierOptions verifierOptions)
             : this(new ILVerifyTypeSystemContext(resolver), verifierOptions) { }

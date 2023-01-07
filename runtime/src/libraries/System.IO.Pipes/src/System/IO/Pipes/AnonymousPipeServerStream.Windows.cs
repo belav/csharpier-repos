@@ -17,7 +17,8 @@ namespace System.IO.Pipes
             HandleInheritability inheritability,
             int bufferSize,
             PipeSecurity? pipeSecurity
-        ) : base(direction, bufferSize)
+        )
+            : base(direction, bufferSize)
         {
             if (direction == PipeDirection.InOut)
             {

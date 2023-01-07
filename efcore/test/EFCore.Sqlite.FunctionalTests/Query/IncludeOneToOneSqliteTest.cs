@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class IncludeOneToOneSqliteTest
     : IncludeOneToOneTestBase<IncludeOneToOneSqliteTest.OneToOneQuerySqliteFixture>
 {
-    public IncludeOneToOneSqliteTest(OneToOneQuerySqliteFixture fixture) : base(fixture) { }
+    public IncludeOneToOneSqliteTest(OneToOneQuerySqliteFixture fixture)
+        : base(fixture) { }
 
     public class OneToOneQuerySqliteFixture : OneToOneQueryFixtureBase
     {

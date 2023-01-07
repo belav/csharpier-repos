@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class ManyToManyTrackingInMemoryTest
     : ManyToManyTrackingTestBase<ManyToManyTrackingInMemoryTest.ManyToManyTrackingInMemoryFixture>
 {
-    public ManyToManyTrackingInMemoryTest(ManyToManyTrackingInMemoryFixture fixture) : base(fixture)
-    { }
+    public ManyToManyTrackingInMemoryTest(ManyToManyTrackingInMemoryFixture fixture)
+        : base(fixture) { }
 
     protected override void ExecuteWithStrategyInTransaction(
         Action<ManyToManyContext> testOperation,

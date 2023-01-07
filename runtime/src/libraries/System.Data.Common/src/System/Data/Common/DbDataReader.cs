@@ -17,7 +17,8 @@ namespace System.Data.Common
             IEnumerable,
             IAsyncDisposable
     {
-        protected DbDataReader() : base() { }
+        protected DbDataReader()
+            : base() { }
 
         public abstract int Depth { get; }
 

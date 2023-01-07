@@ -26,14 +26,16 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : this(browserFixture, serverFixture, output, ExecutionMode.Client) { }
+    )
+        : this(browserFixture, serverFixture, output, ExecutionMode.Client) { }
 
     protected AuthTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output,
         ExecutionMode executionMode
-    ) : base(browserFixture, serverFixture, output)
+    )
+        : base(browserFixture, serverFixture, output)
     {
         // Normally, the E2E tests use the Blazor dev server if they are testing
         // client-side execution. But for the auth tests, we always have to run

@@ -81,7 +81,8 @@ public class SafeHandleSetHandleAsInvalid
 [SecurityCritical]
 public class MySafeHandle : SafeHandle
 {
-    public MySafeHandle() : base(IntPtr.Zero, true)
+    public MySafeHandle()
+        : base(IntPtr.Zero, true)
     {
         this.handle = new IntPtr(100);
     }

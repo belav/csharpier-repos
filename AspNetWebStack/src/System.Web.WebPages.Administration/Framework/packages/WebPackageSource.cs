@@ -7,7 +7,8 @@ namespace System.Web.WebPages.Administration.PackageManager
 {
     public class WebPackageSource : PackageSource
     {
-        public WebPackageSource(string source, string name) : base(source, name) { }
+        public WebPackageSource(string source, string name)
+            : base(source, name) { }
 
         public bool FilterPreferredPackages { get; set; }
 

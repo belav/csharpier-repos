@@ -23,8 +23,8 @@ namespace System.CodeDom
             Arguments.AddRange(arguments);
         }
 
-        public CodeAttributeDeclaration(CodeTypeReference attributeType) : this(attributeType, null)
-        { }
+        public CodeAttributeDeclaration(CodeTypeReference attributeType)
+            : this(attributeType, null) { }
 
         public CodeAttributeDeclaration(
             CodeTypeReference attributeType,

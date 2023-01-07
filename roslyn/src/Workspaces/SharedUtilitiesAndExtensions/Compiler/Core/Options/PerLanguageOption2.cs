@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             ImmutableArray<OptionStorageLocation2> storageLocations
-        ) : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations) { }
+        )
+            : this(feature, group: OptionGroup.Default, name, defaultValue, storageLocations) { }
 
         public PerLanguageOption2(string feature, OptionGroup group, string name, T defaultValue)
             : this(feature, group, name, defaultValue, ImmutableArray<OptionStorageLocation2>.Empty)
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Options
             string name,
             T defaultValue,
             OptionStorageLocation2 storageLocation
-        ) : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation)) { }
+        )
+            : this(feature, group, name, defaultValue, ImmutableArray.Create(storageLocation)) { }
 
         public PerLanguageOption2(
             string feature,

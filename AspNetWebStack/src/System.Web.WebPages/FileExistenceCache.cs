@@ -31,7 +31,8 @@ namespace System.Web.WebPages
         public FileExistenceCache(
             VirtualPathProvider virtualPathProvider,
             int milliSecondsBeforeReset = 1000
-        ) : this(() => virtualPathProvider, milliSecondsBeforeReset)
+        )
+            : this(() => virtualPathProvider, milliSecondsBeforeReset)
         {
             Contract.Assert(virtualPathProvider != null);
         }

@@ -21,7 +21,8 @@ public class TemporalContainedInQueryRootExpression : TemporalRangeQueryRootExpr
         IEntityType entityType,
         DateTime from,
         DateTime to
-    ) : base(entityType, from, to) { }
+    )
+        : base(entityType, from, to) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,7 +35,8 @@ public class TemporalContainedInQueryRootExpression : TemporalRangeQueryRootExpr
         IEntityType entityType,
         DateTime from,
         DateTime to
-    ) : base(queryProvider, entityType, from, to) { }
+    )
+        : base(queryProvider, entityType, from, to) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

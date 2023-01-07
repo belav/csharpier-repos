@@ -15,7 +15,8 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed class EnumDataTypeAttribute : DataTypeAttribute
     {
-        public EnumDataTypeAttribute(Type enumType) : base("Enumeration")
+        public EnumDataTypeAttribute(Type enumType)
+            : base("Enumeration")
         {
             EnumType = enumType;
         }

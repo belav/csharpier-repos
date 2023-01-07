@@ -20,7 +20,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public sealed class HttpClientTest : HttpClientHandlerTestBase
     {
-        public HttpClientTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientTest(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void Dispose_MultipleTimes_Success()
@@ -2038,7 +2039,8 @@ namespace System.Net.Http.Functional.Tests
 
         public abstract class HttpClientSendTest : HttpClientHandlerTestBase
         {
-            protected HttpClientSendTest(ITestOutputHelper output) : base(output) { }
+            protected HttpClientSendTest(ITestOutputHelper output)
+                : base(output) { }
 
             [Fact]
             public async Task Send_NullRequest_ThrowsException()
@@ -2106,12 +2108,14 @@ namespace System.Net.Http.Functional.Tests
 
     public sealed class HttpClientSendTest_Async : HttpClientTest.HttpClientSendTest
     {
-        public HttpClientSendTest_Async(ITestOutputHelper output) : base(output) { }
+        public HttpClientSendTest_Async(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class HttpClientSendTest_Sync : HttpClientTest.HttpClientSendTest
     {
-        public HttpClientSendTest_Sync(ITestOutputHelper output) : base(output) { }
+        public HttpClientSendTest_Sync(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool TestAsync => false;
     }

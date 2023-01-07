@@ -34,8 +34,8 @@ namespace System.Data.Common
         internal readonly bool _useOdbcRules;
 
         // called by derived classes that may cache based on connectionString
-        public DbConnectionOptions(string connectionString) : this(connectionString, null, false)
-        { }
+        public DbConnectionOptions(string connectionString)
+            : this(connectionString, null, false) { }
 
         // synonyms hashtable is meant to be read-only translation of parsed string
         // keywords/synonyms to a known keyword string

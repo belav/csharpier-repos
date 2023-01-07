@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ArrowExpressionClauseSyntax syntax,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType, syntax.GetReference(), location, isIterator: false)
+        )
+            : base(containingType, syntax.GetReference(), location, isIterator: false)
         {
             _property = property;
             _isAutoPropertyAccessor = false;
@@ -222,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isAutoPropertyAccessor,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType, syntax.GetReference(), location, isIterator)
+        )
+            : base(containingType, syntax.GetReference(), location, isIterator)
         {
             _property = property;
             _isAutoPropertyAccessor = isAutoPropertyAccessor;

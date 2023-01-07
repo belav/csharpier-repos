@@ -115,7 +115,8 @@ namespace System.Diagnostics
 
         private static ConditionalWeakTable<TraceListener, string> s_initData = new();
 
-        public ListenerElement(bool allowReferences) : base(typeof(TraceListener))
+        public ListenerElement(bool allowReferences)
+            : base(typeof(TraceListener))
         {
             _allowReferences = allowReferences;
 

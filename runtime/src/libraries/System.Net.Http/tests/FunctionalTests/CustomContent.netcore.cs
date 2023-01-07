@@ -23,7 +23,8 @@ namespace System.Net.Http.Functional.Tests
                 TaskCompletionSource<bool> tsc,
                 int count = 10,
                 int trigger = 1
-            ) : base(content, false)
+            )
+                : base(content, false)
             {
                 _sendingDone = tsc;
                 _trigger = trigger;

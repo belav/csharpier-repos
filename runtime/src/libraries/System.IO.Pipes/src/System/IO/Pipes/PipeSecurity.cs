@@ -10,7 +10,8 @@ namespace System.IO.Pipes
 {
     public class PipeSecurity : NativeObjectSecurity
     {
-        public PipeSecurity() : base(false, ResourceType.KernelObject) { }
+        public PipeSecurity()
+            : base(false, ResourceType.KernelObject) { }
 
         // Used by PipeStream.GetAccessControl
         internal PipeSecurity(SafePipeHandle safeHandle, AccessControlSections includeSections)

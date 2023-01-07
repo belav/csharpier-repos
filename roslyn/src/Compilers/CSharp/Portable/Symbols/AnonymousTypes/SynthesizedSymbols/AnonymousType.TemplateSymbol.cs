@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal AnonymousTypeTemplateSymbol(
                 AnonymousTypeManager manager,
                 AnonymousTypeDescriptor typeDescr
-            ) : base(manager, typeDescr.Location)
+            )
+                : base(manager, typeDescr.Location)
             {
                 this.TypeDescriptorKey = typeDescr.Key;
 

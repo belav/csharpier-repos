@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private static readonly CSharpParseOptions DefaultParseOptions = TestOptions.Regular9;
 
-        public ImplicitObjectCreationParsingTests(ITestOutputHelper output) : base(output) { }
+        public ImplicitObjectCreationParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void TestNoRegressionOnNew()

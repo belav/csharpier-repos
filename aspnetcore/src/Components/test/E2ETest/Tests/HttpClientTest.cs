@@ -28,7 +28,8 @@ public class HttpClientTest
         BlazorWasmTestAppFixture<BasicTestApp.Program> devHostServerFixture,
         BasicTestAppServerSiteFixture<CorsStartup> apiServerFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, devHostServerFixture, output)
+    )
+        : base(browserFixture, devHostServerFixture, output)
     {
         _serverFixture.PathBase = "/subdir";
         _apiServerFixture = apiServerFixture;

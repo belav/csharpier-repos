@@ -601,7 +601,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             IReadOnlyList<Expression> arguments
-        ) : base(delegateType, binder)
+        )
+            : base(delegateType, binder)
         {
             _arguments = arguments;
         }
@@ -633,7 +634,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             IReadOnlyList<Expression> arguments
-        ) : base(delegateType, binder, arguments)
+        )
+            : base(delegateType, binder, arguments)
         {
             Debug.Assert(delegateType.GetInvokeMethod().GetReturnType() == returnType);
             Type = returnType;
@@ -695,7 +697,8 @@ namespace System.Linq.Expressions
             Type delegateType,
             CallSiteBinder binder,
             Expression arg0
-        ) : base(delegateType, binder, arg0)
+        )
+            : base(delegateType, binder, arg0)
         {
             Type = retType;
         }
@@ -713,7 +716,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Expression arg0,
             Expression arg1
-        ) : base(delegateType, binder)
+        )
+            : base(delegateType, binder)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -773,7 +777,8 @@ namespace System.Linq.Expressions
             CallSiteBinder binder,
             Expression arg0,
             Expression arg1
-        ) : base(delegateType, binder, arg0, arg1)
+        )
+            : base(delegateType, binder, arg0, arg1)
         {
             Type = retType;
         }
@@ -793,7 +798,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) : base(delegateType, binder)
+        )
+            : base(delegateType, binder)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -860,7 +866,8 @@ namespace System.Linq.Expressions
             Expression arg0,
             Expression arg1,
             Expression arg2
-        ) : base(delegateType, binder, arg0, arg1, arg2)
+        )
+            : base(delegateType, binder, arg0, arg1, arg2)
         {
             Type = retType;
         }
@@ -882,7 +889,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) : base(delegateType, binder)
+        )
+            : base(delegateType, binder)
         {
             _arg0 = arg0;
             _arg1 = arg1;
@@ -963,7 +971,8 @@ namespace System.Linq.Expressions
             Expression arg1,
             Expression arg2,
             Expression arg3
-        ) : base(delegateType, binder, arg0, arg1, arg2, arg3)
+        )
+            : base(delegateType, binder, arg0, arg1, arg2, arg3)
         {
             Type = retType;
         }

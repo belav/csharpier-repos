@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationModifiers modifiers,
             bool modifierErrors,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType, declarator, modifiers, modifierErrors, diagnostics)
+        )
+            : base(containingType, declarator, modifiers, modifierErrors, diagnostics)
         {
             // Checked in parser: a fixed field declaration requires a length in square brackets
 

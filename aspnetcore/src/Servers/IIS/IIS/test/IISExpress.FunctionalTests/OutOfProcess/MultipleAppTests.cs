@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class MultipleAppTests : IISFunctionalTestBase
 {
-    public MultipleAppTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public MultipleAppTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task Startup()

@@ -52,7 +52,8 @@ namespace System.ComponentModel
             }
         }
 
-        protected AttributeCollection() : this(Array.Empty<Attribute>()) { }
+        protected AttributeCollection()
+            : this(Array.Empty<Attribute>()) { }
 
         /// <summary>
         /// Creates a new AttributeCollection from an existing AttributeCollection

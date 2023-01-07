@@ -32,7 +32,8 @@ namespace System.Linq.Parallel
         internal DistinctQueryOperator(
             IEnumerable<TInputOutput> source,
             IEqualityComparer<TInputOutput>? comparer
-        ) : base(source)
+        )
+            : base(source)
         {
             Debug.Assert(source != null, "child data source cannot be null");
             _comparer = comparer;

@@ -12,8 +12,8 @@ public class TestLogger : ILogger
     private readonly string _name;
     private readonly Func<LogLevel, bool> _filter;
 
-    public TestLogger(string name, ITestSink sink, bool enabled) : this(name, sink, _ => enabled)
-    { }
+    public TestLogger(string name, ITestSink sink, bool enabled)
+        : this(name, sink, _ => enabled) { }
 
     public TestLogger(string name, ITestSink sink, Func<LogLevel, bool> filter)
     {

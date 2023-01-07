@@ -48,7 +48,8 @@ namespace System.Net.Security
             SslProtocols protocols,
             EncryptionPolicy policy,
             bool isServer
-        ) : base(IntPtr.Zero, true)
+        )
+            : base(IntPtr.Zero, true)
         {
             Debug.Assert(
                 context == null || context.Certificate is X509Certificate2,

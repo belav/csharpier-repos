@@ -148,13 +148,15 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         {
             private static readonly ReadOnlyMemory<byte> s_derNull = new byte[] { 0x05, 0x00 };
 
-            public TestSafeBag(string bagIdValue) : base(bagIdValue, s_derNull, skipCopy: true) { }
+            public TestSafeBag(string bagIdValue)
+                : base(bagIdValue, s_derNull, skipCopy: true) { }
 
             public TestSafeBag(
                 string bagIdValue,
                 ReadOnlyMemory<byte> encodedValue,
                 bool skipCopy = true
-            ) : base(bagIdValue, encodedValue, skipCopy) { }
+            )
+                : base(bagIdValue, encodedValue, skipCopy) { }
         }
     }
 }

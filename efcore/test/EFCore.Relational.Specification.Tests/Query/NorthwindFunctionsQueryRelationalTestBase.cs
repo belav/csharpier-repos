@@ -7,7 +7,8 @@ public abstract class NorthwindFunctionsQueryRelationalTestBase<TFixture>
     : NorthwindFunctionsQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindFunctionsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindFunctionsQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected virtual bool CanExecuteQueryString => false;
 

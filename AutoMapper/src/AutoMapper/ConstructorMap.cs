@@ -94,7 +94,8 @@ public class ConstructorParameterMap : MemberMap
         TypeMap typeMap,
         ParameterInfo parameter,
         MemberInfo[] sourceMembers
-    ) : base(typeMap)
+    )
+        : base(typeMap)
     {
         Parameter = parameter;
         if (sourceMembers.Length > 0)
@@ -110,7 +111,8 @@ public class ConstructorParameterMap : MemberMap
     public ConstructorParameterMap(
         ConstructorParameterMap parameterMap,
         IncludedMember includedMember
-    ) : this(includedMember.TypeMap, parameterMap.Parameter, parameterMap.SourceMembers) =>
+    )
+        : this(includedMember.TypeMap, parameterMap.Parameter, parameterMap.SourceMembers) =>
         IncludedMember = includedMember.Chain(parameterMap.IncludedMember);
 
     public ParameterInfo Parameter { get; }

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 IEventSymbol eventSymbol,
                 bool canImplementImplicitly,
                 IDocumentationCommentFormattingService docCommentFormattingService
-            ) : base(eventSymbol, canImplementImplicitly, docCommentFormattingService)
+            )
+                : base(eventSymbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = eventSymbol;
             }

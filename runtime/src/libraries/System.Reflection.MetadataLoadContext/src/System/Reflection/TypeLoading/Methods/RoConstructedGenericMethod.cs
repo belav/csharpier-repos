@@ -18,7 +18,8 @@ namespace System.Reflection.TypeLoading
         internal RoConstructedGenericMethod(
             RoDefinitionMethod genericMethodDefinition,
             RoType[] genericMethodArguments
-        ) : base(genericMethodDefinition.ReflectedType)
+        )
+            : base(genericMethodDefinition.ReflectedType)
         {
             Debug.Assert(genericMethodDefinition != null);
             Debug.Assert(genericMethodArguments != null);

@@ -49,7 +49,8 @@ public abstract class SaveChangesInterceptionInMemoryTestBase : SaveChangesInter
     {
         public SaveChangesInterceptionWithDiagnosticsInMemoryTest(
             InterceptionInMemoryFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionInMemoryFixture : InterceptionInMemoryFixtureBase
         {

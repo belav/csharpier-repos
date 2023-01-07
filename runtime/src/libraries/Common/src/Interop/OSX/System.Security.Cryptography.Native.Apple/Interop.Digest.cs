@@ -67,7 +67,8 @@ namespace System.Security.Cryptography.Apple
 {
     internal sealed class SafeDigestCtxHandle : SafeHandle
     {
-        public SafeDigestCtxHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeDigestCtxHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

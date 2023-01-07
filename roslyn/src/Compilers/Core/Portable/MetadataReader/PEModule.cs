@@ -4434,7 +4434,8 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly StringTableDecoder Instance = new StringTableDecoder();
 
-            private StringTableDecoder() : base(System.Text.Encoding.UTF8) { }
+            private StringTableDecoder()
+                : base(System.Text.Encoding.UTF8) { }
 
             public override unsafe string GetString(byte* bytes, int byteCount)
             {

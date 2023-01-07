@@ -15,6 +15,7 @@ namespace System.Reflection
     {
         public MissingRuntimeArtifactException() { }
 
-        public MissingRuntimeArtifactException(string message) : base(message) { }
+        public MissingRuntimeArtifactException(string message)
+            : base(message) { }
     }
 }

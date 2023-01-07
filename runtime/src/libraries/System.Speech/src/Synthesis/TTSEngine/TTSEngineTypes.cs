@@ -210,7 +210,8 @@ namespace System.Speech.Synthesis.TtsEngine
             set { _textLength = value; }
         }
 
-        internal TextFragment(FragmentState fragState) : this(fragState, null, null, 0, 0) { }
+        internal TextFragment(FragmentState fragState)
+            : this(fragState, null, null, 0, 0) { }
 
         internal TextFragment(FragmentState fragState, string textToSpeak)
             : this(fragState, textToSpeak, textToSpeak, 0, textToSpeak.Length) { }

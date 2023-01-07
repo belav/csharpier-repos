@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DiagnosticBag diagnostics,
             TextSpan? filterSpanWithinTree,
             CancellationToken cancellationToken
-        ) : base(SyntaxWalkerDepth.Trivia)
+        )
+            : base(SyntaxWalkerDepth.Trivia)
         {
             _diagnostics = diagnostics;
             _filterSpanWithinTree = filterSpanWithinTree;

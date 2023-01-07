@@ -30,7 +30,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal FloatMinMaxAggregationOperator(IEnumerable<float> child, int sign) : base(child)
+        internal FloatMinMaxAggregationOperator(IEnumerable<float> child, int sign)
+            : base(child)
         {
             Debug.Assert(sign == -1 || sign == 1, "invalid sign");
             _sign = sign;
@@ -134,7 +135,8 @@ namespace System.Linq.Parallel
                 int partitionIndex,
                 int sign,
                 CancellationToken cancellationToken
-            ) : base(partitionIndex, cancellationToken)
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

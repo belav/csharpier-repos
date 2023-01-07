@@ -14,9 +14,11 @@ namespace System.Security
 #endif
     public sealed partial class NamedPermissionSet : PermissionSet
     {
-        public NamedPermissionSet(NamedPermissionSet permSet) : base(default(PermissionState)) { }
+        public NamedPermissionSet(NamedPermissionSet permSet)
+            : base(default(PermissionState)) { }
 
-        public NamedPermissionSet(string name) : base(default(PermissionState)) { }
+        public NamedPermissionSet(string name)
+            : base(default(PermissionState)) { }
 
         public NamedPermissionSet(string name, PermissionState state)
             : base(default(PermissionState)) { }

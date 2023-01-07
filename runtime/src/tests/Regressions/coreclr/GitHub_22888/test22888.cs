@@ -8,7 +8,8 @@ using System.Runtime.Loader;
 
 class TestAssemblyLoadContext : AssemblyLoadContext
 {
-    public TestAssemblyLoadContext() : base(isCollectible: true) { }
+    public TestAssemblyLoadContext()
+        : base(isCollectible: true) { }
 
     protected override Assembly Load(AssemblyName name)
     {

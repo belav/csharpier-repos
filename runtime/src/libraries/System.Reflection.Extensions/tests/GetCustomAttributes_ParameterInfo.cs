@@ -488,25 +488,29 @@ namespace System.Reflection.Tests
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = false)]
     public class MyAttribute_Single_P : ParameterInfoAttributeBase
     {
-        public MyAttribute_Single_P(string name) : base(name) { }
+        public MyAttribute_Single_P(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public class MyAttribute_AllowMultiple_P : ParameterInfoAttributeBase
     {
-        public MyAttribute_AllowMultiple_P(string name) : base(name) { }
+        public MyAttribute_AllowMultiple_P(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
     public class MyAttribute_Single_Inherited_P : ParameterInfoAttributeBase
     {
-        public MyAttribute_Single_Inherited_P(string name) : base(name) { }
+        public MyAttribute_Single_Inherited_P(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class MyAttribute_AllowMultiple_Inherited_P : ParameterInfoAttributeBase
     {
-        public MyAttribute_AllowMultiple_Inherited_P(string name) : base(name) { }
+        public MyAttribute_AllowMultiple_Inherited_P(string name)
+            : base(name) { }
     }
 
     public class TestClass_P

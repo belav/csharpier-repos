@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MockDiagnos
             public void AnalyzeCompilation(CompilationAnalysisContext context) { }
         }
 
-        public MockDiagnosticAnalyzerTests(ITestOutputHelper logger) : base(logger) { }
+        public MockDiagnosticAnalyzerTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

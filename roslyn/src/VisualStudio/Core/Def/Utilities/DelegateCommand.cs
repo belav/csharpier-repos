@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
 
         private bool _lastCanExecute;
 
-        public DelegateCommand(Action<object> action) : this(action, (_) => true) { }
+        public DelegateCommand(Action<object> action)
+            : this(action, (_) => true) { }
 
         public DelegateCommand(Action<object> action, Func<object, bool> canExecute)
         {

@@ -34,7 +34,8 @@ namespace System.Linq.Parallel
         //     index       - index we are searching for.
         //
 
-        internal ElementAtQueryOperator(IEnumerable<TSource> child, int index) : base(child)
+        internal ElementAtQueryOperator(IEnumerable<TSource> child, int index)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(index >= 0, "index can't be less than 0");

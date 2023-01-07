@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             bool isDeletion,
             AbstractChange parent,
             PreviewEngine engine
-        ) : base(engine)
+        )
+            : base(engine)
         {
             _span = span;
             _id = id;

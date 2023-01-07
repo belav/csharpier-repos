@@ -651,7 +651,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public class CustomInt32ConverterSerializerContext : JsonSerializerContext
         {
-            public CustomInt32ConverterSerializerContext() : base(null) { }
+            public CustomInt32ConverterSerializerContext()
+                : base(null) { }
 
             public override JsonTypeInfo? GetTypeInfo(Type _) =>
                 throw new NotImplementedException();

@@ -137,7 +137,8 @@ namespace System.Numerics
             AssertValid();
         }
 
-        public BigInteger(float value) : this((double)value) { }
+        public BigInteger(float value)
+            : this((double)value) { }
 
         public BigInteger(double value)
         {

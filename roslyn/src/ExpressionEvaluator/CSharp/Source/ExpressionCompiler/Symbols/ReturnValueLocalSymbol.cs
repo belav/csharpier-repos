@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string displayName,
             TypeSymbol type,
             int index
-        ) : base(method, name, displayName, type)
+        )
+            : base(method, name, displayName, type)
         {
             _index = index;
         }

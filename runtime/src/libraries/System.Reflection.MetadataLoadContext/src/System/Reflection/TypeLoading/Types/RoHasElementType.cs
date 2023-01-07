@@ -15,7 +15,8 @@ namespace System.Reflection.TypeLoading
     {
         private readonly RoType _elementType;
 
-        protected RoHasElementType(RoType elementType) : base()
+        protected RoHasElementType(RoType elementType)
+            : base()
         {
             Debug.Assert(elementType != null);
 

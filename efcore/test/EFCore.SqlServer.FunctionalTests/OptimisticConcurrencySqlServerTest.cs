@@ -9,8 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class OptimisticConcurrencyULongSqlServerTest
     : OptimisticConcurrencySqlServerTestBase<F1ULongSqlServerFixture, ulong>
 {
-    public OptimisticConcurrencyULongSqlServerTest(F1ULongSqlServerFixture fixture) : base(fixture)
-    { }
+    public OptimisticConcurrencyULongSqlServerTest(F1ULongSqlServerFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task ULong_row_version_can_handle_empty_array_from_the_database()
@@ -98,7 +98,8 @@ public class OptimisticConcurrencyULongSqlServerTest
 public class OptimisticConcurrencySqlServerTest
     : OptimisticConcurrencySqlServerTestBase<F1SqlServerFixture, byte[]>
 {
-    public OptimisticConcurrencySqlServerTest(F1SqlServerFixture fixture) : base(fixture) { }
+    public OptimisticConcurrencySqlServerTest(F1SqlServerFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(true)]
@@ -165,7 +166,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     : OptimisticConcurrencyRelationalTestBase<TFixture, TRowVersion>
     where TFixture : F1RelationalFixture<TRowVersion>, new()
 {
-    protected OptimisticConcurrencySqlServerTestBase(TFixture fixture) : base(fixture) { }
+    protected OptimisticConcurrencySqlServerTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected enum Mapping
     {

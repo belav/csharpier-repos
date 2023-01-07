@@ -193,7 +193,8 @@ namespace System.Xml.Xsl.Xslt
             QilName mode,
             double priority,
             XslVersion xslVer
-        ) : base(XslNodeType.Template, name, xslVer)
+        )
+            : base(XslNodeType.Template, name, xslVer)
         {
             this.Match = match;
             this.Mode = mode;
@@ -256,7 +257,8 @@ namespace System.Xml.Xsl.Xslt
             string? order,
             string? caseOrder,
             XslVersion xslVer
-        ) : base(XslNodeType.Sort, null, select, xslVer)
+        )
+            : base(XslNodeType.Sort, null, select, xslVer)
         {
             this.Lang = lang;
             this.DataType = dataType;
@@ -343,7 +345,8 @@ namespace System.Xml.Xsl.Xslt
             string? groupingSeparator,
             string? groupingSize,
             XslVersion xslVer
-        ) : base(XslNodeType.Number, null, null, xslVer)
+        )
+            : base(XslNodeType.Number, null, null, xslVer)
         {
             this.Level = level;
             this.Count = count;
@@ -392,7 +395,8 @@ namespace System.Xml.Xsl.Xslt
             object? arg,
             ContextInfo ctxInfo,
             XslVersion xslVer
-        ) : base(t, name, arg, xslVer)
+        )
+            : base(t, name, arg, xslVer)
         {
             ElemNameLi = ctxInfo.elemNameLi;
             EndTagLi = ctxInfo.endTagLi;

@@ -28,7 +28,8 @@ namespace SerializationTestTypes
 
         public DerivedNoIsRef() { }
 
-        public DerivedNoIsRef(bool init) : base(init)
+        public DerivedNoIsRef(bool init)
+            : base(init)
         {
             RefData = Data;
         }
@@ -42,7 +43,8 @@ namespace SerializationTestTypes
 
         public DerivedNoIsRef2() { }
 
-        public DerivedNoIsRef2(bool init) : base(init)
+        public DerivedNoIsRef2(bool init)
+            : base(init)
         {
             RefData2 = RefData;
         }
@@ -56,7 +58,8 @@ namespace SerializationTestTypes
 
         public DerivedNoIsRef3() { }
 
-        public DerivedNoIsRef3(bool init) : base(init)
+        public DerivedNoIsRef3(bool init)
+            : base(init)
         {
             RefData3 = RefData2;
         }
@@ -70,7 +73,8 @@ namespace SerializationTestTypes
 
         public DerivedNoIsRef4() { }
 
-        public DerivedNoIsRef4(bool init) : base(init)
+        public DerivedNoIsRef4(bool init)
+            : base(init)
         {
             RefData4 = RefData3;
         }
@@ -84,7 +88,8 @@ namespace SerializationTestTypes
 
         public DerivedNoIsRef5() { }
 
-        public DerivedNoIsRef5(bool init) : base(init)
+        public DerivedNoIsRef5(bool init)
+            : base(init)
         {
             RefData5 = RefData4;
         }
@@ -98,7 +103,8 @@ namespace SerializationTestTypes
 
         public DerivedNoIsRefWithIsRefTrue6() { }
 
-        public DerivedNoIsRefWithIsRefTrue6(bool init) : base(init)
+        public DerivedNoIsRefWithIsRefTrue6(bool init)
+            : base(init)
         {
             RefData6 = RefData5;
         }
@@ -112,7 +118,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefFalse() { }
 
-        public DerivedWithIsRefFalse(bool init) : base(init)
+        public DerivedWithIsRefFalse(bool init)
+            : base(init)
         {
             RefData = Data;
         }
@@ -126,7 +133,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefFalse2() { }
 
-        public DerivedWithIsRefFalse2(bool init) : base(init)
+        public DerivedWithIsRefFalse2(bool init)
+            : base(init)
         {
             RefData2 = RefData;
         }
@@ -140,7 +148,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefFalse3() { }
 
-        public DerivedWithIsRefFalse3(bool init) : base(init)
+        public DerivedWithIsRefFalse3(bool init)
+            : base(init)
         {
             RefData3 = RefData2;
         }
@@ -154,7 +163,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefFalse4() { }
 
-        public DerivedWithIsRefFalse4(bool init) : base(init)
+        public DerivedWithIsRefFalse4(bool init)
+            : base(init)
         {
             RefData4 = RefData3;
         }
@@ -168,7 +178,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefFalse5() { }
 
-        public DerivedWithIsRefFalse5(bool init) : base(init)
+        public DerivedWithIsRefFalse5(bool init)
+            : base(init)
         {
             RefData5 = RefData4;
         }
@@ -182,7 +193,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefTrue6() { }
 
-        public DerivedWithIsRefTrue6(bool init) : base(init)
+        public DerivedWithIsRefTrue6(bool init)
+            : base(init)
         {
             RefData6 = RefData5;
         }
@@ -196,7 +208,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefTrueExplicit() { }
 
-        public DerivedWithIsRefTrueExplicit(bool init) : base(init)
+        public DerivedWithIsRefTrueExplicit(bool init)
+            : base(init)
         {
             RefData = Data;
         }
@@ -210,7 +223,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefTrueExplicit2() { }
 
-        public DerivedWithIsRefTrueExplicit2(bool init) : base(init)
+        public DerivedWithIsRefTrueExplicit2(bool init)
+            : base(init)
         {
             RefData2 = Data;
         }
@@ -238,7 +252,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefTrue() { }
 
-        public DerivedWithIsRefTrue(bool init) : base(true)
+        public DerivedWithIsRefTrue(bool init)
+            : base(true)
         {
             RefData = Data;
         }
@@ -252,7 +267,8 @@ namespace SerializationTestTypes
 
         public DerivedWithIsRefFalseExplicit() { }
 
-        public DerivedWithIsRefFalseExplicit(bool init) : base(true)
+        public DerivedWithIsRefFalseExplicit(bool init)
+            : base(true)
         {
             RefData = Data;
         }

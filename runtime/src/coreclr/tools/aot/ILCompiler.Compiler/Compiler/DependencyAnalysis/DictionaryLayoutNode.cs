@@ -230,7 +230,8 @@ namespace ILCompiler.DependencyAnalysis
         public PrecomputedDictionaryLayoutNode(
             TypeSystemEntity owningMethodOrType,
             IEnumerable<GenericLookupResult> layout
-        ) : base(owningMethodOrType)
+        )
+            : base(owningMethodOrType)
         {
             ArrayBuilder<GenericLookupResult> l = default(ArrayBuilder<GenericLookupResult>);
             foreach (var entry in layout)

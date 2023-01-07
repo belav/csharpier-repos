@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class StatementParsingTests : ParsingTests
     {
-        public StatementParsingTests(ITestOutputHelper output) : base(output) { }
+        public StatementParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         private StatementSyntax ParseStatement(
             string text,
@@ -4394,7 +4395,8 @@ System.Console.WriteLine(true)";
         {
             public int Tokens;
 
-            public TokenAndTriviaWalker() : base(SyntaxWalkerDepth.StructuredTrivia) { }
+            public TokenAndTriviaWalker()
+                : base(SyntaxWalkerDepth.StructuredTrivia) { }
 
             public override void VisitToken(SyntaxToken token)
             {

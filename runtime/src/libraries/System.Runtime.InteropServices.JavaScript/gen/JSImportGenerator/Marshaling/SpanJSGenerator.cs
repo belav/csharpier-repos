@@ -12,7 +12,8 @@ namespace Microsoft.Interop.JavaScript
     {
         private MarshalerType _elementMarshalerType;
 
-        public SpanJSGenerator(MarshalerType elementMarshalerType) : base(MarshalerType.Span)
+        public SpanJSGenerator(MarshalerType elementMarshalerType)
+            : base(MarshalerType.Span)
         {
             _elementMarshalerType = elementMarshalerType;
         }

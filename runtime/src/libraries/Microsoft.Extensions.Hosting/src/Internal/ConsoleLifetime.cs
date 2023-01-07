@@ -28,8 +28,14 @@ namespace Microsoft.Extensions.Hosting.Internal
             IHostEnvironment environment,
             IHostApplicationLifetime applicationLifetime,
             IOptions<HostOptions> hostOptions
-        ) : this(options, environment, applicationLifetime, hostOptions, NullLoggerFactory.Instance)
-        { }
+        )
+            : this(
+                options,
+                environment,
+                applicationLifetime,
+                hostOptions,
+                NullLoggerFactory.Instance
+            ) { }
 
         public ConsoleLifetime(
             IOptions<ConsoleLifetimeOptions> options,

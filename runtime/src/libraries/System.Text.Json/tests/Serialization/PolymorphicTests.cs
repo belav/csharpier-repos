@@ -11,17 +11,20 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class PolymorphicTests_Span : PolymorphicTests
     {
-        public PolymorphicTests_Span() : base(SerializationWrapper.SpanSerializer) { }
+        public PolymorphicTests_Span()
+            : base(SerializationWrapper.SpanSerializer) { }
     }
 
     public class PolymorphicTests_String : PolymorphicTests
     {
-        public PolymorphicTests_String() : base(SerializationWrapper.StringSerializer) { }
+        public PolymorphicTests_String()
+            : base(SerializationWrapper.StringSerializer) { }
     }
 
     public class PolymorphicTests_Stream : PolymorphicTests
     {
-        public PolymorphicTests_Stream() : base(SerializationWrapper.StreamSerializer) { }
+        public PolymorphicTests_Stream()
+            : base(SerializationWrapper.StreamSerializer) { }
     }
 
     public class PolymorphicTests_StreamWithSmallBuffer : PolymorphicTests
@@ -32,7 +35,8 @@ namespace System.Text.Json.Serialization.Tests
 
     public class PolymorphicTests_Writer : PolymorphicTests
     {
-        public PolymorphicTests_Writer() : base(SerializationWrapper.WriterSerializer) { }
+        public PolymorphicTests_Writer()
+            : base(SerializationWrapper.WriterSerializer) { }
     }
 
     public abstract class PolymorphicTests

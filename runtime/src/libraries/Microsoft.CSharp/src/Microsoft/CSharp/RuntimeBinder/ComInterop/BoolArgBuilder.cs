@@ -10,7 +10,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     internal sealed class BoolArgBuilder : SimpleArgBuilder
     {
-        internal BoolArgBuilder(Type parameterType) : base(parameterType)
+        internal BoolArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(bool));
         }

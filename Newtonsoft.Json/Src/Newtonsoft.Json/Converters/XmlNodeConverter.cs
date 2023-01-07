@@ -48,7 +48,8 @@ namespace Newtonsoft.Json.Converters
     {
         private readonly XmlDocument _document;
 
-        public XmlDocumentWrapper(XmlDocument document) : base(document)
+        public XmlDocumentWrapper(XmlDocument document)
+            : base(document)
         {
             _document = document;
         }
@@ -143,7 +144,8 @@ namespace Newtonsoft.Json.Converters
     {
         private readonly XmlElement _element;
 
-        public XmlElementWrapper(XmlElement element) : base(element)
+        public XmlElementWrapper(XmlElement element)
+            : base(element)
         {
             _element = element;
         }
@@ -167,7 +169,8 @@ namespace Newtonsoft.Json.Converters
     {
         private readonly XmlDeclaration _declaration;
 
-        public XmlDeclarationWrapper(XmlDeclaration declaration) : base(declaration)
+        public XmlDeclarationWrapper(XmlDeclaration declaration)
+            : base(declaration)
         {
             _declaration = declaration;
         }
@@ -412,7 +415,8 @@ namespace Newtonsoft.Json.Converters
     {
         internal XDeclaration Declaration { get; }
 
-        public XDeclarationWrapper(XDeclaration declaration) : base(null)
+        public XDeclarationWrapper(XDeclaration declaration)
+            : base(null)
         {
             Declaration = declaration;
         }
@@ -438,7 +442,8 @@ namespace Newtonsoft.Json.Converters
     {
         private readonly XDocumentType _documentType;
 
-        public XDocumentTypeWrapper(XDocumentType documentType) : base(documentType)
+        public XDocumentTypeWrapper(XDocumentType documentType)
+            : base(documentType)
         {
             _documentType = documentType;
         }
@@ -458,7 +463,8 @@ namespace Newtonsoft.Json.Converters
     {
         private XDocument Document => (XDocument)WrappedNode!;
 
-        public XDocumentWrapper(XDocument document) : base(document) { }
+        public XDocumentWrapper(XDocument document)
+            : base(document) { }
 
         public override List<IXmlNode> ChildNodes
         {
@@ -593,7 +599,8 @@ namespace Newtonsoft.Json.Converters
     {
         private XText Text => (XText)WrappedNode!;
 
-        public XTextWrapper(XText text) : base(text) { }
+        public XTextWrapper(XText text)
+            : base(text) { }
 
         public override string? Value
         {
@@ -619,7 +626,8 @@ namespace Newtonsoft.Json.Converters
     {
         private XComment Text => (XComment)WrappedNode!;
 
-        public XCommentWrapper(XComment text) : base(text) { }
+        public XCommentWrapper(XComment text)
+            : base(text) { }
 
         public override string? Value
         {
@@ -664,7 +672,8 @@ namespace Newtonsoft.Json.Converters
 
         private XContainer Container => (XContainer)WrappedNode!;
 
-        public XContainerWrapper(XContainer container) : base(container) { }
+        public XContainerWrapper(XContainer container)
+            : base(container) { }
 
         public override List<IXmlNode> ChildNodes
         {
@@ -800,7 +809,8 @@ namespace Newtonsoft.Json.Converters
     {
         private XAttribute Attribute => (XAttribute)WrappedNode!;
 
-        public XAttributeWrapper(XAttribute attribute) : base(attribute) { }
+        public XAttributeWrapper(XAttribute attribute)
+            : base(attribute) { }
 
         public override string? Value
         {
@@ -832,7 +842,8 @@ namespace Newtonsoft.Json.Converters
 
         private XElement Element => (XElement)WrappedNode!;
 
-        public XElementWrapper(XElement element) : base(element) { }
+        public XElementWrapper(XElement element)
+            : base(element) { }
 
         public void SetAttributeNode(IXmlNode attribute)
         {

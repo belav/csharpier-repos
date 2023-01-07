@@ -19,7 +19,8 @@ internal class EnableAuthenticator : DefaultUIPage
         HttpClient client,
         IHtmlDocument enableAuthenticator,
         DefaultUIContext context
-    ) : base(client, enableAuthenticator, context)
+    )
+        : base(client, enableAuthenticator, context)
     {
         Assert.True(Context.UserAuthenticated);
         _codeElement = HtmlAssert.HasElement("kbd", enableAuthenticator);

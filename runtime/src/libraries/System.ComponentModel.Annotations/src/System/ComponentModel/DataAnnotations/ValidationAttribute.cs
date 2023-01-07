@@ -46,13 +46,15 @@ namespace System.ComponentModel.DataAnnotations
         ///     Developers subclassing ValidationAttribute should use other constructors
         ///     or supply a better message.
         /// </remarks>
-        protected ValidationAttribute() : this(() => SR.ValidationAttribute_ValidationError) { }
+        protected ValidationAttribute()
+            : this(() => SR.ValidationAttribute_ValidationError) { }
 
         /// <summary>
         ///     Constructor that accepts a fixed validation error message.
         /// </summary>
         /// <param name="errorMessage">A non-localized error message to use in <see cref="ErrorMessageString" />.</param>
-        protected ValidationAttribute(string errorMessage) : this(() => errorMessage) { }
+        protected ValidationAttribute(string errorMessage)
+            : this(() => errorMessage) { }
 
         /// <summary>
         ///     Allows for providing a resource accessor function that will be used by the <see cref="ErrorMessageString" />

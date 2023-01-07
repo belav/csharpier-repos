@@ -5,5 +5,6 @@ namespace Microsoft.AspNetCore.Http.Result;
 
 internal sealed class ConflictObjectResult : ObjectResult
 {
-    public ConflictObjectResult(object? error) : base(error, StatusCodes.Status409Conflict) { }
+    public ConflictObjectResult(object? error)
+        : base(error, StatusCodes.Status409Conflict) { }
 }

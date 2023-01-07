@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Host
         [property: DataMember(Order = 4)] bool DisableCloneWhenProducingSkeletonReferences = false
     )
     {
-        public WorkspaceConfigurationOptions() : this(CacheStorage: StorageDatabase.SQLite) { }
+        public WorkspaceConfigurationOptions()
+            : this(CacheStorage: StorageDatabase.SQLite) { }
 
         public static readonly WorkspaceConfigurationOptions Default = new();
 

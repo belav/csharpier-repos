@@ -7,7 +7,8 @@ public abstract class ComplexNavigationsQueryRelationalTestBase<TFixture>
     : ComplexNavigationsQueryTestBase<TFixture>
     where TFixture : ComplexNavigationsQueryFixtureBase, new()
 {
-    protected ComplexNavigationsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected ComplexNavigationsQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override Task Complex_query_with_optional_navigations_and_client_side_evaluation(
         bool async

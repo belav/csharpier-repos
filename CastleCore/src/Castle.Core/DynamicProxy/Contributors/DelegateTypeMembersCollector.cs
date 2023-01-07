@@ -22,7 +22,8 @@ namespace Castle.DynamicProxy.Contributors
 
     internal sealed class DelegateTypeMembersCollector : MembersCollector
     {
-        public DelegateTypeMembersCollector(Type delegateType) : base(delegateType) { }
+        public DelegateTypeMembersCollector(Type delegateType)
+            : base(delegateType) { }
 
         protected override MetaMethod GetMethodToGenerate(
             MethodInfo method,

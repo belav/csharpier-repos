@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         private NamedTypeSymbol _lazySystemStringType = ErrorTypeSymbol.UnknownResultType;
         private readonly MethodSymbol[] _lazyWellKnownTypeMethods;
 
-        public EmbeddedTypesManager(PEModuleBuilder moduleBeingBuilt) : base(moduleBeingBuilt)
+        public EmbeddedTypesManager(PEModuleBuilder moduleBeingBuilt)
+            : base(moduleBeingBuilt)
         {
             _lazyWellKnownTypeMethods = new MethodSymbol[(int)WellKnownMember.Count];
 

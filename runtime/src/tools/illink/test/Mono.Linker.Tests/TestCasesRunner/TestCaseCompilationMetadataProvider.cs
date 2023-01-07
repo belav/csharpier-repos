@@ -18,7 +18,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public TestCaseCompilationMetadataProvider(
             TestCase testCase,
             AssemblyDefinition fullTestCaseAssemblyDefinition
-        ) : base(testCase, fullTestCaseAssemblyDefinition) { }
+        )
+            : base(testCase, fullTestCaseAssemblyDefinition) { }
 
         public virtual TestRunCharacteristics Characteristics =>
             TestRunCharacteristics.TargetingNetCore

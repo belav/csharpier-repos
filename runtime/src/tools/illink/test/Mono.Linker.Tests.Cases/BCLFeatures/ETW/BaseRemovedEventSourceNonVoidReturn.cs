@@ -67,6 +67,7 @@ namespace Mono.Linker.Tests.Cases.BCLFeatures.ETW
         : CustomCtorEventSourceNonVoidReturn
     {
         [Kept]
-        public MyEventSourceBasedOnCustomCtorEventSourceNonVoidReturn(int value) : base(value) { }
+        public MyEventSourceBasedOnCustomCtorEventSourceNonVoidReturn(int value)
+            : base(value) { }
     }
 }

@@ -13,13 +13,15 @@ public class DefaultFilesOptions : SharedOptionsBase
     /// <summary>
     /// Configuration for the DefaultFilesMiddleware.
     /// </summary>
-    public DefaultFilesOptions() : this(new SharedOptions()) { }
+    public DefaultFilesOptions()
+        : this(new SharedOptions()) { }
 
     /// <summary>
     /// Configuration for the DefaultFilesMiddleware.
     /// </summary>
     /// <param name="sharedOptions"></param>
-    public DefaultFilesOptions(SharedOptions sharedOptions) : base(sharedOptions)
+    public DefaultFilesOptions(SharedOptions sharedOptions)
+        : base(sharedOptions)
     {
         // Prioritized list
         DefaultFileNames = new List<string>

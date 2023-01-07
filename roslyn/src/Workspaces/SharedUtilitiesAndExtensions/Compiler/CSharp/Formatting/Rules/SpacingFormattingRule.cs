@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public SpacingFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
+        public SpacingFormattingRule()
+            : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private SpacingFormattingRule(CSharpSyntaxFormattingOptions options)
         {

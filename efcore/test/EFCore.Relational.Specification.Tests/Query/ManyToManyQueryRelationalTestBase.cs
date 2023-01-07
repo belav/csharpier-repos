@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class ManyToManyQueryRelationalTestBase<TFixture>
     : ManyToManyQueryTestBase<TFixture> where TFixture : ManyToManyQueryFixtureBase, new()
 {
-    protected ManyToManyQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected ManyToManyQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected virtual bool CanExecuteQueryString => false;
 

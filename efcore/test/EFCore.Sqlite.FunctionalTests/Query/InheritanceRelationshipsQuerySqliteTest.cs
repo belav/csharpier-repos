@@ -8,7 +8,8 @@ public class InheritanceRelationshipsQuerySqliteTest
 {
     public InheritanceRelationshipsQuerySqliteTest(
         InheritanceRelationshipsQuerySqliteFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public class InheritanceRelationshipsQuerySqliteFixture
         : InheritanceRelationshipsQueryRelationalFixture

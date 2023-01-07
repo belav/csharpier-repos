@@ -26,7 +26,8 @@ public class SqlConstantExpression : SqlExpression
     public SqlConstantExpression(
         ConstantExpression constantExpression,
         RelationalTypeMapping? typeMapping
-    ) : base(constantExpression.Type.UnwrapNullableType(), typeMapping)
+    )
+        : base(constantExpression.Type.UnwrapNullableType(), typeMapping)
     {
         _constantExpression = constantExpression;
     }

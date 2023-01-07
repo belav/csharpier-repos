@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModule module,
             MetadataImportOptions importOptions,
             int ordinal
-        ) : this((AssemblySymbol)assemblySymbol, module, importOptions, ordinal)
+        )
+            : this((AssemblySymbol)assemblySymbol, module, importOptions, ordinal)
         {
             Debug.Assert(ordinal >= 0);
         }
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModule module,
             MetadataImportOptions importOptions,
             int ordinal
-        ) : this((AssemblySymbol)assemblySymbol, module, importOptions, ordinal)
+        )
+            : this((AssemblySymbol)assemblySymbol, module, importOptions, ordinal)
         {
             Debug.Assert(ordinal > 0);
         }
@@ -145,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEModule module,
             MetadataImportOptions importOptions,
             int ordinal
-        ) : this((AssemblySymbol)assemblySymbol, module, importOptions, ordinal)
+        )
+            : this((AssemblySymbol)assemblySymbol, module, importOptions, ordinal)
         {
             Debug.Assert(ordinal > 0);
         }

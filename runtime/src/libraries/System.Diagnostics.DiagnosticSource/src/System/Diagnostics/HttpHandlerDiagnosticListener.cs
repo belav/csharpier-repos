@@ -132,7 +132,8 @@ namespace System.Diagnostics
                 get { return this._table.Values; }
             }
 
-            internal HashtableWrapper(Hashtable table) : base()
+            internal HashtableWrapper(Hashtable table)
+                : base()
             {
                 this._table = table;
             }
@@ -195,7 +196,8 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class ServicePointHashtable : HashtableWrapper
         {
-            public ServicePointHashtable(Hashtable table) : base(table) { }
+            public ServicePointHashtable(Hashtable table)
+                : base(table) { }
 
             public override object this[object key]
             {
@@ -233,7 +235,8 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class ConnectionGroupHashtable : HashtableWrapper
         {
-            public ConnectionGroupHashtable(Hashtable table) : base(table) { }
+            public ConnectionGroupHashtable(Hashtable table)
+                : base(table) { }
 
             public override object this[object key]
             {
@@ -299,7 +302,8 @@ namespace System.Diagnostics
                 get { return this._list.SyncRoot; }
             }
 
-            internal ArrayListWrapper(ArrayList list) : base()
+            internal ArrayListWrapper(ArrayList list)
+                : base()
             {
                 this._list = list;
             }
@@ -477,7 +481,8 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class ConnectionArrayList : ArrayListWrapper
         {
-            public ConnectionArrayList(ArrayList list) : base(list) { }
+            public ConnectionArrayList(ArrayList list)
+                : base(list) { }
 
             public override int Add(object value)
             {
@@ -507,7 +512,8 @@ namespace System.Diagnostics
         /// </summary>
         private sealed class HttpWebRequestArrayList : ArrayListWrapper
         {
-            public HttpWebRequestArrayList(ArrayList list) : base(list) { }
+            public HttpWebRequestArrayList(ArrayList list)
+                : base(list) { }
 
             public override int Add(object value)
             {
@@ -571,7 +577,8 @@ namespace System.Diagnostics
         /// <summary>
         /// Private constructor. This class implements a singleton pattern and only this class is allowed to create an instance.
         /// </summary>
-        private HttpHandlerDiagnosticListener() : base(DiagnosticListenerName) { }
+        private HttpHandlerDiagnosticListener()
+            : base(DiagnosticListenerName) { }
 
         private void RaiseRequestEvent(HttpWebRequest request)
         {

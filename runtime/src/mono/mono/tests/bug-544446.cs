@@ -8,7 +8,8 @@ class MyProxy : RealProxy
 {
     readonly MarshalByRefObject target;
 
-    public MyProxy(MarshalByRefObject target) : base(target.GetType())
+    public MyProxy(MarshalByRefObject target)
+        : base(target.GetType())
     {
         this.target = target;
     }

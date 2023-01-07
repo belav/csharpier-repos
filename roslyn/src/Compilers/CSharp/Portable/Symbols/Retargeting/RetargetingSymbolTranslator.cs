@@ -1259,7 +1259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
                     RetargetingModuleSymbol retargetingModule,
                     NamedTypeSymbol retargetedType,
                     MethodSymbol toFind
-                ) : base(retargetingModule)
+                )
+                    : base(retargetingModule)
                 {
                     _retargetedType = retargetedType;
                     _toFind = toFind;

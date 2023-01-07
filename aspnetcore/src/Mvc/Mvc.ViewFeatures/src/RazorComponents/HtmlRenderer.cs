@@ -42,7 +42,8 @@ internal sealed class HtmlRenderer : Renderer
         IServiceProvider serviceProvider,
         ILoggerFactory loggerFactory,
         IViewBufferScope viewBufferScope
-    ) : base(serviceProvider, loggerFactory)
+    )
+        : base(serviceProvider, loggerFactory)
     {
         _viewBufferScope = viewBufferScope;
     }

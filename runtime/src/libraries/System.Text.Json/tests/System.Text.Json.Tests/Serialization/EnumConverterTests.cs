@@ -181,7 +181,8 @@ namespace System.Text.Json.Serialization.Tests
 
         private class LowerCaseEnumConverter : JsonStringEnumConverter
         {
-            public LowerCaseEnumConverter() : base(new ToLowerNamingPolicy()) { }
+            public LowerCaseEnumConverter()
+                : base(new ToLowerNamingPolicy()) { }
         }
 
         [Fact]

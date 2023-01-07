@@ -477,7 +477,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NativeIntegerTypeSymbol containingType,
             NativeIntegerMethodSymbol container,
             ParameterSymbol underlyingParameter
-        ) : base(underlyingParameter)
+        )
+            : base(underlyingParameter)
         {
             Debug.Assert(container != null);
 
@@ -545,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 MethodSymbol?,
                 NativeIntegerMethodSymbol?
             > getAccessor
-        ) : base(underlyingProperty)
+        )
+            : base(underlyingProperty)
         {
             Debug.Assert(underlyingProperty.ParameterCount == 0);
             _container = container;

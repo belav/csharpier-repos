@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Emit
             int catchHandlerOffset,
             ImmutableArray<int> yieldOffsets,
             ImmutableArray<int> resumeOffsets
-        ) : base(kickoffMethod)
+        )
+            : base(kickoffMethod)
         {
             Debug.Assert(!yieldOffsets.IsDefault);
             Debug.Assert(!resumeOffsets.IsDefault);

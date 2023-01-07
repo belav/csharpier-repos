@@ -113,7 +113,8 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteConnection" /> class.
         /// </summary>
-        public SqliteConnection() : this(null) { }
+        public SqliteConnection()
+            : this(null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="SqliteConnection" /> class.

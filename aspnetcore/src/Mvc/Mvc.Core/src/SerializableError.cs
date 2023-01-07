@@ -16,13 +16,15 @@ public sealed class SerializableError : Dictionary<string, object>
     /// <summary>
     /// Initializes a new instance of the <see cref="SerializableError"/> class.
     /// </summary>
-    public SerializableError() : base(StringComparer.OrdinalIgnoreCase) { }
+    public SerializableError()
+        : base(StringComparer.OrdinalIgnoreCase) { }
 
     /// <summary>
     /// Creates a new instance of <see cref="SerializableError"/>.
     /// </summary>
     /// <param name="modelState"><see cref="ModelStateDictionary"/> containing the validation errors.</param>
-    public SerializableError(ModelStateDictionary modelState) : this()
+    public SerializableError(ModelStateDictionary modelState)
+        : this()
     {
         if (modelState == null)
         {

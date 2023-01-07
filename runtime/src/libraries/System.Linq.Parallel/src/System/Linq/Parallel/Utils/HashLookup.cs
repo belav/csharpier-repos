@@ -27,7 +27,8 @@ namespace System.Linq.Parallel
 
         private const int HashCodeMask = 0x7fffffff;
 
-        internal HashLookup() : this(null) { }
+        internal HashLookup()
+            : this(null) { }
 
         internal HashLookup(IEqualityComparer<TKey>? comparer)
         {

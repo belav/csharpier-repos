@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             string connectionString,
             IServiceProvider serviceProvider = null,
             bool disableBatching = false
-        ) : base(serviceProvider)
+        )
+            : base(serviceProvider)
         {
             _connectionString = connectionString;
             _disableBatching = disableBatching;

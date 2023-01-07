@@ -162,7 +162,8 @@ class Program
 
         private sealed class TestTag : TextMarkerTag
         {
-            public TestTag() : base("Test") { }
+            public TestTag()
+                : base("Test") { }
         }
 
         private delegate List<ITagSpan<TestTag>> Callback(
@@ -181,7 +182,8 @@ class Program
                 ITaggerEventSource eventSource,
                 IGlobalOptionService globalOptions,
                 IAsynchronousOperationListener asyncListener
-            ) : base(threadingContext, globalOptions, visibilityTracker: null, asyncListener)
+            )
+                : base(threadingContext, globalOptions, visibilityTracker: null, asyncListener)
             {
                 _callback = callback;
                 _eventSource = eventSource;

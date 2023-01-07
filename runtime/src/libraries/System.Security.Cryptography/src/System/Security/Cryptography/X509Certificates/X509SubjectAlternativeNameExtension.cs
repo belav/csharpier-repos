@@ -13,7 +13,8 @@ namespace System.Security.Cryptography.X509Certificates
     {
         private List<GeneralNameAsn>? _decoded;
 
-        public X509SubjectAlternativeNameExtension() : base(Oids.SubjectAltNameOid)
+        public X509SubjectAlternativeNameExtension()
+            : base(Oids.SubjectAltNameOid)
         {
             _decoded = new List<GeneralNameAsn>(0);
         }
@@ -27,7 +28,8 @@ namespace System.Security.Cryptography.X509Certificates
         public X509SubjectAlternativeNameExtension(
             ReadOnlySpan<byte> rawData,
             bool critical = false
-        ) : base(Oids.SubjectAltNameOid, rawData, critical)
+        )
+            : base(Oids.SubjectAltNameOid, rawData, critical)
         {
             _decoded = Decode(RawData);
         }

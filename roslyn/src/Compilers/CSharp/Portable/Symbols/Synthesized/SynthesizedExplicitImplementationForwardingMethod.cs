@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol interfaceMethod,
             MethodSymbol implementingMethod,
             NamedTypeSymbol implementingType
-        ) : base(interfaceMethod, implementingType, generateDebugInfo: false)
+        )
+            : base(interfaceMethod, implementingType, generateDebugInfo: false)
         {
             _implementingMethod = implementingMethod;
         }

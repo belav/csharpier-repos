@@ -22,7 +22,8 @@ public class BuiltInDataTypesSqlServerTest
     public BuiltInDataTypesSqlServerTest(
         BuiltInDataTypesSqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

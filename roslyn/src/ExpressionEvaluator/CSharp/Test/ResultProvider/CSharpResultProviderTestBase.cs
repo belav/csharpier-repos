@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
 {
     public abstract class CSharpResultProviderTestBase : ResultProviderTestBase
     {
-        public CSharpResultProviderTestBase() : this(new CSharpFormatter()) { }
+        public CSharpResultProviderTestBase()
+            : this(new CSharpFormatter()) { }
 
         private CSharpResultProviderTestBase(CSharpFormatter formatter)
             : this(CreateDkmInspectionSession(formatter)) { }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SpellCheck
     [Trait(Traits.Feature, Traits.Features.CodeActionsSpellcheck)]
     public class SpellCheckTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public SpellCheckTests(ITestOutputHelper logger) : base(logger) { }
+        public SpellCheckTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

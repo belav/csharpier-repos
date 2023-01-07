@@ -30,7 +30,8 @@ namespace Microsoft.AspNet.Facebook
         /// <summary>
         /// Initializes a new instance of the <see cref="FacebookAuthorizeAttribute" /> class without requiring permissions.
         /// </summary>
-        public FacebookAuthorizeAttribute() : this(new string[0]) { }
+        public FacebookAuthorizeAttribute()
+            : this(new string[0]) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FacebookAuthorizeAttribute" /> class requiring permissions.

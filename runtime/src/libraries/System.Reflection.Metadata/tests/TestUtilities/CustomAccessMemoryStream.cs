@@ -16,7 +16,8 @@ namespace System.Reflection.Metadata.Tests
             bool canSeek,
             bool canWrite,
             byte[] buffer = null
-        ) : base(buffer ?? Array.Empty<byte>())
+        )
+            : base(buffer ?? Array.Empty<byte>())
         {
             _canRead = canRead;
             _canSeek = canSeek;

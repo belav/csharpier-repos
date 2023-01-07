@@ -15,8 +15,8 @@ namespace System.IO.Pipes
             _clientHandleExposedAsString;
         private readonly HandleInheritability _inheritability;
 
-        public AnonymousPipeServerStream() : this(PipeDirection.Out, HandleInheritability.None, 0)
-        { }
+        public AnonymousPipeServerStream()
+            : this(PipeDirection.Out, HandleInheritability.None, 0) { }
 
         public AnonymousPipeServerStream(PipeDirection direction)
             : this(direction, HandleInheritability.None, 0) { }
@@ -24,14 +24,16 @@ namespace System.IO.Pipes
         public AnonymousPipeServerStream(
             PipeDirection direction,
             HandleInheritability inheritability
-        ) : this(direction, inheritability, 0) { }
+        )
+            : this(direction, inheritability, 0) { }
 
         // Create an AnonymousPipeServerStream from two existing pipe handles.
         public AnonymousPipeServerStream(
             PipeDirection direction,
             SafePipeHandle serverSafePipeHandle,
             SafePipeHandle clientSafePipeHandle
-        ) : base(direction, 0)
+        )
+            : base(direction, 0)
         {
             if (direction == PipeDirection.InOut)
             {
@@ -70,7 +72,8 @@ namespace System.IO.Pipes
             PipeDirection direction,
             HandleInheritability inheritability,
             int bufferSize
-        ) : base(direction, bufferSize)
+        )
+            : base(direction, bufferSize)
         {
             if (direction == PipeDirection.InOut)
             {

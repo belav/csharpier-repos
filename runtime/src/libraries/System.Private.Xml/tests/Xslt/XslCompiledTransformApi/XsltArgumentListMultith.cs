@@ -21,7 +21,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         private ITestOutputHelper _output;
 
-        public CSameInstanceXsltArgTestCase2(ITestOutputHelper output) : base(output)
+        public CSameInstanceXsltArgTestCase2(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             Init(null);
@@ -64,7 +65,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CSameInstanceXsltArgumentListGetParam(ITestOutputHelper output) : base(output)
+        public CSameInstanceXsltArgumentListGetParam(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -170,7 +172,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CSameInstanceXsltArgumentListGetExtnObject(ITestOutputHelper output) : base(output)
+        public CSameInstanceXsltArgumentListGetExtnObject(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -273,7 +276,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CSameInstanceXsltArgumentListTransform(ITestOutputHelper output) : base(output)
+        public CSameInstanceXsltArgumentListTransform(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

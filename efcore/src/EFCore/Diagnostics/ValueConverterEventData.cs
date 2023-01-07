@@ -24,7 +24,8 @@ public class ValueConverterEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         Type mappingClrType,
         ValueConverter valueConverter
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         MappingClrType = mappingClrType;
         ValueConverter = valueConverter;

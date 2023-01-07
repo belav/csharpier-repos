@@ -65,7 +65,8 @@ namespace Mono.Linker.Steps
             EmbeddedResource resource,
             AssemblyDefinition resourceAssembly,
             string xmlDocumentLocation
-        ) : this(context, documentStream, xmlDocumentLocation)
+        )
+            : this(context, documentStream, xmlDocumentLocation)
         {
             _resource = (
                 resource ?? throw new ArgumentNullException(nameof(resource)),

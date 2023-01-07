@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         public ExportAspNetCoreEmbeddedLanguageDocumentHighlighterAttribute(
             string name,
             string language
-        ) : base(typeof(IAspNetCoreEmbeddedLanguageDocumentHighlighter))
+        )
+            : base(typeof(IAspNetCoreEmbeddedLanguageDocumentHighlighter))
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Language = language ?? throw new ArgumentNullException(nameof(language));

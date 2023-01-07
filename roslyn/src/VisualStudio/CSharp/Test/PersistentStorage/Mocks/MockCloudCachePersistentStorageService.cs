@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
         public MockCloudCachePersistentStorageService(
             IPersistentStorageConfiguration configuration,
             string relativePathBase
-        ) : base(configuration)
+        )
+            : base(configuration)
         {
             _relativePathBase = relativePathBase;
         }

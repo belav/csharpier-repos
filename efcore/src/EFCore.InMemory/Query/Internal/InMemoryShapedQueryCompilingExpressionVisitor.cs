@@ -18,7 +18,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
     public InMemoryShapedQueryCompilingExpressionVisitor(
         ShapedQueryCompilingExpressionVisitorDependencies dependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext)
+    )
+        : base(dependencies, queryCompilationContext)
     {
         _contextType = queryCompilationContext.ContextType;
         _threadSafetyChecksEnabled = dependencies.CoreSingletonOptions.AreThreadSafetyChecksEnabled;

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NamespaceKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public NamespaceKeywordRecommender() : base(SyntaxKind.NamespaceKeyword) { }
+        public NamespaceKeywordRecommender()
+            : base(SyntaxKind.NamespaceKeyword) { }
 
         protected override bool IsValidContext(
             int position,

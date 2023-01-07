@@ -16,7 +16,8 @@ namespace System.Xml
         private XmlName _name;
         private XmlLinkedNode? _lastChild;
 
-        internal XmlAttribute(XmlName name, XmlDocument doc) : base(doc)
+        internal XmlAttribute(XmlName name, XmlDocument doc)
+            : base(doc)
         {
             Debug.Assert(name != null);
             Debug.Assert(doc != null);
@@ -41,7 +42,8 @@ namespace System.Xml
             string localName,
             string? namespaceURI,
             XmlDocument doc
-        ) : this(doc.AddAttrXmlName(prefix, localName, namespaceURI, null), doc) { }
+        )
+            : this(doc.AddAttrXmlName(prefix, localName, namespaceURI, null), doc) { }
 
         internal XmlName XmlName
         {

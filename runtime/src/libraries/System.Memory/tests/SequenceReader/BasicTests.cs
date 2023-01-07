@@ -8,32 +8,38 @@ namespace System.Memory.Tests.SequenceReader
 {
     public class ArrayByte : SingleSegment<byte>
     {
-        public ArrayByte() : base(ReadOnlySequenceFactory<byte>.ArrayFactory, s_byteInputData) { }
+        public ArrayByte()
+            : base(ReadOnlySequenceFactory<byte>.ArrayFactory, s_byteInputData) { }
     }
 
     public class ArrayChar : SingleSegment<char>
     {
-        public ArrayChar() : base(ReadOnlySequenceFactory<char>.ArrayFactory, s_charInputData) { }
+        public ArrayChar()
+            : base(ReadOnlySequenceFactory<char>.ArrayFactory, s_charInputData) { }
     }
 
     public class MemoryByte : SingleSegment<byte>
     {
-        public MemoryByte() : base(ReadOnlySequenceFactory<byte>.MemoryFactory, s_byteInputData) { }
+        public MemoryByte()
+            : base(ReadOnlySequenceFactory<byte>.MemoryFactory, s_byteInputData) { }
     }
 
     public class MemoryChar : SingleSegment<char>
     {
-        public MemoryChar() : base(ReadOnlySequenceFactory<char>.MemoryFactory, s_charInputData) { }
+        public MemoryChar()
+            : base(ReadOnlySequenceFactory<char>.MemoryFactory, s_charInputData) { }
     }
 
     public class SingleSegmentByte : SingleSegment<byte>
     {
-        public SingleSegmentByte() : base(s_byteInputData) { }
+        public SingleSegmentByte()
+            : base(s_byteInputData) { }
     }
 
     public class SingleSegmentChar : SingleSegment<char>
     {
-        public SingleSegmentChar() : base(s_charInputData) { }
+        public SingleSegmentChar()
+            : base(s_charInputData) { }
     }
 
     public abstract class SingleSegment<T> : ReaderBasicTests<T> where T : unmanaged, IEquatable<T>

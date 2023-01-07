@@ -29,7 +29,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             this.metadata = metadata;
         }
 
-        protected XmlContext(XmlContext parent) : base(parent)
+        protected XmlContext(XmlContext parent)
+            : base(parent)
         {
             this.metadata = parent.metadata;
         }

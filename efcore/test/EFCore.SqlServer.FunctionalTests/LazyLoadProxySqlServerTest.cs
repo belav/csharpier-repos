@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class LazyLoadProxySqlServerTest
     : LazyLoadProxyTestBase<LazyLoadProxySqlServerTest.LoadSqlServerFixture>
 {
-    public LazyLoadProxySqlServerTest(LoadSqlServerFixture fixture) : base(fixture)
+    public LazyLoadProxySqlServerTest(LoadSqlServerFixture fixture)
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }

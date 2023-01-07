@@ -49,7 +49,8 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
             NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
             RuntimeTypeInfo contextTypeInfo,
             RuntimeTypeInfo reflectedType
-        ) : base(contextTypeInfo, reflectedType)
+        )
+            : base(contextTypeInfo, reflectedType)
         {
             _eventHandle = eventHandle;
             _definingTypeInfo = definingTypeInfo;

@@ -38,9 +38,11 @@ namespace Microsoft.Web.Management.PInvoke
 
     internal class SafeHandleZeroIsInvalid : SafeHandle
     {
-        public SafeHandleZeroIsInvalid() : base(IntPtr.Zero, true) { }
+        public SafeHandleZeroIsInvalid()
+            : base(IntPtr.Zero, true) { }
 
-        public SafeHandleZeroIsInvalid(IntPtr newHandle) : base(IntPtr.Zero, true)
+        public SafeHandleZeroIsInvalid(IntPtr newHandle)
+            : base(IntPtr.Zero, true)
         {
             this.SetHandle(newHandle);
         }
@@ -60,7 +62,8 @@ namespace Microsoft.Web.Management.PInvoke
     {
         private int _size;
 
-        public HGlobalBuffer(int size) : base(IntPtr.Zero, true)
+        public HGlobalBuffer(int size)
+            : base(IntPtr.Zero, true)
         {
             _size = size;
             this.handle = Marshal.AllocHGlobal(size);

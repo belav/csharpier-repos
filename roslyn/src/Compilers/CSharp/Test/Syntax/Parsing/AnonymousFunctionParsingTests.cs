@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     [CompilerTrait(CompilerFeature.LocalFunctions)]
     public class AnonymousFunctionParsingTests : ParsingTests
     {
-        public AnonymousFunctionParsingTests(ITestOutputHelper output) : base(output) { }
+        public AnonymousFunctionParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void MultipleAsyncModifiersOnAnonymousMethod()

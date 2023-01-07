@@ -21,7 +21,8 @@ namespace System.CommandLine
         private static string? _executableName;
 
         /// <param name="description">The description of the command, shown in help.</param>
-        public RootCommand(string description = "") : base(ExecutableName, description) { }
+        public RootCommand(string description = "")
+            : base(ExecutableName, description) { }
 
         internal static Assembly GetAssembly() =>
             _assembly ??= (Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly());

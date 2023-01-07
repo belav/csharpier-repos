@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             PropertySymbol associatedProperty,
             bool generateDebugInfo,
             bool hasMethodBodyDependency
-        ) : base(interfaceMethod, stateMachineType, name, generateDebugInfo, associatedProperty)
+        )
+            : base(interfaceMethod, stateMachineType, name, generateDebugInfo, associatedProperty)
         {
             _hasMethodBodyDependency = hasMethodBodyDependency;
         }

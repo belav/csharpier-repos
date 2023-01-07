@@ -138,7 +138,8 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class. For further
         ///    initialization, set the properties on the object. This is the default constructor.</para>
         /// </summary>
-        public ManagementEventWatcher() : this((ManagementScope)null, null, null) { }
+        public ManagementEventWatcher()
+            : this((ManagementScope)null, null, null) { }
 
         //parameterized constructors
         /// <summary>
@@ -149,7 +150,8 @@ namespace System.Management
         ///    <para>The namespace in which the watcher will be listening for
         ///       events is the default namespace that is currently set.</para>
         /// </remarks>
-        public ManagementEventWatcher(EventQuery query) : this(null, query, null) { }
+        public ManagementEventWatcher(EventQuery query)
+            : this(null, query, null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class when given a WMI event query in the
@@ -160,7 +162,8 @@ namespace System.Management
         ///    <para>The namespace in which the watcher will be listening for
         ///       events is the default namespace that is currently set.</para>
         /// </remarks>
-        public ManagementEventWatcher(string query) : this(null, new EventQuery(query), null) { }
+        public ManagementEventWatcher(string query)
+            : this(null, new EventQuery(query), null) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isIterator,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType, syntax.GetReference(), location, isIterator: isIterator)
+        )
+            : base(containingType, syntax.GetReference(), location, isIterator: isIterator)
         {
             _explicitInterfaceType = explicitInterfaceType;
             _name = name;

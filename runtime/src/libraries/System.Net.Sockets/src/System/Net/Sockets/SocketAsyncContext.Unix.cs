@@ -370,14 +370,16 @@ namespace System.Net.Sockets
         // read queue vs the ones that go in the write queue.
         private abstract class ReadOperation : AsyncOperation, IThreadPoolWorkItem
         {
-            public ReadOperation(SocketAsyncContext context) : base(context) { }
+            public ReadOperation(SocketAsyncContext context)
+                : base(context) { }
 
             void IThreadPoolWorkItem.Execute() => AssociatedContext.ProcessAsyncReadOperation(this);
         }
 
         private abstract class WriteOperation : AsyncOperation, IThreadPoolWorkItem
         {
-            public WriteOperation(SocketAsyncContext context) : base(context) { }
+            public WriteOperation(SocketAsyncContext context)
+                : base(context) { }
 
             void IThreadPoolWorkItem.Execute() =>
                 AssociatedContext.ProcessAsyncWriteOperation(this);
@@ -390,7 +392,8 @@ namespace System.Net.Sockets
             public int Offset;
             public int Count;
 
-            public SendOperation(SocketAsyncContext context) : base(context) { }
+            public SendOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<int, byte[]?, int, SocketFlags, SocketError>? Callback { get; set; }
 
@@ -408,7 +411,8 @@ namespace System.Net.Sockets
         {
             public Memory<byte> Buffer;
 
-            public BufferMemorySendOperation(SocketAsyncContext context) : base(context) { }
+            public BufferMemorySendOperation(SocketAsyncContext context)
+                : base(context) { }
 
             protected override bool DoTryComplete(SocketAsyncContext context)
             {
@@ -450,7 +454,8 @@ namespace System.Net.Sockets
             public IList<ArraySegment<byte>>? Buffers;
             public int BufferIndex;
 
-            public BufferListSendOperation(SocketAsyncContext context) : base(context) { }
+            public BufferListSendOperation(SocketAsyncContext context)
+                : base(context) { }
 
             protected override bool DoTryComplete(SocketAsyncContext context)
             {
@@ -490,7 +495,8 @@ namespace System.Net.Sockets
         {
             public byte* BufferPtr;
 
-            public BufferPtrSendOperation(SocketAsyncContext context) : base(context) { }
+            public BufferPtrSendOperation(SocketAsyncContext context)
+                : base(context) { }
 
             protected override bool DoTryComplete(SocketAsyncContext context)
             {
@@ -518,7 +524,8 @@ namespace System.Net.Sockets
             public SocketFlags ReceivedFlags;
             public int BytesTransferred;
 
-            public ReceiveOperation(SocketAsyncContext context) : base(context) { }
+            public ReceiveOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<int, byte[]?, int, SocketFlags, SocketError>? Callback { get; set; }
 
@@ -537,7 +544,8 @@ namespace System.Net.Sockets
             public Memory<byte> Buffer;
             public bool SetReceivedFlags;
 
-            public BufferMemoryReceiveOperation(SocketAsyncContext context) : base(context) { }
+            public BufferMemoryReceiveOperation(SocketAsyncContext context)
+                : base(context) { }
 
             protected override bool DoTryComplete(SocketAsyncContext context)
             {
@@ -604,7 +612,8 @@ namespace System.Net.Sockets
         {
             public IList<ArraySegment<byte>>? Buffers;
 
-            public BufferListReceiveOperation(SocketAsyncContext context) : base(context) { }
+            public BufferListReceiveOperation(SocketAsyncContext context)
+                : base(context) { }
 
             protected override bool DoTryComplete(SocketAsyncContext context) =>
                 SocketPal.TryCompleteReceiveFrom(
@@ -642,7 +651,8 @@ namespace System.Net.Sockets
             public byte* BufferPtr;
             public int Length;
 
-            public BufferPtrReceiveOperation(SocketAsyncContext context) : base(context) { }
+            public BufferPtrReceiveOperation(SocketAsyncContext context)
+                : base(context) { }
 
             protected override bool DoTryComplete(SocketAsyncContext context) =>
                 SocketPal.TryCompleteReceiveFrom(
@@ -670,7 +680,8 @@ namespace System.Net.Sockets
             public bool IsIPv6;
             public IPPacketInformation IPPacketInformation;
 
-            public ReceiveMessageFromOperation(SocketAsyncContext context) : base(context) { }
+            public ReceiveMessageFromOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<
                 int,
@@ -720,8 +731,8 @@ namespace System.Net.Sockets
             public bool IsIPv6;
             public IPPacketInformation IPPacketInformation;
 
-            public BufferPtrReceiveMessageFromOperation(SocketAsyncContext context) : base(context)
-            { }
+            public BufferPtrReceiveMessageFromOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<
                 int,
@@ -763,7 +774,8 @@ namespace System.Net.Sockets
         {
             public IntPtr AcceptedFileDescriptor;
 
-            public AcceptOperation(SocketAsyncContext context) : base(context) { }
+            public AcceptOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<IntPtr, byte[], int, SocketError>? Callback { get; set; }
 
@@ -802,7 +814,8 @@ namespace System.Net.Sockets
 
         private sealed class ConnectOperation : WriteOperation
         {
-            public ConnectOperation(SocketAsyncContext context) : base(context) { }
+            public ConnectOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<SocketError>? Callback { get; set; }
 
@@ -823,7 +836,8 @@ namespace System.Net.Sockets
             public long Count;
             public long BytesTransferred;
 
-            public SendFileOperation(SocketAsyncContext context) : base(context) { }
+            public SendFileOperation(SocketAsyncContext context)
+                : base(context) { }
 
             public Action<long, SocketError>? Callback { get; set; }
 

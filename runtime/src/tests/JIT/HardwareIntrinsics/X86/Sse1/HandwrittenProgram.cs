@@ -166,7 +166,8 @@ namespace IntelHardwareIntrinsicTest._Sse1
             GCHandle inHandle2;
             GCHandle outHandle;
 
-            public TestTable_2Input(T[] a, T[] b) : this(a, a, b) { }
+            public TestTable_2Input(T[] a, T[] b)
+                : this(a, a, b) { }
 
             public TestTable_2Input(T[] a, T[] b, T[] c)
             {

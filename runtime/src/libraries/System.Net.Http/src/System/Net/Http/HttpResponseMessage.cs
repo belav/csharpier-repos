@@ -147,7 +147,8 @@ namespace System.Net.Http
             get { return ((int)_statusCode >= 200) && ((int)_statusCode <= 299); }
         }
 
-        public HttpResponseMessage() : this(DefaultStatusCode) { }
+        public HttpResponseMessage()
+            : this(DefaultStatusCode) { }
 
         public HttpResponseMessage(HttpStatusCode statusCode)
         {

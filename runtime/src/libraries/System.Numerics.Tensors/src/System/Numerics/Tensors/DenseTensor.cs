@@ -50,7 +50,8 @@ namespace System.Numerics.Tensors
         /// Initializes a rank-1 Tensor using the specified <paramref name="length"/>.
         /// </summary>
         /// <param name="length">Size of the 1-dimensional tensor</param>
-        public DenseTensor(int length) : base(length)
+        public DenseTensor(int length)
+            : base(length)
         {
             memory = new T[length];
         }
@@ -76,7 +77,8 @@ namespace System.Numerics.Tensors
             Memory<T> memory,
             ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(dimensions, reverseStride)
+        )
+            : base(dimensions, reverseStride)
         {
             this.memory = memory;
 

@@ -36,7 +36,8 @@ namespace System.Data
         internal LinqDataView(
             DataTable table,
             SortExpressionBuilder<DataRow>? sortExpressionBuilder
-        ) : base(table)
+        )
+            : base(table)
         {
             Debug.Assert(table != null, "null DataTable");
             this.sortExpressionBuilder =
@@ -61,7 +62,8 @@ namespace System.Data
             Comparison<DataRow>? comparison,
             Func<object, DataRow, int>? comparerKeyRow,
             SortExpressionBuilder<DataRow>? sortExpressionBuilder
-        ) : base(table, predicate_system, comparison, DataViewRowState.CurrentRows)
+        )
+            : base(table, predicate_system, comparison, DataViewRowState.CurrentRows)
         {
             this.sortExpressionBuilder = sortExpressionBuilder ?? this.sortExpressionBuilder;
             this.comparerKeyRow = comparerKeyRow;

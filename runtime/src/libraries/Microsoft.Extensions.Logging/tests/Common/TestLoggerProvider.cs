@@ -39,6 +39,7 @@ namespace Microsoft.Extensions.Logging.Test
 
     public class TestLoggerProvider2 : TestLoggerProvider
     {
-        public TestLoggerProvider2(TestSink testSink) : base(testSink, true) { }
+        public TestLoggerProvider2(TestSink testSink)
+            : base(testSink, true) { }
     }
 }

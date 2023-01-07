@@ -29,7 +29,8 @@ public class FallbackEventDefinition : EventDefinitionBase
         LogLevel level,
         string eventIdCode,
         string messageFormat
-    ) : base(loggingOptions, eventId, level, eventIdCode)
+    )
+        : base(loggingOptions, eventId, level, eventIdCode)
     {
         MessageFormat = messageFormat;
     }

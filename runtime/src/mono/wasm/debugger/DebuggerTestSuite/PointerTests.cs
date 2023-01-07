@@ -13,7 +13,8 @@ namespace DebuggerTests
 {
     public class PointerTests : DebuggerTests
     {
-        public PointerTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public PointerTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         public static TheoryData<string, string, string, int, string, bool> PointersTestData =>
             new TheoryData<string, string, string, int, string, bool>

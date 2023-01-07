@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             AbstractSnippetExpansionClient snippetExpansionClient,
             ITextBuffer subjectBuffer,
             string fieldName
-        ) : base(snippetExpansionClient, subjectBuffer)
+        )
+            : base(snippetExpansionClient, subjectBuffer)
         {
             this.FieldName = fieldName;
         }

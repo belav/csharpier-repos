@@ -26,7 +26,8 @@ public class QueryStringValueProvider : BindingSourceValueProvider, IEnumerableV
         BindingSource bindingSource,
         IQueryCollection values,
         CultureInfo? culture
-    ) : base(bindingSource)
+    )
+        : base(bindingSource)
     {
         if (bindingSource == null)
         {

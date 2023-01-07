@@ -20,7 +20,8 @@ namespace System.Web.Mvc.Filters
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor,
             IPrincipal principal
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (actionDescriptor == null)
             {

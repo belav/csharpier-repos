@@ -27,7 +27,8 @@ internal sealed class KeyRingProvider : ICacheableKeyRingProvider, IKeyRingProvi
         IKeyManager keyManager,
         IOptions<KeyManagementOptions> keyManagementOptions,
         IDefaultKeyResolver defaultKeyResolver
-    ) : this(keyManager, keyManagementOptions, defaultKeyResolver, NullLoggerFactory.Instance) { }
+    )
+        : this(keyManager, keyManagementOptions, defaultKeyResolver, NullLoggerFactory.Instance) { }
 
     public KeyRingProvider(
         IKeyManager keyManager,

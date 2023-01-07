@@ -18,7 +18,8 @@ namespace Internal.TypeSystem.Ecma
             IAssemblyDesc containingAssembly,
             PdbSymbolReader pdbReader,
             IModuleResolver customModuleResolver
-        ) : this(context, peReader, metadataReader, containingAssembly, customModuleResolver)
+        )
+            : this(context, peReader, metadataReader, containingAssembly, customModuleResolver)
         {
             PdbReader = pdbReader;
         }

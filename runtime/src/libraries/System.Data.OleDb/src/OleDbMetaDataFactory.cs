@@ -35,7 +35,8 @@ namespace System.Data.OleDb
             string serverVersion,
             string serverVersionNormalized,
             SchemaSupport[]? schemaSupport
-        ) : base(XMLStream, serverVersion, serverVersionNormalized)
+        )
+            : base(XMLStream, serverVersion, serverVersionNormalized)
         {
             // set up the colletion mane schema rowset guid mapping
             _schemaMapping = new SchemaRowsetName[]

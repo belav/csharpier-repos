@@ -33,7 +33,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     public SqliteMigrationsSqlGenerator(
         MigrationsSqlGeneratorDependencies dependencies,
         IRelationalAnnotationProvider migrationsAnnotations
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Generates commands from a list of operations.

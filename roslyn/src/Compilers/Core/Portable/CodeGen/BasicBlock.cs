@@ -695,7 +695,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             public BasicBlockWithHandlerScope(
                 ILBuilder builder,
                 ExceptionHandlerScope enclosingHandler
-            ) : base(builder)
+            )
+                : base(builder)
             {
                 this.enclosingHandler = enclosingHandler;
             }
@@ -711,7 +712,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 ILBuilder builder,
                 ExceptionHandlerScope enclosingHandler,
                 BlockType type
-            ) : base(builder, enclosingHandler)
+            )
+                : base(builder, enclosingHandler)
             {
                 _type = type;
             }

@@ -17,7 +17,8 @@ public class InputFormatterException : Exception
     /// Initializes a new instance of <see cref="InputFormatterException"/> with the specified <paramref name="message"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
-    public InputFormatterException(string message) : base(message) { }
+    public InputFormatterException(string message)
+        : base(message) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="InputFormatterException"/> with the specified <paramref name="message"/> and

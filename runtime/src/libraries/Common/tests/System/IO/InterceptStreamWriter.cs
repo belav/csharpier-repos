@@ -15,7 +15,8 @@ internal sealed class InterceptStreamWriter : StreamWriter
         Encoding encoding,
         int bufferSize,
         bool leaveOpen
-    ) : base(baseStream, encoding, bufferSize, leaveOpen)
+    )
+        : base(baseStream, encoding, bufferSize, leaveOpen)
     {
         _wrappedWriter = wrappedWriter;
     }

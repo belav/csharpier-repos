@@ -39,7 +39,8 @@ namespace System.Net
             _responseState = ResponseState.Created;
         }
 
-        internal HttpListenerResponse(HttpListenerContext httpContext) : this()
+        internal HttpListenerResponse(HttpListenerContext httpContext)
+            : this()
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Associate(this, httpContext);

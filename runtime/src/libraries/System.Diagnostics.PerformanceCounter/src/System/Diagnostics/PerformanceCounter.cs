@@ -76,7 +76,8 @@ namespace System.Diagnostics
             string counterName,
             string instanceName,
             string machineName
-        ) : this(categoryName, counterName, instanceName, machineName, skipInit: false) { }
+        )
+            : this(categoryName, counterName, instanceName, machineName, skipInit: false) { }
 
         internal PerformanceCounter(
             string categoryName,

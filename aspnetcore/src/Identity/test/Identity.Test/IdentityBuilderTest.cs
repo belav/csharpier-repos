@@ -468,7 +468,8 @@ public class IdentityBuilderTest
             UserManager<PocoUser> manager,
             IHttpContextAccessor context,
             IUserClaimsPrincipalFactory<PocoUser> claimsFactory
-        ) : base(manager, context, claimsFactory, null, null, null, null) { }
+        )
+            : base(manager, context, claimsFactory, null, null, null, null) { }
     }
 
     private class MyUserManager : UserManager<PocoUser>
@@ -483,7 +484,8 @@ public class IdentityBuilderTest
             UserManager<PocoUser> userManager,
             RoleManager<PocoRole> roleManager,
             IOptions<IdentityOptions> optionsAccessor
-        ) : base(userManager, roleManager, optionsAccessor) { }
+        )
+            : base(userManager, roleManager, optionsAccessor) { }
     }
 
     private class MyRoleManager : RoleManager<PocoRole>
@@ -491,7 +493,8 @@ public class IdentityBuilderTest
         public MyRoleManager(
             IRoleStore<PocoRole> store,
             IEnumerable<IRoleValidator<PocoRole>> roleValidators
-        ) : base(store, null, null, null, null) { }
+        )
+            : base(store, null, null, null, null) { }
     }
 
     private class MyUserConfirmation : DefaultUserConfirmation<PocoUser> { }

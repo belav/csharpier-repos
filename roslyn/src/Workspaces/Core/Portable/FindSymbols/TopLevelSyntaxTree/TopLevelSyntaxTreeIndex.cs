@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Checksum? checksum,
             DeclarationInfo declarationInfo,
             ExtensionMethodInfo extensionMethodInfo
-        ) : base(checksum)
+        )
+            : base(checksum)
         {
             _declarationInfo = declarationInfo;
             _extensionMethodInfo = extensionMethodInfo;

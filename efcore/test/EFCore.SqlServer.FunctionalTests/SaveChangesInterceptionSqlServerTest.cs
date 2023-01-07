@@ -205,7 +205,8 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
     {
         public SaveChangesInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {

@@ -24,7 +24,8 @@ public class RelationalQueryCompilationContext : QueryCompilationContext
         QueryCompilationContextDependencies dependencies,
         RelationalQueryCompilationContextDependencies relationalDependencies,
         bool async
-    ) : base(dependencies, async)
+    )
+        : base(dependencies, async)
     {
         RelationalDependencies = relationalDependencies;
         QuerySplittingBehavior = RelationalOptionsExtension

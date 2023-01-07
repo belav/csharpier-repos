@@ -7,7 +7,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprUnaryOp : ExprOperator
     {
-        public ExprUnaryOp(ExpressionKind kind, CType type, Expr operand) : base(kind, type)
+        public ExprUnaryOp(ExpressionKind kind, CType type, Expr operand)
+            : base(kind, type)
         {
             Debug.Assert(kind.IsUnaryOperator());
             Debug.Assert(operand != null);
@@ -20,7 +21,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr operand,
             Expr call,
             MethPropWithInst userMethod
-        ) : base(kind, type, call, userMethod)
+        )
+            : base(kind, type, call, userMethod)
         {
             Debug.Assert(kind.IsUnaryOperator());
             Debug.Assert(operand != null);

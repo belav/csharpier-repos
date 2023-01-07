@@ -64,7 +64,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     /// <param name="tagHelper">The <see cref="CacheTagHelper"/>.</param>
     /// <param name="context">The <see cref="TagHelperContext"/>.</param>
     /// <returns>A new <see cref="CacheTagKey"/>.</returns>
-    public CacheTagKey(CacheTagHelper tagHelper, TagHelperContext context) : this(tagHelper)
+    public CacheTagKey(CacheTagHelper tagHelper, TagHelperContext context)
+        : this(tagHelper)
     {
         Key = context.UniqueId;
         _prefix = nameof(CacheTagHelper);
@@ -75,7 +76,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     /// </summary>
     /// <param name="tagHelper">The <see cref="DistributedCacheTagHelper"/>.</param>
     /// <returns>A new <see cref="CacheTagKey"/>.</returns>
-    public CacheTagKey(DistributedCacheTagHelper tagHelper) : this((CacheTagHelperBase)tagHelper)
+    public CacheTagKey(DistributedCacheTagHelper tagHelper)
+        : this((CacheTagHelperBase)tagHelper)
     {
         Key = tagHelper.Name;
         _prefix = nameof(DistributedCacheTagHelper);

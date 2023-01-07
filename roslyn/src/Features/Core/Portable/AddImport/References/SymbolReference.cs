@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             public SymbolReference(
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 SymbolResult<INamespaceOrTypeSymbol> symbolResult
-            ) : base(provider, new SearchResult(symbolResult))
+            )
+                : base(provider, new SearchResult(symbolResult))
             {
                 SymbolResult = symbolResult;
             }

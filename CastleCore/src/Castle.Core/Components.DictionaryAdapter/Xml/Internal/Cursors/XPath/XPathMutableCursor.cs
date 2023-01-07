@@ -33,7 +33,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             IXmlIncludedTypeMap knownTypes,
             IXmlNamespaceSource namespaces,
             CursorFlags flags
-        ) : base(path, namespaces, parent)
+        )
+            : base(path, namespaces, parent)
         {
             if (null == parent)
                 throw Error.ArgumentNull(nameof(parent));

@@ -12,7 +12,8 @@ namespace System.Net.Sockets.Tests
 {
     public abstract class Accept<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
     {
-        public Accept(ITestOutputHelper output) : base(output) { }
+        public Accept(ITestOutputHelper output)
+            : base(output) { }
 
         [OuterLoop]
         [Theory]
@@ -525,17 +526,20 @@ namespace System.Net.Sockets.Tests
 
     public sealed class AcceptSync : Accept<SocketHelperArraySync>
     {
-        public AcceptSync(ITestOutputHelper output) : base(output) { }
+        public AcceptSync(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class AcceptSyncForceNonBlocking : Accept<SocketHelperSyncForceNonBlocking>
     {
-        public AcceptSyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public AcceptSyncForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class AcceptApm : Accept<SocketHelperApm>
     {
-        public AcceptApm(ITestOutputHelper output) : base(output) { }
+        public AcceptApm(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void AbortedByDispose_LeaksNoUnobservedExceptions()
@@ -590,12 +594,14 @@ namespace System.Net.Sockets.Tests
 
     public sealed class AcceptTask : Accept<SocketHelperTask>
     {
-        public AcceptTask(ITestOutputHelper output) : base(output) { }
+        public AcceptTask(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class AcceptCancellableTask : Accept<SocketHelperCancellableTask>
     {
-        public AcceptCancellableTask(ITestOutputHelper output) : base(output) { }
+        public AcceptCancellableTask(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task AcceptAsync_Precanceled_Throws()
@@ -655,6 +661,7 @@ namespace System.Net.Sockets.Tests
 
     public sealed class AcceptEap : Accept<SocketHelperEap>
     {
-        public AcceptEap(ITestOutputHelper output) : base(output) { }
+        public AcceptEap(ITestOutputHelper output)
+            : base(output) { }
     }
 }

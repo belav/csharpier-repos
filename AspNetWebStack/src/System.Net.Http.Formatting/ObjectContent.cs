@@ -41,7 +41,8 @@ namespace System.Net.Http
             object value,
             MediaTypeFormatter formatter,
             string mediaType
-        ) : this(type, value, formatter, BuildHeaderValue(mediaType)) { }
+        )
+            : this(type, value, formatter, BuildHeaderValue(mediaType)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectContent"/> class.

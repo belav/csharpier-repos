@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     Diagnostic diagnostic,
                     AbstractSuppressionCodeFixProvider fixer,
                     bool forFixMultipleContext = false
-                ) : base(diagnostic, fixer, forFixMultipleContext)
+                )
+                    : base(diagnostic, fixer, forFixMultipleContext)
                 {
                     _document = document;
                     _options = options;

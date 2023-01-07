@@ -43,7 +43,8 @@ namespace System.Net.Security.Tests
             _listener.AcceptTcpClientAsync().ContinueWith(t => OnAccept(t), TaskScheduler.Default);
         }
 
-        public DummyTcpServer(IPEndPoint endPoint) : this(endPoint, null) { }
+        public DummyTcpServer(IPEndPoint endPoint)
+            : this(endPoint, null) { }
 
         public DummyTcpServer(IPEndPoint endPoint, EncryptionPolicy? sslEncryptionPolicy)
         {

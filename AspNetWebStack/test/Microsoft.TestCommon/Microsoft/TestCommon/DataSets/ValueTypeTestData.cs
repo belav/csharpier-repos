@@ -12,7 +12,8 @@ namespace Microsoft.TestCommon
         private static readonly Type OpenNullableType = typeof(Nullable<>);
         private T[] testData;
 
-        public ValueTypeTestData(params T[] testData) : base()
+        public ValueTypeTestData(params T[] testData)
+            : base()
         {
             this.testData = testData;
 

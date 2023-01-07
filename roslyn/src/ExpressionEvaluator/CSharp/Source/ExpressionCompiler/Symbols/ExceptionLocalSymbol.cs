@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string displayName,
             TypeSymbol type,
             string getExceptionMethodName
-        ) : base(method, name, displayName, type)
+        )
+            : base(method, name, displayName, type)
         {
             _getExceptionMethodName = getExceptionMethodName;
         }

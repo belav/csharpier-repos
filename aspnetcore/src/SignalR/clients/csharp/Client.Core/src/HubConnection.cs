@@ -203,7 +203,8 @@ public partial class HubConnection : IAsyncDisposable
         IServiceProvider serviceProvider,
         ILoggerFactory loggerFactory,
         IRetryPolicy reconnectPolicy
-    ) : this(connectionFactory, protocol, endPoint, serviceProvider, loggerFactory)
+    )
+        : this(connectionFactory, protocol, endPoint, serviceProvider, loggerFactory)
     {
         _reconnectPolicy = reconnectPolicy;
     }

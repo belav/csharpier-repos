@@ -21,7 +21,8 @@ internal sealed class DefaultBoundAttributeDescriptor : BoundAttributeDescriptor
         BoundAttributeParameterDescriptor[] parameterDescriptors,
         Dictionary<string, string> metadata,
         RazorDiagnostic[] diagnostics
-    ) : base(kind)
+    )
+        : base(kind)
     {
         Name = name;
         TypeName = typeName;

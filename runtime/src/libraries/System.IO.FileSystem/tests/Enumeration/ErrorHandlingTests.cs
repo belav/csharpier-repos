@@ -12,7 +12,8 @@ namespace System.IO.Tests
     {
         private class IgnoreErrors : FileSystemEnumerator<string>
         {
-            public IgnoreErrors(string directory) : base(directory) { }
+            public IgnoreErrors(string directory)
+                : base(directory) { }
 
             public int ErrorCount { get; private set; }
             public string DirectoryFinished { get; private set; }
@@ -32,7 +33,8 @@ namespace System.IO.Tests
 
         private class LastError : FileSystemEnumerator<string>
         {
-            public LastError(string directory) : base(directory) { }
+            public LastError(string directory)
+                : base(directory) { }
 
             public int Error { get; private set; }
 

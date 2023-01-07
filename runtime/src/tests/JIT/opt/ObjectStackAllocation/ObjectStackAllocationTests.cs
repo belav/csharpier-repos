@@ -36,7 +36,8 @@ namespace ObjectStackAllocation
     {
         public object o;
 
-        public SimpleClassWithGCField(int f1, int f2, object o) : base(f1, f2)
+        public SimpleClassWithGCField(int f1, int f2, object o)
+            : base(f1, f2)
         {
             this.o = o;
         }

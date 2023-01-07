@@ -2463,7 +2463,8 @@ namespace System.Management
         ///     3. Background thread status will be false
         /// </summary>
         /// <param name="workerMethod">Delegate to be called to perform the work</param>
-        public ThreadDispatch(ThreadWorkerMethodWithReturn workerMethod) : this()
+        public ThreadDispatch(ThreadWorkerMethodWithReturn workerMethod)
+            : this()
         {
             InitializeThreadState(null, workerMethod, ApartmentState.MTA, false);
         }
@@ -2476,7 +2477,8 @@ namespace System.Management
         ///     3. Background thread status will be false
         /// </summary>
         /// <param name="workerMethod">Delegate to be called to perform the work</param>
-        public ThreadDispatch(ThreadWorkerMethodWithReturnAndParam workerMethod) : this()
+        public ThreadDispatch(ThreadWorkerMethodWithReturnAndParam workerMethod)
+            : this()
         {
             InitializeThreadState(null, workerMethod, ApartmentState.MTA, false);
         }
@@ -2489,7 +2491,8 @@ namespace System.Management
         ///     3. Background thread status will be false
         /// </summary>
         /// <param name="workerMethod">Delegate to be called to perform the work</param>
-        public ThreadDispatch(ThreadWorkerMethodWithParam workerMethod) : this()
+        public ThreadDispatch(ThreadWorkerMethodWithParam workerMethod)
+            : this()
         {
             InitializeThreadState(null, workerMethod, ApartmentState.MTA, false);
         }
@@ -2502,7 +2505,8 @@ namespace System.Management
         ///     3. Background thread status will be false
         /// </summary>
         /// <param name="workerMethod">Delegate to be called to perform the work</param>
-        public ThreadDispatch(ThreadWorkerMethod workerMethod) : this()
+        public ThreadDispatch(ThreadWorkerMethod workerMethod)
+            : this()
         {
             InitializeThreadState(null, workerMethod, ApartmentState.MTA, false);
         }

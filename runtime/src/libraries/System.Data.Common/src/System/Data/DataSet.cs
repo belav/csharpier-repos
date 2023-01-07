@@ -111,7 +111,8 @@ namespace System.Data
         /// Initializes a new instance of a <see cref='System.Data.DataSet'/>
         /// class with the given name.
         /// </summary>
-        public DataSet(string dataSetName) : this()
+        public DataSet(string dataSetName)
+            : this()
         {
             DataSetName = dataSetName;
         }

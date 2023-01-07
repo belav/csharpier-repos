@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis
             ObjectPool<T> pool,
             Func<ObjectPool<T>, T> allocator,
             Action<ObjectPool<T>, T> releaser
-        ) : this()
+        )
+            : this()
         {
             _pool = pool;
             _pooledObject = allocator(pool);

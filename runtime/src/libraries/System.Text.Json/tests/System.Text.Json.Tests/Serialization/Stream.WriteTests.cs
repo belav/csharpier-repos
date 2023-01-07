@@ -535,7 +535,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 public int FastPathInvocationCount { get; private set; }
 
-                public Context(JsonSerializerOptions options) : base(options) { }
+                public Context(JsonSerializerOptions options)
+                    : base(options) { }
 
                 protected override JsonSerializerOptions? GeneratedSerializerOptions => Options;
 

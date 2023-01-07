@@ -20,7 +20,8 @@ public class PocoUser : PocoUser<string>
     /// Ctor
     /// </summary>
     /// <param name="userName"></param>
-    public PocoUser(string userName) : this()
+    public PocoUser(string userName)
+        : this()
     {
         UserName = userName;
     }
@@ -41,7 +42,8 @@ public class PocoUser<TKey> where TKey : IEquatable<TKey>
     /// ctor
     /// </summary>
     /// <param name="userName"></param>
-    public PocoUser(string userName) : this()
+    public PocoUser(string userName)
+        : this()
     {
         UserName = userName;
     }

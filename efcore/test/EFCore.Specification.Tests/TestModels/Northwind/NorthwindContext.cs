@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 public class NorthwindContext : PoolableDbContext
 {
-    public NorthwindContext(DbContextOptions options) : base(options) { }
+    public NorthwindContext(DbContextOptions options)
+        : base(options) { }
 
     public virtual DbSet<Customer> Customers { get; set; }
     public virtual DbSet<Employee> Employees { get; set; }

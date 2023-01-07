@@ -48,17 +48,20 @@ namespace System.Data.OleDb
         private int _changeID;
         private int _lastChangeID;
 
-        public OleDbCommand() : base()
+        public OleDbCommand()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OleDbCommand(string? cmdText) : this()
+        public OleDbCommand(string? cmdText)
+            : this()
         {
             CommandText = cmdText;
         }
 
-        public OleDbCommand(string? cmdText, OleDbConnection? connection) : this()
+        public OleDbCommand(string? cmdText, OleDbConnection? connection)
+            : this()
         {
             CommandText = cmdText;
             Connection = connection;
@@ -68,14 +71,16 @@ namespace System.Data.OleDb
             string? cmdText,
             OleDbConnection? connection,
             OleDbTransaction? transaction
-        ) : this()
+        )
+            : this()
         {
             CommandText = cmdText;
             Connection = connection;
             Transaction = transaction;
         }
 
-        private OleDbCommand(OleDbCommand from) : this()
+        private OleDbCommand(OleDbCommand from)
+            : this()
         { // Clone
             CommandText = from.CommandText;
             CommandTimeout = from.CommandTimeout;

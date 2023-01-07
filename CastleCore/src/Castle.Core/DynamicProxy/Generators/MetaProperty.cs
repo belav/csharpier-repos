@@ -36,7 +36,8 @@ namespace Castle.DynamicProxy.Generators
             MetaMethod setter,
             IEnumerable<CustomAttributeBuilder> customAttributes,
             Type[] arguments
-        ) : base(property)
+        )
+            : base(property)
         {
             this.getter = getter;
             this.setter = setter;

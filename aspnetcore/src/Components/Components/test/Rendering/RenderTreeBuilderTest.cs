@@ -2038,7 +2038,8 @@ public class RenderTreeBuilderTest
 
     private class TestRenderer : Renderer
     {
-        public TestRenderer() : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
+        public TestRenderer()
+            : base(new TestServiceProvider(), NullLoggerFactory.Instance) { }
 
         public override Dispatcher Dispatcher { get; } = Dispatcher.CreateDefault();
 

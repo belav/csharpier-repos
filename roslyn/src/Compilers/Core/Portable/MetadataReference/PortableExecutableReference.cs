@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis
             MetadataReferenceProperties properties,
             string? fullPath = null,
             DocumentationProvider? initialDocumentation = null
-        ) : base(properties)
+        )
+            : base(properties)
         {
             _filePath = fullPath;
             _lazyDocumentation = initialDocumentation;

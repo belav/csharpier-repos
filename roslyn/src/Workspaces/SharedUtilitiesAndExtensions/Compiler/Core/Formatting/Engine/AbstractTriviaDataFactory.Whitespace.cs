@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int indentation,
                 bool elastic,
                 string language
-            ) : base(options, language)
+            )
+                : base(options, language)
             {
                 _elastic = elastic;
 

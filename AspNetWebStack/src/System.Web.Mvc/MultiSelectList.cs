@@ -26,7 +26,8 @@ namespace System.Web.Mvc
     {
         private IList<SelectListGroup> _groups;
 
-        public MultiSelectList(IEnumerable items) : this(items, selectedValues: null) { }
+        public MultiSelectList(IEnumerable items)
+            : this(items, selectedValues: null) { }
 
         public MultiSelectList(IEnumerable items, IEnumerable selectedValues)
             : this(items, dataValueField: null, dataTextField: null, selectedValues: selectedValues)

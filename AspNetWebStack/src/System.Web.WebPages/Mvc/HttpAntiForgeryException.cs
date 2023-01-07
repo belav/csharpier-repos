@@ -19,7 +19,8 @@ namespace System.Web.Mvc
         private HttpAntiForgeryException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public HttpAntiForgeryException(string message) : base(message) { }
+        public HttpAntiForgeryException(string message)
+            : base(message) { }
 
         private HttpAntiForgeryException(string message, params object[] args)
             : this(String.Format(CultureInfo.CurrentCulture, message, args)) { }

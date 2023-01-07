@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _uncommonData = uncommonData;
         }
 
-        private Conversion(ConversionKind kind) : this(kind, null) { }
+        private Conversion(ConversionKind kind)
+            : this(kind, null) { }
 
         internal Conversion(UserDefinedConversionResult conversionResult, bool isImplicit)
         {

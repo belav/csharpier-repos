@@ -68,7 +68,8 @@ namespace CoreFXTestLibrary
 
         private ExpectedExceptionAttribute() { }
 
-        public ExpectedExceptionAttribute(Type type) : this(type, null) { }
+        public ExpectedExceptionAttribute(Type type)
+            : this(type, null) { }
 
         public ExpectedExceptionAttribute(Type type, string description)
         {

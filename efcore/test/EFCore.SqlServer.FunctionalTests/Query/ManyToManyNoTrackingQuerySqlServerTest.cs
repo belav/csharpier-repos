@@ -9,7 +9,8 @@ public class ManyToManyNoTrackingQuerySqlServerTest
     public ManyToManyNoTrackingQuerySqlServerTest(
         ManyToManyQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

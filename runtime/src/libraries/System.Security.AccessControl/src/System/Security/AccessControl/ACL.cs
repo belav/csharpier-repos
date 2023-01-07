@@ -405,7 +405,8 @@ namespace System.Security.AccessControl
         // Creates an empty ACL
         //
 
-        public RawAcl(byte revision, int capacity) : base()
+        public RawAcl(byte revision, int capacity)
+            : base()
         {
             _revision = revision;
             _aces = new List<GenericAce>(capacity);
@@ -415,7 +416,8 @@ namespace System.Security.AccessControl
         // Creates an ACL from its binary representation
         //
 
-        public RawAcl(byte[] binaryForm, int offset) : base()
+        public RawAcl(byte[] binaryForm, int offset)
+            : base()
         {
             SetBinaryForm(binaryForm, offset);
         }
@@ -1896,7 +1898,8 @@ namespace System.Security.AccessControl
         // Creates an empty ACL
         //
 
-        internal CommonAcl(bool isContainer, bool isDS, byte revision, int capacity) : base()
+        internal CommonAcl(bool isContainer, bool isDS, byte revision, int capacity)
+            : base()
         {
             _isContainer = isContainer;
             _isDS = isDS;

@@ -16,7 +16,8 @@ namespace Microsoft.Cci
     /// </summary>
     internal sealed class TypeReferenceIndexer : ReferenceIndexerBase
     {
-        internal TypeReferenceIndexer(EmitContext context) : base(context) { }
+        internal TypeReferenceIndexer(EmitContext context)
+            : base(context) { }
 
         public override void Visit(CommonPEModuleBuilder module)
         {

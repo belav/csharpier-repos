@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.PullMemberUp
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpPullMemberUpCodeRefactoringProvider() : this(service: null) { }
+        public CSharpPullMemberUpCodeRefactoringProvider()
+            : this(service: null) { }
 
         protected override Task<ImmutableArray<SyntaxNode>> GetSelectedNodesAsync(
             CodeRefactoringContext context

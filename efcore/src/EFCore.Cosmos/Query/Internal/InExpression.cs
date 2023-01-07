@@ -22,7 +22,8 @@ public class InExpression : SqlExpression
         bool negated,
         SqlExpression values,
         CoreTypeMapping typeMapping
-    ) : base(typeof(bool), typeMapping)
+    )
+        : base(typeof(bool), typeMapping)
     {
         Item = item;
         IsNegated = negated;

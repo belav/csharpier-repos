@@ -16,7 +16,8 @@ namespace System.Web.Mvc.Razor
             string rootNamespaceName,
             string sourceFileName,
             RazorEngineHost host
-        ) : base(className, rootNamespaceName, sourceFileName, host)
+        )
+            : base(className, rootNamespaceName, sourceFileName, host)
         {
             var mvcHost = host as MvcWebPageRazorHost;
             if (mvcHost != null && !mvcHost.IsSpecialPage)

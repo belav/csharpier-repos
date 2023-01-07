@@ -1724,12 +1724,14 @@ public class ComplexTypeModelBinderTest
 
         public TestableComplexTypeModelBinder(
             IDictionary<ModelMetadata, IModelBinder> propertyBinders
-        ) : base(propertyBinders, NullLoggerFactory.Instance) { }
+        )
+            : base(propertyBinders, NullLoggerFactory.Instance) { }
 
         public TestableComplexTypeModelBinder(
             IDictionary<ModelMetadata, IModelBinder> propertyBinders,
             bool allowValidatingTopLevelNodes
-        ) : base(propertyBinders, NullLoggerFactory.Instance, allowValidatingTopLevelNodes) { }
+        )
+            : base(propertyBinders, NullLoggerFactory.Instance, allowValidatingTopLevelNodes) { }
 
         public Dictionary<ModelMetadata, ModelBindingResult> Results { get; } =
             new Dictionary<ModelMetadata, ModelBindingResult>();

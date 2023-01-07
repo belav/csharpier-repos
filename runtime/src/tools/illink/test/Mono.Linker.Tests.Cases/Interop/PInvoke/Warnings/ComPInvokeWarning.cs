@@ -233,7 +233,8 @@ namespace Mono.Linker.Tests.Cases.Interop.PInvoke.Warnings
 
         class TestSafeHandle : SafeHandle
         {
-            public TestSafeHandle() : base(IntPtr.Zero, true) { }
+            public TestSafeHandle()
+                : base(IntPtr.Zero, true) { }
 
             public override bool IsInvalid => handle == IntPtr.Zero;
 
@@ -245,7 +246,8 @@ namespace Mono.Linker.Tests.Cases.Interop.PInvoke.Warnings
 
         class MyCriticalHandle : CriticalHandle
         {
-            public MyCriticalHandle() : base(new IntPtr(-1)) { }
+            public MyCriticalHandle()
+                : base(new IntPtr(-1)) { }
 
             public override bool IsInvalid
             {

@@ -16,7 +16,8 @@ namespace System.ComponentModel.DataAnnotations
     {
         private string? _extensions;
 
-        public FileExtensionsAttribute() : base(DataType.Upload)
+        public FileExtensionsAttribute()
+            : base(DataType.Upload)
         {
             // Set DefaultErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.

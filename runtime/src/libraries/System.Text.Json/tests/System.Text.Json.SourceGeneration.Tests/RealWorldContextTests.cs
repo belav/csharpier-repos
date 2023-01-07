@@ -1135,7 +1135,8 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         internal class CustomContext : JsonSerializerContext
         {
-            public CustomContext(JsonSerializerOptions options) : base(options) { }
+            public CustomContext(JsonSerializerOptions options)
+                : base(options) { }
 
             private JsonTypeInfo<object> _object;
             public JsonTypeInfo<object> Object =>

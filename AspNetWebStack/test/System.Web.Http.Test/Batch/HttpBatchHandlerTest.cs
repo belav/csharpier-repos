@@ -543,7 +543,8 @@ namespace System.Web.Http
                     CancellationToken,
                     Task<HttpResponseMessage>
                 > processBatchAsync
-            ) : base(httpServer)
+            )
+                : base(httpServer)
             {
                 Contract.Assert(processBatchAsync != null);
                 _processBatchAsync = processBatchAsync;
@@ -562,13 +563,15 @@ namespace System.Web.Http
 
         private class MockHttpBatchHandler : HttpBatchHandler
         {
-            public MockHttpBatchHandler(HttpServer server) : base(server) { }
+            public MockHttpBatchHandler(HttpServer server)
+                : base(server) { }
 
             public MockHttpBatchHandler(
                 HttpServer httpServer,
                 IExceptionLogger exceptionLogger,
                 IExceptionHandler exceptionHanlder
-            ) : base(httpServer)
+            )
+                : base(httpServer)
             {
                 ExceptionLogger = exceptionLogger;
                 ExceptionHandler = exceptionHanlder;

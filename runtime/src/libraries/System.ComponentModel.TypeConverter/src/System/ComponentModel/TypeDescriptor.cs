@@ -2950,7 +2950,8 @@ namespace System.ComponentModel
             internal AttributeProvider(
                 TypeDescriptionProvider existingProvider,
                 params Attribute[] attrs
-            ) : base(existingProvider)
+            )
+                : base(existingProvider)
             {
                 _attrs = attrs;
             }

@@ -51,12 +51,14 @@ public readonly struct RenderTreeEdit
     [FieldOffset(16)]
     public readonly string? RemovedAttributeName;
 
-    private RenderTreeEdit(RenderTreeEditType type) : this()
+    private RenderTreeEdit(RenderTreeEditType type)
+        : this()
     {
         Type = type;
     }
 
-    private RenderTreeEdit(RenderTreeEditType type, int siblingIndex) : this()
+    private RenderTreeEdit(RenderTreeEditType type, int siblingIndex)
+        : this()
     {
         Type = type;
         SiblingIndex = siblingIndex;
@@ -66,7 +68,8 @@ public readonly struct RenderTreeEdit
         RenderTreeEditType type,
         int siblingIndex,
         int referenceFrameOrMoveToSiblingIndex
-    ) : this()
+    )
+        : this()
     {
         Type = type;
         SiblingIndex = siblingIndex;

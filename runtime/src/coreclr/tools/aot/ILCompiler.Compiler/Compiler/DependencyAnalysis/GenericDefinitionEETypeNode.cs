@@ -10,7 +10,8 @@ namespace ILCompiler.DependencyAnalysis
 {
     internal sealed class GenericDefinitionEETypeNode : EETypeNode
     {
-        public GenericDefinitionEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public GenericDefinitionEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(type.IsGenericDefinition);
         }

@@ -27,7 +27,8 @@ namespace System.Xml
             XmlNamespaceManager? nsMgr,
             string? xmlLang,
             XmlSpace xmlSpace
-        ) : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace)
+        )
+            : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace)
         {
             // Intentionally Empty
         }
@@ -38,7 +39,8 @@ namespace System.Xml
             string? xmlLang,
             XmlSpace xmlSpace,
             Encoding? enc
-        ) : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace, enc)
+        )
+            : this(nt, nsMgr, null, null, null, null, string.Empty, xmlLang, xmlSpace, enc)
         {
             // Intentionally Empty
         }

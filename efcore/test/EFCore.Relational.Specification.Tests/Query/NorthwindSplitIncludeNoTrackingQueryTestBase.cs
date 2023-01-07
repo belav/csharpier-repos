@@ -19,7 +19,8 @@ public abstract class NorthwindSplitIncludeNoTrackingQueryTestBase<TFixture>
             .GetTypeInfo()
             .GetDeclaredMethod(nameof(RelationalQueryableExtensions.AsSplitQuery));
 
-    protected NorthwindSplitIncludeNoTrackingQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindSplitIncludeNoTrackingQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override async Task Include_closes_reader(bool async)
     {

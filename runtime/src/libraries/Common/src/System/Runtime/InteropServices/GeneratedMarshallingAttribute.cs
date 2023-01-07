@@ -55,7 +55,8 @@ namespace System.Runtime.InteropServices
             CountElementName = string.Empty;
         }
 
-        public MarshalUsingAttribute(Type nativeType) : this()
+        public MarshalUsingAttribute(Type nativeType)
+            : this()
         {
             NativeType = nativeType;
         }

@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class UpdatesSqliteTest : UpdatesRelationalTestBase<UpdatesSqliteTest.UpdatesSqliteFixture>
 {
-    public UpdatesSqliteTest(UpdatesSqliteFixture fixture) : base(fixture) { }
+    public UpdatesSqliteTest(UpdatesSqliteFixture fixture)
+        : base(fixture) { }
 
     public override void Save_with_shared_foreign_key()
     {

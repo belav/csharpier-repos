@@ -524,7 +524,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         public class DerivedTestClass : TestClass
         {
-            public DerivedTestClass(string message) : base(message) { }
+            public DerivedTestClass(string message)
+                : base(message) { }
         }
 
         public struct TestStruct
@@ -536,7 +537,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         public class DerivedValidationResult : ValidationResult
         {
-            public DerivedValidationResult(string errorMessage) : base(errorMessage) { }
+            public DerivedValidationResult(string errorMessage)
+                : base(errorMessage) { }
 
             public static readonly DerivedValidationResult SomeError = new DerivedValidationResult(
                 "Some Error"

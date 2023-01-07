@@ -25,7 +25,8 @@ namespace System
         // Creates a new ArrayMismatchException with its message string set to
         // the empty string, its HRESULT set to COR_E_ARRAYTYPEMISMATCH,
         // and its ExceptionInfo reference set to null.
-        public ArrayTypeMismatchException() : base(SR.Arg_ArrayTypeMismatchException)
+        public ArrayTypeMismatchException()
+            : base(SR.Arg_ArrayTypeMismatchException)
         {
             HResult = HResults.COR_E_ARRAYTYPEMISMATCH;
         }
@@ -34,7 +35,8 @@ namespace System
         // message, its HRESULT set to COR_E_ARRAYTYPEMISMATCH,
         // and its ExceptionInfo reference set to null.
         //
-        public ArrayTypeMismatchException(string? message) : base(message)
+        public ArrayTypeMismatchException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_ARRAYTYPEMISMATCH;
         }

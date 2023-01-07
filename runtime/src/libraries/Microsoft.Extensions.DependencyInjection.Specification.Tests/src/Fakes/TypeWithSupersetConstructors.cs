@@ -14,13 +14,15 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
         public TypeWithSupersetConstructors(
             IFakeService fakeService,
             IFactoryService factoryService
-        ) : this(fakeService, multipleService: null, factoryService: factoryService) { }
+        )
+            : this(fakeService, multipleService: null, factoryService: factoryService) { }
 
         public TypeWithSupersetConstructors(
             IFakeService fakeService,
             IFakeMultipleService multipleService,
             IFactoryService factoryService
-        ) : this(multipleService, factoryService, fakeService, scopedService: null) { }
+        )
+            : this(multipleService, factoryService, fakeService, scopedService: null) { }
 
         public TypeWithSupersetConstructors(
             IFakeMultipleService multipleService,

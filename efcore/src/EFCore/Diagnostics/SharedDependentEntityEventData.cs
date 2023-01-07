@@ -24,7 +24,8 @@ public class SharedDependentEntityEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEntityType firstEntityType,
         IEntityType secondEntityType
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         FirstEntityType = firstEntityType;
         SecondEntityType = secondEntityType;

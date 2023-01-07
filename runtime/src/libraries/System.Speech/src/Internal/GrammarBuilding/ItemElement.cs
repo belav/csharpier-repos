@@ -13,7 +13,8 @@ namespace System.Speech.Internal.GrammarBuilding
     {
         #region Constructors
 
-        internal ItemElement(GrammarBuilderBase builder) : this(builder, 1, 1) { }
+        internal ItemElement(GrammarBuilderBase builder)
+            : this(builder, 1, 1) { }
 
         internal ItemElement(int minRepeat, int maxRepeat)
             : this((GrammarBuilderBase)null, minRepeat, maxRepeat) { }

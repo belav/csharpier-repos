@@ -64,12 +64,14 @@ namespace Microsoft.Win32.SafeHandles
 
         private SafeHandle? _parentHandle;
 
-        protected SafeNCryptHandle() : base(true)
+        protected SafeNCryptHandle()
+            : base(true)
         {
             return;
         }
 
-        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle) : base(true)
+        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle)
+            : base(true)
         {
             if (parentHandle == null)
                 throw new ArgumentNullException(nameof(parentHandle));

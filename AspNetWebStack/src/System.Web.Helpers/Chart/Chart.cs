@@ -87,7 +87,8 @@ namespace System.Web.Helpers
             int height,
             string theme = null,
             string themePath = null
-        ) : this(httpContext, () => virtualPathProvider, width, height, theme, themePath) { }
+        )
+            : this(httpContext, () => virtualPathProvider, width, height, theme, themePath) { }
 
         internal Chart(
             HttpContextBase httpContext,

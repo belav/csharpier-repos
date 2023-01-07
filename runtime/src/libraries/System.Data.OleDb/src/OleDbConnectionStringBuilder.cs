@@ -58,12 +58,14 @@ namespace System.Data.OleDb
 
         private bool _persistSecurityInfo = DbConnectionStringDefaults.PersistSecurityInfo;
 
-        public OleDbConnectionStringBuilder() : this(null)
+        public OleDbConnectionStringBuilder()
+            : this(null)
         {
             _knownKeywords = s_validKeywords;
         }
 
-        public OleDbConnectionStringBuilder(string? connectionString) : base()
+        public OleDbConnectionStringBuilder(string? connectionString)
+            : base()
         {
             if (!ADP.IsEmpty(connectionString))
             {
@@ -653,7 +655,8 @@ namespace System.Data.OleDb
             private StandardValuesCollection? _standardValues;
 
             // converter classes should have public ctor
-            public OleDbServicesConverter() : base() { }
+            public OleDbServicesConverter()
+                : base() { }
 
             public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
             {

@@ -19,7 +19,8 @@ namespace System.Text.Json.Nodes
             TValue value,
             JsonTypeInfo<TValue> jsonTypeInfo,
             JsonNodeOptions? options = null
-        ) : base(value, options)
+        )
+            : base(value, options)
         {
             _jsonTypeInfo = jsonTypeInfo;
         }
@@ -28,7 +29,8 @@ namespace System.Text.Json.Nodes
             TValue value,
             JsonConverter<TValue> converter,
             JsonNodeOptions? options = null
-        ) : base(value, options)
+        )
+            : base(value, options)
         {
             _converter = converter;
         }

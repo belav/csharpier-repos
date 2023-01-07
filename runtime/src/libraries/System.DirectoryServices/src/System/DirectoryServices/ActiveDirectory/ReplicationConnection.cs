@@ -126,21 +126,24 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string name,
             DirectoryServer sourceServer
-        ) : this(context, name, sourceServer, null, ActiveDirectoryTransportType.Rpc) { }
+        )
+            : this(context, name, sourceServer, null, ActiveDirectoryTransportType.Rpc) { }
 
         public ReplicationConnection(
             DirectoryContext context,
             string name,
             DirectoryServer sourceServer,
             ActiveDirectorySchedule? schedule
-        ) : this(context, name, sourceServer, schedule, ActiveDirectoryTransportType.Rpc) { }
+        )
+            : this(context, name, sourceServer, schedule, ActiveDirectoryTransportType.Rpc) { }
 
         public ReplicationConnection(
             DirectoryContext context,
             string name,
             DirectoryServer sourceServer,
             ActiveDirectoryTransportType transport
-        ) : this(context, name, sourceServer, null, transport) { }
+        )
+            : this(context, name, sourceServer, null, transport) { }
 
         public ReplicationConnection(
             DirectoryContext context,

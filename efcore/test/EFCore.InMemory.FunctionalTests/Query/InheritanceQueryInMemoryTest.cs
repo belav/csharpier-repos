@@ -9,7 +9,8 @@ public class InheritanceQueryInMemoryTest
     public InheritanceQueryInMemoryTest(
         InheritanceQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

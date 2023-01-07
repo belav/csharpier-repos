@@ -13,7 +13,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
     {
         private readonly IntPtr _oldFilter;
 
-        private MessageFilterSafeHandle(IntPtr handle) : base(true)
+        private MessageFilterSafeHandle(IntPtr handle)
+            : base(true)
         {
             SetHandle(handle);
 

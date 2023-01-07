@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseDeconstruction)]
     public class UseDeconstructionTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseDeconstructionTests(ITestOutputHelper logger) : base(logger) { }
+        public UseDeconstructionTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

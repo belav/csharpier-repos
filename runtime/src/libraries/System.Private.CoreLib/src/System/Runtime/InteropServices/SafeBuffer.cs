@@ -73,7 +73,8 @@ namespace System.Runtime.InteropServices
     {
         private nuint _numBytes;
 
-        protected SafeBuffer(bool ownsHandle) : base(ownsHandle)
+        protected SafeBuffer(bool ownsHandle)
+            : base(ownsHandle)
         {
             _numBytes = Uninitialized;
         }

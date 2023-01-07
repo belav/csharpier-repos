@@ -10,7 +10,8 @@ namespace System.Net.Sockets
             Socket socket,
             object? asyncState,
             AsyncCallback? asyncCallback
-        ) : base(socket, asyncState, asyncCallback) { }
+        )
+            : base(socket, asyncState, asyncCallback) { }
 
         // This method will be called by us when the IO completes synchronously and
         // by the ThreadPool when the IO completes asynchronously.

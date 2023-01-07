@@ -30,17 +30,19 @@ namespace System.Text
         private int _byteCountUnknown;
         protected char charUnknown;
 
-        public DBCSCodePageEncoding(int codePage) : this(codePage, codePage) { }
+        public DBCSCodePageEncoding(int codePage)
+            : this(codePage, codePage) { }
 
-        internal DBCSCodePageEncoding(int codePage, int dataCodePage) : base(codePage, dataCodePage)
-        { }
+        internal DBCSCodePageEncoding(int codePage, int dataCodePage)
+            : base(codePage, dataCodePage) { }
 
         internal DBCSCodePageEncoding(
             int codePage,
             int dataCodePage,
             EncoderFallback enc,
             DecoderFallback dec
-        ) : base(codePage, dataCodePage, enc, dec) { }
+        )
+            : base(codePage, dataCodePage, enc, dec) { }
 
         internal static unsafe char ReadChar(char* pChar)
         {
@@ -1300,7 +1302,8 @@ namespace System.Text
             // Need a place for the last left over byte
             internal byte bLeftOver;
 
-            public DBCSDecoder(DBCSCodePageEncoding encoding) : base(encoding)
+            public DBCSDecoder(DBCSCodePageEncoding encoding)
+                : base(encoding)
             {
                 // Base calls reset
             }

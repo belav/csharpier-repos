@@ -44,7 +44,8 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
         PropertyInfo property,
         ParameterInfo parameterInfo,
         NullabilityInfoContext? nullabilityContext = null
-    ) : this(property, nullabilityContext)
+    )
+        : this(property, nullabilityContext)
     {
         _constructionParameterInfo = parameterInfo;
     }

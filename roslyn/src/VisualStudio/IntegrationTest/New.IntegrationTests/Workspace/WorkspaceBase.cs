@@ -26,7 +26,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.Workspaces
         private readonly string _defaultProjectTemplate;
         private readonly string _defaultlanguageName = LanguageNames.CSharp;
 
-        protected WorkspaceBase(string projectTemplate) : base()
+        protected WorkspaceBase(string projectTemplate)
+            : base()
         {
             _defaultProjectTemplate = projectTemplate;
         }

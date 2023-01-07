@@ -24,7 +24,8 @@ namespace System.Runtime.InteropServices.Marshalling
         private readonly int _sizeOfNativeElement;
         private IntPtr _allocatedMemory;
 
-        public ReadOnlySpanMarshaller(int sizeOfNativeElement) : this()
+        public ReadOnlySpanMarshaller(int sizeOfNativeElement)
+            : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -90,7 +91,8 @@ namespace System.Runtime.InteropServices.Marshalling
         private readonly int _sizeOfNativeElement;
         private IntPtr _allocatedMemory;
 
-        public SpanMarshaller(int sizeOfNativeElement) : this()
+        public SpanMarshaller(int sizeOfNativeElement)
+            : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -164,7 +166,8 @@ namespace System.Runtime.InteropServices.Marshalling
     {
         private SpanMarshaller<T> _inner;
 
-        public NeverNullSpanMarshaller(int sizeOfNativeElement) : this()
+        public NeverNullSpanMarshaller(int sizeOfNativeElement)
+            : this()
         {
             _inner = new SpanMarshaller<T>(sizeOfNativeElement);
         }
@@ -223,7 +226,8 @@ namespace System.Runtime.InteropServices.Marshalling
     {
         private ReadOnlySpanMarshaller<T> _inner;
 
-        public NeverNullReadOnlySpanMarshaller(int sizeOfNativeElement) : this()
+        public NeverNullReadOnlySpanMarshaller(int sizeOfNativeElement)
+            : this()
         {
             _inner = new ReadOnlySpanMarshaller<T>(sizeOfNativeElement);
         }
@@ -274,7 +278,8 @@ namespace System.Runtime.InteropServices.Marshalling
         private T* _nativeValue;
         private Span<T> _data;
 
-        public DirectSpanMarshaller(int sizeOfNativeElement) : this() { }
+        public DirectSpanMarshaller(int sizeOfNativeElement)
+            : this() { }
 
         public DirectSpanMarshaller(Span<T> managed, int sizeOfNativeElement)
             : this(sizeOfNativeElement)

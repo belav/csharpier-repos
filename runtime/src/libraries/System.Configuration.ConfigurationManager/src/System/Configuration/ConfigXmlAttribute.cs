@@ -18,7 +18,8 @@ namespace System.Configuration
             string localName,
             string namespaceUri,
             XmlDocument doc
-        ) : base(prefix, localName, namespaceUri, doc)
+        )
+            : base(prefix, localName, namespaceUri, doc)
         {
             _line = line;
             _filename = filename;

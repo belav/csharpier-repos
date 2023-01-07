@@ -42,7 +42,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             int runtimeId = 0,
             string loggerId = "",
             ProxyOptions options = null
-        ) : base(logger, loggerId)
+        )
+            : base(logger, loggerId)
         {
             this.urlSymbolServerList = urlSymbolServerList ?? new List<string>();
             RuntimeId = runtimeId;

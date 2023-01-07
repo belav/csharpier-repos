@@ -100,7 +100,8 @@ internal class CSharpTokenizer : Tokenizer
         { "where", CSharpKeyword.Where }
     };
 
-    public CSharpTokenizer(ITextDocument source) : base(source)
+    public CSharpTokenizer(ITextDocument source)
+        : base(source)
     {
         base.CurrentState = StartState;
 

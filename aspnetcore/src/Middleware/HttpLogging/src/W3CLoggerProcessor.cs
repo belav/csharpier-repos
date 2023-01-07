@@ -20,7 +20,8 @@ internal class W3CLoggerProcessor : FileLoggerProcessor
         IOptionsMonitor<W3CLoggerOptions> options,
         IHostEnvironment environment,
         ILoggerFactory factory
-    ) : base(options, environment, factory)
+    )
+        : base(options, environment, factory)
     {
         _loggingFields = options.CurrentValue.LoggingFields;
         _additionalRequestHeaders = W3CLoggerOptions.FilterRequestHeaders(options.CurrentValue);

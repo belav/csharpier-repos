@@ -434,7 +434,8 @@ namespace System.DirectoryServices.AccountManagement
             string name,
             string container,
             ContextOptions options
-        ) : this(contextType, name, container, options, null, null) { }
+        )
+            : this(contextType, name, container, options, null, null) { }
 
         public PrincipalContext(
             ContextType contextType,

@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class GearsOfWarQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : GearsOfWarQueryFixtureBase, new()
 {
-    protected GearsOfWarQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected GearsOfWarQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected override Expression RewriteExpectedQueryExpression(
         Expression expectedQueryExpression

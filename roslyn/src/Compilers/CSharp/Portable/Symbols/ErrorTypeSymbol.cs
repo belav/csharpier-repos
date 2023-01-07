@@ -333,7 +333,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler should create error symbols.
-        internal ErrorTypeSymbol(TupleExtraData? tupleData = null) : base(tupleData) { }
+        internal ErrorTypeSymbol(TupleExtraData? tupleData = null)
+            : base(tupleData) { }
 
         /// <summary>
         /// Get this accessibility that was declared on this symbol. For symbols that do not have
@@ -546,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected SubstitutedErrorTypeSymbol(
             ErrorTypeSymbol originalDefinition,
             TupleExtraData? tupleData = null
-        ) : base(tupleData)
+        )
+            : base(tupleData)
         {
             _originalDefinition = originalDefinition;
         }
@@ -619,7 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ErrorTypeSymbol constructedFrom,
             ImmutableArray<TypeWithAnnotations> typeArgumentsWithAnnotations,
             TupleExtraData? tupleData = null
-        ) : base((ErrorTypeSymbol)constructedFrom.OriginalDefinition, tupleData)
+        )
+            : base((ErrorTypeSymbol)constructedFrom.OriginalDefinition, tupleData)
         {
             _constructedFrom = constructedFrom;
             _typeArgumentsWithAnnotations = typeArgumentsWithAnnotations;
@@ -674,7 +677,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SubstitutedNestedErrorTypeSymbol(
             NamedTypeSymbol containingSymbol,
             ErrorTypeSymbol originalDefinition
-        ) : base(originalDefinition)
+        )
+            : base(originalDefinition)
         {
             _containingSymbol = containingSymbol;
             _map = containingSymbol.TypeSubstitution.WithAlphaRename(

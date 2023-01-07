@@ -40,7 +40,8 @@ namespace Internal.JitInterface
             new UnboxingMethodDescFactory();
         private bool _isFallbackBodyCompilation;
 
-        public CorInfoImpl(RyuJitCompilation compilation) : this()
+        public CorInfoImpl(RyuJitCompilation compilation)
+            : this()
         {
             _compilation = compilation;
         }

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class SyntaxTreeTests : ParsingTests
     {
-        public SyntaxTreeTests(ITestOutputHelper output) : base(output) { }
+        public SyntaxTreeTests(ITestOutputHelper output)
+            : base(output) { }
 
         public enum SyntaxTreeFactoryKind
         {

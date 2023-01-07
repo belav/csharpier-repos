@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 internal sealed class TimestampConverter<TMessage> : SettingsConverterBase<TMessage>
     where TMessage : IMessage, new()
 {
-    public TimestampConverter(JsonContext context) : base(context) { }
+    public TimestampConverter(JsonContext context)
+        : base(context) { }
 
     public override TMessage? Read(
         ref Utf8JsonReader reader,

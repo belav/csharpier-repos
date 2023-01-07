@@ -71,7 +71,8 @@ namespace System.Xml.Xsl.XPath
         private LexKind _prevKind;
         private XPathAxis _axis;
 
-        public XPathScanner(string xpathExpr) : this(xpathExpr, 0) { }
+        public XPathScanner(string xpathExpr)
+            : this(xpathExpr, 0) { }
 
         public XPathScanner(string xpathExpr, int startFrom)
         {

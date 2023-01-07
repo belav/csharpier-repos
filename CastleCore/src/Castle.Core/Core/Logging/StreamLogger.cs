@@ -44,7 +44,8 @@ namespace Castle.Core.Logging
         ///  The stream that will be used for logging,
         ///  seeking while the logger is alive
         ///</param>
-        public StreamLogger(string name, Stream stream) : this(name, new StreamWriter(stream)) { }
+        public StreamLogger(string name, Stream stream)
+            : this(name, new StreamWriter(stream)) { }
 
         ///<summary>
         ///  Creates a new <c>StreamLogger</c> with default buffer size.
@@ -119,7 +120,8 @@ namespace Castle.Core.Logging
         /// </summary>
         /// <param name = "name">The name of the log.</param>
         /// <param name = "writer">The <c>StreamWriter</c> the log will write to.</param>
-        protected StreamLogger(string name, StreamWriter writer) : base(name, LoggerLevel.Trace)
+        protected StreamLogger(string name, StreamWriter writer)
+            : base(name, LoggerLevel.Trace)
         {
             this.writer = writer;
             writer.AutoFlush = true;

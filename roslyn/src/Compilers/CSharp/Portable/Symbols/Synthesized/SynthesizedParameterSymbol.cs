@@ -238,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             RefKind refKind,
             DeclarationScope scope,
             string name
-        ) : base(container, type, ordinal, refKind, scope, name) { }
+        )
+            : base(container, type, ordinal, refKind, scope, name) { }
 
         internal sealed override bool IsMetadataIn => RefKind == RefKind.In;
 
@@ -341,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             ImmutableArray<CustomModifier> refCustomModifiers,
             SourceComplexParameterSymbolBase? baseParameterForAttributes
-        ) : base(container, type, ordinal, refKind, scope, name)
+        )
+            : base(container, type, ordinal, refKind, scope, name)
         {
             Debug.Assert(!refCustomModifiers.IsDefault);
             Debug.Assert(!refCustomModifiers.IsEmpty || baseParameterForAttributes is object);

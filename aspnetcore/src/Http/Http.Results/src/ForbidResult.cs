@@ -16,14 +16,16 @@ internal sealed partial class ForbidResult : IResult
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/>.
     /// </summary>
-    public ForbidResult() : this(Array.Empty<string>()) { }
+    public ForbidResult()
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the
     /// specified authentication scheme.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to challenge.</param>
-    public ForbidResult(string authenticationScheme) : this(new[] { authenticationScheme }) { }
+    public ForbidResult(string authenticationScheme)
+        : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidResult"/> with the

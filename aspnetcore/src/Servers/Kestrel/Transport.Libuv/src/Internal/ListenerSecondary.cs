@@ -23,7 +23,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         private LibuvFunctions.uv_buf_t _buf;
         private bool _closed;
 
-        public ListenerSecondary(LibuvTransportContext transportContext) : base(transportContext)
+        public ListenerSecondary(LibuvTransportContext transportContext)
+            : base(transportContext)
         {
             _ptr = Marshal.AllocHGlobal(4);
         }

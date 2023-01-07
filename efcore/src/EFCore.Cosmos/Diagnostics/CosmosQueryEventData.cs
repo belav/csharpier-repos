@@ -29,7 +29,8 @@ public class CosmosQueryEventData : EventData
         IReadOnlyList<(string Name, object? Value)> parameters,
         string querySql,
         bool logSensitiveData
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         ContainerId = containerId;
         PartitionKey = partitionKey;

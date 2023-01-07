@@ -12,7 +12,8 @@ public class TextCompletionContext : CompletionContext
         ParseResult parseResult,
         string commandLineText,
         int cursorPosition
-    ) : base(parseResult, GetWordToComplete(parseResult, cursorPosition))
+    )
+        : base(parseResult, GetWordToComplete(parseResult, cursorPosition))
     {
         CommandLineText = commandLineText;
         CursorPosition = cursorPosition;

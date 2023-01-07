@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal ExpressionListVariableBinder(
             SeparatedSyntaxList<ExpressionSyntax> expressions,
             Binder next
-        ) : base(next)
+        )
+            : base(next)
         {
             Debug.Assert(expressions.Count > 0);
             _expressions = expressions;

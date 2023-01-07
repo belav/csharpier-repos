@@ -1005,7 +1005,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             AnalyzerOptions options,
             CancellationToken cancellationToken
-        ) : this(symbol, compilation, options, isGeneratedCode: false, cancellationToken) { }
+        )
+            : this(symbol, compilation, options, isGeneratedCode: false, cancellationToken) { }
 
         internal SymbolStartAnalysisContext(
             ISymbol symbol,

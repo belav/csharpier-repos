@@ -311,7 +311,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 SourceGeneratedDocumentIdentity documentIdentity,
                 IGlobalOptionService globalOptions,
                 IThreadingContext threadingContext
-            ) : base(threadingContext, assertIsForeground: true)
+            )
+                : base(threadingContext, assertIsForeground: true)
             {
                 _fileManager = fileManager;
                 _textBuffer = textBuffer;

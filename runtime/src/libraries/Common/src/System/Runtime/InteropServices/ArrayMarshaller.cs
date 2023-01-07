@@ -25,7 +25,8 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
         private readonly int _sizeOfNativeElement;
         private IntPtr _allocatedMemory;
 
-        public ArrayMarshaller(int sizeOfNativeElement) : this()
+        public ArrayMarshaller(int sizeOfNativeElement)
+            : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -137,7 +138,8 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
         private readonly int _sizeOfNativeElement;
         private IntPtr _allocatedMemory;
 
-        public PtrArrayMarshaller(int sizeOfNativeElement) : this()
+        public PtrArrayMarshaller(int sizeOfNativeElement)
+            : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }

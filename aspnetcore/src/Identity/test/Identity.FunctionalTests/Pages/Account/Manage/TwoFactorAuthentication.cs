@@ -15,7 +15,8 @@ public class TwoFactorAuthentication : DefaultUIPage
         HttpClient client,
         IHtmlDocument twoFactor,
         DefaultUIContext context
-    ) : base(client, twoFactor, context)
+    )
+        : base(client, twoFactor, context)
     {
         if (Context.CookiePolicyAccepted)
         {

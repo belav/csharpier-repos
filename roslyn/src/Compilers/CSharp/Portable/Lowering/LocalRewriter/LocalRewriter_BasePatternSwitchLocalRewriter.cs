@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 LocalRewriter localRewriter,
                 ImmutableArray<SyntaxNode> arms,
                 bool generateInstrumentation
-            ) : base(node, localRewriter, generateInstrumentation)
+            )
+                : base(node, localRewriter, generateInstrumentation)
             {
                 foreach (var arm in arms)
                 {

@@ -32,7 +32,8 @@ public class GuidTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="GuidTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected GuidTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected GuidTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

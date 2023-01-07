@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
             IAsynchronousOperationListener asyncListener
-        ) : base(threadingContext, globalOptions, visibilityTracker, asyncListener) { }
+        )
+            : base(threadingContext, globalOptions, visibilityTracker, asyncListener) { }
 
         public ITagger<T>? CreateTagger<T>(ITextView textView, ITextBuffer subjectBuffer)
             where T : ITag

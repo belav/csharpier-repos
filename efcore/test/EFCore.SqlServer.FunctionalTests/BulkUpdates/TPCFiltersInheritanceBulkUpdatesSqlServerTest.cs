@@ -8,7 +8,8 @@ public class TPCFiltersInheritanceBulkUpdatesSqlServerTest
 {
     public TPCFiltersInheritanceBulkUpdatesSqlServerTest(
         TPCFiltersInheritanceBulkUpdatesSqlServerFixture fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
     }

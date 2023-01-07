@@ -12,7 +12,8 @@ internal sealed class ConditionCollection : IEnumerable<Condition>
     public LogicalGrouping Grouping { get; }
     public bool TrackAllCaptures { get; }
 
-    public ConditionCollection() : this(LogicalGrouping.MatchAll, trackAllCaptures: false) { }
+    public ConditionCollection()
+        : this(LogicalGrouping.MatchAll, trackAllCaptures: false) { }
 
     public ConditionCollection(LogicalGrouping grouping, bool trackAllCaptures)
     {

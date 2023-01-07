@@ -19,9 +19,11 @@ namespace System.Security.Cryptography.Xml
         private string? _inclusiveNamespacesPrefixList;
         private ExcCanonicalXml? _excCanonicalXml;
 
-        public XmlDsigExcC14NTransform() : this(false, null) { }
+        public XmlDsigExcC14NTransform()
+            : this(false, null) { }
 
-        public XmlDsigExcC14NTransform(bool includeComments) : this(includeComments, null) { }
+        public XmlDsigExcC14NTransform(bool includeComments)
+            : this(includeComments, null) { }
 
         public XmlDsigExcC14NTransform(string inclusiveNamespacesPrefixList)
             : this(false, inclusiveNamespacesPrefixList) { }

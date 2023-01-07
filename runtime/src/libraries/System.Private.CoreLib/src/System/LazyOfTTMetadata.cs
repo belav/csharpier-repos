@@ -14,17 +14,20 @@ namespace System
     {
         private readonly TMetadata _metadata;
 
-        public Lazy(Func<T> valueFactory, TMetadata metadata) : base(valueFactory)
+        public Lazy(Func<T> valueFactory, TMetadata metadata)
+            : base(valueFactory)
         {
             _metadata = metadata;
         }
 
-        public Lazy(TMetadata metadata) : base()
+        public Lazy(TMetadata metadata)
+            : base()
         {
             _metadata = metadata;
         }
 
-        public Lazy(TMetadata metadata, bool isThreadSafe) : base(isThreadSafe)
+        public Lazy(TMetadata metadata, bool isThreadSafe)
+            : base(isThreadSafe)
         {
             _metadata = metadata;
         }
@@ -35,7 +38,8 @@ namespace System
             _metadata = metadata;
         }
 
-        public Lazy(TMetadata metadata, LazyThreadSafetyMode mode) : base(mode)
+        public Lazy(TMetadata metadata, LazyThreadSafetyMode mode)
+            : base(mode)
         {
             _metadata = metadata;
         }

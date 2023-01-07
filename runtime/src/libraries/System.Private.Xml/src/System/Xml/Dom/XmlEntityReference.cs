@@ -32,7 +32,8 @@ namespace System.Xml
         private readonly string _name;
         private XmlLinkedNode? _lastChild;
 
-        protected internal XmlEntityReference(string name, XmlDocument doc) : base(doc)
+        protected internal XmlEntityReference(string name, XmlDocument doc)
+            : base(doc)
         {
             if (!doc.IsLoading)
             {

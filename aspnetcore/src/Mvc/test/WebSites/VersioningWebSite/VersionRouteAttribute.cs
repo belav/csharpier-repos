@@ -30,9 +30,11 @@ public class VersionRouteAttribute : RouteAttribute, IActionConstraintFactory
 
     public bool IsReusable => true;
 
-    public VersionRouteAttribute(string template) : base(template) { }
+    public VersionRouteAttribute(string template)
+        : base(template) { }
 
-    public VersionRouteAttribute(string template, string versionRange) : base(template)
+    public VersionRouteAttribute(string template, string versionRange)
+        : base(template)
     {
         var constraint = CreateVersionConstraint(versionRange);
 

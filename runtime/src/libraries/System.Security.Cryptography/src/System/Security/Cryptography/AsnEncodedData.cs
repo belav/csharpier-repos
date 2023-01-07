@@ -39,7 +39,8 @@ namespace System.Security.Cryptography
             Reset(asnEncodedData._oid, asnEncodedData._rawData);
         }
 
-        public AsnEncodedData(Oid? oid, byte[] rawData) : this(oid, rawData, skipCopy: false) { }
+        public AsnEncodedData(Oid? oid, byte[] rawData)
+            : this(oid, rawData, skipCopy: false) { }
 
         public AsnEncodedData(string oid, byte[] rawData)
             : this(new Oid(oid), rawData, skipCopy: false) { }

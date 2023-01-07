@@ -4057,7 +4057,8 @@ namespace System.IO.Tests
         {
             private TaskCompletionSource? _signal;
 
-            public ZeroByteReadTrackingStream(Stream innerStream) : base(innerStream) { }
+            public ZeroByteReadTrackingStream(Stream innerStream)
+                : base(innerStream) { }
 
             public Task WaitForZeroByteReadAsync()
             {

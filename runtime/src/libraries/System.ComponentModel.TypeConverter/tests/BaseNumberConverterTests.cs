@@ -28,7 +28,8 @@ namespace System.ComponentModel.Tests
 
         public class CustomPositiveSymbolCulture : CultureInfo
         {
-            public CustomPositiveSymbolCulture() : base("en-GB") { }
+            public CustomPositiveSymbolCulture()
+                : base("en-GB") { }
 
             public override object GetFormat(Type formatType)
             {

@@ -29,7 +29,8 @@ namespace System.Net.Http.Handlers
             int count,
             AsyncCallback callback,
             object state
-        ) : base(callback, state)
+        )
+            : base(callback, state)
         {
             Contract.Assert(innerStream != null);
             Contract.Assert(progressStream != null);

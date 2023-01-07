@@ -112,7 +112,8 @@ namespace System.Collections
         // interface, which in that case must be implemented by the keys of all
         // entries added to the sorted list.
         //
-        public SortedList(IComparer? comparer) : this()
+        public SortedList(IComparer? comparer)
+            : this()
         {
             if (comparer != null)
                 this.comparer = comparer;
@@ -127,7 +128,8 @@ namespace System.Collections
         // the IComparable interface, which in that case must be implemented
         // by the keys of all entries added to the sorted list.
         //
-        public SortedList(IComparer? comparer, int capacity) : this(comparer)
+        public SortedList(IComparer? comparer, int capacity)
+            : this(comparer)
         {
             Capacity = capacity;
         }
@@ -138,7 +140,8 @@ namespace System.Collections
         // keys of all entries in the given dictionary as well as keys
         // subsequently added to the sorted list.
         //
-        public SortedList(IDictionary d) : this(d, null) { }
+        public SortedList(IDictionary d)
+            : this(d, null) { }
 
         // Constructs a new sorted list containing a copy of the entries in the
         // given dictionary. The elements of the sorted list are ordered according

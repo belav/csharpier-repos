@@ -50,7 +50,8 @@ public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposab
         ILogger<RedisHubLifetimeManager<THub>> logger,
         IOptions<RedisOptions> options,
         IHubProtocolResolver hubProtocolResolver
-    ) : this(logger, options, hubProtocolResolver, globalHubOptions: null, hubOptions: null) { }
+    )
+        : this(logger, options, hubProtocolResolver, globalHubOptions: null, hubOptions: null) { }
 
     /// <summary>
     /// Constructs the <see cref="RedisHubLifetimeManager{THub}"/> with types from Dependency Injection.

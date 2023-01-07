@@ -133,7 +133,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandler_HttpProtocolTests : HttpProtocolTests
     {
-        public SocketsHttpHandler_HttpProtocolTests(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpProtocolTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task DefaultRequestHeaders_SentUnparsed()
@@ -175,19 +176,20 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandler_HttpProtocolTests_Dribble : HttpProtocolTests_Dribble
     {
-        public SocketsHttpHandler_HttpProtocolTests_Dribble(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandler_HttpProtocolTests_Dribble(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SocketsHttpHandler_DiagnosticsTest_Http11 : DiagnosticsTest
     {
-        public SocketsHttpHandler_DiagnosticsTest_Http11(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandler_DiagnosticsTest_Http11(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SocketsHttpHandler_DiagnosticsTest_Http2 : DiagnosticsTest
     {
-        public SocketsHttpHandler_DiagnosticsTest_Http2(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_DiagnosticsTest_Http2(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -202,7 +204,8 @@ namespace System.Net.Http.Functional.Tests
 #if !TARGETS_BROWSER
     public sealed class SocketsHttpHandler_HttpClientEKUTest : HttpClientEKUTest
     {
-        public SocketsHttpHandler_HttpClientEKUTest(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpClientEKUTest(ITestOutputHelper output)
+            : base(output) { }
     }
 #endif
 
@@ -220,7 +223,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_DangerousAcceptAllCertificatesValidator_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "Certificates are not supported on Browser")]
@@ -229,7 +233,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_ClientCertificates_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "Proxy is not supported on Browser")]
@@ -238,7 +243,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_DefaultProxyCredentials_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
     }
 
     public sealed class SocketsHttpHandler_HttpClientHandler_Finalization_Http11_Test
@@ -246,7 +252,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_Finalization_Http11_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
     }
 
     public sealed class SocketsHttpHandler_HttpClientHandler_Finalization_Http2_Test
@@ -254,7 +261,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_Finalization_Http2_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -265,7 +273,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_MaxConnectionsPerServer_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [InlineData(true)]
@@ -349,7 +358,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_ServerCertificates_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "ResponseDrainTimeout is not supported on Browser")]
@@ -689,7 +699,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandler_PostScenarioTest : PostScenarioTest
     {
-        public SocketsHttpHandler_PostScenarioTest(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_PostScenarioTest(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(false)]
@@ -761,7 +772,8 @@ namespace System.Net.Http.Functional.Tests
     )]
     public sealed class SocketsHttpHandler_ResponseStreamTest : ResponseStreamTest
     {
-        public SocketsHttpHandler_ResponseStreamTest(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_ResponseStreamTest(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ActiveIssue("https://github.com/dotnet/runtime/issues/37669", TestPlatforms.Browser)]
@@ -782,7 +794,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class SocketsHttpHandler_TrailingHeaders_Test : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandler_TrailingHeaders_Test(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_TrailingHeaders_Test(ITestOutputHelper output)
+            : base(output) { }
 
         protected static byte[] DataBytes = "data"u8.ToArray();
 
@@ -1415,25 +1428,28 @@ namespace System.Net.Http.Functional.Tests
 
     public sealed class SocketsHttpHandler_HttpClientHandlerTest : HttpClientHandlerTest
     {
-        public SocketsHttpHandler_HttpClientHandlerTest(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_HttpClientHandlerTest(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandlerTest_AutoRedirect : HttpClientHandlerTest_AutoRedirect
     {
-        public SocketsHttpHandlerTest_AutoRedirect(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_AutoRedirect(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SocketsHttpHandler_DefaultCredentialsTest : DefaultCredentialsTest
     {
-        public SocketsHttpHandler_DefaultCredentialsTest(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandler_DefaultCredentialsTest(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandler_IdnaProtocolTests : IdnaProtocolTests
     {
-        public SocketsHttpHandler_IdnaProtocolTests(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_IdnaProtocolTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool SupportsIdna => true;
     }
@@ -1441,19 +1457,22 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandlerTest_RequestRetry : HttpClientHandlerTest_RequestRetry
     {
-        public SocketsHttpHandlerTest_RequestRetry(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_RequestRetry(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "UseCookies is not supported on Browser")]
     public sealed class SocketsHttpHandlerTest_Cookies : HttpClientHandlerTest_Cookies
     {
-        public SocketsHttpHandlerTest_Cookies(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_Cookies(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "UseCookies is not supported on Browser")]
     public sealed class SocketsHttpHandlerTest_Cookies_Http11 : HttpClientHandlerTest_Cookies_Http11
     {
-        public SocketsHttpHandlerTest_Cookies_Http11(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_Cookies_Http11(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
@@ -1462,7 +1481,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_Http11_Cancellation_Test(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         [Fact]
         public void ConnectTimeout_Default()
@@ -1576,7 +1596,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_MaxResponseHeadersLength(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         [Fact]
         public async Task ServerAdvertisedMaxHeaderListSize_IsHonoredByClient()
@@ -1770,7 +1791,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_MaxResponseHeadersLength_Http11(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         [Theory]
         [InlineData(null, 63 * 1024)]
@@ -1951,7 +1973,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_MaxResponseHeadersLength_Http2(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -1963,7 +1986,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_MaxResponseHeadersLength_Http3(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version30;
     }
@@ -1979,8 +2003,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandler_ConnectionUpgrade_Test : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandler_ConnectionUpgrade_Test(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandler_ConnectionUpgrade_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task UpgradeConnection_ReturnsReadableAndWritableStream()
@@ -2215,7 +2239,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandler_Connect_Test : HttpClientHandler_Connect_Test
     {
-        public SocketsHttpHandler_Connect_Test(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_Connect_Test(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "Socket is not supported on Browser")]
@@ -3394,7 +3419,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public sealed class SocketsHttpHandlerTest_Http2 : HttpClientHandlerTest_Http2
     {
-        public SocketsHttpHandlerTest_Http2(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_Http2(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(SupportsAlpn))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/41078")]
@@ -3921,7 +3947,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class SocketsHttpHandlerTest_ConnectCallback : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandlerTest_ConnectCallback(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_ConnectCallback(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(false, false)]
@@ -4626,8 +4653,8 @@ namespace System.Net.Http.Functional.Tests
     public sealed class SocketsHttpHandlerTest_ConnectCallback_Http2
         : SocketsHttpHandlerTest_ConnectCallback
     {
-        public SocketsHttpHandlerTest_ConnectCallback_Http2(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandlerTest_ConnectCallback_Http2(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
 
@@ -4711,8 +4738,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class SocketsHttpHandlerTest_PlaintextStreamFilter : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandlerTest_PlaintextStreamFilter(ITestOutputHelper output) : base(output)
-        { }
+        public SocketsHttpHandlerTest_PlaintextStreamFilter(ITestOutputHelper output)
+            : base(output) { }
 
         public static IEnumerable<object[]> PlaintextStreamFilter_ContextHasCorrectProperties_Success_MemberData() =>
             from useSsl in new[] { false, true }
@@ -5189,7 +5216,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]
     public sealed class SocketsHttpHandlerTest_Cookies_Http2 : HttpClientHandlerTest_Cookies
     {
-        public SocketsHttpHandlerTest_Cookies_Http2(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_Cookies_Http2(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -5261,7 +5289,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_Cancellation_Test_Http2(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -5280,7 +5309,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(HttpClientHandlerTestBase), nameof(IsQuicSupported))]
     public sealed class SocketsHttpHandlerTest_Cookies_Http3 : HttpClientHandlerTest_Cookies
     {
-        public SocketsHttpHandlerTest_Cookies_Http3(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandlerTest_Cookies_Http3(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version30;
     }
@@ -5303,7 +5333,8 @@ namespace System.Net.Http.Functional.Tests
     {
         public SocketsHttpHandler_HttpClientHandler_Cancellation_Test_Http3(
             ITestOutputHelper output
-        ) : base(output) { }
+        )
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version30;
     }
@@ -5524,7 +5555,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public abstract class SocketsHttpHandler_SecurityTest : HttpClientHandlerTestBase
     {
-        public SocketsHttpHandler_SecurityTest(ITestOutputHelper output) : base(output) { }
+        public SocketsHttpHandler_SecurityTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindows7))]
         [SkipOnPlatform(
@@ -5737,6 +5769,7 @@ namespace System.Net.Http.Functional.Tests
 
     public class MySsl : SslStream
     {
-        public MySsl(Stream stream) : base(stream) { }
+        public MySsl(Stream stream)
+            : base(stream) { }
     }
 }

@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     {
         private readonly ServiceProvider _serviceProvider;
 
-        public DynamicServiceProviderEngine(ServiceProvider serviceProvider) : base(serviceProvider)
+        public DynamicServiceProviderEngine(ServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

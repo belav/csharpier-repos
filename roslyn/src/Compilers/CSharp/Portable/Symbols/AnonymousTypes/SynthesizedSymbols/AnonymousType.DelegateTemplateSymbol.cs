@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeSymbol? voidReturnTypeOpt,
                 int parameterCount,
                 RefKindVector refKinds
-            ) : base(manager, Location.None) // Location is not needed since NameAndIndex is set explicitly below.
+            )
+                : base(manager, Location.None) // Location is not needed since NameAndIndex is set explicitly below.
             {
                 Debug.Assert(
                     refKinds.IsNull
@@ -143,7 +144,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AnonymousTypeManager manager,
                 AnonymousTypeDescriptor typeDescr,
                 ImmutableArray<TypeParameterSymbol> typeParametersToSubstitute
-            ) : base(manager, typeDescr.Location)
+            )
+                : base(manager, typeDescr.Location)
             {
                 // AnonymousTypeOrDelegateComparer requires an actual location.
                 Debug.Assert(SmallestLocation != null);

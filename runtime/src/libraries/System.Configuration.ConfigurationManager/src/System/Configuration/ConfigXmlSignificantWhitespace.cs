@@ -18,7 +18,8 @@ namespace System.Configuration
             int line,
             string strData,
             XmlDocument doc
-        ) : base(strData, doc)
+        )
+            : base(strData, doc)
         {
             _line = line;
             _filename = filename;

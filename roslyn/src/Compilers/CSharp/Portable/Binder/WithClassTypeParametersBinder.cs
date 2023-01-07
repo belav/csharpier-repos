@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly NamedTypeSymbol _namedType;
         private MultiDictionary<string, TypeParameterSymbol> _lazyTypeParameterMap;
 
-        internal WithClassTypeParametersBinder(NamedTypeSymbol container, Binder next) : base(next)
+        internal WithClassTypeParametersBinder(NamedTypeSymbol container, Binder next)
+            : base(next)
         {
             Debug.Assert((object)container != null);
             _namedType = container;

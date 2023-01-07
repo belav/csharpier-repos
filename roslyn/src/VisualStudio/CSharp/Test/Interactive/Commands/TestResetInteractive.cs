@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             Func<string, string> createReference,
             Func<string, string> createImport,
             bool buildSucceeds
-        ) : base(editorOptionsService, createReference, createImport)
+        )
+            : base(editorOptionsService, createReference, createImport)
         {
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _buildSucceeds = buildSucceeds;

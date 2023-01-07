@@ -1093,7 +1093,8 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         IEnlistmentNotificationInternal enlistmentNotification,
         EnlistmentOptions enlistmentOptions,
         OletxTransaction oletxTransaction
-    ) : base(null!, oletxTransaction)
+    )
+        : base(null!, oletxTransaction)
     {
         _iEnlistmentNotification = enlistmentNotification;
         EnlistDuringPrepareRequired =

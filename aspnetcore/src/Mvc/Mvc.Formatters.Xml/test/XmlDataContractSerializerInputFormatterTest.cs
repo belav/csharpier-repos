@@ -860,7 +860,8 @@ public class XmlDataContractSerializerInputFormatterTest
     {
         public int createSerializerCalledCount = 0;
 
-        public TestXmlDataContractSerializerInputFormatter() : base(new MvcOptions()) { }
+        public TestXmlDataContractSerializerInputFormatter()
+            : base(new MvcOptions()) { }
 
         protected override DataContractSerializer CreateSerializer(Type type)
         {

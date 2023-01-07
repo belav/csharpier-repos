@@ -57,7 +57,8 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed class SafeSharedX509NameHandle : SafeInteriorHandle
     {
-        public SafeSharedX509NameHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSharedX509NameHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
     }
 
     /// <summary>
@@ -66,6 +67,7 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed class SafeSharedX509NameStackHandle : SafeInteriorHandle
     {
-        public SafeSharedX509NameStackHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSharedX509NameStackHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
     }
 }

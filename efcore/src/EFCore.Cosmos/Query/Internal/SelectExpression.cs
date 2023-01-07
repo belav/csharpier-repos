@@ -79,7 +79,8 @@ public class SelectExpression : Expression
         RootReferenceExpression fromExpression,
         List<OrderingExpression> orderings,
         string container
-    ) : this(projections, fromExpression, orderings)
+    )
+        : this(projections, fromExpression, orderings)
     {
         Container = container;
     }

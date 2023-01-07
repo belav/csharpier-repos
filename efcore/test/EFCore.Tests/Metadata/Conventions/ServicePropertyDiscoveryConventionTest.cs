@@ -358,7 +358,8 @@ public class ServicePropertyDiscoveryConventionTest
             IEntityType? entityType,
             ILazyLoader? aLazyLoader,
             Action<object, string>? lazyLoader
-        ) : base(id, context, entityType, aLazyLoader, lazyLoader) { }
+        )
+            : base(id, context, entityType, aLazyLoader, lazyLoader) { }
     }
 
     protected class PublicUnmappedBaseSub : PublicUnmappedBaseSuper
@@ -371,7 +372,8 @@ public class ServicePropertyDiscoveryConventionTest
             IEntityType? entityType,
             ILazyLoader? aLazyLoader,
             Action<object, string>? lazyLoader
-        ) : base(id, context, entityType, aLazyLoader, lazyLoader) { }
+        )
+            : base(id, context, entityType, aLazyLoader, lazyLoader) { }
     }
 
     protected class PublicMappedBase

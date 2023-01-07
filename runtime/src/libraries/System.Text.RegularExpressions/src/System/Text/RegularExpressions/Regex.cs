@@ -56,13 +56,15 @@ namespace System.Text.RegularExpressions
         public Regex(
             [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
             RegexOptions options
-        ) : this(pattern, options, s_defaultMatchTimeout, culture: null) { }
+        )
+            : this(pattern, options, s_defaultMatchTimeout, culture: null) { }
 
         public Regex(
             [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
             RegexOptions options,
             TimeSpan matchTimeout
-        ) : this(pattern, options, matchTimeout, culture: null) { }
+        )
+            : this(pattern, options, matchTimeout, culture: null) { }
 
         internal Regex(string pattern, CultureInfo? culture)
         {

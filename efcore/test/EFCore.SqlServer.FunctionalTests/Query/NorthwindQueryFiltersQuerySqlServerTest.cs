@@ -13,7 +13,8 @@ public class NorthwindQueryFiltersQuerySqlServerTest
     public NorthwindQueryFiltersQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NorthwindQueryFiltersCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

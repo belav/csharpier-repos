@@ -49,9 +49,11 @@ namespace Microsoft.Test.ModuleCore
         }
 
         //Constructors
-        public TestModule() : this(null, null) { }
+        public TestModule()
+            : this(null, null) { }
 
-        public TestModule(string name, string desc) : base(name, desc, TestType.TestModule)
+        public TestModule(string name, string desc)
+            : base(name, desc, TestType.TestModule)
         {
             this.Guid = GetType().ToString();
 

@@ -10,7 +10,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
     {
         private readonly byte[] _buffer;
 
-        public XmlBuffer(string filePath) : this(File.ReadAllBytes(filePath)) { }
+        public XmlBuffer(string filePath)
+            : this(File.ReadAllBytes(filePath)) { }
 
         internal XmlBuffer(byte[] buffer)
         {

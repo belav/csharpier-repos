@@ -288,7 +288,8 @@ namespace System.IO.Tests
                 string path,
                 bool useAsync,
                 Action readAsyncInvoked
-            ) : base(path, FileMode.Open, FileAccess.Read, FileShare.Read, 0x1000, useAsync)
+            )
+                : base(path, FileMode.Open, FileAccess.Read, FileShare.Read, 0x1000, useAsync)
             {
                 _readAsyncInvoked = readAsyncInvoked;
             }

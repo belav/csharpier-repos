@@ -45,7 +45,8 @@ namespace Castle.Core.Logging
         /// Build a new trace logger based on the named TraceSource
         /// </summary>
         /// <param name="name">The name used to locate the best TraceSource. In most cases comes from the using type's fullname.</param>
-        public TraceLogger(string name) : base(name)
+        public TraceLogger(string name)
+            : base(name)
         {
             Initialize();
             Level = MapLoggerLevel(traceSource.Switch.Level);
@@ -57,7 +58,8 @@ namespace Castle.Core.Logging
         /// <param name="name">The name used to locate the best TraceSource. In most cases comes from the using type's fullname.</param>
         /// <param name="level">The default logging level at which this source should write messages. In almost all cases this
         /// default value will be overridden in the config file. </param>
-        public TraceLogger(string name, LoggerLevel level) : base(name, level)
+        public TraceLogger(string name, LoggerLevel level)
+            : base(name, level)
         {
             Initialize();
             Level = MapLoggerLevel(traceSource.Switch.Level);

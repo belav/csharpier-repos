@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 string source,
                 string packageName,
                 string versionOpt
-            ) : base(provider, searchResult)
+            )
+                : base(provider, searchResult)
             {
                 _source = source;
                 _packageName = packageName;

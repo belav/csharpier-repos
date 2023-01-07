@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         public EmbeddedTypeParameter(
             EmbeddedMethod containingMethod,
             TypeParameterSymbolAdapter underlyingTypeParameter
-        ) : base(containingMethod, underlyingTypeParameter)
+        )
+            : base(containingMethod, underlyingTypeParameter)
         {
             Debug.Assert(underlyingTypeParameter.AdaptedTypeParameterSymbol.IsDefinition);
         }

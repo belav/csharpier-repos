@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 PortableExecutableReference metadataReference,
                 bool exact,
                 CancellationToken cancellationToken
-            ) : base(provider, exact, cancellationToken)
+            )
+                : base(provider, exact, cancellationToken)
             {
                 _solution = solution;
                 _assembly = assembly;

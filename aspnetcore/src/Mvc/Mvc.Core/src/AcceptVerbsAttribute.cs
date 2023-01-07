@@ -24,7 +24,8 @@ public sealed class AcceptVerbsAttribute
     /// Initializes a new instance of the <see cref="AcceptVerbsAttribute" /> class.
     /// </summary>
     /// <param name="method">The HTTP method the action supports.</param>
-    public AcceptVerbsAttribute(string method) : this(new[] { method })
+    public AcceptVerbsAttribute(string method)
+        : this(new[] { method })
     {
         if (method == null)
         {

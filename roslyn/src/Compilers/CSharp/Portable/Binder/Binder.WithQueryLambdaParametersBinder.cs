@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 LambdaSymbol lambdaSymbol,
                 RangeVariableMap rangeVariableMap,
                 Binder next
-            ) : base(lambdaSymbol, next)
+            )
+                : base(lambdaSymbol, next)
             {
                 _rangeVariableMap = rangeVariableMap;
                 _parameterMap = new MultiDictionary<string, RangeVariableSymbol>();

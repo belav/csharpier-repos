@@ -27,7 +27,8 @@ public partial class VirtualFileResultExecutor
     public VirtualFileResultExecutor(
         ILoggerFactory loggerFactory,
         IWebHostEnvironment hostingEnvironment
-    ) : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
+    )
+        : base(CreateLogger<VirtualFileResultExecutor>(loggerFactory))
     {
         if (hostingEnvironment == null)
         {

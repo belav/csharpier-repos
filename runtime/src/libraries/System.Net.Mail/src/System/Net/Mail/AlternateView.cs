@@ -13,14 +13,17 @@ namespace System.Net.Mail
 
         internal AlternateView() { }
 
-        public AlternateView(string fileName) : base(fileName) { }
+        public AlternateView(string fileName)
+            : base(fileName) { }
 
-        public AlternateView(string fileName, string? mediaType) : base(fileName, mediaType) { }
+        public AlternateView(string fileName, string? mediaType)
+            : base(fileName, mediaType) { }
 
         public AlternateView(string fileName, ContentType? contentType)
             : base(fileName, contentType) { }
 
-        public AlternateView(Stream contentStream) : base(contentStream) { }
+        public AlternateView(Stream contentStream)
+            : base(contentStream) { }
 
         public AlternateView(Stream contentStream, string? mediaType)
             : base(contentStream, mediaType) { }

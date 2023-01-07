@@ -30,7 +30,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="eventSource">The event source.</param>
-        public EventCounter(string name, EventSource eventSource) : base(name, eventSource)
+        public EventCounter(string name, EventSource eventSource)
+            : base(name, eventSource)
         {
             _min = double.PositiveInfinity;
             _max = double.NegativeInfinity;

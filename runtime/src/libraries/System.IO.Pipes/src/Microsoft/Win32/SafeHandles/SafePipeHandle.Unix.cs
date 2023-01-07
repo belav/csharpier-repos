@@ -26,7 +26,8 @@ namespace Microsoft.Win32.SafeHandles
         private SafeHandle? _pipeSocketHandle;
         private volatile int _disposed;
 
-        internal SafePipeHandle(Socket namedPipeSocket) : base(ownsHandle: true)
+        internal SafePipeHandle(Socket namedPipeSocket)
+            : base(ownsHandle: true)
         {
             SetPipeSocketInterlocked(namedPipeSocket, ownsHandle: true);
             base.SetHandle(_pipeSocketHandle!.DangerousGetHandle());

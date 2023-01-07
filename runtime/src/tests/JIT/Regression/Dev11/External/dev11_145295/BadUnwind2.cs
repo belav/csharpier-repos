@@ -12,7 +12,8 @@ namespace Test
         {
             public int CalloutIndex { get; private set; }
 
-            public ReachedCallout(int calloutIndex) : base("ReachedCallout")
+            public ReachedCallout(int calloutIndex)
+                : base("ReachedCallout")
             {
                 this.CalloutIndex = calloutIndex;
             }

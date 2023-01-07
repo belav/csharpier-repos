@@ -62,7 +62,8 @@ namespace System.Xml.XPath
         /// <summary>
         /// Create a new document and load the content from the reader.
         /// </summary>
-        public XPathDocument(XmlReader reader) : this(reader, XmlSpace.Default) { }
+        public XPathDocument(XmlReader reader)
+            : this(reader, XmlSpace.Default) { }
 
         /// <summary>
         /// Create a new document from "reader", with whitespace handling controlled according to "space".

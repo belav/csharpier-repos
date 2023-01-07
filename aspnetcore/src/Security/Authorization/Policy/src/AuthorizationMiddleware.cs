@@ -57,7 +57,8 @@ public class AuthorizationMiddleware
         IAuthorizationPolicyProvider policyProvider,
         IServiceProvider services,
         ILogger<AuthorizationMiddleware> logger
-    ) : this(next, policyProvider, services)
+    )
+        : this(next, policyProvider, services)
     {
         _logger = logger;
     }
@@ -72,7 +73,8 @@ public class AuthorizationMiddleware
         RequestDelegate next,
         IAuthorizationPolicyProvider policyProvider,
         IServiceProvider services
-    ) : this(next, policyProvider)
+    )
+        : this(next, policyProvider)
     {
         ArgumentNullException.ThrowIfNull(services);
 

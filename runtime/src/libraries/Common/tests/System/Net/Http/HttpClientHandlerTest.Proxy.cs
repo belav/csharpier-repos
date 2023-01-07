@@ -24,7 +24,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandler_Proxy_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Proxy_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Proxy_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task Dispose_HandlerWithProxy_ProxyNotDisposed()

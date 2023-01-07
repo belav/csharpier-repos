@@ -50,7 +50,8 @@ namespace InteropTests
         private Object newValueB = new Object();
         private bool success;
 
-        public ThreadSafe() : this(10000) { }
+        public ThreadSafe()
+            : this(10000) { }
 
         public ThreadSafe(int loops)
         {

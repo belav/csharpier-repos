@@ -91,7 +91,13 @@ namespace System.DirectoryServices
             DirectoryEntry? searchRoot,
             string? filter,
             string[]? propertiesToLoad
-        ) : this(searchRoot, filter, propertiesToLoad, System.DirectoryServices.SearchScope.Subtree)
+        )
+            : this(
+                searchRoot,
+                filter,
+                propertiesToLoad,
+                System.DirectoryServices.SearchScope.Subtree
+            )
         {
             _scopeSpecified = false;
         }

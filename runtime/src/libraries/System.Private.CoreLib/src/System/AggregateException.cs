@@ -29,14 +29,16 @@ namespace System
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class.
         /// </summary>
-        public AggregateException() : this(SR.AggregateException_ctor_DefaultMessage) { }
+        public AggregateException()
+            : this(SR.AggregateException_ctor_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateException"/> class with
         /// a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public AggregateException(string? message) : base(message)
+        public AggregateException(string? message)
+            : base(message)
         {
             _innerExceptions = Array.Empty<Exception>();
         }
@@ -127,7 +129,8 @@ namespace System
             string? message,
             Exception[] innerExceptions,
             bool cloneExceptions
-        ) : base(message, innerExceptions.Length > 0 ? innerExceptions[0] : null)
+        )
+            : base(message, innerExceptions.Length > 0 ? innerExceptions[0] : null)
         {
             _innerExceptions = cloneExceptions
                 ? new Exception[innerExceptions.Length]

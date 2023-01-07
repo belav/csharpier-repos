@@ -23,7 +23,8 @@ namespace System.Data.Common
     )]
     public abstract class DBDataPermissionAttribute : CodeAccessSecurityAttribute
     {
-        protected DBDataPermissionAttribute(SecurityAction action) : base(action) { }
+        protected DBDataPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public bool AllowBlankPassword { get; set; }
         public string ConnectionString { get; set; }

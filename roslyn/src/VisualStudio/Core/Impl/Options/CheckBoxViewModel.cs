@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string preview,
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore
-        ) : this(option, description, preview, preview, info, optionStore) { }
+        )
+            : this(option, description, preview, preview, info, optionStore) { }
 
         public CheckBoxOptionViewModel(
             IOption option,
@@ -25,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             string falsePreview,
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore
-        ) : base(option, description, truePreview, falsePreview, info)
+        )
+            : base(option, description, truePreview, falsePreview, info)
         {
             SetProperty(
                 ref _isChecked,

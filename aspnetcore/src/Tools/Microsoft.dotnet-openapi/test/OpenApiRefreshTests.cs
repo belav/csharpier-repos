@@ -8,7 +8,8 @@ namespace Microsoft.DotNet.OpenApi.Refresh.Tests;
 
 public class OpenApiRefreshTests : OpenApiTestBase
 {
-    public OpenApiRefreshTests(ITestOutputHelper output) : base(output) { }
+    public OpenApiRefreshTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Fact]
     public async Task OpenApi_Refresh_Basic()

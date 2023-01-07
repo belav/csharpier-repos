@@ -43,7 +43,8 @@ public class SqlServerMigrationsSqlGenerator : MigrationsSqlGenerator
     public SqlServerMigrationsSqlGenerator(
         MigrationsSqlGeneratorDependencies dependencies,
         ICommandBatchPreparer commandBatchPreparer
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _commandBatchPreparer = commandBatchPreparer;
     }

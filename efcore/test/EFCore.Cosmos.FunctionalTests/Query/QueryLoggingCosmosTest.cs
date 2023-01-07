@@ -11,7 +11,8 @@ public class QueryLoggingCosmosTest
 {
     public QueryLoggingCosmosTest(
         NorthwindQueryCosmosFixtureInsensitive<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public class NorthwindQueryCosmosFixtureInsensitive<TModelCustomizer>
         : NorthwindQueryCosmosFixture<TModelCustomizer>

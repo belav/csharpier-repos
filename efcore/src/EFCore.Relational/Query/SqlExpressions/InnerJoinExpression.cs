@@ -26,7 +26,8 @@ public class InnerJoinExpression : PredicateJoinExpressionBase
         TableExpressionBase table,
         SqlExpression joinPredicate,
         IEnumerable<IAnnotation>? annotations
-    ) : base(table, joinPredicate, annotations) { }
+    )
+        : base(table, joinPredicate, annotations) { }
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)

@@ -10,7 +10,8 @@ public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotatio
     where TFixture : DataAnnotationRelationalTestBase<TFixture>.DataAnnotationRelationalFixtureBase,
         new()
 {
-    protected DataAnnotationRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected DataAnnotationRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void ForeignKey_to_ForeignKey_on_many_to_many()

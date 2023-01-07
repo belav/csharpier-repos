@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis
                 private GreenNode? _current;
                 private int _position;
 
-                internal Enumerator(in SyntaxTokenList list) : this()
+                internal Enumerator(in SyntaxTokenList list)
+                    : this()
                 {
                     if (list.Any())
                     {

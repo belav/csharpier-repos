@@ -657,7 +657,8 @@ public partial class NavigationExpandingExpressionVisitor
             NavigationExpandingExpressionVisitor navigationExpandingExpressionVisitor,
             NavigationExpansionExpression source,
             INavigationExpansionExtensibilityHelper extensibilityHelper
-        ) : base(navigationExpandingExpressionVisitor, source, extensibilityHelper)
+        )
+            : base(navigationExpandingExpressionVisitor, source, extensibilityHelper)
         {
             _logger = navigationExpandingExpressionVisitor._queryCompilationContext.Logger;
             _queryStateManager =

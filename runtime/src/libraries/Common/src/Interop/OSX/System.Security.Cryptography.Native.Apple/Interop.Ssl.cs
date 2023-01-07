@@ -691,7 +691,8 @@ namespace System.Net
 {
     internal sealed class SafeSslHandle : SafeHandle
     {
-        public SafeSslHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeSslHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         internal SafeSslHandle(IntPtr invalidHandleValue, bool ownsHandle)
             : base(invalidHandleValue, ownsHandle) { }

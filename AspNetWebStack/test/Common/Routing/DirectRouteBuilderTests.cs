@@ -193,7 +193,8 @@ namespace System.Web.Mvc.Routing
             public MockDirectRouteBuilder(
                 IReadOnlyCollection<TActionDescriptor> actionDescriptors,
                 bool targetIsAction
-            ) : base(actionDescriptors, targetIsAction) { }
+            )
+                : base(actionDescriptors, targetIsAction) { }
 
             public int TimesValidateParametersCalled { get; private set; }
 

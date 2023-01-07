@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 IForegroundNotificationService notificationService,
                 Action<NormalizedSnapshotSpanCollection> notifyEditorNow,
                 CancellationToken cancellationToken
-            ) : base(threadingContext)
+            )
+                : base(threadingContext)
             {
                 Contract.ThrowIfNull(notifyEditorNow);
                 _subjectBuffer = subjectBuffer;

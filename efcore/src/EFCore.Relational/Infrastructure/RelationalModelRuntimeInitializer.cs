@@ -35,7 +35,8 @@ public class RelationalModelRuntimeInitializer : ModelRuntimeInitializer
     public RelationalModelRuntimeInitializer(
         ModelRuntimeInitializerDependencies dependencies,
         RelationalModelRuntimeInitializerDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

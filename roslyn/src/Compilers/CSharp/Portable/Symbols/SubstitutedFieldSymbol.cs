@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SubstitutedFieldSymbol(
             SubstitutedNamedTypeSymbol containingType,
             FieldSymbol substitutedFrom
-        ) : base((FieldSymbol)substitutedFrom.OriginalDefinition)
+        )
+            : base((FieldSymbol)substitutedFrom.OriginalDefinition)
         {
             _containingType = containingType;
         }

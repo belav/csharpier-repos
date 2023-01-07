@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         [MemberNotNullWhen(true, nameof(_initialized))]
         public StackTraceExplorerRoot? Root { get; private set; }
 
-        public StackTraceExplorerToolWindow() : base(null)
+        public StackTraceExplorerToolWindow()
+            : base(null)
         {
             Caption = ServicesVSResources.Stack_Trace_Explorer;
             var dockPanel = new DockPanel { LastChildFill = true };

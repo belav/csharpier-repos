@@ -359,7 +359,8 @@ public class UserMigrationsIdGenerator : IMigrationsIdGenerator
 
     public class MyContext : DbContext
     {
-        public MyContext(DbContextOptions<MyContext> options) : base(options) { }
+        public MyContext(DbContextOptions<MyContext> options)
+            : base(options) { }
     }
 
     private ServiceProvider CreateDesignServiceProvider(

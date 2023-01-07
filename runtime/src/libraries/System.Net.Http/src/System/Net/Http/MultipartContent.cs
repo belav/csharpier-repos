@@ -35,9 +35,11 @@ namespace System.Net.Http
 
         #region Construction
 
-        public MultipartContent() : this("mixed", GetDefaultBoundary()) { }
+        public MultipartContent()
+            : this("mixed", GetDefaultBoundary()) { }
 
-        public MultipartContent(string subtype) : this(subtype, GetDefaultBoundary()) { }
+        public MultipartContent(string subtype)
+            : this(subtype, GetDefaultBoundary()) { }
 
         public MultipartContent(string subtype, string boundary)
         {

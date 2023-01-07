@@ -36,7 +36,8 @@ namespace System.Security.Cryptography.Cose
             List<CoseSignature> signatures,
             byte[] encodedProtectedHeader,
             bool isTagged
-        ) : base(protectedHeader, unprotectedHeader, content, encodedProtectedHeader, isTagged)
+        )
+            : base(protectedHeader, unprotectedHeader, content, encodedProtectedHeader, isTagged)
         {
             foreach (CoseSignature s in signatures)
             {

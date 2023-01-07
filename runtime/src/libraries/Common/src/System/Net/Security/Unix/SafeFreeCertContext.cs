@@ -21,7 +21,8 @@ namespace System.Net.Security
 #endif
         private readonly SafeX509Handle? _certificate;
 
-        public SafeFreeCertContext(SafeX509Handle certificate) : base(IntPtr.Zero, true)
+        public SafeFreeCertContext(SafeX509Handle certificate)
+            : base(IntPtr.Zero, true)
         {
             // In certain scenarios (e.g. server querying for a client cert), the
             // input certificate may be invalid and this is OK

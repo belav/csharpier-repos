@@ -1972,7 +1972,8 @@ namespace System.Net.WebSockets
                 private bool _pongReceived;
                 private bool _receiveCompleted;
 
-                public ReceiveOperation(WebSocketBase webSocket) : base(webSocket) { }
+                public ReceiveOperation(WebSocketBase webSocket)
+                    : base(webSocket) { }
 
                 protected override WebSocketProtocolComponent.ActionQueue ActionQueue
                 {
@@ -2183,7 +2184,8 @@ namespace System.Net.WebSockets
             {
                 protected bool _BufferHasBeenPinned;
 
-                public SendOperation(WebSocketBase webSocket) : base(webSocket) { }
+                public SendOperation(WebSocketBase webSocket)
+                    : base(webSocket) { }
 
                 protected override WebSocketProtocolComponent.ActionQueue ActionQueue
                 {
@@ -2274,7 +2276,8 @@ namespace System.Net.WebSockets
 
             public sealed class CloseOutputOperation : SendOperation
             {
-                public CloseOutputOperation(WebSocketBase webSocket) : base(webSocket)
+                public CloseOutputOperation(WebSocketBase webSocket)
+                    : base(webSocket)
                 {
                     BufferType = WebSocketProtocolComponent.BufferType.Close;
                 }

@@ -31,7 +31,8 @@ namespace System.Xml
             string localName,
             string namespaceURI,
             XmlDocument doc
-        ) : base(prefix, localName, namespaceURI, doc)
+        )
+            : base(prefix, localName, namespaceURI, doc)
         {
             _state = ElementState.None;
         }

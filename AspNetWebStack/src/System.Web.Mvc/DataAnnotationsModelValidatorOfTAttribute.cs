@@ -12,7 +12,8 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             TAttribute attribute
-        ) : base(metadata, context, attribute) { }
+        )
+            : base(metadata, context, attribute) { }
 
         protected new TAttribute Attribute
         {

@@ -32,7 +32,8 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
         RelationalConnectionDependencies dependencies,
         IRawSqlCommandBuilder rawSqlCommandBuilder,
         IDiagnosticsLogger<DbLoggerCategory.Infrastructure> logger
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _rawSqlCommandBuilder = rawSqlCommandBuilder;
         _logger = logger;

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="span">The original span of the changed text.</param>
         /// <param name="newText">The new text.</param>
-        public TextChange(TextSpan span, string newText) : this()
+        public TextChange(TextSpan span, string newText)
+            : this()
         {
             if (newText == null)
             {

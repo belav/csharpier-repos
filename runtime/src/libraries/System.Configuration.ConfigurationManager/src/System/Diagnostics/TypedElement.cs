@@ -21,7 +21,8 @@ namespace System.Diagnostics
         protected object _runtimeObject;
         private Type _baseType;
 
-        public TypedElement(Type baseType) : base()
+        public TypedElement(Type baseType)
+            : base()
         {
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(s_propTypeName);

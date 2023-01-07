@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<(T first, T last)>.Empty
             );
 
-            internal NumericValueSet(T first, T last) : this(ImmutableArray.Create((first, last)))
+            internal NumericValueSet(T first, T last)
+                : this(ImmutableArray.Create((first, last)))
             {
                 Debug.Assert(default(TTC).Related(LessThanOrEqual, first, last));
             }

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteProjectTelemetryService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteProjectTelemetryService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

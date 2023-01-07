@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             CompilationOptionsReader optionsReader,
             CSharpParseOptions parseOptions,
             CSharpCompilationOptions compilationOptions
-        ) : base(assemblyFileName, optionsReader)
+        )
+            : base(assemblyFileName, optionsReader)
         {
             Debug.Assert(optionsReader.GetLanguageName() == LanguageNames.CSharp);
             ParseOptions = parseOptions;

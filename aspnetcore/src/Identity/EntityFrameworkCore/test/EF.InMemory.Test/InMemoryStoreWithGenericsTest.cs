@@ -367,12 +367,14 @@ public class IdentityUserRoleWithDate : IdentityUserRole<string>
 
 public class MyIdentityRole : IdentityRole<string>
 {
-    public MyIdentityRole() : base()
+    public MyIdentityRole()
+        : base()
     {
         Id = Guid.NewGuid().ToString();
     }
 
-    public MyIdentityRole(string roleName) : this()
+    public MyIdentityRole(string roleName)
+        : this()
     {
         Name = roleName;
     }

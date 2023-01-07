@@ -9,7 +9,8 @@ namespace Internal.CommandLine
     {
         public ArgumentSyntaxException() { }
 
-        public ArgumentSyntaxException(string message) : base(message) { }
+        public ArgumentSyntaxException(string message)
+            : base(message) { }
 
         public ArgumentSyntaxException(string message, Exception innerException)
             : base(message, innerException) { }

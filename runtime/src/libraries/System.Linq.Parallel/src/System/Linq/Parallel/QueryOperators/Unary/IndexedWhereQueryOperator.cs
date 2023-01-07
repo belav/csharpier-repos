@@ -43,7 +43,8 @@ namespace System.Linq.Parallel
         internal IndexedWhereQueryOperator(
             IEnumerable<TInputOutput> child,
             Func<TInputOutput, int, bool> predicate
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(predicate != null, "need a filter function");

@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis
         protected BindingDiagnosticBag(
             DiagnosticBag? diagnosticBag,
             ICollection<TAssemblySymbol>? dependenciesBag
-        ) : base(diagnosticBag)
+        )
+            : base(diagnosticBag)
         {
             Debug.Assert(diagnosticBag?.GetType().IsValueType != true);
             DependenciesBag = dependenciesBag;

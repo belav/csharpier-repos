@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 {
     public class ParserRegressionTests : ParsingTests
     {
-        public ParserRegressionTests(ITestOutputHelper output) : base(output) { }
+        public ParserRegressionTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

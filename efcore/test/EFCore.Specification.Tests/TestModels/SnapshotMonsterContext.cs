@@ -48,7 +48,8 @@ public class SnapshotMonsterContext
         SnapshotMonsterContext.ProductPageView
     >
 {
-    public SnapshotMonsterContext(DbContextOptions options) : base(options) { }
+    public SnapshotMonsterContext(DbContextOptions options)
+        : base(options) { }
 
     public class BackOrderLine2 : BackOrderLine { }
 

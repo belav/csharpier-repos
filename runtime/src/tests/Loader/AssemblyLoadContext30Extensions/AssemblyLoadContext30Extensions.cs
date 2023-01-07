@@ -9,7 +9,8 @@ namespace My
 {
     public class CustomAssemblyLoadContext : AssemblyLoadContext
     {
-        public CustomAssemblyLoadContext() : base() { }
+        public CustomAssemblyLoadContext()
+            : base() { }
     }
 }
 

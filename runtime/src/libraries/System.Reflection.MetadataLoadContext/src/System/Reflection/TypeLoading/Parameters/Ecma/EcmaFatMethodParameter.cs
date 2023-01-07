@@ -22,7 +22,8 @@ namespace System.Reflection.TypeLoading.Ecma
             int position,
             Type parameterType,
             ParameterHandle handle
-        ) : base(roMethodBase, position, parameterType)
+        )
+            : base(roMethodBase, position, parameterType)
         {
             Debug.Assert(roMethodBase != null);
             Debug.Assert(parameterType != null);

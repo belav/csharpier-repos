@@ -57,7 +57,8 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 
     protected class MyContext29219 : DbContext
     {
-        public MyContext29219(DbContextOptions options) : base(options) { }
+        public MyContext29219(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<MyEntity29219> Entities { get; set; }
 
@@ -230,7 +231,8 @@ public abstract class JsonQueryAdHocTestBase : NonSharedModelTestBase
 
     protected class MyContextArrayOfPrimitives : DbContext
     {
-        public MyContextArrayOfPrimitives(DbContextOptions options) : base(options) { }
+        public MyContextArrayOfPrimitives(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<MyEntityArrayOfPrimitives> Entities { get; set; }
 

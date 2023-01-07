@@ -46,7 +46,8 @@ public class ActionContext
         HttpContext httpContext,
         RouteData routeData,
         ActionDescriptor actionDescriptor
-    ) : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary()) { }
+    )
+        : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary()) { }
 
     /// <summary>
     /// Creates a new <see cref="ActionContext"/>.

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 SyntaxNode targetNode,
                 Document document,
                 Diagnostic diagnostic
-            ) : base(fixer, FeaturesResources.in_Source_attribute)
+            )
+                : base(fixer, FeaturesResources.in_Source_attribute)
             {
                 _fixer = fixer;
                 _targetSymbol = targetSymbol;

@@ -79,7 +79,8 @@ public class ModelCodeGeneratorSelectorTest
 
     private class TestModelCodeGenerator : ModelCodeGenerator
     {
-        public TestModelCodeGenerator(string language) : base(new ModelCodeGeneratorDependencies())
+        public TestModelCodeGenerator(string language)
+            : base(new ModelCodeGeneratorDependencies())
         {
             Language = language;
         }

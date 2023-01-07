@@ -27,12 +27,14 @@ namespace System
     )]
     public sealed class ExecutionEngineException : SystemException
     {
-        public ExecutionEngineException() : base(SR.Arg_ExecutionEngineException)
+        public ExecutionEngineException()
+            : base(SR.Arg_ExecutionEngineException)
         {
             HResult = HResults.COR_E_EXECUTIONENGINE;
         }
 
-        public ExecutionEngineException(string? message) : base(message)
+        public ExecutionEngineException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_EXECUTIONENGINE;
         }

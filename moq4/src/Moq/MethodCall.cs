@@ -35,7 +35,8 @@ namespace Moq
             Mock mock,
             Condition condition,
             MethodExpectation expectation
-        ) : base(originalExpression, mock, expectation)
+        )
+            : base(originalExpression, mock, expectation)
         {
             this.condition = condition;
 

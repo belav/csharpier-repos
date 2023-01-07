@@ -91,8 +91,8 @@ namespace Roslyn.Utilities
         /// <exception cref="ArgumentNullException">
         /// If <paramref name="instance"/> is <see langword="null"/>.
         /// </exception>
-        public ReferenceCountedDisposable(T instance) : this(instance, new BoxedReferenceCount(1))
-        { }
+        public ReferenceCountedDisposable(T instance)
+            : this(instance, new BoxedReferenceCount(1)) { }
 
         private ReferenceCountedDisposable(T instance, BoxedReferenceCount referenceCount)
         {
@@ -232,7 +232,8 @@ namespace Roslyn.Utilities
         {
             private readonly BoxedReferenceCount? _boxedReferenceCount;
 
-            public WeakReference(ReferenceCountedDisposable<T> reference) : this()
+            public WeakReference(ReferenceCountedDisposable<T> reference)
+                : this()
             {
                 if (reference == null)
                 {

@@ -142,13 +142,16 @@ namespace System.Xml
         );
 
         // Initializes a new instance of the XmlDocument class.
-        public XmlDocument() : this(new XmlImplementation()) { }
+        public XmlDocument()
+            : this(new XmlImplementation()) { }
 
         // Initializes a new instance
         // of the XmlDocument class with the specified XmlNameTable.
-        public XmlDocument(XmlNameTable nt) : this(new XmlImplementation(nt)) { }
+        public XmlDocument(XmlNameTable nt)
+            : this(new XmlImplementation(nt)) { }
 
-        protected internal XmlDocument(XmlImplementation imp) : base()
+        protected internal XmlDocument(XmlImplementation imp)
+            : base()
         {
             _implementation = imp;
             _domNameTable = new DomNameTable(this);

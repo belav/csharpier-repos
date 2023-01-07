@@ -2138,8 +2138,8 @@ namespace System.Text.Json.Serialization.Tests
 
     public class NumberHandlingTests_SyncOverload : NumberHandlingTests_OverloadSpecific
     {
-        public NumberHandlingTests_SyncOverload() : base(DeserializationWrapper.StringDeserializer)
-        { }
+        public NumberHandlingTests_SyncOverload()
+            : base(DeserializationWrapper.StringDeserializer) { }
     }
 
     public abstract class NumberHandlingTests_OverloadSpecific

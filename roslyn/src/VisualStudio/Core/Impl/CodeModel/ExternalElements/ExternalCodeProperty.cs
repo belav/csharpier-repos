@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             IPropertySymbol symbol
-        ) : base(state, projectId, symbol) { }
+        )
+            : base(state, projectId, symbol) { }
 
         private IPropertySymbol PropertySymbol
         {

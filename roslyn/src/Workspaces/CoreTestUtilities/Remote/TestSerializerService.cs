@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
         public TestSerializerService(
             ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences,
             SolutionServices workspaceServices
-        ) : base(workspaceServices)
+        )
+            : base(workspaceServices)
         {
             _sharedTestGeneratorReferences = sharedTestGeneratorReferences;
         }

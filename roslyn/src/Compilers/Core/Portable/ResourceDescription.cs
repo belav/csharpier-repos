@@ -62,8 +62,15 @@ namespace Microsoft.CodeAnalysis
             string? fileName,
             Func<Stream> dataProvider,
             bool isPublic
-        ) : this(resourceName, fileName, dataProvider, isPublic, isEmbedded: false, checkArgs: true)
-        { }
+        )
+            : this(
+                resourceName,
+                fileName,
+                dataProvider,
+                isPublic,
+                isEmbedded: false,
+                checkArgs: true
+            ) { }
 
         internal ResourceDescription(
             string resourceName,

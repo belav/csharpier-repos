@@ -21,7 +21,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public Errata4(ITestOutputHelper output) : base(output)
+        public Errata4(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

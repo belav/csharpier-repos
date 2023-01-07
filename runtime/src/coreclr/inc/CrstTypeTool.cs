@@ -824,7 +824,8 @@ class TypeFileParser
     internal class ParseError : Exception
     {
         // A raw error message.
-        public ParseError(string message) : base(message) { }
+        public ParseError(string message)
+            : base(message) { }
 
         // An error message tagged with a file, line and column (coming from an error token).
         public ParseError(string message, Token errorToken)
@@ -873,7 +874,8 @@ class TypeFileParser
     // Syntax error used when we unexpectedly ran out of tokens.
     internal class UnexpectedEofError : ParseError
     {
-        public UnexpectedEofError() : base("Unexpected end of file") { }
+        public UnexpectedEofError()
+            : base("Unexpected end of file") { }
     }
 }
 

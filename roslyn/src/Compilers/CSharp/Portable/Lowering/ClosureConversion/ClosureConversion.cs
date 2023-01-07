@@ -165,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics,
             HashSet<LocalSymbol> assignLocals
-        ) : base(slotAllocatorOpt, compilationState, diagnostics)
+        )
+            : base(slotAllocatorOpt, compilationState, diagnostics)
         {
             RoslynDebug.Assert(analysis != null);
             RoslynDebug.Assert((object)thisType != null);

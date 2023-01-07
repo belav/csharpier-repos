@@ -12,7 +12,8 @@ namespace System.Configuration
             LocalUserConfigFilename = string.Empty;
         }
 
-        public ExeConfigurationFileMap(string machineConfigFileName) : base(machineConfigFileName)
+        public ExeConfigurationFileMap(string machineConfigFileName)
+            : base(machineConfigFileName)
         {
             ExeConfigFilename = string.Empty;
             RoamingUserConfigFilename = string.Empty;
@@ -24,7 +25,8 @@ namespace System.Configuration
             string exeConfigFilename,
             string roamingUserConfigFilename,
             string localUserConfigFilename
-        ) : base(machineConfigFileName)
+        )
+            : base(machineConfigFileName)
         {
             ExeConfigFilename = exeConfigFilename;
             RoamingUserConfigFilename = roamingUserConfigFilename;

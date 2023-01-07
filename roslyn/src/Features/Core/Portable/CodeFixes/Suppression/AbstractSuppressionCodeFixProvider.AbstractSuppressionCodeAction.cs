@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
             protected AbstractSuppressionCodeAction(
                 AbstractSuppressionCodeFixProvider fixer,
                 string title
-            ) : base(title)
+            )
+                : base(title)
             {
                 _fixer = fixer;
             }

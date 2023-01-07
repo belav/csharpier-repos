@@ -33,7 +33,8 @@ namespace System.Net.Http.Formatting
         /// Initializes a new instance of the <see cref="BufferedMediaTypeFormatter"/> class.
         /// </summary>
         /// <param name="formatter">The <see cref="BufferedMediaTypeFormatter"/> instance to copy settings from.</param>
-        protected BufferedMediaTypeFormatter(BufferedMediaTypeFormatter formatter) : base(formatter)
+        protected BufferedMediaTypeFormatter(BufferedMediaTypeFormatter formatter)
+            : base(formatter)
         {
             BufferSize = formatter.BufferSize;
         }

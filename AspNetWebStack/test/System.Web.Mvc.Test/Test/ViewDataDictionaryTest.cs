@@ -545,7 +545,8 @@ namespace System.Web.Mvc.Test
 
         public class PersonPropertyDescriptor : PropertyDescriptor
         {
-            public PersonPropertyDescriptor() : base("Bar.Baz", null) { }
+            public PersonPropertyDescriptor()
+                : base("Bar.Baz", null) { }
 
             public override object GetValue(object component)
             {

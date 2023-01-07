@@ -32,7 +32,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         /// </summary>
         /// <param name="mediaType">The media type.</param>
         /// <param name="type">The CLR type.</param>
-        public HelpPageSampleKey(MediaTypeHeaderValue mediaType, Type type) : this(mediaType)
+        public HelpPageSampleKey(MediaTypeHeaderValue mediaType, Type type)
+            : this(mediaType)
         {
             if (type == null)
             {
@@ -97,7 +98,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
             string controllerName,
             string actionName,
             IEnumerable<string> parameterNames
-        ) : this(sampleDirection, controllerName, actionName, parameterNames)
+        )
+            : this(sampleDirection, controllerName, actionName, parameterNames)
         {
             if (mediaType == null)
             {

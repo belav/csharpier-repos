@@ -208,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private LocalSubstituter(
                 PooledDictionary<LocalSymbol, LocalSymbol> tempSubstitution,
                 int recursionDepth = 0
-            ) : base(recursionDepth)
+            )
+                : base(recursionDepth)
             {
                 _tempSubstitution = tempSubstitution;
             }
@@ -1505,7 +1506,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundExpression receiver,
                 int receiverId,
                 int recursionDepth
-            ) : base(recursionDepth)
+            )
+                : base(recursionDepth)
             {
                 _receiver = receiver;
                 _receiverId = receiverId;

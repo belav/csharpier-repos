@@ -69,6 +69,7 @@ namespace Mono.Linker.Tests.Cases.BCLFeatures.ETW
     class MyEventSourceBasedOnCustomCtorEventSourceEmptyBody : CustomCtorEventSourceEmptyBody
     {
         [Kept]
-        public MyEventSourceBasedOnCustomCtorEventSourceEmptyBody(int value) : base(value) { }
+        public MyEventSourceBasedOnCustomCtorEventSourceEmptyBody(int value)
+            : base(value) { }
     }
 }

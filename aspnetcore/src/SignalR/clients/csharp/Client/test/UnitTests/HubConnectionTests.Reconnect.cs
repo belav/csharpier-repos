@@ -1343,7 +1343,8 @@ public partial class HubConnectionTests
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
 
-            public ReconnectingConnectionFactory() : this(() => new TestConnection()) { }
+            public ReconnectingConnectionFactory()
+                : this(() => new TestConnection()) { }
 
             public ReconnectingConnectionFactory(Func<TestConnection> testConnectionFactory)
             {

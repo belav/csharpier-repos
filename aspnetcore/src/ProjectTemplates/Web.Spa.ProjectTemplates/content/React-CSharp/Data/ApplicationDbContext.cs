@@ -15,6 +15,7 @@ namespace Company.WebApplication1.Data
         public ApplicationDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions
-        ) : base(options, operationalStoreOptions) { }
+        )
+            : base(options, operationalStoreOptions) { }
     }
 }

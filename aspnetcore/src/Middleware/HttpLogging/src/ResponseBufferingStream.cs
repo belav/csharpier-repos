@@ -35,7 +35,8 @@ internal sealed class ResponseBufferingStream : BufferingStream, IHttpResponseBo
         HttpContext context,
         List<MediaTypeState> encodings,
         HttpLoggingOptions options
-    ) : base(innerBodyFeature.Stream, logger)
+    )
+        : base(innerBodyFeature.Stream, logger)
     {
         _innerBodyFeature = innerBodyFeature;
         _innerStream = innerBodyFeature.Stream;

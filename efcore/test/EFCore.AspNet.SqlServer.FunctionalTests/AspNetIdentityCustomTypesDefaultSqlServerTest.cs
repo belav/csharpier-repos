@@ -8,7 +8,8 @@ public class AspNetIdentityCustomTypesDefaultSqlServerTest
 {
     public AspNetIdentityCustomTypesDefaultSqlServerTest(
         AspNetIdentityCustomTypesDefaultSqlServerFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public class AspNetIdentityCustomTypesDefaultSqlServerFixture : AspNetIdentityFixtureBase
     {

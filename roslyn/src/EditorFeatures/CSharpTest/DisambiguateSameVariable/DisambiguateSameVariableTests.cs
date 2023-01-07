@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DisambiguateSameVariabl
     public class DisambiguateSameVariableTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public DisambiguateSameVariableTests(ITestOutputHelper logger) : base(logger) { }
+        public DisambiguateSameVariableTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

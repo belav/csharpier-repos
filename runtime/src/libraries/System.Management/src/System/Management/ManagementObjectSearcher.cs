@@ -82,7 +82,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New ManagementObjectSearcher()
         ///    </code>
         /// </example>
-        public ManagementObjectSearcher() : this((ManagementScope)null, null, null) { }
+        public ManagementObjectSearcher()
+            : this((ManagementScope)null, null, null) { }
 
         //parameterized constructors
         /// <summary>
@@ -113,7 +114,8 @@ namespace System.Management
         /// Dim s As New ManagementObjectSearcher(q)
         ///    </code>
         /// </example>
-        public ManagementObjectSearcher(ObjectQuery query) : this(null, query, null) { }
+        public ManagementObjectSearcher(ObjectQuery query)
+            : this(null, query, null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class used to invoke the
@@ -183,7 +185,8 @@ namespace System.Management
             string scope,
             string queryString,
             EnumerationOptions options
-        ) : this(new ManagementScope(scope), new ObjectQuery(queryString), options) { }
+        )
+            : this(new ManagementScope(scope), new ObjectQuery(queryString), options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObjectSearcher'/> class to be

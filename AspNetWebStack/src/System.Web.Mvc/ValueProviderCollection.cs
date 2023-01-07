@@ -15,7 +15,8 @@ namespace System.Web.Mvc
     {
         public ValueProviderCollection() { }
 
-        public ValueProviderCollection(IList<IValueProvider> list) : base(list) { }
+        public ValueProviderCollection(IList<IValueProvider> list)
+            : base(list) { }
 
         public virtual bool ContainsPrefix(string prefix)
         {

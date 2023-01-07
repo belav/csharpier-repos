@@ -16,7 +16,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class SchSendAuxRecordHttpTest : HttpClientHandlerTestBase
     {
-        public SchSendAuxRecordHttpTest(ITestOutputHelper output) : base(output) { }
+        public SchSendAuxRecordHttpTest(ITestOutputHelper output)
+            : base(output) { }
 
         private class CircularBuffer
         {

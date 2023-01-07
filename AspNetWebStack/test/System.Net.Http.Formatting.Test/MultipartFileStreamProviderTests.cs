@@ -10,9 +10,11 @@ namespace System.Net.Http
 {
     public class MockMultipartFileStreamProvider : MultipartFileStreamProvider
     {
-        public MockMultipartFileStreamProvider() : base(Path.GetTempPath()) { }
+        public MockMultipartFileStreamProvider()
+            : base(Path.GetTempPath()) { }
 
-        public MockMultipartFileStreamProvider(string rootPath) : base(rootPath) { }
+        public MockMultipartFileStreamProvider(string rootPath)
+            : base(rootPath) { }
 
         public MockMultipartFileStreamProvider(string rootPath, int bufferSize)
             : base(rootPath, bufferSize) { }

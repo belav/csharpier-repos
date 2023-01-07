@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FullyQualify
     [Trait(Traits.Feature, Traits.Features.CodeActionsFullyQualify)]
     public class FullyQualifyTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FullyQualifyTests(ITestOutputHelper logger) : base(logger) { }
+        public FullyQualifyTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

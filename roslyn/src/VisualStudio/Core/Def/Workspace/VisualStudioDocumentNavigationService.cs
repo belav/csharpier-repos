@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             SVsServiceProvider serviceProvider,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService,
             Lazy<SourceGeneratedFileManager> sourceGeneratedFileManager /* lazy to avoid circularities */
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
             _editorAdaptersFactoryService = editorAdaptersFactoryService;

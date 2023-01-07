@@ -22,7 +22,8 @@ namespace System.Web.WebPages.Razor
             "CA2214:DoNotCallOverridableMethodsInConstructors",
             Justification = "The code path is safe, it is a property setter and not dependent on other state"
         )]
-        public WebCodeRazorHost(string virtualPath) : base(virtualPath)
+        public WebCodeRazorHost(string virtualPath)
+            : base(virtualPath)
         {
             DefaultBaseClass = _helperPageBaseType;
             DefaultNamespace = DetermineNamespace(virtualPath);

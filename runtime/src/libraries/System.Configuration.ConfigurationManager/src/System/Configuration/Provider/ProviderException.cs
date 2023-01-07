@@ -13,7 +13,8 @@ namespace System.Configuration.Provider
     {
         public ProviderException() { }
 
-        public ProviderException(string message) : base(message) { }
+        public ProviderException(string message)
+            : base(message) { }
 
         public ProviderException(string message, Exception innerException)
             : base(message, innerException) { }

@@ -32,7 +32,8 @@ public class ViewDataDictionary : IDictionary<string, object?>
     public ViewDataDictionary(
         IModelMetadataProvider metadataProvider,
         ModelStateDictionary modelState
-    ) : this(metadataProvider, modelState, declaredModelType: typeof(object)) { }
+    )
+        : this(metadataProvider, modelState, declaredModelType: typeof(object)) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary"/> class based entirely on an existing

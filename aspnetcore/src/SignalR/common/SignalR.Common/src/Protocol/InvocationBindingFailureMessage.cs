@@ -33,7 +33,8 @@ public class InvocationBindingFailureMessage : HubInvocationMessage
         string? invocationId,
         string target,
         ExceptionDispatchInfo bindingFailure
-    ) : base(invocationId)
+    )
+        : base(invocationId)
     {
         Target = target;
         BindingFailure = bindingFailure;

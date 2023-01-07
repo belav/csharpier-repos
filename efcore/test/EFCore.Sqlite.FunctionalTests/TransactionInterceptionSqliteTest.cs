@@ -28,8 +28,8 @@ public abstract class TransactionInterceptionSqliteTestBase : TransactionInterce
         : TransactionInterceptionSqliteTestBase,
             IClassFixture<TransactionInterceptionSqliteTest.InterceptionSqliteFixture>
     {
-        public TransactionInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
-        { }
+        public TransactionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {

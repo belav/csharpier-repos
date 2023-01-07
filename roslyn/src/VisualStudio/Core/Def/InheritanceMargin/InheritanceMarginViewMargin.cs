@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListener listener,
             string languageName
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _textView = textView;
             _tagAggregator = tagAggregator;

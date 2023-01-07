@@ -944,7 +944,8 @@ namespace System.Web.Http.WebHost
 
         private class DelegatingStreamContent : StreamContent
         {
-            public DelegatingStreamContent(Stream stream) : base(stream) { }
+            public DelegatingStreamContent(Stream stream)
+                : base(stream) { }
 
             public Task WriteToStreamAsync(Stream stream, TransportContext context)
             {

@@ -84,7 +84,8 @@ namespace System.Net.Sockets
 
         private CancellationTokenSource? _multipleConnectCancellation;
 
-        public SocketAsyncEventArgs() : this(unsafeSuppressExecutionContextFlow: false) { }
+        public SocketAsyncEventArgs()
+            : this(unsafeSuppressExecutionContextFlow: false) { }
 
         /// <summary>Initialize the SocketAsyncEventArgs</summary>
         /// <param name="unsafeSuppressExecutionContextFlow">

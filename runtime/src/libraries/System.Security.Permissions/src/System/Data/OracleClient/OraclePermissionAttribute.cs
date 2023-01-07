@@ -23,7 +23,8 @@ namespace System.Data.OracleClient
     )]
     public sealed class OraclePermissionAttribute : CodeAccessSecurityAttribute
     {
-        public OraclePermissionAttribute(SecurityAction action) : base(action) { }
+        public OraclePermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public bool AllowBlankPassword { get; set; }
         public string ConnectionString

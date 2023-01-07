@@ -124,7 +124,7 @@ public abstract class LoggingTestBase
 
     protected class LoggingContext : DbContext
     {
-        public LoggingContext(DbContextOptionsBuilder optionsBuilder) : base(optionsBuilder.Options)
-        { }
+        public LoggingContext(DbContextOptionsBuilder optionsBuilder)
+            : base(optionsBuilder.Options) { }
     }
 }

@@ -12,12 +12,14 @@ namespace System.IO
     )]
     public class DriveNotFoundException : IOException
     {
-        public DriveNotFoundException() : base(SR.IO_DriveNotFound)
+        public DriveNotFoundException()
+            : base(SR.IO_DriveNotFound)
         {
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }
 
-        public DriveNotFoundException(string? message) : base(message)
+        public DriveNotFoundException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_DIRECTORYNOTFOUND;
         }

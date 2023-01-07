@@ -125,7 +125,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         {
             internal static readonly FunctionPointerType Instance = new FunctionPointerType();
 
-            private FunctionPointerType() : base(typeof(object).MakePointerType())
+            private FunctionPointerType()
+                : base(typeof(object).MakePointerType())
             {
                 Debug.Assert(this.IsPointer);
             }

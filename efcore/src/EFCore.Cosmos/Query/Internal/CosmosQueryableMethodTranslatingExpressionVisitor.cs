@@ -35,7 +35,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         ISqlExpressionFactory sqlExpressionFactory,
         IMemberTranslatorProvider memberTranslatorProvider,
         IMethodCallTranslatorProvider methodCallTranslatorProvider
-    ) : base(dependencies, queryCompilationContext, subquery: false)
+    )
+        : base(dependencies, queryCompilationContext, subquery: false)
     {
         _queryCompilationContext = queryCompilationContext;
         _sqlExpressionFactory = sqlExpressionFactory;
@@ -61,7 +62,8 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     /// </summary>
     protected CosmosQueryableMethodTranslatingExpressionVisitor(
         CosmosQueryableMethodTranslatingExpressionVisitor parentVisitor
-    ) : base(parentVisitor.Dependencies, parentVisitor.QueryCompilationContext, subquery: true)
+    )
+        : base(parentVisitor.Dependencies, parentVisitor.QueryCompilationContext, subquery: true)
     {
         _queryCompilationContext = parentVisitor._queryCompilationContext;
         _sqlExpressionFactory = parentVisitor._sqlExpressionFactory;

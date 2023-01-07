@@ -31,7 +31,8 @@ public class Navigation : PropertyBase, IMutableNavigation, IConventionNavigatio
         PropertyInfo? propertyInfo,
         FieldInfo? fieldInfo,
         ForeignKey foreignKey
-    ) : base(name, propertyInfo, fieldInfo, ConfigurationSource.Convention)
+    )
+        : base(name, propertyInfo, fieldInfo, ConfigurationSource.Convention)
     {
         ForeignKey = foreignKey;
 

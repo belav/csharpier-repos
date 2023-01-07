@@ -96,7 +96,8 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     internal sealed class EagerlyBuiltVTableSliceNode : PrecomputedVTableSliceNode
     {
-        public EagerlyBuiltVTableSliceNode(TypeDesc type) : base(type, ComputeSlots(type)) { }
+        public EagerlyBuiltVTableSliceNode(TypeDesc type)
+            : base(type, ComputeSlots(type)) { }
 
         private static IReadOnlyList<MethodDesc> ComputeSlots(TypeDesc type)
         {
@@ -139,7 +140,8 @@ namespace ILCompiler.DependencyAnalysis
         private HashSet<MethodDesc> _usedMethods = new HashSet<MethodDesc>();
         private MethodDesc[] _slots;
 
-        public LazilyBuiltVTableSliceNode(TypeDesc type) : base(type) { }
+        public LazilyBuiltVTableSliceNode(TypeDesc type)
+            : base(type) { }
 
         public override IReadOnlyList<MethodDesc> Slots
         {

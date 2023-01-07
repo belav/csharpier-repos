@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             string indentWhitespace,
             string eolWhitespace,
             bool useElasticTrivia
-        ) : base(visitIntoStructuredTrivia: true)
+        )
+            : base(visitIntoStructuredTrivia: true)
         {
             _consideredSpan = consideredSpan;
             _initialDepth = initialDepth;

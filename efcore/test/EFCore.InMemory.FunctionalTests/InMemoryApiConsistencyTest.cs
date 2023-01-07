@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class InMemoryApiConsistencyTest
     : ApiConsistencyTestBase<InMemoryApiConsistencyTest.InMemoryApiConsistencyFixture>
 {
-    public InMemoryApiConsistencyTest(InMemoryApiConsistencyFixture fixture) : base(fixture) { }
+    public InMemoryApiConsistencyTest(InMemoryApiConsistencyFixture fixture)
+        : base(fixture) { }
 
     protected override void AddServices(ServiceCollection serviceCollection) =>
         serviceCollection.AddEntityFrameworkInMemoryDatabase();

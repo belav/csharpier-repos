@@ -1013,7 +1013,8 @@ namespace System.Net.Http
         {
             private readonly int _maxSize;
 
-            public LimitMemoryStream(int maxSize, int capacity) : base(capacity)
+            public LimitMemoryStream(int maxSize, int capacity)
+                : base(capacity)
             {
                 Debug.Assert(capacity <= maxSize);
                 _maxSize = maxSize;
@@ -1123,8 +1124,8 @@ namespace System.Net.Http
             private byte[] _buffer;
             private int _length;
 
-            public LimitArrayPoolWriteStream(int maxBufferSize) : this(maxBufferSize, InitialLength)
-            { }
+            public LimitArrayPoolWriteStream(int maxBufferSize)
+                : this(maxBufferSize, InitialLength) { }
 
             public LimitArrayPoolWriteStream(int maxBufferSize, long capacity)
             {

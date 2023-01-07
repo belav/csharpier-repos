@@ -162,7 +162,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 string message,
                 SyntaxTree originalSyntaxTree,
                 SyntaxTree updatedSyntaxTree
-            ) : base(message)
+            )
+                : base(message)
             {
                 _originalSyntaxTree = originalSyntaxTree;
                 _updatedSyntaxTree = updatedSyntaxTree;

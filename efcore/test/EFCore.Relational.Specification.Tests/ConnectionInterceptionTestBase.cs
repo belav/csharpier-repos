@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 {
-    protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
+    protected ConnectionInterceptionTestBase(InterceptionFixtureBase fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false)]
@@ -658,7 +659,8 @@ public abstract class ConnectionInterceptionTestBase : InterceptionTestBase
 
     protected class BadUniverseContext : UniverseContext
     {
-        public BadUniverseContext(DbContextOptions options) : base(options) { }
+        public BadUniverseContext(DbContextOptions options)
+            : base(options) { }
     }
 
     protected class NoOpConnectionInterceptor : DbConnectionInterceptor { }

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AliasAmbiguousType
     [Trait(Traits.Feature, Traits.Features.CodeActionsAliasAmbiguousType)]
     public class AliasAmbiguousTypeTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AliasAmbiguousTypeTests(ITestOutputHelper logger) : base(logger) { }
+        public AliasAmbiguousTypeTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

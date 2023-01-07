@@ -32,7 +32,8 @@ public class SByteTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="SByteTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected SByteTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected SByteTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

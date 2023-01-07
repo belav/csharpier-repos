@@ -34,7 +34,8 @@ namespace System.IO.Pipes
         protected PipeCompletionSource(
             ThreadPoolBoundHandle handle,
             ReadOnlyMemory<byte> bufferToPin
-        ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+        )
+            : base(TaskCreationOptions.RunContinuationsAsynchronously)
         {
             Debug.Assert(handle != null, "handle is null");
 

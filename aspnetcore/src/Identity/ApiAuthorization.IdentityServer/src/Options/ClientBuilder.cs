@@ -69,7 +69,8 @@ public class ClientBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="ClientBuilder"/>.
     /// </summary>
-    public ClientBuilder() : this(new Client()) { }
+    public ClientBuilder()
+        : this(new Client()) { }
 
     /// <summary>
     /// Initializes a new intance of <see cref="ClientBuilder"/>.

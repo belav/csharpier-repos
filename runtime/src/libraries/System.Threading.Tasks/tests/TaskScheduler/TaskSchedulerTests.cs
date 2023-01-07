@@ -495,7 +495,8 @@ namespace System.Threading.Tasks.Tests
                 return _tasks;
             }
 
-            public BuggyTaskScheduler() : this(true) { }
+            public BuggyTaskScheduler()
+                : this(true) { }
 
             public BuggyTaskScheduler(bool faultQueues)
             {

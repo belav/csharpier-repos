@@ -42,7 +42,8 @@ namespace System.Net.Security
             string username,
             string password,
             string domain
-        ) : base(IntPtr.Zero, true)
+        )
+            : base(IntPtr.Zero, true)
         {
             Debug.Assert(
                 username != null && password != null,

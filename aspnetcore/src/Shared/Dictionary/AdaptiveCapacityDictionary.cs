@@ -29,20 +29,22 @@ internal sealed class AdaptiveCapacityDictionary<TKey, TValue>
     /// <summary>
     /// Creates an empty <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
-    public AdaptiveCapacityDictionary() : this(0, EqualityComparer<TKey>.Default) { }
+    public AdaptiveCapacityDictionary()
+        : this(0, EqualityComparer<TKey>.Default) { }
 
     /// <summary>
     /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
     /// <param name="comparer">Equality comparison.</param>
-    public AdaptiveCapacityDictionary(IEqualityComparer<TKey> comparer) : this(0, comparer) { }
+    public AdaptiveCapacityDictionary(IEqualityComparer<TKey> comparer)
+        : this(0, comparer) { }
 
     /// <summary>
     /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.
     /// </summary>
     /// <param name="capacity">Initial capacity.</param>
-    public AdaptiveCapacityDictionary(int capacity) : this(capacity, EqualityComparer<TKey>.Default)
-    { }
+    public AdaptiveCapacityDictionary(int capacity)
+        : this(capacity, EqualityComparer<TKey>.Default) { }
 
     /// <summary>
     /// Creates a <see cref="AdaptiveCapacityDictionary{TKey, TValue}"/>.

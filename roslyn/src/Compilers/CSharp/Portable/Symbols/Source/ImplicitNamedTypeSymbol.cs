@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceOrTypeSymbol containingSymbol,
             MergedTypeDeclaration declaration,
             BindingDiagnosticBag diagnostics
-        ) : base(containingSymbol, declaration, diagnostics)
+        )
+            : base(containingSymbol, declaration, diagnostics)
         {
             Debug.Assert(
                 declaration.Kind == DeclarationKind.ImplicitClass

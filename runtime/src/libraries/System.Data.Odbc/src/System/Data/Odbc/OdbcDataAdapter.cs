@@ -22,28 +22,33 @@ namespace System.Data.Odbc
             _selectCommand,
             _updateCommand;
 
-        public OdbcDataAdapter() : base()
+        public OdbcDataAdapter()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OdbcDataAdapter(OdbcCommand? selectCommand) : this()
+        public OdbcDataAdapter(OdbcCommand? selectCommand)
+            : this()
         {
             SelectCommand = selectCommand;
         }
 
-        public OdbcDataAdapter(string? selectCommandText, OdbcConnection? selectConnection) : this()
+        public OdbcDataAdapter(string? selectCommandText, OdbcConnection? selectConnection)
+            : this()
         {
             SelectCommand = new OdbcCommand(selectCommandText, selectConnection);
         }
 
-        public OdbcDataAdapter(string? selectCommandText, string? selectConnectionString) : this()
+        public OdbcDataAdapter(string? selectCommandText, string? selectConnectionString)
+            : this()
         {
             OdbcConnection connection = new OdbcConnection(selectConnectionString);
             SelectCommand = new OdbcCommand(selectCommandText, connection);
         }
 
-        private OdbcDataAdapter(OdbcDataAdapter from) : base(from)
+        private OdbcDataAdapter(OdbcDataAdapter from)
+            : base(from)
         {
             GC.SuppressFinalize(this);
         }

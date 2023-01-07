@@ -20,12 +20,14 @@ namespace System
     )]
     public sealed class StackOverflowException : SystemException
     {
-        public StackOverflowException() : base(SR.Arg_StackOverflowException)
+        public StackOverflowException()
+            : base(SR.Arg_StackOverflowException)
         {
             HResult = HResults.COR_E_STACKOVERFLOW;
         }
 
-        public StackOverflowException(string? message) : base(message)
+        public StackOverflowException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_STACKOVERFLOW;
         }

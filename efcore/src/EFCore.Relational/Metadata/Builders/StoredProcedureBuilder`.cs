@@ -21,7 +21,8 @@ public class StoredProcedureBuilder<TEntity>
     public StoredProcedureBuilder(
         IMutableStoredProcedure sproc,
         EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) : base(sproc, entityTypeBuilder) { }
+    )
+        : base(sproc, entityTypeBuilder) { }
 
     private EntityTypeBuilder<TEntity> EntityTypeBuilder =>
         (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).Instance;

@@ -19,7 +19,8 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     internal sealed partial class RuntimeArrayTypeInfo : RuntimeHasElementTypeInfo
     {
-        private RuntimeArrayTypeInfo(UnificationKey key, bool multiDim, int rank) : base(key)
+        private RuntimeArrayTypeInfo(UnificationKey key, bool multiDim, int rank)
+            : base(key)
         {
             Debug.Assert(multiDim || rank == 1);
             _multiDim = multiDim;

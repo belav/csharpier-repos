@@ -24,7 +24,8 @@ namespace System.Net.Http
             public ChunkedEncodingReadStream(
                 HttpConnection connection,
                 HttpResponseMessage response
-            ) : base(connection)
+            )
+                : base(connection)
             {
                 Debug.Assert(response != null, "The HttpResponseMessage cannot be null.");
                 _response = response;

@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class SwitchKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public SwitchKeywordRecommender() : base(SyntaxKind.SwitchKeyword) { }
+        public SwitchKeywordRecommender()
+            : base(SyntaxKind.SwitchKeyword) { }
 
         protected override bool IsValidContext(
             int position,

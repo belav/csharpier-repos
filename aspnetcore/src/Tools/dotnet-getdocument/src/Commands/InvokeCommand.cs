@@ -20,7 +20,8 @@ internal sealed class InvokeCommand : HelpCommandBase
     private readonly ProjectOptions _projectOptions = new ProjectOptions();
     private IList<string> _args;
 
-    public InvokeCommand(IConsole console) : base(console) { }
+    public InvokeCommand(IConsole console)
+        : base(console) { }
 
     public override void Configure(CommandLineApplication command)
     {

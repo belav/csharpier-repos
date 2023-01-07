@@ -14,21 +14,24 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerAbortTest : AbortTest
     {
-        public InvokerAbortTest(ITestOutputHelper output) : base(output) { }
+        public InvokerAbortTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientAbortTest : AbortTest
     {
-        public HttpClientAbortTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientAbortTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseHttpClient => true;
     }
 
     public class AbortTest : ClientWebSocketTestBase
     {
-        public AbortTest(ITestOutputHelper output) : base(output) { }
+        public AbortTest(ITestOutputHelper output)
+            : base(output) { }
 
         [OuterLoop(
             "Uses external servers",

@@ -32,7 +32,8 @@ public class CookieHeaderValue
     /// Initializes a new instance of <see cref="CookieHeaderValue"/>.
     /// </summary>
     /// <param name="name">The cookie name.</param>
-    public CookieHeaderValue(StringSegment name) : this(name, StringSegment.Empty)
+    public CookieHeaderValue(StringSegment name)
+        : this(name, StringSegment.Empty)
     {
         if (name == null)
         {

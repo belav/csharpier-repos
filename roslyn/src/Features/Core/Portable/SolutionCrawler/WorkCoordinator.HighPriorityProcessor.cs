@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         Lazy<ImmutableArray<IIncrementalAnalyzer>> lazyAnalyzers,
                         TimeSpan backOffTimeSpan,
                         CancellationToken shutdownToken
-                    ) : base(listener, backOffTimeSpan, shutdownToken)
+                    )
+                        : base(listener, backOffTimeSpan, shutdownToken)
                     {
                         _processor = processor;
                         _lazyAnalyzers = lazyAnalyzers;

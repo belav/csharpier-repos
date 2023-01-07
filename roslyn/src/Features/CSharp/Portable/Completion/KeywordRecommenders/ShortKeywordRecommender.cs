@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ShortKeywordRecommender : AbstractSpecialTypePreselectingKeywordRecommender
     {
-        public ShortKeywordRecommender() : base(SyntaxKind.ShortKeyword) { }
+        public ShortKeywordRecommender()
+            : base(SyntaxKind.ShortKeyword) { }
 
         protected override bool IsValidContextWorker(
             int position,

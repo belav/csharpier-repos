@@ -21,7 +21,8 @@ namespace System.Composition.UnitTests
 
         public class RuleExportAttribute : ExportAttribute
         {
-            public RuleExportAttribute() : base(typeof(IRule)) { }
+            public RuleExportAttribute()
+                : base(typeof(IRule)) { }
         }
 
         [RuleExport]

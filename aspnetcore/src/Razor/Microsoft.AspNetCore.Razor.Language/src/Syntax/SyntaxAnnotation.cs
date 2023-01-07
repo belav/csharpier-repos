@@ -29,12 +29,14 @@ internal sealed class SyntaxAnnotation : IEquatable<SyntaxAnnotation>
         _id = System.Threading.Interlocked.Increment(ref s_nextId);
     }
 
-    public SyntaxAnnotation(string kind) : this()
+    public SyntaxAnnotation(string kind)
+        : this()
     {
         Kind = kind;
     }
 
-    public SyntaxAnnotation(string kind, object data) : this(kind)
+    public SyntaxAnnotation(string kind, object data)
+        : this(kind)
     {
         Data = data;
     }

@@ -159,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalyzerOptions options,
             CompilationAnalysisValueProviderFactory compilationAnalysisValueProviderFactory,
             CancellationToken cancellationToken
-        ) : base(compilation, options, cancellationToken)
+        )
+            : base(compilation, options, cancellationToken)
         {
             _analyzer = analyzer;
             _scope = scope;
@@ -288,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalyzerOptions options,
             bool isGeneratedCode,
             CancellationToken cancellationToken
-        ) : base(owningSymbol, compilation, options, isGeneratedCode, cancellationToken)
+        )
+            : base(owningSymbol, compilation, options, isGeneratedCode, cancellationToken)
         {
             _analyzer = analyzer;
             _scope = scope;

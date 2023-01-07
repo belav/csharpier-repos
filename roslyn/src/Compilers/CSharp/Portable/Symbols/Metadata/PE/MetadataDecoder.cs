@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         public MetadataDecoder(PEModuleSymbol moduleSymbol, PEMethodSymbol context)
             : this(moduleSymbol, (PENamedTypeSymbol)context.ContainingType, context) { }
 
-        public MetadataDecoder(PEModuleSymbol moduleSymbol) : this(moduleSymbol, null, null) { }
+        public MetadataDecoder(PEModuleSymbol moduleSymbol)
+            : this(moduleSymbol, null, null) { }
 
         private MetadataDecoder(
             PEModuleSymbol moduleSymbol,

@@ -35,7 +35,8 @@ public abstract class TemporalRangeQueryRootExpression : TemporalQueryRootExpres
         IEntityType entityType,
         DateTime from,
         DateTime to
-    ) : base(queryProvider, entityType)
+    )
+        : base(queryProvider, entityType)
     {
         From = from;
         To = to;

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Testing;
 public class LoggedTest : LoggedTestBase
 {
     // Obsolete but keeping for back compat
-    public LoggedTest(ITestOutputHelper output = null) : base(output) { }
+    public LoggedTest(ITestOutputHelper output = null)
+        : base(output) { }
 
     public ITestSink TestSink { get; set; }
 

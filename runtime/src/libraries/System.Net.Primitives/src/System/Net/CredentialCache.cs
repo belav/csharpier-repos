@@ -354,7 +354,8 @@ namespace System.Net
                 public SingleTableCredentialEnumerator(
                     CredentialCache cache,
                     Dictionary<TKey, NetworkCredential> table
-                ) : base(cache)
+                )
+                    : base(cache)
                 {
                     Debug.Assert(table != null);
 
@@ -462,7 +463,8 @@ namespace System.Net
             new SystemNetworkCredential();
 
         // We want reference equality to work. Making this private is a good way to guarantee that.
-        private SystemNetworkCredential() : base(string.Empty, string.Empty, string.Empty) { }
+        private SystemNetworkCredential()
+            : base(string.Empty, string.Empty, string.Empty) { }
     }
 
     internal readonly struct CredentialHostKey : IEquatable<CredentialHostKey>

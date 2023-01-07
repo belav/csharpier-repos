@@ -526,7 +526,8 @@ namespace System.IO.Ports
             _dataReceivedHandler = new SerialDataReceivedEventHandler(CatchReceivedEvents);
         }
 
-        public SerialPort(IContainer container) : this()
+        public SerialPort(IContainer container)
+            : this()
         {
             // Required for Windows.Forms Class Composition Designer support
             container.Add(this);
@@ -556,7 +557,8 @@ namespace System.IO.Ports
             Parity parity,
             int dataBits,
             StopBits stopBits
-        ) : this()
+        )
+            : this()
         {
             PortName = portName;
             BaudRate = baudRate;

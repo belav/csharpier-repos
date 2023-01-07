@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class FilteredQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : class, IQueryFixtureBase, new()
 {
-    protected FilteredQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected FilteredQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public Task AssertFilteredQuery<TResult>(
         bool async,

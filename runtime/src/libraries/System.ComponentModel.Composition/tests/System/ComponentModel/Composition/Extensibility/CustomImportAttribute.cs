@@ -8,6 +8,7 @@ namespace System.ComponentModel.Composition.Extensibility
     {
         public CustomImportAttribute() { }
 
-        public CustomImportAttribute(Type type) : base(type) { }
+        public CustomImportAttribute(Type type)
+            : base(type) { }
     }
 }

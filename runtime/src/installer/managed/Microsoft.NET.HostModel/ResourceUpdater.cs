@@ -178,7 +178,8 @@ namespace Microsoft.NET.HostModel
         /// </summary>
         private sealed class SafeUpdateHandle : SafeHandle
         {
-            public SafeUpdateHandle() : base(IntPtr.Zero, true) { }
+            public SafeUpdateHandle()
+                : base(IntPtr.Zero, true) { }
 
             public override bool IsInvalid => handle == IntPtr.Zero;
 
@@ -535,7 +536,8 @@ namespace Microsoft.NET.HostModel
 
         private sealed class ResourceNotAvailableException : Exception
         {
-            public ResourceNotAvailableException(string message) : base(message) { }
+            public ResourceNotAvailableException(string message)
+                : base(message) { }
         }
 
         private static void ThrowExceptionForLastWin32Error()

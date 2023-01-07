@@ -11,7 +11,8 @@ internal sealed class HttpServerSessionHandle : CriticalHandleZeroOrMinusOneIsIn
     private int disposed;
     private readonly ulong serverSessionId;
 
-    internal HttpServerSessionHandle(ulong id) : base()
+    internal HttpServerSessionHandle(ulong id)
+        : base()
     {
         serverSessionId = id;
 

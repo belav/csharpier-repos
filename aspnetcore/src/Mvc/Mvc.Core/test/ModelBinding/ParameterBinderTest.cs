@@ -924,7 +924,8 @@ public class ParameterBinderTest
 
     public abstract class FakeModelMetadata : ModelMetadata
     {
-        public FakeModelMetadata() : base(ModelMetadataIdentity.ForType(typeof(string))) { }
+        public FakeModelMetadata()
+            : base(ModelMetadataIdentity.ForType(typeof(string))) { }
     }
 
     private void TestMethodWithoutAttributes(Person person) { }

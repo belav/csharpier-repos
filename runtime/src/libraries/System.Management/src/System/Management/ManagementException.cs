@@ -744,7 +744,8 @@ namespace System.Management
             ManagementStatus errorCode,
             string msg,
             ManagementBaseObject errObj
-        ) : base(msg)
+        )
+            : base(msg)
         {
             this.errorCode = errorCode;
             this.errorObject = errObj;
@@ -789,15 +790,16 @@ namespace System.Management
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementException'/> class</para>
         /// </summary>
-        public ManagementException() : this(ManagementStatus.Failed, "", null) { }
+        public ManagementException()
+            : this(ManagementStatus.Failed, "", null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementException'/>
         /// class with a specified error message.</para>
         /// </summary>
         /// <param name='message'>The message that describes the error.</param>
-        public ManagementException(string message) : this(ManagementStatus.Failed, message, null)
-        { }
+        public ManagementException(string message)
+            : this(ManagementStatus.Failed, message, null) { }
 
         /// <summary>
         /// <para>Initializes a empty new instance of the <see cref='System.Management.ManagementException'/> class </para>

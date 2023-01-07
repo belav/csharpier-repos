@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos;
 public class OptimisticConcurrencyCosmosTest
     : OptimisticConcurrencyTestBase<F1CosmosFixture<byte[]>, byte[]>
 {
-    public OptimisticConcurrencyCosmosTest(F1CosmosFixture<byte[]> fixture) : base(fixture)
+    public OptimisticConcurrencyCosmosTest(F1CosmosFixture<byte[]> fixture)
+        : base(fixture)
     {
         fixture.Reseed();
     }

@@ -1515,7 +1515,8 @@ public class ControllerBinderDelegateProviderTest
 
     public abstract class FakeModelMetadata : ModelMetadata
     {
-        public FakeModelMetadata() : base(ModelMetadataIdentity.ForType(typeof(string))) { }
+        public FakeModelMetadata()
+            : base(ModelMetadataIdentity.ForType(typeof(string))) { }
     }
 
     private class TestObjectModelValidator : IObjectModelValidator

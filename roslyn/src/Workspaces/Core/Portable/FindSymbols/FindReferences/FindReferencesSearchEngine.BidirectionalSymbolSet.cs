@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 FindReferencesSearchEngine engine,
                 MetadataUnifyingSymbolHashSet initialSymbols,
                 MetadataUnifyingSymbolHashSet upSymbols
-            ) : base(engine)
+            )
+                : base(engine)
             {
                 _allSymbols.AddRange(initialSymbols);
                 _allSymbols.AddRange(upSymbols);

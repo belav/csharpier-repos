@@ -80,7 +80,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpBinaryOperationFlags binaryOperationFlags,
             Type callingContext,
             IEnumerable<CSharpArgumentInfo> argumentInfo
-        ) : base(operation)
+        )
+            : base(operation)
         {
             _binopFlags = binaryOperationFlags;
             _callingContext = callingContext;

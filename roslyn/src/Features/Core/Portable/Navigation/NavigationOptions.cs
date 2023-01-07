@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Navigation
         bool ActivateTab = true
     )
     {
-        public NavigationOptions() : this(PreferProvisionalTab: false) { }
+        public NavigationOptions()
+            : this(PreferProvisionalTab: false) { }
 
         public static readonly NavigationOptions Default = new();
     }

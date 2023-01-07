@@ -17,7 +17,8 @@ namespace Microsoft.Cci
         protected readonly MetadataWriter metadataWriter;
         private readonly HashSet<IImportScope> _alreadySeenScopes = new HashSet<IImportScope>();
 
-        internal ReferenceIndexer(MetadataWriter metadataWriter) : base(metadataWriter.Context)
+        internal ReferenceIndexer(MetadataWriter metadataWriter)
+            : base(metadataWriter.Context)
         {
             this.metadataWriter = metadataWriter;
         }

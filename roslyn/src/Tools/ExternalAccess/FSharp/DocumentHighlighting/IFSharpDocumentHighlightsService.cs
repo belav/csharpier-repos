@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.DocumentHighlighting
         public TextSpan TextSpan { get; }
         public FSharpHighlightSpanKind Kind { get; }
 
-        public FSharpHighlightSpan(TextSpan textSpan, FSharpHighlightSpanKind kind) : this()
+        public FSharpHighlightSpan(TextSpan textSpan, FSharpHighlightSpanKind kind)
+            : this()
         {
             this.TextSpan = textSpan;
             this.Kind = kind;

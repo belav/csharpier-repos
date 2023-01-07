@@ -20,7 +20,8 @@ namespace System.Reflection.TypeLoading
         internal RoConstructedGenericType(
             RoDefinitionType genericTypeDefinition,
             RoType[] genericTypeArguments
-        ) : base()
+        )
+            : base()
         {
             Debug.Assert(genericTypeDefinition != null);
             Debug.Assert(genericTypeArguments != null);

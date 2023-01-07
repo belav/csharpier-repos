@@ -1100,7 +1100,8 @@ namespace System.Xml.XPath
             XPathNavigator navToRead,
             IXmlLineInfo xli,
             IXmlSchemaInfo? xsi
-        ) : base(navToRead, xli, xsi) { }
+        )
+            : base(navToRead, xli, xsi) { }
 
         //-----------------------------------------------
         // IXmlLineInfo
@@ -1130,7 +1131,8 @@ namespace System.Xml.XPath
             XPathNavigator navToRead,
             IXmlLineInfo xli,
             IXmlSchemaInfo xsi
-        ) : base(navToRead, xli, xsi) { }
+        )
+            : base(navToRead, xli, xsi) { }
 
         //-----------------------------------------------
         // IXmlSchemaInfo
@@ -1175,7 +1177,8 @@ namespace System.Xml.XPath
             XPathNavigator navToRead,
             IXmlLineInfo? xli,
             IXmlSchemaInfo xsi
-        ) : base(navToRead, xli, xsi)
+        )
+            : base(navToRead, xli, xsi)
         {
             schemaInfo = xsi;
         }

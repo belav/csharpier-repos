@@ -16,7 +16,8 @@ namespace System.Transactions
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public sealed class DistributedTransactionPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public DistributedTransactionPermissionAttribute(SecurityAction action) : base(action) { }
+        public DistributedTransactionPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public new bool Unrestricted { get; set; }
 

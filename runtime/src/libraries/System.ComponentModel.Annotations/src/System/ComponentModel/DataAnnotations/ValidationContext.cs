@@ -46,7 +46,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="instance">The object instance being validated.  It cannot be <c>null</c>.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
-        public ValidationContext(object instance) : this(instance, null, null) { }
+        public ValidationContext(object instance)
+            : this(instance, null, null) { }
 
         /// <summary>
         ///     Construct a <see cref="ValidationContext" /> for a given object instance and an optional

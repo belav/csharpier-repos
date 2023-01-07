@@ -18,7 +18,8 @@ namespace Microsoft.CSharp.RuntimeBinder
     [EditorBrowsable(EditorBrowsableState.Never)]
     internal sealed class DynamicBindingFailedException : Exception
     {
-        public DynamicBindingFailedException() : base() { }
+        public DynamicBindingFailedException()
+            : base() { }
 
         private DynamicBindingFailedException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
@@ -26,7 +27,8 @@ namespace Microsoft.CSharp.RuntimeBinder
 
     internal sealed class GetMemberValueBinder : GetMemberBinder
     {
-        public GetMemberValueBinder(string name, bool ignoreCase) : base(name, ignoreCase) { }
+        public GetMemberValueBinder(string name, bool ignoreCase)
+            : base(name, ignoreCase) { }
 
         public override DynamicMetaObject FallbackGetMember(
             DynamicMetaObject self,

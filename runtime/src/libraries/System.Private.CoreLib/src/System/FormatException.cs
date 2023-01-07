@@ -20,12 +20,14 @@ namespace System
     )]
     public class FormatException : SystemException
     {
-        public FormatException() : base(SR.Arg_FormatException)
+        public FormatException()
+            : base(SR.Arg_FormatException)
         {
             HResult = HResults.COR_E_FORMAT;
         }
 
-        public FormatException(string? message) : base(message)
+        public FormatException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_FORMAT;
         }

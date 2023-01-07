@@ -18,7 +18,8 @@ namespace System.Net.Http.Headers
             UriKind.RelativeOrAbsolute
         );
 
-        private UriHeaderParser(UriKind uriKind) : base(false)
+        private UriHeaderParser(UriKind uriKind)
+            : base(false)
         {
             _uriKind = uriKind;
         }

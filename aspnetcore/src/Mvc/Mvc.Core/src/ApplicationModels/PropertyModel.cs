@@ -28,7 +28,8 @@ public class PropertyModel : ParameterModelBase, ICommonModel, IBindingModel
     /// Creates a new instance of <see cref="PropertyModel"/> from a given <see cref="PropertyModel"/>.
     /// </summary>
     /// <param name="other">The <see cref="PropertyModel"/> which needs to be copied.</param>
-    public PropertyModel(PropertyModel other) : base(other)
+    public PropertyModel(PropertyModel other)
+        : base(other)
     {
         if (other == null)
         {

@@ -29,7 +29,8 @@ public abstract class SharedTypeQueryRelationalTestBase : SharedTypeQueryTestBas
 
     protected class MyContextRelational24601 : MyContext24601
     {
-        public MyContextRelational24601(DbContextOptions options) : base(options) { }
+        public MyContextRelational24601(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

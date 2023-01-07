@@ -26,7 +26,8 @@ namespace System.Web.Razor.Editor
             Func<string, IEnumerable<ISymbol>> tokenizer,
             ISet<string> keywords,
             bool acceptTrailingDot
-        ) : base(tokenizer)
+        )
+            : base(tokenizer)
         {
             Initialize(keywords, acceptTrailingDot);
         }

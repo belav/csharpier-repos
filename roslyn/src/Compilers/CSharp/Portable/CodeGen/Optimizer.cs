@@ -315,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         public readonly int Start;
         public readonly int End;
 
-        public LocalDefUseSpan(int start) : this(start, start) { }
+        public LocalDefUseSpan(int start)
+            : this(start, start) { }
 
         private LocalDefUseSpan(int start, int end)
         {
@@ -826,7 +827,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             private readonly LocalSymbol _local;
             private bool _found;
 
-            internal LocalUsedWalker(LocalSymbol local, int recursionDepth) : base(recursionDepth)
+            internal LocalUsedWalker(LocalSymbol local, int recursionDepth)
+                : base(recursionDepth)
             {
                 _local = local;
             }

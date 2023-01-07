@@ -72,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             IMetadataAsSourceFileService fileTrackingMetadataAsSourceService,
             VisualStudioWorkspace visualStudioWorkspace,
             SVsServiceProvider serviceProvider
-        ) : base(visualStudioWorkspace.Services.HostServices, WorkspaceKind.MiscellaneousFiles)
+        )
+            : base(visualStudioWorkspace.Services.HostServices, WorkspaceKind.MiscellaneousFiles)
         {
             _foregroundThreadAffinitization = new ForegroundThreadAffinitizedObject(
                 threadingContext,

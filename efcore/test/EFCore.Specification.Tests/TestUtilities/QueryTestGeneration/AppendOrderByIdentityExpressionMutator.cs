@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class AppendOrderByIdentityExpressionMutator : ExpressionMutator
 {
-    public AppendOrderByIdentityExpressionMutator(DbContext context) : base(context) { }
+    public AppendOrderByIdentityExpressionMutator(DbContext context)
+        : base(context) { }
 
     public override bool IsValid(Expression expression) =>
         IsQueryableResult(expression)

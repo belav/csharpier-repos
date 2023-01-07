@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class UpdatesRelationalTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesRelationalTestBase<TFixture>.UpdatesRelationalFixture
 {
-    protected UpdatesRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected UpdatesRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void SaveChanges_works_for_entities_also_mapped_to_view() =>

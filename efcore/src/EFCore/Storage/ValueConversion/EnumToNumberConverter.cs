@@ -33,7 +33,8 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public EnumToNumberConverter() : this(null) { }
+    public EnumToNumberConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter. This converter preserves order.

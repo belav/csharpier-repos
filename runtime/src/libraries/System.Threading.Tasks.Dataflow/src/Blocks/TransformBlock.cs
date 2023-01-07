@@ -66,7 +66,8 @@ namespace System.Threading.Tasks.Dataflow
         public TransformBlock(
             Func<TInput, TOutput> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) : this(transform, null, dataflowBlockOptions) { }
+        )
+            : this(transform, null, dataflowBlockOptions) { }
 
         /// <summary>Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>.</summary>
         /// <param name="transform">The function to invoke with each data element received.</param>
@@ -85,7 +86,8 @@ namespace System.Threading.Tasks.Dataflow
         public TransformBlock(
             Func<TInput, Task<TOutput>> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
-        ) : this(null, transform, dataflowBlockOptions) { }
+        )
+            : this(null, transform, dataflowBlockOptions) { }
 
         /// <summary>
         /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>

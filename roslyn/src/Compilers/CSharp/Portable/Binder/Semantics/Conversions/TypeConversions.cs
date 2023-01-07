@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int currentRecursionDepth,
             bool includeNullability,
             TypeConversions otherNullabilityOpt
-        ) : base(corLibrary, currentRecursionDepth, includeNullability, otherNullabilityOpt) { }
+        )
+            : base(corLibrary, currentRecursionDepth, includeNullability, otherNullabilityOpt) { }
 
         protected override ConversionsBase CreateInstance(int currentRecursionDepth)
         {

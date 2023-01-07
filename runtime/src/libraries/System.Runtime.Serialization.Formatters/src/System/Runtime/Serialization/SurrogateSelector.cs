@@ -200,7 +200,8 @@ namespace System.Runtime.Serialization
     // Subclass to override KeyEquals.
     internal sealed class SurrogateHashtable : Hashtable
     {
-        internal SurrogateHashtable(int size) : base(size) { }
+        internal SurrogateHashtable(int size)
+            : base(size) { }
 
         // Must return true if the context to serialize for (givenContext)
         // is a subset of the context for which the serialization selector is provided (presentContext)

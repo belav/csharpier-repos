@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private readonly int _globalIncrement;
 
-        private VersionStamp(DateTime utcLastModified) : this(utcLastModified, 0) { }
+        private VersionStamp(DateTime utcLastModified)
+            : this(utcLastModified, 0) { }
 
         private VersionStamp(DateTime utcLastModified, int localIncrement)
             : this(utcLastModified, localIncrement, GetNextGlobalVersion()) { }

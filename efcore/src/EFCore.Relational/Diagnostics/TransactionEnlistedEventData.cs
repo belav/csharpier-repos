@@ -30,7 +30,8 @@ public class TransactionEnlistedEventData : EventData
         Transaction transaction,
         DbConnection connection,
         Guid connectionId
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         Transaction = transaction;
         Connection = connection;

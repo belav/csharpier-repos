@@ -882,7 +882,8 @@ namespace System.Text
             internal short bLeftOver3 = -1;
             internal short bLeftOver4 = -1;
 
-            internal GB18030Decoder(EncodingNLS encoding) : base(encoding)
+            internal GB18030Decoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 // DecoderNLS Calls reset
             }

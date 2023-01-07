@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor
             Solution solution,
             DocumentId documentId,
             ImmutableArray<TodoCommentData> todoItems
-        ) : base(id, solution.Workspace, documentId.ProjectId, documentId)
+        )
+            : base(id, solution.Workspace, documentId.ProjectId, documentId)
         {
             Solution = solution;
             TodoItems = todoItems;

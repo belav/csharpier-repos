@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<RefKind> parameterRefKinds,
             RefKind refKind,
             TypeWithAnnotations returnType
-        ) : base(unboundLambda.Syntax.GetReference())
+        )
+            : base(unboundLambda.Syntax.GetReference())
         {
             Debug.Assert(syntaxReferenceOpt is not null);
             Debug.Assert(containingSymbol.DeclaringCompilation == compilation);

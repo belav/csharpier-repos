@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             string fullNameText,
             string searchText,
             bool isHidden
-        ) : base(projectId, typeSymbol, displayText, fullNameText, searchText, isHidden)
+        )
+            : base(projectId, typeSymbol, displayText, fullNameText, searchText, isHidden)
         {
             _typeKind = typeSymbol.TypeKind;
         }

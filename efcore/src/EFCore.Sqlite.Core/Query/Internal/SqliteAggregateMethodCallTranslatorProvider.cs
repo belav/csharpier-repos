@@ -20,7 +20,8 @@ public class SqliteAggregateMethodCallTranslatorProvider
     /// </summary>
     public SqliteAggregateMethodCallTranslatorProvider(
         RelationalAggregateMethodCallTranslatorProviderDependencies dependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
 

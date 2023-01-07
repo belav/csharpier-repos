@@ -2559,7 +2559,8 @@ namespace System.Runtime.Serialization.DataContracts
 
     public sealed partial class XmlDataContract : DataContract
     {
-        internal XmlDataContract(Type type) : base(default) { }
+        internal XmlDataContract(Type type)
+            : base(default) { }
 
         public bool HasRoot
         {

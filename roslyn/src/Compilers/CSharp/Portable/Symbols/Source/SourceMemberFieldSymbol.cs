@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             SyntaxReference syntax,
             Location location
-        ) : base(containingType, name, syntax, location)
+        )
+            : base(containingType, name, syntax, location)
         {
             _modifiers = modifiers;
         }

@@ -27,7 +27,8 @@ public class ResultExecutedContext : FilterContext
         IList<IFilterMetadata> filters,
         IActionResult result,
         object controller
-    ) : base(actionContext, filters)
+    )
+        : base(actionContext, filters)
     {
         if (result == null)
         {

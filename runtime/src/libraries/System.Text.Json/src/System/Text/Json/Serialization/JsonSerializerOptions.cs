@@ -145,7 +145,8 @@ namespace System.Text.Json
         /// Constructs a new <see cref="JsonSerializerOptions"/> instance with a predefined set of options determined by the specified <see cref="JsonSerializerDefaults"/>.
         /// </summary>
         /// <param name="defaults"> The <see cref="JsonSerializerDefaults"/> to reason about.</param>
-        public JsonSerializerOptions(JsonSerializerDefaults defaults) : this()
+        public JsonSerializerOptions(JsonSerializerDefaults defaults)
+            : this()
         {
             if (defaults == JsonSerializerDefaults.Web)
             {

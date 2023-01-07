@@ -20,7 +20,8 @@ namespace System.Net.Sockets
             Socket socket,
             object? asyncState,
             AsyncCallback? asyncCallback
-        ) : base(socket, asyncState, asyncCallback)
+        )
+            : base(socket, asyncState, asyncCallback)
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this, socket);

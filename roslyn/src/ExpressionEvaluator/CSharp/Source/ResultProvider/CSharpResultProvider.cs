@@ -17,14 +17,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     ]
     internal sealed class CSharpResultProvider : ResultProvider
     {
-        public CSharpResultProvider() : this(new CSharpFormatter()) { }
+        public CSharpResultProvider()
+            : this(new CSharpFormatter()) { }
 
-        private CSharpResultProvider(CSharpFormatter formatter) : this(formatter, formatter) { }
+        private CSharpResultProvider(CSharpFormatter formatter)
+            : this(formatter, formatter) { }
 
         internal CSharpResultProvider(
             IDkmClrFormatter2 formatter2,
             IDkmClrFullNameProvider fullNameProvider
-        ) : base(formatter2, fullNameProvider) { }
+        )
+            : base(formatter2, fullNameProvider) { }
 
         internal override string StaticMembersString
         {

@@ -107,7 +107,8 @@ SELECT [s].[Id], [s].[Type] FROM [Singularity] AS [s]
 
     protected class StatisticsCommandInterceptor : CommandInterceptorBase
     {
-        public StatisticsCommandInterceptor() : base(DbCommandMethod.ExecuteReader) { }
+        public StatisticsCommandInterceptor()
+            : base(DbCommandMethod.ExecuteReader) { }
 
         public override InterceptionResult<DbDataReader> ReaderExecuting(
             DbCommand command,

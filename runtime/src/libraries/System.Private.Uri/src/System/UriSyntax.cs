@@ -177,7 +177,10 @@ namespace System
                 string lwrCaseScheme,
                 int defaultPort,
                 UriSyntaxFlags syntaxFlags
-            ) : base((syntaxFlags | UriSyntaxFlags.SimpleUserSyntax | UriSyntaxFlags.BuiltInSyntax))
+            )
+                : base(
+                    (syntaxFlags | UriSyntaxFlags.SimpleUserSyntax | UriSyntaxFlags.BuiltInSyntax)
+                )
             {
                 _scheme = lwrCaseScheme;
                 _port = defaultPort;

@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class TypeVarKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public TypeVarKeywordRecommender() : base(SyntaxKind.TypeVarKeyword) { }
+        public TypeVarKeywordRecommender()
+            : base(SyntaxKind.TypeVarKeyword) { }
 
         protected override bool IsValidContext(
             int position,

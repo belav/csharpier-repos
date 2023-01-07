@@ -1348,7 +1348,8 @@ namespace System.Net.Http
                 T state,
                 Func<T, Memory<byte>, bool> writeAction,
                 CancellationToken cancellationToken
-            ) : base(writeBytes, cancellationToken)
+            )
+                : base(writeBytes, cancellationToken)
             {
                 _state = state;
                 _writeAction = writeAction;

@@ -17,7 +17,8 @@ namespace System.CodeDom
             BaseTypes.Add(new CodeTypeReference("System.Delegate"));
         }
 
-        public CodeTypeDelegate(string name) : this()
+        public CodeTypeDelegate(string name)
+            : this()
         {
             Name = name;
         }

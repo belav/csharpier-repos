@@ -80,7 +80,8 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentOutOfRangeException">
         ///  The specified <paramref name="initialCapacity"/> was negative.
         /// </exception>
-        public PriorityQueue(int initialCapacity) : this(initialCapacity, comparer: null) { }
+        public PriorityQueue(int initialCapacity)
+            : this(initialCapacity, comparer: null) { }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="PriorityQueue{TElement, TPriority}"/> class

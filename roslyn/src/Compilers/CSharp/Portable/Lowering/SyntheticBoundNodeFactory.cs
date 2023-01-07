@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public class MissingPredefinedMember : Exception
         {
-            public MissingPredefinedMember(Diagnostic error) : base(error.ToString())
+            public MissingPredefinedMember(Diagnostic error)
+                : base(error.ToString())
             {
                 this.Diagnostic = error;
             }
@@ -181,8 +182,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode node,
             TypeCompilationState compilationState,
             BindingDiagnosticBag diagnostics
-        ) : this(topLevelMethod, topLevelMethod.ContainingType, node, compilationState, diagnostics)
-        { }
+        )
+            : this(
+                topLevelMethod,
+                topLevelMethod.ContainingType,
+                node,
+                compilationState,
+                diagnostics
+            ) { }
 
         /// <param name="topLevelMethodOpt">The top-level method that will contain the code</param>
         /// <param name="currentClassOpt">The enclosing class</param>

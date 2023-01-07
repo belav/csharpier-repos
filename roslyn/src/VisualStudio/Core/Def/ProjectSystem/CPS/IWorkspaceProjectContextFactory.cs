@@ -121,7 +121,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
             string propertyName,
             string value,
             string message
-        ) : base(message)
+        )
+            : base(message)
         {
             PropertyName = propertyName;
             Value = value;

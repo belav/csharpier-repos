@@ -278,7 +278,8 @@ namespace System.IO.Packaging
             FileMode packageFileMode,
             FileAccess packageFileAccess,
             FileShare share
-        ) : base(packageFileAccess)
+        )
+            : base(packageFileAccess)
         {
             ZipArchive? zipArchive = null;
             ContentTypeHelper? contentTypeHelper;

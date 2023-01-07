@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             TextSpan textSpan,
             ExtractMethodOptions options,
             bool localFunction
-        ) : base(document, textSpan, options)
+        )
+            : base(document, textSpan, options)
         {
             _localFunction = localFunction;
         }

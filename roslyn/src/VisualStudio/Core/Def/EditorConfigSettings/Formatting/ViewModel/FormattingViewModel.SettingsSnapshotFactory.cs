@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
         internal sealed class SettingsSnapshotFactory
             : SettingsSnapshotFactoryBase<FormattingSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<FormattingSetting> data) : base(data)
-            { }
+            public SettingsSnapshotFactory(ISettingsProvider<FormattingSetting> data)
+                : base(data) { }
 
             protected override SettingsEntriesSnapshot CreateSnapshot(
                 ImmutableArray<FormattingSetting> data,

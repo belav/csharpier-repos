@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         public SelfHostDeployer(
             DeploymentParameters deploymentParameters,
             ILoggerFactory loggerFactory
-        ) : base(deploymentParameters, loggerFactory) { }
+        )
+            : base(deploymentParameters, loggerFactory) { }
 
         public override async Task<DeploymentResult> DeployAsync()
         {

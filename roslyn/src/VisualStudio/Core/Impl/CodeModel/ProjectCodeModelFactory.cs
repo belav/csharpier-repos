@@ -52,7 +52,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             IGlobalOptionService globalOptions,
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext, assertIsForeground: false)
+        )
+            : base(threadingContext, assertIsForeground: false)
         {
             _visualStudioWorkspace = visualStudioWorkspace;
             _serviceProvider = serviceProvider;

@@ -43,7 +43,8 @@ namespace System.Web.Http.Controllers
             _filterPipeline = new Lazy<Collection<FilterInfo>>(InitializeFilterPipeline);
         }
 
-        protected HttpActionDescriptor(HttpControllerDescriptor controllerDescriptor) : this()
+        protected HttpActionDescriptor(HttpControllerDescriptor controllerDescriptor)
+            : this()
         {
             if (controllerDescriptor == null)
             {

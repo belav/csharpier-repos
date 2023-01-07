@@ -211,7 +211,8 @@ namespace System.Net.Security
             private MemoryStream _ms;
             private bool _first = true;
 
-            public OpenSslStringBuilder() : base(new MemoryStream(), Encoding.ASCII)
+            public OpenSslStringBuilder()
+                : base(new MemoryStream(), Encoding.ASCII)
             {
                 _ms = (MemoryStream)BaseStream;
             }

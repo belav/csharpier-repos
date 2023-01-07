@@ -36,12 +36,14 @@ namespace System.Web.Http
 
         public class NullHubNameController : HubController
         {
-            public NullHubNameController() : base(null) { }
+            public NullHubNameController()
+                : base(null) { }
         }
 
         public class DefaultContextController : HubController
         {
-            public DefaultContextController(string hubName) : base(hubName) { }
+            public DefaultContextController(string hubName)
+                : base(hubName) { }
 
             public IHubContext GetHubContext()
             {

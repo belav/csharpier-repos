@@ -24,7 +24,8 @@ public class DbContextTypeErrorEventData : DbContextTypeEventData, IErrorEventDa
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         Type contextType,
         Exception exception
-    ) : base(eventDefinition, messageGenerator, contextType)
+    )
+        : base(eventDefinition, messageGenerator, contextType)
     {
         Exception = exception;
     }

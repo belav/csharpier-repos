@@ -20,7 +20,8 @@ namespace System.Security.Cryptography
 
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public DSACryptoServiceProvider(int dwKeySize) : base()
+        public DSACryptoServiceProvider(int dwKeySize)
+            : base()
         {
             throw new PlatformNotSupportedException();
         }

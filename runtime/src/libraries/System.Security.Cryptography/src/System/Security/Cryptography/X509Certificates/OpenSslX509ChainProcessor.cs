@@ -1481,7 +1481,8 @@ namespace System.Security.Cryptography.X509Certificates
             internal bool AbortedForSignatureError { get; private set; }
             internal int LastError { get; private set; }
 
-            internal WorkingChain() : this(s_defaultAbort)
+            internal WorkingChain()
+                : this(s_defaultAbort)
             {
                 LastError = -1;
             }

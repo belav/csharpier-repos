@@ -19,7 +19,8 @@ namespace ILCompiler
         public SingleMethodCompilationModuleGroup(
             ReadyToRunCompilationModuleGroupConfig config,
             MethodDesc method
-        ) : base(config)
+        )
+            : base(config)
         {
             _method = method;
         }

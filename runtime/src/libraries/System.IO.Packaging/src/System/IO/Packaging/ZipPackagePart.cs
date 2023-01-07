@@ -77,7 +77,8 @@ namespace System.IO.Packaging
             PackUriHelper.ValidatedPartUri partUri,
             string contentType,
             CompressionOption compressionOption
-        ) : base(zipPackage, partUri, contentType, compressionOption)
+        )
+            : base(zipPackage, partUri, contentType, compressionOption)
         {
             _zipPackage = zipPackage;
             _zipArchive = zipArchive;

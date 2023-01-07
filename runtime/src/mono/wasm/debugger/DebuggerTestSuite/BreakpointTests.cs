@@ -15,7 +15,8 @@ namespace DebuggerTests
 {
     public class BreakpointTests : DebuggerTests
     {
-        public BreakpointTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public BreakpointTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task CreateGoodBreakpoint()

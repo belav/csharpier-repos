@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class ManyToManyLoadSqlServerTest
     : ManyToManyLoadTestBase<ManyToManyLoadSqlServerTest.ManyToManyLoadSqlServerFixture>
 {
-    public ManyToManyLoadSqlServerTest(ManyToManyLoadSqlServerFixture fixture) : base(fixture) { }
+    public ManyToManyLoadSqlServerTest(ManyToManyLoadSqlServerFixture fixture)
+        : base(fixture) { }
 
     public override async Task Load_collection(
         EntityState state,

@@ -7,7 +7,8 @@ namespace System.CodeDom.Compiler
 {
     public class CompilerError
     {
-        public CompilerError() : this(string.Empty, 0, 0, string.Empty, string.Empty) { }
+        public CompilerError()
+            : this(string.Empty, 0, 0, string.Empty, string.Empty) { }
 
         public CompilerError(
             string fileName,

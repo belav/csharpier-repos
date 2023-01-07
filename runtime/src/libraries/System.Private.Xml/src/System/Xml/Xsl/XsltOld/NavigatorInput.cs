@@ -211,8 +211,8 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        internal NavigatorInput(XPathNavigator navigator) : this(navigator, navigator.BaseURI, null)
-        { }
+        internal NavigatorInput(XPathNavigator navigator)
+            : this(navigator, navigator.BaseURI, null) { }
 
         //
         // Debugging support

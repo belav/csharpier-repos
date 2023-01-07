@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SubstitutedPropertySymbol(
             SubstitutedNamedTypeSymbol containingType,
             PropertySymbol originalDefinition
-        ) : base(originalDefinition)
+        )
+            : base(originalDefinition)
         {
             _containingType = containingType;
         }

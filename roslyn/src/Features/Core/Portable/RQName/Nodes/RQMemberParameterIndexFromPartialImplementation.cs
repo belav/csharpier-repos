@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         public RQMemberParameterIndexFromPartialImplementation(
             RQMember containingMember,
             int parameterIndex
-        ) : base(containingMember, parameterIndex) { }
+        )
+            : base(containingMember, parameterIndex) { }
 
         protected override void AppendChildren(List<SimpleTreeNode> childList)
         {

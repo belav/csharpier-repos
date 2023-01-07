@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
             public OptionsProcessor(
                 VisualStudioProject visualStudioProject,
                 SolutionServices workspaceServices
-            ) : base(visualStudioProject, workspaceServices)
+            )
+                : base(visualStudioProject, workspaceServices)
             {
                 _visualStudioProject = visualStudioProject;
             }

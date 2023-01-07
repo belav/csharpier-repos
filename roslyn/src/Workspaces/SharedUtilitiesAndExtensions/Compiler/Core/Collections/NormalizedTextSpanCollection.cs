@@ -17,13 +17,15 @@ namespace Microsoft.CodeAnalysis.Shared
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that is
         /// empty.
         /// </summary>
-        public NormalizedTextSpanCollection() : base(new List<TextSpan>(0)) { }
+        public NormalizedTextSpanCollection()
+            : base(new List<TextSpan>(0)) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified span.
         /// </summary>
         /// <param name="span">TextSpan contained by the span set.</param>
-        public NormalizedTextSpanCollection(TextSpan span) : base(ListFromSpan(span)) { }
+        public NormalizedTextSpanCollection(TextSpan span)
+            : base(ListFromSpan(span)) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="NormalizedTextSpanCollection"/> that contains the specified list of spans.

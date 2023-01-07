@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             private readonly int _indentation;
 
-            public SimpleIndentationData(TextSpan textSpan, int indentation) : base(textSpan)
+            public SimpleIndentationData(TextSpan textSpan, int indentation)
+                : base(textSpan)
             {
                 _indentation = indentation;
             }
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                     int
                 > indentationDeltaGetter,
                 Func<FormattingContext, SyntaxToken, int> baseIndentationGetter
-            ) : base(textSpan)
+            )
+                : base(textSpan)
             {
                 _formattingContext = formattingContext;
                 _effectiveBaseTokenGetter = effectiveBaseTokenGetter;
@@ -115,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 > indentationDeltaGetter,
                 Func<FormattingContext, SyntaxToken, int> baseIndentationGetter,
                 int lazyIndentationDelta
-            ) : base(textSpan)
+            )
+                : base(textSpan)
             {
                 _formattingContext = formattingContext;
                 _effectiveBaseTokenGetter = effectiveBaseTokenGetter;
@@ -186,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 TextSpan textSpan,
                 IndentationData baseIndentationData,
                 int adjustment
-            ) : base(textSpan)
+            )
+                : base(textSpan)
             {
                 Debug.Assert(
                     adjustment != 0,

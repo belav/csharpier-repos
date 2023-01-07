@@ -19,7 +19,12 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
             MetadataReader reader,
             GenericParameterHandle genericParameterHandle,
             RuntimeTypeDefinitionTypeInfo declaringType
-        ) : base(reader, genericParameterHandle, genericParameterHandle.GetGenericParameter(reader))
+        )
+            : base(
+                reader,
+                genericParameterHandle,
+                genericParameterHandle.GetGenericParameter(reader)
+            )
         {
             _declaringType = declaringType;
         }

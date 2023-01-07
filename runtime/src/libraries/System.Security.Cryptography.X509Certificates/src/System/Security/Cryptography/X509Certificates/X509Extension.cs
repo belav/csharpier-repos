@@ -7,7 +7,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public class X509Extension : AsnEncodedData
     {
-        protected X509Extension() : base() { }
+        protected X509Extension()
+            : base() { }
 
         public X509Extension(AsnEncodedData encodedExtension, bool critical)
             : this(encodedExtension.Oid!, encodedExtension.RawData, critical) { }

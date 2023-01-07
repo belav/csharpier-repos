@@ -77,7 +77,8 @@ public class SqlServerStringTypeMapping : StringTypeMapping
     protected SqlServerStringTypeMapping(
         RelationalTypeMappingParameters parameters,
         SqlDbType? sqlDbType
-    ) : base(parameters)
+    )
+        : base(parameters)
     {
         if (parameters.Unicode)
         {

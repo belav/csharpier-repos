@@ -206,7 +206,8 @@ namespace System.Security.Cryptography.Pkcs
             public RSAPkcs1CmsSignature(
                 string? signatureAlgorithm,
                 HashAlgorithmName? expectedDigest
-            ) : base(signatureAlgorithm, expectedDigest) { }
+            )
+                : base(signatureAlgorithm, expectedDigest) { }
 
             protected override RSASignaturePadding GetSignaturePadding(
                 ReadOnlyMemory<byte>? signatureParameters,
@@ -465,7 +466,8 @@ namespace System.Security.Cryptography.Pkcs
 
             internal override RSASignaturePadding? SignaturePadding => RSASignaturePadding.Pss;
 
-            public RSAPssCmsSignature() : base(null, null) { }
+            public RSAPssCmsSignature()
+                : base(null, null) { }
 
             protected override RSASignaturePadding GetSignaturePadding(
                 ReadOnlyMemory<byte>? signatureParameters,

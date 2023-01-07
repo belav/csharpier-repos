@@ -12,7 +12,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCValidateAfterAdd(ITestOutputHelper output) : base(output)
+        public TCValidateAfterAdd(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -177,7 +178,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCValidateAfterRemove(ITestOutputHelper output) : base(output)
+        public TCValidateAfterRemove(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -423,7 +425,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCValidateAfterReprocess(ITestOutputHelper output) : base(output)
+        public TCValidateAfterReprocess(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -566,7 +569,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCValidateAfterAddInvalidSchema(ITestOutputHelper output) : base(output)
+        public TCValidateAfterAddInvalidSchema(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -796,7 +800,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCXmlSchemaValidatorMisc(ITestOutputHelper output) : base(output)
+        public TCXmlSchemaValidatorMisc(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

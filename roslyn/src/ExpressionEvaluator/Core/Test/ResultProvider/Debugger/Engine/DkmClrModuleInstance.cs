@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             DkmClrRuntimeInstance runtimeInstance,
             Assembly assembly,
             DkmModule module
-        ) : base(module)
+        )
+            : base(module)
         {
             _runtimeInstance = runtimeInstance;
             this.Assembly = assembly;

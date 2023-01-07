@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             InternalSyntax.CSharpSyntaxNode green,
             SyntaxNode parent,
             int position
-        ) : base(green, position, parent == null ? null : parent.SyntaxTree)
+        )
+            : base(green, position, parent == null ? null : parent.SyntaxTree)
         {
             System.Diagnostics.Debug.Assert(parent == null || position >= 0);
         }

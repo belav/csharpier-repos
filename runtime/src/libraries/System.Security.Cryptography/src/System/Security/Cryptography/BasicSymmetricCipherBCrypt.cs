@@ -21,7 +21,8 @@ namespace System.Security.Cryptography
             bool ownsParentHandle,
             byte[]? iv,
             bool encrypting
-        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+        )
+            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _cipherLite = new BasicSymmetricCipherLiteBCrypt(
                 algorithm,

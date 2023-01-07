@@ -168,7 +168,8 @@ namespace System.ComponentModel.Tests
 
         public class SubNestedContainer : NestedContainer
         {
-            public SubNestedContainer(IComponent owner) : base(owner) { }
+            public SubNestedContainer(IComponent owner)
+                : base(owner) { }
 
             public string OwnerNameEntryPoint => OwnerName;
 

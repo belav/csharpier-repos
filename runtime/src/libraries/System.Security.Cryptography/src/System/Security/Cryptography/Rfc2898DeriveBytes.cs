@@ -42,14 +42,16 @@ namespace System.Security.Cryptography
             byte[] salt,
             int iterations,
             HashAlgorithmName hashAlgorithm
-        ) : this(password, salt, iterations, hashAlgorithm, clearPassword: false) { }
+        )
+            : this(password, salt, iterations, hashAlgorithm, clearPassword: false) { }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,
             DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public Rfc2898DeriveBytes(string password, byte[] salt) : this(password, salt, 1000) { }
+        public Rfc2898DeriveBytes(string password, byte[] salt)
+            : this(password, salt, 1000) { }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,
@@ -80,8 +82,8 @@ namespace System.Security.Cryptography
             DiagnosticId = Obsoletions.Rfc2898OutdatedCtorDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public Rfc2898DeriveBytes(string password, int saltSize) : this(password, saltSize, 1000)
-        { }
+        public Rfc2898DeriveBytes(string password, int saltSize)
+            : this(password, saltSize, 1000) { }
 
         [Obsolete(
             Obsoletions.Rfc2898OutdatedCtorMessage,

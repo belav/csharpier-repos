@@ -20,7 +20,9 @@ public class RemoteSignOutContext : RemoteAuthenticationContext<OpenIdConnectOpt
         AuthenticationScheme scheme,
         OpenIdConnectOptions options,
         OpenIdConnectMessage? message
-    ) : base(context, scheme, options, new AuthenticationProperties()) => ProtocolMessage = message;
+    )
+        : base(context, scheme, options, new AuthenticationProperties()) =>
+        ProtocolMessage = message;
 
     /// <summary>
     /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     [CompilerTrait(CompilerFeature.Tuples)]
     public class DeconstructionTests : ParsingTests
     {
-        public DeconstructionTests(ITestOutputHelper output) : base(output) { }
+        public DeconstructionTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

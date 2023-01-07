@@ -46,12 +46,14 @@ namespace System.Data.Common
 #endif
         }
 
-        protected DataAdapter() : base()
+        protected DataAdapter()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        protected DataAdapter(DataAdapter from) : base()
+        protected DataAdapter(DataAdapter from)
+            : base()
         {
             CloneFrom(from);
         }

@@ -573,7 +573,8 @@ namespace System.Linq.Expressions.Tests
 
         public class SubClass : BaseClass
         {
-            public SubClass(int value) : base(value) { }
+            public SubClass(int value)
+                : base(value) { }
         }
 
         [Fact]

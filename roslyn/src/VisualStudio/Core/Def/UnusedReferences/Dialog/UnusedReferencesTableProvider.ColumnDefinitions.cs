@@ -421,7 +421,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 object? tooltip = null,
                 StringComparer? comparer = null,
                 bool expandedByDefault = true
-            ) : base(name, tooltip, comparer, expandedByDefault)
+            )
+                : base(name, tooltip, comparer, expandedByDefault)
             {
                 ImageMoniker = imageMoniker;
             }

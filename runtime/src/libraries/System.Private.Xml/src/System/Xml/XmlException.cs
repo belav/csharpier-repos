@@ -80,10 +80,12 @@ namespace System.Xml
         }
 
         //provided to meet the ECMA standards
-        public XmlException() : this(null) { }
+        public XmlException()
+            : this(null) { }
 
         //provided to meet the ECMA standards
-        public XmlException(string? message) : this(message, ((Exception?)null), 0, 0)
+        public XmlException(string? message)
+            : this(message, ((Exception?)null), 0, 0)
         {
             Debug.Assert(
                 message == null || !message.StartsWith("Xml_", StringComparison.Ordinal),
@@ -101,7 +103,8 @@ namespace System.Xml
             Exception? innerException,
             int lineNumber,
             int linePosition
-        ) : this(message, innerException, lineNumber, linePosition, null) { }
+        )
+            : this(message, innerException, lineNumber, linePosition, null) { }
 
         internal XmlException(
             string? message,
@@ -109,7 +112,8 @@ namespace System.Xml
             int lineNumber,
             int linePosition,
             string? sourceUri
-        ) : base(FormatUserMessage(message, lineNumber, linePosition), innerException)
+        )
+            : base(FormatUserMessage(message, lineNumber, linePosition), innerException)
         {
             HResult = HResults.Xml;
             _res = (message == null ? SR.Xml_DefaultException : SR.Xml_UserException);
@@ -119,7 +123,8 @@ namespace System.Xml
             _linePosition = linePosition;
         }
 
-        internal XmlException(string res, string?[]? args) : this(res, args, null, 0, 0, null) { }
+        internal XmlException(string res, string?[]? args)
+            : this(res, args, null, 0, 0, null) { }
 
         internal XmlException(string res, string? arg)
             : this(res, new string?[] { arg }, null, 0, 0, null) { }
@@ -172,7 +177,8 @@ namespace System.Xml
             int lineNumber,
             int linePosition,
             string? sourceUri
-        ) : this(res, new string?[] { arg }, null, lineNumber, linePosition, sourceUri) { }
+        )
+            : this(res, new string?[] { arg }, null, lineNumber, linePosition, sourceUri) { }
 
         internal XmlException(string res, string?[]? args, int lineNumber, int linePosition)
             : this(res, args, null, lineNumber, linePosition, null) { }
@@ -183,7 +189,8 @@ namespace System.Xml
             int lineNumber,
             int linePosition,
             string? sourceUri
-        ) : this(res, args, null, lineNumber, linePosition, sourceUri) { }
+        )
+            : this(res, args, null, lineNumber, linePosition, sourceUri) { }
 
         internal XmlException(
             string res,
@@ -191,7 +198,8 @@ namespace System.Xml
             Exception? innerException,
             int lineNumber,
             int linePosition
-        ) : this(res, args, innerException, lineNumber, linePosition, null) { }
+        )
+            : this(res, args, innerException, lineNumber, linePosition, null) { }
 
         internal XmlException(
             string res,
@@ -200,7 +208,8 @@ namespace System.Xml
             int lineNumber,
             int linePosition,
             string? sourceUri
-        ) : base(CreateMessage(res, args, lineNumber, linePosition), innerException)
+        )
+            : base(CreateMessage(res, args, lineNumber, linePosition), innerException)
         {
             HResult = HResults.Xml;
             _res = res;

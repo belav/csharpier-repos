@@ -29,7 +29,8 @@ public class TestResourceManagerStringLocalizerFactory : ResourceManagerStringLo
         ResourceLocationAttribute resourceLocationAttribute,
         RootNamespaceAttribute rootNamespaceAttribute,
         ILoggerFactory loggerFactory
-    ) : base(localizationOptions, loggerFactory)
+    )
+        : base(localizationOptions, loggerFactory)
     {
         _resourceLocationAttribute = resourceLocationAttribute;
         _rootNamespaceAttribute = rootNamespaceAttribute;

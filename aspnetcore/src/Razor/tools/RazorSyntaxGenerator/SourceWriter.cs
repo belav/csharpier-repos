@@ -12,7 +12,8 @@ namespace RazorSyntaxGenerator;
 
 internal class SourceWriter : AbstractFileWriter
 {
-    private SourceWriter(TextWriter writer, Tree tree) : base(writer, tree) { }
+    private SourceWriter(TextWriter writer, Tree tree)
+        : base(writer, tree) { }
 
     public static void WriteMain(TextWriter writer, Tree tree) =>
         new SourceWriter(writer, tree).WriteMain();

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Options
             string keyName,
             Func<string, Optional<T>> parseValue,
             Func<T, string> getEditorConfigStringForValue
-        ) : this(keyName, parseValue, (value, optionSet) => getEditorConfigStringForValue(value))
+        )
+            : this(keyName, parseValue, (value, optionSet) => getEditorConfigStringForValue(value))
         {
             if (getEditorConfigStringForValue == null)
             {

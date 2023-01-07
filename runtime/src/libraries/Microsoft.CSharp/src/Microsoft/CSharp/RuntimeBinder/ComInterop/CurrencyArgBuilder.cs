@@ -13,7 +13,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     internal sealed class CurrencyArgBuilder : SimpleArgBuilder
     {
-        internal CurrencyArgBuilder(Type parameterType) : base(parameterType)
+        internal CurrencyArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(CurrencyWrapper));
         }

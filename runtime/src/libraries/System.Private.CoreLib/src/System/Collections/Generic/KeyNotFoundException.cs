@@ -11,12 +11,14 @@ namespace System.Collections.Generic
     )]
     public class KeyNotFoundException : SystemException
     {
-        public KeyNotFoundException() : base(SR.Arg_KeyNotFound)
+        public KeyNotFoundException()
+            : base(SR.Arg_KeyNotFound)
         {
             HResult = HResults.COR_E_KEYNOTFOUND;
         }
 
-        public KeyNotFoundException(string? message) : base(message)
+        public KeyNotFoundException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_KEYNOTFOUND;
         }

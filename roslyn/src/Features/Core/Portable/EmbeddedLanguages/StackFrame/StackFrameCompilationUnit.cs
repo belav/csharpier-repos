@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameMethodDeclarationNode methodDeclaration,
             StackFrameFileInformationNode? fileInformationExpression,
             StackFrameToken endOfLineToken
-        ) : base(StackFrameKind.CompilationUnit)
+        )
+            : base(StackFrameKind.CompilationUnit)
         {
             MethodDeclaration = methodDeclaration;
             FileInformationExpression = fileInformationExpression;

@@ -157,7 +157,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -209,7 +210,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -260,7 +262,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -304,7 +307,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -375,7 +379,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -417,7 +422,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -474,7 +480,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -531,7 +538,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -581,7 +589,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -688,7 +697,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));
@@ -721,7 +731,8 @@ public class OperationExecutor : MarshalByRefObject
             OperationExecutor executor,
             IOperationResultHandler resultHandler,
             IDictionary args
-        ) : base(resultHandler)
+        )
+            : base(resultHandler)
         {
             Check.NotNull(executor, nameof(executor));
             Check.NotNull(args, nameof(args));

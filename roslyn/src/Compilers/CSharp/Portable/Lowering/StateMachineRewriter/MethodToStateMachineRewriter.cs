@@ -109,7 +109,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             VariableSlotAllocator slotAllocatorOpt,
             int nextFreeHoistedLocalSlot,
             BindingDiagnosticBag diagnostics
-        ) : base(slotAllocatorOpt, F.CompilationState, diagnostics)
+        )
+            : base(slotAllocatorOpt, F.CompilationState, diagnostics)
         {
             Debug.Assert(F != null);
             Debug.Assert(originalMethod != null);

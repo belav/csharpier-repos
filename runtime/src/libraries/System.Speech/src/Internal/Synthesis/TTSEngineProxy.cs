@@ -33,7 +33,8 @@ namespace System.Speech.Internal.Synthesis
     {
         #region Constructors
 
-        internal TtsProxySsml(TtsEngineSsml ssmlEngine, ITtsEngineSite site, int lcid) : base(lcid)
+        internal TtsProxySsml(TtsEngineSsml ssmlEngine, ITtsEngineSite site, int lcid)
+            : base(lcid)
         {
             _ssmlEngine = ssmlEngine;
             _site = site;
@@ -108,7 +109,8 @@ namespace System.Speech.Internal.Synthesis
     {
         #region Constructors
 
-        internal TtsProxySapi(ITtsEngine sapiEngine, IntPtr iSite, int lcid) : base(lcid)
+        internal TtsProxySapi(ITtsEngine sapiEngine, IntPtr iSite, int lcid)
+            : base(lcid)
         {
             _iSite = iSite;
             _sapiEngine = sapiEngine;

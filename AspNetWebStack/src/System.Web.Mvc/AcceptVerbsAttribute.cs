@@ -18,7 +18,8 @@ namespace System.Web.Mvc
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class AcceptVerbsAttribute : ActionMethodSelectorAttribute
     {
-        public AcceptVerbsAttribute(HttpVerbs verbs) : this(EnumToArray(verbs)) { }
+        public AcceptVerbsAttribute(HttpVerbs verbs)
+            : this(EnumToArray(verbs)) { }
 
         public AcceptVerbsAttribute(params string[] verbs)
         {

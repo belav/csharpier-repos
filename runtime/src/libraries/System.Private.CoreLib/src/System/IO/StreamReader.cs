@@ -103,7 +103,8 @@ namespace System.IO
             _closable = true;
         }
 
-        public StreamReader(Stream stream) : this(stream, true) { }
+        public StreamReader(Stream stream)
+            : this(stream, true) { }
 
         public StreamReader(Stream stream, bool detectEncodingFromByteOrderMarks)
             : this(
@@ -135,7 +136,8 @@ namespace System.IO
             Encoding encoding,
             bool detectEncodingFromByteOrderMarks,
             int bufferSize
-        ) : this(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize, false) { }
+        )
+            : this(stream, encoding, detectEncodingFromByteOrderMarks, bufferSize, false) { }
 
         public StreamReader(
             Stream stream,
@@ -184,7 +186,8 @@ namespace System.IO
             _closable = !leaveOpen;
         }
 
-        public StreamReader(string path) : this(path, true) { }
+        public StreamReader(string path)
+            : this(path, true) { }
 
         public StreamReader(string path, bool detectEncodingFromByteOrderMarks)
             : this(path, Encoding.UTF8, detectEncodingFromByteOrderMarks, DefaultBufferSize) { }

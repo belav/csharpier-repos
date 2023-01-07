@@ -63,7 +63,8 @@ namespace System.Net
             byte[] buffer,
             int offset,
             int length
-        ) : base(stream, buffer, offset, length)
+        )
+            : base(stream, buffer, offset, length)
         {
             _context = context;
             WebHeaderCollection coll = (WebHeaderCollection)context.Request.Headers;

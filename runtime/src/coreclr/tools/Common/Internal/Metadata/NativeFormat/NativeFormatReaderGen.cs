@@ -95,7 +95,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ArraySignatureHandle(Handle handle) : this(handle._value) { }
+        internal ArraySignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ArraySignatureHandle(int value)
         {
@@ -199,7 +200,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ByReferenceSignatureHandle(Handle handle) : this(handle._value) { }
+        internal ByReferenceSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ByReferenceSignatureHandle(int value)
         {
@@ -307,7 +309,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantBooleanArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantBooleanArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantBooleanArrayHandle(int value)
         {
@@ -415,7 +418,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantBooleanValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantBooleanValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantBooleanValueHandle(int value)
         {
@@ -534,7 +538,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantBoxedEnumValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantBoxedEnumValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantBoxedEnumValueHandle(int value)
         {
@@ -642,7 +647,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantByteArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantByteArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantByteArrayHandle(int value)
         {
@@ -744,7 +750,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantByteValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantByteValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantByteValueHandle(int value)
         {
@@ -846,7 +853,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantCharArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantCharArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantCharArrayHandle(int value)
         {
@@ -948,7 +956,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantCharValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantCharValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantCharValueHandle(int value)
         {
@@ -1050,7 +1059,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantDoubleArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantDoubleArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantDoubleArrayHandle(int value)
         {
@@ -1154,7 +1164,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantDoubleValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantDoubleValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantDoubleValueHandle(int value)
         {
@@ -1265,7 +1276,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantEnumArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantEnumArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantEnumArrayHandle(int value)
         {
@@ -1367,7 +1379,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantHandleArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantHandleArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantHandleArrayHandle(int value)
         {
@@ -1471,7 +1484,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt16ArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantInt16ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt16ArrayHandle(int value)
         {
@@ -1573,7 +1587,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt16ValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantInt16ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt16ValueHandle(int value)
         {
@@ -1675,7 +1690,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt32ArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantInt32ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt32ArrayHandle(int value)
         {
@@ -1777,7 +1793,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt32ValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantInt32ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt32ValueHandle(int value)
         {
@@ -1879,7 +1896,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt64ArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantInt64ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt64ArrayHandle(int value)
         {
@@ -1981,7 +1999,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantInt64ValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantInt64ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantInt64ValueHandle(int value)
         {
@@ -2076,7 +2095,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantReferenceValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantReferenceValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantReferenceValueHandle(int value)
         {
@@ -2184,7 +2204,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSByteArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantSByteArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSByteArrayHandle(int value)
         {
@@ -2286,7 +2307,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSByteValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantSByteValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSByteValueHandle(int value)
         {
@@ -2388,7 +2410,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSingleArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantSingleArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSingleArrayHandle(int value)
         {
@@ -2492,7 +2515,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantSingleValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantSingleValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantSingleValueHandle(int value)
         {
@@ -2598,7 +2622,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantStringArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantStringArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantStringArrayHandle(int value)
         {
@@ -2702,7 +2727,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantStringValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantStringValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantStringValueHandle(int value)
         {
@@ -2806,7 +2832,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt16ArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantUInt16ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt16ArrayHandle(int value)
         {
@@ -2910,7 +2937,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt16ValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantUInt16ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt16ValueHandle(int value)
         {
@@ -3014,7 +3042,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt32ArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantUInt32ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt32ArrayHandle(int value)
         {
@@ -3118,7 +3147,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt32ValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantUInt32ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt32ValueHandle(int value)
         {
@@ -3222,7 +3252,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt64ArrayHandle(Handle handle) : this(handle._value) { }
+        internal ConstantUInt64ArrayHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt64ArrayHandle(int value)
         {
@@ -3326,7 +3357,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ConstantUInt64ValueHandle(Handle handle) : this(handle._value) { }
+        internal ConstantUInt64ValueHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ConstantUInt64ValueHandle(int value)
         {
@@ -3448,7 +3480,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal CustomAttributeHandle(Handle handle) : this(handle._value) { }
+        internal CustomAttributeHandle(Handle handle)
+            : this(handle._value) { }
 
         internal CustomAttributeHandle(int value)
         {
@@ -3580,7 +3613,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal EventHandle(Handle handle) : this(handle._value) { }
+        internal EventHandle(Handle handle)
+            : this(handle._value) { }
 
         internal EventHandle(int value)
         {
@@ -3719,7 +3753,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal FieldHandle(Handle handle) : this(handle._value) { }
+        internal FieldHandle(Handle handle)
+            : this(handle._value) { }
 
         internal FieldHandle(int value)
         {
@@ -3823,7 +3858,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal FieldSignatureHandle(Handle handle) : this(handle._value) { }
+        internal FieldSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal FieldSignatureHandle(int value)
         {
@@ -3925,7 +3961,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal FunctionPointerSignatureHandle(Handle handle) : this(handle._value) { }
+        internal FunctionPointerSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal FunctionPointerSignatureHandle(int value)
         {
@@ -4070,7 +4107,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal GenericParameterHandle(Handle handle) : this(handle._value) { }
+        internal GenericParameterHandle(Handle handle)
+            : this(handle._value) { }
 
         internal GenericParameterHandle(int value)
         {
@@ -4190,7 +4228,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MemberReferenceHandle(Handle handle) : this(handle._value) { }
+        internal MemberReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MemberReferenceHandle(int value)
         {
@@ -4334,7 +4373,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodHandle(Handle handle) : this(handle._value) { }
+        internal MethodHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodHandle(int value)
         {
@@ -4447,7 +4487,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodInstantiationHandle(Handle handle) : this(handle._value) { }
+        internal MethodInstantiationHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodInstantiationHandle(int value)
         {
@@ -4558,7 +4599,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodSemanticsHandle(Handle handle) : this(handle._value) { }
+        internal MethodSemanticsHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodSemanticsHandle(int value)
         {
@@ -4694,7 +4736,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodSignatureHandle(Handle handle) : this(handle._value) { }
+        internal MethodSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodSignatureHandle(int value)
         {
@@ -4796,7 +4839,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal MethodTypeVariableSignatureHandle(Handle handle) : this(handle._value) { }
+        internal MethodTypeVariableSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal MethodTypeVariableSignatureHandle(int value)
         {
@@ -4922,7 +4966,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ModifiedTypeHandle(Handle handle) : this(handle._value) { }
+        internal ModifiedTypeHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ModifiedTypeHandle(int value)
         {
@@ -5049,7 +5094,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal NamedArgumentHandle(Handle handle) : this(handle._value) { }
+        internal NamedArgumentHandle(Handle handle)
+            : this(handle._value) { }
 
         internal NamedArgumentHandle(int value)
         {
@@ -5181,7 +5227,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal NamespaceDefinitionHandle(Handle handle) : this(handle._value) { }
+        internal NamespaceDefinitionHandle(Handle handle)
+            : this(handle._value) { }
 
         internal NamespaceDefinitionHandle(int value)
         {
@@ -5294,7 +5341,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal NamespaceReferenceHandle(Handle handle) : this(handle._value) { }
+        internal NamespaceReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal NamespaceReferenceHandle(int value)
         {
@@ -5426,7 +5474,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ParameterHandle(Handle handle) : this(handle._value) { }
+        internal ParameterHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ParameterHandle(int value)
         {
@@ -5530,7 +5579,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal PointerSignatureHandle(Handle handle) : this(handle._value) { }
+        internal PointerSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal PointerSignatureHandle(int value)
         {
@@ -5669,7 +5719,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal PropertyHandle(Handle handle) : this(handle._value) { }
+        internal PropertyHandle(Handle handle)
+            : this(handle._value) { }
 
         internal PropertyHandle(int value)
         {
@@ -5789,7 +5840,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal PropertySignatureHandle(Handle handle) : this(handle._value) { }
+        internal PropertySignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal PropertySignatureHandle(int value)
         {
@@ -5898,7 +5950,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal QualifiedFieldHandle(Handle handle) : this(handle._value) { }
+        internal QualifiedFieldHandle(Handle handle)
+            : this(handle._value) { }
 
         internal QualifiedFieldHandle(int value)
         {
@@ -6007,7 +6060,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal QualifiedMethodHandle(Handle handle) : this(handle._value) { }
+        internal QualifiedMethodHandle(Handle handle)
+            : this(handle._value) { }
 
         internal QualifiedMethodHandle(int value)
         {
@@ -6111,7 +6165,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal SZArraySignatureHandle(Handle handle) : this(handle._value) { }
+        internal SZArraySignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal SZArraySignatureHandle(int value)
         {
@@ -6318,7 +6373,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ScopeDefinitionHandle(Handle handle) : this(handle._value) { }
+        internal ScopeDefinitionHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ScopeDefinitionHandle(int value)
         {
@@ -6469,7 +6525,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal ScopeReferenceHandle(Handle handle) : this(handle._value) { }
+        internal ScopeReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal ScopeReferenceHandle(int value)
         {
@@ -6673,7 +6730,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeDefinitionHandle(Handle handle) : this(handle._value) { }
+        internal TypeDefinitionHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeDefinitionHandle(int value)
         {
@@ -6789,7 +6847,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeForwarderHandle(Handle handle) : this(handle._value) { }
+        internal TypeForwarderHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeForwarderHandle(int value)
         {
@@ -6902,7 +6961,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeInstantiationSignatureHandle(Handle handle) : this(handle._value) { }
+        internal TypeInstantiationSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeInstantiationSignatureHandle(int value)
         {
@@ -7019,7 +7079,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeReferenceHandle(Handle handle) : this(handle._value) { }
+        internal TypeReferenceHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeReferenceHandle(int value)
         {
@@ -7123,7 +7184,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeSpecificationHandle(Handle handle) : this(handle._value) { }
+        internal TypeSpecificationHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeSpecificationHandle(int value)
         {
@@ -7225,7 +7287,8 @@ namespace Internal.Metadata.NativeFormat
 
         internal int _value;
 
-        internal TypeVariableSignatureHandle(Handle handle) : this(handle._value) { }
+        internal TypeVariableSignatureHandle(Handle handle)
+            : this(handle._value) { }
 
         internal TypeVariableSignatureHandle(int value)
         {

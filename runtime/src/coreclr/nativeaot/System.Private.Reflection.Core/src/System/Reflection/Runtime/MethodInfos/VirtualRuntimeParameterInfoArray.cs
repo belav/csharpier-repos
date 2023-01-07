@@ -18,7 +18,8 @@ namespace System.Reflection.Runtime.MethodInfos
     // Helper for GetRuntimeParameters() - array mimic that supports an efficient "array.Skip(1).ToArray()" operation.
     internal struct VirtualRuntimeParameterInfoArray
     {
-        public VirtualRuntimeParameterInfoArray(int count) : this()
+        public VirtualRuntimeParameterInfoArray(int count)
+            : this()
         {
             Debug.Assert(count >= 1);
             Remainder =

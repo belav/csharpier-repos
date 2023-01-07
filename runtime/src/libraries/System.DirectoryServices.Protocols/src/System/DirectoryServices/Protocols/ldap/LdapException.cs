@@ -105,11 +105,14 @@ namespace System.DirectoryServices.Protocols
         protected LdapException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public LdapException() : base() { }
+        public LdapException()
+            : base() { }
 
-        public LdapException(string message) : base(message) { }
+        public LdapException(string message)
+            : base(message) { }
 
-        public LdapException(string message, Exception inner) : base(message, inner) { }
+        public LdapException(string message, Exception inner)
+            : base(message, inner) { }
 
         public LdapException(int errorCode)
             : base(SR.Format(SR.DefaultLdapError, LdapErrorMappings.NormalizeResultCode(errorCode)))
@@ -117,7 +120,8 @@ namespace System.DirectoryServices.Protocols
             ErrorCode = errorCode;
         }
 
-        public LdapException(int errorCode, string message) : base(message)
+        public LdapException(int errorCode, string message)
+            : base(message)
         {
             ErrorCode = errorCode;
         }
@@ -129,7 +133,8 @@ namespace System.DirectoryServices.Protocols
             ServerErrorMessage = serverErrorMessage;
         }
 
-        public LdapException(int errorCode, string message, Exception inner) : base(message, inner)
+        public LdapException(int errorCode, string message, Exception inner)
+            : base(message, inner)
         {
             ErrorCode = errorCode;
         }
@@ -154,13 +159,17 @@ namespace System.DirectoryServices.Protocols
         protected TlsOperationException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public TlsOperationException() : base() { }
+        public TlsOperationException()
+            : base() { }
 
-        public TlsOperationException(string message) : base(message) { }
+        public TlsOperationException(string message)
+            : base(message) { }
 
-        public TlsOperationException(string message, Exception inner) : base(message, inner) { }
+        public TlsOperationException(string message, Exception inner)
+            : base(message, inner) { }
 
-        public TlsOperationException(DirectoryResponse response) : base(response) { }
+        public TlsOperationException(DirectoryResponse response)
+            : base(response) { }
 
         public TlsOperationException(DirectoryResponse response, string message)
             : base(response, message) { }

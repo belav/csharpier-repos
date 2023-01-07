@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 ITextBuffer subjectBuffer,
                 Workspace workspace,
                 ITextBufferFactoryService textBufferFactoryService
-            ) : base(session.ThreadingContext)
+            )
+                : base(session.ThreadingContext)
             {
                 _session = session;
                 _subjectBuffer = subjectBuffer;

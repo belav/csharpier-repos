@@ -31,7 +31,8 @@ namespace MS.Internal.Xml.XPath
             _isOr = (op == Operator.Op.OR);
         }
 
-        private BooleanExpr(BooleanExpr other) : base(other)
+        private BooleanExpr(BooleanExpr other)
+            : base(other)
         {
             _opnd1 = Clone(other._opnd1);
             _opnd2 = Clone(other._opnd2);

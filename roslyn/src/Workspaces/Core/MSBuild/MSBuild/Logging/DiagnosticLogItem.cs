@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Logging
             WorkspaceDiagnosticKind kind,
             Exception exception,
             string projectFilePath
-        ) : this(kind, exception.Message, projectFilePath) { }
+        )
+            : this(kind, exception.Message, projectFilePath) { }
 
         public override string ToString() => Message;
     }

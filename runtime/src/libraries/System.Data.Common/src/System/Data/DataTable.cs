@@ -196,12 +196,14 @@ namespace System.Data
         /// Initializes a new instance of the <see cref='System.Data.DataTable'/> class with the specified table
         ///    name.
         /// </summary>
-        public DataTable(string? tableName) : this()
+        public DataTable(string? tableName)
+            : this()
         {
             _tableName = tableName ?? "";
         }
 
-        public DataTable(string? tableName, string? tableNamespace) : this(tableName)
+        public DataTable(string? tableName, string? tableNamespace)
+            : this(tableName)
         {
             Namespace = tableNamespace;
         }
@@ -213,7 +215,8 @@ namespace System.Data
             Justification = "CreateInstance's use of GetType uses only the parameterless constructor. Warnings are about serialization related constructors."
         )]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        protected DataTable(SerializationInfo info, StreamingContext context) : this()
+        protected DataTable(SerializationInfo info, StreamingContext context)
+            : this()
         {
             bool isSingleTable =
                 context.Context != null

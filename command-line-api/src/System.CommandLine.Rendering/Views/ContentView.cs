@@ -5,7 +5,8 @@ namespace System.CommandLine.Rendering.Views
 {
     public class ContentView : View
     {
-        public ContentView(string content) : this(new ContentSpan(content)) { }
+        public ContentView(string content)
+            : this(new ContentSpan(content)) { }
 
         public ContentView(TextSpan span)
         {

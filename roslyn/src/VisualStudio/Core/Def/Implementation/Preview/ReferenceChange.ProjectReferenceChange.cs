@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 string projectName,
                 bool isAdded,
                 PreviewEngine engine
-            ) : base(projectId, projectName, isAdded, engine)
+            )
+                : base(projectId, projectName, isAdded, engine)
             {
                 _reference = reference;
                 _projectReferenceName = projectReferenceName;

@@ -11,7 +11,8 @@ public class ConsumesAttributeTests
 {
     public ConsumesAttributeTests(
         MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     [Fact]
     public override async Task HasEndpointMatch()

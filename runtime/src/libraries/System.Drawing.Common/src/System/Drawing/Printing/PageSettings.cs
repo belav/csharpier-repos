@@ -24,7 +24,8 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Initializes a new instance of the <see cref='PageSettings'/> class using the default printer.
         /// </summary>
-        public PageSettings() : this(new PrinterSettings()) { }
+        public PageSettings()
+            : this(new PrinterSettings()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='PageSettings'/> class using the specified printer.

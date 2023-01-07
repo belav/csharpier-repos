@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.StringIndentation
         public StringIndentationTag(
             IEditorFormatMap editorFormatMap,
             ImmutableArray<SnapshotSpan> orderedHoleSpans
-        ) : base(editorFormatMap)
+        )
+            : base(editorFormatMap)
         {
             OrderedHoleSpans = orderedHoleSpans;
         }

@@ -2420,7 +2420,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2444,7 +2445,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2468,7 +2470,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2492,7 +2495,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2516,7 +2520,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2540,7 +2545,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2564,7 +2570,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2588,7 +2595,8 @@ namespace System.Net
             Exception? exception,
             bool cancelled,
             object? userToken
-        ) : base(exception, cancelled, userToken)
+        )
+            : base(exception, cancelled, userToken)
         {
             _result = result;
         }
@@ -2610,7 +2618,8 @@ namespace System.Net
             object? userToken,
             long bytesReceived,
             long totalBytesToReceive
-        ) : base(progressPercentage, userToken)
+        )
+            : base(progressPercentage, userToken)
         {
             BytesReceived = bytesReceived;
             TotalBytesToReceive = totalBytesToReceive;
@@ -2629,7 +2638,8 @@ namespace System.Net
             long totalBytesToSend,
             long bytesReceived,
             long totalBytesToReceive
-        ) : base(progressPercentage, userToken)
+        )
+            : base(progressPercentage, userToken)
         {
             BytesReceived = bytesReceived;
             TotalBytesToReceive = totalBytesToReceive;

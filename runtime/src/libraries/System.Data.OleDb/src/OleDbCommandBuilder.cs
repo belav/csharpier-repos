@@ -10,12 +10,14 @@ namespace System.Data.OleDb
 {
     public sealed class OleDbCommandBuilder : DbCommandBuilder
     {
-        public OleDbCommandBuilder() : base()
+        public OleDbCommandBuilder()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OleDbCommandBuilder(OleDbDataAdapter? adapter) : this()
+        public OleDbCommandBuilder(OleDbDataAdapter? adapter)
+            : this()
         {
             DataAdapter = adapter;
         }

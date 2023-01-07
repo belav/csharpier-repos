@@ -26,7 +26,8 @@ public class TwoSqlExpressionsEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         SqlExpression left,
         SqlExpression right
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         Left = left;
         Right = right;

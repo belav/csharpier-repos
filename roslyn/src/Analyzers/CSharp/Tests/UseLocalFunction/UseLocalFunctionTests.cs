@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseLocalFunction
     public partial class UseLocalFunctionTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseLocalFunctionTests(ITestOutputHelper logger) : base(logger) { }
+        public UseLocalFunctionTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

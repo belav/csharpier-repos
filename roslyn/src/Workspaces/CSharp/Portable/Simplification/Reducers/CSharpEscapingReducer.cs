@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxToken
         > s_simplifyIdentifierToken = SimplifyIdentifierToken;
 
-        public CSharpEscapingReducer() : base(s_pool) { }
+        public CSharpEscapingReducer()
+            : base(s_pool) { }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 

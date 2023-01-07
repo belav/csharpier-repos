@@ -10,9 +10,11 @@ using System.Runtime.InteropServices; // For SafeHandle
 [SecurityCritical]
 public class MySafeValidHandle : SafeHandle
 {
-    public MySafeValidHandle() : base(IntPtr.Zero, true) { }
+    public MySafeValidHandle()
+        : base(IntPtr.Zero, true) { }
 
-    public MySafeValidHandle(IntPtr handleValue) : base(IntPtr.Zero, true)
+    public MySafeValidHandle(IntPtr handleValue)
+        : base(IntPtr.Zero, true)
     {
         handle = handleValue;
     }
@@ -33,9 +35,11 @@ public class MySafeValidHandle : SafeHandle
 [SecurityCritical]
 public class MySafeInValidHandle : SafeHandle
 {
-    public MySafeInValidHandle() : base(IntPtr.Zero, true) { }
+    public MySafeInValidHandle()
+        : base(IntPtr.Zero, true) { }
 
-    public MySafeInValidHandle(IntPtr handleValue) : base(IntPtr.Zero, true)
+    public MySafeInValidHandle(IntPtr handleValue)
+        : base(IntPtr.Zero, true)
     {
         handle = handleValue;
     }

@@ -40,7 +40,8 @@ namespace System.Net.Http
         /// HTTP request or response will be completed.</param>
         public PushStreamContent(
             Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable
-        ) : this(onStreamAvailable, (MediaTypeHeaderValue)null) { }
+        )
+            : this(onStreamAvailable, (MediaTypeHeaderValue)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given media type.
@@ -50,7 +51,8 @@ namespace System.Net.Http
         public PushStreamContent(
             Action<Stream, HttpContent, TransportContext> onStreamAvailable,
             string mediaType
-        ) : this(Taskify(onStreamAvailable), new MediaTypeHeaderValue(mediaType)) { }
+        )
+            : this(Taskify(onStreamAvailable), new MediaTypeHeaderValue(mediaType)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given media type.
@@ -62,7 +64,8 @@ namespace System.Net.Http
         public PushStreamContent(
             Func<Stream, HttpContent, TransportContext, Task> onStreamAvailable,
             string mediaType
-        ) : this(onStreamAvailable, new MediaTypeHeaderValue(mediaType)) { }
+        )
+            : this(onStreamAvailable, new MediaTypeHeaderValue(mediaType)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given <see cref="MediaTypeHeaderValue"/>.
@@ -72,7 +75,8 @@ namespace System.Net.Http
         public PushStreamContent(
             Action<Stream, HttpContent, TransportContext> onStreamAvailable,
             MediaTypeHeaderValue mediaType
-        ) : this(Taskify(onStreamAvailable), mediaType) { }
+        )
+            : this(Taskify(onStreamAvailable), mediaType) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PushStreamContent"/> class with the given <see cref="MediaTypeHeaderValue"/>.
@@ -157,7 +161,8 @@ namespace System.Net.Http
             public CompleteTaskOnCloseStream(
                 Stream innerStream,
                 TaskCompletionSource<bool> serializeToStreamTask
-            ) : base(innerStream)
+            )
+                : base(innerStream)
             {
                 Contract.Assert(serializeToStreamTask != null);
                 _serializeToStreamTask = serializeToStreamTask;

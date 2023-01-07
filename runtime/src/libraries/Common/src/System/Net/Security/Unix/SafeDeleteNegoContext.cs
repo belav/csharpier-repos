@@ -42,7 +42,8 @@ namespace System.Net.Security
             get { return _context; }
         }
 
-        public SafeDeleteNegoContext(SafeFreeNegoCredentials credential) : base(IntPtr.Zero)
+        public SafeDeleteNegoContext(SafeFreeNegoCredentials credential)
+            : base(IntPtr.Zero)
         {
             Debug.Assert((null != credential), "Null credential in SafeDeleteNegoContext");
             bool added = false;

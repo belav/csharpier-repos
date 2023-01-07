@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
     internal abstract class StackFrameNode : EmbeddedSyntaxNode<StackFrameKind, StackFrameNode>
     {
-        protected StackFrameNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameNode(StackFrameKind kind)
+            : base(kind) { }
 
         public abstract void Accept(IStackFrameNodeVisitor visitor);
     }
 
     internal abstract class StackFrameDeclarationNode : StackFrameNode
     {
-        protected StackFrameDeclarationNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameDeclarationNode(StackFrameKind kind)
+            : base(kind) { }
     }
 
     internal sealed class StackFrameMethodDeclarationNode : StackFrameDeclarationNode
@@ -36,7 +38,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameQualifiedNameNode memberAccessExpression,
             StackFrameTypeArgumentList? typeArguments,
             StackFrameParameterList argumentList
-        ) : base(StackFrameKind.MethodDeclaration)
+        )
+            : base(StackFrameKind.MethodDeclaration)
         {
             MemberAccessExpression = memberAccessExpression;
             TypeArguments = typeArguments;
@@ -62,7 +65,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// </summary>
     internal abstract class StackFrameTypeNode : StackFrameNode
     {
-        protected StackFrameTypeNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameTypeNode(StackFrameKind kind)
+            : base(kind) { }
     }
 
     /// <summary>
@@ -75,7 +79,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// </remarks>
     internal abstract class StackFrameNameNode : StackFrameTypeNode
     {
-        protected StackFrameNameNode(StackFrameKind kind) : base(kind) { }
+        protected StackFrameNameNode(StackFrameKind kind)
+            : base(kind) { }
     }
 
     /// <summary>
@@ -106,7 +111,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameNameNode left,
             StackFrameToken dotToken,
             StackFrameSimpleNameNode right
-        ) : base(StackFrameKind.MemberAccess)
+        )
+            : base(StackFrameKind.MemberAccess)
         {
             Debug.Assert(dotToken.Kind == StackFrameKind.DotToken);
 
@@ -167,7 +173,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameToken identifier,
             StackFrameToken graveAccentToken,
             StackFrameToken numberToken
-        ) : base(identifier, StackFrameKind.GenericTypeIdentifier)
+        )
+            : base(identifier, StackFrameKind.GenericTypeIdentifier)
         {
             Debug.Assert(graveAccentToken.Kind == StackFrameKind.GraveAccentToken);
             Debug.Assert(numberToken.Kind == StackFrameKind.NumberToken);
@@ -211,7 +218,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameToken identifier,
             StackFrameToken greaterThanToken,
             StackFrameToken? dollarToken
-        ) : base(identifier, StackFrameKind.GeneratedIdentifier)
+        )
+            : base(identifier, StackFrameKind.GeneratedIdentifier)
         {
             Debug.Assert(lessThanToken.Kind == StackFrameKind.LessThanToken);
             Debug.Assert(greaterThanToken.Kind == StackFrameKind.GreaterThanToken);
@@ -263,7 +271,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameToken identifier,
             StackFrameToken pipeToken,
             StackFrameToken suffix
-        ) : base(identifier, StackFrameKind.LocalMethodIdentifier)
+        )
+            : base(identifier, StackFrameKind.LocalMethodIdentifier)
         {
             Debug.Assert(generatedNameSeparator.Kind == StackFrameKind.GeneratedNameSeparatorToken);
             Debug.Assert(identifier.Kind == StackFrameKind.IdentifierToken);
@@ -317,7 +326,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public StackFrameArrayTypeNode(
             StackFrameNameNode typeIdentifier,
             ImmutableArray<StackFrameArrayRankSpecifier> arrayRankSpecifiers
-        ) : base(StackFrameKind.ArrayTypeExpression)
+        )
+            : base(StackFrameKind.ArrayTypeExpression)
         {
             Debug.Assert(!arrayRankSpecifiers.IsDefaultOrEmpty);
             TypeIdentifier = typeIdentifier;
@@ -346,7 +356,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameToken openBracket,
             StackFrameToken closeBracket,
             ImmutableArray<StackFrameToken> commaTokens
-        ) : base(StackFrameKind.ArrayExpression)
+        )
+            : base(StackFrameKind.ArrayExpression)
         {
             Debug.Assert(!commaTokens.IsDefault);
             Debug.Assert(openBracket.Kind == StackFrameKind.OpenBracketToken);
@@ -407,7 +418,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 StackFrameIdentifierNameNode
             > typeArguments,
             StackFrameToken closeToken
-        ) : base(StackFrameKind.TypeArgument)
+        )
+            : base(StackFrameKind.TypeArgument)
         {
             Debug.Assert(
                 openToken.Kind is StackFrameKind.OpenBracketToken or StackFrameKind.LessThanToken
@@ -460,7 +472,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         public StackFrameParameterDeclarationNode(
             StackFrameTypeNode type,
             StackFrameToken identifier
-        ) : base(StackFrameKind.Parameter)
+        )
+            : base(StackFrameKind.Parameter)
         {
             Debug.Assert(identifier.Kind == StackFrameKind.IdentifierToken);
             Type = type;
@@ -496,7 +509,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 StackFrameParameterDeclarationNode
             > parameters,
             StackFrameToken closeToken
-        ) : base(StackFrameKind.ParameterList)
+        )
+            : base(StackFrameKind.ParameterList)
         {
             Debug.Assert(openToken.Kind == StackFrameKind.OpenParenToken);
             Debug.Assert(closeToken.Kind == StackFrameKind.CloseParenToken);
@@ -540,7 +554,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             StackFrameToken path,
             StackFrameToken? colon,
             StackFrameToken? line
-        ) : base(StackFrameKind.FileInformation)
+        )
+            : base(StackFrameKind.FileInformation)
         {
             Debug.Assert(path.Kind == StackFrameKind.PathToken);
             Debug.Assert(colon.HasValue == line.HasValue);

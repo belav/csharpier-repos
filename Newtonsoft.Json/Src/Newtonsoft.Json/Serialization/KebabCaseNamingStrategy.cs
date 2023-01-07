@@ -65,7 +65,8 @@ namespace Newtonsoft.Json.Serialization
             bool processDictionaryKeys,
             bool overrideSpecifiedNames,
             bool processExtensionDataNames
-        ) : this(processDictionaryKeys, overrideSpecifiedNames)
+        )
+            : this(processDictionaryKeys, overrideSpecifiedNames)
         {
             ProcessExtensionDataNames = processExtensionDataNames;
         }

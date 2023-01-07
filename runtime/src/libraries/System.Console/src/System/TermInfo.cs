@@ -500,11 +500,13 @@ namespace System
 
                 /// <summary>Initializes the parameter with an integer value.</summary>
                 /// <param name="value">The value to be stored in the parameter.</param>
-                public FormatParam(int value) : this(value, null) { }
+                public FormatParam(int value)
+                    : this(value, null) { }
 
                 /// <summary>Initializes the parameter with a string value.</summary>
                 /// <param name="value">The value to be stored in the parameter.</param>
-                public FormatParam(string? value) : this(0, value ?? string.Empty) { }
+                public FormatParam(string? value)
+                    : this(0, value ?? string.Empty) { }
 
                 /// <summary>Initializes the parameter.</summary>
                 /// <param name="intValue">The integer value.</param>

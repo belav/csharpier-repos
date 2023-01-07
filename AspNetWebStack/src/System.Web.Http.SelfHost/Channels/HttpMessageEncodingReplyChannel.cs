@@ -17,7 +17,8 @@ namespace System.Web.Http.SelfHost.Channels
         public HttpMessageEncodingReplyChannel(
             ChannelManagerBase channelManager,
             IReplyChannel innerChannel
-        ) : base(channelManager, innerChannel) { }
+        )
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress LocalAddress
         {

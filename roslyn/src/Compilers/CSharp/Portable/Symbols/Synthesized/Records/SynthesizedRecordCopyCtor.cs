@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public SynthesizedRecordCopyCtor(
             SourceMemberContainerTypeSymbol containingType,
             int memberOffset
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             _memberOffset = memberOffset;
             Parameters = ImmutableArray.Create(

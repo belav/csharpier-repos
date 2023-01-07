@@ -20,7 +20,8 @@ public class OwnedNavigationTableValuedFunctionBuilder
     public OwnedNavigationTableValuedFunctionBuilder(
         IMutableDbFunction function,
         OwnedNavigationBuilder ownedNavigationBuilder
-    ) : base(function)
+    )
+        : base(function)
     {
         OwnedNavigationBuilder = ownedNavigationBuilder;
     }

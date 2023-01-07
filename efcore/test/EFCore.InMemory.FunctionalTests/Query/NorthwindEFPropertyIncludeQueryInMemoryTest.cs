@@ -9,7 +9,8 @@ public class NorthwindEFPropertyIncludeQueryInMemoryTest
     public NorthwindEFPropertyIncludeQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

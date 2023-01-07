@@ -13,8 +13,8 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class EnvironmentPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public EnvironmentPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        public EnvironmentPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         public string All { get; set; }
         public string Read { get; set; }

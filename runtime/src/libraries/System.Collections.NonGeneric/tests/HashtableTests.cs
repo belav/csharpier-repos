@@ -1127,39 +1127,46 @@ namespace System.Collections.Tests
 
         private class ComparableHashtable : Hashtable
         {
-            public ComparableHashtable() : base() { }
+            public ComparableHashtable()
+                : base() { }
 
-            public ComparableHashtable(int capacity) : base(capacity) { }
+            public ComparableHashtable(int capacity)
+                : base(capacity) { }
 
-            public ComparableHashtable(int capacity, float loadFactor) : base(capacity, loadFactor)
-            { }
+            public ComparableHashtable(int capacity, float loadFactor)
+                : base(capacity, loadFactor) { }
 
             public ComparableHashtable(int capacity, IHashCodeProvider hcp, IComparer comparer)
                 : base(capacity, hcp, comparer) { }
 
-            public ComparableHashtable(int capacity, IEqualityComparer ikc) : base(capacity, ikc)
-            { }
+            public ComparableHashtable(int capacity, IEqualityComparer ikc)
+                : base(capacity, ikc) { }
 
             public ComparableHashtable(IHashCodeProvider hcp, IComparer comparer)
                 : base(hcp, comparer) { }
 
-            public ComparableHashtable(IEqualityComparer ikc) : base(ikc) { }
+            public ComparableHashtable(IEqualityComparer ikc)
+                : base(ikc) { }
 
-            public ComparableHashtable(IDictionary d) : base(d) { }
+            public ComparableHashtable(IDictionary d)
+                : base(d) { }
 
-            public ComparableHashtable(IDictionary d, float loadFactor) : base(d, loadFactor) { }
+            public ComparableHashtable(IDictionary d, float loadFactor)
+                : base(d, loadFactor) { }
 
             public ComparableHashtable(IDictionary d, IHashCodeProvider hcp, IComparer comparer)
                 : base(d, hcp, comparer) { }
 
-            public ComparableHashtable(IDictionary d, IEqualityComparer ikc) : base(d, ikc) { }
+            public ComparableHashtable(IDictionary d, IEqualityComparer ikc)
+                : base(d, ikc) { }
 
             public ComparableHashtable(
                 IDictionary d,
                 float loadFactor,
                 IHashCodeProvider hcp,
                 IComparer comparer
-            ) : base(d, loadFactor, hcp, comparer) { }
+            )
+                : base(d, loadFactor, hcp, comparer) { }
 
             public ComparableHashtable(IDictionary d, float loadFactor, IEqualityComparer ikc)
                 : base(d, loadFactor, ikc) { }
@@ -1169,7 +1176,8 @@ namespace System.Collections.Tests
                 float loadFactor,
                 IHashCodeProvider hcp,
                 IComparer comparer
-            ) : base(capacity, loadFactor, hcp, comparer) { }
+            )
+                : base(capacity, loadFactor, hcp, comparer) { }
 
             public ComparableHashtable(int capacity, float loadFactor, IEqualityComparer ikc)
                 : base(capacity, loadFactor, ikc) { }

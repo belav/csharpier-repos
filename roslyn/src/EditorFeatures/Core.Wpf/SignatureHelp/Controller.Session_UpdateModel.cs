@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
                     SignatureHelpItem selectedItem,
                     bool userSelected,
                     int? selectedParameter
-                ) : this()
+                )
+                    : this()
                 {
                     _selectedItem = selectedItem;
                     _userSelected = userSelected;

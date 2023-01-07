@@ -8,7 +8,8 @@ namespace System.Security.Cryptography.Xml
 {
     public struct X509IssuerSerial
     {
-        internal X509IssuerSerial(string issuerName, string serialNumber) : this()
+        internal X509IssuerSerial(string issuerName, string serialNumber)
+            : this()
         {
             Debug.Assert(!string.IsNullOrEmpty(issuerName));
             Debug.Assert(!string.IsNullOrEmpty(serialNumber));

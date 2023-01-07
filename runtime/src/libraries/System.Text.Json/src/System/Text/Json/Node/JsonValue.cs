@@ -12,7 +12,8 @@ namespace System.Text.Json.Node
     /// </summary>
     public abstract partial class JsonValue : JsonNode
     {
-        private protected JsonValue(JsonNodeOptions? options = null) : base(options) { }
+        private protected JsonValue(JsonNodeOptions? options = null)
+            : base(options) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonValue"/> class that contains the specified value.

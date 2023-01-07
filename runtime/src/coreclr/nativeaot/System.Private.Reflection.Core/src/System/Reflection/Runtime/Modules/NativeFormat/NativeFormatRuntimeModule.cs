@@ -15,7 +15,8 @@ namespace System.Reflection.Runtime.Modules.NativeFormat
 {
     internal sealed partial class NativeFormatRuntimeModule : RuntimeModule
     {
-        private NativeFormatRuntimeModule(NativeFormatRuntimeAssembly assembly) : base()
+        private NativeFormatRuntimeModule(NativeFormatRuntimeAssembly assembly)
+            : base()
         {
             _assembly = assembly;
         }

@@ -139,7 +139,8 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12CertBag(
             System.Security.Cryptography.Oid certificateType,
             System.ReadOnlyMemory<byte> encodedCertificate
-        ) : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+        )
+            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
 
         public System.ReadOnlyMemory<byte> EncodedCertificate
         {
@@ -382,7 +383,8 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12ShroudedKeyBag(
             System.ReadOnlyMemory<byte> encryptedPkcs8PrivateKey,
             bool skipCopy = false
-        ) : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
+        )
+            : base(default(string), default(System.ReadOnlyMemory<byte>), default(bool)) { }
 
         public System.ReadOnlyMemory<byte> EncryptedPkcs8PrivateKey
         {

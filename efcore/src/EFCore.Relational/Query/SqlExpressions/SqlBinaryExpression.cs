@@ -55,7 +55,8 @@ public class SqlBinaryExpression : SqlExpression
         SqlExpression right,
         Type type,
         RelationalTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         if (!IsValidOperator(operatorType))
         {

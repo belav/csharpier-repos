@@ -19,7 +19,8 @@ public class ServerInteropTestDefaultExceptionsBehavior
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

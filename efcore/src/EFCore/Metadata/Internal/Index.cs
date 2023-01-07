@@ -56,7 +56,8 @@ public class Index : ConventionAnnotatable, IMutableIndex, IConventionIndex, IIn
         string name,
         EntityType declaringEntityType,
         ConfigurationSource configurationSource
-    ) : this(properties, declaringEntityType, configurationSource)
+    )
+        : this(properties, declaringEntityType, configurationSource)
     {
         Name = name;
     }

@@ -20,7 +20,8 @@ public class AccessDeniedContext : HandleRequestContext<RemoteAuthenticationOpti
         HttpContext context,
         AuthenticationScheme scheme,
         RemoteAuthenticationOptions options
-    ) : base(context, scheme, options) { }
+    )
+        : base(context, scheme, options) { }
 
     /// <summary>
     /// Gets or sets the endpoint path the user agent will be redirected to.

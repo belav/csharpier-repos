@@ -37,7 +37,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     The user-visible error message.  If null, <see cref="ValidationAttribute.GetValidationResult" />
         ///     will use <see cref="ValidationAttribute.FormatErrorMessage" /> for its error message.
         /// </param>
-        public ValidationResult(string? errorMessage) : this(errorMessage, null) { }
+        public ValidationResult(string? errorMessage)
+            : this(errorMessage, null) { }
 
         /// <summary>
         ///     Constructor that accepts an error message as well as a list of member names involved in the validation.

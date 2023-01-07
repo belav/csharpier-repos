@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Experimentation
         public VisualStudioExperimentationService(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             object experimentationServiceOpt = null;
             MethodInfo isCachedFlightEnabledInfo = null;

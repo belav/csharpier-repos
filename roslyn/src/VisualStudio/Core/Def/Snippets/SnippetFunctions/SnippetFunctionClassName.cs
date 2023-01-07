@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             ITextBuffer subjectBuffer,
             string fieldName,
             IThreadingContext threadingContext
-        ) : base(snippetExpansionClient, subjectBuffer, threadingContext)
+        )
+            : base(snippetExpansionClient, subjectBuffer, threadingContext)
         {
             this.FieldName = fieldName;
         }

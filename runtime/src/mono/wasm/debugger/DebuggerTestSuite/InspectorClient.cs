@@ -22,7 +22,8 @@ namespace DebuggerTests
         protected Func<string, JObject, CancellationToken, Task> onEvent;
         protected int next_cmd_id;
 
-        public InspectorClient(ILogger logger) : base(logger) { }
+        public InspectorClient(ILogger logger)
+            : base(logger) { }
 
         protected override async Task<WasmDebuggerConnection> SetupConnection(
             Uri webserverUri,

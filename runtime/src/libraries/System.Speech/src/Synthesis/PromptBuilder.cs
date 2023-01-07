@@ -16,7 +16,8 @@ namespace System.Speech.Synthesis
     public class PromptBuilder
     {
         #region Constructors
-        public PromptBuilder() : this(CultureInfo.CurrentUICulture) { }
+        public PromptBuilder()
+            : this(CultureInfo.CurrentUICulture) { }
 
         public PromptBuilder(CultureInfo culture)
         {
@@ -1156,7 +1157,8 @@ namespace System.Speech.Synthesis
                 _namespace = null;
             }
 
-            internal AttributeItem(string ns, string key, string value) : this(key, value)
+            internal AttributeItem(string ns, string key, string value)
+                : this(key, value)
             {
                 _namespace = ns;
             }
@@ -1174,7 +1176,8 @@ namespace System.Speech.Synthesis
                 _type = type;
             }
 
-            internal Element(ElementType type, string text) : this(type)
+            internal Element(ElementType type, string text)
+                : this(type)
             {
                 _text = text;
             }

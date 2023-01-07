@@ -17,7 +17,8 @@ namespace System.Reflection.TypeLoading
     {
         private readonly RoModule?[] _loadedModules; // Any loaded modules indexed by [rid - 1]. Does NOT include the manifest module.
 
-        protected RoAssembly(MetadataLoadContext loader, int assemblyFileCount) : base()
+        protected RoAssembly(MetadataLoadContext loader, int assemblyFileCount)
+            : base()
         {
             Loader = loader;
             IsSingleModule = (assemblyFileCount == 0);

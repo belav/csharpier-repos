@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
             private readonly int[] _childOffsets;
 
-            internal WithLotsOfChildren(ArrayElement<GreenNode>[] children) : base(children)
+            internal WithLotsOfChildren(ArrayElement<GreenNode>[] children)
+                : base(children)
             {
                 _childOffsets = CalculateOffsets(children);
             }
@@ -32,12 +33,14 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 SyntaxAnnotation[]? annotations,
                 ArrayElement<GreenNode>[] children,
                 int[] childOffsets
-            ) : base(diagnostics, annotations, children)
+            )
+                : base(diagnostics, annotations, children)
             {
                 _childOffsets = childOffsets;
             }
 
-            internal WithLotsOfChildren(ObjectReader reader) : base(reader)
+            internal WithLotsOfChildren(ObjectReader reader)
+                : base(reader)
             {
                 _childOffsets = CalculateOffsets(this.children);
             }

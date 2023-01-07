@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Symbol memberSymbol,
             Binder next,
             Action<Binder, SyntaxNode> binderUpdatedHandler = null
-        ) : this(root, memberSymbol, next, next.Flags)
+        )
+            : this(root, memberSymbol, next, next.Flags)
         {
             _binderUpdatedHandler = binderUpdatedHandler;
         }

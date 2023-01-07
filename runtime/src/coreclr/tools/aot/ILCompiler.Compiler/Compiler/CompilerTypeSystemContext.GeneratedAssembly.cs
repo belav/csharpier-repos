@@ -40,7 +40,8 @@ namespace ILCompiler
 
             public override IAssemblyDesc Assembly => this;
 
-            public CompilerGeneratedAssembly(TypeSystemContext context) : base(context, null)
+            public CompilerGeneratedAssembly(TypeSystemContext context)
+                : base(context, null)
             {
                 _globalModuleType = new CompilerGeneratedType(this, "<Module>");
             }

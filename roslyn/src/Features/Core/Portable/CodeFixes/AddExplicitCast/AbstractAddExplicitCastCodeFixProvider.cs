@@ -293,7 +293,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(title, createChangedDocument, equivalenceKey: title) { }
+            )
+                : base(title, createChangedDocument, equivalenceKey: title) { }
         }
     }
 }

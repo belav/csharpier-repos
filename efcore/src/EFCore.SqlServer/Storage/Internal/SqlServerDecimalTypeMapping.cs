@@ -49,7 +49,8 @@ public class SqlServerDecimalTypeMapping : DecimalTypeMapping
     protected SqlServerDecimalTypeMapping(
         RelationalTypeMappingParameters parameters,
         SqlDbType? sqlDbType
-    ) : base(parameters)
+    )
+        : base(parameters)
     {
         _sqlDbType = sqlDbType;
     }

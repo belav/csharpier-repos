@@ -38,7 +38,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
             Dispatcher dispatcher,
             IFileProvider fileProvider,
             string hostPageRelativePath
-        ) : base(services, dispatcher, new Uri(AppOrigin), fileProvider, hostPageRelativePath)
+        )
+            : base(services, dispatcher, new Uri(AppOrigin), fileProvider, hostPageRelativePath)
         {
             _webview = webview ?? throw new ArgumentNullException(nameof(webview));
 

@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             AnalyzersFolderItem analyzersFolder,
             AnalyzerReference analyzerReference,
             IContextMenuController contextMenuController
-        ) : base(GetNameText(analyzerReference))
+        )
+            : base(GetNameText(analyzerReference))
         {
             _analyzersFolder = analyzersFolder;
             _analyzerReference = analyzerReference;

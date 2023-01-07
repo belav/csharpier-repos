@@ -26,7 +26,8 @@ using System.Linq;
 
 class PublicGen : CsWriter
 {
-    public PublicGen(string fileName) : base(fileName) { }
+    public PublicGen(string fileName)
+        : base(fileName) { }
 
     public void EmitSource()
     {

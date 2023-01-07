@@ -61,7 +61,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             return server;
         }
 
-        private InProcessTestServer() : this(loggerFactory: null, null) { }
+        private InProcessTestServer()
+            : this(loggerFactory: null, null) { }
 
         private InProcessTestServer(ILoggerFactory loggerFactory, IDisposable disposable)
         {

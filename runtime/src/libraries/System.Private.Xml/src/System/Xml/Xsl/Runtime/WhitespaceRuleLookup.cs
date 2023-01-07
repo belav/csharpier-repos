@@ -32,7 +32,8 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Create a new lookup internal class from the specified WhitespaceRules.
         /// </summary>
-        public WhitespaceRuleLookup(IList<WhitespaceRule> rules) : this()
+        public WhitespaceRuleLookup(IList<WhitespaceRule> rules)
+            : this()
         {
             WhitespaceRule rule;
             InternalWhitespaceRule ruleInternal;

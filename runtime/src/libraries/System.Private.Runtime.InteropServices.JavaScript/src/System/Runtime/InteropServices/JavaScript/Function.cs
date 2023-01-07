@@ -14,9 +14,11 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </remarks>
     public class Function : JSObject
     {
-        public Function(params object[] args) : base(nameof(Function), args) { }
+        public Function(params object[] args)
+            : base(nameof(Function), args) { }
 
-        internal Function(IntPtr jsHandle) : base(jsHandle) { }
+        internal Function(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// The Apply() method calls a function with a given this value, and arguments provided as an array (or an array-like object).

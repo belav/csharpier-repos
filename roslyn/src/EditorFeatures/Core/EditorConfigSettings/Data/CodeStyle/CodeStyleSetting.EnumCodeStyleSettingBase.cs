@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 string[] valueDescriptions,
                 string category,
                 OptionUpdater updater
-            ) : base(description, updater)
+            )
+                : base(description, updater)
             {
                 if (enumValues.Length != valueDescriptions.Length)
                 {

@@ -18,7 +18,8 @@ namespace Wasm.Build.NativeRebuild.Tests
         public FlagsChangeRebuildTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         public static IEnumerable<object?[]> FlagsChangesForNativeRelinkingData(bool aot) =>
             ConfigWithAOTData(aot, config: "Release")

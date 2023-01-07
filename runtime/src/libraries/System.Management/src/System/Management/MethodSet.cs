@@ -51,7 +51,8 @@ namespace System.Management
 
         private sealed class enumLock { } //used to lock usage of BeginMethodEnum/NextMethod
 
-        internal MethodDataCollection(ManagementObject parent) : base()
+        internal MethodDataCollection(ManagementObject parent)
+            : base()
         {
             this.parent = parent;
         }

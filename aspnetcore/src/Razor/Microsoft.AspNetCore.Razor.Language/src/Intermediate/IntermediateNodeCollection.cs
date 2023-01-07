@@ -15,7 +15,8 @@ public sealed class IntermediateNodeCollection : IList<IntermediateNode>
 
     private readonly IList<IntermediateNode> _inner;
 
-    public IntermediateNodeCollection() : this(new List<IntermediateNode>()) { }
+    public IntermediateNodeCollection()
+        : this(new List<IntermediateNode>()) { }
 
     private IntermediateNodeCollection(IList<IntermediateNode> inner)
     {

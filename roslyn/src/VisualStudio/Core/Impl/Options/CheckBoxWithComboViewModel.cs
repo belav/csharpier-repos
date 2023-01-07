@@ -31,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionSet options,
             IList<NotificationOptionViewModel> items
-        ) : this(option, description, preview, preview, info, options, items) { }
+        )
+            : this(option, description, preview, preview, info, options, items) { }
 
         public CheckBoxWithComboOptionViewModel(
             IOption option,
@@ -41,7 +42,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionSet options,
             IList<NotificationOptionViewModel> items
-        ) : base(option, description, truePreview, falsePreview, info)
+        )
+            : base(option, description, truePreview, falsePreview, info)
         {
             NotificationOptions = items;
 

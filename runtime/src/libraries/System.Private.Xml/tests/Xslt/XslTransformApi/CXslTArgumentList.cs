@@ -23,7 +23,8 @@ namespace System.Xml.XslTransformApiTests
         private string _xslFile;
         private string _xmlFile;
 
-        public CArgIntegrity(ITestOutputHelper output) : base(output)
+        public CArgIntegrity(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _xslFile = $"{GetTestFilePath()}.xsl";
@@ -630,7 +631,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgAddParam(ITestOutputHelper output) : base(output)
+        public CArgAddParam(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -2459,7 +2461,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgAddParamMisc(ITestOutputHelper output) : base(output)
+        public CArgAddParamMisc(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -7171,7 +7174,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgAddExtObj(ITestOutputHelper output) : base(output)
+        public CArgAddExtObj(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -9726,7 +9730,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgRemoveParam(ITestOutputHelper output) : base(output)
+        public CArgRemoveParam(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -10713,7 +10718,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgRemoveExtObj(ITestOutputHelper output) : base(output)
+        public CArgRemoveExtObj(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -11230,7 +11236,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CArgClear(ITestOutputHelper output) : base(output)
+        public CArgClear(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

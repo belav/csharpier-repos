@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteEncapsulateFieldService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteEncapsulateFieldService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

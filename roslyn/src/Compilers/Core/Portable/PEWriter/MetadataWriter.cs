@@ -4873,7 +4873,8 @@ namespace Microsoft.Cci
                 MetadataWriter writer,
                 Dictionary<T, int> index,
                 int lastRowId
-            ) : base(writer, lastRowId)
+            )
+                : base(writer, lastRowId)
             {
                 Debug.Assert(index.Count == 0);
                 _index = index;
@@ -4905,7 +4906,8 @@ namespace Microsoft.Cci
                 MetadataWriter writer,
                 Dictionary<ITypeReference, int> index,
                 int lastRowId
-            ) : base(writer, lastRowId)
+            )
+                : base(writer, lastRowId)
             {
                 Debug.Assert(index.Count == 0);
                 _index = index;
@@ -4932,7 +4934,8 @@ namespace Microsoft.Cci
                 MetadataWriter writer,
                 IEqualityComparer<T> structuralComparer,
                 int lastRowId = 0
-            ) : base(writer, lastRowId)
+            )
+                : base(writer, lastRowId)
             {
                 _instanceIndex = new Dictionary<T, int>(ReferenceEqualityComparer.Instance);
                 _structuralIndex = new Dictionary<T, int>(structuralComparer);

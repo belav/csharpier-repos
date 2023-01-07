@@ -24,7 +24,8 @@ public class TwoPropertyBaseCollectionsEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IReadOnlyList<IReadOnlyPropertyBase> firstPropertyCollection,
         IReadOnlyList<IReadOnlyPropertyBase> secondPropertyCollection
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         FirstPropertyCollection = firstPropertyCollection;
         SecondPropertyCollection = secondPropertyCollection;

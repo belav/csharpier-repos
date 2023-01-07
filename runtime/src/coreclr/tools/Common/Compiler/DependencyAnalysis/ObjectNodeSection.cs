@@ -27,7 +27,8 @@ namespace ILCompiler.DependencyAnalysis
             ComdatName = comdatName;
         }
 
-        public ObjectNodeSection(string name, SectionType type) : this(name, type, null) { }
+        public ObjectNodeSection(string name, SectionType type)
+            : this(name, type, null) { }
 
         /// <summary>
         /// Returns true if the section is a standard one (defined as text, data, or rdata currently)

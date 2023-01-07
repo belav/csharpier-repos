@@ -50,7 +50,8 @@ namespace System.Diagnostics.Eventing.Reader
 
         public EventLogException() { }
 
-        public EventLogException(string message) : base(message) { }
+        public EventLogException(string message)
+            : base(message) { }
 
         public EventLogException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -75,7 +76,8 @@ namespace System.Diagnostics.Eventing.Reader
         protected EventLogException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             _errorCode = serializationInfo.GetInt32("errorCode");
         }
@@ -95,17 +97,20 @@ namespace System.Diagnostics.Eventing.Reader
     {
         public EventLogNotFoundException() { }
 
-        public EventLogNotFoundException(string message) : base(message) { }
+        public EventLogNotFoundException(string message)
+            : base(message) { }
 
         public EventLogNotFoundException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        internal EventLogNotFoundException(int errorCode) : base(errorCode) { }
+        internal EventLogNotFoundException(int errorCode)
+            : base(errorCode) { }
 
         protected EventLogNotFoundException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 
     /// <summary>
@@ -118,17 +123,20 @@ namespace System.Diagnostics.Eventing.Reader
     {
         public EventLogReadingException() { }
 
-        public EventLogReadingException(string message) : base(message) { }
+        public EventLogReadingException(string message)
+            : base(message) { }
 
         public EventLogReadingException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        internal EventLogReadingException(int errorCode) : base(errorCode) { }
+        internal EventLogReadingException(int errorCode)
+            : base(errorCode) { }
 
         protected EventLogReadingException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 
     /// <summary>
@@ -141,17 +149,20 @@ namespace System.Diagnostics.Eventing.Reader
     {
         public EventLogProviderDisabledException() { }
 
-        public EventLogProviderDisabledException(string message) : base(message) { }
+        public EventLogProviderDisabledException(string message)
+            : base(message) { }
 
         public EventLogProviderDisabledException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        internal EventLogProviderDisabledException(int errorCode) : base(errorCode) { }
+        internal EventLogProviderDisabledException(int errorCode)
+            : base(errorCode) { }
 
         protected EventLogProviderDisabledException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 
     /// <summary>
@@ -162,16 +173,19 @@ namespace System.Diagnostics.Eventing.Reader
     {
         public EventLogInvalidDataException() { }
 
-        public EventLogInvalidDataException(string message) : base(message) { }
+        public EventLogInvalidDataException(string message)
+            : base(message) { }
 
         public EventLogInvalidDataException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        internal EventLogInvalidDataException(int errorCode) : base(errorCode) { }
+        internal EventLogInvalidDataException(int errorCode)
+            : base(errorCode) { }
 
         protected EventLogInvalidDataException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 }

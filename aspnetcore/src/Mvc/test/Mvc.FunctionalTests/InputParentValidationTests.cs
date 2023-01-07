@@ -123,7 +123,8 @@ public class InputParentValidationTests
     {
         public ParentValidationScenarios(
             MvcTestFixture<FormatterWebSite.StartupWithComplexParentValidation> fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         protected override bool ShouldParentBeValidatedWhenChildIsInvalid => true;
     }

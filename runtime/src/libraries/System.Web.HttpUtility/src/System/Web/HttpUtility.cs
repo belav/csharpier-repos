@@ -42,7 +42,8 @@ namespace System.Web
     {
         private sealed class HttpQSCollection : NameValueCollection
         {
-            internal HttpQSCollection() : base(StringComparer.OrdinalIgnoreCase) { }
+            internal HttpQSCollection()
+                : base(StringComparer.OrdinalIgnoreCase) { }
 
             public override string ToString()
             {

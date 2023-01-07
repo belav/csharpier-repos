@@ -28,7 +28,8 @@ namespace System.Security.Cryptography
         public const int HashSizeInBytes = HashSizeInBits / 8;
 
         [UnsupportedOSPlatform("browser")]
-        public HMACMD5() : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
+        public HMACMD5()
+            : this(RandomNumberGenerator.GetBytes(BlockSize)) { }
 
         [UnsupportedOSPlatform("browser")]
         public HMACMD5(byte[] key)

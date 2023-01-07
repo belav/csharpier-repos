@@ -464,9 +464,11 @@ namespace System.Collections.Generic
     {
         public LowLevelListWithIList() { }
 
-        public LowLevelListWithIList(int capacity) : base(capacity) { }
+        public LowLevelListWithIList(int capacity)
+            : base(capacity) { }
 
-        public LowLevelListWithIList(IEnumerable<T> collection) : base(collection) { }
+        public LowLevelListWithIList(IEnumerable<T> collection)
+            : base(collection) { }
 
         // Is this List read-only?
         bool ICollection<T>.IsReadOnly

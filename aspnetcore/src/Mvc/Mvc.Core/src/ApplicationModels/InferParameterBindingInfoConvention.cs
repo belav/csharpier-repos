@@ -46,7 +46,8 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
     public InferParameterBindingInfoConvention(
         IModelMetadataProvider modelMetadataProvider,
         IServiceProviderIsService serviceProviderIsService
-    ) : this(modelMetadataProvider)
+    )
+        : this(modelMetadataProvider)
     {
         _serviceProviderIsService =
             serviceProviderIsService

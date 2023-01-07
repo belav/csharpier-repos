@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class CustomConvertersInMemoryTest
     : CustomConvertersTestBase<CustomConvertersInMemoryTest.CustomConvertersInMemoryFixture>
 {
-    public CustomConvertersInMemoryTest(CustomConvertersInMemoryFixture fixture) : base(fixture) { }
+    public CustomConvertersInMemoryTest(CustomConvertersInMemoryFixture fixture)
+        : base(fixture) { }
 
     public override void Optional_datetime_reading_null_from_database() { }
 

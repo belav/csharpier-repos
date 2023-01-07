@@ -96,7 +96,8 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class UrlSyndicationContentSubclass : UrlSyndicationContent
         {
-            public UrlSyndicationContentSubclass(UrlSyndicationContent source) : base(source) { }
+            public UrlSyndicationContentSubclass(UrlSyndicationContent source)
+                : base(source) { }
         }
     }
 }

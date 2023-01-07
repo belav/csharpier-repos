@@ -16,7 +16,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CNullArgumentTest(ITestOutputHelper output) : base(output)
+        public CNullArgumentTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -382,7 +383,8 @@ namespace System.Xml.XslTransformApiTests
         private ITestOutputHelper _output;
         private AllowDefaultResolverContext _resolverContext;
 
-        public CXmlResolverTest(ITestOutputHelper output) : base(output)
+        public CXmlResolverTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _resolverContext = new AllowDefaultResolverContext();
@@ -809,7 +811,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CLoadTest(ITestOutputHelper output) : base(output)
+        public CLoadTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -1739,7 +1742,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CLoadXmlResolverTest(ITestOutputHelper output) : base(output)
+        public CLoadXmlResolverTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -2541,7 +2545,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CLoadUrlResolverTest(ITestOutputHelper output) : base(output)
+        public CLoadUrlResolverTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -2654,7 +2659,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CLoadStringTest(ITestOutputHelper output) : base(output)
+        public CLoadStringTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -2757,7 +2763,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CLoadXPathNavigableTest(ITestOutputHelper output) : base(output)
+        public CLoadXPathNavigableTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -2872,7 +2879,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CLoadReaderTest(ITestOutputHelper output) : base(output)
+        public CLoadReaderTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -3138,7 +3146,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CTransformTestGeneric(ITestOutputHelper output) : base(output)
+        public CTransformTestGeneric(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -3699,7 +3708,8 @@ namespace System.Xml.XslTransformApiTests
         private ITestOutputHelper _output;
         private AllowDefaultResolverContext _resolverContext;
 
-        public CTransformResolverTest(ITestOutputHelper output) : base(output)
+        public CTransformResolverTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _resolverContext = new AllowDefaultResolverContext();
@@ -4111,7 +4121,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CTransformStrStrTest(ITestOutputHelper output) : base(output)
+        public CTransformStrStrTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -4512,7 +4523,8 @@ namespace System.Xml.XslTransformApiTests
         private ITestOutputHelper _output;
         private AllowDefaultResolverContext _resolverContext;
 
-        public CTransformStrStrResolverTest(ITestOutputHelper output) : base(output)
+        public CTransformStrStrResolverTest(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _resolverContext = new AllowDefaultResolverContext();
@@ -4607,7 +4619,8 @@ namespace System.Xml.XslTransformApiTests
     {
         private ITestOutputHelper _output;
 
-        public CNDP1_1SP1Test(ITestOutputHelper output) : base(output)
+        public CNDP1_1SP1Test(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

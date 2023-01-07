@@ -33,7 +33,8 @@ namespace System.Linq.Parallel
         internal SynchronousChannelMergeEnumerator(
             QueryTaskGroupState taskGroupState,
             SynchronousChannel<T>[] channels
-        ) : base(taskGroupState)
+        )
+            : base(taskGroupState)
         {
             Debug.Assert(channels != null);
 #if DEBUG

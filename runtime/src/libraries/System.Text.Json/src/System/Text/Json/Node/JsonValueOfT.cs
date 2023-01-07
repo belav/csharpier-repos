@@ -12,7 +12,8 @@ namespace System.Text.Json.Node
     {
         internal readonly TValue _value; // keep as a field for direct access to avoid copies
 
-        public JsonValue(TValue value, JsonNodeOptions? options = null) : base(options)
+        public JsonValue(TValue value, JsonNodeOptions? options = null)
+            : base(options)
         {
             Debug.Assert(value != null);
             Debug.Assert(

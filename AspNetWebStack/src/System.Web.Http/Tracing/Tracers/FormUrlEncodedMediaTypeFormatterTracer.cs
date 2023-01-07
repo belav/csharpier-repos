@@ -28,7 +28,8 @@ namespace System.Web.Http.Tracing.Tracers
             FormUrlEncodedMediaTypeFormatter innerFormatter,
             ITraceWriter traceWriter,
             HttpRequestMessage request
-        ) : base(innerFormatter)
+        )
+            : base(innerFormatter)
         {
             _inner = innerFormatter;
             _innerTracer = new MediaTypeFormatterTracer(innerFormatter, traceWriter, request);

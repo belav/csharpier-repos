@@ -12,6 +12,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         public static readonly ArgumentListType Instance = new ArgumentListType();
 
-        private ArgumentListType() : base(TypeKind.TK_ArgumentListType) { }
+        private ArgumentListType()
+            : base(TypeKind.TK_ArgumentListType) { }
     }
 }

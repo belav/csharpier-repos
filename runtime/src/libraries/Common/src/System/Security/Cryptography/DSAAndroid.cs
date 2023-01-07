@@ -25,7 +25,8 @@ namespace System.Security.Cryptography
 
             private Lazy<SafeDsaHandle>? _key;
 
-            public DSAAndroid() : this(2048) { }
+            public DSAAndroid()
+                : this(2048) { }
 
             public DSAAndroid(int keySize)
             {

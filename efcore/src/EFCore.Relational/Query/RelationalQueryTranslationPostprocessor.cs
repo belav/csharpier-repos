@@ -22,7 +22,8 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
         QueryTranslationPostprocessorDependencies dependencies,
         RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext)
+    )
+        : base(dependencies, queryCompilationContext)
     {
         RelationalDependencies = relationalDependencies;
         _useRelationalNulls = RelationalOptionsExtension

@@ -62,7 +62,8 @@ namespace System.Net.Http.Formatting
         /// Initializes a new instance of the <see cref="XmlMediaTypeFormatter"/> class.
         /// </summary>
         /// <param name="formatter">The <see cref="XmlMediaTypeFormatter"/> instance to copy settings from.</param>
-        protected XmlMediaTypeFormatter(XmlMediaTypeFormatter formatter) : base(formatter)
+        protected XmlMediaTypeFormatter(XmlMediaTypeFormatter formatter)
+            : base(formatter)
         {
             UseXmlSerializer = formatter.UseXmlSerializer;
             WriterSettings = formatter.WriterSettings;

@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class LoadInMemoryTest : LoadTestBase<LoadInMemoryTest.LoadInMemoryFixture>
 {
-    public LoadInMemoryTest(LoadInMemoryFixture fixture) : base(fixture) { }
+    public LoadInMemoryTest(LoadInMemoryFixture fixture)
+        : base(fixture) { }
 
     public class LoadInMemoryFixture : LoadFixtureBase
     {

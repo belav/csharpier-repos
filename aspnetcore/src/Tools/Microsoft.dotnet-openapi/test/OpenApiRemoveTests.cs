@@ -9,7 +9,8 @@ namespace Microsoft.DotNet.OpenApi.Remove.Tests;
 
 public class OpenApiRemoveTests : OpenApiTestBase
 {
-    public OpenApiRemoveTests(ITestOutputHelper output) : base(output) { }
+    public OpenApiRemoveTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Fact]
     public async Task OpenApi_Remove_File()

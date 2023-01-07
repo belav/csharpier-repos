@@ -19,7 +19,8 @@ namespace System.Collections.Frozen
         protected KeysAndValuesFrozenDictionary(
             Dictionary<TKey, TValue> source,
             IEqualityComparer<TKey> comparer
-        ) : base(comparer)
+        )
+            : base(comparer)
         {
             Debug.Assert(source.Count != 0);
 

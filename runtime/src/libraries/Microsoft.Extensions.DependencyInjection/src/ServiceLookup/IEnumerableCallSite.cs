@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ResultCache cache,
             Type itemType,
             ServiceCallSite[] serviceCallSites
-        ) : base(cache)
+        )
+            : base(cache)
         {
             ItemType = itemType;
             ServiceCallSites = serviceCallSites;

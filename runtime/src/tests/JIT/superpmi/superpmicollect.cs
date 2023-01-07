@@ -12,9 +12,11 @@ namespace SuperPMICollection
 {
     public class SpmiException : Exception
     {
-        public SpmiException() : base() { }
+        public SpmiException()
+            : base() { }
 
-        public SpmiException(string message) : base(message) { }
+        public SpmiException(string message)
+            : base(message) { }
 
         public SpmiException(string message, Exception innerException)
             : base(message, innerException) { }

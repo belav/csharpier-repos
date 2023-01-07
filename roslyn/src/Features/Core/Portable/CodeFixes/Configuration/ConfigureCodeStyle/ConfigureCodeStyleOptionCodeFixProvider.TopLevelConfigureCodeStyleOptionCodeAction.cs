@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration.ConfigureCodeStyle
             public TopLevelConfigureCodeStyleOptionCodeAction(
                 string optionName,
                 ImmutableArray<CodeAction> nestedActions
-            ) : base(nestedActions, optionName) { }
+            )
+                : base(nestedActions, optionName) { }
         }
     }
 }

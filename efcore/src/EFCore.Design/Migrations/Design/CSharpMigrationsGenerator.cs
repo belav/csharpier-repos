@@ -20,7 +20,8 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
     public CSharpMigrationsGenerator(
         MigrationsCodeGeneratorDependencies dependencies,
         CSharpMigrationsGeneratorDependencies csharpDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         CSharpDependencies = csharpDependencies;
     }

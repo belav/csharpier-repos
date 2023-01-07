@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             set => NamingStyle = NamingStyle with { CapitalizationScheme = value };
         }
 
-        public MutableNamingStyle() : this(new NamingStyle(Guid.NewGuid())) { }
+        public MutableNamingStyle()
+            : this(new NamingStyle(Guid.NewGuid())) { }
 
         public MutableNamingStyle(NamingStyle namingStyle) => NamingStyle = namingStyle;
 

@@ -315,7 +315,8 @@ namespace System.Web.Http.SelfHost.Channels
                     byte[] content,
                     int offset,
                     int count
-                ) : base(content, offset, count)
+                )
+                    : base(content, offset, count)
                 {
                     Contract.Assert(
                         bufferManager != null,

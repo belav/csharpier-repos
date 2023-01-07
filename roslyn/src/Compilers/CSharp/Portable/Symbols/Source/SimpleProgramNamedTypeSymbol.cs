@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol globalNamespace,
             MergedTypeDeclaration declaration,
             BindingDiagnosticBag diagnostics
-        ) : base(globalNamespace, declaration, diagnostics)
+        )
+            : base(globalNamespace, declaration, diagnostics)
         {
             Debug.Assert(globalNamespace.IsGlobalNamespace);
             Debug.Assert(declaration.Kind == DeclarationKind.SimpleProgram);

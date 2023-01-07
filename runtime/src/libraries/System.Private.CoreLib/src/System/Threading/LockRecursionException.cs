@@ -13,7 +13,8 @@ namespace System.Threading
     {
         public LockRecursionException() { }
 
-        public LockRecursionException(string? message) : base(message) { }
+        public LockRecursionException(string? message)
+            : base(message) { }
 
         public LockRecursionException(string? message, Exception? innerException)
             : base(message, innerException) { }

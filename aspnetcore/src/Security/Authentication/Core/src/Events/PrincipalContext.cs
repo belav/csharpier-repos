@@ -24,7 +24,8 @@ public abstract class PrincipalContext<TOptions> : PropertiesContext<TOptions>
         AuthenticationScheme scheme,
         TOptions options,
         AuthenticationProperties? properties
-    ) : base(context, scheme, options, properties) { }
+    )
+        : base(context, scheme, options, properties) { }
 
     /// <summary>
     /// Gets the <see cref="ClaimsPrincipal"/> containing the user claims.

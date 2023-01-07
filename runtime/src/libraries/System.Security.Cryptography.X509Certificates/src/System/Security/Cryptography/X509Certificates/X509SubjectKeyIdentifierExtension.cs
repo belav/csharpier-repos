@@ -8,7 +8,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509SubjectKeyIdentifierExtension : X509Extension
     {
-        public X509SubjectKeyIdentifierExtension() : base(Oids.SubjectKeyIdentifierOid)
+        public X509SubjectKeyIdentifierExtension()
+            : base(Oids.SubjectKeyIdentifierOid)
         {
             _subjectKeyIdentifier = null;
             _decoded = true;
@@ -17,7 +18,8 @@ namespace System.Security.Cryptography.X509Certificates
         public X509SubjectKeyIdentifierExtension(
             AsnEncodedData encodedSubjectKeyIdentifier,
             bool critical
-        ) : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical) { }
+        )
+            : base(Oids.SubjectKeyIdentifierOid, encodedSubjectKeyIdentifier.RawData, critical) { }
 
         public X509SubjectKeyIdentifierExtension(byte[] subjectKeyIdentifier, bool critical)
             : this(subjectKeyIdentifier.AsSpanParameter(nameof(subjectKeyIdentifier)), critical) { }
@@ -25,7 +27,9 @@ namespace System.Security.Cryptography.X509Certificates
         public X509SubjectKeyIdentifierExtension(
             ReadOnlySpan<byte> subjectKeyIdentifier,
             bool critical
-        ) : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(subjectKeyIdentifier), critical) { }
+        )
+            : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(subjectKeyIdentifier), critical)
+        { }
 
         public X509SubjectKeyIdentifierExtension(PublicKey key, bool critical)
             : this(key, X509SubjectKeyIdentifierHashAlgorithm.Sha1, critical) { }
@@ -34,7 +38,8 @@ namespace System.Security.Cryptography.X509Certificates
             PublicKey key,
             X509SubjectKeyIdentifierHashAlgorithm algorithm,
             bool critical
-        ) : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(key, algorithm), critical) { }
+        )
+            : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(key, algorithm), critical) { }
 
         public X509SubjectKeyIdentifierExtension(string subjectKeyIdentifier, bool critical)
             : base(Oids.SubjectKeyIdentifierOid, EncodeExtension(subjectKeyIdentifier), critical)

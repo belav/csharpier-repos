@@ -7,7 +7,8 @@ namespace System.Web.Mvc
 {
     public class HttpUnauthorizedResult : HttpStatusCodeResult
     {
-        public HttpUnauthorizedResult() : this(null) { }
+        public HttpUnauthorizedResult()
+            : this(null) { }
 
         // Unauthorized is equivalent to HTTP status 401, the status code for unauthorized
         // access. Other code might intercept this and perform some special logic. For

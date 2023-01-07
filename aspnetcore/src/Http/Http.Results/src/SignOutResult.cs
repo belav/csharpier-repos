@@ -19,7 +19,8 @@ internal sealed partial class SignOutResult : IResult
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
     /// </summary>
-    public SignOutResult() : this(Array.Empty<string>()) { }
+    public SignOutResult()
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
@@ -34,7 +35,8 @@ internal sealed partial class SignOutResult : IResult
     /// specified authentication scheme.
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to use when signing out the user.</param>
-    public SignOutResult(string authenticationScheme) : this(new[] { authenticationScheme }) { }
+    public SignOutResult(string authenticationScheme)
+        : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the

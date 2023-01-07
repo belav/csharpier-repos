@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class Utf8StringLiteralsParsingTests : ParsingTests
     {
-        public Utf8StringLiteralsParsingTests(ITestOutputHelper output) : base(output) { }
+        public Utf8StringLiteralsParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void RegularStringLiteral_01()

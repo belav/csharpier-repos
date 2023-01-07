@@ -61,7 +61,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             string root,
             FileSystemWatcher? fileSystemWatcher,
             bool pollForChanges
-        ) : this(root, fileSystemWatcher, pollForChanges, ExclusionFilters.Sensitive) { }
+        )
+            : this(root, fileSystemWatcher, pollForChanges, ExclusionFilters.Sensitive) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="PhysicalFilesWatcher" /> that watches files in <paramref name="root" />.
@@ -554,7 +555,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
             public ChangeTokenInfo(
                 CancellationTokenSource tokenSource,
                 CancellationChangeToken changeToken
-            ) : this(tokenSource, changeToken, matcher: null) { }
+            )
+                : this(tokenSource, changeToken, matcher: null) { }
 
             public ChangeTokenInfo(
                 CancellationTokenSource tokenSource,

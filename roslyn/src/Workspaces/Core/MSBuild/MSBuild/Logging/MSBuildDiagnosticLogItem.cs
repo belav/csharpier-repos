@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.Logging
             string fileName,
             int lineNumber,
             int columnNumber
-        ) : base(kind, message, projectFilePath)
+        )
+            : base(kind, message, projectFilePath)
         {
             FileName = fileName ?? throw new ArgumentNullException(nameof(fileName));
             LineNumber = lineNumber;

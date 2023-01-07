@@ -15,7 +15,8 @@ namespace System.Runtime.InteropServices.JavaScript
         public IntPtr JSHandle => handle;
         public bool IsDisposed { get; private set; }
 
-        public JSObject() : base(true)
+        public JSObject()
+            : base(true)
         {
             InFlight = null;
             InFlightCounter = 0;
@@ -24,7 +25,8 @@ namespace System.Runtime.InteropServices.JavaScript
             SetHandle(jsHandle);
         }
 
-        public JSObject(string typeName, params object[] _params) : base(true)
+        public JSObject(string typeName, params object[] _params)
+            : base(true)
         {
             InFlight = null;
             InFlightCounter = 0;
@@ -33,7 +35,8 @@ namespace System.Runtime.InteropServices.JavaScript
             SetHandle(jsHandle);
         }
 
-        internal JSObject(IntPtr jsHandle) : base(true)
+        internal JSObject(IntPtr jsHandle)
+            : base(true)
         {
             SetHandle(jsHandle);
             InFlight = null;

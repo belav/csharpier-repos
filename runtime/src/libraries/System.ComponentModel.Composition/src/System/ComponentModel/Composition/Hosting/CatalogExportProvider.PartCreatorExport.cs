@@ -15,7 +15,8 @@ namespace System.ComponentModel.Composition.Hosting
                 CatalogExportProvider catalogExportProvider,
                 ComposablePartDefinition partDefinition,
                 ExportDefinition exportDefinition
-            ) : base(partDefinition, exportDefinition)
+            )
+                : base(partDefinition, exportDefinition)
             {
                 _catalogExportProvider = catalogExportProvider;
             }

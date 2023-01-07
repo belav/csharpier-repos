@@ -37,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             ProjectId projectId,
             IMethodSymbol symbol,
             AbstractExternalCodeMember parent
-        ) : base(state, projectId, symbol)
+        )
+            : base(state, projectId, symbol)
         {
             Debug.Assert(
                 symbol.MethodKind

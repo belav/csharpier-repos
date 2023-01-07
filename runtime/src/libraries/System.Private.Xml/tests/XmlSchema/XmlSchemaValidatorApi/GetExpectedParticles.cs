@@ -14,7 +14,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCGetExpectedParticles(ITestOutputHelper output) : base(output)
+        public TCGetExpectedParticles(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

@@ -38,7 +38,8 @@ public class SqlUnaryExpression : SqlExpression
         SqlExpression operand,
         Type type,
         RelationalTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         if (!IsValidOperator(operatorType))
         {

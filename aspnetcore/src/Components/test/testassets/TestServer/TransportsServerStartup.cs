@@ -5,7 +5,8 @@ namespace TestServer;
 
 public class TransportsServerStartup : ServerStartup
 {
-    public TransportsServerStartup(IConfiguration configuration) : base(configuration) { }
+    public TransportsServerStartup(IConfiguration configuration)
+        : base(configuration) { }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public override void Configure(

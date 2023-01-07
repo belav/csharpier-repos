@@ -13,12 +13,14 @@ namespace System.Runtime.Serialization
         /// Creates a new SerializationException with its message
         /// string set to a default message.
         /// </summary>
-        public SerializationException() : base(SR.SerializationException)
+        public SerializationException()
+            : base(SR.SerializationException)
         {
             HResult = HResults.COR_E_SERIALIZATION;
         }
 
-        public SerializationException(string? message) : base(message)
+        public SerializationException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_SERIALIZATION;
         }

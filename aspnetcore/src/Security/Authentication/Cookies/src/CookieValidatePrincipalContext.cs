@@ -23,7 +23,8 @@ public class CookieValidatePrincipalContext : PrincipalContext<CookieAuthenticat
         AuthenticationScheme scheme,
         CookieAuthenticationOptions options,
         AuthenticationTicket ticket
-    ) : base(context, scheme, options, ticket?.Properties)
+    )
+        : base(context, scheme, options, ticket?.Properties)
     {
         if (ticket == null)
         {

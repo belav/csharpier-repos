@@ -23,8 +23,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandler_ClientCertificates_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_ClientCertificates_Test(ITestOutputHelper output) : base(output)
-        { }
+        public HttpClientHandler_ClientCertificates_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void ClientCertificateOptions_Default()

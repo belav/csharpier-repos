@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Remote.Storage
         public RemoteCloudCachePersistentStorageService(
             IGlobalServiceBroker globalServiceBroker,
             IPersistentStorageConfiguration configuration
-        ) : base(configuration)
+        )
+            : base(configuration)
         {
             _globalServiceBroker = globalServiceBroker;
         }

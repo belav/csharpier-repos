@@ -27,7 +27,8 @@ namespace System.Net.Http.Functional.Tests
             DecompressionMethods.Deflate | DecompressionMethods.GZip;
 #endif
 
-        public HttpClientHandler_Decompression_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Decompression_Test(ITestOutputHelper output)
+            : base(output) { }
 
         public static IEnumerable<object[]> DecompressedResponse_MethodSpecified_DecompressedContentReturned_MemberData() =>
             from compressionName in new[] { "gzip", "zlib", "deflate", "br" }

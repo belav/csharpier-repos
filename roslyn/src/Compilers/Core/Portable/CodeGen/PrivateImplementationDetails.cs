@@ -516,7 +516,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal ModuleVersionIdField(
             Cci.INamedTypeDefinition containingType,
             Cci.ITypeReference type
-        ) : base("MVID", containingType, type) { }
+        )
+            : base("MVID", containingType, type) { }
 
         public override ImmutableArray<byte> MappedData => default(ImmutableArray<byte>);
     }
@@ -527,7 +528,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.INamedTypeDefinition containingType,
             int analysisIndex,
             Cci.ITypeReference payloadType
-        ) : base("PayloadRoot" + analysisIndex.ToString(), containingType, payloadType) { }
+        )
+            : base("PayloadRoot" + analysisIndex.ToString(), containingType, payloadType) { }
 
         public override ImmutableArray<byte> MappedData => default(ImmutableArray<byte>);
     }
@@ -544,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Cci.INamedTypeDefinition containingType,
             Cci.ITypeReference type,
             ImmutableArray<byte> block
-        ) : base(name, containingType, type)
+        )
+            : base(name, containingType, type)
         {
             Debug.Assert(!block.IsDefault);
 

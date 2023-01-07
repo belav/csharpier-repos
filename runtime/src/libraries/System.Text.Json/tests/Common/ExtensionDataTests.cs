@@ -14,8 +14,8 @@ namespace System.Text.Json.Serialization.Tests
 {
     public abstract class ExtensionDataTests : SerializerTests
     {
-        public ExtensionDataTests(JsonSerializerWrapper serializerWrapper) : base(serializerWrapper)
-        { }
+        public ExtensionDataTests(JsonSerializerWrapper serializerWrapper)
+            : base(serializerWrapper) { }
 
         [Fact]
         public async Task EmptyPropertyName_WinsOver_ExtensionDataEmptyPropertyName()

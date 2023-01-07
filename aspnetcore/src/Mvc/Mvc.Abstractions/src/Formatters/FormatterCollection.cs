@@ -21,7 +21,8 @@ public class FormatterCollection<TFormatter> : Collection<TFormatter> where TFor
     /// as a wrapper for the specified list.
     /// </summary>
     /// <param name="list">The list that is wrapped by the new collection.</param>
-    public FormatterCollection(IList<TFormatter> list) : base(list) { }
+    public FormatterCollection(IList<TFormatter> list)
+        : base(list) { }
 
     /// <summary>
     /// Removes all formatters of the specified type.

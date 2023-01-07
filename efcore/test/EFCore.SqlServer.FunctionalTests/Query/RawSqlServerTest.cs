@@ -36,7 +36,8 @@ SELECT o.Amount From Orders AS o -- RAW
     {
         public virtual DbSet<Order13346> Orders { get; set; }
 
-        public MyContext13346(DbContextOptions options) : base(options) { }
+        public MyContext13346(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

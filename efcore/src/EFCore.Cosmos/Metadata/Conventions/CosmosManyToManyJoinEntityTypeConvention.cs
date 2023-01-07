@@ -23,7 +23,8 @@ public class CosmosManyToManyJoinEntityTypeConvention
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public CosmosManyToManyJoinEntityTypeConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an annotation is changed on an entity type.

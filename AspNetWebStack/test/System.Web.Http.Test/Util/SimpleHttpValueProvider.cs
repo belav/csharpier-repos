@@ -11,9 +11,11 @@ namespace System.Web.Http.Util
     {
         private readonly CultureInfo _culture;
 
-        public SimpleHttpValueProvider() : this(null) { }
+        public SimpleHttpValueProvider()
+            : this(null) { }
 
-        public SimpleHttpValueProvider(CultureInfo culture) : base(StringComparer.OrdinalIgnoreCase)
+        public SimpleHttpValueProvider(CultureInfo culture)
+            : base(StringComparer.OrdinalIgnoreCase)
         {
             _culture = culture ?? CultureInfo.InvariantCulture;
         }

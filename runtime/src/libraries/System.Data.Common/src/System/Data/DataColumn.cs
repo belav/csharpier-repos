@@ -89,7 +89,8 @@ namespace System.Data
             "IL2026:RequiresUnreferencedCode",
             Justification = "This is safe because type is string and expression is null."
         )]
-        public DataColumn() : this(null, typeof(string), null, MappingType.Element) { }
+        public DataColumn()
+            : this(null, typeof(string), null, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataColumn'/> class
@@ -119,7 +120,8 @@ namespace System.Data
                     | DynamicallyAccessedMemberTypes.PublicFields
             )]
                 Type dataType
-        ) : this(columnName, dataType, null, MappingType.Element) { }
+        )
+            : this(columnName, dataType, null, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance
@@ -137,7 +139,8 @@ namespace System.Data
             )]
                 Type dataType,
             string? expr
-        ) : this(columnName, dataType, expr, MappingType.Element) { }
+        )
+            : this(columnName, dataType, expr, MappingType.Element) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataColumn'/> class

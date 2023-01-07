@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
     [Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
     public class ValidateFormatStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ValidateFormatStringTests(ITestOutputHelper logger) : base(logger) { }
+        public ValidateFormatStringTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

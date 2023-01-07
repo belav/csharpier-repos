@@ -265,7 +265,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class SubBuffer : SafeBuffer
         {
-            public SubBuffer(bool ownsHandle) : base(ownsHandle) { }
+            public SubBuffer(bool ownsHandle)
+                : base(ownsHandle) { }
 
             protected override bool ReleaseHandle()
             {
@@ -275,7 +276,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class HGlobalBuffer : SafeBuffer
         {
-            public HGlobalBuffer(int length) : base(true)
+            public HGlobalBuffer(int length)
+                : base(true)
             {
                 SetHandle(Marshal.AllocHGlobal(length));
                 Initialize((ulong)length);

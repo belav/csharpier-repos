@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     TimeSpan backOffTimeSpan,
                     TimeSpan projectBackOffTimeSpan,
                     CancellationToken cancellationToken
-                ) : base(listener, backOffTimeSpan, cancellationToken)
+                )
+                    : base(listener, backOffTimeSpan, cancellationToken)
                 {
                     _gate = new SemaphoreSlim(initialCount: 0);
 
@@ -448,7 +449,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         IncrementalAnalyzerProcessor processor,
                         TimeSpan backOffTimeSpan,
                         CancellationToken cancellationToken
-                    ) : base(listener, backOffTimeSpan, cancellationToken)
+                    )
+                        : base(listener, backOffTimeSpan, cancellationToken)
                     {
                         _registration = registration;
                         _processor = processor;

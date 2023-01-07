@@ -14,7 +14,8 @@ public class PropertyMap : MemberMap
         DestinationType = destinationMemberType;
     }
 
-    public PropertyMap(PropertyMap inheritedMappedProperty, TypeMap typeMap) : base(typeMap)
+    public PropertyMap(PropertyMap inheritedMappedProperty, TypeMap typeMap)
+        : base(typeMap)
     {
         DestinationMember = inheritedMappedProperty.DestinationMember;
         if (DestinationMember.DeclaringType.ContainsGenericParameters)
@@ -35,7 +36,8 @@ public class PropertyMap : MemberMap
         PropertyMap includedMemberMap,
         TypeMap typeMap,
         IncludedMember includedMember
-    ) : this(includedMemberMap, typeMap) =>
+    )
+        : this(includedMemberMap, typeMap) =>
         Details.IncludedMember = includedMember.Chain(includedMemberMap.IncludedMember);
 
     private MemberMapDetails Details => _details ??= new();

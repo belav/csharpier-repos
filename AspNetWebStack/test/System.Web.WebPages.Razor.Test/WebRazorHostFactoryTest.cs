@@ -25,7 +25,8 @@ namespace System.Web.WebPages.Razor.Test
 
         public class TestHost : WebPageRazorHost
         {
-            public TestHost() : base("Foo.cshtml") { }
+            public TestHost()
+                : base("Foo.cshtml") { }
 
             public new void RegisterSpecialFile(string fileName, Type baseType)
             {

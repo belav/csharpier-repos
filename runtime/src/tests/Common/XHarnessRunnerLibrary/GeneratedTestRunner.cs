@@ -24,7 +24,8 @@ public sealed class GeneratedTestRunner : TestRunner
         string assemblyName,
         HashSet<string> testExclusionList,
         bool writeBase64TestResults
-    ) : base(logger)
+    )
+        : base(logger)
     {
         _assemblyName = assemblyName;
         _runTestsCallback = runTestsCallback;

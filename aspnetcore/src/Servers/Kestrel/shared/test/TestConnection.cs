@@ -14,12 +14,14 @@ public class TestConnection : StreamBackedTestConnection
 {
     private readonly Socket _socket;
 
-    public TestConnection(int port) : this(port, AddressFamily.InterNetwork) { }
+    public TestConnection(int port)
+        : this(port, AddressFamily.InterNetwork) { }
 
     public TestConnection(int port, AddressFamily addressFamily)
         : this(CreateConnectedLoopbackSocket(port, addressFamily), ownsSocket: true) { }
 
-    public TestConnection(Socket socket) : this(socket, ownsSocket: false) { }
+    public TestConnection(Socket socket)
+        : this(socket, ownsSocket: false) { }
 
     private TestConnection(Socket socket, bool ownsSocket)
         : base(new NetworkStream(socket, ownsSocket: ownsSocket))

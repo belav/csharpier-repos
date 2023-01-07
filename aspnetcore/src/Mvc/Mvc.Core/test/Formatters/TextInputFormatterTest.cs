@@ -216,7 +216,8 @@ public class TextInputFormatterTest
     {
         private readonly object _object;
 
-        public TestFormatter() : this(null) { }
+        public TestFormatter()
+            : this(null) { }
 
         public TestFormatter(object @object)
         {

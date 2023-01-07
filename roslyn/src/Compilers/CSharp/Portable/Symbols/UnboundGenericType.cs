@@ -81,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             DiagnosticInfo errorInfo,
             TupleExtraData? tupleData = null
-        ) : base(tupleData)
+        )
+            : base(tupleData)
         {
             _name = name;
             _errorInfo = errorInfo;

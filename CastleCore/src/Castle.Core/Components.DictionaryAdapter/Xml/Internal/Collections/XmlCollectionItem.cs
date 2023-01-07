@@ -20,9 +20,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public readonly T Value;
         public readonly bool HasValue;
 
-        public XmlCollectionItem(IXmlNode node) : this(node, default(T), false) { }
+        public XmlCollectionItem(IXmlNode node)
+            : this(node, default(T), false) { }
 
-        public XmlCollectionItem(IXmlNode node, T value) : this(node, value, true) { }
+        public XmlCollectionItem(IXmlNode node, T value)
+            : this(node, value, true) { }
 
         private XmlCollectionItem(IXmlNode node, T value, bool hasValue)
         {

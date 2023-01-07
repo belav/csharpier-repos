@@ -9,8 +9,8 @@ namespace System.CommandLine.Rendering
 {
     internal class AnsiRenderingSpanVisitor : ContentRenderingSpanVisitor
     {
-        public AnsiRenderingSpanVisitor(IConsole console, Region region) : base(console.Out, region)
-        { }
+        public AnsiRenderingSpanVisitor(IConsole console, Region region)
+            : base(console.Out, region) { }
 
         protected override void SetCursorPosition(int? left = null, int? top = null)
         {

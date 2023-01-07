@@ -23,7 +23,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
         public InstanceMethodInvoker(
             MethodInvokeInfo methodInvokeInfo,
             RuntimeTypeHandle declaringTypeHandle
-        ) : base(methodInvokeInfo)
+        )
+            : base(methodInvokeInfo)
         {
             _declaringTypeHandle = declaringTypeHandle;
         }

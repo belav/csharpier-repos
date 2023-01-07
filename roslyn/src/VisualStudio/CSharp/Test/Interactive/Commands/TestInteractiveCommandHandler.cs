@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Interactive.Commands
             IContentTypeRegistryService contentTypeRegistryService,
             EditorOptionsService editorOptionsService,
             IEditorOperationsFactoryService editorOperationsFactoryService
-        ) : base(contentTypeRegistryService, editorOptionsService, editorOperationsFactoryService)
+        )
+            : base(contentTypeRegistryService, editorOptionsService, editorOperationsFactoryService)
         {
             _interactiveWindow = interactiveWindow;
             _sendToInteractiveSubmissionProvider = sendToInteractiveSubmissionProvider;

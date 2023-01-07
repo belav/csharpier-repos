@@ -10,7 +10,8 @@ namespace ILCompiler.DependencyAnalysis
 {
     public class ConstructedEETypeNode : EETypeNode
     {
-        public ConstructedEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public ConstructedEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(!type.IsCanonicalDefinitionType(CanonicalFormKind.Any));
             CheckCanGenerateConstructedEEType(factory, type);

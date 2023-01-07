@@ -29,7 +29,8 @@ internal class RequiredKeywordRecommender : AbstractSyntacticSingleKeywordRecomm
     private static readonly ISet<SyntaxKind> s_validTypeDeclarations =
         SyntaxKindSet.ClassStructRecordTypeDeclarations;
 
-    public RequiredKeywordRecommender() : base(SyntaxKind.RequiredKeyword) { }
+    public RequiredKeywordRecommender()
+        : base(SyntaxKind.RequiredKeyword) { }
 
     protected override bool IsValidContext(
         int position,

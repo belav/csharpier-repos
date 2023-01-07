@@ -21,7 +21,8 @@ namespace System.Net.Http
 #nullable restore
                 >
             > nameValueCollection
-        ) : base(GetContentByteArray(nameValueCollection))
+        )
+            : base(GetContentByteArray(nameValueCollection))
         {
             Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
         }

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="span"></param>
         /// <param name="newLength"></param>
-        public TextChangeRange(TextSpan span, int newLength) : this()
+        public TextChangeRange(TextSpan span, int newLength)
+            : this()
         {
             if (newLength < 0)
             {

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             DeletedMethodDefinition? setter,
             ITypeDefinition containingTypeDef,
             Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
-        ) : base(oldProperty, typesUsedByDeletedMembers)
+        )
+            : base(oldProperty, typesUsedByDeletedMembers)
         {
             _containingTypeDef = containingTypeDef;
             _getter = getter;

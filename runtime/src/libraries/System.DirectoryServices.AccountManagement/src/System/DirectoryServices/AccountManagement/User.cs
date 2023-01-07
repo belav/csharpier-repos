@@ -14,7 +14,8 @@ namespace System.DirectoryServices.AccountManagement
         //
         // Public constructors
         //
-        public UserPrincipal(PrincipalContext context) : base(context)
+        public UserPrincipal(PrincipalContext context)
+            : base(context)
         {
             if (context == null)
                 throw new ArgumentException(SR.NullArguments);
@@ -28,7 +29,8 @@ namespace System.DirectoryServices.AccountManagement
             string samAccountName,
             string password,
             bool enabled
-        ) : this(context)
+        )
+            : this(context)
         {
             if (samAccountName == null || password == null)
                 throw new ArgumentException(SR.NullArguments);

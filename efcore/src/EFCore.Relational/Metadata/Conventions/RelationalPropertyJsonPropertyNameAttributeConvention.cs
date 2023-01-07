@@ -22,7 +22,8 @@ public class RelationalPropertyJsonPropertyNameAttributeConvention
     public RelationalPropertyJsonPropertyNameAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

@@ -78,7 +78,8 @@ namespace System.ComponentModel.Tests
 
     public class MyTypeListConverter : TypeListConverter
     {
-        public MyTypeListConverter(Type[] types) : base(types) { }
+        public MyTypeListConverter(Type[] types)
+            : base(types) { }
     }
 
 #if FUNCTIONAL_TESTS
@@ -190,12 +191,14 @@ namespace System.ComponentModel.Tests
     [TypeConverter("System.ComponentModel.Tests.DerivedClassConverter")]
     internal class DerivedClass : BaseClass
     {
-        public DerivedClass() : base()
+        public DerivedClass()
+            : base()
         {
             DerivedProperty = 2;
         }
 
-        public DerivedClass(int i) : base()
+        public DerivedClass(int i)
+            : base()
         {
             DerivedProperty = i;
         }

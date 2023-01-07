@@ -701,7 +701,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 string normalized,
                 string preferredEncodingHex,
                 string bmpEncodingHex
-            ) : base(input, normalized, preferredEncodingHex, bmpEncodingHex)
+            )
+                : base(input, normalized, preferredEncodingHex, bmpEncodingHex)
             {
                 Flags = flags;
             }

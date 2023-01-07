@@ -8,5 +8,6 @@ public class NorthwindNavigationsQuerySqliteTest
 {
     public NorthwindNavigationsQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 }

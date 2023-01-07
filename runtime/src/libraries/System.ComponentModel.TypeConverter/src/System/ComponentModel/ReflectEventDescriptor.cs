@@ -76,7 +76,8 @@ namespace System.ComponentModel
             string name,
             Type type,
             Attribute[] attributes
-        ) : base(name, attributes)
+        )
+            : base(name, attributes)
         {
             if (componentClass == null)
             {
@@ -99,7 +100,8 @@ namespace System.ComponentModel
         public ReflectEventDescriptor(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentClass,
             EventInfo eventInfo
-        ) : base(eventInfo.Name, Array.Empty<Attribute>())
+        )
+            : base(eventInfo.Name, Array.Empty<Attribute>())
         {
             Debug.Assert(
                 eventInfo.ReflectedType!.IsAssignableFrom(componentClass),
@@ -122,7 +124,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType,
             EventDescriptor oldReflectEventDescriptor,
             Attribute[] attributes
-        ) : base(oldReflectEventDescriptor, attributes)
+        )
+            : base(oldReflectEventDescriptor, attributes)
         {
             _componentClass = componentType;
             _type = oldReflectEventDescriptor.EventType;

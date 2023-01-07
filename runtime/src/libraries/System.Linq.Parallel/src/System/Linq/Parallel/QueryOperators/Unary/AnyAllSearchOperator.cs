@@ -52,7 +52,8 @@ namespace System.Linq.Parallel
             IEnumerable<TInput> child,
             bool qualification,
             Func<TInput, bool> predicate
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(predicate != null, "need a predicate function");

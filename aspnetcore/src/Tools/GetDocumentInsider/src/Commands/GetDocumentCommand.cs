@@ -18,7 +18,8 @@ internal sealed class GetDocumentCommand : ProjectCommandBase
     private CommandOption _fileListPath;
     private CommandOption _output;
 
-    public GetDocumentCommand(IConsole console) : base(console) { }
+    public GetDocumentCommand(IConsole console)
+        : base(console) { }
 
     public override void Configure(CommandLineApplication command)
     {

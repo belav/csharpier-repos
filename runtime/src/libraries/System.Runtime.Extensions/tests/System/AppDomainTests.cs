@@ -226,7 +226,8 @@ namespace System.Tests
 
         class FirstChanceTestException : Exception
         {
-            public FirstChanceTestException(string message) : base(message) { }
+            public FirstChanceTestException(string message)
+                : base(message) { }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -880,7 +881,8 @@ namespace System.Tests
 
         class CorrectlyPropagatesException : Exception
         {
-            public CorrectlyPropagatesException(string message) : base(message) { }
+            public CorrectlyPropagatesException(string message)
+                : base(message) { }
         }
 
         [ConditionalTheory(

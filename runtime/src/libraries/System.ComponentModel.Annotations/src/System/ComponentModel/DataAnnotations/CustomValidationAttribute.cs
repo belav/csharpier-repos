@@ -93,7 +93,8 @@ namespace System.ComponentModel.DataAnnotations
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 Type validatorType,
             string method
-        ) : base(() => SR.CustomValidationAttribute_ValidationError)
+        )
+            : base(() => SR.CustomValidationAttribute_ValidationError)
         {
             ValidatorType = validatorType;
             Method = method;

@@ -223,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             EmptyStructTypeCache emptyStructs,
             bool trackUnassignments = false,
             HashSet<Symbol>? initiallyAssignedVariables = null
-        ) : base(compilation, member, node, emptyStructs, trackUnassignments)
+        )
+            : base(compilation, member, node, emptyStructs, trackUnassignments)
         {
             this.initiallyAssignedVariables = initiallyAssignedVariables;
             _sourceAssembly = GetSourceAssembly(compilation, member, node);

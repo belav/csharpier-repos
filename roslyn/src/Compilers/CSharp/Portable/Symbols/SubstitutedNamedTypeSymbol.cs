@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol constructedFrom = null,
             bool unbound = false,
             TupleExtraData tupleData = null
-        ) : base(originalDefinition, tupleData)
+        )
+            : base(originalDefinition, tupleData)
         {
             Debug.Assert(originalDefinition.IsDefinition);
             Debug.Assert(!originalDefinition.IsErrorType());

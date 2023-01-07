@@ -44,7 +44,8 @@ namespace Roslyn.Test.Performance.Utilities
         private int _startEventAbsoluteInstance = 1;
         private int _stopEventAbsoluteInstance = 1;
 
-        public TraceManager(string cpcPath) : base()
+        public TraceManager(string cpcPath)
+            : base()
         {
             _cpcPath = cpcPath;
             _scenarioGenerator = new ScenarioGenerator();

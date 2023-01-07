@@ -189,9 +189,11 @@ namespace System.Security.Cryptography.Cng.Tests
             private bool _isOpen;
             private readonly bool _invalidateOnClose;
 
-            public StateInformingSafeHandle() : this(true) { }
+            public StateInformingSafeHandle()
+                : this(true) { }
 
-            public StateInformingSafeHandle(bool isOpen) : this(isOpen, true) { }
+            public StateInformingSafeHandle(bool isOpen)
+                : this(isOpen, true) { }
 
             public StateInformingSafeHandle(bool isOpen, bool invalidateOnClose)
                 : base(IntPtr.Zero, true)

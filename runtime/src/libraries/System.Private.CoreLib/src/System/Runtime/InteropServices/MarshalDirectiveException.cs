@@ -20,17 +20,20 @@ namespace System.Runtime.InteropServices
     )]
     public class MarshalDirectiveException : SystemException
     {
-        public MarshalDirectiveException() : base(SR.Arg_MarshalDirectiveException)
+        public MarshalDirectiveException()
+            : base(SR.Arg_MarshalDirectiveException)
         {
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        public MarshalDirectiveException(string? message) : base(message)
+        public MarshalDirectiveException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }
 
-        public MarshalDirectiveException(string? message, Exception? inner) : base(message, inner)
+        public MarshalDirectiveException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_MARSHALDIRECTIVE;
         }

@@ -12,7 +12,8 @@ public class TPCGearsOfWarQuerySqliteTest
     public TPCGearsOfWarQuerySqliteTest(
         TPCGearsOfWarQuerySqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

@@ -17,12 +17,14 @@ namespace System.Net
         private ChangeTrackingArrayList? _bypassList;
         private Regex[]? _regexBypassList;
 
-        public WebProxy() : this((Uri?)null, false, null, null) { }
+        public WebProxy()
+            : this((Uri?)null, false, null, null) { }
 
-        public WebProxy(Uri? Address) : this(Address, false, null, null) { }
+        public WebProxy(Uri? Address)
+            : this(Address, false, null, null) { }
 
-        public WebProxy(Uri? Address, bool BypassOnLocal) : this(Address, BypassOnLocal, null, null)
-        { }
+        public WebProxy(Uri? Address, bool BypassOnLocal)
+            : this(Address, BypassOnLocal, null, null) { }
 
         public WebProxy(
             Uri? Address,
@@ -32,7 +34,8 @@ namespace System.Net
                 RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
             )]
                 string[]? BypassList
-        ) : this(Address, BypassOnLocal, BypassList, null) { }
+        )
+            : this(Address, BypassOnLocal, BypassList, null) { }
 
         public WebProxy(
             Uri? Address,
@@ -55,10 +58,11 @@ namespace System.Net
             }
         }
 
-        public WebProxy(string Host, int Port) : this(CreateProxyUri(Host, Port), false, null, null)
-        { }
+        public WebProxy(string Host, int Port)
+            : this(CreateProxyUri(Host, Port), false, null, null) { }
 
-        public WebProxy(string? Address) : this(CreateProxyUri(Address), false, null, null) { }
+        public WebProxy(string? Address)
+            : this(CreateProxyUri(Address), false, null, null) { }
 
         public WebProxy(string? Address, bool BypassOnLocal)
             : this(CreateProxyUri(Address), BypassOnLocal, null, null) { }
@@ -71,7 +75,8 @@ namespace System.Net
                 RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
             )]
                 string[]? BypassList
-        ) : this(CreateProxyUri(Address), BypassOnLocal, BypassList, null) { }
+        )
+            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, null) { }
 
         public WebProxy(
             string? Address,
@@ -82,7 +87,8 @@ namespace System.Net
             )]
                 string[]? BypassList,
             ICredentials? Credentials
-        ) : this(CreateProxyUri(Address), BypassOnLocal, BypassList, Credentials) { }
+        )
+            : this(CreateProxyUri(Address), BypassOnLocal, BypassList, Credentials) { }
 
         public Uri? Address { get; set; }
 
@@ -258,7 +264,8 @@ namespace System.Net
         {
             public ChangeTrackingArrayList() { }
 
-            public ChangeTrackingArrayList(ICollection c) : base(c) { }
+            public ChangeTrackingArrayList(ICollection c)
+                : base(c) { }
 
             // While this type isn't intended to be mutated concurrently with reads, non-concurrent updates
             // to the list might result in lazy initialization, and it's possible concurrent HTTP requests could race

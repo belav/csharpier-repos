@@ -16,8 +16,10 @@ namespace System.Security.Policy
         protected PolicyException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public PolicyException(string message) : base(message) { }
+        public PolicyException(string message)
+            : base(message) { }
 
-        public PolicyException(string message, Exception exception) : base(message, exception) { }
+        public PolicyException(string message, Exception exception)
+            : base(message, exception) { }
     }
 }

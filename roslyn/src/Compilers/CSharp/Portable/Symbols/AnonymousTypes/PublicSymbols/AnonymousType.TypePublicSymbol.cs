@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal AnonymousTypePublicSymbol(
                 AnonymousTypeManager manager,
                 AnonymousTypeDescriptor typeDescr
-            ) : base(manager, typeDescr)
+            )
+                : base(manager, typeDescr)
             {
                 typeDescr.AssertIsGood();
 

@@ -42,7 +42,8 @@ public class ImageTagHelper : UrlResolutionTagHelper
         IFileVersionProvider fileVersionProvider,
         HtmlEncoder htmlEncoder,
         IUrlHelperFactory urlHelperFactory
-    ) : base(urlHelperFactory, htmlEncoder)
+    )
+        : base(urlHelperFactory, htmlEncoder)
     {
         FileVersionProvider = fileVersionProvider;
     }
@@ -63,7 +64,8 @@ public class ImageTagHelper : UrlResolutionTagHelper
         IFileVersionProvider fileVersionProvider,
         HtmlEncoder htmlEncoder,
         IUrlHelperFactory urlHelperFactory
-    ) : base(urlHelperFactory, htmlEncoder)
+    )
+        : base(urlHelperFactory, htmlEncoder)
     {
         HostingEnvironment = hostingEnvironment;
         Cache = cacheProvider.Cache;

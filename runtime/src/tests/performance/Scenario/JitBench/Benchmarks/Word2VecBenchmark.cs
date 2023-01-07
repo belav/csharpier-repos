@@ -13,7 +13,8 @@ namespace JitBench
     {
         private static readonly HashSet<int> DefaultExitCodes = new HashSet<int>(new[] { 0 });
 
-        public Word2VecBenchmark() : base("Word2Vec")
+        public Word2VecBenchmark()
+            : base("Word2Vec")
         {
             ExePath = "Word2VecScenario.dll";
         }

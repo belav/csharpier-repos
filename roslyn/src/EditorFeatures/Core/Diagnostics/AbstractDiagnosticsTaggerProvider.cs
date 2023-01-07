@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IGlobalOptionService globalOptions,
             ITextBufferVisibilityTracker? visibilityTracker,
             IAsynchronousOperationListener listener
-        ) : base(threadingContext, globalOptions, visibilityTracker, listener)
+        )
+            : base(threadingContext, globalOptions, visibilityTracker, listener)
         {
             _diagnosticService = diagnosticService;
             _analyzerService = analyzerService;

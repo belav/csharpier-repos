@@ -459,7 +459,8 @@ public class ClrCollectionAccessorFactoryTest
         private readonly IEnumerable<MyOtherEntity> _readOnlyPropNoFieldNotFound;
         private IEnumerable<MyOtherEntity> _writeOnlyPropNoFieldNotFound;
 
-        public MyEntity() : this(false) { }
+        public MyEntity()
+            : this(false) { }
 
         public MyEntity(bool initialize)
         {

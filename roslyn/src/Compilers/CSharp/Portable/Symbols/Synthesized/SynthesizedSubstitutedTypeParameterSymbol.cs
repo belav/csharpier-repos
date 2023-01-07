@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeMap map,
             TypeParameterSymbol substitutedFrom,
             int ordinal
-        ) : base(owner, map, substitutedFrom, ordinal)
+        )
+            : base(owner, map, substitutedFrom, ordinal)
         {
             Debug.Assert(
                 this.TypeParameterKind

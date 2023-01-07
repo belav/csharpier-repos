@@ -34,7 +34,8 @@ namespace System.Net.WebSockets.Client.Wasm.Tests
         const double webSocketMessageFrequency = 45000;
         const double fastTimeoutFrequency = 100;
 
-        public BrowserTimerThrottlingTest(ITestOutputHelper output) : base(output) { }
+        public BrowserTimerThrottlingTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(PlatformDetection.IsBrowser))]
         [OuterLoop] // involves long delay

@@ -8,7 +8,8 @@ public class TPTFiltersInheritanceBulkUpdatesSqliteTest
 {
     public TPTFiltersInheritanceBulkUpdatesSqliteTest(
         TPTFiltersInheritanceBulkUpdatesSqliteFixture fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
     }

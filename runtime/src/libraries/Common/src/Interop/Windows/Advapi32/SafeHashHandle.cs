@@ -13,7 +13,8 @@ namespace System.Security.Cryptography
     {
         private SafeProvHandle? _parent;
 
-        public SafeHashHandle() : base(true)
+        public SafeHashHandle()
+            : base(true)
         {
             SetHandle(IntPtr.Zero);
         }

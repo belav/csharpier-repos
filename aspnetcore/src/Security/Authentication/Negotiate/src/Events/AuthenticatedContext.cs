@@ -18,5 +18,6 @@ public class AuthenticatedContext : ResultContext<NegotiateOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         NegotiateOptions options
-    ) : base(context, scheme, options) { }
+    )
+        : base(context, scheme, options) { }
 }

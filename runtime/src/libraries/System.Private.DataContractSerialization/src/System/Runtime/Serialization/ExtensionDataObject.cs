@@ -83,7 +83,8 @@ namespace System.Runtime.Serialization
             _isFinalValue = true;
         }
 
-        internal DataNode(T value) : this()
+        internal DataNode(T value)
+            : this()
         {
             _value = value;
         }

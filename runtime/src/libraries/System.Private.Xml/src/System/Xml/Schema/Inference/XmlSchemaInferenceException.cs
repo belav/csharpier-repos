@@ -25,10 +25,11 @@ namespace System.Xml.Schema
             base.GetObjectData(info, context);
         }
 
-        public XmlSchemaInferenceException() : base(null) { }
+        public XmlSchemaInferenceException()
+            : base(null) { }
 
-        public XmlSchemaInferenceException(string message) : base(message, ((Exception?)null), 0, 0)
-        { }
+        public XmlSchemaInferenceException(string message)
+            : base(message, ((Exception?)null), 0, 0) { }
 
         public XmlSchemaInferenceException(string message, Exception? innerException)
             : base(message, innerException, 0, 0) { }
@@ -38,7 +39,8 @@ namespace System.Xml.Schema
             Exception? innerException,
             int lineNumber,
             int linePosition
-        ) : base(message, innerException, lineNumber, linePosition) { }
+        )
+            : base(message, innerException, lineNumber, linePosition) { }
 
         internal XmlSchemaInferenceException(string res, string arg)
             : base(res, new string[] { arg }, null, null, 0, 0, null) { }

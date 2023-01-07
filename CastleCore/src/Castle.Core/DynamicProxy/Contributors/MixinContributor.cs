@@ -34,7 +34,8 @@ namespace Castle.DynamicProxy.Contributors
         >(new FieldReferenceComparer());
         private readonly GetTargetExpressionDelegate getTargetExpression;
 
-        public MixinContributor(INamingScope namingScope, bool canChangeTarget) : base(namingScope)
+        public MixinContributor(INamingScope namingScope, bool canChangeTarget)
+            : base(namingScope)
         {
             this.canChangeTarget = canChangeTarget;
             getTargetExpression = BuildGetTargetExpression();

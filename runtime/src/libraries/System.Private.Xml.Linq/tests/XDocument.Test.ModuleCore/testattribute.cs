@@ -460,12 +460,14 @@ namespace Microsoft.Test.ModuleCore
         protected string pmodified;
 
         //Constructors
-        public TestModuleAttribute() : base() { }
+        public TestModuleAttribute()
+            : base() { }
 
-        public TestModuleAttribute(string desc) : base(desc) { }
+        public TestModuleAttribute(string desc)
+            : base(desc) { }
 
-        public TestModuleAttribute(string desc, params object[] parameters) : base(desc, parameters)
-        { }
+        public TestModuleAttribute(string desc, params object[] parameters)
+            : base(desc, parameters) { }
 
         [TestProperty(Visible = true)]
         public virtual string Created
@@ -489,12 +491,14 @@ namespace Microsoft.Test.ModuleCore
     public class TestCaseAttribute : TestAttribute
     {
         //Constructors
-        public TestCaseAttribute() : base() { }
+        public TestCaseAttribute()
+            : base() { }
 
-        public TestCaseAttribute(string desc) : base(desc) { }
+        public TestCaseAttribute(string desc)
+            : base(desc) { }
 
-        public TestCaseAttribute(string desc, params object[] parameters) : base(desc, parameters)
-        { }
+        public TestCaseAttribute(string desc, params object[] parameters)
+            : base(desc, parameters) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -506,12 +510,14 @@ namespace Microsoft.Test.ModuleCore
         //Data
 
         //Constructors
-        public VariationAttribute() : base() { }
+        public VariationAttribute()
+            : base() { }
 
-        public VariationAttribute(string desc) : base(desc) { }
+        public VariationAttribute(string desc)
+            : base(desc) { }
 
-        public VariationAttribute(string desc, params object[] parameters) : base(desc, parameters)
-        { }
+        public VariationAttribute(string desc, params object[] parameters)
+            : base(desc, parameters) { }
     }
 
     ////////////////////////////////////////////////////////////////

@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations
     {
         public MigrationsInfrastructureSqlServerTest(
             MigrationsInfrastructureSqlServerFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public override void Can_generate_migration_from_initial_database_to_initial()
         {
@@ -542,7 +543,8 @@ GO
 
         private class BloggingContext : DbContext
         {
-            public BloggingContext(DbContextOptions options) : base(options) { }
+            public BloggingContext(DbContextOptions options)
+                : base(options) { }
 
             // ReSharper disable once UnusedMember.Local
             public DbSet<Blog> Blogs { get; set; }

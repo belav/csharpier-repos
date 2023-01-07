@@ -22,7 +22,8 @@ public class InternalStoredProcedureBuilder
     public InternalStoredProcedureBuilder(
         StoredProcedure storedProcedure,
         IConventionModelBuilder modelBuilder
-    ) : base(storedProcedure, modelBuilder) { }
+    )
+        : base(storedProcedure, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

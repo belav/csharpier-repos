@@ -11,5 +11,6 @@ public class ApplicationUserRegistrationTests
 {
     public ApplicationUserRegistrationTests(
         ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
-    ) : base(serverFactory) { }
+    )
+        : base(serverFactory) { }
 }

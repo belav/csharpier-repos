@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis
         internal SymbolInfo(
             ImmutableArray<ISymbol> candidateSymbols,
             CandidateReason candidateReason
-        ) : this(symbol: null, candidateSymbols, candidateReason) { }
+        )
+            : this(symbol: null, candidateSymbols, candidateReason) { }
 
         private SymbolInfo(
             ISymbol? symbol,

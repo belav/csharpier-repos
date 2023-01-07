@@ -55,9 +55,11 @@ namespace System.ServiceModel.Syndication
         private const string Rfc3339UTCDateTimeFormat = "yyyy-MM-ddTHH:mm:ssZ";
         private readonly int _maxExtensionSize;
 
-        public Atom10FeedFormatter() : this(typeof(SyndicationFeed)) { }
+        public Atom10FeedFormatter()
+            : this(typeof(SyndicationFeed)) { }
 
-        public Atom10FeedFormatter(Type feedTypeToCreate) : base()
+        public Atom10FeedFormatter(Type feedTypeToCreate)
+            : base()
         {
             if (feedTypeToCreate is null)
             {
@@ -80,7 +82,8 @@ namespace System.ServiceModel.Syndication
             FeedType = feedTypeToCreate;
         }
 
-        public Atom10FeedFormatter(SyndicationFeed feedToWrite) : base(feedToWrite)
+        public Atom10FeedFormatter(SyndicationFeed feedToWrite)
+            : base(feedToWrite)
         {
             // No need to check that the parameter passed is valid - it is checked by the c'tor of the base class
             _maxExtensionSize = int.MaxValue;
@@ -1577,9 +1580,11 @@ namespace System.ServiceModel.Syndication
     public class Atom10FeedFormatter<TSyndicationFeed> : Atom10FeedFormatter
         where TSyndicationFeed : SyndicationFeed, new()
     {
-        public Atom10FeedFormatter() : base(typeof(TSyndicationFeed)) { }
+        public Atom10FeedFormatter()
+            : base(typeof(TSyndicationFeed)) { }
 
-        public Atom10FeedFormatter(TSyndicationFeed feedToWrite) : base(feedToWrite) { }
+        public Atom10FeedFormatter(TSyndicationFeed feedToWrite)
+            : base(feedToWrite) { }
 
         protected override SyndicationFeed CreateFeedInstance() => new TSyndicationFeed();
     }

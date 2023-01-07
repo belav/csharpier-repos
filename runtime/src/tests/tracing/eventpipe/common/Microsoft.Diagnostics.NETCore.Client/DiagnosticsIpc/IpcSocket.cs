@@ -19,7 +19,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             AddressFamily addressFamily,
             SocketType socketType,
             ProtocolType protocolType
-        ) : base(addressFamily, socketType, protocolType) { }
+        )
+            : base(addressFamily, socketType, protocolType) { }
 
         // .NET 6 implements this method directly on Socket, but for earlier runtimes we need a polyfill
 #if !NET6_0_OR_GREATER

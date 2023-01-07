@@ -230,7 +230,8 @@ namespace System.ComponentModel
             CultureInfo? culture,
             char passwordChar,
             bool allowPromptAsInput
-        ) : this(mask, culture, allowPromptAsInput, DEFAULT_PROMPT_CHAR, passwordChar, false) { }
+        )
+            : this(mask, culture, allowPromptAsInput, DEFAULT_PROMPT_CHAR, passwordChar, false) { }
 
         /// <summary>
         /// Creates a MaskedTextProvider object from the specified mask.

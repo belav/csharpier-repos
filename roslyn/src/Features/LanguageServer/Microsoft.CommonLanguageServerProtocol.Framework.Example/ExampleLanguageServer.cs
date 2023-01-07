@@ -11,7 +11,8 @@ namespace Microsoft.CommonLanguageServerProtocol.Framework.Example;
 
 public class ExampleLanguageServer : AbstractLanguageServer<ExampleRequestContext>
 {
-    public ExampleLanguageServer(JsonRpc jsonRpc, ILspLogger logger) : base(jsonRpc, logger)
+    public ExampleLanguageServer(JsonRpc jsonRpc, ILspLogger logger)
+        : base(jsonRpc, logger)
     {
         // This spins up the queue and ensure the LSP is ready to start receiving requests
         Initialize();

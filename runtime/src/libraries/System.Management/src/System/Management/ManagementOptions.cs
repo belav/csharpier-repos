@@ -229,7 +229,8 @@ namespace System.Management
             }
         }
 
-        internal ManagementOptions() : this(null, InfiniteTimeout) { }
+        internal ManagementOptions()
+            : this(null, InfiniteTimeout) { }
 
         internal ManagementOptions(ManagementNamedValueCollection context, TimeSpan timeout)
             : this(context, timeout, 0) { }
@@ -617,7 +618,8 @@ namespace System.Management
             bool prototypeOnly,
             bool directRead,
             bool enumerateDeep
-        ) : base(context, timeout)
+        )
+            : base(context, timeout)
         {
             BlockSize = blockSize;
             Rewindable = rewindable;
@@ -770,7 +772,8 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.EventWatcherOptions'/> class for event watching, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public EventWatcherOptions() : this(null, InfiniteTimeout, 1) { }
+        public EventWatcherOptions()
+            : this(null, InfiniteTimeout, 1) { }
 
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.EventWatcherOptions'/> class with the given
@@ -783,7 +786,8 @@ namespace System.Management
             ManagementNamedValueCollection context,
             TimeSpan timeout,
             int blockSize
-        ) : base(context, timeout)
+        )
+            : base(context, timeout)
         {
             Flags =
                 (int)tag_WBEM_GENERIC_FLAG_TYPE.WBEM_FLAG_RETURN_IMMEDIATELY
@@ -932,7 +936,8 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.ObjectGetOptions'/> class for getting a WMI object, using
         ///    default values. This is the default constructor.</para>
         /// </summary>
-        public ObjectGetOptions() : this(null, InfiniteTimeout, false) { }
+        public ObjectGetOptions()
+            : this(null, InfiniteTimeout, false) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ObjectGetOptions'/> class for getting a WMI object, using the
@@ -953,7 +958,8 @@ namespace System.Management
             ManagementNamedValueCollection context,
             TimeSpan timeout,
             bool useAmendedQualifiers
-        ) : base(context, timeout)
+        )
+            : base(context, timeout)
         {
             UseAmendedQualifiers = useAmendedQualifiers;
         }
@@ -1110,7 +1116,8 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.PutOptions'/> class for put operations, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public PutOptions() : this(null, InfiniteTimeout, false, PutType.UpdateOrCreate) { }
+        public PutOptions()
+            : this(null, InfiniteTimeout, false, PutType.UpdateOrCreate) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.PutOptions'/> class for committing a WMI object, using the
@@ -1133,7 +1140,8 @@ namespace System.Management
             TimeSpan timeout,
             bool useAmendedQualifiers,
             PutType putType
-        ) : base(context, timeout)
+        )
+            : base(context, timeout)
         {
             UseAmendedQualifiers = useAmendedQualifiers;
             Type = putType;
@@ -1216,7 +1224,8 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.DeleteOptions'/> class for the delete operation, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public DeleteOptions() : base() { }
+        public DeleteOptions()
+            : base() { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.DeleteOptions'/> class for a delete operation, using
@@ -1304,7 +1313,8 @@ namespace System.Management
         /// <para>Initializes a new instance of the <see cref='System.Management.InvokeMethodOptions'/> class for the <see cref='System.Management.ManagementObject.InvokeMethod(string, ManagementBaseObject, InvokeMethodOptions) '/> operation, using default values.
         ///    This is the default constructor.</para>
         /// </summary>
-        public InvokeMethodOptions() : base() { }
+        public InvokeMethodOptions()
+            : base() { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.InvokeMethodOptions'/> class for an invoke operation using
@@ -1718,7 +1728,8 @@ namespace System.Management
             bool enablePrivileges,
             ManagementNamedValueCollection context,
             TimeSpan timeout
-        ) : base(context, timeout)
+        )
+            : base(context, timeout)
         {
             if (locale != null)
                 this.locale = locale;
@@ -1769,7 +1780,8 @@ namespace System.Management
             bool enablePrivileges,
             ManagementNamedValueCollection context,
             TimeSpan timeout
-        ) : base(context, timeout)
+        )
+            : base(context, timeout)
         {
             if (locale != null)
                 this.locale = locale;
@@ -1852,7 +1864,8 @@ namespace System.Management
             ManagementNamedValueCollection context,
             TimeSpan timeout,
             int flags
-        ) : base(context, timeout, flags) { }
+        )
+            : base(context, timeout, flags) { }
 
         internal ConnectionOptions(ManagementNamedValueCollection context)
             : base(context, InfiniteTimeout) { }

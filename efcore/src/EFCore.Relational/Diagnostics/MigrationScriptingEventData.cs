@@ -40,7 +40,8 @@ public class MigrationScriptingEventData : MigrationEventData
         string? fromMigration,
         string? toMigration,
         bool idempotent
-    ) : base(eventDefinition, messageGenerator, migrator, migration)
+    )
+        : base(eventDefinition, messageGenerator, migrator, migration)
     {
         FromMigration = fromMigration;
         ToMigration = toMigration;

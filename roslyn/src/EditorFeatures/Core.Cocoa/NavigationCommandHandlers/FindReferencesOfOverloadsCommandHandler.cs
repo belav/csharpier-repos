@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
             IAsynchronousOperationListenerProvider listenerProvider,
             IThreadingContext threadingContext
-        ) : base(streamingPresenters)
+        )
+            : base(streamingPresenters)
         {
             Contract.ThrowIfNull(streamingPresenters);
             Contract.ThrowIfNull(listenerProvider);

@@ -59,7 +59,8 @@ namespace Newtonsoft.Json.Serialization
             Value = 2
         }
 
-        public JsonSerializerInternalReader(JsonSerializer serializer) : base(serializer) { }
+        public JsonSerializerInternalReader(JsonSerializer serializer)
+            : base(serializer) { }
 
         public void Populate(JsonReader reader, object target)
         {

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             CSharpSelectionResult result,
             ExtractMethodGenerationOptions options,
             bool localFunction
-        ) : base(result, options, localFunction) { }
+        )
+            : base(result, options, localFunction) { }
 
         protected override Task<AnalyzerResult> AnalyzeAsync(
             SelectionResult selectionResult,

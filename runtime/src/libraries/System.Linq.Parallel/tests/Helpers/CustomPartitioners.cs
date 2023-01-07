@@ -103,7 +103,8 @@ namespace System.Linq.Parallel.Tests
             int count,
             bool keysOrderedInEachPartition,
             bool keysNormalized
-        ) : base(keysOrderedInEachPartition, false, keysNormalized)
+        )
+            : base(keysOrderedInEachPartition, false, keysNormalized)
         {
             _start = start;
             _count = count;

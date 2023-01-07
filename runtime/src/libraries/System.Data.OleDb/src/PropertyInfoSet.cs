@@ -32,7 +32,8 @@ namespace System.Data.OleDb
         internal PropertyInfoSet(
             UnsafeNativeMethods.IDBProperties idbProperties,
             PropertyIDSet propIDSet
-        ) : base(IntPtr.Zero, true)
+        )
+            : base(IntPtr.Zero, true)
         {
             OleDbHResult hr;
             int propIDSetCount = propIDSet.Count;

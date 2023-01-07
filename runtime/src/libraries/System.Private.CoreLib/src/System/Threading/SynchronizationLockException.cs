@@ -21,12 +21,14 @@ namespace System.Threading
     )]
     public class SynchronizationLockException : SystemException
     {
-        public SynchronizationLockException() : base(SR.Arg_SynchronizationLockException)
+        public SynchronizationLockException()
+            : base(SR.Arg_SynchronizationLockException)
         {
             HResult = HResults.COR_E_SYNCHRONIZATIONLOCK;
         }
 
-        public SynchronizationLockException(string? message) : base(message)
+        public SynchronizationLockException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_SYNCHRONIZATIONLOCK;
         }

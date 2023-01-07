@@ -567,7 +567,8 @@ public class IntermediateNodeReferenceTest
 
     private class BasicIntermediateNode : IntermediateNode
     {
-        public BasicIntermediateNode(string name) : this(name, new IntermediateNodeCollection())
+        public BasicIntermediateNode(string name)
+            : this(name, new IntermediateNodeCollection())
         {
             Name = name;
         }

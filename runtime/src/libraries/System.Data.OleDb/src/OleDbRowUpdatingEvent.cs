@@ -12,7 +12,8 @@ namespace System.Data.OleDb
             IDbCommand? command,
             StatementType statementType,
             DataTableMapping tableMapping
-        ) : base(dataRow, command, statementType, tableMapping) { }
+        )
+            : base(dataRow, command, statementType, tableMapping) { }
 
         public new OleDbCommand? Command
         {

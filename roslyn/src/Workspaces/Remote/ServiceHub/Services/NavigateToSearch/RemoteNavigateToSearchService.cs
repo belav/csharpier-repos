@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteNavigateToSearchService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteNavigateToSearchService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

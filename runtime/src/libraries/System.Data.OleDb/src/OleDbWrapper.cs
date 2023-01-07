@@ -20,7 +20,8 @@ namespace System.Data.OleDb
         private readonly UnsafeNativeMethods.IDataInitializeGetDataSource? DangerousIDataInitializeGetDataSource;
 
         // DataLinks (the unknown parameter) is created via Activator.CreateInstance outside of the SafeHandle
-        internal OleDbServicesWrapper(object? unknown) : base()
+        internal OleDbServicesWrapper(object? unknown)
+            : base()
         {
             if (null != unknown)
             {
@@ -134,7 +135,8 @@ namespace System.Data.OleDb
         // we expect to store IDBInitialize instance pointer in base.handle
 
         // construct a DataSourceWrapper and used as a ref parameter to GetDataSource
-        public DataSourceWrapper() : base() { }
+        public DataSourceWrapper()
+            : base() { }
 
         internal unsafe OleDbHResult InitializeAndCreateSession(
             OleDbConnectionString constr,
@@ -356,7 +358,8 @@ namespace System.Data.OleDb
         // since we maintain an AddRef on IDBCreateCommand it is safe to use the delegate without rechecking its function pointer
         private UnsafeNativeMethods.IDBCreateCommandCreateCommand? DangerousIDBCreateCommandCreateCommand;
 
-        public SessionWrapper() : base() { }
+        public SessionWrapper()
+            : base() { }
 
         // if OleDbConnectionString.DangerousIDBCreateCommandCreateCommand does not exist
         // this method will be called to query for IDBCreateCommand (and cache that interface pointer)

@@ -22,7 +22,8 @@ namespace Castle.Core.Resource
     {
         public ResourceException() { }
 
-        public ResourceException(string message) : base(message) { }
+        public ResourceException(string message)
+            : base(message) { }
 
         public ResourceException(string message, Exception innerException)
             : base(message, innerException) { }

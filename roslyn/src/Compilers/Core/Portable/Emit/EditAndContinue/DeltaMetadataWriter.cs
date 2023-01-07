@@ -2055,7 +2055,8 @@ namespace Microsoft.CodeAnalysis.Emit
         {
             private readonly DeltaMetadataWriter _writer;
 
-            public MethodImplIndex(DeltaMetadataWriter writer, int lastRowId) : base(lastRowId)
+            public MethodImplIndex(DeltaMetadataWriter writer, int lastRowId)
+                : base(lastRowId)
             {
                 _writer = writer;
             }
@@ -2094,7 +2095,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 ImmutableDictionary<IMethodDefinition, DeletedMethodDefinition>
             > _deletedTypeMembers;
 
-            public DeltaReferenceIndexer(DeltaMetadataWriter writer) : base(writer)
+            public DeltaReferenceIndexer(DeltaMetadataWriter writer)
+                : base(writer)
             {
                 _changes = writer._changes;
                 _deletedTypeMembers = writer._deletedTypeMembers;

@@ -45,7 +45,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [SkipNonHelix("https://github.com/dotnet/aspnetcore/issues/25107")]
 public class StartupTests : IISFunctionalTestBase
 {
-    public StartupTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public StartupTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     private readonly string _dotnetLocation = DotNetCommands.GetDotNetExecutable(
         RuntimeArchitecture.x64

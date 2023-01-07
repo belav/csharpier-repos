@@ -721,7 +721,8 @@ public class EntityMaterializerSourceTest
             LazyLoader = lazyLoader;
         }
 
-        public WithServiceAndWithProperties(ILazyLoader lazyLoader, int id) : this(lazyLoader)
+        public WithServiceAndWithProperties(ILazyLoader lazyLoader, int id)
+            : this(lazyLoader)
         {
             Id = id;
         }

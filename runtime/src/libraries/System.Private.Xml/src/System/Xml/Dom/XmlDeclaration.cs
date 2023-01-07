@@ -23,7 +23,8 @@ namespace System.Xml
             string? encoding,
             string? standalone,
             XmlDocument doc
-        ) : base(doc)
+        )
+            : base(doc)
         {
             if (!IsValidXmlVersion(version))
                 throw new ArgumentException(SR.Xdom_Version);

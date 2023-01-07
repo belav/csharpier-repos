@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 CancellationToken,
                 Task<ImmutableArray<TaggedText>>
             >? getDescriptionAsync = null
-        ) : this(span, displayParts, replacementTextChange: null, getDescriptionAsync) { }
+        )
+            : this(span, displayParts, replacementTextChange: null, getDescriptionAsync) { }
 
         public InlineHint(
             TextSpan span,

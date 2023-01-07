@@ -15,12 +15,14 @@ namespace System.Runtime.InteropServices
     )]
     public class SafeArrayTypeMismatchException : SystemException
     {
-        public SafeArrayTypeMismatchException() : base(SR.Arg_SafeArrayTypeMismatchException)
+        public SafeArrayTypeMismatchException()
+            : base(SR.Arg_SafeArrayTypeMismatchException)
         {
             HResult = HResults.COR_E_SAFEARRAYTYPEMISMATCH;
         }
 
-        public SafeArrayTypeMismatchException(string? message) : base(message)
+        public SafeArrayTypeMismatchException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_SAFEARRAYTYPEMISMATCH;
         }

@@ -27,7 +27,8 @@ internal abstract class GreenNode
         Kind = kind;
     }
 
-    protected GreenNode(SyntaxKind kind, int fullWidth) : this(kind)
+    protected GreenNode(SyntaxKind kind, int fullWidth)
+        : this(kind)
     {
         FullWidth = fullWidth;
     }
@@ -36,14 +37,16 @@ internal abstract class GreenNode
         SyntaxKind kind,
         RazorDiagnostic[] diagnostics,
         SyntaxAnnotation[] annotations
-    ) : this(kind, 0, diagnostics, annotations) { }
+    )
+        : this(kind, 0, diagnostics, annotations) { }
 
     protected GreenNode(
         SyntaxKind kind,
         int fullWidth,
         RazorDiagnostic[] diagnostics,
         SyntaxAnnotation[] annotations
-    ) : this(kind, fullWidth)
+    )
+        : this(kind, fullWidth)
     {
         if (diagnostics?.Length > 0)
         {

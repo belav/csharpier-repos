@@ -20,7 +20,8 @@ public class OperationException : Exception
     ///     Initializes a new instance of the <see cref="OperationException" /> class.
     /// </summary>
     /// <param name="message">The message that describes the error.</param>
-    public OperationException(string message) : base(message) { }
+    public OperationException(string message)
+        : base(message) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="OperationException" /> class.

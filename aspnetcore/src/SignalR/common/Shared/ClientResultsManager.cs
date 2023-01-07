@@ -168,7 +168,8 @@ internal sealed class ClientResultsManager : IInvocationBinder
             string connectionId,
             string invocationId,
             CancellationToken cancellationToken
-        ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+        )
+            : base(TaskCreationOptions.RunContinuationsAsynchronously)
         {
             _clientResultsManager = clientResultsManager;
             _connectionId = connectionId;

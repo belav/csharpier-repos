@@ -33,7 +33,8 @@ namespace System
         // However when the ctor is called from OnCreateUri context the calling parser
         // settings will later override the result on the base class
         //
-        protected UriParser() : this(SchemeOnlyFlags) { }
+        protected UriParser()
+            : this(SchemeOnlyFlags) { }
 
         //
         // Is called on each Uri ctor for every non-simple parser i.e. the one that does have

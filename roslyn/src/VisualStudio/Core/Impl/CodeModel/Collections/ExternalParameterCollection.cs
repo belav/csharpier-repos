@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             AbstractExternalCodeMember parent,
             ProjectId projectId
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             _projectId = projectId;
         }

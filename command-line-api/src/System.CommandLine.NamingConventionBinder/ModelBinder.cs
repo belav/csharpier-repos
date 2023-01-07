@@ -15,7 +15,8 @@ public class ModelBinder
 {
     /// <param name="modelType">The type that the model binder can bind.</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public ModelBinder(Type modelType) : this(new AnonymousValueDescriptor(modelType)) =>
+    public ModelBinder(Type modelType)
+        : this(new AnonymousValueDescriptor(modelType)) =>
         _ = modelType ?? throw new ArgumentNullException(nameof(modelType));
 
     internal ModelBinder(IValueDescriptor valueDescriptor)

@@ -10,7 +10,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
     public class DecryptTestsUsingExplicitPrivateKey : DecryptTests
     {
-        public DecryptTestsUsingExplicitPrivateKey() : base(true) { }
+        public DecryptTestsUsingExplicitPrivateKey()
+            : base(true) { }
 
         [Fact]
         public static void DecryptUsingWrongPrivateKeyType()

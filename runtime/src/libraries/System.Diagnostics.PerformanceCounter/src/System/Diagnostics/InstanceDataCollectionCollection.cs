@@ -18,7 +18,8 @@ namespace System.Diagnostics
         [Obsolete(
             "This constructor has been deprecated. Use System.Diagnostics.PerformanceCounterCategory.ReadCategory() to get an instance of this collection instead."
         )]
-        public InstanceDataCollectionCollection() : base() { }
+        public InstanceDataCollectionCollection()
+            : base() { }
 
         public InstanceDataCollection this[string counterName]
         {

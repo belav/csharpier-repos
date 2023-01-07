@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class FindCosmosTest : FindTestBase<FindCosmosTest.FindCosmosFixture>
 {
-    protected FindCosmosTest(FindCosmosFixture fixture) : base(fixture)
+    protected FindCosmosTest(FindCosmosFixture fixture)
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }
@@ -28,21 +29,24 @@ public abstract class FindCosmosTest : FindTestBase<FindCosmosTest.FindCosmosFix
 
     public class FindCosmosTestSet : FindCosmosTest
     {
-        public FindCosmosTestSet(FindCosmosFixture fixture) : base(fixture) { }
+        public FindCosmosTestSet(FindCosmosFixture fixture)
+            : base(fixture) { }
 
         protected override TestFinder Finder { get; } = new FindViaSetFinder();
     }
 
     public class FindCosmosTestContext : FindCosmosTest
     {
-        public FindCosmosTestContext(FindCosmosFixture fixture) : base(fixture) { }
+        public FindCosmosTestContext(FindCosmosFixture fixture)
+            : base(fixture) { }
 
         protected override TestFinder Finder { get; } = new FindViaContextFinder();
     }
 
     public class FindCosmosTestNonGeneric : FindCosmosTest
     {
-        public FindCosmosTestNonGeneric(FindCosmosFixture fixture) : base(fixture) { }
+        public FindCosmosTestNonGeneric(FindCosmosFixture fixture)
+            : base(fixture) { }
 
         protected override TestFinder Finder { get; } = new FindViaNonGenericContextFinder();
     }

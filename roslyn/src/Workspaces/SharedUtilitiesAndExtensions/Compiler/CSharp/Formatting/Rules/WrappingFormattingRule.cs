@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     {
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public WrappingFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
+        public WrappingFormattingRule()
+            : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private WrappingFormattingRule(CSharpSyntaxFormattingOptions options)
         {

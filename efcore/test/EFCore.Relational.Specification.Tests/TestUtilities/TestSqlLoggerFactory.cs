@@ -25,7 +25,8 @@ public class TestSqlLoggerFactory : ListLoggerFactory
         QueryBaselineRewritingFileInfo
     > _queryBaselineRewritingFileInfos = new();
 
-    public TestSqlLoggerFactory() : this(_ => true) { }
+    public TestSqlLoggerFactory()
+        : this(_ => true) { }
 
     public TestSqlLoggerFactory(Func<string, bool> shouldLogCategory)
         : base(c => shouldLogCategory(c) || c == DbLoggerCategory.Database.Command.Name)

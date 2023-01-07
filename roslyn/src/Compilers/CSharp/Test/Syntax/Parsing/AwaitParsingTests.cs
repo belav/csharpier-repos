@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class AwaitParsingTests : ParsingTests
     {
-        public AwaitParsingTests(ITestOutputHelper output) : base(output) { }
+        public AwaitParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

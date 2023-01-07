@@ -19,7 +19,8 @@ internal sealed class HostingEventSource : EventSource
     private long _currentRequests;
     private long _failedRequests;
 
-    internal HostingEventSource() : this("Microsoft.AspNetCore.Hosting") { }
+    internal HostingEventSource()
+        : this("Microsoft.AspNetCore.Hosting") { }
 
     // Used for testing
     internal HostingEventSource(string eventSourceName)

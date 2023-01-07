@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                 TEmbeddedMethod adder,
                 TEmbeddedMethod remover,
                 TEmbeddedMethod caller
-            ) : base(underlyingEvent)
+            )
+                : base(underlyingEvent)
             {
                 Debug.Assert(adder != null || remover != null);
 

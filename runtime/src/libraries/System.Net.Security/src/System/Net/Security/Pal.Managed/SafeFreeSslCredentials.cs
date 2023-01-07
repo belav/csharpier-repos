@@ -16,7 +16,8 @@ namespace System.Net
             SslStreamCertificateContext? certificateContext,
             SslProtocols protocols,
             EncryptionPolicy policy
-        ) : base(IntPtr.Zero, true)
+        )
+            : base(IntPtr.Zero, true)
         {
             if (certificateContext != null)
             {

@@ -256,9 +256,11 @@ namespace System.Net.Http.Functional.Tests
                 }
             }
 
-            public MockStream(byte[] data) : this(data, true, true) { }
+            public MockStream(byte[] data)
+                : this(data, true, true) { }
 
-            public MockStream(byte[] data, bool canSeek, bool canRead) : base(data)
+            public MockStream(byte[] data, bool canSeek, bool canRead)
+                : base(data)
             {
                 _canSeek = canSeek;
                 _canRead = canRead;

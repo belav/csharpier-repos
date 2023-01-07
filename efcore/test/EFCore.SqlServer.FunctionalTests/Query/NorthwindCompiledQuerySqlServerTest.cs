@@ -11,7 +11,8 @@ public class NorthwindCompiledQuerySqlServerTest
     public NorthwindCompiledQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

@@ -54,7 +54,8 @@ public abstract class QueryExpressionInterceptionSqlServerTestBase
     {
         public QueryExpressionInterceptionWithDiagnosticsSqlServerTest(
             InterceptionSqlServerFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {

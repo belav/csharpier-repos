@@ -13,7 +13,8 @@ internal sealed class NativeSafeHandle : SafeHandle, IValueTaskSource<object?>
     public override bool IsInvalid => handle == IntPtr.Zero;
     public short Version => _core.Version;
 
-    public NativeSafeHandle(IntPtr handle) : base(IntPtr.Zero, ownsHandle: true)
+    public NativeSafeHandle(IntPtr handle)
+        : base(IntPtr.Zero, ownsHandle: true)
     {
         this.handle = handle;
     }

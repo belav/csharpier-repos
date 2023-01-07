@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isPublic = false,
             bool isReadOnly = false,
             bool isStatic = false
-        ) : base(containingType, name, isPublic, isReadOnly, isStatic)
+        )
+            : base(containingType, name, isPublic, isReadOnly, isStatic)
         {
             Debug.Assert((object)type != null);
             _type = TypeWithAnnotations.Create(type);

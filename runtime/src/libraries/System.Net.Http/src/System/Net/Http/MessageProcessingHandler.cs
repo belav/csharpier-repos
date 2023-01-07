@@ -15,7 +15,8 @@ namespace System.Net.Http
     {
         protected MessageProcessingHandler() { }
 
-        protected MessageProcessingHandler(HttpMessageHandler innerHandler) : base(innerHandler) { }
+        protected MessageProcessingHandler(HttpMessageHandler innerHandler)
+            : base(innerHandler) { }
 
         protected abstract HttpRequestMessage ProcessRequest(
             HttpRequestMessage request,

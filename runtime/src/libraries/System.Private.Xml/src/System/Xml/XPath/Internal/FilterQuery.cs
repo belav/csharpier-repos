@@ -13,13 +13,15 @@ namespace MS.Internal.Xml.XPath
         private readonly Query _cond;
         private readonly bool _noPosition;
 
-        public FilterQuery(Query qyParent, Query cond, bool noPosition) : base(qyParent)
+        public FilterQuery(Query qyParent, Query cond, bool noPosition)
+            : base(qyParent)
         {
             _cond = cond;
             _noPosition = noPosition;
         }
 
-        private FilterQuery(FilterQuery other) : base(other)
+        private FilterQuery(FilterQuery other)
+            : base(other)
         {
             _cond = Clone(other._cond);
             _noPosition = other._noPosition;

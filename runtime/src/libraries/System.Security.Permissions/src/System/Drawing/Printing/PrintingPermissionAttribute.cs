@@ -15,7 +15,8 @@ namespace System.Drawing.Printing
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public sealed class PrintingPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public PrintingPermissionAttribute(SecurityAction action) : base(action) { }
+        public PrintingPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public PrintingPermissionLevel Level { get; set; }
 

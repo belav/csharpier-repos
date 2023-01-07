@@ -72,31 +72,36 @@ namespace System.Data.Odbc
 
         private ODBC32.SQL_C _prepared_Sql_C_Type;
 
-        public OdbcParameter() : base()
+        public OdbcParameter()
+            : base()
         {
             // uses System.Threading!
         }
 
-        public OdbcParameter(string? name, object? value) : this()
+        public OdbcParameter(string? name, object? value)
+            : this()
         {
             ParameterName = name;
             Value = value;
         }
 
-        public OdbcParameter(string? name, OdbcType type) : this()
+        public OdbcParameter(string? name, OdbcType type)
+            : this()
         {
             ParameterName = name;
             OdbcType = type;
         }
 
-        public OdbcParameter(string? name, OdbcType type, int size) : this()
+        public OdbcParameter(string? name, OdbcType type, int size)
+            : this()
         {
             ParameterName = name;
             OdbcType = type;
             Size = size;
         }
 
-        public OdbcParameter(string? name, OdbcType type, int size, string? sourcecolumn) : this()
+        public OdbcParameter(string? name, OdbcType type, int size, string? sourcecolumn)
+            : this()
         {
             ParameterName = name;
             OdbcType = type;
@@ -116,7 +121,8 @@ namespace System.Data.Odbc
             string? srcColumn,
             DataRowVersion srcVersion,
             object? value
-        ) : this()
+        )
+            : this()
         { // V1.0 everything
             this.ParameterName = parameterName;
             this.OdbcType = odbcType;
@@ -142,7 +148,8 @@ namespace System.Data.Odbc
             DataRowVersion sourceVersion,
             bool sourceColumnNullMapping,
             object? value
-        ) : this()
+        )
+            : this()
         { // V2.0 everything - round trip all browsable properties + precision/scale
             this.ParameterName = parameterName;
             this.OdbcType = odbcType;

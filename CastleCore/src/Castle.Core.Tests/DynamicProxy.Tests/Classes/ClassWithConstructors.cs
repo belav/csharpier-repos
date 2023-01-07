@@ -32,7 +32,8 @@ namespace Castle.DynamicProxy.Tests.Classes
             this.x = x;
         }
 
-        protected ClassWithConstructors(double name) : this(name.ToString()) { }
+        protected ClassWithConstructors(double name)
+            : this(name.ToString()) { }
 
         protected internal ClassWithConstructors(double name, double x)
             : this(name.ToString(), (int)x) { }

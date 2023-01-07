@@ -18,7 +18,8 @@ namespace Microsoft.Win32.SafeHandles
         private volatile FileOptions _fileOptions = (FileOptions)(-1);
         private volatile int _fileType = -1;
 
-        public SafeFileHandle() : base(true) { }
+        public SafeFileHandle()
+            : base(true) { }
 
         public bool IsAsync => (GetFileOptions() & FileOptions.Asynchronous) != 0;
 

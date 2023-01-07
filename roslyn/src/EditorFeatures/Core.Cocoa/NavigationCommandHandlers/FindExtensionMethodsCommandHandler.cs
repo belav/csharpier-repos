@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationCommandHandlers
             [ImportMany] IEnumerable<Lazy<IStreamingFindUsagesPresenter>> streamingPresenters,
             IAsynchronousOperationListenerProvider listenerProvider,
             IGlobalOptionService globalOptions
-        ) : base(streamingPresenters)
+        )
+            : base(streamingPresenters)
         {
             Contract.ThrowIfNull(listenerProvider);
 

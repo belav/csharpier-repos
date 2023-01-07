@@ -194,7 +194,8 @@ namespace System.Linq.Parallel
                 SelectQueryOperator<TInput, TOutput> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) : base(childQueryResults, op, settings, preferStriping)
+            )
+                : base(childQueryResults, op, settings, preferStriping)
             {
                 Debug.Assert(op._selector != null);
                 _selector = op._selector;

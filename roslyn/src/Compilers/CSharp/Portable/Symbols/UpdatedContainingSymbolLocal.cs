@@ -54,7 +54,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SourceLocalSymbol underlyingLocal,
             Symbol updatedContainingSymbol,
             TypeWithAnnotations updatedType
-        ) : this(underlyingLocal, updatedContainingSymbol, updatedType, assertContaining: true) { }
+        )
+            : this(underlyingLocal, updatedContainingSymbol, updatedType, assertContaining: true)
+        { }
 
         private readonly SourceLocalSymbol _underlyingLocal;
         public override Symbol ContainingSymbol { get; }

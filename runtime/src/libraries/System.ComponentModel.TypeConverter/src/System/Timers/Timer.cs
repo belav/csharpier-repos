@@ -30,7 +30,8 @@ namespace System.Timers
         /// Initializes a new instance of the <see cref='System.Timers.Timer'/> class, with the properties
         /// set to initial values.
         /// </summary>
-        public Timer() : base()
+        public Timer()
+            : base()
         {
             _interval = 100;
             _enabled = false;
@@ -46,7 +47,8 @@ namespace System.Timers
         /// <param name="interval">
         /// The time, in milliseconds, between events. The value must be greater than zero and less than or equal to <see cref="int.MaxValue"/>.
         /// </param>
-        public Timer(double interval) : this()
+        public Timer(double interval)
+            : this()
         {
             if (interval <= 0)
             {
@@ -72,7 +74,8 @@ namespace System.Timers
         /// <param name="interval">
         /// The time between events. The value in milliseconds must be greater than zero and less than or equal to <see cref="int.MaxValue"/>.
         /// </param>
-        public Timer(TimeSpan interval) : this(interval.TotalMilliseconds) { }
+        public Timer(TimeSpan interval)
+            : this(interval.TotalMilliseconds) { }
 
         /// <summary>
         /// Gets or sets a value indicating whether the Timer raises the Tick event each time the specified

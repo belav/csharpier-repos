@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.UnsafeKeyword
         };
 
-        public AbstractKeywordRecommender() : base(SyntaxKind.AbstractKeyword) { }
+        public AbstractKeywordRecommender()
+            : base(SyntaxKind.AbstractKeyword) { }
 
         protected override bool IsValidContext(
             int position,

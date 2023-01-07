@@ -18,7 +18,8 @@ public class HelloWorldTests : LoggedTest
 {
     private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";
 
-    public HelloWorldTests(ITestOutputHelper output) : base(output) { }
+    public HelloWorldTests(ITestOutputHelper output)
+        : base(output) { }
 
     public static TestMatrix TestVariants =>
         TestMatrix

@@ -25,7 +25,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             string mediaType
-        ) : base(mediaType)
+        )
+            : base(mediaType)
         {
             Initialize(queryStringParameterName, queryStringParameterValue);
         }
@@ -41,7 +42,8 @@ namespace System.Net.Http.Formatting
             string queryStringParameterName,
             string queryStringParameterValue,
             MediaTypeHeaderValue mediaType
-        ) : base(mediaType)
+        )
+            : base(mediaType)
         {
             Initialize(queryStringParameterName, queryStringParameterValue);
         }

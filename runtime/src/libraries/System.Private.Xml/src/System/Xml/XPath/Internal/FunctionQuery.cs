@@ -15,12 +15,14 @@ namespace MS.Internal.Xml.XPath
         private readonly IList<Query> _args;
         private IXsltContextFunction? _function;
 
-        public FunctionQuery(string prefix, string name, List<Query> args) : base(prefix, name)
+        public FunctionQuery(string prefix, string name, List<Query> args)
+            : base(prefix, name)
         {
             _args = args;
         }
 
-        private FunctionQuery(FunctionQuery other) : base(other)
+        private FunctionQuery(FunctionQuery other)
+            : base(other)
         {
             _function = other._function;
             Query[] tmp = new Query[other._args.Count];

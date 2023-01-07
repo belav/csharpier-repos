@@ -12,7 +12,8 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        public HGlobalSafeHandle() : base(IntPtr.Zero, true) { }
+        public HGlobalSafeHandle()
+            : base(IntPtr.Zero, true) { }
 
         // This destructor will run only if the Dispose method
         // does not get called.

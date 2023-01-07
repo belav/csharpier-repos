@@ -3312,7 +3312,8 @@ class Program
                 CommonMessageProvider provider,
                 object otherSymbol,
                 Location otherLocation
-            ) : base(provider, 2)
+            )
+                : base(provider, 2)
             {
                 this.OtherSymbol = otherSymbol;
                 this.OtherLocation = otherLocation;

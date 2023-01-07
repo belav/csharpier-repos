@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Syntax
                 InternalSyntax.SyntaxList green,
                 SyntaxNode parent,
                 int position
-            ) : base(green, parent, position)
+            )
+                : base(green, parent, position)
             {
                 _children = new ArrayElement<WeakReference<SyntaxNode>?>[
                     (((green.SlotCount + 1) >> 1) - 1)

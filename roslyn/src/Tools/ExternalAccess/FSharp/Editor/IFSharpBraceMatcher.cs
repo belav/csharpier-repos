@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         public TextSpan LeftSpan { get; }
         public TextSpan RightSpan { get; }
 
-        public FSharpBraceMatchingResult(TextSpan leftSpan, TextSpan rightSpan) : this()
+        public FSharpBraceMatchingResult(TextSpan leftSpan, TextSpan rightSpan)
+            : this()
         {
             this.LeftSpan = leftSpan;
             this.RightSpan = rightSpan;

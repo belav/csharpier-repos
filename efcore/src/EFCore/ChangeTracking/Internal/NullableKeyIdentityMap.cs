@@ -21,7 +21,8 @@ public class NullableKeyIdentityMap<TKey> : IdentityMap<TKey> where TKey : notnu
         IKey key,
         IPrincipalKeyValueFactory<TKey> principalKeyValueFactory,
         bool sensitiveLoggingEnabled
-    ) : base(key, principalKeyValueFactory, sensitiveLoggingEnabled) { }
+    )
+        : base(key, principalKeyValueFactory, sensitiveLoggingEnabled) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

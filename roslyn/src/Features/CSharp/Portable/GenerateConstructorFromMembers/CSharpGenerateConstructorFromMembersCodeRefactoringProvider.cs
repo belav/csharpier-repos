@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructorFromMembers
         )]
         internal CSharpGenerateConstructorFromMembersCodeRefactoringProvider(
             IPickMembersService pickMembersService_forTesting
-        ) : base(pickMembersService_forTesting) { }
+        )
+            : base(pickMembersService_forTesting) { }
 
         protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
             INamedTypeSymbol containingType

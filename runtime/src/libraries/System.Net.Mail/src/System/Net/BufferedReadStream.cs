@@ -15,9 +15,11 @@ namespace System.Net
         private int _storedOffset;
         private readonly bool _readMore;
 
-        internal BufferedReadStream(Stream stream) : this(stream, false) { }
+        internal BufferedReadStream(Stream stream)
+            : this(stream, false) { }
 
-        internal BufferedReadStream(Stream stream, bool readMore) : base(stream)
+        internal BufferedReadStream(Stream stream, bool readMore)
+            : base(stream)
         {
             _readMore = readMore;
         }
@@ -192,7 +194,8 @@ namespace System.Net
                 BufferedReadStream parent,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
             }

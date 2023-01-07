@@ -258,7 +258,8 @@ public class Dada
 [Serializable]
 public class MyException : Exception
 {
-    public MyException(string s) : base(s) { }
+    public MyException(string s)
+        : base(s) { }
 }
 
 [Serializable]
@@ -266,12 +267,14 @@ public class TestException : Exception
 {
     public int Code = -1;
 
-    public TestException(SerializationInfo i, StreamingContext ctx) : base(i, ctx)
+    public TestException(SerializationInfo i, StreamingContext ctx)
+        : base(i, ctx)
     {
         Code = i.GetInt32("Code");
     }
 
-    public TestException(string txt, int code) : base(txt + " (code: " + code + ")")
+    public TestException(string txt, int code)
+        : base(txt + " (code: " + code + ")")
     {
         Code = code;
     }

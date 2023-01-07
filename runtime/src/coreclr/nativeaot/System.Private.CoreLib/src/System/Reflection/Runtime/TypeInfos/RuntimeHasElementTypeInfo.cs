@@ -20,7 +20,8 @@ namespace System.Reflection.Runtime.TypeInfos
             IKeyedItem<RuntimeHasElementTypeInfo.UnificationKey>,
             IRuntimeMemberInfoWithNoMetadataDefinition
     {
-        protected RuntimeHasElementTypeInfo(UnificationKey key) : base()
+        protected RuntimeHasElementTypeInfo(UnificationKey key)
+            : base()
         {
             _key = key;
         }

@@ -10,7 +10,8 @@ namespace System.Data
     {
         public DataTable Table { get; }
 
-        internal DataTablePropertyDescriptor(DataTable dataTable) : base(dataTable.TableName, null)
+        internal DataTablePropertyDescriptor(DataTable dataTable)
+            : base(dataTable.TableName, null)
         {
             Table = dataTable;
         }

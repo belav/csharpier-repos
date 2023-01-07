@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             string? kind,
             string? unique,
             IdFactory idFactory
-        ) : base(label: "moniker", idFactory)
+        )
+            : base(label: "moniker", idFactory)
         {
             Scheme = scheme;
             Identifier = identifier;

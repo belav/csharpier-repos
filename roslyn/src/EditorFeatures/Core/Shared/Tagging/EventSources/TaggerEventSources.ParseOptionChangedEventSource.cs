@@ -15,8 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
     {
         private class ParseOptionChangedEventSource : AbstractWorkspaceTrackingTaggerEventSource
         {
-            public ParseOptionChangedEventSource(ITextBuffer subjectBuffer) : base(subjectBuffer)
-            { }
+            public ParseOptionChangedEventSource(ITextBuffer subjectBuffer)
+                : base(subjectBuffer) { }
 
             protected override void ConnectToWorkspace(Workspace workspace) =>
                 workspace.WorkspaceChanged += OnWorkspaceChanged;

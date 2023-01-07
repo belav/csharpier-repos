@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodKind methodKind,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType, location, syntax, SyntaxFacts.HasYieldOperations(syntax))
+        )
+            : base(containingType, location, syntax, SyntaxFacts.HasYieldOperations(syntax))
         {
             bool hasBlockBody = syntax.Body != null;
             _isExpressionBodied = !hasBlockBody && syntax.ExpressionBody != null;

@@ -28,7 +28,8 @@ public class CompositeRowForeignKeyValueFactory
     public CompositeRowForeignKeyValueFactory(
         IForeignKeyConstraint foreignKey,
         IValueConverterSelector valueConverterSelector
-    ) : base(foreignKey.Columns)
+    )
+        : base(foreignKey.Columns)
     {
         _foreignKey = foreignKey;
         _principalKeyValueFactory =

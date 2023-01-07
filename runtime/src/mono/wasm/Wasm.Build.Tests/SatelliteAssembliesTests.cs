@@ -17,7 +17,8 @@ namespace Wasm.Build.Tests
         public SatelliteAssembliesTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         public static IEnumerable<object?[]> SatelliteAssemblyTestData(
             bool aot,

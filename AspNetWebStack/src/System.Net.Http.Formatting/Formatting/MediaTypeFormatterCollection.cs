@@ -27,7 +27,8 @@ namespace System.Net.Http.Formatting
         /// This collection will be initialized to contain default <see cref="MediaTypeFormatter"/>
         /// instances for Xml, JsonValue and Json.
         /// </remarks>
-        public MediaTypeFormatterCollection() : this(CreateDefaultFormatters()) { }
+        public MediaTypeFormatterCollection()
+            : this(CreateDefaultFormatters()) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MediaTypeFormatterCollection"/> class.

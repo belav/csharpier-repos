@@ -9,7 +9,8 @@ namespace System.Diagnostics
     {
         private static ConditionalWeakTable<TraceFilter, string> s_initData = new();
 
-        public FilterElement() : base(typeof(TraceFilter)) { }
+        public FilterElement()
+            : base(typeof(TraceFilter)) { }
 
         public TraceFilter GetRuntimeObject()
         {

@@ -9,12 +9,14 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 {
     internal abstract partial class SyntaxList : GreenNode
     {
-        internal SyntaxList() : base(GreenNode.ListKind) { }
+        internal SyntaxList()
+            : base(GreenNode.ListKind) { }
 
         internal SyntaxList(DiagnosticInfo[]? diagnostics, SyntaxAnnotation[]? annotations)
             : base(GreenNode.ListKind, diagnostics, annotations) { }
 
-        internal SyntaxList(ObjectReader reader) : base(reader) { }
+        internal SyntaxList(ObjectReader reader)
+            : base(reader) { }
 
         internal static GreenNode List(GreenNode child)
         {

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.AddPackage
         protected AbstractAddSpecificPackageCodeFixProvider(
             IPackageInstallerService packageInstallerService = null,
             ISymbolSearchService symbolSearchService = null
-        ) : base(packageInstallerService, symbolSearchService) { }
+        )
+            : base(packageInstallerService, symbolSearchService) { }
 
         protected override bool IncludePrerelease => true;
 

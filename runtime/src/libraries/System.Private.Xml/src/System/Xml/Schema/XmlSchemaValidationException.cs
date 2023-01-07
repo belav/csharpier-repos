@@ -26,7 +26,8 @@ namespace System.Xml.Schema
             base.GetObjectData(info, context);
         }
 
-        public XmlSchemaValidationException() : base(null) { }
+        public XmlSchemaValidationException()
+            : base(null) { }
 
         public XmlSchemaValidationException(string? message)
             : base(message, ((Exception?)null), 0, 0) { }
@@ -39,7 +40,8 @@ namespace System.Xml.Schema
             Exception? innerException,
             int lineNumber,
             int linePosition
-        ) : base(message, innerException, lineNumber, linePosition) { }
+        )
+            : base(message, innerException, lineNumber, linePosition) { }
 
         internal XmlSchemaValidationException(
             string? res,
@@ -47,7 +49,8 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
+        )
+            : base(res, new string?[] { arg }, null, sourceUri, lineNumber, linePosition, null) { }
 
         internal XmlSchemaValidationException(
             string? res,
@@ -55,7 +58,8 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(res, args, null, sourceUri, lineNumber, linePosition, null) { }
+        )
+            : base(res, args, null, sourceUri, lineNumber, linePosition, null) { }
 
         internal XmlSchemaValidationException(
             string? res,
@@ -64,7 +68,8 @@ namespace System.Xml.Schema
             string? sourceUri,
             int lineNumber,
             int linePosition
-        ) : base(res, args, innerException, sourceUri, lineNumber, linePosition, null) { }
+        )
+            : base(res, args, innerException, sourceUri, lineNumber, linePosition, null) { }
 
         internal XmlSchemaValidationException(string? res, string?[]? args, object sourceNode)
             : base(res, args, null, null, 0, 0, null)

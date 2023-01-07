@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IAsynchronousOperationListener listener,
             Canvas canvas,
             double heightAndWidthOfTheGlyph
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
             _textView = textView;

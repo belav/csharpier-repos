@@ -23,6 +23,7 @@ namespace System.Drawing
             }
         }
 
-        public SRDescriptionAttribute(string description) : base(description) { }
+        public SRDescriptionAttribute(string description)
+            : base(description) { }
     }
 }

@@ -526,7 +526,8 @@ public class OwinEnvironment : IDictionary<string, object>
             Type featureInterface,
             Func<object, object> getter,
             Func<object> defaultFactory
-        ) : this(featureInterface, getter, defaultFactory, setter: null) { }
+        )
+            : this(featureInterface, getter, defaultFactory, setter: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="FeatureMap"/> for the specified feature interface type.
@@ -538,7 +539,8 @@ public class OwinEnvironment : IDictionary<string, object>
             Type featureInterface,
             Func<object, object> getter,
             Action<object, object> setter
-        ) : this(featureInterface, getter, defaultFactory: null, setter: setter) { }
+        )
+            : this(featureInterface, getter, defaultFactory: null, setter: setter) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="FeatureMap"/> for the specified feature interface type.
@@ -552,7 +554,8 @@ public class OwinEnvironment : IDictionary<string, object>
             Func<object, object> getter,
             Func<object> defaultFactory,
             Action<object, object> setter
-        ) : this(featureInterface, getter, defaultFactory, setter, featureFactory: null) { }
+        )
+            : this(featureInterface, getter, defaultFactory, setter, featureFactory: null) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="FeatureMap"/> for the specified feature interface type.

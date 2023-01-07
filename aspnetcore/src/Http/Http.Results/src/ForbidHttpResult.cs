@@ -16,7 +16,8 @@ public sealed partial class ForbidHttpResult : IResult
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidHttpResult"/>.
     /// </summary>
-    internal ForbidHttpResult() : this(Array.Empty<string>()) { }
+    internal ForbidHttpResult()
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ForbidHttpResult"/> with the

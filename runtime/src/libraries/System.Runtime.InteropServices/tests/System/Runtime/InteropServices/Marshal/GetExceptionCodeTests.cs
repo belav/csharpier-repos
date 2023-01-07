@@ -60,7 +60,8 @@ namespace System.Runtime.InteropServices.Tests
 
         public class HResultException : Exception
         {
-            public HResultException(int hresult) : base()
+            public HResultException(int hresult)
+                : base()
             {
                 HResult = hresult;
             }

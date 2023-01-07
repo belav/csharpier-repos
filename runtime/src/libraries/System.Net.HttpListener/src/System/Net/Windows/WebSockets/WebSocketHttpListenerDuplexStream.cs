@@ -841,7 +841,8 @@ namespace System.Net.WebSockets
             public HttpListenerAsyncEventArgs(
                 WebSocketBase webSocket,
                 WebSocketHttpListenerDuplexStream stream
-            ) : base()
+            )
+                : base()
             {
                 _webSocket = webSocket;
                 _currentStream = stream;

@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.ExtractMethod
             IThreadingContext threadingContext,
             ITextBufferUndoManagerProvider undoManager,
             IInlineRenameService renameService
-        ) : base(threadingContext, undoManager, renameService) { }
+        )
+            : base(threadingContext, undoManager, renameService) { }
     }
 }

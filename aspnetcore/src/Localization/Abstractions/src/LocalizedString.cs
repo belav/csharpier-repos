@@ -16,8 +16,8 @@ public class LocalizedString
     /// </summary>
     /// <param name="name">The name of the string in the resource it was loaded from.</param>
     /// <param name="value">The actual string.</param>
-    public LocalizedString(string name, string value) : this(name, value, resourceNotFound: false)
-    { }
+    public LocalizedString(string name, string value)
+        : this(name, value, resourceNotFound: false) { }
 
     /// <summary>
     /// Creates a new <see cref="LocalizedString"/>.

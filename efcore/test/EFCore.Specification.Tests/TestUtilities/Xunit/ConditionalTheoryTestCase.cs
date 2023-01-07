@@ -17,7 +17,8 @@ public sealed class ConditionalTheoryTestCase : XunitTheoryTestCase
         TestMethodDisplay defaultMethodDisplay,
         TestMethodDisplayOptions defaultMethodDisplayOptions,
         ITestMethod testMethod
-    ) : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod)
+    )
+        : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod)
     { }
 
     public override async Task<RunSummary> RunAsync(

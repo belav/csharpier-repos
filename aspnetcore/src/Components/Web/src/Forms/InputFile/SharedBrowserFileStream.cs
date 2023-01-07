@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components.Forms
             IJSUnmarshalledRuntime jsUnmarshalledRuntime,
             ElementReference inputFileElement,
             BrowserFile file
-        ) : base(file)
+        )
+            : base(file)
         {
             _jsRuntime = jsRuntime;
             _jsUnmarshalledRuntime = jsUnmarshalledRuntime;

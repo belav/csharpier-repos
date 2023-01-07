@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 {
     internal partial class IntelliSenseOptionPageControl : AbstractOptionPageControl
     {
-        public IntelliSenseOptionPageControl(OptionStore optionStore) : base(optionStore)
+        public IntelliSenseOptionPageControl(OptionStore optionStore)
+            : base(optionStore)
         {
             InitializeComponent();
 

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a binder for a container.
         /// </summary>
-        internal InContainerBinder(NamespaceOrTypeSymbol container, Binder next) : base(next)
+        internal InContainerBinder(NamespaceOrTypeSymbol container, Binder next)
+            : base(next)
         {
             Debug.Assert((object)container != null);
             _container = container;

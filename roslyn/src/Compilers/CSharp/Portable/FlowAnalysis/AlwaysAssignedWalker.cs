@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) : base(compilation, member, node, firstInRegion, lastInRegion) { }
+        )
+            : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
         internal static IEnumerable<Symbol> Analyze(
             CSharpCompilation compilation,

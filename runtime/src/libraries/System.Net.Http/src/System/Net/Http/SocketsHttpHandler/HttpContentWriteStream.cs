@@ -14,8 +14,8 @@ namespace System.Net.Http
         {
             public long BytesWritten { get; protected set; }
 
-            public HttpContentWriteStream(HttpConnection connection) : base(connection) =>
-                Debug.Assert(connection != null);
+            public HttpContentWriteStream(HttpConnection connection)
+                : base(connection) => Debug.Assert(connection != null);
 
             public sealed override bool CanRead => false;
             public sealed override bool CanWrite => _connection != null;

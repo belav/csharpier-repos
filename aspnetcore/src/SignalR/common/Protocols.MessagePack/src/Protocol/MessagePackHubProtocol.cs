@@ -34,7 +34,8 @@ public class MessagePackHubProtocol : IHubProtocol
     /// <summary>
     /// Initializes a new instance of the <see cref="MessagePackHubProtocol"/> class.
     /// </summary>
-    public MessagePackHubProtocol() : this(Options.Create(new MessagePackHubProtocolOptions())) { }
+    public MessagePackHubProtocol()
+        : this(Options.Create(new MessagePackHubProtocolOptions())) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessagePackHubProtocol"/> class.

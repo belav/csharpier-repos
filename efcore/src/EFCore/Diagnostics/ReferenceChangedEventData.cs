@@ -28,7 +28,8 @@ public class ReferenceChangedEventData : NavigationEventData
         INavigation navigation,
         object? oldReferencedEntity,
         object? newReferencedEntity
-    ) : base(eventDefinition, messageGenerator, navigation)
+    )
+        : base(eventDefinition, messageGenerator, navigation)
     {
         EntityEntry = entityEntry;
         OldReferencedEntity = oldReferencedEntity;

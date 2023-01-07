@@ -19,7 +19,8 @@ namespace System.Net
         private string _userName = string.Empty;
         private object? _password;
 
-        public NetworkCredential() : this(string.Empty, string.Empty, string.Empty) { }
+        public NetworkCredential()
+            : this(string.Empty, string.Empty, string.Empty) { }
 
         /// <devdoc>
         ///    <para>

@@ -305,7 +305,8 @@ namespace System.Drawing
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) : this(family, emSize, style, unit, gdiCharSet, false) { }
+        )
+            : this(family, emSize, style, unit, gdiCharSet, false) { }
 
         public Font(
             FontFamily family,
@@ -347,7 +348,8 @@ namespace System.Drawing
             FontStyle style,
             GraphicsUnit unit,
             byte gdiCharSet
-        ) : this(familyName, emSize, style, unit, gdiCharSet, false) { }
+        )
+            : this(familyName, emSize, style, unit, gdiCharSet, false) { }
 
         public Font(
             string familyName,

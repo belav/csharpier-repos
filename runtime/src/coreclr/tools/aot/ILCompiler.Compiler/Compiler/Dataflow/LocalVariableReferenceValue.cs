@@ -12,7 +12,8 @@ namespace ILLink.Shared.TrimAnalysis
     {
         public int LocalIndex { get; }
 
-        public LocalVariableReferenceValue(int localIndex, TypeDesc localType) : base(localType)
+        public LocalVariableReferenceValue(int localIndex, TypeDesc localType)
+            : base(localType)
         {
             LocalIndex = localIndex;
         }

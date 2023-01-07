@@ -121,9 +121,11 @@ namespace System.ComponentModel.Tests
 
         private class SubDisplayNameAttribute : DisplayNameAttribute
         {
-            public SubDisplayNameAttribute() : base() { }
+            public SubDisplayNameAttribute()
+                : base() { }
 
-            public SubDisplayNameAttribute(string displayName) : base(displayName) { }
+            public SubDisplayNameAttribute(string displayName)
+                : base(displayName) { }
 
             public new string DisplayNameValue
             {
@@ -134,9 +136,11 @@ namespace System.ComponentModel.Tests
 
         private class AlwaysEqualAttribute : DisplayNameAttribute
         {
-            public AlwaysEqualAttribute() : base() { }
+            public AlwaysEqualAttribute()
+                : base() { }
 
-            public AlwaysEqualAttribute(string displayName) : base(displayName) { }
+            public AlwaysEqualAttribute(string displayName)
+                : base(displayName) { }
 
             public override bool Equals(object obj) => true;
 

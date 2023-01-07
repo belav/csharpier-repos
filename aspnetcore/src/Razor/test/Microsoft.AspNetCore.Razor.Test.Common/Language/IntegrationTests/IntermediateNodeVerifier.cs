@@ -311,7 +311,8 @@ public static class IntermediateNodeVerifier
                 string expected,
                 string actual,
                 string userMessage
-            ) : base(Format(node, ancestors, expected, actual, userMessage))
+            )
+                : base(Format(node, ancestors, expected, actual, userMessage))
             {
                 Node = node;
                 Expected = expected;

@@ -31,7 +31,8 @@ public class TemporalFromToQueryRootExpression : TemporalRangeQueryRootExpressio
         IEntityType entityType,
         DateTime from,
         DateTime to
-    ) : base(queryProvider, entityType, from, to) { }
+    )
+        : base(queryProvider, entityType, from, to) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -44,7 +44,8 @@ public class Tests
     {
         public class SpecialExn : Exception
         {
-            public SpecialExn() : base() { }
+            public SpecialExn()
+                : base() { }
         }
 
         public void TheTest(ResultHolder holder)

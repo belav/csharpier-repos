@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             ITodoListProvider todoListProvider,
             string identifier,
             ITableManagerProvider provider
-        ) : base(workspace, provider, StandardTables.TasksTable)
+        )
+            : base(workspace, provider, StandardTables.TasksTable)
         {
             _source = new TableDataSource(workspace, todoListProvider, identifier);
             AddInitialTableSource(workspace.CurrentSolution, _source);
@@ -83,7 +84,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 Workspace workspace,
                 ITodoListProvider todoListProvider,
                 string identifier
-            ) : base(workspace)
+            )
+                : base(workspace)
             {
                 _workspace = workspace;
                 _identifier = identifier;
@@ -229,7 +231,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int version,
                     ImmutableArray<TodoTableItem> items,
                     ImmutableArray<ITrackingPoint> trackingPoints
-                ) : base(version, items, trackingPoints) { }
+                )
+                    : base(version, items, trackingPoints) { }
 
                 public override bool TryGetValue(int index, string columnName, out object content)
                 {

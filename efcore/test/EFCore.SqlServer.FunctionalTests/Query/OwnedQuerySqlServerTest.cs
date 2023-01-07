@@ -9,7 +9,8 @@ public class OwnedQuerySqlServerTest
     public OwnedQuerySqlServerTest(
         OwnedQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
     }

@@ -66,7 +66,8 @@ namespace System.Net.NetworkInformation
             string name,
             int index,
             LinuxNetworkInterfaceSystemProperties systemProperties
-        ) : base(name)
+        )
+            : base(name)
         {
             _index = index;
             _ipProperties = new LinuxIPInterfaceProperties(this, systemProperties);

@@ -93,7 +93,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             DocumentId documentId,
             bool isSourceGeneratedOutput,
             ITextManagerAdapter textManagerAdapter
-        ) : base(state)
+        )
+            : base(state)
         {
             RoslynDebug.AssertNotNull(documentId);
             RoslynDebug.AssertNotNull(textManagerAdapter);

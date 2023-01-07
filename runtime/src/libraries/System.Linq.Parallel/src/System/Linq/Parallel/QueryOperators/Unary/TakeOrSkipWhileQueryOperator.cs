@@ -69,7 +69,8 @@ namespace System.Linq.Parallel
             Func<TResult, bool>? predicate,
             Func<TResult, int, bool>? indexedPredicate,
             bool take
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(

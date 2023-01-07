@@ -25,7 +25,8 @@ namespace Castle.Core.Configuration
         /// Initializes a new instance of the <see cref="MutableConfiguration"/> class.
         /// </summary>
         /// <param name="name">The name.</param>
-        public MutableConfiguration(string name) : this(name, null) { }
+        public MutableConfiguration(string name)
+            : this(name, null) { }
 
         public MutableConfiguration(string name, string value)
         {

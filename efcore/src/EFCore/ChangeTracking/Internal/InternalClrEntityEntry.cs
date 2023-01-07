@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IStateManager stateManager,
             IEntityType entityType,
             object entity
-        ) : base(stateManager, entityType)
+        )
+            : base(stateManager, entityType)
         {
             Entity = entity;
         }

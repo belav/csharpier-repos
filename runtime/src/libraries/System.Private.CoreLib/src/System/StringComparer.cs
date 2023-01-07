@@ -444,7 +444,8 @@ namespace System
         internal static readonly OrdinalCaseSensitiveComparer Instance =
             new OrdinalCaseSensitiveComparer();
 
-        private OrdinalCaseSensitiveComparer() : base(false) { }
+        private OrdinalCaseSensitiveComparer()
+            : base(false) { }
 
         public override int Compare(string? x, string? y) => string.CompareOrdinal(x, y);
 
@@ -472,7 +473,8 @@ namespace System
         internal static readonly OrdinalIgnoreCaseComparer Instance =
             new OrdinalIgnoreCaseComparer();
 
-        private OrdinalIgnoreCaseComparer() : base(true) { }
+        private OrdinalIgnoreCaseComparer()
+            : base(true) { }
 
         public override int Compare(string? x, string? y) =>
             string.Compare(x, y, StringComparison.OrdinalIgnoreCase);

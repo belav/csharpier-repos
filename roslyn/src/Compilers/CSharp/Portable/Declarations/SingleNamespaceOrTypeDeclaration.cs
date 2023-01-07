@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxReference syntaxReference,
             SourceLocation nameLocation,
             ImmutableArray<Diagnostic> diagnostics
-        ) : base(name)
+        )
+            : base(name)
         {
             _syntaxReference = syntaxReference;
             _nameLocation = nameLocation;

@@ -20,7 +20,8 @@ public class ClientModelValidationContext : ModelValidationContextBase
         ModelMetadata metadata,
         IModelMetadataProvider metadataProvider,
         IDictionary<string, string> attributes
-    ) : base(actionContext, metadata, metadataProvider)
+    )
+        : base(actionContext, metadata, metadataProvider)
     {
         Attributes = attributes;
     }

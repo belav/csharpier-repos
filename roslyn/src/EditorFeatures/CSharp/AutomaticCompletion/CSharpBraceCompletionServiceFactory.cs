@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         public CSharpBraceCompletionServiceFactory(
             [ImportMany(LanguageNames.CSharp)]
                 IEnumerable<IBraceCompletionService> braceCompletionServices
-        ) : base(braceCompletionServices) { }
+        )
+            : base(braceCompletionServices) { }
     }
 }

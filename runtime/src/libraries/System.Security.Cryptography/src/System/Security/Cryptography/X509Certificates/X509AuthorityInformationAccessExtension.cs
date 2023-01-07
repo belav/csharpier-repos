@@ -19,7 +19,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   Initializes a new instance of the <see cref="X509AuthorityInformationAccessExtension" />
         ///   class.
         /// </summary>
-        public X509AuthorityInformationAccessExtension() : base(Oids.AuthorityInformationAccessOid)
+        public X509AuthorityInformationAccessExtension()
+            : base(Oids.AuthorityInformationAccessOid)
         {
             _decoded = Array.Empty<AccessDescriptionAsn>();
         }
@@ -64,7 +65,8 @@ namespace System.Security.Cryptography.X509Certificates
         public X509AuthorityInformationAccessExtension(
             ReadOnlySpan<byte> rawData,
             bool critical = false
-        ) : base(Oids.AuthorityInformationAccessOid, rawData, critical)
+        )
+            : base(Oids.AuthorityInformationAccessOid, rawData, critical)
         {
             _decoded = Decode(RawData);
         }

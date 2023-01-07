@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             AbstractCodeElement parent,
             string dottedName
-        ) : base(state, fileCodeModel)
+        )
+            : base(state, fileCodeModel)
         {
             _parentHandle = new ParentHandle<AbstractCodeElement>(parent);
             _dottedName = dottedName;
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string dottedName
-        ) : base(state, fileCodeModel, nodeKind)
+        )
+            : base(state, fileCodeModel, nodeKind)
         {
             _dottedName = dottedName;
         }

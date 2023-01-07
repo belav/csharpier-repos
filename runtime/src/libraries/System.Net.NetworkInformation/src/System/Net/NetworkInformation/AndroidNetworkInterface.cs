@@ -16,7 +16,8 @@ namespace System.Net.NetworkInformation
         internal unsafe AndroidNetworkInterface(
             string name,
             Interop.Sys.NetworkInterfaceInfo* networkInterfaceInfo
-        ) : base(name)
+        )
+            : base(name)
         {
             _index = networkInterfaceInfo->InterfaceIndex;
             if (networkInterfaceInfo->NumAddressBytes > 0)

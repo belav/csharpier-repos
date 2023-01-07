@@ -15,9 +15,11 @@ namespace System.Data.SqlClient
 #endif
     public sealed class SqlClientPermission : DBDataPermission
     {
-        public SqlClientPermission() : base(default(PermissionState)) { }
+        public SqlClientPermission()
+            : base(default(PermissionState)) { }
 
-        public SqlClientPermission(PermissionState state) : base(default(PermissionState)) { }
+        public SqlClientPermission(PermissionState state)
+            : base(default(PermissionState)) { }
 
         public SqlClientPermission(PermissionState state, bool allowBlankPassword)
             : base(default(PermissionState)) { }

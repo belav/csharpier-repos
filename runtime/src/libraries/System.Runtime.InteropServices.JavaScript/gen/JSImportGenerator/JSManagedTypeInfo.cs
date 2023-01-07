@@ -229,7 +229,8 @@ namespace Microsoft.Interop.JavaScript
 
     internal record JSSimpleTypeInfo(KnownManagedType KnownType) : JSTypeInfo(KnownType)
     {
-        public JSSimpleTypeInfo(KnownManagedType knownType, TypeSyntax syntax) : this(knownType)
+        public JSSimpleTypeInfo(KnownManagedType knownType, TypeSyntax syntax)
+            : this(knownType)
         {
             Syntax = syntax;
         }

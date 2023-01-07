@@ -17,7 +17,8 @@ namespace System.Web.Mvc
             ControllerContext context,
             DataTypeAttribute attribute,
             string ruleName
-        ) : base(metadata, context, attribute)
+        )
+            : base(metadata, context, attribute)
         {
             if (String.IsNullOrEmpty(ruleName))
             {

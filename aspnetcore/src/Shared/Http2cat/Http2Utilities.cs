@@ -1196,7 +1196,8 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
 
     internal sealed class Http2FrameWithPayload : Http2Frame
     {
-        public Http2FrameWithPayload() : base() { }
+        public Http2FrameWithPayload()
+            : base() { }
 
         // This does not contain extended headers
         public Memory<byte> Payload { get; set; }

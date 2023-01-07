@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                     IReadOnlyList<DirectiveTriviaSyntax>
                 > conditionalMap,
                 CancellationToken cancellationToken
-            ) : base(SyntaxWalkerDepth.Token)
+            )
+                : base(SyntaxWalkerDepth.Token)
             {
                 _directiveMap = directiveMap;
                 _conditionalMap = conditionalMap;

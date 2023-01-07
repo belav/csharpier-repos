@@ -147,7 +147,8 @@ public class SortableBindingListTest
     {
         public DerivedListElement() { }
 
-        public DerivedListElement(int i) : base(i) { }
+        public DerivedListElement(int i)
+            : base(i) { }
     }
 
     private class ListElementComparer : IEqualityComparer<ListElement>

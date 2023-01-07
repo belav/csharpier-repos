@@ -21,18 +21,21 @@ namespace Microsoft.Web.Helpers
         /// <summary>
         /// Constructs an Url with the current page's virtual path and no query string parameters
         /// </summary>
-        public UrlBuilder() : this(null, null) { }
+        public UrlBuilder()
+            : this(null, null) { }
 
         /// <summary>
         /// Constructs an Url with the specified path and no query string parameters.
         /// </summary>
-        public UrlBuilder(string path) : this(path, null) { }
+        public UrlBuilder(string path)
+            : this(path, null) { }
 
         /// <summary>
         /// Constructs an Url with the current page's virtual path and the parameters
         /// </summary>
         /// <param name="parameters"></param>
-        public UrlBuilder(object parameters) : this(null, parameters) { }
+        public UrlBuilder(object parameters)
+            : this(null, parameters) { }
 
         public UrlBuilder(string path, object parameters)
             : this(GetHttpContext(), null, path, parameters) { }

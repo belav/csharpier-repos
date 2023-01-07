@@ -20,5 +20,6 @@ public sealed class BindNeverAttribute : BindingBehaviorAttribute
     /// <summary>
     /// Initializes a new <see cref="BindNeverAttribute"/> instance.
     /// </summary>
-    public BindNeverAttribute() : base(BindingBehavior.Never) { }
+    public BindNeverAttribute()
+        : base(BindingBehavior.Never) { }
 }

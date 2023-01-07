@@ -119,7 +119,8 @@ namespace System.Threading.Tasks
                 int maxConcurrency,
                 int timeout,
                 ReplicatableUserAction<TState> action
-            ) : base(replicator, maxConcurrency, timeout)
+            )
+                : base(replicator, maxConcurrency, timeout)
             {
                 _action = action;
             }

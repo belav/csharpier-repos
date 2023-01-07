@@ -21,7 +21,8 @@ namespace System.Security.Permissions
     )]
     public sealed class FileIOPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public FileIOPermissionAttribute(SecurityAction action) : base(action) { }
+        public FileIOPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public string Read { get; set; }
         public string Write { get; set; }

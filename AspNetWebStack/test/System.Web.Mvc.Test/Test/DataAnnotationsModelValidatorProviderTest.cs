@@ -31,7 +31,8 @@ namespace System.Web.Mvc.Test
                 ModelMetadata metadata,
                 ControllerContext context,
                 MyValidationAttribute attribute
-            ) : base(metadata, context, attribute) { }
+            )
+                : base(metadata, context, attribute) { }
         }
 
         private class MyValidationAttributeAdapterBadCtor : ModelValidator
@@ -39,7 +40,8 @@ namespace System.Web.Mvc.Test
             public MyValidationAttributeAdapterBadCtor(
                 ModelMetadata metadata,
                 ControllerContext context
-            ) : base(metadata, context) { }
+            )
+                : base(metadata, context) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -53,7 +55,8 @@ namespace System.Web.Mvc.Test
                 ModelMetadata metadata,
                 ControllerContext context,
                 ValidationAttribute attribute
-            ) : base(metadata, context, attribute) { }
+            )
+                : base(metadata, context, attribute) { }
         }
 
         [MyValidation]
@@ -337,7 +340,8 @@ namespace System.Web.Mvc.Test
                 ModelMetadata metadata,
                 ControllerContext context,
                 int unused
-            ) : base(metadata, context) { }
+            )
+                : base(metadata, context) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {

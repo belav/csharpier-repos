@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             Shell.IAsyncServiceProvider serviceProvider,
             Guid languageGuidForSnippets,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _waiter = listenerProvider.GetListener(FeatureAttribute.Snippets);
             _languageGuidForSnippets = languageGuidForSnippets;

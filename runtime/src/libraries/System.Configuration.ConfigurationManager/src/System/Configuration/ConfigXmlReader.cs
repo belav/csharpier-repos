@@ -25,7 +25,8 @@ namespace System.Configuration
             string filename,
             int lineOffset,
             bool lineNumberIsConstant
-        ) : base(new StringReader(rawXml))
+        )
+            : base(new StringReader(rawXml))
         {
             RawXml = rawXml;
             _filename = filename;

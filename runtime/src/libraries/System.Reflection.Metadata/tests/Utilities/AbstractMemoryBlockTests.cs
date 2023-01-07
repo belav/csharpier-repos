@@ -211,7 +211,8 @@ namespace System.Reflection.Internal.Tests
         {
             private int _i;
 
-            public TestSafeBuffer() : base(true)
+            public TestSafeBuffer()
+                : base(true)
             {
                 Initialize(10);
             }

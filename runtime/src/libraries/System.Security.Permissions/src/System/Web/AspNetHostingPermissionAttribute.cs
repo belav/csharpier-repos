@@ -16,7 +16,8 @@ namespace System.Web
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]
     public sealed class AspNetHostingPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public AspNetHostingPermissionAttribute(SecurityAction action) : base(action) { }
+        public AspNetHostingPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public AspNetHostingPermissionLevel Level { get; set; }
 

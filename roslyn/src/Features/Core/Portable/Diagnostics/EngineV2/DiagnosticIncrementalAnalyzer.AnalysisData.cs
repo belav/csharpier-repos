@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 VersionStamp version,
                 ImmutableArray<DiagnosticData> oldItems,
                 ImmutableArray<DiagnosticData> newItems
-            ) : this(version, newItems)
+            )
+                : this(version, newItems)
             {
                 Debug.Assert(!oldItems.IsDefault);
                 OldItems = oldItems;
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 VersionStamp version,
                 ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> oldResult,
                 ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> newResult
-            ) : this(projectId, version, newResult)
+            )
+                : this(projectId, version, newResult)
             {
                 OldResult = oldResult;
             }

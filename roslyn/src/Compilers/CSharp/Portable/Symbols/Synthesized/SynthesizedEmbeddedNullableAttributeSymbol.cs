@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType,
             TypeSymbol systemByteType
-        ) : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
+        )
+            : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _byteTypeSymbol = systemByteType;
 
@@ -150,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ArrayBuilder<BoundStatement>,
                 ImmutableArray<ParameterSymbol>
             > getConstructorBody
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             _parameters = getParameters(this);
             _getConstructorBody = getConstructorBody;

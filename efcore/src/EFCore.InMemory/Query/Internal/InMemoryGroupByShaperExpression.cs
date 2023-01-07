@@ -25,7 +25,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Query.Internal
             Expression elementSelector,
             ParameterExpression groupingParameter,
             ParameterExpression valueBufferParameter
-        ) : base(keySelector, elementSelector)
+        )
+            : base(keySelector, elementSelector)
         {
             GroupingParameter = groupingParameter;
             ValueBufferParameter = valueBufferParameter;

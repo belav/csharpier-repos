@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         /// </summary>
         internal bool SupportsUnannotatedAPIs { get; }
 
-        public EmbeddedLanguageMetadata(IDictionary<string, object> data) : base(data)
+        public EmbeddedLanguageMetadata(IDictionary<string, object> data)
+            : base(data)
         {
             this.Identifiers = ((IReadOnlyDictionary<string, object>)data)
                 .GetEnumerableMetadata<string>(nameof(Identifiers))
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
             IEnumerable<string> before,
             IEnumerable<string> identifiers,
             bool supportsUnannotatedAPIs
-        ) : base(name, after, before)
+        )
+            : base(name, after, before)
         {
             this.Identifiers = identifiers;
             this.Languages = languages;

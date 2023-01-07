@@ -11,12 +11,14 @@ namespace System.IO
     )]
     public class PathTooLongException : IOException
     {
-        public PathTooLongException() : base(SR.IO_PathTooLong)
+        public PathTooLongException()
+            : base(SR.IO_PathTooLong)
         {
             HResult = HResults.COR_E_PATHTOOLONG;
         }
 
-        public PathTooLongException(string? message) : base(message)
+        public PathTooLongException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_PATHTOOLONG;
         }

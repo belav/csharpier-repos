@@ -9,7 +9,8 @@ public class FirefoxMessageId : MessageId
 {
     public readonly string toId;
 
-    public FirefoxMessageId(string? sessionId, int id, string toId) : base(sessionId, id)
+    public FirefoxMessageId(string? sessionId, int id, string toId)
+        : base(sessionId, id)
     {
         this.toId = toId;
     }

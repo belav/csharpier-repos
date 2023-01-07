@@ -5,7 +5,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprList : Expr
     {
-        public ExprList(Expr optionalElement, Expr optionalNextListNode) : base(ExpressionKind.List)
+        public ExprList(Expr optionalElement, Expr optionalNextListNode)
+            : base(ExpressionKind.List)
         {
             OptionalElement = optionalElement;
             OptionalNextListNode = optionalNextListNode;

@@ -24,7 +24,8 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
     protected RelationalGeometryTypeMapping(
         ValueConverter<TGeometry, TProvider>? converter,
         string storeType
-    ) : base(CreateRelationalTypeMappingParameters(storeType))
+    )
+        : base(CreateRelationalTypeMappingParameters(storeType))
     {
         SpatialConverter = converter;
     }

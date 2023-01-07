@@ -32,6 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.AddMissingImports
         )]
         public CSharpAddMissingImportsRefactoringProvider(
             IPasteTrackingService pasteTrackingService
-        ) : base(pasteTrackingService) { }
+        )
+            : base(pasteTrackingService) { }
     }
 }

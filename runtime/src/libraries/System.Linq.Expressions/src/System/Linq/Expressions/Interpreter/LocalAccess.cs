@@ -41,7 +41,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadLocalInstruction : LocalAccessInstruction, IBoxableInstruction
     {
-        internal LoadLocalInstruction(int index) : base(index) { }
+        internal LoadLocalInstruction(int index)
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocal";
@@ -60,7 +61,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadLocalBoxedInstruction : LocalAccessInstruction
     {
-        internal LoadLocalBoxedInstruction(int index) : base(index) { }
+        internal LoadLocalBoxedInstruction(int index)
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocalBox";
@@ -75,7 +77,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadLocalFromClosureInstruction : LocalAccessInstruction
     {
-        internal LoadLocalFromClosureInstruction(int index) : base(index) { }
+        internal LoadLocalFromClosureInstruction(int index)
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocalClosure";
@@ -90,7 +93,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class LoadLocalFromClosureBoxedInstruction : LocalAccessInstruction
     {
-        internal LoadLocalFromClosureBoxedInstruction(int index) : base(index) { }
+        internal LoadLocalFromClosureBoxedInstruction(int index)
+            : base(index) { }
 
         public override int ProducedStack => 1;
         public override string InstructionName => "LoadLocal";
@@ -109,7 +113,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class AssignLocalInstruction : LocalAccessInstruction, IBoxableInstruction
     {
-        internal AssignLocalInstruction(int index) : base(index) { }
+        internal AssignLocalInstruction(int index)
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -129,7 +134,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class StoreLocalInstruction : LocalAccessInstruction, IBoxableInstruction
     {
-        internal StoreLocalInstruction(int index) : base(index) { }
+        internal StoreLocalInstruction(int index)
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override string InstructionName => "StoreLocal";
@@ -148,7 +154,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class AssignLocalBoxedInstruction : LocalAccessInstruction
     {
-        internal AssignLocalBoxedInstruction(int index) : base(index) { }
+        internal AssignLocalBoxedInstruction(int index)
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -164,7 +171,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class StoreLocalBoxedInstruction : LocalAccessInstruction
     {
-        internal StoreLocalBoxedInstruction(int index) : base(index) { }
+        internal StoreLocalBoxedInstruction(int index)
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override string InstructionName => "StoreLocalBox";
@@ -179,7 +187,8 @@ namespace System.Linq.Expressions.Interpreter
 
     internal sealed class AssignLocalToClosureInstruction : LocalAccessInstruction
     {
-        internal AssignLocalToClosureInstruction(int index) : base(index) { }
+        internal AssignLocalToClosureInstruction(int index)
+            : base(index) { }
 
         public override int ConsumedStack => 1;
         public override int ProducedStack => 1;
@@ -216,11 +225,13 @@ namespace System.Linq.Expressions.Interpreter
 
     internal abstract class InitializeLocalInstruction : LocalAccessInstruction
     {
-        internal InitializeLocalInstruction(int index) : base(index) { }
+        internal InitializeLocalInstruction(int index)
+            : base(index) { }
 
         internal sealed class Reference : InitializeLocalInstruction, IBoxableInstruction
         {
-            internal Reference(int index) : base(index) { }
+            internal Reference(int index)
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -240,7 +251,8 @@ namespace System.Linq.Expressions.Interpreter
         {
             private readonly object _defaultValue;
 
-            internal ImmutableValue(int index, object defaultValue) : base(index)
+            internal ImmutableValue(int index, object defaultValue)
+                : base(index)
             {
                 Debug.Assert(defaultValue != null);
                 _defaultValue = defaultValue;
@@ -266,7 +278,8 @@ namespace System.Linq.Expressions.Interpreter
 
             private readonly object _defaultValue;
 
-            internal ImmutableBox(int index, object defaultValue) : base(index)
+            internal ImmutableBox(int index, object defaultValue)
+                : base(index)
             {
                 _defaultValue = defaultValue;
             }
@@ -283,7 +296,8 @@ namespace System.Linq.Expressions.Interpreter
         internal sealed class ImmutableRefBox : InitializeLocalInstruction
         {
             // immutable value:
-            internal ImmutableRefBox(int index) : base(index) { }
+            internal ImmutableRefBox(int index)
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -296,7 +310,8 @@ namespace System.Linq.Expressions.Interpreter
 
         internal sealed class ParameterBox : InitializeLocalInstruction
         {
-            public ParameterBox(int index) : base(index) { }
+            public ParameterBox(int index)
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -309,7 +324,8 @@ namespace System.Linq.Expressions.Interpreter
 
         internal sealed class Parameter : InitializeLocalInstruction, IBoxableInstruction
         {
-            internal Parameter(int index) : base(index) { }
+            internal Parameter(int index)
+                : base(index) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -333,7 +349,8 @@ namespace System.Linq.Expressions.Interpreter
         {
             private readonly Type _type;
 
-            internal MutableValue(int index, Type type) : base(index)
+            internal MutableValue(int index, Type type)
+                : base(index)
             {
                 Debug.Assert(type.IsValueType, "MutableValue only supports value types.");
 
@@ -374,7 +391,8 @@ namespace System.Linq.Expressions.Interpreter
         {
             private readonly Type _type;
 
-            internal MutableBox(int index, Type type) : base(index)
+            internal MutableBox(int index, Type type)
+                : base(index)
             {
                 Debug.Assert(type.IsValueType, "MutableBox only supports value types.");
 

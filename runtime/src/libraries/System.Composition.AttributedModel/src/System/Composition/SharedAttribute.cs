@@ -20,7 +20,8 @@ namespace System.Composition
         /// <summary>
         /// Mark a part as globally shared.
         /// </summary>
-        public SharedAttribute() : base(SharingBoundaryPartMetadataName, null) { }
+        public SharedAttribute()
+            : base(SharingBoundaryPartMetadataName, null) { }
 
         /// <summary>
         /// Construct a <see cref="SharedAttribute"/> for the specified

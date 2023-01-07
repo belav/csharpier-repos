@@ -24,7 +24,8 @@ namespace System.ComponentModel
             Type? receiverType,
             IExtenderProvider provider,
             Attribute[]? attributes
-        ) : base(extenderInfo, attributes)
+        )
+            : base(extenderInfo, attributes)
         {
             Debug.Assert(extenderInfo != null, "ExtendedPropertyDescriptor must have extenderInfo");
             Debug.Assert(provider != null, "ExtendedPropertyDescriptor must have provider");

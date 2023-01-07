@@ -14,7 +14,8 @@ namespace System.IO
         private readonly Encoding _encoding;
         private readonly Decoder _decoder;
 
-        public CachedConsoleStream(Encoding encoding) : base(FileAccess.Write)
+        public CachedConsoleStream(Encoding encoding)
+            : base(FileAccess.Write)
         {
             _encoding = encoding;
             _decoder = _encoding.GetDecoder();

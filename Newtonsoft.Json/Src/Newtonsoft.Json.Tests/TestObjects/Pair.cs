@@ -35,7 +35,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
     [DataContract]
     public struct Pair<TFirst, TSecond>
     {
-        public Pair(TFirst first, TSecond second) : this()
+        public Pair(TFirst first, TSecond second)
+            : this()
         {
             this.First = first;
             this.Second = second;

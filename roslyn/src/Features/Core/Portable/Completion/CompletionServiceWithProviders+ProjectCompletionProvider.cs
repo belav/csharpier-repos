@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 ExportCompletionProviderAttribute
             >
         {
-            public ProjectCompletionProvider(AnalyzerReference reference) : base(reference) { }
+            public ProjectCompletionProvider(AnalyzerReference reference)
+                : base(reference) { }
 
             protected override bool SupportsLanguage(
                 ExportCompletionProviderAttribute exportAttribute,

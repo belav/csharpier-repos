@@ -22,7 +22,8 @@ namespace System.Collections.Frozen
         /// <summary>A wrapper around this that enables access to important members without making virtual calls.</summary>
         private readonly TThisWrapper _thisSet;
 
-        protected FrozenSetInternalBase(IEqualityComparer<T> comparer) : base(comparer)
+        protected FrozenSetInternalBase(IEqualityComparer<T> comparer)
+            : base(comparer)
         {
             _thisSet = default;
             _thisSet.Store(this);

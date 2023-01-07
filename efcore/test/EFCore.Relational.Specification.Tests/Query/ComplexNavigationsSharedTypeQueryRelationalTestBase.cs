@@ -7,8 +7,8 @@ public abstract class ComplexNavigationsSharedTypeQueryRelationalTestBase<TFixtu
     : ComplexNavigationsSharedTypeQueryTestBase<TFixture>
     where TFixture : ComplexNavigationsSharedTypeQueryRelationalFixtureBase, new()
 {
-    protected ComplexNavigationsSharedTypeQueryRelationalTestBase(TFixture fixture) : base(fixture)
-    { }
+    protected ComplexNavigationsSharedTypeQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override Task Complex_query_with_optional_navigations_and_client_side_evaluation(
         bool async

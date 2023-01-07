@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             ImageMoniker imageMoniker,
             string automationName,
             DefinitionItem.DetachedDefinitionItem definitionItem
-        ) : base(displayContent, imageMoniker, automationName)
+        )
+            : base(displayContent, imageMoniker, automationName)
         {
             DefinitionItem = definitionItem;
         }

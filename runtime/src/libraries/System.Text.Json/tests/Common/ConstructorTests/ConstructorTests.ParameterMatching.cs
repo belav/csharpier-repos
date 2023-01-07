@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Tests
 {
     public abstract partial class ConstructorTests : SerializerTests
     {
-        public ConstructorTests(JsonSerializerWrapper stringSerializer) : base(stringSerializer) { }
+        public ConstructorTests(JsonSerializerWrapper stringSerializer)
+            : base(stringSerializer) { }
 
         [Fact]
         public async Task ReturnNullForNullObjects()

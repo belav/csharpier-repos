@@ -411,7 +411,8 @@ namespace System.IO.Hashing.Tests
             private readonly byte[] _input;
             public ReadOnlySpan<byte> Input => new ReadOnlySpan<byte>(_input);
 
-            public TestCase(string name, byte[] input, byte[] output) : base(name, output)
+            public TestCase(string name, byte[] input, byte[] output)
+                : base(name, output)
             {
                 _input = input;
             }

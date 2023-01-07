@@ -11,9 +11,11 @@ namespace Internal.Cryptography.Pal
 {
     internal sealed class ExportProvider : UnixExportProvider
     {
-        internal ExportProvider(ICertificatePalCore singleCertPal) : base(singleCertPal) { }
+        internal ExportProvider(ICertificatePalCore singleCertPal)
+            : base(singleCertPal) { }
 
-        internal ExportProvider(X509Certificate2Collection certs) : base(certs) { }
+        internal ExportProvider(X509Certificate2Collection certs)
+            : base(certs) { }
 
         protected override byte[] ExportPkcs8(
             ICertificatePalCore certificatePal,

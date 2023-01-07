@@ -117,9 +117,11 @@ namespace System.ComponentModel.Design.Tests
 
         private class TestDesignerTransaction : DesignerTransaction
         {
-            public TestDesignerTransaction() : base() { }
+            public TestDesignerTransaction()
+                : base() { }
 
-            public TestDesignerTransaction(string description) : base(description) { }
+            public TestDesignerTransaction(string description)
+                : base(description) { }
 
             public int CancelCount { get; set; }
 

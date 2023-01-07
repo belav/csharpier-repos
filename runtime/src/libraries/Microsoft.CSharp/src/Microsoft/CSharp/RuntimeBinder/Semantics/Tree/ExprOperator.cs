@@ -7,7 +7,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal abstract class ExprOperator : ExprWithType
     {
-        protected ExprOperator(ExpressionKind kind, CType type) : base(kind, type)
+        protected ExprOperator(ExpressionKind kind, CType type)
+            : base(kind, type)
         {
             Debug.Assert(kind.IsUnaryOperator() || kind > ExpressionKind.TypeLimit);
         }
@@ -17,7 +18,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType type,
             Expr call,
             MethPropWithInst userDefinedMethod
-        ) : this(kind, type)
+        )
+            : this(kind, type)
         {
             OptionalUserDefinedCall = call;
             UserDefinedCallMethod = userDefinedMethod;

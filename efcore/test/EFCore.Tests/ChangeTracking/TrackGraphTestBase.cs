@@ -1268,7 +1268,8 @@ public abstract class TrackGraphTestBase
 
     private class MyTracker : KeyValueEntityTracker
     {
-        public MyTracker(bool updateExistingEntities) : base(updateExistingEntities) { }
+        public MyTracker(bool updateExistingEntities)
+            : base(updateExistingEntities) { }
 
         public override EntityState DetermineState(EntityEntry entry)
         {
@@ -1406,7 +1407,8 @@ public abstract class TrackGraphTestBase
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
             ILoggingOptions loggingOptions
-        ) : base(logger, loggingOptions) { }
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 

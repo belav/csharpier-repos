@@ -409,7 +409,8 @@ namespace System.DirectoryServices.AccountManagement
             string samAccountName,
             string password,
             bool enabled
-        ) : this(context)
+        )
+            : this(context)
         {
             if (samAccountName != null)
             {

@@ -18,7 +18,8 @@ namespace Microsoft.Web.Mvc
         private readonly Dictionary<TKey, TValue> _cache;
         private readonly ReaderWriterLockSlim _readerWriterLock = new ReaderWriterLockSlim();
 
-        protected ReaderWriterCache() : this(null) { }
+        protected ReaderWriterCache()
+            : this(null) { }
 
         protected ReaderWriterCache(IEqualityComparer<TKey> comparer)
         {

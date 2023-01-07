@@ -32,7 +32,8 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
             CustomUserTokenInt
         >.AspNetIdentityFixtureBase
 {
-    protected AspNetIdentityCustomTypesIntKeyTestBase(TFixture fixture) : base(fixture) { }
+    protected AspNetIdentityCustomTypesIntKeyTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task Can_use_navigation_properties_on_User()
@@ -218,7 +219,8 @@ public class CustomTypesIdentityContextInt
         CustomUserTokenInt
     >
 {
-    public CustomTypesIdentityContextInt(DbContextOptions options) : base(options) { }
+    public CustomTypesIdentityContextInt(DbContextOptions options)
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -23,7 +23,8 @@ public class PageHandlerSelectedContext : FilterContext
         PageContext pageContext,
         IList<IFilterMetadata> filters,
         object handlerInstance
-    ) : base(pageContext, filters)
+    )
+        : base(pageContext, filters)
     {
         if (handlerInstance == null)
         {

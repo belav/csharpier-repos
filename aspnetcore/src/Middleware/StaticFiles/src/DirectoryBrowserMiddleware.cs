@@ -31,7 +31,8 @@ public class DirectoryBrowserMiddleware
         RequestDelegate next,
         IWebHostEnvironment hostingEnv,
         IOptions<DirectoryBrowserOptions> options
-    ) : this(next, hostingEnv, HtmlEncoder.Default, options) { }
+    )
+        : this(next, hostingEnv, HtmlEncoder.Default, options) { }
 
     /// <summary>
     /// Creates a new instance of the SendFileMiddleware.

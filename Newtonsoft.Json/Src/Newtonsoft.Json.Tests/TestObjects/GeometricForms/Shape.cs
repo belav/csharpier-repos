@@ -125,7 +125,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
 
             // Methods
             [CompilerGenerated, DebuggerNonUserCode]
-            internal Circle(double _radius) : base(1)
+            internal Circle(double _radius)
+                : base(1)
             {
                 this._radius = _radius;
             }
@@ -156,7 +157,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
             internal readonly double item2;
 
             [CompilerGenerated, DebuggerNonUserCode]
-            internal Prism(double _width, double item2, double _height) : base(2)
+            internal Prism(double _width, double item2, double _height)
+                : base(2)
             {
                 this._width = _width;
                 this.item2 = item2;
@@ -207,7 +209,8 @@ namespace Newtonsoft.Json.Tests.TestObjects.GeometricForms
             internal readonly double _width;
 
             [CompilerGenerated, DebuggerNonUserCode]
-            internal Rectangle(double _width, double _length) : base(0)
+            internal Rectangle(double _width, double _length)
+                : base(0)
             {
                 this._width = _width;
                 this._length = _length;

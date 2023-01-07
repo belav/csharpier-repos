@@ -9,6 +9,7 @@ namespace System.Reflection
     {
         public MissingMetadataException() { }
 
-        public MissingMetadataException(string message) : base(message) { }
+        public MissingMetadataException(string message)
+            : base(message) { }
     }
 }

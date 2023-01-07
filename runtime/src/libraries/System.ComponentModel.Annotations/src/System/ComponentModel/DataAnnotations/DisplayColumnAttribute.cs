@@ -10,7 +10,8 @@ namespace System.ComponentModel.DataAnnotations
     [AttributeUsage(AttributeTargets.Class, Inherited = true, AllowMultiple = false)]
     public class DisplayColumnAttribute : Attribute
     {
-        public DisplayColumnAttribute(string displayColumn) : this(displayColumn, null) { }
+        public DisplayColumnAttribute(string displayColumn)
+            : this(displayColumn, null) { }
 
         public DisplayColumnAttribute(string displayColumn, string? sortColumn)
             : this(displayColumn, sortColumn, false) { }

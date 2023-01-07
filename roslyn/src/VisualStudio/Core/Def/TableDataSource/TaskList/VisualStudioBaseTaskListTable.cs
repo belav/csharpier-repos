@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             ITaskListProvider taskProvider,
             string identifier,
             ITableManagerProvider provider
-        ) : base(workspace, provider, StandardTables.TasksTable)
+        )
+            : base(workspace, provider, StandardTables.TasksTable)
         {
             _source = new TableDataSource(workspace, threadingContext, taskProvider, identifier);
             AddInitialTableSource(workspace.CurrentSolution, _source);
@@ -85,7 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IThreadingContext threadingContext,
                 ITaskListProvider taskProvider,
                 string identifier
-            ) : base(workspace, threadingContext)
+            )
+                : base(workspace, threadingContext)
             {
                 _workspace = workspace;
                 _identifier = identifier;
@@ -222,7 +224,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int version,
                     ImmutableArray<TaskListTableItem> items,
                     ImmutableArray<ITrackingPoint> trackingPoints
-                ) : base(threadingContext, version, items, trackingPoints) { }
+                )
+                    : base(threadingContext, version, items, trackingPoints) { }
 
                 public override bool TryGetValue(
                     int index,

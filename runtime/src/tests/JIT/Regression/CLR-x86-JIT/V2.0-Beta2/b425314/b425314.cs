@@ -824,7 +824,8 @@ public class GenericMethod2 : GenericMethod1
         s_objs[1] = new GenericMethod2(VAL2);
     }
 
-    public GenericMethod2(int val) : base(0)
+    public GenericMethod2(int val)
+        : base(0)
     {
         // The `val' argument will always be VAL2.
         _i2 = val;

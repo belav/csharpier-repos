@@ -32,7 +32,12 @@ namespace System.Web.Http.Tracing.Tracers
         public FormatterParameterBindingTracer(
             FormatterParameterBinding innerBinding,
             ITraceWriter traceWriter
-        ) : base(innerBinding.Descriptor, innerBinding.Formatters, innerBinding.BodyModelValidator)
+        )
+            : base(
+                innerBinding.Descriptor,
+                innerBinding.Formatters,
+                innerBinding.BodyModelValidator
+            )
         {
             Contract.Assert(innerBinding != null);
             Contract.Assert(traceWriter != null);

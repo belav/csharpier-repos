@@ -13,7 +13,8 @@ public class CSharpEntityTypeGeneratorTest : ModelCodeGeneratorTestBase
     public CSharpEntityTypeGeneratorTest(
         ModelCodeGeneratorTestFixture fixture,
         ITestOutputHelper output
-    ) : base(fixture, output) { }
+    )
+        : base(fixture, output) { }
 
     [ConditionalFact]
     public Task KeylessAttribute_is_generated_for_key_less_entity() =>

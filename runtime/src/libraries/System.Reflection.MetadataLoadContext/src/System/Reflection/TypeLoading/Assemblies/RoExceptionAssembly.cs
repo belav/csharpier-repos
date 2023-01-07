@@ -9,7 +9,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal sealed class RoExceptionAssembly : RoStubAssembly
     {
-        internal RoExceptionAssembly(Exception exception) : base()
+        internal RoExceptionAssembly(Exception exception)
+            : base()
         {
             Exception = exception;
         }

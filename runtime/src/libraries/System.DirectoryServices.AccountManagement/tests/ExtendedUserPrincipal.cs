@@ -7,7 +7,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
     [DirectoryObjectClass("User")]
     public class ExtendedUserPrincipal : UserPrincipal, IExtendedPrincipalTest
     {
-        public ExtendedUserPrincipal(PrincipalContext context) : base(context) { }
+        public ExtendedUserPrincipal(PrincipalContext context)
+            : base(context) { }
 
         public static new ExtendedUserPrincipal FindByIdentity(
             PrincipalContext context,

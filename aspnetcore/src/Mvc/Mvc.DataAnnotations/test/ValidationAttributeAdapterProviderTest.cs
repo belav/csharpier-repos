@@ -84,7 +84,8 @@ public class ValidationAttributeAdapterProviderTest
 
     class CustomRegularExpressionAttribute : RegularExpressionAttribute
     {
-        public CustomRegularExpressionAttribute(string pattern) : base(pattern)
+        public CustomRegularExpressionAttribute(string pattern)
+            : base(pattern)
         {
             ErrorMessage = "Not valid.";
         }

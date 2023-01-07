@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class BuiltInDataTypesInMemoryTest
     : BuiltInDataTypesTestBase<BuiltInDataTypesInMemoryTest.BuiltInDataTypesInMemoryFixture>
 {
-    public BuiltInDataTypesInMemoryTest(BuiltInDataTypesInMemoryFixture fixture) : base(fixture) { }
+    public BuiltInDataTypesInMemoryTest(BuiltInDataTypesInMemoryFixture fixture)
+        : base(fixture) { }
 
     public override void Optional_datetime_reading_null_from_database() { }
 

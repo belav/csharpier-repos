@@ -15,7 +15,8 @@ public class LinkExternalLogin : DefaultUIPage
         HttpClient client,
         IHtmlDocument externalLoginsDocument,
         DefaultUIContext context
-    ) : base(client, externalLoginsDocument, context)
+    )
+        : base(client, externalLoginsDocument, context)
     {
         _linkLoginForm = HtmlAssert.HasForm($"#link-login-form", externalLoginsDocument);
         _linkLoginButton = HtmlAssert.HasElement(

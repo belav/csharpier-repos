@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
     [CompilerTrait(CompilerFeature.ReadOnlyReferences)]
     public class RefReadonlyTests : ParsingTests
     {
-        public RefReadonlyTests(ITestOutputHelper output) : base(output) { }
+        public RefReadonlyTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

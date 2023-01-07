@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.FileHeaders
     {
         public static readonly CSharpFileHeaderHelper Instance = new();
 
-        private CSharpFileHeaderHelper() : base(CSharpSyntaxKinds.Instance) { }
+        private CSharpFileHeaderHelper()
+            : base(CSharpSyntaxKinds.Instance) { }
 
         public override string CommentPrefix => "//";
 

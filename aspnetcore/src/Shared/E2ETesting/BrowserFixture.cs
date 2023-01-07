@@ -401,6 +401,7 @@ public class BrowserFixture : IAsyncLifetime
             Uri remoteAddress,
             ICapabilities desiredCapabilities,
             TimeSpan commandTimeout
-        ) : base(remoteAddress, desiredCapabilities, commandTimeout) { }
+        )
+            : base(remoteAddress, desiredCapabilities, commandTimeout) { }
     }
 }

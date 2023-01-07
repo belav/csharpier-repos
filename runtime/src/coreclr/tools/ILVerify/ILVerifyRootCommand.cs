@@ -72,7 +72,8 @@ namespace ILVerify
 
         public ParseResult Result;
 
-        public ILVerifyRootCommand() : base("Tool for verifying MSIL code based on ECMA-335.")
+        public ILVerifyRootCommand()
+            : base("Tool for verifying MSIL code based on ECMA-335.")
         {
             AddArgument(InputFilePath);
             AddOption(Reference);

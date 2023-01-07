@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             DeclarationScope scope,
             string name,
             ImmutableArray<Location> locations
-        ) : base(owner, ordinal)
+        )
+            : base(owner, ordinal)
         {
 #if DEBUG
             foreach (var location in locations)

@@ -8,7 +8,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
 {
     public class RazorError : IEquatable<RazorError>
     {
-        public RazorError(string message, SourceLocation location) : this(message, location, 1) { }
+        public RazorError(string message, SourceLocation location)
+            : this(message, location, 1) { }
 
         public RazorError(string message, int absoluteIndex, int lineIndex, int columnIndex)
             : this(message, new SourceLocation(absoluteIndex, lineIndex, columnIndex)) { }
@@ -26,7 +27,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
             int lineIndex,
             int columnIndex,
             int length
-        ) : this(message, new SourceLocation(absoluteIndex, lineIndex, columnIndex), length) { }
+        )
+            : this(message, new SourceLocation(absoluteIndex, lineIndex, columnIndex), length) { }
 
         public string Message { get; private set; }
         public SourceLocation Location { get; private set; }

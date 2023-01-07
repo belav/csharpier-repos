@@ -11,7 +11,8 @@ namespace System.IO.Hashing.Tests
     {
         private static readonly byte[] s_emptyHashValue = new byte[4];
 
-        public Crc32Tests() : base(s_emptyHashValue) { }
+        public Crc32Tests()
+            : base(s_emptyHashValue) { }
 
         public static IEnumerable<object[]> TestCases
         {

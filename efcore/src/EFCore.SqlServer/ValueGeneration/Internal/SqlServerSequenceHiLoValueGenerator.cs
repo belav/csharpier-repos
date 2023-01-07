@@ -33,7 +33,8 @@ public class SqlServerSequenceHiLoValueGenerator<TValue> : HiLoValueGenerator<TV
         SqlServerSequenceValueGeneratorState generatorState,
         ISqlServerConnection connection,
         IRelationalCommandDiagnosticsLogger commandLogger
-    ) : base(generatorState)
+    )
+        : base(generatorState)
     {
         _sequence = generatorState.Sequence;
         _rawSqlCommandBuilder = rawSqlCommandBuilder;

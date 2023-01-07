@@ -376,7 +376,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
             Child(StreamingContext context) { }
 
-            public Child(string init) : base(init)
+            public Child(string init)
+                : base(init)
             {
                 personAge = 13;
                 mother = new Person2(null);
@@ -393,7 +394,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             string phone;
 
-            public DerivedAddress() : base(null)
+            public DerivedAddress()
+                : base(null)
             {
                 email = "neo@zion.net";
                 phone = "222-111-2222";
@@ -484,7 +486,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             byte[] extraData;
 
-            public DerivedAddress2() : base() { }
+            public DerivedAddress2()
+                : base() { }
         }
 
         [DataContract]

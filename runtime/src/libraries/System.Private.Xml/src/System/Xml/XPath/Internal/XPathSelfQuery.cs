@@ -10,7 +10,8 @@ namespace MS.Internal.Xml.XPath
         public XPathSelfQuery(Query qyInput, string Name, string Prefix, XPathNodeType Type)
             : base(qyInput, Name, Prefix, Type) { }
 
-        private XPathSelfQuery(XPathSelfQuery other) : base(other) { }
+        private XPathSelfQuery(XPathSelfQuery other)
+            : base(other) { }
 
         public override XPathNavigator? Advance()
         {

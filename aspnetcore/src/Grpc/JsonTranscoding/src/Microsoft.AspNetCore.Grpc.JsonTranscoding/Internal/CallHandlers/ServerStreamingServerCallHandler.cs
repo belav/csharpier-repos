@@ -21,7 +21,8 @@ internal sealed class ServerStreamingServerCallHandler<TService, TRequest, TResp
         ILoggerFactory loggerFactory,
         CallHandlerDescriptorInfo descriptorInfo,
         JsonSerializerOptions options
-    ) : base(unaryMethodInvoker, loggerFactory, descriptorInfo, options)
+    )
+        : base(unaryMethodInvoker, loggerFactory, descriptorInfo, options)
     {
         _invoker = unaryMethodInvoker;
     }

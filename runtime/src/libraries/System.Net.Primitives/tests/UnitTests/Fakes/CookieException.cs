@@ -6,10 +6,13 @@ namespace System.Net
     // Fake CookieException without serialization to enable unit tests compiling for netstandard 1.3
     public class CookieException : FormatException
     {
-        public CookieException() : base() { }
+        public CookieException()
+            : base() { }
 
-        internal CookieException(string message) : base(message) { }
+        internal CookieException(string message)
+            : base(message) { }
 
-        internal CookieException(string message, Exception inner) : base(message, inner) { }
+        internal CookieException(string message, Exception inner)
+            : base(message, inner) { }
     }
 }

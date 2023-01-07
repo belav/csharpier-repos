@@ -79,7 +79,8 @@ public class BindingSourceValueProviderTest
 
     private class TestableBindingSourceValueProvider : BindingSourceValueProvider
     {
-        public TestableBindingSourceValueProvider(BindingSource source) : base(source) { }
+        public TestableBindingSourceValueProvider(BindingSource source)
+            : base(source) { }
 
         public override bool ContainsPrefix(string prefix)
         {

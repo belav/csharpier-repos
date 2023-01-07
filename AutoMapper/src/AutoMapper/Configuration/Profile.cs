@@ -73,7 +73,8 @@ public class Profile : IProfileExpressionInternal, IProfileConfiguration
     private List<ValueTransformerConfiguration> _valueTransformerConfigs;
     private bool? _constructorMappingEnabled;
 
-    protected internal Profile(string profileName) : this() => ProfileName = profileName;
+    protected internal Profile(string profileName)
+        : this() => ProfileName = profileName;
 
     protected Profile()
     {

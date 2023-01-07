@@ -14,7 +14,8 @@ namespace System.Reflection.TypeLoading
         private readonly bool _multiDim;
         private readonly int _rank;
 
-        internal RoArrayType(RoType elementType, bool multiDim, int rank) : base(elementType)
+        internal RoArrayType(RoType elementType, bool multiDim, int rank)
+            : base(elementType)
         {
             Debug.Assert(elementType != null);
             Debug.Assert(multiDim || rank == 1);

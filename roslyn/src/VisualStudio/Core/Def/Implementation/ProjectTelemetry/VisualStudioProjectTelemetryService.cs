@@ -69,7 +69,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectTelemetr
             VisualStudioWorkspaceImpl workspace,
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
 

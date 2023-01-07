@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
         protected AbstractBraceCompletionServiceFactory(
             IEnumerable<IBraceCompletionService> braceCompletionServices,
             IThreadingContext threadingContext
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _braceCompletionServices = braceCompletionServices.ToImmutableArray();
         }

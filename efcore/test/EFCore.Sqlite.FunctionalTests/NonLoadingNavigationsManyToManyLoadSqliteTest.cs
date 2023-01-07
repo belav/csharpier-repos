@@ -10,7 +10,8 @@ public class NonLoadingNavigationsManyToManyLoadSqliteTest
 {
     public NonLoadingNavigationsManyToManyLoadSqliteTest(
         NonLoadingNavigationsManyToManyLoadSqliteFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public class NonLoadingNavigationsManyToManyLoadSqliteFixture : ManyToManyLoadFixtureBase
     {

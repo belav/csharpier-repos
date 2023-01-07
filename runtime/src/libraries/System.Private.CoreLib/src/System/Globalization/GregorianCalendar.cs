@@ -71,7 +71,8 @@ namespace System.Globalization
         internal static Calendar GetDefaultInstance() =>
             s_defaultInstance ??= new GregorianCalendar();
 
-        public GregorianCalendar() : this(GregorianCalendarTypes.Localized) { }
+        public GregorianCalendar()
+            : this(GregorianCalendarTypes.Localized) { }
 
         public GregorianCalendar(GregorianCalendarTypes type)
         {

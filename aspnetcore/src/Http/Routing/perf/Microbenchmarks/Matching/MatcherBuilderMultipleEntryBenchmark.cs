@@ -109,7 +109,8 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
             INodeBuilderPolicy,
             IEndpointComparerPolicy
     {
-        public TestUberPolicy(int order) : base(order) { }
+        public TestUberPolicy(int order)
+            : base(order) { }
 
         public IComparer<Endpoint> Comparer => new TestEndpointComparer();
 
@@ -134,7 +135,8 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
 
     private sealed class TestNodeBuilderPolicy : TestMatcherPolicyBase, INodeBuilderPolicy
     {
-        public TestNodeBuilderPolicy(int order) : base(order) { }
+        public TestNodeBuilderPolicy(int order)
+            : base(order) { }
 
         public bool AppliesToEndpoints(IReadOnlyList<Endpoint> endpoints)
         {
@@ -157,7 +159,8 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
 
     private sealed class TestEndpointComparerPolicy : TestMatcherPolicyBase, IEndpointComparerPolicy
     {
-        public TestEndpointComparerPolicy(int order) : base(order) { }
+        public TestEndpointComparerPolicy(int order)
+            : base(order) { }
 
         public IComparer<Endpoint> Comparer => new TestEndpointComparer();
 
@@ -174,7 +177,8 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
 
     private sealed class TestEndpointSelectorPolicy : TestMatcherPolicyBase, IEndpointSelectorPolicy
     {
-        public TestEndpointSelectorPolicy(int order) : base(order) { }
+        public TestEndpointSelectorPolicy(int order)
+            : base(order) { }
 
         public bool AppliesToEndpoints(IReadOnlyList<Endpoint> endpoints)
         {

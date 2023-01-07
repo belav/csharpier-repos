@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         private static readonly CSharpParseOptions CSharp9 =
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp9);
 
-        public UseConditionalExpressionForAssignmentTests(ITestOutputHelper logger) : base(logger)
-        { }
+        public UseConditionalExpressionForAssignmentTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

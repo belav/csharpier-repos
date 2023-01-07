@@ -260,6 +260,7 @@ public class AsyncActionsController : Controller
 
     public class CustomException : Exception
     {
-        public CustomException() : base("This is a custom exception.") { }
+        public CustomException()
+            : base("This is a custom exception.") { }
     }
 }

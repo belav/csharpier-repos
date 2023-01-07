@@ -32,7 +32,8 @@ public class IntTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="IntTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected IntTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected IntTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

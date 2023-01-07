@@ -194,7 +194,8 @@ namespace System.Collections.ObjectModel.Tests
 
         private class TestCollection<T> : ReadOnlyCollection<T>
         {
-            public TestCollection(IList<T> items) : base(items) { }
+            public TestCollection(IList<T> items)
+                : base(items) { }
 
             public IList<T> GetItems() => Items;
         }

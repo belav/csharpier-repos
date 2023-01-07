@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 AbstractTableDataSourceFindUsagesContext context,
                 RoslynDefinitionBucket definitionBucket,
                 IThreadingContext threadingContext
-            ) : base(definitionBucket, context.Presenter)
+            )
+                : base(definitionBucket, context.Presenter)
             {
                 _threadingContext = threadingContext;
             }

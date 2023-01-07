@@ -26,7 +26,8 @@ public abstract class SignOutAuthenticationHandler<TOptions>
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc/>
     public virtual Task SignOutAsync(AuthenticationProperties? properties)

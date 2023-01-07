@@ -26,7 +26,8 @@ public class CascadeDeleteEventData : EntityEntryEventData
         EntityEntry entityEntry,
         EntityEntry parentEntry,
         EntityState state
-    ) : base(eventDefinition, messageGenerator, entityEntry)
+    )
+        : base(eventDefinition, messageGenerator, entityEntry)
     {
         ParentEntityEntry = parentEntry;
         State = state;

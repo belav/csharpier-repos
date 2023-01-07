@@ -26,9 +26,11 @@ namespace System.Collections.Generic
 
         private readonly TreeSet<KeyValuePair<TKey, TValue>> _set; // Do not rename (binary serialization)
 
-        public SortedDictionary() : this((IComparer<TKey>?)null) { }
+        public SortedDictionary()
+            : this((IComparer<TKey>?)null) { }
 
-        public SortedDictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
+        public SortedDictionary(IDictionary<TKey, TValue> dictionary)
+            : this(dictionary, null) { }
 
         public SortedDictionary(IDictionary<TKey, TValue> dictionary, IComparer<TKey>? comparer)
         {
@@ -958,12 +960,14 @@ namespace System.Collections.Generic
     {
         public TreeSet() { }
 
-        public TreeSet(IComparer<T>? comparer) : base(comparer) { }
+        public TreeSet(IComparer<T>? comparer)
+            : base(comparer) { }
 
-        internal TreeSet(TreeSet<T> set, IComparer<T>? comparer) : base(set, comparer) { }
+        internal TreeSet(TreeSet<T> set, IComparer<T>? comparer)
+            : base(set, comparer) { }
 
-        private TreeSet(SerializationInfo siInfo, StreamingContext context) : base(siInfo, context)
-        { }
+        private TreeSet(SerializationInfo siInfo, StreamingContext context)
+            : base(siInfo, context) { }
 
         internal override bool AddIfNotPresent(T item)
         {

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundNode node,
             BoundNode firstInRegion,
             BoundNode lastInRegion
-        ) : base(compilation, member, node, firstInRegion, lastInRegion)
+        )
+            : base(compilation, member, node, firstInRegion, lastInRegion)
         {
             _labelsInside = new ArrayBuilder<LabelSymbol>();
             _branchesOutOf = ArrayBuilder<StatementSyntax>.GetInstance();

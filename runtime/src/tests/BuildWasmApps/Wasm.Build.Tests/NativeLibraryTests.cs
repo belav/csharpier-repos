@@ -15,7 +15,8 @@ namespace Wasm.Build.Tests
         public NativeLibraryTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         [Theory]
         [BuildAndRun(aot: false)]

@@ -75,7 +75,8 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        public HttpClientHandler_RemoteServerTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_RemoteServerTest(ITestOutputHelper output)
+            : base(output) { }
 
         [OuterLoop("Uses external servers")]
         [Theory]
@@ -596,7 +597,8 @@ namespace System.Net.Http.Functional.Tests
             private readonly Stream _stream;
             private readonly bool _syncCopy;
 
-            public StreamContentWithSyncAsyncCopy(Stream stream, bool syncCopy) : base(stream)
+            public StreamContentWithSyncAsyncCopy(Stream stream, bool syncCopy)
+                : base(stream)
             {
                 _stream = stream;
                 _syncCopy = syncCopy;

@@ -25,7 +25,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   Initializes a new instance of the <see cref="X509AuthorityKeyIdentifierExtension" />
         ///   class.
         /// </summary>
-        public X509AuthorityKeyIdentifierExtension() : base(Oids.AuthorityKeyIdentifierOid)
+        public X509AuthorityKeyIdentifierExtension()
+            : base(Oids.AuthorityKeyIdentifierOid)
         {
             _decoded = true;
         }
@@ -70,7 +71,8 @@ namespace System.Security.Cryptography.X509Certificates
         public X509AuthorityKeyIdentifierExtension(
             ReadOnlySpan<byte> rawData,
             bool critical = false
-        ) : base(Oids.AuthorityKeyIdentifierOid, rawData, critical)
+        )
+            : base(Oids.AuthorityKeyIdentifierOid, rawData, critical)
         {
             Decode(RawData);
         }

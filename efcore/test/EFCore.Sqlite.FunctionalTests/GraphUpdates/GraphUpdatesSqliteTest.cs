@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore
         public class ChangedChangingNotifications
             : GraphUpdatesTestBase<ChangedChangingNotifications.SqliteFixture>
         {
-            public ChangedChangingNotifications(SqliteFixture fixture) : base(fixture) { }
+            public ChangedChangingNotifications(SqliteFixture fixture)
+                : base(fixture) { }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -41,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore
 
         public class ChangedNotifications : GraphUpdatesTestBase<ChangedNotifications.SqliteFixture>
         {
-            public ChangedNotifications(SqliteFixture fixture) : base(fixture) { }
+            public ChangedNotifications(SqliteFixture fixture)
+                : base(fixture) { }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -70,7 +72,8 @@ namespace Microsoft.EntityFrameworkCore
         public class FullWithOriginalsNotifications
             : GraphUpdatesTestBase<FullWithOriginalsNotifications.SqliteFixture>
         {
-            public FullWithOriginalsNotifications(SqliteFixture fixture) : base(fixture) { }
+            public FullWithOriginalsNotifications(SqliteFixture fixture)
+                : base(fixture) { }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -99,7 +102,8 @@ namespace Microsoft.EntityFrameworkCore
         public class SnapshotNotifications
             : GraphUpdatesTestBase<SnapshotNotifications.SqliteFixture>
         {
-            public SnapshotNotifications(SqliteFixture fixture) : base(fixture) { }
+            public SnapshotNotifications(SqliteFixture fixture)
+                : base(fixture) { }
 
             protected override void UseTransaction(
                 DatabaseFacade facade,
@@ -129,7 +133,8 @@ namespace Microsoft.EntityFrameworkCore
             where TFixture : GraphUpdatesSqliteTestBase<TFixture>.GraphUpdatesSqliteFixtureBase,
                 new()
         {
-            protected GraphUpdatesSqliteTestBase(TFixture fixture) : base(fixture) { }
+            protected GraphUpdatesSqliteTestBase(TFixture fixture)
+                : base(fixture) { }
 
             protected override IQueryable<Root> ModifyQueryRoot(IQueryable<Root> query) =>
                 query.AsSplitQuery();

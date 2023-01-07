@@ -28,7 +28,8 @@ namespace System.Net.Http.Headers
             _tag = "*";
         }
 
-        public EntityTagHeaderValue(string tag) : this(tag, false) { }
+        public EntityTagHeaderValue(string tag)
+            : this(tag, false) { }
 
         public EntityTagHeaderValue(string tag, bool isWeak)
         {

@@ -32,7 +32,8 @@ public abstract class PredicateJoinExpressionBase : JoinExpressionBase
         TableExpressionBase table,
         SqlExpression joinPredicate,
         IEnumerable<IAnnotation>? annotations
-    ) : base(table, annotations)
+    )
+        : base(table, annotations)
     {
         JoinPredicate = joinPredicate;
     }

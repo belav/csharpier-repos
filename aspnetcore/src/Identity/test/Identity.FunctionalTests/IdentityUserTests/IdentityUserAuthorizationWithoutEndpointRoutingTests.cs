@@ -11,5 +11,6 @@ public class IdentityUserAuthorizationWithoutEndpointRoutingTests
 {
     public IdentityUserAuthorizationWithoutEndpointRoutingTests(
         ServerFactory<StartupWithoutEndpointRouting, IdentityDbContext> serverFactory
-    ) : base(serverFactory) { }
+    )
+        : base(serverFactory) { }
 }

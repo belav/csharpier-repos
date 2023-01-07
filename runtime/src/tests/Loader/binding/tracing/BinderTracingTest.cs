@@ -44,7 +44,8 @@ namespace BinderTracingTests
             private string assemblyPathToLoad;
             private bool throwOnLoad;
 
-            public CustomALC(string name, bool throwOnLoad = false) : base(name)
+            public CustomALC(string name, bool throwOnLoad = false)
+                : base(name)
             {
                 this.throwOnLoad = throwOnLoad;
             }

@@ -17,17 +17,23 @@ namespace System.Diagnostics
         private string _secondaryDelim = ",";
         private bool _initializedDelim;
 
-        public DelimitedListTraceListener(Stream stream) : base(stream) { }
+        public DelimitedListTraceListener(Stream stream)
+            : base(stream) { }
 
-        public DelimitedListTraceListener(Stream stream, string? name) : base(stream, name) { }
+        public DelimitedListTraceListener(Stream stream, string? name)
+            : base(stream, name) { }
 
-        public DelimitedListTraceListener(TextWriter writer) : base(writer) { }
+        public DelimitedListTraceListener(TextWriter writer)
+            : base(writer) { }
 
-        public DelimitedListTraceListener(TextWriter writer, string? name) : base(writer, name) { }
+        public DelimitedListTraceListener(TextWriter writer, string? name)
+            : base(writer, name) { }
 
-        public DelimitedListTraceListener(string? fileName) : base(fileName) { }
+        public DelimitedListTraceListener(string? fileName)
+            : base(fileName) { }
 
-        public DelimitedListTraceListener(string? fileName, string? name) : base(fileName, name) { }
+        public DelimitedListTraceListener(string? fileName, string? name)
+            : base(fileName, name) { }
 
         public string Delimiter
         {

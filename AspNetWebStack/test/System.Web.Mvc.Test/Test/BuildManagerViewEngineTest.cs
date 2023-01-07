@@ -272,7 +272,8 @@ namespace System.Web.Mvc.Test
         {
             private bool _isPrecompiledNonUpdateableSite;
 
-            public TestableBuildManagerViewEngine() : base() { }
+            public TestableBuildManagerViewEngine()
+                : base() { }
 
             public TestableBuildManagerViewEngine(IViewPageActivator viewPageActivator)
                 : base(viewPageActivator) { }
@@ -282,7 +283,8 @@ namespace System.Web.Mvc.Test
                 IResolver<IViewPageActivator> activatorResolver = null,
                 IDependencyResolver dependencyResolver = null,
                 VirtualPathProvider pathProvider = null
-            ) : base(viewPageActivator, activatorResolver, dependencyResolver, pathProvider) { }
+            )
+                : base(viewPageActivator, activatorResolver, dependencyResolver, pathProvider) { }
 
             public new IViewPageActivator ViewPageActivator
             {

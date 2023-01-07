@@ -34,7 +34,8 @@ namespace Castle.DynamicProxy.Generators
             bool standalone,
             bool proxyable,
             bool hasTarget
-        ) : base(method)
+        )
+            : base(method)
         {
             Method = method;
             MethodOnTarget = methodOnTarget;

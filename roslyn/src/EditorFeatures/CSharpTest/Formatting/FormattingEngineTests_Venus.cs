@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
     public class FormattingEngineTests_Venus : CSharpFormattingEngineTestBase
     {
-        public FormattingEngineTests_Venus(ITestOutputHelper output) : base(output) { }
+        public FormattingEngineTests_Venus(ITestOutputHelper output)
+            : base(output) { }
 
         [
             WpfFact,

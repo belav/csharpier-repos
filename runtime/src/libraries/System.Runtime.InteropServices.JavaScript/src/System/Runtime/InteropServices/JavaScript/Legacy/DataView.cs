@@ -57,7 +57,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the DataView class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal DataView(IntPtr jsHandle) : base(jsHandle) { }
+        internal DataView(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// Gets the length (in bytes) of this view from the start of its ArrayBuffer. Fixed at construction time and thus read only.

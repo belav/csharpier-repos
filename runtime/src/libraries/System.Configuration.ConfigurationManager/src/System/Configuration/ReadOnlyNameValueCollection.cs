@@ -11,7 +11,8 @@ namespace System.Configuration
         internal ReadOnlyNameValueCollection(IEqualityComparer equalityComparer)
             : base(equalityComparer) { }
 
-        internal ReadOnlyNameValueCollection(ReadOnlyNameValueCollection value) : base(value) { }
+        internal ReadOnlyNameValueCollection(ReadOnlyNameValueCollection value)
+            : base(value) { }
 
         internal void SetReadOnly()
         {

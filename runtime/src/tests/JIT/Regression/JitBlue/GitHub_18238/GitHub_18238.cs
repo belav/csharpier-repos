@@ -25,7 +25,8 @@ struct S1
     public bool F0;
     public short F1;
 
-    public S1(short f1) : this()
+    public S1(short f1)
+        : this()
     {
         F1 = f1;
         F0 = true;

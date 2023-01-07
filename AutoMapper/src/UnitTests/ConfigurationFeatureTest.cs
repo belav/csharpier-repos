@@ -82,7 +82,8 @@ public class ConfigurationFeatureTest
     {
         private readonly TFeature _feature;
 
-        protected ConfigurationExpressionFeatureBase(int value, TFeature feature) : base(value)
+        protected ConfigurationExpressionFeatureBase(int value, TFeature feature)
+            : base(value)
         {
             _feature = feature;
         }
@@ -110,12 +111,14 @@ public class ConfigurationFeatureTest
 
     public class ConfigurationFeatureA : ConfigurationFeatureBase
     {
-        public ConfigurationFeatureA(int value) : base(value) { }
+        public ConfigurationFeatureA(int value)
+            : base(value) { }
     }
 
     public class ConfigurationFeatureB : ConfigurationFeatureBase
     {
-        public ConfigurationFeatureB(int value) : base(value) { }
+        public ConfigurationFeatureB(int value)
+            : base(value) { }
     }
 
     public abstract class ConfigurationFeatureBase : IRuntimeFeature

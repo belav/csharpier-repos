@@ -28,7 +28,8 @@ public class SqlServerDatabaseCreator : RelationalDatabaseCreator
         RelationalDatabaseCreatorDependencies dependencies,
         ISqlServerConnection connection,
         IRawSqlCommandBuilder rawSqlCommandBuilder
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _connection = connection;
         _rawSqlCommandBuilder = rawSqlCommandBuilder;

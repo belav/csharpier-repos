@@ -17,7 +17,8 @@ namespace System.Text.Json.Serialization.Tests
         public UnsupportedTypesTests(
             JsonSerializerWrapper serializerWrapper,
             bool supportsJsonPathOnSerialize
-        ) : base(serializerWrapper)
+        )
+            : base(serializerWrapper)
         {
             SupportsJsonPathOnSerialize = supportsJsonPathOnSerialize;
         }

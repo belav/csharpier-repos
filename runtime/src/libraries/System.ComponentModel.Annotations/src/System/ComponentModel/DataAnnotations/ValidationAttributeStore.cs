@@ -196,7 +196,8 @@ namespace System.ComponentModel.DataAnnotations
             internal TypeStoreItem(
                 [DynamicallyAccessedMembers(DynamicallyAccessedTypes)] Type type,
                 AttributeCollection attributes
-            ) : base(attributes)
+            )
+                : base(attributes)
             {
                 _type = type;
             }

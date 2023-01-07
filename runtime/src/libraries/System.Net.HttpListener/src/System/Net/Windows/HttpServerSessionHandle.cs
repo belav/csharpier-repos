@@ -14,7 +14,8 @@ namespace System.Net
     {
         private readonly ulong _serverSessionId;
 
-        internal HttpServerSessionHandle(ulong id) : base(true)
+        internal HttpServerSessionHandle(ulong id)
+            : base(true)
         {
             _serverSessionId = id;
 

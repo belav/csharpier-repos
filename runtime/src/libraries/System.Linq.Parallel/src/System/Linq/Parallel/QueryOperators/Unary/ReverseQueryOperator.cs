@@ -35,7 +35,8 @@ namespace System.Linq.Parallel
         //     child                - the child whose data we will reverse
         //
 
-        internal ReverseQueryOperator(IEnumerable<TSource> child) : base(child)
+        internal ReverseQueryOperator(IEnumerable<TSource> child)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
 
@@ -230,7 +231,8 @@ namespace System.Linq.Parallel
                 ReverseQueryOperator<TSource> op,
                 QuerySettings settings,
                 bool preferStriping
-            ) : base(childQueryResults, op, settings, preferStriping)
+            )
+                : base(childQueryResults, op, settings, preferStriping)
             {
                 Debug.Assert(_childQueryResults.IsIndexible);
                 _count = _childQueryResults.ElementsCount;

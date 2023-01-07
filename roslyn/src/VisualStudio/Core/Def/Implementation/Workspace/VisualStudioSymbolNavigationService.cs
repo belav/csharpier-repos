@@ -50,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IThreadingContext threadingContext,
             IVsEditorAdaptersFactoryService editorAdaptersFactory,
             IMetadataAsSourceFileService metadataAsSourceFileService
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
             _globalOptions = globalOptions;

@@ -7,7 +7,8 @@ public abstract class TPCInheritanceQuerySqlServerTestBase<TFixture>
     : TPCInheritanceQueryTestBase<TFixture>
     where TFixture : TPCInheritanceQuerySqlServerFixtureBase, new()
 {
-    protected TPCInheritanceQuerySqlServerTestBase(TFixture fixture) : base(fixture)
+    protected TPCInheritanceQuerySqlServerTestBase(TFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

@@ -41,7 +41,8 @@ namespace Microsoft.Extensions.DependencyModel
             bool serviceable,
             string? path,
             string? hashPath
-        ) : base(type, name, version, hash, dependencies, serviceable, path, hashPath)
+        )
+            : base(type, name, version, hash, dependencies, serviceable, path, hashPath)
         {
             ThrowHelper.ThrowIfNull(assemblies);
 

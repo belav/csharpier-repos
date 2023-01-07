@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
         private readonly ImmutableHashSet<string> _reasons;
 
-        public InvocationReasons(string reason) : this(ImmutableHashSet.Create<string>(reason)) { }
+        public InvocationReasons(string reason)
+            : this(ImmutableHashSet.Create<string>(reason)) { }
 
         private InvocationReasons(ImmutableHashSet<string> reasons) => _reasons = reasons;
 

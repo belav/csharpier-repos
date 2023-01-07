@@ -1086,7 +1086,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New ManagementScope()
         ///    </code>
         /// </example>
-        public ManagementScope() : this(new ManagementPath(ManagementPath.DefaultPath.Path))
+        public ManagementScope()
+            : this(new ManagementPath(ManagementPath.DefaultPath.Path))
         {
             //Flag that this scope uses the default path
             IsDefaulted = true;
@@ -1105,7 +1106,8 @@ namespace System.Management
         /// Dim s As New ManagementScope(p)
         ///    </code>
         /// </example>
-        public ManagementScope(ManagementPath path) : this(path, (ConnectionOptions)null) { }
+        public ManagementScope(ManagementPath path)
+            : this(path, (ConnectionOptions)null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope

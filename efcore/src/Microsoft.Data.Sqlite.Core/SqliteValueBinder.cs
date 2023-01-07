@@ -14,7 +14,8 @@ namespace Microsoft.Data.Sqlite
         private readonly object? _value;
         private readonly SqliteType? _sqliteType;
 
-        protected SqliteValueBinder(object? value) : this(value, null) { }
+        protected SqliteValueBinder(object? value)
+            : this(value, null) { }
 
         protected SqliteValueBinder(object? value, SqliteType? sqliteType)
         {

@@ -50,7 +50,8 @@ namespace System.DirectoryServices.ActiveDirectory
             DirectoryContext context,
             string domainName,
             DirectoryEntryManager directoryEntryMgr
-        ) : base(context, domainName)
+        )
+            : base(context, domainName)
         {
             this.directoryEntryMgr = directoryEntryMgr;
         }

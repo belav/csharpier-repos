@@ -54,7 +54,8 @@ namespace System.Net
         private int _cookieStartIndex;
         private int _cookieLength;
 
-        internal CookieTokenizer(string tokenStream) : this()
+        internal CookieTokenizer(string tokenStream)
+            : this()
         {
             _length = tokenStream.Length;
             _tokenStream = tokenStream;

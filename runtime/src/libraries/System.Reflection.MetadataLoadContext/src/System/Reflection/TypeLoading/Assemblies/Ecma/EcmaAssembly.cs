@@ -21,7 +21,8 @@ namespace System.Reflection.TypeLoading.Ecma
             PEReader peReader,
             MetadataReader reader,
             string location
-        ) : base(loader, reader.AssemblyFiles.Count)
+        )
+            : base(loader, reader.AssemblyFiles.Count)
         {
             Debug.Assert(loader != null);
             Debug.Assert(peReader != null);

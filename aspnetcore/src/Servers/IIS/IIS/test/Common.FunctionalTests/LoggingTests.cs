@@ -35,7 +35,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class LoggingTests : IISFunctionalTestBase
 {
-    public LoggingTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public LoggingTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     public static TestMatrix TestVariants =>
         TestMatrix

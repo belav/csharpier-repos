@@ -189,7 +189,8 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
     public SqlServerTypeMappingSource(
         TypeMappingSourceDependencies dependencies,
         RelationalTypeMappingSourceDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies)
+    )
+        : base(dependencies, relationalDependencies)
     {
         _clrTypeMappings = new Dictionary<Type, RelationalTypeMapping>
         {

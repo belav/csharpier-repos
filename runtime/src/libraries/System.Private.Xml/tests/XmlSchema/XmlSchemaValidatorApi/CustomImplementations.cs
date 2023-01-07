@@ -38,7 +38,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
     internal class ObservedNamespaceManager : XmlNamespaceManager
     {
-        public ObservedNamespaceManager(XmlNameTable nt) : base(nt) { }
+        public ObservedNamespaceManager(XmlNameTable nt)
+            : base(nt) { }
 
         public bool IsLookupNamespaceCalled = false;
 

@@ -22,7 +22,8 @@ namespace MS.Internal.Xml.XPath
                 false
             ) { }
 
-        public XPathChildIterator(XPathChildIterator it) : base(it) { }
+        public XPathChildIterator(XPathChildIterator it)
+            : base(it) { }
 
         public override XPathNodeIterator Clone()
         {

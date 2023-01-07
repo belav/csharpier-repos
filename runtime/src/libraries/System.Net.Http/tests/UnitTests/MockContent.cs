@@ -26,9 +26,11 @@ namespace System.Net.Http.Tests
     {
         public MockException() { }
 
-        public MockException(string message) : base(message) { }
+        public MockException(string message)
+            : base(message) { }
 
-        public MockException(string message, Exception inner) : base(message, inner) { }
+        public MockException(string message, Exception inner)
+            : base(message, inner) { }
     }
 
     public class MockContent : HttpContent
@@ -47,11 +49,14 @@ namespace System.Net.Http.Tests
             get { return _mockData; }
         }
 
-        public MockContent() : this((byte[])null, MockOptions.None) { }
+        public MockContent()
+            : this((byte[])null, MockOptions.None) { }
 
-        public MockContent(byte[] mockData) : this(mockData, MockOptions.None) { }
+        public MockContent(byte[] mockData)
+            : this(mockData, MockOptions.None) { }
 
-        public MockContent(MockOptions options) : this((byte[])null, options) { }
+        public MockContent(MockOptions options)
+            : this((byte[])null, options) { }
 
         public MockContent(Exception customException, MockOptions options)
             : this((byte[])null, options)

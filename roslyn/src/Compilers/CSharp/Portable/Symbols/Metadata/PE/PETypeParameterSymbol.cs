@@ -48,14 +48,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PENamedTypeSymbol definingNamedType,
             ushort ordinal,
             GenericParameterHandle handle
-        ) : this(moduleSymbol, (Symbol)definingNamedType, ordinal, handle) { }
+        )
+            : this(moduleSymbol, (Symbol)definingNamedType, ordinal, handle) { }
 
         internal PETypeParameterSymbol(
             PEModuleSymbol moduleSymbol,
             PEMethodSymbol definingMethod,
             ushort ordinal,
             GenericParameterHandle handle
-        ) : this(moduleSymbol, (Symbol)definingMethod, ordinal, handle) { }
+        )
+            : this(moduleSymbol, (Symbol)definingMethod, ordinal, handle) { }
 
         private PETypeParameterSymbol(
             PEModuleSymbol moduleSymbol,

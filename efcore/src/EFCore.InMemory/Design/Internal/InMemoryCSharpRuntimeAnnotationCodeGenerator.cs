@@ -22,5 +22,6 @@ public class InMemoryCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnotat
     /// </summary>
     public InMemoryCSharpRuntimeAnnotationCodeGenerator(
         CSharpRuntimeAnnotationCodeGeneratorDependencies dependencies
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 }

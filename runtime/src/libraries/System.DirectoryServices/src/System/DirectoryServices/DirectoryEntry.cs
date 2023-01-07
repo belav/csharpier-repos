@@ -53,7 +53,8 @@ namespace System.DirectoryServices
         /// Initializes a new instance of the <see cref='System.DirectoryServices.DirectoryEntry'/> class that will bind
         /// to the directory entry at <paramref name="path"/>.
         /// </devdoc>
-        public DirectoryEntry(string? path) : this()
+        public DirectoryEntry(string? path)
+            : this()
         {
             Path = path;
         }
@@ -72,7 +73,8 @@ namespace System.DirectoryServices
             string? username,
             string? password,
             AuthenticationTypes authenticationType
-        ) : this(path)
+        )
+            : this(path)
         {
             _credentials = new NetworkCredential(username, password);
             if (username == null)
@@ -119,7 +121,8 @@ namespace System.DirectoryServices
             string? username,
             string? password,
             AuthenticationTypes authenticationType
-        ) : this(adsObject, useCache, username, password, authenticationType, false) { }
+        )
+            : this(adsObject, useCache, username, password, authenticationType, false) { }
 
         internal DirectoryEntry(
             object adsObject,

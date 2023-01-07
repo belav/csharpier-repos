@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Format
             string fileName,
             OptionUpdater settingsUpdater,
             Workspace workspace
-        ) : base(fileName, settingsUpdater, workspace)
+        )
+            : base(fileName, settingsUpdater, workspace)
         {
             Update();
         }

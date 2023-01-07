@@ -18,7 +18,8 @@ namespace System.Reflection.TypeLoading
             ReadOnlySpan<byte> ns,
             ReadOnlySpan<byte> name,
             Exception? exception
-        ) : base()
+        )
+            : base()
         {
             _ns = ns.ToArray();
             _name = name.ToArray();

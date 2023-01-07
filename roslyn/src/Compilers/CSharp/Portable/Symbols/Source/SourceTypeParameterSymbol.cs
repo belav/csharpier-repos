@@ -553,7 +553,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             VarianceKind varianceKind,
             ImmutableArray<Location> locations,
             ImmutableArray<SyntaxReference> syntaxRefs
-        ) : base(name, ordinal, locations, syntaxRefs)
+        )
+            : base(name, ordinal, locations, syntaxRefs)
         {
             _owner = owner;
             _varianceKind = varianceKind;
@@ -705,7 +706,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int ordinal,
             ImmutableArray<Location> locations,
             ImmutableArray<SyntaxReference> syntaxRefs
-        ) : base(name, ordinal, locations, syntaxRefs)
+        )
+            : base(name, ordinal, locations, syntaxRefs)
         {
             _owner = owner;
         }
@@ -963,7 +965,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         public ExplicitInterfaceMethodTypeParameterMap(
             SourceOrdinaryMethodSymbol implementationMethod
-        ) : base(implementationMethod)
+        )
+            : base(implementationMethod)
         {
             Debug.Assert(implementationMethod.IsExplicitInterfaceImplementation);
         }
@@ -997,7 +1000,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int ordinal,
             ImmutableArray<Location> locations,
             ImmutableArray<SyntaxReference> syntaxRefs
-        ) : base(name, ordinal, locations, syntaxRefs)
+        )
+            : base(name, ordinal, locations, syntaxRefs)
         {
             _map = map;
         }

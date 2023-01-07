@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorCode errorCode,
             object[] arguments,
             ImmutableArray<Symbol> symbols
-        ) : base(CSharp.MessageProvider.Instance, (int)errorCode, arguments)
+        )
+            : base(CSharp.MessageProvider.Instance, (int)errorCode, arguments)
         {
             this.Symbols = symbols;
         }
@@ -27,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ErrorCode errorCode,
             object[] arguments,
             ImmutableArray<Symbol> symbols
-        ) : base(CSharp.MessageProvider.Instance, isWarningAsError, (int)errorCode, arguments)
+        )
+            : base(CSharp.MessageProvider.Instance, isWarningAsError, (int)errorCode, arguments)
         {
             this.Symbols = symbols;
         }

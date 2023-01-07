@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     internal sealed class CompilationCompletedEvent : CompilationEvent
     {
-        public CompilationCompletedEvent(Compilation compilation) : base(compilation) { }
+        public CompilationCompletedEvent(Compilation compilation)
+            : base(compilation) { }
 
         public override string ToString()
         {

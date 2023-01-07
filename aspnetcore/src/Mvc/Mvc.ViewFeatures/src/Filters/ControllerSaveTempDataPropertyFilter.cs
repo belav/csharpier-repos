@@ -9,8 +9,8 @@ internal sealed class ControllerSaveTempDataPropertyFilter
     : SaveTempDataPropertyFilterBase,
         IActionFilter
 {
-    public ControllerSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory) : base(factory)
-    { }
+    public ControllerSaveTempDataPropertyFilter(ITempDataDictionaryFactory factory)
+        : base(factory) { }
 
     public void OnActionExecuted(ActionExecutedContext context) { }
 

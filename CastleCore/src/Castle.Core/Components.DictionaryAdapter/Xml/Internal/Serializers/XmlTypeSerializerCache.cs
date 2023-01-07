@@ -24,7 +24,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
     {
         public static readonly XmlTypeSerializerCache Instance = new XmlTypeSerializerCache();
 
-        private XmlTypeSerializerCache() : base(CreateSerializer)
+        private XmlTypeSerializerCache()
+            : base(CreateSerializer)
         {
             this[typeof(Object)] = XmlDynamicSerializer.Instance;
             this[typeof(String)] = XmlStringSerializer.Instance;

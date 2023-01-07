@@ -572,7 +572,8 @@ namespace ILCompiler.DependencyAnalysis
             public NativeLayoutParameterizedTypeSignatureVertexNode(
                 NodeFactory factory,
                 TypeDesc type
-            ) : base(type)
+            )
+                : base(type)
             {
                 _parameterTypeSig = factory.NativeLayout.TypeSignatureVertex(
                     ((ParameterizedType)type).ParameterType
@@ -645,7 +646,8 @@ namespace ILCompiler.DependencyAnalysis
         private sealed class NativeLayoutGenericVarSignatureVertexNode
             : NativeLayoutTypeSignatureVertexNode
         {
-            public NativeLayoutGenericVarSignatureVertexNode(TypeDesc type) : base(type) { }
+            public NativeLayoutGenericVarSignatureVertexNode(TypeDesc type)
+                : base(type) { }
 
             public override IEnumerable<DependencyListEntry> GetStaticDependencies(
                 NodeFactory context
@@ -689,7 +691,8 @@ namespace ILCompiler.DependencyAnalysis
             public NativeLayoutInstantiatedTypeSignatureVertexNode(
                 NodeFactory factory,
                 TypeDesc type
-            ) : base(type)
+            )
+                : base(type)
             {
                 Debug.Assert(type.HasInstantiation && !type.IsGenericDefinition);
 
@@ -745,7 +748,8 @@ namespace ILCompiler.DependencyAnalysis
         private sealed class NativeLayoutEETypeSignatureVertexNode
             : NativeLayoutTypeSignatureVertexNode
         {
-            public NativeLayoutEETypeSignatureVertexNode(TypeDesc type) : base(type)
+            public NativeLayoutEETypeSignatureVertexNode(TypeDesc type)
+                : base(type)
             {
                 Debug.Assert(!type.IsRuntimeDeterminedSubtype);
                 Debug.Assert(!type.HasInstantiation || type.IsGenericDefinition);
@@ -2105,7 +2109,8 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutUnwrapNullableGenericDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        )
+            : base(factory, type) { }
 
         protected override string NodeTypeName =>
             "NativeLayoutUnwrapNullableGenericDictionarySlotNode_";
@@ -2120,7 +2125,8 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutAllocateObjectGenericDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        )
+            : base(factory, type) { }
 
         protected override string NodeTypeName =>
             "NativeLayoutAllocateObjectGenericDictionarySlotNode_";
@@ -2134,7 +2140,8 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutThreadStaticBaseIndexDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        )
+            : base(factory, type) { }
 
         protected override string NodeTypeName =>
             "NativeLayoutThreadStaticBaseIndexDictionarySlotNode_";
@@ -2148,7 +2155,8 @@ namespace ILCompiler.DependencyAnalysis
         public NativeLayoutDefaultConstructorGenericDictionarySlotNode(
             NodeFactory factory,
             TypeDesc type
-        ) : base(factory, type) { }
+        )
+            : base(factory, type) { }
 
         protected override string NodeTypeName =>
             "NativeLayoutDefaultConstructorGenericDictionarySlotNode_";

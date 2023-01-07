@@ -27,8 +27,8 @@ namespace System.Net.Sockets
         private int _disposed;
 
         // Creates a new instance of the System.Net.Sockets.NetworkStream class for the specified System.Net.Sockets.Socket.
-        public NetworkStream(Socket socket) : this(socket, FileAccess.ReadWrite, ownsSocket: false)
-        { }
+        public NetworkStream(Socket socket)
+            : this(socket, FileAccess.ReadWrite, ownsSocket: false) { }
 
         public NetworkStream(Socket socket, bool ownsSocket)
             : this(socket, FileAccess.ReadWrite, ownsSocket) { }

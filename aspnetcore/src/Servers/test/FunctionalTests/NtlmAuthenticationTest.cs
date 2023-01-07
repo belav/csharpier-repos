@@ -16,7 +16,8 @@ namespace ServerComparison.FunctionalTests;
 
 public class NtlmAuthenticationTests : LoggedTest
 {
-    public NtlmAuthenticationTests(ITestOutputHelper output) : base(output) { }
+    public NtlmAuthenticationTests(ITestOutputHelper output)
+        : base(output) { }
 
     public static TestMatrix TestVariants =>
         TestMatrix

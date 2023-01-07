@@ -22,7 +22,8 @@ namespace System.Collections.ObjectModel
         private int keyCount; // Do not rename (binary serialization)
         private readonly int threshold; // Do not rename (binary serialization)
 
-        protected KeyedCollection() : this(null, DefaultThreshold) { }
+        protected KeyedCollection()
+            : this(null, DefaultThreshold) { }
 
         protected KeyedCollection(IEqualityComparer<TKey>? comparer)
             : this(comparer, DefaultThreshold) { }
@@ -30,7 +31,8 @@ namespace System.Collections.ObjectModel
         protected KeyedCollection(
             IEqualityComparer<TKey>? comparer,
             int dictionaryCreationThreshold
-        ) : base(new List<TItem>()) // Be explicit about the use of List<T> so we can foreach over
+        )
+            : base(new List<TItem>()) // Be explicit about the use of List<T> so we can foreach over
         // Items internally without enumerator allocations.
         {
             if (dictionaryCreationThreshold < -1)

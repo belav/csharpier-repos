@@ -21,7 +21,8 @@ namespace MS.Internal.Xml.XPath
             _ftype = ftype;
         }
 
-        private NumberFunctions(NumberFunctions other) : base(other)
+        private NumberFunctions(NumberFunctions other)
+            : base(other)
         {
             _arg = Clone(other._arg);
             _ftype = other._ftype;

@@ -32,19 +32,22 @@ namespace Castle.Components.DictionaryAdapter
             ExecutionOrder += 10;
         }
 
-        public RemoveIfAttribute(params object[] values) : this()
+        public RemoveIfAttribute(params object[] values)
+            : this()
         {
             values = values ?? new object[] { null };
             condition = new ValueCondition(values, null);
         }
 
-        public RemoveIfAttribute(object[] values, Type comparerType) : this()
+        public RemoveIfAttribute(object[] values, Type comparerType)
+            : this()
         {
             var comparer = Construct<IEqualityComparer>(comparerType, nameof(comparerType));
             condition = new ValueCondition(values, comparer);
         }
 
-        protected RemoveIfAttribute(ICondition condition) : this()
+        protected RemoveIfAttribute(ICondition condition)
+            : this()
         {
             this.condition = condition;
         }

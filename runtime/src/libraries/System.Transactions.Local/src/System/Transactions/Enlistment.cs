@@ -354,7 +354,8 @@ namespace System.Transactions
         protected DurableInternalEnlistment(
             Enlistment enlistment,
             IEnlistmentNotification twoPhaseNotifications
-        ) : base(enlistment, twoPhaseNotifications) { }
+        )
+            : base(enlistment, twoPhaseNotifications) { }
 
         internal override Guid ResourceManagerIdentifier => _resourceManagerIdentifier;
     }
@@ -371,7 +372,8 @@ namespace System.Transactions
             Enlistment enlistment,
             IEnlistmentNotification twoPhaseNotifications,
             object syncRoot
-        ) : base(enlistment, twoPhaseNotifications)
+        )
+            : base(enlistment, twoPhaseNotifications)
         {
             _syncRoot = syncRoot;
         }
@@ -390,7 +392,8 @@ namespace System.Transactions
             InternalTransaction transaction,
             IPromotableSinglePhaseNotification promotableSinglePhaseNotification,
             Transaction atomicTransaction
-        ) : base(enlistment, transaction, atomicTransaction)
+        )
+            : base(enlistment, transaction, atomicTransaction)
         {
             _promotableNotificationInterface = promotableSinglePhaseNotification;
         }

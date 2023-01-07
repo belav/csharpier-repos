@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             ImmutableArray<string> aliases = default(ImmutableArray<string>),
             bool embedInteropTypes = false
-        ) : base(GetProperties(compilation, aliases, embedInteropTypes))
+        )
+            : base(GetProperties(compilation, aliases, embedInteropTypes))
         {
             this.Compilation = compilation;
         }
@@ -43,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private CSharpCompilationReference(
             CSharpCompilation compilation,
             MetadataReferenceProperties properties
-        ) : base(properties)
+        )
+            : base(properties)
         {
             this.Compilation = compilation;
         }

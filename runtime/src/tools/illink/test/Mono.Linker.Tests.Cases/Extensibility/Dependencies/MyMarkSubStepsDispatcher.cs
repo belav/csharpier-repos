@@ -5,7 +5,8 @@ using Mono.Linker.Steps;
 
 public class MyMarkSubStepsDispatcher : MarkSubStepsDispatcher
 {
-    public MyMarkSubStepsDispatcher() : base(GetSubSteps()) { }
+    public MyMarkSubStepsDispatcher()
+        : base(GetSubSteps()) { }
 
     public override void Initialize(LinkContext context, MarkContext markContext)
     {

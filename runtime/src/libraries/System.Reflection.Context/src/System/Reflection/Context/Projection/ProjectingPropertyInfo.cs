@@ -11,7 +11,8 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given property
     internal class ProjectingPropertyInfo : DelegatingPropertyInfo, IProjectable
     {
-        public ProjectingPropertyInfo(PropertyInfo property, Projector projector) : base(property)
+        public ProjectingPropertyInfo(PropertyInfo property, Projector projector)
+            : base(property)
         {
             Debug.Assert(null != projector);
 

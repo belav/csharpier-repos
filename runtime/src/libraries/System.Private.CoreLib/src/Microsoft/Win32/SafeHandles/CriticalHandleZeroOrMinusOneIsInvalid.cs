@@ -9,7 +9,8 @@ namespace Microsoft.Win32.SafeHandles
     // Class of critical handle which uses 0 or -1 as an invalid handle.
     public abstract class CriticalHandleZeroOrMinusOneIsInvalid : CriticalHandle
     {
-        protected CriticalHandleZeroOrMinusOneIsInvalid() : base(IntPtr.Zero) { }
+        protected CriticalHandleZeroOrMinusOneIsInvalid()
+            : base(IntPtr.Zero) { }
 
         public override bool IsInvalid => handle == IntPtr.Zero || handle == new IntPtr(-1);
     }

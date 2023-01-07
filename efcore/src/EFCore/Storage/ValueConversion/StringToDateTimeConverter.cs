@@ -19,7 +19,8 @@ public class StringToDateTimeConverter : StringDateTimeConverter<string, DateTim
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public StringToDateTimeConverter() : this(null) { }
+    public StringToDateTimeConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

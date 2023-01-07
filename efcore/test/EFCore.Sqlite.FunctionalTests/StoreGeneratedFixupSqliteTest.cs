@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class StoreGeneratedFixupSqliteTest
     : StoreGeneratedFixupRelationalTestBase<StoreGeneratedFixupSqliteTest.StoreGeneratedFixupSqliteFixture>
 {
-    public StoreGeneratedFixupSqliteTest(StoreGeneratedFixupSqliteFixture fixture) : base(fixture)
-    { }
+    public StoreGeneratedFixupSqliteTest(StoreGeneratedFixupSqliteFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public void Temp_values_can_be_made_permanent()

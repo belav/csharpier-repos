@@ -27,7 +27,8 @@ namespace System
 
         // Creates a new WeakReference that keeps track of target.
         // Assumes a Short Weak Reference (ie TrackResurrection is false.)
-        public WeakReference(T target) : this(target, false) { }
+        public WeakReference(T target)
+            : this(target, false) { }
 
         // Creates a new WeakReference that keeps track of target.
         //

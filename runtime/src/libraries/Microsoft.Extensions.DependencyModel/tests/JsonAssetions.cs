@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
 
     public class JsonAssertions : ReferenceTypeAssertions<JToken, JsonAssertions>
     {
-        public JsonAssertions(JToken token) : base(token) { }
+        public JsonAssertions(JToken token)
+            : base(token) { }
 
         protected override string Identifier => nameof(JToken);
 

@@ -20,7 +20,8 @@ namespace System.Web.Mvc
             ActionResult result,
             bool canceled,
             Exception exception
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (result == null)
             {

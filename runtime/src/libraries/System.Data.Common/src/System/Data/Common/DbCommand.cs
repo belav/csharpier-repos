@@ -10,7 +10,8 @@ namespace System.Data.Common
 {
     public abstract class DbCommand : Component, IDbCommand, IAsyncDisposable
     {
-        protected DbCommand() : base() { }
+        protected DbCommand()
+            : base() { }
 
         [DefaultValue("")]
         [RefreshProperties(RefreshProperties.All)]

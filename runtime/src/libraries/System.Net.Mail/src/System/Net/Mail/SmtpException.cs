@@ -74,19 +74,23 @@ namespace System.Net.Mail
             }
         }
 
-        public SmtpException(SmtpStatusCode statusCode) : base(GetMessageForStatus(statusCode))
+        public SmtpException(SmtpStatusCode statusCode)
+            : base(GetMessageForStatus(statusCode))
         {
             _statusCode = statusCode;
         }
 
-        public SmtpException(SmtpStatusCode statusCode, string? message) : base(message)
+        public SmtpException(SmtpStatusCode statusCode, string? message)
+            : base(message)
         {
             _statusCode = statusCode;
         }
 
-        public SmtpException() : this(SmtpStatusCode.GeneralFailure) { }
+        public SmtpException()
+            : this(SmtpStatusCode.GeneralFailure) { }
 
-        public SmtpException(string? message) : base(message) { }
+        public SmtpException(string? message)
+            : base(message) { }
 
         public SmtpException(string? message, Exception? innerException)
             : base(message, innerException) { }
@@ -94,7 +98,8 @@ namespace System.Net.Mail
         protected SmtpException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             _statusCode = (SmtpStatusCode)serializationInfo.GetInt32("Status");
         }

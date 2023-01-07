@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             ParameterSymbol
         >
     {
-        public CSharpLanguageInstructionDecoder() : base(CSharpInstructionDecoder.Instance) { }
+        public CSharpLanguageInstructionDecoder()
+            : base(CSharpInstructionDecoder.Instance) { }
     }
 }

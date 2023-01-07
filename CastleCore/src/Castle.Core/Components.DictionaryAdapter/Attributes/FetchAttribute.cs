@@ -25,7 +25,8 @@ namespace Castle.Components.DictionaryAdapter
         /// <summary>
         /// Instructs fetching to occur.
         /// </summary>
-        public FetchAttribute() : this(true) { }
+        public FetchAttribute()
+            : this(true) { }
 
         /// <summary>
         /// Instructs fetching according to <paramref name="fetch"/>

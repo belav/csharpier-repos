@@ -26,7 +26,8 @@ namespace System.Web.Razor.Generator
             string executeMethodName,
             string writeMethodName,
             string writeLiteralMethodName
-        ) : this()
+        )
+            : this()
         {
             if (String.IsNullOrEmpty(executeMethodName))
             {
@@ -83,7 +84,8 @@ namespace System.Web.Razor.Generator
             string writeToMethodName,
             string writeLiteralToMethodName,
             string templateTypeName
-        ) : this(executeMethodName, writeMethodName, writeLiteralMethodName)
+        )
+            : this(executeMethodName, writeMethodName, writeLiteralMethodName)
         {
             WriteToMethodName = writeToMethodName;
             WriteLiteralToMethodName = writeLiteralToMethodName;

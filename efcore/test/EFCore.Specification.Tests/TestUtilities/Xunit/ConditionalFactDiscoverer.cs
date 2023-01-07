@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.Xunit;
 /// </summary>
 public class ConditionalFactDiscoverer : FactDiscoverer
 {
-    public ConditionalFactDiscoverer(IMessageSink messageSink) : base(messageSink) { }
+    public ConditionalFactDiscoverer(IMessageSink messageSink)
+        : base(messageSink) { }
 
     protected override IXunitTestCase CreateTestCase(
         ITestFrameworkDiscoveryOptions discoveryOptions,

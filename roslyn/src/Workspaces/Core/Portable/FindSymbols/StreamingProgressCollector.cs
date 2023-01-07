@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         public IStreamingProgressTracker ProgressTracker => _underlyingProgress.ProgressTracker;
 
-        public StreamingProgressCollector() : this(NoOpStreamingFindReferencesProgress.Instance) { }
+        public StreamingProgressCollector()
+            : this(NoOpStreamingFindReferencesProgress.Instance) { }
 
         public StreamingProgressCollector(IStreamingFindReferencesProgress underlyingProgress)
         {

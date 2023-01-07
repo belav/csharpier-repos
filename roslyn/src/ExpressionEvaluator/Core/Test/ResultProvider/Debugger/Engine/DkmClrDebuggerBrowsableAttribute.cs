@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         internal DkmClrDebuggerBrowsableAttribute(
             string targetMember,
             DkmClrDebuggerBrowsableAttributeState state
-        ) : base(targetMember)
+        )
+            : base(targetMember)
         {
             this.State = state;
         }

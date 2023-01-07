@@ -76,7 +76,8 @@ namespace System.Linq.Expressions.Interpreter
             ConstructorInfo target,
             int argumentCount,
             ByRefUpdater[] byrefArgs
-        ) : base(target, argumentCount)
+        )
+            : base(target, argumentCount)
         {
             _byrefArgs = byrefArgs;
         }

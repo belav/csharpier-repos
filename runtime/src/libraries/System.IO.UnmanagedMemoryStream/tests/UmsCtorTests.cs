@@ -173,7 +173,8 @@ namespace System.IO.Tests
             long length,
             long capacity,
             FileAccess access
-        ) : base(pointer, length, capacity, access) { }
+        )
+            : base(pointer, length, capacity, access) { }
 
         internal new void Initialize(
             byte* pointer,

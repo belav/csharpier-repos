@@ -123,7 +123,8 @@ public class RelationalConnectionTest
 
     private class ConstructorTestContext1A : DbContext
     {
-        public ConstructorTestContext1A(DbContextOptions options) : base(options) { }
+        public ConstructorTestContext1A(DbContextOptions options)
+            : base(options) { }
     }
 
     private class ConstructorTestContextNoConfiguration : DbContext
@@ -950,7 +951,8 @@ public class RelationalConnectionTest
 
         protected AnotherFakeRelationalOptionsExtension(
             AnotherFakeRelationalOptionsExtension copyFrom
-        ) : base(copyFrom) { }
+        )
+            : base(copyFrom) { }
 
         public override DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
@@ -973,7 +975,8 @@ public class RelationalConnectionTest
 
         private sealed class ExtensionInfo : RelationalExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension)
+                : base(extension) { }
 
             public override void PopulateDebugInfo(IDictionary<string, string> debugInfo) { }
         }

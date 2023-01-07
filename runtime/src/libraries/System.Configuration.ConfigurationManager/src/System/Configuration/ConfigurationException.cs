@@ -34,12 +34,14 @@ namespace System.Configuration
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
-        public ConfigurationException() : this(null, null, null, 0) { }
+        public ConfigurationException()
+            : this(null, null, null, 0) { }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."
         )]
-        public ConfigurationException(string message) : this(message, null, null, 0) { }
+        public ConfigurationException(string message)
+            : this(message, null, null, 0) { }
 
         [Obsolete(
             "ConfigurationException has been deprecated. Use System.Configuration.ConfigurationErrorsException instead."

@@ -13,7 +13,8 @@ public class MaterializationInterceptionSqlServerTest
 {
     public MaterializationInterceptionSqlServerTest(
         MaterializationInterceptionSqlServerFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public class MaterializationInterceptionSqlServerFixture : SingletonInterceptorsFixtureBase
     {

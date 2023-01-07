@@ -23,7 +23,8 @@ namespace System.ComponentModel
         /// </summary>
         public static readonly DisplayNameAttribute Default = new DisplayNameAttribute();
 
-        public DisplayNameAttribute() : this(string.Empty) { }
+        public DisplayNameAttribute()
+            : this(string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DisplayNameAttribute'/> class.

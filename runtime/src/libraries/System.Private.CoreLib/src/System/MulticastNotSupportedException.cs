@@ -16,12 +16,14 @@ namespace System
     )]
     public sealed class MulticastNotSupportedException : SystemException
     {
-        public MulticastNotSupportedException() : base(SR.Arg_MulticastNotSupportedException)
+        public MulticastNotSupportedException()
+            : base(SR.Arg_MulticastNotSupportedException)
         {
             HResult = HResults.COR_E_MULTICASTNOTSUPPORTED;
         }
 
-        public MulticastNotSupportedException(string? message) : base(message)
+        public MulticastNotSupportedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_MULTICASTNOTSUPPORTED;
         }

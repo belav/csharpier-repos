@@ -35,7 +35,8 @@ public class RemoteAttribute : RemoteAttributeBase
     /// <remarks>
     /// Finds the <paramref name="routeName"/> in any area of the application.
     /// </remarks>
-    public RemoteAttribute(string routeName) : this()
+    public RemoteAttribute(string routeName)
+        : this()
     {
         RouteName = routeName;
     }
@@ -56,7 +57,8 @@ public class RemoteAttribute : RemoteAttributeBase
     /// </para>
     /// <para>Finds the <paramref name="controller"/> in the current area.</para>
     /// </remarks>
-    public RemoteAttribute(string action, string controller) : this()
+    public RemoteAttribute(string action, string controller)
+        : this()
     {
         if (action != null)
         {

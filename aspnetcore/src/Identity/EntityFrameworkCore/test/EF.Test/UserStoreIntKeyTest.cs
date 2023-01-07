@@ -24,7 +24,8 @@ public class IntRole : IdentityRole<int>
 
 public class UserStoreIntTest : SqlStoreTestBase<IntUser, IntRole, int>
 {
-    public UserStoreIntTest(ScratchDatabaseFixture fixture) : base(fixture) { }
+    public UserStoreIntTest(ScratchDatabaseFixture fixture)
+        : base(fixture) { }
 
     [Fact]
     public void AddEntityFrameworkStoresCanInferKey()

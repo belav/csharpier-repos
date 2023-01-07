@@ -5,7 +5,8 @@ namespace System.CommandLine.Parsing
 {
     internal class CommandNode : NonterminalSyntaxNode
     {
-        public CommandNode(Token token, Command command, CommandNode? parent) : base(token, parent)
+        public CommandNode(Token token, Command command, CommandNode? parent)
+            : base(token, parent)
         {
             Command = command;
         }

@@ -226,7 +226,8 @@ namespace System.Web.Mvc.Test
 
         private sealed class TestableRazorViewEngine : RazorViewEngine
         {
-            public TestableRazorViewEngine() : base() { }
+            public TestableRazorViewEngine()
+                : base() { }
 
             public TestableRazorViewEngine(IViewPageActivator viewPageActivator)
                 : base(viewPageActivator) { }

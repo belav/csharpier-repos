@@ -147,7 +147,8 @@ public class InMemoryOptionsExtension : IDbContextOptionsExtension
     {
         private string? _logFragment;
 
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         private new InMemoryOptionsExtension Extension => (InMemoryOptionsExtension)base.Extension;
 

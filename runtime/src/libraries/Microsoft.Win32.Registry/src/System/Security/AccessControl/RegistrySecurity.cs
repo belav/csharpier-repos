@@ -45,7 +45,9 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, type) { }
+        )
+            : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, type)
+        { }
 
         public RegistryAccessRule(
             string identity,
@@ -74,7 +76,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         public RegistryRights RegistryRights
         {
@@ -90,7 +93,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, flags)
+        )
+            : this(identity, (int)registryRights, false, inheritanceFlags, propagationFlags, flags)
         { }
 
         public RegistryAuditRule(
@@ -116,7 +120,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         public RegistryRights RegistryRights
         {
@@ -126,7 +131,8 @@ namespace System.Security.AccessControl
 
     public sealed partial class RegistrySecurity : NativeObjectSecurity
     {
-        public RegistrySecurity() : base(true, ResourceType.RegistryKey) { }
+        public RegistrySecurity()
+            : base(true, ResourceType.RegistryKey) { }
 
         internal RegistrySecurity(SafeRegistryHandle hKey, AccessControlSections includeSections)
             : base(true, ResourceType.RegistryKey, hKey, includeSections, _HandleErrorCode, null)

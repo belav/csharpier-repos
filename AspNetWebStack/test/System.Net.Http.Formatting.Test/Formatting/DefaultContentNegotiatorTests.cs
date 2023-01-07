@@ -1386,7 +1386,8 @@ namespace System.Net.Http.Formatting
 
         private class MyMediaTypeMapping : MediaTypeMapping
         {
-            public MyMediaTypeMapping(MediaTypeHeaderValue mediaType) : base(mediaType) { }
+            public MyMediaTypeMapping(MediaTypeHeaderValue mediaType)
+                : base(mediaType) { }
 
             public override double TryMatchMediaType(HttpRequestMessage request)
             {

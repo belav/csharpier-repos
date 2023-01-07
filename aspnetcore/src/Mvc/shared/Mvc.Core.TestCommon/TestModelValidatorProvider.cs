@@ -31,6 +31,6 @@ public class TestModelValidatorProvider : CompositeModelValidatorProvider
         return new TestModelValidatorProvider(providers);
     }
 
-    public TestModelValidatorProvider(IList<IModelValidatorProvider> providers) : base(providers)
-    { }
+    public TestModelValidatorProvider(IList<IModelValidatorProvider> providers)
+        : base(providers) { }
 }

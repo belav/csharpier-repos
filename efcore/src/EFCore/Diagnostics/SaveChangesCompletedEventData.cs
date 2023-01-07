@@ -24,7 +24,8 @@ public class SaveChangesCompletedEventData : DbContextEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         DbContext context,
         int entitiesSavedCount
-    ) : base(eventDefinition, messageGenerator, context)
+    )
+        : base(eventDefinition, messageGenerator, context)
     {
         EntitiesSavedCount = entitiesSavedCount;
     }

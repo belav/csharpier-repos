@@ -10,7 +10,8 @@ public class UpdatesInMemoryWithSensitiveDataLoggingTest
 {
     public UpdatesInMemoryWithSensitiveDataLoggingTest(
         UpdatesInMemoryWithSensitiveDataLoggingFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     protected override string UpdateConcurrencyTokenMessage =>
         InMemoryStrings.UpdateConcurrencyTokenExceptionSensitive(

@@ -8,7 +8,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeLocalAllocHandle : SafeBuffer
     {
-        public SafeLocalAllocHandle() : base(true) { }
+        public SafeLocalAllocHandle()
+            : base(true) { }
 
         internal static readonly SafeLocalAllocHandle Zero = new SafeLocalAllocHandle();
 
@@ -21,7 +22,8 @@ namespace Microsoft.Win32.SafeHandles
         }
 
         // 0 is an Invalid Handle
-        internal SafeLocalAllocHandle(IntPtr handle) : base(true)
+        internal SafeLocalAllocHandle(IntPtr handle)
+            : base(true)
         {
             SetHandle(handle);
         }

@@ -11,7 +11,8 @@ namespace Microsoft.NET.HostModel.AppHost
     /// </summary>
     public class AppHostUpdateException : Exception
     {
-        internal AppHostUpdateException(string message = null) : base(message) { }
+        internal AppHostUpdateException(string message = null)
+            : base(message) { }
     }
 
     /// <summary>

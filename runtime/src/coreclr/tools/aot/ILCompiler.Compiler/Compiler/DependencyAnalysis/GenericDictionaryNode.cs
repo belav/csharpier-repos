@@ -202,7 +202,8 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public TypeGenericDictionaryNode(TypeDesc owningType, NodeFactory factory) : base(factory)
+        public TypeGenericDictionaryNode(TypeDesc owningType, NodeFactory factory)
+            : base(factory)
         {
             Debug.Assert(!owningType.IsCanonicalSubtype(CanonicalFormKind.Any));
             Debug.Assert(!owningType.IsRuntimeDeterminedSubtype);

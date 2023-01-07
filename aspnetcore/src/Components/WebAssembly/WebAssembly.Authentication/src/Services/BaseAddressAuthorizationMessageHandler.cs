@@ -19,7 +19,8 @@ public class BaseAddressAuthorizationMessageHandler : AuthorizationMessageHandle
     public BaseAddressAuthorizationMessageHandler(
         IAccessTokenProvider provider,
         NavigationManager navigationManager
-    ) : base(provider, navigationManager)
+    )
+        : base(provider, navigationManager)
     {
         ConfigureHandler(new[] { navigationManager.BaseUri });
     }

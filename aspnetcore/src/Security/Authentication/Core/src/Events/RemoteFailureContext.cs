@@ -22,7 +22,8 @@ public class RemoteFailureContext : HandleRequestContext<RemoteAuthenticationOpt
         AuthenticationScheme scheme,
         RemoteAuthenticationOptions options,
         Exception failure
-    ) : base(context, scheme, options)
+    )
+        : base(context, scheme, options)
     {
         Failure = failure;
     }

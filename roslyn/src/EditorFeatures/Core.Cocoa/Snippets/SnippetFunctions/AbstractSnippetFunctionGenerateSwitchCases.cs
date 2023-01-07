@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets.Snippe
             ITextBuffer subjectBuffer,
             string caseGenerationLocationField,
             string switchExpressionField
-        ) : base(snippetExpansionClient, subjectBuffer)
+        )
+            : base(snippetExpansionClient, subjectBuffer)
         {
             this.CaseGenerationLocationField = caseGenerationLocationField;
             this.SwitchExpressionField =

@@ -29,7 +29,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             bool useVirtualCall = false,
             bool useJumpableStub = false,
             MethodDesc callingMethod = null
-        ) : base(importSectionNode, instanceSignature, callingMethod)
+        )
+            : base(importSectionNode, instanceSignature, callingMethod)
         {
             _helper = helper;
             _useVirtualCall = useVirtualCall;

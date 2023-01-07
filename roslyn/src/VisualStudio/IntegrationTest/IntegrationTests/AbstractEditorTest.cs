@@ -23,13 +23,15 @@ namespace Roslyn.VisualStudio.IntegrationTests
         protected AbstractEditorTest(
             VisualStudioInstanceFactory instanceFactory,
             string solutionName
-        ) : this(instanceFactory, solutionName, WellKnownProjectTemplates.ClassLibrary) { }
+        )
+            : this(instanceFactory, solutionName, WellKnownProjectTemplates.ClassLibrary) { }
 
         protected AbstractEditorTest(
             VisualStudioInstanceFactory instanceFactory,
             string solutionName,
             string projectTemplate
-        ) : base(instanceFactory)
+        )
+            : base(instanceFactory)
         {
             _solutionName = solutionName;
             _projectTemplate = projectTemplate;

@@ -13,8 +13,8 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class ReflectionPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public ReflectionPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        public ReflectionPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         public ReflectionPermissionFlag Flags { get; set; }
         public bool MemberAccess { get; set; }

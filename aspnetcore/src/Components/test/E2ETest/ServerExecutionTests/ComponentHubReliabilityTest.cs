@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
         public ComponentHubReliabilityTest(
             BasicTestAppServerSiteFixture<ServerStartup> serverFixture,
             ITestOutputHelper output
-        ) : base(serverFixture, output) { }
+        )
+            : base(serverFixture, output) { }
 
         protected override async Task InitializeAsync()
         {

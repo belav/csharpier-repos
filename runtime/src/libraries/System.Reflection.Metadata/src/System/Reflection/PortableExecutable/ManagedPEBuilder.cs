@@ -47,7 +47,8 @@ namespace System.Reflection.PortableExecutable
             MethodDefinitionHandle entryPoint = default(MethodDefinitionHandle),
             CorFlags flags = CorFlags.ILOnly,
             Func<IEnumerable<Blob>, BlobContentId>? deterministicIdProvider = null
-        ) : base(header, deterministicIdProvider)
+        )
+            : base(header, deterministicIdProvider)
         {
             if (header is null)
             {

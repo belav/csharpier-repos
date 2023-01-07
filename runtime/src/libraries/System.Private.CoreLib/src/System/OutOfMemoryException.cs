@@ -26,7 +26,8 @@ namespace System
             HResult = HResults.COR_E_OUTOFMEMORY;
         }
 
-        public OutOfMemoryException(string? message) : base(message)
+        public OutOfMemoryException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_OUTOFMEMORY;
         }

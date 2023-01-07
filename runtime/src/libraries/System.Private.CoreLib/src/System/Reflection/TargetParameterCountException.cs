@@ -11,12 +11,14 @@ namespace System.Reflection
     )]
     public sealed class TargetParameterCountException : ApplicationException
     {
-        public TargetParameterCountException() : base(SR.Arg_TargetParameterCountException)
+        public TargetParameterCountException()
+            : base(SR.Arg_TargetParameterCountException)
         {
             HResult = HResults.COR_E_TARGETPARAMCOUNT;
         }
 
-        public TargetParameterCountException(string? message) : base(message)
+        public TargetParameterCountException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_TARGETPARAMCOUNT;
         }

@@ -570,7 +570,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public LazyExportDefinition(
             string contractName,
             Lazy<IDictionary<string, object?>> metadata
-        ) : base(contractName, (IDictionary<string, object?>?)null)
+        )
+            : base(contractName, (IDictionary<string, object?>?)null)
         {
             _metadata = metadata;
         }

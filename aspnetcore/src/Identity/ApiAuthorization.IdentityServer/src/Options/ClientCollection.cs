@@ -21,7 +21,8 @@ public class ClientCollection : Collection<Client>
     /// clients in <paramref name="list"/>.
     /// </summary>
     /// <param name="list">The initial list of <see cref="Client"/>.</param>
-    public ClientCollection(IList<Client> list) : base(list) { }
+    public ClientCollection(IList<Client> list)
+        : base(list) { }
 
     /// <summary>
     /// Gets a client given its client id.

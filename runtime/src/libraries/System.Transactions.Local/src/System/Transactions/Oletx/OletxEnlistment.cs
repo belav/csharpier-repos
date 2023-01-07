@@ -56,7 +56,8 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         EnlistmentOptions enlistmentOptions,
         OletxResourceManager oletxResourceManager,
         OletxTransaction oletxTransaction
-    ) : base(oletxResourceManager, oletxTransaction)
+    )
+        : base(oletxResourceManager, oletxTransaction)
     {
         // This will get set later by the creator of this object after it
         // has enlisted with the proxy.
@@ -90,7 +91,8 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         OletxTransactionStatus xactStatus,
         byte[] prepareInfoByteArray,
         OletxResourceManager oletxResourceManager
-    ) : base(oletxResourceManager, null)
+    )
+        : base(oletxResourceManager, null)
     {
         // This will get set later by the creator of this object after it
         // has enlisted with the proxy.

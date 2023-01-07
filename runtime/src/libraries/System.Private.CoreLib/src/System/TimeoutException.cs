@@ -20,12 +20,14 @@ namespace System
     )]
     public class TimeoutException : SystemException
     {
-        public TimeoutException() : base(SR.Arg_TimeoutException)
+        public TimeoutException()
+            : base(SR.Arg_TimeoutException)
         {
             HResult = HResults.COR_E_TIMEOUT;
         }
 
-        public TimeoutException(string? message) : base(message)
+        public TimeoutException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_TIMEOUT;
         }

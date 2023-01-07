@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<Location> locations,
             bool isImplicitlyDeclared,
             FieldSymbol? correspondingDefaultFieldOpt = null
-        ) : base(underlyingField)
+        )
+            : base(underlyingField)
         {
             Debug.Assert(tupleElementIndex >= 0);
             Debug.Assert(

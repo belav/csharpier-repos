@@ -28,7 +28,8 @@ namespace Microsoft.TestCommon
             Func<IEnumerable<T>> testDataProvider,
             Func<IEnumerable<T>> derivedTypeTestDataProvider,
             Func<IEnumerable<T>> knownTypeTestDataProvider
-        ) : this(testDataProvider)
+        )
+            : this(testDataProvider)
         {
             this.derivedTypeTestDataProvider = derivedTypeTestDataProvider;
             if (this.derivedTypeTestDataProvider != null)

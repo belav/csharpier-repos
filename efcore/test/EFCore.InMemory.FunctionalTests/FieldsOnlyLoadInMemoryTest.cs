@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class FieldsOnlyLoadInMemoryTest
     : FieldsOnlyLoadTestBase<FieldsOnlyLoadInMemoryTest.FieldsOnlyLoadInMemoryFixture>
 {
-    public FieldsOnlyLoadInMemoryTest(FieldsOnlyLoadInMemoryFixture fixture) : base(fixture) { }
+    public FieldsOnlyLoadInMemoryTest(FieldsOnlyLoadInMemoryFixture fixture)
+        : base(fixture) { }
 
     public class FieldsOnlyLoadInMemoryFixture : FieldsOnlyLoadFixtureBase
     {

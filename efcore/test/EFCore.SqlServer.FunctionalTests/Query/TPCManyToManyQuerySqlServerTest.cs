@@ -9,7 +9,8 @@ public class TPCManyToManyQuerySqlServerTest
     public TPCManyToManyQuerySqlServerTest(
         TPCManyToManyQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

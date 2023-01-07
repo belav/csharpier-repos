@@ -98,7 +98,8 @@ namespace Moq
         /// <param name="defaultBehavior">The behavior to use for mocks created
         /// using the <see cref="MockFactory.Create{T}()"/> repository method if not overridden
         /// by using the <see cref="MockFactory.Create{T}(MockBehavior)"/> overload.</param>
-        public MockRepository(MockBehavior defaultBehavior) : base(defaultBehavior) { }
+        public MockRepository(MockBehavior defaultBehavior)
+            : base(defaultBehavior) { }
 #pragma warning restore 618
     }
 }

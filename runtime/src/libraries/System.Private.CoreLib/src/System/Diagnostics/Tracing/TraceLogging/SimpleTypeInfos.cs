@@ -15,7 +15,8 @@ namespace System.Diagnostics.Tracing
     {
         private static NullTypeInfo? s_instance;
 
-        public NullTypeInfo() : base(typeof(EmptyStruct)) { }
+        public NullTypeInfo()
+            : base(typeof(EmptyStruct)) { }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new NullTypeInfo();
 
@@ -59,7 +60,8 @@ namespace System.Diagnostics.Tracing
 
         private readonly TraceLoggingDataType nativeFormat;
 
-        private ScalarTypeInfo(Type type, TraceLoggingDataType nativeFormat) : base(type)
+        private ScalarTypeInfo(Type type, TraceLoggingDataType nativeFormat)
+            : base(type)
         {
             this.nativeFormat = nativeFormat;
         }
@@ -282,7 +284,8 @@ namespace System.Diagnostics.Tracing
     {
         private static StringTypeInfo? s_instance;
 
-        public StringTypeInfo() : base(typeof(string)) { }
+        public StringTypeInfo()
+            : base(typeof(string)) { }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new StringTypeInfo();
 
@@ -325,7 +328,8 @@ namespace System.Diagnostics.Tracing
     {
         private static DateTimeTypeInfo? s_instance;
 
-        public DateTimeTypeInfo() : base(typeof(DateTime)) { }
+        public DateTimeTypeInfo()
+            : base(typeof(DateTime)) { }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new DateTimeTypeInfo();
 
@@ -358,7 +362,8 @@ namespace System.Diagnostics.Tracing
     {
         private static DateTimeOffsetTypeInfo? s_instance;
 
-        public DateTimeOffsetTypeInfo() : base(typeof(DateTimeOffset)) { }
+        public DateTimeOffsetTypeInfo()
+            : base(typeof(DateTimeOffset)) { }
 
         public static TraceLoggingTypeInfo Instance() =>
             s_instance ??= new DateTimeOffsetTypeInfo();
@@ -392,7 +397,8 @@ namespace System.Diagnostics.Tracing
     {
         private static TimeSpanTypeInfo? s_instance;
 
-        public TimeSpanTypeInfo() : base(typeof(TimeSpan)) { }
+        public TimeSpanTypeInfo()
+            : base(typeof(TimeSpan)) { }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new TimeSpanTypeInfo();
 
@@ -418,7 +424,8 @@ namespace System.Diagnostics.Tracing
     {
         private static DecimalTypeInfo? s_instance;
 
-        public DecimalTypeInfo() : base(typeof(decimal)) { }
+        public DecimalTypeInfo()
+            : base(typeof(decimal)) { }
 
         public static TraceLoggingTypeInfo Instance() => s_instance ??= new DecimalTypeInfo();
 
@@ -447,7 +454,8 @@ namespace System.Diagnostics.Tracing
         [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode(
             "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
         )]
-        public NullableTypeInfo(Type type, List<Type> recursionCheck) : base(type)
+        public NullableTypeInfo(Type type, List<Type> recursionCheck)
+            : base(type)
         {
             Type[] typeArgs = type.GenericTypeArguments;
             Debug.Assert(typeArgs.Length == 1);

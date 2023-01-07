@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             "RS0033:Importing constructor should be [Obsolete]",
             Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
         )]
-        public CSharpUseCompoundAssignmentCodeFixProvider() : base(Utilities.Kinds) { }
+        public CSharpUseCompoundAssignmentCodeFixProvider()
+            : base(Utilities.Kinds) { }
 
         protected override SyntaxToken Token(SyntaxKind kind) => SyntaxFactory.Token(kind);
 

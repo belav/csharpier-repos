@@ -10,7 +10,8 @@ public class ComplexNavigationsSharedTypeQueryInMemoryTest
     public ComplexNavigationsSharedTypeQueryInMemoryTest(
         ComplexNavigationsSharedTypeQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

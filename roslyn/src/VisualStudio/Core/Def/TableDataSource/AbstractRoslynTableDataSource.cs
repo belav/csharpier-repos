@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public AbstractRoslynTableDataSource(
             Workspace workspace,
             IThreadingContext threadingContext
-        ) : base(workspace, threadingContext) => ConnectToSolutionCrawlerService(workspace);
+        )
+            : base(workspace, threadingContext) => ConnectToSolutionCrawlerService(workspace);
 
         protected ImmutableArray<DocumentId> GetDocumentsWithSameFilePath(
             Solution solution,

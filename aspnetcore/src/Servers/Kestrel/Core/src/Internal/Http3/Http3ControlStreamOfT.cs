@@ -16,7 +16,8 @@ internal sealed class Http3ControlStream<TContext>
         IHttpApplication<TContext> application,
         Http3StreamContext context,
         long? headerType
-    ) : base(context, headerType)
+    )
+        : base(context, headerType)
     {
         _application = application;
     }

@@ -12,7 +12,8 @@ namespace Microsoft.Win32.SafeHandles
     {
         private SafeHandle? _parent;
 
-        public SafeBioHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeBioHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

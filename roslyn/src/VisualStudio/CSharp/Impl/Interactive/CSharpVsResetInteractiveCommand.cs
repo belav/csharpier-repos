@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Interactive
             VisualStudioWorkspace workspace,
             CSharpVsInteractiveWindowProvider interactiveWindowProvider,
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) : base(workspace, interactiveWindowProvider, serviceProvider) { }
+        )
+            : base(workspace, interactiveWindowProvider, serviceProvider) { }
 
         protected override string LanguageName
         {

@@ -353,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpCompilation compilation,
                 NamedTypeSymbol containingType,
                 MethodSymbol userMain
-            ) : base(containingType)
+            )
+                : base(containingType)
             {
                 // There should be no way for a userMain to be passed in unless it already passed the
                 // parameter checks for determining entrypoint validity.
@@ -484,7 +485,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal ScriptEntryPoint(
                 NamedTypeSymbol containingType,
                 TypeWithAnnotations returnType
-            ) : base(containingType)
+            )
+                : base(containingType)
             {
                 Debug.Assert(containingType.IsScriptClass);
                 Debug.Assert(returnType.IsVoidType());
@@ -608,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NamedTypeSymbol containingType,
                 TypeWithAnnotations returnType,
                 TypeSymbol submissionArrayType
-            ) : base(containingType)
+            )
+                : base(containingType)
             {
                 Debug.Assert(containingType.IsSubmissionClass);
                 Debug.Assert(!returnType.IsVoidType());

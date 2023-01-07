@@ -24,7 +24,8 @@ public class RegexpExpression : SqlExpression
         SqlExpression pattern,
         bool negated,
         RelationalTypeMapping typeMapping
-    ) : base(typeof(bool), typeMapping)
+    )
+        : base(typeof(bool), typeMapping)
     {
         Match = match;
         Pattern = pattern;

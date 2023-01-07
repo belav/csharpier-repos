@@ -14,13 +14,15 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <summary>
         /// Initializes a new instance of the Map class.
         /// </summary>
-        public Map() : base(nameof(Map)) { }
+        public Map()
+            : base(nameof(Map)) { }
 
         /// <summary>
         /// Initializes a new instance of the Map class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal Map(IntPtr jsHandle) : base(jsHandle) { }
+        internal Map(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// Gets a value indicating whether the Map object has a fixed size.

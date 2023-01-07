@@ -37,7 +37,8 @@ public class BaseObj : Object
     // Note that explicitly calling the base class's constructor is
     // optional since the compiler ensures it anyway.
     // Also note that there is no concept of a destructor.
-    public BaseObj(String name) : base()
+    public BaseObj(String name)
+        : base()
     {
         this.name = name;
         Display("BaseObj Constructor");
@@ -86,7 +87,8 @@ public class BaseObj : Object
 // This is one example of how destructors and Finalize methods differ.
 public class DerivedObj : BaseObj
 {
-    public DerivedObj(String s) : base(s)
+    public DerivedObj(String s)
+        : base(s)
     {
         Display("DerivedObj Constructor");
     }
@@ -115,7 +117,8 @@ public class ResurrectObj : BaseObj
     // Indicates if object should resurrect itself when collected
     private Boolean allowResurrection = true; // Assume resurrection
 
-    public ResurrectObj(String s) : base(s)
+    public ResurrectObj(String s)
+        : base(s)
     {
         Display("ResurrectObj Constructor");
     }
@@ -163,7 +166,8 @@ public class ResurrectObj : BaseObj
 // This class shows how the GC improves performance using generations
 public class GenObj : BaseObj
 {
-    public GenObj(String s) : base(s)
+    public GenObj(String s)
+        : base(s)
     {
         Display("GenObj Constructor");
     }
@@ -180,7 +184,8 @@ public class GenObj : BaseObj
 // This class shows the proper way to implement explicit cleanup.
 public class DisposeObj : BaseObj
 {
-    public DisposeObj(String s) : base(s)
+    public DisposeObj(String s)
+        : base(s)
     {
         Display("DisposeObj Constructor");
     }

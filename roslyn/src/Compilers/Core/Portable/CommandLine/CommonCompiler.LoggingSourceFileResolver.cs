@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
                 string? baseDirectory,
                 ImmutableArray<KeyValuePair<string, string>> pathMap,
                 TouchedFileLogger? logger
-            ) : base(searchPaths, baseDirectory, pathMap)
+            )
+                : base(searchPaths, baseDirectory, pathMap)
             {
                 _logger = logger;
             }

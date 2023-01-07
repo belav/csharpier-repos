@@ -548,7 +548,8 @@ public class CustomParameterPolicyWithMultpleCtors : IParameterPolicy
         Count = count;
     }
 
-    public CustomParameterPolicyWithMultpleCtors(int count) : this(testService: null, count) { }
+    public CustomParameterPolicyWithMultpleCtors(int count)
+        : this(testService: null, count) { }
 
     public ITestService TestService { get; }
     public int Count { get; }

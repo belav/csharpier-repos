@@ -564,10 +564,11 @@ public class RemoteAttributeTest
 
     private class TestableRemoteAttribute : RemoteAttribute
     {
-        public TestableRemoteAttribute(string routeName) : base(routeName) { }
+        public TestableRemoteAttribute(string routeName)
+            : base(routeName) { }
 
-        public TestableRemoteAttribute(string action, string controller) : base(action, controller)
-        { }
+        public TestableRemoteAttribute(string action, string controller)
+            : base(action, controller) { }
 
         public TestableRemoteAttribute(string action, string controller, string areaName)
             : base(action, controller, areaName) { }

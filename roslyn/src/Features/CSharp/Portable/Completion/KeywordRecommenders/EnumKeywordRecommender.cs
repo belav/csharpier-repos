@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.ProtectedKeyword,
         };
 
-        public EnumKeywordRecommender() : base(SyntaxKind.EnumKeyword) { }
+        public EnumKeywordRecommender()
+            : base(SyntaxKind.EnumKeyword) { }
 
         protected override bool IsValidContext(
             int position,

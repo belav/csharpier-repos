@@ -9,7 +9,8 @@ namespace System.Web.Http
     {
         private int _hashCode;
 
-        public EfficientTypePropertyKey(T1 item1, T2 item2) : base(item1, item2)
+        public EfficientTypePropertyKey(T1 item1, T2 item2)
+            : base(item1, item2)
         {
             _hashCode = base.GetHashCode();
         }

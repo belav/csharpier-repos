@@ -9,7 +9,8 @@ namespace System.Data
     {
         private sealed class DataRowTree : RBTree<DataRow>
         {
-            internal DataRowTree() : base(TreeAccessMethod.INDEX_ONLY) { }
+            internal DataRowTree()
+                : base(TreeAccessMethod.INDEX_ONLY) { }
 
             protected override int CompareNode(DataRow? record1, DataRow? record2)
             {

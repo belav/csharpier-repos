@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasBody,
             bool isNullableAnalysisEnabled,
             BindingDiagnosticBag diagnostics
-        ) : base(containingType, syntax.GetReference(), location, isIterator: isIterator)
+        )
+            : base(containingType, syntax.GetReference(), location, isIterator: isIterator)
         {
             Debug.Assert(diagnostics.DiagnosticBag is object);
             Debug.Assert(

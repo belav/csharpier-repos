@@ -11,16 +11,20 @@ namespace System.Net
     )]
     public class CookieException : FormatException, ISerializable
     {
-        public CookieException() : base() { }
+        public CookieException()
+            : base() { }
 
-        internal CookieException(string? message) : base(message) { }
+        internal CookieException(string? message)
+            : base(message) { }
 
-        internal CookieException(string? message, Exception? inner) : base(message, inner) { }
+        internal CookieException(string? message, Exception? inner)
+            : base(message, inner) { }
 
         protected CookieException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
 
         void ISerializable.GetObjectData(
             SerializationInfo serializationInfo,

@@ -62,11 +62,14 @@ namespace Microsoft.CodeAnalysis.Collections
         private ValueCollection? _values;
         private const int StartOfFreeList = -3;
 
-        public SegmentedDictionary() : this(0, null) { }
+        public SegmentedDictionary()
+            : this(0, null) { }
 
-        public SegmentedDictionary(int capacity) : this(capacity, null) { }
+        public SegmentedDictionary(int capacity)
+            : this(capacity, null) { }
 
-        public SegmentedDictionary(IEqualityComparer<TKey>? comparer) : this(0, comparer) { }
+        public SegmentedDictionary(IEqualityComparer<TKey>? comparer)
+            : this(0, comparer) { }
 
         public SegmentedDictionary(int capacity, IEqualityComparer<TKey>? comparer)
         {
@@ -91,13 +94,14 @@ namespace Microsoft.CodeAnalysis.Collections
 #endif
         }
 
-        public SegmentedDictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null)
-        { }
+        public SegmentedDictionary(IDictionary<TKey, TValue> dictionary)
+            : this(dictionary, null) { }
 
         public SegmentedDictionary(
             IDictionary<TKey, TValue> dictionary,
             IEqualityComparer<TKey>? comparer
-        ) : this(dictionary != null ? dictionary.Count : 0, comparer)
+        )
+            : this(dictionary != null ? dictionary.Count : 0, comparer)
         {
             if (dictionary == null)
             {
@@ -135,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Collections
         public SegmentedDictionary(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
             IEqualityComparer<TKey>? comparer
-        ) : this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
+        )
+            : this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
         {
             if (collection == null)
             {

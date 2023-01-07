@@ -17,7 +17,8 @@ public class BytesToStringConverter : ValueConverter<byte[]?, string?>
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public BytesToStringConverter() : this(null) { }
+    public BytesToStringConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

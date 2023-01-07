@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             internal BinderWithContainingMemberOrLambda(
                 Binder next,
                 Symbol containingMemberOrLambda
-            ) : base(next)
+            )
+                : base(next)
             {
                 Debug.Assert(containingMemberOrLambda != null);
 
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Binder next,
                 BinderFlags flags,
                 Symbol containingMemberOrLambda
-            ) : base(next, flags)
+            )
+                : base(next, flags)
             {
                 Debug.Assert(containingMemberOrLambda != null);
 

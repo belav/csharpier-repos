@@ -13,7 +13,8 @@ namespace System.Web.Http.SelfHost.Channels
         public HttpMessageEncodingChannelListener(
             Binding binding,
             IChannelListener<IReplyChannel> innerListener
-        ) : base(binding, innerListener) { }
+        )
+            : base(binding, innerListener) { }
 
         protected override void OnOpening()
         {

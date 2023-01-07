@@ -16,12 +16,14 @@ namespace MS.Internal.Xml.XPath
             string prefix,
             XPathNodeType typeTest,
             bool matchSelf
-        ) : base(qyInput, name, prefix, typeTest)
+        )
+            : base(qyInput, name, prefix, typeTest)
         {
             _matchSelf = matchSelf;
         }
 
-        private XPathAncestorQuery(XPathAncestorQuery other) : base(other)
+        private XPathAncestorQuery(XPathAncestorQuery other)
+            : base(other)
         {
             _matchSelf = other._matchSelf;
         }

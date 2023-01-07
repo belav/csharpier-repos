@@ -285,7 +285,8 @@ namespace System
         /// </summary>
         /// <param name="mode">The lazy thread-safety mode</param>
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="mode"/> mode contains an invalid valuee</exception>
-        public Lazy(LazyThreadSafetyMode mode) : this(null, mode, useDefaultConstructor: true) { }
+        public Lazy(LazyThreadSafetyMode mode)
+            : this(null, mode, useDefaultConstructor: true) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Lazy{T}"/> class

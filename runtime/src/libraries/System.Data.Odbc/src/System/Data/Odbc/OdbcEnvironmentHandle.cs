@@ -8,7 +8,8 @@ namespace System.Data.Odbc
 {
     internal sealed class OdbcEnvironmentHandle : OdbcHandle
     {
-        public OdbcEnvironmentHandle() : base(ODBC32.SQL_HANDLE.ENV, null)
+        public OdbcEnvironmentHandle()
+            : base(ODBC32.SQL_HANDLE.ENV, null)
         {
             ODBC32.SQLRETURN retcode;
 

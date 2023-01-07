@@ -19,7 +19,8 @@ public class DateTimeOffsetToStringConverter : StringDateTimeOffsetConverter<Dat
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
-    public DateTimeOffsetToStringConverter() : this(null) { }
+    public DateTimeOffsetToStringConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

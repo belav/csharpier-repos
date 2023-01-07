@@ -28,7 +28,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Value must be greater than zero.
         /// </param>
         [RequiresUnreferencedCode(CountPropertyHelper.RequiresUnreferencedCodeMessage)]
-        public MaxLengthAttribute(int length) : base(() => DefaultErrorMessageString)
+        public MaxLengthAttribute(int length)
+            : base(() => DefaultErrorMessageString)
         {
             Length = length;
         }
@@ -38,7 +39,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     The maximum allowable length supported by the database will be used.
         /// </summary>
         [RequiresUnreferencedCode(CountPropertyHelper.RequiresUnreferencedCodeMessage)]
-        public MaxLengthAttribute() : base(() => DefaultErrorMessageString)
+        public MaxLengthAttribute()
+            : base(() => DefaultErrorMessageString)
         {
             Length = MaxAllowableLength;
         }

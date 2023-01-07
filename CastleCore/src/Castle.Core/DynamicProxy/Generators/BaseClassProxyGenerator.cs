@@ -30,7 +30,8 @@ namespace Castle.DynamicProxy.Generators
             Type targetType,
             Type[] interfaces,
             ProxyGenerationOptions options
-        ) : base(scope, targetType, interfaces, options)
+        )
+            : base(scope, targetType, interfaces, options)
         {
             EnsureDoesNotImplementIProxyTargetAccessor(targetType, nameof(targetType));
         }

@@ -19,7 +19,8 @@ namespace System.ServiceModel.Syndication
         private Collection<SyndicationLink> _links;
         private DateTimeOffset _publishDate;
 
-        public SyndicationItem() : this(null, null, null) { }
+        public SyndicationItem()
+            : this(null, null, null) { }
 
         public SyndicationItem(string title, string content, Uri itemAlternateLink)
             : this(title, content, itemAlternateLink, null, DateTimeOffset.MinValue) { }

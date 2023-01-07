@@ -19,7 +19,8 @@ class TestAssemblyLoadContext : AssemblyLoadContext
 {
     WeakReference interfaceAssemblyRef = null;
 
-    public TestAssemblyLoadContext(string name, bool isCollectible) : base(name, isCollectible) { }
+    public TestAssemblyLoadContext(string name, bool isCollectible)
+        : base(name, isCollectible) { }
 
     public WeakReference InterfaceAssemblyRef
     {

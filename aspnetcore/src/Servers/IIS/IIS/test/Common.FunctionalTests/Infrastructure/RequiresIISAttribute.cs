@@ -137,7 +137,8 @@ public sealed class RequiresIISAttribute : Attribute, ITestCondition
         }
     }
 
-    public RequiresIISAttribute() : this(IISCapability.None) { }
+    public RequiresIISAttribute()
+        : this(IISCapability.None) { }
 
     public RequiresIISAttribute(IISCapability capabilities)
     {

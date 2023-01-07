@@ -14,7 +14,8 @@ namespace System.Speech.Internal.GrammarBuilding
             _name = name;
         }
 
-        internal RuleElement(GrammarBuilderBase builder, string name) : this(name)
+        internal RuleElement(GrammarBuilderBase builder, string name)
+            : this(name)
         {
             Add(builder);
         }

@@ -102,7 +102,8 @@ namespace System.ComponentModel
             string name,
             Type type,
             Attribute[]? attributes
-        ) : base(name, attributes)
+        )
+            : base(name, attributes)
         {
             Debug.WriteLine(
                 $"Creating ReflectPropertyDescriptor for {componentClass?.FullName}.{name}"
@@ -147,7 +148,8 @@ namespace System.ComponentModel
             MethodInfo getMethod,
             MethodInfo? setMethod,
             Attribute[]? attrs
-        ) : this(componentClass, name, type, attrs)
+        )
+            : this(componentClass, name, type, attrs)
         {
             _propInfo = propInfo;
             _getMethod = getMethod;
@@ -170,7 +172,8 @@ namespace System.ComponentModel
             MethodInfo getMethod,
             MethodInfo? setMethod,
             Attribute[]? attrs
-        ) : this(componentClass, name, type, attrs)
+        )
+            : this(componentClass, name, type, attrs)
         {
             _receiverType = receiverType;
             _getMethod = getMethod;
@@ -187,7 +190,8 @@ namespace System.ComponentModel
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentClass,
             PropertyDescriptor oldReflectPropertyDescriptor,
             Attribute[] attributes
-        ) : base(oldReflectPropertyDescriptor, attributes)
+        )
+            : base(oldReflectPropertyDescriptor, attributes)
         {
             _componentClass = componentClass;
             _type = oldReflectPropertyDescriptor.PropertyType;

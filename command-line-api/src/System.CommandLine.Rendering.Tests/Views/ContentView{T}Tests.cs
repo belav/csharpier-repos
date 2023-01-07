@@ -95,7 +95,8 @@ namespace System.CommandLine.Rendering.Tests.Views
 
             public TextSpan GetSpan() => Span;
 
-            public TestableContentView(T value) : base(value) { }
+            public TestableContentView(T value)
+                : base(value) { }
         }
     }
 }

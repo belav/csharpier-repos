@@ -14,7 +14,8 @@ public class RetryHandler : DelegatingHandler
 
     private readonly ILogger _logger;
 
-    public RetryHandler(HttpMessageHandler innerHandler, ILogger logger) : base(innerHandler)
+    public RetryHandler(HttpMessageHandler innerHandler, ILogger logger)
+        : base(innerHandler)
     {
         _logger = logger;
     }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int indentation,
                 bool elastic,
                 string language
-            ) : base(options, lineBreaks, indentation, elastic, language)
+            )
+                : base(options, lineBreaks, indentation, elastic, language)
             {
                 _original = null;
             }
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Formatting
                 int indentation,
                 bool elastic,
                 string language
-            ) : base(options, lineBreaks, indentation, elastic, language)
+            )
+                : base(options, lineBreaks, indentation, elastic, language)
             {
                 Contract.ThrowIfNull(original);
                 _original = original;

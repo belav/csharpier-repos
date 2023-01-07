@@ -37,7 +37,8 @@ namespace MS.Internal.Xml.XPath
             _opnd2 = opnd2;
         }
 
-        private NumericExpr(NumericExpr other) : base(other)
+        private NumericExpr(NumericExpr other)
+            : base(other)
         {
             _op = other._op;
             _opnd1 = Clone(other._opnd1);

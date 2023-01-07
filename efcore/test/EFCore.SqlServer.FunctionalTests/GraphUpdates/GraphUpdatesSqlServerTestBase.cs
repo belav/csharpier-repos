@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class GraphUpdatesSqlServerTestBase<TFixture> : GraphUpdatesTestBase<TFixture>
     where TFixture : GraphUpdatesSqlServerTestBase<TFixture>.GraphUpdatesSqlServerFixtureBase, new()
 {
-    protected GraphUpdatesSqlServerTestBase(TFixture fixture) : base(fixture) { }
+    protected GraphUpdatesSqlServerTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected override IQueryable<Root> ModifyQueryRoot(IQueryable<Root> query) =>
         query.AsSplitQuery();

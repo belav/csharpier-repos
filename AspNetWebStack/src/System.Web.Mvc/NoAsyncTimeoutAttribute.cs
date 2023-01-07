@@ -12,6 +12,7 @@ namespace System.Web.Mvc
     )]
     public sealed class NoAsyncTimeoutAttribute : AsyncTimeoutAttribute
     {
-        public NoAsyncTimeoutAttribute() : base(Timeout.Infinite) { }
+        public NoAsyncTimeoutAttribute()
+            : base(Timeout.Infinite) { }
     }
 }

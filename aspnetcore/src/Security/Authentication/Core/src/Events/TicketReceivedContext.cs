@@ -22,7 +22,8 @@ public class TicketReceivedContext : RemoteAuthenticationContext<RemoteAuthentic
         AuthenticationScheme scheme,
         RemoteAuthenticationOptions options,
         AuthenticationTicket ticket
-    ) : base(context, scheme, options, ticket?.Properties) => Principal = ticket?.Principal;
+    )
+        : base(context, scheme, options, ticket?.Properties) => Principal = ticket?.Principal;
 
     /// <summary>
     /// Gets or sets the URL to redirect to after signin.

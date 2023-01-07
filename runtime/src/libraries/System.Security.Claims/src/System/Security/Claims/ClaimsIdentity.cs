@@ -136,7 +136,8 @@ namespace System.Security.Claims
             string? authenticationType,
             string? nameType,
             string? roleType
-        ) : this((IIdentity?)null, claims, authenticationType, nameType, roleType) { }
+        )
+            : this((IIdentity?)null, claims, authenticationType, nameType, roleType) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.

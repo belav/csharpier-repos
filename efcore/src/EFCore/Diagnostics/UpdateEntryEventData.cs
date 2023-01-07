@@ -24,7 +24,8 @@ public class UpdateEntryEventData : DbContextEventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IUpdateEntry entityEntry
-    ) : base(eventDefinition, messageGenerator, ((InternalEntityEntry)entityEntry).Context)
+    )
+        : base(eventDefinition, messageGenerator, ((InternalEntityEntry)entityEntry).Context)
     {
         EntityEntry = entityEntry;
     }

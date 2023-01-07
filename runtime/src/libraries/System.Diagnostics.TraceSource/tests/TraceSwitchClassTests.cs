@@ -68,7 +68,8 @@ namespace System.Diagnostics.TraceSourceTests
 
         class TestTraceSwitch : TraceSwitch
         {
-            public TestTraceSwitch() : base(null, null) { }
+            public TestTraceSwitch()
+                : base(null, null) { }
 
             public void SetSwitchSetting(int value)
             {

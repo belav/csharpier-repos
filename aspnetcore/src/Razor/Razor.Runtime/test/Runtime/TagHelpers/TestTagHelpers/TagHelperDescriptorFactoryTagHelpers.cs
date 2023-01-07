@@ -339,7 +339,8 @@ public class DictionarySubclass : Dictionary<string, string> { }
 
 public class DictionaryWithoutParameterlessConstructor : Dictionary<string, string>
 {
-    public DictionaryWithoutParameterlessConstructor(int count) : base() { }
+    public DictionaryWithoutParameterlessConstructor(int count)
+        : base() { }
 }
 
 public class DictionaryOfIntSubclass : Dictionary<int, string> { }

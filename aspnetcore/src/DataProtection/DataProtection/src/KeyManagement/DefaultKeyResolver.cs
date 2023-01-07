@@ -41,7 +41,8 @@ internal sealed class DefaultKeyResolver : IDefaultKeyResolver
     /// </remarks>
     private readonly TimeSpan _maxServerToServerClockSkew;
 
-    public DefaultKeyResolver() : this(NullLoggerFactory.Instance) { }
+    public DefaultKeyResolver()
+        : this(NullLoggerFactory.Instance) { }
 
     public DefaultKeyResolver(ILoggerFactory loggerFactory)
     {

@@ -128,13 +128,15 @@ namespace Newtonsoft.Json.Bson
         /// Initializes a new instance of the <see cref="BsonReader"/> class.
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> containing the BSON data to read.</param>
-        public BsonReader(Stream stream) : this(stream, false, DateTimeKind.Local) { }
+        public BsonReader(Stream stream)
+            : this(stream, false, DateTimeKind.Local) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BsonReader"/> class.
         /// </summary>
         /// <param name="reader">The <see cref="BinaryReader"/> containing the BSON data to read.</param>
-        public BsonReader(BinaryReader reader) : this(reader, false, DateTimeKind.Local) { }
+        public BsonReader(BinaryReader reader)
+            : this(reader, false, DateTimeKind.Local) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BsonReader"/> class.

@@ -27,7 +27,8 @@ namespace System.Drawing
 
         internal Bitmap(IntPtr ptr) => SetNativeImage(ptr);
 
-        public Bitmap(string filename) : this(filename, useIcm: false) { }
+        public Bitmap(string filename)
+            : this(filename, useIcm: false) { }
 
         public Bitmap(string filename, bool useIcm)
         {
@@ -54,7 +55,8 @@ namespace System.Drawing
             EnsureSave(this, filename, null);
         }
 
-        public Bitmap(Stream stream) : this(stream, false) { }
+        public Bitmap(Stream stream)
+            : this(stream, false) { }
 
         public unsafe Bitmap(Stream stream, bool useIcm)
         {
@@ -80,7 +82,8 @@ namespace System.Drawing
             EnsureSave(this, null, stream);
         }
 
-        public Bitmap(Type type, string resource) : this(GetResourceStream(type, resource)) { }
+        public Bitmap(Type type, string resource)
+            : this(GetResourceStream(type, resource)) { }
 
         private static Stream GetResourceStream(Type type, string resource)
         {
@@ -96,7 +99,8 @@ namespace System.Drawing
             return stream;
         }
 
-        public Bitmap(int width, int height) : this(width, height, PixelFormat.Format32bppArgb) { }
+        public Bitmap(int width, int height)
+            : this(width, height, PixelFormat.Format32bppArgb) { }
 
         public Bitmap(int width, int height, Graphics g)
         {
@@ -146,10 +150,11 @@ namespace System.Drawing
             SetNativeImage(bitmap);
         }
 
-        public Bitmap(Image original) : this(original, original.Width, original.Height) { }
+        public Bitmap(Image original)
+            : this(original, original.Width, original.Height) { }
 
-        public Bitmap(Image original, Size newSize) : this(original, newSize.Width, newSize.Height)
-        { }
+        public Bitmap(Image original, Size newSize)
+            : this(original, newSize.Width, newSize.Height) { }
 
         public Bitmap(Image original, int width, int height)
             : this(width, height, PixelFormat.Format32bppArgb)
@@ -163,7 +168,8 @@ namespace System.Drawing
             }
         }
 
-        private Bitmap(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        private Bitmap(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         public static Bitmap FromHicon(IntPtr hicon)
         {

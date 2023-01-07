@@ -42,8 +42,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             IExpansionServiceProvider expansionServiceProvider,
             IExpansionManager expansionManager,
             EditorOptionsService editorOptionsService
-        ) : base(threadingContext, expansionServiceProvider, expansionManager, editorOptionsService)
-        { }
+        )
+            : base(
+                threadingContext,
+                expansionServiceProvider,
+                expansionManager,
+                editorOptionsService
+            ) { }
 
         public bool ExecuteCommand(SurroundWithCommandArgs args, CommandExecutionContext context)
         {

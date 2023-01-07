@@ -23,7 +23,8 @@ namespace Internal.Cryptography.Pal.AnyOS
                 byte[] dataCopy,
                 EnvelopedDataAsn envelopedDataAsn,
                 RecipientInfoCollection recipientInfos
-            ) : base(recipientInfos)
+            )
+                : base(recipientInfos)
             {
                 _dataCopy = dataCopy;
                 _envelopedData = envelopedDataAsn;

@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 public BuildTableDataSource(
                     Workspace workspace,
                     ExternalErrorDiagnosticUpdateSource errorSource
-                ) : base(workspace)
+                )
+                    : base(workspace)
                 {
                     _buildErrorSource = errorSource;
 
@@ -161,7 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         DiagnosticTableEntriesSource source,
                         int version,
                         ImmutableArray<DiagnosticTableItem> items
-                    ) : base(version, items, ImmutableArray<ITrackingPoint>.Empty)
+                    )
+                        : base(version, items, ImmutableArray<ITrackingPoint>.Empty)
                     {
                         _source = source;
                     }

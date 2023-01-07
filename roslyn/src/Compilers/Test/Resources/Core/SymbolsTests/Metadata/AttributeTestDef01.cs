@@ -61,7 +61,8 @@ namespace CustomAttribute
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Parameter)]
     public class DerivedAttribute : BaseAttribute
     {
-        public DerivedAttribute(object p) : base(p) { }
+        public DerivedAttribute(object p)
+            : base(p) { }
 
         Type _prop;
         public Type TypeProp

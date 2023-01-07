@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis
         /// Creates a list of tokens.
         /// </summary>
         /// <param name="tokens">An array of tokens.</param>
-        public SyntaxTokenList(params SyntaxToken[] tokens) : this(null, CreateNode(tokens), 0, 0)
-        { }
+        public SyntaxTokenList(params SyntaxToken[] tokens)
+            : this(null, CreateNode(tokens), 0, 0) { }
 
         /// <summary>
         /// Creates a list of tokens.

@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
 
         public static readonly RenameTrackingTag Instance = new();
 
-        private RenameTrackingTag() : base(TagId) { }
+        private RenameTrackingTag()
+            : base(TagId) { }
     }
 }

@@ -108,7 +108,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider,
                 IErrorList errorList
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 _errorList = errorList;
 
@@ -151,7 +152,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IThreadingContext threadingContext,
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 _liveTableSource = null!;
                 _buildTableSource = null!;
@@ -175,7 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IThreadingContext threadingContext,
                 ExternalErrorDiagnosticUpdateSource errorSource,
                 ITableManagerProvider provider
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 _liveTableSource = null!;
                 _buildTableSource = null!;

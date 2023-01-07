@@ -35,12 +35,14 @@ namespace System.Drawing
         /// </summary>
         private Pen(IntPtr nativePen) => SetNativePen(nativePen);
 
-        internal Pen(Color color, bool immutable) : this(color) => _immutable = immutable;
+        internal Pen(Color color, bool immutable)
+            : this(color) => _immutable = immutable;
 
         /// <summary>
         /// Initializes a new instance of the Pen class with the specified <see cref='Color'/>.
         /// </summary>
-        public Pen(Color color) : this(color, (float)1.0) { }
+        public Pen(Color color)
+            : this(color, (float)1.0) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Pen'/> class with the specified
@@ -70,7 +72,8 @@ namespace System.Drawing
         /// <summary>
         /// Initializes a new instance of the Pen class with the specified <see cref='Brush'/>.
         /// </summary>
-        public Pen(Brush brush) : this(brush, (float)1.0) { }
+        public Pen(Brush brush)
+            : this(brush, (float)1.0) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='Pen'/> class with the specified <see cref='Drawing.Brush'/> and width.

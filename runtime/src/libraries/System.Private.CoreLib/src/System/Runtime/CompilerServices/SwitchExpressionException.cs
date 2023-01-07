@@ -16,12 +16,14 @@ namespace System.Runtime.CompilerServices
     )]
     public sealed class SwitchExpressionException : InvalidOperationException
     {
-        public SwitchExpressionException() : base(SR.Arg_SwitchExpressionException) { }
+        public SwitchExpressionException()
+            : base(SR.Arg_SwitchExpressionException) { }
 
         public SwitchExpressionException(Exception? innerException)
             : base(SR.Arg_SwitchExpressionException, innerException) { }
 
-        public SwitchExpressionException(object? unmatchedValue) : this()
+        public SwitchExpressionException(object? unmatchedValue)
+            : this()
         {
             UnmatchedValue = unmatchedValue;
         }
@@ -32,7 +34,8 @@ namespace System.Runtime.CompilerServices
             UnmatchedValue = info.GetValue(nameof(UnmatchedValue), typeof(object));
         }
 
-        public SwitchExpressionException(string? message) : base(message) { }
+        public SwitchExpressionException(string? message)
+            : base(message) { }
 
         public SwitchExpressionException(string? message, Exception? innerException)
             : base(message, innerException) { }

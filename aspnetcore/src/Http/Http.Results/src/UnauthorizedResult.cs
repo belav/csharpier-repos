@@ -5,5 +5,6 @@ namespace Microsoft.AspNetCore.Http.Result;
 
 internal sealed class UnauthorizedResult : StatusCodeResult
 {
-    public UnauthorizedResult() : base(StatusCodes.Status401Unauthorized) { }
+    public UnauthorizedResult()
+        : base(StatusCodes.Status401Unauthorized) { }
 }

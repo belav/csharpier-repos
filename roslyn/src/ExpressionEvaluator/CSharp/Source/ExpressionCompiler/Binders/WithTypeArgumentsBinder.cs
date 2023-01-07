@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal WithTypeArgumentsBinder(
             ImmutableArray<TypeWithAnnotations> typeArguments,
             Binder next
-        ) : base(next)
+        )
+            : base(next)
         {
             Debug.Assert(!typeArguments.IsDefaultOrEmpty);
             Debug.Assert(typeArguments.All(ta => ta.Type.Kind == SymbolKind.TypeParameter));

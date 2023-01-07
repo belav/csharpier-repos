@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class GraphUpdatesSqliteTestBase<TFixture> : GraphUpdatesTestBase<TFixture>
     where TFixture : GraphUpdatesSqliteTestBase<TFixture>.GraphUpdatesSqliteFixtureBase, new()
 {
-    protected GraphUpdatesSqliteTestBase(TFixture fixture) : base(fixture) { }
+    protected GraphUpdatesSqliteTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory(
         Skip = "Default owned collection pattern does not work with SQLite due to composite key."

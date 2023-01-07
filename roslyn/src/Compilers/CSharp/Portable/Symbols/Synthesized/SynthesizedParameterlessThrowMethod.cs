@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeSymbol returnType,
             string synthesizedMethodName,
             MethodSymbol exceptionConstructor
-        ) : base(containingModule, privateImplType, returnType, synthesizedMethodName)
+        )
+            : base(containingModule, privateImplType, returnType, synthesizedMethodName)
         {
             _exceptionConstructor = exceptionConstructor;
             this.SetParameters(ImmutableArray<ParameterSymbol>.Empty);

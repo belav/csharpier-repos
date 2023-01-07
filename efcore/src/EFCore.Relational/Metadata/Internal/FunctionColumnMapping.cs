@@ -21,7 +21,8 @@ public class FunctionColumnMapping : ColumnMappingBase, IFunctionColumnMapping
         IProperty property,
         FunctionColumn column,
         FunctionMapping functionMapping
-    ) : base(property, column, functionMapping) { }
+    )
+        : base(property, column, functionMapping) { }
 
     /// <inheritdoc />
     public virtual IFunctionMapping FunctionMapping => (IFunctionMapping)TableMapping;

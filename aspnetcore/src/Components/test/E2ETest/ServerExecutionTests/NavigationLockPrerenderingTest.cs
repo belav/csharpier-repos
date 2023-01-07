@@ -17,7 +17,8 @@ public class NavigationLockPrerenderingTest
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<LockedNavigationStartup> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void NavigationIsLockedAfterPrerendering()

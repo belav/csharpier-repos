@@ -13,8 +13,8 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class UrlIdentityPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public UrlIdentityPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        public UrlIdentityPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         public string Url { get; set; }
 

@@ -191,7 +191,8 @@ OFFSET 0 LIMIT 1
     {
         public virtual DbSet<Customer> Customers { get; set; }
 
-        public PartitionKeyContext(DbContextOptions dbContextOptions) : base(dbContextOptions) { }
+        public PartitionKeyContext(DbContextOptions dbContextOptions)
+            : base(dbContextOptions) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.Entity<Customer>(cb =>

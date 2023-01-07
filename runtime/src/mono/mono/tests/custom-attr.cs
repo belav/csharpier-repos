@@ -18,7 +18,8 @@ namespace Test
     {
         public int ival;
 
-        public My2Attribute(string stuff, int blah) : base(stuff)
+        public My2Attribute(string stuff, int blah)
+            : base(stuff)
         {
             System.Console.WriteLine("ctor with int val" + stuff);
             ival = blah;

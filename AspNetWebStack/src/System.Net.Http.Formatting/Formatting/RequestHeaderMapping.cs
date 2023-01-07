@@ -33,7 +33,8 @@ namespace System.Net.Http.Formatting
             StringComparison valueComparison,
             bool isValueSubstring,
             string mediaType
-        ) : base(mediaType)
+        )
+            : base(mediaType)
         {
             Initialize(headerName, headerValue, valueComparison, isValueSubstring);
         }
@@ -54,7 +55,8 @@ namespace System.Net.Http.Formatting
             StringComparison valueComparison,
             bool isValueSubstring,
             MediaTypeHeaderValue mediaType
-        ) : base(mediaType)
+        )
+            : base(mediaType)
         {
             Initialize(headerName, headerValue, valueComparison, isValueSubstring);
         }

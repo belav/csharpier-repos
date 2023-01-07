@@ -37,6 +37,7 @@ public class Runtime_64883
 
     private class CollectibleALC : AssemblyLoadContext
     {
-        public CollectibleALC() : base(true) { }
+        public CollectibleALC()
+            : base(true) { }
     }
 }

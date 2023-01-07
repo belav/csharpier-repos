@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
         public InputNode(
             Func<DriverStateTable.Builder, ImmutableArray<T>> getInput,
             IEqualityComparer<T>? inputComparer = null
-        ) : this(getInput, registerOutput: null, inputComparer: inputComparer, comparer: null) { }
+        )
+            : this(getInput, registerOutput: null, inputComparer: inputComparer, comparer: null) { }
 
         private InputNode(
             Func<DriverStateTable.Builder, ImmutableArray<T>> getInput,

@@ -9,18 +9,20 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class InvalidTypeTests_Span : InvalidTypeTests
     {
-        public InvalidTypeTests_Span() : base(JsonSerializerWrapper.SpanSerializer) { }
+        public InvalidTypeTests_Span()
+            : base(JsonSerializerWrapper.SpanSerializer) { }
     }
 
     public class InvalidTypeTests_String : InvalidTypeTests
     {
-        public InvalidTypeTests_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public InvalidTypeTests_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class InvalidTypeTests_AsyncStream : InvalidTypeTests
     {
-        public InvalidTypeTests_AsyncStream() : base(JsonSerializerWrapper.AsyncStreamSerializer)
-        { }
+        public InvalidTypeTests_AsyncStream()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 
     public class InvalidTypeTests_AsyncStreamWithSmallBuffer : InvalidTypeTests
@@ -31,12 +33,14 @@ namespace System.Text.Json.Serialization.Tests
 
     public class InvalidTypeTests_SyncStream : InvalidTypeTests
     {
-        public InvalidTypeTests_SyncStream() : base(JsonSerializerWrapper.SyncStreamSerializer) { }
+        public InvalidTypeTests_SyncStream()
+            : base(JsonSerializerWrapper.SyncStreamSerializer) { }
     }
 
     public class InvalidTypeTests_Writer : InvalidTypeTests
     {
-        public InvalidTypeTests_Writer() : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
+        public InvalidTypeTests_Writer()
+            : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
     }
 
     public abstract class InvalidTypeTests

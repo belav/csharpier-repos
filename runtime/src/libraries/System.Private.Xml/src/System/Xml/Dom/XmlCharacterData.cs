@@ -14,7 +14,8 @@ namespace System.Xml
         private string? _data;
 
         //base(doc) will throw exception if doc is null.
-        protected internal XmlCharacterData(string? data, XmlDocument doc) : base(doc)
+        protected internal XmlCharacterData(string? data, XmlDocument doc)
+            : base(doc)
         {
             _data = data;
         }

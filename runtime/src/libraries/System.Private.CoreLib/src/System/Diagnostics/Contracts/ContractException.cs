@@ -33,7 +33,8 @@ namespace System.Diagnostics.Contracts
             string? userMessage,
             string? condition,
             Exception? innerException
-        ) : base(failure, innerException)
+        )
+            : base(failure, innerException)
         {
             HResult = HResults.COR_E_CODECONTRACTFAILED;
             _kind = kind;

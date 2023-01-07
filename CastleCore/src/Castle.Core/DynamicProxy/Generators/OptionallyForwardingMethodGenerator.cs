@@ -30,7 +30,8 @@ namespace Castle.DynamicProxy.Generators
             MetaMethod method,
             OverrideMethodDelegate overrideMethod,
             GetTargetReferenceDelegate getTargetReference
-        ) : base(method, overrideMethod)
+        )
+            : base(method, overrideMethod)
         {
             this.getTargetReference = getTargetReference;
         }

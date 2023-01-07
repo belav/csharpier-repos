@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
             protected CommonEmbeddedMethod(
                 TEmbeddedType containingType,
                 TMethodSymbol underlyingMethod
-            ) : base(underlyingMethod)
+            )
+                : base(underlyingMethod)
             {
                 this.ContainingType = containingType;
                 _typeParameters = GetTypeParameters();

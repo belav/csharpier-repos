@@ -30,7 +30,8 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="System.Numerics.Vector2" /> object whose two elements have the same value.</summary>
         /// <param name="value">The value to assign to both elements.</param>
         [Intrinsic]
-        public Vector2(float value) : this(value, value) { }
+        public Vector2(float value)
+            : this(value, value) { }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="System.Numerics.Vector2.X" /> field.</param>

@@ -20,7 +20,8 @@ namespace System.Xml.RwFactoryWriterTests
             int id,
             int pri,
             CXmlDriverParam xmlDriverParams
-        ) : base(testCase)
+        )
+            : base(testCase)
         {
             _xmlDriverParams = xmlDriverParams;
 

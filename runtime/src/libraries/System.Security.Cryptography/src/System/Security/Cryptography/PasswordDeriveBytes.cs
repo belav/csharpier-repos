@@ -41,7 +41,8 @@ namespace System.Security.Cryptography
             byte[]? rgbSalt,
             string strHashName,
             int iterations
-        ) : this(strPassword, rgbSalt, strHashName, iterations, new CspParameters()) { }
+        )
+            : this(strPassword, rgbSalt, strHashName, iterations, new CspParameters()) { }
 
         [RequiresUnreferencedCode(HashAlgorithmUnreferencedCodeMessage)]
         public PasswordDeriveBytes(byte[] password, byte[]? salt, string hashName, int iterations)

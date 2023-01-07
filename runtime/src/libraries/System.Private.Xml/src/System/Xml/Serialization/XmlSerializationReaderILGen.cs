@@ -54,7 +54,8 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 string? choiceSource
-            ) : this(source, null, arrayName, i, mapping, false, choiceSource) { }
+            )
+                : this(source, null, arrayName, i, mapping, false, choiceSource) { }
 
             internal Member(
                 string source,
@@ -62,7 +63,8 @@ namespace System.Xml.Serialization
                 string? arrayName,
                 int i,
                 MemberMapping mapping
-            ) : this(source, arraySource, arrayName, i, mapping, false, null) { }
+            )
+                : this(source, arraySource, arrayName, i, mapping, false, null) { }
 
             internal Member(
                 string source,
@@ -71,7 +73,8 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 string? choiceSource
-            ) : this(source, arraySource, arrayName, i, mapping, false, choiceSource) { }
+            )
+                : this(source, arraySource, arrayName, i, mapping, false, choiceSource) { }
 
             internal Member(
                 string source,
@@ -79,7 +82,8 @@ namespace System.Xml.Serialization
                 int i,
                 MemberMapping mapping,
                 bool multiRef
-            ) : this(source, null, arrayName, i, mapping, multiRef, null) { }
+            )
+                : this(source, null, arrayName, i, mapping, multiRef, null) { }
 
             internal Member(
                 string source,

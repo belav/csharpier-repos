@@ -50,7 +50,8 @@ public class MaxKeyLengthSchemaTest : IClassFixture<ScratchDatabaseFixture>
     // Need a different context type here since EF model is changing by having MaxLengthForKeys
     public class VerstappenDbContext : IdentityDbContext<IdentityUser, IdentityRole, string>
     {
-        public VerstappenDbContext(DbContextOptions options) : base(options) { }
+        public VerstappenDbContext(DbContextOptions options)
+            : base(options) { }
     }
 
     [ConditionalFact]

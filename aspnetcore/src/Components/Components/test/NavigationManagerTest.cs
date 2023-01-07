@@ -1055,7 +1055,8 @@ public class NavigationManagerTest
         public TestNavigationManagerWithLocationChangingExceptionTracking(
             string baseUri = null,
             string uri = null
-        ) : base(baseUri, uri) { }
+        )
+            : base(baseUri, uri) { }
 
         protected override void HandleLocationChangingHandlerException(
             Exception ex,

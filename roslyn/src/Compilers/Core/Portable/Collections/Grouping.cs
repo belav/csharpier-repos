@@ -23,8 +23,8 @@ namespace Microsoft.CodeAnalysis
             _elements = elements;
         }
 
-        public Grouping(KeyValuePair<TKey, IEnumerable<TElement>> pair) : this(pair.Key, pair.Value)
-        { }
+        public Grouping(KeyValuePair<TKey, IEnumerable<TElement>> pair)
+            : this(pair.Key, pair.Value) { }
 
         public IEnumerator<TElement> GetEnumerator()
         {

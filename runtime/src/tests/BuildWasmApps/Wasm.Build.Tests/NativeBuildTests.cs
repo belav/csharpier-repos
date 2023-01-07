@@ -15,7 +15,8 @@ namespace Wasm.Build.Tests
         public NativeBuildTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         // TODO:     - check dotnet.wasm, js have changed
         //           - icall? pinvoke?

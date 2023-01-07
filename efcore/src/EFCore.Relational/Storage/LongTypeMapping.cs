@@ -32,7 +32,8 @@ public class LongTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="LongTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected LongTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected LongTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

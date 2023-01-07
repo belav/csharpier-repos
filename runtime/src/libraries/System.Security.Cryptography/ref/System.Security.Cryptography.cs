@@ -10,13 +10,15 @@ namespace Microsoft.Win32.SafeHandles
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
-        protected SafeNCryptHandle() : base(default(bool)) { }
+        protected SafeNCryptHandle()
+            : base(default(bool)) { }
 
         [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
         protected SafeNCryptHandle(
             System.IntPtr handle,
             System.Runtime.InteropServices.SafeHandle parentHandle
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         protected override bool ReleaseHandle()
         {
@@ -70,7 +72,8 @@ namespace Microsoft.Win32.SafeHandles
     public sealed partial class SafeX509ChainHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeX509ChainHandle() : base(default(bool)) { }
+        public SafeX509ChainHandle()
+            : base(default(bool)) { }
 
         protected override void Dispose(bool disposing) { }
 
@@ -7939,7 +7942,8 @@ namespace System.Security.Cryptography
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("ios")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("tvos")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("windows")]
-        public SafeEvpPKeyHandle() : base(default(System.IntPtr), default(bool)) { }
+        public SafeEvpPKeyHandle()
+            : base(default(System.IntPtr), default(bool)) { }
 
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("android")]
         [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]

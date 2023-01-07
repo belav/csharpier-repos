@@ -24,7 +24,8 @@ namespace System.Reflection.TypeLoading
             string name,
             RoType returnType,
             params RoType[] parameterTypes
-        ) : base(declaringType)
+        )
+            : base(declaringType)
         {
             Debug.Assert(declaringType != null);
             _declaringType = declaringType;

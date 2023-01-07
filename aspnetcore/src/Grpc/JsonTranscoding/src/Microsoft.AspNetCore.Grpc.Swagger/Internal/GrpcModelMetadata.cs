@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Grpc.Swagger.Internal;
 
 internal sealed class GrpcModelMetadata : ModelMetadata
 {
-    public GrpcModelMetadata(ModelMetadataIdentity identity) : base(identity)
+    public GrpcModelMetadata(ModelMetadataIdentity identity)
+        : base(identity)
     {
         IsBindingAllowed = true;
     }

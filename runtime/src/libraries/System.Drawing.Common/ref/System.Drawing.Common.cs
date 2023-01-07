@@ -1264,7 +1264,8 @@ namespace System.Drawing
 
         public partial class FontUnitConverter : System.ComponentModel.EnumConverter
         {
-            public FontUnitConverter() : base(default(System.Type)) { }
+            public FontUnitConverter()
+                : base(default(System.Type)) { }
 
             public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(
                 System.ComponentModel.ITypeDescriptorContext? context

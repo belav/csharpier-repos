@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteMissingImportDiscoveryService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteMissingImportDiscoveryService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

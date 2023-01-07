@@ -112,7 +112,8 @@ internal static partial class Interop
 
         private sealed class OpenSslCryptographicException : CryptographicException
         {
-            internal OpenSslCryptographicException(int errorCode, string message) : base(message)
+            internal OpenSslCryptographicException(int errorCode, string message)
+                : base(message)
             {
                 HResult = errorCode;
             }

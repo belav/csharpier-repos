@@ -16,7 +16,8 @@ namespace System.Net.NetworkInformation
         private readonly bool _supportsMulticast;
         private readonly long _speed;
 
-        private unsafe BsdNetworkInterface(string name, int index) : base(name)
+        private unsafe BsdNetworkInterface(string name, int index)
+            : base(name)
         {
             _index = index;
             Interop.Sys.NativeIPInterfaceStatistics nativeStats;

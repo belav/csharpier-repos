@@ -28,7 +28,8 @@ public abstract class SetOperationBase : TableExpressionBase
         SelectExpression source1,
         SelectExpression source2,
         bool distinct
-    ) : this(alias, source1, source2, distinct, annotations: null) { }
+    )
+        : this(alias, source1, source2, distinct, annotations: null) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="SetOperationBase" /> class.
@@ -44,7 +45,8 @@ public abstract class SetOperationBase : TableExpressionBase
         SelectExpression source2,
         bool distinct,
         IEnumerable<IAnnotation>? annotations
-    ) : base(alias, annotations)
+    )
+        : base(alias, annotations)
     {
         IsDistinct = distinct;
         Source1 = source1;

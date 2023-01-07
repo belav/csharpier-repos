@@ -8,7 +8,8 @@ public class FiltersInheritanceBulkUpdatesSqlServerTest
 {
     public FiltersInheritanceBulkUpdatesSqlServerTest(
         FiltersInheritanceBulkUpdatesSqlServerFixture fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
     }

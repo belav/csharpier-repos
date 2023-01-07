@@ -15,7 +15,8 @@ namespace System.Transactions
             IsolationLevel isoLevel,
             InternalTransaction internalTransaction,
             bool blocking
-        ) : base(isoLevel, internalTransaction)
+        )
+            : base(isoLevel, internalTransaction)
         {
             _blocking = blocking;
             lock (_internalTransaction)

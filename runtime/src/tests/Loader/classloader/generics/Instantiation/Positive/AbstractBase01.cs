@@ -60,7 +60,8 @@ public abstract class GenBase<T>
 
 public class GenInt : GenBase<int>
 {
-    public GenInt() : base(1) { }
+    public GenInt()
+        : base(1) { }
 
     public bool InstVerify()
     {
@@ -70,7 +71,8 @@ public class GenInt : GenBase<int>
 
 public class GenDouble : GenBase<double>
 {
-    public GenDouble() : base(1) { }
+    public GenDouble()
+        : base(1) { }
 
     public bool InstVerify()
     {
@@ -80,7 +82,8 @@ public class GenDouble : GenBase<double>
 
 public class GenString : GenBase<String>
 {
-    public GenString() : base("string") { }
+    public GenString()
+        : base("string") { }
 
     public bool InstVerify()
     {
@@ -90,7 +93,8 @@ public class GenString : GenBase<String>
 
 public class GenObject : GenBase<object>
 {
-    public GenObject() : base(new object()) { }
+    public GenObject()
+        : base(new object()) { }
 
     public bool InstVerify()
     {
@@ -100,7 +104,8 @@ public class GenObject : GenBase<object>
 
 public class GenGuid : GenBase<Guid>
 {
-    public GenGuid() : base(new Guid()) { }
+    public GenGuid()
+        : base(new Guid()) { }
 
     public bool InstVerify()
     {
@@ -110,7 +115,8 @@ public class GenGuid : GenBase<Guid>
 
 public class GenConstructedReference : GenBase<RefX1<int>>
 {
-    public GenConstructedReference() : base(new RefX1<int>()) { }
+    public GenConstructedReference()
+        : base(new RefX1<int>()) { }
 
     public bool InstVerify()
     {
@@ -120,7 +126,8 @@ public class GenConstructedReference : GenBase<RefX1<int>>
 
 public class GenConstructedValue : GenBase<ValX1<string>>
 {
-    public GenConstructedValue() : base(new ValX1<string>()) { }
+    public GenConstructedValue()
+        : base(new ValX1<string>()) { }
 
     public bool InstVerify()
     {
@@ -130,7 +137,8 @@ public class GenConstructedValue : GenBase<ValX1<string>>
 
 public class GenInt1DArray : GenBase<int[]>
 {
-    public GenInt1DArray() : base(new int[1]) { }
+    public GenInt1DArray()
+        : base(new int[1]) { }
 
     public bool InstVerify()
     {
@@ -140,7 +148,8 @@ public class GenInt1DArray : GenBase<int[]>
 
 public class GenString2DArray : GenBase<string[,]>
 {
-    public GenString2DArray() : base(new string[1, 1]) { }
+    public GenString2DArray()
+        : base(new string[1, 1]) { }
 
     public bool InstVerify()
     {
@@ -150,7 +159,8 @@ public class GenString2DArray : GenBase<string[,]>
 
 public class GenIntJaggedArray : GenBase<int[][]>
 {
-    public GenIntJaggedArray() : base(new int[1][]) { }
+    public GenIntJaggedArray()
+        : base(new int[1][]) { }
 
     public bool InstVerify()
     {

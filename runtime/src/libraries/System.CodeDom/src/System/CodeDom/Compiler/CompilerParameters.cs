@@ -9,9 +9,11 @@ namespace System.CodeDom.Compiler
     {
         private TempFileCollection _tempFiles;
 
-        public CompilerParameters() : this(null, null) { }
+        public CompilerParameters()
+            : this(null, null) { }
 
-        public CompilerParameters(string[] assemblyNames) : this(assemblyNames, null, false) { }
+        public CompilerParameters(string[] assemblyNames)
+            : this(assemblyNames, null, false) { }
 
         public CompilerParameters(string[] assemblyNames, string outputName)
             : this(assemblyNames, outputName, false) { }

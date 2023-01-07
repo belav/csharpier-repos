@@ -70,7 +70,8 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
         MethodInfo methodInfo,
         object?[] arguments,
         MethodCallCodeFragment chainedCall
-    ) : this(methodInfo, arguments)
+    )
+        : this(methodInfo, arguments)
     {
         ChainedCall = chainedCall;
     }
@@ -79,7 +80,8 @@ public class MethodCallCodeFragment : IMethodCallCodeFragment
         string method,
         object?[] arguments,
         MethodCallCodeFragment chainedCall
-    ) : this(method, arguments)
+    )
+        : this(method, arguments)
     {
         ChainedCall = chainedCall;
     }

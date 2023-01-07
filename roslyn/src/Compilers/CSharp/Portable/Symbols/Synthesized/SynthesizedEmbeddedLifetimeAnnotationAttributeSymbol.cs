@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType
-        ) : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
+        )
+            : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _constructors = ImmutableArray.Create<MethodSymbol>(
                 new SynthesizedEmbeddedAttributeConstructorWithBodySymbol(

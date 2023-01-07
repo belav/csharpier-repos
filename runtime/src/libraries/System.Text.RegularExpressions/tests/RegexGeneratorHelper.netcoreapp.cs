@@ -220,7 +220,8 @@ namespace System.Text.RegularExpressions.Tests
         {
             private readonly AssemblyDependencyResolver _resolver;
 
-            public RegexLoadContext(string pluginPath) : base(isCollectible: true)
+            public RegexLoadContext(string pluginPath)
+                : base(isCollectible: true)
             {
                 _resolver = new AssemblyDependencyResolver(pluginPath);
             }

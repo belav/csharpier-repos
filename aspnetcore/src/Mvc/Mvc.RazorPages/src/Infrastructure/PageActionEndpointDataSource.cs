@@ -21,7 +21,8 @@ internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBas
         IActionDescriptorCollectionProvider actions,
         ActionEndpointFactory endpointFactory,
         OrderedEndpointsSequenceProvider orderedEndpoints
-    ) : base(actions)
+    )
+        : base(actions)
     {
         DataSourceId = dataSourceIdProvider.CreateId();
         _endpointFactory = endpointFactory;

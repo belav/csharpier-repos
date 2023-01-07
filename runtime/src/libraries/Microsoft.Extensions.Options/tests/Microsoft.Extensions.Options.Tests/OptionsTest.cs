@@ -421,7 +421,8 @@ namespace Microsoft.Extensions.Options.Tests
                 IEnumerable<IConfigureOptions<OptionsWithoutDefaultCtor>> setups,
                 IEnumerable<IPostConfigureOptions<OptionsWithoutDefaultCtor>> postConfigures,
                 IEnumerable<IValidateOptions<OptionsWithoutDefaultCtor>> validations
-            ) : base(setups, postConfigures, validations) { }
+            )
+                : base(setups, postConfigures, validations) { }
 
             protected override OptionsWithoutDefaultCtor CreateInstance(string name)
             {

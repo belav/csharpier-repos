@@ -65,7 +65,8 @@ namespace System.Reflection
 
     public sealed partial class AssemblyName
     {
-        internal unsafe AssemblyName(NativeAssemblyNameParts* pParts) : this()
+        internal unsafe AssemblyName(NativeAssemblyNameParts* pParts)
+            : this()
         {
             if (pParts->_pName != null)
             {

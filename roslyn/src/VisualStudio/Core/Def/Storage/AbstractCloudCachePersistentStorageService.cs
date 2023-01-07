@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
 
         protected AbstractCloudCachePersistentStorageService(
             IPersistentStorageConfiguration configuration
-        ) : base(configuration) { }
+        )
+            : base(configuration) { }
 
         protected abstract ValueTask<ICacheService> CreateCacheServiceAsync(
             string solutionFolder,

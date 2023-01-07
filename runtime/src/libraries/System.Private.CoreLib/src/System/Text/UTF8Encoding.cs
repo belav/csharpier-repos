@@ -70,9 +70,11 @@ namespace System.Text
 
         private readonly bool _isThrowException;
 
-        public UTF8Encoding() : base(UTF8_CODEPAGE) { }
+        public UTF8Encoding()
+            : base(UTF8_CODEPAGE) { }
 
-        public UTF8Encoding(bool encoderShouldEmitUTF8Identifier) : this()
+        public UTF8Encoding(bool encoderShouldEmitUTF8Identifier)
+            : this()
         {
             _emitUTF8Identifier = encoderShouldEmitUTF8Identifier;
         }

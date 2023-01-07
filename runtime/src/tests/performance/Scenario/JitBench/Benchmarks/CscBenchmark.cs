@@ -8,7 +8,8 @@ namespace JitBench
 {
     public abstract class CscBenchmark : Benchmark
     {
-        public CscBenchmark(string name) : base(name) { }
+        public CscBenchmark(string name)
+            : base(name) { }
 
         public override async Task Setup(
             DotNetInstallation dotNetInstall,

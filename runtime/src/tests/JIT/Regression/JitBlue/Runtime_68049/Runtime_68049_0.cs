@@ -13,7 +13,8 @@ public struct S0
     public uint F0;
     public long F1;
 
-    public S0(uint f0) : this()
+    public S0(uint f0)
+        : this()
     {
         F0 = f0;
     }

@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             object[] args,
             ImmutableArray<Symbol> symbols,
             ImmutableArray<Location> additionalLocations
-        ) : base(code, args, symbols)
+        )
+            : base(code, args, symbols)
         {
             // Internal errors are abnormal and should not occur except where there are bugs in the compiler.
             Debug.Assert(code != ErrorCode.ERR_InternalError);

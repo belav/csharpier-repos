@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Naming
             string fileName,
             NamingStyleSettingsUpdater settingsUpdater,
             Workspace workspace
-        ) : base(fileName, settingsUpdater, workspace)
+        )
+            : base(fileName, settingsUpdater, workspace)
         {
             Update();
         }

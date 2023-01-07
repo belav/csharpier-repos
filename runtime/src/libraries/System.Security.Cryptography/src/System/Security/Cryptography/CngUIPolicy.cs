@@ -21,14 +21,16 @@ namespace System.Security.Cryptography
             CngUIProtectionLevels protectionLevel,
             string? friendlyName,
             string? description
-        ) : this(protectionLevel, friendlyName, description, useContext: null) { }
+        )
+            : this(protectionLevel, friendlyName, description, useContext: null) { }
 
         public CngUIPolicy(
             CngUIProtectionLevels protectionLevel,
             string? friendlyName,
             string? description,
             string? useContext
-        ) : this(protectionLevel, friendlyName, description, useContext, creationTitle: null) { }
+        )
+            : this(protectionLevel, friendlyName, description, useContext, creationTitle: null) { }
 
         public CngUIPolicy(
             CngUIProtectionLevels protectionLevel,

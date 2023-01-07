@@ -42,7 +42,8 @@ internal readonly struct CSharpAnalyzerOptionsProvider
     public CSharpAnalyzerOptionsProvider(
         AnalyzerConfigOptions options,
         AnalyzerOptions fallbackOptions
-    ) : this(options, fallbackOptions.GetIdeOptions()) { }
+    )
+        : this(options, fallbackOptions.GetIdeOptions()) { }
 
     // SimplifierOptions
 

@@ -169,7 +169,8 @@ namespace System.Data.Common.Tests
 
     internal class SchemaDbDataReaderMock : DbDataReaderMock
     {
-        public SchemaDbDataReaderMock(DataTable testData) : base(testData) { }
+        public SchemaDbDataReaderMock(DataTable testData)
+            : base(testData) { }
 
         public override DataTable GetSchemaTable()
         {

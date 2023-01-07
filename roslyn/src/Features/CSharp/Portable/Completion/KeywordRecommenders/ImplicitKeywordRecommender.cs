@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 SyntaxKind.UnsafeKeyword,
             };
 
-        public ImplicitKeywordRecommender() : base(SyntaxKind.ImplicitKeyword) { }
+        public ImplicitKeywordRecommender()
+            : base(SyntaxKind.ImplicitKeyword) { }
 
         protected override bool IsValidContext(
             int position,

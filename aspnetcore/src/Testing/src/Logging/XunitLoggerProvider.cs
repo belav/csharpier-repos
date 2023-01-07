@@ -15,7 +15,8 @@ public class XunitLoggerProvider : ILoggerProvider
     private readonly LogLevel _minLevel;
     private readonly DateTimeOffset? _logStart;
 
-    public XunitLoggerProvider(ITestOutputHelper output) : this(output, LogLevel.Trace) { }
+    public XunitLoggerProvider(ITestOutputHelper output)
+        : this(output, LogLevel.Trace) { }
 
     public XunitLoggerProvider(ITestOutputHelper output, LogLevel minLevel)
         : this(output, minLevel, null) { }

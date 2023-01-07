@@ -787,7 +787,8 @@ class C { }
 
         private class RemoveRegionRewriter : CSharpSyntaxRewriter
         {
-            public RemoveRegionRewriter() : base(visitIntoStructuredTrivia: true) { }
+            public RemoveRegionRewriter()
+                : base(visitIntoStructuredTrivia: true) { }
 
             public override SyntaxNode VisitRegionDirectiveTrivia(RegionDirectiveTriviaSyntax node)
             {

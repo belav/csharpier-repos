@@ -15,7 +15,8 @@ namespace System.Net.Sockets.Tests
 {
     public abstract class SendFile<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
     {
-        protected SendFile(ITestOutputHelper output) : base(output) { }
+        protected SendFile(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task Disposed_ThrowsException()
@@ -486,33 +487,39 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendFile_SyncSpan : SendFile<SocketHelperSpanSync>
     {
-        public SendFile_SyncSpan(ITestOutputHelper output) : base(output) { }
+        public SendFile_SyncSpan(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_SyncSpanForceNonBlocking
         : SendFile<SocketHelperSpanSyncForceNonBlocking>
     {
-        public SendFile_SyncSpanForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public SendFile_SyncSpanForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_ArraySync : SendFile<SocketHelperArraySync>
     {
-        public SendFile_ArraySync(ITestOutputHelper output) : base(output) { }
+        public SendFile_ArraySync(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_SyncForceNonBlocking : SendFile<SocketHelperSyncForceNonBlocking>
     {
-        public SendFile_SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public SendFile_SyncForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_Task : SendFile<SocketHelperTask>
     {
-        public SendFile_Task(ITestOutputHelper output) : base(output) { }
+        public SendFile_Task(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_CancellableTask : SendFile<SocketHelperCancellableTask>
     {
-        public SendFile_CancellableTask(ITestOutputHelper output) : base(output) { }
+        public SendFile_CancellableTask(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task SendFileAsync_Precanceled_Throws()
@@ -600,7 +607,8 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendFile_Apm : SendFile<SocketHelperApm>
     {
-        public SendFile_Apm(ITestOutputHelper output) : base(output) { }
+        public SendFile_Apm(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void IndividualBeginEndMethods_Disposed_ThrowsObjectDisposedException()
@@ -643,7 +651,8 @@ namespace System.Net.Sockets.Tests
     public abstract class SendFile_NonParallel<T> : SocketTestHelperBase<T>
         where T : SocketHelperBase, new()
     {
-        protected SendFile_NonParallel(ITestOutputHelper output) : base(output) { }
+        protected SendFile_NonParallel(ITestOutputHelper output)
+            : base(output) { }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/42534", TestPlatforms.Windows)]
         [OuterLoop("Creates and sends a file several gigabytes long")]
@@ -695,7 +704,8 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendFile_NonParallel_SyncSpan : SendFile_NonParallel<SocketHelperSpanSync>
     {
-        public SendFile_NonParallel_SyncSpan(ITestOutputHelper output) : base(output) { }
+        public SendFile_NonParallel_SyncSpan(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_NonParallel_SyncSpanForceNonBlocking
@@ -707,16 +717,19 @@ namespace System.Net.Sockets.Tests
 
     public sealed class SendFile_NonParallel_ArraySync : SendFile_NonParallel<SocketHelperArraySync>
     {
-        public SendFile_NonParallel_ArraySync(ITestOutputHelper output) : base(output) { }
+        public SendFile_NonParallel_ArraySync(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_NonParallel_Task : SendFile_NonParallel<SocketHelperTask>
     {
-        public SendFile_NonParallel_Task(ITestOutputHelper output) : base(output) { }
+        public SendFile_NonParallel_Task(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class SendFile_NonParallel_Apm : SendFile_NonParallel<SocketHelperApm>
     {
-        public SendFile_NonParallel_Apm(ITestOutputHelper output) : base(output) { }
+        public SendFile_NonParallel_Apm(ITestOutputHelper output)
+            : base(output) { }
     }
 }

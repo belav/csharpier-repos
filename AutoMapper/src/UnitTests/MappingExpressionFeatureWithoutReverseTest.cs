@@ -204,12 +204,14 @@ public class MappingExpressionFeatureWithoutReverseTest
 
     public class MappingExpressionFeatureA : MappingExpressionFeatureBase<TypeMapFeatureA>
     {
-        public MappingExpressionFeatureA(int value) : base(value, new TypeMapFeatureA(value)) { }
+        public MappingExpressionFeatureA(int value)
+            : base(value, new TypeMapFeatureA(value)) { }
     }
 
     public class MappingExpressionFeatureB : MappingExpressionFeatureBase<TypeMapFeatureB>
     {
-        public MappingExpressionFeatureB(int value) : base(value, new TypeMapFeatureB(value)) { }
+        public MappingExpressionFeatureB(int value)
+            : base(value, new TypeMapFeatureB(value)) { }
     }
 
     public abstract class MappingExpressionFeatureBase<TFeature> : MappingExpressionFeatureBase
@@ -217,7 +219,8 @@ public class MappingExpressionFeatureWithoutReverseTest
     {
         private readonly TFeature _feature;
 
-        protected MappingExpressionFeatureBase(int value, TFeature feature) : base(value)
+        protected MappingExpressionFeatureBase(int value, TFeature feature)
+            : base(value)
         {
             _feature = feature;
         }
@@ -251,12 +254,14 @@ public class MappingExpressionFeatureWithoutReverseTest
 
     public class TypeMapFeatureA : TypeMapFeatureBase
     {
-        public TypeMapFeatureA(int value) : base(value) { }
+        public TypeMapFeatureA(int value)
+            : base(value) { }
     }
 
     public class TypeMapFeatureB : TypeMapFeatureBase
     {
-        public TypeMapFeatureB(int value) : base(value) { }
+        public TypeMapFeatureB(int value)
+            : base(value) { }
     }
 
     public abstract class TypeMapFeatureBase : IRuntimeFeature

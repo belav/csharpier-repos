@@ -19,7 +19,8 @@ namespace System.Net.Security
     internal sealed class SafeSspiAuthDataHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
 #endif
-        public SafeSspiAuthDataHandle() : base(true) { }
+        public SafeSspiAuthDataHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -37,7 +38,8 @@ namespace System.Net.Security
     internal abstract class SafeFreeContextBuffer : SafeHandleZeroOrMinusOneIsInvalid
     {
 #endif
-        protected SafeFreeContextBuffer() : base(true) { }
+        protected SafeFreeContextBuffer()
+            : base(true) { }
 
         // This must be ONLY called from this file.
         internal void Set(IntPtr value)
@@ -143,7 +145,8 @@ namespace System.Net.Security
 
     internal sealed class SafeFreeContextBuffer_SECURITY : SafeFreeContextBuffer
     {
-        public SafeFreeContextBuffer_SECURITY() : base() { }
+        public SafeFreeContextBuffer_SECURITY()
+            : base() { }
 
         protected override bool ReleaseHandle()
         {
@@ -162,7 +165,8 @@ namespace System.Net.Security
     {
 #endif
 
-        public SafeFreeCertContext() : base(true) { }
+        public SafeFreeCertContext()
+            : base(true) { }
 
         // This must be ONLY called from this file.
         internal void Set(IntPtr value)
@@ -191,7 +195,8 @@ namespace System.Net.Security
         internal DateTime _expiry;
         internal Interop.SspiCli.CredHandle _handle; //should be always used as by ref in PInvokes parameters
 
-        protected SafeFreeCredentials() : base(IntPtr.Zero, true)
+        protected SafeFreeCredentials()
+            : base(IntPtr.Zero, true)
         {
             _handle = default;
             _expiry = DateTime.MaxValue;
@@ -346,7 +351,8 @@ namespace System.Net.Security
 
     internal sealed class SafeFreeCredential_SECURITY : SafeFreeCredentials
     {
-        public SafeFreeCredential_SECURITY() : base() { }
+        public SafeFreeCredential_SECURITY()
+            : base() { }
 
         protected override bool ReleaseHandle()
         {
@@ -1265,7 +1271,8 @@ namespace System.Net.Security
 
     internal sealed class SafeDeleteSslContext : SafeDeleteContext
     {
-        public SafeDeleteSslContext() : base() { }
+        public SafeDeleteSslContext()
+            : base() { }
 
         protected override bool ReleaseHandle()
         {

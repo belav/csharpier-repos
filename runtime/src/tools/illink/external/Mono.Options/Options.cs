@@ -905,7 +905,8 @@ namespace Mono.Options
 
         public OptionException() { }
 
-        public OptionException(string message, string optionName) : base(message)
+        public OptionException(string message, string optionName)
+            : base(message)
         {
             this.option = optionName;
         }
@@ -945,7 +946,8 @@ namespace Mono.Options
 
     public class OptionSet : KeyedCollection<string, Option>
     {
-        public OptionSet() : this(null) { }
+        public OptionSet()
+            : this(null) { }
 
         public OptionSet(MessageLocalizerConverter localizer)
         {
@@ -1060,8 +1062,8 @@ namespace Mono.Options
             // Prototype starts with '=' because this is an invalid prototype
             // (see Option.ParsePrototype(), and thus it'll prevent Category
             // instances from being accidentally used as normal options.
-            public Category(string description) : base("=:Category:= " + description, description)
-            { }
+            public Category(string description)
+                : base("=:Category:= " + description, description) { }
 
             protected override void OnParseComplete(OptionContext c)
             {
@@ -1084,7 +1086,8 @@ namespace Mono.Options
                 string description,
                 int count,
                 Action<OptionValueCollection> action
-            ) : this(prototype, description, count, action, false) { }
+            )
+                : this(prototype, description, count, action, false) { }
 
             public ActionOption(
                 string prototype,
@@ -1092,7 +1095,8 @@ namespace Mono.Options
                 int count,
                 Action<OptionValueCollection> action,
                 bool hidden
-            ) : base(prototype, description, count, hidden)
+            )
+                : base(prototype, description, count, hidden)
             {
                 if (action == null)
                     throw new ArgumentNullException("action");
@@ -1201,7 +1205,8 @@ namespace Mono.Options
                 string prototype,
                 string description,
                 OptionAction<TKey, TValue> action
-            ) : base(prototype, description, 2)
+            )
+                : base(prototype, description, 2)
             {
                 if (action == null)
                     throw new ArgumentNullException("action");
@@ -2172,7 +2177,8 @@ namespace Mono.Options
 
     public class HelpCommand : Command
     {
-        public HelpCommand() : base("help", help: "Show this message and exit") { }
+        public HelpCommand()
+            : base("help", help: "Show this message and exit") { }
 
         public override int Invoke(IEnumerable<string> arguments)
         {

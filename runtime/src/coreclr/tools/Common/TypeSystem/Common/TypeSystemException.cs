@@ -69,7 +69,8 @@ namespace Internal.TypeSystem
                 string typeName,
                 string assemblyName,
                 string messageArg
-            ) : base(id, new string[] { typeName, assemblyName, messageArg })
+            )
+                : base(id, new string[] { typeName, assemblyName, messageArg })
             {
                 TypeName = typeName;
                 AssemblyName = assemblyName;
@@ -126,17 +127,20 @@ namespace Internal.TypeSystem
         /// </summary>
         public class InvalidProgramException : TypeSystemException
         {
-            internal InvalidProgramException(ExceptionStringID id, string method) : base(id, method)
-            { }
+            internal InvalidProgramException(ExceptionStringID id, string method)
+                : base(id, method) { }
 
-            internal InvalidProgramException(ExceptionStringID id) : base(id) { }
+            internal InvalidProgramException(ExceptionStringID id)
+                : base(id) { }
 
-            internal InvalidProgramException() : base(ExceptionStringID.InvalidProgramDefault) { }
+            internal InvalidProgramException()
+                : base(ExceptionStringID.InvalidProgramDefault) { }
         }
 
         public class BadImageFormatException : TypeSystemException
         {
-            internal BadImageFormatException() : base(ExceptionStringID.BadImageFormatGeneric) { }
+            internal BadImageFormatException()
+                : base(ExceptionStringID.BadImageFormatGeneric) { }
 
             internal BadImageFormatException(string reason)
                 : base(ExceptionStringID.BadImageFormatSpecific, reason) { }
@@ -144,7 +148,8 @@ namespace Internal.TypeSystem
 
         public class MarshalDirectiveException : TypeSystemException
         {
-            internal MarshalDirectiveException(ExceptionStringID id) : base(id) { }
+            internal MarshalDirectiveException(ExceptionStringID id)
+                : base(id) { }
         }
     }
 }

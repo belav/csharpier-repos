@@ -25,7 +25,8 @@ namespace System.Web.Http.Results
         public UnauthorizedResult(
             IEnumerable<AuthenticationHeaderValue> challenges,
             HttpRequestMessage request
-        ) : this(challenges, new StatusCodeResult.DirectDependencyProvider(request)) { }
+        )
+            : this(challenges, new StatusCodeResult.DirectDependencyProvider(request)) { }
 
         /// <summary>Initializes a new instance of the <see cref="StatusCodeResult"/> class.</summary>
         /// <param name="challenges">The WWW-Authenticate challenges.</param>
@@ -33,7 +34,8 @@ namespace System.Web.Http.Results
         public UnauthorizedResult(
             IEnumerable<AuthenticationHeaderValue> challenges,
             ApiController controller
-        ) : this(challenges, new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
+        )
+            : this(challenges, new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
 
         private UnauthorizedResult(
             IEnumerable<AuthenticationHeaderValue> challenges,

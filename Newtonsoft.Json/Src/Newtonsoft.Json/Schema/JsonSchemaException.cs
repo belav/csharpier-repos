@@ -74,7 +74,8 @@ namespace Newtonsoft.Json.Schema
         /// with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public JsonSchemaException(string message) : base(message) { }
+        public JsonSchemaException(string message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class
@@ -103,7 +104,8 @@ namespace Newtonsoft.Json.Schema
             string path,
             int lineNumber,
             int linePosition
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             Path = path;
             LineNumber = lineNumber;

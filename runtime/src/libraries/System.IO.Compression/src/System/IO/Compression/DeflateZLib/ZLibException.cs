@@ -31,7 +31,8 @@ namespace System.IO.Compression
             string? zlibErrorContext,
             int zlibErrorCode,
             string? zlibErrorMessage
-        ) : base(message)
+        )
+            : base(message)
         {
             _zlibErrorContext = zlibErrorContext;
             _zlibErrorCode = (ZLibNative.ErrorCode)zlibErrorCode;

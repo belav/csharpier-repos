@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 Func<CancellationToken, Task<Document>> createChangedDocument,
                 string? equivalenceKey,
                 CodeActionPriority priority
-            ) : base(title, equivalenceKey)
+            )
+                : base(title, equivalenceKey)
             {
                 _createChangedDocument = createChangedDocument;
                 Priority = priority;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string title,
                 Func<CancellationToken, Task<Solution>> createChangedSolution,
                 string? equivalenceKey
-            ) : base(title, equivalenceKey)
+            )
+                : base(title, equivalenceKey)
             {
                 _createChangedSolution = createChangedSolution;
             }

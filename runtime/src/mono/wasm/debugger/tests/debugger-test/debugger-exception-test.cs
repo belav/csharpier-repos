@@ -47,7 +47,8 @@ namespace DebuggerTests
         // helps with the tests
         public string message;
 
-        public CustomException(string message) : base(message)
+        public CustomException(string message)
+            : base(message)
         {
             this.message = message;
         }

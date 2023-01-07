@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         }
 #endif
 
-        internal ObjectPool(Factory factory) : this(factory, Environment.ProcessorCount * 2) { }
+        internal ObjectPool(Factory factory)
+            : this(factory, Environment.ProcessorCount * 2) { }
 
         internal ObjectPool(Factory factory, int size)
         {

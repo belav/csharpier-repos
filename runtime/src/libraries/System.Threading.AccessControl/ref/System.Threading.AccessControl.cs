@@ -236,7 +236,8 @@ namespace System.Security.AccessControl
         public MutexSecurity(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         public override System.Type AccessRightType
         {
@@ -383,7 +384,8 @@ namespace System.Security.AccessControl
         public SemaphoreSecurity(
             string name,
             System.Security.AccessControl.AccessControlSections includeSections
-        ) : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
+        )
+            : base(default(bool), default(System.Security.AccessControl.ResourceType)) { }
 
         public override System.Type AccessRightType
         {

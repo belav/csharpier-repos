@@ -12,7 +12,8 @@ namespace System.Net.Http.Formatting.Mocks
     {
         public MockContentNegotiator() { }
 
-        public MockContentNegotiator(bool excludeMatchOnTypeOnly) : base(excludeMatchOnTypeOnly) { }
+        public MockContentNegotiator(bool excludeMatchOnTypeOnly)
+            : base(excludeMatchOnTypeOnly) { }
 
         public new Collection<MediaTypeFormatterMatch> ComputeFormatterMatches(
             Type type,

@@ -8,8 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class ManyToManyNoTrackingQuerySqliteTest
     : ManyToManyNoTrackingQueryRelationalTestBase<ManyToManyQuerySqliteFixture>
 {
-    public ManyToManyNoTrackingQuerySqliteTest(ManyToManyQuerySqliteFixture fixture) : base(fixture)
-    { }
+    public ManyToManyNoTrackingQuerySqliteTest(ManyToManyQuerySqliteFixture fixture)
+        : base(fixture) { }
 
     // Sqlite does not support Apply operations
 

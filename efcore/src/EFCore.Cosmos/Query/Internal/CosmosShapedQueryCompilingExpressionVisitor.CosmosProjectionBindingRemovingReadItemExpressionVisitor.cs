@@ -16,7 +16,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
             ReadItemExpression readItemExpression,
             ParameterExpression jObjectParameter,
             bool trackQueryResults
-        ) : base(jObjectParameter, trackQueryResults)
+        )
+            : base(jObjectParameter, trackQueryResults)
         {
             _readItemExpression = readItemExpression;
         }

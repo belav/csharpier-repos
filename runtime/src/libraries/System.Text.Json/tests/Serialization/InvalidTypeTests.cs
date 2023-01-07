@@ -9,17 +9,20 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class InvalidTypeTests_Span : InvalidTypeTests
     {
-        public InvalidTypeTests_Span() : base(SerializationWrapper.SpanSerializer) { }
+        public InvalidTypeTests_Span()
+            : base(SerializationWrapper.SpanSerializer) { }
     }
 
     public class InvalidTypeTests_String : InvalidTypeTests
     {
-        public InvalidTypeTests_String() : base(SerializationWrapper.StringSerializer) { }
+        public InvalidTypeTests_String()
+            : base(SerializationWrapper.StringSerializer) { }
     }
 
     public class InvalidTypeTests_Stream : InvalidTypeTests
     {
-        public InvalidTypeTests_Stream() : base(SerializationWrapper.StreamSerializer) { }
+        public InvalidTypeTests_Stream()
+            : base(SerializationWrapper.StreamSerializer) { }
     }
 
     public class InvalidTypeTests_StreamWithSmallBuffer : InvalidTypeTests
@@ -30,7 +33,8 @@ namespace System.Text.Json.Serialization.Tests
 
     public class InvalidTypeTests_Writer : InvalidTypeTests
     {
-        public InvalidTypeTests_Writer() : base(SerializationWrapper.WriterSerializer) { }
+        public InvalidTypeTests_Writer()
+            : base(SerializationWrapper.WriterSerializer) { }
     }
 
     public abstract class InvalidTypeTests

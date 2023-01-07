@@ -15,14 +15,16 @@ public class RequestCulture
     /// properties set to the same <see cref="CultureInfo"/> value.
     /// </summary>
     /// <param name="culture">The <see cref="CultureInfo"/> for the request.</param>
-    public RequestCulture(CultureInfo culture) : this(culture, culture) { }
+    public RequestCulture(CultureInfo culture)
+        : this(culture, culture) { }
 
     /// <summary>
     /// Creates a new <see cref="RequestCulture"/> object with its <see cref="Culture"/> and <see cref="UICulture"/>
     /// properties set to the same <see cref="CultureInfo"/> value.
     /// </summary>
     /// <param name="culture">The culture for the request.</param>
-    public RequestCulture(string culture) : this(culture, culture) { }
+    public RequestCulture(string culture)
+        : this(culture, culture) { }
 
     /// <summary>
     /// Creates a new <see cref="RequestCulture"/> object with its <see cref="Culture"/> and <see cref="UICulture"/>

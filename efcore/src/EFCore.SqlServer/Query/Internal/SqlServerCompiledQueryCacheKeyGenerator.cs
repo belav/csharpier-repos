@@ -25,7 +25,8 @@ public class SqlServerCompiledQueryCacheKeyGenerator : RelationalCompiledQueryCa
         CompiledQueryCacheKeyGeneratorDependencies dependencies,
         RelationalCompiledQueryCacheKeyGeneratorDependencies relationalDependencies,
         ISqlServerConnection sqlServerConnection
-    ) : base(dependencies, relationalDependencies)
+    )
+        : base(dependencies, relationalDependencies)
     {
         _sqlServerConnection = sqlServerConnection;
     }

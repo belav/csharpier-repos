@@ -20,7 +20,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     ///     Creates a new instance of the <see cref="TableExpressionBase" /> class.
     /// </summary>
     /// <param name="alias">A string alias for the table source.</param>
-    protected TableExpressionBase(string? alias) : this(alias, annotations: null)
+    protected TableExpressionBase(string? alias)
+        : this(alias, annotations: null)
     {
         Alias = alias;
     }

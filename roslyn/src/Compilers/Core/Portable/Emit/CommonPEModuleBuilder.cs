@@ -706,7 +706,8 @@ namespace Microsoft.CodeAnalysis.Emit
             OutputKind outputKind,
             EmitOptions emitOptions,
             TModuleCompilationState compilationState
-        ) : base(manifestResources, emitOptions, outputKind, serializationProperties, compilation)
+        )
+            : base(manifestResources, emitOptions, outputKind, serializationProperties, compilation)
         {
             Debug.Assert(sourceModule != null);
             Debug.Assert(serializationProperties != null);

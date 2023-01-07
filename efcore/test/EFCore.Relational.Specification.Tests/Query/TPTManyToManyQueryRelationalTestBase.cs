@@ -7,5 +7,6 @@ public abstract class TPTManyToManyQueryRelationalTestBase<TFixture>
     : ManyToManyQueryRelationalTestBase<TFixture>
     where TFixture : TPTManyToManyQueryRelationalFixture, new()
 {
-    protected TPTManyToManyQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected TPTManyToManyQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 }

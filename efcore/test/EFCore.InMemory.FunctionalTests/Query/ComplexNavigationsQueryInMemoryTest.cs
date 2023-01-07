@@ -9,7 +9,8 @@ public class ComplexNavigationsQueryInMemoryTest
     public ComplexNavigationsQueryInMemoryTest(
         ComplexNavigationsQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

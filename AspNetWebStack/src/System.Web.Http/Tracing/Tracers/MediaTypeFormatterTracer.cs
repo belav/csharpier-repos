@@ -34,7 +34,8 @@ namespace System.Web.Http.Tracing.Tracers
             MediaTypeFormatter innerFormatter,
             ITraceWriter traceWriter,
             HttpRequestMessage request
-        ) : base(innerFormatter)
+        )
+            : base(innerFormatter)
         {
             Contract.Assert(innerFormatter != null);
             Contract.Assert(traceWriter != null);

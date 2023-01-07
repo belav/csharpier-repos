@@ -142,7 +142,8 @@ namespace System.Xml
         //
         private sealed class NoNamespaceManager : XmlNamespaceManager
         {
-            public NoNamespaceManager() : base() { }
+            public NoNamespaceManager()
+                : base() { }
 
             public override string DefaultNamespace
             {

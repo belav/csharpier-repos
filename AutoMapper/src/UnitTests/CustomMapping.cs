@@ -135,7 +135,8 @@ public class OpenGenericMapForMember : AutoMapperSpecBase
     {
         private readonly IEnumerable<TItem> _items;
 
-        public Pager(IEnumerable<TItem> items) : this(items, 0, 0, 0) { }
+        public Pager(IEnumerable<TItem> items)
+            : this(items, 0, 0, 0) { }
 
         public Pager(IEnumerable<TItem> items, int currentPage, int pageSize, int totalItems)
         {
@@ -1131,7 +1132,8 @@ public class When_specifying_a_custom_constructor_function_for_custom_converters
     {
         private readonly int _value;
 
-        public CustomConverter() : this(5) { }
+        public CustomConverter()
+            : this(5) { }
 
         public CustomConverter(int value)
         {

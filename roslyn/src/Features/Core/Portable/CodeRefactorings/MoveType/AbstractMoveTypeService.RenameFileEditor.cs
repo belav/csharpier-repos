@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                 State state,
                 string fileName,
                 CancellationToken cancellationToken
-            ) : base(service, state, fileName, cancellationToken) { }
+            )
+                : base(service, state, fileName, cancellationToken) { }
 
             public override Task<ImmutableArray<CodeActionOperation>> GetOperationsAsync() =>
                 Task.FromResult(RenameFileToMatchTypeName());

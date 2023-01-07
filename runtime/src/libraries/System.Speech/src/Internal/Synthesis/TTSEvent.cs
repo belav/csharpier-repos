@@ -28,7 +28,8 @@ namespace System.Speech.Internal.Synthesis
             string bookmark,
             uint wParam,
             IntPtr lParam
-        ) : this(id, prompt, exception, voice)
+        )
+            : this(id, prompt, exception, voice)
         {
             _audioPosition = audioPosition;
             _bookmark = bookmark;

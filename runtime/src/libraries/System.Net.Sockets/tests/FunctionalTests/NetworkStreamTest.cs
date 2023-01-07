@@ -867,7 +867,8 @@ namespace System.Net.Sockets.Tests
 
         private sealed class DerivedNetworkStream : NetworkStream
         {
-            public DerivedNetworkStream(Socket socket) : base(socket) { }
+            public DerivedNetworkStream(Socket socket)
+                : base(socket) { }
 
             public new bool Readable
             {

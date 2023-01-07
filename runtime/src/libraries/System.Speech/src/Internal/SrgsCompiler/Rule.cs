@@ -14,7 +14,8 @@ namespace System.Speech.Internal.SrgsCompiler
         #region Constructors
 
         // Only used for the special transition
-        internal Rule(int iSerialize) : base(null, null)
+        internal Rule(int iSerialize)
+            : base(null, null)
         {
             _iSerialize = iSerialize;
         }
@@ -26,7 +27,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int iSerialize,
             GrammarOptions SemanticFormat,
             ref int cImportedRules
-        ) : base(backend, null)
+        )
+            : base(backend, null)
         {
             _rule = this;
             Init(name, cfgRule, iSerialize, SemanticFormat, ref cImportedRules);
@@ -41,7 +43,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int iSerialize,
             GrammarOptions SemanticFormat,
             ref int cImportedRules
-        ) : base(backend, null)
+        )
+            : base(backend, null)
         {
             _rule = this;
             Init(

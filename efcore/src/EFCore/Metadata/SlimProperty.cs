@@ -61,7 +61,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             ValueComparer? valueComparer,
             ValueComparer? keyValueComparer,
             CoreTypeMapping? typeMapping
-        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+        )
+            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             DeclaringEntityType = declaringEntityType;
             ClrType = clrType;

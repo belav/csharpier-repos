@@ -22,7 +22,8 @@ public class FunctionMapping : TableMappingBase<FunctionColumnMapping>, IFunctio
         StoreFunction storeFunction,
         IDbFunction dbFunction,
         bool includesDerivedTypes
-    ) : base(entityType, storeFunction, includesDerivedTypes)
+    )
+        : base(entityType, storeFunction, includesDerivedTypes)
     {
         DbFunction = dbFunction;
     }

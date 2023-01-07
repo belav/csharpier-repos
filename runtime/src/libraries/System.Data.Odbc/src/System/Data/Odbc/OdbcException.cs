@@ -40,13 +40,15 @@ namespace System.Data.Odbc
             return exception;
         }
 
-        internal OdbcException(string message, OdbcErrorCollection errors) : base(message)
+        internal OdbcException(string message, OdbcErrorCollection errors)
+            : base(message)
         {
             _odbcErrors = errors;
             HResult = HResults.OdbcException;
         }
 
-        private OdbcException(SerializationInfo si, StreamingContext sc) : base(si, sc)
+        private OdbcException(SerializationInfo si, StreamingContext sc)
+            : base(si, sc)
         {
             // Ignoring ODBC32.RETCODE
             _odbcErrors = (OdbcErrorCollection)

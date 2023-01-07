@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SpatialSqlServerTest : SpatialTestBase<SpatialSqlServerFixture>
 {
-    public SpatialSqlServerTest(SpatialSqlServerFixture fixture) : base(fixture) { }
+    public SpatialSqlServerTest(SpatialSqlServerFixture fixture)
+        : base(fixture) { }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

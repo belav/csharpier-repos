@@ -14,7 +14,8 @@ namespace Wasm.Build.Tests
         public BlazorWasmTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext) { }
+        )
+            : base(output, buildContext) { }
 
         [Theory, TestCategory("no-workload")]
         [InlineData("Debug")]

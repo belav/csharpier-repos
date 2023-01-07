@@ -9,7 +9,8 @@ public class OwnedQueryInMemoryTest
     public OwnedQueryInMemoryTest(
         OwnedQueryInMemoryFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

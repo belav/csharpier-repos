@@ -33,7 +33,8 @@ public class EntityQueryRootExpression : QueryRootExpression, IPrintableExpressi
     ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class without any query provider.
     /// </summary>
     /// <param name="entityType">The entity type this query root represents.</param>
-    public EntityQueryRootExpression(IEntityType entityType) : base(entityType.ClrType)
+    public EntityQueryRootExpression(IEntityType entityType)
+        : base(entityType.ClrType)
     {
         EntityType = entityType;
     }

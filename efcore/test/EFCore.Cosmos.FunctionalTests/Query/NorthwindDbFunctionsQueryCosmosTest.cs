@@ -9,7 +9,8 @@ public class NorthwindDbFunctionsQueryCosmosTest
     public NorthwindDbFunctionsQueryCosmosTest(
         NorthwindQueryCosmosFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         ClearLog();
     }

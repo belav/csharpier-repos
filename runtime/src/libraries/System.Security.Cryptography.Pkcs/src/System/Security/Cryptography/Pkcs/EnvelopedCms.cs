@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors
         //
 
-        public EnvelopedCms() : this(new ContentInfo(Array.Empty<byte>())) { }
+        public EnvelopedCms()
+            : this(new ContentInfo(Array.Empty<byte>())) { }
 
         public EnvelopedCms(ContentInfo contentInfo)
             : this(contentInfo, new AlgorithmIdentifier(Oids.Aes256CbcOid.CopyOid())) { }

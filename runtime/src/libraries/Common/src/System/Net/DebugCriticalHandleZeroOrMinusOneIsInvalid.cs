@@ -15,7 +15,8 @@ namespace System.Net
     {
         private string _trace;
 
-        protected DebugCriticalHandleZeroOrMinusOneIsInvalid() : base()
+        protected DebugCriticalHandleZeroOrMinusOneIsInvalid()
+            : base()
         {
             _trace =
                 "WARNING! GC-ed  >>"

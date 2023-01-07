@@ -21,7 +21,8 @@ namespace System.Web.Mvc
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteAttribute" /> class.
         /// </summary>
-        public RouteAttribute() : this(String.Empty) { }
+        public RouteAttribute()
+            : this(String.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteAttribute" /> class.

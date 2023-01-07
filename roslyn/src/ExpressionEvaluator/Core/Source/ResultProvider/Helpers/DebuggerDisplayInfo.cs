@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DebuggerDisplayItemInfo simpleValue,
             DebuggerDisplayItemInfo typeName,
             bool hasFavoritesInfo
-        ) : this(targetType)
+        )
+            : this(targetType)
         {
             Name = name;
             m_value = value;

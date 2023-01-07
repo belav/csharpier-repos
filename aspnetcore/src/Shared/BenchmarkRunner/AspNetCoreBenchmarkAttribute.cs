@@ -10,7 +10,8 @@ namespace BenchmarkDotNet.Attributes;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly)]
 internal class AspNetCoreBenchmarkAttribute : Attribute, IConfigSource
 {
-    public AspNetCoreBenchmarkAttribute() : this(typeof(DefaultCoreConfig)) { }
+    public AspNetCoreBenchmarkAttribute()
+        : this(typeof(DefaultCoreConfig)) { }
 
     public AspNetCoreBenchmarkAttribute(Type configType)
         : this(configType, typeof(DefaultCoreValidationConfig)) { }

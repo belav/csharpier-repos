@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         public SolutionEventsBatchScopeCreator(
             IThreadingContext threadingContext,
             [Import(typeof(SVsServiceProvider))] IServiceProvider serviceProvider
-        ) : base(threadingContext, assertIsForeground: false)
+        )
+            : base(threadingContext, assertIsForeground: false)
         {
             _serviceProvider = serviceProvider;
         }

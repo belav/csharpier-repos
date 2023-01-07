@@ -9,7 +9,8 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed class UrlAttribute : DataTypeAttribute
     {
-        public UrlAttribute() : base(DataType.Url)
+        public UrlAttribute()
+            : base(DataType.Url)
         {
             // Set DefaultErrorMessage not ErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.

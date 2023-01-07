@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class WhileKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public WhileKeywordRecommender() : base(SyntaxKind.WhileKeyword) { }
+        public WhileKeywordRecommender()
+            : base(SyntaxKind.WhileKeyword) { }
 
         protected override bool IsValidContext(
             int position,

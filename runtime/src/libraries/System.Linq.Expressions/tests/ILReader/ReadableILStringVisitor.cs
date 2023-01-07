@@ -36,7 +36,8 @@ namespace System.Linq.Expressions.Tests
 
     public class RawILStringToTextWriter : ReadableILStringToTextWriter
     {
-        public RawILStringToTextWriter(TextWriter writer) : base(writer) { }
+        public RawILStringToTextWriter(TextWriter writer)
+            : base(writer) { }
 
         public override void Process(ILInstruction ilInstruction, string operandString)
         {

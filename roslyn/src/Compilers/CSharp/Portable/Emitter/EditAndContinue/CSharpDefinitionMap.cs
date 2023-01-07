@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             MetadataDecoder metadataDecoder,
             CSharpSymbolMatcher mapToMetadata,
             CSharpSymbolMatcher? mapToPrevious
-        ) : base(edits)
+        )
+            : base(edits)
         {
             _metadataDecoder = metadataDecoder;
             _mapToMetadata = mapToMetadata;

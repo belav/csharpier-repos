@@ -31,7 +31,8 @@ namespace System.Web.Http.ModelBinding
             HttpParameterDescriptor descriptor,
             IEnumerable<MediaTypeFormatter> formatters,
             IBodyModelValidator bodyModelValidator
-        ) : base(descriptor)
+        )
+            : base(descriptor)
         {
             if (descriptor.IsOptional)
             {

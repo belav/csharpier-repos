@@ -25,7 +25,8 @@ namespace MS.Internal.Xml.XPath
         public PreSiblingQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
             : base(qyInput, name, prefix, typeTest) { }
 
-        private PreSiblingQuery(PreSiblingQuery other) : base(other) { }
+        private PreSiblingQuery(PreSiblingQuery other)
+            : base(other) { }
 
         private static bool NotVisited(XPathNavigator nav, List<XPathNavigator> parentStk)
         {

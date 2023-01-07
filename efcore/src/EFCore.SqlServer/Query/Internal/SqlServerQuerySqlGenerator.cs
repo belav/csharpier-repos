@@ -27,7 +27,8 @@ public class SqlServerQuerySqlGenerator : QuerySqlGenerator
     public SqlServerQuerySqlGenerator(
         QuerySqlGeneratorDependencies dependencies,
         IRelationalTypeMappingSource typeMappingSource
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _typeMappingSource = typeMappingSource;
     }

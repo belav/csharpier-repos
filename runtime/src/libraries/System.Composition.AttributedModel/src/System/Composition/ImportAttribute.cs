@@ -19,7 +19,8 @@ namespace System.Composition
         ///     Initializes a new instance of the <see cref="ImportAttribute"/> class, importing the
         ///     export without a contract name.
         /// </summary>
-        public ImportAttribute() : this(null) { }
+        public ImportAttribute()
+            : this(null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportAttribute"/> class, importing the

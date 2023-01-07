@@ -42,7 +42,8 @@ public struct S0
     public uint F6;
     public bool F7;
 
-    public S0(sbyte f0, C0 f1, C0 f2, bool f4, ulong f5, uint f6, bool f7) : this()
+    public S0(sbyte f0, C0 f1, C0 f2, bool f4, ulong f5, uint f6, bool f7)
+        : this()
     {
         F0 = f0;
         F2 = f2;
@@ -117,5 +118,6 @@ public class Runtime : IRuntime
 
 public class CollectibleALC : System.Runtime.Loader.AssemblyLoadContext
 {
-    public CollectibleALC() : base(true) { }
+    public CollectibleALC()
+        : base(true) { }
 }

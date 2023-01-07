@@ -173,7 +173,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             public MockDelegatingHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> callback
-            ) : base()
+            )
+                : base()
             {
                 _callback = callback;
             }
@@ -198,7 +199,8 @@ namespace System.Web.Http.Tracing.Tracers
 
             public MockHttpMessageHandler(
                 Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> callback
-            ) : base()
+            )
+                : base()
             {
                 _callback = callback;
             }

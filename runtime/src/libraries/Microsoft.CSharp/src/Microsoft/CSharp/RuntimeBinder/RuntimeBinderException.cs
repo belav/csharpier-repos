@@ -23,7 +23,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new instance of the <see cref="RuntimeBinderException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public RuntimeBinderException(string? message) : base(message) { }
+        public RuntimeBinderException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///  Initializes a new instance of the <see cref="RuntimeBinderException"/> class with a specified error message

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion
 
         private CompletionRules _latestRules = CompletionRules.Default;
 
-        private CSharpCompletionService(SolutionServices services) : base(services) { }
+        private CSharpCompletionService(SolutionServices services)
+            : base(services) { }
 
         public override string Language => LanguageNames.CSharp;
 

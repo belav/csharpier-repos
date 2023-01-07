@@ -11,7 +11,8 @@ public class NorthwindQueryFiltersQueryInMemoryTest
     public NorthwindQueryFiltersQueryInMemoryTest(
         NorthwindQueryInMemoryFixture<NorthwindQueryFiltersCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

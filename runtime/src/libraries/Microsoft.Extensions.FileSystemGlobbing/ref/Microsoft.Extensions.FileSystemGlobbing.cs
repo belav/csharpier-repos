@@ -544,7 +544,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     {
         public PatternContextLinearExclude(
             Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern pattern
-        ) : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern)) { }
+        )
+            : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern)) { }
 
         public override bool Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directory
@@ -559,7 +560,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     {
         public PatternContextLinearInclude(
             Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern pattern
-        ) : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern)) { }
+        )
+            : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.ILinearPattern)) { }
 
         public override void Declare(
             System.Action<
@@ -656,7 +658,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     {
         public PatternContextRaggedExclude(
             Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern pattern
-        ) : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern)) { }
+        )
+            : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern)) { }
 
         public override bool Test(
             Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase directory
@@ -671,7 +674,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     {
         public PatternContextRaggedInclude(
             Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern pattern
-        ) : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern)) { }
+        )
+            : base(default(Microsoft.Extensions.FileSystemGlobbing.Internal.IRaggedPattern)) { }
 
         public override void Declare(
             System.Action<

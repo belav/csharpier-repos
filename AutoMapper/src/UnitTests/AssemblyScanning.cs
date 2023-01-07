@@ -31,7 +31,8 @@
         {
             public const string Name = "InternalProfile";
 
-            public InternalProfile() : base(Name) { }
+            public InternalProfile()
+                : base(Name) { }
         }
 
         public class When_scanning_by_type : NonValidatingSpecBase

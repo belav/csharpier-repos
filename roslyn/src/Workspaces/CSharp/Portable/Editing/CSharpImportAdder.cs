@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
                 ImmutableArray<INamespaceSymbol> namespaceSymbols,
                 HashSet<INamespaceSymbol> conflictNamespaces,
                 CancellationToken cancellationToken
-            ) : base(SyntaxWalkerDepth.StructuredTrivia)
+            )
+                : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 _model = model;
                 _cancellationToken = cancellationToken;

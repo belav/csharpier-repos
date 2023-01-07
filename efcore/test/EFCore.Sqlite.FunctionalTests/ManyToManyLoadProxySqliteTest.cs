@@ -6,8 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class ManyToManyLoadProxySqliteTest
     : ManyToManyLoadSqliteTestBase<ManyToManyLoadProxySqliteTest.ManyToManyLoadProxySqliteFixture>
 {
-    public ManyToManyLoadProxySqliteTest(ManyToManyLoadProxySqliteFixture fixture) : base(fixture)
-    { }
+    public ManyToManyLoadProxySqliteTest(ManyToManyLoadProxySqliteFixture fixture)
+        : base(fixture) { }
 
     protected override bool ExpectLazyLoading => true;
 

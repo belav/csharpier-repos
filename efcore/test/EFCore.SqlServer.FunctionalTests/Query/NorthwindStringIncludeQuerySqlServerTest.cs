@@ -9,7 +9,8 @@ public class NorthwindStringIncludeQuerySqlServerTest
     // ReSharper disable once UnusedParameter.Local
     public NorthwindStringIncludeQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

@@ -25,7 +25,8 @@ public class BrowserTestBase : LoggedTest, IAsyncLifetime
         CreateConfiguration()
     );
 
-    public BrowserTestBase(ITestOutputHelper output = null) : base(output) { }
+    public BrowserTestBase(ITestOutputHelper output = null)
+        : base(output) { }
 
     protected override async Task InitializeCoreAsync(TestContext context)
     {

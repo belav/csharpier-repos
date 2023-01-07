@@ -25,7 +25,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             CSharpSyntaxNode syntax,
             bool isIterator
-        ) : base(containingType, syntax.GetReference(), ImmutableArray.Create(location), isIterator)
+        )
+            : base(
+                containingType,
+                syntax.GetReference(),
+                ImmutableArray.Create(location),
+                isIterator
+            )
         {
             Debug.Assert(
                 syntax.IsKind(SyntaxKind.ConstructorDeclaration)

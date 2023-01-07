@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             string name,
             DeclarationModifiers declarationModifiers
-        ) : base(containingType, syntaxReference, location, isIterator: false)
+        )
+            : base(containingType, syntaxReference, location, isIterator: false)
         {
             Debug.Assert((object)containingType != null);
             Debug.Assert((object)baseMethod != null);

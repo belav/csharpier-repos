@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class DesignTimeSqlServerTest
     : DesignTimeTestBase<DesignTimeSqlServerTest.DesignTimeSqlServerFixture>
 {
-    public DesignTimeSqlServerTest(DesignTimeSqlServerFixture fixture) : base(fixture) { }
+    public DesignTimeSqlServerTest(DesignTimeSqlServerFixture fixture)
+        : base(fixture) { }
 
     protected override Assembly ProviderAssembly => typeof(SqlServerDesignTimeServices).Assembly;
 

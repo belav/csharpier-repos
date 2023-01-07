@@ -1986,11 +1986,14 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : Atom10ItemFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(SyndicationItem itemToWrite) : base(itemToWrite) { }
+            public Formatter(SyndicationItem itemToWrite)
+                : base(itemToWrite) { }
 
-            public Formatter(Type itemTypeToCreate) : base(itemTypeToCreate) { }
+            public Formatter(Type itemTypeToCreate)
+                : base(itemTypeToCreate) { }
 
             public Type ItemTypeEntryPoint => ItemType;
 
@@ -1999,9 +2002,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class GenericFormatter<T> : Atom10ItemFormatter<T> where T : SyndicationItem, new()
         {
-            public GenericFormatter() : base() { }
+            public GenericFormatter()
+                : base() { }
 
-            public GenericFormatter(T itemToWrite) : base(itemToWrite) { }
+            public GenericFormatter(T itemToWrite)
+                : base(itemToWrite) { }
 
             public Type ItemTypeEntryPoint => ItemType;
 

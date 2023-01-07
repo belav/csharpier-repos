@@ -10,9 +10,11 @@ namespace System.Security.Cryptography.Pkcs
 {
     public sealed class AlgorithmIdentifier
     {
-        public AlgorithmIdentifier() : this(Oids.TripleDesCbcOid.CopyOid(), 0) { }
+        public AlgorithmIdentifier()
+            : this(Oids.TripleDesCbcOid.CopyOid(), 0) { }
 
-        public AlgorithmIdentifier(Oid oid) : this(oid, 0) { }
+        public AlgorithmIdentifier(Oid oid)
+            : this(oid, 0) { }
 
         public AlgorithmIdentifier(Oid oid, int keyLength)
         {

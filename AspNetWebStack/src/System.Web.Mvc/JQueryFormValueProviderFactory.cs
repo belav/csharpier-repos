@@ -13,7 +13,8 @@ namespace System.Web.Mvc
         /// <summary>
         /// Constructs a new instance of the factory which provides JQuery form ValueProviders.
         /// </summary>
-        public JQueryFormValueProviderFactory() : this(unvalidatedValuesAccessor: null) { }
+        public JQueryFormValueProviderFactory()
+            : this(unvalidatedValuesAccessor: null) { }
 
         // For unit testing
         internal JQueryFormValueProviderFactory(

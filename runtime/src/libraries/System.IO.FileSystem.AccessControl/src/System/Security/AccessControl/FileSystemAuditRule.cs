@@ -11,7 +11,8 @@ namespace System.Security.AccessControl
             IdentityReference identity,
             FileSystemRights fileSystemRights,
             AuditFlags flags
-        ) : this(identity, fileSystemRights, InheritanceFlags.None, PropagationFlags.None, flags)
+        )
+            : this(identity, fileSystemRights, InheritanceFlags.None, PropagationFlags.None, flags)
         { }
 
         public FileSystemAuditRule(
@@ -66,7 +67,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         private static int AccessMaskFromRights(FileSystemRights fileSystemRights)
         {

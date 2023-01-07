@@ -11,12 +11,14 @@ namespace System
     )]
     public class TypeUnloadedException : SystemException
     {
-        public TypeUnloadedException() : base(SR.Arg_TypeUnloadedException)
+        public TypeUnloadedException()
+            : base(SR.Arg_TypeUnloadedException)
         {
             HResult = HResults.COR_E_TYPEUNLOADED;
         }
 
-        public TypeUnloadedException(string? message) : base(message)
+        public TypeUnloadedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_TYPEUNLOADED;
         }

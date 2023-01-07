@@ -72,7 +72,8 @@ namespace Internal.TypeSystem
             get { return _Name; }
         }
 
-        public CanonType(TypeSystemContext context) : base(context)
+        public CanonType(TypeSystemContext context)
+            : base(context)
         {
             Initialize();
         }
@@ -149,7 +150,8 @@ namespace Internal.TypeSystem
             get { return _Name; }
         }
 
-        public UniversalCanonType(TypeSystemContext context) : base(context)
+        public UniversalCanonType(TypeSystemContext context)
+            : base(context)
         {
             Initialize();
         }

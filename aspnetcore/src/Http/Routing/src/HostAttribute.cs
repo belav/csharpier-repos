@@ -24,7 +24,8 @@ public sealed class HostAttribute : Attribute, IHostMetadata
     /// The host used during routing.
     /// Host should be Unicode rather than punycode, and may have a port.
     /// </param>
-    public HostAttribute(string host) : this(new[] { host })
+    public HostAttribute(string host)
+        : this(new[] { host })
     {
         if (host == null)
         {

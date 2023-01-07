@@ -652,7 +652,8 @@ namespace System.Net.Sockets.Tests
             public class NlSocketAddress : SocketAddress
             {
                 // We need to create base from something known.
-                public unsafe NlSocketAddress(int pid) : base(AddressFamily.Packet)
+                public unsafe NlSocketAddress(int pid)
+                    : base(AddressFamily.Packet)
                 {
                     sockaddr_nl addr = default;
 

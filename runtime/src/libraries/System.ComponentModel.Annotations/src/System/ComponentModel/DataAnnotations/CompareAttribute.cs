@@ -14,7 +14,8 @@ namespace System.ComponentModel.DataAnnotations
         [RequiresUnreferencedCode(
             "The property referenced by 'otherProperty' may be trimmed. Ensure it is preserved."
         )]
-        public CompareAttribute(string otherProperty) : base(SR.CompareAttribute_MustMatch)
+        public CompareAttribute(string otherProperty)
+            : base(SR.CompareAttribute_MustMatch)
         {
             ArgumentNullException.ThrowIfNull(otherProperty);
 

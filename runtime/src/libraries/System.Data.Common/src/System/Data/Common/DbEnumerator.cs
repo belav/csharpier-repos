@@ -37,7 +37,8 @@ namespace System.Data.Common
             _closeReader = closeReader;
         }
 
-        public DbEnumerator(DbDataReader reader) : this((IDataReader)reader) { }
+        public DbEnumerator(DbDataReader reader)
+            : this((IDataReader)reader) { }
 
         public DbEnumerator(DbDataReader reader, bool closeReader)
             : this((IDataReader)reader, closeReader) { }
@@ -116,7 +117,8 @@ namespace System.Data.Common
             private readonly int _ordinal;
             private readonly Type _type;
 
-            internal DbColumnDescriptor(int ordinal, string name, Type type) : base(name, null)
+            internal DbColumnDescriptor(int ordinal, string name, Type type)
+                : base(name, null)
             {
                 _ordinal = ordinal;
                 _type = type;

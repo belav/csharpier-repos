@@ -728,7 +728,8 @@ namespace System.Diagnostics.Tracing
         /// If the ETW provider name of the EventSource is not given, the name of the EventSource class is used as
         /// the ETW provider name.
         /// </summary>
-        protected EventSource() : this(EventSourceSettings.EtwManifestEventFormat) { }
+        protected EventSource()
+            : this(EventSourceSettings.EtwManifestEventFormat) { }
 
         /// <summary>
         /// By default calling the 'WriteEvent' methods do NOT throw on errors (they silently discard the event).
@@ -750,7 +751,8 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Construct an EventSource with additional non-default settings (see EventSourceSettings for more)
         /// </summary>
-        protected EventSource(EventSourceSettings settings) : this(settings, null) { }
+        protected EventSource(EventSourceSettings settings)
+            : this(settings, null) { }
 
         /// <summary>
         /// Construct an EventSource with additional non-default settings.
@@ -5662,7 +5664,8 @@ namespace System.Diagnostics.Tracing
             int eventId,
             Guid* pActivityID,
             Guid* pChildActivityID
-        ) : this(eventSource, eventId)
+        )
+            : this(eventSource, eventId)
         {
             if (pActivityID != null)
             {

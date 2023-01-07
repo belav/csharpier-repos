@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 DiagnosticInfo[]? diagnostics,
                 SyntaxAnnotation[]? annotations,
                 ArrayElement<GreenNode>[] children
-            ) : base(diagnostics, annotations)
+            )
+                : base(diagnostics, annotations)
             {
                 this.children = children;
                 this.InitializeChildren();
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 }
             }
 
-            internal WithManyChildrenBase(ObjectReader reader) : base(reader)
+            internal WithManyChildrenBase(ObjectReader reader)
+                : base(reader)
             {
                 var length = reader.ReadInt32();
 
@@ -138,15 +140,18 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
                 );
             }
 
-            internal WithManyChildren(ArrayElement<GreenNode>[] children) : base(children) { }
+            internal WithManyChildren(ArrayElement<GreenNode>[] children)
+                : base(children) { }
 
             internal WithManyChildren(
                 DiagnosticInfo[]? diagnostics,
                 SyntaxAnnotation[]? annotations,
                 ArrayElement<GreenNode>[] children
-            ) : base(diagnostics, annotations, children) { }
+            )
+                : base(diagnostics, annotations, children) { }
 
-            internal WithManyChildren(ObjectReader reader) : base(reader) { }
+            internal WithManyChildren(ObjectReader reader)
+                : base(reader) { }
 
             internal override GreenNode SetDiagnostics(DiagnosticInfo[]? errors)
             {

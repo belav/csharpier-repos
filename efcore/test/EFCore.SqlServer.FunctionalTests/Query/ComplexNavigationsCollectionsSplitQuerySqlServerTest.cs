@@ -9,7 +9,8 @@ public class ComplexNavigationsCollectionsSplitQuerySqlServerTest
     public ComplexNavigationsCollectionsSplitQuerySqlServerTest(
         ComplexNavigationsQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

@@ -123,7 +123,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             VisualStudioProject project,
             IComponentModel componentModel,
             AbstractFormattingRule vbHelperFormattingRule
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _componentModel = componentModel;
             _workspace = workspace;

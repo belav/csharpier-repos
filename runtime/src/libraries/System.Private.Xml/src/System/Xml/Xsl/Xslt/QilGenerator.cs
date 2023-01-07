@@ -27,7 +27,8 @@ namespace System.Xml.Xsl.Xslt
         private QilReference? _lookFor,
             _replaceBy;
 
-        public ReferenceReplacer(QilFactory f) : base(f) { }
+        public ReferenceReplacer(QilFactory f)
+            : base(f) { }
 
         public QilNode Replace(QilNode expr, QilReference lookFor, QilReference replaceBy)
         {

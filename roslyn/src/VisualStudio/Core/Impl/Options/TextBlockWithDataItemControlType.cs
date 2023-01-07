@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         private class TextBlockWithDataItemControlTypeAutomationPeer : TextBlockAutomationPeer
         {
-            public TextBlockWithDataItemControlTypeAutomationPeer(TextBlock owner) : base(owner) { }
+            public TextBlockWithDataItemControlTypeAutomationPeer(TextBlock owner)
+                : base(owner) { }
 
             protected override AutomationControlType GetAutomationControlTypeCore() =>
                 AutomationControlType.DataItem;

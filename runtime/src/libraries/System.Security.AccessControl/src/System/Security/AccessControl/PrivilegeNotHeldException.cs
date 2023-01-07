@@ -15,7 +15,8 @@ namespace System.Security.AccessControl
     {
         private readonly string? _privilegeName;
 
-        public PrivilegeNotHeldException() : base(SR.PrivilegeNotHeld_Default) { }
+        public PrivilegeNotHeldException()
+            : base(SR.PrivilegeNotHeld_Default) { }
 
         public PrivilegeNotHeldException(string? privilege)
             : base(SR.Format(SR.PrivilegeNotHeld_Named, privilege))

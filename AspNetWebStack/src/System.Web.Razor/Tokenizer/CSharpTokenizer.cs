@@ -15,7 +15,8 @@ namespace System.Web.Razor.Tokenizer
     {
         private Dictionary<char, Func<CSharpSymbolType>> _operatorHandlers;
 
-        public CSharpTokenizer(ITextDocument source) : base(source)
+        public CSharpTokenizer(ITextDocument source)
+            : base(source)
         {
             CurrentState = Data;
 

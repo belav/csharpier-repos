@@ -1857,7 +1857,8 @@ namespace System.Diagnostics
 
                     private sealed class RefTypedFetchProperty<TObject, TProperty> : PropertyFetch
                     {
-                        public RefTypedFetchProperty(Type type, PropertyInfo property) : base(type)
+                        public RefTypedFetchProperty(Type type, PropertyInfo property)
+                            : base(type)
                         {
                             Debug.Assert(
                                 typeof(TObject).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo())
@@ -1929,7 +1930,8 @@ namespace System.Diagnostics
                     /// </summary>
                     private sealed class EnumeratePropertyFetch : PropertyFetch
                     {
-                        public EnumeratePropertyFetch(Type type) : base(type) { }
+                        public EnumeratePropertyFetch(Type type)
+                            : base(type) { }
 
                         public override object? Fetch(object? obj)
                         {
@@ -1981,7 +1983,8 @@ namespace System.Diagnostics
                     /// </summary>
                     private sealed class CurrentActivityPropertyFetch : PropertyFetch
                     {
-                        public CurrentActivityPropertyFetch() : base(null) { }
+                        public CurrentActivityPropertyFetch()
+                            : base(null) { }
 
                         public override object? Fetch(object? obj)
                         {
@@ -1994,7 +1997,8 @@ namespace System.Diagnostics
                     /// </summary>
                     private sealed class EnumeratePropertyFetch<ElementType> : PropertyFetch
                     {
-                        public EnumeratePropertyFetch(Type type) : base(type) { }
+                        public EnumeratePropertyFetch(Type type)
+                            : base(type) { }
 
                         public override object? Fetch(object? obj)
                         {

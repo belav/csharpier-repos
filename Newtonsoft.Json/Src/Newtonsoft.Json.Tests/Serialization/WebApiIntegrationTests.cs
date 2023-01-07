@@ -119,7 +119,8 @@ namespace Newtonsoft.Json.Tests.Serialization
     {
         public string inheritedTypeField;
 
-        public InheritedType(string protectedFieldValue) : base(protectedFieldValue) { }
+        public InheritedType(string protectedFieldValue)
+            : base(protectedFieldValue) { }
     }
 
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER

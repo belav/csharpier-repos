@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
             RegexOptions options,
             ImmutableDictionary<string, TextSpan> captureNamesToSpan,
             ImmutableDictionary<int, TextSpan> captureNumbersToSpan
-        ) : this()
+        )
+            : this()
         {
             _lexer = new RegexLexer(text);
             _options = options;

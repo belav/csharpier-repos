@@ -17,7 +17,8 @@ internal abstract class Http1MessageBody : MessageBody
     protected readonly Http1Connection _context;
     private bool _readerCompleted;
 
-    protected Http1MessageBody(Http1Connection context, bool keepAlive) : base(context)
+    protected Http1MessageBody(Http1Connection context, bool keepAlive)
+        : base(context)
     {
         _context = context;
         RequestKeepAlive = keepAlive;

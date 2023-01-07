@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             ProjectId projectId,
             INamespaceSymbol namespaceSymbol
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             _projectId = projectId;
             _namespaceSymbolId = namespaceSymbol.GetSymbolKey();

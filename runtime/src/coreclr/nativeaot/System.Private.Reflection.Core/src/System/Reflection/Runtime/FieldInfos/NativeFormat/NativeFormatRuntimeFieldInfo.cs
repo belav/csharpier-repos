@@ -56,7 +56,8 @@ namespace System.Reflection.Runtime.FieldInfos.NativeFormat
             NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
             RuntimeTypeInfo contextTypeInfo,
             RuntimeTypeInfo reflectedType
-        ) : base(contextTypeInfo, reflectedType)
+        )
+            : base(contextTypeInfo, reflectedType)
         {
             _fieldHandle = fieldHandle;
             _definingTypeInfo = definingTypeInfo;

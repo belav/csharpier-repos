@@ -55,7 +55,8 @@ namespace Roslyn.Collections.Immutable
             Bucket? root,
             IEqualityComparer<TKey> comparer,
             IEqualityComparer<TValue> valueComparer
-        ) : this(comparer, valueComparer)
+        )
+            : this(comparer, valueComparer)
         {
             RoslynDebug.AssertNotNull(comparer);
             RoslynDebug.AssertNotNull(valueComparer);
@@ -654,7 +655,8 @@ namespace Roslyn.Collections.Immutable
             /// <param name="key">The key.</param>
             /// <param name="value">The value.</param>
             /// <param name="hashcode">The hashcode.</param>
-            internal ValueBucket(TKey key, TValue value, int hashcode) : base(hashcode)
+            internal ValueBucket(TKey key, TValue value, int hashcode)
+                : base(hashcode)
             {
                 this.Key = key;
                 this.Value = value;
@@ -735,7 +737,8 @@ namespace Roslyn.Collections.Immutable
             /// Initializes a new instance of the <see cref="ImmutableHashMap&lt;TKey, TValue&gt;.ListBucket"/> class.
             /// </summary>
             /// <param name="buckets">The buckets.</param>
-            internal ListBucket(ValueBucket[] buckets) : base(buckets[0].Hash)
+            internal ListBucket(ValueBucket[] buckets)
+                : base(buckets[0].Hash)
             {
                 RoslynDebug.AssertNotNull(buckets);
                 Debug.Assert(buckets.Length >= 2);

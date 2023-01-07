@@ -142,8 +142,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Compilation compilation,
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             CompilationWithAnalyzersOptions analysisOptions
-        ) : this(compilation, analyzers, analysisOptions, cancellationToken: CancellationToken.None)
-        { }
+        )
+            : this(
+                compilation,
+                analyzers,
+                analysisOptions,
+                cancellationToken: CancellationToken.None
+            ) { }
 
         private CompilationWithAnalyzers(
             Compilation compilation,

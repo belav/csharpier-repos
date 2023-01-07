@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             int errorCode,
             ObsoleteAttributeData data,
             params object[] arguments
-        ) : base(messageProvider, errorCode, arguments)
+        )
+            : base(messageProvider, errorCode, arguments)
         {
             Data = data;
         }
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         private CustomObsoleteDiagnosticInfo(
             CustomObsoleteDiagnosticInfo baseInfo,
             DiagnosticSeverity effectiveSeverity
-        ) : base(baseInfo, effectiveSeverity)
+        )
+            : base(baseInfo, effectiveSeverity)
         {
             Data = baseInfo.Data;
         }

@@ -16,7 +16,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType parentType,
             Expr optionalObject,
             CMemberLookupResults memberLookupResults
-        ) : base(ExpressionKind.MemberGroup, MethodGroupType.Instance)
+        )
+            : base(ExpressionKind.MemberGroup, MethodGroupType.Instance)
         {
             Debug.Assert(
                 (

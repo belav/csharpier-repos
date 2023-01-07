@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeCleanup
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeCleanupService(ICodeFixService codeFixService) : base(codeFixService) { }
+        public CSharpCodeCleanupService(ICodeFixService codeFixService)
+            : base(codeFixService) { }
 
         protected override string OrganizeImportsDescription =>
             CSharpFeaturesResources.Organize_Usings;

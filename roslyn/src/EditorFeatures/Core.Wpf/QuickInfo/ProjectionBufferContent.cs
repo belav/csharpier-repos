@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             ITextEditorFactoryService textEditorFactoryService,
             IContentType contentType = null,
             ITextViewRoleSet roleSet = null
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _spans = spans;
             _projectionBufferFactoryService = projectionBufferFactoryService;

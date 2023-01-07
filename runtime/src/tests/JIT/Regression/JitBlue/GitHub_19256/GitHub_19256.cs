@@ -11,7 +11,8 @@ struct S2
     public ulong F1,
         F2;
 
-    public S2(uint f0) : this()
+    public S2(uint f0)
+        : this()
     {
         F0 = f0;
     }

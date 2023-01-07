@@ -17,7 +17,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCXmlResolver(ITestOutputHelper output) : base(output)
+        public TCXmlResolver(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -273,7 +274,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCLineInfoProvider(ITestOutputHelper output) : base(output)
+        public TCLineInfoProvider(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -411,7 +413,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCSourceUri(ITestOutputHelper output) : base(output)
+        public TCSourceUri(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -503,7 +506,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
     {
         private ITestOutputHelper _output;
 
-        public TCValidationEventHandling(ITestOutputHelper output) : base(output)
+        public TCValidationEventHandling(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

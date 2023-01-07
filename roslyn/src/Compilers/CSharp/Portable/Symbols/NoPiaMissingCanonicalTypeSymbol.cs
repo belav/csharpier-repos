@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string scope,
             string identifier,
             TupleExtraData? tupleData = null
-        ) : base(tupleData)
+        )
+            : base(tupleData)
         {
             _embeddingAssembly = embeddingAssembly;
             _fullTypeName = fullTypeName;

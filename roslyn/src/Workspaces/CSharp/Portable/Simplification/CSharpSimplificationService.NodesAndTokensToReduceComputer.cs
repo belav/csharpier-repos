@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             private NodesAndTokensToReduceComputer(
                 Func<SyntaxNodeOrToken, bool> isNodeOrTokenOutsideSimplifySpans
-            ) : base(visitIntoStructuredTrivia: true)
+            )
+                : base(visitIntoStructuredTrivia: true)
             {
                 _isNodeOrTokenOutsideSimplifySpans = isNodeOrTokenOutsideSimplifySpans;
                 _simplifyAllDescendants = false;

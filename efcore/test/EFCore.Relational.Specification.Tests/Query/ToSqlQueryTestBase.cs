@@ -43,7 +43,8 @@ public abstract class ToSqlQueryTestBase : NonSharedModelTestBase
 
     protected class Context27629 : DbContext
     {
-        public Context27629(DbContextOptions options) : base(options) { }
+        public Context27629(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Author> Authors => Set<Author>();
 

@@ -179,7 +179,8 @@ namespace System.Xml
             string xmlFragment,
             XmlNodeType fragType,
             XmlParserContext? context
-        ) : this(new XmlTextReader(xmlFragment, fragType, context))
+        )
+            : this(new XmlTextReader(xmlFragment, fragType, context))
         {
             if (_coreReader.BaseURI!.Length > 0)
             {
@@ -200,7 +201,8 @@ namespace System.Xml
             Stream xmlFragment,
             XmlNodeType fragType,
             XmlParserContext? context
-        ) : this(new XmlTextReader(xmlFragment, fragType, context))
+        )
+            : this(new XmlTextReader(xmlFragment, fragType, context))
         {
             if (_coreReader.BaseURI!.Length > 0)
             {

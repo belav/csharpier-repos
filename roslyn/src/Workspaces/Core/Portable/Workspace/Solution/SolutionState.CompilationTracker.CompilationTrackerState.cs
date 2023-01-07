@@ -260,7 +260,8 @@ namespace Microsoft.CodeAnalysis
                 public AllSyntaxTreesParsedState(
                     Compilation declarationCompilation,
                     CompilationTrackerGeneratorInfo generatorInfo
-                ) : base(declarationCompilation, generatorInfo) { }
+                )
+                    : base(declarationCompilation, generatorInfo) { }
             }
 
             /// <summary>

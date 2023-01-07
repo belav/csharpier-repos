@@ -1251,7 +1251,8 @@ public class DefaultAuthorizationServiceTests
 
     public class BadContext : AuthorizationHandlerContext
     {
-        public BadContext() : base(new List<IAuthorizationRequirement>(), null, null) { }
+        public BadContext()
+            : base(new List<IAuthorizationRequirement>(), null, null) { }
 
         public override bool HasFailed
         {

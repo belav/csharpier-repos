@@ -36,7 +36,8 @@ internal sealed class Sequence<T> : IBufferWriter<T>, IDisposable
     /// Initializes a new instance of the <see cref="Sequence{T}"/> class
     /// that uses a private <see cref="ArrayPool{T}"/> for recycling arrays.
     /// </summary>
-    public Sequence() : this(ArrayPool<T>.Create()) { }
+    public Sequence()
+        : this(ArrayPool<T>.Create()) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Sequence{T}"/> class.

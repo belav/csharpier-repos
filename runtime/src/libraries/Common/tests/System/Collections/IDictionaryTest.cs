@@ -12,7 +12,8 @@ namespace Tests.Collections
     public abstract class IDictionaryTest<TKey, TValue>
         : ICollectionTest<KeyValuePair<TKey, TValue>>
     {
-        protected IDictionaryTest(bool isSynchronized) : base(isSynchronized) { }
+        protected IDictionaryTest(bool isSynchronized)
+            : base(isSynchronized) { }
 
         protected IDictionary<TKey, TValue> GetDictionary(object[] items)
         {

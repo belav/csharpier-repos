@@ -25,7 +25,8 @@ internal sealed class EnlistmentNotifyShim : NotificationShimBase, ITransactionR
     internal EnlistmentNotifyShim(
         DtcProxyShimFactory shimFactory,
         OletxEnlistment enlistmentIdentifier
-    ) : base(shimFactory, enlistmentIdentifier)
+    )
+        : base(shimFactory, enlistmentIdentifier)
     {
         _ignoreSpuriousProxyNotifications = false;
     }

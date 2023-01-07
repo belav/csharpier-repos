@@ -534,7 +534,8 @@ namespace System.Threading.RateLimiting
                 int tokenCount,
                 TokenBucketRateLimiter limiter,
                 CancellationToken cancellationToken
-            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            )
+                : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _tokenCount = tokenCount;
                 _limiter = limiter;

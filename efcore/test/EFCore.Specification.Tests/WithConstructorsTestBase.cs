@@ -795,7 +795,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             MonthlyRevenue = monthlyRevenue;
         }
 
-        public Blog(string title, int? monthlyRevenue = null) : this(0, title, monthlyRevenue) { }
+        public Blog(string title, int? monthlyRevenue = null)
+            : this(0, title, monthlyRevenue) { }
 
         public string Title { get; }
         public int? MonthlyRevenue { get; set; }
@@ -828,7 +829,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             Content = content;
         }
 
-        public Post(string title, string content, Blog blog = null) : this(0, title, content)
+        public Post(string title, string content, Blog blog = null)
+            : this(0, title, content)
         {
             Blog = blog;
         }
@@ -1549,7 +1551,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     public class WithConstructorsContext : PoolableDbContext
     {
-        public WithConstructorsContext(DbContextOptions options) : base(options) { }
+        public WithConstructorsContext(DbContextOptions options)
+            : base(options) { }
     }
 
     public abstract class WithConstructorsFixtureBase

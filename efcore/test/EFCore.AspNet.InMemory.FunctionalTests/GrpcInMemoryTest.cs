@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class GrpcInMemoryTest : GrpcTestBase<GrpcInMemoryTest.GrpcInMemoryFixture>
 {
-    public GrpcInMemoryTest(GrpcInMemoryFixture fixture) : base(fixture) { }
+    public GrpcInMemoryTest(GrpcInMemoryFixture fixture)
+        : base(fixture) { }
 
     public class GrpcInMemoryFixture : GrpcFixtureBase
     {

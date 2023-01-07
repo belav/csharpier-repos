@@ -19,7 +19,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         private ITestOutputHelper _output;
 
-        public TempFiles(ITestOutputHelper output) : base(output)
+        public TempFiles(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }

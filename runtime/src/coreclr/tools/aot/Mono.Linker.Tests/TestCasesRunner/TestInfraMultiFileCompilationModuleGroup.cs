@@ -17,7 +17,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         public TestInfraMultiFileSharedCompilationModuleGroup(
             CompilerTypeSystemContext context,
             IEnumerable<ModuleDesc> compilationModuleSet
-        ) : base(context, compilationModuleSet) { }
+        )
+            : base(context, compilationModuleSet) { }
 
         public override bool ShouldProduceFullVTable(TypeDesc type)
         {

@@ -91,7 +91,8 @@ namespace System.Linq.Expressions
     {
         private readonly FieldInfo _field;
 
-        public FieldExpression(Expression? expression, FieldInfo member) : base(expression)
+        public FieldExpression(Expression? expression, FieldInfo member)
+            : base(expression)
         {
             _field = member;
         }
@@ -105,7 +106,8 @@ namespace System.Linq.Expressions
     {
         private readonly PropertyInfo _property;
 
-        public PropertyExpression(Expression? expression, PropertyInfo member) : base(expression)
+        public PropertyExpression(Expression? expression, PropertyInfo member)
+            : base(expression)
         {
             _property = member;
         }

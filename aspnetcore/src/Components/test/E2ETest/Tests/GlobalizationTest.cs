@@ -19,7 +19,8 @@ public abstract class GlobalizationTest<TServerFixture> : ServerTestBase<TServer
         BrowserFixture browserFixture,
         TServerFixture serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output) { }
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected abstract void SetCulture(string culture);
 

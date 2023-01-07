@@ -22,7 +22,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.FindReferences)]
     public class CSharpFindReferences : AbstractEditorTest
     {
-        public CSharpFindReferences() : base(nameof(CSharpFindReferences)) { }
+        public CSharpFindReferences()
+            : base(nameof(CSharpFindReferences)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

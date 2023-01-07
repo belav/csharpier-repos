@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Text
             ImmutableArray<byte> checksum,
             SourceHashAlgorithm checksumAlgorithm,
             ImmutableArray<byte> embeddedTextBlob
-        ) : base(checksum, checksumAlgorithm, embeddedTextBlob)
+        )
+            : base(checksum, checksumAlgorithm, embeddedTextBlob)
         {
             _chunks = chunks;
             _encodingOpt = encodingOpt;

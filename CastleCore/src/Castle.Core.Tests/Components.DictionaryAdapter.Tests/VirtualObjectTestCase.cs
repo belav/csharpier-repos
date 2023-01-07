@@ -170,9 +170,11 @@ namespace Castle.Components.DictionaryAdapter.Tests
                 return new MockVirtual(site) { PendingNode = node };
             }
 
-            private MockVirtual() : base() { }
+            private MockVirtual()
+                : base() { }
 
-            private MockVirtual(IVirtualSite<Node> site) : base(site) { }
+            private MockVirtual(IVirtualSite<Node> site)
+                : base(site) { }
 
             private Node PendingNode;
             private Node RealNode;

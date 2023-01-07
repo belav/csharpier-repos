@@ -81,7 +81,8 @@ namespace System.ComponentModel.Composition
             string? message,
             Exception? innerException,
             IEnumerable<CompositionError>? errors
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             Requires.NullOrNotNullElements(errors, nameof(errors));
             _errors = Array.AsReadOnly(

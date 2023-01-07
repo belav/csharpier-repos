@@ -22,7 +22,8 @@ public class SqlFunctionExpression : SqlExpression
         IEnumerable<SqlExpression> arguments,
         Type type,
         CoreTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         Name = name;
         Arguments = arguments.ToList();

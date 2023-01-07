@@ -18,7 +18,8 @@ public class SqlFragmentExpression : SqlExpression
     ///     Creates a new instance of the <see cref="SqlFragmentExpression" /> class.
     /// </summary>
     /// <param name="sql">A string token to print in SQL tree.</param>
-    public SqlFragmentExpression(string sql) : base(typeof(string), null)
+    public SqlFragmentExpression(string sql)
+        : base(typeof(string), null)
     {
         Sql = sql;
     }

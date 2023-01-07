@@ -49,7 +49,8 @@ namespace System.Text.Json.Serialization.Converters
         public EnumConverter(
             EnumConverterOptions converterOptions,
             JsonSerializerOptions serializerOptions
-        ) : this(converterOptions, namingPolicy: null, serializerOptions) { }
+        )
+            : this(converterOptions, namingPolicy: null, serializerOptions) { }
 
         public EnumConverter(
             EnumConverterOptions converterOptions,

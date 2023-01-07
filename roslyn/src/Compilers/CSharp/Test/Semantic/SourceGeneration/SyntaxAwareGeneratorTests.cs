@@ -3254,7 +3254,8 @@ class C
             public TestSyntaxContextReceiver(
                 int tag = 0,
                 Action<GeneratorSyntaxContext>? callback = null
-            ) : base(tag, callback) { }
+            )
+                : base(tag, callback) { }
         }
     }
 }

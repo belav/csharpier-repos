@@ -13,7 +13,8 @@ namespace System
     {
         private readonly double _offendingNumber;
 
-        public NotFiniteNumberException() : base(SR.Arg_NotFiniteNumberException)
+        public NotFiniteNumberException()
+            : base(SR.Arg_NotFiniteNumberException)
         {
             _offendingNumber = 0;
             HResult = HResults.COR_E_NOTFINITENUMBER;
@@ -25,13 +26,15 @@ namespace System
             HResult = HResults.COR_E_NOTFINITENUMBER;
         }
 
-        public NotFiniteNumberException(string? message) : base(message)
+        public NotFiniteNumberException(string? message)
+            : base(message)
         {
             _offendingNumber = 0;
             HResult = HResults.COR_E_NOTFINITENUMBER;
         }
 
-        public NotFiniteNumberException(string? message, double offendingNumber) : base(message)
+        public NotFiniteNumberException(string? message, double offendingNumber)
+            : base(message)
         {
             _offendingNumber = offendingNumber;
             HResult = HResults.COR_E_NOTFINITENUMBER;
@@ -47,7 +50,8 @@ namespace System
             string? message,
             double offendingNumber,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _offendingNumber = offendingNumber;
             HResult = HResults.COR_E_NOTFINITENUMBER;

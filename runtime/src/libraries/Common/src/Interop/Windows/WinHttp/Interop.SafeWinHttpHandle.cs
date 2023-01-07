@@ -17,7 +17,8 @@ internal static partial class Interop
         {
             private SafeWinHttpHandle? _parentHandle;
 
-            public SafeWinHttpHandle() : base(true) { }
+            public SafeWinHttpHandle()
+                : base(true) { }
 
             public static void DisposeAndClearHandle(ref SafeWinHttpHandle? safeHandle)
             {

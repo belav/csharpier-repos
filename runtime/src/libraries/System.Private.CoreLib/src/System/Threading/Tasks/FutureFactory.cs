@@ -191,7 +191,8 @@ namespace System.Threading.Tasks
             TaskCreationOptions creationOptions,
             TaskContinuationOptions continuationOptions,
             TaskScheduler? scheduler
-        ) : this(creationOptions, continuationOptions)
+        )
+            : this(creationOptions, continuationOptions)
         {
             m_defaultCancellationToken = cancellationToken;
             m_defaultScheduler = scheduler;

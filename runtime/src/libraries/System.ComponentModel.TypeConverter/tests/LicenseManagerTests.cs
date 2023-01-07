@@ -34,7 +34,8 @@ namespace System.ComponentModel.Tests
             LicenseManager.Validate(typeof(RuntimeLicensedObject));
         }
 
-        public RuntimeLicensedObject(int a) : this() { }
+        public RuntimeLicensedObject(int a)
+            : this() { }
     }
 
     [LicenseProvider(typeof(TestLicenseProvider))]
@@ -55,7 +56,8 @@ namespace System.ComponentModel.Tests
             public override string LicenseKey => "YourLicenseKey";
         }
 
-        public TestLicenseProvider() : base() { }
+        public TestLicenseProvider()
+            : base() { }
 
         public override License GetLicense(
             LicenseContext context,

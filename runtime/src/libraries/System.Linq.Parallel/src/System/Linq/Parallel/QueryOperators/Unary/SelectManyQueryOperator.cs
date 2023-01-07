@@ -59,7 +59,8 @@ namespace System.Linq.Parallel
             Func<TLeftInput, IEnumerable<TRightInput>>? rightChildSelector,
             Func<TLeftInput, int, IEnumerable<TRightInput>>? indexedRightChildSelector,
             Func<TLeftInput, TRightInput, TOutput>? resultSelector
-        ) : base(leftChild)
+        )
+            : base(leftChild)
         {
             Debug.Assert(leftChild != null, "left child data source cannot be null");
             Debug.Assert(

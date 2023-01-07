@@ -23,7 +23,8 @@ public class ExternalLoginInfo : UserLoginInfo
         string loginProvider,
         string providerKey,
         string displayName
-    ) : base(loginProvider, providerKey, displayName)
+    )
+        : base(loginProvider, providerKey, displayName)
     {
         Principal = principal;
     }

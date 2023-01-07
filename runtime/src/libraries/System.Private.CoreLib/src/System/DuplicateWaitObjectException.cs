@@ -24,7 +24,8 @@ namespace System
     {
         // Creates a new DuplicateWaitObjectException with its message
         // string set to a default message.
-        public DuplicateWaitObjectException() : base(SR.Arg_DuplicateWaitObjectException)
+        public DuplicateWaitObjectException()
+            : base(SR.Arg_DuplicateWaitObjectException)
         {
             HResult = HResults.COR_E_DUPLICATEWAITOBJECT;
         }

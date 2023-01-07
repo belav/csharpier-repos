@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             IWpfTextView wpfTextView,
             IComponentModel componentModel,
             IFeatureServiceFactory featureServiceFactory
-        ) : base(wpfTextView, componentModel)
+        )
+            : base(wpfTextView, componentModel)
         {
             _featureServiceFactory = featureServiceFactory;
         }

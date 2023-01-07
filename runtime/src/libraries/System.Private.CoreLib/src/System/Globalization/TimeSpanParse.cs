@@ -89,9 +89,11 @@ namespace System.Globalization
             internal int _zeroes; // Store the number of leading zeroes (if any)
             internal ReadOnlySpan<char> _sep; // Store the literal that we are parsing (if any)
 
-            public TimeSpanToken(TTT type) : this(type, 0, 0, default) { }
+            public TimeSpanToken(TTT type)
+                : this(type, 0, 0, default) { }
 
-            public TimeSpanToken(int number) : this(TTT.Num, number, 0, default) { }
+            public TimeSpanToken(int number)
+                : this(TTT.Num, number, 0, default) { }
 
             public TimeSpanToken(int number, int leadingZeroes)
                 : this(TTT.Num, number, leadingZeroes, default) { }
@@ -165,7 +167,8 @@ namespace System.Globalization
             private readonly ReadOnlySpan<char> _value;
             private int _pos;
 
-            internal TimeSpanTokenizer(ReadOnlySpan<char> input) : this(input, 0) { }
+            internal TimeSpanTokenizer(ReadOnlySpan<char> input)
+                : this(input, 0) { }
 
             internal TimeSpanTokenizer(ReadOnlySpan<char> input, int startPosition)
             {

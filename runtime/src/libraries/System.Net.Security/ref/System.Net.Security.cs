@@ -920,14 +920,16 @@ namespace System.Net.Security
             System.IO.Stream innerStream,
             bool leaveInnerStreamOpen,
             System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback
-        ) : base(default(System.IO.Stream), default(bool)) { }
+        )
+            : base(default(System.IO.Stream), default(bool)) { }
 
         public SslStream(
             System.IO.Stream innerStream,
             bool leaveInnerStreamOpen,
             System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback,
             System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback
-        ) : base(default(System.IO.Stream), default(bool)) { }
+        )
+            : base(default(System.IO.Stream), default(bool)) { }
 
         public SslStream(
             System.IO.Stream innerStream,
@@ -935,7 +937,8 @@ namespace System.Net.Security
             System.Net.Security.RemoteCertificateValidationCallback? userCertificateValidationCallback,
             System.Net.Security.LocalCertificateSelectionCallback? userCertificateSelectionCallback,
             System.Net.Security.EncryptionPolicy encryptionPolicy
-        ) : base(default(System.IO.Stream), default(bool)) { }
+        )
+            : base(default(System.IO.Stream), default(bool)) { }
 
         public override bool CanRead
         {

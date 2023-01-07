@@ -8,7 +8,8 @@ public class FromSqlSprocQuerySqlServerTest
 {
     public FromSqlSprocQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
     }

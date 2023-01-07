@@ -741,7 +741,8 @@ namespace System.Web.Razor.Parser
                 Start = start;
             }
 
-            public Block(CSharpSymbol symbol) : this(GetName(symbol), symbol.Start) { }
+            public Block(CSharpSymbol symbol)
+                : this(GetName(symbol), symbol.Start) { }
 
             public string Name { get; set; }
             public SourceLocation Start { get; set; }

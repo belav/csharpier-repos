@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray<RangeVariableSymbol> parameters,
                 LambdaBodyFactory bodyFactory,
                 bool includeCache = true
-            ) : base(binder, includeCache)
+            )
+                : base(binder, includeCache)
             {
                 _parameters = parameters;
                 _rangeVariableMap = rangeVariableMap;

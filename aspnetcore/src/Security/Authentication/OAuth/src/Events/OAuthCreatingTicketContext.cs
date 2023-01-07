@@ -34,7 +34,8 @@ public class OAuthCreatingTicketContext : ResultContext<OAuthOptions>
         HttpClient backchannel,
         OAuthTokenResponse tokens,
         JsonElement user
-    ) : base(context, scheme, options)
+    )
+        : base(context, scheme, options)
     {
         if (backchannel == null)
         {

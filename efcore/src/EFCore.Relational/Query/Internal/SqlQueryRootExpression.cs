@@ -22,7 +22,8 @@ public sealed class SqlQueryRootExpression : QueryRootExpression
         Type elementType,
         string sql,
         Expression argument
-    ) : base(queryProvider, elementType)
+    )
+        : base(queryProvider, elementType)
     {
         Sql = sql;
         Argument = argument;

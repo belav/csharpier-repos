@@ -40,7 +40,8 @@ namespace System.Configuration
 
         public ConnectionStringSettings() { }
 
-        public ConnectionStringSettings(string name, string connectionString) : this()
+        public ConnectionStringSettings(string name, string connectionString)
+            : this()
         {
             Name = name;
             ConnectionString = connectionString;

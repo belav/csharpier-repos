@@ -80,7 +80,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpConversionKind conversionKind,
             bool isChecked,
             Type callingContext
-        ) : base(type, conversionKind == CSharpConversionKind.ExplicitConversion)
+        )
+            : base(type, conversionKind == CSharpConversionKind.ExplicitConversion)
         {
             ConversionKind = conversionKind;
             _callingContext = callingContext;

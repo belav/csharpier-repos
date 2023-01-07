@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             IPeekResultFactory peekResultFactory,
             IMetadataAsSourceFileService metadataAsSourceService,
             IGlobalOptionService globalOptions
-        ) : base(peekResultFactory)
+        )
+            : base(peekResultFactory)
         {
             _workspace = workspace;
             _projectId = projectId;

@@ -526,9 +526,11 @@ namespace System.ComponentModel.Tests
 
         private class SubCustomTypeDescriptor : CustomTypeDescriptor
         {
-            public SubCustomTypeDescriptor() : base() { }
+            public SubCustomTypeDescriptor()
+                : base() { }
 
-            public SubCustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent) { }
+            public SubCustomTypeDescriptor(ICustomTypeDescriptor parent)
+                : base(parent) { }
         }
     }
 }

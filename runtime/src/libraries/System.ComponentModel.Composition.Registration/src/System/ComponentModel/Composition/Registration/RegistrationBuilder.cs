@@ -35,7 +35,8 @@ namespace System.ComponentModel.Composition.Registration
         private readonly Dictionary<ParameterInfo, List<Attribute>> _parameters =
             new Dictionary<ParameterInfo, List<Attribute>>();
 
-        public RegistrationBuilder() : base(s_inner) { }
+        public RegistrationBuilder()
+            : base(s_inner) { }
 
         public PartBuilder<T> ForTypesDerivedFrom<T>()
         {

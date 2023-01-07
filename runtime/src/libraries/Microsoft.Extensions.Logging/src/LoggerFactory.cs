@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
         /// </summary>
-        public LoggerFactory() : this(Array.Empty<ILoggerProvider>()) { }
+        public LoggerFactory()
+            : this(Array.Empty<ILoggerProvider>()) { }
 
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
@@ -46,7 +47,8 @@ namespace Microsoft.Extensions.Logging
         public LoggerFactory(
             IEnumerable<ILoggerProvider> providers,
             LoggerFilterOptions filterOptions
-        ) : this(providers, new StaticFilterOptionsMonitor(filterOptions)) { }
+        )
+            : this(providers, new StaticFilterOptionsMonitor(filterOptions)) { }
 
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
@@ -56,7 +58,8 @@ namespace Microsoft.Extensions.Logging
         public LoggerFactory(
             IEnumerable<ILoggerProvider> providers,
             IOptionsMonitor<LoggerFilterOptions> filterOption
-        ) : this(providers, filterOption, null) { }
+        )
+            : this(providers, filterOption, null) { }
 
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
@@ -68,7 +71,8 @@ namespace Microsoft.Extensions.Logging
             IEnumerable<ILoggerProvider> providers,
             IOptionsMonitor<LoggerFilterOptions> filterOption,
             IOptions<LoggerFactoryOptions>? options
-        ) : this(providers, filterOption, options, null) { }
+        )
+            : this(providers, filterOption, options, null) { }
 
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.

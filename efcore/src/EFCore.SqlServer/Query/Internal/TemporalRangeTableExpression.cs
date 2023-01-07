@@ -39,7 +39,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             string? alias,
             DateTime from,
             DateTime to
-        ) : base(name, schema, alias)
+        )
+            : base(name, schema, alias)
         {
             From = from;
             To = to;

@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             IEnumerable<SyntaxNode>? oldRootChildren,
             IEnumerable<SyntaxNode>? newRootChildren,
             bool compareStatementSyntax
-        ) : base(oldRoot, newRoot, oldRootChildren, newRootChildren, compareStatementSyntax) { }
+        )
+            : base(oldRoot, newRoot, oldRootChildren, newRootChildren, compareStatementSyntax) { }
 
         protected override bool IsLambdaBodyStatementOrExpression(SyntaxNode node) =>
             LambdaUtilities.IsLambdaBodyStatementOrExpression(node);

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
         private readonly CSharpSyntaxFormattingOptions _options;
 
-        public TokenBasedFormattingRule() : this(CSharpSyntaxFormattingOptions.Default) { }
+        public TokenBasedFormattingRule()
+            : this(CSharpSyntaxFormattingOptions.Default) { }
 
         private TokenBasedFormattingRule(CSharpSyntaxFormattingOptions options)
         {

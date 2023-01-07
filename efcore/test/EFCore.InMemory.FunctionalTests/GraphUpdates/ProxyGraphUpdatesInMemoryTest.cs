@@ -11,7 +11,8 @@ public class ProxyGraphUpdatesInMemoryTest
         where TFixture : ProxyGraphUpdatesInMemoryTestBase<TFixture>.ProxyGraphUpdatesInMemoryFixtureBase,
             new()
     {
-        protected ProxyGraphUpdatesInMemoryTestBase(TFixture fixture) : base(fixture) { }
+        protected ProxyGraphUpdatesInMemoryTestBase(TFixture fixture)
+            : base(fixture) { }
 
         [ConditionalFact(Skip = "FK constraint checking. Issue #2166")]
         public override void Optional_one_to_one_relationships_are_one_to_one() =>
@@ -152,8 +153,8 @@ public class ProxyGraphUpdatesInMemoryTest
     public class LazyLoading
         : ProxyGraphUpdatesInMemoryTestBase<LazyLoading.ProxyGraphUpdatesWithLazyLoadingInMemoryFixture>
     {
-        public LazyLoading(ProxyGraphUpdatesWithLazyLoadingInMemoryFixture fixture) : base(fixture)
-        { }
+        public LazyLoading(ProxyGraphUpdatesWithLazyLoadingInMemoryFixture fixture)
+            : base(fixture) { }
 
         protected override bool DoesLazyLoading => true;
 
@@ -205,7 +206,8 @@ public class ProxyGraphUpdatesInMemoryTest
     {
         public LazyLoadingAndChangeTracking(
             ProxyGraphUpdatesWithChangeTrackingInMemoryFixture fixture
-        ) : base(fixture) { }
+        )
+            : base(fixture) { }
 
         protected override bool DoesLazyLoading => true;
 

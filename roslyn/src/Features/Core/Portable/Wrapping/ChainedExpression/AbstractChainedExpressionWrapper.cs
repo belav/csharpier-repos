@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
         protected AbstractChainedExpressionWrapper(
             Indentation.IIndentationService indentationService,
             ISyntaxFacts syntaxFacts
-        ) : base(indentationService)
+        )
+            : base(indentationService)
         {
             _syntaxFacts = syntaxFacts;
             _dotToken = syntaxFacts.SyntaxKinds.DotToken;

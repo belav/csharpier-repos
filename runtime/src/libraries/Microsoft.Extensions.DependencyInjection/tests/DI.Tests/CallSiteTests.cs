@@ -452,14 +452,16 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
         private class DisposableServiceB : ServiceB, IDisposable
         {
-            public DisposableServiceB(ServiceA serviceA) : base(serviceA) { }
+            public DisposableServiceB(ServiceA serviceA)
+                : base(serviceA) { }
 
             public void Dispose() { }
         }
 
         private class DisposableServiceC : ServiceC, IDisposable
         {
-            public DisposableServiceC(ServiceB serviceB) : base(serviceB) { }
+            public DisposableServiceC(ServiceB serviceB)
+                : base(serviceB) { }
 
             public void Dispose() { }
         }

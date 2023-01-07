@@ -10,7 +10,8 @@ namespace System.Diagnostics.Tracing
     {
         private readonly TraceLoggingTypeInfo elementInfo;
 
-        public EnumerableTypeInfo(Type type, TraceLoggingTypeInfo elementInfo) : base(type)
+        public EnumerableTypeInfo(Type type, TraceLoggingTypeInfo elementInfo)
+            : base(type)
         {
             this.elementInfo = elementInfo;
         }

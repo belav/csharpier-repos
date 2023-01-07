@@ -24,7 +24,8 @@ namespace System.Net.Http.Internal
         // The current number of bytes read into the range
         private long _currentCount;
 
-        public ByteRangeStream(Stream innerStream, RangeItemHeaderValue range) : base(innerStream)
+        public ByteRangeStream(Stream innerStream, RangeItemHeaderValue range)
+            : base(innerStream)
         {
             if (range == null)
             {

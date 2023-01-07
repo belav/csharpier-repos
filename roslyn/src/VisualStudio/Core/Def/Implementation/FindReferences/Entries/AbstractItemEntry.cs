@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public AbstractItemEntry(
                 RoslynDefinitionBucket definitionBucket,
                 StreamingFindUsagesPresenter presenter
-            ) : base(definitionBucket)
+            )
+                : base(definitionBucket)
             {
                 Presenter = presenter;
             }

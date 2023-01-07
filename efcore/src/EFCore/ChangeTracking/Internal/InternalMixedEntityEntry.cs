@@ -29,7 +29,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IStateManager stateManager,
             IEntityType entityType,
             object entity
-        ) : base(stateManager, entityType)
+        )
+            : base(stateManager, entityType)
         {
             Entity = entity;
             _shadowValues = entityType.GetEmptyShadowValuesFactory()();
@@ -49,7 +50,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             IEntityType entityType,
             object entity,
             in ValueBuffer valueBuffer
-        ) : base(stateManager, entityType)
+        )
+            : base(stateManager, entityType)
         {
             Entity = entity;
             _shadowValues = ((IRuntimeEntityType)entityType).ShadowValuesFactory(valueBuffer);

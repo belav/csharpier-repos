@@ -8,8 +8,8 @@ namespace ILCompiler.DependencyAnalysis
 {
     internal sealed class ClonedConstructedEETypeNode : ConstructedEETypeNode, ISymbolDefinitionNode
     {
-        public ClonedConstructedEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
-        { }
+        public ClonedConstructedEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type) { }
 
         protected override string GetName(NodeFactory factory) =>
             this.GetMangledName(factory.NameMangler) + " cloned";

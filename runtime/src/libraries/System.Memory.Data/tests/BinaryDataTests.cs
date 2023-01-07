@@ -748,7 +748,8 @@ namespace System.Tests
                 _offset = offset;
             }
 
-            public OverFlowStream(long offset, byte[] buffer) : base(buffer)
+            public OverFlowStream(long offset, byte[] buffer)
+                : base(buffer)
             {
                 _offset = offset;
             }
@@ -760,7 +761,8 @@ namespace System.Tests
 
         private class NonSeekableStream : MemoryStream
         {
-            public NonSeekableStream(byte[] buffer) : base(buffer) { }
+            public NonSeekableStream(byte[] buffer)
+                : base(buffer) { }
 
             public override bool CanSeek => false;
         }

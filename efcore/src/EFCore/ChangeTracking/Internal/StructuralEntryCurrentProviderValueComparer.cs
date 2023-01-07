@@ -22,7 +22,8 @@ public class StructuralEntryCurrentProviderValueComparer : StructuralEntryCurren
     public StructuralEntryCurrentProviderValueComparer(
         IPropertyBase property,
         ValueConverter converter
-    ) : base(property)
+    )
+        : base(property)
     {
         _converter = converter;
     }

@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteFindUsagesService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteFindUsagesService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

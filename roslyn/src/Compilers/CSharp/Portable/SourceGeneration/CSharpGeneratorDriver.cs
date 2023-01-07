@@ -30,9 +30,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             AnalyzerConfigOptionsProvider optionsProvider,
             ImmutableArray<AdditionalText> additionalTexts,
             GeneratorDriverOptions driverOptions
-        ) : base(parseOptions, generators, optionsProvider, additionalTexts, driverOptions) { }
+        )
+            : base(parseOptions, generators, optionsProvider, additionalTexts, driverOptions) { }
 
-        private CSharpGeneratorDriver(GeneratorDriverState state) : base(state) { }
+        private CSharpGeneratorDriver(GeneratorDriverState state)
+            : base(state) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="ISourceGenerator"/>s and default options

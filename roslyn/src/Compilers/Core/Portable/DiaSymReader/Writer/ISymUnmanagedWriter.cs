@@ -267,7 +267,8 @@ namespace Microsoft.DiaSymReader
     [StructLayout(LayoutKind.Explicit)]
     internal readonly struct VariantStructure
     {
-        public VariantStructure(DateTime date) : this() // Need this to avoid errors about the uninteresting union fields.
+        public VariantStructure(DateTime date)
+            : this() // Need this to avoid errors about the uninteresting union fields.
         {
             _longValue = date.Ticks;
 #pragma warning disable CS0618 // Type or member is obsolete

@@ -27,7 +27,8 @@ namespace System.Collections.ObjectModel
         /// Initializes a new instance of ReadOnlyObservableCollection that
         /// wraps the given ObservableCollection.
         /// </summary>
-        public ReadOnlyObservableCollection(ObservableCollection<T> list) : base(list)
+        public ReadOnlyObservableCollection(ObservableCollection<T> list)
+            : base(list)
         {
             ((INotifyCollectionChanged)Items).CollectionChanged +=
                 new NotifyCollectionChangedEventHandler(HandleCollectionChanged);

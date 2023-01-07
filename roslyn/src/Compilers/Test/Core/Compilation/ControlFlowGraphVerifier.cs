@@ -2451,7 +2451,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 IOperation root,
                 int initialIndent,
                 ISymbol associatedSymbol
-            ) : base(compilation, root, initialIndent)
+            )
+                : base(compilation, root, initialIndent)
             {
                 _graph = graph;
                 _region = region;

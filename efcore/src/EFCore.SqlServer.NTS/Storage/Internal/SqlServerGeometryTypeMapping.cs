@@ -59,7 +59,8 @@ public class SqlServerGeometryTypeMapping<TGeometry>
     protected SqlServerGeometryTypeMapping(
         RelationalTypeMappingParameters parameters,
         ValueConverter<TGeometry, SqlBytes>? converter
-    ) : base(parameters, converter)
+    )
+        : base(parameters, converter)
     {
         _isGeography = IsGeography(StoreType);
     }

@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 Workspace workspace,
                 string description,
                 GlobalUndoService service
-            ) : base(threadingContext, assertIsForeground: true)
+            )
+                : base(threadingContext, assertIsForeground: true)
             {
                 _undoHistoryRegistry = undoHistoryRegistry;
                 _undoManager = undoManager;

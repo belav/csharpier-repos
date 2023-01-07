@@ -51,7 +51,8 @@ namespace System.Text
         // Code Page
         private readonly int _defaultCodePage;
 
-        public ISCIIEncoding(int codePage) : base(codePage)
+        public ISCIIEncoding(int codePage)
+            : base(codePage)
         {
             // Set our code page (subtracting windows code page # offset)
             _defaultCodePage = codePage - 57000;
@@ -824,7 +825,8 @@ namespace System.Text
             // Was the last character a virama?  (Because ZWJ and ZWNJ are different then)
             internal bool bLastVirama;
 
-            public ISCIIEncoder(EncodingNLS encoding) : base(encoding)
+            public ISCIIEncoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 currentCodePage = defaultCodePage = encoding.CodePage - 57000;
                 // base calls reset
@@ -857,7 +859,8 @@ namespace System.Text
             internal char cLastCharForNextNukta;
             internal char cLastCharForNoNextNukta;
 
-            public ISCIIDecoder(EncodingNLS encoding) : base(encoding)
+            public ISCIIDecoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 currentCodePage = encoding.CodePage - 57000;
                 // base calls reset

@@ -13,7 +13,8 @@ namespace System.Net.Quic.Tests
     [ConditionalClass(typeof(QuicTestBase), nameof(QuicTestBase.IsSupported))]
     public sealed class QuicListenerTests : QuicTestBase
     {
-        public QuicListenerTests(ITestOutputHelper output) : base(output) { }
+        public QuicListenerTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public async Task Listener_Backlog_Success()

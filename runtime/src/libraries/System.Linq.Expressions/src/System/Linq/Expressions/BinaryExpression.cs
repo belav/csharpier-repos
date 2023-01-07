@@ -507,7 +507,8 @@ namespace System.Linq.Expressions
     // Optimized assignment node, only holds onto children
     internal class AssignBinaryExpression : BinaryExpression
     {
-        internal AssignBinaryExpression(Expression left, Expression right) : base(left, right) { }
+        internal AssignBinaryExpression(Expression left, Expression right)
+            : base(left, right) { }
 
         public static AssignBinaryExpression Make(Expression left, Expression right, bool byRef)
         {
@@ -530,8 +531,8 @@ namespace System.Linq.Expressions
 
     internal sealed class ByRefAssignBinaryExpression : AssignBinaryExpression
     {
-        internal ByRefAssignBinaryExpression(Expression left, Expression right) : base(left, right)
-        { }
+        internal ByRefAssignBinaryExpression(Expression left, Expression right)
+            : base(left, right) { }
 
         internal override bool IsByRef => true;
     }
@@ -547,7 +548,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             LambdaExpression conversion
-        ) : base(left, right)
+        )
+            : base(left, right)
         {
             _conversion = conversion;
         }
@@ -573,7 +575,8 @@ namespace System.Linq.Expressions
             Type type,
             MethodInfo method,
             LambdaExpression conversion
-        ) : base(nodeType, left, right, type, method)
+        )
+            : base(nodeType, left, right, type, method)
         {
             _conversion = conversion;
         }
@@ -590,7 +593,8 @@ namespace System.Linq.Expressions
             Expression left,
             Expression right,
             Type type
-        ) : base(left, right)
+        )
+            : base(left, right)
         {
             NodeType = nodeType;
             Type = type;
@@ -613,7 +617,8 @@ namespace System.Linq.Expressions
             Expression right,
             Type type,
             MethodInfo method
-        ) : base(nodeType, left, right, type)
+        )
+            : base(nodeType, left, right, type)
         {
             _method = method;
         }

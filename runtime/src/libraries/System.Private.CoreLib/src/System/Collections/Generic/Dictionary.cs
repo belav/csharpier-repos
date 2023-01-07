@@ -41,11 +41,14 @@ namespace System.Collections.Generic
         private ValueCollection? _values;
         private const int StartOfFreeList = -3;
 
-        public Dictionary() : this(0, null) { }
+        public Dictionary()
+            : this(0, null) { }
 
-        public Dictionary(int capacity) : this(capacity, null) { }
+        public Dictionary(int capacity)
+            : this(capacity, null) { }
 
-        public Dictionary(IEqualityComparer<TKey>? comparer) : this(0, comparer) { }
+        public Dictionary(IEqualityComparer<TKey>? comparer)
+            : this(0, comparer) { }
 
         public Dictionary(int capacity, IEqualityComparer<TKey>? comparer)
         {
@@ -92,7 +95,8 @@ namespace System.Collections.Generic
             }
         }
 
-        public Dictionary(IDictionary<TKey, TValue> dictionary) : this(dictionary, null) { }
+        public Dictionary(IDictionary<TKey, TValue> dictionary)
+            : this(dictionary, null) { }
 
         public Dictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey>? comparer)
             : this(dictionary != null ? dictionary.Count : 0, comparer)
@@ -111,7 +115,8 @@ namespace System.Collections.Generic
         public Dictionary(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
             IEqualityComparer<TKey>? comparer
-        ) : this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
+        )
+            : this((collection as ICollection<KeyValuePair<TKey, TValue>>)?.Count ?? 0, comparer)
         {
             if (collection == null)
             {

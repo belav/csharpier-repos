@@ -1115,16 +1115,20 @@ internal static partial class Interop
 
         internal sealed class SslException : Exception
         {
-            public SslException(string? inputMessage) : base(inputMessage) { }
+            public SslException(string? inputMessage)
+                : base(inputMessage) { }
 
-            public SslException(string? inputMessage, Exception? ex) : base(inputMessage, ex) { }
+            public SslException(string? inputMessage, Exception? ex)
+                : base(inputMessage, ex) { }
 
-            public SslException(string? inputMessage, int error) : this(inputMessage)
+            public SslException(string? inputMessage, int error)
+                : this(inputMessage)
             {
                 HResult = error;
             }
 
-            public SslException(int error) : this(SR.Format(SR.net_generic_operation_failed, error))
+            public SslException(int error)
+                : this(SR.Format(SR.net_generic_operation_failed, error))
             {
                 HResult = error;
             }

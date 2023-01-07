@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
         private readonly int _count;
         private readonly int _separatorCount;
 
-        internal SeparatedSyntaxList(SyntaxNodeOrTokenList list) : this()
+        internal SeparatedSyntaxList(SyntaxNodeOrTokenList list)
+            : this()
         {
             Validate(list);
 

@@ -33,7 +33,8 @@ public class ValueConverter<TModel, TProvider> : ValueConverter
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
         ConverterMappingHints? mappingHints = null
-    ) : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
+    )
+        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
     /// <summary>
     ///     <para>

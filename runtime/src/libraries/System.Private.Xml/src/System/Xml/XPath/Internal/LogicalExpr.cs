@@ -29,7 +29,8 @@ namespace MS.Internal.Xml.XPath
             _opnd2 = opnd2;
         }
 
-        private LogicalExpr(LogicalExpr other) : base(other)
+        private LogicalExpr(LogicalExpr other)
+            : base(other)
         {
             _op = other._op;
             _opnd1 = Clone(other._opnd1);

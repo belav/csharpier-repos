@@ -12,7 +12,8 @@ namespace System.Net.Http
     {
         private sealed class RawConnectionStream : HttpContentStream
         {
-            public RawConnectionStream(HttpConnection connection) : base(connection)
+            public RawConnectionStream(HttpConnection connection)
+                : base(connection)
             {
                 if (NetEventSource.Log.IsEnabled())
                     NetEventSource.Info(this);

@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> aliases,
             bool embedInteropTypes,
             bool hasRecursiveAliases
-        ) : this(kind, aliases, embedInteropTypes)
+        )
+            : this(kind, aliases, embedInteropTypes)
         {
             HasRecursiveAliases = hasRecursiveAliases;
         }

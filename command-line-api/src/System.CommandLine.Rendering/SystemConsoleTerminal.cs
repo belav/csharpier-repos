@@ -8,7 +8,8 @@ namespace System.CommandLine.Rendering
         private readonly ConsoleColor _initialForegroundColor;
         private readonly ConsoleColor _initialBackgroundColor;
 
-        public SystemConsoleTerminal(IConsole console) : base(console)
+        public SystemConsoleTerminal(IConsole console)
+            : base(console)
         {
             _initialForegroundColor = System.Console.ForegroundColor;
             _initialBackgroundColor = System.Console.BackgroundColor;

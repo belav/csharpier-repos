@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             string searchText,
             bool isHidden,
             bool isInherited
-        ) : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
+        )
+            : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
         {
             _isInherited = isInherited;
 

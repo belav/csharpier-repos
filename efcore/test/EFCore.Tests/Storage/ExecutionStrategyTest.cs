@@ -806,7 +806,8 @@ public class ExecutionStrategyTest : IDisposable
             int? retryCount = null,
             Func<Exception, bool> shouldRetryOn = null,
             Func<Exception, TimeSpan?> getNextDelay = null
-        ) : base(context, retryCount ?? DefaultMaxRetryCount, DefaultMaxDelay)
+        )
+            : base(context, retryCount ?? DefaultMaxRetryCount, DefaultMaxDelay)
         {
             _shouldRetryOn = shouldRetryOn;
             _getNextDelay = getNextDelay;

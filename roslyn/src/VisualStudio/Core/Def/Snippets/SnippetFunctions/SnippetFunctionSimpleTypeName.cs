@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             string fieldName,
             string fullyQualifiedName,
             IThreadingContext threadingContext
-        ) : base(snippetExpansionClient, subjectBuffer, threadingContext)
+        )
+            : base(snippetExpansionClient, subjectBuffer, threadingContext)
         {
             _fieldName = fieldName;
             _fullyQualifiedName = fullyQualifiedName;

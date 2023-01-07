@@ -11,12 +11,14 @@ namespace System
     )]
     public class CannotUnloadAppDomainException : SystemException
     {
-        public CannotUnloadAppDomainException() : base(SR.Arg_CannotUnloadAppDomainException)
+        public CannotUnloadAppDomainException()
+            : base(SR.Arg_CannotUnloadAppDomainException)
         {
             HResult = HResults.COR_E_CANNOTUNLOADAPPDOMAIN;
         }
 
-        public CannotUnloadAppDomainException(string? message) : base(message)
+        public CannotUnloadAppDomainException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_CANNOTUNLOADAPPDOMAIN;
         }

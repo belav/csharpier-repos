@@ -134,7 +134,8 @@ public class DbContextPoolingTest
 
     private class DefaultOptionsPooledContext : DbContext
     {
-        public DefaultOptionsPooledContext(DbContextOptions options) : base(options) { }
+        public DefaultOptionsPooledContext(DbContextOptions options)
+            : base(options) { }
     }
 
     private class PooledContext : DbContext, IPooledContext
@@ -144,7 +145,8 @@ public class DbContextPoolingTest
 
         public static bool ModifyOptions;
 
-        public PooledContext(DbContextOptions options) : base(options)
+        public PooledContext(DbContextOptions options)
+            : base(options)
         {
             Interlocked.Increment(ref InstanceCount);
 
@@ -193,7 +195,8 @@ public class DbContextPoolingTest
 
     private class PooledContextWithOverrides : DbContext, IPooledContext
     {
-        public PooledContextWithOverrides(DbContextOptions options) : base(options) { }
+        public PooledContextWithOverrides(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Customer> Customers { get; set; }
 
@@ -226,7 +229,8 @@ public class DbContextPoolingTest
     {
         public DbSet<Blog> Blogs { get; set; }
 
-        public SecondContext(DbContextOptions options) : base(options) { }
+        public SecondContext(DbContextOptions options)
+            : base(options) { }
 
         public class Blog
         {
@@ -504,8 +508,8 @@ public class DbContextPoolingTest
 
     private class TwoParameterConstructorContext : DbContext
     {
-        public TwoParameterConstructorContext(DbContextOptions options, string x) : base(options)
-        { }
+        public TwoParameterConstructorContext(DbContextOptions options, string x)
+            : base(options) { }
     }
 
     [ConditionalFact]
@@ -576,7 +580,8 @@ public class DbContextPoolingTest
 
         public WithParameterlessConstructorContext(
             DbContextOptions<WithParameterlessConstructorContext> options
-        ) : base(options)
+        )
+            : base(options)
         {
             ConstructorUsed = "Options";
         }

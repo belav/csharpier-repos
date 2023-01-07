@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class AppendOrderByPropertyExpressionMutator : ExpressionMutator
 {
-    public AppendOrderByPropertyExpressionMutator(DbContext context) : base(context) { }
+    public AppendOrderByPropertyExpressionMutator(DbContext context)
+        : base(context) { }
 
     private bool HasValidPropertyToOrderBy(Expression expression) =>
         expression.Type.GetGenericArguments()[0]

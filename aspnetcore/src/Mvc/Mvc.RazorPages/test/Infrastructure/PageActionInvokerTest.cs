@@ -2124,7 +2124,8 @@ public class PageActionInvokerTest : CommonResourceInvokerTest
     {
         private readonly Func<PageContext, Task> _executeAction;
 
-        public TestPageResultExecutor() : this(null) { }
+        public TestPageResultExecutor()
+            : this(null) { }
 
         public TestPageResultExecutor(Func<PageContext, Task> executeAction)
             : base(

@@ -2320,14 +2320,16 @@ namespace System.Xml
     internal class DocumentXPathNodeIterator_AllElemChildren
         : DocumentXPathNodeIterator_ElemDescendants
     {
-        internal DocumentXPathNodeIterator_AllElemChildren(DocumentXPathNavigator nav) : base(nav)
+        internal DocumentXPathNodeIterator_AllElemChildren(DocumentXPathNavigator nav)
+            : base(nav)
         {
             Debug.Assert(((XmlNode)nav.UnderlyingObject).NodeType != XmlNodeType.Attribute);
         }
 
         internal DocumentXPathNodeIterator_AllElemChildren(
             DocumentXPathNodeIterator_AllElemChildren other
-        ) : base(other) { }
+        )
+            : base(other) { }
 
         public override XPathNodeIterator Clone()
         {
@@ -2350,7 +2352,8 @@ namespace System.Xml
 
         internal DocumentXPathNodeIterator_AllElemChildren_AndSelf(
             DocumentXPathNodeIterator_AllElemChildren_AndSelf other
-        ) : base(other) { }
+        )
+            : base(other) { }
 
         public override XPathNodeIterator Clone()
         {
@@ -2382,7 +2385,8 @@ namespace System.Xml
         internal DocumentXPathNodeIterator_ElemChildren_NoLocalName(
             DocumentXPathNavigator nav,
             string nsAtom
-        ) : base(nav)
+        )
+            : base(nav)
         {
             Debug.Assert(((XmlNode)nav.UnderlyingObject).NodeType != XmlNodeType.Attribute);
             Debug.Assert(Ref.Equal(nav.NameTable.Get(nsAtom), nsAtom));
@@ -2391,7 +2395,8 @@ namespace System.Xml
 
         internal DocumentXPathNodeIterator_ElemChildren_NoLocalName(
             DocumentXPathNodeIterator_ElemChildren_NoLocalName other
-        ) : base(other)
+        )
+            : base(other)
         {
             _nsAtom = other._nsAtom;
         }
@@ -2416,11 +2421,13 @@ namespace System.Xml
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName(
             DocumentXPathNavigator nav,
             string nsAtom
-        ) : base(nav, nsAtom) { }
+        )
+            : base(nav, nsAtom) { }
 
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName(
             DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName other
-        ) : base(other) { }
+        )
+            : base(other) { }
 
         public override XPathNodeIterator Clone()
         {
@@ -2454,7 +2461,8 @@ namespace System.Xml
             DocumentXPathNavigator nav,
             string localNameAtom,
             string nsAtom
-        ) : base(nav)
+        )
+            : base(nav)
         {
             Debug.Assert(((XmlNode)nav.UnderlyingObject).NodeType != XmlNodeType.Attribute);
             Debug.Assert(Ref.Equal(nav.NameTable.Get(localNameAtom), localNameAtom));
@@ -2467,7 +2475,8 @@ namespace System.Xml
 
         internal DocumentXPathNodeIterator_ElemChildren(
             DocumentXPathNodeIterator_ElemChildren other
-        ) : base(other)
+        )
+            : base(other)
         {
             this.localNameAtom = other.localNameAtom;
             this.nsAtom = other.nsAtom;
@@ -2494,14 +2503,16 @@ namespace System.Xml
             DocumentXPathNavigator nav,
             string localNameAtom,
             string nsAtom
-        ) : base(nav, localNameAtom, nsAtom)
+        )
+            : base(nav, localNameAtom, nsAtom)
         {
             Debug.Assert(localNameAtom.Length > 0); // Use DocumentXPathNodeIterator_ElemChildren_AndSelf_NoLocalName if localName == String.Empty
         }
 
         internal DocumentXPathNodeIterator_ElemChildren_AndSelf(
             DocumentXPathNodeIterator_ElemChildren_AndSelf other
-        ) : base(other) { }
+        )
+            : base(other) { }
 
         public override XPathNodeIterator Clone()
         {

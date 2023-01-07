@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Rebuild
             string assemblyFileName,
             CompilationOptionsReader optionsReader,
             VisualBasicCompilationOptions compilationOptions
-        ) : base(assemblyFileName, optionsReader)
+        )
+            : base(assemblyFileName, optionsReader)
         {
             CompilationOptions = compilationOptions;
         }

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             IThreadingContext threadingContext,
             IController<TModel> controller,
             TaskScheduler computationTaskScheduler
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _controller = controller;
             __taskScheduler = computationTaskScheduler;

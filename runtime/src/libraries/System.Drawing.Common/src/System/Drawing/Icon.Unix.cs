@@ -139,8 +139,8 @@ namespace System.Drawing
             undisposable = true;
         }
 
-        public Icon(Icon original, int width, int height) : this(original, new Size(width, height))
-        { }
+        public Icon(Icon original, int width, int height)
+            : this(original, new Size(width, height)) { }
 
         public Icon(Icon original, Size size)
         {
@@ -221,7 +221,8 @@ namespace System.Drawing
                 bitmap = (Bitmap)original.bitmap.Clone();
         }
 
-        public Icon(Stream stream) : this(stream, 32, 32) { }
+        public Icon(Stream stream)
+            : this(stream, 32, 32) { }
 
         public Icon(Stream stream, int width, int height)
         {
@@ -269,7 +270,8 @@ namespace System.Drawing
             this.undisposable = true;
         }
 
-        public Icon(Stream stream, Size size) : this(stream, size.Width, size.Height) { }
+        public Icon(Stream stream, Size size)
+            : this(stream, size.Width, size.Height) { }
 
         public Icon(string fileName, int width, int height)
         {

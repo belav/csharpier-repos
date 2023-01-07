@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly Labels _labels;
 
-        internal ScriptLocalScopeBinder(Labels labels, Binder next) : base(next)
+        internal ScriptLocalScopeBinder(Labels labels, Binder next)
+            : base(next)
         {
             _labels = labels;
         }

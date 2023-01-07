@@ -52,7 +52,8 @@ namespace System.Linq.Parallel
             Func<TSource, TGroupKey> keySelector,
             Func<TSource, TElement>? elementSelector,
             IEqualityComparer<TGroupKey>? keyComparer
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(keySelector != null, "need a selector function");
@@ -372,7 +373,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<Pair<TSource, TGroupKey>, TOrderKey> source,
             IEqualityComparer<TGroupKey>? keyComparer,
             CancellationToken cancellationToken
-        ) : base(source, keyComparer, cancellationToken) { }
+        )
+            : base(source, keyComparer, cancellationToken) { }
 
         //-----------------------------------------------------------------------------------
         // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
@@ -438,7 +440,8 @@ namespace System.Linq.Parallel
             IEqualityComparer<TGroupKey>? keyComparer,
             Func<TSource, TElement> elementSelector,
             CancellationToken cancellationToken
-        ) : base(source, keyComparer, cancellationToken)
+        )
+            : base(source, keyComparer, cancellationToken)
         {
             Debug.Assert(elementSelector != null);
             _elementSelector = elementSelector;
@@ -631,7 +634,8 @@ namespace System.Linq.Parallel
             IEqualityComparer<TGroupKey>? keyComparer,
             IComparer<TOrderKey> orderComparer,
             CancellationToken cancellationToken
-        ) : base(source, keySelector, keyComparer, orderComparer, cancellationToken) { }
+        )
+            : base(source, keySelector, keyComparer, orderComparer, cancellationToken) { }
 
         //-----------------------------------------------------------------------------------
         // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
@@ -712,7 +716,8 @@ namespace System.Linq.Parallel
             IEqualityComparer<TGroupKey>? keyComparer,
             IComparer<TOrderKey> orderComparer,
             CancellationToken cancellationToken
-        ) : base(source, keySelector, keyComparer, orderComparer, cancellationToken)
+        )
+            : base(source, keySelector, keyComparer, orderComparer, cancellationToken)
         {
             Debug.Assert(elementSelector != null);
             _elementSelector = elementSelector;

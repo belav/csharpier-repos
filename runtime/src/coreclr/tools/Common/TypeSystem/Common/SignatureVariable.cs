@@ -31,8 +31,8 @@ namespace Internal.TypeSystem
 
     public sealed partial class SignatureTypeVariable : SignatureVariable
     {
-        internal SignatureTypeVariable(TypeSystemContext context, int index) : base(context, index)
-        { }
+        internal SignatureTypeVariable(TypeSystemContext context, int index)
+            : base(context, index) { }
 
         public override bool IsMethodSignatureVariable
         {

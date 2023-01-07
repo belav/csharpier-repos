@@ -20,7 +20,9 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         public ReferenceAssemblyPathResolver(
             string? defaultReferenceAssembliesPath,
             string[] fallbackSearchPaths
-        ) : this(FileSystemWrapper.Default, defaultReferenceAssembliesPath, fallbackSearchPaths) { }
+        )
+            : this(FileSystemWrapper.Default, defaultReferenceAssembliesPath, fallbackSearchPaths)
+        { }
 
         internal ReferenceAssemblyPathResolver(IFileSystem fileSystem, IEnvironment environment)
             : this(

@@ -8,7 +8,8 @@ namespace System.IO.Hashing
 {
     public sealed partial class Crc32 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public Crc32() : base(default(int)) { }
+        public Crc32()
+            : base(default(int)) { }
 
         public override void Append(System.ReadOnlySpan<byte> source) { }
 
@@ -57,7 +58,8 @@ namespace System.IO.Hashing
 
     public sealed partial class Crc64 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public Crc64() : base(default(int)) { }
+        public Crc64()
+            : base(default(int)) { }
 
         public override void Append(System.ReadOnlySpan<byte> source) { }
 
@@ -176,9 +178,11 @@ namespace System.IO.Hashing
 
     public sealed partial class XxHash128 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public XxHash128() : base(default(int)) { }
+        public XxHash128()
+            : base(default(int)) { }
 
-        public XxHash128(long seed) : base(default(int)) { }
+        public XxHash128(long seed)
+            : base(default(int)) { }
 
         public override void Append(System.ReadOnlySpan<byte> source) { }
 
@@ -223,9 +227,11 @@ namespace System.IO.Hashing
 
     public sealed partial class XxHash3 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public XxHash3() : base(default(int)) { }
+        public XxHash3()
+            : base(default(int)) { }
 
-        public XxHash3(long seed) : base(default(int)) { }
+        public XxHash3(long seed)
+            : base(default(int)) { }
 
         public override void Append(System.ReadOnlySpan<byte> source) { }
 
@@ -282,9 +288,11 @@ namespace System.IO.Hashing
 
     public sealed partial class XxHash32 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public XxHash32() : base(default(int)) { }
+        public XxHash32()
+            : base(default(int)) { }
 
-        public XxHash32(int seed) : base(default(int)) { }
+        public XxHash32(int seed)
+            : base(default(int)) { }
 
         public override void Append(System.ReadOnlySpan<byte> source) { }
 
@@ -341,9 +349,11 @@ namespace System.IO.Hashing
 
     public sealed partial class XxHash64 : System.IO.Hashing.NonCryptographicHashAlgorithm
     {
-        public XxHash64() : base(default(int)) { }
+        public XxHash64()
+            : base(default(int)) { }
 
-        public XxHash64(long seed) : base(default(int)) { }
+        public XxHash64(long seed)
+            : base(default(int)) { }
 
         public override void Append(System.ReadOnlySpan<byte> source) { }
 

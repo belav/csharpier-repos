@@ -67,9 +67,11 @@ namespace System.Xml.Xsl
             info.AddValue("version", "2.0");
         }
 
-        public XsltException() : this(string.Empty, (Exception?)null) { }
+        public XsltException()
+            : this(string.Empty, (Exception?)null) { }
 
-        public XsltException(string message) : this(message, (Exception?)null) { }
+        public XsltException(string message)
+            : this(message, (Exception?)null) { }
 
         public XsltException(string message, Exception? innerException)
             : this(SR.Xml_UserException, new string?[] { message }, null, 0, 0, innerException) { }
@@ -91,7 +93,8 @@ namespace System.Xml.Xsl
             int lineNumber,
             int linePosition,
             Exception? inner
-        ) : base(CreateMessage(res, args, sourceUri, lineNumber, linePosition), inner)
+        )
+            : base(CreateMessage(res, args, sourceUri, lineNumber, linePosition), inner)
         {
             HResult = HResults.XmlXslt;
             _res = res;
@@ -170,9 +173,11 @@ namespace System.Xml.Xsl
             base.GetObjectData(info, context);
         }
 
-        public XsltCompileException() : base() { }
+        public XsltCompileException()
+            : base() { }
 
-        public XsltCompileException(string message) : base(message) { }
+        public XsltCompileException(string message)
+            : base(message) { }
 
         public XsltCompileException(string message, Exception innerException)
             : base(message, innerException) { }

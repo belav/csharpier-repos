@@ -11,7 +11,8 @@ public class NorthwindODataQueryTests
     : ODataQueryTestBase,
         IClassFixture<NorthwindODataQueryTestFixture>
 {
-    public NorthwindODataQueryTests(NorthwindODataQueryTestFixture fixture) : base(fixture) { }
+    public NorthwindODataQueryTests(NorthwindODataQueryTestFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task Basic_query_customers()

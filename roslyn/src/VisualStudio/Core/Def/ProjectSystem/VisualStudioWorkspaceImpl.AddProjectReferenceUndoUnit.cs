@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 VisualStudioWorkspaceImpl workspace,
                 ProjectId fromProjectId,
                 ProjectId toProjectId
-            ) : base(workspace, fromProjectId)
+            )
+                : base(workspace, fromProjectId)
             {
                 _toProjectId = toProjectId;
             }

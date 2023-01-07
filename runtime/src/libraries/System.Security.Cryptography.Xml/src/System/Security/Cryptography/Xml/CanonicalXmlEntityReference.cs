@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.Xml
             string name,
             XmlDocument doc,
             bool defaultNodeSetInclusionState
-        ) : base(name, doc)
+        )
+            : base(name, doc)
         {
             _isInNodeSet = defaultNodeSetInclusionState;
         }

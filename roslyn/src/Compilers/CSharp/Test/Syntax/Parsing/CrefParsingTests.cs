@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class CrefParsingTests : ParsingTests
     {
-        public CrefParsingTests(ITestOutputHelper output) : base(output) { }
+        public CrefParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

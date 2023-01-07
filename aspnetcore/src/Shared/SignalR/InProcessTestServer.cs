@@ -68,7 +68,8 @@ public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup 
         return server;
     }
 
-    private InProcessTestServer() : this(loggerFactory: null, null, null) { }
+    private InProcessTestServer()
+        : this(loggerFactory: null, null, null) { }
 
     private InProcessTestServer(
         ILoggerFactory loggerFactory,

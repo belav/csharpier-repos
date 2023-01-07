@@ -23,7 +23,8 @@ namespace System.Net.Http.Functional.Tests
 
     public abstract class HttpClientHandler_Cancellation_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_Cancellation_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_Cancellation_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(false, CancellationMode.Token)]

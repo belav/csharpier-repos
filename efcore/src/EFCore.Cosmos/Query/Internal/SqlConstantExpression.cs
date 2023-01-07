@@ -27,7 +27,8 @@ public class SqlConstantExpression : SqlExpression
     public SqlConstantExpression(
         ConstantExpression constantExpression,
         CoreTypeMapping? typeMapping
-    ) : base(constantExpression.Type, typeMapping)
+    )
+        : base(constantExpression.Type, typeMapping)
     {
         _constantExpression = constantExpression;
     }

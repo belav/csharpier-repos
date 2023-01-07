@@ -30,7 +30,8 @@ namespace Castle.DynamicProxy.Contributors
         public InterfaceProxyWithoutTargetContributor(
             INamingScope namingScope,
             GetTargetExpressionDelegate getTarget
-        ) : base(namingScope)
+        )
+            : base(namingScope)
         {
             getTargetExpression = getTarget;
         }

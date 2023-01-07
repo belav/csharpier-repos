@@ -23,7 +23,8 @@ public class CSharpUniqueNamer<T> : CSharpNamer<T> where T : notnull
         Func<T, string> nameGetter,
         ICSharpUtilities cSharpUtilities,
         Func<string, string>? singularizePluralizer
-    ) : this(nameGetter, null, cSharpUtilities, singularizePluralizer) { }
+    )
+        : this(nameGetter, null, cSharpUtilities, singularizePluralizer) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,7 +37,8 @@ public class CSharpUniqueNamer<T> : CSharpNamer<T> where T : notnull
         IEnumerable<string>? usedNames,
         ICSharpUtilities cSharpUtilities,
         Func<string, string>? singularizePluralizer
-    ) : base(nameGetter, cSharpUtilities, singularizePluralizer)
+    )
+        : base(nameGetter, cSharpUtilities, singularizePluralizer)
     {
         if (usedNames != null)
         {

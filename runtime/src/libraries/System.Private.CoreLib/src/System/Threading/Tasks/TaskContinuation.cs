@@ -480,7 +480,8 @@ namespace System.Threading.Tasks
             SynchronizationContext context,
             Action action,
             bool flowExecutionContext
-        ) : base(action, flowExecutionContext)
+        )
+            : base(action, flowExecutionContext)
         {
             Debug.Assert(context != null);
             m_syncContext = context;
@@ -581,7 +582,8 @@ namespace System.Threading.Tasks
             TaskScheduler scheduler,
             Action action,
             bool flowExecutionContext
-        ) : base(action, flowExecutionContext)
+        )
+            : base(action, flowExecutionContext)
         {
             Debug.Assert(scheduler != null);
             m_scheduler = scheduler;

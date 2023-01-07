@@ -122,7 +122,9 @@ public class BaseClass
 
 public class TestClass : BaseClass
 {
-    public TestClass(string param, string s) : base(param, s, 1) { }
+    public TestClass(string param, string s)
+        : base(param, s, 1) { }
 
-    public TestClass() : base("", "", 1) { }
+    public TestClass()
+        : base("", "", 1) { }
 }

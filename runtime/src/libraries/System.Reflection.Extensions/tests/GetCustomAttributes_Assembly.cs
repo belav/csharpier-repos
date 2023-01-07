@@ -241,12 +241,14 @@ namespace System.Reflection.Tests
     [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
     public class MyAttribute_Single : MyAttributeBase
     {
-        public MyAttribute_Single(string name) : base(name) { }
+        public MyAttribute_Single(string name)
+            : base(name) { }
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public class MyAttribute_AllowMultiple : MyAttributeBase
     {
-        public MyAttribute_AllowMultiple(string name) : base(name) { }
+        public MyAttribute_AllowMultiple(string name)
+            : base(name) { }
     }
 }

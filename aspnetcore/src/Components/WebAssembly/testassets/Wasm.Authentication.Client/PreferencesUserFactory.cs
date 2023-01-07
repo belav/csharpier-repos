@@ -19,7 +19,8 @@ public class PreferencesUserFactory : AccountClaimsPrincipalFactory<OidcAccount>
     public PreferencesUserFactory(
         NavigationManager navigationManager,
         IAccessTokenProviderAccessor accessor
-    ) : base(accessor)
+    )
+        : base(accessor)
     {
         _httpClient = new HttpClient { BaseAddress = new Uri(navigationManager.BaseUri) };
     }

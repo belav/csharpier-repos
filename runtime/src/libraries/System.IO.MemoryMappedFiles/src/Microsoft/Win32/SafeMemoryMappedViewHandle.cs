@@ -7,6 +7,7 @@ namespace Microsoft.Win32.SafeHandles
 {
     public sealed partial class SafeMemoryMappedViewHandle : SafeBuffer
     {
-        public SafeMemoryMappedViewHandle() : base(true) { }
+        public SafeMemoryMappedViewHandle()
+            : base(true) { }
     }
 }

@@ -15,12 +15,14 @@ namespace System.ComponentModel.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="ChangeRejectedException"/> class.
         /// </summary>
-        public ChangeRejectedException() : this((string?)null, (Exception?)null) { }
+        public ChangeRejectedException()
+            : this((string?)null, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ChangeRejectedException"/> class.
         /// </summary>
-        public ChangeRejectedException(string? message) : this(message, (Exception?)null) { }
+        public ChangeRejectedException(string? message)
+            : this(message, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ChangeRejectedException"/> class.

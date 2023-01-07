@@ -18,7 +18,8 @@ namespace Wasm.Build.Tests
         public BlazorWasmBuildPublishTests(
             ITestOutputHelper output,
             SharedBuildPerTestClassFixture buildContext
-        ) : base(output, buildContext)
+        )
+            : base(output, buildContext)
         {
             _enablePerTestCleanup = true;
         }

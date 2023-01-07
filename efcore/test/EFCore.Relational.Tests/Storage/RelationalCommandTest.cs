@@ -1214,7 +1214,8 @@ public class RelationalCommandTest
             RelationalCommandBuilderDependencies dependencies,
             string commandText,
             IReadOnlyList<IRelationalParameter> parameters
-        ) : base(dependencies, commandText, parameters) { }
+        )
+            : base(dependencies, commandText, parameters) { }
 
         protected override RelationalDataReader CreateRelationalDataReader() =>
             new ThrowingRelationalReader();

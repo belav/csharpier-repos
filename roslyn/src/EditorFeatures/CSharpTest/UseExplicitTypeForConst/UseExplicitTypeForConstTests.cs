@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTypeForConst
     public sealed class UseExplicitTypeForConstTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseExplicitTypeForConstTests(ITestOutputHelper logger) : base(logger) { }
+        public UseExplicitTypeForConstTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

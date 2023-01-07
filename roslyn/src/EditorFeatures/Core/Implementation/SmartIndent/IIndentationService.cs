@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor
         /// </summary>
         public int Offset { get; }
 
-        public IndentationResult(int basePosition, int offset) : this()
+        public IndentationResult(int basePosition, int offset)
+            : this()
         {
             this.BasePosition = basePosition;
             this.Offset = offset;

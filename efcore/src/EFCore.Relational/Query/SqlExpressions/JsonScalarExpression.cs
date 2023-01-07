@@ -41,7 +41,8 @@ public class JsonScalarExpression : SqlExpression
         Type type,
         RelationalTypeMapping typeMapping,
         bool nullable
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         JsonColumn = jsonColumn;
         Path = path;

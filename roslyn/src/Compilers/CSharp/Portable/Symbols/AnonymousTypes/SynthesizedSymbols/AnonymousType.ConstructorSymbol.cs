@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             internal AnonymousTypeConstructorSymbol(
                 NamedTypeSymbol container,
                 ImmutableArray<AnonymousTypePropertySymbol> properties
-            ) : base(container, WellKnownMemberNames.InstanceConstructorName)
+            )
+                : base(container, WellKnownMemberNames.InstanceConstructorName)
             {
                 // Create constructor parameters
                 int fieldsCount = properties.Length;

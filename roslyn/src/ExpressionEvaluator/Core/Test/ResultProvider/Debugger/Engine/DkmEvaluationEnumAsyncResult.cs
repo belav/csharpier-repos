@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 {
     public struct DkmEvaluationEnumAsyncResult
     {
-        public DkmEvaluationEnumAsyncResult(DkmEvaluationResult[] Items) : this()
+        public DkmEvaluationEnumAsyncResult(DkmEvaluationResult[] Items)
+            : this()
         {
             if (Items == null)
             {

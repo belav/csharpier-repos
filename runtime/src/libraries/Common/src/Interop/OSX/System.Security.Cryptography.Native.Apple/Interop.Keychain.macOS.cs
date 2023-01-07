@@ -421,7 +421,8 @@ namespace System.Security.Cryptography.Apple
 {
     internal class SafeKeychainItemHandle : SafeHandle
     {
-        public SafeKeychainItemHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeKeychainItemHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -436,9 +437,11 @@ namespace System.Security.Cryptography.Apple
 
     internal class SafeKeychainHandle : SafeHandle
     {
-        public SafeKeychainHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeKeychainHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
-        internal SafeKeychainHandle(IntPtr handle) : base(handle, ownsHandle: true) { }
+        internal SafeKeychainHandle(IntPtr handle)
+            : base(handle, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

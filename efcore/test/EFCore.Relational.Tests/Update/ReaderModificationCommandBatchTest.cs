@@ -897,7 +897,8 @@ RETURNING 1;
         public ModificationCommandBatchFake(
             IUpdateSqlGenerator sqlGenerator = null,
             int? maxBatchSize = null
-        ) : base(CreateDependencies(sqlGenerator), maxBatchSize)
+        )
+            : base(CreateDependencies(sqlGenerator), maxBatchSize)
         {
             ShouldBeValid = true;
 

@@ -25,7 +25,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the Array/> class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal Array(IntPtr jsHandle) : base(jsHandle) { }
+        internal Array(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// Push the specified elements.

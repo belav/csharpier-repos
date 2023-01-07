@@ -23,7 +23,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of an average associative operator.
         //
 
-        internal NullableIntAverageAggregationOperator(IEnumerable<int?> child) : base(child) { }
+        internal NullableIntAverageAggregationOperator(IEnumerable<int?> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -106,7 +107,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<int?, TKey> source,
                 int partitionIndex,
                 CancellationToken cancellationToken
-            ) : base(partitionIndex, cancellationToken)
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

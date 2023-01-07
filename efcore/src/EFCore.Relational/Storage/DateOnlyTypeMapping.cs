@@ -34,7 +34,8 @@ public class DateOnlyTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="DateOnlyTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected DateOnlyTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected DateOnlyTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

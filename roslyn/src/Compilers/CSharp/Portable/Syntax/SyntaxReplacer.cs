@@ -447,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 SyntaxNode originalNode,
                 IEnumerable<SyntaxNode> replacementNodes,
                 ListEditKind editKind
-            ) : base(originalNode.Span, editKind, false, originalNode.IsPartOfStructuredTrivia())
+            )
+                : base(originalNode.Span, editKind, false, originalNode.IsPartOfStructuredTrivia())
             {
                 _originalNode = originalNode;
                 _newNodes = replacementNodes;
@@ -530,7 +531,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 SyntaxToken originalToken,
                 IEnumerable<SyntaxToken> newTokens,
                 ListEditKind editKind
-            ) : base(originalToken.Span, editKind, false, originalToken.IsPartOfStructuredTrivia())
+            )
+                : base(
+                    originalToken.Span,
+                    editKind,
+                    false,
+                    originalToken.IsPartOfStructuredTrivia()
+                )
             {
                 _originalToken = originalToken;
                 _newTokens = newTokens;
@@ -577,7 +584,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 SyntaxTrivia originalTrivia,
                 IEnumerable<SyntaxTrivia> newTrivia,
                 ListEditKind editKind
-            ) : base(originalTrivia.Span, editKind, true, originalTrivia.IsPartOfStructuredTrivia())
+            )
+                : base(
+                    originalTrivia.Span,
+                    editKind,
+                    true,
+                    originalTrivia.IsPartOfStructuredTrivia()
+                )
             {
                 _originalTrivia = originalTrivia;
                 _newTrivia = newTrivia;

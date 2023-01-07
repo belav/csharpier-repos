@@ -167,7 +167,8 @@ public class DbContextOptionsTest
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension)
+                : base(extension) { }
 
             public override bool IsDatabaseProvider => false;
 
@@ -197,7 +198,8 @@ public class DbContextOptionsTest
 
         private sealed class ExtensionInfo : DbContextOptionsExtensionInfo
         {
-            public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+            public ExtensionInfo(IDbContextOptionsExtension extension)
+                : base(extension) { }
 
             public override bool IsDatabaseProvider => true;
 

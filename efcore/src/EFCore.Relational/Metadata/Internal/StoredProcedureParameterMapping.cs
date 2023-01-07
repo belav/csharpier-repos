@@ -22,7 +22,8 @@ public class StoredProcedureParameterMapping : ColumnMappingBase, IStoredProcedu
         IStoredProcedureParameter parameter,
         StoreStoredProcedureParameter storeParameter,
         StoredProcedureMapping storedProcedureMapping
-    ) : base(property, storeParameter, storedProcedureMapping)
+    )
+        : base(property, storeParameter, storedProcedureMapping)
     {
         Parameter = parameter;
     }

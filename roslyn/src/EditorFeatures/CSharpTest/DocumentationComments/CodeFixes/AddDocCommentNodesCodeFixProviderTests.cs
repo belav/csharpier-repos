@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.DocumentationComments.C
     public class AddDocCommentNodesCodesFixProviderTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddDocCommentNodesCodesFixProviderTests(ITestOutputHelper logger) : base(logger) { }
+        public AddDocCommentNodesCodesFixProviderTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

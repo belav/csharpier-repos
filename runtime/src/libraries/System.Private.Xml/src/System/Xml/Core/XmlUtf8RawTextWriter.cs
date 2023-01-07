@@ -95,7 +95,8 @@ namespace System.Xml
         }
 
         // Construct an instance of this class that serializes to a Stream interface.
-        public XmlUtf8RawTextWriter(Stream stream, XmlWriterSettings settings) : this(settings)
+        public XmlUtf8RawTextWriter(Stream stream, XmlWriterSettings settings)
+            : this(settings)
         {
             Debug.Assert(stream != null && settings != null);
 

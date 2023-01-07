@@ -70,7 +70,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isChecked,
             Type callingContext,
             IEnumerable<CSharpArgumentInfo> argumentInfo
-        ) : base(operation)
+        )
+            : base(operation)
         {
             _argumentInfo = BinderHelper.ToArray(argumentInfo);
             Debug.Assert(_argumentInfo.Length == 1);

@@ -47,7 +47,8 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
         Type serviceType,
         MethodInfo method,
         params IPropertyBase[]? serviceProperties
-    ) : base(parameterType, serviceType, serviceProperties)
+    )
+        : base(parameterType, serviceType, serviceProperties)
     {
         Check.NotNull(method, nameof(method));
 

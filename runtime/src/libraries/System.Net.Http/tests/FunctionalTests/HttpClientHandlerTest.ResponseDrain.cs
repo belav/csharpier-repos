@@ -13,7 +13,8 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class HttpClientHandler_ResponseDrain_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_ResponseDrain_Test(ITestOutputHelper output)
+            : base(output) { }
 
         protected virtual void SetResponseDrainTimeout(HttpClientHandler handler, TimeSpan time) { }
 

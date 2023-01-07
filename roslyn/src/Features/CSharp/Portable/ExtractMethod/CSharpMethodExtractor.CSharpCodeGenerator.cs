@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 AnalyzerResult analyzerResult,
                 CSharpCodeGenerationOptions options,
                 bool localFunction
-            ) : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
+            )
+                : base(insertionPoint, selectionResult, analyzerResult, options, localFunction)
             {
                 Contract.ThrowIfFalse(SemanticDocument == selectionResult.SemanticDocument);
 

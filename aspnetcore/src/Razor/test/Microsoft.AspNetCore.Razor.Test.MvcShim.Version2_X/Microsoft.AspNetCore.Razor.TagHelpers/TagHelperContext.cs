@@ -26,7 +26,8 @@ public class TagHelperContext
         TagHelperAttributeList allAttributes,
         IDictionary<object, object> items,
         string uniqueId
-    ) : this(allAttributes, items, uniqueId)
+    )
+        : this(allAttributes, items, uniqueId)
     {
         if (tagName == null)
         {

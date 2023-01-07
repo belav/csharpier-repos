@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             ProjectId projectId,
             ITypeSymbol typeSymbol
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             _projectId = projectId;
             _typeSymbolId = typeSymbol.GetSymbolKey();

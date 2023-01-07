@@ -14,7 +14,8 @@ struct S1
 {
     public uint F0;
 
-    public S1(uint f0) : this()
+    public S1(uint f0)
+        : this()
     {
         F0 = f0;
     }
@@ -25,7 +26,8 @@ struct S2
     public S1 F1;
     public int F2;
 
-    public S2(S1 f1) : this()
+    public S2(S1 f1)
+        : this()
     {
         F1 = f1;
         F2 = 1;

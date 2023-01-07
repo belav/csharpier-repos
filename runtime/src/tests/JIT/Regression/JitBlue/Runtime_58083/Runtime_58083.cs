@@ -16,7 +16,8 @@ struct S0
     public C0 F0;
     public uint F1;
 
-    public S0(C0 f0) : this()
+    public S0(C0 f0)
+        : this()
     {
         F0 = f0;
     }

@@ -55,7 +55,8 @@ namespace System.ComponentModel.DataAnnotations
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             string minimum,
             string maximum
-        ) : base(() => SR.RangeAttribute_ValidationError)
+        )
+            : base(() => SR.RangeAttribute_ValidationError)
         {
             OperandType = type;
             Minimum = minimum;

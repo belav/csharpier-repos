@@ -945,9 +945,11 @@ namespace System.Xml.Schema
         private readonly decimal _max;
         private BitSet? _nextIteration;
 
-        public LeafRangeNode(decimal min, decimal max) : this(-1, min, max) { }
+        public LeafRangeNode(decimal min, decimal max)
+            : this(-1, min, max) { }
 
-        public LeafRangeNode(int pos, decimal min, decimal max) : base(pos)
+        public LeafRangeNode(int pos, decimal min, decimal max)
+            : base(pos)
         {
             _min = min;
             _max = max;
@@ -1163,8 +1165,8 @@ namespace System.Xml.Schema
         private int _minMaxNodesCount;
         private readonly bool _enableUpaCheck;
 
-        public ParticleContentValidator(XmlSchemaContentType contentType) : this(contentType, true)
-        { }
+        public ParticleContentValidator(XmlSchemaContentType contentType)
+            : this(contentType, true) { }
 
         public ParticleContentValidator(XmlSchemaContentType contentType, bool enableUpaCheck)
             : base(contentType)
@@ -1761,7 +1763,8 @@ namespace System.Xml.Schema
             XmlSchemaContentType contentType,
             bool isOpen,
             bool isEmptiable
-        ) : base(contentType, isOpen, isEmptiable)
+        )
+            : base(contentType, isOpen, isEmptiable)
         {
             _transitionTable = transitionTable;
             _symbols = symbols;
@@ -1896,7 +1899,8 @@ namespace System.Xml.Schema
             XmlSchemaContentType contentType,
             bool isOpen,
             bool isEmptiable
-        ) : base(contentType, isOpen, isEmptiable)
+        )
+            : base(contentType, isOpen, isEmptiable)
         {
             _firstpos = firstpos;
             _followpos = followpos;
@@ -2063,7 +2067,8 @@ namespace System.Xml.Schema
             bool isEmptiable,
             BitSet positionsWithRangeTerminals,
             int minmaxNodesCount
-        ) : base(contentType, false, isEmptiable)
+        )
+            : base(contentType, false, isEmptiable)
         {
             _firstpos = firstpos;
             _followpos = followpos;
@@ -2374,7 +2379,8 @@ namespace System.Xml.Schema
             XmlSchemaContentType contentType,
             int size,
             bool isEmptiable
-        ) : base(contentType, false, isEmptiable)
+        )
+            : base(contentType, false, isEmptiable)
         {
             _elements = new Dictionary<XmlQualifiedName, int>(size);
             _particles = new object[size];

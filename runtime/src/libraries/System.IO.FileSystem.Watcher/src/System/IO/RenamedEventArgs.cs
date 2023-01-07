@@ -19,7 +19,8 @@ namespace System.IO
             string directory,
             string? name,
             string? oldName
-        ) : base(changeType, directory, name)
+        )
+            : base(changeType, directory, name)
         {
             _oldName = oldName;
             _oldFullPath = Combine(directory, oldName);

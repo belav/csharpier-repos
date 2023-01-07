@@ -7,7 +7,8 @@ public class InjectThenByPropertyExpressionMutator : ExpressionMutator
 {
     private ExpressionFinder _expressionFinder;
 
-    public InjectThenByPropertyExpressionMutator(DbContext context) : base(context) { }
+    public InjectThenByPropertyExpressionMutator(DbContext context)
+        : base(context) { }
 
     public override bool IsValid(Expression expression)
     {

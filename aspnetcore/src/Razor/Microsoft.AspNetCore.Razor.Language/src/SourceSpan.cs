@@ -11,7 +11,8 @@ public struct SourceSpan : IEquatable<SourceSpan>
 {
     public static readonly SourceSpan Undefined = new SourceSpan(SourceLocation.Undefined, 0);
 
-    public SourceSpan(int absoluteIndex, int length) : this(null, absoluteIndex, -1, -1, length) { }
+    public SourceSpan(int absoluteIndex, int length)
+        : this(null, absoluteIndex, -1, -1, length) { }
 
     public SourceSpan(SourceLocation location, int contentLength)
         : this(

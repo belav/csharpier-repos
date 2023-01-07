@@ -125,7 +125,8 @@ namespace System.Threading
             _writeLockOwnerId = -1;
         }
 
-        public ReaderWriterLockSlim() : this(LockRecursionPolicy.NoRecursion) { }
+        public ReaderWriterLockSlim()
+            : this(LockRecursionPolicy.NoRecursion) { }
 
         public ReaderWriterLockSlim(LockRecursionPolicy recursionPolicy)
         {

@@ -232,8 +232,10 @@ namespace Xunit
     /// </summary>
     public class XunitException : Exception
     {
-        public XunitException(string message) : base(message) { }
+        public XunitException(string message)
+            : base(message) { }
 
-        public XunitException() : base() { }
+        public XunitException()
+            : base() { }
     }
 }

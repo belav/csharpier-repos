@@ -279,13 +279,15 @@ namespace System.Net
         //bytes with this value in the decode map are invalid
         private const byte InvalidBase64Value = 255;
 
-        internal Base64Stream(Stream stream, Base64WriteStateInfo writeStateInfo) : base(stream)
+        internal Base64Stream(Stream stream, Base64WriteStateInfo writeStateInfo)
+            : base(stream)
         {
             _writeState = new Base64WriteStateInfo();
             _encoder = new Base64Encoder(_writeState, writeStateInfo.MaxLineLength);
         }
 
-        internal Base64Stream(Base64WriteStateInfo writeStateInfo) : base(new MemoryStream())
+        internal Base64Stream(Base64WriteStateInfo writeStateInfo)
+            : base(new MemoryStream())
         {
             _writeState = writeStateInfo;
             _encoder = new Base64Encoder(_writeState, writeStateInfo.MaxLineLength);
@@ -523,7 +525,8 @@ namespace System.Net
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;
@@ -622,7 +625,8 @@ namespace System.Net
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;

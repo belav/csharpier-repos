@@ -29,7 +29,8 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         string thumbprint,
         ICertificateResolver certificateResolver,
         ILoggerFactory loggerFactory
-    ) : this(loggerFactory, encryptor: null)
+    )
+        : this(loggerFactory, encryptor: null)
     {
         if (thumbprint == null)
         {

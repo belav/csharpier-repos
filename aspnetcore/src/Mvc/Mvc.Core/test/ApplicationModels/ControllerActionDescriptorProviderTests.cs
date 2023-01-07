@@ -1755,12 +1755,14 @@ public class ControllerActionDescriptorProviderTests
 
     private class MyRouteValueAttribute : RouteValueAttribute
     {
-        public MyRouteValueAttribute() : base("key", "value") { }
+        public MyRouteValueAttribute()
+            : base("key", "value") { }
     }
 
     private class MySecondRouteValueAttribute : RouteValueAttribute
     {
-        public MySecondRouteValueAttribute() : base("second", "value") { }
+        public MySecondRouteValueAttribute()
+            : base("second", "value") { }
     }
 
     [MyRouteValue]
@@ -2059,7 +2061,8 @@ public class ControllerActionDescriptorProviderTests
     {
         private static readonly string[] _httpMethods = new string[] { "PUT", "PATCH" };
 
-        public PutOrPatchAttribute(string template) : base(_httpMethods, template) { }
+        public PutOrPatchAttribute(string template)
+            : base(_httpMethods, template) { }
     }
 
     private class TestActionParameter

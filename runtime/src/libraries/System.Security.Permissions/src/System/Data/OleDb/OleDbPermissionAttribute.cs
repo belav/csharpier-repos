@@ -25,7 +25,8 @@ namespace System.Data.OleDb
     )]
     public sealed class OleDbPermissionAttribute : DBDataPermissionAttribute
     {
-        public OleDbPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public OleDbPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         [ComponentModel.Browsable(false)]
         [ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]

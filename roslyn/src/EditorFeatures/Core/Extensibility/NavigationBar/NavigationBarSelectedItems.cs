@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor
         public NavigationBarSelectedTypeAndMember(
             NavigationBarItem? typeItem,
             NavigationBarItem? memberItem
-        ) : this(typeItem, showTypeItemGrayed: false, memberItem, showMemberItemGrayed: false) { }
+        )
+            : this(typeItem, showTypeItemGrayed: false, memberItem, showMemberItemGrayed: false) { }
 
         public NavigationBarSelectedTypeAndMember(
             NavigationBarItem? typeItem,

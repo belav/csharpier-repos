@@ -9,7 +9,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprConstant : ExprWithType
     {
-        public ExprConstant(CType type, ConstVal value) : base(ExpressionKind.Constant, type)
+        public ExprConstant(CType type, ConstVal value)
+            : base(ExpressionKind.Constant, type)
         {
             Val = value;
         }

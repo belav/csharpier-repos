@@ -3252,7 +3252,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
     public abstract class TestTableValuedFunctionBuilder<TEntity> : DbFunctionBuilderBase
         where TEntity : class
     {
-        protected TestTableValuedFunctionBuilder(IMutableDbFunction function) : base(function) { }
+        protected TestTableValuedFunctionBuilder(IMutableDbFunction function)
+            : base(function) { }
 
         public new abstract TestTableValuedFunctionBuilder<TEntity> HasName(string name);
 

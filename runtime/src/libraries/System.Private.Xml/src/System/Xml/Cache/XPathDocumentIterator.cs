@@ -63,7 +63,8 @@ namespace MS.Internal.Xml.Cache
             XPathDocumentNavigator parent,
             string name,
             string namespaceURI
-        ) : base(parent)
+        )
+            : base(parent)
         {
             ArgumentNullException.ThrowIfNull(namespaceURI);
 
@@ -129,7 +130,8 @@ namespace MS.Internal.Xml.Cache
         /// <summary>
         /// Create a new iterator that is a copy of "iter".
         /// </summary>
-        public XPathDocumentKindChildIterator(XPathDocumentKindChildIterator iter) : base(iter)
+        public XPathDocumentKindChildIterator(XPathDocumentKindChildIterator iter)
+            : base(iter)
         {
             _typ = iter._typ;
         }
@@ -181,7 +183,8 @@ namespace MS.Internal.Xml.Cache
             string name,
             string namespaceURI,
             bool matchSelf
-        ) : base(root)
+        )
+            : base(root)
         {
             ArgumentNullException.ThrowIfNull(namespaceURI);
 
@@ -257,7 +260,8 @@ namespace MS.Internal.Xml.Cache
             XPathDocumentNavigator root,
             XPathNodeType typ,
             bool matchSelf
-        ) : base(root)
+        )
+            : base(root)
         {
             _typ = typ;
             _matchSelf = matchSelf;

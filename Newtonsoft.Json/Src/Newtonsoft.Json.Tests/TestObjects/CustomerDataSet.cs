@@ -70,7 +70,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
         protected CustomerDataSet(
             global::System.Runtime.Serialization.SerializationInfo info,
             global::System.Runtime.Serialization.StreamingContext context
-        ) : base(info, context, false)
+        )
+            : base(info, context, false)
         {
             if ((IsBinarySerialized(info, context) == true))
             {
@@ -484,7 +485,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
             protected CustomersDataTable(
                 global::System.Runtime.Serialization.SerializationInfo info,
                 global::System.Runtime.Serialization.StreamingContext context
-            ) : base(info, context)
+            )
+                : base(info, context)
             {
                 InitVars();
             }
@@ -846,7 +848,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 "System.Data.Design.TypedDataSetGenerator",
                 "4.0.0.0"
             )]
-            internal CustomersRow(global::System.Data.DataRowBuilder rb) : base(rb)
+            internal CustomersRow(global::System.Data.DataRowBuilder rb)
+                : base(rb)
             {
                 tableCustomers = ((CustomersDataTable)(Table));
             }

@@ -37,7 +37,8 @@ namespace Microsoft.TestCommon
             Type declaringType1,
             string propertyName1,
             TestDataVariations testDataVariations = TestCommon.TestDataVariations.All
-        ) : this(declaringType, propertyName, testDataVariations)
+        )
+            : this(declaringType, propertyName, testDataVariations)
         {
             ExtraDataSets = new List<Tuple<Type, string>>
             {
@@ -53,7 +54,8 @@ namespace Microsoft.TestCommon
             Type declaringType2,
             string propertyName2,
             TestDataVariations testDataVariations = TestCommon.TestDataVariations.All
-        ) : this(declaringType, propertyName, testDataVariations)
+        )
+            : this(declaringType, propertyName, testDataVariations)
         {
             ExtraDataSets = new List<Tuple<Type, string>>
             {
@@ -72,7 +74,8 @@ namespace Microsoft.TestCommon
             Type declaringType3,
             string propertyName3,
             TestDataVariations testDataVariations = TestCommon.TestDataVariations.All
-        ) : this(declaringType, propertyName, testDataVariations)
+        )
+            : this(declaringType, propertyName, testDataVariations)
         {
             ExtraDataSets = new List<Tuple<Type, string>>
             {
@@ -94,7 +97,8 @@ namespace Microsoft.TestCommon
             Type declaringType4,
             string propertyName4,
             TestDataVariations testDataVariations = TestCommon.TestDataVariations.All
-        ) : this(declaringType, propertyName, testDataVariations)
+        )
+            : this(declaringType, propertyName, testDataVariations)
         {
             ExtraDataSets = new List<Tuple<Type, string>>
             {

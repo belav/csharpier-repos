@@ -19,7 +19,8 @@ namespace System.ComponentModel.Composition.Hosting
                 CompositionScopeDefinition catalog,
                 ComposablePartDefinition partDefinition,
                 ExportDefinition exportDefinition
-            ) : base(partDefinition, exportDefinition)
+            )
+                : base(partDefinition, exportDefinition)
             {
                 _scopeManager = scopeManager;
                 _catalog = catalog;

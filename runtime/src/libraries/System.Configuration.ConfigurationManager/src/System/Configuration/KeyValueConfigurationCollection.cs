@@ -9,7 +9,8 @@ namespace System.Configuration
         private static readonly ConfigurationPropertyCollection s_properties =
             new ConfigurationPropertyCollection();
 
-        public KeyValueConfigurationCollection() : base(StringComparer.OrdinalIgnoreCase)
+        public KeyValueConfigurationCollection()
+            : base(StringComparer.OrdinalIgnoreCase)
         {
             InternalAddToEnd = true;
         }

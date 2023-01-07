@@ -19,7 +19,8 @@ namespace Internal.Cryptography
         private CngKey? _lazyKey;
         private bool _disposed;
 
-        public CngAlgorithmCore(string disposedName) : this()
+        public CngAlgorithmCore(string disposedName)
+            : this()
         {
             _disposedName = disposedName;
         }

@@ -15,7 +15,8 @@ namespace Microsoft.NET.HostModel
     {
         public readonly int Win32HResult;
 
-        public HResultException(int hResult) : base(hResult.ToString("X4"))
+        public HResultException(int hResult)
+            : base(hResult.ToString("X4"))
         {
             Win32HResult = hResult;
         }

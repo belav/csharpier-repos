@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 [Serializable]
 internal sealed class AmbiguousMatchException : Exception
 {
-    public AmbiguousMatchException(string message) : base(message) { }
+    public AmbiguousMatchException(string message)
+        : base(message) { }
 
     internal AmbiguousMatchException(SerializationInfo info, StreamingContext context)
         : base(info, context) { }

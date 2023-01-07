@@ -1139,9 +1139,11 @@ namespace System.Security.Authentication.ExtendedProtection
     public abstract partial class ChannelBinding
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        protected ChannelBinding() : base(default(bool)) { }
+        protected ChannelBinding()
+            : base(default(bool)) { }
 
-        protected ChannelBinding(bool ownsHandle) : base(default(bool)) { }
+        protected ChannelBinding(bool ownsHandle)
+            : base(default(bool)) { }
 
         public abstract int Size { get; }
     }

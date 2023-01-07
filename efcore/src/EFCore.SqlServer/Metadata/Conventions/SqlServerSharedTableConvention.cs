@@ -24,7 +24,8 @@ public class SqlServerSharedTableConvention : SharedTableConvention
     public SqlServerSharedTableConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies, relationalDependencies) { }
+    )
+        : base(dependencies, relationalDependencies) { }
 
     /// <inheritdoc />
     protected override bool IndexesUniqueAcrossTables => false;

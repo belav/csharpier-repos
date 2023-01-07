@@ -74,7 +74,8 @@ public sealed class JsonHubProtocol : IHubProtocol
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonHubProtocol"/> class.
     /// </summary>
-    public JsonHubProtocol() : this(Options.Create(new JsonHubProtocolOptions())) { }
+    public JsonHubProtocol()
+        : this(Options.Create(new JsonHubProtocolOptions())) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="JsonHubProtocol"/> class.

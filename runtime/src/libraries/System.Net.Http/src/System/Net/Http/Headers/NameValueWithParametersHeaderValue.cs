@@ -20,10 +20,11 @@ namespace System.Net.Http.Headers
         public ICollection<NameValueHeaderValue> Parameters =>
             _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
-        public NameValueWithParametersHeaderValue(string name) : base(name) { }
+        public NameValueWithParametersHeaderValue(string name)
+            : base(name) { }
 
-        public NameValueWithParametersHeaderValue(string name, string? value) : base(name, value)
-        { }
+        public NameValueWithParametersHeaderValue(string name, string? value)
+            : base(name, value) { }
 
         internal NameValueWithParametersHeaderValue() { }
 

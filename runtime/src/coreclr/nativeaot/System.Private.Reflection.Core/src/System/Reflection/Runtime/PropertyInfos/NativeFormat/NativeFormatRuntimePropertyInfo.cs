@@ -57,7 +57,8 @@ namespace System.Reflection.Runtime.PropertyInfos.NativeFormat
             NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
             RuntimeTypeInfo contextTypeInfo,
             RuntimeTypeInfo reflectedType
-        ) : base(contextTypeInfo, reflectedType)
+        )
+            : base(contextTypeInfo, reflectedType)
         {
             _propertyHandle = propertyHandle;
             _definingTypeInfo = definingTypeInfo;

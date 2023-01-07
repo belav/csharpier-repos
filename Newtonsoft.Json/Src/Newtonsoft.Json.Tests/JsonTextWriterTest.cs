@@ -1869,7 +1869,8 @@ null//comment
     {
         protected readonly TextWriter _writer;
 
-        public CustomJsonTextWriter(TextWriter textWriter) : base(textWriter)
+        public CustomJsonTextWriter(TextWriter textWriter)
+            : base(textWriter)
         {
             _writer = textWriter;
         }

@@ -13,7 +13,8 @@ internal class DummyApplication : IHttpApplication<HttpContext>
 {
     private readonly RequestDelegate _requestDelegate;
 
-    public DummyApplication() : this(context => Task.CompletedTask) { }
+    public DummyApplication()
+        : this(context => Task.CompletedTask) { }
 
     public DummyApplication(RequestDelegate requestDelegate)
     {

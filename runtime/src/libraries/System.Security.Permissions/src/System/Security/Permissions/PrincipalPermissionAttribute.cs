@@ -21,8 +21,8 @@ namespace System.Security.Permissions
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
 #endif
-        public PrincipalPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        public PrincipalPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         public bool Authenticated { get; set; }
         public string Name { get; set; }

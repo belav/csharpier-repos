@@ -22,7 +22,8 @@ public class FromSqlQueryRootExpression : EntityQueryRootExpression
         IEntityType entityType,
         string sql,
         Expression argument
-    ) : base(queryProvider, entityType)
+    )
+        : base(queryProvider, entityType)
     {
         Sql = sql;
         Argument = argument;

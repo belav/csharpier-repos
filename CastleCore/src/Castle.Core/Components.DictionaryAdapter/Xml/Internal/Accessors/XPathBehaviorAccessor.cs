@@ -36,7 +36,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             context
         ) => new XPathBehaviorAccessor(type, context);
 
-        protected XPathBehaviorAccessor(Type type, IXmlContext context) : base(type, context)
+        protected XPathBehaviorAccessor(Type type, IXmlContext context)
+            : base(type, context)
         {
             includedTypes = new XmlIncludedTypeSet();
 

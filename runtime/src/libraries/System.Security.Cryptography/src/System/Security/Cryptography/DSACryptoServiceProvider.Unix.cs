@@ -38,11 +38,13 @@ namespace System.Security.Cryptography
 
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public DSACryptoServiceProvider() : this(DefaultKeySize) { }
+        public DSACryptoServiceProvider()
+            : this(DefaultKeySize) { }
 
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
-        public DSACryptoServiceProvider(int dwKeySize) : base()
+        public DSACryptoServiceProvider(int dwKeySize)
+            : base()
         {
             ArgumentOutOfRangeException.ThrowIfNegative(dwKeySize);
 

@@ -45,19 +45,22 @@ namespace System.Data.Odbc
 
         private ConnectionState _cmdState;
 
-        public OdbcCommand() : base()
+        public OdbcCommand()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OdbcCommand(string? cmdText) : this()
+        public OdbcCommand(string? cmdText)
+            : this()
         {
             // note: arguments are assigned to properties so we do not have to trace them.
             // We still need to include them into the argument list of the definition!
             CommandText = cmdText;
         }
 
-        public OdbcCommand(string? cmdText, OdbcConnection? connection) : this()
+        public OdbcCommand(string? cmdText, OdbcConnection? connection)
+            : this()
         {
             CommandText = cmdText;
             Connection = connection;
@@ -67,7 +70,8 @@ namespace System.Data.Odbc
             string? cmdText,
             OdbcConnection? connection,
             OdbcTransaction? transaction
-        ) : this()
+        )
+            : this()
         {
             CommandText = cmdText;
             Connection = connection;

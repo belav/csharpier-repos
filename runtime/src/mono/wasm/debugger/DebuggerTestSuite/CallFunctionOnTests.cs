@@ -13,7 +13,8 @@ namespace DebuggerTests
 {
     public class CallFunctionOnTests : DebuggerTests
     {
-        public CallFunctionOnTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public CallFunctionOnTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         // This tests `callFunctionOn` with a function that the vscode-js-debug extension uses
         // Using this here as a non-trivial test case

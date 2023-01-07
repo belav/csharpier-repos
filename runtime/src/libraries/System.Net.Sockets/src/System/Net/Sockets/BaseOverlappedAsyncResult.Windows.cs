@@ -24,7 +24,8 @@ namespace System.Net.Sockets
             Socket socket,
             object? asyncState,
             AsyncCallback? asyncCallback
-        ) : base(socket, asyncState, asyncCallback)
+        )
+            : base(socket, asyncState, asyncCallback)
         {
             _cleanupCount = 1;
             if (NetEventSource.Log.IsEnabled())

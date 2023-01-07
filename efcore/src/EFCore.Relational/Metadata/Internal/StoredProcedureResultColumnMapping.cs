@@ -24,7 +24,8 @@ public class StoredProcedureResultColumnMapping
         IStoredProcedureResultColumn resultColumn,
         StoreStoredProcedureResultColumn storeResultColumn,
         StoredProcedureMapping storedProcedureMapping
-    ) : base(property, storeResultColumn, storedProcedureMapping)
+    )
+        : base(property, storeResultColumn, storedProcedureMapping)
     {
         ResultColumn = resultColumn;
     }

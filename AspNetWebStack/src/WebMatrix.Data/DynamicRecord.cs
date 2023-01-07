@@ -141,7 +141,8 @@ namespace WebMatrix.Data
             private static readonly Attribute[] _empty = new Attribute[0];
             private readonly Type _type;
 
-            public DynamicPropertyDescriptor(string name, Type type) : base(name, _empty)
+            public DynamicPropertyDescriptor(string name, Type type)
+                : base(name, _empty)
             {
                 _type = type;
             }

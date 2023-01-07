@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
 {
     internal class FakeConfigurationProvider : MemoryConfigurationProvider, IConfigurationProvider
     {
-        public FakeConfigurationProvider(MemoryConfigurationSource source) : base(source) { }
+        public FakeConfigurationProvider(MemoryConfigurationSource source)
+            : base(source) { }
 
         public new void Set(string key, string? value)
         {

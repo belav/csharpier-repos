@@ -46,7 +46,8 @@ namespace System.Web.Mvc
             _splitVaryByParamThunk = () => GetTokenizedVaryByParam(VaryByParam);
         }
 
-        internal OutputCacheAttribute(ObjectCache childActionCache) : this()
+        internal OutputCacheAttribute(ObjectCache childActionCache)
+            : this()
         {
             _childActionCacheThunk = () => childActionCache;
         }

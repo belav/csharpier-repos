@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.AddExplicit
     public partial class AddExplicitCastTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddExplicitCastTests(ITestOutputHelper logger) : base(logger) { }
+        public AddExplicitCastTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

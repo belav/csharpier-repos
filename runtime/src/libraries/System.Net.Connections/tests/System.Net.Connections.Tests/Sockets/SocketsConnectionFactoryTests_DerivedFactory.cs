@@ -44,7 +44,8 @@ namespace System.Net.Connections.Tests
 
         private sealed class CustomFactory : SocketsConnectionFactory
         {
-            public CustomFactory() : base(SocketType.Stream, ProtocolType.Tcp) { }
+            public CustomFactory()
+                : base(SocketType.Stream, ProtocolType.Tcp) { }
 
             protected override Socket CreateSocket(
                 AddressFamily addressFamily,

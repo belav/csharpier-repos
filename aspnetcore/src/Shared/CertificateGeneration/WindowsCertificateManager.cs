@@ -18,7 +18,8 @@ internal sealed class WindowsCertificateManager : CertificateManager
     public WindowsCertificateManager() { }
 
     // For testing purposes only
-    internal WindowsCertificateManager(string subject, int version) : base(subject, version) { }
+    internal WindowsCertificateManager(string subject, int version)
+        : base(subject, version) { }
 
     protected override bool IsExportable(X509Certificate2 c)
     {

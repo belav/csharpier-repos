@@ -128,7 +128,8 @@ public class UserClaimsPrincipalFactory<TUser, TRole> : UserClaimsPrincipalFacto
         UserManager<TUser> userManager,
         RoleManager<TRole> roleManager,
         IOptions<IdentityOptions> options
-    ) : base(userManager, options)
+    )
+        : base(userManager, options)
     {
         if (roleManager == null)
         {

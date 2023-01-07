@@ -66,10 +66,12 @@ namespace Microsoft.Win32.SafeHandles
         private SafeHandle? _parentHandle;
 
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle() : base(true) { }
+        protected SafeNCryptHandle()
+            : base(true) { }
 
         [SupportedOSPlatform("windows")]
-        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle) : base(true)
+        protected SafeNCryptHandle(IntPtr handle, SafeHandle parentHandle)
+            : base(true)
         {
             ArgumentNullException.ThrowIfNull(parentHandle);
 

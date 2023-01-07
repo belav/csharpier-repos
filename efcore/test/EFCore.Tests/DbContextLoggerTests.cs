@@ -560,6 +560,7 @@ public class DbContextLoggerTests
 
     private class LoggingContext : DbContext
     {
-        public LoggingContext(DbContextOptions options) : base(options) { }
+        public LoggingContext(DbContextOptions options)
+            : base(options) { }
     }
 }

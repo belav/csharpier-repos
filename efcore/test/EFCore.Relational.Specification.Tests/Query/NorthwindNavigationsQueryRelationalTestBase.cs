@@ -7,7 +7,8 @@ public abstract class NorthwindNavigationsQueryRelationalTestBase<TFixture>
     : NorthwindNavigationsQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindNavigationsQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindNavigationsQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     public override Task Where_subquery_on_navigation_client_eval(bool async) =>
         AssertTranslationFailed(() => base.Where_subquery_on_navigation_client_eval(async));

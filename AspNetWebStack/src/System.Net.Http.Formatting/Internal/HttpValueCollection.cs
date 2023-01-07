@@ -50,7 +50,8 @@ namespace System.Net.Http.Formatting.Internal
         protected HttpValueCollection(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        private HttpValueCollection() : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
+        private HttpValueCollection()
+            : base(StringComparer.OrdinalIgnoreCase) // case-insensitive keys
         { }
 #endif
 

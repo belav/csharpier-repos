@@ -17,9 +17,11 @@ namespace MS.Internal.Xml.XPath
             string name,
             string namespaceURI,
             bool matchSelf
-        ) : base(nav, name, namespaceURI, matchSelf) { }
+        )
+            : base(nav, name, namespaceURI, matchSelf) { }
 
-        public XPathDescendantIterator(XPathDescendantIterator it) : base(it)
+        public XPathDescendantIterator(XPathDescendantIterator it)
+            : base(it)
         {
             _level = it._level;
         }

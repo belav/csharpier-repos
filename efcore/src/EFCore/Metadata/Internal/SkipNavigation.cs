@@ -41,7 +41,8 @@ public class SkipNavigation
         bool collection,
         bool onDependent,
         ConfigurationSource configurationSource
-    ) : base(name, propertyInfo, fieldInfo, configurationSource)
+    )
+        : base(name, propertyInfo, fieldInfo, configurationSource)
     {
         DeclaringEntityType = declaringEntityType;
         TargetEntityType = targetEntityType;

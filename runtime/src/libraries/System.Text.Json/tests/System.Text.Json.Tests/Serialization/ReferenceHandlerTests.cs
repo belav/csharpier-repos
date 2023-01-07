@@ -7,8 +7,8 @@ namespace System.Text.Json.Serialization.Tests
 {
     public sealed class ReferenceHandlerTestsDynamic_String : ReferenceHandlerTests
     {
-        public ReferenceHandlerTestsDynamic_String() : base(JsonSerializerWrapper.StringSerializer)
-        { }
+        public ReferenceHandlerTestsDynamic_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public sealed class ReferenceHandlerTestsDynamic_AsyncStream : ReferenceHandlerTests

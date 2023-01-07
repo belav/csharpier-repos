@@ -11,12 +11,14 @@ namespace System.IO
     )]
     public class EndOfStreamException : IOException
     {
-        public EndOfStreamException() : base(SR.Arg_EndOfStreamException)
+        public EndOfStreamException()
+            : base(SR.Arg_EndOfStreamException)
         {
             HResult = HResults.COR_E_ENDOFSTREAM;
         }
 
-        public EndOfStreamException(string? message) : base(message)
+        public EndOfStreamException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_ENDOFSTREAM;
         }

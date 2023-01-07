@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Configuration.Ini
         /// Initializes a new instance with the specified source.
         /// </summary>
         /// <param name="source">The source settings.</param>
-        public IniConfigurationProvider(IniConfigurationSource source) : base(source) { }
+        public IniConfigurationProvider(IniConfigurationSource source)
+            : base(source) { }
 
         /// <summary>
         /// Loads the INI data from a stream.

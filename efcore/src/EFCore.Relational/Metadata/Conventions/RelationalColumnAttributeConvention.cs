@@ -21,7 +21,8 @@ public class RelationalColumnAttributeConvention : PropertyAttributeConventionBa
     public RelationalColumnAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

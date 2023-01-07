@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public ChecksumCollection(ImmutableArray<Checksum> checksums)
             : this(checksums.CastArray<object>()) { }
 
-        public ChecksumCollection(ImmutableArray<object> checksums) : base(checksums) { }
+        public ChecksumCollection(ImmutableArray<object> checksums)
+            : base(checksums) { }
 
         public int Count => Children.Length;
         public Checksum this[int index] => (Checksum)Children[index];

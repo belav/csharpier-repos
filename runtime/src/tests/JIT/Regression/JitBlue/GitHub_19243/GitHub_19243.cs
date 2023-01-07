@@ -8,7 +8,8 @@ struct S0
     public long F0;
     public sbyte F4;
 
-    public S0(long f0) : this()
+    public S0(long f0)
+        : this()
     {
         F0 = f0;
     }

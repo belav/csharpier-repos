@@ -20,7 +20,8 @@ public class SqlServerAggregateMethodCallTranslatorProvider
     /// </summary>
     public SqlServerAggregateMethodCallTranslatorProvider(
         RelationalAggregateMethodCallTranslatorProviderDependencies dependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         var sqlExpressionFactory = dependencies.SqlExpressionFactory;
         var typeMappingSource = dependencies.RelationalTypeMappingSource;

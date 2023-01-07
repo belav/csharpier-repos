@@ -61,7 +61,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isChecked,
             Type callingContext,
             IEnumerable<CSharpArgumentInfo> argumentInfo
-        ) : base(BinderHelper.CreateCallInfo(ref argumentInfo, 2)) // discard 2 arguments: the target object and the value
+        )
+            : base(BinderHelper.CreateCallInfo(ref argumentInfo, 2)) // discard 2 arguments: the target object and the value
         {
             IsCompoundAssignment = isCompoundAssignment;
             _argumentInfo = argumentInfo as CSharpArgumentInfo[];

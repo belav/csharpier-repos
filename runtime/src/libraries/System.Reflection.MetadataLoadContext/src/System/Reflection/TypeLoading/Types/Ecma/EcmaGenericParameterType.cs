@@ -14,7 +14,8 @@ namespace System.Reflection.TypeLoading.Ecma
     {
         private readonly EcmaModule _ecmaModule;
 
-        internal EcmaGenericParameterType(GenericParameterHandle handle, EcmaModule module) : base()
+        internal EcmaGenericParameterType(GenericParameterHandle handle, EcmaModule module)
+            : base()
         {
             Debug.Assert(!handle.IsNil);
 

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit.NoPia
         public EmbeddedType(
             EmbeddedTypesManager typeManager,
             NamedTypeSymbolAdapter underlyingNamedType
-        ) : base(typeManager, underlyingNamedType)
+        )
+            : base(typeManager, underlyingNamedType)
         {
             Debug.Assert(underlyingNamedType.AdaptedNamedTypeSymbol.IsDefinition);
             Debug.Assert(underlyingNamedType.AdaptedNamedTypeSymbol.IsTopLevelType());

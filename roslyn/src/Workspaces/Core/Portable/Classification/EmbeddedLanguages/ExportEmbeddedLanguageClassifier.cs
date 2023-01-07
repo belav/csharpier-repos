@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Classification
             string name,
             string language,
             params string[] identifiers
-        ) : base(typeof(IEmbeddedLanguageClassifier))
+        )
+            : base(typeof(IEmbeddedLanguageClassifier))
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));
             Language = language ?? throw new ArgumentNullException(nameof(language));
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Classification
             string language,
             bool supportsUnannotatedAPIs,
             params string[] identifiers
-        ) : base(name, language, identifiers)
+        )
+            : base(name, language, identifiers)
         {
             SupportsUnannotatedAPIs = supportsUnannotatedAPIs;
         }

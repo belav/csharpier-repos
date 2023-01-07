@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor
     {
         public string DefaultContentType { get; }
 
-        public ContentTypeLanguageMetadata(IDictionary<string, object> data) : base(data)
+        public ContentTypeLanguageMetadata(IDictionary<string, object> data)
+            : base(data)
         {
             this.DefaultContentType = (string)data.GetValueOrDefault("DefaultContentType");
         }

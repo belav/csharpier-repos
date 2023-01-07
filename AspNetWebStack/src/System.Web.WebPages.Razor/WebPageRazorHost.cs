@@ -96,14 +96,16 @@ namespace System.Web.WebPages.Razor
             EnableInstrumentation = false;
         }
 
-        public WebPageRazorHost(string virtualPath) : this(virtualPath, null) { }
+        public WebPageRazorHost(string virtualPath)
+            : this(virtualPath, null) { }
 
         [SuppressMessage(
             "Microsoft.Usage",
             "CA2214:DoNotCallOverridableMethodsInConstructors",
             Justification = "The code path is safe, it is a property setter and not dependent on other state"
         )]
-        public WebPageRazorHost(string virtualPath, string physicalPath) : this()
+        public WebPageRazorHost(string virtualPath, string physicalPath)
+            : this()
         {
             if (String.IsNullOrEmpty(virtualPath))
             {

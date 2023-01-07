@@ -22,7 +22,8 @@ namespace System.Collections.Frozen
         internal OrdinalStringFrozenDictionary(
             Dictionary<string, TValue> source,
             IEqualityComparer<string> comparer
-        ) : base(comparer)
+        )
+            : base(comparer)
         {
             Debug.Assert(source.Count != 0);
             Debug.Assert(

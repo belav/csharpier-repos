@@ -405,7 +405,8 @@ namespace System.Linq.Expressions.Interpreter
             MethodInfo target,
             int argumentCount,
             ByRefUpdater[] byrefArgs
-        ) : base(target, argumentCount)
+        )
+            : base(target, argumentCount)
         {
             _byrefArgs = byrefArgs;
         }

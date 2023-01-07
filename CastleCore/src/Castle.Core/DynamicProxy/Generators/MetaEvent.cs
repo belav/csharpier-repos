@@ -37,7 +37,8 @@ namespace Castle.DynamicProxy.Generators
             MetaMethod adder,
             MetaMethod remover,
             EventAttributes attributes
-        ) : base(@event)
+        )
+            : base(@event)
         {
             if (adder == null)
             {

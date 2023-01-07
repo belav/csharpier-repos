@@ -12,7 +12,8 @@ namespace System.CommandLine;
 public class CommandLineConfigurationException : Exception
 {
     /// <inheritdoc />
-    public CommandLineConfigurationException(string message) : base(message) { }
+    public CommandLineConfigurationException(string message)
+        : base(message) { }
 
     /// <inheritdoc />
     public CommandLineConfigurationException() { }

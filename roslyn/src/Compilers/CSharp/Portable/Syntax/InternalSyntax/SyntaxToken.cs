@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         // are called A LOT and we want to keep them as short and simple as possible and increase the
         // likelihood that they will be inlined.
 
-        internal SyntaxToken(SyntaxKind kind) : base(kind)
+        internal SyntaxToken(SyntaxKind kind)
+            : base(kind)
         {
             FullWidth = this.Text.Length;
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
@@ -37,13 +38,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind kind,
             DiagnosticInfo[] diagnostics,
             SyntaxAnnotation[] annotations
-        ) : base(kind, diagnostics, annotations)
+        )
+            : base(kind, diagnostics, annotations)
         {
             FullWidth = this.Text.Length;
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
         }
 
-        internal SyntaxToken(SyntaxKind kind, int fullWidth) : base(kind, fullWidth)
+        internal SyntaxToken(SyntaxKind kind, int fullWidth)
+            : base(kind, fullWidth)
         {
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
         }
@@ -59,12 +62,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int fullWidth,
             DiagnosticInfo[] diagnostics,
             SyntaxAnnotation[] annotations
-        ) : base(kind, diagnostics, annotations, fullWidth)
+        )
+            : base(kind, diagnostics, annotations, fullWidth)
         {
             this.flags |= NodeFlags.IsNotMissing; //note: cleared by subclasses representing missing tokens
         }
 
-        internal SyntaxToken(ObjectReader reader) : base(reader)
+        internal SyntaxToken(ObjectReader reader)
+            : base(reader)
         {
             var text = this.Text;
             if (text != null)

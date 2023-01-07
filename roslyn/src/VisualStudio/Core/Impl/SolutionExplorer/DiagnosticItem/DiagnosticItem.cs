@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             DiagnosticDescriptor descriptor,
             ReportDiagnostic effectiveSeverity,
             IAnalyzersCommandHandler commandHandler
-        ) : base(descriptor.Id + ": " + descriptor.Title)
+        )
+            : base(descriptor.Id + ": " + descriptor.Title)
         {
             ProjectId = projectId;
             _analyzerReference = analyzerReference;

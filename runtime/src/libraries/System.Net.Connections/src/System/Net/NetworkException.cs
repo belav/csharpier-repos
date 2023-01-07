@@ -19,7 +19,8 @@ namespace System.Net
             string message,
             NetworkError error,
             Exception? innerException = null
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             NetworkError = error;
         }
@@ -28,7 +29,8 @@ namespace System.Net
         protected NetworkException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext)
+        )
+            : base(serializationInfo, streamingContext)
         {
             NetworkError = (NetworkError)serializationInfo.GetInt32("NetworkError");
         }

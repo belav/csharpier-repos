@@ -1591,7 +1591,8 @@ namespace PInvokeTests
         [DllImport("PInvokeNative", CallingConvention = CallingConvention.StdCall)]
         public static extern bool ReleaseMemory(IntPtr handle);
 
-        public SafeMemoryHandle() : base(IntPtr.Zero, true) { }
+        public SafeMemoryHandle()
+            : base(IntPtr.Zero, true) { }
 
         private static readonly IntPtr _invalidHandleValue = new IntPtr(-1);
 

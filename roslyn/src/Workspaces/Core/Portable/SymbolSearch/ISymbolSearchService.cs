@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
             string typeName,
             string? version,
             ImmutableArray<string> containingNamespaceNames
-        ) : base(packageName, rank)
+        )
+            : base(packageName, rank)
         {
             TypeName = typeName;
             Version = version;

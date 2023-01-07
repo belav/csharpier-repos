@@ -20,12 +20,14 @@ namespace System
     )]
     public sealed class IndexOutOfRangeException : SystemException
     {
-        public IndexOutOfRangeException() : base(SR.Arg_IndexOutOfRangeException)
+        public IndexOutOfRangeException()
+            : base(SR.Arg_IndexOutOfRangeException)
         {
             HResult = HResults.COR_E_INDEXOUTOFRANGE;
         }
 
-        public IndexOutOfRangeException(string? message) : base(message)
+        public IndexOutOfRangeException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_INDEXOUTOFRANGE;
         }

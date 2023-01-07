@@ -43,7 +43,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanSByte : LessThanInstruction
         {
-            public LessThanSByte(object? nullValue) : base(nullValue) { }
+            public LessThanSByte(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -63,7 +64,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanInt16 : LessThanInstruction
         {
-            public LessThanInt16(object? nullValue) : base(nullValue) { }
+            public LessThanInt16(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -83,7 +85,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanChar : LessThanInstruction
         {
-            public LessThanChar(object? nullValue) : base(nullValue) { }
+            public LessThanChar(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -103,7 +106,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanInt32 : LessThanInstruction
         {
-            public LessThanInt32(object? nullValue) : base(nullValue) { }
+            public LessThanInt32(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -123,7 +127,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanInt64 : LessThanInstruction
         {
-            public LessThanInt64(object? nullValue) : base(nullValue) { }
+            public LessThanInt64(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -143,7 +148,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanByte : LessThanInstruction
         {
-            public LessThanByte(object? nullValue) : base(nullValue) { }
+            public LessThanByte(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -163,7 +169,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanUInt16 : LessThanInstruction
         {
-            public LessThanUInt16(object? nullValue) : base(nullValue) { }
+            public LessThanUInt16(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -183,7 +190,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanUInt32 : LessThanInstruction
         {
-            public LessThanUInt32(object? nullValue) : base(nullValue) { }
+            public LessThanUInt32(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -203,7 +211,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanUInt64 : LessThanInstruction
         {
-            public LessThanUInt64(object? nullValue) : base(nullValue) { }
+            public LessThanUInt64(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -223,7 +232,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanSingle : LessThanInstruction
         {
-            public LessThanSingle(object? nullValue) : base(nullValue) { }
+            public LessThanSingle(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -243,7 +253,8 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanDouble : LessThanInstruction
         {
-            public LessThanDouble(object? nullValue) : base(nullValue) { }
+            public LessThanDouble(object? nullValue)
+                : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {

@@ -13,7 +13,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr arguments,
             ExprMemberGroup member,
             MethWithInst method
-        ) : base(ExpressionKind.Call, type)
+        )
+            : base(ExpressionKind.Call, type)
         {
             Debug.Assert(
                 (

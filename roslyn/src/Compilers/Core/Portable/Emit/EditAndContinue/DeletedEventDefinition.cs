@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             DeletedMethodDefinition? caller,
             ITypeDefinition containingTypeDef,
             Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
-        ) : base(oldEvent, typesUsedByDeletedMembers)
+        )
+            : base(oldEvent, typesUsedByDeletedMembers)
         {
             _containingTypeDef = containingTypeDef;
             _adder = adder;

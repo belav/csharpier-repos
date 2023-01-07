@@ -133,7 +133,8 @@ namespace System.Data
         /// <summary>
         /// Initializes a new instance of the <see cref='System.Data.DataView'/> class.
         /// </summary>
-        public DataView() : this(null)
+        public DataView()
+            : this(null)
         {
             SetIndex2("", DataViewRowState.CurrentRows, null, true);
         }
@@ -142,7 +143,8 @@ namespace System.Data
         /// Initializes a new instance of the <see cref='System.Data.DataView'/> class with the
         ///    specified <see cref='System.Data.DataTable'/>.
         /// </summary>
-        public DataView(DataTable? table) : this(table, false)
+        public DataView(DataTable? table)
+            : this(table, false)
         {
             SetIndex2("", DataViewRowState.CurrentRows, null, true);
         }

@@ -25,7 +25,8 @@ namespace System.ServiceProcess
     )]
     public class ServiceControllerPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public ServiceControllerPermissionAttribute(SecurityAction action) : base(action) { }
+        public ServiceControllerPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public string MachineName
         {

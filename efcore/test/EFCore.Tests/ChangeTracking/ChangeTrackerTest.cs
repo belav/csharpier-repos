@@ -2709,7 +2709,8 @@ public class ChangeTrackerTest
     {
         public LikeAZooContext() { }
 
-        protected LikeAZooContext(DbContextOptions options) : base(options) { }
+        protected LikeAZooContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Cat> Cats => Set<Cat>();
 

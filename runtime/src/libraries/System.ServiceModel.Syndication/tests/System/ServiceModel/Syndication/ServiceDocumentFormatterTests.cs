@@ -1067,9 +1067,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : ServiceDocumentFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(ServiceDocument document) : base(document) { }
+            public Formatter(ServiceDocument document)
+                : base(document) { }
 
             public static SyndicationCategory CreateCategoryEntryPoint(
                 InlineCategoriesDocument inlineCategories

@@ -77,7 +77,8 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeOpenStaticThunk : DelegateThunk
     {
-        internal DelegateInvokeOpenStaticThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
+        internal DelegateInvokeOpenStaticThunk(DelegateInfo delegateInfo)
+            : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -120,7 +121,8 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeOpenInstanceThunk : DelegateThunk
     {
-        internal DelegateInvokeOpenInstanceThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
+        internal DelegateInvokeOpenInstanceThunk(DelegateInfo delegateInfo)
+            : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -203,7 +205,8 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeClosedStaticThunk : DelegateThunk
     {
-        internal DelegateInvokeClosedStaticThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
+        internal DelegateInvokeClosedStaticThunk(DelegateInfo delegateInfo)
+            : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -260,7 +263,8 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeMulticastThunk : DelegateThunk
     {
-        internal DelegateInvokeMulticastThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
+        internal DelegateInvokeMulticastThunk(DelegateInfo delegateInfo)
+            : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {
@@ -445,7 +449,8 @@ namespace Internal.IL.Stubs
     /// </summary>
     public sealed partial class DelegateInvokeObjectArrayThunk : DelegateThunk
     {
-        internal DelegateInvokeObjectArrayThunk(DelegateInfo delegateInfo) : base(delegateInfo) { }
+        internal DelegateInvokeObjectArrayThunk(DelegateInfo delegateInfo)
+            : base(delegateInfo) { }
 
         public override MethodIL EmitIL()
         {

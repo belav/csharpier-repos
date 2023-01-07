@@ -280,7 +280,8 @@ namespace System.ComponentModel.Design
                 public int GetHashCode(Type obj) => obj.FullName!.GetHashCode();
             }
 
-            public ServiceCollection() : base(s_serviceTypeComparer) { }
+            public ServiceCollection()
+                : base(s_serviceTypeComparer) { }
         }
     }
 }

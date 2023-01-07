@@ -36,7 +36,8 @@ namespace System.IO.Strategies
                 PreAllocatedOverlapped? preallocatedOverlapped,
                 int numBufferedBytes,
                 byte[]? bytes
-            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            )
+                : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _numBufferedBytes = numBufferedBytes;
                 _strategy = strategy;
@@ -304,7 +305,8 @@ namespace System.IO.Strategies
                 Net5CompatFileStreamStrategy strategy,
                 int numBufferedBytes,
                 ReadOnlyMemory<byte> memory
-            ) : base(strategy, null, numBufferedBytes, null) // this type handles the pinning, so null is passed for bytes
+            )
+                : base(strategy, null, numBufferedBytes, null) // this type handles the pinning, so null is passed for bytes
             {
                 _handle = memory.Pin();
             }

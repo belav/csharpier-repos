@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : InheritanceQueryFixtureBase, new()
 {
-    protected InheritanceQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected InheritanceQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

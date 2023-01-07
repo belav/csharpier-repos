@@ -68,7 +68,8 @@ public class MemoryOptimizedTablesTest
 
     private class MemoryOptimizedContext : DbContext
     {
-        public MemoryOptimizedContext(DbContextOptions options) : base(options) { }
+        public MemoryOptimizedContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<FastUn> FastUns { get; set; }
 

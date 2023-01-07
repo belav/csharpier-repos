@@ -14,7 +14,8 @@ public class StoreValueGenerationLegacySqliteTest
     public StoreValueGenerationLegacySqliteTest(
         StoreValueGenerationSqliteFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         // fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

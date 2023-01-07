@@ -56,7 +56,8 @@ namespace System.ComponentModel.DataAnnotations
         ///     Constructor that accepts the string name of a custom data type
         /// </summary>
         /// <param name="customDataType">The string name of the custom data type.</param>
-        public DataTypeAttribute(string customDataType) : this(DataType.Custom)
+        public DataTypeAttribute(string customDataType)
+            : this(DataType.Custom)
         {
             CustomDataType = customDataType;
         }

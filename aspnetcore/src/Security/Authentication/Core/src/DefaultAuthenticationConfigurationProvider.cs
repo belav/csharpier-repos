@@ -12,7 +12,8 @@ internal sealed class DefaultAuthenticationConfigurationProvider
     private const string AuthenticationKey = "Authentication";
 
     // Note: this generally will never be called except in unit tests as IConfiguration is generally available from the host
-    public DefaultAuthenticationConfigurationProvider() : this(new ConfigurationManager()) { }
+    public DefaultAuthenticationConfigurationProvider()
+        : this(new ConfigurationManager()) { }
 
     public DefaultAuthenticationConfigurationProvider(IConfiguration configuration) =>
         _configuration = configuration;

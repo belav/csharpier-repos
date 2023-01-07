@@ -896,7 +896,8 @@ namespace BasicEventSourceTests
 
     public sealed class EventSourceTestByteArray : EventSource
     {
-        public EventSourceTestByteArray(EventSourceSettings settings) : base(settings) { }
+        public EventSourceTestByteArray(EventSourceSettings settings)
+            : base(settings) { }
 
         // byte[] args not supported on 4.5
         [Event(1, Level = EventLevel.Informational, Message = "Int arg after byte array: {1}")]

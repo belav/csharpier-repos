@@ -12,7 +12,8 @@ namespace System.Net.Http
     [Serializable]
     internal sealed class WinHttpException : Win32Exception
     {
-        public WinHttpException(int error, string message) : base(error, message)
+        public WinHttpException(int error, string message)
+            : base(error, message)
         {
             this.HResult = ConvertErrorCodeToHR(error);
         }

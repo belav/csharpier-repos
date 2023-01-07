@@ -110,7 +110,8 @@ namespace Newtonsoft.Json.Linq
 
         internal JContainer() { }
 
-        internal JContainer(JContainer other, JsonCloneSettings? settings) : this()
+        internal JContainer(JContainer other, JsonCloneSettings? settings)
+            : this()
         {
             ValidationUtils.ArgumentNotNull(other, nameof(other));
 

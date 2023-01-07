@@ -14,7 +14,8 @@ namespace Microsoft.Win32.SafeHandles
     {
         internal int Length { get; private set; }
 
-        public SafePasswordHandle(string? password) : base(ownsHandle: true)
+        public SafePasswordHandle(string? password)
+            : base(ownsHandle: true)
         {
             if (password != null)
             {
@@ -23,7 +24,8 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafePasswordHandle(ReadOnlySpan<char> password) : base(ownsHandle: true)
+        public SafePasswordHandle(ReadOnlySpan<char> password)
+            : base(ownsHandle: true)
         {
             // "".AsSpan() is not default, so this is compat for "null tries NULL first".
             if (password != default)
@@ -45,7 +47,8 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafePasswordHandle(SecureString? password) : base(ownsHandle: true)
+        public SafePasswordHandle(SecureString? password)
+            : base(ownsHandle: true)
         {
             if (password != null)
             {

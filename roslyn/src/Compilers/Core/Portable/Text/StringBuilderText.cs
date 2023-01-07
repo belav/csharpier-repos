@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Text
             StringBuilder builder,
             Encoding? encodingOpt,
             SourceHashAlgorithm checksumAlgorithm
-        ) : base(checksumAlgorithm: checksumAlgorithm)
+        )
+            : base(checksumAlgorithm: checksumAlgorithm)
         {
             RoslynDebug.Assert(builder != null);
 

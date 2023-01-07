@@ -16,21 +16,24 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerCloseTest : CloseTest
     {
-        public InvokerCloseTest(ITestOutputHelper output) : base(output) { }
+        public InvokerCloseTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientCloseTest : CloseTest
     {
-        public HttpClientCloseTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientCloseTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseHttpClient => true;
     }
 
     public class CloseTest : ClientWebSocketTestBase
     {
-        public CloseTest(ITestOutputHelper output) : base(output) { }
+        public CloseTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/28957")]
         [OuterLoop(

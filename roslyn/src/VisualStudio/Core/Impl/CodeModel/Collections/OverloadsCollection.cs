@@ -25,8 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private OverloadsCollection(CodeModelState state, CodeFunction parent) : base(state, parent)
-        { }
+        private OverloadsCollection(CodeModelState state, CodeFunction parent)
+            : base(state, parent) { }
 
         private ImmutableArray<EnvDTE.CodeElement> _overloads;
 

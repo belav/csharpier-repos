@@ -9,12 +9,14 @@ namespace Microsoft.Win32.SafeHandles
     public abstract partial class SafeNCryptHandle
         : Microsoft.Win32.SafeHandles.SafeHandleZeroOrMinusOneIsInvalid
     {
-        protected SafeNCryptHandle() : base(default(bool)) { }
+        protected SafeNCryptHandle()
+            : base(default(bool)) { }
 
         protected SafeNCryptHandle(
             System.IntPtr handle,
             System.Runtime.InteropServices.SafeHandle parentHandle
-        ) : base(default(bool)) { }
+        )
+            : base(default(bool)) { }
 
         public override bool IsInvalid
         {
@@ -1078,7 +1080,8 @@ namespace System.Security.Cryptography
         : System.Security.Cryptography.ECDiffieHellmanPublicKey
     {
         // ECDiffieHellmanPublicKey parameter-less ctor only exist on .NET Framework 4.7+
-        private ECDiffieHellmanCngPublicKey() : base(null) { }
+        private ECDiffieHellmanCngPublicKey()
+            : base(null) { }
 
         public System.Security.Cryptography.CngKeyBlobFormat BlobFormat
         {

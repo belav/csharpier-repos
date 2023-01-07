@@ -28,7 +28,8 @@ namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
             ParameterHandle parameterHandle,
             QSignatureTypeHandle qualifiedParameterTypeHandle,
             TypeContext typeContext
-        ) : base(member, position, qualifiedParameterTypeHandle, typeContext)
+        )
+            : base(member, position, qualifiedParameterTypeHandle, typeContext)
         {
             _methodHandle = methodHandle;
             _parameterHandle = parameterHandle;

@@ -14,7 +14,8 @@ namespace System.Web.Razor.Parser
         private Action<BlockType> _startBlockCallback;
         private Action _completeCallback;
 
-        public CallbackVisitor(Action<Span> spanCallback) : this(spanCallback, _ => { }) { }
+        public CallbackVisitor(Action<Span> spanCallback)
+            : this(spanCallback, _ => { }) { }
 
         public CallbackVisitor(Action<Span> spanCallback, Action<RazorError> errorCallback)
             : this(spanCallback, errorCallback, _ => { }, _ => { }) { }
@@ -24,7 +25,8 @@ namespace System.Web.Razor.Parser
             Action<RazorError> errorCallback,
             Action<BlockType> startBlockCallback,
             Action<BlockType> endBlockCallback
-        ) : this(spanCallback, errorCallback, startBlockCallback, endBlockCallback, () => { }) { }
+        )
+            : this(spanCallback, errorCallback, startBlockCallback, endBlockCallback, () => { }) { }
 
         public CallbackVisitor(
             Action<Span> spanCallback,

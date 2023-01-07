@@ -10,7 +10,8 @@ namespace System.Configuration
         private readonly long _minValue;
         private readonly long _resolution;
 
-        public LongValidator(long minValue, long maxValue) : this(minValue, maxValue, false, 1) { }
+        public LongValidator(long minValue, long maxValue)
+            : this(minValue, maxValue, false, 1) { }
 
         public LongValidator(long minValue, long maxValue, bool rangeIsExclusive)
             : this(minValue, maxValue, rangeIsExclusive, 1) { }

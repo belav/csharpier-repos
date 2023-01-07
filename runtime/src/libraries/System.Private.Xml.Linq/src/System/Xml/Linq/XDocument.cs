@@ -58,7 +58,8 @@ namespace System.Xml.Linq
         /// See <see cref="XContainer.Add(object)"/> for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XDocument(params object?[] content) : this()
+        public XDocument(params object?[] content)
+            : this()
         {
             AddContentSkipNotify(content);
         }
@@ -85,7 +86,8 @@ namespace System.Xml.Linq
         /// See <see cref="XContainer.Add(object)"/> for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XDocument(XDeclaration? declaration, params object?[] content) : this(content)
+        public XDocument(XDeclaration? declaration, params object?[] content)
+            : this(content)
         {
             _declaration = declaration;
         }
@@ -97,7 +99,8 @@ namespace System.Xml.Linq
         /// <param name="other">
         /// The <see cref="XDocument"/> object that will be copied.
         /// </param>
-        public XDocument(XDocument other) : base(other)
+        public XDocument(XDocument other)
+            : base(other)
         {
             if (other._declaration != null)
             {

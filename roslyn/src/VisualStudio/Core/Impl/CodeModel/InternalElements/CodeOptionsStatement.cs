@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             string name,
             int ordinal
-        ) : base(state, fileCodeModel)
+        )
+            : base(state, fileCodeModel)
         {
             _name = name;
             _ordinal = ordinal;
@@ -59,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) : base(state, fileCodeModel, nodeKind)
+        )
+            : base(state, fileCodeModel, nodeKind)
         {
             _name = name;
         }

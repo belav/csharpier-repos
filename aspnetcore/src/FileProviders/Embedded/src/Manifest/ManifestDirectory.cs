@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal class ManifestDirectory : ManifestEntry
 {
-    protected ManifestDirectory(string name, ManifestEntry[] children) : base(name)
+    protected ManifestDirectory(string name, ManifestEntry[] children)
+        : base(name)
     {
         if (children == null)
         {

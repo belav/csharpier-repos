@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             ITextBuffer buffer,
             InlineRenameService renameService,
             IClassificationType classificationType
-        ) : base(buffer, renameService)
+        )
+            : base(buffer, renameService)
         {
             _classificationType = classificationType;
         }

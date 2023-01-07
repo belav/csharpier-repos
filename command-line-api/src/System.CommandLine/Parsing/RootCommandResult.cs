@@ -13,7 +13,8 @@ namespace System.CommandLine.Parsing
             Command command,
             Token token,
             Dictionary<Symbol, SymbolResult> symbolResults
-        ) : base(command, token)
+        )
+            : base(command, token)
         {
             _symbolResults = symbolResults;
         }

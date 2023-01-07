@@ -13,12 +13,14 @@ namespace System.IO
     )]
     public partial class FileNotFoundException : IOException
     {
-        public FileNotFoundException() : base(SR.IO_FileNotFound)
+        public FileNotFoundException()
+            : base(SR.IO_FileNotFound)
         {
             HResult = HResults.COR_E_FILENOTFOUND;
         }
 
-        public FileNotFoundException(string? message) : base(message)
+        public FileNotFoundException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_FILENOTFOUND;
         }
@@ -29,7 +31,8 @@ namespace System.IO
             HResult = HResults.COR_E_FILENOTFOUND;
         }
 
-        public FileNotFoundException(string? message, string? fileName) : base(message)
+        public FileNotFoundException(string? message, string? fileName)
+            : base(message)
         {
             HResult = HResults.COR_E_FILENOTFOUND;
             FileName = fileName;

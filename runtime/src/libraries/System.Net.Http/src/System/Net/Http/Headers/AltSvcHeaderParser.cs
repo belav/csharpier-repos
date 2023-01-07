@@ -16,7 +16,8 @@ namespace System.Net.Http.Headers
 
         public static AltSvcHeaderParser Parser { get; } = new AltSvcHeaderParser();
 
-        private AltSvcHeaderParser() : base(supportsMultipleValues: true) { }
+        private AltSvcHeaderParser()
+            : base(supportsMultipleValues: true) { }
 
         protected override int GetParsedValueLength(
             string value,

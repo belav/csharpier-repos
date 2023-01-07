@@ -22,7 +22,8 @@ struct S1
     public sbyte F4;
     public short F0;
 
-    public S1(sbyte f4) : this()
+    public S1(sbyte f4)
+        : this()
     {
         F4 = f4;
     }

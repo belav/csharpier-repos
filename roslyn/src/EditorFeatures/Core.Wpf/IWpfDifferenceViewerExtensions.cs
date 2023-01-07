@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 IThreadingContext threadingContext,
                 IWpfDifferenceViewer diffViewer,
                 double minWidth
-            ) : base(threadingContext)
+            )
+                : base(threadingContext)
             {
                 _diffViewer = diffViewer;
                 _minWidth = minWidth;

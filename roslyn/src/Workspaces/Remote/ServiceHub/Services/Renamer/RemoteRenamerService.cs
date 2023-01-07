@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteRenamerService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteRenamerService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

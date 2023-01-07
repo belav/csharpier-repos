@@ -8,5 +8,6 @@ public class AuthMiddlewareAndFilterWithoutEndpointRoutingTest
 {
     public AuthMiddlewareAndFilterWithoutEndpointRoutingTest(
         MvcTestFixture<SecurityWebSite.StartupWithGlobalAuthFilterWithoutEndpointRouting> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 }

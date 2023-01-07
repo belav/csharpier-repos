@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MergedTypeDeclaration declaration,
             BindingDiagnosticBag diagnostics,
             TupleExtraData tupleData = null
-        ) : base(containingSymbol, declaration, diagnostics, tupleData)
+        )
+            : base(containingSymbol, declaration, diagnostics, tupleData)
         {
             switch (declaration.Kind)
             {

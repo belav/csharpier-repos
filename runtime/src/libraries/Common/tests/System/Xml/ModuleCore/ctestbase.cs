@@ -29,7 +29,8 @@ namespace OLEDB.Test.ModuleCore
         private CAttrBase _attribute;
 
         //Constructor
-        public CTestBase(string desc) : this(null, desc) { }
+        public CTestBase(string desc)
+            : this(null, desc) { }
 
         //Constructor
         public CTestBase(string name, string desc)

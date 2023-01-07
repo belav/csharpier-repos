@@ -526,7 +526,8 @@ public class EventSourceTests : LoggedTest
             EnableEvents(KestrelEventSource.Log, EventLevel.Verbose);
         }
 
-        public TestEventListener(ILogger logger) : this()
+        public TestEventListener(ILogger logger)
+            : this()
         {
             _logger = logger;
         }

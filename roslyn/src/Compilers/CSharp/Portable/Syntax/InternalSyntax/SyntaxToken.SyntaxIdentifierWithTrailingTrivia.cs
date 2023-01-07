@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 GreenNode trailing,
                 DiagnosticInfo[] diagnostics,
                 SyntaxAnnotation[] annotations
-            ) : base(text, diagnostics, annotations)
+            )
+                : base(text, diagnostics, annotations)
             {
                 if (trailing != null)
                 {
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            internal SyntaxIdentifierWithTrailingTrivia(ObjectReader reader) : base(reader)
+            internal SyntaxIdentifierWithTrailingTrivia(ObjectReader reader)
+                : base(reader)
             {
                 var trailing = (GreenNode)reader.ReadValue();
                 if (trailing != null)

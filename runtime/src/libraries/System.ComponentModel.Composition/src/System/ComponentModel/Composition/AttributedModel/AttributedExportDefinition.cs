@@ -24,7 +24,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             ExportAttribute exportAttribute,
             Type? typeIdentityType,
             string contractName
-        ) : base(contractName, (IDictionary<string, object?>?)null)
+        )
+            : base(contractName, (IDictionary<string, object?>?)null)
         {
             ArgumentNullException.ThrowIfNull(partCreationInfo);
             ArgumentNullException.ThrowIfNull(member);

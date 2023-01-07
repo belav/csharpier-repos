@@ -31,7 +31,8 @@ internal unsafe class MsQuicSafeHandle : SafeHandle
         QUIC_HANDLE* handle,
         delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> releaseAction,
         SafeHandleType safeHandleType
-    ) : base((IntPtr)handle, ownsHandle: true)
+    )
+        : base((IntPtr)handle, ownsHandle: true)
     {
         _releaseAction = releaseAction;
         _type = safeHandleType;
@@ -106,7 +107,8 @@ internal sealed class MsQuicContextSafeHandle : MsQuicSafeHandle
         GCHandle context,
         SafeHandleType safeHandleType,
         MsQuicSafeHandle? parent = null
-    ) : base(handle, safeHandleType)
+    )
+        : base(handle, safeHandleType)
     {
         _context = context;
         if (parent is not null)

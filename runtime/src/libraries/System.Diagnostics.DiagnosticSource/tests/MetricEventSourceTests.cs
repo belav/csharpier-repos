@@ -1634,8 +1634,16 @@ namespace System.Diagnostics.Metrics.Tests
             EventKeywords keywords,
             double? refreshInterval,
             params string[]? instruments
-        ) : this(output, keywords, Guid.NewGuid().ToString(), refreshInterval, 50, 50, instruments)
-        { }
+        )
+            : this(
+                output,
+                keywords,
+                Guid.NewGuid().ToString(),
+                refreshInterval,
+                50,
+                50,
+                instruments
+            ) { }
 
         public MetricsEventListener(
             ITestOutputHelper output,

@@ -24,22 +24,26 @@ namespace System.Runtime.InteropServices
     )]
     public class ExternalException : SystemException
     {
-        public ExternalException() : base(SR.Arg_ExternalException)
+        public ExternalException()
+            : base(SR.Arg_ExternalException)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public ExternalException(string? message) : base(message)
+        public ExternalException(string? message)
+            : base(message)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public ExternalException(string? message, Exception? inner) : base(message, inner)
+        public ExternalException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.E_FAIL;
         }
 
-        public ExternalException(string? message, int errorCode) : base(message)
+        public ExternalException(string? message, int errorCode)
+            : base(message)
         {
             HResult = errorCode;
         }

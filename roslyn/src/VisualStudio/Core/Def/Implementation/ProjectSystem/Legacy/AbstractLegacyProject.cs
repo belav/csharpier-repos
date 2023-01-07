@@ -68,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             IServiceProvider serviceProvider,
             IThreadingContext threadingContext,
             string externalErrorReportingPrefix
-        ) : base(threadingContext, assertIsForeground: true)
+        )
+            : base(threadingContext, assertIsForeground: true)
         {
             Contract.ThrowIfNull(hierarchy);
 

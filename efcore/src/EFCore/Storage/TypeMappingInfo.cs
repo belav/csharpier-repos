@@ -16,7 +16,8 @@ public readonly record struct TypeMappingInfo
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
     /// </summary>
     /// <param name="property">The property for which mapping is needed.</param>
-    public TypeMappingInfo(IProperty property) : this(property.GetPrincipals()) { }
+    public TypeMappingInfo(IProperty property)
+        : this(property.GetPrincipals()) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
@@ -119,7 +120,8 @@ public readonly record struct TypeMappingInfo
         int? size = null,
         int? precision = null,
         int? scale = null
-    ) : this(member.GetMemberType())
+    )
+        : this(member.GetMemberType())
     {
         IsUnicode = unicode;
         Size = size;

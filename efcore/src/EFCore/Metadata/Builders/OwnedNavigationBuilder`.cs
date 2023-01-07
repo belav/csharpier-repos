@@ -26,7 +26,8 @@ public class OwnedNavigationBuilder<
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public OwnedNavigationBuilder(IMutableForeignKey ownership) : base(ownership) { }
+    public OwnedNavigationBuilder(IMutableForeignKey ownership)
+        : base(ownership) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the owned entity type. If an annotation with the key specified in

@@ -20,7 +20,8 @@ namespace System.Security.Cryptography
 
             private Lazy<SafeRsaHandle>? _key;
 
-            public RSAAndroid() : this(2048) { }
+            public RSAAndroid()
+                : this(2048) { }
 
             public RSAAndroid(int keySize)
             {

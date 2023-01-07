@@ -29,7 +29,8 @@ namespace Internal.TypeSystem
             MethodDesc typicalMethodDef,
             InstantiatedType instantiatedType,
             int hashcode
-        ) : this(typicalMethodDef, instantiatedType)
+        )
+            : this(typicalMethodDef, instantiatedType)
         {
             SetHashCode(hashcode);
         }

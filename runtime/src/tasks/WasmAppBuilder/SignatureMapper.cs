@@ -89,6 +89,6 @@ internal sealed class InvalidSignatureCharException : Exception
 {
     public char Char { get; private set; }
 
-    public InvalidSignatureCharException(char c) : base($"Can't handle signature '{c}'") =>
-        Char = c;
+    public InvalidSignatureCharException(char c)
+        : base($"Can't handle signature '{c}'") => Char = c;
 }

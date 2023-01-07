@@ -22,7 +22,8 @@ public class ServiceProviderEventData : EventData
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IServiceProvider serviceProvider
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         ServiceProvider = serviceProvider;
     }

@@ -20,7 +20,8 @@ namespace System.Web.Mvc
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor,
             IDictionary<string, object> actionParameters
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (actionDescriptor == null)
             {

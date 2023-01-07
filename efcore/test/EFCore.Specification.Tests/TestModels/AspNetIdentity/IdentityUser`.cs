@@ -7,7 +7,8 @@ public class IdentityUser<TKey> where TKey : IEquatable<TKey>
 {
     public IdentityUser() { }
 
-    public IdentityUser(string userName) : this()
+    public IdentityUser(string userName)
+        : this()
     {
         UserName = userName;
     }

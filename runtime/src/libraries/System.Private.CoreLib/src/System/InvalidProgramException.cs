@@ -20,17 +20,20 @@ namespace System
     )]
     public sealed class InvalidProgramException : SystemException
     {
-        public InvalidProgramException() : base(SR.InvalidProgram_Default)
+        public InvalidProgramException()
+            : base(SR.InvalidProgram_Default)
         {
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        public InvalidProgramException(string? message) : base(message)
+        public InvalidProgramException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }
 
-        public InvalidProgramException(string? message, Exception? inner) : base(message, inner)
+        public InvalidProgramException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_INVALIDPROGRAM;
         }

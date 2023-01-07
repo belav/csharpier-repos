@@ -55,7 +55,8 @@ public class Runtime_73951
         public object F0;
         public S0 F1;
 
-        public S1(object f0) : this()
+        public S1(object f0)
+            : this()
         {
             F0 = f0;
         }

@@ -7,7 +7,8 @@ namespace System.Xml.XmlResolverTests
 {
     internal class DummyStream : MemoryStream
     {
-        internal DummyStream(byte[] data) : base(data) { }
+        internal DummyStream(byte[] data)
+            : base(data) { }
 
         public override bool CanSeek => false;
 

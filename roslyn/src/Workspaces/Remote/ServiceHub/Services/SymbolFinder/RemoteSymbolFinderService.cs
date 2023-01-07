@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteSymbolFinderService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteSymbolFinderService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

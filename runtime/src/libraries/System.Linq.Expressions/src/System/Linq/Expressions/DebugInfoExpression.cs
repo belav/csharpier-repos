@@ -107,7 +107,8 @@ namespace System.Linq.Expressions
             int startColumn,
             int endLine,
             int endColumn
-        ) : base(document)
+        )
+            : base(document)
         {
             _startLine = startLine;
             _startColumn = startColumn;
@@ -133,7 +134,8 @@ namespace System.Linq.Expressions
 
     internal sealed class ClearDebugInfoExpression : DebugInfoExpression
     {
-        internal ClearDebugInfoExpression(SymbolDocumentInfo document) : base(document) { }
+        internal ClearDebugInfoExpression(SymbolDocumentInfo document)
+            : base(document) { }
 
         public override bool IsClear => true;
 

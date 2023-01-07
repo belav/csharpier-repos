@@ -60,7 +60,8 @@ namespace System.Linq.Parallel
             Queue<Pair<TKey, TOutput>>[] buffers,
             object bufferLock,
             bool autoBuffered
-        ) : base(partitionIndex, taskGroupState)
+        )
+            : base(partitionIndex, taskGroupState)
         {
             Debug.Assert(partition != null);
             Debug.Assert(taskGroupState != null);

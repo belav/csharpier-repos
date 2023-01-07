@@ -46,7 +46,8 @@ namespace Roslyn.Test.Utilities
         /// <see cref="Culture" /> and <see cref="UICulture" />.
         /// </para>
         /// </remarks>
-        public UseCultureAttribute(string culture) : this(culture, culture) { }
+        public UseCultureAttribute(string culture)
+            : this(culture, culture) { }
 
         /// <summary>
         /// Replaces the culture and UI culture of the current thread with

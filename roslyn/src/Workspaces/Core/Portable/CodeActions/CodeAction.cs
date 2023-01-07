@@ -628,7 +628,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 ImmutableArray<CodeAction> nestedActions,
                 bool isInlinable,
                 CodeActionPriority priority = CodeActionPriority.Default
-            ) : this(title, nestedActions, isInlinable, priority, createdFromFactoryMethod: false)
+            )
+                : this(title, nestedActions, isInlinable, priority, createdFromFactoryMethod: false)
             { }
 
             public static CodeActionWithNestedActions Create(
@@ -673,7 +674,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string? equivalenceKey,
                 CodeActionPriority priority,
                 bool createdFromFactoryMethod
-            ) : base(title, equivalenceKey, priority, createdFromFactoryMethod)
+            )
+                : base(title, equivalenceKey, priority, createdFromFactoryMethod)
             {
                 _createChangedDocument = createChangedDocument;
             }
@@ -721,7 +723,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string? equivalenceKey,
                 CodeActionPriority priority,
                 bool createdFromFactoryMethod
-            ) : base(title, equivalenceKey, priority, createdFromFactoryMethod)
+            )
+                : base(title, equivalenceKey, priority, createdFromFactoryMethod)
             {
                 _createChangedSolution = createChangedSolution;
             }
@@ -766,7 +769,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
                 string? equivalenceKey,
                 CodeActionPriority priority,
                 bool createdFromFactoryMethod
-            ) : base(title, equivalenceKey, priority, createdFromFactoryMethod) { }
+            )
+                : base(title, equivalenceKey, priority, createdFromFactoryMethod) { }
 
             public static NoChangeAction Create(
                 string title,

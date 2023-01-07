@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IThreadingContext threadingContext,
             InlineRenameService renameService,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider
-        ) : base(threadingContext, renameService, asynchronousOperationListenerProvider) { }
+        )
+            : base(threadingContext, renameService, asynchronousOperationListenerProvider) { }
 
 #if !COCOA
         protected override bool AdornmentShouldReceiveKeyboardNavigation(ITextView textView) =>

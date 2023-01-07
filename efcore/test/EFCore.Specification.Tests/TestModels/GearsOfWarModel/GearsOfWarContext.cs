@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 public class GearsOfWarContext : PoolableDbContext
 {
-    public GearsOfWarContext(DbContextOptions options) : base(options) { }
+    public GearsOfWarContext(DbContextOptions options)
+        : base(options) { }
 
     public DbSet<Gear> Gears { get; set; }
     public DbSet<Officer> Officers { get; set; }

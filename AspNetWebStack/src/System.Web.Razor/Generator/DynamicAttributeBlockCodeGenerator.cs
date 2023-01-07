@@ -21,7 +21,8 @@ namespace System.Web.Razor.Generator
             int offset,
             int line,
             int col
-        ) : this(prefix, new SourceLocation(offset, line, col)) { }
+        )
+            : this(prefix, new SourceLocation(offset, line, col)) { }
 
         public DynamicAttributeBlockCodeGenerator(
             LocationTagged<string> prefix,

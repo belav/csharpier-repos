@@ -364,7 +364,8 @@ namespace System.Collections.ObjectModel.Tests
         private readonly string _name;
         private readonly T _value;
 
-        public Named(string name, T value) : this()
+        public Named(string name, T value)
+            : this()
         {
             _name = name;
             _value = value;
@@ -495,7 +496,8 @@ namespace System.Collections.ObjectModel.Tests
     {
         private readonly Func<TValue, TKey> _getKey;
 
-        public TestKeyedCollection(Func<TValue, TKey> getKey) : base(null, 32)
+        public TestKeyedCollection(Func<TValue, TKey> getKey)
+            : base(null, 32)
         {
             if (getKey == null)
             {
@@ -534,7 +536,8 @@ namespace System.Collections.ObjectModel.Tests
         public TestKeyedCollectionOfIKeyedItem(
             IEqualityComparer<TKey> comp,
             int collectionDictionaryThreshold = 32
-        ) : base(comp, collectionDictionaryThreshold) { }
+        )
+            : base(comp, collectionDictionaryThreshold) { }
 
         protected override TKey GetKeyForItem(IKeyedItem<TKey, TValue> item)
         {

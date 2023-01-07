@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         internal PackageCompilationAssemblyResolver(
             IEnvironment environment,
             IFileSystem fileSystem
-        ) : this(fileSystem, GetDefaultProbeDirectories(environment)) { }
+        )
+            : this(fileSystem, GetDefaultProbeDirectories(environment)) { }
 
         internal PackageCompilationAssemblyResolver(
             IFileSystem fileSystem,

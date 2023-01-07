@@ -12,7 +12,8 @@ namespace System
 
         /// <summary>Initializes the instance with a strong reference to the specified object.</summary>
         /// <param name="obj">The object to wrap.</param>
-        public StrongToWeakReference(T obj) : base(obj)
+        public StrongToWeakReference(T obj)
+            : base(obj)
         {
             Debug.Assert(obj != null, "Expected non-null obj");
             _strongRef = obj;

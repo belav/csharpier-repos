@@ -17,7 +17,8 @@ public class EnableCorsAttribute : Attribute, IEnableCorsAttribute
     /// Creates a new instance of the <see cref="EnableCorsAttribute"/> with the default policy
     /// name defined by <see cref="CorsOptions.DefaultPolicyName"/>.
     /// </summary>
-    public EnableCorsAttribute() : this(policyName: null) { }
+    public EnableCorsAttribute()
+        : this(policyName: null) { }
 
     /// <summary>
     /// Creates a new instance of the <see cref="EnableCorsAttribute"/> with the supplied policy name.

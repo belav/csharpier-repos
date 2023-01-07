@@ -26,7 +26,8 @@ namespace System.Net
     public partial class DownloadProgressChangedEventArgs
         : System.ComponentModel.ProgressChangedEventArgs
     {
-        internal DownloadProgressChangedEventArgs() : base(default(int), default(object)) { }
+        internal DownloadProgressChangedEventArgs()
+            : base(default(int), default(object)) { }
 
         public long BytesReceived
         {
@@ -129,7 +130,8 @@ namespace System.Net
     public partial class UploadProgressChangedEventArgs
         : System.ComponentModel.ProgressChangedEventArgs
     {
-        internal UploadProgressChangedEventArgs() : base(default(int), default(object)) { }
+        internal UploadProgressChangedEventArgs()
+            : base(default(int), default(object)) { }
 
         public long BytesReceived
         {

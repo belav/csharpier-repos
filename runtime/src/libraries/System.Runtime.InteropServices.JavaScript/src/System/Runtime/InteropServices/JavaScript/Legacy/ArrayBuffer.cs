@@ -22,7 +22,8 @@ namespace System.Runtime.InteropServices.JavaScript
         /// Initializes a new instance of the JavaScript Core ArrayBuffer class.
         /// </summary>
         /// <param name="jsHandle">Js handle.</param>
-        internal ArrayBuffer(IntPtr jsHandle) : base(jsHandle) { }
+        internal ArrayBuffer(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         /// <summary>
         /// The length of an ArrayBuffer in bytes.

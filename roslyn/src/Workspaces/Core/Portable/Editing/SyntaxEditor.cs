@@ -327,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
         private sealed class NoChange : Change
         {
-            public NoChange(SyntaxNode node) : base(node) { }
+            public NoChange(SyntaxNode node)
+                : base(node) { }
 
             protected override SyntaxNode Apply(
                 SyntaxNode root,
@@ -340,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Editing
         {
             private readonly SyntaxRemoveOptions _options;
 
-            public RemoveChange(SyntaxNode node, SyntaxRemoveOptions options) : base(node)
+            public RemoveChange(SyntaxNode node, SyntaxRemoveOptions options)
+                : base(node)
             {
                 _options = options;
             }
@@ -361,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 SyntaxNode node,
                 Func<SyntaxNode, SyntaxGenerator, SyntaxNode?> modifier,
                 SyntaxEditor editor
-            ) : base(node)
+            )
+                : base(node)
             {
                 Contract.ThrowIfNull(node);
                 _modifier = modifier;
@@ -389,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 SyntaxNode node,
                 Func<SyntaxNode, SyntaxGenerator, IEnumerable<SyntaxNode>> modifier,
                 SyntaxEditor editor
-            ) : base(node)
+            )
+                : base(node)
             {
                 _modifier = modifier;
                 _editor = editor;
@@ -422,7 +426,8 @@ namespace Microsoft.CodeAnalysis.Editing
                 Func<SyntaxNode, SyntaxGenerator, TArgument, SyntaxNode> modifier,
                 TArgument argument,
                 SyntaxEditor editor
-            ) : base(node)
+            )
+                : base(node)
             {
                 _modifier = modifier;
                 _argument = argument;

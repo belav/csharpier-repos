@@ -12,5 +12,6 @@ public class ResetPasswordConfirmation : DefaultUIPage
         HttpClient client,
         IHtmlDocument resetPasswordConfirmation,
         DefaultUIContext context
-    ) : base(client, resetPasswordConfirmation, context) { }
+    )
+        : base(client, resetPasswordConfirmation, context) { }
 }

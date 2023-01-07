@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Text
             SourceText oldText,
             SourceText newText,
             ImmutableArray<TextChangeRange> changeRanges
-        ) : base(checksumAlgorithm: oldText.ChecksumAlgorithm)
+        )
+            : base(checksumAlgorithm: oldText.ChecksumAlgorithm)
         {
             RoslynDebug.Assert(newText != null);
             Debug.Assert(

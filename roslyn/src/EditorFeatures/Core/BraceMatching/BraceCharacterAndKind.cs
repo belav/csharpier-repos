@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.BraceMatching
         public char Character { get; }
         public int Kind { get; }
 
-        public BraceCharacterAndKind(char character, int kind) : this()
+        public BraceCharacterAndKind(char character, int kind)
+            : this()
         {
             this.Character = character;
             this.Kind = kind;

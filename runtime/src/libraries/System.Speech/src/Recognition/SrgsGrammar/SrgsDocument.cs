@@ -64,7 +64,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             builder.CreateGrammar(elementFactory);
         }
 
-        public SrgsDocument(SrgsRule grammarRootRule) : this()
+        public SrgsDocument(SrgsRule grammarRootRule)
+            : this()
         {
             Helpers.ThrowIfNull(grammarRootRule, nameof(grammarRootRule));
 

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 TreeData treeInfo,
                 SyntaxToken token1,
                 SyntaxToken token2
-            ) : base(options, treeInfo, token1, token2) { }
+            )
+                : base(options, treeInfo, token1, token2) { }
 
             protected override void ExtractLineAndSpace(
                 string text,

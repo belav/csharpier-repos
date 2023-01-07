@@ -11,7 +11,8 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given method
     internal class ProjectingMethodInfo : DelegatingMethodInfo, IProjectable
     {
-        public ProjectingMethodInfo(MethodInfo method, Projector projector) : base(method)
+        public ProjectingMethodInfo(MethodInfo method, Projector projector)
+            : base(method)
         {
             Debug.Assert(null != projector);
 

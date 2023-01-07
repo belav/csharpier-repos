@@ -1424,9 +1424,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class Formatter : SyndicationFeedFormatter
         {
-            public Formatter() : base() { }
+            public Formatter()
+                : base() { }
 
-            public Formatter(SyndicationFeed feedToWrite) : base(feedToWrite) { }
+            public Formatter(SyndicationFeed feedToWrite)
+                : base(feedToWrite) { }
 
             public static SyndicationCategory CreateCategoryEntryPoint(SyndicationFeed feed) =>
                 CreateCategory(feed);

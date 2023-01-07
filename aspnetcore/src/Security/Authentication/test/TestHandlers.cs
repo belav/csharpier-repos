@@ -18,7 +18,8 @@ public class TestAuthHandler
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock) { }
+    )
+        : base(options, logger, encoder, clock) { }
 
     public int SignInCount { get; set; }
     public int SignOutCount { get; set; }

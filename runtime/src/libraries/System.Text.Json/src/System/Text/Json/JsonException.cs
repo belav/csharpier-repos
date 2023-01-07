@@ -32,7 +32,8 @@ namespace System.Text.Json
             long? lineNumber,
             long? bytePositionInLine,
             Exception? innerException
-        ) : base(message, innerException)
+        )
+            : base(message, innerException)
         {
             _message = message;
             LineNumber = lineNumber;
@@ -55,7 +56,8 @@ namespace System.Text.Json
             string? path,
             long? lineNumber,
             long? bytePositionInLine
-        ) : base(message)
+        )
+            : base(message)
         {
             _message = message;
             LineNumber = lineNumber;
@@ -78,7 +80,8 @@ namespace System.Text.Json
         /// Creates a new exception object to relay error information to the user.
         /// </summary>
         /// <param name="message">The context specific error message.</param>
-        public JsonException(string? message) : base(message)
+        public JsonException(string? message)
+            : base(message)
         {
             _message = message;
         }
@@ -86,7 +89,8 @@ namespace System.Text.Json
         /// <summary>
         /// Creates a new exception object to relay error information to the user.
         /// </summary>
-        public JsonException() : base() { }
+        public JsonException()
+            : base() { }
 
         /// <summary>
         /// Creates a new exception object with serialized data.

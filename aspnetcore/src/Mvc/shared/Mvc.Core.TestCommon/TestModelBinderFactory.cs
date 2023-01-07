@@ -72,13 +72,15 @@ public class TestModelBinderFactory : ModelBinderFactory
     protected TestModelBinderFactory(
         IModelMetadataProvider metadataProvider,
         IOptions<MvcOptions> options
-    ) : this(metadataProvider, options, GetServices(options)) { }
+    )
+        : this(metadataProvider, options, GetServices(options)) { }
 
     protected TestModelBinderFactory(
         IModelMetadataProvider metadataProvider,
         IOptions<MvcOptions> options,
         IServiceProvider serviceProvider
-    ) : base(metadataProvider, options, serviceProvider) { }
+    )
+        : base(metadataProvider, options, serviceProvider) { }
 
     private static IServiceProvider GetServices(IOptions<MvcOptions> options)
     {

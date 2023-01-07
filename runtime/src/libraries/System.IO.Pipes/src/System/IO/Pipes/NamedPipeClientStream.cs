@@ -94,7 +94,8 @@ namespace System.IO.Pipes
             PipeOptions options,
             TokenImpersonationLevel impersonationLevel,
             HandleInheritability inheritability
-        ) : base(direction, 0)
+        )
+            : base(direction, 0)
         {
             ArgumentException.ThrowIfNullOrEmpty(pipeName);
             ArgumentNullException.ThrowIfNull(serverName);
@@ -156,7 +157,8 @@ namespace System.IO.Pipes
             bool isAsync,
             bool isConnected,
             SafePipeHandle safePipeHandle
-        ) : base(direction, 0)
+        )
+            : base(direction, 0)
         {
             ArgumentNullException.ThrowIfNull(safePipeHandle);
 

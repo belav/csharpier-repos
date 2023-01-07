@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             IFeatureServiceFactory featureServiceFactory,
             IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             IAsynchronousOperationListener asyncListener
-        ) : base(threadingContext, assertIsForeground: true)
+        )
+            : base(threadingContext, assertIsForeground: true)
         {
             // This should always be touching a symbol since we verified that upon invocation
             _renameInfo = renameInfo;

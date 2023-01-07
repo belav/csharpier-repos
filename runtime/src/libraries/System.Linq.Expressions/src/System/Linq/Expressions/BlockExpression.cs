@@ -574,7 +574,8 @@ namespace System.Linq.Expressions
         internal Scope1(IReadOnlyList<ParameterExpression> variables, Expression body)
             : this(variables, (object)body) { }
 
-        private Scope1(IReadOnlyList<ParameterExpression> variables, object body) : base(variables)
+        private Scope1(IReadOnlyList<ParameterExpression> variables, object body)
+            : base(variables)
         {
             _body = body;
         }
@@ -638,7 +639,8 @@ namespace System.Linq.Expressions
         internal ScopeN(
             IReadOnlyList<ParameterExpression> variables,
             IReadOnlyList<Expression> body
-        ) : base(variables)
+        )
+            : base(variables)
         {
             _body = body;
         }
@@ -681,7 +683,8 @@ namespace System.Linq.Expressions
             IReadOnlyList<ParameterExpression> variables,
             IReadOnlyList<Expression> expressions,
             Type type
-        ) : base(variables, expressions)
+        )
+            : base(variables, expressions)
         {
             Type = type;
         }

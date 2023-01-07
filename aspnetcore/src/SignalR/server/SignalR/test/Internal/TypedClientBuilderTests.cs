@@ -437,7 +437,8 @@ public class TypedClientBuilderTests
             object[] arguments,
             CancellationToken cancellationToken,
             TaskCompletionSource tcs
-        ) : this()
+        )
+            : this()
         {
             Method = method;
             Arguments = arguments;

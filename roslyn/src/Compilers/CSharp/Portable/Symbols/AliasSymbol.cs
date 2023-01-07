@@ -427,7 +427,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol containingSymbol,
             ImmutableArray<Location> locations,
             bool isExtern
-        ) : base(aliasName, containingSymbol, locations, isExtern)
+        )
+            : base(aliasName, containingSymbol, locations, isExtern)
         {
             _aliasTarget = target;
         }

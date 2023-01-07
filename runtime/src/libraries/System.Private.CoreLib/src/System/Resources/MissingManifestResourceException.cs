@@ -13,12 +13,14 @@ namespace System.Resources
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class MissingManifestResourceException : SystemException
     {
-        public MissingManifestResourceException() : base(SR.Arg_MissingManifestResourceException)
+        public MissingManifestResourceException()
+            : base(SR.Arg_MissingManifestResourceException)
         {
             HResult = System.HResults.COR_E_MISSINGMANIFESTRESOURCE;
         }
 
-        public MissingManifestResourceException(string? message) : base(message)
+        public MissingManifestResourceException(string? message)
+            : base(message)
         {
             HResult = System.HResults.COR_E_MISSINGMANIFESTRESOURCE;
         }

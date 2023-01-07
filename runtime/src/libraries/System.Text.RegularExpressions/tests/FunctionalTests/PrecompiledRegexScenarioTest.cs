@@ -170,7 +170,8 @@ namespace RegexTestNamespace
             base.InitializeReferences();
         }
 
-        public RegexTestClass(TimeSpan timeSpan) : this()
+        public RegexTestClass(TimeSpan timeSpan)
+            : this()
         {
             Regex.ValidateMatchTimeout(timeSpan);
             internalMatchTimeout = timeSpan;

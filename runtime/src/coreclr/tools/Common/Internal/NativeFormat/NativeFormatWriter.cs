@@ -1716,7 +1716,8 @@ namespace Internal.NativeFormat
             BlobVertex signaureBlob,
             uint version,
             BlobVertex instrumentationData
-        ) : base(version, instrumentationData)
+        )
+            : base(version, instrumentationData)
         {
             _signatureBlob = signaureBlob;
         }

@@ -18,7 +18,8 @@ public class NotFoundObjectResult : ObjectResult
     /// Creates a new <see cref="NotFoundObjectResult"/> instance.
     /// </summary>
     /// <param name="value">The value to format in the entity body.</param>
-    public NotFoundObjectResult([ActionResultObjectValue] object? value) : base(value)
+    public NotFoundObjectResult([ActionResultObjectValue] object? value)
+        : base(value)
     {
         StatusCode = DefaultStatusCode;
     }

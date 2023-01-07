@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
         public RQUnconstructedType(
             IList<string> namespaceNames,
             IList<RQUnconstructedTypeInfo> typeInfos
-        ) : base(namespaceNames)
+        )
+            : base(namespaceNames)
         {
             TypeInfos = new ReadOnlyCollection<RQUnconstructedTypeInfo>(typeInfos);
         }

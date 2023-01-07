@@ -26,7 +26,8 @@ public class StoreStoredProcedureReturnValue
         string type,
         StoreStoredProcedure storedProcedure,
         RelationalTypeMapping? storeTypeMapping = null
-    ) : base(name, type, storedProcedure)
+    )
+        : base(name, type, storedProcedure)
     {
         _storeTypeMapping = storeTypeMapping;
     }

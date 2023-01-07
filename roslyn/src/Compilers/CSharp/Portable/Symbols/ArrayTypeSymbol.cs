@@ -567,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations elementTypeWithAnnotations,
                 NamedTypeSymbol array,
                 ImmutableArray<NamedTypeSymbol> constructedInterfaces
-            ) : base(elementTypeWithAnnotations, array)
+            )
+                : base(elementTypeWithAnnotations, array)
             {
                 Debug.Assert(constructedInterfaces.Length <= 2);
                 _interfaces = constructedInterfaces;
@@ -623,7 +624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations elementTypeWithAnnotations,
                 int rank,
                 NamedTypeSymbol array
-            ) : base(elementTypeWithAnnotations, array)
+            )
+                : base(elementTypeWithAnnotations, array)
             {
                 Debug.Assert(rank >= 1);
                 _rank = rank;
@@ -653,7 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 TypeWithAnnotations elementTypeWithAnnotations,
                 int rank,
                 NamedTypeSymbol array
-            ) : base(elementTypeWithAnnotations, rank, array) { }
+            )
+                : base(elementTypeWithAnnotations, rank, array) { }
 
             protected override ArrayTypeSymbol WithElementTypeCore(
                 TypeWithAnnotations elementTypeWithAnnotations
@@ -683,7 +686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ImmutableArray<int> sizes,
                 ImmutableArray<int> lowerBounds,
                 NamedTypeSymbol array
-            ) : base(elementTypeWithAnnotations, rank, array)
+            )
+                : base(elementTypeWithAnnotations, rank, array)
             {
                 Debug.Assert(!sizes.IsDefaultOrEmpty || !lowerBounds.IsDefault);
                 Debug.Assert(

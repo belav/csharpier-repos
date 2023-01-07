@@ -28,7 +28,8 @@ namespace System.Web.Razor.Parser.SyntaxTree
         public AutoCompleteEditHandler(
             Func<string, IEnumerable<ISymbol>> tokenizer,
             AcceptedCharacters accepted
-        ) : base(tokenizer, accepted) { }
+        )
+            : base(tokenizer, accepted) { }
 
         public bool AutoCompleteAtEndOfSpan { get; set; }
         public string AutoCompleteString { get; set; }

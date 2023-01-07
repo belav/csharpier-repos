@@ -27,7 +27,8 @@ public class FormValueProvider : BindingSourceValueProvider, IEnumerableValuePro
         BindingSource bindingSource,
         IFormCollection values,
         CultureInfo? culture
-    ) : base(bindingSource)
+    )
+        : base(bindingSource)
     {
         if (bindingSource == null)
         {

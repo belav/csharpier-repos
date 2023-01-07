@@ -19,7 +19,8 @@ public sealed class ReferenceCaptureIntermediateNode : IntermediateNode
     public ReferenceCaptureIntermediateNode(
         IntermediateToken identifierToken,
         string componentCaptureTypeName
-    ) : this(identifierToken)
+    )
+        : this(identifierToken)
     {
         if (string.IsNullOrEmpty(componentCaptureTypeName))
         {

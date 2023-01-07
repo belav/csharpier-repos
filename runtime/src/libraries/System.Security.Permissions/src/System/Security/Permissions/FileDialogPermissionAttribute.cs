@@ -13,8 +13,8 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class FileDialogPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public FileDialogPermissionAttribute(SecurityAction action) : base(default(SecurityAction))
-        { }
+        public FileDialogPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         public bool Open { get; set; }
         public bool Save { get; set; }

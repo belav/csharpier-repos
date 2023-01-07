@@ -14,7 +14,8 @@ namespace System.Xml.Schema
             XmlValidatingReaderImpl reader,
             XmlSchemaCollection schemaCollection,
             IValidationEventHandling eventHandling
-        ) : base(reader, schemaCollection, eventHandling)
+        )
+            : base(reader, schemaCollection, eventHandling)
         {
             schemaInfo = new SchemaInfo();
         }

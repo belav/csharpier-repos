@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IThreadingContext threadingContext,
                 ITaskListProvider taskProvider,
                 ITableManagerProvider provider
-            ) : base(workspace, threadingContext, taskProvider, IdentifierString, provider)
+            )
+                : base(workspace, threadingContext, taskProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();
             }

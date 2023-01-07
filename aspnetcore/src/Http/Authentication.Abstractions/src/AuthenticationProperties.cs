@@ -21,7 +21,8 @@ public class AuthenticationProperties
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationProperties"/> class.
     /// </summary>
-    public AuthenticationProperties() : this(items: null, parameters: null) { }
+    public AuthenticationProperties()
+        : this(items: null, parameters: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationProperties"/> class.

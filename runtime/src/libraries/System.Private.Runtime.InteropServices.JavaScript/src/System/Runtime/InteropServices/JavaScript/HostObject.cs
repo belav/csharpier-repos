@@ -20,6 +20,7 @@ namespace System.Runtime.InteropServices.JavaScript
 
     public class HostObject : JSObject, IHostObject
     {
-        public HostObject(string typeName, params object[] _params) : base(typeName, _params) { }
+        public HostObject(string typeName, params object[] _params)
+            : base(typeName, _params) { }
     }
 }

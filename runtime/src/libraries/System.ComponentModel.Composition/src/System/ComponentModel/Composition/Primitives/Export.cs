@@ -91,7 +91,8 @@ namespace System.ComponentModel.Composition.Primitives
             string contractName,
             IDictionary<string, object?>? metadata,
             Func<object?> exportedValueGetter
-        ) : this(new ExportDefinition(contractName, metadata), exportedValueGetter) { }
+        )
+            : this(new ExportDefinition(contractName, metadata), exportedValueGetter) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="Export"/> class

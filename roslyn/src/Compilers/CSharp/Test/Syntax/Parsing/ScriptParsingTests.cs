@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class ScriptParsingTests : ParsingTests
     {
-        public ScriptParsingTests(ITestOutputHelper output) : base(output) { }
+        public ScriptParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         #region Helpers
 

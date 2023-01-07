@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class ConferencePlannerSqliteTest
     : ConferencePlannerTestBase<ConferencePlannerSqliteTest.ConferencePlannerSqliteFixture>
 {
-    public ConferencePlannerSqliteTest(ConferencePlannerSqliteFixture fixture) : base(fixture) { }
+    public ConferencePlannerSqliteTest(ConferencePlannerSqliteFixture fixture)
+        : base(fixture) { }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

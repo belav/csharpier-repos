@@ -402,7 +402,8 @@ public class IntegerValueGeneratorTest
             string databaseName,
             InMemoryDatabaseRoot root = null,
             IServiceProvider internalServiceProvider = null
-        ) : base(databaseName, root, internalServiceProvider) { }
+        )
+            : base(databaseName, root, internalServiceProvider) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

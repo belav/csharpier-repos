@@ -40,17 +40,20 @@ namespace Roslyn.Utilities
 
         public TestSyntaxTreeOptionsProvider(
             params (SyntaxTree, (string, ReportDiagnostic)[])[] options
-        ) : this(CaseInsensitiveComparison.Comparer, globalOption: default, options) { }
+        )
+            : this(CaseInsensitiveComparison.Comparer, globalOption: default, options) { }
 
         public TestSyntaxTreeOptionsProvider(
             (string, ReportDiagnostic) globalOption,
             params (SyntaxTree, (string, ReportDiagnostic)[])[] options
-        ) : this(CaseInsensitiveComparison.Comparer, globalOption: globalOption, options) { }
+        )
+            : this(CaseInsensitiveComparison.Comparer, globalOption: globalOption, options) { }
 
         public TestSyntaxTreeOptionsProvider(
             SyntaxTree tree,
             params (string, ReportDiagnostic)[] options
-        ) : this(globalOption: default, new[] { (tree, options) }) { }
+        )
+            : this(globalOption: default, new[] { (tree, options) }) { }
 
         public TestSyntaxTreeOptionsProvider(
             params (SyntaxTree, GeneratedKind isGenerated)[] isGenerated

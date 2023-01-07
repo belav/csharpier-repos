@@ -88,7 +88,8 @@ public partial class CollectionModelBinder<TElement> : ICollectionModelBinder
         ILoggerFactory loggerFactory,
         bool allowValidatingTopLevelNodes,
         MvcOptions mvcOptions
-    ) : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes)
+    )
+        : this(elementBinder, loggerFactory, allowValidatingTopLevelNodes)
     {
         if (mvcOptions == null)
         {

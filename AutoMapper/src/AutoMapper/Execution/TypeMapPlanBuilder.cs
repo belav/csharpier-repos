@@ -701,7 +701,8 @@ public abstract class LambdaValueResolver
 
 public class FuncResolver : LambdaValueResolver, IValueResolver
 {
-    public FuncResolver(LambdaExpression lambda) : base(lambda) { }
+    public FuncResolver(LambdaExpression lambda)
+        : base(lambda) { }
 
     public Expression GetExpression(
         IGlobalConfiguration configuration,
@@ -720,7 +721,8 @@ public class FuncResolver : LambdaValueResolver, IValueResolver
 
 public class ExpressionResolver : LambdaValueResolver, IValueResolver
 {
-    public ExpressionResolver(LambdaExpression lambda) : base(lambda) { }
+    public ExpressionResolver(LambdaExpression lambda)
+        : base(lambda) { }
 
     public Expression GetExpression(
         IGlobalConfiguration configuration,
@@ -778,7 +780,8 @@ public class ValueConverter : ValueResolverConfig, IValueResolver
     public ValueConverter(Type concreteType, Type interfaceType)
         : base(concreteType, interfaceType, ServiceLocator(concreteType)) { }
 
-    public ValueConverter(object instance, Type interfaceType) : base(instance, interfaceType) { }
+    public ValueConverter(object instance, Type interfaceType)
+        : base(instance, interfaceType) { }
 
     public Expression GetExpression(
         IGlobalConfiguration configuration,
@@ -824,8 +827,8 @@ public class ClassValueResolver : ValueResolverConfig, IValueResolver
     public ClassValueResolver(Type concreteType, Type interfaceType)
         : base(concreteType, interfaceType) { }
 
-    public ClassValueResolver(object instance, Type interfaceType) : base(instance, interfaceType)
-    { }
+    public ClassValueResolver(object instance, Type interfaceType)
+        : base(instance, interfaceType) { }
 
     public Expression GetExpression(
         IGlobalConfiguration configuration,
@@ -902,7 +905,8 @@ public class LambdaTypeConverter : TypeConverter
 
 public class ExpressionTypeConverter : LambdaTypeConverter
 {
-    public ExpressionTypeConverter(LambdaExpression lambda) : base(lambda) { }
+    public ExpressionTypeConverter(LambdaExpression lambda)
+        : base(lambda) { }
 
     public override LambdaExpression ProjectToExpression => Lambda;
 }

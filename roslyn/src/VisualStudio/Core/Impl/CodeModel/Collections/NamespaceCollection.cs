@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             object parent,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             Debug.Assert(fileCodeModel != null);
 

@@ -15,7 +15,8 @@ namespace System.Data.OleDb
     {
         private IntPtr handle2; // this must be protected so derived classes can use out params.
 
-        public DualCoTaskMem() : base(IntPtr.Zero, true)
+        public DualCoTaskMem()
+            : base(IntPtr.Zero, true)
         {
             this.handle2 = IntPtr.Zero;
         }
@@ -27,7 +28,8 @@ namespace System.Data.OleDb
             out int literalCount,
             out IntPtr literalInfo,
             out OleDbHResult hr
-        ) : this()
+        )
+            : this()
         {
             int count = (null != literals) ? literals.Length : 0;
             hr = dbInfo.GetLiteralInfo(
@@ -46,7 +48,8 @@ namespace System.Data.OleDb
             out IntPtr columnCount,
             out IntPtr columnInfos,
             out OleDbHResult hr
-        ) : this()
+        )
+            : this()
         {
             hr = columnsInfo.GetColumnInfo(out columnCount, out base.handle, out this.handle2);
             columnInfos = base.handle;
@@ -59,7 +62,8 @@ namespace System.Data.OleDb
             out IntPtr schemaGuids,
             out IntPtr schemaRestrictions,
             out OleDbHResult hr
-        ) : this()
+        )
+            : this()
         {
             hr = dbSchemaRowset.GetSchemas(out schemaCount, out base.handle, out this.handle2);
             schemaGuids = base.handle;
@@ -70,7 +74,8 @@ namespace System.Data.OleDb
             UnsafeNativeMethods.IColumnsRowset icolumnsRowset,
             out IntPtr cOptColumns,
             out OleDbHResult hr
-        ) : base(IntPtr.Zero, true)
+        )
+            : base(IntPtr.Zero, true)
         {
             hr = icolumnsRowset.GetAvailableColumns(out cOptColumns, out base.handle);
         }
@@ -156,7 +161,8 @@ namespace System.Data.OleDb
         }
 
         // from ADODBRecordSetConstruction we do not want to release the initial chapter handle
-        private ChapterHandle(IntPtr chapter) : base((object?)null)
+        private ChapterHandle(IntPtr chapter)
+            : base((object?)null)
         {
             _chapterHandle = chapter;
         }

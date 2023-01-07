@@ -185,7 +185,8 @@ namespace System.Net
             /// order to synchronize with Shutdown().</para>
             /// </summary>
             /// <param name="durationMilliseconds"></param>
-            internal TimerQueue(int durationMilliseconds) : base(durationMilliseconds)
+            internal TimerQueue(int durationMilliseconds)
+                : base(durationMilliseconds)
             {
                 // Create the doubly-linked list with a sentinel head and tail so that this member never needs updating.
                 _timers = new TimerNode();
@@ -275,7 +276,8 @@ namespace System.Net
         /// </summary>
         private sealed class InfiniteTimerQueue : Queue
         {
-            internal InfiniteTimerQueue() : base(Timeout.Infinite) { }
+            internal InfiniteTimerQueue()
+                : base(Timeout.Infinite) { }
 
             /// <summary>
             /// <para>Always returns a dummy infinite timer.</para>
@@ -312,7 +314,8 @@ namespace System.Net
                 object? context,
                 int durationMilliseconds,
                 object queueLock
-            ) : base(durationMilliseconds)
+            )
+                : base(durationMilliseconds)
             {
                 if (callback != null)
                 {
@@ -326,7 +329,8 @@ namespace System.Net
             }
 
             // A sentinel node - both the head and tail are one, which prevent the head and tail from ever having to be updated.
-            internal TimerNode() : base(0)
+            internal TimerNode()
+                : base(0)
             {
                 _timerState = TimerState.Sentinel;
             }
@@ -474,7 +478,8 @@ namespace System.Net
         /// </summary>
         private sealed class InfiniteTimer : Timer
         {
-            internal InfiniteTimer() : base(Timeout.Infinite) { }
+            internal InfiniteTimer()
+                : base(Timeout.Infinite) { }
 
             private int _cancelled;
 

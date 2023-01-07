@@ -11,12 +11,14 @@ namespace System
     )]
     public class AppDomainUnloadedException : SystemException
     {
-        public AppDomainUnloadedException() : base(SR.Arg_AppDomainUnloadedException)
+        public AppDomainUnloadedException()
+            : base(SR.Arg_AppDomainUnloadedException)
         {
             HResult = HResults.COR_E_APPDOMAINUNLOADED;
         }
 
-        public AppDomainUnloadedException(string? message) : base(message)
+        public AppDomainUnloadedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_APPDOMAINUNLOADED;
         }

@@ -40,7 +40,8 @@ namespace System.Threading.Tests
 
             public TestHostExecutionContext() { }
 
-            public TestHostExecutionContext(object state) : base(state) { }
+            public TestHostExecutionContext(object state)
+                : base(state) { }
 
             public new object State
             {

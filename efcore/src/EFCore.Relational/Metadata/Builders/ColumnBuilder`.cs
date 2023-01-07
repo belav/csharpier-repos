@@ -19,7 +19,8 @@ public class ColumnBuilder<TProperty> : ColumnBuilder, IInfrastructure<PropertyB
     public ColumnBuilder(
         in StoreObjectIdentifier storeObject,
         PropertyBuilder<TProperty> propertyBuilder
-    ) : base(storeObject, propertyBuilder) { }
+    )
+        : base(storeObject, propertyBuilder) { }
 
     private PropertyBuilder<TProperty> PropertyBuilder =>
         (PropertyBuilder<TProperty>)((IInfrastructure<PropertyBuilder>)this).Instance;

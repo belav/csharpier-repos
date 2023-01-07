@@ -9,7 +9,8 @@ public class TPCRelationshipsQuerySqlServerTest
     public TPCRelationshipsQuerySqlServerTest(
         TPCRelationshipsQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

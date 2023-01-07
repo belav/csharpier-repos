@@ -20,12 +20,14 @@ namespace System
         private readonly string? _objectName;
 
         // This constructor should only be called by the EE (COMPlusThrow)
-        private ObjectDisposedException() : this(null, SR.ObjectDisposed_Generic) { }
+        private ObjectDisposedException()
+            : this(null, SR.ObjectDisposed_Generic) { }
 
         public ObjectDisposedException(string? objectName)
             : this(objectName, SR.ObjectDisposed_Generic) { }
 
-        public ObjectDisposedException(string? objectName, string? message) : base(message)
+        public ObjectDisposedException(string? objectName, string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_OBJECTDISPOSED;
             _objectName = objectName;

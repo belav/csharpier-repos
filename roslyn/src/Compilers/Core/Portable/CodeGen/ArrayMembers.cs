@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// </summary>
         private sealed class ArrayConstructor : ArrayMethod
         {
-            public ArrayConstructor(Cci.IArrayTypeReference arrayType) : base(arrayType) { }
+            public ArrayConstructor(Cci.IArrayTypeReference arrayType)
+                : base(arrayType) { }
 
             public override string Name => ".ctor";
 
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// </summary>
         private sealed class ArrayGet : ArrayMethod
         {
-            public ArrayGet(Cci.IArrayTypeReference arrayType) : base(arrayType) { }
+            public ArrayGet(Cci.IArrayTypeReference arrayType)
+                : base(arrayType) { }
 
             public override string Name => "Get";
 
@@ -176,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// </summary>
         private sealed class ArrayAddress : ArrayMethod
         {
-            public ArrayAddress(Cci.IArrayTypeReference arrayType) : base(arrayType) { }
+            public ArrayAddress(Cci.IArrayTypeReference arrayType)
+                : base(arrayType) { }
 
             public override bool ReturnValueIsByRef => true;
 
@@ -192,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// </summary>
         private sealed class ArraySet : ArrayMethod
         {
-            public ArraySet(Cci.IArrayTypeReference arrayType) : base(arrayType) { }
+            public ArraySet(Cci.IArrayTypeReference arrayType)
+                : base(arrayType) { }
 
             public override string Name => "Set";
 

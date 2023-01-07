@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             Type type,
             string language,
             string layer = ServiceLayer.Default
-        ) : base(typeof(ILanguageService))
+        )
+            : base(typeof(ILanguageService))
         {
             if (type == null)
             {

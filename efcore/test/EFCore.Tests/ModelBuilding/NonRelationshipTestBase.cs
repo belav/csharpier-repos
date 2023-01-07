@@ -1068,12 +1068,14 @@ public abstract partial class ModelBuilderTest
 
         private class UTF8StringToBytesConverter : StringToBytesConverter
         {
-            public UTF8StringToBytesConverter() : base(Encoding.UTF8) { }
+            public UTF8StringToBytesConverter()
+                : base(Encoding.UTF8) { }
         }
 
         private class CustomValueComparer<T> : ValueComparer<T>
         {
-            public CustomValueComparer() : base(false) { }
+            public CustomValueComparer()
+                : base(false) { }
         }
 
         [ConditionalFact]

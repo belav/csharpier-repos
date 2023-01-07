@@ -19,7 +19,8 @@ internal sealed class IISUrlRewriteRule : IRule
         UrlMatch initialMatch,
         ConditionCollection? conditions,
         UrlAction action
-    ) : this(name, initialMatch, conditions, action, false) { }
+    )
+        : this(name, initialMatch, conditions, action, false) { }
 
     public IISUrlRewriteRule(
         string? name,

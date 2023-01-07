@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeWithAnnotations type,
             string fieldName,
             bool isThisParameter
-        ) : base(frame, fieldName, isPublic: true, isReadOnly: false, isStatic: false)
+        )
+            : base(frame, fieldName, isPublic: true, isReadOnly: false, isStatic: false)
         {
             Debug.Assert(type.HasType);
 

@@ -9,7 +9,9 @@ public class TestLogger<TCategory, TDefinitions>
     where TCategory : LoggerCategory<TCategory>, new()
     where TDefinitions : LoggingDefinitions, new()
 {
-    public TestLogger() : base(new TDefinitions()) { }
+    public TestLogger()
+        : base(new TDefinitions()) { }
 
-    public TestLogger(LoggingDefinitions definitions) : base(definitions) { }
+    public TestLogger(LoggingDefinitions definitions)
+        : base(definitions) { }
 }

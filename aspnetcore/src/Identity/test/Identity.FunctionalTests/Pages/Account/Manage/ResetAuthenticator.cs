@@ -15,7 +15,8 @@ public class ResetAuthenticator : DefaultUIPage
         HttpClient client,
         IHtmlDocument resetAuthenticator,
         DefaultUIContext context
-    ) : base(client, resetAuthenticator, context)
+    )
+        : base(client, resetAuthenticator, context)
     {
         Assert.True(Context.UserAuthenticated);
         _resetAuthenticatorForm = HtmlAssert.HasForm(

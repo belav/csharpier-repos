@@ -43,7 +43,8 @@ namespace System.Dynamic
             Expression expression,
             BindingRestrictions restrictions,
             object value
-        ) : this(expression, restrictions)
+        )
+            : this(expression, restrictions)
         {
             _value = value;
         }

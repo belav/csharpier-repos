@@ -14,8 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         internal sealed class SettingsSnapshotFactory
             : SettingsSnapshotFactoryBase<NamingStyleSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<NamingStyleSetting> data) : base(data)
-            { }
+            public SettingsSnapshotFactory(ISettingsProvider<NamingStyleSetting> data)
+                : base(data) { }
 
             protected override SettingsEntriesSnapshot CreateSnapshot(
                 ImmutableArray<NamingStyleSetting> data,

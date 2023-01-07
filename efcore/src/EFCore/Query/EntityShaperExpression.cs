@@ -44,7 +44,8 @@ public class EntityShaperExpression : Expression, IPrintableExpression
         IEntityType entityType,
         Expression valueBufferExpression,
         bool nullable
-    ) : this(entityType, valueBufferExpression, nullable, null) { }
+    )
+        : this(entityType, valueBufferExpression, nullable, null) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="EntityShaperExpression" /> class.

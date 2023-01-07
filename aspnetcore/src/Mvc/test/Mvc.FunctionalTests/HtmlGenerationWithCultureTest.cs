@@ -24,7 +24,8 @@ public class HtmlGenerationWithCultureTest
     public HtmlGenerationWithCultureTest(
         ITestOutputHelper testOutputHelper,
         MvcTestFixture<StartupWithCultureReplace> fixture
-    ) : base(testOutputHelper)
+    )
+        : base(testOutputHelper)
     {
         Factory = fixture.WithWebHostBuilder(
             builder => builder.UseStartup<StartupWithCultureReplace>()

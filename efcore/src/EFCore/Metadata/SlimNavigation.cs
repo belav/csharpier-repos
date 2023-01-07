@@ -34,7 +34,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             SlimForeignKey foreignKey,
             PropertyAccessMode propertyAccessMode,
             bool eagerLoaded
-        ) : base(name, propertyInfo, fieldInfo, propertyAccessMode)
+        )
+            : base(name, propertyInfo, fieldInfo, propertyAccessMode)
         {
             ClrType = clrType;
             ForeignKey = foreignKey;

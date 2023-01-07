@@ -255,7 +255,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 AbstractHostDiagnosticUpdateSource source,
                 DiagnosticAnalyzer analyzer,
                 ProjectId? projectId
-            ) : base(analyzer)
+            )
+                : base(analyzer)
             {
                 _source = source;
                 _projectId = projectId;

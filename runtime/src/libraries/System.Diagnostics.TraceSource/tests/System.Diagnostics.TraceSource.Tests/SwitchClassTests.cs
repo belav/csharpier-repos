@@ -9,7 +9,8 @@ namespace System.Diagnostics.TraceSourceTests
     {
         class TestSwitch : Switch
         {
-            public TestSwitch(string description = null) : base(null, description) { }
+            public TestSwitch(string description = null)
+                : base(null, description) { }
 
             public string SwitchValue
             {

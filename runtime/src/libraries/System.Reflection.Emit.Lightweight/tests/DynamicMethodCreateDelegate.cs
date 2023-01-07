@@ -219,9 +219,11 @@ namespace System.Reflection.Emit.Tests
 
     public class IDSubClass : IDClass
     {
-        public IDSubClass(int id) : base(id) { }
+        public IDSubClass(int id)
+            : base(id) { }
 
-        public IDSubClass() : base() { }
+        public IDSubClass()
+            : base() { }
     }
 
     public delegate int IDClassDelegate(IDClass owner, int id);

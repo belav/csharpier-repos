@@ -58,7 +58,8 @@ namespace System.Net.Http
             RangeHeaderValue range,
             string mediaType,
             int bufferSize
-        ) : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize) { }
+        )
+            : this(content, range, new MediaTypeHeaderValue(mediaType), bufferSize) { }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP
@@ -73,7 +74,8 @@ namespace System.Net.Http
             Stream content,
             RangeHeaderValue range,
             MediaTypeHeaderValue mediaType
-        ) : this(content, range, mediaType, DefaultBufferSize) { }
+        )
+            : this(content, range, mediaType, DefaultBufferSize) { }
 
         /// <summary>
         /// <see cref="HttpContent"/> implementation which provides a byte range view over a stream used to generate HTTP

@@ -176,7 +176,8 @@ public class ProxiesOptionsExtension : IDbContextOptionsExtension
     {
         private string? _logFragment;
 
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         private new ProxiesOptionsExtension Extension => (ProxiesOptionsExtension)base.Extension;
 

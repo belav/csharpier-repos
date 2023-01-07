@@ -34,7 +34,8 @@ public class SqlServerModificationCommandBatch : AffectedCountModificationComman
     public SqlServerModificationCommandBatch(
         ModificationCommandBatchFactoryDependencies dependencies,
         int maxBatchSize
-    ) : base(dependencies, maxBatchSize) { }
+    )
+        : base(dependencies, maxBatchSize) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

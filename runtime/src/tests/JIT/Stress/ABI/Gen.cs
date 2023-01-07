@@ -90,7 +90,8 @@ namespace ABIStress
 
     internal class ArgValue : Value
     {
-        public ArgValue(TypeEx type, int index) : base(type)
+        public ArgValue(TypeEx type, int index)
+            : base(type)
         {
             Index = index;
         }
@@ -133,7 +134,8 @@ namespace ABIStress
 
     internal class ConstantValue : Value
     {
-        public ConstantValue(TypeEx type, object value) : base(type)
+        public ConstantValue(TypeEx type, object value)
+            : base(type)
         {
             Value = value;
         }

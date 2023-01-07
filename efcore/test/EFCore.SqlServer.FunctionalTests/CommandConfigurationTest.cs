@@ -81,7 +81,8 @@ public class CommandConfigurationTest
 
     private class ChipsContext : PoolableDbContext
     {
-        public ChipsContext(DbContextOptions options) : base(options) { }
+        public ChipsContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<KettleChips> Chips { get; set; }
 

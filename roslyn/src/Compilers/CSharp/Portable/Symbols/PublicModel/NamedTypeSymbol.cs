@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         public NamedTypeSymbol(
             CodeAnalysis.NullableAnnotation nullableAnnotation =
                 CodeAnalysis.NullableAnnotation.None
-        ) : base(nullableAnnotation) { }
+        )
+            : base(nullableAnnotation) { }
 
         internal abstract Symbols.NamedTypeSymbol UnderlyingNamedTypeSymbol { get; }
 

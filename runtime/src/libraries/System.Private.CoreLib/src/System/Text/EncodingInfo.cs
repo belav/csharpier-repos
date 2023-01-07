@@ -20,7 +20,8 @@ namespace System.Text
             int codePage,
             string name,
             string displayName
-        ) : this(codePage, name, displayName)
+        )
+            : this(codePage, name, displayName)
         {
             ArgumentNullException.ThrowIfNull(provider);
             ArgumentNullException.ThrowIfNull(name);

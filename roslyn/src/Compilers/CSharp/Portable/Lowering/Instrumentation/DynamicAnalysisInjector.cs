@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics,
             DebugDocumentProvider debugDocumentProvider,
             Instrumenter previous
-        ) : base(previous)
+        )
+            : base(previous)
         {
             _createPayloadForMethodsSpanningSingleFile = createPayloadForMethodsSpanningSingleFile;
             _createPayloadForMethodsSpanningMultipleFiles =

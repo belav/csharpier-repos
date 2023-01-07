@@ -11,8 +11,8 @@ namespace System.Xml.Serialization
     /// </devdoc>
     public class XmlTypeMapping : XmlMapping
     {
-        internal XmlTypeMapping(TypeScope? scope, ElementAccessor accessor) : base(scope, accessor)
-        { }
+        internal XmlTypeMapping(TypeScope? scope, ElementAccessor accessor)
+            : base(scope, accessor) { }
 
         internal TypeMapping? Mapping
         {

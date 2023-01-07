@@ -66,7 +66,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             Guid solutionTelemetryId = default,
             bool disablePartialSolutions = true,
             bool ignoreUnchangeableDocumentsWhenApplyingChanges = true
-        ) : base(GetHostServices(exportProvider, composition), workspaceKind ?? WorkspaceKind.Host)
+        )
+            : base(
+                GetHostServices(exportProvider, composition),
+                workspaceKind ?? WorkspaceKind.Host
+            )
         {
             Contract.ThrowIfTrue(exportProvider != null && composition != null);
 

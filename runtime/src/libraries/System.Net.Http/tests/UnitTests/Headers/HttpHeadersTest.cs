@@ -2891,13 +2891,15 @@ namespace System.Net.Http.Tests
             public MockHeaderParser Parser => _parser;
             public HeaderDescriptor Descriptor => _descriptor;
 
-            public MockHeaders(MockHeaderParser parser) : base()
+            public MockHeaders(MockHeaderParser parser)
+                : base()
             {
                 _parser = parser;
                 _descriptor = (new KnownHeader("known", HttpHeaderType.General, parser)).Descriptor;
             }
 
-            public MockHeaders() : this(new MockHeaderParser()) { }
+            public MockHeaders()
+                : this(new MockHeaderParser()) { }
         }
 
         private class MockHeaderParser : HttpHeaderParser
@@ -2906,14 +2908,17 @@ namespace System.Net.Http.Tests
             public int EmptyValueCount { get; private set; }
             public MockComparer MockComparer { get; private set; }
 
-            public MockHeaderParser() : this(true) { }
+            public MockHeaderParser()
+                : this(true) { }
 
-            public MockHeaderParser(bool supportsMultipleValues) : base(supportsMultipleValues)
+            public MockHeaderParser(bool supportsMultipleValues)
+                : base(supportsMultipleValues)
             {
                 this.MockComparer = new MockComparer();
             }
 
-            public MockHeaderParser(string separator) : base(true, separator)
+            public MockHeaderParser(string separator)
+                : base(true, separator)
             {
                 this.MockComparer = new MockComparer();
             }
@@ -3037,7 +3042,8 @@ namespace System.Net.Http.Tests
                 get { return comparer; }
             }
 
-            public CustomTypeHeaderParser() : base(true) { }
+            public CustomTypeHeaderParser()
+                : base(true) { }
 
             public override bool TryParseValue(
                 string value,
@@ -3071,7 +3077,8 @@ namespace System.Net.Http.Tests
 
         private class NoComparerHeaderParser : HttpHeaderParser
         {
-            public NoComparerHeaderParser() : base(true) { }
+            public NoComparerHeaderParser()
+                : base(true) { }
 
             public override bool TryParseValue(
                 string value,

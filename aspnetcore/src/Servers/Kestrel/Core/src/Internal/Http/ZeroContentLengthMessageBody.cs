@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal sealed class ZeroContentLengthMessageBody : MessageBody
 {
-    public ZeroContentLengthMessageBody(bool keepAlive) : base(null!) // Ok to pass null here because this type overrides all the base methods
+    public ZeroContentLengthMessageBody(bool keepAlive)
+        : base(null!) // Ok to pass null here because this type overrides all the base methods
     {
         RequestKeepAlive = keepAlive;
     }

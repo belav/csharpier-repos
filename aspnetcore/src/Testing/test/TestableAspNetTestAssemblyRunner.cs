@@ -20,8 +20,14 @@ public class TestableAspNetTestAssemblyRunner : AspNetTestAssemblyRunner
         IMessageSink diagnosticMessageSink,
         IMessageSink executionMessageSink,
         ITestFrameworkExecutionOptions executionOptions
-    ) : base(testAssembly, testCases, diagnosticMessageSink, executionMessageSink, executionOptions)
-    { }
+    )
+        : base(
+            testAssembly,
+            testCases,
+            diagnosticMessageSink,
+            executionMessageSink,
+            executionOptions
+        ) { }
 
     public static TestableAspNetTestAssemblyRunner Create(
         Type fixtureType,

@@ -81,7 +81,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         public EventWaitHandleRights EventWaitHandleRights
         {
@@ -119,7 +120,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags flags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         public EventWaitHandleRights EventWaitHandleRights
         {
@@ -129,7 +131,8 @@ namespace System.Security.AccessControl
 
     public sealed class EventWaitHandleSecurity : NativeObjectSecurity
     {
-        public EventWaitHandleSecurity() : base(true, ResourceType.KernelObject) { }
+        public EventWaitHandleSecurity()
+            : base(true, ResourceType.KernelObject) { }
 
         internal EventWaitHandleSecurity(string name, AccessControlSections includeSections)
             : base(true, ResourceType.KernelObject, name, includeSections, HandleErrorCode, null)
@@ -140,7 +143,8 @@ namespace System.Security.AccessControl
         internal EventWaitHandleSecurity(
             SafeWaitHandle handle,
             AccessControlSections includeSections
-        ) : base(true, ResourceType.KernelObject, handle, includeSections, HandleErrorCode, null)
+        )
+            : base(true, ResourceType.KernelObject, handle, includeSections, HandleErrorCode, null)
         {
             // Let the underlying ACL API's demand unmanaged code permission.
         }

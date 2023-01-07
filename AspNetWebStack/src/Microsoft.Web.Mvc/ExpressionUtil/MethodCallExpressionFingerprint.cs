@@ -24,7 +24,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
             ExpressionType nodeType,
             Type type,
             MethodInfo method
-        ) : base(nodeType, type)
+        )
+            : base(nodeType, type)
         {
             // Other properties on MethodCallExpression (like the argument count) are simply derived
             // from Type and Indexer, so they're not necessary for inclusion in the fingerprint.

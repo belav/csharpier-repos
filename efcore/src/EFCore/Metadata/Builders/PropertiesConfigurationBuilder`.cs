@@ -24,7 +24,8 @@ public class PropertiesConfigurationBuilder<TProperty> : PropertiesConfiguration
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public PropertiesConfigurationBuilder(PropertyConfiguration property) : base(property) { }
+    public PropertiesConfigurationBuilder(PropertyConfiguration property)
+        : base(property) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in

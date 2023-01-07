@@ -11,7 +11,8 @@ public abstract class ComplexNavigationsQueryTestBase<TFixture> : QueryTestBase<
 {
     protected ComplexNavigationsContext CreateContext() => Fixture.CreateContext();
 
-    protected ComplexNavigationsQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected ComplexNavigationsQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected override Expression RewriteExpectedQueryExpression(
         Expression expectedQueryExpression

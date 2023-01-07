@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.ReadOnlyKeyword,
         };
 
-        public RecordKeywordRecommender() : base(SyntaxKind.RecordKeyword) { }
+        public RecordKeywordRecommender()
+            : base(SyntaxKind.RecordKeyword) { }
 
         protected override bool IsValidContext(
             int position,

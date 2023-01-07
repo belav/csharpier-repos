@@ -182,7 +182,8 @@ namespace System.Resources
         internal RuntimeResourceSet(string fileName)
             : this(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) { }
 
-        internal RuntimeResourceSet(Stream stream, bool permitDeserialization = false) : base(false)
+        internal RuntimeResourceSet(Stream stream, bool permitDeserialization = false)
+            : base(false)
         {
             _resCache = new Dictionary<string, ResourceLocator>(FastResourceComparer.Default);
             _defaultReader = new ResourceReader(stream, _resCache, permitDeserialization);

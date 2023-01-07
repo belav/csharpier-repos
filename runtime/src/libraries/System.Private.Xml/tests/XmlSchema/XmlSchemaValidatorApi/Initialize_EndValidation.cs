@@ -16,7 +16,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCInitialize(ITestOutputHelper output) : base(output)
+        public TCInitialize(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -540,7 +541,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCEndValidation(ITestOutputHelper output) : base(output)
+        public TCEndValidation(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);

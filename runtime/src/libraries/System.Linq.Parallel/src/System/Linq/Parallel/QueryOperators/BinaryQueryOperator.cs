@@ -44,7 +44,8 @@ namespace System.Linq.Parallel
         internal BinaryQueryOperator(
             QueryOperator<TLeftInput> leftChild,
             QueryOperator<TRightInput> rightChild
-        ) : base(false, leftChild.SpecifiedQuerySettings.Merge(rightChild.SpecifiedQuerySettings))
+        )
+            : base(false, leftChild.SpecifiedQuerySettings.Merge(rightChild.SpecifiedQuerySettings))
         {
             Debug.Assert(leftChild != null && rightChild != null);
             _leftChild = leftChild;

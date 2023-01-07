@@ -268,7 +268,8 @@ namespace System.Net.Http.Functional.Tests
 
     public sealed class Http1ResponseStreamZeroByteReadTest : ResponseStreamZeroByteReadTestBase
     {
-        public Http1ResponseStreamZeroByteReadTest(ITestOutputHelper output) : base(output) { }
+        public Http1ResponseStreamZeroByteReadTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version11;
     }
@@ -276,7 +277,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]
     public sealed class Http2ResponseStreamZeroByteReadTest : ResponseStreamZeroByteReadTestBase
     {
-        public Http2ResponseStreamZeroByteReadTest(ITestOutputHelper output) : base(output) { }
+        public Http2ResponseStreamZeroByteReadTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version20;
     }
@@ -285,7 +287,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(HttpClientHandlerTestBase), nameof(IsQuicSupported))]
     public sealed class Http3ResponseStreamZeroByteReadTest : ResponseStreamZeroByteReadTestBase
     {
-        public Http3ResponseStreamZeroByteReadTest(ITestOutputHelper output) : base(output) { }
+        public Http3ResponseStreamZeroByteReadTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Version UseVersion => HttpVersion.Version30;
     }
@@ -293,7 +296,8 @@ namespace System.Net.Http.Functional.Tests
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
     public abstract class ResponseStreamZeroByteReadTestBase : HttpClientHandlerTestBase
     {
-        public ResponseStreamZeroByteReadTestBase(ITestOutputHelper output) : base(output) { }
+        public ResponseStreamZeroByteReadTestBase(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(true)]

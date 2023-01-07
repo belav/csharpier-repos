@@ -31,7 +31,8 @@ public class EventDefinition : EventDefinitionBase
         LogLevel level,
         string eventIdCode,
         Func<LogLevel, Action<ILogger, Exception?>> logActionFunc
-    ) : base(loggingOptions, eventId, level, eventIdCode)
+    )
+        : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
     }

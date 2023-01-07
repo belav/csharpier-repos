@@ -25,7 +25,8 @@ namespace Internal.IL
 
     class VerifierException : Exception
     {
-        internal VerifierException(string message) : base(message) { }
+        internal VerifierException(string message)
+            : base(message) { }
     }
 
     partial class ILImporter

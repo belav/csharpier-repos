@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
             string caseGenerationLocationField,
             string switchExpressionField,
             IThreadingContext threadingContext
-        ) : base(snippetExpansionClient, subjectBuffer, threadingContext)
+        )
+            : base(snippetExpansionClient, subjectBuffer, threadingContext)
         {
             this.CaseGenerationLocationField = caseGenerationLocationField;
             this.SwitchExpressionField =

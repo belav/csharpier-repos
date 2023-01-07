@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             private readonly TreeData _debugNodeData;
 
-            public Debug(SyntaxNode root, SourceText text) : base(root, text)
+            public Debug(SyntaxNode root, SourceText text)
+                : base(root, text)
             {
                 _debugNodeData = new Node(root);
             }

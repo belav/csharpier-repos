@@ -13,7 +13,8 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             FileExtensionsAttribute attribute
-        ) : base(metadata, context, attribute) { }
+        )
+            : base(metadata, context, attribute) { }
 
         public override IEnumerable<ModelClientValidationRule> GetClientValidationRules()
         {

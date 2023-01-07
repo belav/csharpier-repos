@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Shared
         public VisualStudioImageIdService(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _imageService = (IVsImageService2)serviceProvider.GetService(typeof(SVsImageService));
         }

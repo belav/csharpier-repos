@@ -44,7 +44,8 @@ namespace System.Data.OleDb
             int dataLength,
             int length,
             bool needToReset
-        ) : base(length)
+        )
+            : base(length)
         {
             _bindingCount = bindingCount;
             _headerLength = headerLength;

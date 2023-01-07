@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ResultCache cache,
             Type serviceType,
             Func<IServiceProvider, object> factory
-        ) : base(cache)
+        )
+            : base(cache)
         {
             Factory = factory;
             ServiceType = serviceType;

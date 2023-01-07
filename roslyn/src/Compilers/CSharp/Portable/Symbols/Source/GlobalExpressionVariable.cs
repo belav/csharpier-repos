@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             SyntaxReference syntax,
             Location location
-        ) : base(containingType, modifiers, name, syntax, location)
+        )
+            : base(containingType, modifiers, name, syntax, location)
         {
             Debug.Assert(DeclaredAccessibility == Accessibility.Private);
             _typeSyntaxOpt = typeSyntax?.GetReference();
@@ -217,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Location location,
                 FieldSymbol containingFieldOpt,
                 SyntaxNode nodeToBind
-            ) : base(containingType, modifiers, typeSyntax, name, syntax, location)
+            )
+                : base(containingType, modifiers, typeSyntax, name, syntax, location)
             {
                 Debug.Assert(
                     nodeToBind.Kind() == SyntaxKind.VariableDeclarator

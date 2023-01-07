@@ -95,7 +95,8 @@ internal static class ExecutorFactory
         public NonGenericTaskHandlerMethod(
             HandlerParameterDescriptor[] parameters,
             MethodInfo method
-        ) : base(parameters)
+        )
+            : base(parameters)
         {
             var receiver = Expression.Parameter(typeof(object), "receiver");
             var arguments = Expression.Parameter(typeof(object[]), "arguments");

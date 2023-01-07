@@ -597,10 +597,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 Analyzers = analyzers;
             }
 
-            public MockAnalyzerReference() : this(s_defaultFixer, s_defaultAnalyzers) { }
+            public MockAnalyzerReference()
+                : this(s_defaultFixer, s_defaultAnalyzers) { }
 
-            public MockAnalyzerReference(CodeFixProvider? fixer) : this(fixer, s_defaultAnalyzers)
-            { }
+            public MockAnalyzerReference(CodeFixProvider? fixer)
+                : this(fixer, s_defaultAnalyzers) { }
 
             public override string Display
             {
@@ -664,7 +665,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 public MockDiagnosticAnalyzer(ImmutableArray<string> reportedDiagnosticIds)
                     : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory"))) { }
 
-                public MockDiagnosticAnalyzer() : this(ImmutableArray.Create(MockFixer.Id)) { }
+                public MockDiagnosticAnalyzer()
+                    : this(ImmutableArray.Create(MockFixer.Id)) { }
 
                 public bool ReceivedCallback { get; private set; }
 
@@ -701,8 +703,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
                 public MockDocumentDiagnosticAnalyzer(ImmutableArray<string> reportedDiagnosticIds)
                     : this(reportedDiagnosticIds.SelectAsArray(id => (id, "InternalCategory"))) { }
 
-                public MockDocumentDiagnosticAnalyzer() : this(ImmutableArray.Create(MockFixer.Id))
-                { }
+                public MockDocumentDiagnosticAnalyzer()
+                    : this(ImmutableArray.Create(MockFixer.Id)) { }
 
                 public bool ReceivedCallback { get; private set; }
 

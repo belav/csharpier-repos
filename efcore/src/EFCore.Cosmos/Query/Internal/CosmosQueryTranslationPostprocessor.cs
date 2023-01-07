@@ -23,7 +23,8 @@ public class CosmosQueryTranslationPostprocessor : QueryTranslationPostprocessor
         QueryTranslationPostprocessorDependencies dependencies,
         ISqlExpressionFactory sqlExpressionFactory,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, queryCompilationContext)
+    )
+        : base(dependencies, queryCompilationContext)
     {
         _sqlExpressionFactory = sqlExpressionFactory;
     }

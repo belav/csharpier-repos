@@ -440,7 +440,8 @@ public abstract class TestHelpers
             ModelConfiguration modelConfiguration,
             IModelRuntimeInitializer modelRuntimeInitializer,
             IDiagnosticsLogger<DbLoggerCategory.Model.Validation> validationLogger
-        ) : base(conventions, modelDependencies, modelConfiguration)
+        )
+            : base(conventions, modelDependencies, modelConfiguration)
         {
             _modelRuntimeInitializer = modelRuntimeInitializer;
             _validationLogger = validationLogger;
@@ -461,7 +462,8 @@ public abstract class TestHelpers
         public TestModelConfigurationBuilder(
             ConventionSet conventionSet,
             IServiceProvider serviceProvider
-        ) : base(conventionSet, serviceProvider)
+        )
+            : base(conventionSet, serviceProvider)
         {
             ConventionSet = conventionSet;
         }

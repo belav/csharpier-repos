@@ -833,7 +833,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Initializes the BoundingState.</summary>
         /// <param name="boundedCapacity">The positive bounded capacity.</param>
-        internal BoundingStateWithPostponed(int boundedCapacity) : base(boundedCapacity) { }
+        internal BoundingStateWithPostponed(int boundedCapacity)
+            : base(boundedCapacity) { }
 
         /// <summary>Gets the number of postponed messages for the debugger.</summary>
         private int PostponedMessagesCountForDebugger
@@ -852,7 +853,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Initializes the BoundingState.</summary>
         /// <param name="boundedCapacity">The positive bounded capacity.</param>
-        internal BoundingStateWithPostponedAndTask(int boundedCapacity) : base(boundedCapacity) { }
+        internal BoundingStateWithPostponedAndTask(int boundedCapacity)
+            : base(boundedCapacity) { }
     }
 
     /// <summary>

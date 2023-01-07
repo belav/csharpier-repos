@@ -4113,7 +4113,8 @@ namespace System.Text.Json.Tests
 
     public class ThrowOnReadStream : MemoryStream
     {
-        public ThrowOnReadStream(byte[] bytes) : base(bytes) { }
+        public ThrowOnReadStream(byte[] bytes)
+            : base(bytes) { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -4123,7 +4124,8 @@ namespace System.Text.Json.Tests
 
     public class ThrowOnCanSeekStream : MemoryStream
     {
-        public ThrowOnCanSeekStream(byte[] bytes) : base(bytes) { }
+        public ThrowOnCanSeekStream(byte[] bytes)
+            : base(bytes) { }
 
         public override bool CanSeek => throw new InsufficientMemoryException();
     }

@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public ExportCodeRefactoringProviderAttribute(
             string firstLanguage,
             params string[] additionalLanguages
-        ) : base(typeof(CodeRefactoringProvider))
+        )
+            : base(typeof(CodeRefactoringProvider))
         {
             if (additionalLanguages == null)
             {

@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class StackAllocKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public StackAllocKeywordRecommender() : base(SyntaxKind.StackAllocKeyword) { }
+        public StackAllocKeywordRecommender()
+            : base(SyntaxKind.StackAllocKeyword) { }
 
         protected override bool IsValidContext(
             int position,

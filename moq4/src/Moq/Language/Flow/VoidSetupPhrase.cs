@@ -7,7 +7,8 @@ namespace Moq.Language.Flow
 {
     internal class VoidSetupPhrase<T> : SetupPhrase, ISetup<T> where T : class
     {
-        public VoidSetupPhrase(MethodCall setup) : base(setup) { }
+        public VoidSetupPhrase(MethodCall setup)
+            : base(setup) { }
 
         public IVerifies Raises(Action<T> eventExpression, EventArgs args)
         {

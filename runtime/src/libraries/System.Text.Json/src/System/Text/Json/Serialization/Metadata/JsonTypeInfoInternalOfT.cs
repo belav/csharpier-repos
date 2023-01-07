@@ -14,7 +14,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Creates serialization metadata for a type using a simple converter.
         /// </summary>
-        public JsonTypeInfoInternal(JsonSerializerOptions options) : base(typeof(T), options) { }
+        public JsonTypeInfoInternal(JsonSerializerOptions options)
+            : base(typeof(T), options) { }
 
         /// <summary>
         /// Creates serialization metadata for an object.
@@ -22,7 +23,8 @@ namespace System.Text.Json.Serialization.Metadata
         public JsonTypeInfoInternal(
             JsonSerializerOptions options,
             JsonObjectInfoValues<T> objectInfo
-        ) : base(typeof(T), options)
+        )
+            : base(typeof(T), options)
         {
 #pragma warning disable CS8714
             // The type cannot be used as type parameter in the generic type or method.
@@ -68,7 +70,8 @@ namespace System.Text.Json.Serialization.Metadata
             Func<JsonConverter<T>> converterCreator,
             object? createObjectWithArgs = null,
             object? addFunc = null
-        ) : base(typeof(T), options)
+        )
+            : base(typeof(T), options)
         {
             if (collectionInfo == null)
             {

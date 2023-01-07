@@ -20,7 +20,8 @@ public class RelationalEvaluatableExpressionFilter : EvaluatableExpressionFilter
     public RelationalEvaluatableExpressionFilter(
         EvaluatableExpressionFilterDependencies dependencies,
         RelationalEvaluatableExpressionFilterDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

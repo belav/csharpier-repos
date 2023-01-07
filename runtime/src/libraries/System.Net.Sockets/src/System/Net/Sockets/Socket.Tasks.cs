@@ -1085,7 +1085,8 @@ namespace System.Net.Sockets
             /// <summary>Whether exceptions that emerge should be wrapped in IOExceptions.</summary>
             internal bool _wrapExceptionsInIOExceptions;
 
-            internal TaskSocketAsyncEventArgs() : base(unsafeSuppressExecutionContextFlow: true) // avoid flowing context at lower layers as we only expose Task, which handles it
+            internal TaskSocketAsyncEventArgs()
+                : base(unsafeSuppressExecutionContextFlow: true) // avoid flowing context at lower layers as we only expose Task, which handles it
             { }
 
             /// <summary>Gets the builder's task with appropriate synchronization.</summary>

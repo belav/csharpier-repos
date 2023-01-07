@@ -144,7 +144,8 @@ namespace System.Collections.Concurrent
         /// <remarks>
         /// The default underlying collection is a <see cref="System.Collections.Concurrent.ConcurrentQueue{T}">ConcurrentQueue&lt;T&gt;</see>.
         /// </remarks>
-        public BlockingCollection() : this(new ConcurrentQueue<T>()) { }
+        public BlockingCollection()
+            : this(new ConcurrentQueue<T>()) { }
 
         /// <summary>Initializes a new instance of the <see
         /// cref="System.Collections.Concurrent.BlockingCollection{T}"/>

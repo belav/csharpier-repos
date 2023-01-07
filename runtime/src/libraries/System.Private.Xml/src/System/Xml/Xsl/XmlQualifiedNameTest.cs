@@ -41,7 +41,8 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Constructor
         /// </summary>
-        private XmlQualifiedNameTest(string? name, string? ns, bool exclude) : base(name, ns)
+        private XmlQualifiedNameTest(string? name, string? ns, bool exclude)
+            : base(name, ns)
         {
             _exclude = exclude;
         }

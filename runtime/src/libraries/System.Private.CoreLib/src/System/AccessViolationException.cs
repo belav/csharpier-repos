@@ -20,12 +20,14 @@ namespace System
     )]
     public class AccessViolationException : SystemException
     {
-        public AccessViolationException() : base(SR.Arg_AccessViolationException)
+        public AccessViolationException()
+            : base(SR.Arg_AccessViolationException)
         {
             HResult = HResults.E_POINTER;
         }
 
-        public AccessViolationException(string? message) : base(message)
+        public AccessViolationException(string? message)
+            : base(message)
         {
             HResult = HResults.E_POINTER;
         }

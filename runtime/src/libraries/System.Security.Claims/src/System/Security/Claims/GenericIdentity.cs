@@ -32,7 +32,8 @@ namespace System.Security.Principal
             AddNameClaim();
         }
 
-        protected GenericIdentity(GenericIdentity identity) : base(identity)
+        protected GenericIdentity(GenericIdentity identity)
+            : base(identity)
         {
             m_name = identity.m_name;
             m_type = identity.m_type;

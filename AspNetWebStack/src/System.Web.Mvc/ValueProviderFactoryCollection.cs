@@ -14,12 +14,14 @@ namespace System.Web.Mvc
 
         public ValueProviderFactoryCollection() { }
 
-        public ValueProviderFactoryCollection(IList<ValueProviderFactory> list) : base(list) { }
+        public ValueProviderFactoryCollection(IList<ValueProviderFactory> list)
+            : base(list) { }
 
         internal ValueProviderFactoryCollection(
             IList<ValueProviderFactory> list,
             IDependencyResolver dependencyResolver
-        ) : base(list)
+        )
+            : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }

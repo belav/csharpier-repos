@@ -22,7 +22,8 @@ public sealed class TableValuedFunctionQueryRootExpression : EntityQueryRootExpr
         IEntityType entityType,
         IStoreFunction function,
         IReadOnlyCollection<Expression> arguments
-    ) : base(entityType)
+    )
+        : base(entityType)
     {
         Function = function;
         Arguments = arguments;

@@ -24,13 +24,17 @@ namespace System.DirectoryServices.Protocols
 
         public DirectoryAttribute() { }
 
-        public DirectoryAttribute(string name, string value) : this(name, (object)value) { }
+        public DirectoryAttribute(string name, string value)
+            : this(name, (object)value) { }
 
-        public DirectoryAttribute(string name, byte[] value) : this(name, (object)value) { }
+        public DirectoryAttribute(string name, byte[] value)
+            : this(name, (object)value) { }
 
-        public DirectoryAttribute(string name, Uri value) : this(name, (object)value) { }
+        public DirectoryAttribute(string name, Uri value)
+            : this(name, (object)value) { }
 
-        internal DirectoryAttribute(string name, object value) : this()
+        internal DirectoryAttribute(string name, object value)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(value);
@@ -39,7 +43,8 @@ namespace System.DirectoryServices.Protocols
             Add(value);
         }
 
-        public DirectoryAttribute(string name, params object[] values) : this()
+        public DirectoryAttribute(string name, params object[] values)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(values);

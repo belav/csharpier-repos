@@ -14,7 +14,8 @@ namespace System.ComponentModel.DataAnnotations
         private const string ExtensionAbbreviationExt = "ext";
         private const string ExtensionAbbreviationX = "x";
 
-        public PhoneAttribute() : base(DataType.PhoneNumber)
+        public PhoneAttribute()
+            : base(DataType.PhoneNumber)
         {
             // Set DefaultErrorMessage not ErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.

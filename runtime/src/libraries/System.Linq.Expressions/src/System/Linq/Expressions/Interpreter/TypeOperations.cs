@@ -355,7 +355,8 @@ namespace System.Linq.Expressions.Interpreter
 
             private sealed class Ref : CastInstructionNoT
             {
-                public Ref(Type t) : base(t) { }
+                public Ref(Type t)
+                    : base(t) { }
 
                 protected override void ConvertNull(InterpretedFrame frame)
                 {
@@ -365,7 +366,8 @@ namespace System.Linq.Expressions.Interpreter
 
             private sealed class Value : CastInstructionNoT
             {
-                public Value(Type t) : base(t) { }
+                public Value(Type t)
+                    : base(t) { }
 
                 protected override void ConvertNull(InterpretedFrame frame)
                 {

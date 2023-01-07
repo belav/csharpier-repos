@@ -51,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IThreadingContext threadingContext,
             [Import(typeof(SVsServiceProvider))] IAsyncServiceProvider asyncServiceProvider,
             IVsEditorAdaptersFactoryService editorAdaptersFactoryService
-        ) : base(threadingContext, assertIsForeground: false)
+        )
+            : base(threadingContext, assertIsForeground: false)
         {
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
             ThreadingContext.RunWithShutdownBlockAsync(async cancellationToken =>

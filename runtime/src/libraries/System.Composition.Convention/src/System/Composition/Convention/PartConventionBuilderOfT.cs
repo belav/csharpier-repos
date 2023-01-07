@@ -242,7 +242,8 @@ namespace System.Composition.Convention
             }
         }
 
-        internal PartConventionBuilder(Predicate<Type> selectType) : base(selectType) { }
+        internal PartConventionBuilder(Predicate<Type> selectType)
+            : base(selectType) { }
 
         /// <summary>
         /// Select which of the available constructors will be used to instantiate the part.

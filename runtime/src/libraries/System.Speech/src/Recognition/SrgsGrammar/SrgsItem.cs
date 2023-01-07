@@ -22,14 +22,16 @@ namespace System.Speech.Recognition.SrgsGrammar
             _elements = new SrgsElementList();
         }
 
-        public SrgsItem(string text) : this()
+        public SrgsItem(string text)
+            : this()
         {
             Helpers.ThrowIfEmptyOrNull(text, nameof(text));
 
             _elements.Add(new SrgsText(text));
         }
 
-        public SrgsItem(params SrgsElement[] elements) : this()
+        public SrgsItem(params SrgsElement[] elements)
+            : this()
         {
             Helpers.ThrowIfNull(elements, nameof(elements));
 
@@ -46,23 +48,27 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
         }
 
-        public SrgsItem(int repeatCount) : this()
+        public SrgsItem(int repeatCount)
+            : this()
         {
             SetRepeat(repeatCount);
         }
 
-        public SrgsItem(int min, int max) : this()
+        public SrgsItem(int min, int max)
+            : this()
         {
             SetRepeat(min, max);
         }
 
         //overloads with setting the repeat.
-        public SrgsItem(int min, int max, string text) : this(text)
+        public SrgsItem(int min, int max, string text)
+            : this(text)
         {
             SetRepeat(min, max);
         }
 
-        public SrgsItem(int min, int max, params SrgsElement[] elements) : this(elements)
+        public SrgsItem(int min, int max, params SrgsElement[] elements)
+            : this(elements)
         {
             SetRepeat(min, max);
         }

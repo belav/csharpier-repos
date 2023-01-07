@@ -153,7 +153,8 @@ public class LinkTagHelper : UrlResolutionTagHelper
         HtmlEncoder htmlEncoder,
         JavaScriptEncoder javaScriptEncoder,
         IUrlHelperFactory urlHelperFactory
-    ) : base(urlHelperFactory, htmlEncoder)
+    )
+        : base(urlHelperFactory, htmlEncoder)
     {
         HostingEnvironment = hostingEnvironment;
         JavaScriptEncoder = javaScriptEncoder;

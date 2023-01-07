@@ -11,7 +11,8 @@ namespace System.Globalization.Tests
             string entry,
             string fallbackValue,
             bool validDomainName = true
-        ) : base(entry, fallbackValue, IdnaTestResultType.ToUnicode)
+        )
+            : base(entry, fallbackValue, IdnaTestResultType.ToUnicode)
         {
             ValidDomainName = validDomainName;
         }

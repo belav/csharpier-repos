@@ -17,13 +17,15 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='InvalidEnumArgumentException'/>
         /// class without a message.
         /// </summary>
-        public InvalidEnumArgumentException() : this(null) { }
+        public InvalidEnumArgumentException()
+            : this(null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='InvalidEnumArgumentException'/>
         /// class with the specified message.
         /// </summary>
-        public InvalidEnumArgumentException(string? message) : base(message) { }
+        public InvalidEnumArgumentException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the Exception class with a specified error message

@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class OwnedQueryRelationalTestBase<TFixture> : OwnedQueryTestBase<TFixture>
     where TFixture : OwnedQueryRelationalTestBase<TFixture>.RelationalOwnedQueryFixture, new()
 {
-    protected OwnedQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected OwnedQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

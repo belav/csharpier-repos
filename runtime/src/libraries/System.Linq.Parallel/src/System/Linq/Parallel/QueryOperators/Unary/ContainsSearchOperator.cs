@@ -38,7 +38,8 @@ namespace System.Linq.Parallel
             IEnumerable<TInput> child,
             TInput searchValue,
             IEqualityComparer<TInput>? comparer
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
 

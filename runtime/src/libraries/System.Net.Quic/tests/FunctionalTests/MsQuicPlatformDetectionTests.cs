@@ -9,7 +9,8 @@ namespace System.Net.Quic.Tests
 {
     public class MsQuicPlatformDetectionTests : QuicTestBase
     {
-        public MsQuicPlatformDetectionTests(ITestOutputHelper output) : base(output) { }
+        public MsQuicPlatformDetectionTests(ITestOutputHelper output)
+            : base(output) { }
 
         public static bool IsQuicUnsupported => !IsSupported;
 

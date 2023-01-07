@@ -27,7 +27,8 @@ public class CosmosReadItemEventData : EventData
         string containerId,
         string? partitionKey,
         bool logSensitiveData
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         ResourceId = resourceId;
         ContainerId = containerId;

@@ -43,7 +43,9 @@ namespace Castle.DynamicProxy.Generators.Emitters
             TypeAttributes attributes,
             Type baseType,
             Type[] interfaces
-        ) : this(maintype, CreateTypeBuilder(maintype, name, attributes, baseType, interfaces)) { }
+        )
+            : this(maintype, CreateTypeBuilder(maintype, name, attributes, baseType, interfaces))
+        { }
 
         public NestedClassEmitter(AbstractTypeEmitter maintype, TypeBuilder typeBuilder)
             : base(typeBuilder)

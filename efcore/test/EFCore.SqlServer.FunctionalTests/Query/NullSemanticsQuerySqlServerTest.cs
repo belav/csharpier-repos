@@ -12,7 +12,8 @@ public class NullSemanticsQuerySqlServerTest
     public NullSemanticsQuerySqlServerTest(
         NullSemanticsQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

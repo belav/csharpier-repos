@@ -20,7 +20,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             ContractBasedImportDefinition definition,
             ReflectionWritableMember member,
             ImportType importType
-        ) : base(definition, importType)
+        )
+            : base(definition, importType)
         {
             ArgumentNullException.ThrowIfNull(member);
 

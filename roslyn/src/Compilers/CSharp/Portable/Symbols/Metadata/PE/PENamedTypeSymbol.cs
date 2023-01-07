@@ -2772,7 +2772,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 NamespaceOrTypeSymbol container,
                 TypeDefinitionHandle handle,
                 string emittedNamespaceName
-            ) : base(moduleSymbol, container, handle, emittedNamespaceName, 0, out _) { }
+            )
+                : base(moduleSymbol, container, handle, emittedNamespaceName, 0, out _) { }
 
             protected override NamedTypeSymbol WithTupleDataCore(TupleExtraData newData) =>
                 throw ExceptionUtilities.Unreachable();

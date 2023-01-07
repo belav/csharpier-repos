@@ -868,7 +868,8 @@ namespace System.IO
                 int offset,
                 int count,
                 AsyncCallback? callback
-            ) : base(function, state, CancellationToken.None, TaskCreationOptions.DenyChildAttach)
+            )
+                : base(function, state, CancellationToken.None, TaskCreationOptions.DenyChildAttach)
             {
                 Debug.Assert(function != null);
                 Debug.Assert(stream != null);

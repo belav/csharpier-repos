@@ -308,7 +308,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 Workspace workspace,
                 SourceGeneratedDocumentIdentity documentIdentity,
                 IThreadingContext threadingContext
-            ) : base(threadingContext, assertIsForeground: true)
+            )
+                : base(threadingContext, assertIsForeground: true)
             {
                 _fileManager = fileManager;
                 _textBuffer = textBuffer;

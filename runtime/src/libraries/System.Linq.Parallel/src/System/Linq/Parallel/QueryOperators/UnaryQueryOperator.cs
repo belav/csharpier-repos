@@ -47,7 +47,8 @@ namespace System.Linq.Parallel
             QueryOperator<TInput> child,
             bool outputOrdered,
             QuerySettings settings
-        ) : base(outputOrdered, settings)
+        )
+            : base(outputOrdered, settings)
         {
             _child = child;
         }

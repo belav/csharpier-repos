@@ -70,7 +70,8 @@ public class TemporaryOpenApiProject : TemporaryCSharpProject
 
     public new class ItemSpec : TemporaryCSharpProject.ItemSpec
     {
-        public ItemSpec() : base()
+        public ItemSpec()
+            : base()
         {
             Name = "OpenApiReference";
         }

@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.Pkcs
         // Constructors.
         //
 
-        public Pkcs9ContentType() : base(Oids.ContentTypeOid.CopyOid()) { }
+        public Pkcs9ContentType()
+            : base(Oids.ContentTypeOid.CopyOid()) { }
 
         internal Pkcs9ContentType(ReadOnlySpan<byte> rawData)
             : base(Oids.ContentTypeOid.CopyOid(), rawData) { }

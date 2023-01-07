@@ -32,8 +32,8 @@ public partial class XmlSerializerOutputFormatter : TextOutputFormatter
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>
     /// with default <see cref="XmlWriterSettings"/>.
     /// </summary>
-    public XmlSerializerOutputFormatter() : this(FormattingUtilities.GetDefaultXmlWriterSettings())
-    { }
+    public XmlSerializerOutputFormatter()
+        : this(FormattingUtilities.GetDefaultXmlWriterSettings()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="XmlSerializerOutputFormatter"/>

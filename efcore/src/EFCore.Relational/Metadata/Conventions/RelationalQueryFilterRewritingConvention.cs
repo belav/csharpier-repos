@@ -16,7 +16,8 @@ public class RelationalQueryFilterRewritingConvention : QueryFilterRewritingConv
     public RelationalQueryFilterRewritingConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
         DbSetAccessRewriter = new RelationalDbSetAccessRewritingExpressionVisitor(
@@ -67,8 +68,8 @@ public class RelationalQueryFilterRewritingConvention : QueryFilterRewritingConv
         ///     Creates a new instance of <see cref="RelationalDbSetAccessRewritingExpressionVisitor" />.
         /// </summary>
         /// <param name="contextType">The clr type of derived DbContext.</param>
-        public RelationalDbSetAccessRewritingExpressionVisitor(Type contextType) : base(contextType)
-        { }
+        public RelationalDbSetAccessRewritingExpressionVisitor(Type contextType)
+            : base(contextType) { }
 
         /// <inheritdoc />
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)

@@ -16,7 +16,8 @@ namespace ILLink.Shared.TrimAnalysis
             IMethodSymbol methodSymbol,
             ParameterIndex parameterIndex,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
-        ) : this(new(new(methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
+        )
+            : this(new(new(methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
 
         public MethodParameterValue(ParameterProxy parameter)
             : this(parameter, FlowAnnotations.GetMethodParameterAnnotation(parameter)) { }

@@ -55,7 +55,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             IThreadingContext threadingContext,
             IVsTextManager4 textManager,
             IGlobalOptionService globalOptions
-        ) : base(threadingContext, assertIsForeground: true)
+        )
+            : base(threadingContext, assertIsForeground: true)
         {
             _textManager = textManager;
             _globalOptions = globalOptions;

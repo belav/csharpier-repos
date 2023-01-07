@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private BoundExpression _switchGoverningExpression;
         private BindingDiagnosticBag _switchGoverningDiagnostics;
 
-        private SwitchBinder(Binder next, SwitchStatementSyntax switchSyntax) : base(next)
+        private SwitchBinder(Binder next, SwitchStatementSyntax switchSyntax)
+            : base(next)
         {
             SwitchSyntax = switchSyntax;
             _breakLabel = new GeneratedLabelSymbol("break");

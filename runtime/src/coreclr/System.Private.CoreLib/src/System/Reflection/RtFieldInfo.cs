@@ -69,7 +69,8 @@ namespace System.Reflection
             RuntimeType declaringType,
             RuntimeTypeCache reflectedTypeCache,
             BindingFlags bindingFlags
-        ) : base(reflectedTypeCache, declaringType, bindingFlags)
+        )
+            : base(reflectedTypeCache, declaringType, bindingFlags)
         {
             m_fieldHandle = handle.Value;
             m_fieldAttributes = RuntimeFieldHandle.GetAttributes(handle);

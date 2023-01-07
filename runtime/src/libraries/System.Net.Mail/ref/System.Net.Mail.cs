@@ -8,23 +8,26 @@ namespace System.Net.Mail
 {
     public partial class AlternateView : System.Net.Mail.AttachmentBase
     {
-        public AlternateView(System.IO.Stream contentStream) : base(default(System.IO.Stream)) { }
+        public AlternateView(System.IO.Stream contentStream)
+            : base(default(System.IO.Stream)) { }
 
         public AlternateView(
             System.IO.Stream contentStream,
             System.Net.Mime.ContentType? contentType
-        ) : base(default(System.IO.Stream)) { }
+        )
+            : base(default(System.IO.Stream)) { }
 
         public AlternateView(System.IO.Stream contentStream, string? mediaType)
             : base(default(System.IO.Stream)) { }
 
-        public AlternateView(string fileName) : base(default(System.IO.Stream)) { }
+        public AlternateView(string fileName)
+            : base(default(System.IO.Stream)) { }
 
         public AlternateView(string fileName, System.Net.Mime.ContentType? contentType)
             : base(default(System.IO.Stream)) { }
 
-        public AlternateView(string fileName, string? mediaType) : base(default(System.IO.Stream))
-        { }
+        public AlternateView(string fileName, string? mediaType)
+            : base(default(System.IO.Stream)) { }
 
         public System.Uri? BaseUri
         {
@@ -89,12 +92,14 @@ namespace System.Net.Mail
         public Attachment(System.IO.Stream contentStream, string? name, string? mediaType)
             : base(default(System.IO.Stream)) { }
 
-        public Attachment(string fileName) : base(default(System.IO.Stream)) { }
+        public Attachment(string fileName)
+            : base(default(System.IO.Stream)) { }
 
         public Attachment(string fileName, System.Net.Mime.ContentType contentType)
             : base(default(System.IO.Stream)) { }
 
-        public Attachment(string fileName, string? mediaType) : base(default(System.IO.Stream)) { }
+        public Attachment(string fileName, string? mediaType)
+            : base(default(System.IO.Stream)) { }
 
         public System.Net.Mime.ContentDisposition? ContentDisposition
         {
@@ -210,23 +215,26 @@ namespace System.Net.Mail
 
     public partial class LinkedResource : System.Net.Mail.AttachmentBase
     {
-        public LinkedResource(System.IO.Stream contentStream) : base(default(System.IO.Stream)) { }
+        public LinkedResource(System.IO.Stream contentStream)
+            : base(default(System.IO.Stream)) { }
 
         public LinkedResource(
             System.IO.Stream contentStream,
             System.Net.Mime.ContentType? contentType
-        ) : base(default(System.IO.Stream)) { }
+        )
+            : base(default(System.IO.Stream)) { }
 
         public LinkedResource(System.IO.Stream contentStream, string? mediaType)
             : base(default(System.IO.Stream)) { }
 
-        public LinkedResource(string fileName) : base(default(System.IO.Stream)) { }
+        public LinkedResource(string fileName)
+            : base(default(System.IO.Stream)) { }
 
         public LinkedResource(string fileName, System.Net.Mime.ContentType? contentType)
             : base(default(System.IO.Stream)) { }
 
-        public LinkedResource(string fileName, string? mediaType) : base(default(System.IO.Stream))
-        { }
+        public LinkedResource(string fileName, string? mediaType)
+            : base(default(System.IO.Stream)) { }
 
         public System.Uri? ContentLink
         {

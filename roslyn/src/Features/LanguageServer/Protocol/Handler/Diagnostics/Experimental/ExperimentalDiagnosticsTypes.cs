@@ -207,7 +207,8 @@ internal class WorkspaceFullDocumentDiagnosticReport : FullDocumentDiagnosticRep
         VisualStudio.LanguageServer.Protocol.Diagnostic[] items,
         int? version,
         string? resultId
-    ) : base(resultId, items)
+    )
+        : base(resultId, items)
     {
         Uri = uri ?? throw new ArgumentNullException(nameof(uri));
         Version = version;

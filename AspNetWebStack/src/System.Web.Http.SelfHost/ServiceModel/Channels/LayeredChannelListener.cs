@@ -19,7 +19,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             bool sharedInnerListener,
             IDefaultCommunicationTimeouts timeouts,
             IChannelListener innerChannelListener
-        ) : base(timeouts)
+        )
+            : base(timeouts)
         {
             _sharedInnerListener = sharedInnerListener;
             _innerChannelListener = innerChannelListener;
@@ -33,7 +34,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         protected LayeredChannelListener(
             bool sharedInnerListener,
             IDefaultCommunicationTimeouts timeouts
-        ) : this(sharedInnerListener, timeouts, null) { }
+        )
+            : this(sharedInnerListener, timeouts, null) { }
 
         protected LayeredChannelListener(bool sharedInnerListener)
             : this(sharedInnerListener, null, null) { }
@@ -41,7 +43,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         protected LayeredChannelListener(
             IDefaultCommunicationTimeouts timeouts,
             IChannelListener innerChannelListener
-        ) : this(false, timeouts, innerChannelListener) { }
+        )
+            : this(false, timeouts, innerChannelListener) { }
 
         public override Uri Uri
         {
@@ -225,7 +228,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 TimeSpan timeout,
                 AsyncCallback callback,
                 object state
-            ) : base(callback, state)
+            )
+                : base(callback, state)
             {
                 _communicationObject = communicationObject;
 
@@ -293,7 +297,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 TimeSpan timeout,
                 AsyncCallback callback,
                 object state
-            ) : base(callback, state)
+            )
+                : base(callback, state)
             {
                 _communicationObject = communicationObject;
 

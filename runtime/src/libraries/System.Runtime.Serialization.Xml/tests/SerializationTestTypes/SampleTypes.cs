@@ -71,7 +71,8 @@ namespace SerializationTestTypes
     {
         public CircularLinkDerived() { }
 
-        public CircularLinkDerived(bool inti) : base() { }
+        public CircularLinkDerived(bool inti)
+            : base() { }
     }
 
     [DataContract(IsReference = true)]

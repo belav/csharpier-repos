@@ -10,11 +10,14 @@ namespace System.Net.Http
     {
         internal RequestRetryType AllowRetry { get; } = RequestRetryType.NoRetry;
 
-        public HttpRequestException() : this(null, null) { }
+        public HttpRequestException()
+            : this(null, null) { }
 
-        public HttpRequestException(string? message) : this(message, null) { }
+        public HttpRequestException(string? message)
+            : this(message, null) { }
 
-        public HttpRequestException(string? message, Exception? inner) : base(message, inner)
+        public HttpRequestException(string? message, Exception? inner)
+            : base(message, inner)
         {
             if (inner != null)
             {
@@ -48,7 +51,8 @@ namespace System.Net.Http
             string? message,
             Exception? inner,
             RequestRetryType allowRetry
-        ) : this(message, inner)
+        )
+            : this(message, inner)
         {
             AllowRetry = allowRetry;
         }

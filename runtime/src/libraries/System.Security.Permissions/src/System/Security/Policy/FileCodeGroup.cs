@@ -15,7 +15,8 @@ namespace System.Security.Policy
         public FileCodeGroup(
             IMembershipCondition membershipCondition,
             Permissions.FileIOPermissionAccess access
-        ) : base(default(IMembershipCondition), default(PolicyStatement)) { }
+        )
+            : base(default(IMembershipCondition), default(PolicyStatement)) { }
 
         public override string AttributeString
         {

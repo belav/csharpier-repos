@@ -16,7 +16,8 @@ public sealed partial class ChallengeHttpResult : IResult
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeHttpResult"/>.
     /// </summary>
-    internal ChallengeHttpResult() : this(Array.Empty<string>()) { }
+    internal ChallengeHttpResult()
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ChallengeHttpResult"/> with the

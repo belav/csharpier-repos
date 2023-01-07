@@ -3358,7 +3358,8 @@ class MyRealProxy : RealProxy, IRemotingTypeInfo
     MBRO mbro;
     bool can_cast_to_called = false;
 
-    public MyRealProxy(MBRO mbro) : base(typeof(MBRO))
+    public MyRealProxy(MBRO mbro)
+        : base(typeof(MBRO))
     {
         this.mbro = mbro;
     }

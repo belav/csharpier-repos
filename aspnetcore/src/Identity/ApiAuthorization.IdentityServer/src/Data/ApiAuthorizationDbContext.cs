@@ -29,7 +29,8 @@ public class ApiAuthorizationDbContext<TUser> : IdentityDbContext<TUser>, IPersi
     public ApiAuthorizationDbContext(
         DbContextOptions options,
         IOptions<OperationalStoreOptions> operationalStoreOptions
-    ) : base(options)
+    )
+        : base(options)
     {
         _operationalStoreOptions = operationalStoreOptions;
     }

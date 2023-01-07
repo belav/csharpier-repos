@@ -14,7 +14,8 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     internal sealed partial class RuntimeByRefTypeInfo : RuntimeHasElementTypeInfo
     {
-        private RuntimeByRefTypeInfo(UnificationKey key) : base(key) { }
+        private RuntimeByRefTypeInfo(UnificationKey key)
+            : base(key) { }
 
         protected sealed override bool IsArrayImpl() => false;
 

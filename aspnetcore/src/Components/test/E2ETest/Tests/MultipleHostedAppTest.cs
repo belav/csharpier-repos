@@ -15,7 +15,8 @@ public class MultipleHostedAppTest : ServerTestBase<AspNetSiteServerFixture>
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output)
+    )
+        : base(browserFixture, serverFixture, output)
     {
         serverFixture.AdditionalArguments.AddRange(new[] { "--MapAllApps", "true" });
         serverFixture.BuildWebHostMethod = HostedInAspNet.Server.Program.BuildWebHost;

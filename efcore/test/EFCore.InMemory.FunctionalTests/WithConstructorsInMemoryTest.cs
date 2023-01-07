@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class WithConstructorsInMemoryTest
     : WithConstructorsTestBase<WithConstructorsInMemoryTest.WithConstructorsInMemoryFixture>
 {
-    public WithConstructorsInMemoryTest(WithConstructorsInMemoryFixture fixture) : base(fixture) { }
+    public WithConstructorsInMemoryTest(WithConstructorsInMemoryFixture fixture)
+        : base(fixture) { }
 
     public override void Query_and_update_using_constructors_with_property_parameters()
     {

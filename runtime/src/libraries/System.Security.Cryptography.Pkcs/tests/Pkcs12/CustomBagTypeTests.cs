@@ -84,7 +84,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
         private class CustomBagType : Pkcs12SafeBag
         {
-            public CustomBagType(byte value) : this(new byte[] { 4, 1, value }) { }
+            public CustomBagType(byte value)
+                : this(new byte[] { 4, 1, value }) { }
 
             public CustomBagType(ReadOnlyMemory<byte> encoded, bool skipCopy = false)
                 : base("0.0", encoded, skipCopy) { }

@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             ITextUndoHistoryRegistry undoRegistry,
             IEditorOperationsFactoryService editorOperations,
             EditorOptionsService editorOptionsService
-        ) : base(undoRegistry, editorOperations, editorOptionsService) { }
+        )
+            : base(undoRegistry, editorOperations, editorOptionsService) { }
 
         protected override void NextAction(IEditorOperations editorOperation, Action nextAction) =>
             editorOperation.InsertNewLine();

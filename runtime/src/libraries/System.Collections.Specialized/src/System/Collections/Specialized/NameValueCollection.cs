@@ -31,14 +31,16 @@ namespace System.Collections.Specialized
         ///    and using the default case-insensitive hash code provider and the default
         ///    case-insensitive comparer.</para>
         /// </devdoc>
-        public NameValueCollection() : base() { }
+        public NameValueCollection()
+            : base() { }
 
         /// <devdoc>
         /// <para>Copies the entries from the specified <see cref='System.Collections.Specialized.NameValueCollection'/> to a new <see cref='System.Collections.Specialized.NameValueCollection'/> with the same initial capacity as
         ///    the number of entries copied and using the default case-insensitive hash code
         ///    provider and the default case-insensitive comparer.</para>
         /// </devdoc>
-        public NameValueCollection(NameValueCollection col) : base(col?.Comparer)
+        public NameValueCollection(NameValueCollection col)
+            : base(col?.Comparer)
         {
             Add(col!);
         }
@@ -54,9 +56,11 @@ namespace System.Collections.Specialized
         ///    the specified initial capacity and using the default case-insensitive hash code
         ///    provider and the default case-insensitive comparer.</para>
         /// </devdoc>
-        public NameValueCollection(int capacity) : base(capacity) { }
+        public NameValueCollection(int capacity)
+            : base(capacity) { }
 
-        public NameValueCollection(IEqualityComparer? equalityComparer) : base(equalityComparer) { }
+        public NameValueCollection(IEqualityComparer? equalityComparer)
+            : base(equalityComparer) { }
 
         public NameValueCollection(int capacity, IEqualityComparer? equalityComparer)
             : base(capacity, equalityComparer) { }
@@ -84,7 +88,8 @@ namespace System.Collections.Specialized
             int capacity,
             IHashCodeProvider? hashProvider,
             IComparer? comparer
-        ) : base(capacity, hashProvider, comparer) { }
+        )
+            : base(capacity, hashProvider, comparer) { }
 
         protected NameValueCollection(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

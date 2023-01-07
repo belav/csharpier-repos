@@ -14,7 +14,8 @@ namespace System.CommandLine
 {
     internal sealed class CommandLineException : Exception
     {
-        public CommandLineException(string message) : base(message) { }
+        public CommandLineException(string message)
+            : base(message) { }
     }
 
     //

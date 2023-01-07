@@ -894,7 +894,8 @@ namespace Moq.Tests.Regressions
 
             public class ExtendedConcreteType : ExtendingTypeBase
             {
-                public ExtendedConcreteType(int extendedValue) : base(extendedValue) { }
+                public ExtendedConcreteType(int extendedValue)
+                    : base(extendedValue) { }
 
                 public override int CommonValue { get; set; }
             }

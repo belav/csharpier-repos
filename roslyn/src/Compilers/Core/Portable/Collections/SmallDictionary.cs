@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis
         // https://github.com/dotnet/roslyn/issues/40344
         public static readonly SmallDictionary<K, V> Empty = new SmallDictionary<K, V>(null!);
 
-        public SmallDictionary() : this(EqualityComparer<K>.Default) { }
+        public SmallDictionary()
+            : this(EqualityComparer<K>.Default) { }
 
         public SmallDictionary(IEqualityComparer<K> comparer)
         {
@@ -128,7 +129,8 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class NodeLinked : Node
         {
-            public NodeLinked(K key, V value, Node next) : base(key, value)
+            public NodeLinked(K key, V value, Node next)
+                : base(key, value)
             {
                 this.Next = next;
             }
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis
         {
             public Node next;
 
-            public AvlNodeHead(int hashCode, K key, V value, Node next) : base(hashCode, key, value)
+            public AvlNodeHead(int hashCode, K key, V value, Node next)
+                : base(hashCode, key, value)
             {
                 this.next = next;
             }
@@ -156,7 +159,8 @@ namespace Microsoft.CodeAnalysis
             public readonly int HashCode;
             public sbyte Balance;
 
-            protected HashedNode(int hashCode, K key, V value) : base(key, value)
+            protected HashedNode(int hashCode, K key, V value)
+                : base(key, value)
             {
                 this.HashCode = hashCode;
             }
@@ -167,7 +171,8 @@ namespace Microsoft.CodeAnalysis
             public AvlNode? Left;
             public AvlNode? Right;
 
-            public AvlNode(int hashCode, K key, V value) : base(hashCode, key, value) { }
+            public AvlNode(int hashCode, K key, V value)
+                : base(hashCode, key, value) { }
 
 #if DEBUG
             public static int AssertBalanced(AvlNode? V)
@@ -513,7 +518,8 @@ namespace Microsoft.CodeAnalysis
                 private Node? _next;
                 private Node? _current;
 
-                public Enumerator(SmallDictionary<K, V> dict) : this()
+                public Enumerator(SmallDictionary<K, V> dict)
+                    : this()
                 {
                     var root = dict._root;
                     if (root != null)
@@ -625,7 +631,8 @@ namespace Microsoft.CodeAnalysis
                 private Node? _next;
                 private Node? _current;
 
-                public Enumerator(SmallDictionary<K, V> dict) : this()
+                public Enumerator(SmallDictionary<K, V> dict)
+                    : this()
                 {
                     var root = dict._root;
                     if (root == null)
@@ -728,7 +735,8 @@ namespace Microsoft.CodeAnalysis
             private Node? _next;
             private Node? _current;
 
-            public Enumerator(SmallDictionary<K, V> dict) : this()
+            public Enumerator(SmallDictionary<K, V> dict)
+                : this()
             {
                 var root = dict._root;
                 if (root == null)

@@ -15,18 +15,21 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             DispId = dispId;
         }
 
-        internal ComMethodDesc(string name, int dispId) : this(dispId)
+        internal ComMethodDesc(string name, int dispId)
+            : this(dispId)
         {
             // no ITypeInfo constructor
             Name = name;
         }
 
-        internal ComMethodDesc(string name, int dispId, INVOKEKIND invkind) : this(name, dispId)
+        internal ComMethodDesc(string name, int dispId, INVOKEKIND invkind)
+            : this(name, dispId)
         {
             _invokeKind = invkind;
         }
 
-        internal ComMethodDesc(ITypeInfo typeInfo, FUNCDESC funcDesc) : this(funcDesc.memid)
+        internal ComMethodDesc(ITypeInfo typeInfo, FUNCDESC funcDesc)
+            : this(funcDesc.memid)
         {
             _invokeKind = funcDesc.invkind;
 

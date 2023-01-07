@@ -24,9 +24,11 @@ namespace System.Diagnostics.TraceSourceTests
 
         private const int MethodEnumCount = 9;
 
-        public TestTraceListener(bool threadSafe = false) : this(null, threadSafe) { }
+        public TestTraceListener(bool threadSafe = false)
+            : this(null, threadSafe) { }
 
-        public TestTraceListener(string name, bool threadSafe = false) : base(name)
+        public TestTraceListener(string name, bool threadSafe = false)
+            : base(name)
         {
             _threadSafe = threadSafe;
             _calls = new int[MethodEnumCount];

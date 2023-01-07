@@ -23,12 +23,14 @@ namespace System.Data.OleDb
     {
         private static readonly object EventInfoMessage = new object();
 
-        public OleDbConnection(string? connectionString) : this()
+        public OleDbConnection(string? connectionString)
+            : this()
         {
             ConnectionString = connectionString;
         }
 
-        private OleDbConnection(OleDbConnection connection) : this()
+        private OleDbConnection(OleDbConnection connection)
+            : this()
         { // Clone
             CopyFrom(connection);
         }

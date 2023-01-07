@@ -198,7 +198,8 @@ namespace Internal.TypeSystem.Ecma
             MetadataReader metadataReader,
             IAssemblyDesc containingAssembly,
             IModuleResolver customModuleResolver
-        ) : base(context, containingAssembly)
+        )
+            : base(context, containingAssembly)
         {
             _peReader = peReader;
             _metadataReader = metadataReader;

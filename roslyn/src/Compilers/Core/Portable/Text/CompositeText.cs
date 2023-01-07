@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Text
             ImmutableArray<SourceText> segments,
             Encoding? encoding,
             SourceHashAlgorithm checksumAlgorithm
-        ) : base(checksumAlgorithm: checksumAlgorithm)
+        )
+            : base(checksumAlgorithm: checksumAlgorithm)
         {
             Debug.Assert(!segments.IsDefaultOrEmpty);
 

@@ -36,14 +36,17 @@ namespace OLEDB.Test.ModuleCore
         }
 
         //Constructors
-        public CTestModule() : this(null, "Microsoft", 1) { }
+        public CTestModule()
+            : this(null, "Microsoft", 1) { }
 
-        public CTestModule(string desc) : this(desc, "Microsoft", 1)
+        public CTestModule(string desc)
+            : this(desc, "Microsoft", 1)
         {
             //Delegate
         }
 
-        public CTestModule(string desc, string owner, int version) : base(desc)
+        public CTestModule(string desc, string owner, int version)
+            : base(desc)
         {
             _clsid = GetType().ToString();
 

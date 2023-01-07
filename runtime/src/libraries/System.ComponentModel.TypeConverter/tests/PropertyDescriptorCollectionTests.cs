@@ -241,7 +241,8 @@ namespace System.ComponentModel.Tests
 
         private class MockPropertyDescriptor : PropertyDescriptor
         {
-            public MockPropertyDescriptor(string name) : base(name, new Attribute[] { }) { }
+            public MockPropertyDescriptor(string name)
+                : base(name, new Attribute[] { }) { }
 
             public override Type ComponentType
             {

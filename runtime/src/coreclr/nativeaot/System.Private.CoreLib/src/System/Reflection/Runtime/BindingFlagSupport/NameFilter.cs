@@ -18,7 +18,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
     internal sealed partial class NameFilterCaseSensitive : NameFilter
     {
-        public NameFilterCaseSensitive(string expectedName) : base(expectedName) { }
+        public NameFilterCaseSensitive(string expectedName)
+            : base(expectedName) { }
 
         public sealed override bool Matches(string name) =>
             name.Equals(ExpectedName, StringComparison.Ordinal);
@@ -26,7 +27,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
     internal sealed partial class NameFilterCaseInsensitive : NameFilter
     {
-        public NameFilterCaseInsensitive(string expectedName) : base(expectedName) { }
+        public NameFilterCaseInsensitive(string expectedName)
+            : base(expectedName) { }
 
         public sealed override bool Matches(string name) =>
             name.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);

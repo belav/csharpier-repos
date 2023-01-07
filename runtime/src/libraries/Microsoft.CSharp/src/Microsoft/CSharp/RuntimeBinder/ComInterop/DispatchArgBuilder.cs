@@ -12,7 +12,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         private readonly bool _isWrapper;
 
-        internal DispatchArgBuilder(Type parameterType) : base(parameterType)
+        internal DispatchArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             _isWrapper = parameterType == typeof(DispatchWrapper);
         }

@@ -18,7 +18,8 @@ namespace System.Data
         /// Default constructor for generic TypedTableBase.
         /// Will be called by generated Typed DataSet classes and is not for public use.
         /// </summary>
-        protected TypedTableBase() : base() { }
+        protected TypedTableBase()
+            : base() { }
 
         /// <summary>
         /// Constructor for the generic TypedTableBase with takes SerializationInfo and StreamingContext.
@@ -36,7 +37,8 @@ namespace System.Data
         protected TypedTableBase(
             System.Runtime.Serialization.SerializationInfo info,
             System.Runtime.Serialization.StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         /// <summary>
         /// This property returns an enumerator of T for the TypedTable.  Note, this could

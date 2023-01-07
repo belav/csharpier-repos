@@ -17,7 +17,8 @@ namespace System.Net.Http.Formatting
     /// </summary>
     public class DefaultContentNegotiator : IContentNegotiator
     {
-        public DefaultContentNegotiator() : this(false) { }
+        public DefaultContentNegotiator()
+            : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultContentNegotiator"/> with

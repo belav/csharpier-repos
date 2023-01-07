@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private partial class CSharpSyntaxTreeFactoryService : AbstractSyntaxTreeFactoryService
         {
-            public CSharpSyntaxTreeFactoryService(SolutionServices services) : base(services) { }
+            public CSharpSyntaxTreeFactoryService(SolutionServices services)
+                : base(services) { }
 
             public override ParseOptions GetDefaultParseOptions() => CSharpParseOptions.Default;
 

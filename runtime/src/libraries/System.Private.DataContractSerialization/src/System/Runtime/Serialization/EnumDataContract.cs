@@ -22,7 +22,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal EnumDataContract(Type type) : base(new EnumDataContractCriticalHelper(type))
+        internal EnumDataContract(Type type)
+            : base(new EnumDataContractCriticalHelper(type))
         {
             _helper = (base.Helper as EnumDataContractCriticalHelper)!;
         }
@@ -128,7 +129,8 @@ namespace System.Runtime.Serialization.DataContracts
             internal EnumDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
                     Type type
-            ) : base(type)
+            )
+                : base(type)
             {
                 XmlName = DataContract.GetXmlName(type, out _hasDataContract);
                 Type baseType = Enum.GetUnderlyingType(type);

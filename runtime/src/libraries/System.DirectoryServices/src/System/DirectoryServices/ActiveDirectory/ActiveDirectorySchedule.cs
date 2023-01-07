@@ -56,7 +56,8 @@ namespace System.DirectoryServices.ActiveDirectory
 #pragma warning restore 612, 618
         }
 
-        public ActiveDirectorySchedule(ActiveDirectorySchedule schedule) : this()
+        public ActiveDirectorySchedule(ActiveDirectorySchedule schedule)
+            : this()
         {
             ArgumentNullException.ThrowIfNull(schedule);
 
@@ -65,7 +66,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 _scheduleArray[i] = tmpSchedule[i];
         }
 
-        internal ActiveDirectorySchedule(bool[] schedule) : this()
+        internal ActiveDirectorySchedule(bool[] schedule)
+            : this()
         {
             for (int i = 0; i < 672; i++)
                 _scheduleArray[i] = schedule[i];

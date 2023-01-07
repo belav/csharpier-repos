@@ -11,7 +11,8 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members returned by a given module
     internal class ProjectingModule : DelegatingModule, IProjectable
     {
-        public ProjectingModule(Module module, Projector projector) : base(module)
+        public ProjectingModule(Module module, Projector projector)
+            : base(module)
         {
             Debug.Assert(null != projector);
 

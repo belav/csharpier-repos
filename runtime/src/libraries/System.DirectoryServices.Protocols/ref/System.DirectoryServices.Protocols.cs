@@ -609,13 +609,15 @@ namespace System.DirectoryServices.Protocols
         public DirSyncRequestControl(
             byte[] cookie,
             System.DirectoryServices.Protocols.DirectorySynchronizationOptions option
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        )
+            : base(default(string), default(byte[]), default(bool), default(bool)) { }
 
         public DirSyncRequestControl(
             byte[] cookie,
             System.DirectoryServices.Protocols.DirectorySynchronizationOptions option,
             int attributeCount
-        ) : base(default(string), default(byte[]), default(bool), default(bool)) { }
+        )
+            : base(default(string), default(byte[]), default(bool), default(bool)) { }
 
         public int AttributeCount
         {
@@ -1274,8 +1276,8 @@ namespace System.DirectoryServices.Protocols
     [System.Runtime.Versioning.SupportedOSPlatformAttribute("windows")]
     public partial class QuotaControl : System.DirectoryServices.Protocols.DirectoryControl
     {
-        public QuotaControl() : base(default(string), default(byte[]), default(bool), default(bool))
-        { }
+        public QuotaControl()
+            : base(default(string), default(byte[]), default(bool), default(bool)) { }
 
         public QuotaControl(System.Security.Principal.SecurityIdentifier querySid)
             : base(default(string), default(byte[]), default(bool), default(bool)) { }

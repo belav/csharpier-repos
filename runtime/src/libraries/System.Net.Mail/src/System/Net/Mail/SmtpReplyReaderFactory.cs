@@ -374,7 +374,8 @@ namespace System.Net.Mail
                 SmtpReplyReaderFactory parent,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
             }
@@ -384,7 +385,8 @@ namespace System.Net.Mail
                 AsyncCallback? callback,
                 object? state,
                 bool oneLine
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _oneLine = oneLine;
                 _parent = parent;

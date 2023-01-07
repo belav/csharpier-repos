@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         public RetargetingEventSymbol(
             RetargetingModuleSymbol retargetingModule,
             EventSymbol underlyingEvent
-        ) : base(underlyingEvent)
+        )
+            : base(underlyingEvent)
         {
             RoslynDebug.Assert((object)retargetingModule != null);
             Debug.Assert(!(underlyingEvent is RetargetingEventSymbol));

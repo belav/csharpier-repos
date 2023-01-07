@@ -82,7 +82,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class AddResponse : DirectoryResponse
@@ -93,7 +94,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class ModifyResponse : DirectoryResponse
@@ -104,7 +106,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class ModifyDNResponse : DirectoryResponse
@@ -115,7 +118,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class CompareResponse : DirectoryResponse
@@ -126,7 +130,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class ExtendedResponse : DirectoryResponse
@@ -139,7 +144,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
 
         public string ResponseName { get; internal set; }
 
@@ -176,7 +182,8 @@ namespace System.DirectoryServices.Protocols
             ResultCode result,
             string message,
             Uri[] referral
-        ) : base(dn, controls, result, message, referral) { }
+        )
+            : base(dn, controls, result, message, referral) { }
 
         public SearchResultReferenceCollection References
         {

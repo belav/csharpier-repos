@@ -70,14 +70,16 @@ public class TestActionResult : ITestActionResult
 
 public class TestObjectResult : ObjectResult, ITestActionResult
 {
-    public TestObjectResult(object innerResult) : base(innerResult) { }
+    public TestObjectResult(object innerResult)
+        : base(innerResult) { }
 }
 
 public class TestStatusCodeResult : StatusCodeResult, ITestActionResult
 {
     private readonly StatusCodeResult _innerResult;
 
-    public TestStatusCodeResult(StatusCodeResult innerResult) : base(innerResult.StatusCode)
+    public TestStatusCodeResult(StatusCodeResult innerResult)
+        : base(innerResult.StatusCode)
     {
         _innerResult = innerResult;
     }
@@ -85,32 +87,38 @@ public class TestStatusCodeResult : StatusCodeResult, ITestActionResult
 
 public class TestNotFoundResult : TestStatusCodeResult
 {
-    public TestNotFoundResult(NotFoundResult innerResult) : base(innerResult) { }
+    public TestNotFoundResult(NotFoundResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestNotFoundObjectResult : TestObjectResult
 {
-    public TestNotFoundObjectResult(NotFoundObjectResult innerResult) : base(innerResult) { }
+    public TestNotFoundObjectResult(NotFoundObjectResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestBadRequestResult : TestStatusCodeResult
 {
-    public TestBadRequestResult(BadRequestResult innerResult) : base(innerResult) { }
+    public TestBadRequestResult(BadRequestResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestBadRequestObjectResult : TestActionResult
 {
-    public TestBadRequestObjectResult(BadRequestObjectResult innerResult) : base(innerResult) { }
+    public TestBadRequestObjectResult(BadRequestObjectResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestOkResult : TestStatusCodeResult
 {
-    public TestOkResult(OkResult innerResult) : base(innerResult) { }
+    public TestOkResult(OkResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestOkObjectResult : TestObjectResult
 {
-    public TestOkObjectResult(object innerResult) : base(innerResult)
+    public TestOkObjectResult(object innerResult)
+        : base(innerResult)
     {
         StatusCode = 200;
     }
@@ -118,12 +126,14 @@ public class TestOkObjectResult : TestObjectResult
 
 public class TestOkObjectResult<T> : TestObjectResult
 {
-    public TestOkObjectResult(object innerResult) : base(innerResult)
+    public TestOkObjectResult(object innerResult)
+        : base(innerResult)
     {
         StatusCode = 200;
     }
 
-    public TestOkObjectResult(T content, TestODataController controller) : base(content)
+    public TestOkObjectResult(T content, TestODataController controller)
+        : base(content)
     {
         // Controller is unused.
         StatusCode = 200;
@@ -132,24 +142,30 @@ public class TestOkObjectResult<T> : TestObjectResult
 
 public class TestStatusCodeObjectResult : TestObjectResult
 {
-    public TestStatusCodeObjectResult(ObjectResult innerResult) : base(innerResult) { }
+    public TestStatusCodeObjectResult(ObjectResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestCreatedResult : TestActionResult
 {
-    public TestCreatedResult(CreatedResult innerResult) : base(innerResult) { }
+    public TestCreatedResult(CreatedResult innerResult)
+        : base(innerResult) { }
 }
 
 public class TestUpdatedODataResult<T> : UpdatedODataResult<T>, ITestActionResult
 {
-    public TestUpdatedODataResult(T entity) : base(entity) { }
+    public TestUpdatedODataResult(T entity)
+        : base(entity) { }
 
-    public TestUpdatedODataResult(string uri, T entity) : base(entity) { }
+    public TestUpdatedODataResult(string uri, T entity)
+        : base(entity) { }
 }
 
 public class TestCreatedODataResult<T> : CreatedODataResult<T>, ITestActionResult
 {
-    public TestCreatedODataResult(T entity) : base(entity) { }
+    public TestCreatedODataResult(T entity)
+        : base(entity) { }
 
-    public TestCreatedODataResult(string uri, T entity) : base(entity) { }
+    public TestCreatedODataResult(string uri, T entity)
+        : base(entity) { }
 }

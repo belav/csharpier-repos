@@ -11,7 +11,8 @@ public abstract class IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, T
     where TUserLogin : IdentityUserLogin<TKey>
     where TUserToken : IdentityUserToken<TKey>
 {
-    protected IdentityUserContext(DbContextOptions options) : base(options) { }
+    protected IdentityUserContext(DbContextOptions options)
+        : base(options) { }
 
     protected IdentityUserContext() { }
 

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             object projectOrDocumentId,
             AnalysisKind kind,
             string analyzerPackageName
-        ) : base(analyzer)
+        )
+            : base(analyzer)
         {
             Contract.ThrowIfNull(projectOrDocumentId);
 

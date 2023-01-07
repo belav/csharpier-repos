@@ -114,7 +114,8 @@ namespace System.Xml
             DataDocumentXPathNavigator owner,
             XmlDataDocument doc,
             XmlNode node
-        ) : this(owner, doc, node, null, false, null) { }
+        )
+            : this(owner, doc, node, null, false, null) { }
 
         internal XPathNodePointer(DataDocumentXPathNavigator owner, XPathNodePointer pointer)
             : this(

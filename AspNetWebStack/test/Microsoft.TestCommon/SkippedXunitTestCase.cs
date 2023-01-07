@@ -32,7 +32,8 @@ namespace Microsoft.TestCommon
             String skipReason,
             ITestMethod testMethod,
             object[] testMethodArguments = null
-        ) : base(diagnosticMessageSink, defaultMethodDisplay, testMethod, testMethodArguments)
+        )
+            : base(diagnosticMessageSink, defaultMethodDisplay, testMethod, testMethodArguments)
         {
             _skipReason = skipReason;
         }

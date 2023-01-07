@@ -122,7 +122,8 @@ namespace System.Linq.Expressions
             Expression ifTrue,
             Expression ifFalse,
             Type type
-        ) : base(test, ifTrue, ifFalse)
+        )
+            : base(test, ifTrue, ifFalse)
         {
             Type = type;
         }

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 int indentationDelta,
                 SyntaxFormattingOptions options,
                 bool visitStructuredTrivia = true
-            ) : base(visitIntoStructuredTrivia: visitStructuredTrivia)
+            )
+                : base(visitIntoStructuredTrivia: visitStructuredTrivia)
             {
                 _forceIndentation = forceIndentation;
                 _indentation = indentation;

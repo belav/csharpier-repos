@@ -81,7 +81,8 @@ internal static partial class Interop
 
         internal sealed class SafeCloseIcmpHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            public SafeCloseIcmpHandle() : base(true) { }
+            public SafeCloseIcmpHandle()
+                : base(true) { }
 
             protected override bool ReleaseHandle()
             {

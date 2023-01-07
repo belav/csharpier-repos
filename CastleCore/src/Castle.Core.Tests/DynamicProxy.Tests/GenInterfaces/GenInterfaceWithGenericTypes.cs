@@ -140,7 +140,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
                 MethodInfo targetMethod,
                 MethodInfo interfMethod,
                 object[] arguments
-            ) : base(target, interceptors, interfMethod, arguments)
+            )
+                : base(target, interceptors, interfMethod, arguments)
             {
                 this.target = target;
             }
@@ -179,7 +180,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
                 MethodInfo targetMethod,
                 MethodInfo interfMethod,
                 object[] arguments
-            ) : base(target, interceptors, interfMethod, arguments)
+            )
+                : base(target, interceptors, interfMethod, arguments)
             {
                 this.target = target;
             }
@@ -218,7 +220,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
                 MethodInfo targetMethod,
                 MethodInfo interfMethod,
                 object[] arguments
-            ) : base(target, interceptors, interfMethod, arguments)
+            )
+                : base(target, interceptors, interfMethod, arguments)
             {
                 this.target = target;
             }
@@ -257,7 +260,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
                 MethodInfo targetMethod,
                 MethodInfo interfMethod,
                 object[] arguments
-            ) : base(target, interceptors, interfMethod, arguments)
+            )
+                : base(target, interceptors, interfMethod, arguments)
             {
                 this.target = target;
             }

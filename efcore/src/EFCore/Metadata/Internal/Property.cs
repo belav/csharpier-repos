@@ -42,7 +42,8 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
         EntityType declaringEntityType,
         ConfigurationSource configurationSource,
         ConfigurationSource? typeConfigurationSource
-    ) : base(name, propertyInfo, fieldInfo, configurationSource)
+    )
+        : base(name, propertyInfo, fieldInfo, configurationSource)
     {
         DeclaringEntityType = declaringEntityType;
         ClrType = clrType;

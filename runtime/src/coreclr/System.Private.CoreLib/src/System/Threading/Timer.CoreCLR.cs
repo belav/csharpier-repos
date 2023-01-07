@@ -15,7 +15,8 @@ namespace System.Threading
         // We use a SafeHandle to ensure that the native timer is destroyed when the AppDomain is unloaded.
         private sealed class AppDomainTimerSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            public AppDomainTimerSafeHandle() : base(true) { }
+            public AppDomainTimerSafeHandle()
+                : base(true) { }
 
             protected override bool ReleaseHandle()
             {

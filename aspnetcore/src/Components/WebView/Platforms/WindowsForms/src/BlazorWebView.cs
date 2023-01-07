@@ -205,7 +205,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
         /// </summary>
         private sealed class BlazorWebViewControlCollection : ControlCollection
         {
-            public BlazorWebViewControlCollection(BlazorWebView owner) : base(owner) { }
+            public BlazorWebViewControlCollection(BlazorWebView owner)
+                : base(owner) { }
 
             /// <summary>
             /// This is the only API we use; everything else is blocked.

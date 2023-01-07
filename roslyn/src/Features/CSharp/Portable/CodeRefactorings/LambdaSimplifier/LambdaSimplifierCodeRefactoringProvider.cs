@@ -339,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.LambdaSimplifier
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(title, createChangedDocument, title) { }
+            )
+                : base(title, createChangedDocument, title) { }
         }
     }
 }

@@ -13,7 +13,8 @@ namespace System.IO.Hashing.Tests
 
         private static readonly byte[] s_emptyHashValue = new byte[] { 0xC4, 0xD2, 0x6D, 0x9A };
 
-        public XxHash32Tests_Seeded_007() : base(s_emptyHashValue) { }
+        public XxHash32Tests_Seeded_007()
+            : base(s_emptyHashValue) { }
 
         public static IEnumerable<object[]> TestCases
         {

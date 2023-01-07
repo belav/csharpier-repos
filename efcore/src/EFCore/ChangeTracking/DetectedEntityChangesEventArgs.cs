@@ -26,7 +26,8 @@ public class DetectedEntityChangesEventArgs : DetectedChangesEventArgs
     public DetectedEntityChangesEventArgs(
         InternalEntityEntry internalEntityEntry,
         bool changesFound
-    ) : base(changesFound)
+    )
+        : base(changesFound)
     {
         _internalEntityEntry = internalEntityEntry;
     }

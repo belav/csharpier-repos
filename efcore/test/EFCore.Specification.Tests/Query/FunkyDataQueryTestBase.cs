@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class FunkyDataQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : FunkyDataQueryTestBase<TFixture>.FunkyDataQueryFixtureBase, new()
 {
-    protected FunkyDataQueryTestBase(TFixture fixture) : base(fixture) { }
+    protected FunkyDataQueryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

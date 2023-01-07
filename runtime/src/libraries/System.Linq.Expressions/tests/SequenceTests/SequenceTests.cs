@@ -4669,6 +4669,7 @@ namespace System.Linq.Expressions.Tests
 
     internal class AssertionException : Exception
     {
-        public AssertionException(string msg) : base(msg) { }
+        public AssertionException(string msg)
+            : base(msg) { }
     }
 }

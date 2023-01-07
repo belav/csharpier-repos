@@ -31,7 +31,8 @@ public class EmbeddedFileProvider : IFileProvider
     /// assembly with the base namespace defaulting to the assembly name.
     /// </summary>
     /// <param name="assembly">The assembly that contains the embedded resources.</param>
-    public EmbeddedFileProvider(Assembly assembly) : this(assembly, assembly?.GetName()?.Name) { }
+    public EmbeddedFileProvider(Assembly assembly)
+        : this(assembly, assembly?.GetName()?.Name) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EmbeddedFileProvider" /> class using the specified

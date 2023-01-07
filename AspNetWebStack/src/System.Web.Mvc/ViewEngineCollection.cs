@@ -15,12 +15,14 @@ namespace System.Web.Mvc
 
         public ViewEngineCollection() { }
 
-        public ViewEngineCollection(IList<IViewEngine> list) : base(list) { }
+        public ViewEngineCollection(IList<IViewEngine> list)
+            : base(list) { }
 
         internal ViewEngineCollection(
             IList<IViewEngine> list,
             IDependencyResolver dependencyResolver
-        ) : base(list)
+        )
+            : base(list)
         {
             _dependencyResolver = dependencyResolver;
         }

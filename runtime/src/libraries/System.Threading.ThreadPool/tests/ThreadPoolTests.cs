@@ -590,7 +590,8 @@ namespace System.Threading.ThreadPools.Tests
 
         private sealed class InvalidWorkItemAndTask : Task, IThreadPoolWorkItem
         {
-            public InvalidWorkItemAndTask(Action action) : base(action) { }
+            public InvalidWorkItemAndTask(Action action)
+                : base(action) { }
 
             public void Execute() { }
         }

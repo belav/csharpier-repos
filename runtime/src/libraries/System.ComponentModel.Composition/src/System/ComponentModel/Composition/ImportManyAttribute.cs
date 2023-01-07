@@ -31,7 +31,8 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ImportManyAttribute() : this((string?)null) { }
+        public ImportManyAttribute()
+            : this((string?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportManyAttribute"/> class, importing the
@@ -57,7 +58,8 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ImportManyAttribute(Type? contractType) : this((string?)null, contractType) { }
+        public ImportManyAttribute(Type? contractType)
+            : this((string?)null, contractType) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportManyAttribute"/> class, importing the
@@ -78,7 +80,8 @@ namespace System.ComponentModel.Composition
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
-        public ImportManyAttribute(string? contractName) : this(contractName, (Type?)null) { }
+        public ImportManyAttribute(string? contractName)
+            : this(contractName, (Type?)null) { }
 
         public ImportManyAttribute(string? contractName, Type? contractType)
         {

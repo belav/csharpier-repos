@@ -28,7 +28,8 @@ public class EntityTypeBuilder<
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public EntityTypeBuilder(IMutableEntityType entityType) : base(entityType) { }
+    public EntityTypeBuilder(IMutableEntityType entityType)
+        : base(entityType) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the entity type. If an annotation with the key specified in

@@ -25,7 +25,8 @@ public class JQueryFormValueProvider : JQueryValueProvider
         BindingSource bindingSource,
         IDictionary<string, StringValues> values,
         CultureInfo? culture
-    ) : base(bindingSource, values, culture)
+    )
+        : base(bindingSource, values, culture)
     {
         if (
             values.TryGetValue(FormValueHelper.CultureInvariantFieldName, out var invariantKeys)

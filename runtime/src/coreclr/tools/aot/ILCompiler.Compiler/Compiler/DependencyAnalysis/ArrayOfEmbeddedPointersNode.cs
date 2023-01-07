@@ -86,7 +86,8 @@ namespace ILCompiler.DependencyAnalysis
             public SimpleEmbeddedPointerIndirectionNode(
                 ArrayOfEmbeddedPointersNode<TTarget> futureParent,
                 TTarget target
-            ) : base(target)
+            )
+                : base(target)
             {
                 _parentNode = futureParent;
             }
@@ -125,7 +126,8 @@ namespace ILCompiler.DependencyAnalysis
                 ArrayOfEmbeddedPointersNode<TTarget> futureParent,
                 TTarget target,
                 int id
-            ) : base(futureParent, target)
+            )
+                : base(futureParent, target)
             {
                 _id = id;
             }

@@ -18,7 +18,8 @@ internal sealed class ProtectedPrerenderComponentApplicationStore
 
     public ProtectedPrerenderComponentApplicationStore(
         IDataProtectionProvider dataProtectionProvider
-    ) : base()
+    )
+        : base()
     {
         CreateProtector(dataProtectionProvider);
     }

@@ -79,9 +79,11 @@ namespace System.Security.Cryptography.Xml
         //
         // public constructors
         //
-        public EncryptedXml() : this(new XmlDocument()) { }
+        public EncryptedXml()
+            : this(new XmlDocument()) { }
 
-        public EncryptedXml(XmlDocument document) : this(document, null) { }
+        public EncryptedXml(XmlDocument document)
+            : this(document, null) { }
 
         public EncryptedXml(XmlDocument document, Evidence? evidence)
         {

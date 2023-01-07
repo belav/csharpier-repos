@@ -24,7 +24,8 @@ namespace System.Net.Mail
     )]
     public sealed class SmtpPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public SmtpPermissionAttribute(SecurityAction action) : base(action) { }
+        public SmtpPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public string Access
         {

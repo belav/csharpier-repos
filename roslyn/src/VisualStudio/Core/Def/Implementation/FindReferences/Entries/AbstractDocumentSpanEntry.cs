@@ -33,7 +33,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 Guid projectGuid,
                 SourceText lineText,
                 MappedSpanResult mappedSpanResult
-            ) : base(definitionBucket, context.Presenter)
+            )
+                : base(definitionBucket, context.Presenter)
             {
                 _boxedProjectGuid = projectGuid;
 

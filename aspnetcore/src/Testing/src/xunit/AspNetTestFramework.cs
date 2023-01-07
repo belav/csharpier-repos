@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Testing;
 
 public class AspNetTestFramework : XunitTestFramework
 {
-    public AspNetTestFramework(IMessageSink messageSink) : base(messageSink) { }
+    public AspNetTestFramework(IMessageSink messageSink)
+        : base(messageSink) { }
 
     protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName) =>
         new AspNetTestFrameworkExecutor(

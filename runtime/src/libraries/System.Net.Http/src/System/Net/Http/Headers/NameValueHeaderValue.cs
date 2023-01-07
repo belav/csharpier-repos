@@ -35,7 +35,8 @@ namespace System.Net.Http.Headers
 
         internal NameValueHeaderValue() { }
 
-        public NameValueHeaderValue(string name) : this(name, null) { }
+        public NameValueHeaderValue(string name)
+            : this(name, null) { }
 
         public NameValueHeaderValue(string name, string? value)
         {

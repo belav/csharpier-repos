@@ -71,16 +71,19 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
     public class Produces201ResponseTypeAttribute : ProducesResponseTypeAttribute
     {
-        public Produces201ResponseTypeAttribute() : base(201) { }
+        public Produces201ResponseTypeAttribute()
+            : base(201) { }
 
-        public Produces201ResponseTypeAttribute(int statusCode) : base(statusCode) { }
+        public Produces201ResponseTypeAttribute(int statusCode)
+            : base(statusCode) { }
     }
 
     public class CustomInvalidProducesResponseTypeAttribute : ProducesResponseTypeAttribute
     {
         private string _statusCode;
 
-        public CustomInvalidProducesResponseTypeAttribute() : base(0) { }
+        public CustomInvalidProducesResponseTypeAttribute()
+            : base(0) { }
 
         public new string StatusCode
         {

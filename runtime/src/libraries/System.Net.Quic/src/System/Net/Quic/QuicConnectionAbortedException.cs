@@ -8,7 +8,8 @@ namespace System.Net.Quic
         internal QuicConnectionAbortedException(long errorCode)
             : this(SR.Format(SR.net_quic_connectionaborted, errorCode), errorCode) { }
 
-        public QuicConnectionAbortedException(string message, long errorCode) : base(message)
+        public QuicConnectionAbortedException(string message, long errorCode)
+            : base(message)
         {
             ErrorCode = errorCode;
         }

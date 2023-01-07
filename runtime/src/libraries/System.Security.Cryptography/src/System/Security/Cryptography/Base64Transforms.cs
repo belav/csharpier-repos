@@ -130,7 +130,8 @@ namespace System.Security.Cryptography
         private int _inputIndex;
         private readonly FromBase64TransformMode _whitespaces;
 
-        public FromBase64Transform() : this(FromBase64TransformMode.IgnoreWhiteSpaces) { }
+        public FromBase64Transform()
+            : this(FromBase64TransformMode.IgnoreWhiteSpaces) { }
 
         public FromBase64Transform(FromBase64TransformMode whitespaces)
         {

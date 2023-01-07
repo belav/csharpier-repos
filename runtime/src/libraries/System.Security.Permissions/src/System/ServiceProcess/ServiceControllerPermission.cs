@@ -16,7 +16,8 @@ namespace System.ServiceProcess
     {
         public ServiceControllerPermission() { }
 
-        public ServiceControllerPermission(PermissionState state) : base(state) { }
+        public ServiceControllerPermission(PermissionState state)
+            : base(state) { }
 
         public ServiceControllerPermission(
             ServiceControllerPermissionAccess permissionAccess,

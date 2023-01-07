@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         public DkmGetChildrenAsyncResult(
             DkmEvaluationResult[] InitialChildren,
             DkmEvaluationResultEnumContext EnumContext
-        ) : this()
+        )
+            : this()
         {
             if (InitialChildren == null)
             {

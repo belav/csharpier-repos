@@ -20,7 +20,8 @@ internal sealed class KestrelConnection<T> : KestrelConnection, IThreadPoolWorkI
         Func<T, Task> connectionDelegate,
         T connectionContext,
         KestrelTrace logger
-    ) : base(id, serviceContext, transportConnectionManager, logger)
+    )
+        : base(id, serviceContext, transportConnectionManager, logger)
     {
         _connectionDelegate = connectionDelegate;
         _transportConnection = connectionContext;

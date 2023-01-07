@@ -15,7 +15,8 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public class ClientWebSocketOptionsTests : ClientWebSocketTestBase
     {
-        public ClientWebSocketOptionsTests(ITestOutputHelper output) : base(output) { }
+        public ClientWebSocketOptionsTests(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(WebSocketsSupported))]
         [SkipOnPlatform(TestPlatforms.Browser, "Credentials not supported on browser")]

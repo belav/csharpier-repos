@@ -26,12 +26,14 @@ namespace System.Resources
     {
         private readonly string? _cultureName;
 
-        public MissingSatelliteAssemblyException() : base(SR.MissingSatelliteAssembly_Default)
+        public MissingSatelliteAssemblyException()
+            : base(SR.MissingSatelliteAssembly_Default)
         {
             HResult = System.HResults.COR_E_MISSINGSATELLITEASSEMBLY;
         }
 
-        public MissingSatelliteAssemblyException(string? message) : base(message)
+        public MissingSatelliteAssemblyException(string? message)
+            : base(message)
         {
             HResult = System.HResults.COR_E_MISSINGSATELLITEASSEMBLY;
         }
@@ -52,7 +54,8 @@ namespace System.Resources
         protected MissingSatelliteAssemblyException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public string? CultureName => _cultureName;
     }

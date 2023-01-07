@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryImport
     public class RemoveUnnecessaryImportsTests_FixAllTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public RemoveUnnecessaryImportsTests_FixAllTests(ITestOutputHelper logger) : base(logger)
-        { }
+        public RemoveUnnecessaryImportsTests_FixAllTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

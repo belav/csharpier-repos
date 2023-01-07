@@ -15,7 +15,8 @@ namespace DebuggerTests
 {
     public class SetVariableValueTests : DebuggerTests
     {
-        public SetVariableValueTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public SetVariableValueTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         [ConditionalTheory(nameof(RunningOnChrome))]
         [InlineData("a", 1, 30, 130)]

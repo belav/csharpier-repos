@@ -123,7 +123,8 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "System.Net.Security is not supported on Browser")]
     public abstract class HttpClientMiniStress : HttpClientHandlerTestBase
     {
-        public HttpClientMiniStress(ITestOutputHelper output) : base(output) { }
+        public HttpClientMiniStress(ITestOutputHelper output)
+            : base(output) { }
 
         protected override HttpClient CreateHttpClient() =>
             CreateHttpClient(CreateSocketsHttpHandler(allowAllCertificates: true));

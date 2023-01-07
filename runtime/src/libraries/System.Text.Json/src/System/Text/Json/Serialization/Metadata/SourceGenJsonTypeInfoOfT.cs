@@ -33,7 +33,8 @@ namespace System.Text.Json.Serialization.Metadata
         public SourceGenJsonTypeInfo(
             JsonSerializerOptions options,
             JsonObjectInfoValues<T> objectInfo
-        ) : base(GetConverter(objectInfo), options)
+        )
+            : base(GetConverter(objectInfo), options)
         {
             if (objectInfo.ObjectWithParameterizedConstructorCreator != null)
             {
@@ -65,7 +66,8 @@ namespace System.Text.Json.Serialization.Metadata
             Func<JsonConverter<T>> converterCreator,
             object? createObjectWithArgs = null,
             object? addFunc = null
-        ) : base(new JsonMetadataServicesConverter<T>(converterCreator()), options)
+        )
+            : base(new JsonMetadataServicesConverter<T>(converterCreator()), options)
         {
             if (collectionInfo is null)
             {

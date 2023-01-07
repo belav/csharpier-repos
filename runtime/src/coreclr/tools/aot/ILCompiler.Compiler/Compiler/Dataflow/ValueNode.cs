@@ -14,9 +14,11 @@ namespace ILCompiler.Dataflow
     {
         public ValueNodeList() { }
 
-        public ValueNodeList(int capacity) : base(capacity) { }
+        public ValueNodeList(int capacity)
+            : base(capacity) { }
 
-        public ValueNodeList(List<MultiValue> other) : base(other) { }
+        public ValueNodeList(List<MultiValue> other)
+            : base(other) { }
 
         public override int GetHashCode()
         {

@@ -617,7 +617,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
         private int? _serviceProviderHash;
         private string? _logFragment;
 
-        public ExtensionInfo(CoreOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(CoreOptionsExtension extension)
+            : base(extension) { }
 
         private new CoreOptionsExtension Extension => (CoreOptionsExtension)base.Extension;
 

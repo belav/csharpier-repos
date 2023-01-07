@@ -210,7 +210,8 @@ namespace System.Text
         /// <exception cref="ArgumentOutOfRangeException">
         /// If <paramref name="value"/> does not represent a value Unicode scalar value.
         /// </exception>
-        public Rune(int value) : this((uint)value) { }
+        public Rune(int value)
+            : this((uint)value) { }
 
         /// <summary>
         /// Creates a <see cref="Rune"/> from the provided Unicode scalar value.

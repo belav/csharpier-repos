@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEmbeddedLanguagesProvider() : base(Info) { }
+        public CSharpEmbeddedLanguagesProvider()
+            : base(Info) { }
 
         public override string EscapeText(string text, SyntaxToken token) =>
             EmbeddedLanguageUtilities.EscapeText(text, token);

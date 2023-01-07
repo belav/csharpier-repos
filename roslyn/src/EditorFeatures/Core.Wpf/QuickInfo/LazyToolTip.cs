@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
                 IThreadingContext threadingContext,
                 FrameworkElement element,
                 Func<DisposableToolTip> createToolTip
-            ) : base(threadingContext, assertIsForeground: true)
+            )
+                : base(threadingContext, assertIsForeground: true)
             {
                 _element = element;
                 _createToolTip = createToolTip;

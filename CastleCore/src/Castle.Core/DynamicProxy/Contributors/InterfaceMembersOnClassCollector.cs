@@ -28,7 +28,8 @@ namespace Castle.DynamicProxy.Contributors
             Type type,
             bool onlyProxyVirtual,
             InterfaceMapping map
-        ) : base(type)
+        )
+            : base(type)
         {
             this.onlyProxyVirtual = onlyProxyVirtual;
             this.map = map;

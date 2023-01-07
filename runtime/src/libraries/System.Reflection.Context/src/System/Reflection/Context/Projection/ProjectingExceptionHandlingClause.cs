@@ -14,7 +14,8 @@ namespace System.Reflection.Context.Projection
         public ProjectingExceptionHandlingClause(
             ExceptionHandlingClause clause,
             Projector projector
-        ) : base(clause)
+        )
+            : base(clause)
         {
             Debug.Assert(null != projector);
 

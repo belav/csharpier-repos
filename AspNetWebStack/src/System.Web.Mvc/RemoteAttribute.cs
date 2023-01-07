@@ -26,12 +26,14 @@ namespace System.Web.Mvc
         private string _additionalFields;
         private string[] _additonalFieldsSplit = new string[0];
 
-        protected RemoteAttribute() : base(MvcResources.RemoteAttribute_RemoteValidationFailed)
+        protected RemoteAttribute()
+            : base(MvcResources.RemoteAttribute_RemoteValidationFailed)
         {
             RouteData = new RouteValueDictionary();
         }
 
-        public RemoteAttribute(string routeName) : this()
+        public RemoteAttribute(string routeName)
+            : this()
         {
             if (String.IsNullOrWhiteSpace(routeName))
             {
@@ -48,7 +50,8 @@ namespace System.Web.Mvc
                 null /* areaName */
             ) { }
 
-        public RemoteAttribute(string action, string controller, string areaName) : this()
+        public RemoteAttribute(string action, string controller, string areaName)
+            : this()
         {
             if (String.IsNullOrWhiteSpace(action))
             {

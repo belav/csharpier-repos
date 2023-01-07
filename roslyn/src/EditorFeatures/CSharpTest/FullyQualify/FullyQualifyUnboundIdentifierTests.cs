@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.FullyQualify
     public class FullyQualifyUnboundIdentifierTests
         : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public FullyQualifyUnboundIdentifierTests(ITestOutputHelper logger) : base(logger) { }
+        public FullyQualifyUnboundIdentifierTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

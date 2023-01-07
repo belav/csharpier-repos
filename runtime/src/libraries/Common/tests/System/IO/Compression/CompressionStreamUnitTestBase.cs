@@ -630,7 +630,8 @@ namespace System.IO.Compression
             _mode = mode;
         }
 
-        public BadWrappedStream(Mode mode, byte[] buffer) : base(buffer)
+        public BadWrappedStream(Mode mode, byte[] buffer)
+            : base(buffer)
         {
             _mode = mode;
         }
@@ -722,7 +723,8 @@ namespace System.IO.Compression
             return ms;
         }
 
-        public ManualSyncMemoryStream(bool sync = false) : base()
+        public ManualSyncMemoryStream(bool sync = false)
+            : base()
         {
             isSync = sync;
         }

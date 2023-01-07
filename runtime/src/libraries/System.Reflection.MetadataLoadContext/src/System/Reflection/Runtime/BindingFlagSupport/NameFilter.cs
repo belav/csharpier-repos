@@ -20,7 +20,8 @@ namespace System.Reflection
     {
         private readonly byte[] _expectedNameUtf8;
 
-        public NameFilterCaseSensitive(string expectedName) : base(expectedName)
+        public NameFilterCaseSensitive(string expectedName)
+            : base(expectedName)
         {
             _expectedNameUtf8 = expectedName.ToUtf8();
         }
@@ -31,7 +32,8 @@ namespace System.Reflection
 
     internal sealed partial class NameFilterCaseInsensitive : NameFilter
     {
-        public NameFilterCaseInsensitive(string expectedName) : base(expectedName) { }
+        public NameFilterCaseInsensitive(string expectedName)
+            : base(expectedName) { }
 
         public sealed override bool Matches(string name) =>
             name.Equals(ExpectedName, StringComparison.OrdinalIgnoreCase);

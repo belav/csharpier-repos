@@ -22,7 +22,8 @@ namespace System.Net.Http.Handlers
             object userToken,
             long bytesTransferred,
             long? totalBytes
-        ) : base(progressPercentage, userToken)
+        )
+            : base(progressPercentage, userToken)
         {
             BytesTransferred = bytesTransferred;
             TotalBytes = totalBytes;

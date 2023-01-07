@@ -57,7 +57,8 @@ namespace System.Linq.Parallel
             QueryOperator<TLeftInput> left,
             QueryOperator<TRightInput> right,
             Func<TLeftInput, TRightInput, TOutput> resultSelector
-        ) : base(left.SpecifiedQuerySettings.Merge(right.SpecifiedQuerySettings))
+        )
+            : base(left.SpecifiedQuerySettings.Merge(right.SpecifiedQuerySettings))
         {
             Debug.Assert(resultSelector != null, "operator cannot be null");
 

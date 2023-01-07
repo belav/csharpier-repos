@@ -12,7 +12,8 @@ namespace DebuggerTests
 {
     public class AssignmentTests : DebuggerTests
     {
-        public AssignmentTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public AssignmentTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         public static TheoryData<string, JObject, JObject, string> GetTestData =>
             new()

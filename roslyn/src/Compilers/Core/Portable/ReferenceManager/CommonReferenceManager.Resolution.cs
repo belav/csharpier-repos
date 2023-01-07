@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis
                 ImmutableArray<string> aliasesOpt,
                 ImmutableArray<string> recursiveAliasesOpt,
                 ImmutableArray<MetadataReference> mergedReferences
-            ) : this(index, kind)
+            )
+                : this(index, kind)
             {
                 // We have to have non-default aliases (empty are ok). We can have both recursive and non-recursive aliases if two references were merged.
                 Debug.Assert(!aliasesOpt.IsDefault || !recursiveAliasesOpt.IsDefault);

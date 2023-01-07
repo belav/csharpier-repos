@@ -1213,7 +1213,8 @@ namespace System.Diagnostics
     {
         public TagList(
             System.ReadOnlySpan<System.Collections.Generic.KeyValuePair<string, object?>> tagList
-        ) : this()
+        )
+            : this()
         {
             throw null;
         }
@@ -1871,7 +1872,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit,
             string? description
-        ) : base(meter, name, unit, description)
+        )
+            : base(meter, name, unit, description)
         {
             throw null;
         }

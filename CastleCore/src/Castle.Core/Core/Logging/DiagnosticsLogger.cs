@@ -35,14 +35,16 @@ namespace Castle.Core.Logging
         ///   Creates a logger based on <see cref = "EventLog" />.
         /// </summary>
         /// <param name = "logName"><see cref = "EventLog.Log" /></param>
-        public DiagnosticsLogger(string logName) : this(logName, "default") { }
+        public DiagnosticsLogger(string logName)
+            : this(logName, "default") { }
 
         /// <summary>
         ///   Creates a logger based on <see cref = "EventLog" />.
         /// </summary>
         /// <param name = "logName"><see cref = "EventLog.Log" /></param>
         /// <param name = "source"><see cref = "EventLog.Source" /></param>
-        public DiagnosticsLogger(string logName, string source) : base(LoggerLevel.Trace)
+        public DiagnosticsLogger(string logName, string source)
+            : base(LoggerLevel.Trace)
         {
             // Create the source, if it does not already exist.
             if (!EventLog.SourceExists(source))

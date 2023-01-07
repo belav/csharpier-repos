@@ -26,7 +26,8 @@ namespace System.Threading
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }
 
-        public ThreadInterruptedException(string? message) : base(message)
+        public ThreadInterruptedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_THREADINTERRUPTED;
         }

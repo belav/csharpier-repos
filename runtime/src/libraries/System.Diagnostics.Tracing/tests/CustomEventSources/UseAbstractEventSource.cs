@@ -16,10 +16,11 @@ namespace SdtEventSources
 {
     public abstract class UtilBaseEventSource : EventSource
     {
-        protected UtilBaseEventSource() : base() { }
+        protected UtilBaseEventSource()
+            : base() { }
 
-        protected UtilBaseEventSource(bool throwOnEventWriteErrors) : base(throwOnEventWriteErrors)
-        { }
+        protected UtilBaseEventSource(bool throwOnEventWriteErrors)
+            : base(throwOnEventWriteErrors) { }
 
         protected unsafe void WriteEvent(int eventId, int arg1, short arg2, long arg3)
         {
@@ -42,7 +43,8 @@ namespace SdtEventSources
     {
         public static OptimizedEventSource Log = new OptimizedEventSource();
 
-        public OptimizedEventSource() : base(true) { }
+        public OptimizedEventSource()
+            : base(true) { }
 
         [Event(
             1,

@@ -12,7 +12,8 @@ namespace DebuggerTests
 {
     public class HotReloadTests : DebuggerTests
     {
-        public HotReloadTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public HotReloadTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task DebugHotReloadMethodChangedUserBreak()

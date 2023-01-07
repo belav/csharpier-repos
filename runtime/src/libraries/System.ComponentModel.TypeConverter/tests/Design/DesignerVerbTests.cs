@@ -220,7 +220,8 @@ namespace System.ComponentModel.Design.Tests
                 string text,
                 EventHandler handler,
                 CommandID startCommandID
-            ) : base(text, handler, startCommandID) { }
+            )
+                : base(text, handler, startCommandID) { }
 
             public override IDictionary Properties => null;
         }
@@ -234,7 +235,8 @@ namespace System.ComponentModel.Design.Tests
                 string text,
                 EventHandler handler,
                 CommandID startCommandID
-            ) : base(text, handler, startCommandID) { }
+            )
+                : base(text, handler, startCommandID) { }
 
             private bool Constructed { get; set; }
 

@@ -26,7 +26,8 @@ namespace Castle.DynamicProxy.Contributors
             INamingScope namingScope,
             GetTargetExpressionDelegate getTarget,
             GetTargetReferenceDelegate getTargetReference
-        ) : base(namingScope, getTarget)
+        )
+            : base(namingScope, getTarget)
         {
             this.getTargetReference = getTargetReference;
             canChangeTarget = true;

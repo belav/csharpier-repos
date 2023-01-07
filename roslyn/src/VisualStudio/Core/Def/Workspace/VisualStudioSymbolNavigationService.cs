@@ -49,7 +49,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IVsEditorAdaptersFactoryService editorAdaptersFactory,
             IMetadataAsSourceFileService metadataAsSourceFileService,
             VisualStudioWorkspace workspace
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _serviceProvider = serviceProvider;
             _globalOptions = globalOptions;

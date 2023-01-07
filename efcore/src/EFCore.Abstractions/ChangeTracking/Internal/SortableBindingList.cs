@@ -31,7 +31,8 @@ public class SortableBindingList<T> : BindingList<T>
     [RequiresUnreferencedCode(
         "Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
     )]
-    public SortableBindingList(List<T> list) : base(list) { }
+    public SortableBindingList(List<T> list)
+        : base(list) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

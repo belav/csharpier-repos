@@ -54,7 +54,8 @@ namespace System.ComponentModel
         [RequiresUnreferencedCode(
             "Raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
         )]
-        public BindingList(IList<T> list) : base(list)
+        public BindingList(IList<T> list)
+            : base(list)
         {
             Initialize();
         }

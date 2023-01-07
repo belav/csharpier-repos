@@ -26,7 +26,8 @@ public class QueryExpressionEventData : DbContextEventData
         DbContext? context,
         Expression queryExpression,
         ExpressionPrinter expressionPrinter
-    ) : base(eventDefinition, messageGenerator, context)
+    )
+        : base(eventDefinition, messageGenerator, context)
     {
         Expression = queryExpression;
         ExpressionPrinter = expressionPrinter;

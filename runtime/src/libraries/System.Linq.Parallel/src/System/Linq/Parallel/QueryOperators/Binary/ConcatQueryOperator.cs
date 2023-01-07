@@ -40,7 +40,8 @@ namespace System.Linq.Parallel
         internal ConcatQueryOperator(
             ParallelQuery<TSource> firstChild,
             ParallelQuery<TSource> secondChild
-        ) : base(firstChild, secondChild)
+        )
+            : base(firstChild, secondChild)
         {
             Debug.Assert(firstChild != null, "first child data source cannot be null");
             Debug.Assert(secondChild != null, "second child data source cannot be null");

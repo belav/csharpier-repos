@@ -151,7 +151,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         {
             private IDisposable _optionsReloadToken;
 
-            public CustomFormatter(IOptionsMonitor<CustomOptions> options) : base("custom")
+            public CustomFormatter(IOptionsMonitor<CustomOptions> options)
+                : base("custom")
             {
                 ReloadLoggerOptions(options.CurrentValue);
                 _optionsReloadToken = options.OnChange(ReloadLoggerOptions);

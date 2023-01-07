@@ -21,7 +21,8 @@ namespace System.Net.Http.Headers
         private TransferCodingHeaderParser(
             bool supportsMultipleValues,
             Func<TransferCodingHeaderValue> transferCodingCreator
-        ) : base(supportsMultipleValues)
+        )
+            : base(supportsMultipleValues)
         {
             Debug.Assert(transferCodingCreator != null);
 

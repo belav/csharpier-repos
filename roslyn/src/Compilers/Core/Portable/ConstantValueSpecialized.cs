@@ -391,7 +391,8 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDecimalZero : ConstantValueDefault
         {
-            internal ConstantValueDecimalZero() : base(ConstantValueTypeDiscriminator.Decimal) { }
+            internal ConstantValueDecimalZero()
+                : base(ConstantValueTypeDiscriminator.Decimal) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -411,7 +412,8 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDoubleZero : ConstantValueDefault
         {
-            internal ConstantValueDoubleZero() : base(ConstantValueTypeDiscriminator.Double) { }
+            internal ConstantValueDoubleZero()
+                : base(ConstantValueTypeDiscriminator.Double) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -431,7 +433,8 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueSingleZero : ConstantValueDefault
         {
-            internal ConstantValueSingleZero() : base(ConstantValueTypeDiscriminator.Single) { }
+            internal ConstantValueSingleZero()
+                : base(ConstantValueTypeDiscriminator.Single) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -539,7 +542,8 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class ConstantValueDecimalOne : ConstantValueOne
         {
-            internal ConstantValueDecimalOne() : base(ConstantValueTypeDiscriminator.Decimal) { }
+            internal ConstantValueDecimalOne()
+                : base(ConstantValueTypeDiscriminator.Decimal) { }
 
             public override bool Equals(ConstantValue? other)
             {
@@ -561,12 +565,14 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly byte _value;
 
-            public ConstantValueI8(sbyte value) : base(ConstantValueTypeDiscriminator.SByte)
+            public ConstantValueI8(sbyte value)
+                : base(ConstantValueTypeDiscriminator.SByte)
             {
                 _value = unchecked((byte)value);
             }
 
-            public ConstantValueI8(byte value) : base(ConstantValueTypeDiscriminator.Byte)
+            public ConstantValueI8(byte value)
+                : base(ConstantValueTypeDiscriminator.Byte)
             {
                 _value = value;
             }
@@ -596,17 +602,20 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly short _value;
 
-            public ConstantValueI16(short value) : base(ConstantValueTypeDiscriminator.Int16)
+            public ConstantValueI16(short value)
+                : base(ConstantValueTypeDiscriminator.Int16)
             {
                 _value = value;
             }
 
-            public ConstantValueI16(ushort value) : base(ConstantValueTypeDiscriminator.UInt16)
+            public ConstantValueI16(ushort value)
+                : base(ConstantValueTypeDiscriminator.UInt16)
             {
                 _value = unchecked((short)value);
             }
 
-            public ConstantValueI16(char value) : base(ConstantValueTypeDiscriminator.Char)
+            public ConstantValueI16(char value)
+                : base(ConstantValueTypeDiscriminator.Char)
             {
                 _value = unchecked((short)value);
             }
@@ -641,12 +650,14 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly int _value;
 
-            public ConstantValueI32(int value) : base(ConstantValueTypeDiscriminator.Int32)
+            public ConstantValueI32(int value)
+                : base(ConstantValueTypeDiscriminator.Int32)
             {
                 _value = value;
             }
 
-            public ConstantValueI32(uint value) : base(ConstantValueTypeDiscriminator.UInt32)
+            public ConstantValueI32(uint value)
+                : base(ConstantValueTypeDiscriminator.UInt32)
             {
                 _value = unchecked((int)value);
             }
@@ -676,12 +687,14 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly long _value;
 
-            public ConstantValueI64(long value) : base(ConstantValueTypeDiscriminator.Int64)
+            public ConstantValueI64(long value)
+                : base(ConstantValueTypeDiscriminator.Int64)
             {
                 _value = value;
             }
 
-            public ConstantValueI64(ulong value) : base(ConstantValueTypeDiscriminator.UInt64)
+            public ConstantValueI64(ulong value)
+                : base(ConstantValueTypeDiscriminator.UInt64)
             {
                 _value = unchecked((long)value);
             }
@@ -712,12 +725,14 @@ namespace Microsoft.CodeAnalysis
             // Constants are limited to 32-bit for portability.
             private readonly int _value;
 
-            public ConstantValueNativeInt(int value) : base(ConstantValueTypeDiscriminator.NInt)
+            public ConstantValueNativeInt(int value)
+                : base(ConstantValueTypeDiscriminator.NInt)
             {
                 _value = value;
             }
 
-            public ConstantValueNativeInt(uint value) : base(ConstantValueTypeDiscriminator.NUInt)
+            public ConstantValueNativeInt(uint value)
+                : base(ConstantValueTypeDiscriminator.NUInt)
             {
                 _value = unchecked((int)value);
             }
@@ -747,7 +762,8 @@ namespace Microsoft.CodeAnalysis
         {
             private readonly double _value;
 
-            public ConstantValueDouble(double value) : base(ConstantValueTypeDiscriminator.Double)
+            public ConstantValueDouble(double value)
+                : base(ConstantValueTypeDiscriminator.Double)
             {
                 if (double.IsNaN(value))
                 {
@@ -780,7 +796,8 @@ namespace Microsoft.CodeAnalysis
             // DoubleValue can be used to get unclipped value
             private readonly double _value;
 
-            public ConstantValueSingle(double value) : base(ConstantValueTypeDiscriminator.Single)
+            public ConstantValueSingle(double value)
+                : base(ConstantValueTypeDiscriminator.Single)
             {
                 if (double.IsNaN(value))
                 {

@@ -24,7 +24,8 @@ namespace System.Net.PeerToPeer.Collaboration
     )]
     public sealed class PeerCollaborationPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public PeerCollaborationPermissionAttribute(SecurityAction action) : base(action) { }
+        public PeerCollaborationPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public override IPermission CreatePermission()
         {

@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ClassVi
         protected AbstractSyncClassViewCommandHandler(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             Contract.ThrowIfNull(serviceProvider);
 

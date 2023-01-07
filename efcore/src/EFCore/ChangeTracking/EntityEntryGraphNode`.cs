@@ -27,7 +27,8 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
         TState state,
         InternalEntityEntry? sourceEntry,
         INavigationBase? inboundNavigation
-    ) : base(entry, sourceEntry, inboundNavigation)
+    )
+        : base(entry, sourceEntry, inboundNavigation)
     {
         NodeState = state;
     }
@@ -44,8 +45,13 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
         TState state,
         EntityEntry? sourceEntry,
         INavigationBase? inboundNavigation
-    ) : this(entry.GetInfrastructure(), state, sourceEntry?.GetInfrastructure(), inboundNavigation)
-    { }
+    )
+        : this(
+            entry.GetInfrastructure(),
+            state,
+            sourceEntry?.GetInfrastructure(),
+            inboundNavigation
+        ) { }
 
     /// <summary>
     ///     Gets or sets state that will be available to all nodes that are visited after this node.

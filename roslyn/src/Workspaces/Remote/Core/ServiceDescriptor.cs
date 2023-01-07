@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Remote
             _serializationOptions = serializationOptions;
         }
 
-        private ServiceDescriptor(ServiceDescriptor copyFrom) : base(copyFrom)
+        private ServiceDescriptor(ServiceDescriptor copyFrom)
+            : base(copyFrom)
         {
             ComponentName = copyFrom.ComponentName;
             SimpleName = copyFrom.SimpleName;

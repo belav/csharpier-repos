@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxNode
         > s_simplifyParameter = SimplifyParameter;
 
-        public CSharpMiscellaneousReducer() : base(s_pool) { }
+        public CSharpMiscellaneousReducer()
+            : base(s_pool) { }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 

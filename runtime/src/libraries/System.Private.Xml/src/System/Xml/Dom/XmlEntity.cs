@@ -20,7 +20,8 @@ namespace System.Xml
             string? systemId,
             string? notationName,
             XmlDocument doc
-        ) : base(doc)
+        )
+            : base(doc)
         {
             _name = doc.NameTable.Add(name);
             _publicId = publicId;

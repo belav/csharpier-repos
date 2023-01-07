@@ -40,7 +40,8 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
         IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
         IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions,
         IStringLocalizerFactory stringLocalizerFactory
-    ) : this(validationAttributeAdapterProvider, dataAnnotationLocalizationOptions)
+    )
+        : this(validationAttributeAdapterProvider, dataAnnotationLocalizationOptions)
     {
         _stringLocalizerFactory = stringLocalizerFactory;
     }

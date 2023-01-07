@@ -47,7 +47,8 @@ namespace System.Runtime.Serialization
             Type type,
             IFormatterConverter converter,
             bool requireSameTokenInPartialTrust
-        ) : this(type, converter)
+        )
+            : this(type, converter)
         {
             // requireSameTokenInPartialTrust is a vacuous parameter in a platform that does not support partial trust.
         }

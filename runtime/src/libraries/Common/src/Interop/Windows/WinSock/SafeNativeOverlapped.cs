@@ -13,13 +13,15 @@ namespace System.Net.Sockets
     {
         private readonly SafeSocketHandle? _socketHandle;
 
-        public SafeNativeOverlapped() : this(IntPtr.Zero)
+        public SafeNativeOverlapped()
+            : this(IntPtr.Zero)
         {
             if (NetEventSource.Log.IsEnabled())
                 NetEventSource.Info(this);
         }
 
-        private SafeNativeOverlapped(IntPtr handle) : base(IntPtr.Zero, true)
+        private SafeNativeOverlapped(IntPtr handle)
+            : base(IntPtr.Zero, true)
         {
             SetHandle(handle);
         }

@@ -25,7 +25,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new node
         /// </summary>
-        public QilBinary(QilNodeType nodeType, QilNode left, QilNode right) : base(nodeType)
+        public QilBinary(QilNodeType nodeType, QilNode left, QilNode right)
+            : base(nodeType)
         {
             _left = left;
             _right = right;

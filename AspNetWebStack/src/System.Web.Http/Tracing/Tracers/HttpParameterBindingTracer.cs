@@ -30,7 +30,8 @@ namespace System.Web.Http.Tracing.Tracers
         public HttpParameterBindingTracer(
             HttpParameterBinding innerBinding,
             ITraceWriter traceWriter
-        ) : base(innerBinding.Descriptor)
+        )
+            : base(innerBinding.Descriptor)
         {
             Contract.Assert(innerBinding != null);
             Contract.Assert(traceWriter != null);

@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     /// </summary>
     internal abstract class JsonValueNode : JsonNode
     {
-        protected JsonValueNode(JsonKind kind) : base(kind) { }
+        protected JsonValueNode(JsonKind kind)
+            : base(kind) { }
     }
 
     /// <summary>
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     /// </summary>
     internal sealed class JsonTextNode : JsonValueNode
     {
-        public JsonTextNode(JsonToken textToken) : base(JsonKind.Text)
+        public JsonTextNode(JsonToken textToken)
+            : base(JsonKind.Text)
         {
             Debug.Assert(textToken.Kind == JsonKind.TextToken);
             TextToken = textToken;
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             JsonToken openBraceToken,
             JsonSeparatedList sequence,
             JsonToken closeBraceToken
-        ) : base(JsonKind.Object)
+        )
+            : base(JsonKind.Object)
         {
             Debug.Assert(openBraceToken.Kind == JsonKind.OpenBraceToken);
             Debug.Assert(closeBraceToken.Kind == JsonKind.CloseBraceToken);
@@ -120,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             JsonToken openBracketToken,
             ImmutableArray<JsonValueNode> sequence,
             JsonToken closeBracketToken
-        ) : base(JsonKind.Array)
+        )
+            : base(JsonKind.Array)
         {
             Debug.Assert(openBracketToken.Kind == JsonKind.OpenBracketToken);
             Debug.Assert(sequence != null);
@@ -179,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
     internal sealed class JsonLiteralNode : JsonValueNode
     {
-        public JsonLiteralNode(JsonToken literalToken) : base(JsonKind.Literal)
+        public JsonLiteralNode(JsonToken literalToken)
+            : base(JsonKind.Literal)
         {
             LiteralToken = literalToken;
         }
@@ -203,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     /// </summary>
     internal sealed class JsonCommaValueNode : JsonValueNode
     {
-        public JsonCommaValueNode(JsonToken commaToken) : base(JsonKind.CommaValue)
+        public JsonCommaValueNode(JsonToken commaToken)
+            : base(JsonKind.CommaValue)
         {
             Debug.Assert(commaToken.Kind == JsonKind.CommaToken);
             CommaToken = commaToken;
@@ -269,7 +275,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             JsonToken openParenToken,
             ImmutableArray<JsonValueNode> sequence,
             JsonToken closeParenToken
-        ) : base(JsonKind.Constructor)
+        )
+            : base(JsonKind.Constructor)
         {
             Debug.Assert(newKeyword.Kind == JsonKind.NewKeyword);
             Debug.Assert(nameToken.Kind == JsonKind.TextToken);

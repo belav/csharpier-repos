@@ -51,12 +51,14 @@ namespace System.Media
             _loadAsyncOperationCompleted = new SendOrPostCallback(LoadAsyncOperationCompleted);
         }
 
-        public SoundPlayer(string soundLocation) : this()
+        public SoundPlayer(string soundLocation)
+            : this()
         {
             SetupSoundLocation(soundLocation ?? string.Empty);
         }
 
-        public SoundPlayer(Stream? stream) : this()
+        public SoundPlayer(Stream? stream)
+            : this()
         {
             _stream = stream;
         }

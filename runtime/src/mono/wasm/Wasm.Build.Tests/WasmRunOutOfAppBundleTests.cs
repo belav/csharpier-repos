@@ -14,7 +14,8 @@ public class WasmRunOutOfAppBundleTests : BuildTestBase
     public WasmRunOutOfAppBundleTests(
         ITestOutputHelper output,
         SharedBuildPerTestClassFixture buildContext
-    ) : base(output, buildContext) { }
+    )
+        : base(output, buildContext) { }
 
     [Theory]
     [BuildAndRun]

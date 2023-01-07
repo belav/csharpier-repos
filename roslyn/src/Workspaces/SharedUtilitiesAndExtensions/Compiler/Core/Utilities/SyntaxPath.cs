@@ -31,7 +31,8 @@ namespace Roslyn.Utilities
             public int Ordinal { get; }
             public int Kind { get; }
 
-            public PathSegment(int ordinal, int kind) : this()
+            public PathSegment(int ordinal, int kind)
+                : this()
             {
                 this.Ordinal = ordinal;
                 this.Kind = kind;

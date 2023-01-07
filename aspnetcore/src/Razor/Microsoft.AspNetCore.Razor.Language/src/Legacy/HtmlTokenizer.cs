@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 // Tokenizer _loosely_ based on http://dev.w3.org/html5/spec/Overview.html#tokenization
 internal class HtmlTokenizer : Tokenizer
 {
-    public HtmlTokenizer(ITextDocument source) : base(source)
+    public HtmlTokenizer(ITextDocument source)
+        : base(source)
     {
         base.CurrentState = StartState;
     }

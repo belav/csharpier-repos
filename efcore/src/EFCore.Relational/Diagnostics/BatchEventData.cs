@@ -24,7 +24,8 @@ public class BatchEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEnumerable<IUpdateEntry> entries,
         int commandCount
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         Entries = entries;
         CommandCount = commandCount;

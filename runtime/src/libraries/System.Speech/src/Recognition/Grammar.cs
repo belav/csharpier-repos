@@ -36,9 +36,11 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, parameters, false);
         }
 
-        public Grammar(string path) : this(path, (string)null, null) { }
+        public Grammar(string path)
+            : this(path, (string)null, null) { }
 
-        public Grammar(string path, string ruleName) : this(path, ruleName, null) { }
+        public Grammar(string path, string ruleName)
+            : this(path, ruleName, null) { }
 
         public Grammar(string path, string ruleName, object[] parameters)
         {
@@ -58,7 +60,8 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, parameters, false);
         }
 
-        public Grammar(SrgsDocument srgsDocument) : this(srgsDocument, null, null, null) { }
+        public Grammar(SrgsDocument srgsDocument)
+            : this(srgsDocument, null, null, null) { }
 
         public Grammar(SrgsDocument srgsDocument, string ruleName)
             : this(srgsDocument, ruleName, null, null) { }
@@ -81,9 +84,11 @@ namespace System.Speech.Recognition
             InitialGrammarLoad(ruleName, parameters, false);
         }
 
-        public Grammar(Stream stream) : this(stream, null, null, null) { }
+        public Grammar(Stream stream)
+            : this(stream, null, null, null) { }
 
-        public Grammar(Stream stream, string ruleName) : this(stream, ruleName, null, null) { }
+        public Grammar(Stream stream, string ruleName)
+            : this(stream, ruleName, null, null) { }
 
         public Grammar(Stream stream, string ruleName, object[] parameters)
             : this(stream, ruleName, null, parameters) { }

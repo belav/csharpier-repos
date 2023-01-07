@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
             bool configurable = true
-        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+        )
+            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             AddDiagnosticIdToOptionMapping(diagnosticId, option);
         }
@@ -69,7 +70,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
             bool configurable = true
-        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+        )
+            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             RoslynDebug.Assert(options != null);
             Debug.Assert(options.Count > 1);
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// </summary>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
             ImmutableDictionary<DiagnosticDescriptor, IOption2> supportedDiagnosticsWithOptions
-        ) : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
+        )
+            : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
         {
             foreach (var (descriptor, option) in supportedDiagnosticsWithOptions)
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option);
@@ -95,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 DiagnosticDescriptor,
                 ImmutableHashSet<IOption2>
             > supportedDiagnosticsWithOptions
-        ) : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
+        )
+            : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
         {
             foreach (var (descriptor, options) in supportedDiagnosticsWithOptions)
             {

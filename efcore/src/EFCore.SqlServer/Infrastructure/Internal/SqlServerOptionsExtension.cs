@@ -31,7 +31,8 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected SqlServerOptionsExtension(SqlServerOptionsExtension copyFrom) : base(copyFrom) { }
+    protected SqlServerOptionsExtension(SqlServerOptionsExtension copyFrom)
+        : base(copyFrom) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,7 +63,8 @@ public class SqlServerOptionsExtension : RelationalOptionsExtension
     {
         private string? _logFragment;
 
-        public ExtensionInfo(IDbContextOptionsExtension extension) : base(extension) { }
+        public ExtensionInfo(IDbContextOptionsExtension extension)
+            : base(extension) { }
 
         private new SqlServerOptionsExtension Extension =>
             (SqlServerOptionsExtension)base.Extension;

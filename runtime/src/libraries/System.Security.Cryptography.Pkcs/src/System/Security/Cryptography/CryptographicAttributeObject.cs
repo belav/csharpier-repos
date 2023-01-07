@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
         //
         // Constructors.
         //
-        public CryptographicAttributeObject(Oid oid) : this(oid, new AsnEncodedDataCollection()) { }
+        public CryptographicAttributeObject(Oid oid)
+            : this(oid, new AsnEncodedDataCollection()) { }
 
         public CryptographicAttributeObject(Oid oid, AsnEncodedDataCollection? values)
         {

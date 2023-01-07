@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             FileLinePositionSpan unmappedFileSpan,
             DocumentId? documentId = null,
             FileLinePositionSpan? mappedFileSpan = null
-        ) : this(unmappedFileSpan, documentId, mappedFileSpan, forceMappedPath: false) { }
+        )
+            : this(unmappedFileSpan, documentId, mappedFileSpan, forceMappedPath: false) { }
 
         private DiagnosticDataLocation(
             FileLinePositionSpan unmappedFileSpan,

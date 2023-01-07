@@ -17,5 +17,6 @@ public class ConflictResult : StatusCodeResult
     /// <summary>
     /// Creates a new <see cref="ConflictResult"/> instance.
     /// </summary>
-    public ConflictResult() : base(DefaultStatusCode) { }
+    public ConflictResult()
+        : base(DefaultStatusCode) { }
 }

@@ -43,7 +43,8 @@ public class ApiResourceBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="ApiResourceBuilder"/>.
     /// </summary>
-    public ApiResourceBuilder() : this(new ApiResource()) { }
+    public ApiResourceBuilder()
+        : this(new ApiResource()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ApiResourceBuilder"/>.

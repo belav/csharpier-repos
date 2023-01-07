@@ -14,7 +14,8 @@ public class ManageExternalLogin : DefaultUIPage
         HttpClient client,
         IHtmlDocument externalLoginDocument,
         DefaultUIContext context
-    ) : base(client, externalLoginDocument, context)
+    )
+        : base(client, externalLoginDocument, context)
     {
         _externalLoginForm = HtmlAssert.HasForm("#external-login", externalLoginDocument);
     }

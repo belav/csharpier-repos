@@ -30,8 +30,8 @@ namespace System.Net.Http.Functional.Tests
         private static bool ClientSupportsDHECipherSuites =>
             (!PlatformDetection.IsWindows || PlatformDetection.IsWindows10Version1607OrGreater);
 
-        public HttpClientHandler_ServerCertificates_Test(ITestOutputHelper output) : base(output)
-        { }
+        public HttpClientHandler_ServerCertificates_Test(ITestOutputHelper output)
+            : base(output) { }
 
         // This enables customizing ServerCertificateCustomValidationCallback in WinHttpHandler variants:
         protected bool AllowAllCertificates { get; set; } = true;

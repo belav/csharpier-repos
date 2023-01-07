@@ -7,7 +7,8 @@ namespace System.IO.Pipes.Tests
 {
     public class TestPipeStream : PipeStream
     {
-        public TestPipeStream() : base(PipeDirection.InOut, 512) // values don't matter for these tests.
+        public TestPipeStream()
+            : base(PipeDirection.InOut, 512) // values don't matter for these tests.
         { }
 
         [Fact]

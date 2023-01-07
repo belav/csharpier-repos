@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             int iteratorMethodOrdinal,
             bool isEnumerable,
             TypeWithAnnotations elementType
-        ) : base(slotAllocatorOpt, compilationState, iteratorMethod, iteratorMethodOrdinal)
+        )
+            : base(slotAllocatorOpt, compilationState, iteratorMethod, iteratorMethodOrdinal)
         {
             this.ElementType = TypeMap.SubstituteType(elementType);
 

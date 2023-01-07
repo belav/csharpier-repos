@@ -29,17 +29,20 @@ namespace Roslyn.Utilities
     /// </summary>
     internal class SoftCrashException : OperationCanceledException
     {
-        public SoftCrashException() : base() { }
+        public SoftCrashException()
+            : base() { }
 
-        public SoftCrashException(string message) : base(message) { }
+        public SoftCrashException(string message)
+            : base(message) { }
 
-        public SoftCrashException(CancellationToken token) : base(token) { }
+        public SoftCrashException(CancellationToken token)
+            : base(token) { }
 
         public SoftCrashException(string message, Exception innerException)
             : base(message, innerException) { }
 
-        public SoftCrashException(string message, CancellationToken token) : base(message, token)
-        { }
+        public SoftCrashException(string message, CancellationToken token)
+            : base(message, token) { }
 
         public SoftCrashException(string message, Exception innerException, CancellationToken token)
             : base(message, innerException, token) { }

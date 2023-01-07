@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.GenerateConstructorFromMembers
 
         private readonly IPickMembersService? _pickMembersService_forTesting;
 
-        protected AbstractGenerateConstructorFromMembersCodeRefactoringProvider() : this(null) { }
+        protected AbstractGenerateConstructorFromMembersCodeRefactoringProvider()
+            : this(null) { }
 
         /// <summary>
         /// For testing purposes only.

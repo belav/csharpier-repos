@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             _dllImportIndex = _methodImplIndex = _preserveSigIndex = -1;
         }
 
-        public CommonMethodWellKnownAttributeData() : this(false) { }
+        public CommonMethodWellKnownAttributeData()
+            : this(false) { }
 
         #region DllImportAttribute, MethodImplAttribute, PreserveSigAttribute
 

@@ -2703,7 +2703,8 @@ namespace System.Xml.Serialization
             TypeScope[] scopes,
             string access,
             string className
-        ) : base(writer, scopes, access, className) { }
+        )
+            : base(writer, scopes, access, className) { }
 
         [RequiresUnreferencedCode("calls WriteStructMethod")]
         internal void GenerateBegin()

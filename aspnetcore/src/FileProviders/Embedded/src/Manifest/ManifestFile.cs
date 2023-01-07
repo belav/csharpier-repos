@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.FileProviders.Embedded.Manifest;
 
 internal sealed class ManifestFile : ManifestEntry
 {
-    public ManifestFile(string name, string resourcePath) : base(name)
+    public ManifestFile(string name, string resourcePath)
+        : base(name)
     {
         if (string.IsNullOrWhiteSpace(name))
         {

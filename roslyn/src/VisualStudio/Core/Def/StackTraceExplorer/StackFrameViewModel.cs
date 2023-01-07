@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             Workspace workspace,
             IClassificationFormatMap formatMap,
             ClassificationTypeMap typeMap
-        ) : base(formatMap, typeMap)
+        )
+            : base(formatMap, typeMap)
         {
             _frame = frame;
             _threadingContext = threadingContext;

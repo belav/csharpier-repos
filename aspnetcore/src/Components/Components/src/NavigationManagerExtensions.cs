@@ -151,7 +151,8 @@ public static class NavigationManagerExtensions
             string name,
             IEnumerable<TValue?> values,
             QueryParameterFormatter<TValue> formatter
-        ) : this(name)
+        )
+            : this(name)
         {
             _enumerator = values.GetEnumerator();
             _formatter = formatter;

@@ -17,7 +17,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal sealed class ComInvokeAction : InvokeBinder
     {
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal ComInvokeAction(CallInfo callInfo) : base(callInfo) { }
+        internal ComInvokeAction(CallInfo callInfo)
+            : base(callInfo) { }
 
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

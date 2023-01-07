@@ -23,7 +23,8 @@ public class DelegateStartup : StartupBase<IServiceCollection>
     public DelegateStartup(
         IServiceProviderFactory<IServiceCollection> factory,
         Action<IApplicationBuilder> configureApp
-    ) : base(factory)
+    )
+        : base(factory)
     {
         _configureApp = configureApp;
     }

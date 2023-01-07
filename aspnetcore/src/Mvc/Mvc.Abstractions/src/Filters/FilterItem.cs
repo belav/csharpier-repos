@@ -33,7 +33,8 @@ public class FilterItem
     /// </summary>
     /// <param name="descriptor">The <see cref="FilterDescriptor"/>.</param>
     /// <param name="filter"></param>
-    public FilterItem(FilterDescriptor descriptor, IFilterMetadata filter) : this(descriptor)
+    public FilterItem(FilterDescriptor descriptor, IFilterMetadata filter)
+        : this(descriptor)
     {
         if (filter == null)
         {

@@ -24,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics
             Func<EventDefinitionBase, EventData, string> messageGenerator,
             string navigationChain,
             string navigationName
-        ) : base(eventDefinition, messageGenerator)
+        )
+            : base(eventDefinition, messageGenerator)
         {
             NavigationChain = navigationChain;
             NavigationName = navigationName;

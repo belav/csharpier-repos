@@ -25,7 +25,8 @@ public class ActionExecutingContext : FilterContext
         IList<IFilterMetadata> filters,
         IDictionary<string, object?> actionArguments,
         object controller
-    ) : base(actionContext, filters)
+    )
+        : base(actionContext, filters)
     {
         if (actionArguments == null)
         {

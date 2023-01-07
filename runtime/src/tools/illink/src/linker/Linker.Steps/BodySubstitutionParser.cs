@@ -19,7 +19,8 @@ namespace Mono.Linker.Steps
             LinkContext context,
             Stream documentStream,
             string xmlDocumentLocation
-        ) : base(context, documentStream, xmlDocumentLocation) { }
+        )
+            : base(context, documentStream, xmlDocumentLocation) { }
 
         public BodySubstitutionParser(
             LinkContext context,
@@ -27,7 +28,8 @@ namespace Mono.Linker.Steps
             EmbeddedResource resource,
             AssemblyDefinition resourceAssembly,
             string xmlDocumentLocation = ""
-        ) : base(context, documentStream, resource, resourceAssembly, xmlDocumentLocation) { }
+        )
+            : base(context, documentStream, resource, resourceAssembly, xmlDocumentLocation) { }
 
         public void Parse(SubstitutionInfo xmlInfo)
         {

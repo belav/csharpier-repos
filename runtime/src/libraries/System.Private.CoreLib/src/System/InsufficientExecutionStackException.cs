@@ -17,7 +17,8 @@ namespace System
             HResult = HResults.COR_E_INSUFFICIENTEXECUTIONSTACK;
         }
 
-        public InsufficientExecutionStackException(string? message) : base(message)
+        public InsufficientExecutionStackException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_INSUFFICIENTEXECUTIONSTACK;
         }
@@ -31,6 +32,7 @@ namespace System
         private InsufficientExecutionStackException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 }

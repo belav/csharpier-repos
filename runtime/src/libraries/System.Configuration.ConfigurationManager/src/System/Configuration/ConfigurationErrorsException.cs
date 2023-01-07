@@ -38,15 +38,18 @@ namespace System.Configuration
             Exception inner,
             string filename,
             int line
-        ) : base(message, inner)
+        )
+            : base(message, inner)
         {
 #pragma warning restore 0618
             Init(filename, line);
         }
 
-        public ConfigurationErrorsException() : this(null, null, null, 0) { }
+        public ConfigurationErrorsException()
+            : this(null, null, null, 0) { }
 
-        public ConfigurationErrorsException(string message) : this(message, null, null, 0) { }
+        public ConfigurationErrorsException(string message)
+            : this(message, null, null, 0) { }
 
         public ConfigurationErrorsException(string message, Exception inner)
             : this(message, inner, null, 0) { }

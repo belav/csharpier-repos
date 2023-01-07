@@ -43,7 +43,8 @@ namespace System.Data
         {
             private readonly Index _index;
 
-            internal IndexTree(Index index) : base(TreeAccessMethod.KEY_SEARCH_AND_INDEX)
+            internal IndexTree(Index index)
+                : base(TreeAccessMethod.KEY_SEARCH_AND_INDEX)
             {
                 _index = index;
             }
@@ -90,14 +91,16 @@ namespace System.Data
             IndexField[] indexFields,
             DataViewRowState recordStates,
             IFilter? rowFilter
-        ) : this(table, indexFields, null, recordStates, rowFilter) { }
+        )
+            : this(table, indexFields, null, recordStates, rowFilter) { }
 
         public Index(
             DataTable table,
             System.Comparison<DataRow> comparison,
             DataViewRowState recordStates,
             IFilter? rowFilter
-        ) : this(table, GetAllFields(table.Columns), comparison, recordStates, rowFilter) { }
+        )
+            : this(table, GetAllFields(table.Columns), comparison, recordStates, rowFilter) { }
 
         // for the delegate methods, we don't know what the dependent columns are - so all columns are dependent
         private static IndexField[] GetAllFields(DataColumnCollection columns)

@@ -11,7 +11,8 @@ namespace System.Configuration
     )]
     public class SettingsPropertyNotFoundException : Exception
     {
-        public SettingsPropertyNotFoundException(string message) : base(message) { }
+        public SettingsPropertyNotFoundException(string message)
+            : base(message) { }
 
         public SettingsPropertyNotFoundException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -19,7 +20,8 @@ namespace System.Configuration
         protected SettingsPropertyNotFoundException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public SettingsPropertyNotFoundException() { }
     }

@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             IThreadingContext threadingContext,
             Workspace workspace,
             Lazy<IStreamingFindUsagesPresenter> streamingPresenter
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _workspace = workspace;
             _streamingPresenter = streamingPresenter;

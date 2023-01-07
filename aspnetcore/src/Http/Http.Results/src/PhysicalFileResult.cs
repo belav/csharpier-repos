@@ -19,7 +19,8 @@ internal sealed partial class PhysicalFileResult : FileResult, IResult
     /// </summary>
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
-    public PhysicalFileResult(string fileName, string? contentType) : base(contentType)
+    public PhysicalFileResult(string fileName, string? contentType)
+        : base(contentType)
     {
         FileName = fileName;
     }

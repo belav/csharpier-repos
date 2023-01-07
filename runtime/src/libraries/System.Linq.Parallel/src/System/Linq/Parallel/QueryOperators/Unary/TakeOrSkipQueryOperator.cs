@@ -423,7 +423,8 @@ namespace System.Linq.Parallel
                 TakeOrSkipQueryOperator<TResult> takeOrSkipOp,
                 QuerySettings settings,
                 bool preferStriping
-            ) : base(childQueryResults, takeOrSkipOp, settings, preferStriping)
+            )
+                : base(childQueryResults, takeOrSkipOp, settings, preferStriping)
             {
                 _takeOrSkipOp = takeOrSkipOp;
                 Debug.Assert(_childQueryResults.IsIndexible);

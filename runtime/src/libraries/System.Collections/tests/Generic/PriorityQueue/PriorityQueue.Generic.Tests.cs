@@ -370,7 +370,8 @@ namespace System.Collections.Tests
             : PriorityQueue<TElement, TPriority>,
                 IEnumerable<(TElement Element, TPriority Priority)>
         {
-            public EnumerablePriorityQueue(IComparer<TPriority>? comparer) : base(comparer) { }
+            public EnumerablePriorityQueue(IComparer<TPriority>? comparer)
+                : base(comparer) { }
 
             IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(
                 TElement Element,

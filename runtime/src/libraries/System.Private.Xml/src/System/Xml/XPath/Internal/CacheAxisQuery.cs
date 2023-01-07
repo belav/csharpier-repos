@@ -19,7 +19,8 @@ namespace MS.Internal.Xml.XPath
             this.count = 0;
         }
 
-        protected CacheAxisQuery(CacheAxisQuery other) : base(other)
+        protected CacheAxisQuery(CacheAxisQuery other)
+            : base(other)
         {
             this.outputBuffer = new List<XPathNavigator>(other.outputBuffer);
             this.count = other.count;

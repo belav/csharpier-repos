@@ -13,7 +13,8 @@ namespace System.Data
         private readonly DataRowView? _parentRowView;
         private readonly object[]? _filterValues;
 
-        public RelatedView(DataColumn[] columns, object[] values) : base(columns[0].Table, false)
+        public RelatedView(DataColumn[] columns, object[] values)
+            : base(columns[0].Table, false)
         {
             if (values == null)
             {
@@ -32,7 +33,8 @@ namespace System.Data
             DataRowView parentRowView,
             DataKey parentKey,
             DataColumn[] childKeyColumns
-        ) : base(childKeyColumns[0].Table, false)
+        )
+            : base(childKeyColumns[0].Table, false)
         {
             _filterValues = null;
             _parentRowView = parentRowView;

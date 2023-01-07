@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.Cose
             CoseHeaderMap unprotectedHeaders,
             byte[] encodedSignProtectedHeaders,
             byte[] signature
-        ) : this(protectedHeaders, unprotectedHeaders, encodedSignProtectedHeaders, signature)
+        )
+            : this(protectedHeaders, unprotectedHeaders, encodedSignProtectedHeaders, signature)
         {
             Message = message;
         }

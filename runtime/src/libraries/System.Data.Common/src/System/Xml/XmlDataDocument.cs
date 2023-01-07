@@ -2752,7 +2752,8 @@ namespace System.Xml
         /// Initializes a new instance of the XmlDataDocument class.
         /// </summary>
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
-        public XmlDataDocument() : base(new XmlDataImplementation())
+        public XmlDataDocument()
+            : base(new XmlDataImplementation())
         {
             Init();
             AttachDataSet(new DataSet());
@@ -2764,13 +2765,15 @@ namespace System.Xml
         /// DataSet.
         /// </summary>
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
-        public XmlDataDocument(DataSet dataset) : base(new XmlDataImplementation())
+        public XmlDataDocument(DataSet dataset)
+            : base(new XmlDataImplementation())
         {
             Init(dataset);
         }
 
         [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
-        internal XmlDataDocument(XmlImplementation imp) : base(imp)
+        internal XmlDataDocument(XmlImplementation imp)
+            : base(imp)
         {
             // This constructor is used by XmlDataImplementation.CreateDocument(), which
             // exposes it as XmlDocument. The methods using these fields are never called.

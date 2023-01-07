@@ -21,7 +21,8 @@ public class TokenResponseReceivedContext : RemoteAuthenticationContext<OpenIdCo
         OpenIdConnectOptions options,
         ClaimsPrincipal user,
         AuthenticationProperties properties
-    ) : base(context, scheme, options, properties) => Principal = user;
+    )
+        : base(context, scheme, options, properties) => Principal = user;
 
     /// <summary>
     /// Gets or sets the <see cref="OpenIdConnectMessage"/>.

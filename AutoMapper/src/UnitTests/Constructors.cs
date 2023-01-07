@@ -1189,7 +1189,8 @@ public class When_mapping_to_an_object_using_service_location : AutoMapperSpecBa
             _addend = addend;
         }
 
-        public Dest() : this(0) { }
+        public Dest()
+            : this(0) { }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>
@@ -1236,7 +1237,8 @@ public class When_mapping_to_an_object_using_contextual_service_location : AutoM
             _addend = addend;
         }
 
-        public Dest() : this(0) { }
+        public Dest()
+            : this(0) { }
     }
 
     protected override MapperConfiguration CreateConfiguration() =>

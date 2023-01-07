@@ -259,7 +259,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         private class NullNameConsoleFormatter : ConsoleFormatter
         {
-            public NullNameConsoleFormatter() : base(null) { }
+            public NullNameConsoleFormatter()
+                : base(null) { }
 
             public override void Write<TState>(
                 in LogEntry<TState> logEntry,

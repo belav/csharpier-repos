@@ -27,7 +27,8 @@ public class ModelSourceTest
 
     private class MyModelCustomizer : ModelCustomizer
     {
-        public MyModelCustomizer(ModelCustomizerDependencies dependencies) : base(dependencies) { }
+        public MyModelCustomizer(ModelCustomizerDependencies dependencies)
+            : base(dependencies) { }
 
         public override void Customize(ModelBuilder modelBuilder, DbContext dbContext)
         {

@@ -231,7 +231,8 @@ namespace System.Collections
 
         // Constructs a new hashtable. The hashtable is created with an initial
         // capacity of zero and a load factor of 1.0.
-        public Hashtable() : this(0, 1.0f) { }
+        public Hashtable()
+            : this(0, 1.0f) { }
 
         // Constructs a new hashtable with the given initial capacity and a load
         // factor of 1.0. The capacity argument serves as an indication of
@@ -240,7 +241,8 @@ namespace System.Collections
         // eliminate a number of resizing operations that would otherwise be
         // performed when elements are added to the hashtable.
         //
-        public Hashtable(int capacity) : this(capacity, 1.0f) { }
+        public Hashtable(int capacity)
+            : this(capacity, 1.0f) { }
 
         // Constructs a new hashtable with the given initial capacity and load
         // factor. The capacity argument serves as an indication of the
@@ -289,10 +291,11 @@ namespace System.Collections
         [Obsolete(
             "This constructor has been deprecated. Use Hashtable(IEqualityComparer) instead."
         )]
-        public Hashtable(IHashCodeProvider? hcp, IComparer? comparer) : this(0, 1.0f, hcp, comparer)
-        { }
+        public Hashtable(IHashCodeProvider? hcp, IComparer? comparer)
+            : this(0, 1.0f, hcp, comparer) { }
 
-        public Hashtable(IEqualityComparer? equalityComparer) : this(0, 1.0f, equalityComparer) { }
+        public Hashtable(IEqualityComparer? equalityComparer)
+            : this(0, 1.0f, equalityComparer) { }
 
         [Obsolete(
             "This constructor has been deprecated. Use Hashtable(int, IEqualityComparer) instead."
@@ -306,7 +309,8 @@ namespace System.Collections
         // Constructs a new hashtable containing a copy of the entries in the given
         // dictionary. The hashtable is created with a load factor of 1.0.
         //
-        public Hashtable(IDictionary d) : this(d, 1.0f) { }
+        public Hashtable(IDictionary d)
+            : this(d, 1.0f) { }
 
         // Constructs a new hashtable containing a copy of the entries in the given
         // dictionary. The hashtable is created with the given load factor.
@@ -331,7 +335,8 @@ namespace System.Collections
             float loadFactor,
             IHashCodeProvider? hcp,
             IComparer? comparer
-        ) : this(capacity, loadFactor)
+        )
+            : this(capacity, loadFactor)
         {
             if (hcp != null || comparer != null)
             {
@@ -347,7 +352,8 @@ namespace System.Collections
             float loadFactor,
             IHashCodeProvider? hcp,
             IComparer? comparer
-        ) : this(d?.Count ?? 0, loadFactor, hcp, comparer)
+        )
+            : this(d?.Count ?? 0, loadFactor, hcp, comparer)
         {
             ArgumentNullException.ThrowIfNull(d);
 
@@ -1295,7 +1301,8 @@ namespace System.Collections
         {
             private Hashtable _table;
 
-            internal SyncHashtable(Hashtable table) : base(false)
+            internal SyncHashtable(Hashtable table)
+                : base(false)
             {
                 _table = table;
             }

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 INamedTypeSymbol symbol,
                 bool canImplementImplicitly,
                 IDocumentationCommentFormattingService docCommentFormattingService
-            ) : base(symbol, canImplementImplicitly, docCommentFormattingService)
+            )
+                : base(symbol, canImplementImplicitly, docCommentFormattingService)
             {
                 _symbol = symbol;
 

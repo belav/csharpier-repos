@@ -16,14 +16,16 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerDeflateTests : DeflateTests
     {
-        public InvokerDeflateTests(ITestOutputHelper output) : base(output) { }
+        public InvokerDeflateTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseCustomInvoker => true;
     }
 
     public sealed class HttpClientDeflateTests : DeflateTests
     {
-        public HttpClientDeflateTests(ITestOutputHelper output) : base(output) { }
+        public HttpClientDeflateTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseHttpClient => true;
     }
@@ -31,7 +33,8 @@ namespace System.Net.WebSockets.Client.Tests
     [PlatformSpecific(~TestPlatforms.Browser)]
     public class DeflateTests : ClientWebSocketTestBase
     {
-        public DeflateTests(ITestOutputHelper output) : base(output) { }
+        public DeflateTests(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalTheory(nameof(WebSocketsSupported))]
         [InlineData(15, true, 15, true, "permessage-deflate; client_max_window_bits")]

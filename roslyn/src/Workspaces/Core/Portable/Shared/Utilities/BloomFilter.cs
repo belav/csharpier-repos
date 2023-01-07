@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             double falsePositiveProbability,
             bool isCaseSensitive,
             ICollection<string> values
-        ) : this(values.Count, falsePositiveProbability, isCaseSensitive)
+        )
+            : this(values.Count, falsePositiveProbability, isCaseSensitive)
         {
             AddRange(values);
         }

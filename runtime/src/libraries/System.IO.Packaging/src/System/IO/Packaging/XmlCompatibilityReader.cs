@@ -31,7 +31,8 @@ namespace System.IO.Packaging
     internal sealed class XmlCompatibilityReader : XmlWrappingReader
     {
         #region Construction
-        public XmlCompatibilityReader(XmlReader baseReader) : base(baseReader)
+        public XmlCompatibilityReader(XmlReader baseReader)
+            : base(baseReader)
         {
             _compatibilityScope = new CompatibilityScope(null, -1, this);
 
@@ -71,7 +72,8 @@ namespace System.IO.Packaging
         public XmlCompatibilityReader(
             XmlReader baseReader,
             IsXmlNamespaceSupportedCallback? isXmlNamespaceSupported
-        ) : this(baseReader)
+        )
+            : this(baseReader)
         {
             _namespaceCallback = isXmlNamespaceSupported;
         }
@@ -80,7 +82,8 @@ namespace System.IO.Packaging
             XmlReader baseReader,
             IsXmlNamespaceSupportedCallback? isXmlNamespaceSupported,
             IEnumerable<string> supportedNamespaces
-        ) : this(baseReader, isXmlNamespaceSupported)
+        )
+            : this(baseReader, isXmlNamespaceSupported)
         {
             foreach (string xmlNamespace in supportedNamespaces)
             {

@@ -8,7 +8,8 @@ using System.Runtime.InteropServices; // For SafeHandle
 public class MySafeHandle : SafeHandle
 {
     [SecurityCritical]
-    public MySafeHandle() : base(IntPtr.Zero, true)
+    public MySafeHandle()
+        : base(IntPtr.Zero, true)
     {
         if (handle != IntPtr.Zero)
         {
@@ -16,7 +17,8 @@ public class MySafeHandle : SafeHandle
         }
     }
 
-    public MySafeHandle(IntPtr handleValue) : base(IntPtr.Zero, true)
+    public MySafeHandle(IntPtr handleValue)
+        : base(IntPtr.Zero, true)
     {
         handle = handleValue;
         if (handle != handleValue)

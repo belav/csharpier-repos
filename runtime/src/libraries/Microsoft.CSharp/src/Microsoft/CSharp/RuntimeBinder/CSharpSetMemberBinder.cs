@@ -60,7 +60,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isChecked,
             Type callingContext,
             IEnumerable<CSharpArgumentInfo> argumentInfo
-        ) : base(name, false)
+        )
+            : base(name, false)
         {
             IsCompoundAssignment = isCompoundAssignment;
             _argumentInfo = BinderHelper.ToArray(argumentInfo);

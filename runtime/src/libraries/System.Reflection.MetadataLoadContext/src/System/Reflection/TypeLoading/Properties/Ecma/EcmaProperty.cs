@@ -21,7 +21,8 @@ namespace System.Reflection.TypeLoading.Ecma
             RoInstantiationProviderType declaringType,
             PropertyDefinitionHandle handle,
             Type reflectedType
-        ) : base(declaringType, reflectedType)
+        )
+            : base(declaringType, reflectedType)
         {
             Debug.Assert(!handle.IsNil);
             Debug.Assert(declaringType != null);

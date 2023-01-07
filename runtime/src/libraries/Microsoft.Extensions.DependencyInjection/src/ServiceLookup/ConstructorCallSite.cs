@@ -15,14 +15,16 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             ResultCache cache,
             Type serviceType,
             ConstructorInfo constructorInfo
-        ) : this(cache, serviceType, constructorInfo, Array.Empty<ServiceCallSite>()) { }
+        )
+            : this(cache, serviceType, constructorInfo, Array.Empty<ServiceCallSite>()) { }
 
         public ConstructorCallSite(
             ResultCache cache,
             Type serviceType,
             ConstructorInfo constructorInfo,
             ServiceCallSite[] parameterCallSites
-        ) : base(cache)
+        )
+            : base(cache)
         {
             if (!serviceType.IsAssignableFrom(constructorInfo.DeclaringType))
             {

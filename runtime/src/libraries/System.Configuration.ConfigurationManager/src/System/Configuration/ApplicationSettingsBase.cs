@@ -30,14 +30,16 @@ namespace System.Configuration
         /// <summary>
         /// Default constructor without a concept of "owner" component.
         /// </summary>
-        protected ApplicationSettingsBase() : base() { }
+        protected ApplicationSettingsBase()
+            : base() { }
 
         /// <summary>
         /// Constructor that takes an IComponent. The IComponent acts as the "owner" of this settings class. One
         /// of the things we do is query the component's site to see if it has a SettingsProvider service. If it
         /// does, we allow it to override the providers specified in the metadata.
         /// </summary>
-        protected ApplicationSettingsBase(IComponent owner) : this(owner, string.Empty) { }
+        protected ApplicationSettingsBase(IComponent owner)
+            : this(owner, string.Empty) { }
 
         /// <summary>
         /// Convenience overload that takes the settings key
@@ -50,7 +52,8 @@ namespace System.Configuration
         /// <summary>
         /// Convenience overload that takes the owner component and settings key.
         /// </summary>
-        protected ApplicationSettingsBase(IComponent owner, string settingsKey) : this(settingsKey)
+        protected ApplicationSettingsBase(IComponent owner, string settingsKey)
+            : this(settingsKey)
         {
             if (owner is null)
             {

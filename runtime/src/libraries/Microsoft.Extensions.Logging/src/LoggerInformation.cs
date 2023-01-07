@@ -80,7 +80,8 @@ namespace Microsoft.Extensions.Logging
 
     internal readonly struct LoggerInformation
     {
-        public LoggerInformation(ILoggerProvider provider, string category) : this()
+        public LoggerInformation(ILoggerProvider provider, string category)
+            : this()
         {
             ProviderType = provider.GetType();
             Logger = provider.CreateLogger(category);

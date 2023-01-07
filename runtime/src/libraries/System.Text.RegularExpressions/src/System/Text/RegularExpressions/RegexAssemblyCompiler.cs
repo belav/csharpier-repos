@@ -23,7 +23,8 @@ namespace System.Text.RegularExpressions
             AssemblyName an,
             CustomAttributeBuilder[]? attribs,
             string? resourceFile
-        ) : base(persistsAssembly: true)
+        )
+            : base(persistsAssembly: true)
         {
             if (resourceFile != null)
             {

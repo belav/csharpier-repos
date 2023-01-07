@@ -115,7 +115,8 @@ namespace System.Text.Json.Serialization.Samples
             private object _value;
             private Type _type;
 
-            public JsonDynamicString(string value, JsonSerializerOptions options) : base(options)
+            public JsonDynamicString(string value, JsonSerializerOptions options)
+                : base(options)
             {
                 _value = value;
                 _type = typeof(string);
@@ -171,7 +172,8 @@ namespace System.Text.Json.Serialization.Samples
             private object _value = null;
             private object _lastValue = null;
 
-            public JsonDynamicNumber(object value, JsonSerializerOptions options) : base(options)
+            public JsonDynamicNumber(object value, JsonSerializerOptions options)
+                : base(options)
             {
                 if (value == null)
                 {
@@ -299,7 +301,8 @@ namespace System.Text.Json.Serialization.Samples
             private object _value;
             private Type _type;
 
-            public JsonDynamicBoolean(bool value, JsonSerializerOptions options) : base(options)
+            public JsonDynamicBoolean(bool value, JsonSerializerOptions options)
+                : base(options)
             {
                 _value = value;
                 _type = typeof(bool);
@@ -353,7 +356,8 @@ namespace System.Text.Json.Serialization.Samples
         {
             private IDictionary<string, object> _value;
 
-            public JsonDynamicObject(JsonSerializerOptions options) : base(options)
+            public JsonDynamicObject(JsonSerializerOptions options)
+                : base(options)
             {
                 _value = new Dictionary<string, object>(
                     options.PropertyNameCaseInsensitive
@@ -455,7 +459,8 @@ namespace System.Text.Json.Serialization.Samples
         {
             private IList<object> _value;
 
-            public JsonDynamicArray(JsonSerializerOptions options) : base(options)
+            public JsonDynamicArray(JsonSerializerOptions options)
+                : base(options)
             {
                 _value = new List<object>();
             }

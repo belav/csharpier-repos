@@ -30,7 +30,8 @@ namespace System.IO.Pipes
             PipeSecurity? pipeSecurity,
             HandleInheritability inheritability = HandleInheritability.None,
             PipeAccessRights additionalAccessRights = default
-        ) : base(direction, transmissionMode, outBufferSize)
+        )
+            : base(direction, transmissionMode, outBufferSize)
         {
             ValidateParameters(
                 pipeName,

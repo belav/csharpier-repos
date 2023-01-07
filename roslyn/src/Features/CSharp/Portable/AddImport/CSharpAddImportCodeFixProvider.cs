@@ -213,6 +213,7 @@ namespace Microsoft.CodeAnalysis.CSharp.AddImport
         internal CSharpAddImportCodeFixProvider(
             IPackageInstallerService installerService,
             ISymbolSearchService symbolSearchService
-        ) : base(installerService, symbolSearchService) { }
+        )
+            : base(installerService, symbolSearchService) { }
     }
 }

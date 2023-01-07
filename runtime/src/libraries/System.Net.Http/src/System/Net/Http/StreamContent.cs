@@ -147,7 +147,8 @@ namespace System.Net.Http
 
         private sealed class ReadOnlyStream : DelegatingStream
         {
-            public ReadOnlyStream(Stream innerStream) : base(innerStream) { }
+            public ReadOnlyStream(Stream innerStream)
+                : base(innerStream) { }
 
             public override bool CanWrite => false;
 

@@ -608,7 +608,8 @@ namespace System.Threading.Tasks
                 TaskScheduler scheduler,
                 CancellationToken cancellationToken,
                 Func<TSource, CancellationToken, ValueTask> body
-            ) : base(taskBody, dop, scheduler, cancellationToken, body)
+            )
+                : base(taskBody, dop, scheduler, cancellationToken, body)
             {
                 Enumerator =
                     source.GetEnumerator()
@@ -638,7 +639,8 @@ namespace System.Threading.Tasks
                 TaskScheduler scheduler,
                 CancellationToken cancellationToken,
                 Func<TSource, CancellationToken, ValueTask> body
-            ) : base(taskBody, dop, scheduler, cancellationToken, body)
+            )
+                : base(taskBody, dop, scheduler, cancellationToken, body)
             {
                 Enumerator =
                     source.GetAsyncEnumerator(Cancellation.Token)

@@ -13,17 +13,20 @@ namespace System
     )]
     public class TypeAccessException : TypeLoadException
     {
-        public TypeAccessException() : base(SR.Arg_TypeAccessException)
+        public TypeAccessException()
+            : base(SR.Arg_TypeAccessException)
         {
             HResult = HResults.COR_E_TYPEACCESS;
         }
 
-        public TypeAccessException(string? message) : base(message)
+        public TypeAccessException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_TYPEACCESS;
         }
 
-        public TypeAccessException(string? message, Exception? inner) : base(message, inner)
+        public TypeAccessException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_TYPEACCESS;
         }

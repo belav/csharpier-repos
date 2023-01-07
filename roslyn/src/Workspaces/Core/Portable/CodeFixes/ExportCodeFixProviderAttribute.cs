@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public ExportCodeFixProviderAttribute(
             string firstLanguage,
             params string[] additionalLanguages
-        ) : base(typeof(CodeFixProvider))
+        )
+            : base(typeof(CodeFixProvider))
         {
             if (additionalLanguages == null)
             {

@@ -1168,7 +1168,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             #region constructors
             public User() { }
 
-            public User(string login, Type secretType) : this()
+            public User(string login, Type secretType)
+                : this()
             {
                 Login = login;
                 SecretType = secretType;

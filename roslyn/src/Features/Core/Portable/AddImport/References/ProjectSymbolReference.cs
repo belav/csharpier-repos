@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 SymbolResult<INamespaceOrTypeSymbol> symbolResult,
                 Project project
-            ) : base(provider, symbolResult)
+            )
+                : base(provider, symbolResult)
             {
                 _project = project;
             }

@@ -24,22 +24,26 @@ namespace System
         private readonly string? _fileName; // The name of the corrupt PE file.
         private readonly string? _fusionLog; // fusion log (when applicable)
 
-        public BadImageFormatException() : base(SR.Arg_BadImageFormatException)
+        public BadImageFormatException()
+            : base(SR.Arg_BadImageFormatException)
         {
             HResult = HResults.COR_E_BADIMAGEFORMAT;
         }
 
-        public BadImageFormatException(string? message) : base(message)
+        public BadImageFormatException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_BADIMAGEFORMAT;
         }
 
-        public BadImageFormatException(string? message, Exception? inner) : base(message, inner)
+        public BadImageFormatException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_BADIMAGEFORMAT;
         }
 
-        public BadImageFormatException(string? message, string? fileName) : base(message)
+        public BadImageFormatException(string? message, string? fileName)
+            : base(message)
         {
             HResult = HResults.COR_E_BADIMAGEFORMAT;
             _fileName = fileName;

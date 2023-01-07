@@ -5,7 +5,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
 {
     public class TypeWithParameterlessPublicConstructor
     {
-        public TypeWithParameterlessPublicConstructor() : this("some name") { }
+        public TypeWithParameterlessPublicConstructor()
+            : this("some name") { }
 
         protected TypeWithParameterlessPublicConstructor(string name) { }
     }

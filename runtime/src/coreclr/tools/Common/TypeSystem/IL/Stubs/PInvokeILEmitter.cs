@@ -638,7 +638,8 @@ namespace Internal.IL.Stubs
     {
         public bool IsStubRequired { get; }
 
-        public PInvokeILStubMethodIL(ILStubMethodIL methodIL, bool isStubRequired) : base(methodIL)
+        public PInvokeILStubMethodIL(ILStubMethodIL methodIL, bool isStubRequired)
+            : base(methodIL)
         {
             IsStubRequired = isStubRequired;
         }

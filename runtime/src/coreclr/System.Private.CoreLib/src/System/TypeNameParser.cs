@@ -22,7 +22,8 @@ namespace System
         private static partial void Release(IntPtr pTypeNameParser);
         #endregion
 
-        public SafeTypeNameParserHandle() : base(true) { }
+        public SafeTypeNameParserHandle()
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

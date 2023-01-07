@@ -19,14 +19,16 @@ namespace System.Xml.Xsl.XPath
             int endChar,
             string resId,
             params string?[]? args
-        ) : base(resId, args)
+        )
+            : base(resId, args)
         {
             this.queryString = queryString;
             this.startChar = startChar;
             this.endChar = endChar;
         }
 
-        internal XPathCompileException(string resId, params string[] args) : base(resId, args) { } // queryString will be set later
+        internal XPathCompileException(string resId, params string[] args)
+            : base(resId, args) { } // queryString will be set later
 
         internal XPathCompileException(SerializationInfo info, StreamingContext context)
             : base(info, context)

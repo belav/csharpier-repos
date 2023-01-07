@@ -14,7 +14,8 @@ namespace DebuggerTests
 {
     public class MonoJsTests : DebuggerTests
     {
-        public MonoJsTests(ITestOutputHelper testOutput) : base(testOutput) { }
+        public MonoJsTests(ITestOutputHelper testOutput)
+            : base(testOutput) { }
 
         [ConditionalFact(nameof(RunningOnChrome))]
         public async Task BadRaiseDebugEventsTest()

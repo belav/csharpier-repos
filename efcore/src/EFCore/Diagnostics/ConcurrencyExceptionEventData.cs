@@ -30,7 +30,8 @@ public class ConcurrencyExceptionEventData : DbContextErrorEventData
         DbContext context,
         IReadOnlyList<IUpdateEntry> entries,
         DbUpdateConcurrencyException exception
-    ) : base(eventDefinition, messageGenerator, context, exception)
+    )
+        : base(eventDefinition, messageGenerator, context, exception)
     {
         _internalEntries = entries;
     }

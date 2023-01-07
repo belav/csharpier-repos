@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// </summary>
         public int Offset { get; }
 
-        public IndentationResult(int basePosition, int offset) : this()
+        public IndentationResult(int basePosition, int offset)
+            : this()
         {
             this.BasePosition = basePosition;
             this.Offset = offset;

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             SyntaxNode
         > s_simplifyParentheses = SimplifyParentheses;
 
-        public CSharpParenthesizedPatternReducer() : base(s_pool) { }
+        public CSharpParenthesizedPatternReducer()
+            : base(s_pool) { }
 
         protected override bool IsApplicable(CSharpSimplifierOptions options) => true;
 

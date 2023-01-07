@@ -619,7 +619,8 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousTypeToClass
             public MyCodeAction(
                 string title,
                 Func<CancellationToken, Task<Document>> createChangedDocument
-            ) : base(title, createChangedDocument) { }
+            )
+                : base(title, createChangedDocument) { }
         }
     }
 }

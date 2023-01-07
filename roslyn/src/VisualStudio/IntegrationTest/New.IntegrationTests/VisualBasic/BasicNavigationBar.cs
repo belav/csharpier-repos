@@ -30,7 +30,8 @@ Structure S
     Public Property B As Integer
 End Structure";
 
-        public BasicNavigationBar() : base(nameof(BasicNavigationBar)) { }
+        public BasicNavigationBar()
+            : base(nameof(BasicNavigationBar)) { }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 

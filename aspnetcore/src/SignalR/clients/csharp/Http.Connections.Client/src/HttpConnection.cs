@@ -99,7 +99,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
     /// Initializes a new instance of the <see cref="HttpConnection"/> class.
     /// </summary>
     /// <param name="url">The URL to connect to.</param>
-    public HttpConnection(Uri url) : this(url, HttpTransports.All) { }
+    public HttpConnection(Uri url)
+        : this(url, HttpTransports.All) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HttpConnection"/> class.
@@ -193,7 +194,8 @@ public partial class HttpConnection : ConnectionContext, IConnectionInherentKeep
         HttpConnectionOptions httpConnectionOptions,
         ILoggerFactory loggerFactory,
         ITransportFactory transportFactory
-    ) : this(httpConnectionOptions, loggerFactory)
+    )
+        : this(httpConnectionOptions, loggerFactory)
     {
         _transportFactory = transportFactory;
     }

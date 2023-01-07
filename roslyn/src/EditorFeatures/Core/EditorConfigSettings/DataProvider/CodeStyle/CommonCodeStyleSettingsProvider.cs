@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             string filePath,
             OptionUpdater settingsUpdater,
             Workspace workspace
-        ) : base(filePath, settingsUpdater, workspace)
+        )
+            : base(filePath, settingsUpdater, workspace)
         {
             Update();
         }

@@ -47,9 +47,11 @@ namespace System.Text
         private readonly bool _isThrowException;
         private readonly bool _bigEndian;
 
-        public UTF32Encoding() : this(false, true) { }
+        public UTF32Encoding()
+            : this(false, true) { }
 
-        public UTF32Encoding(bool bigEndian, bool byteOrderMark) : base(bigEndian ? 12001 : 12000)
+        public UTF32Encoding(bool bigEndian, bool byteOrderMark)
+            : base(bigEndian ? 12001 : 12000)
         {
             _bigEndian = bigEndian;
             _emitUTF32ByteOrderMark = byteOrderMark;
@@ -1288,7 +1290,8 @@ namespace System.Text
             internal int iChar;
             internal int readByteCount;
 
-            public UTF32Decoder(UTF32Encoding encoding) : base(encoding)
+            public UTF32Decoder(UTF32Encoding encoding)
+                : base(encoding)
             {
                 // base calls reset
             }

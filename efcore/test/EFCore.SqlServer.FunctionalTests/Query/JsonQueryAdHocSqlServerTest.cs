@@ -5,8 +5,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class JsonQueryAdHocSqlServerTest : JsonQueryAdHocTestBase
 {
-    public JsonQueryAdHocSqlServerTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-    { }
+    public JsonQueryAdHocSqlServerTest(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper) { }
 
     protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 

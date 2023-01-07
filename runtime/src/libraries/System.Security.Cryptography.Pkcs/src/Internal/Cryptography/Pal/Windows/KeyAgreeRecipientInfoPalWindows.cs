@@ -19,7 +19,8 @@ namespace Internal.Cryptography.Pal.Windows
             SafeHandle pCmsgCmsRecipientInfoMemory,
             int index,
             int subIndex
-        ) : base()
+        )
+            : base()
         {
             _pCmsgCmsRecipientInfoMemory = pCmsgCmsRecipientInfoMemory;
             Index = index;

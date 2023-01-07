@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
             IAsyncServiceProvider serviceProvider,
             IThreadingContext threadingContext,
             IPersistentStorageConfiguration configuration
-        ) : base(configuration)
+        )
+            : base(configuration)
         {
             _serviceProvider = serviceProvider;
             _threadingContext = threadingContext;

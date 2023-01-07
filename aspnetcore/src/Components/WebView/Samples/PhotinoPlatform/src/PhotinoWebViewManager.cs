@@ -32,7 +32,8 @@ internal class PhotinoWebViewManager : WebViewManager
         IFileProvider fileProvider,
         JSComponentConfigurationStore jsComponents,
         string hostPageRelativePath
-    ) : base(provider, dispatcher, appBaseUri, fileProvider, jsComponents, hostPageRelativePath)
+    )
+        : base(provider, dispatcher, appBaseUri, fileProvider, jsComponents, hostPageRelativePath)
     {
         _window = window ?? throw new ArgumentNullException(nameof(window));
         _window.WebMessageReceived += (sender, message) =>

@@ -24,7 +24,8 @@ public class RedirectContext : PropertiesContext<WsFederationOptions>
         AuthenticationScheme scheme,
         WsFederationOptions options,
         AuthenticationProperties? properties
-    ) : base(context, scheme, options, properties) { }
+    )
+        : base(context, scheme, options, properties) { }
 
     /// <summary>
     /// The <see cref="WsFederationMessage"/> used to compose the redirect.

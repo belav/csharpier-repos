@@ -19,7 +19,8 @@ public class SampleAuthenticationHandler : AuthenticationHandler<AuthenticationS
         ILoggerFactory logger,
         UrlEncoder encoder,
         ISystemClock clock
-    ) : base(options, logger, encoder, clock)
+    )
+        : base(options, logger, encoder, clock)
     {
         _id = new ClaimsPrincipal(new ClaimsIdentity("Api"));
     }

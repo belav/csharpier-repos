@@ -31,7 +31,8 @@ public sealed partial class RedirectHttpResult : IResult
     internal RedirectHttpResult(
         [StringSyntax(StringSyntaxAttribute.Uri)] string url,
         bool permanent
-    ) : this(url, permanent, preserveMethod: false) { }
+    )
+        : this(url, permanent, preserveMethod: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectHttpResult"/> class with the values
@@ -45,7 +46,8 @@ public sealed partial class RedirectHttpResult : IResult
         [StringSyntax(StringSyntaxAttribute.Uri)] string url,
         bool permanent,
         bool preserveMethod
-    ) : this(url, acceptLocalUrlOnly: false, permanent, preserveMethod) { }
+    )
+        : this(url, acceptLocalUrlOnly: false, permanent, preserveMethod) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectHttpResult"/> class with the values

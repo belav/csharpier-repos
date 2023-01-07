@@ -140,7 +140,8 @@ namespace System.Web.Mvc
                 ControllerContext controllerContext,
                 string validationType,
                 string errorMessage
-            ) : base(metadata, controllerContext)
+            )
+                : base(metadata, controllerContext)
             {
                 if (String.IsNullOrEmpty(validationType))
                 {

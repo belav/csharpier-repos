@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class NorthwindODataContext : PoolableDbContext
 {
-    public NorthwindODataContext(DbContextOptions options) : base(options) { }
+    public NorthwindODataContext(DbContextOptions options)
+        : base(options) { }
 
     public virtual DbSet<Customer> Customers { get; set; }
     public virtual DbSet<Employee> Employees { get; set; }

@@ -27,7 +27,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion.Version30;
 
-        public HttpClientHandlerTest_Http3(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandlerTest_Http3(ITestOutputHelper output)
+            : base(output) { }
 
         private async Task AssertProtocolErrorAsync(long errorCode, Func<Task> task)
         {

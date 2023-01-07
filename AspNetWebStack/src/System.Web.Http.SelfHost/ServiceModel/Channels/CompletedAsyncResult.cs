@@ -8,7 +8,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
     //An AsyncResult that completes as soon as it is instantiated.
     internal class CompletedAsyncResult : AsyncResult
     {
-        public CompletedAsyncResult(AsyncCallback callback, object state) : base(callback, state)
+        public CompletedAsyncResult(AsyncCallback callback, object state)
+            : base(callback, state)
         {
             Complete(true);
         }

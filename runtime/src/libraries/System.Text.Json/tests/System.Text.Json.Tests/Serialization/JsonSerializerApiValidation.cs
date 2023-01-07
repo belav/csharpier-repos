@@ -13,13 +13,14 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class JsonSerializerApiValidation_Span : JsonSerializerApiValidation
     {
-        public JsonSerializerApiValidation_Span() : base(JsonSerializerWrapper.SpanSerializer) { }
+        public JsonSerializerApiValidation_Span()
+            : base(JsonSerializerWrapper.SpanSerializer) { }
     }
 
     public class JsonSerializerApiValidation_String : JsonSerializerApiValidation
     {
-        public JsonSerializerApiValidation_String() : base(JsonSerializerWrapper.StringSerializer)
-        { }
+        public JsonSerializerApiValidation_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class JsonSerializerApiValidation_AsyncStream : JsonSerializerApiValidation
@@ -48,13 +49,14 @@ namespace System.Text.Json.Serialization.Tests
 
     public class JsonSerializerApiValidation_Element : JsonSerializerApiValidation
     {
-        public JsonSerializerApiValidation_Element() : base(JsonSerializerWrapper.ElementSerializer)
-        { }
+        public JsonSerializerApiValidation_Element()
+            : base(JsonSerializerWrapper.ElementSerializer) { }
     }
 
     public class JsonSerializerApiValidation_Node : JsonSerializerApiValidation
     {
-        public JsonSerializerApiValidation_Node() : base(JsonSerializerWrapper.NodeSerializer) { }
+        public JsonSerializerApiValidation_Node()
+            : base(JsonSerializerWrapper.NodeSerializer) { }
     }
 }
 
@@ -67,9 +69,11 @@ public abstract class JsonSerializerApiValidation
 
     internal partial class MyDummyContext : JsonSerializerContext
     {
-        public MyDummyContext() : base(new JsonSerializerOptions()) { }
+        public MyDummyContext()
+            : base(new JsonSerializerOptions()) { }
 
-        public MyDummyContext(JsonSerializerOptions options) : base(options) { }
+        public MyDummyContext(JsonSerializerOptions options)
+            : base(options) { }
 
         public override JsonTypeInfo? GetTypeInfo(Type type) => throw new NotImplementedException();
 

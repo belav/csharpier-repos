@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol firstCandidate,
             NamedTypeSymbol secondCandidate,
             TupleExtraData? tupleData = null
-        ) : base(tupleData)
+        )
+            : base(tupleData)
         {
             _embeddingAssembly = embeddingAssembly;
             _firstCandidate = firstCandidate;

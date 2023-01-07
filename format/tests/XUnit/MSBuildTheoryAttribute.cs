@@ -14,6 +14,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.XUnit
     )]
     public sealed class MSBuildTheoryAttribute : ConditionalTheoryAttribute
     {
-        public MSBuildTheoryAttribute(params Type[] skipConditions) : base(skipConditions) { }
+        public MSBuildTheoryAttribute(params Type[] skipConditions)
+            : base(skipConditions) { }
     }
 }

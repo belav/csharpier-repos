@@ -1328,7 +1328,8 @@ namespace System.IO.Ports
                 SerialStream parent,
                 CancellationToken ct,
                 Memory<byte> buffer
-            ) : base(parent, ct)
+            )
+                : base(parent, ct)
             {
                 Buffer = buffer;
             }
@@ -1342,7 +1343,8 @@ namespace System.IO.Ports
                 SerialStream parent,
                 CancellationToken ct,
                 ReadOnlyMemory<byte> buffer
-            ) : base(parent, ct)
+            )
+                : base(parent, ct)
             {
                 Buffer = buffer;
             }

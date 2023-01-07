@@ -49,7 +49,8 @@ namespace System.Numerics.Tensors
             ReadOnlySpan<int> dimensions,
             int capacity,
             bool reverseStride = false
-        ) : base(dimensions, reverseStride)
+        )
+            : base(dimensions, reverseStride)
         {
             nonZeroCount = 0;
             compressedDimension = reverseStride ? Rank - 1 : 0;
@@ -78,7 +79,8 @@ namespace System.Numerics.Tensors
             int nonZeroCount,
             ReadOnlySpan<int> dimensions,
             bool reverseStride = false
-        ) : base(dimensions, reverseStride)
+        )
+            : base(dimensions, reverseStride)
         {
             compressedDimension = reverseStride ? Rank - 1 : 0;
             nonCompressedStrides = (int[])strides.Clone();

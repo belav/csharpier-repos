@@ -32,7 +32,8 @@ public class DefaultConnectionContext
     /// Creates the <see cref="DefaultConnectionContext"/> without Pipes to avoid upfront allocations.
     /// The caller is expected to set the <see cref="Transport"/> and <see cref="Application"/> pipes manually.
     /// </summary>
-    public DefaultConnectionContext() : this(Guid.NewGuid().ToString()) { }
+    public DefaultConnectionContext()
+        : this(Guid.NewGuid().ToString()) { }
 
     /// <summary>
     /// Creates the <see cref="DefaultConnectionContext"/> without Pipes to avoid upfront allocations.

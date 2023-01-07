@@ -35,7 +35,8 @@ public class CommandCorrelatedEventData : DbContextEventData
         bool async,
         DateTimeOffset startTime,
         CommandSource commandSource
-    ) : base(eventDefinition, messageGenerator, context)
+    )
+        : base(eventDefinition, messageGenerator, context)
     {
         Connection = connection;
         CommandId = commandId;

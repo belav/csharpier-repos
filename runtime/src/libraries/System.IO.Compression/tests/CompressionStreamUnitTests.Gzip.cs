@@ -543,7 +543,8 @@ namespace System.IO.Compression
             public bool ReadArrayInvoked = false,
                 WriteArrayInvoked = false;
 
-            internal DerivedGZipStream(Stream stream, CompressionMode mode) : base(stream, mode) { }
+            internal DerivedGZipStream(Stream stream, CompressionMode mode)
+                : base(stream, mode) { }
 
             internal DerivedGZipStream(Stream stream, CompressionMode mode, bool leaveOpen)
                 : base(stream, mode, leaveOpen) { }

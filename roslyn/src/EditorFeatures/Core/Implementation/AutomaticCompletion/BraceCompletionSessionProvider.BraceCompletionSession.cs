@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.AutomaticCompletion
                 IEditorOperationsFactoryService editorOperationsFactoryService,
                 IBraceCompletionService service,
                 IThreadingContext threadingContext
-            ) : base(threadingContext, assertIsForeground: true)
+            )
+                : base(threadingContext, assertIsForeground: true)
             {
                 this.TextView = textView;
                 this.SubjectBuffer = subjectBuffer;

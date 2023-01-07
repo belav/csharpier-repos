@@ -15,7 +15,8 @@ namespace System
     {
         private readonly SafeFileHandle _handle;
 
-        internal WasmConsoleStream(SafeFileHandle handle, FileAccess access) : base(access)
+        internal WasmConsoleStream(SafeFileHandle handle, FileAccess access)
+            : base(access)
         {
             _handle = handle;
         }

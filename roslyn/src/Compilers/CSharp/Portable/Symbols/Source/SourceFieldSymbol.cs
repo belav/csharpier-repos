@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string name,
             SyntaxReference syntax,
             Location location
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             Debug.Assert(name != null);
             Debug.Assert(syntax != null);

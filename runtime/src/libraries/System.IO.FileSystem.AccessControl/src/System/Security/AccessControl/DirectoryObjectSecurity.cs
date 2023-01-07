@@ -11,7 +11,8 @@ namespace System.Security.AccessControl
     /// </summary>
     public abstract class DirectoryObjectSecurity : ObjectSecurity
     {
-        protected DirectoryObjectSecurity() : base(true, true)
+        protected DirectoryObjectSecurity()
+            : base(true, true)
         {
             return;
         }

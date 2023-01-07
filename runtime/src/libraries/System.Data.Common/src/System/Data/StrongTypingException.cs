@@ -17,17 +17,20 @@ namespace System.Data
         protected StrongTypingException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        public StrongTypingException() : base()
+        public StrongTypingException()
+            : base()
         {
             HResult = HResults.StrongTyping;
         }
 
-        public StrongTypingException(string? message) : base(message)
+        public StrongTypingException(string? message)
+            : base(message)
         {
             HResult = HResults.StrongTyping;
         }
 
-        public StrongTypingException(string? s, Exception? innerException) : base(s, innerException)
+        public StrongTypingException(string? s, Exception? innerException)
+            : base(s, innerException)
         {
             HResult = HResults.StrongTyping;
         }

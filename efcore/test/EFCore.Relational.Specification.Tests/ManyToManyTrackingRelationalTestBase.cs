@@ -9,7 +9,8 @@ public abstract class ManyToManyTrackingRelationalTestBase<TFixture>
     : ManyToManyTrackingTestBase<TFixture>
     where TFixture : ManyToManyTrackingRelationalTestBase<TFixture>.ManyToManyTrackingRelationalFixture
 {
-    protected ManyToManyTrackingRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected ManyToManyTrackingRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public void Many_to_many_delete_behaviors_are_set()

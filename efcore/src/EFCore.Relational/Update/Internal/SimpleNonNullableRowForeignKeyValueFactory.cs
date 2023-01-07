@@ -25,7 +25,8 @@ public class SimpleNonNullableRowForeignKeyValueFactory<TKey, TForeignKey>
         IColumn column,
         ColumnAccessors columnAccessors,
         IValueConverterSelector valueConverterSelector
-    ) : base(foreignKey, column, columnAccessors, valueConverterSelector)
+    )
+        : base(foreignKey, column, columnAccessors, valueConverterSelector)
     {
         EqualityComparer = CreateKeyEqualityComparer(column);
     }

@@ -20,7 +20,8 @@ namespace Castle.Core.Internal
     {
         private readonly int hashCode;
 
-        public WeakKey(object target, int hashCode) : base(target)
+        public WeakKey(object target, int hashCode)
+            : base(target)
         {
             this.hashCode = hashCode;
         }

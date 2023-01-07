@@ -15,7 +15,8 @@ namespace System.Threading.Tasks.Tests
     {
         public readonly int FromTaskId;
 
-        public TPLTestException() : base("Throwing an exception")
+        public TPLTestException()
+            : base("Throwing an exception")
         {
             FromTaskId = Task.CurrentId ?? -1;
         }

@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
         // REVIEW: This needs to be bounded and we need a strategy for what to do when the queue is full
         private bool _closed;
 
-        public Listener(LibuvTransportContext transportContext) : base(transportContext) { }
+        public Listener(LibuvTransportContext transportContext)
+            : base(transportContext) { }
 
         protected UvStreamHandle ListenSocket { get; private set; }
 

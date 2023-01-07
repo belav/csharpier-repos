@@ -29,7 +29,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         private Dictionary<XmlName, IXsltContextVariable> variables;
         private Dictionary<XmlName, IXsltContextFunction> functions;
 
-        public XmlContextBase() : base(new NameTable())
+        public XmlContextBase()
+            : base(new NameTable())
         {
             AddNamespace(Xsd.Namespace);
             AddNamespace(Xsi.Namespace);
@@ -37,7 +38,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             AddNamespace(XRef.Namespace);
         }
 
-        protected XmlContextBase(XmlContextBase parent) : base(GetNameTable(parent))
+        protected XmlContextBase(XmlContextBase parent)
+            : base(GetNameTable(parent))
         {
             this.parent = parent;
         }

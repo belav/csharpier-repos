@@ -323,7 +323,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             Script script,
             T value,
             Exception exceptionOpt
-        ) : base(executionState, script, exceptionOpt)
+        )
+            : base(executionState, script, exceptionOpt)
         {
             ReturnValue = value;
         }

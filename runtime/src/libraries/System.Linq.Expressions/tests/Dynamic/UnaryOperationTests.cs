@@ -13,8 +13,8 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideUnaryOperationBinder : UnaryOperationBinder
         {
-            public MinimumOverrideUnaryOperationBinder(ExpressionType operation) : base(operation)
-            { }
+            public MinimumOverrideUnaryOperationBinder(ExpressionType operation)
+                : base(operation) { }
 
             public override DynamicMetaObject FallbackUnaryOperation(
                 DynamicMetaObject target,

@@ -187,7 +187,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
             public BadDataRelationalCommandBuilder(
                 RelationalCommandBuilderDependencies dependencies,
                 object[] values
-            ) : base(dependencies)
+            )
+                : base(dependencies)
             {
                 _values = values;
             }
@@ -204,7 +205,8 @@ public class BadDataSqliteTest : IClassFixture<BadDataSqliteTest.BadDataSqliteFi
                     string commandText,
                     IReadOnlyList<IRelationalParameter> parameters,
                     object[] values
-                ) : base(dependencies, commandText, parameters)
+                )
+                    : base(dependencies, commandText, parameters)
                 {
                     _values = values;
                 }

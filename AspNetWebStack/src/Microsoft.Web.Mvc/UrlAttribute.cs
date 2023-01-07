@@ -18,7 +18,8 @@ namespace Microsoft.Web.Mvc
             RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture
         );
 
-        public UrlAttribute() : base(DataType.Url)
+        public UrlAttribute()
+            : base(DataType.Url)
         {
             ErrorMessage = MvcResources.UrlAttribute_Invalid;
         }

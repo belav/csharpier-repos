@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
     {
         private readonly LoadContext _inMemoryAssemblyContext;
 
-        internal CoreAssemblyLoaderImpl(InteractiveAssemblyLoader loader) : base(loader)
+        internal CoreAssemblyLoaderImpl(InteractiveAssemblyLoader loader)
+            : base(loader)
         {
             _inMemoryAssemblyContext = new LoadContext(Loader, null);
         }

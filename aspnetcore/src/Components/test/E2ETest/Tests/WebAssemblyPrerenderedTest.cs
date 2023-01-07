@@ -16,7 +16,8 @@ public class WebAssemblyPrerenderedTest : ServerTestBase<AspNetSiteServerFixture
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output)
+    )
+        : base(browserFixture, serverFixture, output)
     {
         serverFixture.BuildWebHostMethod = Wasm.Prerendered.Server.Program.BuildWebHost;
         serverFixture.Environment = AspNetEnvironment.Development;

@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis
             SourceText? sourceText,
             ValueSource<TextAndVersion> textSource,
             ValueSource<TreeAndVersion>? treeSource
-        ) : base(solutionServices, documentServiceProvider, attributes, sourceText, textSource)
+        )
+            : base(solutionServices, documentServiceProvider, attributes, sourceText, textSource)
         {
             Contract.ThrowIfFalse(_options is null == _treeSource is null);
 
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis
             ParseOptions? options,
             HostLanguageServices languageServices,
             HostWorkspaceServices services
-        ) : base(info, services)
+        )
+            : base(info, services)
         {
             _languageServices = languageServices;
             _options = options;

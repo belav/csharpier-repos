@@ -27,7 +27,8 @@ namespace System.Linq.Expressions.Tests
                 protected override Expression VisitExtension(Expression node) => MarkerExtension;
             }
 
-            public IncompleteExpressionOverride() : base() { }
+            public IncompleteExpressionOverride()
+                : base() { }
 
             public Expression VisitChildren() => VisitChildren(new Visitor());
         }

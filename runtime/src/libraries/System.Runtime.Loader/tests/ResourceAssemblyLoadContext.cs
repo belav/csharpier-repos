@@ -17,7 +17,8 @@ namespace System.Runtime.Loader.Tests
     {
         public LoadBy LoadBy { get; set; }
 
-        public ResourceAssemblyLoadContext(bool isCollectible = false) : base(isCollectible)
+        public ResourceAssemblyLoadContext(bool isCollectible = false)
+            : base(isCollectible)
         {
             LoadBy = LoadBy.Path;
         }

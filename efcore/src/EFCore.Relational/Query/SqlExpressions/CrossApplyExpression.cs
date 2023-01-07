@@ -18,7 +18,8 @@ public class CrossApplyExpression : JoinExpressionBase
     ///     Creates a new instance of the <see cref="CrossApplyExpression" /> class.
     /// </summary>
     /// <param name="table">A table source to CROSS APPLY with.</param>
-    public CrossApplyExpression(TableExpressionBase table) : this(table, annotations: null) { }
+    public CrossApplyExpression(TableExpressionBase table)
+        : this(table, annotations: null) { }
 
     private CrossApplyExpression(TableExpressionBase table, IEnumerable<IAnnotation>? annotations)
         : base(table, annotations) { }

@@ -51,7 +51,8 @@ namespace System.Threading.Tasks
         /// <summary>Creates a <see cref="TaskCompletionSource{TResult}"/> with the specified state.</summary>
         /// <param name="state">The state to use as the underlying
         /// <see cref="Task{TResult}"/>'s AsyncState.</param>
-        public TaskCompletionSource(object? state) : this(state, TaskCreationOptions.None) { }
+        public TaskCompletionSource(object? state)
+            : this(state, TaskCreationOptions.None) { }
 
         /// <summary>Creates a <see cref="TaskCompletionSource{TResult}"/> with the specified state and options.</summary>
         /// <param name="creationOptions">The options to use when creating the underlying <see cref="Task{TResult}"/>.</param>

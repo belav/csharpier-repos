@@ -9,7 +9,8 @@ namespace System.Web.Mvc
     {
         private readonly UnvalidatedRequestValuesAccessor _unvalidatedValuesAccessor;
 
-        public QueryStringValueProviderFactory() : this(null) { }
+        public QueryStringValueProviderFactory()
+            : this(null) { }
 
         // For unit testing
         internal QueryStringValueProviderFactory(

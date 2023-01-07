@@ -7,7 +7,8 @@ public class NonSeekableReadStream : Stream
 {
     private readonly Stream _inner;
 
-    public NonSeekableReadStream(byte[] data) : this(new MemoryStream(data)) { }
+    public NonSeekableReadStream(byte[] data)
+        : this(new MemoryStream(data)) { }
 
     public NonSeekableReadStream(Stream inner)
     {

@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Cryptography.SafeHandles;
 
 internal abstract unsafe class BCryptHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
-    protected BCryptHandle() : base(ownsHandle: true) { }
+    protected BCryptHandle()
+        : base(ownsHandle: true) { }
 
     protected uint GetProperty(string pszProperty, void* pbOutput, uint cbOutput)
     {

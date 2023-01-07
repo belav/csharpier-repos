@@ -69,7 +69,8 @@ namespace System.Web.Http.Controllers
         public ReflectedHttpActionDescriptor(
             HttpControllerDescriptor controllerDescriptor,
             MethodInfo methodInfo
-        ) : base(controllerDescriptor)
+        )
+            : base(controllerDescriptor)
         {
             if (methodInfo == null)
             {

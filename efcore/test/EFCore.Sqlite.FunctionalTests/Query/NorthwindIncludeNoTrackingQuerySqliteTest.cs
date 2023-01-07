@@ -11,7 +11,8 @@ public class NorthwindIncludeNoTrackingQuerySqliteTest
     public NorthwindIncludeNoTrackingQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestSqlLoggerFactory.CaptureOutput(testOutputHelper);
     }

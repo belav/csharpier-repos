@@ -21,7 +21,8 @@ namespace MS.Internal.Xml.XPath
             _funcType = funcType;
         }
 
-        private BooleanFunctions(BooleanFunctions other) : base(other)
+        private BooleanFunctions(BooleanFunctions other)
+            : base(other)
         {
             _arg = Clone(other._arg);
             _funcType = other._funcType;

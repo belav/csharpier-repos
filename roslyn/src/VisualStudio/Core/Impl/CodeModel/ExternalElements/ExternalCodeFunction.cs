@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             CodeModelState state,
             ProjectId projectId,
             IMethodSymbol symbol
-        ) : base(state, projectId, symbol) { }
+        )
+            : base(state, projectId, symbol) { }
 
         private IMethodSymbol MethodSymbol
         {

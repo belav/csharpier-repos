@@ -15,7 +15,8 @@ namespace System.Reflection.TypeLoading
     {
         private const TypeAttributes TypeAttributesSentinel = (TypeAttributes)(-1);
 
-        private protected RoType() : base() { }
+        private protected RoType()
+            : base() { }
 
         public sealed override Type AsType() => this;
 

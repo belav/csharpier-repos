@@ -71,7 +71,8 @@ namespace Microsoft.Extensions.Configuration.Ini
     {
         public IniConfigurationProvider(
             Microsoft.Extensions.Configuration.Ini.IniConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.FileConfigurationSource)) { }
 
         public override void Load(System.IO.Stream stream) { }
     }
@@ -94,7 +95,8 @@ namespace Microsoft.Extensions.Configuration.Ini
     {
         public IniStreamConfigurationProvider(
             Microsoft.Extensions.Configuration.Ini.IniStreamConfigurationSource source
-        ) : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.StreamConfigurationSource)) { }
 
         public override void Load(System.IO.Stream stream) { }
 

@@ -19,7 +19,8 @@ public class WebAssemblyConfigurationTest
         BrowserFixture browserFixture,
         BlazorWasmTestAppFixture<BasicTestApp.Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture, output)
+    )
+        : base(browserFixture, serverFixture, output)
     {
         _serverFixture.PathBase = "/subdir";
     }

@@ -25,7 +25,8 @@ namespace System.Reflection.Context
     {
         private readonly ReflectionContextProjector _projector;
 
-        protected CustomReflectionContext() : this(new IdentityReflectionContext()) { }
+        protected CustomReflectionContext()
+            : this(new IdentityReflectionContext()) { }
 
         protected CustomReflectionContext(ReflectionContext source)
         {

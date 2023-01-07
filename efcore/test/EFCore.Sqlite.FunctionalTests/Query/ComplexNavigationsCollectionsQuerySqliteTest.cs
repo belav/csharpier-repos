@@ -10,7 +10,8 @@ public class ComplexNavigationsCollectionsQuerySqliteTest
 {
     public ComplexNavigationsCollectionsQuerySqliteTest(
         ComplexNavigationsQuerySqliteFixture fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     public override async Task Complex_query_with_let_collection_projection_FirstOrDefault_with_ToList_on_inner_and_outer(
         bool async

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.ChainedExpression
                 SyntaxWrappingOptions options,
                 ImmutableArray<ImmutableArray<SyntaxNodeOrToken>> chunks,
                 CancellationToken cancellationToken
-            ) : base(service, document, originalSourceText, options, cancellationToken)
+            )
+                : base(service, document, originalSourceText, options, cancellationToken)
             {
                 _chunks = chunks;
 

@@ -41,7 +41,8 @@ namespace MS.Internal.Xml.XPath
             _nsUri = string.Empty;
         }
 
-        protected BaseAxisQuery(BaseAxisQuery other) : base(other)
+        protected BaseAxisQuery(BaseAxisQuery other)
+            : base(other)
         {
             this.qyInput = Clone(other.qyInput);
             _name = other._name;

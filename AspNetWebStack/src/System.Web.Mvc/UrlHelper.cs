@@ -23,8 +23,8 @@ namespace System.Web.Mvc
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
         public UrlHelper() { }
 
-        public UrlHelper(RequestContext requestContext) : this(requestContext, RouteTable.Routes)
-        { }
+        public UrlHelper(RequestContext requestContext)
+            : this(requestContext, RouteTable.Routes) { }
 
         public UrlHelper(RequestContext requestContext, RouteCollection routeCollection)
         {

@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
         private DocCommentConverter(
             IDocumentationCommentFormattingService formattingService,
             CancellationToken cancellationToken
-        ) : base(visitIntoStructuredTrivia: false)
+        )
+            : base(visitIntoStructuredTrivia: false)
         {
             _formattingService = formattingService;
             _cancellationToken = cancellationToken;

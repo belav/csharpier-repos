@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeActionPriority codeActionPriority,
             IFixAllState fixAllState,
             Diagnostic diagnostic
-        ) : base(workspace, codeAction, codeActionPriority)
+        )
+            : base(workspace, codeAction, codeActionPriority)
         {
             Diagnostic = diagnostic;
             FixAllState = fixAllState;

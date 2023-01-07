@@ -11,7 +11,8 @@ internal sealed class UnixCertificateManager : CertificateManager
 {
     public UnixCertificateManager() { }
 
-    internal UnixCertificateManager(string subject, int version) : base(subject, version) { }
+    internal UnixCertificateManager(string subject, int version)
+        : base(subject, version) { }
 
     public override bool IsTrusted(X509Certificate2 certificate) => false;
 

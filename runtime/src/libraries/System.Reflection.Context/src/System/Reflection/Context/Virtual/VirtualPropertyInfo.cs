@@ -23,7 +23,8 @@ namespace System.Reflection.Context.Virtual
             IEnumerable<Attribute>? getterAttributes,
             IEnumerable<Attribute>? setterAttributes,
             CustomReflectionContext context
-        ) : base(propertyType, name, context)
+        )
+            : base(propertyType, name, context)
         {
             if (getter == null && setter == null)
                 throw new ArgumentException(SR.ArgumentNull_GetterOrSetterMustBeSpecified);

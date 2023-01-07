@@ -30,7 +30,8 @@ namespace System.Security.Principal
         // Constructors.
         //
 
-        public WindowsPrincipal(WindowsIdentity ntIdentity) : base(ntIdentity)
+        public WindowsPrincipal(WindowsIdentity ntIdentity)
+            : base(ntIdentity)
         {
             ArgumentNullException.ThrowIfNull(ntIdentity);
 

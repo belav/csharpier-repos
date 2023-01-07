@@ -38,7 +38,8 @@ namespace AutoMapper.Configuration
             MemberList memberList,
             Type sourceType,
             Type destinationType
-        ) : this(memberList, new TypePair(sourceType, destinationType)) { }
+        )
+            : this(memberList, new TypePair(sourceType, destinationType)) { }
 
         protected MappingExpressionBase(MemberList memberList, TypePair types)
         {
@@ -349,7 +350,8 @@ namespace AutoMapper.Configuration
             MemberList memberList,
             Type sourceType,
             Type destinationType
-        ) : base(memberList, sourceType, destinationType) { }
+        )
+            : base(memberList, sourceType, destinationType) { }
 
         protected MappingExpressionBase(MemberList memberList, TypePair types)
             : base(memberList, types) { }

@@ -55,7 +55,8 @@ namespace Microsoft.Extensions.Logging.Configuration
     {
         public LoggerProviderOptionsChangeTokenSource(
             Microsoft.Extensions.Logging.Configuration.ILoggerProviderConfiguration<TProvider> providerConfiguration
-        ) : base(default(Microsoft.Extensions.Configuration.IConfiguration)) { }
+        )
+            : base(default(Microsoft.Extensions.Configuration.IConfiguration)) { }
     }
 
     public static partial class LoggingBuilderConfigurationExtensions

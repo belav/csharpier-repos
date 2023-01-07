@@ -89,7 +89,8 @@ namespace System.ComponentModel.Tests
 
         private class MockEventDescriptor : EventDescriptor
         {
-            public MockEventDescriptor(string name) : base(name, new Attribute[] { }) { }
+            public MockEventDescriptor(string name)
+                : base(name, new Attribute[] { }) { }
 
             public override Type ComponentType { get; } = typeof(EventArgs);
 

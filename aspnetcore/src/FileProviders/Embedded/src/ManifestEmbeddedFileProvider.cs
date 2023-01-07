@@ -56,7 +56,8 @@ public class ManifestEmbeddedFileProvider : IFileProvider
         string root,
         string manifestName,
         DateTimeOffset lastModified
-    ) : this(assembly, ManifestParser.Parse(assembly, manifestName).Scope(root), lastModified) { }
+    )
+        : this(assembly, ManifestParser.Parse(assembly, manifestName).Scope(root), lastModified) { }
 
     internal ManifestEmbeddedFileProvider(
         Assembly assembly,

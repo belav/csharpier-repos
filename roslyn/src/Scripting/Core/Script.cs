@@ -403,7 +403,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ScriptOptions options,
             Type globalsTypeOpt,
             Script previousOpt
-        ) : base(compiler, builder, sourceText, options, globalsTypeOpt, previousOpt) { }
+        )
+            : base(compiler, builder, sourceText, options, globalsTypeOpt, previousOpt) { }
 
         public override Type ReturnType => typeof(T);
 

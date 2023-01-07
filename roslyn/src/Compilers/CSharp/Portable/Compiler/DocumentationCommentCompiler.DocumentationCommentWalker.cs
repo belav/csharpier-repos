@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ArrayBuilder<CSharpSyntaxNode> includeElementNodes,
                 HashSet<ParameterSymbol> documentedParameters,
                 HashSet<TypeParameterSymbol> documentedTypeParameters
-            ) : base(SyntaxWalkerDepth.StructuredTrivia)
+            )
+                : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 _compilation = compilation;
                 _diagnostics = diagnostics;

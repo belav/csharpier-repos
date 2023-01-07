@@ -837,7 +837,8 @@ namespace System.IO.Packaging
                 bool isNormalized,
                 bool computeIsRelationship,
                 bool isRelationshipPartUri
-            ) : base(partUriString, UriKind.Relative)
+            )
+                : base(partUriString, UriKind.Relative)
             {
                 Debug.Assert(!string.IsNullOrEmpty(partUriString));
 

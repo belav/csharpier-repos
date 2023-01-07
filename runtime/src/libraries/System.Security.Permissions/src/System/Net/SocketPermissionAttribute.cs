@@ -24,7 +24,8 @@ namespace System.Net
     )]
     public sealed class SocketPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public SocketPermissionAttribute(SecurityAction action) : base(action) { }
+        public SocketPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public string Access
         {

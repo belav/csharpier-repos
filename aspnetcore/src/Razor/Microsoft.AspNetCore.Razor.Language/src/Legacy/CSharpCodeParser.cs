@@ -3233,7 +3233,8 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
             Start = start;
         }
 
-        public Block(SyntaxToken token, SourceLocation start) : this(GetName(token), start) { }
+        public Block(SyntaxToken token, SourceLocation start)
+            : this(GetName(token), start) { }
 
         public string Name { get; set; }
         public SourceLocation Start { get; set; }

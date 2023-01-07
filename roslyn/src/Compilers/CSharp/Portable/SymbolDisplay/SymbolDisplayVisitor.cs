@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SymbolDisplayFormat format,
             SemanticModel semanticModelOpt,
             int positionOpt
-        ) : base(builder, format, true, semanticModelOpt, positionOpt)
+        )
+            : base(builder, format, true, semanticModelOpt, positionOpt)
         {
             _escapeKeywordIdentifiers = format.MiscellaneousOptions.IncludesOption(
                 SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers

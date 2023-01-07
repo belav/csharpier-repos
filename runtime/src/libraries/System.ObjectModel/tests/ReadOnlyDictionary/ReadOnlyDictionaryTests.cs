@@ -408,7 +408,8 @@ namespace System.Collections.ObjectModel.Tests
 
     public class TestReadOnlyDictionary<TKey, TValue> : ReadOnlyDictionary<TKey, TValue>
     {
-        public TestReadOnlyDictionary(IDictionary<TKey, TValue> dict) : base(dict) { }
+        public TestReadOnlyDictionary(IDictionary<TKey, TValue> dict)
+            : base(dict) { }
 
         public IDictionary<TKey, TValue> GetDictionary()
         {
@@ -509,7 +510,8 @@ namespace System.Collections.ObjectModel.Tests
 
     public class ReadOnlyDictionaryOverNonGenericTests : IDictionaryTest<string, int>
     {
-        public ReadOnlyDictionaryOverNonGenericTests() : base(false) { }
+        public ReadOnlyDictionaryOverNonGenericTests()
+            : base(false) { }
 
         private int m_next_item = 1;
         protected override bool IsResetNotSupported
@@ -558,7 +560,8 @@ namespace System.Collections.ObjectModel.Tests
 
     public class ReadOnlyDictionaryTestsStringInt : IDictionaryTest<string, int>
     {
-        public ReadOnlyDictionaryTestsStringInt() : base(false) { }
+        public ReadOnlyDictionaryTestsStringInt()
+            : base(false) { }
 
         private int m_next_item = 1;
         protected override bool IsResetNotSupported

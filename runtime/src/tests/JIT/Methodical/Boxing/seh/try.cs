@@ -11,7 +11,8 @@ namespace SinCalc_try_seh_cs
     {
         public object mistake;
 
-        public MistakeException(double m) : base("Mistake!")
+        public MistakeException(double m)
+            : base("Mistake!")
         {
             mistake = m;
         }

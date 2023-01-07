@@ -30,7 +30,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Initializes a new instance of the <see cref="MarshalUsingAttribute" /> class that provides a native marshalling type and optionally size information.
         /// </summary>
         /// <param name="nativeType">The marshaller type used to convert the attributed type from managed to native code. This type must be attributed with <see cref="CustomMarshallerAttribute" />.</param>
-        public MarshalUsingAttribute(Type nativeType) : this()
+        public MarshalUsingAttribute(Type nativeType)
+            : this()
         {
             NativeType = nativeType;
         }

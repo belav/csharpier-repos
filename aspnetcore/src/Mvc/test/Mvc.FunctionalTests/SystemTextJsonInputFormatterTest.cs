@@ -8,7 +8,8 @@ public class SystemTextJsonInputFormatterTest
 {
     public SystemTextJsonInputFormatterTest(
         MvcTestFixture<FormatterWebSite.StartupWithJsonFormatter> fixture
-    ) : base(fixture) { }
+    )
+        : base(fixture) { }
 
     [Fact(Skip = "https://github.com/dotnet/runtime/issues/38539")]
     public override Task JsonInputFormatter_RoundtripsRecordType() =>

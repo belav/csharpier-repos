@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
             ForEachInfo<ForEachStatementSyntax, StatementSyntax> forEachInfo,
             YieldStatementSyntax yieldReturnStatement,
             YieldStatementSyntax yieldBreakStatement
-        ) : base(forEachInfo)
+        )
+            : base(forEachInfo)
         {
             _yieldReturnStatement = yieldReturnStatement;
             _yieldBreakStatement = yieldBreakStatement;

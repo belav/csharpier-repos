@@ -32,7 +32,8 @@ namespace MS.Internal.Xml.XPath
             _needInput = true;
         }
 
-        private CacheChildrenQuery(CacheChildrenQuery other) : base(other)
+        private CacheChildrenQuery(CacheChildrenQuery other)
+            : base(other)
         {
             _nextInput = Clone(other._nextInput);
             _elementStk = other._elementStk.Clone();

@@ -14,7 +14,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.DocumentationComments)]
     public class DocumentationCommentTests : AbstractEditorTest
     {
-        public DocumentationCommentTests() : base(nameof(DocumentationCommentTests)) { }
+        public DocumentationCommentTests()
+            : base(nameof(DocumentationCommentTests)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

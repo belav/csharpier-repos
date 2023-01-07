@@ -21,7 +21,8 @@ public class ApiResourceCollection : Collection<ApiResource>
     /// API resources in <paramref name="list"/>.
     /// </summary>
     /// <param name="list">The initial list of <see cref="ApiResource"/>.</param>
-    public ApiResourceCollection(IList<ApiResource> list) : base(list) { }
+    public ApiResourceCollection(IList<ApiResource> list)
+        : base(list) { }
 
     /// <summary>
     /// Gets an API resource given its name.

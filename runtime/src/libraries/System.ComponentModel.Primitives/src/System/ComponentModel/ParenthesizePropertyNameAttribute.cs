@@ -19,7 +19,8 @@ namespace System.ComponentModel
         public static readonly ParenthesizePropertyNameAttribute Default =
             new ParenthesizePropertyNameAttribute();
 
-        public ParenthesizePropertyNameAttribute() : this(false) { }
+        public ParenthesizePropertyNameAttribute()
+            : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the System.ComponentModel.Design.ParenthesizePropertyNameAttribute

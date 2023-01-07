@@ -19,7 +19,8 @@ internal struct RoutePatternLexer
     public readonly bool SupportTokenReplacement;
     public int Position;
 
-    public RoutePatternLexer(VirtualCharSequence text, bool supportTokenReplacement) : this()
+    public RoutePatternLexer(VirtualCharSequence text, bool supportTokenReplacement)
+        : this()
     {
         Text = text;
         SupportTokenReplacement = supportTokenReplacement;

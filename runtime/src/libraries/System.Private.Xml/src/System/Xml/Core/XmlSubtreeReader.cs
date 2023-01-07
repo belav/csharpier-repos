@@ -114,7 +114,8 @@ namespace System.Xml
         //
         // Constructor
         //
-        internal XmlSubtreeReader(XmlReader reader) : base(reader)
+        internal XmlSubtreeReader(XmlReader reader)
+            : base(reader)
         {
             _initialDepth = reader.Depth;
             _state = State.Initial;

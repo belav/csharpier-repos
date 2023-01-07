@@ -18,7 +18,8 @@ public class TableValuedFunctionBuilder : DbFunctionBuilderBase, IInfrastructure
     public TableValuedFunctionBuilder(
         IMutableDbFunction function,
         EntityTypeBuilder entityTypeBuilder
-    ) : base(function)
+    )
+        : base(function)
     {
         EntityTypeBuilder = entityTypeBuilder;
     }

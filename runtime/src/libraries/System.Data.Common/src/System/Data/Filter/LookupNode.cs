@@ -15,7 +15,8 @@ namespace System.Data
         private DataColumn? _column;
         private DataRelation? _relation;
 
-        internal LookupNode(DataTable? table, string columnName, string? relationName) : base(table)
+        internal LookupNode(DataTable? table, string columnName, string? relationName)
+            : base(table)
         {
             _relationName = relationName;
             _columnName = columnName;

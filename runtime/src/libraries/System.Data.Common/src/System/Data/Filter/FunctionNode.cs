@@ -141,7 +141,8 @@ namespace System.Data
             new Function("Avg", FunctionId.Avg, typeof(object), false, false, 1, null, null, null),
         };
 
-        internal FunctionNode(DataTable? table, string name) : base(table)
+        internal FunctionNode(DataTable? table, string name)
+            : base(table)
         {
             // Because FunctionNode instances are created eagerly but evaluated lazily,
             // we need to capture the deserialization scope here. The scope could be

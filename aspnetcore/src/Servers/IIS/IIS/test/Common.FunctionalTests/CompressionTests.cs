@@ -34,7 +34,8 @@ public class CompressionTests : FixtureLoggedTest
 {
     private readonly IISCompressionSiteFixture _fixture;
 
-    public CompressionTests(IISCompressionSiteFixture fixture) : base(fixture)
+    public CompressionTests(IISCompressionSiteFixture fixture)
+        : base(fixture)
     {
         _fixture = fixture;
     }

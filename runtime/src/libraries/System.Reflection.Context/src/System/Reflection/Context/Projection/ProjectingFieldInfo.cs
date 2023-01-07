@@ -11,7 +11,8 @@ namespace System.Reflection.Context.Projection
     // Recursively 'projects' any assemblies, modules, types and members for a given field
     internal class ProjectingFieldInfo : DelegatingFieldInfo, IProjectable
     {
-        public ProjectingFieldInfo(FieldInfo field, Projector projector) : base(field)
+        public ProjectingFieldInfo(FieldInfo field, Projector projector)
+            : base(field)
         {
             Debug.Assert(null != projector);
 

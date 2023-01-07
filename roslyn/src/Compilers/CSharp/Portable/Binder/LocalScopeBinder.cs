@@ -22,9 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<LabelSymbol> _labels;
         private readonly uint _localScopeDepth;
 
-        internal LocalScopeBinder(Binder next) : this(next, next.Flags) { }
+        internal LocalScopeBinder(Binder next)
+            : this(next, next.Flags) { }
 
-        internal LocalScopeBinder(Binder next, BinderFlags flags) : base(next, flags)
+        internal LocalScopeBinder(Binder next, BinderFlags flags)
+            : base(next, flags)
         {
             var parentDepth = next.LocalScopeDepth;
 

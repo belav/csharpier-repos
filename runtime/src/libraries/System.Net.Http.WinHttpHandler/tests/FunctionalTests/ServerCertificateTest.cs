@@ -12,7 +12,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 {
     public class ServerCertificateTest : BaseCertificateTest
     {
-        public ServerCertificateTest(ITestOutputHelper output) : base(output) { }
+        public ServerCertificateTest(ITestOutputHelper output)
+            : base(output) { }
 
         public static bool DowngradeToHTTP1IfClientCertSet =>
             PlatformDetection.WindowsVersion < 2004;

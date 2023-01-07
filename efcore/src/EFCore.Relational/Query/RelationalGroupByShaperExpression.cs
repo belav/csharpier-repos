@@ -25,7 +25,8 @@ public class RelationalGroupByShaperExpression : GroupByShaperExpression
         Expression keySelector,
         Expression elementSelector,
         ShapedQueryExpression groupingEnumerable
-    ) : base(keySelector, groupingEnumerable)
+    )
+        : base(keySelector, groupingEnumerable)
     {
         ElementSelector = elementSelector;
     }

@@ -28,7 +28,8 @@ public abstract class ServiceParameterBinding : ParameterBinding
         Type parameterType,
         Type serviceType,
         params IPropertyBase[]? serviceProperties
-    ) : base(parameterType, serviceProperties)
+    )
+        : base(parameterType, serviceProperties)
     {
         Check.NotNull(serviceType, nameof(serviceType));
 

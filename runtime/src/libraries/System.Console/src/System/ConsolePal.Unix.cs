@@ -1261,7 +1261,8 @@ namespace System
                 SafeFileHandle handle,
                 FileAccess access,
                 bool useReadLine = false
-            ) : base(access)
+            )
+                : base(access)
             {
                 Debug.Assert(handle != null, "Expected non-null console handle");
                 Debug.Assert(!handle.IsInvalid, "Expected valid console handle");

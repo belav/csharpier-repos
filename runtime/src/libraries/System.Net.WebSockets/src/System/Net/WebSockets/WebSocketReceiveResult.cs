@@ -11,7 +11,8 @@ namespace System.Net.WebSockets
             int count,
             WebSocketMessageType messageType,
             bool endOfMessage
-        ) : this(count, messageType, endOfMessage, null, null) { }
+        )
+            : this(count, messageType, endOfMessage, null, null) { }
 
         public WebSocketReceiveResult(
             int count,

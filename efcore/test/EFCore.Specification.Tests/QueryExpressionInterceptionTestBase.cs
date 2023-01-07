@@ -5,8 +5,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class QueryExpressionInterceptionTestBase : InterceptionTestBase
 {
-    protected QueryExpressionInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture)
-    { }
+    protected QueryExpressionInterceptionTestBase(InterceptionFixtureBase fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false, false)]

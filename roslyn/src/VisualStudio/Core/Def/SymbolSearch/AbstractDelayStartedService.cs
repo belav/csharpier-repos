@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
             IAsynchronousOperationListenerProvider listenerProvider,
             Option2<bool> featureEnabledOption,
             ImmutableArray<PerLanguageOption2<bool>> perLanguageOptions
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _globalOptions = globalOptions;
             Workspace = workspace;

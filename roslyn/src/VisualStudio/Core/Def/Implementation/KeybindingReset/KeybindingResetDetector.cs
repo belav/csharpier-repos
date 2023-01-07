@@ -100,7 +100,8 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
             IGlobalOptionService globalOptions,
             VisualStudioInfoBarService infoBarService,
             SVsServiceProvider serviceProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _globalOptions = globalOptions;
             _infoBarService = infoBarService;

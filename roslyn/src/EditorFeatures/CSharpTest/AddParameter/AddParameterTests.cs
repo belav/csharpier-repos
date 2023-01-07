@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
     public class AddParameterTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddParameterTests(ITestOutputHelper logger) : base(logger) { }
+        public AddParameterTests(ITestOutputHelper logger)
+            : base(logger) { }
 
         internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
             Workspace workspace

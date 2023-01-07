@@ -44,7 +44,8 @@ namespace System.Security.Claims
         /// </summary>
         /// <param name="reader">a <see cref="BinaryReader"/> pointing to a <see cref="Claim"/>.</param>
         /// <exception cref="ArgumentNullException">if 'reader' is null.</exception>
-        public Claim(BinaryReader reader) : this(reader, null) { }
+        public Claim(BinaryReader reader)
+            : this(reader, null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="Claim"/> using a <see cref="BinaryReader"/>.
@@ -227,7 +228,8 @@ namespace System.Security.Claims
             string? valueType,
             string? issuer,
             string? originalIssuer
-        ) : this(type, value, valueType, issuer, originalIssuer, (ClaimsIdentity?)null) { }
+        )
+            : this(type, value, valueType, issuer, originalIssuer, (ClaimsIdentity?)null) { }
 
         /// <summary>
         /// Creates a <see cref="Claim"/> with the specified type, value, value type, issuer, original issuer and subject.
@@ -249,7 +251,8 @@ namespace System.Security.Claims
             string? issuer,
             string? originalIssuer,
             ClaimsIdentity? subject
-        ) : this(type, value, valueType, issuer, originalIssuer, subject, null, null) { }
+        )
+            : this(type, value, valueType, issuer, originalIssuer, subject, null, null) { }
 
         /// <summary>
         /// This internal constructor was added as a performance boost when adding claims that are found in the NTToken.

@@ -14,7 +14,8 @@ public class TestModelSource : ModelSource
         Action<ModelConfigurationBuilder> configureConventions,
         Action<ModelBuilder, DbContext> onModelCreating,
         ModelSourceDependencies dependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _configureConventions = configureConventions;
         _onModelCreating = onModelCreating;

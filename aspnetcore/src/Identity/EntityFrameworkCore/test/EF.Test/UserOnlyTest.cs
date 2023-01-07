@@ -17,7 +17,8 @@ public class UserOnlyTest : IClassFixture<ScratchDatabaseFixture>
 
     public class TestUserDbContext : IdentityUserContext<IdentityUser>
     {
-        public TestUserDbContext(DbContextOptions options) : base(options) { }
+        public TestUserDbContext(DbContextOptions options)
+            : base(options) { }
     }
 
     public UserOnlyTest(ScratchDatabaseFixture fixture)

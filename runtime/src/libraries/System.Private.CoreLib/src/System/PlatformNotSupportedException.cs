@@ -20,12 +20,14 @@ namespace System
     )]
     public class PlatformNotSupportedException : NotSupportedException
     {
-        public PlatformNotSupportedException() : base(SR.Arg_PlatformNotSupported)
+        public PlatformNotSupportedException()
+            : base(SR.Arg_PlatformNotSupported)
         {
             HResult = HResults.COR_E_PLATFORMNOTSUPPORTED;
         }
 
-        public PlatformNotSupportedException(string? message) : base(message)
+        public PlatformNotSupportedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_PLATFORMNOTSUPPORTED;
         }

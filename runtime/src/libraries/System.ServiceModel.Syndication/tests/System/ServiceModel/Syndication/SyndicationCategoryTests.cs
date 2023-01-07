@@ -227,9 +227,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         private class SyndicationCategorySubclass : SyndicationCategory
         {
-            public SyndicationCategorySubclass() : base() { }
+            public SyndicationCategorySubclass()
+                : base() { }
 
-            public SyndicationCategorySubclass(SyndicationCategory source) : base(source) { }
+            public SyndicationCategorySubclass(SyndicationCategory source)
+                : base(source) { }
 
             public bool TryParseAttributeEntryPoint(
                 string name,

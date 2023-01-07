@@ -17,7 +17,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateAttribute(ITestOutputHelper output) : base(output)
+        public TCValidateAttribute(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);
@@ -219,7 +220,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
 
     public class TCGetUnspecifiedDefaultAttributes : CXmlSchemaValidatorTestCase
     {
-        public TCGetUnspecifiedDefaultAttributes(ITestOutputHelper output) : base(output) { }
+        public TCGetUnspecifiedDefaultAttributes(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void PassNull__Invalid()
@@ -382,7 +384,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private ITestOutputHelper _output;
         private ExceptionVerifier _exVerifier;
 
-        public TCValidateEndOfAttributes(ITestOutputHelper output) : base(output)
+        public TCValidateEndOfAttributes(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             _exVerifier = new ExceptionVerifier("System.Xml", _output);

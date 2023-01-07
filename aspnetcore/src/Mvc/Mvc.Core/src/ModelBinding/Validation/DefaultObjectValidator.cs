@@ -24,7 +24,8 @@ internal class DefaultObjectValidator : ObjectModelValidator
         IModelMetadataProvider modelMetadataProvider,
         IList<IModelValidatorProvider> validatorProviders,
         MvcOptions mvcOptions
-    ) : base(modelMetadataProvider, validatorProviders)
+    )
+        : base(modelMetadataProvider, validatorProviders)
     {
         _mvcOptions = mvcOptions;
     }

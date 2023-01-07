@@ -12,7 +12,8 @@ namespace System.CommandLine.Generator.Invocations
             IMethodSymbol constructor,
             ReturnPattern returnPattern,
             ITypeSymbol delegateType
-        ) : base(delegateType, returnPattern, 1)
+        )
+            : base(delegateType, returnPattern, 1)
         {
             Constructor = constructor;
         }

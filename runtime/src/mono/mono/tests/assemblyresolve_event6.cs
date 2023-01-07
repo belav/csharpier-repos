@@ -24,7 +24,8 @@ public class App
 
     public class MyExn : Exception
     {
-        public MyExn() : base("MyReflectionResolveEventHandler threw") { }
+        public MyExn()
+            : base("MyReflectionResolveEventHandler threw") { }
     }
 
     public class Work : MarshalByRefObject

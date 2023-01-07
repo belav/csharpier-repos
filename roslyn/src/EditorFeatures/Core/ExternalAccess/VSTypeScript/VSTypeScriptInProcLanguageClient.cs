@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             IGlobalOptionService globalOptions,
             ILspServiceLoggerFactory lspLoggerFactory,
             IThreadingContext threadingContext
-        ) : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
+        )
+            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
         {
             _typeScriptCapabilitiesProvider = typeScriptCapabilitiesProvider;
         }

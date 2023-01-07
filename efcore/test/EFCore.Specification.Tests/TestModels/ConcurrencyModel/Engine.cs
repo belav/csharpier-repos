@@ -7,7 +7,8 @@ public class Engine
 {
     public class EngineProxy : Engine, IF1Proxy
     {
-        public EngineProxy(ILazyLoader loader, int id, string name) : base(loader, id, name) { }
+        public EngineProxy(ILazyLoader loader, int id, string name)
+            : base(loader, id, name) { }
 
         public bool CreatedCalled { get; set; }
         public bool InitializingCalled { get; set; }

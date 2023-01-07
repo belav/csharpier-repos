@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.PatternMatching
                 char[] containerSplitCharacters,
                 CultureInfo culture,
                 bool allowFuzzyMatching = false
-            ) : base(false, culture, allowFuzzyMatching)
+            )
+                : base(false, culture, allowFuzzyMatching)
             {
                 _containerSplitCharacters = containerSplitCharacters;
 

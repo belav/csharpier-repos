@@ -350,7 +350,8 @@ namespace System.ComponentModel.Composition
         public ExportFactory(
             System.Func<System.Tuple<T, System.Action>> exportLifetimeContextCreator,
             TMetadata metadata
-        ) : base(default(System.Func<System.Tuple<T, System.Action>>)) { }
+        )
+            : base(default(System.Func<System.Tuple<T, System.Action>>)) { }
 
         public TMetadata Metadata
         {

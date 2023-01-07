@@ -27,7 +27,8 @@ public class GuidToBytesConverter : ValueConverter<Guid, byte[]>
     ///         See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public GuidToBytesConverter() : this(null) { }
+    public GuidToBytesConverter()
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.

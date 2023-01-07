@@ -8940,10 +8940,11 @@ namespace System.Xml.Xsl
 
     public abstract partial class XsltContext : System.Xml.XmlNamespaceManager
     {
-        protected XsltContext() : base(default(System.Xml.XmlNameTable)) { }
+        protected XsltContext()
+            : base(default(System.Xml.XmlNameTable)) { }
 
-        protected XsltContext(System.Xml.NameTable table) : base(default(System.Xml.XmlNameTable))
-        { }
+        protected XsltContext(System.Xml.NameTable table)
+            : base(default(System.Xml.XmlNameTable)) { }
 
         public abstract bool Whitespace { get; }
         public abstract int CompareDocument(string baseUri, string nextbaseUri);

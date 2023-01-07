@@ -36,7 +36,8 @@ namespace System.Transactions
     [UnsupportedOSPlatform("browser")]
     public sealed class TransactionScope : IDisposable
     {
-        public TransactionScope() : this(TransactionScopeOption.Required) { }
+        public TransactionScope()
+            : this(TransactionScopeOption.Required) { }
 
         public TransactionScope(TransactionScopeOption scopeOption)
             : this(scopeOption, TransactionScopeAsyncFlowOption.Suppress) { }
@@ -182,7 +183,8 @@ namespace System.Transactions
         public TransactionScope(
             TransactionScopeOption scopeOption,
             TransactionOptions transactionOptions
-        ) : this(scopeOption, transactionOptions, TransactionScopeAsyncFlowOption.Suppress) { }
+        )
+            : this(scopeOption, transactionOptions, TransactionScopeAsyncFlowOption.Suppress) { }
 
         public TransactionScope(
             TransactionScopeOption scopeOption,

@@ -249,7 +249,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ModuleSymbol containingModule,
             NamedTypeSymbol baseType
-        ) : base(name, containingNamespace, containingModule, baseType)
+        )
+            : base(name, containingNamespace, containingModule, baseType)
         {
             _constructors = ImmutableArray.Create<MethodSymbol>(
                 new SynthesizedEmbeddedAttributeConstructorSymbol(
@@ -270,7 +271,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal SynthesizedEmbeddedAttributeConstructorSymbol(
             NamedTypeSymbol containingType,
             Func<MethodSymbol, ImmutableArray<ParameterSymbol>> getParameters
-        ) : base(containingType)
+        )
+            : base(containingType)
         {
             _parameters = getParameters(this);
         }

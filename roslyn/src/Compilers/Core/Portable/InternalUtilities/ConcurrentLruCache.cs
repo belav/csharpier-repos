@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.InternalUtilities
         /// cache. If any duplicate keys are found in the array a
         /// <see cref="ArgumentException"/> will be thrown.
         /// </summary>
-        public ConcurrentLruCache(KeyValuePair<K, V>[] array) : this(array.Length)
+        public ConcurrentLruCache(KeyValuePair<K, V>[] array)
+            : this(array.Length)
         {
             foreach (var kvp in array)
             {

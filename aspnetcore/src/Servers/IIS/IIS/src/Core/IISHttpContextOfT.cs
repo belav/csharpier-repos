@@ -22,7 +22,8 @@ internal sealed class IISHttpContextOfT<TContext> : IISHttpContext where TContex
         IISHttpServer server,
         ILogger logger,
         bool useLatin1
-    ) : base(memoryPool, pInProcessHandler, options, server, logger, useLatin1)
+    )
+        : base(memoryPool, pInProcessHandler, options, server, logger, useLatin1)
     {
         _application = application;
     }

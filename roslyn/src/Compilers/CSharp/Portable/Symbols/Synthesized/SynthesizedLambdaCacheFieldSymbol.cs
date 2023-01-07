@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol topLevelMethod,
             bool isReadOnly,
             bool isStatic
-        ) : base(containingType, name, isPublic: true, isReadOnly: isReadOnly, isStatic: isStatic)
+        )
+            : base(containingType, name, isPublic: true, isReadOnly: isReadOnly, isStatic: isStatic)
         {
             Debug.Assert((object)type != null);
             Debug.Assert((object)topLevelMethod != null);

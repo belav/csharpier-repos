@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal override SyntaxNode ScopeDesignator { get; }
 
-        internal ExpressionVariableBinder(SyntaxNode scopeDesignator, Binder next) : base(next)
+        internal ExpressionVariableBinder(SyntaxNode scopeDesignator, Binder next)
+            : base(next)
         {
             this.ScopeDesignator = scopeDesignator;
         }

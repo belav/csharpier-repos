@@ -20,6 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Commanding.Commands
         public SortAndRemoveUnnecessaryImportsCommandArgs(
             ITextView textView,
             ITextBuffer subjectBuffer
-        ) : base(textView, subjectBuffer) { }
+        )
+            : base(textView, subjectBuffer) { }
     }
 }

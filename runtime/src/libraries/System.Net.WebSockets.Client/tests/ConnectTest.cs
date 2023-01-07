@@ -15,7 +15,8 @@ namespace System.Net.WebSockets.Client.Tests
 {
     public sealed class InvokerConnectTest : ConnectTest
     {
-        public InvokerConnectTest(ITestOutputHelper output) : base(output) { }
+        public InvokerConnectTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseCustomInvoker => true;
 
@@ -125,14 +126,16 @@ namespace System.Net.WebSockets.Client.Tests
 
     public sealed class HttpClientConnectTest : ConnectTest
     {
-        public HttpClientConnectTest(ITestOutputHelper output) : base(output) { }
+        public HttpClientConnectTest(ITestOutputHelper output)
+            : base(output) { }
 
         protected override bool UseHttpClient => true;
     }
 
     public class ConnectTest : ClientWebSocketTestBase
     {
-        public ConnectTest(ITestOutputHelper output) : base(output) { }
+        public ConnectTest(ITestOutputHelper output)
+            : base(output) { }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/1895")]
         [OuterLoop(

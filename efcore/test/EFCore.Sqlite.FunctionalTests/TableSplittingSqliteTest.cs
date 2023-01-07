@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class TableSplittingSqliteTest : TableSplittingTestBase
 {
-    public TableSplittingSqliteTest(ITestOutputHelper testOutputHelper) : base(testOutputHelper) { }
+    public TableSplittingSqliteTest(ITestOutputHelper testOutputHelper)
+        : base(testOutputHelper) { }
 
     public override async Task ExecuteUpdate_works_for_table_sharing(bool async)
     {

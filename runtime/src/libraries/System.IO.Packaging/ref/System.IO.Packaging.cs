@@ -499,7 +499,8 @@ namespace System.IO.Packaging
 
     public sealed partial class ZipPackage : System.IO.Packaging.Package
     {
-        internal ZipPackage() : base(default(System.IO.FileAccess)) { }
+        internal ZipPackage()
+            : base(default(System.IO.FileAccess)) { }
 
         protected override System.IO.Packaging.PackagePart CreatePartCore(
             System.Uri partUri,
@@ -529,8 +530,8 @@ namespace System.IO.Packaging
 
     public sealed partial class ZipPackagePart : System.IO.Packaging.PackagePart
     {
-        internal ZipPackagePart() : base(default(System.IO.Packaging.Package), default(System.Uri))
-        { }
+        internal ZipPackagePart()
+            : base(default(System.IO.Packaging.Package), default(System.Uri)) { }
 
         protected override System.IO.Stream? GetStreamCore(
             System.IO.FileMode streamFileMode,

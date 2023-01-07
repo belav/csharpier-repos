@@ -31,7 +31,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of an inlined sum associative operator.
         //
 
-        internal InlinedAggregationOperator(IEnumerable<TSource> child) : base(child)
+        internal InlinedAggregationOperator(IEnumerable<TSource> child)
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
         }

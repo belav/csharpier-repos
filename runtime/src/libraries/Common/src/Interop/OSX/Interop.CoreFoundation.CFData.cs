@@ -90,9 +90,11 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCFDataHandle : SafeHandle
     {
-        public SafeCFDataHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeCFDataHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
-        internal SafeCFDataHandle(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle) { }
+        internal SafeCFDataHandle(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {

@@ -578,7 +578,8 @@ namespace System.Net.Security.Tests
 
         private sealed class ThrowingDelegatingStream : PreReadWriteActionDelegatingStream
         {
-            public ThrowingDelegatingStream(Stream stream) : base(stream)
+            public ThrowingDelegatingStream(Stream stream)
+                : base(stream)
             {
                 PreReadWriteAction = () =>
                 {

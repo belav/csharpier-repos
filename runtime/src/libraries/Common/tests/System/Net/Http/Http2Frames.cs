@@ -166,7 +166,8 @@ namespace System.Net.Test.Common
             int streamDependency,
             byte weight,
             int streamId
-        ) : base(0, FrameType.Headers, flags, streamId)
+        )
+            : base(0, FrameType.Headers, flags, streamId)
         {
             Length = data.Length + (PaddedFlag ? padLength + 1 : 0) + (PriorityFlag ? 5 : 0);
 
@@ -248,7 +249,8 @@ namespace System.Net.Test.Common
             int streamDependency,
             byte weight,
             int streamId
-        ) : base(0, FrameType.Continuation, flags, streamId)
+        )
+            : base(0, FrameType.Continuation, flags, streamId)
         {
             Length = data.Length + (PaddedFlag ? padLength + 1 : 0) + (PriorityFlag ? 5 : 0);
 
@@ -486,7 +488,8 @@ namespace System.Net.Test.Common
             Entries = new List<SettingsEntry>(entries);
         }
 
-        public SettingsFrame(params SettingsEntry[] entries) : this(FrameFlags.None, entries) { }
+        public SettingsFrame(params SettingsEntry[] entries)
+            : this(FrameFlags.None, entries) { }
 
         public static SettingsFrame ReadFrom(Frame header, ReadOnlySpan<byte> buffer)
         {
@@ -552,7 +555,8 @@ namespace System.Net.Test.Common
             int errorCode,
             byte[] additionalDebugData,
             int streamId
-        ) : base(additionalDebugData.Length + 8, FrameType.GoAway, FrameFlags.None, streamId)
+        )
+            : base(additionalDebugData.Length + 8, FrameType.GoAway, FrameFlags.None, streamId)
         {
             LastStreamId = lastStreamId;
             ErrorCode = errorCode;

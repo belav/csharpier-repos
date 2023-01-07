@@ -412,7 +412,8 @@ public class ApiBehaviorTestNewtonsoftJson
 {
     public ApiBehaviorTestNewtonsoftJson(
         MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         var factory = fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         CustomInvalidModelStateClient = factory.CreateDefaultClient();

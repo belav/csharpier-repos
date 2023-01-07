@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ITypeSymbol? type,
             ConstantValue? constantValue,
             bool isImplicit
-        ) : base(semanticModel, syntax, isImplicit)
+        )
+            : base(semanticModel, syntax, isImplicit)
         {
             Children = SetParentOperation(children, this);
             Type = type;
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ITypeSymbol? type,
             ConstantValue? constantValue,
             bool isImplicit
-        ) : base(semanticModel, syntax, isImplicit)
+        )
+            : base(semanticModel, syntax, isImplicit)
         {
             // we don't allow null children.
             Debug.Assert(children.All(o => o != null));
@@ -190,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Operations
             in ControlFlowGraphBuilder.Context context,
             IAnonymousFunctionOperation original,
             bool isImplicit
-        ) : base(semanticModel: null, original.Syntax, isImplicit)
+        )
+            : base(semanticModel: null, original.Syntax, isImplicit)
         {
             Context = context;
             Original = original;
@@ -292,7 +295,8 @@ namespace Microsoft.CodeAnalysis.Operations
             SyntaxNode syntax,
             ITypeSymbol? type,
             bool isImplicit
-        ) : base(semanticModel, syntax, isImplicit)
+        )
+            : base(semanticModel, syntax, isImplicit)
         {
             Arguments = SetParentOperation(arguments, this);
             ArgumentNames = argumentNames;
@@ -889,7 +893,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ILocalSymbol local,
             SyntaxNode syntax,
             ITypeSymbol type
-        ) : this(local, semanticModel: null, syntax, type, isImplicit: true) { }
+        )
+            : this(local, semanticModel: null, syntax, type, isImplicit: true) { }
     }
 
     internal sealed partial class BlockOperation
@@ -909,7 +914,8 @@ namespace Microsoft.CodeAnalysis.Operations
             ImmutableArray<IOperation> statements,
             SemanticModel semanticModel,
             SyntaxNode syntax
-        ) : base(semanticModel, syntax, isImplicit: true)
+        )
+            : base(semanticModel, syntax, isImplicit: true)
         {
             // Intentionally skipping SetParentOperation: this is used by CreateTemporaryBlock for the purposes of the
             // control flow factory, to temporarily create a new block for use in emulating the "block" a using variable

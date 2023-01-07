@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             FileLinePositionSpan span,
             IPeekRelationship relationship,
             IPeekResultFactory peekResultFactory
-        ) : base(peekResultFactory)
+        )
+            : base(peekResultFactory)
         {
             _span = span;
             _relationship = relationship;

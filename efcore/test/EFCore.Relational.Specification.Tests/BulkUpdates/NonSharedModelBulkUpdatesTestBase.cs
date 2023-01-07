@@ -64,7 +64,8 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
 
     protected class Context28671 : DbContext
     {
-        public Context28671(DbContextOptions options) : base(options) { }
+        public Context28671(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -138,7 +139,8 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
 
     protected class Context28745 : DbContext
     {
-        public Context28745(DbContextOptions options) : base(options) { }
+        public Context28745(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Blog> Blogs => Set<Blog>();
 

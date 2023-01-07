@@ -12,7 +12,8 @@ namespace Internal.CommandLine
             IEnumerable<string> names,
             IReadOnlyList<T> defaultValue,
             bool isRequired
-        ) : base(command, names, true, isRequired)
+        )
+            : base(command, names, true, isRequired)
         {
             Value = defaultValue;
             DefaultValue = defaultValue;

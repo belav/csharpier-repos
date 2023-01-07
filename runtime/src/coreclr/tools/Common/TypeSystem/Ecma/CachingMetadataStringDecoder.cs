@@ -33,7 +33,8 @@ namespace Internal.TypeSystem.Ecma
         // The next candidate in the bucket range for eviction
         private int _evictionHint;
 
-        public CachingMetadataStringDecoder(int size) : base(System.Text.Encoding.UTF8)
+        public CachingMetadataStringDecoder(int size)
+            : base(System.Text.Encoding.UTF8)
         {
             Debug.Assert((size & (size - 1)) == 0, "The cache size must be power of 2");
 

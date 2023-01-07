@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 public AsyncDocumentWorkItemQueue(
                     SolutionCrawlerProgressReporter progressReporter,
                     Workspace workspace
-                ) : base(progressReporter, workspace) { }
+                )
+                    : base(progressReporter, workspace) { }
 
                 protected override int WorkItemCount_NoLock => _documentWorkQueue.Count;
 

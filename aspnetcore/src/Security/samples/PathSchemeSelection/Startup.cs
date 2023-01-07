@@ -57,7 +57,8 @@ public class Startup
             ILoggerFactory logger,
             UrlEncoder encoder,
             ISystemClock clock
-        ) : base(options, logger, encoder, clock)
+        )
+            : base(options, logger, encoder, clock)
         {
             var id = new ClaimsIdentity("Api");
             id.AddClaim(new Claim(ClaimTypes.Name, "Hao", ClaimValueTypes.String, "Api"));

@@ -12,7 +12,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract partial class RoGenericParameterType : RoType
     {
-        protected RoGenericParameterType() : base() { }
+        protected RoGenericParameterType()
+            : base() { }
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;

@@ -9,7 +9,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         private Uri _baseUri;
         private string _relativeUri;
 
-        internal CalledResolveUriEventArgs(Uri baseUri, string relativeUri) : base()
+        internal CalledResolveUriEventArgs(Uri baseUri, string relativeUri)
+            : base()
         {
             _baseUri = baseUri;
             _relativeUri = relativeUri;
@@ -79,7 +80,8 @@ namespace System.Xml.XmlSchemaValidatorApiTests
         // -----------------
         // Constructors
         // -----------------
-        public CXmlTestResolver() : base()
+        public CXmlTestResolver()
+            : base()
         {
             _resolver = new XmlUrlResolver();
         }

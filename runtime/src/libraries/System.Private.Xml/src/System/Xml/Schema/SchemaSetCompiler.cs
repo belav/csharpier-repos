@@ -33,7 +33,8 @@ namespace System.Xml.Schema
             ValidationEventHandler? eventHandler,
             XmlSchema? schemaForSchema,
             XmlSchemaCompilationSettings? compilationSettings
-        ) : base(nameTable, null, eventHandler, compilationSettings)
+        )
+            : base(nameTable, null, eventHandler, compilationSettings)
         {
             _schemaForSchema = schemaForSchema;
         }

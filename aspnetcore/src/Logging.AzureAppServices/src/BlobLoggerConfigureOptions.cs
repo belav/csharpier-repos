@@ -19,7 +19,8 @@ internal sealed class BlobLoggerConfigureOptions
         IConfiguration configuration,
         IWebAppContext context,
         Action<AzureBlobLoggerOptions> configureOptions
-    ) : base(configuration, "AzureBlobEnabled")
+    )
+        : base(configuration, "AzureBlobEnabled")
     {
         _configuration = configuration;
         _context = context;

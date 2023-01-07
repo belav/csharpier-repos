@@ -108,7 +108,8 @@ namespace SerializationTestTypes
             set { data3 = value; }
         }
 
-        public DerivedDC(bool init) : base(init)
+        public DerivedDC(bool init)
+            : base(init)
         {
             data0 = "TestString0";
             data1 = "TestString1";
@@ -143,7 +144,8 @@ namespace SerializationTestTypes
             set { data3 = value; }
         }
 
-        public DerivedSerializable(bool init) : base(init)
+        public DerivedSerializable(bool init)
+            : base(init)
         {
             data0 = "TestString0";
             data1 = "TestString1";
@@ -197,7 +199,8 @@ namespace SerializationTestTypes
             set { data4 = value; }
         }
 
-        public Derived2DC(bool init) : base(init)
+        public Derived2DC(bool init)
+            : base(init)
         {
             data11 = "TestString11";
             data12 = "TestString12";
@@ -350,7 +353,8 @@ namespace SerializationTestTypes
             set { data4 = value; }
         }
 
-        public Derived2Serializable(bool init) : base(init)
+        public Derived2Serializable(bool init)
+            : base(init)
         {
             data00 = "TestString00";
             data122 = "TestString122";
@@ -390,7 +394,8 @@ namespace SerializationTestTypes
             set { data4 = value; }
         }
 
-        public Derived2SerializablePositive(bool init) : base(init)
+        public Derived2SerializablePositive(bool init)
+            : base(init)
         {
             data00 = "TestString00";
             data122 = "TestString122";
@@ -403,7 +408,8 @@ namespace SerializationTestTypes
     {
         public Derived2Derived2Serializable() { }
 
-        public Derived2Derived2Serializable(bool init) : base(init) { }
+        public Derived2Derived2Serializable(bool init)
+            : base(init) { }
     }
 
     [DataContract(IsReference = false)]
@@ -411,7 +417,8 @@ namespace SerializationTestTypes
     {
         public Derived3Derived2Serializable() { }
 
-        public Derived3Derived2Serializable(bool init) : base(init) { }
+        public Derived3Derived2Serializable(bool init)
+            : base(init) { }
     }
 
     public class Derived31Derived2SerializablePOCO : Derived2Serializable
@@ -421,7 +428,8 @@ namespace SerializationTestTypes
 
         public Derived31Derived2SerializablePOCO() { }
 
-        public Derived31Derived2SerializablePOCO(bool init) : base(init)
+        public Derived31Derived2SerializablePOCO(bool init)
+            : base(init)
         {
             SimpleDCWithRefData = new SimpleDCWithRef(true);
             RefData = SimpleDCWithRefData;
@@ -433,7 +441,8 @@ namespace SerializationTestTypes
     {
         public Derived4Derived2Serializable() { }
 
-        public Derived4Derived2Serializable(bool init) : base(init) { }
+        public Derived4Derived2Serializable(bool init)
+            : base(init) { }
     }
 
     [Serializable]
@@ -441,7 +450,8 @@ namespace SerializationTestTypes
     {
         public Derived5Derived2Serializable() { }
 
-        public Derived5Derived2Serializable(bool init) : base(init) { }
+        public Derived5Derived2Serializable(bool init)
+            : base(init) { }
     }
 
     public class Derived6Derived2SerializablePOCO : Derived3Derived2Serializable
@@ -451,7 +461,8 @@ namespace SerializationTestTypes
 
         public Derived6Derived2SerializablePOCO() { }
 
-        public Derived6Derived2SerializablePOCO(bool init) : base(init)
+        public Derived6Derived2SerializablePOCO(bool init)
+            : base(init)
         {
             SimpleDCWithRefData = new SimpleDCWithRef(true);
             RefData = SimpleDCWithRefData;

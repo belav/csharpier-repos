@@ -15,7 +15,8 @@ namespace System.Xml.Tests
 
         private CDataReader _rReader;
 
-        public CDataReaderTestCase() : base()
+        public CDataReaderTestCase()
+            : base()
         {
             _rReader = new CDataReader(null, 0, null);
         }

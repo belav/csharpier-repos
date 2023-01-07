@@ -25,7 +25,8 @@ public class TypeMappedRelationalParameter : RelationalParameterBase
         RelationalTypeMapping relationalTypeMapping,
         bool? nullable,
         ParameterDirection direction = ParameterDirection.Input
-    ) : base(invariantName)
+    )
+        : base(invariantName)
     {
         Name = name;
         RelationalTypeMapping = relationalTypeMapping;

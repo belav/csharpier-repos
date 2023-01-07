@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class PropertyValuesSqliteTest
     : PropertyValuesTestBase<PropertyValuesSqliteTest.PropertyValuesSqliteFixture>
 {
-    public PropertyValuesSqliteTest(PropertyValuesSqliteFixture fixture) : base(fixture) { }
+    public PropertyValuesSqliteTest(PropertyValuesSqliteFixture fixture)
+        : base(fixture) { }
 
     public class PropertyValuesSqliteFixture : PropertyValuesFixtureBase
     {

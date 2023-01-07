@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Logging.Test
     {
         private Func<string> _json;
 
-        public TestConfiguration(JsonConfigurationSource source, Func<string> json) : base(source)
+        public TestConfiguration(JsonConfigurationSource source, Func<string> json)
+            : base(source)
         {
             _json = json;
         }

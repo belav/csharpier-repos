@@ -25,7 +25,8 @@ namespace ILCompiler
             PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration,
             IEnumerable<DefType> typesWithStructMarshalling,
             IEnumerable<DefType> typesWithDelegateMarshalling
-        ) : base(interopStateManager, pInvokeILEmitterConfiguration)
+        )
+            : base(interopStateManager, pInvokeILEmitterConfiguration)
         {
             _typesWithStructMarshalling = typesWithStructMarshalling;
             _typesWithDelegateMarshalling = typesWithDelegateMarshalling;

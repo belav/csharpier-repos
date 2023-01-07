@@ -1030,7 +1030,8 @@ namespace System.Reflection.Emit
 
     internal sealed class Int32Stack : List<int>
     {
-        public Int32Stack(int initialCapacity) : base(initialCapacity) { }
+        public Int32Stack(int initialCapacity)
+            : base(initialCapacity) { }
 
         public int Peek()
         {

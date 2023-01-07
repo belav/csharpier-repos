@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             string fileName,
             IVsTextLines textBuffer,
             Workspace workspace
-        ) : base(null)
+        )
+            : base(null)
         {
             _vsEditorAdaptersFactoryService = vsEditorAdaptersFactoryService;
             _threadingContext = threadingContext;

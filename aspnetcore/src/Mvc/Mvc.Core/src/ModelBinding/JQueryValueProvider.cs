@@ -29,7 +29,8 @@ public abstract class JQueryValueProvider
         BindingSource bindingSource,
         IDictionary<string, StringValues> values,
         CultureInfo? culture
-    ) : base(bindingSource)
+    )
+        : base(bindingSource)
     {
         if (bindingSource == null)
         {

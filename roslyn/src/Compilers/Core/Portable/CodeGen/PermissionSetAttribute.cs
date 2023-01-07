@@ -227,7 +227,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
     {
         private readonly string _file;
 
-        public PermissionSetFileReadException(string message, string file) : base(message)
+        public PermissionSetFileReadException(string message, string file)
+            : base(message)
         {
             _file = file;
         }

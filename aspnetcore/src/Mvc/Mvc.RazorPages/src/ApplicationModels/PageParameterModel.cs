@@ -37,7 +37,8 @@ public class PageParameterModel : ParameterModelBase, ICommonModel, IBindingMode
     /// Copy constructor.
     /// </summary>
     /// <param name="other">The model to copy.</param>
-    public PageParameterModel(PageParameterModel other) : base(other)
+    public PageParameterModel(PageParameterModel other)
+        : base(other)
     {
         if (other == null)
         {

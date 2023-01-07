@@ -116,7 +116,8 @@ namespace System.Net.Http
         /// </summary>
         public HttpRequestOptions Options => _options ??= new HttpRequestOptions();
 
-        public HttpRequestMessage() : this(HttpMethod.Get, (Uri?)null) { }
+        public HttpRequestMessage()
+            : this(HttpMethod.Get, (Uri?)null) { }
 
         public HttpRequestMessage(HttpMethod method, Uri? requestUri)
         {

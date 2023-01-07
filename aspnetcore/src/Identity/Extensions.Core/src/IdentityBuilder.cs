@@ -35,7 +35,8 @@ public class IdentityBuilder
         Type user,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type role,
         IServiceCollection services
-    ) : this(user, services) => RoleType = role;
+    )
+        : this(user, services) => RoleType = role;
 
     /// <summary>
     /// Gets the <see cref="Type"/> used for users.

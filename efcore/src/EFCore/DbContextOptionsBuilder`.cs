@@ -26,14 +26,16 @@ public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder where T
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder{TContext}" /> class with no options set.
     /// </summary>
-    public DbContextOptionsBuilder() : this(new DbContextOptions<TContext>()) { }
+    public DbContextOptionsBuilder()
+        : this(new DbContextOptions<TContext>()) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder{TContext}" /> class to further configure
     ///     a given <see cref="DbContextOptions" />.
     /// </summary>
     /// <param name="options">The options to be configured.</param>
-    public DbContextOptionsBuilder(DbContextOptions<TContext> options) : base(options) { }
+    public DbContextOptionsBuilder(DbContextOptions<TContext> options)
+        : base(options) { }
 
     /// <summary>
     ///     Gets the options being configured.

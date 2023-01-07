@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
                 IMoveToNamespaceService changeNamespaceService,
                 MoveToNamespaceAnalysisResult analysisResult,
                 CodeCleanupOptionsProvider cleanupOptions
-            ) : base(changeNamespaceService, analysisResult, cleanupOptions) { }
+            )
+                : base(changeNamespaceService, analysisResult, cleanupOptions) { }
         }
     }
 }

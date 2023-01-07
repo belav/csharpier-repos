@@ -269,14 +269,16 @@ namespace System.DirectoryServices.AccountManagement
     {
         public ComputerPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        )
+            : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
 
         public ComputerPrincipal(
             System.DirectoryServices.AccountManagement.PrincipalContext context,
             string samAccountName,
             string password,
             bool enabled
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        )
+            : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
 
         public System.DirectoryServices.AccountManagement.PrincipalValueCollection<string> ServicePrincipalNames
         {
@@ -1332,7 +1334,8 @@ namespace System.DirectoryServices.AccountManagement
             string samAccountName,
             string password,
             bool enabled
-        ) : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
+        )
+            : base(default(System.DirectoryServices.AccountManagement.PrincipalContext)) { }
 
         public override System.DirectoryServices.AccountManagement.AdvancedFilters AdvancedSearchFilter
         {

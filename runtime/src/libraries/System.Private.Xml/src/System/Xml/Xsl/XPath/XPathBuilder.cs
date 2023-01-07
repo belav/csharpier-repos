@@ -1195,7 +1195,8 @@ namespace System.Xml.Xsl.XPath
                 QilNode fixupCurrent,
                 QilNode fixupPosition,
                 QilNode fixupLast
-            ) : base(f.BaseFactory)
+            )
+                : base(f.BaseFactory)
             {
                 this.f = f;
                 _fixupCurrent = fixupCurrent;

@@ -25,7 +25,8 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a new (empty) QilList
         /// </summary>
-        public QilList(QilNodeType nodeType) : base(nodeType)
+        public QilList(QilNodeType nodeType)
+            : base(nodeType)
         {
             _members = new QilNode[4];
             this.xmlType = null;

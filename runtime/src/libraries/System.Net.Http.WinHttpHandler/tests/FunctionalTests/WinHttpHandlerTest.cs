@@ -333,7 +333,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 
             public Task WaitRead => _waitReadSource.Task;
 
-            public DelayedStream(byte[] buffer, Task delayTask) : base(buffer)
+            public DelayedStream(byte[] buffer, Task delayTask)
+                : base(buffer)
             {
                 _delayTask = delayTask;
             }

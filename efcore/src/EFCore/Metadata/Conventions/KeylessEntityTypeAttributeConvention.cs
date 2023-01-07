@@ -18,7 +18,8 @@ public class KeylessEntityTypeAttributeConvention
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public KeylessEntityTypeAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies
-    ) : base(dependencies) { }
+    )
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an entity type is added to the model if it has an attribute.

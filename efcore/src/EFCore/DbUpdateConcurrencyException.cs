@@ -26,7 +26,8 @@ public class DbUpdateConcurrencyException : DbUpdateException
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
-    public DbUpdateConcurrencyException(string message) : base(message) { }
+    public DbUpdateConcurrencyException(string message)
+        : base(message) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.
@@ -46,7 +47,8 @@ public class DbUpdateConcurrencyException : DbUpdateException
         string message,
         Exception? innerException,
         IReadOnlyList<IUpdateEntry> entries
-    ) : base(message, innerException, entries) { }
+    )
+        : base(message, innerException, entries) { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbUpdateConcurrencyException" /> class.

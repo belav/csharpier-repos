@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
         /// </summary>
         private class SolutionAccessor : Accessor<string, string, string>
         {
-            public SolutionAccessor(SQLitePersistentStorage storage) : base(storage) { }
+            public SolutionAccessor(SQLitePersistentStorage storage)
+                : base(storage) { }
 
             protected override Table Table => Table.Solution;
 

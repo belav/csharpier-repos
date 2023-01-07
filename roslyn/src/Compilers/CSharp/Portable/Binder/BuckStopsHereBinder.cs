@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal BuckStopsHereBinder(
             CSharpCompilation compilation,
             FileIdentifier? associatedFileIdentifier
-        ) : base(compilation)
+        )
+            : base(compilation)
         {
             this.AssociatedFileIdentifier = associatedFileIdentifier;
         }

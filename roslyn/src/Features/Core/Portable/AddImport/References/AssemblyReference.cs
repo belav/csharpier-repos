@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
                 SearchResult searchResult,
                 ReferenceAssemblyWithTypeResult referenceAssemblyWithType
-            ) : base(provider, searchResult)
+            )
+                : base(provider, searchResult)
             {
                 _referenceAssemblyWithType = referenceAssemblyWithType;
             }

@@ -613,7 +613,8 @@ namespace Microsoft.Extensions.Http
                 ILoggerFactory loggerFactory,
                 IOptionsMonitor<HttpClientFactoryOptions> optionsMonitor,
                 IEnumerable<IHttpMessageHandlerBuilderFilter> filters
-            ) : base(services, scopeFactory, loggerFactory, optionsMonitor, filters)
+            )
+                : base(services, scopeFactory, loggerFactory, optionsMonitor, filters)
             {
                 ActiveEntryState =
                     new Dictionary<

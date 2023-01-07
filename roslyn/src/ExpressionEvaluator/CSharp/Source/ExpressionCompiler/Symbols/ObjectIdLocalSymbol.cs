@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string name,
             string displayName,
             bool isWritable
-        ) : base(method, name, displayName, type)
+        )
+            : base(method, name, displayName, type)
         {
             _isWritable = isWritable;
         }

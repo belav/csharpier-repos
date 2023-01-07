@@ -111,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             CSharpParseOptions options,
             bool allowPreprocessorDirectives = true,
             bool interpolationFollowedByColon = false
-        ) : base(text)
+        )
+            : base(text)
         {
             Debug.Assert(options != null);
 

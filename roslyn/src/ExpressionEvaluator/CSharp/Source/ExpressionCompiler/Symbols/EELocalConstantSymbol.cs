@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             string name,
             TypeSymbol type,
             ConstantValue value
-        ) : this(method, name, TypeWithAnnotations.Create(type), value) { }
+        )
+            : this(method, name, TypeWithAnnotations.Create(type), value) { }
 
         public EELocalConstantSymbol(
             MethodSymbol method,

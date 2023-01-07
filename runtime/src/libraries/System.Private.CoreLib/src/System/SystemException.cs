@@ -11,12 +11,14 @@ namespace System
     )]
     public class SystemException : Exception
     {
-        public SystemException() : base(SR.Arg_SystemException)
+        public SystemException()
+            : base(SR.Arg_SystemException)
         {
             HResult = HResults.COR_E_SYSTEM;
         }
 
-        public SystemException(string? message) : base(message)
+        public SystemException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_SYSTEM;
         }

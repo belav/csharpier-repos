@@ -30,7 +30,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             "31bf3856ad364e35"
         };
 
-        public WebProjectSystem(string root) : base(root) { }
+        public WebProjectSystem(string root)
+            : base(root) { }
 
         public string ProjectName
         {

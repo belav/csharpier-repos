@@ -54,14 +54,16 @@ namespace System.Text
             DiagnosticId = Obsoletions.SystemTextEncodingUTF7DiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public UTF7Encoding() : this(false) { }
+        public UTF7Encoding()
+            : this(false) { }
 
         [Obsolete(
             Obsoletions.SystemTextEncodingUTF7Message,
             DiagnosticId = Obsoletions.SystemTextEncodingUTF7DiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        public UTF7Encoding(bool allowOptionals) : base(UTF7_CODEPAGE) // Set the data item.
+        public UTF7Encoding(bool allowOptionals)
+            : base(UTF7_CODEPAGE) // Set the data item.
         {
             // Allowing optionals?
             _allowOptionals = allowOptionals;
@@ -865,7 +867,8 @@ namespace System.Text
             /*private*/
             internal bool firstByte;
 
-            public Decoder(UTF7Encoding encoding) : base(encoding)
+            public Decoder(UTF7Encoding encoding)
+                : base(encoding)
             {
                 // base calls reset
             }
@@ -895,7 +898,8 @@ namespace System.Text
             /*private*/
             internal int bitCount;
 
-            public Encoder(UTF7Encoding encoding) : base(encoding)
+            public Encoder(UTF7Encoding encoding)
+                : base(encoding)
             {
                 // base calls reset
             }

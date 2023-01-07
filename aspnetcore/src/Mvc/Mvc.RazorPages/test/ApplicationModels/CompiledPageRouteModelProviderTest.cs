@@ -577,7 +577,8 @@ public class CompiledPageRouteModelProviderTest
             ApplicationPartManager partManager,
             IOptions<RazorPagesOptions> options,
             ILogger<CompiledPageRouteModelProvider> logger
-        ) : base(partManager, options, logger) { }
+        )
+            : base(partManager, options, logger) { }
 
         public List<CompiledViewDescriptor> Descriptors { get; } =
             new List<CompiledViewDescriptor>();

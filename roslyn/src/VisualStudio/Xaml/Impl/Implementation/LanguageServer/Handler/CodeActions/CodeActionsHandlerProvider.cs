@@ -28,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             IGlobalOptionService globalOptions
-        ) : base(codeFixService, codeRefactoringService, globalOptions) { }
+        )
+            : base(codeFixService, codeRefactoringService, globalOptions) { }
     }
 
     [ExportStatelessXamlLspService(typeof(CodeActionResolveHandler)), Shared]
@@ -40,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             ICodeFixService codeFixService,
             ICodeRefactoringService codeRefactoringService,
             IGlobalOptionService globalOptions
-        ) : base(codeFixService, codeRefactoringService, globalOptions) { }
+        )
+            : base(codeFixService, codeRefactoringService, globalOptions) { }
     }
 
     [ExportStatelessXamlLspService(typeof(RunCodeActionHandler)), Shared]
@@ -53,6 +55,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             ICodeRefactoringService codeRefactoringService,
             IGlobalOptionService globalOptions,
             IThreadingContext threadingContext
-        ) : base(codeFixService, codeRefactoringService, globalOptions, threadingContext) { }
+        )
+            : base(codeFixService, codeRefactoringService, globalOptions, threadingContext) { }
     }
 }

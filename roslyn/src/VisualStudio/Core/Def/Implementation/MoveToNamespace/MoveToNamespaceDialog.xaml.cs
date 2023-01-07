@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveToNamespace
         public string OK => ServicesVSResources.OK;
         public string Cancel => ServicesVSResources.Cancel;
 
-        internal MoveToNamespaceDialog(MoveToNamespaceDialogViewModel viewModel) : base()
+        internal MoveToNamespaceDialog(MoveToNamespaceDialogViewModel viewModel)
+            : base()
         {
             _viewModel = viewModel;
 

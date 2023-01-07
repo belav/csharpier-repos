@@ -8,7 +8,8 @@ public class NorthwindAsTrackingQuerySqlServerTest
 {
     public NorthwindAsTrackingQuerySqlServerTest(
         NorthwindQuerySqlServerFixture<NoopModelCustomizer> fixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

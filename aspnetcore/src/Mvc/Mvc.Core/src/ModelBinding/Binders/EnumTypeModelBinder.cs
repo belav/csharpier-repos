@@ -28,7 +28,8 @@ public class EnumTypeModelBinder : SimpleTypeModelBinder
         bool suppressBindingUndefinedValueToEnumType,
         Type modelType,
         ILoggerFactory loggerFactory
-    ) : base(modelType, loggerFactory) { }
+    )
+        : base(modelType, loggerFactory) { }
 
     /// <inheritdoc/>
     protected override void CheckModel(

@@ -56,7 +56,8 @@ public readonly struct RootComponentMapping
         [DynamicallyAccessedMembers(Component)] Type componentType,
         string selector,
         ParameterView parameters
-    ) : this(componentType, selector)
+    )
+        : this(componentType, selector)
     {
         Parameters = parameters;
     }

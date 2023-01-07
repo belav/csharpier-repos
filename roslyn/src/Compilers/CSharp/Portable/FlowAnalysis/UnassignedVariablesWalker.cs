@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             Symbol member,
             BoundNode node
-        ) : base(compilation, member, node, EmptyStructTypeCache.CreateNeverEmpty()) { }
+        )
+            : base(compilation, member, node, EmptyStructTypeCache.CreateNeverEmpty()) { }
 
         internal static HashSet<Symbol> Analyze(
             CSharpCompilation compilation,

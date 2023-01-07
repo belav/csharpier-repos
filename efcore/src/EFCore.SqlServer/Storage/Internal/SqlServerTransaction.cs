@@ -26,8 +26,15 @@ public class SqlServerTransaction : RelationalTransaction
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
         bool transactionOwned,
         ISqlGenerationHelper sqlGenerationHelper
-    ) : base(connection, transaction, transactionId, logger, transactionOwned, sqlGenerationHelper)
-    { }
+    )
+        : base(
+            connection,
+            transaction,
+            transactionId,
+            logger,
+            transactionOwned,
+            sqlGenerationHelper
+        ) { }
 
     /// <inheritdoc />
     public override bool SupportsSavepoints

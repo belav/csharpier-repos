@@ -456,14 +456,17 @@ namespace System.Xml
 
         // Initializes a new instance of the XmlTextReaderImpl class with the specified stream, baseUri and nametable
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        internal XmlTextReaderImpl(Stream input) : this(string.Empty, input, new NameTable()) { }
+        internal XmlTextReaderImpl(Stream input)
+            : this(string.Empty, input, new NameTable()) { }
 
-        internal XmlTextReaderImpl(Stream input, XmlNameTable nt) : this(string.Empty, input, nt)
-        { }
+        internal XmlTextReaderImpl(Stream input, XmlNameTable nt)
+            : this(string.Empty, input, nt) { }
 
-        internal XmlTextReaderImpl(string url, Stream input) : this(url, input, new NameTable()) { }
+        internal XmlTextReaderImpl(string url, Stream input)
+            : this(url, input, new NameTable()) { }
 
-        internal XmlTextReaderImpl(string? url, Stream input, XmlNameTable nt) : this(nt)
+        internal XmlTextReaderImpl(string? url, Stream input, XmlNameTable nt)
+            : this(nt)
         {
             ConvertAbsoluteUnixPathToAbsoluteUri(ref url, resolver: null);
             _namespaceManager = new XmlNamespaceManager(nt);
@@ -483,16 +486,17 @@ namespace System.Xml
 
         // Initializes a new instance of the XmlTextReaderImpl class with the specified TextReader, baseUri and XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        internal XmlTextReaderImpl(TextReader input) : this(string.Empty, input, new NameTable())
-        { }
+        internal XmlTextReaderImpl(TextReader input)
+            : this(string.Empty, input, new NameTable()) { }
 
         internal XmlTextReaderImpl(TextReader input, XmlNameTable nt)
             : this(string.Empty, input, nt) { }
 
-        internal XmlTextReaderImpl(string url, TextReader input) : this(url, input, new NameTable())
-        { }
+        internal XmlTextReaderImpl(string url, TextReader input)
+            : this(url, input, new NameTable()) { }
 
-        internal XmlTextReaderImpl(string? url, TextReader input, XmlNameTable nt) : this(nt)
+        internal XmlTextReaderImpl(string? url, TextReader input, XmlNameTable nt)
+            : this(nt)
         {
             ConvertAbsoluteUnixPathToAbsoluteUri(ref url, resolver: null);
             _namespaceManager = new XmlNamespaceManager(nt);
@@ -541,7 +545,10 @@ namespace System.Xml
             string xmlFragment,
             XmlNodeType fragType,
             XmlParserContext? context
-        ) : this(null == context || null == context.NameTable ? new NameTable() : context.NameTable)
+        )
+            : this(
+                null == context || null == context.NameTable ? new NameTable() : context.NameTable
+            )
         {
             xmlFragment ??= string.Empty;
 
@@ -579,9 +586,11 @@ namespace System.Xml
 
         // Initializes a new instance of the XmlTextReaderImpl class with the specified url and XmlNameTable.
         // This constructor is used when creating XmlTextReaderImpl for V1 XmlTextReader
-        public XmlTextReaderImpl(string url) : this(url, new NameTable()) { }
+        public XmlTextReaderImpl(string url)
+            : this(url, new NameTable()) { }
 
-        public XmlTextReaderImpl(string url, XmlNameTable nt) : this(nt)
+        public XmlTextReaderImpl(string url, XmlNameTable nt)
+            : this(nt)
         {
             ArgumentException.ThrowIfNullOrEmpty(url);
 
@@ -605,7 +614,8 @@ namespace System.Xml
             XmlReaderSettings settings,
             XmlParserContext? context,
             XmlResolver uriResolver
-        ) : this(settings.GetXmlResolver(), settings, context)
+        )
+            : this(settings.GetXmlResolver(), settings, context)
         {
             Uri baseUri = uriResolver.ResolveUri(null, uriStr);
             string baseUriStr = baseUri.ToString();
@@ -729,7 +739,8 @@ namespace System.Xml
             string? baseUriStr,
             XmlParserContext? context,
             bool closeInput
-        ) : this(settings.GetXmlResolver(), settings, context)
+        )
+            : this(settings.GetXmlResolver(), settings, context)
         {
             ConvertAbsoluteUnixPathToAbsoluteUri(ref baseUriStr, settings.GetXmlResolver());
 
@@ -816,7 +827,8 @@ namespace System.Xml
             XmlReaderSettings settings,
             string baseUriStr,
             XmlParserContext? context
-        ) : this(settings.GetXmlResolver(), settings, context)
+        )
+            : this(settings.GetXmlResolver(), settings, context)
         {
             ConvertAbsoluteUnixPathToAbsoluteUri(ref baseUriStr, settings.GetXmlResolver());
             // get BaseUri from XmlParserContext
@@ -875,7 +887,8 @@ namespace System.Xml
             string xmlFragment,
             XmlParserContext? context,
             XmlReaderSettings settings
-        ) : this(null, settings, context)
+        )
+            : this(null, settings, context)
         {
             Debug.Assert(xmlFragment != null);
             InitStringInput(string.Empty, Encoding.Unicode, xmlFragment);

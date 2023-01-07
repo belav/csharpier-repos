@@ -63,7 +63,8 @@ namespace Newtonsoft.Json.Linq
             _valueType = type;
         }
 
-        internal JValue(JValue other, JsonCloneSettings? settings) : this(other.Value, other.Type)
+        internal JValue(JValue other, JsonCloneSettings? settings)
+            : this(other.Value, other.Type)
         {
             if (settings?.CopyAnnotations ?? true)
             {
@@ -75,95 +76,109 @@ namespace Newtonsoft.Json.Linq
         /// Initializes a new instance of the <see cref="JValue"/> class from another <see cref="JValue"/> object.
         /// </summary>
         /// <param name="other">A <see cref="JValue"/> object to copy from.</param>
-        public JValue(JValue other) : this(other.Value, other.Type) { }
+        public JValue(JValue other)
+            : this(other.Value, other.Type) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(long value) : this(BoxedPrimitives.Get(value), JTokenType.Integer) { }
+        public JValue(long value)
+            : this(BoxedPrimitives.Get(value), JTokenType.Integer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(decimal value) : this(BoxedPrimitives.Get(value), JTokenType.Float) { }
+        public JValue(decimal value)
+            : this(BoxedPrimitives.Get(value), JTokenType.Float) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(char value) : this(value, JTokenType.String) { }
+        public JValue(char value)
+            : this(value, JTokenType.String) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
         [CLSCompliant(false)]
-        public JValue(ulong value) : this(value, JTokenType.Integer) { }
+        public JValue(ulong value)
+            : this(value, JTokenType.Integer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(double value) : this(BoxedPrimitives.Get(value), JTokenType.Float) { }
+        public JValue(double value)
+            : this(BoxedPrimitives.Get(value), JTokenType.Float) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(float value) : this(value, JTokenType.Float) { }
+        public JValue(float value)
+            : this(value, JTokenType.Float) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(DateTime value) : this(value, JTokenType.Date) { }
+        public JValue(DateTime value)
+            : this(value, JTokenType.Date) { }
 
 #if HAVE_DATE_TIME_OFFSET
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(DateTimeOffset value) : this(value, JTokenType.Date) { }
+        public JValue(DateTimeOffset value)
+            : this(value, JTokenType.Date) { }
 #endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(bool value) : this(BoxedPrimitives.Get(value), JTokenType.Boolean) { }
+        public JValue(bool value)
+            : this(BoxedPrimitives.Get(value), JTokenType.Boolean) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(string? value) : this(value, JTokenType.String) { }
+        public JValue(string? value)
+            : this(value, JTokenType.String) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(Guid value) : this(value, JTokenType.Guid) { }
+        public JValue(Guid value)
+            : this(value, JTokenType.Guid) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(Uri? value) : this(value, (value != null) ? JTokenType.Uri : JTokenType.Null)
-        { }
+        public JValue(Uri? value)
+            : this(value, (value != null) ? JTokenType.Uri : JTokenType.Null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(TimeSpan value) : this(value, JTokenType.TimeSpan) { }
+        public JValue(TimeSpan value)
+            : this(value, JTokenType.TimeSpan) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JValue"/> class with the given value.
         /// </summary>
         /// <param name="value">The value.</param>
-        public JValue(object? value) : this(value, GetValueType(null, value)) { }
+        public JValue(object? value)
+            : this(value, GetValueType(null, value)) { }
 
         internal override bool DeepEquals(JToken node)
         {

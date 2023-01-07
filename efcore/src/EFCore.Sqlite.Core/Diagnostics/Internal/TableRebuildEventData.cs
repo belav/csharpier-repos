@@ -22,7 +22,8 @@ public class TableRebuildEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         Type operationType,
         string? tableName
-    ) : base(eventDefinition, messageGenerator)
+    )
+        : base(eventDefinition, messageGenerator)
     {
         OperationType = operationType;
         TableName = tableName;

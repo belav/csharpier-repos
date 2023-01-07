@@ -29,7 +29,8 @@ public class RequestPathBaseTests : FixtureLoggedTest
 {
     private readonly IISSubAppSiteFixture _fixture;
 
-    public RequestPathBaseTests(IISSubAppSiteFixture fixture) : base(fixture)
+    public RequestPathBaseTests(IISSubAppSiteFixture fixture)
+        : base(fixture)
     {
         _fixture = fixture;
     }

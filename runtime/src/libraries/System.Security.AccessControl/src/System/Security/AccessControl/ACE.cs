@@ -698,7 +698,8 @@ namespace System.Security.AccessControl
             AceFlags flags,
             int accessMask,
             SecurityIdentifier securityIdentifier
-        ) : base(type, flags)
+        )
+            : base(type, flags)
         {
             ArgumentNullException.ThrowIfNull(securityIdentifier);
 
@@ -776,7 +777,8 @@ namespace System.Security.AccessControl
 
         #region Constructors
 
-        public CustomAce(AceType type, AceFlags flags, byte[]? opaque) : base(type, flags)
+        public CustomAce(AceType type, AceFlags flags, byte[]? opaque)
+            : base(type, flags)
         {
             if (type <= AceType.MaxDefinedAceType)
             {
@@ -940,7 +942,8 @@ namespace System.Security.AccessControl
             int accessMask,
             CompoundAceType compoundAceType,
             SecurityIdentifier sid
-        ) : base(AceType.AccessAllowedCompound, flags, accessMask, sid)
+        )
+            : base(AceType.AccessAllowedCompound, flags, accessMask, sid)
         {
             //
             // The compound ACE type value is deliberately not validated
@@ -1225,7 +1228,8 @@ namespace System.Security.AccessControl
             int accessMask,
             SecurityIdentifier sid,
             byte[]? opaque
-        ) : base(type, flags, accessMask, sid)
+        )
+            : base(type, flags, accessMask, sid)
         {
             _qualifier = QualifierFromType(type, out _isCallback);
             SetOpaque(opaque);
@@ -1399,7 +1403,8 @@ namespace System.Security.AccessControl
             SecurityIdentifier sid,
             bool isCallback,
             byte[]? opaque
-        ) : base(TypeFromQualifier(isCallback, qualifier), flags, accessMask, sid, opaque) { }
+        )
+            : base(TypeFromQualifier(isCallback, qualifier), flags, accessMask, sid, opaque) { }
 
         #endregion
 
@@ -1787,7 +1792,8 @@ namespace System.Security.AccessControl
             Guid inheritedType,
             bool isCallback,
             byte[]? opaque
-        ) : base(TypeFromQualifier(isCallback, qualifier), aceFlags, accessMask, sid, opaque)
+        )
+            : base(TypeFromQualifier(isCallback, qualifier), aceFlags, accessMask, sid, opaque)
         {
             _objectFlags = flags;
             _objectAceType = type;

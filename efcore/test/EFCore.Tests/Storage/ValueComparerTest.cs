@@ -7,7 +7,8 @@ public class ValueComparerTest
 {
     protected class FakeValueComparer : ValueComparer<double>
     {
-        public FakeValueComparer() : base(false) { }
+        public FakeValueComparer()
+            : base(false) { }
     }
 
     private class Foo

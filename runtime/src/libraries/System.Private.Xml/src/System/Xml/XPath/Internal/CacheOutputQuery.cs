@@ -23,7 +23,8 @@ namespace MS.Internal.Xml.XPath
             this.count = 0;
         }
 
-        protected CacheOutputQuery(CacheOutputQuery other) : base(other)
+        protected CacheOutputQuery(CacheOutputQuery other)
+            : base(other)
         {
             this.input = Clone(other.input);
             this.outputBuffer = new List<XPathNavigator>(other.outputBuffer);

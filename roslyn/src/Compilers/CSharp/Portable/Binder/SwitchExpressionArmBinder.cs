@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SwitchExpressionArmSyntax arm,
             ExpressionVariableBinder armScopeBinder,
             SwitchExpressionBinder switchExpressionBinder
-        ) : base(armScopeBinder)
+        )
+            : base(armScopeBinder)
         {
             this._arm = arm;
             this._armScopeBinder = armScopeBinder;

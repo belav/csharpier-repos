@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             IAsynchronousOperationListener asyncListener,
             IDocumentProvider documentProvider,
             string asyncOperationId
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             this.TextView = textView;
             this.SubjectBuffer = subjectBuffer;

@@ -414,8 +414,8 @@ public class ModelMetadataTest
     {
         private string _displayName;
 
-        public TestModelMetadata(Type modelType) : base(ModelMetadataIdentity.ForType(modelType))
-        { }
+        public TestModelMetadata(Type modelType)
+            : base(ModelMetadataIdentity.ForType(modelType)) { }
 
         public TestModelMetadata(ParameterInfo parameter)
             : base(ModelMetadataIdentity.ForParameter(parameter)) { }

@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType,
             TypeSymbol boolType
-        ) : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
+        )
+            : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _boolType = boolType;
 

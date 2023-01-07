@@ -15,7 +15,8 @@ namespace System.Web.WebPages
         /// <summary>
         /// Creates the BrowserOverrideStore setting any browser override cookie to expire in 7 days.
         /// </summary>
-        public CookieBrowserOverrideStore() : this(daysToExpire: 7) { }
+        public CookieBrowserOverrideStore()
+            : this(daysToExpire: 7) { }
 
         /// <summary>
         /// Constructor to control the expiration of the browser override cookie.

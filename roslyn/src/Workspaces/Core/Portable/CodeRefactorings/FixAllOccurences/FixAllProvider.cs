@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                     Task<Document?>
                 > fixAllAsync,
                 ImmutableArray<FixAllScope> supportedFixAllScopes
-            ) : base(supportedFixAllScopes)
+            )
+                : base(supportedFixAllScopes)
             {
                 _fixAllAsync = fixAllAsync;
             }

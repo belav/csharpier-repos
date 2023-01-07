@@ -11,7 +11,8 @@ namespace System.Configuration
     )]
     public class SettingsPropertyWrongTypeException : Exception
     {
-        public SettingsPropertyWrongTypeException(string message) : base(message) { }
+        public SettingsPropertyWrongTypeException(string message)
+            : base(message) { }
 
         public SettingsPropertyWrongTypeException(string message, Exception innerException)
             : base(message, innerException) { }
@@ -19,7 +20,8 @@ namespace System.Configuration
         protected SettingsPropertyWrongTypeException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public SettingsPropertyWrongTypeException() { }
     }

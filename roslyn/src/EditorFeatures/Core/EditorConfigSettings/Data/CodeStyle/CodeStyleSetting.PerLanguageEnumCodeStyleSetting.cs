@@ -28,7 +28,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 OptionSet visualStudioOptions,
                 OptionUpdater updater,
                 string fileName
-            ) : base(description, enumValues, valueDescriptions, option.Group.Description, updater)
+            )
+                : base(
+                    description,
+                    enumValues,
+                    valueDescriptions,
+                    option.Group.Description,
+                    updater
+                )
             {
                 _option = option;
 

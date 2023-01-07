@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public sealed class X509BasicConstraintsExtension : X509Extension
     {
-        public X509BasicConstraintsExtension() : base(Oids.BasicConstraints2Oid)
+        public X509BasicConstraintsExtension()
+            : base(Oids.BasicConstraints2Oid)
         {
             _decoded = true;
         }

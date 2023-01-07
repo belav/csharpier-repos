@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     [CompilerTrait(CompilerFeature.LocalFunctions)]
     public class LocalFunctionParsingTests : ParsingTests
     {
-        public LocalFunctionParsingTests(ITestOutputHelper output) : base(output) { }
+        public LocalFunctionParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         [WorkItem(13480, "https://github.com/dotnet/roslyn/issues/13480")]

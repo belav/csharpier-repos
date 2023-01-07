@@ -17,7 +17,8 @@ namespace System.Web.Http.ModelBinding.Binders
     /// </remarks>
     public class CompositeModelBinder : IModelBinder
     {
-        public CompositeModelBinder(IEnumerable<IModelBinder> binders) : this(binders.ToArray()) { }
+        public CompositeModelBinder(IEnumerable<IModelBinder> binders)
+            : this(binders.ToArray()) { }
 
         public CompositeModelBinder(params IModelBinder[] binders)
         {

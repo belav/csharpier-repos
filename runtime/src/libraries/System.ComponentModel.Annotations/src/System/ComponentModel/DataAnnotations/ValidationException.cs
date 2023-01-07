@@ -26,7 +26,8 @@ namespace System.ComponentModel.DataAnnotations
             ValidationResult validationResult,
             ValidationAttribute? validatingAttribute,
             object? value
-        ) : this(validationResult.ErrorMessage, validatingAttribute, value)
+        )
+            : this(validationResult.ErrorMessage, validatingAttribute, value)
         {
             _validationResult = validationResult;
         }
@@ -41,7 +42,8 @@ namespace System.ComponentModel.DataAnnotations
             string? errorMessage,
             ValidationAttribute? validatingAttribute,
             object? value
-        ) : base(errorMessage)
+        )
+            : base(errorMessage)
         {
             Value = value;
             ValidationAttribute = validatingAttribute;
@@ -58,7 +60,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
         /// <param name="message">The localized message</param>
-        public ValidationException(string? message) : base(message) { }
+        public ValidationException(string? message)
+            : base(message) { }
 
         /// <summary>
         ///     Constructor that accepts a localized message and an inner exception

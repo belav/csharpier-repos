@@ -42,7 +42,8 @@ namespace System.Xml.RwFactoryWriterTests
             string desc,
             Exception e,
             CTestModule testModule
-        ) : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule) { }
+        )
+            : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule) { }
 
         internal CXmlDriverErrorTestCase(
             string name,
@@ -50,7 +51,8 @@ namespace System.Xml.RwFactoryWriterTests
             Exception e,
             tagVARIATION_STATUS returnCode,
             CTestModule testModule
-        ) : base(testModule, (desc.Length > 1000 ? desc.Substring(0, 1000) + "..." : desc))
+        )
+            : base(testModule, (desc.Length > 1000 ? desc.Substring(0, 1000) + "..." : desc))
         {
             this.Name = name;
             _exception = e;
@@ -77,7 +79,8 @@ namespace System.Xml.RwFactoryWriterTests
             string desc,
             string message,
             CTestModule testModule
-        ) : base(testModule, desc)
+        )
+            : base(testModule, desc)
         {
             this.Name = name;
             _message = message;
@@ -96,7 +99,8 @@ namespace System.Xml.RwFactoryWriterTests
         private string[] _filters;
         private string _defaultSection;
 
-        public XmlDriverScenario(string desc, string controlFile) : base(desc)
+        public XmlDriverScenario(string desc, string controlFile)
+            : base(desc)
         {
             _spec = controlFile;
             _filters = null;

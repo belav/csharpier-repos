@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets.SnippetFunctio
             ITextBuffer subjectBuffer,
             string fieldName,
             string fullyQualifiedName
-        ) : base(snippetExpansionClient, subjectBuffer, fieldName, fullyQualifiedName) { }
+        )
+            : base(snippetExpansionClient, subjectBuffer, fieldName, fullyQualifiedName) { }
 
         protected override bool TryGetSimplifiedTypeName(
             Document documentWithFullyQualifiedTypeName,

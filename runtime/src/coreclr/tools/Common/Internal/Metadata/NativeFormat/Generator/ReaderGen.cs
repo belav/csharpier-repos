@@ -10,7 +10,8 @@
 
 class ReaderGen : CsWriter
 {
-    public ReaderGen(string fileName) : base(fileName) { }
+    public ReaderGen(string fileName)
+        : base(fileName) { }
 
     public void EmitSource()
     {

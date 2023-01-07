@@ -26,7 +26,8 @@ public class PropertyValueEventData : PropertyEventData
         EntityEntry entityEntry,
         IProperty property,
         object? value
-    ) : base(eventDefinition, messageGenerator, property)
+    )
+        : base(eventDefinition, messageGenerator, property)
     {
         EntityEntry = entityEntry;
         Value = value;

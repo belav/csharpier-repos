@@ -120,7 +120,8 @@ namespace System.Web.Http
         // Easily construct, mock out the the right things, and expose protected members to the tests.
         public class CustomBinding : HttpParameterBinding
         {
-            public CustomBinding(string paramName) : base(Build(paramName)) { }
+            public CustomBinding(string paramName)
+                : base(Build(paramName)) { }
 
             static HttpParameterDescriptor Build(string paramName)
             {

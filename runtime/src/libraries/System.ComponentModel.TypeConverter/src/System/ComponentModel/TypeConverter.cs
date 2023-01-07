@@ -418,7 +418,8 @@ namespace System.ComponentModel
                 string name,
                 Type propertyType,
                 Attribute[]? attributes
-            ) : base(name, attributes)
+            )
+                : base(name, attributes)
             {
                 ComponentType = componentType;
                 PropertyType = propertyType;

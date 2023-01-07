@@ -7,7 +7,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
     internal sealed class ExprBinOp : ExprOperator
     {
-        public ExprBinOp(ExpressionKind kind, CType type, Expr left, Expr right) : base(kind, type)
+        public ExprBinOp(ExpressionKind kind, CType type, Expr left, Expr right)
+            : base(kind, type)
         {
             Debug.Assert(kind > ExpressionKind.TypeLimit);
             Debug.Assert(left != null);
@@ -24,7 +25,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Expr right,
             Expr call,
             MethPropWithInst userMethod
-        ) : base(kind, type, call, userMethod)
+        )
+            : base(kind, type, call, userMethod)
         {
             Debug.Assert(kind > ExpressionKind.TypeLimit);
             Debug.Assert(left != null);

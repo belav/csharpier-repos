@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             AbstractCodeElement parent,
             string name,
             int ordinal
-        ) : base(state, fileCodeModel)
+        )
+            : base(state, fileCodeModel)
         {
             _parent = parent;
             _name = name;

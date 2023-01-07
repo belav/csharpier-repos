@@ -30,7 +30,8 @@ public class HtmlHelper<TModel> : HtmlHelper, IHtmlHelper<TModel>
         HtmlEncoder htmlEncoder,
         UrlEncoder urlEncoder,
         ModelExpressionProvider modelExpressionProvider
-    ) : base(htmlGenerator, viewEngine, metadataProvider, bufferScope, htmlEncoder, urlEncoder)
+    )
+        : base(htmlGenerator, viewEngine, metadataProvider, bufferScope, htmlEncoder, urlEncoder)
     {
         _modelExpressionProvider =
             modelExpressionProvider

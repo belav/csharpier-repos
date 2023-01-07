@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.UnsafeKeyword
         };
 
-        public SealedKeywordRecommender() : base(SyntaxKind.SealedKeyword) { }
+        public SealedKeywordRecommender()
+            : base(SyntaxKind.SealedKeyword) { }
 
         protected override bool IsValidContext(
             int position,

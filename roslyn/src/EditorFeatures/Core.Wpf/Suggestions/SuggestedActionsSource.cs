@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ITextView textView,
                 ITextBuffer textBuffer,
                 ISuggestedActionCategoryRegistryService suggestedActionCategoryRegistry
-            ) : base(threadingContext)
+            )
+                : base(threadingContext)
             {
                 GlobalOptions = globalOptions;
 

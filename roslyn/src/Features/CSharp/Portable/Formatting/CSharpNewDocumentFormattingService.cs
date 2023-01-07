@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         public CSharpNewDocumentFormattingService(
             [ImportMany]
                 IEnumerable<Lazy<INewDocumentFormattingProvider, LanguageMetadata>> providers
-        ) : base(providers) { }
+        )
+            : base(providers) { }
 
         protected override string Language => LanguageNames.CSharp;
     }

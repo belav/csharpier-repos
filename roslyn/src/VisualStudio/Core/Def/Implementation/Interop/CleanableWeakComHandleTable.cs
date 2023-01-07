@@ -48,7 +48,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
             IThreadingContext threadingContext,
             int? cleanUpThreshold = null,
             TimeSpan? cleanUpTimeSlice = null
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _table = new Dictionary<TKey, WeakComHandle<TValue, TValue>>();
             _deadKeySet = new HashSet<TKey>();

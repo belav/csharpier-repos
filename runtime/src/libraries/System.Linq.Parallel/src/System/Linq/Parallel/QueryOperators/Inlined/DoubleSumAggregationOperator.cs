@@ -23,7 +23,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal DoubleSumAggregationOperator(IEnumerable<double> child) : base(child) { }
+        internal DoubleSumAggregationOperator(IEnumerable<double> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -94,7 +95,8 @@ namespace System.Linq.Parallel
                 QueryOperatorEnumerator<double, TKey> source,
                 int partitionIndex,
                 CancellationToken cancellationToken
-            ) : base(partitionIndex, cancellationToken)
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

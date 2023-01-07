@@ -16,6 +16,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
     {
         public IBraceMatcher BraceMatcher { get; }
 
-        public DateAndTimeEmbeddedLanguageEditorFeatures(EmbeddedLanguageInfo info) : base(info) { }
+        public DateAndTimeEmbeddedLanguageEditorFeatures(EmbeddedLanguageInfo info)
+            : base(info) { }
     }
 }

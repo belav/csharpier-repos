@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private readonly FixedStatementSyntax _syntax;
 
-        public FixedStatementBinder(Binder enclosing, FixedStatementSyntax syntax) : base(enclosing)
+        public FixedStatementBinder(Binder enclosing, FixedStatementSyntax syntax)
+            : base(enclosing)
         {
             Debug.Assert(syntax != null);
             _syntax = syntax;

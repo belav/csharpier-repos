@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class NorthwindInMemoryContext : NorthwindContext
 {
-    public NorthwindInMemoryContext(DbContextOptions options) : base(options) { }
+    public NorthwindInMemoryContext(DbContextOptions options)
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

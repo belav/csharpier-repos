@@ -307,7 +307,8 @@ namespace System.Net.Mime
         /// </summary>
         /// <param name="stream">Underlying stream</param>
         /// <param name="lineLength">Preferred maximum line-length for writes</param>
-        internal QuotedPrintableStream(Stream stream, int lineLength) : base(stream)
+        internal QuotedPrintableStream(Stream stream, int lineLength)
+            : base(stream)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(lineLength);
 
@@ -644,7 +645,8 @@ namespace System.Net.Mime
                 int count,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;

@@ -19,7 +19,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         public CSharpErrorListCommon(
             VisualStudioInstanceFactory instanceFactory,
             string templateName
-        ) : base(instanceFactory, nameof(CSharpErrorListCommon), templateName) { }
+        )
+            : base(instanceFactory, nameof(CSharpErrorListCommon), templateName) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 

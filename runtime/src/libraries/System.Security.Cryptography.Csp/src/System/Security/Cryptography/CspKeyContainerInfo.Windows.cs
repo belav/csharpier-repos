@@ -14,7 +14,8 @@ namespace System.Security.Cryptography
         private readonly bool _randomKeyContainer;
 
         //Public Constructor will call internal constructor.
-        public CspKeyContainerInfo(CspParameters parameters) : this(parameters, false) { }
+        public CspKeyContainerInfo(CspParameters parameters)
+            : this(parameters, false) { }
 
         /// <summary>
         ///Internal constructor for creating the CspKeyContainerInfo object

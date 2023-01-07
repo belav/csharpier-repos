@@ -31,7 +31,8 @@ public class FileLoggerProvider : BatchingLoggerProvider
         "RS0022:Constructor make noninheritable base class inheritable",
         Justification = "Required for backwards compatibility"
     )]
-    public FileLoggerProvider(IOptionsMonitor<AzureFileLoggerOptions> options) : base(options)
+    public FileLoggerProvider(IOptionsMonitor<AzureFileLoggerOptions> options)
+        : base(options)
     {
         var loggerOptions = options.CurrentValue;
         _path = loggerOptions.LogDirectory;

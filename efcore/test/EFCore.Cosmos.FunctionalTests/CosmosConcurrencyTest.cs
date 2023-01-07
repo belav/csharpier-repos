@@ -227,7 +227,8 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
 
     public class ConcurrencyContext : PoolableDbContext
     {
-        public ConcurrencyContext(DbContextOptions options) : base(options) { }
+        public ConcurrencyContext(DbContextOptions options)
+            : base(options) { }
 
         public DbSet<Customer> Customers { get; set; }
 

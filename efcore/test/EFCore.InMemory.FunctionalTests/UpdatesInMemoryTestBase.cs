@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class UpdatesInMemoryTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesInMemoryTestBase<TFixture>.UpdatesInMemoryFixtureBase
 {
-    protected UpdatesInMemoryTestBase(TFixture fixture) : base(fixture) { }
+    protected UpdatesInMemoryTestBase(TFixture fixture)
+        : base(fixture) { }
 
     protected override string UpdateConcurrencyMessage =>
         InMemoryStrings.UpdateConcurrencyException;

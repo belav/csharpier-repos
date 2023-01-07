@@ -12,7 +12,8 @@ namespace System.CommandLine.Tests.Binding
             Type parameterType,
             Action<object> assertBoundValue,
             string variationName
-        ) : this(new[] { commandLineToken }, parameterType, assertBoundValue, variationName) { }
+        )
+            : this(new[] { commandLineToken }, parameterType, assertBoundValue, variationName) { }
 
         private BindingTestCase(
             string[] commandLineTokens,

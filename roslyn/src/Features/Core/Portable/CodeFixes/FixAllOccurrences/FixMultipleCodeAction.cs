@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             IFixAllState fixAllState,
             string title,
             string computingFixWaitDialogMessage
-        ) : base(fixAllState, showPreviewChangesDialog: false)
+        )
+            : base(fixAllState, showPreviewChangesDialog: false)
         {
             _title = title;
             _computingFixWaitDialogMessage = computingFixWaitDialogMessage;

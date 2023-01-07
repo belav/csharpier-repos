@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers =
             UseExpressionBodyHelper.Helpers;
 
-        public UseExpressionBodyDiagnosticAnalyzer() : base(GetSupportedDescriptorsWithOptions())
+        public UseExpressionBodyDiagnosticAnalyzer()
+            : base(GetSupportedDescriptorsWithOptions())
         {
             _syntaxKinds = _helpers.SelectMany(h => h.SyntaxKinds).ToImmutableArray();
         }

@@ -10,7 +10,8 @@ namespace System.Net.Http.QPack
     {
         public QPackDecodingException() { }
 
-        public QPackDecodingException(string message) : base(message) { }
+        public QPackDecodingException(string message)
+            : base(message) { }
 
         public QPackDecodingException(string message, Exception innerException)
             : base(message, innerException) { }

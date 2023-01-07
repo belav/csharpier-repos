@@ -19,7 +19,8 @@ namespace System.Xml.Serialization
             TypeScope scope,
             ElementAccessor accessor,
             XmlMappingAccess access
-        ) : base(scope, accessor, access)
+        )
+            : base(scope, accessor, access)
         {
             MembersMapping mapping = (MembersMapping)accessor.Mapping!;
             StringBuilder key = new StringBuilder();

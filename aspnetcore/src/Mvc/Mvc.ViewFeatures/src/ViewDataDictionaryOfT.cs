@@ -24,7 +24,8 @@ public class ViewDataDictionary<TModel> : ViewDataDictionary
     public ViewDataDictionary(
         IModelMetadataProvider metadataProvider,
         ModelStateDictionary modelState
-    ) : base(metadataProvider, modelState, declaredModelType: typeof(TModel)) { }
+    )
+        : base(metadataProvider, modelState, declaredModelType: typeof(TModel)) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ViewDataDictionary{TModel}"/> class based in part on an

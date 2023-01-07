@@ -15,7 +15,8 @@ namespace System.Runtime.Serialization.DataContracts
                 Type type,
             XmlDictionaryString name,
             XmlDictionaryString ns
-        ) : base(new SpecialTypeDataContractCriticalHelper(type, name, ns))
+        )
+            : base(new SpecialTypeDataContractCriticalHelper(type, name, ns))
         {
             _helper = (base.Helper as SpecialTypeDataContractCriticalHelper)!;
         }
@@ -30,7 +31,8 @@ namespace System.Runtime.Serialization.DataContracts
                     Type type,
                 XmlDictionaryString name,
                 XmlDictionaryString ns
-            ) : base(type)
+            )
+                : base(type)
             {
                 SetDataContractName(name, ns);
             }

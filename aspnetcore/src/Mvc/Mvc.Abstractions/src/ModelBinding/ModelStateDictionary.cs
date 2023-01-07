@@ -35,7 +35,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
     /// </summary>
-    public ModelStateDictionary() : this(DefaultMaxAllowedErrors) { }
+    public ModelStateDictionary()
+        : this(DefaultMaxAllowedErrors) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.

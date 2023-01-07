@@ -113,22 +113,26 @@ public class WasmAppBuilder : Task
 
     private sealed class WasmEntry : AssetEntry
     {
-        public WasmEntry(string name) : base(name, "dotnetwasm") { }
+        public WasmEntry(string name)
+            : base(name, "dotnetwasm") { }
     }
 
     private sealed class ThreadsWorkerEntry : AssetEntry
     {
-        public ThreadsWorkerEntry(string name) : base(name, "js-module-threads") { }
+        public ThreadsWorkerEntry(string name)
+            : base(name, "js-module-threads") { }
     }
 
     private sealed class AssemblyEntry : AssetEntry
     {
-        public AssemblyEntry(string name) : base(name, "assembly") { }
+        public AssemblyEntry(string name)
+            : base(name, "assembly") { }
     }
 
     private sealed class SatelliteAssemblyEntry : AssetEntry
     {
-        public SatelliteAssemblyEntry(string name, string culture) : base(name, "resource")
+        public SatelliteAssemblyEntry(string name, string culture)
+            : base(name, "resource")
         {
             CultureName = culture;
         }
@@ -139,7 +143,8 @@ public class WasmAppBuilder : Task
 
     private sealed class VfsEntry : AssetEntry
     {
-        public VfsEntry(string name) : base(name, "vfs") { }
+        public VfsEntry(string name)
+            : base(name, "vfs") { }
 
         [JsonPropertyName("virtualPath")]
         public string? VirtualPath { get; set; }
@@ -147,7 +152,8 @@ public class WasmAppBuilder : Task
 
     private sealed class IcuData : AssetEntry
     {
-        public IcuData(string name) : base(name, "icu") { }
+        public IcuData(string name)
+            : base(name, "icu") { }
 
         [JsonPropertyName("loadRemote")]
         public bool LoadRemote { get; set; }

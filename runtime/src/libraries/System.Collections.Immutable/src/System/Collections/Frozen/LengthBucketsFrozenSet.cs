@@ -27,7 +27,8 @@ namespace System.Collections.Frozen
             KeyValuePair<string, int>[][] lengthBuckets,
             int minLength,
             IEqualityComparer<string> comparer
-        ) : base(comparer)
+        )
+            : base(comparer)
         {
             Debug.Assert(
                 comparer == EqualityComparer<string>.Default

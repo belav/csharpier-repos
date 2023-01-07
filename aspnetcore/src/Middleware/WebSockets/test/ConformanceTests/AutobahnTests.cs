@@ -14,7 +14,8 @@ public class AutobahnTests : LoggedTest
 {
     private static readonly TimeSpan TestTimeout = TimeSpan.FromMinutes(3);
 
-    public AutobahnTests(ITestOutputHelper output) : base(output) { }
+    public AutobahnTests(ITestOutputHelper output)
+        : base(output) { }
 
     // Skip if wstest is not installed for now, see https://github.com/aspnet/WebSockets/issues/95
     // We will enable Wstest on every build once we've gotten the necessary infrastructure sorted out :).

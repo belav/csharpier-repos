@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode scopeSyntaxOpt,
             DebugId methodId,
             DebugId closureId
-        ) : base(MakeName(scopeSyntaxOpt, methodId, closureId), containingMethod)
+        )
+            : base(MakeName(scopeSyntaxOpt, methodId, closureId), containingMethod)
         {
             TypeKind = isStruct ? TypeKind.Struct : TypeKind.Class;
             _topLevelMethod = topLevelMethod;

@@ -13,7 +13,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class TypeParameterType : CType
     {
-        public TypeParameterType(TypeParameterSymbol symbol) : base(TypeKind.TK_TypeParameterType)
+        public TypeParameterType(TypeParameterSymbol symbol)
+            : base(TypeKind.TK_TypeParameterType)
         {
             Debug.Assert(symbol.GetTypeParameterType() == null);
             Symbol = symbol;

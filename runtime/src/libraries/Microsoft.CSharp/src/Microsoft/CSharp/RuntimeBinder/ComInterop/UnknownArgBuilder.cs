@@ -12,7 +12,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         private readonly bool _isWrapper;
 
-        internal UnknownArgBuilder(Type parameterType) : base(parameterType)
+        internal UnknownArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             _isWrapper = parameterType == typeof(UnknownWrapper);
         }

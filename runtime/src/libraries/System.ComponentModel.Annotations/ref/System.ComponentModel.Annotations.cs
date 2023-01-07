@@ -123,8 +123,8 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class CreditCardAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
-        public CreditCardAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType))
-        { }
+        public CreditCardAttribute()
+            : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
 
         public override bool IsValid(object? value)
         {
@@ -662,7 +662,8 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class PhoneAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
-        public PhoneAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+        public PhoneAttribute()
+            : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
 
         public override bool IsValid(object? value)
         {
@@ -900,7 +901,8 @@ namespace System.ComponentModel.DataAnnotations
     public sealed partial class UrlAttribute
         : System.ComponentModel.DataAnnotations.DataTypeAttribute
     {
-        public UrlAttribute() : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
+        public UrlAttribute()
+            : base(default(System.ComponentModel.DataAnnotations.DataType)) { }
 
         public override bool IsValid(object? value)
         {

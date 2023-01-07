@@ -56,7 +56,8 @@ namespace System.Web.Mvc
             public DataErrorInfoClassModelValidator(
                 ModelMetadata metadata,
                 ControllerContext controllerContext
-            ) : base(metadata, controllerContext) { }
+            )
+                : base(metadata, controllerContext) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -81,7 +82,8 @@ namespace System.Web.Mvc
             public DataErrorInfoPropertyModelValidator(
                 ModelMetadata metadata,
                 ControllerContext controllerContext
-            ) : base(metadata, controllerContext) { }
+            )
+                : base(metadata, controllerContext) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {

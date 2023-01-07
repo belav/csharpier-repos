@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
             ITextBuffer subjectBuffer,
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             IAsynchronousOperationListener asyncListener
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _presenter = presenter;
             _subjectBuffer = subjectBuffer;

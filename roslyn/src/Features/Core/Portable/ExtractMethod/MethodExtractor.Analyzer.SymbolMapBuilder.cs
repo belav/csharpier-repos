@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     SemanticModel semanticModel,
                     TextSpan span,
                     CancellationToken cancellationToken
-                ) : base(SyntaxWalkerDepth.Token)
+                )
+                    : base(SyntaxWalkerDepth.Token)
                 {
                     _semanticModel = semanticModel;
                     _service = service;

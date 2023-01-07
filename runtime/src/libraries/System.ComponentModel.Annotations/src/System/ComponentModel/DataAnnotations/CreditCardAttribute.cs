@@ -9,7 +9,8 @@ namespace System.ComponentModel.DataAnnotations
     )]
     public sealed class CreditCardAttribute : DataTypeAttribute
     {
-        public CreditCardAttribute() : base(DataType.CreditCard)
+        public CreditCardAttribute()
+            : base(DataType.CreditCard)
         {
             // Set DefaultErrorMessage, allowing user to set
             // ErrorMessageResourceType and ErrorMessageResourceName to use localized messages.

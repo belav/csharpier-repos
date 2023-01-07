@@ -3072,7 +3072,8 @@ namespace System.Collections.Tests
 
         private class DerivedArrayList : ArrayList
         {
-            public DerivedArrayList(ICollection c) : base(c) { }
+            public DerivedArrayList(ICollection c)
+                : base(c) { }
         }
     }
 

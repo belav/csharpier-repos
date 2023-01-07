@@ -41,7 +41,8 @@ namespace System.Linq.Expressions.Tests
 
         public D() { }
 
-        public D(int val) : this(val, "") { }
+        public D(int val)
+            : this(val, "") { }
 
         public D(int val, string s)
         {

@@ -206,7 +206,8 @@ namespace System.Net.Security
         private int _nestedWrite;
         private int _nestedRead;
 
-        public SslStream(Stream innerStream) : this(innerStream, false, null, null) { }
+        public SslStream(Stream innerStream)
+            : this(innerStream, false, null, null) { }
 
         public SslStream(Stream innerStream, bool leaveInnerStreamOpen)
             : this(
@@ -250,7 +251,8 @@ namespace System.Net.Security
             RemoteCertificateValidationCallback? userCertificateValidationCallback,
             LocalCertificateSelectionCallback? userCertificateSelectionCallback,
             EncryptionPolicy encryptionPolicy
-        ) : base(innerStream, leaveInnerStreamOpen)
+        )
+            : base(innerStream, leaveInnerStreamOpen)
         {
 #pragma warning disable SYSLIB0040 // NoEncryption and AllowNoEncryption are obsolete
             if (

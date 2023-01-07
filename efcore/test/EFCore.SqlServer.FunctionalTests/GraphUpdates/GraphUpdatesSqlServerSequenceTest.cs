@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore;
 public class GraphUpdatesSqlServerSequenceTest
     : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerSequenceTest.SqlServerFixture>
 {
-    public GraphUpdatesSqlServerSequenceTest(SqlServerFixture fixture) : base(fixture) { }
+    public GraphUpdatesSqlServerSequenceTest(SqlServerFixture fixture)
+        : base(fixture) { }
 
     protected override void UseTransaction(
         DatabaseFacade facade,

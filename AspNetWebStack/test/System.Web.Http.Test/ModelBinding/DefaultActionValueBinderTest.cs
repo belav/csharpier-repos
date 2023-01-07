@@ -475,7 +475,8 @@ namespace System.Web.Http.ModelBinding
 
             private class CustomBinding : HttpParameterBinding
             {
-                public CustomBinding() : base(new Mock<HttpParameterDescriptor>().Object) { }
+                public CustomBinding()
+                    : base(new Mock<HttpParameterDescriptor>().Object) { }
 
                 public override Threading.Tasks.Task ExecuteBindingAsync(
                     Metadata.ModelMetadataProvider metadataProvider,

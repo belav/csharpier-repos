@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 internal class SyntaxTrivia : GreenNode
 {
-    internal SyntaxTrivia(SyntaxKind kind, string text) : base(kind, text.Length)
+    internal SyntaxTrivia(SyntaxKind kind, string text)
+        : base(kind, text.Length)
     {
         Text = text;
     }
@@ -19,7 +20,8 @@ internal class SyntaxTrivia : GreenNode
         string text,
         RazorDiagnostic[] diagnostics,
         SyntaxAnnotation[] annotations
-    ) : base(kind, text.Length, diagnostics, annotations)
+    )
+        : base(kind, text.Length, diagnostics, annotations)
     {
         Text = text;
     }

@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.FileProviders
         /// Initializes a new instance of a PhysicalFileProvider at the given root directory.
         /// </summary>
         /// <param name="root">The root directory. This should be an absolute path.</param>
-        public PhysicalFileProvider(string root) : this(root, ExclusionFilters.Sensitive) { }
+        public PhysicalFileProvider(string root)
+            : this(root, ExclusionFilters.Sensitive) { }
 
         /// <summary>
         /// Initializes a new instance of a PhysicalFileProvider at the given root directory.

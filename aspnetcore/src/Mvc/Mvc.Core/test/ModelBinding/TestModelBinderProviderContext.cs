@@ -20,7 +20,8 @@ public class TestModelBinderProviderContext : ModelBinderProviderContext
     private readonly List<Func<ModelMetadata, IModelBinder>> _binderCreators =
         new List<Func<ModelMetadata, IModelBinder>>();
 
-    public TestModelBinderProviderContext(Type modelType) : this(modelType, bindingInfo: null) { }
+    public TestModelBinderProviderContext(Type modelType)
+        : this(modelType, bindingInfo: null) { }
 
     public TestModelBinderProviderContext(Type modelType, BindingInfo bindingInfo)
     {

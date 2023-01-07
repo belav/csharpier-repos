@@ -638,7 +638,8 @@ namespace ILCompiler.DependencyAnalysis
 
         private sealed class NecessaryTypeSymbolHashtable : TypeSymbolHashtable
         {
-            public NecessaryTypeSymbolHashtable(NodeFactory factory) : base(factory) { }
+            public NecessaryTypeSymbolHashtable(NodeFactory factory)
+                : base(factory) { }
 
             protected override IEETypeNode CreateValueFromKey(TypeDesc key) =>
                 _factory.CreateNecessaryTypeNode(key);
@@ -665,7 +666,8 @@ namespace ILCompiler.DependencyAnalysis
 
         private sealed class ConstructedTypeSymbolHashtable : TypeSymbolHashtable
         {
-            public ConstructedTypeSymbolHashtable(NodeFactory factory) : base(factory) { }
+            public ConstructedTypeSymbolHashtable(NodeFactory factory)
+                : base(factory) { }
 
             protected override IEETypeNode CreateValueFromKey(TypeDesc key) =>
                 _factory.CreateConstructedTypeNode(key);

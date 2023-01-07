@@ -16,7 +16,8 @@ struct S0
     public short F3;
     public ulong F4;
 
-    public S0(bool f0, bool f1, uint f2, short f3, ulong f4) : this()
+    public S0(bool f0, bool f1, uint f2, short f3, ulong f4)
+        : this()
     {
         F0 = f0;
         F1 = f1;
@@ -39,7 +40,8 @@ class C1
 
 struct S2
 {
-    public S2(C0 f4) : this() { }
+    public S2(C0 f4)
+        : this() { }
 }
 
 struct S3

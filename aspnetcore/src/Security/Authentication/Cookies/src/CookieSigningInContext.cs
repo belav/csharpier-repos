@@ -27,7 +27,8 @@ public class CookieSigningInContext : PrincipalContext<CookieAuthenticationOptio
         ClaimsPrincipal principal,
         AuthenticationProperties? properties,
         CookieOptions cookieOptions
-    ) : base(context, scheme, options, properties)
+    )
+        : base(context, scheme, options, properties)
     {
         CookieOptions = cookieOptions;
         Principal = principal;

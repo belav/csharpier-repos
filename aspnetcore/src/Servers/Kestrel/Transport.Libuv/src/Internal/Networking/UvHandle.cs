@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
             DestroyMemory(handle);
         private Action<Action<IntPtr>, IntPtr> _queueCloseHandle;
 
-        protected UvHandle(ILibuvTrace logger) : base(logger) { }
+        protected UvHandle(ILibuvTrace logger)
+            : base(logger) { }
 
         protected void CreateHandle(
             LibuvFunctions uv,

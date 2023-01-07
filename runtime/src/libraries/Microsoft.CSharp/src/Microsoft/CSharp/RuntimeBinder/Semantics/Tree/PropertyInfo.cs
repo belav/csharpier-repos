@@ -14,7 +14,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             CType type,
             PropertySymbol propertySymbol,
             AggregateType propertyType
-        ) : base(ExpressionKind.PropertyInfo, type)
+        )
+            : base(ExpressionKind.PropertyInfo, type)
         {
             Debug.Assert(propertySymbol != null);
             Debug.Assert(propertyType != null);

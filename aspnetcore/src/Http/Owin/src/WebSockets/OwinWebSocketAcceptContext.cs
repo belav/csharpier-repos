@@ -15,7 +15,8 @@ public class OwinWebSocketAcceptContext : WebSocketAcceptContext
     /// <summary>
     /// Initializes a new instance of <see cref="OwinWebSocketAcceptContext"/>.
     /// </summary>
-    public OwinWebSocketAcceptContext() : this(new Dictionary<string, object>(1)) { }
+    public OwinWebSocketAcceptContext()
+        : this(new Dictionary<string, object>(1)) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="OwinWebSocketAcceptContext"/>.

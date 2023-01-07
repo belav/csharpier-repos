@@ -23,6 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
 
     internal class CSharpQuickInfoService : QuickInfoServiceWithProviders
     {
-        internal CSharpQuickInfoService(LanguageServices services) : base(services) { }
+        internal CSharpQuickInfoService(LanguageServices services)
+            : base(services) { }
     }
 }

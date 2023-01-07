@@ -503,7 +503,8 @@ namespace Microsoft.CodeAnalysis.UseAutoProperty
                 ,
                 CodeActionPriority priority
 #endif
-            ) : base(title, createChangedSolution, title)
+            )
+                : base(title, createChangedSolution, title)
             {
 #if !CODE_STYLE // 'CodeActionPriority' is not a public API, hence not supported in CodeStyle layer.
                 Priority = priority;

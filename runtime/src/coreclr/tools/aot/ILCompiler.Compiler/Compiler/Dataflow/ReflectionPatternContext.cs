@@ -60,7 +60,8 @@ namespace ILCompiler.Dataflow
             MethodIL source,
             int offset,
             Origin memberWithRequirements
-        ) : this(logger, reportingEnabled, source.OwningMethod, memberWithRequirements)
+        )
+            : this(logger, reportingEnabled, source.OwningMethod, memberWithRequirements)
         {
             _sourceIL = source;
             _ilOffset = offset;

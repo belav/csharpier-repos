@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public RemoteTodoCommentsDiscoveryService(
             in ServiceConstructionArguments arguments,
             RemoteCallback<IRemoteTodoCommentsDiscoveryService.ICallback> callback
-        ) : base(arguments)
+        )
+            : base(arguments)
         {
             _callback = callback;
         }

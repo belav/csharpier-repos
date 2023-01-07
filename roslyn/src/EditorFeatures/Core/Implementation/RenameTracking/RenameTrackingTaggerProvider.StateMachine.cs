@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
                 IDiagnosticAnalyzerService diagnosticAnalyzerService,
                 IGlobalOptionService globalOptions,
                 IAsynchronousOperationListener asyncListener
-            ) : base(threadingContext)
+            )
+                : base(threadingContext)
             {
                 _buffer = buffer;
                 _buffer.Changed += Buffer_Changed;

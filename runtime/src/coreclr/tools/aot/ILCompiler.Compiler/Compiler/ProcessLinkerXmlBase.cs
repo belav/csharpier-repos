@@ -75,7 +75,8 @@ namespace ILCompiler
             ModuleDesc resourceAssembly,
             string xmlDocumentLocation,
             IReadOnlyDictionary<string, bool> featureSwitchValues
-        ) : this(context, documentStream, xmlDocumentLocation, featureSwitchValues)
+        )
+            : this(context, documentStream, xmlDocumentLocation, featureSwitchValues)
         {
             _owningModule = resourceAssembly;
         }

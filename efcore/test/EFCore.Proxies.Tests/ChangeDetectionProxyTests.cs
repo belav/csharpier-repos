@@ -450,7 +450,8 @@ public class ChangeDetectionProxyTests
 
     private class DefaultContext : TestContext<ChangeValueEntity>
     {
-        public DefaultContext() : base(nameof(DefaultContext), false, true) { }
+        public DefaultContext()
+            : base(nameof(DefaultContext), false, true) { }
     }
 
     private class SnapshotContext : TestContext<ChangeValueEntity>

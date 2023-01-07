@@ -8,7 +8,8 @@ namespace System.Data.Common
 {
     public abstract class DbDataRecord : ICustomTypeDescriptor, IDataRecord
     {
-        protected DbDataRecord() : base() { }
+        protected DbDataRecord()
+            : base() { }
 
         public abstract int FieldCount { get; }
 

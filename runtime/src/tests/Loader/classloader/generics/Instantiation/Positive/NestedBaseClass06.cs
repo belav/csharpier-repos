@@ -63,7 +63,8 @@ public class Outer<U>
 
 public class Gen<T> : Outer<T>.GenBase<T>
 {
-    public Gen(T fld1) : base(fld1) { }
+    public Gen(T fld1)
+        : base(fld1) { }
 
     new public bool InstVerify(System.Type t1)
     {

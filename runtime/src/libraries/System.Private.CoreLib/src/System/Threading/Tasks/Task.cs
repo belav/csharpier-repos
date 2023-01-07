@@ -3459,7 +3459,8 @@ namespace System.Threading.Tasks
         // Used in SpinThenBlockingWait (below), but could be seen as a general purpose mechanism.
         private sealed class SetOnInvokeMres : ManualResetEventSlim, ITaskCompletionAction
         {
-            internal SetOnInvokeMres() : base(false, 0) { }
+            internal SetOnInvokeMres()
+                : base(false, 0) { }
 
             public void Invoke(Task completingTask)
             {

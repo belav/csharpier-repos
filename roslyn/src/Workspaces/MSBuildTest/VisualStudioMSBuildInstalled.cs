@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
         private readonly Version _minimumVersion;
 
-        public VisualStudioMSBuildInstalled() : this(new Version(15, 0)) { }
+        public VisualStudioMSBuildInstalled()
+            : this(new Version(15, 0)) { }
 
         protected VisualStudioMSBuildInstalled(Version minimumVersion)
         {
@@ -106,7 +107,8 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
     internal class VisualStudio16_2OrHigherMSBuildInstalled : VisualStudioMSBuildInstalled
     {
-        public VisualStudio16_2OrHigherMSBuildInstalled() : base(new Version(16, 2)) { }
+        public VisualStudio16_2OrHigherMSBuildInstalled()
+            : base(new Version(16, 2)) { }
     }
 
     internal class VisualStudio16_9_Preview3OrHigherMSBuildInstalled : VisualStudioMSBuildInstalled

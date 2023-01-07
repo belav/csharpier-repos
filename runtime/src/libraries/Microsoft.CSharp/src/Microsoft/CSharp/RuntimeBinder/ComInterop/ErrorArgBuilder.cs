@@ -11,7 +11,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     internal sealed class ErrorArgBuilder : SimpleArgBuilder
     {
-        internal ErrorArgBuilder(Type parameterType) : base(parameterType)
+        internal ErrorArgBuilder(Type parameterType)
+            : base(parameterType)
         {
             Debug.Assert(parameterType == typeof(ErrorWrapper));
         }

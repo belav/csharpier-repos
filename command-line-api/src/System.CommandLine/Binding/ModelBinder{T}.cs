@@ -9,7 +9,8 @@ namespace System.CommandLine.Binding
     public class ModelBinder<TModel> : ModelBinder
     {
         /// <inheritdoc />
-        public ModelBinder() : base(typeof(TModel)) { }
+        public ModelBinder()
+            : base(typeof(TModel)) { }
 
         /// <summary>
         /// Configures a custom binding behavior for the specified property.

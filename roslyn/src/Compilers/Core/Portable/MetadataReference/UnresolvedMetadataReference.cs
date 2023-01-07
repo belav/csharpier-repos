@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
         internal UnresolvedMetadataReference(
             string reference,
             MetadataReferenceProperties properties
-        ) : base(properties)
+        )
+            : base(properties)
         {
             this.Reference = reference;
         }

@@ -95,7 +95,8 @@ namespace System.Net
             object? myObject,
             object? myState,
             AsyncCallback? myCallBack
-        ) : this(captureIdentity, forceCaptureContext, false, myObject, myState, myCallBack) { }
+        )
+            : this(captureIdentity, forceCaptureContext, false, myObject, myState, myCallBack) { }
 
         internal ContextAwareResult(
             bool captureIdentity,
@@ -104,7 +105,8 @@ namespace System.Net
             object? myObject,
             object? myState,
             AsyncCallback? myCallBack
-        ) : base(myObject, myState, myCallBack)
+        )
+            : base(myObject, myState, myCallBack)
         {
             if (forceCaptureContext)
             {

@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             ImageMoniker imageMoniker,
             DetachedDefinitionItem definitionItem,
             ImageMoniker languageMoniker
-        ) : base(displayContent, imageMoniker, definitionItem)
+        )
+            : base(displayContent, imageMoniker, definitionItem)
         {
             LanguageMoniker = languageMoniker;
         }

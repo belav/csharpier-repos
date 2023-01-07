@@ -16,7 +16,8 @@ internal sealed class MessageConverter<TMessage> : SettingsConverterBase<TMessag
 {
     private readonly Dictionary<string, FieldDescriptor> _jsonFieldMap;
 
-    public MessageConverter(JsonContext context) : base(context)
+    public MessageConverter(JsonContext context)
+        : base(context)
     {
         _jsonFieldMap = CreateJsonFieldMap((new TMessage()).Descriptor.Fields.InFieldNumberOrder());
     }

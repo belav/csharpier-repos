@@ -12,9 +12,11 @@ namespace System.Net.Cache
         private readonly TimeSpan _minFresh = TimeSpan.MinValue;
         private readonly TimeSpan _maxStale = TimeSpan.MinValue;
 
-        public HttpRequestCachePolicy() : this(HttpRequestCacheLevel.Default) { }
+        public HttpRequestCachePolicy()
+            : this(HttpRequestCacheLevel.Default) { }
 
-        public HttpRequestCachePolicy(HttpRequestCacheLevel level) : base(MapLevel(level))
+        public HttpRequestCachePolicy(HttpRequestCacheLevel level)
+            : base(MapLevel(level))
         {
             Level = level;
         }
@@ -22,7 +24,8 @@ namespace System.Net.Cache
         public HttpRequestCachePolicy(
             HttpCacheAgeControl cacheAgeControl,
             TimeSpan ageOrFreshOrStale
-        ) : this(HttpRequestCacheLevel.Default)
+        )
+            : this(HttpRequestCacheLevel.Default)
         {
             switch (cacheAgeControl)
             {
@@ -47,7 +50,8 @@ namespace System.Net.Cache
             HttpCacheAgeControl cacheAgeControl,
             TimeSpan maxAge,
             TimeSpan freshOrStale
-        ) : this(HttpRequestCacheLevel.Default)
+        )
+            : this(HttpRequestCacheLevel.Default)
         {
             switch (cacheAgeControl)
             {
@@ -76,7 +80,8 @@ namespace System.Net.Cache
             }
         }
 
-        public HttpRequestCachePolicy(DateTime cacheSyncDate) : this(HttpRequestCacheLevel.Default)
+        public HttpRequestCachePolicy(DateTime cacheSyncDate)
+            : this(HttpRequestCacheLevel.Default)
         {
             _lastSyncDateUtc = cacheSyncDate.ToUniversalTime();
         }
@@ -86,7 +91,8 @@ namespace System.Net.Cache
             TimeSpan maxAge,
             TimeSpan freshOrStale,
             DateTime cacheSyncDate
-        ) : this(cacheAgeControl, maxAge, freshOrStale)
+        )
+            : this(cacheAgeControl, maxAge, freshOrStale)
         {
             _lastSyncDateUtc = cacheSyncDate.ToUniversalTime();
         }

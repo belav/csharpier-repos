@@ -32,7 +32,8 @@ public class ProviderCultureResult
     /// <see cref="UICultures"/> properties set to the same culture value.
     /// </summary>
     /// <param name="cultures">The list of cultures to be used for formatting, text, i.e. language.</param>
-    public ProviderCultureResult(IList<StringSegment> cultures) : this(cultures, cultures) { }
+    public ProviderCultureResult(IList<StringSegment> cultures)
+        : this(cultures, cultures) { }
 
     /// <summary>
     /// Creates a new <see cref="ProviderCultureResult"/> object has its <see cref="Cultures"/> and

@@ -13,9 +13,11 @@ namespace System.Runtime.Serialization.Json
         private readonly DateTimeFormat? _dateTimeFormat;
         private DateTimeArrayJsonHelperWithString? _dateTimeArrayHelper;
 
-        public JsonReaderDelegator(XmlReader reader) : base(reader) { }
+        public JsonReaderDelegator(XmlReader reader)
+            : base(reader) { }
 
-        public JsonReaderDelegator(XmlReader reader, DateTimeFormat? dateTimeFormat) : this(reader)
+        public JsonReaderDelegator(XmlReader reader, DateTimeFormat? dateTimeFormat)
+            : this(reader)
         {
             _dateTimeFormat = dateTimeFormat;
         }

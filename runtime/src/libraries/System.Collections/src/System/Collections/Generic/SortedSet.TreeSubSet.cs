@@ -44,7 +44,8 @@ namespace System.Collections.Generic
                 T? Max,
                 bool lowerBoundActive,
                 bool upperBoundActive
-            ) : base(Underlying.Comparer)
+            )
+                : base(Underlying.Comparer)
             {
                 _underlying = Underlying;
                 _min = Min;

@@ -5,12 +5,14 @@ namespace System.Web.Mvc
 {
     public class ViewDataDictionary<TModel> : ViewDataDictionary
     {
-        public ViewDataDictionary() : base(default(TModel)) { }
+        public ViewDataDictionary()
+            : base(default(TModel)) { }
 
-        public ViewDataDictionary(TModel model) : base(model) { }
+        public ViewDataDictionary(TModel model)
+            : base(model) { }
 
-        public ViewDataDictionary(ViewDataDictionary viewDataDictionary) : base(viewDataDictionary)
-        { }
+        public ViewDataDictionary(ViewDataDictionary viewDataDictionary)
+            : base(viewDataDictionary) { }
 
         public new TModel Model
         {

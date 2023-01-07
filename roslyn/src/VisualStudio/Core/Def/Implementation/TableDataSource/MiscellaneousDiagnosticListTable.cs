@@ -59,7 +59,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IGlobalOptionService globalOptions,
                 IDiagnosticService diagnosticService,
                 ITableManagerProvider provider
-            ) : base(workspace, provider)
+            )
+                : base(workspace, provider)
             {
                 _source = new LiveTableDataSource(
                     workspace,

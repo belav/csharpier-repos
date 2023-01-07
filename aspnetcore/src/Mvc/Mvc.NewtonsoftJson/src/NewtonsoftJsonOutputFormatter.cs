@@ -38,7 +38,8 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         JsonSerializerSettings serializerSettings,
         ArrayPool<char> charPool,
         MvcOptions mvcOptions
-    ) : this(serializerSettings, charPool, mvcOptions, jsonOptions: null) { }
+    )
+        : this(serializerSettings, charPool, mvcOptions, jsonOptions: null) { }
 
     /// <summary>
     /// Initializes a new <see cref="NewtonsoftJsonOutputFormatter"/> instance.

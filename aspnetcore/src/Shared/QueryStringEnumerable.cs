@@ -32,7 +32,8 @@ readonly struct QueryStringEnumerable
     /// Constructs an instance of <see cref="QueryStringEnumerable"/>.
     /// </summary>
     /// <param name="queryString">The query string.</param>
-    public QueryStringEnumerable(string? queryString) : this(queryString.AsMemory()) { }
+    public QueryStringEnumerable(string? queryString)
+        : this(queryString.AsMemory()) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="QueryStringEnumerable"/>.

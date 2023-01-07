@@ -30,7 +30,8 @@ public class SqlServerValueGeneratorSelector : RelationalValueGeneratorSelector
         ISqlServerConnection connection,
         IRawSqlCommandBuilder rawSqlCommandBuilder,
         IRelationalCommandDiagnosticsLogger commandLogger
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _sequenceFactory = sequenceFactory;
         _connection = connection;

@@ -31,7 +31,8 @@ internal class DuplexPipeStreamAdapter<TStream> : DuplexPipeStream, IDuplexPipe
         StreamPipeReaderOptions readerOptions,
         StreamPipeWriterOptions writerOptions,
         Func<Stream, TStream> createStream
-    ) : base(duplexPipe.Input, duplexPipe.Output)
+    )
+        : base(duplexPipe.Input, duplexPipe.Output)
     {
         var stream = createStream(this);
         Stream = stream;

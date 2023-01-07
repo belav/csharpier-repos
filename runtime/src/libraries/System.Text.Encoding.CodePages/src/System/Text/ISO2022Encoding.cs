@@ -56,8 +56,8 @@ namespace System.Text
 
         // We have to load the 936 code page tables, so impersonate 936 as our base
         // This pretends to be other code pages as far as memory sections are concerned.
-        internal ISO2022Encoding(int codePage) : base(codePage, s_tableBaseCodePages[codePage % 10])
-        { }
+        internal ISO2022Encoding(int codePage)
+            : base(codePage, s_tableBaseCodePages[codePage % 10]) { }
 
         private static readonly int[] s_tableBaseCodePages =
         {
@@ -1951,7 +1951,8 @@ namespace System.Text
             internal ISO2022Modes currentMode;
             internal ISO2022Modes shiftInOutMode;
 
-            internal ISO2022Encoder(EncodingNLS encoding) : base(encoding)
+            internal ISO2022Encoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 // base calls reset
             }
@@ -1983,7 +1984,8 @@ namespace System.Text
             internal ISO2022Modes currentMode;
             internal ISO2022Modes shiftInOutMode;
 
-            internal ISO2022Decoder(EncodingNLS encoding) : base(encoding)
+            internal ISO2022Decoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 // base calls reset
             }

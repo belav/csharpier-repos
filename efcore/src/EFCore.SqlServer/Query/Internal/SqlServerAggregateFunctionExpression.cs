@@ -27,7 +27,8 @@ public class SqlServerAggregateFunctionExpression : SqlExpression
         IEnumerable<bool> argumentsPropagateNullability,
         Type type,
         RelationalTypeMapping? typeMapping
-    ) : base(type, typeMapping)
+    )
+        : base(type, typeMapping)
     {
         Name = name;
         Arguments = arguments.ToList();

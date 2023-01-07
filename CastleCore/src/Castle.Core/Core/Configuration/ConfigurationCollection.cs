@@ -33,7 +33,8 @@ namespace Castle.Core.Configuration
         /// <summary>
         /// Creates a new instance of <c>ConfigurationCollection</c>.
         /// </summary>
-        public ConfigurationCollection(IEnumerable<IConfiguration> value) : base(value) { }
+        public ConfigurationCollection(IEnumerable<IConfiguration> value)
+            : base(value) { }
 
         public IConfiguration this[string name]
         {

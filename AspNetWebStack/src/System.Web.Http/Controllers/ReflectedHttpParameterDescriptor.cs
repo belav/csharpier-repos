@@ -14,7 +14,8 @@ namespace System.Web.Http.Controllers
         public ReflectedHttpParameterDescriptor(
             HttpActionDescriptor actionDescriptor,
             ParameterInfo parameterInfo
-        ) : base(actionDescriptor)
+        )
+            : base(actionDescriptor)
         {
             if (parameterInfo == null)
             {

@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             string displayContent,
             ImageMoniker imageMoniker,
             DetachedDefinitionItem definitionItem
-        ) : base(displayContent, imageMoniker)
+        )
+            : base(displayContent, imageMoniker)
         {
             DefinitionItem = definitionItem;
         }

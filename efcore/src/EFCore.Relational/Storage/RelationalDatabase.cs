@@ -36,7 +36,8 @@ public class RelationalDatabase : Database
     public RelationalDatabase(
         DatabaseDependencies dependencies,
         RelationalDatabaseDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

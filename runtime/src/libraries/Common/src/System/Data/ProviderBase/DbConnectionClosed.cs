@@ -14,7 +14,8 @@ namespace System.Data.ProviderBase
             ConnectionState state,
             bool hidePassword,
             bool allowSetConnectionString
-        ) : base(state, hidePassword, allowSetConnectionString) { }
+        )
+            : base(state, hidePassword, allowSetConnectionString) { }
 
         public override string ServerVersion => throw ADP.ClosedConnectionError();
 
@@ -54,7 +55,8 @@ namespace System.Data.ProviderBase
 
     internal abstract class DbConnectionBusy : DbConnectionClosed
     {
-        protected DbConnectionBusy(ConnectionState state) : base(state, true, false) { }
+        protected DbConnectionBusy(ConnectionState state)
+            : base(state, true, false) { }
 
         internal override bool TryOpenConnection(
             DbConnection outerConnection,
@@ -70,7 +72,8 @@ namespace System.Data.ProviderBase
         internal static readonly DbConnectionInternal SingletonInstance =
             new DbConnectionClosedBusy(); // singleton object
 
-        private DbConnectionClosedBusy() : base(ConnectionState.Closed) { }
+        private DbConnectionClosedBusy()
+            : base(ConnectionState.Closed) { }
     }
 
     internal sealed class DbConnectionOpenBusy : DbConnectionBusy
@@ -79,7 +82,8 @@ namespace System.Data.ProviderBase
         internal static readonly DbConnectionInternal SingletonInstance =
             new DbConnectionOpenBusy(); // singleton object
 
-        private DbConnectionOpenBusy() : base(ConnectionState.Open) { }
+        private DbConnectionOpenBusy()
+            : base(ConnectionState.Open) { }
     }
 
     internal sealed class DbConnectionClosedConnecting : DbConnectionBusy
@@ -89,7 +93,8 @@ namespace System.Data.ProviderBase
         internal static readonly DbConnectionInternal SingletonInstance =
             new DbConnectionClosedConnecting(); // singleton object
 
-        private DbConnectionClosedConnecting() : base(ConnectionState.Connecting) { }
+        private DbConnectionClosedConnecting()
+            : base(ConnectionState.Connecting) { }
 
         internal override void CloseConnection(
             DbConnection owningObject,
@@ -150,7 +155,8 @@ namespace System.Data.ProviderBase
         internal static readonly DbConnectionInternal SingletonInstance =
             new DbConnectionClosedNeverOpened(); // singleton object
 
-        private DbConnectionClosedNeverOpened() : base(ConnectionState.Closed, false, true) { }
+        private DbConnectionClosedNeverOpened()
+            : base(ConnectionState.Closed, false, true) { }
     }
 
     internal sealed class DbConnectionClosedPreviouslyOpened : DbConnectionClosed
@@ -160,7 +166,8 @@ namespace System.Data.ProviderBase
         internal static readonly DbConnectionInternal SingletonInstance =
             new DbConnectionClosedPreviouslyOpened(); // singleton object
 
-        private DbConnectionClosedPreviouslyOpened() : base(ConnectionState.Closed, true, true) { }
+        private DbConnectionClosedPreviouslyOpened()
+            : base(ConnectionState.Closed, true, true) { }
 
         internal override bool TryReplaceConnection(
             DbConnection outerConnection,

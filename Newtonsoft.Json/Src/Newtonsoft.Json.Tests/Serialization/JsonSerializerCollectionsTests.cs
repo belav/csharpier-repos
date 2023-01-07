@@ -328,7 +328,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestCollectionNonGeneric : ArrayList
         {
             [JsonConstructor]
-            public TestCollectionNonGeneric(IEnumerable l) : base(l.Cast<object>().ToList()) { }
+            public TestCollectionNonGeneric(IEnumerable l)
+                : base(l.Cast<object>().ToList()) { }
         }
 
         [Test]
@@ -433,7 +434,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         public class TestDictionaryNonGeneric : Hashtable
         {
             [JsonConstructor]
-            public TestDictionaryNonGeneric(IDictionary d) : base(d) { }
+            public TestDictionaryNonGeneric(IDictionary d)
+                : base(d) { }
         }
 
         [Test]
@@ -742,7 +744,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             private PrivateDefaultCtorWithIEnumerableCtorList() { }
 
-            public PrivateDefaultCtorWithIEnumerableCtorList(IEnumerable<T> values) : base(values)
+            public PrivateDefaultCtorWithIEnumerableCtorList(IEnumerable<T> values)
+                : base(values)
             {
                 Add(default(T));
             }

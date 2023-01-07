@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public class NullSemanticsQuerySqliteTest
     : NullSemanticsQueryTestBase<NullSemanticsQuerySqliteFixture>
 {
-    public NullSemanticsQuerySqliteTest(NullSemanticsQuerySqliteFixture fixture) : base(fixture)
+    public NullSemanticsQuerySqliteTest(NullSemanticsQuerySqliteFixture fixture)
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
     }

@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 string simpleAssemblyName,
                 AssemblyIdentityComparer identityComparer,
                 Dictionary<MetadataReference, MetadataOrDiagnostic>? observedMetadata
-            ) : base(simpleAssemblyName, identityComparer, observedMetadata) { }
+            )
+                : base(simpleAssemblyName, identityComparer, observedMetadata) { }
 
             protected override CommonMessageProvider MessageProvider
             {
@@ -1194,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     DocumentationProvider documentationProvider,
                     string sourceAssemblySimpleName,
                     MetadataImportOptions compilationImportOptions
-                ) : base(assembly.Identity, assembly.AssemblyReferences, embedInteropTypes)
+                )
+                    : base(assembly.Identity, assembly.AssemblyReferences, embedInteropTypes)
                 {
                     RoslynDebug.Assert(documentationProvider != null);
                     RoslynDebug.Assert(cachedSymbols != null);

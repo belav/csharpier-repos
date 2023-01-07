@@ -290,7 +290,8 @@ namespace System.Web.Mvc.Test
 
         private class AllowMultipleCustomFilter : MvcFilter
         {
-            public AllowMultipleCustomFilter(bool allowMultiple) : base(allowMultiple, -1) { }
+            public AllowMultipleCustomFilter(bool allowMultiple)
+                : base(allowMultiple, -1) { }
         }
 
         [Fact]

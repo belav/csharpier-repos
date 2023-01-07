@@ -80,7 +80,8 @@ namespace System.Linq.Parallel
             Func<TIntermediate, TOutput> resultSelector,
             bool throwIfEmpty,
             QueryAggregationOptions options
-        ) : base(child)
+        )
+            : base(child)
         {
             Debug.Assert(child != null, "child data source cannot be null");
             Debug.Assert(intermediateReduce != null, "need an intermediate reduce function");

@@ -25,7 +25,8 @@ public class TransportFailedException : Exception
         string transportType,
         string message,
         Exception? innerException = null
-    ) : base($"{transportType} failed: {message}", innerException)
+    )
+        : base($"{transportType} failed: {message}", innerException)
     {
         TransportType = transportType;
     }

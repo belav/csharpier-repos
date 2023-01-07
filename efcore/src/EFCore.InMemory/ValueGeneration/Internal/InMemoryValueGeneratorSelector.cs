@@ -24,7 +24,8 @@ public class InMemoryValueGeneratorSelector : ValueGeneratorSelector
     public InMemoryValueGeneratorSelector(
         ValueGeneratorSelectorDependencies dependencies,
         IInMemoryDatabase inMemoryDatabase
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _inMemoryStore = inMemoryDatabase.Store;
     }

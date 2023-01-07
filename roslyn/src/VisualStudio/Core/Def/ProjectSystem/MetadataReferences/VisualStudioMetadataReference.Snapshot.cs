@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 MetadataReferenceProperties properties,
                 string fullPath,
                 FileChangeTracker fileChangeTrackerOpt
-            ) : base(properties, fullPath)
+            )
+                : base(properties, fullPath)
             {
                 Debug.Assert(Properties.Kind == MetadataImageKind.Assembly);
                 _provider = provider;

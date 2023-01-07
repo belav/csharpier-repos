@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 public abstract class NorthwindBulkUpdatesTestBase<TFixture> : BulkUpdatesTestBase<TFixture>
     where TFixture : NorthwindBulkUpdatesFixture<NoopModelCustomizer>, new()
 {
-    protected NorthwindBulkUpdatesTestBase(TFixture fixture) : base(fixture)
+    protected NorthwindBulkUpdatesTestBase(TFixture fixture)
+        : base(fixture)
     {
         ClearLog();
     }

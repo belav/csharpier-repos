@@ -23,9 +23,11 @@ namespace Microsoft.CodeAnalysis
             _span = span;
         }
 
-        public SourceLocation(SyntaxNode node) : this(node.SyntaxTree, node.Span) { }
+        public SourceLocation(SyntaxNode node)
+            : this(node.SyntaxTree, node.Span) { }
 
-        public SourceLocation(in SyntaxToken token) : this(token.SyntaxTree!, token.Span) { }
+        public SourceLocation(in SyntaxToken token)
+            : this(token.SyntaxTree!, token.Span) { }
 
         public SourceLocation(in SyntaxNodeOrToken nodeOrToken)
             : this(nodeOrToken.SyntaxTree!, nodeOrToken.Span)
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(nodeOrToken.SyntaxTree is object);
         }
 
-        public SourceLocation(in SyntaxTrivia trivia) : this(trivia.SyntaxTree!, trivia.Span)
+        public SourceLocation(in SyntaxTrivia trivia)
+            : this(trivia.SyntaxTree!, trivia.Span)
         {
             Debug.Assert(trivia.SyntaxTree is object);
         }

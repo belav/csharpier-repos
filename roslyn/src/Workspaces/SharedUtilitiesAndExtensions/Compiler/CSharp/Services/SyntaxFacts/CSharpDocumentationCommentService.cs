@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             XmlTextAttributeSyntax
         >
     {
-        private CSharpDocumentationCommentService() : base(CSharpSyntaxFacts.Instance) { }
+        private CSharpDocumentationCommentService()
+            : base(CSharpSyntaxFacts.Instance) { }
 
         public static readonly IDocumentationCommentService Instance =
             new CSharpDocumentationCommentService();

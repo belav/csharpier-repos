@@ -19,7 +19,8 @@ namespace System.Security.Cryptography
             byte[] keyBlob,
             string? curveName,
             CngKeyBlobFormat format
-        ) : base(keyBlob)
+        )
+            : base(keyBlob)
         {
             _format = format;
             // Can be null for P256, P384, P521, or an explicit blob

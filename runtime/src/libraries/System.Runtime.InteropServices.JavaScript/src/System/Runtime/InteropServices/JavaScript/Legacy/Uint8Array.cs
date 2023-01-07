@@ -24,7 +24,8 @@ namespace System.Runtime.InteropServices.JavaScript
             LegacyHostImplementation.RegisterCSOwnedObject(this);
         }
 
-        internal Uint8Array(IntPtr jsHandle) : base(jsHandle) { }
+        internal Uint8Array(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         public int Length
         {

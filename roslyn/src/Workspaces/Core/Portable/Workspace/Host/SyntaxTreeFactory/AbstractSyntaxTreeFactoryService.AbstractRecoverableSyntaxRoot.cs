@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Host
                 AbstractSyntaxTreeFactoryService service,
                 TRoot root,
                 IRecoverableSyntaxTree<TRoot> containingTree
-            ) : base(new ConstantValueSource<TRoot>(containingTree.CloneNodeAsRoot(root)))
+            )
+                : base(new ConstantValueSource<TRoot>(containingTree.CloneNodeAsRoot(root)))
             {
                 _service = service;
                 _containingTree = containingTree;
@@ -123,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Host
             private RecoverableSyntaxRoot(
                 RecoverableSyntaxRoot<TRoot> originalRoot,
                 IRecoverableSyntaxTree<TRoot> containingTree
-            ) : base(originalRoot)
+            )
+                : base(originalRoot)
             {
                 Contract.ThrowIfNull(originalRoot._storage);
 

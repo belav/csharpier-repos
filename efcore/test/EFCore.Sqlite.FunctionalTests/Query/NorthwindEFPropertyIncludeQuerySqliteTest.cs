@@ -11,7 +11,8 @@ public class NorthwindEFPropertyIncludeQuerySqliteTest
     public NorthwindEFPropertyIncludeQuerySqliteTest(
         NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         //TestSqlLoggerFactory.CaptureOutput(testOutputHelper);
     }

@@ -12,7 +12,8 @@ namespace System.Net.Http.Headers
     {
         internal static readonly ByteArrayHeaderParser Parser = new ByteArrayHeaderParser();
 
-        private ByteArrayHeaderParser() : base(false) { }
+        private ByteArrayHeaderParser()
+            : base(false) { }
 
         public override string ToString(object value)
         {

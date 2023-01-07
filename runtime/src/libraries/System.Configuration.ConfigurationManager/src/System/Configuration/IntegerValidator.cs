@@ -10,7 +10,8 @@ namespace System.Configuration
         private readonly int _minValue;
         private readonly int _resolution;
 
-        public IntegerValidator(int minValue, int maxValue) : this(minValue, maxValue, false, 1) { }
+        public IntegerValidator(int minValue, int maxValue)
+            : this(minValue, maxValue, false, 1) { }
 
         public IntegerValidator(int minValue, int maxValue, bool rangeIsExclusive)
             : this(minValue, maxValue, rangeIsExclusive, 1) { }

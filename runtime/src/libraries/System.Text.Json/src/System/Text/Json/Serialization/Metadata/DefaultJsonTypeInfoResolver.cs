@@ -24,7 +24,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </summary>
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        public DefaultJsonTypeInfoResolver() : this(mutable: true) { }
+        public DefaultJsonTypeInfoResolver()
+            : this(mutable: true) { }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]

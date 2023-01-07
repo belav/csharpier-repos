@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.SymbolSearch.Patching
             [MarshalAs(UnmanagedType.Bool)]
             public bool editable;
 
-            public DeltaInput(byte* pBuf_, int cbBuf_, bool editable_) : this()
+            public DeltaInput(byte* pBuf_, int cbBuf_, bool editable_)
+                : this()
             {
                 pBuf = pBuf_;
                 cbBuf = new IntPtr(cbBuf_);

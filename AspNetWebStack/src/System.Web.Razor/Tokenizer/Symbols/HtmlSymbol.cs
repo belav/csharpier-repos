@@ -29,13 +29,15 @@ namespace System.Web.Razor.Tokenizer.Symbols
             string content,
             HtmlSymbolType type,
             IEnumerable<RazorError> errors
-        ) : base(new SourceLocation(offset, line, column), content, type, errors) { }
+        )
+            : base(new SourceLocation(offset, line, column), content, type, errors) { }
 
         public HtmlSymbol(
             SourceLocation start,
             string content,
             HtmlSymbolType type,
             IEnumerable<RazorError> errors
-        ) : base(start, content, type, errors) { }
+        )
+            : base(start, content, type, errors) { }
     }
 }

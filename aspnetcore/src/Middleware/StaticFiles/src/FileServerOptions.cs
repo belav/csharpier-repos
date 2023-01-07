@@ -13,7 +13,8 @@ public class FileServerOptions : SharedOptionsBase
     /// <summary>
     /// Creates a combined options class for all of the static file middleware components.
     /// </summary>
-    public FileServerOptions() : base(new SharedOptions())
+    public FileServerOptions()
+        : base(new SharedOptions())
     {
         StaticFileOptions = new StaticFileOptions(SharedOptions);
         DirectoryBrowserOptions = new DirectoryBrowserOptions(SharedOptions);

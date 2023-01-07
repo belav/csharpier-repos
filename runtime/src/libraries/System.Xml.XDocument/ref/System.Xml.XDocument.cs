@@ -374,9 +374,11 @@ namespace System.Xml.Linq
 
     public partial class XCData : System.Xml.Linq.XText
     {
-        public XCData(string value) : base(default(string)) { }
+        public XCData(string value)
+            : base(default(string)) { }
 
-        public XCData(System.Xml.Linq.XCData other) : base(default(string)) { }
+        public XCData(System.Xml.Linq.XCData other)
+            : base(default(string)) { }
 
         public override System.Xml.XmlNodeType NodeType
         {

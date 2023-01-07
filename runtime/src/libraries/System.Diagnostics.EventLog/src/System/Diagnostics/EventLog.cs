@@ -30,9 +30,11 @@ namespace System.Diagnostics
 
         private EventLogInternal _underlyingEventLog;
 
-        public EventLog() : this(string.Empty, ".", string.Empty) { }
+        public EventLog()
+            : this(string.Empty, ".", string.Empty) { }
 
-        public EventLog(string logName) : this(logName, ".", string.Empty) { }
+        public EventLog(string logName)
+            : this(logName, ".", string.Empty) { }
 
         public EventLog(string logName, string machineName)
             : this(logName, machineName, string.Empty) { }

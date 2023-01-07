@@ -40,7 +40,8 @@ namespace System.Net.Mail
 
         internal Message() { }
 
-        internal Message(string from, string to) : this()
+        internal Message(string from, string to)
+            : this()
         {
             ArgumentException.ThrowIfNullOrEmpty(from);
             ArgumentException.ThrowIfNullOrEmpty(to);
@@ -51,7 +52,8 @@ namespace System.Net.Mail
             _to = collection;
         }
 
-        internal Message(MailAddress from, MailAddress to) : this()
+        internal Message(MailAddress from, MailAddress to)
+            : this()
         {
             _from = from;
             To.Add(to);

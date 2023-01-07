@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         public readonly VirtualCharSequence Text;
         public int Position;
 
-        public JsonLexer(VirtualCharSequence text) : this()
+        public JsonLexer(VirtualCharSequence text)
+            : this()
         {
             Text = text;
         }

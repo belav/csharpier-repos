@@ -74,7 +74,8 @@ namespace System.Xml.Resolvers
             private readonly int _offset;
             private readonly int _length;
 
-            internal ByteArrayChunk(byte[] array) : this(array, 0, array.Length) { }
+            internal ByteArrayChunk(byte[] array)
+                : this(array, 0, array.Length) { }
 
             internal ByteArrayChunk(byte[] array, int offset, int length)
             {
@@ -175,10 +176,11 @@ namespace System.Xml.Resolvers
         //
         // Constructors
         //
-        public XmlPreloadedResolver() : this(null) { }
+        public XmlPreloadedResolver()
+            : this(null) { }
 
-        public XmlPreloadedResolver(XmlKnownDtds preloadedDtds) : this(null, preloadedDtds, null)
-        { }
+        public XmlPreloadedResolver(XmlKnownDtds preloadedDtds)
+            : this(null, preloadedDtds, null) { }
 
         public XmlPreloadedResolver(XmlResolver? fallbackResolver)
             : this(fallbackResolver, XmlKnownDtds.All, null) { }

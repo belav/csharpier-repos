@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
             string title,
             string parentTitle,
             Func<CancellationToken, Task<Document>> createChangedDocument
-        ) : base(title, createChangedDocument, title, CodeActionPriority.Low)
+        )
+            : base(title, createChangedDocument, title, CodeActionPriority.Low)
         {
             ParentTitle = parentTitle;
             SortTitle = parentTitle + "_" + title;

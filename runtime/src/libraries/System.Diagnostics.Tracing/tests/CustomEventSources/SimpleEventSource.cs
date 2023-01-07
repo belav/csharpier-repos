@@ -38,7 +38,8 @@ namespace SdtEventSources
     [EventSource(Name = "SimpleEventSource")]
     public sealed class SimpleEventSource : EventSource
     {
-        public SimpleEventSource() : base(true) { }
+        public SimpleEventSource()
+            : base(true) { }
 
         [Event(
             1,

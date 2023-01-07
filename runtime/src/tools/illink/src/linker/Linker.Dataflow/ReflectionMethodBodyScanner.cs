@@ -66,7 +66,8 @@ namespace Mono.Linker.Dataflow
             LinkContext context,
             MarkStep parent,
             MessageOrigin origin
-        ) : base(context)
+        )
+            : base(context)
         {
             _markStep = parent;
             _origin = origin;

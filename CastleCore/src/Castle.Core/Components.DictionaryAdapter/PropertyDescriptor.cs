@@ -51,7 +51,8 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         /// <param name="property">The property.</param>
         /// <param name="annotations">The annotations.</param>
-        public PropertyDescriptor(PropertyInfo property, object[] annotations) : this()
+        public PropertyDescriptor(PropertyInfo property, object[] annotations)
+            : this()
         {
             Property = property;
             Annotations = annotations ?? NoAnnotations;

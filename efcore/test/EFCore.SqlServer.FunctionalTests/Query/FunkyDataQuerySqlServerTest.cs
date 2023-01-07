@@ -9,7 +9,8 @@ public class FunkyDataQuerySqlServerTest
     public FunkyDataQuerySqlServerTest(
         FunkyDataQuerySqlServerFixture fixture,
         ITestOutputHelper testOutputHelper
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
         //Fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);

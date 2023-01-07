@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly CrefSyntax _crefSyntax;
         private MultiDictionary<string, TypeParameterSymbol> _lazyTypeParameterMap;
 
-        internal WithCrefTypeParametersBinder(CrefSyntax crefSyntax, Binder next) : base(next)
+        internal WithCrefTypeParametersBinder(CrefSyntax crefSyntax, Binder next)
+            : base(next)
         {
             _crefSyntax = crefSyntax;
         }

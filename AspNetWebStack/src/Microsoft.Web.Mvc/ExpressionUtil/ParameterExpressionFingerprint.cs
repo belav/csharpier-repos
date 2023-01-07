@@ -23,7 +23,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
             ExpressionType nodeType,
             Type type,
             int parameterIndex
-        ) : base(nodeType, type)
+        )
+            : base(nodeType, type)
         {
             ParameterIndex = parameterIndex;
         }

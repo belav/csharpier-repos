@@ -164,7 +164,8 @@ namespace Microsoft.Extensions.Configuration.FileExtensions.Test
 
         public class FileConfigurationProviderImpl : FileConfigurationProvider
         {
-            public FileConfigurationProviderImpl(FileConfigurationSource source) : base(source) { }
+            public FileConfigurationProviderImpl(FileConfigurationSource source)
+                : base(source) { }
 
             public override void Load(Stream stream) { }
         }

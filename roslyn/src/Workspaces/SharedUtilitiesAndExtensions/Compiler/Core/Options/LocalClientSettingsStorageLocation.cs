@@ -19,7 +19,8 @@ internal sealed class LocalClientSettingsStorageLocation : ClientSettingsStorage
 {
     public override bool IsMachineLocal => true;
 
-    public LocalClientSettingsStorageLocation(string keyName) : base(keyName) { }
+    public LocalClientSettingsStorageLocation(string keyName)
+        : base(keyName) { }
 
     /// <summary>
     /// Creates a <see cref="RoamingProfileStorageLocation"/> that has different key names for different languages.

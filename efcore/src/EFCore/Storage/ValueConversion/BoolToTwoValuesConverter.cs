@@ -35,7 +35,9 @@ public class BoolToTwoValuesConverter<TProvider> : ValueConverter<bool, TProvide
         TProvider trueValue,
         Expression<Func<TProvider, bool>>? fromProvider = null,
         ConverterMappingHints? mappingHints = null
-    ) : base(ToProvider(falseValue, trueValue), fromProvider ?? ToBool(trueValue), mappingHints) { }
+    )
+        : base(ToProvider(falseValue, trueValue), fromProvider ?? ToBool(trueValue), mappingHints)
+    { }
 
     private static Expression<Func<bool, TProvider>> ToProvider(
         TProvider falseValue,

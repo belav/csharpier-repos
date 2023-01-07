@@ -63,7 +63,8 @@ namespace Castle.DynamicProxy.Generators
             GetTargetExpressionDelegate getTargetTypeExpression,
             OverrideMethodDelegate createMethod,
             IInvocationCreationContributor contributor
-        ) : base(method, createMethod)
+        )
+            : base(method, createMethod)
         {
             this.invocation = invocation;
             this.getTargetExpression = getTargetExpression;

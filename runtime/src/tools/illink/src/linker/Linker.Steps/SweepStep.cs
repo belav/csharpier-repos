@@ -641,7 +641,8 @@ namespace Mono.Linker.Steps
 
             bool changedAnyScopes;
 
-            AssemblyReferencesCorrector(AssemblyDefinition assembly) : base(assembly)
+            AssemblyReferencesCorrector(AssemblyDefinition assembly)
+                : base(assembly)
             {
                 this.importer = new DefaultMetadataImporter(assembly.MainModule);
                 changedAnyScopes = false;

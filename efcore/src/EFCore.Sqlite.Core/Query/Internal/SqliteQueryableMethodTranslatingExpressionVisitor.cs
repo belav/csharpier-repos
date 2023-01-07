@@ -25,7 +25,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
         QueryCompilationContext queryCompilationContext
-    ) : base(dependencies, relationalDependencies, queryCompilationContext) { }
+    )
+        : base(dependencies, relationalDependencies, queryCompilationContext) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,7 +36,8 @@ public class SqliteQueryableMethodTranslatingExpressionVisitor
     /// </summary>
     protected SqliteQueryableMethodTranslatingExpressionVisitor(
         SqliteQueryableMethodTranslatingExpressionVisitor parentVisitor
-    ) : base(parentVisitor) { }
+    )
+        : base(parentVisitor) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

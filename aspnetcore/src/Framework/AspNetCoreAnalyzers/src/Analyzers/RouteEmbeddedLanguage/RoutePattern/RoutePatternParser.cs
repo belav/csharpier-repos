@@ -20,7 +20,8 @@ internal partial struct RoutePatternParser
     private RoutePatternToken _currentToken;
     private readonly bool _supportTokenReplacement;
 
-    private RoutePatternParser(VirtualCharSequence text, bool supportTokenReplacement) : this()
+    private RoutePatternParser(VirtualCharSequence text, bool supportTokenReplacement)
+        : this()
     {
         _lexer = new RoutePatternLexer(text, supportTokenReplacement);
 

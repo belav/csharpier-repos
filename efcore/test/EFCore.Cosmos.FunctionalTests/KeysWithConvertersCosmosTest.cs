@@ -6,7 +6,8 @@ namespace Microsoft.EntityFrameworkCore.Cosmos;
 public class KeysWithConvertersCosmosTest
     : KeysWithConvertersTestBase<KeysWithConvertersCosmosTest.KeysWithConvertersCosmosFixture>
 {
-    public KeysWithConvertersCosmosTest(KeysWithConvertersCosmosFixture fixture) : base(fixture) { }
+    public KeysWithConvertersCosmosTest(KeysWithConvertersCosmosFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact(Skip = "Issue=#16920 (Include)")]
     public override void Can_insert_and_read_back_with_struct_key_and_optional_dependents() =>

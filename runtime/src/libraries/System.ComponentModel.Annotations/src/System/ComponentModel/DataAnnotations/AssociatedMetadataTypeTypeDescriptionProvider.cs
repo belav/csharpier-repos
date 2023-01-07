@@ -33,7 +33,8 @@ namespace System.ComponentModel.DataAnnotations
             Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
                 Type associatedMetadataType
-        ) : this(type)
+        )
+            : this(type)
         {
             ArgumentNullException.ThrowIfNull(associatedMetadataType);
 

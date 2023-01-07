@@ -480,7 +480,8 @@ namespace System.Net.Mail
                 ContextAwareResult outerResult,
                 AsyncCallback? callback,
                 object? state
-            ) : base(null, state, callback)
+            )
+                : base(null, state, callback)
             {
                 _connection = connection;
                 _host = host;

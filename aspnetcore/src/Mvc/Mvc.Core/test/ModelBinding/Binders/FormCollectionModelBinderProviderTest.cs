@@ -60,6 +60,7 @@ public class FormCollectionModelBinderProviderTest
 
     private class DerivedFormCollection : FormCollection
     {
-        public DerivedFormCollection() : base(fields: null, files: null) { }
+        public DerivedFormCollection()
+            : base(fields: null, files: null) { }
     }
 }

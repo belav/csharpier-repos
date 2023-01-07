@@ -41,7 +41,8 @@ public class ClientCertificateTests : IISFunctionalTestBase
     public ClientCertificateTests(
         PublishedSitesFixture fixture,
         ClientCertificateFixture certFixture
-    ) : base(fixture)
+    )
+        : base(fixture)
     {
         _certFixture = certFixture;
     }

@@ -773,7 +773,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal class SafeNCryptHandle : SafeHandle
     {
-        public SafeNCryptHandle() : base(IntPtr.Zero, ownsHandle: true) { }
+        public SafeNCryptHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -800,7 +801,8 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class DuplicateSafeNCryptKeyHandle : SafeNCryptKeyHandle
     {
-        public DuplicateSafeNCryptKeyHandle(SafeNCryptKeyHandle original) : base()
+        public DuplicateSafeNCryptKeyHandle(SafeNCryptKeyHandle original)
+            : base()
         {
             bool success = false;
             original.DangerousAddRef(ref success);

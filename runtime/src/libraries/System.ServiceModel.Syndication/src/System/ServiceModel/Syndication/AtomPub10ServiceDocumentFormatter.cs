@@ -18,9 +18,11 @@ namespace System.ServiceModel.Syndication
         private readonly Type _documentType;
         private readonly int _maxExtensionSize;
 
-        public AtomPub10ServiceDocumentFormatter() : this(typeof(ServiceDocument)) { }
+        public AtomPub10ServiceDocumentFormatter()
+            : this(typeof(ServiceDocument)) { }
 
-        public AtomPub10ServiceDocumentFormatter(Type documentTypeToCreate) : base()
+        public AtomPub10ServiceDocumentFormatter(Type documentTypeToCreate)
+            : base()
         {
             if (documentTypeToCreate is null)
             {
@@ -866,7 +868,8 @@ namespace System.ServiceModel.Syndication
     public class AtomPub10ServiceDocumentFormatter<TServiceDocument>
         : AtomPub10ServiceDocumentFormatter where TServiceDocument : ServiceDocument, new()
     {
-        public AtomPub10ServiceDocumentFormatter() : base(typeof(TServiceDocument)) { }
+        public AtomPub10ServiceDocumentFormatter()
+            : base(typeof(TServiceDocument)) { }
 
         public AtomPub10ServiceDocumentFormatter(TServiceDocument documentToWrite)
             : base(documentToWrite) { }

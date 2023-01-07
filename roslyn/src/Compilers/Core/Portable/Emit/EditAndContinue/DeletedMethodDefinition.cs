@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             IMethodDefinition oldMethod,
             ITypeDefinition containingTypeDef,
             Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
-        ) : base(oldMethod, typesUsedByDeletedMembers)
+        )
+            : base(oldMethod, typesUsedByDeletedMembers)
         {
             _containingTypeDef = containingTypeDef;
 

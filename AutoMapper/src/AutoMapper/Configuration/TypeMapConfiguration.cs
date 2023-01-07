@@ -304,8 +304,8 @@ public abstract class MappingExpressionBase<TSource, TDestination, TMappingExpre
     protected MappingExpressionBase(MemberList memberList, Type sourceType, Type destinationType)
         : base(memberList, sourceType, destinationType) { }
 
-    protected MappingExpressionBase(MemberList memberList, TypePair types) : base(memberList, types)
-    { }
+    protected MappingExpressionBase(MemberList memberList, TypePair types)
+        : base(memberList, types) { }
 
     public void As(Type typeOverride)
     {

@@ -19,7 +19,8 @@ public sealed class DpapiXmlDecryptor : IXmlDecryptor
     /// <summary>
     /// Creates a new instance of a <see cref="DpapiXmlDecryptor"/>.
     /// </summary>
-    public DpapiXmlDecryptor() : this(services: null) { }
+    public DpapiXmlDecryptor()
+        : this(services: null) { }
 
     /// <summary>
     /// Creates a new instance of a <see cref="DpapiXmlDecryptor"/>.

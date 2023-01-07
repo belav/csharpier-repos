@@ -24,17 +24,20 @@ namespace System.Data.OleDb
             _selectCommand,
             _updateCommand;
 
-        public OleDbDataAdapter() : base()
+        public OleDbDataAdapter()
+            : base()
         {
             GC.SuppressFinalize(this);
         }
 
-        public OleDbDataAdapter(OleDbCommand? selectCommand) : this()
+        public OleDbDataAdapter(OleDbCommand? selectCommand)
+            : this()
         {
             SelectCommand = selectCommand;
         }
 
-        public OleDbDataAdapter(string? selectCommandText, string? selectConnectionString) : this()
+        public OleDbDataAdapter(string? selectCommandText, string? selectConnectionString)
+            : this()
         {
             OleDbConnection connection = new OleDbConnection(selectConnectionString);
             SelectCommand = new OleDbCommand(selectCommandText, connection);
@@ -46,7 +49,8 @@ namespace System.Data.OleDb
             SelectCommand = new OleDbCommand(selectCommandText, selectConnection);
         }
 
-        private OleDbDataAdapter(OleDbDataAdapter from) : base(from)
+        private OleDbDataAdapter(OleDbDataAdapter from)
+            : base(from)
         {
             GC.SuppressFinalize(this);
         }

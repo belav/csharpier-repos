@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             string name,
             string[] languages,
             params string[] identifiers
-        ) : this(name, languages, supportsUnannotatedAPIs: false, identifiers) { }
+        )
+            : this(name, languages, supportsUnannotatedAPIs: false, identifiers) { }
 
         public ExportEmbeddedLanguageBraceMatcherAttribute(
             string name,

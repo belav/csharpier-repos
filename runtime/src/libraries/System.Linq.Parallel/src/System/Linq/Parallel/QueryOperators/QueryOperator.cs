@@ -34,9 +34,11 @@ namespace System.Linq.Parallel
     {
         protected bool _outputOrdered;
 
-        internal QueryOperator(QuerySettings settings) : this(false, settings) { }
+        internal QueryOperator(QuerySettings settings)
+            : this(false, settings) { }
 
-        internal QueryOperator(bool isOrdered, QuerySettings settings) : base(settings)
+        internal QueryOperator(bool isOrdered, QuerySettings settings)
+            : base(settings)
         {
             _outputOrdered = isOrdered;
         }

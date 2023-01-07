@@ -214,7 +214,8 @@ namespace System.Runtime.Serialization.Json
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             public JsonCollectionDataContractCriticalHelper(
                 CollectionDataContract traditionalDataContract
-            ) : base(traditionalDataContract)
+            )
+                : base(traditionalDataContract)
             {
                 _traditionalCollectionDataContract = traditionalDataContract;
             }

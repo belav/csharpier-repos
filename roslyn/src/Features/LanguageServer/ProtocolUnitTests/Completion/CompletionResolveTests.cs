@@ -520,8 +520,8 @@ link text";
 
         private class TestCaretOutOfScopeCompletionService : CompletionService
         {
-            public TestCaretOutOfScopeCompletionService(SolutionServices services) : base(services)
-            { }
+            public TestCaretOutOfScopeCompletionService(SolutionServices services)
+                : base(services) { }
 
             public override string Language => LanguageNames.CSharp;
 

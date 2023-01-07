@@ -52,7 +52,8 @@ namespace System.Reflection.Emit
             Type[]? parameterTypes,
             ModuleBuilder mod,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TypeBuilder type
-        ) : this(name, attributes, callingConvention, parameterTypes, null, null, mod, type) { }
+        )
+            : this(name, attributes, callingConvention, parameterTypes, null, null, mod, type) { }
 
         #endregion
 

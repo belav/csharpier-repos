@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis
                 _adjustRunTime = null;
             }
 
-            public RunTimer(Func<TimeSpan, TimeSpan>? adjustRunTime) : this()
+            public RunTimer(Func<TimeSpan, TimeSpan>? adjustRunTime)
+                : this()
             {
                 _adjustRunTime = adjustRunTime;
             }
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis
             public RunTimer(
                 Action<TimeSpan> callback,
                 Func<TimeSpan, TimeSpan>? adjustRunTime = null
-            ) : this(adjustRunTime)
+            )
+                : this(adjustRunTime)
             {
                 _callback = callback;
             }

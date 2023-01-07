@@ -15,7 +15,8 @@ namespace Microsoft.TestCommon
     {
         Xunit.InlineDataAttribute _inner;
 
-        public InlineDataAttribute(params object[] dataValues) : base()
+        public InlineDataAttribute(params object[] dataValues)
+            : base()
         {
             _inner = new Xunit.InlineDataAttribute(dataValues);
         }

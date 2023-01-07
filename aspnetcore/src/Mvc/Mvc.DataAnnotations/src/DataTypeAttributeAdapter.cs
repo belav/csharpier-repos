@@ -17,7 +17,8 @@ internal sealed class DataTypeAttributeAdapter : AttributeAdapterBase<DataTypeAt
         DataTypeAttribute attribute,
         string ruleName,
         IStringLocalizer? stringLocalizer
-    ) : base(attribute, stringLocalizer)
+    )
+        : base(attribute, stringLocalizer)
     {
         if (string.IsNullOrEmpty(ruleName))
         {

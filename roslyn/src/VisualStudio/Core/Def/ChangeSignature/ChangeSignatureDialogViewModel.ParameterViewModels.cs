@@ -110,7 +110,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             public AddedParameterViewModel(
                 ChangeSignatureDialogViewModel changeSignatureDialogViewModel,
                 AddedParameter addedParameter
-            ) : base(changeSignatureDialogViewModel)
+            )
+                : base(changeSignatureDialogViewModel)
             {
                 _addedParameter = addedParameter;
             }
@@ -176,7 +177,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 ChangeSignatureDialogViewModel changeSignatureDialogViewModel,
                 ExistingParameter existingParameter,
                 int initialIndex
-            ) : base(changeSignatureDialogViewModel)
+            )
+                : base(changeSignatureDialogViewModel)
             {
                 _existingParameter = existingParameter;
                 InitialIndex = initialIndex.ToString();

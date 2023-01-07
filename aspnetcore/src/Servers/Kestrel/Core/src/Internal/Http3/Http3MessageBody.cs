@@ -14,7 +14,8 @@ internal sealed class Http3MessageBody : MessageBody
     private readonly Http3Stream _context;
     private ReadResult _readResult;
 
-    public Http3MessageBody(Http3Stream context) : base(context)
+    public Http3MessageBody(Http3Stream context)
+        : base(context)
     {
         _context = context;
         ExtendedConnect = _context.IsExtendedConnectRequest;

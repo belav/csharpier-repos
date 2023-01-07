@@ -192,7 +192,8 @@ namespace Microsoft.Extensions.Options
         )]
         public ConfigureFromConfigurationOptions(
             Microsoft.Extensions.Configuration.IConfiguration config
-        ) : base(default(System.Action<TOptions>)) { }
+        )
+            : base(default(System.Action<TOptions>)) { }
     }
 
     public partial class NamedConfigureFromConfigurationOptions<
@@ -211,7 +212,8 @@ namespace Microsoft.Extensions.Options
         public NamedConfigureFromConfigurationOptions(
             string? name,
             Microsoft.Extensions.Configuration.IConfiguration config
-        ) : base(default(string), default(System.Action<TOptions>)) { }
+        )
+            : base(default(string), default(System.Action<TOptions>)) { }
 
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values may require generating dynamic code at runtime."
@@ -223,6 +225,7 @@ namespace Microsoft.Extensions.Options
             string? name,
             Microsoft.Extensions.Configuration.IConfiguration config,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions>? configureBinder
-        ) : base(default(string), default(System.Action<TOptions>)) { }
+        )
+            : base(default(string), default(System.Action<TOptions>)) { }
     }
 }

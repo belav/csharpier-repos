@@ -23,7 +23,8 @@ namespace System.IO.Hashing.Tests
             0x0E
         };
 
-        public XxHash64Tests_Seeded_007() : base(s_emptyHashValue) { }
+        public XxHash64Tests_Seeded_007()
+            : base(s_emptyHashValue) { }
 
         public static IEnumerable<object[]> TestCases
         {

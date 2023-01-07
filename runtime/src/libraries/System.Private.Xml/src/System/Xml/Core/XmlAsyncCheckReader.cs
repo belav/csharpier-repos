@@ -945,7 +945,8 @@ namespace System.Xml
     {
         private readonly IXmlNamespaceResolver _readerAsIXmlNamespaceResolver;
 
-        public XmlAsyncCheckReaderWithNS(XmlReader reader) : base(reader)
+        public XmlAsyncCheckReaderWithNS(XmlReader reader)
+            : base(reader)
         {
             _readerAsIXmlNamespaceResolver = (IXmlNamespaceResolver)reader;
         }
@@ -974,7 +975,8 @@ namespace System.Xml
     {
         private readonly IXmlLineInfo _readerAsIXmlLineInfo;
 
-        public XmlAsyncCheckReaderWithLineInfo(XmlReader reader) : base(reader)
+        public XmlAsyncCheckReaderWithLineInfo(XmlReader reader)
+            : base(reader)
         {
             _readerAsIXmlLineInfo = (IXmlLineInfo)reader;
         }
@@ -1003,7 +1005,8 @@ namespace System.Xml
     {
         private readonly IXmlNamespaceResolver _readerAsIXmlNamespaceResolver;
 
-        public XmlAsyncCheckReaderWithLineInfoNS(XmlReader reader) : base(reader)
+        public XmlAsyncCheckReaderWithLineInfoNS(XmlReader reader)
+            : base(reader)
         {
             _readerAsIXmlNamespaceResolver = (IXmlNamespaceResolver)reader;
         }
@@ -1034,7 +1037,8 @@ namespace System.Xml
     {
         private readonly IXmlSchemaInfo _readerAsIXmlSchemaInfo;
 
-        public XmlAsyncCheckReaderWithLineInfoNSSchema(XmlReader reader) : base(reader)
+        public XmlAsyncCheckReaderWithLineInfoNSSchema(XmlReader reader)
+            : base(reader)
         {
             _readerAsIXmlSchemaInfo = (IXmlSchemaInfo)reader;
         }

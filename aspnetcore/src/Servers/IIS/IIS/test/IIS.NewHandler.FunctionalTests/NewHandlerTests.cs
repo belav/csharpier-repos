@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class NewHandlerTests : IISFunctionalTestBase
 {
-    public NewHandlerTests(PublishedSitesFixture fixture) : base(fixture) { }
+    public NewHandlerTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task CheckNewHandlerIsUsed()

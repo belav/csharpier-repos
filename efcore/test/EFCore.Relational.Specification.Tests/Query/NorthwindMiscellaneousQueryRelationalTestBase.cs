@@ -9,7 +9,8 @@ public abstract class NorthwindMiscellaneousQueryRelationalTestBase<TFixture>
     : NorthwindMiscellaneousQueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindMiscellaneousQueryRelationalTestBase(TFixture fixture) : base(fixture) { }
+    protected NorthwindMiscellaneousQueryRelationalTestBase(TFixture fixture)
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]

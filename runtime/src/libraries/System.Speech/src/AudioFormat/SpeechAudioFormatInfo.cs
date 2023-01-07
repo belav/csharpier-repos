@@ -118,7 +118,8 @@ namespace System.Speech.AudioFormat
             int samplesPerSecond,
             AudioBitsPerSample bitsPerSample,
             AudioChannel channel
-        ) : this(EncodingFormat.Pcm, samplesPerSecond, (short)bitsPerSample, (short)channel, null)
+        )
+            : this(EncodingFormat.Pcm, samplesPerSecond, (short)bitsPerSample, (short)channel, null)
         {
             // Don't explicitly check these are sensible values - allow flexibility here as some formats may do unexpected things here.
             _blockAlign = (short)(_channelCount * (_bitsPerSample / 8));

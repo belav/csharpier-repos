@@ -30,7 +30,8 @@ public class SqliteDatabaseCreator : RelationalDatabaseCreator
         RelationalDatabaseCreatorDependencies dependencies,
         ISqliteRelationalConnection connection,
         IRawSqlCommandBuilder rawSqlCommandBuilder
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         _connection = connection;
         _rawSqlCommandBuilder = rawSqlCommandBuilder;

@@ -1384,13 +1384,15 @@ namespace ns1
         }
 
         // Constructor
-        public c6(int i) : this()
+        public c6(int i)
+            : this()
         {
             Console.WriteLine("    c6<T, U>.ctor(int i)");
         }
 
         // Constructor
-        public c6(T i, List<Func<U>> j) : this(1)
+        public c6(T i, List<Func<U>> j)
+            : this(1)
         {
             Console.WriteLine("    c6<T, U>.ctor(T i, List<Func<U>> j)");
         }
@@ -1605,13 +1607,15 @@ namespace ns1
     public class c7<T, U> : c6<U, T>, IEnumerable<U>, IDisposable, ICloneable, ICollection<U>
     {
         // Constructor
-        public c7() : base()
+        public c7()
+            : base()
         {
             Console.WriteLine("    c7<T, U>.ctor()");
         }
 
         // Constructor
-        public c7(int i) : base(i)
+        public c7(int i)
+            : base(i)
         {
             ++i;
             Console.WriteLine("    c7<T, U>.ctor(int i)");
@@ -1619,7 +1623,8 @@ namespace ns1
         }
 
         // Constructor
-        public c7(T i, List<Func<U>> j) : base(default(U), new List<Func<T>>())
+        public c7(T i, List<Func<U>> j)
+            : base(default(U), new List<Func<T>>())
         {
             Console.WriteLine("    c7<T, U>.ctor(T i, List<Func<U>> j)");
         }

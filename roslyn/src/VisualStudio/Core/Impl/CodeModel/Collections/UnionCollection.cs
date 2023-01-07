@@ -34,7 +34,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             AbstractCodeElement parent,
             ICodeElements[] collections
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             _collections = collections;
         }

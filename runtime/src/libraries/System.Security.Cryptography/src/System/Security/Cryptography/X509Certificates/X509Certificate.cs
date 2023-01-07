@@ -54,7 +54,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         // Null turns into the empty span here, which is correct for compat.
         [UnsupportedOSPlatform("browser")]
-        public X509Certificate(byte[] data) : this(new ReadOnlySpan<byte>(data)) { }
+        public X509Certificate(byte[] data)
+            : this(new ReadOnlySpan<byte>(data)) { }
 
         private protected X509Certificate(ReadOnlySpan<byte> data)
         {
@@ -200,7 +201,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             SecureString? password,
             X509KeyStorageFlags keyStorageFlags
-        ) : this()
+        )
+            : this()
 #pragma warning restore SYSLIB0026
         {
             ArgumentNullException.ThrowIfNull(fileName);
@@ -225,7 +227,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
 #pragma warning disable SYSLIB0026
-        public X509Certificate(SerializationInfo info, StreamingContext context) : this()
+        public X509Certificate(SerializationInfo info, StreamingContext context)
+            : this()
 #pragma warning restore SYSLIB0026
         {
             throw new PlatformNotSupportedException();

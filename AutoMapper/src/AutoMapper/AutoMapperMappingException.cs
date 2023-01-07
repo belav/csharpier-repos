@@ -11,7 +11,8 @@ public class AutoMapperMappingException : Exception
 
     public AutoMapperMappingException() { }
 
-    public AutoMapperMappingException(string message) : base(message) => _message = message;
+    public AutoMapperMappingException(string message)
+        : base(message) => _message = message;
 
     public AutoMapperMappingException(string message, Exception innerException)
         : base(message, innerException) => _message = message;
@@ -146,10 +147,11 @@ public class AutoMapperConfigurationException : Exception
         }
     }
 
-    public AutoMapperConfigurationException(string message) : base(message) { }
+    public AutoMapperConfigurationException(string message)
+        : base(message) { }
 
-    public AutoMapperConfigurationException(string message, Exception inner) : base(message, inner)
-    { }
+    public AutoMapperConfigurationException(string message, Exception inner)
+        : base(message, inner) { }
 
     public AutoMapperConfigurationException(TypeMapConfigErrors[] errors) => Errors = errors;
 

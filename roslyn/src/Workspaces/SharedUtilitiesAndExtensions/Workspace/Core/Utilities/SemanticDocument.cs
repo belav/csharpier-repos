@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             SourceText text,
             SyntaxNode root,
             SemanticModel semanticModel
-        ) : base(document, text, root)
+        )
+            : base(document, text, root)
         {
             this.SemanticModel = semanticModel;
         }

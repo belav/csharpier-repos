@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public sealed class DisposableDirectory : TempDirectory, IDisposable
     {
-        public DisposableDirectory(TempRoot root) : base(root) { }
+        public DisposableDirectory(TempRoot root)
+            : base(root) { }
 
         public void Dispose()
         {

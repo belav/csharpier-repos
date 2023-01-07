@@ -336,7 +336,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         : R2RSignatureTypeProvider,
             IR2RSignatureTypeProvider<TypeDesc, MethodDesc, R2RSigProviderContext>
     {
-        public R2RSignatureTypeProviderForGlobalTables(TraceTypeSystemContext tsc) : base(tsc) { }
+        public R2RSignatureTypeProviderForGlobalTables(TraceTypeSystemContext tsc)
+            : base(tsc) { }
 
         MethodDesc IR2RSignatureTypeProvider<
             TypeDesc,

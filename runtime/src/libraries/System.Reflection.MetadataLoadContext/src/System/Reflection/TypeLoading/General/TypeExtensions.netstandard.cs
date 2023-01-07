@@ -46,7 +46,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract class LeveledTypeInfo : TypeDelegator
     {
-        protected LeveledTypeInfo() : base() { }
+        protected LeveledTypeInfo()
+            : base() { }
 
         // This is an api that TypeDelegator overrides that it needn't have. Since RoType expects to fall through to System.Type's method, we have to reimplement
         // System.Type's behavior here to avoid getting TypeDelegator's method.

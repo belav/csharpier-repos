@@ -18,7 +18,8 @@ namespace System.Dynamic.Tests
                 string name,
                 bool ignoreCase,
                 CallInfo callInfo
-            ) : base(name, ignoreCase, callInfo) { }
+            )
+                : base(name, ignoreCase, callInfo) { }
 
             public override DynamicMetaObject FallbackInvokeMember(
                 DynamicMetaObject target,

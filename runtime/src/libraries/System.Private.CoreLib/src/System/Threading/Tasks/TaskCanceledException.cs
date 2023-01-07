@@ -28,14 +28,16 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskCanceledException"/> class.
         /// </summary>
-        public TaskCanceledException() : base(SR.TaskCanceledException_ctor_DefaultMessage) { }
+        public TaskCanceledException()
+            : base(SR.TaskCanceledException_ctor_DefaultMessage) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskCanceledException"/>
         /// class with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public TaskCanceledException(string? message) : base(message) { }
+        public TaskCanceledException(string? message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskCanceledException"/>
@@ -59,7 +61,8 @@ namespace System.Threading.Tasks
             string? message,
             Exception? innerException,
             CancellationToken token
-        ) : base(message, innerException, token) { }
+        )
+            : base(message, innerException, token) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Threading.Tasks.TaskCanceledException"/> class

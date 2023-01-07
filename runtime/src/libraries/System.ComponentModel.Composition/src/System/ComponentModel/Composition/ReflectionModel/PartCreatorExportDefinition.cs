@@ -12,7 +12,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private readonly ExportDefinition _productDefinition;
         private IDictionary<string, object?>? _metadata;
 
-        public PartCreatorExportDefinition(ExportDefinition productDefinition) : base()
+        public PartCreatorExportDefinition(ExportDefinition productDefinition)
+            : base()
         {
             _productDefinition = productDefinition;
         }

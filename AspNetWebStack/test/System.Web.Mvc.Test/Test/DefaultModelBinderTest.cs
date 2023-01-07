@@ -3264,7 +3264,8 @@ namespace System.Web.Mvc.Test
         {
             public AlwaysInvalidAttribute() { }
 
-            public AlwaysInvalidAttribute(string message) : base(message) { }
+            public AlwaysInvalidAttribute(string message)
+                : base(message) { }
 
             public override bool IsValid(object value)
             {
@@ -3577,7 +3578,8 @@ namespace System.Web.Mvc.Test
 
         class TestableDefaultModelBinder<TModel> : DefaultModelBinder where TModel : new()
         {
-            public TestableDefaultModelBinder() : this(new TModel()) { }
+            public TestableDefaultModelBinder()
+                : this(new TModel()) { }
 
             public TestableDefaultModelBinder(TModel model)
             {

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis
             WorkspaceDiagnosticKind kind,
             string message,
             DocumentId documentId
-        ) : base(kind, message)
+        )
+            : base(kind, message)
         {
             this.DocumentId = documentId;
         }

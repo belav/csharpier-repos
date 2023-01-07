@@ -24,7 +24,8 @@ namespace System.Web.Mvc.Filters
             ControllerContext controllerContext,
             ActionDescriptor actionDescriptor,
             ActionResult result
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (actionDescriptor == null)
             {

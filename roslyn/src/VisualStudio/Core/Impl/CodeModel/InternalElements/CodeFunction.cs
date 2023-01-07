@@ -57,14 +57,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             int? nodeKind
-        ) : base(state, fileCodeModel, nodeKey, nodeKind) { }
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         internal CodeFunction(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
             string name
-        ) : base(state, fileCodeModel, nodeKind, name) { }
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         EnvDTE.CodeElements ICodeElementContainer<CodeParameter>.GetCollection() => this.Parameters;
 

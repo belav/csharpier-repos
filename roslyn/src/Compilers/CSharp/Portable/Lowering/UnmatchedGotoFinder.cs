@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private UnmatchedGotoFinder(
             Dictionary<BoundNode, HashSet<LabelSymbol>> unmatchedLabelsCache,
             int recursionDepth
-        ) : base(recursionDepth)
+        )
+            : base(recursionDepth)
         {
             Debug.Assert(unmatchedLabelsCache != null);
             _unmatchedLabelsCache = unmatchedLabelsCache;

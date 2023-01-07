@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Completion
                 );
         }
 
-        private InteractiveCommandCompletionService(Workspace workspace) : base(workspace) { }
+        private InteractiveCommandCompletionService(Workspace workspace)
+            : base(workspace) { }
 
         public override string Language => InteractiveLanguageNames.InteractiveCommand;
 

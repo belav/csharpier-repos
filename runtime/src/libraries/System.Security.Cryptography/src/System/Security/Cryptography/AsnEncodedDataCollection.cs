@@ -15,7 +15,8 @@ namespace System.Security.Cryptography
             _list = new List<AsnEncodedData>();
         }
 
-        public AsnEncodedDataCollection(AsnEncodedData asnEncodedData) : this()
+        public AsnEncodedDataCollection(AsnEncodedData asnEncodedData)
+            : this()
         {
             _list.Add(asnEncodedData);
         }

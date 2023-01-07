@@ -106,7 +106,8 @@ public class ConfigureCompatibilityOptionsTest
             ILoggerFactory loggerFactory,
             IOptions<MvcCompatibilityOptions> compatibilityOptions,
             IReadOnlyDictionary<string, object> defaultValues
-        ) : base(loggerFactory, compatibilityOptions)
+        )
+            : base(loggerFactory, compatibilityOptions)
         {
             DefaultValues = defaultValues;
         }

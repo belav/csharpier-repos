@@ -36,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Exter
             ProjectId projectId,
             IParameterSymbol symbol,
             AbstractExternalCodeElement parent
-        ) : base(state, projectId, symbol)
+        )
+            : base(state, projectId, symbol)
         {
             _parentHandle = new ParentHandle<AbstractExternalCodeElement>(parent);
         }

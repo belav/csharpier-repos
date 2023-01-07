@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.BuildTasks
 
         internal abstract RequestLanguage Language { get; }
 
-        public ManagedCompiler() : base(ErrorString.ResourceManager)
+        public ManagedCompiler()
+            : base(ErrorString.ResourceManager)
         {
             // If there is a crash, the runtime error is output to stderr and
             // we want MSBuild to print it out regardless of verbosity.

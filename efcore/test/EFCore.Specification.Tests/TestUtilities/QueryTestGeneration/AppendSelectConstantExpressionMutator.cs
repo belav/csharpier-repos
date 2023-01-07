@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 
 public class AppendSelectConstantExpressionMutator : ExpressionMutator
 {
-    public AppendSelectConstantExpressionMutator(DbContext context) : base(context) { }
+    public AppendSelectConstantExpressionMutator(DbContext context)
+        : base(context) { }
 
     private readonly List<(Type type, Expression expression)> _expressions =
         new()

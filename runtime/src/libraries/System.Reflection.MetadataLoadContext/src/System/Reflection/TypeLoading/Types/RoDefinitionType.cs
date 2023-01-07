@@ -13,7 +13,8 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal abstract partial class RoDefinitionType : RoInstantiationProviderType
     {
-        protected RoDefinitionType() : base() { }
+        protected RoDefinitionType()
+            : base() { }
 
         public sealed override bool IsTypeDefinition => true;
 

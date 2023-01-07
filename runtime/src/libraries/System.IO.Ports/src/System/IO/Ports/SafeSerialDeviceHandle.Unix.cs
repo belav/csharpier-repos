@@ -12,7 +12,8 @@ namespace System.IO.Ports
 {
     internal sealed class SafeSerialDeviceHandle : SafeHandleMinusOneIsInvalid
     {
-        public SafeSerialDeviceHandle() : base(ownsHandle: true) { }
+        public SafeSerialDeviceHandle()
+            : base(ownsHandle: true) { }
 
         internal static SafeSerialDeviceHandle Open(string portName)
         {

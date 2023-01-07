@@ -18,7 +18,8 @@ namespace System.Web.Mvc
         public CachedDataAnnotationsModelMetadata(
             CachedDataAnnotationsModelMetadata prototype,
             Func<object> modelAccessor
-        ) : base(prototype, modelAccessor) { }
+        )
+            : base(prototype, modelAccessor) { }
 
         public CachedDataAnnotationsModelMetadata(
             CachedDataAnnotationsModelMetadataProvider provider,

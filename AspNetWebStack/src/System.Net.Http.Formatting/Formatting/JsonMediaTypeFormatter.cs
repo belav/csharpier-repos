@@ -60,7 +60,8 @@ namespace System.Net.Http.Formatting
         /// Initializes a new instance of the <see cref="JsonMediaTypeFormatter"/> class.
         /// </summary>
         /// <param name="formatter">The <see cref="JsonMediaTypeFormatter"/> instance to copy settings from.</param>
-        protected JsonMediaTypeFormatter(JsonMediaTypeFormatter formatter) : base(formatter)
+        protected JsonMediaTypeFormatter(JsonMediaTypeFormatter formatter)
+            : base(formatter)
         {
             Contract.Assert(formatter != null);
 

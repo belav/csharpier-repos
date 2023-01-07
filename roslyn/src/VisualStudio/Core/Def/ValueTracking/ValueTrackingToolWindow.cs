@@ -61,7 +61,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         /// context. If the tool window is left open across shutdown/restart
         /// of VS for example, then this gets called.
         /// </summary>
-        public ValueTrackingToolWindow() : base(null)
+        public ValueTrackingToolWindow()
+            : base(null)
         {
             Caption = ServicesVSResources.Value_Tracking;
             Content = _root;

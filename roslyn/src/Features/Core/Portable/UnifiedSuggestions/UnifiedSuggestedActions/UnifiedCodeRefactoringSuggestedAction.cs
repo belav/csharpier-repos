@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
             CodeAction codeAction,
             CodeActionPriority codeActionPriority,
             CodeRefactoringProvider codeRefactoringProvider
-        ) : base(workspace, codeAction, codeActionPriority)
+        )
+            : base(workspace, codeAction, codeActionPriority)
         {
             CodeRefactoringProvider = codeRefactoringProvider;
         }

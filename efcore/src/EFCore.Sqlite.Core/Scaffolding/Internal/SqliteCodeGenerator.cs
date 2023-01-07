@@ -26,8 +26,8 @@ public class SqliteCodeGenerator : ProviderCodeGenerator
     ///     Initializes a new instance of the <see cref="SqliteCodeGenerator" /> class.
     /// </summary>
     /// <param name="dependencies">The dependencies.</param>
-    public SqliteCodeGenerator(ProviderCodeGeneratorDependencies dependencies) : base(dependencies)
-    { }
+    public SqliteCodeGenerator(ProviderCodeGeneratorDependencies dependencies)
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

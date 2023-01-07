@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor
         public Document Document { get; }
         public TextSpan TextSpan { get; }
 
-        public InlineRenameLocation(Document document, TextSpan textSpan) : this()
+        public InlineRenameLocation(Document document, TextSpan textSpan)
+            : this()
         {
             this.Document = document;
             this.TextSpan = textSpan;
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor
             InlineRenameReplacementKind kind,
             TextSpan originalSpan,
             TextSpan newSpan
-        ) : this()
+        )
+            : this()
         {
             this.Kind = kind;
             this.OriginalSpan = originalSpan;

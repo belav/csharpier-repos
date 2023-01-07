@@ -29,7 +29,8 @@ namespace System
 
         // Creates a new ArgumentException with its message
         // string set to the empty string.
-        public ArgumentException() : base(SR.Arg_ArgumentException)
+        public ArgumentException()
+            : base(SR.Arg_ArgumentException)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -37,7 +38,8 @@ namespace System
         // Creates a new ArgumentException with its message
         // string set to message.
         //
-        public ArgumentException(string? message) : base(message)
+        public ArgumentException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_ARGUMENT;
         }
@@ -55,7 +57,8 @@ namespace System
             HResult = HResults.COR_E_ARGUMENT;
         }
 
-        public ArgumentException(string? message, string? paramName) : base(message)
+        public ArgumentException(string? message, string? paramName)
+            : base(message)
         {
             _paramName = paramName;
             HResult = HResults.COR_E_ARGUMENT;

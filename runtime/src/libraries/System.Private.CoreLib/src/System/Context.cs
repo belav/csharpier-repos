@@ -16,11 +16,14 @@ namespace System
     )]
     public class ContextMarshalException : SystemException
     {
-        public ContextMarshalException() : this(SR.Arg_ContextMarshalException, null) { }
+        public ContextMarshalException()
+            : this(SR.Arg_ContextMarshalException, null) { }
 
-        public ContextMarshalException(string? message) : this(message, null) { }
+        public ContextMarshalException(string? message)
+            : this(message, null) { }
 
-        public ContextMarshalException(string? message, Exception? inner) : base(message, inner)
+        public ContextMarshalException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = HResults.COR_E_CONTEXTMARSHAL;
         }

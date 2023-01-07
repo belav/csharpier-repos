@@ -19,7 +19,8 @@ public class SecurityTokenReceivedContext : RemoteAuthenticationContext<WsFedera
         AuthenticationScheme scheme,
         WsFederationOptions options,
         AuthenticationProperties properties
-    ) : base(context, scheme, options, properties) { }
+    )
+        : base(context, scheme, options, properties) { }
 
     /// <summary>
     /// The <see cref="WsFederationMessage"/> received on this request.

@@ -12,7 +12,8 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal GrammarElement(Backend backend, CustomGrammar cg) : base(null)
+        internal GrammarElement(Backend backend, CustomGrammar cg)
+            : base(null)
         {
             _cg = cg;
             _backend = backend;

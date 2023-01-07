@@ -53,14 +53,17 @@ namespace System.DirectoryServices.ActiveDirectory
         public ActiveDirectoryObjectNotFoundException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        public ActiveDirectoryObjectNotFoundException(string? message) : base(message) { }
+        public ActiveDirectoryObjectNotFoundException(string? message)
+            : base(message) { }
 
-        public ActiveDirectoryObjectNotFoundException() : base() { }
+        public ActiveDirectoryObjectNotFoundException()
+            : base() { }
 
         protected ActiveDirectoryObjectNotFoundException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public Type? Type { get; }
 
@@ -101,7 +104,8 @@ namespace System.DirectoryServices.ActiveDirectory
             ErrorCode = errorCode;
         }
 
-        public ActiveDirectoryOperationException(string? message, int errorCode) : base(message)
+        public ActiveDirectoryOperationException(string? message, int errorCode)
+            : base(message)
         {
             ErrorCode = errorCode;
         }
@@ -109,14 +113,17 @@ namespace System.DirectoryServices.ActiveDirectory
         public ActiveDirectoryOperationException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        public ActiveDirectoryOperationException(string? message) : base(message) { }
+        public ActiveDirectoryOperationException(string? message)
+            : base(message) { }
 
-        public ActiveDirectoryOperationException() : base(SR.DSUnknownFailure) { }
+        public ActiveDirectoryOperationException()
+            : base(SR.DSUnknownFailure) { }
 
         protected ActiveDirectoryOperationException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public int ErrorCode { get; }
 
@@ -140,7 +147,8 @@ namespace System.DirectoryServices.ActiveDirectory
             Exception? inner,
             int errorCode,
             string? name
-        ) : base(message, inner)
+        )
+            : base(message, inner)
         {
             ErrorCode = errorCode;
             Name = name;
@@ -156,14 +164,17 @@ namespace System.DirectoryServices.ActiveDirectory
         public ActiveDirectoryServerDownException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        public ActiveDirectoryServerDownException(string? message) : base(message) { }
+        public ActiveDirectoryServerDownException(string? message)
+            : base(message) { }
 
-        public ActiveDirectoryServerDownException() : base() { }
+        public ActiveDirectoryServerDownException()
+            : base() { }
 
         protected ActiveDirectoryServerDownException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public int ErrorCode { get; }
 
@@ -199,14 +210,17 @@ namespace System.DirectoryServices.ActiveDirectory
         public ActiveDirectoryObjectExistsException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        public ActiveDirectoryObjectExistsException(string? message) : base(message) { }
+        public ActiveDirectoryObjectExistsException(string? message)
+            : base(message) { }
 
-        public ActiveDirectoryObjectExistsException() : base() { }
+        public ActiveDirectoryObjectExistsException()
+            : base() { }
 
         protected ActiveDirectoryObjectExistsException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 
     [Serializable]
@@ -223,7 +237,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? message,
             Exception? inner,
             SyncFromAllServersErrorInformation[]? errors
-        ) : base(message, inner)
+        )
+            : base(message, inner)
         {
             _errors = errors;
         }
@@ -231,14 +246,17 @@ namespace System.DirectoryServices.ActiveDirectory
         public SyncFromAllServersOperationException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        public SyncFromAllServersOperationException(string? message) : base(message) { }
+        public SyncFromAllServersOperationException(string? message)
+            : base(message) { }
 
-        public SyncFromAllServersOperationException() : base(SR.DSSyncAllFailure) { }
+        public SyncFromAllServersOperationException()
+            : base(SR.DSSyncAllFailure) { }
 
         protected SyncFromAllServersOperationException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
 
         public SyncFromAllServersErrorInformation[] ErrorInformation
         {
@@ -281,7 +299,8 @@ namespace System.DirectoryServices.ActiveDirectory
             string? message,
             Exception? inner,
             ForestTrustRelationshipCollisionCollection? collisions
-        ) : base(message, inner)
+        )
+            : base(message, inner)
         {
             Collisions = collisions;
         }
@@ -289,9 +308,11 @@ namespace System.DirectoryServices.ActiveDirectory
         public ForestTrustCollisionException(string? message, Exception? inner)
             : base(message, inner) { }
 
-        public ForestTrustCollisionException(string? message) : base(message) { }
+        public ForestTrustCollisionException(string? message)
+            : base(message) { }
 
-        public ForestTrustCollisionException() : base(SR.ForestTrustCollision) { }
+        public ForestTrustCollisionException()
+            : base(SR.ForestTrustCollision) { }
 
         protected ForestTrustCollisionException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }

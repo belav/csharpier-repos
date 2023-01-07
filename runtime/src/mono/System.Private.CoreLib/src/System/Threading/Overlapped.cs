@@ -176,7 +176,8 @@ namespace System.Threading
             _overlappedData._overlapped = this;
         }
 
-        public Overlapped(int offsetLo, int offsetHi, IntPtr hEvent, IAsyncResult? ar) : this()
+        public Overlapped(int offsetLo, int offsetHi, IntPtr hEvent, IAsyncResult? ar)
+            : this()
         {
             _overlappedData.OffsetLow = offsetLo;
             _overlappedData.OffsetHigh = offsetHi;

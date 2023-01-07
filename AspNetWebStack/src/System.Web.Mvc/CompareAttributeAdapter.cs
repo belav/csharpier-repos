@@ -15,7 +15,8 @@ namespace System.Web.Mvc
             ModelMetadata metadata,
             ControllerContext context,
             DataAnnotationsCompareAttribute attribute
-        ) : base(metadata, context, new CompareAttributeWrapper(attribute, metadata))
+        )
+            : base(metadata, context, new CompareAttributeWrapper(attribute, metadata))
         {
             Contract.Assert(attribute.GetType() == typeof(DataAnnotationsCompareAttribute));
         }
@@ -45,7 +46,8 @@ namespace System.Web.Mvc
             public CompareAttributeWrapper(
                 DataAnnotationsCompareAttribute attribute,
                 ModelMetadata metadata
-            ) : base(attribute.OtherProperty)
+            )
+                : base(attribute.OtherProperty)
             {
                 _otherPropertyDisplayName = attribute.OtherPropertyDisplayName;
                 if (_otherPropertyDisplayName == null && metadata.ContainerType != null)

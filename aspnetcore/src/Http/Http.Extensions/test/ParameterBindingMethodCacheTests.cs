@@ -1587,7 +1587,8 @@ public class ParameterBindingMethodCacheTests
 
     public record struct RecordStructWithMultipleConstructors(int Foo)
     {
-        public RecordStructWithMultipleConstructors(int foo, int bar) : this(foo) { }
+        public RecordStructWithMultipleConstructors(int foo, int bar)
+            : this(foo) { }
     }
 
     private abstract class AbstractClass { }

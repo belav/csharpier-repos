@@ -24,7 +24,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     public RelationalRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
-    ) : base(dependencies)
+    )
+        : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }

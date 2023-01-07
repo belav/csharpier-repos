@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.SignatureHel
             > signatureHelpPresenters,
             IAsyncCompletionBroker completionBroker,
             IAsynchronousOperationListenerProvider listenerProvider
-        ) : base(threadingContext)
+        )
+            : base(threadingContext)
         {
             _globalOptions = globalOptions;
             _signatureHelpPresenter = ExtensionOrderer

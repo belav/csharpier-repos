@@ -19,7 +19,8 @@ namespace System.Reflection.TypeLoading
         internal RoDefinitionConstructor(
             RoInstantiationProviderType declaringType,
             TMethodDecoder decoder
-        ) : base()
+        )
+            : base()
         {
             Debug.Assert(declaringType != null);
             _declaringType = declaringType;

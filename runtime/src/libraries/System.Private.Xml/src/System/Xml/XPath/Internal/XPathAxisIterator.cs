@@ -33,7 +33,8 @@ namespace MS.Internal.Xml.XPath
             string name,
             string namespaceURI,
             bool matchSelf
-        ) : this(nav, matchSelf)
+        )
+            : this(nav, matchSelf)
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(namespaceURI);

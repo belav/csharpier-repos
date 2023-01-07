@@ -16,7 +16,8 @@ internal sealed class StringLengthAttributeAdapter : AttributeAdapterBase<String
     public StringLengthAttributeAdapter(
         StringLengthAttribute attribute,
         IStringLocalizer? stringLocalizer
-    ) : base(attribute, stringLocalizer)
+    )
+        : base(attribute, stringLocalizer)
     {
         _max = Attribute.MaximumLength.ToString(CultureInfo.InvariantCulture);
         _min = Attribute.MinimumLength.ToString(CultureInfo.InvariantCulture);

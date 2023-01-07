@@ -24,7 +24,8 @@ namespace System.Net
     )]
     public sealed class WebPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public WebPermissionAttribute(SecurityAction action) : base(action) { }
+        public WebPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public string Accept
         {

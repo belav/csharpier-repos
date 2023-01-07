@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis
     [DebuggerDisplay("{Path,nq}")]
     public readonly struct CommandLineSourceFile
     {
-        public CommandLineSourceFile(string path, bool isScript) : this(path, isScript, false) { }
+        public CommandLineSourceFile(string path, bool isScript)
+            : this(path, isScript, false) { }
 
         public CommandLineSourceFile(string path, bool isScript, bool isInputRedirected)
         {

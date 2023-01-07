@@ -22,7 +22,8 @@ namespace Castle.Components.DictionaryAdapter
     /// </summary>
     public class RemoveIfEmptyAttribute : RemoveIfAttribute
     {
-        public RemoveIfEmptyAttribute() : base(RemoveIfEmptyCondition.Instance) { }
+        public RemoveIfEmptyAttribute()
+            : base(RemoveIfEmptyCondition.Instance) { }
 
         private new Type Condition { get; set; }
 

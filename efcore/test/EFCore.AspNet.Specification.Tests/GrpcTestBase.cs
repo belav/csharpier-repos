@@ -137,7 +137,8 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
 
     public class GrpcContext : PoolableDbContext
     {
-        public GrpcContext(DbContextOptions options) : base(options) { }
+        public GrpcContext(DbContextOptions options)
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

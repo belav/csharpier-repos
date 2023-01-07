@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) : base(description, updater)
+        )
+            : base(description, updater)
         {
             _option = option;
             _editorConfigOptions = editorConfigOptions;

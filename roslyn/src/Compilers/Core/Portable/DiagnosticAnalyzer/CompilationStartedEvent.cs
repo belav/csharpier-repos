@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private CompilationStartedEvent(
             Compilation compilation,
             ImmutableArray<AdditionalText> additionalFiles
-        ) : base(compilation)
+        )
+            : base(compilation)
         {
             AdditionalFiles = additionalFiles;
         }

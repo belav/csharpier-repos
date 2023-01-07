@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             IDiagnosticAnalyzerService analyzerService,
             EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
             IGlobalOptionService globalOptions
-        ) : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
+        )
+            : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
 
         public override TextDocumentIdentifier? GetTextDocumentIdentifier(
             VSInternalDocumentDiagnosticsParams diagnosticsParams

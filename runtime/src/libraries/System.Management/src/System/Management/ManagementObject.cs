@@ -231,7 +231,8 @@ namespace System.Management
         /// Console.WriteLine(o("FreeSpace"))
         ///    </code>
         /// </example>
-        public ManagementObject() : this((ManagementScope)null, null, null) { }
+        public ManagementObject()
+            : this((ManagementScope)null, null, null) { }
 
         //parameterized constructors
         /// <summary>
@@ -247,7 +248,8 @@ namespace System.Management
         /// Dim o As New ManagementObject(p)
         ///    </code>
         /// </example>
-        public ManagementObject(ManagementPath path) : this(null, path, null) { }
+        public ManagementObject(ManagementPath path)
+            : this(null, path, null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObject'/> class for the specified WMI object path. The path
@@ -275,7 +277,8 @@ namespace System.Management
         /// Dim o As New ManagementObject("\\\\MyServer\\root\\MyApp:MyClass.Key=""abc""");
         ///    </code>
         /// </example>
-        public ManagementObject(string path) : this(null, new ManagementPath(path), null) { }
+        public ManagementObject(string path)
+            : this(null, new ManagementPath(path), null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementObject'/> class bound to the specified
@@ -378,7 +381,8 @@ namespace System.Management
             ManagementScope scope,
             ManagementPath path,
             ObjectGetOptions options
-        ) : base(null)
+        )
+            : base(null)
         {
             ManagementObjectCTOR(scope, path, options);
         }

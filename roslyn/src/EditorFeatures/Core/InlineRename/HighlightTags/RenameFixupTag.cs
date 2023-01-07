@@ -13,6 +13,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename.HighlightTag
 
         public static readonly RenameFixupTag Instance = new RenameFixupTag();
 
-        private RenameFixupTag() : base(TagId) { }
+        private RenameFixupTag()
+            : base(TagId) { }
     }
 }

@@ -364,7 +364,8 @@ public class CSharpCompilerTest
             RazorReferenceManager referenceManager,
             IWebHostEnvironment hostingEnvironment,
             DependencyContextCompilationOptions options
-        ) : base(referenceManager, hostingEnvironment)
+        )
+            : base(referenceManager, hostingEnvironment)
         {
             _options = options;
         }

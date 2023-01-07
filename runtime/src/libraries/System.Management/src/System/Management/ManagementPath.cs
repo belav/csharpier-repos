@@ -183,7 +183,8 @@ namespace System.Management
         /// <summary>
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class that is empty. This is the default constructor.</para>
         /// </summary>
-        public ManagementPath() : this((string)null) { }
+        public ManagementPath()
+            : this((string)null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementPath'/> class for the given path.</para>

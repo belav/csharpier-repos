@@ -24,7 +24,8 @@ namespace System.Reflection
             RuntimeTypeHandle declaringTypeHandle,
             RuntimeTypeCache reflectedTypeCache,
             BindingFlags bindingFlags
-        ) : base(reflectedTypeCache, declaringTypeHandle.GetRuntimeType(), bindingFlags)
+        )
+            : base(reflectedTypeCache, declaringTypeHandle.GetRuntimeType(), bindingFlags)
         {
             m_tkField = tkField;
             m_name = null;

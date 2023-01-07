@@ -7,7 +7,8 @@ namespace System.Net.Http.HPack
     {
         public HPackEncodingException() { }
 
-        public HPackEncodingException(string message) : base(message) { }
+        public HPackEncodingException(string message)
+            : base(message) { }
 
         public HPackEncodingException(string message, Exception innerException)
             : base(message, innerException) { }

@@ -35,7 +35,8 @@ public class RouteValueProvider : BindingSourceValueProvider
         BindingSource bindingSource,
         RouteValueDictionary values,
         CultureInfo culture
-    ) : base(bindingSource)
+    )
+        : base(bindingSource)
     {
         if (bindingSource == null)
         {

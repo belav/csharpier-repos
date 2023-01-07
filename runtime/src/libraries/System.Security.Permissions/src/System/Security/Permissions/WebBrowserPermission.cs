@@ -88,7 +88,8 @@ namespace System.Security.Permissions
     )]
     public sealed class WebBrowserPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public WebBrowserPermissionAttribute(SecurityAction action) : base(action) { }
+        public WebBrowserPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
         public override IPermission CreatePermission()
         {

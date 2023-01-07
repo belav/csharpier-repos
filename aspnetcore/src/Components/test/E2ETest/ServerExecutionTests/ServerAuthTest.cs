@@ -15,7 +15,9 @@ public class ServerAuthTest : AuthTest
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<BasicTestApp.Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output, ExecutionMode.Server) { }
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output, ExecutionMode.Server)
+    { }
 
     [Theory]
     [InlineData(null, null)]

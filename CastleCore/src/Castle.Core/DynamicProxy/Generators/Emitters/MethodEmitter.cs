@@ -49,7 +49,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             MethodAttributes attributes,
             Type returnType,
             params Type[] argumentTypes
-        ) : this(owner, name, attributes)
+        )
+            : this(owner, name, attributes)
         {
             SetParameters(argumentTypes);
             SetReturnType(returnType);
@@ -60,7 +61,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             string name,
             MethodAttributes attributes,
             MethodInfo methodToUseAsATemplate
-        ) : this(owner, name, attributes)
+        )
+            : this(owner, name, attributes)
         {
             // All code paths leading up to this constructor can be traced back to
             // proxy type generation code. At present, proxy types are never generic.

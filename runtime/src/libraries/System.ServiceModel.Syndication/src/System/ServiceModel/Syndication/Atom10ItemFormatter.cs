@@ -15,9 +15,11 @@ namespace System.ServiceModel.Syndication
         private bool _preserveAttributeExtensions = true;
         private bool _preserveElementExtensions = true;
 
-        public Atom10ItemFormatter() : this(typeof(SyndicationItem)) { }
+        public Atom10ItemFormatter()
+            : this(typeof(SyndicationItem)) { }
 
-        public Atom10ItemFormatter(Type itemTypeToCreate) : base()
+        public Atom10ItemFormatter(Type itemTypeToCreate)
+            : base()
         {
             if (itemTypeToCreate is null)
             {
@@ -39,7 +41,8 @@ namespace System.ServiceModel.Syndication
             ItemType = itemTypeToCreate;
         }
 
-        public Atom10ItemFormatter(SyndicationItem itemToWrite) : base(itemToWrite)
+        public Atom10ItemFormatter(SyndicationItem itemToWrite)
+            : base(itemToWrite)
         {
             ItemType = itemToWrite.GetType();
         }
@@ -148,9 +151,11 @@ namespace System.ServiceModel.Syndication
     public class Atom10ItemFormatter<TSyndicationItem> : Atom10ItemFormatter
         where TSyndicationItem : SyndicationItem, new()
     {
-        public Atom10ItemFormatter() : base(typeof(TSyndicationItem)) { }
+        public Atom10ItemFormatter()
+            : base(typeof(TSyndicationItem)) { }
 
-        public Atom10ItemFormatter(TSyndicationItem itemToWrite) : base(itemToWrite) { }
+        public Atom10ItemFormatter(TSyndicationItem itemToWrite)
+            : base(itemToWrite) { }
 
         protected override SyndicationItem CreateItemInstance() => new TSyndicationItem();
     }

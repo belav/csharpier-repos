@@ -21,7 +21,8 @@ public class CustomJsonClaimAction : ClaimAction
         string claimType,
         string valueType,
         Func<JsonElement, string?> resolver
-    ) : base(claimType, valueType)
+    )
+        : base(claimType, valueType)
     {
         Resolver = resolver;
     }

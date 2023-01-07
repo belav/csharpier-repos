@@ -13,12 +13,14 @@ namespace System.Data
         internal bool _found;
         internal DataColumn? _column;
 
-        internal NameNode(DataTable? table, char[] text, int start, int pos) : base(table)
+        internal NameNode(DataTable? table, char[] text, int start, int pos)
+            : base(table)
         {
             _name = ParseName(text, start, pos);
         }
 
-        internal NameNode(DataTable? table, string name) : base(table)
+        internal NameNode(DataTable? table, string name)
+            : base(table)
         {
             _name = name;
         }

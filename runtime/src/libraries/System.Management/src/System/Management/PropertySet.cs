@@ -52,7 +52,8 @@ namespace System.Management
         private readonly ManagementBaseObject parent;
         private readonly bool isSystem;
 
-        internal PropertyDataCollection(ManagementBaseObject parent, bool isSystem) : base()
+        internal PropertyDataCollection(ManagementBaseObject parent, bool isSystem)
+            : base()
         {
             this.parent = parent;
             this.isSystem = isSystem;

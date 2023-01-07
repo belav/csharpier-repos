@@ -65,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 IDiagnosticService diagnosticService,
                 string identifier,
                 ExternalErrorDiagnosticUpdateSource? buildUpdateSource = null
-            ) : base(workspace, threadingContext)
+            )
+                : base(workspace, threadingContext)
             {
                 _workspace = workspace;
                 GlobalOptions = globalOptions;
@@ -423,7 +424,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     int version,
                     ImmutableArray<DiagnosticTableItem> items,
                     ImmutableArray<ITrackingPoint> trackingPoints
-                ) : base(threadingContext, version, items, trackingPoints)
+                )
+                    : base(threadingContext, version, items, trackingPoints)
                 {
                     _source = source;
                 }

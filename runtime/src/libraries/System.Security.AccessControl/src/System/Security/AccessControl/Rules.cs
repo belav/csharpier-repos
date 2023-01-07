@@ -136,7 +136,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
         {
             if (type != AccessControlType.Allow && type != AccessControlType.Deny)
             {
@@ -203,7 +204,8 @@ namespace System.Security.AccessControl
             Guid objectType,
             Guid inheritedObjectType,
             AccessControlType type
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type)
         {
             if (
                 (!objectType.Equals(Guid.Empty))
@@ -271,7 +273,8 @@ namespace System.Security.AccessControl
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
             AuditFlags auditFlags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags)
         {
             if (auditFlags == AuditFlags.None)
             {
@@ -321,7 +324,15 @@ namespace System.Security.AccessControl
             Guid objectType,
             Guid inheritedObjectType,
             AuditFlags auditFlags
-        ) : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, auditFlags)
+        )
+            : base(
+                identity,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                auditFlags
+            )
         {
             if (
                 (!objectType.Equals(Guid.Empty))
@@ -376,7 +387,8 @@ namespace System.Security.AccessControl
     {
         #region Constructors
 
-        public AuthorizationRuleCollection() : base() { }
+        public AuthorizationRuleCollection()
+            : base() { }
 
         #endregion
 

@@ -24,7 +24,8 @@ public class FactoryMethodBinding : InstantiationBinding
         MethodInfo factoryMethod,
         IReadOnlyList<ParameterBinding> parameterBindings,
         Type runtimeType
-    ) : base(parameterBindings)
+    )
+        : base(parameterBindings)
     {
         Check.NotNull(factoryMethod, nameof(factoryMethod));
         Check.NotNull(runtimeType, nameof(runtimeType));
@@ -45,7 +46,8 @@ public class FactoryMethodBinding : InstantiationBinding
         MethodInfo factoryMethod,
         IReadOnlyList<ParameterBinding> parameterBindings,
         Type runtimeType
-    ) : this(factoryMethod, parameterBindings, runtimeType)
+    )
+        : this(factoryMethod, parameterBindings, runtimeType)
     {
         Check.NotNull(factoryInstance, nameof(factoryInstance));
 

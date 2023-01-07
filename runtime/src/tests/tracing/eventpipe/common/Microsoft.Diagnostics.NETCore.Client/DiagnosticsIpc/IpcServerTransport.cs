@@ -106,7 +106,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             string pipeName,
             int maxInstances,
             IIpcServerTransportCallbackInternal transportCallback = null
-        ) : base(transportCallback)
+        )
+            : base(transportCallback)
         {
             _maxInstances =
                 maxInstances != MaxAllowedConnections
@@ -189,7 +190,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
 
         protected IpcSocketServerTransport(
             IIpcServerTransportCallbackInternal transportCallback = null
-        ) : base(transportCallback) { }
+        )
+            : base(transportCallback) { }
 
         protected override void Dispose(bool disposing)
         {
@@ -258,7 +260,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             string address,
             int backlog,
             IIpcServerTransportCallbackInternal transportCallback = null
-        ) : base(transportCallback)
+        )
+            : base(transportCallback)
         {
             _endPoint = new IpcTcpSocketEndPoint(address);
             _backlog = backlog != MaxAllowedConnections ? backlog : 100;
@@ -293,7 +296,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             string path,
             int backlog,
             IIpcServerTransportCallbackInternal transportCallback = null
-        ) : base(transportCallback)
+        )
+            : base(transportCallback)
         {
             _backlog =
                 backlog != MaxAllowedConnections ? backlog : (int)SocketOptionName.MaxConnections;

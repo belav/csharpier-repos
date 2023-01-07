@@ -111,7 +111,8 @@ namespace Roslyn.Test.Utilities.TestGenerators
             Action<GeneratorInitializationContext> onInit,
             Action<GeneratorExecutionContext> onExecute,
             string? source = ""
-        ) : base(onInit, onExecute, source) { }
+        )
+            : base(onInit, onExecute, source) { }
     }
 
     internal class InMemoryAdditionalText : AdditionalText
@@ -131,7 +132,8 @@ namespace Roslyn.Test.Utilities.TestGenerators
 
         internal class BinaryText : InMemoryAdditionalText
         {
-            public BinaryText(string path) : base(path, string.Empty) { }
+            public BinaryText(string path)
+                : base(path, string.Empty) { }
 
             public override SourceText GetText(CancellationToken cancellationToken = default) =>
                 throw new InvalidDataException("Binary content not supported");
@@ -178,7 +180,8 @@ namespace Roslyn.Test.Utilities.TestGenerators
             Action<GeneratorInitializationContext> onInit,
             Action<GeneratorExecutionContext> onExecute,
             Action<IncrementalGeneratorInitializationContext> onIncrementalInit
-        ) : base(onInit, onExecute)
+        )
+            : base(onInit, onExecute)
         {
             _onInit = onIncrementalInit;
         }

@@ -13,7 +13,8 @@ namespace System.Security.Permissions
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class PermissionSetAttribute : CodeAccessSecurityAttribute
     {
-        public PermissionSetAttribute(SecurityAction action) : base(default(SecurityAction)) { }
+        public PermissionSetAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
 
         public string File { get; set; }
         public string Hex { get; set; }

@@ -377,7 +377,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         private DerivedISerializableWithNonPublicDeserializationCtor(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 
     [Serializable]
@@ -419,7 +420,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         internal int DerivedIncrementedDuringOnDeserializingMethod;
         internal int DerivedIncrementedDuringOnDeserializedMethod;
 
-        public DerivedIncrementCountsDuringRoundtrip(string ignored) : base(ignored) { }
+        public DerivedIncrementCountsDuringRoundtrip(string ignored)
+            : base(ignored) { }
 
         [OnSerializing]
         private void OnSerializingMethod(StreamingContext context) =>

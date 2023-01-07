@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 SemanticModel semanticModel,
                 SemanticMap map,
                 CancellationToken cancellationToken
-            ) : base(SyntaxWalkerDepth.Token)
+            )
+                : base(SyntaxWalkerDepth.Token)
             {
                 _semanticModel = semanticModel;
                 _map = map;

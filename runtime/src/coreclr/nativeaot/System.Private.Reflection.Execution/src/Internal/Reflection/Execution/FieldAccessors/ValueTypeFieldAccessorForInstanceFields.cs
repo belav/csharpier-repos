@@ -12,7 +12,8 @@ namespace Internal.Reflection.Execution.FieldAccessors
             int offsetPlusHeader,
             RuntimeTypeHandle declaringTypeHandle,
             RuntimeTypeHandle fieldTypeHandle
-        ) : base(declaringTypeHandle, fieldTypeHandle, offsetPlusHeader) { }
+        )
+            : base(declaringTypeHandle, fieldTypeHandle, offsetPlusHeader) { }
 
         protected sealed override object UncheckedGetField(object obj)
         {

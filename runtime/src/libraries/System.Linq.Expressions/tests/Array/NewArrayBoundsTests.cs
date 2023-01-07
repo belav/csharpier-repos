@@ -60,7 +60,8 @@ namespace System.Linq.Expressions.Tests
 
         private class BogusReadOnlyCollection<T> : ReadOnlyCollection<T>
         {
-            public BogusReadOnlyCollection() : base(new BogusCollection<T>()) { }
+            public BogusReadOnlyCollection()
+                : base(new BogusCollection<T>()) { }
         }
 
         public static IEnumerable<object> Bounds_TestData()

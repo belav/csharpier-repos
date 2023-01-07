@@ -3416,7 +3416,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalyzerManager analyzerManager,
             SeverityFilter severityFilter,
             Func<SyntaxTrivia, bool> isComment
-        ) : base(analyzers, analyzerManager, severityFilter, isComment)
+        )
+            : base(analyzers, analyzerManager, severityFilter, isComment)
         {
             _getKind = getKind;
         }

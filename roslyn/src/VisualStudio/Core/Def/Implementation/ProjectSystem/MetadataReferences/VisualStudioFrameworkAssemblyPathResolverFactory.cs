@@ -56,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 IThreadingContext threadingContext,
                 VisualStudioWorkspace? workspace,
                 IServiceProvider serviceProvider
-            ) : base(threadingContext, assertIsForeground: false)
+            )
+                : base(threadingContext, assertIsForeground: false)
             {
                 _workspace = workspace;
                 _serviceProvider = serviceProvider;

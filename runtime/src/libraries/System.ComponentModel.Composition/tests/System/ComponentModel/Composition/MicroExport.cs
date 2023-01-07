@@ -44,7 +44,8 @@ namespace System.ComponentModel.Composition
             string contractName,
             IDictionary<string, object> metadata,
             params object[] exportedValues
-        ) : this(contractName, exportedValues[0].GetType(), metadata, exportedValues) { }
+        )
+            : this(contractName, exportedValues[0].GetType(), metadata, exportedValues) { }
 
         public MicroExport(
             string contractName,

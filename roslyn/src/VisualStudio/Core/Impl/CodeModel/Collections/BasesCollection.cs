@@ -43,7 +43,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
             bool interfaces
-        ) : base(state, parent)
+        )
+            : base(state, parent)
         {
             Debug.Assert(fileCodeModel != null);
 

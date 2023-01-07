@@ -19,7 +19,8 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Special private constructor for Special Rulerefs
         /// </summary>
-        private RuleRef(SpecialRuleRefType type, Rule rule) : base(rule)
+        private RuleRef(SpecialRuleRefType type, Rule rule)
+            : base(rule)
         {
             _type = type;
         }
@@ -34,7 +35,8 @@ namespace System.Speech.Internal.SrgsCompiler
             List<Rule> undefRules,
             string semanticKey,
             string initParameters
-        ) : base(parent._rule)
+        )
+            : base(parent._rule)
         {
             string id = uri.OriginalString;
 

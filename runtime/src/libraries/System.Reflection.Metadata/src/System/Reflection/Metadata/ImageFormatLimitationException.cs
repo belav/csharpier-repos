@@ -7,9 +7,11 @@ namespace System.Reflection.Metadata
 {
     public partial class ImageFormatLimitationException : Exception
     {
-        public ImageFormatLimitationException() : base() { }
+        public ImageFormatLimitationException()
+            : base() { }
 
-        public ImageFormatLimitationException(string? message) : base(message) { }
+        public ImageFormatLimitationException(string? message)
+            : base(message) { }
 
         public ImageFormatLimitationException(string? message, Exception? innerException)
             : base(message, innerException) { }

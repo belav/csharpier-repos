@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpCompilation compilation,
             Symbol member,
             BoundNode node
-        ) : base(compilation, member, node, strictAnalysis: true) { }
+        )
+            : base(compilation, member, node, strictAnalysis: true) { }
 
         internal static HashSet<PrefixUnaryExpressionSyntax> Analyze(
             CSharpCompilation compilation,

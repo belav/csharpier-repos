@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             bool isStylePreferred,
             ReportDiagnostic severity,
             CancellationToken cancellationToken
-        ) : this()
+        )
+            : this()
         {
             _helper = helper;
             _typeName = typeName;

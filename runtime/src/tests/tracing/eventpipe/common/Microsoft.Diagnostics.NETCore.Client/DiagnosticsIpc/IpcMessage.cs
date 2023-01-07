@@ -88,7 +88,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
             DiagnosticsServerCommandSet commandSet,
             byte commandId,
             byte[] payload = null
-        ) : this(new IpcHeader(commandSet, commandId), payload) { }
+        )
+            : this(new IpcHeader(commandSet, commandId), payload) { }
 
         public byte[] Payload { get; private set; } = null;
         public IpcHeader Header { get; private set; } = default;

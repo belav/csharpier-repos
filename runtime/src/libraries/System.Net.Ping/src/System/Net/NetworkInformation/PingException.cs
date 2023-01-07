@@ -11,7 +11,8 @@ namespace System.Net.NetworkInformation
     )]
     public class PingException : InvalidOperationException
     {
-        public PingException(string? message) : base(message) { }
+        public PingException(string? message)
+            : base(message) { }
 
         public PingException(string? message, Exception? innerException)
             : base(message, innerException) { }
@@ -19,6 +20,7 @@ namespace System.Net.NetworkInformation
         protected PingException(
             SerializationInfo serializationInfo,
             StreamingContext streamingContext
-        ) : base(serializationInfo, streamingContext) { }
+        )
+            : base(serializationInfo, streamingContext) { }
     }
 }

@@ -5,7 +5,8 @@ namespace Internal.CommandLine
 {
     public sealed class ArgumentCommand<T> : ArgumentCommand
     {
-        internal ArgumentCommand(string name, T value) : base(name)
+        internal ArgumentCommand(string name, T value)
+            : base(name)
         {
             Value = value;
         }

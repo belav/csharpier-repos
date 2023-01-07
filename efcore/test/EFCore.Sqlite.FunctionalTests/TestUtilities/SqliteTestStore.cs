@@ -33,7 +33,8 @@ public class SqliteTestStore : RelationalTestStore
         bool seed = true,
         bool sharedCache = true,
         bool shared = true
-    ) : base(name, shared)
+    )
+        : base(name, shared)
     {
         _seed = seed;
 

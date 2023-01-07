@@ -36,7 +36,8 @@ public sealed unsafe class Secret : IDisposable, ISecret
     /// Creates a new Secret from the provided input value, where the input value
     /// is specified as an array.
     /// </summary>
-    public Secret(byte[] value) : this(new ArraySegment<byte>(value))
+    public Secret(byte[] value)
+        : this(new ArraySegment<byte>(value))
     {
         if (value == null)
         {

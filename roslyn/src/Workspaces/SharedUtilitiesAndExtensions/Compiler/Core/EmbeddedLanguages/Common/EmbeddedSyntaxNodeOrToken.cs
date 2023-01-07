@@ -16,12 +16,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
 
         public readonly TSyntaxNode? Node;
 
-        private EmbeddedSyntaxNodeOrToken(TSyntaxNode? node) : this()
+        private EmbeddedSyntaxNodeOrToken(TSyntaxNode? node)
+            : this()
         {
             Node = node;
         }
 
-        private EmbeddedSyntaxNodeOrToken(EmbeddedSyntaxToken<TSyntaxKind> token) : this()
+        private EmbeddedSyntaxNodeOrToken(EmbeddedSyntaxToken<TSyntaxKind> token)
+            : this()
         {
             Debug.Assert((int)(object)token.Kind != 0);
             _token = token;

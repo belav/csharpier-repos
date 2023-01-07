@@ -26,9 +26,11 @@ namespace System.Net.Http.Formatting
 
         public class MockMediaTypeMapping : MediaTypeMapping
         {
-            public MockMediaTypeMapping(MediaTypeHeaderValue mediaType) : base(mediaType) { }
+            public MockMediaTypeMapping(MediaTypeHeaderValue mediaType)
+                : base(mediaType) { }
 
-            public MockMediaTypeMapping(string mediaType) : base(mediaType) { }
+            public MockMediaTypeMapping(string mediaType)
+                : base(mediaType) { }
 
             public override double TryMatchMediaType(HttpRequestMessage request)
             {

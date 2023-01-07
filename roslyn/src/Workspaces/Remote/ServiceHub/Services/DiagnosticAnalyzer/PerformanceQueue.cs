@@ -133,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             public Snapshot(
                 IEnumerable<(string analyzerId, TimeSpan timeSpan)> snapshot,
                 int unitCount
-            ) : this(Convert(snapshot), unitCount) { }
+            )
+                : this(Convert(snapshot), unitCount) { }
 
             public Snapshot(
                 IEnumerable<(int assignedAnalyzerNumber, TimeSpan timeSpan)> rawData,

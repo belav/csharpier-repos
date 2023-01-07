@@ -514,7 +514,8 @@ namespace System.Threading.RateLimiting
                 int permitCount,
                 FixedWindowRateLimiter limiter,
                 CancellationToken cancellationToken
-            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            )
+                : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _permitCount = permitCount;
                 _limiter = limiter;

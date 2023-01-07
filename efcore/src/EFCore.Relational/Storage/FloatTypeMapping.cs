@@ -33,7 +33,8 @@ public class FloatTypeMapping : RelationalTypeMapping
     ///     Initializes a new instance of the <see cref="FloatTypeMapping" /> class.
     /// </summary>
     /// <param name="parameters">Parameter object for <see cref="RelationalTypeMapping" />.</param>
-    protected FloatTypeMapping(RelationalTypeMappingParameters parameters) : base(parameters) { }
+    protected FloatTypeMapping(RelationalTypeMappingParameters parameters)
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.

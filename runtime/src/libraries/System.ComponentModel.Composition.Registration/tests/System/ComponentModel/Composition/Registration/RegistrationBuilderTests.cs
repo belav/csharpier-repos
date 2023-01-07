@@ -42,7 +42,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private class DiscoveredCatalog : AssemblyCatalog
         {
-            public DiscoveredCatalog() : base("") { }
+            public DiscoveredCatalog()
+                : base("") { }
         }
 
         [ConditionalFact(

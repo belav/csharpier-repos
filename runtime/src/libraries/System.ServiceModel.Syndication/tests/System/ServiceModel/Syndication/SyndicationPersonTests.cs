@@ -227,9 +227,11 @@ namespace System.ServiceModel.Syndication.Tests
 
         public class SyndicationPersonSubclass : SyndicationPerson
         {
-            public SyndicationPersonSubclass() : base() { }
+            public SyndicationPersonSubclass()
+                : base() { }
 
-            public SyndicationPersonSubclass(SyndicationPerson source) : base(source) { }
+            public SyndicationPersonSubclass(SyndicationPerson source)
+                : base(source) { }
 
             public bool TryParseAttributeEntryPoint(
                 string name,

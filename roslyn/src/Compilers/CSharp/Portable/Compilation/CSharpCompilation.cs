@@ -5936,7 +5936,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SymbolFilter filter,
                 Func<string, bool> predicate,
                 CancellationToken cancellationToken
-            ) : base(compilation, filter, cancellationToken)
+            )
+                : base(compilation, filter, cancellationToken)
             {
                 _predicate = predicate;
             }
@@ -5961,7 +5962,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SymbolFilter filter,
                 string name,
                 CancellationToken cancellationToken
-            ) : base(compilation, filter, cancellationToken)
+            )
+                : base(compilation, filter, cancellationToken)
             {
                 _name = name;
             }

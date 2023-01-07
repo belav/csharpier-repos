@@ -50,7 +50,8 @@ namespace Newtonsoft.Json
         /// with a specified error message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public JsonException(string message) : base(message) { }
+        public JsonException(string message)
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonException"/> class
@@ -69,8 +70,8 @@ namespace Newtonsoft.Json
         /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is <c>null</c>.</exception>
         /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
-        public JsonException(SerializationInfo info, StreamingContext context) : base(info, context)
-        { }
+        public JsonException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 #endif
 
         internal static JsonException Create(IJsonLineInfo lineInfo, string path, string message)

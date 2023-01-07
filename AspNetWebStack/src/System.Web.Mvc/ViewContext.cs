@@ -57,7 +57,8 @@ window.mvcClientValidationMetadata.push({0});
             ViewDataDictionary viewData,
             TempDataDictionary tempData,
             TextWriter writer
-        ) : base(controllerContext)
+        )
+            : base(controllerContext)
         {
             if (controllerContext == null)
             {

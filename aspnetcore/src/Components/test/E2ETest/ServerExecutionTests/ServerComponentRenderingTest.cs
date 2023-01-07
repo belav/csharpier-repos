@@ -19,7 +19,8 @@ public class ServerComponentRenderingTest : ComponentRenderingTestBase
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output
-    ) : base(browserFixture, serverFixture.WithServerExecution(), output) { }
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     [Fact]
     public void ThrowsIfRenderIsRequestedOutsideSyncContext()

@@ -39,7 +39,8 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
             ImmutableDictionary<CaptureId, FlowCaptureKind> lValueFlowCaptures,
             TrimAnalysisPatternStore trimAnalysisPatterns,
             InterproceduralState<MultiValue, ValueSetLattice<SingleValue>> interproceduralState
-        ) : base(lattice, method, methodCFG, lValueFlowCaptures, interproceduralState)
+        )
+            : base(lattice, method, methodCFG, lValueFlowCaptures, interproceduralState)
         {
             _multiValueLattice = lattice.Lattice.ValueLattice;
             TrimAnalysisPatterns = trimAnalysisPatterns;

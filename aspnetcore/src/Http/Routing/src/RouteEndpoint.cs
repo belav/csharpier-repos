@@ -27,7 +27,8 @@ public sealed class RouteEndpoint : Endpoint
         int order,
         EndpointMetadataCollection? metadata,
         string? displayName
-    ) : base(requestDelegate, metadata, displayName)
+    )
+        : base(requestDelegate, metadata, displayName)
     {
         if (requestDelegate == null)
         {

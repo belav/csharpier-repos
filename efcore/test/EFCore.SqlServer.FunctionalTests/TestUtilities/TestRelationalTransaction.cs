@@ -38,7 +38,8 @@ public class TestRelationalTransaction : RelationalTransaction
         IDiagnosticsLogger<DbLoggerCategory.Database.Transaction> logger,
         bool transactionOwned,
         ISqlGenerationHelper sqlGenerationHelper
-    ) : base(connection, transaction, new Guid(), logger, transactionOwned, sqlGenerationHelper)
+    )
+        : base(connection, transaction, new Guid(), logger, transactionOwned, sqlGenerationHelper)
     {
         _testConnection = (TestSqlServerConnection)connection;
     }

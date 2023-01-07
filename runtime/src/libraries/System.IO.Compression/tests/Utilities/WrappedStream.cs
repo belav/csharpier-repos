@@ -30,7 +30,8 @@ internal class WrappedStream : Stream
     internal WrappedStream(Stream baseStream, EventHandler onClosed)
         : this(baseStream, true, true, true, onClosed) { }
 
-    internal WrappedStream(Stream baseStream) : this(baseStream, null) { }
+    internal WrappedStream(Stream baseStream)
+        : this(baseStream, null) { }
 
     public override void Flush() => _baseStream.Flush();
 

@@ -401,7 +401,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     string workspaceKind,
                     AnalysisKind kind,
                     DocumentId documentId
-                ) : base((int)kind, documentId) => _workspaceKind = workspaceKind;
+                )
+                    : base((int)kind, documentId) => _workspaceKind = workspaceKind;
 
                 public override string BuildTool => PredefinedBuildTools.Live;
 

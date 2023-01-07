@@ -124,7 +124,8 @@ namespace System.Collections.ObjectModel
     {
         public ReadOnlyObservableCollection(
             System.Collections.ObjectModel.ObservableCollection<T> list
-        ) : base(default(System.Collections.Generic.IList<T>)) { }
+        )
+            : base(default(System.Collections.Generic.IList<T>)) { }
 
         public static new System.Collections.ObjectModel.ReadOnlyObservableCollection<T> Empty
         {

@@ -14,7 +14,8 @@ namespace System.Data.ProviderBase
     {
         private readonly int _bufferLength;
 
-        protected DbBuffer(int initialSize) : base(IntPtr.Zero, true)
+        protected DbBuffer(int initialSize)
+            : base(IntPtr.Zero, true)
         {
             if (0 < initialSize)
             {

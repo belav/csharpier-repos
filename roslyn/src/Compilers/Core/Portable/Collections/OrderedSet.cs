@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Collections
             _list = new ArrayBuilder<T>();
         }
 
-        public OrderedSet(IEnumerable<T> items) : this()
+        public OrderedSet(IEnumerable<T> items)
+            : this()
         {
             AddRange(items);
         }

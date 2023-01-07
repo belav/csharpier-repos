@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Hosting.FunctionalTests;
 
 public class WebHostBuilderTests : LoggedTest
 {
-    public WebHostBuilderTests(ITestOutputHelper output) : base(output) { }
+    public WebHostBuilderTests(ITestOutputHelper output)
+        : base(output) { }
 
     public static TestMatrix TestVariants =>
         TestMatrix.ForServers(ServerType.Kestrel).WithTfms(Tfm.Default);

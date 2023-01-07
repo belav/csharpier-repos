@@ -18,17 +18,20 @@ namespace System.IO.IsolatedStorage
         // this field is used to provide the underlying exception under debugger.
         internal Exception? _underlyingException;
 
-        public IsolatedStorageException() : base(SR.IsolatedStorage_Exception)
+        public IsolatedStorageException()
+            : base(SR.IsolatedStorage_Exception)
         {
             HResult = COR_E_ISOSTORE;
         }
 
-        public IsolatedStorageException(string? message) : base(message)
+        public IsolatedStorageException(string? message)
+            : base(message)
         {
             HResult = COR_E_ISOSTORE;
         }
 
-        public IsolatedStorageException(string? message, Exception? inner) : base(message, inner)
+        public IsolatedStorageException(string? message, Exception? inner)
+            : base(message, inner)
         {
             HResult = COR_E_ISOSTORE;
         }

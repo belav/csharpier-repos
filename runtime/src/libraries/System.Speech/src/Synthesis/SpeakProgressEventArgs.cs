@@ -11,7 +11,8 @@ namespace System.Speech.Synthesis
             TimeSpan audioPosition,
             int iWordPos,
             int cWordLen
-        ) : base(prompt)
+        )
+            : base(prompt)
         {
             _audioPosition = audioPosition;
             _iWordPos = iWordPos;

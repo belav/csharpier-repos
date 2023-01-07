@@ -32,28 +32,32 @@ namespace Castle.Core.Logging
         ///   set to <c>LoggerLevel.Debug</c> and the <c>Name</c>
         ///   set to <c>string.Empty</c>.
         /// </summary>
-        public ConsoleLogger() : this(string.Empty, LoggerLevel.Debug) { }
+        public ConsoleLogger()
+            : this(string.Empty, LoggerLevel.Debug) { }
 
         /// <summary>
         ///   Creates a new ConsoleLogger with the <c>Name</c>
         ///   set to <c>string.Empty</c>.
         /// </summary>
         /// <param name = "logLevel">The logs Level.</param>
-        public ConsoleLogger(LoggerLevel logLevel) : this(string.Empty, logLevel) { }
+        public ConsoleLogger(LoggerLevel logLevel)
+            : this(string.Empty, logLevel) { }
 
         /// <summary>
         ///   Creates a new ConsoleLogger with the <c>Level</c>
         ///   set to <c>LoggerLevel.Debug</c>.
         /// </summary>
         /// <param name = "name">The logs Name.</param>
-        public ConsoleLogger(string name) : this(name, LoggerLevel.Debug) { }
+        public ConsoleLogger(string name)
+            : this(name, LoggerLevel.Debug) { }
 
         /// <summary>
         ///   Creates a new ConsoleLogger.
         /// </summary>
         /// <param name = "name">The logs Name.</param>
         /// <param name = "logLevel">The logs Level.</param>
-        public ConsoleLogger(string name, LoggerLevel logLevel) : base(name, logLevel) { }
+        public ConsoleLogger(string name, LoggerLevel logLevel)
+            : base(name, logLevel) { }
 
         /// <summary>
         ///   A Common method to log.

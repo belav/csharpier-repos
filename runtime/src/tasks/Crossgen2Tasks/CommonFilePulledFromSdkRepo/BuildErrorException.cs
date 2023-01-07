@@ -14,7 +14,8 @@ namespace Microsoft.NET.Build.Tasks
     {
         public BuildErrorException() { }
 
-        public BuildErrorException(string message) : base(message) { }
+        public BuildErrorException(string message)
+            : base(message) { }
 
         public BuildErrorException(string message, Exception innerException)
             : base(message, innerException) { }

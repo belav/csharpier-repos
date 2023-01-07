@@ -26,7 +26,8 @@ namespace System.Net.Tests
 
     public sealed class HttpWebRequestTest_Async : HttpWebRequestTest
     {
-        public HttpWebRequestTest_Async(ITestOutputHelper output) : base(output) { }
+        public HttpWebRequestTest_Async(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Task<WebResponse> GetResponseAsync(HttpWebRequest request) =>
             request.GetResponseAsync();
@@ -34,7 +35,8 @@ namespace System.Net.Tests
 
     public sealed class HttpWebRequestTest_Sync : HttpWebRequestTest
     {
-        public HttpWebRequestTest_Sync(ITestOutputHelper output) : base(output) { }
+        public HttpWebRequestTest_Sync(ITestOutputHelper output)
+            : base(output) { }
 
         protected override Task<WebResponse> GetResponseAsync(HttpWebRequest request) =>
             Task.Run(() => request.GetResponse());

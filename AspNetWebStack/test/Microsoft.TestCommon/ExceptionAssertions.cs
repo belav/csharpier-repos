@@ -801,9 +801,11 @@ namespace Microsoft.TestCommon
         [Serializable]
         private class ThrowsException : Xunit.Sdk.ThrowsException
         {
-            public ThrowsException(Type type) : base(type) { }
+            public ThrowsException(Type type)
+                : base(type) { }
 
-            public ThrowsException(Type type, Exception ex) : base(type, ex) { }
+            public ThrowsException(Type type, Exception ex)
+                : base(type, ex) { }
 
             public override string StackTrace
             {

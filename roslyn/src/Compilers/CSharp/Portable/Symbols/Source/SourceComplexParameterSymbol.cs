@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool isParams,
             bool isExtensionMethodThis,
             DeclarationScope scope
-        ) : base(owner, parameterType, ordinal, refKind, scope, name, locations)
+        )
+            : base(owner, parameterType, ordinal, refKind, scope, name, locations)
         {
             Debug.Assert(
                 (syntaxRef == null) || (syntaxRef.GetSyntax().IsKind(SyntaxKind.Parameter))

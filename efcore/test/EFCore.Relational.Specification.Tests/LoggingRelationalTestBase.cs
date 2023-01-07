@@ -78,7 +78,8 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
     {
         public IndexPropertiesBothMappedAndNotMappedToTableContext(
             DbContextOptionsBuilder optionsBuilder
-        ) : base(optionsBuilder.Options) { }
+        )
+            : base(optionsBuilder.Options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -120,7 +121,8 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
     {
         public UnnamedIndexPropertiesMappedToNonOverlappingTablesContext(
             DbContextOptionsBuilder optionsBuilder
-        ) : base(optionsBuilder.Options) { }
+        )
+            : base(optionsBuilder.Options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -168,7 +170,8 @@ public abstract class LoggingRelationalTestBase<TBuilder, TExtension> : LoggingT
     {
         public ForeignKeyPropertiesMappedToUnrelatedTablesContext(
             DbContextOptionsBuilder optionsBuilder
-        ) : base(optionsBuilder.Options) { }
+        )
+            : base(optionsBuilder.Options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

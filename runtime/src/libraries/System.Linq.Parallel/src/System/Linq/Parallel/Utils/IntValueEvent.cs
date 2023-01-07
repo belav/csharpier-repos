@@ -16,7 +16,8 @@ namespace System.Linq.Parallel
     {
         internal int Value;
 
-        internal IntValueEvent() : base(false)
+        internal IntValueEvent()
+            : base(false)
         {
             Value = 0;
         }

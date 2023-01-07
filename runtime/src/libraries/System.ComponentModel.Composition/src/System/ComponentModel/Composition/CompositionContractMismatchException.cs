@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContractMismatchException"/> class.
         /// </summary>
-        public CompositionContractMismatchException() : this((string?)null, (Exception?)null) { }
+        public CompositionContractMismatchException()
+            : this((string?)null, (Exception?)null) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="CompositionContractMismatchException"/> class
@@ -72,6 +73,7 @@ namespace System.ComponentModel.Composition
         protected CompositionContractMismatchException(
             SerializationInfo info,
             StreamingContext context
-        ) : base(info, context) { }
+        )
+            : base(info, context) { }
     }
 }

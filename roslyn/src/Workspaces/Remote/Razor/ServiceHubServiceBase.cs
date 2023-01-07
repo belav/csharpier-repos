@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Remote
             IServiceProvider serviceProvider,
             Stream stream,
             IEnumerable<JsonConverter>? jsonConverters = null
-        ) : base(serviceProvider, stream, jsonConverters) { }
+        )
+            : base(serviceProvider, stream, jsonConverters) { }
 
         /// <summary>
         /// Invoked remotely.
