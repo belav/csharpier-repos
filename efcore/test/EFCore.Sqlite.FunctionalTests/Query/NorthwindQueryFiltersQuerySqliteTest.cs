@@ -3,13 +3,15 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindQueryFiltersQuerySqliteTest : NorthwindQueryFiltersQueryTestBase<
-    NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer>>
+public class NorthwindQueryFiltersQuerySqliteTest
+    : NorthwindQueryFiltersQueryTestBase<
+        NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer>
+    >
 {
     public NorthwindQueryFiltersQuerySqliteTest(
         NorthwindQuerySqliteFixture<NorthwindQueryFiltersCustomizer> fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
         //fixture.TestSqlLoggerFactory.SetTestOutputHelper(testOutputHelper);
@@ -20,15 +22,16 @@ public class NorthwindQueryFiltersQuerySqliteTest : NorthwindQueryFiltersQueryTe
         await base.Count_query(async);
 
         AssertSql(
-"""
+            """
 @__ef_filter__TenantPrefix_0='B' (Size = 1)
 
 SELECT COUNT(*)
 FROM "Customers" AS "c"
 WHERE @__ef_filter__TenantPrefix_0 = '' OR (("c"."CompanyName" LIKE @__ef_filter__TenantPrefix_0 || '%') AND substr("c"."CompanyName", 1, length(@__ef_filter__TenantPrefix_0)) = @__ef_filter__TenantPrefix_0) OR @__ef_filter__TenantPrefix_0 = ''
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

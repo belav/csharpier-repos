@@ -97,7 +97,16 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
@@ -116,7 +125,16 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
@@ -135,7 +153,16 @@ public class EventCallbackTest
 
         int runCount = 0;
         int arg = -1;
-        var callback = new EventCallback(component, (Action<int>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<int>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(17);
@@ -154,7 +181,16 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act & Assert
         await Assert.ThrowsAsync<ArgumentException>(() =>
@@ -170,7 +206,16 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
@@ -187,7 +232,16 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
@@ -205,7 +259,17 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
@@ -224,7 +288,17 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
@@ -243,7 +317,17 @@ public class EventCallbackTest
 
         int runCount = 0;
         int arg = -1;
-        var callback = new EventCallback(component, (Func<int, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<int, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(17);
@@ -262,7 +346,17 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act & Assert
         await Assert.ThrowsAsync<ArgumentException>(() =>
@@ -313,7 +407,16 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
@@ -332,7 +435,16 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Action<EventArgs>)((e) => { arg = e; runCount++; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Action<EventArgs>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
@@ -350,7 +462,16 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback<EventArgs>(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
@@ -367,7 +488,16 @@ public class EventCallbackTest
         var component = new EventCountingComponent();
 
         int runCount = 0;
-        var callback = new EventCallback<EventArgs>(component, (Func<Task>)(() => { runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<Task>)(
+                () =>
+                {
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
@@ -385,7 +515,17 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync();
@@ -404,7 +544,17 @@ public class EventCallbackTest
 
         int runCount = 0;
         EventArgs arg = null;
-        var callback = new EventCallback<EventArgs>(component, (Func<EventArgs, Task>)((e) => { arg = e; runCount++; return Task.CompletedTask; }));
+        var callback = new EventCallback<EventArgs>(
+            component,
+            (Func<EventArgs, Task>)(
+                (e) =>
+                {
+                    arg = e;
+                    runCount++;
+                    return Task.CompletedTask;
+                }
+            )
+        );
 
         // Act
         await callback.InvokeAsync(new EventArgs());
@@ -427,6 +577,7 @@ public class EventCallbackTest
 
         public void Attach(RenderHandle renderHandle) => throw new NotImplementedException();
 
-        public Task SetParametersAsync(ParameterView parameters) => throw new NotImplementedException();
+        public Task SetParametersAsync(ParameterView parameters) =>
+            throw new NotImplementedException();
     }
 }

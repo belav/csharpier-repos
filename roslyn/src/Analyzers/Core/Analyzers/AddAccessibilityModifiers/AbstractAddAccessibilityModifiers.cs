@@ -7,24 +7,31 @@ using Microsoft.CodeAnalysis.LanguageService;
 
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
-    internal abstract class AbstractAddAccessibilityModifiers<TMemberDeclarationSyntax> : IAddAccessibilityModifiers
-        where TMemberDeclarationSyntax : SyntaxNode
+    internal abstract class AbstractAddAccessibilityModifiers<TMemberDeclarationSyntax>
+        : IAddAccessibilityModifiers where TMemberDeclarationSyntax : SyntaxNode
     {
         public bool ShouldUpdateAccessibilityModifier(
             IAccessibilityFacts accessibilityFacts,
             SyntaxNode member,
             AccessibilityModifiersRequired option,
-            out SyntaxToken name)
+            out SyntaxToken name
+        )
         {
             name = default;
-            return member is TMemberDeclarationSyntax memberDecl &&
-                ShouldUpdateAccessibilityModifier(accessibilityFacts, memberDecl, option, out name);
+            return member is TMemberDeclarationSyntax memberDecl
+                && ShouldUpdateAccessibilityModifier(
+                    accessibilityFacts,
+                    memberDecl,
+                    option,
+                    out name
+                );
         }
 
         public abstract bool ShouldUpdateAccessibilityModifier(
             IAccessibilityFacts accessibilityFacts,
             TMemberDeclarationSyntax member,
             AccessibilityModifiersRequired option,
-            out SyntaxToken name);
+            out SyntaxToken name
+        );
     }
 }

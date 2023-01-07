@@ -9,22 +9,24 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class UpdatesInMemoryTestBase<TFixture> : UpdatesTestBase<TFixture>
     where TFixture : UpdatesInMemoryTestBase<TFixture>.UpdatesInMemoryFixtureBase
 {
-    protected UpdatesInMemoryTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    protected UpdatesInMemoryTestBase(TFixture fixture) : base(fixture) { }
 
-    protected override string UpdateConcurrencyMessage
-        => InMemoryStrings.UpdateConcurrencyException;
+    protected override string UpdateConcurrencyMessage =>
+        InMemoryStrings.UpdateConcurrencyException;
 
     protected override void ExecuteWithStrategyInTransaction(
         Action<UpdatesContext> testOperation,
         Action<UpdatesContext> nestedTestOperation1 = null,
-        Action<UpdatesContext> nestedTestOperation2 = null)
+        Action<UpdatesContext> nestedTestOperation2 = null
+    )
     {
         try
         {
-            base.ExecuteWithStrategyInTransaction(testOperation, nestedTestOperation1, nestedTestOperation2);
+            base.ExecuteWithStrategyInTransaction(
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
         }
         finally
         {
@@ -35,11 +37,16 @@ public abstract class UpdatesInMemoryTestBase<TFixture> : UpdatesTestBase<TFixtu
     protected override async Task ExecuteWithStrategyInTransactionAsync(
         Func<UpdatesContext, Task> testOperation,
         Func<UpdatesContext, Task> nestedTestOperation1 = null,
-        Func<UpdatesContext, Task> nestedTestOperation2 = null)
+        Func<UpdatesContext, Task> nestedTestOperation2 = null
+    )
     {
         try
         {
-            await base.ExecuteWithStrategyInTransactionAsync(testOperation, nestedTestOperation1, nestedTestOperation2);
+            await base.ExecuteWithStrategyInTransactionAsync(
+                testOperation,
+                nestedTestOperation1,
+                nestedTestOperation2
+            );
         }
         finally
         {
@@ -48,18 +55,21 @@ public abstract class UpdatesInMemoryTestBase<TFixture> : UpdatesTestBase<TFixtu
     }
 
     // Issue #29875
-    public override Task Can_change_type_of_pk_to_pk_dependent_by_replacing_with_new_dependent(bool async)
+    public override Task Can_change_type_of_pk_to_pk_dependent_by_replacing_with_new_dependent(
+        bool async
+    )
     {
         return Assert.ThrowsAsync<DbUpdateConcurrencyException>(
-            () => base.Can_change_type_of_pk_to_pk_dependent_by_replacing_with_new_dependent(async));
+            () => base.Can_change_type_of_pk_to_pk_dependent_by_replacing_with_new_dependent(async)
+        );
     }
 
     public abstract class UpdatesInMemoryFixtureBase : UpdatesFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder).ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(w => w.Log(InMemoryEventId.TransactionIgnoredWarning));
     }
 }

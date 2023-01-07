@@ -30,9 +30,13 @@ public class RangeConditionHeaderValueTest
     public void Ctor_DateOverload_MatchExpectation()
     {
         var rangeCondition = new RangeConditionHeaderValue(
-            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+        );
         Assert.Null(rangeCondition.EntityTag);
-        Assert.Equal(new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero), rangeCondition.LastModified);
+        Assert.Equal(
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero),
+            rangeCondition.LastModified
+        );
     }
 
     [Fact]
@@ -41,7 +45,9 @@ public class RangeConditionHeaderValueTest
         var rangeCondition = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"x\""));
         Assert.Equal("\"x\"", rangeCondition.ToString());
 
-        rangeCondition = new RangeConditionHeaderValue(new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+        rangeCondition = new RangeConditionHeaderValue(
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+        );
         Assert.Equal("Thu, 15 Jul 2010 12:33:57 GMT", rangeCondition.ToString());
     }
 
@@ -51,13 +57,17 @@ public class RangeConditionHeaderValueTest
         var rangeCondition1 = new RangeConditionHeaderValue("\"x\"");
         var rangeCondition2 = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"x\""));
         var rangeCondition3 = new RangeConditionHeaderValue(
-            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+        );
         var rangeCondition4 = new RangeConditionHeaderValue(
-            new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero));
+            new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero)
+        );
         var rangeCondition5 = new RangeConditionHeaderValue(
-            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+        );
         var rangeCondition6 = new RangeConditionHeaderValue(
-            new EntityTagHeaderValue("\"x\"", true));
+            new EntityTagHeaderValue("\"x\"", true)
+        );
 
         Assert.Equal(rangeCondition1.GetHashCode(), rangeCondition2.GetHashCode());
         Assert.NotEqual(rangeCondition1.GetHashCode(), rangeCondition3.GetHashCode());
@@ -72,13 +82,17 @@ public class RangeConditionHeaderValueTest
         var rangeCondition1 = new RangeConditionHeaderValue("\"x\"");
         var rangeCondition2 = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"x\""));
         var rangeCondition3 = new RangeConditionHeaderValue(
-            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+        );
         var rangeCondition4 = new RangeConditionHeaderValue(
-            new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero));
+            new DateTimeOffset(2008, 8, 16, 13, 44, 10, TimeSpan.Zero)
+        );
         var rangeCondition5 = new RangeConditionHeaderValue(
-            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero));
+            new DateTimeOffset(2010, 7, 15, 12, 33, 57, TimeSpan.Zero)
+        );
         var rangeCondition6 = new RangeConditionHeaderValue(
-            new EntityTagHeaderValue("\"x\"", true));
+            new EntityTagHeaderValue("\"x\"", true)
+        );
 
         Assert.False(rangeCondition1.Equals(null), "\"x\" vs. <null>");
         Assert.True(rangeCondition1!.Equals(rangeCondition2), "\"x\" vs. \"x\"");
@@ -93,13 +107,26 @@ public class RangeConditionHeaderValueTest
     public void Parse_SetOfValidValueStrings_ParsedCorrectly()
     {
         CheckValidParse("  \"x\" ", new RangeConditionHeaderValue("\"x\""));
-        CheckValidParse("  Sun, 06 Nov 1994 08:49:37 GMT ",
-            new RangeConditionHeaderValue(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)));
-        CheckValidParse("Wed, 09 Nov 1994 08:49:37 GMT",
-            new RangeConditionHeaderValue(new DateTimeOffset(1994, 11, 9, 8, 49, 37, TimeSpan.Zero)));
-        CheckValidParse(" W/ \"tag\" ", new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true)));
-        CheckValidParse(" w/\"tag\"", new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true)));
-        CheckValidParse("\"tag\"", new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"")));
+        CheckValidParse(
+            "  Sun, 06 Nov 1994 08:49:37 GMT ",
+            new RangeConditionHeaderValue(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero))
+        );
+        CheckValidParse(
+            "Wed, 09 Nov 1994 08:49:37 GMT",
+            new RangeConditionHeaderValue(new DateTimeOffset(1994, 11, 9, 8, 49, 37, TimeSpan.Zero))
+        );
+        CheckValidParse(
+            " W/ \"tag\" ",
+            new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true))
+        );
+        CheckValidParse(
+            " w/\"tag\"",
+            new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true))
+        );
+        CheckValidParse(
+            "\"tag\"",
+            new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\""))
+        );
     }
 
     [Theory]
@@ -124,11 +151,22 @@ public class RangeConditionHeaderValueTest
     public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
     {
         CheckValidTryParse("  \"x\" ", new RangeConditionHeaderValue("\"x\""));
-        CheckValidTryParse("  Sun, 06 Nov 1994 08:49:37 GMT ",
-            new RangeConditionHeaderValue(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero)));
-        CheckValidTryParse(" W/ \"tag\" ", new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true)));
-        CheckValidTryParse(" w/\"tag\"", new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true)));
-        CheckValidTryParse("\"tag\"", new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"")));
+        CheckValidTryParse(
+            "  Sun, 06 Nov 1994 08:49:37 GMT ",
+            new RangeConditionHeaderValue(new DateTimeOffset(1994, 11, 6, 8, 49, 37, TimeSpan.Zero))
+        );
+        CheckValidTryParse(
+            " W/ \"tag\" ",
+            new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true))
+        );
+        CheckValidTryParse(
+            " w/\"tag\"",
+            new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\"", true))
+        );
+        CheckValidTryParse(
+            "\"tag\"",
+            new RangeConditionHeaderValue(new EntityTagHeaderValue("\"tag\""))
+        );
     }
 
     [Theory]

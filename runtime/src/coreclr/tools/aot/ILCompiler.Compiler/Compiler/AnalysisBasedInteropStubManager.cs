@@ -20,8 +20,12 @@ namespace ILCompiler
         private readonly IEnumerable<DefType> _typesWithStructMarshalling;
         private readonly IEnumerable<DefType> _typesWithDelegateMarshalling;
 
-        public AnalysisBasedInteropStubManager(InteropStateManager interopStateManager, PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration, IEnumerable<DefType> typesWithStructMarshalling, IEnumerable<DefType> typesWithDelegateMarshalling)
-            : base(interopStateManager, pInvokeILEmitterConfiguration)
+        public AnalysisBasedInteropStubManager(
+            InteropStateManager interopStateManager,
+            PInvokeILEmitterConfiguration pInvokeILEmitterConfiguration,
+            IEnumerable<DefType> typesWithStructMarshalling,
+            IEnumerable<DefType> typesWithDelegateMarshalling
+        ) : base(interopStateManager, pInvokeILEmitterConfiguration)
         {
             _typesWithStructMarshalling = typesWithStructMarshalling;
             _typesWithDelegateMarshalling = typesWithDelegateMarshalling;
@@ -40,16 +44,22 @@ namespace ILCompiler
             }
         }
 
-        public override void AddDependenciesDueToMethodCodePresence(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
-        {
-        }
+        public override void AddDependenciesDueToMethodCodePresence(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        ) { }
 
-        public override void AddInterestingInteropConstructedTypeDependencies(ref DependencyList dependencies, NodeFactory factory, TypeDesc type)
-        {
-        }
+        public override void AddInterestingInteropConstructedTypeDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type
+        ) { }
 
-        public override void AddMarshalAPIsGenericDependencies(ref DependencyList dependencies, NodeFactory factory, MethodDesc method)
-        {
-        }
+        public override void AddMarshalAPIsGenericDependencies(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method
+        ) { }
     }
 }

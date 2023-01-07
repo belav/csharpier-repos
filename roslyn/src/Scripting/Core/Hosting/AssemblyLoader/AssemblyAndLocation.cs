@@ -29,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         public bool IsDefault => Assembly == null;
 
         public bool Equals(AssemblyAndLocation other) =>
-            Assembly == other.Assembly && Location == other.Location && GlobalAssemblyCache == other.GlobalAssemblyCache;
+            Assembly == other.Assembly
+            && Location == other.Location
+            && GlobalAssemblyCache == other.GlobalAssemblyCache;
 
         public override int GetHashCode() =>
             Hash.Combine(Assembly, Hash.Combine(Location, Hash.Combine(GlobalAssemblyCache, 0)));

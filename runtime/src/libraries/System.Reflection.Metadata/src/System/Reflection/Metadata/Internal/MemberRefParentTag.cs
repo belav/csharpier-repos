@@ -16,11 +16,11 @@ namespace System.Reflection.Metadata.Ecma335
         internal const uint TypeSpec = 0x00000004;
         internal const uint TagMask = 0x00000007;
         internal const TableMask TablesReferenced =
-          TableMask.TypeDef
-          | TableMask.TypeRef
-          | TableMask.ModuleRef
-          | TableMask.MethodDef
-          | TableMask.TypeSpec;
+            TableMask.TypeDef
+            | TableMask.TypeRef
+            | TableMask.ModuleRef
+            | TableMask.MethodDef
+            | TableMask.TypeSpec;
         internal const ulong TagToTokenTypeByteVector =
             (ulong)TokenTypeIds.TypeDef >> 24
             | (ulong)TokenTypeIds.TypeRef >> 16
@@ -31,7 +31,12 @@ namespace System.Reflection.Metadata.Ecma335
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         internal static EntityHandle ConvertToHandle(uint memberRef)
         {
-            uint tokenType = unchecked((uint)((TagToTokenTypeByteVector >> ((int)(memberRef & TagMask) << 3)) << TokenTypeIds.RowIdBitCount));
+            uint tokenType = unchecked(
+                (uint)(
+                    (TagToTokenTypeByteVector >> ((int)(memberRef & TagMask) << 3))
+                    << TokenTypeIds.RowIdBitCount
+                )
+            );
             uint rowId = (memberRef >> NumberOfBits);
 
             if (tokenType == 0 || (rowId & ~TokenTypeIds.RIDMask) != 0)

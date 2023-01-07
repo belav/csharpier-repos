@@ -12,8 +12,10 @@ namespace System.Drawing.Tests
 {
     public partial class GraphicsTests
     {
-        public static bool IsWindows7OrWindowsArm64 => PlatformDetection.IsWindows7 || (PlatformDetection.IsWindows && PlatformDetection.IsArm64Process);
-        
+        public static bool IsWindows7OrWindowsArm64 =>
+            PlatformDetection.IsWindows7
+            || (PlatformDetection.IsWindows && PlatformDetection.IsArm64Process);
+
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void GetHdc_FromHdc_Roundtrips()
         {
@@ -95,7 +97,11 @@ namespace System.Drawing.Tests
             yield return new object[] { Helpers.GetDC(foregroundWindow) };
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51097", typeof(GraphicsTests), nameof(IsWindows7OrWindowsArm64))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51097",
+            typeof(GraphicsTests),
+            nameof(IsWindows7OrWindowsArm64)
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(FromHdc_TestData))]
         public void FromHdc_ValidHdc_ReturnsExpected(IntPtr hdc)
@@ -107,7 +113,11 @@ namespace System.Drawing.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51097", typeof(GraphicsTests), nameof(IsWindows7OrWindowsArm64))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51097",
+            typeof(GraphicsTests),
+            nameof(IsWindows7OrWindowsArm64)
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(FromHdc_TestData))]
         public void FromHdc_ValidHdcWithContext_ReturnsExpected(IntPtr hdc)
@@ -119,7 +129,11 @@ namespace System.Drawing.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51097", typeof(GraphicsTests), nameof(IsWindows7OrWindowsArm64))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51097",
+            typeof(GraphicsTests),
+            nameof(IsWindows7OrWindowsArm64)
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(FromHdc_TestData))]
         public void FromHdcInternal_GetDC_ReturnsExpected(IntPtr hdc)
@@ -134,7 +148,10 @@ namespace System.Drawing.Tests
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void FromHdc_ZeroHdc_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("hdc", () => Graphics.FromHdc(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "hdc",
+                () => Graphics.FromHdc(IntPtr.Zero)
+            );
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
@@ -165,17 +182,26 @@ namespace System.Drawing.Tests
                 IntPtr hdc = graphics.GetHdc();
                 graphics.ReleaseHdc();
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc(hdc));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdcInternal(hdc));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdcInternal(hdc)
+                );
 
                 hdc = graphics.GetHdc();
                 graphics.ReleaseHdc(hdc);
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc());
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdcInternal(hdc));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdcInternal(hdc)
+                );
 
                 hdc = graphics.GetHdc();
                 graphics.ReleaseHdcInternal(hdc);
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc());
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdcInternal(hdc));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdcInternal(hdc)
+                );
             }
         }
 
@@ -187,11 +213,17 @@ namespace System.Drawing.Tests
             {
                 IntPtr hdc = graphics.GetHdc();
                 graphics.ReleaseHdc((IntPtr)10);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdcInternal((IntPtr)10));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdcInternal((IntPtr)10)
+                );
 
                 hdc = graphics.GetHdc();
                 graphics.ReleaseHdcInternal((IntPtr)10);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc((IntPtr)10));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdc((IntPtr)10)
+                );
             }
         }
 
@@ -222,8 +254,14 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc());
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc(IntPtr.Zero));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdcInternal(IntPtr.Zero));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdc(IntPtr.Zero)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdcInternal(IntPtr.Zero)
+                );
             }
         }
 
@@ -236,8 +274,14 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc());
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdc(IntPtr.Zero));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ReleaseHdcInternal(IntPtr.Zero));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdc(IntPtr.Zero)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ReleaseHdcInternal(IntPtr.Zero)
+                );
             }
         }
 
@@ -247,7 +291,11 @@ namespace System.Drawing.Tests
             yield return new object[] { Helpers.GetForegroundWindow() };
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51097", typeof(GraphicsTests), nameof(IsWindows7OrWindowsArm64))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51097",
+            typeof(GraphicsTests),
+            nameof(IsWindows7OrWindowsArm64)
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Hwnd_TestData))]
         public void FromHwnd_ValidHwnd_ReturnsExpected(IntPtr hWnd)
@@ -259,7 +307,11 @@ namespace System.Drawing.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/51097", typeof(GraphicsTests), nameof(IsWindows7OrWindowsArm64))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/51097",
+            typeof(GraphicsTests),
+            nameof(IsWindows7OrWindowsArm64)
+        )]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(Hwnd_TestData))]
         public void FromHwndInternal_ValidHwnd_ReturnsExpected(IntPtr hWnd)
@@ -311,7 +363,9 @@ namespace System.Drawing.Tests
         {
             using (var image = new Bitmap(10, 10, format))
             {
-                Exception exception = AssertExtensions.Throws<ArgumentException,Exception>(() => Graphics.FromImage(image));
+                Exception exception = AssertExtensions.Throws<ArgumentException, Exception>(
+                    () => Graphics.FromImage(image)
+                );
                 if (exception is ArgumentException argumentException)
                     Assert.Equal("image", argumentException.ParamName);
             }
@@ -348,13 +402,24 @@ namespace System.Drawing.Tests
 
         public static IEnumerable<object[]> CompositingMode_TestData()
         {
-            yield return new object[] { CompositingMode.SourceCopy, Color.FromArgb(160, 255, 255, 255) };
-            yield return new object[] { CompositingMode.SourceOver, Color.FromArgb(220, 185, 185, 185) };
+            yield return new object[]
+            {
+                CompositingMode.SourceCopy,
+                Color.FromArgb(160, 255, 255, 255)
+            };
+            yield return new object[]
+            {
+                CompositingMode.SourceOver,
+                Color.FromArgb(220, 185, 185, 185)
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CompositingMode_TestData))]
-        public void CompositingMode_Set_GetReturnsExpected(CompositingMode mode, Color expectedOverlap)
+        public void CompositingMode_Set_GetReturnsExpected(
+            CompositingMode mode,
+            Color expectedOverlap
+        )
         {
             Color transparentBlack = Color.FromArgb(160, 0, 0, 0);
             Color transparentWhite = Color.FromArgb(160, 255, 255, 255);
@@ -373,24 +438,32 @@ namespace System.Drawing.Tests
                 graphics.FillRectangle(transparentWhiteBrush, new Rectangle(1, 1, 2, 2));
 
                 targetGraphics.DrawImage(image, Point.Empty);
-                Helpers.VerifyBitmap(targetImage, new Color[][]
-                {
-                    new Color[] { transparentBlack,   transparentBlack, Helpers.EmptyColor },
-                    new Color[] { transparentBlack,   expectedOverlap,  transparentWhite   },
-                    new Color[] { Helpers.EmptyColor, transparentWhite, transparentWhite   }
-                });
+                Helpers.VerifyBitmap(
+                    targetImage,
+                    new Color[][]
+                    {
+                        new Color[] { transparentBlack, transparentBlack, Helpers.EmptyColor },
+                        new Color[] { transparentBlack, expectedOverlap, transparentWhite },
+                        new Color[] { Helpers.EmptyColor, transparentWhite, transparentWhite }
+                    }
+                );
             }
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(CompositingMode.SourceOver - 1)]
         [InlineData(CompositingMode.SourceCopy + 1)]
-        public void CompositingMode_SetInvalid_ThrowsInvalidEnumArgumentException(CompositingMode compositingMode)
+        public void CompositingMode_SetInvalid_ThrowsInvalidEnumArgumentException(
+            CompositingMode compositingMode
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.CompositingMode = compositingMode);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.CompositingMode = compositingMode
+                );
             }
         }
 
@@ -404,7 +477,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.CompositingMode);
-                    Assert.Throws<InvalidOperationException>(() => graphics.CompositingMode = CompositingMode.SourceCopy);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.CompositingMode = CompositingMode.SourceCopy
+                    );
                 }
                 finally
                 {
@@ -422,7 +497,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.CompositingMode);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.CompositingMode = CompositingMode.SourceCopy);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.CompositingMode = CompositingMode.SourceCopy
+                );
             }
         }
 
@@ -432,9 +510,14 @@ namespace System.Drawing.Tests
             Color transparentWhite = Color.FromArgb(160, 255, 255, 255);
             var basicExpectedColors = new Color[][]
             {
-                new Color[] { transparentBlack,   transparentBlack,                   Helpers.EmptyColor },
-                new Color[] { transparentBlack,   Color.FromArgb(220, 185, 185, 185), transparentWhite   },
-                new Color[] { Helpers.EmptyColor, transparentWhite,                   transparentWhite   }
+                new Color[] { transparentBlack, transparentBlack, Helpers.EmptyColor },
+                new Color[]
+                {
+                    transparentBlack,
+                    Color.FromArgb(220, 185, 185, 185),
+                    transparentWhite
+                },
+                new Color[] { Helpers.EmptyColor, transparentWhite, transparentWhite }
             };
 
             yield return new object[] { CompositingQuality.AssumeLinear, basicExpectedColors };
@@ -444,9 +527,24 @@ namespace System.Drawing.Tests
 
             var gammaCorrectedColors = new Color[][]
             {
-                new Color[] { Color.FromArgb(159, 0, 0, 0), Color.FromArgb(159, 0, 0, 0),       Color.FromArgb(0, 0, 0, 0)         },
-                new Color[] { Color.FromArgb(159, 0, 0, 0), Color.FromArgb(219, 222, 222, 222), Color.FromArgb(159, 255, 255, 255) },
-                new Color[] { Color.FromArgb(0, 0, 0, 0),   Color.FromArgb(159, 255, 255, 255), Color.FromArgb(159, 255, 255, 255) }
+                new Color[]
+                {
+                    Color.FromArgb(159, 0, 0, 0),
+                    Color.FromArgb(159, 0, 0, 0),
+                    Color.FromArgb(0, 0, 0, 0)
+                },
+                new Color[]
+                {
+                    Color.FromArgb(159, 0, 0, 0),
+                    Color.FromArgb(219, 222, 222, 222),
+                    Color.FromArgb(159, 255, 255, 255)
+                },
+                new Color[]
+                {
+                    Color.FromArgb(0, 0, 0, 0),
+                    Color.FromArgb(159, 255, 255, 255),
+                    Color.FromArgb(159, 255, 255, 255)
+                }
             };
             yield return new object[] { CompositingQuality.GammaCorrected, gammaCorrectedColors };
             yield return new object[] { CompositingQuality.HighQuality, gammaCorrectedColors };
@@ -454,7 +552,10 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CompositingQuality_TestData))]
-        public void CompositingQuality_Set_GetReturnsExpected(CompositingQuality quality, Color[][] expectedIntersectionColor)
+        public void CompositingQuality_Set_GetReturnsExpected(
+            CompositingQuality quality,
+            Color[][] expectedIntersectionColor
+        )
         {
             Color transparentBlack = Color.FromArgb(160, 0, 0, 0);
             Color transparentWhite = Color.FromArgb(160, 255, 255, 255);
@@ -477,12 +578,17 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(CompositingQuality.Invalid - 1)]
         [InlineData(CompositingQuality.AssumeLinear + 1)]
-        public void CompositingQuality_SetInvalid_ThrowsInvalidEnumArgumentException(CompositingQuality compositingQuality)
+        public void CompositingQuality_SetInvalid_ThrowsInvalidEnumArgumentException(
+            CompositingQuality compositingQuality
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.CompositingQuality = compositingQuality);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.CompositingQuality = compositingQuality
+                );
             }
         }
 
@@ -496,7 +602,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.CompositingQuality);
-                    Assert.Throws<InvalidOperationException>(() => graphics.CompositingQuality = CompositingQuality.AssumeLinear);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.CompositingQuality = CompositingQuality.AssumeLinear
+                    );
                 }
                 finally
                 {
@@ -514,7 +622,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.CompositingQuality);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.CompositingQuality = CompositingQuality.AssumeLinear);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.CompositingQuality = CompositingQuality.AssumeLinear
+                );
             }
         }
 
@@ -639,7 +750,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.Flush());
-                    Assert.Throws<InvalidOperationException>(() => graphics.Flush(FlushIntention.Sync));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.Flush(FlushIntention.Sync)
+                    );
                 }
                 finally
                 {
@@ -657,7 +770,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.Flush());
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.Flush(FlushIntention.Flush));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.Flush(FlushIntention.Flush)
+                );
             }
         }
 
@@ -670,7 +786,10 @@ namespace System.Drawing.Tests
         [InlineData(InterpolationMode.HighQualityBilinear, InterpolationMode.HighQualityBilinear)]
         [InlineData(InterpolationMode.Low, InterpolationMode.Bilinear)]
         [InlineData(InterpolationMode.NearestNeighbor, InterpolationMode.NearestNeighbor)]
-        public void InterpolationMode_SetValid_GetReturnsExpected(InterpolationMode interpolationMode, InterpolationMode expectedInterpolationMode)
+        public void InterpolationMode_SetValid_GetReturnsExpected(
+            InterpolationMode interpolationMode,
+            InterpolationMode expectedInterpolationMode
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -683,12 +802,17 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(InterpolationMode.Invalid - 1)]
         [InlineData(InterpolationMode.HighQualityBicubic + 1)]
-        public void InterpolationMode_SetInvalid_ThrowsInvalidEnumArgumentException(InterpolationMode interpolationMode)
+        public void InterpolationMode_SetInvalid_ThrowsInvalidEnumArgumentException(
+            InterpolationMode interpolationMode
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.InterpolationMode = interpolationMode);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.InterpolationMode = interpolationMode
+                );
             }
         }
 
@@ -698,7 +822,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.InterpolationMode = InterpolationMode.Invalid);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.InterpolationMode = InterpolationMode.Invalid
+                );
             }
         }
 
@@ -712,7 +839,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.InterpolationMode);
-                    Assert.Throws<InvalidOperationException>(() => graphics.InterpolationMode = InterpolationMode.HighQualityBilinear);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.InterpolationMode = InterpolationMode.HighQualityBilinear
+                    );
                 }
                 finally
                 {
@@ -730,7 +859,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.InterpolationMode);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.InterpolationMode = InterpolationMode.HighQualityBilinear);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.InterpolationMode = InterpolationMode.HighQualityBilinear
+                );
             }
         }
 
@@ -759,7 +891,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.PageScale = pageScale);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.PageScale = pageScale
+                );
             }
         }
 
@@ -820,7 +955,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.PageUnit = pageUnit);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.PageUnit = pageUnit
+                );
             }
         }
 
@@ -830,7 +968,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.PageUnit = GraphicsUnit.World);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.PageUnit = GraphicsUnit.World
+                );
             }
         }
 
@@ -844,7 +985,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.PageUnit);
-                    Assert.Throws<InvalidOperationException>(() => graphics.PageUnit = GraphicsUnit.Document);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.PageUnit = GraphicsUnit.Document
+                    );
                 }
                 finally
                 {
@@ -862,7 +1005,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.PageUnit);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.PageUnit = GraphicsUnit.Document);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.PageUnit = GraphicsUnit.Document
+                );
             }
         }
 
@@ -885,12 +1031,17 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(PixelOffsetMode.Invalid - 1)]
         [InlineData(PixelOffsetMode.Half + 1)]
-        public void PixelOffsetMode_SetInvalid_ThrowsInvalidEnumArgumentException(PixelOffsetMode pixelOffsetMode)
+        public void PixelOffsetMode_SetInvalid_ThrowsInvalidEnumArgumentException(
+            PixelOffsetMode pixelOffsetMode
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.PixelOffsetMode = pixelOffsetMode);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.PixelOffsetMode = pixelOffsetMode
+                );
             }
         }
 
@@ -900,7 +1051,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.PixelOffsetMode = PixelOffsetMode.Invalid);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.PixelOffsetMode = PixelOffsetMode.Invalid
+                );
             }
         }
 
@@ -914,7 +1068,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.PixelOffsetMode);
-                    Assert.Throws<InvalidOperationException>(() => graphics.PixelOffsetMode = PixelOffsetMode.Default);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.PixelOffsetMode = PixelOffsetMode.Default
+                    );
                 }
                 finally
                 {
@@ -932,7 +1088,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.PixelOffsetMode);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.PixelOffsetMode = PixelOffsetMode.Default);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.PixelOffsetMode = PixelOffsetMode.Default
+                );
             }
         }
 
@@ -946,7 +1105,7 @@ namespace System.Drawing.Tests
                 new Point(0, 0),
                 new Color[][]
                 {
-                    new Color[] { red, red,   red   },
+                    new Color[] { red, red, red },
                     new Color[] { red, empty, empty },
                     new Color[] { red, empty, empty }
                 }
@@ -958,7 +1117,7 @@ namespace System.Drawing.Tests
                 new Color[][]
                 {
                     new Color[] { empty, red, empty },
-                    new Color[] { red,   red, red   },
+                    new Color[] { red, red, red },
                     new Color[] { empty, red, empty }
                 }
             };
@@ -976,7 +1135,10 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(RenderingOrigin_TestData))]
-        public void RenderingOrigin_SetToCustom_RendersExpected(Point renderingOrigin, Color[][] expectedRendering)
+        public void RenderingOrigin_SetToCustom_RendersExpected(
+            Point renderingOrigin,
+            Color[][] expectedRendering
+        )
         {
             Color red = Color.FromArgb(Color.Red.ToArgb());
 
@@ -1002,7 +1164,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.RenderingOrigin);
-                    Assert.Throws<InvalidOperationException>(() => graphics.RenderingOrigin = Point.Empty);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.RenderingOrigin = Point.Empty
+                    );
                 }
                 finally
                 {
@@ -1020,7 +1184,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.RenderingOrigin);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.RenderingOrigin = Point.Empty);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.RenderingOrigin = Point.Empty
+                );
             }
         }
 
@@ -1030,7 +1197,10 @@ namespace System.Drawing.Tests
         [InlineData(SmoothingMode.HighQuality, SmoothingMode.AntiAlias)]
         [InlineData(SmoothingMode.HighSpeed, SmoothingMode.None)]
         [InlineData(SmoothingMode.None, SmoothingMode.None)]
-        public void SmoothingMode_SetValid_GetReturnsExpected(SmoothingMode smoothingMode, SmoothingMode expectedSmoothingMode)
+        public void SmoothingMode_SetValid_GetReturnsExpected(
+            SmoothingMode smoothingMode,
+            SmoothingMode expectedSmoothingMode
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -1043,12 +1213,17 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(SmoothingMode.Invalid - 1)]
         [InlineData(SmoothingMode.AntiAlias + 1)]
-        public void SmoothingMode_SetInvalid_ThrowsInvalidEnumArgumentException(SmoothingMode smoothingMode)
+        public void SmoothingMode_SetInvalid_ThrowsInvalidEnumArgumentException(
+            SmoothingMode smoothingMode
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.SmoothingMode = smoothingMode);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.SmoothingMode = smoothingMode
+                );
             }
         }
 
@@ -1058,7 +1233,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.SmoothingMode = SmoothingMode.Invalid);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.SmoothingMode = SmoothingMode.Invalid
+                );
             }
         }
 
@@ -1072,7 +1250,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.SmoothingMode);
-                    Assert.Throws<InvalidOperationException>(() => graphics.SmoothingMode = SmoothingMode.AntiAlias);
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.SmoothingMode = SmoothingMode.AntiAlias
+                    );
                 }
                 finally
                 {
@@ -1090,7 +1270,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.SmoothingMode);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.SmoothingMode = SmoothingMode.AntiAlias);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.SmoothingMode = SmoothingMode.AntiAlias
+                );
             }
         }
 
@@ -1116,7 +1299,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TextContrast = textContrast);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TextContrast = textContrast
+                );
             }
         }
 
@@ -1159,7 +1345,9 @@ namespace System.Drawing.Tests
         [InlineData(TextRenderingHint.SingleBitPerPixel)]
         [InlineData(TextRenderingHint.SingleBitPerPixelGridFit)]
         [InlineData(TextRenderingHint.SystemDefault)]
-        public void TextRenderingHint_SetValid_GetReturnsExpected(TextRenderingHint textRenderingHint)
+        public void TextRenderingHint_SetValid_GetReturnsExpected(
+            TextRenderingHint textRenderingHint
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -1172,12 +1360,17 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(TextRenderingHint.SystemDefault - 1)]
         [InlineData(TextRenderingHint.ClearTypeGridFit + 1)]
-        public void TextRenderingHint_SetInvalid_ThrowsInvalidEnumArgumentException(TextRenderingHint textRenderingHint)
+        public void TextRenderingHint_SetInvalid_ThrowsInvalidEnumArgumentException(
+            TextRenderingHint textRenderingHint
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => graphics.TextRenderingHint = textRenderingHint);
+                AssertExtensions.Throws<InvalidEnumArgumentException>(
+                    "value",
+                    () => graphics.TextRenderingHint = textRenderingHint
+                );
             }
         }
 
@@ -1191,7 +1384,10 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.TextRenderingHint);
-                    Assert.Throws<InvalidOperationException>(() => graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit);
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit
+                    );
                 }
                 finally
                 {
@@ -1209,7 +1405,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.TextRenderingHint);
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TextRenderingHint = TextRenderingHint.SingleBitPerPixelGridFit
+                );
             }
         }
 
@@ -1230,14 +1429,17 @@ namespace System.Drawing.Tests
 
                 graphics.Transform = matrix;
                 graphics.FillRectangle(brush, new Rectangle(0, 0, 3, 2));
-                Helpers.VerifyBitmap(image, new Color[][]
-                {
-                    new Color[] { empty, red,   empty, empty, empty },
-                    new Color[] { empty, red,   empty, empty, empty },
-                    new Color[] { empty, empty, empty, empty, empty },
-                    new Color[] { empty, empty, empty, empty, empty },
-                    new Color[] { empty, empty, empty, empty, empty }
-                });
+                Helpers.VerifyBitmap(
+                    image,
+                    new Color[][]
+                    {
+                        new Color[] { empty, red, empty, empty, empty },
+                        new Color[] { empty, red, empty, empty, empty },
+                        new Color[] { empty, empty, empty, empty, empty },
+                        new Color[] { empty, empty, empty, empty, empty },
+                        new Color[] { empty, empty, empty, empty, empty }
+                    }
+                );
             }
         }
 
@@ -1396,15 +1598,27 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("matrix", () => graphics.MultiplyTransform(null));
-                AssertExtensions.Throws<ArgumentNullException>("matrix", () => graphics.MultiplyTransform(null, MatrixOrder.Append));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "matrix",
+                    () => graphics.MultiplyTransform(null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "matrix",
+                    () => graphics.MultiplyTransform(null, MatrixOrder.Append)
+                );
             }
         }
 
         [ConditionalFact(Helpers.IsDrawingSupported)]
         public void MultiplyTransform_DisposedMatrix_Nop()
         {
-            var brush = new LinearGradientBrush(new Rectangle(1, 2, 3, 4), Color.Plum, Color.Red, 45, true);
+            var brush = new LinearGradientBrush(
+                new Rectangle(1, 2, 3, 4),
+                Color.Plum,
+                Color.Red,
+                45,
+                true
+            );
             Matrix transform = brush.Transform;
 
             var matrix = new Matrix();
@@ -1423,8 +1637,14 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var matrix = new Matrix(123, 24, 82, 16, 47, 30))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.MultiplyTransform(matrix));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.MultiplyTransform(matrix, MatrixOrder.Append));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.MultiplyTransform(matrix)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.MultiplyTransform(matrix, MatrixOrder.Append)
+                );
             }
         }
 
@@ -1437,7 +1657,10 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var matrix = new Matrix())
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.MultiplyTransform(matrix, order));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.MultiplyTransform(matrix, order)
+                );
             }
         }
 
@@ -1451,8 +1674,12 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.MultiplyTransform(matrix));
-                    Assert.Throws<InvalidOperationException>(() => graphics.MultiplyTransform(matrix, MatrixOrder.Append));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.MultiplyTransform(matrix)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.MultiplyTransform(matrix, MatrixOrder.Append)
+                    );
                 }
                 finally
                 {
@@ -1470,8 +1697,14 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.MultiplyTransform(matrix));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.MultiplyTransform(matrix, MatrixOrder.Prepend));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.MultiplyTransform(matrix)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.MultiplyTransform(matrix, MatrixOrder.Prepend)
+                );
             }
         }
 
@@ -1524,7 +1757,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TranslateTransform(0, 0, order));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TranslateTransform(0, 0, order)
+                );
             }
         }
 
@@ -1537,8 +1773,12 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.TranslateTransform(0, 0));
-                    Assert.Throws<InvalidOperationException>(() => graphics.TranslateTransform(0, 0, MatrixOrder.Append));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.TranslateTransform(0, 0)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.TranslateTransform(0, 0, MatrixOrder.Append)
+                    );
                 }
                 finally
                 {
@@ -1555,8 +1795,14 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TranslateTransform(0, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TranslateTransform(0, 0, MatrixOrder.Append));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TranslateTransform(0, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.TranslateTransform(0, 0, MatrixOrder.Append)
+                );
             }
         }
 
@@ -1604,8 +1850,14 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ScaleTransform(0, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ScaleTransform(0, 0, MatrixOrder.Append));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ScaleTransform(0, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ScaleTransform(0, 0, MatrixOrder.Append)
+                );
             }
         }
 
@@ -1617,7 +1869,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ScaleTransform(0, 0, order));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ScaleTransform(0, 0, order)
+                );
             }
         }
 
@@ -1631,7 +1886,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.ScaleTransform(0, 0));
-                    Assert.Throws<InvalidOperationException>(() => graphics.ScaleTransform(0, 0, MatrixOrder.Append));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.ScaleTransform(0, 0, MatrixOrder.Append)
+                    );
                 }
                 finally
                 {
@@ -1648,8 +1905,14 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ScaleTransform(0, 0));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.ScaleTransform(0, 0, MatrixOrder.Append));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ScaleTransform(0, 0)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.ScaleTransform(0, 0, MatrixOrder.Append)
+                );
             }
         }
 
@@ -1703,7 +1966,10 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.RotateTransform(0, order));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.RotateTransform(0, order)
+                );
             }
         }
 
@@ -1717,7 +1983,9 @@ namespace System.Drawing.Tests
                 try
                 {
                     Assert.Throws<InvalidOperationException>(() => graphics.RotateTransform(0));
-                    Assert.Throws<InvalidOperationException>(() => graphics.RotateTransform(0, MatrixOrder.Append));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.RotateTransform(0, MatrixOrder.Append)
+                    );
                 }
                 finally
                 {
@@ -1735,7 +2003,10 @@ namespace System.Drawing.Tests
                 graphics.Dispose();
 
                 AssertExtensions.Throws<ArgumentException>(null, () => graphics.RotateTransform(0));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.RotateTransform(0, MatrixOrder.Append));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.RotateTransform(0, MatrixOrder.Append)
+                );
             }
         }
 
@@ -1753,7 +2024,13 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/23375")]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CopyFromScreen_TestData))]
-        public void CopyFromScreen_OutOfRange_DoesNotAffectGraphics(int sourceX, int sourceY, int destinationX, int destinationY, Size size)
+        public void CopyFromScreen_OutOfRange_DoesNotAffectGraphics(
+            int sourceX,
+            int sourceY,
+            int destinationX,
+            int destinationY,
+            Size size
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -1762,7 +2039,11 @@ namespace System.Drawing.Tests
                 image.SetPixel(0, 0, plum);
 
                 graphics.CopyFromScreen(sourceX, sourceY, destinationX, destinationY, size);
-                graphics.CopyFromScreen(new Point(sourceX, sourceY), new Point(destinationX, destinationY), size);
+                graphics.CopyFromScreen(
+                    new Point(sourceX, sourceY),
+                    new Point(destinationX, destinationY),
+                    size
+                );
                 Assert.Equal(plum, image.GetPixel(0, 0));
             }
         }
@@ -1772,7 +2053,14 @@ namespace System.Drawing.Tests
         [InlineData(0, 0, 0, 0, 10, 10)]
         [InlineData(0, 0, 0, 0, int.MaxValue, int.MaxValue)]
         [InlineData(1, 1, 2, 2, 3, 3)]
-        public void CopyFromScreen_ValidRange_AffectsGraphics(int sourceX, int sourceY, int destinationX, int destinationY, int width, int height)
+        public void CopyFromScreen_ValidRange_AffectsGraphics(
+            int sourceX,
+            int sourceY,
+            int destinationX,
+            int destinationY,
+            int width,
+            int height
+        )
         {
             Color color = Color.FromArgb(2, 3, 4);
             using (var image = new Bitmap(10, 10))
@@ -1780,7 +2068,13 @@ namespace System.Drawing.Tests
             using (SolidBrush brush = new SolidBrush(color))
             {
                 graphics.FillRectangle(brush, new Rectangle(0, 0, 10, 10));
-                graphics.CopyFromScreen(sourceX, sourceY, destinationX, destinationY, new Size(width, height));
+                graphics.CopyFromScreen(
+                    sourceX,
+                    sourceY,
+                    destinationX,
+                    destinationY,
+                    new Size(width, height)
+                );
 
                 Rectangle drawnRect = new Rectangle(destinationX, destinationY, width, height);
                 for (int y = 0; y < image.Height; y++)
@@ -1827,7 +2121,9 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/23375")]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CopyPixelOperation_TestData))]
-        public void CopyFromScreen_IntsAndValidCopyPixelOperation_Success(CopyPixelOperation copyPixelOperation)
+        public void CopyFromScreen_IntsAndValidCopyPixelOperation_Success(
+            CopyPixelOperation copyPixelOperation
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -1841,14 +2137,21 @@ namespace System.Drawing.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/23375")]
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(CopyPixelOperation_TestData))]
-        public void CopyFromScreen_PointsAndValidCopyPixelOperation_Success(CopyPixelOperation copyPixelOperation)
+        public void CopyFromScreen_PointsAndValidCopyPixelOperation_Success(
+            CopyPixelOperation copyPixelOperation
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
                 // We don't know what the screen looks like at this point in time, so
                 // just make sure that this doesn't fail.
-                graphics.CopyFromScreen(Point.Empty, Point.Empty, new Size(1, 1), copyPixelOperation);
+                graphics.CopyFromScreen(
+                    Point.Empty,
+                    Point.Empty,
+                    new Size(1, 1),
+                    copyPixelOperation
+                );
             }
         }
 
@@ -1872,12 +2175,16 @@ namespace System.Drawing.Tests
         [InlineData(CopyPixelOperation.Whiteness - 1)]
         [InlineData(CopyPixelOperation.CaptureBlt - 1)]
         [InlineData(CopyPixelOperation.CaptureBlt + 1)]
-        public void CopyFromScreen_InvalidCopyPixelOperation_ThrowsInvalidEnumArgumentException(CopyPixelOperation copyPixelOperation)
+        public void CopyFromScreen_InvalidCopyPixelOperation_ThrowsInvalidEnumArgumentException(
+            CopyPixelOperation copyPixelOperation
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                Assert.ThrowsAny<ArgumentException>(() => graphics.CopyFromScreen(1, 2, 3, 4, Size.Empty, copyPixelOperation));
+                Assert.ThrowsAny<ArgumentException>(
+                    () => graphics.CopyFromScreen(1, 2, 3, 4, Size.Empty, copyPixelOperation)
+                );
             }
         }
 
@@ -1891,10 +2198,32 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty));
-                    Assert.Throws<InvalidOperationException>(() => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty, CopyPixelOperation.DestinationInvert));
-                    Assert.Throws<InvalidOperationException>(() => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty));
-                    Assert.Throws<InvalidOperationException>(() => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty, CopyPixelOperation.DestinationInvert));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            graphics.CopyFromScreen(
+                                0,
+                                0,
+                                0,
+                                0,
+                                Size.Empty,
+                                CopyPixelOperation.DestinationInvert
+                            )
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            graphics.CopyFromScreen(
+                                Point.Empty,
+                                Point.Empty,
+                                Size.Empty,
+                                CopyPixelOperation.DestinationInvert
+                            )
+                    );
                 }
                 finally
                 {
@@ -1912,10 +2241,36 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty, CopyPixelOperation.MergeCopy));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty, CopyPixelOperation.MergeCopy));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.CopyFromScreen(0, 0, 0, 0, Size.Empty)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.CopyFromScreen(
+                            0,
+                            0,
+                            0,
+                            0,
+                            Size.Empty,
+                            CopyPixelOperation.MergeCopy
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.CopyFromScreen(Point.Empty, Point.Empty, Size.Empty)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.CopyFromScreen(
+                            Point.Empty,
+                            Point.Empty,
+                            Size.Empty,
+                            CopyPixelOperation.MergeCopy
+                        )
+                );
             }
         }
 
@@ -1931,7 +2286,7 @@ namespace System.Drawing.Tests
 
             yield return new object[]
             {
-               CoordinateSpace.Device,
+                CoordinateSpace.Device,
                 CoordinateSpace.World,
                 new Point[] { new Point(1, 1), new Point(2, 2) },
                 new Point[] { new Point(9, 12), new Point(13, 18) }
@@ -1972,7 +2327,12 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(TransformPoints_TestData))]
-        public void TransformPoints_Points_Success(CoordinateSpace destSpace, CoordinateSpace srcSpace, Point[] points, Point[] expected)
+        public void TransformPoints_Points_Success(
+            CoordinateSpace destSpace,
+            CoordinateSpace srcSpace,
+            Point[] points,
+            Point[] expected
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -1998,7 +2358,7 @@ namespace System.Drawing.Tests
 
             yield return new object[]
             {
-               CoordinateSpace.Device,
+                CoordinateSpace.Device,
                 CoordinateSpace.World,
                 new PointF[] { new Point(1, 1), new Point(2, 2) },
                 new PointF[] { new Point(9, 12), new Point(13, 18) }
@@ -2039,7 +2399,12 @@ namespace System.Drawing.Tests
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(TransformPointFs_TestData))]
-        public void TransformPoints_PointFs_Success(CoordinateSpace destSpace, CoordinateSpace srcSpace, PointF[] points, PointF[] expected)
+        public void TransformPoints_PointFs_Success(
+            CoordinateSpace destSpace,
+            CoordinateSpace srcSpace,
+            PointF[] points,
+            PointF[] expected
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -2092,26 +2457,62 @@ namespace System.Drawing.Tests
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(CoordinateSpace.World - 1)]
         [InlineData(CoordinateSpace.Device + 1)]
-        public void TransformPoints_InvalidDestSpace_ThrowsArgumentException(CoordinateSpace destSpace)
+        public void TransformPoints_InvalidDestSpace_ThrowsArgumentException(
+            CoordinateSpace destSpace
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(destSpace, CoordinateSpace.World, new Point[] { new Point(1, 1) }));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(destSpace, CoordinateSpace.World, new PointF[] { new PointF(1, 1) }));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            destSpace,
+                            CoordinateSpace.World,
+                            new Point[] { new Point(1, 1) }
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            destSpace,
+                            CoordinateSpace.World,
+                            new PointF[] { new PointF(1, 1) }
+                        )
+                );
             }
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [InlineData(CoordinateSpace.World - 1)]
         [InlineData(CoordinateSpace.Device + 1)]
-        public void TransformPoints_InvalidSourceSpace_ThrowsArgumentException(CoordinateSpace srcSpace)
+        public void TransformPoints_InvalidSourceSpace_ThrowsArgumentException(
+            CoordinateSpace srcSpace
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(CoordinateSpace.World, srcSpace, new Point[] { new Point(1, 1) }));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(CoordinateSpace.World, srcSpace, new PointF[] { new PointF(1, 1) }));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.World,
+                            srcSpace,
+                            new Point[] { new Point(1, 1) }
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.World,
+                            srcSpace,
+                            new PointF[] { new PointF(1, 1) }
+                        )
+                );
             }
         }
 
@@ -2121,8 +2522,24 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pts", () => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, (Point[])null));
-                AssertExtensions.Throws<ArgumentNullException>("pts", () => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, (PointF[])null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pts",
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            (Point[])null
+                        )
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pts",
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            (PointF[])null
+                        )
+                );
             }
         }
 
@@ -2132,8 +2549,24 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, new Point[0]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, new PointF[0]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            new Point[0]
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            new PointF[0]
+                        )
+                );
             }
         }
 
@@ -2146,8 +2579,22 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, new Point[] { Point.Empty }));
-                    Assert.Throws<InvalidOperationException>(() => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, new PointF[] { PointF.Empty }));
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            graphics.TransformPoints(
+                                CoordinateSpace.Page,
+                                CoordinateSpace.Page,
+                                new Point[] { Point.Empty }
+                            )
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () =>
+                            graphics.TransformPoints(
+                                CoordinateSpace.Page,
+                                CoordinateSpace.Page,
+                                new PointF[] { PointF.Empty }
+                            )
+                    );
                 }
                 finally
                 {
@@ -2164,20 +2611,50 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, new Point[] { Point.Empty }));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.TransformPoints(CoordinateSpace.Page, CoordinateSpace.Page, new PointF[] { PointF.Empty }));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            new Point[] { Point.Empty }
+                        )
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                        graphics.TransformPoints(
+                            CoordinateSpace.Page,
+                            CoordinateSpace.Page,
+                            new PointF[] { PointF.Empty }
+                        )
+                );
             }
         }
 
         public static IEnumerable<object[]> GetNearestColor_TestData()
         {
-            yield return new object[] { PixelFormat.Format32bppArgb, Color.Red, Color.FromArgb(Color.Red.ToArgb()) };
-            yield return new object[] { PixelFormat.Format16bppRgb555, Color.Red, Color.FromArgb(255, 248, 0, 0) };
+            yield return new object[]
+            {
+                PixelFormat.Format32bppArgb,
+                Color.Red,
+                Color.FromArgb(Color.Red.ToArgb())
+            };
+            yield return new object[]
+            {
+                PixelFormat.Format16bppRgb555,
+                Color.Red,
+                Color.FromArgb(255, 248, 0, 0)
+            };
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
         [MemberData(nameof(GetNearestColor_TestData))]
-        public void GetNearestColor_Color_ReturnsExpected(PixelFormat pixelFormat, Color color, Color expected)
+        public void GetNearestColor_Color_ReturnsExpected(
+            PixelFormat pixelFormat,
+            Color color,
+            Color expected
+        )
         {
             using (var image = new Bitmap(10, 10, pixelFormat))
             using (Graphics graphics = Graphics.FromImage(image))
@@ -2195,7 +2672,9 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.GetNearestColor(Color.Red));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.GetNearestColor(Color.Red)
+                    );
                 }
                 finally
                 {
@@ -2212,7 +2691,10 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.GetNearestColor(Color.Red));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.GetNearestColor(Color.Red)
+                );
             }
         }
 
@@ -2222,10 +2704,22 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawArc(null, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawArc(null, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawArc(null, new RectangleF(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawArc(null, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawArc(null, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawArc(null, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawArc(null, new RectangleF(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawArc(null, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2238,10 +2732,22 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2252,10 +2758,22 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new Rectangle(0, 0, 0, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0, 0, 0, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new RectangleF(0, 0, 0, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0f, 0f, 0f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new Rectangle(0, 0, 0, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0, 0, 0, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new RectangleF(0, 0, 0, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0f, 0f, 0f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2266,10 +2784,22 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 0), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0, 0, 1, 0, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 0), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0f, 0f, 1f, 0f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 0), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0, 0, 1, 0, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 0), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0f, 0f, 1f, 0f, 0, 90)
+                );
             }
         }
 
@@ -2283,10 +2813,18 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90)
+                    );
                 }
                 finally
                 {
@@ -2304,10 +2842,22 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2317,9 +2867,18 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawRectangle(null, new Rectangle(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawRectangle(null, 0, 0, 1, 1));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawRectangle(null, 0f, 0f, 1f, 1f));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawRectangle(null, new Rectangle(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawRectangle(null, 0, 0, 1, 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawRectangle(null, 0f, 0f, 1f, 1f)
+                );
             }
         }
 
@@ -2332,9 +2891,18 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangle(pen, 0, 0, 1, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangle(pen, 0, 0, 1, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f)
+                );
             }
         }
 
@@ -2348,9 +2916,15 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1)));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawRectangle(pen, 0, 0, 1, 1));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1))
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawRectangle(pen, 0, 0, 1, 1)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f)
+                    );
                 }
                 finally
                 {
@@ -2368,9 +2942,18 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangle(pen, 0, 0, 1, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangle(pen, new Rectangle(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangle(pen, 0, 0, 1, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangle(pen, 0f, 0f, 1f, 1f)
+                );
             }
         }
 
@@ -2380,8 +2963,14 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawRectangles(null, new Rectangle[2]));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawRectangles(null, new RectangleF[2]));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawRectangles(null, new Rectangle[2])
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawRectangles(null, new RectangleF[2])
+                );
             }
         }
 
@@ -2394,8 +2983,14 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangles(pen, new Rectangle[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangles(pen, new RectangleF[2]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangles(pen, new Rectangle[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangles(pen, new RectangleF[2])
+                );
             }
         }
 
@@ -2406,8 +3001,14 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentNullException>("rects", () => graphics.DrawRectangles(pen, (Rectangle[])null));
-                AssertExtensions.Throws<ArgumentNullException>("rects", () => graphics.DrawRectangles(pen, (RectangleF[])null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "rects",
+                    () => graphics.DrawRectangles(pen, (Rectangle[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "rects",
+                    () => graphics.DrawRectangles(pen, (RectangleF[])null)
+                );
             }
         }
 
@@ -2418,8 +3019,14 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangles(pen, new Rectangle[0]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangles(pen, new RectangleF[0]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangles(pen, new Rectangle[0])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangles(pen, new RectangleF[0])
+                );
             }
         }
 
@@ -2433,8 +3040,12 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawRectangles(pen, new Rectangle[2]));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawRectangles(pen, new RectangleF[2]));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawRectangles(pen, new Rectangle[2])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawRectangles(pen, new RectangleF[2])
+                    );
                 }
                 finally
                 {
@@ -2452,8 +3063,14 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangles(pen, new Rectangle[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawRectangles(pen, new RectangleF[2]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangles(pen, new Rectangle[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawRectangles(pen, new RectangleF[2])
+                );
             }
         }
 
@@ -2463,10 +3080,22 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawEllipse(null, new Rectangle(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawEllipse(null, 0, 0, 1, 1));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawEllipse(null, new RectangleF(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawEllipse(null, 0f, 0f, 1f, 1f));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawEllipse(null, new Rectangle(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawEllipse(null, 0, 0, 1, 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawEllipse(null, new RectangleF(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawEllipse(null, 0f, 0f, 1f, 1f)
+                );
             }
         }
 
@@ -2479,11 +3108,22 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, 0, 0, 1, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, 0, 0, 1, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f)
+                );
             }
         }
 
@@ -2497,10 +3137,18 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1)));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawEllipse(pen, 0, 0, 1, 1));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1)));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1))
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawEllipse(pen, 0, 0, 1, 1)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1))
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f)
+                    );
                 }
                 finally
                 {
@@ -2518,10 +3166,22 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, 0, 0, 1, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1)));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, new Rectangle(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, 0, 0, 1, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, new RectangleF(0, 0, 1, 1))
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawEllipse(pen, 0f, 0f, 1f, 1f)
+                );
             }
         }
 
@@ -2531,10 +3191,22 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPie(null, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPie(null, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPie(null, new RectangleF(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPie(null, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPie(null, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPie(null, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPie(null, new RectangleF(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPie(null, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2547,10 +3219,22 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2561,10 +3245,22 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, new Rectangle(0, 0, 0, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, 0, 0, 0, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, new RectangleF(0, 0, 0, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, 0f, 0f, 0f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, new Rectangle(0, 0, 0, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, 0, 0, 0, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, new RectangleF(0, 0, 0, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, 0f, 0f, 0f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2575,10 +3271,22 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 0), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0, 0, 1, 0, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 0), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawArc(pen, 0f, 0f, 1f, 0f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new Rectangle(0, 0, 1, 0), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0, 0, 1, 0, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, new RectangleF(0, 0, 1, 0), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawArc(pen, 0f, 0f, 1f, 0f, 0, 90)
+                );
             }
         }
 
@@ -2592,10 +3300,18 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90)
+                    );
                 }
                 finally
                 {
@@ -2613,10 +3329,22 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, new RectangleF(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPie(pen, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -2626,8 +3354,14 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPolygon(null, new Point[2]));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPolygon(null, new PointF[2]));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPolygon(null, new Point[2])
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPolygon(null, new PointF[2])
+                );
             }
         }
 
@@ -2640,8 +3374,14 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPolygon(pen, new Point[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPolygon(pen, new PointF[2]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPolygon(pen, new Point[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPolygon(pen, new PointF[2])
+                );
             }
         }
 
@@ -2652,8 +3392,14 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawPolygon(pen, (Point[])null));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawPolygon(pen, (PointF[])null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawPolygon(pen, (Point[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawPolygon(pen, (PointF[])null)
+                );
             }
         }
 
@@ -2666,8 +3412,14 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPolygon(pen, new Point[length]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPolygon(pen, new PointF[length]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPolygon(pen, new Point[length])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPolygon(pen, new PointF[length])
+                );
             }
         }
 
@@ -2681,8 +3433,12 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPolygon(pen, new Point[2]));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPolygon(pen, new PointF[2]));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPolygon(pen, new Point[2])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPolygon(pen, new PointF[2])
+                    );
                 }
                 finally
                 {
@@ -2700,8 +3456,14 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPolygon(pen, new Point[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPolygon(pen, new PointF[2]));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPolygon(pen, new Point[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPolygon(pen, new PointF[2])
+                );
             }
         }
 
@@ -2712,7 +3474,10 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var graphicsPath = new GraphicsPath())
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawPath(null, graphicsPath));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawPath(null, graphicsPath)
+                );
             }
         }
 
@@ -2726,7 +3491,10 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPath(pen, graphicsPath));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPath(pen, graphicsPath)
+                );
             }
         }
 
@@ -2737,7 +3505,10 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentNullException>("path", () => graphics.DrawPath(pen, null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "path",
+                    () => graphics.DrawPath(pen, null)
+                );
             }
         }
 
@@ -2751,7 +3522,10 @@ namespace System.Drawing.Tests
                 var graphicsPath = new GraphicsPath();
                 graphicsPath.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPath(pen, graphicsPath));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPath(pen, graphicsPath)
+                );
             }
         }
 
@@ -2766,7 +3540,9 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawPath(pen, graphicsPath));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawPath(pen, graphicsPath)
+                    );
                 }
                 finally
                 {
@@ -2785,7 +3561,10 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawPath(pen, graphicsPath));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawPath(pen, graphicsPath)
+                );
             }
         }
 
@@ -2795,13 +3574,34 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new Point[2]));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new PointF[2]));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new Point[2], 1));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new PointF[2], 1));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new PointF[2], 0, 2));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new Point[2], 0, 2, 1));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawCurve(null, new PointF[2], 0, 2, 1));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new Point[2])
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new PointF[2])
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new Point[2], 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new PointF[2], 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new PointF[2], 0, 2)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new Point[2], 0, 2, 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawCurve(null, new PointF[2], 0, 2, 1)
+                );
             }
         }
 
@@ -2814,13 +3614,34 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[2], 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2], 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2], 0, 2));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[2], 0, 2, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[2], 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2], 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2], 0, 2)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[2], 0, 2, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1)
+                );
             }
         }
 
@@ -2831,13 +3652,34 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (Point[])null));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (PointF[])null));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (Point[])null, 1));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (PointF[])null, 1));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (PointF[])null, 0, 2));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (Point[])null, 0, 2, 1));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawCurve(pen, (PointF[])null, 0, 2, 1));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (Point[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (PointF[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (Point[])null, 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (PointF[])null, 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (PointF[])null, 0, 2)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (Point[])null, 0, 2, 1)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawCurve(pen, (PointF[])null, 0, 2, 1)
+                );
             }
         }
 
@@ -2850,13 +3692,34 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[length]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[length]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[length], 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[length], 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[length], 0, length));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[length], 0, length, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[length], 0, length, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[length])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[length])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[length], 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[length], 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[length], 0, length)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[length], 0, length, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[length], 0, length, 1)
+                );
             }
         }
 
@@ -2866,15 +3729,28 @@ namespace System.Drawing.Tests
         [InlineData(4, 4, 0)]
         [InlineData(4, 0, 5)]
         [InlineData(4, 3, 2)]
-        public void DrawCurve_InvalidOffsetCount_ThrowsArgumentException(int length, int offset, int numberOfSegments)
+        public void DrawCurve_InvalidOffsetCount_ThrowsArgumentException(
+            int length,
+            int offset,
+            int numberOfSegments
+        )
         {
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[length], offset, numberOfSegments));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[length], offset, numberOfSegments, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[length], offset, numberOfSegments, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[length], offset, numberOfSegments)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[length], offset, numberOfSegments, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[length], offset, numberOfSegments, 1)
+                );
             }
         }
 
@@ -2888,13 +3764,27 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new Point[2]));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new PointF[2]));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new Point[2], 1));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new PointF[2], 1));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new PointF[2], 0, 2));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new Point[2], 0, 2, 1));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new Point[2])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new PointF[2])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new Point[2], 1)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new PointF[2], 1)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new PointF[2], 0, 2)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new Point[2], 0, 2, 1)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1)
+                    );
                 }
                 finally
                 {
@@ -2912,13 +3802,34 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[2], 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2], 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2], 0, 2));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new Point[2], 0, 2, 1));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[2], 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2], 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2], 0, 2)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new Point[2], 0, 2, 1)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawCurve(pen, new PointF[2], 0, 2, 1)
+                );
             }
         }
 
@@ -2928,10 +3839,22 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawClosedCurve(null, new Point[3]));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawClosedCurve(null, new Point[3], 1, FillMode.Winding));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawClosedCurve(null, new PointF[3]));
-                AssertExtensions.Throws<ArgumentNullException>("pen", () => graphics.DrawClosedCurve(null, new PointF[3], 1, FillMode.Winding));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawClosedCurve(null, new Point[3])
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawClosedCurve(null, new Point[3], 1, FillMode.Winding)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawClosedCurve(null, new PointF[3])
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "pen",
+                    () => graphics.DrawClosedCurve(null, new PointF[3], 1, FillMode.Winding)
+                );
             }
         }
 
@@ -2944,10 +3867,22 @@ namespace System.Drawing.Tests
                 var pen = new Pen(Color.Red);
                 pen.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new Point[3]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Winding));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new PointF[3]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new Point[3])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Winding)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new PointF[3])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding)
+                );
             }
         }
 
@@ -2958,10 +3893,22 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawClosedCurve(pen, (Point[])null));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawClosedCurve(pen, (Point[])null, 1, FillMode.Winding));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawClosedCurve(pen, (PointF[])null));
-                AssertExtensions.Throws<ArgumentNullException>("points", () => graphics.DrawClosedCurve(pen, (PointF[])null, 1, FillMode.Winding));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawClosedCurve(pen, (Point[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawClosedCurve(pen, (Point[])null, 1, FillMode.Winding)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawClosedCurve(pen, (PointF[])null)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "points",
+                    () => graphics.DrawClosedCurve(pen, (PointF[])null, 1, FillMode.Winding)
+                );
             }
         }
 
@@ -2975,10 +3922,22 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var pen = new Pen(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new Point[length]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new Point[length], 1, FillMode.Winding));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new PointF[length]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new PointF[length], 1, FillMode.Winding));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new Point[length])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new Point[length], 1, FillMode.Winding)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new PointF[length])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new PointF[length], 1, FillMode.Winding)
+                );
             }
         }
 
@@ -2992,10 +3951,18 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawClosedCurve(pen, new Point[3]));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Winding));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawClosedCurve(pen, new PointF[3]));
-                    Assert.Throws<InvalidOperationException>(() => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawClosedCurve(pen, new Point[3])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Winding)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawClosedCurve(pen, new PointF[3])
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Winding)
+                    );
                 }
                 finally
                 {
@@ -3013,10 +3980,22 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new Point[3]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Alternate));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new PointF[3]));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Alternate));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new Point[3])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new Point[3], 1, FillMode.Alternate)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new PointF[3])
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.DrawClosedCurve(pen, new PointF[3], 1, FillMode.Alternate)
+                );
             }
         }
 
@@ -3026,9 +4005,18 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(10, 10))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                AssertExtensions.Throws<ArgumentNullException>("brush", () => graphics.FillPie(null, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("brush", () => graphics.FillPie(null, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentNullException>("brush", () => graphics.FillPie(null, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "brush",
+                    () => graphics.FillPie(null, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "brush",
+                    () => graphics.FillPie(null, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "brush",
+                    () => graphics.FillPie(null, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -3041,9 +4029,18 @@ namespace System.Drawing.Tests
                 var brush = new SolidBrush(Color.Red);
                 brush.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -3054,9 +4051,18 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var brush = new SolidBrush(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, new Rectangle(0, 0, 0, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0, 0, 0, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0f, 0f, 0f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, new Rectangle(0, 0, 0, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0, 0, 0, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0f, 0f, 0f, 1f, 0, 90)
+                );
             }
         }
 
@@ -3067,9 +4073,18 @@ namespace System.Drawing.Tests
             using (Graphics graphics = Graphics.FromImage(image))
             using (var brush = new SolidBrush(Color.Red))
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 0), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0, 0, 1, 0, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0f, 0f, 1f, 0f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 0), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0, 0, 1, 0, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0f, 0f, 1f, 0f, 0, 90)
+                );
             }
         }
 
@@ -3083,9 +4098,15 @@ namespace System.Drawing.Tests
                 graphics.GetHdc();
                 try
                 {
-                    Assert.Throws<InvalidOperationException>(() => graphics.FillPie(brush, new Rectangle(0, 0, 1, 1), 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.FillPie(brush, 0, 0, 1, 1, 0, 90));
-                    Assert.Throws<InvalidOperationException>(() => graphics.FillPie(brush, 0f, 0f, 1f, 1f, 0, 90));
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 1), 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.FillPie(brush, 0, 0, 1, 1, 0, 90)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => graphics.FillPie(brush, 0f, 0f, 1f, 1f, 0, 90)
+                    );
                 }
                 finally
                 {
@@ -3103,9 +4124,18 @@ namespace System.Drawing.Tests
                 Graphics graphics = Graphics.FromImage(image);
                 graphics.Dispose();
 
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 1), 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0, 0, 1, 1, 0, 90));
-                AssertExtensions.Throws<ArgumentException>(null, () => graphics.FillPie(brush, 0f, 0f, 1f, 1f, 0, 90));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, new Rectangle(0, 0, 1, 1), 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0, 0, 1, 1, 0, 90)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => graphics.FillPie(brush, 0f, 0f, 1f, 1f, 0, 90)
+                );
             }
         }
 
@@ -3121,11 +4151,10 @@ namespace System.Drawing.Tests
                 graphics.FillRectangle(brush, new Rectangle(0, 0, 2, 2));
 
                 graphics.Clear(color);
-                Helpers.VerifyBitmap(image, new Color[][]
-                {
-                    new Color[] { color, color },
-                    new Color[] { color, color }
-                });
+                Helpers.VerifyBitmap(
+                    image,
+                    new Color[][] { new Color[] { color, color }, new Color[] { color, color } }
+                );
             }
         }
 
@@ -3167,7 +4196,12 @@ namespace System.Drawing.Tests
             using (var image = new Bitmap(50, 50))
             using (Graphics graphics = Graphics.FromImage(image))
             {
-                graphics.DrawString("Test text", SystemFonts.DefaultFont, Brushes.White, new Point());
+                graphics.DrawString(
+                    "Test text",
+                    SystemFonts.DefaultFont,
+                    Brushes.White,
+                    new Point()
+                );
                 Helpers.VerifyBitmapNotBlank(image);
             }
         }
@@ -3181,7 +4215,14 @@ namespace System.Drawing.Tests
                 graphics.CompositingMode = CompositingMode.SourceCopy;
                 AssertExtensions.Throws<ArgumentException>(
                     null,
-                    () => graphics.DrawString("Test text", SystemFonts.DefaultFont, Brushes.White, new Point()));
+                    () =>
+                        graphics.DrawString(
+                            "Test text",
+                            SystemFonts.DefaultFont,
+                            Brushes.White,
+                            new Point()
+                        )
+                );
             }
         }
 

@@ -15,145 +15,163 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"class C { }
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"class C { }
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"System.Console.WriteLine();
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"System.Console.WriteLine();
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"int i = 0;
-$$");
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
+                @"int i = 0;
+$$"
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInsideEmptyMethod()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestInsideUnsafeBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"unsafe {
-    $$"));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"unsafe {
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterFixed()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"unsafe {
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    @"unsafe {
     fixed (int* = bar) {
     }
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterFixed()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"  fixed (int* = bar) {
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    @"  fixed (int* = bar) {
     }
-    $$"));
+    $$"
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotInClass()
         {
             await VerifyAbsenceAsync(
-@"class C {
-    $$");
+                @"class C {
+    $$"
+            );
         }
 
         [Fact]
         public async Task TestNotInStruct()
         {
             await VerifyAbsenceAsync(
-@"struct S {
-    $$");
+                @"struct S {
+    $$"
+            );
         }
 
         [Fact]
         public async Task TestNotInRecordStruct()
         {
             await VerifyAbsenceAsync(
-@"record struct S {
-    $$");
+                @"record struct S {
+    $$"
+            );
         }
 
         [Fact]
         public async Task TestInUnsafeStruct()
         {
             await VerifyKeywordAsync(
-@"unsafe struct S {
-    $$");
+                @"unsafe struct S {
+    $$"
+            );
         }
 
         [Fact]
         public async Task TestInUnsafeNestedStruct1()
         {
             await VerifyKeywordAsync(
-@"unsafe struct S {
+                @"unsafe struct S {
     struct T {
-      $$");
+      $$"
+            );
         }
 
         [Fact]
         public async Task TestInUnsafeNestedStruct2()
         {
             await VerifyKeywordAsync(
-@"struct S {
+                @"struct S {
     unsafe struct T {
-      $$");
+      $$"
+            );
         }
 
         [Fact]
         public async Task TestNotAfterStatic()
         {
             await VerifyAbsenceAsync(
-@"unsafe struct S {
-    static $$");
+                @"unsafe struct S {
+    static $$"
+            );
         }
 
         [Fact, WorkItem(52296, "https://github.com/dotnet/roslyn/issues/52296")]
         public async Task TestInUnsafeLocalFunction()
         {
             await VerifyKeywordAsync(
-@"public class C
+                @"public class C
 {
     public void M()
     {
@@ -162,14 +180,15 @@ $$");
             $$
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(52296, "https://github.com/dotnet/roslyn/issues/52296")]
         public async Task TestNotInOrdinaryLocalFunction()
         {
             await VerifyAbsenceAsync(
-@"public class C
+                @"public class C
 {
     public void M()
     {
@@ -178,7 +197,8 @@ $$");
             $$
         }
     }
-}");
+}"
+            );
         }
     }
 }

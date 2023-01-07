@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_SimpleForEachLoop()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -32,7 +33,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (st ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -65,7 +67,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithList()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -85,7 +88,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (st ... }')
   Locals: Local_1: System.String item
   LoopControlVariable: 
@@ -118,7 +122,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithKeyValue()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -139,7 +144,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (Ke ... }')
   Locals: Local_1: System.Collections.Generic.KeyValuePair<System.Int32, System.Int32> pair
   LoopControlVariable: 
@@ -192,7 +198,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithBreak()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -210,7 +217,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (in ... }')
   Locals: Local_1: System.Int32 num
   LoopControlVariable: 
@@ -255,7 +263,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithContinue()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -273,7 +282,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (in ... }')
   Locals: Local_1: System.Int32 num
   LoopControlVariable: 
@@ -318,7 +328,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_QueryExpression()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -334,7 +345,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (st ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -364,7 +376,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_Struct()
         {
-            string source = @"
+            string source =
+                @"
 using System.Reflection;
 
 namespace DisplayStructContentsTest
@@ -397,7 +410,8 @@ namespace DisplayStructContentsTest
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (Fi ... }')
   Locals: Local_1: System.Reflection.FieldInfo fi
   LoopControlVariable: 
@@ -463,7 +477,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_String()
         {
-            string source = @"
+            string source =
+                @"
 class Class1
 {
     public void M()
@@ -478,7 +493,8 @@ class Class1
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (ch ... }')
   Locals: Local_1: System.Char c
   LoopControlVariable: 
@@ -511,7 +527,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithVar()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -530,7 +547,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.Collections.Generic.KeyValuePair<System.Int32, System.Int32> pair
   LoopControlVariable: 
@@ -583,7 +601,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_BadElementType()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -596,7 +615,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (Mi ... }')
   Locals: Local_1: MissingType x
   LoopControlVariable: 
@@ -636,7 +656,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_NullLiteralCollection()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -647,7 +668,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (in ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable: 
@@ -667,7 +689,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_NoElementCollection()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main(string[] args)
@@ -678,7 +701,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (in ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable: 
@@ -701,7 +725,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ModifyIterationVariable()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(int[] a)
@@ -710,7 +735,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (in ... a) { x++; }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable: 
@@ -740,7 +766,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_Pattern()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(Enumerable e)
@@ -761,7 +788,8 @@ class Enumerator
 }
 
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (lo ... x in e) { }')
   Locals: Local_1: System.Int64 x
   LoopControlVariable: 
@@ -784,7 +812,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ImplicitlyTypedString()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(string s)
@@ -793,7 +822,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (var x in s) { }')
   Locals: Local_1: System.Char x
   LoopControlVariable: 
@@ -816,7 +846,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ExplicitlyTypedVar()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(var[] a)
@@ -827,7 +858,8 @@ class C
     class var { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (var x in a) { }')
   Locals: Local_1: C.var x
   LoopControlVariable: 
@@ -850,7 +882,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_DynamicEnumerable()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void F(dynamic d)
@@ -859,7 +892,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (int x in d) { }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable: 
@@ -882,7 +916,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_TypeParameterConstrainedToInterface()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Test<T>() where T : System.Collections.IEnumerator
@@ -899,7 +934,8 @@ public class Enumerable<T>
     public T GetEnumerator() { return default(T); }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (ob ... }')
   Locals: Local_1: System.Object x
   LoopControlVariable: 
@@ -935,7 +971,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_CastArrayToIEnumerable()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections;
 
 class C
@@ -946,7 +983,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (st ... e)args) { }')
   Locals: Local_1: System.String x
   LoopControlVariable: 
@@ -973,7 +1011,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_CastCollectionToIEnumerable()
         {
-            string source = @"
+            string source =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -985,7 +1024,8 @@ class C
 }
 ";
             // Affected by https://github.com/dotnet/roslyn/issues/20756
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (st ... >)args) { }')
   Locals: Local_1: System.String x
   LoopControlVariable: 
@@ -1012,7 +1052,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithThrow()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main()
@@ -1030,7 +1071,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (in ... }')
   Locals: Local_1: System.Int32 num
   LoopControlVariable: 
@@ -1083,7 +1125,8 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithDeconstructDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class X
 {
     public static void M((int, int)[] x)
@@ -1094,7 +1137,8 @@ class X
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.Int32 a
     Local_2: System.Int32 b
@@ -1116,14 +1160,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithNestedDeconstructDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class X
 {
     public static void M((int, (int, int))[] x)
@@ -1134,7 +1183,8 @@ class X
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.Int32 a
     Local_2: System.Int32 b
@@ -1161,14 +1211,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithInvalidLoopControlVariable()
         {
-            string source = @"
+            string source =
+                @"
 class X
 {
     public static void M((int, int)[] x)
@@ -1179,7 +1234,8 @@ class X
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (4 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (i')
     LoopControlVariable: 
@@ -1203,7 +1259,8 @@ IBlockOperation (4 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IParameterReferenceOperation: x (OperationKind.ParameterReference, Type: (System.Int32, System.Int32)[], IsInvalid) (Syntax: 'x')
   IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1515: 'in' expected
                 //         foreach (i, j in x)
                 Diagnostic(ErrorCode.ERR_InExpected, ",").WithLocation(6, 19),
@@ -1212,13 +1269,17 @@ IBlockOperation (4 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, ",").WithLocation(6, 19),
                 // CS1525: Invalid expression term ','
                 //         foreach (i, j in x)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 19),
                 // CS1026: ) expected
                 //         foreach (i, j in x)
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, ",").WithLocation(6, 19),
                 // CS1525: Invalid expression term ','
                 //         foreach (i, j in x)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(",").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",")
+                    .WithArguments(",")
+                    .WithLocation(6, 19),
                 // CS1002: ; expected
                 //         foreach (i, j in x)
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(6, 19),
@@ -1239,17 +1300,24 @@ IBlockOperation (4 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(6, 27),
                 // CS0103: The name 'j' does not exist in the current context
                 //         foreach (i, j in x)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "j").WithArguments("j").WithLocation(6, 21)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "j")
+                    .WithArguments("j")
+                    .WithLocation(6, 21)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_WithInvalidLoopControlVariable_02()
         {
-            string source = @"
+            string source =
+                @"
 class X
 {
     public static void M(int[] x)
@@ -1260,7 +1328,8 @@ class X
     }/*</bind>*/
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (x[ ... }')
     LoopControlVariable: 
@@ -1275,18 +1344,24 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     NextVariables(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(6, 23)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_InvalidLoopControlVariableDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 class X
 {
     public static void M(int[] x)
@@ -1298,7 +1373,8 @@ class X
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (in ... }')
   Locals: Local_1: System.Int32 i
   LoopControlVariable: 
@@ -1314,23 +1390,33 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   NextVariables(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,32): error CS0136: A local or parameter named 'i' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         /*<bind>*/foreach (int i in x)
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "i").WithArguments("i").WithLocation(7, 32),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "i")
+                    .WithArguments("i")
+                    .WithLocation(7, 32),
                 // file.cs(6,13): warning CS0219: The variable 'i' is assigned but its value is never used
                 //         int i = 0;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i").WithArguments("i").WithLocation(6, 13)
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
+                    .WithArguments("i")
+                    .WithLocation(6, 13)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(19996, "https://github.com/dotnet/roslyn/issues/19996")]
         public void IForEachLoopStatement_InvalidLoopControlVariableExpression_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int a, int b)
@@ -1342,7 +1428,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (M( ... }')
   LoopControlVariable: 
     IInvocationOperation ( void C.M(System.Int32 a, System.Int32 b)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M(1, 2)')
@@ -1363,20 +1450,26 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   NextVariables(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // error CS0230: Type and identifier are both required in a foreach statement
                 //         /*<bind>*/foreach (M(1, 2) in arr)
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(7, 36)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_InvalidLoopControlVariableExpression_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int a, int b)
@@ -1393,7 +1486,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (M2 ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable: 
@@ -1412,21 +1506,26 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   NextVariables(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,42): error CS0230: Type and identifier are both required in a foreach statement
                 //         /*<bind>*/foreach (M2(out var x) in arr)
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(7, 42)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
-
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_InvalidLoopControlVariableExpression_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(object o)
@@ -1438,7 +1537,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (o  ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable: 
@@ -1453,20 +1553,26 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
     IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   NextVariables(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,39): error CS0230: Type and identifier are both required in a foreach statement
                 //         /*<bind>*/foreach (o is int x in arr)
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(7, 39)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ForEachVariableStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ViaExtensionMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1484,7 +1590,8 @@ static class Extensions
     public static IEnumerator<string> GetEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -1512,14 +1619,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   NextVariables(0)";
-            VerifyOperationTreeForTest<ForEachStatementSyntax>(source, expectedOperationTree, parseOptions: TestOptions.Regular9);
+            VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                source,
+                expectedOperationTree,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ViaExtensionMethodWithConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1537,7 +1649,8 @@ static class Extensions
     public static IEnumerator<string> GetEnumerator(this object p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -1565,14 +1678,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   NextVariables(0)";
-            VerifyOperationTreeForTest<ForEachStatementSyntax>(source, expectedOperationTree, parseOptions: TestOptions.Regular9);
+            VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                source,
+                expectedOperationTree,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ViaExtensionMethod_WithGetEnumeratorReturningWrongType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1590,7 +1708,8 @@ static class Extensions
     public static bool GetEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (va ... }')
   Locals: Local_1: var value
   LoopControlVariable: 
@@ -1611,14 +1730,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
                 IOperation:  (OperationKind.None, Type: System.Console) (Syntax: 'System.Console')
                 ILocalReferenceOperation: value (OperationKind.LocalReference, Type: var) (Syntax: 'value')
   NextVariables(0)";
-            VerifyOperationTreeForTest<ForEachStatementSyntax>(source, expectedOperationTree, parseOptions: TestOptions.Regular9);
+            VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                source,
+                expectedOperationTree,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IForEachLoopStatement_ViaExtensionMethod_WithSpillInExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1636,7 +1760,8 @@ static class Extensions
     public static IEnumerator<string> GetEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -1670,14 +1795,19 @@ IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1)
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   NextVariables(0)";
-            VerifyOperationTreeForTest<ForEachStatementSyntax>(source, expectedOperationTree, parseOptions: TestOptions.Regular9);
+            VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                source,
+                expectedOperationTree,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IAwaitForEachLoopStatement_ViaExtensionMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1695,7 +1825,8 @@ static class Extensions
     public static IAsyncEnumerator<string> GetAsyncEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -1723,7 +1854,10 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   NextVariables(0)";
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics();
             VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, expectedOperationTree);
         }
@@ -1732,7 +1866,8 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IAwaitForEachLoopStatement_ViaExtensionMethodWithConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1750,7 +1885,8 @@ static class Extensions
     public static IAsyncEnumerator<string> GetAsyncEnumerator(this object p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -1778,7 +1914,10 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   NextVariables(0)";
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics();
             VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, expectedOperationTree);
         }
@@ -1787,7 +1926,8 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IAwaitForEachLoopStatement_ViaExtensionMethod_WithGetAsyncEnumeratorReturningWrongType()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static async void Main()
@@ -1804,7 +1944,8 @@ static class Extensions
     public static bool GetAsyncEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'await forea ... }')
   Locals: Local_1: var value
   LoopControlVariable: 
@@ -1825,14 +1966,22 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
                 IOperation:  (OperationKind.None, Type: System.Console) (Syntax: 'System.Console')
                 ILocalReferenceOperation: value (OperationKind.LocalReference, Type: var) (Syntax: 'value')
   NextVariables(0)";
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics(
                 // (6,47): error CS0117: 'bool' does not contain a definition for 'Current'
                 //         /*<bind>*/await foreach (var value in new Program())
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "new Program()").WithArguments("bool", "Current").WithLocation(6, 47),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "new Program()")
+                    .WithArguments("bool", "Current")
+                    .WithLocation(6, 47),
                 // (6,47): error CS8412: Asynchronous foreach requires that the return type 'bool' of 'Extensions.GetAsyncEnumerator(Program)' must have a suitable public 'MoveNextAsync' method and public 'Current' property
                 //         /*<bind>*/await foreach (var value in new Program())
-                Diagnostic(ErrorCode.ERR_BadGetAsyncEnumerator, "new Program()").WithArguments("bool", "Extensions.GetAsyncEnumerator(Program)").WithLocation(6, 47));
+                Diagnostic(ErrorCode.ERR_BadGetAsyncEnumerator, "new Program()")
+                    .WithArguments("bool", "Extensions.GetAsyncEnumerator(Program)")
+                    .WithLocation(6, 47)
+            );
             VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, expectedOperationTree);
         }
 
@@ -1840,7 +1989,8 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void IAwaitForEachLoopStatement_ViaExtensionMethod_WithSpillInExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -1858,7 +2008,8 @@ static class Extensions
     public static IAsyncEnumerator<string> GetAsyncEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -1892,7 +2043,10 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   NextVariables(0)";
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
             comp.VerifyDiagnostics();
             VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, expectedOperationTree);
         }
@@ -1901,7 +2055,8 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
         [Fact]
         public void ForEachFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(MyClass[] a, MyClass[] b)
@@ -1915,7 +2070,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2090,14 +2246,19 @@ Block[B12] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(string a, bool result)
@@ -2111,7 +2272,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2218,14 +2380,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(int[,] a, long result)
@@ -2239,7 +2406,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2355,14 +2523,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_04()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(Enumerable e, long result)
@@ -2387,7 +2560,8 @@ struct Enumerator
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2459,14 +2633,19 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_05()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(Enumerable e, long result)
@@ -2492,7 +2671,8 @@ struct Enumerator : System.IDisposable
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2586,14 +2766,19 @@ Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_06()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(System.Collections.Generic.IEnumerable<int> e, int result)
@@ -2607,7 +2792,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -2710,14 +2896,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.IOperation)]
         [Fact]
         public void CheckForEachLoopOperationInfoArguments()
         {
-            var src = @"using System;
+            var src =
+                @"using System;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections.Generic;
@@ -2783,7 +2974,10 @@ struct AsyncEnumerator : IAsyncEnumerator<int>
 
             var comp = CreateCompilation(src, targetFramework: TargetFramework.Net60);
             comp.VerifyDiagnostics();
-            var op = (Operations.ForEachLoopOperation)VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, @"IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
+            var op = (Operations.ForEachLoopOperation)
+                VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                    comp,
+                    @"IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable:
     IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'var')
@@ -2809,65 +3003,105 @@ struct AsyncEnumerator : IAsyncEnumerator<int>
                   ILocalReferenceOperation: x (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'x')
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  NextVariables(0)");
+  NextVariables(0)"
+                );
 
             Assert.Equal(2, op.Info.GetEnumeratorArguments.Length);
             Assert.Equal(3, op.Info.MoveNextArguments.Length);
             Assert.Equal(4, op.Info.DisposeArguments.Length);
-            Assert.Equal(@"System.Threading.Tasks.ValueTask AsyncEnumerator.DisposeAsync([System.String s = null], [System.Int32 line = 0], [System.Int32 xxx = 12], [System.String f = """"])",
-                op.Info.PatternDisposeMethod.ToTestDisplayString());
+            Assert.Equal(
+                @"System.Threading.Tasks.ValueTask AsyncEnumerator.DisposeAsync([System.String s = null], [System.Int32 line = 0], [System.Int32 xxx = 12], [System.String f = """"])",
+                op.Info.PatternDisposeMethod.ToTestDisplayString()
+            );
 
-            VerifyOperationTree(comp, op.Info.GetEnumeratorArguments[0], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.GetEnumeratorArguments[0],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""<Main>$"", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.GetEnumeratorArguments[1], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.GetEnumeratorArguments[1],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 7, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.MoveNextArguments[0], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.MoveNextArguments[0],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""<Main>$"", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.MoveNextArguments[1], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.MoveNextArguments[1],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 7, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.MoveNextArguments[2], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: r) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.MoveNextArguments[2],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: r) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 12, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.DisposeArguments[0], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.DisposeArguments[0],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""<Main>$"", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.DisposeArguments[1], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.DisposeArguments[1],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 7, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.DisposeArguments[2], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: xxx) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.DisposeArguments[2],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: xxx) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 12, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.DisposeArguments[3], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: f) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.DisposeArguments[3],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: f) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: """", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.IOperation)]
         [Fact]
         public void CheckForEachLoopOperationInfoArguments2()
         {
-            var src = @"using System;
+            var src =
+                @"using System;
 using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 
@@ -2913,10 +3147,12 @@ struct AsyncEnumerator
 }
 ";
 
-
             var comp = CreateCompilation(src, targetFramework: TargetFramework.Net60);
             comp.VerifyDiagnostics();
-            var op = (Operations.ForEachLoopOperation)VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, @"IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
+            var op = (Operations.ForEachLoopOperation)
+                VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                    comp,
+                    @"IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable:
     IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDeclarator, Type: null) (Syntax: 'var')
@@ -2942,50 +3178,79 @@ struct AsyncEnumerator
                   ILocalReferenceOperation: x (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'x')
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  NextVariables(0)");
+  NextVariables(0)"
+                );
 
             Assert.Equal(2, op.Info.GetEnumeratorArguments.Length);
             Assert.Equal(2, op.Info.MoveNextArguments.Length);
             Assert.Equal(2, op.Info.DisposeArguments.Length);
 
-            Assert.Equal("System.Threading.Tasks.ValueTask AsyncEnumerator.DisposeAsync([System.String s = null], [System.Int32 line = 0])", op.Info.PatternDisposeMethod.ToTestDisplayString());
+            Assert.Equal(
+                "System.Threading.Tasks.ValueTask AsyncEnumerator.DisposeAsync([System.String s = null], [System.Int32 line = 0])",
+                op.Info.PatternDisposeMethod.ToTestDisplayString()
+            );
 
-            VerifyOperationTree(comp, op.Info.GetEnumeratorArguments[0], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.GetEnumeratorArguments[0],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""<Main>$"", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.GetEnumeratorArguments[1], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.GetEnumeratorArguments[1],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 6, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.MoveNextArguments[0], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.MoveNextArguments[0],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""<Main>$"", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.MoveNextArguments[1], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.MoveNextArguments[1],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 6, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.DisposeArguments[0], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.DisposeArguments[0],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: s) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.String, Constant: ""<Main>$"", IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
 
-            VerifyOperationTree(comp, op.Info.DisposeArguments[1], @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
+            VerifyOperationTree(
+                comp,
+                op.Info.DisposeArguments[1],
+                @"IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: line) (OperationKind.Argument, Type: null, IsImplicit) (Syntax: 'await forea ... }')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 6, IsImplicit) (Syntax: 'await forea ... }')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)");
+  OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.IOperation)]
         [Fact]
         public void NullPatternDisposeMethod()
         {
-            var src = @"using System;
+            var src =
+                @"using System;
 using System.Threading.Tasks;
 /*<bind>*/
 await foreach (var x in new CustomAsyncEnumerable())
@@ -3008,7 +3273,10 @@ struct CustomAsyncEnumerator
 
             var comp = CreateCompilation(src, targetFramework: TargetFramework.Net60);
             comp.VerifyDiagnostics();
-            var op = (Operations.ForEachLoopOperation)VerifyOperationTreeForTest<ForEachStatementSyntax>(comp, @"
+            var op = (Operations.ForEachLoopOperation)
+                VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                    comp,
+                    @"
 IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.Int32 x
   LoopControlVariable:
@@ -3035,7 +3303,8 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
                   ILocalReferenceOperation: x (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'x')
                   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
-  NextVariables(0)");
+  NextVariables(0)"
+                );
 
             Assert.Null(op.Info.PatternDisposeMethod);
         }
@@ -3044,7 +3313,8 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
         [Fact]
         public void ForEachFlow_07()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(in System.Span<int> e, int result)
@@ -3058,7 +3328,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3126,14 +3397,20 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + SpanSource, expectedFlowGraph, expectedDiagnostics, TestOptions.ReleaseDll.WithAllowUnsafe(true));
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + SpanSource,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_08()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(in System.Span<int> e, int result)
@@ -3147,7 +3424,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3215,14 +3493,20 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + SpanSource, expectedFlowGraph, expectedDiagnostics, TestOptions.ReleaseDll.WithAllowUnsafe(true));
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + SpanSource,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_09()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(in System.ReadOnlySpan<int> e, int result)
@@ -3236,7 +3520,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3304,14 +3589,20 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + SpanSource, expectedFlowGraph, expectedDiagnostics, TestOptions.ReleaseDll.WithAllowUnsafe(true));
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + SpanSource,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_10()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(in System.ReadOnlySpan<int> e, int result)
@@ -3325,7 +3616,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3393,14 +3685,20 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + SpanSource, expectedFlowGraph, expectedDiagnostics, TestOptions.ReleaseDll.WithAllowUnsafe(true));
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + SpanSource,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                TestOptions.ReleaseDll.WithAllowUnsafe(true)
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_11()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(dynamic e, int result)
@@ -3414,7 +3712,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3526,14 +3825,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_12()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(MyClass e, int result)
@@ -3545,13 +3849,17 @@ public class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,27): error CS1579: foreach statement cannot operate on variables of type 'MyClass' because 'MyClass' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         foreach (var x in e)
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "e").WithArguments("MyClass", "GetEnumerator").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "e")
+                    .WithArguments("MyClass", "GetEnumerator")
+                    .WithLocation(6, 27)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3610,14 +3918,19 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_13()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(MyClass[] a, int result)
@@ -3635,7 +3948,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3756,14 +4070,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_14()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int result)
@@ -3784,7 +4103,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3862,14 +4182,19 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_15()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(int result)
@@ -3888,13 +4213,15 @@ public sealed class MyClass
     }
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,32): error CS0230: Type and identifier are both required in a foreach statement
-                //         foreach (M2(out var x) in this) 
+                //         foreach (M2(out var x) in this)
                 Diagnostic(ErrorCode.ERR_BadForeachDecl, "in").WithLocation(6, 32)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -3957,14 +4284,19 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_16()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(System.Collections.IEnumerable e, object result)
@@ -3978,7 +4310,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4086,14 +4419,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_17()
         {
-            string source = @"
+            string source =
+                @"
 public class MyClass
 {
     void M(int[] a, long result)
@@ -4107,7 +4445,8 @@ public class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4223,14 +4562,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_18()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result)
@@ -4248,7 +4592,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4324,14 +4669,19 @@ Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_19()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result)
@@ -4349,7 +4699,8 @@ public sealed class MyClass
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4425,14 +4776,19 @@ Block[B5] - Exit
     Predecessors: [B2] [B3]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void ForEachFlow_26()
         {
-            string source = @"
+            string source =
+                @"
 public sealed class MyClass
 {
     void M(bool result, object a, object b)
@@ -4446,16 +4802,22 @@ public sealed class MyClass
     public MyClass GetEnumerator() => throw null;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,42): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
-                //         foreach ((var x, (var y, var z), a ?? b) in this) 
+                //         foreach ((var x, (var y, var z), a ?? b) in this)
                 Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "a ?? b").WithLocation(6, 42),
                 // file.cs(6,18): error CS8186: A foreach loop must declare its iteration variables.
-                //         foreach ((var x, (var y, var z), a ?? b) in this) 
-                Diagnostic(ErrorCode.ERR_MustDeclareForeachIteration, "(var x, (var y, var z), a ?? b)").WithLocation(6, 18)
+                //         foreach ((var x, (var y, var z), a ?? b) in this)
+                Diagnostic(
+                        ErrorCode.ERR_MustDeclareForeachIteration,
+                        "(var x, (var y, var z), a ?? b)"
+                    )
+                    .WithLocation(6, 18)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4553,14 +4915,19 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void ForEachFlow_ViaExtensionMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -4580,7 +4947,8 @@ static class Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4683,14 +5051,20 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.Regular9);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void ForEachFlow_ViaExtensionMethodWithConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -4711,7 +5085,8 @@ static class Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4814,14 +5189,20 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.Regular9);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void ForEachFlow_ViaExtensionMethod_WithGetEnumeratorReturningWrongType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -4839,16 +5220,22 @@ static class Extensions
     public static bool GetEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(7,31): error CS0117: 'bool' does not contain a definition for 'Current'
                 //         foreach (var value in new Program())
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "new Program()").WithArguments("bool", "Current").WithLocation(7, 31),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "new Program()")
+                    .WithArguments("bool", "Current")
+                    .WithLocation(7, 31),
                 // file.cs(7,31): error CS0202: foreach requires that the return type 'bool' of 'Extensions.GetEnumerator(Program)' must have a suitable public 'MoveNext' method and public 'Current' property
                 //         foreach (var value in new Program())
-                Diagnostic(ErrorCode.ERR_BadGetEnumerator, "new Program()").WithArguments("bool", "Extensions.GetEnumerator(Program)").WithLocation(7, 31)
+                Diagnostic(ErrorCode.ERR_BadGetEnumerator, "new Program()")
+                    .WithArguments("bool", "Extensions.GetEnumerator(Program)")
+                    .WithLocation(7, 31)
             };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -4899,14 +5286,20 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.Regular9);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void ForEachFlow_ViaExtensionMethod_WithSpillInExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -4926,7 +5319,8 @@ static class Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5069,14 +5463,20 @@ Block[B10] - Exit
     Predecessors: [B5]
     Statements (0)";
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, parseOptions: TestOptions.Regular9);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                parseOptions: TestOptions.Regular9
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void AwaitForeachFlow_ViaExtensionMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -5096,7 +5496,8 @@ static class Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5199,15 +5600,23 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)";
 
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void AwaitForeachFlow_ViaExtensionMethodWithConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -5228,7 +5637,8 @@ static class Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5331,15 +5741,23 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)";
 
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void AwaitForeachFlow_ViaExtensionMethod_WithGetAsyncEnumeratorReturningWrongType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -5357,16 +5775,22 @@ static class Extensions
     public static bool GetAsyncEnumerator(this Program p) => throw null;
 }
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // (7,37): error CS0117: 'bool' does not contain a definition for 'Current'
                 //         await foreach (var value in new Program())
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "new Program()").WithArguments("bool", "Current").WithLocation(7, 37),
+                Diagnostic(ErrorCode.ERR_NoSuchMember, "new Program()")
+                    .WithArguments("bool", "Current")
+                    .WithLocation(7, 37),
                 // (7,37): error CS8412: Asynchronous foreach requires that the return type 'bool' of 'Extensions.GetAsyncEnumerator(Program)' must have a suitable public 'MoveNextAsync' method and public 'Current' property
                 //         await foreach (var value in new Program())
-                Diagnostic(ErrorCode.ERR_BadGetAsyncEnumerator, "new Program()").WithArguments("bool", "Extensions.GetAsyncEnumerator(Program)").WithLocation(7, 37)
+                Diagnostic(ErrorCode.ERR_BadGetAsyncEnumerator, "new Program()")
+                    .WithArguments("bool", "Extensions.GetAsyncEnumerator(Program)")
+                    .WithLocation(7, 37)
             };
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5417,15 +5841,23 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)";
 
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact, WorkItem(17602, "https://github.com/dotnet/roslyn/issues/17602")]
         public void AwaitForeachFlow_ViaExtensionMethod_WithSpillInExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Program
 {
@@ -5445,7 +5877,8 @@ static class Extensions
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedFlowGraph = @"
+            var expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5588,15 +6021,23 @@ Block[B10] - Exit
     Predecessors: [B5]
     Statements (0)";
 
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, s_IAsyncEnumerable }, parseOptions: TestOptions.Regular9);
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(comp, expectedFlowGraph, expectedDiagnostics);
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, s_IAsyncEnumerable },
+                parseOptions: TestOptions.Regular9
+            );
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [Fact, CompilerTrait(CompilerFeature.IOperation, CompilerFeature.AsyncStreams)]
         [WorkItem(30362, "https://github.com/dotnet/roslyn/issues/30362")]
         public void IForEachLoopStatement_SimpleAwaitForEachLoop()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static async System.Threading.Tasks.Task Main(System.Collections.Generic.IAsyncEnumerable<string> pets)
@@ -5608,7 +6049,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
   Locals: Local_1: System.String value
   LoopControlVariable: 
@@ -5635,14 +6077,22 @@ IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, E
   NextVariables(0)
 ";
 
-            VerifyOperationTreeForTest<ForEachStatementSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedOperationTree);
+            VerifyOperationTreeForTest<ForEachStatementSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedOperationTree
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(30362, "https://github.com/dotnet/roslyn/issues/30362")]
         public void ForEachAwaitFlow_SimpleAwaitForEachLoop()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System;
@@ -5659,7 +6109,8 @@ class Program
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5759,14 +6210,23 @@ Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source + s_IAsyncEnumerable + s_ValueTask, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source + s_IAsyncEnumerable + s_ValueTask,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(30362, "https://github.com/dotnet/roslyn/issues/30362")]
         public void ForEachAwaitFlow_SimpleAwaitForEachLoop_MissingIAsyncEnumerableType()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System;
@@ -5781,13 +6241,17 @@ class Program
     }/*</bind>*/
 }";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(7,55): error CS0234: The type or namespace name 'IAsyncEnumerable<>' does not exist in the namespace 'System.Collections.Generic' (are you missing an assembly reference?)
                 //     static async Task Main(System.Collections.Generic.IAsyncEnumerable<string> pets)
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "IAsyncEnumerable<string>").WithArguments("IAsyncEnumerable<>", "System.Collections.Generic").WithLocation(7, 55)
+                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "IAsyncEnumerable<string>")
+                    .WithArguments("IAsyncEnumerable<>", "System.Collections.Generic")
+                    .WithLocation(7, 55)
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5839,9 +6303,14 @@ Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
 
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
     Locals: Local_1: System.String value
@@ -5867,11 +6336,16 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
             VerifyOperationTreeForTest<BlockSyntax>(source, expectedOperationTree);
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(49267, "https://github.com/dotnet/roslyn/issues/49267")]
         public void AsyncForeach_StructEnumerator()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 #pragma warning disable CS1998 // async method lacks awaits
 using System.Threading.Tasks;
 class C
@@ -5889,9 +6363,13 @@ class C
         public async Task<bool> MoveNextAsync() => throw null;
         public async ValueTask DisposeAsync() => throw null;
     }
-}", targetFramework: TargetFramework.NetCoreApp);
+}",
+                targetFramework: TargetFramework.NetCoreApp
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
     Locals: Local_1: System.Int32 i
@@ -5910,9 +6388,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     NextVariables(0)
-            ", DiagnosticDescription.None);
+            ",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(compilation, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                compilation,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -5988,14 +6470,20 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(49267, "https://github.com/dotnet/roslyn/issues/49267")]
         public void AsyncForeach_StructEnumerator_ExplicitAsyncDisposeInterface()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 #pragma warning disable CS1998 // async method lacks awaits
 using System.Threading.Tasks;
 class C
@@ -6013,9 +6501,13 @@ class C
         public async Task<bool> MoveNextAsync() => throw null;
         public async ValueTask DisposeAsync() => throw null;
     }
-}", targetFramework: TargetFramework.NetCoreApp);
+}",
+                targetFramework: TargetFramework.NetCoreApp
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
     Locals: Local_1: System.Int32 i
@@ -6034,9 +6526,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     NextVariables(0)
-            ", DiagnosticDescription.None);
+            ",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(compilation, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                compilation,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6112,14 +6608,20 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(49267, "https://github.com/dotnet/roslyn/issues/49267")]
         public void Foreach_StructEnumerator()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class C
 {
     static void Main()
@@ -6136,9 +6638,13 @@ class C
         public bool MoveNext() => throw null;
         public void Dispose() => throw null;
     }
-}", targetFramework: TargetFramework.NetCoreApp);
+}",
+                targetFramework: TargetFramework.NetCoreApp
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
     Locals: Local_1: System.Int32 i
@@ -6156,9 +6662,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
               null
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", DiagnosticDescription.None);
+    NextVariables(0)",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(compilation, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                compilation,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6234,14 +6744,20 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
-        [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow, CompilerFeature.AsyncStreams)]
+        [CompilerTrait(
+            CompilerFeature.IOperation,
+            CompilerFeature.Dataflow,
+            CompilerFeature.AsyncStreams
+        )]
         [Fact, WorkItem(49267, "https://github.com/dotnet/roslyn/issues/49267")]
         public void Foreach_RefStructEnumerator()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class C
 {
     static void Main()
@@ -6258,9 +6774,13 @@ class C
         public bool MoveNext() => throw null;
         public void Dispose() => throw null;
     }
-}", targetFramework: TargetFramework.NetCoreApp);
+}",
+                targetFramework: TargetFramework.NetCoreApp
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
     Locals: Local_1: System.Int32 i
@@ -6278,9 +6798,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
               null
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", DiagnosticDescription.None);
+    NextVariables(0)",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(compilation, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                compilation,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6352,13 +6876,15 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void AsyncForEach_TestConstantNullableImplementingIEnumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -6372,8 +6898,14 @@ public struct C : IAsyncEnumerable<int>
     }/*</bind>*/
     IAsyncEnumerator<int> IAsyncEnumerable<int>.GetAsyncEnumerator(System.Threading.CancellationToken cancellationToken) => throw null;
 }";
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, AsyncStreamsTypes }, options: TestOptions.DebugExe);
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, expectedDiagnostics: DiagnosticDescription.None, expectedOperationTree: @"
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, AsyncStreamsTypes },
+                options: TestOptions.DebugExe
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                expectedDiagnostics: DiagnosticDescription.None,
+                expectedOperationTree: @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
     Locals: Local_1: System.Int32 i
@@ -6395,9 +6927,12 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     NextVariables(0)
-");
+"
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6497,14 +7032,16 @@ Block[B0] - Entry
 Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void Foreach_RefStructEnumerator_DefaultDisposeArguments()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class C
 {
     static void Main()
@@ -6521,9 +7058,13 @@ class C
         public bool MoveNext() => throw null;
         public void Dispose(int a = 1, bool b = true, params object[] extras) => throw null;
     }
-}", targetFramework: TargetFramework.NetCoreApp);
+}",
+                targetFramework: TargetFramework.NetCoreApp
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(compilation, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
     Locals: Local_1: System.Int32 i
@@ -6541,9 +7082,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
               null
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", DiagnosticDescription.None);
+    NextVariables(0)",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(compilation, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                compilation,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6632,13 +7177,15 @@ Block[B0] - Entry
 Block[B5] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void AsyncForeach_ExtensionGetEnumeratorWithParams()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 public class C
@@ -6661,8 +7208,14 @@ public static class Extensions
 {
     public static C.Enumerator GetAsyncEnumerator(this C self, params int[] x) => throw null;
 }";
-            var comp = CreateCompilationWithMscorlib46(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular9);
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            var comp = CreateCompilationWithMscorlib46(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular9
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, IsAsynchronous, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'await forea ... }')
     Locals: Local_1: System.Int32 i
@@ -6691,9 +7244,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
                     InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
                     OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
     NextVariables(0)
-", DiagnosticDescription.None);
+",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6774,13 +7331,15 @@ Block[B0] - Entry
 Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void ForEach_ExtensionGetEnumeratorDefaultParam()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 public class C
 {
     static void M(C c)
@@ -6799,9 +7358,12 @@ public static class CExt
     }
     public static Enumerator GetEnumerator(this C c, int i = 1) => null;
 }
-");
+"
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach (va ... }')
     Locals: Local_1: System.Int32 i
@@ -6817,9 +7379,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
     NextVariables(0)
-", DiagnosticDescription.None);
+",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -6916,13 +7482,15 @@ Block[B0] - Entry
 Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void ForEach_ExtensionGetEnumeratorParamArrayNotLast()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 public class C
 {
     static void M(C c)
@@ -6941,21 +7509,29 @@ public static class CExt
     }
     public static Enumerator GetEnumerator(this C c, params int[] arr, int i = 0) => null;
 }
-");
+"
+            );
 
-            var diagnostics = new DiagnosticDescription[] {
+            var diagnostics = new DiagnosticDescription[]
+            {
                 // (6,27): error CS7036: There is no argument given that corresponds to the required parameter 'arr' of 'CExt.GetEnumerator(C, params int[], int)'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c").WithArguments("arr", "CExt.GetEnumerator(C, params int[], int)").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c")
+                    .WithArguments("arr", "CExt.GetEnumerator(C, params int[], int)")
+                    .WithLocation(6, 27),
                 // (6,27): error CS1579: foreach statement cannot operate on variables of type 'C' because 'C' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c").WithArguments("C", "GetEnumerator").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c")
+                    .WithArguments("C", "GetEnumerator")
+                    .WithLocation(6, 27),
                 // (18,54): error CS0231: A params parameter must be the last parameter in a parameter list
                 //     public static Enumerator GetEnumerator(this C c, params int[] arr, int i = 0) => null;
                 Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] arr").WithLocation(18, 54)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (va ... }')
     Locals: Local_1: var i
@@ -6967,9 +7543,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", diagnostics);
+    NextVariables(0)",
+                diagnostics
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7010,13 +7590,15 @@ Block[B2] - Block
 Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void ForEach_ExtensionGetEnumeratorParamArrayWrongType()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 public class C
 {
     static void M(C c)
@@ -7035,24 +7617,33 @@ public static class CExt
     }
     public static Enumerator GetEnumerator(this C c, params int i = 0) => null;
 }
-");
+"
+            );
 
-            var diagnostics = new DiagnosticDescription[] {
+            var diagnostics = new DiagnosticDescription[]
+            {
                 // (6,27): error CS7036: There is no argument given that corresponds to the required parameter 'i' of 'CExt.GetEnumerator(C, params int)'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c").WithArguments("i", "CExt.GetEnumerator(C, params int)").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c")
+                    .WithArguments("i", "CExt.GetEnumerator(C, params int)")
+                    .WithLocation(6, 27),
                 // (6,27): error CS1579: foreach statement cannot operate on variables of type 'C' because 'C' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c").WithArguments("C", "GetEnumerator").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c")
+                    .WithArguments("C", "GetEnumerator")
+                    .WithLocation(6, 27),
                 // (18,54): error CS0225: The params parameter must be a single dimensional array
                 //     public static Enumerator GetEnumerator(this C c, params int i = 0) => null;
                 Diagnostic(ErrorCode.ERR_ParamsMustBeArray, "params").WithLocation(18, 54),
                 // (18,54): error CS1751: Cannot specify a default value for a parameter array
                 //     public static Enumerator GetEnumerator(this C c, params int i = 0) => null;
-                Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params").WithLocation(18, 54)
+                Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params")
+                    .WithLocation(18, 54)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (va ... }')
     Locals: Local_1: var i
@@ -7064,9 +7655,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", diagnostics);
+    NextVariables(0)",
+                diagnostics
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7107,13 +7702,15 @@ Block[B2] - Block
 Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public static void ForEach_ExtensionGetEnumeratorParamsOnWrongType_IL()
         {
-            string il = @"
+            string il =
+                @"
 .class public auto ansi beforefieldinit C extends [mscorlib]System.Object
 {
     .method public hidebysig specialname rtspecialname instance void .ctor () cil managed 
@@ -7149,7 +7746,8 @@ Block[B4] - Exit
 }
 ";
 
-            var comp = CreateCompilationWithIL(@"
+            var comp = CreateCompilationWithIL(
+                @"
 public class D
 {
     static void M(C c)
@@ -7159,18 +7757,27 @@ public class D
         }
     }/*</bind>*/
 }
-", il);
+",
+                il
+            );
 
-            var diagnostics = new DiagnosticDescription[] {
+            var diagnostics = new DiagnosticDescription[]
+            {
                 // (6,27): error CS7036: There is no argument given that corresponds to the required parameter 'i' of 'CExt.GetEnumerator(C, params int)'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c").WithArguments("i", "CExt.GetEnumerator(C, params int)").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c")
+                    .WithArguments("i", "CExt.GetEnumerator(C, params int)")
+                    .WithLocation(6, 27),
                 // (6,27): error CS1579: foreach statement cannot operate on variables of type 'C' because 'C' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c").WithArguments("C", "GetEnumerator").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c")
+                    .WithArguments("C", "GetEnumerator")
+                    .WithLocation(6, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (va ... }')
     Locals: Local_1: var i
@@ -7182,9 +7789,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", diagnostics);
+    NextVariables(0)",
+                diagnostics
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7225,13 +7836,15 @@ Block[B2] - Block
 Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public static void ForEach_ExtensionGetEnumeratorNonTrailingDefaultValue_IL()
         {
-            string il = @"
+            string il =
+                @"
 .class public auto ansi beforefieldinit C extends [mscorlib]System.Object
 {
     .method public hidebysig specialname rtspecialname instance void .ctor () cil managed 
@@ -7266,7 +7879,8 @@ Block[B4] - Exit
 }
 ";
 
-            var comp = CreateCompilationWithIL(@"
+            var comp = CreateCompilationWithIL(
+                @"
 public class D
 {
     static void M(C c)
@@ -7276,18 +7890,27 @@ public class D
         }
     }/*</bind>*/
 }
-", il);
+",
+                il
+            );
 
-            var diagnostics = new DiagnosticDescription[] {
+            var diagnostics = new DiagnosticDescription[]
+            {
                 // (6,27): error CS7036: There is no argument given that corresponds to the required parameter 'i2' of 'CExt.GetEnumerator(C, int, int)'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c").WithArguments("i2", "CExt.GetEnumerator(C, int, int)").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "c")
+                    .WithArguments("i2", "CExt.GetEnumerator(C, int, int)")
+                    .WithLocation(6, 27),
                 // (6,27): error CS1579: foreach statement cannot operate on variables of type 'C' because 'C' does not contain a public instance or extension definition for 'GetEnumerator'
                 //         foreach (var i in c)
-                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c").WithArguments("C", "GetEnumerator").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_ForEachMissingMember, "c")
+                    .WithArguments("C", "GetEnumerator")
+                    .WithLocation(6, 27)
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null, IsInvalid) (Syntax: 'foreach (va ... }')
     Locals: Local_1: var i
@@ -7299,9 +7922,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
       IParameterReferenceOperation: c (OperationKind.ParameterReference, Type: C, IsInvalid) (Syntax: 'c')
     Body: 
       IBlockOperation (0 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
-    NextVariables(0)", diagnostics);
+    NextVariables(0)",
+                diagnostics
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7342,13 +7969,15 @@ Block[B2] - Block
 Block[B4] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
         [Fact]
         public void FlowGraph_NullableSuppressionOnForeachVariable()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 using System.Collections.Generic;
 class A
 {
@@ -7363,9 +7992,13 @@ class A
 static class Extensions
 {
     public static IEnumerator<string>? GetEnumerator(this A a) => throw null!;
-}", options: WithNullableEnable());
+}",
+                options: WithNullableEnable()
+            );
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(comp, @"
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                comp,
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IForEachLoopOperation (LoopKind.ForEach, Continue Label Id: 0, Exit Label Id: 1) (OperationKind.Loop, Type: null) (Syntax: 'foreach(var ... }')
     Locals: Local_1: System.String? s
@@ -7394,9 +8027,13 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
                     ILocalReferenceOperation: s (OperationKind.LocalReference, Type: System.String) (Syntax: 's')
                   Arguments(0)
     NextVariables(0)
-", DiagnosticDescription.None);
+",
+                DiagnosticDescription.None
+            );
 
-            VerifyFlowGraphForTest<BlockSyntax>(comp, @"
+            VerifyFlowGraphForTest<BlockSyntax>(
+                comp,
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -7498,10 +8135,12 @@ Block[B0] - Entry
 Block[B7] - Exit
     Predecessors: [B2]
     Statements (0)
-");
+"
+            );
         }
 
-        internal static readonly string s_ValueTask = @"
+        internal static readonly string s_ValueTask =
+            @"
 namespace System.Threading.Tasks
 {
     [System.Runtime.CompilerServices.AsyncMethodBuilder(typeof(System.Runtime.CompilerServices.ValueTaskMethodBuilder))]

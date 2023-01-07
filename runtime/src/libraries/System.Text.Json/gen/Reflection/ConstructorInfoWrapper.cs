@@ -14,7 +14,10 @@ namespace System.Text.Json.Reflection
         private readonly IMethodSymbol _ctor;
         private readonly MetadataLoadContextInternal _metadataLoadContext;
 
-        public ConstructorInfoWrapper(IMethodSymbol ctor, MetadataLoadContextInternal metadataLoadContext)
+        public ConstructorInfoWrapper(
+            IMethodSymbol ctor,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             Debug.Assert(ctor != null);
             _ctor = ctor;
@@ -80,12 +83,23 @@ namespace System.Text.Json.Reflection
             return parameters.ToArray();
         }
 
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw new NotSupportedException();
         }

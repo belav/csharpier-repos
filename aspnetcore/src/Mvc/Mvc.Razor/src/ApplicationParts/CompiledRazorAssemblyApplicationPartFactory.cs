@@ -29,5 +29,6 @@ public class CompiledRazorAssemblyApplicationPartFactory : ApplicationPartFactor
     }
 
     /// <inheritdoc />
-    public override IEnumerable<ApplicationPart> GetApplicationParts(Assembly assembly) => GetDefaultApplicationParts(assembly);
+    public override IEnumerable<ApplicationPart> GetApplicationParts(Assembly assembly) =>
+        GetDefaultApplicationParts(assembly);
 }

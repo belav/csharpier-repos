@@ -9,6 +9,7 @@ namespace Test
     public class BB
     {
         static void Method1() { }
+
         public static int Main()
         {
             bool local1 = false;

@@ -27,15 +27,18 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             name: nameof(HostPage),
             propertyType: typeof(string),
             ownerType: typeof(BlazorWebView),
-            typeMetadata: new PropertyMetadata(OnHostPagePropertyChanged));
+            typeMetadata: new PropertyMetadata(OnHostPagePropertyChanged)
+        );
 
         /// <summary>
         /// The backing store for the <see cref="RootComponent"/> property.
         /// </summary>
-        public static readonly DependencyProperty RootComponentsProperty = DependencyProperty.Register(
-            name: nameof(RootComponents),
-            propertyType: typeof(ObservableCollection<RootComponent>),
-            ownerType: typeof(BlazorWebView));
+        public static readonly DependencyProperty RootComponentsProperty =
+            DependencyProperty.Register(
+                name: nameof(RootComponents),
+                propertyType: typeof(ObservableCollection<RootComponent>),
+                ownerType: typeof(BlazorWebView)
+            );
 
         /// <summary>
         /// The backing store for the <see cref="Services"/> property.
@@ -44,7 +47,8 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             name: nameof(Services),
             propertyType: typeof(IServiceProvider),
             ownerType: typeof(BlazorWebView),
-            typeMetadata: new PropertyMetadata(OnServicesPropertyChanged));
+            typeMetadata: new PropertyMetadata(OnServicesPropertyChanged)
+        );
         #endregion
 
         private const string webViewTemplateChildName = "WebView";
@@ -62,7 +66,10 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
 
             Template = new ControlTemplate
             {
-                VisualTree = new FrameworkElementFactory(typeof(WebView2Control), webViewTemplateChildName)
+                VisualTree = new FrameworkElementFactory(
+                    typeof(WebView2Control),
+                    webViewTemplateChildName
+                )
             };
         }
 
@@ -93,18 +100,24 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             set => SetValue(ServicesProperty, value);
         }
 
-        private static void OnServicesPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((BlazorWebView)d).OnServicesPropertyChanged(e);
+        private static void OnServicesPropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e
+        ) => ((BlazorWebView)d).OnServicesPropertyChanged(e);
 
-        private void OnServicesPropertyChanged(DependencyPropertyChangedEventArgs e) => StartWebViewCoreIfPossible();
+        private void OnServicesPropertyChanged(DependencyPropertyChangedEventArgs e) =>
+            StartWebViewCoreIfPossible();
 
-        private static void OnHostPagePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((BlazorWebView)d).OnHostPagePropertyChanged(e);
+        private static void OnHostPagePropertyChanged(
+            DependencyObject d,
+            DependencyPropertyChangedEventArgs e
+        ) => ((BlazorWebView)d).OnHostPagePropertyChanged(e);
 
-        private void OnHostPagePropertyChanged(DependencyPropertyChangedEventArgs e) => StartWebViewCoreIfPossible();
+        private void OnHostPagePropertyChanged(DependencyPropertyChangedEventArgs e) =>
+            StartWebViewCoreIfPossible();
 
         private bool RequiredStartupPropertiesSet =>
-            _webview != null &&
-            HostPage != null &&
-            Services != null;
+            _webview != null && HostPage != null && Services != null;
 
         /// <inheritdoc />
         public override void OnApplyTemplate()
@@ -144,7 +157,13 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             var hostPageRelativePath = Path.GetRelativePath(contentRootDir, HostPage);
             var fileProvider = new PhysicalFileProvider(contentRootDir);
 
-            _webviewManager = new WebView2WebViewManager(new WpfWeb2ViewWrapper(_webview), Services, WpfDispatcher.Instance, fileProvider, hostPageRelativePath);
+            _webviewManager = new WebView2WebViewManager(
+                new WpfWeb2ViewWrapper(_webview),
+                Services,
+                WpfDispatcher.Instance,
+                fileProvider,
+                hostPageRelativePath
+            );
             foreach (var rootComponent in RootComponents)
             {
                 // Since the page isn't loaded yet, this will always complete synchronously
@@ -153,7 +172,10 @@ namespace Microsoft.AspNetCore.Components.WebView.Wpf
             _webviewManager.Navigate("/");
         }
 
-        private void HandleRootComponentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs eventArgs)
+        private void HandleRootComponentsCollectionChanged(
+            object sender,
+            NotifyCollectionChangedEventArgs eventArgs
+        )
         {
             CheckDisposed();
 

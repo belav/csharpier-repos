@@ -5,18 +5,22 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.Interop
 {
-    internal sealed record LibraryImportGeneratorOptions(bool GenerateForwarders, bool UseMarshalType)
+    internal sealed record LibraryImportGeneratorOptions(
+        bool GenerateForwarders,
+        bool UseMarshalType
+    )
     {
         public LibraryImportGeneratorOptions(AnalyzerConfigOptions options)
-            : this(options.GenerateForwarders(), options.UseMarshalType())
-        {
-        }
+            : this(options.GenerateForwarders(), options.UseMarshalType()) { }
     }
 
     public static class OptionsHelper
     {
-        public const string UseMarshalTypeOption = "build_property.LibraryImportGenerator_UseMarshalType";
-        public const string GenerateForwardersOption = "build_property.LibraryImportGenerator_GenerateForwarders";
+        public const string UseMarshalTypeOption =
+            "build_property.LibraryImportGenerator_UseMarshalType";
+        public const string GenerateForwardersOption =
+            "build_property.LibraryImportGenerator_GenerateForwarders";
+
         private static bool GetBoolOption(this AnalyzerConfigOptions options, string key)
         {
             return options.TryGetValue(key, out string? value)
@@ -24,8 +28,10 @@ namespace Microsoft.Interop
                 && result;
         }
 
-        internal static bool UseMarshalType(this AnalyzerConfigOptions options) => options.GetBoolOption(UseMarshalTypeOption);
+        internal static bool UseMarshalType(this AnalyzerConfigOptions options) =>
+            options.GetBoolOption(UseMarshalTypeOption);
 
-        internal static bool GenerateForwarders(this AnalyzerConfigOptions options) => options.GetBoolOption(GenerateForwardersOption);
+        internal static bool GenerateForwarders(this AnalyzerConfigOptions options) =>
+            options.GetBoolOption(GenerateForwardersOption);
     }
 }

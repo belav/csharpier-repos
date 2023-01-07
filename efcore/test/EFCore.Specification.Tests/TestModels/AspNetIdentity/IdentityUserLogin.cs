@@ -3,8 +3,7 @@
 
 namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 
-public class IdentityUserLogin<TKey>
-    where TKey : IEquatable<TKey>
+public class IdentityUserLogin<TKey> where TKey : IEquatable<TKey>
 {
     public virtual string LoginProvider { get; set; }
     public virtual string ProviderKey { get; set; }

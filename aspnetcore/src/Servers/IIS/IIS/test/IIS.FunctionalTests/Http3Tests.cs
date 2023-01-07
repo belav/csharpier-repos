@@ -46,7 +46,9 @@ public class Http3Tests : FunctionalTestsBase
         using var client = SetUpClient();
         client.DefaultRequestVersion = HttpVersion.Version30;
         client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
-        var response = await client.GetAsync(Fixture.Client.BaseAddress.ToString() + "Http3_Direct");
+        var response = await client.GetAsync(
+            Fixture.Client.BaseAddress.ToString() + "Http3_Direct"
+        );
 
         response.EnsureSuccessStatusCode();
         Assert.Equal(HttpVersion.Version30, response.Version);
@@ -133,9 +135,13 @@ public class Http3Tests : FunctionalTestsBase
         client.DefaultRequestVersion = HttpVersion.Version30;
         client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
         var response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
-        await client.GetAsync(Fixture.Client.BaseAddress.ToString() + "Http3_ResetAfterHeaders_SetResult");
+        await client.GetAsync(
+            Fixture.Client.BaseAddress.ToString() + "Http3_ResetAfterHeaders_SetResult"
+        );
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() => response.Content.ReadAsStringAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync()
+        );
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
         Assert.Equal(0x010c, qex.ApplicationErrorCode.Value); // H3_REQUEST_CANCELLED
@@ -144,15 +150,21 @@ public class Http3Tests : FunctionalTestsBase
     [ConditionalFact]
     public async Task Http3_AppExceptionAfterHeaders_InternalError()
     {
-        var address = Fixture.Client.BaseAddress.ToString() + "Http3_AppExceptionAfterHeaders_InternalError";
+        var address =
+            Fixture.Client.BaseAddress.ToString() + "Http3_AppExceptionAfterHeaders_InternalError";
         using var client = SetUpClient();
         client.DefaultRequestVersion = HttpVersion.Version30;
         client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
         var response = await client.GetAsync(address, HttpCompletionOption.ResponseHeadersRead);
-        await client.GetAsync(Fixture.Client.BaseAddress.ToString() + "Http3_AppExceptionAfterHeaders_InternalError_SetResult");
+        await client.GetAsync(
+            Fixture.Client.BaseAddress.ToString()
+                + "Http3_AppExceptionAfterHeaders_InternalError_SetResult"
+        );
         response.EnsureSuccessStatusCode();
-        var ex = await Assert.ThrowsAsync<HttpRequestException>(() => response.Content.ReadAsStringAsync());
+        var ex = await Assert.ThrowsAsync<HttpRequestException>(
+            () => response.Content.ReadAsStringAsync()
+        );
         var qex = Assert.IsType<QuicException>(ex.InnerException?.InnerException?.InnerException);
         Assert.Equal(QuicError.StreamAborted, qex.QuicError);
         Assert.Equal(0x0102, qex.ApplicationErrorCode.Value); // H3_INTERNAL_ERROR
@@ -176,7 +188,8 @@ public class Http3Tests : FunctionalTestsBase
     {
         var handler = new HttpClientHandler();
         // Needed on CI, the IIS Express cert we use isn't trusted there.
-        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
         return new HttpClient(handler) { Timeout = TimeSpan.FromSeconds(200) };
     }
 }

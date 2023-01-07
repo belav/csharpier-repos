@@ -42,7 +42,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -73,7 +74,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Double.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Double.GetElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -95,7 +98,9 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Double.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Double.WithElement({imm}): {nameof(RunBasicScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -120,20 +125,22 @@ namespace JIT.HardwareIntrinsics.General
             try
             {
                 object result = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.GetElement))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value, imm });
+                    .GetMethod(nameof(Vector128.GetElement))
+                    .MakeGenericMethod(typeof(Double))
+                    .Invoke(null, new object[] { value, imm });
                 ValidateGetResult((Double)(result), values);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Double.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Double.GetElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -146,20 +153,22 @@ namespace JIT.HardwareIntrinsics.General
             try
             {
                 object result2 = typeof(Vector128)
-                                    .GetMethod(nameof(Vector128.WithElement))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value, imm, insertedValue });
+                    .GetMethod(nameof(Vector128.WithElement))
+                    .MakeGenericMethod(typeof(Double))
+                    .Invoke(null, new object[] { value, imm, insertedValue });
                 ValidateWithResult((Vector128<Double>)(result2), values, insertedValue);
             }
             catch (TargetInvocationException e)
             {
-                succeeded = expectedOutOfRangeException
-                          && e.InnerException is ArgumentOutOfRangeException;
+                succeeded =
+                    expectedOutOfRangeException && e.InnerException is ArgumentOutOfRangeException;
             }
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Double.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException.");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Double.WithElement({imm}): {nameof(RunReflectionScenario)} failed to throw ArgumentOutOfRangeException."
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;
@@ -175,27 +184,45 @@ namespace JIT.HardwareIntrinsics.General
             RunReflectionScenario(0 + ElementCount, expectedOutOfRangeException: true);
         }
 
-        private void ValidateGetResult(Double result, Double[] values, [CallerMemberName] string method = "")
+        private void ValidateGetResult(
+            Double result,
+            Double[] values,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result != values[0])
             {
                 Succeeded = false;
 
-                TestLibrary.TestFramework.LogInformation($"Vector128<Double.GetElement(0): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Double.GetElement(0): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  result: ({result})");
                 TestLibrary.TestFramework.LogInformation(string.Empty);
             }
         }
 
-        private void ValidateWithResult(Vector128<Double> result, Double[] values, Double insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Vector128<Double> result,
+            Double[] values,
+            Double insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
             ValidateWithResult(resultElements, values, insertedValue, method);
         }
 
-        private void ValidateWithResult(Double[] result, Double[] values, Double insertedValue, [CallerMemberName] string method = "")
+        private void ValidateWithResult(
+            Double[] result,
+            Double[] values,
+            Double insertedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -215,10 +242,16 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128<Double.WithElement(0): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", values)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128<Double.WithElement(0): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", values)})"
+                );
                 TestLibrary.TestFramework.LogInformation($"  insert: insertedValue");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", result)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", result)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

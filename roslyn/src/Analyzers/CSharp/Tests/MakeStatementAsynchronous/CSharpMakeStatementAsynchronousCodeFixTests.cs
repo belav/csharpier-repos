@@ -16,23 +16,26 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStatementAsynchronous
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsMakeStatementAsynchronous)]
-    public class CSharpMakeStatementAsynchronousCodeFixTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class CSharpMakeStatementAsynchronousCodeFixTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public CSharpMakeStatementAsynchronousCodeFixTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public CSharpMakeStatementAsynchronousCodeFixTests(ITestOutputHelper logger) : base(logger)
+        { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpMakeStatementAsynchronousCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpMakeStatementAsynchronousCodeFixProvider());
 
-        private static readonly TestParameters s_asyncStreamsFeature = new TestParameters(parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8));
+        private static readonly TestParameters s_asyncStreamsFeature = new TestParameters(
+            parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8)
+        );
 
         [Fact]
         public async Task FixAllForeach()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<int> collection)
@@ -41,7 +44,8 @@ class Program
         foreach (var j in collection) { }
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<int> collection)
@@ -49,14 +53,17 @@ class Program
         await foreach (var i in collection) { }
         await foreach (var j in collection) { }
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixAllForeachDeconstruction()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<(int, int)> collection)
@@ -65,7 +72,8 @@ class Program
         foreach (var (k, l) in collection) { }
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<(int, int)> collection)
@@ -73,14 +81,17 @@ class Program
         await foreach (var (i, j) in collection) { }
         await foreach (var (k, l) in collection) { }
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixAllUsingStatement()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -89,7 +100,8 @@ class Program
         using (var j = disposable) { }
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -97,14 +109,17 @@ class Program
         await using (var i = disposable) { }
         await using (var j = disposable) { }
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixAllUsingDeclaration()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -113,7 +128,8 @@ class Program
         using var j = disposable;
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -121,14 +137,17 @@ class Program
         await using var i = disposable;
         await using var j = disposable;
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixForeach()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<int> collection)
@@ -138,7 +157,8 @@ class Program
         }
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<int> collection)
@@ -147,14 +167,17 @@ class Program
         {
         }
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixForeachDeconstruction()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<(int, int)> collection)
@@ -164,7 +187,8 @@ class Program
         }
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.Collections.Generic.IAsyncEnumerable<(int, int)> collection)
@@ -173,14 +197,17 @@ class Program
         {
         }
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixUsingStatement()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -190,7 +217,8 @@ class Program
         }
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -199,14 +227,17 @@ class Program
         {
         }
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
 
         [Fact]
         public async Task FixUsingDeclaration()
         {
             await TestInRegularAndScript1Async(
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
@@ -214,14 +245,17 @@ class Program
         using var i = disposable[||];
     }
 }",
-IAsyncEnumerable + @"
+                IAsyncEnumerable
+                    + @"
 class Program
 {
     void M(System.IAsyncDisposable disposable)
     {
         await using var i = disposable;
     }
-}", parameters: s_asyncStreamsFeature);
+}",
+                parameters: s_asyncStreamsFeature
+            );
         }
     }
 }

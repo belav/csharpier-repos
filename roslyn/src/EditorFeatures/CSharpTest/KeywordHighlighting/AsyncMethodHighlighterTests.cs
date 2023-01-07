@@ -15,14 +15,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class AsyncMethodHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(AsyncAwaitHighlighter);
+        internal override Type GetHighlighterType() => typeof(AsyncAwaitHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -44,14 +43,15 @@ class AsyncExample
         result = await resultTask;
         result = await lambda();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestExample2_1()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Threading.Tasks;
 
 class AsyncExample
@@ -73,7 +73,8 @@ class AsyncExample
         result = [|await|] resultTask;
         result = [|await|] lambda();
     }
-}");
+}"
+            );
         }
     }
 }

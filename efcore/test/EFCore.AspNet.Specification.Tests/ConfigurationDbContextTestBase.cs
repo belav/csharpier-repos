@@ -19,10 +19,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
     protected ConfigurationDbContextFixtureBase Fixture { get; }
 
     [ConditionalFact(
-        Skip =
-            "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'.")]
-    public async Task Can_call_ResourceStore_FindApiScopesByNameAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+        Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
+    )]
+    public async Task Can_call_ResourceStore_FindApiScopesByNameAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveApiScopes(context);
@@ -31,7 +31,12 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
             {
                 var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                Assert.Equal(2, (await store.FindApiScopesByNameAsync(new[] { "ApiScope2", "ApiScope1" })).Count());
+                Assert.Equal(
+                    2,
+                    (
+                        await store.FindApiScopesByNameAsync(new[] { "ApiScope2", "ApiScope1" })
+                    ).Count()
+                );
             }
         );
 
@@ -67,31 +72,24 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 Emphasize = true,
                 UserClaims = new List<ApiScopeClaim>(),
                 Properties = new List<ApiScopeProperty>(),
-            });
+            }
+        );
 
         await context.SaveChangesAsync();
     }
 
     [ConditionalFact(
-        Skip =
-            "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'.")]
-    public async Task Can_call_ClientStore_FindClientByIdAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+        Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
+    )]
+    public async Task Can_call_ClientStore_FindClientByIdAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 context.AddRange(
-                    new Client
-                    {
-                        ClientId = "C1", Description = "D1",
-                    },
-                    new Client
-                    {
-                        ClientId = "C2", Description = "D2",
-                    },
-                    new Client
-                    {
-                        ClientId = "C3", Description = "D3",
-                    });
+                    new Client { ClientId = "C1", Description = "D1", },
+                    new Client { ClientId = "C2", Description = "D2", },
+                    new Client { ClientId = "C3", Description = "D3", }
+                );
 
                 await context.SaveChangesAsync();
             },
@@ -104,10 +102,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
         );
 
     [ConditionalFact(
-        Skip =
-            "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'.")]
-    public async Task Can_call_ResourceStore_FindIdentityResourcesByScopeNameAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+        Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
+    )]
+    public async Task Can_call_ResourceStore_FindIdentityResourcesByScopeNameAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveIdentityResources(context);
@@ -117,15 +115,21 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
                 Assert.Equal(
-                    2, (await store.FindIdentityResourcesByScopeNameAsync(new[] { "IdentityResource2", "IdentityResource1" })).Count());
+                    2,
+                    (
+                        await store.FindIdentityResourcesByScopeNameAsync(
+                            new[] { "IdentityResource2", "IdentityResource1" }
+                        )
+                    ).Count()
+                );
             }
         );
 
     [ConditionalFact(
-        Skip =
-            "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'.")]
-    public async Task Can_call_ResourceStore_FindApiResourcesByScopeNameAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+        Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
+    )]
+    public async Task Can_call_ResourceStore_FindApiResourcesByScopeNameAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveApiResources(context);
@@ -134,15 +138,18 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
             {
                 var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                Assert.Equal(2, (await store.FindApiResourcesByScopeNameAsync(new[] { "S1", "S4" })).Count());
+                Assert.Equal(
+                    2,
+                    (await store.FindApiResourcesByScopeNameAsync(new[] { "S1", "S4" })).Count()
+                );
             }
         );
 
     [ConditionalFact(
-        Skip =
-            "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'.")]
-    public async Task Can_call_ResourceStore_GetAllResourcesAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+        Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
+    )]
+    public async Task Can_call_ResourceStore_GetAllResourcesAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveIdentityResources(context);
@@ -187,7 +194,8 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 Description = "IdentityResource 3",
                 Required = true,
                 Emphasize = true
-            });
+            }
+        );
 
         await context.SaveChangesAsync();
     }
@@ -200,30 +208,39 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 Name = "ApiResource1",
                 DisplayName = "ApiResource 1",
                 Description = "ApiResource 1",
-                Scopes = new List<ApiResourceScope> { new() { Scope = "S1" }, new() { Scope = "S2" } }
+                Scopes = new List<ApiResourceScope>
+                {
+                    new() { Scope = "S1" },
+                    new() { Scope = "S2" }
+                }
             },
             new ApiResource
             {
                 Name = "ApiResource2",
                 DisplayName = "ApiResource 2",
                 Description = "ApiResource 2",
-                Scopes = new List<ApiResourceScope> { new() { Scope = "S4" }, new() { Scope = "S5" } }
+                Scopes = new List<ApiResourceScope>
+                {
+                    new() { Scope = "S4" },
+                    new() { Scope = "S5" }
+                }
             },
             new ApiResource
             {
                 Name = "ApiResource3",
                 DisplayName = "ApiResource 3",
                 Description = "ApiResource 3"
-            });
+            }
+        );
 
         await context.SaveChangesAsync();
     }
 
     [ConditionalFact(
-        Skip =
-            "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'.")]
-    public async Task Can_call_ResourceStore_FindApiResourcesByNameAsync()
-        => await ExecuteWithStrategyInTransactionAsync(
+        Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
+    )]
+    public async Task Can_call_ResourceStore_FindApiResourcesByNameAsync() =>
+        await ExecuteWithStrategyInTransactionAsync(
             async context =>
             {
                 await SaveApiResources(context);
@@ -232,7 +249,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
             {
                 var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                Assert.Equal(2, (await store.FindApiResourcesByNameAsync(new[] { "ApiResource2", "ApiResource1" })).Count());
+                Assert.Equal(
+                    2,
+                    (
+                        await store.FindApiResourcesByNameAsync(
+                            new[] { "ApiResource2", "ApiResource1" }
+                        )
+                    ).Count()
+                );
             }
         );
 
@@ -241,14 +265,17 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
     {
         using (var context = CreateContext())
         {
-            var entityTypeMappings = context.Model.GetEntityTypes().Select(e => new EntityTypeMapping(e)).ToList();
+            var entityTypeMappings = context.Model
+                .GetEntityTypes()
+                .Select(e => new EntityTypeMapping(e))
+                .ToList();
 
             EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);
         }
     }
 
-    protected virtual List<EntityTypeMapping> ExpectedMappings
-        => new()
+    protected virtual List<EntityTypeMapping> ExpectedMappings =>
+        new()
         {
             new EntityTypeMapping
             {
@@ -294,7 +321,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ApiResourceClaim {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: UserClaims ToPrincipal: ApiResource Cascade",
                 },
-                Navigations = { "Navigation: ApiResourceClaim.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: UserClaims", },
+                Navigations =
+                {
+                    "Navigation: ApiResourceClaim.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: UserClaims",
+                },
             },
             new EntityTypeMapping
             {
@@ -313,7 +343,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ApiResourceProperty {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: Properties ToPrincipal: ApiResource Cascade",
                 },
-                Navigations = { "Navigation: ApiResourceProperty.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Properties", },
+                Navigations =
+                {
+                    "Navigation: ApiResourceProperty.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Properties",
+                },
             },
             new EntityTypeMapping
             {
@@ -331,7 +364,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ApiResourceScope {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: Scopes ToPrincipal: ApiResource Cascade",
                 },
-                Navigations = { "Navigation: ApiResourceScope.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Scopes", },
+                Navigations =
+                {
+                    "Navigation: ApiResourceScope.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Scopes",
+                },
             },
             new EntityTypeMapping
             {
@@ -353,7 +389,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ApiResourceSecret {'ApiResourceId'} -> ApiResource {'Id'} ToDependent: Secrets ToPrincipal: ApiResource Cascade",
                 },
-                Navigations = { "Navigation: ApiResourceSecret.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Secrets", },
+                Navigations =
+                {
+                    "Navigation: ApiResourceSecret.ApiResource (ApiResource) ToPrincipal ApiResource Inverse: Secrets",
+                },
             },
             new EntityTypeMapping
             {
@@ -390,8 +429,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                     "Property: ApiScopeClaim.Type (string) Required MaxLength(200)",
                 },
                 Indexes = { "{'ScopeId'} ", },
-                FKs = { "ForeignKey: ApiScopeClaim {'ScopeId'} -> ApiScope {'Id'} ToDependent: UserClaims ToPrincipal: Scope Cascade", },
-                Navigations = { "Navigation: ApiScopeClaim.Scope (ApiScope) ToPrincipal ApiScope Inverse: UserClaims", },
+                FKs =
+                {
+                    "ForeignKey: ApiScopeClaim {'ScopeId'} -> ApiScope {'Id'} ToDependent: UserClaims ToPrincipal: Scope Cascade",
+                },
+                Navigations =
+                {
+                    "Navigation: ApiScopeClaim.Scope (ApiScope) ToPrincipal ApiScope Inverse: UserClaims",
+                },
             },
             new EntityTypeMapping
             {
@@ -406,8 +451,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                     "Property: ApiScopeProperty.Value (string) Required MaxLength(2000)",
                 },
                 Indexes = { "{'ScopeId'} ", },
-                FKs = { "ForeignKey: ApiScopeProperty {'ScopeId'} -> ApiScope {'Id'} ToDependent: Properties ToPrincipal: Scope Cascade", },
-                Navigations = { "Navigation: ApiScopeProperty.Scope (ApiScope) ToPrincipal ApiScope Inverse: Properties", },
+                FKs =
+                {
+                    "ForeignKey: ApiScopeProperty {'ScopeId'} -> ApiScope {'Id'} ToDependent: Properties ToPrincipal: Scope Cascade",
+                },
+                Navigations =
+                {
+                    "Navigation: ApiScopeProperty.Scope (ApiScope) ToPrincipal ApiScope Inverse: Properties",
+                },
             },
             new EntityTypeMapping
             {
@@ -488,8 +539,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                     "Property: ClientClaim.Value (string) Required MaxLength(250)",
                 },
                 Indexes = { "{'ClientId'} ", },
-                FKs = { "ForeignKey: ClientClaim {'ClientId'} -> Client {'Id'} ToDependent: Claims ToPrincipal: Client Cascade", },
-                Navigations = { "Navigation: ClientClaim.Client (Client) ToPrincipal Client Inverse: Claims", },
+                FKs =
+                {
+                    "ForeignKey: ClientClaim {'ClientId'} -> Client {'Id'} ToDependent: Claims ToPrincipal: Client Cascade",
+                },
+                Navigations =
+                {
+                    "Navigation: ClientClaim.Client (Client) ToPrincipal Client Inverse: Claims",
+                },
             },
             new EntityTypeMapping
             {
@@ -507,7 +564,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ClientCorsOrigin {'ClientId'} -> Client {'Id'} ToDependent: AllowedCorsOrigins ToPrincipal: Client Cascade",
                 },
-                Navigations = { "Navigation: ClientCorsOrigin.Client (Client) ToPrincipal Client Inverse: AllowedCorsOrigins", },
+                Navigations =
+                {
+                    "Navigation: ClientCorsOrigin.Client (Client) ToPrincipal Client Inverse: AllowedCorsOrigins",
+                },
             },
             new EntityTypeMapping
             {
@@ -525,7 +585,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ClientGrantType {'ClientId'} -> Client {'Id'} ToDependent: AllowedGrantTypes ToPrincipal: Client Cascade",
                 },
-                Navigations = { "Navigation: ClientGrantType.Client (Client) ToPrincipal Client Inverse: AllowedGrantTypes", },
+                Navigations =
+                {
+                    "Navigation: ClientGrantType.Client (Client) ToPrincipal Client Inverse: AllowedGrantTypes",
+                },
             },
             new EntityTypeMapping
             {
@@ -582,8 +645,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                     "Property: ClientProperty.Value (string) Required MaxLength(2000)",
                 },
                 Indexes = { "{'ClientId'} ", },
-                FKs = { "ForeignKey: ClientProperty {'ClientId'} -> Client {'Id'} ToDependent: Properties ToPrincipal: Client Cascade", },
-                Navigations = { "Navigation: ClientProperty.Client (Client) ToPrincipal Client Inverse: Properties", },
+                FKs =
+                {
+                    "ForeignKey: ClientProperty {'ClientId'} -> Client {'Id'} ToDependent: Properties ToPrincipal: Client Cascade",
+                },
+                Navigations =
+                {
+                    "Navigation: ClientProperty.Client (Client) ToPrincipal Client Inverse: Properties",
+                },
             },
             new EntityTypeMapping
             {
@@ -601,7 +670,10 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                 {
                     "ForeignKey: ClientRedirectUri {'ClientId'} -> Client {'Id'} ToDependent: RedirectUris ToPrincipal: Client Cascade",
                 },
-                Navigations = { "Navigation: ClientRedirectUri.Client (Client) ToPrincipal Client Inverse: RedirectUris", },
+                Navigations =
+                {
+                    "Navigation: ClientRedirectUri.Client (Client) ToPrincipal Client Inverse: RedirectUris",
+                },
             },
             new EntityTypeMapping
             {
@@ -615,8 +687,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                     "Property: ClientScope.Scope (string) Required MaxLength(200)",
                 },
                 Indexes = { "{'ClientId'} ", },
-                FKs = { "ForeignKey: ClientScope {'ClientId'} -> Client {'Id'} ToDependent: AllowedScopes ToPrincipal: Client Cascade", },
-                Navigations = { "Navigation: ClientScope.Client (Client) ToPrincipal Client Inverse: AllowedScopes", },
+                FKs =
+                {
+                    "ForeignKey: ClientScope {'ClientId'} -> Client {'Id'} ToDependent: AllowedScopes ToPrincipal: Client Cascade",
+                },
+                Navigations =
+                {
+                    "Navigation: ClientScope.Client (Client) ToPrincipal Client Inverse: AllowedScopes",
+                },
             },
             new EntityTypeMapping
             {
@@ -634,8 +712,14 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
                     "Property: ClientSecret.Value (string) Required MaxLength(4000)",
                 },
                 Indexes = { "{'ClientId'} ", },
-                FKs = { "ForeignKey: ClientSecret {'ClientId'} -> Client {'Id'} ToDependent: ClientSecrets ToPrincipal: Client Cascade", },
-                Navigations = { "Navigation: ClientSecret.Client (Client) ToPrincipal Client Inverse: ClientSecrets", },
+                FKs =
+                {
+                    "ForeignKey: ClientSecret {'ClientId'} -> Client {'Id'} ToDependent: ClientSecrets ToPrincipal: Client Cascade",
+                },
+                Navigations =
+                {
+                    "Navigation: ClientSecret.Client (Client) ToPrincipal Client Inverse: ClientSecrets",
+                },
             },
             new EntityTypeMapping
             {
@@ -708,37 +792,45 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
             },
         };
 
-    protected ConfigurationDbContext CreateContext()
-        => Fixture.CreateContext();
+    protected ConfigurationDbContext CreateContext() => Fixture.CreateContext();
 
     protected virtual Task ExecuteWithStrategyInTransactionAsync(
         Func<ConfigurationDbContext, Task> testOperation,
         Func<ConfigurationDbContext, Task> nestedTestOperation1 = null,
         Func<ConfigurationDbContext, Task> nestedTestOperation2 = null,
-        Func<ConfigurationDbContext, Task> nestedTestOperation3 = null)
-        => TestHelpers.ExecuteWithStrategyInTransactionAsync(
-            CreateContext, UseTransaction,
-            testOperation, nestedTestOperation1, nestedTestOperation2, nestedTestOperation3);
+        Func<ConfigurationDbContext, Task> nestedTestOperation3 = null
+    ) =>
+        TestHelpers.ExecuteWithStrategyInTransactionAsync(
+            CreateContext,
+            UseTransaction,
+            testOperation,
+            nestedTestOperation1,
+            nestedTestOperation2,
+            nestedTestOperation3
+        );
 
-    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected virtual void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
-    public abstract class ConfigurationDbContextFixtureBase : SharedStoreFixtureBase<ConfigurationDbContext>
+    public abstract class ConfigurationDbContextFixtureBase
+        : SharedStoreFixtureBase<ConfigurationDbContext>
     {
-        protected override IServiceCollection AddServices(IServiceCollection serviceCollection)
-            => base.AddServices(serviceCollection)
-                .AddSingleton<ConfigurationStoreOptions>();
+        protected override IServiceCollection AddServices(IServiceCollection serviceCollection) =>
+            base.AddServices(serviceCollection).AddSingleton<ConfigurationStoreOptions>();
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base.AddOptions(builder)
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
                 .EnableDetailedErrors()
                 .EnableSensitiveDataLogging()
                 .ConfigureWarnings(
-                    b => b.Default(WarningBehavior.Throw)
-                        .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
-                        .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning));
+                    b =>
+                        b.Default(WarningBehavior.Throw)
+                            .Log(CoreEventId.SensitiveDataLoggingEnabledWarning)
+                            .Log(CoreEventId.PossibleUnintendedReferenceComparisonWarning)
+                );
 
-        protected override bool UsePooling
-            => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
+        protected override bool UsePooling => false; // The IdentityServer ConfigurationDbContext has additional service dependencies
     }
 }

@@ -20,8 +20,7 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     ///     Creates a new instance of the <see cref="TableExpressionBase" /> class.
     /// </summary>
     /// <param name="alias">A string alias for the table source.</param>
-    protected TableExpressionBase(string? alias)
-        : this(alias, annotations: null)
+    protected TableExpressionBase(string? alias) : this(alias, annotations: null)
     {
         Alias = alias;
     }
@@ -53,16 +52,13 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     public virtual string? Alias { get; internal set; }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(object);
+    public override Type Type => typeof(object);
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
     ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
@@ -71,8 +67,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     protected abstract void Print(ExpressionPrinter expressionPrinter);
 
     /// <inheritdoc />
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => Print(expressionPrinter);
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        Print(expressionPrinter);
 
     /// <summary>
     ///     Creates a printable string representation of annotations associated with the given expression using <see cref="ExpressionPrinter" />.
@@ -90,18 +86,18 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TableExpressionBase tableExpressionBase
-                && Equals(tableExpressionBase));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TableExpressionBase tableExpressionBase && Equals(tableExpressionBase)
+        );
 
-    private bool Equals(TableExpressionBase tableExpressionBase)
-        => Alias == tableExpressionBase.Alias;
+    private bool Equals(TableExpressionBase tableExpressionBase) =>
+        Alias == tableExpressionBase.Alias;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => 0;
+    public override int GetHashCode() => 0;
 
     /// <summary>
     ///     Adds an annotation to this object. Throws if an annotation with the specified name already exists.
@@ -116,7 +112,9 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
         {
             return Equals(oldAnnotation.Value, value)
                 ? this
-                : throw new InvalidOperationException(CoreStrings.DuplicateAnnotation(name, this.Print()));
+                : throw new InvalidOperationException(
+                    CoreStrings.DuplicateAnnotation(name, this.Print())
+                );
         }
 
         var annotation = new Annotation(name, value);
@@ -129,7 +127,9 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     /// </summary>
     /// <param name="annotations">The annotations to be applied.</param>
     /// <returns>The new expression with given annotations.</returns>
-    protected abstract TableExpressionBase CreateWithAnnotations(IEnumerable<IAnnotation> annotations);
+    protected abstract TableExpressionBase CreateWithAnnotations(
+        IEnumerable<IAnnotation> annotations
+    );
 
     /// <summary>
     ///     Gets the annotation with the given name, returning <see langword="null" /> if it does not exist.
@@ -138,8 +138,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     /// <returns>
     ///     The existing annotation if an annotation with the specified name already exists. Otherwise, <see langword="null" />.
     /// </returns>
-    public virtual IAnnotation? FindAnnotation(string name)
-        => _annotations == null
+    public virtual IAnnotation? FindAnnotation(string name) =>
+        _annotations == null
             ? null
             : _annotations.TryGetValue(name, out var annotation)
                 ? annotation
@@ -148,6 +148,6 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     /// <summary>
     ///     Gets all annotations on the current object.
     /// </summary>
-    public virtual IEnumerable<IAnnotation> GetAnnotations()
-        => _annotations?.Values ?? Enumerable.Empty<IAnnotation>();
+    public virtual IEnumerable<IAnnotation> GetAnnotations() =>
+        _annotations?.Values ?? Enumerable.Empty<IAnnotation>();
 }

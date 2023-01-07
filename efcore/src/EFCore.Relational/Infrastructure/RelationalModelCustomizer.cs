@@ -29,8 +29,6 @@ public class RelationalModelCustomizer : ModelCustomizer
     ///     Initializes a new instance of the <see cref="RelationalModelCustomizer" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    public RelationalModelCustomizer(ModelCustomizerDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public RelationalModelCustomizer(ModelCustomizerDependencies dependencies) : base(dependencies)
+    { }
 }

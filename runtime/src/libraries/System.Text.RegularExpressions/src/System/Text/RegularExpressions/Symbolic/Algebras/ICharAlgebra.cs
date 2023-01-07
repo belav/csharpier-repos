@@ -16,7 +16,12 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Add both uppercase and lowercase elelements if caseInsensitive is true using the given culture
         /// or the current culture when the given culture is null.
         /// </summary>
-        T RangeConstraint(char lower, char upper, bool caseInsensitive = false, string? culture = null);
+        T RangeConstraint(
+            char lower,
+            char upper,
+            bool caseInsensitive = false,
+            string? culture = null
+        );
 
         /// <summary>
         /// Make a constraint describing a singleton set containing the character c, or

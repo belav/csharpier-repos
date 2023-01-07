@@ -13,15 +13,18 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
     {
         public static void Main(string[] args)
         {
-            #if DEBUG
+#if DEBUG
             if (args.Any(a => string.Equals(a, "--debug", StringComparison.Ordinal)))
             {
-                args = args.Where(a => !string.Equals(a, "--debug", StringComparison.Ordinal)).ToArray();
-                Console.WriteLine($"Waiting for debugger. Process ID: {Process.GetCurrentProcess().Id}");
+                args = args.Where(a => !string.Equals(a, "--debug", StringComparison.Ordinal))
+                    .ToArray();
+                Console.WriteLine(
+                    $"Waiting for debugger. Process ID: {Process.GetCurrentProcess().Id}"
+                );
                 Console.WriteLine("Press ENTER to continue");
                 Console.ReadLine();
             }
-            #endif
+#endif
 
             var app = new CommandLineApplication();
             app.Description = "Crank's Revenge";
@@ -32,16 +35,19 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             WorkerCommand.Register(app);
             ServerCommand.Register(app);
 
-            app.Command("help", cmd =>
-            {
-                var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for.");
-
-                cmd.OnExecute(() =>
+            app.Command(
+                "help",
+                cmd =>
                 {
-                    app.ShowHelp(commandArgument.Value);
-                    return 0;
-                });
-            });
+                    var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for.");
+
+                    cmd.OnExecute(() =>
+                    {
+                        app.ShowHelp(commandArgument.Value);
+                        return 0;
+                    });
+                }
+            );
 
             app.OnExecute(() =>
             {

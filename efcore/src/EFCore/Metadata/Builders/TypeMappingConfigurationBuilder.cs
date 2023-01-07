@@ -117,8 +117,8 @@ public class TypeMappingConfigurationBuilder
     /// </summary>
     /// <typeparam name="TConversion">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual TypeMappingConfigurationBuilder HasConversion<TConversion>()
-        => HasConversion(typeof(TConversion));
+    public virtual TypeMappingConfigurationBuilder HasConversion<TConversion>() =>
+        HasConversion(typeof(TConversion));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -149,8 +149,7 @@ public class TypeMappingConfigurationBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -159,8 +158,7 @@ public class TypeMappingConfigurationBuilder
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -168,8 +166,7 @@ public class TypeMappingConfigurationBuilder
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

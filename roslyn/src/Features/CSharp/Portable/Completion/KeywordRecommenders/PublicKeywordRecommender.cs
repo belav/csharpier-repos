@@ -10,27 +10,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class PublicKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public PublicKeywordRecommender()
-            : base(SyntaxKind.PublicKeyword)
+        public PublicKeywordRecommender() : base(SyntaxKind.PublicKeyword) { }
+
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
+            return context.IsGlobalStatementContext
+                || IsValidContextForType(context, cancellationToken)
+                || IsValidContextForMember(context, cancellationToken);
         }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static bool IsValidContextForMember(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsGlobalStatementContext ||
-                IsValidContextForType(context, cancellationToken) ||
-                IsValidContextForMember(context, cancellationToken);
-        }
-
-        private static bool IsValidContextForMember(CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            if (context.SyntaxTree.IsGlobalMemberDeclarationContext(context.Position, SyntaxKindSet.AllGlobalMemberModifiers, cancellationToken) ||
-                context.IsMemberDeclarationContext(
+            if (
+                context.SyntaxTree.IsGlobalMemberDeclarationContext(
+                    context.Position,
+                    SyntaxKindSet.AllGlobalMemberModifiers,
+                    cancellationToken
+                )
+                || context.IsMemberDeclarationContext(
                     validModifiers: SyntaxKindSet.AllMemberModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: false,
-                    cancellationToken: cancellationToken))
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 return CheckPreviousAccessibilityModifiers(context);
             }
@@ -38,9 +48,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             return false;
         }
 
-        private static bool IsValidContextForType(CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static bool IsValidContextForType(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (context.IsTypeDeclarationContext(validModifiers: SyntaxKindSet.AllTypeModifiers, validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations, canBePartial: false, cancellationToken: cancellationToken))
+            if (
+                context.IsTypeDeclarationContext(
+                    validModifiers: SyntaxKindSet.AllTypeModifiers,
+                    validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                    canBePartial: false,
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 return CheckPreviousAccessibilityModifiers(context);
             }
@@ -51,11 +71,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         private static bool CheckPreviousAccessibilityModifiers(CSharpSyntaxContext context)
         {
             var precedingModifiers = context.PrecedingModifiers;
-            return
-                !precedingModifiers.Contains(SyntaxKind.PublicKeyword) &&
-                !precedingModifiers.Contains(SyntaxKind.InternalKeyword) &&
-                !precedingModifiers.Contains(SyntaxKind.ProtectedKeyword) &&
-                !precedingModifiers.Contains(SyntaxKind.PrivateKeyword);
+            return !precedingModifiers.Contains(SyntaxKind.PublicKeyword)
+                && !precedingModifiers.Contains(SyntaxKind.InternalKeyword)
+                && !precedingModifiers.Contains(SyntaxKind.ProtectedKeyword)
+                && !precedingModifiers.Contains(SyntaxKind.PrivateKeyword);
         }
     }
 }

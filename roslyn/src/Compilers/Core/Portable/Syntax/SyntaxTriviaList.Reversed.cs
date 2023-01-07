@@ -40,8 +40,7 @@ namespace Microsoft.CodeAnalysis
                 return new ReversedEnumeratorImpl(in _list);
             }
 
-            IEnumerator
-                IEnumerable.GetEnumerator()
+            IEnumerator IEnumerable.GetEnumerator()
             {
                 if (_list.Count == 0)
                 {
@@ -78,8 +77,7 @@ namespace Microsoft.CodeAnalysis
                 private GreenNode? _current;
                 private int _position;
 
-                internal Enumerator(in SyntaxTriviaList list)
-                    : this()
+                internal Enumerator(in SyntaxTriviaList list) : this()
                 {
                     if (list.Node is object)
                     {
@@ -152,9 +150,7 @@ namespace Microsoft.CodeAnalysis
                     throw new NotSupportedException();
                 }
 
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
     }

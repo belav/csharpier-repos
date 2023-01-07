@@ -16,7 +16,10 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type expectedType = typeof(object);
 
             // Act
-            DefaultExpressionFingerprint fingerprint = new DefaultExpressionFingerprint(expectedNodeType, expectedType);
+            DefaultExpressionFingerprint fingerprint = new DefaultExpressionFingerprint(
+                expectedNodeType,
+                expectedType
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -31,8 +34,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            DefaultExpressionFingerprint fingerprint1 = new DefaultExpressionFingerprint(nodeType, type);
-            DefaultExpressionFingerprint fingerprint2 = new DefaultExpressionFingerprint(nodeType, type);
+            DefaultExpressionFingerprint fingerprint1 = new DefaultExpressionFingerprint(
+                nodeType,
+                type
+            );
+            DefaultExpressionFingerprint fingerprint2 = new DefaultExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -47,8 +56,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            DefaultExpressionFingerprint fingerprint1 = new DefaultExpressionFingerprint(nodeType, type);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            DefaultExpressionFingerprint fingerprint1 = new DefaultExpressionFingerprint(
+                nodeType,
+                type
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -62,8 +77,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            DefaultExpressionFingerprint fingerprint1 = new DefaultExpressionFingerprint(nodeType, type);
-            DefaultExpressionFingerprint fingerprint2 = new DefaultExpressionFingerprint(nodeType, typeof(string));
+            DefaultExpressionFingerprint fingerprint1 = new DefaultExpressionFingerprint(
+                nodeType,
+                type
+            );
+            DefaultExpressionFingerprint fingerprint2 = new DefaultExpressionFingerprint(
+                nodeType,
+                typeof(string)
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

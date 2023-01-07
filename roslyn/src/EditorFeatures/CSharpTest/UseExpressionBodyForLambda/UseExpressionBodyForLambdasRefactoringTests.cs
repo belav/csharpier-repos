@@ -18,26 +18,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForLambdasRefactoringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseExpressionBodyForLambdaCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseExpressionBodyForLambdaCodeRefactoringProvider();
 
         private OptionsCollection UseExpressionBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+            );
 
         private OptionsCollection UseExpressionBodyDisabledDiagnostic =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.WhenPossibleWithSilentEnforcement
+            );
 
         private OptionsCollection UseBlockBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.NeverWithSuggestionEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.NeverWithSuggestionEnforcement
+            );
 
         private OptionsCollection UseBlockBodyDisabledDiagnostic =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedLambdas, CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedLambdas,
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
 
         [Fact]
         public async Task TestNotOfferedIfUserPrefersExpressionBodiesAndInBlockBody()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -48,14 +62,16 @@ class C
             return x.ToString();
         }
     }
-}", parameters: new TestParameters(options: UseExpressionBody));
+}",
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
 
         [Fact]
         public async Task TestOfferedIfUserPrefersExpressionBodiesWithoutDiagnosticAndInBlockBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -67,7 +83,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -75,14 +91,16 @@ class C
     {
         Func<int, string> f = x => x.ToString();
     }
-}", parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic));
+}",
+                parameters: new TestParameters(options: UseExpressionBodyDisabledDiagnostic)
+            );
         }
 
         [Fact]
         public async Task TestOfferedIfUserPrefersBlockBodiesAndInBlockBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -94,7 +112,7 @@ class C
         };
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -102,27 +120,31 @@ class C
     {
         Func<int, string> f = x => x.ToString();
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
         public async Task TestNotOfferedInMethod()
         {
             await TestMissingAsync(
-@"class C
+                @"class C
 {
     int [|Goo|]()
     {
         return 1;
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
         public async Task TestNotOfferedIfUserPrefersBlockBodiesAndInExpressionBody()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -130,14 +152,16 @@ class C
     {
         Func<int, string> f = x [||]=> x.ToString();
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact]
         public async Task TestOfferedIfUserPrefersBlockBodiesWithoutDiagnosticAndInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -146,7 +170,7 @@ class C
         Func<int, string> f = x [||]=> x.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -157,14 +181,16 @@ class C
             return x.ToString();
         };
     }
-}", parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic));
+}",
+                parameters: new TestParameters(options: UseBlockBodyDisabledDiagnostic)
+            );
         }
 
         [Fact]
         public async Task TestOfferedIfUserPrefersExpressionBodiesAndInExpressionBody()
         {
             await TestInRegularAndScript1Async(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -173,7 +199,7 @@ class C
         Func<int, string> f = x [||]=> x.ToString();
     }
 }",
-@"using System;
+                @"using System;
 
 class C
 {
@@ -184,7 +210,9 @@ class C
             return x.ToString();
         };
     }
-}", parameters: new TestParameters(options: UseExpressionBody));
+}",
+                parameters: new TestParameters(options: UseExpressionBody)
+            );
         }
     }
 }

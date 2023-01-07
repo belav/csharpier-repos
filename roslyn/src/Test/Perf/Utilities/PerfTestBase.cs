@@ -26,7 +26,7 @@ namespace Roslyn.Test.Performance.Utilities
         public abstract void Setup();
 
         /// <summary>
-        /// The body of the test.  In most cases, this method will be shelling out to an 
+        /// The body of the test.  In most cases, this method will be shelling out to an
         /// external tool.
         /// </summary>
         public abstract void Test();
@@ -43,7 +43,7 @@ namespace Roslyn.Test.Performance.Utilities
 
         /// <summary>
         /// The name of the process that the profiler should pay attention to.
-        /// 
+        ///
         /// 'csc' is an example.
         /// </summary>
         public abstract string MeasuredProc { get; }

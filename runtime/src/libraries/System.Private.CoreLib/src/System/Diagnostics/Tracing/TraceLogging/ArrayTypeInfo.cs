@@ -7,8 +7,7 @@ namespace System.Diagnostics.Tracing
     {
         private readonly TraceLoggingTypeInfo elementInfo;
 
-        public ArrayTypeInfo(Type type, TraceLoggingTypeInfo elementInfo)
-            : base(type)
+        public ArrayTypeInfo(Type type, TraceLoggingTypeInfo elementInfo) : base(type)
         {
             this.elementInfo = elementInfo;
         }
@@ -16,7 +15,8 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string? name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);

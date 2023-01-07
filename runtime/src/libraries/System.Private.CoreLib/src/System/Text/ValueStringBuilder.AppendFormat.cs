@@ -11,7 +11,11 @@ namespace System.Text
     {
         // Copied from StringBuilder, can't be done via generic extension
         // as ValueStringBuilder is a ref struct and cannot be used in a generic.
-        internal void AppendFormatHelper(IFormatProvider? provider, string format, ReadOnlySpan<object?> args)
+        internal void AppendFormatHelper(
+            IFormatProvider? provider,
+            string format,
+            ReadOnlySpan<object?> args
+        )
         {
             ArgumentNullException.ThrowIfNull(format);
 
@@ -120,8 +124,7 @@ namespace System.Text
                         do
                         {
                             ch = MoveNext(format, ref pos);
-                        }
-                        while (ch == ' ');
+                        } while (ch == ' ');
 
                         // Consume an optional minus sign indicating left alignment.
                         if (ch == '-')
@@ -211,9 +214,16 @@ namespace System.Text
                 {
                     // If arg is ISpanFormattable and the beginning doesn't need padding,
                     // try formatting it into the remaining current chunk.
-                    if ((leftJustify || width == 0) &&
-                        arg is ISpanFormattable spanFormattableArg &&
-                        spanFormattableArg.TryFormat(_chars.Slice(_pos), out int charsWritten, itemFormatSpan, provider))
+                    if (
+                        (leftJustify || width == 0)
+                        && arg is ISpanFormattable spanFormattableArg
+                        && spanFormattableArg.TryFormat(
+                            _chars.Slice(_pos),
+                            out int charsWritten,
+                            itemFormatSpan,
+                            provider
+                        )
+                    )
                     {
                         _pos += charsWritten;
 
@@ -275,6 +285,7 @@ namespace System.Text
             }
         }
 
-        private static void ThrowFormatInvalidString() => throw new FormatException(SR.Format_InvalidString);
+        private static void ThrowFormatInvalidString() =>
+            throw new FormatException(SR.Format_InvalidString);
     }
 }

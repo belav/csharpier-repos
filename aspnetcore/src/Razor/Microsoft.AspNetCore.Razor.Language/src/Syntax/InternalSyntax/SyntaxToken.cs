@@ -17,8 +17,12 @@ internal class SyntaxToken : RazorSyntaxNode
         Content = content;
     }
 
-    internal SyntaxToken(SyntaxKind kind, string content, GreenNode leadingTrivia, GreenNode trailingTrivia)
-        : base(kind, content.Length)
+    internal SyntaxToken(
+        SyntaxKind kind,
+        string content,
+        GreenNode leadingTrivia,
+        GreenNode trailingTrivia
+    ) : base(kind, content.Length)
     {
         Content = content;
         _leadingTrivia = leadingTrivia;
@@ -27,8 +31,14 @@ internal class SyntaxToken : RazorSyntaxNode
         AdjustFlagsAndWidth(trailingTrivia);
     }
 
-    internal SyntaxToken(SyntaxKind kind, string content, GreenNode leadingTrivia, GreenNode trailingTrivia, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-        : base(kind, content.Length, diagnostics, annotations)
+    internal SyntaxToken(
+        SyntaxKind kind,
+        string content,
+        GreenNode leadingTrivia,
+        GreenNode trailingTrivia,
+        RazorDiagnostic[] diagnostics,
+        SyntaxAnnotation[] annotations
+    ) : base(kind, content.Length, diagnostics, annotations)
     {
         Content = content;
         _leadingTrivia = leadingTrivia;
@@ -108,7 +118,14 @@ internal class SyntaxToken : RazorSyntaxNode
 
     public virtual SyntaxToken TokenWithLeadingTrivia(GreenNode trivia)
     {
-        return new SyntaxToken(Kind, Content, trivia, _trailingTrivia, GetDiagnostics(), GetAnnotations());
+        return new SyntaxToken(
+            Kind,
+            Content,
+            trivia,
+            _trailingTrivia,
+            GetDiagnostics(),
+            GetAnnotations()
+        );
     }
 
     public sealed override GreenNode WithTrailingTrivia(GreenNode trivia)
@@ -118,17 +135,38 @@ internal class SyntaxToken : RazorSyntaxNode
 
     public virtual SyntaxToken TokenWithTrailingTrivia(GreenNode trivia)
     {
-        return new SyntaxToken(Kind, Content, _leadingTrivia, trivia, GetDiagnostics(), GetAnnotations());
+        return new SyntaxToken(
+            Kind,
+            Content,
+            _leadingTrivia,
+            trivia,
+            GetDiagnostics(),
+            GetAnnotations()
+        );
     }
 
     internal override GreenNode SetDiagnostics(RazorDiagnostic[] diagnostics)
     {
-        return new SyntaxToken(Kind, Content, _leadingTrivia, _trailingTrivia, diagnostics, GetAnnotations());
+        return new SyntaxToken(
+            Kind,
+            Content,
+            _leadingTrivia,
+            _trailingTrivia,
+            diagnostics,
+            GetAnnotations()
+        );
     }
 
     internal override GreenNode SetAnnotations(SyntaxAnnotation[] annotations)
     {
-        return new SyntaxToken(Kind, Content, _leadingTrivia, _trailingTrivia, GetDiagnostics(), annotations);
+        return new SyntaxToken(
+            Kind,
+            Content,
+            _leadingTrivia,
+            _trailingTrivia,
+            GetDiagnostics(),
+            annotations
+        );
     }
 
     protected sealed override int GetSlotCount()
@@ -216,8 +254,13 @@ internal class SyntaxToken : RazorSyntaxNode
             Flags |= NodeFlags.IsMissing;
         }
 
-        internal MissingToken(SyntaxKind kind, GreenNode leading, GreenNode trailing, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-            : base(kind, string.Empty, leading, trailing, diagnostics, annotations)
+        internal MissingToken(
+            SyntaxKind kind,
+            GreenNode leading,
+            GreenNode trailing,
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations
+        ) : base(kind, string.Empty, leading, trailing, diagnostics, annotations)
         {
             Flags |= NodeFlags.IsMissing;
         }

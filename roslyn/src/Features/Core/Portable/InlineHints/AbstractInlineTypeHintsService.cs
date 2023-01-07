@@ -20,21 +20,32 @@ namespace Microsoft.CodeAnalysis.InlineHints
     {
         protected static readonly SymbolDisplayFormat s_minimalTypeStyle = new SymbolDisplayFormat(
             genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier | SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         protected abstract TypeHint? TryGetTypeHint(
-            SemanticModel semanticModel, SyntaxNode node,
+            SemanticModel semanticModel,
+            SyntaxNode node,
             bool displayAllOverride,
             bool forImplicitVariableTypes,
             bool forLambdaParameterTypes,
             bool forImplicitObjectCreation,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         public async Task<ImmutableArray<InlineHint>> GetInlineHintsAsync(
-            Document document, TextSpan textSpan, InlineTypeHintsOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            InlineTypeHintsOptions options,
+            SymbolDescriptionOptions displayOptions,
+            CancellationToken cancellationToken
+        )
         {
             // TODO: https://github.com/dotnet/roslyn/issues/57283
-            var globalOptions = document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
+            var globalOptions =
+                document.Project.Solution.Services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
             var displayAllOverride = globalOptions.InlineHintsOptionsDisplayAllOverride;
 
             var enabledForTypes = options.EnabledForTypes;
@@ -44,24 +55,36 @@ namespace Microsoft.CodeAnalysis.InlineHints
             var forImplicitVariableTypes = enabledForTypes && options.ForImplicitVariableTypes;
             var forLambdaParameterTypes = enabledForTypes && options.ForLambdaParameterTypes;
             var forImplicitObjectCreation = enabledForTypes && options.ForImplicitObjectCreation;
-            if (!forImplicitVariableTypes && !forLambdaParameterTypes && !forImplicitObjectCreation && !displayAllOverride)
+            if (
+                !forImplicitVariableTypes
+                && !forLambdaParameterTypes
+                && !forImplicitObjectCreation
+                && !displayAllOverride
+            )
                 return ImmutableArray<InlineHint>.Empty;
 
-            var anonymousTypeService = document.GetRequiredLanguageService<IStructuralTypeDisplayService>();
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var anonymousTypeService =
+                document.GetRequiredLanguageService<IStructuralTypeDisplayService>();
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             using var _1 = ArrayBuilder<InlineHint>.GetInstance(out var result);
 
             foreach (var node in root.DescendantNodes(n => n.Span.IntersectsWith(textSpan)))
             {
                 var hintOpt = TryGetTypeHint(
-                    semanticModel, node,
+                    semanticModel,
+                    node,
                     displayAllOverride,
                     forImplicitVariableTypes,
                     forLambdaParameterTypes,
                     forImplicitObjectCreation,
-                    cancellationToken);
+                    cancellationToken
+                );
                 if (hintOpt == null)
                     continue;
 
@@ -80,9 +103,18 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 finalParts.AddRange(suffix);
                 var taggedText = finalParts.ToTaggedText();
 
-                result.Add(new InlineHint(
-                    span, taggedText, textChange,
-                    InlineHintHelpers.GetDescriptionFunction(span.Start, type.GetSymbolKey(cancellationToken: cancellationToken), displayOptions)));
+                result.Add(
+                    new InlineHint(
+                        span,
+                        taggedText,
+                        textChange,
+                        InlineHintHelpers.GetDescriptionFunction(
+                            span.Start,
+                            type.GetSymbolKey(cancellationToken: cancellationToken),
+                            displayOptions
+                        )
+                    )
+                );
             }
 
             return result.ToImmutable();
@@ -94,7 +126,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             ImmutableArray<SymbolDisplayPart> parts,
             SemanticModel semanticModel,
             int position,
-            HashSet<INamedTypeSymbol>? seenSymbols = null)
+            HashSet<INamedTypeSymbol>? seenSymbols = null
+        )
         {
             seenSymbols ??= new();
 
@@ -104,13 +137,26 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 {
                     if (seenSymbols.Add(anonymousType))
                     {
-                        var anonymousParts = anonymousTypeService.GetAnonymousTypeParts(anonymousType, semanticModel, position);
-                        AddParts(anonymousTypeService, finalParts, anonymousParts, semanticModel, position, seenSymbols);
+                        var anonymousParts = anonymousTypeService.GetAnonymousTypeParts(
+                            anonymousType,
+                            semanticModel,
+                            position
+                        );
+                        AddParts(
+                            anonymousTypeService,
+                            finalParts,
+                            anonymousParts,
+                            semanticModel,
+                            position,
+                            seenSymbols
+                        );
                         seenSymbols.Remove(anonymousType);
                     }
                     else
                     {
-                        finalParts.Add(new SymbolDisplayPart(SymbolDisplayPartKind.Text, symbol: null, "..."));
+                        finalParts.Add(
+                            new SymbolDisplayPart(SymbolDisplayPartKind.Text, symbol: null, "...")
+                        );
                     }
                 }
                 else

@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.OutputCaching;
 /// <remarks>
 /// This attribute requires the output cache middleware.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public sealed class OutputCacheAttribute : Attribute
 {
     // A nullable-int cannot be used as an Attribute parameter.

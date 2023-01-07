@@ -6,10 +6,8 @@ using System;
 
 public class Foo
 {
-
     public static int Main()
     {
-
         const int a = 0x7fffffff; // highest positive int
         const int b = -a - 1; // lowest negative int
         int intMin = b;
@@ -57,7 +55,5 @@ public class Foo
         }
 
         return 100;
-
     }
-
 }

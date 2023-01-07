@@ -15,8 +15,15 @@ public class RdExperienceTests
 {
     public class Foo<T>
     {
-        public string Frob(T t) { return "Frob: " + t.GetType().ToString(); }
-        public string Gizmo(T t) { return "Gizmo: " + t.GetType().ToString(); }
+        public string Frob(T t)
+        {
+            return "Frob: " + t.GetType().ToString();
+        }
+
+        public string Gizmo(T t)
+        {
+            return "Gizmo: " + t.GetType().ToString();
+        }
     }
 
     public class Bar { }

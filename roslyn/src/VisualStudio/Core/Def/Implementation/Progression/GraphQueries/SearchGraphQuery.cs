@@ -21,16 +21,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         public SearchGraphQuery(
             string searchPattern,
             IThreadingContext threadingContext,
-            IAsynchronousOperationListener asyncListener)
+            IAsynchronousOperationListener asyncListener
+        )
         {
             _threadingContext = threadingContext;
             _asyncListener = asyncListener;
             _searchPattern = searchPattern;
         }
 
-        public async Task<GraphBuilder> GetGraphAsync(Solution solution, IGraphContext context, CancellationToken cancellationToken)
+        public async Task<GraphBuilder> GetGraphAsync(
+            Solution solution,
+            IGraphContext context,
+            CancellationToken cancellationToken
+        )
         {
-            var graphBuilder = await GraphBuilder.CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken).ConfigureAwait(false);
+            var graphBuilder = await GraphBuilder
+                .CreateForInputNodesAsync(solution, context.InputNodes, cancellationToken)
+                .ConfigureAwait(false);
             var callback = new ProgressionNavigateToSearchCallback(context, graphBuilder);
             var searcher = NavigateToSearcher.Create(
                 solution,
@@ -38,9 +45,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 callback,
                 _searchPattern,
                 NavigateToUtilities.GetKindsProvided(solution),
-                _threadingContext.DisposalToken);
+                _threadingContext.DisposalToken
+            );
 
-            await searcher.SearchAsync(searchCurrentDocument: false, cancellationToken).ConfigureAwait(false);
+            await searcher
+                .SearchAsync(searchCurrentDocument: false, cancellationToken)
+                .ConfigureAwait(false);
 
             return graphBuilder;
         }

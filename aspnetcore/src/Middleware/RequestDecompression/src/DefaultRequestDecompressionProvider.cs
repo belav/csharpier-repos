@@ -17,7 +17,8 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
 
     public DefaultRequestDecompressionProvider(
         ILogger<DefaultRequestDecompressionProvider> logger,
-        IOptions<RequestDecompressionOptions> options)
+        IOptions<RequestDecompressionOptions> options
+    )
     {
         if (logger is null)
         {
@@ -67,13 +68,28 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Trace, "The Content-Encoding header is empty or not specified. Skipping request decompression.", EventName = "NoContentEncoding")]
+        [LoggerMessage(
+            1,
+            LogLevel.Trace,
+            "The Content-Encoding header is empty or not specified. Skipping request decompression.",
+            EventName = "NoContentEncoding"
+        )]
         public static partial void NoContentEncoding(ILogger logger);
 
-        [LoggerMessage(2, LogLevel.Debug, "Request decompression is not supported for multiple Content-Encodings.", EventName = "MultipleContentEncodingsSpecified")]
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Request decompression is not supported for multiple Content-Encodings.",
+            EventName = "MultipleContentEncodingsSpecified"
+        )]
         public static partial void MultipleContentEncodingsSpecified(ILogger logger);
 
-        [LoggerMessage(3, LogLevel.Debug, "No matching request decompression provider found.", EventName = "NoDecompressionProvider")]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "No matching request decompression provider found.",
+            EventName = "NoDecompressionProvider"
+        )]
         public static partial void NoDecompressionProvider(ILogger logger);
 
         public static void DecompressingWith(ILogger logger, string contentEncoding)
@@ -83,8 +99,14 @@ internal sealed partial class DefaultRequestDecompressionProvider : IRequestDeco
                 DecompressingWithCore(logger, contentEncoding.ToLowerInvariant());
             }
         }
-        
-        [LoggerMessage(4, LogLevel.Debug, "The request will be decompressed with '{ContentEncoding}'.", EventName = "DecompressingWith", SkipEnabledCheck = true)]
+
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "The request will be decompressed with '{ContentEncoding}'.",
+            EventName = "DecompressingWith",
+            SkipEnabledCheck = true
+        )]
         private static partial void DecompressingWithCore(ILogger logger, string contentEncoding);
     }
 }

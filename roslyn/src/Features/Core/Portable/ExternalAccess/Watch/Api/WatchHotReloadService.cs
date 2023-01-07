@@ -20,20 +20,30 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         {
             private readonly ImmutableArray<string> _capabilities;
 
-            public DebuggerService(ImmutableArray<string> capabilities)
-                => _capabilities = capabilities;
+            public DebuggerService(ImmutableArray<string> capabilities) =>
+                _capabilities = capabilities;
 
-            public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellationToken)
-                => ValueTaskFactory.FromResult(ImmutableArray<ManagedActiveStatementDebugInfo>.Empty);
+            public ValueTask<
+                ImmutableArray<ManagedActiveStatementDebugInfo>
+            > GetActiveStatementsAsync(CancellationToken cancellationToken) =>
+                ValueTaskFactory.FromResult(ImmutableArray<ManagedActiveStatementDebugInfo>.Empty);
 
-            public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(Guid module, CancellationToken cancellationToken)
-                => ValueTaskFactory.FromResult(new ManagedHotReloadAvailability(ManagedHotReloadAvailabilityStatus.Available));
+            public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+                Guid module,
+                CancellationToken cancellationToken
+            ) =>
+                ValueTaskFactory.FromResult(
+                    new ManagedHotReloadAvailability(ManagedHotReloadAvailabilityStatus.Available)
+                );
 
-            public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellationToken)
-                => ValueTaskFactory.FromResult(_capabilities);
+            public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
+                CancellationToken cancellationToken
+            ) => ValueTaskFactory.FromResult(_capabilities);
 
-            public ValueTask PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellationToken)
-                => ValueTaskFactory.CompletedTask;
+            public ValueTask PrepareModuleForUpdateAsync(
+                Guid module,
+                CancellationToken cancellationToken
+            ) => ValueTaskFactory.CompletedTask;
         }
 
         public readonly struct Update
@@ -44,7 +54,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
             public readonly ImmutableArray<byte> PdbDelta;
             public readonly ImmutableArray<int> UpdatedTypes;
 
-            public Update(Guid moduleId, ImmutableArray<byte> ilDelta, ImmutableArray<byte> metadataDelta, ImmutableArray<byte> pdbDelta, ImmutableArray<int> updatedTypes)
+            public Update(
+                Guid moduleId,
+                ImmutableArray<byte> ilDelta,
+                ImmutableArray<byte> metadataDelta,
+                ImmutableArray<byte> pdbDelta,
+                ImmutableArray<int> updatedTypes
+            )
             {
                 ModuleId = moduleId;
                 ILDelta = ilDelta;
@@ -61,8 +77,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         private DebuggingSessionId _sessionId;
         private readonly ImmutableArray<string> _capabilities;
 
-        public WatchHotReloadService(HostWorkspaceServices services, ImmutableArray<string> capabilities)
-            => (_encService, _capabilities) = (services.GetRequiredService<IEditAndContinueWorkspaceService>(), capabilities);
+        public WatchHotReloadService(
+            HostWorkspaceServices services,
+            ImmutableArray<string> capabilities
+        ) =>
+            (_encService, _capabilities) = (
+                services.GetRequiredService<IEditAndContinueWorkspaceService>(),
+                capabilities
+            );
 
         /// <summary>
         /// Starts the watcher.
@@ -71,13 +93,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         /// <param name="cancellationToken">Cancellation token.</param>
         public async Task StartSessionAsync(Solution solution, CancellationToken cancellationToken)
         {
-            var newSessionId = await _encService.StartDebuggingSessionAsync(
-                solution,
-                new DebuggerService(_capabilities),
-                captureMatchingDocuments: ImmutableArray<DocumentId>.Empty,
-                captureAllMatchingDocuments: true,
-                reportDiagnostics: false,
-                cancellationToken).ConfigureAwait(false);
+            var newSessionId = await _encService
+                .StartDebuggingSessionAsync(
+                    solution,
+                    new DebuggerService(_capabilities),
+                    captureMatchingDocuments: ImmutableArray<DocumentId>.Empty,
+                    captureAllMatchingDocuments: true,
+                    reportDiagnostics: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             Contract.ThrowIfFalse(_sessionId == default, "Session already started");
             _sessionId = newSessionId;
         }
@@ -91,12 +116,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         /// <returns>
         /// Updates (one for each changed project) and Rude Edit diagnostics. Does not include syntax or semantic diagnostics.
         /// </returns>
-        public async Task<(ImmutableArray<Update> updates, ImmutableArray<Diagnostic> diagnostics)> EmitSolutionUpdateAsync(Solution solution, CancellationToken cancellationToken)
+        public async Task<(
+            ImmutableArray<Update> updates,
+            ImmutableArray<Diagnostic> diagnostics
+        )> EmitSolutionUpdateAsync(Solution solution, CancellationToken cancellationToken)
         {
             var sessionId = _sessionId;
             Contract.ThrowIfFalse(sessionId != default, "Session has not started");
 
-            var results = await _encService.EmitSolutionUpdateAsync(sessionId, solution, s_solutionActiveStatementSpanProvider, cancellationToken).ConfigureAwait(false);
+            var results = await _encService
+                .EmitSolutionUpdateAsync(
+                    sessionId,
+                    solution,
+                    s_solutionActiveStatementSpanProvider,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (results.ModuleUpdates.Status == ModuleUpdateStatus.Ready)
             {
@@ -104,9 +139,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
             }
 
             var updates = results.ModuleUpdates.Updates.SelectAsArray(
-                update => new Update(update.Module, update.ILDelta, update.MetadataDelta, update.PdbDelta, update.UpdatedTypes));
+                update =>
+                    new Update(
+                        update.Module,
+                        update.ILDelta,
+                        update.MetadataDelta,
+                        update.PdbDelta,
+                        update.UpdatedTypes
+                    )
+            );
 
-            var diagnostics = await results.GetAllDiagnosticsAsync(solution, cancellationToken).ConfigureAwait(false);
+            var diagnostics = await results
+                .GetAllDiagnosticsAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
 
             return (updates, diagnostics);
         }
@@ -117,18 +162,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
             _encService.EndDebuggingSession(_sessionId, out _);
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly WatchHotReloadService _instance;
 
-            internal TestAccessor(WatchHotReloadService instance)
-                => _instance = instance;
+            internal TestAccessor(WatchHotReloadService instance) => _instance = instance;
 
-            public DebuggingSessionId SessionId
-                => _instance._sessionId;
+            public DebuggingSessionId SessionId => _instance._sessionId;
         }
     }
 }

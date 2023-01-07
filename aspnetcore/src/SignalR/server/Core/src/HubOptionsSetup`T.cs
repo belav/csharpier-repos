@@ -29,15 +29,19 @@ public class HubOptionsSetup<THub> : IConfigureOptions<HubOptions<THub>> where T
     public void Configure(HubOptions<THub> options)
     {
         // Do a deep copy, otherwise users modifying the HubOptions<THub> list would be changing the global options list
-        options.SupportedProtocols = new List<string>(_hubOptions.SupportedProtocols ?? Array.Empty<string>());
+        options.SupportedProtocols = new List<string>(
+            _hubOptions.SupportedProtocols ?? Array.Empty<string>()
+        );
         options.KeepAliveInterval = _hubOptions.KeepAliveInterval;
         options.HandshakeTimeout = _hubOptions.HandshakeTimeout;
         options.ClientTimeoutInterval = _hubOptions.ClientTimeoutInterval;
         options.EnableDetailedErrors = _hubOptions.EnableDetailedErrors;
         options.MaximumReceiveMessageSize = _hubOptions.MaximumReceiveMessageSize;
         options.StreamBufferCapacity = _hubOptions.StreamBufferCapacity;
-        options.MaximumParallelInvocationsPerClient = _hubOptions.MaximumParallelInvocationsPerClient;
-        options.DisableImplicitFromServicesParameters = _hubOptions.DisableImplicitFromServicesParameters;
+        options.MaximumParallelInvocationsPerClient =
+            _hubOptions.MaximumParallelInvocationsPerClient;
+        options.DisableImplicitFromServicesParameters =
+            _hubOptions.DisableImplicitFromServicesParameters;
 
         options.UserHasSetValues = true;
 

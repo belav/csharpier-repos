@@ -23,15 +23,16 @@ internal sealed class JsonConverterFactoryForMessage : JsonConverterFactory
         return typeof(IMessage).IsAssignableFrom(typeToConvert);
     }
 
-    public override JsonConverter CreateConverter(
-        Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-            typeof(MessageConverter<>).MakeGenericType(new Type[] { typeToConvert }),
-            BindingFlags.Instance | BindingFlags.Public,
-            binder: null,
-            args: new object[] { _context },
-            culture: null)!;
+        JsonConverter converter = (JsonConverter)
+            Activator.CreateInstance(
+                typeof(MessageConverter<>).MakeGenericType(new Type[] { typeToConvert }),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[] { _context },
+                culture: null
+            )!;
 
         return converter;
     }

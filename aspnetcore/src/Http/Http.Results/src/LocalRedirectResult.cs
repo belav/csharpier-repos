@@ -20,10 +20,7 @@ internal sealed partial class LocalRedirectResult : IResult
     /// provided.
     /// </summary>
     /// <param name="localUrl">The local URL to redirect to.</param>
-    public LocalRedirectResult(string localUrl)
-         : this(localUrl, permanent: false)
-    {
-    }
+    public LocalRedirectResult(string localUrl) : this(localUrl, permanent: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -32,9 +29,7 @@ internal sealed partial class LocalRedirectResult : IResult
     /// <param name="localUrl">The local URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     public LocalRedirectResult(string localUrl, bool permanent)
-        : this(localUrl, permanent, preserveMethod: false)
-    {
-    }
+        : this(localUrl, permanent, preserveMethod: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LocalRedirectResult"/> class with the values
@@ -75,7 +70,9 @@ internal sealed partial class LocalRedirectResult : IResult
     {
         if (!SharedUrlHelper.IsLocalUrl(Url))
         {
-            throw new InvalidOperationException("The supplied URL is not local. A URL with an absolute path is considered local if it does not have a host/authority part. URLs using virtual paths ('~/') are also local.");
+            throw new InvalidOperationException(
+                "The supplied URL is not local. A URL with an absolute path is considered local if it does not have a host/authority part. URLs using virtual paths ('~/') are also local."
+            );
         }
 
         var destinationUrl = SharedUrlHelper.Content(httpContext, Url);
@@ -102,9 +99,12 @@ internal sealed partial class LocalRedirectResult : IResult
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information,
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
             "Executing LocalRedirectResult, redirecting to {Destination}.",
-            EventName = "LocalRedirectResultExecuting")]
+            EventName = "LocalRedirectResultExecuting"
+        )]
         public static partial void LocalRedirectResultExecuting(ILogger logger, string destination);
     }
 }

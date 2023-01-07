@@ -19,28 +19,33 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public OwnedNavigationSplitTableBuilder(in StoreObjectIdentifier storeObject, OwnedNavigationBuilder ownedNavigationBuilder)
+    public OwnedNavigationSplitTableBuilder(
+        in StoreObjectIdentifier storeObject,
+        OwnedNavigationBuilder ownedNavigationBuilder
+    )
     {
         Check.DebugAssert(
             storeObject.StoreObjectType == StoreObjectType.Table,
-            "StoreObjectType should be Table, not " + storeObject.StoreObjectType);
+            "StoreObjectType should be Table, not " + storeObject.StoreObjectType
+        );
 
         InternalMappingFragment = EntityTypeMappingFragment.GetOrCreate(
-            ownedNavigationBuilder.OwnedEntityType, storeObject, ConfigurationSource.Explicit);
+            ownedNavigationBuilder.OwnedEntityType,
+            storeObject,
+            ConfigurationSource.Explicit
+        );
         OwnedNavigationBuilder = ownedNavigationBuilder;
     }
 
     /// <summary>
     ///     The specified table name.
     /// </summary>
-    public virtual string Name
-        => MappingFragment.StoreObject.Name;
+    public virtual string Name => MappingFragment.StoreObject.Name;
 
     /// <summary>
     ///     The specified table schema.
     /// </summary>
-    public virtual string? Schema
-        => MappingFragment.StoreObject.Schema;
+    public virtual string? Schema => MappingFragment.StoreObject.Schema;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +59,7 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     /// <summary>
     ///     The mapping fragment being configured.
     /// </summary>
-    public virtual IMutableEntityTypeMappingFragment MappingFragment
-        => InternalMappingFragment;
+    public virtual IMutableEntityTypeMappingFragment MappingFragment => InternalMappingFragment;
 
     private OwnedNavigationBuilder OwnedNavigationBuilder { get; }
 
@@ -84,7 +88,9 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     /// </remarks>
     public virtual TableTriggerBuilder HasTrigger(string modelName)
     {
-        var trigger = EntityTypeBuilder.HasTrigger(OwnedNavigationBuilder.OwnedEntityType, modelName).Metadata;
+        var trigger = EntityTypeBuilder
+            .HasTrigger(OwnedNavigationBuilder.OwnedEntityType, modelName)
+            .Metadata;
         trigger.SetTableName(Name);
         trigger.SetTableSchema(Schema);
 
@@ -97,8 +103,8 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     /// </summary>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ColumnBuilder Property(string propertyName)
-        => new(MappingFragment.StoreObject, OwnedNavigationBuilder.Property(propertyName));
+    public virtual ColumnBuilder Property(string propertyName) =>
+        new(MappingFragment.StoreObject, OwnedNavigationBuilder.Property(propertyName));
 
     /// <summary>
     ///     Maps the property to a column on the current table and returns an object that can be used
@@ -107,8 +113,8 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ColumnBuilder<TProperty> Property<TProperty>(string propertyName)
-        => new(MappingFragment.StoreObject, OwnedNavigationBuilder.Property<TProperty>(propertyName));
+    public virtual ColumnBuilder<TProperty> Property<TProperty>(string propertyName) =>
+        new(MappingFragment.StoreObject, OwnedNavigationBuilder.Property<TProperty>(propertyName));
 
     /// <summary>
     ///     Adds or updates an annotation on the table. If an annotation with the key specified in <paramref name="annotation" />
@@ -121,13 +127,17 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
-        InternalMappingFragment.Builder.HasAnnotation(annotation, value, ConfigurationSource.Explicit);
+        InternalMappingFragment.Builder.HasAnnotation(
+            annotation,
+            value,
+            ConfigurationSource.Explicit
+        );
 
         return this;
     }
 
-    OwnedNavigationBuilder IInfrastructure<OwnedNavigationBuilder>.Instance
-        => OwnedNavigationBuilder;
+    OwnedNavigationBuilder IInfrastructure<OwnedNavigationBuilder>.Instance =>
+        OwnedNavigationBuilder;
 
     #region Hidden System.Object members
 
@@ -136,8 +146,7 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -145,16 +154,14 @@ public class OwnedNavigationSplitTableBuilder : IInfrastructure<OwnedNavigationB
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

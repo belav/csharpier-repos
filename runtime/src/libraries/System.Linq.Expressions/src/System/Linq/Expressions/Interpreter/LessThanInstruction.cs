@@ -9,8 +9,28 @@ namespace System.Linq.Expressions.Interpreter
     internal abstract class LessThanInstruction : Instruction
     {
         private readonly object? _nullValue;
-        private static Instruction? s_SByte, s_Int16, s_Char, s_Int32, s_Int64, s_Byte, s_UInt16, s_UInt32, s_UInt64, s_Single, s_Double;
-        private static Instruction? s_liftedToNullSByte, s_liftedToNullInt16, s_liftedToNullChar, s_liftedToNullInt32, s_liftedToNullInt64, s_liftedToNullByte, s_liftedToNullUInt16, s_liftedToNullUInt32, s_liftedToNullUInt64, s_liftedToNullSingle, s_liftedToNullDouble;
+        private static Instruction? s_SByte,
+            s_Int16,
+            s_Char,
+            s_Int32,
+            s_Int64,
+            s_Byte,
+            s_UInt16,
+            s_UInt32,
+            s_UInt64,
+            s_Single,
+            s_Double;
+        private static Instruction? s_liftedToNullSByte,
+            s_liftedToNullInt16,
+            s_liftedToNullChar,
+            s_liftedToNullInt32,
+            s_liftedToNullInt64,
+            s_liftedToNullByte,
+            s_liftedToNullUInt16,
+            s_liftedToNullUInt32,
+            s_liftedToNullUInt64,
+            s_liftedToNullSingle,
+            s_liftedToNullDouble;
 
         public override int ConsumedStack => 2;
         public override int ProducedStack => 1;
@@ -23,10 +43,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanSByte : LessThanInstruction
         {
-            public LessThanSByte(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanSByte(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -46,10 +63,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanInt16 : LessThanInstruction
         {
-            public LessThanInt16(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanInt16(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -69,10 +83,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanChar : LessThanInstruction
         {
-            public LessThanChar(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanChar(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -92,10 +103,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanInt32 : LessThanInstruction
         {
-            public LessThanInt32(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanInt32(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -115,10 +123,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanInt64 : LessThanInstruction
         {
-            public LessThanInt64(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanInt64(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -138,10 +143,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanByte : LessThanInstruction
         {
-            public LessThanByte(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanByte(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -161,10 +163,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanUInt16 : LessThanInstruction
         {
-            public LessThanUInt16(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanUInt16(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -184,10 +183,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanUInt32 : LessThanInstruction
         {
-            public LessThanUInt32(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanUInt32(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -207,10 +203,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanUInt64 : LessThanInstruction
         {
-            public LessThanUInt64(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanUInt64(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -230,10 +223,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanSingle : LessThanInstruction
         {
-            public LessThanSingle(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanSingle(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -253,10 +243,7 @@ namespace System.Linq.Expressions.Interpreter
 
         private sealed class LessThanDouble : LessThanInstruction
         {
-            public LessThanDouble(object? nullValue)
-                : base(nullValue)
-            {
-            }
+            public LessThanDouble(object? nullValue) : base(nullValue) { }
 
             public override int Run(InterpretedFrame frame)
             {
@@ -273,6 +260,7 @@ namespace System.Linq.Expressions.Interpreter
                 return 1;
             }
         }
+
         public static Instruction Create(Type type, bool liftedToNull = false)
         {
             Debug.Assert(!type.IsEnum);

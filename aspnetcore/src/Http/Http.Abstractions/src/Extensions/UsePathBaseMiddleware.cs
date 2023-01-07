@@ -46,14 +46,24 @@ public class UsePathBaseMiddleware
             throw new ArgumentNullException(nameof(context));
         }
 
-        if (context.Request.Path.StartsWithSegments(_pathBase, out var matchedPath, out var remainingPath))
+        if (
+            context.Request.Path.StartsWithSegments(
+                _pathBase,
+                out var matchedPath,
+                out var remainingPath
+            )
+        )
         {
             return InvokeCore(context, matchedPath, remainingPath);
         }
         return _next(context);
     }
 
-    private async Task InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+    private async Task InvokeCore(
+        HttpContext context,
+        PathString matchedPath,
+        PathString remainingPath
+    )
     {
         var originalPath = context.Request.Path;
         var originalPathBase = context.Request.PathBase;

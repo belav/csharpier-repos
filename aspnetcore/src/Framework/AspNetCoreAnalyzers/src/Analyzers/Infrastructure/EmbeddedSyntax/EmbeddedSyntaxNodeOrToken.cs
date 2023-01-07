@@ -39,12 +39,13 @@ internal struct EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>
     [MemberNotNullWhen(true, nameof(Node))]
     public bool IsNode => Node != null;
 
-    public TextSpan? GetFullSpan()
-        => IsNode ? Node.GetFullSpan() : _token.GetFullSpan();
+    public TextSpan? GetFullSpan() => IsNode ? Node.GetFullSpan() : _token.GetFullSpan();
 
-    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(TSyntaxNode? node)
-        => new(node);
+    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(
+        TSyntaxNode? node
+    ) => new(node);
 
-    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(EmbeddedSyntaxToken<TSyntaxKind> token)
-        => new(token);
+    public static implicit operator EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>(
+        EmbeddedSyntaxToken<TSyntaxKind> token
+    ) => new(token);
 }

@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.TaskList
     {
         [DataMember(Order = 0)]
         public string Text { get; }
+
         [DataMember(Order = 1)]
         public int Priority { get; }
 
@@ -32,9 +33,16 @@ namespace Microsoft.CodeAnalysis.TaskList
 
             foreach (var item in items)
             {
-                if (item.Split(':') is [var token, var priorityString] &&
-                    !string.IsNullOrWhiteSpace(token) &&
-                    int.TryParse(priorityString, NumberStyles.None, CultureInfo.InvariantCulture, out var priority))
+                if (
+                    item.Split(':') is [var token, var priorityString]
+                    && !string.IsNullOrWhiteSpace(token)
+                    && int.TryParse(
+                        priorityString,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out var priority
+                    )
+                )
                 {
                     result.Add(new TaskListItemDescriptor(token, priority));
                 }

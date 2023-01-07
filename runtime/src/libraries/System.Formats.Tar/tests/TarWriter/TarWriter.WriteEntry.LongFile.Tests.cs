@@ -15,27 +15,60 @@ namespace System.Formats.Tar.Tests
         {
             foreach (bool unseekableStream in new[] { false, true })
             {
-                foreach (TarEntryFormat entryFormat in new[] { TarEntryFormat.V7, TarEntryFormat.Ustar, TarEntryFormat.Gnu, TarEntryFormat.Pax })
+                foreach (
+                    TarEntryFormat entryFormat in new[]
+                    {
+                        TarEntryFormat.V7,
+                        TarEntryFormat.Ustar,
+                        TarEntryFormat.Gnu,
+                        TarEntryFormat.Pax
+                    }
+                )
                 {
                     yield return new object[] { entryFormat, LegacyMaxFileSize, unseekableStream };
                 }
 
                 // Pax supports unlimited size files.
-                yield return new object[] { TarEntryFormat.Pax, LegacyMaxFileSize + 1, unseekableStream };
+                yield return new object[]
+                {
+                    TarEntryFormat.Pax,
+                    LegacyMaxFileSize + 1,
+                    unseekableStream
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(WriteEntry_LongFileSize_TheoryData))]
-        public void WriteEntry_LongFileSize(TarEntryFormat entryFormat, long size, bool unseekableStream)
+        public void WriteEntry_LongFileSize(
+            TarEntryFormat entryFormat,
+            long size,
+            bool unseekableStream
+        )
         {
             // Write archive with a 8 Gb long entry.
-            using FileStream tarFile = File.Open(GetTestFilePath(), new FileStreamOptions { Access = FileAccess.ReadWrite, Mode = FileMode.Create, Options = FileOptions.DeleteOnClose });
-            Stream s = unseekableStream ? new WrappedStream(tarFile, tarFile.CanRead, tarFile.CanWrite, canSeek: false) : tarFile;
+            using FileStream tarFile = File.Open(
+                GetTestFilePath(),
+                new FileStreamOptions
+                {
+                    Access = FileAccess.ReadWrite,
+                    Mode = FileMode.Create,
+                    Options = FileOptions.DeleteOnClose
+                }
+            );
+            Stream s = unseekableStream
+                ? new WrappedStream(tarFile, tarFile.CanRead, tarFile.CanWrite, canSeek: false)
+                : tarFile;
 
             using (TarWriter writer = new(s, leaveOpen: true))
             {
-                TarEntry writeEntry = InvokeTarEntryCreationConstructor(entryFormat, entryFormat is TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile, "foo");
+                TarEntry writeEntry = InvokeTarEntryCreationConstructor(
+                    entryFormat,
+                    entryFormat is TarEntryFormat.V7
+                        ? TarEntryType.V7RegularFile
+                        : TarEntryType.RegularFile,
+                    "foo"
+                );
                 writeEntry.DataStream = new SimulatedDataStream(size);
                 writer.WriteEntry(writeEntry);
             }
@@ -74,9 +107,13 @@ namespace System.Formats.Tar.Tests
 
                 while (dataStream.Position < dummyDataOffset)
                 {
-                    int bufSize = (int)Math.Min(seekBuffer.Length, dummyDataOffset - dataStream.Position);
+                    int bufSize = (int)
+                        Math.Min(seekBuffer.Length, dummyDataOffset - dataStream.Position);
                     int res = dataStream.Read(seekBuffer.Slice(0, bufSize));
-                    Assert.True(res > 0, "Unseekable stream finished before expected - Something went very wrong");
+                    Assert.True(
+                        res > 0,
+                        "Unseekable stream finished before expected - Something went very wrong"
+                    );
                 }
             }
 

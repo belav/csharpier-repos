@@ -154,7 +154,6 @@ namespace GitHub_21666
                     Console.WriteLine("TestUInt32Containment failed on LeadingZeroCount");
                     return false;
                 }
-
             }
 
             uint* ptr1 = &value;
@@ -223,7 +222,6 @@ namespace GitHub_21666
                     Console.WriteLine("TestUInt64Containment failed on LeadingZeroCount");
                     return false;
                 }
-
             }
 
             ulong* ptr1 = &value;
@@ -254,7 +252,10 @@ namespace GitHub_21666
                     return false;
                 }
 
-                if (Sse42.X64.Crc32(0xffffffffffffffffUL, ulongArray[*ptr + 1]) != 0x0000000073d74d75UL)
+                if (
+                    Sse42.X64.Crc32(0xffffffffffffffffUL, ulongArray[*ptr + 1])
+                    != 0x0000000073d74d75UL
+                )
                 {
                     Console.WriteLine("TestUInt64Containment failed on Crc32");
                     return false;

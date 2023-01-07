@@ -21,7 +21,9 @@ internal sealed class WorkDispatcher<TKey, TValue> where TKey : notnull
             }
 
             // This is the task that we'll return to all waiters. We'll complete it when the factory is complete
-            var tcs = new TaskCompletionSource<TValue?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<TValue?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             if (_workers.TryAdd(key, tcs.Task))
             {
@@ -48,7 +50,11 @@ internal sealed class WorkDispatcher<TKey, TValue> where TKey : notnull
         }
     }
 
-    public async Task<TValue?> ScheduleAsync<TState>(TKey key, TState state, Func<TKey, TState, Task<TValue?>> valueFactory)
+    public async Task<TValue?> ScheduleAsync<TState>(
+        TKey key,
+        TState state,
+        Func<TKey, TState, Task<TValue?>> valueFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(key);
 
@@ -60,7 +66,9 @@ internal sealed class WorkDispatcher<TKey, TValue> where TKey : notnull
             }
 
             // This is the task that we'll return to all waiters. We'll complete it when the factory is complete
-            var tcs = new TaskCompletionSource<TValue?>(TaskCreationOptions.RunContinuationsAsynchronously);
+            var tcs = new TaskCompletionSource<TValue?>(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             if (_workers.TryAdd(key, tcs.Task))
             {

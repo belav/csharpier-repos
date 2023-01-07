@@ -19,7 +19,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
             public readonly Action<GenerationVerifier> Verifier;
             public readonly CompilationDifference? CompilationDifference;
 
-            public GenerationInfo(CSharpCompilation compilation, MetadataReader reader, CompilationDifference? diff, EmitBaseline baseline, Action<GenerationVerifier> verifier)
+            public GenerationInfo(
+                CSharpCompilation compilation,
+                MetadataReader reader,
+                CompilationDifference? diff,
+                EmitBaseline baseline,
+                Action<GenerationVerifier> verifier
+            )
             {
                 Compilation = compilation;
                 MetadataReader = reader;

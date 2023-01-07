@@ -31,10 +31,14 @@ namespace RunTests
             }
 
             fileContentsBuilder.AppendLine($@"/Platform:{options.Architecture}");
-            fileContentsBuilder.AppendLine($@"/Logger:xunit;LogFilePath={GetResultsFilePath(workItem, options, "xml")}");
+            fileContentsBuilder.AppendLine(
+                $@"/Logger:xunit;LogFilePath={GetResultsFilePath(workItem, options, "xml")}"
+            );
             if (options.IncludeHtml)
             {
-                fileContentsBuilder.AppendLine($@"/Logger:html;LogFileName={GetResultsFilePath(workItem, options, "html")}");
+                fileContentsBuilder.AppendLine(
+                    $@"/Logger:html;LogFileName={GetResultsFilePath(workItem, options, "html")}"
+                );
             }
 
             var blameOption = "CollectHangDump";
@@ -54,14 +58,19 @@ namespace RunTests
             // Helix timeout is 15 minutes as helix jobs fully timeout in 30minutes.  So in order to capture dumps we need the timeout
             // to be 2x shorter than the expected test run time (15min) in case only the last test hangs.
             var timeout = options.UseHelix ? "15minutes" : "25minutes";
-            fileContentsBuilder.AppendLine($"/Blame:{blameOption};TestTimeout={timeout};DumpType=full");
+            fileContentsBuilder.AppendLine(
+                $"/Blame:{blameOption};TestTimeout={timeout};DumpType=full"
+            );
 
             // Specifies the results directory - this is where dumps from the blame options will get published.
             fileContentsBuilder.AppendLine($"/ResultsDirectory:{options.TestResultsDirectory}");
 
             // Build the filter string
             var filterStringBuilder = new StringBuilder();
-            var filters = workItem.Filters.Values.SelectMany(filter => filter).Where(filter => !string.IsNullOrEmpty(filter.FullyQualifiedName)).ToImmutableArray();
+            var filters = workItem.Filters.Values
+                .SelectMany(filter => filter)
+                .Where(filter => !string.IsNullOrEmpty(filter.FullyQualifiedName))
+                .ToImmutableArray();
 
             if (filters.Length > 0 || !string.IsNullOrWhiteSpace(options.TestFilter))
             {
@@ -100,24 +109,50 @@ namespace RunTests
         {
             var dotnetDir = Path.GetDirectoryName(dotnetPath)!;
             var sdkDir = Path.Combine(dotnetDir, "sdk");
-            var vsTestConsolePath = Directory.EnumerateFiles(sdkDir, "vstest.console.dll", SearchOption.AllDirectories).Last();
+            var vsTestConsolePath = Directory
+                .EnumerateFiles(sdkDir, "vstest.console.dll", SearchOption.AllDirectories)
+                .Last();
             return vsTestConsolePath;
         }
 
-        private static string GetResultsFilePath(WorkItemInfo workItemInfo, Options options, string suffix = "xml")
+        private static string GetResultsFilePath(
+            WorkItemInfo workItemInfo,
+            Options options,
+            string suffix = "xml"
+        )
         {
-            var fileName = $"WorkItem_{workItemInfo.PartitionIndex}_{options.Architecture}_test_results.{suffix}";
+            var fileName =
+                $"WorkItem_{workItemInfo.PartitionIndex}_{options.Architecture}_test_results.{suffix}";
             return Path.Combine(options.TestResultsDirectory, fileName);
         }
 
-        public async Task<TestResult> RunTestAsync(WorkItemInfo workItemInfo, Options options, CancellationToken cancellationToken)
+        public async Task<TestResult> RunTestAsync(
+            WorkItemInfo workItemInfo,
+            Options options,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await RunTestAsyncInternal(workItemInfo, options, isRetry: false, cancellationToken);
+            var result = await RunTestAsyncInternal(
+                workItemInfo,
+                options,
+                isRetry: false,
+                cancellationToken
+            );
 
             // For integration tests (TestVsi), we make one more attempt to re-run failed tests.
-            if (options.Retry && !HasBuiltInRetry(workItemInfo) && !options.IncludeHtml && !result.Succeeded)
+            if (
+                options.Retry
+                && !HasBuiltInRetry(workItemInfo)
+                && !options.IncludeHtml
+                && !result.Succeeded
+            )
             {
-                return await RunTestAsyncInternal(workItemInfo, options, isRetry: true, cancellationToken);
+                return await RunTestAsyncInternal(
+                    workItemInfo,
+                    options,
+                    isRetry: true,
+                    cancellationToken
+                );
             }
 
             return result;
@@ -125,16 +160,28 @@ namespace RunTests
             static bool HasBuiltInRetry(WorkItemInfo workItemInfo)
             {
                 // vs-extension-testing handles test retry internally.
-                return workItemInfo.Filters.Keys.Any(key => key.AssemblyName == "Microsoft.VisualStudio.LanguageServices.New.IntegrationTests.dll");
+                return workItemInfo.Filters.Keys.Any(
+                    key =>
+                        key.AssemblyName
+                        == "Microsoft.VisualStudio.LanguageServices.New.IntegrationTests.dll"
+                );
             }
         }
 
-        private async Task<TestResult> RunTestAsyncInternal(WorkItemInfo workItemInfo, Options options, bool isRetry, CancellationToken cancellationToken)
+        private async Task<TestResult> RunTestAsyncInternal(
+            WorkItemInfo workItemInfo,
+            Options options,
+            bool isRetry,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 var rspFileContents = BuildRspFileContents(workItemInfo, options);
-                var rspFilePath = Path.Combine(getRspDirectory(), $"vstest_{workItemInfo.PartitionIndex}.rsp");
+                var rspFilePath = Path.Combine(
+                    getRspDirectory(),
+                    $"vstest_{workItemInfo.PartitionIndex}.rsp"
+                );
                 File.WriteAllText(rspFilePath, rspFileContents);
 
                 var vsTestConsolePath = GetVsTestConsolePath(options.DotnetFilePath);
@@ -143,7 +190,9 @@ namespace RunTests
 
                 var resultsFilePath = GetResultsFilePath(workItemInfo, options);
                 var resultsDir = Path.GetDirectoryName(resultsFilePath);
-                var htmlResultsFilePath = options.IncludeHtml ? GetResultsFilePath(workItemInfo, options, "html") : null;
+                var htmlResultsFilePath = options.IncludeHtml
+                    ? GetResultsFilePath(workItemInfo, options, "html")
+                    : null;
                 var processResultList = new List<ProcessResult>();
 
                 // NOTE: xUnit doesn't always create the log directory
@@ -154,25 +203,35 @@ namespace RunTests
 
                 if (isRetry && File.Exists(resultsFilePath))
                 {
-                    ConsoleUtil.WriteLine("Starting a retry. Tests which failed will run a second time to reduce flakiness.");
+                    ConsoleUtil.WriteLine(
+                        "Starting a retry. Tests which failed will run a second time to reduce flakiness."
+                    );
                     try
                     {
                         var doc = XDocument.Load(resultsFilePath);
-                        foreach (var test in doc.XPathSelectElements("/assemblies/assembly/collection/test[@result='Fail']"))
+                        foreach (
+                            var test in doc.XPathSelectElements(
+                                "/assemblies/assembly/collection/test[@result='Fail']"
+                            )
+                        )
                         {
-                            ConsoleUtil.WriteLine($"  {test.Attribute("name")!.Value}: {test.Attribute("result")!.Value}");
+                            ConsoleUtil.WriteLine(
+                                $"  {test.Attribute("name")!.Value}: {test.Attribute("result")!.Value}"
+                            );
                         }
                     }
                     catch
                     {
-                        ConsoleUtil.WriteLine("  ...Failed to identify the list of specific failures.");
+                        ConsoleUtil.WriteLine(
+                            "  ...Failed to identify the list of specific failures."
+                        );
                     }
 
                     // Copy the results file path, since the new xunit run will overwrite it
                     var backupResultsFilePath = Path.ChangeExtension(resultsFilePath, ".old");
                     File.Copy(resultsFilePath, backupResultsFilePath, overwrite: true);
 
-                    // If running the process with this varialbe added, we assume that this file contains 
+                    // If running the process with this varialbe added, we assume that this file contains
                     // xml logs from the first attempt.
                     environmentVariables.Add("OutputXmlFilePath", backupResultsFilePath);
                 }
@@ -188,15 +247,21 @@ namespace RunTests
                         commandLineArguments,
                         displayWindow: false,
                         captureOutput: true,
-                        environmentVariables: environmentVariables),
+                        environmentVariables: environmentVariables
+                    ),
                     lowPriority: false,
-                    cancellationToken: cancellationToken);
-                Logger.Log($"Create xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName}");
+                    cancellationToken: cancellationToken
+                );
+                Logger.Log(
+                    $"Create xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName}"
+                );
 
                 var xunitProcessResult = await dotnetProcessInfo.Result;
                 var span = DateTime.UtcNow - start;
 
-                Logger.Log($"Exit xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName} with code {xunitProcessResult.ExitCode}");
+                Logger.Log(
+                    $"Exit xunit process with id {dotnetProcessInfo.Id} for test {workItemInfo.DisplayName} with code {xunitProcessResult.ExitCode}"
+                );
                 processResultList.Add(xunitProcessResult);
 
                 if (xunitProcessResult.ExitCode != 0)
@@ -224,9 +289,13 @@ namespace RunTests
                     }
                 }
 
-                Logger.Log($"Command line {workItemInfo.DisplayName} completed in {span.TotalSeconds} seconds: {options.DotnetFilePath} {commandLineArguments}");
-                var standardOutput = string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
-                var errorOutput = string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
+                Logger.Log(
+                    $"Command line {workItemInfo.DisplayName} completed in {span.TotalSeconds} seconds: {options.DotnetFilePath} {commandLineArguments}"
+                );
+                var standardOutput =
+                    string.Join(Environment.NewLine, xunitProcessResult.OutputLines) ?? "";
+                var errorOutput =
+                    string.Join(Environment.NewLine, xunitProcessResult.ErrorLines) ?? "";
 
                 var testResultInfo = new TestResultInfo(
                     exitCode: xunitProcessResult.ExitCode,
@@ -234,13 +303,15 @@ namespace RunTests
                     htmlResultsFilePath: htmlResultsFilePath,
                     elapsed: span,
                     standardOutput: standardOutput,
-                    errorOutput: errorOutput);
+                    errorOutput: errorOutput
+                );
 
                 return new TestResult(
                     workItemInfo,
                     testResultInfo,
                     commandLineArguments,
-                    processResults: ImmutableArray.CreateRange(processResultList));
+                    processResults: ImmutableArray.CreateRange(processResultList)
+                );
 
                 string getRspDirectory()
                 {
@@ -250,14 +321,21 @@ namespace RunTests
                         return Directory.GetCurrentDirectory();
                     }
 
-                    var dirPath = Path.Combine(options.ArtifactsDirectory, "tmp", options.Configuration, "vstest-rsp");
+                    var dirPath = Path.Combine(
+                        options.ArtifactsDirectory,
+                        "tmp",
+                        options.Configuration,
+                        "vstest-rsp"
+                    );
                     Directory.CreateDirectory(dirPath);
                     return dirPath;
                 }
             }
             catch (Exception ex)
             {
-                throw new Exception($"Unable to run {workItemInfo.DisplayName} with {options.DotnetFilePath}. {ex}");
+                throw new Exception(
+                    $"Unable to run {workItemInfo.DisplayName} with {options.DotnetFilePath}. {ex}"
+                );
             }
         }
     }

@@ -32,7 +32,8 @@ internal partial class VectorTest
     private const int DefaultSeed = 20010415;
     private static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
     {
-        string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+        string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase)
+            => new Random().Next(),
         string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
         _ => DefaultSeed
     };
@@ -149,7 +150,7 @@ internal partial class VectorTest
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> VectorOne<T>() where T: struct
+    public static Vector<T> VectorOne<T>() where T : struct
     {
         return Vector<T>.One;
     }
@@ -165,7 +166,7 @@ internal partial class VectorTest
     {
         Vector<float> v1 = new Vector<float>(2.0f);
         Vector<float> result1 = VectorPlusOne<float>(v1);
-        for (int i=0; i < Vector<float>.Count; ++i)
+        for (int i = 0; i < Vector<float>.Count; ++i)
         {
             if (!CheckValue<float>(result1[i], 3.0f))
             {
@@ -210,9 +211,11 @@ internal partial class VectorTest
         Vector3 v1 = new Vector3(3.0f, 4.0f, 5.0f);
         Vector3 result = GetVector3PlusOne(v1);
 
-        if (!CheckValue<float>(result.X, 4.0f) ||
-            !CheckValue<float>(result.Y, 5.0f) ||
-            !CheckValue<float>(result.Z, 6.0f))
+        if (
+            !CheckValue<float>(result.X, 4.0f)
+            || !CheckValue<float>(result.Y, 5.0f)
+            || !CheckValue<float>(result.Z, 6.0f)
+        )
         {
             Console.WriteLine("Vector3ReturnTest did not return expected value");
             return Fail;
@@ -228,7 +231,10 @@ internal partial class VectorTest
         Vector2 result_v2 = F2_v2(0.5F);
         Vector2 expectedResult_v2 = F1_v2(0.5F);
         Console.WriteLine("Result is " + result_v2.ToString());
-        if (!CheckValue<float>(result_v2.X, expectedResult_v2.X) || !CheckValue<float>(result_v2.Y, expectedResult_v2.Y))
+        if (
+            !CheckValue<float>(result_v2.X, expectedResult_v2.X)
+            || !CheckValue<float>(result_v2.Y, expectedResult_v2.Y)
+        )
         {
             Console.WriteLine("Expected result is " + expectedResult_v2.ToString());
             Console.WriteLine("Vector2 test FAILED");
@@ -238,9 +244,11 @@ internal partial class VectorTest
         Vector3 result_v3 = F2_v3(0.6F);
         Vector3 expectedResult_v3 = F1_v3(0.6F);
         Console.WriteLine("Result is " + result_v3.ToString());
-        if (!CheckValue<float>(result_v3.X, expectedResult_v3.X) ||
-            !CheckValue<float>(result_v3.Y, expectedResult_v3.Y) ||
-            !CheckValue<float>(result_v3.Z, expectedResult_v3.Z))
+        if (
+            !CheckValue<float>(result_v3.X, expectedResult_v3.X)
+            || !CheckValue<float>(result_v3.Y, expectedResult_v3.Y)
+            || !CheckValue<float>(result_v3.Z, expectedResult_v3.Z)
+        )
         {
             Console.WriteLine("Expected result is " + expectedResult_v3.ToString());
             Console.WriteLine("Vector3 test FAILED");
@@ -250,10 +258,12 @@ internal partial class VectorTest
         Vector4 result_v4 = F2_v4(0.7F);
         Vector4 expectedResult_v4 = F1_v4(0.7F);
         Console.WriteLine("Result is " + result_v4.ToString());
-        if (!CheckValue<float>(result_v4.X, expectedResult_v4.X) ||
-            !CheckValue<float>(result_v4.Y, expectedResult_v4.Y) ||
-            !CheckValue<float>(result_v4.Z, expectedResult_v4.Z) ||
-            !CheckValue<float>(result_v4.W, expectedResult_v4.W))
+        if (
+            !CheckValue<float>(result_v4.X, expectedResult_v4.X)
+            || !CheckValue<float>(result_v4.Y, expectedResult_v4.Y)
+            || !CheckValue<float>(result_v4.Z, expectedResult_v4.Z)
+            || !CheckValue<float>(result_v4.W, expectedResult_v4.W)
+        )
         {
             Console.WriteLine("Expected result is " + expectedResult_v4.ToString());
             Console.WriteLine("Vector4 test FAILED");

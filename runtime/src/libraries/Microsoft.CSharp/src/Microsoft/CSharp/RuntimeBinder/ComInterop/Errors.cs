@@ -31,7 +31,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         /// </summary>
         internal static Exception DispBadParamCount(object p0)
         {
-            return new System.Reflection.TargetParameterCountException(SR.Format(SR.COMDispatchInvokeError, p0));
+            return new System.Reflection.TargetParameterCountException(
+                SR.Format(SR.COMDispatchInvokeError, p0)
+            );
         }
 
         /// <summary>
@@ -111,7 +113,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         /// </summary>
         internal static Exception AmbiguousConversion(object p0, object p1)
         {
-            return new System.Reflection.AmbiguousMatchException(SR.Format(SR.COMAmbiguousConversion, p0, p1));
+            return new System.Reflection.AmbiguousMatchException(
+                SR.Format(SR.COMAmbiguousConversion, p0, p1)
+            );
         }
     }
 }

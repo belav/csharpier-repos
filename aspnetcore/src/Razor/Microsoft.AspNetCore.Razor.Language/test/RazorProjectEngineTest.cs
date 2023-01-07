@@ -17,7 +17,10 @@ public class RazorProjectEngineTest
         // Arrange
 
         // Act
-        var engine = RazorProjectEngine.Create(RazorConfiguration.Default, Mock.Of<RazorProjectFileSystem>());
+        var engine = RazorProjectEngine.Create(
+            RazorConfiguration.Default,
+            Mock.Of<RazorProjectFileSystem>()
+        );
 
         // Assert
         AssertDefaultPhases(engine);
@@ -37,7 +40,8 @@ public class RazorProjectEngineTest
             phase => Assert.IsType<DefaultRazorDocumentClassifierPhase>(phase),
             phase => Assert.IsType<DefaultRazorDirectiveClassifierPhase>(phase),
             phase => Assert.IsType<DefaultRazorOptimizationPhase>(phase),
-            phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase));
+            phase => Assert.IsType<DefaultRazorCSharpLoweringPhase>(phase)
+        );
     }
 
     private static void AssertDefaultFeatures(RazorProjectEngine engine)
@@ -84,7 +88,8 @@ public class RazorProjectEngineTest
             feature => Assert.IsType<InheritsDirectivePass>(feature),
             feature => Assert.IsType<MetadataAttributePass>(feature),
             feature => Assert.IsType<PreallocatedTagHelperAttributeOptimizationPass>(feature),
-            feature => Assert.IsType<ViewCssScopePass>(feature));
+            feature => Assert.IsType<ViewCssScopePass>(feature)
+        );
     }
 
     private static void AssertDefaultDirectives(RazorProjectEngine engine)
@@ -97,7 +102,8 @@ public class RazorProjectEngineTest
             directive => Assert.Same(ImplementsDirective.Directive, directive),
             directive => Assert.Same(InheritsDirective.Directive, directive),
             directive => Assert.Same(NamespaceDirective.Directive, directive),
-            directive => Assert.Same(AttributeDirective.Directive, directive));
+            directive => Assert.Same(AttributeDirective.Directive, directive)
+        );
     }
 
     private static void AssertDefaultTargetExtensions(RazorProjectEngine engine)
@@ -111,6 +117,7 @@ public class RazorProjectEngineTest
             extension => Assert.IsType<DefaultTagHelperTargetExtension>(extension),
             extension => Assert.IsType<DesignTimeDirectiveTargetExtension>(extension),
             extension => Assert.IsType<MetadataAttributeTargetExtension>(extension),
-            extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension));
+            extension => Assert.IsType<PreallocatedAttributeTargetExtension>(extension)
+        );
     }
 }

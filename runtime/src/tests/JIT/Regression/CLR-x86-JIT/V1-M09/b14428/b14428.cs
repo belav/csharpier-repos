@@ -10,7 +10,6 @@ namespace DefaultNamespace
 
     public class DateTimeCompare
     {
-
         public static int Main()
         {
             Object v1 = new DateTime(1952, 2, 19);

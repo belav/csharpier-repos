@@ -19,10 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Organizing
         public async Task TestTypes1(string typeKind)
         {
             var initial =
-$@"static public {typeKind} C {{
+                $@"static public {typeKind} C {{
 }}";
             var final =
-$@"public static {typeKind} C {{
+                $@"public static {typeKind} C {{
 }}";
 
             await CheckAsync(initial, final);
@@ -34,10 +34,10 @@ $@"public static {typeKind} C {{
         public async Task TestTypes2(string typeKind)
         {
             var initial =
-$@"public static {typeKind} D {{
+                $@"public static {typeKind} D {{
 }}";
             var final =
-$@"public static {typeKind} D {{
+                $@"public static {typeKind} D {{
 }}";
 
             await CheckAsync(initial, final);
@@ -49,10 +49,10 @@ $@"public static {typeKind} D {{
         public async Task TestTypes3(string typeKind)
         {
             var initial =
-$@"public static partial {typeKind} E {{
+                $@"public static partial {typeKind} E {{
 }}";
             var final =
-$@"public static partial {typeKind} E {{
+                $@"public static partial {typeKind} E {{
 }}";
 
             await CheckAsync(initial, final);
@@ -64,10 +64,10 @@ $@"public static partial {typeKind} E {{
         public async Task TestTypes4(string typeKind)
         {
             var initial =
-$@"static public partial {typeKind} F {{
+                $@"static public partial {typeKind} F {{
 }}";
             var final =
-$@"public static partial {typeKind} F {{
+                $@"public static partial {typeKind} F {{
 }}";
 
             await CheckAsync(initial, final);
@@ -79,10 +79,10 @@ $@"public static partial {typeKind} F {{
         public async Task TestTypes5(string typeKind)
         {
             var initial =
-$@"unsafe public static {typeKind} F {{
+                $@"unsafe public static {typeKind} F {{
 }}";
             var final =
-$@"public static unsafe {typeKind} F {{
+                $@"public static unsafe {typeKind} F {{
 }}";
 
             await CheckAsync(initial, final);

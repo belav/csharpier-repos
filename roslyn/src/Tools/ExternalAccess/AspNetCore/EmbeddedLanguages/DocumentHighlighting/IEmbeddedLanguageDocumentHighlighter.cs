@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
             SemanticModel semanticModel,
             SyntaxToken token,
             int position,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     internal enum AspNetCoreHighlightSpanKind

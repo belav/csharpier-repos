@@ -14,11 +14,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddUsing
 {
     public partial class AddUsingTests
     {
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task TestWhereExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -27,7 +30,7 @@ class Program
     {
         var q = args.[|Where|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -36,14 +39,18 @@ class Program
     static void Main(string[] args)
     {
         var q = args.Where }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task TestSelectExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -52,7 +59,7 @@ class Program
     {
         var q = args.[|Select|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,14 +68,18 @@ class Program
     static void Main(string[] args)
     {
         var q = args.Select }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task TestGroupByExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -77,7 +88,7 @@ class Program
     {
         var q = args.[|GroupBy|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -86,14 +97,18 @@ class Program
     static void Main(string[] args)
     {
         var q = args.GroupBy }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task TestJoinExtension()
         {
             await TestInRegularAndScriptAsync(
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 class Program
@@ -102,7 +117,7 @@ class Program
     {
         var q = args.[|Join|] }
 }",
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -111,27 +126,38 @@ class Program
     static void Main(string[] args)
     {
         var q = args.Join }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task RegressionFor8455()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M()
     {
         int dim = (int)Math.[|Min|]();
     }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")
+        ]
         public async Task TestExtensionWithThePresenceOfTheSameNameNonExtensionMethod()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS1
+                @"namespace NS1
 {
     class Program
     {
@@ -158,7 +184,7 @@ namespace NS2
         }
     }
 }",
-@"using NS2;
+                @"using NS2;
 
 namespace NS1
 {
@@ -186,15 +212,22 @@ namespace NS2
         {
         }
     }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(920398, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/920398")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(920398, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/920398")
+        ]
         [WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")]
         public async Task TestExtensionWithThePresenceOfTheSameNameNonExtensionPrivateMethod()
         {
             await TestInRegularAndScriptAsync(
-@"namespace NS1
+                @"namespace NS1
 {
     class Program
     {
@@ -221,7 +254,7 @@ namespace NS2
         }
     }
 }",
-@"using NS2;
+                @"using NS2;
 
 namespace NS1
 {
@@ -249,15 +282,22 @@ namespace NS2
         {
         }
     }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(920398, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/920398")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(920398, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/920398")
+        ]
         [WorkItem(772321, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/772321")]
         public async Task TestExtensionWithThePresenceOfTheSameNameExtensionPrivateMethod()
         {
             await TestInRegularAndScriptAsync(
-@"using NS2;
+                @"using NS2;
 
 namespace NS1
 {
@@ -293,7 +333,7 @@ namespace NS3
         }
     }
 }",
-@"using NS2;
+                @"using NS2;
 using NS3;
 
 namespace NS1
@@ -329,14 +369,21 @@ namespace NS3
         {
         }
     }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -357,7 +404,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -379,14 +426,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod2()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -407,7 +461,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -429,14 +483,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod3()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -457,7 +518,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -479,14 +540,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod4()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -507,7 +575,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -529,14 +597,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod5()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -557,7 +632,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -579,14 +654,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod6()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -607,7 +689,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -629,14 +711,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod7()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -657,7 +746,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -679,14 +768,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod8()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -707,7 +803,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -729,14 +825,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod9()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -757,7 +860,7 @@ namespace Ext
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -779,14 +882,21 @@ namespace Ext
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod10()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -817,7 +927,7 @@ namespace Ext2
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext;
 
@@ -849,14 +959,21 @@ namespace Ext2
         }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(269, "https://github.com/dotnet/roslyn/issues/269")
+        ]
         public async Task TestAddUsingForAddExtentionMethod11()
         {
             await TestAsync(
-@"using System;
+                @"using System;
 using System.Collections;
 
 class X : IEnumerable
@@ -887,7 +1004,7 @@ namespace Ext2
         }
     }
 }",
-@"using System;
+                @"using System;
 using System.Collections;
 using Ext2;
 
@@ -919,15 +1036,22 @@ namespace Ext2
         }
     }
 }",
-index: 1,
-parseOptions: null);
+                index: 1,
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")
+        ]
         public async Task InExtensionMethodUnderConditionalAccessExpression()
         {
             var initialText =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <Document FilePath = ""Program"">
 namespace Sample
@@ -958,7 +1082,7 @@ namespace Sample.Extensions
 </Workspace>";
 
             var expectedText =
-@"
+                @"
 using Sample.Extensions;
 
 namespace Sample
@@ -976,11 +1100,17 @@ namespace Sample
             await TestInRegularAndScriptAsync(initialText, expectedText);
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")
+        ]
         public async Task InExtensionMethodUnderMultipleConditionalAccessExpressions()
         {
             var initialText =
-  @"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <Document FilePath = ""Program"">
 public class C
@@ -1007,7 +1137,7 @@ namespace Sample.Extensions
 </Workspace>";
 
             var expectedText =
-@"
+                @"
 using Sample.Extensions;
 
 public class C
@@ -1021,11 +1151,17 @@ public class C
             await TestInRegularAndScriptAsync(initialText, expectedText);
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(3818, "https://github.com/dotnet/roslyn/issues/3818")
+        ]
         public async Task InExtensionMethodUnderMultipleConditionalAccessExpressions2()
         {
             var initialText =
-  @"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <Document FilePath = ""Program"">
 public class C
@@ -1052,7 +1188,7 @@ namespace Sample.Extensions
 </Workspace>";
 
             var expectedText =
-@"
+                @"
 using Sample.Extensions;
 
 public class C
@@ -1066,11 +1202,14 @@ public class C
             await TestInRegularAndScriptAsync(initialText, expectedText);
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task TestDeconstructExtension()
         {
             await TestAsync(
-@"
+                @"
 class Program
 {
     void M(Program p)
@@ -1086,7 +1225,7 @@ namespace N
         public static void Deconstruct(this Program p, out int x, out int y) { }
     }
 }",
-@"
+                @"
 using N;
 
 class Program
@@ -1104,16 +1243,20 @@ namespace N
         public static void Deconstruct(this Program p, out int x, out int y) { }
     }
 }",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalTheory(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalTheory(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         [CombinatorialData]
         [WorkItem(16547, "https://github.com/dotnet/roslyn/issues/16547")]
         public async Task TestAddUsingForAddExtentionMethodWithSameNameAsProperty(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 namespace A
 {
     public class Foo
@@ -1140,7 +1283,7 @@ namespace A.Extensions
         }
     }
 }",
-@"
+                @"
 using A.Extensions;
 
 namespace A
@@ -1168,16 +1311,21 @@ namespace A.Extensions
             return foo;
         }
     }
-}", testHost);
+}",
+                testHost
+            );
         }
 
-        [ConditionalTheory(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalTheory(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         [CombinatorialData]
         [WorkItem(39155, "https://github.com/dotnet/roslyn/issues/39155")]
         public async Task TestExtensionGetAwaiterOverload(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -1218,7 +1366,7 @@ namespace A.Extension
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using A.Extension;
@@ -1259,16 +1407,21 @@ namespace A.Extension
         }
     }
 }
-", testHost);
+",
+                testHost
+            );
         }
 
-        [ConditionalTheory(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalTheory(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         [CombinatorialData]
         [WorkItem(39155, "https://github.com/dotnet/roslyn/issues/39155")]
         public async Task TestExtensionSelectOverload(TestHost testHost)
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1296,7 +1449,7 @@ namespace A.Extension
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using A.Extension;
@@ -1324,14 +1477,19 @@ namespace A.Extension
         public static IEnumerable<int> Select(this Foo foo, Func<int, int> f) => null;
     }
 }
-", testHost);
+",
+                testHost
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue)]
+        [ConditionalFact(
+            typeof(IsRelease),
+            Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+        )]
         public async Task TestExtensionDeconstructOverload()
         {
             await TestAsync(
-@"
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1359,7 +1517,7 @@ namespace A.Extension
     }
 }
 ",
-@"
+                @"
 using System;
 using System.Collections.Generic;
 using A.Extension;
@@ -1388,14 +1546,21 @@ namespace A.Extension
     }
 }
 ",
-parseOptions: null);
+                parseOptions: null
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(55117, "https://github.com/dotnet/roslyn/issues/55117")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(55117, "https://github.com/dotnet/roslyn/issues/55117")
+        ]
         public async Task TestMethodConflictWithGenericExtension()
         {
             await TestInRegularAndScriptAsync(
-@"namespace A
+                @"namespace A
 {
     public abstract class Goo
     {
@@ -1420,7 +1585,7 @@ namespace A.Extensions
             => (T)@this.Bar( typeof( T ) );
     }
 }",
-@"using A.Extensions;
+                @"using A.Extensions;
 
 namespace A
 {
@@ -1446,14 +1611,21 @@ namespace A.Extensions
         public static T Bar<T>( this Goo @this )
             => (T)@this.Bar( typeof( T ) );
     }
-}");
+}"
+            );
         }
 
-        [ConditionalFact(typeof(IsRelease), Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue), WorkItem(55117, "https://github.com/dotnet/roslyn/issues/55117")]
+        [
+            ConditionalFact(
+                typeof(IsRelease),
+                Reason = ConditionalSkipReason.TestIsTriggeringMessagePackIssue
+            ),
+            WorkItem(55117, "https://github.com/dotnet/roslyn/issues/55117")
+        ]
         public async Task TestMethodConflictWithConditionalGenericExtension()
         {
             await TestInRegularAndScriptAsync(
-@"namespace A
+                @"namespace A
 {
     public abstract class Goo
     {
@@ -1478,7 +1650,7 @@ namespace A.Extensions
             => (T)@this.Bar( typeof( T ) );
     }
 }",
-@"using A.Extensions;
+                @"using A.Extensions;
 
 namespace A
 {
@@ -1504,7 +1676,8 @@ namespace A.Extensions
         public static T Bar<T>( this Goo @this )
             => (T)@this.Bar( typeof( T ) );
     }
-}");
+}"
+            );
         }
     }
 }

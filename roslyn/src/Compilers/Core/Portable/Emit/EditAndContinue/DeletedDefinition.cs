@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
     {
         protected readonly T OldDefinition;
 
-        private readonly Dictionary<ITypeDefinition, DeletedTypeDefinition> _typesUsedByDeletedMembers;
+        private readonly Dictionary<
+            ITypeDefinition,
+            DeletedTypeDefinition
+        > _typesUsedByDeletedMembers;
 
         /// <summary>
         /// Constructs a deleted definition
@@ -24,26 +27,42 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
         /// Cache of type definitions used in signatures of deleted members. Used so that if a method 'C M(C c)' is deleted
         /// we use the same <see cref="DeletedTypeDefinition"/> instance for the method return type, and the parameter type.
         /// </param>
-        protected DeletedDefinition(T oldDefinition, Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers)
+        protected DeletedDefinition(
+            T oldDefinition,
+            Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
+        )
         {
             OldDefinition = oldDefinition;
 
             _typesUsedByDeletedMembers = typesUsedByDeletedMembers;
         }
 
-        protected ImmutableArray<DeletedParameterDefinition> WrapParameters(ImmutableArray<IParameterDefinition> parameters)
+        protected ImmutableArray<DeletedParameterDefinition> WrapParameters(
+            ImmutableArray<IParameterDefinition> parameters
+        )
         {
-            return parameters.SelectAsArray(p => new DeletedParameterDefinition(p, _typesUsedByDeletedMembers));
+            return parameters.SelectAsArray(
+                p => new DeletedParameterDefinition(p, _typesUsedByDeletedMembers)
+            );
         }
 
-        protected IEnumerable<DeletedGenericParameter> WrapGenericMethodParameters(DeletedMethodDefinition methodDefinition, IEnumerable<IGenericMethodParameter> genericParameters)
+        protected IEnumerable<DeletedGenericParameter> WrapGenericMethodParameters(
+            DeletedMethodDefinition methodDefinition,
+            IEnumerable<IGenericMethodParameter> genericParameters
+        )
         {
-            return genericParameters.Select(p => new DeletedGenericParameter(p, methodDefinition, _typesUsedByDeletedMembers));
+            return genericParameters.Select(
+                p => new DeletedGenericParameter(p, methodDefinition, _typesUsedByDeletedMembers)
+            );
         }
 
-        protected IEnumerable<DeletedCustomAttribute> WrapAttributes(IEnumerable<ICustomAttribute> attributes)
+        protected IEnumerable<DeletedCustomAttribute> WrapAttributes(
+            IEnumerable<ICustomAttribute> attributes
+        )
         {
-            return attributes.Select(a => new DeletedCustomAttribute(a, _typesUsedByDeletedMembers));
+            return attributes.Select(
+                a => new DeletedCustomAttribute(a, _typesUsedByDeletedMembers)
+            );
         }
 
         [return: NotNullIfNotNull("typeReference")]

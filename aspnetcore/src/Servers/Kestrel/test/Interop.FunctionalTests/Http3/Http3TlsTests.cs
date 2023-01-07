@@ -23,32 +23,41 @@ public class Http3TlsTests : LoggedTest
     [MsQuicSupported]
     public async Task ServerCertificateSelector_Invoked()
     {
-        var builder = CreateHostBuilder(async context =>
-        {
-            await context.Response.WriteAsync("Hello World");
-        }, configureKestrel: kestrelOptions =>
-        {
-            kestrelOptions.ListenAnyIP(0, listenOptions =>
+        var builder = CreateHostBuilder(
+            async context =>
             {
-                listenOptions.Protocols = HttpProtocols.Http3;
-                listenOptions.UseHttps(httpsOptions =>
-                {
-                    httpsOptions.ServerCertificateSelector = (context, host) =>
+                await context.Response.WriteAsync("Hello World");
+            },
+            configureKestrel: kestrelOptions =>
+            {
+                kestrelOptions.ListenAnyIP(
+                    0,
+                    listenOptions =>
                     {
-                        Assert.Null(context); // The context isn't available durring the quic handshake.
-                        Assert.Equal("testhost", host);
-                        return TestResources.GetTestCertificate();
-                    };
-                });
-            });
-        });
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificateSelector = (context, host) =>
+                            {
+                                Assert.Null(context); // The context isn't available durring the quic handshake.
+                                Assert.Equal("testhost", host);
+                                return TestResources.GetTestCertificate();
+                            };
+                        });
+                    }
+                );
+            }
+        );
 
         using var host = builder.Build();
         using var client = HttpHelpers.CreateClient();
 
         await host.StartAsync().DefaultTimeout();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"https://127.0.0.1:{host.GetPort()}/"
+        );
         request.Version = HttpVersion.Version30;
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
         request.Headers.Host = "testhost";
@@ -66,34 +75,48 @@ public class Http3TlsTests : LoggedTest
     [InlineData(ClientCertificateMode.RequireCertificate)]
     [InlineData(ClientCertificateMode.AllowCertificate)]
     [MsQuicSupported]
-    [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2,
-        SkipReason = "Windows versions newer than 20H2 do not enable TLS 1.1: https://github.com/dotnet/aspnetcore/issues/37761")]
-    public async Task ClientCertificate_AllowOrRequire_Available_Accepted(ClientCertificateMode mode)
+    [MaximumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win10_20H2,
+        SkipReason = "Windows versions newer than 20H2 do not enable TLS 1.1: https://github.com/dotnet/aspnetcore/issues/37761"
+    )]
+    public async Task ClientCertificate_AllowOrRequire_Available_Accepted(
+        ClientCertificateMode mode
+    )
     {
-        var builder = CreateHostBuilder(async context =>
-        {
-            var hasCert = context.Connection.ClientCertificate != null;
-            await context.Response.WriteAsync(hasCert.ToString());
-        }, configureKestrel: kestrelOptions =>
-        {
-            kestrelOptions.ListenAnyIP(0, listenOptions =>
+        var builder = CreateHostBuilder(
+            async context =>
             {
-                listenOptions.Protocols = HttpProtocols.Http3;
-                listenOptions.UseHttps(httpsOptions =>
-                {
-                    httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                    httpsOptions.ClientCertificateMode = mode;
-                    httpsOptions.AllowAnyClientCertificate();
-                });
-            });
-        });
+                var hasCert = context.Connection.ClientCertificate != null;
+                await context.Response.WriteAsync(hasCert.ToString());
+            },
+            configureKestrel: kestrelOptions =>
+            {
+                kestrelOptions.ListenAnyIP(
+                    0,
+                    listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode = mode;
+                            httpsOptions.AllowAnyClientCertificate();
+                        });
+                    }
+                );
+            }
+        );
 
         using var host = builder.Build();
         using var client = HttpHelpers.CreateClient(includeClientCert: true);
 
         await host.StartAsync().DefaultTimeout();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"https://127.0.0.1:{host.GetPort()}/"
+        );
         request.Version = HttpVersion.Version30;
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -113,30 +136,39 @@ public class Http3TlsTests : LoggedTest
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41131")]
     public async Task ClientCertificate_NoOrDelayed_Available_Ignored(ClientCertificateMode mode)
     {
-        var builder = CreateHostBuilder(async context =>
-        {
-            var hasCert = context.Connection.ClientCertificate != null;
-            await context.Response.WriteAsync(hasCert.ToString());
-        }, configureKestrel: kestrelOptions =>
-        {
-            kestrelOptions.ListenAnyIP(0, listenOptions =>
+        var builder = CreateHostBuilder(
+            async context =>
             {
-                listenOptions.Protocols = HttpProtocols.Http3;
-                listenOptions.UseHttps(httpsOptions =>
-                {
-                    httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                    httpsOptions.ClientCertificateMode = mode;
-                    httpsOptions.AllowAnyClientCertificate();
-                });
-            });
-        });
+                var hasCert = context.Connection.ClientCertificate != null;
+                await context.Response.WriteAsync(hasCert.ToString());
+            },
+            configureKestrel: kestrelOptions =>
+            {
+                kestrelOptions.ListenAnyIP(
+                    0,
+                    listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode = mode;
+                            httpsOptions.AllowAnyClientCertificate();
+                        });
+                    }
+                );
+            }
+        );
 
         using var host = builder.Build();
         using var client = HttpHelpers.CreateClient(includeClientCert: true);
 
         await host.StartAsync().DefaultTimeout();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"https://127.0.0.1:{host.GetPort()}/"
+        );
         request.Version = HttpVersion.Version30;
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -156,36 +188,48 @@ public class Http3TlsTests : LoggedTest
     [InlineData(ClientCertificateMode.AllowCertificate, true)]
     [MsQuicSupported]
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/35070")]
-    public async Task ClientCertificate_AllowOrRequire_Available_Invalid_Refused(ClientCertificateMode mode, bool serverAllowInvalid)
+    public async Task ClientCertificate_AllowOrRequire_Available_Invalid_Refused(
+        ClientCertificateMode mode,
+        bool serverAllowInvalid
+    )
     {
-        var builder = CreateHostBuilder(async context =>
-        {
-            var hasCert = context.Connection.ClientCertificate != null;
-            await context.Response.WriteAsync(hasCert.ToString());
-        }, configureKestrel: kestrelOptions =>
-        {
-            kestrelOptions.ListenAnyIP(0, listenOptions =>
+        var builder = CreateHostBuilder(
+            async context =>
             {
-                listenOptions.Protocols = HttpProtocols.Http3;
-                listenOptions.UseHttps(httpsOptions =>
-                {
-                    httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                    httpsOptions.ClientCertificateMode = mode;
-
-                    if (serverAllowInvalid)
+                var hasCert = context.Connection.ClientCertificate != null;
+                await context.Response.WriteAsync(hasCert.ToString());
+            },
+            configureKestrel: kestrelOptions =>
+            {
+                kestrelOptions.ListenAnyIP(
+                    0,
+                    listenOptions =>
                     {
-                        httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode = mode;
+
+                            if (serverAllowInvalid)
+                            {
+                                httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
+                            }
+                        });
                     }
-                });
-            });
-        });
+                );
+            }
+        );
 
         using var host = builder.Build();
         using var client = HttpHelpers.CreateClient(includeClientCert: true);
 
         await host.StartAsync().DefaultTimeout();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"https://127.0.0.1:{host.GetPort()}/"
+        );
         request.Version = HttpVersion.Version30;
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -193,7 +237,9 @@ public class Http3TlsTests : LoggedTest
 
         if (!serverAllowInvalid)
         {
-            var ex = await Assert.ThrowsAnyAsync<HttpRequestException>(() => sendTask).DefaultTimeout();
+            var ex = await Assert
+                .ThrowsAnyAsync<HttpRequestException>(() => sendTask)
+                .DefaultTimeout();
             Logger.LogInformation(ex, "SendAsync successfully threw error.");
         }
         else
@@ -212,30 +258,40 @@ public class Http3TlsTests : LoggedTest
     [MsQuicSupported]
     public async Task ClientCertificate_Allow_NotAvailable_Optional()
     {
-        var builder = CreateHostBuilder(async context =>
-        {
-            var hasCert = context.Connection.ClientCertificate != null;
-            await context.Response.WriteAsync(hasCert.ToString());
-        }, configureKestrel: kestrelOptions =>
-        {
-            kestrelOptions.ListenAnyIP(0, listenOptions =>
+        var builder = CreateHostBuilder(
+            async context =>
             {
-                listenOptions.Protocols = HttpProtocols.Http3;
-                listenOptions.UseHttps(httpsOptions =>
-                {
-                    httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                    httpsOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate;
-                    httpsOptions.AllowAnyClientCertificate();
-                });
-            });
-        });
+                var hasCert = context.Connection.ClientCertificate != null;
+                await context.Response.WriteAsync(hasCert.ToString());
+            },
+            configureKestrel: kestrelOptions =>
+            {
+                kestrelOptions.ListenAnyIP(
+                    0,
+                    listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(httpsOptions =>
+                        {
+                            httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
+                            httpsOptions.ClientCertificateMode =
+                                ClientCertificateMode.AllowCertificate;
+                            httpsOptions.AllowAnyClientCertificate();
+                        });
+                    }
+                );
+            }
+        );
 
         using var host = builder.Build();
         using var client = HttpHelpers.CreateClient(includeClientCert: false);
 
         await host.StartAsync().DefaultTimeout();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"https://127.0.0.1:{host.GetPort()}/"
+        );
         request.Version = HttpVersion.Version30;
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -252,30 +308,44 @@ public class Http3TlsTests : LoggedTest
     [InlineData(HttpProtocols.Http1AndHttp2AndHttp3)]
     public async Task OnAuthenticate_Available_Throws(HttpProtocols protocols)
     {
-        await ServerRetryHelper.BindPortsWithRetry(async port =>
-        {
-            var builder = CreateHostBuilder(async context =>
+        await ServerRetryHelper.BindPortsWithRetry(
+            async port =>
             {
-                await context.Response.WriteAsync("Hello World");
-            }, configureKestrel: kestrelOptions =>
-            {
-                kestrelOptions.ListenAnyIP(port, listenOptions =>
-                {
-                    listenOptions.Protocols = protocols;
-                    listenOptions.UseHttps(httpsOptions =>
+                var builder = CreateHostBuilder(
+                    async context =>
                     {
-                        httpsOptions.ServerCertificate = TestResources.GetTestCertificate();
-                        httpsOptions.OnAuthenticate = (_, _) => { };
-                    });
-                });
-            });
+                        await context.Response.WriteAsync("Hello World");
+                    },
+                    configureKestrel: kestrelOptions =>
+                    {
+                        kestrelOptions.ListenAnyIP(
+                            port,
+                            listenOptions =>
+                            {
+                                listenOptions.Protocols = protocols;
+                                listenOptions.UseHttps(httpsOptions =>
+                                {
+                                    httpsOptions.ServerCertificate =
+                                        TestResources.GetTestCertificate();
+                                    httpsOptions.OnAuthenticate = (_, _) => { };
+                                });
+                            }
+                        );
+                    }
+                );
 
-            using var host = builder.Build();
+                using var host = builder.Build();
 
-            var exception = await Assert.ThrowsAsync<NotSupportedException>(() =>
-                host.StartAsync().DefaultTimeout());
-            Assert.Equal("The OnAuthenticate callback is not supported with HTTP/3.", exception.Message);
-        }, Logger);
+                var exception = await Assert.ThrowsAsync<NotSupportedException>(
+                    () => host.StartAsync().DefaultTimeout()
+                );
+                Assert.Equal(
+                    "The OnAuthenticate callback is not supported with HTTP/3.",
+                    exception.Message
+                );
+            },
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -284,36 +354,52 @@ public class Http3TlsTests : LoggedTest
     {
         var configuredState = new object();
         object callbackState = null;
-        var builder = CreateHostBuilder(async context =>
-        {
-            await context.Response.WriteAsync("Hello World");
-        }, configureKestrel: kestrelOptions =>
-        {
-            kestrelOptions.ListenAnyIP(0, listenOptions =>
+        var builder = CreateHostBuilder(
+            async context =>
             {
-                listenOptions.Protocols = HttpProtocols.Http3;
-                listenOptions.UseHttps(new TlsHandshakeCallbackOptions
-                {
-                    OnConnection = (context) =>
+                await context.Response.WriteAsync("Hello World");
+            },
+            configureKestrel: kestrelOptions =>
+            {
+                kestrelOptions.ListenAnyIP(
+                    0,
+                    listenOptions =>
                     {
-                        callbackState = context.State;
-                        return ValueTask.FromResult(new SslServerAuthenticationOptions
-                        {
-                            ServerCertificate = TestResources.GetTestCertificate(),
-                            ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http3 }
-                        });
-                    },
-                    OnConnectionState = configuredState
-                });
-            });
-        });
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(
+                            new TlsHandshakeCallbackOptions
+                            {
+                                OnConnection = (context) =>
+                                {
+                                    callbackState = context.State;
+                                    return ValueTask.FromResult(
+                                        new SslServerAuthenticationOptions
+                                        {
+                                            ServerCertificate = TestResources.GetTestCertificate(),
+                                            ApplicationProtocols = new List<SslApplicationProtocol>
+                                            {
+                                                SslApplicationProtocol.Http3
+                                            }
+                                        }
+                                    );
+                                },
+                                OnConnectionState = configuredState
+                            }
+                        );
+                    }
+                );
+            }
+        );
 
         using var host = builder.Build();
         using var client = HttpHelpers.CreateClient();
 
         await host.StartAsync().DefaultTimeout();
 
-        var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Get,
+            $"https://127.0.0.1:{host.GetPort()}/"
+        );
         request.Version = HttpVersion.Version30;
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
         request.Headers.Host = "testhost";
@@ -329,8 +415,17 @@ public class Http3TlsTests : LoggedTest
         await host.StopAsync().DefaultTimeout();
     }
 
-    private IHostBuilder CreateHostBuilder(RequestDelegate requestDelegate, HttpProtocols? protocol = null, Action<KestrelServerOptions> configureKestrel = null)
+    private IHostBuilder CreateHostBuilder(
+        RequestDelegate requestDelegate,
+        HttpProtocols? protocol = null,
+        Action<KestrelServerOptions> configureKestrel = null
+    )
     {
-        return HttpHelpers.CreateHostBuilder(AddTestLogging, requestDelegate, protocol, configureKestrel);
+        return HttpHelpers.CreateHostBuilder(
+            AddTestLogging,
+            requestDelegate,
+            protocol,
+            configureKestrel
+        );
     }
 }

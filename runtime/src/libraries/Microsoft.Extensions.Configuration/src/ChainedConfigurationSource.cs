@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.Configuration
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>
         /// <returns>A <see cref="ChainedConfigurationProvider"/></returns>
-        public IConfigurationProvider Build(IConfigurationBuilder builder)
-            => new ChainedConfigurationProvider(this);
+        public IConfigurationProvider Build(IConfigurationBuilder builder) =>
+            new ChainedConfigurationProvider(this);
     }
 }

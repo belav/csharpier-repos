@@ -16,8 +16,12 @@ namespace System.Net.Quic.Tests
         [ConditionalFact(nameof(IsQuicUnsupported))]
         public void UnsupportedPlatforms_ThrowsPlatformNotSupportedException()
         {
-            Assert.ThrowsAsync<PlatformNotSupportedException>(async () => await CreateQuicListener());
-            Assert.ThrowsAsync<PlatformNotSupportedException>(async () => await CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0)));
+            Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () => await CreateQuicListener()
+            );
+            Assert.ThrowsAsync<PlatformNotSupportedException>(
+                async () => await CreateQuicConnection(new IPEndPoint(IPAddress.Loopback, 0))
+            );
         }
     }
 }

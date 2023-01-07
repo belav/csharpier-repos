@@ -17,12 +17,9 @@ public class CreatedResult : ObjectResult
     private string? _location;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="CreatedResult"/> class 
-    /// </summary>  
-    public CreatedResult()
-        : base(null)
-    {
-    }
+    /// Initializes a new instance of the <see cref="CreatedResult"/> class
+    /// </summary>
+    public CreatedResult() : base(null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedResult"/> class with the values
@@ -30,8 +27,7 @@ public class CreatedResult : ObjectResult
     /// </summary>
     /// <param name="location">The location at which the content has been created.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public CreatedResult(string? location, object? value)
-        : base(value)
+    public CreatedResult(string? location, object? value) : base(value)
     {
         if (location != null)
         {
@@ -47,8 +43,7 @@ public class CreatedResult : ObjectResult
     /// </summary>
     /// <param name="location">The location at which the content has been created.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public CreatedResult(Uri? location, object? value)
-        : base(value)
+    public CreatedResult(Uri? location, object? value) : base(value)
     {
         if (location != null)
         {
@@ -58,7 +53,10 @@ public class CreatedResult : ObjectResult
             }
             else
             {
-                Location = location.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                Location = location.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
 

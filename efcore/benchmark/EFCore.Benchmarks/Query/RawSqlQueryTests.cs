@@ -32,7 +32,10 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         {
             var fixture = CreateFixture();
             fixture.Initialize(
-                1000, 1000, 2, 2,
+                1000,
+                1000,
+                2,
+                2,
                 ctx =>
                 {
                     if (!string.IsNullOrEmpty(StoredProcedureCreationScript))
@@ -43,7 +46,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
                         ctx.Database.ExecuteSqlRaw(StoredProcedureCreationScript);
 #endif
                     }
-                });
+                }
+            );
 
             _context = fixture.CreateContext();
 
@@ -84,7 +88,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query
         [Benchmark]
         public virtual async Task SelectParameterized()
         {
-            var sql = @"SELECT * FROM ""Products"" WHERE ""CurrentPrice"" >= @p0 AND ""CurrentPrice"" <= @p1";
+            var sql =
+                @"SELECT * FROM ""Products"" WHERE ""CurrentPrice"" >= @p0 AND ""CurrentPrice"" <= @p1";
             var query = _context.Products
 #if OLD_FROM_SQL
                 .FromSql(sql, 10, 14)

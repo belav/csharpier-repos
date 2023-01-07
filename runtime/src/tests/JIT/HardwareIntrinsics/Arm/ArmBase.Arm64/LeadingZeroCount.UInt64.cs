@@ -97,7 +97,6 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             Succeeded = true;
 
-            
             _fld = TestLibrary.Generator.GetUInt64();
             _data = TestLibrary.Generator.GetUInt64();
         }
@@ -121,10 +120,15 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunReflectionScenario_UnsafeRead));
 
-            var result = typeof(ArmBase.Arm64).GetMethod(nameof(ArmBase.Arm64.LeadingZeroCount), new Type[] { typeof(UInt64) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
-                                     });
+            var result = typeof(ArmBase.Arm64)
+                .GetMethod(nameof(ArmBase.Arm64.LeadingZeroCount), new Type[] { typeof(UInt64) })
+                .Invoke(
+                    null,
+                    new object[]
+                    {
+                        Unsafe.ReadUnaligned<UInt64>(ref Unsafe.As<UInt64, byte>(ref _data))
+                    }
+                );
 
             ValidateResult(_data, (Int32)result);
         }
@@ -133,9 +137,7 @@ namespace JIT.HardwareIntrinsics.Arm
         {
             TestLibrary.TestFramework.BeginScenario(nameof(RunClsVarScenario));
 
-            var result = ArmBase.Arm64.LeadingZeroCount(
-                _clsVar
-            );
+            var result = ArmBase.Arm64.LeadingZeroCount(_clsVar);
 
             ValidateResult(_clsVar, result);
         }
@@ -207,15 +209,26 @@ namespace JIT.HardwareIntrinsics.Arm
             }
         }
 
-        private void ValidateResult(UInt64 data, Int32 result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt64 data,
+            Int32 result,
+            [CallerMemberName] string method = ""
+        )
         {
             var isUnexpectedResult = false;
 
-            int expectedResult = 0; for (int index = 63; ((data >> index) & 1) == 0; index--) { expectedResult++; } isUnexpectedResult = (expectedResult != result);
+            int expectedResult = 0;
+            for (int index = 63; ((data >> index) & 1) == 0; index--)
+            {
+                expectedResult++;
+            }
+            isUnexpectedResult = (expectedResult != result);
 
             if (isUnexpectedResult)
             {
-                TestLibrary.TestFramework.LogInformation($"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.LeadingZeroCount)}<Int32>(UInt64): LeadingZeroCount failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"{nameof(ArmBase.Arm64)}.{nameof(ArmBase.Arm64.LeadingZeroCount)}<Int32>(UInt64): LeadingZeroCount failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"    data: {data}");
                 TestLibrary.TestFramework.LogInformation($"  result: {result}");
                 TestLibrary.TestFramework.LogInformation(string.Empty);

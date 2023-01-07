@@ -11,7 +11,10 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
-    using Verify = CSharpCodeFixVerifier<CodeStyle.CSharpFormattingAnalyzer, CodeStyle.CSharpFormattingCodeFixProvider>;
+    using Verify = CSharpCodeFixVerifier<
+        CodeStyle.CSharpFormattingAnalyzer,
+        CodeStyle.CSharpFormattingCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.Formatting)]
     public class FormattingAnalyzerTests
@@ -20,20 +23,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
         public async Task TrailingWhitespace()
         {
             var testCode =
-                "class X[| |]" + Environment.NewLine +
-                "{" + Environment.NewLine +
-                "}" + Environment.NewLine;
+                "class X[| |]"
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "}"
+                + Environment.NewLine;
             var expected =
-                "class X" + Environment.NewLine +
-                "{" + Environment.NewLine +
-                "}" + Environment.NewLine;
+                "class X"
+                + Environment.NewLine
+                + "{"
+                + Environment.NewLine
+                + "}"
+                + Environment.NewLine;
             await Verify.VerifyCodeFixAsync(testCode, expected);
         }
 
         [Fact]
         public async Task TestMissingSpace()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class TypeName
 {
     void Method()
@@ -42,7 +52,8 @@ class TypeName
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class TypeName
 {
     void Method()
@@ -57,7 +68,8 @@ class TypeName
         [Fact]
         public async Task TestAlreadyFormatted()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
     void MyMethod()
@@ -72,7 +84,8 @@ class MyClass
         [Fact]
         public async Task TestNeedsIndentation()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
   $$void MyMethod()
@@ -80,7 +93,8 @@ class MyClass
   $$}
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     void MyMethod()
@@ -95,7 +109,8 @@ class MyClass
         [Fact]
         public async Task TestNeedsIndentationButSuppressed()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
   $$void MyMethod1()
@@ -113,7 +128,8 @@ class MyClass
   $$}
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -138,7 +154,8 @@ class MyClass
         [Fact]
         public async Task TestWhitespaceBetweenMethods1()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -150,7 +167,8 @@ class MyClass
     }
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -169,7 +187,8 @@ class MyClass
         [Fact]
         public async Task TestWhitespaceBetweenMethods2()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -181,7 +200,8 @@ class MyClass
     }
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -201,7 +221,8 @@ class MyClass
         public async Task TestWhitespaceBetweenMethods3()
         {
             // This example has trailing whitespace on both lines preceding MyMethod2
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -213,7 +234,8 @@ class MyClass
     }
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     void MyMethod1()
@@ -232,7 +254,8 @@ class MyClass
         [Fact]
         public async Task TestOverIndentation()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
     [|    |]void MyMethod()
@@ -240,7 +263,8 @@ class MyClass
     [|    |]}
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     void MyMethod()
@@ -255,14 +279,16 @@ class MyClass
         [Fact]
         public async Task TestIncrementalFixesFullLine()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass
 {
     int Property1$${$$get;$$set;$$}
     int Property2$${$$get;$$}
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass
 {
     int Property1 { get; set; }
@@ -274,7 +300,6 @@ class MyClass
             {
                 TestCode = testCode,
                 FixedCode = fixedCode,
-
                 // Each application of a single code fix covers all diagnostics on the same line. In total, two lines
                 // require changes so the number of incremental iterations is exactly 2.
                 NumberOfIncrementalIterations = 2,
@@ -284,20 +309,23 @@ class MyClass
         [Fact]
         public async Task TestEditorConfigUsed()
         {
-            var testCode = @"
+            var testCode =
+                @"
 class MyClass {
     void MyMethod()[| |]{
     }
 }
 ";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class MyClass {
     void MyMethod()
     {
     }
 }
 ";
-            var editorConfig = @"
+            var editorConfig =
+                @"
 root = true
 [*.cs]
 csharp_new_line_before_open_brace = methods
@@ -308,10 +336,7 @@ csharp_new_line_before_open_brace = methods
                 TestState =
                 {
                     Sources = { testCode },
-                    AnalyzerConfigFiles =
-                    {
-                        ("/.editorconfig", editorConfig),
-                    },
+                    AnalyzerConfigFiles = { ("/.editorconfig", editorConfig), },
                 },
                 FixedState = { Sources = { fixedCode } },
             }.RunAsync();

@@ -7,84 +7,124 @@ using Mono.Cecil;
 
 namespace Mono.Linker
 {
-	// Currently this is implemented using heuristics
-	public class CompilerGeneratedState
-	{
-		readonly LinkContext _context;
-		readonly Dictionary<TypeDefinition, MethodDefinition> _compilerGeneratedTypeToUserCodeMethod;
-		readonly HashSet<TypeDefinition> _typesWithPopulatedCache;
+    // Currently this is implemented using heuristics
+    public class CompilerGeneratedState
+    {
+        readonly LinkContext _context;
+        readonly Dictionary<
+            TypeDefinition,
+            MethodDefinition
+        > _compilerGeneratedTypeToUserCodeMethod;
+        readonly HashSet<TypeDefinition> _typesWithPopulatedCache;
 
-		public CompilerGeneratedState (LinkContext context)
-		{
-			_context = context;
-			_compilerGeneratedTypeToUserCodeMethod = new Dictionary<TypeDefinition, MethodDefinition> ();
-			_typesWithPopulatedCache = new HashSet<TypeDefinition> ();
-		}
+        public CompilerGeneratedState(LinkContext context)
+        {
+            _context = context;
+            _compilerGeneratedTypeToUserCodeMethod =
+                new Dictionary<TypeDefinition, MethodDefinition>();
+            _typesWithPopulatedCache = new HashSet<TypeDefinition>();
+        }
 
-		static bool HasRoslynCompilerGeneratedName (TypeDefinition type) =>
-			type.Name.Contains ('<') || (type.DeclaringType != null && HasRoslynCompilerGeneratedName (type.DeclaringType));
+        static bool HasRoslynCompilerGeneratedName(TypeDefinition type) =>
+            type.Name.Contains('<')
+            || (type.DeclaringType != null && HasRoslynCompilerGeneratedName(type.DeclaringType));
 
-		void PopulateCacheForType (TypeDefinition type)
-		{
-			// Avoid repeat scans of the same type
-			if (!_typesWithPopulatedCache.Add (type))
-				return;
+        void PopulateCacheForType(TypeDefinition type)
+        {
+            // Avoid repeat scans of the same type
+            if (!_typesWithPopulatedCache.Add(type))
+                return;
 
-			foreach (MethodDefinition method in type.Methods) {
-				if (!method.HasCustomAttributes)
-					continue;
+            foreach (MethodDefinition method in type.Methods)
+            {
+                if (!method.HasCustomAttributes)
+                    continue;
 
-				foreach (var attribute in method.CustomAttributes) {
-					if (attribute.AttributeType.Namespace != "System.Runtime.CompilerServices")
-						continue;
+                foreach (var attribute in method.CustomAttributes)
+                {
+                    if (attribute.AttributeType.Namespace != "System.Runtime.CompilerServices")
+                        continue;
 
-					switch (attribute.AttributeType.Name) {
-					case "AsyncIteratorStateMachineAttribute":
-					case "AsyncStateMachineAttribute":
-					case "IteratorStateMachineAttribute":
-						TypeDefinition? stateMachineType = GetFirstConstructorArgumentAsType (attribute);
-						if (stateMachineType != null) {
-							if (!_compilerGeneratedTypeToUserCodeMethod.TryAdd (stateMachineType, method)) {
-								var alreadyAssociatedMethod = _compilerGeneratedTypeToUserCodeMethod[stateMachineType];
-								_context.LogWarning (new MessageOrigin (method), DiagnosticId.MethodsAreAssociatedWithStateMachine, method.GetDisplayName (), alreadyAssociatedMethod.GetDisplayName (), stateMachineType.GetDisplayName ());
-							}
-						}
+                    switch (attribute.AttributeType.Name)
+                    {
+                        case "AsyncIteratorStateMachineAttribute":
+                        case "AsyncStateMachineAttribute":
+                        case "IteratorStateMachineAttribute":
+                            TypeDefinition? stateMachineType = GetFirstConstructorArgumentAsType(
+                                attribute
+                            );
+                            if (stateMachineType != null)
+                            {
+                                if (
+                                    !_compilerGeneratedTypeToUserCodeMethod.TryAdd(
+                                        stateMachineType,
+                                        method
+                                    )
+                                )
+                                {
+                                    var alreadyAssociatedMethod =
+                                        _compilerGeneratedTypeToUserCodeMethod[stateMachineType];
+                                    _context.LogWarning(
+                                        new MessageOrigin(method),
+                                        DiagnosticId.MethodsAreAssociatedWithStateMachine,
+                                        method.GetDisplayName(),
+                                        alreadyAssociatedMethod.GetDisplayName(),
+                                        stateMachineType.GetDisplayName()
+                                    );
+                                }
+                            }
 
-						break;
-					}
-				}
-			}
-		}
+                            break;
+                    }
+                }
+            }
+        }
 
-		static TypeDefinition? GetFirstConstructorArgumentAsType (CustomAttribute attribute)
-		{
-			if (!attribute.HasConstructorArguments)
-				return null;
+        static TypeDefinition? GetFirstConstructorArgumentAsType(CustomAttribute attribute)
+        {
+            if (!attribute.HasConstructorArguments)
+                return null;
 
-			return attribute.ConstructorArguments[0].Value as TypeDefinition;
-		}
+            return attribute.ConstructorArguments[0].Value as TypeDefinition;
+        }
 
-		public MethodDefinition? GetUserDefinedMethodForCompilerGeneratedMember (IMemberDefinition sourceMember)
-		{
-			if (sourceMember == null)
-				return null;
+        public MethodDefinition? GetUserDefinedMethodForCompilerGeneratedMember(
+            IMemberDefinition sourceMember
+        )
+        {
+            if (sourceMember == null)
+                return null;
 
-			TypeDefinition compilerGeneratedType = (sourceMember as TypeDefinition) ?? sourceMember.DeclaringType;
-			if (_compilerGeneratedTypeToUserCodeMethod.TryGetValue (compilerGeneratedType, out MethodDefinition? userDefinedMethod))
-				return userDefinedMethod;
+            TypeDefinition compilerGeneratedType =
+                (sourceMember as TypeDefinition) ?? sourceMember.DeclaringType;
+            if (
+                _compilerGeneratedTypeToUserCodeMethod.TryGetValue(
+                    compilerGeneratedType,
+                    out MethodDefinition? userDefinedMethod
+                )
+            )
+                return userDefinedMethod;
 
-			// Only handle async or iterator state machine
-			// So go to the declaring type and check if it's compiler generated (as a perf optimization)
-			if (!HasRoslynCompilerGeneratedName (compilerGeneratedType) || compilerGeneratedType.DeclaringType == null)
-				return null;
+            // Only handle async or iterator state machine
+            // So go to the declaring type and check if it's compiler generated (as a perf optimization)
+            if (
+                !HasRoslynCompilerGeneratedName(compilerGeneratedType)
+                || compilerGeneratedType.DeclaringType == null
+            )
+                return null;
 
-			// Now go to its declaring type and search all methods to find the one which points to the type as its
-			// state machine implementation.
-			PopulateCacheForType (compilerGeneratedType.DeclaringType);
-			if (_compilerGeneratedTypeToUserCodeMethod.TryGetValue (compilerGeneratedType, out userDefinedMethod))
-				return userDefinedMethod;
+            // Now go to its declaring type and search all methods to find the one which points to the type as its
+            // state machine implementation.
+            PopulateCacheForType(compilerGeneratedType.DeclaringType);
+            if (
+                _compilerGeneratedTypeToUserCodeMethod.TryGetValue(
+                    compilerGeneratedType,
+                    out userDefinedMethod
+                )
+            )
+                return userDefinedMethod;
 
-			return null;
-		}
-	}
+            return null;
+        }
+    }
 }

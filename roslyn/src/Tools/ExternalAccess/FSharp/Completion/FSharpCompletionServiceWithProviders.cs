@@ -9,12 +9,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Completion
     internal abstract class FSharpCompletionServiceWithProviders : CompletionService
     {
         internal FSharpCompletionServiceWithProviders(Workspace workspace)
-            : base(workspace.Services.SolutionServices)
-        {
-        }
+            : base(workspace.Services.SolutionServices) { }
 
-        internal sealed override CompletionRules GetRules(CompletionOptions options)
-            => GetRulesImpl();
+        internal sealed override CompletionRules GetRules(CompletionOptions options) =>
+            GetRulesImpl();
 
         internal abstract CompletionRules GetRulesImpl();
     }

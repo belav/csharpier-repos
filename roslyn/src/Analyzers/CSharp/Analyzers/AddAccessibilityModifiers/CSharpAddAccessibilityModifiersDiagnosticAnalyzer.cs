@@ -19,7 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
     {
         protected override void ProcessCompilationUnit(
             SyntaxTreeAnalysisContext context,
-            CodeStyleOption2<AccessibilityModifiersRequired> option, CompilationUnitSyntax compilationUnit)
+            CodeStyleOption2<AccessibilityModifiersRequired> option,
+            CompilationUnitSyntax compilationUnit
+        )
         {
             ProcessMembers(context, option, compilationUnit.Members);
         }
@@ -27,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
         private void ProcessMembers(
             SyntaxTreeAnalysisContext context,
             CodeStyleOption2<AccessibilityModifiersRequired> option,
-            SyntaxList<MemberDeclarationSyntax> members)
+            SyntaxList<MemberDeclarationSyntax> members
+        )
         {
             foreach (var memberDeclaration in members)
                 ProcessMemberDeclaration(context, option, memberDeclaration);
@@ -35,17 +38,23 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
 
         private void ProcessMemberDeclaration(
             SyntaxTreeAnalysisContext context,
-            CodeStyleOption2<AccessibilityModifiersRequired> option, MemberDeclarationSyntax member)
+            CodeStyleOption2<AccessibilityModifiersRequired> option,
+            MemberDeclarationSyntax member
+        )
         {
             if (member is BaseNamespaceDeclarationSyntax namespaceDeclaration)
                 ProcessMembers(context, option, namespaceDeclaration.Members);
 
             // If we have a class or struct, recurse inwards.
-            if (member is TypeDeclarationSyntax(
-                    SyntaxKind.ClassDeclaration or
-                    SyntaxKind.StructDeclaration or
-                    SyntaxKind.RecordDeclaration or
-                    SyntaxKind.RecordStructDeclaration) typeDeclaration)
+            if (
+                member is TypeDeclarationSyntax
+                (
+                    SyntaxKind.ClassDeclaration
+                        or SyntaxKind.StructDeclaration
+                        or SyntaxKind.RecordDeclaration
+                        or SyntaxKind.RecordStructDeclaration
+                ) typeDeclaration
+            )
             {
                 ProcessMembers(context, option, typeDeclaration.Members);
             }
@@ -61,17 +70,27 @@ namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
             }
 #endif
 
-            if (!CSharpAddAccessibilityModifiers.Instance.ShouldUpdateAccessibilityModifier(CSharpAccessibilityFacts.Instance, member, option.Value, out var name))
+            if (
+                !CSharpAddAccessibilityModifiers.Instance.ShouldUpdateAccessibilityModifier(
+                    CSharpAccessibilityFacts.Instance,
+                    member,
+                    option.Value,
+                    out var name
+                )
+            )
                 return;
 
             // Have an issue to flag, either add or remove. Report issue to user.
             var additionalLocations = ImmutableArray.Create(member.GetLocation());
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                name.GetLocation(),
-                option.Notification.Severity,
-                additionalLocations: additionalLocations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    name.GetLocation(),
+                    option.Notification.Severity,
+                    additionalLocations: additionalLocations,
+                    properties: null
+                )
+            );
         }
     }
 }

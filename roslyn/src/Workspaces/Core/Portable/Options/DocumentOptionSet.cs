@@ -27,12 +27,24 @@ namespace Microsoft.CodeAnalysis.Options
         private ImmutableDictionary<OptionKey, object?> _values;
         private readonly string _language;
 
-        internal DocumentOptionSet(StructuredAnalyzerConfigOptions? configOptions, OptionSet underlyingOptions, string language)
-            : this(configOptions, underlyingOptions, language, ImmutableDictionary<OptionKey, object?>.Empty)
-        {
-        }
+        internal DocumentOptionSet(
+            StructuredAnalyzerConfigOptions? configOptions,
+            OptionSet underlyingOptions,
+            string language
+        )
+            : this(
+                configOptions,
+                underlyingOptions,
+                language,
+                ImmutableDictionary<OptionKey, object?>.Empty
+            ) { }
 
-        private DocumentOptionSet(StructuredAnalyzerConfigOptions? configOptions, OptionSet underlyingOptions, string language, ImmutableDictionary<OptionKey, object?> values)
+        private DocumentOptionSet(
+            StructuredAnalyzerConfigOptions? configOptions,
+            OptionSet underlyingOptions,
+            string language,
+            ImmutableDictionary<OptionKey, object?> values
+        )
         {
             _language = language;
             _configOptions = configOptions;
@@ -69,7 +81,10 @@ namespace Microsoft.CodeAnalysis.Options
                 return false;
             }
 
-            var editorConfigPersistence = (IEditorConfigStorageLocation?)option.Option.StorageLocations.SingleOrDefault(static location => location is IEditorConfigStorageLocation);
+            var editorConfigPersistence = (IEditorConfigStorageLocation?)
+                option.Option.StorageLocations.SingleOrDefault(
+                    static location => location is IEditorConfigStorageLocation
+                );
             if (editorConfigPersistence == null)
             {
                 value = null;
@@ -78,7 +93,11 @@ namespace Microsoft.CodeAnalysis.Options
 
             try
             {
-                return editorConfigPersistence.TryGetOption(_configOptions, option.Option.Type, out value);
+                return editorConfigPersistence.TryGetOption(
+                    _configOptions,
+                    option.Option.Type,
+                    out value
+                );
             }
             catch (Exception e) when (FatalError.ReportAndCatch(e))
             {
@@ -87,34 +106,43 @@ namespace Microsoft.CodeAnalysis.Options
             }
         }
 
-        public T GetOption<T>(PerLanguageOption<T> option)
-            => GetOption(option, _language);
+        public T GetOption<T>(PerLanguageOption<T> option) => GetOption(option, _language);
 
-        internal T GetOption<T>(PerLanguageOption2<T> option)
-            => GetOption(option, _language);
+        internal T GetOption<T>(PerLanguageOption2<T> option) => GetOption(option, _language);
 
-        public override OptionSet WithChangedOption(OptionKey optionAndLanguage, object? value)
-            => new DocumentOptionSet(_configOptions, _underlyingOptions, _language, _values.SetItem(optionAndLanguage, value));
-
-        /// <summary>
-        /// Creates a new <see cref="DocumentOptionSet" /> that contains the changed value.
-        /// </summary>
-        public DocumentOptionSet WithChangedOption<T>(PerLanguageOption<T> option, T value)
-            => (DocumentOptionSet)WithChangedOption(option, _language, value);
+        public override OptionSet WithChangedOption(OptionKey optionAndLanguage, object? value) =>
+            new DocumentOptionSet(
+                _configOptions,
+                _underlyingOptions,
+                _language,
+                _values.SetItem(optionAndLanguage, value)
+            );
 
         /// <summary>
         /// Creates a new <see cref="DocumentOptionSet" /> that contains the changed value.
         /// </summary>
-        internal DocumentOptionSet WithChangedOption<T>(PerLanguageOption2<T> option, T value)
-            => (DocumentOptionSet)WithChangedOption(option, _language, value);
+        public DocumentOptionSet WithChangedOption<T>(PerLanguageOption<T> option, T value) =>
+            (DocumentOptionSet)WithChangedOption(option, _language, value);
 
-        private protected override AnalyzerConfigOptions CreateAnalyzerConfigOptions(IEditorConfigOptionMappingService optionService, string? language)
+        /// <summary>
+        /// Creates a new <see cref="DocumentOptionSet" /> that contains the changed value.
+        /// </summary>
+        internal DocumentOptionSet WithChangedOption<T>(PerLanguageOption2<T> option, T value) =>
+            (DocumentOptionSet)WithChangedOption(option, _language, value);
+
+        private protected override AnalyzerConfigOptions CreateAnalyzerConfigOptions(
+            IEditorConfigOptionMappingService optionService,
+            string? language
+        )
         {
-            Debug.Assert((language ?? _language) == _language, $"Use of a {nameof(DocumentOptionSet)} is not expected to differ from the language it was constructed with.");
+            Debug.Assert(
+                (language ?? _language) == _language,
+                $"Use of a {nameof(DocumentOptionSet)} is not expected to differ from the language it was constructed with."
+            );
             return base.CreateAnalyzerConfigOptions(optionService, language ?? _language);
         }
 
-        internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet)
-            => GetChangedOptions(optionSet);
+        internal override IEnumerable<OptionKey> GetChangedOptions(OptionSet optionSet) =>
+            GetChangedOptions(optionSet);
     }
 }

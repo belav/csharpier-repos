@@ -14,7 +14,10 @@ namespace Test
         static int m_iStatic;
         static uint m_uStatic;
 
-        static uint Method1(float param1) { return 0; }
+        static uint Method1(float param1)
+        {
+            return 0;
+        }
 
         static void Static1()
         {
@@ -26,7 +29,10 @@ namespace Test
 
         public static int Main()
         {
-            try { Static1(); }
+            try
+            {
+                Static1();
+            }
             catch (Exception) { }
             return 100;
         }

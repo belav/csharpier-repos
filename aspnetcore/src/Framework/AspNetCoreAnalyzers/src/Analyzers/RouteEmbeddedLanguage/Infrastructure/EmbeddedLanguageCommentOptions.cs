@@ -21,10 +21,14 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 /// </summary>
 internal static class EmbeddedLanguageCommentOptions<TOptions> where TOptions : struct, Enum
 {
-    private static readonly Dictionary<string, TOptions> s_nameToOption =
-        typeof(TOptions).GetTypeInfo().DeclaredFields
-            .Where(f => f.FieldType == typeof(TOptions))
-            .ToDictionary(f => f.Name, f => (TOptions)f.GetValue(null)!, StringComparer.OrdinalIgnoreCase);
+    private static readonly Dictionary<string, TOptions> s_nameToOption = typeof(TOptions)
+        .GetTypeInfo()
+        .DeclaredFields.Where(f => f.FieldType == typeof(TOptions))
+        .ToDictionary(
+            f => f.Name,
+            f => (TOptions)f.GetValue(null)!,
+            StringComparer.OrdinalIgnoreCase
+        );
 
     public static bool TryGetOptions(IEnumerable<string> captures, out TOptions options)
     {

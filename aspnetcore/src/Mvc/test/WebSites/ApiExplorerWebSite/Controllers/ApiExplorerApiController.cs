@@ -13,21 +13,13 @@ public class ApiExplorerApiController : Controller
     public IActionResult ActionWithoutParameters() => Ok();
 
     [EndpointGroupName("GroupNameOnAction")]
-    public void ActionWithSomeParameters(object input)
-    {
-    }
+    public void ActionWithSomeParameters(object input) { }
 
-    public void ActionWithIdParameter(int id, string name)
-    {
-    }
+    public void ActionWithIdParameter(int id, string name) { }
 
-    public void ActionWithIdSuffixParameter(int personId, string personName)
-    {
-    }
+    public void ActionWithIdSuffixParameter(int personId, string personName) { }
 
-    public void ActionWithFormFileCollectionParameter(IFormFileCollection formFile)
-    {
-    }
+    public void ActionWithFormFileCollectionParameter(IFormFileCollection formFile) { }
 
     [Produces("application/pdf", Type = typeof(Stream))]
     public IActionResult ProducesWithUnsupportedContentType() => null;

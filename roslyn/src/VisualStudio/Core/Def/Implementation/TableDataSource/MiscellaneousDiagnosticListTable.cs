@@ -16,8 +16,15 @@ using Microsoft.VisualStudio.Shell.TableManager;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    [ExportEventListener(WellKnownEventListeners.DiagnosticService, WorkspaceKind.MiscellaneousFiles), Shared]
-    internal sealed class MiscellaneousDiagnosticListTableWorkspaceEventListener : IEventListener<IDiagnosticService>
+    [
+        ExportEventListener(
+            WellKnownEventListeners.DiagnosticService,
+            WorkspaceKind.MiscellaneousFiles
+        ),
+        Shared
+    ]
+    internal sealed class MiscellaneousDiagnosticListTableWorkspaceEventListener
+        : IEventListener<IDiagnosticService>
     {
         internal const string IdentifierString = nameof(MiscellaneousDiagnosticListTable);
 
@@ -28,23 +35,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public MiscellaneousDiagnosticListTableWorkspaceEventListener(
             ITableManagerProvider tableManagerProvider,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _tableManagerProvider = tableManagerProvider;
             _globalOptions = globalOptions;
         }
 
-        public void StartListening(Workspace workspace, IDiagnosticService diagnosticService)
-            => new MiscellaneousDiagnosticListTable(workspace, _globalOptions, diagnosticService, _tableManagerProvider);
+        public void StartListening(Workspace workspace, IDiagnosticService diagnosticService) =>
+            new MiscellaneousDiagnosticListTable(
+                workspace,
+                _globalOptions,
+                diagnosticService,
+                _tableManagerProvider
+            );
 
         private sealed class MiscellaneousDiagnosticListTable : VisualStudioBaseDiagnosticListTable
         {
             private readonly LiveTableDataSource _source;
 
-            public MiscellaneousDiagnosticListTable(Workspace workspace, IGlobalOptionService globalOptions, IDiagnosticService diagnosticService, ITableManagerProvider provider)
-                : base(workspace, provider)
+            public MiscellaneousDiagnosticListTable(
+                Workspace workspace,
+                IGlobalOptionService globalOptions,
+                IDiagnosticService diagnosticService,
+                ITableManagerProvider provider
+            ) : base(workspace, provider)
             {
-                _source = new LiveTableDataSource(workspace, globalOptions, diagnosticService, IdentifierString);
+                _source = new LiveTableDataSource(
+                    workspace,
+                    globalOptions,
+                    diagnosticService,
+                    IdentifierString
+                );
 
                 AddInitialTableSource(workspace.CurrentSolution, _source);
                 ConnectWorkspaceEvents();
@@ -52,7 +74,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             protected override void AddTableSourceIfNecessary(Solution solution)
             {
-                if (solution.ProjectIds.Count == 0 || this.TableManager.Sources.Any(s => s == _source))
+                if (
+                    solution.ProjectIds.Count == 0
+                    || this.TableManager.Sources.Any(s => s == _source)
+                )
                 {
                     return;
                 }
@@ -62,7 +87,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
             protected override void RemoveTableSourceIfNecessary(Solution solution)
             {
-                if (solution.ProjectIds.Count > 0 || !this.TableManager.Sources.Any(s => s == _source))
+                if (
+                    solution.ProjectIds.Count > 0
+                    || !this.TableManager.Sources.Any(s => s == _source)
+                )
                 {
                     return;
                 }
@@ -70,8 +98,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 this.TableManager.RemoveSource(_source);
             }
 
-            protected override void ShutdownSource()
-                => _source.Shutdown();
+            protected override void ShutdownSource() => _source.Shutdown();
         }
     }
 }

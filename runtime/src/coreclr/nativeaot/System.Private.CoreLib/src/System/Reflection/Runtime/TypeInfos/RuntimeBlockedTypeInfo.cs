@@ -38,34 +38,22 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override Assembly Assembly
         {
-            get
-            {
-                return typeof(object).Assembly;
-            }
+            get { return typeof(object).Assembly; }
         }
 
         public sealed override bool ContainsGenericParameters
         {
-            get
-            {
-                return _isGenericTypeDefinition;
-            }
+            get { return _isGenericTypeDefinition; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return Array.Empty<CustomAttributeData>();
-            }
+            get { return Array.Empty<CustomAttributeData>(); }
         }
 
         public sealed override string FullName
         {
-            get
-            {
-                return GeneratedName;
-            }
+            get { return GeneratedName; }
         }
 
         public sealed override Guid GUID
@@ -77,22 +65,20 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
 #if DEBUG
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => base.HasSameMetadataDefinitionAs(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            base.HasSameMetadataDefinitionAs(other);
 #endif
 
         public sealed override bool IsGenericTypeDefinition
         {
-            get
-            {
-                return _isGenericTypeDefinition;
-            }
+            get { return _isGenericTypeDefinition; }
         }
 
         public sealed override string Namespace
         {
             get
             {
-                return null;  // Reflection-blocked framework types report themselves as existing in the "root" namespace.
+                return null; // Reflection-blocked framework types report themselves as existing in the "root" namespace.
             }
         }
 
@@ -116,10 +102,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         protected sealed override TypeAttributes GetAttributeFlagsImpl()
@@ -150,7 +133,7 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                return null;  // this causes the type to report having no members.
+                return null; // this causes the type to report having no members.
             }
         }
 
@@ -164,34 +147,22 @@ namespace System.Reflection.Runtime.TypeInfos
 
         internal sealed override Type InternalDeclaringType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return GeneratedName;
-            }
+            get { return GeneratedName; }
         }
 
         internal sealed override string InternalFullNameOfAssembly
         {
-            get
-            {
-                return GeneratedName;
-            }
+            get { return GeneratedName; }
         }
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return _typeHandle;
-            }
+            get { return _typeHandle; }
         }
 
         //
@@ -232,7 +203,8 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             get
             {
-                return _lazyGeneratedName ??= BlockedRuntimeTypeNameGenerator.GetNameForBlockedRuntimeType(_typeHandle);
+                return _lazyGeneratedName ??=
+                    BlockedRuntimeTypeNameGenerator.GetNameForBlockedRuntimeType(_typeHandle);
             }
         }
 

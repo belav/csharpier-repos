@@ -34,6 +34,6 @@ public static class RelationalDbFunctionsExtensions
     public static TProperty Collate<TProperty>(
         this DbFunctions _,
         TProperty operand,
-        [NotParameterized] string collation)
-        => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Collate)));
+        [NotParameterized] string collation
+    ) => throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Collate)));
 }

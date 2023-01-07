@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<UInt32>>() / sizeof(UInt32);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<UInt32>>() / sizeof(UInt32);
 
         public bool Succeeded { get; set; } = true;
 
@@ -58,20 +59,28 @@ namespace JIT.HardwareIntrinsics.General
 
             UInt32 value = TestLibrary.Generator.GetUInt32();
             object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.Create), new Type[] { typeof(UInt32) })
-                                .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.Create), new Type[] { typeof(UInt32) })
+                .Invoke(null, new object[] { value });
 
             ValidateResult((Vector64<UInt32>)(result), value);
         }
 
-        private void ValidateResult(Vector64<UInt32> result, UInt32 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector64<UInt32> result,
+            UInt32 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt32[] resultElements = new UInt32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt32, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValue, method);
         }
 
-        private void ValidateResult(UInt32[] resultElements, UInt32 expectedValue, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt32[] resultElements,
+            UInt32 expectedValue,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -93,9 +102,13 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.Create(UInt32): {method} failed:");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.Create(UInt32): {method} failed:"
+                );
                 TestLibrary.TestFramework.LogInformation($"   value: {expectedValue}");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -23,7 +23,8 @@ namespace System.Runtime.Serialization.DataContracts
 
         public override bool IsBuiltInDataContract => true;
 
-        private sealed class GenericParameterDataContractCriticalHelper : DataContract.DataContractCriticalHelper
+        private sealed class GenericParameterDataContractCriticalHelper
+            : DataContract.DataContractCriticalHelper
         {
             private readonly int _parameterPosition;
 
@@ -31,8 +32,8 @@ namespace System.Runtime.Serialization.DataContracts
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             internal GenericParameterDataContractCriticalHelper(
                 [DynamicallyAccessedMembers(ClassDataContract.DataContractPreserveMemberTypes)]
-                Type type)
-                : base(type)
+                    Type type
+            ) : base(type)
             {
                 SetDataContractName(DataContract.GetXmlName(type));
                 _parameterPosition = type.GenericParameterPosition;
@@ -43,7 +44,10 @@ namespace System.Runtime.Serialization.DataContracts
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal override DataContract BindGenericParameters(DataContract[] paramContracts, Dictionary<DataContract, DataContract>? boundContracts = null)
+        internal override DataContract BindGenericParameters(
+            DataContract[] paramContracts,
+            Dictionary<DataContract, DataContract>? boundContracts = null
+        )
         {
             return paramContracts[ParameterPosition];
         }

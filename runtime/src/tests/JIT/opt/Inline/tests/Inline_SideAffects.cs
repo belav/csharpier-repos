@@ -10,6 +10,7 @@ namespace Inline_SideAffects
     internal class Inline_SideAffects
     {
         private static int s_i = 0;
+
         private static bool Foo_Inline()
         {
             s_i++;
@@ -22,6 +23,7 @@ namespace Inline_SideAffects
             s_i += 3;
             return false;
         }
+
         private static int Main()
         {
             if ((Foo_Inline()) && (Bar_Inline()))
@@ -30,7 +32,8 @@ namespace Inline_SideAffects
             }
             else
             {
-                if (s_i != 4) goto succeeded;
+                if (s_i != 4)
+                    goto succeeded;
             }
 
             s_i = 0;
@@ -41,14 +44,15 @@ namespace Inline_SideAffects
             }
             else
             {
-                if (s_i != 1) goto succeeded;
+                if (s_i != 1)
+                    goto succeeded;
             }
 
-        succeeded:
+            succeeded:
             Console.WriteLine("Test Passed.");
             return 100;
 
-        Fail:
+            Fail:
             Console.WriteLine("Test Failed");
             return 101;
         }

@@ -11,28 +11,39 @@ namespace System.Reflection.TypeLoading
     /// </summary>
     internal sealed class RoByRefType : RoHasElementType
     {
-        internal RoByRefType(RoType elementType)
-            : base(elementType)
+        internal RoByRefType(RoType elementType) : base(elementType)
         {
             Debug.Assert(elementType != null);
         }
 
         protected sealed override bool IsArrayImpl() => false;
+
         public sealed override bool IsSZArray => false;
         public sealed override bool IsVariableBoundArray => false;
+
         protected sealed override bool IsByRefImpl() => true;
+
         protected sealed override bool IsPointerImpl() => false;
 
-        public sealed override int GetArrayRank() => throw new ArgumentException(SR.Argument_HasToBeArrayClass);
+        public sealed override int GetArrayRank() =>
+            throw new ArgumentException(SR.Argument_HasToBeArrayClass);
 
         protected sealed override TypeAttributes ComputeAttributeFlags() => TypeAttributes.Public;
 
         protected sealed override string Suffix => "&";
 
         protected sealed override RoType? ComputeBaseTypeWithoutDesktopQuirk() => null;
-        protected sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces() => Array.Empty<RoType>();
 
-        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(NameFilter? filter) => Array.Empty<ConstructorInfo>();
-        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(NameFilter? filter, Type reflectedType) => Array.Empty<MethodInfo>();
+        protected sealed override IEnumerable<RoType> ComputeDirectlyImplementedInterfaces() =>
+            Array.Empty<RoType>();
+
+        internal sealed override IEnumerable<ConstructorInfo> GetConstructorsCore(
+            NameFilter? filter
+        ) => Array.Empty<ConstructorInfo>();
+
+        internal sealed override IEnumerable<MethodInfo> GetMethodsCore(
+            NameFilter? filter,
+            Type reflectedType
+        ) => Array.Empty<MethodInfo>();
     }
 }

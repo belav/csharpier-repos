@@ -44,10 +44,15 @@ namespace Microsoft.CodeAnalysis.Options
         #endregion
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public GlobalOptionService(
             [Import(AllowDefault = true)] IWorkspaceThreadingService? workspaceThreadingService,
-            [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionPersisters)
+            [ImportMany] IEnumerable<Lazy<IOptionPersisterProvider>> optionPersisters
+        )
         {
             _getOption = GetOption;
 
@@ -69,7 +74,12 @@ namespace Microsoft.CodeAnalysis.Options
 
                 ImmutableInterlocked.InterlockedInitialize(
                     ref _lazyOptionPersisters,
-                    GetOptionPersistersSlow(_workspaceThreadingService, _optionPersisterProviders, CancellationToken.None));
+                    GetOptionPersistersSlow(
+                        _workspaceThreadingService,
+                        _optionPersisterProviders,
+                        CancellationToken.None
+                    )
+                );
             }
 
             return _lazyOptionPersisters;
@@ -78,29 +88,41 @@ namespace Microsoft.CodeAnalysis.Options
             static ImmutableArray<IOptionPersister> GetOptionPersistersSlow(
                 IWorkspaceThreadingService? workspaceThreadingService,
                 ImmutableArray<Lazy<IOptionPersisterProvider>> persisterProviders,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 if (workspaceThreadingService is not null)
                 {
-                    return workspaceThreadingService.Run(() => GetOptionPersistersAsync(persisterProviders, cancellationToken));
+                    return workspaceThreadingService.Run(
+                        () => GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                    );
                 }
                 else
                 {
-                    return GetOptionPersistersAsync(persisterProviders, cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                    return GetOptionPersistersAsync(persisterProviders, cancellationToken)
+                        .WaitAndGetResult_CanCallOnBackground(cancellationToken);
                 }
             }
 
             static async Task<ImmutableArray<IOptionPersister>> GetOptionPersistersAsync(
                 ImmutableArray<Lazy<IOptionPersisterProvider>> persisterProviders,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                return await persisterProviders.SelectAsArrayAsync(
-                    static (lazyProvider, cancellationToken) => lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
-                    cancellationToken).ConfigureAwait(false);
+                return await persisterProviders
+                    .SelectAsArrayAsync(
+                        static (lazyProvider, cancellationToken) =>
+                            lazyProvider.Value.GetOrCreatePersisterAsync(cancellationToken),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
-        private static object? LoadOptionFromPersisterOrGetDefault(OptionKey optionKey, ImmutableArray<IOptionPersister> persisters)
+        private static object? LoadOptionFromPersisterOrGetDefault(
+            OptionKey optionKey,
+            ImmutableArray<IOptionPersister> persisters
+        )
         {
             foreach (var persister in persisters)
             {
@@ -115,11 +137,10 @@ namespace Microsoft.CodeAnalysis.Options
             return optionKey.Option.DefaultValue;
         }
 
-        public T GetOption<T>(Option2<T> option)
-            => OptionsHelpers.GetOption(option, _getOption);
+        public T GetOption<T>(Option2<T> option) => OptionsHelpers.GetOption(option, _getOption);
 
-        public T GetOption<T>(PerLanguageOption2<T> option, string? language)
-            => OptionsHelpers.GetOption(option, language, _getOption);
+        public T GetOption<T>(PerLanguageOption2<T> option, string? language) =>
+            OptionsHelpers.GetOption(option, language, _getOption);
 
         public object? GetOption(OptionKey optionKey)
         {
@@ -149,7 +170,10 @@ namespace Microsoft.CodeAnalysis.Options
             return values.ToImmutableAndClear();
         }
 
-        private object? GetOption_NoLock(OptionKey optionKey, ImmutableArray<IOptionPersister> persisters)
+        private object? GetOption_NoLock(
+            OptionKey optionKey,
+            ImmutableArray<IOptionPersister> persisters
+        )
         {
             if (_currentValues.TryGetValue(optionKey, out var value))
             {
@@ -175,10 +199,13 @@ namespace Microsoft.CodeAnalysis.Options
             _changedOptionKeys = _changedOptionKeys.Add(optionKey);
         }
 
-        public void SetGlobalOption(OptionKey optionKey, object? value)
-            => SetGlobalOptions(ImmutableArray.Create(optionKey), ImmutableArray.Create(value));
+        public void SetGlobalOption(OptionKey optionKey, object? value) =>
+            SetGlobalOptions(ImmutableArray.Create(optionKey), ImmutableArray.Create(value));
 
-        public void SetGlobalOptions(ImmutableArray<OptionKey> optionKeys, ImmutableArray<object?> values)
+        public void SetGlobalOptions(
+            ImmutableArray<OptionKey> optionKeys,
+            ImmutableArray<object?> values
+        )
         {
             Contract.ThrowIfFalse(optionKeys.Length == values.Length);
 
@@ -246,7 +273,11 @@ namespace Microsoft.CodeAnalysis.Options
             UpdateRegisteredWorkspacesAndRaiseEvents(changedOptions);
         }
 
-        private static void PersistOption(ImmutableArray<IOptionPersister> persisters, OptionKey optionKey, object? value)
+        private static void PersistOption(
+            ImmutableArray<IOptionPersister> persisters,
+            OptionKey optionKey,
+            object? value
+        )
         {
             foreach (var persister in persisters)
             {
@@ -273,10 +304,14 @@ namespace Microsoft.CodeAnalysis.Options
                 SetOptionCore(optionKey, newValue);
             }
 
-            UpdateRegisteredWorkspacesAndRaiseEvents(new List<OptionChangedEventArgs> { new OptionChangedEventArgs(optionKey, newValue) });
+            UpdateRegisteredWorkspacesAndRaiseEvents(
+                new List<OptionChangedEventArgs> { new OptionChangedEventArgs(optionKey, newValue) }
+            );
         }
 
-        private void UpdateRegisteredWorkspacesAndRaiseEvents(List<OptionChangedEventArgs> changedOptions)
+        private void UpdateRegisteredWorkspacesAndRaiseEvents(
+            List<OptionChangedEventArgs> changedOptions
+        )
         {
             if (changedOptions.Count == 0)
             {
@@ -306,11 +341,19 @@ namespace Microsoft.CodeAnalysis.Options
             }
         }
 
-        public void RegisterWorkspace(Workspace workspace)
-            => ImmutableInterlocked.Update(ref _registeredWorkspaces, (workspaces, workspace) => workspaces.Add(workspace), workspace);
+        public void RegisterWorkspace(Workspace workspace) =>
+            ImmutableInterlocked.Update(
+                ref _registeredWorkspaces,
+                (workspaces, workspace) => workspaces.Add(workspace),
+                workspace
+            );
 
-        public void UnregisterWorkspace(Workspace workspace)
-            => ImmutableInterlocked.Update(ref _registeredWorkspaces, (workspaces, workspace) => workspaces.Remove(workspace), workspace);
+        public void UnregisterWorkspace(Workspace workspace) =>
+            ImmutableInterlocked.Update(
+                ref _registeredWorkspaces,
+                (workspaces, workspace) => workspaces.Remove(workspace),
+                workspace
+            );
 
         public event EventHandler<OptionChangedEventArgs>? OptionChanged;
     }

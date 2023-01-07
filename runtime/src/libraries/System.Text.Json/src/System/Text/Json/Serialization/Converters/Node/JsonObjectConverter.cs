@@ -9,9 +9,13 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class JsonObjectConverter : JsonConverter<JsonObject>
     {
-        internal override void ConfigureJsonTypeInfo(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfo(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.CreateObjectForExtensionDataProperty = () => new JsonObject(options.GetNodeOptions());
+            jsonTypeInfo.CreateObjectForExtensionDataProperty = () =>
+                new JsonObject(options.GetNodeOptions());
         }
 
         internal override void ReadElementAndSetProperty(
@@ -19,9 +23,16 @@ namespace System.Text.Json.Serialization.Converters
             string propertyName,
             ref Utf8JsonReader reader,
             JsonSerializerOptions options,
-            scoped ref ReadStack state)
+            scoped ref ReadStack state
+        )
         {
-            bool success = JsonNodeConverter.Instance.TryRead(ref reader, typeof(JsonNode), options, ref state, out JsonNode? value);
+            bool success = JsonNodeConverter.Instance.TryRead(
+                ref reader,
+                typeof(JsonNode),
+                options,
+                ref state,
+                out JsonNode? value
+            );
             Debug.Assert(success); // Node converters are not resumable.
 
             Debug.Assert(obj is JsonObject);
@@ -33,13 +44,21 @@ namespace System.Text.Json.Serialization.Converters
             jObject[propertyName] = jNodeValue;
         }
 
-        public override void Write(Utf8JsonWriter writer, JsonObject value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            JsonObject value,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(value != null);
             value.WriteTo(writer, options);
         }
 
-        public override JsonObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override JsonObject? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             switch (reader.TokenType)
             {

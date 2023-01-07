@@ -7,13 +7,15 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting;
 
 public class CachingApplicationPublisher : ApplicationPublisher, IDisposable
 {
-    private readonly Dictionary<DotnetPublishParameters, PublishedApplication> _publishCache = new Dictionary<DotnetPublishParameters, PublishedApplication>();
+    private readonly Dictionary<DotnetPublishParameters, PublishedApplication> _publishCache =
+        new Dictionary<DotnetPublishParameters, PublishedApplication>();
 
-    public CachingApplicationPublisher(string applicationPath) : base(applicationPath)
-    {
-    }
+    public CachingApplicationPublisher(string applicationPath) : base(applicationPath) { }
 
-    public override async Task<PublishedApplication> Publish(DeploymentParameters deploymentParameters, ILogger logger)
+    public override async Task<PublishedApplication> Publish(
+        DeploymentParameters deploymentParameters,
+        ILogger logger
+    )
     {
         if (ApplicationPath != deploymentParameters.ApplicationPath)
         {
@@ -22,12 +24,16 @@ public class CachingApplicationPublisher : ApplicationPublisher, IDisposable
 
         if (deploymentParameters.PublishEnvironmentVariables.Any())
         {
-            throw new InvalidOperationException("DeploymentParameters.PublishEnvironmentVariables not supported");
+            throw new InvalidOperationException(
+                "DeploymentParameters.PublishEnvironmentVariables not supported"
+            );
         }
 
         if (!string.IsNullOrEmpty(deploymentParameters.PublishedApplicationRootPath))
         {
-            throw new InvalidOperationException("DeploymentParameters.PublishedApplicationRootPath not supported");
+            throw new InvalidOperationException(
+                "DeploymentParameters.PublishedApplicationRootPath not supported"
+            );
         }
 
         var dotnetPublishParameters = new DotnetPublishParameters

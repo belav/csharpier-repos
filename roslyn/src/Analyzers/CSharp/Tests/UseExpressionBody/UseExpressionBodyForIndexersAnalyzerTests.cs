@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForIndexersAnalyzerTests
@@ -28,8 +29,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.WhenPossible },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never
+                    },
                 }
             }.RunAsync();
         }
@@ -42,8 +49,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.Never },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.Never },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.Never
+                    },
                 }
             }.RunAsync();
         }
@@ -51,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         [Fact]
         public async Task TestUseExpressionBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -64,7 +78,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -77,7 +92,8 @@ class C
         [Fact]
         public async Task TestMissingWithSetter()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -100,7 +116,8 @@ class C
         [Fact]
         public async Task TestMissingOnSetter1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void Bar() { }
@@ -119,7 +136,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -132,7 +150,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -145,7 +164,8 @@ class C
         [Fact]
         public async Task TestUseExpressionBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
@@ -158,7 +178,8 @@ class C
         }
     }|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -171,14 +192,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
 
     {|IDE0026:int this[int i] => Bar();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -197,14 +220,16 @@ class C
         [Fact, WorkItem(20363, "https://github.com/dotnet/roslyn/issues/20363")]
         public async Task TestUseBlockBodyForAccessorEventWhenAccessorWantExpression1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     int Bar() { return 0; }
 
     {|IDE0026:int this[int i] => Bar();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 class C
 {
     int Bar() { return 0; }
@@ -220,8 +245,14 @@ class C
                 FixedCode = fixedCode,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedIndexers, ExpressionBodyPreference.Never },
-                    { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, ExpressionBodyPreference.WhenPossible },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
+                        ExpressionBodyPreference.Never
+                    },
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                        ExpressionBodyPreference.WhenPossible
+                    },
                 },
                 NumberOfFixAllIterations = 2,
                 NumberOfIncrementalIterations = 2,
@@ -231,14 +262,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody3()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0026:int this[int i] => throw new NotImplementedException();|}
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C
@@ -257,14 +290,16 @@ class C
         [Fact]
         public async Task TestUseBlockBody4()
         {
-            var code = @"
+            var code =
+                @"
 using System;
 
 class C
 {
     {|IDE0026:int this[int i] => throw new NotImplementedException();|} // comment
 }";
-            var fixedCode = @"
+            var fixedCode =
+                @"
 using System;
 
 class C

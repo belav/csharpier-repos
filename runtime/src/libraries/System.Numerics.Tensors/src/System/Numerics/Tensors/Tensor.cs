@@ -81,14 +81,18 @@ namespace System.Numerics.Tensors
         {
             if (diagonal.Rank < 1)
             {
-                throw new ArgumentException(SR.Format(SR.MustHaveAtLeastOneDimension, nameof(diagonal)), nameof(diagonal));
+                throw new ArgumentException(
+                    SR.Format(SR.MustHaveAtLeastOneDimension, nameof(diagonal)),
+                    nameof(diagonal)
+                );
             }
 
             int diagonalLength = diagonal.dimensions[0];
 
             // TODO: allow specification of axis1 and axis2?
             var rank = diagonal.dimensions.Length + 1;
-            Span<int> dimensions = rank < ArrayUtilities.StackallocMax ? stackalloc int[rank] : new int[rank];
+            Span<int> dimensions =
+                rank < ArrayUtilities.StackallocMax ? stackalloc int[rank] : new int[rank];
 
             // assume square
             var axisLength = diagonalLength + Math.Abs(offset);
@@ -103,21 +107,30 @@ namespace System.Numerics.Tensors
 
             var sizePerDiagonal = diagonal.Length / diagonalLength;
 
-            var diagProjectionStride = diagonal.IsReversedStride && diagonal.Rank > 1 ? diagonal.strides[1] : 1;
-            var resultProjectionStride = result.IsReversedStride && result.Rank > 2 ? result.strides[2] : 1;
+            var diagProjectionStride =
+                diagonal.IsReversedStride && diagonal.Rank > 1 ? diagonal.strides[1] : 1;
+            var resultProjectionStride =
+                result.IsReversedStride && result.Rank > 2 ? result.strides[2] : 1;
 
             for (int diagIndex = 0; diagIndex < diagonalLength; diagIndex++)
             {
                 var resultIndex0 = offset < 0 ? diagIndex - offset : diagIndex;
                 var resultIndex1 = offset > 0 ? diagIndex + offset : diagIndex;
 
-                var resultBase = resultIndex0 * result.strides[0] + resultIndex1 * result.strides[1];
+                var resultBase =
+                    resultIndex0 * result.strides[0] + resultIndex1 * result.strides[1];
                 var diagBase = diagIndex * diagonal.strides[0];
 
-                for (int diagProjectionOffset = 0; diagProjectionOffset < sizePerDiagonal; diagProjectionOffset++)
+                for (
+                    int diagProjectionOffset = 0;
+                    diagProjectionOffset < sizePerDiagonal;
+                    diagProjectionOffset++
+                )
                 {
-                    result.SetValue(resultBase + diagProjectionOffset * resultProjectionStride,
-                        diagonal.GetValue(diagBase + diagProjectionOffset * diagProjectionStride));
+                    result.SetValue(
+                        resultBase + diagProjectionOffset * resultProjectionStride,
+                        diagonal.GetValue(diagBase + diagProjectionOffset * diagProjectionStride)
+                    );
                 }
             }
 
@@ -131,7 +144,12 @@ namespace System.Numerics.Tensors
     /// <typeparam name="T">type contained within the Tensor.  Typically a value type such as int, double, float, etc.</typeparam>
     [DebuggerDisplay("{GetArrayString(false)}")]
     // When we cross-compile for frameworks that expose ICloneable this must implement ICloneable as well.
-    public abstract class Tensor<T> : IList, IList<T>, IReadOnlyList<T>, IStructuralComparable, IStructuralEquatable
+    public abstract class Tensor<T>
+        : IList,
+            IList<T>,
+            IReadOnlyList<T>,
+            IStructuralComparable,
+            IStructuralEquatable
     {
         internal static T Zero
         {
@@ -291,7 +309,10 @@ namespace System.Numerics.Tensors
             {
                 if (dimensions[i] < 1)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(dimensions), SR.DimensionsMustBePositiveAndNonZero);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(dimensions),
+                        SR.DimensionsMustBePositiveAndNonZero
+                    );
                 }
                 this.dimensions[i] = dimensions[i];
                 size *= dimensions[i];
@@ -442,7 +463,9 @@ namespace System.Numerics.Tensors
 
             if (Rank < 2)
             {
-                throw new InvalidOperationException(SR.Format(SR.CannotComputeDiagonal, nameof(Tensor<T>)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CannotComputeDiagonal, nameof(Tensor<T>))
+                );
             }
 
             // TODO: allow specification of axis1 and axis2?
@@ -469,11 +492,17 @@ namespace System.Numerics.Tensors
 
             if (diagonalLength <= 0)
             {
-                throw new ArgumentException(SR.Format(SR.CannotComputeDiagonalWithOffset, offset), nameof(offset));
+                throw new ArgumentException(
+                    SR.Format(SR.CannotComputeDiagonalWithOffset, offset),
+                    nameof(offset)
+                );
             }
 
             var newTensorRank = Rank - 1;
-            var newTensorDimensions = newTensorRank < ArrayUtilities.StackallocMax ? stackalloc int[newTensorRank] : new int[newTensorRank];
+            var newTensorDimensions =
+                newTensorRank < ArrayUtilities.StackallocMax
+                    ? stackalloc int[newTensorRank]
+                    : new int[newTensorRank];
             newTensorDimensions[0] = diagonalLength;
 
             for (int i = 2; i < dimensions.Length; i++)
@@ -484,7 +513,10 @@ namespace System.Numerics.Tensors
             var diagonalTensor = CloneEmpty(newTensorDimensions);
             var sizePerDiagonal = diagonalTensor.Length / diagonalTensor.Dimensions[0];
 
-            var diagProjectionStride = diagonalTensor.IsReversedStride && diagonalTensor.Rank > 1 ? diagonalTensor.strides[1] : 1;
+            var diagProjectionStride =
+                diagonalTensor.IsReversedStride && diagonalTensor.Rank > 1
+                    ? diagonalTensor.strides[1]
+                    : 1;
             var sourceProjectionStride = IsReversedStride && Rank > 2 ? strides[2] : 1;
 
             for (int diagIndex = 0; diagIndex < diagonalLength; diagIndex++)
@@ -495,10 +527,16 @@ namespace System.Numerics.Tensors
                 var sourceBase = sourceIndex0 * strides[0] + sourceIndex1 * strides[1];
                 var diagBase = diagIndex * diagonalTensor.strides[0];
 
-                for (int diagProjectionIndex = 0; diagProjectionIndex < sizePerDiagonal; diagProjectionIndex++)
+                for (
+                    int diagProjectionIndex = 0;
+                    diagProjectionIndex < sizePerDiagonal;
+                    diagProjectionIndex++
+                )
                 {
-                    diagonalTensor.SetValue(diagBase + diagProjectionIndex * diagProjectionStride,
-                        GetValue(sourceBase + diagProjectionIndex * sourceProjectionStride));
+                    diagonalTensor.SetValue(
+                        diagBase + diagProjectionIndex * diagProjectionStride,
+                        GetValue(sourceBase + diagProjectionIndex * sourceProjectionStride)
+                    );
                 }
             }
 
@@ -547,7 +585,9 @@ namespace System.Numerics.Tensors
         {
             if (Rank < 2)
             {
-                throw new InvalidOperationException(SR.Format(SR.CannotComputeTriangle, nameof(Tensor<T>)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.CannotComputeTriangle, nameof(Tensor<T>))
+                );
             }
 
             // Similar to get diagonal except it gets every element below and including the diagonal.
@@ -603,7 +643,11 @@ namespace System.Numerics.Tensors
                 {
                     var baseIndex = triIndex0 * strides[0] + triIndex1 * result.strides[1];
 
-                    for (int projectionIndex = 0; projectionIndex < projectionSize; projectionIndex++)
+                    for (
+                        int projectionIndex = 0;
+                        projectionIndex < projectionSize;
+                        projectionIndex++
+                    )
                     {
                         var index = baseIndex + projectionIndex * projectionStride;
 
@@ -648,7 +692,6 @@ namespace System.Numerics.Tensors
                 var span = new ReadOnlySpan<int>(indices);
                 return this[span];
             }
-
             set
             {
                 if (indices is null)
@@ -668,15 +711,8 @@ namespace System.Numerics.Tensors
         /// <returns>The value at the specified position in this Tensor.</returns>
         public virtual T this[ReadOnlySpan<int> indices]
         {
-            get
-            {
-                return GetValue(ArrayUtilities.GetIndex(strides, indices));
-            }
-
-            set
-            {
-                SetValue(ArrayUtilities.GetIndex(strides, indices), value);
-            }
+            get { return GetValue(ArrayUtilities.GetIndex(strides, indices)); }
+            set { SetValue(ArrayUtilities.GetIndex(strides, indices), value); }
         }
 
         /// <summary>
@@ -799,7 +835,10 @@ namespace System.Numerics.Tensors
                 }
                 if (array.Rank != 1)
                 {
-                    throw new ArgumentException(SR.OnlySingleDimensionalArraysSupported, nameof(array));
+                    throw new ArgumentException(
+                        SR.OnlySingleDimensionalArraysSupported,
+                        nameof(array)
+                    );
                 }
                 if (array.Length < index + Length)
                 {
@@ -817,10 +856,7 @@ namespace System.Numerics.Tensors
         #region IList members
         object? IList.this[int index]
         {
-            get
-            {
-                return GetValue(index);
-            }
+            get { return GetValue(index); }
             set
             {
                 try
@@ -1029,21 +1065,42 @@ namespace System.Numerics.Tensors
                 return CompareTo(otherArray, comparer);
             }
 
-            throw new ArgumentException(SR.Format(SR.CannotCompare, nameof(Tensor<T>), other.GetType()), nameof(other));
+            throw new ArgumentException(
+                SR.Format(SR.CannotCompare, nameof(Tensor<T>), other.GetType()),
+                nameof(other)
+            );
         }
 
         private int CompareTo(Tensor<T> other, IComparer comparer)
         {
             if (Rank != other.Rank)
             {
-                throw new ArgumentException(SR.Format(SR.CannotCompareWithRank, nameof(Tensor<T>), Rank, nameof(other), other.Rank), nameof(other));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.CannotCompareWithRank,
+                        nameof(Tensor<T>),
+                        Rank,
+                        nameof(other),
+                        other.Rank
+                    ),
+                    nameof(other)
+                );
             }
 
             for (int i = 0; i < dimensions.Length; i++)
             {
                 if (dimensions[i] != other.dimensions[i])
                 {
-                    throw new ArgumentException(SR.Format(SR.CannotCompareWithDifferentDimension, nameof(Tensor<T>), i, dimensions[i], other.dimensions[i]), nameof(other));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.CannotCompareWithDifferentDimension,
+                            nameof(Tensor<T>),
+                            i,
+                            dimensions[i],
+                            other.dimensions[i]
+                        ),
+                        nameof(other)
+                    );
                 }
             }
 
@@ -1062,7 +1119,8 @@ namespace System.Numerics.Tensors
             }
             else
             {
-                var indices = Rank < ArrayUtilities.StackallocMax ? stackalloc int[Rank] : new int[Rank];
+                var indices =
+                    Rank < ArrayUtilities.StackallocMax ? stackalloc int[Rank] : new int[Rank];
                 for (int i = 0; i < Length; i++)
                 {
                     ArrayUtilities.GetIndices(strides, IsReversedStride, i, indices);
@@ -1081,7 +1139,16 @@ namespace System.Numerics.Tensors
         {
             if (Rank != other.Rank)
             {
-                throw new ArgumentException(SR.Format(SR.CannotCompareWithRank, nameof(Tensor<T>), Rank, nameof(Array), other.Rank), nameof(other));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.CannotCompareWithRank,
+                        nameof(Tensor<T>),
+                        Rank,
+                        nameof(Array),
+                        other.Rank
+                    ),
+                    nameof(other)
+                );
             }
 
             for (int i = 0; i < dimensions.Length; i++)
@@ -1089,7 +1156,17 @@ namespace System.Numerics.Tensors
                 var otherDimension = other.GetLength(i);
                 if (dimensions[i] != otherDimension)
                 {
-                    throw new ArgumentException(SR.Format(SR.CannotCompareToWithDifferentDimension, nameof(Tensor<T>), nameof(Array), i, dimensions[i], otherDimension), nameof(other));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.CannotCompareToWithDifferentDimension,
+                            nameof(Tensor<T>),
+                            nameof(Array),
+                            i,
+                            dimensions[i],
+                            otherDimension
+                        ),
+                        nameof(other)
+                    );
                 }
             }
 
@@ -1131,21 +1208,42 @@ namespace System.Numerics.Tensors
                 return Equals(otherArray, comparer);
             }
 
-            throw new ArgumentException(SR.Format(SR.CannotCompare, nameof(Tensor<T>), other.GetType()), nameof(other));
+            throw new ArgumentException(
+                SR.Format(SR.CannotCompare, nameof(Tensor<T>), other.GetType()),
+                nameof(other)
+            );
         }
 
         private bool Equals(Tensor<T> other, IEqualityComparer comparer)
         {
             if (Rank != other.Rank)
             {
-                throw new ArgumentException(SR.Format(SR.CannotCompareWithRank, nameof(Tensor<T>), Rank, nameof(other), other.Rank), nameof(other));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.CannotCompareWithRank,
+                        nameof(Tensor<T>),
+                        Rank,
+                        nameof(other),
+                        other.Rank
+                    ),
+                    nameof(other)
+                );
             }
 
             for (int i = 0; i < dimensions.Length; i++)
             {
                 if (dimensions[i] != other.dimensions[i])
                 {
-                    throw new ArgumentException(SR.Format(SR.CannotCompareWithDifferentDimension, nameof(Tensor<T>), i, dimensions[i], other.dimensions[i]), nameof(other));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.CannotCompareWithDifferentDimension,
+                            nameof(Tensor<T>),
+                            i,
+                            dimensions[i],
+                            other.dimensions[i]
+                        ),
+                        nameof(other)
+                    );
                 }
             }
 
@@ -1161,7 +1259,8 @@ namespace System.Numerics.Tensors
             }
             else
             {
-                var indices = Rank < ArrayUtilities.StackallocMax ? stackalloc int[Rank] : new int[Rank];
+                var indices =
+                    Rank < ArrayUtilities.StackallocMax ? stackalloc int[Rank] : new int[Rank];
                 for (int i = 0; i < Length; i++)
                 {
                     ArrayUtilities.GetIndices(strides, IsReversedStride, i, indices);
@@ -1180,7 +1279,16 @@ namespace System.Numerics.Tensors
         {
             if (Rank != other.Rank)
             {
-                throw new ArgumentException(SR.Format(SR.CannotCompareWithRank, nameof(Tensor<T>), Rank, nameof(Array), other.Rank), nameof(other));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.CannotCompareWithRank,
+                        nameof(Tensor<T>),
+                        Rank,
+                        nameof(Array),
+                        other.Rank
+                    ),
+                    nameof(other)
+                );
             }
 
             for (int i = 0; i < dimensions.Length; i++)
@@ -1188,7 +1296,17 @@ namespace System.Numerics.Tensors
                 var otherDimension = other.GetLength(i);
                 if (dimensions[i] != otherDimension)
                 {
-                    throw new ArgumentException(SR.Format(SR.CannotCompareToWithDifferentDimension, nameof(Tensor<T>), nameof(Array), i, dimensions[i], otherDimension), nameof(other));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.CannotCompareToWithDifferentDimension,
+                            nameof(Tensor<T>),
+                            nameof(Array),
+                            i,
+                            dimensions[i],
+                            otherDimension
+                        ),
+                        nameof(other)
+                    );
                 }
             }
 
@@ -1205,6 +1323,7 @@ namespace System.Numerics.Tensors
 
             return true;
         }
+
         int IStructuralEquatable.GetHashCode(IEqualityComparer comparer)
         {
             int hashCode = 0;
@@ -1235,7 +1354,6 @@ namespace System.Numerics.Tensors
             return denseTensor;
         }
 
-
         /// <summary>
         /// Creates a copy of this tensor as a SparseTensor&lt;T&gt;.  If this tensor is already a SparseTensor&lt;T&gt; calling this method is equivalent to calling Clone().
         /// </summary>
@@ -1256,7 +1374,10 @@ namespace System.Numerics.Tensors
         /// <returns></returns>
         public virtual CompressedSparseTensor<T> ToCompressedSparseTensor()
         {
-            var compressedSparseTensor = new CompressedSparseTensor<T>(Dimensions, IsReversedStride);
+            var compressedSparseTensor = new CompressedSparseTensor<T>(
+                Dimensions,
+                IsReversedStride
+            );
             for (int i = 0; i < Length; i++)
             {
                 compressedSparseTensor.SetValue(i, GetValue(i));

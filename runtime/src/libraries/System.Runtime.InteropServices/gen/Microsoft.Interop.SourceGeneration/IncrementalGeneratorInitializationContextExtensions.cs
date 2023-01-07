@@ -12,28 +12,41 @@ namespace Microsoft.Interop
 {
     public static class IncrementalGeneratorInitializationContextExtensions
     {
-        public static IncrementalValueProvider<StubEnvironment> CreateStubEnvironmentProvider(this IncrementalGeneratorInitializationContext context)
+        public static IncrementalValueProvider<StubEnvironment> CreateStubEnvironmentProvider(
+            this IncrementalGeneratorInitializationContext context
+        )
         {
-            return context.CompilationProvider.Select(static (comp, ct) => comp.CreateStubEnvironment());
+            return context.CompilationProvider.Select(
+                static (comp, ct) => comp.CreateStubEnvironment()
+            );
         }
 
-        public static void RegisterDiagnostics(this IncrementalGeneratorInitializationContext context, IncrementalValuesProvider<Diagnostic> diagnostics)
+        public static void RegisterDiagnostics(
+            this IncrementalGeneratorInitializationContext context,
+            IncrementalValuesProvider<Diagnostic> diagnostics
+        )
         {
-            context.RegisterSourceOutput(diagnostics, (context, diagnostic) =>
-            {
-                context.ReportDiagnostic(diagnostic);
-            });
+            context.RegisterSourceOutput(
+                diagnostics,
+                (context, diagnostic) =>
+                {
+                    context.ReportDiagnostic(diagnostic);
+                }
+            );
         }
 
-        public static void RegisterConcatenatedSyntaxOutputs<TNode>(this IncrementalGeneratorInitializationContext context, IncrementalValuesProvider<TNode> nodes, string fileName)
-            where TNode : SyntaxNode
+        public static void RegisterConcatenatedSyntaxOutputs<TNode>(
+            this IncrementalGeneratorInitializationContext context,
+            IncrementalValuesProvider<TNode> nodes,
+            string fileName
+        ) where TNode : SyntaxNode
         {
             IncrementalValueProvider<ImmutableArray<string>> generatedMethods = nodes
-                .Select(
-                    static (node, ct) => node.NormalizeWhitespace().ToFullString())
+                .Select(static (node, ct) => node.NormalizeWhitespace().ToFullString())
                 .Collect();
 
-            context.RegisterSourceOutput(generatedMethods,
+            context.RegisterSourceOutput(
+                generatedMethods,
                 (context, generatedSources) =>
                 {
                     // Don't generate a file if we don't have to, to avoid the extra IDE overhead once we have generated
@@ -51,7 +64,8 @@ namespace Microsoft.Interop
 
                     // Once https://github.com/dotnet/roslyn/issues/61326 is resolved, we can avoid the ToString() here.
                     context.AddSource(fileName, source.ToString());
-                });
+                }
+            );
         }
     }
 }

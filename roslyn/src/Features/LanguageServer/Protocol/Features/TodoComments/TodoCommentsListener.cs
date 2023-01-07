@@ -25,8 +25,15 @@ namespace Microsoft.CodeAnalysis.TodoComments
         private readonly IGlobalOptionService _globalOptions;
         private readonly HostWorkspaceServices _services;
         private readonly IAsynchronousOperationListener _asyncListener;
-        private readonly Action<DocumentId, ImmutableArray<TodoCommentData>, ImmutableArray<TodoCommentData>> _onTodoCommentsUpdated;
-        private readonly ConcurrentDictionary<DocumentId, ImmutableArray<TodoCommentData>> _documentToInfos = new();
+        private readonly Action<
+            DocumentId,
+            ImmutableArray<TodoCommentData>,
+            ImmutableArray<TodoCommentData>
+        > _onTodoCommentsUpdated;
+        private readonly ConcurrentDictionary<
+            DocumentId,
+            ImmutableArray<TodoCommentData>
+        > _documentToInfos = new();
 
         /// <summary>
         /// Remote service connection. Created on demand when we startup and then
@@ -43,12 +50,19 @@ namespace Microsoft.CodeAnalysis.TodoComments
             IGlobalOptionService globalOptions,
             HostWorkspaceServices services,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            Action<DocumentId, ImmutableArray<TodoCommentData>, ImmutableArray<TodoCommentData>> onTodoCommentsUpdated,
-            CancellationToken disposalToken)
+            Action<
+                DocumentId,
+                ImmutableArray<TodoCommentData>,
+                ImmutableArray<TodoCommentData>
+            > onTodoCommentsUpdated,
+            CancellationToken disposalToken
+        )
         {
             _globalOptions = globalOptions;
             _services = services;
-            _asyncListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.TodoCommentList);
+            _asyncListener = asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.TodoCommentList
+            );
             _onTodoCommentsUpdated = onTodoCommentsUpdated;
             _disposalToken = disposalToken;
 
@@ -56,7 +70,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
                 TimeSpan.FromSeconds(1),
                 ProcessTodoCommentInfosAsync,
                 _asyncListener,
-                _disposalToken);
+                _disposalToken
+            );
         }
 
         public void Dispose()
@@ -76,7 +91,9 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
             var cancellationToken = _disposalToken;
 
-            var client = await RemoteHostClient.TryGetClientAsync(_services, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(_services, cancellationToken)
+                .ConfigureAwait(false);
             if (client == null)
             {
                 ComputeTodoCommentsInCurrentProcess(cancellationToken);
@@ -87,18 +104,25 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
             // Pass ourselves in as the callback target for the OOP service.  As it discovers
             // todo comments it will call back into us to notify VS about it.
-            _lazyConnection = client.CreateConnection<IRemoteTodoCommentsDiscoveryService>(callbackTarget: this);
+            _lazyConnection = client.CreateConnection<IRemoteTodoCommentsDiscoveryService>(
+                callbackTarget: this
+            );
 
             // Now kick off scanning in the OOP process.
             // If the call fails an error has already been reported and there is nothing more to do.
-            _ = await _lazyConnection.TryInvokeAsync(
-                (service, callbackId, cancellationToken) => service.ComputeTodoCommentsAsync(callbackId, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            _ = await _lazyConnection
+                .TryInvokeAsync(
+                    (service, callbackId, cancellationToken) =>
+                        service.ComputeTodoCommentsAsync(callbackId, cancellationToken),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private void ComputeTodoCommentsInCurrentProcess(CancellationToken cancellationToken)
         {
-            var registrationService = _services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService =
+                _services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new InProcTodoCommentsIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(
@@ -106,7 +130,9 @@ namespace Microsoft.CodeAnalysis.TodoComments
                 new IncrementalAnalyzerProviderMetadata(
                     nameof(InProcTodoCommentsIncrementalAnalyzerProvider),
                     highPriorityForActiveFile: false,
-                    workspaceKinds: WorkspaceKind.Host));
+                    workspaceKinds: WorkspaceKind.Host
+                )
+            );
         }
 
         private void GlobalOptionChanged(object? sender, OptionChangedEventArgs e)
@@ -115,7 +141,14 @@ namespace Microsoft.CodeAnalysis.TodoComments
             if (e.Option == TodoCommentOptionsStorage.TokenList && _lazyConnection != null)
             {
                 // only perform the call if connection has not been disposed:
-                _ = Task.Run(() => _lazyConnection?.TryInvokeAsync((service, cancellationToken) => service.ReanalyzeAsync(cancellationToken), _disposalToken))
+                _ = Task.Run(
+                        () =>
+                            _lazyConnection?.TryInvokeAsync(
+                                (service, cancellationToken) =>
+                                    service.ReanalyzeAsync(cancellationToken),
+                                _disposalToken
+                            )
+                    )
                     .ReportNonFatalErrorUnlessCancelledAsync(_disposalToken);
             }
         }
@@ -123,14 +156,19 @@ namespace Microsoft.CodeAnalysis.TodoComments
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public ValueTask ReportTodoCommentDataAsync(DocumentId documentId, ImmutableArray<TodoCommentData> infos, CancellationToken cancellationToken)
+        public ValueTask ReportTodoCommentDataAsync(
+            DocumentId documentId,
+            ImmutableArray<TodoCommentData> infos,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 _workQueue.AddWork(new DocumentAndComments(documentId, infos));
                 return ValueTaskFactory.CompletedTask;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 // report NFW before returning back to the remote process
                 throw ExceptionUtilities.Unreachable;
@@ -140,11 +178,13 @@ namespace Microsoft.CodeAnalysis.TodoComments
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public ValueTask<TodoCommentOptions> GetOptionsAsync(CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetTodoCommentOptions());
+        public ValueTask<TodoCommentOptions> GetOptionsAsync(CancellationToken cancellationToken) =>
+            ValueTaskFactory.FromResult(_globalOptions.GetTodoCommentOptions());
 
         private ValueTask ProcessTodoCommentInfosAsync(
-            ImmutableSegmentedList<DocumentAndComments> docAndCommentsArray, CancellationToken cancellationToken)
+            ImmutableSegmentedList<DocumentAndComments> docAndCommentsArray,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -181,7 +221,8 @@ namespace Microsoft.CodeAnalysis.TodoComments
 
         private static void AddFilteredInfos(
             ImmutableSegmentedList<DocumentAndComments> array,
-            ArrayBuilder<DocumentAndComments> filteredArray)
+            ArrayBuilder<DocumentAndComments> filteredArray
+        )
         {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var seenDocumentIds);
 

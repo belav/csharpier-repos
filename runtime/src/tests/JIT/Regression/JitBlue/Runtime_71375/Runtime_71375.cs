@@ -17,7 +17,16 @@ public class Runtime_71375
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static int VarArgs(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, Vector128<int> splitArg, __arglist) => splitArg.GetElement(0);
+    static int VarArgs(
+        int arg1,
+        int arg2,
+        int arg3,
+        int arg4,
+        int arg5,
+        int arg6,
+        Vector128<int> splitArg,
+        __arglist
+    ) => splitArg.GetElement(0);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static bool Problem()

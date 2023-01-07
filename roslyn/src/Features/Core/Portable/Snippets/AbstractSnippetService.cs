@@ -20,12 +20,16 @@ namespace Microsoft.CodeAnalysis.Snippets
 {
     internal abstract class AbstractSnippetService : ISnippetService
     {
-        private readonly ImmutableArray<Lazy<ISnippetProvider, LanguageMetadata>> _lazySnippetProviders;
+        private readonly ImmutableArray<
+            Lazy<ISnippetProvider, LanguageMetadata>
+        > _lazySnippetProviders;
         private readonly Dictionary<string, ISnippetProvider> _identifierToProviderMap = new();
         private readonly object _snippetProvidersLock = new();
         private ImmutableArray<ISnippetProvider> _snippetProviders;
 
-        public AbstractSnippetService(IEnumerable<Lazy<ISnippetProvider, LanguageMetadata>> lazySnippetProviders)
+        public AbstractSnippetService(
+            IEnumerable<Lazy<ISnippetProvider, LanguageMetadata>> lazySnippetProviders
+        )
         {
             _lazySnippetProviders = lazySnippetProviders.ToImmutableArray();
         }
@@ -41,15 +45,21 @@ namespace Microsoft.CodeAnalysis.Snippets
         }
 
         /// <summary>
-        /// Iterates through all providers and determines if the snippet 
+        /// Iterates through all providers and determines if the snippet
         /// can be added to the Completion list at the corresponding position.
         /// </summary>
-        public async Task<ImmutableArray<SnippetData>> GetSnippetsAsync(Document document, int position, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<SnippetData>> GetSnippetsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SnippetData>.GetInstance(out var arrayBuilder);
             foreach (var provider in GetSnippetProviders(document))
             {
-                var snippetData = await provider.GetSnippetDataAsync(document, position, cancellationToken).ConfigureAwait(false);
+                var snippetData = await provider
+                    .GetSnippetDataAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
                 arrayBuilder.AddIfNotNull(snippetData);
             }
 
@@ -63,10 +73,19 @@ namespace Microsoft.CodeAnalysis.Snippets
                 if (_snippetProviders.IsDefault)
                 {
                     using var _ = ArrayBuilder<ISnippetProvider>.GetInstance(out var arrayBuilder);
-                    foreach (var provider in _lazySnippetProviders.Where(p => p.Metadata.Language == document.Project.Language))
+                    foreach (
+                        var provider in _lazySnippetProviders.Where(
+                            p => p.Metadata.Language == document.Project.Language
+                        )
+                    )
                     {
                         var providerData = provider.Value;
-                        Debug.Assert(!_identifierToProviderMap.TryGetValue(providerData.SnippetIdentifier, out var _));
+                        Debug.Assert(
+                            !_identifierToProviderMap.TryGetValue(
+                                providerData.SnippetIdentifier,
+                                out var _
+                            )
+                        );
                         _identifierToProviderMap.Add(providerData.SnippetIdentifier, providerData);
                         arrayBuilder.Add(providerData);
                     }

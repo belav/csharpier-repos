@@ -5,7 +5,13 @@ using System;
 
 namespace System.Xml.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Interface | AttributeTargets.Struct, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Enum
+            | AttributeTargets.Interface
+            | AttributeTargets.Struct,
+        AllowMultiple = false
+    )]
     public sealed class XmlSerializerAssemblyAttribute : System.Attribute
     {
         private string? _assemblyName;

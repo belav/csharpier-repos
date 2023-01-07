@@ -26,13 +26,15 @@ namespace System.Text.Json.Serialization.Metadata
                 _lastEvictedTicks = DateTime.UtcNow.Ticks;
             }
 
-            public TValue GetOrAdd<TValue>(TKey key, Func<TKey, TValue> valueFactory) where TValue : class?
+            public TValue GetOrAdd<TValue>(TKey key, Func<TKey, TValue> valueFactory)
+                where TValue : class?
             {
                 CacheEntry entry = _cache.GetOrAdd(
                     key,
 #if NETCOREAPP
                     static (TKey key, Func<TKey, TValue> valueFactory) => new(valueFactory(key)),
-                    valueFactory);
+                    valueFactory
+                );
 #else
                     key => new(valueFactory(key)));
 #endif
@@ -66,7 +68,10 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 foreach (KeyValuePair<TKey, CacheEntry> kvp in _cache)
                 {
-                    if (utcNowTicks - Volatile.Read(ref kvp.Value.LastUsedTicks) >= _slidingExpirationTicks)
+                    if (
+                        utcNowTicks - Volatile.Read(ref kvp.Value.LastUsedTicks)
+                        >= _slidingExpirationTicks
+                    )
                     {
                         _cache.TryRemove(kvp.Key, out _);
                     }

@@ -10,7 +10,7 @@ using System.Linq;
 namespace System.CommandLine
 {
     /// <summary>
-    /// A symbol defining a named parameter and a value for that parameter. 
+    /// A symbol defining a named parameter and a value for that parameter.
     /// </summary>
     /// <seealso cref="IdentifierSymbol" />
     public abstract class Option : IdentifierSymbol, IValueDescriptor
@@ -36,7 +36,10 @@ namespace System.CommandLine
 
             if (aliases.Length == 0)
             {
-                throw new ArgumentException("An option must have at least one alias.", nameof(aliases));
+                throw new ArgumentException(
+                    "An option must have at least one alias.",
+                    nameof(aliases)
+                );
             }
 
             for (var i = 0; i < aliases.Length; i++)
@@ -89,7 +92,8 @@ namespace System.CommandLine
         /// <summary>
         /// Gets the list of completion sources for the option.
         /// </summary>
-        public List<Func<CompletionContext, IEnumerable<CompletionItem>>> CompletionSources => Argument.CompletionSources;
+        public List<Func<CompletionContext, IEnumerable<CompletionItem>>> CompletionSources =>
+            Argument.CompletionSources;
 
         /// <summary>
         /// Gets a value that indicates whether multiple argument tokens are allowed for each option identifier token.
@@ -106,8 +110,8 @@ namespace System.CommandLine
         /// </example>
         public bool AllowMultipleArgumentsPerToken { get; set; }
 
-        internal virtual bool IsGreedy
-            => Argument.Arity.MinimumNumberOfValues > 0 && Argument.ValueType != typeof(bool);
+        internal virtual bool IsGreedy =>
+            Argument.Arity.MinimumNumberOfValues > 0 && Argument.ValueType != typeof(bool);
 
         /// <summary>
         /// Indicates whether the option is required when its parent command is invoked.
@@ -152,8 +156,8 @@ namespace System.CommandLine
             }
 
             return completions
-                   .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
-                   .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
+                .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
+                .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <summary>

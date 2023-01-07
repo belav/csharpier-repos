@@ -26,7 +26,8 @@ public readonly record struct NonTrackedModificationCommandParameters
     public NonTrackedModificationCommandParameters(
         string tableName,
         string? schemaName,
-        bool sensitiveLoggingEnabled)
+        bool sensitiveLoggingEnabled
+    )
     {
         Table = null;
         TableName = tableName;
@@ -39,9 +40,7 @@ public readonly record struct NonTrackedModificationCommandParameters
     /// </summary>
     /// <param name="table">The table containing the data to be modified.</param>
     /// <param name="sensitiveLoggingEnabled">Indicates whether potentially sensitive data (e.g. database values) can be logged.</param>
-    public NonTrackedModificationCommandParameters(
-        ITable table,
-        bool sensitiveLoggingEnabled)
+    public NonTrackedModificationCommandParameters(ITable table, bool sensitiveLoggingEnabled)
     {
         Table = table;
         TableName = table.Name;

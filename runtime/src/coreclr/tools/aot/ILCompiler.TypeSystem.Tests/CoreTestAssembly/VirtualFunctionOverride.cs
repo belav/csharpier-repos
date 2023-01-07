@@ -26,20 +26,19 @@ namespace VirtualFunctionOverride
     class BaseGenericWithOverload<T>
     {
         public virtual void MyMethod(string s) { }
+
         public virtual void MyMethod(T s) { }
     }
 
     class DerivedGenericWithOverload<U> : BaseGenericWithOverload<U>
     {
         public override void MyMethod(string s) { }
+
         public override void MyMethod(U s) { }
     }
 
     class ClassWithFinalizer
     {
-        ~ClassWithFinalizer()
-        {
-
-        }
+        ~ClassWithFinalizer() { }
     }
 }

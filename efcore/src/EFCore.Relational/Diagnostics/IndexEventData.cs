@@ -25,8 +25,8 @@ public class IndexEventData : EventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEntityType entityType,
         string? indexName,
-        List<string> indexPropertyNames)
-        : base(eventDefinition, messageGenerator)
+        List<string> indexPropertyNames
+    ) : base(eventDefinition, messageGenerator)
     {
         EntityType = entityType;
         Name = indexName;

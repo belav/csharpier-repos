@@ -85,7 +85,9 @@ public class DateTimeModelBinder : IModelBinder
                 modelState.TryAddModelError(
                     modelName,
                     metadata.ModelBindingMessageProvider.ValueMustNotBeNullAccessor(
-                        valueProviderResult.ToString()));
+                        valueProviderResult.ToString()
+                    )
+                );
             }
             else
             {

@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
-    public class HttpClientHandlerTest_Url: HttpClientHandlerTestBase
+    public class HttpClientHandlerTest_Url : HttpClientHandlerTestBase
     {
         public HttpClientHandlerTest_Url(ITestOutputHelper output) : base(output) { }
 
@@ -25,20 +25,22 @@ namespace System.Net.Http.Functional.Tests
         {
             string serverPath = null;
 
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    client.BaseAddress = url;
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        client.BaseAddress = url;
 
-                    var getTask = client.GetAsync(requestPath);
+                        var getTask = client.GetAsync(requestPath);
 
-                    var response = await server.HandleRequestAsync();
-                    serverPath = response.Path;
+                        var response = await server.HandleRequestAsync();
+                        serverPath = response.Path;
 
-                    await getTask;
+                        await getTask;
+                    }
                 }
-            });
+            );
 
             Assert.Equal(expectedServerPath, serverPath);
         }

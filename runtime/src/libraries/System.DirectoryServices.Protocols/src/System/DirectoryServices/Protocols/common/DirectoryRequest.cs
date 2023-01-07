@@ -8,9 +8,7 @@ namespace System.DirectoryServices.Protocols
 {
     public abstract class DirectoryRequest : DirectoryOperation
     {
-        internal DirectoryRequest()
-        {
-        }
+        internal DirectoryRequest() { }
 
         public string RequestId
         {
@@ -56,30 +54,36 @@ namespace System.DirectoryServices.Protocols
 
             DistinguishedName = distinguishedName;
 
-            var objClassAttr = new DirectoryAttribute()
-            {
-                Name = nameof(objectClass)
-            };
+            var objClassAttr = new DirectoryAttribute() { Name = nameof(objectClass) };
             objClassAttr.Add(objectClass);
             Attributes.Add(objClassAttr);
         }
 
         public string DistinguishedName { get; set; }
 
-        public DirectoryAttributeCollection Attributes { get; } = new DirectoryAttributeCollection();
+        public DirectoryAttributeCollection Attributes { get; } =
+            new DirectoryAttributeCollection();
     }
 
     public class ModifyRequest : DirectoryRequest
     {
         public ModifyRequest() { }
 
-        public ModifyRequest(string distinguishedName, params DirectoryAttributeModification[] modifications) : this()
+        public ModifyRequest(
+            string distinguishedName,
+            params DirectoryAttributeModification[] modifications
+        ) : this()
         {
             DistinguishedName = distinguishedName;
             Modifications.AddRange(modifications);
         }
 
-        public ModifyRequest(string distinguishedName, DirectoryAttributeOperation operation, string attributeName, params object[] values) : this()
+        public ModifyRequest(
+            string distinguishedName,
+            DirectoryAttributeOperation operation,
+            string attributeName,
+            params object[] values
+        ) : this()
         {
             ArgumentNullException.ThrowIfNull(attributeName);
 
@@ -102,7 +106,8 @@ namespace System.DirectoryServices.Protocols
 
         public string DistinguishedName { get; set; }
 
-        public DirectoryAttributeModificationCollection Modifications { get; } = new DirectoryAttributeModificationCollection();
+        public DirectoryAttributeModificationCollection Modifications { get; } =
+            new DirectoryAttributeModificationCollection();
     }
 
     public class CompareRequest : DirectoryRequest
@@ -136,7 +141,11 @@ namespace System.DirectoryServices.Protocols
             CompareRequestHelper(distinguishedName, assertion.Name, assertion[0]);
         }
 
-        private void CompareRequestHelper(string distinguishedName, string attributeName, object value)
+        private void CompareRequestHelper(
+            string distinguishedName,
+            string attributeName,
+            object value
+        )
         {
             ArgumentNullException.ThrowIfNull(attributeName);
             ArgumentNullException.ThrowIfNull(value);
@@ -155,7 +164,11 @@ namespace System.DirectoryServices.Protocols
     {
         public ModifyDNRequest() { }
 
-        public ModifyDNRequest(string distinguishedName, string newParentDistinguishedName, string newName)
+        public ModifyDNRequest(
+            string distinguishedName,
+            string newParentDistinguishedName,
+            string newName
+        )
         {
             DistinguishedName = distinguishedName;
             NewParentDistinguishedName = newParentDistinguishedName;
@@ -213,7 +226,12 @@ namespace System.DirectoryServices.Protocols
     {
         public SearchRequest() { }
 
-        public SearchRequest(string distinguishedName, string ldapFilter, SearchScope searchScope, params string[] attributeList) : this()
+        public SearchRequest(
+            string distinguishedName,
+            string ldapFilter,
+            SearchScope searchScope,
+            params string[] attributeList
+        ) : this()
         {
             DistinguishedName = distinguishedName;
 
@@ -254,7 +272,11 @@ namespace System.DirectoryServices.Protocols
             {
                 if (value < SearchScope.Base || value > SearchScope.Subtree)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(SearchScope));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(SearchScope)
+                    );
                 }
 
                 _directoryScope = value;
@@ -268,7 +290,11 @@ namespace System.DirectoryServices.Protocols
             {
                 if (value < DereferenceAlias.Never || value > DereferenceAlias.Always)
                 {
-                    throw new InvalidEnumArgumentException(nameof(value), (int)value, typeof(DereferenceAlias));
+                    throw new InvalidEnumArgumentException(
+                        nameof(value),
+                        (int)value,
+                        typeof(DereferenceAlias)
+                    );
                 }
 
                 _directoryRefAlias = value;

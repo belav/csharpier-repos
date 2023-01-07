@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Host
         public ProjectCacheService(Workspace? workspace, bool createImplicitCache = false)
         {
             _workspace = workspace;
-            _configurationService = workspace?.Services.GetService<IWorkspaceConfigurationService>();
+            _configurationService =
+                workspace?.Services.GetService<IWorkspaceConfigurationService>();
             _implicitCache = createImplicitCache ? new SimpleMRUCache() : null;
 
             // Also clear the cache when the solution is cleared or removed.
@@ -42,7 +43,11 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 workspace.WorkspaceChanged += (s, e) =>
                 {
-                    if (e.Kind is WorkspaceChangeKind.SolutionCleared or WorkspaceChangeKind.SolutionRemoved)
+                    if (
+                        e.Kind
+                        is WorkspaceChangeKind.SolutionCleared
+                            or WorkspaceChangeKind.SolutionRemoved
+                    )
                         this.ClearImplicitCache();
                 };
             }
@@ -51,8 +56,10 @@ namespace Microsoft.CodeAnalysis.Host
         /// <summary>
         /// Recoverable trees only save significant memory for larger trees.
         /// </summary>
-        public int MinimumLengthForRecoverableTree
-            => (_configurationService?.Options.DisableRecoverableTrees != true) ? 4 * 1024 : int.MaxValue;
+        public int MinimumLengthForRecoverableTree =>
+            (_configurationService?.Options.DisableRecoverableTrees != true)
+                ? 4 * 1024
+                : int.MaxValue;
 
         public bool IsImplicitCacheEmpty
         {
@@ -89,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         [return: NotNullIfNotNull("instance")]
-        public T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, object owner, T? instance) where T : class
+        public T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, object owner, T? instance)
+            where T : class
         {
             if (IsEnabled)
             {
@@ -109,8 +117,7 @@ namespace Microsoft.CodeAnalysis.Host
             return instance;
         }
 
-        private bool IsEnabled
-            => _configurationService?.Options.DisableProjectCacheService != true;
+        private bool IsEnabled => _configurationService?.Options.DisableProjectCacheService != true;
 
         private bool PartOfP2PReferences(ProjectId key)
         {
@@ -125,7 +132,9 @@ namespace Microsoft.CodeAnalysis.Host
             foreach (var projectId in _activeCaches.Keys)
             {
                 // this should be cheap. graph is cached every time project reference is updated.
-                var p2pReferences = (ImmutableHashSet<ProjectId>)graph.GetProjectsThatThisProjectTransitivelyDependsOn(projectId);
+                var p2pReferences =
+                    (ImmutableHashSet<ProjectId>)
+                        graph.GetProjectsThatThisProjectTransitivelyDependsOn(projectId);
                 if (p2pReferences.Contains(key))
                 {
                     return true;
@@ -136,7 +145,11 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         [return: NotNullIfNotNull("instance")]
-        public T? CacheObjectIfCachingEnabledForKey<T>(ProjectId key, ICachedObjectOwner owner, T? instance) where T : class
+        public T? CacheObjectIfCachingEnabledForKey<T>(
+            ProjectId key,
+            ICachedObjectOwner owner,
+            T? instance
+        ) where T : class
         {
             if (IsEnabled)
             {
@@ -180,8 +193,7 @@ namespace Microsoft.CodeAnalysis.Host
                 _key = key;
             }
 
-            public void Dispose()
-                => _cacheService.DisableCaching(_key, this);
+            public void Dispose() => _cacheService.DisableCaching(_key, this);
 
             internal void CreateStrongReference(object key, object? instance)
             {
@@ -196,8 +208,8 @@ namespace Microsoft.CodeAnalysis.Host
                 }
             }
 
-            internal void CreateOwnerEntry(ICachedObjectOwner owner)
-                => _ownerObjects.Add(new WeakReference<ICachedObjectOwner>(owner));
+            internal void CreateOwnerEntry(ICachedObjectOwner owner) =>
+                _ownerObjects.Add(new WeakReference<ICachedObjectOwner>(owner));
 
             internal void FreeOwnerEntries()
             {

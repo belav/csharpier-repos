@@ -19,7 +19,9 @@ internal static partial class Interop
             }
 
             internal long ToTicks() => ((long)dwHighDateTime << 32) + dwLowDateTime;
+
             internal DateTime ToDateTimeUtc() => DateTime.FromFileTimeUtc(ToTicks());
+
             internal DateTimeOffset ToDateTimeOffset() => DateTimeOffset.FromFileTime(ToTicks());
         }
     }

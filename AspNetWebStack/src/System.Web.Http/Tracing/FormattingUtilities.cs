@@ -27,18 +27,26 @@ namespace System.Web.Http.Tracing
         public static string ActionArgumentsToString(IDictionary<string, object> actionArguments)
         {
             Contract.Assert(actionArguments != null);
-            return String.Join(", ",
-                               actionArguments.Keys.Select<string, string>(
-                                   (k) => k + "=" + ValueToString(actionArguments[k], CultureInfo.CurrentCulture)));
+            return String.Join(
+                ", ",
+                actionArguments.Keys.Select<string, string>(
+                    (k) => k + "=" + ValueToString(actionArguments[k], CultureInfo.CurrentCulture)
+                )
+            );
         }
 
         public static string ActionDescriptorToString(HttpActionDescriptor actionDescriptor)
         {
             Contract.Assert(actionDescriptor != null);
 
-            string parameterList = String.Join(", ",
-                                               actionDescriptor.GetParameters().Select<HttpParameterDescriptor, string>(
-                                                   (p) => p.ParameterType.Name + " " + p.ParameterName));
+            string parameterList = String.Join(
+                ", ",
+                actionDescriptor
+                    .GetParameters()
+                    .Select<HttpParameterDescriptor, string>(
+                        (p) => p.ParameterType.Name + " " + p.ParameterName
+                    )
+            );
 
             return actionDescriptor.ActionName + "(" + parameterList + ")";
         }
@@ -46,10 +54,16 @@ namespace System.Web.Http.Tracing
         public static string ActionInvokeToString(HttpActionContext actionContext)
         {
             Contract.Assert(actionContext != null);
-            return ActionInvokeToString(actionContext.ActionDescriptor.ActionName, actionContext.ActionArguments);
+            return ActionInvokeToString(
+                actionContext.ActionDescriptor.ActionName,
+                actionContext.ActionArguments
+            );
         }
 
-        public static string ActionInvokeToString(string actionName, IDictionary<string, object> arguments)
+        public static string ActionInvokeToString(
+            string actionName,
+            IDictionary<string, object> arguments
+        )
         {
             Contract.Assert(actionName != null);
             Contract.Assert(arguments != null);
@@ -61,7 +75,10 @@ namespace System.Web.Http.Tracing
         {
             Contract.Assert(formatters != null);
 
-            return String.Join(", ", formatters.Select<MediaTypeFormatter, string>((f) => f.GetType().Name));
+            return String.Join(
+                ", ",
+                formatters.Select<MediaTypeFormatter, string>((f) => f.GetType().Name)
+            );
         }
 
         public static string ModelBinderToString(ModelBinderProvider provider)
@@ -74,7 +91,10 @@ namespace System.Web.Http.Tracing
                 return provider.GetType().Name;
             }
 
-            string modelBinderList = String.Join(", ", composite.Providers.Select<ModelBinderProvider, string>(ModelBinderToString));
+            string modelBinderList = String.Join(
+                ", ",
+                composite.Providers.Select<ModelBinderProvider, string>(ModelBinderToString)
+            );
 
             return provider.GetType().Name + "(" + modelBinderList + ")";
         }
@@ -96,9 +116,11 @@ namespace System.Web.Http.Tracing
                 {
                     foreach (ModelError error in state.Errors)
                     {
-                        string errorString = Error.Format(SRResources.TraceModelStateErrorMessage, 
-                                                           key,
-                                                           error.ErrorMessage);
+                        string errorString = Error.Format(
+                            SRResources.TraceModelStateErrorMessage,
+                            key,
+                            error.ErrorMessage
+                        );
                         if (modelStateBuilder.Length > 0)
                         {
                             modelStateBuilder.Append(',');
@@ -116,7 +138,10 @@ namespace System.Web.Http.Tracing
         {
             Contract.Assert(routeData != null);
 
-            return String.Join(",", routeData.Values.Select((pair) => Error.Format("{0}:{1}", pair.Key, pair.Value)));
+            return String.Join(
+                ",",
+                routeData.Values.Select((pair) => Error.Format("{0}:{1}", pair.Key, pair.Value))
+            );
         }
 
         public static string ValueProviderToString(IValueProvider provider)
@@ -129,7 +154,10 @@ namespace System.Web.Http.Tracing
                 return provider.GetType().Name;
             }
 
-            string providerList = String.Join(", ", composite.Select<IValueProvider, string>(ValueProviderToString));
+            string providerList = String.Join(
+                ", ",
+                composite.Select<IValueProvider, string>(ValueProviderToString)
+            );
             return provider.GetType().Name + "(" + providerList + ")";
         }
 

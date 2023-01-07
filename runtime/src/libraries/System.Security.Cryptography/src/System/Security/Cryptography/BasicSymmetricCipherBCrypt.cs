@@ -12,8 +12,16 @@ namespace System.Security.Cryptography
     {
         private readonly BasicSymmetricCipherLiteBCrypt _cipherLite;
 
-        public BasicSymmetricCipherBCrypt(SafeAlgorithmHandle algorithm, CipherMode cipherMode, int blockSizeInBytes, int paddingSizeInBytes, ReadOnlySpan<byte> key, bool ownsParentHandle, byte[]? iv, bool encrypting)
-            : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
+        public BasicSymmetricCipherBCrypt(
+            SafeAlgorithmHandle algorithm,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            int paddingSizeInBytes,
+            ReadOnlySpan<byte> key,
+            bool ownsParentHandle,
+            byte[]? iv,
+            bool encrypting
+        ) : base(cipherMode.GetCipherIv(iv), blockSizeInBytes, paddingSizeInBytes)
         {
             _cipherLite = new BasicSymmetricCipherLiteBCrypt(
                 algorithm,
@@ -22,7 +30,8 @@ namespace System.Security.Cryptography
                 key,
                 ownsParentHandle,
                 IV, //implicit 'null' to empty span
-                encrypting);
+                encrypting
+            );
         }
 
         protected override void Dispose(bool disposing)

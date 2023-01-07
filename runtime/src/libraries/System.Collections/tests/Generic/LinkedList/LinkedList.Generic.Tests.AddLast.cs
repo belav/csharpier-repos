@@ -16,7 +16,9 @@ namespace System.Collections.Tests
         {
             int arraySize = 16;
             int seed = 21543;
-            T[] tempItems, headItems, tailItems;
+            T[] tempItems,
+                headItems,
+                tailItems;
 
             headItems = new T[16];
             tailItems = new T[16];
@@ -104,7 +106,10 @@ namespace System.Collections.Tests
             LinkedList<T> linkedList = new LinkedList<T>();
             int arraySize = 16;
             int seed = 21543;
-            T[] tempItems, headItems, headItemsReverse, tailItems;
+            T[] tempItems,
+                headItems,
+                headItemsReverse,
+                tailItems;
 
             headItems = new T[arraySize];
             tailItems = new T[arraySize];

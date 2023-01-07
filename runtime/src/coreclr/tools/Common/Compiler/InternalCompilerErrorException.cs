@@ -7,14 +7,10 @@ namespace ILCompiler
 {
     public class InternalCompilerErrorException : Exception
     {
-        public InternalCompilerErrorException(string message)
-            : this(message, innerException: null)
-        {
-        }
+        public InternalCompilerErrorException(string message) : this(message, innerException: null)
+        { }
 
         public InternalCompilerErrorException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
     }
 }

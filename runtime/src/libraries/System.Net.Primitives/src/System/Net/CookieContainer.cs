@@ -68,18 +68,12 @@ namespace System.Net
 
         internal string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal CookieVariant Variant
         {
-            get
-            {
-                return _variant;
-            }
+            get { return _variant; }
         }
     }
 
@@ -87,7 +81,9 @@ namespace System.Net
     //
     // Manage cookies for a user (implicit). Based on RFC 2965.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class CookieContainer
     {
         public const int DefaultCookieLimit = 300;
@@ -95,8 +91,9 @@ namespace System.Net
         public const int DefaultCookieLengthLimit = 4096;
 
         private static readonly string s_fqdnMyDomain = CreateFqdnMyDomain();
-        private static readonly HeaderVariantInfo[] s_headerInfo = {
-            new HeaderVariantInfo(HttpKnownHeaderNames.SetCookie,  CookieVariant.Rfc2109),
+        private static readonly HeaderVariantInfo[] s_headerInfo =
+        {
+            new HeaderVariantInfo(HttpKnownHeaderNames.SetCookie, CookieVariant.Rfc2109),
             new HeaderVariantInfo(HttpKnownHeaderNames.SetCookie2, CookieVariant.Rfc2965)
         };
 
@@ -107,9 +104,7 @@ namespace System.Net
         private int m_count; // Do not rename (binary serialization)
         private readonly string m_fqdnMyDomain = s_fqdnMyDomain; // Do not rename (binary serialization)
 
-        public CookieContainer()
-        {
-        }
+        public CookieContainer() { }
 
         public CookieContainer(int capacity)
         {
@@ -120,11 +115,18 @@ namespace System.Net
             m_maxCookies = capacity;
         }
 
-        public CookieContainer(int capacity, int perDomainCapacity, int maxCookieSize) : this(capacity)
+        public CookieContainer(int capacity, int perDomainCapacity, int maxCookieSize)
+            : this(capacity)
         {
-            if (perDomainCapacity != int.MaxValue && (perDomainCapacity <= 0 || perDomainCapacity > capacity))
+            if (
+                perDomainCapacity != int.MaxValue
+                && (perDomainCapacity <= 0 || perDomainCapacity > capacity)
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(perDomainCapacity), SR.Format(SR.net_cookie_capacity_range, "PerDomainCapacity", 0, capacity));
+                throw new ArgumentOutOfRangeException(
+                    nameof(perDomainCapacity),
+                    SR.Format(SR.net_cookie_capacity_range, "PerDomainCapacity", 0, capacity)
+                );
             }
             m_maxCookiesPerDomain = perDomainCapacity;
             if (maxCookieSize <= 0)
@@ -137,23 +139,29 @@ namespace System.Net
         private static string CreateFqdnMyDomain()
         {
             string domain = HostInformation.DomainName;
-            return domain != null && domain.Length > 1 ?
-                '.' + domain :
-                string.Empty;
+            return domain != null && domain.Length > 1 ? '.' + domain : string.Empty;
         }
 
         // NOTE: after shrinking the capacity, Count can become greater than Capacity.
         public int Capacity
         {
-            get
-            {
-                return m_maxCookies;
-            }
+            get { return m_maxCookies; }
             set
             {
-                if (value <= 0 || (value < m_maxCookiesPerDomain && m_maxCookiesPerDomain != int.MaxValue))
+                if (
+                    value <= 0
+                    || (value < m_maxCookiesPerDomain && m_maxCookiesPerDomain != int.MaxValue)
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Format(SR.net_cookie_capacity_range, "Capacity", 0, m_maxCookiesPerDomain));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Format(
+                            SR.net_cookie_capacity_range,
+                            "Capacity",
+                            0,
+                            m_maxCookiesPerDomain
+                        )
+                    );
                 }
                 if (value < m_maxCookies)
                 {
@@ -169,18 +177,12 @@ namespace System.Net
         /// </devdoc>
         public int Count
         {
-            get
-            {
-                return m_count;
-            }
+            get { return m_count; }
         }
 
         public int MaxCookieSize
         {
-            get
-            {
-                return m_maxCookieSize;
-            }
+            get { return m_maxCookieSize; }
             set
             {
                 ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
@@ -193,10 +195,7 @@ namespace System.Net
         /// </devdoc>
         public int PerDomainCapacity
         {
-            get
-            {
-                return m_maxCookiesPerDomain;
-            }
+            get { return m_maxCookiesPerDomain; }
             set
             {
                 if (value <= 0 || (value > m_maxCookies && value != int.MaxValue))
@@ -221,7 +220,8 @@ namespace System.Net
             {
                 throw new ArgumentException(
                     SR.Format(SR.net_emptystringcall, nameof(cookie) + "." + nameof(cookie.Domain)),
-                    nameof(cookie));
+                    nameof(cookie)
+                );
             }
 
             Uri? uri;
@@ -229,7 +229,9 @@ namespace System.Net
 
             // We cannot add an invalid cookie into the container.
             // Trying to prepare Uri for the cookie verification.
-            uriSb.Append(cookie.Secure ? UriScheme.Https : UriScheme.Http).Append(UriScheme.SchemeDelimiter);
+            uriSb
+                .Append(cookie.Secure ? UriScheme.Https : UriScheme.Http)
+                .Append(UriScheme.SchemeDelimiter);
 
             // If the original cookie has an explicitly set domain, copy it over to the new cookie.
             if (!cookie.DomainImplicit)
@@ -241,7 +243,6 @@ namespace System.Net
             }
             uriSb.Append(cookie.Domain);
 
-
             // Either keep Port as implicit or set it according to original cookie.
             if (cookie.PortList != null)
             {
@@ -252,11 +253,20 @@ namespace System.Net
             uriSb.Append(cookie.Path);
 
             if (!Uri.TryCreate(uriSb.ToString(), UriKind.Absolute, out uri))
-                throw new CookieException(SR.Format(SR.net_cookie_attribute, "Domain", cookie.Domain));
+                throw new CookieException(
+                    SR.Format(SR.net_cookie_attribute, "Domain", cookie.Domain)
+                );
 
             // We don't know cookie verification status, so re-create the cookie and verify it.
             Cookie new_cookie = cookie.Clone();
-            new_cookie.VerifySetDefaults(new_cookie.Variant, uri, IsLocalDomain(uri.Host), m_fqdnMyDomain, true, true);
+            new_cookie.VerifySetDefaults(
+                new_cookie.Variant,
+                uri,
+                IsLocalDomain(uri.Host),
+                m_fqdnMyDomain,
+                true,
+                true
+            );
 
             Add(new_cookie, true);
         }
@@ -271,7 +281,9 @@ namespace System.Net
             {
                 if (throwOnError)
                 {
-                    throw new CookieException(SR.Format(SR.net_cookie_size, cookie, m_maxCookieSize));
+                    throw new CookieException(
+                        SR.Format(SR.net_cookie_size, cookie, m_maxCookieSize)
+                    );
                 }
                 return;
             }
@@ -414,7 +426,10 @@ namespace System.Net
 
                             // We also find the least used cookie collection in ENTIRE container.
                             // We count the collection as LRU only if it holds 1+ elements.
-                            if (cc.Count > 0 && (tempUsed = cc.TimeStamp(CookieCollection.Stamp.Check)) < oldUsed)
+                            if (
+                                cc.Count > 0
+                                && (tempUsed = cc.TimeStamp(CookieCollection.Stamp.Check)) < oldUsed
+                            )
                             {
                                 lruDomain = tempDomain;
                                 lruCc = cc;
@@ -424,7 +439,10 @@ namespace System.Net
                     }
 
                     // Check if we have reduced to the limit of the domain by expiration only.
-                    int min_count = Math.Min((int)(domain_count * remainingFraction), Math.Min(m_maxCookiesPerDomain, m_maxCookies) - 1);
+                    int min_count = Math.Min(
+                        (int)(domain_count * remainingFraction),
+                        Math.Min(m_maxCookiesPerDomain, m_maxCookies) - 1
+                    );
                     if (domain_count > min_count)
                     {
                         // This case requires sorting all domain collections by timestamp.
@@ -541,7 +559,8 @@ namespace System.Net
                         }
 
                         removePathList.Clear();
-                        if (pathList.Count == 0) removeDomainList.Add(currentDomain);
+                        if (pathList.Count == 0)
+                            removeDomainList.Add(currentDomain);
                     }
                 }
 
@@ -605,7 +624,16 @@ namespace System.Net
             }
 
             // Test domain membership.
-            if (string.Compare(m_fqdnMyDomain, 0, host, dot, m_fqdnMyDomain.Length, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(
+                    m_fqdnMyDomain,
+                    0,
+                    host,
+                    dot,
+                    m_fqdnMyDomain.Length,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
             {
                 return true;
             }
@@ -660,7 +688,14 @@ namespace System.Net
             ArgumentNullException.ThrowIfNull(cookie);
 
             Cookie new_cookie = cookie.Clone();
-            new_cookie.VerifySetDefaults(new_cookie.Variant, uri, IsLocalDomain(uri.Host), m_fqdnMyDomain, true, true);
+            new_cookie.VerifySetDefaults(
+                new_cookie.Variant,
+                uri,
+                IsLocalDomain(uri.Host),
+                m_fqdnMyDomain,
+                true,
+                true
+            );
 
             Add(new_cookie, true);
         }
@@ -674,14 +709,30 @@ namespace System.Net
             foreach (Cookie c in cookies)
             {
                 Cookie new_cookie = c.Clone();
-                new_cookie.VerifySetDefaults(new_cookie.Variant, uri, isLocalDomain, m_fqdnMyDomain, true, true);
+                new_cookie.VerifySetDefaults(
+                    new_cookie.Variant,
+                    uri,
+                    isLocalDomain,
+                    m_fqdnMyDomain,
+                    true,
+                    true
+                );
                 Add(new_cookie, true);
             }
         }
 
-        internal CookieCollection CookieCutter(Uri uri, string? headerName, string setCookieHeader, bool isThrow)
+        internal CookieCollection CookieCutter(
+            Uri uri,
+            string? headerName,
+            string setCookieHeader,
+            bool isThrow
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"uri:{uri} headerName:{headerName} setCookieHeader:{setCookieHeader} isThrow:{isThrow}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"uri:{uri} headerName:{headerName} setCookieHeader:{setCookieHeader} isThrow:{isThrow}"
+                );
 
             CookieCollection cookies = new CookieCollection();
             CookieVariant variant = CookieVariant.Unknown;
@@ -693,7 +744,15 @@ namespace System.Net
             {
                 for (int i = 0; i < s_headerInfo.Length; ++i)
                 {
-                    if ((string.Equals(headerName, s_headerInfo[i].Name, StringComparison.OrdinalIgnoreCase)))
+                    if (
+                        (
+                            string.Equals(
+                                headerName,
+                                s_headerInfo[i].Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
                     {
                         variant = s_headerInfo[i].Variant;
                     }
@@ -707,7 +766,8 @@ namespace System.Net
                 do
                 {
                     Cookie? cookie = parser.Get();
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"CookieParser returned cookie:{cookie}");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, $"CookieParser returned cookie:{cookie}");
 
                     if (cookie == null)
                     {
@@ -731,7 +791,16 @@ namespace System.Net
 
                     // This will set the default values from the response URI
                     // AND will check for cookie validity
-                    if (!cookie.VerifySetDefaults(variant, uri, isLocalDomain, m_fqdnMyDomain, true, isThrow))
+                    if (
+                        !cookie.VerifySetDefaults(
+                            variant,
+                            uri,
+                            isLocalDomain,
+                            m_fqdnMyDomain,
+                            true,
+                            isThrow
+                        )
+                    )
                     {
                         continue;
                     }
@@ -748,7 +817,10 @@ namespace System.Net
             {
                 if (isThrow)
                 {
-                    throw new CookieException(SR.Format(SR.net_cookie_parse_header, uri.AbsoluteUri), e);
+                    throw new CookieException(
+                        SR.Format(SR.net_cookie_parse_header, uri.AbsoluteUri),
+                        e
+                    );
                 }
             }
 
@@ -805,8 +877,10 @@ namespace System.Net
             int port = uri.Port;
             CookieCollection? cookies = null;
 
-            var domainAttributeMatchAnyCookieVariant = new System.Collections.Generic.List<string>();
-            System.Collections.Generic.List<string>? domainAttributeMatchOnlyCookieVariantPlain = null;
+            var domainAttributeMatchAnyCookieVariant =
+                new System.Collections.Generic.List<string>();
+            System.Collections.Generic.List<string>? domainAttributeMatchOnlyCookieVariantPlain =
+                null;
 
             string fqdnRemote = uri.Host;
 
@@ -849,23 +923,47 @@ namespace System.Net
                         while ((dot < last) && (dot = fqdnRemote.IndexOf('.', dot + 1)) != -1)
                         {
                             // These candidates can only match CookieVariant.Plain cookies.
-                            domainAttributeMatchOnlyCookieVariantPlain ??= new System.Collections.Generic.List<string>();
-                            domainAttributeMatchOnlyCookieVariantPlain.Add(fqdnRemote.Substring(dot));
+                            domainAttributeMatchOnlyCookieVariantPlain ??=
+                                new System.Collections.Generic.List<string>();
+                            domainAttributeMatchOnlyCookieVariantPlain.Add(
+                                fqdnRemote.Substring(dot)
+                            );
                         }
                     }
                 }
             }
 
-            BuildCookieCollectionFromDomainMatches(uri, isSecure, port, ref cookies, domainAttributeMatchAnyCookieVariant, false);
+            BuildCookieCollectionFromDomainMatches(
+                uri,
+                isSecure,
+                port,
+                ref cookies,
+                domainAttributeMatchAnyCookieVariant,
+                false
+            );
             if (domainAttributeMatchOnlyCookieVariantPlain != null)
             {
-                BuildCookieCollectionFromDomainMatches(uri, isSecure, port, ref cookies, domainAttributeMatchOnlyCookieVariantPlain, true);
+                BuildCookieCollectionFromDomainMatches(
+                    uri,
+                    isSecure,
+                    port,
+                    ref cookies,
+                    domainAttributeMatchOnlyCookieVariantPlain,
+                    true
+                );
             }
 
             return cookies;
         }
 
-        private void BuildCookieCollectionFromDomainMatches(Uri uri, bool isSecure, int port, ref CookieCollection? cookies, System.Collections.Generic.List<string> domainAttribute, bool matchOnlyPlainCookie)
+        private void BuildCookieCollectionFromDomainMatches(
+            Uri uri,
+            bool isSecure,
+            int port,
+            ref CookieCollection? cookies,
+            System.Collections.Generic.List<string> domainAttribute,
+            bool matchOnlyPlainCookie
+        )
         {
             for (int i = 0; i < domainAttribute.Count; i++)
             {
@@ -890,7 +988,13 @@ namespace System.Net
                         {
                             CookieCollection cc = (CookieCollection)list.GetByIndex(e)!;
                             cc.TimeStamp(CookieCollection.Stamp.Set);
-                            MergeUpdateCollections(ref cookies, cc, port, isSecure, matchOnlyPlainCookie);
+                            MergeUpdateCollections(
+                                ref cookies,
+                                cc,
+                                port,
+                                isSecure,
+                                matchOnlyPlainCookie
+                            );
                         }
                     }
                 }
@@ -921,12 +1025,18 @@ namespace System.Net
 
             if (!requestPath.StartsWith(cookiePath, StringComparison.Ordinal))
                 return false;
-            return requestPath.Length == cookiePath.Length ||
-                   cookiePath.EndsWith('/') ||
-                   requestPath[cookiePath.Length] == '/';
+            return requestPath.Length == cookiePath.Length
+                || cookiePath.EndsWith('/')
+                || requestPath[cookiePath.Length] == '/';
         }
 
-        private void MergeUpdateCollections(ref CookieCollection? destination, CookieCollection source, int port, bool isSecure, bool isPlainOnly)
+        private void MergeUpdateCollections(
+            ref CookieCollection? destination,
+            CookieCollection source,
+            int port,
+            bool isSecure,
+            bool isPlainOnly
+        )
         {
             lock (source)
             {
@@ -1015,11 +1125,14 @@ namespace System.Net
                 delimiter = "; ";
             }
 
-            optCookie2 = cookies.IsOtherVersionSeen ?
-                          (Cookie.SpecialAttributeLiteral +
-                           CookieFields.VersionAttributeName +
-                           Cookie.EqualsLiteral +
-                           Cookie.MaxSupportedVersionString) : string.Empty;
+            optCookie2 = cookies.IsOtherVersionSeen
+                ? (
+                    Cookie.SpecialAttributeLiteral
+                    + CookieFields.VersionAttributeName
+                    + Cookie.EqualsLiteral
+                    + Cookie.MaxSupportedVersionString
+                )
+                : string.Empty;
 
             return StringBuilderCache.GetStringAndRelease(builder);
         }
@@ -1036,12 +1149,16 @@ namespace System.Net
     // PathList needs to be public in order to maintain binary serialization compatibility as the System shim
     // needs to have access to type-forward it.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class PathList
     {
         // Usage of PathList depends on it being shallowly immutable;
         // adding any mutable fields to it would result in breaks.
-        private readonly SortedList m_list = SortedList.Synchronized(new SortedList(PathListComparer.StaticInstance)); // Do not rename (binary serialization)
+        private readonly SortedList m_list = SortedList.Synchronized(
+            new SortedList(PathListComparer.StaticInstance)
+        ); // Do not rename (binary serialization)
 
         internal int Count => m_list.Count;
 
@@ -1062,10 +1179,7 @@ namespace System.Net
 
         internal ICollection Values
         {
-            get
-            {
-                return m_list.Values;
-            }
+            get { return m_list.Values; }
         }
 
         internal object? this[string s]
@@ -1108,7 +1222,9 @@ namespace System.Net
         internal object SyncRoot => m_list.SyncRoot;
 
         [Serializable]
-        [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        [System.Runtime.CompilerServices.TypeForwardedFrom(
+            "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        )]
         private sealed class PathListComparer : IComparer
         {
             internal static readonly PathListComparer StaticInstance = new PathListComparer();

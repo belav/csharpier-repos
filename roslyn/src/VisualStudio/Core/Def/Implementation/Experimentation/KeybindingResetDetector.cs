@@ -44,7 +44,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
     /// If we find other extensions that do this in the future, we'll re-use this same mechanism
     /// </para>
     [Export(typeof(IExperiment))]
-    internal sealed class KeybindingResetDetector : ForegroundThreadAffinitizedObject, IExperiment, IOleCommandTarget
+    internal sealed class KeybindingResetDetector
+        : ForegroundThreadAffinitizedObject,
+            IExperiment,
+            IOleCommandTarget
     {
         // Flight info
         private const string InternalFlightName = "keybindgoldbarint";
@@ -58,8 +61,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
         private const uint ResumeId = 707;
         private const uint SuspendId = 708;
         private const uint ToggleSuspendId = 709;
-        private static readonly Guid ReSharperPackageGuid = new("0C6E6407-13FC-4878-869A-C8B4016C57FE");
-        private static readonly Guid ReSharperCommandGroup = new("{47F03277-5055-4922-899C-0F7F30D26BF1}");
+        private static readonly Guid ReSharperPackageGuid =
+            new("0C6E6407-13FC-4878-869A-C8B4016C57FE");
+        private static readonly Guid ReSharperCommandGroup =
+            new("{47F03277-5055-4922-899C-0F7F30D26BF1}");
 
         private readonly VisualStudioWorkspace _workspace;
         private readonly System.IServiceProvider _serviceProvider;
@@ -73,6 +78,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
         private uint _priorityCommandTargetCookie = VSConstants.VSCOOKIE_NIL;
 
         private CancellationTokenSource _cancellationTokenSource = new();
+
         /// <summary>
         /// If false, ReSharper is either not installed, or has been disabled in the extension manager.
         /// If true, the ReSharper extension is enabled. ReSharper's internal status could be either suspended or enabled.
@@ -87,8 +93,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public KeybindingResetDetector(IThreadingContext threadingContext, VisualStudioWorkspace workspace, SVsServiceProvider serviceProvider)
-            : base(threadingContext)
+        public KeybindingResetDetector(
+            IThreadingContext threadingContext,
+            VisualStudioWorkspace workspace,
+            SVsServiceProvider serviceProvider
+        ) : base(threadingContext)
         {
             _workspace = workspace;
             _serviceProvider = serviceProvider;
@@ -110,13 +119,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             AssertIsForeground();
 
             // Ensure one of the flights is enabled, otherwise bail
-            _experimentationService = _workspace.Services.GetRequiredService<IExperimentationService>();
-            if (!_experimentationService.IsExperimentEnabled(ExternalFlightName) && !_experimentationService.IsExperimentEnabled(InternalFlightName))
+            _experimentationService =
+                _workspace.Services.GetRequiredService<IExperimentationService>();
+            if (
+                !_experimentationService.IsExperimentEnabled(ExternalFlightName)
+                && !_experimentationService.IsExperimentEnabled(InternalFlightName)
+            )
             {
                 return;
             }
 
-            var vsShell = IServiceProviderExtensions.GetService<SVsShell, IVsShell>(_serviceProvider);
+            var vsShell = IServiceProviderExtensions.GetService<SVsShell, IVsShell>(
+                _serviceProvider
+            );
             var hr = vsShell.IsPackageInstalled(ReSharperPackageGuid, out var extensionEnabled);
             if (ErrorHandler.Failed(hr))
             {
@@ -129,11 +144,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             if (_resharperExtensionInstalledAndEnabled)
             {
                 // We need to monitor for suspend/resume commands, so create and install the command target and the modal callback.
-                var priorityCommandTargetRegistrar = IServiceProviderExtensions.GetService<SVsRegisterPriorityCommandTarget, IVsRegisterPriorityCommandTarget>(_serviceProvider);
+                var priorityCommandTargetRegistrar = IServiceProviderExtensions.GetService<
+                    SVsRegisterPriorityCommandTarget,
+                    IVsRegisterPriorityCommandTarget
+                >(_serviceProvider);
                 hr = priorityCommandTargetRegistrar.RegisterPriorityCommandTarget(
-                    dwReserved: 0 /* from docs must be 0 */,
+                    dwReserved: 0 /* from docs must be 0 */
+                    ,
                     pCmdTrgt: this,
-                    pdwCookie: out _priorityCommandTargetCookie);
+                    pdwCookie: out _priorityCommandTargetCookie
+                );
 
                 if (ErrorHandler.Failed(hr))
                 {
@@ -158,11 +178,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             var cancellationToken = _cancellationTokenSource.Token;
 
             // make sure all state machine change work is serialized so that cancellation
-            // doesn't mess the state up.   
-            _lastTask = _lastTask.SafeContinueWithFromAsync(_ =>
-            {
-                return UpdateStateMachineWorkerAsync(cancellationToken);
-            }, cancellationToken, TaskScheduler.Default);
+            // doesn't mess the state up.
+            _lastTask = _lastTask.SafeContinueWithFromAsync(
+                _ =>
+                {
+                    return UpdateStateMachineWorkerAsync(cancellationToken);
+                },
+                cancellationToken,
+                TaskScheduler.Default
+            );
         }
 
         private async Task UpdateStateMachineWorkerAsync(CancellationToken cancellationToken)
@@ -186,7 +210,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 return;
             }
 
-            options = options.WithChangedOption(KeybindingResetOptions.ReSharperStatus, currentStatus);
+            options = options.WithChangedOption(
+                KeybindingResetOptions.ReSharperStatus,
+                currentStatus
+            );
 
             switch (lastStatus)
             {
@@ -195,7 +222,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                     if (currentStatus == ReSharperStatus.Enabled)
                     {
                         // N->E or S->E. If ReSharper was just installed and is enabled, reset NeedsReset.
-                        options = options.WithChangedOption(KeybindingResetOptions.NeedsReset, false);
+                        options = options.WithChangedOption(
+                            KeybindingResetOptions.NeedsReset,
+                            false
+                        );
                     }
 
                     // Else is N->N, N->S, S->N, S->S. N->S can occur if the user suspends ReSharper, then disables
@@ -207,7 +237,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                     if (currentStatus != ReSharperStatus.Enabled)
                     {
                         // E->N or E->S. Set NeedsReset. Pop the gold bar to the user.
-                        options = options.WithChangedOption(KeybindingResetOptions.NeedsReset, true);
+                        options = options.WithChangedOption(
+                            KeybindingResetOptions.NeedsReset,
+                            true
+                        );
                     }
 
                     // Else is E->E. No actions to take
@@ -235,34 +268,53 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
 
             _infoBarOpen = true;
 
-            Debug.Assert(_experimentationService.IsExperimentEnabled(InternalFlightName) ||
-                         _experimentationService.IsExperimentEnabled(ExternalFlightName));
+            Debug.Assert(
+                _experimentationService.IsExperimentEnabled(InternalFlightName)
+                    || _experimentationService.IsExperimentEnabled(ExternalFlightName)
+            );
 
-            var message = ServicesVSResources.We_notice_you_suspended_0_Reset_keymappings_to_continue_to_navigate_and_refactor;
+            var message =
+                ServicesVSResources.We_notice_you_suspended_0_Reset_keymappings_to_continue_to_navigate_and_refactor;
             KeybindingsResetLogger.Log("InfoBarShown");
             var infoBarService = _workspace.Services.GetRequiredService<IInfoBarService>();
             infoBarService.ShowInfoBar(
                 string.Format(message, ReSharperExtensionName),
-                new InfoBarUI(title: ServicesVSResources.Reset_Visual_Studio_default_keymapping,
-                              kind: InfoBarUI.UIKind.Button,
-                              action: RestoreVsKeybindings),
-                new InfoBarUI(title: string.Format(ServicesVSResources.Apply_0_keymapping_scheme, ReSharperKeyboardMappingName),
-                              kind: InfoBarUI.UIKind.Button,
-                              action: OpenExtensionsHyperlink),
-                new InfoBarUI(title: string.Format(ServicesVSResources.Apply_0_keymapping_scheme, VSCodeKeyboardMappingName),
-                              kind: InfoBarUI.UIKind.Button,
-                              action: OpenExtensionsHyperlink),
-                new InfoBarUI(title: ServicesVSResources.Never_show_this_again,
-                              kind: InfoBarUI.UIKind.HyperLink,
-                              action: NeverShowAgain),
-                new InfoBarUI(title: "", kind: InfoBarUI.UIKind.Close,
-                              action: InfoBarClose));
+                new InfoBarUI(
+                    title: ServicesVSResources.Reset_Visual_Studio_default_keymapping,
+                    kind: InfoBarUI.UIKind.Button,
+                    action: RestoreVsKeybindings
+                ),
+                new InfoBarUI(
+                    title: string.Format(
+                        ServicesVSResources.Apply_0_keymapping_scheme,
+                        ReSharperKeyboardMappingName
+                    ),
+                    kind: InfoBarUI.UIKind.Button,
+                    action: OpenExtensionsHyperlink
+                ),
+                new InfoBarUI(
+                    title: string.Format(
+                        ServicesVSResources.Apply_0_keymapping_scheme,
+                        VSCodeKeyboardMappingName
+                    ),
+                    kind: InfoBarUI.UIKind.Button,
+                    action: OpenExtensionsHyperlink
+                ),
+                new InfoBarUI(
+                    title: ServicesVSResources.Never_show_this_again,
+                    kind: InfoBarUI.UIKind.HyperLink,
+                    action: NeverShowAgain
+                ),
+                new InfoBarUI(title: "", kind: InfoBarUI.UIKind.Close, action: InfoBarClose)
+            );
         }
 
         /// <summary>
-        /// Returns true if ReSharper is installed, enabled, and not suspended.  
+        /// Returns true if ReSharper is installed, enabled, and not suspended.
         /// </summary>
-        private async ValueTask<ReSharperStatus> IsReSharperRunningAsync(CancellationToken cancellationToken)
+        private async ValueTask<ReSharperStatus> IsReSharperRunningAsync(
+            CancellationToken cancellationToken
+        )
         {
             // Quick exit if resharper is either uninstalled or not enabled
             if (!_resharperExtensionInstalledAndEnabled)
@@ -293,13 +345,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 }
 
                 // When ReSharper is running, the ReSharper_Suspend command is Enabled and not Invisible
-                if (suspendFlag.HasFlag(OLECMDF.OLECMDF_ENABLED) && !suspendFlag.HasFlag(OLECMDF.OLECMDF_INVISIBLE))
+                if (
+                    suspendFlag.HasFlag(OLECMDF.OLECMDF_ENABLED)
+                    && !suspendFlag.HasFlag(OLECMDF.OLECMDF_INVISIBLE)
+                )
                 {
                     return ReSharperStatus.Enabled;
                 }
 
                 // When ReSharper is suspended, the ReSharper_Resume command is Enabled and not Invisible
-                if (resumeFlag.HasFlag(OLECMDF.OLECMDF_ENABLED) && !resumeFlag.HasFlag(OLECMDF.OLECMDF_INVISIBLE))
+                if (
+                    resumeFlag.HasFlag(OLECMDF.OLECMDF_ENABLED)
+                    && !resumeFlag.HasFlag(OLECMDF.OLECMDF_INVISIBLE)
+                )
                 {
                     return ReSharperStatus.Suspended;
                 }
@@ -314,9 +372,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                 cmds[0].cmdID = cmdId;
                 cmds[0].cmdf = 0;
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                var hr = _oleCommandTarget.QueryStatus(ReSharperCommandGroup, (uint)cmds.Length, cmds, IntPtr.Zero);
+                var hr = _oleCommandTarget.QueryStatus(
+                    ReSharperCommandGroup,
+                    (uint)cmds.Length,
+                    cmds,
+                    IntPtr.Zero
+                );
                 if (ErrorHandler.Failed(hr))
                 {
                     FatalError.ReportAndCatch(Marshal.GetExceptionForHR(hr));
@@ -335,9 +400,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
                     return;
                 }
 
-                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                _oleCommandTarget = IServiceProviderExtensions.GetService<SUIHostCommandDispatcher, IOleCommandTarget>(_serviceProvider);
+                _oleCommandTarget = IServiceProviderExtensions.GetService<
+                    SUIHostCommandDispatcher,
+                    IOleCommandTarget
+                >(_serviceProvider);
             }
         }
 
@@ -347,19 +417,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
 
             if (_uiShell == null)
             {
-                _uiShell = IServiceProviderExtensions.GetService<SVsUIShell, IVsUIShell>(_serviceProvider);
+                _uiShell = IServiceProviderExtensions.GetService<SVsUIShell, IVsUIShell>(
+                    _serviceProvider
+                );
             }
 
-            ErrorHandler.ThrowOnFailure(_uiShell.PostExecCommand(
+            ErrorHandler.ThrowOnFailure(
+                _uiShell.PostExecCommand(
                     VSConstants.GUID_VSStandardCommandSet97,
                     (uint)VSConstants.VSStd97CmdID.CustomizeKeyboard,
                     (uint)OLECMDEXECOPT.OLECMDEXECOPT_DODEFAULT,
-                    null));
+                    null
+                )
+            );
 
             KeybindingsResetLogger.Log("KeybindingsReset");
 
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(KeybindingResetOptions.NeedsReset, false)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(KeybindingResetOptions.NeedsReset, false)
+                )
+            );
         }
 
         private void OpenExtensionsHyperlink()
@@ -369,15 +447,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             VisualStudioNavigateToLinkService.StartBrowser(KeybindingsFwLink);
 
             KeybindingsResetLogger.Log("ExtensionsLink");
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(KeybindingResetOptions.NeedsReset, false)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options.WithChangedOption(KeybindingResetOptions.NeedsReset, false)
+                )
+            );
         }
 
         private void NeverShowAgain()
         {
-            _workspace.TryApplyChanges(_workspace.CurrentSolution.WithOptions(_workspace.Options
-                .WithChangedOption(KeybindingResetOptions.NeverShowAgain, true)
-                .WithChangedOption(KeybindingResetOptions.NeedsReset, false)));
+            _workspace.TryApplyChanges(
+                _workspace.CurrentSolution.WithOptions(
+                    _workspace.Options
+                        .WithChangedOption(KeybindingResetOptions.NeverShowAgain, true)
+                        .WithChangedOption(KeybindingResetOptions.NeedsReset, false)
+                )
+            );
             KeybindingsResetLogger.Log("NeverShowAgain");
 
             // The only external references to this object are as callbacks, which are removed by the Shutdown method.
@@ -390,7 +475,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             _infoBarOpen = false;
         }
 
-        public int QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
+        public int QueryStatus(
+            ref Guid pguidCmdGroup,
+            uint cCmds,
+            OLECMD[] prgCmds,
+            IntPtr pCmdText
+        )
         {
             // Technically can be called on any thread, though VS will only ever call it on the UI thread.
             ThisCanBeCalledOnAnyThread();
@@ -398,11 +488,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
             return (int)OLE.Interop.Constants.OLECMDERR_E_NOTSUPPORTED;
         }
 
-        public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
+        public int Exec(
+            ref Guid pguidCmdGroup,
+            uint nCmdID,
+            uint nCmdexecopt,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             // Technically can be called on any thread, though VS will only ever call it on the UI thread.
             ThisCanBeCalledOnAnyThread();
-            if (pguidCmdGroup == ReSharperCommandGroup && nCmdID >= ResumeId && nCmdID <= ToggleSuspendId)
+            if (
+                pguidCmdGroup == ReSharperCommandGroup
+                && nCmdID >= ResumeId
+                && nCmdID <= ToggleSuspendId
+            )
             {
                 // Don't delay command processing to update resharper status
                 StartUpdateStateMachine();
@@ -434,7 +534,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Experimentation
 
             if (_priorityCommandTargetCookie != VSConstants.VSCOOKIE_NIL)
             {
-                var priorityCommandTargetRegistrar = IServiceProviderExtensions.GetService<SVsRegisterPriorityCommandTarget, IVsRegisterPriorityCommandTarget>(_serviceProvider);
+                var priorityCommandTargetRegistrar = IServiceProviderExtensions.GetService<
+                    SVsRegisterPriorityCommandTarget,
+                    IVsRegisterPriorityCommandTarget
+                >(_serviceProvider);
                 var cookie = _priorityCommandTargetCookie;
                 _priorityCommandTargetCookie = VSConstants.VSCOOKIE_NIL;
                 var hr = priorityCommandTargetRegistrar.UnregisterPriorityCommandTarget(cookie);

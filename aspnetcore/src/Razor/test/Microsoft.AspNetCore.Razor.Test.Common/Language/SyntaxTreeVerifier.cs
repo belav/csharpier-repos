@@ -43,7 +43,12 @@ internal class SyntaxTreeVerifier
                     var snippetStartIndex = Math.Max(0, i - 10);
                     var snippetStartLength = i - snippetStartIndex;
                     var snippetStart = new char[snippetStartLength];
-                    syntaxTree.Source.CopyTo(snippetStartIndex, snippetStart, 0, snippetStartLength);
+                    syntaxTree.Source.CopyTo(
+                        snippetStartIndex,
+                        snippetStart,
+                        0,
+                        snippetStartLength
+                    );
 
                     var snippetEndIndex = Math.Min(syntaxTree.Source.Length - 1, i + 10);
                     var snippetEndLength = snippetEndIndex - i;
@@ -58,8 +63,9 @@ internal class SyntaxTreeVerifier
                     var snippetString = new string(snippet);
 
                     throw new XunitException(
-$@"Could not locate Syntax Node owner at position '{i}':
-{snippetString}");
+                        $@"Could not locate Syntax Node owner at position '{i}':
+{snippetString}"
+                    );
                 }
             }
         }
@@ -85,7 +91,9 @@ $@"Could not locate Syntax Node owner at position '{i}':
                 var start = token.GetSourceLocation(_source);
                 if (!start.Equals(_currentLocation))
                 {
-                    throw new InvalidOperationException($"Token starting at {start} should start at {_currentLocation} - {token} ");
+                    throw new InvalidOperationException(
+                        $"Token starting at {start} should start at {_currentLocation} - {token} "
+                    );
                 }
 
                 _currentLocation = SourceLocationTracker.Advance(_currentLocation, token.Content);

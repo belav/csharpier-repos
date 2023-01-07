@@ -40,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             IUIThreadOperationExecutor threadOperationExecutor,
             VisualStudioWorkspace workspace,
             IGlobalOptionService globalOptions,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _threadOperationExecutor = threadOperationExecutor;
             _workspace = workspace;
@@ -48,18 +49,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             _threadingContext = threadingContext;
         }
 
-        public async Task InitializeAsync(IAsyncServiceProvider serviceProvider, CancellationToken cancellationToken)
+        public async Task InitializeAsync(
+            IAsyncServiceProvider serviceProvider,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(serviceProvider);
 
             _serviceProvider = (IServiceProvider)serviceProvider;
 
             // Hook up the "Remove Unused References" menu command for CPS based managed projects.
-            var menuCommandService = await serviceProvider.GetServiceAsync<IMenuCommandService, IMenuCommandService>(_threadingContext.JoinableTaskFactory, throwOnFailure: false).ConfigureAwait(false);
+            var menuCommandService = await serviceProvider
+                .GetServiceAsync<IMenuCommandService, IMenuCommandService>(
+                    _threadingContext.JoinableTaskFactory,
+                    throwOnFailure: false
+                )
+                .ConfigureAwait(false);
             if (menuCommandService != null)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-                VisualStudioCommandHandlerHelpers.AddCommand(menuCommandService, ID.RoslynCommands.SyncNamespaces, Guids.RoslynGroupId, OnSyncNamespacesForSelectedProject, OnSyncNamespacesForSelectedProjectStatus);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
+                VisualStudioCommandHandlerHelpers.AddCommand(
+                    menuCommandService,
+                    ID.RoslynCommands.SyncNamespaces,
+                    Guids.RoslynGroupId,
+                    OnSyncNamespacesForSelectedProject,
+                    OnSyncNamespacesForSelectedProjectStatus
+                );
             }
         }
 
@@ -69,7 +86,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
 
             var visible = false;
 
-            if (VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(_serviceProvider, out var projectHierarchy))
+            if (
+                VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(
+                    _serviceProvider,
+                    out var projectHierarchy
+                )
+            )
             {
                 // Is a project node. Are we C# project node?
                 visible = projectHierarchy.IsCapabilityMatch(".NET & CSharp");
@@ -77,8 +99,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             else
             {
                 // Is a solution node. Do we contain any C# projects?
-                visible = _workspace.CurrentSolution.Projects
-                    .Any(project => project.Language.Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase));
+                visible = _workspace.CurrentSolution.Projects.Any(
+                    project =>
+                        project.Language.Equals(
+                            LanguageNames.CSharp,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                );
             }
 
             var enabled = visible && !VisualStudioCommandHandlerHelpers.IsBuildActive();
@@ -96,7 +123,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
 
         private void OnSyncNamespacesForSelectedProject(object sender, EventArgs args)
         {
-            if (VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(_serviceProvider, out var projectHierarchy))
+            if (
+                VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(
+                    _serviceProvider,
+                    out var projectHierarchy
+                )
+            )
             {
                 // The project node is selected, so get projects that this node represents.
                 var projects = GetProjectsForHierarchy(projectHierarchy);
@@ -107,20 +139,34 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             {
                 // The solution node is selected, so collect all the C# projects for update.
                 var projects = _workspace.CurrentSolution.Projects
-                    .Where(project => project.Language.Equals(LanguageNames.CSharp, StringComparison.OrdinalIgnoreCase))
+                    .Where(
+                        project =>
+                            project.Language.Equals(
+                                LanguageNames.CSharp,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    )
                     .ToImmutableArray();
 
                 SyncNamespaces(projects);
             }
         }
 
-        private ImmutableArray<Project> GetProjectsForHierarchy(Shell.Interop.IVsHierarchy projectHierarchy)
+        private ImmutableArray<Project> GetProjectsForHierarchy(
+            Shell.Interop.IVsHierarchy projectHierarchy
+        )
         {
             var projectFilePath = projectHierarchy.TryGetProjectFilePath();
 
             var solution = _workspace.CurrentSolution;
             return solution.Projects
-                .Where(project => project.FilePath?.Equals(projectFilePath, StringComparison.OrdinalIgnoreCase) == true)
+                .Where(
+                    project =>
+                        project.FilePath?.Equals(
+                            projectFilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == true
+                )
                 .ToImmutableArrayOrEmpty();
         }
 
@@ -135,21 +181,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SyncNamespaces
             var options = _globalOptions.GetCodeActionOptionsProvider();
 
             Solution? solution = null;
-            var status = _threadOperationExecutor.Execute(ServicesVSResources.Sync_Namespaces, ServicesVSResources.Updating_namspaces, allowCancellation: true, showProgress: true, (operationContext) =>
-            {
-                solution = _threadingContext.JoinableTaskFactory.Run(() => syncService.SyncNamespacesAsync(projects, options, operationContext.UserCancellationToken));
-            });
+            var status = _threadOperationExecutor.Execute(
+                ServicesVSResources.Sync_Namespaces,
+                ServicesVSResources.Updating_namspaces,
+                allowCancellation: true,
+                showProgress: true,
+                (operationContext) =>
+                {
+                    solution = _threadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            syncService.SyncNamespacesAsync(
+                                projects,
+                                options,
+                                operationContext.UserCancellationToken
+                            )
+                    );
+                }
+            );
 
             if (status != UIThreadOperationStatus.Canceled && solution is not null)
             {
                 if (_workspace.CurrentSolution.GetChanges(solution).GetProjectChanges().Any())
                 {
                     _workspace.TryApplyChanges(solution);
-                    MessageDialog.Show(ServicesVSResources.Sync_Namespaces, ServicesVSResources.Namespaces_have_been_updated, MessageDialogCommandSet.Ok);
+                    MessageDialog.Show(
+                        ServicesVSResources.Sync_Namespaces,
+                        ServicesVSResources.Namespaces_have_been_updated,
+                        MessageDialogCommandSet.Ok
+                    );
                 }
                 else
                 {
-                    MessageDialog.Show(ServicesVSResources.Sync_Namespaces, ServicesVSResources.No_namespaces_needed_updating, MessageDialogCommandSet.Ok);
+                    MessageDialog.Show(
+                        ServicesVSResources.Sync_Namespaces,
+                        ServicesVSResources.No_namespaces_needed_updating,
+                        MessageDialogCommandSet.Ok
+                    );
                 }
             }
         }

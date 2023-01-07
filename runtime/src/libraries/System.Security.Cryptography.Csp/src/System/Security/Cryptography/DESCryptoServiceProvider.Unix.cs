@@ -6,13 +6,21 @@ using Internal.Cryptography;
 
 namespace System.Security.Cryptography
 {
-    [Obsolete(Obsoletions.DerivedCryptographicTypesMessage, DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.DerivedCryptographicTypesMessage,
+        DiagnosticId = Obsoletions.DerivedCryptographicTypesDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class DESCryptoServiceProvider : DES
     {
         private readonly DES _impl;
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5351", Justification = "This is the implementation of DESCryptoServiceProvider")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5351",
+            Justification = "This is the implementation of DESCryptoServiceProvider"
+        )]
         public DESCryptoServiceProvider() : base()
         {
             // This class wraps DES
@@ -27,6 +35,7 @@ namespace System.Security.Cryptography
         }
 
         public override ICryptoTransform CreateDecryptor() => _impl.CreateDecryptor();
+
         public override ICryptoTransform CreateEncryptor() => _impl.CreateEncryptor();
 
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) =>
@@ -51,6 +60,7 @@ namespace System.Security.Cryptography
         }
 
         public override void GenerateIV() => _impl.GenerateIV();
+
         public override void GenerateKey() => _impl.GenerateKey();
 
         public override byte[] IV

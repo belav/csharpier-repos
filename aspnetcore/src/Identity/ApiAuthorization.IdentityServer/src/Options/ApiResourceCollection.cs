@@ -14,18 +14,14 @@ public class ApiResourceCollection : Collection<ApiResource>
     /// <summary>
     /// Initializes a new instance of <see cref="ApiResourceCollection"/>.
     /// </summary>
-    public ApiResourceCollection()
-    {
-    }
+    public ApiResourceCollection() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ApiResourceCollection"/> with the given
     /// API resources in <paramref name="list"/>.
     /// </summary>
     /// <param name="list">The initial list of <see cref="ApiResource"/>.</param>
-    public ApiResourceCollection(IList<ApiResource> list) : base(list)
-    {
-    }
+    public ApiResourceCollection(IList<ApiResource> list) : base(list) { }
 
     /// <summary>
     /// Gets an API resource given its name.

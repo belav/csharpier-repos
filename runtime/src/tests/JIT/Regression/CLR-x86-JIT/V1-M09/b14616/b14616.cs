@@ -14,16 +14,14 @@ namespace DefaultNamespace
         {
             if (true)
             {
-                Console.WriteLine("\n\tMultiDim Array arg check disabled for now - can't create 2D array!\n");
+                Console.WriteLine(
+                    "\n\tMultiDim Array arg check disabled for now - can't create 2D array!\n"
+                );
                 return true;
             }
 
-            try
-            {
-            }
-            catch (RankException)
-            {
-            }
+            try { }
+            catch (RankException) { }
 
             return true;
         }

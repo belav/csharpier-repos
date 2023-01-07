@@ -37,62 +37,63 @@ namespace System.Text.RegularExpressions
                 {
                     // Concatenation
                     case RegexNodeKind.Concatenate:
+                    {
+                        int childCount = node.ChildCount();
+                        for (int i = 0; i < childCount; i++)
                         {
-                            int childCount = node.ChildCount();
-                            for (int i = 0; i < childCount; i++)
+                            if (!Process(node.Child(i), ref vsb))
                             {
-                                if (!Process(node.Child(i), ref vsb))
-                                {
-                                    return false;
-                                }
+                                return false;
                             }
-                            return !rtl;
                         }
+                        return !rtl;
+                    }
 
                     // Alternation: find a string that's a shared prefix of all branches
                     case RegexNodeKind.Alternate:
+                    {
+                        int childCount = node.ChildCount();
+
+                        // Store the initial branch into the target builder, keeping track
+                        // of how much was appended. Any of this contents that doesn't overlap
+                        // will every other branch will be removed before returning.
+                        int initialLength = vsb.Length;
+                        Process(node.Child(0), ref vsb);
+                        int addedLength = vsb.Length - initialLength;
+
+                        // Then explore the rest of the branches, finding the length
+                        // of prefix they all share in common with the initial branch.
+                        if (addedLength != 0)
                         {
-                            int childCount = node.ChildCount();
+                            var alternateSb = new ValueStringBuilder(64);
 
-                            // Store the initial branch into the target builder, keeping track
-                            // of how much was appended. Any of this contents that doesn't overlap
-                            // will every other branch will be removed before returning.
-                            int initialLength = vsb.Length;
-                            Process(node.Child(0), ref vsb);
-                            int addedLength = vsb.Length - initialLength;
-
-                            // Then explore the rest of the branches, finding the length
-                            // of prefix they all share in common with the initial branch.
-                            if (addedLength != 0)
+                            // Process each branch.  If we reach a point where we've proven there's
+                            // no overlap, we can bail early.
+                            for (int i = 1; i < childCount && addedLength != 0; i++)
                             {
-                                var alternateSb = new ValueStringBuilder(64);
+                                alternateSb.Length = 0;
 
-                                // Process each branch.  If we reach a point where we've proven there's
-                                // no overlap, we can bail early.
-                                for (int i = 1; i < childCount && addedLength != 0; i++)
-                                {
-                                    alternateSb.Length = 0;
+                                // Process the branch into a temporary builder.
+                                Process(node.Child(i), ref alternateSb);
 
-                                    // Process the branch into a temporary builder.
-                                    Process(node.Child(i), ref alternateSb);
-
-                                    // Find how much overlap there is between this branch's prefix
-                                    // and the smallest amount of prefix that overlapped with all
-                                    // the previously seen branches.
-                                    addedLength = vsb.AsSpan(initialLength, addedLength).CommonPrefixLength(alternateSb.AsSpan());
-                                }
-
-                                alternateSb.Dispose();
-
-                                // Then cull back on what was added based on the other branches.
-                                vsb.Length = initialLength + addedLength;
+                                // Find how much overlap there is between this branch's prefix
+                                // and the smallest amount of prefix that overlapped with all
+                                // the previously seen branches.
+                                addedLength = vsb.AsSpan(initialLength, addedLength)
+                                    .CommonPrefixLength(alternateSb.AsSpan());
                             }
 
-                            // Don't explore anything after the alternation.  We could make this work if desirable,
-                            // but it's currently not worth the extra complication.  The entire contents of every
-                            // branch would need to be identical other than zero-width anchors/assertions.
-                            return false;
+                            alternateSb.Dispose();
+
+                            // Then cull back on what was added based on the other branches.
+                            vsb.Length = initialLength + addedLength;
                         }
+
+                        // Don't explore anything after the alternation.  We could make this work if desirable,
+                        // but it's currently not worth the extra complication.  The entire contents of every
+                        // branch would need to be identical other than zero-width anchors/assertions.
+                        return false;
+                    }
 
                     // One character
                     case RegexNodeKind.One:
@@ -105,26 +106,29 @@ namespace System.Text.RegularExpressions
                         return !rtl;
 
                     // Loop of one character
-                    case RegexNodeKind.Oneloop or RegexNodeKind.Oneloopatomic or RegexNodeKind.Onelazy when node.M > 0:
+                    case RegexNodeKind.Oneloop
+                    or RegexNodeKind.Oneloopatomic
+                    or RegexNodeKind.Onelazy when node.M > 0:
                         const int SingleCharIterationLimit = 32; // arbitrary cut-off to avoid creating super long strings unnecessarily
                         int count = Math.Min(node.M, SingleCharIterationLimit);
                         vsb.Append(node.Ch, count);
                         return count == node.N && !rtl;
 
                     // Loop of a node
-                    case RegexNodeKind.Loop or RegexNodeKind.Lazyloop when node.M > 0:
+                    case RegexNodeKind.Loop
+                    or RegexNodeKind.Lazyloop when node.M > 0:
+                    {
+                        const int NodeIterationLimit = 4; // arbitrary cut-off to avoid creating super long strings unnecessarily
+                        int limit = Math.Min(node.M, NodeIterationLimit);
+                        for (int i = 0; i < limit; i++)
                         {
-                            const int NodeIterationLimit = 4; // arbitrary cut-off to avoid creating super long strings unnecessarily
-                            int limit = Math.Min(node.M, NodeIterationLimit);
-                            for (int i = 0; i < limit; i++)
+                            if (!Process(node.Child(0), ref vsb))
                             {
-                                if (!Process(node.Child(0), ref vsb))
-                                {
-                                    return false;
-                                }
+                                return false;
                             }
-                            return limit == node.N && !rtl;
                         }
+                        return limit == node.N && !rtl;
+                    }
 
                     // Grouping nodes for which we only care about their single child
                     case RegexNodeKind.Atomic:
@@ -159,7 +163,10 @@ namespace System.Text.RegularExpressions
         /// <param name="root">The RegexNode tree root.</param>
         /// <param name="thorough">true to spend more time finding sets (e.g. through alternations); false to do a faster analysis that's potentially more incomplete.</param>
         /// <returns>The array of found sets, or null if there aren't any.</returns>
-        public static List<RegexFindOptimizations.FixedDistanceSet>? FindFixedDistanceSets(RegexNode root, bool thorough)
+        public static List<RegexFindOptimizations.FixedDistanceSet>? FindFixedDistanceSets(
+            RegexNode root,
+            bool thorough
+        )
         {
             const int MaxLoopExpansion = 20; // arbitrary cut-off to avoid loops adding significant overhead to processing
             const int MaxFixedResults = 50; // arbitrary cut-off to avoid generating lots of sets unnecessarily
@@ -185,8 +192,10 @@ namespace System.Text.RegularExpressions
             // doesn't.
             if (results.Count == 0)
             {
-                if (FindFirstCharClass(root) is not string charClass ||
-                    charClass == RegexCharClass.AnyClass) // weed out match-all, same as above
+                if (
+                    FindFirstCharClass(root) is not string charClass
+                    || charClass == RegexCharClass.AnyClass
+                ) // weed out match-all, same as above
                 {
                     return null;
                 }
@@ -214,7 +223,13 @@ namespace System.Text.RegularExpressions
 
                 if (thorough && result.Chars is null)
                 {
-                    if (RegexCharClass.TryGetSingleRange(result.Set, out char lowInclusive, out char highInclusive))
+                    if (
+                        RegexCharClass.TryGetSingleRange(
+                            result.Set,
+                            out char lowInclusive,
+                            out char highInclusive
+                        )
+                    )
                     {
                         result.Range = (lowInclusive, highInclusive, negated);
                         results[i] = result;
@@ -230,7 +245,12 @@ namespace System.Text.RegularExpressions
             // of the node.  If it returns false, the node isn't entirely fixed, in which case subsequent nodes
             // shouldn't be examined and distance should no longer be trusted.  However, regardless of whether it
             // returns true or false, it may have populated results, and all populated results are valid.
-            static bool TryFindFixedSets(RegexNode node, List<RegexFindOptimizations.FixedDistanceSet> results, ref int distance, bool thorough)
+            static bool TryFindFixedSets(
+                RegexNode node,
+                List<RegexFindOptimizations.FixedDistanceSet> results,
+                ref int distance,
+                bool thorough
+            )
             {
                 if (!StackHelper.TryEnsureSufficientExecutionStack())
                 {
@@ -248,53 +268,87 @@ namespace System.Text.RegularExpressions
                         if (results.Count < MaxFixedResults)
                         {
                             string setString = RegexCharClass.OneToStringClass(node.Ch);
-                            results.Add(new RegexFindOptimizations.FixedDistanceSet(null, setString, distance++));
+                            results.Add(
+                                new RegexFindOptimizations.FixedDistanceSet(
+                                    null,
+                                    setString,
+                                    distance++
+                                )
+                            );
                             return true;
                         }
                         return false;
 
-                    case RegexNodeKind.Onelazy or RegexNodeKind.Oneloop or RegexNodeKind.Oneloopatomic when node.M > 0:
+                    case RegexNodeKind.Onelazy
+                    or RegexNodeKind.Oneloop
+                    or RegexNodeKind.Oneloopatomic when node.M > 0:
+                    {
+                        string setString = RegexCharClass.OneToStringClass(node.Ch);
+                        int minIterations = Math.Min(node.M, MaxLoopExpansion);
+                        int i = 0;
+                        for (; i < minIterations && results.Count < MaxFixedResults; i++)
                         {
-                            string setString = RegexCharClass.OneToStringClass(node.Ch);
-                            int minIterations = Math.Min(node.M, MaxLoopExpansion);
-                            int i = 0;
-                            for (; i < minIterations && results.Count < MaxFixedResults; i++)
-                            {
-                                results.Add(new RegexFindOptimizations.FixedDistanceSet(null, setString, distance++));
-                            }
-                            return i == node.M && i == node.N;
+                            results.Add(
+                                new RegexFindOptimizations.FixedDistanceSet(
+                                    null,
+                                    setString,
+                                    distance++
+                                )
+                            );
                         }
+                        return i == node.M && i == node.N;
+                    }
 
                     case RegexNodeKind.Multi:
+                    {
+                        string s = node.Str!;
+                        int i = 0;
+                        for (; i < s.Length && results.Count < MaxFixedResults; i++)
                         {
-                            string s = node.Str!;
-                            int i = 0;
-                            for (; i < s.Length && results.Count < MaxFixedResults; i++)
-                            {
-                                string setString = RegexCharClass.OneToStringClass(s[i]);
-                                results.Add(new RegexFindOptimizations.FixedDistanceSet(null, setString, distance++));
-                            }
-                            return i == s.Length;
+                            string setString = RegexCharClass.OneToStringClass(s[i]);
+                            results.Add(
+                                new RegexFindOptimizations.FixedDistanceSet(
+                                    null,
+                                    setString,
+                                    distance++
+                                )
+                            );
                         }
+                        return i == s.Length;
+                    }
 
                     case RegexNodeKind.Set:
                         if (results.Count < MaxFixedResults)
                         {
-                            results.Add(new RegexFindOptimizations.FixedDistanceSet(null, node.Str!, distance++));
+                            results.Add(
+                                new RegexFindOptimizations.FixedDistanceSet(
+                                    null,
+                                    node.Str!,
+                                    distance++
+                                )
+                            );
                             return true;
                         }
                         return false;
 
-                    case RegexNodeKind.Setlazy or RegexNodeKind.Setloop or RegexNodeKind.Setloopatomic when node.M > 0:
+                    case RegexNodeKind.Setlazy
+                    or RegexNodeKind.Setloop
+                    or RegexNodeKind.Setloopatomic when node.M > 0:
+                    {
+                        int minIterations = Math.Min(node.M, MaxLoopExpansion);
+                        int i = 0;
+                        for (; i < minIterations && results.Count < MaxFixedResults; i++)
                         {
-                            int minIterations = Math.Min(node.M, MaxLoopExpansion);
-                            int i = 0;
-                            for (; i < minIterations && results.Count < MaxFixedResults; i++)
-                            {
-                                results.Add(new RegexFindOptimizations.FixedDistanceSet(null, node.Str!, distance++));
-                            }
-                            return i == node.M && i == node.N;
+                            results.Add(
+                                new RegexFindOptimizations.FixedDistanceSet(
+                                    null,
+                                    node.Str!,
+                                    distance++
+                                )
+                            );
                         }
+                        return i == node.M && i == node.N;
+                    }
 
                     case RegexNodeKind.Notone:
                         // We could create a set out of Notone, but it will be of little value in helping to improve
@@ -302,7 +356,9 @@ namespace System.Text.RegularExpressions
                         distance++;
                         return true;
 
-                    case RegexNodeKind.Notonelazy or RegexNodeKind.Notoneloop or RegexNodeKind.Notoneloopatomic when node.M == node.N:
+                    case RegexNodeKind.Notonelazy
+                    or RegexNodeKind.Notoneloop
+                    or RegexNodeKind.Notoneloopatomic when node.M == node.N:
                         distance += node.M;
                         return true;
 
@@ -330,7 +386,8 @@ namespace System.Text.RegularExpressions
                     case RegexNodeKind.Capture:
                         return TryFindFixedSets(node.Child(0), results, ref distance, thorough);
 
-                    case RegexNodeKind.Lazyloop or RegexNodeKind.Loop when node.M > 0:
+                    case RegexNodeKind.Lazyloop
+                    or RegexNodeKind.Loop when node.M > 0:
                         // This effectively only iterates the loop once.  If deemed valuable,
                         // it could be updated in the future to duplicate the found results
                         // (updated to incorporate distance from previous iterations) and
@@ -341,89 +398,116 @@ namespace System.Text.RegularExpressions
                         return false;
 
                     case RegexNodeKind.Concatenate:
+                    {
+                        int childCount = node.ChildCount();
+                        for (int i = 0; i < childCount; i++)
                         {
-                            int childCount = node.ChildCount();
-                            for (int i = 0; i < childCount; i++)
+                            if (!TryFindFixedSets(node.Child(i), results, ref distance, thorough))
                             {
-                                if (!TryFindFixedSets(node.Child(i), results, ref distance, thorough))
-                                {
-                                    return false;
-                                }
+                                return false;
                             }
-                            return true;
                         }
+                        return true;
+                    }
 
                     case RegexNodeKind.Alternate when thorough:
+                    {
+                        int childCount = node.ChildCount();
+                        bool allSameSize = true;
+                        int? sameDistance = null;
+                        var combined = new Dictionary<int, (RegexCharClass Set, int Count)>();
+
+                        var localResults = new List<RegexFindOptimizations.FixedDistanceSet>();
+                        for (int i = 0; i < childCount; i++)
                         {
-                            int childCount = node.ChildCount();
-                            bool allSameSize = true;
-                            int? sameDistance = null;
-                            var combined = new Dictionary<int, (RegexCharClass Set, int Count)>();
+                            localResults.Clear();
+                            int localDistance = 0;
+                            allSameSize &= TryFindFixedSets(
+                                node.Child(i),
+                                localResults,
+                                ref localDistance,
+                                thorough
+                            );
 
-                            var localResults = new List<RegexFindOptimizations.FixedDistanceSet> ();
-                            for (int i = 0; i < childCount; i++)
+                            if (localResults.Count == 0)
                             {
-                                localResults.Clear();
-                                int localDistance = 0;
-                                allSameSize &= TryFindFixedSets(node.Child(i), localResults, ref localDistance, thorough);
-
-                                if (localResults.Count == 0)
-                                {
-                                    return false;
-                                }
-
-                                if (allSameSize)
-                                {
-                                    if (sameDistance is null)
-                                    {
-                                        sameDistance = localDistance;
-                                    }
-                                    else if (sameDistance.Value != localDistance)
-                                    {
-                                        allSameSize = false;
-                                    }
-                                }
-
-                                foreach (RegexFindOptimizations.FixedDistanceSet fixedSet in localResults)
-                                {
-                                    if (combined.TryGetValue(fixedSet.Distance, out (RegexCharClass Set, int Count) value))
-                                    {
-                                        if (value.Set.TryAddCharClass(RegexCharClass.Parse(fixedSet.Set)))
-                                        {
-                                            value.Count++;
-                                            combined[fixedSet.Distance] = value;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        combined[fixedSet.Distance] = (RegexCharClass.Parse(fixedSet.Set), 1);
-                                    }
-                                }
-                            }
-
-                            foreach (KeyValuePair<int, (RegexCharClass Set, int Count)> pair in combined)
-                            {
-                                if (results.Count >= MaxFixedResults)
-                                {
-                                    allSameSize = false;
-                                    break;
-                                }
-
-                                if (pair.Value.Count == childCount)
-                                {
-                                    results.Add(new RegexFindOptimizations.FixedDistanceSet(null, pair.Value.Set.ToStringClass(), pair.Key + distance));
-                                }
+                                return false;
                             }
 
                             if (allSameSize)
                             {
-                                Debug.Assert(sameDistance.HasValue);
-                                distance += sameDistance.Value;
-                                return true;
+                                if (sameDistance is null)
+                                {
+                                    sameDistance = localDistance;
+                                }
+                                else if (sameDistance.Value != localDistance)
+                                {
+                                    allSameSize = false;
+                                }
                             }
 
-                            return false;
+                            foreach (
+                                RegexFindOptimizations.FixedDistanceSet fixedSet in localResults
+                            )
+                            {
+                                if (
+                                    combined.TryGetValue(
+                                        fixedSet.Distance,
+                                        out (RegexCharClass Set, int Count) value
+                                    )
+                                )
+                                {
+                                    if (
+                                        value.Set.TryAddCharClass(
+                                            RegexCharClass.Parse(fixedSet.Set)
+                                        )
+                                    )
+                                    {
+                                        value.Count++;
+                                        combined[fixedSet.Distance] = value;
+                                    }
+                                }
+                                else
+                                {
+                                    combined[fixedSet.Distance] = (
+                                        RegexCharClass.Parse(fixedSet.Set),
+                                        1
+                                    );
+                                }
+                            }
                         }
+
+                        foreach (
+                            KeyValuePair<int, (RegexCharClass Set, int Count)> pair in combined
+                        )
+                        {
+                            if (results.Count >= MaxFixedResults)
+                            {
+                                allSameSize = false;
+                                break;
+                            }
+
+                            if (pair.Value.Count == childCount)
+                            {
+                                results.Add(
+                                    new RegexFindOptimizations.FixedDistanceSet(
+                                        null,
+                                        pair.Value.Set.ToStringClass(),
+                                        pair.Key + distance
+                                    )
+                                );
+                            }
+                        }
+
+                        if (allSameSize)
+                        {
+                            Debug.Assert(sameDistance.HasValue);
+                            distance += sameDistance.Value;
+                            return true;
+                        }
+
+                        return false;
+                    }
 
                     default:
                         return false;
@@ -432,69 +516,72 @@ namespace System.Text.RegularExpressions
         }
 
         /// <summary>Sorts a set of fixed-distance set results from best to worst quality.</summary>
-        public static void SortFixedDistanceSetsByQuality(List<RegexFindOptimizations.FixedDistanceSet> results) =>
+        public static void SortFixedDistanceSetsByQuality(
+            List<RegexFindOptimizations.FixedDistanceSet> results
+        ) =>
             // Finally, try to move the "best" results to be earlier.  "best" here are ones we're able to search
             // for the fastest and that have the best chance of matching as few false positives as possible.
-            results.Sort((s1, s2) =>
-            {
-                // If both have chars, prioritize the one with the smaller frequency for those chars.
-                if (s1.Chars is not null && s2.Chars is not null)
+            results.Sort(
+                (s1, s2) =>
                 {
-                    // Then of the ones that are the same length, prefer those with less frequent values.  The frequency is
-                    // only an approximation, used as a tie-breaker when we'd otherwise effectively be picking randomly.  True
-                    // frequencies will vary widely based on the actual data being searched, the language of the data, etc.
-                    int c = SumFrequencies(s1.Chars).CompareTo(SumFrequencies(s2.Chars));
-                    if (c != 0)
+                    // If both have chars, prioritize the one with the smaller frequency for those chars.
+                    if (s1.Chars is not null && s2.Chars is not null)
                     {
-                        return c;
-                    }
-
-                    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-                    static float SumFrequencies(char[] chars)
-                    {
-                        float sum = 0;
-                        foreach (char c in chars)
+                        // Then of the ones that are the same length, prefer those with less frequent values.  The frequency is
+                        // only an approximation, used as a tie-breaker when we'd otherwise effectively be picking randomly.  True
+                        // frequencies will vary widely based on the actual data being searched, the language of the data, etc.
+                        int c = SumFrequencies(s1.Chars).CompareTo(SumFrequencies(s2.Chars));
+                        if (c != 0)
                         {
-                            // Lookup each character in the table.  For values > 255, this will end up truncating
-                            // and thus we'll get skew in the data.  It's already a gross approximation, though,
-                            // and it is primarily meant for disambiguation of ASCII letters.
-                            sum += s_frequency[(byte)c];
+                            return c;
                         }
-                        return sum;
+
+                        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+                        static float SumFrequencies(char[] chars)
+                        {
+                            float sum = 0;
+                            foreach (char c in chars)
+                            {
+                                // Lookup each character in the table.  For values > 255, this will end up truncating
+                                // and thus we'll get skew in the data.  It's already a gross approximation, though,
+                                // and it is primarily meant for disambiguation of ASCII letters.
+                                sum += s_frequency[(byte)c];
+                            }
+                            return sum;
+                        }
                     }
-                }
 
-                // If one has chars and the other doesn't, prioritize the one with chars.
-                if ((s1.Chars is not null) != (s2.Chars is not null))
-                {
-                    return s1.Chars is not null ? -1 : 1;
-                }
-
-                // If one has a range and the other doesn't, prioritize the one with a range.
-                if ((s1.Range is not null) != (s2.Range is not null))
-                {
-                    return s1.Range is not null ? -1 : 1;
-                }
-
-                // If both have ranges, prefer the one that includes fewer characters.
-                if (s1.Range is not null)
-                {
-                    return
-                        GetRangeLength(s1.Range.GetValueOrDefault()).CompareTo(
-                        GetRangeLength(s2.Range.GetValueOrDefault()));
-
-                    static int GetRangeLength((char LowInclusive, char HighInclusive, bool Negated) range)
+                    // If one has chars and the other doesn't, prioritize the one with chars.
+                    if ((s1.Chars is not null) != (s2.Chars is not null))
                     {
-                        int length = range.HighInclusive - range.LowInclusive + 1;
-                        return range.Negated ?
-                            char.MaxValue + 1 - length :
-                            length;
+                        return s1.Chars is not null ? -1 : 1;
                     }
-                }
 
-                // As a tiebreaker, prioritize the earlier one.
-                return s1.Distance.CompareTo(s2.Distance);
-            });
+                    // If one has a range and the other doesn't, prioritize the one with a range.
+                    if ((s1.Range is not null) != (s2.Range is not null))
+                    {
+                        return s1.Range is not null ? -1 : 1;
+                    }
+
+                    // If both have ranges, prefer the one that includes fewer characters.
+                    if (s1.Range is not null)
+                    {
+                        return GetRangeLength(s1.Range.GetValueOrDefault())
+                            .CompareTo(GetRangeLength(s2.Range.GetValueOrDefault()));
+
+                        static int GetRangeLength(
+                            (char LowInclusive, char HighInclusive, bool Negated) range
+                        )
+                        {
+                            int length = range.HighInclusive - range.LowInclusive + 1;
+                            return range.Negated ? char.MaxValue + 1 - length : length;
+                        }
+                    }
+
+                    // As a tiebreaker, prioritize the earlier one.
+                    return s1.Distance.CompareTo(s2.Distance);
+                }
+            );
 
         /// <summary>
         /// Computes a character class for the first character in tree.  This uses a more robust algorithm
@@ -515,9 +602,7 @@ namespace System.Text.RegularExpressions
             // whole pattern was nullable such that it could match an empty string, in which case we
             // can't make any statements about what begins a match.
             RegexCharClass? cc = null;
-            return TryFindFirstCharClass(root, ref cc) == true ?
-                cc!.ToStringClass() :
-                null;
+            return TryFindFirstCharClass(root, ref cc) == true ? cc!.ToStringClass() : null;
 
             // Walks the nodes of the expression looking for any node that could possibly match the first
             // character of a match, e.g. in `a*b*c+d`, we'd find [abc], or in `(abc|d*e)?[fgh]`, we'd find
@@ -544,7 +629,10 @@ namespace System.Text.RegularExpressions
                 {
                     // Base cases where we have results to add to the result set. Add the values into the result set, if possible.
                     // If this is a loop and it has a lower bound of 0, then it's zero-width, so return null.
-                    case RegexNodeKind.One or RegexNodeKind.Oneloop or RegexNodeKind.Onelazy or RegexNodeKind.Oneloopatomic:
+                    case RegexNodeKind.One
+                    or RegexNodeKind.Oneloop
+                    or RegexNodeKind.Onelazy
+                    or RegexNodeKind.Oneloopatomic:
                         if (cc is null || cc.CanMerge)
                         {
                             cc ??= new RegexCharClass();
@@ -553,7 +641,10 @@ namespace System.Text.RegularExpressions
                         }
                         return false;
 
-                    case RegexNodeKind.Notone or RegexNodeKind.Notoneloop or RegexNodeKind.Notoneloopatomic or RegexNodeKind.Notonelazy:
+                    case RegexNodeKind.Notone
+                    or RegexNodeKind.Notoneloop
+                    or RegexNodeKind.Notoneloopatomic
+                    or RegexNodeKind.Notonelazy:
                         if (cc is null || cc.CanMerge)
                         {
                             cc ??= new RegexCharClass();
@@ -571,30 +662,43 @@ namespace System.Text.RegularExpressions
                         }
                         return false;
 
-                    case RegexNodeKind.Set or RegexNodeKind.Setloop or RegexNodeKind.Setlazy or RegexNodeKind.Setloopatomic:
+                    case RegexNodeKind.Set
+                    or RegexNodeKind.Setloop
+                    or RegexNodeKind.Setlazy
+                    or RegexNodeKind.Setloopatomic:
+                    {
+                        bool setSuccess = false;
+                        if (cc is null)
                         {
-                            bool setSuccess = false;
-                            if (cc is null)
-                            {
-                                cc = RegexCharClass.Parse(node.Str!);
-                                setSuccess = true;
-                            }
-                            else if (cc.CanMerge && RegexCharClass.Parse(node.Str!) is { CanMerge: true } setCc)
-                            {
-                                cc.AddCharClass(setCc);
-                                setSuccess = true;
-                            }
-                            return
-                                !setSuccess ? false :
-                                node.Kind is RegexNodeKind.Set || node.M > 0 ? true :
-                                null;
+                            cc = RegexCharClass.Parse(node.Str!);
+                            setSuccess = true;
                         }
+                        else if (
+                            cc.CanMerge
+                            && RegexCharClass.Parse(node.Str!) is { CanMerge: true } setCc
+                        )
+                        {
+                            cc.AddCharClass(setCc);
+                            setSuccess = true;
+                        }
+                        return !setSuccess
+                            ? false
+                            : node.Kind is RegexNodeKind.Set || node.M > 0
+                                ? true
+                                : null;
+                    }
 
                     case RegexNodeKind.Multi:
                         if (cc is null || cc.CanMerge)
                         {
                             cc ??= new RegexCharClass();
-                            cc.AddChar(node.Str![(node.Options & RegexOptions.RightToLeft) != 0 ? node.Str.Length - 1 : 0]);
+                            cc.AddChar(
+                                node.Str![
+                                    (node.Options & RegexOptions.RightToLeft) != 0
+                                        ? node.Str.Length - 1
+                                        : 0
+                                ]
+                            );
                             return true;
                         }
                         return false;
@@ -640,47 +744,51 @@ namespace System.Text.RegularExpressions
                     // contribute to the starting character set.  The moment a child returns false, we need to fail the whole thing.
                     // If every child is nullable, then the concatenation is also nullable.
                     case RegexNodeKind.Concatenate:
+                    {
+                        int childCount = node.ChildCount();
+                        for (int i = 0; i < childCount; i++)
                         {
-                            int childCount = node.ChildCount();
-                            for (int i = 0; i < childCount; i++)
+                            bool? childResult = TryFindFirstCharClass(node.Child(i), ref cc);
+                            if (childResult != null)
                             {
-                                bool? childResult = TryFindFirstCharClass(node.Child(i), ref cc);
-                                if (childResult != null)
-                                {
-                                    return childResult;
-                                }
+                                return childResult;
                             }
-                            return null;
                         }
+                        return null;
+                    }
 
                     // Alternation. Every child is its own fork/branch and contributes to the starting set.  As with concatenation,
                     // the moment any child fails, fail.  And if any child is nullable, the alternation is also nullable (since that
                     // zero-width path could be taken).  Otherwise, if every branch returns true, so too does the alternation.
                     case RegexNodeKind.Alternate:
+                    {
+                        int childCount = node.ChildCount();
+                        bool anyChildWasNull = false;
+                        for (int i = 0; i < childCount; i++)
                         {
-                            int childCount = node.ChildCount();
-                            bool anyChildWasNull = false;
-                            for (int i = 0; i < childCount; i++)
+                            bool? childResult = TryFindFirstCharClass(node.Child(i), ref cc);
+                            if (childResult is null)
                             {
-                                bool? childResult = TryFindFirstCharClass(node.Child(i), ref cc);
-                                if (childResult is null)
-                                {
-                                    anyChildWasNull = true;
-                                }
-                                else if (childResult == false)
-                                {
-                                    return false;
-                                }
+                                anyChildWasNull = true;
                             }
-                            return anyChildWasNull ? null : true;
+                            else if (childResult == false)
+                            {
+                                return false;
+                            }
                         }
+                        return anyChildWasNull ? null : true;
+                    }
 
                     // Conditionals.  Just like alternation for their "yes"/"no" child branches.  If either returns false, return false.
                     // If either is nullable, this is nullable. If both return true, return true.
                     case RegexNodeKind.BackreferenceConditional:
                     case RegexNodeKind.ExpressionConditional:
-                        int branchStart = node.Kind is RegexNodeKind.BackreferenceConditional ? 0 : 1;
-                        return (TryFindFirstCharClass(node.Child(branchStart), ref cc), TryFindFirstCharClass(node.Child(branchStart + 1), ref cc)) switch
+                        int branchStart =
+                            node.Kind is RegexNodeKind.BackreferenceConditional ? 0 : 1;
+                        return (
+                            TryFindFirstCharClass(node.Child(branchStart), ref cc),
+                            TryFindFirstCharClass(node.Child(branchStart + 1), ref cc)
+                        ) switch
                         {
                             (false, _) or (_, false) => false,
                             (null, _) or (_, null) => null,
@@ -702,7 +810,10 @@ namespace System.Text.RegularExpressions
         /// Analyzes the pattern for a leading set loop followed by a non-overlapping literal. If such a pattern is found, an implementation
         /// can search for the literal and then walk backward through all matches for the loop until the beginning is found.
         /// </summary>
-        public static (RegexNode LoopNode, (char Char, string? String, char[]? Chars) Literal)? FindLiteralFollowingLeadingLoop(RegexNode node)
+        public static (
+            RegexNode LoopNode,
+            (char Char, string? String, char[]? Chars) Literal
+        )? FindLiteralFollowingLeadingLoop(RegexNode node)
         {
             if ((node.Options & RegexOptions.RightToLeft) != 0)
             {
@@ -730,7 +841,15 @@ namespace System.Text.RegularExpressions
             // could also be made to support Oneloopatomic and Notoneloopatomic, but the scenarios for that are rare.
             Debug.Assert(node.ChildCount() >= 2);
             RegexNode firstChild = node.Child(0);
-            if (firstChild.Kind is not (RegexNodeKind.Setloop or RegexNodeKind.Setloopatomic or RegexNodeKind.Setlazy) || firstChild.N != int.MaxValue)
+            if (
+                firstChild.Kind
+                    is not (
+                        RegexNodeKind.Setloop
+                        or RegexNodeKind.Setloopatomic
+                        or RegexNodeKind.Setlazy
+                    )
+                || firstChild.N != int.MaxValue
+            )
             {
                 return null;
             }
@@ -751,10 +870,12 @@ namespace System.Text.RegularExpressions
             // If there's no overlap, we have a winner.
             switch (nextChild.Kind)
             {
-                case RegexNodeKind.One when !RegexCharClass.CharInClass(nextChild.Ch, firstChild.Str!):
+                case RegexNodeKind.One
+                    when !RegexCharClass.CharInClass(nextChild.Ch, firstChild.Str!):
                     return (firstChild, (nextChild.Ch, null, null));
 
-                case RegexNodeKind.Multi when !RegexCharClass.CharInClass(nextChild.Str![0], firstChild.Str!):
+                case RegexNodeKind.Multi
+                    when !RegexCharClass.CharInClass(nextChild.Str![0], firstChild.Str!):
                     return (firstChild, ('\0', nextChild.Str, null));
 
                 case RegexNodeKind.Set when !RegexCharClass.IsNegated(nextChild.Str!):
@@ -819,68 +940,82 @@ namespace System.Text.RegularExpressions
                         continue;
 
                     case RegexNodeKind.Concatenate:
-                        // For concatenations, we expect primarily to explore its first (for leading) or last (for trailing) child,
-                        // but we can also skip over certain kinds of nodes (e.g. Empty), and thus iterate through its children backward
-                        // looking for the last we shouldn't skip.
+                    // For concatenations, we expect primarily to explore its first (for leading) or last (for trailing) child,
+                    // but we can also skip over certain kinds of nodes (e.g. Empty), and thus iterate through its children backward
+                    // looking for the last we shouldn't skip.
+                    {
+                        int childCount = node.ChildCount();
+                        RegexNode? child = null;
+                        if (leading)
                         {
-                            int childCount = node.ChildCount();
-                            RegexNode? child = null;
-                            if (leading)
+                            for (int i = 0; i < childCount; i++)
                             {
-                                for (int i = 0; i < childCount; i++)
+                                if (
+                                    node.Child(i).Kind
+                                    is not (
+                                        RegexNodeKind.Empty
+                                        or RegexNodeKind.PositiveLookaround
+                                        or RegexNodeKind.NegativeLookaround
+                                    )
+                                )
                                 {
-                                    if (node.Child(i).Kind is not (RegexNodeKind.Empty or RegexNodeKind.PositiveLookaround or RegexNodeKind.NegativeLookaround))
-                                    {
-                                        child = node.Child(i);
-                                        break;
-                                    }
+                                    child = node.Child(i);
+                                    break;
                                 }
                             }
-                            else
+                        }
+                        else
+                        {
+                            for (int i = childCount - 1; i >= 0; i--)
                             {
-                                for (int i = childCount - 1; i >= 0; i--)
+                                if (
+                                    node.Child(i).Kind
+                                    is not (
+                                        RegexNodeKind.Empty
+                                        or RegexNodeKind.PositiveLookaround
+                                        or RegexNodeKind.NegativeLookaround
+                                    )
+                                )
                                 {
-                                    if (node.Child(i).Kind is not (RegexNodeKind.Empty or RegexNodeKind.PositiveLookaround or RegexNodeKind.NegativeLookaround))
-                                    {
-                                        child = node.Child(i);
-                                        break;
-                                    }
+                                    child = node.Child(i);
+                                    break;
                                 }
                             }
-
-                            if (child is not null)
-                            {
-                                node = child;
-                                continue;
-                            }
-
-                            goto default;
                         }
 
-                    case RegexNodeKind.Alternate:
-                        // For alternations, every branch needs to lead or trail with the same anchor.
+                        if (child is not null)
                         {
-                            // Get the leading/trailing anchor of the first branch.  If there isn't one, bail.
-                            RegexNodeKind anchor = FindLeadingOrTrailingAnchor(node.Child(0), leading);
-                            if (anchor == RegexNodeKind.Unknown)
+                            node = child;
+                            continue;
+                        }
+
+                        goto default;
+                    }
+
+                    case RegexNodeKind.Alternate:
+                    // For alternations, every branch needs to lead or trail with the same anchor.
+                    {
+                        // Get the leading/trailing anchor of the first branch.  If there isn't one, bail.
+                        RegexNodeKind anchor = FindLeadingOrTrailingAnchor(node.Child(0), leading);
+                        if (anchor == RegexNodeKind.Unknown)
+                        {
+                            return RegexNodeKind.Unknown;
+                        }
+
+                        // Look at each subsequent branch and validate it has the same leading or trailing
+                        // anchor.  If any doesn't, bail.
+                        int childCount = node.ChildCount();
+                        for (int i = 1; i < childCount; i++)
+                        {
+                            if (FindLeadingOrTrailingAnchor(node.Child(i), leading) != anchor)
                             {
                                 return RegexNodeKind.Unknown;
                             }
-
-                            // Look at each subsequent branch and validate it has the same leading or trailing
-                            // anchor.  If any doesn't, bail.
-                            int childCount = node.ChildCount();
-                            for (int i = 1; i < childCount; i++)
-                            {
-                                if (FindLeadingOrTrailingAnchor(node.Child(i), leading) != anchor)
-                                {
-                                    return RegexNodeKind.Unknown;
-                                }
-                            }
-
-                            // All branches have the same leading/trailing anchor.  Return it.
-                            return anchor;
                         }
+
+                        // All branches have the same leading/trailing anchor.  Return it.
+                        return anchor;
+                    }
 
                     default:
                         // For everything else, we couldn't find an anchor.
@@ -892,38 +1027,518 @@ namespace System.Text.RegularExpressions
         /// <summary>Percent occurrences in source text (100 * char count / total count).</summary>
         private static readonly float[] s_frequency = new float[]
         {
-            0.000f /* '\x00' */, 0.000f /* '\x01' */, 0.000f /* '\x02' */, 0.000f /* '\x03' */, 0.000f /* '\x04' */, 0.000f /* '\x05' */, 0.000f /* '\x06' */, 0.000f /* '\x07' */,
-            0.000f /* '\x08' */, 0.001f /* '\x09' */, 0.000f /* '\x0A' */, 0.000f /* '\x0B' */, 0.000f /* '\x0C' */, 0.000f /* '\x0D' */, 0.000f /* '\x0E' */, 0.000f /* '\x0F' */,
-            0.000f /* '\x10' */, 0.000f /* '\x11' */, 0.000f /* '\x12' */, 0.000f /* '\x13' */, 0.003f /* '\x14' */, 0.000f /* '\x15' */, 0.000f /* '\x16' */, 0.000f /* '\x17' */,
-            0.000f /* '\x18' */, 0.004f /* '\x19' */, 0.000f /* '\x1A' */, 0.000f /* '\x1B' */, 0.006f /* '\x1C' */, 0.006f /* '\x1D' */, 0.000f /* '\x1E' */, 0.000f /* '\x1F' */,
-            8.952f /* '    ' */, 0.065f /* '   !' */, 0.420f /* '   "' */, 0.010f /* '   #' */, 0.011f /* '   $' */, 0.005f /* '   %' */, 0.070f /* '   &' */, 0.050f /* '   '' */,
-            3.911f /* '   (' */, 3.910f /* '   )' */, 0.356f /* '   *' */, 2.775f /* '   +' */, 1.411f /* '   ,' */, 0.173f /* '   -' */, 2.054f /* '   .' */, 0.677f /* '   /' */,
-            1.199f /* '   0' */, 0.870f /* '   1' */, 0.729f /* '   2' */, 0.491f /* '   3' */, 0.335f /* '   4' */, 0.269f /* '   5' */, 0.435f /* '   6' */, 0.240f /* '   7' */,
-            0.234f /* '   8' */, 0.196f /* '   9' */, 0.144f /* '   :' */, 0.983f /* '   ;' */, 0.357f /* '   <' */, 0.661f /* '   =' */, 0.371f /* '   >' */, 0.088f /* '   ?' */,
-            0.007f /* '   @' */, 0.763f /* '   A' */, 0.229f /* '   B' */, 0.551f /* '   C' */, 0.306f /* '   D' */, 0.449f /* '   E' */, 0.337f /* '   F' */, 0.162f /* '   G' */,
-            0.131f /* '   H' */, 0.489f /* '   I' */, 0.031f /* '   J' */, 0.035f /* '   K' */, 0.301f /* '   L' */, 0.205f /* '   M' */, 0.253f /* '   N' */, 0.228f /* '   O' */,
-            0.288f /* '   P' */, 0.034f /* '   Q' */, 0.380f /* '   R' */, 0.730f /* '   S' */, 0.675f /* '   T' */, 0.265f /* '   U' */, 0.309f /* '   V' */, 0.137f /* '   W' */,
-            0.084f /* '   X' */, 0.023f /* '   Y' */, 0.023f /* '   Z' */, 0.591f /* '   [' */, 0.085f /* '   \' */, 0.590f /* '   ]' */, 0.013f /* '   ^' */, 0.797f /* '   _' */,
-            0.001f /* '   `' */, 4.596f /* '   a' */, 1.296f /* '   b' */, 2.081f /* '   c' */, 2.005f /* '   d' */, 6.903f /* '   e' */, 1.494f /* '   f' */, 1.019f /* '   g' */,
-            1.024f /* '   h' */, 3.750f /* '   i' */, 0.286f /* '   j' */, 0.439f /* '   k' */, 2.913f /* '   l' */, 1.459f /* '   m' */, 3.908f /* '   n' */, 3.230f /* '   o' */,
-            1.444f /* '   p' */, 0.231f /* '   q' */, 4.220f /* '   r' */, 3.924f /* '   s' */, 5.312f /* '   t' */, 2.112f /* '   u' */, 0.737f /* '   v' */, 0.573f /* '   w' */,
-            0.992f /* '   x' */, 1.067f /* '   y' */, 0.181f /* '   z' */, 0.391f /* '   {' */, 0.056f /* '   |' */, 0.391f /* '   }' */, 0.002f /* '   ~' */, 0.000f /* '\x7F' */,
-            0.000f /* '\x80' */, 0.000f /* '\x81' */, 0.000f /* '\x82' */, 0.000f /* '\x83' */, 0.000f /* '\x84' */, 0.000f /* '\x85' */, 0.000f /* '\x86' */, 0.000f /* '\x87' */,
-            0.000f /* '\x88' */, 0.000f /* '\x89' */, 0.000f /* '\x8A' */, 0.000f /* '\x8B' */, 0.000f /* '\x8C' */, 0.000f /* '\x8D' */, 0.000f /* '\x8E' */, 0.000f /* '\x8F' */,
-            0.000f /* '\x90' */, 0.000f /* '\x91' */, 0.000f /* '\x92' */, 0.000f /* '\x93' */, 0.000f /* '\x94' */, 0.000f /* '\x95' */, 0.000f /* '\x96' */, 0.000f /* '\x97' */,
-            0.000f /* '\x98' */, 0.000f /* '\x99' */, 0.000f /* '\x9A' */, 0.000f /* '\x9B' */, 0.000f /* '\x9C' */, 0.000f /* '\x9D' */, 0.000f /* '\x9E' */, 0.000f /* '\x9F' */,
-            0.000f /* '\xA0' */, 0.000f /* '\xA1' */, 0.000f /* '\xA2' */, 0.000f /* '\xA3' */, 0.000f /* '\xA4' */, 0.000f /* '\xA5' */, 0.000f /* '\xA6' */, 0.000f /* '\xA7' */,
-            0.000f /* '\xA8' */, 0.000f /* '\xA9' */, 0.000f /* '\xAA' */, 0.000f /* '\xAB' */, 0.000f /* '\xAC' */, 0.000f /* '\xAD' */, 0.000f /* '\xAE' */, 0.000f /* '\xAF' */,
-            0.000f /* '\xB0' */, 0.000f /* '\xB1' */, 0.000f /* '\xB2' */, 0.000f /* '\xB3' */, 0.000f /* '\xB4' */, 0.000f /* '\xB5' */, 0.000f /* '\xB6' */, 0.000f /* '\xB7' */,
-            0.000f /* '\xB8' */, 0.000f /* '\xB9' */, 0.000f /* '\xBA' */, 0.000f /* '\xBB' */, 0.000f /* '\xBC' */, 0.000f /* '\xBD' */, 0.000f /* '\xBE' */, 0.000f /* '\xBF' */,
-            0.000f /* '\xC0' */, 0.000f /* '\xC1' */, 0.000f /* '\xC2' */, 0.000f /* '\xC3' */, 0.000f /* '\xC4' */, 0.000f /* '\xC5' */, 0.000f /* '\xC6' */, 0.000f /* '\xC7' */,
-            0.000f /* '\xC8' */, 0.000f /* '\xC9' */, 0.000f /* '\xCA' */, 0.000f /* '\xCB' */, 0.000f /* '\xCC' */, 0.000f /* '\xCD' */, 0.000f /* '\xCE' */, 0.000f /* '\xCF' */,
-            0.000f /* '\xD0' */, 0.000f /* '\xD1' */, 0.000f /* '\xD2' */, 0.000f /* '\xD3' */, 0.000f /* '\xD4' */, 0.000f /* '\xD5' */, 0.000f /* '\xD6' */, 0.000f /* '\xD7' */,
-            0.000f /* '\xD8' */, 0.000f /* '\xD9' */, 0.000f /* '\xDA' */, 0.000f /* '\xDB' */, 0.000f /* '\xDC' */, 0.000f /* '\xDD' */, 0.000f /* '\xDE' */, 0.000f /* '\xDF' */,
-            0.000f /* '\xE0' */, 0.000f /* '\xE1' */, 0.000f /* '\xE2' */, 0.000f /* '\xE3' */, 0.000f /* '\xE4' */, 0.000f /* '\xE5' */, 0.000f /* '\xE6' */, 0.000f /* '\xE7' */,
-            0.000f /* '\xE8' */, 0.000f /* '\xE9' */, 0.000f /* '\xEA' */, 0.000f /* '\xEB' */, 0.000f /* '\xEC' */, 0.000f /* '\xED' */, 0.000f /* '\xEE' */, 0.000f /* '\xEF' */,
-            0.000f /* '\xF0' */, 0.000f /* '\xF1' */, 0.000f /* '\xF2' */, 0.000f /* '\xF3' */, 0.000f /* '\xF4' */, 0.000f /* '\xF5' */, 0.000f /* '\xF6' */, 0.000f /* '\xF7' */,
-            0.000f /* '\xF8' */, 0.000f /* '\xF9' */, 0.000f /* '\xFA' */, 0.000f /* '\xFB' */, 0.000f /* '\xFC' */, 0.000f /* '\xFD' */, 0.000f /* '\xFE' */, 0.000f /* '\xFF' */,
+            0.000f /* '\x00' */
+            ,
+            0.000f /* '\x01' */
+            ,
+            0.000f /* '\x02' */
+            ,
+            0.000f /* '\x03' */
+            ,
+            0.000f /* '\x04' */
+            ,
+            0.000f /* '\x05' */
+            ,
+            0.000f /* '\x06' */
+            ,
+            0.000f /* '\x07' */
+            ,
+            0.000f /* '\x08' */
+            ,
+            0.001f /* '\x09' */
+            ,
+            0.000f /* '\x0A' */
+            ,
+            0.000f /* '\x0B' */
+            ,
+            0.000f /* '\x0C' */
+            ,
+            0.000f /* '\x0D' */
+            ,
+            0.000f /* '\x0E' */
+            ,
+            0.000f /* '\x0F' */
+            ,
+            0.000f /* '\x10' */
+            ,
+            0.000f /* '\x11' */
+            ,
+            0.000f /* '\x12' */
+            ,
+            0.000f /* '\x13' */
+            ,
+            0.003f /* '\x14' */
+            ,
+            0.000f /* '\x15' */
+            ,
+            0.000f /* '\x16' */
+            ,
+            0.000f /* '\x17' */
+            ,
+            0.000f /* '\x18' */
+            ,
+            0.004f /* '\x19' */
+            ,
+            0.000f /* '\x1A' */
+            ,
+            0.000f /* '\x1B' */
+            ,
+            0.006f /* '\x1C' */
+            ,
+            0.006f /* '\x1D' */
+            ,
+            0.000f /* '\x1E' */
+            ,
+            0.000f /* '\x1F' */
+            ,
+            8.952f /* '    ' */
+            ,
+            0.065f /* '   !' */
+            ,
+            0.420f /* '   "' */
+            ,
+            0.010f /* '   #' */
+            ,
+            0.011f /* '   $' */
+            ,
+            0.005f /* '   %' */
+            ,
+            0.070f /* '   &' */
+            ,
+            0.050f /* '   '' */
+            ,
+            3.911f /* '   (' */
+            ,
+            3.910f /* '   )' */
+            ,
+            0.356f /* '   *' */
+            ,
+            2.775f /* '   +' */
+            ,
+            1.411f /* '   ,' */
+            ,
+            0.173f /* '   -' */
+            ,
+            2.054f /* '   .' */
+            ,
+            0.677f /* '   /' */
+            ,
+            1.199f /* '   0' */
+            ,
+            0.870f /* '   1' */
+            ,
+            0.729f /* '   2' */
+            ,
+            0.491f /* '   3' */
+            ,
+            0.335f /* '   4' */
+            ,
+            0.269f /* '   5' */
+            ,
+            0.435f /* '   6' */
+            ,
+            0.240f /* '   7' */
+            ,
+            0.234f /* '   8' */
+            ,
+            0.196f /* '   9' */
+            ,
+            0.144f /* '   :' */
+            ,
+            0.983f /* '   ;' */
+            ,
+            0.357f /* '   <' */
+            ,
+            0.661f /* '   =' */
+            ,
+            0.371f /* '   >' */
+            ,
+            0.088f /* '   ?' */
+            ,
+            0.007f /* '   @' */
+            ,
+            0.763f /* '   A' */
+            ,
+            0.229f /* '   B' */
+            ,
+            0.551f /* '   C' */
+            ,
+            0.306f /* '   D' */
+            ,
+            0.449f /* '   E' */
+            ,
+            0.337f /* '   F' */
+            ,
+            0.162f /* '   G' */
+            ,
+            0.131f /* '   H' */
+            ,
+            0.489f /* '   I' */
+            ,
+            0.031f /* '   J' */
+            ,
+            0.035f /* '   K' */
+            ,
+            0.301f /* '   L' */
+            ,
+            0.205f /* '   M' */
+            ,
+            0.253f /* '   N' */
+            ,
+            0.228f /* '   O' */
+            ,
+            0.288f /* '   P' */
+            ,
+            0.034f /* '   Q' */
+            ,
+            0.380f /* '   R' */
+            ,
+            0.730f /* '   S' */
+            ,
+            0.675f /* '   T' */
+            ,
+            0.265f /* '   U' */
+            ,
+            0.309f /* '   V' */
+            ,
+            0.137f /* '   W' */
+            ,
+            0.084f /* '   X' */
+            ,
+            0.023f /* '   Y' */
+            ,
+            0.023f /* '   Z' */
+            ,
+            0.591f /* '   [' */
+            ,
+            0.085f /* '   \' */
+            ,
+            0.590f /* '   ]' */
+            ,
+            0.013f /* '   ^' */
+            ,
+            0.797f /* '   _' */
+            ,
+            0.001f /* '   `' */
+            ,
+            4.596f /* '   a' */
+            ,
+            1.296f /* '   b' */
+            ,
+            2.081f /* '   c' */
+            ,
+            2.005f /* '   d' */
+            ,
+            6.903f /* '   e' */
+            ,
+            1.494f /* '   f' */
+            ,
+            1.019f /* '   g' */
+            ,
+            1.024f /* '   h' */
+            ,
+            3.750f /* '   i' */
+            ,
+            0.286f /* '   j' */
+            ,
+            0.439f /* '   k' */
+            ,
+            2.913f /* '   l' */
+            ,
+            1.459f /* '   m' */
+            ,
+            3.908f /* '   n' */
+            ,
+            3.230f /* '   o' */
+            ,
+            1.444f /* '   p' */
+            ,
+            0.231f /* '   q' */
+            ,
+            4.220f /* '   r' */
+            ,
+            3.924f /* '   s' */
+            ,
+            5.312f /* '   t' */
+            ,
+            2.112f /* '   u' */
+            ,
+            0.737f /* '   v' */
+            ,
+            0.573f /* '   w' */
+            ,
+            0.992f /* '   x' */
+            ,
+            1.067f /* '   y' */
+            ,
+            0.181f /* '   z' */
+            ,
+            0.391f /* '   {' */
+            ,
+            0.056f /* '   |' */
+            ,
+            0.391f /* '   }' */
+            ,
+            0.002f /* '   ~' */
+            ,
+            0.000f /* '\x7F' */
+            ,
+            0.000f /* '\x80' */
+            ,
+            0.000f /* '\x81' */
+            ,
+            0.000f /* '\x82' */
+            ,
+            0.000f /* '\x83' */
+            ,
+            0.000f /* '\x84' */
+            ,
+            0.000f /* '\x85' */
+            ,
+            0.000f /* '\x86' */
+            ,
+            0.000f /* '\x87' */
+            ,
+            0.000f /* '\x88' */
+            ,
+            0.000f /* '\x89' */
+            ,
+            0.000f /* '\x8A' */
+            ,
+            0.000f /* '\x8B' */
+            ,
+            0.000f /* '\x8C' */
+            ,
+            0.000f /* '\x8D' */
+            ,
+            0.000f /* '\x8E' */
+            ,
+            0.000f /* '\x8F' */
+            ,
+            0.000f /* '\x90' */
+            ,
+            0.000f /* '\x91' */
+            ,
+            0.000f /* '\x92' */
+            ,
+            0.000f /* '\x93' */
+            ,
+            0.000f /* '\x94' */
+            ,
+            0.000f /* '\x95' */
+            ,
+            0.000f /* '\x96' */
+            ,
+            0.000f /* '\x97' */
+            ,
+            0.000f /* '\x98' */
+            ,
+            0.000f /* '\x99' */
+            ,
+            0.000f /* '\x9A' */
+            ,
+            0.000f /* '\x9B' */
+            ,
+            0.000f /* '\x9C' */
+            ,
+            0.000f /* '\x9D' */
+            ,
+            0.000f /* '\x9E' */
+            ,
+            0.000f /* '\x9F' */
+            ,
+            0.000f /* '\xA0' */
+            ,
+            0.000f /* '\xA1' */
+            ,
+            0.000f /* '\xA2' */
+            ,
+            0.000f /* '\xA3' */
+            ,
+            0.000f /* '\xA4' */
+            ,
+            0.000f /* '\xA5' */
+            ,
+            0.000f /* '\xA6' */
+            ,
+            0.000f /* '\xA7' */
+            ,
+            0.000f /* '\xA8' */
+            ,
+            0.000f /* '\xA9' */
+            ,
+            0.000f /* '\xAA' */
+            ,
+            0.000f /* '\xAB' */
+            ,
+            0.000f /* '\xAC' */
+            ,
+            0.000f /* '\xAD' */
+            ,
+            0.000f /* '\xAE' */
+            ,
+            0.000f /* '\xAF' */
+            ,
+            0.000f /* '\xB0' */
+            ,
+            0.000f /* '\xB1' */
+            ,
+            0.000f /* '\xB2' */
+            ,
+            0.000f /* '\xB3' */
+            ,
+            0.000f /* '\xB4' */
+            ,
+            0.000f /* '\xB5' */
+            ,
+            0.000f /* '\xB6' */
+            ,
+            0.000f /* '\xB7' */
+            ,
+            0.000f /* '\xB8' */
+            ,
+            0.000f /* '\xB9' */
+            ,
+            0.000f /* '\xBA' */
+            ,
+            0.000f /* '\xBB' */
+            ,
+            0.000f /* '\xBC' */
+            ,
+            0.000f /* '\xBD' */
+            ,
+            0.000f /* '\xBE' */
+            ,
+            0.000f /* '\xBF' */
+            ,
+            0.000f /* '\xC0' */
+            ,
+            0.000f /* '\xC1' */
+            ,
+            0.000f /* '\xC2' */
+            ,
+            0.000f /* '\xC3' */
+            ,
+            0.000f /* '\xC4' */
+            ,
+            0.000f /* '\xC5' */
+            ,
+            0.000f /* '\xC6' */
+            ,
+            0.000f /* '\xC7' */
+            ,
+            0.000f /* '\xC8' */
+            ,
+            0.000f /* '\xC9' */
+            ,
+            0.000f /* '\xCA' */
+            ,
+            0.000f /* '\xCB' */
+            ,
+            0.000f /* '\xCC' */
+            ,
+            0.000f /* '\xCD' */
+            ,
+            0.000f /* '\xCE' */
+            ,
+            0.000f /* '\xCF' */
+            ,
+            0.000f /* '\xD0' */
+            ,
+            0.000f /* '\xD1' */
+            ,
+            0.000f /* '\xD2' */
+            ,
+            0.000f /* '\xD3' */
+            ,
+            0.000f /* '\xD4' */
+            ,
+            0.000f /* '\xD5' */
+            ,
+            0.000f /* '\xD6' */
+            ,
+            0.000f /* '\xD7' */
+            ,
+            0.000f /* '\xD8' */
+            ,
+            0.000f /* '\xD9' */
+            ,
+            0.000f /* '\xDA' */
+            ,
+            0.000f /* '\xDB' */
+            ,
+            0.000f /* '\xDC' */
+            ,
+            0.000f /* '\xDD' */
+            ,
+            0.000f /* '\xDE' */
+            ,
+            0.000f /* '\xDF' */
+            ,
+            0.000f /* '\xE0' */
+            ,
+            0.000f /* '\xE1' */
+            ,
+            0.000f /* '\xE2' */
+            ,
+            0.000f /* '\xE3' */
+            ,
+            0.000f /* '\xE4' */
+            ,
+            0.000f /* '\xE5' */
+            ,
+            0.000f /* '\xE6' */
+            ,
+            0.000f /* '\xE7' */
+            ,
+            0.000f /* '\xE8' */
+            ,
+            0.000f /* '\xE9' */
+            ,
+            0.000f /* '\xEA' */
+            ,
+            0.000f /* '\xEB' */
+            ,
+            0.000f /* '\xEC' */
+            ,
+            0.000f /* '\xED' */
+            ,
+            0.000f /* '\xEE' */
+            ,
+            0.000f /* '\xEF' */
+            ,
+            0.000f /* '\xF0' */
+            ,
+            0.000f /* '\xF1' */
+            ,
+            0.000f /* '\xF2' */
+            ,
+            0.000f /* '\xF3' */
+            ,
+            0.000f /* '\xF4' */
+            ,
+            0.000f /* '\xF5' */
+            ,
+            0.000f /* '\xF6' */
+            ,
+            0.000f /* '\xF7' */
+            ,
+            0.000f /* '\xF8' */
+            ,
+            0.000f /* '\xF9' */
+            ,
+            0.000f /* '\xFA' */
+            ,
+            0.000f /* '\xFB' */
+            ,
+            0.000f /* '\xFC' */
+            ,
+            0.000f /* '\xFD' */
+            ,
+            0.000f /* '\xFE' */
+            ,
+            0.000f /* '\xFF' */
+            ,
         };
 
         // The above table was generated programmatically with the following.  This can be augmented to incorporate additional data sources,

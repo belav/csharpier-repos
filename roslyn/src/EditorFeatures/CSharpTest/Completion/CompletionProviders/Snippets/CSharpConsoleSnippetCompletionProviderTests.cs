@@ -12,7 +12,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpConsoleSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpConsoleSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "cw";
 
@@ -20,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         public async Task InsertConsoleSnippetInMethodTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -29,7 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -38,14 +39,18 @@ class Program
         Console.WriteLine($$);
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertAsyncConsoleSnippetTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public async Task MethodAsync()
     {
@@ -54,7 +59,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -63,14 +68,18 @@ class Program
         await Console.Out.WriteLineAsync($$);
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetGlobalTest()
         {
             var markupBeforeCommit =
-@"$$
+                @"$$
 class Program
 {
     public async Task MethodAsync()
@@ -79,7 +88,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 Console.WriteLine($$);
 
@@ -89,14 +98,18 @@ class Program
     {
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoConsoleSnippetInBlockNamespaceTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 namespace Namespace
 {
     $$
@@ -114,7 +127,7 @@ namespace Namespace
         public async Task NoConsoleSnippetInFileScopedNamespaceTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 namespace Namespace;
 $$
 class Program
@@ -131,7 +144,7 @@ class Program
         public async Task InsertConsoleSnippetInConstructorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public Program()
     {
@@ -141,7 +154,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -151,7 +164,11 @@ class Program
         Console.WriteLine($$);
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         /// <summary>
@@ -162,7 +179,7 @@ class Program
         public async Task InsertConsoleSnippetInLocalFunctionTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -175,7 +192,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -188,7 +205,11 @@ class Program
         }
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         /// <summary>
@@ -199,7 +220,7 @@ class Program
         public async Task InsertConsoleSnippetInAnonymousFunctionTest()
         {
             var markupBeforeCommit =
-@"public delegate void Print(int value);
+                @"public delegate void Print(int value);
 
 static void Main(string[] args)
 {
@@ -210,7 +231,7 @@ static void Main(string[] args)
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 public delegate void Print(int value);
 
@@ -221,7 +242,11 @@ static void Main(string[] args)
     };
 
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         /// <summary>
@@ -232,7 +257,7 @@ static void Main(string[] args)
         public async Task InsertConsoleSnippetInParenthesizedLambdaExpressionTest()
         {
             var markupBeforeCommit =
-@"
+                @"
 Func<int, int, bool> testForEquality = (x, y) =>
 {
     $$
@@ -240,7 +265,7 @@ Func<int, int, bool> testForEquality = (x, y) =>
 };";
 
             var expectedCodeAfterCommit =
-@"
+                @"
 using System;
 
 Func<int, int, bool> testForEquality = (x, y) =>
@@ -248,14 +273,18 @@ Func<int, int, bool> testForEquality = (x, y) =>
     global::System.Console.WriteLine($$);
     return x == y;
 };";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoConsoleSnippetInSwitchExpression()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -278,7 +307,7 @@ Func<int, int, bool> testForEquality = (x, y) =>
         public async Task NoConsoleSnippetInSingleLambdaExpression()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -292,7 +321,7 @@ Func<int, int, bool> testForEquality = (x, y) =>
         public async Task NoConsoleSnippetInStringTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -307,7 +336,7 @@ Func<int, int, bool> testForEquality = (x, y) =>
         public async Task NoConsoleSnippetInObjectInitializerTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -332,7 +361,7 @@ class Test
         public async Task NoConsoleSnippetInParameterListTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method(int x, $$)
     {
@@ -346,7 +375,7 @@ class Test
         public async Task NoConsoleSnippetInRecordDeclarationTest()
         {
             var markupBeforeCommit =
-@"public record Person
+                @"public record Person
 {
     $$
     public string FirstName { get; init; } = default!;
@@ -360,7 +389,7 @@ class Test
         public async Task NoConsoleSnippetInVariableDeclarationTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -375,7 +404,7 @@ class Test
         public async Task InsertConsoleSnippetWithInvocationBeforeAndAfterCursorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -384,7 +413,7 @@ class Test
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -393,14 +422,18 @@ class Program
         Console.WriteLine($$);
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetWithInvocationUnderscoreBeforeAndAfterCursorTest()
         {
             var markupBeforeCommit =
-@"class Program
+                @"class Program
 {
     public void Method()
     {
@@ -409,7 +442,7 @@ class Program
 }";
 
             var expectedCodeAfterCommit =
-@"using System;
+                @"using System;
 
 class Program
 {
@@ -418,7 +451,11 @@ class Program
         Console.WriteLine($$);
     }
 }";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

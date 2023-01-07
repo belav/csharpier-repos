@@ -14,8 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceThreadingServiceProvider(
-            IWorkspaceThreadingService service)
+        public WorkspaceThreadingServiceProvider(IWorkspaceThreadingService service)
         {
             Service = service;
         }

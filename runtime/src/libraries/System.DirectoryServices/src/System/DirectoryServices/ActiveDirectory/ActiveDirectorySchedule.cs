@@ -51,7 +51,8 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             // need to get the offset between local time and UTC time
 #pragma warning disable 612, 618
-            _utcOffSet = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Ticks / TimeSpan.TicksPerHour;
+            _utcOffSet =
+                TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now).Ticks / TimeSpan.TicksPerHour;
 #pragma warning restore 612, 618
         }
 
@@ -95,22 +96,54 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        public void SetSchedule(DayOfWeek day, HourOfDay fromHour, MinuteOfHour fromMinute, HourOfDay toHour, MinuteOfHour toMinute)
+        public void SetSchedule(
+            DayOfWeek day,
+            HourOfDay fromHour,
+            MinuteOfHour fromMinute,
+            HourOfDay toHour,
+            MinuteOfHour toMinute
+        )
         {
             if (day < DayOfWeek.Sunday || day > DayOfWeek.Saturday)
                 throw new InvalidEnumArgumentException(nameof(day), (int)day, typeof(DayOfWeek));
 
             if (fromHour < HourOfDay.Zero || fromHour > HourOfDay.TwentyThree)
-                throw new InvalidEnumArgumentException(nameof(fromHour), (int)fromHour, typeof(HourOfDay));
+                throw new InvalidEnumArgumentException(
+                    nameof(fromHour),
+                    (int)fromHour,
+                    typeof(HourOfDay)
+                );
 
-            if (fromMinute != MinuteOfHour.Zero && fromMinute != MinuteOfHour.Fifteen && fromMinute != MinuteOfHour.Thirty && fromMinute != MinuteOfHour.FortyFive)
-                throw new InvalidEnumArgumentException(nameof(fromMinute), (int)fromMinute, typeof(MinuteOfHour));
+            if (
+                fromMinute != MinuteOfHour.Zero
+                && fromMinute != MinuteOfHour.Fifteen
+                && fromMinute != MinuteOfHour.Thirty
+                && fromMinute != MinuteOfHour.FortyFive
+            )
+                throw new InvalidEnumArgumentException(
+                    nameof(fromMinute),
+                    (int)fromMinute,
+                    typeof(MinuteOfHour)
+                );
 
             if (toHour < HourOfDay.Zero || toHour > HourOfDay.TwentyThree)
-                throw new InvalidEnumArgumentException(nameof(toHour), (int)toHour, typeof(HourOfDay));
+                throw new InvalidEnumArgumentException(
+                    nameof(toHour),
+                    (int)toHour,
+                    typeof(HourOfDay)
+                );
 
-            if (toMinute != MinuteOfHour.Zero && toMinute != MinuteOfHour.Fifteen && toMinute != MinuteOfHour.Thirty && toMinute != MinuteOfHour.FortyFive)
-                throw new InvalidEnumArgumentException(nameof(toMinute), (int)toMinute, typeof(MinuteOfHour));
+            if (
+                toMinute != MinuteOfHour.Zero
+                && toMinute != MinuteOfHour.Fifteen
+                && toMinute != MinuteOfHour.Thirty
+                && toMinute != MinuteOfHour.FortyFive
+            )
+                throw new InvalidEnumArgumentException(
+                    nameof(toMinute),
+                    (int)toMinute,
+                    typeof(MinuteOfHour)
+                );
 
             // end time should be later than the start time
             if ((int)fromHour * 60 + (int)fromMinute > (int)toHour * 60 + (int)toMinute)
@@ -123,21 +156,36 @@ namespace System.DirectoryServices.ActiveDirectory
                 _scheduleArray[i] = true;
         }
 
-        public void SetSchedule(DayOfWeek[] days, HourOfDay fromHour, MinuteOfHour fromMinute, HourOfDay toHour, MinuteOfHour toMinute)
+        public void SetSchedule(
+            DayOfWeek[] days,
+            HourOfDay fromHour,
+            MinuteOfHour fromMinute,
+            HourOfDay toHour,
+            MinuteOfHour toMinute
+        )
         {
             ArgumentNullException.ThrowIfNull(days);
 
             for (int i = 0; i < days.Length; i++)
             {
                 if (days[i] < DayOfWeek.Sunday || days[i] > DayOfWeek.Saturday)
-                    throw new InvalidEnumArgumentException(nameof(days), (int)days[i], typeof(DayOfWeek));
+                    throw new InvalidEnumArgumentException(
+                        nameof(days),
+                        (int)days[i],
+                        typeof(DayOfWeek)
+                    );
             }
 
             for (int i = 0; i < days.Length; i++)
                 SetSchedule(days[i], fromHour, fromMinute, toHour, toMinute);
         }
 
-        public void SetDailySchedule(HourOfDay fromHour, MinuteOfHour fromMinute, HourOfDay toHour, MinuteOfHour toMinute)
+        public void SetDailySchedule(
+            HourOfDay fromHour,
+            MinuteOfHour fromMinute,
+            HourOfDay toHour,
+            MinuteOfHour toMinute
+        )
         {
             for (int i = 0; i < 7; i++)
             {

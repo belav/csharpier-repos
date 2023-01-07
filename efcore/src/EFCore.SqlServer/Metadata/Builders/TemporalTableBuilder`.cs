@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
 /// <typeparam name="TEntity">The entity type being configured.</typeparam>
-public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
-    where TEntity : class
+public class TemporalTableBuilder<TEntity> : TemporalTableBuilder where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -18,10 +17,7 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public TemporalTableBuilder(EntityTypeBuilder entityTypeBuilder)
-        : base(entityTypeBuilder)
-    {
-    }
+    public TemporalTableBuilder(EntityTypeBuilder entityTypeBuilder) : base(entityTypeBuilder) { }
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -32,8 +28,8 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name)
-        => (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name);
+    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name) =>
+        (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name);
 
     /// <summary>
     ///     Configures a history table for the entity mapped to a temporal table.
@@ -45,6 +41,6 @@ public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
     /// <param name="name">The name of the history table.</param>
     /// <param name="schema">The schema of the history table.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name, string? schema)
-        => (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
+    public new virtual TemporalTableBuilder<TEntity> UseHistoryTable(string name, string? schema) =>
+        (TemporalTableBuilder<TEntity>)base.UseHistoryTable(name, schema);
 }

@@ -40,11 +40,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void SortedSet_Generic_Constructor_IEnumerable(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void SortedSet_Generic_Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             SortedSet<T> set = new SortedSet<T>(enumerable);
             Assert.True(set.SetEquals(enumerable));
         }
@@ -53,29 +65,55 @@ namespace System.Collections.Tests
         public void SortedSet_Generic_Constructor_IEnumerable_Null()
         {
             Assert.Throws<ArgumentNullException>(() => new SortedSet<T>((IEnumerable<T>)null));
-            Assert.Throws<ArgumentNullException>(() => new SortedSet<T>((IEnumerable<T>)null, Comparer<T>.Default));
+            Assert.Throws<ArgumentNullException>(
+                () => new SortedSet<T>((IEnumerable<T>)null, Comparer<T>.Default)
+            );
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void SortedSet_Generic_Constructor_IEnumerable_IComparer_Netcoreapp(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void SortedSet_Generic_Constructor_IEnumerable_IComparer_Netcoreapp(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, 0);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                0
+            );
             SortedSet<T> set = new SortedSet<T>(enumerable, GetIComparer());
             Assert.True(set.SetEquals(enumerable));
         }
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void SortedSet_Generic_Constructor_IEnumerable_IComparer_NullComparer_Netcoreapp(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void SortedSet_Generic_Constructor_IEnumerable_IComparer_NullComparer_Netcoreapp(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
             _ = numberOfDuplicateElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, 0);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                0
+            );
             SortedSet<T> set = new SortedSet<T>(enumerable, comparer: null);
             Assert.True(set.SetEquals(enumerable));
         }
@@ -135,7 +173,10 @@ namespace System.Collections.Tests
 
                 List<T> expected = new List<T>(setLength - 2);
                 foreach (T value in set)
-                    if (comparer.Compare(value, firstElement) >= 0 && comparer.Compare(value, lastElement) <= 0)
+                    if (
+                        comparer.Compare(value, firstElement) >= 0
+                        && comparer.Compare(value, lastElement) <= 0
+                    )
                         expected.Add(value);
 
                 SortedSet<T> view = set.GetViewBetween(firstElement, lastElement);
@@ -146,7 +187,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void SortedSet_Generic_GetViewBetween_LowerValueGreaterThanUpperValue_ThrowsArgumentException(int setLength)
+        public void SortedSet_Generic_GetViewBetween_LowerValueGreaterThanUpperValue_ThrowsArgumentException(
+            int setLength
+        )
         {
             if (setLength >= 2)
             {
@@ -155,13 +198,19 @@ namespace System.Collections.Tests
                 T firstElement = set.ElementAt(0);
                 T lastElement = set.ElementAt(setLength - 1);
                 if (comparer.Compare(firstElement, lastElement) < 0)
-                    AssertExtensions.Throws<ArgumentException>("lowerValue", null, () => set.GetViewBetween(lastElement, firstElement));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "lowerValue",
+                        null,
+                        () => set.GetViewBetween(lastElement, firstElement)
+                    );
             }
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void SortedSet_Generic_GetViewBetween_SubsequentOutOfRangeCall_ThrowsArgumentOutOfRangeException(int setLength)
+        public void SortedSet_Generic_GetViewBetween_SubsequentOutOfRangeCall_ThrowsArgumentOutOfRangeException(
+            int setLength
+        )
         {
             if (setLength >= 3)
             {
@@ -170,10 +219,15 @@ namespace System.Collections.Tests
                 T firstElement = set.ElementAt(0);
                 T middleElement = set.ElementAt(setLength / 2);
                 T lastElement = set.ElementAt(setLength - 1);
-                if ((comparer.Compare(firstElement, middleElement) < 0) && (comparer.Compare(middleElement, lastElement) < 0))
+                if (
+                    (comparer.Compare(firstElement, middleElement) < 0)
+                    && (comparer.Compare(middleElement, lastElement) < 0)
+                )
                 {
                     SortedSet<T> view = set.GetViewBetween(firstElement, middleElement);
-                    Assert.Throws<ArgumentOutOfRangeException>(() => view.GetViewBetween(middleElement, lastElement));
+                    Assert.Throws<ArgumentOutOfRangeException>(
+                        () => view.GetViewBetween(middleElement, lastElement)
+                    );
                 }
             }
         }
@@ -182,7 +236,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void SortedSet_Generic_GetViewBetween_Empty_MinMax(int setLength)
         {
-            if (setLength < 4) return;
+            if (setLength < 4)
+                return;
 
             SortedSet<T> set = (SortedSet<T>)GenericISetFactory(setLength);
             Assert.Equal(setLength, set.Count);
@@ -215,7 +270,12 @@ namespace System.Collections.Tests
         public void SortedSet_Generic_RemoveWhere_AllElements(int setLength)
         {
             SortedSet<T> set = (SortedSet<T>)GenericISetFactory(setLength);
-            int removedCount = set.RemoveWhere((value) => { return true; });
+            int removedCount = set.RemoveWhere(
+                (value) =>
+                {
+                    return true;
+                }
+            );
             Assert.Equal(setLength, removedCount);
         }
 
@@ -224,7 +284,12 @@ namespace System.Collections.Tests
         public void SortedSet_Generic_RemoveWhere_NoElements(int setLength)
         {
             SortedSet<T> set = (SortedSet<T>)GenericISetFactory(setLength);
-            int removedCount = set.RemoveWhere((value) => { return false; });
+            int removedCount = set.RemoveWhere(
+                (value) =>
+                {
+                    return false;
+                }
+            );
             Assert.Equal(0, removedCount);
             Assert.Equal(setLength, set.Count);
         }
@@ -312,7 +377,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void SortedSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(int setLength)
+        public void SortedSet_Generic_CopyTo_NegativeCount_ThrowsArgumentOutOfRangeException(
+            int setLength
+        )
         {
             SortedSet<T> set = (SortedSet<T>)GenericISetFactory(setLength);
             T[] actual = new T[setLength];
@@ -327,7 +394,15 @@ namespace System.Collections.Tests
         [Fact]
         public void SetComparer_SetEqualsTests()
         {
-            List<T> objects = new List<T>() { CreateT(1), CreateT(2), CreateT(3), CreateT(4), CreateT(5), CreateT(6) };
+            List<T> objects = new List<T>()
+            {
+                CreateT(1),
+                CreateT(2),
+                CreateT(3),
+                CreateT(4),
+                CreateT(5),
+                CreateT(6)
+            };
 
             var set = new HashSet<SortedSet<T>>()
             {

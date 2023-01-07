@@ -9,16 +9,18 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.UnitTests.Persistence
 {
-    [ExportWorkspaceServiceFactory(typeof(ITemporaryStorageServiceInternal), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceServiceFactory(typeof(ITemporaryStorageServiceInternal), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal sealed class TestTemporaryStorageServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestTemporaryStorageServiceFactory()
-        {
-        }
+        public TestTemporaryStorageServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => TrivialTemporaryStorageService.Instance;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            TrivialTemporaryStorageService.Instance;
     }
 }

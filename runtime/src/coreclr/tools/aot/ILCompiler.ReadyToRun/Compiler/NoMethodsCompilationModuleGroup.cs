@@ -15,10 +15,8 @@ namespace ILCompiler
     /// </summary>
     public class NoMethodsCompilationModuleGroup : ReadyToRunCompilationModuleGroupBase
     {
-        public NoMethodsCompilationModuleGroup(ReadyToRunCompilationModuleGroupConfig config) :
-                base(config)
-        {
-        }
+        public NoMethodsCompilationModuleGroup(ReadyToRunCompilationModuleGroupConfig config)
+            : base(config) { }
 
         public override bool ContainsMethodBody(MethodDesc method, bool unboxingStub)
         {

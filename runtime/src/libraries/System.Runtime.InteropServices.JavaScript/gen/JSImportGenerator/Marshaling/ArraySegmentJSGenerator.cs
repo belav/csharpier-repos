@@ -11,16 +11,24 @@ namespace Microsoft.Interop.JavaScript
     internal sealed class ArraySegmentJSGenerator : PrimitiveJSGenerator
     {
         private MarshalerType _elementMarshalerType;
+
         public ArraySegmentJSGenerator(MarshalerType elementMarshalerType)
             : base(MarshalerType.ArraySegment)
         {
             _elementMarshalerType = elementMarshalerType;
         }
 
-        public override IEnumerable<ExpressionSyntax> GenerateBind(TypePositionInfo info, StubCodeContext context)
+        public override IEnumerable<ExpressionSyntax> GenerateBind(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
-            yield return InvocationExpression(MarshalerTypeName(Type),
-                ArgumentList(SingletonSeparatedList(Argument(MarshalerTypeName(_elementMarshalerType)))));
+            yield return InvocationExpression(
+                MarshalerTypeName(Type),
+                ArgumentList(
+                    SingletonSeparatedList(Argument(MarshalerTypeName(_elementMarshalerType)))
+                )
+            );
         }
     }
 }

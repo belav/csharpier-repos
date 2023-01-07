@@ -6,14 +6,45 @@ using Xunit;
 
 namespace System.SpanTests
 {
-    public class ReplaceTests_Byte : ReplaceTests<byte> { protected override byte Create(int value) => (byte)value; }
-    public class ReplaceTests_Int16 : ReplaceTests<short> { protected override short Create(int value) => (short)value; }
-    public class ReplaceTests_Int32 : ReplaceTests<int> { protected override int Create(int value) => value; }
-    public class ReplaceTests_Int64 : ReplaceTests<long> { protected override long Create(int value) => value; }
-    public class ReplaceTests_Char : ReplaceTests<char> { protected override char Create(int value) => (char)value; }
-    public class ReplaceTests_Double : ReplaceTests<double> { protected override double Create(int value) => (double)value; }
-    public class ReplaceTests_Record : ReplaceTests<SimpleRecord> { protected override SimpleRecord Create(int value) => new SimpleRecord(value); }
-    public class ReplaceTests_CustomEquatable : ReplaceTests<CustomEquatable> { protected override CustomEquatable Create(int value) => new CustomEquatable((byte)value); }
+    public class ReplaceTests_Byte : ReplaceTests<byte>
+    {
+        protected override byte Create(int value) => (byte)value;
+    }
+
+    public class ReplaceTests_Int16 : ReplaceTests<short>
+    {
+        protected override short Create(int value) => (short)value;
+    }
+
+    public class ReplaceTests_Int32 : ReplaceTests<int>
+    {
+        protected override int Create(int value) => value;
+    }
+
+    public class ReplaceTests_Int64 : ReplaceTests<long>
+    {
+        protected override long Create(int value) => value;
+    }
+
+    public class ReplaceTests_Char : ReplaceTests<char>
+    {
+        protected override char Create(int value) => (char)value;
+    }
+
+    public class ReplaceTests_Double : ReplaceTests<double>
+    {
+        protected override double Create(int value) => (double)value;
+    }
+
+    public class ReplaceTests_Record : ReplaceTests<SimpleRecord>
+    {
+        protected override SimpleRecord Create(int value) => new SimpleRecord(value);
+    }
+
+    public class ReplaceTests_CustomEquatable : ReplaceTests<CustomEquatable>
+    {
+        protected override CustomEquatable Create(int value) => new CustomEquatable((byte)value);
+    }
 
     public readonly struct CustomEquatable : IEquatable<CustomEquatable>
     {

@@ -20,10 +20,7 @@ namespace System
         // you can't use the raw IntPtr value for comparisons.
         //
 
-        internal RuntimeTypeHandle(EETypePtr pEEType)
-            : this(pEEType.RawValue)
-        {
-        }
+        internal RuntimeTypeHandle(EETypePtr pEEType) : this(pEEType.RawValue) { }
 
         private RuntimeTypeHandle(IntPtr value)
         {
@@ -120,10 +117,7 @@ namespace System
 
         internal bool IsNull
         {
-            get
-            {
-                return _value == new IntPtr(0);
-            }
+            get { return _value == new IntPtr(0); }
         }
 
         // Last resort string for Type.ToString() when no metadata around.
@@ -148,7 +142,8 @@ namespace System
                 ReflectionExecutionDomainCallbacks callbacks = RuntimeAugments.CallbacksIfAvailable;
                 if (callbacks != null)
                 {
-                    string penultimateLastResortString = callbacks.GetBetterDiagnosticInfoIfAvailable(this);
+                    string penultimateLastResortString =
+                        callbacks.GetBetterDiagnosticInfoIfAvailable(this);
                     if (penultimateLastResortString != null)
                         s += "(" + penultimateLastResortString + ")";
                 }
@@ -158,10 +153,7 @@ namespace System
 
         internal IntPtr RawValue
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         private IntPtr _value;

@@ -17,13 +17,27 @@ public class RequestExecutionQueueTests
 {
     private const string MethodName = "SomeMethod";
 
-    private static RequestExecutionQueue<TestRequestContext> GetRequestExecutionQueue(IMethodHandler? methodHandler = null)
+    private static RequestExecutionQueue<TestRequestContext> GetRequestExecutionQueue(
+        IMethodHandler? methodHandler = null
+    )
     {
         var handlerProvider = new Mock<IHandlerProvider>(MockBehavior.Strict);
         var handler = methodHandler ?? GetTestMethodHandler();
 
-        handlerProvider.Setup(h => h.GetMethodHandler(MethodName, TestMethodHandler.RequestType, TestMethodHandler.ResponseType)).Returns(handler);
-        var executionQueue = new RequestExecutionQueue<TestRequestContext>(NoOpLspLogger.Instance, handlerProvider.Object);
+        handlerProvider
+            .Setup(
+                h =>
+                    h.GetMethodHandler(
+                        MethodName,
+                        TestMethodHandler.RequestType,
+                        TestMethodHandler.ResponseType
+                    )
+            )
+            .Returns(handler);
+        var executionQueue = new RequestExecutionQueue<TestRequestContext>(
+            NoOpLspLogger.Instance,
+            handlerProvider.Object
+        );
         executionQueue.Start();
 
         return executionQueue;
@@ -31,10 +45,23 @@ public class RequestExecutionQueueTests
 
     private static ILspServices GetLspServices()
     {
-        var requestContextFactory = new Mock<IRequestContextFactory<TestRequestContext>>(MockBehavior.Strict);
-        requestContextFactory.Setup(f => f.CreateRequestContextAsync<int>(It.IsAny<IQueueItem<TestRequestContext>>(), It.IsAny<int>(), It.IsAny<CancellationToken>()))
+        var requestContextFactory = new Mock<IRequestContextFactory<TestRequestContext>>(
+            MockBehavior.Strict
+        );
+        requestContextFactory
+            .Setup(
+                f =>
+                    f.CreateRequestContextAsync<int>(
+                        It.IsAny<IQueueItem<TestRequestContext>>(),
+                        It.IsAny<int>(),
+                        It.IsAny<CancellationToken>()
+                    )
+            )
             .Returns(Task.FromResult(new TestRequestContext()));
-        var services = new List<(Type, object)> { (typeof(IRequestContextFactory<TestRequestContext>), requestContextFactory.Object) };
+        var services = new List<(Type, object)>
+        {
+            (typeof(IRequestContextFactory<TestRequestContext>), requestContextFactory.Object)
+        };
         var lspServices = new TestLspServices(services, supportsGetRegisteredServices: false);
 
         return lspServices;
@@ -55,7 +82,15 @@ public class RequestExecutionQueueTests
         var request = 1;
         var lspServices = GetLspServices();
 
-        await Assert.ThrowsAsync<NotImplementedException>(() => requestExecutionQueue.ExecuteAsync<int, string>(request, MethodName, lspServices, CancellationToken.None));
+        await Assert.ThrowsAsync<NotImplementedException>(
+            () =>
+                requestExecutionQueue.ExecuteAsync<int, string>(
+                    request,
+                    MethodName,
+                    lspServices,
+                    CancellationToken.None
+                )
+        );
     }
 
     [Fact]
@@ -75,7 +110,11 @@ public class RequestExecutionQueueTests
     {
         public bool MutatesSolutionState => false;
 
-        public Task<string> HandleRequestAsync(int request, TestRequestContext context, CancellationToken cancellationToken)
+        public Task<string> HandleRequestAsync(
+            int request,
+            TestRequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
@@ -88,7 +127,12 @@ public class RequestExecutionQueueTests
         var request = 1;
         var lspServices = GetLspServices();
 
-        var response = await requestExecutionQueue.ExecuteAsync<int, string>(request, MethodName, lspServices, CancellationToken.None);
+        var response = await requestExecutionQueue.ExecuteAsync<int, string>(
+            request,
+            MethodName,
+            lspServices,
+            CancellationToken.None
+        );
 
         Assert.Equal("stuff", response);
     }
@@ -100,8 +144,18 @@ public class RequestExecutionQueueTests
         var request = 1;
         var lspServices = GetLspServices();
 
-        var task1 = requestExecutionQueue.ExecuteAsync<int, string>(request, MethodName, lspServices, CancellationToken.None);
-        var task2 = requestExecutionQueue.ExecuteAsync<int, string>(request, MethodName, lspServices, CancellationToken.None);
+        var task1 = requestExecutionQueue.ExecuteAsync<int, string>(
+            request,
+            MethodName,
+            lspServices,
+            CancellationToken.None
+        );
+        var task2 = requestExecutionQueue.ExecuteAsync<int, string>(
+            request,
+            MethodName,
+            lspServices,
+            CancellationToken.None
+        );
 
         await requestExecutionQueue.DisposeAsync();
 
@@ -109,7 +163,5 @@ public class RequestExecutionQueueTests
         Assert.True(task2.IsCompleted);
     }
 
-    private class TestResponse
-    {
-    }
+    private class TestResponse { }
 }

@@ -9,7 +9,9 @@ namespace System.Drawing
 {
     internal static class ColorTable
     {
-        private static readonly Lazy<Dictionary<string, Color>> s_colorConstants = new Lazy<Dictionary<string, Color>>(GetColors);
+        private static readonly Lazy<Dictionary<string, Color>> s_colorConstants = new Lazy<
+            Dictionary<string, Color>
+        >(GetColors);
 
         private static Dictionary<string, Color> GetColors()
         {
@@ -21,9 +23,15 @@ namespace System.Drawing
 
         private static void FillWithProperties(
             Dictionary<string, Color> dictionary,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] Type typeWithColors)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)]
+                Type typeWithColors
+        )
         {
-            foreach (PropertyInfo prop in typeWithColors.GetProperties(BindingFlags.Public | BindingFlags.Static))
+            foreach (
+                PropertyInfo prop in typeWithColors.GetProperties(
+                    BindingFlags.Public | BindingFlags.Static
+                )
+            )
             {
                 if (prop.PropertyType == typeof(Color))
                     dictionary[prop.Name] = (Color)prop.GetValue(null, null)!;
@@ -32,7 +40,8 @@ namespace System.Drawing
 
         internal static Dictionary<string, Color> Colors => s_colorConstants.Value;
 
-        internal static bool TryGetNamedColor(string name, out Color result) => Colors.TryGetValue(name, out result);
+        internal static bool TryGetNamedColor(string name, out Color result) =>
+            Colors.TryGetValue(name, out result);
 
         internal static bool IsKnownNamedColor(string name) => Colors.TryGetValue(name, out _);
     }

@@ -12,17 +12,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
     internal interface IFSharpCrossLanguageSymbolNavigationService
     {
         /// <inheritdoc cref="ICrossLanguageSymbolNavigationService.TryGetNavigableLocationAsync"/>
-        Task<IFSharpNavigableLocation?> TryGetNavigableLocationAsync(string documentationCommentId, CancellationToken cancellationToken);
+        Task<IFSharpNavigableLocation?> TryGetNavigableLocationAsync(
+            string documentationCommentId,
+            CancellationToken cancellationToken
+        );
     }
 
     /// <inheritdoc cref="NavigationOptions"/>
     internal sealed record class FSharpNavigationOptions2(
         bool PreferProvisionalTab,
-        bool ActivateTab);
+        bool ActivateTab
+    );
 
     /// <inheritdoc cref="INavigableLocation"/>
     internal interface IFSharpNavigableLocation
     {
-        Task<bool> NavigateToAsync(FSharpNavigationOptions2 options, CancellationToken cancellationToken);
+        Task<bool> NavigateToAsync(
+            FSharpNavigationOptions2 options,
+            CancellationToken cancellationToken
+        );
     }
 }

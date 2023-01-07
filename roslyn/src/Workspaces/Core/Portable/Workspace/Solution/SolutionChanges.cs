@@ -42,7 +42,9 @@ namespace Microsoft.CodeAnalysis
                 var oldState = old.GetProjectState(id);
                 if (oldState != null && newState != null && newState != oldState)
                 {
-                    yield return _newSolution.GetRequiredProject(id).GetChanges(_oldSolution.GetRequiredProject(id));
+                    yield return _newSolution
+                        .GetRequiredProject(id)
+                        .GetChanges(_oldSolution.GetRequiredProject(id));
                 }
             }
         }
@@ -60,7 +62,9 @@ namespace Microsoft.CodeAnalysis
 
         public IEnumerable<AnalyzerReference> GetAddedAnalyzerReferences()
         {
-            using var _ = PooledHashSet<AnalyzerReference>.GetInstance(out var oldAnalyzerReferences);
+            using var _ = PooledHashSet<AnalyzerReference>.GetInstance(
+                out var oldAnalyzerReferences
+            );
             oldAnalyzerReferences.UnionWith(_oldSolution.AnalyzerReferences);
             foreach (var analyzerReference in _newSolution.AnalyzerReferences)
             {
@@ -73,7 +77,9 @@ namespace Microsoft.CodeAnalysis
 
         public IEnumerable<AnalyzerReference> GetRemovedAnalyzerReferences()
         {
-            using var _ = PooledHashSet<AnalyzerReference>.GetInstance(out var newAnalyzerReferences);
+            using var _ = PooledHashSet<AnalyzerReference>.GetInstance(
+                out var newAnalyzerReferences
+            );
             newAnalyzerReferences.UnionWith(_newSolution.AnalyzerReferences);
             foreach (var analyzerReference in _oldSolution.AnalyzerReferences)
             {

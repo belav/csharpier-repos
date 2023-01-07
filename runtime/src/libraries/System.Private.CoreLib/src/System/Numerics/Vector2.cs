@@ -30,9 +30,7 @@ namespace System.Numerics
         /// <summary>Creates a new <see cref="System.Numerics.Vector2" /> object whose two elements have the same value.</summary>
         /// <param name="value">The value to assign to both elements.</param>
         [Intrinsic]
-        public Vector2(float value) : this(value, value)
-        {
-        }
+        public Vector2(float value) : this(value, value) { }
 
         /// <summary>Creates a vector whose elements have the specified values.</summary>
         /// <param name="x">The value to assign to the <see cref="System.Numerics.Vector2.X" /> field.</param>
@@ -53,7 +51,9 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.values);
             }
 
-            this = Unsafe.ReadUnaligned<Vector2>(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector2>(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Returns a vector whose 2 elements are equal to zero.</summary>
@@ -153,10 +153,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator +(Vector2 left, Vector2 right)
         {
-            return new Vector2(
-                left.X + right.X,
-                left.Y + right.Y
-            );
+            return new Vector2(left.X + right.X, left.Y + right.Y);
         }
 
         /// <summary>Divides the first vector by the second.</summary>
@@ -168,10 +165,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator /(Vector2 left, Vector2 right)
         {
-            return new Vector2(
-                left.X / right.X,
-                left.Y / right.Y
-            );
+            return new Vector2(left.X / right.X, left.Y / right.Y);
         }
 
         /// <summary>Divides the specified vector by a specified scalar value.</summary>
@@ -194,8 +188,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Vector2 left, Vector2 right)
         {
-            return (left.X == right.X)
-                && (left.Y == right.Y);
+            return (left.X == right.X) && (left.Y == right.Y);
         }
 
         /// <summary>Returns a value that indicates whether two specified vectors are not equal.</summary>
@@ -218,10 +211,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator *(Vector2 left, Vector2 right)
         {
-            return new Vector2(
-                left.X * right.X,
-                left.Y * right.Y
-            );
+            return new Vector2(left.X * right.X, left.Y * right.Y);
         }
 
         /// <summary>Multiplies the specified vector by the specified scalar value.</summary>
@@ -255,10 +245,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 operator -(Vector2 left, Vector2 right)
         {
-            return new Vector2(
-                left.X - right.X,
-                left.Y - right.Y
-            );
+            return new Vector2(left.X - right.X, left.Y - right.Y);
         }
 
         /// <summary>Negates the specified vector.</summary>
@@ -278,10 +265,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Abs(Vector2 value)
         {
-            return new Vector2(
-                MathF.Abs(value.X),
-                MathF.Abs(value.Y)
-            );
+            return new Vector2(MathF.Abs(value.X), MathF.Abs(value.Y));
         }
 
         /// <summary>Adds two vectors together.</summary>
@@ -356,8 +340,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Dot(Vector2 value1, Vector2 value2)
         {
-            return (value1.X * value2.X)
-                 + (value1.Y * value2.Y);
+            return (value1.X * value2.X) + (value1.Y * value2.Y);
         }
 
         /// <summary>Performs a linear interpolation between two vectors based on the given weighting.</summary>
@@ -468,10 +451,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SquareRoot(Vector2 value)
         {
-            return new Vector2(
-                MathF.Sqrt(value.X),
-                MathF.Sqrt(value.Y)
-            );
+            return new Vector2(MathF.Sqrt(value.X), MathF.Sqrt(value.Y));
         }
 
         /// <summary>Subtracts the second vector from the first.</summary>
@@ -617,7 +597,10 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>Attempts to copy the vector to the given <see cref="Span{Single}" />. The length of the destination span must be at least 2.</summary>
@@ -631,7 +614,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned(ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned(
+                ref Unsafe.As<float, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
             return true;
         }
 
@@ -657,7 +643,9 @@ namespace System.Numerics
 
             if (Vector64.IsHardwareAccelerated)
             {
-                return Vector64.LoadUnsafe(ref Unsafe.AsRef(in X)).Equals(Vector64.LoadUnsafe(ref other.X));
+                return Vector64
+                    .LoadUnsafe(ref Unsafe.AsRef(in X))
+                    .Equals(Vector64.LoadUnsafe(ref other.X));
             }
             else if (Vector128.IsHardwareAccelerated)
             {
@@ -668,8 +656,7 @@ namespace System.Numerics
 
             static bool SoftwareFallback(in Vector2 self, Vector2 other)
             {
-                return self.X.Equals(other.X)
-                    && self.Y.Equals(other.Y);
+                return self.X.Equals(other.X) && self.Y.Equals(other.Y);
             }
         }
 
@@ -714,7 +701,9 @@ namespace System.Numerics
         /// <remarks>This method returns a string in which each element of the vector is formatted using <paramref name="format" /> and the current culture's formatting conventions. The "&lt;" and "&gt;" characters are used to begin and end the string, and the current culture's <see cref="System.Globalization.NumberFormatInfo.NumberGroupSeparator" /> property followed by a space is used to separate each element.</remarks>
         /// <related type="Article" href="/dotnet/standard/base-types/standard-numeric-format-strings">Standard Numeric Format Strings</related>
         /// <related type="Article" href="/dotnet/standard/base-types/custom-numeric-format-strings">Custom Numeric Format Strings</related>
-        public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
+        public readonly string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        )
         {
             return ToString(format, CultureInfo.CurrentCulture);
         }
@@ -726,7 +715,10 @@ namespace System.Numerics
         /// <remarks>This method returns a string in which each element of the vector is formatted using <paramref name="format" /> and <paramref name="formatProvider" />. The "&lt;" and "&gt;" characters are used to begin and end the string, and the format provider's <see cref="System.Globalization.NumberFormatInfo.NumberGroupSeparator" /> property followed by a space is used to separate each element.</remarks>
         /// <related type="Article" href="/dotnet/standard/base-types/custom-numeric-format-strings">Custom Numeric Format Strings</related>
         /// <related type="Article" href="/dotnet/standard/base-types/standard-numeric-format-strings">Standard Numeric Format Strings</related>
-        public readonly string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        public readonly string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             string separator = NumberFormatInfo.GetInstance(formatProvider).NumberGroupSeparator;
 

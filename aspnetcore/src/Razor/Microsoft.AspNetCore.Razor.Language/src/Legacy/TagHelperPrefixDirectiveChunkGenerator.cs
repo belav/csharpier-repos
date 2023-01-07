@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
 internal class TagHelperPrefixDirectiveChunkGenerator : SpanChunkGenerator
 {
-    public TagHelperPrefixDirectiveChunkGenerator(string prefix, string directiveText, List<RazorDiagnostic> diagnostics)
+    public TagHelperPrefixDirectiveChunkGenerator(
+        string prefix,
+        string directiveText,
+        List<RazorDiagnostic> diagnostics
+    )
     {
         Prefix = prefix;
         DirectiveText = directiveText;
@@ -28,10 +32,10 @@ internal class TagHelperPrefixDirectiveChunkGenerator : SpanChunkGenerator
     public override bool Equals(object obj)
     {
         var other = obj as TagHelperPrefixDirectiveChunkGenerator;
-        return base.Equals(other) &&
-            Enumerable.SequenceEqual(Diagnostics, other.Diagnostics) &&
-            string.Equals(Prefix, other.Prefix, StringComparison.Ordinal) &&
-            string.Equals(DirectiveText, other.DirectiveText, StringComparison.Ordinal);
+        return base.Equals(other)
+            && Enumerable.SequenceEqual(Diagnostics, other.Diagnostics)
+            && string.Equals(Prefix, other.Prefix, StringComparison.Ordinal)
+            && string.Equals(DirectiveText, other.DirectiveText, StringComparison.Ordinal);
     }
 
     /// <inheritdoc />
@@ -56,7 +60,10 @@ internal class TagHelperPrefixDirectiveChunkGenerator : SpanChunkGenerator
         if (Diagnostics.Count > 0)
         {
             builder.Append(" [");
-            var ids = string.Join(", ", Diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}"));
+            var ids = string.Join(
+                ", ",
+                Diagnostics.Select(diagnostic => $"{diagnostic.Id}{diagnostic.Span}")
+            );
             builder.Append(ids);
             builder.Append(']');
         }

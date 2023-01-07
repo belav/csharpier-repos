@@ -10,4 +10,6 @@ namespace Microsoft.AspNetCore.Http;
 /// <returns>
 /// A <see cref="ValueTask"/> result of calling the handler and applying any modifications made by filters in the pipeline.
 /// </returns>
-public delegate ValueTask<object?> RouteHandlerFilterDelegate(RouteHandlerInvocationContext context);
+public delegate ValueTask<object?> RouteHandlerFilterDelegate(
+    RouteHandlerInvocationContext context
+);

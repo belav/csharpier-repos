@@ -45,20 +45,17 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
 
     private static readonly TimeSpan DefaultLoggingCacheTime = TimeSpan.FromSeconds(1);
 
-    private WarningsConfiguration _warningsConfiguration
-        = new WarningsConfiguration()
-            .TryWithExplicit(CoreEventId.ManyServiceProvidersCreatedWarning, WarningBehavior.Throw)
-            .TryWithExplicit(CoreEventId.LazyLoadOnDisposedContextWarning, WarningBehavior.Throw)
-            .TryWithExplicit(CoreEventId.DetachedLazyLoadingWarning, WarningBehavior.Throw)
-            .TryWithExplicit(CoreEventId.InvalidIncludePathError, WarningBehavior.Throw)
-            .TryWithExplicit(CoreEventId.NavigationBaseIncludeIgnored, WarningBehavior.Throw);
+    private WarningsConfiguration _warningsConfiguration = new WarningsConfiguration()
+        .TryWithExplicit(CoreEventId.ManyServiceProvidersCreatedWarning, WarningBehavior.Throw)
+        .TryWithExplicit(CoreEventId.LazyLoadOnDisposedContextWarning, WarningBehavior.Throw)
+        .TryWithExplicit(CoreEventId.DetachedLazyLoadingWarning, WarningBehavior.Throw)
+        .TryWithExplicit(CoreEventId.InvalidIncludePathError, WarningBehavior.Throw)
+        .TryWithExplicit(CoreEventId.NavigationBaseIncludeIgnored, WarningBehavior.Throw);
 
     /// <summary>
     ///     Creates a new set of options with everything set to default values.
     /// </summary>
-    public CoreOptionsExtension()
-    {
-    }
+    public CoreOptionsExtension() { }
 
     /// <summary>
     ///     Called by a derived class constructor when implementing the <see cref="Clone" /> method.
@@ -94,15 +91,13 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     Information/metadata about the extension.
     /// </summary>
-    public virtual DbContextOptionsExtensionInfo Info
-        => _info ??= new ExtensionInfo(this);
+    public virtual DbContextOptionsExtensionInfo Info => _info ??= new ExtensionInfo(this);
 
     /// <summary>
     ///     Override this method in a derived class to ensure that any clone created is also of that class.
     /// </summary>
     /// <returns>A clone of this instance, which can be modified before being returned as immutable.</returns>
-    protected virtual CoreOptionsExtension Clone()
-        => new(this);
+    protected virtual CoreOptionsExtension Clone() => new(this);
 
     /// <summary>
     ///     Creates a new instance with all options the same as for this instance, but with the given option changed.
@@ -110,7 +105,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="internalServiceProvider">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithInternalServiceProvider(IServiceProvider? internalServiceProvider)
+    public virtual CoreOptionsExtension WithInternalServiceProvider(
+        IServiceProvider? internalServiceProvider
+    )
     {
         var clone = Clone();
 
@@ -125,7 +122,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="applicationServiceProvider">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithApplicationServiceProvider(IServiceProvider? applicationServiceProvider)
+    public virtual CoreOptionsExtension WithApplicationServiceProvider(
+        IServiceProvider? applicationServiceProvider
+    )
     {
         var clone = Clone();
 
@@ -143,7 +142,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="rootApplicationServiceProvider">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithRootApplicationServiceProvider(IServiceProvider? rootApplicationServiceProvider)
+    public virtual CoreOptionsExtension WithRootApplicationServiceProvider(
+        IServiceProvider? rootApplicationServiceProvider
+    )
     {
         var clone = Clone();
 
@@ -158,13 +159,17 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="autoResolve">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithAutoResolveRootApplicationServiceProvider(bool autoResolve = true)
+    public virtual CoreOptionsExtension WithAutoResolveRootApplicationServiceProvider(
+        bool autoResolve = true
+    )
     {
         var clone = Clone();
 
         clone._autoResolveResolveRootProvider = autoResolve;
         clone._rootApplicationServiceProvider ??= autoResolve
-            ? _applicationServiceProvider?.GetService<ServiceProviderAccessor>()?.RootServiceProvider
+            ? _applicationServiceProvider
+                ?.GetService<ServiceProviderAccessor>()
+                ?.RootServiceProvider
             : null;
 
         return clone;
@@ -236,7 +241,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="sensitiveDataLoggingEnabled">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithSensitiveDataLoggingEnabled(bool sensitiveDataLoggingEnabled)
+    public virtual CoreOptionsExtension WithSensitiveDataLoggingEnabled(
+        bool sensitiveDataLoggingEnabled
+    )
     {
         var clone = Clone();
 
@@ -281,7 +288,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="queryTrackingBehavior">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithQueryTrackingBehavior(QueryTrackingBehavior queryTrackingBehavior)
+    public virtual CoreOptionsExtension WithQueryTrackingBehavior(
+        QueryTrackingBehavior queryTrackingBehavior
+    )
     {
         var clone = Clone();
 
@@ -301,7 +310,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     public virtual CoreOptionsExtension WithReplacedService(
         Type serviceType,
         Type newImplementationType,
-        Type? currentImplementationType = null)
+        Type? currentImplementationType = null
+    )
     {
         var clone = Clone();
 
@@ -348,7 +358,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="warningsConfiguration">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithWarningsConfiguration(WarningsConfiguration warningsConfiguration)
+    public virtual CoreOptionsExtension WithWarningsConfiguration(
+        WarningsConfiguration warningsConfiguration
+    )
     {
         var clone = Clone();
 
@@ -363,7 +375,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="serviceProviderCachingEnabled">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithServiceProviderCachingEnabled(bool serviceProviderCachingEnabled)
+    public virtual CoreOptionsExtension WithServiceProviderCachingEnabled(
+        bool serviceProviderCachingEnabled
+    )
     {
         var clone = Clone();
 
@@ -382,9 +396,8 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     {
         var clone = Clone();
 
-        clone._interceptors = _interceptors == null
-            ? interceptors
-            : _interceptors.Concat(interceptors);
+        clone._interceptors =
+            _interceptors == null ? interceptors : _interceptors.Concat(interceptors);
 
         return clone;
     }
@@ -395,13 +408,16 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// </summary>
     /// <param name="interceptors">The option to change.</param>
     /// <returns>A new instance with the option changed.</returns>
-    public virtual CoreOptionsExtension WithSingletonInterceptors(IEnumerable<ISingletonInterceptor> interceptors)
+    public virtual CoreOptionsExtension WithSingletonInterceptors(
+        IEnumerable<ISingletonInterceptor> interceptors
+    )
     {
         var clone = Clone();
 
-        clone._singletonInterceptors = _singletonInterceptors == null
-            ? interceptors
-            : _singletonInterceptors.Concat(interceptors);
+        clone._singletonInterceptors =
+            _singletonInterceptors == null
+                ? interceptors
+                : _singletonInterceptors.Concat(interceptors);
 
         return clone;
     }
@@ -409,92 +425,78 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.EnableSensitiveDataLogging" /> method.
     /// </summary>
-    public virtual bool IsSensitiveDataLoggingEnabled
-        => _sensitiveDataLoggingEnabled;
+    public virtual bool IsSensitiveDataLoggingEnabled => _sensitiveDataLoggingEnabled;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.EnableDetailedErrors" /> method.
     /// </summary>
-    public virtual bool DetailedErrorsEnabled
-        => _detailedErrorsEnabled;
+    public virtual bool DetailedErrorsEnabled => _detailedErrorsEnabled;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.EnableThreadSafetyChecks" /> method.
     /// </summary>
-    public virtual bool ThreadSafetyChecksEnabled
-        => _threadSafetyChecksEnabled;
+    public virtual bool ThreadSafetyChecksEnabled => _threadSafetyChecksEnabled;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseModel" /> method.
     /// </summary>
-    public virtual IModel? Model
-        => _model;
+    public virtual IModel? Model => _model;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseLoggerFactory" /> method.
     /// </summary>
-    public virtual ILoggerFactory? LoggerFactory
-        => _loggerFactory;
+    public virtual ILoggerFactory? LoggerFactory => _loggerFactory;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" /> method.
     /// </summary>
-    public virtual IDbContextLogger? DbContextLogger
-        => _contextLogger;
+    public virtual IDbContextLogger? DbContextLogger => _contextLogger;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseMemoryCache" /> method.
     /// </summary>
-    public virtual IMemoryCache? MemoryCache
-        => _memoryCache;
+    public virtual IMemoryCache? MemoryCache => _memoryCache;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseInternalServiceProvider" /> method.
     /// </summary>
-    public virtual IServiceProvider? InternalServiceProvider
-        => _internalServiceProvider;
+    public virtual IServiceProvider? InternalServiceProvider => _internalServiceProvider;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseApplicationServiceProvider" /> method.
     /// </summary>
-    public virtual IServiceProvider? ApplicationServiceProvider
-        => _applicationServiceProvider;
+    public virtual IServiceProvider? ApplicationServiceProvider => _applicationServiceProvider;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseRootApplicationServiceProvider" /> method.
     /// </summary>
-    public virtual IServiceProvider? RootApplicationServiceProvider
-        => _rootApplicationServiceProvider;
+    public virtual IServiceProvider? RootApplicationServiceProvider =>
+        _rootApplicationServiceProvider;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseRootApplicationServiceProvider" /> method.
     /// </summary>
-    public virtual bool AutoResolveRootProvider
-        => _autoResolveResolveRootProvider;
+    public virtual bool AutoResolveRootProvider => _autoResolveResolveRootProvider;
 
     /// <summary>
     ///     The options set from the <see cref="DbContextOptionsBuilder.ConfigureWarnings" /> method.
     /// </summary>
-    public virtual WarningsConfiguration WarningsConfiguration
-        => _warningsConfiguration;
+    public virtual WarningsConfiguration WarningsConfiguration => _warningsConfiguration;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.UseQueryTrackingBehavior" /> method.
     /// </summary>
-    public virtual QueryTrackingBehavior QueryTrackingBehavior
-        => _queryTrackingBehavior;
+    public virtual QueryTrackingBehavior QueryTrackingBehavior => _queryTrackingBehavior;
 
     /// <summary>
     ///     The option set from the <see cref="DbContextOptionsBuilder.EnableServiceProviderCaching" /> method.
     /// </summary>
-    public virtual bool ServiceProviderCachingEnabled
-        => _serviceProviderCachingEnabled;
+    public virtual bool ServiceProviderCachingEnabled => _serviceProviderCachingEnabled;
 
     /// <summary>
     ///     The options set from the <see cref="DbContextOptionsBuilder.ReplaceService{TService,TImplementation}" /> method.
     /// </summary>
-    public virtual IReadOnlyDictionary<(Type, Type?), Type>? ReplacedServices
-        => _replacedServices;
+    public virtual IReadOnlyDictionary<(Type, Type?), Type>? ReplacedServices => _replacedServices;
 
     /// <summary>
     ///     The option set from the
@@ -502,8 +504,7 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     ///         cref="EntityFrameworkServiceCollectionExtensions.AddDbContextPool{TContext}(IServiceCollection,Action{DbContextOptionsBuilder},int)" />
     ///     method.
     /// </summary>
-    public virtual int? MaxPoolSize
-        => _maxPoolSize;
+    public virtual int? MaxPoolSize => _maxPoolSize;
 
     /// <summary>
     ///     The option set from the
@@ -511,22 +512,20 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
     ///         cref="EntityFrameworkServiceCollectionExtensions.AddDbContextPool{TContext}(IServiceCollection,Action{DbContextOptionsBuilder},int)" />
     ///     method.
     /// </summary>
-    public virtual TimeSpan LoggingCacheTime
-        => _loggingCacheTime;
+    public virtual TimeSpan LoggingCacheTime => _loggingCacheTime;
 
     /// <summary>
     ///     The options set from the <see cref="DbContextOptionsBuilder.AddInterceptors(IEnumerable{IInterceptor})" /> method
     ///     for scoped interceptors.
     /// </summary>
-    public virtual IEnumerable<IInterceptor>? Interceptors
-        => _interceptors;
+    public virtual IEnumerable<IInterceptor>? Interceptors => _interceptors;
 
     /// <summary>
     ///     The options set from the <see cref="DbContextOptionsBuilder.AddInterceptors(IEnumerable{IInterceptor})" /> method
     ///     for singleton interceptors.
     /// </summary>
-    public virtual IEnumerable<ISingletonInterceptor>? SingletonInterceptors
-        => _singletonInterceptors;
+    public virtual IEnumerable<ISingletonInterceptor>? SingletonInterceptors =>
+        _singletonInterceptors;
 
     /// <summary>
     ///     Adds the services required to make the selected options work. This is used when there
@@ -552,8 +551,7 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
         }
     }
 
-    private IMemoryCache? GetMemoryCache()
-        => MemoryCache;
+    private IMemoryCache? GetMemoryCache() => MemoryCache;
 
     /// <summary>
     ///     Gives the extension a chance to validate that all options in the extension are valid.
@@ -574,7 +572,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                 throw new InvalidOperationException(
                     CoreStrings.InvalidReplaceService(
                         nameof(DbContextOptionsBuilder.ReplaceService),
-                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                        nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                    )
+                );
             }
 
             if (LoggerFactory != null)
@@ -583,7 +583,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                     CoreStrings.InvalidUseService(
                         nameof(DbContextOptionsBuilder.UseLoggerFactory),
                         nameof(DbContextOptionsBuilder.UseInternalServiceProvider),
-                        nameof(ILoggerFactory)));
+                        nameof(ILoggerFactory)
+                    )
+                );
             }
 
             if (MemoryCache != null)
@@ -592,7 +594,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                     CoreStrings.InvalidUseService(
                         nameof(DbContextOptionsBuilder.UseMemoryCache),
                         nameof(DbContextOptionsBuilder.UseInternalServiceProvider),
-                        nameof(IMemoryCache)));
+                        nameof(IMemoryCache)
+                    )
+                );
             }
 
             if (SingletonInterceptors != null && SingletonInterceptors.Any())
@@ -601,7 +605,9 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                     CoreStrings.InvalidUseService(
                         nameof(DbContextOptionsBuilder.AddInterceptors),
                         nameof(DbContextOptionsBuilder.UseInternalServiceProvider),
-                        nameof(ISingletonInterceptor)));
+                        nameof(ISingletonInterceptor)
+                    )
+                );
             }
         }
     }
@@ -611,16 +617,11 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
         private int? _serviceProviderHash;
         private string? _logFragment;
 
-        public ExtensionInfo(CoreOptionsExtension extension)
-            : base(extension)
-        {
-        }
+        public ExtensionInfo(CoreOptionsExtension extension) : base(extension) { }
 
-        private new CoreOptionsExtension Extension
-            => (CoreOptionsExtension)base.Extension;
+        private new CoreOptionsExtension Extension => (CoreOptionsExtension)base.Extension;
 
-        public override bool IsDatabaseProvider
-            => false;
+        public override bool IsDatabaseProvider => false;
 
         public override string LogFragment
         {
@@ -664,16 +665,26 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
 
         public override void PopulateDebugInfo(IDictionary<string, string> debugInfo)
         {
-            debugInfo["Core:" + nameof(DbContextOptionsBuilder.UseMemoryCache)] =
-                (Extension.GetMemoryCache()?.GetHashCode() ?? 0L).ToString(CultureInfo.InvariantCulture);
+            debugInfo["Core:" + nameof(DbContextOptionsBuilder.UseMemoryCache)] = (
+                Extension.GetMemoryCache()?.GetHashCode() ?? 0L
+            ).ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableSensitiveDataLogging)] =
-                Extension._sensitiveDataLoggingEnabled.GetHashCode().ToString(CultureInfo.InvariantCulture);
+                Extension._sensitiveDataLoggingEnabled
+                    .GetHashCode()
+                    .ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableDetailedErrors)] =
-                Extension._detailedErrorsEnabled.GetHashCode().ToString(CultureInfo.InvariantCulture);
-            debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableThreadSafetyChecks)] =
-                (!Extension._threadSafetyChecksEnabled).GetHashCode().ToString(CultureInfo.InvariantCulture);
+                Extension._detailedErrorsEnabled
+                    .GetHashCode()
+                    .ToString(CultureInfo.InvariantCulture);
+            debugInfo["Core:" + nameof(DbContextOptionsBuilder.EnableThreadSafetyChecks)] = (
+                !Extension._threadSafetyChecksEnabled
+            )
+                .GetHashCode()
+                .ToString(CultureInfo.InvariantCulture);
             debugInfo["Core:" + nameof(DbContextOptionsBuilder.ConfigureWarnings)] =
-                Extension._warningsConfiguration.GetServiceProviderHashCode().ToString(CultureInfo.InvariantCulture);
+                Extension._warningsConfiguration
+                    .GetServiceProviderHashCode()
+                    .ToString(CultureInfo.InvariantCulture);
 
             if (Extension._replacedServices != null)
             {
@@ -681,12 +692,17 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
                 {
                     var (serviceType, implementationType) = replacedService.Key;
 
-                    debugInfo["Core:"
+                    debugInfo[
+                        "Core:"
                             + nameof(DbContextOptionsBuilder.ReplaceService)
                             + ":"
                             + serviceType.DisplayName()
-                            + (implementationType == null ? "" : ", " + implementationType.DisplayName())]
-                        = replacedService.Value.GetHashCode().ToString(CultureInfo.InvariantCulture);
+                            + (
+                                implementationType == null
+                                    ? ""
+                                    : ", " + implementationType.DisplayName()
+                            )
+                    ] = replacedService.Value.GetHashCode().ToString(CultureInfo.InvariantCulture);
                 }
             }
         }
@@ -725,22 +741,40 @@ public class CoreOptionsExtension : IDbContextOptionsExtension
             return _serviceProviderHash.Value;
         }
 
-        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other)
-            => other is ExtensionInfo otherInfo
-                && Extension.GetMemoryCache() == otherInfo.Extension.GetMemoryCache()
-                && Extension._sensitiveDataLoggingEnabled == otherInfo.Extension._sensitiveDataLoggingEnabled
-                && Extension._detailedErrorsEnabled == otherInfo.Extension._detailedErrorsEnabled
-                && Extension.RootApplicationServiceProvider == otherInfo.Extension.RootApplicationServiceProvider
-                && Extension._threadSafetyChecksEnabled == otherInfo.Extension._threadSafetyChecksEnabled
-                && Extension._warningsConfiguration.ShouldUseSameServiceProvider(otherInfo.Extension._warningsConfiguration)
-                && (Extension._replacedServices == otherInfo.Extension._replacedServices
-                    || (Extension._replacedServices != null
-                        && otherInfo.Extension._replacedServices != null
-                        && Extension._replacedServices.Count == otherInfo.Extension._replacedServices.Count
-                        && Extension._replacedServices.SequenceEqual(otherInfo.Extension._replacedServices)))
-                && (Extension._singletonInterceptors == otherInfo.Extension._singletonInterceptors
-                    || (Extension._singletonInterceptors != null
-                        && otherInfo.Extension._singletonInterceptors != null
-                        && Extension._singletonInterceptors.SequenceEqual(otherInfo.Extension._singletonInterceptors)));
+        public override bool ShouldUseSameServiceProvider(DbContextOptionsExtensionInfo other) =>
+            other is ExtensionInfo otherInfo
+            && Extension.GetMemoryCache() == otherInfo.Extension.GetMemoryCache()
+            && Extension._sensitiveDataLoggingEnabled
+                == otherInfo.Extension._sensitiveDataLoggingEnabled
+            && Extension._detailedErrorsEnabled == otherInfo.Extension._detailedErrorsEnabled
+            && Extension.RootApplicationServiceProvider
+                == otherInfo.Extension.RootApplicationServiceProvider
+            && Extension._threadSafetyChecksEnabled
+                == otherInfo.Extension._threadSafetyChecksEnabled
+            && Extension._warningsConfiguration.ShouldUseSameServiceProvider(
+                otherInfo.Extension._warningsConfiguration
+            )
+            && (
+                Extension._replacedServices == otherInfo.Extension._replacedServices
+                || (
+                    Extension._replacedServices != null
+                    && otherInfo.Extension._replacedServices != null
+                    && Extension._replacedServices.Count
+                        == otherInfo.Extension._replacedServices.Count
+                    && Extension._replacedServices.SequenceEqual(
+                        otherInfo.Extension._replacedServices
+                    )
+                )
+            )
+            && (
+                Extension._singletonInterceptors == otherInfo.Extension._singletonInterceptors
+                || (
+                    Extension._singletonInterceptors != null
+                    && otherInfo.Extension._singletonInterceptors != null
+                    && Extension._singletonInterceptors.SequenceEqual(
+                        otherInfo.Extension._singletonInterceptors
+                    )
+                )
+            );
     }
 }

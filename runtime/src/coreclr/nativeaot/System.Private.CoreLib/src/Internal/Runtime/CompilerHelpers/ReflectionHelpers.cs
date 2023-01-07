@@ -15,16 +15,42 @@ namespace Internal.Runtime.CompilerHelpers
     {
         // This entry is used to implement Type.GetType()'s ability to detect the calling assembly and use it as
         // a default assembly name.
-        public static Type GetType(string typeName, string callingAssemblyName, bool throwOnError, bool ignoreCase)
+        public static Type GetType(
+            string typeName,
+            string callingAssemblyName,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
-            return ExtensibleGetType(typeName, callingAssemblyName, null, null, throwOnError: throwOnError, ignoreCase: ignoreCase);
+            return ExtensibleGetType(
+                typeName,
+                callingAssemblyName,
+                null,
+                null,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase
+            );
         }
 
         // This entry is used to implement Type.GetType()'s ability to detect the calling assembly and use it as
         // a default assembly name.
-        public static Type ExtensibleGetType(string typeName, string callingAssemblyName, Func<AssemblyName, Assembly?> assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError, bool ignoreCase)
+        public static Type ExtensibleGetType(
+            string typeName,
+            string callingAssemblyName,
+            Func<AssemblyName, Assembly?> assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
-            return RuntimeAugments.Callbacks.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase, callingAssemblyName);
+            return RuntimeAugments.Callbacks.GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError,
+                ignoreCase,
+                callingAssemblyName
+            );
         }
 
         // This supports Assembly.GetExecutingAssembly() intrinsic expansion in the compiler
@@ -40,7 +66,10 @@ namespace Internal.Runtime.CompilerHelpers
         }
 
         // This supports MethodBase.GetCurrentMethod() intrinsic expansion in the compiler
-        public static MethodBase GetCurrentMethodGeneric(RuntimeMethodHandle methodHandle, RuntimeTypeHandle typeHandle)
+        public static MethodBase GetCurrentMethodGeneric(
+            RuntimeMethodHandle methodHandle,
+            RuntimeTypeHandle typeHandle
+        )
         {
             return MethodBase.GetMethodFromHandle(methodHandle, typeHandle);
         }

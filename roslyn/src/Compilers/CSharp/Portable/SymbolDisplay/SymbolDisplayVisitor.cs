@@ -23,10 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<SymbolDisplayPart> builder,
             SymbolDisplayFormat format,
             SemanticModel semanticModelOpt,
-            int positionOpt)
-            : base(builder, format, true, semanticModelOpt, positionOpt)
+            int positionOpt
+        ) : base(builder, format, true, semanticModelOpt, positionOpt)
         {
-            _escapeKeywordIdentifiers = format.MiscellaneousOptions.IncludesOption(SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
+            _escapeKeywordIdentifiers = format.MiscellaneousOptions.IncludesOption(
+                SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+            );
         }
 
         private SymbolDisplayVisitor(
@@ -37,14 +39,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool escapeKeywordIdentifiers,
             IDictionary<INamespaceOrTypeSymbol, IAliasSymbol> aliasMap,
             bool isFirstSymbolVisited,
-            bool inNamespaceOrType = false)
-            : base(builder, format, isFirstSymbolVisited, semanticModelOpt, positionOpt, inNamespaceOrType)
+            bool inNamespaceOrType = false
+        )
+            : base(
+                builder,
+                format,
+                isFirstSymbolVisited,
+                semanticModelOpt,
+                positionOpt,
+                inNamespaceOrType
+            )
         {
             _escapeKeywordIdentifiers = escapeKeywordIdentifiers;
             _lazyAliasMap = aliasMap;
         }
 
-        protected override AbstractSymbolDisplayVisitor MakeNotFirstVisitor(bool inNamespaceOrType = false)
+        protected override AbstractSymbolDisplayVisitor MakeNotFirstVisitor(
+            bool inNamespaceOrType = false
+        )
         {
             return new SymbolDisplayVisitor(
                 this.builder,
@@ -54,13 +66,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 _escapeKeywordIdentifiers,
                 _lazyAliasMap,
                 isFirstSymbolVisited: false,
-                inNamespaceOrType: inNamespaceOrType);
+                inNamespaceOrType: inNamespaceOrType
+            );
         }
 
-        internal SymbolDisplayPart CreatePart(SymbolDisplayPartKind kind, ISymbol symbol, string text)
+        internal SymbolDisplayPart CreatePart(
+            SymbolDisplayPartKind kind,
+            ISymbol symbol,
+            string text
+        )
         {
-            text = (text == null) ? "?" :
-                   (_escapeKeywordIdentifiers && IsEscapable(kind)) ? EscapeIdentifier(text) : text;
+            text =
+                (text == null)
+                    ? "?"
+                    : (_escapeKeywordIdentifiers && IsEscapable(kind))
+                        ? EscapeIdentifier(text)
+                        : text;
 
             return new SymbolDisplayPart(kind, symbol, text);
         }
@@ -92,16 +113,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static string EscapeIdentifier(string identifier)
         {
             var kind = SyntaxFacts.GetKeywordKind(identifier);
-            return kind == SyntaxKind.None
-                ? identifier
-                : $"@{identifier}";
+            return kind == SyntaxKind.None ? identifier : $"@{identifier}";
         }
 
         public override void VisitAssembly(IAssemblySymbol symbol)
         {
-            var text = format.TypeQualificationStyle == SymbolDisplayTypeQualificationStyle.NameOnly
-                ? symbol.Identity.Name
-                : symbol.Identity.GetDisplayName();
+            var text =
+                format.TypeQualificationStyle == SymbolDisplayTypeQualificationStyle.NameOnly
+                    ? symbol.Identity.Name
+                    : symbol.Identity.GetDisplayName();
 
             builder.Add(CreatePart(SymbolDisplayPartKind.AssemblyName, symbol, text));
         }
@@ -124,19 +144,31 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            if (isFirstSymbolVisited && format.KindOptions.IncludesOption(SymbolDisplayKindOptions.IncludeNamespaceKeyword))
+            if (
+                isFirstSymbolVisited
+                && format.KindOptions.IncludesOption(
+                    SymbolDisplayKindOptions.IncludeNamespaceKeyword
+                )
+            )
             {
                 AddKeyword(SyntaxKind.NamespaceKeyword);
                 AddSpace();
             }
 
-            if (format.TypeQualificationStyle == SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces)
+            if (
+                format.TypeQualificationStyle
+                == SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            )
             {
                 var containingNamespace = symbol.ContainingNamespace;
                 if (ShouldVisitNamespace(containingNamespace))
                 {
                     containingNamespace.Accept(this.NotFirstVisitor);
-                    AddPunctuation(containingNamespace.IsGlobalNamespace ? SyntaxKind.ColonColonToken : SyntaxKind.DotToken);
+                    AddPunctuation(
+                        containingNamespace.IsGlobalNamespace
+                            ? SyntaxKind.ColonColonToken
+                            : SyntaxKind.DotToken
+                    );
                 }
             }
 
@@ -162,23 +194,37 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case SymbolDisplayGlobalNamespaceStyle.Included:
                     if (this.isFirstSymbolVisited)
                     {
-                        builder.Add(CreatePart(
-                            SymbolDisplayPartKind.Text,
-                            globalNamespace,
-                            standaloneGlobalNamespaceString));
+                        builder.Add(
+                            CreatePart(
+                                SymbolDisplayPartKind.Text,
+                                globalNamespace,
+                                standaloneGlobalNamespaceString
+                            )
+                        );
                     }
                     else
                     {
-                        builder.Add(CreatePart(SymbolDisplayPartKind.Keyword, globalNamespace,
-                            SyntaxFacts.GetText(SyntaxKind.GlobalKeyword)));
+                        builder.Add(
+                            CreatePart(
+                                SymbolDisplayPartKind.Keyword,
+                                globalNamespace,
+                                SyntaxFacts.GetText(SyntaxKind.GlobalKeyword)
+                            )
+                        );
                     }
                     break;
                 case SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining:
-                    Debug.Assert(this.isFirstSymbolVisited, "Don't call with IsFirstSymbolVisited = false if OmittedAsContaining");
-                    builder.Add(CreatePart(
-                        SymbolDisplayPartKind.Text,
-                        globalNamespace,
-                        standaloneGlobalNamespaceString));
+                    Debug.Assert(
+                        this.isFirstSymbolVisited,
+                        "Don't call with IsFirstSymbolVisited = false if OmittedAsContaining"
+                    );
+                    builder.Add(
+                        CreatePart(
+                            SymbolDisplayPartKind.Text,
+                            globalNamespace,
+                            standaloneGlobalNamespaceString
+                        )
+                    );
                     break;
                 default:
                     throw ExceptionUtilities.UnexpectedValue(format.GlobalNamespaceStyle);
@@ -228,10 +274,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder.Add(CreatePart(SymbolDisplayPartKind.LocalName, symbol, symbol.Name));
             }
 
-            if (format.LocalOptions.IncludesOption(SymbolDisplayLocalOptions.IncludeConstantValue) &&
-                symbol.IsConst &&
-                symbol.HasConstantValue &&
-                CanAddConstant(symbol.Type, symbol.ConstantValue))
+            if (
+                format.LocalOptions.IncludesOption(SymbolDisplayLocalOptions.IncludeConstantValue)
+                && symbol.IsConst
+                && symbol.HasConstantValue
+                && CanAddConstant(symbol.Type, symbol.ConstantValue)
+            )
             {
                 AddSpace();
                 AddPunctuation(SyntaxKind.EqualsToken);
@@ -297,12 +345,20 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void AddPunctuation(SyntaxKind punctuationKind)
         {
-            builder.Add(CreatePart(SymbolDisplayPartKind.Punctuation, null, SyntaxFacts.GetText(punctuationKind)));
+            builder.Add(
+                CreatePart(
+                    SymbolDisplayPartKind.Punctuation,
+                    null,
+                    SyntaxFacts.GetText(punctuationKind)
+                )
+            );
         }
 
         private void AddKeyword(SyntaxKind keywordKind)
         {
-            builder.Add(CreatePart(SymbolDisplayPartKind.Keyword, null, SyntaxFacts.GetText(keywordKind)));
+            builder.Add(
+                CreatePart(SymbolDisplayPartKind.Keyword, null, SyntaxFacts.GetText(keywordKind))
+            );
         }
 
         private void AddAccessibilityIfNeeded(ISymbol symbol)
@@ -310,11 +366,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             INamedTypeSymbol containingType = symbol.ContainingType;
 
             // this method is only called for members and they should have a containingType or a containing symbol should be a TypeSymbol.
-            Debug.Assert((object)containingType != null || (symbol.ContainingSymbol is ITypeSymbol));
+            Debug.Assert(
+                (object)containingType != null || (symbol.ContainingSymbol is ITypeSymbol)
+            );
 
-            if (format.MemberOptions.IncludesOption(SymbolDisplayMemberOptions.IncludeAccessibility) &&
-                (containingType == null ||
-                 (containingType.TypeKind != TypeKind.Interface && !IsEnumMember(symbol) & !IsLocalFunction(symbol))))
+            if (
+                format.MemberOptions.IncludesOption(SymbolDisplayMemberOptions.IncludeAccessibility)
+                && (
+                    containingType == null
+                    || (
+                        containingType.TypeKind != TypeKind.Interface
+                        && !IsEnumMember(symbol) & !IsLocalFunction(symbol)
+                    )
+                )
+            )
             {
                 AddAccessibility(symbol);
             }
@@ -371,14 +436,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            if (format.TypeQualificationStyle != SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces)
+            if (
+                format.TypeQualificationStyle
+                != SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            )
             {
                 return false;
             }
 
-            return
-                !namespaceSymbol.IsGlobalNamespace ||
-                format.GlobalNamespaceStyle == SymbolDisplayGlobalNamespaceStyle.Included;
+            return !namespaceSymbol.IsGlobalNamespace
+                || format.GlobalNamespaceStyle == SymbolDisplayGlobalNamespaceStyle.Included;
         }
 
         private bool IncludeNamedType(INamedTypeSymbol namedType)
@@ -388,7 +455,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
             }
 
-            if (namedType.IsScriptClass && !format.CompilerInternalOptions.IncludesOption(SymbolDisplayCompilerInternalOptions.IncludeScriptType))
+            if (
+                namedType.IsScriptClass
+                && !format.CompilerInternalOptions.IncludesOption(
+                    SymbolDisplayCompilerInternalOptions.IncludeScriptType
+                )
+            )
             {
                 return false;
             }

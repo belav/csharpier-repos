@@ -49,7 +49,9 @@ namespace Exchange
         private float newValueA = 0.0F;
         private float newValueB = Single.MinValue;
         private bool success;
-        public ThreadSafe(): this(10000) { }
+
+        public ThreadSafe() : this(10000) { }
+
         public ThreadSafe(int loops)
         {
             success = true;
@@ -67,15 +69,15 @@ namespace Exchange
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueA);
-
         }
+
         public void ThreadWorkerB()
         {
             signal.WaitOne();
             for (int i = 0; i < numberOfIterations; i++)
                 Interlocked.Exchange(ref totalValue, newValueB);
-
         }
+
         public void ThreadChecker()
         {
             float tmpVal;
@@ -85,21 +87,16 @@ namespace Exchange
                 tmpVal = totalValue;
                 if (tmpVal != newValueB && tmpVal != newValueA)
                 {
-
                     Console.WriteLine(tmpVal + "," + newValueB + "," + newValueA);
                     success = false;
                 }
                 Thread.Sleep(0);
             }
-
         }
 
         public bool Pass
         {
-            get
-            {
-                return (success);
-            }
+            get { return (success); }
         }
     }
 }

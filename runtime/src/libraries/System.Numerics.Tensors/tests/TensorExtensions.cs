@@ -12,17 +12,25 @@ namespace System.Numerics.Tensors
         {
             if (left.Rank != 2)
             {
-                throw new InvalidOperationException($"{nameof(MatrixMultiply)} is only valid for a {nameof(Tensor<T>)} of {nameof(left.Rank)} 2.");
+                throw new InvalidOperationException(
+                    $"{nameof(MatrixMultiply)} is only valid for a {nameof(Tensor<T>)} of {nameof(left.Rank)} 2."
+                );
             }
 
             if (right.Rank != 2)
             {
-                throw new ArgumentException($"{nameof(Tensor<T>)} {nameof(right)} must have {nameof(left.Rank)} 2.", nameof(right));
+                throw new ArgumentException(
+                    $"{nameof(Tensor<T>)} {nameof(right)} must have {nameof(left.Rank)} 2.",
+                    nameof(right)
+                );
             }
 
             if (left.dimensions[1] != right.dimensions[0])
             {
-                throw new ArgumentException($"{nameof(Tensor<T>)} {nameof(right)} must have first dimension of {left.dimensions[1]}.", nameof(right));
+                throw new ArgumentException(
+                    $"{nameof(Tensor<T>)} {nameof(right)} must have first dimension of {left.dimensions[1]}.",
+                    nameof(right)
+                );
             }
 
             return TensorOperations.Contract(left, right, s_oneArray, s_zeroArray);

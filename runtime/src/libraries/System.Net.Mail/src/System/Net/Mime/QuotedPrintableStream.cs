@@ -33,28 +33,270 @@ namespace System.Net.Mime
         //if we aren't encoding CRLF then it occupies two chars
         private const int SizeOfNonEncodedCRLF = 2;
 
-        private static ReadOnlySpan<byte> HexDecodeMap => new byte[] // rely on C# compiler optimization to eliminate allocation
-        {
-            // 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 0
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 1
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 2
-             0,   1,   2,   3,   4,   5,   6,   7,   8,   9,   255, 255, 255, 255, 255, 255, // 3
-             255, 10,  11,  12,  13,  14,  15,  255, 255, 255, 255, 255, 255, 255, 255, 255, // 4
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 5
-             255, 10,  11,  12,  13,  14,  15,  255, 255, 255, 255, 255, 255, 255, 255, 255, // 6
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 7
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 8
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // 9
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // A
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // B
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // C
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // D
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // E
-             255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, // F
-        };
+        private static ReadOnlySpan<byte> HexDecodeMap =>
+            new byte[] // rely on C# compiler optimization to eliminate allocation
+            {
+                // 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 0
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 1
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 2
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 3
+                255,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 4
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 5
+                255,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 6
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 7
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 8
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 9
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // A
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // B
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // C
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // D
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // E
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // F
+            };
 
-        private static ReadOnlySpan<byte> HexEncodeMap => new byte[] { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70 };
+        private static ReadOnlySpan<byte> HexEncodeMap =>
+            new byte[] { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70 };
 
         private readonly int _lineLength;
         private ReadStateInfo? _readState;
@@ -72,20 +314,35 @@ namespace System.Net.Mime
             _lineLength = lineLength;
         }
 
-        internal QuotedPrintableStream(Stream stream, bool encodeCRLF) : this(stream, EncodedStreamFactory.DefaultMaxLineLength)
+        internal QuotedPrintableStream(Stream stream, bool encodeCRLF)
+            : this(stream, EncodedStreamFactory.DefaultMaxLineLength)
         {
             _encodeCRLF = encodeCRLF;
         }
 
         private ReadStateInfo ReadState => _readState ??= new ReadStateInfo();
 
-        internal WriteStateInfoBase WriteState => _writeState ??= new WriteStateInfoBase(1024, null, null, _lineLength);
+        internal WriteStateInfoBase WriteState =>
+            _writeState ??= new WriteStateInfoBase(1024, null, null, _lineLength);
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
-            WriteAsyncResult result = new WriteAsyncResult(this, buffer, offset, count, callback, state);
+            WriteAsyncResult result = new WriteAsyncResult(
+                this,
+                buffer,
+                offset,
+                count,
+                callback,
+                state
+            );
             result.Write();
             return result;
         }
@@ -190,9 +447,13 @@ namespace System.Net.Mime
                                     byte b1 = HexDecodeMap[source[1]];
                                     byte b2 = HexDecodeMap[source[2]];
                                     if (b1 == 255)
-                                        throw new FormatException(SR.Format(SR.InvalidHexDigit, b1));
+                                        throw new FormatException(
+                                            SR.Format(SR.InvalidHexDigit, b1)
+                                        );
                                     if (b2 == 255)
-                                        throw new FormatException(SR.Format(SR.InvalidHexDigit, b2));
+                                        throw new FormatException(
+                                            SR.Format(SR.InvalidHexDigit, b2)
+                                        );
 
                                     *dest++ = (byte)((b1 << 4) + b2);
                                 }
@@ -201,7 +462,7 @@ namespace System.Net.Mime
                         }
                     }
                 }
-            EndWhile:
+                EndWhile:
                 return (int)(dest - start);
             }
         }
@@ -213,13 +474,24 @@ namespace System.Net.Mime
             {
                 //only fold if we're before a whitespace or if we're at the line limit
                 //add two to the encoded Byte Length to be conservative so that we guarantee that the line length is acceptable
-                if ((_lineLength != -1 && WriteState.CurrentLineLength + SizeOfEncodedChar + 2 >= _lineLength && (buffer[cur] == ' ' ||
-                    buffer[cur] == '\t' || buffer[cur] == '\r' || buffer[cur] == '\n')) ||
-                    _writeState!.CurrentLineLength + SizeOfEncodedChar + 2 >= EncodedStreamFactory.DefaultMaxLineLength)
+                if (
+                    (
+                        _lineLength != -1
+                        && WriteState.CurrentLineLength + SizeOfEncodedChar + 2 >= _lineLength
+                        && (
+                            buffer[cur] == ' '
+                            || buffer[cur] == '\t'
+                            || buffer[cur] == '\r'
+                            || buffer[cur] == '\n'
+                        )
+                    )
+                    || _writeState!.CurrentLineLength + SizeOfEncodedChar + 2
+                        >= EncodedStreamFactory.DefaultMaxLineLength
+                )
                 {
                     if (WriteState.Buffer.Length - WriteState.Length < SizeOfSoftCRLF)
                     {
-                        return cur - offset;  //ok because folding happens externally
+                        return cur - offset; //ok because folding happens externally
                     }
 
                     WriteState.Append((byte)'=');
@@ -232,7 +504,10 @@ namespace System.Net.Mime
                 //detect a CRLF in the input and encode it.
                 if (buffer[cur] == '\r' && cur + 1 < count + offset && buffer[cur + 1] == '\n')
                 {
-                    if (WriteState.Buffer.Length - WriteState.Length < (_encodeCRLF ? SizeOfEncodedCRLF : SizeOfNonEncodedCRLF))
+                    if (
+                        WriteState.Buffer.Length - WriteState.Length
+                        < (_encodeCRLF ? SizeOfEncodedCRLF : SizeOfNonEncodedCRLF)
+                    )
                     {
                         return cur - offset;
                     }
@@ -249,9 +524,11 @@ namespace System.Net.Mime
                     }
                 }
                 //ascii chars less than 32 (control chars) and greater than 126 (non-ascii) are not allowed so we have to encode
-                else if ((buffer[cur] < 32 && buffer[cur] != '\t') ||
-                    buffer[cur] == '=' ||
-                    buffer[cur] > 126)
+                else if (
+                    (buffer[cur] < 32 && buffer[cur] != '\t')
+                    || buffer[cur] == '='
+                    || buffer[cur] > 126
+                )
                 {
                     if (WriteState.Buffer.Length - WriteState.Length < SizeOfSoftCRLF)
                     {
@@ -273,8 +550,10 @@ namespace System.Net.Mime
                     }
 
                     //detect special case:  is whitespace at end of line?  we must encode it if it is
-                    if ((buffer[cur] == (byte)'\t' || buffer[cur] == (byte)' ') &&
-                        (cur + 1 >= count + offset))
+                    if (
+                        (buffer[cur] == (byte)'\t' || buffer[cur] == (byte)' ')
+                        && (cur + 1 >= count + offset)
+                    )
                     {
                         if (WriteState.Buffer.Length - WriteState.Length < SizeOfEncodedChar)
                         {
@@ -303,9 +582,11 @@ namespace System.Net.Mime
             return EncodeBytes(buffer, 0, buffer.Length);
         }
 
-        public string GetEncodedString() => Encoding.ASCII.GetString(WriteState.Buffer, 0, WriteState.Length);
+        public string GetEncodedString() =>
+            Encoding.ASCII.GetString(WriteState.Buffer, 0, WriteState.Length);
 
-        public override void EndWrite(IAsyncResult asyncResult) => WriteAsyncResult.End(asyncResult);
+        public override void EndWrite(IAsyncResult asyncResult) =>
+            WriteAsyncResult.End(asyncResult);
 
         public override void Flush()
         {
@@ -356,7 +637,14 @@ namespace System.Net.Mime
             private static readonly AsyncCallback s_onWrite = new AsyncCallback(OnWrite);
             private int _written;
 
-            internal WriteAsyncResult(QuotedPrintableStream parent, byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) : base(null, state, callback)
+            internal WriteAsyncResult(
+                QuotedPrintableStream parent,
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;
@@ -401,7 +689,13 @@ namespace System.Net.Mime
                     _written += _parent.EncodeBytes(_buffer, _offset + _written, _count - _written);
                     if (_written < _count)
                     {
-                        IAsyncResult result = _parent.BaseStream.BeginWrite(_parent.WriteState.Buffer, 0, _parent.WriteState.Length, s_onWrite, this);
+                        IAsyncResult result = _parent.BaseStream.BeginWrite(
+                            _parent.WriteState.Buffer,
+                            0,
+                            _parent.WriteState.Length,
+                            s_onWrite,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                             break;
                         CompleteWrite(result);

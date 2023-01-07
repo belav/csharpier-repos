@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
@@ -40,9 +40,16 @@ public class OutputCacheEntryFormatterTests
         var key = "abc";
         var entry = new OutputCacheEntry()
         {
-            Body = new CachedResponseBody(new List<byte[]>() { bodySegment1, bodySegment2 }, bodySegment1.Length + bodySegment2.Length),
+            Body = new CachedResponseBody(
+                new List<byte[]>() { bodySegment1, bodySegment2 },
+                bodySegment1.Length + bodySegment2.Length
+            ),
             Created = DateTimeOffset.UtcNow,
-            Headers = new HeaderDictionary { [HeaderNames.Accept] = new[] { "text/plain", "text/html" }, [HeaderNames.AcceptCharset] = "utf8" },
+            Headers = new HeaderDictionary
+            {
+                [HeaderNames.Accept] = new[] { "text/plain", "text/html" },
+                [HeaderNames.AcceptCharset] = "utf8"
+            },
             StatusCode = StatusCodes.Status201Created,
             Tags = new[] { "tag", "タグ" }
         };
@@ -85,7 +92,12 @@ public class OutputCacheEntryFormatterTests
         var entry = new OutputCacheEntry()
         {
             Body = EmptyResponseBody,
-            Headers = new HeaderDictionary { [""] = "", [HeaderNames.Accept] = new[] { null, null, "", "text/html" }, [HeaderNames.AcceptCharset] = new string[] { null } },
+            Headers = new HeaderDictionary
+            {
+                [""] = "",
+                [HeaderNames.Accept] = new[] { null, null, "", "text/html" },
+                [HeaderNames.AcceptCharset] = new string[] { null }
+            },
             Tags = Array.Empty<string>()
         };
 

@@ -11,9 +11,7 @@ namespace System.Net.Http
     {
         private sealed class ConnectionCloseReadStream : HttpContentReadStream
         {
-            public ConnectionCloseReadStream(HttpConnection connection) : base(connection)
-            {
-            }
+            public ConnectionCloseReadStream(HttpConnection connection) : base(connection) { }
 
             public override int Read(Span<byte> buffer)
             {
@@ -35,7 +33,10 @@ namespace System.Net.Http
                 return bytesRead;
             }
 
-            public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+            public override async ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 CancellationHelper.ThrowIfCancellationRequested(cancellationToken);
 
@@ -54,14 +55,24 @@ namespace System.Net.Http
                 }
                 else
                 {
-                    CancellationTokenRegistration ctr = connection.RegisterCancellation(cancellationToken);
+                    CancellationTokenRegistration ctr = connection.RegisterCancellation(
+                        cancellationToken
+                    );
                     try
                     {
                         bytesRead = await readTask.ConfigureAwait(false);
                     }
-                    catch (Exception exc) when (CancellationHelper.ShouldWrapInOperationCanceledException(exc, cancellationToken))
+                    catch (Exception exc)
+                        when (CancellationHelper.ShouldWrapInOperationCanceledException(
+                                exc,
+                                cancellationToken
+                            )
+                        )
                     {
-                        throw CancellationHelper.CreateOperationCanceledException(exc, cancellationToken);
+                        throw CancellationHelper.CreateOperationCanceledException(
+                            exc,
+                            cancellationToken
+                        );
                     }
                     finally
                     {
@@ -87,7 +98,11 @@ namespace System.Net.Http
                 return bytesRead;
             }
 
-            public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+            public override Task CopyToAsync(
+                Stream destination,
+                int bufferSize,
+                CancellationToken cancellationToken
+            )
             {
                 ValidateCopyToArguments(destination, bufferSize);
 
@@ -103,7 +118,12 @@ namespace System.Net.Http
                     return Task.CompletedTask;
                 }
 
-                Task copyTask = connection.CopyToUntilEofAsync(destination, async: true, bufferSize, cancellationToken);
+                Task copyTask = connection.CopyToUntilEofAsync(
+                    destination,
+                    async: true,
+                    bufferSize,
+                    cancellationToken
+                );
                 if (copyTask.IsCompletedSuccessfully)
                 {
                     Finish(connection);
@@ -113,16 +133,30 @@ namespace System.Net.Http
                 return CompleteCopyToAsync(copyTask, connection, cancellationToken);
             }
 
-            private async Task CompleteCopyToAsync(Task copyTask, HttpConnection connection, CancellationToken cancellationToken)
+            private async Task CompleteCopyToAsync(
+                Task copyTask,
+                HttpConnection connection,
+                CancellationToken cancellationToken
+            )
             {
-                CancellationTokenRegistration ctr = connection.RegisterCancellation(cancellationToken);
+                CancellationTokenRegistration ctr = connection.RegisterCancellation(
+                    cancellationToken
+                );
                 try
                 {
                     await copyTask.ConfigureAwait(false);
                 }
-                catch (Exception exc) when (CancellationHelper.ShouldWrapInOperationCanceledException(exc, cancellationToken))
+                catch (Exception exc)
+                    when (CancellationHelper.ShouldWrapInOperationCanceledException(
+                            exc,
+                            cancellationToken
+                        )
+                    )
                 {
-                    throw CancellationHelper.CreateOperationCanceledException(exc, cancellationToken);
+                    throw CancellationHelper.CreateOperationCanceledException(
+                        exc,
+                        cancellationToken
+                    );
                 }
                 finally
                 {

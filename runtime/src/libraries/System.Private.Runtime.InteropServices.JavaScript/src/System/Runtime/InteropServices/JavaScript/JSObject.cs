@@ -32,7 +32,13 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            Interop.Runtime.InvokeJSWithArgsRef(JSHandle, method, args, out int exception, out object res);
+            Interop.Runtime.InvokeJSWithArgsRef(
+                JSHandle,
+                method,
+                args,
+                out int exception,
+                out object res
+            );
             if (exception != 0)
                 throw new JSException((string)res);
             Interop.Runtime.ReleaseInFlight(res);
@@ -65,7 +71,12 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             AssertNotDisposed();
 
-            Interop.Runtime.GetObjectPropertyRef(JSHandle, name, out int exception, out object propertyValue);
+            Interop.Runtime.GetObjectPropertyRef(
+                JSHandle,
+                name,
+                out int exception,
+                out object propertyValue
+            );
             if (exception != 0)
                 throw new JSException((string)propertyValue);
             Interop.Runtime.ReleaseInFlight(propertyValue);
@@ -83,11 +94,24 @@ namespace System.Runtime.InteropServices.JavaScript
         /// float[], double[]) </param>
         /// <param name="createIfNotExists">Defaults to <see langword="true"/> and creates the property on the javascript object if not found, if set to <see langword="false"/> it will not create the property if it does not exist.  If the property exists, the value is updated with the provided value.</param>
         /// <param name="hasOwnProperty"></param>
-        public void SetObjectProperty(string name, object value, bool createIfNotExists = true, bool hasOwnProperty = false)
+        public void SetObjectProperty(
+            string name,
+            object value,
+            bool createIfNotExists = true,
+            bool hasOwnProperty = false
+        )
         {
             AssertNotDisposed();
 
-            Interop.Runtime.SetObjectPropertyRef(JSHandle, name, in value, createIfNotExists, hasOwnProperty, out int exception, out object res);
+            Interop.Runtime.SetObjectPropertyRef(
+                JSHandle,
+                name,
+                in value,
+                createIfNotExists,
+                hasOwnProperty,
+                out int exception,
+                out object res
+            );
             if (exception != 0)
                 throw new JSException($"Error setting {name} on (js-obj js '{JSHandle}'): {res}");
         }

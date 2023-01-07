@@ -34,8 +34,8 @@ public class DataReaderEventData : DbContextEventData
         Guid connectionId,
         int recordsAffected,
         int readCount,
-        DateTimeOffset startTime)
-        : base(eventDefinition, messageGenerator, context)
+        DateTimeOffset startTime
+    ) : base(eventDefinition, messageGenerator, context)
     {
         Command = command;
         DataReader = dataReader;

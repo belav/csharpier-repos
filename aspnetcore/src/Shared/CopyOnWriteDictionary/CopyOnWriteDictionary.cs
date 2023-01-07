@@ -9,7 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.Internal;
 
-internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue> where TKey : notnull
+internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+    where TKey : notnull
 {
     private readonly IDictionary<TKey, TValue> _sourceDictionary;
     private readonly IEqualityComparer<TKey> _comparer;
@@ -17,7 +18,8 @@ internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TV
 
     public CopyOnWriteDictionary(
         IDictionary<TKey, TValue> sourceDictionary,
-        IEqualityComparer<TKey> comparer)
+        IEqualityComparer<TKey> comparer
+    )
     {
         if (sourceDictionary == null)
         {
@@ -35,10 +37,7 @@ internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TV
 
     private IDictionary<TKey, TValue> ReadDictionary
     {
-        get
-        {
-            return _innerDictionary ?? _sourceDictionary;
-        }
+        get { return _innerDictionary ?? _sourceDictionary; }
     }
 
     private IDictionary<TKey, TValue> WriteDictionary
@@ -47,8 +46,7 @@ internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TV
         {
             if (_innerDictionary == null)
             {
-                _innerDictionary = new Dictionary<TKey, TValue>(_sourceDictionary,
-                                                                _comparer);
+                _innerDictionary = new Dictionary<TKey, TValue>(_sourceDictionary, _comparer);
             }
 
             return _innerDictionary;
@@ -57,46 +55,28 @@ internal sealed class CopyOnWriteDictionary<TKey, TValue> : IDictionary<TKey, TV
 
     public ICollection<TKey> Keys
     {
-        get
-        {
-            return ReadDictionary.Keys;
-        }
+        get { return ReadDictionary.Keys; }
     }
 
     public ICollection<TValue> Values
     {
-        get
-        {
-            return ReadDictionary.Values;
-        }
+        get { return ReadDictionary.Values; }
     }
 
     public int Count
     {
-        get
-        {
-            return ReadDictionary.Count;
-        }
+        get { return ReadDictionary.Count; }
     }
 
     public bool IsReadOnly
     {
-        get
-        {
-            return false;
-        }
+        get { return false; }
     }
 
     public TValue this[TKey key]
     {
-        get
-        {
-            return ReadDictionary[key];
-        }
-        set
-        {
-            WriteDictionary[key] = value;
-        }
+        get { return ReadDictionary[key]; }
+        set { WriteDictionary[key] = value; }
     }
 
     public bool ContainsKey(TKey key)

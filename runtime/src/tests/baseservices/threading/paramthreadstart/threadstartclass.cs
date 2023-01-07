@@ -17,7 +17,7 @@ class ThreadStartClass
 
     private int Run()
     {
-    	 int iRet = 100;
+        int iRet = 100;
         Stopwatch sw = new Stopwatch();
         sw.Start();
         Thread.Sleep(1000);
@@ -27,20 +27,32 @@ class ThreadStartClass
         t.Start(sw);
         t.Join();
 
-	 if (sw.ElapsedMilliseconds != ((Stopwatch)oSaved).ElapsedMilliseconds)
-	 {
-	 	Console.WriteLine("Expected ((Stopwatch)oSaved).ElapsedMilliseconds = sw.ElapsedMilliseconds=" + sw.ElapsedMilliseconds.ToString());
-	 	Console.WriteLine("Actual oSaved.ElapsedMilliseconds=" + ((Stopwatch)oSaved).ElapsedMilliseconds.ToString());
-	 	iRet = 98;
-	 }
-	         	Console.WriteLine("Expected ((Stopwatch)oSaved).ElapsedMilliseconds to be 1000, but found " + ((Stopwatch)oSaved).ElapsedMilliseconds);
+        if (sw.ElapsedMilliseconds != ((Stopwatch)oSaved).ElapsedMilliseconds)
+        {
+            Console.WriteLine(
+                "Expected ((Stopwatch)oSaved).ElapsedMilliseconds = sw.ElapsedMilliseconds="
+                    + sw.ElapsedMilliseconds.ToString()
+            );
+            Console.WriteLine(
+                "Actual oSaved.ElapsedMilliseconds="
+                    + ((Stopwatch)oSaved).ElapsedMilliseconds.ToString()
+            );
+            iRet = 98;
+        }
+        Console.WriteLine(
+            "Expected ((Stopwatch)oSaved).ElapsedMilliseconds to be 1000, but found "
+                + ((Stopwatch)oSaved).ElapsedMilliseconds
+        );
         if (((Stopwatch)oSaved).ElapsedMilliseconds < 950)
         {
-        	Console.WriteLine("Expected ((Stopwatch)oSaved).ElapsedMilliseconds to be 1000, but found " + ((Stopwatch)oSaved).ElapsedMilliseconds);
-		iRet = 97;
+            Console.WriteLine(
+                "Expected ((Stopwatch)oSaved).ElapsedMilliseconds to be 1000, but found "
+                    + ((Stopwatch)oSaved).ElapsedMilliseconds
+            );
+            iRet = 97;
         }
-	
-        Console.WriteLine(iRet==100 ? "Test Passed" : "Test Failed");
+
+        Console.WriteLine(iRet == 100 ? "Test Passed" : "Test Failed");
         return iRet;
     }
 

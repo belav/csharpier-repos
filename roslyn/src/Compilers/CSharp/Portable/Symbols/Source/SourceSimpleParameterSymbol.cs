@@ -20,10 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             RefKind refKind,
             DeclarationScope scope,
             string name,
-            ImmutableArray<Location> locations)
-            : base(owner, parameterType, ordinal, refKind, scope, name, locations)
-        {
-        }
+            ImmutableArray<Location> locations
+        ) : base(owner, parameterType, ordinal, refKind, scope, name, locations) { }
 
         public override bool IsDiscard => false;
 
@@ -92,7 +90,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return -1; }
         }
 
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => ImmutableArray<int>.Empty;
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            ImmutableArray<int>.Empty;
 
         internal override bool HasInterpolatedStringHandlerArgumentError => false;
 
@@ -101,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return FlowAnalysisAnnotations.None; }
         }
 
-        internal override ImmutableHashSet<string> NotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        internal override ImmutableHashSet<string> NotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         internal override MarshalPseudoCustomAttributeData? MarshallingInformation
         {
@@ -129,6 +129,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ConstantValue.NotAvailable; }
         }
 
-        internal override DeclarationScope EffectiveScope => CalculateEffectiveScopeIgnoringAttributes();
+        internal override DeclarationScope EffectiveScope =>
+            CalculateEffectiveScopeIgnoringAttributes();
     }
 }

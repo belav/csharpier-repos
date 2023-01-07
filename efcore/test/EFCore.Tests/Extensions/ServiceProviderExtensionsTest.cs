@@ -13,7 +13,8 @@ public class ServiceProviderExtensionsTest
         var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
         Assert.Throws<InvalidOperationException>(
-            () => serviceProvider.GetRequiredService<IPilkington>());
+            () => serviceProvider.GetRequiredService<IPilkington>()
+        );
     }
 
     [ConditionalFact]
@@ -22,7 +23,8 @@ public class ServiceProviderExtensionsTest
         var serviceProvider = new ServiceCollection().BuildServiceProvider(validateScopes: true);
 
         Assert.Throws<InvalidOperationException>(
-            () => serviceProvider.GetRequiredService(typeof(IPilkington)));
+            () => serviceProvider.GetRequiredService(typeof(IPilkington))
+        );
     }
 
     [ConditionalFact]
@@ -30,13 +32,19 @@ public class ServiceProviderExtensionsTest
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddScoped<IPilkington, Karl>();
-        using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+        using var scope = serviceCollection
+            .BuildServiceProvider(validateScopes: true)
+            .CreateScope();
         var serviceProvider = scope.ServiceProvider;
 
         Assert.Equal(
             KarlQuote,
-            Assert.Throws<NotSupportedException>(
-                () => serviceProvider.GetRequiredService<IPilkington>()).Message);
+            Assert
+                .Throws<NotSupportedException>(
+                    () => serviceProvider.GetRequiredService<IPilkington>()
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -45,13 +53,19 @@ public class ServiceProviderExtensionsTest
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddScoped<IPilkington, Karl>();
 
-        using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+        using var scope = serviceCollection
+            .BuildServiceProvider(validateScopes: true)
+            .CreateScope();
         var serviceProvider = scope.ServiceProvider;
 
         Assert.Equal(
             KarlQuote,
-            Assert.Throws<NotSupportedException>(
-                () => serviceProvider.GetRequiredService(typeof(IPilkington))).Message);
+            Assert
+                .Throws<NotSupportedException>(
+                    () => serviceProvider.GetRequiredService(typeof(IPilkington))
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -75,13 +89,17 @@ public class ServiceProviderExtensionsTest
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddScoped<IPilkington, Karl>();
-        using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+        using var scope = serviceCollection
+            .BuildServiceProvider(validateScopes: true)
+            .CreateScope();
         var serviceProvider = scope.ServiceProvider;
 
         Assert.Equal(
             KarlQuote,
-            Assert.Throws<NotSupportedException>(
-                () => serviceProvider.GetService<IPilkington>()).Message);
+            Assert
+                .Throws<NotSupportedException>(() => serviceProvider.GetService<IPilkington>())
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -90,20 +108,24 @@ public class ServiceProviderExtensionsTest
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddScoped<IPilkington, Karl>();
 
-        using var scope = serviceCollection.BuildServiceProvider(validateScopes: true).CreateScope();
+        using var scope = serviceCollection
+            .BuildServiceProvider(validateScopes: true)
+            .CreateScope();
         var serviceProvider = scope.ServiceProvider;
 
         Assert.Equal(
             KarlQuote,
-            Assert.Throws<NotSupportedException>(
-                () => serviceProvider.GetService(typeof(IPilkington))).Message);
+            Assert
+                .Throws<NotSupportedException>(
+                    () => serviceProvider.GetService(typeof(IPilkington))
+                )
+                .Message
+        );
     }
 
     private const string KarlQuote = "You can only talk rubbish if you're aware of knowledge.";
 
-    private interface IPilkington
-    {
-    }
+    private interface IPilkington { }
 
     private class Karl : IPilkington
     {

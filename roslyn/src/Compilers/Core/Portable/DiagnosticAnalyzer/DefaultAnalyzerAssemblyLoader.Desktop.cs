@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
         private readonly object _guard = new();
 
         private readonly Dictionary<AssemblyIdentity, Assembly> _loadedAssembliesByIdentity = new();
-        private readonly Dictionary<string, AssemblyIdentity?> _loadedAssemblyIdentitiesByPath = new();
+        private readonly Dictionary<string, AssemblyIdentity?> _loadedAssemblyIdentitiesByPath =
+            new();
 
         private int _hookedAssemblyResolve;
 
@@ -48,7 +49,10 @@ namespace Microsoft.CodeAnalysis
             lock (_guard)
             {
                 identity = GetOrAddAssemblyIdentity(fullPath);
-                if (identity != null && _loadedAssembliesByIdentity.TryGetValue(identity, out var existingAssembly))
+                if (
+                    identity != null
+                    && _loadedAssembliesByIdentity.TryGetValue(identity, out var existingAssembly)
+                )
                 {
                     return existingAssembly;
                 }
@@ -107,7 +111,10 @@ namespace Microsoft.CodeAnalysis
 
             lock (_guard)
             {
-                if (_loadedAssemblyIdentitiesByPath.TryGetValue(fullPath, out var existingIdentity) && existingIdentity != null)
+                if (
+                    _loadedAssemblyIdentitiesByPath.TryGetValue(fullPath, out var existingIdentity)
+                    && existingIdentity != null
+                )
                 {
                     // Somebody else beat us, so used the cached value
                     identity = existingIdentity;
@@ -131,9 +138,13 @@ namespace Microsoft.CodeAnalysis
             ImmutableHashSet<string> candidatePaths;
             lock (_guard)
             {
-
                 // First, check if this loader already loaded the requested assembly:
-                if (_loadedAssembliesByIdentity.TryGetValue(requestedIdentity, out var existingAssembly))
+                if (
+                    _loadedAssembliesByIdentity.TryGetValue(
+                        requestedIdentity,
+                        out var existingAssembly
+                    )
+                )
                 {
                     return existingAssembly;
                 }
@@ -158,11 +169,18 @@ namespace Microsoft.CodeAnalysis
             {
                 var candidateIdentity = GetOrAddAssemblyIdentity(candidatePath);
 
-                if (candidateIdentity is not null &&
-                    candidateIdentity.Version >= requestedIdentity.Version &&
-                    candidateIdentity.PublicKeyToken.SequenceEqual(requestedIdentity.PublicKeyToken))
+                if (
+                    candidateIdentity is not null
+                    && candidateIdentity.Version >= requestedIdentity.Version
+                    && candidateIdentity.PublicKeyToken.SequenceEqual(
+                        requestedIdentity.PublicKeyToken
+                    )
+                )
                 {
-                    if (bestIdentityVersion is null || candidateIdentity.Version > bestIdentityVersion)
+                    if (
+                        bestIdentityVersion is null
+                        || candidateIdentity.Version > bestIdentityVersion
+                    )
                     {
                         bestPath = candidatePath;
                         bestIdentityVersion = candidateIdentity.Version;

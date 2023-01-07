@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.AddImport
     internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
     {
         /// <summary>
-        /// This is the top level 'Install Nuget Package' code action we show in 
-        /// the lightbulb.  It will have children to 'Install Latest', 
+        /// This is the top level 'Install Nuget Package' code action we show in
+        /// the lightbulb.  It will have children to 'Install Latest',
         /// 'Install Version 'X' ..., and 'Install with package manager'.
         /// </summary>
         private class ParentInstallPackageCodeAction : CodeAction.CodeActionWithNestedActions
@@ -35,11 +35,14 @@ namespace Microsoft.CodeAnalysis.AddImport
             public ParentInstallPackageCodeAction(
                 Document document,
                 AddImportFixData fixData,
-                IPackageInstallerService installerService)
-                : base(string.Format(FeaturesResources.Install_package_0, fixData.PackageName),
-                       CreateNestedActions(document, fixData, installerService),
-                       isInlinable: false,
-                       priority: CodeActionPriority.Low) // Adding a nuget reference is lower priority than other fixes..
+                IPackageInstallerService installerService
+            )
+                : base(
+                    string.Format(FeaturesResources.Install_package_0, fixData.PackageName),
+                    CreateNestedActions(document, fixData, installerService),
+                    isInlinable: false,
+                    priority: CodeActionPriority.Low
+                ) // Adding a nuget reference is lower priority than other fixes..
             {
                 Contract.ThrowIfFalse(fixData.Kind == AddImportFixKind.PackageSymbol);
             }
@@ -47,29 +50,50 @@ namespace Microsoft.CodeAnalysis.AddImport
             private static ImmutableArray<CodeAction> CreateNestedActions(
                 Document document,
                 AddImportFixData fixData,
-                IPackageInstallerService installerService)
+                IPackageInstallerService installerService
+            )
             {
                 // Determine what versions of this package are already installed in some project
                 // in this solution.  We'll offer to add those specific versions to this project,
                 // followed by an option to "Find and install latest version."
-                var installedVersions = installerService.GetInstalledVersions(fixData.PackageName).NullToEmpty();
+                var installedVersions = installerService
+                    .GetInstalledVersions(fixData.PackageName)
+                    .NullToEmpty();
                 using var _ = ArrayBuilder<CodeAction>.GetInstance(out var codeActions);
 
                 // First add the actions to install a specific version.
-                codeActions.AddRange(installedVersions.Select(
-                    v => CreateCodeAction(
-                        document, fixData, installerService, versionOpt: v, isLocal: true)));
+                codeActions.AddRange(
+                    installedVersions.Select(
+                        v =>
+                            CreateCodeAction(
+                                document,
+                                fixData,
+                                installerService,
+                                versionOpt: v,
+                                isLocal: true
+                            )
+                    )
+                );
 
                 // Now add the action to install the specific version.
                 var preferredVersion = fixData.PackageVersionOpt;
                 if (preferredVersion == null || !installedVersions.Contains(preferredVersion))
                 {
-                    codeActions.Add(CreateCodeAction(
-                        document, fixData, installerService, preferredVersion, isLocal: false));
+                    codeActions.Add(
+                        CreateCodeAction(
+                            document,
+                            fixData,
+                            installerService,
+                            preferredVersion,
+                            isLocal: false
+                        )
+                    );
                 }
 
                 // And finally the action to show the package manager dialog.
-                codeActions.Add(new InstallWithPackageManagerCodeAction(installerService, fixData.PackageName));
+                codeActions.Add(
+                    new InstallWithPackageManagerCodeAction(installerService, fixData.PackageName)
+                );
                 return codeActions.ToImmutable();
             }
 
@@ -78,21 +102,33 @@ namespace Microsoft.CodeAnalysis.AddImport
                 AddImportFixData fixData,
                 IPackageInstallerService installerService,
                 string versionOpt,
-                bool isLocal)
+                bool isLocal
+            )
             {
-                var title = versionOpt == null
-                    ? FeaturesResources.Find_and_install_latest_version
-                    : isLocal
-                        ? string.Format(FeaturesResources.Use_local_version_0, versionOpt)
-                        : string.Format(FeaturesResources.Install_version_0, versionOpt);
+                var title =
+                    versionOpt == null
+                        ? FeaturesResources.Find_and_install_latest_version
+                        : isLocal
+                            ? string.Format(FeaturesResources.Use_local_version_0, versionOpt)
+                            : string.Format(FeaturesResources.Install_version_0, versionOpt);
 
                 var installOperation = new InstallPackageDirectlyCodeActionOperation(
-                    installerService, document, fixData.PackageSource, fixData.PackageName, versionOpt,
-                    includePrerelease: false, isLocal: isLocal);
+                    installerService,
+                    document,
+                    fixData.PackageSource,
+                    fixData.PackageName,
+                    versionOpt,
+                    includePrerelease: false,
+                    isLocal: isLocal
+                );
 
                 // Nuget hits should always come after other results.
                 return new InstallPackageAndAddImportCodeAction(
-                    document, fixData, title, installOperation);
+                    document,
+                    fixData,
+                    title,
+                    installOperation
+                );
             }
         }
     }

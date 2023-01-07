@@ -12,18 +12,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class NameOfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public NameOfKeywordRecommender()
-            : base(SyntaxKind.NameOfKeyword)
-        {
-        }
+        public NameOfKeywordRecommender() : base(SyntaxKind.NameOfKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsAnyExpressionContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.LeftToken.IsInCastExpressionTypeWhereExpressionIsMissingOrInNextLine();
+            return context.IsAnyExpressionContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.LeftToken.IsInCastExpressionTypeWhereExpressionIsMissingOrInNextLine();
         }
     }
 }

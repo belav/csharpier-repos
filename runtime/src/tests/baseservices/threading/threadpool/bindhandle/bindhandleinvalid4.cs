@@ -37,7 +37,9 @@ class BindHandleInvalid3
                 }
                 else
                 {
-                    Console.WriteLine($"Got wrong error - HResult: 0x{ex.HResult:x}, Exception: {ex}");
+                    Console.WriteLine(
+                        $"Got wrong error - HResult: 0x{ex.HResult:x}, Exception: {ex}"
+                    );
                 }
             }
         }
@@ -51,6 +53,4 @@ class BindHandleInvalid3
         Console.WriteLine("Didn't get argument null exception");
         return (99);
     }
-
-
 }

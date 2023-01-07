@@ -30,8 +30,13 @@ namespace System
         // ASSUMES that strings like http://host/Path/Path/MoreDir/../../  have been canonicalized before going to this method.
         // ASSUMES that back slashes already have been converted if applicable.
         //
-        internal static unsafe bool TestForSubPath(char* selfPtr, int selfLength, char* otherPtr, int otherLength,
-            bool ignoreCase)
+        internal static unsafe bool TestForSubPath(
+            char* selfPtr,
+            int selfLength,
+            char* otherPtr,
+            int otherLength,
+            bool ignoreCase
+        )
         {
             int i = 0;
             char chSelf;
@@ -107,11 +112,18 @@ namespace System
             return true;
         }
 
-        internal static string EscapeString(string stringToEscape, bool checkExistingEscaped, IndexOfAnyValues<char> noEscape)
+        internal static string EscapeString(
+            string stringToEscape,
+            bool checkExistingEscaped,
+            IndexOfAnyValues<char> noEscape
+        )
         {
             ArgumentNullException.ThrowIfNull(stringToEscape);
 
-            Debug.Assert(!noEscape.Contains('%'), "Need to treat % specially; it should be part of any escaped set");
+            Debug.Assert(
+                !noEscape.Contains('%'),
+                "Need to treat % specially; it should be part of any escaped set"
+            );
 
             int indexOfFirstToEscape = stringToEscape.AsSpan().IndexOfAnyExcept(noEscape);
             if (indexOfFirstToEscape < 0)
@@ -125,14 +137,26 @@ namespace System
             // escape the rest, and return the result as a string.
             var vsb = new ValueStringBuilder(stackalloc char[Uri.StackallocThreshold]);
             vsb.Append(stringToEscape.AsSpan(0, indexOfFirstToEscape));
-            EscapeStringToBuilder(stringToEscape.AsSpan(indexOfFirstToEscape), ref vsb, noEscape, checkExistingEscaped);
+            EscapeStringToBuilder(
+                stringToEscape.AsSpan(indexOfFirstToEscape),
+                ref vsb,
+                noEscape,
+                checkExistingEscaped
+            );
             return vsb.ToString();
         }
 
-        internal static unsafe void EscapeString(ReadOnlySpan<char> stringToEscape, ref ValueStringBuilder dest,
-            bool checkExistingEscaped, IndexOfAnyValues<char> noEscape)
+        internal static unsafe void EscapeString(
+            ReadOnlySpan<char> stringToEscape,
+            ref ValueStringBuilder dest,
+            bool checkExistingEscaped,
+            IndexOfAnyValues<char> noEscape
+        )
         {
-            Debug.Assert(!noEscape.Contains('%'), "Need to treat % specially; it should be part of any escaped set");
+            Debug.Assert(
+                !noEscape.Contains('%'),
+                "Need to treat % specially; it should be part of any escaped set"
+            );
 
             int indexOfFirstToEscape = stringToEscape.IndexOfAnyExcept(noEscape);
             if (indexOfFirstToEscape < 0)
@@ -144,13 +168,21 @@ namespace System
             {
                 dest.Append(stringToEscape.Slice(0, indexOfFirstToEscape));
 
-                EscapeStringToBuilder(stringToEscape.Slice(indexOfFirstToEscape), ref dest, noEscape, checkExistingEscaped);
+                EscapeStringToBuilder(
+                    stringToEscape.Slice(indexOfFirstToEscape),
+                    ref dest,
+                    noEscape,
+                    checkExistingEscaped
+                );
             }
         }
 
         private static void EscapeStringToBuilder(
-            ReadOnlySpan<char> stringToEscape, ref ValueStringBuilder vsb,
-            IndexOfAnyValues<char> noEscape, bool checkExistingEscaped)
+            ReadOnlySpan<char> stringToEscape,
+            ref ValueStringBuilder vsb,
+            IndexOfAnyValues<char> noEscape,
+            bool checkExistingEscaped
+        )
         {
             Debug.Assert(!stringToEscape.IsEmpty && !noEscape.Contains(stringToEscape[0]));
 
@@ -163,12 +195,17 @@ namespace System
 
                 if (!char.IsAscii(c))
                 {
-                    if (Rune.DecodeFromUtf16(stringToEscape, out Rune r, out int charsConsumed) != OperationStatus.Done)
+                    if (
+                        Rune.DecodeFromUtf16(stringToEscape, out Rune r, out int charsConsumed)
+                        != OperationStatus.Done
+                    )
                     {
                         r = Rune.ReplacementChar;
                     }
 
-                    Debug.Assert(stringToEscape.EnumerateRunes() is { } e && e.MoveNext() && e.Current == r);
+                    Debug.Assert(
+                        stringToEscape.EnumerateRunes() is { } e && e.MoveNext() && e.Current == r
+                    );
                     Debug.Assert(charsConsumed is 1 or 2);
 
                     stringToEscape = stringToEscape.Slice(charsConsumed);
@@ -190,7 +227,11 @@ namespace System
                     if (c == '%' && checkExistingEscaped)
                     {
                         // If the next two characters are valid escaped ASCII, then just output them as-is.
-                        if (stringToEscape.Length > 2 && char.IsAsciiHexDigit(stringToEscape[1]) && char.IsAsciiHexDigit(stringToEscape[2]))
+                        if (
+                            stringToEscape.Length > 2
+                            && char.IsAsciiHexDigit(stringToEscape[1])
+                            && char.IsAsciiHexDigit(stringToEscape[2])
+                        )
                         {
                             vsb.Append('%');
                             vsb.Append(stringToEscape[1]);
@@ -218,24 +259,66 @@ namespace System
             }
         }
 
-        internal static unsafe char[] UnescapeString(string input, int start, int end, char[] dest,
-            ref int destPosition, char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax,
-            bool isQuery)
+        internal static unsafe char[] UnescapeString(
+            string input,
+            int start,
+            int end,
+            char[] dest,
+            ref int destPosition,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        )
         {
             fixed (char* pStr = input)
             {
-                return UnescapeString(pStr, start, end, dest, ref destPosition, rsvd1, rsvd2, rsvd3, unescapeMode,
-                    syntax, isQuery);
+                return UnescapeString(
+                    pStr,
+                    start,
+                    end,
+                    dest,
+                    ref destPosition,
+                    rsvd1,
+                    rsvd2,
+                    rsvd3,
+                    unescapeMode,
+                    syntax,
+                    isQuery
+                );
             }
         }
 
-        internal static unsafe char[] UnescapeString(char* pStr, int start, int end, char[] dest, ref int destPosition,
-            char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
+        internal static unsafe char[] UnescapeString(
+            char* pStr,
+            int start,
+            int end,
+            char[] dest,
+            ref int destPosition,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        )
         {
             ValueStringBuilder vsb = new ValueStringBuilder(dest.Length);
             vsb.Append(dest.AsSpan(0, destPosition));
-            UnescapeString(pStr, start, end, ref vsb, rsvd1, rsvd2, rsvd3, unescapeMode,
-                    syntax, isQuery);
+            UnescapeString(
+                pStr,
+                start,
+                end,
+                ref vsb,
+                rsvd1,
+                rsvd2,
+                rsvd3,
+                unescapeMode,
+                syntax,
+                isQuery
+            );
 
             if (vsb.Length > dest.Length)
             {
@@ -261,24 +344,76 @@ namespace System
         // - It is a RARE case when Unescape actually needs escaping some characters mentioned above.
         //   For this reason it returns a char[] that is usually the same ref as the input "dest" value.
         //
-        internal static unsafe void UnescapeString(string input, int start, int end, ref ValueStringBuilder dest,
-            char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
+        internal static unsafe void UnescapeString(
+            string input,
+            int start,
+            int end,
+            ref ValueStringBuilder dest,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        )
         {
             fixed (char* pStr = input)
             {
-                UnescapeString(pStr, start, end, ref dest, rsvd1, rsvd2, rsvd3, unescapeMode, syntax, isQuery);
+                UnescapeString(
+                    pStr,
+                    start,
+                    end,
+                    ref dest,
+                    rsvd1,
+                    rsvd2,
+                    rsvd3,
+                    unescapeMode,
+                    syntax,
+                    isQuery
+                );
             }
         }
-        internal static unsafe void UnescapeString(ReadOnlySpan<char> input, ref ValueStringBuilder dest,
-           char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
+
+        internal static unsafe void UnescapeString(
+            ReadOnlySpan<char> input,
+            ref ValueStringBuilder dest,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        )
         {
             fixed (char* pStr = &MemoryMarshal.GetReference(input))
             {
-                UnescapeString(pStr, 0, input.Length, ref dest, rsvd1, rsvd2, rsvd3, unescapeMode, syntax, isQuery);
+                UnescapeString(
+                    pStr,
+                    0,
+                    input.Length,
+                    ref dest,
+                    rsvd1,
+                    rsvd2,
+                    rsvd3,
+                    unescapeMode,
+                    syntax,
+                    isQuery
+                );
             }
         }
-        internal static unsafe void UnescapeString(char* pStr, int start, int end, ref ValueStringBuilder dest,
-            char rsvd1, char rsvd2, char rsvd3, UnescapeMode unescapeMode, UriParser? syntax, bool isQuery)
+
+        internal static unsafe void UnescapeString(
+            char* pStr,
+            int start,
+            int end,
+            ref ValueStringBuilder dest,
+            char rsvd1,
+            char rsvd2,
+            char rsvd3,
+            UnescapeMode unescapeMode,
+            UriParser? syntax,
+            bool isQuery
+        )
         {
             if ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.CopyOnly)
             {
@@ -287,8 +422,9 @@ namespace System
             }
 
             bool escapeReserved = false;
-            bool iriParsing = Uri.IriParsingStatic(syntax)
-                                && ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.EscapeUnescape);
+            bool iriParsing =
+                Uri.IriParsingStatic(syntax)
+                && ((unescapeMode & UnescapeMode.EscapeUnescape) == UnescapeMode.EscapeUnescape);
 
             for (int next = start; next < end; )
             {
@@ -325,7 +461,7 @@ namespace System
                                 if ((unescapeMode & UnescapeMode.Escape) != 0)
                                     escapeReserved = true;
                                 else
-                                    continue;   // we should throw instead but since v1.0 would just print '%'
+                                    continue; // we should throw instead but since v1.0 would just print '%'
                             }
                             // Do not unescape '%' itself unless full unescape is requested
                             else if (ch == '%')
@@ -340,13 +476,21 @@ namespace System
                                 continue;
                             }
                             // Do not unescape a dangerous char unless it's V1ToStringFlags mode
-                            else if ((unescapeMode & UnescapeMode.V1ToStringFlag) == 0 && IsNotSafeForUnescape(ch))
+                            else if (
+                                (unescapeMode & UnescapeMode.V1ToStringFlag) == 0
+                                && IsNotSafeForUnescape(ch)
+                            )
                             {
                                 next += 2;
                                 continue;
                             }
-                            else if (iriParsing && ((ch <= '\x9F' && IsNotSafeForUnescape(ch)) ||
-                                                    (ch > '\x9F' && !IriHelper.CheckIriUnicodeRange(ch, isQuery))))
+                            else if (
+                                iriParsing
+                                && (
+                                    (ch <= '\x9F' && IsNotSafeForUnescape(ch))
+                                    || (ch > '\x9F' && !IriHelper.CheckIriUnicodeRange(ch, isQuery))
+                                )
+                            )
                             {
                                 // check if unenscaping gives a char outside iri range
                                 // if it does then keep it escaped
@@ -373,8 +517,10 @@ namespace System
                         // escape (escapeReserved==true) or otherwise unescape the sequence
                         break;
                     }
-                    else if ((unescapeMode & (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
-                        == (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
+                    else if (
+                        (unescapeMode & (UnescapeMode.Unescape | UnescapeMode.UnescapeAll))
+                        == (UnescapeMode.Unescape | UnescapeMode.UnescapeAll)
+                    )
                     {
                         continue;
                     }
@@ -387,8 +533,10 @@ namespace System
                             escapeReserved = true;
                             break;
                         }
-                        else if ((unescapeMode & UnescapeMode.V1ToStringFlag) == 0
-                            && (ch <= '\x1F' || (ch >= '\x7F' && ch <= '\x9F')))
+                        else if (
+                            (unescapeMode & UnescapeMode.V1ToStringFlag) == 0
+                            && (ch <= '\x1F' || (ch >= '\x7F' && ch <= '\x9F'))
+                        )
                         {
                             // found an unescaped reserved character -> escape it
                             escapeReserved = true;
@@ -417,12 +565,14 @@ namespace System
                     else
                     {
                         // Unicode
-                        int charactersRead = PercentEncodingHelper.UnescapePercentEncodedUTF8Sequence(
-                            pStr + next,
-                            end - next,
-                            ref dest,
-                            isQuery,
-                            iriParsing);
+                        int charactersRead =
+                            PercentEncodingHelper.UnescapePercentEncodedUTF8Sequence(
+                                pStr + next,
+                                end - next,
+                                ref dest,
+                                isQuery,
+                                iriParsing
+                            );
 
                         Debug.Assert(charactersRead > 0);
                         next += charactersRead;
@@ -485,25 +635,39 @@ namespace System
         }
 
         // true for all ASCII letters and digits, as well as the RFC3986 unreserved marks '-', '_', '.', and '~'
-        public static readonly IndexOfAnyValues<char> Unreserved =
-            IndexOfAnyValues.Create("-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~");
+        public static readonly IndexOfAnyValues<char> Unreserved = IndexOfAnyValues.Create(
+            "-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~"
+        );
 
         // true for all ASCII letters and digits, as well as the RFC3986 reserved characters, unreserved characters, and hash
-        public static readonly IndexOfAnyValues<char> UnreservedReserved =
-            IndexOfAnyValues.Create("!#$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~");
+        public static readonly IndexOfAnyValues<char> UnreservedReserved = IndexOfAnyValues.Create(
+            "!#$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"
+        );
 
         public static readonly IndexOfAnyValues<char> UnreservedReservedExceptHash =
-            IndexOfAnyValues.Create("!$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~");
+            IndexOfAnyValues.Create(
+                "!$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"
+            );
 
         public static readonly IndexOfAnyValues<char> UnreservedReservedExceptQuestionMarkHash =
-            IndexOfAnyValues.Create("!$&'()*+,-./0123456789:;=@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~");
+            IndexOfAnyValues.Create(
+                "!$&'()*+,-./0123456789:;=@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"
+            );
 
         //
         // Is this a gen delim char from RFC 3986
         //
         internal static bool IsGenDelim(char ch)
         {
-            return (ch == ':' || ch == '/' || ch == '?' || ch == '#' || ch == '[' || ch == ']' || ch == '@');
+            return (
+                ch == ':'
+                || ch == '/'
+                || ch == '?'
+                || ch == '#'
+                || ch == '['
+                || ch == ']'
+                || ch == '@'
+            );
         }
 
         internal static readonly char[] s_WSchars = new char[] { ' ', '\n', '\r', '\t' };
@@ -518,7 +682,10 @@ namespace System
             char.IsBetween(ch, '\u200E', '\u202E') && !char.IsBetween(ch, '\u2010', '\u2029');
 
         // Strip Bidirectional control characters from this string
-        internal static unsafe string StripBidiControlCharacters(ReadOnlySpan<char> strToClean, string? backingString = null)
+        internal static unsafe string StripBidiControlCharacters(
+            ReadOnlySpan<char> strToClean,
+            string? backingString = null
+        )
         {
             Debug.Assert(backingString is null || strToClean.Length == backingString.Length);
 
@@ -545,18 +712,22 @@ namespace System
 
 #pragma warning disable CS8500 // takes address of managed type
             ReadOnlySpan<char> tmpStrToClean = strToClean; // avoid address exposing the span and impacting the other code in the method that uses it
-            return string.Create(tmpStrToClean.Length - charsToRemove, (IntPtr)(&tmpStrToClean), static (buffer, strToCleanPtr) =>
-            {
-                int destIndex = 0;
-                foreach (char c in *(ReadOnlySpan<char>*)strToCleanPtr)
+            return string.Create(
+                tmpStrToClean.Length - charsToRemove,
+                (IntPtr)(&tmpStrToClean),
+                static (buffer, strToCleanPtr) =>
                 {
-                    if (!IsBidiControlCharacter(c))
+                    int destIndex = 0;
+                    foreach (char c in *(ReadOnlySpan<char>*)strToCleanPtr)
                     {
-                        buffer[destIndex++] = c;
+                        if (!IsBidiControlCharacter(c))
+                        {
+                            buffer[destIndex++] = c;
+                        }
                     }
+                    Debug.Assert(buffer.Length == destIndex);
                 }
-                Debug.Assert(buffer.Length == destIndex);
-            });
+            );
 #pragma warning restore CS8500
         }
     }

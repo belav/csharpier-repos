@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<UInt16>>() / sizeof(UInt16);
 
         public bool Succeeded { get; set; } = true;
 
@@ -72,20 +73,28 @@ namespace JIT.HardwareIntrinsics.General
             }
 
             object result = typeof(Vector64)
-                                .GetMethod(nameof(Vector64.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
+                .GetMethod(nameof(Vector64.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1], values[2], values[3] });
 
             ValidateResult((Vector64<UInt16>)(result), values);
         }
 
-        private void ValidateResult(Vector64<UInt16> result, UInt16[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector64<UInt16> result,
+            UInt16[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             UInt16[] resultElements = new UInt16[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<UInt16, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(UInt16[] resultElements, UInt16[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            UInt16[] resultElements,
+            UInt16[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -100,9 +109,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64.Create(UInt16): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64.Create(UInt16): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

@@ -22,13 +22,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForEachToFor
     public partial class ConvertForEachToForTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
-            Workspace workspace, TestParameters parameters)
-            => new CSharpConvertForEachToForCodeRefactoringProvider();
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertForEachToForCodeRefactoringProvider();
 
-        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(true, NotificationOption2.Silent);
+        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Silent
+        );
 
-        private OptionsCollection ImplicitTypeEverywhere
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypeEverywhere =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithSilent },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithSilent },
@@ -38,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForEachToFor
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task EmptyBlockBody()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -50,7 +55,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -69,7 +75,8 @@ class Test
         [Fact]
         public async Task EmptyBody()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -79,7 +86,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -95,7 +103,8 @@ class Test
         [Fact]
         public async Task Body()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -105,7 +114,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -125,7 +135,8 @@ class Test
         [Fact]
         public async Task BlockBody()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -138,7 +149,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -158,7 +170,8 @@ class Test
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task Comment()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -171,7 +184,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -191,7 +205,8 @@ class Test
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task Comment2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -204,7 +219,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -224,7 +240,8 @@ class Test
         [Fact]
         public async Task Comment3()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -234,7 +251,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -250,7 +268,8 @@ class Test
         [Fact]
         public async Task Comment4()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -260,7 +279,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -280,7 +300,8 @@ class Test
         [Fact]
         public async Task Comment5()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -290,7 +311,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -310,7 +332,8 @@ class Test
         [Fact]
         public async Task Comment6()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -321,7 +344,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -342,7 +366,8 @@ class Test
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task Comment7()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -354,7 +379,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -374,7 +400,8 @@ class Test
         [Fact]
         public async Task TestCommentsInTheMiddleOfParentheses()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -384,7 +411,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -400,7 +428,8 @@ class Test
         [Fact]
         public async Task TestCommentsAtBeginningOfParentheses()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -410,7 +439,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -426,7 +456,8 @@ class Test
         [Fact]
         public async Task TestCommentsAtTheEndOfParentheses()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -436,7 +467,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -452,7 +484,8 @@ class Test
         [Fact]
         public async Task CollectionStatement()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -464,7 +497,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -484,7 +518,8 @@ class Test
         [Fact]
         public async Task CollectionConflict()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -498,7 +533,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -520,7 +556,8 @@ class Test
         [Fact]
         public async Task VariableWritten()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -533,7 +570,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -553,7 +591,8 @@ class Test
         [Fact]
         public async Task IndexConflict()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -566,7 +605,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -586,7 +626,8 @@ class Test
         [Fact]
         public async Task StructPropertyReadFromAndDiscarded()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     struct Struct
@@ -604,7 +645,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     struct Struct
@@ -629,7 +671,8 @@ class Test
         [Fact]
         public async Task StructPropertyReadFromAndAssignedToLocal()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     struct Struct
@@ -647,7 +690,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     struct Struct
@@ -672,7 +716,8 @@ class Test
         [Fact]
         public async Task WrongCaretPosition()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -692,7 +737,8 @@ class Test
         [WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task TestCaretBefore()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -704,7 +750,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -724,7 +771,8 @@ class Test
         [WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task TestCaretAfter()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -736,7 +784,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -756,7 +805,8 @@ class Test
         [WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task TestSelection()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -768,7 +818,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -787,7 +838,8 @@ class Test
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task Field()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     int[] array = new int[] { 1, 3, 4 };
@@ -800,7 +852,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     int[] array = new int[] { 1, 3, 4 };
@@ -820,7 +873,8 @@ class Test
         [Fact]
         public async Task ArrayElement()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -833,7 +887,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -853,7 +908,8 @@ class Test
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task Parameter()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method(int[] array)
@@ -864,7 +920,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method(int[] array)
@@ -882,7 +939,8 @@ class Test
         [Fact, WorkItem(31621, "https://github.com/dotnet/roslyn/issues/31621")]
         public async Task Property()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     int [] Prop { get; } = new int[] { 1, 2, 3 };
@@ -895,7 +953,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     int [] Prop { get; } = new int[] { 1, 2, 3 };
@@ -915,7 +974,8 @@ class Test
         [Fact]
         public async Task Interface()
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -930,7 +990,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -952,7 +1013,8 @@ class Test
         [Fact]
         public async Task IListOfT()
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -967,7 +1029,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections.Generic;
 
 class Test
@@ -989,7 +1052,8 @@ class Test
         [Fact]
         public async Task IReadOnlyListOfT()
         {
-            var text = @"
+            var text =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -1014,7 +1078,8 @@ class ReadOnly<T> : IReadOnlyList<T>
     IEnumerator IEnumerable.GetEnumerator() => throw new System.NotImplementedException();
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System.Collections;
 using System.Collections.Generic;
 
@@ -1046,7 +1111,8 @@ class ReadOnly<T> : IReadOnlyList<T>
         [Fact]
         public async Task IList()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 
@@ -1082,7 +1148,8 @@ class List : IList
     public void RemoveAt(int index) => throw new NotImplementedException();
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 
@@ -1125,10 +1192,13 @@ class List : IList
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/29740")]
         public async Task ImmutableArray()
         {
-            var text = @"
+            var text =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
-    <MetadataReference>" + typeof(ImmutableArray<>).Assembly.Location + @"</MetadataReference>
+    <MetadataReference>"
+                + typeof(ImmutableArray<>).Assembly.Location
+                + @"</MetadataReference>
         <Document>
 using System;
 using System.Collections.Immutable;
@@ -1147,7 +1217,8 @@ class Test
     </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections.Immutable;
 
@@ -1169,7 +1240,8 @@ class Test
         [Fact]
         public async Task ExplicitInterface()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1195,7 +1267,8 @@ class Explicit : IReadOnlyList<int>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1228,7 +1301,8 @@ class Explicit : IReadOnlyList<int>
         [Fact]
         public async Task DoubleExplicitInterface()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1263,7 +1337,8 @@ class Explicit : IReadOnlyList<int>, IReadOnlyList<string>
         [Fact]
         public async Task DoubleExplicitInterfaceWithExplicitType()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1293,7 +1368,8 @@ class Explicit : IReadOnlyList<int>, IReadOnlyList<string>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1330,7 +1406,8 @@ class Explicit : IReadOnlyList<int>, IReadOnlyList<string>
         [Fact]
         public async Task MixedInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1360,7 +1437,8 @@ class Mixed : IReadOnlyList<int>, IReadOnlyList<string>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1396,7 +1474,8 @@ class Mixed : IReadOnlyList<int>, IReadOnlyList<string>
         [Fact]
         public async Task MixedInterfaceImplementationWithExplicitType()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1426,7 +1505,8 @@ class Mixed : IReadOnlyList<int>, IReadOnlyList<string>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1463,7 +1543,8 @@ class Mixed : IReadOnlyList<int>, IReadOnlyList<string>
         [Fact]
         public async Task PreserveUserExpression()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1495,7 +1576,8 @@ namespace NS
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1534,7 +1616,8 @@ namespace NS
         [Fact]
         public async Task EmbededStatement()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1550,7 +1633,8 @@ class Test
         [Fact]
         public async Task EmbededStatement2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1561,7 +1645,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1582,7 +1667,8 @@ class Test
         [Fact]
         public async Task IndexConflict2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1595,7 +1681,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1615,7 +1702,8 @@ class Test
         [Fact]
         public async Task UseTypeAsUsedInForeach()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1628,7 +1716,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1648,7 +1737,8 @@ class Test
         [Fact]
         public async Task String()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1660,7 +1750,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1681,7 +1772,8 @@ class Test
         [Fact]
         public async Task StringLocalConst()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1694,7 +1786,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1714,7 +1807,8 @@ class Test
         [Fact]
         public async Task StringConst()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     const string test = ""test"";
@@ -1728,7 +1822,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     const string test = ""test"";
@@ -1749,7 +1844,8 @@ class Test
         [Fact]
         public async Task ElementExplicitCast()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1762,7 +1858,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1782,7 +1879,8 @@ class Test
         [Fact, WorkItem(50469, "https://github.com/dotnet/roslyn/issues/50469")]
         public async Task PreventExplicitCastToVar()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1795,7 +1893,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1815,7 +1914,8 @@ class Test
         [Fact]
         public async Task NotAssignable()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1834,7 +1934,8 @@ class Test
         [Fact]
         public async Task ElementMissing()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1853,7 +1954,8 @@ class Test
         [Fact]
         public async Task ElementMissing2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1871,7 +1973,8 @@ class Test
         [Fact]
         public async Task StringExplicitType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1883,7 +1986,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class Test
 {
     void Method()
@@ -1904,7 +2008,8 @@ class Test
         [Fact]
         public async Task Var()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1930,7 +2035,8 @@ class Explicit : IReadOnlyList<int>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1963,7 +2069,8 @@ class Explicit : IReadOnlyList<int>
         [Fact]
         public async Task ArrayRank2()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     void Method()
@@ -1981,7 +2088,8 @@ class Test
         [Fact, WorkItem(48950, "https://github.com/dotnet/roslyn/issues/48950")]
         public async Task NullableReferenceVar()
         {
-            var text = @"
+            var text =
+                @"
 #nullable enable
 class Test
 {
@@ -1994,7 +2102,8 @@ class Test
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 #nullable enable
 class Test
 {

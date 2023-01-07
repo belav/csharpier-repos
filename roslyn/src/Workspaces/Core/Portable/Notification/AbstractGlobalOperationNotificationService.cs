@@ -8,7 +8,8 @@ using System;
 
 namespace Microsoft.CodeAnalysis.Notification
 {
-    internal abstract class AbstractGlobalOperationNotificationService : IGlobalOperationNotificationService
+    internal abstract class AbstractGlobalOperationNotificationService
+        : IGlobalOperationNotificationService
     {
         public abstract event EventHandler Started;
         public abstract event EventHandler<GlobalOperationEventArgs> Stopped;

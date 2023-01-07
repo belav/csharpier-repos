@@ -94,7 +94,9 @@ namespace System.SpanTests
             // Cannot pass variant array, if array type is not a valuetype.
             string[] a = { "Hello" };
             Assert.Throws<ArrayTypeMismatchException>(() => new Span<object>(a).DontBox());
-            Assert.Throws<ArrayTypeMismatchException>(() => new Span<object>(a, 0, a.Length).DontBox());
+            Assert.Throws<ArrayTypeMismatchException>(
+                () => new Span<object>(a, 0, a.Length).DontBox()
+            );
         }
 
         [Fact]

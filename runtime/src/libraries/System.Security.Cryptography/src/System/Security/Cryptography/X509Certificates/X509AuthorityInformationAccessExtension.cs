@@ -19,8 +19,7 @@ namespace System.Security.Cryptography.X509Certificates
         ///   Initializes a new instance of the <see cref="X509AuthorityInformationAccessExtension" />
         ///   class.
         /// </summary>
-        public X509AuthorityInformationAccessExtension()
-            : base(Oids.AuthorityInformationAccessOid)
+        public X509AuthorityInformationAccessExtension() : base(Oids.AuthorityInformationAccessOid)
         {
             _decoded = Array.Empty<AccessDescriptionAsn>();
         }
@@ -62,8 +61,10 @@ namespace System.Security.Cryptography.X509Certificates
         /// <exception cref="CryptographicException">
         ///   <paramref name="rawData" /> did not decode as an Authority Information Access extension.
         /// </exception>
-        public X509AuthorityInformationAccessExtension(ReadOnlySpan<byte> rawData, bool critical = false)
-            : base(Oids.AuthorityInformationAccessOid, rawData, critical)
+        public X509AuthorityInformationAccessExtension(
+            ReadOnlySpan<byte> rawData,
+            bool critical = false
+        ) : base(Oids.AuthorityInformationAccessOid, rawData, critical)
         {
             _decoded = Decode(RawData);
         }
@@ -94,8 +95,14 @@ namespace System.Security.Cryptography.X509Certificates
         public X509AuthorityInformationAccessExtension(
             IEnumerable<string>? ocspUris,
             IEnumerable<string>? caIssuersUris,
-            bool critical = false)
-            : base(Oids.AuthorityInformationAccessOid, Encode(ocspUris, caIssuersUris), critical, skipCopy: true)
+            bool critical = false
+        )
+            : base(
+                Oids.AuthorityInformationAccessOid,
+                Encode(ocspUris, caIssuersUris),
+                critical,
+                skipCopy: true
+            )
         {
             _decoded = Decode(RawData);
         }
@@ -174,7 +181,8 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new ArgumentException(
                     SR.Format(SR.Arg_EmptyOrNullString_Named, "accessMethodOid.Value"),
-                    nameof(accessMethodOid));
+                    nameof(accessMethodOid)
+                );
             }
 
             return EnumerateUris(accessMethodOid.Value);
@@ -243,7 +251,10 @@ namespace System.Security.Cryptography.X509Certificates
         {
             try
             {
-                AsnValueReader reader = new AsnValueReader(authorityInfoAccessSyntax, AsnEncodingRules.DER);
+                AsnValueReader reader = new AsnValueReader(
+                    authorityInfoAccessSyntax,
+                    AsnEncodingRules.DER
+                );
                 AsnValueReader descriptions = reader.ReadSequence();
                 reader.ThrowIfNotEmpty();
 
@@ -264,7 +275,8 @@ namespace System.Security.Cryptography.X509Certificates
                     AccessDescriptionAsn.Decode(
                         ref descriptions,
                         authorityInfoAccessSyntax,
-                        out decoded[count]);
+                        out decoded[count]
+                    );
 
                     count++;
                 }
@@ -279,7 +291,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         private static byte[] Encode(
             IEnumerable<string>? ocspUris,
-            IEnumerable<string>? caIssuersUris)
+            IEnumerable<string>? caIssuersUris
+        )
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             bool empty = true;
@@ -299,7 +312,8 @@ namespace System.Security.Cryptography.X509Certificates
                     writer.WriteCharacterString(
                         UniversalTagNumber.IA5String,
                         value,
-                        new Asn1Tag(TagClass.ContextSpecific, 6));
+                        new Asn1Tag(TagClass.ContextSpecific, 6)
+                    );
                 }
                 catch (System.Text.EncoderFallbackException e)
                 {

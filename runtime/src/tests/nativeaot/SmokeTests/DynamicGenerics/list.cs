@@ -10,7 +10,6 @@ using System.Linq;
 using TypeOfRepo;
 using System.Runtime.CompilerServices;
 
-
 public class DynamicListTests
 {
     public class NonGenericBase
@@ -18,7 +17,7 @@ public class DynamicListTests
         public int IntValue { get; set; }
     }
 
-    public struct StructWrapper<T> where T: NonGenericBase
+    public struct StructWrapper<T> where T : NonGenericBase
     {
         public T Reference;
     }
@@ -29,15 +28,20 @@ public class DynamicListTests
 
         public override bool Equals(object obj)
         {
-            return (obj is StructWrapperWithEquals<T>) && ((StructWrapperWithEquals<T>)obj).Reference.Equals(Reference);
+            return (obj is StructWrapperWithEquals<T>)
+                && ((StructWrapperWithEquals<T>)obj).Reference.Equals(Reference);
         }
+
         public override int GetHashCode()
         {
             return Reference.GetHashCode();
         }
     }
 
-    public class DummyForRdXml : NonGenericBase, IEquatable<DummyForRdXml>, IComparable<DummyForRdXml>
+    public class DummyForRdXml
+        : NonGenericBase,
+            IEquatable<DummyForRdXml>,
+            IComparable<DummyForRdXml>
     {
         public bool Equals(DummyForRdXml other)
         {
@@ -50,7 +54,8 @@ public class DynamicListTests
         }
     }
 
-    public struct EquatableStructWrapper<T> : IEquatable<EquatableStructWrapper<T>> where T: IEquatable<T>
+    public struct EquatableStructWrapper<T> : IEquatable<EquatableStructWrapper<T>>
+        where T : IEquatable<T>
     {
         public T Reference;
 
@@ -60,7 +65,8 @@ public class DynamicListTests
         }
     }
 
-    public struct ComparableStructWrapper<T> : IComparable<ComparableStructWrapper<T>> where T: IComparable<T>
+    public struct ComparableStructWrapper<T> : IComparable<ComparableStructWrapper<T>>
+        where T : IComparable<T>
     {
         public T Reference;
 
@@ -71,18 +77,28 @@ public class DynamicListTests
     }
 
     public class NonGenericElement1 : NonGenericBase { }
-    public class NonGenericElement2 : NonGenericBase { }
-    public class NonGenericElement3 : NonGenericBase { }
-    public class NonGenericElement4 : NonGenericBase { }
-    public class NonGenericElement5 : NonGenericBase { }
-    public class NonGenericElement6 : NonGenericBase { }
-    public class NonGenericElement7 : NonGenericBase { }
-    public class NonGenericElement8 : NonGenericBase { }
-    public class NonGenericElement9 : NonGenericBase { }
-    public class NonGenericElement10 : NonGenericBase { }
-    public class NonGenericElement11 : NonGenericBase { }
-    public class NonGenericElement12 : NonGenericBase { }
 
+    public class NonGenericElement2 : NonGenericBase { }
+
+    public class NonGenericElement3 : NonGenericBase { }
+
+    public class NonGenericElement4 : NonGenericBase { }
+
+    public class NonGenericElement5 : NonGenericBase { }
+
+    public class NonGenericElement6 : NonGenericBase { }
+
+    public class NonGenericElement7 : NonGenericBase { }
+
+    public class NonGenericElement8 : NonGenericBase { }
+
+    public class NonGenericElement9 : NonGenericBase { }
+
+    public class NonGenericElement10 : NonGenericBase { }
+
+    public class NonGenericElement11 : NonGenericBase { }
+
+    public class NonGenericElement12 : NonGenericBase { }
 
     public class EquatableElement1 : NonGenericBase, IEquatable<EquatableElement1>
     {
@@ -104,8 +120,10 @@ public class DynamicListTests
     {
         public override bool Equals(object obj)
         {
-            return (obj is NonGenericElementWithEquals1) && ((NonGenericElementWithEquals1)obj).IntValue == IntValue;
+            return (obj is NonGenericElementWithEquals1)
+                && ((NonGenericElementWithEquals1)obj).IntValue == IntValue;
         }
+
         public override int GetHashCode()
         {
             return IntValue;
@@ -120,7 +138,8 @@ public class DynamicListTests
         }
     }
 
-    public class NonGenericWrappedBaseComparer<T> : IComparer<StructWrapper<T>> where T : NonGenericBase
+    public class NonGenericWrappedBaseComparer<T> : IComparer<StructWrapper<T>>
+        where T : NonGenericBase
     {
         public int Compare(StructWrapper<T> x, StructWrapper<T> y)
         {
@@ -140,19 +159,25 @@ public class DynamicListTests
             }
         }
 
-        public static IEnumerable<StructWrapper<T>> WrapInStructWrapper<T>(IEnumerable<T> enumeration) where T: NonGenericBase
+        public static IEnumerable<StructWrapper<T>> WrapInStructWrapper<T>(
+            IEnumerable<T> enumeration
+        ) where T : NonGenericBase
         {
             foreach (var e in enumeration)
                 yield return new StructWrapper<T> { Reference = e };
         }
 
-        public static IEnumerable<StructWrapperWithEquals<T>> WrapInStructWrapperWithEquals<T>(IEnumerable<T> enumeration) where T : NonGenericBase
+        public static IEnumerable<StructWrapperWithEquals<T>> WrapInStructWrapperWithEquals<T>(
+            IEnumerable<T> enumeration
+        ) where T : NonGenericBase
         {
             foreach (var e in enumeration)
                 yield return new StructWrapperWithEquals<T> { Reference = e };
         }
 
-        public static IEnumerable<EquatableStructWrapper<T>> WrapInEquatableStructWrapper<T>(IEnumerable<T> enumeration) where T : NonGenericBase, IEquatable<T>
+        public static IEnumerable<EquatableStructWrapper<T>> WrapInEquatableStructWrapper<T>(
+            IEnumerable<T> enumeration
+        ) where T : NonGenericBase, IEquatable<T>
         {
             foreach (var e in enumeration)
                 yield return new EquatableStructWrapper<T> { Reference = e };
@@ -220,7 +245,8 @@ public class DynamicListTests
 
         public T GetItem(object list, int index)
         {
-            return (T)ListTypeInfo.GetDeclaredProperty("Item").GetValue(list, new object[] { index });
+            return (T)
+                ListTypeInfo.GetDeclaredProperty("Item").GetValue(list, new object[] { index });
         }
 
         public void CallAdd(object list, T item)
@@ -230,12 +256,14 @@ public class DynamicListTests
 
         public bool CallRemove(object list, T item)
         {
-            return (bool)ListTypeInfo.GetDeclaredMethod("Remove").Invoke(list, new object[] { item });
+            return (bool)
+                ListTypeInfo.GetDeclaredMethod("Remove").Invoke(list, new object[] { item });
         }
 
         public int CallRemoveAll(object list, Predicate<T> match)
         {
-            return (int)ListTypeInfo.GetDeclaredMethod("RemoveAll").Invoke(list, new object[] { match });
+            return (int)
+                ListTypeInfo.GetDeclaredMethod("RemoveAll").Invoke(list, new object[] { match });
         }
 
         public void CallAddRange(object list, IEnumerable<T> collection)
@@ -246,12 +274,15 @@ public class DynamicListTests
         public object CallGetRange(object list, int index, int count)
         {
             // This method returns object on purpose so that it doesn't force a static reference to List<T>
-            return ListTypeInfo.GetDeclaredMethod("GetRange").Invoke(list, new object[] { index, count });
+            return ListTypeInfo
+                .GetDeclaredMethod("GetRange")
+                .Invoke(list, new object[] { index, count });
         }
 
         public bool CallContains(object list, T item)
         {
-            return (bool)ListTypeInfo.GetDeclaredMethod("Contains").Invoke(list, new object[] { item });
+            return (bool)
+                ListTypeInfo.GetDeclaredMethod("Contains").Invoke(list, new object[] { item });
         }
 
         public void CallSort(object list, Comparison<T> comparison)
@@ -288,7 +319,7 @@ public class DynamicListTests
     public static class Driver<T> where T : new()
     {
         private static ListAccessor<T> accessor = new ListAccessor<T>();
-        
+
         public static void TestGetRange()
         {
             object list = accessor.Construct();
@@ -342,7 +373,7 @@ public class DynamicListTests
 
             T item1 = new T();
             T item2 = new T();
-            
+
             accessor.CallAdd(list, item1);
             Assert.AreEqual(1, accessor.GetCount(list));
 
@@ -370,7 +401,10 @@ public class DynamicListTests
                 Assert.AreEqual(item1, accessor.GetItem(list, 1));
                 Assert.AreEqual(item1, accessor.GetItem(list, 2));
 
-                int numRemoved = accessor.CallRemoveAll(list, x => item1.GetHashCode() == x.GetHashCode() && Object.ReferenceEquals(item1, x));
+                int numRemoved = accessor.CallRemoveAll(
+                    list,
+                    x => item1.GetHashCode() == x.GetHashCode() && Object.ReferenceEquals(item1, x)
+                );
                 Assert.AreEqual(2, numRemoved);
                 Assert.AreEqual(1, accessor.GetCount(list));
                 Assert.AreEqual(item2, accessor.GetItem(list, 0));
@@ -462,7 +496,7 @@ public class DynamicListTests
             // This is the empty array that is declared as a static in IList
             Type arrayType = typeof(T).MakeArrayType();
             Assert.AreEqual(arrayType, array.GetType());
-            
+
             // Adding an element will make List allocate actual array
             T item = new T();
             accessor.CallAdd(list, item);
@@ -484,7 +518,11 @@ public class DynamicListTests
             Assert.AreEqual(expectedResult, accessor.CallContains(list, elementToFind));
         }
 
-        public static void TestSortWithComparison(IEnumerable<T> enumToSort, Comparison<T> comparison, IEnumerable<T> expectedOrder)
+        public static void TestSortWithComparison(
+            IEnumerable<T> enumToSort,
+            Comparison<T> comparison,
+            IEnumerable<T> expectedOrder
+        )
         {
             object list = accessor.Construct(enumToSort);
             accessor.CallSort(list, comparison);
@@ -498,7 +536,11 @@ public class DynamicListTests
             }
         }
 
-        public static void TestSortWithComparer(IEnumerable<T> enumToSort, IComparer<T> comparer, IEnumerable<T> expectedOrder)
+        public static void TestSortWithComparer(
+            IEnumerable<T> enumToSort,
+            IComparer<T> comparer,
+            IEnumerable<T> expectedOrder
+        )
         {
             object list = accessor.Construct(enumToSort);
             accessor.CallSort(list, comparer);
@@ -527,10 +569,15 @@ public class DynamicListTests
     [TestMethod]
     public static void TestAddRange()
     {
-        Driver<NonGenericElementWithEquals1>.TestAddRange(Producer.Produce<NonGenericElementWithEquals1>(10));
-        
+        Driver<NonGenericElementWithEquals1>.TestAddRange(
+            Producer.Produce<NonGenericElementWithEquals1>(10)
+        );
+
         Driver<StructWrapperWithEquals<NonGenericElementWithEquals1>>.TestAddRange(
-            Producer.WrapInStructWrapperWithEquals(Producer.Produce<NonGenericElementWithEquals1>(10)));
+            Producer.WrapInStructWrapperWithEquals(
+                Producer.Produce<NonGenericElementWithEquals1>(10)
+            )
+        );
     }
 
     [TestMethod]
@@ -592,16 +639,27 @@ public class DynamicListTests
     [TestMethod]
     public static void TestContains()
     {
-        
         {
             // Should be compared with IEquatable
-            Driver<EquatableElement1>.TestContains(Producer.Produce<EquatableElement1>(5), new EquatableElement1 { IntValue = 1 }, true);
-            Driver<EquatableElement1>.TestContains(Producer.Produce<EquatableElement1>(5), new EquatableElement1 { IntValue = 5 }, false);
-        
+            Driver<EquatableElement1>.TestContains(
+                Producer.Produce<EquatableElement1>(5),
+                new EquatableElement1 { IntValue = 1 },
+                true
+            );
+            Driver<EquatableElement1>.TestContains(
+                Producer.Produce<EquatableElement1>(5),
+                new EquatableElement1 { IntValue = 5 },
+                false
+            );
+
             // Should be compared by calling Equals(object other)
             NonGenericElement10 item = new NonGenericElement10();
             Driver<NonGenericElement10>.TestContains(Producer.MakeEnumerable(item), item, true);
-            Driver<NonGenericElement10>.TestContains(Producer.MakeEnumerable(item), new NonGenericElement10(), false);
+            Driver<NonGenericElement10>.TestContains(
+                Producer.MakeEnumerable(item),
+                new NonGenericElement10(),
+                false
+            );
         }
 
         // Struct version of the above two
@@ -609,17 +667,36 @@ public class DynamicListTests
             // Should be compared with IEquatable
             Driver<EquatableStructWrapper<EquatableElement1>>.TestContains(
                 Producer.WrapInEquatableStructWrapper(Producer.Produce<EquatableElement1>(5)),
-                new EquatableStructWrapper<EquatableElement1> { Reference = new EquatableElement1 { IntValue = 1 } },
-                true);
+                new EquatableStructWrapper<EquatableElement1>
+                {
+                    Reference = new EquatableElement1 { IntValue = 1 }
+                },
+                true
+            );
             Driver<EquatableStructWrapper<EquatableElement1>>.TestContains(
                 Producer.WrapInEquatableStructWrapper(Producer.Produce<EquatableElement1>(5)),
-                new EquatableStructWrapper<EquatableElement1> { Reference = new EquatableElement1 { IntValue = 5 } },
-                false);
+                new EquatableStructWrapper<EquatableElement1>
+                {
+                    Reference = new EquatableElement1 { IntValue = 5 }
+                },
+                false
+            );
 
             // Should be compared by calling Equals(object other)
-            StructWrapper<NonGenericElement10> item = new StructWrapper<NonGenericElement10> { Reference = new NonGenericElement10() };
-            Driver<StructWrapper<NonGenericElement10>>.TestContains(Producer.MakeEnumerable(item), item, true);
-            Driver<StructWrapper<NonGenericElement10>>.TestContains(Producer.MakeEnumerable(item), new StructWrapper<NonGenericElement10> { Reference = new NonGenericElement10() }, false);
+            StructWrapper<NonGenericElement10> item = new StructWrapper<NonGenericElement10>
+            {
+                Reference = new NonGenericElement10()
+            };
+            Driver<StructWrapper<NonGenericElement10>>.TestContains(
+                Producer.MakeEnumerable(item),
+                item,
+                true
+            );
+            Driver<StructWrapper<NonGenericElement10>>.TestContains(
+                Producer.MakeEnumerable(item),
+                new StructWrapper<NonGenericElement10> { Reference = new NonGenericElement10() },
+                false
+            );
         }
     }
 
@@ -634,18 +711,29 @@ public class DynamicListTests
             Driver<NonGenericElement11>.TestSortWithComparison(
                 Producer.MakeEnumerable(item1, item2, item3),
                 (x, y) => x.IntValue.CompareTo(y.IntValue),
-                Producer.MakeEnumerable(item3, item1, item2));
+                Producer.MakeEnumerable(item3, item1, item2)
+            );
         }
 
         {
-            StructWrapper<NonGenericElement11> item1 = new StructWrapper<NonGenericElement11> { Reference = new NonGenericElement11 { IntValue = 2 } };
-            StructWrapper<NonGenericElement11> item2 = new StructWrapper<NonGenericElement11> { Reference = new NonGenericElement11 { IntValue = 3 } };
-            StructWrapper<NonGenericElement11> item3 = new StructWrapper<NonGenericElement11> { Reference = new NonGenericElement11 { IntValue = 1 } };
+            StructWrapper<NonGenericElement11> item1 = new StructWrapper<NonGenericElement11>
+            {
+                Reference = new NonGenericElement11 { IntValue = 2 }
+            };
+            StructWrapper<NonGenericElement11> item2 = new StructWrapper<NonGenericElement11>
+            {
+                Reference = new NonGenericElement11 { IntValue = 3 }
+            };
+            StructWrapper<NonGenericElement11> item3 = new StructWrapper<NonGenericElement11>
+            {
+                Reference = new NonGenericElement11 { IntValue = 1 }
+            };
 
             Driver<StructWrapper<NonGenericElement11>>.TestSortWithComparison(
                 Producer.MakeEnumerable(item1, item2, item3),
                 (x, y) => x.Reference.IntValue.CompareTo(y.Reference.IntValue),
-                Producer.MakeEnumerable(item3, item1, item2));
+                Producer.MakeEnumerable(item3, item1, item2)
+            );
         }
     }
 
@@ -661,7 +749,8 @@ public class DynamicListTests
             Driver<NonGenericElement12>.TestSortWithComparer(
                 Producer.MakeEnumerable(item1, item2, item3),
                 new NonGenericBaseComparer(),
-                Producer.MakeEnumerable(item3, item1, item2));
+                Producer.MakeEnumerable(item3, item1, item2)
+            );
         }
 
         // Rely on IComparable<T>
@@ -673,31 +762,55 @@ public class DynamicListTests
             Driver<ComparableElement1>.TestSortWithComparer(
                 Producer.MakeEnumerable(item1, item2, item3),
                 null,
-                Producer.MakeEnumerable(item3, item1, item2));
+                Producer.MakeEnumerable(item3, item1, item2)
+            );
         }
 
         // Provide a comparer
         {
-            StructWrapper<NonGenericElement12> item1 = new StructWrapper<NonGenericElement12> { Reference = new NonGenericElement12 { IntValue = 2 } };
-            StructWrapper<NonGenericElement12> item2 = new StructWrapper<NonGenericElement12> { Reference = new NonGenericElement12 { IntValue = 3 } };
-            StructWrapper<NonGenericElement12> item3 = new StructWrapper<NonGenericElement12> { Reference = new NonGenericElement12 { IntValue = 1 } };
+            StructWrapper<NonGenericElement12> item1 = new StructWrapper<NonGenericElement12>
+            {
+                Reference = new NonGenericElement12 { IntValue = 2 }
+            };
+            StructWrapper<NonGenericElement12> item2 = new StructWrapper<NonGenericElement12>
+            {
+                Reference = new NonGenericElement12 { IntValue = 3 }
+            };
+            StructWrapper<NonGenericElement12> item3 = new StructWrapper<NonGenericElement12>
+            {
+                Reference = new NonGenericElement12 { IntValue = 1 }
+            };
 
             Driver<StructWrapper<NonGenericElement12>>.TestSortWithComparer(
                 Producer.MakeEnumerable(item1, item2, item3),
                 new NonGenericWrappedBaseComparer<NonGenericElement12>(),
-                Producer.MakeEnumerable(item3, item1, item2));
+                Producer.MakeEnumerable(item3, item1, item2)
+            );
         }
 
         // Rely on IComparable<T>
         {
-            ComparableStructWrapper<ComparableElement1> item1 = new ComparableStructWrapper<ComparableElement1> { Reference = new ComparableElement1 { IntValue = 2 } };
-            ComparableStructWrapper<ComparableElement1> item2 = new ComparableStructWrapper<ComparableElement1> { Reference = new ComparableElement1 { IntValue = 3 } };
-            ComparableStructWrapper<ComparableElement1> item3 = new ComparableStructWrapper<ComparableElement1> { Reference = new ComparableElement1 { IntValue = 1 } };
+            ComparableStructWrapper<ComparableElement1> item1 =
+                new ComparableStructWrapper<ComparableElement1>
+                {
+                    Reference = new ComparableElement1 { IntValue = 2 }
+                };
+            ComparableStructWrapper<ComparableElement1> item2 =
+                new ComparableStructWrapper<ComparableElement1>
+                {
+                    Reference = new ComparableElement1 { IntValue = 3 }
+                };
+            ComparableStructWrapper<ComparableElement1> item3 =
+                new ComparableStructWrapper<ComparableElement1>
+                {
+                    Reference = new ComparableElement1 { IntValue = 1 }
+                };
 
             Driver<ComparableStructWrapper<ComparableElement1>>.TestSortWithComparer(
                 Producer.MakeEnumerable(item1, item2, item3),
                 null,
-                Producer.MakeEnumerable(item3, item1, item2));
+                Producer.MakeEnumerable(item3, item1, item2)
+            );
         }
     }
 }

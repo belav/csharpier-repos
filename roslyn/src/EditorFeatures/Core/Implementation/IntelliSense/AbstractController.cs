@@ -13,7 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
-    internal abstract class AbstractController<TSession, TModel, TPresenterSession, TEditorSession> : ForegroundThreadAffinitizedObject, IController<TModel>
+    internal abstract class AbstractController<TSession, TModel, TPresenterSession, TEditorSession>
+        : ForegroundThreadAffinitizedObject,
+            IController<TModel>
         where TSession : class, ISession<TModel>
         where TPresenterSession : IIntelliSensePresenterSession
     {
@@ -32,8 +34,15 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 
         protected bool IsSessionActive => sessionOpt != null;
 
-        protected AbstractController(IThreadingContext threadingContext, ITextView textView, ITextBuffer subjectBuffer, IIntelliSensePresenter<TPresenterSession, TEditorSession> presenter, IAsynchronousOperationListener asyncListener, IDocumentProvider documentProvider, string asyncOperationId)
-            : base(threadingContext)
+        protected AbstractController(
+            IThreadingContext threadingContext,
+            ITextView textView,
+            ITextBuffer subjectBuffer,
+            IIntelliSensePresenter<TPresenterSession, TEditorSession> presenter,
+            IAsynchronousOperationListener asyncListener,
+            IDocumentProvider documentProvider,
+            string asyncOperationId
+        ) : base(threadingContext)
         {
             this.TextView = textView;
             this.SubjectBuffer = subjectBuffer;
@@ -73,7 +82,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 
         void IController<TModel>.OnModelUpdated(TModel result, bool updateController)
         {
-            // This is only called from the model computation if it was not cancelled.  And if it was 
+            // This is only called from the model computation if it was not cancelled.  And if it was
             // not cancelled then we must have a pointer to it (as well as the presenter session).
             AssertIsForeground();
             VerifySessionIsActive();
@@ -81,14 +90,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
             this.OnModelUpdated(result, updateController);
         }
 
-        IAsyncToken IController<TModel>.BeginAsyncOperation(string name, object tag, string filePath, int lineNumber)
+        IAsyncToken IController<TModel>.BeginAsyncOperation(
+            string name,
+            object tag,
+            string filePath,
+            int lineNumber
+        )
         {
             AssertIsForeground();
             VerifySessionIsActive();
-            name = String.IsNullOrEmpty(name)
-                ? _asyncOperationId
-                : $"{_asyncOperationId} - {name}";
-            return _asyncListener.BeginAsyncOperation(name, tag, filePath: filePath, lineNumber: lineNumber);
+            name = String.IsNullOrEmpty(name) ? _asyncOperationId : $"{_asyncOperationId} - {name}";
+            return _asyncListener.BeginAsyncOperation(
+                name,
+                tag,
+                filePath: filePath,
+                lineNumber: lineNumber
+            );
         }
 
         protected void VerifySessionIsActive()

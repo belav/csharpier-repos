@@ -37,7 +37,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// (they could but this would make it difficult (or near impossible) to clear caches.
         /// Allowing distinct but equivalent BDDs is also a tradeoff between efficiency and flexibility.
         /// </summary>
-        private readonly ConcurrentDictionary<(int ordinal, BDD? one, BDD? zero), BDD> _bddCache = new();
+        private readonly ConcurrentDictionary<(int ordinal, BDD? one, BDD? zero), BDD> _bddCache =
+            new();
 
         /// <summary>
         /// Generator for minterms.
@@ -54,7 +55,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Returns the BDD from the cache if it already exists.
         /// </summary>
         public BDD GetOrCreateBDD(int ordinal, BDD? one, BDD? zero) =>
-            _bddCache.GetOrAdd((ordinal, one, zero), static key => new BDD(key.ordinal, key.one, key.zero));
+            _bddCache.GetOrAdd(
+                (ordinal, one, zero),
+                static key => new BDD(key.ordinal, key.one, key.zero)
+            );
 
         #region IBooleanAlgebra members
 
@@ -72,12 +76,27 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Complement a
         /// </summary>
         public BDD Not(BDD a) =>
-            a == False ? True :
-            a == True ? False :
-            _opCache.GetOrAdd((BoolOp.Not, a, null), static (key, algebra) => key.a.IsLeaf ?
-                algebra.GetOrCreateBDD(algebra.CombineTerminals(BoolOp.Not, key.a.Ordinal, 0), null, null) : // multi-terminal case
-                algebra.GetOrCreateBDD(key.a.Ordinal, algebra.Not(key.a.One), algebra.Not(key.a.Zero)),
-                this);
+            a == False
+                ? True
+                : a == True
+                    ? False
+                    : _opCache.GetOrAdd(
+                        (BoolOp.Not, a, null),
+                        static (key, algebra) =>
+                            key.a.IsLeaf
+                                ? algebra.GetOrCreateBDD(
+                                    algebra.CombineTerminals(BoolOp.Not, key.a.Ordinal, 0),
+                                    null,
+                                    null
+                                )
+                                : // multi-terminal case
+                                algebra.GetOrCreateBDD(
+                                    key.a.Ordinal,
+                                    algebra.Not(key.a.One),
+                                    algebra.Not(key.a.Zero)
+                                ),
+                        this
+                    );
 
         /// <summary>
         /// Applies the binary Boolean operation op and constructs the BDD recursively from a and b.
@@ -141,41 +160,48 @@ namespace System.Text.RegularExpressions.Symbolic
                 b = tmp;
             }
 
-            return _opCache.GetOrAdd((op, a, b), static (key, algebra) =>
-            {
-                Debug.Assert(key.b is not null, "Validated it was non-null prior to calling GetOrAdd");
-
-                if (key.a.IsLeaf && key.b.IsLeaf)
+            return _opCache.GetOrAdd(
+                (op, a, b),
+                static (key, algebra) =>
                 {
-                    // Multi-terminal case, we know here that a is neither True nor False
-                    int ord = algebra.CombineTerminals(key.op, key.a.Ordinal, key.b.Ordinal);
-                    return algebra.GetOrCreateBDD(ord, null, null);
-                }
+                    Debug.Assert(
+                        key.b is not null,
+                        "Validated it was non-null prior to calling GetOrAdd"
+                    );
 
-                if (key.a.IsLeaf || key.b!.Ordinal > key.a.Ordinal)
-                {
-                    Debug.Assert(!key.b.IsLeaf);
-                    BDD t = algebra.ApplyBinaryOp(key.op, key.a, key.b.One);
-                    BDD f = algebra.ApplyBinaryOp(key.op, key.a, key.b.Zero);
-                    return t == f ? t : algebra.GetOrCreateBDD(key.b.Ordinal, t, f);
-                }
+                    if (key.a.IsLeaf && key.b.IsLeaf)
+                    {
+                        // Multi-terminal case, we know here that a is neither True nor False
+                        int ord = algebra.CombineTerminals(key.op, key.a.Ordinal, key.b.Ordinal);
+                        return algebra.GetOrCreateBDD(ord, null, null);
+                    }
 
-                if (key.b.IsLeaf || key.a.Ordinal > key.b.Ordinal)
-                {
-                    Debug.Assert(!key.a.IsLeaf);
-                    BDD t = algebra.ApplyBinaryOp(key.op, key.a.One, key.b);
-                    BDD f = algebra.ApplyBinaryOp(key.op, key.a.Zero, key.b);
-                    return t == f ? t : algebra.GetOrCreateBDD(key.a.Ordinal, t, f);
-                }
+                    if (key.a.IsLeaf || key.b!.Ordinal > key.a.Ordinal)
+                    {
+                        Debug.Assert(!key.b.IsLeaf);
+                        BDD t = algebra.ApplyBinaryOp(key.op, key.a, key.b.One);
+                        BDD f = algebra.ApplyBinaryOp(key.op, key.a, key.b.Zero);
+                        return t == f ? t : algebra.GetOrCreateBDD(key.b.Ordinal, t, f);
+                    }
 
-                {
-                    Debug.Assert(!key.a.IsLeaf);
-                    Debug.Assert(!key.b.IsLeaf);
-                    BDD t = algebra.ApplyBinaryOp(key.op, key.a.One, key.b.One);
-                    BDD f = algebra.ApplyBinaryOp(key.op, key.a.Zero, key.b.Zero);
-                    return t == f ? t : algebra.GetOrCreateBDD(key.a.Ordinal, t, f);
-                }
-            }, this);
+                    if (key.b.IsLeaf || key.a.Ordinal > key.b.Ordinal)
+                    {
+                        Debug.Assert(!key.a.IsLeaf);
+                        BDD t = algebra.ApplyBinaryOp(key.op, key.a.One, key.b);
+                        BDD f = algebra.ApplyBinaryOp(key.op, key.a.Zero, key.b);
+                        return t == f ? t : algebra.GetOrCreateBDD(key.a.Ordinal, t, f);
+                    }
+
+                    {
+                        Debug.Assert(!key.a.IsLeaf);
+                        Debug.Assert(!key.b.IsLeaf);
+                        BDD t = algebra.ApplyBinaryOp(key.op, key.a.One, key.b.One);
+                        BDD f = algebra.ApplyBinaryOp(key.op, key.a.Zero, key.b.Zero);
+                        return t == f ? t : algebra.GetOrCreateBDD(key.a.Ordinal, t, f);
+                    }
+                },
+                this
+            );
         }
 
         /// <summary>
@@ -241,7 +267,9 @@ namespace System.Text.RegularExpressions.Symbolic
         public BDD ShiftRight(BDD set, int k)
         {
             Debug.Assert(k >= 0);
-            return set.IsLeaf ? set : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, 0 - k);
+            return set.IsLeaf
+                ? set
+                : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, 0 - k);
         }
 
         /// <summary>
@@ -252,7 +280,9 @@ namespace System.Text.RegularExpressions.Symbolic
         public BDD ShiftLeft(BDD set, int k)
         {
             Debug.Assert(k >= 0);
-            return set.IsLeaf ? set : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, k);
+            return set.IsLeaf
+                ? set
+                : ShiftLeftImpl(new Dictionary<(BDD set, int k), BDD>(), set, k);
         }
 
         /// <summary>
@@ -266,16 +296,14 @@ namespace System.Text.RegularExpressions.Symbolic
             int ordinal = set.Ordinal + k;
 
             if (ordinal < 0)
-                return True;  //this arises if k is negative
+                return True; //this arises if k is negative
 
             if (!shiftCache.TryGetValue((set, k), out BDD? res))
             {
                 BDD zero = ShiftLeftImpl(shiftCache, set.Zero, k);
                 BDD one = ShiftLeftImpl(shiftCache, set.One, k);
 
-                res = (zero == one) ?
-                    zero :
-                    GetOrCreateBDD((ushort)ordinal, one, zero);
+                res = (zero == one) ? zero : GetOrCreateBDD((ushort)ordinal, one, zero);
                 shiftCache[(set, k)] = res;
             }
             return res;
@@ -288,7 +316,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// </summary>
         /// <param name="sets">the BDDs to create the minterms for</param>
         /// <returns>BDDs for the minterm</returns>
-        public List<BDD> GenerateMinterms(IEnumerable<BDD> sets) => _mintermGen.GenerateMinterms(sets);
+        public List<BDD> GenerateMinterms(IEnumerable<BDD> sets) =>
+            _mintermGen.GenerateMinterms(sets);
 
         /// <summary>
         /// Make a set containing all integers whose bits up to maxBit equal n.
@@ -329,10 +358,13 @@ namespace System.Text.RegularExpressions.Symbolic
 
             if (mask == 1) // Base case for least significant bit
             {
-                return
-                    upper == 0 ? GetOrCreateBDD(maxBit, False, True) : // lower must also be 0
-                    lower == 1 ? GetOrCreateBDD(maxBit, True, False) : // upper must also be 1
-                    True; // Otherwise both 0 and 1 are included
+                return upper == 0
+                    ? GetOrCreateBDD(maxBit, False, True)
+                    : // lower must also be 0
+                    lower == 1
+                        ? GetOrCreateBDD(maxBit, True, False)
+                        : // upper must also be 1
+                        True; // Otherwise both 0 and 1 are included
             }
 
             // Check if range includes all numbers up to bit
@@ -372,7 +404,8 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Bits above maxBit are ignored.
         /// The ranges are nonoverlapping and ordered.
         /// </summary>
-        public static (uint, uint)[] ToRanges(BDD set, int maxBit) => BDDRangeConverter.ToRanges(set, maxBit);
+        public static (uint, uint)[] ToRanges(BDD set, int maxBit) =>
+            BDDRangeConverter.ToRanges(set, maxBit);
 
         #region domain size and min computation
 
@@ -424,24 +457,31 @@ namespace System.Text.RegularExpressions.Symbolic
                 if (set.Zero.IsEmpty)
                 {
                     sizeL = 0;
-                    sizeR = set.One.IsFull ?
-                        (uint)1 << set.Ordinal :
-                        ((uint)1 << (set.Ordinal - 1 - set.One.Ordinal)) * ComputeDomainSizeImpl(sizeCache, set.One);
+                    sizeR = set.One.IsFull
+                        ? (uint)1 << set.Ordinal
+                        : ((uint)1 << (set.Ordinal - 1 - set.One.Ordinal))
+                            * ComputeDomainSizeImpl(sizeCache, set.One);
                 }
                 else if (set.Zero.IsFull)
                 {
                     sizeL = 1UL << set.Ordinal;
-                    sizeR = set.One.IsEmpty ?
-                        0UL :
-                        (1UL << (set.Ordinal - 1 - set.One.Ordinal)) * ComputeDomainSizeImpl(sizeCache, set.One);
+                    sizeR = set.One.IsEmpty
+                        ? 0UL
+                        : (1UL << (set.Ordinal - 1 - set.One.Ordinal))
+                            * ComputeDomainSizeImpl(sizeCache, set.One);
                 }
                 else
                 {
-                    sizeL = (1UL << (set.Ordinal - 1 - set.Zero.Ordinal)) * ComputeDomainSizeImpl(sizeCache, set.Zero);
+                    sizeL =
+                        (1UL << (set.Ordinal - 1 - set.Zero.Ordinal))
+                        * ComputeDomainSizeImpl(sizeCache, set.Zero);
                     sizeR =
-                        set.One == False ? 0UL :
-                        set.One == True ? 1UL << set.Ordinal :
-                        (1UL << (set.Ordinal - 1 - set.One.Ordinal)) * ComputeDomainSizeImpl(sizeCache, set.One);
+                        set.One == False
+                            ? 0UL
+                            : set.One == True
+                                ? 1UL << set.Ordinal
+                                : (1UL << (set.Ordinal - 1 - set.One.Ordinal))
+                                    * ComputeDomainSizeImpl(sizeCache, set.One);
                 }
 
                 size = sizeL + sizeR;

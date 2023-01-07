@@ -1,4 +1,6 @@
-[assembly: Microsoft.AspNetCore.Mvc.ApiConventionType(typeof(Microsoft.AspNetCore.Mvc.DefaultApiConventions))]
+[assembly: Microsoft.AspNetCore.Mvc.ApiConventionType(
+    typeof(Microsoft.AspNetCore.Mvc.DefaultApiConventions)
+)]
 
 namespace TestApp._INPUT_
 {
@@ -6,9 +8,7 @@ namespace TestApp._INPUT_
 
     [ApiController]
     [Route("[controller]/[action]")]
-    public class BaseController : ControllerBase
-    {
-    }
+    public class BaseController : ControllerBase { }
 }
 
 namespace TestApp._INPUT_

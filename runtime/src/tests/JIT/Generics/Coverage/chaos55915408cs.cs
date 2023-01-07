@@ -42,17 +42,16 @@ namespace Chaos
 {
     using System;
 
-
     public class A0A0 : A0, IA1
     {
-
         private IA1 _fA0A01;
 
         private static A0A1<A0A0> _sfA0A00;
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public static void VerifyA0A0NotInlinedGenericStatic<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public static void VerifyA0A0NotInlinedGenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0A0));
@@ -60,15 +59,16 @@ namespace Chaos
             A0A0._sfA0A00 = new A0A1<A0A0>();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public static void VerifyA0A0NotInlinedStatic()
         {
             System.Console.WriteLine(typeof(A0A0));
             A0A0._sfA0A00 = new A0A1<A0A0>();
         }
 
-        public static void VerifyA0A0GenericStatic<T>()
-            where T : new()
+        public static void VerifyA0A0GenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0A0));
@@ -82,9 +82,10 @@ namespace Chaos
             A0A0._sfA0A00 = new A0A1<A0A0>();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public void VerifyA0A0NotInlinedGeneric<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public void VerifyA0A0NotInlinedGeneric<T>() where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -94,7 +95,9 @@ namespace Chaos
             this._fA0A01 = new A0A0();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public void VerifyA0A0NotInlined()
         {
             System.Console.WriteLine(this);
@@ -185,34 +188,36 @@ namespace Chaos
             A0A0A0<A0A0A0<A0>>.VerifyA0A0A0NotInlinedStatic();
             A0A0A0<A0A0A0<A0A0A0<A0>>>.VerifyA0A0A0GenericStatic<A0A0A0<A0A0A0<A0A0A0<A0>>>>();
             A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>.VerifyA0A0A0Static();
-            A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>> v17 = new A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>();
+            A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>> v17 =
+                new A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>();
             v17.VerifyA0A0A0NotInlinedGeneric<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>();
-            A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>> v18 = new A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>();
+            A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>> v18 =
+                new A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>();
             v18.VerifyA0A0A0NotInlined();
         }
     }
 
-    public class A0A1<T0> : A0
-        where T0 : new()
+    public class A0A1<T0> : A0 where T0 : new()
     {
-
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public static void VerifyA0A1NotInlinedGenericStatic<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public static void VerifyA0A1NotInlinedGenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
             T t2 = new T();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public static void VerifyA0A1NotInlinedStatic()
         {
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A1GenericStatic<T>()
-            where T : new()
+        public static void VerifyA0A1GenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -224,9 +229,10 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public void VerifyA0A1NotInlinedGeneric<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public void VerifyA0A1NotInlinedGeneric<T>() where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -234,7 +240,9 @@ namespace Chaos
             T t3 = new T();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public void VerifyA0A1NotInlined()
         {
             System.Console.WriteLine(this);
@@ -258,7 +266,9 @@ namespace Chaos
             v0.VerifyInterfaceIA1();
             A0 v1 = new A0();
             v1.VerifyInterfaceGenericIA1<A0A1<A0A0>>();
-            A0.VerifyA0NotInlinedGenericStatic<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>();
+            A0.VerifyA0NotInlinedGenericStatic<
+                A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>
+            >();
             A0.VerifyA0NotInlinedStatic();
             A0.VerifyA0GenericStatic<A0A1<A0A0>>();
             A0.VerifyA0Static();
@@ -294,67 +304,109 @@ namespace Chaos
             i14.VerifyInterfaceGenericIA1<A0A1<A0A0>>();
             A0A1<A0>.VerifyA0A1NotInlinedGenericStatic<A0>();
             A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>.VerifyA0A1NotInlinedStatic();
-            A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>.VerifyA0A1GenericStatic<A0A0>();
+            A0A1<
+                A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>
+            >.VerifyA0A1GenericStatic<A0A0>();
             A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>.VerifyA0A1Static();
-            A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>> v15 = new A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>();
+            A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>> v15 =
+                new A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>();
             v15.VerifyA0A1NotInlinedGeneric<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>();
-            A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>> v16 = new A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>();
+            A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>> v16 =
+                new A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>();
             v16.VerifyA0A1NotInlined();
-            A0A0A0<A0A0>.VerifyA0A0A0NotInlinedGenericStatic<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
+            A0A0A0<A0A0>.VerifyA0A0A0NotInlinedGenericStatic<
+                A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>
+            >();
             A0A0A0<A0>.VerifyA0A0A0NotInlinedStatic();
             A0A0A0<A0A0A0<A0>>.VerifyA0A0A0GenericStatic<A0>();
             A0A0A0<A0A0>.VerifyA0A0A0Static();
-            A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>> v17 = new A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
+            A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>> v17 =
+                new A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
             v17.VerifyA0A0A0NotInlinedGeneric<A0>();
-            A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>> v18 = new A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
+            A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>> v18 =
+                new A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
             v18.VerifyA0A0A0NotInlined();
         }
     }
 
     public class Program
     {
-
         public static int Main()
         {
             A0 v0 = new A0();
             v0.CreateAllTypesA0();
             A0A0 v1 = new A0A0();
             v1.CreateAllTypesA0A0();
-            A0A1<A0A0A0<A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>>> v2 = new A0A1<A0A0A0<A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>>>();
+            A0A1<
+                A0A0A0<
+                    A0A0A0<
+                        A0A0A0<
+                            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>
+                        >
+                    >
+                >
+            > v2 =
+                new A0A1<
+                    A0A0A0<
+                        A0A0A0<
+                            A0A0A0<
+                                A0A1<
+                                    A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>
+                                >
+                            >
+                        >
+                    >
+                >();
             v2.CreateAllTypesA0A1();
-            A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>>> v3 = new A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>>>();
+            A0A0A0<
+                A0A0A0<
+                    A0A0A0<
+                        A0A0A0<
+                            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>
+                        >
+                    >
+                >
+            > v3 =
+                new A0A0A0<
+                    A0A0A0<
+                        A0A0A0<
+                            A0A0A0<
+                                A0A1<
+                                    A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>
+                                >
+                            >
+                        >
+                    >
+                >();
             v3.CreateAllTypesA0A0A0();
             System.Console.WriteLine("Test SUCCESS");
             return 100;
         }
     }
 
-    public interface IA1A2<T0>
-        where T0 : new()
-    {
-    }
+    public interface IA1A2<T0> where T0 : new() { }
 
-    public class A0A0A0<T0> : A0A0
-        where T0 : new()
+    public class A0A0A0<T0> : A0A0 where T0 : new()
     {
-
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public static void VerifyA0A0A0NotInlinedGenericStatic<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public static void VerifyA0A0A0NotInlinedGenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
             T t2 = new T();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public static void VerifyA0A0A0NotInlinedStatic()
         {
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A0A0GenericStatic<T>()
-            where T : new()
+        public static void VerifyA0A0A0GenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -366,9 +418,10 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public void VerifyA0A0A0NotInlinedGeneric<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public void VerifyA0A0A0NotInlinedGeneric<T>() where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -376,7 +429,9 @@ namespace Chaos
             T t3 = new T();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public void VerifyA0A0A0NotInlined()
         {
             System.Console.WriteLine(this);
@@ -402,7 +457,9 @@ namespace Chaos
             v1.VerifyInterfaceGenericIA1<A0>();
             A0.VerifyA0NotInlinedGenericStatic<A0A0>();
             A0.VerifyA0NotInlinedStatic();
-            A0.VerifyA0GenericStatic<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
+            A0.VerifyA0GenericStatic<
+                A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>
+            >();
             A0.VerifyA0Static();
             A0 v2 = new A0();
             v2.VerifyA0NotInlinedGeneric<A0>();
@@ -418,9 +475,13 @@ namespace Chaos
             i7.VerifyInterfaceIA1();
             IA1 i8 = ((IA1)(new A0()));
             i8.VerifyInterfaceGenericIA1<A0A0>();
-            A0A0.VerifyA0A0NotInlinedGenericStatic<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
+            A0A0.VerifyA0A0NotInlinedGenericStatic<
+                A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>
+            >();
             A0A0.VerifyA0A0NotInlinedStatic();
-            A0A0.VerifyA0A0GenericStatic<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>();
+            A0A0.VerifyA0A0GenericStatic<
+                A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>
+            >();
             A0A0.VerifyA0A0Static();
             A0A0 v9 = new A0A0();
             v9.VerifyA0A0NotInlinedGeneric<A0>();
@@ -434,66 +495,94 @@ namespace Chaos
             i13.VerifyInterfaceIA1();
             IA1 i14 = ((IA1)(new A0A0()));
             i14.VerifyInterfaceGenericIA1<A0>();
-            A0A1<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>.VerifyA0A1NotInlinedGenericStatic<A0A1<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
-            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>.VerifyA0A1NotInlinedStatic();
-            A0A1<A0A0>.VerifyA0A1GenericStatic<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
+            A0A1<
+                A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>
+            >.VerifyA0A1NotInlinedGenericStatic<
+                A0A1<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>
+            >();
+            A0A1<
+                A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>
+            >.VerifyA0A1NotInlinedStatic();
+            A0A1<A0A0>.VerifyA0A1GenericStatic<
+                A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>
+            >();
             A0A1<A0>.VerifyA0A1Static();
-            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>> v15 = new A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
+            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>> v15 =
+                new A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
             v15.VerifyA0A1NotInlinedGeneric<A0>();
-            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>> v16 = new A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
+            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>> v16 =
+                new A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>();
             v16.VerifyA0A1NotInlined();
             A0A0A0<A0A0>.VerifyA0A0A0NotInlinedGenericStatic<A0>();
             A0A0A0<A0>.VerifyA0A0A0NotInlinedStatic();
             A0A0A0<A0>.VerifyA0A0A0GenericStatic<A0A0A0<A0>>();
-            A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>.VerifyA0A0A0Static();
-            A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>> v17 = new A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>();
-            v17.VerifyA0A0A0NotInlinedGeneric<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>();
-            A0A0A0<A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>> v18 = new A0A0A0<A0A0A0<A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>>>();
+            A0A0A0<
+                A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>
+            >.VerifyA0A0A0Static();
+            A0A0A0<
+                A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>
+            > v17 =
+                new A0A0A0<
+                    A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>
+                >();
+            v17.VerifyA0A0A0NotInlinedGeneric<
+                A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>
+            >();
+            A0A0A0<
+                A0A0A0<
+                    A0A0A0<A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>>
+                >
+            > v18 =
+                new A0A0A0<
+                    A0A0A0<
+                        A0A0A0<
+                            A0A1<A0A0A0<A0A1<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0A0A0<A0>>>>>>>>>
+                        >
+                    >
+                >();
             v18.VerifyA0A0A0NotInlined();
         }
     }
 
     public interface IA1
     {
-
         void VerifyInterfaceIA1();
 
-        void VerifyInterfaceGenericIA1<K>()
-            where K : new();
+        void VerifyInterfaceGenericIA1<K>() where K : new();
     }
 
     public class A0 : object, IA1
     {
-
         public void VerifyInterfaceIA1()
         {
             System.Console.WriteLine(typeof(A0));
         }
 
-        public void VerifyInterfaceGenericIA1<K>()
-            where K : new()
+        public void VerifyInterfaceGenericIA1<K>() where K : new()
         {
             System.Console.WriteLine(typeof(A0));
             K t1 = new K();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public static void VerifyA0NotInlinedGenericStatic<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public static void VerifyA0NotInlinedGenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0));
             T t2 = new T();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public static void VerifyA0NotInlinedStatic()
         {
             System.Console.WriteLine(typeof(A0));
         }
 
-        public static void VerifyA0GenericStatic<T>()
-            where T : new()
+        public static void VerifyA0GenericStatic<T>() where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0));
@@ -505,9 +594,10 @@ namespace Chaos
             System.Console.WriteLine(typeof(A0));
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-        public void VerifyA0NotInlinedGeneric<T>()
-            where T : new()
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
+        public void VerifyA0NotInlinedGeneric<T>() where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -515,7 +605,9 @@ namespace Chaos
             T t3 = new T();
         }
 
-        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImplAttribute(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         public void VerifyA0NotInlined()
         {
             System.Console.WriteLine(this);
@@ -600,7 +692,9 @@ namespace Chaos
             v15.VerifyA0A1NotInlinedGeneric<A0A1<A0A1<A0A1<A0>>>>();
             A0A1<A0> v16 = new A0A1<A0>();
             v16.VerifyA0A1NotInlined();
-            A0A0A0<A0A0A0<A0A0A0<A0>>>.VerifyA0A0A0NotInlinedGenericStatic<A0A0A0<A0A0A0<A0A0A0<A0>>>>();
+            A0A0A0<A0A0A0<A0A0A0<A0>>>.VerifyA0A0A0NotInlinedGenericStatic<
+                A0A0A0<A0A0A0<A0A0A0<A0>>>
+            >();
             A0A0A0<A0>.VerifyA0A0A0NotInlinedStatic();
             A0A0A0<A0A0A0<A0>>.VerifyA0A0A0GenericStatic<A0A0A0<A0A0A0<A0>>>();
             A0A0A0<A0A1<A0>>.VerifyA0A0A0Static();

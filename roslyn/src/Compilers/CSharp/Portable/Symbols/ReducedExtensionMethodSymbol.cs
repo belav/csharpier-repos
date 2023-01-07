@@ -34,22 +34,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <param name="compilation">Compilation used to check constraints.
         /// The latest language version is assumed if this is null.</param>
-        public static MethodSymbol Create(MethodSymbol method, TypeSymbol receiverType, CSharpCompilation compilation)
+        public static MethodSymbol Create(
+            MethodSymbol method,
+            TypeSymbol receiverType,
+            CSharpCompilation compilation
+        )
         {
-            Debug.Assert(method.IsExtensionMethod && method.MethodKind != MethodKind.ReducedExtension);
+            Debug.Assert(
+                method.IsExtensionMethod && method.MethodKind != MethodKind.ReducedExtension
+            );
             Debug.Assert(method.ParameterCount > 0);
             Debug.Assert((object)receiverType != null);
 
             var useSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.DiscardedDependencies;
 
-            method = InferExtensionMethodTypeArguments(method, receiverType, compilation, ref useSiteInfo);
+            method = InferExtensionMethodTypeArguments(
+                method,
+                receiverType,
+                compilation,
+                ref useSiteInfo
+            );
             if ((object)method == null)
             {
                 return null;
             }
 
             var conversions = new TypeConversions(method.ContainingAssembly.CorLibrary);
-            var conversion = conversions.ConvertExtensionMethodThisArg(method.Parameters[0].Type, receiverType, ref useSiteInfo);
+            var conversion = conversions.ConvertExtensionMethodThisArg(
+                method.Parameters[0].Type,
+                receiverType,
+                ref useSiteInfo
+            );
             if (!conversion.Exists)
             {
                 return null;
@@ -71,7 +86,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public static MethodSymbol Create(MethodSymbol method)
         {
-            Debug.Assert(method.IsExtensionMethod && method.MethodKind != MethodKind.ReducedExtension);
+            Debug.Assert(
+                method.IsExtensionMethod && method.MethodKind != MethodKind.ReducedExtension
+            );
 
             // The reduced form is always created from the unconstructed method symbol.
             var constructedFrom = method.ConstructedFrom;
@@ -109,7 +126,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// are not satisfied, the return value is null.
         /// </summary>
         /// <param name="compilation">Compilation used to check constraints.  The latest language version is assumed if this is null.</param>
-        private static MethodSymbol InferExtensionMethodTypeArguments(MethodSymbol method, TypeSymbol thisType, CSharpCompilation compilation, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        private static MethodSymbol InferExtensionMethodTypeArguments(
+            MethodSymbol method,
+            TypeSymbol thisType,
+            CSharpCompilation compilation,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(method.IsExtensionMethod);
             Debug.Assert((object)thisType != null);
@@ -136,9 +158,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // Create an argument value for the "this" argument of specific type,
             // and pass the same bad argument value for all other arguments.
-            var thisArgumentValue = new BoundLiteral(syntax, ConstantValue.Bad, thisType) { WasCompilerGenerated = true };
-            var otherArgumentType = new ExtendedErrorTypeSymbol(errorNamespace, name: string.Empty, arity: 0, errorInfo: null, unreported: false);
-            var otherArgumentValue = new BoundLiteral(syntax, ConstantValue.Bad, otherArgumentType) { WasCompilerGenerated = true };
+            var thisArgumentValue = new BoundLiteral(syntax, ConstantValue.Bad, thisType)
+            {
+                WasCompilerGenerated = true
+            };
+            var otherArgumentType = new ExtendedErrorTypeSymbol(
+                errorNamespace,
+                name: string.Empty,
+                arity: 0,
+                errorInfo: null,
+                unreported: false
+            );
+            var otherArgumentValue = new BoundLiteral(syntax, ConstantValue.Bad, otherArgumentType)
+            {
+                WasCompilerGenerated = true
+            };
 
             var paramCount = method.ParameterCount;
             var arguments = new BoundExpression[paramCount];
@@ -154,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 conversions,
                 method,
                 arguments.AsImmutable(),
-                useSiteInfo: ref useSiteInfo);
+                useSiteInfo: ref useSiteInfo
+            );
 
             if (typeArgs.IsDefault)
             {
@@ -181,7 +216,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         if (!typeArg.HasType)
                         {
                             notInferredTypeParameters.Add(typeParams[i]);
-                            builder.Add(TypeWithAnnotations.Create(ErrorTypeSymbol.UnknownResultType));
+                            builder.Add(
+                                TypeWithAnnotations.Create(ErrorTypeSymbol.UnknownResultType)
+                            );
                         }
                         else
                         {
@@ -198,10 +235,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var diagnosticsBuilder = ArrayBuilder<TypeParameterDiagnosticInfo>.GetInstance();
             var substitution = new TypeMap(typeParams, typeArgsForConstraintsCheck);
             ArrayBuilder<TypeParameterDiagnosticInfo> useSiteDiagnosticsBuilder = null;
-            var success = method.CheckConstraints(new ConstraintsHelper.CheckConstraintsArgs(compilation, conversions, includeNullability: false, NoLocation.Singleton, diagnostics: null, template: new CompoundUseSiteInfo<AssemblySymbol>(useSiteInfo)),
-                                                  substitution, typeParams, typeArgsForConstraintsCheck, diagnosticsBuilder, nullabilityDiagnosticsBuilderOpt: null,
-                                                  ref useSiteDiagnosticsBuilder,
-                                                  ignoreTypeConstraintsDependentOnTypeParametersOpt: notInferredTypeParameters.Count > 0 ? notInferredTypeParameters : null);
+            var success = method.CheckConstraints(
+                new ConstraintsHelper.CheckConstraintsArgs(
+                    compilation,
+                    conversions,
+                    includeNullability: false,
+                    NoLocation.Singleton,
+                    diagnostics: null,
+                    template: new CompoundUseSiteInfo<AssemblySymbol>(useSiteInfo)
+                ),
+                substitution,
+                typeParams,
+                typeArgsForConstraintsCheck,
+                diagnosticsBuilder,
+                nullabilityDiagnosticsBuilderOpt: null,
+                ref useSiteDiagnosticsBuilder,
+                ignoreTypeConstraintsDependentOnTypeParametersOpt: notInferredTypeParameters.Count
+                > 0
+                    ? notInferredTypeParameters
+                    : null
+            );
             diagnosticsBuilder.Free();
             notInferredTypeParameters.Free();
 
@@ -224,12 +277,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 typeArgsForConstruct = typeArgs.ZipAsArray(
                     method.TypeParameters,
-                    (t, tp) => t.HasType ? t : TypeWithAnnotations.Create(tp));
+                    (t, tp) => t.HasType ? t : TypeWithAnnotations.Create(tp)
+                );
             }
 
             return method.Construct(typeArgsForConstruct);
         }
-
 
         internal override MethodSymbol CallsiteReducedFromMethod
         {
@@ -238,16 +291,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeSymbol ReceiverType
         {
-            get
-            {
-                return _reducedFrom.Parameters[0].Type;
-            }
+            get { return _reducedFrom.Parameters[0].Type; }
         }
 
         internal override CodeAnalysis.NullableAnnotation ReceiverNullableAnnotation =>
             _reducedFrom.Parameters[0].TypeWithAnnotations.ToPublicAnnotation();
 
-        public override TypeSymbol GetTypeInferredDuringReduction(TypeParameterSymbol reducedFromTypeParameter)
+        public override TypeSymbol GetTypeInferredDuringReduction(
+            TypeParameterSymbol reducedFromTypeParameter
+        )
         {
             if ((object)reducedFromTypeParameter == null)
             {
@@ -361,9 +413,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _reducedFrom.DeclaringSyntaxReferences; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return _reducedFrom.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            return _reducedFrom.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         public override MethodSymbol OriginalDefinition
@@ -411,22 +471,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return true; }
         }
 
-        internal sealed override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataNewSlot(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return false;
         }
 
-        internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataVirtual(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return false;
         }
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override ObsoleteAttributeData ObsoleteAttributeData
@@ -434,8 +495,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _reducedFrom.ObsoleteAttributeData; }
         }
 
-        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(bool forceComplete)
-            => _reducedFrom.GetUnmanagedCallersOnlyAttributeData(forceComplete);
+        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => _reducedFrom.GetUnmanagedCallersOnlyAttributeData(forceComplete);
 
         public override Accessibility DeclaredAccessibility
         {
@@ -487,11 +549,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _typeMap.SubstituteType(_reducedFrom.ReturnTypeWithAnnotations); }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => _reducedFrom.ReturnTypeFlowAnalysisAnnotations;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            _reducedFrom.ReturnTypeFlowAnalysisAnnotations;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => _reducedFrom.ReturnNotNullIfParameterNotNull;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            _reducedFrom.ReturnNotNullIfParameterNotNull;
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations => _reducedFrom.FlowAnalysisAnnotations;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            _reducedFrom.FlowAnalysisAnnotations;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
@@ -514,7 +579,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (_lazyParameters.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _lazyParameters, this.MakeParameters());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _lazyParameters,
+                        this.MakeParameters()
+                    );
                 }
                 return _lazyParameters;
             }
@@ -529,7 +597,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool IsInitOnly => false;
 
-        internal override bool IsEffectivelyReadOnly => _reducedFrom.Parameters[0].RefKind == RefKind.In;
+        internal override bool IsEffectivelyReadOnly =>
+            _reducedFrom.Parameters[0].RefKind == RefKind.In;
 
         public override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations
         {
@@ -561,7 +630,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var parameters = ArrayBuilder<ParameterSymbol>.GetInstance(count - 1);
                 for (int i = 0; i < count - 1; i++)
                 {
-                    parameters.Add(new ReducedExtensionMethodParameterSymbol(this, reducedFromParameters[i + 1]));
+                    parameters.Add(
+                        new ReducedExtensionMethodParameterSymbol(
+                            this,
+                            reducedFromParameters[i + 1]
+                        )
+                    );
                 }
 
                 return parameters.ToImmutableAndFree();
@@ -573,11 +647,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             throw ExceptionUtilities.Unreachable();
         }
 
-        internal override bool IsNullableAnalysisEnabled() => throw ExceptionUtilities.Unreachable();
+        internal override bool IsNullableAnalysisEnabled() =>
+            throw ExceptionUtilities.Unreachable();
 
         public override bool Equals(Symbol obj, TypeCompareKind compareKind)
         {
-            if ((object)this == obj) return true;
+            if ((object)this == obj)
+                return true;
 
             ReducedExtensionMethodSymbol other = obj as ReducedExtensionMethodSymbol;
             return (object)other != null && _reducedFrom.Equals(other._reducedFrom, compareKind);
@@ -588,7 +664,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return _reducedFrom.GetHashCode();
         }
 
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
 
         internal sealed override bool HasUnscopedRefAttribute => false;
 
@@ -600,8 +677,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             private readonly ReducedExtensionMethodSymbol _containingMethod;
 
-            public ReducedExtensionMethodParameterSymbol(ReducedExtensionMethodSymbol containingMethod, ParameterSymbol underlyingParameter) :
-                base(underlyingParameter)
+            public ReducedExtensionMethodParameterSymbol(
+                ReducedExtensionMethodSymbol containingMethod,
+                ParameterSymbol underlyingParameter
+            ) : base(underlyingParameter)
             {
                 Debug.Assert(containingMethod != null);
                 Debug.Assert(underlyingParameter.Ordinal > 0);
@@ -620,14 +699,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public override TypeWithAnnotations TypeWithAnnotations
             {
-                get { return _containingMethod._typeMap.SubstituteType(this._underlyingParameter.TypeWithAnnotations); }
+                get
+                {
+                    return _containingMethod._typeMap.SubstituteType(
+                        this._underlyingParameter.TypeWithAnnotations
+                    );
+                }
             }
 
             public override ImmutableArray<CustomModifier> RefCustomModifiers
             {
                 get
                 {
-                    return _containingMethod._typeMap.SubstituteCustomModifiers(this._underlyingParameter.RefCustomModifiers);
+                    return _containingMethod._typeMap.SubstituteCustomModifiers(
+                        this._underlyingParameter.RefCustomModifiers
+                    );
                 }
             }
 
@@ -655,9 +741,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 get { throw ExceptionUtilities.Unreachable(); }
             }
 
-            internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => throw ExceptionUtilities.Unreachable();
+            internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+                throw ExceptionUtilities.Unreachable();
 
-            internal override bool HasInterpolatedStringHandlerArgumentError => throw ExceptionUtilities.Unreachable();
+            internal override bool HasInterpolatedStringHandlerArgumentError =>
+                throw ExceptionUtilities.Unreachable();
 
             public sealed override bool Equals(Symbol obj, TypeCompareKind compareKind)
             {
@@ -667,14 +755,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 // Equality of ordinal and containing symbol is a correct
-                // implementation for all ParameterSymbols, but we don't 
+                // implementation for all ParameterSymbols, but we don't
                 // define it on the base type because most can simply use
                 // ReferenceEquals.
 
                 var other = obj as ReducedExtensionMethodParameterSymbol;
-                return other is not null &&
-                    this.Ordinal == other.Ordinal &&
-                    this.ContainingSymbol.Equals(other.ContainingSymbol, compareKind);
+                return other is not null
+                    && this.Ordinal == other.Ordinal
+                    && this.ContainingSymbol.Equals(other.ContainingSymbol, compareKind);
             }
 
             public sealed override int GetHashCode()

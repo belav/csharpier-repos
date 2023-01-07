@@ -19,14 +19,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public DelegateCtorSignature(
             TypeDesc delegateType,
             IMethodNode targetMethod,
-            MethodWithToken methodToken)
+            MethodWithToken methodToken
+        )
         {
             _delegateType = delegateType;
             _targetMethod = targetMethod;
             _methodToken = methodToken;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)delegateType.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)
+                delegateType.Context;
             compilerContext.EnsureLoadableType(delegateType);
             compilerContext.EnsureLoadableMethod(targetMethod.Method);
         }
@@ -40,14 +42,20 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (!relocsOnly)
             {
-                SignatureContext innerContext = builder.EmitFixup(factory, ReadyToRunFixupKind.DelegateCtor, _methodToken.Token.Module, factory.SignatureContext);
+                SignatureContext innerContext = builder.EmitFixup(
+                    factory,
+                    ReadyToRunFixupKind.DelegateCtor,
+                    _methodToken.Token.Module,
+                    factory.SignatureContext
+                );
 
                 builder.EmitMethodSignature(
                     _methodToken,
                     enforceDefEncoding: false,
                     enforceOwningType: false,
                     innerContext,
-                    isInstantiatingStub: _targetMethod.Method.HasInstantiation);
+                    isInstantiatingStub: _targetMethod.Method.HasInstantiation
+                );
 
                 builder.EmitTypeSignature(_delegateType, innerContext);
             }

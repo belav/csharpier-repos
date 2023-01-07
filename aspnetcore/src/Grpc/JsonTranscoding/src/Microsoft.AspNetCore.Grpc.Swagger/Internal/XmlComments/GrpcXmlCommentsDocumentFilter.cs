@@ -28,13 +28,19 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
         // Get unique services
         var nameAndServiceDescriptor = context.ApiDescriptions
             .Select(apiDesc => apiDesc.ActionDescriptor)
-            .Where(actionDesc => actionDesc != null && (actionDesc.EndpointMetadata?.Any(m => m is GrpcMethodMetadata) ?? false))
+            .Where(
+                actionDesc =>
+                    actionDesc != null
+                    && (actionDesc.EndpointMetadata?.Any(m => m is GrpcMethodMetadata) ?? false)
+            )
             .GroupBy(actionDesc => actionDesc.RouteValues["controller"]!)
             .Select(group => new KeyValuePair<string, ActionDescriptor>(group.Key, group.First()));
 
         foreach (var nameAndType in nameAndServiceDescriptor)
         {
-            var grpcMethodMetadata = nameAndType.Value.EndpointMetadata.OfType<GrpcMethodMetadata>().First();
+            var grpcMethodMetadata = nameAndType.Value.EndpointMetadata
+                .OfType<GrpcMethodMetadata>()
+                .First();
             if (TryAdd(swaggerDoc, nameAndType, grpcMethodMetadata.ServiceType))
             {
                 continue;
@@ -50,10 +56,16 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
         }
     }
 
-    private bool TryAdd(OpenApiDocument swaggerDoc, KeyValuePair<string, ActionDescriptor> nameAndType, Type type)
+    private bool TryAdd(
+        OpenApiDocument swaggerDoc,
+        KeyValuePair<string, ActionDescriptor> nameAndType,
+        Type type
+    )
     {
         var memberName = XmlCommentsNodeNameHelper.GetMemberNameForType(type);
-        var typeNode = _xmlNavigator.SelectSingleNode(string.Format(CultureInfo.InvariantCulture, MemberXPath, memberName));
+        var typeNode = _xmlNavigator.SelectSingleNode(
+            string.Format(CultureInfo.InvariantCulture, MemberXPath, memberName)
+        );
 
         if (typeNode != null)
         {
@@ -65,11 +77,13 @@ internal sealed class GrpcXmlCommentsDocumentFilter : IDocumentFilter
                     swaggerDoc.Tags = new List<OpenApiTag>();
                 }
 
-                swaggerDoc.Tags.Add(new OpenApiTag
-                {
-                    Name = nameAndType.Key,
-                    Description = XmlCommentsTextHelper.Humanize(summaryNode.InnerXml)
-                });
+                swaggerDoc.Tags.Add(
+                    new OpenApiTag
+                    {
+                        Name = nameAndType.Key,
+                        Description = XmlCommentsTextHelper.Humanize(summaryNode.InnerXml)
+                    }
+                );
             }
             return true;
         }

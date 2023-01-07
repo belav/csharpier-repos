@@ -12,12 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class GlobalKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public GlobalKeywordRecommender()
-            : base(SyntaxKind.GlobalKeyword)
-        {
-        }
+        public GlobalKeywordRecommender() : base(SyntaxKind.GlobalKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
 
@@ -31,18 +32,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
                 }
             }
 
-            return
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                UsingKeywordRecommender.IsUsingDirectiveContext(context, forGlobalKeyword: true, cancellationToken) ||
-                context.IsAnyExpressionContext ||
-                context.IsObjectCreationTypeContext ||
-                context.IsIsOrAsTypeContext ||
-                context.IsFunctionPointerTypeArgumentContext ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.RefKeyword, cancellationToken) ||
-                syntaxTree.IsAfterKeyword(position, SyntaxKind.ReadOnlyKeyword, cancellationToken) ||
-                syntaxTree.IsUsingAliasContext(position, cancellationToken);
+            return context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || UsingKeywordRecommender.IsUsingDirectiveContext(
+                    context,
+                    forGlobalKeyword: true,
+                    cancellationToken
+                )
+                || context.IsAnyExpressionContext
+                || context.IsObjectCreationTypeContext
+                || context.IsIsOrAsTypeContext
+                || context.IsFunctionPointerTypeArgumentContext
+                || syntaxTree.IsAfterKeyword(position, SyntaxKind.ConstKeyword, cancellationToken)
+                || syntaxTree.IsAfterKeyword(position, SyntaxKind.RefKeyword, cancellationToken)
+                || syntaxTree.IsAfterKeyword(
+                    position,
+                    SyntaxKind.ReadOnlyKeyword,
+                    cancellationToken
+                )
+                || syntaxTree.IsUsingAliasContext(position, cancellationToken);
         }
     }
 }

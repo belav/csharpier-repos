@@ -26,6 +26,7 @@ namespace VirtualStaticInterfaceMethods
     class SimpleVariantTwice : IVariant<Base>, IVariant<Mid>
     {
         public static string WhichMethod(Base b) => throw null;
+
         public static string WhichMethod(Mid b) => throw null;
     }
 
@@ -44,7 +45,9 @@ namespace VirtualStaticInterfaceMethods
         public static string WhichMethod(T b) => throw null;
     }
 
-    class GenericVariantWithInheritanceDerived<T> : GenericVariantWithInheritanceBase<T>, IVariant<T>
+    class GenericVariantWithInheritanceDerived<T>
+        : GenericVariantWithInheritanceBase<T>,
+            IVariant<T>
     {
         public static new string WhichMethod(T b) => throw null;
     }
@@ -60,6 +63,8 @@ namespace VirtualStaticInterfaceMethods
     }
 
     class Base { }
+
     class Mid : Base { }
+
     class Derived : Mid { }
 }

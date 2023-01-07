@@ -30,19 +30,25 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 : ProtocolConversions.GetUriFromFilePath(document.FilePath);
         }
 
-        public static Uri? TryGetURI(this TextDocument document, RequestContext? context = null)
-            => ProtocolConversions.TryGetUriFromFilePath(document.FilePath, context);
+        public static Uri? TryGetURI(this TextDocument document, RequestContext? context = null) =>
+            ProtocolConversions.TryGetUriFromFilePath(document.FilePath, context);
 
         public static ImmutableArray<Document> GetDocuments(this Solution solution, Uri documentUri)
         {
             var documentIds = GetDocumentIds(solution, documentUri);
 
             // We don't call GetRequiredDocument here as the id could be referring to an additional document.
-            var documents = documentIds.Select(solution.GetDocument).WhereNotNull().ToImmutableArray();
+            var documents = documentIds
+                .Select(solution.GetDocument)
+                .WhereNotNull()
+                .ToImmutableArray();
             return documents;
         }
 
-        public static ImmutableArray<DocumentId> GetDocumentIds(this Solution solution, Uri documentUri)
+        public static ImmutableArray<DocumentId> GetDocumentIds(
+            this Solution solution,
+            Uri documentUri
+        )
         {
             // TODO: we need to normalize this. but for now, we check both absolute and local path
             //       right now, based on who calls this, solution might has "/" or "\\" as directory
@@ -57,26 +63,38 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return documentIds;
         }
 
-        public static Document? GetDocument(this Solution solution, TextDocumentIdentifier documentIdentifier)
+        public static Document? GetDocument(
+            this Solution solution,
+            TextDocumentIdentifier documentIdentifier
+        )
         {
             var documents = solution.GetDocuments(documentIdentifier.Uri);
             return documents.Length == 0
                 ? null
-                : documents.FindDocumentInProjectContext(documentIdentifier, (sln, id) => sln.GetRequiredDocument(id));
+                : documents.FindDocumentInProjectContext(
+                    documentIdentifier,
+                    (sln, id) => sln.GetRequiredDocument(id)
+                );
         }
 
         private static T FindItemInProjectContext<T>(
             ImmutableArray<T> items,
             TextDocumentIdentifier itemIdentifier,
             Func<T, ProjectId> projectIdGetter,
-            Func<T> defaultGetter)
+            Func<T> defaultGetter
+        )
         {
             if (items.Length > 1)
             {
                 // We have more than one document; try to find the one that matches the right context
-                if (itemIdentifier is VSTextDocumentIdentifier vsDocumentIdentifier && vsDocumentIdentifier.ProjectContext != null)
+                if (
+                    itemIdentifier is VSTextDocumentIdentifier vsDocumentIdentifier
+                    && vsDocumentIdentifier.ProjectContext != null
+                )
                 {
-                    var projectId = ProtocolConversions.ProjectContextToProjectId(vsDocumentIdentifier.ProjectContext);
+                    var projectId = ProtocolConversions.ProjectContextToProjectId(
+                        vsDocumentIdentifier.ProjectContext
+                    );
                     var matchingItem = items.FirstOrDefault(d => projectIdGetter(d) == projectId);
 
                     if (matchingItem != null)
@@ -96,40 +114,73 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return items[0];
         }
 
-        public static T FindDocumentInProjectContext<T>(this ImmutableArray<T> documents, TextDocumentIdentifier documentIdentifier, Func<Solution, DocumentId, T> documentGetter) where T : TextDocument
+        public static T FindDocumentInProjectContext<T>(
+            this ImmutableArray<T> documents,
+            TextDocumentIdentifier documentIdentifier,
+            Func<Solution, DocumentId, T> documentGetter
+        ) where T : TextDocument
         {
-            return FindItemInProjectContext(documents, documentIdentifier, projectIdGetter: (item) => item.Project.Id, defaultGetter: () =>
-            {
-                // We were not passed a project context.  This can happen when the LSP powered NavBar is not enabled.
-                // This branch should be removed when we're using the LSP based navbar in all scenarios.
+            return FindItemInProjectContext(
+                documents,
+                documentIdentifier,
+                projectIdGetter: (item) => item.Project.Id,
+                defaultGetter: () =>
+                {
+                    // We were not passed a project context.  This can happen when the LSP powered NavBar is not enabled.
+                    // This branch should be removed when we're using the LSP based navbar in all scenarios.
 
-                var solution = documents.First().Project.Solution;
-                // Lookup which of the linked documents is currently active in the workspace.
-                var documentIdInCurrentContext = solution.Workspace.GetDocumentIdInCurrentContext(documents.First().Id);
-                return documentGetter(solution, documentIdInCurrentContext);
-            });
+                    var solution = documents.First().Project.Solution;
+                    // Lookup which of the linked documents is currently active in the workspace.
+                    var documentIdInCurrentContext =
+                        solution.Workspace.GetDocumentIdInCurrentContext(documents.First().Id);
+                    return documentGetter(solution, documentIdInCurrentContext);
+                }
+            );
         }
 
-        public static Project? GetProject(this Solution solution, TextDocumentIdentifier projectIdentifier)
+        public static Project? GetProject(
+            this Solution solution,
+            TextDocumentIdentifier projectIdentifier
+        )
         {
-            var projects = solution.Projects.Where(project => project.FilePath == projectIdentifier.Uri.LocalPath).ToImmutableArray();
+            var projects = solution.Projects
+                .Where(project => project.FilePath == projectIdentifier.Uri.LocalPath)
+                .ToImmutableArray();
             return !projects.Any()
                 ? null
-                : FindItemInProjectContext(projects, projectIdentifier, projectIdGetter: (item) => item.Id, defaultGetter: () => projects[0]);
+                : FindItemInProjectContext(
+                    projects,
+                    projectIdentifier,
+                    projectIdGetter: (item) => item.Id,
+                    defaultGetter: () => projects[0]
+                );
         }
 
-        public static TextDocument? GetAdditionalDocument(this Solution solution, TextDocumentIdentifier documentIdentifier)
+        public static TextDocument? GetAdditionalDocument(
+            this Solution solution,
+            TextDocumentIdentifier documentIdentifier
+        )
         {
             var documentIds = GetDocumentIds(solution, documentIdentifier.Uri);
 
             // We don't call GetRequiredAdditionalDocument as the id could be referring to a regular document.
-            var additionalDocuments = documentIds.Select(solution.GetAdditionalDocument).WhereNotNull().ToImmutableArray();
+            var additionalDocuments = documentIds
+                .Select(solution.GetAdditionalDocument)
+                .WhereNotNull()
+                .ToImmutableArray();
             return !additionalDocuments.Any()
                 ? null
-                : additionalDocuments.FindDocumentInProjectContext(documentIdentifier, (sln, id) => sln.GetRequiredAdditionalDocument(id));
+                : additionalDocuments.FindDocumentInProjectContext(
+                    documentIdentifier,
+                    (sln, id) => sln.GetRequiredAdditionalDocument(id)
+                );
         }
 
-        public static async Task<int> GetPositionFromLinePositionAsync(this TextDocument document, LinePosition linePosition, CancellationToken cancellationToken)
+        public static async Task<int> GetPositionFromLinePositionAsync(
+            this TextDocument document,
+            LinePosition linePosition,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return text.Lines.GetPosition(linePosition);
@@ -145,7 +196,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return false;
         }
 
-        public static bool HasCompletionListDataCapability(this ClientCapabilities clientCapabilities)
+        public static bool HasCompletionListDataCapability(
+            this ClientCapabilities clientCapabilities
+        )
         {
             if (!TryGetVSCompletionListSetting(clientCapabilities, out var completionListSetting))
             {
@@ -155,7 +208,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             return completionListSetting.Data;
         }
 
-        public static bool HasCompletionListCommitCharactersCapability(this ClientCapabilities clientCapabilities)
+        public static bool HasCompletionListCommitCharactersCapability(
+            this ClientCapabilities clientCapabilities
+        )
         {
             if (!TryGetVSCompletionListSetting(clientCapabilities, out var completionListSetting))
             {
@@ -178,14 +233,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 case InternalLanguageNames.TypeScript:
                     return "typescript";
                 default:
-                    throw new ArgumentException(string.Format("Document project language {0} is not valid", document.Project.Language));
+                    throw new ArgumentException(
+                        string.Format(
+                            "Document project language {0} is not valid",
+                            document.Project.Language
+                        )
+                    );
             }
         }
 
-        public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition)
-            => new ClassifiedTextElement(definition.DisplayParts.Select(part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)));
+        public static ClassifiedTextElement GetClassifiedText(this DefinitionItem definition) =>
+            new ClassifiedTextElement(
+                definition.DisplayParts.Select(
+                    part => new ClassifiedTextRun(part.Tag.ToClassificationTypeName(), part.Text)
+                )
+            );
 
-        private static bool TryGetVSCompletionListSetting(ClientCapabilities clientCapabilities, [NotNullWhen(returnValue: true)] out VSInternalCompletionListSetting? completionListSetting)
+        private static bool TryGetVSCompletionListSetting(
+            ClientCapabilities clientCapabilities,
+            [NotNullWhen(returnValue: true)]
+                out VSInternalCompletionListSetting? completionListSetting
+        )
         {
             if (clientCapabilities is not VSInternalClientCapabilities vsClientCapabilities)
             {
@@ -200,7 +268,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 return false;
             }
 
-            if (textDocumentCapability.Completion is not VSInternalCompletionSetting vsCompletionSetting)
+            if (
+                textDocumentCapability.Completion
+                is not VSInternalCompletionSetting vsCompletionSetting
+            )
             {
                 completionListSetting = null;
                 return false;

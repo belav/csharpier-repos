@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 {
     internal class VisualStudioWorkspace_InProc : InProcComponent
     {
-        private static readonly Guid RoslynPackageId = new Guid("6cf2e545-6109-4730-8883-cf43d7aec3e1");
+        private static readonly Guid RoslynPackageId = new Guid(
+            "6cf2e545-6109-4730-8883-cf43d7aec3e1"
+        );
         private readonly VisualStudioWorkspace _visualStudioWorkspace;
         private readonly IGlobalOptionService _globalOptions;
 
@@ -39,31 +41,60 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             _globalOptions = GetComponentModelService<IGlobalOptionService>();
         }
 
-        public static VisualStudioWorkspace_InProc Create()
-            => new VisualStudioWorkspace_InProc();
+        public static VisualStudioWorkspace_InProc Create() => new VisualStudioWorkspace_InProc();
 
-        public bool IsPrettyListingOn(string languageName)
-            => _globalOptions.GetOption(FeatureOnOffOptions.PrettyListing, languageName);
+        public bool IsPrettyListingOn(string languageName) =>
+            _globalOptions.GetOption(FeatureOnOffOptions.PrettyListing, languageName);
 
-        public void SetPrettyListing(string languageName, bool value)
-            => InvokeOnUIThread(_ => _globalOptions.SetGlobalOption(new OptionKey(FeatureOnOffOptions.PrettyListing, languageName), value));
+        public void SetPrettyListing(string languageName, bool value) =>
+            InvokeOnUIThread(
+                _ =>
+                    _globalOptions.SetGlobalOption(
+                        new OptionKey(FeatureOnOffOptions.PrettyListing, languageName),
+                        value
+                    )
+            );
 
-        public void SetFileScopedNamespaces(bool value)
-            => InvokeOnUIThread(_ => _globalOptions.SetGlobalOption(
-                new OptionKey(Microsoft.CodeAnalysis.CSharp.CodeStyle.CSharpCodeStyleOptions.NamespaceDeclarations),
-                new CodeStyleOption2<NamespaceDeclarationPreference>(value ? NamespaceDeclarationPreference.FileScoped : NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Suggestion)));
+        public void SetFileScopedNamespaces(bool value) =>
+            InvokeOnUIThread(
+                _ =>
+                    _globalOptions.SetGlobalOption(
+                        new OptionKey(
+                            Microsoft
+                                .CodeAnalysis
+                                .CSharp
+                                .CodeStyle
+                                .CSharpCodeStyleOptions
+                                .NamespaceDeclarations
+                        ),
+                        new CodeStyleOption2<NamespaceDeclarationPreference>(
+                            value
+                                ? NamespaceDeclarationPreference.FileScoped
+                                : NamespaceDeclarationPreference.BlockScoped,
+                            NotificationOption2.Suggestion
+                        )
+                    )
+            );
 
-        public void SetGlobalOption(WellKnownGlobalOption option, string? language, object? value)
-            => InvokeOnUIThread(_ => _globalOptions.SetGlobalOption(option.GetKey(language), value));
+        public void SetGlobalOption(
+            WellKnownGlobalOption option,
+            string? language,
+            object? value
+        ) => InvokeOnUIThread(_ => _globalOptions.SetGlobalOption(option.GetKey(language), value));
 
-        public void WaitForAsyncOperations(TimeSpan timeout, string featuresToWaitFor, bool waitForWorkspaceFirst = true)
+        public void WaitForAsyncOperations(
+            TimeSpan timeout,
+            string featuresToWaitFor,
+            bool waitForWorkspaceFirst = true
+        )
         {
             if (waitForWorkspaceFirst || featuresToWaitFor == FeatureAttribute.Workspace)
             {
                 WaitForProjectSystem(timeout);
             }
 
-            GetWaitingService().WaitForAsyncOperations(timeout, featuresToWaitFor, waitForWorkspaceFirst);
+            GetWaitingService()
+                .WaitForAsyncOperations(timeout, featuresToWaitFor, waitForWorkspaceFirst);
         }
 
         public void WaitForAllAsyncOperations(TimeSpan timeout, params string[] featureNames)
@@ -73,7 +104,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 WaitForProjectSystem(timeout);
             }
 
-            GetWaitingService().WaitForAllAsyncOperations(_visualStudioWorkspace, timeout, featureNames);
+            GetWaitingService()
+                .WaitForAllAsyncOperations(_visualStudioWorkspace, timeout, featureNames);
         }
 
         public void WaitForAllAsyncOperationsOrFail(TimeSpan timeout, params string[] featureNames)
@@ -84,21 +116,35 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
             catch (Exception e)
             {
-                var listenerProvider = GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
-                var messageBuilder = new StringBuilder("Failed to clean up listeners in a timely manner.");
-                foreach (var token in ((AsynchronousOperationListenerProvider)listenerProvider).GetTokens())
+                var listenerProvider =
+                    GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                var messageBuilder = new StringBuilder(
+                    "Failed to clean up listeners in a timely manner."
+                );
+                foreach (
+                    var token in (
+                        (AsynchronousOperationListenerProvider)listenerProvider
+                    ).GetTokens()
+                )
                 {
                     messageBuilder.AppendLine().Append($"  {token}");
                 }
 
-                Environment.FailFast("Terminating test process due to unrecoverable timeout.", new TimeoutException(messageBuilder.ToString(), e));
+                Environment.FailFast(
+                    "Terminating test process due to unrecoverable timeout.",
+                    new TimeoutException(messageBuilder.ToString(), e)
+                );
             }
         }
 
         private static void WaitForProjectSystem(TimeSpan timeout)
         {
-            var operationProgressStatus = InvokeOnUIThread(_ => GetGlobalService<SVsOperationProgress, IVsOperationProgressStatusService>());
-            var stageStatus = operationProgressStatus.GetStageStatus(CommonOperationProgressStageIds.Intellisense);
+            var operationProgressStatus = InvokeOnUIThread(
+                _ => GetGlobalService<SVsOperationProgress, IVsOperationProgressStatusService>()
+            );
+            var stageStatus = operationProgressStatus.GetStageStatus(
+                CommonOperationProgressStageIds.Intellisense
+            );
             stageStatus.WaitForCompletionAsync().Wait(timeout);
         }
 
@@ -111,8 +157,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             Marshal.ThrowExceptionForHR(hresult);
         }
 
-        public void CleanUpWorkspace()
-            => InvokeOnUIThread(cancellationToken =>
+        public void CleanUpWorkspace() =>
+            InvokeOnUIThread(cancellationToken =>
             {
                 LoadRoslynPackage();
                 _visualStudioWorkspace.TestHookPartialSolutionsDisabled = true;
@@ -134,8 +180,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 if (option is IPerLanguageValuedOption)
                 {
-                    _globalOptions.SetGlobalOption(new OptionKey(option, LanguageNames.CSharp), option.DefaultValue);
-                    _globalOptions.SetGlobalOption(new OptionKey(option, LanguageNames.VisualBasic), option.DefaultValue);
+                    _globalOptions.SetGlobalOption(
+                        new OptionKey(option, LanguageNames.CSharp),
+                        option.DefaultValue
+                    );
+                    _globalOptions.SetGlobalOption(
+                        new OptionKey(option, LanguageNames.VisualBasic),
+                        option.DefaultValue
+                    );
                 }
                 else
                 {
@@ -144,14 +196,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             }
         }
 
-        public void CleanUpWaitingService()
-            => InvokeOnUIThread(cancellationToken =>
+        public void CleanUpWaitingService() =>
+            InvokeOnUIThread(cancellationToken =>
             {
-                var provider = GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+                var provider =
+                    GetComponentModel().DefaultExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
 
                 if (provider == null)
                 {
-                    throw new InvalidOperationException("The test waiting service could not be located.");
+                    throw new InvalidOperationException(
+                        "The test waiting service could not be located."
+                    );
                 }
 
                 GetWaitingService().EnableActiveTokenTracking(true);

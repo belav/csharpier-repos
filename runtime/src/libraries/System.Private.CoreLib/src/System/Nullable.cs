@@ -16,7 +16,9 @@ namespace System
 
     [Serializable]
     [NonVersionable] // This only applies to field layout
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial struct Nullable<T> where T : struct
     {
         private readonly bool hasValue; // Do not rename (binary serialization)
@@ -51,13 +53,14 @@ namespace System
         public readonly T GetValueOrDefault() => value;
 
         [NonVersionable]
-        public readonly T GetValueOrDefault(T defaultValue) =>
-            hasValue ? value : defaultValue;
+        public readonly T GetValueOrDefault(T defaultValue) => hasValue ? value : defaultValue;
 
         public override bool Equals(object? other)
         {
-            if (!hasValue) return other == null;
-            if (other == null) return false;
+            if (!hasValue)
+                return other == null;
+            if (other == null)
+                return false;
             return value.Equals(other);
         }
 
@@ -66,8 +69,7 @@ namespace System
         public override string? ToString() => hasValue ? value.ToString() : "";
 
         [NonVersionable]
-        public static implicit operator Nullable<T>(T value) =>
-            new Nullable<T>(value);
+        public static implicit operator Nullable<T>(T value) => new Nullable<T>(value);
 
         [NonVersionable]
         public static explicit operator T(Nullable<T> value) => value!.Value;
@@ -79,10 +81,12 @@ namespace System
         {
             if (n1.HasValue)
             {
-                if (n2.HasValue) return Comparer<T>.Default.Compare(n1.value, n2.value);
+                if (n2.HasValue)
+                    return Comparer<T>.Default.Compare(n1.value, n2.value);
                 return 1;
             }
-            if (n2.HasValue) return -1;
+            if (n2.HasValue)
+                return -1;
             return 0;
         }
 
@@ -90,10 +94,12 @@ namespace System
         {
             if (n1.HasValue)
             {
-                if (n2.HasValue) return EqualityComparer<T>.Default.Equals(n1.value, n2.value);
+                if (n2.HasValue)
+                    return EqualityComparer<T>.Default.Equals(n1.value, n2.value);
                 return false;
             }
-            if (n2.HasValue) return false;
+            if (n2.HasValue)
+                return false;
             return true;
         }
 
@@ -141,8 +147,7 @@ namespace System
         /// called when the input reference points to a value with an actual location and not an "rvalue" (an expression that may appear on the right side but not left side of an assignment). That is, if this API is called and the input reference
         /// points to a value that is produced by the compiler as a defensive copy or a temporary copy, the behavior might not match the desired one.
         /// </remarks>
-        public static ref readonly T GetValueRefOrDefaultRef<T>(in T? nullable)
-            where T : struct
+        public static ref readonly T GetValueRefOrDefaultRef<T>(in T? nullable) where T : struct
         {
             return ref nullable.value;
         }

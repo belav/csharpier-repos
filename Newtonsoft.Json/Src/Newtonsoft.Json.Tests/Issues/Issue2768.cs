@@ -117,7 +117,7 @@ namespace Newtonsoft.Json.Tests.Issues
             };
 
             decimal? parsedValue = null;
-            
+
             while (reader.Read())
             {
                 if (reader.TokenType == JsonToken.Float)

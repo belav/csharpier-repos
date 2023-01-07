@@ -69,14 +69,17 @@ namespace System.Net
             }
         }
 
-        private static readonly AsyncCallback s_acceptCallbackDelegate = new AsyncCallback(AcceptCallback);
-        private static readonly AsyncCallback s_connectCallbackDelegate = new AsyncCallback(ConnectCallback);
-        private static readonly AsyncCallback s_SSLHandshakeCallback = new AsyncCallback(SSLHandshakeCallback);
+        private static readonly AsyncCallback s_acceptCallbackDelegate = new AsyncCallback(
+            AcceptCallback
+        );
+        private static readonly AsyncCallback s_connectCallbackDelegate = new AsyncCallback(
+            ConnectCallback
+        );
+        private static readonly AsyncCallback s_SSLHandshakeCallback = new AsyncCallback(
+            SSLHandshakeCallback
+        );
 
-        internal FtpControlStream(NetworkStream client)
-            : base(client)
-        {
-        }
+        internal FtpControlStream(NetworkStream client) : base(client) { }
 
         /// <summary>
         ///    <para>Closes the connecting socket to generate an error.</para>
@@ -90,9 +93,7 @@ namespace System.Net
                 {
                     socket.Close();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
+                catch (ObjectDisposedException) { }
             }
         }
 
@@ -106,10 +107,17 @@ namespace System.Net
             try
             {
                 connection._dataSocket = listenSocket.EndAccept(asyncResult);
-                if (!connection.ServerAddress.Equals(((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address))
+                if (
+                    !connection.ServerAddress.Equals(
+                        ((IPEndPoint)connection._dataSocket.RemoteEndPoint!).Address
+                    )
+                )
                 {
                     connection._dataSocket.Close();
-                    throw new WebException(SR.net_ftp_active_address_different, WebExceptionStatus.ProtocolError);
+                    throw new WebException(
+                        SR.net_ftp_active_address_different,
+                        WebExceptionStatus.ProtocolError
+                    );
                 }
                 connection.ContinueCommandPipeline();
             }
@@ -169,7 +177,11 @@ namespace System.Net
             //
             if (_tlsStream != null)
             {
-                stream = new FtpDataStream(_tlsStream, (FtpWebRequest)_request!, IsFtpDataStreamWriteable());
+                stream = new FtpDataStream(
+                    _tlsStream,
+                    (FtpWebRequest)_request!,
+                    IsFtpDataStreamWriteable()
+                );
                 _tlsStream = null;
                 return PipelineInstruction.GiveStream;
             }
@@ -180,7 +192,12 @@ namespace System.Net
             {
                 FtpWebRequest request = (FtpWebRequest)_request!;
 
-                TlsStream tlsStream = new TlsStream(networkStream, _dataSocket, request.RequestUri.Host, request.ClientCertificates);
+                TlsStream tlsStream = new TlsStream(
+                    networkStream,
+                    _dataSocket,
+                    request.RequestUri.Host,
+                    request.ClientCertificates
+                );
                 networkStream = tlsStream;
 
                 if (_isAsync)
@@ -196,7 +213,11 @@ namespace System.Net
                 }
             }
 
-            stream = new FtpDataStream(networkStream, (FtpWebRequest)_request!, IsFtpDataStreamWriteable());
+            stream = new FtpDataStream(
+                networkStream,
+                (FtpWebRequest)_request!,
+                IsFtpDataStreamWriteable()
+            );
             return PipelineInstruction.GiveStream;
         }
 
@@ -218,9 +239,18 @@ namespace System.Net
 
         //    This is called by underlying base class code, each time a new response is received from the wire or a protocol stage is resumed.
         //    This function controls the setting up of a data socket/connection, and of saving off the server responses.
-        protected override PipelineInstruction PipelineCallback(PipelineEntry? entry, ResponseDescription? response, bool timeout, ref Stream? stream)
+        protected override PipelineInstruction PipelineCallback(
+            PipelineEntry? entry,
+            ResponseDescription? response,
+            bool timeout,
+            ref Stream? stream
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"Command:{entry?.Command} Description:{response?.StatusDescription}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(
+                    this,
+                    $"Command:{entry?.Command} Description:{response?.StatusDescription}"
+                );
 
             // null response is not expected
             if (response == null)
@@ -301,11 +331,16 @@ namespace System.Net
                 throw GenerateException(status, response.StatusDescription, null);
             }
 
-            if (_loginState != FtpLoginState.LoggedIn
-                && entry.Command.IndexOf("PASS", StringComparison.Ordinal) != -1)
+            if (
+                _loginState != FtpLoginState.LoggedIn
+                && entry.Command.IndexOf("PASS", StringComparison.Ordinal) != -1
+            )
             {
                 // Note the fact that we logged in
-                if (status == FtpStatusCode.NeedLoginAccount || status == FtpStatusCode.LoggedInProceed)
+                if (
+                    status == FtpStatusCode.NeedLoginAccount
+                    || status == FtpStatusCode.LoggedInProceed
+                )
                     _loginState = FtpLoginState.LoggedIn;
                 else
                     throw GenerateException(status, response.StatusDescription, null);
@@ -314,10 +349,17 @@ namespace System.Net
             //
             // Parse special cases
             //
-            if (entry.HasFlag(PipelineEntryFlags.CreateDataConnection) && (response.PositiveCompletion || response.PositiveIntermediate))
+            if (
+                entry.HasFlag(PipelineEntryFlags.CreateDataConnection)
+                && (response.PositiveCompletion || response.PositiveIntermediate)
+            )
             {
                 bool isSocketReady;
-                PipelineInstruction result = QueueOrCreateDataConection(entry, response, out isSocketReady);
+                PipelineInstruction result = QueueOrCreateDataConection(
+                    entry,
+                    response,
+                    out isSocketReady
+                );
                 if (!isSocketReady)
                     return result;
                 // otherwise we have a stream to create
@@ -333,7 +375,11 @@ namespace System.Net
                 }
                 if (!entry.HasFlag(PipelineEntryFlags.GiveDataStream))
                 {
-                    _abortReason = SR.Format(SR.net_ftp_invalid_status_response, status, entry.Command);
+                    _abortReason = SR.Format(
+                        SR.net_ftp_invalid_status_response,
+                        status,
+                        entry.Command
+                    );
                     return PipelineInstruction.Abort;
                 }
 
@@ -349,7 +395,6 @@ namespace System.Net
 
                 return QueueOrCreateFtpDataStream(ref stream);
             }
-
 
             //
             // Parse responses by status code exclusivelly
@@ -376,24 +421,32 @@ namespace System.Net
                 if (!(NetworkStream is TlsStream))
                 {
                     FtpWebRequest request = (FtpWebRequest)_request!;
-                    TlsStream tlsStream = new TlsStream(NetworkStream, Socket, request.RequestUri.Host, request.ClientCertificates);
+                    TlsStream tlsStream = new TlsStream(
+                        NetworkStream,
+                        Socket,
+                        request.RequestUri.Host,
+                        request.ClientCertificates
+                    );
 
                     if (_isAsync)
                     {
-                        tlsStream.BeginAuthenticateAsClient(ar =>
-                        {
-                            try
+                        tlsStream.BeginAuthenticateAsClient(
+                            ar =>
                             {
-                                tlsStream.EndAuthenticateAsClient(ar);
-                                NetworkStream = tlsStream;
-                                this.ContinueCommandPipeline();
-                            }
-                            catch (Exception e)
-                            {
-                                this.CloseSocket();
-                                this.InvokeRequestCallback(e);
-                            }
-                        }, null);
+                                try
+                                {
+                                    tlsStream.EndAuthenticateAsClient(ar);
+                                    NetworkStream = tlsStream;
+                                    this.ContinueCommandPipeline();
+                                }
+                                catch (Exception e)
+                                {
+                                    this.CloseSocket();
+                                    this.InvokeRequestCallback(e);
+                                }
+                            },
+                            null
+                        );
 
                         return PipelineInstruction.Pause;
                     }
@@ -435,7 +488,10 @@ namespace System.Net
             }
 
             // Intermediate responses require rereading
-            if (response.PositiveIntermediate || (!UsingSecureStream && entry.Command == "AUTH TLS\r\n"))
+            if (
+                response.PositiveIntermediate
+                || (!UsingSecureStream && entry.Command == "AUTH TLS\r\n")
+            )
             {
                 return PipelineInstruction.Reread;
             }
@@ -451,7 +507,8 @@ namespace System.Net
             bool resetLoggedInState = false;
             FtpWebRequest request = (FtpWebRequest)req;
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             _responseUri = request.RequestUri;
 
@@ -503,7 +560,12 @@ namespace System.Net
                 }
 
                 commandList.Add(new PipelineEntry(FormatFtpCommand("USER", domainUserName)));
-                commandList.Add(new PipelineEntry(FormatFtpCommand("PASS", password), PipelineEntryFlags.DontLogParameter));
+                commandList.Add(
+                    new PipelineEntry(
+                        FormatFtpCommand("PASS", password),
+                        PipelineEntryFlags.DontLogParameter
+                    )
+                );
 
                 // If SSL, always configure data channel encryption after authentication to maximum RFC compatibility.   The RFC allows for
                 // PBSZ/PROT commands to come either before or after the USER/PASS, but some servers require USER/PASS immediately after
@@ -533,26 +595,52 @@ namespace System.Net
             string requestDirectory;
             string requestFilename;
 
-            GetPathInfo(getPathOption, request.RequestUri, out requestPath, out requestDirectory, out requestFilename);
+            GetPathInfo(
+                getPathOption,
+                request.RequestUri,
+                out requestPath,
+                out requestDirectory,
+                out requestFilename
+            );
 
-            if (requestFilename.Length == 0 && request.MethodInfo.HasFlag(FtpMethodFlags.TakesParameter))
+            if (
+                requestFilename.Length == 0
+                && request.MethodInfo.HasFlag(FtpMethodFlags.TakesParameter)
+            )
                 throw new WebException(SR.net_ftp_invalid_uri);
 
             // We optimize for having the current working directory staying at the login directory.  This ensure that
             // our relative paths work right and reduces unnecessary CWD commands.
             // Usually, we don't change the working directory except for some FTP commands.  If necessary,
             // we need to reset our working directory back to the login directory.
-            if (_establishedServerDirectory != null && _loginDirectory != null && _establishedServerDirectory != _loginDirectory)
+            if (
+                _establishedServerDirectory != null
+                && _loginDirectory != null
+                && _establishedServerDirectory != _loginDirectory
+            )
             {
-                commandList.Add(new PipelineEntry(FormatFtpCommand("CWD", _loginDirectory), PipelineEntryFlags.UserCommand));
+                commandList.Add(
+                    new PipelineEntry(
+                        FormatFtpCommand("CWD", _loginDirectory),
+                        PipelineEntryFlags.UserCommand
+                    )
+                );
                 _requestedServerDirectory = _loginDirectory;
             }
 
             // For most commands, we don't need to navigate to the directory since we pass in the full
             // path as part of the FTP protocol command.   However,  some commands require it.
-            if (request.MethodInfo.HasFlag(FtpMethodFlags.MustChangeWorkingDirectoryToPath) && requestDirectory.Length > 0)
+            if (
+                request.MethodInfo.HasFlag(FtpMethodFlags.MustChangeWorkingDirectoryToPath)
+                && requestDirectory.Length > 0
+            )
             {
-                commandList.Add(new PipelineEntry(FormatFtpCommand("CWD", requestDirectory), PipelineEntryFlags.UserCommand));
+                commandList.Add(
+                    new PipelineEntry(
+                        FormatFtpCommand("CWD", requestDirectory),
+                        PipelineEntryFlags.UserCommand
+                    )
+                );
                 _requestedServerDirectory = requestDirectory;
             }
 
@@ -561,26 +649,54 @@ namespace System.Net
                 string requestedTypeSetting = request.UseBinary ? "I" : "A";
                 if (_currentTypeSetting != requestedTypeSetting)
                 {
-                    commandList.Add(new PipelineEntry(FormatFtpCommand("TYPE", requestedTypeSetting)));
+                    commandList.Add(
+                        new PipelineEntry(FormatFtpCommand("TYPE", requestedTypeSetting))
+                    );
                     _currentTypeSetting = requestedTypeSetting;
                 }
 
                 if (request.UsePassive)
                 {
-                    string passiveCommand = (ServerAddress.AddressFamily == AddressFamily.InterNetwork || ServerAddress.IsIPv4MappedToIPv6) ? "PASV" : "EPSV";
-                    commandList.Add(new PipelineEntry(FormatFtpCommand(passiveCommand, null), PipelineEntryFlags.CreateDataConnection));
+                    string passiveCommand =
+                        (
+                            ServerAddress.AddressFamily == AddressFamily.InterNetwork
+                            || ServerAddress.IsIPv4MappedToIPv6
+                        )
+                            ? "PASV"
+                            : "EPSV";
+                    commandList.Add(
+                        new PipelineEntry(
+                            FormatFtpCommand(passiveCommand, null),
+                            PipelineEntryFlags.CreateDataConnection
+                        )
+                    );
                 }
                 else
                 {
-                    string portCommand = (ServerAddress.AddressFamily == AddressFamily.InterNetwork || ServerAddress.IsIPv4MappedToIPv6) ? "PORT" : "EPRT";
+                    string portCommand =
+                        (
+                            ServerAddress.AddressFamily == AddressFamily.InterNetwork
+                            || ServerAddress.IsIPv4MappedToIPv6
+                        )
+                            ? "PORT"
+                            : "EPRT";
                     CreateFtpListenerSocket();
-                    commandList.Add(new PipelineEntry(FormatFtpCommand(portCommand, GetPortCommandLine())));
+                    commandList.Add(
+                        new PipelineEntry(FormatFtpCommand(portCommand, GetPortCommandLine()))
+                    );
                 }
 
                 if (request.ContentOffset > 0)
                 {
                     // REST command must always be the last sent before the main file command is sent.
-                    commandList.Add(new PipelineEntry(FormatFtpCommand("REST", request.ContentOffset.ToString(CultureInfo.InvariantCulture))));
+                    commandList.Add(
+                        new PipelineEntry(
+                            FormatFtpCommand(
+                                "REST",
+                                request.ContentOffset.ToString(CultureInfo.InvariantCulture)
+                            )
+                        )
+                    );
                 }
             }
 
@@ -594,9 +710,11 @@ namespace System.Net
 
             if (request.MethodInfo.Operation == FtpOperation.Rename)
             {
-                string baseDir = (requestDirectory.Length == 0)
-                    ? string.Empty : requestDirectory + "/";
-                commandList.Add(new PipelineEntry(FormatFtpCommand("RNFR", baseDir + requestFilename), flags));
+                string baseDir =
+                    (requestDirectory.Length == 0) ? string.Empty : requestDirectory + "/";
+                commandList.Add(
+                    new PipelineEntry(FormatFtpCommand("RNFR", baseDir + requestFilename), flags)
+                );
 
                 string renameTo;
                 if (request.RenameTo is not null && request.RenameTo.StartsWith('/'))
@@ -611,15 +729,21 @@ namespace System.Net
             }
             else if (request.MethodInfo.HasFlag(FtpMethodFlags.DoesNotTakeParameter))
             {
-                commandList.Add(new PipelineEntry(FormatFtpCommand(request.Method, string.Empty), flags));
+                commandList.Add(
+                    new PipelineEntry(FormatFtpCommand(request.Method, string.Empty), flags)
+                );
             }
             else if (request.MethodInfo.HasFlag(FtpMethodFlags.MustChangeWorkingDirectoryToPath))
             {
-                commandList.Add(new PipelineEntry(FormatFtpCommand(request.Method, requestFilename), flags));
+                commandList.Add(
+                    new PipelineEntry(FormatFtpCommand(request.Method, requestFilename), flags)
+                );
             }
             else
             {
-                commandList.Add(new PipelineEntry(FormatFtpCommand(request.Method, requestPath), flags));
+                commandList.Add(
+                    new PipelineEntry(FormatFtpCommand(request.Method, requestPath), flags)
+                );
             }
 
             commandList.Add(new PipelineEntry(FormatFtpCommand("QUIT", null)));
@@ -627,7 +751,11 @@ namespace System.Net
             return commandList.ToArray();
         }
 
-        private PipelineInstruction QueueOrCreateDataConection(PipelineEntry entry, ResponseDescription response, out bool isSocketReady)
+        private PipelineInstruction QueueOrCreateDataConection(
+            PipelineEntry entry,
+            ResponseDescription response,
+            out bool isSocketReady
+        )
         {
             isSocketReady = false;
             if (_dataHandshakeStarted)
@@ -674,7 +802,10 @@ namespace System.Net
                     throw ExceptionHelper.RequestAbortedException;
                 }
 
-                IPEndPoint localEndPoint = new IPEndPoint(((IPEndPoint)Socket.LocalEndPoint!).Address, 0);
+                IPEndPoint localEndPoint = new IPEndPoint(
+                    ((IPEndPoint)Socket.LocalEndPoint!).Address,
+                    0
+                );
                 _dataSocket.Bind(localEndPoint);
 
                 _passiveEndPoint = new IPEndPoint(ServerAddress, port);
@@ -686,7 +817,8 @@ namespace System.Net
             {
                 IPEndPoint passiveEndPoint = _passiveEndPoint;
                 _passiveEndPoint = null;
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "starting Connect()");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "starting Connect()");
                 if (_isAsync)
                 {
                     _dataSocket!.BeginConnect(passiveEndPoint, s_connectCallbackDelegate, this);
@@ -700,7 +832,8 @@ namespace System.Net
             }
             else
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "starting Accept()");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, "starting Accept()");
 
                 if (_isAsync)
                 {
@@ -713,12 +846,17 @@ namespace System.Net
                     try
                     {
                         _dataSocket = _dataSocket!.Accept();
-                        if (!ServerAddress.Equals(((IPEndPoint)_dataSocket.RemoteEndPoint!).Address))
+                        if (
+                            !ServerAddress.Equals(((IPEndPoint)_dataSocket.RemoteEndPoint!).Address)
+                        )
                         {
                             _dataSocket.Close();
-                            throw new WebException(SR.net_ftp_active_address_different, WebExceptionStatus.ProtocolError);
+                            throw new WebException(
+                                SR.net_ftp_active_address_different,
+                                WebExceptionStatus.ProtocolError
+                            );
                         }
-                        isSocketReady = true;   // for active mode we end up creating a stream before advancing the pipeline
+                        isSocketReady = true; // for active mode we end up creating a stream before advancing the pipeline
                         result = PipelineInstruction.Pause;
                     }
                     finally
@@ -740,17 +878,22 @@ namespace System.Net
         /// <summary>
         ///    <para>Gets the path component of the Uri</para>
         /// </summary>
-        private static void GetPathInfo(GetPathOption pathOption,
-                                                           Uri uri,
-                                                           out string path,
-                                                           out string directory,
-                                                           out string filename)
+        private static void GetPathInfo(
+            GetPathOption pathOption,
+            Uri uri,
+            out string path,
+            out string directory,
+            out string filename
+        )
         {
             path = uri.GetComponents(UriComponents.Path, UriFormat.Unescaped);
             int index = path.LastIndexOf('/');
 
-            if (pathOption == GetPathOption.AssumeFilename &&
-                index != -1 && index == path.Length - 1)
+            if (
+                pathOption == GetPathOption.AssumeFilename
+                && index != -1
+                && index == path.Length - 1
+            )
             {
                 // Remove last '/' and continue normal processing
                 path = path.Substring(0, path.Length - 1);
@@ -803,36 +946,26 @@ namespace System.Net
         /// </summary>
         private static string FormatAddressV6(IPAddress address, int port)
         {
-            return
-                "|2|" +
-                address.ToString() +
-                "|" +
-                port.ToString(NumberFormatInfo.InvariantInfo) +
-                "|";
+            return "|2|"
+                + address.ToString()
+                + "|"
+                + port.ToString(NumberFormatInfo.InvariantInfo)
+                + "|";
         }
 
         internal long ContentLength
         {
-            get
-            {
-                return _contentLength;
-            }
+            get { return _contentLength; }
         }
 
         internal DateTime LastModified
         {
-            get
-            {
-                return _lastModified;
-            }
+            get { return _lastModified; }
         }
 
         internal Uri ResponseUri
         {
-            get
-            {
-                return _responseUri!;
-            }
+            get { return _responseUri!; }
         }
 
         /// <summary>
@@ -840,10 +973,7 @@ namespace System.Net
         /// </summary>
         internal string? BannerMessage
         {
-            get
-            {
-                return _bannerMessage?.ToString();
-            }
+            get { return _bannerMessage?.ToString(); }
         }
 
         /// <summary>
@@ -851,10 +981,7 @@ namespace System.Net
         /// </summary>
         internal string? WelcomeMessage
         {
-            get
-            {
-                return _welcomeMessage?.ToString();
-            }
+            get { return _welcomeMessage?.ToString(); }
         }
 
         /// <summary>
@@ -862,10 +989,7 @@ namespace System.Net
         /// </summary>
         internal string? ExitMessage
         {
-            get
-            {
-                return _exitMessage?.ToString();
-            }
+            get { return _exitMessage?.ToString(); }
         }
 
         /// <summary>
@@ -875,7 +999,9 @@ namespace System.Net
         {
             string[] parsedList = responseString.Split(' ');
             if (parsedList.Length < 2)
-                throw new FormatException(SR.Format(SR.net_ftp_response_invalid_format, responseString));
+                throw new FormatException(
+                    SR.Format(SR.net_ftp_response_invalid_format, responseString)
+                );
             return Convert.ToInt64(parsedList[1], NumberFormatInfo.InvariantInfo);
         }
 
@@ -895,12 +1021,27 @@ namespace System.Net
             {
                 return dateTime;
             }
-            int year = Convert.ToInt32(dateTimeLine.Substring(0, 4), NumberFormatInfo.InvariantInfo);
-            int month = Convert.ToInt16(dateTimeLine.Substring(4, 2), NumberFormatInfo.InvariantInfo);
+            int year = Convert.ToInt32(
+                dateTimeLine.Substring(0, 4),
+                NumberFormatInfo.InvariantInfo
+            );
+            int month = Convert.ToInt16(
+                dateTimeLine.Substring(4, 2),
+                NumberFormatInfo.InvariantInfo
+            );
             int day = Convert.ToInt16(dateTimeLine.Substring(6, 2), NumberFormatInfo.InvariantInfo);
-            int hour = Convert.ToInt16(dateTimeLine.Substring(8, 2), NumberFormatInfo.InvariantInfo);
-            int minute = Convert.ToInt16(dateTimeLine.Substring(10, 2), NumberFormatInfo.InvariantInfo);
-            int second = Convert.ToInt16(dateTimeLine.Substring(12, 2), NumberFormatInfo.InvariantInfo);
+            int hour = Convert.ToInt16(
+                dateTimeLine.Substring(8, 2),
+                NumberFormatInfo.InvariantInfo
+            );
+            int minute = Convert.ToInt16(
+                dateTimeLine.Substring(10, 2),
+                NumberFormatInfo.InvariantInfo
+            );
+            int second = Convert.ToInt16(
+                dateTimeLine.Substring(12, 2),
+                NumberFormatInfo.InvariantInfo
+            );
             int millisecond = 0;
             if (parsedList.Length > 2)
             {
@@ -911,12 +1052,8 @@ namespace System.Net
                 dateTime = new DateTime(year, month, day, hour, minute, second, millisecond);
                 dateTime = dateTime.ToLocalTime(); // must be handled in local time
             }
-            catch (ArgumentOutOfRangeException)
-            {
-            }
-            catch (ArgumentException)
-            {
-            }
+            catch (ArgumentOutOfRangeException) { }
+            catch (ArgumentException) { }
             return dateTime;
         }
 
@@ -961,14 +1098,20 @@ namespace System.Net
             Uri? newUri;
             if (!Uri.TryCreate(baseUri, escapedFilename, out newUri))
             {
-                throw new FormatException(SR.Format(SR.net_ftp_invalid_response_filename, filename));
+                throw new FormatException(
+                    SR.Format(SR.net_ftp_invalid_response_filename, filename)
+                );
             }
             else
             {
-                if (!baseUri.IsBaseOf(newUri) ||
-                     baseUri.Segments.Length != newUri.Segments.Length - 1)
+                if (
+                    !baseUri.IsBaseOf(newUri)
+                    || baseUri.Segments.Length != newUri.Segments.Length - 1
+                )
                 {
-                    throw new FormatException(SR.Format(SR.net_ftp_invalid_response_filename, filename));
+                    throw new FormatException(
+                        SR.Format(SR.net_ftp_invalid_response_filename, filename)
+                    );
                 }
                 else
                 {
@@ -990,9 +1133,14 @@ namespace System.Net
                 {
                     pos1++;
                     long result;
-                    if (long.TryParse(str.AsSpan(pos1, pos2 - pos1),
-                                        NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
-                                        NumberFormatInfo.InvariantInfo, out result))
+                    if (
+                        long.TryParse(
+                            str.AsSpan(pos1, pos2 - pos1),
+                            NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+                            NumberFormatInfo.InvariantInfo,
+                            out result
+                        )
+                    )
                     {
                         _contentLength = result;
                     }
@@ -1027,7 +1175,9 @@ namespace System.Net
             // We need at least the status code and the port
             if (parsedList.Length <= 7)
             {
-                throw new FormatException(SR.Format(SR.net_ftp_response_invalid_format, responseString));
+                throw new FormatException(
+                    SR.Format(SR.net_ftp_response_invalid_format, responseString)
+                );
             }
 
             int index = parsedList.Length - 1;
@@ -1049,14 +1199,18 @@ namespace System.Net
             int pos1 = responseString.LastIndexOf('(');
             int pos2 = responseString.LastIndexOf(')');
             if (pos1 == -1 || pos2 <= pos1)
-                throw new FormatException(SR.Format(SR.net_ftp_response_invalid_format, responseString));
+                throw new FormatException(
+                    SR.Format(SR.net_ftp_response_invalid_format, responseString)
+                );
 
             // addressInfo will contain a string of format "|||<tcp-port>|"
             string addressInfo = responseString.Substring(pos1 + 1, pos2 - pos1 - 1);
 
             string[] parsedList = addressInfo.Split('|');
             if (parsedList.Length < 4)
-                throw new FormatException(SR.Format(SR.net_ftp_response_invalid_format, responseString));
+                throw new FormatException(
+                    SR.Format(SR.net_ftp_response_invalid_format, responseString)
+                );
 
             return Convert.ToInt32(parsedList[3], NumberFormatInfo.InvariantInfo);
         }
@@ -1091,7 +1245,10 @@ namespace System.Net
             {
                 // retrieves the IP address of the local endpoint
                 IPEndPoint localEP = (IPEndPoint)_dataSocket!.LocalEndPoint!;
-                if (ServerAddress.AddressFamily == AddressFamily.InterNetwork || ServerAddress.IsIPv4MappedToIPv6)
+                if (
+                    ServerAddress.AddressFamily == AddressFamily.InterNetwork
+                    || ServerAddress.IsIPv4MappedToIPv6
+                )
                 {
                     return FormatAddress(localEP.Address, localEP.Port);
                 }
@@ -1106,7 +1263,11 @@ namespace System.Net
             }
             catch (Exception e)
             {
-                throw GenerateException(SR.net_ftp_protocolerror, WebExceptionStatus.ProtocolError, e); // could not open data connection
+                throw GenerateException(
+                    SR.net_ftp_protocolerror,
+                    WebExceptionStatus.ProtocolError,
+                    e
+                ); // could not open data connection
             }
         }
 
@@ -1115,9 +1276,9 @@ namespace System.Net
         /// </summary>
         private static string FormatFtpCommand(string command, string? parameter)
         {
-            return string.IsNullOrEmpty(parameter) ?
-                command + "\r\n" :
-                command + " " + parameter + "\r\n";
+            return string.IsNullOrEmpty(parameter)
+                ? command + "\r\n"
+                : command + " " + parameter + "\r\n";
         }
 
         /// <summary>
@@ -1128,8 +1289,15 @@ namespace System.Net
         private static Socket CreateFtpDataSocket(Socket templateSocket)
         {
             // Safe to be called under an Assert.
-            Socket socket = new Socket(templateSocket.AddressFamily, templateSocket.SocketType, templateSocket.ProtocolType);
-            if (templateSocket.AddressFamily == AddressFamily.InterNetworkV6 && templateSocket.DualMode)
+            Socket socket = new Socket(
+                templateSocket.AddressFamily,
+                templateSocket.SocketType,
+                templateSocket.ProtocolType
+            );
+            if (
+                templateSocket.AddressFamily == AddressFamily.InterNetworkV6
+                && templateSocket.DualMode
+            )
             {
                 socket.DualMode = true;
             }
@@ -1137,9 +1305,14 @@ namespace System.Net
             return socket;
         }
 
-        protected override bool CheckValid(ResponseDescription response, ref int validThrough, ref int completeLength)
+        protected override bool CheckValid(
+            ResponseDescription response,
+            ref int validThrough,
+            ref int completeLength
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"CheckValid({response.StatusBuffer})");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"CheckValid({response.StatusBuffer})");
 
             // If the response is less than 4 bytes long, it is too short to tell, so return true, valid so far.
             if (response.StatusBuffer.Length < 4)
@@ -1152,14 +1325,24 @@ namespace System.Net
             if (response.Status == ResponseDescription.NoStatus)
             {
                 // If the response does not start with three digits, then it is not a valid response from an FTP server.
-                if (!(char.IsDigit(responseString[0]) && char.IsDigit(responseString[1]) && char.IsDigit(responseString[2]) && (responseString[3] == ' ' || responseString[3] == '-')))
+                if (
+                    !(
+                        char.IsDigit(responseString[0])
+                        && char.IsDigit(responseString[1])
+                        && char.IsDigit(responseString[2])
+                        && (responseString[3] == ' ' || responseString[3] == '-')
+                    )
+                )
                 {
                     return false;
                 }
                 else
                 {
                     response.StatusCodeString = responseString.Substring(0, 3);
-                    response.Status = Convert.ToInt16(response.StatusCodeString, NumberFormatInfo.InvariantInfo);
+                    response.Status = Convert.ToInt16(
+                        response.StatusCodeString,
+                        NumberFormatInfo.InvariantInfo
+                    );
                 }
 
                 // IF a hyphen follows the status code on the first line of the response, then we have a multiline response coming.
@@ -1180,10 +1363,13 @@ namespace System.Net
             // FTP protocol for multiline responses.
             // All other cases indicate that the response is not yet complete.
             int index;
-            while ((index = responseString.IndexOf("\r\n", validThrough, StringComparison.Ordinal)) != -1)  // gets the end line.
+            while (
+                (index = responseString.IndexOf("\r\n", validThrough, StringComparison.Ordinal))
+                != -1
+            ) // gets the end line.
             {
                 int lineStart = validThrough;
-                validThrough = index + 2;  // validThrough now marks the end of the line being examined.
+                validThrough = index + 2; // validThrough now marks the end of the line being examined.
                 if (!response.Multiline)
                 {
                     completeLength = validThrough;

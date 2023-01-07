@@ -18,7 +18,7 @@ namespace System.CommandLine.Invocation
         private HelpBuilder? _helpBuilder;
         private BindingContext? _bindingContext;
         private IConsole? _console;
-        private readonly CancellationToken _token; 
+        private readonly CancellationToken _token;
         private readonly LinkedList<CancellationTokenRegistration> _registrations = new();
         private volatile CancellationTokenSource? _source;
 
@@ -28,11 +28,12 @@ namespace System.CommandLine.Invocation
         public InvocationContext(
             ParseResult parseResult,
             IConsole? console = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ParseResult = parseResult;
             _console = console;
-            
+
             _source = new CancellationTokenSource();
             _token = _source.Token;
             if (cancellationToken.CanBeCanceled)
@@ -74,12 +75,13 @@ namespace System.CommandLine.Invocation
                 return _console;
             }
             set => _console = value;
-        } 
+        }
 
         /// <summary>
         /// Enables writing help output.
         /// </summary>
-        public HelpBuilder HelpBuilder => _helpBuilder ??= Parser.Configuration.HelpBuilderFactory(BindingContext);
+        public HelpBuilder HelpBuilder =>
+            _helpBuilder ??= Parser.Configuration.HelpBuilderFactory(BindingContext);
 
         /// <summary>
         /// The parser used to create the <see cref="ParseResult"/>.
@@ -89,7 +91,8 @@ namespace System.CommandLine.Invocation
         /// <summary>
         /// Provides localizable strings for help and error messages.
         /// </summary>
-        public LocalizationResources LocalizationResources => Parser.Configuration.LocalizationResources;
+        public LocalizationResources LocalizationResources =>
+            Parser.Configuration.LocalizationResources;
 
         /// <summary>
         /// The parse result for the current invocation.
@@ -124,20 +127,16 @@ namespace System.CommandLine.Invocation
         }
 
         /// <inheritdoc cref="ParseResult.GetValue(Option)"/>
-        public object? GetValue(Option option) =>
-            ParseResult.GetValue(option);
+        public object? GetValue(Option option) => ParseResult.GetValue(option);
 
         /// <inheritdoc cref="ParseResult.GetValue(Option)"/>
-        public T? GetValue<T>(Option<T> option)
-            => ParseResult.GetValue(option);
+        public T? GetValue<T>(Option<T> option) => ParseResult.GetValue(option);
 
         /// <inheritdoc cref="ParseResult.GetValue(Argument)"/>
-        public object? GetValue(Argument argument) =>
-            ParseResult.GetValue(argument);
+        public object? GetValue(Argument argument) => ParseResult.GetValue(argument);
 
         /// <inheritdoc cref="ParseResult.GetValue(Argument)"/>
-        public T GetValue<T>(Argument<T> argument)
-            => ParseResult.GetValue(argument);
+        public T GetValue<T>(Argument<T> argument) => ParseResult.GetValue(argument);
 
         /// <inheritdoc />
         void IDisposable.Dispose()

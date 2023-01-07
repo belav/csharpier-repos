@@ -22,10 +22,12 @@ namespace System.Collections.Frozen
         private protected override int FindItemIndex(T item) => -1;
 
         /// <inheritdoc />
-        private protected override Enumerator GetEnumeratorCore() => new Enumerator(Array.Empty<T>());
+        private protected override Enumerator GetEnumeratorCore() =>
+            new Enumerator(Array.Empty<T>());
 
         /// <inheritdoc />
-        private protected override bool IsProperSubsetOfCore(IEnumerable<T> other) => !OtherIsEmpty(other);
+        private protected override bool IsProperSubsetOfCore(IEnumerable<T> other) =>
+            !OtherIsEmpty(other);
 
         /// <inheritdoc />
         private protected override bool IsProperSupersetOfCore(IEnumerable<T> other) => false;
@@ -34,7 +36,8 @@ namespace System.Collections.Frozen
         private protected override bool IsSubsetOfCore(IEnumerable<T> other) => true;
 
         /// <inheritdoc />
-        private protected override bool IsSupersetOfCore(IEnumerable<T> other) => OtherIsEmpty(other);
+        private protected override bool IsSupersetOfCore(IEnumerable<T> other) =>
+            OtherIsEmpty(other);
 
         /// <inheritdoc />
         private protected override bool OverlapsCore(IEnumerable<T> other) => false;
@@ -43,7 +46,9 @@ namespace System.Collections.Frozen
         private protected override bool SetEqualsCore(IEnumerable<T> other) => OtherIsEmpty(other);
 
         private static bool OtherIsEmpty(IEnumerable<T> other) =>
-            other is IReadOnlyCollection<T> s ? s.Count == 0 : // TODO https://github.com/dotnet/runtime/issues/42254: Remove if/when Any includes this check
-            !other.Any();
+            other is IReadOnlyCollection<T> s
+                ? s.Count == 0
+                : // TODO https://github.com/dotnet/runtime/issues/42254: Remove if/when Any includes this check
+                !other.Any();
     }
 }

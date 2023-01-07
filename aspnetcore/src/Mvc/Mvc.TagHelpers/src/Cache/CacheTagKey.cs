@@ -18,11 +18,18 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers.Cache;
 public class CacheTagKey : IEquatable<CacheTagKey>
 {
     private static readonly char[] AttributeSeparator = new[] { ',' };
-    private static readonly Func<IRequestCookieCollection, string, string> CookieAccessor = (c, key) => c[key];
-    private static readonly Func<IHeaderDictionary, string, string> HeaderAccessor = (c, key) => c[key];
-    private static readonly Func<IQueryCollection, string, string> QueryAccessor = (c, key) => c[key];
-    private static readonly Func<RouteValueDictionary, string, string> RouteValueAccessor = (c, key) =>
-        Convert.ToString(c[key], CultureInfo.InvariantCulture);
+    private static readonly Func<IRequestCookieCollection, string, string> CookieAccessor = (
+        c,
+        key
+    ) => c[key];
+    private static readonly Func<IHeaderDictionary, string, string> HeaderAccessor = (c, key) =>
+        c[key];
+    private static readonly Func<IQueryCollection, string, string> QueryAccessor = (c, key) =>
+        c[key];
+    private static readonly Func<RouteValueDictionary, string, string> RouteValueAccessor = (
+        c,
+        key
+    ) => Convert.ToString(c[key], CultureInfo.InvariantCulture);
 
     private const string CacheKeyTokenSeparator = "||";
     private const string VaryByName = "VaryBy";
@@ -57,8 +64,7 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     /// <param name="tagHelper">The <see cref="CacheTagHelper"/>.</param>
     /// <param name="context">The <see cref="TagHelperContext"/>.</param>
     /// <returns>A new <see cref="CacheTagKey"/>.</returns>
-    public CacheTagKey(CacheTagHelper tagHelper, TagHelperContext context)
-        : this(tagHelper)
+    public CacheTagKey(CacheTagHelper tagHelper, TagHelperContext context) : this(tagHelper)
     {
         Key = context.UniqueId;
         _prefix = nameof(CacheTagHelper);
@@ -69,8 +75,7 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     /// </summary>
     /// <param name="tagHelper">The <see cref="DistributedCacheTagHelper"/>.</param>
     /// <returns>A new <see cref="CacheTagKey"/>.</returns>
-    public CacheTagKey(DistributedCacheTagHelper tagHelper)
-        : this((CacheTagHelperBase)tagHelper)
+    public CacheTagKey(DistributedCacheTagHelper tagHelper) : this((CacheTagHelperBase)tagHelper)
     {
         Key = tagHelper.Name;
         _prefix = nameof(DistributedCacheTagHelper);
@@ -91,7 +96,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
         _routeValues = ExtractCollection(
             tagHelper.VaryByRoute,
             tagHelper.ViewContext.RouteData.Values,
-            RouteValueAccessor);
+            RouteValueAccessor
+        );
         _varyByUser = tagHelper.VaryByUser;
         _varyByCulture = tagHelper.VaryByCulture;
 
@@ -123,9 +129,7 @@ public class CacheTagKey : IEquatable<CacheTagKey>
         }
 
         var builder = new StringBuilder(_prefix);
-        builder
-            .Append(CacheKeyTokenSeparator)
-            .Append(Key);
+        builder.Append(CacheKeyTokenSeparator).Append(Key);
 
         if (!string.IsNullOrEmpty(_varyBy))
         {
@@ -196,18 +200,23 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     /// <inheritdoc />
     public bool Equals(CacheTagKey other)
     {
-        return string.Equals(other.Key, Key, StringComparison.Ordinal) &&
-            other._expiresAfter == _expiresAfter &&
-            other._expiresOn == _expiresOn &&
-            other._expiresSliding == _expiresSliding &&
-            string.Equals(other._varyBy, _varyBy, StringComparison.Ordinal) &&
-            AreSame(_cookies, other._cookies) &&
-            AreSame(_headers, other._headers) &&
-            AreSame(_queries, other._queries) &&
-            AreSame(_routeValues, other._routeValues) &&
-            (_varyByUser == other._varyByUser &&
-                (!_varyByUser || string.Equals(other._username, _username, StringComparison.Ordinal))) &&
-            CultureEquals();
+        return string.Equals(other.Key, Key, StringComparison.Ordinal)
+            && other._expiresAfter == _expiresAfter
+            && other._expiresOn == _expiresOn
+            && other._expiresSliding == _expiresSliding
+            && string.Equals(other._varyBy, _varyBy, StringComparison.Ordinal)
+            && AreSame(_cookies, other._cookies)
+            && AreSame(_headers, other._headers)
+            && AreSame(_queries, other._queries)
+            && AreSame(_routeValues, other._routeValues)
+            && (
+                _varyByUser == other._varyByUser
+                && (
+                    !_varyByUser
+                    || string.Equals(other._username, _username, StringComparison.Ordinal)
+                )
+            )
+            && CultureEquals();
 
         bool CultureEquals()
         {
@@ -222,8 +231,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
                 return true;
             }
 
-            return _requestCulture.Equals(other._requestCulture) &&
-                _requestUICulture.Equals(other._requestUICulture);
+            return _requestCulture.Equals(other._requestCulture)
+                && _requestUICulture.Equals(other._requestUICulture);
         }
     }
 
@@ -265,7 +274,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     private static IList<KeyValuePair<string, string>> ExtractCollection<TSourceCollection>(
         string keys,
         TSourceCollection collection,
-        Func<TSourceCollection, string, string> accessor)
+        Func<TSourceCollection, string, string> accessor
+    )
     {
         if (string.IsNullOrEmpty(keys))
         {
@@ -283,7 +293,9 @@ public class CacheTagKey : IEquatable<CacheTagKey>
             if (trimmedValue.Length != 0)
             {
                 var value = accessor(collection, trimmedValue.Value);
-                result.Add(new KeyValuePair<string, string>(trimmedValue.Value, value ?? string.Empty));
+                result.Add(
+                    new KeyValuePair<string, string>(trimmedValue.Value, value ?? string.Empty)
+                );
             }
         }
 
@@ -293,7 +305,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     private static void AddStringCollection(
         StringBuilder builder,
         string collectionName,
-        IList<KeyValuePair<string, string>> values)
+        IList<KeyValuePair<string, string>> values
+    )
     {
         if (values == null || values.Count == 0)
         {
@@ -301,10 +314,7 @@ public class CacheTagKey : IEquatable<CacheTagKey>
         }
 
         // keyName(param1=value1|param2=value2)
-        builder
-            .Append(CacheKeyTokenSeparator)
-            .Append(collectionName)
-            .Append('(');
+        builder.Append(CacheKeyTokenSeparator).Append(collectionName).Append('(');
 
         for (var i = 0; i < values.Count; i++)
         {
@@ -315,10 +325,7 @@ public class CacheTagKey : IEquatable<CacheTagKey>
                 builder.Append(CacheKeyTokenSeparator);
             }
 
-            builder
-                .Append(item.Key)
-                .Append(CacheKeyTokenSeparator)
-                .Append(item.Value);
+            builder.Append(item.Key).Append(CacheKeyTokenSeparator).Append(item.Value);
         }
 
         builder.Append(')');
@@ -327,7 +334,8 @@ public class CacheTagKey : IEquatable<CacheTagKey>
     private static void CombineCollectionHashCode(
         ref HashCode hashCode,
         string collectionName,
-        IList<KeyValuePair<string, string>> values)
+        IList<KeyValuePair<string, string>> values
+    )
     {
         if (values != null)
         {
@@ -342,7 +350,10 @@ public class CacheTagKey : IEquatable<CacheTagKey>
         }
     }
 
-    private static bool AreSame(IList<KeyValuePair<string, string>> values1, IList<KeyValuePair<string, string>> values2)
+    private static bool AreSame(
+        IList<KeyValuePair<string, string>> values1,
+        IList<KeyValuePair<string, string>> values2
+    )
     {
         if (values1 == values2)
         {
@@ -356,8 +367,10 @@ public class CacheTagKey : IEquatable<CacheTagKey>
 
         for (var i = 0; i < values1.Count; i++)
         {
-            if (!string.Equals(values1[i].Key, values2[i].Key, StringComparison.Ordinal) ||
-                !string.Equals(values1[i].Value, values2[i].Value, StringComparison.Ordinal))
+            if (
+                !string.Equals(values1[i].Key, values2[i].Key, StringComparison.Ordinal)
+                || !string.Equals(values1[i].Value, values2[i].Value, StringComparison.Ordinal)
+            )
             {
                 return false;
             }

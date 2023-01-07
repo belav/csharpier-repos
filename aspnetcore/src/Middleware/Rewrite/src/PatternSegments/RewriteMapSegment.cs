@@ -16,9 +16,15 @@ internal sealed class RewriteMapSegment : PatternSegment
         _pattern = pattern;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
-        var key = _pattern.Evaluate(context, ruleBackReferences, conditionBackReferences).ToLowerInvariant();
+        var key = _pattern
+            .Evaluate(context, ruleBackReferences, conditionBackReferences)
+            .ToLowerInvariant();
         return _rewriteMap[key];
     }
 }

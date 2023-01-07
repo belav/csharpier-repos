@@ -27,6 +27,7 @@ namespace Microsoft.Win32.SafeHandles
 
         protected abstract bool ReleaseNativeHandle();
     }
+
     public sealed partial class SafeNCryptKeyHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
@@ -43,6 +44,7 @@ namespace Microsoft.Win32.SafeHandles
 
         protected override bool ReleaseNativeHandle() => false;
     }
+
     public sealed partial class SafeNCryptProviderHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
@@ -53,6 +55,7 @@ namespace Microsoft.Win32.SafeHandles
 
         protected override bool ReleaseNativeHandle() => false;
     }
+
     public sealed partial class SafeNCryptSecretHandle : SafeNCryptHandle
     {
         [SupportedOSPlatform("windows")]
@@ -94,13 +97,18 @@ namespace System.Security.Cryptography
         }
 
         public override void GenerateKey() { }
+
         public override void GenerateIV() { }
+
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
+
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
     }
+
     public sealed partial class CngKey : System.IDisposable
     {
         internal CngKey() { }
+
         public CngAlgorithm Algorithm => null!;
         public CngAlgorithmGroup? AlgorithmGroup => null;
         public CngExportPolicies ExportPolicy => default;
@@ -110,16 +118,26 @@ namespace System.Security.Cryptography
         public string? KeyName => null;
         public int KeySize => default;
         public CngKeyUsages KeyUsage => default;
-        public IntPtr ParentWindowHandle { get => default; set { } }
+        public IntPtr ParentWindowHandle
+        {
+            get => default;
+            set { }
+        }
         public CngProvider? Provider => null;
         public SafeNCryptProviderHandle ProviderHandle => null!;
         public CngUIPolicy UIPolicy => null!;
         public string? UniqueName => null;
+
         public void Delete() { }
+
         public void Dispose() { }
+
         public byte[] Export(CngKeyBlobFormat format) => null!;
+
         public CngProperty GetProperty(string name, CngPropertyOptions options) => default;
+
         public bool HasProperty(string name, CngPropertyOptions options) => false;
+
         public void SetProperty(CngProperty property) { }
 
         [SupportedOSPlatform("windows")]
@@ -135,7 +153,11 @@ namespace System.Security.Cryptography
         }
 
         [SupportedOSPlatform("windows")]
-        public static CngKey Create(CngAlgorithm algorithm, string? keyName, CngKeyCreationParameters? creationParameters)
+        public static CngKey Create(
+            CngAlgorithm algorithm,
+            string? keyName,
+            CngKeyCreationParameters? creationParameters
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
@@ -171,7 +193,10 @@ namespace System.Security.Cryptography
         }
 
         [SupportedOSPlatform("windows")]
-        public static CngKey Open(SafeNCryptKeyHandle keyHandle, CngKeyHandleOpenOptions keyHandleOpenOptions)
+        public static CngKey Open(
+            SafeNCryptKeyHandle keyHandle,
+            CngKeyHandleOpenOptions keyHandleOpenOptions
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
@@ -189,11 +214,16 @@ namespace System.Security.Cryptography
         }
 
         [SupportedOSPlatform("windows")]
-        public static CngKey Open(string keyName, CngProvider provider, CngKeyOpenOptions openOptions)
+        public static CngKey Open(
+            string keyName,
+            CngProvider provider,
+            CngKeyOpenOptions openOptions
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
     }
+
     public sealed partial class DSACng : DSA
     {
         [SupportedOSPlatform("windows")]
@@ -215,11 +245,16 @@ namespace System.Security.Cryptography
         }
 
         public CngKey Key => null!;
+
         public override byte[] CreateSignature(byte[] rgbHash) => null!;
+
         public override DSAParameters ExportParameters(bool includePrivateParameters) => default;
+
         public override void ImportParameters(DSAParameters parameters) { }
+
         public override bool VerifySignature(byte[] rgbHash, byte[] rgbSignature) => false;
     }
+
     public sealed partial class ECDiffieHellmanCng : ECDiffieHellman
     {
         [SupportedOSPlatform("windows")]
@@ -246,49 +281,110 @@ namespace System.Security.Cryptography
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
-        public CngAlgorithm HashAlgorithm { get => null!; set { } }
-        public byte[]? HmacKey { get => null; set { } }
+        public CngAlgorithm HashAlgorithm
+        {
+            get => null!;
+            set { }
+        }
+        public byte[]? HmacKey
+        {
+            get => null;
+            set { }
+        }
         public CngKey Key => null!;
-        public ECDiffieHellmanKeyDerivationFunction KeyDerivationFunction { get => default; set { } }
-        public byte[]? Label { get => null; set { } }
-        public byte[]? SecretAppend { get => null; set { } }
-        public byte[]? SecretPrepend { get => null; set { } }
-        public byte[]? Seed { get => null; set { } }
+        public ECDiffieHellmanKeyDerivationFunction KeyDerivationFunction
+        {
+            get => default;
+            set { }
+        }
+        public byte[]? Label
+        {
+            get => null;
+            set { }
+        }
+        public byte[]? SecretAppend
+        {
+            get => null;
+            set { }
+        }
+        public byte[]? SecretPrepend
+        {
+            get => null;
+            set { }
+        }
+        public byte[]? Seed
+        {
+            get => null;
+            set { }
+        }
         public bool UseSecretAgreementAsHmacKey => false;
-        public SafeNCryptSecretHandle DeriveSecretAgreementHandle(CngKey otherPartyPublicKey) => null!;
-        public SafeNCryptSecretHandle DeriveSecretAgreementHandle(ECDiffieHellmanPublicKey otherPartyPublicKey) => null!;
+
+        public SafeNCryptSecretHandle DeriveSecretAgreementHandle(CngKey otherPartyPublicKey) =>
+            null!;
+
+        public SafeNCryptSecretHandle DeriveSecretAgreementHandle(
+            ECDiffieHellmanPublicKey otherPartyPublicKey
+        ) => null!;
+
         public byte[] DeriveKeyMaterial(CngKey otherPartyPublicKey) => null!;
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public void FromXmlString(string xml, ECKeyXmlFormat format) { }
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public string ToXmlString(ECKeyXmlFormat format) => null!;
+
         public override ECDiffieHellmanPublicKey PublicKey => null!;
     }
+
     public sealed partial class ECDiffieHellmanCngPublicKey : ECDiffieHellmanPublicKey
     {
         internal ECDiffieHellmanCngPublicKey() { }
+
         public CngKeyBlobFormat BlobFormat => null!;
+
         protected override void Dispose(bool disposing) { }
+
         public CngKey Import() => null!;
 
         [SupportedOSPlatform("windows")]
-        public static ECDiffieHellmanPublicKey FromByteArray(byte[] publicKeyBlob, CngKeyBlobFormat format)
+        public static ECDiffieHellmanPublicKey FromByteArray(
+            byte[] publicKeyBlob,
+            CngKeyBlobFormat format
+        )
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static ECDiffieHellmanCngPublicKey FromXmlString(string xml)
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public override string ToXmlString()
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
     }
+
     public sealed partial class ECDsaCng : ECDsa
     {
         [SupportedOSPlatform("windows")]
@@ -315,21 +411,44 @@ namespace System.Security.Cryptography
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_CryptographyCng);
         }
 
-        public CngAlgorithm HashAlgorithm { get => null!; set { } }
+        public CngAlgorithm HashAlgorithm
+        {
+            get => null!;
+            set { }
+        }
         public CngKey Key => null!;
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public void FromXmlString(string xml, ECKeyXmlFormat format) { }
+
         public byte[] SignData(byte[] data) => null!;
+
         public byte[] SignData(byte[] data, int offset, int count) => null!;
+
         public byte[] SignData(System.IO.Stream data) => null!;
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public string ToXmlString(ECKeyXmlFormat format) => null!;
+
         public bool VerifyData(byte[] data, byte[] signature) => false;
+
         public bool VerifyData(byte[] data, int offset, int count, byte[] signature) => false;
+
         public bool VerifyData(System.IO.Stream data, byte[] signature) => false;
+
         public override byte[] SignHash(byte[] hash) => null!;
+
         public override bool VerifyHash(byte[] hash, byte[] signature) => false;
     }
+
     public sealed partial class RSACng : RSA
     {
         [SupportedOSPlatform("windows")]
@@ -351,9 +470,12 @@ namespace System.Security.Cryptography
         }
 
         public CngKey Key => null!;
+
         public override RSAParameters ExportParameters(bool includePrivateParameters) => default;
+
         public override void ImportParameters(RSAParameters parameters) { }
     }
+
     public sealed partial class TripleDESCng : TripleDES
     {
         [SupportedOSPlatform("windows")]
@@ -381,8 +503,11 @@ namespace System.Security.Cryptography
         }
 
         public override void GenerateKey() { }
+
         public override void GenerateIV() { }
+
         public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
+
         public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[]? rgbIV) => null!;
     }
 }

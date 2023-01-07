@@ -13,7 +13,8 @@ internal sealed partial class MarkupTagHelperDirectiveAttributeSyntax
     {
         get
         {
-            var tagHelperAttributeInfo = this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
+            var tagHelperAttributeInfo =
+                this.GetAnnotationValue(TagHelperAttributeInfoKey) as TagHelperAttributeInfo;
             return tagHelperAttributeInfo;
         }
     }
@@ -26,17 +27,20 @@ internal sealed partial class MarkupTagHelperDirectiveAttributeSyntax
                 Transition.GetContent(),
                 Name.GetContent(),
                 Colon?.GetContent() ?? string.Empty,
-                ParameterName?.GetContent() ?? string.Empty);
+                ParameterName?.GetContent() ?? string.Empty
+            );
             return fullName;
         }
     }
 
-    public MarkupTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(TagHelperAttributeInfo info)
+    public MarkupTagHelperDirectiveAttributeSyntax WithTagHelperAttributeInfo(
+        TagHelperAttributeInfo info
+    )
     {
         var annotations = new List<SyntaxAnnotation>(GetAnnotations())
-            {
-                new SyntaxAnnotation(TagHelperAttributeInfoKey, info)
-            };
+        {
+            new SyntaxAnnotation(TagHelperAttributeInfoKey, info)
+        };
 
         var newGreen = Green.WithAnnotationsGreen(annotations.ToArray());
 

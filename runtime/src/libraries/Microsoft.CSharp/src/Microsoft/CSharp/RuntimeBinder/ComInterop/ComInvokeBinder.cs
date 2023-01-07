@@ -15,8 +15,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal sealed class ComInvokeBinder
     {
         private readonly ComMethodDesc _methodDesc;
-        private readonly Expression _method;        // ComMethodDesc to be called
-        private readonly Expression _dispatch;      // IDispatch
+        private readonly Expression _method; // ComMethodDesc to be called
+        private readonly Expression _dispatch; // IDispatch
 
         private readonly CallInfo _callInfo;
         private readonly DynamicMetaObject[] _args;
@@ -46,7 +46,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             BindingRestrictions restrictions,
             Expression method,
             Expression dispatch,
-            ComMethodDesc methodDesc)
+            ComMethodDesc methodDesc
+        )
         {
             Debug.Assert(callInfo != null);
             Debug.Assert(args != null);
@@ -87,7 +88,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         private ParameterExpression DispParamsVariable
         {
-            get { return EnsureVariable(ref _dispParams, typeof(ComTypes.DISPPARAMS), "dispParams"); }
+            get
+            {
+                return EnsureVariable(ref _dispParams, typeof(ComTypes.DISPPARAMS), "dispParams");
+            }
         }
 
         private ParameterExpression InvokeResultVariable
@@ -102,7 +106,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         private ParameterExpression DispIdsOfKeywordArgsPinnedVariable
         {
-            get { return EnsureVariable(ref _dispIdsOfKeywordArgsPinned, typeof(GCHandle), "dispIdsOfKeywordArgsPinned"); }
+            get
+            {
+                return EnsureVariable(
+                    ref _dispIdsOfKeywordArgsPinned,
+                    typeof(GCHandle),
+                    "dispIdsOfKeywordArgsPinned"
+                );
+            }
         }
 
         private ParameterExpression PropertyPutDispIdVariable
@@ -110,9 +121,17 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             get { return EnsureVariable(ref _propertyPutDispId, typeof(int), "propertyPutDispId"); }
         }
 
-        private ParameterExpression ParamVariantsVariable => _paramVariants ??= Expression.Variable(VariantArray.GetStructType(_args.Length), "paramVariants");
+        private ParameterExpression ParamVariantsVariable =>
+            _paramVariants ??= Expression.Variable(
+                VariantArray.GetStructType(_args.Length),
+                "paramVariants"
+            );
 
-        private static ParameterExpression EnsureVariable(ref ParameterExpression var, Type type, string name)
+        private static ParameterExpression EnsureVariable(
+            ref ParameterExpression var,
+            Type type,
+            string name
+        )
         {
             if (var != null)
             {
@@ -123,7 +142,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         private static Type MarshalType(DynamicMetaObject mo, bool isByRef)
         {
-            Type marshalType = (mo.Value == null && mo.HasValue && !mo.LimitType.IsValueType) ? null : mo.LimitType;
+            Type marshalType =
+                (mo.Value == null && mo.HasValue && !mo.LimitType.IsValueType)
+                    ? null
+                    : mo.LimitType;
 
             // we are not checking that mo.Expression is writeable or whether evaluating it has no sideeffects
             // the assumption is that whoever matched it with ByRef arginfo took care of this.
@@ -148,7 +170,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             for (int i = 0; i < _args.Length; i++)
             {
                 DynamicMetaObject curMo = _args[i];
-                _restrictions = _restrictions.Merge(ComBinderHelpers.GetTypeRestrictionForDynamicMetaObject(curMo));
+                _restrictions = _restrictions.Merge(
+                    ComBinderHelpers.GetTypeRestrictionForDynamicMetaObject(curMo)
+                );
                 marshalArgTypes[i] = MarshalType(curMo, _isByRef[i]);
             }
 
@@ -162,7 +186,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         private static void AddNotNull(List<ParameterExpression> list, ParameterExpression var)
         {
-            if (var != null) list.Add(var);
+            if (var != null)
+                list.Add(var);
         }
 
         private Expression CreateScope(Expression expression)
@@ -200,9 +225,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs))
+                            typeof(ComTypes.DISPPARAMS).GetField(
+                                nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs)
+                            )
                         ),
-                        Expression.Call(typeof(UnsafeMethods).GetMethod(nameof(UnsafeMethods.GetIdsOfNamedParameters)),
+                        Expression.Call(
+                            typeof(UnsafeMethods).GetMethod(
+                                nameof(UnsafeMethods.GetIdsOfNamedParameters)
+                            ),
                             DispatchObjectVariable,
                             Expression.Constant(names),
                             DispIdVariable,
@@ -272,7 +302,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             else
             {
                 // INVOKE_PROPERTYGET should only be needed for COM objects without typeinfo, where we might have to treat properties as methods
-                invokeKind = ComTypes.INVOKEKIND.INVOKE_FUNC | ComTypes.INVOKEKIND.INVOKE_PROPERTYGET;
+                invokeKind =
+                    ComTypes.INVOKEKIND.INVOKE_FUNC | ComTypes.INVOKEKIND.INVOKE_PROPERTYGET;
             }
 
             MethodCallExpression invoke = Expression.Call(
@@ -304,10 +335,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             //
             // _returnValue = (ReturnType)_invokeResult.ToObject();
             //
-            Expression invokeResultObject =
-                Expression.Call(
-                    InvokeResultVariable,
-                    typeof(Variant).GetMethod(nameof(Variant.ToObject)));
+            Expression invokeResultObject = Expression.Call(
+                InvokeResultVariable,
+                typeof(Variant).GetMethod(nameof(Variant.ToObject))
+            );
 
             VariantBuilder[] variants = _varEnumSelector.VariantBuilders;
 
@@ -316,7 +347,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
             for (int i = 0, n = variants.Length; i < n; i++)
             {
-                Expression updateFromReturn = variants[i].UpdateFromReturn(parametersForUpdates[i + 1]);
+                Expression updateFromReturn = variants[i].UpdateFromReturn(
+                    parametersForUpdates[i + 1]
+                );
                 if (updateFromReturn != null)
                 {
                     tryStatements.Add(updateFromReturn);
@@ -397,7 +430,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 //
                 Expression.Assign(
                     DispIdVariable,
-                    Expression.Property(_method, typeof(ComMethodDesc).GetProperty(nameof(ComMethodDesc.DispId)))
+                    Expression.Property(
+                        _method,
+                        typeof(ComMethodDesc).GetProperty(nameof(ComMethodDesc.DispId))
+                    )
                 )
             };
 
@@ -413,7 +449,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                             typeof(ComTypes.DISPPARAMS).GetField(nameof(ComTypes.DISPPARAMS.rgvarg))
                         ),
                         Expression.Call(
-                            typeof(UnsafeMethods).GetMethod(nameof(UnsafeMethods.ConvertVariantByrefToPtr)),
+                            typeof(UnsafeMethods).GetMethod(
+                                nameof(UnsafeMethods.ConvertVariantByrefToPtr)
+                            ),
                             VariantArray.GetStructField(ParamVariantsVariable, 0)
                         )
                     )
@@ -443,7 +481,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(nameof(ComTypes.DISPPARAMS.cNamedArgs))
+                            typeof(ComTypes.DISPPARAMS).GetField(
+                                nameof(ComTypes.DISPPARAMS.cNamedArgs)
+                            )
                         ),
                         Expression.Constant(1)
                     )
@@ -460,10 +500,14 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs))
+                            typeof(ComTypes.DISPPARAMS).GetField(
+                                nameof(ComTypes.DISPPARAMS.rgdispidNamedArgs)
+                            )
                         ),
                         Expression.Call(
-                            typeof(UnsafeMethods).GetMethod(nameof(UnsafeMethods.ConvertInt32ByrefToPtr)),
+                            typeof(UnsafeMethods).GetMethod(
+                                nameof(UnsafeMethods.ConvertInt32ByrefToPtr)
+                            ),
                             PropertyPutDispIdVariable
                         )
                     )
@@ -478,7 +522,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     Expression.Assign(
                         Expression.Field(
                             DispParamsVariable,
-                            typeof(ComTypes.DISPPARAMS).GetField(nameof(ComTypes.DISPPARAMS.cNamedArgs))
+                            typeof(ComTypes.DISPPARAMS).GetField(
+                                nameof(ComTypes.DISPPARAMS.cNamedArgs)
+                            )
                         ),
                         Expression.Constant(_keywordArgNames.Length)
                     )

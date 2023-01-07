@@ -16,7 +16,10 @@ namespace Microsoft.Extensions.Configuration
     /// ConfigurationManager is a mutable configuration object. It is both an <see cref="IConfigurationBuilder"/> and an <see cref="IConfigurationRoot"/>.
     /// As sources are added, it updates its current view of configuration.
     /// </summary>
-    public sealed class ConfigurationManager : IConfigurationBuilder, IConfigurationRoot, IDisposable
+    public sealed class ConfigurationManager
+        : IConfigurationBuilder,
+            IConfigurationRoot,
+            IDisposable
     {
         // Concurrently modifying config sources or properties is not thread-safe. However, it is thread-safe to read config while modifying sources or properties.
         private readonly ConfigurationSources _sources;
@@ -62,7 +65,8 @@ namespace Microsoft.Extensions.Configuration
         public IConfigurationSection GetSection(string key) => new ConfigurationSection(this, key);
 
         /// <inheritdoc/>
-        public IEnumerable<IConfigurationSection> GetChildren() => this.GetChildrenImplementation(null);
+        public IEnumerable<IConfigurationSection> GetChildren() =>
+            this.GetChildrenImplementation(null);
 
         IDictionary<string, object> IConfigurationBuilder.Properties => _properties;
 
@@ -72,7 +76,8 @@ namespace Microsoft.Extensions.Configuration
         // We cannot track the duration of the reference to the providers if this property is used.
         // If a configuration source is removed after this is accessed but before it's completely enumerated,
         // this may allow access to a disposed provider.
-        IEnumerable<IConfigurationProvider> IConfigurationRoot.Providers => _providerManager.NonReferenceCountedProviders;
+        IEnumerable<IConfigurationProvider> IConfigurationRoot.Providers =>
+            _providerManager.NonReferenceCountedProviders;
 
         /// <inheritdoc/>
         public void Dispose()
@@ -106,11 +111,15 @@ namespace Microsoft.Extensions.Configuration
             RaiseChanged();
         }
 
-        internal ReferenceCountedProviders GetProvidersReference() => _providerManager.GetReference();
+        internal ReferenceCountedProviders GetProvidersReference() =>
+            _providerManager.GetReference();
 
         private void RaiseChanged()
         {
-            var previousToken = Interlocked.Exchange(ref _changeToken, new ConfigurationReloadToken());
+            var previousToken = Interlocked.Exchange(
+                ref _changeToken,
+                new ConfigurationReloadToken()
+            );
             previousToken.OnReload();
         }
 
@@ -120,7 +129,9 @@ namespace Microsoft.Extensions.Configuration
             IConfigurationProvider provider = source.Build(this);
 
             provider.Load();
-            _changeTokenRegistrations.Add(ChangeToken.OnChange(provider.GetReloadToken, RaiseChanged));
+            _changeTokenRegistrations.Add(
+                ChangeToken.OnChange(provider.GetReloadToken, RaiseChanged)
+            );
 
             _providerManager.AddProvider(provider);
             RaiseChanged();

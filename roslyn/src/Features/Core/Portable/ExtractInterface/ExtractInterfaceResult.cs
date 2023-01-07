@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public Solution UpdatedSolution { get; }
         public DocumentId NavigationDocumentId { get; }
 
-        public ExtractInterfaceResult(bool succeeded, Solution updatedSolution = null, DocumentId navigationDocumentId = null)
+        public ExtractInterfaceResult(
+            bool succeeded,
+            Solution updatedSolution = null,
+            DocumentId navigationDocumentId = null
+        )
         {
             Succeeded = succeeded;
             UpdatedSolution = updatedSolution;

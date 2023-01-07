@@ -8,9 +8,7 @@ namespace Microsoft.Extensions.ApiDescription.Tool;
 
 internal sealed class Program : ProgramBase
 {
-    public Program(IConsole console) : base(console)
-    {
-    }
+    public Program(IConsole console) : base(console) { }
 
     private static int Main(string[] args)
     {
@@ -18,6 +16,10 @@ internal sealed class Program : ProgramBase
 
         var console = GetConsole();
 
-        return new Program(console).Run(args, new InvokeCommand(console), throwOnUnexpectedArg: false);
+        return new Program(console).Run(
+            args,
+            new InvokeCommand(console),
+            throwOnUnexpectedArg: false
+        );
     }
 }

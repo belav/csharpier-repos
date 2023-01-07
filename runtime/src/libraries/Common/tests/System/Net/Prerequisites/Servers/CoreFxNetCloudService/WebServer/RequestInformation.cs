@@ -68,10 +68,12 @@ namespace WebServer
 
         public static RequestInformation DeSerializeFromJson(string json)
         {
-            return (RequestInformation)JsonConvert.DeserializeObject(
-                json,
-                typeof(RequestInformation),
-                new NameValueCollectionConverter());
+            return (RequestInformation)
+                JsonConvert.DeserializeObject(
+                    json,
+                    typeof(RequestInformation),
+                    new NameValueCollectionConverter()
+                );
         }
 
         public string SerializeToJson()
@@ -79,8 +81,6 @@ namespace WebServer
             return JsonConvert.SerializeObject(this, new NameValueCollectionConverter());
         }
 
-        private RequestInformation()
-        {
-        }
+        private RequestInformation() { }
     }
 }

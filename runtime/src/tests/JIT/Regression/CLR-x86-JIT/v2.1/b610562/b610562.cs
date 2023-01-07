@@ -8,6 +8,7 @@
 //static member is passed by ref to an interlocked method.
 
 using System;
+
 namespace VTest
 {
     public class TestMain : refTest<TestMain>
@@ -27,16 +28,13 @@ namespace VTest
             }
             return ret;
         }
-
     }
 
     public class refTest<type> where type : refTest<type>
     {
         public refTest()
         {
-
             test(ref sometype);
-
         }
 
         public void test(ref type r)
@@ -46,5 +44,4 @@ namespace VTest
 
         public static type sometype;
     }
-
 }

@@ -19,7 +19,9 @@ namespace System.Net.Quic.Implementations.MsQuic
             return new MsQuicListener(options);
         }
 
-        internal override QuicConnectionProvider CreateConnection(QuicClientConnectionOptions options)
+        internal override QuicConnectionProvider CreateConnection(
+            QuicClientConnectionOptions options
+        )
         {
             if (!IsSupported)
             {

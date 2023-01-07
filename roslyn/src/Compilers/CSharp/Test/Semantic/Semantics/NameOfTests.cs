@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestGoodNameofInstances()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using alias1 = System;
@@ -144,7 +145,9 @@ interface I3 : I1, I2
     int Test(string arg = nameof(M), string arg2 = ""N"" /* nameof(N) */);
 }
 ";
-            var comp = CompileAndVerify(source, expectedOutput: @"
+            var comp = CompileAndVerify(
+                source,
+                expectedOutput: @"
 var2
 nameof
 var1
@@ -175,13 +178,15 @@ Add
 instanceVar
 D
 C
-S");
+S"
+            );
         }
 
         [Fact]
         public void TestBadNameofInstances()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 
@@ -237,80 +242,121 @@ class Test<T>
     static string s;
 }";
             var option = TestOptions.ReleaseExe.WithWarningLevel(0);
-            CreateCompilationWithMscorlib40AndSystemCore(source, options: option).VerifyDiagnostics(
-                // (12,20): error CS1525: Invalid expression term 'int'
-                //         s = nameof(int);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(12, 20),
-                // (13,20): error CS1525: Invalid expression term 'void'
-                //         s = nameof(void);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "void").WithArguments("void").WithLocation(13, 20),
-                // (17,66): error CS1031: Type expected
-                //         s = nameof(System.Collections.Generic.Dictionary<Program,>.KeyCollection);
-                Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(17, 66),
-                // (11,27): error CS0305: Using the generic type 'Action<T>' requires 1 type arguments
-                //         s = nameof(System.Action<>);
-                Diagnostic(ErrorCode.ERR_BadArity, "Action<>").WithArguments("System.Action<T>", "type", "1").WithLocation(11, 27),
-                // (16,20): error CS0103: The name 'List' does not exist in the current context
-                //         s = nameof(List<int>.Enumerator);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "List<int>").WithArguments("List").WithLocation(16, 20),
-                // (19,33): error CS0122: 'Test<object>.s' is inaccessible due to its protection level
-                //         s = nameof(Test<Object>.s);
-                Diagnostic(ErrorCode.ERR_BadAccess, "s").WithArguments("Test<object>.s").WithLocation(19, 33),
-                // (22,20): error CS0103: The name 'nameof' does not exist in the current context
-                //         s = nameof(nameof);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof").WithArguments("nameof").WithLocation(22, 20),
-                // (23,28): error CS0117: 'Program' does not contain a definition for 's2'
-                //         s = nameof(Program.s2);
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "s2").WithArguments("Program", "s2").WithLocation(23, 28),
-                // (24,27): error CS0117: 'object' does not contain a definition for 'Something'
-                //         s = nameof(Object.Something);
-                Diagnostic(ErrorCode.ERR_NoSuchMember, "Something").WithArguments("object", "Something").WithLocation(24, 27),
-                // (25,28): error CS0400: The type or namespace name 'Something' could not be found in the global namespace (are you missing an assembly reference?)
-                //         s = nameof(global::Something);
-                Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound, "Something").WithArguments("Something").WithLocation(25, 28),
-                // (26,20): error CS0432: Alias 'global2' not found
-                //         s = nameof(global2::Something);
-                Diagnostic(ErrorCode.ERR_AliasNotFound, "global2").WithArguments("global2").WithLocation(26, 20),
-                // (27,20): error CS0234: The type or namespace name 'Collections2' does not exist in the namespace 'System' (are you missing an assembly reference?)
-                //         s = nameof(System.Collections2.Generic.List);
-                Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "System.Collections2").WithArguments("Collections2", "System").WithLocation(27, 20),
-                // (28,20): error CS0103: The name 'List2' does not exist in the current context
-                //         s = nameof(List2<>.Add);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "List2<>").WithArguments("List2").WithLocation(28, 20),
-                // (31,20): error CS8083: An alias-qualified name is not an expression.
-                //         s = nameof(global::Program); // not an expression
-                Diagnostic(ErrorCode.ERR_AliasQualifiedNameNotAnExpression, "global::Program").WithLocation(31, 20),
-                // (32,20): error CS0305: Using the generic type 'Test<T>' requires 1 type arguments
-                //         s = nameof(Test<>.s); // inaccessible
-                Diagnostic(ErrorCode.ERR_BadArity, "Test<>").WithArguments("Test<T>", "type", "1").WithLocation(32, 20),
-                // (32,27): error CS0122: 'Test<T>.s' is inaccessible due to its protection level
-                //         s = nameof(Test<>.s); // inaccessible
-                Diagnostic(ErrorCode.ERR_BadAccess, "s").WithArguments("Test<T>.s").WithLocation(32, 27),
-                // (33,20): error CS0841: Cannot use local variable 'b' before it is declared
-                //         s = nameof(b); // cannot use before declaration
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b").WithArguments("b").WithLocation(33, 20),
-                // (35,20): error CS8084: Type parameters are not allowed on a method group as an argument to 'nameof'.
-                //         s = nameof(System.Linq.Enumerable.Select<int, int>); // type parameters not allowed on method group in nameof
-                Diagnostic(ErrorCode.ERR_NameofMethodGroupWithTypeParameters, "System.Linq.Enumerable.Select<int, int>").WithLocation(35, 20),
-                // (43,13): error CS0103: The name 'nameof' does not exist in the current context
-                //         s = nameof();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof").WithArguments("nameof").WithLocation(43, 13),
-                // (44,20): error CS8081: Expression does not have a name.
-                //         s = nameof(this);
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "this").WithLocation(44, 20),
-                // (47,20): error CS8081: Expression does not have a name.
-                //         s = nameof(typeof(string));
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(string)").WithLocation(47, 20),
-                // (49,20): error CS8082: Sub-expression cannot be used in an argument to nameof.
-                //         s = nameof(a[4].Equals);
-                Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "a[4]").WithLocation(49, 20)
-            );
+            CreateCompilationWithMscorlib40AndSystemCore(source, options: option)
+                .VerifyDiagnostics(
+                    // (12,20): error CS1525: Invalid expression term 'int'
+                    //         s = nameof(int);
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                        .WithArguments("int")
+                        .WithLocation(12, 20),
+                    // (13,20): error CS1525: Invalid expression term 'void'
+                    //         s = nameof(void);
+                    Diagnostic(ErrorCode.ERR_InvalidExprTerm, "void")
+                        .WithArguments("void")
+                        .WithLocation(13, 20),
+                    // (17,66): error CS1031: Type expected
+                    //         s = nameof(System.Collections.Generic.Dictionary<Program,>.KeyCollection);
+                    Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(17, 66),
+                    // (11,27): error CS0305: Using the generic type 'Action<T>' requires 1 type arguments
+                    //         s = nameof(System.Action<>);
+                    Diagnostic(ErrorCode.ERR_BadArity, "Action<>")
+                        .WithArguments("System.Action<T>", "type", "1")
+                        .WithLocation(11, 27),
+                    // (16,20): error CS0103: The name 'List' does not exist in the current context
+                    //         s = nameof(List<int>.Enumerator);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "List<int>")
+                        .WithArguments("List")
+                        .WithLocation(16, 20),
+                    // (19,33): error CS0122: 'Test<object>.s' is inaccessible due to its protection level
+                    //         s = nameof(Test<Object>.s);
+                    Diagnostic(ErrorCode.ERR_BadAccess, "s")
+                        .WithArguments("Test<object>.s")
+                        .WithLocation(19, 33),
+                    // (22,20): error CS0103: The name 'nameof' does not exist in the current context
+                    //         s = nameof(nameof);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
+                        .WithArguments("nameof")
+                        .WithLocation(22, 20),
+                    // (23,28): error CS0117: 'Program' does not contain a definition for 's2'
+                    //         s = nameof(Program.s2);
+                    Diagnostic(ErrorCode.ERR_NoSuchMember, "s2")
+                        .WithArguments("Program", "s2")
+                        .WithLocation(23, 28),
+                    // (24,27): error CS0117: 'object' does not contain a definition for 'Something'
+                    //         s = nameof(Object.Something);
+                    Diagnostic(ErrorCode.ERR_NoSuchMember, "Something")
+                        .WithArguments("object", "Something")
+                        .WithLocation(24, 27),
+                    // (25,28): error CS0400: The type or namespace name 'Something' could not be found in the global namespace (are you missing an assembly reference?)
+                    //         s = nameof(global::Something);
+                    Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound, "Something")
+                        .WithArguments("Something")
+                        .WithLocation(25, 28),
+                    // (26,20): error CS0432: Alias 'global2' not found
+                    //         s = nameof(global2::Something);
+                    Diagnostic(ErrorCode.ERR_AliasNotFound, "global2")
+                        .WithArguments("global2")
+                        .WithLocation(26, 20),
+                    // (27,20): error CS0234: The type or namespace name 'Collections2' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                    //         s = nameof(System.Collections2.Generic.List);
+                    Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "System.Collections2")
+                        .WithArguments("Collections2", "System")
+                        .WithLocation(27, 20),
+                    // (28,20): error CS0103: The name 'List2' does not exist in the current context
+                    //         s = nameof(List2<>.Add);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "List2<>")
+                        .WithArguments("List2")
+                        .WithLocation(28, 20),
+                    // (31,20): error CS8083: An alias-qualified name is not an expression.
+                    //         s = nameof(global::Program); // not an expression
+                    Diagnostic(ErrorCode.ERR_AliasQualifiedNameNotAnExpression, "global::Program")
+                        .WithLocation(31, 20),
+                    // (32,20): error CS0305: Using the generic type 'Test<T>' requires 1 type arguments
+                    //         s = nameof(Test<>.s); // inaccessible
+                    Diagnostic(ErrorCode.ERR_BadArity, "Test<>")
+                        .WithArguments("Test<T>", "type", "1")
+                        .WithLocation(32, 20),
+                    // (32,27): error CS0122: 'Test<T>.s' is inaccessible due to its protection level
+                    //         s = nameof(Test<>.s); // inaccessible
+                    Diagnostic(ErrorCode.ERR_BadAccess, "s")
+                        .WithArguments("Test<T>.s")
+                        .WithLocation(32, 27),
+                    // (33,20): error CS0841: Cannot use local variable 'b' before it is declared
+                    //         s = nameof(b); // cannot use before declaration
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b")
+                        .WithArguments("b")
+                        .WithLocation(33, 20),
+                    // (35,20): error CS8084: Type parameters are not allowed on a method group as an argument to 'nameof'.
+                    //         s = nameof(System.Linq.Enumerable.Select<int, int>); // type parameters not allowed on method group in nameof
+                    Diagnostic(
+                            ErrorCode.ERR_NameofMethodGroupWithTypeParameters,
+                            "System.Linq.Enumerable.Select<int, int>"
+                        )
+                        .WithLocation(35, 20),
+                    // (43,13): error CS0103: The name 'nameof' does not exist in the current context
+                    //         s = nameof();
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "nameof")
+                        .WithArguments("nameof")
+                        .WithLocation(43, 13),
+                    // (44,20): error CS8081: Expression does not have a name.
+                    //         s = nameof(this);
+                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "this").WithLocation(44, 20),
+                    // (47,20): error CS8081: Expression does not have a name.
+                    //         s = nameof(typeof(string));
+                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(string)")
+                        .WithLocation(47, 20),
+                    // (49,20): error CS8082: Sub-expression cannot be used in an argument to nameof.
+                    //         s = nameof(a[4].Equals);
+                    Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "a[4]")
+                        .WithLocation(49, 20)
+                );
         }
 
         [Fact]
         public void TestWhenNameofOperatorBinds()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Class
 {
@@ -423,32 +469,42 @@ class NameofLocal
 ";
             MetadataReference[] references = new[] { SystemCoreRef, CSharpRef };
             var option = TestOptions.ReleaseExe.WithWarningLevel(0);
-            CreateCompilationWithMscorlib45(source, references, options: option).VerifyDiagnostics(
-                // (104,31): error CS1501: No overload for method 'nameof' takes 1 arguments
-                //             Console.WriteLine(nameof(Class.var));
-                Diagnostic(ErrorCode.ERR_BadArgCount, "nameof").WithArguments("nameof", "1").WithLocation(104, 31),
-                // (74,9): error CS0079: The event 'NameofEvent.nameof' can only appear on the left hand side of += or -=
-                //         nameof(Class.var);
-                Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "nameof").WithArguments("NameofEvent.nameof").WithLocation(74, 9),
-                // (74,9): error CS1593: Delegate 'System.Action' does not take 1 arguments
-                //         nameof(Class.var);
-                Diagnostic(ErrorCode.ERR_BadDelArgCount, "nameof").WithArguments("System.Action", "1").WithLocation(74, 9),
-                // (81,27): error CS0149: Method name expected
-                //         Console.WriteLine(nameof(Class.var));
-                Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(81, 27),
-                // (96,31): error CS1501: No overload for method 'nameof' takes 1 arguments
-                //             Console.WriteLine(nameof(Class.var));
-                Diagnostic(ErrorCode.ERR_BadArgCount, "nameof").WithArguments("nameof", "1").WithLocation(96, 31),
-                // (89,27): error CS0149: Method name expected
-                //         Console.WriteLine(nameof(Class.var));
-                Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(89, 27)
-            );
+            CreateCompilationWithMscorlib45(source, references, options: option)
+                .VerifyDiagnostics(
+                    // (104,31): error CS1501: No overload for method 'nameof' takes 1 arguments
+                    //             Console.WriteLine(nameof(Class.var));
+                    Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
+                        .WithArguments("nameof", "1")
+                        .WithLocation(104, 31),
+                    // (74,9): error CS0079: The event 'NameofEvent.nameof' can only appear on the left hand side of += or -=
+                    //         nameof(Class.var);
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "nameof")
+                        .WithArguments("NameofEvent.nameof")
+                        .WithLocation(74, 9),
+                    // (74,9): error CS1593: Delegate 'System.Action' does not take 1 arguments
+                    //         nameof(Class.var);
+                    Diagnostic(ErrorCode.ERR_BadDelArgCount, "nameof")
+                        .WithArguments("System.Action", "1")
+                        .WithLocation(74, 9),
+                    // (81,27): error CS0149: Method name expected
+                    //         Console.WriteLine(nameof(Class.var));
+                    Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(81, 27),
+                    // (96,31): error CS1501: No overload for method 'nameof' takes 1 arguments
+                    //             Console.WriteLine(nameof(Class.var));
+                    Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
+                        .WithArguments("nameof", "1")
+                        .WithLocation(96, 31),
+                    // (89,27): error CS0149: Method name expected
+                    //         Console.WriteLine(nameof(Class.var));
+                    Diagnostic(ErrorCode.ERR_MethodNameExpected, "nameof").WithLocation(89, 27)
+                );
         }
 
         [Fact]
         public void TestNameofDifferentContexts()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -507,35 +563,44 @@ class Program
     [Obsolete(""Please do not use this method: "" + nameof(Program.Old), true)]
     static void Old() { }
 }";
-            CompileAndVerify(source, expectedOutput: @"
+            CompileAndVerify(
+                source,
+                expectedOutput: @"
 EntryMethodName
 Correct
-Correct");
+Correct"
+            );
         }
 
         [Fact]
         public void TestNameofLowerLangVersion()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 class Program
 {
     Program(string s = nameof(Program))
     { }
 }
-", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5));
+",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+            );
 
             comp.VerifyDiagnostics(
                 // (4,24): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language version 6 or greater.
                 //     Program(string s = nameof(Program))
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "nameof(Program)").WithArguments("nameof operator", "6").WithLocation(4, 24)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "nameof(Program)")
+                    .WithArguments("nameof operator", "6")
+                    .WithLocation(4, 24)
+            );
         }
 
         [Fact]
         [WorkItem(33564, "https://github.com/dotnet/roslyn/issues/33564")]
         public void TestNameofIndexerName()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 class C
 {
@@ -554,16 +619,19 @@ class C
         get { return 0; }
     }
 }";
-            CompileAndVerify(source, expectedOutput:
-@"get__Other
+            CompileAndVerify(
+                source,
+                expectedOutput: @"get__Other
 Main
-Other");
+Other"
+            );
         }
 
         [Fact]
         public void TestNameofAliasMember()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using SCGL = System.Collections.Generic.List<int>;
 class C
@@ -579,7 +647,8 @@ class C
         [Fact, WorkItem(1013334, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1013334")]
         public void TestCompatStatementExpressionInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -596,14 +665,16 @@ class Program
             var compilation = CreateCompilation(
                 source,
                 options: TestOptions.DebugExe,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+            );
             CompileAndVerify(compilation, expectedOutput: @"12");
         }
 
         [Fact, WorkItem(1013334, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1013334")]
         public void TestCompatStatementExpressionInvocation02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 class Program
 {
@@ -620,14 +691,16 @@ class Program
             var compilation = CreateCompilation(
                 source,
                 options: TestOptions.DebugExe,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6));
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+            );
             CompileAndVerify(compilation, expectedOutput: @"12");
         }
 
         [Fact, WorkItem(1013334, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1013334")]
         public void TestCompatStatementExpressionInvocation03()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     const int N = 12;
@@ -637,9 +710,11 @@ class Program
     }
 }";
             var compilation = CreateCompilation(
-                source,
-                options: TestOptions.DebugExe,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)).VerifyDiagnostics(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
+                )
+                .VerifyDiagnostics(
                     // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         nameof(N);
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "nameof(N)").WithLocation(7, 9)
@@ -649,7 +724,8 @@ class Program
         [Fact, WorkItem(1013334, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1013334")]
         public void TestCompatStatementExpressionInvocation04()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     const int N = 12;
@@ -659,12 +735,16 @@ class Program
     }
 }";
             var compilation = CreateCompilation(
-                source,
-                options: TestOptions.DebugExe,
-                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)).VerifyDiagnostics(
+                    source,
+                    options: TestOptions.DebugExe,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+                )
+                .VerifyDiagnostics(
                     // (7,9): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language version 6 or greater.
                     //         nameof(N);
-                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "nameof(N)").WithArguments("nameof operator", "6").WithLocation(7, 9),
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "nameof(N)")
+                        .WithArguments("nameof operator", "6")
+                        .WithLocation(7, 9),
                     // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         nameof(N);
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "nameof(N)").WithLocation(7, 9)
@@ -676,7 +756,7 @@ class Program
         public void SymbolInfoForMethodGroup01()
         {
             var source =
-@"public class SomeClass
+                @"public class SomeClass
 {
     public const string GooName = nameof(SomeClass.Goo);
     public static int Goo()
@@ -687,7 +767,11 @@ class Program
             var compilation = CreateCompilation(source);
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "SomeClass.Goo").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "SomeClass.Goo")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.MemberGroup, symbolInfo.CandidateReason);
             Assert.Equal("Goo", symbolInfo.CandidateSymbols[0].Name);
@@ -698,7 +782,7 @@ class Program
         public void SymbolInfoForMethodGroup02()
         {
             var source =
-@"public class SomeClass
+                @"public class SomeClass
 {
     public const string GooName = nameof(SomeClass.Goo);
     public static int Goo()
@@ -713,7 +797,11 @@ class Program
             var compilation = CreateCompilation(source);
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "SomeClass.Goo").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "SomeClass.Goo")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.MemberGroup, symbolInfo.CandidateReason);
             Assert.Equal(2, symbolInfo.CandidateSymbols.Length);
@@ -724,7 +812,7 @@ class Program
         public void SymbolInfoForMethodGroup03()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 public static class X1
@@ -744,11 +832,16 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (13,20): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //         Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension").WithLocation(13, 20)
-                );
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension")
+                    .WithLocation(13, 20)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "a.Extension").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "a.Extension")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Null(symbolInfo.Symbol);
             Assert.Equal(CandidateReason.MemberGroup, symbolInfo.CandidateReason);
@@ -760,7 +853,7 @@ public class Program
         public void SymbolInfoForMethodGroup04()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 namespace N1
@@ -791,11 +884,16 @@ namespace N1
             compilation.VerifyDiagnostics(
                 // (22,28): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //                 Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension").WithLocation(22, 28)
-                );
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "a.Extension")
+                    .WithLocation(22, 28)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "a.Extension").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "a.Extension")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.MemberGroup, symbolInfo.CandidateReason);
             Assert.Null(symbolInfo.Symbol);
@@ -807,7 +905,7 @@ namespace N1
         public void SymbolInfoForEmptyMethodGroup()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 public static class X1
@@ -828,11 +926,17 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (14,22): error CS1061: 'A' does not contain a definition for 'Extension' and no accessible extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
                 //         Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension").WithArguments("A", "Extension").WithLocation(14, 22)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension")
+                    .WithArguments("A", "Extension")
+                    .WithLocation(14, 22)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "a.Extension").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "a.Extension")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.None, symbolInfo.CandidateReason);
             Assert.Null(symbolInfo.Symbol);
@@ -844,7 +948,7 @@ public class Program
         public void SymbolInfoForTypeFromInstance()
         {
             var source =
-@"public class A
+                @"public class A
 {
     public class Nested {}
 }
@@ -861,14 +965,22 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (10,22): error CS0572: 'Nested': cannot reference a type through an expression; try 'A.Nested' instead
                 //         Use(nameof(a.Nested));
-                Diagnostic(ErrorCode.ERR_BadTypeReference, "Nested").WithArguments("Nested", "A.Nested").WithLocation(10, 22),
+                Diagnostic(ErrorCode.ERR_BadTypeReference, "Nested")
+                    .WithArguments("Nested", "A.Nested")
+                    .WithLocation(10, 22),
                 // (9,11): warning CS0219: The variable 'a' is assigned but its value is never used
                 //         A a = null;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a").WithArguments("a").WithLocation(9, 11)
-                );
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
+                    .WithArguments("a")
+                    .WithLocation(9, 11)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "a.Nested").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "a.Nested")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.None, symbolInfo.CandidateReason);
             Assert.NotNull(symbolInfo.Symbol);
@@ -880,7 +992,7 @@ public class Program
         public void SymbolInfoForMethodGroup05()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 namespace N1
@@ -910,11 +1022,16 @@ namespace N1
             compilation.VerifyDiagnostics(
                 // (21,28): error CS8093: Extension method groups are not allowed as an argument to 'nameof'.
                 //                 Use(nameof(A.Extension));
-                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "A.Extension").WithLocation(21, 28)
-                );
+                Diagnostic(ErrorCode.ERR_NameofExtensionMethod, "A.Extension")
+                    .WithLocation(21, 28)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "A.Extension").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "A.Extension")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.MemberGroup, symbolInfo.CandidateReason);
             Assert.Null(symbolInfo.Symbol);
@@ -926,7 +1043,7 @@ namespace N1
         public void SymbolInfoForNothingFound()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 public class Program
@@ -943,11 +1060,17 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (9,22): error CS1061: 'A' does not contain a definition for 'Extension' and no extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
                 //         Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension").WithArguments("A", "Extension").WithLocation(9, 22)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension")
+                    .WithArguments("A", "Extension")
+                    .WithLocation(9, 22)
+            );
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "a.Extension").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "a.Extension")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Equal(CandidateReason.None, symbolInfo.CandidateReason);
             Assert.Null(symbolInfo.Symbol);
@@ -958,7 +1081,7 @@ public class Program
         public void ExtensionMethodConstraintFailed()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 public interface Interface
@@ -982,15 +1105,17 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (16,22): error CS1061: 'A' does not contain a definition for 'Extension' and no accessible extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
                 //         Use(nameof(a.Extension));
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension").WithArguments("A", "Extension").WithLocation(16, 22)
-                );
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension")
+                    .WithArguments("A", "Extension")
+                    .WithLocation(16, 22)
+            );
         }
 
         [Fact]
         public void StaticMemberFromType()
         {
             var source =
-@"public class A
+                @"public class A
 {
     public static int Field;
     public static int Property { get; }
@@ -1016,7 +1141,7 @@ public class Program
         public void AllowImplicitThisInStaticContext()
         {
             var source =
-@"
+                @"
 public class MyAttribute : System.Attribute
 {
     public MyAttribute(string S) {}
@@ -1048,7 +1173,7 @@ public class Program
         public void NameofInaccessibleMethod()
         {
             var source =
-@"
+                @"
 public class Class
 {
     protected void Method() {}
@@ -1061,15 +1186,17 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (8,36): error CS0122: 'Class.Method()' is inaccessible due to its protection level
                 //     public string S = nameof(Class.Method);
-                Diagnostic(ErrorCode.ERR_BadAccess, "Method").WithArguments("Class.Method()").WithLocation(8, 36)
-                );
+                Diagnostic(ErrorCode.ERR_BadAccess, "Method")
+                    .WithArguments("Class.Method()")
+                    .WithLocation(8, 36)
+            );
         }
 
         [Fact]
         public void NameofAmbiguousProperty()
         {
             var source =
-@"
+                @"
 public interface I1
 {
     int Property { get; }
@@ -1087,8 +1214,10 @@ public class Program
             compilation.VerifyDiagnostics(
                 // (13,33): error CS0229: Ambiguity between 'I1.Property' and 'I2.Property'
                 //     public string S = nameof(I3.Property);
-                Diagnostic(ErrorCode.ERR_AmbigMember, "Property").WithArguments("I1.Property", "I2.Property").WithLocation(13, 33)
-                );
+                Diagnostic(ErrorCode.ERR_AmbigMember, "Property")
+                    .WithArguments("I1.Property", "I2.Property")
+                    .WithLocation(13, 33)
+            );
         }
 
         [Fact]
@@ -1096,7 +1225,7 @@ public class Program
         public void SymbolInfoForMethodGroup06()
         {
             var source =
-@"public class A
+                @"public class A
 {
 }
 public static class X1
@@ -1115,7 +1244,11 @@ public class Program
             compilation.VerifyDiagnostics();
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);
-            var node = tree.GetRoot().DescendantNodes().Where(n => n.ToString() == "X1.Extension").OfType<ExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .Where(n => n.ToString() == "X1.Extension")
+                .OfType<ExpressionSyntax>()
+                .First();
             var symbolInfo = model.GetSymbolInfo(node, default(CancellationToken));
             Assert.Null(symbolInfo.Symbol);
             Assert.Equal(CandidateReason.MemberGroup, symbolInfo.CandidateReason);
@@ -1126,7 +1259,7 @@ public class Program
         public void ConstInitializerUsingSelf()
         {
             var source =
-@"public class X
+                @"public class X
 {
     const string N1 = nameof(N1);
     public static void Main()
@@ -1135,7 +1268,10 @@ public class Program
         System.Console.WriteLine(N1 + N2);
     }
 }";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe
+            );
             var comp = CompileAndVerify(compilation, expectedOutput: @"N1N2");
         }
 
@@ -1143,7 +1279,7 @@ public class Program
         public void NameofTypeParameterInParameterInitializer()
         {
             var source =
-@"class Test {
+                @"class Test {
   void M<T>(
     T t = default(T), // ok
     string s = nameof(T) // ok
@@ -1156,7 +1292,7 @@ public class Program
         public void NameofFixedBuffer()
         {
             var source =
-@"
+                @"
 using System;
 unsafe struct Struct1
 {
@@ -1191,16 +1327,20 @@ class Other {
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, null, TestOptions.UnsafeDebugExe);
-            CompileAndVerify(compilation, expectedOutput:
-                "MessageType x MessageType").VerifyDiagnostics();
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                null,
+                TestOptions.UnsafeDebugExe
+            );
+            CompileAndVerify(compilation, expectedOutput: "MessageType x MessageType")
+                .VerifyDiagnostics();
         }
 
         [Fact, WorkItem(10467, "https://github.com/dotnet/roslyn/issues/10467")]
         public void NameofMethodFixedBuffer()
         {
             var source =
-@"
+                @"
 using System;
 
 unsafe struct Struct1
@@ -1229,25 +1369,34 @@ unsafe struct Struct1
     }
   }
 }";
-            var compilation = CreateCompilationWithMscorlib45(source, null,
-                TestOptions.UnsafeDebugDll).VerifyDiagnostics(
-                // (14,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
-                //     return nameof(MessageType);
-                Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "MessageType").WithLocation(14, 19),
-                // (20,29): error CS1628: Cannot use ref or out parameter 'x' inside an anonymous method, lambda expression, or query expression
-                //     Action a = () => nameof(x);
-                Diagnostic(ErrorCode.ERR_AnonDelegateCantUse, "x").WithArguments("x").WithLocation(20, 56),
-                // (26,23): error CS1503: Argument 1: cannot convert from 'char*' to 'char[]'
-                //         return nameof(myStruct.MessageType);
-                Diagnostic(ErrorCode.ERR_BadArgType, "myStruct.MessageType").WithArguments("1", "char*", "char[]").WithLocation(26, 23));
+            var compilation = CreateCompilationWithMscorlib45(
+                    source,
+                    null,
+                    TestOptions.UnsafeDebugDll
+                )
+                .VerifyDiagnostics(
+                    // (14,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    //     return nameof(MessageType);
+                    Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "MessageType")
+                        .WithLocation(14, 19),
+                    // (20,29): error CS1628: Cannot use ref or out parameter 'x' inside an anonymous method, lambda expression, or query expression
+                    //     Action a = () => nameof(x);
+                    Diagnostic(ErrorCode.ERR_AnonDelegateCantUse, "x")
+                        .WithArguments("x")
+                        .WithLocation(20, 56),
+                    // (26,23): error CS1503: Argument 1: cannot convert from 'char*' to 'char[]'
+                    //         return nameof(myStruct.MessageType);
+                    Diagnostic(ErrorCode.ERR_BadArgType, "myStruct.MessageType")
+                        .WithArguments("1", "char*", "char[]")
+                        .WithLocation(26, 23)
+                );
         }
-
 
         [Fact, WorkItem(12696, "https://github.com/dotnet/roslyn/issues/12696")]
         public void FixedFieldAccessInsideNameOf()
         {
             var source =
-@"
+                @"
 using System;
 
 struct MyType
@@ -1274,15 +1423,20 @@ class EntryPoint
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, null, TestOptions.UnsafeDebugExe);
-            CompileAndVerify(compilation, expectedOutput: "normalField fixedField fixedField").VerifyDiagnostics();
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                null,
+                TestOptions.UnsafeDebugExe
+            );
+            CompileAndVerify(compilation, expectedOutput: "normalField fixedField fixedField")
+                .VerifyDiagnostics();
         }
 
         [Fact, WorkItem(12696, "https://github.com/dotnet/roslyn/issues/12696")]
         public void FixedFieldAccessFromInnerClass()
         {
             var source =
-@"
+                @"
 using System;
 
 public struct MyType
@@ -1306,14 +1460,20 @@ class EntryPoint
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, null, TestOptions.UnsafeDebugExe);
-            CompileAndVerify(compilation, expectedOutput: "normalField fixedField").VerifyDiagnostics();
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                null,
+                TestOptions.UnsafeDebugExe
+            );
+            CompileAndVerify(compilation, expectedOutput: "normalField fixedField")
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void PassingNameOfToInShouldCopy()
         {
-            CompileAndVerify(@"
+            CompileAndVerify(
+                @"
 class Program
 {
     public static void Main()
@@ -1324,13 +1484,16 @@ class Program
     {
         System.Console.WriteLine(value);
     }
-}", expectedOutput: "Main");
+}",
+                expectedOutput: "Main"
+            );
         }
 
         [Fact, WorkItem(20600, "https://github.com/dotnet/roslyn/issues/20600")]
         public void PermitInstanceQualifiedFromType()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Main()
@@ -1386,33 +1549,40 @@ public static class Extensions
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib40AndSystemCore(source, options: TestOptions.ReleaseExe);
-            compilation.VerifyDiagnostics(
-                );
+            var compilation = CreateCompilationWithMscorlib40AndSystemCore(
+                source,
+                options: TestOptions.ReleaseExe
+            );
+            compilation.VerifyDiagnostics();
             var comp = CompileAndVerify(compilation, expectedOutput: @"passed");
         }
 
         [Fact]
         public void TestDynamicWhenNotDefined()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static string M() => nameof(dynamic);
 }
 ";
             var option = TestOptions.ReleaseDll;
-            CreateCompilation(source, options: option).VerifyDiagnostics(
-                // (4,33): error CS0103: The name 'dynamic' does not exist in the current context
-                //     static string M() => nameof(dynamic);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "dynamic").WithArguments("dynamic").WithLocation(4, 33)
-            );
+            CreateCompilation(source, options: option)
+                .VerifyDiagnostics(
+                    // (4,33): error CS0103: The name 'dynamic' does not exist in the current context
+                    //     static string M() => nameof(dynamic);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "dynamic")
+                        .WithArguments("dynamic")
+                        .WithLocation(4, 33)
+                );
         }
 
         [Fact]
         public void TestNintWhenDefined()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static string M(object nint) => nameof(nint);
@@ -1425,7 +1595,8 @@ class Program
         [Fact]
         public void TestDynamicWhenDefined()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static string M(object dynamic) => nameof(dynamic);
@@ -1438,7 +1609,8 @@ class Program
         [Fact]
         public void TestTypeArguments()
         {
-            var source = @"
+            var source =
+                @"
 interface I<T> { }
 class Program
 {
@@ -1453,7 +1625,8 @@ class Program
         [Fact]
         public void TestNameOfTypeOf()
         {
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static string F1() => nameof(typeof(int));
@@ -1461,22 +1634,28 @@ class Program
     static string F3() => nameof(typeof(dynamic));
 }";
             var option = TestOptions.ReleaseDll;
-            CreateCompilation(source, options: option).VerifyDiagnostics(
-                // (4,34): error CS8081: Expression does not have a name.
-                //     static string F1() => nameof(typeof(int));
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(int)").WithLocation(4, 34),
-                // (5,34): error CS8081: Expression does not have a name.
-                //     static string F2() => nameof(typeof(nint));
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(nint)").WithLocation(5, 34),
-                // (6,34): error CS1962: The typeof operator cannot be used on the dynamic type
-                //     static string F3() => nameof(typeof(dynamic));
-                Diagnostic(ErrorCode.ERR_BadDynamicTypeof, "typeof(dynamic)").WithLocation(6, 34));
+            CreateCompilation(source, options: option)
+                .VerifyDiagnostics(
+                    // (4,34): error CS8081: Expression does not have a name.
+                    //     static string F1() => nameof(typeof(int));
+                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(int)")
+                        .WithLocation(4, 34),
+                    // (5,34): error CS8081: Expression does not have a name.
+                    //     static string F2() => nameof(typeof(nint));
+                    Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "typeof(nint)")
+                        .WithLocation(5, 34),
+                    // (6,34): error CS1962: The typeof operator cannot be used on the dynamic type
+                    //     static string F3() => nameof(typeof(dynamic));
+                    Diagnostic(ErrorCode.ERR_BadDynamicTypeof, "typeof(dynamic)")
+                        .WithLocation(6, 34)
+                );
         }
 
         [Fact]
         public void TestNameOfNintWhenTheyAreIdentifierNames()
         {
-            var source = @"
+            var source =
+                @"
 public class C 
 {
     public string nint;

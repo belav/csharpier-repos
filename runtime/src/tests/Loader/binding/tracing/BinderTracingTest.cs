@@ -21,7 +21,13 @@ namespace BinderTracingTests
         public string ActiveIssue { get; private set; }
         public string TestSetup { get; private set; }
         public string[] AdditionalLoadsToTrack { get; private set; }
-        public BinderTestAttribute(bool isolate = false, string testSetup = null, string[] additionalLoadsToTrack = null, string activeIssue = null)
+
+        public BinderTestAttribute(
+            bool isolate = false,
+            string testSetup = null,
+            string[] additionalLoadsToTrack = null,
+            string activeIssue = null
+        )
         {
             Isolate = isolate;
             TestSetup = testSetup;
@@ -54,7 +60,10 @@ namespace BinderTracingTests
                 if (throwOnLoad)
                     throw new Exception($"Exception on Load in '{ToString()}'");
 
-                if (!string.IsNullOrEmpty(assemblyNameToLoad) && assemblyName.Name == assemblyNameToLoad)
+                if (
+                    !string.IsNullOrEmpty(assemblyNameToLoad)
+                    && assemblyName.Name == assemblyNameToLoad
+                )
                     return LoadFromAssemblyPath(assemblyPathToLoad);
 
                 return null;
@@ -77,15 +86,21 @@ namespace BinderTracingTests
         {
             MethodInfo[] methods = typeof(BinderTracingTest)
                 .GetMethods(BindingFlags.Public | BindingFlags.Static)
-                .Where(m => m.GetCustomAttribute<BinderTestAttribute>() != null &&
-                    m.ReturnType == typeof(BindOperation) &&
-                    m.GetCustomAttribute<BinderTestAttribute>().ActiveIssue == null)
+                .Where(
+                    m =>
+                        m.GetCustomAttribute<BinderTestAttribute>() != null
+                        && m.ReturnType == typeof(BindOperation)
+                        && m.GetCustomAttribute<BinderTestAttribute>().ActiveIssue == null
+                )
                 .ToArray();
 
             foreach (var method in methods)
             {
                 BinderTestAttribute attribute = method.GetCustomAttribute<BinderTestAttribute>();
-                if (attribute.Isolate && Environment.GetEnvironmentVariable("DOTNET_GCStress") != null)
+                if (
+                    attribute.Isolate
+                    && Environment.GetEnvironmentVariable("DOTNET_GCStress") != null
+                )
                     continue;
 
                 bool success = attribute.Isolate
@@ -112,12 +127,16 @@ namespace BinderTracingTests
                 else
                 {
                     // Run specific test - first argument should be the test method name
-                    MethodInfo method = typeof(BinderTracingTest)
-                        .GetMethod(args[0], BindingFlags.Public | BindingFlags.Static);
-                    Assert.True(method != null &&
-                        method.GetCustomAttribute<BinderTestAttribute>() != null &&
-                        method.ReturnType == typeof(BindOperation) &&
-                        method.GetCustomAttribute<BinderTestAttribute>().ActiveIssue == null);
+                    MethodInfo method = typeof(BinderTracingTest).GetMethod(
+                        args[0],
+                        BindingFlags.Public | BindingFlags.Static
+                    );
+                    Assert.True(
+                        method != null
+                            && method.GetCustomAttribute<BinderTestAttribute>() != null
+                            && method.ReturnType == typeof(BindOperation)
+                            && method.GetCustomAttribute<BinderTestAttribute>().ActiveIssue == null
+                    );
                     success = RunSingleTest(method);
                 }
             }
@@ -155,8 +174,10 @@ namespace BinderTracingTests
                 BinderTestAttribute attribute = method.GetCustomAttribute<BinderTestAttribute>();
                 if (!string.IsNullOrEmpty(attribute.TestSetup))
                 {
-                    MethodInfo setupMethod = method.DeclaringType
-                        .GetMethod(attribute.TestSetup, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
+                    MethodInfo setupMethod = method.DeclaringType.GetMethod(
+                        attribute.TestSetup,
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                    );
                     Assert.True(setupMethod != null);
                     setupMethod.Invoke(null, new object[0]);
                 }
@@ -172,7 +193,8 @@ namespace BinderTracingTests
                 if (attribute.AdditionalLoadsToTrack != null)
                     loadsToTrack = loadsToTrack.Union(attribute.AdditionalLoadsToTrack).ToArray();
 
-                Func<BindOperation> func = (Func<BindOperation>)method.CreateDelegate(typeof(Func<BindOperation>));
+                Func<BindOperation> func =
+                    (Func<BindOperation>)method.CreateDelegate(typeof(Func<BindOperation>));
                 using (var listener = new BinderEventListener(loadsToTrack))
                 {
                     BindOperation expected = func();
@@ -213,10 +235,17 @@ namespace BinderTracingTests
             }
         }
 
-        private static void ValidateSingleBind(BinderEventListener listener, AssemblyName assemblyName, BindOperation expected)
+        private static void ValidateSingleBind(
+            BinderEventListener listener,
+            AssemblyName assemblyName,
+            BindOperation expected
+        )
         {
             BindOperation[] binds = listener.WaitAndGetEventsForAssembly(assemblyName);
-            Assert.True(binds.Length == 1, $"Bind event count for {assemblyName} - expected: 1, actual: {binds.Length}");
+            Assert.True(
+                binds.Length == 1,
+                $"Bind event count for {assemblyName} - expected: 1, actual: {binds.Length}"
+            );
             BindOperation actual = binds[0];
 
             Helpers.ValidateBindOperation(expected, actual);

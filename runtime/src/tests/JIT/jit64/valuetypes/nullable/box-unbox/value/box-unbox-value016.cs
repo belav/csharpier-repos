@@ -27,5 +27,3 @@ internal class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

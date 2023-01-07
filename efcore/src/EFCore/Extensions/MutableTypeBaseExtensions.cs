@@ -11,7 +11,5 @@ namespace Microsoft.EntityFrameworkCore
     ///     Extension methods for <see cref="IMutableTypeBase" />.
     /// </summary>
     [Obsolete("Use IMutableTypeBase")]
-    public static class MutableTypeBaseExtensions
-    {
-    }
+    public static class MutableTypeBaseExtensions { }
 }

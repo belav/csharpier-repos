@@ -15,10 +15,7 @@ namespace System.Threading
         // We use a SafeHandle to ensure that the native timer is destroyed when the AppDomain is unloaded.
         private sealed class AppDomainTimerSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
         {
-            public AppDomainTimerSafeHandle()
-                : base(true)
-            {
-            }
+            public AppDomainTimerSafeHandle() : base(true) { }
 
             protected override bool ReleaseHandle()
             {
@@ -64,7 +61,10 @@ namespace System.Threading
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AppDomainTimer_Change")]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static partial bool ChangeAppDomainTimer(AppDomainTimerSafeHandle handle, uint dueTime);
+        private static partial bool ChangeAppDomainTimer(
+            AppDomainTimerSafeHandle handle,
+            uint dueTime
+        );
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AppDomainTimer_Delete")]
         [return: MarshalAs(UnmanagedType.Bool)]

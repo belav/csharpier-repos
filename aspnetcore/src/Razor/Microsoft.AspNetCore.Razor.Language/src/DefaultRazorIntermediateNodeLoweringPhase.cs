@@ -13,8 +13,11 @@ using Microsoft.AspNetCore.Razor.Language.Legacy;
 using Microsoft.AspNetCore.Razor.Language.Syntax;
 
 namespace Microsoft.AspNetCore.Razor.Language;
+
 #pragma warning disable CS0618 // Type or member is obsolete
-internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase, IRazorIntermediateNodeLoweringPhase
+internal class DefaultRazorIntermediateNodeLoweringPhase
+    : RazorEnginePhaseBase,
+        IRazorIntermediateNodeLoweringPhase
 {
     private IRazorCodeGenerationOptionsFeature _optionsFeature;
 
@@ -45,20 +48,32 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         // We need to decide up front if this document is a "component" file. This will affect how
         // lowering behaves.
         LoweringVisitor visitor;
-        if (FileKinds.IsComponentImport(codeDocument.GetFileKind()) &&
-            syntaxTree.Options.FeatureFlags.AllowComponentFileKind)
+        if (
+            FileKinds.IsComponentImport(codeDocument.GetFileKind())
+            && syntaxTree.Options.FeatureFlags.AllowComponentFileKind
+        )
         {
-            visitor = new ComponentImportFileKindVisitor(document, builder, syntaxTree.Options.FeatureFlags)
+            visitor = new ComponentImportFileKindVisitor(
+                document,
+                builder,
+                syntaxTree.Options.FeatureFlags
+            )
             {
                 SourceDocument = syntaxTree.Source,
             };
 
             visitor.Visit(syntaxTree.Root);
         }
-        else if (FileKinds.IsComponent(codeDocument.GetFileKind()) &&
-            syntaxTree.Options.FeatureFlags.AllowComponentFileKind)
+        else if (
+            FileKinds.IsComponent(codeDocument.GetFileKind())
+            && syntaxTree.Options.FeatureFlags.AllowComponentFileKind
+        )
         {
-            visitor = new ComponentFileKindVisitor(document, builder, syntaxTree.Options.FeatureFlags)
+            visitor = new ComponentFileKindVisitor(
+                document,
+                builder,
+                syntaxTree.Options.FeatureFlags
+            )
             {
                 SourceDocument = syntaxTree.Source,
             };
@@ -67,7 +82,12 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         }
         else
         {
-            visitor = new LegacyFileKindVisitor(document, builder, tagHelperContext?.Prefix, syntaxTree.Options.FeatureFlags)
+            visitor = new LegacyFileKindVisitor(
+                document,
+                builder,
+                tagHelperContext?.Prefix,
+                syntaxTree.Options.FeatureFlags
+            )
             {
                 SourceDocument = syntaxTree.Source,
             };
@@ -129,7 +149,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         DocumentIntermediateNode document,
         IntermediateNodeBuilder builder,
         RazorParserOptions options,
-        IReadOnlyList<RazorSyntaxTree> imports)
+        IReadOnlyList<RazorSyntaxTree> imports
+    )
     {
         if (imports == null)
         {
@@ -167,31 +188,39 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             switch (descriptor.Kind)
             {
                 case DirectiveKind.SingleLine:
+                {
+                    if (
+                        seenDirective
+                        && descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring
+                    )
                     {
-                        if (seenDirective && descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring)
-                        {
-                            // This directive has been overridden, it should be removed from the document.
-                            break;
-                        }
-
-                        continue;
-                    }
-
-                case DirectiveKind.RazorBlock:
-                case DirectiveKind.CodeBlock:
-                    {
-                        if (descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring)
-                        {
-                            // A block directive cannot be imported.
-                            document.Diagnostics.Add(
-                                RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(descriptor.Directive));
-                        }
-
+                        // This directive has been overridden, it should be removed from the document.
                         break;
                     }
 
+                    continue;
+                }
+
+                case DirectiveKind.RazorBlock:
+                case DirectiveKind.CodeBlock:
+                {
+                    if (descriptor.Usage == DirectiveUsage.FileScopedSinglyOccurring)
+                    {
+                        // A block directive cannot be imported.
+                        document.Diagnostics.Add(
+                            RazorDiagnosticFactory.CreateDirective_BlockDirectiveCannotBeImported(
+                                descriptor.Directive
+                            )
+                        );
+                    }
+
+                    break;
+                }
+
                 default:
-                    throw new InvalidOperationException(Resources.FormatUnexpectedDirectiveKind(typeof(DirectiveKind).FullName));
+                    throw new InvalidOperationException(
+                        Resources.FormatUnexpectedDirectiveKind(typeof(DirectiveKind).FullName)
+                    );
             }
 
             // Overridden and invalid imported directives make it to here. They should be removed from the document.
@@ -207,6 +236,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             Namespace = @namespace;
             Source = source;
         }
+
         public string Namespace { get; }
 
         public SourceSpan? Source { get; }
@@ -220,6 +250,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             return false;
         }
+
         public bool Equals(UsingReference other)
         {
             return string.Equals(Namespace, other.Namespace, StringComparison.Ordinal);
@@ -235,7 +266,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         protected readonly List<UsingReference> _usings;
         protected readonly RazorParserFeatureFlags _featureFlags;
 
-        public LoweringVisitor(DocumentIntermediateNode document, IntermediateNodeBuilder builder, RazorParserFeatureFlags featureFlags)
+        public LoweringVisitor(
+            DocumentIntermediateNode document,
+            IntermediateNodeBuilder builder,
+            RazorParserFeatureFlags featureFlags
+        )
         {
             _document = document;
             _builder = builder;
@@ -302,12 +337,14 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             }
             else if (context.ChunkGenerator is DirectiveTokenChunkGenerator tokenChunkGenerator)
             {
-                _builder.Add(new DirectiveTokenIntermediateNode()
-                {
-                    Content = node.GetContent(),
-                    DirectiveToken = tokenChunkGenerator.Descriptor,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new DirectiveTokenIntermediateNode()
+                    {
+                        Content = node.GetContent(),
+                        DirectiveToken = tokenChunkGenerator.Descriptor,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
             }
             else if (context.ChunkGenerator is AddImportChunkGenerator importChunkGenerator)
             {
@@ -315,7 +352,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 var namespaceSpan = BuildSourceSpanFromNode(node);
                 _usings.Add(new UsingReference(namespaceImport, namespaceSpan));
             }
-            else if (context.ChunkGenerator is AddTagHelperChunkGenerator addTagHelperChunkGenerator)
+            else if (
+                context.ChunkGenerator is AddTagHelperChunkGenerator addTagHelperChunkGenerator
+            )
             {
                 IntermediateNode directiveNode;
                 if (IsMalformed(addTagHelperChunkGenerator.Diagnostics))
@@ -344,23 +383,30 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
                 _builder.Push(directiveNode);
 
-                _builder.Add(new DirectiveTokenIntermediateNode()
-                {
-                    Content = addTagHelperChunkGenerator.LookupText,
-                    DirectiveToken = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Tokens[0],
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new DirectiveTokenIntermediateNode()
+                    {
+                        Content = addTagHelperChunkGenerator.LookupText,
+                        DirectiveToken = CSharpCodeParser.AddTagHelperDirectiveDescriptor.Tokens[0],
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 _builder.Pop();
             }
-            else if (context.ChunkGenerator is RemoveTagHelperChunkGenerator removeTagHelperChunkGenerator)
+            else if (
+                context.ChunkGenerator
+                is RemoveTagHelperChunkGenerator removeTagHelperChunkGenerator
+            )
             {
                 IntermediateNode directiveNode;
                 if (IsMalformed(removeTagHelperChunkGenerator.Diagnostics))
                 {
                     directiveNode = new MalformedDirectiveIntermediateNode()
                     {
-                        DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Directive,
+                        DirectiveName = CSharpCodeParser
+                            .RemoveTagHelperDirectiveDescriptor
+                            .Directive,
                         Directive = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
                         Source = BuildSourceSpanFromNode(node),
                     };
@@ -369,7 +415,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 {
                     directiveNode = new DirectiveIntermediateNode()
                     {
-                        DirectiveName = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Directive,
+                        DirectiveName = CSharpCodeParser
+                            .RemoveTagHelperDirectiveDescriptor
+                            .Directive,
                         Directive = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor,
                         Source = BuildSourceSpanFromNode(node),
                     };
@@ -382,23 +430,32 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
                 _builder.Push(directiveNode);
 
-                _builder.Add(new DirectiveTokenIntermediateNode()
-                {
-                    Content = removeTagHelperChunkGenerator.LookupText,
-                    DirectiveToken = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Tokens[0],
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new DirectiveTokenIntermediateNode()
+                    {
+                        Content = removeTagHelperChunkGenerator.LookupText,
+                        DirectiveToken = CSharpCodeParser.RemoveTagHelperDirectiveDescriptor.Tokens[
+                            0
+                        ],
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 _builder.Pop();
             }
-            else if (context.ChunkGenerator is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefixChunkGenerator)
+            else if (
+                context.ChunkGenerator
+                is TagHelperPrefixDirectiveChunkGenerator tagHelperPrefixChunkGenerator
+            )
             {
                 IntermediateNode directiveNode;
                 if (IsMalformed(tagHelperPrefixChunkGenerator.Diagnostics))
                 {
                     directiveNode = new MalformedDirectiveIntermediateNode()
                     {
-                        DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Directive,
+                        DirectiveName = CSharpCodeParser
+                            .TagHelperPrefixDirectiveDescriptor
+                            .Directive,
                         Directive = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
                         Source = BuildSourceSpanFromNode(node),
                     };
@@ -407,7 +464,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 {
                     directiveNode = new DirectiveIntermediateNode()
                     {
-                        DirectiveName = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Directive,
+                        DirectiveName = CSharpCodeParser
+                            .TagHelperPrefixDirectiveDescriptor
+                            .Directive,
                         Directive = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor,
                         Source = BuildSourceSpanFromNode(node),
                     };
@@ -420,12 +479,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
                 _builder.Push(directiveNode);
 
-                _builder.Add(new DirectiveTokenIntermediateNode()
-                {
-                    Content = tagHelperPrefixChunkGenerator.Prefix,
-                    DirectiveToken = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Tokens[0],
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new DirectiveTokenIntermediateNode()
+                    {
+                        Content = tagHelperPrefixChunkGenerator.Prefix,
+                        DirectiveToken = CSharpCodeParser.TagHelperPrefixDirectiveDescriptor.Tokens[
+                            0
+                        ],
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 _builder.Pop();
             }
@@ -447,11 +510,17 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
     // Lowers a document using *html-as-text* and Tag Helpers
     private class LegacyFileKindVisitor : LoweringVisitor
     {
-        private readonly HashSet<string> _renderedBoundAttributeNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> _renderedBoundAttributeNames = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
         private readonly string _tagHelperPrefix;
 
-        public LegacyFileKindVisitor(DocumentIntermediateNode document, IntermediateNodeBuilder builder, string tagHelperPrefix, RazorParserFeatureFlags featureFlags)
-            : base(document, builder, featureFlags)
+        public LegacyFileKindVisitor(
+            DocumentIntermediateNode document,
+            IntermediateNodeBuilder builder,
+            string tagHelperPrefix,
+            RazorParserFeatureFlags featureFlags
+        ) : base(document, builder, featureFlags)
         {
             _tagHelperPrefix = tagHelperPrefix;
         }
@@ -467,13 +536,21 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 node.NamePrefix?.LiteralTokens,
                 node.Name.LiteralTokens,
                 node.NameSuffix?.LiteralTokens,
-                node.EqualsToken == null ? new SyntaxList<SyntaxToken>() : new SyntaxList<SyntaxToken>(node.EqualsToken),
-                node.ValuePrefix?.LiteralTokens);
-            var prefix = (MarkupTextLiteralSyntax)SyntaxFactory.MarkupTextLiteral(prefixTokens).Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                node.EqualsToken == null
+                    ? new SyntaxList<SyntaxToken>()
+                    : new SyntaxList<SyntaxToken>(node.EqualsToken),
+                node.ValuePrefix?.LiteralTokens
+            );
+            var prefix = (MarkupTextLiteralSyntax)
+                SyntaxFactory
+                    .MarkupTextLiteral(prefixTokens)
+                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
-            if (name.StartsWith("data-", StringComparison.OrdinalIgnoreCase) &&
-                !_featureFlags.AllowConditionalDataDashAttributes)
+            if (
+                name.StartsWith("data-", StringComparison.OrdinalIgnoreCase)
+                && !_featureFlags.AllowConditionalDataDashAttributes
+            )
             {
                 Visit(prefix);
                 Visit(node.Value);
@@ -481,10 +558,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             }
             else
             {
-                if (node.Value != null && node.Value.ChildNodes().All(c => c is MarkupLiteralAttributeValueSyntax))
+                if (
+                    node.Value != null
+                    && node.Value.ChildNodes().All(c => c is MarkupLiteralAttributeValueSyntax)
+                )
                 {
                     // We need to do what ConditionalAttributeCollapser used to do.
-                    var literalAttributeValueNodes = node.Value.ChildNodes().Cast<MarkupLiteralAttributeValueSyntax>().ToArray();
+                    var literalAttributeValueNodes = node.Value
+                        .ChildNodes()
+                        .Cast<MarkupLiteralAttributeValueSyntax>()
+                        .ToArray();
                     var valueTokens = SyntaxListBuilder<SyntaxToken>.Create();
                     for (var i = 0; i < literalAttributeValueNodes.Length; i++)
                     {
@@ -493,19 +576,27 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     }
                     var rewritten = SyntaxFactory.MarkupTextLiteral(valueTokens.ToList());
 
-                    var mergedLiterals = MergeLiterals(prefix?.LiteralTokens, rewritten.LiteralTokens, node.ValueSuffix?.LiteralTokens);
-                    var mergedAttribute = SyntaxFactory.MarkupTextLiteral(mergedLiterals).Green.CreateRed(node.Parent, node.Position);
+                    var mergedLiterals = MergeLiterals(
+                        prefix?.LiteralTokens,
+                        rewritten.LiteralTokens,
+                        node.ValueSuffix?.LiteralTokens
+                    );
+                    var mergedAttribute = SyntaxFactory
+                        .MarkupTextLiteral(mergedLiterals)
+                        .Green.CreateRed(node.Parent, node.Position);
                     Visit(mergedAttribute);
                 }
                 else
                 {
-                    _builder.Push(new HtmlAttributeIntermediateNode()
-                    {
-                        AttributeName = node.Name.GetContent(),
-                        Prefix = prefix.GetContent(),
-                        Suffix = node.ValueSuffix?.GetContent() ?? string.Empty,
-                        Source = BuildSourceSpanFromNode(node),
-                    });
+                    _builder.Push(
+                        new HtmlAttributeIntermediateNode()
+                        {
+                            AttributeName = node.Name.GetContent(),
+                            Prefix = prefix.GetContent(),
+                            Suffix = node.ValueSuffix?.GetContent() ?? string.Empty,
+                            Source = BuildSourceSpanFromNode(node),
+                        }
+                    );
 
                     VisitAttributeValue(node.Value);
 
@@ -514,21 +605,25 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             }
         }
 
-        public override void VisitMarkupMinimizedAttributeBlock(MarkupMinimizedAttributeBlockSyntax node)
+        public override void VisitMarkupMinimizedAttributeBlock(
+            MarkupMinimizedAttributeBlockSyntax node
+        )
         {
             var name = node.Name.GetContent();
-            if (name.StartsWith("data-", StringComparison.OrdinalIgnoreCase) &&
-                !_featureFlags.AllowConditionalDataDashAttributes)
+            if (
+                name.StartsWith("data-", StringComparison.OrdinalIgnoreCase)
+                && !_featureFlags.AllowConditionalDataDashAttributes
+            )
             {
                 base.VisitMarkupMinimizedAttributeBlock(node);
                 return;
             }
 
             // Minimized attributes are just html content.
-            var literals = MergeLiterals(
-                node.NamePrefix?.LiteralTokens,
-                node.Name?.LiteralTokens);
-            var literal = SyntaxFactory.MarkupTextLiteral(literals).Green.CreateRed(node.Parent, node.Position);
+            var literals = MergeLiterals(node.NamePrefix?.LiteralTokens, node.Name?.LiteralTokens);
+            var literal = SyntaxFactory
+                .MarkupTextLiteral(literals)
+                .Green.CreateRed(node.Parent, node.Position);
 
             Visit(literal);
         }
@@ -537,17 +632,22 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         // <input checked="hello-world `@false`"/>
         //  Prefix= (space)
         //  Children will contain a token for @false.
-        public override void VisitMarkupDynamicAttributeValue(MarkupDynamicAttributeValueSyntax node)
+        public override void VisitMarkupDynamicAttributeValue(
+            MarkupDynamicAttributeValueSyntax node
+        )
         {
             var containsExpression = false;
             var descendantNodes = node.DescendantNodes(n =>
             {
-                    // Don't go into sub block. They may contain expressions but we only care about the top level.
-                    return !(n.Parent is CSharpCodeBlockSyntax);
+                // Don't go into sub block. They may contain expressions but we only care about the top level.
+                return !(n.Parent is CSharpCodeBlockSyntax);
             });
             foreach (var child in descendantNodes)
             {
-                if (child is CSharpImplicitExpressionSyntax || child is CSharpExplicitExpressionSyntax)
+                if (
+                    child is CSharpImplicitExpressionSyntax
+                    || child is CSharpExplicitExpressionSyntax
+                )
                 {
                     containsExpression = true;
                 }
@@ -555,19 +655,23 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (containsExpression)
             {
-                _builder.Push(new CSharpExpressionAttributeValueIntermediateNode()
-                {
-                    Prefix = node.Prefix?.GetContent() ?? string.Empty,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new CSharpExpressionAttributeValueIntermediateNode()
+                    {
+                        Prefix = node.Prefix?.GetContent() ?? string.Empty,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
             }
             else
             {
-                _builder.Push(new CSharpCodeAttributeValueIntermediateNode()
-                {
-                    Prefix = node.Prefix?.GetContent() ?? string.Empty,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new CSharpCodeAttributeValueIntermediateNode()
+                    {
+                        Prefix = node.Prefix?.GetContent() ?? string.Empty,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
             }
 
             Visit(node.Value);
@@ -575,21 +679,29 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             _builder.Pop();
         }
 
-        public override void VisitMarkupLiteralAttributeValue(MarkupLiteralAttributeValueSyntax node)
+        public override void VisitMarkupLiteralAttributeValue(
+            MarkupLiteralAttributeValueSyntax node
+        )
         {
-            _builder.Push(new HtmlAttributeValueIntermediateNode()
-            {
-                Prefix = node.Prefix?.GetContent() ?? string.Empty,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Push(
+                new HtmlAttributeValueIntermediateNode()
+                {
+                    Prefix = node.Prefix?.GetContent() ?? string.Empty,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
 
-            _builder.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = node,
-                ContentFactory = static node => ((MarkupLiteralAttributeValueSyntax)node).Value?.GetContent() ?? string.Empty,
-                Kind = TokenKind.Html,
-                Source = BuildSourceSpanFromNode(node.Value)
-            });
+            _builder.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = node,
+                    ContentFactory = static node =>
+                        ((MarkupLiteralAttributeValueSyntax)node).Value?.GetContent()
+                        ?? string.Empty,
+                    Kind = TokenKind.Html,
+                    Source = BuildSourceSpanFromNode(node.Value)
+                }
+            );
 
             _builder.Pop();
         }
@@ -605,14 +717,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (templateNode.Children.Count > 0)
             {
-                var sourceRangeStart = templateNode
-                    .Children
+                var sourceRangeStart = templateNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = templateNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = templateNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     templateNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -621,7 +734,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
         }
@@ -650,14 +764,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode
-                    .Children
+                var sourceRangeStart = expressionNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = expressionNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -666,7 +781,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
         }
@@ -689,14 +805,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode
-                    .Children
+                var sourceRangeStart = expressionNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = expressionNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -705,7 +822,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
         }
@@ -717,18 +835,23 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 // If we are top level in a tag helper HTML attribute, we want to be rendered as markup.
                 // This case happens for duplicate non-string bound attributes. They would be initially be categorized as
                 // CSharp but since they are duplicate, they should just be markup.
-                var markupLiteral = SyntaxFactory.MarkupTextLiteral(node.LiteralTokens).Green.CreateRed(node.Parent, node.Position);
+                var markupLiteral = SyntaxFactory
+                    .MarkupTextLiteral(node.LiteralTokens)
+                    .Green.CreateRed(node.Parent, node.Position);
                 Visit(markupLiteral);
                 return;
             }
 
-            _builder.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = node,
-                ContentFactory = static node => ((CSharpExpressionLiteralSyntax)node).GetContent(),
-                Kind = TokenKind.CSharp,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = node,
+                    ContentFactory = static node =>
+                        ((CSharpExpressionLiteralSyntax)node).GetContent(),
+                    Kind = TokenKind.CSharp,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
 
             base.VisitCSharpExpressionLiteral(node);
         }
@@ -749,13 +872,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     _builder.Push(statementNode);
                 }
 
-                _builder.Add(new LazyIntermediateToken()
-                {
-                    FactoryArgument = node,
-                    ContentFactory = static node => ((CSharpStatementLiteralSyntax)node).GetContent(),
-                    Kind = TokenKind.CSharp,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new LazyIntermediateToken()
+                    {
+                        FactoryArgument = node,
+                        ContentFactory = static node =>
+                            ((CSharpStatementLiteralSyntax)node).GetContent(),
+                        Kind = TokenKind.CSharp,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 if (!isAttributeValue)
                 {
@@ -777,9 +903,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             if (node.LiteralTokens.Count == 1)
             {
                 var token = node.LiteralTokens[0];
-                if (token != null &&
-                    token.Kind == SyntaxKind.Marker &&
-                    token.Content.Length == 0)
+                if (token != null && token.Kind == SyntaxKind.Marker && token.Content.Length == 0)
                 {
                     // We don't want to create IR nodes for marker tokens.
                     return;
@@ -826,9 +950,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             var source = BuildSourceSpanFromNode(node);
             var currentChildren = _builder.Current.Children;
-            if (currentChildren.Count > 0 && currentChildren[currentChildren.Count - 1] is HtmlContentIntermediateNode)
+            if (
+                currentChildren.Count > 0
+                && currentChildren[currentChildren.Count - 1] is HtmlContentIntermediateNode
+            )
             {
-                var existingHtmlContent = (HtmlContentIntermediateNode)currentChildren[currentChildren.Count - 1];
+                var existingHtmlContent = (HtmlContentIntermediateNode)
+                    currentChildren[currentChildren.Count - 1];
 
                 if (existingHtmlContent.Source == null && source == null)
                 {
@@ -836,29 +964,32 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     return;
                 }
 
-                if (source != null &&
-                    existingHtmlContent.Source != null &&
-                    existingHtmlContent.Source.Value.FilePath == source.Value.FilePath &&
-                    existingHtmlContent.Source.Value.AbsoluteIndex + existingHtmlContent.Source.Value.Length == source.Value.AbsoluteIndex)
+                if (
+                    source != null
+                    && existingHtmlContent.Source != null
+                    && existingHtmlContent.Source.Value.FilePath == source.Value.FilePath
+                    && existingHtmlContent.Source.Value.AbsoluteIndex
+                        + existingHtmlContent.Source.Value.Length
+                        == source.Value.AbsoluteIndex
+                )
                 {
                     Combine(existingHtmlContent, node);
                     return;
                 }
             }
 
-            var contentNode = new HtmlContentIntermediateNode()
-            {
-                Source = source
-            };
+            var contentNode = new HtmlContentIntermediateNode() { Source = source };
             _builder.Push(contentNode);
 
-            _builder.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = node,
-                ContentFactory = static node => ((SyntaxNode)node).GetContent(),
-                Kind = TokenKind.Html,
-                Source = source,
-            });
+            _builder.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = node,
+                    ContentFactory = static node => ((SyntaxNode)node).GetContent(),
+                    Kind = TokenKind.Html,
+                    Source = source,
+                }
+            );
 
             _builder.Pop();
         }
@@ -909,14 +1040,19 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         {
             foreach (var child in node.Attributes)
             {
-                if (child is MarkupTagHelperAttributeSyntax || child is MarkupMinimizedTagHelperAttributeSyntax)
+                if (
+                    child is MarkupTagHelperAttributeSyntax
+                    || child is MarkupMinimizedTagHelperAttributeSyntax
+                )
                 {
                     Visit(child);
                 }
             }
         }
 
-        public override void VisitMarkupMinimizedTagHelperAttribute(MarkupMinimizedTagHelperAttributeSyntax node)
+        public override void VisitMarkupMinimizedTagHelperAttribute(
+            MarkupMinimizedTagHelperAttributeSyntax node
+        )
         {
             if (!_featureFlags.AllowMinimizedBooleanTagHelperAttributes)
             {
@@ -928,19 +1064,33 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var element = node.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
             var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
             var attributeName = node.Name.GetContent();
-            var associatedDescriptors = descriptors.Where(descriptor =>
-                descriptor.BoundAttributes.Any(attributeDescriptor => TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, attributeDescriptor)));
+            var associatedDescriptors = descriptors.Where(
+                descriptor =>
+                    descriptor.BoundAttributes.Any(
+                        attributeDescriptor =>
+                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                attributeDescriptor
+                            )
+                    )
+            );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes.First(a =>
-                    {
-                        return TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, a);
-                    });
+                    var associatedAttributeDescriptor =
+                        associatedDescriptor.BoundAttributes.First(a =>
+                        {
+                            return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                a
+                            );
+                        });
 
-                    var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
+                    var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(
+                        attributeName
+                    );
 
                     if (!expectsBooleanValue)
                     {
@@ -955,7 +1105,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         TagHelper = associatedDescriptor,
                         AttributeStructure = node.TagHelperAttributeInfo.AttributeStructure,
                         Source = null,
-                        IsIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(attributeName, associatedAttributeDescriptor),
+                        IsIndexerNameMatch =
+                            TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(
+                                attributeName,
+                                associatedAttributeDescriptor
+                            ),
                     };
 
                     _builder.Add(setTagHelperProperty);
@@ -979,17 +1133,29 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
             var attributeName = node.Name.GetContent();
             var attributeValueNode = node.Value;
-            var associatedDescriptors = descriptors.Where(descriptor =>
-                descriptor.BoundAttributes.Any(attributeDescriptor => TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, attributeDescriptor)));
+            var associatedDescriptors = descriptors.Where(
+                descriptor =>
+                    descriptor.BoundAttributes.Any(
+                        attributeDescriptor =>
+                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                attributeDescriptor
+                            )
+                    )
+            );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    var associatedAttributeDescriptor = associatedDescriptor.BoundAttributes.First(a =>
-                    {
-                        return TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, a);
-                    });
+                    var associatedAttributeDescriptor =
+                        associatedDescriptor.BoundAttributes.First(a =>
+                        {
+                            return TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                a
+                            );
+                        });
 
                     var setTagHelperProperty = new TagHelperPropertyIntermediateNode()
                     {
@@ -998,7 +1164,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         TagHelper = associatedDescriptor,
                         AttributeStructure = node.TagHelperAttributeInfo.AttributeStructure,
                         Source = BuildSourceSpanFromNode(attributeValueNode),
-                        IsIndexerNameMatch = TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(attributeName, associatedAttributeDescriptor),
+                        IsIndexerNameMatch =
+                            TagHelperMatchingConventions.SatisfiesBoundAttributeIndexer(
+                                attributeName,
+                                associatedAttributeDescriptor
+                            ),
                     };
 
                     _builder.Push(setTagHelperProperty);
@@ -1029,11 +1199,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             IReadOnlyList<SyntaxNode> children = node.ChildNodes();
             var position = node.Position;
-            if (children.Count > 0 &&
-                children[0] is MarkupBlockSyntax markupBlock &&
-                markupBlock.Children.Count == 2 &&
-                markupBlock.Children[0] is MarkupTextLiteralSyntax &&
-                markupBlock.Children[1] is MarkupEphemeralTextLiteralSyntax)
+            if (
+                children.Count > 0
+                && children[0] is MarkupBlockSyntax markupBlock
+                && markupBlock.Children.Count == 2
+                && markupBlock.Children[0] is MarkupTextLiteralSyntax
+                && markupBlock.Children[1] is MarkupEphemeralTextLiteralSyntax
+            )
             {
                 // This is a special case when we have an attribute like attr="@@foo".
                 // In this case, we want the foo to be written out as HtmlContent and not HtmlAttributeValue.
@@ -1044,14 +1216,18 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (children.All(c => c is MarkupLiteralAttributeValueSyntax))
             {
-                var literalAttributeValueNodes = children.Cast<MarkupLiteralAttributeValueSyntax>().ToArray();
+                var literalAttributeValueNodes = children
+                    .Cast<MarkupLiteralAttributeValueSyntax>()
+                    .ToArray();
                 var valueTokens = SyntaxListBuilder<SyntaxToken>.Create();
                 for (var i = 0; i < literalAttributeValueNodes.Length; i++)
                 {
                     var mergedValue = MergeAttributeValue(literalAttributeValueNodes[i]);
                     valueTokens.AddRange(mergedValue.LiteralTokens);
                 }
-                var rewritten = SyntaxFactory.MarkupTextLiteral(valueTokens.ToList()).Green.CreateRed(node.Parent, position);
+                var rewritten = SyntaxFactory
+                    .MarkupTextLiteral(valueTokens.ToList())
+                    .Green.CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is MarkupTextLiteralSyntax))
@@ -1062,7 +1238,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 {
                     builder.AddRange(literal.LiteralTokens);
                 }
-                var rewritten = SyntaxFactory.MarkupTextLiteral(builder.ToList()).Green.CreateRed(node.Parent, position);
+                var rewritten = SyntaxFactory
+                    .MarkupTextLiteral(builder.ToList())
+                    .Green.CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is CSharpExpressionLiteralSyntax))
@@ -1075,7 +1253,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     context = literal.GetSpanContext();
                     builder.AddRange(literal.LiteralTokens);
                 }
-                var rewritten = SyntaxFactory.CSharpExpressionLiteral(builder.ToList()).Green.CreateRed(node.Parent, position);
+                var rewritten = SyntaxFactory
+                    .CSharpExpressionLiteral(builder.ToList())
+                    .Green.CreateRed(node.Parent, position);
                 rewritten = context != null ? rewritten.WithSpanContext(context) : rewritten;
                 Visit(rewritten);
             }
@@ -1093,7 +1273,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var originalContext = rewritten.GetSpanContext();
             if (originalContext != null)
             {
-                rewritten = rewritten.WithSpanContext(new SpanContext(new MarkupChunkGenerator(), originalContext.EditHandler));
+                rewritten = rewritten.WithSpanContext(
+                    new SpanContext(new MarkupChunkGenerator(), originalContext.EditHandler)
+                );
             }
 
             return rewritten;
@@ -1101,13 +1283,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
         private void Combine(HtmlContentIntermediateNode node, SyntaxNode item)
         {
-            node.Children.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = item,
-                ContentFactory = static item => ((SyntaxNode)item).GetContent(),
-                Kind = TokenKind.Html,
-                Source = BuildSourceSpanFromNode(item),
-            });
+            node.Children.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = item,
+                    ContentFactory = static item => ((SyntaxNode)item).GetContent(),
+                    Kind = TokenKind.Html,
+                    Source = BuildSourceSpanFromNode(item),
+                }
+            );
 
             if (node.Source != null)
             {
@@ -1118,7 +1302,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     node.Source.Value.CharacterIndex,
                     node.Source.Value.Length + item.FullWidth,
                     node.Source.Value.LineCount,
-                    node.Source.Value.EndCharacterIndex);
+                    node.Source.Value.EndCharacterIndex
+                );
             }
         }
 
@@ -1143,15 +1328,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
     // Lowers a document using *html-as-nodes* and Components
     private class ComponentFileKindVisitor : LoweringVisitor
     {
-        private readonly HashSet<string> _renderedBoundAttributeNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> _renderedBoundAttributeNames = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public ComponentFileKindVisitor(
             DocumentIntermediateNode document,
             IntermediateNodeBuilder builder,
-            RazorParserFeatureFlags featureFlags)
-            : base(document, builder, featureFlags)
-        {
-        }
+            RazorParserFeatureFlags featureFlags
+        ) : base(document, builder, featureFlags) { }
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -1160,8 +1345,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
         public override void VisitMarkupElement(MarkupElementSyntax node)
         {
-            if ((node.StartTag != null && node.StartTag.IsMarkupTransition) ||
-                (node.EndTag != null && node.EndTag.IsMarkupTransition))
+            if (
+                (node.StartTag != null && node.StartTag.IsMarkupTransition)
+                || (node.EndTag != null && node.EndTag.IsMarkupTransition)
+            )
             {
                 // We don't want to create a node for Markup transitions (<text></text>). Treat their contents as regular markup.
                 // Technically there shouldn't be an end transition without a start transition but just being defensive.
@@ -1172,38 +1359,59 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var element = new MarkupElementIntermediateNode()
             {
                 Source = BuildSourceSpanFromNode(node),
-
                 // Could be empty while the tag is being typed in.
-                TagName = node.StartTag?.Name?.Content ?? node.EndTag?.Name?.Content ?? string.Empty,
+                TagName =
+                    node.StartTag?.Name?.Content ?? node.EndTag?.Name?.Content ?? string.Empty,
             };
 
             if (node.StartTag != null && node.EndTag != null && node.StartTag.IsVoidElement())
             {
                 element.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_UnexpectedClosingTagForVoidElement(
-                            BuildSourceSpanFromNode(node.EndTag), node.EndTag.GetTagNameWithOptionalBang()));
+                    ComponentDiagnosticFactory.Create_UnexpectedClosingTagForVoidElement(
+                        BuildSourceSpanFromNode(node.EndTag),
+                        node.EndTag.GetTagNameWithOptionalBang()
+                    )
+                );
             }
-            else if (node.StartTag != null && node.EndTag == null && !node.StartTag.IsVoidElement() && !node.StartTag.IsSelfClosing())
+            else if (
+                node.StartTag != null
+                && node.EndTag == null
+                && !node.StartTag.IsVoidElement()
+                && !node.StartTag.IsSelfClosing()
+            )
             {
                 element.Diagnostics.Add(
                     ComponentDiagnosticFactory.Create_UnclosedTag(
-                        BuildSourceSpanFromNode(node.StartTag), node.StartTag.GetTagNameWithOptionalBang()));
+                        BuildSourceSpanFromNode(node.StartTag),
+                        node.StartTag.GetTagNameWithOptionalBang()
+                    )
+                );
             }
             else if (node.StartTag == null && node.EndTag != null)
             {
                 element.Diagnostics.Add(
                     ComponentDiagnosticFactory.Create_UnexpectedClosingTag(
-                        BuildSourceSpanFromNode(node.EndTag), node.EndTag.GetTagNameWithOptionalBang()));
+                        BuildSourceSpanFromNode(node.EndTag),
+                        node.EndTag.GetTagNameWithOptionalBang()
+                    )
+                );
             }
 
             if (node.StartTag != null && !_document.Options.SuppressPrimaryMethodBody)
             {
                 // We only want this error during the second phase of the two phase compilation.
                 var startTagName = node.StartTag.GetTagNameWithOptionalBang();
-                if (!string.IsNullOrEmpty(startTagName) && LooksLikeAComponentName(_document, startTagName))
+                if (
+                    !string.IsNullOrEmpty(startTagName)
+                    && LooksLikeAComponentName(_document, startTagName)
+                )
                 {
                     element.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_UnexpectedMarkupElement(startTagName, BuildSourceSpanFromNode(node.StartTag)));
+                        ComponentDiagnosticFactory.Create_UnexpectedMarkupElement(
+                            startTagName,
+                            BuildSourceSpanFromNode(node.StartTag)
+                        )
+                    );
                 }
             }
 
@@ -1213,7 +1421,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             _builder.Pop();
 
-            static bool LooksLikeAComponentName(DocumentIntermediateNode document, string startTagName)
+            static bool LooksLikeAComponentName(
+                DocumentIntermediateNode document,
+                string startTagName
+            )
             {
                 var category = char.GetUnicodeCategory(startTagName, 0);
 
@@ -1226,9 +1437,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 //
                 // To avoid a breaking change, the support of localized component names (without explicit
                 // Uppercase classification) is behind a `SupportLocalizedComponentNames` feature flag.
-                return category is UnicodeCategory.UppercaseLetter ||
-                    (document.Options.SupportLocalizedComponentNames &&
-                        (category is UnicodeCategory.TitlecaseLetter or UnicodeCategory.OtherLetter));
+                return category is UnicodeCategory.UppercaseLetter
+                    || (
+                        document.Options.SupportLocalizedComponentNames
+                        && (
+                            category
+                            is UnicodeCategory.TitlecaseLetter
+                                or UnicodeCategory.OtherLetter
+                        )
+                    );
             }
         }
 
@@ -1274,54 +1491,77 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 node.NamePrefix?.LiteralTokens,
                 node.Name.LiteralTokens,
                 node.NameSuffix?.LiteralTokens,
-                node.EqualsToken == null ? new SyntaxList<SyntaxToken>() : new SyntaxList<SyntaxToken>(node.EqualsToken),
-                node.ValuePrefix?.LiteralTokens);
-            var prefix = (MarkupTextLiteralSyntax)SyntaxFactory.MarkupTextLiteral(prefixTokens).Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+                node.EqualsToken == null
+                    ? new SyntaxList<SyntaxToken>()
+                    : new SyntaxList<SyntaxToken>(node.EqualsToken),
+                node.ValuePrefix?.LiteralTokens
+            );
+            var prefix = (MarkupTextLiteralSyntax)
+                SyntaxFactory
+                    .MarkupTextLiteral(prefixTokens)
+                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
-            _builder.Push(new HtmlAttributeIntermediateNode()
-            {
-                AttributeName = node.Name.GetContent(),
-                Prefix = prefix.GetContent(),
-                Suffix = node.ValueSuffix?.GetContent() ?? string.Empty,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Push(
+                new HtmlAttributeIntermediateNode()
+                {
+                    AttributeName = node.Name.GetContent(),
+                    Prefix = prefix.GetContent(),
+                    Suffix = node.ValueSuffix?.GetContent() ?? string.Empty,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
 
             Visit(node.Value);
 
             _builder.Pop();
         }
 
-        public override void VisitMarkupMinimizedAttributeBlock(MarkupMinimizedAttributeBlockSyntax node)
+        public override void VisitMarkupMinimizedAttributeBlock(
+            MarkupMinimizedAttributeBlockSyntax node
+        )
         {
-            var prefixTokens = MergeLiterals(node.NamePrefix?.LiteralTokens, node.Name.LiteralTokens);
-            var prefix = (MarkupTextLiteralSyntax)SyntaxFactory.MarkupTextLiteral(prefixTokens).Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
+            var prefixTokens = MergeLiterals(
+                node.NamePrefix?.LiteralTokens,
+                node.Name.LiteralTokens
+            );
+            var prefix = (MarkupTextLiteralSyntax)
+                SyntaxFactory
+                    .MarkupTextLiteral(prefixTokens)
+                    .Green.CreateRed(node, node.NamePrefix?.Position ?? node.Name.Position);
 
             var name = node.Name.GetContent();
-            _builder.Add(new HtmlAttributeIntermediateNode()
-            {
-                AttributeName = node.Name.GetContent(),
-                Prefix = prefix.GetContent(),
-                Suffix = null,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Add(
+                new HtmlAttributeIntermediateNode()
+                {
+                    AttributeName = node.Name.GetContent(),
+                    Prefix = prefix.GetContent(),
+                    Suffix = null,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
         }
 
         // Example
         // <input checked="hello-world `@false`"/>
         //  Prefix= (space)
         //  Children will contain a token for @false.
-        public override void VisitMarkupDynamicAttributeValue(MarkupDynamicAttributeValueSyntax node)
+        public override void VisitMarkupDynamicAttributeValue(
+            MarkupDynamicAttributeValueSyntax node
+        )
         {
             var containsExpression = false;
             var descendantNodes = node.DescendantNodes(n =>
             {
-                    // Don't go into sub block. They may contain expressions but we only care about the top level.
-                    return !(n.Parent is CSharpCodeBlockSyntax);
+                // Don't go into sub block. They may contain expressions but we only care about the top level.
+                return !(n.Parent is CSharpCodeBlockSyntax);
             });
             foreach (var child in descendantNodes)
             {
-                if (child is CSharpImplicitExpressionSyntax || child is CSharpExplicitExpressionSyntax)
+                if (
+                    child is CSharpImplicitExpressionSyntax
+                    || child is CSharpExplicitExpressionSyntax
+                )
                 {
                     containsExpression = true;
                 }
@@ -1329,19 +1569,23 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (containsExpression)
             {
-                _builder.Push(new CSharpExpressionAttributeValueIntermediateNode()
-                {
-                    Prefix = node.Prefix?.GetContent() ?? string.Empty,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new CSharpExpressionAttributeValueIntermediateNode()
+                    {
+                        Prefix = node.Prefix?.GetContent() ?? string.Empty,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
             }
             else
             {
-                _builder.Push(new CSharpCodeAttributeValueIntermediateNode()
-                {
-                    Prefix = node.Prefix?.GetContent() ?? string.Empty,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new CSharpCodeAttributeValueIntermediateNode()
+                    {
+                        Prefix = node.Prefix?.GetContent() ?? string.Empty,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
             }
 
             Visit(node.Value);
@@ -1349,21 +1593,29 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             _builder.Pop();
         }
 
-        public override void VisitMarkupLiteralAttributeValue(MarkupLiteralAttributeValueSyntax node)
+        public override void VisitMarkupLiteralAttributeValue(
+            MarkupLiteralAttributeValueSyntax node
+        )
         {
-            _builder.Push(new HtmlAttributeValueIntermediateNode()
-            {
-                Prefix = node.Prefix?.GetContent() ?? string.Empty,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Push(
+                new HtmlAttributeValueIntermediateNode()
+                {
+                    Prefix = node.Prefix?.GetContent() ?? string.Empty,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
 
-            _builder.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = node,
-                ContentFactory = static node => ((MarkupLiteralAttributeValueSyntax)node).Value?.GetContent() ?? string.Empty,
-                Kind = TokenKind.Html,
-                Source = BuildSourceSpanFromNode(node.Value)
-            });
+            _builder.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = node,
+                    ContentFactory = static node =>
+                        ((MarkupLiteralAttributeValueSyntax)node).Value?.GetContent()
+                        ?? string.Empty,
+                    Kind = TokenKind.Html,
+                    Source = BuildSourceSpanFromNode(node.Value)
+                }
+            );
 
             _builder.Pop();
         }
@@ -1373,19 +1625,24 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             if (_builder.Current is HtmlAttributeIntermediateNode)
             {
                 // This can happen inside a data- attribute
-                _builder.Push(new HtmlAttributeValueIntermediateNode()
-                {
-                    Prefix = string.Empty,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new HtmlAttributeValueIntermediateNode()
+                    {
+                        Prefix = string.Empty,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
-                _builder.Add(new LazyIntermediateToken()
-                {
-                    FactoryArgument = node,
-                    ContentFactory = static node => ((MarkupTextLiteralSyntax)node).GetContent() ?? string.Empty,
-                    Kind = TokenKind.Html,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new LazyIntermediateToken()
+                    {
+                        FactoryArgument = node,
+                        ContentFactory = static node =>
+                            ((MarkupTextLiteralSyntax)node).GetContent() ?? string.Empty,
+                        Kind = TokenKind.Html,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 _builder.Pop();
 
@@ -1401,9 +1658,7 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             if (node.LiteralTokens.Count == 1)
             {
                 var token = node.LiteralTokens[0];
-                if (token != null &&
-                    token.Kind == SyntaxKind.Marker &&
-                    token.Content.Length == 0)
+                if (token != null && token.Kind == SyntaxKind.Marker && token.Content.Length == 0)
                 {
                     // We don't want to create IR nodes for marker tokens.
                     return;
@@ -1413,8 +1668,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             // Combine chunks of HTML literal text if possible.
             var source = BuildSourceSpanFromNode(node);
             var currentChildren = _builder.Current.Children;
-            if (currentChildren.Count > 0 &&
-                currentChildren[currentChildren.Count - 1] is HtmlContentIntermediateNode existingHtmlContent)
+            if (
+                currentChildren.Count > 0
+                && currentChildren[currentChildren.Count - 1]
+                    is HtmlContentIntermediateNode existingHtmlContent
+            )
             {
                 if (existingHtmlContent.Source == null && source == null)
                 {
@@ -1422,30 +1680,37 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     return;
                 }
 
-                if (source != null &&
-                    existingHtmlContent.Source != null &&
-                    existingHtmlContent.Source.Value.FilePath == source.Value.FilePath &&
-                    existingHtmlContent.Source.Value.AbsoluteIndex + existingHtmlContent.Source.Value.Length == source.Value.AbsoluteIndex)
+                if (
+                    source != null
+                    && existingHtmlContent.Source != null
+                    && existingHtmlContent.Source.Value.FilePath == source.Value.FilePath
+                    && existingHtmlContent.Source.Value.AbsoluteIndex
+                        + existingHtmlContent.Source.Value.Length
+                        == source.Value.AbsoluteIndex
+                )
                 {
                     Combine(existingHtmlContent, node);
                     return;
                 }
             }
 
-            _builder.Add(new HtmlContentIntermediateNode()
-            {
-                Source = source,
-                Children =
+            _builder.Add(
+                new HtmlContentIntermediateNode()
+                {
+                    Source = source,
+                    Children =
                     {
                         new LazyIntermediateToken()
                         {
                             FactoryArgument = node,
-                            ContentFactory = static node => ((MarkupTextLiteralSyntax)node).GetContent(),
+                            ContentFactory = static node =>
+                                ((MarkupTextLiteralSyntax)node).GetContent(),
                             Kind = TokenKind.Html,
                             Source = source,
                         }
                     }
-            });
+                }
+            );
         }
 
         public override void VisitMarkupCommentBlock(MarkupCommentBlockSyntax node)
@@ -1464,14 +1729,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (templateNode.Children.Count > 0)
             {
-                var sourceRangeStart = templateNode
-                    .Children
+                var sourceRangeStart = templateNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = templateNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = templateNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     templateNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1480,7 +1746,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
         }
@@ -1496,11 +1763,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             if (_builder.Current is HtmlAttributeIntermediateNode)
             {
                 // This can happen inside a data- attribute
-                _builder.Push(new CSharpExpressionAttributeValueIntermediateNode()
-                {
-                    Prefix = string.Empty,
-                    Source = this.BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new CSharpExpressionAttributeValueIntermediateNode()
+                    {
+                        Prefix = string.Empty,
+                        Source = this.BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 base.VisitCSharpExplicitExpression(node);
 
@@ -1525,14 +1794,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode
-                    .Children
+                var sourceRangeStart = expressionNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = expressionNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1541,7 +1811,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
         }
@@ -1551,11 +1822,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             if (_builder.Current is HtmlAttributeIntermediateNode)
             {
                 // This can happen inside a data- attribute
-                _builder.Push(new CSharpExpressionAttributeValueIntermediateNode()
-                {
-                    Prefix = string.Empty,
-                    Source = this.BuildSourceSpanFromNode(node),
-                });
+                _builder.Push(
+                    new CSharpExpressionAttributeValueIntermediateNode()
+                    {
+                        Prefix = string.Empty,
+                        Source = this.BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 base.VisitCSharpImplicitExpression(node);
 
@@ -1580,14 +1853,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode
-                    .Children
+                var sourceRangeStart = expressionNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = expressionNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -1596,7 +1870,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
         }
@@ -1608,18 +1883,23 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 // If we are top level in a tag helper HTML attribute, we want to be rendered as markup.
                 // This case happens for duplicate non-string bound attributes. They would be initially be categorized as
                 // CSharp but since they are duplicate, they should just be markup.
-                var markupLiteral = SyntaxFactory.MarkupTextLiteral(node.LiteralTokens).Green.CreateRed(node.Parent, node.Position);
+                var markupLiteral = SyntaxFactory
+                    .MarkupTextLiteral(node.LiteralTokens)
+                    .Green.CreateRed(node.Parent, node.Position);
                 Visit(markupLiteral);
                 return;
             }
 
-            _builder.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = node,
-                ContentFactory = static node => ((CSharpExpressionLiteralSyntax)node).GetContent(),
-                Kind = TokenKind.CSharp,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = node,
+                    ContentFactory = static node =>
+                        ((CSharpExpressionLiteralSyntax)node).GetContent(),
+                    Kind = TokenKind.CSharp,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
 
             base.VisitCSharpExpressionLiteral(node);
         }
@@ -1640,13 +1920,16 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     _builder.Push(statementNode);
                 }
 
-                _builder.Add(new LazyIntermediateToken()
-                {
-                    FactoryArgument = node,
-                    ContentFactory = static node => ((CSharpStatementLiteralSyntax)node).GetContent(),
-                    Kind = TokenKind.CSharp,
-                    Source = BuildSourceSpanFromNode(node),
-                });
+                _builder.Add(
+                    new LazyIntermediateToken()
+                    {
+                        FactoryArgument = node,
+                        ContentFactory = static node =>
+                            ((CSharpStatementLiteralSyntax)node).GetContent(),
+                        Kind = TokenKind.CSharp,
+                        Source = BuildSourceSpanFromNode(node),
+                    }
+                );
 
                 if (!isAttributeValue)
                 {
@@ -1702,7 +1985,12 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     // This is most likely a case mismatch in start and end tags. Otherwise the parser wouldn't have grouped them together.
                     // But we can't have case mismatch in start and end tags in components. Add a diagnostic.
                     tagHelperNode.Diagnostics.Add(
-                        ComponentDiagnosticFactory.Create_InconsistentStartAndEndTagName(startTagName, endTagName, BuildSourceSpanFromNode(node.EndTag)));
+                        ComponentDiagnosticFactory.Create_InconsistentStartAndEndTagName(
+                            startTagName,
+                            endTagName,
+                            BuildSourceSpanFromNode(node.EndTag)
+                        )
+                    );
                 }
             }
         }
@@ -1711,17 +1999,21 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         {
             foreach (var child in node.Attributes)
             {
-                if (child is MarkupTagHelperAttributeSyntax ||
-                    child is MarkupMinimizedTagHelperAttributeSyntax ||
-                    child is MarkupTagHelperDirectiveAttributeSyntax ||
-                    child is MarkupMinimizedTagHelperDirectiveAttributeSyntax)
+                if (
+                    child is MarkupTagHelperAttributeSyntax
+                    || child is MarkupMinimizedTagHelperAttributeSyntax
+                    || child is MarkupTagHelperDirectiveAttributeSyntax
+                    || child is MarkupMinimizedTagHelperDirectiveAttributeSyntax
+                )
                 {
                     Visit(child);
                 }
             }
         }
 
-        public override void VisitMarkupMinimizedTagHelperAttribute(MarkupMinimizedTagHelperAttributeSyntax node)
+        public override void VisitMarkupMinimizedTagHelperAttribute(
+            MarkupMinimizedTagHelperAttributeSyntax node
+        )
         {
             if (!_featureFlags.AllowMinimizedBooleanTagHelperAttributes)
             {
@@ -1733,22 +2025,35 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var element = node.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
             var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
             var attributeName = node.Name.GetContent();
-            var associatedDescriptors = descriptors.Where(descriptor =>
-                descriptor.BoundAttributes.Any(attributeDescriptor => TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, attributeDescriptor)));
+            var associatedDescriptors = descriptors.Where(
+                descriptor =>
+                    descriptor.BoundAttributes.Any(
+                        attributeDescriptor =>
+                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                attributeDescriptor
+                            )
+                    )
+            );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    if (TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
-                        attributeName,
-                        associatedDescriptor,
-                        out var associatedAttributeDescriptor,
-                        out var indexerMatch,
-                        out _,
-                        out _))
+                    if (
+                        TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
+                            attributeName,
+                            associatedDescriptor,
+                            out var associatedAttributeDescriptor,
+                            out var indexerMatch,
+                            out _,
+                            out _
+                        )
+                    )
                     {
-                        var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
+                        var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(
+                            attributeName
+                        );
 
                         if (!expectsBooleanValue)
                         {
@@ -1782,7 +2087,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             }
         }
 
-        public override void VisitMarkupMinimizedTagHelperDirectiveAttribute(MarkupMinimizedTagHelperDirectiveAttributeSyntax node)
+        public override void VisitMarkupMinimizedTagHelperDirectiveAttribute(
+            MarkupMinimizedTagHelperDirectiveAttributeSyntax node
+        )
         {
             if (!_featureFlags.AllowMinimizedBooleanTagHelperAttributes)
             {
@@ -1794,52 +2101,79 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var element = node.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
             var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
             var attributeName = node.FullName;
-            var associatedDescriptors = descriptors.Where(descriptor =>
-                descriptor.BoundAttributes.Any(attributeDescriptor => TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, attributeDescriptor)));
+            var associatedDescriptors = descriptors.Where(
+                descriptor =>
+                    descriptor.BoundAttributes.Any(
+                        attributeDescriptor =>
+                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                attributeDescriptor
+                            )
+                    )
+            );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    if (TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
-                        attributeName,
-                        associatedDescriptor,
-                        out var associatedAttributeDescriptor,
-                        out var indexerMatch,
-                        out var parameterMatch,
-                        out var associatedAttributeParameterDescriptor))
+                    if (
+                        TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
+                            attributeName,
+                            associatedDescriptor,
+                            out var associatedAttributeDescriptor,
+                            out var indexerMatch,
+                            out var parameterMatch,
+                            out var associatedAttributeParameterDescriptor
+                        )
+                    )
                     {
                         // Directive attributes should start with '@' unless the descriptors are misconfigured.
                         // In that case, we would have already logged an error.
-                        var actualAttributeName = attributeName.StartsWith("@", StringComparison.Ordinal) ? attributeName.Substring(1) : attributeName;
+                        var actualAttributeName = attributeName.StartsWith(
+                            "@",
+                            StringComparison.Ordinal
+                        )
+                            ? attributeName.Substring(1)
+                            : attributeName;
 
                         IntermediateNode attributeNode;
-                        if (parameterMatch &&
-                            TagHelperMatchingConventions.TryGetBoundAttributeParameter(actualAttributeName, out var attributeNameWithoutParameter))
+                        if (
+                            parameterMatch
+                            && TagHelperMatchingConventions.TryGetBoundAttributeParameter(
+                                actualAttributeName,
+                                out var attributeNameWithoutParameter
+                            )
+                        )
                         {
-                            var expectsBooleanValue = associatedAttributeParameterDescriptor.IsBooleanProperty;
+                            var expectsBooleanValue =
+                                associatedAttributeParameterDescriptor.IsBooleanProperty;
                             if (!expectsBooleanValue)
                             {
                                 // We do not allow minimized non-boolean bound attributes.
                                 return;
                             }
 
-                            attributeNode = new TagHelperDirectiveAttributeParameterIntermediateNode()
-                            {
-                                AttributeName = actualAttributeName,
-                                AttributeNameWithoutParameter = attributeNameWithoutParameter.Value,
-                                OriginalAttributeName = attributeName,
-                                BoundAttributeParameter = associatedAttributeParameterDescriptor,
-                                BoundAttribute = associatedAttributeDescriptor,
-                                TagHelper = associatedDescriptor,
-                                IsIndexerNameMatch = indexerMatch,
-                                AttributeStructure = node.TagHelperAttributeInfo.AttributeStructure,
-                                Source = null,
-                            };
+                            attributeNode =
+                                new TagHelperDirectiveAttributeParameterIntermediateNode()
+                                {
+                                    AttributeName = actualAttributeName,
+                                    AttributeNameWithoutParameter =
+                                        attributeNameWithoutParameter.Value,
+                                    OriginalAttributeName = attributeName,
+                                    BoundAttributeParameter =
+                                        associatedAttributeParameterDescriptor,
+                                    BoundAttribute = associatedAttributeDescriptor,
+                                    TagHelper = associatedDescriptor,
+                                    IsIndexerNameMatch = indexerMatch,
+                                    AttributeStructure =
+                                        node.TagHelperAttributeInfo.AttributeStructure,
+                                    Source = null,
+                                };
                         }
                         else
                         {
-                            var expectsBooleanValue = associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
+                            var expectsBooleanValue =
+                                associatedAttributeDescriptor.ExpectsBooleanValue(attributeName);
                             if (!expectsBooleanValue)
                             {
                                 // We do not allow minimized non-boolean bound attributes.
@@ -1880,20 +2214,31 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
             var attributeName = node.Name.GetContent();
             var attributeValueNode = node.Value;
-            var associatedDescriptors = descriptors.Where(descriptor =>
-                descriptor.BoundAttributes.Any(attributeDescriptor => TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, attributeDescriptor)));
+            var associatedDescriptors = descriptors.Where(
+                descriptor =>
+                    descriptor.BoundAttributes.Any(
+                        attributeDescriptor =>
+                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                attributeDescriptor
+                            )
+                    )
+            );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    if (TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
-                        attributeName,
-                        associatedDescriptor,
-                        out var associatedAttributeDescriptor,
-                        out var indexerMatch,
-                        out _,
-                        out _))
+                    if (
+                        TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
+                            attributeName,
+                            associatedDescriptor,
+                            out var associatedAttributeDescriptor,
+                            out var indexerMatch,
+                            out _,
+                            out _
+                        )
+                    )
                     {
                         var setTagHelperProperty = new TagHelperPropertyIntermediateNode()
                         {
@@ -1925,48 +2270,75 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             }
         }
 
-        public override void VisitMarkupTagHelperDirectiveAttribute(MarkupTagHelperDirectiveAttributeSyntax node)
+        public override void VisitMarkupTagHelperDirectiveAttribute(
+            MarkupTagHelperDirectiveAttributeSyntax node
+        )
         {
             var element = node.FirstAncestorOrSelf<MarkupTagHelperElementSyntax>();
             var descriptors = element.TagHelperInfo.BindingResult.Descriptors;
             var attributeName = node.FullName;
             var attributeValueNode = node.Value;
 
-            var associatedDescriptors = descriptors.Where(descriptor =>
-                descriptor.BoundAttributes.Any(attributeDescriptor => TagHelperMatchingConventions.CanSatisfyBoundAttribute(attributeName, attributeDescriptor)));
+            var associatedDescriptors = descriptors.Where(
+                descriptor =>
+                    descriptor.BoundAttributes.Any(
+                        attributeDescriptor =>
+                            TagHelperMatchingConventions.CanSatisfyBoundAttribute(
+                                attributeName,
+                                attributeDescriptor
+                            )
+                    )
+            );
 
             if (associatedDescriptors.Any() && _renderedBoundAttributeNames.Add(attributeName))
             {
                 foreach (var associatedDescriptor in associatedDescriptors)
                 {
-                    if (TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
-                        attributeName,
-                        associatedDescriptor,
-                        out var associatedAttributeDescriptor,
-                        out var indexerMatch,
-                        out var parameterMatch,
-                        out var associatedAttributeParameterDescriptor))
+                    if (
+                        TagHelperMatchingConventions.TryGetFirstBoundAttributeMatch(
+                            attributeName,
+                            associatedDescriptor,
+                            out var associatedAttributeDescriptor,
+                            out var indexerMatch,
+                            out var parameterMatch,
+                            out var associatedAttributeParameterDescriptor
+                        )
+                    )
                     {
                         // Directive attributes should start with '@' unless the descriptors are misconfigured.
                         // In that case, we would have already logged an error.
-                        var actualAttributeName = attributeName.StartsWith("@", StringComparison.Ordinal) ? attributeName.Substring(1) : attributeName;
+                        var actualAttributeName = attributeName.StartsWith(
+                            "@",
+                            StringComparison.Ordinal
+                        )
+                            ? attributeName.Substring(1)
+                            : attributeName;
 
                         IntermediateNode attributeNode;
-                        if (parameterMatch &&
-                            TagHelperMatchingConventions.TryGetBoundAttributeParameter(actualAttributeName, out var attributeNameWithoutParameter))
+                        if (
+                            parameterMatch
+                            && TagHelperMatchingConventions.TryGetBoundAttributeParameter(
+                                actualAttributeName,
+                                out var attributeNameWithoutParameter
+                            )
+                        )
                         {
-                            attributeNode = new TagHelperDirectiveAttributeParameterIntermediateNode()
-                            {
-                                AttributeName = actualAttributeName,
-                                AttributeNameWithoutParameter = attributeNameWithoutParameter.Value,
-                                OriginalAttributeName = attributeName,
-                                BoundAttributeParameter = associatedAttributeParameterDescriptor,
-                                BoundAttribute = associatedAttributeDescriptor,
-                                TagHelper = associatedDescriptor,
-                                IsIndexerNameMatch = indexerMatch,
-                                AttributeStructure = node.TagHelperAttributeInfo.AttributeStructure,
-                                Source = BuildSourceSpanFromNode(attributeValueNode),
-                            };
+                            attributeNode =
+                                new TagHelperDirectiveAttributeParameterIntermediateNode()
+                                {
+                                    AttributeName = actualAttributeName,
+                                    AttributeNameWithoutParameter =
+                                        attributeNameWithoutParameter.Value,
+                                    OriginalAttributeName = attributeName,
+                                    BoundAttributeParameter =
+                                        associatedAttributeParameterDescriptor,
+                                    BoundAttribute = associatedAttributeDescriptor,
+                                    TagHelper = associatedDescriptor,
+                                    IsIndexerNameMatch = indexerMatch,
+                                    AttributeStructure =
+                                        node.TagHelperAttributeInfo.AttributeStructure,
+                                    Source = BuildSourceSpanFromNode(attributeValueNode),
+                                };
                         }
                         else
                         {
@@ -2011,11 +2383,13 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             IReadOnlyList<SyntaxNode> children = node.ChildNodes();
             var position = node.Position;
-            if (children.Count > 0 &&
-                children[0] is MarkupBlockSyntax markupBlock &&
-                markupBlock.Children.Count == 2 &&
-                markupBlock.Children[0] is MarkupTextLiteralSyntax &&
-                markupBlock.Children[1] is MarkupEphemeralTextLiteralSyntax)
+            if (
+                children.Count > 0
+                && children[0] is MarkupBlockSyntax markupBlock
+                && markupBlock.Children.Count == 2
+                && markupBlock.Children[0] is MarkupTextLiteralSyntax
+                && markupBlock.Children[1] is MarkupEphemeralTextLiteralSyntax
+            )
             {
                 // This is a special case when we have an attribute like attr="@@foo".
                 // In this case, we want the foo to be written out as HtmlContent and not HtmlAttributeValue.
@@ -2026,14 +2400,18 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (children.All(c => c is MarkupLiteralAttributeValueSyntax))
             {
-                var literalAttributeValueNodes = children.Cast<MarkupLiteralAttributeValueSyntax>().ToArray();
+                var literalAttributeValueNodes = children
+                    .Cast<MarkupLiteralAttributeValueSyntax>()
+                    .ToArray();
                 var valueTokens = SyntaxListBuilder<SyntaxToken>.Create();
                 for (var i = 0; i < literalAttributeValueNodes.Length; i++)
                 {
                     var mergedValue = MergeAttributeValue(literalAttributeValueNodes[i]);
                     valueTokens.AddRange(mergedValue.LiteralTokens);
                 }
-                var rewritten = SyntaxFactory.MarkupTextLiteral(valueTokens.ToList()).Green.CreateRed(node.Parent, position);
+                var rewritten = SyntaxFactory
+                    .MarkupTextLiteral(valueTokens.ToList())
+                    .Green.CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is MarkupTextLiteralSyntax))
@@ -2044,7 +2422,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                 {
                     builder.AddRange(literal.LiteralTokens);
                 }
-                var rewritten = SyntaxFactory.MarkupTextLiteral(builder.ToList()).Green.CreateRed(node.Parent, position);
+                var rewritten = SyntaxFactory
+                    .MarkupTextLiteral(builder.ToList())
+                    .Green.CreateRed(node.Parent, position);
                 Visit(rewritten);
             }
             else if (children.All(c => c is CSharpExpressionLiteralSyntax))
@@ -2057,7 +2437,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     context = literal.GetSpanContext();
                     builder.AddRange(literal.LiteralTokens);
                 }
-                var rewritten = SyntaxFactory.CSharpExpressionLiteral(builder.ToList()).Green.CreateRed(node.Parent, position);
+                var rewritten = SyntaxFactory
+                    .CSharpExpressionLiteral(builder.ToList())
+                    .Green.CreateRed(node.Parent, position);
                 rewritten = context != null ? rewritten.WithSpanContext(context) : rewritten;
                 Visit(rewritten);
             }
@@ -2075,7 +2457,9 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             var originalContext = rewritten.GetSpanContext();
             if (originalContext != null)
             {
-                rewritten = rewritten.WithSpanContext(new SpanContext(new MarkupChunkGenerator(), originalContext.EditHandler));
+                rewritten = rewritten.WithSpanContext(
+                    new SpanContext(new MarkupChunkGenerator(), originalContext.EditHandler)
+                );
             }
 
             return rewritten;
@@ -2083,13 +2467,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
         private void Combine(HtmlContentIntermediateNode node, SyntaxNode item)
         {
-            node.Children.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = item,
-                ContentFactory = static item => ((SyntaxNode)item).GetContent(),
-                Kind = TokenKind.Html,
-                Source = BuildSourceSpanFromNode(item),
-            });
+            node.Children.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = item,
+                    ContentFactory = static item => ((SyntaxNode)item).GetContent(),
+                    Kind = TokenKind.Html,
+                    Source = BuildSourceSpanFromNode(item),
+                }
+            );
 
             if (node.Source != null)
             {
@@ -2102,7 +2488,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                     node.Source.Value.CharacterIndex,
                     node.Source.Value.Length + item.FullWidth,
                     node.Source.Value.LineCount,
-                    node.Source.Value.EndCharacterIndex);
+                    node.Source.Value.EndCharacterIndex
+                );
             }
         }
 
@@ -2129,10 +2516,8 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         public ComponentImportFileKindVisitor(
             DocumentIntermediateNode document,
             IntermediateNodeBuilder builder,
-            RazorParserFeatureFlags featureFlags)
-            : base(document, builder, featureFlags)
-        {
-        }
+            RazorParserFeatureFlags featureFlags
+        ) : base(document, builder, featureFlags) { }
 
         public override void DefaultVisit(SyntaxNode node)
         {
@@ -2142,7 +2527,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         public override void VisitMarkupElement(MarkupElementSyntax node)
         {
             _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(BuildSourceSpanFromNode(node)));
+                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                    BuildSourceSpanFromNode(node)
+                )
+            );
 
             base.VisitMarkupElement(node);
         }
@@ -2150,7 +2538,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         public override void VisitMarkupCommentBlock(MarkupCommentBlockSyntax node)
         {
             _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(BuildSourceSpanFromNode(node)));
+                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                    BuildSourceSpanFromNode(node)
+                )
+            );
 
             base.VisitMarkupCommentBlock(node);
         }
@@ -2158,7 +2549,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         public override void VisitMarkupTagHelperElement(MarkupTagHelperElementSyntax node)
         {
             _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(BuildSourceSpanFromNode(node)));
+                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                    BuildSourceSpanFromNode(node)
+                )
+            );
 
             base.VisitMarkupTagHelperElement(node);
         }
@@ -2166,7 +2560,10 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         public override void VisitCSharpExplicitExpression(CSharpExplicitExpressionSyntax node)
         {
             _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(BuildSourceSpanFromNode(node)));
+                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                    BuildSourceSpanFromNode(node)
+                )
+            );
 
             base.VisitCSharpExplicitExpression(node);
         }
@@ -2176,7 +2573,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
             // We typically don't want C# in imports files except for directives. But since Razor directive intellisense
             // is tied to C# intellisense during design time, we want to still generate and IR node for implicit expressions.
             // Otherwise, there will be no source mapping when someone types an `@` leading to no intellisense.
-            if (node.FirstAncestorOrSelf<SyntaxNode>(n => n is MarkupStartTagSyntax || n is MarkupEndTagSyntax) != null)
+            if (
+                node.FirstAncestorOrSelf<SyntaxNode>(
+                    n => n is MarkupStartTagSyntax || n is MarkupEndTagSyntax
+                ) != null
+            )
             {
                 // We don't care about implicit expresssion in attributes.
                 return;
@@ -2192,14 +2593,15 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
             if (expressionNode.Children.Count > 0)
             {
-                var sourceRangeStart = expressionNode
-                    .Children
+                var sourceRangeStart = expressionNode.Children
                     .FirstOrDefault(child => child.Source != null)
                     ?.Source;
 
                 if (sourceRangeStart != null)
                 {
-                    var contentLength = expressionNode.Children.Sum(child => child.Source?.Length ?? 0);
+                    var contentLength = expressionNode.Children.Sum(
+                        child => child.Source?.Length ?? 0
+                    );
 
                     expressionNode.Source = new SourceSpan(
                         sourceRangeStart.Value.FilePath ?? SourceDocument.FilePath,
@@ -2208,37 +2610,50 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
                         sourceRangeStart.Value.CharacterIndex,
                         contentLength,
                         sourceRangeStart.Value.LineCount,
-                        sourceRangeStart.Value.EndCharacterIndex);
+                        sourceRangeStart.Value.EndCharacterIndex
+                    );
                 }
             }
 
             _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(expressionNode.Source));
+                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                    expressionNode.Source
+                )
+            );
 
             base.VisitCSharpImplicitExpression(node);
         }
 
         public override void VisitCSharpExpressionLiteral(CSharpExpressionLiteralSyntax node)
         {
-            if (node.FirstAncestorOrSelf<SyntaxNode>(n => n is CSharpImplicitExpressionSyntax) == null)
+            if (
+                node.FirstAncestorOrSelf<SyntaxNode>(n => n is CSharpImplicitExpressionSyntax)
+                == null
+            )
             {
                 // We only care about implicit expressions.
                 return;
             }
 
-            _builder.Add(new LazyIntermediateToken()
-            {
-                FactoryArgument = node,
-                ContentFactory = static node => ((CSharpExpressionLiteralSyntax)node).GetContent(),
-                Kind = TokenKind.CSharp,
-                Source = BuildSourceSpanFromNode(node),
-            });
+            _builder.Add(
+                new LazyIntermediateToken()
+                {
+                    FactoryArgument = node,
+                    ContentFactory = static node =>
+                        ((CSharpExpressionLiteralSyntax)node).GetContent(),
+                    Kind = TokenKind.CSharp,
+                    Source = BuildSourceSpanFromNode(node),
+                }
+            );
         }
 
         public override void VisitCSharpStatement(CSharpStatementSyntax node)
         {
             _document.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(BuildSourceSpanFromNode(node)));
+                ComponentDiagnosticFactory.Create_UnsupportedComponentImportContent(
+                    BuildSourceSpanFromNode(node)
+                )
+            );
 
             base.VisitCSharpStatement(node);
         }
@@ -2246,10 +2661,11 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
 
     private class ImportsVisitor : LoweringVisitor
     {
-        public ImportsVisitor(DocumentIntermediateNode document, IntermediateNodeBuilder builder, RazorParserFeatureFlags featureFlags)
-            : base(document, new ImportBuilder(builder), featureFlags)
-        {
-        }
+        public ImportsVisitor(
+            DocumentIntermediateNode document,
+            IntermediateNodeBuilder builder,
+            RazorParserFeatureFlags featureFlags
+        ) : base(document, new ImportBuilder(builder), featureFlags) { }
 
         private class ImportBuilder : IntermediateNodeBuilder
         {
@@ -2286,6 +2702,6 @@ internal class DefaultRazorIntermediateNodeLoweringPhase : RazorEnginePhaseBase,
         }
     }
 
-    private static bool IsMalformed(IEnumerable<RazorDiagnostic> diagnostics)
-        => diagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
+    private static bool IsMalformed(IEnumerable<RazorDiagnostic> diagnostics) =>
+        diagnostics.Any(diagnostic => diagnostic.Severity == RazorDiagnosticSeverity.Error);
 }

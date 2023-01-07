@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
         [Fact]
         public void ReadOnlyStructSimple()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     readonly struct S1{}
@@ -37,10 +38,12 @@ class Program
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), options: TestOptions.DebugDll);
-            comp.VerifyDiagnostics(
+            var comp = CreateCompilationWithMscorlib45(
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+                options: TestOptions.DebugDll
             );
-
+            comp.VerifyDiagnostics();
 
             var s1 = comp.GetTypeByMetadataName("Program+S1");
             Assert.False(s1.IsRefLikeType);
@@ -64,7 +67,8 @@ class Program
         [Fact]
         public void ReadOnlyStructSimpleLangVer()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     readonly struct S1{}
@@ -75,24 +79,35 @@ class Program
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7), options: TestOptions.DebugDll);
+            var comp = CreateCompilationWithMscorlib45(
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp7),
+                options: TestOptions.DebugDll
+            );
             comp.VerifyDiagnostics(
                 // (4,5): error CS8107: Feature 'readonly structs' is not available in C# 7. Please use language version 7.2 or greater.
                 //     readonly struct S1{}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "readonly").WithArguments("readonly structs", "7.2").WithLocation(4, 5),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "readonly")
+                    .WithArguments("readonly structs", "7.2")
+                    .WithLocation(4, 5),
                 // (6,12): error CS8107: Feature 'readonly structs' is not available in C# 7. Please use language version 7.2 or greater.
                 //     public readonly struct S2{}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "readonly").WithArguments("readonly structs", "7.2").WithLocation(6, 12),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "readonly")
+                    .WithArguments("readonly structs", "7.2")
+                    .WithLocation(6, 12),
                 // (8,5): error CS8107: Feature 'readonly structs' is not available in C# 7. Please use language version 7.2 or greater.
                 //     readonly public struct S3{}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "readonly").WithArguments("readonly structs", "7.2").WithLocation(8, 5)
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "readonly")
+                    .WithArguments("readonly structs", "7.2")
+                    .WithLocation(8, 5)
             );
         }
 
         [Fact]
         public void ReadOnlyClassErr()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     readonly class S1{}
@@ -103,17 +118,27 @@ class Program
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), options: TestOptions.DebugDll);
+            var comp = CreateCompilationWithMscorlib45(
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+                options: TestOptions.DebugDll
+            );
             comp.VerifyDiagnostics(
                 // (4,20): error CS0106: The modifier 'readonly' is not valid for this item
                 //     readonly class S1{}
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S1").WithArguments("readonly").WithLocation(4, 20),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S1")
+                    .WithArguments("readonly")
+                    .WithLocation(4, 20),
                 // (6,47): error CS0106: The modifier 'readonly' is not valid for this item
                 //     public readonly delegate ref readonly int S2();
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S2").WithArguments("readonly").WithLocation(6, 47),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S2")
+                    .WithArguments("readonly")
+                    .WithLocation(6, 47),
                 // (8,31): error CS0106: The modifier 'readonly' is not valid for this item
                 //     readonly public interface S3{}
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S3").WithArguments("readonly").WithLocation(8, 31)
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "S3")
+                    .WithArguments("readonly")
+                    .WithLocation(8, 31)
             );
 
             var s1 = comp.GetTypeByMetadataName("Program+S1");
@@ -138,7 +163,8 @@ class Program
         [Fact]
         public void ReadOnlyRefStruct()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     readonly ref struct S1{}
@@ -147,9 +173,12 @@ class Program
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), options: TestOptions.DebugDll.WithAllowUnsafe(true));
-            comp.VerifyDiagnostics(
+            var comp = CreateCompilationWithMscorlib45(
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+                options: TestOptions.DebugDll.WithAllowUnsafe(true)
             );
+            comp.VerifyDiagnostics();
 
             var s1 = comp.GetTypeByMetadataName("Program+S1");
             Assert.True(s1.IsRefLikeType);
@@ -167,7 +196,8 @@ class Program
         [Fact]
         public void ReadOnlyStructPartialMatchingModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     readonly partial struct S1{}
@@ -180,9 +210,12 @@ class Program
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), options: TestOptions.DebugDll);
-            comp.VerifyDiagnostics(
+            var comp = CreateCompilationWithMscorlib45(
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+                options: TestOptions.DebugDll
             );
+            comp.VerifyDiagnostics();
 
             var s1 = comp.GetTypeByMetadataName("Program+S1");
             Assert.False(s1.IsRefLikeType);
@@ -197,7 +230,8 @@ class Program
         [Fact]
         public void ReadOnlyStructPartialNotMatchingModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Program
 {
     readonly partial struct S1{}
@@ -214,9 +248,12 @@ class Program
 }
 ";
 
-            var comp = CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest), options: TestOptions.DebugDll);
-            comp.VerifyDiagnostics(
+            var comp = CreateCompilationWithMscorlib45(
+                text,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.Latest),
+                options: TestOptions.DebugDll
             );
+            comp.VerifyDiagnostics();
 
             var s1 = comp.GetTypeByMetadataName("Program+S1");
             Assert.True(s1.IsRefLikeType);

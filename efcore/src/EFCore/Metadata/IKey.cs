@@ -27,15 +27,15 @@ public interface IKey : IReadOnlyKey, IAnnotatable
     ///     Returns the type of the key property for simple keys, or an object array for composite keys.
     /// </summary>
     /// <returns>The key type.</returns>
-    Type GetKeyType()
-        => Properties.Count > 1 ? typeof(IReadOnlyList<object>) : Properties.First().ClrType;
+    Type GetKeyType() =>
+        Properties.Count > 1 ? typeof(IReadOnlyList<object>) : Properties.First().ClrType;
 
     /// <summary>
     ///     Gets all foreign keys that target a given primary or alternate key.
     /// </summary>
     /// <returns>The foreign keys that reference the given key.</returns>
-    new IEnumerable<IForeignKey> GetReferencingForeignKeys()
-        => ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IForeignKey>();
+    new IEnumerable<IForeignKey> GetReferencingForeignKeys() =>
+        ((IReadOnlyKey)this).GetReferencingForeignKeys().Cast<IForeignKey>();
 
     /// <summary>
     ///     <para>
@@ -48,8 +48,7 @@ public interface IKey : IReadOnlyKey, IAnnotatable
     /// </summary>
     /// <typeparam name="TKey">The type of the key instance.</typeparam>
     /// <returns>The factory.</returns>
-    IPrincipalKeyValueFactory<TKey> GetPrincipalKeyValueFactory<TKey>()
-        where TKey : notnull;
+    IPrincipalKeyValueFactory<TKey> GetPrincipalKeyValueFactory<TKey>() where TKey : notnull;
 
     /// <summary>
     ///     <para>

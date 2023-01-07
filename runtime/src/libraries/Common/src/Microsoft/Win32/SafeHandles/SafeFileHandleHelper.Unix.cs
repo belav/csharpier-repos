@@ -28,7 +28,9 @@ namespace Microsoft.Win32.SafeHandles
                 Interop.Sys.Open(path, flags, mode),
                 path,
                 isDirectory: enoentDueToDirectory,
-                errorRewriter: e => (e.Error == Interop.Error.EISDIR) ? Interop.Error.EACCES.Info() : e);
+                errorRewriter: e =>
+                    (e.Error == Interop.Error.EISDIR) ? Interop.Error.EACCES.Info() : e
+            );
 
             // Make sure it's not a directory; we do this after opening it once we have a file descriptor
             // to avoid race conditions.
@@ -41,7 +43,11 @@ namespace Microsoft.Win32.SafeHandles
             if ((status.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR)
             {
                 handle.Dispose();
-                throw Interop.GetExceptionForIoErrno(Interop.Error.EACCES.Info(), path, isDirectory: true);
+                throw Interop.GetExceptionForIoErrno(
+                    Interop.Error.EACCES.Info(),
+                    path,
+                    isDirectory: true
+                );
             }
 
             return handle;

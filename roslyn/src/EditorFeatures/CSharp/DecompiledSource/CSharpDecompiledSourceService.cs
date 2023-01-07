@@ -33,53 +33,91 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
     [ExportLanguageService(typeof(IDecompiledSourceService), LanguageNames.CSharp), Shared]
     internal class CSharpDecompiledSourceService : IDecompiledSourceService
     {
-        private static readonly FileVersionInfo s_decompilerVersion = FileVersionInfo.GetVersionInfo(typeof(CSharpDecompiler).Assembly.Location);
+        private static readonly FileVersionInfo s_decompilerVersion =
+            FileVersionInfo.GetVersionInfo(typeof(CSharpDecompiler).Assembly.Location);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpDecompiledSourceService()
-        {
-        }
+        public CSharpDecompiledSourceService() { }
 
-        public async Task<Document?> AddSourceToAsync(Document document, Compilation symbolCompilation, ISymbol symbol, MetadataReference? metadataReference, string? assemblyLocation, SyntaxFormattingOptions formattingOptions, CancellationToken cancellationToken)
+        public async Task<Document?> AddSourceToAsync(
+            Document document,
+            Compilation symbolCompilation,
+            ISymbol symbol,
+            MetadataReference? metadataReference,
+            string? assemblyLocation,
+            SyntaxFormattingOptions formattingOptions,
+            CancellationToken cancellationToken
+        )
         {
             // Get the name of the type the symbol is in
             var containingOrThis = symbol.GetContainingTypeOrThis();
             var fullName = GetFullReflectionName(containingOrThis);
 
             // Decompile
-            var decompiledDocument = PerformDecompilation(document, fullName, symbolCompilation, metadataReference, assemblyLocation);
+            var decompiledDocument = PerformDecompilation(
+                document,
+                fullName,
+                symbolCompilation,
+                metadataReference,
+                assemblyLocation
+            );
 
             if (decompiledDocument is null)
                 return null;
 
             document = decompiledDocument;
 
-            document = await AddAssemblyInfoRegionAsync(document, symbol, cancellationToken).ConfigureAwait(false);
+            document = await AddAssemblyInfoRegionAsync(document, symbol, cancellationToken)
+                .ConfigureAwait(false);
 
             // Convert XML doc comments to regular comments, just like MAS
-            var docCommentFormattingService = document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
-            document = await ConvertDocCommentsToRegularCommentsAsync(document, docCommentFormattingService, cancellationToken).ConfigureAwait(false);
+            var docCommentFormattingService =
+                document.GetRequiredLanguageService<IDocumentationCommentFormattingService>();
+            document = await ConvertDocCommentsToRegularCommentsAsync(
+                    document,
+                    docCommentFormattingService,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            return await FormatDocumentAsync(document, formattingOptions, cancellationToken).ConfigureAwait(false);
+            return await FormatDocumentAsync(document, formattingOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public static async Task<Document> FormatDocumentAsync(Document document, SyntaxFormattingOptions options, CancellationToken cancellationToken)
+        public static async Task<Document> FormatDocumentAsync(
+            Document document,
+            SyntaxFormattingOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var node = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var node = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // Apply formatting rules
-            var formattedDoc = await Formatter.FormatAsync(
-                 document,
-                 SpecializedCollections.SingletonEnumerable(node.FullSpan),
-                 options,
-                 CSharpDecompiledSourceFormattingRule.Instance.Concat(Formatter.GetDefaultFormattingRules(document)),
-                 cancellationToken).ConfigureAwait(false);
+            var formattedDoc = await Formatter
+                .FormatAsync(
+                    document,
+                    SpecializedCollections.SingletonEnumerable(node.FullSpan),
+                    options,
+                    CSharpDecompiledSourceFormattingRule.Instance.Concat(
+                        Formatter.GetDefaultFormattingRules(document)
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return formattedDoc;
         }
 
-        private static Document? PerformDecompilation(Document document, string fullName, Compilation compilation, MetadataReference? metadataReference, string? assemblyLocation)
+        private static Document? PerformDecompilation(
+            Document document,
+            string fullName,
+            Compilation compilation,
+            MetadataReference? metadataReference,
+            string? assemblyLocation
+        )
         {
             var logger = new StringBuilder();
             var resolver = new AssemblyResolver(compilation, logger);
@@ -113,37 +151,65 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             return document.WithText(SourceText.From(text));
         }
 
-        private static async Task<Document> AddAssemblyInfoRegionAsync(Document document, ISymbol symbol, CancellationToken cancellationToken)
+        private static async Task<Document> AddAssemblyInfoRegionAsync(
+            Document document,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var assemblyInfo = MetadataAsSourceHelpers.GetAssemblyInfo(symbol.ContainingAssembly);
-            var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(compilation, symbol.ContainingAssembly);
+            var compilation = await document.Project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var assemblyPath = MetadataAsSourceHelpers.GetAssemblyDisplay(
+                compilation,
+                symbol.ContainingAssembly
+            );
 
-            var regionTrivia = SyntaxFactory.RegionDirectiveTrivia(true)
-                .WithTrailingTrivia(new[] { SyntaxFactory.Space, SyntaxFactory.PreprocessingMessage(assemblyInfo) });
+            var regionTrivia = SyntaxFactory
+                .RegionDirectiveTrivia(true)
+                .WithTrailingTrivia(
+                    new[] { SyntaxFactory.Space, SyntaxFactory.PreprocessingMessage(assemblyInfo) }
+                );
 
-            var oldRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var newRoot = oldRoot.WithLeadingTrivia(new[]
+            var oldRoot = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var newRoot = oldRoot.WithLeadingTrivia(
+                new[]
                 {
                     SyntaxFactory.Trivia(regionTrivia),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Comment("// " + assemblyPath),
                     SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.Comment($"// Decompiled with ICSharpCode.Decompiler {s_decompilerVersion.FileVersion}"),
+                    SyntaxFactory.Comment(
+                        $"// Decompiled with ICSharpCode.Decompiler {s_decompilerVersion.FileVersion}"
+                    ),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Trivia(SyntaxFactory.EndRegionDirectiveTrivia(true)),
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.CarriageReturnLineFeed
-                });
+                }
+            );
 
             return document.WithSyntaxRoot(newRoot);
         }
 
-        private static async Task<Document> ConvertDocCommentsToRegularCommentsAsync(Document document, IDocumentationCommentFormattingService docCommentFormattingService, CancellationToken cancellationToken)
+        private static async Task<Document> ConvertDocCommentsToRegularCommentsAsync(
+            Document document,
+            IDocumentationCommentFormattingService docCommentFormattingService,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await document
+                .GetSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var newSyntaxRoot = DocCommentConverter.ConvertToRegularComments(syntaxRoot, docCommentFormattingService, cancellationToken);
+            var newSyntaxRoot = DocCommentConverter.ConvertToRegularComments(
+                syntaxRoot,
+                docCommentFormattingService,
+                cancellationToken
+            );
 
             return document.WithSyntaxRoot(newSyntaxRoot);
         }
@@ -153,9 +219,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DecompiledSource
             var containingTypeStack = new Stack<string>();
             var containingNamespaceStack = new Stack<string>();
 
-            for (INamespaceOrTypeSymbol? symbol = containingType;
+            for (
+                INamespaceOrTypeSymbol? symbol = containingType;
                 symbol is not null and not INamespaceSymbol { IsGlobalNamespace: true };
-                symbol = (INamespaceOrTypeSymbol?)symbol.ContainingType ?? symbol.ContainingNamespace)
+                symbol =
+                        (INamespaceOrTypeSymbol?)symbol.ContainingType ?? symbol.ContainingNamespace
+            )
             {
                 if (symbol.ContainingType is not null)
                     containingTypeStack.Push(symbol.MetadataName);

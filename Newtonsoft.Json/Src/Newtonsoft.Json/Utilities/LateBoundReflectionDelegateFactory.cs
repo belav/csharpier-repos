@@ -35,7 +35,8 @@ namespace Newtonsoft.Json.Utilities
 {
     internal class LateBoundReflectionDelegateFactory : ReflectionDelegateFactory
     {
-        private static readonly LateBoundReflectionDelegateFactory _instance = new LateBoundReflectionDelegateFactory();
+        private static readonly LateBoundReflectionDelegateFactory _instance =
+            new LateBoundReflectionDelegateFactory();
 
         internal static ReflectionDelegateFactory Instance => _instance;
 
@@ -77,7 +78,9 @@ namespace Newtonsoft.Json.Utilities
             ConstructorInfo? constructorInfo = ReflectionUtils.GetDefaultConstructor(type, true);
             if (constructorInfo == null)
             {
-                throw new InvalidOperationException("Unable to find default constructor for " + type.FullName);
+                throw new InvalidOperationException(
+                    "Unable to find default constructor for " + type.FullName
+                );
             }
 
             return () => (T)constructorInfo.Invoke(null);

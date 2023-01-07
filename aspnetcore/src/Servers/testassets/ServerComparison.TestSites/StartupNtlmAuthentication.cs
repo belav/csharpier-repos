@@ -20,56 +20,61 @@ public class StartupNtlmAuthentication
         // services.AddSingleton<IClaimsTransformation, OneTransformPerRequest>();
 
         // This will deffer to the server implementations when available.
-        services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-            .AddNegotiate();
+        services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
     }
 
     public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
     {
-        app.Use(async (context, next) =>
-        {
-            try
+        app.Use(
+            async (context, next) =>
             {
-                await next(context);
-            }
-            catch (Exception ex)
-            {
-                if (context.Response.HasStarted)
+                try
                 {
-                    throw;
+                    await next(context);
                 }
-                context.Response.Clear();
-                context.Response.StatusCode = 500;
-                await context.Response.WriteAsync(ex.ToString());
+                catch (Exception ex)
+                {
+                    if (context.Response.HasStarted)
+                    {
+                        throw;
+                    }
+                    context.Response.Clear();
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync(ex.ToString());
+                }
             }
-        });
+        );
 
         app.UseAuthentication();
-        app.Run((context) =>
-        {
-            if (context.Request.Path.Equals("/Anonymous"))
+        app.Run(
+            (context) =>
             {
-                return context.Response.WriteAsync("Anonymous?" + !context.User.Identity.IsAuthenticated);
-            }
-
-            if (context.Request.Path.Equals("/Restricted"))
-            {
-                if (context.User.Identity.IsAuthenticated)
+                if (context.Request.Path.Equals("/Anonymous"))
                 {
-                    return context.Response.WriteAsync("Authenticated");
+                    return context.Response.WriteAsync(
+                        "Anonymous?" + !context.User.Identity.IsAuthenticated
+                    );
                 }
-                else
+
+                if (context.Request.Path.Equals("/Restricted"))
                 {
-                    return context.ChallengeAsync();
+                    if (context.User.Identity.IsAuthenticated)
+                    {
+                        return context.Response.WriteAsync("Authenticated");
+                    }
+                    else
+                    {
+                        return context.ChallengeAsync();
+                    }
                 }
-            }
 
-            if (context.Request.Path.Equals("/Forbidden"))
-            {
-                return context.ForbidAsync();
-            }
+                if (context.Request.Path.Equals("/Forbidden"))
+                {
+                    return context.ForbidAsync();
+                }
 
-            return context.Response.WriteAsync("Hello World");
-        });
+                return context.Response.WriteAsync("Hello World");
+            }
+        );
     }
 }

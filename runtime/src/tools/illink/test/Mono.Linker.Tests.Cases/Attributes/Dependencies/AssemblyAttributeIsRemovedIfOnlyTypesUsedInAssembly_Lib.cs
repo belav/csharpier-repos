@@ -2,7 +2,5 @@
 
 namespace Mono.Linker.Tests.Cases.Attributes.Dependencies
 {
-	public class AttributeInReferenceAttribute : Attribute
-	{
-	}
+    public class AttributeInReferenceAttribute : Attribute { }
 }
