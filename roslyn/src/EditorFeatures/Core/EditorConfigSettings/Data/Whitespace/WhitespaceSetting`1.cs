@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal sealed class WhitespaceSetting<T> : WhitespaceSetting where T : notnull
+    internal sealed class WhitespaceSetting<T> : WhitespaceSetting
+        where T : notnull
     {
         public override bool IsDefinedInEditorConfig =>
             _options.TryGetEditorConfigOption<T>(_option, out _);

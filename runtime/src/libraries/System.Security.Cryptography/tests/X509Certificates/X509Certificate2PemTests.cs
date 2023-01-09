@@ -614,7 +614,8 @@ MII
             string keyPem,
             Func<T> keyLoader,
             string password = null
-        ) where T : AsymmetricAlgorithm
+        )
+            where T : AsymmetricAlgorithm
         {
             AsymmetricAlgorithm key = keyLoader();
             Assert.NotNull(key);

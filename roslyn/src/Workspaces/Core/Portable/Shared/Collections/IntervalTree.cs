@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         public static IntervalTree<T> Create<T, TIntrospector>(
             in TIntrospector introspector,
             params T[] values
-        ) where TIntrospector : struct, IIntervalIntrospector<T>
+        )
+            where TIntrospector : struct, IIntervalIntrospector<T>
         {
             return Create(in introspector, (IEnumerable<T>)values);
         }
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         public static IntervalTree<T> Create<T, TIntrospector>(
             in TIntrospector introspector,
             IEnumerable<T> values = null
-        ) where TIntrospector : struct, IIntervalIntrospector<T>
+        )
+            where TIntrospector : struct, IIntervalIntrospector<T>
         {
             return IntervalTree<T>.Create(
                 in introspector,

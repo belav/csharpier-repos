@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Func<T, TValue> getter,
             TValue validNonDefaultValue,
             bool defaultThrows = false
-        ) where T : class
+        )
+            where T : class
         {
             Assert.NotEqual<TValue>(default, validNonDefaultValue);
 
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Func<T, IEnumerable<TValue>> getter,
             TValue item,
             bool allowDuplicates
-        ) where T : class
+        )
+            where T : class
         {
             var boxedItems = (IEnumerable<TValue>)ImmutableArray.Create(item);
             TestProperty(instance, factory, getter, boxedItems, defaultThrows: false);

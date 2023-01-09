@@ -2465,7 +2465,8 @@ End Class
             Compilation comp2,
             string typeName,
             string methodName
-        ) where TInvocation : SyntaxNode
+        )
+            where TInvocation : SyntaxNode
         {
             var method1 = GetInvokedSymbol<TInvocation>(comp1, typeName, methodName);
             var method2 = GetInvokedSymbol<TInvocation>(comp2, typeName, methodName);
@@ -2488,7 +2489,8 @@ End Class
             Compilation compilation,
             string typeName,
             string methodName
-        ) where TInvocation : SyntaxNode
+        )
+            where TInvocation : SyntaxNode
         {
             var type1 = compilation.GlobalNamespace.GetTypeMembers(typeName).Single();
             var method = type1.GetMembers(methodName).Single();

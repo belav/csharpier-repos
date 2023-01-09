@@ -17,7 +17,8 @@ namespace Microsoft.Internal
         public static T[] GetAttributes<T>(
             this ICustomAttributeProvider attributeProvider,
             bool inherit
-        ) where T : class
+        )
+            where T : class
         {
             return (T[])attributeProvider.GetCustomAttributes(typeof(T), inherit);
         }
@@ -31,7 +32,8 @@ namespace Microsoft.Internal
         public static T? GetFirstAttribute<T>(
             this ICustomAttributeProvider attributeProvider,
             bool inherit
-        ) where T : class
+        )
+            where T : class
         {
             return GetAttributes<T>(attributeProvider, inherit).FirstOrDefault();
         }
@@ -45,7 +47,8 @@ namespace Microsoft.Internal
         public static bool IsAttributeDefined<T>(
             this ICustomAttributeProvider attributeProvider,
             bool inherit
-        ) where T : class
+        )
+            where T : class
         {
             return attributeProvider.IsDefined(typeof(T), inherit);
         }

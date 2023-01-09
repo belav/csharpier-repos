@@ -7,7 +7,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests
 {
-    internal sealed class TestFixtureHelper<TFixture> where TFixture : class, IDisposable, new()
+    internal sealed class TestFixtureHelper<TFixture>
+        where TFixture : class, IDisposable, new()
     {
         private readonly object _gate = new();
 

@@ -27,12 +27,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         // ⚠ Verify IVTs do not use this method before removing it.
         public static TLanguageService? GetLanguageService<TLanguageService>(
             this Document? document
-        ) where TLanguageService : class, ILanguageService =>
+        )
+            where TLanguageService : class, ILanguageService =>
             document?.Project?.GetLanguageService<TLanguageService>();
 
         public static TLanguageService GetRequiredLanguageService<TLanguageService>(
             this Document document
-        ) where TLanguageService : class, ILanguageService =>
+        )
+            where TLanguageService : class, ILanguageService =>
             document.Project.GetRequiredLanguageService<TLanguageService>();
 
         public static async ValueTask<SemanticModel> GetRequiredSemanticModelAsync(

@@ -57,7 +57,8 @@ internal class NullableTest1
         return Helper.Compare((char?)(ValueType)(object)o, Helper.Create(default(char)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -69,7 +70,8 @@ internal class NullableTest1
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((char?)(ValueType)(object)o, Helper.Create(default(char)));
     }
@@ -165,7 +167,8 @@ internal class NullableTest2
         return Helper.Compare((bool?)(ValueType)(object)o, Helper.Create(default(bool)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -177,7 +180,8 @@ internal class NullableTest2
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((bool?)(ValueType)(object)o, Helper.Create(default(bool)));
     }
@@ -273,7 +277,8 @@ internal class NullableTest3
         return Helper.Compare((byte?)(ValueType)(object)o, Helper.Create(default(byte)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -285,7 +290,8 @@ internal class NullableTest3
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((byte?)(ValueType)(object)o, Helper.Create(default(byte)));
     }
@@ -381,7 +387,8 @@ internal class NullableTest4
         return Helper.Compare((sbyte?)(ValueType)(object)o, Helper.Create(default(sbyte)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -393,7 +400,8 @@ internal class NullableTest4
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((sbyte?)(ValueType)(object)o, Helper.Create(default(sbyte)));
     }
@@ -489,7 +497,8 @@ internal class NullableTest5
         return Helper.Compare((short?)(ValueType)(object)o, Helper.Create(default(short)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -501,7 +510,8 @@ internal class NullableTest5
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((short?)(ValueType)(object)o, Helper.Create(default(short)));
     }
@@ -597,7 +607,8 @@ internal class NullableTest6
         return Helper.Compare((ushort?)(ValueType)(object)o, Helper.Create(default(ushort)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -609,7 +620,8 @@ internal class NullableTest6
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((ushort?)(ValueType)(object)o, Helper.Create(default(ushort)));
     }
@@ -705,7 +717,8 @@ internal class NullableTest7
         return Helper.Compare((int?)(ValueType)(object)o, Helper.Create(default(int)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -717,7 +730,8 @@ internal class NullableTest7
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((int?)(ValueType)(object)o, Helper.Create(default(int)));
     }
@@ -813,7 +827,8 @@ internal class NullableTest8
         return Helper.Compare((uint?)(ValueType)(object)o, Helper.Create(default(uint)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -825,7 +840,8 @@ internal class NullableTest8
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((uint?)(ValueType)(object)o, Helper.Create(default(uint)));
     }
@@ -921,7 +937,8 @@ internal class NullableTest9
         return Helper.Compare((long?)(ValueType)(object)o, Helper.Create(default(long)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -933,7 +950,8 @@ internal class NullableTest9
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((long?)(ValueType)(object)o, Helper.Create(default(long)));
     }
@@ -1029,7 +1047,8 @@ internal class NullableTest10
         return Helper.Compare((ulong?)(ValueType)(object)o, Helper.Create(default(ulong)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1041,7 +1060,8 @@ internal class NullableTest10
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((ulong?)(ValueType)(object)o, Helper.Create(default(ulong)));
     }
@@ -1137,7 +1157,8 @@ internal class NullableTest11
         return Helper.Compare((float?)(ValueType)(object)o, Helper.Create(default(float)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1149,7 +1170,8 @@ internal class NullableTest11
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((float?)(ValueType)(object)o, Helper.Create(default(float)));
     }
@@ -1245,7 +1267,8 @@ internal class NullableTest12
         return Helper.Compare((double?)(ValueType)(object)o, Helper.Create(default(double)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1257,7 +1280,8 @@ internal class NullableTest12
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((double?)(ValueType)(object)o, Helper.Create(default(double)));
     }
@@ -1353,7 +1377,8 @@ internal class NullableTest13
         return Helper.Compare((decimal?)(ValueType)(object)o, Helper.Create(default(decimal)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1365,7 +1390,8 @@ internal class NullableTest13
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((decimal?)(ValueType)(object)o, Helper.Create(default(decimal)));
     }
@@ -1461,7 +1487,8 @@ internal class NullableTest14
         return Helper.Compare((IntPtr?)(ValueType)(object)o, Helper.Create(default(IntPtr)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1473,7 +1500,8 @@ internal class NullableTest14
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((IntPtr?)(ValueType)(object)o, Helper.Create(default(IntPtr)));
     }
@@ -1569,7 +1597,8 @@ internal class NullableTest15
         return Helper.Compare((UIntPtr?)(ValueType)(object)o, Helper.Create(default(UIntPtr)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1581,7 +1610,8 @@ internal class NullableTest15
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((UIntPtr?)(ValueType)(object)o, Helper.Create(default(UIntPtr)));
     }
@@ -1677,7 +1707,8 @@ internal class NullableTest16
         return Helper.Compare((Guid?)(ValueType)(object)o, Helper.Create(default(Guid)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1689,7 +1720,8 @@ internal class NullableTest16
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((Guid?)(ValueType)(object)o, Helper.Create(default(Guid)));
     }
@@ -1785,7 +1817,8 @@ internal class NullableTest17
         return Helper.Compare((GCHandle?)(ValueType)(object)o, Helper.Create(default(GCHandle)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1797,7 +1830,8 @@ internal class NullableTest17
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((GCHandle?)(ValueType)(object)o, Helper.Create(default(GCHandle)));
     }
@@ -1893,7 +1927,8 @@ internal class NullableTest18
         return Helper.Compare((ByteE?)(ValueType)(object)o, Helper.Create(default(ByteE)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -1905,7 +1940,8 @@ internal class NullableTest18
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((ByteE?)(ValueType)(object)o, Helper.Create(default(ByteE)));
     }
@@ -2001,7 +2037,8 @@ internal class NullableTest19
         return Helper.Compare((IntE?)(ValueType)(object)o, Helper.Create(default(IntE)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2013,7 +2050,8 @@ internal class NullableTest19
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((IntE?)(ValueType)(object)o, Helper.Create(default(IntE)));
     }
@@ -2109,7 +2147,8 @@ internal class NullableTest20
         return Helper.Compare((LongE?)(ValueType)(object)o, Helper.Create(default(LongE)));
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2121,7 +2160,8 @@ internal class NullableTest20
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare((LongE?)(ValueType)(object)o, Helper.Create(default(LongE)));
     }
@@ -2223,7 +2263,8 @@ internal class NullableTest21
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2238,7 +2279,8 @@ internal class NullableTest21
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (EmptyStruct?)(ValueType)(object)o,
@@ -2352,7 +2394,8 @@ internal class NullableTest22
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2367,7 +2410,8 @@ internal class NullableTest22
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStruct?)(ValueType)(object)o,
@@ -2481,7 +2525,8 @@ internal class NullableTest23
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2496,7 +2541,8 @@ internal class NullableTest23
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructQ?)(ValueType)(object)o,
@@ -2610,7 +2656,8 @@ internal class NullableTest24
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2625,7 +2672,8 @@ internal class NullableTest24
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructA?)(ValueType)(object)o,
@@ -2742,7 +2790,8 @@ internal class NullableTest25
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2757,7 +2806,8 @@ internal class NullableTest25
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructQA?)(ValueType)(object)o,
@@ -2874,7 +2924,8 @@ internal class NullableTest26
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -2889,7 +2940,8 @@ internal class NullableTest26
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (EmptyStructGen<int>?)(ValueType)(object)o,
@@ -3010,7 +3062,8 @@ internal class NullableTest27
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3025,7 +3078,8 @@ internal class NullableTest27
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructGen<int>?)(ValueType)(object)o,
@@ -3146,7 +3200,8 @@ internal class NullableTest28
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3161,7 +3216,8 @@ internal class NullableTest28
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructConstrainedGen<int>?)(ValueType)(object)o,
@@ -3294,7 +3350,8 @@ internal class NullableTest29
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3309,7 +3366,8 @@ internal class NullableTest29
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructConstrainedGenA<int>?)(ValueType)(object)o,
@@ -3442,7 +3500,8 @@ internal class NullableTest30
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3457,7 +3516,8 @@ internal class NullableTest30
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructConstrainedGenQ<int>?)(ValueType)(object)o,
@@ -3590,7 +3650,8 @@ internal class NullableTest31
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3605,7 +3666,8 @@ internal class NullableTest31
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NotEmptyStructConstrainedGenQA<int>?)(ValueType)(object)o,
@@ -3726,7 +3788,8 @@ internal class NullableTest32
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3741,7 +3804,8 @@ internal class NullableTest32
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NestedStruct?)(ValueType)(object)o,
@@ -3858,7 +3922,8 @@ internal class NullableTest33
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -3873,7 +3938,8 @@ internal class NullableTest33
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (NestedStructGen<int>?)(ValueType)(object)o,
@@ -3994,7 +4060,8 @@ internal class NullableTest34
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4009,7 +4076,8 @@ internal class NullableTest34
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (ExplicitFieldOffsetStruct?)(ValueType)(object)o,
@@ -4127,7 +4195,8 @@ internal class NullableTest37
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4142,7 +4211,8 @@ internal class NullableTest37
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (MarshalAsStruct?)(ValueType)(object)o,
@@ -4259,7 +4329,8 @@ internal class NullableTest38
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4274,7 +4345,8 @@ internal class NullableTest38
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (ImplementOneInterface?)(ValueType)(object)o,
@@ -4395,7 +4467,8 @@ internal class NullableTest39
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4410,7 +4483,8 @@ internal class NullableTest39
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (ImplementTwoInterface?)(ValueType)(object)o,
@@ -4531,7 +4605,8 @@ internal class NullableTest40
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4546,7 +4621,8 @@ internal class NullableTest40
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (ImplementOneInterfaceGen<int>?)(ValueType)(object)o,
@@ -4671,7 +4747,8 @@ internal class NullableTest41
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4686,7 +4763,8 @@ internal class NullableTest41
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (ImplementTwoInterfaceGen<int>?)(ValueType)(object)o,
@@ -4811,7 +4889,8 @@ internal class NullableTest42
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4826,7 +4905,8 @@ internal class NullableTest42
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (ImplementAllInterface<int>?)(ValueType)(object)o,
@@ -4947,7 +5027,8 @@ internal class NullableTest43
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -4962,7 +5043,8 @@ internal class NullableTest43
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (WithMultipleGCHandleStruct?)(ValueType)(object)o,
@@ -5083,7 +5165,8 @@ internal class NullableTest44
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -5098,7 +5181,8 @@ internal class NullableTest44
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (WithOnlyFXTypeStruct?)(ValueType)(object)o,
@@ -5216,7 +5300,8 @@ internal class NullableTest45
         );
     }
 
-    private static bool BoxUnboxToNQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToNQGenC<T>(T? o)
+        where T : struct
     {
         try
         {
@@ -5231,7 +5316,8 @@ internal class NullableTest45
         }
     }
 
-    private static bool BoxUnboxToQGenC<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGenC<T>(T? o)
+        where T : struct
     {
         return Helper.Compare(
             (MixedAllStruct?)(ValueType)(object)o,

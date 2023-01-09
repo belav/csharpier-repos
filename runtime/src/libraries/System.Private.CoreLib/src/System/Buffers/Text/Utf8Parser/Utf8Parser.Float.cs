@@ -164,7 +164,8 @@ namespace System.Buffers.Text
             T nan,
             out T value,
             out int bytesConsumed
-        ) where T : struct
+        )
+            where T : struct
         {
             int srcIndex = 0;
             int remaining = source.Length;

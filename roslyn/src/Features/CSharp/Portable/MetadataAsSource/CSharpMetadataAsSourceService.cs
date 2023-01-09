@@ -186,7 +186,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
         private TSyntax AddNullableRegions<TSyntax>(
             TSyntax node,
             CancellationToken cancellationToken
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             return node switch
             {

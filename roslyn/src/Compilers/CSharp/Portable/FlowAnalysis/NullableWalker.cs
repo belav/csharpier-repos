@@ -2660,7 +2660,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
         }
 
-        private void VisitAndUnsplitAll<T>(ImmutableArray<T> nodes) where T : BoundNode
+        private void VisitAndUnsplitAll<T>(ImmutableArray<T> nodes)
+            where T : BoundNode
         {
             if (nodes.IsDefault)
             {

@@ -900,7 +900,8 @@ namespace System.Net
             bool justAddresses,
             AddressFamily addressFamily,
             CancellationToken cancellationToken
-        ) where T : class
+        )
+            where T : class
         {
             long startingTimestamp = Stopwatch.GetTimestamp();
             Task? task = NameResolutionPal.GetAddrInfoAsync(

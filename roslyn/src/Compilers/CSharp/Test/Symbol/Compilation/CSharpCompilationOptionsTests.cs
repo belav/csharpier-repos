@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Func<TOptions, T, TOptions> factory,
             Func<TOptions, T> getter,
             T validNonDefaultValue
-        ) where TOptions : CompilationOptions
+        )
+            where TOptions : CompilationOptions
         {
             var validDefaultValue = getter(oldOptions);
 

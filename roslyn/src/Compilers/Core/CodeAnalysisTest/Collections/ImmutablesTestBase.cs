@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected static bool IsSame<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> first,
             IImmutableDictionary<TKey, TValue> second
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (
                 first is ImmutableSegmentedDictionary<TKey, TValue> firstSegmented

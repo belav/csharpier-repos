@@ -1089,7 +1089,8 @@ namespace XLinqTests
 
         #region Methods
 
-        private void VerifyDeleteNodes<T>(IEnumerable<T> toRemove) where T : XNode
+        private void VerifyDeleteNodes<T>(IEnumerable<T> toRemove)
+            where T : XNode
         {
             // copy of the data to delete
             IEnumerable<XNode> toRemoveCopy = toRemove.OfType<XNode>().ToList();

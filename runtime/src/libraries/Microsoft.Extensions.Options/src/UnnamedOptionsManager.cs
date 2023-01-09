@@ -8,7 +8,8 @@ namespace Microsoft.Extensions.Options
 {
     internal sealed class UnnamedOptionsManager<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > : IOptions<TOptions> where TOptions : class
+    > : IOptions<TOptions>
+        where TOptions : class
     {
         private readonly IOptionsFactory<TOptions> _factory;
         private volatile object? _syncObj;

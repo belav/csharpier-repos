@@ -2833,7 +2833,8 @@ public class FindEntryTest
         CompositeKeyType keyType,
         bool isPk = false,
         int index = 1
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var property = set.EntityType.FindProperty(propertyName)!;
         var foundList = CreateKeyValues(keyType, found);
@@ -2887,7 +2888,8 @@ public class FindEntryTest
         TProperty notFound,
         CompositeKeyType keyType,
         int index = 1
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var property = set.EntityType.FindProperty(propertyName)!;
         var foundList = CreateKeyValues(keyType, found);
@@ -2929,7 +2931,8 @@ public class FindEntryTest
         CompositeKeyType keyType,
         bool isPk = false,
         int index = 1
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var properties = propertyNames.Select(n => set.EntityType.FindProperty(n)!).ToList();
         var found = CreateKeyValues(keyType, 1, "88", "foo");
@@ -2963,7 +2966,8 @@ public class FindEntryTest
         CompositeKeyType keyType,
         int index = 1,
         bool withNulls = false
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var properties = propertyNames.Select(n => set.EntityType.FindProperty(n)!).ToList();
         var found = CreateKeyValues(keyType, 1, withNulls ? null : "88", "foo");
@@ -2992,7 +2996,8 @@ public class FindEntryTest
         FindContext context,
         string propertyName,
         object? value
-    ) where TEntity : class, new()
+    )
+        where TEntity : class, new()
     {
         var entry = context.Entry(new TEntity());
         entry.Property(propertyName).CurrentValue = value;
@@ -3005,7 +3010,8 @@ public class FindEntryTest
         FindContext context,
         string[] propertyNames,
         object?[] values
-    ) where TEntity : class, new()
+    )
+        where TEntity : class, new()
     {
         var entry = context.Entry(new TEntity());
         for (var i = 0; i < propertyNames.Length; i++)
@@ -3023,7 +3029,8 @@ public class FindEntryTest
         string entityTypeName,
         string propertyName,
         object value
-    ) where TEntity : class, new()
+    )
+        where TEntity : class, new()
     {
         var entry = context.Set<TEntity>(entityTypeName).Entry(new TEntity());
         entry.Property(propertyName).CurrentValue = value;

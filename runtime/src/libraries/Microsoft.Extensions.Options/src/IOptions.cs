@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
     public interface IOptions<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] out TOptions
-    > where TOptions : class
+    >
+        where TOptions : class
     {
         /// <summary>
         /// The default configured <typeparamref name="TOptions"/> instance

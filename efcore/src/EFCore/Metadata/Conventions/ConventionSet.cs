@@ -732,7 +732,8 @@ public class ConventionSet
     public static bool Replace<TConvention, TImplementation>(
         List<TConvention> conventionsList,
         TImplementation newConvention
-    ) where TImplementation : TConvention
+    )
+        where TImplementation : TConvention
     {
         Check.NotNull(conventionsList, nameof(conventionsList));
         Check.NotNull(newConvention, nameof(newConvention));

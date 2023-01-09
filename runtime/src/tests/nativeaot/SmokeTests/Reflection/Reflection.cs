@@ -1467,7 +1467,8 @@ internal static class ReflectionTest
             }
         }
 
-        private static void TestRefReturnInvokeNullable<T>(T? nullable) where T : struct
+        private static void TestRefReturnInvokeNullable<T>(T? nullable)
+            where T : struct
         {
             TestClass<T?> tc = new TestClass<T?>(nullable);
 
@@ -1949,10 +1950,12 @@ internal static class ReflectionTest
         static class TypeWithCodelessMethods
         {
             // "where T: struct" prevents the compiler from coming up with a good T
-            public static void CodelessMethod<T>() where T : struct { }
+            public static void CodelessMethod<T>()
+                where T : struct { }
         }
 
-        static class CodelessType<T> where T : struct
+        static class CodelessType<T>
+            where T : struct
         {
             public static void CodelessMethod() { }
         }
@@ -2090,7 +2093,8 @@ internal static class ReflectionTest
 
         interface IMessWithYou { }
 
-        class GenericTypeWithUnsatisfiableConstrains<T> where T : struct, IMessWithYou
+        class GenericTypeWithUnsatisfiableConstrains<T>
+            where T : struct, IMessWithYou
         {
             public static int SomeField;
         }
@@ -2214,7 +2218,8 @@ internal static class ReflectionTest
 
         struct SomeStruct<T> : IHardToGuess { }
 
-        public static void TakeAGuess<T>() where T : struct, IHardToGuess { }
+        public static void TakeAGuess<T>()
+            where T : struct, IHardToGuess { }
 
         class Atom1 { }
 

@@ -281,7 +281,8 @@ public class StoredProcedureBuilder
     [EntityFrameworkInternal]
     protected virtual PropertyBuilder CreatePropertyBuilder<TDerivedEntity, TProperty>(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression
-    ) where TDerivedEntity : class
+    )
+        where TDerivedEntity : class
     {
         var memberInfo = propertyExpression.GetMemberAccess();
         var entityType = EntityTypeBuilder.Metadata;

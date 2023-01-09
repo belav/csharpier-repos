@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public abstract class CodeObjectTestBase<T> : CodeDomTestBase where T : CodeObject, new()
+    public abstract class CodeObjectTestBase<T> : CodeDomTestBase
+        where T : CodeObject, new()
     {
         [Fact]
         public void Ctor_Default_ObjectBase()

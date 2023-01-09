@@ -371,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private static Dictionary<K, V> CreateDictionary<K, V>(
             IReadOnlyDictionary<K, V> dictionary,
             IEqualityComparer<K>? comparer
-        ) where K : notnull
+        )
+            where K : notnull
         {
             var result = new Dictionary<K, V>(comparer);
             foreach (var pair in dictionary)
@@ -386,7 +387,8 @@ namespace Microsoft.CodeAnalysis.Emit
             IReadOnlyDictionary<K, V> previous,
             IReadOnlyDictionary<K, V> current,
             IEqualityComparer<K>? comparer = null
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (previous.Count == 0)
             {
@@ -1207,7 +1209,8 @@ namespace Microsoft.CodeAnalysis.Emit
             EditAndContinueOperation addCode,
             EventOrPropertyMapIndex map,
             TableIndex mapTable
-        ) where T : class, ITypeDefinitionMember
+        )
+            where T : class, ITypeDefinitionMember
         {
             foreach (var member in index.GetRows())
             {
@@ -1235,7 +1238,8 @@ namespace Microsoft.CodeAnalysis.Emit
             DefinitionIndex<T> index,
             TableIndex tableIndex,
             EditAndContinueOperation addCode
-        ) where T : class, ITypeDefinitionMember
+        )
+            where T : class, ITypeDefinitionMember
         {
             foreach (var member in index.GetRows())
             {
@@ -1640,7 +1644,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ArrayBuilder<EntityHandle> tokens,
             DefinitionIndex<T> index,
             TableIndex tableIndex
-        ) where T : class, IDefinition
+        )
+            where T : class, IDefinition
         {
             foreach (var member in index.GetRows())
             {
@@ -1684,7 +1689,8 @@ namespace Microsoft.CodeAnalysis.Emit
             }
         }
 
-        private abstract class DefinitionIndexBase<T> where T : notnull
+        private abstract class DefinitionIndexBase<T>
+            where T : notnull
         {
             protected readonly Dictionary<T, int> added; // Definitions added in this generation.
             protected readonly List<T> rows; // Rows in this generation, containing adds and updates.

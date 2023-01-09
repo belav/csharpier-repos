@@ -363,7 +363,8 @@ internal class DefaultRazorProjectEngine : RazorProjectEngine
         Engine.Process(codeDocument);
     }
 
-    private TFeature GetRequiredFeature<TFeature>() where TFeature : IRazorProjectEngineFeature
+    private TFeature GetRequiredFeature<TFeature>()
+        where TFeature : IRazorProjectEngineFeature
     {
         var feature = ProjectFeatures.OfType<TFeature>().FirstOrDefault();
         if (feature == null)

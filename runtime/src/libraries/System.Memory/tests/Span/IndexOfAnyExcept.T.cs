@@ -90,7 +90,8 @@ namespace System.SpanTests
 
     public record SimpleRecord(int Value);
 
-    public abstract class IndexOfAnyExceptTests<T> where T : IEquatable<T>
+    public abstract class IndexOfAnyExceptTests<T>
+        where T : IEquatable<T>
     {
         private readonly T _a,
             _b,

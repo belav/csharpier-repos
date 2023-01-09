@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 
         public UnitTestingRemoteServiceConnectionWrapper<TService> CreateConnection<TService>(
             object? callbackTarget
-        ) where TService : class =>
+        )
+            where TService : class =>
             new(
                 _client.CreateConnection<TService>(
                     _serviceDescriptors.UnderlyingObject,
@@ -63,7 +64,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Func<TService, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -74,7 +76,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Func<TService, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -93,7 +96,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -110,7 +114,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -129,7 +134,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                 ValueTask
             > invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -146,7 +152,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
                 ValueTask<TResult>
             > invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -167,7 +174,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -186,7 +194,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection

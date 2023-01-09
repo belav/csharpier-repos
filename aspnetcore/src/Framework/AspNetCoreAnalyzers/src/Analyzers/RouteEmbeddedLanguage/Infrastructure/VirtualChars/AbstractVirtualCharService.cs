@@ -252,7 +252,8 @@ internal abstract partial class AbstractVirtualCharService : IVirtualCharService
         TTextInfo info,
         ImmutableList<VirtualChar>.Builder result,
         int offset
-    ) where TTextInfo : struct, ITextInfo<T>
+    )
+        where TTextInfo : struct, ITextInfo<T>
     {
         var ch = info.Get(tokenText, index);
 

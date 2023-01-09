@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         internal static IComWrapperFixed? TryGetWrapper(object managedObject) =>
             WrapperPolicy.TryGetWrapper(managedObject);
 
-        internal static T GetManagedObject<T>(object value) where T : class
+        internal static T GetManagedObject<T>(object value)
+            where T : class
         {
             Contract.ThrowIfNull(value, "value");
 
@@ -55,7 +56,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
             return (T)value;
         }
 
-        internal static T GetManagedObject<T>(IComWrapperFixed comWrapper) where T : class
+        internal static T GetManagedObject<T>(IComWrapperFixed comWrapper)
+            where T : class
         {
             Contract.ThrowIfNull(comWrapper, "comWrapper");
 
@@ -70,7 +72,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
             return (T)target;
         }
 
-        internal static T? TryGetManagedObject<T>(object? value) where T : class
+        internal static T? TryGetManagedObject<T>(object? value)
+            where T : class
         {
             if (value is IComWrapperFixed wrapper)
             {
@@ -80,7 +83,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
             return value as T;
         }
 
-        internal static T? TryGetManagedObject<T>(IComWrapperFixed comWrapper) where T : class
+        internal static T? TryGetManagedObject<T>(IComWrapperFixed comWrapper)
+            where T : class
         {
             if (comWrapper == null)
             {

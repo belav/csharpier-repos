@@ -802,7 +802,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         private static int GetItemIndexByPosition<TNode>(
             SeparatedSyntaxList<TNode> list,
             int position
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (var i = list.SeparatorCount - 1; i >= 0; i--)
             {

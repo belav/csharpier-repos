@@ -62,7 +62,8 @@ namespace Internal.TypeSystem
             }
         }
 
-        internal int CompareWithinClass<T>(T x, T y) where T : TypeDesc
+        internal int CompareWithinClass<T>(T x, T y)
+            where T : TypeDesc
         {
             Debug.Assert(x.GetType() == y.GetType());
 

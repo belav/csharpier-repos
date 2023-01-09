@@ -25,7 +25,8 @@ public class MethodConstraintsTests
 
     public class TypeRequiringIFoo
     {
-        public void Method<T>() where T : IFoo { }
+        public void Method<T>()
+            where T : IFoo { }
     }
 
     public class TypeWithPrivateCtor
@@ -42,17 +43,20 @@ public class MethodConstraintsTests
 
     public class TypeWithClassConstraint
     {
-        public void Method<T>() where T : class { }
+        public void Method<T>()
+            where T : class { }
     }
 
     public class TypeWithNewConstraint
     {
-        public void Method<T>() where T : new() { }
+        public void Method<T>()
+            where T : new() { }
     }
 
     public class TypeWithStructConstraint
     {
-        public void Method<T>() where T : struct { }
+        public void Method<T>()
+            where T : struct { }
     }
 
     public class TypeWithNoConstraint
@@ -64,12 +68,14 @@ public class MethodConstraintsTests
 
     public class TypeWithSelfReferenceConstraint
     {
-        public void Method<T, U>() where T : U { }
+        public void Method<T, U>()
+            where T : U { }
     }
 
     public class TypeWithSelfReferenceIEnumerableConstraint
     {
-        public void Method<T, U>() where T : IEnumerable<U> { }
+        public void Method<T, U>()
+            where T : IEnumerable<U> { }
     }
 
     public interface IBar<in T> { }
@@ -82,22 +88,26 @@ public class MethodConstraintsTests
 
     public class TypeWithVariance
     {
-        public void Method<T, U>() where T : IBar<U> { }
+        public void Method<T, U>()
+            where T : IBar<U> { }
     }
 
     public class TypeWithRecursiveConstraints
     {
-        public void Method<T, S>() where T : TypeWithNoConstraint<S> { }
+        public void Method<T, S>()
+            where T : TypeWithNoConstraint<S> { }
     }
 
     public class TypeWithMDArrayConstraints
     {
-        public void Method<T>() where T : IEnumerable<Derived[,,]> { }
+        public void Method<T>()
+            where T : IEnumerable<Derived[,,]> { }
     }
 
     public class GenericType<T, U>
     {
-        public void Method<V>() where V : U { }
+        public void Method<V>()
+            where V : U { }
     }
 
     static MethodInfo MakeGenericMethod(Type t, Type genArg)

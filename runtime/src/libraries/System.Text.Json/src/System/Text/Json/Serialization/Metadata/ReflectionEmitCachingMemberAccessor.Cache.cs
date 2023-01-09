@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization.Metadata
 {
     internal sealed partial class ReflectionEmitCachingMemberAccessor
     {
-        private sealed class Cache<TKey> where TKey : notnull
+        private sealed class Cache<TKey>
+            where TKey : notnull
         {
             private int _evictLock;
             private long _lastEvictedTicks; // timestamp of latest eviction operation.

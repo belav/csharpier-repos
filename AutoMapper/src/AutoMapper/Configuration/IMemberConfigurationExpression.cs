@@ -31,7 +31,8 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// <typeparam name="TSourceMember">Source member to supply</typeparam>
     void MapFrom<TValueResolver, TSourceMember>(
         Expression<Func<TSource, TSourceMember>> sourceMember
-    ) where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>;
+    )
+        where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember>;
 
     /// <summary>
     /// Map destination member using a custom member value resolver supplied from a source member name
@@ -191,7 +192,8 @@ public interface IMemberConfigurationExpression<TSource, TDestination, TMember>
     /// <param name="sourceMember">Source member to supply to the value converter</param>
     void ConvertUsing<TValueConverter, TSourceMember>(
         Expression<Func<TSource, TSourceMember>> sourceMember
-    ) where TValueConverter : IValueConverter<TSourceMember, TMember>;
+    )
+        where TValueConverter : IValueConverter<TSourceMember, TMember>;
 
     /// <summary>
     /// Specify a value converter to convert from the specified source member name to the destination member

@@ -153,7 +153,8 @@ namespace System.Buffers
             int searchSpaceLength,
             ref char values,
             int valuesLength
-        ) where TNegator : struct, SpanHelpers.INegator<char>
+        )
+            where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
 
@@ -209,7 +210,8 @@ namespace System.Buffers
             int searchSpaceLength,
             ref char values,
             int valuesLength
-        ) where TNegator : struct, SpanHelpers.INegator<char>
+        )
+            where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
 
@@ -261,7 +263,8 @@ namespace System.Buffers
             int searchSpaceLength,
             ref char values,
             int valuesLength
-        ) where TNegator : struct, SpanHelpers.INegator<char>
+        )
+            where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
 
@@ -289,7 +292,8 @@ namespace System.Buffers
             int searchSpaceLength,
             ref char values,
             int valuesLength
-        ) where TNegator : struct, SpanHelpers.INegator<char>
+        )
+            where TNegator : struct, SpanHelpers.INegator<char>
         {
             var valuesSpan = new ReadOnlySpan<char>(ref values, valuesLength);
 
@@ -317,7 +321,8 @@ namespace System.Buffers
             ref char searchSpace,
             int searchSpaceLength,
             ReadOnlySpan<char> values
-        ) where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
+        )
+            where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
         {
             ref char searchSpaceEnd = ref Unsafe.Add(ref searchSpace, searchSpaceLength);
             ref char cur = ref searchSpace;
@@ -342,7 +347,8 @@ namespace System.Buffers
             ref char searchSpace,
             int searchSpaceLength,
             ReadOnlySpan<char> values
-        ) where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
+        )
+            where TNegator : struct, IndexOfAnyAsciiSearcher.INegator
         {
             for (int i = searchSpaceLength - 1; i >= 0; i--)
             {

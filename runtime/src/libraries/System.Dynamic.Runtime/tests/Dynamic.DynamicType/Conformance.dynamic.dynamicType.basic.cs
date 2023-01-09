@@ -4860,7 +4860,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.throw
     // <Code>
     public class D
     {
-        public void Foo<T>(T t) where T : System.Exception
+        public void Foo<T>(T t)
+            where T : System.Exception
         {
             throw t;
         }
@@ -8303,7 +8304,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
 
         #endregion
         #region "Type parameter"
-        private static bool Test31<T>() where T : struct
+        private static bool Test31<T>()
+            where T : struct
         {
             dynamic d = default(T);
             if (d == null)
@@ -8311,7 +8313,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             return true;
         }
 
-        private static bool Test32<T>() where T : struct
+        private static bool Test32<T>()
+            where T : struct
         {
             dynamic d = default(T);
             if (d != null)
@@ -8319,7 +8322,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             return false;
         }
 
-        private static bool Test33<T>() where T : struct
+        private static bool Test33<T>()
+            where T : struct
         {
             dynamic d = default(T);
             if (null == d)
@@ -8327,7 +8331,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             return true;
         }
 
-        private static bool Test34<T>() where T : struct
+        private static bool Test34<T>()
+            where T : struct
         {
             dynamic d = default(T);
             if (null != d)

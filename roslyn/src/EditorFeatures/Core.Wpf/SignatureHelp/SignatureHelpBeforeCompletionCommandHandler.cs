@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         private bool TryGetControllerCommandHandler<TCommandArgs>(
             TCommandArgs args,
             out ICommandHandler commandHandler
-        ) where TCommandArgs : EditorCommandArgs
+        )
+            where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
             if (!TryGetController(args, out var controller))
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
         private CommandState GetCommandStateWorker<TCommandArgs>(
             TCommandArgs args,
             Func<CommandState> nextHandler
-        ) where TCommandArgs : EditorCommandArgs
+        )
+            where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
             return TryGetControllerCommandHandler(args, out var commandHandler)
@@ -88,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.CommandHandlers
             TCommandArgs args,
             Action nextHandler,
             CommandExecutionContext context
-        ) where TCommandArgs : EditorCommandArgs
+        )
+            where TCommandArgs : EditorCommandArgs
         {
             AssertIsForeground();
             if (!TryGetControllerCommandHandler(args, out var commandHandler))

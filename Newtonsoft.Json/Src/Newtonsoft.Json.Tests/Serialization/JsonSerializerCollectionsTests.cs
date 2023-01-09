@@ -2852,7 +2852,8 @@ namespace Newtonsoft.Json.Tests.Serialization
 
     public class NonGenericItem : GenericItem<string> { }
 
-    public class GenericClass<T, TValue> : IEnumerable<T> where T : GenericItem<TValue>, new()
+    public class GenericClass<T, TValue> : IEnumerable<T>
+        where T : GenericItem<TValue>, new()
     {
         public IList<T> Items { get; set; }
 

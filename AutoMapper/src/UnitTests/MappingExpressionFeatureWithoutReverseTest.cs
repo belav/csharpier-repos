@@ -190,7 +190,8 @@ public class MappingExpressionFeatureWithoutReverseTest
             MappingExpressionFeatureBase feature,
             TypeMap map,
             int reverseExecutedCount = 1
-        ) where TFeature : TypeMapFeatureBase
+        )
+            where TFeature : TypeMapFeatureBase
         {
             feature.ConfigureTypeMaps.ShouldBeOfLength(1);
             feature.ReverseExecutedCount.ShouldBe(reverseExecutedCount);

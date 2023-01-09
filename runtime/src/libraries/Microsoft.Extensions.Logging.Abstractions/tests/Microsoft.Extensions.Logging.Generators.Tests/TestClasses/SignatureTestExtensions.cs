@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
     }
 
     // test particular method signature variations are generated correctly
-    internal partial class SignatureTestExtensions<T> where T : class
+    internal partial class SignatureTestExtensions<T>
+        where T : class
     {
         public static void Combo(ILogger logger, ILogger<int> logger2)
         {

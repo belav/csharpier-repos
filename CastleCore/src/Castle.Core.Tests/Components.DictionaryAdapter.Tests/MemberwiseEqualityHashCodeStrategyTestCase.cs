@@ -130,7 +130,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
             person.BillingAddress = GetAdapter<IAddress>();
         }
 
-        private T GetAdapter<T>() where T : class
+        private T GetAdapter<T>()
+            where T : class
         {
             return (T)
                 factory.GetAdapter(
@@ -143,7 +144,8 @@ namespace Castle.Components.DictionaryAdapter.Tests
                 );
         }
 
-        private T GetXmlAdapter<T>() where T : class
+        private T GetXmlAdapter<T>()
+            where T : class
         {
             var xpath = new XmlAdapter(new XmlDocument());
             return (T)

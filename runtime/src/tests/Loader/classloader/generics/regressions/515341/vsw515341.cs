@@ -12,7 +12,8 @@ public struct GenS<T> : GenI<T> { }
 
 public class C
 {
-    public void Meth2<T>() where T : GenI<C> { }
+    public void Meth2<T>()
+        where T : GenI<C> { }
 }
 
 public class Test_vsw515341

@@ -8,7 +8,8 @@ interface I<out T>
     T A();
 }
 
-class X<T> : I<T> where T : class
+class X<T> : I<T>
+    where T : class
 {
     T I<T>.A()
     {

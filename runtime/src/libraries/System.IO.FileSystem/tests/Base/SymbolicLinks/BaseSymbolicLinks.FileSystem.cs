@@ -152,7 +152,8 @@ namespace System.IO.Tests
             ); // do not create target
         }
 
-        protected void ResolveLinkTarget_Throws_NotExists_Internal<T>() where T : Exception
+        protected void ResolveLinkTarget_Throws_NotExists_Internal<T>()
+            where T : Exception
         {
             string path = GetRandomFilePath();
             Assert.Throws<T>(() => ResolveLinkTarget(path, returnFinalTarget: false));

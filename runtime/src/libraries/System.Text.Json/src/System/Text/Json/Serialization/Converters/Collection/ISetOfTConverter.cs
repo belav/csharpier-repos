@@ -8,7 +8,8 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class ISetOfTConverter<TCollection, TElement>
-        : IEnumerableDefaultConverter<TCollection, TElement> where TCollection : ISet<TElement>
+        : IEnumerableDefaultConverter<TCollection, TElement>
+        where TCollection : ISet<TElement>
     {
         protected override void Add(in TElement value, ref ReadStack state)
         {

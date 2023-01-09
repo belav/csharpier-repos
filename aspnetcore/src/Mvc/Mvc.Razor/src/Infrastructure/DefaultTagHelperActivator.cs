@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.Razor.Infrastructure;
 internal sealed class DefaultTagHelperActivator : ITagHelperActivator
 {
     /// <inheritdoc />
-    public TTagHelper Create<TTagHelper>(ViewContext context) where TTagHelper : ITagHelper
+    public TTagHelper Create<TTagHelper>(ViewContext context)
+        where TTagHelper : ITagHelper
     {
         if (context == null)
         {

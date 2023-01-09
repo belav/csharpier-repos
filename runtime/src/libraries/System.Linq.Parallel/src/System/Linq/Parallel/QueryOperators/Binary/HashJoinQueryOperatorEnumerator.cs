@@ -269,7 +269,8 @@ namespace System.Linq.Parallel
             QueryOperatorEnumerator<Pair<TBaseElement, THashKey>, TBaseOrderKey> dataSource,
             TBaseBuilder baseHashBuilder,
             CancellationToken cancellationToken
-        ) where TBaseBuilder : IBaseHashBuilder<TBaseElement, TBaseOrderKey>
+        )
+            where TBaseBuilder : IBaseHashBuilder<TBaseElement, TBaseOrderKey>
         {
             Debug.Assert(dataSource != null);
 

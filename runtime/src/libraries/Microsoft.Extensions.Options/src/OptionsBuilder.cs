@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Options
     /// Used to configure <typeparamref name="TOptions"/> instances.
     /// </summary>
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
-    public class OptionsBuilder<TOptions> where TOptions : class
+    public class OptionsBuilder<TOptions>
+        where TOptions : class
     {
         private const string DefaultValidationFailureMessage = "A validation error has occurred.";
 
@@ -62,7 +63,8 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> Configure<TDep>(
             Action<TOptions, TDep> configureOptions
-        ) where TDep : class
+        )
+            where TDep : class
         {
             ThrowHelper.ThrowIfNull(configureOptions);
 
@@ -232,7 +234,8 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> PostConfigure<TDep>(
             Action<TOptions, TDep> configureOptions
-        ) where TDep : class
+        )
+            where TDep : class
         {
             ThrowHelper.ThrowIfNull(configureOptions);
 
@@ -412,7 +415,8 @@ namespace Microsoft.Extensions.Options
         /// <returns>The current <see cref="OptionsBuilder{TOptions}"/>.</returns>
         public virtual OptionsBuilder<TOptions> Validate<TDep>(
             Func<TOptions, TDep, bool> validation
-        ) where TDep : notnull =>
+        )
+            where TDep : notnull =>
             Validate(validation: validation, failureMessage: DefaultValidationFailureMessage);
 
         /// <summary>
@@ -425,7 +429,8 @@ namespace Microsoft.Extensions.Options
         public virtual OptionsBuilder<TOptions> Validate<TDep>(
             Func<TOptions, TDep, bool> validation,
             string failureMessage
-        ) where TDep : notnull
+        )
+            where TDep : notnull
         {
             ThrowHelper.ThrowIfNull(validation);
 

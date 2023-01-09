@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             Func<SyntaxNode, bool>? expandInsideNode = null,
             bool expandParameter = false,
             CancellationToken cancellationToken = default
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (node == null)
             {
@@ -100,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             Func<SyntaxNode, bool>? expandInsideNode = null,
             bool expandParameter = false,
             CancellationToken cancellationToken = default
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (workspace == null)
                 throw new ArgumentNullException(nameof(workspace));
@@ -125,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             Func<SyntaxNode, bool>? expandInsideNode = null,
             bool expandParameter = false,
             CancellationToken cancellationToken = default
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (node == null)
                 throw new ArgumentNullException(nameof(node));

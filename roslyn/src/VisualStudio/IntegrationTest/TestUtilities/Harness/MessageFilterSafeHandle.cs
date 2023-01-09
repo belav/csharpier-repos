@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.Harness
             out IntPtr oldMessageFilter
         );
 
-        public static MessageFilterSafeHandle Register<T>(T messageFilter) where T : IMessageFilter
+        public static MessageFilterSafeHandle Register<T>(T messageFilter)
+            where T : IMessageFilter
         {
             var handle = Marshal.GetComInterfaceForObject<T, IMessageFilter>(messageFilter);
             return new MessageFilterSafeHandle(handle);

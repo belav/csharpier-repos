@@ -18,7 +18,8 @@ namespace Microsoft.VisualStudio.Debugger
     {
         private readonly Dictionary<Guid, object> _dataItems = new Dictionary<Guid, object>();
 
-        public T GetDataItem<T>() where T : DkmDataItem
+        public T GetDataItem<T>()
+            where T : DkmDataItem
         {
             object value;
             if (_dataItems.TryGetValue(typeof(T).GUID, out value))

@@ -57,7 +57,8 @@ public class FallbackEventDefinition : EventDefinitionBase
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
         Action<ILogger> logAction
-    ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+    )
+        where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)
         {

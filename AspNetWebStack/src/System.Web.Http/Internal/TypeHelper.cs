@@ -97,7 +97,8 @@ namespace System.Web.Http.Internal
         /// </summary>
         /// <typeparam name="T">type to search for</typeparam>
         /// <returns>subset of objects that can be assigned to T</returns>
-        internal static ReadOnlyCollection<T> OfType<T>(object[] objects) where T : class
+        internal static ReadOnlyCollection<T> OfType<T>(object[] objects)
+            where T : class
         {
             int max = objects.Length;
             List<T> list = new List<T>(max);

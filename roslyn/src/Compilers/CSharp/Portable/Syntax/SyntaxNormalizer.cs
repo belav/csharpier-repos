@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             string indentWhitespace,
             string eolWhitespace,
             bool useElasticTrivia = false
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var normalizer = new SyntaxNormalizer(
                 node.FullSpan,

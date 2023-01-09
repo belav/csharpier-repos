@@ -63,7 +63,8 @@ public class InheritanceData : ISetSource
         Plants = plants;
     }
 
-    public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public virtual IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(Animal))
         {

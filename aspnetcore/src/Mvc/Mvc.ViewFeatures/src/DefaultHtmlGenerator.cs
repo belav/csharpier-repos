@@ -1706,7 +1706,8 @@ public class DefaultHtmlGenerator : IHtmlGenerator
         }
     }
 
-    private static object ConvertEnumFromString<TEnum>(string value) where TEnum : struct
+    private static object ConvertEnumFromString<TEnum>(string value)
+        where TEnum : struct
     {
         if (Enum.TryParse(value, out TEnum enumValue))
         {

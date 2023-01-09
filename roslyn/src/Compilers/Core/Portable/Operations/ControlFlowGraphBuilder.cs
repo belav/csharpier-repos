@@ -2299,7 +2299,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private void VisitAndPushArray<T>(
             ImmutableArray<T> array,
             Func<T, IOperation>? unwrapper = null
-        ) where T : IOperation
+        )
+            where T : IOperation
         {
             Debug.Assert(unwrapper != null || typeof(T) == typeof(IOperation));
             foreach (var element in array)
@@ -2311,7 +2312,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private ImmutableArray<T> PopArray<T>(
             ImmutableArray<T> originalArray,
             Func<IOperation, int, ImmutableArray<T>, T>? wrapper = null
-        ) where T : IOperation
+        )
+            where T : IOperation
         {
             Debug.Assert(wrapper != null || typeof(T) == typeof(IOperation));
             int numElements = originalArray.Length;
@@ -2341,7 +2343,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ImmutableArray<T> originalArray,
             Func<T, IOperation>? unwrapper = null,
             Func<IOperation, int, ImmutableArray<T>, T>? wrapper = null
-        ) where T : IOperation
+        )
+            where T : IOperation
         {
 #if DEBUG
             int stackSizeBefore = _evalStack.Count;

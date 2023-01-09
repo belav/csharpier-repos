@@ -219,7 +219,8 @@ namespace System.Runtime.Serialization
             }
         }
 
-        private static object Make<T>() where T : new()
+        private static object Make<T>()
+            where T : new()
         {
             var t = new T();
             return t;

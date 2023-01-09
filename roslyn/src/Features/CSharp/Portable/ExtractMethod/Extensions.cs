@@ -139,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         private static bool PartOfConstantInitializerExpression<T>(
             this SyntaxNode node,
             Func<T, SyntaxTokenList> modifiersGetter
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var decl = node.GetAncestor<T>();
             if (decl == null)

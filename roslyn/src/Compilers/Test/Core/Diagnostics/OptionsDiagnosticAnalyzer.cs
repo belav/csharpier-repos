@@ -14,7 +14,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public class OptionsDiagnosticAnalyzer<TLanguageKindEnum>
-        : TestDiagnosticAnalyzer<TLanguageKindEnum> where TLanguageKindEnum : struct
+        : TestDiagnosticAnalyzer<TLanguageKindEnum>
+        where TLanguageKindEnum : struct
     {
         private readonly AnalyzerOptions _expectedOptions;
         private readonly Dictionary<string, AnalyzerOptions> _mismatchedOptions =

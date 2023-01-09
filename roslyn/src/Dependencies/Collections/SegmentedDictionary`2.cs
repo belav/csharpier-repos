@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Collections
     internal sealed class SegmentedDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
             IDictionary,
-            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IReadOnlyDictionary<TKey, TValue>
+        where TKey : notnull
     {
         private const bool SupportsComparerDevirtualization
 #if NETCOREAPP

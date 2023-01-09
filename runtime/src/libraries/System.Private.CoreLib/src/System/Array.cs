@@ -967,7 +967,8 @@ namespace System
                             int adjustedIndex,
                             int length,
                             object value
-                        ) where T : struct, IComparable<T> =>
+                        )
+                            where T : struct, IComparable<T> =>
                             UnsafeArrayAsSpan<T>(array, adjustedIndex, length)
                                 .BinarySearch(Unsafe.As<byte, T>(ref value.GetRawData()));
                     }
@@ -1495,7 +1496,8 @@ namespace System
                         object value,
                         int adjustedIndex,
                         int length
-                    ) where T : struct, IEquatable<T> =>
+                    )
+                        where T : struct, IEquatable<T> =>
                         UnsafeArrayAsSpan<T>(array, adjustedIndex, length)
                             .IndexOf(Unsafe.As<byte, T>(ref value.GetRawData()));
                 }
@@ -1750,7 +1752,8 @@ namespace System
                         object value,
                         int adjustedIndex,
                         int length
-                    ) where T : struct, IEquatable<T> =>
+                    )
+                        where T : struct, IEquatable<T> =>
                         UnsafeArrayAsSpan<T>(array, adjustedIndex, length)
                             .LastIndexOf(Unsafe.As<byte, T>(ref value.GetRawData()));
                 }
@@ -2211,7 +2214,8 @@ namespace System
                         Array? items,
                         int adjustedIndex,
                         int length
-                    ) where T : struct
+                    )
+                        where T : struct
                     {
                         Span<T> keysSpan = UnsafeArrayAsSpan<T>(keys, adjustedIndex, length);
                         if (items != null)

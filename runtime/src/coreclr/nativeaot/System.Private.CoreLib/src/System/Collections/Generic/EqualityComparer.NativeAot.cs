@@ -48,7 +48,8 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T> where T : struct, Enum
+    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+        where T : struct, Enum
     {
         public sealed override bool Equals(T x, T y)
         {

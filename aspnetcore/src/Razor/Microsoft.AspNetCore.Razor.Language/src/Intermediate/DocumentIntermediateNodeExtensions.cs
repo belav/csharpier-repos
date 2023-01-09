@@ -75,7 +75,8 @@ public static class DocumentIntermediateNodeExtensions
 
     public static IReadOnlyList<IntermediateNodeReference> FindDescendantReferences<TNode>(
         this DocumentIntermediateNode document
-    ) where TNode : IntermediateNode
+    )
+        where TNode : IntermediateNode
     {
         if (document == null)
         {
@@ -129,7 +130,8 @@ public static class DocumentIntermediateNodeExtensions
         }
     }
 
-    private class ReferenceVisitor<TNode> : IntermediateNodeWalker where TNode : IntermediateNode
+    private class ReferenceVisitor<TNode> : IntermediateNodeWalker
+        where TNode : IntermediateNode
     {
         public List<IntermediateNodeReference> References = new List<IntermediateNodeReference>();
 

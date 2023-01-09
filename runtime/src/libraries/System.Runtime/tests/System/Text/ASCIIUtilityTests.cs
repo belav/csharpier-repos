@@ -467,7 +467,8 @@ namespace System.Text.Tests
             return Type.GetType("System.Text.ASCIIUtility, System.Private.CoreLib");
         }
 
-        private sealed class UnsafeLazyDelegate<TDelegate> where TDelegate : Delegate
+        private sealed class UnsafeLazyDelegate<TDelegate>
+            where TDelegate : Delegate
         {
             private readonly Lazy<TDelegate> _lazyDelegate;
 

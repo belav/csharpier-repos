@@ -53,7 +53,8 @@ public class ConfigurationFeatureTest
     private void Validate<TFeature>(
         ConfigurationExpressionFeatureBase feature,
         MapperConfiguration config
-    ) where TFeature : ConfigurationFeatureBase
+    )
+        where TFeature : ConfigurationFeatureBase
     {
         feature.ConfigurationProviders.ShouldBeOfLength(1);
 
@@ -78,7 +79,8 @@ public class ConfigurationFeatureTest
     }
 
     public abstract class ConfigurationExpressionFeatureBase<TFeature>
-        : ConfigurationExpressionFeatureBase where TFeature : IRuntimeFeature
+        : ConfigurationExpressionFeatureBase
+        where TFeature : IRuntimeFeature
     {
         private readonly TFeature _feature;
 

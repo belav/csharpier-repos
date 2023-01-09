@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.UseIsNullCheck
 {
     internal abstract class AbstractUseIsNullCheckForReferenceEqualsCodeFixProvider<TExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider where TExpressionSyntax : SyntaxNode
+        : SyntaxEditorBasedCodeFixProvider
+        where TExpressionSyntax : SyntaxNode
     {
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.UseIsNullCheckDiagnosticId);

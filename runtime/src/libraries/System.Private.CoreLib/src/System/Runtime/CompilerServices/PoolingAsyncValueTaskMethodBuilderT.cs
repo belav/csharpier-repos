@@ -170,7 +170,8 @@ namespace System.Runtime.CompilerServices
         private static IAsyncStateMachineBox GetStateMachineBox<TStateMachine>(
             ref TStateMachine stateMachine,
             [NotNull] ref StateMachineBox? boxFieldRef
-        ) where TStateMachine : IAsyncStateMachine
+        )
+            where TStateMachine : IAsyncStateMachine
         {
             ExecutionContext? currentContext = ExecutionContext.Capture();
 
@@ -307,7 +308,8 @@ namespace System.Runtime.CompilerServices
                 IValueTaskSource<TResult>,
                 IValueTaskSource,
                 IAsyncStateMachineBox,
-                IThreadPoolWorkItem where TStateMachine : IAsyncStateMachine
+                IThreadPoolWorkItem
+            where TStateMachine : IAsyncStateMachine
         {
             /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;

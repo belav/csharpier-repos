@@ -6174,7 +6174,8 @@ public class RendererTest
         }
     }
 
-    private class ConditionalParentComponent<T> : AutoRenderComponent where T : IComponent
+    private class ConditionalParentComponent<T> : AutoRenderComponent
+        where T : IComponent
     {
         [Parameter]
         public bool IncludeChild { get; set; }

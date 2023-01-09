@@ -21,7 +21,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     //
     // This object is a good candidate for long term caching.
     //
-    internal sealed class QueriedMemberList<M> where M : MemberInfo
+    internal sealed class QueriedMemberList<M>
+        where M : MemberInfo
     {
         private QueriedMemberList()
         {

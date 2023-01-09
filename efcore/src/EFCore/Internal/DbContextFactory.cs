@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 /// </summary>
 public class DbContextFactory<
     [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
-> : IDbContextFactory<TContext> where TContext : DbContext
+> : IDbContextFactory<TContext>
+    where TContext : DbContext
 {
     private readonly IServiceProvider _serviceProvider;
     private readonly DbContextOptions<TContext> _options;

@@ -167,7 +167,8 @@ public class ServiceCollectionMap : IInfrastructure<IInternalServiceCollectionMa
     /// <returns>The map, such that further calls can be chained.</returns>
     public virtual ServiceCollectionMap TryAddTransient<TService>(
         Func<IServiceProvider, TService> factory
-    ) where TService : class => TryAdd(typeof(TService), factory, ServiceLifetime.Transient);
+    )
+        where TService : class => TryAdd(typeof(TService), factory, ServiceLifetime.Transient);
 
     /// <summary>
     ///     Adds a <see cref="ServiceLifetime.Scoped" /> service implemented by the given factory
@@ -178,7 +179,8 @@ public class ServiceCollectionMap : IInfrastructure<IInternalServiceCollectionMa
     /// <returns>The map, such that further calls can be chained.</returns>
     public virtual ServiceCollectionMap TryAddScoped<TService>(
         Func<IServiceProvider, TService> factory
-    ) where TService : class => TryAdd(typeof(TService), factory, ServiceLifetime.Scoped);
+    )
+        where TService : class => TryAdd(typeof(TService), factory, ServiceLifetime.Scoped);
 
     /// <summary>
     ///     Adds a <see cref="ServiceLifetime.Singleton" /> service implemented by the given factory
@@ -189,7 +191,8 @@ public class ServiceCollectionMap : IInfrastructure<IInternalServiceCollectionMa
     /// <returns>The map, such that further calls can be chained.</returns>
     public virtual ServiceCollectionMap TryAddSingleton<TService>(
         Func<IServiceProvider, TService> factory
-    ) where TService : class => TryAdd(typeof(TService), factory, ServiceLifetime.Singleton);
+    )
+        where TService : class => TryAdd(typeof(TService), factory, ServiceLifetime.Singleton);
 
     /// <summary>
     ///     Adds a <see cref="ServiceLifetime.Transient" /> service implemented by the given factory

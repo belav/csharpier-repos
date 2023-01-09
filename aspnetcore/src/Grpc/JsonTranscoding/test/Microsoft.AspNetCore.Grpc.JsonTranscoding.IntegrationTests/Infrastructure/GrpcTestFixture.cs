@@ -11,7 +11,8 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.IntegrationTests.Infrastructure;
 
-public class GrpcTestFixture<TStartup> : IDisposable where TStartup : class
+public class GrpcTestFixture<TStartup> : IDisposable
+    where TStartup : class
 {
     private TestServer? _server;
     private IHost? _host;

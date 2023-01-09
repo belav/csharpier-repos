@@ -65,12 +65,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             public static implicit operator decimal(AmbiguousNumClass nc) => nc._num;
         }
 
-        public static T ReturnRef<T>(T item) where T : class
+        public static T ReturnRef<T>(T item)
+            where T : class
         {
             return item;
         }
 
-        public static T ReturnVal<T>(T item) where T : struct
+        public static T ReturnVal<T>(T item)
+            where T : struct
         {
             return item;
         }
@@ -84,9 +86,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         private class Constraints
         {
-            public void MustBeConvertible<T>(T arg) where T : IConvertible { }
+            public void MustBeConvertible<T>(T arg)
+                where T : IConvertible { }
 
-            public void MustBeStruct<T>(T arg) where T : struct { }
+            public void MustBeStruct<T>(T arg)
+                where T : struct { }
 
             public void MustBeDerived<TDerived, TBase>(TDerived d, TBase b)
                 where TDerived : TBase { }

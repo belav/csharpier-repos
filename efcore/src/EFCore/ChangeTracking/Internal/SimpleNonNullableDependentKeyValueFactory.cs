@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 /// </summary>
 public class SimpleNonNullableDependentKeyValueFactory<TKey>
     : DependentKeyValueFactory<TKey>,
-        IDependentKeyValueFactory<TKey> where TKey : notnull
+        IDependentKeyValueFactory<TKey>
+    where TKey : notnull
 {
     private readonly PropertyAccessors _propertyAccessors;
 

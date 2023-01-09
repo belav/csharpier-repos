@@ -1199,7 +1199,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         IReadOnlyModificationCommand command,
         IForeignKey foreignKey,
         bool checkStoreGenerated = false
-    ) where T : notnull
+    )
+        where T : notnull
     {
         if (predecessorsMap.TryGetValue(keyValue, out var predecessorCommands))
         {
@@ -1244,7 +1245,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         IReadOnlyModificationCommand command,
         IForeignKeyConstraint foreignKey,
         bool checkStoreGenerated = false
-    ) where T : notnull
+    )
+        where T : notnull
     {
         if (predecessorsMap.TryGetValue(keyValue, out var predecessorCommands))
         {
@@ -1295,7 +1297,8 @@ public class CommandBatchPreparer : ICommandBatchPreparer
         T keyValue,
         IReadOnlyModificationCommand command,
         CommandDependency edge
-    ) where T : notnull
+    )
+        where T : notnull
     {
         if (predecessorsMap.TryGetValue(keyValue, out var predecessorCommands))
         {

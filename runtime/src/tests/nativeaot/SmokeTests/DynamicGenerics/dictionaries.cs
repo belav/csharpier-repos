@@ -19,7 +19,8 @@ namespace Dictionaries
 
     public struct GenericStruct<T> { }
 
-    public class NullableTest<T> : Base where T : struct
+    public class NullableTest<T> : Base
+        where T : struct
     {
         public override Object Test(int i, Object o)
         {
@@ -45,9 +46,11 @@ namespace Dictionaries
         }
     }
 
-    public delegate Object DelWithNullable<T>(Nullable<T> o) where T : struct;
+    public delegate Object DelWithNullable<T>(Nullable<T> o)
+        where T : struct;
 
-    public class DelegateTarget<T> where T : struct
+    public class DelegateTarget<T>
+        where T : struct
     {
         public static Object DelWithNullableTarget(T? n)
         {
@@ -547,7 +550,8 @@ namespace TypeDictTestTypes
         public int f;
     }
 
-    public class MyClass6<T, U> where T : MyClass7
+    public class MyClass6<T, U>
+        where T : MyClass7
     {
         public int f;
 
@@ -1353,9 +1357,11 @@ namespace CtorDict
 
 
 
-    public class CtorTest<T, X> where T : new()
+    public class CtorTest<T, X>
+        where T : new()
     {
-        public Object TestMethod<U, Y>(int id) where U : new()
+        public Object TestMethod<U, Y>(int id)
+            where U : new()
         {
             switch (id)
             {

@@ -94,7 +94,8 @@ namespace NS.Module.CS01
             event GenDele<T> E02;
         }
 
-        public class ModClassImplImp<T> : ModIGen2<T, Action<T>> where T : class
+        public class ModClassImplImp<T> : ModIGen2<T, Action<T>>
+            where T : class
         {
             public Action<T> P01
             {

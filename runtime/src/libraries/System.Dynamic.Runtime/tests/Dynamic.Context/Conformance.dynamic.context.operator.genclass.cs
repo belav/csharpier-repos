@@ -130,7 +130,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         }
     }
 
-    public class MemberClassWithClassConstraint<T> where T : class
+    public class MemberClassWithClassConstraint<T>
+        where T : class
     {
         public int Field;
 
@@ -150,7 +151,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         }
     }
 
-    public class MemberClassWithNewConstraint<T> where T : new()
+    public class MemberClassWithNewConstraint<T>
+        where T : new()
     {
         public static int Status;
 
@@ -172,7 +174,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.genclas
         }
     }
 
-    public class MemberClassWithAnotherTypeConstraint<T, U> where T : U
+    public class MemberClassWithAnotherTypeConstraint<T, U>
+        where T : U
     {
         public static implicit operator MyStruct[](MemberClassWithAnotherTypeConstraint<T, U> p1)
         {

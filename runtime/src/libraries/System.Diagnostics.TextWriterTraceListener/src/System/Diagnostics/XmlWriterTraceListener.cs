@@ -463,7 +463,8 @@ namespace System.Diagnostics
             _writer?.Write(message);
         }
 
-        private void InternalWrite<T>(T message) where T : ISpanFormattable
+        private void InternalWrite<T>(T message)
+            where T : ISpanFormattable
         {
             Debug.Assert(
                 typeof(T) == typeof(int) || typeof(T) == typeof(uint) || typeof(T) == typeof(long),

@@ -90,7 +90,8 @@ internal static class EndpointMetadataPopulator
     private static void PopulateMetadataForParameter<T>(
         ParameterInfo parameter,
         EndpointBuilder builder
-    ) where T : IEndpointParameterMetadataProvider
+    )
+        where T : IEndpointParameterMetadataProvider
     {
         T.PopulateMetadata(parameter, builder);
     }

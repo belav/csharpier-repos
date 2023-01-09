@@ -23,11 +23,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static T GetRequiredAncestor<T>(
             this SyntaxToken token,
             Func<T, bool>? predicate = null
-        ) where T : SyntaxNode =>
+        )
+            where T : SyntaxNode =>
             GetAncestor(token, predicate)
             ?? throw new InvalidOperationException("Could not find a valid ancestor");
 
-        public static IEnumerable<T> GetAncestors<T>(this SyntaxToken token) where T : SyntaxNode
+        public static IEnumerable<T> GetAncestors<T>(this SyntaxToken token)
+            where T : SyntaxNode
         {
             return token.Parent != null
                 ? token.Parent.AncestorsAndSelf().OfType<T>()

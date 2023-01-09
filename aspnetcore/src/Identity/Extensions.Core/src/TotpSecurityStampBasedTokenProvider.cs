@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
 public abstract class TotpSecurityStampBasedTokenProvider<TUser>
-    : IUserTwoFactorTokenProvider<TUser> where TUser : class
+    : IUserTwoFactorTokenProvider<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Generates a token for the specified <paramref name="user"/> and <paramref name="purpose"/>.

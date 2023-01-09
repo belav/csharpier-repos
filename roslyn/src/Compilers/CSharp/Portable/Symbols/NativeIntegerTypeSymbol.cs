@@ -302,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Symbol? other,
             TypeCompareKind comparison,
             Func<TSymbol, Symbol> getUnderlyingSymbol
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             if (other is null)
             {

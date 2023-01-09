@@ -396,7 +396,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ReplaceMethodWithProper
             SemanticModel semanticModel,
             IParameterSymbol parameter,
             TNode node
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var rewriter = new Rewriter(semanticModel, parameter);
             return (TNode)rewriter.Visit(node);

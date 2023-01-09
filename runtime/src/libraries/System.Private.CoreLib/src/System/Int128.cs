@@ -1449,7 +1449,8 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.CreateChecked{TOther}(TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int128 CreateChecked<TOther>(TOther value) where TOther : INumberBase<TOther>
+        public static Int128 CreateChecked<TOther>(TOther value)
+            where TOther : INumberBase<TOther>
         {
             Int128 result;
 

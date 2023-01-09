@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ValidateFormatString
 {
     internal abstract class AbstractValidateFormatStringDiagnosticAnalyzer<TSyntaxKind>
-        : DiagnosticAnalyzer where TSyntaxKind : struct
+        : DiagnosticAnalyzer
+        where TSyntaxKind : struct
     {
         private const string DiagnosticID = IDEDiagnosticIds.ValidateFormatStringDiagnosticID;
 

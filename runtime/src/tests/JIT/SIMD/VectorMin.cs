@@ -10,7 +10,8 @@ internal partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorMinTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorMinTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorMin(T left, T right, T result)
         {

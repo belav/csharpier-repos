@@ -13,7 +13,8 @@ using Xunit.Sdk;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class SendFile<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class SendFile<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         protected SendFile(ITestOutputHelper output)
             : base(output) { }

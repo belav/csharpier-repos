@@ -7,7 +7,8 @@ using System.Collections.Generic;
 namespace System.CommandLine.Rendering.Views
 {
     //TODO: consider IEnumerable<T> addition
-    public abstract class LayoutView<T> : View, IEnumerable<T> where T : View
+    public abstract class LayoutView<T> : View, IEnumerable<T>
+        where T : View
     {
         private readonly List<T> _children = new();
         public IReadOnlyList<T> Children => _children.AsReadOnly();

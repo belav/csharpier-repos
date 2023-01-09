@@ -3,7 +3,8 @@
 
 namespace System.Buffers
 {
-    internal sealed class IndexOfEmptyValues<T> : IndexOfAnyValues<T> where T : IEquatable<T>?
+    internal sealed class IndexOfEmptyValues<T> : IndexOfAnyValues<T>
+        where T : IEquatable<T>?
     {
         internal override T[] GetValues() => Array.Empty<T>();
 

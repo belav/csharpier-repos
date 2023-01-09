@@ -90,23 +90,27 @@ namespace System.Tests
 
         private const string HelpersParamName = "value";
 
-        private static Action ZeroHelper<T>(T value) where T : INumberBase<T> =>
-            () => ArgumentOutOfRangeException.ThrowIfZero(value);
+        private static Action ZeroHelper<T>(T value)
+            where T : INumberBase<T> => () => ArgumentOutOfRangeException.ThrowIfZero(value);
 
-        private static Action NegativeOrZeroHelper<T>(T value) where T : INumberBase<T> =>
+        private static Action NegativeOrZeroHelper<T>(T value)
+            where T : INumberBase<T> =>
             () => ArgumentOutOfRangeException.ThrowIfNegativeOrZero(value);
 
-        private static Action GreaterThanHelper<T>(T value, T other) where T : IComparable<T> =>
+        private static Action GreaterThanHelper<T>(T value, T other)
+            where T : IComparable<T> =>
             () => ArgumentOutOfRangeException.ThrowIfGreaterThan(value, other);
 
         private static Action GreaterThanOrEqualHelper<T>(T value, T other)
             where T : IComparable<T> =>
             () => ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(value, other);
 
-        private static Action LessThanHelper<T>(T value, T other) where T : IComparable<T> =>
+        private static Action LessThanHelper<T>(T value, T other)
+            where T : IComparable<T> =>
             () => ArgumentOutOfRangeException.ThrowIfLessThan(value, other);
 
-        private static Action LessThanOrEqualHelper<T>(T value, T other) where T : IComparable<T> =>
+        private static Action LessThanOrEqualHelper<T>(T value, T other)
+            where T : IComparable<T> =>
             () => ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, other);
 
         [Fact]

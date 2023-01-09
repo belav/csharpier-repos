@@ -1468,9 +1468,11 @@ namespace System.Linq.Expressions.Tests
 
             public static void GenericStaticMethod<T>(T t1) { }
 
-            public void ConstrainedInstanceMethod<T>(T t1) where T : struct { }
+            public void ConstrainedInstanceMethod<T>(T t1)
+                where T : struct { }
 
-            public static void ConstrainedStaticMethod<T>(T t1) where T : struct { }
+            public static void ConstrainedStaticMethod<T>(T t1)
+                where T : struct { }
 
             public void InstanceMethod0() { }
 

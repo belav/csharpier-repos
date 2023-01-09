@@ -261,7 +261,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             bool whenPartIsNullable,
             TContainer container,
             SyntaxNode match
-        ) where TContainer : SyntaxNode
+        )
+            where TContainer : SyntaxNode
         {
             if (whenPartIsNullable)
             {
@@ -304,7 +305,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             TContainer whenPart,
             SyntaxNode match,
             SyntaxNode matchParent
-        ) where TContainer : SyntaxNode
+        )
+            where TContainer : SyntaxNode
         {
             if (syntaxFacts.IsSimpleMemberAccessExpression(matchParent))
             {

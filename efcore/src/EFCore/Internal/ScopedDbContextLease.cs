@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Internal;
 public sealed class ScopedDbContextLease<TContext>
     : IScopedDbContextLease<TContext>,
         IDisposable,
-        IAsyncDisposable where TContext : DbContext
+        IAsyncDisposable
+    where TContext : DbContext
 {
     private DbContextLease _lease;
 

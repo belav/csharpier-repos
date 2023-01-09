@@ -16,7 +16,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public sealed class ObservableUpDownCounter<T> : ObservableInstrument<T> where T : struct
+    public sealed class ObservableUpDownCounter<T> : ObservableInstrument<T>
+        where T : struct
     {
         private object _callback;
 

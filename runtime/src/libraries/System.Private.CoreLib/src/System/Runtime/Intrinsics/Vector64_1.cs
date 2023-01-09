@@ -28,7 +28,8 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector64DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector64.Size)]
-    public readonly struct Vector64<T> : IEquatable<Vector64<T>> where T : struct
+    public readonly struct Vector64<T> : IEquatable<Vector64<T>>
+        where T : struct
     {
         // This field allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
         internal readonly ulong _00;

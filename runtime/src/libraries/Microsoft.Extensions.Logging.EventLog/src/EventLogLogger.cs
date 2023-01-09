@@ -59,7 +59,8 @@ namespace Microsoft.Extensions.Logging.EventLog
         public IEventLog EventLog { get; }
 
         /// <inheritdoc />
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull
         {
             return _externalScopeProvider?.Push(state);
         }

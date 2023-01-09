@@ -387,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <returns></returns>
         internal static SeparatedSyntaxList<TOther> AsSeparatedList<TOther>(
             this SyntaxNodeOrTokenList list
-        ) where TOther : SyntaxNode
+        )
+            where TOther : SyntaxNode
         {
             var builder = SeparatedSyntaxListBuilder<TOther>.Create();
             foreach (var i in list)

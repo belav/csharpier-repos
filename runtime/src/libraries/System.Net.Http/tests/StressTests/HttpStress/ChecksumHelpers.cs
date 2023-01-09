@@ -73,7 +73,8 @@ namespace HttpStress
         public static ulong CalculateHeaderCrc<T>(
             IEnumerable<(string name, T)> headers,
             Encoding? encoding = null
-        ) where T : IEnumerable<string>
+        )
+            where T : IEnumerable<string>
         {
             ulong checksum = InitialCrc;
 

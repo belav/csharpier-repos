@@ -632,7 +632,8 @@ public class Program
     unsafe static bool ValidateResult_Vector64<T>(
         Vector64<T> result,
         Vector64<T> expectedElementValue
-    ) where T : unmanaged
+    )
+        where T : unmanaged
     {
         var succeeded = true;
 
@@ -666,7 +667,8 @@ public class Program
     unsafe static bool ValidateResult_Vector128<T>(
         Vector128<T> result,
         Vector128<T> expectedElementValue
-    ) where T : unmanaged
+    )
+        where T : unmanaged
     {
         var succeeded = true;
 

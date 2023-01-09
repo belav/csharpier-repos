@@ -27,7 +27,8 @@ namespace Test
             return -1;
         }
 
-        public static string GetEnumCategory<T>(T enumValue) where T : struct, IConvertible
+        public static string GetEnumCategory<T>(T enumValue)
+            where T : struct, IConvertible
         {
             if (!typeof(T).IsEnum)
                 return null;

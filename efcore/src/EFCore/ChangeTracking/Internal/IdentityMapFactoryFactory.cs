@@ -27,7 +27,8 @@ public class IdentityMapFactoryFactory
                 .Invoke(null, new object[] { key })!;
 
     [UsedImplicitly]
-    private static Func<bool, IIdentityMap> CreateFactory<TKey>(IKey key) where TKey : notnull
+    private static Func<bool, IIdentityMap> CreateFactory<TKey>(IKey key)
+        where TKey : notnull
     {
         var factory = key.GetPrincipalKeyValueFactory<TKey>();
 

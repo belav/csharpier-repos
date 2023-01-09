@@ -42,7 +42,8 @@ public static class CookiePolicyServiceCollectionExtensions
     public static IServiceCollection AddCookiePolicy<TService>(
         this IServiceCollection services,
         Action<CookiePolicyOptions, TService> configureOptions
-    ) where TService : class
+    )
+        where TService : class
     {
         if (services == null)
         {

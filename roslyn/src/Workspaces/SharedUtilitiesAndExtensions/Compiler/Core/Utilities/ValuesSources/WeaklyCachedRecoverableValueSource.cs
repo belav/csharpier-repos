@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Host
     /// The initial value comes from the <see cref="ValueSource{T}"/> specified in the constructor.
     /// Derived types implement SaveAsync and RecoverAsync.
     /// </summary>
-    internal abstract class WeaklyCachedRecoverableValueSource<T> : ValueSource<T> where T : class
+    internal abstract class WeaklyCachedRecoverableValueSource<T> : ValueSource<T>
+        where T : class
     {
         private SemaphoreSlim? _lazyGate; // Lazily created. Access via the Gate property
         private bool _saved;

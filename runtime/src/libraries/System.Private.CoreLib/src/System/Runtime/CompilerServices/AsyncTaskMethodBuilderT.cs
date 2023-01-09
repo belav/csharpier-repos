@@ -111,7 +111,8 @@ namespace System.Runtime.CompilerServices
         internal static void AwaitUnsafeOnCompleted<TAwaiter>(
             ref TAwaiter awaiter,
             IAsyncStateMachineBox box
-        ) where TAwaiter : ICriticalNotifyCompletion
+        )
+            where TAwaiter : ICriticalNotifyCompletion
         {
             // The null tests here ensure that the jit can optimize away the interface
             // tests when TAwaiter is a ref type.
@@ -179,7 +180,8 @@ namespace System.Runtime.CompilerServices
         private static IAsyncStateMachineBox GetStateMachineBox<TStateMachine>(
             ref TStateMachine stateMachine,
             [NotNull] ref Task<TResult>? taskField
-        ) where TStateMachine : IAsyncStateMachine
+        )
+            where TStateMachine : IAsyncStateMachine
         {
             ExecutionContext? currentContext = ExecutionContext.Capture();
 
@@ -285,7 +287,8 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">Specifies the type of the state machine.</typeparam>
         private sealed class DebugFinalizableAsyncStateMachineBox<TStateMachine>
             : // SOS DumpAsync command depends on this name
-            AsyncStateMachineBox<TStateMachine> where TStateMachine : IAsyncStateMachine
+            AsyncStateMachineBox<TStateMachine>
+            where TStateMachine : IAsyncStateMachine
         {
             ~DebugFinalizableAsyncStateMachineBox()
             {
@@ -305,7 +308,8 @@ namespace System.Runtime.CompilerServices
         private class AsyncStateMachineBox<TStateMachine>
             : // SOS DumpAsync command depends on this name
             Task<TResult>,
-                IAsyncStateMachineBox where TStateMachine : IAsyncStateMachine
+                IAsyncStateMachineBox
+            where TStateMachine : IAsyncStateMachine
         {
             /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;

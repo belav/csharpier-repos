@@ -462,7 +462,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckLambdaIdentityGenericWithClassRestrictionHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             foreach (Tc value in new Tc[] { null, default(Tc) })
             {
@@ -472,7 +473,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckLambdaIdentityGenericWithSubClassRestrictionHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             foreach (TC value in new TC[] { null, default(TC), (TC)new C() })
             {
@@ -482,7 +484,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckLambdaIdentityGenericWithClassAndNewRestrictionHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             foreach (Tcn value in new Tcn[] { null, default(Tcn), new Tcn() })
             {
@@ -492,7 +495,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckLambdaIdentityGenericWithSubClassAndNewRestrictionHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             foreach (TCn value in new TCn[] { null, default(TCn), new TCn(), (TCn)new C() })
             {
@@ -502,7 +506,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckLambdaIdentityGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             foreach (Ts value in new Ts[] { default(Ts), new Ts() })
             {
@@ -2019,7 +2024,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityGenericWithClassRestriction<Tc>(
             Tc value,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             ParameterExpression p = Expression.Parameter(typeof(Tc), "p");
 
@@ -2069,7 +2075,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityGenericWithSubClassRestriction<TC>(
             TC value,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             ParameterExpression p = Expression.Parameter(typeof(TC), "p");
 
@@ -2119,7 +2126,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityGenericWithClassAndNewRestriction<Tcn>(
             Tcn value,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             ParameterExpression p = Expression.Parameter(typeof(Tcn), "p");
 
@@ -2169,7 +2177,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityGenericWithSubClassAndNewRestriction<TCn>(
             TCn value,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             ParameterExpression p = Expression.Parameter(typeof(TCn), "p");
 
@@ -2219,7 +2228,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityGenericWithStructRestriction<Ts>(
             Ts value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             ParameterExpression p = Expression.Parameter(typeof(Ts), "p");
 

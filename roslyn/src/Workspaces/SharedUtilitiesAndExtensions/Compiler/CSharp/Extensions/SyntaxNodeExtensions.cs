@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             [NotNullWhen(returnValue: true)] this SyntaxNode? node,
             SyntaxKind kind,
             [NotNullWhen(returnValue: true)] out TNode? result
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (node.IsKind(kind))
             {
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             [NotNullWhen(returnValue: true)] this SyntaxNode? node,
             SyntaxKind kind,
             [NotNullWhen(returnValue: true)] out TNode? result
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (node.IsParentKind(kind))
             {
@@ -635,14 +637,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static bool SpansPreprocessorDirective<TSyntaxNode>(
             this IEnumerable<TSyntaxNode> list
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpSyntaxFacts.Instance.SpansPreprocessorDirective(list);
 
         [return: NotNullIfNotNull("node")]
         public static TNode? ConvertToSingleLine<TNode>(
             this TNode? node,
             bool useElasticTrivia = false
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (node == null)
             {
@@ -809,7 +813,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static IList<IList<TSyntaxNode>> SplitNodesOnPreprocessorBoundaries<TSyntaxNode>(
             this IEnumerable<TSyntaxNode> nodes,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var result = new List<IList<TSyntaxNode>>();
 
@@ -876,18 +881,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static ImmutableArray<SyntaxTrivia> GetLeadingBlankLines<TSyntaxNode>(
             this TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpFileBannerFacts.Instance.GetLeadingBlankLines(node);
 
         public static TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
             this TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBlankLines(node);
 
         public static TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
             this TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBlankLines(
                 node,
                 out strippedTrivia
@@ -895,12 +903,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         public static ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             this TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpFileBannerFacts.Instance.GetLeadingBannerAndPreprocessorDirectives(node);
 
         public static TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             this TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
                 node
             );
@@ -908,7 +918,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         public static TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             this TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             CSharpFileBannerFacts.Instance.GetNodeWithoutLeadingBannerAndPreprocessorDirectives(
                 node,
                 out strippedTrivia
@@ -1297,7 +1308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this T node,
             SyntaxToken leadingToken,
             SyntaxToken trailingToken
-        ) where T : SyntaxNode =>
+        )
+            where T : SyntaxNode =>
             node.WithCommentsFrom(
                 SyntaxNodeOrTokenExtensions.GetTrivia(leadingToken),
                 SyntaxNodeOrTokenExtensions.GetTrivia(trailingToken)
@@ -1307,7 +1319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this T node,
             IEnumerable<SyntaxToken> leadingTokens,
             IEnumerable<SyntaxToken> trailingTokens
-        ) where T : SyntaxNode =>
+        )
+            where T : SyntaxNode =>
             node.WithCommentsFrom(leadingTokens.GetTrivia(), trailingTokens.GetTrivia());
 
         public static T WithCommentsFrom<T>(
@@ -1315,7 +1328,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             IEnumerable<SyntaxTrivia> leadingTrivia,
             IEnumerable<SyntaxTrivia> trailingTrivia,
             params SyntaxNodeOrToken[] trailingNodesOrTokens
-        ) where T : SyntaxNode =>
+        )
+            where T : SyntaxNode =>
             node.WithLeadingTrivia(
                     leadingTrivia
                         .Concat(node.GetLeadingTrivia())
@@ -1331,7 +1345,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                         .FilterComments(addElasticMarker: false)
                 );
 
-        public static T KeepCommentsAndAddElasticMarkers<T>(this T node) where T : SyntaxNode =>
+        public static T KeepCommentsAndAddElasticMarkers<T>(this T node)
+            where T : SyntaxNode =>
             node.WithTrailingTrivia(node.GetTrailingTrivia().FilterComments(addElasticMarker: true))
                 .WithLeadingTrivia(node.GetLeadingTrivia().FilterComments(addElasticMarker: true));
     }

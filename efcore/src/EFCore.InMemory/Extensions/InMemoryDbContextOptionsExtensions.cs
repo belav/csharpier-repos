@@ -35,7 +35,8 @@ public static class InMemoryDbContextOptionsExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         string databaseName,
         Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseInMemoryDatabase(
                 (DbContextOptionsBuilder)optionsBuilder,
@@ -94,7 +95,8 @@ public static class InMemoryDbContextOptionsExtensions
         string databaseName,
         InMemoryDatabaseRoot? databaseRoot,
         Action<InMemoryDbContextOptionsBuilder>? inMemoryOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseInMemoryDatabase(
                 (DbContextOptionsBuilder)optionsBuilder,

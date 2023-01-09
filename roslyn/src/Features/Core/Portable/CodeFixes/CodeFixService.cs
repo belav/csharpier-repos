@@ -880,7 +880,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Func<Diagnostic, bool> hasFix,
             Func<ImmutableArray<Diagnostic>, Task<ImmutableArray<CodeFix>>> getFixes,
             CancellationToken cancellationToken
-        ) where TCodeFixProvider : notnull
+        )
+            where TCodeFixProvider : notnull
         {
             var allDiagnostics = await diagnosticsWithSameSpan
                 .OrderByDescending(d => d.Severity)

@@ -95,7 +95,8 @@ namespace System.Dynamic.Utils
         /// contains a ReadOnlyCollection or the Expression.  We check for the Expression and if it's
         /// present we return that, otherwise we return the 1st element of the ReadOnlyCollection.
         /// </summary>
-        public static T ReturnObject<T>(object collectionOrT) where T : class
+        public static T ReturnObject<T>(object collectionOrT)
+            where T : class
         {
             if (collectionOrT is T t)
             {
@@ -324,7 +325,8 @@ namespace System.Dynamic.Utils
         internal static bool SameElements<T>(
             ref IEnumerable<T>? replacement,
             IReadOnlyList<T> current
-        ) where T : class
+        )
+            where T : class
         {
             Debug.Assert(current != null);
             if (replacement == current) // Relatively common case, so particularly useful to take the short-circuit.
@@ -352,7 +354,8 @@ namespace System.Dynamic.Utils
         private static bool SameElementsInCollection<T>(
             ICollection<T> replacement,
             IReadOnlyList<T> current
-        ) where T : class
+        )
+            where T : class
         {
             int count = current.Count;
             if (replacement.Count != count)

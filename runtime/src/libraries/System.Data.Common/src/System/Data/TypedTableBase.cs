@@ -12,7 +12,8 @@ namespace System.Data
     /// This is the generic base class for TypedDataSet
     /// </summary>
     [Serializable]
-    public abstract class TypedTableBase<T> : DataTable, IEnumerable<T> where T : DataRow
+    public abstract class TypedTableBase<T> : DataTable, IEnumerable<T>
+        where T : DataRow
     {
         /// <summary>
         /// Default constructor for generic TypedTableBase.

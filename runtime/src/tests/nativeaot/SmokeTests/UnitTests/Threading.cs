@@ -1663,7 +1663,8 @@ internal static class Assert
         throw new AssertionFailureException();
     }
 
-    public static void Same<T>(T expected, T actual) where T : class
+    public static void Same<T>(T expected, T actual)
+        where T : class
     {
         if (expected == actual)
             return;
@@ -1687,7 +1688,8 @@ internal static class Assert
         throw new AssertionFailureException();
     }
 
-    public static void Throws<T>(Action action) where T : Exception
+    public static void Throws<T>(Action action)
+        where T : Exception
     {
         // TODO: Enable Assert.Throws<T> tests. There currently seem to be some reliability issues surrounding exceptions on Unix.
         //try

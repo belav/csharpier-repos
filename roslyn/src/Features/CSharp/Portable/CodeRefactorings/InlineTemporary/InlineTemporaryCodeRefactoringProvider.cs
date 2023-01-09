@@ -385,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineTemporary
             Document document,
             SyntaxAnnotation annotation,
             CancellationToken cancellationToken
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             return root.GetAnnotatedNodesAndTokens(annotation).Single().AsNode() as T;

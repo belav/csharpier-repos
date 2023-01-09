@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.UseIsNullCheck
 {
     internal abstract class AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer<TLanguageKindEnum>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TLanguageKindEnum : struct
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        where TLanguageKindEnum : struct
     {
         protected AbstractUseIsNullCheckForReferenceEqualsDiagnosticAnalyzer(
             LocalizableString title

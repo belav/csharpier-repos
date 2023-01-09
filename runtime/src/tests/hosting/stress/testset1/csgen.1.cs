@@ -14,7 +14,8 @@ public enum TestEnum
     blue = 4,
 }
 
-public class AA<TA, TB> where TA : IComparable
+public class AA<TA, TB>
+    where TA : IComparable
 {
     public TB m_agboGeneric1;
 

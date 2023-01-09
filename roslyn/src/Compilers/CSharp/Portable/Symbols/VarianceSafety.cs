@@ -343,7 +343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             LocationProvider<T> locationProvider,
             T locationArg,
             BindingDiagnosticBag diagnostics
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             Debug.Assert(requireOutputSafety || requireInputSafety);
 
@@ -449,7 +450,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             LocationProvider<T> locationProvider,
             T locationArg,
             BindingDiagnosticBag diagnostics
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             Debug.Assert(requireOutputSafety || requireInputSafety);
 
@@ -543,7 +545,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             LocationProvider<T> locationProvider,
             T locationArg,
             MessageID expectedVariance
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             MessageID actualVariance;
             switch (unsafeTypeParameter.Variance)
@@ -601,7 +604,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private static T GetDeclaringSyntax<T>(this Symbol symbol) where T : SyntaxNode
+        private static T GetDeclaringSyntax<T>(this Symbol symbol)
+            where T : SyntaxNode
         {
             var syntaxRefs = symbol.DeclaringSyntaxReferences;
             if (syntaxRefs.Length == 0)

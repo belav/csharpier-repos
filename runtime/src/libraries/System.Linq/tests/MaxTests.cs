@@ -186,7 +186,8 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(Max_AllTypes_TestData))]
-        public void Max_AllTypes<T>(IEnumerable<T> source, T expected) where T : INumber<T>
+        public void Max_AllTypes<T>(IEnumerable<T> source, T expected)
+            where T : INumber<T>
         {
             Assert.Equal(expected, source.Max());
 

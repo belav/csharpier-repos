@@ -532,7 +532,8 @@ public class WebAssemblyAuthenticationTests : ServerTestBase<AspNetSiteServerFix
     public static IServiceCollection SetupTestDatabase<TContext>(
         IServiceCollection services,
         DbConnection connection
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var descriptor = services.SingleOrDefault(
             d => d.ServiceType == typeof(DbContextOptions<TContext>)
@@ -561,7 +562,8 @@ public class WebAssemblyAuthenticationTests : ServerTestBase<AspNetSiteServerFix
     private static DbContextOptions<TContext> DbContextOptionsFactory<TContext>(
         IServiceProvider applicationServiceProvider,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var builder = new DbContextOptionsBuilder<TContext>(
             new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>())

@@ -16,7 +16,8 @@ namespace System.Collections.Generic
         /// </remarks>
         internal static Dictionary<string, T> LibraryCollectionToDictionary<T>(
             this IReadOnlyList<T> collection
-        ) where T : Library
+        )
+            where T : Library
         {
             var dictionary = new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase);
 

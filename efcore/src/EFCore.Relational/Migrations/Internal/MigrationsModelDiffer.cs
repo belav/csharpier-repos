@@ -2676,7 +2676,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         Func<T, DiffContext, IEnumerable<MigrationOperation>> add,
         Func<T, DiffContext, IEnumerable<MigrationOperation>> remove,
         params Func<T, T, DiffContext, bool>[] predicates
-    ) where T : notnull
+    )
+        where T : notnull
     {
         var sourceList = sources.ToList();
         var targetList = targets.ToList();
@@ -2883,7 +2884,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void AddMapping<T>(T source, T target) where T : notnull
+        public virtual void AddMapping<T>(T source, T target)
+            where T : notnull
         {
             _targetToSource.Add(target, source);
             _sourceToTarget.Add(source, target);
@@ -2937,7 +2939,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual T? FindSource<T>(T? target) where T : class =>
+        public virtual T? FindSource<T>(T? target)
+            where T : class =>
             target == null
                 ? null
                 : _targetToSource.TryGetValue(target, out var source)
@@ -2950,7 +2953,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual T? FindTarget<T>(T? source) where T : class =>
+        public virtual T? FindTarget<T>(T? source)
+            where T : class =>
             source == null
                 ? null
                 : _sourceToTarget.TryGetValue(source, out var target)

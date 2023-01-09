@@ -166,7 +166,8 @@ namespace System.Web.Http.Controllers
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public virtual Collection<T> GetCustomAttributes<T>() where T : class
+        public virtual Collection<T> GetCustomAttributes<T>()
+            where T : class
         {
             return GetCustomAttributes<T>(inherit: true);
         }
@@ -177,7 +178,8 @@ namespace System.Web.Http.Controllers
         /// <typeparam name="T">The type of attribute to search for.</typeparam>
         /// <param name="inherit"><c>true</c> to search this action's inheritance chain to find the attributes; otherwise, <c>false</c>.</param>
         /// <returns>The collection of custom attributes applied to this action.</returns>
-        public virtual Collection<T> GetCustomAttributes<T>(bool inherit) where T : class
+        public virtual Collection<T> GetCustomAttributes<T>(bool inherit)
+            where T : class
         {
             return new Collection<T>();
         }

@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    internal class SymbolicRegexSampler<S> where S : notnull
+    internal class SymbolicRegexSampler<S>
+        where S : notnull
     {
         private Random _random;
         private SymbolicRegexNode<S> _root;

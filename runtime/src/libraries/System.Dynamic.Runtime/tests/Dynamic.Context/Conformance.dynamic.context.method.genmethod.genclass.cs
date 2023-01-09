@@ -86,12 +86,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         }
 
         #region Constraints on methods that have a new type parameter
-        public U Method_ReturnsUConstraint<U>(U u) where U : class
+        public U Method_ReturnsUConstraint<U>(U u)
+            where U : class
         {
             return null;
         }
 
-        public U Method_ReturnsUConstraint<U>(T t) where U : new()
+        public U Method_ReturnsUConstraint<U>(T t)
+            where U : new()
         {
             return new U();
         }
@@ -108,7 +110,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             where V : class
             where W : V { }
 
-        public dynamic Method_ReturnsDynamicConstraint<U>(T t, U u, dynamic d) where U : new()
+        public dynamic Method_ReturnsDynamicConstraint<U>(T t, U u, dynamic d)
+            where U : new()
         {
             return new U();
         }
@@ -135,12 +138,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
         //These are negative methods... you should not be able to call them with the dynamic type because the dynamic type would not satisfy the constraints
         //you cannot call this like: Method_ReturnsUConstraint<dynamic>(d); because object does not derive from C
-        public U Method_ReturnsUNegConstraint<U>(U u) where U : C
+        public U Method_ReturnsUNegConstraint<U>(U u)
+            where U : C
         {
             return null;
         }
 
-        public T Method_ReturnsTNegConstraint<U>(U u) where U : struct
+        public T Method_ReturnsTNegConstraint<U>(U u)
+            where U : struct
         {
             return default(T);
         }
@@ -198,9 +203,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         #endregion
     }
 
-    public class MemberClassWithClassConstraint<T> where T : class
+    public class MemberClassWithClassConstraint<T>
+        where T : class
     {
-        public int Method_ReturnsInt<U>() where U : T
+        public int Method_ReturnsInt<U>()
+            where U : T
         {
             return 1;
         }
@@ -213,42 +220,50 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         }
     }
 
-    public class MemberClassWithNewConstraint<T> where T : new()
+    public class MemberClassWithNewConstraint<T>
+        where T : new()
     {
-        public U Method_ReturnsU<U>() where U : T
+        public U Method_ReturnsU<U>()
+            where U : T
         {
             return default(U);
         }
 
-        public dynamic Method_ReturnsDynamic<V>(T u, V v) where V : T
+        public dynamic Method_ReturnsDynamic<V>(T u, V v)
+            where V : T
         {
             return new T();
         }
     }
 
-    public class MemberClassWithAnotherTypeConstraint<T, U> where T : U
+    public class MemberClassWithAnotherTypeConstraint<T, U>
+        where T : U
     {
         public U Method_ReturnsU()
         {
             return default(U);
         }
 
-        public dynamic Method_ReturnsDynamic<V>(int x, U u, V v) where V : U
+        public dynamic Method_ReturnsDynamic<V>(int x, U u, V v)
+            where V : U
         {
             return default(T);
         }
     }
 
     #region Negative tests - you should not be able to construct this with a dynamic object
-    public class MemberClassWithUDClassConstraint<T> where T : C
+    public class MemberClassWithUDClassConstraint<T>
+        where T : C
     {
-        public U Method_ReturnsU<U>() where U : T, new()
+        public U Method_ReturnsU<U>()
+            where U : T, new()
         {
             return new U();
         }
     }
 
-    public class MemberClassWithStructConstraint<T> where T : struct
+    public class MemberClassWithStructConstraint<T>
+        where T : struct
     {
         public U Method_ReturnsU<U>()
         {
@@ -256,7 +271,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         }
     }
 
-    public class MemberClassWithInterfaceConstraint<T> where T : I
+    public class MemberClassWithInterfaceConstraint<T>
+        where T : I
     {
         public dynamic Method_ReturnsDynamic<U, V>(int x, U u, V v)
             where V : U

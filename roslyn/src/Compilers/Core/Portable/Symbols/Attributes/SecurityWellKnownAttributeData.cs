@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public IEnumerable<Cci.SecurityAttribute> GetSecurityAttributes<T>(
             ImmutableArray<T> customAttributes
-        ) where T : Cci.ICustomAttribute
+        )
+            where T : Cci.ICustomAttribute
         {
             Debug.Assert(!customAttributes.IsDefault);
             Debug.Assert(

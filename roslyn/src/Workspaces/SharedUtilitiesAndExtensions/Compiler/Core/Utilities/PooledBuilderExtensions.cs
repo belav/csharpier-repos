@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
     {
         public static Dictionary<K, V> ToDictionaryAndFree<K, V>(
             this PooledDictionary<K, V> builders
-        ) where K : notnull
+        )
+            where K : notnull
         {
             var dictionary = new Dictionary<K, V>(builders.Count);
 
@@ -28,7 +29,8 @@ namespace Roslyn.Utilities
 
         public static Dictionary<K, ImmutableArray<V>> ToMultiDictionaryAndFree<K, V>(
             this PooledDictionary<K, ArrayBuilder<V>> builders
-        ) where K : notnull
+        )
+            where K : notnull
         {
             var dictionary = new Dictionary<K, ImmutableArray<V>>(builders.Count);
 
@@ -44,7 +46,8 @@ namespace Roslyn.Utilities
         public static ImmutableDictionary<K, ImmutableArray<V>> ToImmutableMultiDictionaryAndFree<
             K,
             V
-        >(this PooledDictionary<K, ArrayBuilder<V>> builders) where K : notnull
+        >(this PooledDictionary<K, ArrayBuilder<V>> builders)
+            where K : notnull
         {
             var result = ImmutableDictionary.CreateBuilder<K, ImmutableArray<V>>();
 

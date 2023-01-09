@@ -1377,7 +1377,8 @@ namespace System.Runtime.InteropServices
 
         /// <inheritdoc cref="INumberBase{TSelf}.CreateChecked{TOther}(TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static NFloat CreateChecked<TOther>(TOther value) where TOther : INumberBase<TOther>
+        public static NFloat CreateChecked<TOther>(TOther value)
+            where TOther : INumberBase<TOther>
         {
             NFloat result;
 
@@ -1763,7 +1764,8 @@ namespace System.Runtime.InteropServices
         private static bool TryConvertTo<TOther>(
             NFloat value,
             [MaybeNullWhen(false)] out TOther result
-        ) where TOther : INumberBase<TOther>
+        )
+            where TOther : INumberBase<TOther>
         {
             if (typeof(TOther) == typeof(byte))
             {

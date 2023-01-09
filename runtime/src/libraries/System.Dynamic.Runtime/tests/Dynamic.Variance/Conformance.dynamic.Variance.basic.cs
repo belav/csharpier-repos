@@ -396,7 +396,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -480,7 +481,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -885,7 +887,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -965,7 +968,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.integere
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {

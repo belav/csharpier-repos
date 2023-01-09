@@ -10,7 +10,8 @@ namespace System.Web.Http.Internal
         public static TAttribute[] GetCustomAttributes<TAttribute>(
             this MemberInfo member,
             bool inherit
-        ) where TAttribute : class
+        )
+            where TAttribute : class
         {
             if (member == null)
             {

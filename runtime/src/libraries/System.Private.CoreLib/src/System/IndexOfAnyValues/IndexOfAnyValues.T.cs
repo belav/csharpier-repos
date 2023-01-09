@@ -15,7 +15,8 @@ namespace System.Buffers
     /// <see cref="IndexOfAnyValues{T}"/> are optimized for situations where the same set of values is frequently used for searching at runtime.
     /// </remarks>
     [DebuggerTypeProxy(typeof(IndexOfAnyValuesDebugView<>))]
-    public class IndexOfAnyValues<T> where T : IEquatable<T>?
+    public class IndexOfAnyValues<T>
+        where T : IEquatable<T>?
     {
         // Only CoreLib can create derived types
         private protected IndexOfAnyValues() { }

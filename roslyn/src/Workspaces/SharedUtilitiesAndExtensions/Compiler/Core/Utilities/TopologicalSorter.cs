@@ -30,7 +30,8 @@ namespace Roslyn.Utilities
             this IEnumerable<T> items,
             Func<T, IEnumerable<T>> itemsBefore,
             Func<T, IEnumerable<T>> itemsAfter
-        ) where T : notnull
+        )
+            where T : notnull
         {
             var combinedItemsBefore = CreateCombinedItemsBefore(items, itemsBefore, itemsAfter);
             return TopologicalSort(items, combinedItemsBefore);
@@ -58,7 +59,8 @@ namespace Roslyn.Utilities
             IEnumerable<T> items,
             Func<T, IEnumerable<T>> itemsBefore,
             Func<T, IEnumerable<T>> itemsAfter
-        ) where T : notnull
+        )
+            where T : notnull
         {
             // create initial list
             var itemToItemsBefore = items.ToDictionary(

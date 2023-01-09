@@ -53,6 +53,6 @@ public class EntityFinderSource : IEntityFinderSource
         IDbSetCache,
         IEntityType,
         IEntityFinder
-    > CreateConstructor<TEntity>() where TEntity : class =>
-        (s, src, c, t) => new EntityFinder<TEntity>(s, src, c, t);
+    > CreateConstructor<TEntity>()
+        where TEntity : class => (s, src, c, t) => new EntityFinder<TEntity>(s, src, c, t);
 }

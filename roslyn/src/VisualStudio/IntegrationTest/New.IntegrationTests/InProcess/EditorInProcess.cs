@@ -524,7 +524,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         private async Task<string[]> GetTagsAsync<TTag>(
             Predicate<TTag>? filter,
             CancellationToken cancellationToken
-        ) where TTag : ITag
+        )
+            where TTag : ITag
         {
             filter ??= _ => true;
 

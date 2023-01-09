@@ -158,7 +158,8 @@ namespace ABIStress
             il.Emit(OpCodes.Newobj, Type.Ctor);
         }
 
-        private static unsafe void EmitLoadBlittable<T>(ILGenerator il, T val) where T : unmanaged
+        private static unsafe void EmitLoadBlittable<T>(ILGenerator il, T val)
+            where T : unmanaged
         {
             LocalBuilder local = il.DeclareLocal(typeof(T));
             for (int i = 0; i < sizeof(T); i++)

@@ -20,7 +20,8 @@ namespace System.Collections.Immutable
         /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
         [DebuggerStepThrough]
-        public static void NotNull<T>([NotNull] T value, string? parameterName) where T : class // ensures value-types aren't passed to a null checking method
+        public static void NotNull<T>([NotNull] T value, string? parameterName)
+            where T : class // ensures value-types aren't passed to a null checking method
         {
             if (value == null)
             {

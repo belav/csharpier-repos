@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis
             return result;
         }
 
-        protected T? GetRed<T>(ref T? field, int slot) where T : SyntaxNode
+        protected T? GetRed<T>(ref T? field, int slot)
+            where T : SyntaxNode
         {
             var result = field;
 
@@ -198,7 +199,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         // special case of above function where slot = 0, does not need GetChildPosition
-        protected T? GetRedAtZero<T>(ref T? field) where T : SyntaxNode
+        protected T? GetRedAtZero<T>(ref T? field)
+            where T : SyntaxNode
         {
             var result = field;
 
@@ -730,7 +732,8 @@ namespace Microsoft.CodeAnalysis
         public TNode? FirstAncestorOrSelf<TNode>(
             Func<TNode, bool>? predicate = null,
             bool ascendOutOfTrivia = true
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (SyntaxNode? node = this; node != null; node = GetParent(node, ascendOutOfTrivia))
             {
@@ -756,7 +759,8 @@ namespace Microsoft.CodeAnalysis
             Func<TNode, TArg, bool> predicate,
             TArg argument,
             bool ascendOutOfTrivia = true
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (var node = this; node != null; node = GetParent(node, ascendOutOfTrivia))
             {
@@ -1413,7 +1417,8 @@ namespace Microsoft.CodeAnalysis
         /// </para>
         /// </remarks>
         [return: NotNullIfNotNull("node")]
-        public T? CopyAnnotationsTo<T>(T? node) where T : SyntaxNode
+        public T? CopyAnnotationsTo<T>(T? node)
+            where T : SyntaxNode
         {
             if (node == null)
             {
@@ -1642,7 +1647,8 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
-        ) where TNode : SyntaxNode;
+        )
+            where TNode : SyntaxNode;
 
         protected internal abstract SyntaxNode ReplaceNodeInListCore(
             SyntaxNode originalNode,
@@ -1734,7 +1740,8 @@ namespace Microsoft.CodeAnalysis
         /// Creates a clone of a red node that can be used as a root of given syntaxTree.
         /// New node has no parents, position == 0, and syntaxTree as specified.
         /// </summary>
-        internal static T CloneNodeAsRoot<T>(T node, SyntaxTree syntaxTree) where T : SyntaxNode
+        internal static T CloneNodeAsRoot<T>(T node, SyntaxTree syntaxTree)
+            where T : SyntaxNode
         {
             var clone = (T)node.Green.CreateRed(null, 0);
             clone._syntaxTree = syntaxTree;

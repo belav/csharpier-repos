@@ -3168,12 +3168,13 @@ namespace System.Reflection.Tests
             in KeyValuePair<ICloneable, IFormatProvider?>? c
         ) => throw new NotImplementedException();
 
-        public ref T ConstrainedGenericMethodWithByRef<T>(out T[] array) where T : class? =>
-            throw new NotImplementedException();
+        public ref T ConstrainedGenericMethodWithByRef<T>(out T[] array)
+            where T : class? => throw new NotImplementedException();
 
         public unsafe void MethodWithPointers(int* a, int?* b) { }
 
-        public unsafe void GenericMethodWithPointers<T>(T* a, T?* b) where T : unmanaged { }
+        public unsafe void GenericMethodWithPointers<T>(T* a, T?* b)
+            where T : unmanaged { }
     }
 
     public struct GenericStruct<T, Y> { }
@@ -3261,7 +3262,8 @@ namespace System.Reflection.Tests
         public ref T? this[in T a, in List<T?> b] => throw new NotImplementedException();
     }
 
-    internal class GenericTestConstrainedNotNull<T> where T : notnull
+    internal class GenericTestConstrainedNotNull<T>
+        where T : notnull
     {
 #nullable disable
         public T FieldUnknown;
@@ -3275,7 +3277,8 @@ namespace System.Reflection.Tests
         public T? PropertyNullable { get; set; } = default!;
     }
 
-    internal class GenericTestConstrainedStruct<T> where T : struct
+    internal class GenericTestConstrainedStruct<T>
+        where T : struct
     {
 #nullable disable
         public T FieldUnknown;
@@ -3291,13 +3294,15 @@ namespace System.Reflection.Tests
 
     public class ListOfUnconstrained<T> : List<T> { }
 
-    public class ListUnconstrainedOfNullable<T> : ListOfUnconstrained<T> where T : class? { }
+    public class ListUnconstrainedOfNullable<T> : ListOfUnconstrained<T>
+        where T : class? { }
 
     public class ListUnconstrainedOfNullableOfObject<T> : ListUnconstrainedOfNullable<object> { }
 
     public class ListOfArrayOfNullableString : List<string?[]> { }
 
-    public class ListOfNotNull<T> : List<T> where T : notnull { }
+    public class ListOfNotNull<T> : List<T>
+        where T : notnull { }
 
     public class ListOfListOfObject<T> : List<List<object>> { }
 

@@ -217,7 +217,8 @@ namespace JIT.HardwareIntrinsics.General
             Vector64<T> result,
             Vector64<Int32> value,
             [CallerMemberName] string method = ""
-        ) where T : struct
+        )
+            where T : struct
         {
             Int32[] resultElements = new Int32[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int32, byte>(ref resultElements[0]), result);

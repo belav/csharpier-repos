@@ -1067,7 +1067,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassRestrictionArrayListHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             TC[][] array = new TC[][]
             {
@@ -1098,7 +1099,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassAndNewRestrictionArrayListHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Tcn[][] array = new Tcn[][]
             {
@@ -1129,7 +1131,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassAndNewRestrictionArrayListHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             TCn[][] array = new TCn[][]
             {
@@ -1160,7 +1163,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionArrayListHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Ts[][] array = new Ts[][]
             {
@@ -1723,7 +1727,8 @@ namespace System.Linq.Expressions.Tests
             Tc[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<Tc[]>> e = Expression.Lambda<Func<Tc[]>>(
                 Expression.NewArrayInit(typeof(Tc), exprs),
@@ -1742,7 +1747,8 @@ namespace System.Linq.Expressions.Tests
             TC[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             Expression<Func<TC[]>> e = Expression.Lambda<Func<TC[]>>(
                 Expression.NewArrayInit(typeof(TC), exprs),
@@ -1761,7 +1767,8 @@ namespace System.Linq.Expressions.Tests
             Tcn[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<Tcn[]>> e = Expression.Lambda<Func<Tcn[]>>(
                 Expression.NewArrayInit(typeof(Tcn), exprs),
@@ -1780,7 +1787,8 @@ namespace System.Linq.Expressions.Tests
             TCn[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Expression<Func<TCn[]>> e = Expression.Lambda<Func<TCn[]>>(
                 Expression.NewArrayInit(typeof(TCn), exprs),
@@ -1799,7 +1807,8 @@ namespace System.Linq.Expressions.Tests
             Ts[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts[]>> e = Expression.Lambda<Func<Ts[]>>(
                 Expression.NewArrayInit(typeof(Ts), exprs),

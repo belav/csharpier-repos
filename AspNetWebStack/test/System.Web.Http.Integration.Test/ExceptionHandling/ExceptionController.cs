@@ -66,7 +66,8 @@ namespace System.Web.Http
             return "bar";
         }
 
-        public T GenericAction<T>() where T : User
+        public T GenericAction<T>()
+            where T : User
         {
             return null;
         }

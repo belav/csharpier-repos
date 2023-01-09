@@ -14,7 +14,8 @@ namespace System.Diagnostics.Metrics
         T measurement,
         ReadOnlySpan<KeyValuePair<string, object?>> tags,
         object? state
-    ) where T : struct;
+    )
+        where T : struct;
 
     /// <summary>
     /// MeterListener is class used to listen to the metrics instrument measurements recording.
@@ -334,7 +335,8 @@ namespace System.Diagnostics.Metrics
             T measurement,
             ReadOnlySpan<KeyValuePair<string, object?>> tags,
             object? state
-        ) where T : struct
+        )
+            where T : struct
         {
             if (typeof(T) == typeof(byte))
             {

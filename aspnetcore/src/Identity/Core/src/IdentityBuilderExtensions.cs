@@ -70,7 +70,8 @@ public static class IdentityBuilderExtensions
     public static IdentityBuilder AddSignInManager<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             TSignInManager
-    >(this IdentityBuilder builder) where TSignInManager : class
+    >(this IdentityBuilder builder)
+        where TSignInManager : class
     {
         builder.AddSignInManagerDeps();
         var managerType = typeof(SignInManager<>).MakeGenericType(builder.UserType);

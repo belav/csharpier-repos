@@ -6496,7 +6496,8 @@ public class OwnedFixupTest
     private static ICollection<T> CreateChildCollection<T>(
         CollectionType collectionType,
         T dependent
-    ) where T : class =>
+    )
+        where T : class =>
         collectionType switch
         {
             CollectionType.List => new List<T> { dependent },

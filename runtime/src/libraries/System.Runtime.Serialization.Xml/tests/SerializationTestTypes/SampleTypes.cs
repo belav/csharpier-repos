@@ -599,7 +599,8 @@ namespace SerializationTestTypes
     }
 
     [DataContract(IsReference = true)]
-    public class CustomGeneric1<T> where T : new()
+    public class CustomGeneric1<T>
+        where T : new()
     {
         [DataMember]
         public T t = new T();
@@ -634,7 +635,8 @@ namespace SerializationTestTypes
     }
 
     [DataContract(IsReference = true)]
-    public class GenericBase<T> where T : new()
+    public class GenericBase<T>
+        where T : new()
     {
         [DataMember]
         public object genericData = new T();
@@ -6212,7 +6214,8 @@ namespace SerializationTestTypes
     }
 
     [System.Runtime.Serialization.DataContract(IsReference = true)]
-    public class CustomGeneric2<T> where T : new()
+    public class CustomGeneric2<T>
+        where T : new()
     {
         [System.Runtime.Serialization.DataMember]
         public string Data = "data";

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
 
         private DefaultTextDocumentServiceProvider() { }
 
-        public TService GetService<TService>() where TService : class, IDocumentService
+        public TService GetService<TService>()
+            where TService : class, IDocumentService
         {
             // right now, it doesn't implement much services but we expect it to implements all
             // document services in future so that we can remove all if branches in feature code

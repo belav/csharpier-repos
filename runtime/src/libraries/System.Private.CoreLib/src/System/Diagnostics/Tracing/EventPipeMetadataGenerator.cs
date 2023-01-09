@@ -315,7 +315,8 @@ namespace System.Diagnostics.Tracing
             uint bufferLength,
             ref uint offset,
             T value
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             Debug.Assert(bufferLength >= (offset + sizeof(T)));
             *(T*)(buffer + offset) = value;

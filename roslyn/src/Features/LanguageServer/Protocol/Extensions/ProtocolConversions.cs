@@ -302,7 +302,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             Func<DocumentId, T> getOldDocumentFunc,
             IDocumentTextDifferencingService? textDiffService,
             CancellationToken cancellationToken
-        ) where T : TextDocument
+        )
+            where T : TextDocument
         {
             using var _ = ArrayBuilder<(Uri Uri, LSP.TextEdit TextEdit)>.GetInstance(
                 out var uriToTextEdits

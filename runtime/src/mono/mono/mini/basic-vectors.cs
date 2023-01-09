@@ -1341,7 +1341,8 @@ public class VectorTests
     /* Vector.Abs */
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> vector_t_abs<T>(Vector<T> v1) where T : struct
+    public static Vector<T> vector_t_abs<T>(Vector<T> v1)
+        where T : struct
     {
         return Vector.Abs(v1);
     }
@@ -1400,7 +1401,8 @@ public class VectorTests
 
     // Vector<T>.Add
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> vector_add<T>(Vector<T> v1, Vector<T> v2) where T : struct
+    public static Vector<T> vector_add<T>(Vector<T> v1, Vector<T> v2)
+        where T : struct
     {
         return v1 + v2;
     }
@@ -1592,7 +1594,8 @@ public class VectorTests
     // Vector<T>.op_Subtraction
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> vector_sub<T>(Vector<T> v1, Vector<T> v2) where T : struct
+    public static Vector<T> vector_sub<T>(Vector<T> v1, Vector<T> v2)
+        where T : struct
     {
         return v1 - v2;
     }
@@ -1669,7 +1672,8 @@ public class VectorTests
 
     // Vector<T>.op_Multiply
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> vector_mul<T>(Vector<T> v1, Vector<T> v2) where T : struct
+    public static Vector<T> vector_mul<T>(Vector<T> v1, Vector<T> v2)
+        where T : struct
     {
         return v1 * v2;
     }
@@ -1709,7 +1713,8 @@ public class VectorTests
 
     // Vector<T>.op_Division
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> vector_div<T>(Vector<T> v1, Vector<T> v2) where T : struct
+    public static Vector<T> vector_div<T>(Vector<T> v1, Vector<T> v2)
+        where T : struct
     {
         return v1 / v2;
     }
@@ -1778,7 +1783,8 @@ public class VectorTests
 
     // Vector<T>.CopyTo
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void vector_copyto<T>(Vector<T> v1, T[] array, int index) where T : struct
+    public static void vector_copyto<T>(Vector<T> v1, T[] array, int index)
+        where T : struct
     {
         v1.CopyTo(array, index);
     }

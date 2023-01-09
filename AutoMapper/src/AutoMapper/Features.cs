@@ -26,7 +26,8 @@ public class Features<TFeature>
     /// </summary>
     /// <typeparam name="TFeatureToFind">The type of the feature.</typeparam>
     /// <returns>The feature or null if feature not exists.</returns>
-    public TFeatureToFind Get<TFeatureToFind>() where TFeatureToFind : TFeature
+    public TFeatureToFind Get<TFeatureToFind>()
+        where TFeatureToFind : TFeature
     {
         var index = IndexOf(typeof(TFeatureToFind));
         return index < Count ? (TFeatureToFind)_features[index] : default;

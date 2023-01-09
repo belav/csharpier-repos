@@ -302,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             IDictionary<TKey, TypeImportCompletionCacheEntry> cache,
             EditorBrowsableInfo editorBrowsableInfo,
             CancellationToken cancellationToken
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             // Cache hit
             if (cache.TryGetValue(key, out var cacheEntry) && cacheEntry.Checksum == checksum)

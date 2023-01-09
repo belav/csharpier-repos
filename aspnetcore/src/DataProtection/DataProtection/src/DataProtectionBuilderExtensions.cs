@@ -97,7 +97,8 @@ public static class DataProtectionBuilderExtensions
     /// </remarks>
     public static IDataProtectionBuilder AddKeyEscrowSink<TImplementation>(
         this IDataProtectionBuilder builder
-    ) where TImplementation : class, IKeyEscrowSink
+    )
+        where TImplementation : class, IKeyEscrowSink
     {
         if (builder == null)
         {

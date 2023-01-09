@@ -26,7 +26,8 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
             }
 
             [Kept]
-            static T? Method<T>() where T : class, I?
+            static T? Method<T>()
+                where T : class, I?
             {
                 return default;
             }
@@ -38,5 +39,6 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
 
     [Kept]
     [KeptMember(".ctor()")]
-    class C<T> where T : I? { }
+    class C<T>
+        where T : I? { }
 }

@@ -71,7 +71,8 @@ public static class IntermediateNodeExtensions
         return visitor.Results;
     }
 
-    private class Visitor<TNode> : IntermediateNodeWalker where TNode : IntermediateNode
+    private class Visitor<TNode> : IntermediateNodeWalker
+        where TNode : IntermediateNode
     {
         public List<TNode> Results { get; } = new List<TNode>();
 

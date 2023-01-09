@@ -11,7 +11,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
         }
 
         [Kept]
-        static class Bar<T> where T : IFoo
+        static class Bar<T>
+            where T : IFoo
         {
             [Kept]
             public static void Helper(T arg) { }

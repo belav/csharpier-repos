@@ -4,7 +4,8 @@ using System.Diagnostics;
 
 namespace Application
 {
-    public sealed class FooClass<S> where S : class
+    public sealed class FooClass<S>
+        where S : class
     {
         public static FooClass<S> Create(string name, Action<S> action)
         {
@@ -16,7 +17,8 @@ namespace Application
             string name,
             Func<S, T> func,
             FooClass<T> fooChild
-        ) where T : class
+        )
+            where T : class
         {
             return new FooClass<S>(source, name, CreateCallback(func, fooChild));
         }

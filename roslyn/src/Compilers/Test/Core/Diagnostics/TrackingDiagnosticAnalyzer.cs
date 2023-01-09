@@ -19,7 +19,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public abstract class TrackingDiagnosticAnalyzer<TLanguageKindEnum>
-        : TestDiagnosticAnalyzer<TLanguageKindEnum> where TLanguageKindEnum : struct
+        : TestDiagnosticAnalyzer<TLanguageKindEnum>
+        where TLanguageKindEnum : struct
     {
         #region Tracking
 

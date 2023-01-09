@@ -135,7 +135,8 @@ namespace System.Net.Http
             this HttpContent content,
             T streamProvider,
             CancellationToken cancellationToken
-        ) where T : MultipartStreamProvider
+        )
+            where T : MultipartStreamProvider
         {
             return ReadAsMultipartAsync(
                 content,
@@ -158,7 +159,8 @@ namespace System.Net.Http
             this HttpContent content,
             T streamProvider,
             int bufferSize
-        ) where T : MultipartStreamProvider
+        )
+            where T : MultipartStreamProvider
         {
             return ReadAsMultipartAsync(
                 content,
@@ -183,7 +185,8 @@ namespace System.Net.Http
             T streamProvider,
             int bufferSize,
             CancellationToken cancellationToken
-        ) where T : MultipartStreamProvider
+        )
+            where T : MultipartStreamProvider
         {
             if (content == null)
             {

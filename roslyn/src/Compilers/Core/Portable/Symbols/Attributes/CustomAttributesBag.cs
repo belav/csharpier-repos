@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Represents a bag of custom attributes and the associated decoded well-known attribute data.
     /// </summary>
-    internal sealed class CustomAttributesBag<T> where T : AttributeData
+    internal sealed class CustomAttributesBag<T>
+        where T : AttributeData
     {
         private ImmutableArray<T> _customAttributes;
         private WellKnownAttributeData _decodedWellKnownAttributeData;

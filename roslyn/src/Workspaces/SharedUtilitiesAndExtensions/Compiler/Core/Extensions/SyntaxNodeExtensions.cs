@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static TNode? GetAncestor<TNode>(this SyntaxNode node) where TNode : SyntaxNode
+        public static TNode? GetAncestor<TNode>(this SyntaxNode node)
+            where TNode : SyntaxNode
         {
             var current = node.Parent;
             while (current != null)
@@ -88,7 +89,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static bool HasAncestor<TNode>(this SyntaxNode node) where TNode : SyntaxNode
+        public static bool HasAncestor<TNode>(this SyntaxNode node)
+            where TNode : SyntaxNode
         {
             return node.GetAncestors<TNode>().Any();
         }
@@ -97,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SyntaxNode node,
             TextSpan searchSpan,
             Func<SyntaxNode, bool> predicate
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             Contract.ThrowIfNull(node);
 
@@ -128,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool CheckParent<T>(
             [NotNullWhen(returnValue: true)] this SyntaxNode? node,
             Func<T, bool> valueChecker
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             if (node?.Parent is not T parentNode)
             {
@@ -147,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsChildNode<TParent>(
             this SyntaxNode node,
             Func<TParent, SyntaxNode?> childGetter
-        ) where TParent : SyntaxNode
+        )
+            where TParent : SyntaxNode
         {
             var ancestor = node.GetAncestor<TParent>();
             if (ancestor == null)
@@ -166,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static bool IsFoundUnder<TParent>(
             this SyntaxNode node,
             Func<TParent, SyntaxNode?> childGetter
-        ) where TParent : SyntaxNode
+        )
+            where TParent : SyntaxNode
         {
             var ancestor = node.GetAncestor<TParent>();
             if (ancestor == null)
@@ -296,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static TSyntaxNode? FindInnermostCommonNode<TSyntaxNode>(
             this IEnumerable<SyntaxNode> nodes
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             (TSyntaxNode?)nodes.FindInnermostCommonNode(t => t is TSyntaxNode);
 
         /// <summary>
@@ -388,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<T> GetAnnotatedNodes<T>(
             this SyntaxNode node,
             SyntaxAnnotation syntaxAnnotation
-        ) where T : SyntaxNode =>
+        )
+            where T : SyntaxNode =>
             node.GetAnnotatedNodesAndTokens(syntaxAnnotation).Select(n => n.AsNode()).OfType<T>();
 
         /// <summary>
@@ -410,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 Task<SyntaxNode>
             > computeReplacementAsync,
             CancellationToken cancellationToken
-        ) where TRootNode : SyntaxNode
+        )
+            where TRootNode : SyntaxNode
         {
             return root.ReplaceSyntaxAsync(
                 nodes: nodes,
@@ -442,7 +451,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 Task<SyntaxToken>
             > computeReplacementAsync,
             CancellationToken cancellationToken
-        ) where TRootNode : SyntaxNode
+        )
+            where TRootNode : SyntaxNode
         {
             return root.ReplaceSyntaxAsync(
                 nodes: null,
@@ -465,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 Task<SyntaxTrivia>
             > computeReplacementAsync,
             CancellationToken cancellationToken
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return root.ReplaceSyntaxAsync(
                 nodes: null,
@@ -502,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 Task<SyntaxTrivia>
             >? computeReplacementTriviaAsync,
             CancellationToken cancellationToken
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             // index all nodes, tokens and trivia by the full spans they cover
             var nodesToReplace =
@@ -974,7 +986,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this T node,
             IEnumerable<SyntaxTrivia> leadingTrivia,
             IEnumerable<SyntaxTrivia> trailingTrivia
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             return node.WithLeadingTrivia(leadingTrivia).WithTrailingTrivia(trailingTrivia);
         }
@@ -1013,7 +1026,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TNode? FirstAncestorOrSelfUntil<TNode>(
             this SyntaxNode? node,
             Func<SyntaxNode, bool> predicate
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (
                 var current = node;

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
     {
         internal partial class WorkCoordinator
         {
-            private abstract class AsyncWorkItemQueue<TKey> : IDisposable where TKey : class
+            private abstract class AsyncWorkItemQueue<TKey> : IDisposable
+                where TKey : class
             {
                 private readonly object _gate = new();
                 private readonly SemaphoreSlim _semaphore;

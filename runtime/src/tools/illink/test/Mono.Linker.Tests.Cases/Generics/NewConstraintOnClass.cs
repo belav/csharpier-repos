@@ -24,6 +24,7 @@ namespace Mono.Linker.Tests.Cases.Generics
 
         [Kept]
         [KeptMember(".ctor()")]
-        class G1<T> where T : G1Ctor, new() { }
+        class G1<T>
+            where T : G1Ctor, new() { }
     }
 }

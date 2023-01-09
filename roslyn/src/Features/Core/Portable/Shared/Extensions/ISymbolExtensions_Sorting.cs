@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ISymbolDisplayService symbolDisplayService,
             SemanticModel semanticModel,
             int position
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             return Sort(symbols, semanticModel, position);
         }
@@ -31,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ImmutableArray<TSymbol> symbols,
             SemanticModel semanticModel,
             int position
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var symbolToParameterTypeNames = new ConcurrentDictionary<TSymbol, string[]>();
             string[] getParameterTypeNames(TSymbol s) =>
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             TSymbol s2,
             ConcurrentDictionary<TSymbol, string[]> symbolToParameterTypeNames,
             Func<TSymbol, string[]> getParameterTypeNames
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var symbol1ParameterTypeNames = symbolToParameterTypeNames.GetOrAdd(
                 s1,

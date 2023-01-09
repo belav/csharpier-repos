@@ -8,13 +8,15 @@ namespace Microsoft.AspNetCore.Identity.EntityFrameworkCore.Test;
 
 public class CustomPocoTest
 {
-    public class User<TKey> where TKey : IEquatable<TKey>
+    public class User<TKey>
+        where TKey : IEquatable<TKey>
     {
         public TKey Id { get; set; }
         public string UserName { get; set; }
     }
 
-    public class CustomDbContext<TKey> : DbContext where TKey : IEquatable<TKey>
+    public class CustomDbContext<TKey> : DbContext
+        where TKey : IEquatable<TKey>
     {
         public CustomDbContext(DbContextOptions options)
             : base(options) { }

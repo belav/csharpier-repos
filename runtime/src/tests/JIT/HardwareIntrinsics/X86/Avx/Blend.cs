@@ -298,7 +298,8 @@ namespace IntelHardwareIntrinsicTest
             return testResult;
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public T[] inArray2;

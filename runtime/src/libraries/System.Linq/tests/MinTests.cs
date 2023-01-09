@@ -186,7 +186,8 @@ namespace System.Linq.Tests
 
         [Theory]
         [MemberData(nameof(Min_AllTypes_TestData))]
-        public void Min_AllTypes<T>(IEnumerable<T> source, T expected) where T : INumber<T>
+        public void Min_AllTypes<T>(IEnumerable<T> source, T expected)
+            where T : INumber<T>
         {
             Assert.Equal(expected, source.Min());
 

@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
-    internal class AbstractPreviewTaggerProvider<TTag> : ITaggerProvider where TTag : ITag
+    internal class AbstractPreviewTaggerProvider<TTag> : ITaggerProvider
+        where TTag : ITag
     {
         private readonly object _key;
         private readonly TTag _tagInstance;
@@ -24,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             _tagInstance = tagInstance;
         }
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag =>
-            new Tagger(buffer, _key, _tagInstance) as ITagger<T>;
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag => new Tagger(buffer, _key, _tagInstance) as ITagger<T>;
 
         private class Tagger : ITagger<TTag>
         {

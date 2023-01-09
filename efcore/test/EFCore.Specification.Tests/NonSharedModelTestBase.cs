@@ -49,7 +49,8 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
         Func<string, bool> shouldLogCategory = null,
         Func<TestStore> createTestStore = null,
         bool usePooling = true
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var contextFactory = Initialize<TContext>(
             onModelCreating,
@@ -79,7 +80,8 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
         Func<string, bool> shouldLogCategory = null,
         Func<TestStore> createTestStore = null,
         bool usePooling = true
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var contextFactory = Initialize<TContext>(
             onModelCreating,
@@ -108,7 +110,8 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
         Func<string, bool> shouldLogCategory,
         Func<TestStore> createTestStore,
         bool usePooling
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         _testStore = createTestStore?.Invoke() ?? CreateTestStore();
 
@@ -193,7 +196,8 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
         _listLoggerFactory = null;
     }
 
-    protected class ContextFactory<TContext> where TContext : DbContext
+    protected class ContextFactory<TContext>
+        where TContext : DbContext
     {
         public ContextFactory(
             IServiceProvider serviceProvider,

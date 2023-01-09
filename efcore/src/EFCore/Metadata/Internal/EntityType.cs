@@ -5850,8 +5850,8 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
 
     #endregion
 
-    private static IEnumerable<T> ToEnumerable<T>(T? element) where T : class =>
-        element == null ? Enumerable.Empty<T>() : new[] { element };
+    private static IEnumerable<T> ToEnumerable<T>(T? element)
+        where T : class => element == null ? Enumerable.Empty<T>() : new[] { element };
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

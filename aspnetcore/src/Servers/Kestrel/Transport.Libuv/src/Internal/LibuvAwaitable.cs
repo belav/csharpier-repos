@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networking;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 {
-    internal class LibuvAwaitable<TRequest> : ICriticalNotifyCompletion where TRequest : UvRequest
+    internal class LibuvAwaitable<TRequest> : ICriticalNotifyCompletion
+        where TRequest : UvRequest
     {
         private readonly static Action _callbackCompleted = () => { };
 

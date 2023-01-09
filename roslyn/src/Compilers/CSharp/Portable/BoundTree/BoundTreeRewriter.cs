@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return type;
         }
 
-        public ImmutableArray<T> VisitList<T>(ImmutableArray<T> list) where T : BoundNode
+        public ImmutableArray<T> VisitList<T>(ImmutableArray<T> list)
+            where T : BoundNode
         {
             if (list.IsDefault)
             {
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return DoVisitList(list);
         }
 
-        private ImmutableArray<T> DoVisitList<T>(ImmutableArray<T> list) where T : BoundNode
+        private ImmutableArray<T> DoVisitList<T>(ImmutableArray<T> list)
+            where T : BoundNode
         {
             ArrayBuilder<T>? newList = null;
             for (int i = 0; i < list.Length; i++)

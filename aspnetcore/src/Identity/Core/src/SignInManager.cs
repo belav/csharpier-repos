@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for user sign in.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class SignInManager<TUser> where TUser : class
+public class SignInManager<TUser>
+    where TUser : class
 {
     private const string LoginProviderKey = "LoginProvider";
     private const string XsrfKey = "XsrfId";

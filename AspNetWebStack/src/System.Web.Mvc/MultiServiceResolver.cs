@@ -11,7 +11,8 @@ namespace System.Web.Mvc
         internal static TService[] GetCombined<TService>(
             IList<TService> items,
             IDependencyResolver resolver = null
-        ) where TService : class
+        )
+            where TService : class
         {
             if (resolver == null)
             {

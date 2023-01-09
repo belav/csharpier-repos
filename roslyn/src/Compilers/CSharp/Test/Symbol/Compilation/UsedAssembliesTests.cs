@@ -781,7 +781,8 @@ public class C2
                 string source2,
                 MetadataReference reference0,
                 MetadataReference reference1
-            ) where TAssemblySymbol : AssemblySymbol
+            )
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(source2, reference0, reference1);
                 Assert.IsType<TAssemblySymbol>(
@@ -892,7 +893,8 @@ public class C3
                 string source2,
                 MetadataReference reference0,
                 MetadataReference reference1
-            ) where TAssemblySymbol : AssemblySymbol
+            )
+                where TAssemblySymbol : AssemblySymbol
             {
                 var comp2 = AssertUsedAssemblyReferences(
                     source2,
@@ -3065,7 +3067,8 @@ public class C2
                 string source2,
                 MetadataReference reference0,
                 MetadataReference reference1
-            ) where TAssemblySymbol : AssemblySymbol
+            )
+                where TAssemblySymbol : AssemblySymbol
             {
                 Compilation comp2 = AssertUsedAssemblyReferences(
                     source2,

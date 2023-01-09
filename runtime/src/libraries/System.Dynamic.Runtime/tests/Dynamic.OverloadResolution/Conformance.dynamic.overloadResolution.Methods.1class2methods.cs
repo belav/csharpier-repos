@@ -4139,7 +4139,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
 
     public class C
     {
-        public static int M<T>(int i) where T : C
+        public static int M<T>(int i)
+            where T : C
         {
             return 1;
         }
@@ -4156,7 +4157,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T> where T : class { }
+    public class C<T>
+        where T : class { }
 
     public class A
     {
@@ -4177,7 +4179,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             return 0;
         }
 
-        public int Foo<T>(T x, C<T> y) where T : class
+        public int Foo<T>(T x, C<T> y)
+            where T : class
         {
             return 1;
         }
@@ -4191,7 +4194,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Code>
     public interface I { }
 
-    public class C<T> where T : I { }
+    public class C<T>
+        where T : I { }
 
     public class A
     {
@@ -4212,7 +4216,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             return 0;
         }
 
-        public int Foo<T>(T x, C<T> y) where T : I
+        public int Foo<T>(T x, C<T> y)
+            where T : I
         {
             return 1;
         }
@@ -4224,7 +4229,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T> where T : class { }
+    public class C<T>
+        where T : class { }
 
     public class A
     {
@@ -4245,7 +4251,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             return 0;
         }
 
-        public int Foo<T>(T x, T y) where T : class
+        public int Foo<T>(T x, T y)
+            where T : class
         {
             return 1;
         }
@@ -4257,7 +4264,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     // <Area>Overload resolution</Area>
     // <Expects status=success></Expects>
     // <Code>
-    public class C<T> where T : class
+    public class C<T>
+        where T : class
     {
         public static implicit operator C<T>(int i)
         {
@@ -4284,7 +4292,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
             return 1;
         }
 
-        public int Foo<T>(T x, C<T> y) where T : class
+        public int Foo<T>(T x, C<T> y)
+            where T : class
         {
             return 0;
         }

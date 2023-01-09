@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<SemanticModel, TType, TNode, bool> canReplace,
             Func<SemanticModel, SyntaxNode, TType, TNode, SyntaxNode> updateRoot,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return ApplySemanticEditsAsync(
                 editor,
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<SemanticModel, TType, TNode, bool> canReplace,
             Func<SemanticModel, SyntaxNode, TType, TNode, SyntaxNode> updateRoot,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return ApplySemanticEditsAsync(
                 editor,
@@ -84,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<SemanticModel, TNode, bool> canReplace,
             Func<SemanticModel, SyntaxNode, TNode, SyntaxNode> updateRoot,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return ApplyExpressionLevelSemanticEditsAsync(
                 editor,
@@ -111,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<SemanticModel, TType, TNode, bool> canReplace,
             Func<SemanticModel, SyntaxNode, TType, TNode, SyntaxNode> updateRoot,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return ApplySemanticEditsAsync(
                 editor,
@@ -137,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<SemanticModel, TNode, bool> canReplace,
             Func<SemanticModel, SyntaxNode, TNode, SyntaxNode> updateRoot,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return ApplyMethodBodySemanticEditsAsync(
                 editor,
@@ -178,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<SemanticModel, TType, TNode, bool> canReplace,
             Func<SemanticModel, SyntaxNode, TType, TNode, SyntaxNode> updateRoot,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             IEnumerable<(
                 TType instance,

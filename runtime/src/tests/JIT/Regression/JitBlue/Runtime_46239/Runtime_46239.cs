@@ -207,7 +207,8 @@ namespace Runtime_46239
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static int test<T>() where T : struct
+        private static int test<T>()
+            where T : struct
         {
             // Marshal.SizeOf throws "System.ArgumentException: Type 'Runtime_46239.S1' cannot
             // be marshaled as an unmanaged structure; no meaningful size or offset can be computed."

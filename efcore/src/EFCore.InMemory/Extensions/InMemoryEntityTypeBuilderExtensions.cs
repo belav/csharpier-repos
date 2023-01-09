@@ -50,7 +50,8 @@ public static class InMemoryEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToInMemoryQuery<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         Expression<Func<IQueryable<TEntity>>> query
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(query, nameof(query));
 

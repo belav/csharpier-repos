@@ -85,7 +85,8 @@ public static class ProxiesExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         bool useChangeTrackingProxies = true,
         bool checkEquality = true
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseChangeTrackingProxies(
                 (DbContextOptionsBuilder)optionsBuilder,
@@ -161,7 +162,8 @@ public static class ProxiesExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         bool useLazyLoadingProxies = true,
         bool ignoreNonVirtualNavigations = false
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseLazyLoadingProxies((DbContextOptionsBuilder)optionsBuilder, useLazyLoadingProxies);
 
@@ -228,7 +230,8 @@ public static class ProxiesExtensions
     public static TEntity CreateProxy<TEntity>(
         this DbSet<TEntity> set,
         params object[] constructorArguments
-    ) where TEntity : class => CreateProxy(set, null, constructorArguments);
+    )
+        where TEntity : class => CreateProxy(set, null, constructorArguments);
 
     /// <summary>
     ///     Creates a proxy instance for an entity type if proxy creation has been turned on.
@@ -242,7 +245,8 @@ public static class ProxiesExtensions
         this DbSet<TEntity> set,
         Action<TEntity>? configureEntity,
         params object[] constructorArguments
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(set, nameof(set));
         Check.NotNull(constructorArguments, nameof(constructorArguments));

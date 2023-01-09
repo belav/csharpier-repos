@@ -197,7 +197,8 @@ namespace System.Diagnostics.TraceSourceTests
         }
     }
 
-    public abstract class ListBaseTests<T> : CollectionBaseTests<T> where T : IList
+    public abstract class ListBaseTests<T> : CollectionBaseTests<T>
+        where T : IList
     {
         public abstract bool IsReadOnly { get; }
 
@@ -339,7 +340,8 @@ namespace System.Diagnostics.TraceSourceTests
         }
     }
 
-    public abstract class CollectionBaseTests<T> : EnumerableBaseTests<T> where T : ICollection
+    public abstract class CollectionBaseTests<T> : EnumerableBaseTests<T>
+        where T : ICollection
     {
         public abstract bool IsSynchronized { get; }
 
@@ -401,7 +403,8 @@ namespace System.Diagnostics.TraceSourceTests
         }
     }
 
-    public abstract class EnumerableBaseTests<T> where T : IEnumerable
+    public abstract class EnumerableBaseTests<T>
+        where T : IEnumerable
     {
         public abstract T Create(int count = 0);
 

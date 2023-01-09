@@ -198,7 +198,8 @@ namespace System.Reflection.TypeLoading
             Func<MemberInfo, bool>? optionalPredicate,
             MemberTypes targetMemberType,
             out QueryResult<M> queryResult
-        ) where M : MemberInfo
+        )
+            where M : MemberInfo
         {
             if ((memberType & targetMemberType) == 0)
             {

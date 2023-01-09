@@ -15,13 +15,15 @@ namespace Roslyn.Utilities
             this ImmutableDictionary<K, ImmutableHashSet<V>> map,
             IEnumerable<K> keys,
             V value
-        ) where K : notnull => keys.Aggregate(map, (m, k) => m.Add(k, value));
+        )
+            where K : notnull => keys.Aggregate(map, (m, k) => m.Add(k, value));
 
         public static ImmutableDictionary<K, ImmutableHashSet<V>> Add<K, V>(
             this ImmutableDictionary<K, ImmutableHashSet<V>> map,
             K key,
             V value
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (!map.TryGetValue(key, out var values))
             {
@@ -36,13 +38,15 @@ namespace Roslyn.Utilities
             this ImmutableDictionary<K, ImmutableHashSet<V>> map,
             IEnumerable<K> keys,
             V value
-        ) where K : notnull => keys.Aggregate(map, (m, k) => m.Remove(k, value));
+        )
+            where K : notnull => keys.Aggregate(map, (m, k) => m.Remove(k, value));
 
         public static ImmutableDictionary<K, ImmutableHashSet<V>> Remove<K, V>(
             this ImmutableDictionary<K, ImmutableHashSet<V>> map,
             K key,
             V value
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (map.TryGetValue(key, out var values))
             {
@@ -64,7 +68,8 @@ namespace Roslyn.Utilities
             this IEnumerable<TSource>? source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (source is null)
             {

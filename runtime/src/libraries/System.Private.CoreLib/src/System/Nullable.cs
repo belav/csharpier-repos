@@ -19,7 +19,8 @@ namespace System
     [System.Runtime.CompilerServices.TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
-    public partial struct Nullable<T> where T : struct
+    public partial struct Nullable<T>
+        where T : struct
     {
         private readonly bool hasValue; // Do not rename (binary serialization)
         internal T value; // Do not rename (binary serialization) or make readonly (can be mutated in ToString, etc.)
@@ -77,7 +78,8 @@ namespace System
 
     public static class Nullable
     {
-        public static int Compare<T>(Nullable<T> n1, Nullable<T> n2) where T : struct
+        public static int Compare<T>(Nullable<T> n1, Nullable<T> n2)
+            where T : struct
         {
             if (n1.HasValue)
             {
@@ -90,7 +92,8 @@ namespace System
             return 0;
         }
 
-        public static bool Equals<T>(Nullable<T> n1, Nullable<T> n2) where T : struct
+        public static bool Equals<T>(Nullable<T> n1, Nullable<T> n2)
+            where T : struct
         {
             if (n1.HasValue)
             {
@@ -147,7 +150,8 @@ namespace System
         /// called when the input reference points to a value with an actual location and not an "rvalue" (an expression that may appear on the right side but not left side of an assignment). That is, if this API is called and the input reference
         /// points to a value that is produced by the compiler as a defensive copy or a temporary copy, the behavior might not match the desired one.
         /// </remarks>
-        public static ref readonly T GetValueRefOrDefaultRef<T>(in T? nullable) where T : struct
+        public static ref readonly T GetValueRefOrDefaultRef<T>(in T? nullable)
+            where T : struct
         {
             return ref nullable.value;
         }

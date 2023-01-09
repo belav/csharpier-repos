@@ -621,7 +621,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrType type,
             out DkmClrType attributeTarget,
             out T evalAttribute
-        ) where T : DkmClrEvalAttribute
+        )
+            where T : DkmClrEvalAttribute
         {
             attributeTarget = null;
             evalAttribute = null;

@@ -175,7 +175,8 @@ namespace System.Buffers
         private static unsafe IndexOfAnyValues<T>? TryGetSingleRange<T>(
             ReadOnlySpan<T> values,
             out T maxInclusive
-        ) where T : struct, INumber<T>, IMinMaxValue<T>
+        )
+            where T : struct, INumber<T>, IMinMaxValue<T>
         {
             T min = T.MaxValue;
             T max = T.MinValue;

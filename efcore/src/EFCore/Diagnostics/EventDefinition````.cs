@@ -71,7 +71,8 @@ public class EventDefinition<TParam1, TParam2, TParam3, TParam4> : EventDefiniti
         TParam2 arg2,
         TParam3 arg3,
         TParam4 arg4
-    ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+    )
+        where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)
         {

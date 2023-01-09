@@ -13,7 +13,8 @@ namespace System.Text.Json.Serialization.Converters
     /// of JSON objects using parameterized constructors.
     /// </summary>
     internal class LargeObjectWithParameterizedConstructorConverter<T>
-        : ObjectWithParameterizedConstructorConverter<T> where T : notnull
+        : ObjectWithParameterizedConstructorConverter<T>
+        where T : notnull
     {
         protected sealed override bool ReadAndCacheConstructorArgument(
             scoped ref ReadStack state,

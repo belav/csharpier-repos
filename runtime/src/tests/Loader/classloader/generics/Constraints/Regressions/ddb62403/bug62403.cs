@@ -5,9 +5,11 @@ using System;
 
 class TestClass
 {
-    public static void N<U, V>() where U : V { }
+    public static void N<U, V>()
+        where U : V { }
 
-    public static void M<U, V>() where U : V
+    public static void M<U, V>()
+        where U : V
     {
         N<U, U>();
     }

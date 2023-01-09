@@ -16,7 +16,8 @@ using System.Threading;
 
 namespace Roslyn.Utilities
 {
-    internal class TextKeyedCache<T> where T : class
+    internal class TextKeyedCache<T>
+        where T : class
     {
         // immutable tuple - text and corresponding item
         // reference type because we want atomic assignments

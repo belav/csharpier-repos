@@ -510,19 +510,22 @@ class Tests
     class NullableMethods
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static bool GetHasValue<T>(Nullable<T> value) where T : struct
+        public static bool GetHasValue<T>(Nullable<T> value)
+            where T : struct
         {
             return value.HasValue;
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static T GetValue<T>(Nullable<T> value) where T : struct
+        public static T GetValue<T>(Nullable<T> value)
+            where T : struct
         {
             return value.Value;
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static Nullable<T> Get<T>(T t) where T : struct
+        public static Nullable<T> Get<T>(T t)
+            where T : struct
         {
             return t;
         }
@@ -567,7 +570,8 @@ class Tests
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static Nullable<T> GetNull<T>() where T : struct
+        public static Nullable<T> GetNull<T>()
+            where T : struct
         {
             return null;
         }
@@ -583,7 +587,8 @@ class Tests
             int i7,
             int i8,
             T? value
-        ) where T : struct
+        )
+            where T : struct
         {
             return value.HasValue;
         }
@@ -889,7 +894,8 @@ class Tests
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static bool GetHasValue<T>(T? value) where T : struct
+    public static bool GetHasValue<T>(T? value)
+        where T : struct
     {
         return value.HasValue;
     }
@@ -1046,7 +1052,8 @@ class Tests
 
     struct AStruct : GameComponent { }
 
-    public class ReadonlyTest<T> where T : GameComponent
+    public class ReadonlyTest<T>
+        where T : GameComponent
     {
         private static Components<T> _components;
 
@@ -1076,7 +1083,8 @@ class Tests
     struct DummyStruct { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    static void array_ienumerable<T1, T>(T t) where T : IEnumerable<T1>
+    static void array_ienumerable<T1, T>(T t)
+        where T : IEnumerable<T1>
     {
         var e = t.GetEnumerator();
     }

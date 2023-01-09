@@ -164,7 +164,8 @@ public class QueryAsserter
         bool async,
         string testMethodName,
         bool filteredQuery = false
-    ) where TResult : struct
+    )
+        where TResult : struct
     {
         using var context = _contextCreator();
         var query = RewriteServerQuery(actualQuery(SetSourceCreator(context)));
@@ -194,7 +195,8 @@ public class QueryAsserter
         bool async,
         string testMethodName,
         bool filteredQuery = false
-    ) where TResult : struct
+    )
+        where TResult : struct
     {
         using var context = _contextCreator();
         var query = RewriteServerQuery(actualQuery(SetSourceCreator(context)));

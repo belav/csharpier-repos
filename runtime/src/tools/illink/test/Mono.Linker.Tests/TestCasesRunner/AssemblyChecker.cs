@@ -1545,7 +1545,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
         protected static IEnumerable<T> GetCustomAttributeCtorValues<T>(
             ICustomAttributeProvider provider,
             string attributeName
-        ) where T : class
+        )
+            where T : class
         {
             return provider.CustomAttributes
                 .Where(

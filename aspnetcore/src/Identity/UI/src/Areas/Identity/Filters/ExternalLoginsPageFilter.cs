@@ -8,7 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.UI.Areas.Identity.Filters;
 
-internal sealed class ExternalLoginsPageFilter<TUser> : IAsyncPageFilter where TUser : class
+internal sealed class ExternalLoginsPageFilter<TUser> : IAsyncPageFilter
+    where TUser : class
 {
     public async Task OnPageHandlerExecutionAsync(
         PageHandlerExecutingContext context,

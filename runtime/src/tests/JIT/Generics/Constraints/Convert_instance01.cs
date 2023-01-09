@@ -10,7 +10,8 @@ public class FooClass : IFoo { }
 
 public struct FooStruct : IFoo { }
 
-public class GenClass<T> where T : IFoo
+public class GenClass<T>
+    where T : IFoo
 {
     public IFoo ConvertToConstraint(T t)
     {
@@ -23,7 +24,8 @@ public class GenClass<T> where T : IFoo
     }
 }
 
-public struct GenStruct<T> where T : IFoo
+public struct GenStruct<T>
+    where T : IFoo
 {
     public IFoo ConvertToConstraint(T t)
     {

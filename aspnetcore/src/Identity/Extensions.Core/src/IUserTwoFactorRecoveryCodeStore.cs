@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store which stores a user's recovery codes.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Updates the recovery codes for the user while invalidating any previous recovery codes.

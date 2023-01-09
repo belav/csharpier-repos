@@ -219,7 +219,8 @@ public class InteropClient : IDisposable
         return credentials;
     }
 
-    private TClient CreateClient<TClient>(IChannelWrapper channel) where TClient : ClientBase
+    private TClient CreateClient<TClient>(IChannelWrapper channel)
+        where TClient : ClientBase
     {
         return (TClient)Activator.CreateInstance(typeof(TClient), channel.Channel)!;
     }

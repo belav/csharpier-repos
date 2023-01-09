@@ -14,7 +14,8 @@ namespace Internal.Cryptography.Pal
         public static T? GetPublicKey<T>(
             this X509Certificate2 certificate,
             Predicate<X509Certificate2>? matchesConstraints = null
-        ) where T : AsymmetricAlgorithm
+        )
+            where T : AsymmetricAlgorithm
         {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
@@ -59,7 +60,8 @@ namespace Internal.Cryptography.Pal
         public static T? GetPrivateKey<T>(
             this X509Certificate2 certificate,
             Predicate<X509Certificate2>? matchesConstraints = null
-        ) where T : AsymmetricAlgorithm
+        )
+            where T : AsymmetricAlgorithm
         {
             if (certificate == null)
                 throw new ArgumentNullException(nameof(certificate));
@@ -87,7 +89,8 @@ namespace Internal.Cryptography.Pal
             throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
         }
 
-        private static string GetExpectedOidValue<T>() where T : AsymmetricAlgorithm
+        private static string GetExpectedOidValue<T>()
+            where T : AsymmetricAlgorithm
         {
             if (typeof(T) == typeof(RSA))
                 return Oids.Rsa;

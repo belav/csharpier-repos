@@ -14,7 +14,8 @@ namespace IntelHardwareIntrinsicTest.General;
 
 public partial class Program
 {
-    private class Vector128UnusedTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class Vector128UnusedTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorUnused(T t1, T t2)
         {
@@ -28,7 +29,8 @@ public partial class Program
         }
     }
 
-    private class Vector256UnusedTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class Vector256UnusedTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorUnused(T t1, T t2)
         {

@@ -36,7 +36,8 @@ public static class MessagePackProtocolDependencyInjectionExtensions
     public static TBuilder AddMessagePackProtocol<TBuilder>(
         this TBuilder builder,
         Action<MessagePackHubProtocolOptions> configure
-    ) where TBuilder : ISignalRBuilder
+    )
+        where TBuilder : ISignalRBuilder
     {
         builder.Services.TryAddEnumerable(
             ServiceDescriptor.Singleton<IHubProtocol, MessagePackHubProtocol>()

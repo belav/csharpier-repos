@@ -29,7 +29,8 @@ namespace Roslyn.Test.Utilities.Desktop
             this SerializationInfo info,
             string name,
             ImmutableArray<T> value
-        ) where T : class
+        )
+            where T : class
         {
             // we will copy the content into an array and serialize the copy
             // we could serialize element-wise, but that would require serializing

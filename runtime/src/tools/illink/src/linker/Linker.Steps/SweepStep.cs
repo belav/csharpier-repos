@@ -601,7 +601,8 @@ namespace Mono.Linker.Steps
                 }
         }
 
-        protected bool SweepCollectionMetadata<T>(IList<T> list) where T : IMetadataTokenProvider
+        protected bool SweepCollectionMetadata<T>(IList<T> list)
+            where T : IMetadataTokenProvider
         {
             bool removed = false;
 
@@ -618,7 +619,8 @@ namespace Mono.Linker.Steps
             return removed;
         }
 
-        protected virtual bool ShouldRemove<T>(T element) where T : IMetadataTokenProvider
+        protected virtual bool ShouldRemove<T>(T element)
+            where T : IMetadataTokenProvider
         {
             return !Annotations.IsMarked(element);
         }

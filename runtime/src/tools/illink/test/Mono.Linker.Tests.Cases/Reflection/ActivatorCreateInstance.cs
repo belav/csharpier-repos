@@ -704,7 +704,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
         }
 
         [Kept]
-        private static void TestCreateInstanceOfTWithNewConstraint<T>() where T : new()
+        private static void TestCreateInstanceOfTWithNewConstraint<T>()
+            where T : new()
         {
             Activator.CreateInstance<T>();
         }

@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Host
         }
 
         internal sealed class RecoverableSyntaxRoot<TRoot>
-            : WeaklyCachedRecoverableValueSource<TRoot> where TRoot : SyntaxNode
+            : WeaklyCachedRecoverableValueSource<TRoot>
+            where TRoot : SyntaxNode
         {
             private ITemporaryStreamStorageInternal? _storage;
 

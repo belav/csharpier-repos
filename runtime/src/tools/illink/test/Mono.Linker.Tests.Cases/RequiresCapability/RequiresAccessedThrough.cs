@@ -125,7 +125,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
             [RequiresUnreferencedCode("Message for --NewConstraintTestAnnotatedType--")]
             class NewConstraintTestAnnotatedType { }
 
-            static void GenericMethod<T>() where T : new() { }
+            static void GenericMethod<T>()
+                where T : new() { }
 
             // NativeAOT doesnt generate warnings when marking generic constraints
             // https://github.com/dotnet/runtime/issues/68688
@@ -149,19 +150,22 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "--NewConstraintTestType.ctor--",
                 ProducedBy = ProducedBy.Analyzer
             )]
-            public static void Test<T>() where T : new()
+            public static void Test<T>()
+                where T : new()
             {
                 GenericMethod<NewConstraintTestType>();
                 GenericMethod<NewConstraintTestAnnotatedType>();
                 GenericMethod<T>(); // should not crash analyzer
             }
 
-            static class NewConstraintOnTypeParameterOfStaticType<T> where T : new()
+            static class NewConstraintOnTypeParameterOfStaticType<T>
+                where T : new()
             {
                 public static void DoNothing() { }
             }
 
-            class NewConstraintOnTypeParameter<T> where T : new() { }
+            class NewConstraintOnTypeParameter<T>
+                where T : new() { }
 
             // NativeAOT doesnt generate warnings when marking generic constraints
             // https://github.com/dotnet/runtime/issues/68688
@@ -185,7 +189,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "--NewConstraintTestType.ctor--",
                 ProducedBy = ProducedBy.Analyzer
             )]
-            public static void TestNewConstraintOnTypeParameter<T>() where T : new()
+            public static void TestNewConstraintOnTypeParameter<T>()
+                where T : new()
             {
                 _ = new NewConstraintOnTypeParameter<NewConstraintTestType>();
                 _ = new NewConstraintOnTypeParameter<NewConstraintTestAnnotatedType>();
@@ -263,7 +268,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "--NewConstraintTestType.ctor--",
                 ProducedBy = ProducedBy.Analyzer
             )]
-            public static void TestNewConstraintOnTypeParameterOfStaticType<T>() where T : new()
+            public static void TestNewConstraintOnTypeParameterOfStaticType<T>()
+                where T : new()
             {
                 NewConstraintOnTypeParameterOfStaticType<NewConstraintTestType>.DoNothing();
                 NewConstraintOnTypeParameterOfStaticType<NewConstraintTestAnnotatedType>.DoNothing();

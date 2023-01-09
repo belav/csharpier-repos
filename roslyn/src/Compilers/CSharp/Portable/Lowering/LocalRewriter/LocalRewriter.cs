@@ -651,7 +651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             out TSymbol symbol,
             bool isOptional = false,
             Location? location = null
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             Debug.Assert((syntax != null) ^ (location != null));
 

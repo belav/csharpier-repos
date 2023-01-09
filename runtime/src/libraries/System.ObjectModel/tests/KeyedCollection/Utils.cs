@@ -85,7 +85,8 @@ namespace System.Collections.ObjectModel.Tests
         }
     }
 
-    public class BadKeyComparer<T> : IEqualityComparer<BadKey<T>> where T : IEquatable<T>
+    public class BadKeyComparer<T> : IEqualityComparer<BadKey<T>>
+        where T : IEquatable<T>
     {
         /// <summary>
         ///     Determines whether the specified objects are equal.
@@ -402,7 +403,8 @@ namespace System.Collections.ObjectModel.Tests
     public class KeyedItem<TKey, TValue>
         : IComparable<KeyedItem<TKey, TValue>>,
             IKeyedItem<TKey, TValue>,
-            IEquatable<KeyedItem<TKey, TValue>> where TValue : IComparable<TValue>
+            IEquatable<KeyedItem<TKey, TValue>>
+        where TValue : IComparable<TValue>
     {
         private readonly TValue _item;
 
@@ -528,7 +530,8 @@ namespace System.Collections.ObjectModel.Tests
     }
 
     public class TestKeyedCollectionOfIKeyedItem<TKey, TValue>
-        : KeyedCollection<TKey, IKeyedItem<TKey, TValue>> where TKey : IEquatable<TKey>
+        : KeyedCollection<TKey, IKeyedItem<TKey, TValue>>
+        where TKey : IEquatable<TKey>
     {
         public TestKeyedCollectionOfIKeyedItem(int collectionDictionaryThreshold = 32)
             : base(null, collectionDictionaryThreshold) { }

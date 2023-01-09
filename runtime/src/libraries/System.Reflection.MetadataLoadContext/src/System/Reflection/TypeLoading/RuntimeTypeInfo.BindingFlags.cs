@@ -246,12 +246,14 @@ namespace System.Reflection.TypeLoading
             }
         }
 
-        private QueryResult<M> Query<M>(BindingFlags bindingAttr) where M : MemberInfo
+        private QueryResult<M> Query<M>(BindingFlags bindingAttr)
+            where M : MemberInfo
         {
             return Query<M>(null, bindingAttr, null);
         }
 
-        private QueryResult<M> Query<M>(string name, BindingFlags bindingAttr) where M : MemberInfo
+        private QueryResult<M> Query<M>(string name, BindingFlags bindingAttr)
+            where M : MemberInfo
         {
             if (name is null)
             {
@@ -265,7 +267,8 @@ namespace System.Reflection.TypeLoading
             string? optionalName,
             BindingFlags bindingAttr,
             Func<M, bool>? optionalPredicate
-        ) where M : MemberInfo
+        )
+            where M : MemberInfo
         {
             MemberPolicies<M> policies = MemberPolicies<M>.Default;
             bindingAttr = policies.ModifyBindingFlags(bindingAttr);

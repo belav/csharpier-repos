@@ -203,7 +203,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallTypeConstrainedMethods<T>() where T : IUsedEveryWay
+            public static void CallTypeConstrainedMethods<T>()
+                where T : IUsedEveryWay
             {
                 T.UsedThroughConstrainedType();
                 T.UsedThroughConstrainedTypeExplicit();
@@ -303,7 +304,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallExplicitImplMethod<T>() where T : IStaticAndInstanceMethods
+            public static void CallExplicitImplMethod<T>()
+                where T : IStaticAndInstanceMethods
             {
                 T.StaticMethodExplicitImpl();
             }
@@ -536,14 +538,16 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallBase1TypeConstrainedMethod<T>() where T : IBase1
+            public static void CallBase1TypeConstrainedMethod<T>()
+                where T : IBase1
             {
                 T.UsedOnBaseOnlyConstrainedTypeImplicitImpl();
                 T.UsedOnConstrainedTypeExplicitImpl();
             }
 
             [Kept]
-            public static void CallBase2TypeConstrainedMethod<T>() where T : IBase2
+            public static void CallBase2TypeConstrainedMethod<T>()
+                where T : IBase2
             {
                 T.UsedOnBaseOnlyConstrainedTypeImplicitImpl();
                 T.UsedOnConstrainedTypeExplicitImpl();
@@ -616,7 +620,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallExplicitMethod<T, U>() where T : IGenericInterface<U>
+            public static void CallExplicitMethod<T, U>()
+                where T : IGenericInterface<U>
             {
                 T.GetTExplicit();
             }
@@ -626,7 +631,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
         public class RecursiveGenericInterface
         {
             [Kept]
-            public interface IGenericInterface<T> where T : IGenericInterface<T>
+            public interface IGenericInterface<T>
+                where T : IGenericInterface<T>
             {
                 public static abstract T GetT();
 
@@ -735,7 +741,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
 
             [Kept]
             // In link mode, if there are no constrained calls we should be able to remove the type constraint
-            public static void UsesIUnusedMethods<T>() where T : IUnusedMethods { }
+            public static void UsesIUnusedMethods<T>()
+                where T : IUnusedMethods { }
 
             [Kept]
             public static void Test()
@@ -786,7 +793,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallIBaseMethod<T>() where T : IBase
+            public static void CallIBaseMethod<T>()
+                where T : IBase
             {
                 T.ExplicitlyImplemented();
             }

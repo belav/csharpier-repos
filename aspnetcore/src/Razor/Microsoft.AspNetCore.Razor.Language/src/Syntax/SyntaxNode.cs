@@ -132,7 +132,8 @@ internal abstract partial class SyntaxNode
         return result;
     }
 
-    protected T GetRed<T>(ref T field, int slot) where T : SyntaxNode
+    protected T GetRed<T>(ref T field, int slot)
+        where T : SyntaxNode
     {
         var result = field;
 
@@ -154,7 +155,8 @@ internal abstract partial class SyntaxNode
     }
 
     // special case of above function where slot = 0, does not need GetChildPosition
-    protected T GetRedAtZero<T>(ref T field) where T : SyntaxNode
+    protected T GetRedAtZero<T>(ref T field)
+        where T : SyntaxNode
     {
         var result = field;
 
@@ -383,7 +385,8 @@ internal abstract partial class SyntaxNode
     protected internal SyntaxNode ReplaceCore<TNode>(
         IEnumerable<TNode> nodes = null,
         Func<TNode, TNode, SyntaxNode> computeReplacementNode = null
-    ) where TNode : SyntaxNode
+    )
+        where TNode : SyntaxNode
     {
         return SyntaxReplacer.Replace(this, nodes, computeReplacementNode);
     }

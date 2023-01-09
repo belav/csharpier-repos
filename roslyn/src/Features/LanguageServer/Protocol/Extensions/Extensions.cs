@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             this ImmutableArray<T> documents,
             TextDocumentIdentifier documentIdentifier,
             Func<Solution, DocumentId, T> documentGetter
-        ) where T : TextDocument
+        )
+            where T : TextDocument
         {
             return FindItemInProjectContext(
                 documents,

@@ -869,7 +869,8 @@ internal abstract partial class Http3Stream
         IHttpApplication<TContext> application,
         in ReadOnlySequence<byte> payload,
         bool isCompleted
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         return _incomingFrame.Type switch
         {
@@ -910,7 +911,8 @@ internal abstract partial class Http3Stream
         IHttpApplication<TContext> application,
         ReadOnlySequence<byte> payload,
         bool isCompleted
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         // HEADERS frame after trailing headers is invalid.
         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1

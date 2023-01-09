@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure.Em
 /// <summary>
 /// Trivia on an <see cref="EmbeddedSyntaxToken{TSyntaxKind}"/>.
 /// </summary>
-internal struct EmbeddedSyntaxTrivia<TSyntaxKind> where TSyntaxKind : struct
+internal struct EmbeddedSyntaxTrivia<TSyntaxKind>
+    where TSyntaxKind : struct
 {
     public readonly TSyntaxKind Kind;
     public readonly VirtualCharSequence VirtualChars;

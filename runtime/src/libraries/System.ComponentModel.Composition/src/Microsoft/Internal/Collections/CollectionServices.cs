@@ -161,7 +161,8 @@ namespace Microsoft.Internal.Collections
             this List<T>? source,
             T? value,
             IEnumerable<T>? second
-        ) where T : class
+        )
+            where T : class
         {
             if (second == null)
             {

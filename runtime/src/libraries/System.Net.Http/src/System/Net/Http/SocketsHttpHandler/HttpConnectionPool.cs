@@ -2985,7 +2985,8 @@ namespace System.Net.Http
                 long nowTicks,
                 TimeSpan pooledConnectionLifetime,
                 TimeSpan pooledConnectionIdleTimeout
-            ) where T : HttpConnectionBase
+            )
+                where T : HttpConnectionBase
             {
                 int freeIndex = 0;
                 while (

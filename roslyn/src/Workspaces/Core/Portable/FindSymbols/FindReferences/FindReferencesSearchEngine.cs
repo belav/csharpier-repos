@@ -315,7 +315,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             static PooledHashSet<string> GetGlobalAliasesSet<T>(
                 PooledDictionary<T, PooledHashSet<string>> dictionary,
                 T key
-            ) where T : notnull
+            )
+                where T : notnull
             {
                 if (!dictionary.TryGetValue(key, out var set))
                 {
@@ -329,7 +330,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             static MetadataUnifyingSymbolHashSet GetSymbolSet<T>(
                 PooledDictionary<T, MetadataUnifyingSymbolHashSet> dictionary,
                 T key
-            ) where T : notnull
+            )
+                where T : notnull
             {
                 if (!dictionary.TryGetValue(key, out var set))
                 {
@@ -344,7 +346,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         private static PooledHashSet<U>? TryGet<T, U>(
             Dictionary<T, PooledHashSet<U>> dictionary,
             T key
-        ) where T : notnull => dictionary.TryGetValue(key, out var set) ? set : null;
+        )
+            where T : notnull => dictionary.TryGetValue(key, out var set) ? set : null;
 
         private async Task ProcessDocumentAsync(
             Document document,

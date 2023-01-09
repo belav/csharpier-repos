@@ -1057,7 +1057,8 @@ namespace Span
             InvokeTestSpanAsBytes<int>(length);
         }
 
-        static void InvokeTestSpanAsBytes<T>(int length) where T : struct
+        static void InvokeTestSpanAsBytes<T>(int length)
+            where T : struct
         {
             var array = new T[length];
 
@@ -1070,7 +1071,8 @@ namespace Span
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void TestSpanAsBytes<T>(T[] array, int iterationCount, bool untrue) where T : struct
+        static void TestSpanAsBytes<T>(T[] array, int iterationCount, bool untrue)
+            where T : struct
         {
             var sink = Sink<byte>.Instance;
             var span = new Span<T>(array);

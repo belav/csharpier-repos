@@ -27,7 +27,8 @@ namespace Roslyn.Hosting.Diagnostics.VenusMargin
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public ProjectionSpanTaggerProvider() { }
 
-        public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer)
+            where T : ITag
         {
             return new Tagger(textView) as ITagger<T>;
         }

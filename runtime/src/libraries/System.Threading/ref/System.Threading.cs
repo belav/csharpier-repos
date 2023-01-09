@@ -658,7 +658,8 @@ namespace System.Threading
         }
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("location1")]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class?
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class?
         {
             throw null;
         }
@@ -742,7 +743,8 @@ namespace System.Threading
         public static T Exchange<T>(
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")] ref T location1,
             T value
-        ) where T : class?
+        )
+            where T : class?
         {
             throw null;
         }
@@ -818,7 +820,8 @@ namespace System.Threading
                     .PublicParameterlessConstructor
             )]
                 T
-        >([System.Diagnostics.CodeAnalysis.NotNullAttribute] ref T? target) where T : class
+        >([System.Diagnostics.CodeAnalysis.NotNullAttribute] ref T? target)
+            where T : class
         {
             throw null;
         }
@@ -856,7 +859,8 @@ namespace System.Threading
         public static T EnsureInitialized<T>(
             [System.Diagnostics.CodeAnalysis.NotNullAttribute] ref T? target,
             System.Func<T> valueFactory
-        ) where T : class
+        )
+            where T : class
         {
             throw null;
         }
@@ -866,7 +870,8 @@ namespace System.Threading
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("syncLock")]
                 ref object? syncLock,
             System.Func<T> valueFactory
-        ) where T : class
+        )
+            where T : class
         {
             throw null;
         }
@@ -1565,7 +1570,8 @@ namespace System.Threading
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("location")]
         public static T Read<T>(
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("location")] ref T location
-        ) where T : class?
+        )
+            where T : class?
         {
             throw null;
         }
@@ -1604,7 +1610,8 @@ namespace System.Threading
         public static void Write<T>(
             [System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute("value")] ref T location,
             T value
-        ) where T : class? { }
+        )
+            where T : class? { }
     }
 
     public partial class WaitHandleCannotBeOpenedException : System.ApplicationException

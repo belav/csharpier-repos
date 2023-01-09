@@ -15,7 +15,8 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        public static IEnumerable<T?> NullableSequence<T>(IEnumerable<T> source) where T : struct
+        public static IEnumerable<T?> NullableSequence<T>(IEnumerable<T> source)
+            where T : struct
         {
             return source.Select(i => (T?)i).Concat(Enumerable.Repeat(default(T?), 1));
         }

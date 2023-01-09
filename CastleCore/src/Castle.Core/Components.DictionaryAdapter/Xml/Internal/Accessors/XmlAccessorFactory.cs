@@ -20,5 +20,6 @@ namespace Castle.Components.DictionaryAdapter.Xml
         string name,
         Type type,
         IXmlContext context
-    ) where TAccessor : XmlAccessor;
+    )
+        where TAccessor : XmlAccessor;
 }

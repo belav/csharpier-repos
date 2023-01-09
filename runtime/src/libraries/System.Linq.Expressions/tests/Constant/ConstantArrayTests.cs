@@ -639,7 +639,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionArrayConstantHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             foreach (
                 Ts[] value in new Ts[][]
@@ -682,7 +683,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassAndNewRestrictionArrayHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             foreach (
                 Tcn[] value in new Tcn[][]
@@ -717,7 +719,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassAndNewRestrictionHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             foreach (
                 TCn[] value in new TCn[][]
@@ -1039,7 +1042,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericArrayWithStructRestriction<Ts>(
             Ts[] value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts[]>> e = Expression.Lambda<Func<Ts[]>>(
                 Expression.Constant(value, typeof(Ts[])),
@@ -1062,7 +1066,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithClassRestrictionArray<Tc>(
             Tc[] value,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<Tc[]>> e = Expression.Lambda<Func<Tc[]>>(
                 Expression.Constant(value, typeof(Tc[])),
@@ -1075,7 +1080,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithClassAndNewRestrictionArray<Tcn>(
             Tcn[] value,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<Tcn[]>> e = Expression.Lambda<Func<Tcn[]>>(
                 Expression.Constant(value, typeof(Tcn[])),
@@ -1088,7 +1094,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithSubClassRestrictionArray<TC>(
             TC[] value,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             Expression<Func<TC[]>> e = Expression.Lambda<Func<TC[]>>(
                 Expression.Constant(value, typeof(TC[])),
@@ -1101,7 +1108,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithSubClassAndNewRestrictionArray<TCn>(
             TCn[] value,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Expression<Func<TCn[]>> e = Expression.Lambda<Func<TCn[]>>(
                 Expression.Constant(value, typeof(TCn[])),

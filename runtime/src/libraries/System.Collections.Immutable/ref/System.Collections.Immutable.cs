@@ -17,7 +17,8 @@ namespace System.Collections.Frozen
                 TValue
             >> source,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -29,7 +30,8 @@ namespace System.Collections.Frozen
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -43,7 +45,8 @@ namespace System.Collections.Frozen
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -66,7 +69,8 @@ namespace System.Collections.Frozen
             System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
             System.Collections.ICollection,
             System.Collections.IDictionary,
-            System.Collections.IEnumerable where TKey : notnull
+            System.Collections.IEnumerable
+        where TKey : notnull
     {
         internal FrozenDictionary() { }
 
@@ -945,7 +949,8 @@ namespace System.Collections.Immutable
 
         public System.Collections.Immutable.ImmutableArray<T> AddRange<TDerived>(
             ImmutableArray<TDerived> items
-        ) where TDerived : T
+        )
+            where TDerived : T
         {
             throw null;
         }
@@ -979,7 +984,8 @@ namespace System.Collections.Immutable
 #nullable disable
         TOther
 #nullable restore
-        > As<TOther>() where TOther : class?
+        > As<TOther>()
+            where TOther : class?
         {
             throw null;
         }
@@ -988,7 +994,8 @@ namespace System.Collections.Immutable
 #nullable disable
         TOther
 #nullable restore
-        > CastArray<TOther>() where TOther : class?
+        > CastArray<TOther>()
+            where TOther : class?
         {
             throw null;
         }
@@ -1517,13 +1524,16 @@ namespace System.Collections.Immutable
 
             public void AddRange<TDerived>(
                 System.Collections.Immutable.ImmutableArray<TDerived> items
-            ) where TDerived : T { }
+            )
+                where TDerived : T { }
 
             public void AddRange<TDerived>(
                 System.Collections.Immutable.ImmutableArray<TDerived>.Builder items
-            ) where TDerived : T { }
+            )
+                where TDerived : T { }
 
-            public void AddRange<TDerived>(TDerived[] items) where TDerived : T { }
+            public void AddRange<TDerived>(TDerived[] items)
+                where TDerived : T { }
 
             public void AddRange(System.ReadOnlySpan<T> items) { }
 
@@ -1752,7 +1762,8 @@ namespace System.Collections.Immutable
             this System.Collections.Immutable.IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1760,7 +1771,8 @@ namespace System.Collections.Immutable
         public static System.Collections.Immutable.ImmutableDictionary<
             TKey,
             TValue
-        >.Builder CreateBuilder<TKey, TValue>() where TKey : notnull
+        >.Builder CreateBuilder<TKey, TValue>()
+            where TKey : notnull
         {
             throw null;
         }
@@ -1770,7 +1782,8 @@ namespace System.Collections.Immutable
             TValue
         >.Builder CreateBuilder<TKey, TValue>(
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1781,7 +1794,8 @@ namespace System.Collections.Immutable
         >.Builder CreateBuilder<TKey, TValue>(
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1794,7 +1808,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1808,7 +1823,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1823,7 +1839,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1831,7 +1848,8 @@ namespace System.Collections.Immutable
         public static System.Collections.Immutable.ImmutableDictionary<TKey, TValue> Create<
             TKey,
             TValue
-        >() where TKey : notnull
+        >()
+            where TKey : notnull
         {
             throw null;
         }
@@ -1839,7 +1857,8 @@ namespace System.Collections.Immutable
         public static System.Collections.Immutable.ImmutableDictionary<TKey, TValue> Create<
             TKey,
             TValue
-        >(System.Collections.Generic.IEqualityComparer<TKey>? keyComparer) where TKey : notnull
+        >(System.Collections.Generic.IEqualityComparer<TKey>? keyComparer)
+            where TKey : notnull
         {
             throw null;
         }
@@ -1850,7 +1869,8 @@ namespace System.Collections.Immutable
         >(
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1858,7 +1878,8 @@ namespace System.Collections.Immutable
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this System.Collections.Immutable.IImmutableDictionary<TKey, TValue> dictionary,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1867,7 +1888,8 @@ namespace System.Collections.Immutable
             this System.Collections.Immutable.IImmutableDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue defaultValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1880,7 +1902,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> source
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1894,7 +1917,8 @@ namespace System.Collections.Immutable
                 TValue
             >> source,
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1909,7 +1933,8 @@ namespace System.Collections.Immutable
             >> source,
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1920,7 +1945,8 @@ namespace System.Collections.Immutable
         > ToImmutableDictionary<TSource, TKey>(
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1932,7 +1958,8 @@ namespace System.Collections.Immutable
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1942,7 +1969,8 @@ namespace System.Collections.Immutable
             TValue
         > ToImmutableDictionary<TKey, TValue>(
             this System.Collections.Immutable.ImmutableDictionary<TKey, TValue>.Builder builder
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1954,7 +1982,8 @@ namespace System.Collections.Immutable
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TValue> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1967,7 +1996,8 @@ namespace System.Collections.Immutable
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TValue> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1981,7 +2011,8 @@ namespace System.Collections.Immutable
             System.Func<TSource, TValue> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -2005,7 +2036,8 @@ namespace System.Collections.Immutable
             System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
-            System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
+            System.Collections.Immutable.IImmutableDictionary<TKey, TValue>
+        where TKey : notnull
     {
         internal ImmutableDictionary() { }
 
@@ -3059,7 +3091,8 @@ namespace System.Collections.Immutable
             TKey key,
             System.Func<TKey, TValue> addValueFactory,
             System.Func<TKey, TValue, TValue> updateValueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3069,7 +3102,8 @@ namespace System.Collections.Immutable
             TKey key,
             TValue addValue,
             System.Func<TKey, TValue, TValue> updateValueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3083,7 +3117,8 @@ namespace System.Collections.Immutable
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
             TKey key,
             System.Func<TKey, TValue> valueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3092,7 +3127,8 @@ namespace System.Collections.Immutable
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3102,7 +3138,8 @@ namespace System.Collections.Immutable
             TKey key,
             System.Func<TKey, TArg, TValue> valueFactory,
             TArg factoryArgument
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3141,7 +3178,8 @@ namespace System.Collections.Immutable
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3166,7 +3204,8 @@ namespace System.Collections.Immutable
             ref System.Collections.Immutable.ImmutableDictionary<TKey, TValue> location,
             TKey key,
             [System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute(false)] out TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -3176,12 +3215,14 @@ namespace System.Collections.Immutable
             TKey key,
             TValue newValue,
             TValue comparisonValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
 
-        public static bool Update<T>(ref T location, System.Func<T, T> transformer) where T : class?
+        public static bool Update<T>(ref T location, System.Func<T, T> transformer)
+            where T : class?
         {
             throw null;
         }
@@ -3190,7 +3231,8 @@ namespace System.Collections.Immutable
             ref T location,
             System.Func<T, TArg, T> transformer,
             TArg transformerArgument
-        ) where T : class?
+        )
+            where T : class?
         {
             throw null;
         }
@@ -4313,7 +4355,8 @@ namespace System.Collections.Immutable
         public static System.Collections.Immutable.ImmutableSortedDictionary<
             TKey,
             TValue
-        >.Builder CreateBuilder<TKey, TValue>() where TKey : notnull
+        >.Builder CreateBuilder<TKey, TValue>()
+            where TKey : notnull
         {
             throw null;
         }
@@ -4323,7 +4366,8 @@ namespace System.Collections.Immutable
             TValue
         >.Builder CreateBuilder<TKey, TValue>(
             System.Collections.Generic.IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4334,7 +4378,8 @@ namespace System.Collections.Immutable
         >.Builder CreateBuilder<TKey, TValue>(
             System.Collections.Generic.IComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4348,7 +4393,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4363,7 +4409,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4376,7 +4423,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4384,7 +4432,8 @@ namespace System.Collections.Immutable
         public static System.Collections.Immutable.ImmutableSortedDictionary<TKey, TValue> Create<
             TKey,
             TValue
-        >() where TKey : notnull
+        >()
+            where TKey : notnull
         {
             throw null;
         }
@@ -4392,7 +4441,8 @@ namespace System.Collections.Immutable
         public static System.Collections.Immutable.ImmutableSortedDictionary<TKey, TValue> Create<
             TKey,
             TValue
-        >(System.Collections.Generic.IComparer<TKey>? keyComparer) where TKey : notnull
+        >(System.Collections.Generic.IComparer<TKey>? keyComparer)
+            where TKey : notnull
         {
             throw null;
         }
@@ -4403,7 +4453,8 @@ namespace System.Collections.Immutable
         >(
             System.Collections.Generic.IComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4416,7 +4467,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >> source
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4430,7 +4482,8 @@ namespace System.Collections.Immutable
                 TValue
             >> source,
             System.Collections.Generic.IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4445,7 +4498,8 @@ namespace System.Collections.Immutable
             >> source,
             System.Collections.Generic.IComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4458,7 +4512,8 @@ namespace System.Collections.Immutable
                 TKey,
                 TValue
             >.Builder builder
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4470,7 +4525,8 @@ namespace System.Collections.Immutable
             this System.Collections.Generic.IEnumerable<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TValue> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4483,7 +4539,8 @@ namespace System.Collections.Immutable
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TValue> elementSelector,
             System.Collections.Generic.IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4497,7 +4554,8 @@ namespace System.Collections.Immutable
             System.Func<TSource, TValue> elementSelector,
             System.Collections.Generic.IComparer<TKey>? keyComparer,
             System.Collections.Generic.IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -4521,7 +4579,8 @@ namespace System.Collections.Immutable
             System.Collections.ICollection,
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
-            System.Collections.Immutable.IImmutableDictionary<TKey, TValue> where TKey : notnull
+            System.Collections.Immutable.IImmutableDictionary<TKey, TValue>
+        where TKey : notnull
     {
         internal ImmutableSortedDictionary() { }
 
@@ -6029,7 +6088,8 @@ namespace System.Linq
             this System.Collections.Immutable.ImmutableArray<TBase> immutableArray,
             System.Collections.Generic.IEnumerable<TDerived> items,
             System.Collections.Generic.IEqualityComparer<TBase>? comparer = null
-        ) where TDerived : TBase
+        )
+            where TDerived : TBase
         {
             throw null;
         }
@@ -6038,7 +6098,8 @@ namespace System.Linq
             this System.Collections.Immutable.ImmutableArray<TBase> immutableArray,
             System.Collections.Immutable.ImmutableArray<TDerived> items,
             System.Collections.Generic.IEqualityComparer<TBase>? comparer = null
-        ) where TDerived : TBase
+        )
+            where TDerived : TBase
         {
             throw null;
         }
@@ -6047,7 +6108,8 @@ namespace System.Linq
             this System.Collections.Immutable.ImmutableArray<TBase> immutableArray,
             System.Collections.Immutable.ImmutableArray<TDerived> items,
             System.Func<TBase, TBase, bool> predicate
-        ) where TDerived : TBase
+        )
+            where TDerived : TBase
         {
             throw null;
         }
@@ -6092,7 +6154,8 @@ namespace System.Linq
         public static System.Collections.Generic.Dictionary<TKey, T> ToDictionary<TKey, T>(
             this System.Collections.Immutable.ImmutableArray<T> immutableArray,
             System.Func<T, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -6101,7 +6164,8 @@ namespace System.Linq
             this System.Collections.Immutable.ImmutableArray<T> immutableArray,
             System.Func<T, TKey> keySelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -6114,7 +6178,8 @@ namespace System.Linq
             this System.Collections.Immutable.ImmutableArray<T> immutableArray,
             System.Func<T, TKey> keySelector,
             System.Func<T, TElement> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -6128,7 +6193,8 @@ namespace System.Linq
             System.Func<T, TKey> keySelector,
             System.Func<T, TElement> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }

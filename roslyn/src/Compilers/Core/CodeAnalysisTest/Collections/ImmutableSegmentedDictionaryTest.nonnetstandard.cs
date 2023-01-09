@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         private static void EmptyTestHelperHash<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> empty,
             TKey someKey
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             // Intentionally not used
             _ = someKey;

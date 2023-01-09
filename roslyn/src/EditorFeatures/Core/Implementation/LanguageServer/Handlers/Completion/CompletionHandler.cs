@@ -306,7 +306,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 TextSpan? defaultSpan,
                 LSP.Range? defaultRange,
                 CancellationToken cancellationToken
-            ) where TCompletionItem : LSP.CompletionItem, new()
+            )
+                where TCompletionItem : LSP.CompletionItem, new()
             {
                 // Generate display text
                 stringBuilder.Append(item.DisplayTextPrefix);

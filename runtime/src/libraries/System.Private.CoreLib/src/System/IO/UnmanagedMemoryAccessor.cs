@@ -292,7 +292,8 @@ namespace System.IO
         // (larger than 8 bytes -- though this is number is JIT and architecture dependent).   As
         // such, it is best to use the ReadXXX methods for small standard types such as ints, longs,
         // bools, etc.
-        public void Read<T>(long position, out T structure) where T : struct
+        public void Read<T>(long position, out T structure)
+            where T : struct
         {
             ArgumentOutOfRangeException.ThrowIfNegative(position);
 
@@ -330,7 +331,8 @@ namespace System.IO
         // Reads 'count' structs of type T from unmanaged memory, into 'array' starting at 'offset'.
         // Note: this method is not safe, since it overwrites the contents of structures, it can
         // be used to modify the private members of a struct.
-        public int ReadArray<T>(long position, T[] array, int offset, int count) where T : struct
+        public int ReadArray<T>(long position, T[] array, int offset, int count)
+            where T : struct
         {
             ArgumentNullException.ThrowIfNull(array);
 
@@ -530,7 +532,8 @@ namespace System.IO
         // is most performant when used with medium to large sized structs (larger than 8 bytes
         // though this is number is JIT and architecture dependent).   As such, it is best to use
         // the WriteX methods for small standard types such as ints, longs, bools, etc.
-        public void Write<T>(long position, ref T structure) where T : struct
+        public void Write<T>(long position, ref T structure)
+            where T : struct
         {
             ArgumentOutOfRangeException.ThrowIfNegative(position);
             if (!_isOpen)
@@ -568,7 +571,8 @@ namespace System.IO
         }
 
         // Writes 'count' structs of type T from 'array' (starting at 'offset') into unmanaged memory.
-        public void WriteArray<T>(long position, T[] array, int offset, int count) where T : struct
+        public void WriteArray<T>(long position, T[] array, int offset, int count)
+            where T : struct
         {
             ArgumentNullException.ThrowIfNull(array);
 

@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
 /// <typeparam name="TAttribute">The attribute type to look for.</typeparam>
-public abstract class NavigationAttributeConventionBase<TAttribute> where TAttribute : Attribute
+public abstract class NavigationAttributeConventionBase<TAttribute>
+    where TAttribute : Attribute
 {
     /// <summary>
     ///     Creates a new instance of <see cref="NavigationAttributeConventionBase{TAttribute}" />.
@@ -412,7 +413,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute> where TAttri
     protected static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
         IConventionEntityType entityType,
         IConventionNavigation navigation
-    ) where TCustomAttribute : Attribute =>
+    )
+        where TCustomAttribute : Attribute =>
         GetAttributes<TCustomAttribute>(navigation.GetIdentifyingMemberInfo());
 
     /// <summary>
@@ -425,12 +427,14 @@ public abstract class NavigationAttributeConventionBase<TAttribute> where TAttri
     protected static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
         IConventionEntityType entityType,
         IConventionSkipNavigation skipNavigation
-    ) where TCustomAttribute : Attribute =>
+    )
+        where TCustomAttribute : Attribute =>
         GetAttributes<TCustomAttribute>(skipNavigation.GetIdentifyingMemberInfo());
 
     private static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
         MemberInfo? memberInfo
-    ) where TCustomAttribute : Attribute
+    )
+        where TCustomAttribute : Attribute
     {
         if (memberInfo == null)
         {

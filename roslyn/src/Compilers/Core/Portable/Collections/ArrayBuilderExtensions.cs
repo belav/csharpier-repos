@@ -219,7 +219,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static void AddOptional<T>(this ArrayBuilder<T> builder, T? item) where T : class
+        public static void AddOptional<T>(this ArrayBuilder<T> builder, T? item)
+            where T : class
         {
             if (item != null)
             {
@@ -267,7 +268,8 @@ namespace Microsoft.CodeAnalysis
             return builder?.ToImmutableAndFree() ?? ImmutableArray<T>.Empty;
         }
 
-        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value) where T : struct
+        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value)
+            where T : struct
         {
             if (value != null)
             {
@@ -275,7 +277,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value) where T : class
+        public static void AddIfNotNull<T>(this ArrayBuilder<T> builder, T? value)
+            where T : class
         {
             if (value != null)
             {

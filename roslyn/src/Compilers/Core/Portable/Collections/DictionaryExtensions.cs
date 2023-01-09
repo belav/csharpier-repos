@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
             this Dictionary<TKey, TValue> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var existingValue))
             {

@@ -61,7 +61,8 @@ public class DbSetFinderTest
 
     internal class Brandy { }
 
-    public class NotANormalSet<TEntity> : DbSet<TEntity> where TEntity : class
+    public class NotANormalSet<TEntity> : DbSet<TEntity>
+        where TEntity : class
     {
         public override IEntityType EntityType => throw new NotImplementedException();
     }

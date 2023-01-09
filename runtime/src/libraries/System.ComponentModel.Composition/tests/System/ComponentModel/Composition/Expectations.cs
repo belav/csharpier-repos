@@ -300,7 +300,8 @@ namespace System.ComponentModel.Composition
             yield return typeof(Int32).GetSingleMember("MaxValue");
         }
 
-        public static IEnumerable<TEnum> GetEnumValues<TEnum>() where TEnum : struct
+        public static IEnumerable<TEnum> GetEnumValues<TEnum>()
+            where TEnum : struct
         {
             var values = TestServices.GetEnumValues<TEnum>();
 
@@ -310,7 +311,8 @@ namespace System.ComponentModel.Composition
             }
         }
 
-        public static IEnumerable<TEnum> GetInvalidEnumValues<TEnum>() where TEnum : struct
+        public static IEnumerable<TEnum> GetInvalidEnumValues<TEnum>()
+            where TEnum : struct
         {
             var bounds = GetEnumBounds<TEnum>();
 
@@ -338,14 +340,16 @@ namespace System.ComponentModel.Composition
             yield return new string[] { "1", "2", "3" };
         }
 
-        private static TEnum AddEnum<TEnum>(TEnum left, int right) where TEnum : struct
+        private static TEnum AddEnum<TEnum>(TEnum left, int right)
+            where TEnum : struct
         {
             int intRight = (int)(object)left;
 
             return (TEnum)(object)(intRight + right);
         }
 
-        private static Tuple<TEnum, TEnum> GetEnumBounds<TEnum>() where TEnum : struct
+        private static Tuple<TEnum, TEnum> GetEnumBounds<TEnum>()
+            where TEnum : struct
         {
             var values = TestServices.GetEnumValues<TEnum>();
 

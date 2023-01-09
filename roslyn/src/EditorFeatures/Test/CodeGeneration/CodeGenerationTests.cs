@@ -690,7 +690,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             string initial,
             string expected,
             Type attributeClass
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             using var testContext = await TestContext.CreateAsync(initial, expected);
             var attributeType = GetTypeSymbol(attributeClass)(testContext.SemanticModel);
@@ -724,7 +725,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
             ImmutableArray<Func<SemanticModel, ISymbol>> getNewMembers = default,
             bool? declareNewMembersAtTop = null,
             string retainedMembersKey = "RetainedMember"
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             using var testContext = await TestContext.CreateAsync(initial, expected);
             var declarationNode = testContext.GetDestinationNode().FirstAncestorOrSelf<T>();
@@ -1223,7 +1225,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeGeneration
                 return symbol;
             }
 
-            public T GetSelectedSyntax<T>(bool fullSpanCoverage = false) where T : SyntaxNode
+            public T GetSelectedSyntax<T>(bool fullSpanCoverage = false)
+                where T : SyntaxNode
             {
                 var destSpan = Workspace.Documents.Single().SelectedSpans.Single();
                 var token = SemanticModel.SyntaxTree.GetRoot().FindToken(destSpan.Start);

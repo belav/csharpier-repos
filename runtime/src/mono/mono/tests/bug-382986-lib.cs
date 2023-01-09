@@ -10,7 +10,8 @@ namespace Repro
         }
     }
 
-    public class Generic<T> where T : Base
+    public class Generic<T>
+        where T : Base
     {
         public int Run(T t)
         {

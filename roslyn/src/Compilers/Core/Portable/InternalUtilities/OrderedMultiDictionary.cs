@@ -9,7 +9,8 @@ namespace Roslyn.Utilities
 {
     // Note that this is not threadsafe for concurrent reading and writing.
     internal sealed class OrderedMultiDictionary<K, V>
-        : IEnumerable<KeyValuePair<K, SetWithInsertionOrder<V>>> where K : notnull
+        : IEnumerable<KeyValuePair<K, SetWithInsertionOrder<V>>>
+        where K : notnull
     {
         private readonly Dictionary<K, SetWithInsertionOrder<V>> _dictionary;
         private readonly List<K> _keys;

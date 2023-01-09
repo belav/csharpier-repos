@@ -1471,7 +1471,8 @@ public class Interfaces
             static object IFoo.Frob() => new Gen<T>();
         }
 
-        static object CallFrob<T>() where T : IFoo => T.Frob();
+        static object CallFrob<T>()
+            where T : IFoo => T.Frob();
 
         class Gen<T> { }
 
@@ -1592,7 +1593,8 @@ public class Interfaces
 
         class Derived : Mid { }
 
-        static void TestSimpleInterface<T>(string expected) where T : ISimple
+        static void TestSimpleInterface<T>(string expected)
+            where T : ISimple
         {
             string actual = T.GetCookie();
             if (actual != expected)
@@ -1608,7 +1610,8 @@ public class Interfaces
             }
         }
 
-        static void TestSimpleInterfaceWithGenericMethod<T, U>(string expected) where T : ISimple
+        static void TestSimpleInterfaceWithGenericMethod<T, U>(string expected)
+            where T : ISimple
         {
             string actual = T.GetCookieGeneric<U>();
             if (actual != expected)
@@ -1624,7 +1627,8 @@ public class Interfaces
             }
         }
 
-        static void TestVariantInterface<T, U>(string expected) where T : IVariant<U>
+        static void TestVariantInterface<T, U>(string expected)
+            where T : IVariant<U>
         {
             string actual = T.WhichMethod(default);
             if (actual != expected)
@@ -1760,9 +1764,11 @@ public class Interfaces
 
         class Atom { }
 
-        static string GetCookie<T>() where T : IFoo => T.GetCookie();
+        static string GetCookie<T>()
+            where T : IFoo => T.GetCookie();
 
-        static string GetCookie<T, U>() where T : IFoo<U> => T.GetCookie();
+        static string GetCookie<T, U>()
+            where T : IFoo<U> => T.GetCookie();
 
         public static void Run()
         {
@@ -1808,7 +1814,8 @@ public class Interfaces
             public static int CallMeIndirect() => 2022;
         }
 
-        class FrobCaller<T> where T : IFoo
+        class FrobCaller<T>
+            where T : IFoo
         {
             public static int CallDirect() => T.CallMeDirect();
 
@@ -1866,7 +1873,8 @@ public class Interfaces
             public static (int, Type) CallMeIndirect() => (2022, typeof(T[,,]));
         }
 
-        class FrobCaller<T, U> where T : IFoo<U>
+        class FrobCaller<T, U>
+            where T : IFoo<U>
         {
             public static (int, Type) CallDirect() => T.CallMeDirect();
 
@@ -1941,7 +1949,8 @@ public class Interfaces
             public static (int, Type) CallMeIndirect() => (2022, typeof(T[,,]));
         }
 
-        class FrobCaller<T, U> where T : IFoo<U>
+        class FrobCaller<T, U>
+            where T : IFoo<U>
         {
             public static (int, Type) CallDirect() => T.CallMeDirect();
 
@@ -2024,9 +2033,11 @@ public class Interfaces
 
         struct GenericStruct<T, U> : IBar<T[], U> { }
 
-        static (Type, Type) CallTheCall<T, U>() where T : IFoo<U> => T.DisambiguateMe();
+        static (Type, Type) CallTheCall<T, U>()
+            where T : IFoo<U> => T.DisambiguateMe();
 
-        static (Type, Type) DelegateTheCall<T, U>() where T : IFoo<U>
+        static (Type, Type) DelegateTheCall<T, U>()
+            where T : IFoo<U>
         {
             Func<(Type, Type)> d = T.DisambiguateMe;
             return d();
@@ -2069,7 +2080,8 @@ public class Interfaces
             public void Frob() => State++;
         }
 
-        static void DoFrob<T>(ref T theT, ref GenericStruct<T> theGenericStruct) where T : IFoo
+        static void DoFrob<T>(ref T theT, ref GenericStruct<T> theGenericStruct)
+            where T : IFoo
         {
             theT.Frob();
             theGenericStruct.Frob();
@@ -2116,9 +2128,11 @@ public class Interfaces
 
         struct SimpleStruct : IBar { }
 
-        static int Call<T>(int val) where T : IFoo => T.GetCookie(val);
+        static int Call<T>(int val)
+            where T : IFoo => T.GetCookie(val);
 
-        static int CallIndirect<T>(int val) where T : IFoo
+        static int CallIndirect<T>(int val)
+            where T : IFoo
         {
             Func<int, int> del = T.GetCookie;
             return del(val);
@@ -2153,9 +2167,11 @@ public class Interfaces
 
         struct SimpleStruct : IBar<Atom2> { }
 
-        static (int, Type) Call<T>(int val) where T : IFoo => T.GetCookie(val);
+        static (int, Type) Call<T>(int val)
+            where T : IFoo => T.GetCookie(val);
 
-        static (int, Type) CallIndirect<T>(int val) where T : IFoo
+        static (int, Type) CallIndirect<T>(int val)
+            where T : IFoo
         {
             Func<int, (int, Type)> del = T.GetCookie;
             return del(val);

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this SyntaxList<T> syntaxList,
             int index,
             int count
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var result = new List<T>(syntaxList);
             result.RemoveRange(index, count);

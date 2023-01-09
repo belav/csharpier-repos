@@ -39,7 +39,8 @@ public abstract class RazorPage : IRazorPage
 
     public void EndContext() { }
 
-    public TTagHelper CreateTagHelper<TTagHelper>() where TTagHelper : ITagHelper
+    public TTagHelper CreateTagHelper<TTagHelper>()
+        where TTagHelper : ITagHelper
     {
         throw new NotImplementedException();
     }

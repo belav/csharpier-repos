@@ -15,12 +15,14 @@ public class CapturedBatch
     public IList<int> DisposedComponentIDs { get; set; }
     public RenderTreeFrame[] ReferenceFrames { get; set; }
 
-    public IEnumerable<RenderTreeFrame> GetComponentFrames<T>() where T : IComponent =>
+    public IEnumerable<RenderTreeFrame> GetComponentFrames<T>()
+        where T : IComponent =>
         ReferenceFrames.Where(
             f => f.FrameType == RenderTreeFrameType.Component && f.Component is T
         );
 
-    public IEnumerable<RenderTreeDiff> GetComponentDiffs<T>() where T : IComponent =>
+    public IEnumerable<RenderTreeDiff> GetComponentDiffs<T>()
+        where T : IComponent =>
         GetComponentFrames<T>().SelectMany(f => DiffsByComponentId[f.ComponentId]);
 
     internal void AddDiff(RenderTreeDiff diff)

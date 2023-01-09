@@ -65,7 +65,8 @@ namespace System.Collections.Generic
         }
     }
 
-    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?> where T : struct
+    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>
+        where T : struct
     {
         internal override int IndexOf(T?[] array, T? value, int startIndex, int count)
         {
@@ -182,7 +183,8 @@ namespace System.Collections.Generic
 #endif
     }
 
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T> where T : struct, Enum
+    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>
+        where T : struct, Enum
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(T x, T y)

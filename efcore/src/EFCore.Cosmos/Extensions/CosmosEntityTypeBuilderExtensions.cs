@@ -51,7 +51,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToContainer<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)ToContainer((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
@@ -243,7 +244,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasPartitionKey<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)HasPartitionKey((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
@@ -259,7 +261,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasPartitionKey<TEntity, TProperty>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         Expression<Func<TEntity, TProperty>> propertyExpression
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(propertyExpression, nameof(propertyExpression));
 
@@ -356,7 +359,8 @@ public static class CosmosEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> UseETagConcurrency<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)UseETagConcurrency((EntityTypeBuilder)entityTypeBuilder);
 
     /// <summary>
@@ -392,7 +396,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasAnalyticalStoreTimeToLive<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         int? seconds
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             HasAnalyticalStoreTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
 
@@ -486,7 +491,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasDefaultTimeToLive<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         int? seconds
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             HasDefaultTimeToLive((EntityTypeBuilder)entityTypeBuilder, seconds);
 
@@ -574,7 +580,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasManualThroughput<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         int? throughput
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             HasManualThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
 
@@ -609,7 +616,8 @@ public static class CosmosEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasAutoscaleThroughput<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         int? throughput
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             HasAutoscaleThroughput((EntityTypeBuilder)entityTypeBuilder, throughput);
 

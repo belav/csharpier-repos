@@ -20,7 +20,8 @@ internal static class ActivatorExtensions
     /// </summary>
     public static T CreateInstance<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
-    >(this IActivator activator, string implementationTypeName) where T : class
+    >(this IActivator activator, string implementationTypeName)
+        where T : class
     {
         if (implementationTypeName == null)
         {

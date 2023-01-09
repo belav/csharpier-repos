@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Converters
     /// <summary>
     /// Default base class implementation of <cref>JsonObjectConverter{T}</cref>.
     /// </summary>
-    internal class ObjectDefaultConverter<T> : JsonObjectConverter<T> where T : notnull
+    internal class ObjectDefaultConverter<T> : JsonObjectConverter<T>
+        where T : notnull
     {
         internal override bool CanHaveMetadata => true;
         internal override bool SupportsCreateObjectDelegate => true;

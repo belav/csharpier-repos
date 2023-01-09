@@ -89,7 +89,8 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
 
     public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
         IServiceProviderFactory<TContainerBuilder> factory
-    ) where TContainerBuilder : notnull
+    )
+        where TContainerBuilder : notnull
     {
         // ConfigureWebHostDefaults should never call this.
         throw new InvalidOperationException();
@@ -97,7 +98,8 @@ internal sealed class BootstrapHostBuilder : IHostBuilder
 
     public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
         Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-    ) where TContainerBuilder : notnull
+    )
+        where TContainerBuilder : notnull
     {
         // ConfigureWebHostDefaults should never call this.
         throw new InvalidOperationException();

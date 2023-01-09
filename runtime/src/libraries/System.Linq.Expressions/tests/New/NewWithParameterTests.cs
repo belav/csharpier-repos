@@ -103,7 +103,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckNewWithParameterGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             foreach (Ts value in new Ts[] { default(Ts), new Ts() })
             {
@@ -205,7 +206,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyWithParameterGenericWithStructRestriction<Ts>(
             Ts value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             ConstructorInfo constructor = typeof(Ts?).GetConstructor(new Type[] { typeof(Ts) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Ts)) };

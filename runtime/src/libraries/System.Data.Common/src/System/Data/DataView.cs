@@ -880,7 +880,8 @@ namespace System.Data
         internal Range FindRecords<TKey, TRow>(
             Index.ComparisonBySelector<TKey, TRow> comparison,
             TKey key
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             // TODO: This will throw NRE if _index isn't set (e.g. default ctor)
             return _index!.FindRecords(comparison, key);

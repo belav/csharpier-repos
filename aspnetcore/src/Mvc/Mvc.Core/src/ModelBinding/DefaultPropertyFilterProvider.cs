@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// Provides a expression based way to provide include properties.
 /// </summary>
 /// <typeparam name="TModel">The target model Type.</typeparam>
-public class DefaultPropertyFilterProvider<TModel> : IPropertyFilterProvider where TModel : class
+public class DefaultPropertyFilterProvider<TModel> : IPropertyFilterProvider
+    where TModel : class
 {
     private static readonly Func<ModelMetadata, bool> _default = (m) => true;
 

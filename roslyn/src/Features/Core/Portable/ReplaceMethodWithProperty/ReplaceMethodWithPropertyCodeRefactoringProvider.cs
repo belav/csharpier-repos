@@ -650,7 +650,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             Compilation compilation,
             TSymbol originalDefinition,
             CancellationToken cancellationToken
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             return originalDefinition
                     .GetSymbolKey(cancellationToken)

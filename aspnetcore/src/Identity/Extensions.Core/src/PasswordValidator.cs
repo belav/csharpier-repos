@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the default password policy for Identity.
 /// </summary>
 /// <typeparam name="TUser">The type that represents a user.</typeparam>
-public class PasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : class
+public class PasswordValidator<TUser> : IPasswordValidator<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Constructions a new instance of <see cref="PasswordValidator{TUser}"/>.

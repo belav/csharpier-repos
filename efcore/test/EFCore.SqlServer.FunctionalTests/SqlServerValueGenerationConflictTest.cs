@@ -134,7 +134,8 @@ public class SqlServerValueGenerationStrategyNoThrowTest
 }
 
 public class SqlServerValueGenerationConflictTest<TContext>
-    : IClassFixture<SqlServerValueGenerationStrategyFixture<TContext>> where TContext : DbContext
+    : IClassFixture<SqlServerValueGenerationStrategyFixture<TContext>>
+    where TContext : DbContext
 {
     public SqlServerValueGenerationConflictTest(
         SqlServerValueGenerationStrategyFixture<TContext> fixture

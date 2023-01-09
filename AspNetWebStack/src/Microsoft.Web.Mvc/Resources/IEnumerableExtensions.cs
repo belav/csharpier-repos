@@ -24,7 +24,8 @@ namespace Microsoft.Web.Mvc.Resources
 
         // This wrapper allows IEnumerable<T> to be serialized by DataContractSerilizer
         // it implements the minimal amount of surface needed for serialization.
-        private class IEnumerableWrapper<T> : IEnumerable<T> where T : class
+        private class IEnumerableWrapper<T> : IEnumerable<T>
+            where T : class
         {
             private IEnumerable<T> _collection;
 

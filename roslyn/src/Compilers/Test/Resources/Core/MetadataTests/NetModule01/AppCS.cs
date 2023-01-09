@@ -29,7 +29,8 @@ namespace AppCS
             Extension.ExtModChainA01(AppField01, "String Parameter Constant");
         }
 
-        protected NS.Module.CS01.CS02.ModClassImplImp<V> AppMethod<V>(V t) where V : class
+        protected NS.Module.CS01.CS02.ModClassImplImp<V> AppMethod<V>(V t)
+            where V : class
         {
             return null;
         }
@@ -62,7 +63,8 @@ namespace AppCS
 
 namespace AppCS
 {
-    public interface IContraVar<in CT> where CT : class
+    public interface IContraVar<in CT>
+        where CT : class
     {
         CT ContraGooProp { set; }
     }
@@ -77,7 +79,8 @@ namespace AppCS
         T NormalGoo(T t);
     }
 
-    internal class ContraInClass<CT1> : IContraVar<CT1> where CT1 : class
+    internal class ContraInClass<CT1> : IContraVar<CT1>
+        where CT1 : class
     {
         public CT1 ContraGooProp
         {
@@ -85,7 +88,8 @@ namespace AppCS
         }
     }
 
-    internal class CoOutClass<CO1> : ICoVar<CO1> where CO1 : new()
+    internal class CoOutClass<CO1> : ICoVar<CO1>
+        where CO1 : new()
     {
         public CO1 CoGooMethod()
         {

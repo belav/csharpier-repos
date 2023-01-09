@@ -105,7 +105,8 @@ public class PropertiesConfigurationBuilder<TProperty> : PropertiesConfiguration
     public new virtual PropertiesConfigurationBuilder<TProperty> HaveConversion<
         TConversion,
         TComparer
-    >() where TComparer : ValueComparer =>
+    >()
+        where TComparer : ValueComparer =>
         (PropertiesConfigurationBuilder<TProperty>)base.HaveConversion<TConversion, TComparer>();
 
     /// <summary>

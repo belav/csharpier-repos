@@ -18,7 +18,8 @@ internal static class ParameterPolicyActivator
         IServiceProvider serviceProvider,
         string inlineParameterPolicy,
         out string parameterPolicyKey
-    ) where T : IParameterPolicy
+    )
+        where T : IParameterPolicy
     {
         // IServiceProvider could be null
         // DefaultInlineConstraintResolver can be created without an IServiceProvider and then call this method

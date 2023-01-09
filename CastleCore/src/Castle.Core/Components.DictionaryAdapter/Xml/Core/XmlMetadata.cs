@@ -369,7 +369,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             return name.Length > 1 && name[0] == 'I' && char.IsUpper(name, 1);
         }
 
-        private static bool TryCast<T>(object obj, ref T result) where T : class
+        private static bool TryCast<T>(object obj, ref T result)
+            where T : class
         {
             var value = obj as T;
             if (null == value)

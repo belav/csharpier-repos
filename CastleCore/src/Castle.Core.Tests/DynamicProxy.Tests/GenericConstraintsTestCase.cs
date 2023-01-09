@@ -33,7 +33,8 @@ namespace Castle.DynamicProxy.Tests
             CreateProxyFor<IConstraint_Method1IsTypeStructAndMethod2<object>>();
         }
 
-        private T CreateProxyFor<T>(params IInterceptor[] interceptors) where T : class
+        private T CreateProxyFor<T>(params IInterceptor[] interceptors)
+            where T : class
         {
             return generator.CreateInterfaceProxyWithoutTarget<T>(interceptors);
         }

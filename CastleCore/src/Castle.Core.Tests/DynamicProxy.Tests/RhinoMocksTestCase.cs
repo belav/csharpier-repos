@@ -474,7 +474,8 @@ namespace Castle.DynamicProxy.Tests
 
     public interface IFactory2
     {
-        T Create<T>() where T : List<T>;
+        T Create<T>()
+            where T : List<T>;
     }
 
     public abstract class HasProtectedInternalAbstractMethod

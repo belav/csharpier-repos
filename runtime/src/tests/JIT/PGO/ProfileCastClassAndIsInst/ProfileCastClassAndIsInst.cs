@@ -58,7 +58,8 @@ public class Program
     static IGenericInterface<T> CastToGenericInterface<T>(object o) => (IGenericInterface<T>)o;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void AssertThrows<T>(Action action, [CallerLineNumber] int line = 0) where T : Exception
+    static void AssertThrows<T>(Action action, [CallerLineNumber] int line = 0)
+        where T : Exception
     {
         try
         {

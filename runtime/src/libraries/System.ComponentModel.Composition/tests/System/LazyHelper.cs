@@ -7,7 +7,8 @@ namespace System
 {
     internal static class LazyHelper
     {
-        public static Lazy<T> AsLazy<T>(this T t) where T : class
+        public static Lazy<T> AsLazy<T>(this T t)
+            where T : class
         {
             return new Lazy<T>(() => t, LazyThreadSafetyMode.PublicationOnly);
         }

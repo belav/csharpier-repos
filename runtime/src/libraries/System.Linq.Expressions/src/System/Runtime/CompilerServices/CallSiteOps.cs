@@ -24,7 +24,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static CallSite<T> CreateMatchmaker<T>(CallSite<T> site) where T : class
+        public static CallSite<T> CreateMatchmaker<T>(CallSite<T> site)
+            where T : class
         {
             var mm = CallSite<T>.CreateMatchMaker();
             // CallSiteOps.ClearMatch(mm);
@@ -85,7 +86,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static void AddRule<T>(CallSite<T> site, T rule) where T : class
+        public static void AddRule<T>(CallSite<T> site, T rule)
+            where T : class
         {
             site.AddRule(rule);
         }
@@ -100,7 +102,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static void UpdateRules<T>(CallSite<T> @this, int matched) where T : class
+        public static void UpdateRules<T>(CallSite<T> @this, int matched)
+            where T : class
         {
             if (matched > 1)
             {
@@ -118,7 +121,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static T[]? GetRules<T>(CallSite<T> site) where T : class
+        public static T[]? GetRules<T>(CallSite<T> site)
+            where T : class
         {
             return site.Rules;
         }
@@ -133,7 +137,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static RuleCache<T> GetRuleCache<T>(CallSite<T> site) where T : class
+        public static RuleCache<T> GetRuleCache<T>(CallSite<T> site)
+            where T : class
         {
             return site.Binder!.GetRuleCache<T>();
         }
@@ -149,7 +154,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static void MoveRule<T>(RuleCache<T> cache, T rule, int i) where T : class
+        public static void MoveRule<T>(RuleCache<T> cache, T rule, int i)
+            where T : class
         {
             if (i > 1)
             {
@@ -167,7 +173,8 @@ namespace System.Runtime.CompilerServices
             Obsolete("CallSiteOps has been deprecated and is not supported.", error: true),
             EditorBrowsable(EditorBrowsableState.Never)
         ]
-        public static T[] GetCachedRules<T>(RuleCache<T> cache) where T : class
+        public static T[] GetCachedRules<T>(RuleCache<T> cache)
+            where T : class
         {
             return cache.GetRules();
         }

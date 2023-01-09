@@ -46,7 +46,8 @@ namespace ILLink.RoslynAnalyzer
         internal static void AddIfNotNull<TSymbol>(
             ImmutableArray<TSymbol>.Builder properties,
             TSymbol? p
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             if (p != null)
             {

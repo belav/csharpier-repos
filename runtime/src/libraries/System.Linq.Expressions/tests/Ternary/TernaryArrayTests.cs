@@ -875,7 +875,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryArrayGenericWithClassRestrictionArrayHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             bool[] array1 = new bool[] { false, true };
             Tc[][] array2 = new Tc[][]
@@ -904,7 +905,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryArrayGenericWithSubClassRestrictionArrayHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             bool[] array1 = new bool[] { false, true };
             TC[][] array2 = new TC[][]
@@ -933,7 +935,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryArrayGenericWithClassAndNewRestrictionArrayHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             bool[] array1 = new bool[] { false, true };
             Tcn[][] array2 = new Tcn[][]
@@ -962,7 +965,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryArrayGenericWithSubClassAndNewRestrictionArrayHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             bool[] array1 = new bool[] { false, true };
             TCn[][] array2 = new TCn[][]
@@ -991,7 +995,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryArrayGenericWithStructRestrictionArrayHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             bool[] array1 = new bool[] { false, true };
             Ts[][] array2 = new Ts[][]
@@ -1622,7 +1627,8 @@ namespace System.Linq.Expressions.Tests
             Tc[] a,
             Tc[] b,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<Tc[]>> e = Expression.Lambda<Func<Tc[]>>(
                 Expression.Condition(
@@ -1642,7 +1648,8 @@ namespace System.Linq.Expressions.Tests
             TC[] a,
             TC[] b,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             Expression<Func<TC[]>> e = Expression.Lambda<Func<TC[]>>(
                 Expression.Condition(
@@ -1662,7 +1669,8 @@ namespace System.Linq.Expressions.Tests
             Tcn[] a,
             Tcn[] b,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<Tcn[]>> e = Expression.Lambda<Func<Tcn[]>>(
                 Expression.Condition(
@@ -1682,7 +1690,8 @@ namespace System.Linq.Expressions.Tests
             TCn[] a,
             TCn[] b,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Expression<Func<TCn[]>> e = Expression.Lambda<Func<TCn[]>>(
                 Expression.Condition(
@@ -1702,7 +1711,8 @@ namespace System.Linq.Expressions.Tests
             Ts[] a,
             Ts[] b,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts[]>> e = Expression.Lambda<Func<Ts[]>>(
                 Expression.Condition(

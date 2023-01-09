@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.ObjectPool;
 /// </summary>
 /// <typeparam name="T">The type to pool objects for.</typeparam>
 /// <remarks>This implementation keeps a cache of retained objects. This means that if objects are returned when the pool has already reached "maximumRetained" objects they will be available to be Garbage Collected.</remarks>
-public class DefaultObjectPool<T> : ObjectPool<T> where T : class
+public class DefaultObjectPool<T> : ObjectPool<T>
+    where T : class
 {
     private readonly Func<T> _createFunc;
     private readonly Func<T, bool> _returnFunc;

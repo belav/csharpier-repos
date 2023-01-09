@@ -120,7 +120,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) where TEnum : Enum
+        )
+            where TEnum : Enum
         {
             Type tEnum = typeof(TEnum);
 
@@ -361,7 +362,8 @@ namespace System.Formats.Asn1
         ///   <paramref name="expectedTag"/>.<see cref="Asn1Tag.TagValue"/> is not correct for
         ///   the method.
         /// </exception>
-        public TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null) where TEnum : Enum
+        public TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null)
+            where TEnum : Enum
         {
             TEnum ret = AsnDecoder.ReadEnumeratedValue<TEnum>(
                 _data.Span,

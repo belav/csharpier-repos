@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace Microsoft.TestCommon
 {
-    public class ValueTypeTestData<T> : TestData<T> where T : struct
+    public class ValueTypeTestData<T> : TestData<T>
+        where T : struct
     {
         private static readonly Type OpenNullableType = typeof(Nullable<>);
         private T[] testData;

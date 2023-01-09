@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractObjectCreationCompletionProvider<TSyntaxContext>
-        : AbstractSymbolCompletionProvider<TSyntaxContext> where TSyntaxContext : SyntaxContext
+        : AbstractSymbolCompletionProvider<TSyntaxContext>
+        where TSyntaxContext : SyntaxContext
     {
         /// <summary>
         /// Return null if not in object creation type context.

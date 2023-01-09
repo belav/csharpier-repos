@@ -38,7 +38,8 @@ public abstract class BulkUpdatesTestBase<TFixture> : IClassFixture<TFixture>
         Expression<Func<SetPropertyCalls<TResult>, SetPropertyCalls<TResult>>> setPropertyCalls,
         int rowsAffectedCount,
         Action<IReadOnlyList<TEntity>, IReadOnlyList<TEntity>> asserter = null
-    ) where TResult : class =>
+    )
+        where TResult : class =>
         BulkUpdatesAsserter.AssertUpdate(
             async,
             query,

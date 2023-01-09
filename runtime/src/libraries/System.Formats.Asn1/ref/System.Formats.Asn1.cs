@@ -224,7 +224,8 @@ namespace System.Formats.Asn1
             System.Formats.Asn1.AsnEncodingRules ruleSet,
             out int bytesConsumed,
             System.Formats.Asn1.Asn1Tag? expectedTag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TEnum : System.Enum
+        )
+            where TEnum : System.Enum
         {
             throw null;
         }
@@ -285,7 +286,8 @@ namespace System.Formats.Asn1
             System.Formats.Asn1.AsnEncodingRules ruleSet,
             out int bytesConsumed,
             System.Formats.Asn1.Asn1Tag? expectedTag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TFlagsEnum : System.Enum
+        )
+            where TFlagsEnum : System.Enum
         {
             throw null;
         }
@@ -584,7 +586,8 @@ namespace System.Formats.Asn1
 
         public TEnum ReadEnumeratedValue<TEnum>(
             System.Formats.Asn1.Asn1Tag? expectedTag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TEnum : System.Enum
+        )
+            where TEnum : System.Enum
         {
             throw null;
         }
@@ -627,7 +630,8 @@ namespace System.Formats.Asn1
 
         public TFlagsEnum ReadNamedBitListValue<TFlagsEnum>(
             System.Formats.Asn1.Asn1Tag? expectedTag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TFlagsEnum : System.Enum
+        )
+            where TFlagsEnum : System.Enum
         {
             throw null;
         }
@@ -913,7 +917,8 @@ namespace System.Formats.Asn1
         public void WriteEnumeratedValue<TEnum>(
             TEnum value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TEnum : System.Enum { }
+        )
+            where TEnum : System.Enum { }
 
         public void WriteGeneralizedTime(
             System.DateTimeOffset value,
@@ -960,7 +965,8 @@ namespace System.Formats.Asn1
         public void WriteNamedBitList<TEnum>(
             TEnum value,
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)
-        ) where TEnum : System.Enum { }
+        )
+            where TEnum : System.Enum { }
 
         public void WriteNull(
             System.Formats.Asn1.Asn1Tag? tag = default(System.Formats.Asn1.Asn1Tag?)

@@ -9,7 +9,8 @@ namespace Moq.Language.Flow
         : SetupPhrase,
             ISetup<T, TResult>,
             ISetupGetter<T, TResult>,
-            IReturnsResult<T> where T : class
+            IReturnsResult<T>
+        where T : class
     {
         public NonVoidSetupPhrase(MethodCall setup)
             : base(setup) { }

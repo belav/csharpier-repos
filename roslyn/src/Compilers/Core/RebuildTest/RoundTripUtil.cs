@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
         public static unsafe void VerifyRoundTrip<TCompilation>(
             TCompilation original,
             EmitOptions? emitOptions = null
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             Assert.True(original.SyntaxTrees.All(x => !string.IsNullOrEmpty(x.FilePath)));
             Assert.True(original.Options.Deterministic);

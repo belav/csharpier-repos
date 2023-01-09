@@ -231,7 +231,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseAutoProperty
 
         private static T? GetSingleStatementFromAccessor<T>(
             AccessorDeclarationSyntax? accessorDeclaration
-        ) where T : StatementSyntax
+        )
+            where T : StatementSyntax
         {
             var statements = accessorDeclaration?.Body?.Statements;
             if (statements?.Count == 1)

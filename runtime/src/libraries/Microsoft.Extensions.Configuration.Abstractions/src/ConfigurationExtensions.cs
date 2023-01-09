@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder Add<TSource>(
             this IConfigurationBuilder builder,
             Action<TSource>? configureSource
-        ) where TSource : IConfigurationSource, new()
+        )
+            where TSource : IConfigurationSource, new()
         {
             var source = new TSource();
             configureSource?.Invoke(source);

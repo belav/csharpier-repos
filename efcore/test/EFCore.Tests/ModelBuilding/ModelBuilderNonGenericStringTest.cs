@@ -127,7 +127,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
     }
 
     private class NonGenericStringTestEntityTypeBuilder<TEntity>
-        : NonGenericTestEntityTypeBuilder<TEntity> where TEntity : class
+        : NonGenericTestEntityTypeBuilder<TEntity>
+        where TEntity : class
     {
         public NonGenericStringTestEntityTypeBuilder(EntityTypeBuilder entityTypeBuilder)
             : base(entityTypeBuilder) { }
@@ -138,7 +139,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
 
         public override TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericStringTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsOne(
                     typeof(TRelatedEntity).FullName!,
@@ -149,7 +151,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
         public override TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsOne(
                     typeof(TRelatedEntity).FullName!,
@@ -168,7 +171,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             TRelatedEntity
         > OwnsMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsMany(
                     typeof(TRelatedEntity).FullName!,
@@ -179,7 +183,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
         public override TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsMany(
                     typeof(TRelatedEntity).FullName!,
@@ -196,7 +201,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericStringTestReferenceNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasOne(
                     typeof(TRelatedEntity).FullName!,
@@ -209,7 +215,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             TRelatedEntity
         > HasMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericTestCollectionNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasMany(
                     typeof(TRelatedEntity).FullName!,
@@ -380,7 +387,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             TNewDependentEntity
         > OwnsOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             new NonGenericStringTestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.OwnsOne(
                     typeof(TNewDependentEntity).FullName!,
@@ -394,7 +402,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
         > OwnsOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TEntity, TDependentEntity>(
                 OwnedNavigationBuilder.OwnsOne(
                     typeof(TNewDependentEntity).FullName!,
@@ -416,7 +425,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             Expression<
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.OwnsMany(
                     typeof(TNewDependentEntity).FullName!,
@@ -432,7 +442,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TEntity, TDependentEntity>(
                 OwnedNavigationBuilder.OwnsMany(
                     typeof(TNewDependentEntity).FullName!,
@@ -446,7 +457,8 @@ public class ModelBuilderNonGenericStringTest : ModelBuilderNonGenericTest
             TNewDependentEntity
         > HasOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>>? navigationExpression = null
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             new NonGenericStringTestReferenceNavigationBuilder<
                 TDependentEntity,
                 TNewDependentEntity

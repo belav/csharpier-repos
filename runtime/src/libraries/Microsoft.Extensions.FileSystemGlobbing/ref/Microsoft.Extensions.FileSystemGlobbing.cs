@@ -693,7 +693,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
     }
 
     public abstract partial class PatternContext<TFrame>
-        : Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext where TFrame : struct
+        : Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
+        where TFrame : struct
     {
         protected TFrame Frame;
 

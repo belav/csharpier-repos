@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal abstract class AbstractMemberScopedReferenceFinder<TSymbol>
-        : AbstractReferenceFinder<TSymbol> where TSymbol : ISymbol
+        : AbstractReferenceFinder<TSymbol>
+        where TSymbol : ISymbol
     {
         protected abstract bool TokensMatch(
             FindReferencesDocumentState state,

@@ -357,7 +357,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             }
         }
 
-        public static async Task<T> WaitForNotNullAsync<T>(Func<T?> action) where T : class
+        public static async Task<T> WaitForNotNullAsync<T>(Func<T?> action)
+            where T : class
         {
             var result = action();
 

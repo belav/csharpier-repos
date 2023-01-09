@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.Options
         /// <returns>Wrapped options object.</returns>
         public static IOptions<TOptions> Create<
             [DynamicallyAccessedMembers(DynamicallyAccessedMembers)] TOptions
-        >(TOptions options) where TOptions : class
+        >(TOptions options)
+            where TOptions : class
         {
             return new OptionsWrapper<TOptions>(options);
         }

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     /// Contains tests that ensure the correctness of any class that implements the generic
     /// IList interface
     /// </summary>
-    public abstract class IList_Generic_Tests<T> : ICollection_Generic_Tests<T> where T : notnull
+    public abstract class IList_Generic_Tests<T> : ICollection_Generic_Tests<T>
+        where T : notnull
     {
         #region IList<T> Helper Methods
 

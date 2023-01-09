@@ -1959,7 +1959,8 @@ public class DefaultEditorTemplatesTest
             throw new NotImplementedException();
         }
 
-        public IEnumerable<SelectListItem> GetEnumSelectList<TEnum>() where TEnum : struct
+        public IEnumerable<SelectListItem> GetEnumSelectList<TEnum>()
+            where TEnum : struct
         {
             throw new NotImplementedException();
         }

@@ -424,7 +424,8 @@ public class TypeExtensionsTest
 
     private class MultipleImplementor<TRandom, TElement>
         : IObservable<TRandom>,
-            IEnumerable<TElement> where TRandom : Random
+            IEnumerable<TElement>
+        where TRandom : Random
     {
         public IEnumerator<TElement> GetEnumerator() => throw new NotImplementedException();
 

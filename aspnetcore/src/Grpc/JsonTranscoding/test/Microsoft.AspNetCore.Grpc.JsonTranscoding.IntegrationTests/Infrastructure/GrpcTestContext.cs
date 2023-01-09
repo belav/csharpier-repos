@@ -15,7 +15,8 @@ public delegate void LogMessage(
     Exception? exception
 );
 
-internal class GrpcTestContext<TStartup> : IDisposable where TStartup : class
+internal class GrpcTestContext<TStartup> : IDisposable
+    where TStartup : class
 {
     private readonly Stopwatch _stopwatch;
     private readonly GrpcTestFixture<TStartup> _fixture;

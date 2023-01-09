@@ -65,7 +65,8 @@ namespace Roslyn.Utilities
 
         private ImmutableArray<Registry<TEventHandler>> GetRegistries<TEventHandler>(
             string eventName
-        ) where TEventHandler : class
+        )
+            where TEventHandler : class
         {
             using (_guard.DisposableWait())
             {
@@ -75,7 +76,8 @@ namespace Roslyn.Utilities
 
         private ImmutableArray<Registry<TEventHandler>> GetRegistries_NoLock<TEventHandler>(
             string eventName
-        ) where TEventHandler : class
+        )
+            where TEventHandler : class
         {
             _guard.AssertHasLock();
             if (_eventNameToRegistries.TryGetValue(eventName, out var registries))
@@ -89,7 +91,8 @@ namespace Roslyn.Utilities
         private void SetRegistries_NoLock<TEventHandler>(
             string eventName,
             ImmutableArray<Registry<TEventHandler>> registries
-        ) where TEventHandler : class
+        )
+            where TEventHandler : class
         {
             _guard.AssertHasLock();
 
@@ -141,7 +144,8 @@ namespace Roslyn.Utilities
             public override int GetHashCode() => _handler == null ? 0 : _handler.GetHashCode();
         }
 
-        internal struct EventHandlerSet<TEventHandler> where TEventHandler : class
+        internal struct EventHandlerSet<TEventHandler>
+            where TEventHandler : class
         {
             private readonly ImmutableArray<Registry<TEventHandler>> _registries;
 

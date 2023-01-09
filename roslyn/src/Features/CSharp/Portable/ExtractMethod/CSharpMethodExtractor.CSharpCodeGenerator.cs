@@ -948,7 +948,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 TDeclarationNode method,
                 BlockSyntax body,
                 ArrowExpressionClauseSyntax expressionBody
-            ) where TDeclarationNode : SyntaxNode
+            )
+                where TDeclarationNode : SyntaxNode
             {
                 if (body != null)
                 {

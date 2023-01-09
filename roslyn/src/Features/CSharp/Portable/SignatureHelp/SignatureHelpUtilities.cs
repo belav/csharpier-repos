@@ -195,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
         internal static bool IsTriggerParenOrComma<TSyntaxNode>(
             SyntaxToken token,
             Func<char, bool> isTriggerCharacter
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // Don't dismiss if the user types ( to start a parenthesized expression or tuple
             // Note that the tuple initially parses as a parenthesized expression

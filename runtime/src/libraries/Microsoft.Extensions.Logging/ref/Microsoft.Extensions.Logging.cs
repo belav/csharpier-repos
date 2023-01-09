@@ -129,7 +129,8 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter<T>(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -137,7 +138,8 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.ILoggingBuilder AddFilter<T>(
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             System.Func<string?, Microsoft.Extensions.Logging.LogLevel, bool> categoryLevelFilter
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -146,7 +148,8 @@ namespace Microsoft.Extensions.Logging
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string? category,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -155,7 +158,8 @@ namespace Microsoft.Extensions.Logging
             this Microsoft.Extensions.Logging.ILoggingBuilder builder,
             string? category,
             Microsoft.Extensions.Logging.LogLevel level
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -163,7 +167,8 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter<T>(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -171,7 +176,8 @@ namespace Microsoft.Extensions.Logging
         public static Microsoft.Extensions.Logging.LoggerFilterOptions AddFilter<T>(
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             System.Func<string?, Microsoft.Extensions.Logging.LogLevel, bool> categoryLevelFilter
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -180,7 +186,8 @@ namespace Microsoft.Extensions.Logging
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             string? category,
             System.Func<Microsoft.Extensions.Logging.LogLevel, bool> levelFilter
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }
@@ -189,7 +196,8 @@ namespace Microsoft.Extensions.Logging
             this Microsoft.Extensions.Logging.LoggerFilterOptions builder,
             string? category,
             Microsoft.Extensions.Logging.LogLevel level
-        ) where T : Microsoft.Extensions.Logging.ILoggerProvider
+        )
+            where T : Microsoft.Extensions.Logging.ILoggerProvider
         {
             throw null;
         }

@@ -11,14 +11,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 {
     public class RelationalModelBuilderTest : ModelBuilderTest
     {
-        public abstract class TestTableBuilder<TEntity> where TEntity : class
+        public abstract class TestTableBuilder<TEntity>
+            where TEntity : class
         {
             public abstract TestTableBuilder<TEntity> ExcludeFromMigrations(bool excluded = true);
         }
 
         public class GenericTestTableBuilder<TEntity>
             : TestTableBuilder<TEntity>,
-                IInfrastructure<TableBuilder<TEntity>> where TEntity : class
+                IInfrastructure<TableBuilder<TEntity>>
+            where TEntity : class
         {
             public GenericTestTableBuilder(TableBuilder<TEntity> tableBuilder)
             {
@@ -38,7 +40,8 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
         public class NonGenericTestTableBuilder<TEntity>
             : TestTableBuilder<TEntity>,
-                IInfrastructure<TableBuilder> where TEntity : class
+                IInfrastructure<TableBuilder>
+            where TEntity : class
         {
             public NonGenericTestTableBuilder(TableBuilder tableBuilder)
             {

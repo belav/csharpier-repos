@@ -1471,7 +1471,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
             this IEnumerable<TSource?> source,
             TSource? seed,
             Func<TSource?, TSource?, bool> lesser
-        ) where TSource : struct
+        )
+            where TSource : struct
         {
             CheckNotNull(source, "source");
             MiscellaneousUtils.Assert(lesser != null);
@@ -1986,7 +1987,8 @@ namespace Newtonsoft.Json.Utilities.LinqBridge
         }
 
         [DebuggerStepThrough]
-        private static void CheckNotNull<T>(T value, string name) where T : class
+        private static void CheckNotNull<T>(T value, string name)
+            where T : class
         {
             if (value == null)
                 throw new ArgumentNullException(name);

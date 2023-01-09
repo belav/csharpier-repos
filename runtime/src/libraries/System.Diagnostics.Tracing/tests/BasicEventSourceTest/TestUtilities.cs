@@ -59,7 +59,8 @@ namespace BasicEventSourceTests
         /// <typeparam name="T">The type to unwrap</typeparam>
         /// <param name="wrappedValue">Value returned from event payload</param>
         /// <returns></returns>
-        public static T? UnwrapNullable<T>(object wrappedValue) where T : struct
+        public static T? UnwrapNullable<T>(object wrappedValue)
+            where T : struct
         {
             // ETW will return a collection of key/value pairs
             if (wrappedValue is IDictionary<string, object> dict)

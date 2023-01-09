@@ -274,7 +274,8 @@ namespace System.Tests
 
     public class GenericClassWithNoConstraints<T> { }
 
-    public class GenericClassWithConstraints<T> where T : ClassWithInterfaces, Interface1 { }
+    public class GenericClassWithConstraints<T>
+        where T : ClassWithInterfaces, Interface1 { }
 
     namespace Inner
     {

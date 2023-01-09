@@ -161,7 +161,8 @@ public class PropertiesConfigurationBuilder
         TConversion,
         TComparer,
         TProviderComparer
-    >() where TComparer : ValueComparer =>
+    >()
+        where TComparer : ValueComparer =>
         HaveConversion(typeof(TConversion), typeof(TComparer), typeof(TProviderComparer));
 
     /// <summary>

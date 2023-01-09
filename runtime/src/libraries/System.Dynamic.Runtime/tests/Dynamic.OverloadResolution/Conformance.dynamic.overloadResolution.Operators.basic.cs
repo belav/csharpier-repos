@@ -1258,7 +1258,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
             T exp_undervalue,
             string tip,
             Func<dynamic, dynamic> test
-        ) where T : struct
+        )
+            where T : struct
         {
             int flag = 1;
             try

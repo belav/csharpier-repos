@@ -121,7 +121,8 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
     public new virtual PropertyBuilder<TProperty> HasValueGenerator<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             TGenerator
-    >() where TGenerator : ValueGenerator =>
+    >()
+        where TGenerator : ValueGenerator =>
         (PropertyBuilder<TProperty>)base.HasValueGenerator<TGenerator>();
 
     /// <summary>
@@ -208,7 +209,8 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public new virtual PropertyBuilder<TProperty> HasValueGeneratorFactory<
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
-    >() where TFactory : ValueGeneratorFactory =>
+    >()
+        where TFactory : ValueGeneratorFactory =>
         (PropertyBuilder<TProperty>)base.HasValueGeneratorFactory<TFactory>();
 
     /// <summary>
@@ -575,7 +577,8 @@ public class PropertyBuilder<TProperty> : PropertyBuilder
             TConversion,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             TComparer
-    >() where TComparer : ValueComparer =>
+    >()
+        where TComparer : ValueComparer =>
         (PropertyBuilder<TProperty>)base.HasConversion<TConversion, TComparer>();
 
     /// <summary>

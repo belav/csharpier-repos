@@ -642,7 +642,8 @@ namespace System.Runtime.CompilerServices
             Compilation comp,
             string expectedDecisionDag,
             int index = 0
-        ) where T : CSharpSyntaxNode
+        )
+            where T : CSharpSyntaxNode
         {
 #if DEBUG
             var tree = comp.SyntaxTrees.First();

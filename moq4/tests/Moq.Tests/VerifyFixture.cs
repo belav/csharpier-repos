@@ -1889,8 +1889,10 @@ namespace Moq.Tests
 
         public interface IBaz
         {
-            void Call<T>(T param) where T : IBazParam;
-            void Subscribe<T>() where T : IBazParam;
+            void Call<T>(T param)
+                where T : IBazParam;
+            void Subscribe<T>()
+                where T : IBazParam;
             void Subscribe();
         }
 

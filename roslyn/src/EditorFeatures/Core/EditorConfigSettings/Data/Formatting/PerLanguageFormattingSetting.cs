@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal sealed class PerLanguageFormattingSetting<T> : FormattingSetting where T : notnull
+    internal sealed class PerLanguageFormattingSetting<T> : FormattingSetting
+        where T : notnull
     {
         private bool _isValueSet;
         private T? _value;

@@ -39,7 +39,8 @@ public static class IdentityServiceCollectionUIExtensions
     public static IdentityBuilder AddDefaultIdentity<TUser>(
         this IServiceCollection services,
         Action<IdentityOptions> configureOptions
-    ) where TUser : class
+    )
+        where TUser : class
     {
         services
             .AddAuthentication(o =>

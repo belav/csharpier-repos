@@ -7,7 +7,8 @@ interface IConstraint
     bool Eq(IConstraint b);
 }
 
-class Generic<A, B, C, D, E, F, G, H, T> where T : IConstraint
+class Generic<A, B, C, D, E, F, G, H, T>
+    where T : IConstraint
 {
     public bool Eq(T a, T b)
     {

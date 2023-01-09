@@ -100,7 +100,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
     }
 
     private class GenericStringTestEntityTypeBuilder<TEntity>
-        : GenericTestEntityTypeBuilder<TEntity> where TEntity : class
+        : GenericTestEntityTypeBuilder<TEntity>
+        where TEntity : class
     {
         public GenericStringTestEntityTypeBuilder(EntityTypeBuilder<TEntity> entityTypeBuilder)
             : base(entityTypeBuilder) { }
@@ -111,7 +112,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
 
         public override TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericStringTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsOne<TRelatedEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -121,7 +123,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
         public override TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsOne<TRelatedEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName(),
@@ -137,7 +140,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             TRelatedEntity
         > OwnsMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericStringTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsMany<TRelatedEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -147,7 +151,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
         public override TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsMany<TRelatedEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName(),
@@ -163,7 +168,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericStringTestReferenceNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasOne<TRelatedEntity>(
                     navigationExpression?.GetMemberAccess().GetSimpleMemberName()
@@ -175,7 +181,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             TRelatedEntity
         > HasMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericStringTestCollectionNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasMany<TRelatedEntity>(
                     navigationExpression?.GetMemberAccess().GetSimpleMemberName()
@@ -398,7 +405,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             TNewDependentEntity
         > OwnsOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap(
                 OwnedNavigationBuilder.OwnsOne<TNewDependentEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -411,7 +419,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
         > OwnsOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap(
                 OwnedNavigationBuilder.OwnsOne<TNewDependentEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName(),
@@ -426,7 +435,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             Expression<
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap(
                 OwnedNavigationBuilder.OwnsMany<TNewDependentEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -441,7 +451,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap(
                 OwnedNavigationBuilder.OwnsMany<TNewDependentEntity>(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName(),
@@ -454,7 +465,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             TNewRelatedEntity
         > HasOne<TNewRelatedEntity>(
             Expression<Func<TDependentEntity, TNewRelatedEntity?>>? navigationExpression = null
-        ) where TNewRelatedEntity : class =>
+        )
+            where TNewRelatedEntity : class =>
             new GenericStringTestReferenceNavigationBuilder<TDependentEntity, TNewRelatedEntity>(
                 OwnedNavigationBuilder.HasOne<TNewRelatedEntity>(
                     navigationExpression?.GetMemberAccess().GetSimpleMemberName()

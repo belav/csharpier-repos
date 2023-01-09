@@ -24,18 +24,22 @@ namespace Microsoft.CodeAnalysis.LanguageService
         TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
             TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode;
+        )
+            where TSyntaxNode : SyntaxNode;
 
         ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode;
+        )
+            where TSyntaxNode : SyntaxNode;
 
         TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode;
+        )
+            where TSyntaxNode : SyntaxNode;
         TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode;
+        )
+            where TSyntaxNode : SyntaxNode;
     }
 }

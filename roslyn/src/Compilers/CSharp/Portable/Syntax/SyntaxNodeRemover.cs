@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             TRoot root,
             IEnumerable<SyntaxNode> nodes,
             SyntaxRemoveOptions options
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             if (nodes == null)
             {

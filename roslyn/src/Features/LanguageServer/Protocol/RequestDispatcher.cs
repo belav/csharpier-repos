@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             LSP.ClientCapabilities clientCapabilities,
             RequestExecutionQueue queue,
             CancellationToken cancellationToken
-        ) where TRequestType : class
+        )
+            where TRequestType : class
         {
             // Get the handler matching the requested method.
             var requestHandlerMetadata = new RequestHandlerMetadata(
@@ -174,7 +175,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             LSP.ClientCapabilities clientCapabilities,
             string methodName,
             CancellationToken cancellationToken
-        ) where TRequestType : class
+        )
+            where TRequestType : class
         {
             return queue.ExecuteAsync(
                 mutatesSolutionState,

@@ -161,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 ServiceRpcDescriptor descriptor,
                 ServiceActivationOptions options,
                 CancellationToken cancellationToken
-            ) where T : class
+            )
+                where T : class
             {
                 var pipePair = FullDuplexStream.CreatePipePair();
 

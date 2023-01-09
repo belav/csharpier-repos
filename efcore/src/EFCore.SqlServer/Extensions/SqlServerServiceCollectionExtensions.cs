@@ -60,7 +60,8 @@ public static class SqlServerServiceCollectionExtensions
         string? connectionString,
         Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null,
         Action<DbContextOptionsBuilder>? optionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         serviceCollection.AddDbContext<TContext>(
             (_, options) =>
             {

@@ -20,7 +20,8 @@ public sealed class Derived : Base<IB>
     public sealed override A Key => default;
 }
 
-public abstract class Base<B> : Base where B : IB
+public abstract class Base<B> : Base
+    where B : IB
 {
     public sealed override B Value => null;
 }

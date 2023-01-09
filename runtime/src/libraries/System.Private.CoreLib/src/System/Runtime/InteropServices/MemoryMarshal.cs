@@ -29,7 +29,8 @@ namespace System.Runtime.InteropServices
         /// Thrown if the Length property of the new Span would exceed int.MaxValue.
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Span<byte> AsBytes<T>(Span<T> span) where T : struct
+        public static unsafe Span<byte> AsBytes<T>(Span<T> span)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
                 ThrowHelper.ThrowInvalidTypeWithPointersNotSupported(typeof(T));
@@ -52,7 +53,8 @@ namespace System.Runtime.InteropServices
         /// Thrown if the Length property of the new Span would exceed int.MaxValue.
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe ReadOnlySpan<byte> AsBytes<T>(ReadOnlySpan<T> span) where T : struct
+        public static unsafe ReadOnlySpan<byte> AsBytes<T>(ReadOnlySpan<T> span)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
                 ThrowHelper.ThrowInvalidTypeWithPointersNotSupported(typeof(T));
@@ -349,7 +351,8 @@ namespace System.Runtime.InteropServices
         public static bool TryGetMemoryManager<T, TManager>(
             ReadOnlyMemory<T> memory,
             [NotNullWhen(true)] out TManager? manager
-        ) where TManager : MemoryManager<T>
+        )
+            where TManager : MemoryManager<T>
         {
             TManager? localManager; // Use register for null comparison rather than byref
             manager = localManager = memory.GetObjectStartLength(out _, out _) as TManager;
@@ -374,7 +377,8 @@ namespace System.Runtime.InteropServices
             [NotNullWhen(true)] out TManager? manager,
             out int start,
             out int length
-        ) where TManager : MemoryManager<T>
+        )
+            where TManager : MemoryManager<T>
         {
             TManager? localManager; // Use register for null comparison rather than byref
             manager = localManager = memory.GetObjectStartLength(out start, out length) as TManager;
@@ -440,7 +444,8 @@ namespace System.Runtime.InteropServices
         /// Reads a structure of type T out of a read-only span of bytes.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe T Read<T>(ReadOnlySpan<byte> source) where T : struct
+        public static unsafe T Read<T>(ReadOnlySpan<byte> source)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
@@ -478,7 +483,8 @@ namespace System.Runtime.InteropServices
         /// Writes a structure of type T into a span of bytes.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe void Write<T>(Span<byte> destination, ref T value) where T : struct
+        public static unsafe void Write<T>(Span<byte> destination, ref T value)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
@@ -496,7 +502,8 @@ namespace System.Runtime.InteropServices
         /// </summary>
         /// <returns>If the span is too small to contain the type T, return false.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe bool TryWrite<T>(Span<byte> destination, ref T value) where T : struct
+        public static unsafe bool TryWrite<T>(Span<byte> destination, ref T value)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
@@ -518,7 +525,8 @@ namespace System.Runtime.InteropServices
         /// Supported only for platforms that support misaligned memory access or when the memory block is aligned by other means.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe ref T AsRef<T>(Span<byte> span) where T : struct
+        public static unsafe ref T AsRef<T>(Span<byte> span)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
@@ -539,7 +547,8 @@ namespace System.Runtime.InteropServices
         /// Supported only for platforms that support misaligned memory access or when the memory block is aligned by other means.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe ref readonly T AsRef<T>(ReadOnlySpan<byte> span) where T : struct
+        public static unsafe ref readonly T AsRef<T>(ReadOnlySpan<byte> span)
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {

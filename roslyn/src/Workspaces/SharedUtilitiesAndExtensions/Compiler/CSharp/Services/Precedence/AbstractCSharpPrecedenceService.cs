@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Precedence;
 namespace Microsoft.CodeAnalysis.CSharp.Precedence
 {
     internal abstract class AbstractCSharpPrecedenceService<TSyntax>
-        : AbstractPrecedenceService<TSyntax, OperatorPrecedence> where TSyntax : SyntaxNode
+        : AbstractPrecedenceService<TSyntax, OperatorPrecedence>
+        where TSyntax : SyntaxNode
     {
         protected AbstractCSharpPrecedenceService() { }
 

@@ -125,7 +125,8 @@ public interface IMappingExpression<TSource, TDestination>
     /// Override the destination type mapping for looking up configuration and instantiation
     /// </summary>
     /// <typeparam name="T">Destination type to use</typeparam>
-    void As<T>() where T : TDestination;
+    void As<T>()
+        where T : TDestination;
 }
 
 public interface IProjectionExpression<TSource, TDestination, TMappingExpression>

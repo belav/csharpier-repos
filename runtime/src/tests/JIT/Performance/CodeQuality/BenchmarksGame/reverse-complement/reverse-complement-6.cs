@@ -67,7 +67,8 @@ namespace BenchmarksGame
             }
         }
 
-        static bool tryTake<T>(BlockingCollection<T> q, out T t) where T : class
+        static bool tryTake<T>(BlockingCollection<T> q, out T t)
+            where T : class
         {
             t = null;
             var wait = new SpinWait();

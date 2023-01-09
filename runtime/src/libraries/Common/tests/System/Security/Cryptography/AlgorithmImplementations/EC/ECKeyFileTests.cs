@@ -9,7 +9,8 @@ using Xunit;
 namespace System.Security.Cryptography.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public abstract partial class ECKeyFileTests<T> where T : ECAlgorithm
+    public abstract partial class ECKeyFileTests<T>
+        where T : ECAlgorithm
     {
         protected abstract T CreateKey();
         protected abstract void Exercise(T key);

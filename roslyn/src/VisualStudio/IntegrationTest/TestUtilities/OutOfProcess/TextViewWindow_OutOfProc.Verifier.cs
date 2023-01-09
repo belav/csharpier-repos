@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 {
     public abstract partial class TextViewWindow_OutOfProc : OutOfProcComponent
     {
-        public class Verifier<TTextViewWindow> where TTextViewWindow : TextViewWindow_OutOfProc
+        public class Verifier<TTextViewWindow>
+            where TTextViewWindow : TextViewWindow_OutOfProc
         {
             protected readonly TTextViewWindow _textViewWindow;
             protected readonly VisualStudioInstance _instance;

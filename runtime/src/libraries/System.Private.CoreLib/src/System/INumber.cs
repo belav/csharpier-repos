@@ -28,7 +28,8 @@ namespace System
             ISpanParseable<TSelf>, // implies IParseable<TSelf>
             ISubtractionOperators<TSelf, TSelf, TSelf>,
             IUnaryNegationOperators<TSelf, TSelf>,
-            IUnaryPlusOperators<TSelf, TSelf> where TSelf : INumber<TSelf>
+            IUnaryPlusOperators<TSelf, TSelf>
+        where TSelf : INumber<TSelf>
     {
         /// <summary>Gets the value <c>1</c> for the type.</summary>
         static abstract TSelf One { get; }
@@ -56,21 +57,24 @@ namespace System
         /// <returns>An instance of <typeparamref name="TSelf" /> created from <paramref name="value" />.</returns>
         /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <typeparamref name="TSelf" />.</exception>
-        static abstract TSelf Create<TOther>(TOther value) where TOther : INumber<TOther>;
+        static abstract TSelf Create<TOther>(TOther value)
+            where TOther : INumber<TOther>;
 
         /// <summary>Creates an instance of the current type from a value, saturating any values that fall outside the representable range of the current type.</summary>
         /// <typeparam name="TOther">The type of <paramref name="value" />.</typeparam>
         /// <param name="value">The value which is used to create the instance of <typeparamref name="TSelf" />.</param>
         /// <returns>An instance of <typeparamref name="TSelf" /> created from <paramref name="value" />, saturating if <paramref name="value" /> falls outside the representable range of <typeparamref name="TSelf" />.</returns>
         /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
-        static abstract TSelf CreateSaturating<TOther>(TOther value) where TOther : INumber<TOther>;
+        static abstract TSelf CreateSaturating<TOther>(TOther value)
+            where TOther : INumber<TOther>;
 
         /// <summary>Creates an instance of the current type from a value, truncating any values that fall outside the representable range of the current type.</summary>
         /// <typeparam name="TOther">The type of <paramref name="value" />.</typeparam>
         /// <param name="value">The value which is used to create the instance of <typeparamref name="TSelf" />.</param>
         /// <returns>An instance of <typeparamref name="TSelf" /> created from <paramref name="value" />, truncating if <paramref name="value" /> falls outside the representable range of <typeparamref name="TSelf" />.</returns>
         /// <exception cref="NotSupportedException"><typeparamref name="TOther" /> is not supported.</exception>
-        static abstract TSelf CreateTruncating<TOther>(TOther value) where TOther : INumber<TOther>;
+        static abstract TSelf CreateTruncating<TOther>(TOther value)
+            where TOther : INumber<TOther>;
 
         /// <summary>Computes the quotient and remainder of two values.</summary>
         /// <param name="left">The value which <paramref name="right" /> divides.</param>
@@ -181,7 +185,8 @@ namespace System
     /// <summary>Defines a number type which can represent both positive and negative values.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface ISignedNumber<TSelf> : INumber<TSelf> where TSelf : ISignedNumber<TSelf>
+    public interface ISignedNumber<TSelf> : INumber<TSelf>
+        where TSelf : ISignedNumber<TSelf>
     {
         /// <summary>Gets the value <c>-1</c> for the type.</summary>
         static abstract TSelf NegativeOne { get; }

@@ -15,7 +15,8 @@ namespace System.Xml.Xsl.IlGen
     /// This internal class maintains a list of unique values.  Each unique value is assigned a unique ID, which can
     /// be used to quickly access the value, since it corresponds to the value's position in the list.
     /// </summary>
-    internal sealed class UniqueList<T> where T : notnull
+    internal sealed class UniqueList<T>
+        where T : notnull
     {
         private readonly Dictionary<T, int> _lookup = new Dictionary<T, int>();
         private readonly List<T> _list = new List<T>();

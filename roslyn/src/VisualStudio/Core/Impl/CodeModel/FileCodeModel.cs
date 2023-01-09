@@ -408,7 +408,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             });
         }
 
-        internal T PerformEdit<T>(Func<Document, Tuple<T, Document>> action) where T : SyntaxNode
+        internal T PerformEdit<T>(Func<Document, Tuple<T, Document>> action)
+            where T : SyntaxNode
         {
             return EnsureEditor(() =>
             {

@@ -156,7 +156,8 @@ namespace System.Security.Cryptography
             Stream source,
             Memory<byte> destination,
             CancellationToken cancellationToken
-        ) where T : ILiteHash
+        )
+            where T : ILiteHash
         {
             using (hash)
             {
@@ -193,7 +194,8 @@ namespace System.Security.Cryptography
             T hash,
             Stream source,
             CancellationToken cancellationToken
-        ) where T : ILiteHash
+        )
+            where T : ILiteHash
         {
             byte[] result = new byte[hash.HashSizeInBytes];
             int written = await ProcessStreamAsync(hash, source, result, cancellationToken)

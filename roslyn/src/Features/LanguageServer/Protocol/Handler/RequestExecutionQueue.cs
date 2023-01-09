@@ -137,7 +137,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             ClientCapabilities clientCapabilities,
             string methodName,
             CancellationToken requestCancellationToken
-        ) where TRequestType : class
+        )
+            where TRequestType : class
         {
             // Note: If the queue is not accepting any more items then TryEnqueue below will fail.
 

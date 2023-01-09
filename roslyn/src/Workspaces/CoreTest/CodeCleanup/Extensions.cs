@@ -45,16 +45,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
             return TextSpan.FromBounds(previousToken.SpanStart, endToken.Span.End);
         }
 
-        public static T GetMember<T>(this Document document, int index) where T : SyntaxNode =>
-            (T)document.GetSyntaxRootAsync().Result.GetMember(index);
+        public static T GetMember<T>(this Document document, int index)
+            where T : SyntaxNode => (T)document.GetSyntaxRootAsync().Result.GetMember(index);
 
-        public static T GetMember<T>(this T node, int index) where T : SyntaxNode
+        public static T GetMember<T>(this T node, int index)
+            where T : SyntaxNode
         {
             dynamic d = node;
             return (T)d.Members[index];
         }
 
-        public static T RemoveCSharpMember<T>(this T node, int index) where T : SyntaxNode
+        public static T RemoveCSharpMember<T>(this T node, int index)
+            where T : SyntaxNode
         {
             var newMembers = CSharp.SyntaxFactory.List(
                 node.RemoveMember<CSharp.Syntax.MemberDeclarationSyntax>(index)
@@ -68,7 +70,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeCleanup
             this T node,
             CSharp.Syntax.MemberDeclarationSyntax member,
             int index
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var newMembers = CSharp.SyntaxFactory.List(
                 node.AddMember<CSharp.Syntax.MemberDeclarationSyntax>(member, index)

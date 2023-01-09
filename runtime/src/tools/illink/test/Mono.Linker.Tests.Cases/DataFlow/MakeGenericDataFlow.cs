@@ -198,11 +198,13 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class NewConstraint
             {
-                class GenericWithNewConstraint<T> where T : new() { }
+                class GenericWithNewConstraint<T>
+                    where T : new() { }
 
                 class GenericWithNewConstraintAndAnnotations<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
-                > where T : new() { }
+                >
+                    where T : new() { }
 
                 static void SpecificType()
                 {
@@ -269,7 +271,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class StructConstraint
             {
-                class GenericWithStructConstraint<T> where T : struct { }
+                class GenericWithStructConstraint<T>
+                    where T : struct { }
 
                 static void SpecificType()
                 {
@@ -305,7 +308,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class UnmanagedConstraint
             {
-                class GenericWithUnmanagedConstraint<T> where T : unmanaged { }
+                class GenericWithUnmanagedConstraint<T>
+                    where T : unmanaged { }
 
                 static void SpecificType()
                 {
@@ -890,14 +894,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class NewConstraint
             {
-                static void GenericWithNewConstraint<T>() where T : new()
+                static void GenericWithNewConstraint<T>()
+                    where T : new()
                 {
                     var t = new T();
                 }
 
                 static void GenericWithNewConstraintAndAnnotations<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
-                >() where T : new() { }
+                >()
+                    where T : new() { }
 
                 static void SpecificType()
                 {
@@ -992,7 +998,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class StructConstraint
             {
-                static void GenericWithStructConstraint<T>() where T : struct
+                static void GenericWithStructConstraint<T>()
+                    where T : struct
                 {
                     var t = new T();
                 }
@@ -1046,7 +1053,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class UnmanagedConstraint
             {
-                static void GenericWithUnmanagedConstraint<T>() where T : unmanaged
+                static void GenericWithUnmanagedConstraint<T>()
+                    where T : unmanaged
                 {
                     var t = new T();
                 }

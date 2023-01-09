@@ -320,7 +320,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     public static class ValueComparable
     {
         // Convenience method so the compiler can work its type inference magic.
-        public static ValueComparable<T> Create<T>(T value) where T : IComparable<T>
+        public static ValueComparable<T> Create<T>(T value)
+            where T : IComparable<T>
         {
             return new ValueComparable<T>(value);
         }

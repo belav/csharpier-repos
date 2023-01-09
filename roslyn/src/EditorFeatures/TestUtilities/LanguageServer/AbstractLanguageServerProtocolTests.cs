@@ -52,7 +52,8 @@ namespace Roslyn.Test.Utilities
 
         private class TestSpanMapperProvider : IDocumentServiceProvider
         {
-            TService? IDocumentServiceProvider.GetService<TService>() where TService : class =>
+            TService? IDocumentServiceProvider.GetService<TService>()
+                where TService : class =>
                 typeof(TService) == typeof(ISpanMappingService)
                     ? (TService)(object)new TestSpanMapper()
                     : null;
@@ -828,7 +829,8 @@ namespace Roslyn.Test.Utilities
                 string methodName,
                 RequestType request,
                 CancellationToken cancellationToken
-            ) where RequestType : class
+            )
+                where RequestType : class
             {
                 // If creating the LanguageServer threw we might timeout without this.
                 var result = await _clientRpc
@@ -982,7 +984,8 @@ namespace Roslyn.Test.Utilities
             internal AbstractLanguageServer<RequestContext>.TestAccessor GetServerAccessor() =>
                 LanguageServer.GetTestAccessor();
 
-            internal T GetRequiredLspService<T>() where T : class, ILspService =>
+            internal T GetRequiredLspService<T>()
+                where T : class, ILspService =>
                 LanguageServer.GetTestAccessor().GetRequiredLspService<T>();
 
             internal ImmutableArray<SourceText> GetTrackedTexts() =>

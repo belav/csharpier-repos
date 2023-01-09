@@ -1270,7 +1270,8 @@ namespace Mono.Linker
             return step;
         }
 
-        TStep? ResolveStep<TStep>(string type, Assembly assembly) where TStep : class
+        TStep? ResolveStep<TStep>(string type, Assembly assembly)
+            where TStep : class
         {
             // Ignore warning, since we're just enabling analyzer for dogfooding
 #pragma warning disable IL2026

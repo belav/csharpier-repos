@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Indentation
 {
     internal abstract partial class AbstractIndentationService<TSyntaxRoot>
         : AbstractIndentation<TSyntaxRoot>,
-            IIndentationService where TSyntaxRoot : SyntaxNode, ICompilationUnitSyntax
+            IIndentationService
+        where TSyntaxRoot : SyntaxNode, ICompilationUnitSyntax
     {
         public IndentationResult GetIndentation(
             ParsedDocument document,

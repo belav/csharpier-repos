@@ -67,7 +67,8 @@ namespace System.Reflection.Runtime.TypeInfos
             //
             //  BindingFlags == Public | NonPublic | Instance | Static | FlattenHierarchy
             //
-            public QueriedMemberList<M> GetQueriedMembers<M>() where M : MemberInfo
+            public QueriedMemberList<M> GetQueriedMembers<M>()
+                where M : MemberInfo
             {
                 int index = MemberPolicies<M>.MemberTypeIndex;
                 object result = Volatile.Read(ref _nameAgnosticQueryCaches[index]);
@@ -142,7 +143,8 @@ namespace System.Reflection.Runtime.TypeInfos
             // In addition, if "ignoreCase" was passed to the constructor, BindingFlags.IgnoreCase is also in effect.
             //
             private sealed class PerNameQueryCache<M>
-                : ConcurrentUnifier<string, QueriedMemberList<M>> where M : MemberInfo
+                : ConcurrentUnifier<string, QueriedMemberList<M>>
+                where M : MemberInfo
             {
                 public PerNameQueryCache(RuntimeTypeInfo type, bool ignoreCase)
                 {

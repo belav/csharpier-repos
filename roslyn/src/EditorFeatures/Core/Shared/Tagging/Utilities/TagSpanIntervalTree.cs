@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
     /// tracked. That way you can query for intersecting/overlapping spans in a different snapshot
     /// than the one for the tag spans that were added.
     /// </summary>
-    internal partial class TagSpanIntervalTree<TTag> where TTag : ITag
+    internal partial class TagSpanIntervalTree<TTag>
+        where TTag : ITag
     {
         private readonly IntervalTree<TagNode> _tree;
         private readonly ITextBuffer _textBuffer;

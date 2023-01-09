@@ -718,7 +718,8 @@ namespace System.Data
         internal Range FindRecords<TKey, TRow>(
             ComparisonBySelector<TKey, TRow> comparison,
             TKey key
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             int x = _records.root;
             while (IndexTree.NIL != x)
@@ -1195,7 +1196,8 @@ namespace System.Data
             }
         }
 
-        internal static int IndexOfReference<T>(List<T?>? list, T item) where T : class
+        internal static int IndexOfReference<T>(List<T?>? list, T item)
+            where T : class
         {
             if (null != list)
             {
@@ -1210,13 +1212,15 @@ namespace System.Data
             return -1;
         }
 
-        internal static bool ContainsReference<T>(List<T?> list, T item) where T : class
+        internal static bool ContainsReference<T>(List<T?> list, T item)
+            where T : class
         {
             return (0 <= IndexOfReference(list, item));
         }
     }
 
-    internal sealed class Listeners<TElem> where TElem : class
+    internal sealed class Listeners<TElem>
+        where TElem : class
     {
         private readonly List<TElem?> _listeners;
         private readonly Func<TElem?, bool> _filter;

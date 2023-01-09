@@ -180,7 +180,8 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
         bool updateOwnedFirst,
         Mapping mapping,
         string propertyName
-    ) where TEntity : class, ISuperFan
+    )
+        where TEntity : class, ISuperFan
     {
         await using var c = CreateF1Context();
 

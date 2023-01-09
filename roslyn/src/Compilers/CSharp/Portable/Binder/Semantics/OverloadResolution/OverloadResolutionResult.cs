@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// method was selected if overload resolution succeeded, as well as detailed information about
     /// each method that was considered.
     /// </summary>
-    internal class OverloadResolutionResult<TMember> where TMember : Symbol
+    internal class OverloadResolutionResult<TMember>
+        where TMember : Symbol
     {
         private MemberResolutionResult<TMember> _bestResult;
         private ThreeState _bestResultState;
@@ -204,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isMethodGroupConversion = false,
             RefKind? returnRefKind = null,
             TypeSymbol delegateOrFunctionPointerType = null
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             Debug.Assert(
                 !this.Succeeded,

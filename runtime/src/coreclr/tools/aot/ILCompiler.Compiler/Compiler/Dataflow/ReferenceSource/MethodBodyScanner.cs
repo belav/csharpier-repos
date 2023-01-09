@@ -247,7 +247,8 @@ namespace Mono.Linker.Dataflow
             KeyType collectionKey,
             int curBasicBlock,
             int? maxTrackedValues = null
-        ) where KeyType : notnull
+        )
+            where KeyType : notnull
         {
             if (valueCollection.TryGetValue(collectionKey, out ValueBasicBlockPair existingValue))
             {

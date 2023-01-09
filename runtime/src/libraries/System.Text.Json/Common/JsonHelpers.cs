@@ -15,7 +15,8 @@ namespace System.Text.Json
             this Dictionary<TKey, TValue> dictionary,
             in TKey key,
             in TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             if (!dictionary.ContainsKey(key))

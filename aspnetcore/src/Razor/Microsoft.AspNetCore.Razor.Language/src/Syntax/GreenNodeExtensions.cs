@@ -24,7 +24,8 @@ internal static class GreenNodeExtensions
     public static TNode WithAnnotationsGreen<TNode>(
         this TNode node,
         params SyntaxAnnotation[] annotations
-    ) where TNode : GreenNode
+    )
+        where TNode : GreenNode
     {
         var newAnnotations = new List<SyntaxAnnotation>();
         foreach (var candidate in annotations)
@@ -56,7 +57,8 @@ internal static class GreenNodeExtensions
     public static TNode WithDiagnosticsGreen<TNode>(
         this TNode node,
         params RazorDiagnostic[] diagnostics
-    ) where TNode : GreenNode
+    )
+        where TNode : GreenNode
     {
         return (TNode)node.SetDiagnostics(diagnostics);
     }

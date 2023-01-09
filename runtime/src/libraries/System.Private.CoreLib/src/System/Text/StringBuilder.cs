@@ -1121,7 +1121,8 @@ namespace System.Text
         [CLSCompliant(false)]
         public StringBuilder Append(ulong value) => AppendSpanFormattable(value);
 
-        private StringBuilder AppendSpanFormattable<T>(T value) where T : ISpanFormattable
+        private StringBuilder AppendSpanFormattable<T>(T value)
+            where T : ISpanFormattable
         {
             Debug.Assert(
                 typeof(T).Assembly.Equals(typeof(object).Assembly),
@@ -1148,7 +1149,8 @@ namespace System.Text
             T value,
             string? format,
             IFormatProvider? provider
-        ) where T : ISpanFormattable
+        )
+            where T : ISpanFormattable
         {
             Debug.Assert(
                 typeof(T).Assembly.Equals(typeof(object).Assembly),

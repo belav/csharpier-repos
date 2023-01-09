@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         public static TLanguageService GetRequiredLanguageService<TLanguageService>(
             this Project project
-        ) where TLanguageService : class, ILanguageService
+        )
+            where TLanguageService : class, ILanguageService
 #if CODE_STYLE
             =>
             project.GetExtendedLanguageServices().GetRequiredService<TLanguageService>();

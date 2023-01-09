@@ -8,7 +8,8 @@ using System.Diagnostics;
 namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>Represents the exploration of a symbolic regex as a symbolic NFA</summary>
-    internal sealed class SymbolicNFA<S> where S : notnull
+    internal sealed class SymbolicNFA<S>
+        where S : notnull
     {
         private readonly IBooleanAlgebra<S> _solver;
         private readonly Transition[] _transitionFunction;

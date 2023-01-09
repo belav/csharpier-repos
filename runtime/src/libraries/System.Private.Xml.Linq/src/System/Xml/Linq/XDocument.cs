@@ -897,7 +897,8 @@ namespace System.Xml.Linq
             return ContentsHashCode();
         }
 
-        private T? GetFirstNode<T>() where T : XNode
+        private T? GetFirstNode<T>()
+            where T : XNode
         {
             XNode? n = content as XNode;
             if (n != null)

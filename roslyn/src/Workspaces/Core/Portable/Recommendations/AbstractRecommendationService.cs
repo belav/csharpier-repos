@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Recommendations
 {
     internal abstract partial class AbstractRecommendationService<TSyntaxContext>
-        : IRecommendationService where TSyntaxContext : SyntaxContext
+        : IRecommendationService
+        where TSyntaxContext : SyntaxContext
     {
         protected abstract AbstractRecommendationServiceRunner CreateRunner(
             TSyntaxContext context,

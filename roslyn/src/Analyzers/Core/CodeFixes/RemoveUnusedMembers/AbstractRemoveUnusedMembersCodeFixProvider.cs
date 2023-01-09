@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
 {
     internal abstract class AbstractRemoveUnusedMembersCodeFixProvider<TFieldDeclarationSyntax>
-        : SyntaxEditorBasedCodeFixProvider where TFieldDeclarationSyntax : SyntaxNode
+        : SyntaxEditorBasedCodeFixProvider
+        where TFieldDeclarationSyntax : SyntaxNode
     {
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnusedMembersDiagnosticId);

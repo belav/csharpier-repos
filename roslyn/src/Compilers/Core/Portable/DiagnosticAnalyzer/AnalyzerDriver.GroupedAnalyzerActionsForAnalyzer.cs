@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static void VerifyActions<TAnalyzerAction>(
                 in ImmutableArray<TAnalyzerAction> actions,
                 DiagnosticAnalyzer analyzer
-            ) where TAnalyzerAction : AnalyzerAction
+            )
+                where TAnalyzerAction : AnalyzerAction
             {
                 foreach (var action in actions)
                 {
@@ -63,14 +64,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             private ImmutableArray<TAnalyzerAction> GetFilteredActions<TAnalyzerAction>(
                 in ImmutableArray<TAnalyzerAction> actions
-            ) where TAnalyzerAction : AnalyzerAction =>
+            )
+                where TAnalyzerAction : AnalyzerAction =>
                 GetFilteredActions(actions, _analyzer, _analyzerActionsNeedFiltering);
 
             private static ImmutableArray<TAnalyzerAction> GetFilteredActions<TAnalyzerAction>(
                 in ImmutableArray<TAnalyzerAction> actions,
                 DiagnosticAnalyzer analyzer,
                 bool analyzerActionsNeedFiltering
-            ) where TAnalyzerAction : AnalyzerAction
+            )
+                where TAnalyzerAction : AnalyzerAction
             {
                 if (!analyzerActionsNeedFiltering)
                 {
@@ -206,7 +209,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ImmutableArray<ActionType> codeBlockActions,
                 DiagnosticAnalyzer analyzer,
                 bool analyzerActionsNeedFiltering
-            ) where ActionType : AnalyzerAction
+            )
+                where ActionType : AnalyzerAction
             {
                 if (lazyCodeBlockActions.IsDefault)
                 {

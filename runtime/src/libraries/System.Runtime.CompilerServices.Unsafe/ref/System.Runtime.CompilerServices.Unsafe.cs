@@ -62,7 +62,8 @@ namespace System.Runtime.CompilerServices
         }
 
         [return: System.Diagnostics.CodeAnalysis.NotNullIfNotNull("o")]
-        public static T? As<T>(object? o) where T : class?
+        public static T? As<T>(object? o)
+            where T : class?
         {
             throw null;
         }
@@ -193,7 +194,8 @@ namespace System.Runtime.CompilerServices
             throw null;
         }
 
-        public static ref T Unbox<T>(object box) where T : struct
+        public static ref T Unbox<T>(object box)
+            where T : struct
         {
             throw null;
         }

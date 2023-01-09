@@ -14,7 +14,8 @@ public class Help
     public static Object s_object = new object();
 }
 
-public class A<T> where T : Exception
+public class A<T>
+    where T : Exception
 {
     public static void StaticFunctionWithManyArgs(int i, int j, int k, object o)
     {

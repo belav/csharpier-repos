@@ -12,7 +12,8 @@ namespace Moq.Language.Flow
     public interface IReturnsThrows<TMock, TResult>
         : IReturns<TMock, TResult>,
             IThrows,
-            IFluentInterface where TMock : class { }
+            IFluentInterface
+        where TMock : class { }
 
     /// <summary>
     /// Implements the fluent API.
@@ -21,5 +22,6 @@ namespace Moq.Language.Flow
     public interface IReturnsThrowsGetter<TMock, TProperty>
         : IReturnsGetter<TMock, TProperty>,
             IThrows,
-            IFluentInterface where TMock : class { }
+            IFluentInterface
+        where TMock : class { }
 }

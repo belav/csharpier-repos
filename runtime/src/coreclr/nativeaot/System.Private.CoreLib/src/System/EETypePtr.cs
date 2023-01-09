@@ -336,7 +336,8 @@ namespace System
             get { return RuntimeImports.GetRhCorElementTypeInfo(CorElementType); }
         }
 
-        internal ref T GetWritableData<T>() where T : unmanaged
+        internal ref T GetWritableData<T>()
+            where T : unmanaged
         {
             Debug.Assert(Internal.Runtime.WritableData.GetSize(IntPtr.Size) == sizeof(T));
             return ref Unsafe.AsRef<T>((void*)_value->WritableData);

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             private static TTypeSyntax AddInformationTo<TTypeSyntax>(
                 TTypeSyntax syntax,
                 ISymbol symbol
-            ) where TTypeSyntax : TypeSyntax
+            )
+                where TTypeSyntax : TypeSyntax
             {
                 syntax = syntax
                     .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)

@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             TCollection objectUnderTest,
             TElement additionalItem,
             Func<TCollection, IEnumerable<TElement>?, bool> equalsStructurally
-        ) where TCollection : class, IEnumerable<TElement>
+        )
+            where TCollection : class, IEnumerable<TElement>
         {
             if (objectUnderTest is null)
                 throw new ArgumentNullException(nameof(objectUnderTest));

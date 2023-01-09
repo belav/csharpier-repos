@@ -21,7 +21,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
 
         internal static TInProcComponent CreateInProcComponent<TInProcComponent>(
             VisualStudioInstance visualStudioInstance
-        ) where TInProcComponent : InProcComponent =>
+        )
+            where TInProcComponent : InProcComponent =>
             visualStudioInstance.ExecuteInHostProcess<TInProcComponent>(
                 type: typeof(TInProcComponent),
                 methodName: "Create"

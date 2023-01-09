@@ -25,7 +25,8 @@ public class ConstraintsTests
 
     public class OtherBase : IFooer { }
 
-    public class TypeRequiringIFoo<T> where T : IFoo { }
+    public class TypeRequiringIFoo<T>
+        where T : IFoo { }
 
     public class TypeWithPrivateCtor
     {
@@ -39,17 +40,22 @@ public class ConstraintsTests
 
     public class TypeWithPublicCtor { }
 
-    public class TypeWithClassConstraint<T> where T : class { }
+    public class TypeWithClassConstraint<T>
+        where T : class { }
 
-    public class TypeWithNewConstraint<T> where T : new() { }
+    public class TypeWithNewConstraint<T>
+        where T : new() { }
 
-    public class TypeWithStructConstraint<T> where T : struct { }
+    public class TypeWithStructConstraint<T>
+        where T : struct { }
 
     public class TypeWithNoConstraint<T> { }
 
-    public class TypeWithSelfReferenceConstraint<T, U> where T : U { }
+    public class TypeWithSelfReferenceConstraint<T, U>
+        where T : U { }
 
-    public class TypeWithSelfReferenceIEnumerableConstraint<T, U> where T : IEnumerable<U> { }
+    public class TypeWithSelfReferenceIEnumerableConstraint<T, U>
+        where T : IEnumerable<U> { }
 
     public interface IBar<in T> { }
 
@@ -59,7 +65,8 @@ public class ConstraintsTests
 
     public class TypeImplementingIBar<T> : IBar<T> { }
 
-    public class TypeWithVariance<T, U> where T : IBar<U> { }
+    public class TypeWithVariance<T, U>
+        where T : IBar<U> { }
 
     public class TypeWithRecursiveConstraints<T, S> : TypeWithClassConstraint<T>
         where T : TypeWithNoConstraint<S> { }

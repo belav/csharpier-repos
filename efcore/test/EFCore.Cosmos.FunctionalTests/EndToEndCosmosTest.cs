@@ -856,7 +856,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         Action<CustomerWithCollection<TCollection>> modify,
         TCollection modifiedValue,
         Action<ModelBuilder> onModelBuilder = null
-    ) where TCollection : class
+    )
+        where TCollection : class
     {
         var options = Fixture.CreateOptions();
 

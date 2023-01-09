@@ -106,7 +106,8 @@ namespace Newtonsoft.Json.Utilities
             return new EnumInfo(isFlags, values, names, resolvedNames);
         }
 
-        public static IList<T> GetFlagsValues<T>(T value) where T : struct
+        public static IList<T> GetFlagsValues<T>(T value)
+            where T : struct
         {
             Type enumType = typeof(T);
 

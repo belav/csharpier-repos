@@ -39,7 +39,8 @@ namespace Microsoft.Interop
             this IncrementalGeneratorInitializationContext context,
             IncrementalValuesProvider<TNode> nodes,
             string fileName
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             IncrementalValueProvider<ImmutableArray<string>> generatedMethods = nodes
                 .Select(static (node, ct) => node.NormalizeWhitespace().ToFullString())

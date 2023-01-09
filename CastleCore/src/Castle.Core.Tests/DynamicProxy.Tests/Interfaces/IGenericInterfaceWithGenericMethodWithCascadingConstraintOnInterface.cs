@@ -17,6 +17,7 @@ namespace Castle.DynamicProxy.Tests.Interfaces
     public interface IGenericInterfaceWithGenericMethodWithCascadingConstraintOnInterface<TGenericType>
         where TGenericType : IEmpty
     {
-        void Method<TGenericSubType>() where TGenericSubType : TGenericType;
+        void Method<TGenericSubType>()
+            where TGenericSubType : TGenericType;
     }
 }

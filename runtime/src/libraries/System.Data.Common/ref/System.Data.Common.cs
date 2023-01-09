@@ -1334,7 +1334,8 @@ namespace System.Data
     }
 
     public sealed partial class DataRowComparer<TRow>
-        : System.Collections.Generic.IEqualityComparer<TRow> where TRow : System.Data.DataRow
+        : System.Collections.Generic.IEqualityComparer<TRow>
+        where TRow : System.Data.DataRow
     {
         internal DataRowComparer() { }
 
@@ -3021,7 +3022,8 @@ namespace System.Data
 
         public static System.Data.DataView AsDataView<T>(
             this System.Data.EnumerableRowCollection<T> source
-        ) where T : System.Data.DataRow
+        )
+            where T : System.Data.DataRow
         {
             throw null;
         }
@@ -3035,7 +3037,8 @@ namespace System.Data
 
         public static System.Data.DataTable CopyToDataTable<T>(
             this System.Collections.Generic.IEnumerable<T> source
-        ) where T : System.Data.DataRow
+        )
+            where T : System.Data.DataRow
         {
             throw null;
         }
@@ -3044,14 +3047,16 @@ namespace System.Data
             this System.Collections.Generic.IEnumerable<T> source,
             System.Data.DataTable table,
             System.Data.LoadOption options
-        ) where T : System.Data.DataRow { }
+        )
+            where T : System.Data.DataRow { }
 
         public static void CopyToDataTable<T>(
             this System.Collections.Generic.IEnumerable<T> source,
             System.Data.DataTable table,
             System.Data.LoadOption options,
             System.Data.FillErrorEventHandler? errorHandler
-        ) where T : System.Data.DataRow { }
+        )
+            where T : System.Data.DataRow { }
     }
 
     public sealed partial class DataTableNewRowEventArgs : System.EventArgs
@@ -4890,7 +4895,8 @@ namespace System.Data
     {
         public static System.Data.EnumerableRowCollection<TRow> AsEnumerable<TRow>(
             this System.Data.TypedTableBase<TRow> source
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4898,7 +4904,8 @@ namespace System.Data
         public static TRow? ElementAtOrDefault<TRow>(
             this System.Data.TypedTableBase<TRow> source,
             int index
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4919,7 +4926,8 @@ namespace System.Data
             this System.Data.TypedTableBase<TRow> source,
             System.Func<TRow, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey> comparer
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4927,7 +4935,8 @@ namespace System.Data
         public static System.Data.OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
             this System.Data.TypedTableBase<TRow> source,
             System.Func<TRow, TKey> keySelector
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4936,7 +4945,8 @@ namespace System.Data
             this System.Data.TypedTableBase<TRow> source,
             System.Func<TRow, TKey> keySelector,
             System.Collections.Generic.IComparer<TKey> comparer
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4944,7 +4954,8 @@ namespace System.Data
         public static System.Data.EnumerableRowCollection<S> Select<TRow, S>(
             this System.Data.TypedTableBase<TRow> source,
             System.Func<TRow, S> selector
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4952,7 +4963,8 @@ namespace System.Data
         public static System.Data.EnumerableRowCollection<TRow> Where<TRow>(
             this System.Data.TypedTableBase<TRow> source,
             System.Func<TRow, bool> predicate
-        ) where TRow : System.Data.DataRow
+        )
+            where TRow : System.Data.DataRow
         {
             throw null;
         }
@@ -4961,7 +4973,8 @@ namespace System.Data
     public abstract partial class TypedTableBase<T>
         : System.Data.DataTable,
             System.Collections.Generic.IEnumerable<T>,
-            System.Collections.IEnumerable where T : System.Data.DataRow
+            System.Collections.IEnumerable
+        where T : System.Data.DataRow
     {
         protected TypedTableBase() { }
 

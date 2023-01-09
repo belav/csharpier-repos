@@ -1871,7 +1871,8 @@ public class PropertyBaseTest
     private static IMutableProperty CreateProperty<TEntity>(
         string fieldName,
         string propertyName = Property
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var model = CreateModelBuilder();
         var property = model
@@ -1890,7 +1891,8 @@ public class PropertyBaseTest
     private static IMutableNavigation CreateReferenceNavigation<TEntity>(
         string fieldName,
         string navigationName = Reference
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var model = CreateModelBuilder();
         var relationship = model
@@ -1909,7 +1911,8 @@ public class PropertyBaseTest
     private static IMutableNavigation CreateCollectionNavigation<TEntity>(
         string fieldName,
         string navigationName = Collection
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var model = CreateModelBuilder();
         var relationship = model

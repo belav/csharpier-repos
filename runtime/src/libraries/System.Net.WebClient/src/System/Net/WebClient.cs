@@ -2201,7 +2201,8 @@ namespace System.Net
             Func<TAsyncCompletedEventArgs, T> getResult,
             TCompletionDelegate handler,
             Action<WebClient, TCompletionDelegate> unregisterHandler
-        ) where TAsyncCompletedEventArgs : AsyncCompletedEventArgs
+        )
+            where TAsyncCompletedEventArgs : AsyncCompletedEventArgs
         {
             if (e.UserState == tcs)
             {

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<Lazy<T, TMetadata>> SelectMatchingExtensions<T, TMetadata>(
             this HostLanguageServices serviceProvider,
             IEnumerable<Lazy<T, TMetadata>>? items
-        ) where TMetadata : ILanguageMetadata
+        )
+            where TMetadata : ILanguageMetadata
         {
             if (items == null)
             {

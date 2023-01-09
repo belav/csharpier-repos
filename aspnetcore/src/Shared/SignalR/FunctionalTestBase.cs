@@ -42,7 +42,8 @@ public class FunctionalTestBase : VerifiableLoggedTest
     public Task<InProcessTestServer<T>> StartServer<T>(
         Func<WriteContext, bool> expectedErrorsFilter = null,
         Action<KestrelServerOptions> configureKestrelServerOptions = null
-    ) where T : class
+    )
+        where T : class
     {
         var disposable = base.StartVerifiableLog(ResolveExpectedErrorsFilter(expectedErrorsFilter));
         return InProcessTestServer<T>.StartServer(

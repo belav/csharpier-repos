@@ -15,7 +15,8 @@ namespace System.Text.RegularExpressions.Symbolic
     /// where it maintains linear construction time in terms of the overall number of AST nodes in a given <see cref="RegexNode"/> input.
     /// Enumeration is performed in reverse of the order added, yielding items from last to first.
     /// </remarks>
-    internal sealed class DoublyLinkedList<T> : IEnumerable<T> where T : notnull
+    internal sealed class DoublyLinkedList<T> : IEnumerable<T>
+        where T : notnull
     {
         /// <summary>First node of the list</summary>
         private Node? _first;

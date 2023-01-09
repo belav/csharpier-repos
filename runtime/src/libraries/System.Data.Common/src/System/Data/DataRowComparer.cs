@@ -122,7 +122,8 @@ namespace System.Data
     /// This class implements IEqualityComparer using value based semantics
     /// when comparing DataRows.
     /// </summary>
-    public sealed class DataRowComparer<TRow> : IEqualityComparer<TRow> where TRow : DataRow
+    public sealed class DataRowComparer<TRow> : IEqualityComparer<TRow>
+        where TRow : DataRow
     {
         /// <summary>
         /// Private constructor to prevent initialization outside of Default singleton instance.

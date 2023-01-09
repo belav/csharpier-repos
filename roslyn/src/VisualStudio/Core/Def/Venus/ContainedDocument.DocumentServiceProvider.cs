@@ -39,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 _excerpter = new DocumentExcerpter(primaryBuffer);
             }
 
-            public TService GetService<TService>() where TService : class, IDocumentService
+            public TService GetService<TService>()
+                where TService : class, IDocumentService
             {
                 if (_spanMapper is TService spanMapper)
                 {

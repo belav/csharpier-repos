@@ -3,7 +3,8 @@
 
 namespace System.Text.RegularExpressions.Symbolic.Unicode
 {
-    internal sealed class UnicodeCategoryTheory<TPredicate> where TPredicate : class
+    internal sealed class UnicodeCategoryTheory<TPredicate>
+        where TPredicate : class
     {
         internal readonly ICharAlgebra<TPredicate> _solver;
         private readonly TPredicate[] _catConditions = new TPredicate[30];

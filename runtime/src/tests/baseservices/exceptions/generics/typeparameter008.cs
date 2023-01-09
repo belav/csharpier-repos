@@ -48,7 +48,8 @@ public class GenException<T> : Exception { }
 
 public struct Gen
 {
-    public void ExceptionTest<Ex>(Ex e) where Ex : Exception
+    public void ExceptionTest<Ex>(Ex e)
+        where Ex : Exception
     {
         try
         {

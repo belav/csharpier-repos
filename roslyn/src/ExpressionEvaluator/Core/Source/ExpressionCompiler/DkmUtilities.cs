@@ -305,7 +305,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this TSymbol? symbol,
             DkmClrCompilationResultFlags flags,
             bool isConstant
-        ) where TSymbol : class, ISymbolInternal
+        )
+            where TSymbol : class, ISymbolInternal
         {
             var category =
                 (symbol != null)
@@ -390,7 +391,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         internal static MetadataContext<TAssemblyContext> GetMetadataContext<TAssemblyContext>(
             this DkmClrAppDomain appDomain
-        ) where TAssemblyContext : struct
+        )
+            where TAssemblyContext : struct
         {
             var dataItem = appDomain.GetDataItem<
                 MetadataContextItem<MetadataContext<TAssemblyContext>>
@@ -402,7 +404,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             this DkmClrAppDomain appDomain,
             MetadataContext<TAssemblyContext> context,
             bool report
-        ) where TAssemblyContext : struct
+        )
+            where TAssemblyContext : struct
         {
             if (report)
             {

@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Remote;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
-    internal readonly struct RazorRemoteCallbackWrapper<T> where T : class
+    internal readonly struct RazorRemoteCallbackWrapper<T>
+        where T : class
     {
         internal readonly RemoteCallback<T> UnderlyingObject;
 

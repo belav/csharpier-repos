@@ -87,7 +87,8 @@ namespace AutoMapper.Configuration.Conventions
 
         public IMemberConfiguration AddMember<TMemberMapper>(
             Action<TMemberMapper> setupAction = null
-        ) where TMemberMapper : IChildMemberConfiguration, new()
+        )
+            where TMemberMapper : IChildMemberConfiguration, new()
         {
             GetOrAdd(_ => (IList)_.MemberMappers, setupAction);
             return this;
@@ -103,7 +104,8 @@ namespace AutoMapper.Configuration.Conventions
         private TMemberMapper GetOrAdd<TMemberMapper>(
             Func<IMemberConfiguration, IList> getList,
             Action<TMemberMapper> setupAction = null
-        ) where TMemberMapper : new()
+        )
+            where TMemberMapper : new()
         {
             var child = getList(this).OfType<TMemberMapper>().FirstOrDefault();
             if (child == null)

@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal sealed class HttpMultiplexedConnectionMiddleware<TContext> where TContext : notnull
+internal sealed class HttpMultiplexedConnectionMiddleware<TContext>
+    where TContext : notnull
 {
     private readonly ServiceContext _serviceContext;
     private readonly IHttpApplication<TContext> _application;

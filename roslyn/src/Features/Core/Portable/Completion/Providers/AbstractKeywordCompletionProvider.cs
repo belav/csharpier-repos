@@ -17,7 +17,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract partial class AbstractKeywordCompletionProvider<TContext>
-        : LSPCompletionProvider where TContext : SyntaxContext
+        : LSPCompletionProvider
+        where TContext : SyntaxContext
     {
         private static readonly Comparer s_comparer = new();
 

@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceModel;
 namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class InheritanceRelationalQueryTestBase<TFixture>
-    : InheritanceQueryTestBase<TFixture> where TFixture : InheritanceQueryRelationalFixture, new()
+    : InheritanceQueryTestBase<TFixture>
+    where TFixture : InheritanceQueryRelationalFixture, new()
 {
     protected InheritanceRelationalQueryTestBase(TFixture fixture)
         : base(fixture) { }

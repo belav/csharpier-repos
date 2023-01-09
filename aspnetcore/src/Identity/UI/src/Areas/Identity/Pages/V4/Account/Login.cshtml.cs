@@ -93,7 +93,8 @@ public abstract class LoginModel : PageModel
     ) => throw new NotImplementedException();
 }
 
-internal sealed class LoginModel<TUser> : LoginModel where TUser : class
+internal sealed class LoginModel<TUser> : LoginModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly ILogger<LoginModel> _logger;

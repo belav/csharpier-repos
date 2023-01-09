@@ -214,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static TProperty GetOrCreateAutoClosingProperty<TProperty, TTextView>(
             this TTextView textView,
             Func<TTextView, TProperty> valueCreator
-        ) where TTextView : ITextView
+        )
+            where TTextView : ITextView
         {
             return textView.GetOrCreateAutoClosingProperty(typeof(TProperty), valueCreator);
         }
@@ -226,7 +227,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this TTextView textView,
             object key,
             Func<TTextView, TProperty> valueCreator
-        ) where TTextView : ITextView
+        )
+            where TTextView : ITextView
         {
             GetOrCreateAutoClosingProperty(textView, key, valueCreator, out var value);
             return value;
@@ -240,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             object key,
             Func<TTextView, TProperty> valueCreator,
             out TProperty value
-        ) where TTextView : ITextView
+        )
+            where TTextView : ITextView
         {
             return AutoClosingViewProperty<TProperty, TTextView>.GetOrCreateValue(
                 textView,
@@ -258,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextBuffer subjectBuffer,
             object key,
             Func<TTextView, ITextBuffer, TProperty> valueCreator
-        ) where TTextView : class, ITextView
+        )
+            where TTextView : class, ITextView
         {
             GetOrCreatePerSubjectBufferProperty(
                 textView,
@@ -280,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             object key,
             Func<TTextView, ITextBuffer, TProperty> valueCreator,
             out TProperty value
-        ) where TTextView : class, ITextView
+        )
+            where TTextView : class, ITextView
         {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(subjectBuffer);
@@ -300,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextBuffer subjectBuffer,
             object key,
             [MaybeNullWhen(false)] out TProperty value
-        ) where TTextView : class, ITextView
+        )
+            where TTextView : class, ITextView
         {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(subjectBuffer);
@@ -318,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             ITextBuffer subjectBuffer,
             object key,
             TProperty value
-        ) where TTextView : class, ITextView
+        )
+            where TTextView : class, ITextView
         {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(subjectBuffer);
@@ -335,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this TTextView textView,
             ITextBuffer subjectBuffer,
             object key
-        ) where TTextView : class, ITextView
+        )
+            where TTextView : class, ITextView
         {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(subjectBuffer);

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void CheckISymbols<TSymbol>(
             ImmutableArray<TSymbol> symbols,
             params string[] descriptions
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             Assert.Equal(descriptions.Length, symbols.Length);
 
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         internal static void CheckSymbols<TSymbol>(
             ImmutableArray<TSymbol> symbols,
             params string[] descriptions
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             Assert.Equal(descriptions.Length, symbols.Length);
 
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static void CheckSymbolsUnordered<TSymbol>(
             ImmutableArray<TSymbol> symbols,
             params string[] descriptions
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             Assert.Equal(descriptions.Length, symbols.Length);
             AssertEx.SetEqual(

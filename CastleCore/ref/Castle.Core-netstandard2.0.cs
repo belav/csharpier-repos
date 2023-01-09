@@ -288,7 +288,8 @@ namespace Castle.Components.DictionaryAdapter
 
         public object Coerce(System.Type type) { }
 
-        public T Coerce<T>() where T : class { }
+        public T Coerce<T>()
+            where T : class { }
 
         public void CopyTo(Castle.Components.DictionaryAdapter.IDictionaryAdapter other) { }
 
@@ -817,7 +818,8 @@ namespace Castle.Components.DictionaryAdapter
             string key
         );
         object Coerce(System.Type type);
-        T Coerce<T>() where T : class;
+        T Coerce<T>()
+            where T : class;
         void CopyTo(Castle.Components.DictionaryAdapter.IDictionaryAdapter other);
         void CopyTo(
             Castle.Components.DictionaryAdapter.IDictionaryAdapter other,
@@ -1470,7 +1472,8 @@ namespace Castle.Components.DictionaryAdapter
         public static void MergeBehavior<T>(
             ref System.Collections.Generic.List<T> dictionaryBehaviors,
             T behavior
-        ) where T : class, Castle.Components.DictionaryAdapter.IDictionaryBehavior { }
+        )
+            where T : class, Castle.Components.DictionaryAdapter.IDictionaryBehavior { }
     }
 
     [System.AttributeUsage(
@@ -2125,7 +2128,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
         ) { }
     }
 
-    public class SingletonDispenser<TKey, TItem> where TItem : class
+    public class SingletonDispenser<TKey, TItem>
+        where TItem : class
     {
         public SingletonDispenser(System.Func<TKey, TItem> factory) { }
 
@@ -4142,7 +4146,8 @@ namespace Castle.Core
 
     public interface IServiceProviderEx : System.IServiceProvider
     {
-        T GetService<T>() where T : class;
+        T GetService<T>()
+            where T : class;
     }
 
     public interface IServiceProviderExAccessor
@@ -4239,7 +4244,8 @@ namespace Castle.Core.Internal
         public static T GetAttribute<T>(this System.Reflection.MemberInfo member)
             where T : System.Attribute { }
 
-        public static T GetAttribute<T>(this System.Type type) where T : System.Attribute { }
+        public static T GetAttribute<T>(this System.Type type)
+            where T : System.Attribute { }
 
         public static System.AttributeUsageAttribute GetAttributeUsage(
             this System.Type attributeType
@@ -4247,15 +4253,19 @@ namespace Castle.Core.Internal
 
         public static System.Collections.Generic.IEnumerable<T> GetAttributes<T>(
             this System.Reflection.MemberInfo member
-        ) where T : System.Attribute { }
+        )
+            where T : System.Attribute { }
 
         public static System.Collections.Generic.IEnumerable<T> GetAttributes<T>(
             this System.Type type
-        ) where T : System.Attribute { }
+        )
+            where T : System.Attribute { }
 
-        public static T GetTypeAttribute<T>(this System.Type type) where T : System.Attribute { }
+        public static T GetTypeAttribute<T>(this System.Type type)
+            where T : System.Attribute { }
 
-        public static T[] GetTypeAttributes<T>(System.Type type) where T : System.Attribute { }
+        public static T[] GetTypeAttributes<T>(System.Type type)
+            where T : System.Attribute { }
 
         public static System.Type GetTypeConverter(System.Reflection.MemberInfo member) { }
     }
@@ -5495,7 +5505,8 @@ namespace Castle.DynamicProxy
         TClass CreateClassProxy<TClass>(
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class;
+        )
+            where TClass : class;
         object CreateClassProxyWithTarget(
             System.Type classToProxy,
             object target,
@@ -5544,12 +5555,14 @@ namespace Castle.DynamicProxy
         TClass CreateClassProxyWithTarget<TClass>(
             TClass target,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class;
+        )
+            where TClass : class;
         TClass CreateClassProxyWithTarget<TClass>(
             TClass target,
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class;
+        )
+            where TClass : class;
         object CreateInterfaceProxyWithTarget(
             System.Type interfaceToProxy,
             object target,
@@ -5577,12 +5590,14 @@ namespace Castle.DynamicProxy
         TInterface CreateInterfaceProxyWithTarget<TInterface>(
             TInterface target,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class;
+        )
+            where TInterface : class;
         TInterface CreateInterfaceProxyWithTarget<TInterface>(
             TInterface target,
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class;
+        )
+            where TInterface : class;
         object CreateInterfaceProxyWithTargetInterface(
             System.Type interfaceToProxy,
             object target,
@@ -5610,12 +5625,14 @@ namespace Castle.DynamicProxy
         TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(
             TInterface target,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class;
+        )
+            where TInterface : class;
         TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(
             TInterface target,
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class;
+        )
+            where TInterface : class;
         object CreateInterfaceProxyWithoutTarget(
             System.Type interfaceToProxy,
             Castle.DynamicProxy.IInterceptor interceptor
@@ -5642,14 +5659,17 @@ namespace Castle.DynamicProxy
         );
         TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
             Castle.DynamicProxy.IInterceptor interceptor
-        ) where TInterface : class;
+        )
+            where TInterface : class;
         TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class;
+        )
+            where TInterface : class;
         TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class;
+        )
+            where TInterface : class;
     }
 
     public interface IProxyTargetAccessor
@@ -5810,12 +5830,14 @@ namespace Castle.DynamicProxy
 
         public TClass CreateClassProxy<TClass>(
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class { }
+        )
+            where TClass : class { }
 
         public TClass CreateClassProxy<TClass>(
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class { }
+        )
+            where TClass : class { }
 
         protected object CreateClassProxyInstance(
             System.Type proxyType,
@@ -5891,13 +5913,15 @@ namespace Castle.DynamicProxy
         public TClass CreateClassProxyWithTarget<TClass>(
             TClass target,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class { }
+        )
+            where TClass : class { }
 
         public TClass CreateClassProxyWithTarget<TClass>(
             TClass target,
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TClass : class { }
+        )
+            where TClass : class { }
 
         protected System.Type CreateInterfaceProxyTypeWithTarget(
             System.Type interfaceToProxy,
@@ -5949,13 +5973,15 @@ namespace Castle.DynamicProxy
         public TInterface CreateInterfaceProxyWithTarget<TInterface>(
             TInterface target,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         public TInterface CreateInterfaceProxyWithTarget<TInterface>(
             TInterface target,
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         public object CreateInterfaceProxyWithTargetInterface(
             System.Type interfaceToProxy,
@@ -5988,13 +6014,15 @@ namespace Castle.DynamicProxy
         public TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(
             TInterface target,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         public TInterface CreateInterfaceProxyWithTargetInterface<TInterface>(
             TInterface target,
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         public object CreateInterfaceProxyWithoutTarget(
             System.Type interfaceToProxy,
@@ -6027,16 +6055,19 @@ namespace Castle.DynamicProxy
 
         public TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
             Castle.DynamicProxy.IInterceptor interceptor
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         public TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         public TInterface CreateInterfaceProxyWithoutTarget<TInterface>(
             Castle.DynamicProxy.ProxyGenerationOptions options,
             params Castle.DynamicProxy.IInterceptor[] interceptors
-        ) where TInterface : class { }
+        )
+            where TInterface : class { }
 
         protected System.Collections.Generic.List<object> GetConstructorArguments(
             object target,

@@ -42,7 +42,8 @@ internal static class ModelBindingHelper
         IModelBinderFactory modelBinderFactory,
         IValueProvider valueProvider,
         IObjectModelValidator objectModelValidator
-    ) where TModel : class
+    )
+        where TModel : class
     {
         return TryUpdateModelAsync(
             model,
@@ -84,7 +85,8 @@ internal static class ModelBindingHelper
         IValueProvider valueProvider,
         IObjectModelValidator objectModelValidator,
         params Expression<Func<TModel, object?>>[] includeExpressions
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (includeExpressions == null)
         {
@@ -134,7 +136,8 @@ internal static class ModelBindingHelper
         IValueProvider valueProvider,
         IObjectModelValidator objectModelValidator,
         Func<ModelMetadata, bool> propertyFilter
-    ) where TModel : class
+    )
+        where TModel : class
     {
         return TryUpdateModelAsync(
             model,

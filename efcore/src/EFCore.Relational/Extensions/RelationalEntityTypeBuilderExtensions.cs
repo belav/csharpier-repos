@@ -74,7 +74,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> UseTpcMappingStrategy<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTpcMappingStrategy();
 
     /// <summary>
@@ -88,7 +89,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> UseTphMappingStrategy<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTphMappingStrategy();
 
     /// <summary>
@@ -102,7 +104,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> UseTptMappingStrategy<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTptMappingStrategy();
 
     /// <summary>
@@ -246,7 +249,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToSqlQuery<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string query
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)ToSqlQuery((EntityTypeBuilder)entityTypeBuilder, query);
 
     /// <summary>
@@ -415,7 +419,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
@@ -431,7 +436,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToFunction<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         MethodInfo? function
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)ToFunction((EntityTypeBuilder)entityTypeBuilder, function);
 
     /// <summary>
@@ -449,7 +455,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<TableValuedFunctionBuilder<TEntity>> configureFunction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(configureFunction, nameof(configureFunction));
@@ -479,7 +486,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         MethodInfo function,
         Action<TableValuedFunctionBuilder<TEntity>> configureFunction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(function, nameof(function));
         Check.NotNull(configureFunction, nameof(configureFunction));
@@ -962,7 +970,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string? sql
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql);
 
@@ -984,7 +993,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string sql,
         Action<CheckConstraintBuilder> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             HasCheckConstraint((EntityTypeBuilder)entityTypeBuilder, name, sql, buildAction);
 
@@ -1195,7 +1205,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> HasComment<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? comment
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)HasComment((EntityTypeBuilder)entityTypeBuilder, comment);
 
     /// <summary>

@@ -13,7 +13,8 @@ public interface IInitializer
     Task Migrate();
 }
 
-public class DropCreateDatabaseAlways<TContext> : IInitializer where TContext : DbContext, new()
+public class DropCreateDatabaseAlways<TContext> : IInitializer
+    where TContext : DbContext, new()
 {
     protected virtual void Seed(TContext context) { }
 

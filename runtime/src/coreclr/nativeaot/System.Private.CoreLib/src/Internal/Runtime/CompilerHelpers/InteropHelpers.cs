@@ -532,7 +532,8 @@ namespace Internal.Runtime.CompilerHelpers
         /// <summary>
         /// Retrieves the current delegate that is being called
         /// </summary>
-        public static T GetCurrentCalleeDelegate<T>() where T : class // constraint can't be System.Delegate
+        public static T GetCurrentCalleeDelegate<T>()
+            where T : class // constraint can't be System.Delegate
         {
             return PInvokeMarshal.GetCurrentCalleeDelegate<T>();
         }

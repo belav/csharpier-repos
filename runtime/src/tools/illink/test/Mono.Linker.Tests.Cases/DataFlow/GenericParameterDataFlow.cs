@@ -961,12 +961,14 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             }
         }
 
-        static void TestNewConstraintSatisfiesParameterlessConstructor<T>() where T : new()
+        static void TestNewConstraintSatisfiesParameterlessConstructor<T>()
+            where T : new()
         {
             RequiresParameterlessConstructor<T>();
         }
 
-        static void TestStructConstraintSatisfiesParameterlessConstructor<T>() where T : struct
+        static void TestStructConstraintSatisfiesParameterlessConstructor<T>()
+            where T : struct
         {
             RequiresParameterlessConstructor<T>();
         }

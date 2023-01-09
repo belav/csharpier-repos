@@ -175,7 +175,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             SyntaxTree tree,
             string name,
             SymbolKind kind
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             var model = comp.GetSemanticModel(tree);
             string code = tree.GetText().ToString();
@@ -193,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source
             CSharpCompilation comp,
             SyntaxTree tree,
             string textToSearchFor
-        ) where TNode : ExpressionSyntax
+        )
+            where TNode : ExpressionSyntax
         {
             var model = comp.GetSemanticModel(tree);
             string code = tree.GetText().ToString();

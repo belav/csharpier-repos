@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             Validate(oldCount, this.Count);
         }
 
-        public void AddRange<TNode>(SyntaxList<TNode> list) where TNode : GreenNode
+        public void AddRange<TNode>(SyntaxList<TNode> list)
+            where TNode : GreenNode
         {
             this.AddRange(list, 0, list.Count);
         }
@@ -191,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return new SyntaxList<GreenNode>(ToListNode());
         }
 
-        public SyntaxList<TNode> ToList<TNode>() where TNode : GreenNode
+        public SyntaxList<TNode> ToList<TNode>()
+            where TNode : GreenNode
         {
             return new SyntaxList<TNode>(ToListNode());
         }

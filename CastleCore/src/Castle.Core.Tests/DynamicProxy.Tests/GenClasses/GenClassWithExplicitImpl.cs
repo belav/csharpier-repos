@@ -33,7 +33,8 @@ namespace Castle.DynamicProxy.Tests.GenClasses
         protected virtual void AcceptChanges() { }
     }
 
-    public class GenClassWithExplicitImpl<T> : GenClassWithExplicitImpl where T : IComparable
+    public class GenClassWithExplicitImpl<T> : GenClassWithExplicitImpl
+        where T : IComparable
     {
         protected override bool IsChanged
         {

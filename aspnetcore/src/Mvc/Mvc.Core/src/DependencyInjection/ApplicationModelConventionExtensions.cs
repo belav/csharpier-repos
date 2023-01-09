@@ -18,7 +18,8 @@ public static class ApplicationModelConventionExtensions
     /// <typeparam name="TApplicationModelConvention">The type to remove.</typeparam>
     public static void RemoveType<TApplicationModelConvention>(
         this IList<IApplicationModelConvention> list
-    ) where TApplicationModelConvention : IApplicationModelConvention
+    )
+        where TApplicationModelConvention : IApplicationModelConvention
     {
         if (list == null)
         {

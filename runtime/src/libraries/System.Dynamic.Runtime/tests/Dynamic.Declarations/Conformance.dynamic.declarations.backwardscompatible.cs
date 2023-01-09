@@ -292,9 +292,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     //<Expects status=success></Expects>
     public class @dynamic { }
 
-    public class G<T> where T : dynamic
+    public class G<T>
+        where T : dynamic
     {
-        public R M<R>(R r) where R : dynamic
+        public R M<R>(R r)
+            where R : dynamic
         {
             return r;
         }
@@ -573,11 +575,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     //<Expects status=success></Expects>
     public class @dynamic { }
 
-    public class G<T> where T : new()
+    public class G<T>
+        where T : new()
     {
         public T V = new T();
 
-        public R M<R>() where R : new()
+        public R M<R>()
+            where R : new()
         {
             return new R();
         }
@@ -617,14 +621,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects status=success></Expects>
-    public class G<@dynamic> where dynamic : new()
+    public class G<@dynamic>
+        where dynamic : new()
     {
         public dynamic V = new dynamic();
     }
 
     public class C
     {
-        public dynamic M<@dynamic>() where dynamic : new()
+        public dynamic M<@dynamic>()
+            where dynamic : new()
         {
             return new dynamic();
         }
@@ -672,14 +678,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     {
         public class @dynamic { }
 
-        public class G2<@dynamic> where dynamic : new()
+        public class G2<@dynamic>
+            where dynamic : new()
         {
             public dynamic V = new dynamic();
         }
 
         public class C2
         {
-            public dynamic M<@dynamic>() where dynamic : new()
+            public dynamic M<@dynamic>()
+                where dynamic : new()
             {
                 return new dynamic();
             }
@@ -697,14 +705,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.backwardsc
     //<Expects status=success></Expects>
     public class @dynamic { }
 
-    public class G<@dynamic> where dynamic : new()
+    public class G<@dynamic>
+        where dynamic : new()
     {
         public dynamic V = new dynamic();
     }
 
     public class C
     {
-        public dynamic M<@dynamic>() where dynamic : new()
+        public dynamic M<@dynamic>()
+            where dynamic : new()
         {
             return new dynamic();
         }

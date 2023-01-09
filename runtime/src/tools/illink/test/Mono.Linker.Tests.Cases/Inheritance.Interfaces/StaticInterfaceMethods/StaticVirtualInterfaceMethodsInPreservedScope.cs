@@ -27,7 +27,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
         }
 
         [Kept]
-        static void MarkInterfaceMethods<T>() where T : IStaticInterfaceWithDefaultImpls
+        static void MarkInterfaceMethods<T>()
+            where T : IStaticInterfaceWithDefaultImpls
         {
             T.Property = T.Property + 1;
             T.Method();

@@ -57,7 +57,8 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             private class DictionaryEnumConverterInner<TKey, TValue>
-                : JsonConverter<Dictionary<TKey, TValue>> where TKey : struct, Enum
+                : JsonConverter<Dictionary<TKey, TValue>>
+                where TKey : struct, Enum
             {
                 private readonly JsonConverter<TValue> _valueConverter;
                 private Type _keyType;

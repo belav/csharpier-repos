@@ -12,7 +12,8 @@ namespace System.Collections.Frozen
     /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
     internal sealed class ValueTypeDefaultComparerFrozenDictionary<TKey, TValue>
         : KeysAndValuesFrozenDictionary<TKey, TValue>,
-            IDictionary<TKey, TValue> where TKey : notnull
+            IDictionary<TKey, TValue>
+        where TKey : notnull
     {
         internal ValueTypeDefaultComparerFrozenDictionary(Dictionary<TKey, TValue> source)
             : base(source, EqualityComparer<TKey>.Default)

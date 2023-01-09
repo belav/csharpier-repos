@@ -285,7 +285,8 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Retrieves the current delegate that is being called
         /// </summary>
-        public static T GetCurrentCalleeDelegate<T>() where T : class // constraint can't be System.Delegate
+        public static T GetCurrentCalleeDelegate<T>()
+            where T : class // constraint can't be System.Delegate
         {
             //
             // RH keeps track of the current thunk that is being called through a secret argument / thread

@@ -133,7 +133,8 @@ public static unsafe class Raytrace
         );
     }
 
-    public class Intersector<T> : Intersector where T : unmanaged, ISceneObject
+    public class Intersector<T> : Intersector
+        where T : unmanaged, ISceneObject
     {
         public SceneObjectReader<T> Reader;
 

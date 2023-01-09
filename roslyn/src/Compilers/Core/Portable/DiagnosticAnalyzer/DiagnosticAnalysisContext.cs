@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed at the start of semantic analysis of a code block.</param>
         public abstract void RegisterCodeBlockStartAction<TLanguageKindEnum>(
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
-        ) where TLanguageKindEnum : struct;
+        )
+            where TLanguageKindEnum : struct;
 
         /// <summary>
         /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
@@ -156,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterSyntaxNodeAction<TLanguageKindEnum>(
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             this.RegisterSyntaxNodeAction(action, syntaxKinds.AsImmutableOrEmpty());
         }
@@ -172,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public abstract void RegisterSyntaxNodeAction<TLanguageKindEnum>(
             Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds
-        ) where TLanguageKindEnum : struct;
+        )
+            where TLanguageKindEnum : struct;
 
         /// <summary>
         /// Register an action to be executed at the start of semantic analysis of a method body or an expression appearing outside a method body.
@@ -277,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TKey key,
             AnalysisValueProvider<TKey, TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) where TKey : class
+        )
+            where TKey : class
         {
             DiagnosticAnalysisContextHelpers.VerifyArguments(key, valueProvider);
             return valueProvider.TryGetValue(key, out value);
@@ -444,7 +448,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed at the start of semantic analysis of a code block.</param>
         public abstract void RegisterCodeBlockStartAction<TLanguageKindEnum>(
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
-        ) where TLanguageKindEnum : struct;
+        )
+            where TLanguageKindEnum : struct;
 
         /// <summary>
         /// Register an action to be executed at the end of semantic analysis of a method body or an expression appearing outside a method body.
@@ -508,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterSyntaxNodeAction<TLanguageKindEnum>(
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             this.RegisterSyntaxNodeAction(action, syntaxKinds.AsImmutableOrEmpty());
         }
@@ -524,7 +530,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public abstract void RegisterSyntaxNodeAction<TLanguageKindEnum>(
             Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds
-        ) where TLanguageKindEnum : struct;
+        )
+            where TLanguageKindEnum : struct;
 
         /// <summary>
         /// Register an action to be executed at completion of semantic analysis of an <see cref="IOperation"/> with an appropriate Kind.
@@ -598,7 +605,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TKey key,
             AnalysisValueProvider<TKey, TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) where TKey : class
+        )
+            where TKey : class
         {
             DiagnosticAnalysisContextHelpers.VerifyArguments(key, valueProvider);
             return TryGetValueCore(key, valueProvider, out value);
@@ -608,7 +616,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TKey key,
             AnalysisValueProvider<TKey, TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) where TKey : class
+        )
+            where TKey : class
         {
             throw new NotImplementedException();
         }
@@ -744,7 +753,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TKey key,
             AnalysisValueProvider<TKey, TValue> valueProvider,
             [MaybeNullWhen(false)] out TValue value
-        ) where TKey : class
+        )
+            where TKey : class
         {
             DiagnosticAnalysisContextHelpers.VerifyArguments(key, valueProvider);
 
@@ -1039,7 +1049,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="action">Action to be executed at the start of semantic analysis of a code block.</param>
         public abstract void RegisterCodeBlockStartAction<TLanguageKindEnum>(
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
-        ) where TLanguageKindEnum : struct;
+        )
+            where TLanguageKindEnum : struct;
 
         /// <summary>
         /// Register an action to be executed after semantic analysis of a method body or an expression appearing outside a method body.
@@ -1059,7 +1070,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterSyntaxNodeAction<TLanguageKindEnum>(
             Action<SyntaxNodeAnalysisContext> action,
             params TLanguageKindEnum[] syntaxKinds
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             this.RegisterSyntaxNodeAction(action, syntaxKinds.AsImmutableOrEmpty());
         }
@@ -1075,7 +1087,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public abstract void RegisterSyntaxNodeAction<TLanguageKindEnum>(
             Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds
-        ) where TLanguageKindEnum : struct;
+        )
+            where TLanguageKindEnum : struct;
 
         /// <summary>
         /// Register an action to be executed at the start of semantic analysis of a method body or an expression appearing outside a method body.

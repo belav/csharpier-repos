@@ -164,7 +164,8 @@ namespace Internal.Cryptography.Pal.Windows
             X509Certificate2 certificate,
             bool silent,
             bool preferNCrypt
-        ) where T : AsymmetricAlgorithm
+        )
+            where T : AsymmetricAlgorithm
         {
             if (!certificate.HasPrivateKey)
             {

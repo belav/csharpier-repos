@@ -128,7 +128,8 @@ namespace System.Linq.Expressions
         /// otherwise, returns the original expression.</returns>
         /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
         [return: NotNullIfNotNull(nameof(node))]
-        public T? VisitAndConvert<T>(T? node, string? callerName) where T : Expression
+        public T? VisitAndConvert<T>(T? node, string? callerName)
+            where T : Expression
         {
             if (node == null)
             {
@@ -154,7 +155,8 @@ namespace System.Linq.Expressions
         public ReadOnlyCollection<T> VisitAndConvert<T>(
             ReadOnlyCollection<T> nodes,
             string? callerName
-        ) where T : Expression
+        )
+            where T : Expression
         {
             ArgumentNullException.ThrowIfNull(nodes);
             T[]? newNodes = null;

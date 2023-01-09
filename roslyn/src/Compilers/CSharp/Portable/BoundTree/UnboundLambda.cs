@@ -1764,7 +1764,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static BoundLambda? GuessBestBoundLambda<T>(
             ImmutableDictionary<T, BoundLambda> candidates
-        ) where T : notnull
+        )
+            where T : notnull
         {
             switch (candidates.Count)
             {

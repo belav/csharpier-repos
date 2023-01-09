@@ -864,7 +864,8 @@ namespace Microsoft.CodeAnalysis
             in SyntaxNodeOrToken node,
             Func<TDirective, bool>? filter,
             ref List<TDirective>? directives
-        ) where TDirective : SyntaxNode
+        )
+            where TDirective : SyntaxNode
         {
             if (node._token != null && node.AsToken() is var token && token.ContainsDirectives)
             {
@@ -881,7 +882,8 @@ namespace Microsoft.CodeAnalysis
             SyntaxNode node,
             Func<TDirective, bool>? filter,
             ref List<TDirective>? directives
-        ) where TDirective : SyntaxNode
+        )
+            where TDirective : SyntaxNode
         {
             foreach (
                 var trivia in node.DescendantTrivia(
@@ -898,7 +900,8 @@ namespace Microsoft.CodeAnalysis
             in SyntaxTrivia trivia,
             Func<TDirective, bool>? filter,
             ref List<TDirective>? directives
-        ) where TDirective : SyntaxNode
+        )
+            where TDirective : SyntaxNode
         {
             if (trivia.IsDirective)
             {
@@ -924,7 +927,8 @@ namespace Microsoft.CodeAnalysis
             in SyntaxTriviaList trivia,
             Func<TDirective, bool>? filter,
             ref List<TDirective>? directives
-        ) where TDirective : SyntaxNode
+        )
+            where TDirective : SyntaxNode
         {
             foreach (var tr in trivia)
             {

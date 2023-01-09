@@ -70,7 +70,8 @@ public class BulkUpdatesAsserter
         Expression<Func<SetPropertyCalls<TResult>, SetPropertyCalls<TResult>>> setPropertyCalls,
         int rowsAffectedCount,
         Action<IReadOnlyList<TEntity>, IReadOnlyList<TEntity>> asserter
-    ) where TResult : class
+    )
+        where TResult : class
     {
         _entitySorters.TryGetValue(typeof(TEntity), out var sorter);
         var elementSorter = (Func<TEntity, object>)sorter;

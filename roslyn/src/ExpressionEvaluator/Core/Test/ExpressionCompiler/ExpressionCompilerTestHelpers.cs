@@ -666,7 +666,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             bool expectedGeneric,
             string expectedValueSourcePath,
             int expectedValueSourceLine
-        ) where TMethodSymbol : IMethodSymbolInternal
+        )
+            where TMethodSymbol : IMethodSymbolInternal
         {
             Assert.Equal(expectedLocalName, localAndMethod.LocalName);
             Assert.Equal(expectedLocalDisplayName, localAndMethod.LocalDisplayName);
@@ -729,7 +730,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static void VerifyAppDomainMetadataContext<TAssemblyContext>(
             MetadataContext<TAssemblyContext> metadataContext,
             Guid[] moduleVersionIds
-        ) where TAssemblyContext : struct
+        )
+            where TAssemblyContext : struct
         {
             var actualIds = metadataContext.AssemblyContexts.Keys
                 .Select(key => key.ModuleVersionId.ToString())

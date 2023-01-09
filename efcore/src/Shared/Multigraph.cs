@@ -5,7 +5,8 @@
 
 namespace Microsoft.EntityFrameworkCore.Utilities;
 
-internal class Multigraph<TVertex, TEdge> : Graph<TVertex> where TVertex : notnull
+internal class Multigraph<TVertex, TEdge> : Graph<TVertex>
+    where TVertex : notnull
 {
     private readonly IComparer<TVertex>? _secondarySortComparer;
     private readonly HashSet<TVertex> _vertices = new();

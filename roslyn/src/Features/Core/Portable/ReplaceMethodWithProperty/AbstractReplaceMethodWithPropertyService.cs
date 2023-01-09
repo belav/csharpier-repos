@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.ReplaceMethodWithProperty
             ISyntaxFacts syntaxFacts,
             GetAndSetMethods getAndSetMethods,
             TPropertyDeclaration property
-        ) where TPropertyDeclaration : SyntaxNode
+        )
+            where TPropertyDeclaration : SyntaxNode
         {
             var getMethodDeclaration = getAndSetMethods.GetMethodDeclaration;
             var setMethodDeclaration = getAndSetMethods.SetMethodDeclaration;

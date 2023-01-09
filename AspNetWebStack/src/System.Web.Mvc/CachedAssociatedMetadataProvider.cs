@@ -9,7 +9,8 @@ using System.Runtime.Caching;
 namespace System.Web.Mvc
 {
     public abstract class CachedAssociatedMetadataProvider<TModelMetadata>
-        : AssociatedMetadataProvider where TModelMetadata : ModelMetadata
+        : AssociatedMetadataProvider
+        where TModelMetadata : ModelMetadata
     {
         private static ConcurrentDictionary<Type, string> _typeIds =
             new ConcurrentDictionary<Type, string>();

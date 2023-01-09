@@ -24,7 +24,8 @@ public class RazorLineFormattingOptionsTests
 
     private class TestRazorDocumentServiceProvider : IDocumentServiceProvider
     {
-        public TService? GetService<TService>() where TService : class, IDocumentService =>
+        public TService? GetService<TService>()
+            where TService : class, IDocumentService =>
             typeof(TService) == typeof(DocumentPropertiesService)
                 ? (TService?)(object)new PropertiesService()
                 : null;

@@ -1125,7 +1125,8 @@ namespace System.Collections.Immutable.Tests
 
         [Theory]
         [MemberData(nameof(ContainsNullData))]
-        public void ContainsNull<T>(IEnumerable<T> source) where T : class
+        public void ContainsNull<T>(IEnumerable<T> source)
+            where T : class
         {
             bool expected = source.Contains(null, EqualityComparer<T>.Default);
             Assert.Equal(expected, source.ToImmutableArray().Contains(null));
@@ -1272,7 +1273,8 @@ namespace System.Collections.Immutable.Tests
 
         [Theory]
         [MemberData(nameof(EnumeratorTraversalNullData))]
-        public void EnumeratorTraversalNull<T>(IEnumerable<T> source) where T : class
+        public void EnumeratorTraversalNull<T>(IEnumerable<T> source)
+            where T : class
         {
             var array = ForceLazy(source.ToImmutableArray()).ToArray();
             Assert.Equal(source, array);
@@ -3676,7 +3678,8 @@ namespace System.Collections.Immutable.Tests
         /// </summary>
         /// <typeparam name="T">The type of the object.</typeparam>
         /// <param name="obj">The object.</param>
-        private static IEquatable<T> AsEquatable<T>(T obj) where T : IEquatable<T> => obj;
+        private static IEquatable<T> AsEquatable<T>(T obj)
+            where T : IEquatable<T> => obj;
 
         /// <summary>
         /// Given an enumerable, produces a list of enumerables that have the same contents,
@@ -3776,7 +3779,8 @@ namespace System.Collections.Immutable.Tests
         /// Returns a list of comparers that are shared between tests.
         /// </summary>
         /// <typeparam name="T">The comparand type.</typeparam>
-        private static IEnumerable<IComparer<T>> SharedComparers<T>() where T : IComparable<T>
+        private static IEnumerable<IComparer<T>> SharedComparers<T>()
+            where T : IComparable<T>
         {
             // Null comparers should be accepted and translated to the default comparer.
             yield return null;

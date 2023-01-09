@@ -25,7 +25,8 @@ namespace MonoBug
         TValue Value { get; }
     }
 
-    struct Pair<TKey, TValue> : IPair<TKey, TValue> where TValue : class
+    struct Pair<TKey, TValue> : IPair<TKey, TValue>
+        where TValue : class
     {
         public TKey Key { get; }
         public TValue Value { get; }
@@ -39,7 +40,8 @@ namespace MonoBug
 
     struct IncorrectEnumerator1<TValue>
         : IEnumerator<ValueHolder<TValue>>,
-            IEnumerator<IValue<TValue>> where TValue : class
+            IEnumerator<IValue<TValue>>
+        where TValue : class
     {
         object IEnumerator.Current => null;
 

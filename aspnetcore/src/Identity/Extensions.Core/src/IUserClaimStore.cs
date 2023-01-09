@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store of claims for a user.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserClaimStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserClaimStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="user"/> as an asynchronous operation.

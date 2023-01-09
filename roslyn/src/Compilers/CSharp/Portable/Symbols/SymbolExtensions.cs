@@ -789,7 +789,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private static ImmutableArray<TISymbol> GetPublicSymbols<TISymbol>(
             this ImmutableArray<Symbol> symbols
-        ) where TISymbol : class, ISymbol
+        )
+            where TISymbol : class, ISymbol
         {
             if (symbols.IsDefault)
             {
@@ -884,7 +885,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         [return: NotNullIfNotNull("symbol")]
-        internal static TSymbol? GetSymbol<TSymbol>(this ISymbol? symbol) where TSymbol : Symbol
+        internal static TSymbol? GetSymbol<TSymbol>(this ISymbol? symbol)
+            where TSymbol : Symbol
         {
             return (TSymbol?)((PublicModel.Symbol?)symbol)?.UnderlyingSymbol;
         }

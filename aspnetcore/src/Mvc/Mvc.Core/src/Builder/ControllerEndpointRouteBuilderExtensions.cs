@@ -498,7 +498,8 @@ public static class ControllerEndpointRouteBuilderExtensions
     public static void MapDynamicControllerRoute<TTransformer>(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern
-    ) where TTransformer : DynamicRouteValueTransformer
+    )
+        where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {
@@ -531,7 +532,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         object? state
-    ) where TTransformer : DynamicRouteValueTransformer
+    )
+        where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {
@@ -578,7 +580,8 @@ public static class ControllerEndpointRouteBuilderExtensions
         [StringSyntax("Route")] string pattern,
         object state,
         int order
-    ) where TTransformer : DynamicRouteValueTransformer
+    )
+        where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {

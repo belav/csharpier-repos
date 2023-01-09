@@ -298,7 +298,8 @@ namespace Microsoft.CodeAnalysis
             internal void WriteRefKindArray(ImmutableArray<IParameterSymbol> values) =>
                 WriteArray(values, _writeRefKind);
 
-            private void WriteArray<T, U>(ImmutableArray<T> array, Action<U> writeValue) where T : U
+            private void WriteArray<T, U>(ImmutableArray<T> array, Action<U> writeValue)
+                where T : U
             {
                 WriteSpace();
                 Debug.Assert(!array.IsDefault);

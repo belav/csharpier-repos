@@ -52,7 +52,8 @@ namespace System.Memory.Tests.SequenceReader
             return new ReadOnlySequence<T>(first, 0, last, last.Length);
         }
 
-        public static ReadOnlySequence<T> Create<T>(params T[][] inputs) where T : struct
+        public static ReadOnlySequence<T> Create<T>(params T[][] inputs)
+            where T : struct
         {
             if (inputs == null || inputs.Length == 0)
             {
@@ -104,7 +105,8 @@ namespace System.Memory.Tests.SequenceReader
             return Create(buffers);
         }
 
-        public static ReadOnlySequence<T> Create<T>(params int[] inputs) where T : struct
+        public static ReadOnlySequence<T> Create<T>(params int[] inputs)
+            where T : struct
         {
             T[][] buffers;
             if (inputs.Length == 0)

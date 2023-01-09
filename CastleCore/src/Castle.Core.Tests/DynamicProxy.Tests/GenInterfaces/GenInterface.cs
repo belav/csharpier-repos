@@ -14,12 +14,14 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-    public interface GenInterface<T> where T : new()
+    public interface GenInterface<T>
+        where T : new()
     {
         T DoSomething(T t);
     }
 
-    public class GenInterfaceImpl<T> : GenInterface<T> where T : new()
+    public class GenInterfaceImpl<T> : GenInterface<T>
+        where T : new()
     {
         public T DoSomething(T t)
         {

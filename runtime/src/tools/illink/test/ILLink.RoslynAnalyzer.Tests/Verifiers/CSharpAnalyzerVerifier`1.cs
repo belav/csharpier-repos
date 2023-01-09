@@ -1084,12 +1084,14 @@ namespace ILLink.RoslynAnalyzer.Tests
                 .ToArray();
         }
 
-        internal static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source) where T : class
+        internal static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source)
+            where T : class
         {
             return source.Where<T?>(s_notNullTest)!;
         }
 
-        public static T? SingleOrNull<T>(this IEnumerable<T> source) where T : struct
+        public static T? SingleOrNull<T>(this IEnumerable<T> source)
+            where T : struct
         {
             return source.Select(value => (T?)value).SingleOrDefault();
         }

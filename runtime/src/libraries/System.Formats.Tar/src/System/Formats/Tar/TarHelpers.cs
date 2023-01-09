@@ -283,7 +283,8 @@ namespace System.Formats.Tar
         }
 
         /// <summary>Parses a byte span that represents an ASCII string containing a number in octal base.</summary>
-        internal static T ParseOctal<T>(ReadOnlySpan<byte> buffer) where T : struct, INumber<T>
+        internal static T ParseOctal<T>(ReadOnlySpan<byte> buffer)
+            where T : struct, INumber<T>
         {
             buffer = TrimEndingNullsAndSpaces(buffer);
             buffer = TrimLeadingNullsAndSpaces(buffer);

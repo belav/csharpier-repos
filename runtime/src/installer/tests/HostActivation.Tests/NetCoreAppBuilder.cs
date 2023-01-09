@@ -63,7 +63,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             }
         }
 
-        public abstract class FileBuilder<T> : FileBuilder where T : FileBuilder
+        public abstract class FileBuilder<T> : FileBuilder
+            where T : FileBuilder
         {
             public FileBuilder(string path)
                 : base(path) { }

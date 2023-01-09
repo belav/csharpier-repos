@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             _listener = listenerProvider.GetListener(FeatureAttribute.Classification);
         }
 
-        public ITagger<T>? CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T>? CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             this.AssertIsForeground();
             if (!_globalOptions.GetOption(InternalFeatureOnOffOptions.SyntacticColorizer))

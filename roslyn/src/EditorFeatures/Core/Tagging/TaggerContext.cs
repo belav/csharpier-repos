@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
-    internal class TaggerContext<TTag> where TTag : ITag
+    internal class TaggerContext<TTag>
+        where TTag : ITag
     {
         private readonly ImmutableDictionary<ITextBuffer, TagSpanIntervalTree<TTag>> _existingTags;
 

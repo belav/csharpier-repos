@@ -73,7 +73,8 @@ namespace System.Buffers.Text
             Span<byte> destination,
             out int bytesWritten,
             StandardFormat format
-        ) where T : ISpanFormattable
+        )
+            where T : ISpanFormattable
         {
             scoped Span<char> formatText = default;
 

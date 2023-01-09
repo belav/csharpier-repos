@@ -28,8 +28,8 @@ namespace TestConstraint
 
         interface IBuggy<T1>
         {
-            public void Foo<T2>() where T2 : T1 =>
-                Console.WriteLine($"Works for type: {typeof(T1)}");
+            public void Foo<T2>()
+                where T2 : T1 => Console.WriteLine($"Works for type: {typeof(T1)}");
         }
 
         public class Worky : IBuggy<int> { }
@@ -45,7 +45,8 @@ namespace TestConstraint
             long Index { get; }
         }
 
-        private interface IAuditTrail<TRecord> where TRecord : class, ILogEntry
+        private interface IAuditTrail<TRecord>
+            where TRecord : class, ILogEntry
         {
             ValueTask AppendAsync<TRecordImpl>(TRecordImpl impl, CancellationToken token)
                 where TRecordImpl : notnull, TRecord

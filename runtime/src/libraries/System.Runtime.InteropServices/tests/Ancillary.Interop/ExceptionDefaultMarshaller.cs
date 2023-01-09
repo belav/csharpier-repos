@@ -19,7 +19,8 @@ namespace System.Runtime.InteropServices.Marshalling
         MarshalMode.UnmanagedToManagedOut,
         typeof(ExceptionHResultMarshaller<>)
     )]
-    public static class ExceptionDefaultMarshaller<T> where T : unmanaged
+    public static class ExceptionDefaultMarshaller<T>
+        where T : unmanaged
     {
         /// <summary>
         /// Converts the exception to the default value of the unmanaged type.

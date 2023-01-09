@@ -299,7 +299,8 @@ class DeadCodeElimination
 
         class Marker2 { }
 
-        static Type Call<T>() where T : IFoo => T.Frob();
+        static Type Call<T>()
+            where T : IFoo => T.Frob();
 
         public static void Run()
         {

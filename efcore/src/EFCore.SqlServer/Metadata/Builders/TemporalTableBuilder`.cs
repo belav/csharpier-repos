@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
 /// <typeparam name="TEntity">The entity type being configured.</typeparam>
-public class TemporalTableBuilder<TEntity> : TemporalTableBuilder where TEntity : class
+public class TemporalTableBuilder<TEntity> : TemporalTableBuilder
+    where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

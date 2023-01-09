@@ -1319,8 +1319,10 @@ public class Tests
 
     interface IConstrainedCalls
     {
-        Pair<int, int> vtype_ret<T, T2>(T t, T2 t2) where T : IReturnVType;
-        AnEnum enum_ret<T, T2>(T t, T2 t2) where T : IReturnVType;
+        Pair<int, int> vtype_ret<T, T2>(T t, T2 t2)
+            where T : IReturnVType;
+        AnEnum enum_ret<T, T2>(T t, T2 t2)
+            where T : IReturnVType;
         int normal_args<T, T2>(T t, T2 t2, int i1, int i2, string s, ref int i3, Foo foo)
             where T : IConstrained2;
     }
@@ -1339,13 +1341,15 @@ public class Tests
     public class CConstrainedCalls : IConstrainedCalls
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public Pair<int, int> vtype_ret<T, T2>(T t, T2 t2) where T : IReturnVType
+        public Pair<int, int> vtype_ret<T, T2>(T t, T2 t2)
+            where T : IReturnVType
         {
             return t.return_vtype();
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public AnEnum enum_ret<T, T2>(T t, T2 t2) where T : IReturnVType
+        public AnEnum enum_ret<T, T2>(T t, T2 t2)
+            where T : IReturnVType
         {
             return t.return_enum();
         }
@@ -1547,13 +1551,15 @@ public class Tests
 
     interface IFace4
     {
-        TSource Catch<TSource, TException>(TSource t) where TException : Exception;
+        TSource Catch<TSource, TException>(TSource t)
+            where TException : Exception;
     }
 
     class Class4 : IFace4
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public TSource Catch<TSource, TException>(TSource t) where TException : Exception
+        public TSource Catch<TSource, TException>(TSource t)
+            where TException : Exception
         {
             return t;
         }
@@ -1819,25 +1825,30 @@ public class Tests
 
     interface IFaceConstrained
     {
-        void constrained_void_iface_call<T, T2>(T t, T2 t2) where T2 : IConstrained;
-        void constrained_void_iface_call_ref_arg<T, T2>(T t, T2 t2) where T2 : IConstrained;
+        void constrained_void_iface_call<T, T2>(T t, T2 t2)
+            where T2 : IConstrained;
+        void constrained_void_iface_call_ref_arg<T, T2>(T t, T2 t2)
+            where T2 : IConstrained;
         void constrained_void_iface_call_gsharedvt_arg<T, T2, T3>(T t, T2 t2, T3 t3)
             where T2 : IConstrained<T>;
         T constrained_iface_call_gsharedvt_ret<T, T2, T3>(T t, T2 t2, T3 t3)
             where T2 : IConstrained<T>;
-        T2 constrained_normal_call<T, T2>(T t, T2 t2) where T2 : VClass;
+        T2 constrained_normal_call<T, T2>(T t, T2 t2)
+            where T2 : VClass;
     }
 
     class ClassConstrained : IFaceConstrained
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public void constrained_void_iface_call<T, T2>(T t, T2 t2) where T2 : IConstrained
+        public void constrained_void_iface_call<T, T2>(T t, T2 t2)
+            where T2 : IConstrained
         {
             t2.foo();
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public void constrained_void_iface_call_ref_arg<T, T2>(T t, T2 t2) where T2 : IConstrained
+        public void constrained_void_iface_call_ref_arg<T, T2>(T t, T2 t2)
+            where T2 : IConstrained
         {
             t2.foo_ref_arg("A", "B");
         }
@@ -1857,7 +1868,8 @@ public class Tests
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public T2 constrained_normal_call<T, T2>(T t, T2 t2) where T2 : VClass
+        public T2 constrained_normal_call<T, T2>(T t, T2 t2)
+            where T2 : VClass
         {
             /* This becomes a constrained call even through 't2' is forced to be a reference type by the constraint */
             return (T2)t2.foo(5);
@@ -2555,12 +2567,14 @@ public class Tests
 
     public interface IFaceConstrainedIFace
     {
-        int foo<T, T2>(ref T val) where T : IFaceTest;
+        int foo<T, T2>(ref T val)
+            where T : IFaceTest;
     }
 
     class ConstrainedIFace : IFaceConstrainedIFace
     {
-        public int foo<T, T2>(ref T val) where T : IFaceTest
+        public int foo<T, T2>(ref T val)
+            where T : IFaceTest
         {
             return val.iface_method();
         }
@@ -2832,7 +2846,8 @@ public class Tests
         return success ? 20 : 1;
     }
 
-    void gsharedvt_try_at_offset_0<T>(ref T disposable) where T : class, IDisposable
+    void gsharedvt_try_at_offset_0<T>(ref T disposable)
+        where T : class, IDisposable
     {
         try
         {

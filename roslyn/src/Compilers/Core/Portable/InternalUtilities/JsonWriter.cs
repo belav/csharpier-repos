@@ -112,18 +112,21 @@ namespace Roslyn.Utilities
             Write(value);
         }
 
-        public void Write<T>(string key, T value) where T : struct, Enum
+        public void Write<T>(string key, T value)
+            where T : struct, Enum
         {
             WriteKey(key);
             Write(value.ToString());
         }
 
-        public void WriteInvariant<T>(T value) where T : struct, IFormattable
+        public void WriteInvariant<T>(T value)
+            where T : struct, IFormattable
         {
             Write(value.ToString(null, CultureInfo.InvariantCulture));
         }
 
-        public void WriteInvariant<T>(string key, T value) where T : struct, IFormattable
+        public void WriteInvariant<T>(string key, T value)
+            where T : struct, IFormattable
         {
             WriteKey(key);
             WriteInvariant(value);
@@ -196,12 +199,14 @@ namespace Roslyn.Utilities
             }
         }
 
-        public void Write<T>(T value) where T : struct, Enum
+        public void Write<T>(T value)
+            where T : struct, Enum
         {
             Write(value.ToString());
         }
 
-        public void Write<T>(T? value) where T : struct, Enum
+        public void Write<T>(T? value)
+            where T : struct, Enum
         {
             if (value is { } e)
             {

@@ -246,7 +246,8 @@ namespace Microsoft.Extensions.Logging.Test
         // intentionally holds nothing
     }
 
-    internal class GenericClass<X> where X : class
+    internal class GenericClass<X>
+        where X : class
     {
         // intentionally holds nothing
     }

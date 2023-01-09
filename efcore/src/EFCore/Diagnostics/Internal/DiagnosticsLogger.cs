@@ -164,7 +164,8 @@ public class DiagnosticsLogger<TLoggerCategory> : IDiagnosticsLogger<TLoggerCate
         out TInterceptor? interceptor,
         out bool diagnosticSourceEnabled,
         out bool simpleLogEnabled
-    ) where TInterceptor : class, IInterceptor =>
+    )
+        where TInterceptor : class, IInterceptor =>
         ((IDiagnosticsLogger)this).NeedsEventData(
             definition,
             out interceptor,

@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<bool> TryInvokeAsync<TService>(
             Func<TService, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Remote
         public async ValueTask<Optional<TResult>> TryInvokeAsync<TService, TResult>(
             Func<TService, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -96,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Func<TService, RemoteServiceCallbackId, CancellationToken, ValueTask> invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -113,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Remote
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -127,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             Func<TService, Checksum, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -139,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Solution solution,
             Func<TService, Checksum, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -159,7 +165,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Project project,
             Func<TService, Checksum, CancellationToken, ValueTask> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -177,7 +184,8 @@ namespace Microsoft.CodeAnalysis.Remote
             Project project,
             Func<TService, Checksum, CancellationToken, ValueTask<TResult>> invocation,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget: null);
             return await connection
@@ -198,7 +206,8 @@ namespace Microsoft.CodeAnalysis.Remote
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -217,7 +226,8 @@ namespace Microsoft.CodeAnalysis.Remote
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -244,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Remote
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection
@@ -269,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Remote
             > invocation,
             object callbackTarget,
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             using var connection = CreateConnection<TService>(callbackTarget);
             return await connection

@@ -16,7 +16,8 @@ namespace System.Reflection.Tests
         //
         // Turn a CustomAttributeData into a live Attribute object.
         //
-        public static T Instantiate<T>(this CustomAttributeData cad) where T : Attribute
+        public static T Instantiate<T>(this CustomAttributeData cad)
+            where T : Attribute
         {
             if (cad == null)
                 return null;

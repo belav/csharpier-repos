@@ -75,12 +75,14 @@ namespace System.Net.Security
         private ValueTask WriteAsyncInternal<TWriteAdapter>(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TWriteAdapter : IReadWriteAdapter => default;
+        )
+            where TWriteAdapter : IReadWriteAdapter => default;
 
         private ValueTask<int> ReadAsyncInternal<TReadAdapter>(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TReadAdapter : IReadWriteAdapter => default;
+        )
+            where TReadAdapter : IReadWriteAdapter => default;
 
         private bool RemoteCertRequired => default;
 

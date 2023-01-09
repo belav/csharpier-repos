@@ -10,7 +10,8 @@ using LinqError = System.Linq.Expressions.Error;
 
 namespace System.Dynamic.Utils
 {
-    internal abstract class ListProvider<T> : IList<T> where T : class
+    internal abstract class ListProvider<T> : IList<T>
+        where T : class
     {
         protected abstract T First { get; }
         protected abstract int ElementCount { get; }

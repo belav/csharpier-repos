@@ -92,7 +92,8 @@ EXEC (@SQL);";
     private static TOperation AddSqlServerSpecificAnnotations<TOperation>(
         TOperation operation,
         DatabaseTable table
-    ) where TOperation : MigrationOperation
+    )
+        where TOperation : MigrationOperation
     {
         operation[SqlServerAnnotationNames.MemoryOptimized] =
             table[SqlServerAnnotationNames.MemoryOptimized] as bool?;

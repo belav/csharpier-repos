@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
             Func<TNode, TArg, bool> predicate,
             TArg argument,
             bool ascendOutOfTrivia = true
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (; node != null; node = GetParent(node, ascendOutOfTrivia))
             {

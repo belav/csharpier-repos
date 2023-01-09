@@ -70,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             );
         }
 
-        public ITagger<T>? CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
+        public ITagger<T>? CreateTagger<T>(ITextView textView, ITextBuffer buffer)
+            where T : ITag
         {
             if (textView.IsNotSurfaceBufferOfTextView(buffer))
             {

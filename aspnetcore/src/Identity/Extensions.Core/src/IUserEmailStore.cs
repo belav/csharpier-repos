@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for the storage and management of user email addresses.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserEmailStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserEmailStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets the <paramref name="email"/> address for a <paramref name="user"/>.

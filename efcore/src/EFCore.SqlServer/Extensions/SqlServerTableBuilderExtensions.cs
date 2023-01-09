@@ -66,7 +66,8 @@ public static class SqlServerTableBuilderExtensions
     public static TemporalTableBuilder<TEntity> IsTemporal<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
         bool temporal = true
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(temporal);
 
@@ -89,7 +90,8 @@ public static class SqlServerTableBuilderExtensions
     public static TableBuilder<TEntity> IsTemporal<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
         Action<TemporalTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         tableBuilder.Metadata.SetIsTemporal(true);
         buildAction(
@@ -240,7 +242,8 @@ public static class SqlServerTableBuilderExtensions
     public static TableBuilder<TEntity> IsMemoryOptimized<TEntity>(
         this TableBuilder<TEntity> tableBuilder,
         bool memoryOptimized = true
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         tableBuilder.Metadata.SetIsMemoryOptimized(memoryOptimized);
 

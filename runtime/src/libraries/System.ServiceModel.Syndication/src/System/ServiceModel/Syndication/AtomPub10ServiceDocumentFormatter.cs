@@ -866,7 +866,8 @@ namespace System.ServiceModel.Syndication
 
     [XmlRoot(ElementName = App10Constants.Service, Namespace = App10Constants.Namespace)]
     public class AtomPub10ServiceDocumentFormatter<TServiceDocument>
-        : AtomPub10ServiceDocumentFormatter where TServiceDocument : ServiceDocument, new()
+        : AtomPub10ServiceDocumentFormatter
+        where TServiceDocument : ServiceDocument, new()
     {
         public AtomPub10ServiceDocumentFormatter()
             : base(typeof(TServiceDocument)) { }

@@ -34,7 +34,8 @@ public abstract class ResetAuthenticatorModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel where TUser : class
+internal sealed class ResetAuthenticatorModel<TUser> : ResetAuthenticatorModel
+    where TUser : class
 {
     readonly UserManager<TUser> _userManager;
     private readonly SignInManager<TUser> _signInManager;

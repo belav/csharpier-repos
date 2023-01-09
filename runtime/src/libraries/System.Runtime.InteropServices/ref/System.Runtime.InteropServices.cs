@@ -737,7 +737,8 @@ namespace System.IO
             System.IO.FileAccess access
         ) { }
 
-        public int ReadArray<T>(long position, T[] array, int offset, int count) where T : struct
+        public int ReadArray<T>(long position, T[] array, int offset, int count)
+            where T : struct
         {
             throw null;
         }
@@ -811,7 +812,8 @@ namespace System.IO
             throw null;
         }
 
-        public void Read<T>(long position, out T structure) where T : struct
+        public void Read<T>(long position, out T structure)
+            where T : struct
         {
             throw null;
         }
@@ -849,7 +851,8 @@ namespace System.IO
         public void WriteArray<T>(long position, T[] array, int offset, int count)
             where T : struct { }
 
-        public void Write<T>(long position, ref T structure) where T : struct { }
+        public void Write<T>(long position, ref T structure)
+            where T : struct { }
     }
 }
 
@@ -1057,7 +1060,8 @@ namespace System.Runtime.InteropServices
         public static ref TValue GetValueRefOrNullRef<TKey, TValue>(
             System.Collections.Generic.Dictionary<TKey, TValue> dictionary,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1066,7 +1070,8 @@ namespace System.Runtime.InteropServices
             System.Collections.Generic.Dictionary<TKey, TValue> dictionary,
             TKey key,
             out bool exists
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1250,7 +1255,8 @@ namespace System.Runtime.InteropServices
         {
             public System.IntPtr Vtable;
 
-            public unsafe static T GetInstance<T>(ComInterfaceDispatch* dispatchPtr) where T : class
+            public unsafe static T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
+                where T : class
             {
                 throw null;
             }

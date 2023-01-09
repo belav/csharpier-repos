@@ -21,7 +21,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class BinaryIntegerHelper<TSelf> where TSelf : IBinaryInteger<TSelf>
+    public static class BinaryIntegerHelper<TSelf>
+        where TSelf : IBinaryInteger<TSelf>
     {
         public static TSelf LeadingZeroCount(TSelf value) => TSelf.LeadingZeroCount(value);
 
@@ -37,7 +38,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class BinaryNumberHelper<TSelf> where TSelf : IBinaryNumber<TSelf>
+    public static class BinaryNumberHelper<TSelf>
+        where TSelf : IBinaryNumber<TSelf>
     {
         public static bool IsPow2(TSelf value) => TSelf.IsPow2(value);
 
@@ -71,7 +73,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class DecrementOperatorsHelper<TSelf> where TSelf : IDecrementOperators<TSelf>
+    public static class DecrementOperatorsHelper<TSelf>
+        where TSelf : IDecrementOperators<TSelf>
     {
         public static TSelf op_Decrement(TSelf value) => --value;
     }
@@ -93,7 +96,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class IncrementOperatorsHelper<TSelf> where TSelf : IIncrementOperators<TSelf>
+    public static class IncrementOperatorsHelper<TSelf>
+        where TSelf : IIncrementOperators<TSelf>
     {
         public static TSelf op_Increment(TSelf value) => ++value;
     }
@@ -113,7 +117,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class MinMaxValueHelper<TSelf> where TSelf : IMinMaxValue<TSelf>
+    public static class MinMaxValueHelper<TSelf>
+        where TSelf : IMinMaxValue<TSelf>
     {
         public static TSelf MaxValue => TSelf.MaxValue;
 
@@ -128,7 +133,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class NumberHelper<TSelf> where TSelf : INumber<TSelf>
+    public static class NumberHelper<TSelf>
+        where TSelf : INumber<TSelf>
     {
         public static TSelf One => TSelf.One;
 
@@ -139,14 +145,14 @@ namespace System.Tests
         public static TSelf Clamp(TSelf value, TSelf min, TSelf max) =>
             TSelf.Clamp(value, min, max);
 
-        public static TSelf Create<TOther>(TOther value) where TOther : INumber<TOther> =>
-            TSelf.Create<TOther>(value);
+        public static TSelf Create<TOther>(TOther value)
+            where TOther : INumber<TOther> => TSelf.Create<TOther>(value);
 
-        public static TSelf CreateSaturating<TOther>(TOther value) where TOther : INumber<TOther> =>
-            TSelf.CreateSaturating<TOther>(value);
+        public static TSelf CreateSaturating<TOther>(TOther value)
+            where TOther : INumber<TOther> => TSelf.CreateSaturating<TOther>(value);
 
-        public static TSelf CreateTruncating<TOther>(TOther value) where TOther : INumber<TOther> =>
-            TSelf.CreateTruncating<TOther>(value);
+        public static TSelf CreateTruncating<TOther>(TOther value)
+            where TOther : INumber<TOther> => TSelf.CreateTruncating<TOther>(value);
 
         public static (TSelf Quotient, TSelf Remainder) DivRem(TSelf left, TSelf right) =>
             TSelf.DivRem(left, right);
@@ -199,7 +205,8 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class ParseableHelper<TSelf> where TSelf : IParseable<TSelf>
+    public static class ParseableHelper<TSelf>
+        where TSelf : IParseable<TSelf>
     {
         public static TSelf Parse(string s, IFormatProvider provider) => TSelf.Parse(s, provider);
 
@@ -217,13 +224,15 @@ namespace System.Tests
     }
 
     [RequiresPreviewFeatures]
-    public static class SignedNumberHelper<TSelf> where TSelf : ISignedNumber<TSelf>
+    public static class SignedNumberHelper<TSelf>
+        where TSelf : ISignedNumber<TSelf>
     {
         public static TSelf NegativeOne => TSelf.NegativeOne;
     }
 
     [RequiresPreviewFeatures]
-    public static class SpanParseableHelper<TSelf> where TSelf : ISpanParseable<TSelf>
+    public static class SpanParseableHelper<TSelf>
+        where TSelf : ISpanParseable<TSelf>
     {
         public static TSelf Parse(ReadOnlySpan<char> s, IFormatProvider provider) =>
             TSelf.Parse(s, provider);

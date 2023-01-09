@@ -42,7 +42,8 @@ namespace System.Memory.Tests.SequenceReader
             : base(s_charInputData) { }
     }
 
-    public abstract class SingleSegment<T> : ReaderBasicTests<T> where T : unmanaged, IEquatable<T>
+    public abstract class SingleSegment<T> : ReaderBasicTests<T>
+        where T : unmanaged, IEquatable<T>
     {
         public SingleSegment(T[] inputData)
             : base(ReadOnlySequenceFactory<T>.SingleSegmentFactory, inputData) { }
@@ -173,7 +174,8 @@ namespace System.Memory.Tests.SequenceReader
             : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory, s_charInputData) { }
     }
 
-    public abstract class ReaderBasicTests<T> where T : unmanaged, IEquatable<T>
+    public abstract class ReaderBasicTests<T>
+        where T : unmanaged, IEquatable<T>
     {
         internal static byte[] s_byteInputData = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         internal static char[] s_charInputData = new char[]

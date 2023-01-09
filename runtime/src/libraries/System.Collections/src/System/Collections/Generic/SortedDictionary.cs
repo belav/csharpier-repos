@@ -16,7 +16,8 @@ namespace System.Collections.Generic
     public class SortedDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
             IDictionary,
-            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IReadOnlyDictionary<TKey, TValue>
+        where TKey : notnull
     {
         [NonSerialized]
         private KeyCollection? _keys;

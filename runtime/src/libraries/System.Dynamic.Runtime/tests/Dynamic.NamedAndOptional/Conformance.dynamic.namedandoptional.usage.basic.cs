@@ -3737,7 +3737,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             return 1;
         }
 
-        public int Foo<T>(T x, T? y) where T : struct
+        public int Foo<T>(T x, T? y)
+            where T : struct
         {
             return 2;
         }

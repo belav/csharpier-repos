@@ -3,5 +3,6 @@
 
 namespace System.CommandLine.Parsing
 {
-    public delegate string? ValidateSymbol<in T>(T symbolResult) where T : SymbolResult;
+    public delegate string? ValidateSymbol<in T>(T symbolResult)
+        where T : SymbolResult;
 }

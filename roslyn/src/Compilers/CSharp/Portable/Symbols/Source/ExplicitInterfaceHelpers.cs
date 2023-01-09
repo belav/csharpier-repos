@@ -130,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static ImmutableArray<T> SubstituteExplicitInterfaceImplementations<T>(
             ImmutableArray<T> unsubstitutedExplicitInterfaceImplementations,
             TypeMap map
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             var builder = ArrayBuilder<T>.GetInstance();
             foreach (
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public static T SubstituteExplicitInterfaceImplementation<T>(
             T unsubstitutedPropertyImplemented,
             TypeMap map
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             var unsubstitutedInterfaceType = unsubstitutedPropertyImplemented.ContainingType;
             Debug.Assert((object)unsubstitutedInterfaceType != null);

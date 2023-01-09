@@ -551,7 +551,8 @@ public class MapConnectionHandlerTests
         string path,
         Action<HttpConnectionDispatcherOptions> configureOptions,
         Action<IEndpointConventionBuilder> configureEndpoints = null
-    ) where TConnectionHandler : ConnectionHandler
+    )
+        where TConnectionHandler : ConnectionHandler
     {
         return new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>

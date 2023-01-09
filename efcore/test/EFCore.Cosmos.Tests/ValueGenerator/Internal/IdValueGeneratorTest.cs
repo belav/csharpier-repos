@@ -43,7 +43,8 @@ public class IdValueGeneratorTest
 
         Assert.Equal(ids.Count, new HashSet<string>(ids.Concat(ids)).Count);
 
-        string Create<TEntity>(TEntity entity) where TEntity : class, new() =>
+        string Create<TEntity>(TEntity entity)
+            where TEntity : class, new() =>
             (string)
                 CosmosTestHelpers.Instance.CreateInternalEntry(model, EntityState.Added, entity)[
                     model

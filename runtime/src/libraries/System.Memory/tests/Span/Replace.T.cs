@@ -55,7 +55,8 @@ namespace System.SpanTests
         public bool Equals(CustomEquatable other) => other.Value == Value;
     }
 
-    public abstract class ReplaceTests<T> where T : IEquatable<T>
+    public abstract class ReplaceTests<T>
+        where T : IEquatable<T>
     {
         private readonly T _oldValue;
         private readonly T _newValue;

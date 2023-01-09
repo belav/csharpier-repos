@@ -12,7 +12,8 @@ internal static class EmbeddedSyntaxHelpers
     public static TextSpan GetSpan<TSyntaxKind>(
         EmbeddedSyntaxToken<TSyntaxKind> token1,
         EmbeddedSyntaxToken<TSyntaxKind> token2
-    ) where TSyntaxKind : struct
+    )
+        where TSyntaxKind : struct
     {
         if (token2.VirtualChars.IsEmpty)
         {

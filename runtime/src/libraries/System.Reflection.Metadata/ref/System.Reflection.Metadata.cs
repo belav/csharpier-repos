@@ -6682,7 +6682,8 @@ namespace System.Reflection.Metadata
         }
     }
 
-    public readonly partial struct ReservedBlob<THandle> where THandle : struct
+    public readonly partial struct ReservedBlob<THandle>
+        where THandle : struct
     {
         private readonly THandle _Handle_k__BackingField;
         private readonly object _dummy;

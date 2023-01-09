@@ -1800,7 +1800,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         );
     }
 
-    public static Exception AssertThrows<T>(Func<object> testCode) where T : Exception, new()
+    public static Exception AssertThrows<T>(Func<object> testCode)
+        where T : Exception, new()
     {
         testCode();
 

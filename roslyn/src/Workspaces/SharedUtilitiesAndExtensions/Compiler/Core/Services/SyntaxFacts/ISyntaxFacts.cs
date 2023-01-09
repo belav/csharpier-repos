@@ -221,7 +221,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             out SyntaxToken openParen,
             out SeparatedSyntaxList<TArgumentSyntax> arguments,
             out SyntaxToken closeParen
-        ) where TArgumentSyntax : SyntaxNode;
+        )
+            where TArgumentSyntax : SyntaxNode;
 
         bool IsVerbatimInterpolatedStringExpression(SyntaxNode node);
 

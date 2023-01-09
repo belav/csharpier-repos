@@ -19,7 +19,8 @@ namespace Internal.JitInterface
         }
     }
 
-    public class JitObjectComparer<T> : IEqualityComparer<T> where T : class
+    public class JitObjectComparer<T> : IEqualityComparer<T>
+        where T : class
     {
         public bool Equals(T x, T y) => x == y;
 

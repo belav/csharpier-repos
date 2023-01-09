@@ -71,7 +71,8 @@ namespace System.Web.Helpers
             return false;
         }
 
-        internal static bool TryFromStringToEnum<T>(string value, out T result) where T : struct
+        internal static bool TryFromStringToEnum<T>(string value, out T result)
+            where T : struct
         {
             return Enum.TryParse(value, ignoreCase: true, result: out result);
         }

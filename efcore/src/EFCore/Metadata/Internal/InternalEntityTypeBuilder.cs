@@ -2428,7 +2428,8 @@ public class InternalEntityTypeBuilder
             Dictionary<string, ConfigurationSource?> baseMemberNames,
             Func<T, bool> compatibleWithBaseMember,
             Action<T> removeMember
-        ) where T : PropertyBase
+        )
+            where T : PropertyBase
         {
             List<T>? membersToBeDetached = null;
             List<T>? membersToBeRemoved = null;
@@ -2981,7 +2982,8 @@ public class InternalEntityTypeBuilder
     /// </summary>
     public virtual InternalEntityTypeBuilder RemoveUnusedImplicitProperties<T>(
         IReadOnlyList<T> properties
-    ) where T : class, IConventionProperty
+    )
+        where T : class, IConventionProperty
     {
         foreach (var property in properties)
         {

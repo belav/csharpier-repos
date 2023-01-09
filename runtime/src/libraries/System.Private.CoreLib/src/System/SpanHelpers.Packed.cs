@@ -518,7 +518,8 @@ namespace System
             short value0,
             short value1,
             int length
-        ) where TNegator : struct, SpanHelpers.INegator<short>
+        )
+            where TNegator : struct, SpanHelpers.INegator<short>
         {
             Debug.Assert(CanUsePackedIndexOf(value0));
             Debug.Assert(CanUsePackedIndexOf(value1));
@@ -742,7 +743,8 @@ namespace System
             short value1,
             short value2,
             int length
-        ) where TNegator : struct, SpanHelpers.INegator<short>
+        )
+            where TNegator : struct, SpanHelpers.INegator<short>
         {
             Debug.Assert(CanUsePackedIndexOf(value0));
             Debug.Assert(CanUsePackedIndexOf(value1));
@@ -992,7 +994,8 @@ namespace System
             short lowInclusive,
             short rangeInclusive,
             int length
-        ) where TNegator : struct, SpanHelpers.INegator<short>
+        )
+            where TNegator : struct, SpanHelpers.INegator<short>
         {
             Debug.Assert(CanUsePackedIndexOf(lowInclusive));
             Debug.Assert(CanUsePackedIndexOf((short)(lowInclusive + rangeInclusive)));

@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
     public class OptionsCache<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > : IOptionsMonitorCache<TOptions> where TOptions : class
+    > : IOptionsMonitorCache<TOptions>
+        where TOptions : class
     {
         private readonly ConcurrentDictionary<string, Lazy<TOptions>> _cache =
             new ConcurrentDictionary<string, Lazy<TOptions>>(

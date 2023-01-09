@@ -16,7 +16,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public sealed class Histogram<T> : Instrument<T> where T : struct
+    public sealed class Histogram<T> : Instrument<T>
+        where T : struct
     {
         internal Histogram(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)

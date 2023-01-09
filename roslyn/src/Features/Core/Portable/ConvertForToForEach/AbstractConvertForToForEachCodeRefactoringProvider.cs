@@ -277,7 +277,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             INamedTypeSymbol containingType,
             ITypeSymbol type,
             string memberName
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             var methods = type.GetAccessibleMembersInThisAndBaseTypes<TSymbol>(containingType);
             return methods.Where(m => m.Name == memberName);
@@ -287,7 +288,8 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
             INamedTypeSymbol containingType,
             ITypeSymbol type,
             string memberName
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             return TryFindMembersInThisOrBaseTypes<TSymbol>(containingType, type, memberName)
                 .FirstOrDefault();

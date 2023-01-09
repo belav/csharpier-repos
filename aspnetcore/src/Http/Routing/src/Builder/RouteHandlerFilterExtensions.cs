@@ -37,7 +37,8 @@ public static class RouteHandlerFilterExtensions
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     public static RouteHandlerBuilder AddFilter<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
-    >(this RouteHandlerBuilder builder) where TFilterType : IRouteHandlerFilter
+    >(this RouteHandlerBuilder builder)
+        where TFilterType : IRouteHandlerFilter
     {
         // We call `CreateFactory` twice here since the `CreateFactory` API does not support optional arguments.
         // See https://github.com/dotnet/runtime/issues/67309 for more info.

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static TDeclarationSyntax ConditionallyAddFormattingAnnotationTo<TDeclarationSyntax>(
             TDeclarationSyntax result,
             SyntaxList<MemberDeclarationSyntax> members
-        ) where TDeclarationSyntax : MemberDeclarationSyntax
+        )
+            where TDeclarationSyntax : MemberDeclarationSyntax
         {
             return members.Count == 1
                 ? result.WithAdditionalAnnotations(Formatter.Annotation)
@@ -204,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IList<bool>? availableIndices,
             Func<SyntaxList<TDeclaration>, TDeclaration?>? after = null,
             Func<SyntaxList<TDeclaration>, TDeclaration?>? before = null
-        ) where TDeclaration : SyntaxNode
+        )
+            where TDeclaration : SyntaxNode
         {
             var index = GetInsertionIndex(
                 declarationList,
@@ -307,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ISymbol symbol,
             CSharpCodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             if (
                 !info.Context.GenerateDocumentationComments
@@ -336,7 +339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         public static T? GetReuseableSyntaxNodeForSymbol<T>(
             ISymbol symbol,
             CSharpCodeGenerationContextInfo info
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             Contract.ThrowIfNull(symbol);
 

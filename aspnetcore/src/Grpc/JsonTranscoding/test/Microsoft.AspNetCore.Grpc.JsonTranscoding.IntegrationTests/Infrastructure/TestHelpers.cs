@@ -38,7 +38,8 @@ internal static class TestHelpers
         return httpContext;
     }
 
-    private class TestInterceptorActivator<T> : IGrpcInterceptorActivator<T> where T : Interceptor
+    private class TestInterceptorActivator<T> : IGrpcInterceptorActivator<T>
+        where T : Interceptor
     {
         public GrpcActivatorHandle<Interceptor> Create(
             IServiceProvider serviceProvider,

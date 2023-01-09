@@ -22,7 +22,8 @@ namespace System.Collections.Concurrent
     public class ConcurrentDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
             IDictionary,
-            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IReadOnlyDictionary<TKey, TValue>
+        where TKey : notnull
     {
         /// <summary>Internal tables of the dictionary.</summary>
         private volatile Tables _tables;
@@ -2509,7 +2510,8 @@ namespace System.Collections.Concurrent
         }
     }
 
-    internal sealed class IDictionaryDebugView<TKey, TValue> where TKey : notnull
+    internal sealed class IDictionaryDebugView<TKey, TValue>
+        where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> _dictionary;
 

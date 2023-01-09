@@ -185,7 +185,8 @@ namespace Microsoft.VisualStudio.LanguageServices.SymbolSearch
 
         private ImmutableArray<TPackageResult> FilterAndOrderPackages<TPackageResult>(
             ImmutableArray<TPackageResult> allPackages
-        ) where TPackageResult : PackageResult
+        )
+            where TPackageResult : PackageResult
         {
             // The ranking threshold under while we start aggressively filtering out packages if they don't have a high
             // enough rank.  Above this and we will always include the item as it's shown more than enough usage to

@@ -72,7 +72,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<T> CreateObjectInfo<T>(
             JsonSerializerOptions options,
             JsonObjectInfoValues<T> objectInfo
-        ) where T : notnull
+        )
+            where T : notnull
         {
             if (options is null)
             {

@@ -54,7 +54,8 @@ public class RowForeignKeyValueFactoryFactory : IRowForeignKeyValueFactoryFactor
     private static IRowForeignKeyValueFactory CreateSimple<TKey, TForeignKey>(
         IForeignKeyConstraint foreignKey,
         IValueConverterSelector valueConverterSelector
-    ) where TKey : notnull
+    )
+        where TKey : notnull
     {
         var dependentColumn = foreignKey.Columns.First();
         var principalColumn = foreignKey.PrincipalColumns.First();

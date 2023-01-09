@@ -31,7 +31,8 @@ namespace System.Numerics
     [Intrinsic]
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(VectorDebugView<>))]
-    public readonly struct Vector<T> : IEquatable<Vector<T>>, IFormattable where T : struct
+    public readonly struct Vector<T> : IEquatable<Vector<T>>, IFormattable
+        where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         internal readonly ulong _00;

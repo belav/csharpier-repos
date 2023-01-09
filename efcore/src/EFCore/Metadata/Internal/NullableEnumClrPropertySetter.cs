@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 public class NullableEnumClrPropertySetter<TEntity, TValue, TNonNullableEnumValue>
-    : IClrPropertySetter where TEntity : class
+    : IClrPropertySetter
+    where TEntity : class
 {
     private readonly Action<TEntity, TValue> _setter;
 

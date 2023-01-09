@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 
 namespace Devirtualization
 {
-    public class EqualityComparerFixture<T> where T : IEquatable<T>
+    public class EqualityComparerFixture<T>
+        where T : IEquatable<T>
     {
         IEqualityComparer<T> comparer;
 

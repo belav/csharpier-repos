@@ -1181,7 +1181,8 @@ namespace System.Linq.Expressions.Interpreter
             );
         }
 
-        public void EmitIntSwitch<T>(Dictionary<T, int> cases) where T : notnull
+        public void EmitIntSwitch<T>(Dictionary<T, int> cases)
+            where T : notnull
         {
             Emit(new IntSwitchInstruction<T>(cases));
         }

@@ -1664,7 +1664,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates an empty list of syntax nodes.
         /// </summary>
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
-        public static SyntaxList<TNode> List<TNode>() where TNode : SyntaxNode
+        public static SyntaxList<TNode> List<TNode>()
+            where TNode : SyntaxNode
         {
             return default(SyntaxList<TNode>);
         }
@@ -1675,7 +1676,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
         /// <param name="node">The single element node.</param>
         /// <returns></returns>
-        public static SyntaxList<TNode> SingletonList<TNode>(TNode node) where TNode : SyntaxNode
+        public static SyntaxList<TNode> SingletonList<TNode>(TNode node)
+            where TNode : SyntaxNode
         {
             return new SyntaxList<TNode>(node);
         }
@@ -1770,7 +1772,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates an empty separated list.
         /// </summary>
         /// <typeparam name="TNode">The specific type of the element nodes.</typeparam>
-        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>() where TNode : SyntaxNode
+        public static SeparatedSyntaxList<TNode> SeparatedList<TNode>()
+            where TNode : SyntaxNode
         {
             return default(SeparatedSyntaxList<TNode>);
         }
@@ -1848,7 +1851,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
             IEnumerable<TNode>? nodes,
             IEnumerable<SyntaxToken>? separators
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             // Interleave the nodes and the separators.  The number of separators must be equal to or 1 less than the number of nodes or
             // an argument exception is thrown.
@@ -1908,7 +1912,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="nodesAndTokens">A sequence of nodes or tokens, alternating between nodes and separator tokens.</param>
         public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
             IEnumerable<SyntaxNodeOrToken> nodesAndTokens
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return SeparatedList<TNode>(NodeOrTokenList(nodesAndTokens));
         }
@@ -1921,7 +1926,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="nodesAndTokens">The list of nodes and tokens.</param>
         public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
             SyntaxNodeOrTokenList nodesAndTokens
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (!HasSeparatedNodeTokenPattern(nodesAndTokens))
             {
@@ -2601,7 +2607,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxList<TNode> oldList,
             SyntaxList<TNode> newList,
             bool topLevel
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             return SyntaxEquivalence.AreEquivalent(oldList.Node, newList.Node, null, topLevel);
         }
@@ -2619,7 +2626,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxList<TNode> oldList,
             SyntaxList<TNode> newList,
             Func<SyntaxKind, bool>? ignoreChildNode = null
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return SyntaxEquivalence.AreEquivalent(
                 oldList.Node,
@@ -2643,7 +2651,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SeparatedSyntaxList<TNode> oldList,
             SeparatedSyntaxList<TNode> newList,
             bool topLevel
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return SyntaxEquivalence.AreEquivalent(oldList.Node, newList.Node, null, topLevel);
         }
@@ -2661,7 +2670,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SeparatedSyntaxList<TNode> oldList,
             SeparatedSyntaxList<TNode> newList,
             Func<SyntaxKind, bool>? ignoreChildNode = null
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return SyntaxEquivalence.AreEquivalent(
                 oldList.Node,

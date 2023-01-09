@@ -69,7 +69,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit = null,
             string? description = null
-        ) where T : struct => new Counter<T>(this, name, unit, description);
+        )
+            where T : struct => new Counter<T>(this, name, unit, description);
 
         /// <summary>
         /// Histogram is an Instrument which can be used to report arbitrary values that are likely to be statistically meaningful. It is intended for statistics such as histograms, summaries, and percentile.
@@ -84,7 +85,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit = null,
             string? description = null
-        ) where T : struct => new Histogram<T>(this, name, unit, description);
+        )
+            where T : struct => new Histogram<T>(this, name, unit, description);
 
         /// <summary>
         /// Create a metrics UpDownCounter object.
@@ -100,7 +102,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit = null,
             string? description = null
-        ) where T : struct => new UpDownCounter<T>(this, name, unit, description);
+        )
+            where T : struct => new UpDownCounter<T>(this, name, unit, description);
 
         /// <summary>
         /// Create an ObservableUpDownCounter object. ObservableUpDownCounter is an Instrument which reports increasing or decreasing value(s) when the instrument is being observed.
@@ -117,7 +120,8 @@ namespace System.Diagnostics.Metrics
             Func<T> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct =>
+        )
+            where T : struct =>
             new ObservableUpDownCounter<T>(this, name, observeValue, unit, description);
 
         /// <summary>
@@ -135,7 +139,8 @@ namespace System.Diagnostics.Metrics
             Func<Measurement<T>> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct =>
+        )
+            where T : struct =>
             new ObservableUpDownCounter<T>(this, name, observeValue, unit, description);
 
         /// <summary>
@@ -153,7 +158,8 @@ namespace System.Diagnostics.Metrics
             Func<IEnumerable<Measurement<T>>> observeValues,
             string? unit = null,
             string? description = null
-        ) where T : struct =>
+        )
+            where T : struct =>
             new ObservableUpDownCounter<T>(this, name, observeValues, unit, description);
 
         /// <summary>
@@ -171,7 +177,9 @@ namespace System.Diagnostics.Metrics
             Func<T> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct => new ObservableCounter<T>(this, name, observeValue, unit, description);
+        )
+            where T : struct =>
+            new ObservableCounter<T>(this, name, observeValue, unit, description);
 
         /// <summary>
         /// ObservableCounter is an Instrument which reports monotonically increasing value(s) when the instrument is being observed.
@@ -188,7 +196,9 @@ namespace System.Diagnostics.Metrics
             Func<Measurement<T>> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct => new ObservableCounter<T>(this, name, observeValue, unit, description);
+        )
+            where T : struct =>
+            new ObservableCounter<T>(this, name, observeValue, unit, description);
 
         /// <summary>
         /// ObservableCounter is an Instrument which reports monotonically increasing value(s) when the instrument is being observed.
@@ -205,7 +215,8 @@ namespace System.Diagnostics.Metrics
             Func<IEnumerable<Measurement<T>>> observeValues,
             string? unit = null,
             string? description = null
-        ) where T : struct =>
+        )
+            where T : struct =>
             new ObservableCounter<T>(this, name, observeValues, unit, description);
 
         /// <summary>
@@ -220,7 +231,8 @@ namespace System.Diagnostics.Metrics
             Func<T> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct => new ObservableGauge<T>(this, name, observeValue, unit, description);
+        )
+            where T : struct => new ObservableGauge<T>(this, name, observeValue, unit, description);
 
         /// <summary>
         /// ObservableGauge is an asynchronous Instrument which reports non-additive value(s) (e.g. the room temperature - it makes no sense to report the temperature value from multiple rooms and sum them up) when the instrument is being observed.
@@ -234,7 +246,8 @@ namespace System.Diagnostics.Metrics
             Func<Measurement<T>> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct => new ObservableGauge<T>(this, name, observeValue, unit, description);
+        )
+            where T : struct => new ObservableGauge<T>(this, name, observeValue, unit, description);
 
         /// <summary>
         /// ObservableGauge is an asynchronous Instrument which reports non-additive value(s) (e.g. the room temperature - it makes no sense to report the temperature value from multiple rooms and sum them up) when the instrument is being observed.
@@ -248,7 +261,9 @@ namespace System.Diagnostics.Metrics
             Func<IEnumerable<Measurement<T>>> observeValues,
             string? unit = null,
             string? description = null
-        ) where T : struct => new ObservableGauge<T>(this, name, observeValues, unit, description);
+        )
+            where T : struct =>
+            new ObservableGauge<T>(this, name, observeValues, unit, description);
 
         /// <summary>
         /// Dispose the Meter which will disable all instruments created by this meter.

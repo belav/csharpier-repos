@@ -6,7 +6,8 @@ namespace System.Reflection.Metadata
     /// <summary>
     /// Represents a handle and a corresponding blob on a metadata heap that was reserved for future content update.
     /// </summary>
-    public readonly struct ReservedBlob<THandle> where THandle : struct
+    public readonly struct ReservedBlob<THandle>
+        where THandle : struct
     {
         public THandle Handle { get; }
         public Blob Content { get; }

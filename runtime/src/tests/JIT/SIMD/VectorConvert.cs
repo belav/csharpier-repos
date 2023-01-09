@@ -150,7 +150,8 @@ partial class VectorTest
         random = new Random(Seed);
     }
 
-    static T getRandomValue<T>(int i, int j) where T : struct
+    static T getRandomValue<T>(int i, int j)
+        where T : struct
     {
         int element = i + j * Vector<T>.Count;
         int sign = (random.Next(0, 2) < 1) ? -1 : 1;
@@ -198,7 +199,8 @@ partial class VectorTest
         return value;
     }
 
-    static Vector<T> getRandomVector<T>(T[] valueArray, int j) where T : struct
+    static Vector<T> getRandomVector<T>(T[] valueArray, int j)
+        where T : struct
     {
         for (int i = 0; i < Vector<T>.Count; i++)
         {

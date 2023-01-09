@@ -14,13 +14,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         /// this cache never release cached object. must be used only with fixed set of value types. or
         /// something that grows very slowly like Guid for projects.
         /// </summary>
-        public static object GetOrCreate<T>(T value) where T : struct
+        public static object GetOrCreate<T>(T value)
+            where T : struct
         {
             // let compiler creates a cache for each value type.
             return Cache<T>.Instance.GetOrCreate(value);
         }
 
-        private class Cache<T> where T : struct
+        private class Cache<T>
+            where T : struct
         {
             public static readonly Cache<T> Instance = new();
 

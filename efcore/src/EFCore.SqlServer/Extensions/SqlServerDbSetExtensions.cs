@@ -34,7 +34,8 @@ public static class SqlServerDbSetExtensions
     public static IQueryable<TEntity> TemporalAsOf<TEntity>(
         this DbSet<TEntity> source,
         DateTime utcPointInTime
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
@@ -84,7 +85,8 @@ public static class SqlServerDbSetExtensions
         this DbSet<TEntity> source,
         DateTime utcFrom,
         DateTime utcTo
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
@@ -135,7 +137,8 @@ public static class SqlServerDbSetExtensions
         this DbSet<TEntity> source,
         DateTime utcFrom,
         DateTime utcTo
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
@@ -186,7 +189,8 @@ public static class SqlServerDbSetExtensions
         this DbSet<TEntity> source,
         DateTime utcFrom,
         DateTime utcTo
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;

@@ -36,7 +36,8 @@ public static class NewtonsoftJsonProtocolDependencyInjectionExtensions
     public static TBuilder AddNewtonsoftJsonProtocol<TBuilder>(
         this TBuilder builder,
         Action<NewtonsoftJsonHubProtocolOptions> configure
-    ) where TBuilder : ISignalRBuilder
+    )
+        where TBuilder : ISignalRBuilder
     {
         builder.Services.TryAddEnumerable(
             ServiceDescriptor.Singleton<IHubProtocol, NewtonsoftJsonHubProtocol>()

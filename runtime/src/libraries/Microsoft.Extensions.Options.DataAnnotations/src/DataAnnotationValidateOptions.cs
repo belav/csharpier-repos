@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Options
                 | DynamicallyAccessedMemberTypes.NonPublicProperties
         )]
             TOptions
-    > : IValidateOptions<TOptions> where TOptions : class
+    > : IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.

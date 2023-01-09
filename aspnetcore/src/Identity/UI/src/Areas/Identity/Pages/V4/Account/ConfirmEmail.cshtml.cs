@@ -32,7 +32,8 @@ public abstract class ConfirmEmailModel : PageModel
         throw new NotImplementedException();
 }
 
-internal sealed class ConfirmEmailModel<TUser> : ConfirmEmailModel where TUser : class
+internal sealed class ConfirmEmailModel<TUser> : ConfirmEmailModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
 

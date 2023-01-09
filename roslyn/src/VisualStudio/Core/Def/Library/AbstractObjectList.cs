@@ -16,7 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
     internal abstract class AbstractObjectList<TLibraryManager>
         : IVsCoTaskMemFreeMyStrings,
             IVsSimpleObjectList2,
-            IVsBrowseContainersList where TLibraryManager : AbstractLibraryManager
+            IVsBrowseContainersList
+        where TLibraryManager : AbstractLibraryManager
     {
         protected readonly TLibraryManager LibraryManager;
 

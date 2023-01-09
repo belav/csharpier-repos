@@ -57,7 +57,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static void Add<TSymbol>(
             ArrayBuilder<ISymbol> result,
             ImmutableArray<TSymbol> enumerable
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             result.AddRange(enumerable.Cast<ISymbol>());
         }

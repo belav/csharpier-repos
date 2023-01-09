@@ -204,7 +204,8 @@ namespace System.Reflection.Runtime.TypeInfos
             Func<MemberInfo, bool> optionalPredicate,
             MemberTypes targetMemberType,
             out QueryResult<M> queryResult
-        ) where M : MemberInfo
+        )
+            where M : MemberInfo
         {
             if ((memberType & targetMemberType) == 0)
             {
@@ -263,7 +264,8 @@ namespace System.Reflection.Runtime.TypeInfos
             };
         }
 
-        private M QueryMemberWithSameMetadataDefinitionAs<M>(MemberInfo member) where M : MemberInfo
+        private M QueryMemberWithSameMetadataDefinitionAs<M>(MemberInfo member)
+            where M : MemberInfo
         {
             QueryResult<M> members = Query<M>(
                 member.Name,

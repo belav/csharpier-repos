@@ -164,7 +164,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.TrackAll;
     }
 
-    protected class Repository<T> where T : class
+    protected class Repository<T>
+        where T : class
     {
         private readonly NorthwindContext _context;
 

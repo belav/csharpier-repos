@@ -17,7 +17,8 @@ namespace Microsoft.JSInterop;
 /// <typeparam name="TValue">The type of the value to wrap.</typeparam>
 public sealed class DotNetObjectReference<[DynamicallyAccessedMembers(JSInvokable)] TValue>
     : IDotNetObjectReference,
-        IDisposable where TValue : class
+        IDisposable
+    where TValue : class
 {
     private readonly TValue _value;
     private long _objectId;

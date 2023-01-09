@@ -183,7 +183,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             this WeakReference<T> @this,
             WeakReference<T> other,
             bool isSamePlatform
-        ) where T : class
+        )
+            where T : class
         {
             if (@this == null && other == null)
                 return;

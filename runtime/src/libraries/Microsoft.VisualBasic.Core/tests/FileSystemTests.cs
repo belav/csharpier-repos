@@ -766,7 +766,8 @@ namespace Microsoft.VisualBasic.Tests
         // file numbers) because AssemblyData instances are associated with the calling assembly, and
         // in RELEASE builds, the calling assembly of a lambda invoked from XUnit.Assert.Throws<T>()
         // is corelib rather than this assembly, so file numbers created outside the lambda will be invalid.
-        private static void AssertThrows<TException>(Action action) where TException : Exception
+        private static void AssertThrows<TException>(Action action)
+            where TException : Exception
         {
             TException ex = null;
             try

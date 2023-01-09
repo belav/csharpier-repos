@@ -92,7 +92,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name);
 
     /// <summary>
@@ -108,7 +109,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToTable<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         Action<TableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -138,7 +140,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<TableBuilder<TEntity>> buildAction
-    ) where TEntity : class => ToTable(entityTypeBuilder, name, null, buildAction);
+    )
+        where TEntity : class => ToTable(entityTypeBuilder, name, null, buildAction);
 
     /// <summary>
     ///     Configures the table that the entity type maps to when targeting a relational database.
@@ -213,7 +216,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         string? schema
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).ToTable(name, schema);
 
     /// <summary>
@@ -233,7 +237,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<TableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -568,7 +573,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<SplitTableBuilder<TEntity>> buildAction
-    ) where TEntity : class => entityTypeBuilder.SplitToTable(name, null, buildAction);
+    )
+        where TEntity : class => entityTypeBuilder.SplitToTable(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different table.
@@ -624,7 +630,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<SplitTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));

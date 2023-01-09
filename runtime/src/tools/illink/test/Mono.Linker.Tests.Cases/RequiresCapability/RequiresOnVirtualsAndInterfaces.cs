@@ -373,7 +373,8 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
                 "--StaticInterfaces.IRequires.AbstractMethod--",
                 ProducedBy = ProducedBy.Analyzer
             )]
-            static void UseRequiresMethods<T>() where T : IRequires
+            static void UseRequiresMethods<T>()
+                where T : IRequires
             {
                 T.AbstractMethod();
                 T.VirtualMethod();

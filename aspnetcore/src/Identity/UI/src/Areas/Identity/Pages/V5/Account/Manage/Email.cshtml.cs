@@ -81,7 +81,8 @@ public abstract class EmailModel : PageModel
         throw new NotImplementedException();
 }
 
-internal sealed class EmailModel<TUser> : EmailModel where TUser : class
+internal sealed class EmailModel<TUser> : EmailModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly SignInManager<TUser> _signInManager;

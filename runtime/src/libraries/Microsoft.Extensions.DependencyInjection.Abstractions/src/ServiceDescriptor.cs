@@ -217,7 +217,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A new instance of <see cref="ServiceDescriptor"/>.</returns>
         public static ServiceDescriptor Transient<TService>(
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(implementationFactory);
 
@@ -310,7 +311,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A new instance of <see cref="ServiceDescriptor"/>.</returns>
         public static ServiceDescriptor Scoped<TService>(
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(implementationFactory);
 
@@ -406,7 +408,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>A new instance of <see cref="ServiceDescriptor"/>.</returns>
         public static ServiceDescriptor Singleton<TService>(
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(implementationFactory);
 

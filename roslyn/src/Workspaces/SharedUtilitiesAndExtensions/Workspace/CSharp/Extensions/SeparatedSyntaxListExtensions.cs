@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int index,
             IEnumerable<T> nodes,
             SyntaxKind separator
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var newList = separatedList.InsertRange(index, nodes);
             if (index < separatedList.Count)

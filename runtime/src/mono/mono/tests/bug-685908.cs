@@ -11,7 +11,8 @@ class Program
         return 1;
     }
 
-    static int Test<T>() where T : I
+    static int Test<T>()
+        where T : I
     {
         Expression<Func<T, int>> e = l => l.SetValue() + l.Value;
         var arg = default(T);

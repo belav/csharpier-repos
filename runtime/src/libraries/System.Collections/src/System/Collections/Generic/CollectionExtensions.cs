@@ -87,7 +87,8 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         public static ReadOnlyDictionary<TKey, TValue> AsReadOnly<TKey, TValue>(
             this IDictionary<TKey, TValue> dictionary
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return new ReadOnlyDictionary<TKey, TValue>(dictionary);
         }

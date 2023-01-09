@@ -10,7 +10,8 @@ public abstract class CompositeKeysData : ISetSource
     public IReadOnlyList<CompositeThree> CompositeThrees { get; }
     public IReadOnlyList<CompositeFour> CompositeFours { get; }
 
-    public abstract IQueryable<TEntity> Set<TEntity>() where TEntity : class;
+    public abstract IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class;
 
     protected CompositeKeysData()
     {

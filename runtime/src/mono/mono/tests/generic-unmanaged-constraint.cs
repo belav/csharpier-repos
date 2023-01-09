@@ -8,7 +8,8 @@ unsafe class Program
     }
 }
 
-unsafe class Generic<T> where T : unmanaged
+unsafe class Generic<T>
+    where T : unmanaged
 {
     public static T* GetPtr()
     {

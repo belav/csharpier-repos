@@ -228,7 +228,8 @@ namespace Microsoft.Extensions.Hosting
         public void ConfigureContainer<TContainerBuilder>(
             IServiceProviderFactory<TContainerBuilder> factory,
             Action<TContainerBuilder>? configure = null
-        ) where TContainerBuilder : notnull
+        )
+            where TContainerBuilder : notnull
         {
             _createServiceProvider = () =>
             {
@@ -468,7 +469,8 @@ namespace Microsoft.Extensions.Hosting
 
             public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
                 IServiceProviderFactory<TContainerBuilder> factory
-            ) where TContainerBuilder : notnull
+            )
+                where TContainerBuilder : notnull
             {
                 ThrowHelper.ThrowIfNull(factory);
 
@@ -478,7 +480,8 @@ namespace Microsoft.Extensions.Hosting
 
             public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
                 Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-            ) where TContainerBuilder : notnull
+            )
+                where TContainerBuilder : notnull
             {
                 ThrowHelper.ThrowIfNull(factory);
 

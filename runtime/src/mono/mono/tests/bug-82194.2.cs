@@ -4,7 +4,8 @@ using System.Reflection;
 
 namespace Runner
 {
-    public class ObjectContainer<T> where T : class, new() { }
+    public class ObjectContainer<T>
+        where T : class, new() { }
 
     public class DocumentObject : ObjectContainer<DomainObject> { }
 

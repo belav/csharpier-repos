@@ -199,7 +199,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddHttpClient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(this IServiceCollection services) where TClient : class
+        >(this IServiceCollection services)
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(services);
 
@@ -282,7 +283,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddHttpClient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(this IServiceCollection services, string name) where TClient : class
+        >(this IServiceCollection services, string name)
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(name);
@@ -590,7 +592,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string name,
             Action<IServiceProvider, HttpClient> configureClient
-        ) where TClient : class
+        )
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(name);

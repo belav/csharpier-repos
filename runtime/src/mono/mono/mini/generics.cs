@@ -814,7 +814,8 @@ class Tests
 
     struct FooStruct { }
 
-    bool IsNull2<T>(object value) where T : struct
+    bool IsNull2<T>(object value)
+        where T : struct
     {
         T? item = (T?)value;
 
@@ -1187,7 +1188,8 @@ class Tests
         }
     }
 
-    class Foo2<T> where T : Foo2<T>.IRecord
+    class Foo2<T>
+        where T : Foo2<T>.IRecord
     {
         public interface IRecord
         {
@@ -1200,7 +1202,8 @@ class Tests
         }
     }
 
-    class Foo3<T> where T : IComparable
+    class Foo3<T>
+        where T : IComparable
     {
         public static int CompareTo(T[] t)
         {
@@ -1337,7 +1340,8 @@ class Tests
             a3;
     }
 
-    class MyClass<T> where T : struct
+    class MyClass<T>
+        where T : struct
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public MyClass(int a1, int a2, int a3, int a4, int a5, int a6, Nullable<T> a) { }
@@ -1462,7 +1466,8 @@ class Tests
         return delegate_8_args_res == "h" ? 0 : 1;
     }
 
-    static void throw_catch_t<T>() where T : Exception
+    static void throw_catch_t<T>()
+        where T : Exception
     {
         try
         {
@@ -1477,7 +1482,8 @@ class Tests
         return 0;
     }
 
-    class ThrowClass<T> where T : Exception
+    class ThrowClass<T>
+        where T : Exception
     {
         public void throw_catch_t()
         {
@@ -1626,7 +1632,8 @@ class Tests
 
     public struct AStruct
     {
-        public Type Caller<TAwaiter>(ref TAwaiter awaiter) where TAwaiter : ICompletion
+        public Type Caller<TAwaiter>(ref TAwaiter awaiter)
+            where TAwaiter : ICompletion
         {
             return awaiter.UnsafeOnCompleted();
         }

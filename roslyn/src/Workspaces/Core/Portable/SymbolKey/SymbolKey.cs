@@ -270,7 +270,8 @@ namespace Microsoft.CodeAnalysis
             PooledArrayBuilder<TSymbol> symbols,
             string reasonIfFailed,
             out string? failureReason
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             if (symbols.Builder.Count == 0)
             {
@@ -340,7 +341,8 @@ namespace Microsoft.CodeAnalysis
         private static PooledArrayBuilder<TSymbol> GetMembersOfNamedType<TSymbol>(
             SymbolKeyResolution containingTypeResolution,
             string? metadataName
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var result = PooledArrayBuilder<TSymbol>.GetInstance();
             foreach (var containingType in containingTypeResolution.OfType<INamedTypeSymbol>())

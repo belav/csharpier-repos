@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Converters
     /// of JSON objects using parameterized constructors.
     /// </summary>
     internal sealed class LargeObjectWithParameterizedConstructorConverterWithReflection<T>
-        : LargeObjectWithParameterizedConstructorConverter<T> where T : notnull
+        : LargeObjectWithParameterizedConstructorConverter<T>
+        where T : notnull
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]

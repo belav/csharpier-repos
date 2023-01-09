@@ -72,7 +72,8 @@ namespace System.Net.Sockets
             [NotNull] ref T? cache,
             SafeSocketHandle socketHandle,
             string guidString
-        ) where T : Delegate
+        )
+            where T : Delegate
         {
             Guid guid = new Guid(guidString);
             IntPtr ptr;

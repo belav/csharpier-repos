@@ -212,7 +212,8 @@ namespace System.Globalization
         private unsafe void ChangeCaseCommon<TConversion>(
             ReadOnlySpan<char> source,
             Span<char> destination
-        ) where TConversion : struct
+        )
+            where TConversion : struct
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(

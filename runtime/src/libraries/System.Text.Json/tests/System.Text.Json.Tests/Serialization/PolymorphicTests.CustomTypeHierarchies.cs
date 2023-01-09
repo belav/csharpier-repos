@@ -3699,7 +3699,8 @@ namespace System.Text.Json.Serialization.Tests
 
             public CustomPolymorphismResolver<TBaseType> WithDerivedType<TDerivedType>(
                 int typeDiscriminatorId
-            ) where TDerivedType : TBaseType
+            )
+                where TDerivedType : TBaseType
             {
                 WithDerivedType(new JsonDerivedType(typeof(TDerivedType), typeDiscriminatorId));
                 return this;
@@ -3707,7 +3708,8 @@ namespace System.Text.Json.Serialization.Tests
 
             public CustomPolymorphismResolver<TBaseType> WithDerivedType<TDerivedType>(
                 string typeDiscriminatorId
-            ) where TDerivedType : TBaseType
+            )
+                where TDerivedType : TBaseType
             {
                 WithDerivedType(new JsonDerivedType(typeof(TDerivedType), typeDiscriminatorId));
                 return this;

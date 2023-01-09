@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 internal static class DataSetUtil
 {
-    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName) where T : class
+    internal static void CheckArgumentNull<T>(T argumentValue, string argumentName)
+        where T : class
     {
         if (null == argumentValue)
         {

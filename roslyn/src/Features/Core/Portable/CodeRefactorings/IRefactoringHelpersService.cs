@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan selection,
             bool allowEmptyNodes,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode;
+        )
+            where TSyntaxNode : SyntaxNode;
     }
 
     internal static class IRefactoringHelpersServiceExtensions
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             Document document,
             TextSpan selection,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             return service.GetRelevantNodesAsync<TSyntaxNode>(
                 document,

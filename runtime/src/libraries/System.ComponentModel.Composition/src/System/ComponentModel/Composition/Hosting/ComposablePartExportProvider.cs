@@ -444,7 +444,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [DebuggerStepThrough]
-        private void EnsureCanSet<T>(T? currentValue) where T : class
+        private void EnsureCanSet<T>(T? currentValue)
+            where T : class
         {
             if ((_isRunning) || (currentValue != null))
             {

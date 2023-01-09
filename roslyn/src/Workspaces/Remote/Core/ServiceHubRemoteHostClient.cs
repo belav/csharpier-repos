@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Remote
             ServiceDescriptors descriptors,
             IRemoteServiceCallbackDispatcherProvider callbackDispatcherProvider,
             object? callbackTarget
-        ) where T : class
+        )
+            where T : class
         {
             var descriptor = descriptors.GetServiceDescriptor(typeof(T), Configuration);
             var callbackDispatcher =

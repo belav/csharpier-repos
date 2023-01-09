@@ -177,7 +177,8 @@ namespace Roslyn.Utilities
         public static IReadOnlyCollection<T> ToCollection<T>(this IEnumerable<T> sequence) =>
             (sequence is IReadOnlyCollection<T> collection) ? collection : sequence.ToList();
 
-        public static T? FirstOrNull<T>(this IEnumerable<T> source) where T : struct
+        public static T? FirstOrNull<T>(this IEnumerable<T> source)
+            where T : struct
         {
             if (source == null)
             {
@@ -198,7 +199,8 @@ namespace Roslyn.Utilities
             return source.Cast<T?>().FirstOrDefault(v => predicate(v!.Value));
         }
 
-        public static T? LastOrNull<T>(this IEnumerable<T> source) where T : struct
+        public static T? LastOrNull<T>(this IEnumerable<T> source)
+            where T : struct
         {
             if (source == null)
             {
@@ -288,7 +290,8 @@ namespace Roslyn.Utilities
 
         private static readonly Func<object, bool> s_notNullTest = x => x != null;
 
-        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source) where T : class
+        public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> source)
+            where T : class
         {
             if (source == null)
             {
@@ -561,7 +564,8 @@ namespace Roslyn.Utilities
             return source.ThenBy(Comparisons<T>.Comparer);
         }
 
-        private static class Comparisons<T> where T : IComparable<T>
+        private static class Comparisons<T>
+            where T : IComparable<T>
         {
             public static readonly Comparison<T> CompareTo = (t1, t2) => t1.CompareTo(t2);
 
@@ -615,7 +619,8 @@ namespace Roslyn.Utilities
 
         public static ImmutableDictionary<K, V> ToImmutableDictionaryOrEmpty<K, V>(
             this IEnumerable<KeyValuePair<K, V>>? items
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (items == null)
             {
@@ -628,7 +633,8 @@ namespace Roslyn.Utilities
         public static ImmutableDictionary<K, V> ToImmutableDictionaryOrEmpty<K, V>(
             this IEnumerable<KeyValuePair<K, V>>? items,
             IEqualityComparer<K>? keyComparer
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (items == null)
             {
@@ -700,7 +706,8 @@ namespace Roslyn.Utilities
             this IEnumerable<T> data,
             Func<T, K> keySelector,
             IEqualityComparer<K>? comparer = null
-        ) where K : notnull
+        )
+            where K : notnull
         {
             var dictionary = new Dictionary<K, ImmutableArray<T>>(comparer);
             var groups = data.GroupBy(keySelector, comparer);

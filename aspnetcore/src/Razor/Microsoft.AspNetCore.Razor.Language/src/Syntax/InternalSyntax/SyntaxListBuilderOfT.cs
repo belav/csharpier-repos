@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
-internal readonly struct SyntaxListBuilder<TNode> where TNode : GreenNode
+internal readonly struct SyntaxListBuilder<TNode>
+    where TNode : GreenNode
 {
     private readonly SyntaxListBuilder _builder;
 
@@ -99,7 +100,8 @@ internal readonly struct SyntaxListBuilder<TNode> where TNode : GreenNode
         return default(SyntaxList<TNode>);
     }
 
-    public SyntaxList<TDerived> ToList<TDerived>() where TDerived : GreenNode
+    public SyntaxList<TDerived> ToList<TDerived>()
+        where TDerived : GreenNode
     {
         return new SyntaxList<TDerived>(ToListNode());
     }

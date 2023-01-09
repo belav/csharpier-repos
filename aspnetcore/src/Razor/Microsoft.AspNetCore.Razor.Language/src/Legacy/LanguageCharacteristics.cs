@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-internal abstract class LanguageCharacteristics<TTokenizer> where TTokenizer : Tokenizer
+internal abstract class LanguageCharacteristics<TTokenizer>
+    where TTokenizer : Tokenizer
 {
     public abstract string GetSample(SyntaxKind type);
     public abstract TTokenizer CreateTokenizer(ITextDocument source);

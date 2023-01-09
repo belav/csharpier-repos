@@ -23,7 +23,8 @@ namespace System.Numerics
             ISpanParsable<TSelf>,
             ISubtractionOperators<TSelf, TSelf, TSelf>,
             IUnaryPlusOperators<TSelf, TSelf>,
-            IUnaryNegationOperators<TSelf, TSelf> where TSelf : INumberBase<TSelf>?
+            IUnaryNegationOperators<TSelf, TSelf>
+        where TSelf : INumberBase<TSelf>?
     {
         /// <summary>Gets the value <c>1</c> for the type.</summary>
         static abstract TSelf One { get; }

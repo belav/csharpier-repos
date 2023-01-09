@@ -258,7 +258,8 @@ namespace System.Formats.Asn1
             return ret;
         }
 
-        internal TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null) where TEnum : Enum
+        internal TEnum ReadEnumeratedValue<TEnum>(Asn1Tag? expectedTag = null)
+            where TEnum : Enum
         {
             TEnum ret = AsnDecoder.ReadEnumeratedValue<TEnum>(
                 _span,

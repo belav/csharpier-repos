@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// including access failures and lockout status
 /// </summary>
 /// <typeparam name="TUser">The type that represents a user.</typeparam>
-public interface IUserLockoutStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserLockoutStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Gets the last <see cref="DateTimeOffset"/> a user's last lockout expired, if any.

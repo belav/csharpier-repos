@@ -24,7 +24,8 @@ public struct ValueTest<U>
     public readonly U value;
 }
 
-public abstract class BaseClass<T> where T : BaseClass<T>
+public abstract class BaseClass<T>
+    where T : BaseClass<T>
 {
     public ValueTest<T> valueTest = default(ValueTest<T>);
 }

@@ -37,7 +37,8 @@ internal class TestLspServices : ILspServices
         return types.ToImmutableArray();
     }
 
-    public T GetRequiredService<T>() where T : notnull
+    public T GetRequiredService<T>()
+        where T : notnull
     {
         var service = (T?)TryGetService(typeof(T));
         if (service is null)

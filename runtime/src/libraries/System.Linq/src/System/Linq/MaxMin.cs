@@ -11,7 +11,8 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        private interface IMinMaxCalc<T> where T : struct, IBinaryInteger<T>
+        private interface IMinMaxCalc<T>
+            where T : struct, IBinaryInteger<T>
         {
             public static abstract bool Compare(T left, T right);
             public static abstract Vector128<T> Compare(Vector128<T> left, Vector128<T> right);

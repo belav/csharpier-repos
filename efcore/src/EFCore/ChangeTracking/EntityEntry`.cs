@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 ///     </para>
 /// </remarks>
 /// <typeparam name="TEntity">The type of entity being tracked by this entry.</typeparam>
-public class EntityEntry<TEntity> : EntityEntry where TEntity : class
+public class EntityEntry<TEntity> : EntityEntry
+    where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,7 +77,8 @@ public class EntityEntry<TEntity> : EntityEntry where TEntity : class
     /// </returns>
     public virtual ReferenceEntry<TEntity, TProperty> Reference<TProperty>(
         Expression<Func<TEntity, TProperty?>> propertyExpression
-    ) where TProperty : class
+    )
+        where TProperty : class
     {
         Check.NotNull(propertyExpression, nameof(propertyExpression));
 
@@ -103,7 +105,8 @@ public class EntityEntry<TEntity> : EntityEntry where TEntity : class
     /// </returns>
     public virtual CollectionEntry<TEntity, TProperty> Collection<TProperty>(
         Expression<Func<TEntity, IEnumerable<TProperty>>> propertyExpression
-    ) where TProperty : class
+    )
+        where TProperty : class
     {
         Check.NotNull(propertyExpression, nameof(propertyExpression));
 
@@ -147,7 +150,8 @@ public class EntityEntry<TEntity> : EntityEntry where TEntity : class
     /// </returns>
     public virtual ReferenceEntry<TEntity, TProperty> Reference<TProperty>(
         INavigationBase navigation
-    ) where TProperty : class
+    )
+        where TProperty : class
     {
         Check.NotNull(navigation, nameof(navigation));
 
@@ -169,7 +173,8 @@ public class EntityEntry<TEntity> : EntityEntry where TEntity : class
     /// </returns>
     public virtual CollectionEntry<TEntity, TProperty> Collection<TProperty>(
         INavigationBase navigation
-    ) where TProperty : class
+    )
+        where TProperty : class
     {
         Check.NotNull(navigation, nameof(navigation));
 

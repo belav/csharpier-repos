@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public abstract class ClrAccessorFactory<TAccessor> where TAccessor : class
+public abstract class ClrAccessorFactory<TAccessor>
+    where TAccessor : class
 {
     private static readonly MethodInfo GenericCreate = typeof(ClrAccessorFactory<TAccessor>)
         .GetTypeInfo()
@@ -75,5 +76,6 @@ public abstract class ClrAccessorFactory<TAccessor> where TAccessor : class
     protected abstract TAccessor CreateGeneric<TEntity, TValue, TNonNullableEnumValue>(
         MemberInfo memberInfo,
         IPropertyBase? propertyBase
-    ) where TEntity : class;
+    )
+        where TEntity : class;
 }

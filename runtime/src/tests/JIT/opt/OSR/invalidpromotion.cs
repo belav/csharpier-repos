@@ -38,7 +38,8 @@ public struct ObjectSequenceMany : IFoo
 public class InvalidPromotion
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool G<T>(int n) where T : IFoo
+    static bool G<T>(int n)
+        where T : IFoo
     {
         // OSR cannot safely promote values
         T values = default;

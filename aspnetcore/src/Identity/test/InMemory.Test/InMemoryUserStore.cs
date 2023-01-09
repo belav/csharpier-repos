@@ -18,7 +18,8 @@ public class InMemoryUserStore<TUser>
         IUserTwoFactorStore<TUser>,
         IUserAuthenticationTokenStore<TUser>,
         IUserAuthenticatorKeyStore<TUser>,
-        IUserTwoFactorRecoveryCodeStore<TUser> where TUser : PocoUser
+        IUserTwoFactorRecoveryCodeStore<TUser>
+    where TUser : PocoUser
 {
     private readonly Dictionary<string, TUser> _logins = new Dictionary<string, TUser>();
 

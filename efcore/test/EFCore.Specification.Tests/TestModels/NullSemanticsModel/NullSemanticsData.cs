@@ -22,7 +22,8 @@ public class NullSemanticsData : ISetSource
     public static IReadOnlyList<NullSemanticsEntity2> CreateEntities2() =>
         CreateNullSemanticsEntityBases<NullSemanticsEntity2>();
 
-    public IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(NullSemanticsEntity1))
         {

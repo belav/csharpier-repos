@@ -499,7 +499,8 @@ namespace System.Net.Http.Formatting
             throw new NotImplementedException();
         }
 
-        bool Equals<T>(object x, object y) where T : IEquatable<T>
+        bool Equals<T>(object x, object y)
+            where T : IEquatable<T>
         {
             IEquatable<T> yEquatable = (IEquatable<T>)y;
             return yEquatable.Equals((T)x);

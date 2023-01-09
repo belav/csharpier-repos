@@ -444,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Func<DocumentationCommentParser, bool> isNotExpectedFunction,
             Func<DocumentationCommentParser, bool> abortFunction,
             XmlParseErrorCode error
-        ) where T : CSharpSyntaxNode
+        )
+            where T : CSharpSyntaxNode
         {
             var badTokens = default(SyntaxListBuilder<SyntaxToken>);
             bool hasError = false;
@@ -1063,7 +1064,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             TNode node,
             XmlParseErrorCode code,
             params string[] args
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             return WithAdditionalDiagnostics(
                 node,

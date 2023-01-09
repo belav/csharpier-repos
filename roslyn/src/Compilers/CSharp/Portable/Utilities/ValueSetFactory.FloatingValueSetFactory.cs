@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal static partial class ValueSetFactory
     {
         private sealed class FloatingValueSetFactory<TFloating, TFloatingTC>
-            : IValueSetFactory<TFloating> where TFloatingTC : struct, FloatingTC<TFloating>
+            : IValueSetFactory<TFloating>
+            where TFloatingTC : struct, FloatingTC<TFloating>
         {
             public static readonly FloatingValueSetFactory<TFloating, TFloatingTC> Instance =
                 new FloatingValueSetFactory<TFloating, TFloatingTC>();

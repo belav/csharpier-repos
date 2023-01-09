@@ -248,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         public SyntaxKind UnderCheckedStatementContext() =>
             UnderCheckedContext<CheckedStatementSyntax>();
 
-        private SyntaxKind UnderCheckedContext<T>() where T : SyntaxNode
+        private SyntaxKind UnderCheckedContext<T>()
+            where T : SyntaxNode
         {
             var token = GetFirstTokenInSelection();
             var contextNode = token.Parent.GetAncestor<T>();

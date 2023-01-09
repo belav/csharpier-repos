@@ -131,7 +131,8 @@ public interface IGlobalConfiguration : IConfigurationProvider
     /// Dry run all type maps in given profile
     /// </summary>
     /// <typeparam name="TProfile">Profile type</typeparam>
-    void AssertConfigurationIsValid<TProfile>() where TProfile : Profile, new();
+    void AssertConfigurationIsValid<TProfile>()
+        where TProfile : Profile, new();
 
     /// <summary>
     /// Get all configured mappers

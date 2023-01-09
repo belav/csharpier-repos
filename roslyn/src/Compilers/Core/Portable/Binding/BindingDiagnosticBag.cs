@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis
         [MemberNotNullWhen(true, nameof(DiagnosticBag))]
         internal bool AccumulatesDiagnostics => DiagnosticBag is object;
 
-        internal void AddRange<T>(ImmutableArray<T> diagnostics) where T : Diagnostic
+        internal void AddRange<T>(ImmutableArray<T> diagnostics)
+            where T : Diagnostic
         {
             DiagnosticBag?.AddRange(diagnostics);
         }

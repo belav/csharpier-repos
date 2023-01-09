@@ -180,7 +180,8 @@ public abstract class AbstractLanguageServer<TRequestContext> : ILifeCycleManage
         public async Task NotificationEntryPointAsync<TRequest>(
             TRequest request,
             CancellationToken cancellationToken
-        ) where TRequest : class
+        )
+            where TRequest : class
         {
             CheckServerState();
             var queue = _target.GetRequestExecutionQueue();
@@ -217,7 +218,8 @@ public abstract class AbstractLanguageServer<TRequestContext> : ILifeCycleManage
         public async Task<TResponse?> EntryPointAsync<TRequest, TResponse>(
             TRequest request,
             CancellationToken cancellationToken
-        ) where TRequest : class
+        )
+            where TRequest : class
         {
             CheckServerState();
             var queue = _target.GetRequestExecutionQueue();
@@ -325,8 +327,8 @@ public abstract class AbstractLanguageServer<TRequestContext> : ILifeCycleManage
             _server = server;
         }
 
-        public T GetRequiredLspService<T>() where T : class =>
-            _server.GetLspServices().GetRequiredService<T>();
+        public T GetRequiredLspService<T>()
+            where T : class => _server.GetLspServices().GetRequiredService<T>();
 
         internal RequestExecutionQueue<TRequestContext>.TestAccessor? GetQueueAccessor()
         {

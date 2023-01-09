@@ -16,7 +16,8 @@ public class StoreGeneratedInMemoryTest
         ValueGenerationPositive<Guid, GuidToBytes>();
     }
 
-    private void ValueGenerationPositive<TKey, TEntity>() where TEntity : WithConverter<TKey>, new()
+    private void ValueGenerationPositive<TKey, TEntity>()
+        where TEntity : WithConverter<TKey>, new()
     {
         var databaseName = Guid.NewGuid().ToString();
         TKey? id;

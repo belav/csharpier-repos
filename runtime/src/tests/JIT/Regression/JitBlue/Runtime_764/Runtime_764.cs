@@ -7,7 +7,8 @@ using System.Runtime.CompilerServices;
 // Regression test case for importer bug.
 // If Release is inlined into Main, the importer may unsafely re-order trees.
 
-public struct Ptr<T> where T : class
+public struct Ptr<T>
+    where T : class
 {
     private T _value;
 

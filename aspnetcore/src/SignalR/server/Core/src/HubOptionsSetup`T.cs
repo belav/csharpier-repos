@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.SignalR;
 /// Class to configure the <see cref="HubOptions"/> for a specific <typeparamref name="THub"/>.
 /// </summary>
 /// <typeparam name="THub">The <see cref="Hub"/> type to configure.</typeparam>
-public class HubOptionsSetup<THub> : IConfigureOptions<HubOptions<THub>> where THub : Hub
+public class HubOptionsSetup<THub> : IConfigureOptions<HubOptions<THub>>
+    where THub : Hub
 {
     private readonly HubOptions _hubOptions;
 

@@ -42,7 +42,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             return default(T);
         }
 
-        public int M<T>(T t) where T : IEnumerable<T>
+        public int M<T>(T t)
+            where T : IEnumerable<T>
         {
             return 3;
         }
@@ -105,12 +106,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
         }
 
         #region Constraints on methods that have a new type parameter
-        public U Method_ReturnsUConstraint<U>(U u) where U : class
+        public U Method_ReturnsUConstraint<U>(U u)
+            where U : class
         {
             return null;
         }
 
-        public U Method_ReturnsUConstraint<T, U>(T t) where U : new()
+        public U Method_ReturnsUConstraint<T, U>(T t)
+            where U : new()
         {
             return new U();
         }
@@ -122,7 +125,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             return new V();
         }
 
-        public dynamic Method_ReturnsDynamicConstraint<T, U>(T t, U u, dynamic d) where U : new()
+        public dynamic Method_ReturnsDynamicConstraint<T, U>(T t, U u, dynamic d)
+            where U : new()
         {
             return new U();
         }
@@ -149,12 +153,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
 
         //These are negative methods... you should not be able to call them with the dynamic type because the dynamic type would not satisfy the constraints
         //you cannot call this like: Method_ReturnsUConstraint<dynamic>(d); because object does not derive from C
-        public U Method_ReturnsUNegConstraint<U>(U u) where U : C
+        public U Method_ReturnsUNegConstraint<U>(U u)
+            where U : C
         {
             return null;
         }
 
-        public T Method_ReturnsTNegConstraint<T, U>(U u) where U : struct
+        public T Method_ReturnsTNegConstraint<T, U>(U u)
+            where U : struct
         {
             return default(T);
         }

@@ -100,7 +100,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             this MSB.Execution.ProjectInstance executedProject,
             string propertyName,
             bool ignoreCase
-        ) where TEnum : struct =>
+        )
+            where TEnum : struct =>
             Conversions.ToEnum<TEnum>(executedProject.ReadPropertyString(propertyName), ignoreCase);
 
         public static string ReadItemsAsString(

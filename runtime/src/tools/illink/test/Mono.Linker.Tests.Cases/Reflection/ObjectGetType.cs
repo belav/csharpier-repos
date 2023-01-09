@@ -198,7 +198,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     [KeptAttributeAttribute(typeof(DynamicallyAccessedMembersAttribute))]
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                         TWithMethods
-                > where TWithMethods : new()
+                >
+                    where TWithMethods : new()
                 {
                     [Kept]
                     static TWithMethods ReturnAnnotated()

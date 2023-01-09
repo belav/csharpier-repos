@@ -457,7 +457,8 @@ link text";
         private static async Task<T> GetCompletionItemToResolveAsync<T>(
             TestLspServer testLspServer,
             string label
-        ) where T : LSP.CompletionItem
+        )
+            where T : LSP.CompletionItem
         {
             var completionParams = CreateCompletionParams(
                 testLspServer.GetLocations("caret").Single(),

@@ -168,7 +168,8 @@ public abstract class RazorPageBase : IRazorPage
     /// <remarks>
     /// <typeparamref name="TTagHelper"/> must have a parameterless constructor.
     /// </remarks>
-    public TTagHelper CreateTagHelper<TTagHelper>() where TTagHelper : ITagHelper
+    public TTagHelper CreateTagHelper<TTagHelper>()
+        where TTagHelper : ITagHelper
     {
         return TagHelperFactory.CreateTagHelper<TTagHelper>(ViewContext);
     }

@@ -40,7 +40,8 @@ namespace System.Runtime.InteropServices
         public static void CleanupUnusedObjectsInCurrentContext() { }
 
         [SupportedOSPlatform("windows")]
-        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o) where T : notnull
+        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o)
+            where T : notnull
         {
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_ComInterop);
         }

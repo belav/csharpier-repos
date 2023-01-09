@@ -505,7 +505,8 @@ public class JsonConverterReadTests
         string value,
         GrpcJsonSettings? settings = null,
         DescriptorRegistry? descriptorRegistry = null
-    ) where TValue : IMessage, new()
+    )
+        where TValue : IMessage, new()
     {
         var typeRegistery = TypeRegistry.FromFiles(
             HelloRequest.Descriptor.File,
@@ -546,7 +547,8 @@ public class JsonConverterReadTests
         Action<Exception> assertException,
         GrpcJsonSettings? settings = null,
         DescriptorRegistry? descriptorRegistry = null
-    ) where TValue : IMessage, new()
+    )
+        where TValue : IMessage, new()
     {
         var typeRegistery = TypeRegistry.FromFiles(
             HelloRequest.Descriptor.File,

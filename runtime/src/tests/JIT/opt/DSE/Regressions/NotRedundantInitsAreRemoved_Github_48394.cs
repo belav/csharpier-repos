@@ -13,7 +13,8 @@ public struct Struct1
 public class NotRedundantInitsAreRemoved_Github_48394
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void ValidateAndAssignValue<T>(ref T obj) where T : new()
+    private static void ValidateAndAssignValue<T>(ref T obj)
+        where T : new()
     {
         if (obj != null)
             throw new Exception("obj was expected to be null");

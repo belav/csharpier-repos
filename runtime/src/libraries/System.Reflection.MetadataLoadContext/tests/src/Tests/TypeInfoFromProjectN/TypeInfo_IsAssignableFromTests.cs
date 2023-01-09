@@ -665,13 +665,17 @@ namespace System.Reflection.Tests
 
     public class G2<T> : G<T> { }
 
-    public class Gen2<T> where T : Gen<T>, I1, I2 { }
+    public class Gen2<T>
+        where T : Gen<T>, I1, I2 { }
 
-    public class Gen3<T> where T : D { }
+    public class Gen3<T>
+        where T : D { }
 
-    public class Gen4<T> where T : struct { }
+    public class Gen4<T>
+        where T : struct { }
 
-    public class Gen5<T, U> where T : U { }
+    public class Gen5<T, U>
+        where T : U { }
 
     public class GBase<T> { }
 
@@ -686,7 +690,8 @@ namespace System.Reflection.Tests
         public class C : B { }
     }
 
-    public class G10<T> where T : I1 { }
+    public class G10<T>
+        where T : I1 { }
 
     public enum Eint : int { }
 

@@ -29,7 +29,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnValueType
         }
 
         [Kept]
-        public interface IBuildable<T> : IBuildable where T : IBuilder, new() { }
+        public interface IBuildable<T> : IBuildable
+            where T : IBuilder, new() { }
 
         public struct Result<T> : IResult { }
 
@@ -42,7 +43,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnValueType
         [Kept]
         [KeptInterface(typeof(IBuilder))]
         [KeptMember(".ctor()")]
-        public abstract class Builder<T> : IBuilder where T : IRunner
+        public abstract class Builder<T> : IBuilder
+            where T : IRunner
         {
             public abstract Result<T> Build(Node node, Node root, World world);
 

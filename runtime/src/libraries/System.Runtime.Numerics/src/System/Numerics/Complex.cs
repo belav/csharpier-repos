@@ -1032,7 +1032,8 @@ namespace System.Numerics
 
         /// <inheritdoc cref="INumberBase{TSelf}.CreateChecked{TOther}(TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Complex CreateChecked<TOther>(TOther value) where TOther : INumberBase<TOther>
+        public static Complex CreateChecked<TOther>(TOther value)
+            where TOther : INumberBase<TOther>
         {
             Complex result;
 

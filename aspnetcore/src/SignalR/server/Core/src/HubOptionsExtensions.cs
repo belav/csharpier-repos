@@ -36,7 +36,8 @@ public static class HubOptionsExtensions
     /// <param name="options">The options to add a filter to.</param>
     public static void AddFilter<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilter
-    >(this HubOptions options) where TFilter : IHubFilter
+    >(this HubOptions options)
+        where TFilter : IHubFilter
     {
         _ = options ?? throw new ArgumentNullException(nameof(options));
 

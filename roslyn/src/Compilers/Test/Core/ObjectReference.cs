@@ -16,12 +16,14 @@ namespace Roslyn.Test.Utilities
         // on the stack in this method or targetFactory get cleaned up. Otherwise, they might still
         // be alive when we want to make later assertions.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static ObjectReference<T> CreateFromFactory<T>(Func<T> targetFactory) where T : class
+        public static ObjectReference<T> CreateFromFactory<T>(Func<T> targetFactory)
+            where T : class
         {
             return new ObjectReference<T>(targetFactory());
         }
 
-        public static ObjectReference<T> Create<T>(T target) where T : class
+        public static ObjectReference<T> Create<T>(T target)
+            where T : class
         {
             return new ObjectReference<T>(target);
         }
@@ -50,7 +52,8 @@ namespace Roslyn.Test.Utilities
     /// that is marked NoInline; this ensures that when the uses are done, any temporaries still floating around are understood
     /// by the JIT/GC to actually be unused.
     /// </remarks>
-    public sealed class ObjectReference<T> where T : class
+    public sealed class ObjectReference<T>
+        where T : class
     {
         private T _strongReference;
 
@@ -187,7 +190,8 @@ namespace Roslyn.Test.Utilities
         public ObjectReference<TResult> GetObjectReference<TResult, TArg>(
             Func<T, TArg, TResult> function,
             TArg argument
-        ) where TResult : class
+        )
+            where TResult : class
         {
             var newValue = function(GetReferenceWithChecks(), argument);
             return ObjectReference.Create(newValue);

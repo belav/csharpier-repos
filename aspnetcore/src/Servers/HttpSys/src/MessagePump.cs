@@ -75,7 +75,8 @@ internal sealed partial class MessagePump : IServer, IServerDelegationFeature
     public Task StartAsync<TContext>(
         IHttpApplication<TContext> application,
         CancellationToken cancellationToken
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         ArgumentNullException.ThrowIfNull(application);
 

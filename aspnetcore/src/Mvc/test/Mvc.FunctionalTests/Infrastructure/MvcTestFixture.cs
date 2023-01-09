@@ -12,7 +12,8 @@ using Microsoft.Extensions.Logging.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
+public class MvcTestFixture<TStartup> : WebApplicationFactory<TStartup>
+    where TStartup : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {

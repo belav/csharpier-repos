@@ -133,7 +133,8 @@ namespace DebuggerTests
         // async methods cannot have unsafe params, so no test for that
     }
 
-    public unsafe struct GenericStructWithUnmanagedT<T> where T : unmanaged
+    public unsafe struct GenericStructWithUnmanagedT<T>
+        where T : unmanaged
     {
         public T Value;
         public int IntField;
@@ -141,7 +142,8 @@ namespace DebuggerTests
         public DateTime** DTPP;
     }
 
-    public unsafe class GenericClassWithPointers<T> where T : unmanaged
+    public unsafe class GenericClassWithPointers<T>
+        where T : unmanaged
     {
         public unsafe T* Ptr;
     }

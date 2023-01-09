@@ -1392,7 +1392,8 @@ public abstract class PageBase : RazorPageBase
     /// <typeparam name="TModel">The type of the model object.</typeparam>
     /// <param name="model">The model instance to update.</param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
-    public virtual Task<bool> TryUpdateModelAsync<TModel>(TModel model) where TModel : class
+    public virtual Task<bool> TryUpdateModelAsync<TModel>(TModel model)
+        where TModel : class
     {
         if (model == null)
         {
@@ -1450,7 +1451,8 @@ public abstract class PageBase : RazorPageBase
         TModel model,
         string prefix,
         IValueProvider valueProvider
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -1493,7 +1495,8 @@ public abstract class PageBase : RazorPageBase
         TModel model,
         string prefix,
         params Expression<Func<TModel, object?>>[] includeExpressions
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -1540,7 +1543,8 @@ public abstract class PageBase : RazorPageBase
         TModel model,
         string prefix,
         Func<ModelMetadata, bool> propertyFilter
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -1590,7 +1594,8 @@ public abstract class PageBase : RazorPageBase
         string prefix,
         IValueProvider valueProvider,
         params Expression<Func<TModel, object?>>[] includeExpressions
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -1635,7 +1640,8 @@ public abstract class PageBase : RazorPageBase
         string prefix,
         IValueProvider valueProvider,
         Func<ModelMetadata, bool> propertyFilter
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {

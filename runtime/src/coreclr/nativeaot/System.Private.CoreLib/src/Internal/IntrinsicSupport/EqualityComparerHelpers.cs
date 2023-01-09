@@ -105,12 +105,14 @@ namespace Internal.IntrinsicSupport
 
         // This one is an intrinsic that is used to make enum comparisons more efficient.
         [Intrinsic]
-        internal static bool EnumOnlyEquals<T>(T x, T y) where T : struct
+        internal static bool EnumOnlyEquals<T>(T x, T y)
+            where T : struct
         {
             return x.Equals(y);
         }
 
-        private static bool StructOnlyEqualsIEquatable<T>(T x, T y) where T : IEquatable<T>
+        private static bool StructOnlyEqualsIEquatable<T>(T x, T y)
+            where T : IEquatable<T>
         {
             return x.Equals(y);
         }
@@ -158,7 +160,8 @@ namespace Internal.IntrinsicSupport
             return EqualityComparer<T>.Default;
         }
 
-        private static bool StructOnlyNormalEquals<T>(T left, T right) where T : notnull
+        private static bool StructOnlyNormalEquals<T>(T left, T right)
+            where T : notnull
         {
             return left.Equals(right);
         }

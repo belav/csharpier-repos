@@ -464,7 +464,8 @@ namespace XLinqTests
             return new XElement(nameof(data), data);
         }
 
-        private IEnumerable<ExpectedValue> ExpectedContent<T>(IEnumerable<T> data) where T : class
+        private IEnumerable<ExpectedValue> ExpectedContent<T>(IEnumerable<T> data)
+            where T : class
         {
             return data.Select(
                 n =>

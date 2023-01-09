@@ -16,13 +16,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class SyntaxTokenExtensions
     {
-        public static bool IsLastTokenOfNode<T>(this SyntaxToken token) where T : SyntaxNode =>
-            token.IsLastTokenOfNode<T>(out _);
+        public static bool IsLastTokenOfNode<T>(this SyntaxToken token)
+            where T : SyntaxNode => token.IsLastTokenOfNode<T>(out _);
 
         public static bool IsLastTokenOfNode<T>(
             this SyntaxToken token,
             [NotNullWhen(true)] out T? node
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var ancestor = token.GetAncestor<T>();
             if (ancestor == null || token != ancestor.GetLastToken(includeZeroWidth: true))

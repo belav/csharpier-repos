@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 // Sealed for perf
-public sealed class ClrPropertyGetter<TEntity, TValue> : IClrPropertyGetter where TEntity : class
+public sealed class ClrPropertyGetter<TEntity, TValue> : IClrPropertyGetter
+    where TEntity : class
 {
     private readonly Func<TEntity, TValue> _getter;
     private readonly Func<TEntity, bool> _hasDefaultValue;

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
 
 public abstract class ServerTestBase<TServerFixture>
     : BrowserTestBase,
-        IClassFixture<TServerFixture> where TServerFixture : ServerFixture
+        IClassFixture<TServerFixture>
+    where TServerFixture : ServerFixture
 {
     public string ServerPathBase => "/subdir";
 

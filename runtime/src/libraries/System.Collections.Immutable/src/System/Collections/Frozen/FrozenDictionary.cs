@@ -36,7 +36,8 @@ namespace System.Collections.Frozen
         public static FrozenDictionary<TKey, TValue> ToFrozenDictionary<TKey, TValue>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source,
             IEqualityComparer<TKey>? comparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             ThrowHelper.ThrowIfNull(source);
             comparer ??= EqualityComparer<TKey>.Default;
@@ -78,7 +79,8 @@ namespace System.Collections.Frozen
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer = null
-        ) where TKey : notnull => Freeze(source.ToDictionary(keySelector, comparer));
+        )
+            where TKey : notnull => Freeze(source.ToDictionary(keySelector, comparer));
 
         /// <summary>Creates a <see cref="FrozenDictionary{TKey, TElement}"/> from an <see cref="IEnumerable{TSource}"/> according to specified key selector and element selector functions.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -94,12 +96,14 @@ namespace System.Collections.Frozen
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer = null
-        ) where TKey : notnull =>
+        )
+            where TKey : notnull =>
             Freeze(source.ToDictionary(keySelector, elementSelector, comparer));
 
         private static FrozenDictionary<TKey, TValue> Freeze<TKey, TValue>(
             Dictionary<TKey, TValue> source
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             // If the input was empty, simply return the empty frozen dictionary singleton. The comparer is ignored.
             if (source.Count == 0)
@@ -179,7 +183,8 @@ namespace System.Collections.Frozen
     public abstract class FrozenDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
             IReadOnlyDictionary<TKey, TValue>,
-            IDictionary where TKey : notnull
+            IDictionary
+        where TKey : notnull
     {
         /// <summary>Initialize the dictionary.</summary>
         /// <param name="comparer">The comparer to use and to expose from <see cref="Comparer"/>.</param>

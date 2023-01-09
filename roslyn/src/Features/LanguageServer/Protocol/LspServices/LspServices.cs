@@ -68,12 +68,14 @@ internal class LspServices : ILspServices
         _serviceProvider = serviceCollection.BuildServiceProvider();
     }
 
-    public T GetRequiredLspService<T>() where T : class, ILspService
+    public T GetRequiredLspService<T>()
+        where T : class, ILspService
     {
         return GetRequiredService<T>();
     }
 
-    public T GetRequiredService<T>() where T : notnull
+    public T GetRequiredService<T>()
+        where T : notnull
     {
         T? service;
 

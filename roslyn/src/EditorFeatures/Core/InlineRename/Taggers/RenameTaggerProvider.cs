@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public RenameTaggerProvider(InlineRenameService renameService) =>
             _renameService = renameService;
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag =>
-            new RenameTagger(buffer, _renameService) as ITagger<T>;
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag => new RenameTagger(buffer, _renameService) as ITagger<T>;
     }
 }

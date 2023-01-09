@@ -211,7 +211,8 @@ namespace System.Text.Json.Serialization.Metadata
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
                 TFSharpValueOption,
             TElement
-        >() where TFSharpValueOption : struct
+        >()
+            where TFSharpValueOption : struct
         {
             Debug.Assert(
                 typeof(TFSharpValueOption).GetGenericTypeDefinition() == _fsharpValueOptionType
@@ -330,7 +331,8 @@ namespace System.Text.Json.Serialization.Metadata
         private static TMemberInfo EnsureMemberExists<TMemberInfo>(
             TMemberInfo? memberInfo,
             string memberName
-        ) where TMemberInfo : MemberInfo
+        )
+            where TMemberInfo : MemberInfo
         {
             if (memberInfo is null)
             {

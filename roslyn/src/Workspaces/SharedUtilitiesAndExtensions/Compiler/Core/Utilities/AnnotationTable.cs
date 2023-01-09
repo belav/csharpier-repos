@@ -24,7 +24,8 @@ namespace Roslyn.Utilities
     ///
     /// also, note that this table is not thread safe.
     /// </summary>
-    internal class AnnotationTable<TAnnotation> where TAnnotation : class
+    internal class AnnotationTable<TAnnotation>
+        where TAnnotation : class
     {
         private int _globalId;
 
@@ -79,7 +80,8 @@ namespace Roslyn.Utilities
         public TSyntaxNode WithAdditionalAnnotations<TSyntaxNode>(
             TSyntaxNode node,
             params TAnnotation[] annotations
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             node.WithAdditionalAnnotations(this.GetOrCreateRealAnnotations(annotations).ToArray());
 
         public SyntaxToken WithAdditionalAnnotations(
@@ -107,7 +109,8 @@ namespace Roslyn.Utilities
         public TSyntaxNode WithoutAnnotations<TSyntaxNode>(
             TSyntaxNode node,
             params TAnnotation[] annotations
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             node.WithoutAnnotations(GetRealAnnotations(annotations).ToArray());
 
         public SyntaxToken WithoutAnnotations(
@@ -157,17 +160,20 @@ namespace Roslyn.Utilities
 
         public IEnumerable<TSpecificAnnotation> GetAnnotations<TSpecificAnnotation>(
             SyntaxToken token
-        ) where TSpecificAnnotation : TAnnotation =>
+        )
+            where TSpecificAnnotation : TAnnotation =>
             this.GetAnnotations(token).OfType<TSpecificAnnotation>();
 
         public IEnumerable<TSpecificAnnotation> GetAnnotations<TSpecificAnnotation>(
             SyntaxTrivia trivia
-        ) where TSpecificAnnotation : TAnnotation =>
+        )
+            where TSpecificAnnotation : TAnnotation =>
             this.GetAnnotations(trivia).OfType<TSpecificAnnotation>();
 
         public IEnumerable<TSpecificAnnotation> GetAnnotations<TSpecificAnnotation>(
             SyntaxNodeOrToken nodeOrToken
-        ) where TSpecificAnnotation : TAnnotation =>
+        )
+            where TSpecificAnnotation : TAnnotation =>
             this.GetAnnotations(nodeOrToken).OfType<TSpecificAnnotation>();
 
         public bool HasAnnotations(SyntaxNode node) => node.HasAnnotations(_annotationKind);
@@ -225,7 +231,8 @@ namespace Roslyn.Utilities
 
         public IEnumerable<SyntaxNodeOrToken> GetAnnotatedNodesAndTokens<TSpecificAnnotation>(
             SyntaxNode node
-        ) where TSpecificAnnotation : TAnnotation =>
+        )
+            where TSpecificAnnotation : TAnnotation =>
             node.GetAnnotatedNodesAndTokens(_annotationKind)
                 .Where(this.HasAnnotations<TSpecificAnnotation>);
 

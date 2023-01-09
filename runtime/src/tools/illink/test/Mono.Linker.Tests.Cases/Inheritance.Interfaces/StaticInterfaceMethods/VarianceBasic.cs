@@ -98,7 +98,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
         public class TestEntrypoint
         {
             [Kept]
-            public static string Test_Scenario<T, ImplType>() where ImplType : InterfaceScenario1<T>
+            public static string Test_Scenario<T, ImplType>()
+                where ImplType : InterfaceScenario1<T>
             {
                 int x = ImplType.Method();
                 return x.ToString();

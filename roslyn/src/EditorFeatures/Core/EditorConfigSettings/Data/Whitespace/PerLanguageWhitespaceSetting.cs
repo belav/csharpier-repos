@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
-    internal sealed class PerLanguageWhitespaceSetting<T> : WhitespaceSetting where T : notnull
+    internal sealed class PerLanguageWhitespaceSetting<T> : WhitespaceSetting
+        where T : notnull
     {
         private bool _isValueSet;
         private T? _value;

@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
-internal struct EmbeddedSyntaxToken<TSyntaxKind> where TSyntaxKind : struct
+internal struct EmbeddedSyntaxToken<TSyntaxKind>
+    where TSyntaxKind : struct
 {
     public readonly TSyntaxKind Kind;
     public readonly VirtualCharSequence VirtualChars;

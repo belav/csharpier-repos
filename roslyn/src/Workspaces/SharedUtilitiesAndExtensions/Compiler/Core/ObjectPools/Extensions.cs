@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis
 
         public static PooledObject<Dictionary<TKey, TValue>> GetPooledObject<TKey, TValue>(
             this ObjectPool<Dictionary<TKey, TValue>> pool
-        ) where TKey : notnull => PooledObject<Dictionary<TKey, TValue>>.Create(pool);
+        )
+            where TKey : notnull => PooledObject<Dictionary<TKey, TValue>>.Create(pool);
 
         public static PooledObject<List<TItem>> GetPooledObject<TItem>(
             this ObjectPool<List<TItem>> pool
@@ -47,8 +48,8 @@ namespace Microsoft.CodeAnalysis
             return pooledObject;
         }
 
-        public static PooledObject<T> GetPooledObject<T>(this ObjectPool<T> pool) where T : class =>
-            new(pool, p => p.Allocate(), (p, o) => p.Free(o));
+        public static PooledObject<T> GetPooledObject<T>(this ObjectPool<T> pool)
+            where T : class => new(pool, p => p.Allocate(), (p, o) => p.Free(o));
 
         public static StringBuilder AllocateAndClear(this ObjectPool<StringBuilder> pool)
         {
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis
 
         public static Dictionary<TKey, TValue> AllocateAndClear<TKey, TValue>(
             this ObjectPool<Dictionary<TKey, TValue>> pool
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var map = pool.Allocate();
             map.Clear();
@@ -138,7 +140,8 @@ namespace Microsoft.CodeAnalysis
         public static void ClearAndFree<T>(
             this ObjectPool<ConcurrentSet<T>> pool,
             ConcurrentSet<T> set
-        ) where T : notnull
+        )
+            where T : notnull
         {
             if (set == null)
                 return;
@@ -193,7 +196,8 @@ namespace Microsoft.CodeAnalysis
         public static void ClearAndFree<TKey, TValue>(
             this ObjectPool<Dictionary<TKey, TValue>> pool,
             Dictionary<TKey, TValue> map
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (map == null)
             {

@@ -141,7 +141,8 @@ internal partial class VectorTest
         Console.WriteLine(" ]");
     }
 
-    private static T Add<T>(T left, T right) where T : struct, IComparable<T>, IEquatable<T>
+    private static T Add<T>(T left, T right)
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         if (typeof(T) == typeof(float))
         {
@@ -197,7 +198,8 @@ internal partial class VectorTest
         }
     }
 
-    private static T Multiply<T>(T left, T right) where T : struct, IComparable<T>, IEquatable<T>
+    private static T Multiply<T>(T left, T right)
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         if (typeof(T) == typeof(float))
         {

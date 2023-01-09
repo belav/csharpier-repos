@@ -117,7 +117,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             IServiceProviderFactory<TContainerBuilder> factory
-        ) where TContainerBuilder : notnull
+        )
+            where TContainerBuilder : notnull
         {
             ThrowHelper.ThrowIfNull(factory);
 
@@ -133,7 +134,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-        ) where TContainerBuilder : notnull
+        )
+            where TContainerBuilder : notnull
         {
             ThrowHelper.ThrowIfNull(factory);
 

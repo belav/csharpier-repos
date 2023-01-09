@@ -28,7 +28,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 TOptions
-        >(this OptionsBuilder<TOptions> optionsBuilder) where TOptions : class
+        >(this OptionsBuilder<TOptions> optionsBuilder)
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
 

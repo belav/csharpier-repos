@@ -296,7 +296,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallTypeConstrainedMethods<T>() where T : IUsedEveryWay
+            public static void CallTypeConstrainedMethods<T>()
+                where T : IUsedEveryWay
             {
                 T.UsedThroughConstrainedType();
                 T.UsedThroughConstrainedTypeExplicit();
@@ -749,14 +750,16 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallBase1TypeConstrainedMethod<T>() where T : IBase
+            public static void CallBase1TypeConstrainedMethod<T>()
+                where T : IBase
             {
                 T.UsedOnBaseOnlyConstrainedTypeImplicitImpl();
                 T.UsedOnConstrainedTypeExplicitImpl();
             }
 
             [Kept]
-            internal static void CallBase2TypeConstrainedMethod<T>() where T : IBaseInternal
+            internal static void CallBase2TypeConstrainedMethod<T>()
+                where T : IBaseInternal
             {
                 T.UsedOnBaseOnlyConstrainedTypeImplicitImpl();
                 T.UsedOnConstrainedTypeExplicitImpl();
@@ -833,7 +836,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            public static void CallExplicitMethod<T, U>() where T : IGenericInterface<U>
+            public static void CallExplicitMethod<T, U>()
+                where T : IGenericInterface<U>
             {
                 T.GetTExplicit();
             }
@@ -843,7 +847,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
         public static class RecursiveGenericInterface
         {
             [Kept]
-            public interface IGenericInterface<T> where T : IGenericInterface<T>
+            public interface IGenericInterface<T>
+                where T : IGenericInterface<T>
             {
                 [Kept]
                 public static abstract T GetT();
@@ -853,7 +858,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
             }
 
             [Kept]
-            internal interface IGenericInterfaceInternal<T> where T : IGenericInterfaceInternal<T>
+            internal interface IGenericInterfaceInternal<T>
+                where T : IGenericInterfaceInternal<T>
             {
                 [Kept]
                 static abstract T GetT();

@@ -11,7 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal sealed class ComEventSink
     {
-        public static ComEventSink Advise<T>(object obj, T sink) where T : class
+        public static ComEventSink Advise<T>(object obj, T sink)
+            where T : class
         {
             if (!typeof(T).IsInterface)
             {

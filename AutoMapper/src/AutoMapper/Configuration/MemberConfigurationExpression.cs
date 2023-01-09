@@ -45,8 +45,13 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>
 
     public void MapFrom<TValueResolver, TSourceMember>(
         Expression<Func<TSource, TSourceMember>> sourceMember
-    ) where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember> =>
-        MapFromCore<TValueResolver, TSourceMember>(sourceMember);
+    )
+        where TValueResolver : IMemberValueResolver<
+                TSource,
+                TDestination,
+                TSourceMember,
+                TMember
+            > => MapFromCore<TValueResolver, TSourceMember>(sourceMember);
 
     public void MapFrom<TValueResolver, TSourceMember>(string sourceMemberName)
         where TValueResolver : IMemberValueResolver<
@@ -59,7 +64,13 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>
     private void MapFromCore<TValueResolver, TSourceMember>(
         Expression<Func<TSource, TSourceMember>> sourceMember,
         string sourceMemberName = null
-    ) where TValueResolver : IMemberValueResolver<TSource, TDestination, TSourceMember, TMember> =>
+    )
+        where TValueResolver : IMemberValueResolver<
+                TSource,
+                TDestination,
+                TSourceMember,
+                TMember
+            > =>
         MapFromCore(
             new(
                 typeof(TValueResolver),
@@ -207,7 +218,8 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>
 
     public void ConvertUsing<TValueConverter, TSourceMember>(
         Expression<Func<TSource, TSourceMember>> sourceMember
-    ) where TValueConverter : IValueConverter<TSourceMember, TMember> =>
+    )
+        where TValueConverter : IValueConverter<TSourceMember, TMember> =>
         ConvertUsingCore<TValueConverter, TSourceMember>(sourceMember);
 
     public void ConvertUsing<TValueConverter, TSourceMember>(string sourceMemberName)

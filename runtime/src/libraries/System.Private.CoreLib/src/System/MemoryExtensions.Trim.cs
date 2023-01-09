@@ -72,7 +72,8 @@ namespace System
         /// </summary>
         /// <param name="span">The source span from which the element is removed.</param>
         /// <param name="trimElement">The specified element to look for and remove.</param>
-        public static Span<T> Trim<T>(this Span<T> span, T trimElement) where T : IEquatable<T>?
+        public static Span<T> Trim<T>(this Span<T> span, T trimElement)
+            where T : IEquatable<T>?
         {
             int start = ClampStart(span, trimElement);
             int length = ClampEnd(span, start, trimElement);
@@ -278,7 +279,8 @@ namespace System
         public static ReadOnlyMemory<T> Trim<T>(
             this ReadOnlyMemory<T> memory,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (trimElements.Length > 1)
             {
@@ -306,7 +308,8 @@ namespace System
         public static ReadOnlyMemory<T> TrimStart<T>(
             this ReadOnlyMemory<T> memory,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (trimElements.Length > 1)
             {
@@ -331,7 +334,8 @@ namespace System
         public static ReadOnlyMemory<T> TrimEnd<T>(
             this ReadOnlyMemory<T> memory,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (trimElements.Length > 1)
             {
@@ -427,7 +431,8 @@ namespace System
         public static ReadOnlySpan<T> Trim<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (trimElements.Length > 1)
             {
@@ -454,7 +459,8 @@ namespace System
         public static ReadOnlySpan<T> TrimStart<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (trimElements.Length > 1)
             {
@@ -479,7 +485,8 @@ namespace System
         public static ReadOnlySpan<T> TrimEnd<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (trimElements.Length > 1)
             {
@@ -526,7 +533,8 @@ namespace System
             ReadOnlySpan<T> span,
             int start,
             ReadOnlySpan<T> trimElements
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             // Initially, start==len==0. If ClampStart trims all, start==len
             Debug.Assert((uint)start <= span.Length);

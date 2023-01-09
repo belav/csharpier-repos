@@ -67,7 +67,8 @@ public class InMemoryTableFactory : IInMemoryTableFactory
         IInMemoryTable baseTable,
         bool sensitiveLoggingEnabled,
         bool nullabilityCheckEnabled
-    ) where TKey : notnull =>
+    )
+        where TKey : notnull =>
         () =>
             new InMemoryTable<TKey>(
                 entityType,

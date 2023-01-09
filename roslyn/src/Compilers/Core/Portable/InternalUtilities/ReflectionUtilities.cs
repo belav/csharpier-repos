@@ -115,7 +115,8 @@ namespace Roslyn.Utilities
             return FindItem(typeInfo.DeclaredConstructors, paramTypes);
         }
 
-        public static T? CreateDelegate<T>(this MethodInfo? methodInfo) where T : Delegate
+        public static T? CreateDelegate<T>(this MethodInfo? methodInfo)
+            where T : Delegate
         {
             if (methodInfo == null)
             {

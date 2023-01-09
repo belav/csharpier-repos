@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEventSymbol @event,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds a field into destination.
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IFieldSymbol field,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds a method into destination.
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IMethodSymbol method,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds a property into destination.
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IPropertySymbol property,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds a named type into destination.
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamedTypeSymbol namedType,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds a namespace into destination.
@@ -138,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             INamespaceSymbol @namespace,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds members into destination.
@@ -148,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<ISymbol> members,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds the parameters to destination.
@@ -158,7 +165,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<IParameterSymbol> parameters,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds the attributes to destination.
@@ -169,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             SyntaxToken? target,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Remove the given attribute from destination.
@@ -179,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             SyntaxNode attributeToRemove,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Remove the given attribute from destination.
@@ -189,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             AttributeData attributeToRemove,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Update the modifiers list for the given declaration node.
@@ -199,7 +210,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<SyntaxToken> newModifiers,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Update the accessibility modifiers for the given declaration node, retaining the trivia of the existing modifiers.
@@ -209,7 +221,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             Accessibility newAccessibility,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Update the type for the given declaration node.
@@ -219,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             ITypeSymbol newType,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Replace the existing members with the given newMembers for the given declaration node.
@@ -229,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IList<ISymbol> newMembers,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds the statements to destination.
@@ -239,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<SyntaxNode> statements,
             CodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode;
+        )
+            where TDeclarationNode : SyntaxNode;
 
         /// <summary>
         /// Adds a field with the provided signature into destination.

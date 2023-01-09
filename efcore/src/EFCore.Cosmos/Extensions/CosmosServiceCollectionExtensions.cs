@@ -60,7 +60,8 @@ public static class CosmosServiceCollectionExtensions
         string databaseName,
         Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null,
         Action<DbContextOptionsBuilder>? optionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         serviceCollection.AddDbContext<TContext>(
             (serviceProvider, options) =>
             {

@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             this SolutionServices workspaceServices,
             IEnumerable<Lazy<T, TMetadata>> items,
             IContentType contentType
-        ) where TMetadata : ILanguageMetadata
+        )
+            where TMetadata : ILanguageMetadata
         {
             if (items == null)
             {

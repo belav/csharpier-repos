@@ -1285,7 +1285,8 @@ namespace Microsoft.CodeAnalysis
                     CompilationAndGeneratorDriverTranslationAction translationAction
                 )
             > addDocumentsToProjectState
-        ) where T : TextDocumentState
+        )
+            where T : TextDocumentState
         {
             if (documentInfos.IsDefault)
             {
@@ -1423,7 +1424,8 @@ namespace Microsoft.CodeAnalysis
                     CompilationAndGeneratorDriverTranslationAction translationAction
                 )
             > removeDocumentsFromProjectState
-        ) where T : TextDocumentState
+        )
+            where T : TextDocumentState
         {
             if (documentIds.IsEmpty)
             {

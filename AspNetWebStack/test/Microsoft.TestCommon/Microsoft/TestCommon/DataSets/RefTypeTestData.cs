@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace Microsoft.TestCommon
 {
-    public class RefTypeTestData<T> : TestData<T> where T : class
+    public class RefTypeTestData<T> : TestData<T>
+        where T : class
     {
         private Func<IEnumerable<T>> testDataProvider;
         private Func<IEnumerable<T>> derivedTypeTestDataProvider;

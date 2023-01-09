@@ -14,7 +14,8 @@ unsafe class Pointers
         public int Num;
     }
 
-    private class Test<T> where T : unmanaged
+    private class Test<T>
+        where T : unmanaged
     {
         public T Pointer(T* pointer) => *pointer;
 

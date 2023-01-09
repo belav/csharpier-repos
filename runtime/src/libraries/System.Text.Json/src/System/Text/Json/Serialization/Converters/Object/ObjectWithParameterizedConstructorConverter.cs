@@ -28,7 +28,8 @@ namespace System.Text.Json.Serialization.Converters
     /// of JSON objects using parameterized constructors.
     /// </summary>
     internal abstract partial class ObjectWithParameterizedConstructorConverter<T>
-        : ObjectDefaultConverter<T> where T : notnull
+        : ObjectDefaultConverter<T>
+        where T : notnull
     {
         internal sealed override bool ConstructorIsParameterized => true;
 

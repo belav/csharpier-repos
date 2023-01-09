@@ -85,7 +85,8 @@ namespace Castle.DynamicProxy.Tests
         [ReflectionPermission(SecurityAction.Demand)]
         public class AttributedClass_ReflectionPermission { }
 
-        private int AttributeCount<TAttribute>(object proxy) where TAttribute : Attribute
+        private int AttributeCount<TAttribute>(object proxy)
+            where TAttribute : Attribute
         {
             return proxy.GetType().GetCustomAttributes(typeof(TAttribute), false).Count();
         }

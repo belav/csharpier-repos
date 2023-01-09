@@ -61,7 +61,8 @@ namespace System.Threading
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [return: NotNullIfNotNull(nameof(location1))]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class?
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class?
         {
             return Unsafe.As<T>(
                 RuntimeImports.InterlockedCompareExchange(

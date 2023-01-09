@@ -20,8 +20,8 @@ public static class ReflectionHelper
     public static bool IsPublic(this PropertyInfo propertyInfo) =>
         (propertyInfo.GetGetMethod() ?? propertyInfo.GetSetMethod()) != null;
 
-    public static bool Has<TAttribute>(this MemberInfo member) where TAttribute : Attribute =>
-        member.IsDefined(typeof(TAttribute));
+    public static bool Has<TAttribute>(this MemberInfo member)
+        where TAttribute : Attribute => member.IsDefined(typeof(TAttribute));
 
     public static bool CanBeSet(this MemberInfo member) =>
         member is PropertyInfo property ? property.CanWrite : !((FieldInfo)member).IsInitOnly;

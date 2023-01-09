@@ -27,7 +27,8 @@ public static class HubEndpointRouteBuilderExtensions
     /// <returns>An <see cref="HubEndpointConventionBuilder"/> for endpoints associated with the connections.</returns>
     public static HubEndpointConventionBuilder MapHub<
         [DynamicallyAccessedMembers(HubAccessibility)] THub
-    >(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern) where THub : Hub
+    >(this IEndpointRouteBuilder endpoints, [StringSyntax("Route")] string pattern)
+        where THub : Hub
     {
         return endpoints.MapHub<THub>(pattern, configureOptions: null);
     }
@@ -46,7 +47,8 @@ public static class HubEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         Action<HttpConnectionDispatcherOptions>? configureOptions
-    ) where THub : Hub
+    )
+        where THub : Hub
     {
         var marker = endpoints.ServiceProvider.GetService<SignalRMarkerService>();
 

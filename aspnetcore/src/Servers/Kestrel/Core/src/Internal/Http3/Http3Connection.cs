@@ -679,7 +679,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
         ConnectionContext streamContext,
         IHttpApplication<TContext> application,
         long streamId
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         // http request stream
         // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-5.2-2
@@ -867,7 +868,8 @@ internal sealed class Http3Connection : IHttp3StreamLifetimeHandler, IRequestPro
 
     private async ValueTask<Http3ControlStream> CreateNewUnidirectionalStreamAsync<TContext>(
         IHttpApplication<TContext> application
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         var features = new FeatureCollection();
         features.Set<IStreamDirectionFeature>(

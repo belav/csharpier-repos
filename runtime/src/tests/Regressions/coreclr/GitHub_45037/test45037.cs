@@ -20,7 +20,8 @@ public abstract class ABase
     public abstract object this[int index] { get; }
 }
 
-public sealed class Concrete<T> : ABase where T : class
+public sealed class Concrete<T> : ABase
+    where T : class
 {
     public override T this[int index]
     {
@@ -33,7 +34,8 @@ class Parent
     public virtual object Value { get; }
 }
 
-class Child<T> : Parent where T : class
+class Child<T> : Parent
+    where T : class
 {
     public override T Value
     {

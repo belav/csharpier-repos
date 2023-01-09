@@ -813,7 +813,8 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
         Action<F1Context> clientChange,
         Action<F1Context, TException> resolver,
         Action<F1Context> validator
-    ) where TException : DbUpdateException
+    )
+        where TException : DbUpdateException
     {
         using var c = CreateF1Context();
         await c.Database

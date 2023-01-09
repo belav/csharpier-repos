@@ -14,7 +14,8 @@ public class InMemoryContext : InMemoryContext<IdentityUser, IdentityRole, strin
     public static new InMemoryContext Create(DbConnection connection) =>
         Initialize(new InMemoryContext(connection));
 
-    public static TContext Initialize<TContext>(TContext context) where TContext : DbContext
+    public static TContext Initialize<TContext>(TContext context)
+        where TContext : DbContext
     {
         context.Database.EnsureCreated();
 
@@ -22,7 +23,8 @@ public class InMemoryContext : InMemoryContext<IdentityUser, IdentityRole, strin
     }
 }
 
-public class InMemoryContext<TUser> : IdentityUserContext<TUser, string> where TUser : IdentityUser
+public class InMemoryContext<TUser> : IdentityUserContext<TUser, string>
+    where TUser : IdentityUser
 {
     private readonly DbConnection _connection;
 

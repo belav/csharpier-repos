@@ -16,7 +16,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 {
     internal abstract class NamingStyleDiagnosticAnalyzerBase<TLanguageKindEnum>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TLanguageKindEnum : struct
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        where TLanguageKindEnum : struct
     {
         private static readonly LocalizableString s_localizableMessageFormat =
             new LocalizableResourceString(

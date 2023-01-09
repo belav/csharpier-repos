@@ -2194,7 +2194,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     private static InMemoryTestStore CreateScratch<TContext>(
         Action<TContext> seed,
         string databaseName
-    ) where TContext : DbContext, new() =>
+    )
+        where TContext : DbContext, new() =>
         InMemoryTestStore
             .GetOrCreate(databaseName)
             .InitializeInMemory(null, () => new TContext(), c => seed((TContext)c));

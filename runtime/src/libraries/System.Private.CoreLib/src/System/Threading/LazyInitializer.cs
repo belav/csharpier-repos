@@ -52,8 +52,8 @@ namespace System.Threading
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 T
-        >([NotNull] ref T? target) where T : class =>
-            Volatile.Read(ref target!) ?? EnsureInitializedCore(ref target);
+        >([NotNull] ref T? target)
+            where T : class => Volatile.Read(ref target!) ?? EnsureInitializedCore(ref target);
 
         /// <summary>
         /// Initializes a target reference type with the type's default constructor (slow path)
@@ -66,7 +66,8 @@ namespace System.Threading
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 T
-        >([NotNull] ref T? target) where T : class
+        >([NotNull] ref T? target)
+            where T : class
         {
             try
             {
@@ -286,7 +287,8 @@ namespace System.Threading
             [NotNull] ref T? target,
             [NotNullIfNotNull(nameof(syncLock))] ref object? syncLock,
             Func<T> valueFactory
-        ) where T : class =>
+        )
+            where T : class =>
             Volatile.Read(ref target!)
             ?? EnsureInitializedCore(ref target, ref syncLock, valueFactory);
 
@@ -306,7 +308,8 @@ namespace System.Threading
             [NotNull] ref T? target,
             [NotNull] ref object? syncLock,
             Func<T> valueFactory
-        ) where T : class
+        )
+            where T : class
         {
             // Lazily initialize the lock if necessary and then double check if initialization is still required.
             lock (EnsureLockInitialized(ref syncLock))

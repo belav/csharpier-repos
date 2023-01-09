@@ -277,7 +277,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckLambdaIdentityNullableGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             foreach (Ts? value in new Ts?[] { default(Ts), new Ts() })
             {
@@ -1289,7 +1290,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyIdentityNullableGenericWithStructRestriction<Ts>(
             Ts? value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             ParameterExpression p = Expression.Parameter(typeof(Ts?), "p");
 

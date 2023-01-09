@@ -68,7 +68,8 @@ namespace Moq
     ///     Assert.False(order.IsFilled);
     ///   </code>
     /// </example>
-    public partial class Mock<T> : Mock, IMock<T> where T : class
+    public partial class Mock<T> : Mock, IMock<T>
+        where T : class
     {
         private static Type[] inheritedInterfaces;
         private static int serialNumberCounter;

@@ -827,7 +827,8 @@ namespace System.Linq.Expressions.Interpreter
             thrown == null ? null : (thrown as Exception ?? new RuntimeWrappedException(thrown));
     }
 
-    internal sealed class IntSwitchInstruction<T> : Instruction where T : notnull
+    internal sealed class IntSwitchInstruction<T> : Instruction
+        where T : notnull
     {
         private readonly Dictionary<T, int> _cases;
 

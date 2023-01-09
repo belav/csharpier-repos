@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.PEWriter
                 (obj as EqualsProxy)?.Name.Equals(Name) == true;
         }
 
-        private static Mock<T> CreateEqualsInterface<T>(string name) where T : class
+        private static Mock<T> CreateEqualsInterface<T>(string name)
+            where T : class
         {
             var mock = new Mock<EqualsProxy>(name) { CallBase = true };
             return mock.As<T>();

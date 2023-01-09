@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.SignalR;
 /// <summary>
 /// A lifetime manager abstraction for <see cref="Hub"/> instances.
 /// </summary>
-public abstract class HubLifetimeManager<THub> where THub : Hub
+public abstract class HubLifetimeManager<THub>
+    where THub : Hub
 {
     // Called by the framework and not something we'd cancel, so it doesn't take a cancellation token
     /// <summary>

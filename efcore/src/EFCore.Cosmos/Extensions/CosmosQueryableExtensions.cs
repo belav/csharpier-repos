@@ -37,7 +37,8 @@ public static class CosmosQueryableExtensions
     public static IQueryable<TEntity> WithPartitionKey<TEntity>(
         this IQueryable<TEntity> source,
         [NotParameterized] string partitionKey
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(partitionKey, nameof(partitionKey));
 
@@ -83,7 +84,8 @@ public static class CosmosQueryableExtensions
         this DbSet<TEntity> source,
         [NotParameterized] string sql,
         params object[] parameters
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotEmpty(sql, nameof(sql));
         Check.NotNull(parameters, nameof(parameters));

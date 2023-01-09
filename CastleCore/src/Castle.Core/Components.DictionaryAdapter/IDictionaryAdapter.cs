@@ -49,7 +49,8 @@ namespace Castle.Components.DictionaryAdapter
 
         void CopyTo(IDictionaryAdapter other, Func<PropertyDescriptor, bool> selector);
 
-        T Coerce<T>() where T : class;
+        T Coerce<T>()
+            where T : class;
 
         object Coerce(Type type);
     }

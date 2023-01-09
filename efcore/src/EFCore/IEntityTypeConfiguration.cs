@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore;
 /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
 public interface IEntityTypeConfiguration<
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-> where TEntity : class
+>
+    where TEntity : class
 {
     /// <summary>
     ///     Configures the entity of type <typeparamref name="TEntity" />.

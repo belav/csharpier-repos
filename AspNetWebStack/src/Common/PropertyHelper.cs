@@ -45,7 +45,8 @@ namespace System.Web.WebPages
         /// <remarks>This method is more memory efficient than a dynamically compiled lambda, and about the same speed.</remarks>
         public static Action<TDeclaringType, object> MakeFastPropertySetter<TDeclaringType>(
             PropertyInfo propertyInfo
-        ) where TDeclaringType : class
+        )
+            where TDeclaringType : class
         {
             Contract.Assert(propertyInfo != null);
 

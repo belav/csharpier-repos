@@ -5669,7 +5669,8 @@ public sealed partial class SelectExpression : TableExpressionBase
             return this;
         }
 
-        List<T> VisitList<T>(List<T> list, bool inPlace, out bool changed) where T : Expression
+        List<T> VisitList<T>(List<T> list, bool inPlace, out bool changed)
+            where T : Expression
         {
             changed = false;
             var newList = list;

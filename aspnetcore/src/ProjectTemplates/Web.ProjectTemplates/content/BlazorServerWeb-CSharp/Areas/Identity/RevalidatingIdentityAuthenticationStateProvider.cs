@@ -8,7 +8,8 @@ using Microsoft.Extensions.Options;
 namespace BlazorServerWeb_CSharp.Areas.Identity;
 
 public class RevalidatingIdentityAuthenticationStateProvider<TUser>
-    : RevalidatingServerAuthenticationStateProvider where TUser : class
+    : RevalidatingServerAuthenticationStateProvider
+    where TUser : class
 {
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly IdentityOptions _options;

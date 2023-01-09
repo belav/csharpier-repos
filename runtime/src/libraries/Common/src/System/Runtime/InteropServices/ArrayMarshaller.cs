@@ -132,7 +132,8 @@ namespace System.Runtime.InteropServices.GeneratedMarshalling
 #else
     internal
 #endif
-    unsafe ref struct PtrArrayMarshaller<T> where T : unmanaged
+    unsafe ref struct PtrArrayMarshaller<T>
+        where T : unmanaged
     {
         private T*[]? _managedArray;
         private readonly int _sizeOfNativeElement;

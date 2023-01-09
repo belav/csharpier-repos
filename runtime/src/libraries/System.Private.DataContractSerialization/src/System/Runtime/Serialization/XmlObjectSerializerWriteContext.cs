@@ -711,7 +711,8 @@ namespace System.Runtime.Serialization
             return default(T)!;
         }
 
-        internal static T GetNullableValue<T>(Nullable<T> value) where T : struct
+        internal static T GetNullableValue<T>(Nullable<T> value)
+            where T : struct
         {
             // value.Value will throw if hasValue is false
             return value!.Value;
@@ -726,7 +727,8 @@ namespace System.Runtime.Serialization
             );
         }
 
-        internal static bool GetHasValue<T>(Nullable<T> value) where T : struct
+        internal static bool GetHasValue<T>(Nullable<T> value)
+            where T : struct
         {
             return value.HasValue;
         }

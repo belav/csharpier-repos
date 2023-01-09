@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Identity.Test;
 /// </summary>
 /// <typeparam name="TUser">The type of the user.</typeparam>
 public abstract class UserManagerSpecificationTestBase<TUser>
-    : UserManagerSpecificationTestBase<TUser, string> where TUser : class { }
+    : UserManagerSpecificationTestBase<TUser, string>
+    where TUser : class { }
 
 /// <summary>
 /// Base class for tests that exercise basic identity functionality that all stores should support.

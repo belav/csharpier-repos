@@ -545,7 +545,8 @@ namespace System.Dynamic
                 Expression[] parameters,
                 Expression arg0,
                 Expression? arg1
-            ) where TBinder : DynamicMetaObjectBinder
+            )
+                where TBinder : DynamicMetaObjectBinder
             {
                 if (!object.ReferenceEquals(parameters, s_noArgs))
                     return arg1 != null
@@ -571,7 +572,8 @@ namespace System.Dynamic
                 TBinder binder,
                 Expression[] args,
                 Fallback<TBinder> fallback
-            ) where TBinder : DynamicMetaObjectBinder
+            )
+                where TBinder : DynamicMetaObjectBinder
             {
                 return CallMethodWithResult(method, binder, args, fallback, null);
             }
@@ -586,7 +588,8 @@ namespace System.Dynamic
                 Expression[] args,
                 Fallback<TBinder> fallback,
                 Fallback<TBinder>? fallbackInvoke
-            ) where TBinder : DynamicMetaObjectBinder
+            )
+                where TBinder : DynamicMetaObjectBinder
             {
                 //
                 // First, call fallback to do default binding
@@ -627,7 +630,8 @@ namespace System.Dynamic
                 Expression[] args,
                 DynamicMetaObject fallbackResult,
                 Fallback<TBinder>? fallbackInvoke
-            ) where TBinder : DynamicMetaObjectBinder
+            )
+                where TBinder : DynamicMetaObjectBinder
             {
                 if (!IsOverridden(method))
                 {
@@ -780,7 +784,8 @@ namespace System.Dynamic
                 Expression[] args,
                 Expression value,
                 Fallback<TBinder> fallback
-            ) where TBinder : DynamicMetaObjectBinder
+            )
+                where TBinder : DynamicMetaObjectBinder
             {
                 //
                 // First, call fallback to do default binding
@@ -856,7 +861,8 @@ namespace System.Dynamic
                 TBinder binder,
                 Expression[] args,
                 Fallback<TBinder> fallback
-            ) where TBinder : DynamicMetaObjectBinder
+            )
+                where TBinder : DynamicMetaObjectBinder
             {
                 //
                 // First, call fallback to do default binding

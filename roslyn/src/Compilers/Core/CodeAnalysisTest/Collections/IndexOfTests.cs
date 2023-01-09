@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Func<TCollection, int, int, int> indexOfItemIndex,
             Func<TCollection, int, int, int, int> indexOfItemIndexCount,
             Func<TCollection, int, int, int, IEqualityComparer<int>?, int> indexOfItemIndexCountEQ
-        ) where TCollection : notnull
+        )
+            where TCollection : notnull
         {
             var emptyCollection = factory(new int[0]);
             var collection1256 = factory(new[] { 1, 2, 5, 6 });

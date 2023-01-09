@@ -8,7 +8,8 @@ using System;
 
 public interface I1
 {
-    void meth1<T>(T x) where T : Class1;
+    void meth1<T>(T x)
+        where T : Class1;
 }
 
 public class Class1 : I1

@@ -127,7 +127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         protected CompilationUtils.SemanticInfoSummary GetSemanticInfoForTest<TNode>(
             string testSrc,
             CSharpParseOptions parseOptions = null
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var compilation = CreateCompilation(testSrc, parseOptions: parseOptions);
             return GetSemanticInfoForTest<TNode>(compilation);
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string testSrc,
             MessageID feature,
             CSharpParseOptions parseOptions = null
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var compilation = CreateExperimentalCompilationWithMscorlib45(
                 testSrc,
@@ -149,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected CompilationUtils.SemanticInfoSummary GetSemanticInfoForTest<TNode>(
             CSharpCompilation compilation
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var tree = compilation.SyntaxTrees[0];
             var model = compilation.GetSemanticModel(tree);

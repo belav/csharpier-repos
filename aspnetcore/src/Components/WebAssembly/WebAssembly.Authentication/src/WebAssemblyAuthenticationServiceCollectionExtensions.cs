@@ -75,7 +75,8 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
     )]
     private static void AddAuthenticationStateProvider<
         [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState
-    >(IServiceCollection services) where TRemoteAuthenticationState : RemoteAuthenticationState
+    >(IServiceCollection services)
+        where TRemoteAuthenticationState : RemoteAuthenticationState
     {
         services.TryAddScoped(
             static sp =>
@@ -150,7 +151,8 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
     >(
         this IServiceCollection services,
         Action<RemoteAuthenticationOptions<OidcProviderOptions>> configure
-    ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+    )
+        where TRemoteAuthenticationState : RemoteAuthenticationState, new()
     {
         return AddOidcAuthentication<TRemoteAuthenticationState, RemoteUserAccount>(
             services,
@@ -220,7 +222,8 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
         RemoteUserAccount
     > AddApiAuthorization<[DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState>(
         this IServiceCollection services
-    ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+    )
+        where TRemoteAuthenticationState : RemoteAuthenticationState, new()
     {
         return AddApiAuthorizationCore<TRemoteAuthenticationState, RemoteUserAccount>(
             services,
@@ -287,7 +290,8 @@ public static class WebAssemblyAuthenticationServiceCollectionExtensions
     > AddApiAuthorization<[DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState>(
         this IServiceCollection services,
         Action<RemoteAuthenticationOptions<ApiAuthorizationProviderOptions>> configure
-    ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+    )
+        where TRemoteAuthenticationState : RemoteAuthenticationState, new()
     {
         return AddApiAuthorizationCore<TRemoteAuthenticationState, RemoteUserAccount>(
             services,

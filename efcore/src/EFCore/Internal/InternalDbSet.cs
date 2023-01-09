@@ -22,7 +22,8 @@ public class InternalDbSet<
         IQueryable<TEntity>,
         IAsyncEnumerable<TEntity>,
         IInfrastructure<IServiceProvider>,
-        IResettableService where TEntity : class
+        IResettableService
+    where TEntity : class
 {
     private readonly DbContext _context;
     private readonly string? _entityTypeName;

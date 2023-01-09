@@ -12,7 +12,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public readonly struct Measurement<T> where T : struct
+    public readonly struct Measurement<T>
+        where T : struct
     {
         private readonly KeyValuePair<string, object?>[] _tags;
 

@@ -16,7 +16,8 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 namespace Microsoft.CodeAnalysis.ConvertNumericLiteral
 {
     internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNumericLiteralExpression>
-        : CodeRefactoringProvider where TNumericLiteralExpression : SyntaxNode
+        : CodeRefactoringProvider
+        where TNumericLiteralExpression : SyntaxNode
     {
         protected abstract (string hexPrefix, string binaryPrefix) GetNumericLiteralPrefixes();
 

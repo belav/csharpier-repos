@@ -1213,7 +1213,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 #nullable enable
     }
 
-    public abstract class TestTableBuilder<TEntity> where TEntity : class
+    public abstract class TestTableBuilder<TEntity>
+        where TEntity : class
     {
         public abstract string? Name { get; }
 
@@ -1234,7 +1235,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class GenericTestTableBuilder<TEntity>
         : TestTableBuilder<TEntity>,
-            IInfrastructure<TableBuilder<TEntity>> where TEntity : class
+            IInfrastructure<TableBuilder<TEntity>>
+        where TEntity : class
     {
         public GenericTestTableBuilder(TableBuilder<TEntity> tableBuilder)
         {
@@ -1271,7 +1273,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class NonGenericTestTableBuilder<TEntity>
         : TestTableBuilder<TEntity>,
-            IInfrastructure<TableBuilder> where TEntity : class
+            IInfrastructure<TableBuilder>
+        where TEntity : class
     {
         public NonGenericTestTableBuilder(TableBuilder tableBuilder)
         {
@@ -1425,7 +1428,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             );
     }
 
-    public abstract class TestSplitTableBuilder<TEntity> where TEntity : class
+    public abstract class TestSplitTableBuilder<TEntity>
+        where TEntity : class
     {
         public abstract string? Name { get; }
 
@@ -1449,7 +1453,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class GenericTestSplitTableBuilder<TEntity>
         : TestSplitTableBuilder<TEntity>,
-            IInfrastructure<SplitTableBuilder<TEntity>> where TEntity : class
+            IInfrastructure<SplitTableBuilder<TEntity>>
+        where TEntity : class
     {
         public GenericTestSplitTableBuilder(SplitTableBuilder<TEntity> tableBuilder)
         {
@@ -1491,7 +1496,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class NonGenericTestSplitTableBuilder<TEntity>
         : TestSplitTableBuilder<TEntity>,
-            IInfrastructure<SplitTableBuilder> where TEntity : class
+            IInfrastructure<SplitTableBuilder>
+        where TEntity : class
     {
         public NonGenericTestSplitTableBuilder(SplitTableBuilder tableBuilder)
         {
@@ -1724,7 +1730,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
         ) => Wrap(ColumnBuilder.HasAnnotation(annotation, value));
     }
 
-    public abstract class TestViewBuilder<TEntity> where TEntity : class
+    public abstract class TestViewBuilder<TEntity>
+        where TEntity : class
     {
         public abstract string? Name { get; }
 
@@ -1739,7 +1746,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class GenericTestViewBuilder<TEntity>
         : TestViewBuilder<TEntity>,
-            IInfrastructure<ViewBuilder<TEntity>> where TEntity : class
+            IInfrastructure<ViewBuilder<TEntity>>
+        where TEntity : class
     {
         public GenericTestViewBuilder(ViewBuilder<TEntity> tableBuilder)
         {
@@ -1767,7 +1775,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class NonGenericTestViewBuilder<TEntity>
         : TestViewBuilder<TEntity>,
-            IInfrastructure<ViewBuilder> where TEntity : class
+            IInfrastructure<ViewBuilder>
+        where TEntity : class
     {
         public NonGenericTestViewBuilder(ViewBuilder tableBuilder)
         {
@@ -1888,7 +1897,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             );
     }
 
-    public abstract class TestSplitViewBuilder<TEntity> where TEntity : class
+    public abstract class TestSplitViewBuilder<TEntity>
+        where TEntity : class
     {
         public abstract string? Name { get; }
 
@@ -1908,7 +1918,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class GenericTestSplitViewBuilder<TEntity>
         : TestSplitViewBuilder<TEntity>,
-            IInfrastructure<SplitViewBuilder<TEntity>> where TEntity : class
+            IInfrastructure<SplitViewBuilder<TEntity>>
+        where TEntity : class
     {
         public GenericTestSplitViewBuilder(SplitViewBuilder<TEntity> tableBuilder)
         {
@@ -1943,7 +1954,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class NonGenericTestSplitViewBuilder<TEntity>
         : TestSplitViewBuilder<TEntity>,
-            IInfrastructure<SplitViewBuilder> where TEntity : class
+            IInfrastructure<SplitViewBuilder>
+        where TEntity : class
     {
         public NonGenericTestSplitViewBuilder(SplitViewBuilder tableBuilder)
         {
@@ -2153,7 +2165,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
         ) => Wrap(ViewColumnBuilder.HasAnnotation(annotation, value));
     }
 
-    public abstract class TestStoredProcedureBuilder<TEntity> where TEntity : class
+    public abstract class TestStoredProcedureBuilder<TEntity>
+        where TEntity : class
     {
         public abstract TestStoredProcedureBuilder<TEntity> HasParameter(string propertyName);
 
@@ -2173,12 +2186,14 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
         public abstract TestStoredProcedureBuilder<TEntity> HasParameter<TDerivedEntity, TProperty>(
             Expression<Func<TDerivedEntity, TProperty>> propertyExpression
-        ) where TDerivedEntity : class, TEntity;
+        )
+            where TDerivedEntity : class, TEntity;
 
         public abstract TestStoredProcedureBuilder<TEntity> HasParameter<TDerivedEntity, TProperty>(
             Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
             Action<TestStoredProcedureParameterBuilder> buildAction
-        ) where TDerivedEntity : class, TEntity;
+        )
+            where TDerivedEntity : class, TEntity;
 
         public abstract TestStoredProcedureBuilder<TEntity> HasOriginalValueParameter(
             string propertyName
@@ -2210,7 +2225,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
         >(
             Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
             Action<TestStoredProcedureParameterBuilder> buildAction
-        ) where TDerivedEntity : class, TEntity;
+        )
+            where TDerivedEntity : class, TEntity;
 
         public abstract TestStoredProcedureBuilder<TEntity> HasRowsAffectedParameter();
 
@@ -2246,7 +2262,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
         >(
             Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
             Action<TestStoredProcedureResultColumnBuilder> buildAction
-        ) where TDerivedEntity : class, TEntity;
+        )
+            where TDerivedEntity : class, TEntity;
 
         public abstract TestStoredProcedureBuilder<TEntity> HasRowsAffectedResultColumn();
 
@@ -2266,7 +2283,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class GenericTestStoredProcedureBuilder<TEntity>
         : TestStoredProcedureBuilder<TEntity>,
-            IInfrastructure<StoredProcedureBuilder<TEntity>> where TEntity : class
+            IInfrastructure<StoredProcedureBuilder<TEntity>>
+        where TEntity : class
     {
         public GenericTestStoredProcedureBuilder(
             StoredProcedureBuilder<TEntity> storedProcedureBuilder
@@ -2463,7 +2481,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
     public class NonGenericTestStoredProcedureBuilder<TEntity>
         : TestStoredProcedureBuilder<TEntity>,
-            IInfrastructure<StoredProcedureBuilder> where TEntity : class
+            IInfrastructure<StoredProcedureBuilder>
+        where TEntity : class
     {
         public NonGenericTestStoredProcedureBuilder(StoredProcedureBuilder storedProcedureBuilder)
         {

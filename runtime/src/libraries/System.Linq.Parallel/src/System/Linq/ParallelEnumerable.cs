@@ -5484,7 +5484,8 @@ namespace System.Linq
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToDictionary(source, keySelector, EqualityComparer<TKey>.Default);
         }
@@ -5516,7 +5517,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
@@ -5584,7 +5586,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToDictionary(
                 source,
@@ -5628,7 +5631,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
@@ -5690,7 +5694,8 @@ namespace System.Linq
         public static ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToLookup(source, keySelector, EqualityComparer<TKey>.Default);
         }
@@ -5718,7 +5723,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);
@@ -5782,7 +5788,8 @@ namespace System.Linq
             this ParallelQuery<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToLookup(source, keySelector, elementSelector, EqualityComparer<TKey>.Default);
         }
@@ -5818,7 +5825,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(keySelector);

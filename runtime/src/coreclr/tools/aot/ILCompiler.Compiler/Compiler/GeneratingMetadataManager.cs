@@ -62,7 +62,8 @@ namespace ILCompiler
             out List<MetadataMapping<MethodDesc>> methodMappings,
             out List<MetadataMapping<FieldDesc>> fieldMappings,
             out List<MetadataMapping<MethodDesc>> stackTraceMapping
-        ) where TPolicy : struct, IMetadataPolicy
+        )
+            where TPolicy : struct, IMetadataPolicy
         {
             var transformed = MetadataTransform.Run(policy, GetCompilationModulesWithMetadata());
             MetadataTransform transform = transformed.Transform;

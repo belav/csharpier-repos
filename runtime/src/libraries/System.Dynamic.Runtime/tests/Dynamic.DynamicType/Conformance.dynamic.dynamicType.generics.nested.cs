@@ -14,7 +14,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {
@@ -56,7 +57,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {
@@ -98,7 +100,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {
@@ -140,7 +143,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {
@@ -182,7 +186,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {
@@ -224,7 +229,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Base<T>
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {
@@ -266,9 +272,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ne
 
     public class Foo { }
 
-    public class Base<T> where T : Foo
+    public class Base<T>
+        where T : Foo
     {
-        public class Derived<U> where U : T
+        public class Derived<U>
+            where U : T
         {
             public void Foo()
             {

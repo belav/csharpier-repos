@@ -48,7 +48,8 @@ public class FieldLayoutTests
         public abstract void SetFieldFromObject(object obj);
     }
 
-    public class DerivedTypeNullableThing<T> : NonGenericBaseType where T : struct, IIntegerable
+    public class DerivedTypeNullableThing<T> : NonGenericBaseType
+        where T : struct, IIntegerable
     {
         public T? _field;
 

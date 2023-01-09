@@ -164,7 +164,8 @@ namespace System.Linq
             this ImmutableArray<TBase> immutableArray,
             ImmutableArray<TDerived> items,
             IEqualityComparer<TBase>? comparer = null
-        ) where TDerived : TBase
+        )
+            where TDerived : TBase
         {
             immutableArray.ThrowNullRefIfNotInitialized();
             items.ThrowNullRefIfNotInitialized();
@@ -200,7 +201,8 @@ namespace System.Linq
             this ImmutableArray<TBase> immutableArray,
             IEnumerable<TDerived> items,
             IEqualityComparer<TBase>? comparer = null
-        ) where TDerived : TBase
+        )
+            where TDerived : TBase
         {
             Requires.NotNull(items, nameof(items));
 
@@ -235,7 +237,8 @@ namespace System.Linq
             this ImmutableArray<TBase> immutableArray,
             ImmutableArray<TDerived> items,
             Func<TBase, TBase, bool> predicate
-        ) where TDerived : TBase
+        )
+            where TDerived : TBase
         {
             Requires.NotNull(predicate, nameof(predicate));
             immutableArray.ThrowNullRefIfNotInitialized();
@@ -581,7 +584,8 @@ namespace System.Linq
         public static Dictionary<TKey, T> ToDictionary<TKey, T>(
             this ImmutableArray<T> immutableArray,
             Func<T, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToDictionary(immutableArray, keySelector, EqualityComparer<TKey>.Default);
         }
@@ -600,7 +604,8 @@ namespace System.Linq
             this ImmutableArray<T> immutableArray,
             Func<T, TKey> keySelector,
             Func<T, TElement> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToDictionary(
                 immutableArray,
@@ -623,7 +628,8 @@ namespace System.Linq
             this ImmutableArray<T> immutableArray,
             Func<T, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(keySelector, nameof(keySelector));
 
@@ -652,7 +658,8 @@ namespace System.Linq
             Func<T, TKey> keySelector,
             Func<T, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(keySelector, nameof(keySelector));
             Requires.NotNull(elementSelector, nameof(elementSelector));

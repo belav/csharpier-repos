@@ -24,7 +24,8 @@ namespace System.Collections.Immutable.Tests
             TCollection objectUnderTest,
             TElement additionalItem,
             Func<TCollection, IEnumerable<TElement>, bool> equalsStructurally
-        ) where TCollection : class, IEnumerable<TElement>
+        )
+            where TCollection : class, IEnumerable<TElement>
         {
             Requires.NotNull(objectUnderTest, nameof(objectUnderTest));
             Requires.Argument(

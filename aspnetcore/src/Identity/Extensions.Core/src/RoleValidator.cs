@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the default validation of roles.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public class RoleValidator<TRole> : IRoleValidator<TRole> where TRole : class
+public class RoleValidator<TRole> : IRoleValidator<TRole>
+    where TRole : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="RoleValidator{TRole}"/>.

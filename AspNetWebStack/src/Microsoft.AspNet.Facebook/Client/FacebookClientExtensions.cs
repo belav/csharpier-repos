@@ -41,7 +41,8 @@ namespace Microsoft.AspNet.Facebook.Client
         public static Task<TFacebookObject> GetFacebookObjectAsync<TFacebookObject>(
             this FacebookClient client,
             string objectPath
-        ) where TFacebookObject : class
+        )
+            where TFacebookObject : class
         {
             if (client == null)
             {
@@ -106,7 +107,8 @@ namespace Microsoft.AspNet.Facebook.Client
         )]
         public static async Task<IList<TUserFriend>> GetCurrentUserFriendsAsync<TUserFriend>(
             this FacebookClient client
-        ) where TUserFriend : class
+        )
+            where TUserFriend : class
         {
             FacebookGroupConnection<TUserFriend> friends = await GetFacebookObjectAsync<
                 FacebookGroupConnection<TUserFriend>
@@ -150,7 +152,8 @@ namespace Microsoft.AspNet.Facebook.Client
         )]
         public static async Task<IList<TStatus>> GetCurrentUserStatusesAsync<TStatus>(
             this FacebookClient client
-        ) where TStatus : class
+        )
+            where TStatus : class
         {
             FacebookGroupConnection<TStatus> statuses = await GetFacebookObjectAsync<
                 FacebookGroupConnection<TStatus>
@@ -171,7 +174,8 @@ namespace Microsoft.AspNet.Facebook.Client
         )]
         public static async Task<IList<TPhotos>> GetCurrentUserPhotosAsync<TPhotos>(
             this FacebookClient client
-        ) where TPhotos : class
+        )
+            where TPhotos : class
         {
             FacebookGroupConnection<TPhotos> photos = await GetFacebookObjectAsync<
                 FacebookGroupConnection<TPhotos>

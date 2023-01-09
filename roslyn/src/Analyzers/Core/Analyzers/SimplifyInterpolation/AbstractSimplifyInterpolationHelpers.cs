@@ -295,7 +295,8 @@ namespace Microsoft.CodeAnalysis.SimplifyInterpolation
             out TExpressionSyntax? alignment,
             out bool negate,
             List<TextSpan> unnecessarySpans
-        ) where TExpressionSyntax : SyntaxNode
+        )
+            where TExpressionSyntax : SyntaxNode
         {
             if (expression is IInvocationOperation invocation && HasNonImplicitInstance(invocation))
             {

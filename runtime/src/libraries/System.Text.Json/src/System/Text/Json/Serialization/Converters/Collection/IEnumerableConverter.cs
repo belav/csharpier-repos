@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Converters
     /// </summary>
     /// <typeparam name="TCollection"></typeparam>
     internal sealed class IEnumerableConverter<TCollection>
-        : JsonCollectionConverter<TCollection, object?> where TCollection : IEnumerable
+        : JsonCollectionConverter<TCollection, object?>
+        where TCollection : IEnumerable
     {
         private readonly bool _isDeserializable = typeof(TCollection).IsAssignableFrom(
             typeof(List<object?>)

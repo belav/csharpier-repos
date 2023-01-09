@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public static TSymbol AddAnnotationToSymbol<TSymbol>(
             this SyntaxAnnotation annotation,
             TSymbol symbol
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             Contract.ThrowIfFalse(symbol is CodeGenerationSymbol);
             var codeGenSymbol = (CodeGenerationSymbol)(object)symbol;

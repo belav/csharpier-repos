@@ -338,7 +338,8 @@ namespace System.Net.Sockets.Tests
 
         // A smaller subset of the tests is being executed against the different Send/Receive implementations of Socket
         // to make sure async IO works as expected in all of those cases.
-        public abstract class PolymorphicTests<T> where T : SocketHelperBase, new()
+        public abstract class PolymorphicTests<T>
+            where T : SocketHelperBase, new()
         {
             private static readonly T Helper = new T();
             private readonly string _ipcPipeName = Path.GetRandomFileName();

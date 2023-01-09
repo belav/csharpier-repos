@@ -15,7 +15,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public sealed class UpDownCounter<T> : Instrument<T> where T : struct
+    public sealed class UpDownCounter<T> : Instrument<T>
+        where T : struct
     {
         internal UpDownCounter(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)

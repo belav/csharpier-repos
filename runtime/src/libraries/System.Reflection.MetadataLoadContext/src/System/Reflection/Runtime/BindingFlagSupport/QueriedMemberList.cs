@@ -24,7 +24,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     // base types. This is used when the binding flags passed to a Get() api limit the search to the immediate type only in order to avoid triggering
     // unnecessary assembly resolving and a lot of unnecessary ParameterInfo creation and comparison checks.
     //
-    internal sealed class QueriedMemberList<M> where M : MemberInfo
+    internal sealed class QueriedMemberList<M>
+        where M : MemberInfo
     {
         private QueriedMemberList(bool immediateTypeOnly)
         {

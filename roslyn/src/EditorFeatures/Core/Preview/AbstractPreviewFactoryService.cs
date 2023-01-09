@@ -31,7 +31,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     internal abstract class AbstractPreviewFactoryService<TDifferenceViewer>
-        : IPreviewFactoryService where TDifferenceViewer : IDifferenceViewer
+        : IPreviewFactoryService
+        where TDifferenceViewer : IDifferenceViewer
     {
         private const double DefaultZoomLevel = 0.75;
         private readonly ITextViewRoleSet _previewRoleSet;
@@ -512,7 +513,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             double zoomLevel,
             Func<TDocument, CancellationToken, ValueTask<ITextBuffer>> createBufferAsync,
             CancellationToken cancellationToken
-        ) where TDocument : TextDocument
+        )
+            where TDocument : TextDocument
         {
             // createBufferAsync must be called from the main thread
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -633,7 +635,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
             double zoomLevel,
             Func<TDocument, CancellationToken, ValueTask<ITextBuffer>> createBufferAsync,
             CancellationToken cancellationToken
-        ) where TDocument : TextDocument
+        )
+            where TDocument : TextDocument
         {
             // createBufferAsync must be called from the main thread
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);

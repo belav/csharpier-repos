@@ -26,7 +26,8 @@ public static class ManyToManyContextExtensions
     public static TEntity CreateInstance<TEntity>(
         this DbSet<TEntity> set,
         Action<TEntity, bool> configureEntity = null
-    ) where TEntity : class, new()
+    )
+        where TEntity : class, new()
     {
         var isProxy =
             set.GetService<IDbContextOptions>()

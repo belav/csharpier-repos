@@ -73,7 +73,8 @@ public class InterfacesTests
         }
     }
 
-    public class UseFrobber<T, U> : UseFrobberBase where T : IFrobber<U>
+    public class UseFrobber<T, U> : UseFrobberBase
+        where T : IFrobber<U>
     {
         public override string UseFrob()
         {

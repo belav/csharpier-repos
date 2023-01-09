@@ -85,7 +85,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Tokenizer source,
             Func<TNode> factory,
             ref TNode node
-        ) where TNode : CompiledXPathNode
+        )
+            where TNode : CompiledXPathNode
         {
             if (!Consume(source, Token.SelfReference))
             {

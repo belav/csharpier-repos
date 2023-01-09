@@ -195,7 +195,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
     /// <typeparam name="TModel">The type of the model object.</typeparam>
     /// <param name="model">The model instance to update.</param>
     /// <returns>A <see cref="Task"/> that on completion returns <c>true</c> if the update is successful.</returns>
-    protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model) where TModel : class
+    protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model)
+        where TModel : class
     {
         if (model == null)
         {
@@ -252,7 +253,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         TModel model,
         string name,
         IValueProvider valueProvider
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -295,7 +297,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         TModel model,
         string name,
         params Expression<Func<TModel, object?>>[] includeExpressions
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -342,7 +345,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         TModel model,
         string name,
         Func<ModelMetadata, bool> propertyFilter
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -392,7 +396,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         string name,
         IValueProvider valueProvider,
         params Expression<Func<TModel, object?>>[] includeExpressions
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {
@@ -437,7 +442,8 @@ public abstract class PageModel : IAsyncPageFilter, IPageFilter
         string name,
         IValueProvider valueProvider,
         Func<ModelMetadata, bool> propertyFilter
-    ) where TModel : class
+    )
+        where TModel : class
     {
         if (model == null)
         {

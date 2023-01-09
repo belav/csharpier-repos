@@ -84,7 +84,8 @@ public abstract class LoginWith2faModel : PageModel
     ) => throw new NotImplementedException();
 }
 
-internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel where TUser : class
+internal sealed class LoginWith2faModel<TUser> : LoginWith2faModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;

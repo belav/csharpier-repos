@@ -3614,7 +3614,8 @@ public static partial class RequestDelegateFactory
         }
     }
 
-    private static void EnsureRequestTaskOfNotNull<T>(Task<T?> task) where T : IResult
+    private static void EnsureRequestTaskOfNotNull<T>(Task<T?> task)
+        where T : IResult
     {
         if (task is null)
         {

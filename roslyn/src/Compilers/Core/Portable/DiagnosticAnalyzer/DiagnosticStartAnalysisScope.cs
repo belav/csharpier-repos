@@ -355,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// Scope for setting up analyzers for a code block, automatically associating actions with analyzers.
     /// </summary>
     internal sealed class AnalyzerCodeBlockStartAnalysisContext<TLanguageKindEnum>
-        : CodeBlockStartAnalysisContext<TLanguageKindEnum> where TLanguageKindEnum : struct
+        : CodeBlockStartAnalysisContext<TLanguageKindEnum>
+        where TLanguageKindEnum : struct
     {
         private readonly DiagnosticAnalyzer _analyzer;
         private readonly HostCodeBlockStartAnalysisScope<TLanguageKindEnum> _scope;
@@ -796,7 +797,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public void RegisterCodeBlockStartAction<TLanguageKindEnum>(
             DiagnosticAnalyzer analyzer,
             Action<CodeBlockStartAnalysisContext<TLanguageKindEnum>> action
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             CodeBlockStartAnalyzerAction<TLanguageKindEnum> analyzerAction =
                 new CodeBlockStartAnalyzerAction<TLanguageKindEnum>(action, analyzer);
@@ -825,7 +827,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             DiagnosticAnalyzer analyzer,
             Action<SyntaxNodeAnalysisContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             SyntaxNodeAnalyzerAction<TLanguageKindEnum> analyzerAction =
                 new SyntaxNodeAnalyzerAction<TLanguageKindEnum>(action, syntaxKinds, analyzer);
@@ -1117,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal readonly ImmutableArray<
             CodeBlockStartAnalyzerAction<TLanguageKindEnum>
-        > GetCodeBlockStartActions<TLanguageKindEnum>() where TLanguageKindEnum : struct
+        > GetCodeBlockStartActions<TLanguageKindEnum>()
+            where TLanguageKindEnum : struct
         {
             return _codeBlockStartActions
                 .OfType<CodeBlockStartAnalyzerAction<TLanguageKindEnum>>()
@@ -1126,7 +1130,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal readonly ImmutableArray<
             SyntaxNodeAnalyzerAction<TLanguageKindEnum>
-        > GetSyntaxNodeActions<TLanguageKindEnum>() where TLanguageKindEnum : struct
+        > GetSyntaxNodeActions<TLanguageKindEnum>()
+            where TLanguageKindEnum : struct
         {
             return _syntaxNodeActions
                 .OfType<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>()
@@ -1229,7 +1234,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal void AddCodeBlockStartAction<TLanguageKindEnum>(
             CodeBlockStartAnalyzerAction<TLanguageKindEnum> action
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             _codeBlockStartActions = _codeBlockStartActions.Add(action);
             IsEmpty = false;
@@ -1249,7 +1255,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         internal void AddSyntaxNodeAction<TLanguageKindEnum>(
             SyntaxNodeAnalyzerAction<TLanguageKindEnum> action
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             _syntaxNodeActions = _syntaxNodeActions.Add(action);
             IsEmpty = false;

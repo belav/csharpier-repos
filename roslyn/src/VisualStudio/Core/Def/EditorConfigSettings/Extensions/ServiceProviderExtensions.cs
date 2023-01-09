@@ -15,7 +15,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             this IServiceProvider serviceProvider,
             JoinableTaskFactory joinableTaskFactory,
             [NotNullWhen(true)] out TInterface? @interface
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             @interface = serviceProvider.GetService<TService, TInterface>(
                 joinableTaskFactory,
@@ -28,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
             this IServiceProvider serviceProvider,
             JoinableTaskFactory joinableTaskFactory,
             [NotNullWhen(true)] out TInterface? @interface
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             @interface = serviceProvider.GetService<TInterface>(joinableTaskFactory);
             return @interface is not null;
@@ -37,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
         public static TInterface? GetService<TInterface>(
             this IServiceProvider serviceProvider,
             JoinableTaskFactory joinableTaskFactory
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             return serviceProvider.GetService<TInterface, TInterface>(
                 joinableTaskFactory,

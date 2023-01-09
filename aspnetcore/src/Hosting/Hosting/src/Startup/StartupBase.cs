@@ -44,7 +44,8 @@ public abstract class StartupBase : IStartup
 /// Base class for initializing services and middlewares used for configuring a <typeparamref name="TBuilder"/>.
 /// </summary>
 /// <typeparam name="TBuilder">The type of builder associated with the startup configuration.</typeparam>
-public abstract class StartupBase<TBuilder> : StartupBase where TBuilder : notnull
+public abstract class StartupBase<TBuilder> : StartupBase
+    where TBuilder : notnull
 {
     private readonly IServiceProviderFactory<TBuilder> _factory;
 

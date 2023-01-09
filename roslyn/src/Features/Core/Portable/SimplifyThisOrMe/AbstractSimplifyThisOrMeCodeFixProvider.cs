@@ -19,7 +19,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.SimplifyThisOrMe
 {
     internal abstract partial class AbstractSimplifyThisOrMeCodeFixProvider<TMemberAccessExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider where TMemberAccessExpressionSyntax : SyntaxNode
+        : SyntaxEditorBasedCodeFixProvider
+        where TMemberAccessExpressionSyntax : SyntaxNode
     {
         protected abstract string GetTitle();
         protected abstract SyntaxNode Rewrite(

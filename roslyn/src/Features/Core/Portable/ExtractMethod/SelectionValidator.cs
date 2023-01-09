@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SyntaxNode root,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             // use top-down approach to find smallest statement range that contains given span.
             // this approach is more expansive than bottom-up approach I used before but way simpler and easy to understand
@@ -199,7 +200,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             SyntaxNode root,
             TextSpan textSpan,
             CancellationToken cancellationToken
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             // use top-down approach to find largest statement range contained in the given span
             // this method is a bit more expensive than bottom-up approach, but way more simpler than the other approach.

@@ -39,7 +39,8 @@ internal class SyntaxListPool
         return item;
     }
 
-    internal PooledResult<TNode> Allocate<TNode>() where TNode : GreenNode
+    internal PooledResult<TNode> Allocate<TNode>()
+        where TNode : GreenNode
     {
         var builder = new SyntaxListBuilder<TNode>(this.Allocate());
         return new PooledResult<TNode>(this, builder);
@@ -76,7 +77,8 @@ internal class SyntaxListPool
         return list;
     }
 
-    public readonly struct PooledResult<TNode> : IDisposable where TNode : GreenNode
+    public readonly struct PooledResult<TNode> : IDisposable
+        where TNode : GreenNode
     {
         private readonly SyntaxListBuilder<TNode> _builder;
         private readonly SyntaxListPool _pool;

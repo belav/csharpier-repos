@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TContextNode contextNode,
                 out SyntaxNode newRoot,
                 out TContextNode newContextNode
-            ) where TContextNode : SyntaxNode
+            )
+                where TContextNode : SyntaxNode
             {
                 newRoot = new AddFirstMissingCloseBraceRewriter(contextNode).Visit(root);
                 newContextNode = (TContextNode)newRoot.GetAnnotatedNodes(s_annotation).Single();

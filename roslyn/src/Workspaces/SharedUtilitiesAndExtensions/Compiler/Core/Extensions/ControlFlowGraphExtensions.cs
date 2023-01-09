@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         public static IEnumerable<T> DescendantOperations<T>(
             this ControlFlowGraph cfg,
             OperationKind operationKind
-        ) where T : IOperation =>
+        )
+            where T : IOperation =>
             cfg.DescendantOperations().Where(d => d?.Kind == operationKind).Cast<T>();
     }
 }

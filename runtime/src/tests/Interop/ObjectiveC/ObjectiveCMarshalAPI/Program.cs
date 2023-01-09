@@ -175,7 +175,8 @@ namespace ObjectiveCMarshalAPI
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static GCHandle AllocAndTrackObject<T>(uint count) where T : Base, new()
+        static GCHandle AllocAndTrackObject<T>(uint count)
+            where T : Base, new()
         {
             var obj = new T();
             GCHandle h = ObjectiveCMarshal.CreateReferenceTrackingHandle(obj, out Span<IntPtr> s);
@@ -190,7 +191,8 @@ namespace ObjectiveCMarshalAPI
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void Validate_AllocAndFreeAnotherHandle<T>(GCHandle handle) where T : Base, new()
+        static void Validate_AllocAndFreeAnotherHandle<T>(GCHandle handle)
+            where T : Base, new()
         {
             var obj = (T)handle.Target;
             GCHandle h = ObjectiveCMarshal.CreateReferenceTrackingHandle(obj, out Span<IntPtr> s);

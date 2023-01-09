@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
 {
-    internal readonly struct EmbeddedSyntaxToken<TSyntaxKind> where TSyntaxKind : struct
+    internal readonly struct EmbeddedSyntaxToken<TSyntaxKind>
+        where TSyntaxKind : struct
     {
         public readonly TSyntaxKind Kind;
         public readonly ImmutableArray<EmbeddedSyntaxTrivia<TSyntaxKind>> LeadingTrivia;

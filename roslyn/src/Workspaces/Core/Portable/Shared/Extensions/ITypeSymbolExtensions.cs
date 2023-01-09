@@ -178,7 +178,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ITypeSymbol typeSymbol,
             TSymbol constructedInterfaceMember,
             SolutionServices services
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             // Check the current type for explicit interface matches.  Otherwise, check
             // the current type and base types for implicit matches.

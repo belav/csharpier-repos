@@ -21,7 +21,8 @@ public static class JsonPatchExtensions
         this JsonPatchDocument<T> patchDoc,
         T objectToApplyTo,
         ModelStateDictionary modelState
-    ) where T : class
+    )
+        where T : class
     {
         if (patchDoc == null)
         {
@@ -53,7 +54,8 @@ public static class JsonPatchExtensions
         T objectToApplyTo,
         ModelStateDictionary modelState,
         string prefix
-    ) where T : class
+    )
+        where T : class
     {
         if (patchDoc == null)
         {

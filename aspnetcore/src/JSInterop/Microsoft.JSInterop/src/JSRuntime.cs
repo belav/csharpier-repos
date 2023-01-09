@@ -360,7 +360,8 @@ public abstract partial class JSRuntime : IJSRuntime, IDisposable
 
     internal long TrackObjectReference<[DynamicallyAccessedMembers(JSInvokable)] TValue>(
         DotNetObjectReference<TValue> dotNetObjectReference
-    ) where TValue : class
+    )
+        where TValue : class
     {
         if (dotNetObjectReference == null)
         {

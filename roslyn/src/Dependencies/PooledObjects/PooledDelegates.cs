@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
     /// </summary>
     internal static class PooledDelegates
     {
-        private static class DefaultDelegatePool<T> where T : class, new()
+        private static class DefaultDelegatePool<T>
+            where T : class, new()
         {
             public static readonly ObjectPool<T> Instance = new(() => new T(), 20);
         }

@@ -43,7 +43,8 @@ namespace System
         internal static EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(
             Type enumType,
             bool getNames = true
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             Debug.Assert(enumType != null);
             Debug.Assert(enumType is RuntimeType);

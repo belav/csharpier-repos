@@ -933,7 +933,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassRestrictionArrayArrayLengthTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             CheckGenericWithClassRestrictionArrayArrayLengthExpression<Tc>(
                 GenerateGenericWithClassRestrictionArrayArray<Tc>(0),
@@ -951,14 +952,16 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithClassRestrictionArrayArrayLengthTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             CheckExceptionGenericWithClassRestrictionArrayArrayLength<Tc>(null, useInterpreter);
         }
 
         private static void CheckGenericWithSubClassRestrictionArrayArrayLengthTestHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             CheckGenericWithSubClassRestrictionArrayArrayLengthExpression<TC>(
                 GenerateGenericWithSubClassRestrictionArrayArray<TC>(0),
@@ -976,14 +979,16 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithSubClassRestrictionArrayArrayLengthTestHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             CheckExceptionGenericWithSubClassRestrictionArrayArrayLength<TC>(null, useInterpreter);
         }
 
         private static void CheckGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             CheckGenericWithClassAndNewRestrictionArrayArrayLengthExpression<Tcn>(
                 GenerateGenericWithClassAndNewRestrictionArrayArray<Tcn>(0),
@@ -1001,7 +1006,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLengthTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLength<Tcn>(
                 null,
@@ -1011,7 +1017,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthTestHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthExpression<TCn>(
                 GenerateGenericWithSubClassAndNewRestrictionArrayArray<TCn>(0),
@@ -1029,7 +1036,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLengthTestHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLength<TCn>(
                 null,
@@ -1039,7 +1047,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionArrayArrayLengthTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             CheckGenericWithStructRestrictionArrayArrayLengthExpression<Ts>(
                 GenerateGenericWithStructRestrictionArrayArray<Ts>(0),
@@ -1057,7 +1066,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithStructRestrictionArrayArrayLengthTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             CheckExceptionGenericWithStructRestrictionArrayArrayLength<Ts>(null, useInterpreter);
         }
@@ -2107,7 +2117,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithClassRestrictionArrayArrayLengthExpression<Tc>(
             Tc[][] array,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Tc[][]))),
@@ -2120,7 +2131,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithSubClassRestrictionArrayArrayLengthExpression<TC>(
             TC[][] array,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(TC[][]))),
@@ -2133,7 +2145,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithClassAndNewRestrictionArrayArrayLengthExpression<Tcn>(
             Tcn[][] array,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Tcn[][]))),
@@ -2146,7 +2159,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithSubClassAndNewRestrictionArrayArrayLengthExpression<TCn>(
             TCn[][] array,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(TCn[][]))),
@@ -2159,7 +2173,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithStructRestrictionArrayArrayLengthExpression<Ts>(
             Ts[][] array,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Ts[][]))),
@@ -2604,7 +2619,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionGenericWithClassRestrictionArrayArrayLength<Tc>(
             Tc[][] array,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -2627,7 +2643,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionGenericWithSubClassRestrictionArrayArrayLength<TC>(
             TC[][] array,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -2650,7 +2667,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionGenericWithClassAndNewRestrictionArrayArrayLength<Tcn>(
             Tcn[][] array,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -2673,7 +2691,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionGenericWithSubClassAndNewRestrictionArrayArrayLength<TCn>(
             TCn[][] array,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -2696,7 +2715,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckExceptionGenericWithStructRestrictionArrayArrayLength<Ts>(
             Ts[][] array,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(

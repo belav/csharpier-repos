@@ -2732,7 +2732,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ImmutableArray<Symbol> members,
             SymbolKind kind,
             int offset = -1
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             if (offset < 0)
             {

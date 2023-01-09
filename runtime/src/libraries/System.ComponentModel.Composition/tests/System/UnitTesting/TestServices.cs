@@ -13,7 +13,8 @@ namespace System.UnitTesting
             return Guid.NewGuid().ToString().Replace('-', '_');
         }
 
-        public static IEnumerable<TEnum> GetEnumValues<TEnum>() where TEnum : struct
+        public static IEnumerable<TEnum> GetEnumValues<TEnum>()
+            where TEnum : struct
         { // Silverlight 2.0 does not have Enum.GetValues()
             // so we need to write our own
 

@@ -9,13 +9,15 @@ namespace System.Data
 {
     public class EnumerableRowCollectionExtensionsTests
     {
-        public class TestTypedTable<T> : TypedTableBase<T> where T : DataRow
+        public class TestTypedTable<T> : TypedTableBase<T>
+            where T : DataRow
         {
             public TestTypedTable()
                 : base() { }
         }
 
-        private class TestDataRowComparer<T> : Comparer<T> where T : DataRow
+        private class TestDataRowComparer<T> : Comparer<T>
+            where T : DataRow
         {
             public override int Compare(T x, T y)
             {

@@ -24,7 +24,8 @@ namespace Microsoft.TestCommon
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
         /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
-        public static new T Throws<T>(Action testCode) where T : Exception
+        public static new T Throws<T>(Action testCode)
+            where T : Exception
         {
             return (T)Throws(typeof(T), testCode);
         }
@@ -37,7 +38,8 @@ namespace Microsoft.TestCommon
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
         /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
-        public static new T Throws<T>(Func<object> testCode) where T : Exception
+        public static new T Throws<T>(Func<object> testCode)
+            where T : Exception
         {
             return (T)Throws(typeof(T), testCode);
         }
@@ -123,7 +125,8 @@ namespace Microsoft.TestCommon
         public static TException Throws<TException>(
             Func<object> testCode,
             bool allowDerivedExceptions
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             return Throws<TException>(
                 () =>
@@ -148,7 +151,8 @@ namespace Microsoft.TestCommon
             Action testCode,
             string exceptionMessage,
             bool allowDerivedExceptions = false
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             var ex = Throws<TException>(testCode, allowDerivedExceptions);
             VerifyExceptionMessage(ex, exceptionMessage);
@@ -169,7 +173,8 @@ namespace Microsoft.TestCommon
             Func<object> testCode,
             string exceptionMessage,
             bool allowDerivedExceptions = false
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             return Throws<TException>(
                 () =>
@@ -726,7 +731,8 @@ namespace Microsoft.TestCommon
             Func<Task> testCode,
             string exceptionMessage,
             bool partialMatch = false
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             var ex = await ThrowsAsync<TException>(testCode);
             VerifyExceptionMessage(ex, exceptionMessage, partialMatch);

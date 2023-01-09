@@ -19,7 +19,8 @@ internal static partial class SyntaxValueProviderExtensions
     /// just use the syntax tree itself to determine value semantics here.
     /// </summary>
     private sealed class SyntaxNodeGrouping<TSyntaxNode>
-        : IEquatable<SyntaxNodeGrouping<TSyntaxNode>> where TSyntaxNode : SyntaxNode
+        : IEquatable<SyntaxNodeGrouping<TSyntaxNode>>
+        where TSyntaxNode : SyntaxNode
     {
         public readonly SyntaxTree SyntaxTree;
         public readonly ImmutableArray<TSyntaxNode> SyntaxNodes;

@@ -620,13 +620,15 @@ class Program
             public fixed byte Bytes[Length];
         }
 
-        T Generic<T>(object o) where T : class
+        T Generic<T>(object o)
+            where T : class
         {
             Func<object, T> f = OtherGeneric<T>;
             return f(o);
         }
 
-        T OtherGeneric<T>(object o) where T : class
+        T OtherGeneric<T>(object o)
+            where T : class
         {
             return o as T;
         }
@@ -994,7 +996,8 @@ class Program
     /// </summary>
     class TestInitThisClass
     {
-        class Gen1<T> where T : class
+        class Gen1<T>
+            where T : class
         {
             static string s_str1;
             static string s_str2;
@@ -1016,7 +1019,8 @@ class Program
             }
         }
 
-        class Gen2<T> where T : class
+        class Gen2<T>
+            where T : class
         {
             public static string GetFromClassParam()
             {
@@ -1068,7 +1072,8 @@ class Program
 
         class C2 { }
 
-        class Base1<T> where T : class
+        class Base1<T>
+            where T : class
         {
             public virtual T As(object o)
             {
@@ -1076,7 +1081,8 @@ class Program
             }
         }
 
-        class Derived1<T> : Base1<T> where T : class
+        class Derived1<T> : Base1<T>
+            where T : class
         {
             public T AsToo(object o)
             {
@@ -1147,7 +1153,8 @@ class Program
             }
         }
 
-        class Derived<T> : Base<T, string> where T : class
+        class Derived<T> : Base<T, string>
+            where T : class
         {
             public T Cast(object v)
             {
@@ -1754,7 +1761,8 @@ class Program
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob<T, U>(ref T t, object o) where T : IFoo<U>
+        static bool DoFrob<T, U>(ref T t, object o)
+            where T : IFoo<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -3433,7 +3441,8 @@ class GenClass1b<T> : IGenInterface<T>
     }
 }
 
-class GenClass1c<T> where T : new()
+class GenClass1c<T>
+    where T : new()
 {
     public T t;
 
@@ -3587,7 +3596,8 @@ public class MyIdClass1
     }
 }
 
-public class GenBase<T, U> : IFoo<T> where T : new()
+public class GenBase<T, U> : IFoo<T>
+    where T : new()
 {
     public T m_fieldT;
     public U m_fieldU;
@@ -3784,7 +3794,8 @@ public class Base
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public string NewTest<T, U>() where T : new()
+    public string NewTest<T, U>()
+        where T : new()
     {
         var a = new T();
         var b = new MyGenClass1<T>();

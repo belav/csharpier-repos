@@ -49,7 +49,8 @@ public static class MsalWebAssemblyServiceCollectionExtensions
     >(
         this IServiceCollection services,
         Action<RemoteAuthenticationOptions<MsalProviderOptions>> configure
-    ) where TRemoteAuthenticationState : RemoteAuthenticationState, new()
+    )
+        where TRemoteAuthenticationState : RemoteAuthenticationState, new()
     {
         return AddMsalAuthentication<TRemoteAuthenticationState, RemoteUserAccount>(
             services,

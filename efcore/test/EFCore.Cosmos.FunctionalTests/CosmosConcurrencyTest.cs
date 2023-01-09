@@ -193,7 +193,8 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
         Action<ConcurrencyContext> seedAction,
         Action<ConcurrencyContext> storeChange,
         Action<ConcurrencyContext> clientChange
-    ) where TException : DbUpdateException
+    )
+        where TException : DbUpdateException
     {
         using var outerContext = CreateContext();
         await outerContext.Database.EnsureCreatedAsync();

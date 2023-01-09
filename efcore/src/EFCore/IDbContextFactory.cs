@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore;
 /// <typeparam name="TContext">The <see cref="DbContext" /> type to create.</typeparam>
 public interface IDbContextFactory<
     [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
-> where TContext : DbContext
+>
+    where TContext : DbContext
 {
     /// <summary>
     ///     Creates a new <see cref="DbContext" /> instance.

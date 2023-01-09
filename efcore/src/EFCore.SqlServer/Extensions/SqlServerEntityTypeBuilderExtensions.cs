@@ -52,7 +52,8 @@ public static class SqlServerEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> IsMemoryOptimized<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         bool memoryOptimized = true
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)
             IsMemoryOptimized((EntityTypeBuilder)entityTypeBuilder, memoryOptimized);
 

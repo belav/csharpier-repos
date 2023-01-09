@@ -150,7 +150,8 @@ public class My
 
     class AllocViaGVMSecondLevelBase
     {
-        public virtual T ActuallyAlloc<T>() where T : new()
+        public virtual T ActuallyAlloc<T>()
+            where T : new()
         {
             throw new Exception();
         }
@@ -158,7 +159,8 @@ public class My
 
     class AllocViaGVMBase
     {
-        public virtual T Alloc<T>() where T : new()
+        public virtual T Alloc<T>()
+            where T : new()
         {
             throw new Exception();
         }

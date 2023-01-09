@@ -47,7 +47,8 @@ namespace Microsoft.Web.Mvc
             RequestContext context,
             RouteCollection routeCollection,
             Expression<Action<TController>> action
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             RouteValueDictionary routeValues = ExpressionHelper.GetRouteValuesFromExpression(
                 action

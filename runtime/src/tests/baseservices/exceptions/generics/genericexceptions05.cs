@@ -14,9 +14,11 @@ public class Help
     public static Object s_object = new object();
 }
 
-public class A<T> where T : Exception
+public class A<T>
+    where T : Exception
 {
-    public static void GenericFunctionWithFewArgs<X>() where X : Exception
+    public static void GenericFunctionWithFewArgs<X>()
+        where X : Exception
     {
         try
         {

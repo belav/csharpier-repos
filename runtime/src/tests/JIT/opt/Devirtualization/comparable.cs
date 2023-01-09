@@ -23,7 +23,8 @@ public sealed class X : IComparable<X>
     }
 }
 
-public class Y<T> where T : IComparable<T>
+public class Y<T>
+    where T : IComparable<T>
 {
     public static int C(T x, T y)
     {

@@ -29,7 +29,8 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector128DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector128.Size)]
-    public readonly struct Vector128<T> : IEquatable<Vector128<T>> where T : struct
+    public readonly struct Vector128<T> : IEquatable<Vector128<T>>
+        where T : struct
     {
         internal readonly Vector64<T> _lower;
         internal readonly Vector64<T> _upper;

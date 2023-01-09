@@ -419,9 +419,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 || currentToken.LeadingTrivia.HasAnyWhitespaceElasticTrivia();
         }
 
-        public static bool IsNull<T>(T t) where T : class => t == null;
+        public static bool IsNull<T>(T t)
+            where T : class => t == null;
 
-        public static bool IsNotNull<T>(T t) where T : class => !IsNull(t);
+        public static bool IsNotNull<T>(T t)
+            where T : class => !IsNull(t);
 
         public static TextSpan GetFormattingSpan(SyntaxNode root, TextSpan span)
         {

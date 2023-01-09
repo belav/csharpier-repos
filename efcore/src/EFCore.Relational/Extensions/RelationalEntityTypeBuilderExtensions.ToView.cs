@@ -40,7 +40,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> ToView<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name);
 
     /// <summary>
@@ -84,7 +85,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string? name,
         string? schema
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         (EntityTypeBuilder<TEntity>)ToView((EntityTypeBuilder)entityTypeBuilder, name, schema);
 
     /// <summary>
@@ -118,7 +120,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<ViewBuilder<TEntity>> buildAction
-    ) where TEntity : class => ToView(entityTypeBuilder, name, null, buildAction);
+    )
+        where TEntity : class => ToView(entityTypeBuilder, name, null, buildAction);
 
     /// <summary>
     ///     Configures the view that the entity type maps to when targeting a relational database.
@@ -171,7 +174,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<ViewBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -439,7 +443,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<SplitViewBuilder<TEntity>> buildAction
-    ) where TEntity : class => entityTypeBuilder.SplitToView(name, null, buildAction);
+    )
+        where TEntity : class => entityTypeBuilder.SplitToView(name, null, buildAction);
 
     /// <summary>
     ///     Configures some of the properties on this entity type to be mapped to a different view.
@@ -495,7 +500,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<SplitViewBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));

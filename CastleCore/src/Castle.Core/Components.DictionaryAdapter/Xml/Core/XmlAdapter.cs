@@ -404,7 +404,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
             string key,
             PropertyDescriptor property,
             XmlAccessorFactory<TAccessor> factory
-        ) where TAccessor : XmlAccessor
+        )
+            where TAccessor : XmlAccessor
         {
             var xmlMeta = GetXmlMetadata(property.Property.DeclaringType);
             var accessor = factory(key, property.PropertyType, xmlMeta.Context);

@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.Tools.Internal;
 
 internal static class Ensure
 {
-    public static T NotNull<T>(T obj, string paramName) where T : class
+    public static T NotNull<T>(T obj, string paramName)
+        where T : class
     {
         if (obj == null)
         {

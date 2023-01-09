@@ -101,7 +101,8 @@ namespace Internal.Cryptography.Pal
             Func<CngKey, TAlgorithm> factory,
             Action<TAlgorithm, ECParameters> import,
             CryptImportPublicKeyInfoFlags importFlags = CryptImportPublicKeyInfoFlags.NONE
-        ) where TAlgorithm : AsymmetricAlgorithm, new()
+        )
+            where TAlgorithm : AsymmetricAlgorithm, new()
         {
             TAlgorithm key;
 

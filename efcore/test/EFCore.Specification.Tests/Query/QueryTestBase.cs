@@ -48,7 +48,8 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
         bool assertOrder = false,
         int entryCount = 0,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : class =>
+    )
+        where TResult : class =>
         AssertQuery(
             async,
             query,
@@ -69,7 +70,8 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
         bool assertOrder = false,
         int entryCount = 0,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : class =>
+    )
+        where TResult : class =>
         QueryAsserter.AssertQuery(
             actualQuery,
             expectedQuery,
@@ -86,7 +88,9 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
         Func<ISetSource, IQueryable<TResult>> query,
         bool assertOrder = false,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : struct => AssertQueryScalar(async, query, query, assertOrder, testMethodName);
+    )
+        where TResult : struct =>
+        AssertQueryScalar(async, query, query, assertOrder, testMethodName);
 
     public Task AssertQueryScalar<TResult>(
         bool async,
@@ -94,7 +98,8 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
         Func<ISetSource, IQueryable<TResult>> expectedQuery,
         bool assertOrder = false,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : struct =>
+    )
+        where TResult : struct =>
         QueryAsserter.AssertQueryScalar(
             actualQuery,
             expectedQuery,
@@ -108,7 +113,9 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
         Func<ISetSource, IQueryable<TResult?>> query,
         bool assertOrder = false,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : struct => AssertQueryScalar(async, query, query, assertOrder, testMethodName);
+    )
+        where TResult : struct =>
+        AssertQueryScalar(async, query, query, assertOrder, testMethodName);
 
     public Task AssertQueryScalar<TResult>(
         bool async,
@@ -116,7 +123,8 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
         Func<ISetSource, IQueryable<TResult?>> expectedQuery,
         bool assertOrder = false,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : struct =>
+    )
+        where TResult : struct =>
         QueryAsserter.AssertQueryScalar(
             actualQuery,
             expectedQuery,

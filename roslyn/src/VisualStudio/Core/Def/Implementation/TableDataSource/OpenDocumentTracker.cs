@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    internal class OpenDocumentTracker<TItem> where TItem : TableItem
+    internal class OpenDocumentTracker<TItem>
+        where TItem : TableItem
     {
         private readonly object _gate = new();
         private readonly Dictionary<

@@ -20,7 +20,8 @@ public struct R : IGet
     }
 }
 
-public class X<K> where K : IGet
+public class X<K>
+    where K : IGet
 {
     public X(K r)
     {

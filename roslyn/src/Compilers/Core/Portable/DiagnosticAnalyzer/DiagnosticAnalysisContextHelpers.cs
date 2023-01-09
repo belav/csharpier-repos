@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static void VerifyArguments<TContext, TLanguageKindEnum>(
             Action<TContext> action,
             ImmutableArray<TLanguageKindEnum> syntaxKinds
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             VerifyAction(action);
             VerifySyntaxKinds(syntaxKinds);
@@ -175,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         private static void VerifySyntaxKinds<TLanguageKindEnum>(
             ImmutableArray<TLanguageKindEnum> syntaxKinds
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             if (syntaxKinds.IsDefault)
             {
@@ -210,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal static void VerifyArguments<TKey, TValue>(
             TKey key,
             AnalysisValueProvider<TKey, TValue> valueProvider
-        ) where TKey : class
+        )
+            where TKey : class
         {
             if (key == null)
             {

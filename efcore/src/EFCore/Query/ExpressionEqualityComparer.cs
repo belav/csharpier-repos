@@ -240,7 +240,8 @@ public sealed class ExpressionEqualityComparer : IEqualityComparer<Expression?>
                 }
             }
 
-            void AddListToHash<T>(IReadOnlyList<T> expressions) where T : Expression
+            void AddListToHash<T>(IReadOnlyList<T> expressions)
+                where T : Expression
             {
                 for (var i = 0; i < expressions.Count; i++)
                 {

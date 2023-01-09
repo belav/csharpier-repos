@@ -10,7 +10,8 @@ internal partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorHWAccelTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorHWAccelTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorHWAccel(T a, T b, T c)
         {

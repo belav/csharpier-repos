@@ -1068,7 +1068,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 Dictionary<T, Dictionary<DiagnosticData, int>> map,
                 T key,
                 HashSet<DiagnosticData> diagnostics
-            ) where T : notnull
+            )
+                where T : notnull
             {
                 var errors = GetErrorSet(map, key);
                 foreach (var diagnostic in diagnostics)
@@ -1081,7 +1082,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 Dictionary<T, Dictionary<DiagnosticData, int>> map,
                 T key,
                 DiagnosticData diagnostic
-            ) where T : notnull
+            )
+                where T : notnull
             {
                 var errors = GetErrorSet(map, key);
                 AddError(errors, diagnostic, key);
@@ -1091,7 +1093,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 Dictionary<DiagnosticData, int> errors,
                 DiagnosticData diagnostic,
                 T key
-            ) where T : notnull
+            )
+                where T : notnull
             {
                 RecordProjectContainsErrors();
 
@@ -1135,7 +1138,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             private static Dictionary<DiagnosticData, int> GetErrorSet<T>(
                 Dictionary<T, Dictionary<DiagnosticData, int>> map,
                 T key
-            ) where T : notnull =>
+            )
+                where T : notnull =>
                 map.GetOrAdd(
                     key,
                     _ => new Dictionary<DiagnosticData, int>(DiagnosticDataComparer.Instance)

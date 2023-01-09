@@ -15,7 +15,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Structure
 {
     public abstract class AbstractSyntaxNodeStructureProviderTests<TSyntaxNode>
-        : AbstractSyntaxStructureProviderTests where TSyntaxNode : SyntaxNode
+        : AbstractSyntaxStructureProviderTests
+        where TSyntaxNode : SyntaxNode
     {
         internal abstract AbstractSyntaxStructureProvider CreateProvider();
 

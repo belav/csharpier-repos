@@ -61,7 +61,8 @@ namespace System.Collections.Generic
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class GenericComparer<T> : Comparer<T> where T : IComparable<T>?
+    public sealed partial class GenericComparer<T> : Comparer<T>
+        where T : IComparable<T>?
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int Compare(T? x, T? y)
@@ -89,7 +90,8 @@ namespace System.Collections.Generic
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
     )]
     // Needs to be public to support binary serialization compatibility
-    public sealed class NullableComparer<T> : Comparer<T?>, ISerializable where T : struct
+    public sealed class NullableComparer<T> : Comparer<T?>, ISerializable
+        where T : struct
     {
         public NullableComparer() { }
 

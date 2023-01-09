@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken oldToken,
             SyntaxToken newToken,
             int diagnosticOffsetDelta
-        ) where TRoot : CSharpSyntaxNode
+        )
+            where TRoot : CSharpSyntaxNode
         {
             var replacer = new SyntaxFirstTokenReplacer(oldToken, newToken, diagnosticOffsetDelta);
             var newRoot = (TRoot)replacer.Visit(root);
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private static TSyntax UpdateDiagnosticOffset<TSyntax>(
             TSyntax node,
             int diagnosticOffsetDelta
-        ) where TSyntax : CSharpSyntaxNode
+        )
+            where TSyntax : CSharpSyntaxNode
         {
             DiagnosticInfo[] oldDiagnostics = node.GetDiagnostics();
             if (oldDiagnostics == null || oldDiagnostics.Length == 0)

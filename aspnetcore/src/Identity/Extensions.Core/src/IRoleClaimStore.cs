@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store of role specific claims.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public interface IRoleClaimStore<TRole> : IRoleStore<TRole> where TRole : class
+public interface IRoleClaimStore<TRole> : IRoleStore<TRole>
+    where TRole : class
 {
     /// <summary>
     ///  Gets a list of <see cref="Claim"/>s to be belonging to the specified <paramref name="role"/> as an asynchronous operation.

@@ -9,7 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Syntax
 {
-    internal abstract class AbstractWarningStateMap<TWarningState> where TWarningState : struct
+    internal abstract class AbstractWarningStateMap<TWarningState>
+        where TWarningState : struct
     {
         /// <summary>
         /// List of entries sorted in source order, each of which captures a

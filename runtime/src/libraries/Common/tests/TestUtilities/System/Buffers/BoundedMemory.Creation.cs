@@ -25,7 +25,8 @@ namespace System.Buffers
         public static BoundedMemory<T> Allocate<T>(
             int elementCount,
             PoisonPagePlacement placement = PoisonPagePlacement.After
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             if (elementCount < 0)
             {
@@ -48,7 +49,8 @@ namespace System.Buffers
         public static BoundedMemory<T> AllocateFromExistingData<T>(
             ReadOnlySpan<T> data,
             PoisonPagePlacement placement = PoisonPagePlacement.After
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             if (placement != PoisonPagePlacement.Before && placement != PoisonPagePlacement.After)
             {
@@ -67,7 +69,8 @@ namespace System.Buffers
         public static BoundedMemory<T> AllocateFromExistingData<T>(
             T[] data,
             PoisonPagePlacement placement = PoisonPagePlacement.After
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             return AllocateFromExistingData(new ReadOnlySpan<T>(data), placement);
         }
@@ -88,7 +91,8 @@ namespace System.Buffers
         private static BoundedMemory<T> AllocateWithoutDataPopulation<T>(
             int elementCount,
             PoisonPagePlacement placement
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {

@@ -475,7 +475,8 @@ ERR:
         public static TBuilder UseHelpBuilder<TBuilder>(
             this TBuilder builder,
             Func<BindingContext, HelpBuilder> getHelpBuilder
-        ) where TBuilder : CommandLineBuilder
+        )
+            where TBuilder : CommandLineBuilder
         {
             if (builder is null)
             {

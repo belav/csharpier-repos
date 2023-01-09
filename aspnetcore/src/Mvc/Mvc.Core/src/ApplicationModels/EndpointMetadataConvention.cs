@@ -115,7 +115,8 @@ internal sealed class EndpointMetadataConvention : IActionModelConvention
 
     private static void PopulateMetadataForParameter<T>(
         EndpointParameterMetadataContext parameterContext
-    ) where T : IEndpointParameterMetadataProvider
+    )
+        where T : IEndpointParameterMetadataProvider
     {
         T.PopulateMetadata(parameterContext);
     }

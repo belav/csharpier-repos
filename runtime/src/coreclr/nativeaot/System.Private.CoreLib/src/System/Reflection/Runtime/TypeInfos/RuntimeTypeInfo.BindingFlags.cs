@@ -300,12 +300,14 @@ namespace System.Reflection.Runtime.TypeInfos
             }
         }
 
-        private QueryResult<M> Query<M>(BindingFlags bindingAttr) where M : MemberInfo
+        private QueryResult<M> Query<M>(BindingFlags bindingAttr)
+            where M : MemberInfo
         {
             return Query<M>(null, bindingAttr, null);
         }
 
-        private QueryResult<M> Query<M>(string name, BindingFlags bindingAttr) where M : MemberInfo
+        private QueryResult<M> Query<M>(string name, BindingFlags bindingAttr)
+            where M : MemberInfo
         {
             if (name == null)
                 throw new ArgumentNullException(nameof(name));
@@ -316,7 +318,8 @@ namespace System.Reflection.Runtime.TypeInfos
             string optionalName,
             BindingFlags bindingAttr,
             Func<M, bool> optionalPredicate
-        ) where M : MemberInfo
+        )
+            where M : MemberInfo
         {
             MemberPolicies<M> policies = MemberPolicies<M>.Default;
             bindingAttr = policies.ModifyBindingFlags(bindingAttr);

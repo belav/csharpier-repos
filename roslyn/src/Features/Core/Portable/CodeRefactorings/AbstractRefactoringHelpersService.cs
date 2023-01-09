@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan selectionRaw,
             bool allowEmptyNodes,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             using var _1 = ArrayBuilder<TSyntaxNode>.GetInstance(out var relevantNodesBuilder);
             await AddRelevantNodesAsync<TSyntaxNode>(
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan selectionRaw,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // Given selection is trimmed first to enable over-selection that spans multiple lines. Since trailing whitespace ends
             // at newline boundary over-selection to e.g. a line after LocalFunctionStatement would cause FindNode to find enclosing
@@ -198,7 +200,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             }
         }
 
-        private static bool IsWantedTypeExpressionLike<TSyntaxNode>() where TSyntaxNode : SyntaxNode
+        private static bool IsWantedTypeExpressionLike<TSyntaxNode>()
+            where TSyntaxNode : SyntaxNode
         {
             var wantedType = typeof(TSyntaxNode);
 
@@ -315,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             int location,
             SyntaxToken tokenToLeft,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // there could be multiple (n) tokens to the left if first n-1 are Empty -> iterate over all of them
             while (tokenToLeft != default)
@@ -358,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             int location,
             SyntaxToken tokenToRightOrIn,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             if (tokenToRightOrIn != default)
             {
@@ -408,7 +413,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan selectionTrimmed,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var selectionNode = root.FindNode(selectionTrimmed, getInnermostNodeForTie: true);
             var prevNode = selectionNode;
@@ -604,7 +610,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             int position,
             ArrayBuilder<TSyntaxNode> relevantNodesBuilder,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // If we're deep inside we don't have to deal with being on edges (that gets dealt by TryGetSelectedNodeAsync)
             // -> can simply FindToken -> proceed testing its ancestors
@@ -655,7 +662,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             IEnumerable<SyntaxNode> nodes,
             ArrayBuilder<TSyntaxNode> resultBuilder,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var correctTypeNonHiddenNodes = nodes
                 .OfType<TSyntaxNode>()

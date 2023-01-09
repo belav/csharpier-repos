@@ -23,7 +23,8 @@ struct S3b
     static S3a[][] foo;
 }
 
-struct P<X> where X : struct
+struct P<X>
+    where X : struct
 {
     static P<X>[][] foo;
 }

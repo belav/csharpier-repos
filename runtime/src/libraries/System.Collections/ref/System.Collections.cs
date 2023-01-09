@@ -518,7 +518,8 @@ namespace System.Collections.Generic
             System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
             System.Collections.ICollection,
             System.Collections.IDictionary,
-            System.Collections.IEnumerable where TKey : notnull
+            System.Collections.IEnumerable
+        where TKey : notnull
     {
         public SortedDictionary() { }
 
@@ -949,7 +950,8 @@ namespace System.Collections.Generic
             System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
             System.Collections.ICollection,
             System.Collections.IDictionary,
-            System.Collections.IEnumerable where TKey : notnull
+            System.Collections.IEnumerable
+        where TKey : notnull
     {
         public SortedList() { }
 
@@ -1589,7 +1591,8 @@ namespace System.Collections.Generic
         public static System.Collections.ObjectModel.ReadOnlyDictionary<TKey, TValue> AsReadOnly<
             TKey,
             TValue
-        >(this IDictionary<TKey, TValue> dictionary) where TKey : notnull
+        >(this IDictionary<TKey, TValue> dictionary)
+            where TKey : notnull
         {
             throw null;
         }
@@ -1637,7 +1640,8 @@ namespace System.Collections.Generic
             System.Collections.IDictionary,
             System.Collections.IEnumerable,
             System.Runtime.Serialization.IDeserializationCallback,
-            System.Runtime.Serialization.ISerializable where TKey : notnull
+            System.Runtime.Serialization.ISerializable
+        where TKey : notnull
     {
         public Dictionary() { }
 

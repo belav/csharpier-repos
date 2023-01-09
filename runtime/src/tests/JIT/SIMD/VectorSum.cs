@@ -12,7 +12,8 @@ internal partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorSumTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorSumTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorSum(T a, T b)
         {

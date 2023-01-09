@@ -20,7 +20,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.Twondo
         int foo(IAction<T> a);
     }
 
-    public class Meta<T> : IMeta<T> where T : new()
+    public class Meta<T> : IMeta<T>
+        where T : new()
     {
         public int foo(IAction<T> a)
         {
@@ -176,7 +177,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
         T Boo();
     }
 
-    public class Variance<T, U, S> : iVariance<T, U, S> where T : new()
+    public class Variance<T, U, S> : iVariance<T, U, S>
+        where T : new()
     {
         public T Boo()
         {
@@ -230,7 +232,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.multip
         T Boo();
     }
 
-    public class Variance<T, U, S> : iVariance<T, U, S> where T : new()
+    public class Variance<T, U, S> : iVariance<T, U, S>
+        where T : new()
     {
         public T Boo()
         {
@@ -400,7 +403,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     {
         public int Status = 1;
 
-        public void Foo<T>(T x, MyDel<T> y) where T : new()
+        public void Foo<T>(T x, MyDel<T> y)
+            where T : new()
         {
             this.Status = 0;
         }
@@ -460,7 +464,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     {
         public int Status = 0;
 
-        public void Foo<T>(T x, IFoo<T> y) where T : new()
+        public void Foo<T>(T x, IFoo<T> y)
+            where T : new()
         {
             this.Status = 0;
         }
@@ -514,7 +519,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     {
         public int Status = 0;
 
-        public void Foo<T>(T x, IFoo<T> y) where T : class
+        public void Foo<T>(T x, IFoo<T> y)
+            where T : class
         {
             this.Status = 0;
         }
@@ -572,7 +578,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     {
         public int Status = 0;
 
-        public void Foo<T>(T x, IFoo<T> y) where T : IFoo
+        public void Foo<T>(T x, IFoo<T> y)
+            where T : IFoo
         {
             this.Status = 0;
         }
@@ -700,7 +707,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.complex.typein
     {
         public int Status = 0;
 
-        public void Foo<T>(T x, Action<T> y) where T : new()
+        public void Foo<T>(T x, Action<T> y)
+            where T : new()
         {
             this.Status = 0;
         }

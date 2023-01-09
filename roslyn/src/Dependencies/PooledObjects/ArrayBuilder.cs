@@ -283,7 +283,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         /// <summary>
         /// Realizes the array, downcasting each element to a derived type.
         /// </summary>
-        public ImmutableArray<U> ToDowncastedImmutable<U>() where U : T
+        public ImmutableArray<U> ToDowncastedImmutable<U>()
+            where U : T
         {
             if (Count == 0)
             {
@@ -429,7 +430,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         internal Dictionary<K, ImmutableArray<T>> ToDictionary<K>(
             Func<T, K> keySelector,
             IEqualityComparer<K>? comparer = null
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (this.Count == 1)
             {
@@ -484,12 +486,14 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             }
         }
 
-        public void AddRange<U>(ArrayBuilder<U> items) where U : T
+        public void AddRange<U>(ArrayBuilder<U> items)
+            where U : T
         {
             _builder.AddRange(items._builder);
         }
 
-        public void AddRange<U>(ArrayBuilder<U> items, int start, int length) where U : T
+        public void AddRange<U>(ArrayBuilder<U> items, int start, int length)
+            where U : T
         {
             Debug.Assert(start >= 0 && length >= 0);
             Debug.Assert(start + length <= items.Count);
@@ -519,7 +523,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             }
         }
 
-        public void AddRange<S>(ImmutableArray<S> items) where S : class, T
+        public void AddRange<S>(ImmutableArray<S> items)
+            where S : class, T
         {
             AddRange(ImmutableArray<T>.CastUp(items));
         }

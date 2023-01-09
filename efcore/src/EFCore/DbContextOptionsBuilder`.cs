@@ -21,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     </para>
 /// </remarks>
 /// <typeparam name="TContext">The type of context to be configured.</typeparam>
-public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder where TContext : DbContext
+public class DbContextOptionsBuilder<TContext> : DbContextOptionsBuilder
+    where TContext : DbContext
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptionsBuilder{TContext}" /> class with no options set.

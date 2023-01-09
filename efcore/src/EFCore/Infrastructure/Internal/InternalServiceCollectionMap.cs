@@ -143,7 +143,8 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     /// </remarks>
     /// <typeparam name="TService">The service contract.</typeparam>
     /// <returns>The map, such that further calls can be chained.</returns>
-    public virtual InternalServiceCollectionMap DoPatchInjection<TService>() where TService : class
+    public virtual InternalServiceCollectionMap DoPatchInjection<TService>()
+        where TService : class
     {
         if (_serviceMap.TryGetValue(typeof(TService), out var indexes))
         {

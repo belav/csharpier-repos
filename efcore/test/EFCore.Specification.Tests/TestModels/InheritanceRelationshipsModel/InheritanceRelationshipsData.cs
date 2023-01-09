@@ -52,7 +52,8 @@ public class InheritanceRelationshipsData : ISetSource
         );
     }
 
-    public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public virtual IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(BaseInheritanceRelationshipEntity))
         {

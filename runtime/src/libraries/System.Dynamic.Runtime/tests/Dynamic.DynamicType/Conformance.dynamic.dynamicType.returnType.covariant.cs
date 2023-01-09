@@ -1531,7 +1531,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             return default(T);
         }
 
-        public virtual T RetObjectConstr<U>(U u) where U : T
+        public virtual T RetObjectConstr<U>(U u)
+            where U : T
         {
             Test.Called = "baseConstr";
             return default(U);

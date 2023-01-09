@@ -741,7 +741,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         protected virtual TNode WithAdditionalDiagnostics<TNode>(
             TNode node,
             params DiagnosticInfo[] diagnostics
-        ) where TNode : GreenNode
+        )
+            where TNode : GreenNode
         {
             DiagnosticInfo[] existingDiags = node.GetDiagnostics();
             int existingLength = existingDiags.Length;
@@ -760,7 +761,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
         }
 
-        protected TNode AddError<TNode>(TNode node, ErrorCode code) where TNode : GreenNode
+        protected TNode AddError<TNode>(TNode node, ErrorCode code)
+            where TNode : GreenNode
         {
             return AddError(node, code, Array.Empty<object>());
         }
@@ -826,7 +828,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             int length,
             ErrorCode code,
             params object[] args
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             return WithAdditionalDiagnostics(node, MakeError(offset, length, code, args));
         }
@@ -836,7 +839,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             CSharpSyntaxNode location,
             ErrorCode code,
             params object[] args
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             // assumes non-terminals will at most appear once in sub-tree
             int offset;
@@ -858,7 +862,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             TNode node,
             ErrorCode code,
             params object[] args
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             var firstToken = node.GetFirstToken();
             return WithAdditionalDiagnostics(
@@ -889,7 +894,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             TNode node,
             out int offset,
             out int width
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             var lastToken = node.GetLastNonmissingToken();
             offset = node.FullWidth; //advance to end of entire node
@@ -955,7 +961,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         protected void AddTrailingSkippedSyntax<TNode>(
             SyntaxListBuilder<TNode> list,
             GreenNode skippedSyntax
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             list[list.Count - 1] = AddTrailingSkippedSyntax(list[list.Count - 1], skippedSyntax);
         }
@@ -1219,7 +1226,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             TNode node,
             MessageID feature,
             bool forceWarning = false
-        ) where TNode : GreenNode
+        )
+            where TNode : GreenNode
         {
             LanguageVersion availableVersion = this.Options.LanguageVersion;
 

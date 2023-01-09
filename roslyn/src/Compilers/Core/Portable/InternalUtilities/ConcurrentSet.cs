@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
     /// A concurrent, simplified HashSet.
     /// </summary>
     [DebuggerDisplay("Count = {Count}")]
-    internal sealed class ConcurrentSet<T> : ICollection<T> where T : notnull
+    internal sealed class ConcurrentSet<T> : ICollection<T>
+        where T : notnull
     {
         /// <summary>
         /// The default concurrency level is 2. That means the collection can cope with up to two

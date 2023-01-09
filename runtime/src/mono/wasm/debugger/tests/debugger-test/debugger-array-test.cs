@@ -455,7 +455,8 @@ namespace DebuggerTests
             await Task.CompletedTask;
         }
 
-        public void GenericInstanceMethod<T>(T sc_arg) where T : SimpleClass
+        public void GenericInstanceMethod<T>(T sc_arg)
+            where T : SimpleClass
         {
             var local_gs = new SimpleGenericStruct<int>
             {

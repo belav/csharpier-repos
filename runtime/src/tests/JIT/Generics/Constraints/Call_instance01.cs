@@ -25,7 +25,8 @@ public struct FooStruct : IFoo
     }
 }
 
-public class GenClass<T> where T : IFoo
+public class GenClass<T>
+    where T : IFoo
 {
     public bool CallOnConstraint(T t)
     {
@@ -38,7 +39,8 @@ public class GenClass<T> where T : IFoo
     }
 }
 
-public struct GenStruct<T> where T : IFoo
+public struct GenStruct<T>
+    where T : IFoo
 {
     public bool CallOnConstraint(T t)
     {

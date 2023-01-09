@@ -329,7 +329,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         private string PrintSpan(SnapshotSpan span) =>
             $"'{span.GetText().Replace("\\", "\\\\").Replace("\r", "\\r").Replace("\n", "\\n")}'[{span.Start.Position}-{span.Start.Position + span.Length}]";
 
-        private string[] GetTags<TTag>(Predicate<TTag>? filter = null) where TTag : ITag
+        private string[] GetTags<TTag>(Predicate<TTag>? filter = null)
+            where TTag : ITag
         {
             bool Filter(TTag tag) => true;
 

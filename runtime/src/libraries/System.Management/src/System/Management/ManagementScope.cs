@@ -590,7 +590,8 @@ namespace System.Management
             ref TDelegate delegate_f,
             IntPtr hModule,
             string procName
-        ) where TDelegate : class
+        )
+            where TDelegate : class
         {
             IntPtr procAddr = Interop.Kernel32.GetProcAddress(hModule, procName);
             return procAddr != IntPtr.Zero

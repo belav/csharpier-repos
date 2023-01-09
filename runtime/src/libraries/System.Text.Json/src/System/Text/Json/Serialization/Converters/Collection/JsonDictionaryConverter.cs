@@ -30,7 +30,8 @@ namespace System.Text.Json.Serialization
     /// Base class for dictionary converters such as IDictionary, Hashtable, Dictionary{,} IDictionary{,} and SortedList.
     /// </summary>
     internal abstract class JsonDictionaryConverter<TDictionary, TKey, TValue>
-        : JsonDictionaryConverter<TDictionary> where TKey : notnull
+        : JsonDictionaryConverter<TDictionary>
+        where TKey : notnull
     {
         /// <summary>
         /// When overridden, adds the value to the collection.

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Remote
     /// Abstracts a connection to a service implementing type <typeparamref name="TService"/>.
     /// </summary>
     /// <typeparam name="TService">Remote interface type of the service.</typeparam>
-    internal abstract class RemoteServiceConnection<TService> : IDisposable where TService : class
+    internal abstract class RemoteServiceConnection<TService> : IDisposable
+        where TService : class
     {
         public abstract void Dispose();
 

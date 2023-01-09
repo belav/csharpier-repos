@@ -1312,7 +1312,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             bool isGeneratedCode,
             SyntaxNodeAnalyzerStateData? analyzerState
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             Debug.Assert(analyzerState == null || analyzerState.CurrentNode == node);
             Debug.Assert(
@@ -1408,7 +1409,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalysisScope analysisScope,
             AnalysisState? analysisState,
             bool isGeneratedCode
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             DeclarationAnalyzerStateData? analyzerState = null;
 
@@ -1902,7 +1904,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>
         > GetNodeActionsByKind<TLanguageKindEnum>(
             IEnumerable<SyntaxNodeAnalyzerAction<TLanguageKindEnum>> nodeActions
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             Debug.Assert(nodeActions != null && nodeActions.Any());
 
@@ -1958,7 +1961,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             AnalysisScope analysisScope,
             AnalysisState? analysisState,
             bool isGeneratedCode
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             DeclarationAnalyzerStateData? analyzerState = null;
 
@@ -2015,7 +2019,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TextSpan filterSpan,
             SyntaxNodeAnalyzerStateData? analyzerState,
             bool isGeneratedCode
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             if (
                 isGeneratedCode && _shouldSkipAnalysisOnGeneratedCode(analyzer)
@@ -2061,7 +2066,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             bool isGeneratedCode,
             SyntaxNodeAnalyzerStateData? analyzerState
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             Debug.Assert(nodeActionsByKind.Any());
             Debug.Assert(!isGeneratedCode || !_shouldSkipAnalysisOnGeneratedCode(analyzer));
@@ -2117,7 +2123,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Func<Diagnostic, bool> isSupportedDiagnostic,
             bool isGeneratedCode,
             SyntaxNodeAnalyzerStateData? analyzerState
-        ) where TLanguageKindEnum : struct
+        )
+            where TLanguageKindEnum : struct
         {
             if (nodeActionsByKind.TryGetValue(getKind(node), out var actionsForKind))
             {

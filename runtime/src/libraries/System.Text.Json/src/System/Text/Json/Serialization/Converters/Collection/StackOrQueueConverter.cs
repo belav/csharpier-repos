@@ -8,7 +8,8 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     internal class StackOrQueueConverter<TCollection>
-        : JsonCollectionConverter<TCollection, object?> where TCollection : IEnumerable
+        : JsonCollectionConverter<TCollection, object?>
+        where TCollection : IEnumerable
     {
         protected sealed override void Add(in object? value, ref ReadStack state)
         {

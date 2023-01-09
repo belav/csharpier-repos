@@ -5,7 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
-    internal partial struct QueryResult<M> where M : MemberInfo
+    internal partial struct QueryResult<M>
+        where M : MemberInfo
     {
         internal struct QueryResultEnumerator
         {

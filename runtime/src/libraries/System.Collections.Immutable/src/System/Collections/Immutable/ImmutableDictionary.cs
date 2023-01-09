@@ -18,7 +18,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="TKey">The type of keys stored by the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of values stored by the dictionary.</typeparam>
         /// <returns>The immutable collection.</returns>
-        public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>() where TKey : notnull
+        public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>()
+            where TKey : notnull
         {
             return ImmutableDictionary<TKey, TValue>.Empty;
         }
@@ -34,7 +35,8 @@ namespace System.Collections.Immutable
         /// </returns>
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>(
             IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(keyComparer);
         }
@@ -52,7 +54,8 @@ namespace System.Collections.Immutable
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>(
             IEqualityComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableDictionary<TKey, TValue>.Empty.WithComparers(
                 keyComparer,
@@ -69,7 +72,8 @@ namespace System.Collections.Immutable
         /// <returns>The new immutable collection.</returns>
         public static ImmutableDictionary<TKey, TValue> CreateRange<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableDictionary<TKey, TValue>.Empty.AddRange(items);
         }
@@ -85,7 +89,8 @@ namespace System.Collections.Immutable
         public static ImmutableDictionary<TKey, TValue> CreateRange<TKey, TValue>(
             IEqualityComparer<TKey>? keyComparer,
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer)
@@ -105,7 +110,8 @@ namespace System.Collections.Immutable
             IEqualityComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer,
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer, valueComparer)
@@ -133,7 +139,8 @@ namespace System.Collections.Immutable
         /// <returns>The new builder.</returns>
         public static ImmutableDictionary<TKey, TValue>.Builder CreateBuilder<TKey, TValue>(
             IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return Create<TKey, TValue>(keyComparer).ToBuilder();
         }
@@ -149,7 +156,8 @@ namespace System.Collections.Immutable
         public static ImmutableDictionary<TKey, TValue>.Builder CreateBuilder<TKey, TValue>(
             IEqualityComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return Create<TKey, TValue>(keyComparer, valueComparer).ToBuilder();
         }
@@ -176,7 +184,8 @@ namespace System.Collections.Immutable
             Func<TSource, TValue> elementSelector,
             IEqualityComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(source, nameof(source));
             Requires.NotNull(keySelector, nameof(keySelector));
@@ -202,7 +211,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable dictionary.</returns>
         public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TKey, TValue>(
             this ImmutableDictionary<TKey, TValue>.Builder builder
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(builder, nameof(builder));
 
@@ -229,7 +239,8 @@ namespace System.Collections.Immutable
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector,
             IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableDictionary(source, keySelector, elementSelector, keyComparer, null);
         }
@@ -245,7 +256,8 @@ namespace System.Collections.Immutable
         public static ImmutableDictionary<TKey, TSource> ToImmutableDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableDictionary(source, keySelector, v => v, null, null);
         }
@@ -263,7 +275,8 @@ namespace System.Collections.Immutable
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableDictionary(source, keySelector, v => v, keyComparer, null);
         }
@@ -286,7 +299,8 @@ namespace System.Collections.Immutable
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableDictionary(source, keySelector, elementSelector, null, null);
         }
@@ -304,7 +318,8 @@ namespace System.Collections.Immutable
             this IEnumerable<KeyValuePair<TKey, TValue>> source,
             IEqualityComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(source, nameof(source));
 
@@ -330,7 +345,8 @@ namespace System.Collections.Immutable
         public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TKey, TValue>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source,
             IEqualityComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableDictionary(source, keyComparer, null);
         }
@@ -344,7 +360,8 @@ namespace System.Collections.Immutable
         /// <returns>An immutable map.</returns>
         public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TKey, TValue>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableDictionary(source, null, null);
         }
@@ -364,7 +381,8 @@ namespace System.Collections.Immutable
             this IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(map, nameof(map));
             Requires.NotNullAllowStructs(key, nameof(key));
@@ -380,7 +398,8 @@ namespace System.Collections.Immutable
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return GetValueOrDefault(dictionary, key, default(TValue)!);
         }
@@ -400,7 +419,8 @@ namespace System.Collections.Immutable
             this IImmutableDictionary<TKey, TValue> dictionary,
             TKey key,
             TValue defaultValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(dictionary, nameof(dictionary));
             Requires.NotNullAllowStructs(key, nameof(key));

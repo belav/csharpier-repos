@@ -3978,7 +3978,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             return x;
         }
 
-        private static int Bar<T>(T x) where T : A, IA
+        private static int Bar<T>(T x)
+            where T : A, IA
         {
             return x.Foo();
         }

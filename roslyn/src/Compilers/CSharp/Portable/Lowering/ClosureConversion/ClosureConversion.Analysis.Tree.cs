@@ -736,7 +736,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 private void PushOrReuseScope<TSymbol>(
                     BoundNode node,
                     ImmutableArray<TSymbol> locals
-                ) where TSymbol : Symbol
+                )
+                    where TSymbol : Symbol
                 {
                     // We should never create a new scope with the same bound node. We can get into
                     // this situation for methods and nested functions where a new scope is created
@@ -818,7 +819,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Scope scope,
                     ImmutableArray<TSymbol> locals,
                     bool declareAsFree = false
-                ) where TSymbol : Symbol
+                )
+                    where TSymbol : Symbol
                 {
                     foreach (var local in locals)
                     {

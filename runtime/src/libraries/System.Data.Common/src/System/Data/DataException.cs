@@ -378,7 +378,8 @@ namespace System.Data
         private static Exception _InvalidEnumArgumentException(string error) =>
             TraceExceptionAsReturnValue(new InvalidEnumArgumentException(error));
 
-        private static Exception _InvalidEnumArgumentException<T>(T value) where T : Enum =>
+        private static Exception _InvalidEnumArgumentException<T>(T value)
+            where T : Enum =>
             _InvalidEnumArgumentException(
                 SR.Format(SR.ADP_InvalidEnumerationValue, typeof(T).Name, value.ToString())
             );

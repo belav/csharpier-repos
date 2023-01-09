@@ -18,7 +18,8 @@ public static class DotNetObjectReference
     /// <returns>An instance of <see cref="DotNetObjectReference{TValue}" />.</returns>
     public static DotNetObjectReference<TValue> Create<
         [DynamicallyAccessedMembers(JSInvokable)] TValue
-    >(TValue value) where TValue : class
+    >(TValue value)
+        where TValue : class
     {
         if (value is null)
         {

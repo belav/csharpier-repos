@@ -6,13 +6,15 @@ using System;
 
 public interface IFoo { }
 
-public class Transition<T> where T : IFoo { }
+public class Transition<T>
+    where T : IFoo { }
 
 public class FooClass : IFoo { }
 
 public struct FooStruct : IFoo { }
 
-public class GenClass<T> where T : IFoo
+public class GenClass<T>
+    where T : IFoo
 {
     public static Transition<T> TransitiveConstraint()
     {
@@ -20,7 +22,8 @@ public class GenClass<T> where T : IFoo
     }
 }
 
-public struct GenStruct<T> where T : IFoo
+public struct GenStruct<T>
+    where T : IFoo
 {
     public static Transition<T> TransitiveConstraint()
     {

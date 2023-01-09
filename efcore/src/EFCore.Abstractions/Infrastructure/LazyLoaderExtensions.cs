@@ -33,7 +33,8 @@ public static class LazyLoaderExtensions
         object entity,
         ref TRelated? navigationField,
         [CallerMemberName] string navigationName = ""
-    ) where TRelated : class
+    )
+        where TRelated : class
     {
         loader?.Load(entity, navigationName);
 

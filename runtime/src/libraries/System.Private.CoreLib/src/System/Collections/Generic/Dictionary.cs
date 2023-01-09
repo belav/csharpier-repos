@@ -19,7 +19,8 @@ namespace System.Collections.Generic
             IDictionary,
             IReadOnlyDictionary<TKey, TValue>,
             ISerializable,
-            IDeserializationCallback where TKey : notnull
+            IDeserializationCallback
+        where TKey : notnull
     {
         // constants for serialization
         private const string VersionName = "Version"; // Do not rename (binary serialization)

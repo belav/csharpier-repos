@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey
     {
-        private abstract class Reader<TStringResult> : IDisposable where TStringResult : class
+        private abstract class Reader<TStringResult> : IDisposable
+            where TStringResult : class
         {
             protected const char OpenParenChar = '(';
             protected const char CloseParenChar = ')';
@@ -373,7 +374,8 @@ namespace Microsoft.CodeAnalysis
                 TOwningSymbol owningSymbol,
                 Func<TOwningSymbol, int, ITypeSymbol?> getContextualType,
                 ImmutableArray<IParameterSymbol> parameters
-            ) where TOwningSymbol : ISymbol
+            )
+                where TOwningSymbol : ISymbol
             {
                 using var originalParameterTypes = this.ReadSymbolKeyArray<
                     TOwningSymbol,

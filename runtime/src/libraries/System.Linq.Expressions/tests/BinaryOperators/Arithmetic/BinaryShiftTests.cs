@@ -959,7 +959,8 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(left ? a << b : a >> b, f());
         }
 
-        private static void VerifyNullShift<T>(T a, bool left, bool useInterpreter) where T : struct
+        private static void VerifyNullShift<T>(T a, bool left, bool useInterpreter)
+            where T : struct
         {
             Expression<Func<T?>> e = Expression.Lambda<Func<T?>>(
                 left

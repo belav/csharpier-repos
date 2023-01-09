@@ -10,7 +10,8 @@ public class B : A { }
 
 public abstract class C { }
 
-public abstract class C<CTParam> : C where CTParam : A { }
+public abstract class C<CTParam> : C
+    where CTParam : A { }
 
 public class D : C<B> { }
 
@@ -21,19 +22,22 @@ public abstract class E
     internal abstract Type NamedObjectType { get; }
 }
 
-public class E<ETParam> : E where ETParam : A
+public class E<ETParam> : E
+    where ETParam : A
 {
     private readonly F<C<ETParam>> components = new F<C<ETParam>>();
 
     internal override Type NamedObjectType => typeof(ETParam);
 
-    public void Register<ERegMethodParam>() where ERegMethodParam : C<ETParam>, new()
+    public void Register<ERegMethodParam>()
+        where ERegMethodParam : C<ETParam>, new()
     {
         components.Register<ERegMethodParam>();
     }
 }
 
-public class F<FTParam> where FTParam : class
+public class F<FTParam>
+    where FTParam : class
 {
     private readonly HashSet<Type> componentTypes = new HashSet<Type>();
 
@@ -50,7 +54,8 @@ public class G
 
     private readonly Dictionary<Type, E> subcontainersByRegisteredType = new Dictionary<Type, E>();
 
-    public E<ETParam> RegisterNamedObjectType<ETParam>() where ETParam : A
+    public E<ETParam> RegisterNamedObjectType<ETParam>()
+        where ETParam : A
     {
         return RegisterSubcontainer(new E<ETParam>());
     }

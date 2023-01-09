@@ -71,7 +71,8 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
         }
 
         [Kept]
-        static C[] Test3<T>(ref C c) where T : C
+        static C[] Test3<T>(ref C c)
+            where T : C
         {
             return null;
         }
@@ -116,6 +117,7 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
 
         [Kept]
         [KeptMember(".ctor()")]
-        class GC<T> where T : I { }
+        class GC<T>
+            where T : I { }
     }
 }

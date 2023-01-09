@@ -21,7 +21,8 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     public static IncrementalValuesProvider<T> ForAttributeWithSimpleName<T>(
         this IncrementalGeneratorInitializationContext context,
         string simpleName
-    ) where T : SyntaxNode
+    )
+        where T : SyntaxNode
     {
         return context.SyntaxProvider
             .ForAttributeWithSimpleName(simpleName, (node, _) => node is T)
@@ -32,7 +33,8 @@ internal static class IncrementalGeneratorInitializationContextExtensions
     public static IncrementalValuesProvider<T> ForAttributeWithMetadataName<T>(
         this IncrementalGeneratorInitializationContext context,
         string fullyQualifiedMetadataName
-    ) where T : SyntaxNode
+    )
+        where T : SyntaxNode
     {
         return context.SyntaxProvider.ForAttributeWithMetadataName(
             fullyQualifiedMetadataName,

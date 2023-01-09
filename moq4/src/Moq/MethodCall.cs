@@ -231,7 +231,8 @@ namespace Moq
         public void SetRaiseEventBehavior<TMock>(
             Action<TMock> eventExpression,
             params object[] args
-        ) where TMock : class
+        )
+            where TMock : class
         {
             Guard.NotNull(eventExpression, nameof(eventExpression));
 

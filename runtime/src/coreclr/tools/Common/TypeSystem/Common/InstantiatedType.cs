@@ -257,7 +257,8 @@ namespace Internal.TypeSystem
             T[] uninstantiatedTypes,
             Instantiation typeInstantiation,
             Instantiation methodInstantiation
-        ) where T : TypeDesc
+        )
+            where T : TypeDesc
         {
             T[] clone = null;
 

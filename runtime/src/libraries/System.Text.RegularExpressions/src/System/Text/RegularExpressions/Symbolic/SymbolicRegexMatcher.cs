@@ -1025,7 +1025,8 @@ namespace System.Text.RegularExpressions.Symbolic
             int i,
             int iEnd,
             PerThreadData perThreadData
-        ) where TInputReader : struct, IInputReader
+        )
+            where TInputReader : struct, IInputReader
         {
             // Pick the correct start state based on previous character kind.
             MatchingState<TSet> initialState = _initialStates[
@@ -1782,7 +1783,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 ReadOnlySpan<char> input,
                 ref CurrentState state,
                 ref int pos
-            ) where TInputReader : struct, IInputReader;
+            )
+                where TInputReader : struct, IInputReader;
         }
 
         /// <summary>
@@ -1796,7 +1798,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 ReadOnlySpan<char> input,
                 ref CurrentState state,
                 ref int pos
-            ) where TInputReader : struct, IInputReader
+            )
+                where TInputReader : struct, IInputReader
             {
                 // return true to indicate that the current position is a possible starting position
                 return true;
@@ -1814,7 +1817,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 ReadOnlySpan<char> input,
                 ref CurrentState state,
                 ref int pos
-            ) where TInputReader : struct, IInputReader
+            )
+                where TInputReader : struct, IInputReader
             {
                 // Find the first position that matches with some likely character.
                 if (!matcher._findOpts!.TryFindNextStartingPositionLeftToRight(input, ref pos, 0))
@@ -1844,7 +1848,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 in CurrentState state,
                 int positionId,
                 StateFlags flags
-            ) where TStateHandler : struct, IStateHandler;
+            )
+                where TStateHandler : struct, IStateHandler;
         }
 
         /// <summary>
@@ -1858,7 +1863,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 in CurrentState state,
                 int positionId,
                 StateFlags flags
-            ) where TStateHandler : struct, IStateHandler
+            )
+                where TStateHandler : struct, IStateHandler
             {
                 Debug.Assert(!matcher._pattern._info.ContainsSomeAnchor);
                 return flags.IsNullable();
@@ -1876,7 +1882,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 in CurrentState state,
                 int positionId,
                 StateFlags flags
-            ) where TStateHandler : struct, IStateHandler
+            )
+                where TStateHandler : struct, IStateHandler
             {
                 return flags.IsNullable()
                     || (

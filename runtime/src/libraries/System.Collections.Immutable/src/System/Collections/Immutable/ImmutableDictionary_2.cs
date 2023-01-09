@@ -20,7 +20,8 @@ namespace System.Collections.Immutable
             IImmutableDictionaryInternal<TKey, TValue>,
             IHashKeyCollection<TKey>,
             IDictionary<TKey, TValue>,
-            IDictionary where TKey : notnull
+            IDictionary
+        where TKey : notnull
     {
         /// <summary>
         /// An empty immutable dictionary with default equality comparers.

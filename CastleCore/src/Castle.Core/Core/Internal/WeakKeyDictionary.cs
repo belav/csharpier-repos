@@ -18,7 +18,8 @@ namespace Castle.Core.Internal
     using System.Collections;
     using System.Collections.Generic;
 
-    internal class WeakKeyDictionary<TKey, TValue> : IDictionary<TKey, TValue> where TKey : class
+    internal class WeakKeyDictionary<TKey, TValue> : IDictionary<TKey, TValue>
+        where TKey : class
     {
         private readonly Dictionary<object, TValue> dictionary;
         private readonly WeakKeyComparer<TKey> comparer;

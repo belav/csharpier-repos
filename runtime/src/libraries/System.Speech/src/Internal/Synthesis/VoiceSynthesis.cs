@@ -313,7 +313,8 @@ namespace System.Speech.Internal.Synthesis
             TtsEventId ttsEvent,
             ref EventHandler<T> internalEventHandler,
             EventHandler<T> eventHandler
-        ) where T : PromptEventArgs
+        )
+            where T : PromptEventArgs
         {
             lock (_thisObjectLock)
             {
@@ -336,7 +337,8 @@ namespace System.Speech.Internal.Synthesis
             TtsEventId ttsEvent,
             ref EventHandler<T> internalEventHandler,
             EventHandler<T> eventHandler
-        ) where T : EventArgs
+        )
+            where T : EventArgs
         {
             lock (_thisObjectLock)
             {

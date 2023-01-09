@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void RecordDefinition<T>(
             SmallDictionary<string, Symbol> declarationMap,
             ImmutableArray<T> definitions
-        ) where T : Symbol
+        )
+            where T : Symbol
         {
             foreach (Symbol s in definitions)
             {

@@ -291,7 +291,8 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class GenericArraySortHelper<T> where T : IComparable<T>
+    internal sealed partial class GenericArraySortHelper<T>
+        where T : IComparable<T>
     {
         // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not execute it
 

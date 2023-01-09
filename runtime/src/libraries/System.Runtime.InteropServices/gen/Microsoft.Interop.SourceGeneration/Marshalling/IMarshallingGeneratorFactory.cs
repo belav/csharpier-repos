@@ -44,7 +44,8 @@ namespace Microsoft.Interop
         public static MarshallingGeneratorFactoryKey<T> Create<T>(
             T key,
             IMarshallingGeneratorFactory factory
-        ) where T : IEquatable<T>
+        )
+            where T : IEquatable<T>
         {
             return new MarshallingGeneratorFactoryKey<T> { Key = key, GeneratorFactory = factory };
         }

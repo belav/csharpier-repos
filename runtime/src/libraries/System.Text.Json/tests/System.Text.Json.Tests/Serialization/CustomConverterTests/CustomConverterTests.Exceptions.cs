@@ -30,7 +30,8 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        private static void ConverterFailNoRethrow<TException>() where TException : Exception, new()
+        private static void ConverterFailNoRethrow<TException>()
+            where TException : Exception, new()
         {
             var options = new JsonSerializerOptions();
             JsonConverter converter = new FailConverter<TException>();

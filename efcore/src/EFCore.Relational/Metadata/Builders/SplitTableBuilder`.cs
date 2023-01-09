@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <typeparam name="TEntity">The entity type being configured.</typeparam>
 public class SplitTableBuilder<TEntity>
     : SplitTableBuilder,
-        IInfrastructure<EntityTypeBuilder<TEntity>> where TEntity : class
+        IInfrastructure<EntityTypeBuilder<TEntity>>
+    where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

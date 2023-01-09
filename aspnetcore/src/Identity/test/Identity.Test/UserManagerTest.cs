@@ -1813,7 +1813,8 @@ public class UserManagerTest
         );
     }
 
-    private class BadPasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : class
+    private class BadPasswordValidator<TUser> : IPasswordValidator<TUser>
+        where TUser : class
     {
         public static readonly IdentityError ErrorMessage = new IdentityError
         {

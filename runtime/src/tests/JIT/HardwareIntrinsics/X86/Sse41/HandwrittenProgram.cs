@@ -32,7 +32,8 @@ namespace IntelHardwareIntrinsicTest._Sse41
             return (void*)(buffer + misalignment);
         }
 
-        public unsafe struct TestTable<T> : IDisposable where T : struct
+        public unsafe struct TestTable<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;
@@ -76,7 +77,8 @@ namespace IntelHardwareIntrinsicTest._Sse41
             }
         }
 
-        public unsafe struct TestTable_SingleArray<T> : IDisposable where T : struct
+        public unsafe struct TestTable_SingleArray<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
 
@@ -98,7 +100,8 @@ namespace IntelHardwareIntrinsicTest._Sse41
             }
         }
 
-        public unsafe struct AlignedTestTable<T> : IDisposable where T : struct
+        public unsafe struct AlignedTestTable<T> : IDisposable
+            where T : struct
         {
             private byte[] inArray;
             public T[] outArray;
@@ -158,7 +161,8 @@ namespace IntelHardwareIntrinsicTest._Sse41
             }
         }
 
-        public unsafe struct TestTable_2Input<T> : IDisposable where T : struct
+        public unsafe struct TestTable_2Input<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public T[] inArray2;

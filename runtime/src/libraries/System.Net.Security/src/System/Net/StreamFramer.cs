@@ -24,7 +24,8 @@ namespace System.Net
         public async ValueTask<byte[]?> ReadMessageAsync<TAdapter>(
             Stream stream,
             CancellationToken cancellationToken
-        ) where TAdapter : IReadWriteAdapter
+        )
+            where TAdapter : IReadWriteAdapter
         {
             if (_eof)
             {
@@ -92,7 +93,8 @@ namespace System.Net
             Stream stream,
             byte[] message,
             CancellationToken cancellationToken
-        ) where TAdapter : IReadWriteAdapter
+        )
+            where TAdapter : IReadWriteAdapter
         {
             _writeHeader.PayloadSize = message.Length;
             _writeHeader.CopyTo(_writeHeaderBuffer, 0);

@@ -156,13 +156,17 @@ namespace System.Reflection.Tests
 
     public class D4<T> : C1, I3<string> { }
 
-    public class E1<T> where T : ImI1 { }
+    public class E1<T>
+        where T : ImI1 { }
 
-    public class E2<T> where T : C1, I21 { }
+    public class E2<T>
+        where T : C1, I21 { }
 
-    public class E3<T> where T : C1, I3<T> { }
+    public class E3<T>
+        where T : C1, I3<T> { }
 
-    public class E4<T> where T : C1, I3<int> { }
+    public class E4<T>
+        where T : C1, I3<int> { }
 
     public enum MyEnum1
     {

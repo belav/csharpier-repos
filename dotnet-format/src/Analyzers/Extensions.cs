@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
         public static bool TryCreateInstance<T>(
             this Type type,
             [NotNullWhen(returnValue: true)] out T? instance
-        ) where T : class
+        )
+            where T : class
         {
             try
             {

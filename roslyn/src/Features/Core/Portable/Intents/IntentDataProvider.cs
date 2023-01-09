@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Features.Intents
             FallbackOptions = fallbackOptions;
         }
 
-        public T? GetIntentData<T>() where T : class
+        public T? GetIntentData<T>()
+            where T : class
         {
             if (_serializedIntentData != null)
             {

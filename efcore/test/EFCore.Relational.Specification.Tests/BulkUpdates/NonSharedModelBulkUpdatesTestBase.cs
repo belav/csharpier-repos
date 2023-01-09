@@ -188,7 +188,8 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
         Func<TContext> contextCreator,
         Func<TContext, IQueryable<TResult>> query,
         int rowsAffectedCount
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         if (async)
         {

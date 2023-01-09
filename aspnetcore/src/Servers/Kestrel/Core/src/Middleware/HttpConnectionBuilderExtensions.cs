@@ -14,7 +14,8 @@ internal static class HttpConnectionBuilderExtensions
         IHttpApplication<TContext> application,
         HttpProtocols protocols,
         bool addAltSvcHeader
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         var middleware = new HttpConnectionMiddleware<TContext>(
             serviceContext,
@@ -34,7 +35,8 @@ internal static class HttpConnectionBuilderExtensions
         IHttpApplication<TContext> application,
         HttpProtocols protocols,
         bool addAltSvcHeader
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         var middleware = new HttpMultiplexedConnectionMiddleware<TContext>(
             serviceContext,

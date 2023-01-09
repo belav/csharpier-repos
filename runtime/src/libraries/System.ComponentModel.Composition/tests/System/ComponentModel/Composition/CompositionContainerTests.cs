@@ -3243,7 +3243,8 @@ namespace System.ComponentModel.Composition
 
         public interface IMefCollection { }
 
-        public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection where TC : TP { }
+        public interface IMefCollection<TC, TP> : IList<TC>, IMefCollection
+            where TC : TP { }
 
         public class BaseClass { }
 

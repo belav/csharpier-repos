@@ -176,7 +176,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>, T
+        )
+            where TComparable : IComparable<T>, T
         {
             TestSpan(array, value, expectedIndex);
             TestReadOnlySpan(array, value, expectedIndex);
@@ -190,7 +191,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>
+        )
+            where TComparable : IComparable<T>
         {
             var span = new Span<T>(array);
             var index = span.BinarySearch(value);
@@ -201,7 +203,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>
+        )
+            where TComparable : IComparable<T>
         {
             var span = new ReadOnlySpan<T>(array);
             var index = span.BinarySearch(value);
@@ -212,7 +215,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>, T
+        )
+            where TComparable : IComparable<T>, T
         {
             var span = new Span<T>(array);
             var index = span.BinarySearch((IComparable<T>)value);
@@ -223,7 +227,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>, T
+        )
+            where TComparable : IComparable<T>, T
         {
             var span = new ReadOnlySpan<T>(array);
             var index = span.BinarySearch((IComparable<T>)value);
@@ -234,7 +239,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>, T
+        )
+            where TComparable : IComparable<T>, T
         {
             var span = new Span<T>(array);
             var index = span.BinarySearch(value, Comparer<T>.Default);
@@ -245,7 +251,8 @@ namespace System.SpanTests
             T[] array,
             TComparable value,
             int expectedIndex
-        ) where TComparable : IComparable<T>, T
+        )
+            where TComparable : IComparable<T>, T
         {
             var span = new ReadOnlySpan<T>(array);
             var index = span.BinarySearch(value, Comparer<T>.Default);

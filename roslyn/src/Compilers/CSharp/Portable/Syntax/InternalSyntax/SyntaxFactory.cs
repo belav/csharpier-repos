@@ -437,12 +437,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return SyntaxTrivia.Create(SyntaxKind.DocumentationCommentExteriorTrivia, text);
         }
 
-        public static SyntaxList<TNode> List<TNode>() where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>()
+            where TNode : CSharpSyntaxNode
         {
             return default(SyntaxList<TNode>);
         }
 
-        public static SyntaxList<TNode> List<TNode>(TNode node) where TNode : CSharpSyntaxNode
+        public static SyntaxList<TNode> List<TNode>(TNode node)
+            where TNode : CSharpSyntaxNode
         {
             return new SyntaxList<TNode>(SyntaxList.List(node));
         }
@@ -505,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             TNode node1,
             SyntaxToken token,
             TNode node2
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             return new SeparatedSyntaxList<TNode>(
                 new SyntaxList<CSharpSyntaxNode>(SyntaxList.List(node1, token, node2))
@@ -514,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         public static SeparatedSyntaxList<TNode> SeparatedList<TNode>(
             params CSharpSyntaxNode[] nodes
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             if (nodes != null)
             {

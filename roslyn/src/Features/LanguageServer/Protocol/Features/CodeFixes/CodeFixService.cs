@@ -994,7 +994,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             Func<ImmutableArray<Diagnostic>, Task<ImmutableArray<CodeFix>>> getFixes,
             CodeActionOptionsProvider fallbackOptions,
             CancellationToken cancellationToken
-        ) where TCodeFixProvider : notnull
+        )
+            where TCodeFixProvider : notnull
         {
             cancellationToken.ThrowIfCancellationRequested();
 

@@ -952,7 +952,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionNullableGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             // null arrays
             CheckExceptionNullableGenericWithStructRestrictionArrayIndex<Ts>(
@@ -1544,7 +1545,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckNullableGenericWithStructRestrictionArrayIndex<Ts>(
             Ts?[] array,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -1906,7 +1908,8 @@ namespace System.Linq.Expressions.Tests
             Ts?[] array,
             int index,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts?>> e = Expression.Lambda<Func<Ts?>>(
                 Expression.ArrayIndex(
@@ -2287,7 +2290,8 @@ namespace System.Linq.Expressions.Tests
             Ts?[] array,
             int index,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(

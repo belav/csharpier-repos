@@ -36,7 +36,8 @@ public static class JsonProtocolDependencyInjectionExtensions
     public static TBuilder AddJsonProtocol<TBuilder>(
         this TBuilder builder,
         Action<JsonHubProtocolOptions> configure
-    ) where TBuilder : ISignalRBuilder
+    )
+        where TBuilder : ISignalRBuilder
     {
         builder.Services.TryAddEnumerable(
             ServiceDescriptor.Singleton<IHubProtocol, JsonHubProtocol>()

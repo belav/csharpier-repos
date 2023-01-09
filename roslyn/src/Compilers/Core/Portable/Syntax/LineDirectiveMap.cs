@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
     /// directives, then the array has just one element in it. To map line numbers, a binary search
     /// of the mapping entries is done and nearest line mapping is applied.
     /// </summary>
-    internal abstract partial class LineDirectiveMap<TDirective> where TDirective : SyntaxNode
+    internal abstract partial class LineDirectiveMap<TDirective>
+        where TDirective : SyntaxNode
     {
         internal readonly ImmutableArray<LineMappingEntry> Entries;
 

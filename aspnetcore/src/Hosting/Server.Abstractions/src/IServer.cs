@@ -24,7 +24,8 @@ public interface IServer : IDisposable
     Task StartAsync<TContext>(
         IHttpApplication<TContext> application,
         CancellationToken cancellationToken
-    ) where TContext : notnull;
+    )
+        where TContext : notnull;
 
     /// <summary>
     /// Stop processing requests and shut down the server, gracefully if possible.

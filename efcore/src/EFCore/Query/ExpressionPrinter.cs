@@ -195,7 +195,8 @@ public class ExpressionPrinter : ExpressionVisitor
     public virtual void VisitCollection<T>(
         IReadOnlyCollection<T> items,
         Action<ExpressionPrinter>? joinAction = null
-    ) where T : Expression
+    )
+        where T : Expression
     {
         joinAction ??= (p => p.Append(", "));
 

@@ -890,7 +890,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             IEnumerable<SyntaxNode> statements,
             CSharpCodeGenerationContextInfo info,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode
+        )
+            where TDeclarationNode : SyntaxNode
         {
             var location = info.Context.BestLocation;
             CheckLocation(destinationMember, location);
@@ -941,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             TDeclarationNode destinationMember,
             IEnumerable<SyntaxNode> statements,
             MemberDeclarationSyntax memberDeclaration
-        ) where TDeclarationNode : SyntaxNode
+        )
+            where TDeclarationNode : SyntaxNode
         {
             var body = memberDeclaration.GetBody();
             if (body == null)

@@ -26,7 +26,8 @@ namespace System.Threading.RateLimiting
         public static PartitionedRateLimiter<TResource> Create<TResource, TPartitionKey>(
             Func<TResource, RateLimitPartition<TPartitionKey>> partitioner,
             IEqualityComparer<TPartitionKey>? equalityComparer = null
-        ) where TPartitionKey : notnull
+        )
+            where TPartitionKey : notnull
         {
             return new DefaultPartitionedRateLimiter<TResource, TPartitionKey>(
                 partitioner,

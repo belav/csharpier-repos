@@ -46,7 +46,8 @@ namespace System.Diagnostics.Metrics
     //   for different label set sizes because most instruments always specify labelsets with the same number of labels (most likely
     //   zero).
     [System.Security.SecuritySafeCritical] // using SecurityCritical type ReadOnlySpan
-    internal struct AggregatorStore<TAggregator> where TAggregator : Aggregator
+    internal struct AggregatorStore<TAggregator>
+        where TAggregator : Aggregator
     {
         // this union can be:
         // null
@@ -239,7 +240,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    internal sealed class MultiSizeLabelNameDictionary<TAggregator> where TAggregator : Aggregator
+    internal sealed class MultiSizeLabelNameDictionary<TAggregator>
+        where TAggregator : Aggregator
     {
         private TAggregator? NoLabelAggregator;
         private FixedSizeLabelNameDictionary<StringSequence1, ObjectSequence1, TAggregator>? Label1;
@@ -447,7 +449,8 @@ namespace System.Diagnostics.Metrics
             ref AggregatorStore<TAggregator> aggregatorStore,
             Func<TAggregator?> createAggregatorFunc,
             ReadOnlySpan<KeyValuePair<string, object?>> labels
-        ) where TAggregator : Aggregator
+        )
+            where TAggregator : Aggregator
         {
             LabelInstruction[] instructions = Compile(labels);
             Array.Sort(

@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Adornments
     /// <summary>
     /// UI manager for graphic overlay tags. These tags will simply paint something related to the text.
     /// </summary>
-    internal class AdornmentManager<T> where T : GraphicsTag
+    internal class AdornmentManager<T>
+        where T : GraphicsTag
     {
         private readonly object _invalidatedSpansLock = new object();
 

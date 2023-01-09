@@ -4042,7 +4042,8 @@ namespace System.Linq.Expressions.Tests
             Func<T?, U> f,
             Expression<Func<T?, U>> e,
             bool useInterpreter
-        ) where T : struct
+        )
+            where T : struct
         {
             Func<T?, U> d = e.Compile(useInterpreter);
             Assert.Equal(f(arg), d(arg));

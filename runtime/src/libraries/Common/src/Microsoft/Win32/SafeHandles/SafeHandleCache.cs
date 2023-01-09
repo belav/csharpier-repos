@@ -10,7 +10,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     /// <summary>Provides a cache for special instances of SafeHandles.</summary>
     /// <typeparam name="T">Specifies the type of SafeHandle.</typeparam>
-    internal static class SafeHandleCache<T> where T : SafeHandle
+    internal static class SafeHandleCache<T>
+        where T : SafeHandle
     {
         private static T? s_invalidHandle;
 

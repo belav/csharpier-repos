@@ -23,7 +23,8 @@ namespace Internal.Reflection.Extensions.NonPortable
     // This class is only used by the CustomAttributeExtensions class - hence, we bake in the CustomAttributeExtensions behavior of
     // filtering out WinRT attributes.
     //
-    internal abstract class CustomAttributeSearcher<E> where E : class
+    internal abstract class CustomAttributeSearcher<E>
+        where E : class
     {
         //
         // Returns the effective set of custom attributes on a reflection element.

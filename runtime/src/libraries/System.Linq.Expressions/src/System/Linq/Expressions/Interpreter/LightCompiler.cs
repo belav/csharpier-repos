@@ -1799,7 +1799,8 @@ namespace System.Linq.Expressions.Interpreter
             _locals.UndefineLocal(temp, _instructions.Count);
         }
 
-        private void CompileIntSwitchExpression<T>(SwitchExpression node) where T : notnull
+        private void CompileIntSwitchExpression<T>(SwitchExpression node)
+            where T : notnull
         {
             LabelInfo end = DefineLabel(node: null);
             bool hasValue = node.Type != typeof(void);

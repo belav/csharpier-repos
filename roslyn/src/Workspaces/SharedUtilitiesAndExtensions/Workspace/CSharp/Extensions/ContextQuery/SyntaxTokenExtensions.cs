@@ -608,7 +608,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             this SyntaxToken targetToken,
             int position,
             SyntaxKind kind = SyntaxKind.None
-        ) where TMemberNode : SyntaxNode
+        )
+            where TMemberNode : SyntaxNode
         {
             if (!IsAccessorDeclarationContextWorker(ref targetToken))
             {

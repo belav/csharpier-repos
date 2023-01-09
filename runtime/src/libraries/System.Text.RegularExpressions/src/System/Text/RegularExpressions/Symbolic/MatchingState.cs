@@ -9,7 +9,8 @@ using System.Net;
 namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>Captures a state explored during matching.</summary>
-    internal sealed class MatchingState<TSet> where TSet : IComparable<TSet>, IEquatable<TSet>
+    internal sealed class MatchingState<TSet>
+        where TSet : IComparable<TSet>, IEquatable<TSet>
     {
         internal MatchingState(SymbolicRegexNode<TSet> node, uint prevCharKind)
         {

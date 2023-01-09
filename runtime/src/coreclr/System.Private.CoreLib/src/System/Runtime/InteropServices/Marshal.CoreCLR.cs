@@ -508,7 +508,8 @@ namespace System.Runtime.InteropServices
         private static extern IntPtr CreateAggregatedObjectNative(IntPtr pOuter, object o);
 
         [SupportedOSPlatform("windows")]
-        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o) where T : notnull
+        public static IntPtr CreateAggregatedObject<T>(IntPtr pOuter, T o)
+            where T : notnull
         {
             if (!IsBuiltInComSupported)
             {

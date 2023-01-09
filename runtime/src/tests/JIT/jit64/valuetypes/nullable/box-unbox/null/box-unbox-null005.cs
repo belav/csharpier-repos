@@ -21,7 +21,8 @@ internal class NullableTest
         return ((object)o) == null;
     }
 
-    private static bool BoxUnboxToQGen<T>(T? o) where T : struct
+    private static bool BoxUnboxToQGen<T>(T? o)
+        where T : struct
     {
         return ((T?)o) == null;
     }

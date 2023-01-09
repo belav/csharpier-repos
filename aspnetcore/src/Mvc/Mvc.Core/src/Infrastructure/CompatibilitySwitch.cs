@@ -51,7 +51,8 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// pattern. This is framework infrastructure and should not be used by application code.
 /// </summary>
 /// <typeparam name="TValue">The type of value associated with the compatibility switch.</typeparam>
-public class CompatibilitySwitch<TValue> : ICompatibilitySwitch where TValue : struct
+public class CompatibilitySwitch<TValue> : ICompatibilitySwitch
+    where TValue : struct
 {
     private TValue _value;
 

@@ -150,13 +150,15 @@ internal partial class VectorTest
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> VectorOne<T>() where T : struct
+    public static Vector<T> VectorOne<T>()
+        where T : struct
     {
         return Vector<T>.One;
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector<T> VectorPlusOne<T>(Vector<T> v1) where T : struct
+    public static Vector<T> VectorPlusOne<T>(Vector<T> v1)
+        where T : struct
     {
         Vector<T> v2 = VectorOne<T>();
         return v1 + v2;

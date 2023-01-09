@@ -16,6 +16,7 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
     public interface GenericMethodWhereOneGenParamInheritsTheOther
     {
-        T2 Foo<T1, T2>(T1 foo) where T1 : T2;
+        T2 Foo<T1, T2>(T1 foo)
+            where T1 : T2;
     }
 }

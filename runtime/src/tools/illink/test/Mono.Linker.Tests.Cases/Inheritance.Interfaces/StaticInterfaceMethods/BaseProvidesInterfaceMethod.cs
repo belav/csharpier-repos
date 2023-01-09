@@ -20,7 +20,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
         }
 
         [Kept]
-        static void CallMethod<T>() where T : IFoo
+        static void CallMethod<T>()
+            where T : IFoo
         {
             T.Method();
         }

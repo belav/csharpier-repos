@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides validation services for user classes.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
+public class UserValidator<TUser> : IUserValidator<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="UserValidator{TUser}"/>.

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static partial class ITextViewExtensions
     {
-        private class AutoClosingViewProperty<TProperty, TTextView> where TTextView : ITextView
+        private class AutoClosingViewProperty<TProperty, TTextView>
+            where TTextView : ITextView
         {
             private readonly TTextView _textView;
             private readonly Dictionary<object, TProperty> _map = new();

@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 internal sealed class DefaultRemoteApplicationPathsProvider<
     [DynamicallyAccessedMembers(JsonSerialized)] TProviderOptions
-> : IRemoteAuthenticationPathsProvider where TProviderOptions : class, new()
+> : IRemoteAuthenticationPathsProvider
+    where TProviderOptions : class, new()
 {
     private readonly IOptions<RemoteAuthenticationOptions<TProviderOptions>> _options;
 

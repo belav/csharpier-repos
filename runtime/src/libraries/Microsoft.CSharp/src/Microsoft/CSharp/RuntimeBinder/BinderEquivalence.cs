@@ -38,7 +38,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             new BinderEqualityComparer()
         );
 
-        internal static T TryGetExisting<T>(this T binder) where T : ICSharpBinder
+        internal static T TryGetExisting<T>(this T binder)
+            where T : ICSharpBinder
         {
             var fromCache = binderEquivalenceCache.GetOrAdd(binder, binder);
             if (fromCache == (object)binder)

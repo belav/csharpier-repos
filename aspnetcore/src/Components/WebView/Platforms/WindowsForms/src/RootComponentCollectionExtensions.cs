@@ -25,7 +25,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WindowsForms
             this ObservableCollection<RootComponent> components,
             string selector,
             IDictionary<string, object> parameters = null
-        ) where TComponent : IComponent
+        )
+            where TComponent : IComponent
         {
             components.Add(new RootComponent(selector, typeof(TComponent), parameters));
         }

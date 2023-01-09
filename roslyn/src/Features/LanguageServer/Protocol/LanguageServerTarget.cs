@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             static Lazy<ILspService, LspServiceMetadataView> CreateLspServiceInstance<T>(
                 T lspServiceInstance
-            ) where T : ILspService
+            )
+                where T : ILspService
             {
                 return new Lazy<ILspService, LspServiceMetadataView>(
                     () => lspServiceInstance,
@@ -139,7 +140,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             public async Task<TResponseType?> EntryPointAsync<TRequestType, TResponseType>(
                 TRequestType requestType,
                 CancellationToken cancellationToken
-            ) where TRequestType : class
+            )
+                where TRequestType : class
             {
                 Contract.ThrowIfNull(
                     _target._clientCapabilities,
@@ -377,8 +379,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 _server = server;
             }
 
-            public T GetRequiredLspService<T>() where T : class, ILspService =>
-                _server._lspServices.GetRequiredService<T>();
+            public T GetRequiredLspService<T>()
+                where T : class, ILspService => _server._lspServices.GetRequiredService<T>();
 
             internal RequestExecutionQueue.TestAccessor GetQueueAccessor() =>
                 _server._queue!.GetTestAccessor();

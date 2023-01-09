@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public ISpanMappingService SpanMappingService { get; }
 
-        public TService? GetService<TService>() where TService : class, IDocumentService
+        public TService? GetService<TService>()
+            where TService : class, IDocumentService
         {
             if (DocumentOperationService is TService service)
             {

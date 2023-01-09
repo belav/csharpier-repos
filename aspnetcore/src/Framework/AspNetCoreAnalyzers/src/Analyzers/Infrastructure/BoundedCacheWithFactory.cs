@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Analyzers.Infrastructure;
 /// Acts as a good alternative to <see cref="System.Runtime.CompilerServices.ConditionalWeakTable{TKey, TValue}"/>
 /// when the cached value has a cyclic reference to the key preventing early garbage collection of entries.
 /// </summary>
-internal class BoundedCacheWithFactory<TKey, TValue> where TKey : class
+internal class BoundedCacheWithFactory<TKey, TValue>
+    where TKey : class
 {
     // Bounded weak reference cache.
     // Size 5 is an arbitrarily chosen bound, which can be tuned in future as required.

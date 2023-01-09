@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken,
             IEnumerable<SyntaxTrivia>? trivia,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)
                 root.ReplaceCore(
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxNode oldNode,
             SyntaxNode newNode
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             if (oldNode == newNode)
             {
@@ -106,7 +108,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxNode oldNode,
             IEnumerable<SyntaxNode> newNodes
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.ReplaceNodeInListCore(oldNode, newNodes);
         }
@@ -122,7 +125,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> newNodes
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.InsertNodesInListCore(nodeInList, newNodes, insertBefore: true);
         }
@@ -138,7 +142,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxNode nodeInList,
             IEnumerable<SyntaxNode> newNodes
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.InsertNodesInListCore(nodeInList, newNodes, insertBefore: false);
         }
@@ -154,7 +159,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxToken tokenInList,
             IEnumerable<SyntaxToken> newTokens
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.ReplaceTokenInListCore(tokenInList, newTokens);
         }
@@ -170,7 +176,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxToken tokenInList,
             IEnumerable<SyntaxToken> newTokens
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.InsertTokensInListCore(tokenInList, newTokens, insertBefore: true);
         }
@@ -186,7 +193,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxToken tokenInList,
             IEnumerable<SyntaxToken> newTokens
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.InsertTokensInListCore(tokenInList, newTokens, insertBefore: false);
         }
@@ -202,7 +210,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxTrivia oldTrivia,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.ReplaceTriviaInListCore(oldTrivia, newTrivia);
         }
@@ -218,7 +227,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxTrivia trivia,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.InsertTriviaInListCore(trivia, newTrivia, insertBefore: true);
         }
@@ -234,7 +244,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxTrivia trivia,
             IEnumerable<SyntaxTrivia> newTrivia
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)root.InsertTriviaInListCore(trivia, newTrivia, insertBefore: false);
         }
@@ -252,7 +263,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             IEnumerable<SyntaxToken> tokens,
             Func<SyntaxToken, SyntaxToken, SyntaxToken> computeReplacementToken
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)
                 root.ReplaceCore<SyntaxNode>(
@@ -273,7 +285,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxToken oldToken,
             SyntaxToken newToken
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)
                 root.ReplaceCore<SyntaxNode>(
@@ -295,7 +308,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             IEnumerable<SyntaxTrivia> trivia,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia> computeReplacementTrivia
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)
                 root.ReplaceCore<SyntaxNode>(
@@ -315,7 +329,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxTrivia trivia,
             SyntaxTrivia newTrivia
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot)
                 root.ReplaceCore<SyntaxNode>(
@@ -336,7 +351,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             SyntaxNode node,
             SyntaxRemoveOptions options
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot?)root.RemoveNodesCore(new[] { node }, options);
         }
@@ -352,7 +368,8 @@ namespace Microsoft.CodeAnalysis
             this TRoot root,
             IEnumerable<SyntaxNode> nodes,
             SyntaxRemoveOptions options
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             return (TRoot?)root.RemoveNodesCore(nodes, options);
         }
@@ -372,7 +389,8 @@ namespace Microsoft.CodeAnalysis
             this TNode node,
             string indentation,
             bool elasticTrivia
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return (TNode)node.NormalizeWhitespaceCore(indentation, DefaultEOL, elasticTrivia);
         }
@@ -391,7 +409,8 @@ namespace Microsoft.CodeAnalysis
             string indentation = DefaultIndentation,
             string eol = DefaultEOL,
             bool elasticTrivia = false
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return (TNode)node.NormalizeWhitespaceCore(indentation, eol, elasticTrivia);
         }
@@ -410,7 +429,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a new node from this node without leading or trailing trivia.
         /// </summary>
-        public static TSyntax WithoutTrivia<TSyntax>(this TSyntax syntax) where TSyntax : SyntaxNode
+        public static TSyntax WithoutTrivia<TSyntax>(this TSyntax syntax)
+            where TSyntax : SyntaxNode
         {
             return syntax.WithoutLeadingTrivia().WithoutTrailingTrivia();
         }
@@ -440,7 +460,8 @@ namespace Microsoft.CodeAnalysis
         public static TSyntax WithLeadingTrivia<TSyntax>(
             this TSyntax node,
             IEnumerable<SyntaxTrivia>? trivia
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             var first = node.GetFirstToken(includeZeroWidth: true);
             var newFirst = first.WithLeadingTrivia(trivia);
@@ -462,7 +483,8 @@ namespace Microsoft.CodeAnalysis
         public static TSyntax WithLeadingTrivia<TSyntax>(
             this TSyntax node,
             params SyntaxTrivia[]? trivia
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             return node.WithLeadingTrivia((IEnumerable<SyntaxTrivia>?)trivia);
         }
@@ -473,7 +495,8 @@ namespace Microsoft.CodeAnalysis
         public static TSyntax WithTrailingTrivia<TSyntax>(
             this TSyntax node,
             SyntaxTriviaList trivia
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             var last = node.GetLastToken(includeZeroWidth: true);
             var newLast = last.WithTrailingTrivia(trivia);
@@ -486,7 +509,8 @@ namespace Microsoft.CodeAnalysis
         public static TSyntax WithTrailingTrivia<TSyntax>(
             this TSyntax node,
             IEnumerable<SyntaxTrivia>? trivia
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             var last = node.GetLastToken(includeZeroWidth: true);
             var newLast = last.WithTrailingTrivia(trivia);
@@ -508,7 +532,8 @@ namespace Microsoft.CodeAnalysis
         public static TSyntax WithTrailingTrivia<TSyntax>(
             this TSyntax node,
             params SyntaxTrivia[]? trivia
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             return node.WithTrailingTrivia((IEnumerable<SyntaxTrivia>?)trivia);
         }

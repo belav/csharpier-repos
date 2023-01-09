@@ -11,7 +11,8 @@ namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>Represents a symbolic derivative created from a symbolic regex without using minterms</summary>
     internal class TransitionRegex<S>
-        : IEnumerable<(S, SymbolicRegexNode<S>?, SymbolicRegexNode<S>)> where S : notnull
+        : IEnumerable<(S, SymbolicRegexNode<S>?, SymbolicRegexNode<S>)>
+        where S : notnull
     {
         public readonly SymbolicRegexBuilder<S> _builder;
         public readonly TransitionRegexKind _kind;

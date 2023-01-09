@@ -12,7 +12,8 @@ using System.Linq;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class Connect<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class Connect<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         public Connect(ITestOutputHelper output)
             : base(output) { }

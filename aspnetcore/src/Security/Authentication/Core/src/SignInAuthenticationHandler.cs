@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// </summary>
 public abstract class SignInAuthenticationHandler<TOptions>
     : SignOutAuthenticationHandler<TOptions>,
-        IAuthenticationSignInHandler where TOptions : AuthenticationSchemeOptions, new()
+        IAuthenticationSignInHandler
+    where TOptions : AuthenticationSchemeOptions, new()
 {
     /// <summary>
     /// Initializes a new instance of <see cref="SignInAuthenticationHandler{TOptions}"/>.

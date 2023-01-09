@@ -82,7 +82,8 @@ namespace System.Text.Json.Reflection
         public static TAttribute? GetUniqueCustomAttribute<TAttribute>(
             this MemberInfo memberInfo,
             bool inherit
-        ) where TAttribute : Attribute
+        )
+            where TAttribute : Attribute
         {
             object[] attributes = memberInfo.GetCustomAttributes(typeof(TAttribute), inherit);
 

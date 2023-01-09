@@ -574,7 +574,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryArrayNullableGenericWithStructRestrictionArrayHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             bool[] array1 = new bool[] { false, true };
             Ts?[][] array2 = new Ts?[][]
@@ -1528,7 +1529,8 @@ namespace System.Linq.Expressions.Tests
             Ts?[] a,
             Ts?[] b,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts?[]>> e = Expression.Lambda<Func<Ts?[]>>(
                 Expression.Condition(

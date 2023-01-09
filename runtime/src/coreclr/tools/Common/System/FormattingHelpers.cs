@@ -7,7 +7,8 @@ namespace System
 {
     internal static class FormattingHelpers
     {
-        public static string ToStringInvariant<T>(this T value) where T : IConvertible
+        public static string ToStringInvariant<T>(this T value)
+            where T : IConvertible
         {
             return value.ToString(CultureInfo.InvariantCulture);
         }

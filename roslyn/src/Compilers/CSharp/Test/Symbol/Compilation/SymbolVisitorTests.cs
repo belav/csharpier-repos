@@ -23,10 +23,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string ToString() => _output.ToString();
 
-            void VisitChildren<T>(params T[] children) where T : ISymbol =>
-                VisitChildren((IEnumerable<T>)children);
+            void VisitChildren<T>(params T[] children)
+                where T : ISymbol => VisitChildren((IEnumerable<T>)children);
 
-            void VisitChildren<T>(IEnumerable<T> children) where T : ISymbol
+            void VisitChildren<T>(IEnumerable<T> children)
+                where T : ISymbol
             {
                 foreach (var item in children)
                 {
@@ -211,10 +212,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override string ToString() => _output.ToString();
 
-            void VisitChildren<T>(params T[] children) where T : ISymbol =>
-                VisitChildren((IEnumerable<T>)children);
+            void VisitChildren<T>(params T[] children)
+                where T : ISymbol => VisitChildren((IEnumerable<T>)children);
 
-            void VisitChildren<T>(IEnumerable<T> children) where T : ISymbol
+            void VisitChildren<T>(IEnumerable<T> children)
+                where T : ISymbol
             {
                 foreach (var item in children)
                 {
@@ -419,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             protected override int DefaultResult => -1;
 
-            void VisitChildren<T>(IEnumerable<T> children, StringBuilder argument) where T : ISymbol
+            void VisitChildren<T>(IEnumerable<T> children, StringBuilder argument)
+                where T : ISymbol
             {
                 foreach (var item in children)
                 {

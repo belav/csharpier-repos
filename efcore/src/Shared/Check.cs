@@ -91,7 +91,8 @@ internal static class Check
     public static IReadOnlyList<T> HasNoNulls<T>(
         [NotNull] IReadOnlyList<T>? value,
         [InvokerParameterName] string parameterName
-    ) where T : class
+    )
+        where T : class
     {
         NotNull(value, parameterName);
 

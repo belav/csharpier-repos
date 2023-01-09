@@ -23,7 +23,8 @@ namespace Castle.DynamicProxy.Tests.GenClasses
             get { return invoked; }
         }
 
-        public virtual Z DoSomething<Z>(Z z) where Z : new()
+        public virtual Z DoSomething<Z>(Z z)
+            where Z : new()
         {
             invoked = true;
 

@@ -13,7 +13,8 @@ internal static class SyntaxReplacer
         SyntaxNode root,
         IEnumerable<TNode> nodes = null,
         Func<TNode, TNode, SyntaxNode> computeReplacementNode = null
-    ) where TNode : SyntaxNode
+    )
+        where TNode : SyntaxNode
     {
         var replacer = new Replacer<TNode>(nodes, computeReplacementNode);
 
@@ -50,7 +51,8 @@ internal static class SyntaxReplacer
         ).Visit(root);
     }
 
-    private class Replacer<TNode> : SyntaxRewriter where TNode : SyntaxNode
+    private class Replacer<TNode> : SyntaxRewriter
+        where TNode : SyntaxNode
     {
         private readonly Func<TNode, TNode, SyntaxNode> _computeReplacementNode;
         private readonly HashSet<SyntaxNode> _nodeSet;

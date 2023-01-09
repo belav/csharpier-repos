@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Options;
 namespace Microsoft.CodeAnalysis.UseConditionalExpression
 {
     internal abstract class AbstractUseConditionalExpressionDiagnosticAnalyzer<TIfStatementSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TIfStatementSyntax : SyntaxNode
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        where TIfStatementSyntax : SyntaxNode
     {
         public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;

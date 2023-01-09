@@ -28,7 +28,8 @@ namespace ILCompiler.Metadata
         public static MetadataTransformResult<TPolicy> Run<TPolicy>(
             TPolicy policy,
             IEnumerable<Cts.ModuleDesc> modules
-        ) where TPolicy : struct, IMetadataPolicy
+        )
+            where TPolicy : struct, IMetadataPolicy
         {
             // TODO: Make this multithreaded. The high level plan is:
             // - make EntityMap thread safe

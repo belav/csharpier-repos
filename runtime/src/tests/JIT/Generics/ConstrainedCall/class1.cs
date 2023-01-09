@@ -31,7 +31,8 @@ class MyInt : IncrDecr
     }
 }
 
-class MyCounter<T> where T : IncrDecr, new()
+class MyCounter<T>
+    where T : IncrDecr, new()
 {
     T counter = new T();
     T[] counters = new T[1];

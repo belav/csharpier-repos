@@ -22,14 +22,14 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// pool that uses default constructor with 100 elements pooled
         /// </summary>
-        public static ObjectPool<T> BigDefault<T>() where T : class, new() =>
-            DefaultBigPool<T>.Instance;
+        public static ObjectPool<T> BigDefault<T>()
+            where T : class, new() => DefaultBigPool<T>.Instance;
 
         /// <summary>
         /// pool that uses default constructor with 20 elements pooled
         /// </summary>
-        public static ObjectPool<T> Default<T>() where T : class, new() =>
-            DefaultNormalPool<T>.Instance;
+        public static ObjectPool<T> Default<T>()
+            where T : class, new() => DefaultNormalPool<T>.Instance;
 
         /// <summary>
         /// pool that uses string as key with StringComparer.OrdinalIgnoreCase as key comparer
@@ -65,12 +65,14 @@ namespace Microsoft.CodeAnalysis
         // char pooled memory : 8K * 5 = 40K
         private const int CharBufferCount = 5;
 
-        private static class DefaultBigPool<T> where T : class, new()
+        private static class DefaultBigPool<T>
+            where T : class, new()
         {
             public static readonly ObjectPool<T> Instance = new(() => new T(), 100);
         }
 
-        private static class DefaultNormalPool<T> where T : class, new()
+        private static class DefaultNormalPool<T>
+            where T : class, new()
         {
             public static readonly ObjectPool<T> Instance = new(() => new T(), 20);
         }

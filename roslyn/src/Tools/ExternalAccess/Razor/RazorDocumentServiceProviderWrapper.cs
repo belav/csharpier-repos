@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public bool SupportDiagnostics => _innerDocumentServiceProvider.SupportDiagnostics;
 
-        public TService? GetService<TService>() where TService : class, IDocumentService
+        public TService? GetService<TService>()
+            where TService : class, IDocumentService
         {
             var serviceType = typeof(TService);
             if (serviceType == typeof(ISpanMappingService))

@@ -2981,7 +2981,8 @@ namespace System.Reflection.Tests
         object[] Puke(int Amount);
     }
 
-    public class PackOfCarnivores<T> where T : IConsume
+    public class PackOfCarnivores<T>
+        where T : IConsume
     {
         public T[] pPack;
     }
@@ -3322,7 +3323,8 @@ namespace System.Reflection.Tests
         internal class TI_SubClass : TI_AbstractSubClass { }
     }
 
-    internal class TI_GenericClassWithConstraints<T> where T : TI_Interface1 { }
+    internal class TI_GenericClassWithConstraints<T>
+        where T : TI_Interface1 { }
 
 #pragma warning restore 0169, 0067, 0649
 }

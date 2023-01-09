@@ -46,7 +46,8 @@ namespace Moq.Tests
         public interface IX
         {
             void Unconstrained<T>(T arg);
-            void Constrained<T>(T arg) where T : struct;
+            void Constrained<T>(T arg)
+                where T : struct;
         }
     }
 }

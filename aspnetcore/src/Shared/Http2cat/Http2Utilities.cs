@@ -1131,7 +1131,8 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         bool ignoreNonGoAwayFrames,
         int expectedLastStreamId,
         Http2ErrorCode expectedErrorCode
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         await WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(
             ignoreNonGoAwayFrames,
@@ -1145,7 +1146,8 @@ internal sealed class Http2Utilities : IHttpStreamHeadersHandler
         bool ignoreNonGoAwayFrames,
         int expectedLastStreamId,
         Http2ErrorCode expectedErrorCode
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         var frame = await ReceiveFrameAsync();
 

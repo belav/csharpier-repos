@@ -130,7 +130,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             bool overrideSpecifiedNames,
             bool processDictionaryKeys,
             bool processExtensionDataNames
-        ) where T : NamingStrategy, new()
+        )
+            where T : NamingStrategy, new()
         {
             var s1 = new T
             {

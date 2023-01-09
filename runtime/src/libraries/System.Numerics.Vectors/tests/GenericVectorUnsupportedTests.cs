@@ -384,7 +384,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void IsNotSupportedUInt128() => TestIsNotSupported<UInt128>();
 
-        private static void TestIsNotSupported<T>() where T : struct
+        private static void TestIsNotSupported<T>()
+            where T : struct
         {
             Assert.False(Vector<T>.IsSupported);
 

@@ -2486,7 +2486,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
     private static IList<IComponent> GetComponents(RenderTreeBuilder builder) =>
         GetComponents<IComponent>(builder);
 
-    private static IList<T> GetComponents<T>(RenderTreeBuilder builder) where T : IComponent =>
+    private static IList<T> GetComponents<T>(RenderTreeBuilder builder)
+        where T : IComponent =>
         builder
             .GetFrames()
             .AsEnumerable()

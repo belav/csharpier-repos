@@ -467,7 +467,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 600
             );
 
-        public T GetExtension<T>(GraphObject graphObject, T previous) where T : class
+        public T GetExtension<T>(GraphObject graphObject, T previous)
+            where T : class
         {
             if (graphObject is GraphNode graphNode)
             {

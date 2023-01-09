@@ -630,7 +630,8 @@ namespace Roslyn.Utilities
         }
     }
 
-    internal class SimplePool<T> where T : class
+    internal class SimplePool<T>
+        where T : class
     {
         private readonly object _gate = new();
         private readonly Stack<T> _values = new();

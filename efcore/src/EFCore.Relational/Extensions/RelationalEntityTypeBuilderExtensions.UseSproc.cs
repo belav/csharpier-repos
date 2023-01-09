@@ -99,7 +99,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> UpdateUsingStoredProcedure<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             null,
@@ -124,7 +125,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             name,
@@ -151,7 +153,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             name,
@@ -429,7 +432,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> DeleteUsingStoredProcedure<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             null,
@@ -454,7 +458,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             name,
@@ -481,7 +486,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             name,
@@ -759,7 +765,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     public static EntityTypeBuilder<TEntity> InsertUsingStoredProcedure<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             null,
@@ -784,7 +791,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
         string name,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             name,
@@ -811,7 +819,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string name,
         string? schema,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         UseStoredProcedure(
             entityTypeBuilder,
             name,
@@ -1030,7 +1039,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
         string? schema,
         StoreObjectType sprocType,
         Action<StoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(buildAction, nameof(buildAction));
 

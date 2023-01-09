@@ -247,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         internal TNode ParseWithStackGuard<TNode>(
             Func<TNode> parseFunc,
             Func<TNode> createEmptyNodeFunc
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             // If this value is non-zero then we are nesting calls to ParseWithStackGuard which should not be
             // happening.  It's not a bug but it's inefficient and should be changed.
@@ -3312,7 +3313,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             bool tryParseLocalDeclarationStatement<DeclarationSyntax>(
                 SyntaxList<AttributeListSyntax> attributes,
                 out MemberDeclarationSyntax result
-            ) where DeclarationSyntax : StatementSyntax
+            )
+                where DeclarationSyntax : StatementSyntax
             {
                 bool wasInAsync = IsInAsync;
                 IsInAsync = true; // We are implicitly in an async context
@@ -3341,7 +3343,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 SyntaxList<AttributeListSyntax> attributes,
                 ref ResetPoint startPoint,
                 out MemberDeclarationSyntax result
-            ) where DeclarationSyntax : StatementSyntax
+            )
+                where DeclarationSyntax : StatementSyntax
             {
                 var resetOnFailurePoint = this.GetResetPoint();
                 try
@@ -5216,7 +5219,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             Func<LanguageParser, bool> abortFunction,
             ErrorCode error,
             out GreenNode trailingTrivia
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             if (list.Count == 0)
             {
@@ -15818,7 +15822,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             ref SyntaxToken startToken,
             SeparatedSyntaxListBuilder<T> list,
             SyntaxKind expected
-        ) where T : CSharpSyntaxNode
+        )
+            where T : CSharpSyntaxNode
         {
             return this.SkipBadSeparatedListTokensWithExpectedKind(
                 ref startToken,
@@ -17234,7 +17239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
         }
 
-        internal TNode ConsumeUnexpectedTokens<TNode>(TNode node) where TNode : CSharpSyntaxNode
+        internal TNode ConsumeUnexpectedTokens<TNode>(TNode node)
+            where TNode : CSharpSyntaxNode
         {
             if (this.CurrentToken.Kind == SyntaxKind.EndOfFileToken)
                 return node;

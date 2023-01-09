@@ -22,7 +22,8 @@ public abstract class ComplexNavigationsData : ISetSource
     public IReadOnlyList<InheritanceLeaf1> InheritanceLeafOnes { get; }
     public IReadOnlyList<InheritanceLeaf2> InheritanceLeafTwos { get; }
 
-    public abstract IQueryable<TEntity> Set<TEntity>() where TEntity : class;
+    public abstract IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class;
 
     protected ComplexNavigationsData()
     {

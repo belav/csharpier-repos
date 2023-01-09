@@ -118,7 +118,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithClassConstraint<T> where T : class
+    public class MemberClassWithClassConstraint<T>
+        where T : class
     {
         public int Method_ReturnsInt()
         {
@@ -131,7 +132,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithNewConstraint<T> where T : new()
+    public class MemberClassWithNewConstraint<T>
+        where T : new()
     {
         public T Method_ReturnsT()
         {
@@ -144,7 +146,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithAnotherTypeConstraint<T, U> where T : U
+    public class MemberClassWithAnotherTypeConstraint<T, U>
+        where T : U
     {
         public U Method_ReturnsU(dynamic d)
         {
@@ -158,7 +161,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     }
 
     #region Negative tests - you should not be able to construct this with a dynamic object
-    public class MemberClassWithUDClassConstraint<T> where T : C, new()
+    public class MemberClassWithUDClassConstraint<T>
+        where T : C, new()
     {
         public C Method_ReturnsC()
         {
@@ -166,7 +170,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithStructConstraint<T> where T : struct
+    public class MemberClassWithStructConstraint<T>
+        where T : struct
     {
         public dynamic Method_ReturnsDynamic(int x)
         {
@@ -174,7 +179,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
         }
     }
 
-    public class MemberClassWithInterfaceConstraint<T> where T : I
+    public class MemberClassWithInterfaceConstraint<T>
+        where T : I
     {
         public dynamic Method_ReturnsDynamic(int x, T v)
         {

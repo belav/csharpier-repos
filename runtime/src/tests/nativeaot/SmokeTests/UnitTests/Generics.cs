@@ -179,13 +179,15 @@ class Generics
             public fixed byte Bytes[Length];
         }
 
-        T Generic<T>(object o) where T : class
+        T Generic<T>(object o)
+            where T : class
         {
             Func<object, T> f = OtherGeneric<T>;
             return f(o);
         }
 
-        T OtherGeneric<T>(object o) where T : class
+        T OtherGeneric<T>(object o)
+            where T : class
         {
             return o as T;
         }
@@ -553,7 +555,8 @@ class Generics
     /// </summary>
     class TestInitThisClass
     {
-        class Gen1<T> where T : class
+        class Gen1<T>
+            where T : class
         {
             static string s_str1;
             static string s_str2;
@@ -575,7 +578,8 @@ class Generics
             }
         }
 
-        class Gen2<T> where T : class
+        class Gen2<T>
+            where T : class
         {
             public static string GetFromClassParam()
             {
@@ -627,7 +631,8 @@ class Generics
 
         class C2 { }
 
-        class Base1<T> where T : class
+        class Base1<T>
+            where T : class
         {
             public virtual T As(object o)
             {
@@ -635,7 +640,8 @@ class Generics
             }
         }
 
-        class Derived1<T> : Base1<T> where T : class
+        class Derived1<T> : Base1<T>
+            where T : class
         {
             public T AsToo(object o)
             {
@@ -706,7 +712,8 @@ class Generics
             }
         }
 
-        class Derived<T> : Base<T, string> where T : class
+        class Derived<T> : Base<T, string>
+            where T : class
         {
             public T Cast(object v)
             {
@@ -1322,7 +1329,8 @@ class Generics
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob<T, U>(ref T t, object o) where T : IFoo<U>
+        static bool DoFrob<T, U>(ref T t, object o)
+            where T : IFoo<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -2146,7 +2154,8 @@ class Generics
                 throw new Exception();
         }
 
-        static void TestStaticAbstractGvm<T, TMethods>() where TMethods : IGvmMethods
+        static void TestStaticAbstractGvm<T, TMethods>()
+            where TMethods : IGvmMethods
         {
             if (TMethods.StaticAbstractGvm<T>() != 1)
                 throw new Exception();
@@ -2169,7 +2178,8 @@ class Generics
 
         class Atom : IAtom, IPhantom { }
 
-        class Lol<TLeft> where TLeft : IAtom, IPhantom
+        class Lol<TLeft>
+            where TLeft : IAtom, IPhantom
         {
             public static void Run() =>
                 (
@@ -3354,7 +3364,8 @@ class Generics
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static string ConstrainedCall<T, U, X>(ref T instance) where T : IInterface<U>
+        static string ConstrainedCall<T, U, X>(ref T instance)
+            where T : IInterface<U>
         {
             return instance.Method<X>();
         }
@@ -3420,7 +3431,8 @@ class Generics
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob1<T, U>(ref T t, object o) where T : IFoo<U>
+        static bool DoFrob1<T, U>(ref T t, object o)
+            where T : IFoo<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -3428,7 +3440,8 @@ class Generics
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static bool DoFrob2<T, U>(ref T t, object o) where T : IBar<U>
+        static bool DoFrob2<T, U>(ref T t, object o)
+            where T : IBar<U>
         {
             // Perform a constrained interface call from shared code.
             // This should have been resolved to a direct call at compile time.
@@ -3518,7 +3531,8 @@ class Generics
         class DerivedSBar : Bar<SAtom1> { }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static string ConstrainedCall<T, U, X>(ref T instance) where T : IFoo<U>
+        static string ConstrainedCall<T, U, X>(ref T instance)
+            where T : IFoo<U>
         {
             return instance.Foo<X>();
         }
@@ -3639,7 +3653,8 @@ class Generics
 
         class GenClass<T> { }
 
-        private static object RecurseOverStruct<T>(int count) where T : new()
+        private static object RecurseOverStruct<T>(int count)
+            where T : new()
         {
             if (count > 0)
                 RecurseOverStruct<GenStruct<T>>(count - 1);
@@ -3647,7 +3662,8 @@ class Generics
             return new T();
         }
 
-        private static object RecurseOverClass<T>(int count) where T : new()
+        private static object RecurseOverClass<T>(int count)
+            where T : new()
         {
             if (count > 0)
                 RecurseOverClass<GenClass<T>>(count - 1);
@@ -3848,7 +3864,8 @@ class Generics
 
         struct Technique : ITechnique { }
 
-        static void CatConcepts<T, U>() where T : ITechnique => default(T).CatSlaps<SmallCat<U>>();
+        static void CatConcepts<T, U>()
+            where T : ITechnique => default(T).CatSlaps<SmallCat<U>>();
 
         public static void Run()
         {

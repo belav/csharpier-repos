@@ -1462,7 +1462,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
 
     protected virtual EntityEntry<TEntity> AddTestBuiltInNullableDataTypes<TEntity>(
         DbSet<TEntity> set
-    ) where TEntity : BuiltInNullableDataTypesBase, new()
+    )
+        where TEntity : BuiltInNullableDataTypesBase, new()
     {
         var entityEntry = set.Add(new TEntity { Id = 11 });
 
@@ -3537,7 +3538,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                 .HasData(new StringEnclosure { Id = 1, Value = ReallyLargeString });
         }
 
-        protected static void MakeRequired<TEntity>(ModelBuilder modelBuilder) where TEntity : class
+        protected static void MakeRequired<TEntity>(ModelBuilder modelBuilder)
+            where TEntity : class
         {
             foreach (
                 var property in modelBuilder.Entity<TEntity>().Metadata.GetDeclaredProperties()

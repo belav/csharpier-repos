@@ -20,7 +20,8 @@ namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis;
 /// The Redis scaleout provider for multi-server support.
 /// </summary>
 /// <typeparam name="THub">The type of <see cref="Hub"/> to manage connections for.</typeparam>
-public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposable where THub : Hub
+public class RedisHubLifetimeManager<THub> : HubLifetimeManager<THub>, IDisposable
+    where THub : Hub
 {
     private readonly HubConnectionStore _connections = new HubConnectionStore();
     private readonly RedisSubscriptionManager _groups = new RedisSubscriptionManager();

@@ -474,7 +474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             Indenter indenter,
             SeparatedSyntaxList<T> list,
             SyntaxToken token
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var index = list.GetWithSeparators().IndexOf(token);
             if (index < 0)

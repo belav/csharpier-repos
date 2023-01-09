@@ -132,7 +132,8 @@ public static class SqliteDbContextOptionsBuilderExtensions
     public static DbContextOptionsBuilder<TContext> UseSqlite<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseSqlite((DbContextOptionsBuilder)optionsBuilder, sqliteOptionsAction);
 
@@ -152,7 +153,8 @@ public static class SqliteDbContextOptionsBuilderExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         string? connectionString,
         Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseSqlite(
                 (DbContextOptionsBuilder)optionsBuilder,
@@ -180,7 +182,8 @@ public static class SqliteDbContextOptionsBuilderExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         DbConnection connection,
         Action<SqliteDbContextOptionsBuilder>? sqliteOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseSqlite((DbContextOptionsBuilder)optionsBuilder, connection, sqliteOptionsAction);
 

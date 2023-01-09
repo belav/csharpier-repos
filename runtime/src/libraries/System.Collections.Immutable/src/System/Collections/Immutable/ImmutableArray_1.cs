@@ -480,7 +480,8 @@ namespace System.Collections.Immutable
         /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
         /// <param name="items">The values to add.</param>
         /// <returns>A new list with the elements added.</returns>
-        public ImmutableArray<T> AddRange<TDerived>(TDerived[] items) where TDerived : T
+        public ImmutableArray<T> AddRange<TDerived>(TDerived[] items)
+            where TDerived : T
         {
             var self = this;
             self.ThrowNullRefIfNotInitialized();

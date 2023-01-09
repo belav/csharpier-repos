@@ -9,7 +9,8 @@ using System.Runtime.CompilerServices;
 class GenericMethodPatchpoint
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static int F<T>(T[] data, int from, int to) where T : class
+    public static int F<T>(T[] data, int from, int to)
+        where T : class
     {
         int result = 0;
         for (int i = from; i < to; i++)

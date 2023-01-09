@@ -169,7 +169,8 @@ internal class Http3InMemory
         Http3ErrorCode expectedErrorCode,
         Action<Type, string[]> matchExpectedErrorMessage = null,
         params string[] expectedErrorMessage
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         await WaitForGoAwayAsync(ignoreNonGoAwayFrames, expectedLastStreamId);
 
@@ -209,7 +210,8 @@ internal class Http3InMemory
         Http3ErrorCode expectedErrorCode,
         Action<Type, string[]> matchExpectedErrorMessage = null,
         params string[] expectedErrorMessage
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         var currentError = (Http3ErrorCode)MultiplexedConnectionContext.Error;
         if (currentError != expectedErrorCode)

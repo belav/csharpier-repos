@@ -16,7 +16,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
     using System;
 
-    public class GenInterfaceWithGenArray<T> : IGenInterfaceWithGenArray<T> where T : struct
+    public class GenInterfaceWithGenArray<T> : IGenInterfaceWithGenArray<T>
+        where T : struct
     {
         private T[] innerItems;
 
@@ -36,7 +37,8 @@ namespace Castle.DynamicProxy.Tests.GenInterfaces
         }
     }
 
-    public interface IGenInterfaceWithGenArray<T> where T : struct
+    public interface IGenInterfaceWithGenArray<T>
+        where T : struct
     {
         void CopyTo(T[] items);
 

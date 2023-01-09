@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             );
         }
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag =>
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag =>
             new RenameClassificationTagger(buffer, _renameService, _classificationType)
             as ITagger<T>;
     }

@@ -892,7 +892,8 @@ namespace System.Net.Sockets
             Cancelled = 2
         }
 
-        private struct OperationQueue<TOperation> where TOperation : AsyncOperation
+        private struct OperationQueue<TOperation>
+            where TOperation : AsyncOperation
         {
             // Quick overview:
             //
@@ -1576,7 +1577,8 @@ namespace System.Net.Sockets
             TOperation operation,
             int timeout,
             int observedSequenceNumber
-        ) where TOperation : AsyncOperation
+        )
+            where TOperation : AsyncOperation
         {
             Debug.Assert(timeout == -1 || timeout > 0, $"Unexpected timeout: {timeout}");
 

@@ -62,7 +62,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         Action<DbContextOptionsBuilder>? optionsAction = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContext<TContext, TContext>(
             serviceCollection,
             optionsAction,
@@ -122,7 +123,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         Action<DbContextOptionsBuilder>? optionsAction = null,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
-    ) where TContextImplementation : DbContext, TContextService =>
+    )
+        where TContextImplementation : DbContext, TContextService =>
         AddDbContext<TContextService, TContextImplementation>(
             serviceCollection,
             optionsAction == null ? null : (_, b) => optionsAction(b),
@@ -175,7 +177,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         Action<DbContextOptionsBuilder> optionsAction,
         int poolSize = DbContextPool<DbContext>.DefaultPoolSize
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
 
     /// <summary>
@@ -292,7 +295,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
         int poolSize = DbContextPool<DbContext>.DefaultPoolSize
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContextPool<TContext, TContext>(serviceCollection, optionsAction, poolSize);
 
     /// <summary>
@@ -389,7 +393,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
         int poolSize
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         if (poolSize <= 0)
         {
@@ -446,7 +451,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         ServiceLifetime contextLifetime,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContext<TContext, TContext>(serviceCollection, contextLifetime, optionsLifetime);
 
     /// <summary>
@@ -559,7 +565,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContext<TContext, TContext>(
             serviceCollection,
             optionsAction,
@@ -629,7 +636,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
         ServiceLifetime contextLifetime = ServiceLifetime.Scoped,
         ServiceLifetime optionsLifetime = ServiceLifetime.Scoped
-    ) where TContextImplementation : DbContext, TContextService
+    )
+        where TContextImplementation : DbContext, TContextService
     {
         if (contextLifetime == ServiceLifetime.Singleton)
         {
@@ -743,7 +751,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         Action<DbContextOptionsBuilder>? optionsAction = null,
         ServiceLifetime lifetime = ServiceLifetime.Singleton
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContextFactory<TContext, DbContextFactory<TContext>>(
             serviceCollection,
             optionsAction,
@@ -897,7 +906,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
         ServiceLifetime lifetime = ServiceLifetime.Singleton
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         AddDbContextFactory<TContext, DbContextFactory<TContext>>(
             serviceCollection,
             optionsAction,
@@ -1053,7 +1063,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         Action<DbContextOptionsBuilder> optionsAction,
         int poolSize = DbContextPool<DbContext>.DefaultPoolSize
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         Check.NotNull(optionsAction, nameof(optionsAction));
 
@@ -1109,7 +1120,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         this IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction,
         int poolSize = DbContextPool<DbContext>.DefaultPoolSize
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         Check.NotNull(optionsAction, nameof(optionsAction));
 
@@ -1130,7 +1142,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         IServiceCollection serviceCollection,
         Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction,
         ServiceLifetime optionsLifetime
-    ) where TContextImplementation : DbContext
+    )
+        where TContextImplementation : DbContext
     {
         serviceCollection.TryAddSingleton<ServiceProviderAccessor>();
 
@@ -1154,7 +1167,8 @@ public static class EntityFrameworkServiceCollectionExtensions
     private static DbContextOptions<TContext> CreateDbContextOptions<TContext>(
         IServiceProvider applicationServiceProvider,
         Action<IServiceProvider, DbContextOptionsBuilder>? optionsAction
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var builder = new DbContextOptionsBuilder<TContext>(
             new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>())
@@ -1167,7 +1181,8 @@ public static class EntityFrameworkServiceCollectionExtensions
         return builder.Options;
     }
 
-    private static void CheckContextConstructors<TContext>() where TContext : DbContext
+    private static void CheckContextConstructors<TContext>()
+        where TContext : DbContext
     {
         var declaredConstructors = typeof(TContext).GetTypeInfo().DeclaredConstructors.ToList();
         if (declaredConstructors.Count == 1 && declaredConstructors[0].GetParameters().Length == 0)

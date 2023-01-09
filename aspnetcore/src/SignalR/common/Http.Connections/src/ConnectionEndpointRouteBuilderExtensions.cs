@@ -40,7 +40,8 @@ public static class ConnectionEndpointRouteBuilderExtensions
     public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern
-    ) where TConnectionHandler : ConnectionHandler
+    )
+        where TConnectionHandler : ConnectionHandler
     {
         return endpoints.MapConnectionHandler<TConnectionHandler>(pattern, configureOptions: null);
     }
@@ -57,7 +58,8 @@ public static class ConnectionEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         Action<HttpConnectionDispatcherOptions>? configureOptions
-    ) where TConnectionHandler : ConnectionHandler
+    )
+        where TConnectionHandler : ConnectionHandler
     {
         var options = new HttpConnectionDispatcherOptions();
         configureOptions?.Invoke(options);

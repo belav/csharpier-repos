@@ -64,7 +64,8 @@ namespace System.Formats.Asn1
         ///
         ///   <typeparamref name="TEnum"/> is not declared [<see cref="FlagsAttribute"/>].
         /// </exception>
-        public void WriteNamedBitList<TEnum>(TEnum value, Asn1Tag? tag = null) where TEnum : Enum
+        public void WriteNamedBitList<TEnum>(TEnum value, Asn1Tag? tag = null)
+            where TEnum : Enum
         {
             CheckUniversalTag(tag, UniversalTagNumber.BitString);
 

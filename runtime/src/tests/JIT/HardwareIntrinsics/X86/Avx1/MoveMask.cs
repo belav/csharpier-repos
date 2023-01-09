@@ -58,7 +58,8 @@ namespace IntelHardwareIntrinsicTest.Avx1
             Assert.Equal(Pass, testResult);
         }
 
-        public unsafe struct TestTable_SingleArray<T> : IDisposable where T : struct
+        public unsafe struct TestTable_SingleArray<T> : IDisposable
+            where T : struct
         {
             public T[] inArray1;
             public void* inArray1Ptr => inHandle1.AddrOfPinnedObject().ToPointer();

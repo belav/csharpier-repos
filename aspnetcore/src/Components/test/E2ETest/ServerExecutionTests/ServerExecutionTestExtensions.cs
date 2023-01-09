@@ -19,7 +19,8 @@ internal static class ServerExecutionTestExtensions
 
     public static ToggleExecutionModeServerFixture<T> WithServerExecution<T, TStartup>(
         this ToggleExecutionModeServerFixture<T> serverFixture
-    ) where TStartup : class
+    )
+        where TStartup : class
     {
         serverFixture.UseAspNetHost(Program.BuildWebHost<TStartup>);
         serverFixture.ExecutionMode = ExecutionMode.Server;

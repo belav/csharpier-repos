@@ -7,7 +7,8 @@ using System.Linq;
 namespace System.IO.Tests
 {
     // Tests that are valid for FileInfo and DirectoryInfo
-    public abstract class InfoGetSetAttributes<T> : AllGetSetAttributes where T : FileSystemInfo
+    public abstract class InfoGetSetAttributes<T> : AllGetSetAttributes
+        where T : FileSystemInfo
     {
         protected abstract T CreateInfo(string path);
 

@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization.Converters
 {
     /// Converter for <cref>System.Collections.IList</cref>.
     internal sealed class IListConverter<TCollection>
-        : JsonCollectionConverter<TCollection, object?> where TCollection : IList
+        : JsonCollectionConverter<TCollection, object?>
+        where TCollection : IList
     {
         protected override void Add(in object? value, ref ReadStack state)
         {

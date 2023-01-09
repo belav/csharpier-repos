@@ -569,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         private static void DebugCheckEmpty<T, TIntrospector>(
             ContextIntervalTree<T, TIntrospector> tree,
             TextSpan textSpan
-        ) where TIntrospector : struct, IIntervalIntrospector<T>
+        )
+            where TIntrospector : struct, IIntervalIntrospector<T>
         {
             var intervals = tree.GetIntervalsThatContain(textSpan.Start, textSpan.Length);
             Contract.ThrowIfFalse(intervals.Length == 0);

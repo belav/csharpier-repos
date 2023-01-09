@@ -213,7 +213,8 @@ internal sealed class TransportManager
         IConnectionListener<T> connectionListener,
         Func<T, Task> connectionDelegate,
         EndpointConfig? endpointConfig
-    ) where T : BaseConnectionContext
+    )
+        where T : BaseConnectionContext
     {
         var transportConnectionManager = new TransportConnectionManager(
             _serviceContext.ConnectionManager

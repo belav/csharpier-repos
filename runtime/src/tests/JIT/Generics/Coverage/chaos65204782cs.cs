@@ -46,12 +46,14 @@ namespace Chaos
         where T0 : new()
         where T1 : new() { }
 
-    public class A0A3A6<T0> : A0A3 where T0 : new()
+    public class A0A3A6<T0> : A0A3
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A3A6NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A3A6NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -66,7 +68,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A3A6GenericStatic<T>() where T : new()
+        public static void VerifyA0A3A6GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -81,7 +84,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A3A6NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A3A6NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -1717,7 +1721,8 @@ namespace Chaos
             this._fA01 = new A0();
         }
 
-        public void VerifyInterfaceGenericIA1<K>() where K : new()
+        public void VerifyInterfaceGenericIA1<K>()
+            where K : new()
         {
             System.Console.WriteLine(typeof(A0));
             K t1 = new K();
@@ -1732,7 +1737,8 @@ namespace Chaos
             this._fA01 = new A0();
         }
 
-        public void VerifyInterfaceGenericIA2<K>() where K : new()
+        public void VerifyInterfaceGenericIA2<K>()
+            where K : new()
         {
             System.Console.WriteLine(typeof(A0));
             K t1 = new K();
@@ -1743,7 +1749,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0));
@@ -1760,7 +1767,8 @@ namespace Chaos
             A0._sfA00 = new A0A1A2<A0A0A0<A0A1<A0A0>>>();
         }
 
-        public static void VerifyA0GenericStatic<T>() where T : new()
+        public static void VerifyA0GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0));
@@ -1777,7 +1785,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -2580,12 +2589,14 @@ namespace Chaos
         }
     }
 
-    public class A0A0A0A1<T0, T1> : A0A0A0<T0> where T0 : new()
+    public class A0A0A0A1<T0, T1> : A0A0A0<T0>
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A0A1NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0A1NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -2600,7 +2611,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A0A0A1GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0A1GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -2615,7 +2627,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A0A1NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A0A1NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -3776,7 +3789,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A1NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A1NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T t1 = new T();
@@ -3787,7 +3801,8 @@ namespace Chaos
         )]
         public static void VerifyA0A0A1NotInlinedStatic() { }
 
-        public static void VerifyA0A0A1GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A1GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T t1 = new T();
@@ -3798,7 +3813,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A1NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A1NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -4749,7 +4765,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0A0));
@@ -4766,7 +4783,8 @@ namespace Chaos
             A0A0._sfA0A00 = new A0();
         }
 
-        public static void VerifyA0A0GenericStatic<T>() where T : new()
+        public static void VerifyA0A0GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             System.Console.WriteLine(typeof(A0A0));
@@ -4783,7 +4801,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -5768,15 +5787,18 @@ namespace Chaos
     {
         void VerifyInterfaceIA2();
 
-        void VerifyInterfaceGenericIA2<K>() where K : new();
+        void VerifyInterfaceGenericIA2<K>()
+            where K : new();
     }
 
-    public class A0A1A2<T0> : A0A1<T0>, IA2 where T0 : new()
+    public class A0A1A2<T0> : A0A1<T0>, IA2
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A1A2NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A1A2NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -5791,7 +5813,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A1A2GenericStatic<T>() where T : new()
+        public static void VerifyA0A1A2GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -5806,7 +5829,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A1A2NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A1A2NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -7405,10 +7429,12 @@ namespace Chaos
     {
         void VerifyInterfaceIA1();
 
-        void VerifyInterfaceGenericIA1<K>() where K : new();
+        void VerifyInterfaceGenericIA1<K>()
+            where K : new();
     }
 
-    public interface IA1A2<T0> : IA2 where T0 : new() { }
+    public interface IA1A2<T0> : IA2
+        where T0 : new() { }
 
     public class A0A0A0A0A0<T0, T1> : A0A0A0A0<T0>
         where T0 : new()
@@ -7417,7 +7443,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A0A0A0NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0A0A0NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -7434,7 +7461,8 @@ namespace Chaos
             T1 t1 = new T1();
         }
 
-        public static void VerifyA0A0A0A0A0GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0A0A0GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -7451,7 +7479,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A0A0A0NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A0A0A0NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -7880,14 +7909,17 @@ namespace Chaos
         }
     }
 
-    public interface IA2A6<T0> where T0 : new() { }
+    public interface IA2A6<T0>
+        where T0 : new() { }
 
-    public class A0A0A1A2<T0> : A0A0A1 where T0 : new()
+    public class A0A0A1A2<T0> : A0A0A1
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A1A2NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A1A2NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -7902,7 +7934,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A0A1A2GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A1A2GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -7917,7 +7950,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A1A2NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A1A2NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -8407,14 +8441,17 @@ namespace Chaos
         }
     }
 
-    public interface IA1A5<T0> : IA2 where T0 : new() { }
+    public interface IA1A5<T0> : IA2
+        where T0 : new() { }
 
-    public class A0A1A4<T0, T1> : A0A1<T0> where T0 : new()
+    public class A0A1A4<T0, T1> : A0A1<T0>
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A1A4NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A1A4NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -8429,7 +8466,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A1A4GenericStatic<T>() where T : new()
+        public static void VerifyA0A1A4GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -8444,7 +8482,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A1A4NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A1A4NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -9574,12 +9613,14 @@ namespace Chaos
         }
     }
 
-    public class A0A4<T0> : A0 where T0 : new()
+    public class A0A4<T0> : A0
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A4NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A4NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -9594,7 +9635,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A4GenericStatic<T>() where T : new()
+        public static void VerifyA0A4GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -9609,7 +9651,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A4NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A4NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -9955,12 +9998,14 @@ namespace Chaos
         }
     }
 
-    public class A0A0A0A0<T0> : A0A0A0<T0>, IA2 where T0 : new()
+    public class A0A0A0A0<T0> : A0A0A0<T0>, IA2
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A0A0NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0A0NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -9975,7 +10020,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A0A0A0GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0A0GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -9990,7 +10036,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A0A0NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A0A0NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -10798,7 +10845,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A1A2A3NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A1A2A3NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -10815,7 +10863,8 @@ namespace Chaos
             T1 t1 = new T1();
         }
 
-        public static void VerifyA0A1A2A3GenericStatic<T>() where T : new()
+        public static void VerifyA0A1A2A3GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -10832,7 +10881,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A1A2A3NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A1A2A3NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -11352,12 +11402,14 @@ namespace Chaos
         }
     }
 
-    public class A0A1<T0> : A0, IA2 where T0 : new()
+    public class A0A1<T0> : A0, IA2
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A1NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A1NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -11372,7 +11424,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A1GenericStatic<T>() where T : new()
+        public static void VerifyA0A1GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -11387,7 +11440,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A1NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A1NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -12422,12 +12476,14 @@ namespace Chaos
         }
     }
 
-    public class A0A0A0<T0> : A0A0, IA2 where T0 : new()
+    public class A0A0A0<T0> : A0A0, IA2
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A0NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -12442,7 +12498,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A0A0GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A0GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -12457,7 +12514,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A0NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A0NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -13633,7 +13691,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A3NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A3NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T t1 = new T();
@@ -13644,7 +13703,8 @@ namespace Chaos
         )]
         public static void VerifyA0A3NotInlinedStatic() { }
 
-        public static void VerifyA0A3GenericStatic<T>() where T : new()
+        public static void VerifyA0A3GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T t1 = new T();
@@ -13655,7 +13715,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A3NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A3NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));
@@ -14558,12 +14619,14 @@ namespace Chaos
         }
     }
 
-    public class A0A0A3<T0> : A0A0 where T0 : new()
+    public class A0A0A3<T0> : A0A0
+        where T0 : new()
     {
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public static void VerifyA0A0A3NotInlinedGenericStatic<T>() where T : new()
+        public static void VerifyA0A0A3NotInlinedGenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -14578,7 +14641,8 @@ namespace Chaos
             T0 t0 = new T0();
         }
 
-        public static void VerifyA0A0A3GenericStatic<T>() where T : new()
+        public static void VerifyA0A0A3GenericStatic<T>()
+            where T : new()
         {
             System.Console.WriteLine(typeof(T));
             T0 t1 = new T0();
@@ -14593,7 +14657,8 @@ namespace Chaos
         [System.Runtime.CompilerServices.MethodImplAttribute(
             System.Runtime.CompilerServices.MethodImplOptions.NoInlining
         )]
-        public void VerifyA0A0A3NotInlinedGeneric<T>() where T : new()
+        public void VerifyA0A0A3NotInlinedGeneric<T>()
+            where T : new()
         {
             System.Console.WriteLine(this);
             System.Console.WriteLine(typeof(T));

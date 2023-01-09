@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddHostedService<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 THostedService
-        >(this IServiceCollection services) where THostedService : class, IHostedService
+        >(this IServiceCollection services)
+            where THostedService : class, IHostedService
         {
             services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<IHostedService, THostedService>()
@@ -41,7 +42,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddHostedService<THostedService>(
             this IServiceCollection services,
             Func<IServiceProvider, THostedService> implementationFactory
-        ) where THostedService : class, IHostedService
+        )
+            where THostedService : class, IHostedService
         {
             services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<IHostedService>(implementationFactory)

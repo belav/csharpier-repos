@@ -189,7 +189,8 @@ namespace System.IO.Tests
             Assert.Equal(s_separator + "abc", Path.Combine("ab\tcd", s_separator + "abc"));
         }
 
-        private static void VerifyException<T>(string[] paths) where T : Exception
+        private static void VerifyException<T>(string[] paths)
+            where T : Exception
         {
             Assert.Throws<T>(() => Path.Combine(paths));
 
@@ -225,7 +226,8 @@ namespace System.IO.Tests
             }
         }
 
-        private static void CommonCasesException<T>(string testing) where T : Exception
+        private static void CommonCasesException<T>(string testing)
+            where T : Exception
         {
             VerifyException<T>(new string[] { testing });
 

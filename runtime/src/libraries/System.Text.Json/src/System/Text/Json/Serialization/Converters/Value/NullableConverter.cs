@@ -3,7 +3,8 @@
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class NullableConverter<T> : JsonConverter<T?> where T : struct
+    internal sealed class NullableConverter<T> : JsonConverter<T?>
+        where T : struct
     {
         internal override Type? ElementType => typeof(T);
         public override bool HandleNull => true;

@@ -828,7 +828,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         public abstract class CodeBlockObjectCreationAnalyzer<TLanguageKindEnum>
-            : DiagnosticAnalyzer where TLanguageKindEnum : struct
+            : DiagnosticAnalyzer
+            where TLanguageKindEnum : struct
         {
             public static readonly DiagnosticDescriptor DiagnosticDescriptor =
                 new DiagnosticDescriptor(
@@ -913,7 +914,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         public abstract class AbstractNamespaceDeclarationAnalyzer<TLanguageKindEnum>
-            : DiagnosticAnalyzer where TLanguageKindEnum : struct
+            : DiagnosticAnalyzer
+            where TLanguageKindEnum : struct
         {
             public const string DiagnosticId = nameof(DiagnosticId);
             public const string Title = nameof(Title);

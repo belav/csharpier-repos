@@ -11,7 +11,8 @@ namespace Roslyn.Utilities
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this IReadOnlyDictionary<TKey, TValue> dictionary,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var value))
             {

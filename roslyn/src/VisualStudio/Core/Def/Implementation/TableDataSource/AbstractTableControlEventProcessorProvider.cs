@@ -11,7 +11,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     internal abstract class AbstractTableControlEventProcessorProvider<TItem>
-        : ITableControlEventProcessorProvider where TItem : TableItem
+        : ITableControlEventProcessorProvider
+        where TItem : TableItem
     {
         public ITableControlEventProcessor GetAssociatedEventProcessor(
             IWpfTableControl tableControl

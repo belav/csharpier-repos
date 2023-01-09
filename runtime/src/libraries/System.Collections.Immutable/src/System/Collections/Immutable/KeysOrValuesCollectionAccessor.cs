@@ -14,7 +14,8 @@ namespace System.Collections.Immutable
     /// <typeparam name="T">Either TKey or TValue.</typeparam>
     internal abstract class KeysOrValuesCollectionAccessor<TKey, TValue, T>
         : ICollection<T>,
-            ICollection where TKey : notnull
+            ICollection
+        where TKey : notnull
     {
         /// <summary>
         /// The underlying wrapped dictionary.
@@ -170,7 +171,8 @@ namespace System.Collections.Immutable
     /// A lightweight collection view over and IEnumerable of keys.
     /// </summary>
     internal sealed class KeysCollectionAccessor<TKey, TValue>
-        : KeysOrValuesCollectionAccessor<TKey, TValue, TKey> where TKey : notnull
+        : KeysOrValuesCollectionAccessor<TKey, TValue, TKey>
+        where TKey : notnull
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="KeysCollectionAccessor{TKey, TValue}"/> class.
@@ -191,7 +193,8 @@ namespace System.Collections.Immutable
     /// A lightweight collection view over and IEnumerable of values.
     /// </summary>
     internal sealed class ValuesCollectionAccessor<TKey, TValue>
-        : KeysOrValuesCollectionAccessor<TKey, TValue, TValue> where TKey : notnull
+        : KeysOrValuesCollectionAccessor<TKey, TValue, TValue>
+        where TKey : notnull
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValuesCollectionAccessor{TKey, TValue}"/> class.

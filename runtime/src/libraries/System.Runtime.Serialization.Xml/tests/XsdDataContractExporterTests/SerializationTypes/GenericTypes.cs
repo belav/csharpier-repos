@@ -22,7 +22,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [Serializable]
-    internal class Foo<Q> where Q : new()
+    internal class Foo<Q>
+        where Q : new()
     {
         Q single;
         Q[] array;

@@ -100,7 +100,8 @@ namespace System.Xml
             return false;
         }
 
-        private sealed class PriorityDictionary<K, V> where K : class
+        private sealed class PriorityDictionary<K, V>
+            where K : class
         {
             private Dictionary<K, V>? _dictionary;
             private readonly Entry[] _list;

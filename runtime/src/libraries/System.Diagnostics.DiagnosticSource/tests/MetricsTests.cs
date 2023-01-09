@@ -2919,7 +2919,8 @@ namespace System.Diagnostics.Metrics.Tests
             Counter<T> counter,
             T value,
             KeyValuePair<string, object?>[] tags
-        ) where T : struct
+        )
+            where T : struct
         {
             switch (tags.Length)
             {
@@ -2993,7 +2994,8 @@ namespace System.Diagnostics.Metrics.Tests
             UpDownCounter<T> counter,
             T value,
             KeyValuePair<string, object?>[] tags
-        ) where T : struct
+        )
+            where T : struct
         {
             switch (tags.Length)
             {
@@ -3067,7 +3069,8 @@ namespace System.Diagnostics.Metrics.Tests
             Histogram<T> histogram,
             T value,
             KeyValuePair<string, object?>[] tags
-        ) where T : struct
+        )
+            where T : struct
         {
             switch (tags.Length)
             {
@@ -3157,7 +3160,8 @@ namespace System.Diagnostics.Metrics.Tests
             Instrument<T> instrument,
             Action<T, KeyValuePair<string, object?>[]> record,
             bool allowNegative = false
-        ) where T : struct
+        )
+            where T : struct
         {
             using MeterListener listener = new MeterListener();
             listener.InstrumentPublished = (theInstrument, theListener) =>
@@ -3212,7 +3216,8 @@ namespace System.Diagnostics.Metrics.Tests
         private void ObservableInstrumentMeasurementAggregationValidation<T>(
             ObservableInstrument<T> instrument,
             Measurement<T>[] expectedResult
-        ) where T : struct
+        )
+            where T : struct
         {
             using MeterListener listener = new MeterListener();
             listener.InstrumentPublished = (theInstrument, theListener) =>
@@ -3253,7 +3258,8 @@ namespace System.Diagnostics.Metrics.Tests
         private void InstrumentPassingVariableTagsParametersTest<T>(
             Instrument<T> instrument,
             Func<Instrument<T>, T, KeyValuePair<string, object?>[], T> record
-        ) where T : struct
+        )
+            where T : struct
         {
             using MeterListener listener = new MeterListener();
             listener.InstrumentPublished = (theInstrument, theListener) =>
@@ -3364,7 +3370,8 @@ namespace System.Diagnostics.Metrics.Tests
             expectedValue = record(instrument, expectedValue, expectedTags);
         }
 
-        private T ConvertValue<T>(short value) where T : struct
+        private T ConvertValue<T>(short value)
+            where T : struct
         {
             if (typeof(T) == typeof(byte))
             {

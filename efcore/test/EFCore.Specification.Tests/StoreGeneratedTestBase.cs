@@ -26,7 +26,8 @@ public abstract class StoreGeneratedTestBase<TFixture> : IClassFixture<TFixture>
         ValueGenerationPositive<Guid, GuidToBytes>();
     }
 
-    private void ValueGenerationPositive<TKey, TEntity>() where TEntity : WithConverter<TKey>, new()
+    private void ValueGenerationPositive<TKey, TEntity>()
+        where TEntity : WithConverter<TKey>, new()
     {
         TKey? id;
 

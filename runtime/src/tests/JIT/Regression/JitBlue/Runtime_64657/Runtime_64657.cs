@@ -16,7 +16,8 @@ public unsafe class Runtime_64657
     );
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Validate<T>(T* c, int x) where T : unmanaged
+    static void Validate<T>(T* c, int x)
+        where T : unmanaged
     {
         // this nullcheck should not read more than requested
         T implicitNullcheck = c[x];

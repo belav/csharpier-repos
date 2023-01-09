@@ -90,12 +90,14 @@ namespace System.Web.Http.Services
         /// </summary>
         protected DefaultServices() { }
 
-        private void SetSingle<T>(T instance) where T : class
+        private void SetSingle<T>(T instance)
+            where T : class
         {
             _defaultServicesSingle[typeof(T)] = instance;
         }
 
-        private void SetMultiple<T>(params T[] instances) where T : class
+        private void SetMultiple<T>(params T[] instances)
+            where T : class
         {
             var x = (IEnumerable<object>)instances;
             _defaultServicesMulti[typeof(T)] = new List<object>(x);

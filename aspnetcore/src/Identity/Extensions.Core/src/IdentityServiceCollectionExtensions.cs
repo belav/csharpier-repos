@@ -33,7 +33,8 @@ public static class IdentityServiceCollectionExtensions
     public static IdentityBuilder AddIdentityCore<TUser>(
         this IServiceCollection services,
         Action<IdentityOptions> setupAction
-    ) where TUser : class
+    )
+        where TUser : class
     {
         // Services identity depends on
         services.AddOptions().AddLogging();

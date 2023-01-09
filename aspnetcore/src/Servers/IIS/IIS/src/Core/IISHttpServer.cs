@@ -100,7 +100,8 @@ internal sealed class IISHttpServer : IServer
     public unsafe Task StartAsync<TContext>(
         IHttpApplication<TContext> application,
         CancellationToken cancellationToken
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         _httpServerHandle = GCHandle.Alloc(this);
 
@@ -315,7 +316,8 @@ internal sealed class IISHttpServer : IServer
         }
     }
 
-    private sealed class IISContextFactory<T> : IISContextFactory where T : notnull
+    private sealed class IISContextFactory<T> : IISContextFactory
+        where T : notnull
     {
         private const string Latin1Suppport =
             "Microsoft.AspNetCore.Server.IIS.Latin1RequestHeaders";

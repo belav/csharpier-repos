@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for managing user in a persistence store.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class AspNetUserManager<TUser> : UserManager<TUser>, IDisposable where TUser : class
+public class AspNetUserManager<TUser> : UserManager<TUser>, IDisposable
+    where TUser : class
 {
     private readonly CancellationToken _cancel;
 

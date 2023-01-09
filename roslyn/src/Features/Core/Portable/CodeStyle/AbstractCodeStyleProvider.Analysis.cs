@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             public void RegisterSyntaxNodeAction<TSyntaxKind>(
                 Action<SyntaxNodeAnalysisContext, CodeStyleOption2<TOptionValue>> analyze,
                 params TSyntaxKind[] syntaxKinds
-            ) where TSyntaxKind : struct
+            )
+                where TSyntaxKind : struct
             {
                 var provider = _codeStyleProvider;
                 _context.RegisterSyntaxNodeAction(

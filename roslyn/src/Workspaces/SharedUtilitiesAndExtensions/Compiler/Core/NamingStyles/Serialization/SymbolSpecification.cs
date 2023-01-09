@@ -189,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static bool AnyMatches<TSymbolMatcher>(
             ImmutableArray<TSymbolMatcher> matchers,
             ISymbol symbol
-        ) where TSymbolMatcher : ISymbolMatcher
+        )
+            where TSymbolMatcher : ISymbolMatcher
         {
             foreach (var matcher in matchers)
             {
@@ -218,7 +219,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
         private static bool AllMatches<TSymbolMatcher>(
             ImmutableArray<TSymbolMatcher> matchers,
             ISymbol symbol
-        ) where TSymbolMatcher : ISymbolMatcher
+        )
+            where TSymbolMatcher : ISymbolMatcher
         {
             foreach (var matcher in matchers)
             {

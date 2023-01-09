@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Host
     /// A value source that caches its value weakly once obtained from its source.
     /// The source must allow repeatable accesses.
     /// </summary>
-    internal sealed class WeaklyCachedValueSource<T> : ValueSource<T> where T : class
+    internal sealed class WeaklyCachedValueSource<T> : ValueSource<T>
+        where T : class
     {
         private SemaphoreSlim? _lazyGate; // Lazily created. Access via the Gate property
         private readonly ValueSource<T> _source;

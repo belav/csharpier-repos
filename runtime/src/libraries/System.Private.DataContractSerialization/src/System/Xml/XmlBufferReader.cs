@@ -535,7 +535,8 @@ namespace System.Xml
             return value;
         }
 
-        public void ReadRawArrayBytes<T>(Span<T> dst) where T : unmanaged
+        public void ReadRawArrayBytes<T>(Span<T> dst)
+            where T : unmanaged
         {
             ReadRawArrayBytes(MemoryMarshal.AsBytes(dst));
         }
@@ -1001,7 +1002,8 @@ namespace System.Xml
         }
 
 #pragma warning disable 8500 // sizeof of managed types
-        private unsafe T ReadRawBytes<T>() where T : unmanaged
+        private unsafe T ReadRawBytes<T>()
+            where T : unmanaged
         {
             ReadOnlySpan<byte> buffer = GetBuffer(sizeof(T), out int offset)
                 .AsSpan(offset, sizeof(T));
@@ -1011,8 +1013,8 @@ namespace System.Xml
             return value;
         }
 
-        private unsafe T ReadRawBytes<T>(int offset) where T : unmanaged =>
-            MemoryMarshal.Read<T>(_buffer.AsSpan(offset, sizeof(T)));
+        private unsafe T ReadRawBytes<T>(int offset)
+            where T : unmanaged => MemoryMarshal.Read<T>(_buffer.AsSpan(offset, sizeof(T)));
 #pragma warning restore 8500
 
         public int GetInt16(int offset) =>

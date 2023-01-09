@@ -43,7 +43,8 @@ public class PriorityOrderer : ITestCaseOrderer
     /// <returns></returns>
     public IEnumerable<XunitTestCase> OrderTestCases<XunitTestCase>(
         IEnumerable<XunitTestCase> testCases
-    ) where XunitTestCase : ITestCase
+    )
+        where XunitTestCase : ITestCase
     {
         var sortedMethods = new SortedDictionary<int, List<XunitTestCase>>();
 

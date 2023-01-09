@@ -22,7 +22,8 @@ namespace System.UnitTesting
         /// <summary>
         ///     Verifies that the specified action throws an exception of type <typeparam name="T"/>.
         /// </summary>
-        public static T Throws<T>(Action action) where T : Exception
+        public static T Throws<T>(Action action)
+            where T : Exception
         {
             return Throws<T>(RetryMode.Retry, action, (Action<T, int>)null);
         }
@@ -72,7 +73,8 @@ namespace System.UnitTesting
         ///     Verifies that the specified action throws an exception of type <typeparam name="T"/>,
         ///     indicating whether to retry.
         /// </summary>
-        public static T Throws<T>(RetryMode retry, Action action) where T : Exception
+        public static T Throws<T>(RetryMode retry, Action action)
+            where T : Exception
         {
             return Throws<T>(retry, action, (Action<T, int>)null);
         }

@@ -62,7 +62,8 @@ namespace IntelHardwareIntrinsicTest._Lzcnt
             Assert.Equal(Pass, testResult);
         }
 
-        public struct LZCNT<T> where T : struct
+        public struct LZCNT<T>
+            where T : struct
         {
             public T s;
             public T res;

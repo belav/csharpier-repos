@@ -34,13 +34,15 @@ namespace System.Linq
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector
-        ) where TKey : notnull => ToDictionary(source, keySelector, null);
+        )
+            where TKey : notnull => ToDictionary(source, keySelector, null);
 
         public static Dictionary<TKey, TSource> ToDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (source == null)
             {
@@ -85,7 +87,8 @@ namespace System.Linq
             TSource[] source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TSource> d = new Dictionary<TKey, TSource>(source.Length, comparer);
             for (int i = 0; i < source.Length; i++)
@@ -100,7 +103,8 @@ namespace System.Linq
             List<TSource> source,
             Func<TSource, TKey> keySelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TSource> d = new Dictionary<TKey, TSource>(source.Count, comparer);
             foreach (TSource element in source)
@@ -115,14 +119,16 @@ namespace System.Linq
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector
-        ) where TKey : notnull => ToDictionary(source, keySelector, elementSelector, null);
+        )
+            where TKey : notnull => ToDictionary(source, keySelector, elementSelector, null);
 
         public static Dictionary<TKey, TElement> ToDictionary<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (source == null)
             {
@@ -173,7 +179,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TElement> d = new Dictionary<TKey, TElement>(source.Length, comparer);
             for (int i = 0; i < source.Length; i++)
@@ -189,7 +196,8 @@ namespace System.Linq
             Func<TSource, TKey> keySelector,
             Func<TSource, TElement> elementSelector,
             IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Dictionary<TKey, TElement> d = new Dictionary<TKey, TElement>(source.Count, comparer);
             foreach (TSource element in source)

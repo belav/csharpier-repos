@@ -2000,7 +2000,8 @@ namespace System.ServiceModel.Syndication.Tests
             public SyndicationItem CreateItemInstanceEntryPoint() => CreateItemInstance();
         }
 
-        public class GenericFormatter<T> : Atom10ItemFormatter<T> where T : SyndicationItem, new()
+        public class GenericFormatter<T> : Atom10ItemFormatter<T>
+            where T : SyndicationItem, new()
         {
             public GenericFormatter()
                 : base() { }

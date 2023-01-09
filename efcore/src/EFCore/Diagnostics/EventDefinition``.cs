@@ -62,7 +62,8 @@ public class EventDefinition<TParam1, TParam2> : EventDefinitionBase
         IDiagnosticsLogger<TLoggerCategory> logger,
         TParam1 arg1,
         TParam2 arg2
-    ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+    )
+        where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)
         {

@@ -289,7 +289,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LineSeparators
             SyntaxList<T> children,
             ArrayBuilder<TextSpan> spans,
             CancellationToken cancellationToken
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             Contract.ThrowIfNull(spans);
 

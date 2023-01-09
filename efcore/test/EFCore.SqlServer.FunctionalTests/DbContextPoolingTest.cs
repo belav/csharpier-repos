@@ -23,7 +23,8 @@ public class DbContextPoolingTest
 {
     private static DbContextOptionsBuilder<TContext> ConfigureOptions<TContext>(
         DbContextOptionsBuilder<TContext> optionsBuilder
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         optionsBuilder
             .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString)
             .EnableServiceProviderCaching(false);
@@ -61,7 +62,8 @@ public class DbContextPoolingTest
 
     private static IServiceProvider BuildServiceProvider<TContext>(
         Action<DbContextOptionsBuilder> optionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         new ServiceCollection()
             .AddDbContextPool<TContext>(ob =>
             {
@@ -121,7 +123,8 @@ public class DbContextPoolingTest
     private static IDbContextFactory<TContext> BuildFactory<TContext>(
         bool withDependencyInjection,
         int poolSize
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         withDependencyInjection
             ? BuildServiceProviderWithFactory<TContext>(poolSize)
                 .GetService<IDbContextFactory<TContext>>()

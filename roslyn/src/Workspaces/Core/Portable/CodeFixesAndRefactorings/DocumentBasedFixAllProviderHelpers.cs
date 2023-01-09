@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 IProgressTracker,
                 Task<Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>>
             > getFixedDocumentsAsync
-        ) where TFixAllContext : IFixAllContext
+        )
+            where TFixAllContext : IFixAllContext
         {
             progressTracker.Description = progressTrackerDescription;
 
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 IProgressTracker,
                 Task<Dictionary<DocumentId, (SyntaxNode? node, SourceText? text)>>
             > getFixedDocumentsAsync
-        ) where TFixAllContext : IFixAllContext
+        )
+            where TFixAllContext : IFixAllContext
         {
             // First, compute and apply the fixes.
             var docIdToNewRootOrText = await getFixedDocumentsAsync(fixAllContext, progressTracker)

@@ -82,7 +82,8 @@ namespace ArrayTests
         public abstract void FillArray(object array, object val);
     }
 
-    public class IndexOfVal<T> : IndexOfValBase where T : struct
+    public class IndexOfVal<T> : IndexOfValBase
+        where T : struct
     {
         public override void FillArray(object array, object val)
         {

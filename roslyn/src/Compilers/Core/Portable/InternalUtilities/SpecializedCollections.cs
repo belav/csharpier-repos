@@ -48,7 +48,8 @@ namespace Roslyn.Utilities
             return Empty.Set<T>.Instance;
         }
 
-        public static IDictionary<TKey, TValue> EmptyDictionary<TKey, TValue>() where TKey : notnull
+        public static IDictionary<TKey, TValue> EmptyDictionary<TKey, TValue>()
+            where TKey : notnull
         {
             return Empty.Dictionary<TKey, TValue>.Instance;
         }

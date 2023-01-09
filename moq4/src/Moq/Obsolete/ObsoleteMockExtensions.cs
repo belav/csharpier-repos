@@ -44,7 +44,8 @@ namespace Moq
         public static ISetupSetter<T, TProperty> SetupSet<T, TProperty>(
             this Mock<T> mock,
             Expression<Func<T, TProperty>> expression
-        ) where T : class
+        )
+            where T : class
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -77,7 +78,8 @@ namespace Moq
         public static void VerifySet<T, TProperty>(
             this Mock<T> mock,
             Expression<Func<T, TProperty>> expression
-        ) where T : class
+        )
+            where T : class
         {
             Guard.NotNull(expression, nameof(expression));
 
@@ -112,7 +114,8 @@ namespace Moq
             this Mock<T> mock,
             Expression<Func<T, TProperty>> expression,
             string failMessage
-        ) where T : class
+        )
+            where T : class
         {
             Mock.VerifySet(mock, expression, Times.AtLeastOnce(), failMessage);
         }
@@ -147,7 +150,8 @@ namespace Moq
             this Mock<T> mock,
             Expression<Func<T, TProperty>> expression,
             Times times
-        ) where T : class
+        )
+            where T : class
         {
             Mock.VerifySet(mock, expression, times, null);
         }
@@ -185,7 +189,8 @@ namespace Moq
             Expression<Func<T, TProperty>> expression,
             Times times,
             string failMessage
-        ) where T : class
+        )
+            where T : class
         {
             Mock.VerifySet(mock, expression, times, failMessage);
         }

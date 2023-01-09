@@ -66,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             private IEnumerable<ITagSpan<T>> GetTags<T>(
                 NormalizedSnapshotSpanCollection spans,
                 T tag
-            ) where T : ITag
+            )
+                where T : ITag
             {
                 if (
                     !_stateMachine.GlobalOptions.GetOption(

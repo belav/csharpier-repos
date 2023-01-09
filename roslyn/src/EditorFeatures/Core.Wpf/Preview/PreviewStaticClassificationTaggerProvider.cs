@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         public PreviewStaticClassificationTaggerProvider(ClassificationTypeMap typeMap) =>
             _typeMap = typeMap;
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             return new Tagger(_typeMap, buffer) as ITagger<T>;
         }

@@ -41,7 +41,8 @@ public static class CorsEndpointConventionBuilderExtensions
     public static TBuilder RequireCors<TBuilder>(
         this TBuilder builder,
         Action<CorsPolicyBuilder> configurePolicy
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {

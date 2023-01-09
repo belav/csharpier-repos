@@ -472,7 +472,8 @@ internal static class TestExtensions
     public static EntityTypeBuilder<TEntity> GenericEntityBuilderExtension<TEntity>(
         this EntityTypeBuilder<TEntity> builder,
         string value
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         builder.HasAnnotation("Annotation", value + ".Annotation");
         builder.Metadata["Metadata"] = value + ".Metadata";
@@ -563,7 +564,8 @@ internal static class TestExtensions
     public static EntityTypeBuilder<TEntity> SharedNameExtension<TEntity, TBuilder>(
         this EntityTypeBuilder<TEntity> builder,
         string value
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         builder.HasAnnotation("Annotation", value + ".Annotation");
         builder.Metadata["Metadata"] = value + ".Metadata";

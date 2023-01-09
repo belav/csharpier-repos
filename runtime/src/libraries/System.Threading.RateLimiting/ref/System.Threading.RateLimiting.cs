@@ -235,7 +235,8 @@ namespace System.Threading.RateLimiting
                 System.Threading.RateLimiting.RateLimitPartition<TPartitionKey>
             > partitioner,
             System.Collections.Generic.IEqualityComparer<TPartitionKey>? equalityComparer = null
-        ) where TPartitionKey : notnull
+        )
+            where TPartitionKey : notnull
         {
             throw null;
         }

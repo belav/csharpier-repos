@@ -154,7 +154,8 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        private void ThrowsMaxOnce<T>(Action action) where T : Exception
+        private void ThrowsMaxOnce<T>(Action action)
+            where T : Exception
         {
             try
             {

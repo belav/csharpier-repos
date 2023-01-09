@@ -594,7 +594,8 @@ namespace Microsoft.CodeAnalysis
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ImmutableArray<TBase> Cast<TDerived, TBase>(
             this ImmutableArray<TDerived> items
-        ) where TDerived : class, TBase
+        )
+            where TDerived : class, TBase
         {
             return ImmutableArray<TBase>.CastUp(items);
         }
@@ -733,7 +734,8 @@ namespace Microsoft.CodeAnalysis
         internal static ImmutableArray<TValue> Flatten<TKey, TValue>(
             this Dictionary<TKey, ImmutableArray<TValue>> dictionary,
             IComparer<TValue>? comparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.Count == 0)
             {
@@ -878,7 +880,8 @@ namespace Microsoft.CodeAnalysis
             this ImmutableArray<T> items,
             Func<T, K> keySelector,
             IEqualityComparer<K>? comparer = null
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (items.Length == 1)
             {

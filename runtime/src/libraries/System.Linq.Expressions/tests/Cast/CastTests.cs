@@ -1379,7 +1379,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckObjectCastGenericWithClassRestrictionHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             object[] array = new object[] { null, new object(), new C(), new D(3) };
             for (int i = 0; i < array.Length; i++)
@@ -1390,7 +1391,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckObjectCastGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             object[] array = new object[] { null, new object(), new C(), new D(3) };
             for (int i = 0; i < array.Length; i++)
@@ -1410,7 +1412,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassRestrictionCastObjectHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Tc[] array = new Tc[] { null, default(Tc) };
             for (int i = 0; i < array.Length; i++)
@@ -1421,7 +1424,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionCastObjectHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -1432,7 +1436,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionCastValueTypeHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -1443,7 +1448,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckValueTypeCastGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             ValueType[] array = new ValueType[]
             {
@@ -2749,7 +2755,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyObjectCastGenericWithClassRestriction<Tc>(
             object value,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<Tc>> e = Expression.Lambda<Func<Tc>>(
                 Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Tc)),
@@ -2766,7 +2773,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyObjectCastGenericWithStructRestriction<Ts>(
             object value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts>> e = Expression.Lambda<Func<Ts>>(
                 Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Ts)),
@@ -2796,7 +2804,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithClassRestrictionCastObject<Tc>(
             Tc value,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<object>> e = Expression.Lambda<Func<object>>(
                 Expression.Convert(Expression.Constant(value, typeof(Tc)), typeof(object)),
@@ -2810,7 +2819,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithStructRestrictionCastObject<Ts>(
             Ts value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<object>> e = Expression.Lambda<Func<object>>(
                 Expression.Convert(Expression.Constant(value, typeof(Ts)), typeof(object)),
@@ -2824,7 +2834,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithStructRestrictionCastValueType<Ts>(
             Ts value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<ValueType>> e = Expression.Lambda<Func<ValueType>>(
                 Expression.Convert(Expression.Constant(value, typeof(Ts)), typeof(ValueType)),
@@ -2838,7 +2849,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyValueTypeCastGenericWithStructRestriction<Ts>(
             ValueType value,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts>> e = Expression.Lambda<Func<Ts>>(
                 Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(Ts)),

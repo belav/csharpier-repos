@@ -31,26 +31,30 @@ class MyInt : IncrDecr
     }
 }
 
-class MyCounter<T> where T : IncrDecr, new()
+class MyCounter<T>
+    where T : IncrDecr, new()
 {
     T counter = new T();
     T[] counters = new T[1];
 
-    public void Increment<T2>() where T2 : IncrDecr, new()
+    public void Increment<T2>()
+        where T2 : IncrDecr, new()
     {
         T2 cnter = new T2();
         cnter.Incr(100);
         counter = (T)(IncrDecr)cnter;
     }
 
-    public void Decrement<T2>() where T2 : IncrDecr, new()
+    public void Decrement<T2>()
+        where T2 : IncrDecr, new()
     {
         T2 cnter = (T2)(IncrDecr)counter;
         cnter.Decr(100);
         counter = (T)(IncrDecr)cnter;
     }
 
-    public void Increment<T2>(int index) where T2 : IncrDecr, new()
+    public void Increment<T2>(int index)
+        where T2 : IncrDecr, new()
     {
         T2[] cnters = new T2[1];
         cnters[index] = new T2();
@@ -58,7 +62,8 @@ class MyCounter<T> where T : IncrDecr, new()
         counters[index] = (T)(IncrDecr)cnters[index];
     }
 
-    public void Decrement<T2>(int index) where T2 : IncrDecr, new()
+    public void Decrement<T2>(int index)
+        where T2 : IncrDecr, new()
     {
         T2[] cnters = new T2[1];
         cnters[index] = (T2)(IncrDecr)counters[index];
@@ -66,13 +71,15 @@ class MyCounter<T> where T : IncrDecr, new()
         counters[index] = (T)(IncrDecr)cnters[index];
     }
 
-    public virtual void Increment2<T2>(T2 cnter) where T2 : IncrDecr, new()
+    public virtual void Increment2<T2>(T2 cnter)
+        where T2 : IncrDecr, new()
     {
         cnter.Incr(100);
         counter = (T)(IncrDecr)cnter;
     }
 
-    public virtual void Decrement2<T2>(T2 cnter) where T2 : IncrDecr, new()
+    public virtual void Decrement2<T2>(T2 cnter)
+        where T2 : IncrDecr, new()
     {
         cnter.Decr(100);
         counter = (T)(IncrDecr)cnter;

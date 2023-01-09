@@ -98,7 +98,8 @@ internal static partial class Interop
         TSafeHandle handle,
         string? path = null,
         bool isDirError = false
-    ) where TSafeHandle : SafeHandle
+    )
+        where TSafeHandle : SafeHandle
     {
         if (handle.IsInvalid)
         {

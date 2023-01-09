@@ -10,7 +10,8 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract class SymbolFactory<ModuleSymbol, TypeSymbol> where TypeSymbol : class
+    internal abstract class SymbolFactory<ModuleSymbol, TypeSymbol>
+        where TypeSymbol : class
     {
         internal abstract TypeSymbol GetUnsupportedMetadataTypeSymbol(
             ModuleSymbol moduleSymbol,

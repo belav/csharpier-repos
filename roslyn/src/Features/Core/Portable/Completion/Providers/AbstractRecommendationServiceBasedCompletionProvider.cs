@@ -19,7 +19,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractRecommendationServiceBasedCompletionProvider<TSyntaxContext>
-        : AbstractSymbolCompletionProvider<TSyntaxContext> where TSyntaxContext : SyntaxContext
+        : AbstractSymbolCompletionProvider<TSyntaxContext>
+        where TSyntaxContext : SyntaxContext
     {
         protected abstract Task<bool> ShouldPreselectInferredTypesAsync(
             CompletionContext? completionContext,

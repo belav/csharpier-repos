@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static TNode WithAnnotations<TNode>(
             this TNode node,
             params SyntaxAnnotation[] annotations
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             return (TNode)node.Green.SetAnnotations(annotations).CreateRed();
         }

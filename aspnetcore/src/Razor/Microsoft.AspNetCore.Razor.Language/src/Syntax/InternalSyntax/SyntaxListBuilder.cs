@@ -107,7 +107,8 @@ internal class SyntaxListBuilder
         Validate(oldCount, Count);
     }
 
-    public void AddRange<TNode>(SyntaxList<TNode> list) where TNode : GreenNode
+    public void AddRange<TNode>(SyntaxList<TNode> list)
+        where TNode : GreenNode
     {
         this.AddRange(list, 0, list.Count);
     }
@@ -191,7 +192,8 @@ internal class SyntaxListBuilder
         return new SyntaxList<GreenNode>(ToListNode());
     }
 
-    public SyntaxList<TNode> ToList<TNode>() where TNode : GreenNode
+    public SyntaxList<TNode> ToList<TNode>()
+        where TNode : GreenNode
     {
         return new SyntaxList<TNode>(ToListNode());
     }

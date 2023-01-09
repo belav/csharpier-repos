@@ -52,7 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection Configure<TOptions>(
             this IServiceCollection services,
             Action<TOptions> configureOptions
-        ) where TOptions : class =>
+        )
+            where TOptions : class =>
             services.Configure(Options.Options.DefaultName, configureOptions);
 
         /// <summary>
@@ -68,7 +69,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string? name,
             Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(configureOptions);
@@ -90,7 +92,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection ConfigureAll<TOptions>(
             this IServiceCollection services,
             Action<TOptions> configureOptions
-        ) where TOptions : class =>
+        )
+            where TOptions : class =>
             services.Configure(name: null, configureOptions: configureOptions);
 
         /// <summary>
@@ -104,7 +107,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection PostConfigure<TOptions>(
             this IServiceCollection services,
             Action<TOptions> configureOptions
-        ) where TOptions : class =>
+        )
+            where TOptions : class =>
             services.PostConfigure(Options.Options.DefaultName, configureOptions);
 
         /// <summary>
@@ -120,7 +124,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             string? name,
             Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(configureOptions);
@@ -143,7 +148,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection PostConfigureAll<TOptions>(
             this IServiceCollection services,
             Action<TOptions> configureOptions
-        ) where TOptions : class =>
+        )
+            where TOptions : class =>
             services.PostConfigure(name: null, configureOptions: configureOptions);
 
         /// <summary>
@@ -157,8 +163,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection ConfigureOptions<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
                 TConfigureOptions
-        >(this IServiceCollection services) where TConfigureOptions : class =>
-            services.ConfigureOptions(typeof(TConfigureOptions));
+        >(this IServiceCollection services)
+            where TConfigureOptions : class => services.ConfigureOptions(typeof(TConfigureOptions));
 
         private static IEnumerable<Type> FindConfigurationServices(Type type)
         {
@@ -268,7 +274,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="OptionsBuilder{TOptions}"/> so that configure calls can be chained in it.</returns>
         public static OptionsBuilder<TOptions> AddOptions<TOptions>(
             this IServiceCollection services
-        ) where TOptions : class => services.AddOptions<TOptions>(Options.Options.DefaultName);
+        )
+            where TOptions : class => services.AddOptions<TOptions>(Options.Options.DefaultName);
 
         /// <summary>
         /// Gets an options builder that forwards Configure calls for the same named <typeparamref name="TOptions"/> to the underlying service collection.
@@ -280,7 +287,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static OptionsBuilder<TOptions> AddOptions<TOptions>(
             this IServiceCollection services,
             string? name
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(services);
 

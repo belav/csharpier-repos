@@ -21,7 +21,8 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public class ThrowingDiagnosticAnalyzer<TLanguageKindEnum>
-        : TestDiagnosticAnalyzer<TLanguageKindEnum> where TLanguageKindEnum : struct
+        : TestDiagnosticAnalyzer<TLanguageKindEnum>
+        where TLanguageKindEnum : struct
     {
         [Serializable]
         public class DeliberateException : Exception

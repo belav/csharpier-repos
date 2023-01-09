@@ -11,8 +11,8 @@ namespace Roslyn.Utilities
 {
     internal static class LazyInitialization
     {
-        internal static T InterlockedStore<T>([NotNull] ref T? target, T value) where T : class =>
-            Interlocked.CompareExchange(ref target, value, null) ?? value;
+        internal static T InterlockedStore<T>([NotNull] ref T? target, T value)
+            where T : class => Interlocked.CompareExchange(ref target, value, null) ?? value;
 
         internal static int InterlockedStore(ref int target, int uninitializedValue, int value)
         {
@@ -46,7 +46,8 @@ namespace Roslyn.Utilities
             [NotNull] ref T? target,
             Func<U, T> valueFactory,
             U state
-        ) where T : class
+        )
+            where T : class
         {
             return Volatile.Read(ref target!) ?? InterlockedStore(ref target, valueFactory(state));
         }

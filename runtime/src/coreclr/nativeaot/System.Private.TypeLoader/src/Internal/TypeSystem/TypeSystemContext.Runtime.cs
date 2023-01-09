@@ -608,7 +608,8 @@ namespace Internal.TypeSystem
     internal static partial class TypeNameHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T WithDebugName<T>(this T type) where T : TypeDesc
+        public static T WithDebugName<T>(this T type)
+            where T : TypeDesc
         {
 #if DEBUG
             type.DebugName ??= type.ToString();

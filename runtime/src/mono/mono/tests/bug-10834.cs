@@ -40,7 +40,8 @@ namespace Repro
 
     abstract class C<U>
     {
-        public abstract int M1<T>(in T arg) where T : U, I1;
+        public abstract int M1<T>(in T arg)
+            where T : U, I1;
     }
 
     class Bug : C<S1>

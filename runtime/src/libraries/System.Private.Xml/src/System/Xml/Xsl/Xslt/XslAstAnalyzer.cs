@@ -54,7 +54,8 @@ namespace System.Xml.Xsl.Xslt
         /// Represents a graph using hashtable of adjacency lists.
         /// </summary>
         /// <typeparam name="V">Vertex type</typeparam>
-        internal sealed class Graph<V> : Dictionary<V, List<V>?> where V : XslNode
+        internal sealed class Graph<V> : Dictionary<V, List<V>?>
+            where V : XslNode
         {
             private static readonly IList<V> s_empty = (new List<V>()).AsReadOnly();
 

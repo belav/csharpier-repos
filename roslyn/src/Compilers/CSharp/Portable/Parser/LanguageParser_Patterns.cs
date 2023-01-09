@@ -689,7 +689,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxKind openKind,
             SyntaxKind closeKind,
             Func<LanguageParser, T> parseFunc
-        ) where T : CSharpSyntaxNode
+        )
+            where T : CSharpSyntaxNode
         {
             Debug.Assert(
                 (openKind, closeKind)
@@ -833,7 +834,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SeparatedSyntaxListBuilder<T> list,
             SyntaxKind expected,
             SyntaxKind closeKind
-        ) where T : CSharpSyntaxNode
+        )
+            where T : CSharpSyntaxNode
         {
             return this.SkipBadSeparatedListTokensWithExpectedKind(
                 ref open,

@@ -16,7 +16,8 @@ namespace Castle.DynamicProxy.Tests.GenClasses
 {
     using System;
 
-    public class GenClassWithGenMethods<T> where T : new()
+    public class GenClassWithGenMethods<T>
+        where T : new()
     {
         private object savedParam;
         private bool invoked;

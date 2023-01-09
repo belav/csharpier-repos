@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Collections
     ///
     /// Thread safe.
     /// </summary>
-    internal class CachingDictionary<TKey, TElement> where TKey : notnull
+    internal class CachingDictionary<TKey, TElement>
+        where TKey : notnull
     {
         private readonly Func<TKey, ImmutableArray<TElement>> _getElementsOfKey;
         private readonly Func<IEqualityComparer<TKey>, HashSet<TKey>> _getKeys;

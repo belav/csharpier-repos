@@ -725,7 +725,8 @@ namespace System.Collections.Immutable.Tests
         /// the ImmutableInterlocked method so that the delegate can test both overloads
         /// by being executed twice.
         /// </param>
-        private static void UpdateHelper<T>(Action<UpdateDelegate<T>> test) where T : class
+        private static void UpdateHelper<T>(Action<UpdateDelegate<T>> test)
+            where T : class
         {
             test(ImmutableInterlocked.Update<T>);
             test(UpdateWrapper<T>);
@@ -754,7 +755,8 @@ namespace System.Collections.Immutable.Tests
         /// <param name="location">The variable or field to be changed.</param>
         /// <param name="transformer">The function that transforms the value.</param>
         /// <returns>The result of the replacement function.</returns>
-        private static bool UpdateWrapper<T>(ref T location, Func<T, T> transformer) where T : class
+        private static bool UpdateWrapper<T>(ref T location, Func<T, T> transformer)
+            where T : class
         {
             return ImmutableInterlocked.Update<T, int>(
                 ref location,

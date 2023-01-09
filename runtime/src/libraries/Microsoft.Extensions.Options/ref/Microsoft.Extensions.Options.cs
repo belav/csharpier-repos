@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> AddOptions<TOptions>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -25,7 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.Options.OptionsBuilder<TOptions> AddOptions<TOptions>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string? name
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -33,7 +35,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection ConfigureAll<TOptions>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -71,7 +74,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection Configure<TOptions>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -80,7 +84,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string? name,
             System.Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -88,7 +93,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection PostConfigureAll<TOptions>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -96,7 +102,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection PostConfigure<TOptions>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -105,7 +112,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string? name,
             System.Action<TOptions> configureOptions
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -116,7 +124,8 @@ namespace Microsoft.Extensions.Options
 {
     public partial class ConfigureNamedOptions<TOptions>
         : Microsoft.Extensions.Options.IConfigureNamedOptions<TOptions>,
-            Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
+            Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+        where TOptions : class
     {
         public ConfigureNamedOptions(string? name, System.Action<TOptions>? action) { }
 
@@ -345,7 +354,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ConfigureOptions<TOptions>
-        : Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+        where TOptions : class
     {
         public ConfigureOptions(System.Action<TOptions>? action) { }
 
@@ -358,12 +368,14 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial interface IConfigureNamedOptions<in TOptions>
-        : Microsoft.Extensions.Options.IConfigureOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IConfigureOptions<TOptions>
+        where TOptions : class
     {
         void Configure(string? name, TOptions options);
     }
 
-    public partial interface IConfigureOptions<in TOptions> where TOptions : class
+    public partial interface IConfigureOptions<in TOptions>
+        where TOptions : class
     {
         void Configure(TOptions options);
     }
@@ -383,7 +395,8 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             TOptions
-    > where TOptions : class
+    >
+        where TOptions : class
     {
         TOptions Create(string name);
     }
@@ -397,7 +410,8 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             TOptions
-    > where TOptions : class
+    >
+        where TOptions : class
     {
         void Clear();
         TOptions GetOrAdd(string? name, System.Func<TOptions> createOptions);
@@ -430,7 +444,8 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             out TOptions
-    > : Microsoft.Extensions.Options.IOptions<TOptions> where TOptions : class
+    > : Microsoft.Extensions.Options.IOptions<TOptions>
+        where TOptions : class
     {
         TOptions Get(string? name);
     }
@@ -444,17 +459,20 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             out TOptions
-    > where TOptions : class
+    >
+        where TOptions : class
     {
         TOptions Value { get; }
     }
 
-    public partial interface IPostConfigureOptions<in TOptions> where TOptions : class
+    public partial interface IPostConfigureOptions<in TOptions>
+        where TOptions : class
     {
         void PostConfigure(string? name, TOptions options);
     }
 
-    public partial interface IValidateOptions<TOptions> where TOptions : class
+    public partial interface IValidateOptions<TOptions>
+        where TOptions : class
     {
         Microsoft.Extensions.Options.ValidateOptionsResult Validate(string? name, TOptions options);
     }
@@ -472,13 +490,15 @@ namespace Microsoft.Extensions.Options
                     .PublicParameterlessConstructor
             )]
                 TOptions
-        >(TOptions options) where TOptions : class
+        >(TOptions options)
+            where TOptions : class
         {
             throw null;
         }
     }
 
-    public partial class OptionsBuilder<TOptions> where TOptions : class
+    public partial class OptionsBuilder<TOptions>
+        where TOptions : class
     {
         public OptionsBuilder(
             Microsoft.Extensions.DependencyInjection.IServiceCollection services,
@@ -503,7 +523,8 @@ namespace Microsoft.Extensions.Options
 
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Configure<TDep>(
             System.Action<TOptions, TDep> configureOptions
-        ) where TDep : class
+        )
+            where TDep : class
         {
             throw null;
         }
@@ -569,7 +590,8 @@ namespace Microsoft.Extensions.Options
 
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> PostConfigure<TDep>(
             System.Action<TOptions, TDep> configureOptions
-        ) where TDep : class
+        )
+            where TDep : class
         {
             throw null;
         }
@@ -643,7 +665,8 @@ namespace Microsoft.Extensions.Options
 
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<TDep>(
             System.Func<TOptions, TDep, bool> validation
-        ) where TDep : notnull
+        )
+            where TDep : notnull
         {
             throw null;
         }
@@ -651,7 +674,8 @@ namespace Microsoft.Extensions.Options
         public virtual Microsoft.Extensions.Options.OptionsBuilder<TOptions> Validate<TDep>(
             System.Func<TOptions, TDep, bool> validation,
             string failureMessage
-        ) where TDep : notnull
+        )
+            where TDep : notnull
         {
             throw null;
         }
@@ -772,7 +796,8 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             TOptions
-    > : Microsoft.Extensions.Options.IOptionsMonitorCache<TOptions> where TOptions : class
+    > : Microsoft.Extensions.Options.IOptionsMonitorCache<TOptions>
+        where TOptions : class
     {
         public OptionsCache() { }
 
@@ -803,7 +828,8 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             TOptions
-    > : Microsoft.Extensions.Options.IOptionsFactory<TOptions> where TOptions : class
+    > : Microsoft.Extensions.Options.IOptionsFactory<TOptions>
+        where TOptions : class
     {
         public OptionsFactory(
             System.Collections.Generic.IEnumerable<Microsoft.Extensions.Options.IConfigureOptions<TOptions>> setups,
@@ -838,7 +864,8 @@ namespace Microsoft.Extensions.Options
             TOptions
     >
         : Microsoft.Extensions.Options.IOptions<TOptions>,
-            Microsoft.Extensions.Options.IOptionsSnapshot<TOptions> where TOptions : class
+            Microsoft.Extensions.Options.IOptionsSnapshot<TOptions>
+        where TOptions : class
     {
         public OptionsManager(Microsoft.Extensions.Options.IOptionsFactory<TOptions> factory) { }
 
@@ -944,7 +971,8 @@ namespace Microsoft.Extensions.Options
                 .PublicParameterlessConstructor
         )]
             TOptions
-    > : Microsoft.Extensions.Options.IOptions<TOptions> where TOptions : class
+    > : Microsoft.Extensions.Options.IOptions<TOptions>
+        where TOptions : class
     {
         public OptionsWrapper(TOptions options) { }
 
@@ -955,7 +983,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class PostConfigureOptions<TOptions>
-        : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IPostConfigureOptions<TOptions>
+        where TOptions : class
     {
         public PostConfigureOptions(string? name, System.Action<TOptions>? action) { }
 
@@ -1225,7 +1254,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ValidateOptions<TOptions>
-        : Microsoft.Extensions.Options.IValidateOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IValidateOptions<TOptions>
+        where TOptions : class
     {
         public ValidateOptions(
             string? name,
@@ -1256,7 +1286,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ValidateOptions<TOptions, TDep>
-        : Microsoft.Extensions.Options.IValidateOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IValidateOptions<TOptions>
+        where TOptions : class
     {
         public ValidateOptions(
             string? name,
@@ -1292,7 +1323,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ValidateOptions<TOptions, TDep1, TDep2>
-        : Microsoft.Extensions.Options.IValidateOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IValidateOptions<TOptions>
+        where TOptions : class
     {
         public ValidateOptions(
             string? name,
@@ -1333,7 +1365,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ValidateOptions<TOptions, TDep1, TDep2, TDep3>
-        : Microsoft.Extensions.Options.IValidateOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IValidateOptions<TOptions>
+        where TOptions : class
     {
         public ValidateOptions(
             string? name,
@@ -1379,7 +1412,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4>
-        : Microsoft.Extensions.Options.IValidateOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IValidateOptions<TOptions>
+        where TOptions : class
     {
         public ValidateOptions(
             string? name,
@@ -1430,7 +1464,8 @@ namespace Microsoft.Extensions.Options
     }
 
     public partial class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
-        : Microsoft.Extensions.Options.IValidateOptions<TOptions> where TOptions : class
+        : Microsoft.Extensions.Options.IValidateOptions<TOptions>
+        where TOptions : class
     {
         public ValidateOptions(
             string? name,

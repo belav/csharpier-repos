@@ -11,7 +11,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 {
     internal abstract class SettingsSnapshotFactoryBase<T, TEntriesSnapshot>
-        : TableEntriesSnapshotFactoryBase where TEntriesSnapshot : SettingsEntriesSnapshotBase<T>
+        : TableEntriesSnapshotFactoryBase
+        where TEntriesSnapshot : SettingsEntriesSnapshotBase<T>
     {
         private readonly ISettingsProvider<T> _data;
 

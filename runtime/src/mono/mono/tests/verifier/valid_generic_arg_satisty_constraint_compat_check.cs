@@ -6,7 +6,8 @@ public class SerializerItemProxy<TBaseClass, TActualClass> : SerializerProxy<TAc
 
 public class SerializerProxy<T>
 {
-    static SerializerProxy<TItem> MakeItem<TItem>() where TItem : class, T
+    static SerializerProxy<TItem> MakeItem<TItem>()
+        where TItem : class, T
     {
         return new SerializerItemProxy<TItem, TItem>();
     }

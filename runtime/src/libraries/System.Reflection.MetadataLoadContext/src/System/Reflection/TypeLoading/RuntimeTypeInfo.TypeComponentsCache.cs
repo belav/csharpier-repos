@@ -61,7 +61,8 @@ namespace System.Reflection.TypeLoading
                 string name,
                 bool ignoreCase,
                 bool immediateTypeOnly
-            ) where M : MemberInfo
+            )
+                where M : MemberInfo
             {
                 int index = MemberPolicies<M>.MemberTypeIndex;
                 object[] cacheArray = ignoreCase
@@ -192,7 +193,8 @@ namespace System.Reflection.TypeLoading
             // In addition, if "ignoreCase" was passed to the constructor, BindingFlags.IgnoreCase is also in effect.
             //
             private sealed class PerNameQueryCache<M>
-                : ConcurrentUnifier<string, QueriedMemberList<M>> where M : MemberInfo
+                : ConcurrentUnifier<string, QueriedMemberList<M>>
+                where M : MemberInfo
             {
                 public PerNameQueryCache(
                     RuntimeTypeInfo type,

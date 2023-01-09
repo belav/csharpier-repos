@@ -4371,7 +4371,8 @@ namespace System.Linq.Expressions
         public System.Collections.ObjectModel.ReadOnlyCollection<T> VisitAndConvert<T>(
             System.Collections.ObjectModel.ReadOnlyCollection<T> nodes,
             string? callerName
-        ) where T : System.Linq.Expressions.Expression
+        )
+            where T : System.Linq.Expressions.Expression
         {
             throw null;
         }
@@ -5665,12 +5666,14 @@ namespace System.Runtime.CompilerServices
         public virtual T? BindDelegate<T>(
             System.Runtime.CompilerServices.CallSite<T> site,
             object[] args
-        ) where T : class
+        )
+            where T : class
         {
             throw null;
         }
 
-        protected void CacheTarget<T>(T target) where T : class { }
+        protected void CacheTarget<T>(T target)
+            where T : class { }
     }
 
     public static partial class CallSiteHelpers
@@ -5681,7 +5684,8 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    public partial class CallSite<T> : System.Runtime.CompilerServices.CallSite where T : class
+    public partial class CallSite<T> : System.Runtime.CompilerServices.CallSite
+        where T : class
     {
         internal CallSite() { }
 
@@ -5874,7 +5878,8 @@ namespace System.Runtime.CompilerServices
     [System.ComponentModel.EditorBrowsableAttribute(
         System.ComponentModel.EditorBrowsableState.Never
     )]
-    public partial class RuleCache<T> where T : class
+    public partial class RuleCache<T>
+        where T : class
     {
         internal RuleCache() { }
     }

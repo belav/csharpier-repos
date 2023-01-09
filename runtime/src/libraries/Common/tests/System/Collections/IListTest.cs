@@ -1611,7 +1611,8 @@ namespace Tests.Collections
         }
     }
 
-    public abstract class IListTest<TList, T> : IListTest<T> where TList : IList
+    public abstract class IListTest<TList, T> : IListTest<T>
+        where TList : IList
     {
         private readonly bool _isGenericCompatibility;
         private readonly bool _isResetNotSupported;

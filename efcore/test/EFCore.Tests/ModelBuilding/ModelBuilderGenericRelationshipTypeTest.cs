@@ -89,7 +89,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
 
         public override TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericTypeTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsOne(navigationExpression)
             );
@@ -97,7 +98,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
         public override TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsOne(
                     navigationExpression,
@@ -113,7 +115,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericTypeTestReferenceNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasOne(navigationExpression)
             );
@@ -123,7 +126,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             TRelatedEntity
         > HasMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new GenericTypeTestCollectionNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasMany(navigationExpression)
             );
@@ -439,7 +443,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class =>
+        )
+            where TJoinEntity : class =>
             new GenericTypeTestEntityTypeBuilder<TRightEntity>(
                 CollectionCollectionBuilder.UsingEntity(
                     typeof(TJoinEntity),
@@ -481,7 +486,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class =>
+        )
+            where TJoinEntity : class =>
             new GenericTypeTestEntityTypeBuilder<TRightEntity>(
                 CollectionCollectionBuilder.UsingEntity(
                     joinEntityName,
@@ -537,7 +543,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             TNewRelatedEntity
         > HasOne<TNewRelatedEntity>(
             Expression<Func<TRelatedEntity, TNewRelatedEntity?>>? navigationExpression = null
-        ) where TNewRelatedEntity : class =>
+        )
+            where TNewRelatedEntity : class =>
             new GenericTypeTestReferenceNavigationBuilder<TRelatedEntity, TNewRelatedEntity>(
                 OwnedNavigationBuilder.HasOne(navigationExpression)
             );

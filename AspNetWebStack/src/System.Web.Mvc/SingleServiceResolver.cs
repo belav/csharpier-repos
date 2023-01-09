@@ -6,7 +6,8 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    internal class SingleServiceResolver<TService> : IResolver<TService> where TService : class
+    internal class SingleServiceResolver<TService> : IResolver<TService>
+        where TService : class
     {
         private Lazy<TService> _currentValueFromResolver;
         private Func<TService> _currentValueThunk;

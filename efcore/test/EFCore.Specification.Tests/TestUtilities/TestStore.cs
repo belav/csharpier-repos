@@ -61,7 +61,8 @@ public abstract class TestStore : IDisposable
         Func<TestStore, TContext> createContext,
         Action<TContext> seed = null,
         Action<TContext> clean = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         Initialize(
             serviceProvider,
             createContext,

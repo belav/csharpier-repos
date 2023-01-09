@@ -2164,7 +2164,8 @@ public class ChangeDetectorTest
     private static InternalEntityEntry CreateInternalEntry<TEntity>(
         IServiceProvider contextServices,
         TEntity entity = null
-    ) where TEntity : class, new() =>
+    )
+        where TEntity : class, new() =>
         contextServices
             .GetRequiredService<IStateManager>()
             .GetOrCreateEntry(

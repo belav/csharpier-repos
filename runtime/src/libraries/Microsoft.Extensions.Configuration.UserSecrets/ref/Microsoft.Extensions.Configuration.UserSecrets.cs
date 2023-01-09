@@ -54,7 +54,8 @@ namespace Microsoft.Extensions.Configuration
 
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets<T>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration
-        ) where T : class
+        )
+            where T : class
         {
             throw null;
         }
@@ -62,7 +63,8 @@ namespace Microsoft.Extensions.Configuration
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder AddUserSecrets<T>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             bool optional
-        ) where T : class
+        )
+            where T : class
         {
             throw null;
         }
@@ -71,7 +73,8 @@ namespace Microsoft.Extensions.Configuration
             this Microsoft.Extensions.Configuration.IConfigurationBuilder configuration,
             bool optional,
             bool reloadOnChange
-        ) where T : class
+        )
+            where T : class
         {
             throw null;
         }

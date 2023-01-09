@@ -40,7 +40,8 @@ public class IdentityUser : IdentityUser<string>
 /// Represents a user in the identity system
 /// </summary>
 /// <typeparam name="TKey">The type used for the primary key for the user.</typeparam>
-public class IdentityUser<TKey> where TKey : IEquatable<TKey>
+public class IdentityUser<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityUser{TKey}"/>.

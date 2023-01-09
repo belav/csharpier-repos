@@ -962,7 +962,8 @@ public static class CoreLoggerExtensions
     /// <typeparam name="TLoggerCategory">The logger category for which to log the warning.</typeparam>
     public static void SensitiveDataLoggingEnabledWarning<TLoggerCategory>(
         this IDiagnosticsLogger<TLoggerCategory> diagnostics
-    ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+    )
+        where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         var definition = CoreResources.LogSensitiveDataLoggingEnabled(diagnostics);
 

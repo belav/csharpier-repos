@@ -168,7 +168,8 @@ namespace System.Text.Json
         /// When serializing and deserializing types using the options
         /// instance, metadata for the types will be fetched from the context instance.
         /// </remarks>
-        public void AddContext<TContext>() where TContext : JsonSerializerContext, new()
+        public void AddContext<TContext>()
+            where TContext : JsonSerializerContext, new()
         {
             VerifyMutable();
             TContext context = new();

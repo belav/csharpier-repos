@@ -1263,7 +1263,8 @@ namespace System.Reflection.Tests
             Assert.Equal(expected, c?.GetTypeInfo().IsAssignableTo(type.GetTypeInfo()) ?? false);
         }
 
-        class G<T, U> where T : U { }
+        class G<T, U>
+            where T : U { }
 
         static volatile object s_boxedInt32;
 
@@ -1324,7 +1325,8 @@ namespace System.Reflection.Tests
 
         interface IFace { }
 
-        class G<T> where T : class, IFace
+        class G<T>
+            where T : class, IFace
         {
             //void OpenGenericArrays()
             //{
@@ -1334,7 +1336,8 @@ namespace System.Reflection.Tests
             //}
         }
 
-        class GG<T, U> where T : class, U
+        class GG<T, U>
+            where T : class, U
         {
             //void OpenGenericArrays()
             //{
@@ -3142,7 +3145,8 @@ namespace System.Reflection.Tests
         public class InsideTypeInfoTests<U> { }
     }
 
-    public class TI_FullNameTest<T> where T : unmanaged
+    public class TI_FullNameTest<T>
+        where T : unmanaged
     {
         public static T TypeParam() => throw new Exception();
 

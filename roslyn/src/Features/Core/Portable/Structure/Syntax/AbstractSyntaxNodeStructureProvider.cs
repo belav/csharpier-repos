@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Shared.Collections;
 namespace Microsoft.CodeAnalysis.Structure
 {
     internal abstract class AbstractSyntaxNodeStructureProvider<TSyntaxNode>
-        : AbstractSyntaxStructureProvider where TSyntaxNode : SyntaxNode
+        : AbstractSyntaxStructureProvider
+        where TSyntaxNode : SyntaxNode
     {
         public sealed override void CollectBlockSpans(
             SyntaxTrivia trivia,

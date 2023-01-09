@@ -30,7 +30,8 @@ namespace Castle.Core.Internal
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The type attribute.</returns>
-        public static T GetAttribute<T>(this Type type) where T : Attribute
+        public static T GetAttribute<T>(this Type type)
+            where T : Attribute
         {
             return GetAttributes<T>(type).FirstOrDefault();
         }
@@ -40,7 +41,8 @@ namespace Castle.Core.Internal
         /// </summary>
         /// <param name="type">The type.</param>
         /// <returns>The type attributes.</returns>
-        public static IEnumerable<T> GetAttributes<T>(this Type type) where T : Attribute
+        public static IEnumerable<T> GetAttributes<T>(this Type type)
+            where T : Attribute
         {
             foreach (T a in type.GetCustomAttributes(typeof(T), false))
             {
@@ -53,7 +55,8 @@ namespace Castle.Core.Internal
         /// </summary>
         /// <param name="member">The member.</param>
         /// <returns>The member attribute.</returns>
-        public static T GetAttribute<T>(this MemberInfo member) where T : Attribute
+        public static T GetAttribute<T>(this MemberInfo member)
+            where T : Attribute
         {
             return GetAttributes<T>(member).FirstOrDefault();
         }
@@ -63,7 +66,8 @@ namespace Castle.Core.Internal
         /// </summary>
         /// <param name="member">The member.</param>
         /// <returns>The member attributes.</returns>
-        public static IEnumerable<T> GetAttributes<T>(this MemberInfo member) where T : Attribute
+        public static IEnumerable<T> GetAttributes<T>(this MemberInfo member)
+            where T : Attribute
         {
             foreach (T a in member.GetCustomAttributes(typeof(T), false))
             {
@@ -76,7 +80,8 @@ namespace Castle.Core.Internal
         /// </summary>
         /// <param name = "type">The type.</param>
         /// <returns>The type attribute.</returns>
-        public static T GetTypeAttribute<T>(this Type type) where T : Attribute
+        public static T GetTypeAttribute<T>(this Type type)
+            where T : Attribute
         {
             var attribute = GetAttribute<T>(type);
 
@@ -100,7 +105,8 @@ namespace Castle.Core.Internal
         /// </summary>
         /// <param name = "type">The type.</param>
         /// <returns>The type attributes.</returns>
-        public static T[] GetTypeAttributes<T>(Type type) where T : Attribute
+        public static T[] GetTypeAttributes<T>(Type type)
+            where T : Attribute
         {
             var attributes = GetAttributes<T>(type).ToArray();
 

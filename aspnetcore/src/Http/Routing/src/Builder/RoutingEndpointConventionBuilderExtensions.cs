@@ -63,7 +63,8 @@ public static class RoutingEndpointConventionBuilderExtensions
     public static TBuilder WithDisplayName<TBuilder>(
         this TBuilder builder,
         Func<EndpointBuilder, string> func
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(func);

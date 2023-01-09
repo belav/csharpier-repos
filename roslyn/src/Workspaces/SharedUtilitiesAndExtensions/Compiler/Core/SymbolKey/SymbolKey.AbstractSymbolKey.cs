@@ -6,7 +6,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey
     {
-        private abstract class AbstractSymbolKey<TSymbol> where TSymbol : class, ISymbol
+        private abstract class AbstractSymbolKey<TSymbol>
+            where TSymbol : class, ISymbol
         {
             public abstract void Create(TSymbol symbol, SymbolKeyWriter writer);
 

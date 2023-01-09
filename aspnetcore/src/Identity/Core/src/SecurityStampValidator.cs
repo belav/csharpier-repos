@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides default implementation of validation functions for security stamps.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class SecurityStampValidator<TUser> : ISecurityStampValidator where TUser : class
+public class SecurityStampValidator<TUser> : ISecurityStampValidator
+    where TUser : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="SecurityStampValidator{TUser}"/>.

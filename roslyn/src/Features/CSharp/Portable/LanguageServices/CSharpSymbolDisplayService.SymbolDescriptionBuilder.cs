@@ -221,7 +221,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.LanguageServices
                 return ImmutableArray<SymbolDisplayPart>.Empty;
             }
 
-            private async Task<T> GetFirstDeclarationAsync<T>(ISymbol symbol) where T : SyntaxNode
+            private async Task<T> GetFirstDeclarationAsync<T>(ISymbol symbol)
+                where T : SyntaxNode
             {
                 foreach (var syntaxRef in symbol.DeclaringSyntaxReferences)
                 {

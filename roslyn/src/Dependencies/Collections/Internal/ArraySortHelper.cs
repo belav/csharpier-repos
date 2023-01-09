@@ -335,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
     }
 
-    internal static class SegmentedGenericArraySortHelper<T> where T : IComparable<T>
+    internal static class SegmentedGenericArraySortHelper<T>
+        where T : IComparable<T>
     {
         public static void Sort(SegmentedArraySegment<T> keys, IComparer<T>? comparer)
         {
@@ -1466,7 +1467,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         public static int MoveNansToFront<TKey, TValue>(
             SegmentedArraySegment<TKey> keys,
             Span<TValue> values
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Debug.Assert(typeof(TKey) == typeof(double) || typeof(TKey) == typeof(float));
 

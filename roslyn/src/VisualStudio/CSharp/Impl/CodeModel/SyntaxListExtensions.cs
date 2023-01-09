@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
         public static IReadOnlyList<TNode> AsReadOnlyList<TNode>(
             this SeparatedSyntaxList<TNode> separatedList
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return separatedList;
         }

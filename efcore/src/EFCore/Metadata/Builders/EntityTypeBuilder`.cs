@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <typeparam name="TEntity">The entity type being configured.</typeparam>
 public class EntityTypeBuilder<
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-> : EntityTypeBuilder where TEntity : class
+> : EntityTypeBuilder
+    where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -189,7 +190,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the navigation property.</returns>
     public virtual NavigationBuilder<TEntity, TNavigation> Navigation<TNavigation>(
         Expression<Func<TEntity, TNavigation?>> navigationExpression
-    ) where TNavigation : class =>
+    )
+        where TNavigation : class =>
         new(
             Builder.Navigation(
                 Check.NotNull(navigationExpression, nameof(navigationExpression)).GetMemberAccess()
@@ -208,7 +210,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the navigation property.</returns>
     public virtual NavigationBuilder<TEntity, TNavigation> Navigation<TNavigation>(
         Expression<Func<TEntity, IEnumerable<TNavigation>?>> navigationExpression
-    ) where TNavigation : class =>
+    )
+        where TNavigation : class =>
         new(
             Builder.Navigation(
                 Check.NotNull(navigationExpression, nameof(navigationExpression)).GetMemberAccess()
@@ -395,7 +398,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(string navigationName) where TRelatedEntity : class =>
+    >(string navigationName)
+        where TRelatedEntity : class =>
         OwnsOneBuilder<TRelatedEntity>(
             new TypeIdentity(typeof(TRelatedEntity), (Model)Metadata.Model),
             new MemberIdentity(Check.NotEmpty(navigationName, nameof(navigationName)))
@@ -426,7 +430,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(string ownedTypeName, string navigationName) where TRelatedEntity : class =>
+    >(string ownedTypeName, string navigationName)
+        where TRelatedEntity : class =>
         OwnsOneBuilder<TRelatedEntity>(
             new TypeIdentity(
                 Check.NotEmpty(ownedTypeName, nameof(ownedTypeName)),
@@ -668,7 +673,8 @@ public class EntityTypeBuilder<
         string ownedTypeName,
         string navigationName,
         Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-    ) where TRelatedEntity : class
+    )
+        where TRelatedEntity : class
     {
         Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
         Check.NotEmpty(navigationName, nameof(navigationName));
@@ -712,7 +718,8 @@ public class EntityTypeBuilder<
     >(
         Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
         Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-    ) where TRelatedEntity : class
+    )
+        where TRelatedEntity : class
     {
         Check.NotNull(navigationExpression, nameof(navigationExpression));
         Check.NotNull(buildAction, nameof(buildAction));
@@ -757,7 +764,8 @@ public class EntityTypeBuilder<
         string ownedTypeName,
         Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
         Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-    ) where TRelatedEntity : class
+    )
+        where TRelatedEntity : class
     {
         Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
         Check.NotNull(navigationExpression, nameof(navigationExpression));
@@ -774,7 +782,8 @@ public class EntityTypeBuilder<
 
     private OwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOneBuilder<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(TypeIdentity ownedType, MemberIdentity navigation) where TRelatedEntity : class
+    >(TypeIdentity ownedType, MemberIdentity navigation)
+        where TRelatedEntity : class
     {
         InternalForeignKeyBuilder relationship;
         using (var batch = Builder.Metadata.Model.DelayConventions())
@@ -815,7 +824,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsMany<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(string navigationName) where TRelatedEntity : class =>
+    >(string navigationName)
+        where TRelatedEntity : class =>
         OwnsManyBuilder<TRelatedEntity>(
             new TypeIdentity(typeof(TRelatedEntity), (Model)Metadata.Model),
             new MemberIdentity(Check.NotEmpty(navigationName, nameof(navigationName)))
@@ -846,7 +856,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsMany<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(string ownedTypeName, string navigationName) where TRelatedEntity : class =>
+    >(string ownedTypeName, string navigationName)
+        where TRelatedEntity : class =>
         OwnsManyBuilder<TRelatedEntity>(
             new TypeIdentity(ownedTypeName, typeof(TRelatedEntity)),
             new MemberIdentity(Check.NotEmpty(navigationName, nameof(navigationName)))
@@ -915,7 +926,8 @@ public class EntityTypeBuilder<
     >(
         string ownedTypeName,
         Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression
-    ) where TRelatedEntity : class =>
+    )
+        where TRelatedEntity : class =>
         OwnsManyBuilder<TRelatedEntity>(
             new TypeIdentity(ownedTypeName, typeof(TRelatedEntity)),
             new MemberIdentity(
@@ -1084,7 +1096,8 @@ public class EntityTypeBuilder<
         string ownedTypeName,
         string navigationName,
         Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-    ) where TRelatedEntity : class
+    )
+        where TRelatedEntity : class
     {
         Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
         Check.NotEmpty(navigationName, nameof(navigationName));
@@ -1128,7 +1141,8 @@ public class EntityTypeBuilder<
     >(
         Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression,
         Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-    ) where TRelatedEntity : class
+    )
+        where TRelatedEntity : class
     {
         Check.NotNull(navigationExpression, nameof(navigationExpression));
         Check.NotNull(buildAction, nameof(buildAction));
@@ -1173,7 +1187,8 @@ public class EntityTypeBuilder<
         string ownedTypeName,
         Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression,
         Action<OwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-    ) where TRelatedEntity : class
+    )
+        where TRelatedEntity : class
     {
         Check.NotEmpty(ownedTypeName, nameof(ownedTypeName));
         Check.NotNull(navigationExpression, nameof(navigationExpression));
@@ -1190,7 +1205,8 @@ public class EntityTypeBuilder<
 
     private OwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsManyBuilder<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(TypeIdentity ownedType, MemberIdentity navigation) where TRelatedEntity : class
+    >(TypeIdentity ownedType, MemberIdentity navigation)
+        where TRelatedEntity : class
     {
         InternalForeignKeyBuilder relationship;
         using (var batch = Builder.Metadata.Model.DelayConventions())
@@ -1236,7 +1252,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the relationship.</returns>
     public virtual ReferenceNavigationBuilder<TEntity, TRelatedEntity> HasOne<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(string? navigationName) where TRelatedEntity : class
+    >(string? navigationName)
+        where TRelatedEntity : class
     {
         var relatedEntityType = FindRelatedEntityType(typeof(TRelatedEntity), navigationName);
         var foreignKey = HasOneBuilder(MemberIdentity.Create(navigationName), relatedEntityType);
@@ -1324,7 +1341,8 @@ public class EntityTypeBuilder<
     /// <returns>An object that can be used to configure the relationship.</returns>
     public virtual CollectionNavigationBuilder<TEntity, TRelatedEntity> HasMany<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TRelatedEntity
-    >(string? navigationName) where TRelatedEntity : class
+    >(string? navigationName)
+        where TRelatedEntity : class
     {
         Check.NullButNotEmpty(navigationName, nameof(navigationName));
 

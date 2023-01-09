@@ -138,7 +138,8 @@ public class RouteOptions
     /// <param name="token">The route token used to apply the parameter policy.</param>
     public void SetParameterPolicy<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
-    >(string token) where T : IParameterPolicy
+    >(string token)
+        where T : IParameterPolicy
     {
         _constraintTypeMap[token] = typeof(T);
     }
@@ -166,7 +167,8 @@ public class RouteOptions
 
     private static void AddConstraint<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConstraint
-    >(Dictionary<string, Type> constraintMap, string text) where TConstraint : IRouteConstraint
+    >(Dictionary<string, Type> constraintMap, string text)
+        where TConstraint : IRouteConstraint
     {
         constraintMap[text] = typeof(TConstraint);
     }

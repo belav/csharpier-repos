@@ -207,7 +207,8 @@ namespace Microsoft.Win32.SafeHandles
         ///     * Holder    - Specifically disallowed. Holders should only ever be referenced by duplicates,
         ///                   so duplication will occur on the duplicate rather than the holder handle.
         /// </remarks>
-        internal T Duplicate<T>() where T : SafeNCryptHandle, new()
+        internal T Duplicate<T>()
+            where T : SafeNCryptHandle, new()
         {
 #if DEBUG
             Debug.Assert(IsValidOpenState);
@@ -232,7 +233,8 @@ namespace Microsoft.Win32.SafeHandles
         ///     See code:Microsoft.Win32.SafeHandles.SafeNCryptHandle#NCryptHandleDuplicationAlgorithm for
         ///     details about the algorithm.
         /// </summary>
-        private T DuplicateDuplicatedHandle<T>() where T : SafeNCryptHandle, new()
+        private T DuplicateDuplicatedHandle<T>()
+            where T : SafeNCryptHandle, new()
         {
 #if DEBUG
             Debug.Assert(IsValidOpenState);
@@ -256,7 +258,8 @@ namespace Microsoft.Win32.SafeHandles
         ///     See code:Microsoft.Win32.SafeHandles.SafeNCryptHandle#NCryptHandleDuplicationAlgorithm for
         ///     details about the algorithm.
         /// </summary>
-        private T DuplicateOwnerHandle<T>() where T : SafeNCryptHandle, new()
+        private T DuplicateOwnerHandle<T>()
+            where T : SafeNCryptHandle, new()
         {
 #if DEBUG
             Debug.Assert(IsValidOpenState);

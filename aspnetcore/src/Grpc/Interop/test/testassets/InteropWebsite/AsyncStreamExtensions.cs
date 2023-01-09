@@ -29,7 +29,8 @@ internal static class AsyncStreamExtensions
     public static async Task ForEachAsync<T>(
         this IAsyncStreamReader<T> streamReader,
         Func<T, Task> asyncAction
-    ) where T : class
+    )
+        where T : class
     {
         while (await streamReader.MoveNext().ConfigureAwait(false))
         {

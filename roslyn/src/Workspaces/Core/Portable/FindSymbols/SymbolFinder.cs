@@ -270,7 +270,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             TSymbol symbol,
             Compilation compilation,
             CancellationToken cancellationToken = default
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             if (symbol is null)
                 throw new ArgumentNullException(nameof(symbol));

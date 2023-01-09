@@ -525,7 +525,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         private protected override T? FindImpl<T>(
             ImmutableSegmentedList<T> list,
             Predicate<T> match
-        ) where T : default => list.ToBuilder().Find(match);
+        )
+            where T : default => list.ToBuilder().Find(match);
 
         private protected override ImmutableSegmentedList<T> FindAllImpl<T>(
             ImmutableSegmentedList<T> list,
@@ -553,7 +554,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         private protected override T? FindLastImpl<T>(
             ImmutableSegmentedList<T> list,
             Predicate<T> match
-        ) where T : default => list.ToBuilder().FindLast(match);
+        )
+            where T : default => list.ToBuilder().FindLast(match);
 
         private protected override int FindLastIndexImpl<T>(
             ImmutableSegmentedList<T> list,

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return instance;
         }
 
-        private static class PooledSymbolHashSet<TSymbol> where TSymbol : Symbol
+        private static class PooledSymbolHashSet<TSymbol>
+            where TSymbol : Symbol
         {
             internal static readonly ObjectPool<PooledHashSet<TSymbol>> s_poolInstance =
                 PooledHashSet<TSymbol>.CreatePool(SymbolEqualityComparer.ConsiderEverything);
@@ -32,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return instance;
         }
 
-        private static class PooledSymbolDictionary<TSymbol, V> where TSymbol : Symbol
+        private static class PooledSymbolDictionary<TSymbol, V>
+            where TSymbol : Symbol
         {
             internal static readonly ObjectPool<PooledDictionary<TSymbol, V>> s_poolInstance =
                 PooledDictionary<TSymbol, V>.CreatePool(SymbolEqualityComparer.ConsiderEverything);

@@ -86,7 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             typeof(ISupportDisposalNotification)
         };
 
-        public TPattern? GetPattern<TPattern>() where TPattern : class
+        public TPattern? GetPattern<TPattern>()
+            where TPattern : class
         {
             if (!IsDisposed)
             {

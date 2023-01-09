@@ -77,7 +77,8 @@ namespace Microsoft.Extensions.Logging
 
     public partial interface ILogger
     {
-        System.IDisposable? BeginScope<TState>(TState state) where TState : notnull;
+        System.IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull;
         bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel);
         void Log<TState>(
             Microsoft.Extensions.Logging.LogLevel logLevel,
@@ -783,7 +784,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
             get { throw null; }
         }
 
-        public System.IDisposable BeginScope<TState>(TState state) where TState : notnull
+        public System.IDisposable BeginScope<TState>(TState state)
+            where TState : notnull
         {
             throw null;
         }
@@ -847,7 +849,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
 
         public NullLogger() { }
 
-        public System.IDisposable BeginScope<TState>(TState state) where TState : notnull
+        public System.IDisposable BeginScope<TState>(TState state)
+            where TState : notnull
         {
             throw null;
         }

@@ -94,7 +94,8 @@ public struct FeatureReferences<TCache>
         ref TFeature? cached,
         TState state,
         Func<TState, TFeature?> factory
-    ) where TFeature : class?
+    )
+        where TFeature : class?
     {
         var flush = false;
         var revision = Collection?.Revision ?? ContextDisposed();
@@ -116,7 +117,8 @@ public struct FeatureReferences<TCache>
         Func<TState, TFeature?> factory,
         int revision,
         bool flush
-    ) where TFeature : class?
+    )
+        where TFeature : class?
     {
         if (flush)
         {
@@ -150,7 +152,8 @@ public struct FeatureReferences<TCache>
     public TFeature? Fetch<TFeature>(
         ref TFeature? cached,
         Func<IFeatureCollection, TFeature?> factory
-    ) where TFeature : class? => Fetch(ref cached, Collection, factory);
+    )
+        where TFeature : class? => Fetch(ref cached, Collection, factory);
 
     private static int ContextDisposed()
     {

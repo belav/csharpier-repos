@@ -230,7 +230,8 @@ namespace System.Runtime.InteropServices.Tests
             TestArray(structArray);
             TestSpan<TestStruct>(structArray);
 
-            void TestArray<T>(T[] data) where T : struct
+            void TestArray<T>(T[] data)
+                where T : struct
             {
                 T[] destination = new T[data.Length];
                 buffer.WriteArray(0, data, 0, data.Length);
@@ -238,7 +239,8 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(data, destination);
             }
 
-            void TestSpan<T>(ReadOnlySpan<T> data) where T : unmanaged
+            void TestSpan<T>(ReadOnlySpan<T> data)
+                where T : unmanaged
             {
                 Span<T> destination = stackalloc T[data.Length];
                 buffer.WriteSpan(0, data);

@@ -633,7 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             BindingDiagnosticBag diagnostics,
             AttributeDescription description,
             Func<string, NamespaceSymbol, BindingDiagnosticBag, T> factory
-        ) where T : SynthesizedEmbeddedAttributeSymbolBase
+        )
+            where T : SynthesizedEmbeddedAttributeSymbolBase
         {
             if (symbol is null)
             {

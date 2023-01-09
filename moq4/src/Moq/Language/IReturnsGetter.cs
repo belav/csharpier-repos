@@ -14,7 +14,8 @@ namespace Moq.Language
     /// <typeparam name="TMock">Mocked type.</typeparam>
     /// <typeparam name="TProperty">Type of the property.</typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface IReturnsGetter<TMock, TProperty> : IFluentInterface where TMock : class
+    public interface IReturnsGetter<TMock, TProperty> : IFluentInterface
+        where TMock : class
     {
         /// <summary>
         /// Specifies the value to return.

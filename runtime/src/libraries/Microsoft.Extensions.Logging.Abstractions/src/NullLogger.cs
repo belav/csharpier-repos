@@ -21,7 +21,8 @@ namespace Microsoft.Extensions.Logging.Abstractions
         private NullLogger() { }
 
         /// <inheritdoc />
-        public IDisposable BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable BeginScope<TState>(TState state)
+            where TState : notnull
         {
             return NullScope.Instance;
         }

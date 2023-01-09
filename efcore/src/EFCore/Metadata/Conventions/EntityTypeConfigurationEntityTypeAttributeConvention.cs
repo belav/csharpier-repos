@@ -67,7 +67,8 @@ public class EntityTypeConfigurationEntityTypeAttributeConvention
     private static void Configure<TEntity>(
         IConventionEntityType entityType,
         Type entityTypeConfigurationType
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         var entityTypeBuilder = new EntityTypeBuilder<TEntity>((IMutableEntityType)entityType);
         var entityTypeConfiguration =

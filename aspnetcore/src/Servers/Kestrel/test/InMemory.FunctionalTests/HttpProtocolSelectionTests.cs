@@ -133,7 +133,8 @@ public class HttpProtocolSelectionTests : TestApplicationErrorLoggerLoggedTest
     private async Task TestError<TException>(
         HttpProtocols serverProtocols,
         string expectedErrorMessage
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         var testContext = new TestServiceContext(LoggerFactory);
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))

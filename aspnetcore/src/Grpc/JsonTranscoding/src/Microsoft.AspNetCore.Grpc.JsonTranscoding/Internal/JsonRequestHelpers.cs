@@ -184,7 +184,8 @@ internal static class JsonRequestHelpers
     public static async ValueTask<TRequest> ReadMessage<TRequest>(
         JsonTranscodingServerCallContext serverCallContext,
         JsonSerializerOptions serializerOptions
-    ) where TRequest : class
+    )
+        where TRequest : class
     {
         try
         {
@@ -452,7 +453,8 @@ internal static class JsonRequestHelpers
         JsonSerializerOptions serializerOptions,
         TResponse message,
         CancellationToken cancellationToken
-    ) where TResponse : class
+    )
+        where TResponse : class
     {
         var response = serverCallContext.HttpContext.Response;
 

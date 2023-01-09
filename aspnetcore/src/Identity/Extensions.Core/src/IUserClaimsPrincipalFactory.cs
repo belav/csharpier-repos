@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a factory to create a <see cref="ClaimsPrincipal"/> from a user.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserClaimsPrincipalFactory<TUser> where TUser : class
+public interface IUserClaimsPrincipalFactory<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Creates a <see cref="ClaimsPrincipal"/> from an user asynchronously.

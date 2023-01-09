@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">Options type.</typeparam>
     public class OptionsWrapper<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > : IOptions<TOptions> where TOptions : class
+    > : IOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Initializes the wrapper with the options instance to return.

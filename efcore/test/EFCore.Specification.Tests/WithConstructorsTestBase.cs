@@ -842,7 +842,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         public Blog Blog { get; private set; }
     }
 
-    protected class HasContext<TContext> where TContext : DbContext
+    protected class HasContext<TContext>
+        where TContext : DbContext
     {
         public HasContext() { }
 
@@ -861,7 +862,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         public TContext Context { get; }
     }
 
-    protected class HasContextProperty<TContext> where TContext : DbContext
+    protected class HasContextProperty<TContext>
+        where TContext : DbContext
     {
         public int Id { get; set; }
 
@@ -871,7 +873,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         public TContext Context { get; private set; }
     }
 
-    protected class HasContextPc<TContext> where TContext : DbContext
+    protected class HasContextPc<TContext>
+        where TContext : DbContext
     {
         private TContext _context;
         private bool _setterCalled;

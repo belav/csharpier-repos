@@ -156,7 +156,8 @@ namespace System.Reflection.Tests
             }
         }
 
-        private static void TestRefReturnInvokeNullable<T>(T? nullable) where T : struct
+        private static void TestRefReturnInvokeNullable<T>(T? nullable)
+            where T : struct
         {
             TestClass<T?> tc = new TestClass<T?>(nullable);
             PropertyInfo p = typeof(TestClass<T?>).GetProperty(

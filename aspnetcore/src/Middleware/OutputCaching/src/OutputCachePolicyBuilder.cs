@@ -57,7 +57,8 @@ public sealed class OutputCachePolicyBuilder
     /// <typeparam name="T">The policy type.</typeparam>
     public OutputCachePolicyBuilder AddPolicy<
         [DynamicallyAccessedMembers(ActivatorAccessibility)] T
-    >() where T : IOutputCachePolicy
+    >()
+        where T : IOutputCachePolicy
     {
         return AddPolicy(typeof(T));
     }

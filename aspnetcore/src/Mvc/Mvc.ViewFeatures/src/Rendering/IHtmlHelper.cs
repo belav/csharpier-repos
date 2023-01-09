@@ -390,7 +390,8 @@ public interface IHtmlHelper
     /// Thrown if <typeparamref name="TEnum"/> is not an <see cref="Enum"/> or if it has a
     /// <see cref="FlagsAttribute"/>.
     /// </exception>
-    IEnumerable<SelectListItem> GetEnumSelectList<TEnum>() where TEnum : struct;
+    IEnumerable<SelectListItem> GetEnumSelectList<TEnum>()
+        where TEnum : struct;
 
     /// <summary>
     /// Returns a select list for the given <paramref name="enumType"/>.

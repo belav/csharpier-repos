@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.InternalUtilities
 {
     public class OneOrManyTests : TestBase
     {
-        private static void Verify<T>(OneOrMany<T> actual, params T[] expected) where T : notnull
+        private static void Verify<T>(OneOrMany<T> actual, params T[] expected)
+            where T : notnull
         {
             Assert.Equal(actual.Count, expected.Length);
             int n = actual.Count;

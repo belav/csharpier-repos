@@ -184,7 +184,8 @@ namespace System.Tests
             Assert.True(w.Target != null);
         }
 
-        private static void VerifyStillAlive<T>(WeakReference<T> w) where T : class
+        private static void VerifyStillAlive<T>(WeakReference<T> w)
+            where T : class
         {
             T value;
             bool isAlive = w.TryGetTarget(out value);
@@ -198,7 +199,8 @@ namespace System.Tests
             Assert.Null(w.Target);
         }
 
-        private static void VerifyIsDead<T>(WeakReference<T> w) where T : class
+        private static void VerifyIsDead<T>(WeakReference<T> w)
+            where T : class
         {
             T value;
             bool isAlive = w.TryGetTarget(out value);

@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) where TOption : notnull
+        )
+            where TOption : notnull
         {
             return new PerLanguageFormattingSetting<TOption>(
                 option,
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             AnalyzerConfigOptions editorConfigOptions,
             OptionSet visualStudioOptions,
             OptionUpdater updater
-        ) where TOption : struct
+        )
+            where TOption : struct
         {
             return new FormattingSetting<TOption>(
                 option,

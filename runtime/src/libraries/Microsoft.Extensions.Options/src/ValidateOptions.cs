@@ -9,7 +9,8 @@ namespace Microsoft.Extensions.Options
     /// Implementation of <see cref="IValidateOptions{TOptions}"/>
     /// </summary>
     /// <typeparam name="TOptions">The options type to validate.</typeparam>
-    public class ValidateOptions<TOptions> : IValidateOptions<TOptions> where TOptions : class
+    public class ValidateOptions<TOptions> : IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.
@@ -69,7 +70,8 @@ namespace Microsoft.Extensions.Options
     /// </summary>
     /// <typeparam name="TOptions">The options type to validate.</typeparam>
     /// <typeparam name="TDep">Dependency type.</typeparam>
-    public class ValidateOptions<TOptions, TDep> : IValidateOptions<TOptions> where TOptions : class
+    public class ValidateOptions<TOptions, TDep> : IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.
@@ -419,7 +421,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TDep4">Fourth dependency type.</typeparam>
     /// <typeparam name="TDep5">Fifth dependency type.</typeparam>
     public class ValidateOptions<TOptions, TDep1, TDep2, TDep3, TDep4, TDep5>
-        : IValidateOptions<TOptions> where TOptions : class
+        : IValidateOptions<TOptions>
+        where TOptions : class
     {
         /// <summary>
         /// Constructor.

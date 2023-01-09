@@ -9,7 +9,8 @@ using System.Linq;
 
 namespace Roslyn.Utilities
 {
-    internal sealed class ImmutableSetWithInsertionOrder<T> : IEnumerable<T> where T : notnull
+    internal sealed class ImmutableSetWithInsertionOrder<T> : IEnumerable<T>
+        where T : notnull
     {
         public static readonly ImmutableSetWithInsertionOrder<T> Empty =
             new ImmutableSetWithInsertionOrder<T>(ImmutableDictionary.Create<T, uint>(), 0u);

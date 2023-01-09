@@ -37,7 +37,8 @@ namespace System.Collections.Immutable
         }
     }
 
-    internal static class SecureObjectPool<T, TCaller> where TCaller : ISecurePooledObjectUser
+    internal static class SecureObjectPool<T, TCaller>
+        where TCaller : ISecurePooledObjectUser
     {
         public static void TryAdd(TCaller caller, SecurePooledObject<T> item)
         {
@@ -107,7 +108,8 @@ namespace System.Collections.Immutable
         /// <param name="caller">The renter of the object.</param>
         /// <returns>The rented object.</returns>
         /// <exception cref="ObjectDisposedException">Thrown if <paramref name="caller"/> is no longer the renter of the value.</exception>
-        internal T Use<TCaller>(ref TCaller caller) where TCaller : struct, ISecurePooledObjectUser
+        internal T Use<TCaller>(ref TCaller caller)
+            where TCaller : struct, ISecurePooledObjectUser
         {
             if (!IsOwned(ref caller))
                 Requires.FailObjectDisposed(caller);

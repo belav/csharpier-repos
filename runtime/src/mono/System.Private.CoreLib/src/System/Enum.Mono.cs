@@ -69,7 +69,8 @@ namespace System
         private static unsafe EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(
             RuntimeType enumType,
             bool getNames = true
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             EnumInfo<TUnderlyingValue>? entry =
                 enumType.Cache.EnumInfo as EnumInfo<TUnderlyingValue>;

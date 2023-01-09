@@ -319,7 +319,8 @@ namespace Microsoft.TestCommon
         /// <typeparam name="T">The type of instance.</typeparam>
         /// <param name="instance">The instance to test.</param>
         /// <param name="genericTypeParameter">The type of the generic parameter to which the instance's generic type should have been bound.</param>
-        public void IsCorrectGenericType<T>(T instance, Type genericTypeParameter) where T : class
+        public void IsCorrectGenericType<T>(T instance, Type genericTypeParameter)
+            where T : class
         {
             Assert.NotNull(instance);
             Assert.NotNull(genericTypeParameter);

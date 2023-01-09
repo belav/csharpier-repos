@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             this Workspace workspace,
             DocumentId documentId,
             ImmutableArray<TItem> items
-        ) where TItem : TableItem
+        )
+            where TItem : TableItem
         {
             if (documentId == null)
             {

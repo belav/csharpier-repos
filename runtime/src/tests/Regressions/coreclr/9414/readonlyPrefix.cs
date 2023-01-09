@@ -13,7 +13,8 @@ class Program
         public void Frob() { }
     }
 
-    class Foo<T> where T : IFrobber
+    class Foo<T>
+        where T : IFrobber
     {
         public static void FrobAll(T[,] arr)
         {

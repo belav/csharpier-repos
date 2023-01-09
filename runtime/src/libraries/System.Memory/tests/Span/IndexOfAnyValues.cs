@@ -509,12 +509,14 @@ namespace System.SpanTests
             public delegate int IndexOfAnySearchDelegate<T>(
                 ReadOnlySpan<T> searchSpace,
                 ReadOnlySpan<T> values
-            ) where T : IEquatable<T>?;
+            )
+                where T : IEquatable<T>?;
 
             public delegate int IndexOfAnyValuesSearchDelegate<T>(
                 ReadOnlySpan<T> searchSpace,
                 IndexOfAnyValues<T> values
-            ) where T : IEquatable<T>?;
+            )
+                where T : IEquatable<T>?;
 
             public static void TestRandomInputs(
                 IndexOfAnySearchDelegate<byte> expected,
@@ -580,7 +582,8 @@ namespace System.SpanTests
                 IndexOfAnySearchDelegate<T> expected,
                 IndexOfAnySearchDelegate<T> indexOfAny,
                 IndexOfAnyValuesSearchDelegate<T> indexOfAnyValues
-            ) where T : struct, INumber<T>, IMinMaxValue<T>
+            )
+                where T : struct, INumber<T>, IMinMaxValue<T>
             {
                 ReadOnlySpan<T> haystack = GetRandomSlice(rng, haystackRandom, MaxHaystackLength);
                 ReadOnlySpan<T> needle = GetRandomSlice(rng, needleRandom, MaxNeedleLength);
@@ -650,7 +653,8 @@ namespace System.SpanTests
                 int expected,
                 int actual,
                 string approach
-            ) where T : INumber<T>
+            )
+                where T : INumber<T>
             {
                 string readableHaystack = string.Join(
                     ", ",

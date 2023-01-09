@@ -162,7 +162,8 @@ public partial class NorthwindData : ISetSource
         OrderDetails = orderDetails;
     }
 
-    public IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(Customer))
         {

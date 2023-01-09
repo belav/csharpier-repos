@@ -352,7 +352,8 @@ public class JsonTranscodingServiceMethodProviderTests
 
     private IReadOnlyList<Endpoint> MapEndpoints<TService>(
         Action<ILoggingBuilder>? configureLogging = null
-    ) where TService : class
+    )
+        where TService : class
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddLogging(log =>

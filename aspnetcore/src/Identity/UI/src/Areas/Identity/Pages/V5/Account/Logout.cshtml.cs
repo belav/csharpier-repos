@@ -30,7 +30,8 @@ public abstract class LogoutModel : PageModel
         throw new NotImplementedException();
 }
 
-internal sealed class LogoutModel<TUser> : LogoutModel where TUser : class
+internal sealed class LogoutModel<TUser> : LogoutModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly ILogger<LogoutModel> _logger;

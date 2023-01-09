@@ -32,7 +32,8 @@ struct MyStruct : I<string>, I<object>
     }
 }
 
-class Conversion1<T, U> where U : I<T>, new()
+class Conversion1<T, U>
+    where U : I<T>, new()
 {
     public string Caller1(T param)
     {
@@ -47,7 +48,8 @@ class Conversion1<T, U> where U : I<T>, new()
     }
 }
 
-class Conversion2<U> where U : I<string>, new()
+class Conversion2<U>
+    where U : I<string>, new()
 {
     public string Caller1()
     {
@@ -64,25 +66,29 @@ class Conversion2<U> where U : I<string>, new()
 
 class Test_ConstrainedMethods
 {
-    static string Caller1<T, U>(T param) where U : I<T>, new()
+    static string Caller1<T, U>(T param)
+        where U : I<T>, new()
     {
         U instance = new U();
         return instance.Method(param);
     }
 
-    static string Caller2<T, U>(T param) where U : I<T>, new()
+    static string Caller2<T, U>(T param)
+        where U : I<T>, new()
     {
         U instance = new U();
         return instance.Method<object>(param);
     }
 
-    static string Caller3<U>() where U : I<string>, new()
+    static string Caller3<U>()
+        where U : I<string>, new()
     {
         U instance = new U();
         return instance.Method("mystring");
     }
 
-    static string Caller4<U>() where U : I<string>, new()
+    static string Caller4<U>()
+        where U : I<string>, new()
     {
         U instance = new U();
         return instance.Method<object>("mystring");

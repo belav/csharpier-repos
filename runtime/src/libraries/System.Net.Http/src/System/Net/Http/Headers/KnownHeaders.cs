@@ -605,7 +605,8 @@ namespace System.Net.Http.Headers
         /// Matching is case-insensitive. Because of this, we do not preserve the case of the original header,
         /// whether from the wire or from the user explicitly setting a known header using a header name string.
         /// </remarks>
-        private static KnownHeader? GetCandidate<T>(T key) where T : struct, IHeaderNameAccessor // Enforce struct for performance
+        private static KnownHeader? GetCandidate<T>(T key)
+            where T : struct, IHeaderNameAccessor // Enforce struct for performance
         {
             // Lookup is performed by first switching on the header name's length, and then switching
             // on the most unique position in that length's string.

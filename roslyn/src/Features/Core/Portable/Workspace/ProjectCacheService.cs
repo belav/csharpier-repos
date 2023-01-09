@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.Host
             ProjectId key,
             ICachedObjectOwner owner,
             T? instance
-        ) where T : class
+        )
+            where T : class
         {
             if (IsEnabled)
             {

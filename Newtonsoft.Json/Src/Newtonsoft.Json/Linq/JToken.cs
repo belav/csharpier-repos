@@ -479,7 +479,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type to filter the child tokens on.</typeparam>
         /// <returns>A <see cref="JEnumerable{T}"/> containing the child tokens of this <see cref="JToken"/>, in document order.</returns>
-        public JEnumerable<T> Children<T>() where T : JToken
+        public JEnumerable<T> Children<T>()
+            where T : JToken
         {
             return new JEnumerable<T>(Children().OfType<T>());
         }
@@ -2888,7 +2889,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type of the annotation to retrieve.</typeparam>
         /// <returns>The first annotation object that matches the specified type, or <c>null</c> if no annotation is of the specified type.</returns>
-        public T? Annotation<T>() where T : class
+        public T? Annotation<T>()
+            where T : class
         {
             if (_annotations != null)
             {
@@ -2961,7 +2963,8 @@ namespace Newtonsoft.Json.Linq
         /// </summary>
         /// <typeparam name="T">The type of the annotations to retrieve.</typeparam>
         /// <returns>An <see cref="IEnumerable{T}"/> that contains the annotations for this <see cref="JToken"/>.</returns>
-        public IEnumerable<T> Annotations<T>() where T : class
+        public IEnumerable<T> Annotations<T>()
+            where T : class
         {
             if (_annotations == null)
             {
@@ -3041,7 +3044,8 @@ namespace Newtonsoft.Json.Linq
         /// Removes the annotations of the specified type from this <see cref="JToken"/>.
         /// </summary>
         /// <typeparam name="T">The type of annotations to remove.</typeparam>
-        public void RemoveAnnotations<T>() where T : class
+        public void RemoveAnnotations<T>()
+            where T : class
         {
             if (_annotations != null)
             {

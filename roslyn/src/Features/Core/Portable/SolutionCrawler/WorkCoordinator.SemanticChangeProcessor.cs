@@ -353,7 +353,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     NonReentrantLock gate,
                     Dictionary<TKey, TValue> map,
                     CancellationToken cancellationToken
-                ) where TKey : notnull
+                )
+                    where TKey : notnull
                 {
                     using (gate.DisposableWait(cancellationToken))
                     {
@@ -376,7 +377,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     NonReentrantLock gate,
                     Dictionary<TKey, TValue> map,
                     Func<TValue, IDisposable> disposerSelector
-                ) where TKey : notnull
+                )
+                    where TKey : notnull
                 {
                     using (gate.DisposableWait(CancellationToken.None))
                     {

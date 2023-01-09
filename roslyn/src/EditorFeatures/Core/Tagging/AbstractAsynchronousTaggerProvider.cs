@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
     /// <summary>
     /// Base type of all asynchronous tagger providers (<see cref="ITaggerProvider"/> and <see cref="IViewTaggerProvider"/>).
     /// </summary>
-    internal abstract partial class AbstractAsynchronousTaggerProvider<TTag> where TTag : ITag
+    internal abstract partial class AbstractAsynchronousTaggerProvider<TTag>
+        where TTag : ITag
     {
         private readonly object _uniqueKey = new();
 

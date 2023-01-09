@@ -119,7 +119,8 @@ namespace System.Web.Http.Controllers
             set { _parameterBindingAttribute = value; }
         }
 
-        public virtual Collection<T> GetCustomAttributes<T>() where T : class
+        public virtual Collection<T> GetCustomAttributes<T>()
+            where T : class
         {
             return new Collection<T>();
         }

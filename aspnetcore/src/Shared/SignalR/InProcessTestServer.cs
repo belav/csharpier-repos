@@ -30,7 +30,8 @@ public abstract class InProcessTestServer : IAsyncDisposable
     public abstract ValueTask DisposeAsync();
 }
 
-public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup : class
+public class InProcessTestServer<TStartup> : InProcessTestServer
+    where TStartup : class
 {
     private readonly ILoggerFactory _loggerFactory;
     private readonly ILogger _logger;

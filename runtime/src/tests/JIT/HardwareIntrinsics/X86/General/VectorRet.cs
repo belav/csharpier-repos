@@ -230,26 +230,30 @@ public partial class Program
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector128<T> Vector128One<T>() where T : struct
+    public static Vector128<T> Vector128One<T>()
+        where T : struct
     {
         return CreateVector128(GetValueFromInt<T>(1));
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector256<T> Vector256One<T>() where T : struct
+    public static Vector256<T> Vector256One<T>()
+        where T : struct
     {
         return CreateVector256(GetValueFromInt<T>(1));
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector128<T> Vector128PlusOne<T>(Vector128<T> v1) where T : struct
+    public static Vector128<T> Vector128PlusOne<T>(Vector128<T> v1)
+        where T : struct
     {
         Vector128<T> v2 = Vector128One<T>();
         return Vector128Add<T>(v1, v2);
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static Vector256<T> Vector256PlusOne<T>(Vector256<T> v1) where T : struct
+    public static Vector256<T> Vector256PlusOne<T>(Vector256<T> v1)
+        where T : struct
     {
         Vector256<T> v2 = Vector256One<T>();
         return Vector256Add<T>(v1, v2);

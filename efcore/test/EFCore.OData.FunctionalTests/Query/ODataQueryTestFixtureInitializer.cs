@@ -23,7 +23,8 @@ public class ODataQueryTestFixtureInitializer
         string storeName,
         IEdmModel edmModel,
         List<IODataControllerActionConvention> customRoutingConventions = null
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var selfHostServer = Host.CreateDefaultBuilder()
             .ConfigureServices(services => services.AddSingleton<IHostLifetime, NoopHostLifetime>())

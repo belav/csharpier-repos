@@ -826,7 +826,8 @@ internal class Program
         }
     }
 
-    class InstanceMethodCaller<T> where T : IComparable
+    class InstanceMethodCaller<T>
+        where T : IComparable
     {
         public static int Compare(T t, object o)
         {
@@ -1089,7 +1090,8 @@ internal class Program
         return result;
     }
 
-    private static bool VectorTestOf<T>(T value1, T value2, T sum) where T : struct
+    private static bool VectorTestOf<T>(T value1, T value2, T sum)
+        where T : struct
     {
         Console.WriteLine("Constructing vector of {0}", value1);
         Vector<T> vector1 = new Vector<T>(value1);
@@ -1884,7 +1886,8 @@ internal class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static bool CheckArrayVal<T>(ref T refVal, T testValue) where T : IEquatable<T>
+    private static bool CheckArrayVal<T>(ref T refVal, T testValue)
+        where T : IEquatable<T>
     {
         return refVal.Equals(testValue);
     }
@@ -1969,7 +1972,8 @@ internal class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static bool DoGenericArrayTest<T>(T testValue) where T : IEquatable<T>
+    private static bool DoGenericArrayTest<T>(T testValue)
+        where T : IEquatable<T>
     {
         T[,] array = new T[2, 2];
         array[0, 0] = testValue;

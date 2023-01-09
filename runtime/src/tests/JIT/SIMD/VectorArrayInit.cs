@@ -19,7 +19,8 @@ internal partial class VectorTest
         _ => DefaultSeed
     };
 
-    private class VectorArrayInitTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorArrayInitTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorArrayInit(int size, Random random)
         {

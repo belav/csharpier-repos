@@ -16,7 +16,8 @@ namespace System.Collections.Immutable.Tests
         /// A test for Empty
         /// </summary>
         /// <typeparam name="T">The type of elements held in the stack.</typeparam>
-        private void EmptyTestHelper<T>() where T : new()
+        private void EmptyTestHelper<T>()
+            where T : new()
         {
             IImmutableStack<T> actual = ImmutableStack<T>.Empty;
             Assert.NotNull(actual);
@@ -38,7 +39,8 @@ namespace System.Collections.Immutable.Tests
             return result;
         }
 
-        private void PushAndCountTestHelper<T>() where T : new()
+        private void PushAndCountTestHelper<T>()
+            where T : new()
         {
             var actual0 = ImmutableStack<T>.Empty;
             Assert.Equal(0, actual0.Count());

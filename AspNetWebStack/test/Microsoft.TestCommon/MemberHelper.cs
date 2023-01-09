@@ -151,7 +151,8 @@ namespace System.Web.TestUtil
         private static void TestAttribute<TAttribute>(
             MemberInfo memberInfo,
             TAttribute attributeValue
-        ) where TAttribute : Attribute
+        )
+            where TAttribute : Attribute
         {
             object[] attrs = memberInfo.GetCustomAttributes(typeof(TAttribute), true);
 
@@ -204,7 +205,8 @@ namespace System.Web.TestUtil
             object instance,
             string eventName,
             TEventArgs eventArgs
-        ) where TEventArgs : EventArgs
+        )
+            where TEventArgs : EventArgs
         {
             EventInfo eventInfo = GetEventInfo(instance, eventName);
 

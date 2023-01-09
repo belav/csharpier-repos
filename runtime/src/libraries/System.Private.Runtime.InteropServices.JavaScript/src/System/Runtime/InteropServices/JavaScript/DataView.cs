@@ -208,7 +208,8 @@ namespace System.Runtime.InteropServices.JavaScript
         public void SetUint8(int byteOffset, byte value, bool littleEndian = false) =>
             Invoke("setUint8", byteOffset, value, littleEndian);
 
-        private static U UnBoxValue<U>(object jsValue) where U : struct
+        private static U UnBoxValue<U>(object jsValue)
+            where U : struct
         {
             if (jsValue == null)
             {

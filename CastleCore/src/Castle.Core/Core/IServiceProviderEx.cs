@@ -21,6 +21,7 @@ namespace Castle.Core
     /// </summary>
     public interface IServiceProviderEx : IServiceProvider
     {
-        T GetService<T>() where T : class;
+        T GetService<T>()
+            where T : class;
     }
 }

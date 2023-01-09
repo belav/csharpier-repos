@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Remote;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
 {
-    internal readonly struct UnitTestingRemoteCallbackWrapper<T> where T : class
+    internal readonly struct UnitTestingRemoteCallbackWrapper<T>
+        where T : class
     {
         internal readonly RemoteCallback<T> UnderlyingObject;
 

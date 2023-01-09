@@ -10,7 +10,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Tests;
 
-public class RedisServerFixture<TStartup> : IAsyncLifetime where TStartup : class
+public class RedisServerFixture<TStartup> : IAsyncLifetime
+    where TStartup : class
 {
     public InProcessTestServer<TStartup> FirstServer { get; private set; }
     public InProcessTestServer<TStartup> SecondServer { get; private set; }

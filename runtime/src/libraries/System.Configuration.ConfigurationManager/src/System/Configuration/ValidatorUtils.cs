@@ -23,7 +23,8 @@ namespace System.Configuration
             T max,
             T resolution,
             bool exclusiveRange
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             ValidateRangeImpl(value, min, max, exclusiveRange);
 

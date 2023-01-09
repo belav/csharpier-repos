@@ -264,26 +264,32 @@ namespace System.ComponentModel.Composition
         }
 
         [Export(typeof(IExport<>))]
-        public class PartWithTypeConstraint<T> : IExport<T> where T : IFoo { }
+        public class PartWithTypeConstraint<T> : IExport<T>
+            where T : IFoo { }
 
         [Export(typeof(IExport<>))]
-        public class PartWithBaseTypeConstraint<T> : IExport<T> where T : Bar { }
+        public class PartWithBaseTypeConstraint<T> : IExport<T>
+            where T : Bar { }
 
         [Export(typeof(IExport<>))]
-        public class PartWithRefTypeConstraint<T> : IExport<T> where T : class { }
+        public class PartWithRefTypeConstraint<T> : IExport<T>
+            where T : class { }
 
         [Export(typeof(IExport<>))]
-        public class PartWithStructTypeConstraint<T> : IExport<T> where T : struct { }
+        public class PartWithStructTypeConstraint<T> : IExport<T>
+            where T : struct { }
 
         [Export(typeof(IExport<>))]
-        public class PartWithNewableTypeConstraint<T> : IExport<T> where T : new() { }
+        public class PartWithNewableTypeConstraint<T> : IExport<T>
+            where T : new() { }
 
         [Export(typeof(IExport<,>))]
         public class PartWithGenericConstraint<T1, T2> : IExport<T1, T2>
             where T2 : IDictionary<string, T1> { }
 
         [Export(typeof(IExport<,>))]
-        public class PartWithNakedConstraint<T1, T2> : IExport<T1, T2> where T2 : T1 { }
+        public class PartWithNakedConstraint<T1, T2> : IExport<T1, T2>
+            where T2 : T1 { }
 
         [Export(typeof(IExport<>))]
         public class OpenGenericPartWithClosedGenericImport<T> : IExport<T>

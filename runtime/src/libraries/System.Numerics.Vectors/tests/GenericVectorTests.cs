@@ -96,7 +96,8 @@ namespace System.Numerics.Tests
             TestConstructor<double>();
         }
 
-        private void TestConstructor<T>() where T : struct
+        private void TestConstructor<T>()
+            where T : struct
         {
             Assert.Throws<NullReferenceException>(() => new Vector<T>((T[])null));
 
@@ -171,7 +172,8 @@ namespace System.Numerics.Tests
             TestConstructorWithOffset<double>();
         }
 
-        private void TestConstructorWithOffset<T>() where T : struct
+        private void TestConstructorWithOffset<T>()
+            where T : struct
         {
             Assert.Throws<NullReferenceException>(() => new Vector<T>((T[])null, 0));
 
@@ -247,7 +249,8 @@ namespace System.Numerics.Tests
             TestConstructorConstantValue<double>();
         }
 
-        private void TestConstructorConstantValue<T>() where T : struct
+        private void TestConstructorConstantValue<T>()
+            where T : struct
         {
             T constantValue = Util.GenerateSingleValue<T>(GetMinValue<T>(), GetMaxValue<T>());
             var vector = new Vector<T>(constantValue);
@@ -320,7 +323,8 @@ namespace System.Numerics.Tests
             TestConstructorDefault<double>();
         }
 
-        private void TestConstructorDefault<T>() where T : struct
+        private void TestConstructorDefault<T>()
+            where T : struct
         {
             var vector = new Vector<T>();
             ValidateVector(
@@ -392,7 +396,8 @@ namespace System.Numerics.Tests
             TestConstructorArrayTooSmallException<double>();
         }
 
-        private void TestConstructorArrayTooSmallException<T>() where T : struct
+        private void TestConstructorArrayTooSmallException<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>().Skip(1).ToArray();
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -432,7 +437,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void ConstructorWithSpanDouble() => TestConstructorWithSpan<double>();
 
-        private void TestConstructorWithSpan<T>() where T : struct
+        private void TestConstructorWithSpan<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>().ToArray();
             Vector<T> vector;
@@ -528,7 +534,8 @@ namespace System.Numerics.Tests
                 () => TestReadOnlySpanBasedConstructorWithLessElements<double>()
             );
 
-        private void TestReadOnlySpanBasedConstructorWithLessElements<T>() where T : struct
+        private void TestReadOnlySpanBasedConstructorWithLessElements<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count - 1).ToArray();
             var vector = new Vector<T>(new ReadOnlySpan<T>(values));
@@ -594,7 +601,8 @@ namespace System.Numerics.Tests
                 () => TestReadOnlySpanByteBasedConstructorWithLessElements<double>()
             );
 
-        private void TestReadOnlySpanByteBasedConstructorWithLessElements<T>() where T : struct
+        private void TestReadOnlySpanByteBasedConstructorWithLessElements<T>()
+            where T : struct
         {
             byte[] values = GenerateRandomValuesForVector<byte>(Vector<byte>.Count - 1).ToArray();
             var vector = new Vector<T>(new ReadOnlySpan<byte>(values));
@@ -660,7 +668,8 @@ namespace System.Numerics.Tests
                 () => TestSpanBasedConstructorWithLessElements<double>()
             );
 
-        private void TestSpanBasedConstructorWithLessElements<T>() where T : struct
+        private void TestSpanBasedConstructorWithLessElements<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count - 1).ToArray();
             var vector = new Vector<T>(new Span<T>(values));
@@ -700,7 +709,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void ArrayBasedConstructor_Double() => TestArrayBasedConstructor<double>();
 
-        private void TestArrayBasedConstructor<T>() where T : struct
+        private void TestArrayBasedConstructor<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count).ToArray();
             var vector = new Vector<T>(values);
@@ -743,7 +753,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void ArrayIndexBasedConstructor_Double() => TestArrayIndexBasedConstructor<double>();
 
-        private void TestArrayIndexBasedConstructor<T>() where T : struct
+        private void TestArrayIndexBasedConstructor<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count * 2).ToArray();
             int offset = Vector<T>.Count - 1;
@@ -797,7 +808,8 @@ namespace System.Numerics.Tests
         public void ArrayBasedConstructorWithLessElements_Double() =>
             TestArrayBasedConstructorWithLessElements<double>();
 
-        private void TestArrayBasedConstructorWithLessElements<T>() where T : struct
+        private void TestArrayBasedConstructorWithLessElements<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count - 1).ToArray();
             Assert.Throws<ArgumentOutOfRangeException>(() => new Vector<T>(values));
@@ -843,7 +855,8 @@ namespace System.Numerics.Tests
         public void ArrayIndexBasedConstructorLessElements_Double() =>
             TestArrayIndexBasedConstructorLessElements<double>();
 
-        private void TestArrayIndexBasedConstructorLessElements<T>() where T : struct
+        private void TestArrayIndexBasedConstructorLessElements<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count * 2).ToArray();
             Assert.Throws<ArgumentOutOfRangeException>(
@@ -867,7 +880,8 @@ namespace System.Numerics.Tests
         public void ConstructorWithUnsupportedTypes_Char() =>
             TestConstructorWithUnsupportedTypes<Char>();
 
-        private void TestConstructorWithUnsupportedTypes<T>() where T : struct
+        private void TestConstructorWithUnsupportedTypes<T>()
+            where T : struct
         {
             Assert.Throws<NotSupportedException>(
                 () => new Vector<T>(new ReadOnlySpan<byte>(new byte[4]))
@@ -943,7 +957,8 @@ namespace System.Numerics.Tests
             TestIndexerOutOfRange<double>();
         }
 
-        private void TestIndexerOutOfRange<T>() where T : struct
+        private void TestIndexerOutOfRange<T>()
+            where T : struct
         {
             Vector<T> vector = Vector<T>.One;
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -1012,7 +1027,8 @@ namespace System.Numerics.Tests
             TestGetElementOutOfRange<double>();
         }
 
-        private void TestGetElementOutOfRange<T>() where T : struct
+        private void TestGetElementOutOfRange<T>()
+            where T : struct
         {
             Vector<T> vector = Vector<T>.One;
 
@@ -1084,7 +1100,8 @@ namespace System.Numerics.Tests
             TestStaticOneVector<double>();
         }
 
-        private void TestStaticOneVector<T>() where T : struct, INumber<T>
+        private void TestStaticOneVector<T>()
+            where T : struct, INumber<T>
         {
             Vector<T> vector = Vector<T>.One;
             T oneValue = Util.One<T>();
@@ -1157,7 +1174,8 @@ namespace System.Numerics.Tests
             TestStaticZeroVector<double>();
         }
 
-        private void TestStaticZeroVector<T>() where T : struct, INumber<T>
+        private void TestStaticZeroVector<T>()
+            where T : struct, INumber<T>
         {
             Vector<T> vector = Vector<T>.Zero;
             T zeroValue = Util.Zero<T>();
@@ -1232,7 +1250,8 @@ namespace System.Numerics.Tests
             TestCopyTo<double>();
         }
 
-        private void TestCopyTo<T>() where T : struct
+        private void TestCopyTo<T>()
+            where T : struct
         {
             var initialValues = GenerateRandomValuesForVector<T>();
             var vector = new Vector<T>(initialValues);
@@ -1311,7 +1330,8 @@ namespace System.Numerics.Tests
             TestCopyToWithOffset<double>();
         }
 
-        private void TestCopyToWithOffset<T>() where T : struct
+        private void TestCopyToWithOffset<T>()
+            where T : struct
         {
             int offset = Util.GenerateSingleValue<int>(5, 500);
             var initialValues = GenerateRandomValuesForVector<T>();
@@ -1387,7 +1407,8 @@ namespace System.Numerics.Tests
             TestCopyToSpan<double>();
         }
 
-        private void TestCopyToSpan<T>() where T : struct
+        private void TestCopyToSpan<T>()
+            where T : struct
         {
             T[] initialValues = GenerateRandomValuesForVector<T>();
             var vector = new Vector<T>(initialValues);
@@ -1482,7 +1503,8 @@ namespace System.Numerics.Tests
             TestTryCopyToSpan<double>();
         }
 
-        private void TestTryCopyToSpan<T>() where T : struct
+        private void TestTryCopyToSpan<T>()
+            where T : struct
         {
             T[] initialValues = GenerateRandomValuesForVector<T>();
             var vector = new Vector<T>(initialValues);
@@ -1581,7 +1603,8 @@ namespace System.Numerics.Tests
             TestEqualsObject<double>();
         }
 
-        private void TestEqualsObject<T>() where T : struct
+        private void TestEqualsObject<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector1 = new Vector<T>(values);
@@ -1669,7 +1692,8 @@ namespace System.Numerics.Tests
             TestEqualsVector<double>();
         }
 
-        private void TestEqualsVector<T>() where T : struct, INumber<T>
+        private void TestEqualsVector<T>()
+            where T : struct, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector1 = new Vector<T>(values);
@@ -1812,7 +1836,8 @@ namespace System.Numerics.Tests
             TestGetHashCode<double>();
         }
 
-        private void TestGetHashCode<T>() where T : struct
+        private void TestGetHashCode<T>()
+            where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> v = new Vector<T>(values);
@@ -1999,7 +2024,8 @@ namespace System.Numerics.Tests
             TestToString<double>("E3", CultureInfo.CurrentCulture);
         }
 
-        private void TestToString<T>(string format, IFormatProvider provider) where T : struct
+        private void TestToString<T>(string format, IFormatProvider provider)
+            where T : struct
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             Vector<T> v1 = new Vector<T>(values1);
@@ -2092,7 +2118,8 @@ namespace System.Numerics.Tests
             TestAddition<double>();
         }
 
-        private void TestAddition<T>() where T : struct, INumber<T>
+        private void TestAddition<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -2156,7 +2183,8 @@ namespace System.Numerics.Tests
             TestAdditionOverflow<long>();
         }
 
-        private void TestAdditionOverflow<T>() where T : struct, INumber<T>
+        private void TestAdditionOverflow<T>()
+            where T : struct, INumber<T>
         {
             T maxValue = GetMaxValueExact<T>();
             Vector<T> maxValueVector = new Vector<T>(maxValue);
@@ -2248,7 +2276,8 @@ namespace System.Numerics.Tests
             TestSubtraction<double>();
         }
 
-        private void TestSubtraction<T>() where T : struct, INumber<T>
+        private void TestSubtraction<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -2312,7 +2341,8 @@ namespace System.Numerics.Tests
             TestSubtractionOverflow<long>();
         }
 
-        private void TestSubtractionOverflow<T>() where T : struct, INumber<T>
+        private void TestSubtractionOverflow<T>()
+            where T : struct, INumber<T>
         {
             T minValue = GetMinValueExact<T>();
             Vector<T> minValueVector = new Vector<T>(minValue);
@@ -2404,7 +2434,8 @@ namespace System.Numerics.Tests
             TestMultiplication<double>();
         }
 
-        private void TestMultiplication<T>() where T : struct, INumber<T>
+        private void TestMultiplication<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -2502,7 +2533,8 @@ namespace System.Numerics.Tests
             TestMultiplicationWithScalar<double>();
         }
 
-        private void TestMultiplicationWithScalar<T>() where T : struct, INumber<T>
+        private void TestMultiplicationWithScalar<T>()
+            where T : struct, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             T factor = Util.GenerateSingleValue<T>(GetMinValue<T>(), GetMaxValue<T>());
@@ -2600,7 +2632,8 @@ namespace System.Numerics.Tests
             TestDivision<double>();
         }
 
-        private void TestDivision<T>() where T : struct, INumber<T>
+        private void TestDivision<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             values1 = values1
@@ -2660,7 +2693,8 @@ namespace System.Numerics.Tests
             TestDivisionByZeroException<long>();
         }
 
-        private void TestDivisionByZeroException<T>() where T : struct
+        private void TestDivisionByZeroException<T>()
+            where T : struct
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values1);
@@ -2742,7 +2776,8 @@ namespace System.Numerics.Tests
             TestDivisionWithScalar<double>();
         }
 
-        private void TestDivisionWithScalar<T>() where T : struct, INumber<T>
+        private void TestDivisionWithScalar<T>()
+            where T : struct, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             values = values
@@ -2804,7 +2839,8 @@ namespace System.Numerics.Tests
             TestDivisionWithScalarByZeroException<long>();
         }
 
-        private void TestDivisionWithScalarByZeroException<T>() where T : struct, INumber<T>
+        private void TestDivisionWithScalarByZeroException<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values1);
@@ -2887,7 +2923,8 @@ namespace System.Numerics.Tests
             TestUnaryMinus<double>();
         }
 
-        private void TestUnaryMinus<T>() where T : struct, INumber<T>
+        private void TestUnaryMinus<T>()
+            where T : struct, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -2964,7 +3001,8 @@ namespace System.Numerics.Tests
             TestBitwiseAndOperator<double>();
         }
 
-        private void TestBitwiseAndOperator<T>() where T : struct
+        private void TestBitwiseAndOperator<T>()
+            where T : struct
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             Vector<T> randomVector = new Vector<T>(values1);
@@ -3025,7 +3063,8 @@ namespace System.Numerics.Tests
             TestBitwiseOrOperator<long>();
         }
 
-        private void TestBitwiseOrOperator<T>() where T : struct
+        private void TestBitwiseOrOperator<T>()
+            where T : struct
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             Vector<T> randomVector = new Vector<T>(values1);
@@ -3090,7 +3129,8 @@ namespace System.Numerics.Tests
             TestBitwiseXorOperator<long>();
         }
 
-        private void TestBitwiseXorOperator<T>() where T : struct, IBitwiseOperators<T, T, T>
+        private void TestBitwiseXorOperator<T>()
+            where T : struct, IBitwiseOperators<T, T, T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -3221,7 +3261,8 @@ namespace System.Numerics.Tests
             TestBitwiseAndNot<long>();
         }
 
-        private void TestBitwiseAndNot<T>() where T : struct, IBitwiseOperators<T, T, T>
+        private void TestBitwiseAndNot<T>()
+            where T : struct, IBitwiseOperators<T, T, T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -3326,7 +3367,8 @@ namespace System.Numerics.Tests
             );
         }
 
-        private void TestShiftLeft<T>() where T : unmanaged, IBinaryInteger<T>
+        private void TestShiftLeft<T>()
+            where T : unmanaged, IBinaryInteger<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -3424,7 +3466,8 @@ namespace System.Numerics.Tests
             );
         }
 
-        private void TestShiftRightArithmetic<T>() where T : unmanaged, IBinaryInteger<T>
+        private void TestShiftRightArithmetic<T>()
+            where T : unmanaged, IBinaryInteger<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -3522,7 +3565,8 @@ namespace System.Numerics.Tests
             );
         }
 
-        private void TestShiftRightLogical<T>() where T : unmanaged, IBinaryInteger<T>
+        private void TestShiftRightLogical<T>()
+            where T : unmanaged, IBinaryInteger<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -3612,7 +3656,8 @@ namespace System.Numerics.Tests
             TestVectorGreaterThan<double>();
         }
 
-        private void TestVectorGreaterThan<T>() where T : struct, INumber<T>
+        private void TestVectorGreaterThan<T>()
+            where T : struct, INumber<T>
         {
             var values1 = GenerateRandomValuesForVector<T>();
             var values2 = GenerateRandomValuesForVector<T>();
@@ -3703,7 +3748,8 @@ namespace System.Numerics.Tests
             TestVectorGreaterThanOrEqual<double>();
         }
 
-        private void TestVectorGreaterThanOrEqual<T>() where T : struct, INumber<T>
+        private void TestVectorGreaterThanOrEqual<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -3782,7 +3828,8 @@ namespace System.Numerics.Tests
             TestVectorGreaterThanAny<double>();
         }
 
-        private void TestVectorGreaterThanAny<T>() where T : struct
+        private void TestVectorGreaterThanAny<T>()
+            where T : struct
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -3872,7 +3919,8 @@ namespace System.Numerics.Tests
             TestVectorGreaterThanAll<double>();
         }
 
-        private void TestVectorGreaterThanAll<T>() where T : struct
+        private void TestVectorGreaterThanAll<T>()
+            where T : struct
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -3961,7 +4009,8 @@ namespace System.Numerics.Tests
             TestVectorGreaterThanOrEqualAny<double>();
         }
 
-        private void TestVectorGreaterThanOrEqualAny<T>() where T : struct
+        private void TestVectorGreaterThanOrEqualAny<T>()
+            where T : struct
         {
             int maxT = GetMaxValue<T>();
             double maxStep = (double)maxT / (double)Vector<T>.Count;
@@ -4060,7 +4109,8 @@ namespace System.Numerics.Tests
             TestVectorGreaterThanOrEqualAll<double>();
         }
 
-        private void TestVectorGreaterThanOrEqualAll<T>() where T : struct
+        private void TestVectorGreaterThanOrEqualAll<T>()
+            where T : struct
         {
             int maxT = GetMaxValue<T>();
             double maxStep = (double)maxT / (double)Vector<T>.Count;
@@ -4170,7 +4220,8 @@ namespace System.Numerics.Tests
             TestVectorLessThan<double>();
         }
 
-        private void TestVectorLessThan<T>() where T : struct, INumber<T>
+        private void TestVectorLessThan<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -4261,7 +4312,8 @@ namespace System.Numerics.Tests
             TestVectorLessThanOrEqual<double>();
         }
 
-        private void TestVectorLessThanOrEqual<T>() where T : struct, INumber<T>
+        private void TestVectorLessThanOrEqual<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -4352,7 +4404,8 @@ namespace System.Numerics.Tests
             TestVectorLessThanAny<double>();
         }
 
-        private void TestVectorLessThanAny<T>() where T : struct, INumber<T>
+        private void TestVectorLessThanAny<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -4427,7 +4480,8 @@ namespace System.Numerics.Tests
             TestVectorLessThanAll<double>();
         }
 
-        private void TestVectorLessThanAll<T>() where T : struct, INumber<T>
+        private void TestVectorLessThanAll<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -4515,7 +4569,8 @@ namespace System.Numerics.Tests
             TestVectorLessThanOrEqualAny<double>();
         }
 
-        private void TestVectorLessThanOrEqualAny<T>() where T : struct
+        private void TestVectorLessThanOrEqualAny<T>()
+            where T : struct
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -4609,7 +4664,8 @@ namespace System.Numerics.Tests
             TestVectorLessThanOrEqualAll<double>();
         }
 
-        private void TestVectorLessThanOrEqualAll<T>() where T : struct
+        private void TestVectorLessThanOrEqualAll<T>()
+            where T : struct
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)
@@ -4702,7 +4758,8 @@ namespace System.Numerics.Tests
             TestVectorEquals<double>();
         }
 
-        private void TestVectorEquals<T>() where T : struct, INumber<T>
+        private void TestVectorEquals<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2;
@@ -4786,7 +4843,8 @@ namespace System.Numerics.Tests
             TestVectorEqualsAny<double>();
         }
 
-        private void TestVectorEqualsAny<T>() where T : struct, INumber<T>
+        private void TestVectorEqualsAny<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2;
@@ -4872,7 +4930,8 @@ namespace System.Numerics.Tests
             TestVectorEqualsAll<double>();
         }
 
-        private void TestVectorEqualsAll<T>() where T : struct, INumber<T>
+        private void TestVectorEqualsAll<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2;
@@ -4966,7 +5025,8 @@ namespace System.Numerics.Tests
             TestConditionalSelect<double>();
         }
 
-        private void TestConditionalSelect<T>() where T : struct, INumber<T>
+        private void TestConditionalSelect<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -5074,7 +5134,8 @@ namespace System.Numerics.Tests
             TestDotProduct<double>();
         }
 
-        private void TestDotProduct<T>() where T : struct, INumber<T>
+        private void TestDotProduct<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = Util.GenerateRandomValues<T>(Vector<T>.Count);
             T[] values2 = Util.GenerateRandomValues<T>(Vector<T>.Count);
@@ -5162,7 +5223,8 @@ namespace System.Numerics.Tests
             TestMax<double>();
         }
 
-        private void TestMax<T>() where T : struct, INumber<T>
+        private void TestMax<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -5254,7 +5316,8 @@ namespace System.Numerics.Tests
             TestMin<double>();
         }
 
-        private void TestMin<T>() where T : struct, INumber<T>
+        private void TestMin<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -5508,7 +5571,8 @@ namespace System.Numerics.Tests
             TestAbs<double>();
         }
 
-        private void TestAbs<T>() where T : struct, INumber<T>
+        private void TestAbs<T>()
+            where T : struct, INumber<T>
         {
             T[] values = Util.GenerateRandomValues<T>(
                 Vector<T>.Count,
@@ -5604,7 +5668,8 @@ namespace System.Numerics.Tests
             TestMultiplicationReflection<double>();
         }
 
-        private void TestMultiplicationReflection<T>() where T : struct, INumber<T>
+        private void TestMultiplicationReflection<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -5702,7 +5767,8 @@ namespace System.Numerics.Tests
             TestAdditionReflection<double>();
         }
 
-        private void TestAdditionReflection<T>() where T : struct, INumber<T>
+        private void TestAdditionReflection<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             T[] values2 = GenerateRandomValuesForVector<T>();
@@ -5800,7 +5866,8 @@ namespace System.Numerics.Tests
             TestDivisionReflection<double>();
         }
 
-        private void TestDivisionReflection<T>() where T : struct, INumber<T>
+        private void TestDivisionReflection<T>()
+            where T : struct, INumber<T>
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             values1 = values1
@@ -5894,7 +5961,8 @@ namespace System.Numerics.Tests
             TestConstructorSingleValueReflection<double>();
         }
 
-        private void TestConstructorSingleValueReflection<T>() where T : struct
+        private void TestConstructorSingleValueReflection<T>()
+            where T : struct
         {
             ConstructorInfo constructor = typeof(Vector<T>)
                 .GetTypeInfo()
@@ -5979,7 +6047,8 @@ namespace System.Numerics.Tests
             TestConstructorArrayReflection<double>();
         }
 
-        private void TestConstructorArrayReflection<T>() where T : struct
+        private void TestConstructorArrayReflection<T>()
+            where T : struct
         {
             ConstructorInfo constructor = typeof(Vector<T>)
                 .GetTypeInfo()
@@ -6064,7 +6133,8 @@ namespace System.Numerics.Tests
             TestCopyToReflection<double>();
         }
 
-        private void TestCopyToReflection<T>() where T : struct
+        private void TestCopyToReflection<T>()
+            where T : struct
         {
             MethodInfo copyToMethod = typeof(Vector<T>)
                 .GetTypeInfo()
@@ -6147,7 +6217,8 @@ namespace System.Numerics.Tests
             TestCopyToWithOffsetReflection<double>();
         }
 
-        private void TestCopyToWithOffsetReflection<T>() where T : struct
+        private void TestCopyToWithOffsetReflection<T>()
+            where T : struct
         {
             MethodInfo copyToMethod = typeof(Vector<T>)
                 .GetTypeInfo()
@@ -6231,7 +6302,8 @@ namespace System.Numerics.Tests
             TestCountViaReflectionConsistency<double>();
         }
 
-        private void TestCountViaReflectionConsistency<T>() where T : struct
+        private void TestCountViaReflectionConsistency<T>()
+            where T : struct
         {
             MethodInfo countMethod = typeof(Vector<T>)
                 .GetTypeInfo()
@@ -6684,7 +6756,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void TestCastDoubleToInt() => TestCastToInt<double>();
 
-        private unsafe void TestCastToInt<T>() where T : unmanaged
+        private unsafe void TestCastToInt<T>()
+            where T : unmanaged
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector1 = new Vector<T>(values);
@@ -6776,7 +6849,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void SumUInt16() => TestSum<ushort>(x => x.Aggregate((a, b) => (ushort)(a + b)));
 
-        private static void TestSum<T>(Func<T[], T> expected) where T : struct, IEquatable<T>
+        private static void TestSum<T>(Func<T[], T> expected)
+            where T : struct, IEquatable<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new(values);
@@ -6823,7 +6897,8 @@ namespace System.Numerics.Tests
         [Fact]
         public void IsSupportedUIntPtr() => TestIsSupported<nuint>();
 
-        private static void TestIsSupported<T>() where T : struct
+        private static void TestIsSupported<T>()
+            where T : struct
         {
             Assert.True(Vector<T>.IsSupported);
 
@@ -6895,7 +6970,8 @@ namespace System.Numerics.Tests
             TestLoad<double>();
         }
 
-        private void TestLoad<T>() where T : unmanaged, INumber<T>
+        private void TestLoad<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Unsafe.SkipInit(out Vector<T> vector);
@@ -6974,7 +7050,8 @@ namespace System.Numerics.Tests
             TestLoadAligned<double>();
         }
 
-        private void TestLoadAligned<T>() where T : unmanaged, INumber<T>
+        private void TestLoadAligned<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Unsafe.SkipInit(out Vector<T> vector);
@@ -7055,7 +7132,8 @@ namespace System.Numerics.Tests
             TestLoadAlignedNonTemporal<double>();
         }
 
-        private void TestLoadAlignedNonTemporal<T>() where T : unmanaged, INumber<T>
+        private void TestLoadAlignedNonTemporal<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Unsafe.SkipInit(out Vector<T> vector);
@@ -7136,7 +7214,8 @@ namespace System.Numerics.Tests
             TestLoadUnsafe<double>();
         }
 
-        private void TestLoadUnsafe<T>() where T : unmanaged, INumber<T>
+        private void TestLoadUnsafe<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = Vector.LoadUnsafe<T>(ref values[0]);
@@ -7210,7 +7289,8 @@ namespace System.Numerics.Tests
             TestLoadUnsafeWithIndex<double>();
         }
 
-        private void TestLoadUnsafeWithIndex<T>() where T : unmanaged, INumber<T>
+        private void TestLoadUnsafeWithIndex<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count + 1);
             Vector<T> vector = Vector.LoadUnsafe<T>(ref values[0], 1);
@@ -7286,7 +7366,8 @@ namespace System.Numerics.Tests
             TestStore<double>();
         }
 
-        private void TestStore<T>() where T : unmanaged, INumber<T>
+        private void TestStore<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -7367,7 +7448,8 @@ namespace System.Numerics.Tests
             TestStoreAligned<double>();
         }
 
-        private void TestStoreAligned<T>() where T : unmanaged, INumber<T>
+        private void TestStoreAligned<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -7450,7 +7532,8 @@ namespace System.Numerics.Tests
             TestStoreAlignedNonTemporal<double>();
         }
 
-        private void TestStoreAlignedNonTemporal<T>() where T : unmanaged, INumber<T>
+        private void TestStoreAlignedNonTemporal<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -7533,7 +7616,8 @@ namespace System.Numerics.Tests
             TestStoreUnsafe<double>();
         }
 
-        private void TestStoreUnsafe<T>() where T : unmanaged, INumber<T>
+        private void TestStoreUnsafe<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values);
@@ -7610,7 +7694,8 @@ namespace System.Numerics.Tests
             TestStoreUnsafeWithIndex<double>();
         }
 
-        private void TestStoreUnsafeWithIndex<T>() where T : unmanaged, INumber<T>
+        private void TestStoreUnsafeWithIndex<T>()
+            where T : unmanaged, INumber<T>
         {
             T[] values = GenerateRandomValuesForVector<T>(Vector<T>.Count + 1);
             Vector<T> vector = new Vector<T>(values);
@@ -7634,7 +7719,8 @@ namespace System.Numerics.Tests
             T actual,
             string operation,
             int precision = -1
-        ) where T : IEquatable<T>
+        )
+            where T : IEquatable<T>
         {
             if (typeof(T) == typeof(float))
             {
@@ -7728,14 +7814,16 @@ namespace System.Numerics.Tests
             }
         }
 
-        internal static T[] GenerateRandomValuesForVector<T>(int? numValues = null) where T : struct
+        internal static T[] GenerateRandomValuesForVector<T>(int? numValues = null)
+            where T : struct
         {
             int minValue = GetMinValue<T>();
             int maxValue = GetMaxValue<T>();
             return Util.GenerateRandomValues<T>(numValues ?? Vector<T>.Count, minValue, maxValue);
         }
 
-        internal static int GetMinValue<T>() where T : struct
+        internal static int GetMinValue<T>()
+            where T : struct
         {
             if (
                 typeof(T) == typeof(int)
@@ -7767,7 +7855,8 @@ namespace System.Numerics.Tests
             throw new NotSupportedException();
         }
 
-        internal static T GetMinValueExact<T>() where T : struct
+        internal static T GetMinValueExact<T>()
+            where T : struct
         {
             if (typeof(T) == typeof(byte))
             {
@@ -7812,7 +7901,8 @@ namespace System.Numerics.Tests
             throw new NotSupportedException();
         }
 
-        internal static int GetMaxValue<T>() where T : struct
+        internal static int GetMaxValue<T>()
+            where T : struct
         {
             if (
                 typeof(T) == typeof(int)
@@ -7844,7 +7934,8 @@ namespace System.Numerics.Tests
             throw new NotSupportedException();
         }
 
-        internal static T GetMaxValueExact<T>() where T : struct
+        internal static T GetMaxValueExact<T>()
+            where T : struct
         {
             if (typeof(T) == typeof(byte))
             {
@@ -7889,7 +7980,8 @@ namespace System.Numerics.Tests
             throw new NotSupportedException();
         }
 
-        internal static T GetValueWithAllOnesSet<T>() where T : struct
+        internal static T GetValueWithAllOnesSet<T>()
+            where T : struct
         {
             if (typeof(T) == typeof(byte))
             {

@@ -651,7 +651,8 @@ namespace SerializationTypes
     }
 
     [DataContract(IsReference = true)]
-    public class GenericBase<T> where T : new()
+    public class GenericBase<T>
+        where T : new()
     {
         [DataMember]
         public object genericData;
@@ -1469,7 +1470,8 @@ namespace SerializationTypes
         public List<int> PublicIntListFieldWithXmlElementAttribute;
     }
 
-    public abstract class HighScoreManager<T> where T : HighScoreManager<T>.HighScoreBase
+    public abstract class HighScoreManager<T>
+        where T : HighScoreManager<T>.HighScoreBase
     {
         public abstract class HighScoreBase { }
     }

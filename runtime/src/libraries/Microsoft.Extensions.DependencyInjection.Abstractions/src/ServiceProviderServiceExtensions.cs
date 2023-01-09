@@ -58,7 +58,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object from.</param>
         /// <returns>A service object of type <typeparamref name="T"/>.</returns>
         /// <exception cref="System.InvalidOperationException">There is no service of type <typeparamref name="T"/>.</exception>
-        public static T GetRequiredService<T>(this IServiceProvider provider) where T : notnull
+        public static T GetRequiredService<T>(this IServiceProvider provider)
+            where T : notnull
         {
             ThrowHelper.ThrowIfNull(provider);
 

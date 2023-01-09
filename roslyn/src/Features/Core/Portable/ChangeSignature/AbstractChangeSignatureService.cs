@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         protected abstract T TransferLeadingWhitespaceTrivia<T>(
             T newArgument,
             SyntaxNode oldArgument
-        ) where T : SyntaxNode;
+        )
+            where T : SyntaxNode;
 
         protected abstract SyntaxToken CommaTokenWithElasticSpace();
 
@@ -946,7 +947,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         protected static int GetParameterIndex<TNode>(
             SeparatedSyntaxList<TNode> parameters,
             int position
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (parameters.Count == 0)
             {
@@ -983,7 +985,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             SeparatedSyntaxList<T> list,
             SignatureChange updatedSignature,
             Func<AddedParameter, T> createNewParameterMethod
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var originalParameters = updatedSignature.OriginalConfiguration.ToListOfParameters();
             var reorderedParameters = updatedSignature.UpdatedConfiguration.ToListOfParameters();
@@ -1051,7 +1054,8 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         protected ImmutableArray<SyntaxToken> GetSeparators<T>(
             SeparatedSyntaxList<T> arguments,
             int numSeparatorsToSkip
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var separators = ImmutableArray.CreateBuilder<SyntaxToken>();
 

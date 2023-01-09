@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             OptionSet visualStudioOptions,
             OptionUpdater updater,
             string fileName
-        ) where TOption : notnull
+        )
+            where TOption : notnull
         {
             var isDefinedInEditorConfig = editorConfigOptions.TryGetEditorConfigOption<TOption>(
                 option,
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             OptionSet visualStudioOptions,
             OptionUpdater updater,
             string fileName
-        ) where TOption : struct
+        )
+            where TOption : struct
         {
             var isDefinedInEditorConfig = editorConfigOptions.TryGetEditorConfigOption<TOption>(
                 option,

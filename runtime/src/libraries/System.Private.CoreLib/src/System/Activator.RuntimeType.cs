@@ -201,6 +201,7 @@ namespace System
             return (T)((RuntimeType)typeof(T)).CreateInstanceOfT()!;
         }
 
-        private static T CreateDefaultInstance<T>() where T : struct => default;
+        private static T CreateDefaultInstance<T>()
+            where T : struct => default;
     }
 }

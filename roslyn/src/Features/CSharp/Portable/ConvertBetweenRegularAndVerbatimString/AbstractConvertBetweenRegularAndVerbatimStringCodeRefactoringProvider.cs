@@ -17,7 +17,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.ConvertBetweenRegularAndVerbatimString
 {
     internal abstract class AbstractConvertBetweenRegularAndVerbatimStringCodeRefactoringProvider<TStringExpressionSyntax>
-        : CodeRefactoringProvider where TStringExpressionSyntax : ExpressionSyntax
+        : CodeRefactoringProvider
+        where TStringExpressionSyntax : ExpressionSyntax
     {
         private const char OpenBrace = '{';
         private const char CloseBrace = '}';

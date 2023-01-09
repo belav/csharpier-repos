@@ -239,7 +239,8 @@ namespace System.Reflection.Tests
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto, Pack = 4, Size = 40)]
         private class Generic<T> { }
 
-        private class GenericParameterHolder<T> where T : ExplicitAutoFourFortyTwo { }
+        private class GenericParameterHolder<T>
+            where T : ExplicitAutoFourFortyTwo { }
 
         private interface IInterface { }
     }

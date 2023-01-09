@@ -425,7 +425,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        private sealed class Extensions<TExtension> where TExtension : class
+        private sealed class Extensions<TExtension>
+            where TExtension : class
         {
             private readonly AnalyzerFileReference _reference;
             private readonly Type _attributeType;

@@ -270,7 +270,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IDictionary<TKey, TValue> dictionary,
             TKey equalKey,
             out TKey actualKey
-        ) where TKey : notnull;
+        )
+            where TKey : notnull;
 
         /// <summary>
         /// Gets the Builder for a given dictionary instance.
@@ -280,7 +281,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// <returns>The builder.</returns>
         protected abstract IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
             IImmutableDictionary<TKey, TValue>? basis = null
-        ) where TKey : notnull;
+        )
+            where TKey : notnull;
 
         /// <summary>
         /// Gets an empty immutable dictionary.
@@ -291,7 +293,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected abstract IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<
             TKey,
             TValue
-        >() where TKey : notnull;
+        >()
+            where TKey : notnull;
 
         protected abstract IImmutableDictionary<string, TValue> Empty<TValue>(
             StringComparer comparer

@@ -2248,7 +2248,8 @@ namespace System
             IComparable,
             IComparable<ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>>,
             IValueTupleInternal,
-            ITuple where TRest : struct
+            ITuple
+        where TRest : struct
     {
         /// <summary>
         /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's first component.

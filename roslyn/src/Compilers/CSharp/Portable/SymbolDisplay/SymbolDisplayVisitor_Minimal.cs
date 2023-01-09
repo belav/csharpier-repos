@@ -315,12 +315,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             return symbolName;
         }
 
-        private static T GetAncestorOrThis<T>(SyntaxNode node) where T : SyntaxNode
+        private static T GetAncestorOrThis<T>(SyntaxNode node)
+            where T : SyntaxNode
         {
             return GetAncestorsOrThis<T>(node).FirstOrDefault();
         }
 
-        private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node) where T : SyntaxNode
+        private static IEnumerable<T> GetAncestorsOrThis<T>(SyntaxNode node)
+            where T : SyntaxNode
         {
             return node == null
                 ? SpecializedCollections.EmptyEnumerable<T>()

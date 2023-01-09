@@ -129,7 +129,8 @@ namespace Microsoft.Extensions.Logging
             }
         }
 
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull
         {
             ScopeLogger[]? loggers = ScopeLoggers;
 

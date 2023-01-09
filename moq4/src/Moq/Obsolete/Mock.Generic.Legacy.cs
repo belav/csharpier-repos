@@ -98,7 +98,8 @@ namespace Moq
             this Mock<T> mock,
             Expression<Func<T, TProperty>> expression,
             TProperty value
-        ) where T : class
+        )
+            where T : class
         {
             throw new NotSupportedException();
         }
@@ -115,7 +116,8 @@ namespace Moq
             this Mock<T> mock,
             Expression<Func<T, TProperty>> expression,
             TProperty value
-        ) where T : class
+        )
+            where T : class
         {
             throw new NotSupportedException();
         }
@@ -133,7 +135,8 @@ namespace Moq
             Expression<Func<T, TProperty>> expression,
             TProperty value,
             string failMessage
-        ) where T : class
+        )
+            where T : class
         {
             throw new NotSupportedException();
         }

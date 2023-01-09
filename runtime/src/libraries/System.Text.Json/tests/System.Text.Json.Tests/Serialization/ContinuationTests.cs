@@ -376,7 +376,8 @@ namespace System.Text.Json.Serialization.Tests
             void Verify();
         }
 
-        private class TestClass<TNested> : ITestObject where TNested : INestedObject
+        private class TestClass<TNested> : ITestObject
+            where TNested : INestedObject
         {
             public string A { get; set; }
             public string B { get; set; }
@@ -415,7 +416,8 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        private class TestValueType<TNested> : ITestObject where TNested : INestedObject
+        private class TestValueType<TNested> : ITestObject
+            where TNested : INestedObject
         {
             public string A { get; set; }
             public string B { get; set; }
@@ -495,7 +497,8 @@ namespace System.Text.Json.Serialization.Tests
             public NestedClassWithParamCtor(string a) => A = a;
         }
 
-        private class DictionaryTestClass<TNested> : ITestObject where TNested : INestedObject
+        private class DictionaryTestClass<TNested> : ITestObject
+            where TNested : INestedObject
         {
             public Dictionary<string, TNested> A { get; set; }
 

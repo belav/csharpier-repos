@@ -10,7 +10,8 @@ internal partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorAddTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorAddTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorAdd(T a, T b, T c)
         {

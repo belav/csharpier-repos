@@ -1066,7 +1066,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Add<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1074,7 +1075,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> AndNot<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1090,35 +1092,40 @@ namespace System.Numerics
 
         public static System.Numerics.Vector<System.Byte> AsVectorByte<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Numerics.Vector<System.Double> AsVectorDouble<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Numerics.Vector<System.Int16> AsVectorInt16<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Numerics.Vector<System.Int32> AsVectorInt32<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Numerics.Vector<System.Int64> AsVectorInt64<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1132,7 +1139,8 @@ namespace System.Numerics
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<nuint> AsVectorNUInt<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1140,14 +1148,16 @@ namespace System.Numerics
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.SByte> AsVectorSByte<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Numerics.Vector<System.Single> AsVectorSingle<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1155,7 +1165,8 @@ namespace System.Numerics
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt16> AsVectorUInt16<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1163,7 +1174,8 @@ namespace System.Numerics
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt32> AsVectorUInt32<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1171,7 +1183,8 @@ namespace System.Numerics
         [System.CLSCompliantAttribute(false)]
         public static System.Numerics.Vector<System.UInt64> AsVectorUInt64<T>(
             System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1179,7 +1192,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> BitwiseAnd<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1187,7 +1201,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> BitwiseOr<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1228,7 +1243,8 @@ namespace System.Numerics
             System.Numerics.Vector<T> condition,
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1296,7 +1312,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Divide<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1348,7 +1365,8 @@ namespace System.Numerics
         public static bool EqualsAll<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1356,7 +1374,8 @@ namespace System.Numerics
         public static bool EqualsAny<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1364,7 +1383,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Equals<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1424,7 +1444,8 @@ namespace System.Numerics
         public static bool GreaterThanAll<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1432,7 +1453,8 @@ namespace System.Numerics
         public static bool GreaterThanAny<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1472,7 +1494,8 @@ namespace System.Numerics
         public static bool GreaterThanOrEqualAll<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1480,7 +1503,8 @@ namespace System.Numerics
         public static bool GreaterThanOrEqualAny<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1488,7 +1512,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> GreaterThanOrEqual<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1496,7 +1521,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> GreaterThan<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1536,7 +1562,8 @@ namespace System.Numerics
         public static bool LessThanAll<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1544,7 +1571,8 @@ namespace System.Numerics
         public static bool LessThanAny<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1584,7 +1612,8 @@ namespace System.Numerics
         public static bool LessThanOrEqualAll<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1592,7 +1621,8 @@ namespace System.Numerics
         public static bool LessThanOrEqualAny<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1600,7 +1630,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> LessThanOrEqual<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1608,19 +1639,22 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> LessThan<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         [System.CLSCompliantAttribute(false)]
-        public static unsafe System.Numerics.Vector<T> Load<T>(T* source) where T : unmanaged
+        public static unsafe System.Numerics.Vector<T> Load<T>(T* source)
+            where T : unmanaged
         {
             throw null;
         }
 
         [System.CLSCompliantAttribute(false)]
-        public static unsafe System.Numerics.Vector<T> LoadAligned<T>(T* source) where T : unmanaged
+        public static unsafe System.Numerics.Vector<T> LoadAligned<T>(T* source)
+            where T : unmanaged
         {
             throw null;
         }
@@ -1632,7 +1666,8 @@ namespace System.Numerics
             throw null;
         }
 
-        public static System.Numerics.Vector<T> LoadUnsafe<T>(ref T source) where T : struct
+        public static System.Numerics.Vector<T> LoadUnsafe<T>(ref T source)
+            where T : struct
         {
             throw null;
         }
@@ -1647,7 +1682,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Max<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1655,7 +1691,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Min<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1663,7 +1700,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Multiply<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1980,7 +2018,8 @@ namespace System.Numerics
         public static unsafe void StoreAligned<T>(
             this System.Numerics.Vector<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -1989,7 +2028,8 @@ namespace System.Numerics
         public static unsafe void StoreAlignedNonTemporal<T>(
             this System.Numerics.Vector<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -2005,7 +2045,8 @@ namespace System.Numerics
             this System.Numerics.Vector<T> source,
             ref T destination,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2013,17 +2054,20 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Subtract<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
-        public static T Sum<T>(System.Numerics.Vector<T> value) where T : struct
+        public static T Sum<T>(System.Numerics.Vector<T> value)
+            where T : struct
         {
             throw null;
         }
 
-        public static T ToScalar<T>(this System.Numerics.Vector<T> vector) where T : struct
+        public static T ToScalar<T>(this System.Numerics.Vector<T> vector)
+            where T : struct
         {
             throw null;
         }
@@ -2205,7 +2249,8 @@ namespace System.Numerics
             this System.Numerics.Vector<T> vector,
             int index,
             T value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2213,7 +2258,8 @@ namespace System.Numerics
         public static System.Numerics.Vector<T> Xor<T>(
             System.Numerics.Vector<T> left,
             System.Numerics.Vector<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3242,7 +3288,8 @@ namespace System.Numerics
 
     public readonly partial struct Vector<T>
         : System.IEquatable<System.Numerics.Vector<T>>,
-            System.IFormattable where T : struct
+            System.IFormattable
+        where T : struct
     {
         private readonly int _dummyPrimitive;
 

@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">Options type.</typeparam>
     public class OptionsManager<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > : IOptions<TOptions>, IOptionsSnapshot<TOptions> where TOptions : class
+    > : IOptions<TOptions>, IOptionsSnapshot<TOptions>
+        where TOptions : class
     {
         private readonly IOptionsFactory<TOptions> _factory;
         private readonly OptionsCache<TOptions> _cache = new OptionsCache<TOptions>(); // Note: this is a private cache

@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 /// <typeparam name="TKey">Type of keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">Type of values in the dictionary.</typeparam>
 public partial class DictionaryModelBinder<TKey, TValue>
-    : CollectionModelBinder<KeyValuePair<TKey, TValue?>> where TKey : notnull
+    : CollectionModelBinder<KeyValuePair<TKey, TValue?>>
+    where TKey : notnull
 {
     private readonly IModelBinder _valueBinder;
 

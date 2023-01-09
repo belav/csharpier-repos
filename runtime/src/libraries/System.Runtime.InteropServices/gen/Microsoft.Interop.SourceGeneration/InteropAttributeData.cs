@@ -54,7 +54,8 @@ namespace Microsoft.Interop
         public static T WithValuesFromNamedArguments<T>(
             this T t,
             ImmutableDictionary<string, TypedConstant> namedArguments
-        ) where T : InteropAttributeCompilationData
+        )
+            where T : InteropAttributeCompilationData
         {
             InteropAttributeMember userDefinedValues = InteropAttributeMember.None;
             bool setLastError = false;

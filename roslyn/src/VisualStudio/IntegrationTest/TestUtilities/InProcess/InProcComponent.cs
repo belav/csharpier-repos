@@ -108,7 +108,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     (TInterface)ServiceProvider.GlobalProvider.GetService(typeof(TService))
             );
 
-        protected static TService GetComponentModelService<TService>() where TService : class =>
+        protected static TService GetComponentModelService<TService>()
+            where TService : class =>
             InvokeOnUIThread(cancellationToken => GetComponentModel().GetService<TService>());
 
         protected static TestWaitingService GetWaitingService() =>

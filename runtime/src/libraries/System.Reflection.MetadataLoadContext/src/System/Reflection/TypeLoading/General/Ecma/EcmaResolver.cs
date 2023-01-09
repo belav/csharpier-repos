@@ -262,7 +262,8 @@ namespace System.Reflection.TypeLoading.Ecma
             this MethodDefinitionHandle handle,
             EcmaModule module,
             in TypeContext typeContext
-        ) where T : MethodBase
+        )
+            where T : MethodBase
         {
             MetadataReader reader = module.Reader;
             MethodDefinition methodDefinition = handle.GetMethodDefinition(reader);

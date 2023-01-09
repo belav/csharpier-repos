@@ -444,7 +444,8 @@ namespace Internal.NativeFormat
             }
         }
 
-        private T Unify<T>(T vertex) where T : Vertex
+        private T Unify<T>(T vertex)
+            where T : Vertex
         {
             Vertex existing;
             if (_unifier.TryGetValue(vertex, out existing))

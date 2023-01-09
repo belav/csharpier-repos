@@ -2624,7 +2624,8 @@ namespace System.ServiceModel.Syndication.Tests
             }
         }
 
-        public class GenericFormatter<T> : Rss20FeedFormatter<T> where T : SyndicationFeed, new()
+        public class GenericFormatter<T> : Rss20FeedFormatter<T>
+            where T : SyndicationFeed, new()
         {
             public GenericFormatter()
                 : base() { }

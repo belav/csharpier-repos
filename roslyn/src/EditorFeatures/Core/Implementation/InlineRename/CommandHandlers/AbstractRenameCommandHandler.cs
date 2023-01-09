@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             TArgs args,
             Action nextHandler,
             Action<InlineRenameSession, SnapshotSpan> actionIfInsideActiveSpan
-        ) where TArgs : EditorCommandArgs
+        )
+            where TArgs : EditorCommandArgs
         {
             if (_renameService.ActiveSession == null)
             {

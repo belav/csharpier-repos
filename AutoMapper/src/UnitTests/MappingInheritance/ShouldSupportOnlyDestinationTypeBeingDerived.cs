@@ -174,7 +174,8 @@ public class AsWithGenerics : AutoMapperSpecBase
 {
     INodeModel<int> _destination;
 
-    public interface INodeModel<T> : INodeModel where T : struct
+    public interface INodeModel<T> : INodeModel
+        where T : struct
     {
         new T? ID { get; set; }
     }
@@ -185,7 +186,8 @@ public class AsWithGenerics : AutoMapperSpecBase
         string Name { get; set; }
     }
 
-    public class NodeModel<T> : INodeModel<T> where T : struct
+    public class NodeModel<T> : INodeModel<T>
+        where T : struct
     {
         public T? ID { get; set; }
         public string Name { get; set; }
@@ -197,7 +199,8 @@ public class AsWithGenerics : AutoMapperSpecBase
         }
     }
 
-    public class NodeDto<T> where T : struct
+    public class NodeDto<T>
+        where T : struct
     {
         public T? ID { get; set; }
         public string Name { get; set; }

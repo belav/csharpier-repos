@@ -165,7 +165,8 @@ public interface IDiagnosticsLogger
         out TInterceptor? interceptor,
         out bool diagnosticSourceEnabled,
         out bool simpleLogEnabled
-    ) where TInterceptor : class, IInterceptor
+    )
+        where TInterceptor : class, IInterceptor
     {
         // No null checks; low-level code in hot path for logging.
 

@@ -274,7 +274,8 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        private static TEnum ConvertToEnum<TEnum>(object value) where TEnum : struct
+        private static TEnum ConvertToEnum<TEnum>(object value)
+            where TEnum : struct
         {
             if (value is string stringValue)
             {

@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             graph.Free();
         }
 
-        private struct Node<T> where T : class
+        private struct Node<T>
+            where T : class
         {
             /// <summary>
             /// The set of fields on which the field depends.

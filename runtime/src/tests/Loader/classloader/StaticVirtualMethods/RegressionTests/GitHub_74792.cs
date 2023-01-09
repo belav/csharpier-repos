@@ -45,7 +45,8 @@ public class L2 : ILogic
     }
 }
 
-struct G<T> where T : ILogic
+struct G<T>
+    where T : ILogic
 {
     public void Test()
     {

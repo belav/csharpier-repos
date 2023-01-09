@@ -1184,7 +1184,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
             }
         }
 
-        public IQueryable<TEntity> Set<TEntity>() where TEntity : class
+        public IQueryable<TEntity> Set<TEntity>()
+            where TEntity : class
         {
             if (typeof(TEntity) == typeof(ArubaOwner))
             {

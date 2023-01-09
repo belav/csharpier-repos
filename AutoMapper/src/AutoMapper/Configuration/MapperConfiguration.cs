@@ -622,7 +622,8 @@ public class MapperConfiguration : IGlobalConfiguration
         );
 }
 
-struct LazyValue<T> where T : class
+struct LazyValue<T>
+    where T : class
 {
     readonly Func<T> _factory;
     T _value = null;

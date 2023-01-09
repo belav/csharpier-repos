@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Logging.Configuration
     internal sealed class LoggerProviderConfigureOptions<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions,
         TProvider
-    > : ConfigureFromConfigurationOptions<TOptions> where TOptions : class
+    > : ConfigureFromConfigurationOptions<TOptions>
+        where TOptions : class
     {
         [RequiresDynamicCode(LoggerProviderOptions.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(LoggerProviderOptions.TrimmingRequiresUnreferencedCodeMessage)]

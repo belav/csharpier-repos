@@ -25,8 +25,8 @@ namespace DevDiv_736188
         ) => default;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static T CallWith2Args<T>(ref T field, Func<T> initializer) where T : class =>
-            CallWith3Args(ref field, ref InternalSyncObject, initializer);
+        internal static T CallWith2Args<T>(ref T field, Func<T> initializer)
+            where T : class => CallWith3Args(ref field, ref InternalSyncObject, initializer);
 
         static int Main(string[] args)
         {

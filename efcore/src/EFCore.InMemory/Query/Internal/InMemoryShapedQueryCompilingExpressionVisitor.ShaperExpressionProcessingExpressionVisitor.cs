@@ -436,7 +436,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             IEnumerable<ValueBuffer> innerValueBuffers,
             Func<QueryContext, ValueBuffer, TElement> innerShaper,
             IClrCollectionAccessor? clrCollectionAccessor
-        ) where TCollection : class, ICollection<TElement>
+        )
+            where TCollection : class, ICollection<TElement>
         {
             var collection = (TCollection)(clrCollectionAccessor?.Create() ?? new List<TElement>());
 

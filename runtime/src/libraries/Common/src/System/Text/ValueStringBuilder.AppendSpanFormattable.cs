@@ -9,7 +9,8 @@ namespace System.Text
             T value,
             string? format = null,
             IFormatProvider? provider = null
-        ) where T : ISpanFormattable
+        )
+            where T : ISpanFormattable
         {
             if (value.TryFormat(_chars.Slice(_pos), out int charsWritten, format, provider))
             {

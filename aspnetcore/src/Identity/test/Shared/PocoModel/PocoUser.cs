@@ -31,7 +31,8 @@ public class PocoUser : PocoUser<string>
 /// Test user
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoUser<TKey> where TKey : IEquatable<TKey>
+public class PocoUser<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     /// ctor

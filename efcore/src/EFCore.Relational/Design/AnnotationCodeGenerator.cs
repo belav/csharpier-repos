@@ -1061,7 +1061,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         TAnnotatable annotatable,
         IDictionary<string, IAnnotation> annotations,
         Func<TAnnotatable, IAnnotation, TCodeFragment?> generateCodeFragment
-    ) where TCodeFragment : notnull
+    )
+        where TCodeFragment : notnull
     {
         foreach (var (name, annotation) in EnumerateForRemoval(annotations))
         {

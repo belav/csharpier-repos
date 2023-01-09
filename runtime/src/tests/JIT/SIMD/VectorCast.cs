@@ -22,7 +22,8 @@ internal partial class VectorTest
             bytePattern[i] = (byte)(i + 1);
     }
 
-    static T[] GetPatternAs<T>() where T : struct
+    static T[] GetPatternAs<T>()
+        where T : struct
     {
         T[] pattern = new T[bytePattern.Length]; // should be bytes.Length / sizeof(T) but sizeof(T) doesn't work
         // so we'll settle for a larger than needed array
@@ -32,63 +33,83 @@ internal partial class VectorTest
 
     // Get a Vector<T> containing a specific bit pattern
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<T> GetVector<T>() where T : struct => new Vector<T>(GetPatternAs<T>());
+    static Vector<T> GetVector<T>()
+        where T : struct => new Vector<T>(GetPatternAs<T>());
 
     // Cast a Vector<T> to specific vector type (we can cast from a generic value but the cast itself can't
     // be generic so we need one method for each possible vector element type).
-    static Vector<Byte> To_Byte<T>(Vector<T> from) where T : struct => (Vector<Byte>)from;
+    static Vector<Byte> To_Byte<T>(Vector<T> from)
+        where T : struct => (Vector<Byte>)from;
 
-    static Vector<SByte> To_SByte<T>(Vector<T> from) where T : struct => (Vector<SByte>)from;
+    static Vector<SByte> To_SByte<T>(Vector<T> from)
+        where T : struct => (Vector<SByte>)from;
 
-    static Vector<UInt16> To_UInt16<T>(Vector<T> from) where T : struct => (Vector<UInt16>)from;
+    static Vector<UInt16> To_UInt16<T>(Vector<T> from)
+        where T : struct => (Vector<UInt16>)from;
 
-    static Vector<Int16> To_Int16<T>(Vector<T> from) where T : struct => (Vector<Int16>)from;
+    static Vector<Int16> To_Int16<T>(Vector<T> from)
+        where T : struct => (Vector<Int16>)from;
 
-    static Vector<UInt32> To_UInt32<T>(Vector<T> from) where T : struct => (Vector<UInt32>)from;
+    static Vector<UInt32> To_UInt32<T>(Vector<T> from)
+        where T : struct => (Vector<UInt32>)from;
 
-    static Vector<Int32> To_Int32<T>(Vector<T> from) where T : struct => (Vector<Int32>)from;
+    static Vector<Int32> To_Int32<T>(Vector<T> from)
+        where T : struct => (Vector<Int32>)from;
 
-    static Vector<UInt64> To_UInt64<T>(Vector<T> from) where T : struct => (Vector<UInt64>)from;
+    static Vector<UInt64> To_UInt64<T>(Vector<T> from)
+        where T : struct => (Vector<UInt64>)from;
 
-    static Vector<Int64> To_Int64<T>(Vector<T> from) where T : struct => (Vector<Int64>)from;
+    static Vector<Int64> To_Int64<T>(Vector<T> from)
+        where T : struct => (Vector<Int64>)from;
 
-    static Vector<Single> To_Single<T>(Vector<T> from) where T : struct => (Vector<Single>)from;
+    static Vector<Single> To_Single<T>(Vector<T> from)
+        where T : struct => (Vector<Single>)from;
 
-    static Vector<Double> To_Double<T>(Vector<T> from) where T : struct => (Vector<Double>)from;
+    static Vector<Double> To_Double<T>(Vector<T> from)
+        where T : struct => (Vector<Double>)from;
 
-    static Vector<nuint> To_NUInt<T>(Vector<T> from) where T : struct => (Vector<nuint>)from;
+    static Vector<nuint> To_NUInt<T>(Vector<T> from)
+        where T : struct => (Vector<nuint>)from;
 
-    static Vector<nint> To_NInt<T>(Vector<T> from) where T : struct => (Vector<nint>)from;
+    static Vector<nint> To_NInt<T>(Vector<T> from)
+        where T : struct => (Vector<nint>)from;
 
     // Check the result of casting Vector<T> to a specific vector type.
-    static bool Test_Byte<T>() where T : struct => GetVector<Byte>() == To_Byte(GetVector<T>());
+    static bool Test_Byte<T>()
+        where T : struct => GetVector<Byte>() == To_Byte(GetVector<T>());
 
-    static bool Test_SByte<T>() where T : struct => GetVector<SByte>() == To_SByte(GetVector<T>());
+    static bool Test_SByte<T>()
+        where T : struct => GetVector<SByte>() == To_SByte(GetVector<T>());
 
-    static bool Test_UInt16<T>() where T : struct =>
-        GetVector<UInt16>() == To_UInt16(GetVector<T>());
+    static bool Test_UInt16<T>()
+        where T : struct => GetVector<UInt16>() == To_UInt16(GetVector<T>());
 
-    static bool Test_Int16<T>() where T : struct => GetVector<Int16>() == To_Int16(GetVector<T>());
+    static bool Test_Int16<T>()
+        where T : struct => GetVector<Int16>() == To_Int16(GetVector<T>());
 
-    static bool Test_UInt32<T>() where T : struct =>
-        GetVector<UInt32>() == To_UInt32(GetVector<T>());
+    static bool Test_UInt32<T>()
+        where T : struct => GetVector<UInt32>() == To_UInt32(GetVector<T>());
 
-    static bool Test_Int32<T>() where T : struct => GetVector<Int32>() == To_Int32(GetVector<T>());
+    static bool Test_Int32<T>()
+        where T : struct => GetVector<Int32>() == To_Int32(GetVector<T>());
 
-    static bool Test_UInt64<T>() where T : struct =>
-        GetVector<UInt64>() == To_UInt64(GetVector<T>());
+    static bool Test_UInt64<T>()
+        where T : struct => GetVector<UInt64>() == To_UInt64(GetVector<T>());
 
-    static bool Test_Int64<T>() where T : struct => GetVector<Int64>() == To_Int64(GetVector<T>());
+    static bool Test_Int64<T>()
+        where T : struct => GetVector<Int64>() == To_Int64(GetVector<T>());
 
-    static bool Test_Single<T>() where T : struct =>
-        GetVector<Single>() == To_Single(GetVector<T>());
+    static bool Test_Single<T>()
+        where T : struct => GetVector<Single>() == To_Single(GetVector<T>());
 
-    static bool Test_Double<T>() where T : struct =>
-        GetVector<Double>() == To_Double(GetVector<T>());
+    static bool Test_Double<T>()
+        where T : struct => GetVector<Double>() == To_Double(GetVector<T>());
 
-    static bool Test_NUInt<T>() where T : struct => GetVector<nuint>() == To_NUInt(GetVector<T>());
+    static bool Test_NUInt<T>()
+        where T : struct => GetVector<nuint>() == To_NUInt(GetVector<T>());
 
-    static bool Test_NInt<T>() where T : struct => GetVector<nint>() == To_NInt(GetVector<T>());
+    static bool Test_NInt<T>()
+        where T : struct => GetVector<nint>() == To_NInt(GetVector<T>());
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool ReportFailure(bool success, [CallerLineNumber] int line = 0)

@@ -286,7 +286,8 @@ public sealed class WebAssemblyHostBuilder
     public void ConfigureContainer<TBuilder>(
         IServiceProviderFactory<TBuilder> factory,
         Action<TBuilder>? configure = null
-    ) where TBuilder : notnull
+    )
+        where TBuilder : notnull
     {
         if (factory == null)
         {

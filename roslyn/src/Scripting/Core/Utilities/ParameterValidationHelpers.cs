@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         internal static ImmutableArray<T> ToImmutableArrayChecked<T>(
             IEnumerable<T> items,
             string parameterName
-        ) where T : class
+        )
+            where T : class
         {
             var builder = ArrayBuilder<T>.GetInstance();
             AddRangeChecked(builder, items, parameterName);
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ImmutableArray<T> existing,
             IEnumerable<T> items,
             string parameterName
-        ) where T : class
+        )
+            where T : class
         {
             var builder = ArrayBuilder<T>.GetInstance();
             builder.AddRange(existing);
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Scripting
             ArrayBuilder<T> builder,
             IEnumerable<T> items,
             string parameterName
-        ) where T : class
+        )
+            where T : class
         {
             RequireNonNull(items, parameterName);
 

@@ -111,7 +111,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <seealso cref="ServiceLifetime.Transient"/>
         public static IServiceCollection AddTransient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-        >(this IServiceCollection services) where TService : class
+        >(this IServiceCollection services)
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
 
@@ -131,7 +132,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddTransient<TService>(
             this IServiceCollection services,
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(implementationFactory);
@@ -264,7 +266,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <seealso cref="ServiceLifetime.Scoped"/>
         public static IServiceCollection AddScoped<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-        >(this IServiceCollection services) where TService : class
+        >(this IServiceCollection services)
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
 
@@ -284,7 +287,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddScoped<TService>(
             this IServiceCollection services,
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(implementationFactory);
@@ -417,7 +421,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <seealso cref="ServiceLifetime.Singleton"/>
         public static IServiceCollection AddSingleton<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-        >(this IServiceCollection services) where TService : class
+        >(this IServiceCollection services)
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
 
@@ -437,7 +442,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddSingleton<TService>(
             this IServiceCollection services,
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(implementationFactory);
@@ -507,7 +513,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddSingleton<TService>(
             this IServiceCollection services,
             TService implementationInstance
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(implementationInstance);

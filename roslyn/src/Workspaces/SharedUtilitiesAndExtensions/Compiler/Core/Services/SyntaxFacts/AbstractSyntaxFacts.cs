@@ -269,7 +269,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
             TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var leadingTriviaToKeep = new List<SyntaxTrivia>(node.GetLeadingTrivia());
 
@@ -283,7 +284,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         public ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out var leadingTrivia);
             return leadingTrivia;
@@ -291,7 +293,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             return GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out _);
         }
@@ -299,7 +302,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var leadingTrivia = node.GetLeadingTrivia();
 
@@ -515,7 +519,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             SyntaxNode ownerOfHeader,
             SyntaxNodeOrToken lastTokenOrNodeOfHeader,
             ImmutableArray<THoleSyntax> holes
-        ) where THoleSyntax : SyntaxNode
+        )
+            where THoleSyntax : SyntaxNode
         {
             Debug.Assert(ownerOfHeader.FullSpan.Contains(lastTokenOrNodeOfHeader.Span));
 

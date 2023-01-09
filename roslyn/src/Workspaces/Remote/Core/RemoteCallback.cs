@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Remote
     /// The purpose of this type is to handle exceptions thrown by the underlying remoting infrastructure
     /// in manner that's compatible with our exception handling policies.
     /// </summary>
-    internal readonly struct RemoteCallback<T> where T : class
+    internal readonly struct RemoteCallback<T>
+        where T : class
     {
         private readonly T _callback;
 

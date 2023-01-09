@@ -51,7 +51,8 @@ internal sealed class DefaultTagHelperFactory : ITagHelperFactory
     }
 
     /// <inheritdoc />
-    public TTagHelper CreateTagHelper<TTagHelper>(ViewContext context) where TTagHelper : ITagHelper
+    public TTagHelper CreateTagHelper<TTagHelper>(ViewContext context)
+        where TTagHelper : ITagHelper
     {
         if (context == null)
         {

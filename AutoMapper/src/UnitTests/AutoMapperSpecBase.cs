@@ -53,8 +53,8 @@ public abstract class NonValidatingSpecBase
     public void AssertConfigurationIsValid(string profileName) =>
         Configuration.AssertConfigurationIsValid(profileName);
 
-    public void AssertConfigurationIsValid<TProfile>() where TProfile : Profile, new() =>
-        Configuration.AssertConfigurationIsValid<TProfile>();
+    public void AssertConfigurationIsValid<TProfile>()
+        where TProfile : Profile, new() => Configuration.AssertConfigurationIsValid<TProfile>();
 
     protected IQueryable<TDestination> ProjectTo<TDestination>(
         IQueryable source,

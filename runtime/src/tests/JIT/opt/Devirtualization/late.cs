@@ -3,7 +3,8 @@
 
 using System;
 
-interface Ix<T> where T : class
+interface Ix<T>
+    where T : class
 {
     T F();
 }

@@ -555,7 +555,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
                 GenerateGenericWithStructRestrictionArray<Ts>(0),
@@ -573,7 +574,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Assert.Throws<NullReferenceException>(
                 () =>
@@ -1128,7 +1130,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
             Ts?[] array,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Ts?[]))),

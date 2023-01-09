@@ -50,7 +50,8 @@ namespace System.Net.Http.Functional.Tests
         private async Task<(bool, T)> IgnoreSpecificException<ExpectedException, T>(
             Task<T> task,
             string expectedExceptionContent = null
-        ) where ExpectedException : Exception
+        )
+            where ExpectedException : Exception
         {
             try
             {

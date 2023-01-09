@@ -501,7 +501,8 @@ namespace Microsoft.Cci
             }
         }
 
-        private readonly struct DefinitionIndex<T> where T : class, IReference
+        private readonly struct DefinitionIndex<T>
+            where T : class, IReference
         {
             // IReference to RowId
             private readonly Dictionary<T, int> _index;

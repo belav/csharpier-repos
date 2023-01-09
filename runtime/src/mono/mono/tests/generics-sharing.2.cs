@@ -400,7 +400,8 @@ namespace GenericSharingTest
         }
     }
 
-    public class NonGenUser<T> where T : NonGen
+    public class NonGenUser<T>
+        where T : NonGen
     {
         public int getNonGenField()
         {
@@ -558,7 +559,8 @@ namespace GenericSharingTest
             return GenA<T>.staticMethod();
         }
 
-        static void checkException<T>(String method, ActionDelegate action) where T : Exception
+        static void checkException<T>(String method, ActionDelegate action)
+            where T : Exception
         {
             try
             {

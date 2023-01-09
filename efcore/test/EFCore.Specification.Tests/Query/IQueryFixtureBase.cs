@@ -24,6 +24,7 @@ public interface IQueryFixtureBase
             _context = context;
         }
 
-        public IQueryable<TEntity> Set<TEntity>() where TEntity : class => _context.Set<TEntity>();
+        public IQueryable<TEntity> Set<TEntity>()
+            where TEntity : class => _context.Set<TEntity>();
     }
 }

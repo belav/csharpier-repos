@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         private IList<bool>? GetAvailableInsertionIndices<TDeclarationNode>(
             TDeclarationNode destination,
             CancellationToken cancellationToken
-        ) where TDeclarationNode : SyntaxNode =>
+        )
+            where TDeclarationNode : SyntaxNode =>
             GetAvailableInsertionIndices((SyntaxNode)destination, cancellationToken);
 
         public bool CanAddTo(

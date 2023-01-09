@@ -110,7 +110,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         string name,
         HealthStatus? failureStatus,
         IEnumerable<string> tags
-    ) where T : class, IHealthCheck
+    )
+        where T : class, IHealthCheck
     {
         return AddCheck<T>(builder, name, failureStatus, tags, default);
     }
@@ -142,7 +143,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         HealthStatus? failureStatus = null,
         IEnumerable<string>? tags = null,
         TimeSpan? timeout = null
-    ) where T : class, IHealthCheck
+    )
+        where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -229,7 +231,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         string name,
         HealthStatus? failureStatus,
         params object[] args
-    ) where T : class, IHealthCheck
+    )
+        where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -269,7 +272,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         HealthStatus? failureStatus,
         IEnumerable<string>? tags,
         params object[] args
-    ) where T : class, IHealthCheck
+    )
+        where T : class, IHealthCheck
     {
         if (builder == null)
         {
@@ -319,7 +323,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         IEnumerable<string> tags,
         TimeSpan timeout,
         params object[] args
-    ) where T : class, IHealthCheck
+    )
+        where T : class, IHealthCheck
     {
         if (builder == null)
         {

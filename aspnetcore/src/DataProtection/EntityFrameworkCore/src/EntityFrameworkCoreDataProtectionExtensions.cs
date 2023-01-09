@@ -23,7 +23,8 @@ public static class EntityFrameworkCoreDataProtectionExtensions
     /// <returns>The value <paramref name="builder"/>.</returns>
     public static IDataProtectionBuilder PersistKeysToDbContext<TContext>(
         this IDataProtectionBuilder builder
-    ) where TContext : DbContext, IDataProtectionKeyContext
+    )
+        where TContext : DbContext, IDataProtectionKeyContext
     {
         builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(services =>
         {

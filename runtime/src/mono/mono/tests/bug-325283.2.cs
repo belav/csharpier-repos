@@ -10,7 +10,8 @@ public class Foo : IFoo
     public void Tst() { }
 }
 
-public abstract class BusinessBase<TYPE> where TYPE : BusinessBase<TYPE>, new()
+public abstract class BusinessBase<TYPE>
+    where TYPE : BusinessBase<TYPE>, new()
 {
     public static void Load<KEY>(KEY id)
     {
@@ -28,7 +29,8 @@ public class Page : BusinessBase<Page>
         return new Page();
     }
 
-    public static void Test<T>(T t) where T : IFoo
+    public static void Test<T>(T t)
+        where T : IFoo
     {
         t.Tst();
     }

@@ -18,7 +18,8 @@ namespace Castle.DynamicProxy.Tests
 
     using NUnit.Framework;
 
-    public class LazyInterceptorV1<T> : IInterceptor where T : class
+    public class LazyInterceptorV1<T> : IInterceptor
+        where T : class
     {
         public LazyInterceptorV1(Lazy<T> lazyTarget)
         {
@@ -40,7 +41,8 @@ namespace Castle.DynamicProxy.Tests
         }
     }
 
-    public class LazyInterceptorV2<T> : IInterceptor where T : class
+    public class LazyInterceptorV2<T> : IInterceptor
+        where T : class
     {
         public LazyInterceptorV2(Lazy<T> lazyTarget)
         {
@@ -69,7 +71,8 @@ namespace Castle.DynamicProxy.Tests
         string Handle(EventArgs ea);
     }
 
-    public interface IEventHandler<T> : IEventHandler where T : EventArgs { }
+    public interface IEventHandler<T> : IEventHandler
+        where T : EventArgs { }
 
     public class EventArgs1 : EventArgs { }
 

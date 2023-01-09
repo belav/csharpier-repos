@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
             private void AddTextChange<TSyntax>(
                 SyntaxList<TSyntax> list,
                 SyntaxList<TSyntax> organizedList
-            ) where TSyntax : SyntaxNode
+            )
+                where TSyntax : SyntaxNode
             {
                 if (list.Count > 0)
                     this.TextChanges.Add(

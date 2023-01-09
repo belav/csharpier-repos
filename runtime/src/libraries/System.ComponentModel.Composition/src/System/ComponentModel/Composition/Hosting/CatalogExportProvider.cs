@@ -1017,7 +1017,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <typeparam name="T"></typeparam>
         /// <param name="currentValue"></param>
         [DebuggerStepThrough]
-        private void EnsureCanSet<T>(T? currentValue) where T : class
+        private void EnsureCanSet<T>(T? currentValue)
+            where T : class
         {
             if ((_isRunning) || (currentValue != null))
             {

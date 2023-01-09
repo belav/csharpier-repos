@@ -1063,7 +1063,8 @@ namespace Microsoft.EntityFrameworkCore
                 DbContext context,
                 object[] keyValues,
                 CancellationToken cancellationToken = default
-            ) where TEntity : class;
+            )
+                where TEntity : class;
         }
 
         public class FindViaSetFinder : TestFinder

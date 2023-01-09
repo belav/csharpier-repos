@@ -41,7 +41,8 @@ internal class foo
     }
 }
 
-internal class bar<B> where B : System.IComparable
+internal class bar<B>
+    where B : System.IComparable
 {
     private B[] _array;
 

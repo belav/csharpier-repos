@@ -92,7 +92,8 @@ internal static class MsQuicHelpers
         MsQuicSafeHandle handle,
         uint parameter,
         T value
-    ) where T : unmanaged
+    )
+        where T : unmanaged
     {
         int status = MsQuicApi.Api.SetParam(handle, parameter, (uint)sizeof(T), (byte*)&value);
 

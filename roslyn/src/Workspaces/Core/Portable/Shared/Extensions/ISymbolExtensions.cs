@@ -852,7 +852,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ImmutableArray<T> symbols,
             bool hideAdvancedMembers,
             Compilation compilation
-        ) where T : ISymbol
+        )
+            where T : ISymbol
         {
             symbols = symbols.RemoveOverriddenSymbolsWithinSet();
 
@@ -884,7 +885,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static ImmutableArray<T> RemoveOverriddenSymbolsWithinSet<T>(
             this ImmutableArray<T> symbols
-        ) where T : ISymbol
+        )
+            where T : ISymbol
         {
             var overriddenSymbols = new MetadataUnifyingSymbolHashSet();
 
@@ -902,7 +904,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ImmutableArray<T> symbols,
             bool hideAdvancedMembers,
             Compilation compilation
-        ) where T : ISymbol
+        )
+            where T : ISymbol
         {
             return symbols
                 .FilterToVisibleAndBrowsableSymbols(hideAdvancedMembers, compilation)

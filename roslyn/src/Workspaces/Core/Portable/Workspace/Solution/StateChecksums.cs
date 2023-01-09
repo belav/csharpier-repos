@@ -357,7 +357,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         public static T GetOrCreate<T>(
             object value,
             ConditionalWeakTable<object, object>.CreateValueCallback checksumCreator
-        ) where T : IChecksummedObject
+        )
+            where T : IChecksummedObject
         {
             // same key should always return same checksum
             return (T)s_cache.GetValue(value, checksumCreator);

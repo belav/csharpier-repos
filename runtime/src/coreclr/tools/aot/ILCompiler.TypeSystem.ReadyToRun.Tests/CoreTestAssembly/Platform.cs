@@ -65,7 +65,8 @@ namespace System
 
     public abstract class Enum : ValueType { }
 
-    public struct Nullable<T> where T : struct { }
+    public struct Nullable<T>
+        where T : struct { }
 
     public sealed class String { }
 

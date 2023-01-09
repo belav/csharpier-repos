@@ -1864,7 +1864,8 @@ namespace System.Diagnostics.Eventing.Reader
                     | DynamicallyAccessedMemberTypes.NonPublicConstructors
             )]
                 T
-        >(UnsafeNativeMethods.EvtVariant val, int size) where T : struct
+        >(UnsafeNativeMethods.EvtVariant val, int size)
+            where T : struct
         {
             IntPtr ptr = val.Reference;
             if (ptr == IntPtr.Zero)

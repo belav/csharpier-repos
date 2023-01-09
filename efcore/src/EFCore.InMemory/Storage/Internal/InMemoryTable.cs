@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InMemoryTable<TKey> : IInMemoryTable where TKey : notnull
+public class InMemoryTable<TKey> : IInMemoryTable
+    where TKey : notnull
 {
     private readonly IPrincipalKeyValueFactory<TKey> _keyValueFactory;
     private readonly bool _sensitiveLoggingEnabled;

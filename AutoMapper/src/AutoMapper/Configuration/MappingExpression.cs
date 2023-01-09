@@ -188,7 +188,8 @@ public class MappingExpression<TSource, TDestination>
         return this;
     }
 
-    public void As<T>() where T : TDestination => As(typeof(T));
+    public void As<T>()
+        where T : TDestination => As(typeof(T));
 
     public IMappingExpression<TSource, TDestination> AddTransform<TValue>(
         Expression<Func<TValue, TValue>> transformer

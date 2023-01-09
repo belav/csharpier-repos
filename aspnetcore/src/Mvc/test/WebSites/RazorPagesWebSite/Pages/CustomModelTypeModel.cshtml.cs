@@ -55,7 +55,8 @@ public class CustomModelTypeModel : PageModel
 
 public class User { }
 
-internal class CustomModelTypeModel<TUser> : CustomModelTypeModel where TUser : User
+internal class CustomModelTypeModel<TUser> : CustomModelTypeModel
+    where TUser : User
 {
     private readonly ILogger<CustomModelTypeModel<TUser>> _logger;
 

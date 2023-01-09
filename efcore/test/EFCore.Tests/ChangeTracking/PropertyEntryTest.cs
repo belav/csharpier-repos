@@ -176,7 +176,8 @@ public class PropertyEntryTest
     [ConditionalFact]
     public void Can_get_name_with_object_field() => Can_get_name_helper<ObjectWotty>();
 
-    private void Can_get_name_helper<TWotty>() where TWotty : IWotty, new()
+    private void Can_get_name_helper<TWotty>()
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entry = context
@@ -202,7 +203,8 @@ public class PropertyEntryTest
     public void Can_get_current_value_with_object_field() =>
         Can_get_current_value_helper<ObjectWotty>();
 
-    private void Can_get_current_value_helper<TWotty>() where TWotty : IWotty, new()
+    private void Can_get_current_value_helper<TWotty>()
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entry = context
@@ -229,7 +231,8 @@ public class PropertyEntryTest
     public void Can_set_current_value_with_object_field() =>
         Can_set_current_value_helper<ObjectWotty>();
 
-    private void Can_set_current_value_helper<TWotty>() where TWotty : IWotty, new()
+    private void Can_set_current_value_helper<TWotty>()
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entity = new TWotty
@@ -260,7 +263,8 @@ public class PropertyEntryTest
     public void Can_set_current_value_to_null_with_object_field() =>
         Can_set_current_value_to_null_helper<ObjectWotty>();
 
-    private void Can_set_current_value_to_null_helper<TWotty>() where TWotty : IWotty, new()
+    private void Can_set_current_value_to_null_helper<TWotty>()
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entity = new TWotty
@@ -291,7 +295,8 @@ public class PropertyEntryTest
     public void Can_set_and_get_original_value_with_object_field() =>
         Can_set_and_get_original_value_helper<ObjectWotty>();
 
-    private void Can_set_and_get_original_value_helper<TWotty>() where TWotty : IWotty, new()
+    private void Can_set_and_get_original_value_helper<TWotty>()
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entity = new TWotty
@@ -368,7 +373,8 @@ public class PropertyEntryTest
     public void Can_set_original_value_to_null_with_object_field() =>
         Can_set_original_value_to_null_helper<ObjectWotty>();
 
-    private void Can_set_original_value_to_null_helper<TWotty>() where TWotty : IWotty, new()
+    private void Can_set_original_value_to_null_helper<TWotty>()
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entity = new TWotty
@@ -454,7 +460,8 @@ public class PropertyEntryTest
 
     private void Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<TWotty>(
         EntityState initialState
-    ) where TWotty : IWotty, new()
+    )
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entity = new TWotty { Id = 1 };
@@ -502,7 +509,8 @@ public class PropertyEntryTest
 
     private void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<TWotty>(
         EntityState initialState
-    ) where TWotty : IWotty, new()
+    )
+        where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
         var entity = new TWotty { Id = 1 };
@@ -629,7 +637,8 @@ public class PropertyEntryTest
     public void Can_get_name_generic_with_object_field() =>
         Can_get_name_generic_helper<ObjectWotty>();
 
-    private void Can_get_name_generic_helper<TWotty>() where TWotty : class, IWotty, new()
+    private void Can_get_name_generic_helper<TWotty>()
+        where TWotty : class, IWotty, new()
     {
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
@@ -647,7 +656,8 @@ public class PropertyEntryTest
     public void Can_get_current_value_generic_with_object_field() =>
         Can_get_current_value_generic_helper<ObjectWotty>();
 
-    private void Can_get_current_value_generic_helper<TWotty>() where TWotty : class, IWotty, new()
+    private void Can_get_current_value_generic_helper<TWotty>()
+        where TWotty : class, IWotty, new()
     {
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
@@ -665,7 +675,8 @@ public class PropertyEntryTest
     public void Can_set_current_value_generic_with_object_field() =>
         Can_set_current_value_generic_helper<ObjectWotty>();
 
-    private void Can_set_current_value_generic_helper<TWotty>() where TWotty : class, IWotty, new()
+    private void Can_set_current_value_generic_helper<TWotty>()
+        where TWotty : class, IWotty, new()
     {
         var entity = new TWotty { Id = 1, Primate = "Monkey" };
 

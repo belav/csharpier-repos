@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace Moq
 {
-    internal class AsInterface<TInterface> : Mock<TInterface> where TInterface : class
+    internal class AsInterface<TInterface> : Mock<TInterface>
+        where TInterface : class
     {
         private Mock owner;
 

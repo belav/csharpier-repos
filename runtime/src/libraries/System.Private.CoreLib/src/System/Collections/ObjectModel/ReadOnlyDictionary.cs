@@ -16,7 +16,8 @@ namespace System.Collections.ObjectModel
     public class ReadOnlyDictionary<TKey, TValue>
         : IDictionary<TKey, TValue>,
             IDictionary,
-            IReadOnlyDictionary<TKey, TValue> where TKey : notnull
+            IReadOnlyDictionary<TKey, TValue>
+        where TKey : notnull
     {
         private readonly IDictionary<TKey, TValue> m_dictionary; // Do not rename (binary serialization)
 

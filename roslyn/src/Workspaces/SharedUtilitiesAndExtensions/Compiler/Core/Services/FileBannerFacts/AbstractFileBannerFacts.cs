@@ -112,7 +112,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
         public TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
             TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var leadingTriviaToKeep = new List<SyntaxTrivia>(node.GetLeadingTrivia());
 
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
         public ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out var leadingTrivia);
             return leadingTrivia;
@@ -134,7 +136,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             return GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out _);
         }
@@ -142,7 +145,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
             TSyntaxNode node,
             out ImmutableArray<SyntaxTrivia> strippedTrivia
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var leadingTrivia = node.GetLeadingTrivia();
 

@@ -39,7 +39,8 @@ public class InterlockedExchange1
         return retVal;
     }
 
-    public bool PosTest1<T>() where T : class
+    public bool PosTest1<T>()
+        where T : class
     {
         bool retVal = true;
         T location;

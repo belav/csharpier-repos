@@ -286,7 +286,8 @@ namespace System.Net.Security
         private async Task ReplyOnReAuthenticationAsync<TIOAdapter>(
             TIOAdapter adapter,
             byte[]? buffer
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             try
             {
@@ -398,7 +399,8 @@ namespace System.Net.Security
             bool receiveFirst,
             byte[]? reAuthenticationData,
             bool isApm = false
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             ProtocolToken message;
             bool handshakeCompleted = false;
@@ -857,7 +859,8 @@ namespace System.Net.Security
         private async ValueTask WriteAsyncChunked<TIOAdapter>(
             TIOAdapter writeAdapter,
             ReadOnlyMemory<byte> buffer
-        ) where TIOAdapter : struct, IReadWriteAdapter
+        )
+            where TIOAdapter : struct, IReadWriteAdapter
         {
             do
             {
@@ -871,7 +874,8 @@ namespace System.Net.Security
         private ValueTask WriteSingleChunk<TIOAdapter>(
             TIOAdapter writeAdapter,
             ReadOnlyMemory<byte> buffer
-        ) where TIOAdapter : struct, IReadWriteAdapter
+        )
+            where TIOAdapter : struct, IReadWriteAdapter
         {
             byte[] rentedBuffer = ArrayPool<byte>.Shared.Rent(buffer.Length + FrameOverhead);
             byte[] outBuffer = rentedBuffer;
@@ -1135,7 +1139,8 @@ namespace System.Net.Security
         private async ValueTask<int> ReadAsyncInternal<TIOAdapter>(
             TIOAdapter adapter,
             Memory<byte> buffer
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             if (Interlocked.Exchange(ref _nestedRead, 1) == 1)
             {
@@ -1364,7 +1369,8 @@ namespace System.Net.Security
         private async ValueTask FillBufferAsync<TIOAdapter>(
             TIOAdapter adapter,
             int numBytesRequired
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_internalBufferCount > 0);
             Debug.Assert(_internalBufferCount < numBytesRequired);
@@ -1386,7 +1392,8 @@ namespace System.Net.Security
         private async ValueTask WriteAsyncInternal<TIOAdapter>(
             TIOAdapter writeAdapter,
             ReadOnlyMemory<byte> buffer
-        ) where TIOAdapter : struct, IReadWriteAdapter
+        )
+            where TIOAdapter : struct, IReadWriteAdapter
         {
             ThrowIfExceptionalOrNotAuthenticatedOrShutdown();
 

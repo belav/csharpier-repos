@@ -158,7 +158,8 @@ namespace System.Web.Http.Controllers
         /// <remarks>The default implementation retrieves the matching set of attributes declared on <see cref="ControllerType"/>.</remarks>
         /// <typeparam name="T">Used to filter the collection of attributes. Use a value of <see cref="Object"/> to retrieve all attributes.</typeparam>
         /// <returns>A collection of attributes associated with this controller.</returns>
-        public virtual Collection<T> GetCustomAttributes<T>() where T : class
+        public virtual Collection<T> GetCustomAttributes<T>()
+            where T : class
         {
             return GetCustomAttributes<T>(inherit: true);
         }
@@ -170,7 +171,8 @@ namespace System.Web.Http.Controllers
         /// <typeparam name="T">Used to filter the collection of attributes. Use a value of <see cref="Object"/> to retrieve all attributes.</typeparam>
         /// <param name="inherit"><c>true</c> to search this controller's inheritance chain to find the attributes; otherwise, <c>false</c>.</param>
         /// <returns>A collection of attributes associated with this controller.</returns>
-        public virtual Collection<T> GetCustomAttributes<T>(bool inherit) where T : class
+        public virtual Collection<T> GetCustomAttributes<T>(bool inherit)
+            where T : class
         {
             object[] attributes;
             // Getting custom attributes via reflection is slow.

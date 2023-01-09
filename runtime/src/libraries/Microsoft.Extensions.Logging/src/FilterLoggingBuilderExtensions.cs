@@ -43,7 +43,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddFilter<T>(
             this ILoggingBuilder builder,
             Func<string?, LogLevel, bool> categoryLevelFilter
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             builder.ConfigureFilter(options => options.AddFilter<T>(categoryLevelFilter));
 
         /// <summary>
@@ -67,7 +68,8 @@ namespace Microsoft.Extensions.Logging
         public static ILoggingBuilder AddFilter<T>(
             this ILoggingBuilder builder,
             Func<LogLevel, bool> levelFilter
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             builder.ConfigureFilter(options => options.AddFilter<T>(levelFilter));
 
         /// <summary>
@@ -95,7 +97,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggingBuilder builder,
             string? category,
             LogLevel level
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             builder.ConfigureFilter(options => options.AddFilter<T>(category, level));
 
         /// <summary>
@@ -123,7 +126,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggingBuilder builder,
             string? category,
             Func<LogLevel, bool> levelFilter
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             builder.ConfigureFilter(options => options.AddFilter<T>(category, levelFilter));
 
         /// <summary>
@@ -158,7 +162,8 @@ namespace Microsoft.Extensions.Logging
         public static LoggerFilterOptions AddFilter<T>(
             this LoggerFilterOptions builder,
             Func<string?, LogLevel, bool> categoryLevelFilter
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             AddRule(
                 builder,
                 type: typeof(T).FullName,
@@ -186,7 +191,8 @@ namespace Microsoft.Extensions.Logging
         public static LoggerFilterOptions AddFilter<T>(
             this LoggerFilterOptions builder,
             Func<LogLevel, bool> levelFilter
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             AddRule(
                 builder,
                 type: typeof(T).FullName,
@@ -218,7 +224,8 @@ namespace Microsoft.Extensions.Logging
             this LoggerFilterOptions builder,
             string? category,
             LogLevel level
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             AddRule(builder, type: typeof(T).FullName, category: category, level: level);
 
         /// <summary>
@@ -247,7 +254,8 @@ namespace Microsoft.Extensions.Logging
             this LoggerFilterOptions builder,
             string? category,
             Func<LogLevel, bool> levelFilter
-        ) where T : ILoggerProvider =>
+        )
+            where T : ILoggerProvider =>
             AddRule(
                 builder,
                 type: typeof(T).FullName,

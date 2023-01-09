@@ -43,14 +43,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public static TSyntaxNode? AddAnnotationsTo<TSyntaxNode>(
             ISymbol symbol,
             TSyntaxNode? syntax
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             symbol is CodeGenerationSymbol codeGenerationSymbol
                 ? syntax?.WithAdditionalAnnotations(codeGenerationSymbol.GetAnnotations())
                 : syntax;
 
         public static TSyntaxNode AddFormatterAndCodeGeneratorAnnotationsTo<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             node.WithAdditionalAnnotations(Formatter.Annotation, CodeGenerator.Annotation);
 
         public static void GetNameAndInnermostNamespace(
@@ -201,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .ToList();
         }
 
-        public static T RemoveLeadingDirectiveTrivia<T>(T node) where T : SyntaxNode
+        public static T RemoveLeadingDirectiveTrivia<T>(T node)
+            where T : SyntaxNode
         {
             var leadingTrivia = node.GetLeadingTrivia().Where(trivia => !trivia.IsDirective);
             return node.WithLeadingTrivia(leadingTrivia);
@@ -210,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         public static T? GetReuseableSyntaxNodeForAttribute<T>(
             AttributeData attribute,
             CodeGenerationContextInfo info
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             Contract.ThrowIfNull(attribute);
 
@@ -228,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IComparer<TDeclaration> comparerWithNameCheck,
             Func<SyntaxList<TDeclaration>, TDeclaration?>? after = null,
             Func<SyntaxList<TDeclaration>, TDeclaration?>? before = null
-        ) where TDeclaration : SyntaxNode
+        )
+            where TDeclaration : SyntaxNode
         {
             Contract.ThrowIfTrue(
                 availableIndices != null && availableIndices.Count != declarationList.Count + 1
@@ -352,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IList<bool>? availableIndices,
             IComparer<TDeclarationSyntax> comparerWithoutNameCheck,
             IComparer<TDeclarationSyntax> comparerWithNameCheck
-        ) where TDeclarationSyntax : SyntaxNode
+        )
+            where TDeclarationSyntax : SyntaxNode
         {
             var result = TryGetDesiredIndexIfGroupedWorker(
                 declarationList,
@@ -381,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IList<bool>? availableIndices,
             IComparer<TDeclarationSyntax> comparerWithoutNameCheck,
             IComparer<TDeclarationSyntax> comparerWithNameCheck
-        ) where TDeclarationSyntax : SyntaxNode
+        )
+            where TDeclarationSyntax : SyntaxNode
         {
             if (!declarationList.IsSorted(comparerWithoutNameCheck))
             {

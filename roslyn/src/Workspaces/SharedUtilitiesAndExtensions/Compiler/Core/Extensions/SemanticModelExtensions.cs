@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this SemanticModel semanticModel,
             int position,
             CancellationToken cancellationToken
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             for (
                 var symbol = semanticModel.GetEnclosingSymbol(position, cancellationToken);

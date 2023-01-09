@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
                 Node? left,
                 Node? right,
                 in TIntrospector introspector
-            ) where TIntrospector : struct, IIntervalIntrospector<T>
+            )
+                where TIntrospector : struct, IIntervalIntrospector<T>
             {
                 this.Left = left;
                 this.Right = right;

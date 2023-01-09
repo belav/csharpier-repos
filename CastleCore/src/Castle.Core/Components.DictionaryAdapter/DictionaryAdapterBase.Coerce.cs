@@ -19,7 +19,8 @@ namespace Castle.Components.DictionaryAdapter
 
     public abstract partial class DictionaryAdapterBase
     {
-        public T Coerce<T>() where T : class
+        public T Coerce<T>()
+            where T : class
         {
             return (T)Coerce(typeof(T));
         }

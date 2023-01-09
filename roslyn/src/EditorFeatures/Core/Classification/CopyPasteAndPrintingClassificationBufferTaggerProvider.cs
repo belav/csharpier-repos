@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Classification
             _globalOptions = globalOptions;
         }
 
-        public IAccurateTagger<T>? CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public IAccurateTagger<T>? CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             _threadingContext.ThrowIfNotOnUIThread();
 

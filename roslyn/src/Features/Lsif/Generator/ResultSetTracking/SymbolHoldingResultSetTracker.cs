@@ -186,7 +186,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.ResultSetTr
                 Func<T> vertexCreator,
                 ILsifJsonWriter lsifJsonWriter,
                 IdFactory idFactory
-            ) where T : Vertex
+            )
+                where T : Vertex
             {
                 lock (_edgeKindToVertexId)
                 {

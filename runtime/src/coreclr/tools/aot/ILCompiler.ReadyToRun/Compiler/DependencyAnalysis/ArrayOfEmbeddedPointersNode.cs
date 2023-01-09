@@ -8,7 +8,8 @@ using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    interface ISimpleEmbeddedPointerIndirectionNode<out TTarget> where TTarget : ISortableSymbolNode
+    interface ISimpleEmbeddedPointerIndirectionNode<out TTarget>
+        where TTarget : ISortableSymbolNode
     {
         TTarget Target { get; }
     }

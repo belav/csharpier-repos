@@ -33,7 +33,8 @@ namespace Microsoft.Web.Mvc
         public static string BuildUrlFromExpression<TController>(
             this HtmlHelper helper,
             Expression<Action<TController>> action
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             return LinkBuilder.BuildUrlFromExpression(
                 helper.ViewContext.RequestContext,
@@ -59,7 +60,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             Expression<Action<TController>> action,
             string linkText
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             return ActionLink(helper, action, linkText, null);
         }
@@ -83,7 +85,8 @@ namespace Microsoft.Web.Mvc
             Expression<Action<TController>> action,
             string linkText,
             object htmlAttributes
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             RouteValueDictionary routingValues = ExpressionHelper.GetRouteValuesFromExpression(
                 action

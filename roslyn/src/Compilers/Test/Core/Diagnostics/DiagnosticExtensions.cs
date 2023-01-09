@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis
         public static TCompilation VerifyDiagnostics<TCompilation>(
             this TCompilation c,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             var diagnostics = c.GetDiagnostics();
             diagnostics.Verify(expected);
@@ -168,7 +169,8 @@ namespace Microsoft.CodeAnalysis
         private static void VerifyAssemblyIds<TCompilation>(
             TCompilation c,
             ImmutableArray<Diagnostic> diagnostics
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -199,7 +201,8 @@ namespace Microsoft.CodeAnalysis
             DiagnosticAnalyzer[] analyzers,
             int expectedCount,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             Assert.Equal(
                 expectedCount,
@@ -213,7 +216,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             return VerifyAnalyzerDiagnostics(
                 c,
@@ -232,7 +236,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             var newCompilation = c.GetCompilationWithAnalyzerDiagnostics(
                 analyzers,
@@ -253,7 +258,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             CancellationToken cancellationToken = default
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             return GetAnalyzerDiagnostics(
                 c,
@@ -272,7 +278,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             CancellationToken cancellationToken = default
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             _ = GetCompilationWithAnalyzerDiagnostics(
                 c,
@@ -294,7 +301,8 @@ namespace Microsoft.CodeAnalysis
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             CancellationToken cancellationToken = default,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             // Verify suppression is unaffected by toggling /warnaserror.
             // Only perform this additional verification if the caller hasn't
@@ -332,7 +340,8 @@ namespace Microsoft.CodeAnalysis
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException,
             DiagnosticDescription[] expectedDiagnostics,
             CancellationToken cancellationToken
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             if (toggleWarnAsError)
             {
@@ -404,7 +413,8 @@ namespace Microsoft.CodeAnalysis
             AnalyzerOptions options = null,
             Action<Exception, DiagnosticAnalyzer, Diagnostic> onAnalyzerException = null,
             CancellationToken cancellationToken = default
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             // Verify suppressed diagnostics are filtered when reportSuppressedDiagnostics is false.
             // The actual verification is handled in GetCompilationWithAnalyzerDiagnostics.
@@ -429,7 +439,8 @@ namespace Microsoft.CodeAnalysis
             bool includeCompilerDiagnostics,
             CancellationToken cancellationToken,
             out ImmutableArray<Diagnostic> diagnostics
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             var analyzersArray = analyzers.ToImmutableArray();
             if (reportSuppressedDiagnostics != c.Options.ReportSuppressedDiagnostics)
@@ -502,7 +513,8 @@ namespace Microsoft.CodeAnalysis
             this TCompilation c,
             EmitOptions options,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             c.GetEmitDiagnostics(options: options).Verify(expected);
             return c;
@@ -512,7 +524,8 @@ namespace Microsoft.CodeAnalysis
             this TCompilation c,
             EmitOptions options = null,
             IEnumerable<ResourceDescription> manifestResources = null
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             var pdbStream = MonoHelpers.IsRunningOnMono() ? null : new MemoryStream();
             return c.Emit(
@@ -526,14 +539,16 @@ namespace Microsoft.CodeAnalysis
         public static TCompilation VerifyEmitDiagnostics<TCompilation>(
             this TCompilation c,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             return VerifyEmitDiagnostics(c, EmitOptions.Default, expected);
         }
 
         public static ImmutableArray<Diagnostic> GetEmitDiagnostics<TCompilation>(
             this TCompilation c
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             return GetEmitDiagnostics(c, EmitOptions.Default);
         }
@@ -542,7 +557,8 @@ namespace Microsoft.CodeAnalysis
             this TCompilation c,
             IEnumerable<ResourceDescription> manifestResources,
             params DiagnosticDescription[] expected
-        ) where TCompilation : Compilation
+        )
+            where TCompilation : Compilation
         {
             c.GetEmitDiagnostics(manifestResources: manifestResources).Verify(expected);
             return c;

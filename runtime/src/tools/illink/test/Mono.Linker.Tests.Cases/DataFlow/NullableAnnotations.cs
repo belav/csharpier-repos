@@ -153,7 +153,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         static void NullableOfAnnotatedGenericParameterRequiresPublicProperties<
             [KeptAttributeAttribute(typeof(DAM))] [DAM(DAMT.PublicProperties)] T
-        >() where T : struct
+        >()
+            where T : struct
         {
             Nullable.GetUnderlyingType(typeof(Nullable<T>)).RequiresPublicProperties();
         }
@@ -288,7 +289,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         static void UnderlyingTypeOfCreatedNullableOfAnnotatedTRequiresPublicProperties<
             [KeptAttributeAttribute(typeof(DAM))] [DAM(DAMT.PublicProperties)] T
-        >() where T : struct
+        >()
+            where T : struct
         {
             Type t = typeof(Nullable<T>);
             t = Nullable.GetUnderlyingType(t);
@@ -323,7 +325,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [Kept]
         static void NullableOfAnnotatedGenericParamPassedAsGenericParamRequiresPublicFields<
             [KeptAttributeAttribute(typeof(DAM))] [DAM(DAMT.PublicFields)] T
-        >() where T : struct
+        >()
+            where T : struct
         {
             RequirePublicFieldsOnGenericParam<Nullable<T>>();
         }

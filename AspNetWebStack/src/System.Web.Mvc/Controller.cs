@@ -849,7 +849,8 @@ namespace System.Web.Mvc
             );
         }
 
-        protected internal bool TryUpdateModel<TModel>(TModel model) where TModel : class
+        protected internal bool TryUpdateModel<TModel>(TModel model)
+            where TModel : class
         {
             return TryUpdateModel(model, null, null, null, ValueProvider);
         }
@@ -870,7 +871,8 @@ namespace System.Web.Mvc
             TModel model,
             string prefix,
             string[] includeProperties
-        ) where TModel : class
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, includeProperties, null, ValueProvider);
         }
@@ -880,7 +882,8 @@ namespace System.Web.Mvc
             string prefix,
             string[] includeProperties,
             string[] excludeProperties
-        ) where TModel : class
+        )
+            where TModel : class
         {
             return TryUpdateModel(
                 model,
@@ -901,7 +904,8 @@ namespace System.Web.Mvc
             TModel model,
             string prefix,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, null, null, valueProvider);
         }
@@ -910,7 +914,8 @@ namespace System.Web.Mvc
             TModel model,
             string[] includeProperties,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, null, includeProperties, null, valueProvider);
         }
@@ -920,7 +925,8 @@ namespace System.Web.Mvc
             string prefix,
             string[] includeProperties,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             return TryUpdateModel(model, prefix, includeProperties, null, valueProvider);
         }
@@ -931,7 +937,8 @@ namespace System.Web.Mvc
             string[] includeProperties,
             string[] excludeProperties,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             if (model == null)
             {
@@ -996,7 +1003,8 @@ namespace System.Web.Mvc
             return ModelState.IsValid;
         }
 
-        protected internal void UpdateModel<TModel>(TModel model) where TModel : class
+        protected internal void UpdateModel<TModel>(TModel model)
+            where TModel : class
         {
             UpdateModel(model, null, null, null, ValueProvider);
         }
@@ -1017,7 +1025,8 @@ namespace System.Web.Mvc
             TModel model,
             string prefix,
             string[] includeProperties
-        ) where TModel : class
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, includeProperties, null, ValueProvider);
         }
@@ -1027,7 +1036,8 @@ namespace System.Web.Mvc
             string prefix,
             string[] includeProperties,
             string[] excludeProperties
-        ) where TModel : class
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, includeProperties, excludeProperties, ValueProvider);
         }
@@ -1042,7 +1052,8 @@ namespace System.Web.Mvc
             TModel model,
             string prefix,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, null, null, valueProvider);
         }
@@ -1051,7 +1062,8 @@ namespace System.Web.Mvc
             TModel model,
             string[] includeProperties,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             UpdateModel(model, null, includeProperties, null, valueProvider);
         }
@@ -1061,7 +1073,8 @@ namespace System.Web.Mvc
             string prefix,
             string[] includeProperties,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             UpdateModel(model, prefix, includeProperties, null, valueProvider);
         }
@@ -1072,7 +1085,8 @@ namespace System.Web.Mvc
             string[] includeProperties,
             string[] excludeProperties,
             IValueProvider valueProvider
-        ) where TModel : class
+        )
+            where TModel : class
         {
             bool success = TryUpdateModel(
                 model,

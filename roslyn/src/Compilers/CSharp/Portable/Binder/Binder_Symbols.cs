@@ -2144,7 +2144,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             SyntaxNode syntax,
             BindingDiagnosticBag diagnostics,
             out TSymbol symbol
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             symbol = (TSymbol)compilation.GetSpecialTypeMember(specialMember);
             if (symbol is null)

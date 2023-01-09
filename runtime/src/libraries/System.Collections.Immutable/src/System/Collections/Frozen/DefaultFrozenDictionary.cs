@@ -11,7 +11,8 @@ namespace System.Collections.Frozen
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     internal sealed class DefaultFrozenDictionary<TKey, TValue>
         : KeysAndValuesFrozenDictionary<TKey, TValue>,
-            IDictionary<TKey, TValue> where TKey : notnull
+            IDictionary<TKey, TValue>
+        where TKey : notnull
     {
         internal DefaultFrozenDictionary(
             Dictionary<TKey, TValue> source,

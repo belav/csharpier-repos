@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.RenameTracking);
         }
 
-        public ITagger<T> CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             var stateMachine = buffer.Properties.GetOrCreateSingletonProperty(
                 () =>

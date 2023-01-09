@@ -46,7 +46,8 @@ public sealed class JSExportAttribute : Attribute
     AllowMultiple = false
 )]
 [Versioning.SupportedOSPlatformAttribute("browser")]
-public sealed class JSMarshalAsAttribute<T> : Attribute where T : JSType
+public sealed class JSMarshalAsAttribute<T> : Attribute
+    where T : JSType
 {
     public JSMarshalAsAttribute()
     {
@@ -142,7 +143,8 @@ public abstract class JSType
         }
     }
 
-    public sealed class Array<T> : JSType where T : JSType
+    public sealed class Array<T> : JSType
+        where T : JSType
     {
         internal Array()
         {
@@ -150,7 +152,8 @@ public abstract class JSType
         }
     }
 
-    public sealed class Promise<T> : JSType where T : JSType
+    public sealed class Promise<T> : JSType
+        where T : JSType
     {
         internal Promise()
         {
@@ -166,7 +169,8 @@ public abstract class JSType
         }
     }
 
-    public sealed class Function<T> : JSType where T : JSType
+    public sealed class Function<T> : JSType
+        where T : JSType
     {
         internal Function()
         {

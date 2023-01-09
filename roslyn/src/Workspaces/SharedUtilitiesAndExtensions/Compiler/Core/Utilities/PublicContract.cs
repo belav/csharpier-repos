@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis
         internal static IEnumerable<T> RequireNonNullItems<T>(
             [NotNull] IEnumerable<T>? sequence,
             string argumentName
-        ) where T : class
+        )
+            where T : class
         {
             if (sequence == null)
             {
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis
         internal static void RequireUniqueNonNullItems<T>(
             [NotNull] IEnumerable<T>? sequence,
             string argumentName
-        ) where T : class
+        )
+            where T : class
         {
             if (sequence == null)
             {
@@ -66,7 +68,8 @@ namespace Microsoft.CodeAnalysis
         internal static IReadOnlyList<T> ToBoxedImmutableArrayWithNonNullItems<T>(
             IEnumerable<T>? sequence,
             string argumentName
-        ) where T : class
+        )
+            where T : class
         {
             var list = sequence.ToBoxedImmutableArray();
 
@@ -86,7 +89,8 @@ namespace Microsoft.CodeAnalysis
         internal static IReadOnlyList<T> ToBoxedImmutableArrayWithDistinctNonNullItems<T>(
             IEnumerable<T>? sequence,
             string argumentName
-        ) where T : class
+        )
+            where T : class
         {
             var list = sequence.ToBoxedImmutableArray();
 
@@ -123,7 +127,8 @@ namespace Microsoft.CodeAnalysis
             return -1;
         }
 
-        private static int IndexOfNullOrDuplicateItem<T>(this IReadOnlyList<T> list) where T : class
+        private static int IndexOfNullOrDuplicateItem<T>(this IReadOnlyList<T> list)
+            where T : class
         {
             var length = list.Count;
 
@@ -159,7 +164,8 @@ namespace Microsoft.CodeAnalysis
         private static void ThrowArgumentItemNullOrDuplicateException<T>(
             IEnumerable<T> sequence,
             string argumentName
-        ) where T : class
+        )
+            where T : class
         {
             var list = sequence.ToList();
             var index = list.IndexOfNullOrDuplicateItem();
@@ -179,7 +185,8 @@ namespace Microsoft.CodeAnalysis
         private static void ThrowArgumentItemNullException<T>(
             IEnumerable<T> sequence,
             string argumentName
-        ) where T : class =>
+        )
+            where T : class =>
             throw new ArgumentNullException(
                 MakeIndexedArgumentName(argumentName, sequence.IndexOf(null!))
             );

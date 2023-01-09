@@ -42,7 +42,8 @@ namespace LifeTimeFX
     /// <param name="o"></param>
     /// <param name="index"></param>
 
-    public interface ObjectContainer<T> where T : LifeTime
+    public interface ObjectContainer<T>
+        where T : LifeTime
     {
         void Init(int numberOfObjects);
         void AddObjectAt(T o, int index);
@@ -51,7 +52,8 @@ namespace LifeTimeFX
         int Count { get; }
     }
 
-    public sealed class BinaryTreeObjectContainer<T> : ObjectContainer<T> where T : LifeTime
+    public sealed class BinaryTreeObjectContainer<T> : ObjectContainer<T>
+        where T : LifeTime
     {
         class Node
         {
@@ -176,7 +178,8 @@ namespace LifeTimeFX
     }
 
     //#ArrayContainer Simple Array Stock Implementation for ObjectContainer
-    public sealed class ArrayObjectContainer<T> : ObjectContainer<T> where T : LifeTime
+    public sealed class ArrayObjectContainer<T> : ObjectContainer<T>
+        where T : LifeTime
     {
         private T[] objContainer = null;
 

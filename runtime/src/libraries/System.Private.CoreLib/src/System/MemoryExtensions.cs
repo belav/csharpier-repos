@@ -297,7 +297,8 @@ namespace System
         /// <param name="span">The span to search.</param>
         /// <param name="value">The value to search for.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe bool Contains<T>(this Span<T> span, T value) where T : IEquatable<T>?
+        public static unsafe bool Contains<T>(this Span<T> span, T value)
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -393,7 +394,8 @@ namespace System
         /// <param name="span">The span to search.</param>
         /// <param name="value">The value to search for.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int IndexOf<T>(this Span<T> span, T value) where T : IEquatable<T>?
+        public static unsafe int IndexOf<T>(this Span<T> span, T value)
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -471,7 +473,8 @@ namespace System
         /// <param name="span">The span to search.</param>
         /// <param name="value">The value to search for.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe int LastIndexOf<T>(this Span<T> span, T value) where T : IEquatable<T>?
+        public static unsafe int LastIndexOf<T>(this Span<T> span, T value)
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -733,7 +736,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -775,7 +779,8 @@ namespace System
             T value1,
             T value2,
             T value3
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -824,7 +829,8 @@ namespace System
         public static unsafe int IndexOfAnyExcept<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> values
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             switch (values.Length)
             {
@@ -1050,7 +1056,8 @@ namespace System
             this ReadOnlySpan<T> span,
             T value0,
             T value1
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -1098,7 +1105,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -1140,7 +1148,8 @@ namespace System
             T value1,
             T value2,
             T value3
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -1189,7 +1198,8 @@ namespace System
         public static unsafe int LastIndexOfAnyExcept<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> values
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             switch (values.Length)
             {
@@ -1283,7 +1293,8 @@ namespace System
         public static int LastIndexOfAnyExcept<T>(
             this ReadOnlySpan<T> span,
             IndexOfAnyValues<T> values
-        ) where T : IEquatable<T>? => IndexOfAnyValues<T>.LastIndexOfAnyExcept(span, values);
+        )
+            where T : IEquatable<T>? => IndexOfAnyValues<T>.LastIndexOfAnyExcept(span, values);
 
         /// <inheritdoc cref="IndexOfAnyInRange{T}(ReadOnlySpan{T}, T, T)"/>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1305,7 +1316,8 @@ namespace System
             this ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (lowInclusive is null || highInclusive is null)
             {
@@ -1375,7 +1387,8 @@ namespace System
             this Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T> =>
+        )
+            where T : IComparable<T> =>
             IndexOfAnyExceptInRange((ReadOnlySpan<T>)span, lowInclusive, highInclusive);
 
         /// <summary>Searches for the first index of any value outside of the range between <paramref name="lowInclusive"/> and <paramref name="highInclusive"/>, inclusive.</summary>
@@ -1392,7 +1405,8 @@ namespace System
             this ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (lowInclusive is null || highInclusive is null)
             {
@@ -1462,7 +1476,8 @@ namespace System
             this Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T> =>
+        )
+            where T : IComparable<T> =>
             LastIndexOfAnyInRange((ReadOnlySpan<T>)span, lowInclusive, highInclusive);
 
         /// <summary>Searches for the last index of any value in the range between <paramref name="lowInclusive"/> and <paramref name="highInclusive"/>, inclusive.</summary>
@@ -1479,7 +1494,8 @@ namespace System
             this ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (lowInclusive is null || highInclusive is null)
             {
@@ -1549,7 +1565,8 @@ namespace System
             this Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T> =>
+        )
+            where T : IComparable<T> =>
             LastIndexOfAnyExceptInRange((ReadOnlySpan<T>)span, lowInclusive, highInclusive);
 
         /// <summary>Searches for the last index of any value outside of the range between <paramref name="lowInclusive"/> and <paramref name="highInclusive"/>, inclusive.</summary>
@@ -1566,7 +1583,8 @@ namespace System
             this ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (lowInclusive is null || highInclusive is null)
             {
@@ -2027,7 +2045,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -2364,7 +2383,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -2408,7 +2428,8 @@ namespace System
         public static unsafe int LastIndexOfAny<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> values
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             if (RuntimeHelpers.IsBitwiseEquatable<T>())
             {
@@ -2664,7 +2685,8 @@ namespace System
         public static unsafe int SequenceCompareTo<T>(
             this ReadOnlySpan<T> span,
             ReadOnlySpan<T> other
-        ) where T : IComparable<T>?
+        )
+            where T : IComparable<T>?
         {
             // Can't use IsBitwiseEquatable<T>() below because that only tells us about
             // equality checks, not about CompareTo checks.
@@ -3408,7 +3430,8 @@ namespace System
         public static int BinarySearch<T, TComparable>(
             this ReadOnlySpan<T> span,
             TComparable comparable
-        ) where TComparable : IComparable<T>
+        )
+            where TComparable : IComparable<T>
         {
             return SpanHelpers.BinarySearch(span, comparable);
         }
@@ -3436,7 +3459,8 @@ namespace System
             this ReadOnlySpan<T> span,
             T value,
             TComparer comparer
-        ) where TComparer : IComparer<T>
+        )
+            where TComparer : IComparer<T>
         {
             if (comparer == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparer);
@@ -3542,7 +3566,8 @@ namespace System
             this Span<TKey> keys,
             Span<TValue> items,
             TComparer comparer
-        ) where TComparer : IComparer<TKey>?
+        )
+            where TComparer : IComparer<TKey>?
         {
             if (keys.Length != items.Length)
                 ThrowHelper.ThrowArgumentException(

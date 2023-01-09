@@ -291,7 +291,8 @@ public class BuiltinTests
         return 0;
     }
 
-    private sealed class MyGenericEqualityComparer<T> : EqualityComparer<T> where T : IEquatable<T>
+    private sealed class MyGenericEqualityComparer<T> : EqualityComparer<T>
+        where T : IEquatable<T>
     {
         public sealed override bool Equals(T x, T y)
         {

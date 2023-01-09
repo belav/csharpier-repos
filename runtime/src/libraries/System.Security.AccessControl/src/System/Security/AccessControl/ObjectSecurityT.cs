@@ -19,7 +19,8 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.Security.AccessControl
 {
-    public class AccessRule<T> : AccessRule where T : struct
+    public class AccessRule<T> : AccessRule
+        where T : struct
     {
         #region Constructors
         //
@@ -102,7 +103,8 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-    public class AuditRule<T> : AuditRule where T : struct
+    public class AuditRule<T> : AuditRule
+        where T : struct
     {
         #region Constructors
 
@@ -165,7 +167,8 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-    public abstract class ObjectSecurity<T> : NativeObjectSecurity where T : struct
+    public abstract class ObjectSecurity<T> : NativeObjectSecurity
+        where T : struct
     {
         #region Constructors
 

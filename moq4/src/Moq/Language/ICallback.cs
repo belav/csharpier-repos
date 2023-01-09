@@ -100,7 +100,8 @@ namespace Moq.Language
     /// <typeparam name="TMock">Mocked type.</typeparam>
     /// <typeparam name="TResult">Type of the return value of the setup.</typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public partial interface ICallback<TMock, TResult> : IFluentInterface where TMock : class
+    public partial interface ICallback<TMock, TResult> : IFluentInterface
+        where TMock : class
     {
         /// <summary>
         ///   Specifies a callback to invoke when the method is called that receives the original <see cref="IInvocation"/>.

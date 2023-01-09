@@ -16,7 +16,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
 {
     internal abstract class AbstractRemoveUnnecessaryParenthesesCodeFixProvider<TParenthesizedExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider where TParenthesizedExpressionSyntax : SyntaxNode
+        : SyntaxEditorBasedCodeFixProvider
+        where TParenthesizedExpressionSyntax : SyntaxNode
     {
         public override ImmutableArray<string> FixableDiagnosticIds =>
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnnecessaryParenthesesDiagnosticId);

@@ -239,7 +239,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Code>
     using System.Collections.Generic;
 
-    public class MyClass<T, U> where T : List<object>, new()
+    public class MyClass<T, U>
+        where T : List<object>, new()
     {
         internal T myList = new T();
     }
@@ -296,7 +297,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     //<Expects Status=success></Expects>
     // <Code>
 
-    public class MyClass<T, U> where T : U { }
+    public class MyClass<T, U>
+        where T : U { }
 
     public class MyClassDerived<T> : MyClass<T, object>
     {
@@ -337,7 +339,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class MyClass<T, U> where T : U { }
+    public class MyClass<T, U>
+        where T : U { }
 
     public class MyClassDerived<T> : MyClass<T, dynamic>
     {
@@ -378,7 +381,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.de
     // <Expects Status=success></Expects>
     // <Code>
 
-    public class MyClass<T, U> where T : U { }
+    public class MyClass<T, U>
+        where T : U { }
 
     public class MyClassDerived<T> : MyClass<T, dynamic>
     {

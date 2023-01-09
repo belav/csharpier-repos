@@ -30,7 +30,8 @@ namespace VTest
         }
     }
 
-    public class refTest<type> where type : refTest<type>
+    public class refTest<type>
+        where type : refTest<type>
     {
         public refTest()
         {

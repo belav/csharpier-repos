@@ -73,7 +73,8 @@ namespace System.Linq.Expressions
             _flow = Flow.NewLine;
         }
 
-        private static int GetId<T>(T e, ref Dictionary<T, int>? ids) where T : notnull
+        private static int GetId<T>(T e, ref Dictionary<T, int>? ids)
+            where T : notnull
         {
             if (ids == null)
             {

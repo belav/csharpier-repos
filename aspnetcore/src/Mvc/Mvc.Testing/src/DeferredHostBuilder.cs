@@ -89,7 +89,8 @@ internal sealed class DeferredHostBuilder : IHostBuilder
 
     public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
         IServiceProviderFactory<TContainerBuilder> factory
-    ) where TContainerBuilder : notnull
+    )
+        where TContainerBuilder : notnull
     {
         _configure += b => b.UseServiceProviderFactory(factory);
         return this;
@@ -97,7 +98,8 @@ internal sealed class DeferredHostBuilder : IHostBuilder
 
     public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
         Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-    ) where TContainerBuilder : notnull
+    )
+        where TContainerBuilder : notnull
     {
         _configure += b => b.UseServiceProviderFactory(factory);
         return this;

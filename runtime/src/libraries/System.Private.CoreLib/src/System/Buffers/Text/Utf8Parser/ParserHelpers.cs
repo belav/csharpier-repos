@@ -62,7 +62,8 @@ namespace System.Buffers.Text
             ReadOnlySpan<byte> _,
             out T value,
             out int bytesConsumed
-        ) where T : struct
+        )
+            where T : struct
         {
             // The parameters to this method are ordered the same as our callers' parameters
             // allowing the JIT to avoid unnecessary register swapping or spilling.

@@ -1024,7 +1024,8 @@ Zero
             );
         }
 
-        private void TestIncrementCompilationAndOutput<T>(T value, T valuePlusOne) where T : struct
+        private void TestIncrementCompilationAndOutput<T>(T value, T valuePlusOne)
+            where T : struct
         {
             Type type = typeof(T);
             Assert.True(

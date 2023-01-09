@@ -14,9 +14,11 @@ internal static class EnumerableExtensions
     public static IEnumerable<T> Distinct<T>(
         this IEnumerable<T> source,
         Func<T?, T?, bool> comparer
-    ) where T : class => source.Distinct(new DynamicEqualityComparer<T>(comparer));
+    )
+        where T : class => source.Distinct(new DynamicEqualityComparer<T>(comparer));
 
-    private sealed class DynamicEqualityComparer<T> : IEqualityComparer<T> where T : class
+    private sealed class DynamicEqualityComparer<T> : IEqualityComparer<T>
+        where T : class
     {
         private readonly Func<T?, T?, bool> _func;
 

@@ -34,7 +34,8 @@ namespace Test
         }
     }
 
-    public class DerivedClass<T> : BaseClass<T> where T : new()
+    public class DerivedClass<T> : BaseClass<T>
+        where T : new()
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
         public DerivedClass()

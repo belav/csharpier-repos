@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// <typeparam name="TRemoteAuthenticationState">The state to be persisted across authentication operations.</typeparam>
 public interface IRemoteAuthenticationService<
     [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationState
-> where TRemoteAuthenticationState : RemoteAuthenticationState
+>
+    where TRemoteAuthenticationState : RemoteAuthenticationState
 {
     /// <summary>
     /// Signs in a user.

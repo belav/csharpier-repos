@@ -239,8 +239,8 @@ namespace CSharpSyntaxGenerator.Grammar
         private static SyntaxKind GetSyntaxKind(string name) =>
             GetMembers<SyntaxKind>().Where(k => k.ToString() == name).SingleOrDefault();
 
-        private static IEnumerable<TEnum> GetMembers<TEnum>() where TEnum : struct, Enum =>
-            (IEnumerable<TEnum>)Enum.GetValues(typeof(TEnum));
+        private static IEnumerable<TEnum> GetMembers<TEnum>()
+            where TEnum : struct, Enum => (IEnumerable<TEnum>)Enum.GetValues(typeof(TEnum));
 
         private static Production RuleReference(string name) =>
             new Production(

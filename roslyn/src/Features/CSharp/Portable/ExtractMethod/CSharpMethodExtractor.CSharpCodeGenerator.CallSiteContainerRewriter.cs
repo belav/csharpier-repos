@@ -295,8 +295,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         .WithStatement(ReplaceStatementIfNeeded(node.Statement));
                 }
 
-                private TNode VisitNode<TNode>(TNode node) where TNode : SyntaxNode =>
-                    (TNode)Visit(node);
+                private TNode VisitNode<TNode>(TNode node)
+                    where TNode : SyntaxNode => (TNode)Visit(node);
 
                 private StatementSyntax ReplaceStatementIfNeeded(StatementSyntax statement)
                 {

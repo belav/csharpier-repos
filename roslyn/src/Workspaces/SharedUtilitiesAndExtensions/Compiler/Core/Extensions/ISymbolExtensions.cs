@@ -890,7 +890,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this ISymbol symbol,
             SymbolKind kind,
             [NotNullWhen(true)] out TSymbol? result
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             if (!symbol.IsKind(kind))
             {

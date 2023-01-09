@@ -388,7 +388,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             ImmutableArray<TSymbol> symbols,
             TSyntax syntax,
             string tagName
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var names = symbols.Select(p => p.Name).ToSet();
             names.RemoveAll(

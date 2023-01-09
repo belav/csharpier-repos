@@ -15,7 +15,8 @@ namespace Tracing.Tests.Common
             }
         }
 
-        public static void Equal<T>(string name, T left, T right) where T : IEquatable<T>
+        public static void Equal<T>(string name, T left, T right)
+            where T : IEquatable<T>
         {
             if (left == null && right != null)
             {
@@ -50,7 +51,8 @@ namespace Tracing.Tests.Common
             }
         }
 
-        public static void NotEqual<T>(string name, T left, T right) where T : IEquatable<T>
+        public static void NotEqual<T>(string name, T left, T right)
+            where T : IEquatable<T>
         {
             if (left == null && right == null)
             {

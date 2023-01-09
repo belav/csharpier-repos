@@ -99,7 +99,8 @@ public abstract class RegisterModel : PageModel
     ) => throw new NotImplementedException();
 }
 
-internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
+internal sealed class RegisterModel<TUser> : RegisterModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;

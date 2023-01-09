@@ -316,7 +316,8 @@ public class MvcOptionsSetupTest
         );
     }
 
-    private static T GetOptions<T>(Action<IServiceCollection> action = null) where T : class, new()
+    private static T GetOptions<T>(Action<IServiceCollection> action = null)
+        where T : class, new()
     {
         var serviceProvider = GetServiceProvider(action);
         return serviceProvider.GetRequiredService<IOptions<T>>().Value;

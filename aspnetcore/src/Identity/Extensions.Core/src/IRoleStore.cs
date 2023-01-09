@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a storage and management of roles.
 /// </summary>
 /// <typeparam name="TRole">The type that represents a role.</typeparam>
-public interface IRoleStore<TRole> : IDisposable where TRole : class
+public interface IRoleStore<TRole> : IDisposable
+    where TRole : class
 {
     /// <summary>
     /// Creates a new role in a store as an asynchronous operation.

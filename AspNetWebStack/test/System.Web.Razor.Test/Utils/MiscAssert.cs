@@ -13,7 +13,8 @@ namespace System.Web.Razor.Test.Utils
             T actual,
             Expression<Func<T, object>> propertyExpr,
             string objectName
-        ) where T : class
+        )
+            where T : class
         {
             // Unpack convert expressions
             Expression expr = propertyExpr.Body;

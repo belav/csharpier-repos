@@ -169,7 +169,8 @@ internal class RoutePatternHighlighter : IAspNetCoreEmbeddedLanguageDocumentHigh
         RoutePatternNode node,
         VirtualChar ch,
         Func<TNode, VirtualChar, bool> predicate
-    ) where TNode : RoutePatternNode
+    )
+        where TNode : RoutePatternNode
     {
         if (node is TNode nodeMatch && predicate(nodeMatch, ch))
         {

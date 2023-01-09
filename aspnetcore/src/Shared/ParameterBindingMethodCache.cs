@@ -597,7 +597,8 @@ internal sealed class ParameterBindingMethodCache
     private static ValueTask<TValue?> BindAsync<TValue>(
         HttpContext httpContext,
         ParameterInfo parameter
-    ) where TValue : class?, IBindableFromHttpContext<TValue>
+    )
+        where TValue : class?, IBindableFromHttpContext<TValue>
     {
         return TValue.BindAsync(httpContext, parameter);
     }
@@ -1022,7 +1023,8 @@ internal sealed class ParameterBindingMethodCache
 
     private static ValueTask<object?> ConvertValueTaskOfNullableResult<T>(
         ValueTask<Nullable<T>> typedValueTask
-    ) where T : struct
+    )
+        where T : struct
     {
         if (typedValueTask.IsCompletedSuccessfully)
         {

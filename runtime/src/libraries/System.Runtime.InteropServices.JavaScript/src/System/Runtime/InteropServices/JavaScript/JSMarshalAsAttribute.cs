@@ -23,7 +23,8 @@ namespace System.Runtime.InteropServices.JavaScript
         AllowMultiple = false
     )]
     [SupportedOSPlatform("browser")]
-    public sealed class JSMarshalAsAttribute<T> : Attribute where T : JSType
+    public sealed class JSMarshalAsAttribute<T> : Attribute
+        where T : JSType
     {
         /// <summary>
         /// Initializes a new instance of <see cref="JSMarshalAsAttribute{T}" /> configured by generic parameters of <see cref="JSType" />.

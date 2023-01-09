@@ -102,7 +102,8 @@ public class LazyLoadingProxyTests
         );
     }
 
-    private class LazyContextIgnoreVirtuals<TEntity> : TestContext<TEntity> where TEntity : class
+    private class LazyContextIgnoreVirtuals<TEntity> : TestContext<TEntity>
+        where TEntity : class
     {
         public LazyContextIgnoreVirtuals()
             : base(
@@ -113,7 +114,8 @@ public class LazyLoadingProxyTests
             ) { }
     }
 
-    private class LazyContext<TEntity> : TestContext<TEntity> where TEntity : class
+    private class LazyContext<TEntity> : TestContext<TEntity>
+        where TEntity : class
     {
         public LazyContext()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)

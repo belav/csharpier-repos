@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             RegexNode node,
             VirtualChar ch,
             Func<TNode, VirtualChar, bool> predicate
-        ) where TNode : RegexNode
+        )
+            where TNode : RegexNode
         {
             if (node is TNode nodeMatch && predicate(nodeMatch, ch))
                 return nodeMatch;

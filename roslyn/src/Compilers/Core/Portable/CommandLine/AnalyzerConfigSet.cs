@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis
         public static AnalyzerConfigSet Create<TList>(
             TList analyzerConfigs,
             out ImmutableArray<Diagnostic> diagnostics
-        ) where TList : IReadOnlyCollection<AnalyzerConfig>
+        )
+            where TList : IReadOnlyCollection<AnalyzerConfig>
         {
             var sortedAnalyzerConfigs = ArrayBuilder<AnalyzerConfig>.GetInstance(
                 analyzerConfigs.Count

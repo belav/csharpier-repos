@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <typeparam name="T">Type of the syntax node.</typeparam>
         /// <param name="node">The original syntax node.</param>
         /// <returns>A clone of the original syntax node that has current <see cref="CSharpSyntaxTree"/> as its parent.</returns>
-        protected T CloneNodeAsRoot<T>(T node) where T : CSharpSyntaxNode
+        protected T CloneNodeAsRoot<T>(T node)
+            where T : CSharpSyntaxNode
         {
             return CSharpSyntaxNode.CloneNodeAsRoot(node, this);
         }

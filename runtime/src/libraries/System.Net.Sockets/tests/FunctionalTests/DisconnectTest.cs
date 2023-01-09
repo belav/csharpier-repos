@@ -9,7 +9,8 @@ using Xunit.Abstractions;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class Disconnect<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class Disconnect<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         protected Disconnect(ITestOutputHelper output)
             : base(output) { }

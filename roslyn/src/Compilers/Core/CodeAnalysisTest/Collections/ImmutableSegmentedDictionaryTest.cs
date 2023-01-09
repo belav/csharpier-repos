@@ -411,7 +411,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Assert.False(map.ContainsValue(value));
             Assert.True(map.Add(key, value).ContainsValue(value));
@@ -419,7 +420,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         private static ImmutableSegmentedDictionary<TKey, TValue> Empty<TKey, TValue>(
             IEqualityComparer<TKey>? keyComparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSegmentedDictionary<TKey, TValue>.Empty.WithComparer(keyComparer);
         }

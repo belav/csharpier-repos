@@ -398,7 +398,8 @@ namespace System.Data.Tests
             return writer.ToString();
         }
 
-        private static T ReadXml<T>(string xml) where T : IXmlSerializable, new()
+        private static T ReadXml<T>(string xml)
+            where T : IXmlSerializable, new()
         {
             T newObj = new T();
             newObj.ReadXml(new XmlTextReader(new StringReader(xml)) { XmlResolver = null }); // suppress DTDs, same as runtime code

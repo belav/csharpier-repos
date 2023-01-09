@@ -677,7 +677,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TNode withinNodeInCurrent,
             bool allOccurrences,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var generator = SyntaxGenerator.GetGenerator(originalDocument.Document);
             var matches = FindMatches(
@@ -703,7 +704,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             TNode node,
             SyntaxNode replacementNode,
             ISet<TExpressionSyntax> matches
-        ) where TNode : SyntaxNode;
+        )
+            where TNode : SyntaxNode;
 
         protected static ITypeSymbol GetTypeSymbol(
             SemanticDocument document,

@@ -17,7 +17,8 @@ namespace System.IO.Compression.Tests
         private static void ConstructorThrows<TException>(
             Func<ZipArchive> constructor,
             string Message
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             try
             {

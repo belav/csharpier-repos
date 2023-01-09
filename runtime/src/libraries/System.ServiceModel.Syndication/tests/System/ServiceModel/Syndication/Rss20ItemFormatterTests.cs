@@ -2440,7 +2440,8 @@ namespace System.ServiceModel.Syndication.Tests
             public SyndicationItem CreateItemInstanceEntryPoint() => CreateItemInstance();
         }
 
-        public class GenericFormatter<T> : Rss20ItemFormatter<T> where T : SyndicationItem, new()
+        public class GenericFormatter<T> : Rss20ItemFormatter<T>
+            where T : SyndicationItem, new()
         {
             public GenericFormatter()
                 : base() { }

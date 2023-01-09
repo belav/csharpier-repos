@@ -46,7 +46,8 @@ namespace System.Collections.Generic
         }
     }
 
-    internal sealed partial class EnumComparer<T> : Comparer<T> where T : struct, Enum
+    internal sealed partial class EnumComparer<T> : Comparer<T>
+        where T : struct, Enum
     {
         public override int Compare(T x, T y)
         {

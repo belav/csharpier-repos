@@ -22,7 +22,8 @@ public class SpatialData : ISetSource
         _multiLineStringEntities = CreateMultiLineStringEntities(factory);
     }
 
-    public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public virtual IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(PointEntity))
         {

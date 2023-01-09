@@ -272,7 +272,8 @@ namespace System.Runtime.InteropServices.Marshalling
             | CustomTypeMarshallerFeatures.TwoStageMarshalling,
         BufferSize = 0
     )]
-    public unsafe ref struct DirectSpanMarshaller<T> where T : unmanaged
+    public unsafe ref struct DirectSpanMarshaller<T>
+        where T : unmanaged
     {
         private T* _allocatedMemory;
         private T* _nativeValue;

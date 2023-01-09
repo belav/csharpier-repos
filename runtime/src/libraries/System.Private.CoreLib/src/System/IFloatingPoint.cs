@@ -137,7 +137,8 @@ namespace System
         /// <summary>Computes the integer logarithm of a value.</summary>
         /// <param name="x">The value whose integer logarithm is to be computed.</param>
         /// <returns>The integer logarithm of <paramref name="x" />.</returns>
-        static abstract TInteger ILogB<TInteger>(TSelf x) where TInteger : IBinaryInteger<TInteger>;
+        static abstract TInteger ILogB<TInteger>(TSelf x)
+            where TInteger : IBinaryInteger<TInteger>;
 
         /// <summary>Determines if a value is finite.</summary>
         /// <param name="value">The value to be checked.</param>

@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddHostedService<THostedService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, THostedService> implementationFactory
-        ) where THostedService : class, Microsoft.Extensions.Hosting.IHostedService
+        )
+            where THostedService : class, Microsoft.Extensions.Hosting.IHostedService
         {
             throw null;
         }
@@ -292,13 +293,15 @@ namespace Microsoft.Extensions.Hosting
         );
         Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> factory
-        ) where TContainerBuilder : notnull;
+        )
+            where TContainerBuilder : notnull;
         Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             System.Func<
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder>
             > factory
-        ) where TContainerBuilder : notnull;
+        )
+            where TContainerBuilder : notnull;
     }
 
     public partial interface IHostedService

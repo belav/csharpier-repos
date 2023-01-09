@@ -628,14 +628,17 @@ namespace System.Reflection.Tests
             ) { }
         }
 
-        private class TestClass4<T> where T : NoOneSubclasses, new()
+        private class TestClass4<T>
+            where T : NoOneSubclasses, new()
         {
-            public static void Moo<M>(int p1, int p2) where M : NoOneSubclassesThisEither { }
+            public static void Moo<M>(int p1, int p2)
+                where M : NoOneSubclassesThisEither { }
 
             public static void Moo<N, O>(TestClass4<N> p1, int p2)
                 where N : NoOneSubclasses, new() { }
 
-            public static void Moo<N, O>(O p1, int p2) where N : NoOneSubclasses, new() { }
+            public static void Moo<N, O>(O p1, int p2)
+                where N : NoOneSubclasses, new() { }
         }
 
         private class NoOneSubclasses { }

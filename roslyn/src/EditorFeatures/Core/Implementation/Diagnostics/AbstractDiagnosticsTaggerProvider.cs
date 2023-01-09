@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Diagnostics
     /// tagging infrastructure.
     /// </summary>
     internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
-        : AsynchronousTaggerProvider<TTag> where TTag : ITag
+        : AsynchronousTaggerProvider<TTag>
+        where TTag : ITag
     {
         private readonly IDiagnosticService _diagnosticService;
 

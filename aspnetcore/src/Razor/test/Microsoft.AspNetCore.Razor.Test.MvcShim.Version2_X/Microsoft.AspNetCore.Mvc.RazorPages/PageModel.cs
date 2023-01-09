@@ -22,7 +22,8 @@ public abstract class PageModel
 
     public ViewDataDictionary ViewData { get; }
 
-    protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model) where TModel : class
+    protected internal Task<bool> TryUpdateModelAsync<TModel>(TModel model)
+        where TModel : class
     {
         throw new NotImplementedException();
     }

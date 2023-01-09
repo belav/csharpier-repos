@@ -1499,7 +1499,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageService
             out SyntaxToken openParen,
             out SeparatedSyntaxList<TArgumentSyntax> arguments,
             out SyntaxToken closeParen
-        ) where TArgumentSyntax : SyntaxNode
+        )
+            where TArgumentSyntax : SyntaxNode
         {
             var tupleExpression = (TupleExpressionSyntax)node;
             openParen = tupleExpression.OpenParenToken;

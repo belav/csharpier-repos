@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// This method must be called only when some decoded data will be stored into it subsequently.
         /// </remarks>
-        public T GetOrCreateData<T>() where T : WellKnownAttributeData, new()
+        public T GetOrCreateData<T>()
+            where T : WellKnownAttributeData, new()
         {
             if (_lazyDecodeData == null)
             {

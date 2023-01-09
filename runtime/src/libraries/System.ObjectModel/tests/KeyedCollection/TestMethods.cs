@@ -2043,7 +2043,8 @@ namespace System.Collections.ObjectModel.Tests
     }
 
     public abstract class IListTestKeyedCollectionBadKey<TKey, TValue>
-        : IListTest<KeyedCollection<BadKey<TKey>, TValue>, TValue> where TKey : IEquatable<TKey>
+        : IListTest<KeyedCollection<BadKey<TKey>, TValue>, TValue>
+        where TKey : IEquatable<TKey>
     {
         protected IListTestKeyedCollectionBadKey()
             : base(false, false, false, false, true, true) { }

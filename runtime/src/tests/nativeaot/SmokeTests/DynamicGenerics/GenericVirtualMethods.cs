@@ -150,7 +150,8 @@ public static class GenericVirtualMethods
         string intString,
         string derivedClassString,
         string stringString
-    ) where T : IInterfaceWithGVM
+    )
+        where T : IInterfaceWithGVM
     {
         Assert.AreEqual(intString, t.GVM<int>(54));
         Assert.AreEqual(derivedClassString, t.GVM<GVMDerivedClass>(new GVMDerivedClass()));

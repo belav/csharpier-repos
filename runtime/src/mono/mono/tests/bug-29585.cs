@@ -22,7 +22,8 @@ namespace TestCase
         }
     }
 
-    abstract class Abstract<TDerived> where TDerived : Abstract<TDerived>
+    abstract class Abstract<TDerived>
+        where TDerived : Abstract<TDerived>
     {
         protected virtual int FindGenericMethod<T>()
         {

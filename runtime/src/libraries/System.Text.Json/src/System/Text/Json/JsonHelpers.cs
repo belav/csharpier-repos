@@ -110,7 +110,8 @@ namespace System.Text.Json
         public static Dictionary<TKey, TValue> CreateDictionaryFromCollection<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>> collection,
             IEqualityComparer<TKey> comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
 #if NETSTANDARD2_0 || NETFRAMEWORK
             var dictionary = new Dictionary<TKey, TValue>(comparer);

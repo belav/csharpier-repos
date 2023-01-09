@@ -2672,7 +2672,8 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
         Action<TResult, TResult> elementAsserter = null,
         bool assertOrder = false,
         int entryCount = 0
-    ) where TResult : class
+    )
+        where TResult : class
     {
         using var context = CreateContext();
         var query = queryCreator(_setSourceCreator(context));
@@ -3239,7 +3240,8 @@ public abstract class EntitySplittingQueryTestBase : NonSharedModelTestBase
             _context = context;
         }
 
-        public IQueryable<TEntity> Set<TEntity>() where TEntity : class => _context.Set<TEntity>();
+        public IQueryable<TEntity> Set<TEntity>()
+            where TEntity : class => _context.Set<TEntity>();
     }
 
     #endregion

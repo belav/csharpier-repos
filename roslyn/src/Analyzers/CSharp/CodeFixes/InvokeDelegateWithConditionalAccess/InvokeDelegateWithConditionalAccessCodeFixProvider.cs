@@ -198,7 +198,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
         private static T AppendTriviaWithoutEndOfLines<T>(
             T newStatement,
             IfStatementSyntax ifStatement
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             // We're combining trivia from the delegate invocation and the end of the if statement
             // but we don't want two EndOfLines so we ignore the one on the invocation (if it exists)

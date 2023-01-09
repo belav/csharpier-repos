@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         internal static IDictionary<TKey, TValue> ToBuilder<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return dictionary switch
             {
@@ -44,7 +45,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         internal static IEqualityComparer<TKey> GetKeyComparer<TKey, TValue>(
             this IImmutableDictionary<TKey, TValue> dictionary
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return dictionary switch
             {

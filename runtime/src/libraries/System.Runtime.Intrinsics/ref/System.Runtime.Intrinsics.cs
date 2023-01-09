@@ -15,7 +15,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> Abs<T>(
             System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -23,7 +24,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Add<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -31,49 +33,56 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> AndNot<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<System.Byte> AsByte<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<System.Double> AsDouble<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<System.Int16> AsInt16<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<System.Int32> AsInt32<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<System.Int64> AsInt64<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<nint> AsNInt<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -81,7 +90,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector128<nuint> AsNUInt<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -89,14 +99,16 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector128<System.SByte> AsSByte<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<System.Single> AsSingle<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -104,7 +116,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector128<System.UInt16> AsUInt16<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -112,7 +125,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector128<System.UInt32> AsUInt32<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -120,7 +134,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector128<System.UInt64> AsUInt64<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -148,7 +163,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> AsVector128<T>(
             this System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -176,7 +192,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Numerics.Vector<T> AsVector<T>(
             this System.Runtime.Intrinsics.Vector128<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -193,7 +210,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> BitwiseAnd<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -201,7 +219,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> BitwiseOr<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -224,7 +243,8 @@ namespace System.Runtime.Intrinsics
             System.Runtime.Intrinsics.Vector128<T> condition,
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -292,18 +312,21 @@ namespace System.Runtime.Intrinsics
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector,
             System.Span<T> destination
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector,
             T[] destination
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector,
             T[] destination,
             int startIndex
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static System.Runtime.Intrinsics.Vector128<System.Byte> Create(byte value)
         {
@@ -759,7 +782,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> Create<T>(
             System.ReadOnlySpan<T> values
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -767,17 +791,20 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Create<T>(
             System.Runtime.Intrinsics.Vector64<T> lower,
             System.Runtime.Intrinsics.Vector64<T> upper
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
-        public static System.Runtime.Intrinsics.Vector128<T> Create<T>(T value) where T : struct
+        public static System.Runtime.Intrinsics.Vector128<T> Create<T>(T value)
+            where T : struct
         {
             throw null;
         }
 
-        public static System.Runtime.Intrinsics.Vector128<T> Create<T>(T[] values) where T : struct
+        public static System.Runtime.Intrinsics.Vector128<T> Create<T>(T[] values)
+            where T : struct
         {
             throw null;
         }
@@ -791,7 +818,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Divide<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -799,7 +827,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Divide<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             T right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -807,7 +836,8 @@ namespace System.Runtime.Intrinsics
         public static T Dot<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -815,7 +845,8 @@ namespace System.Runtime.Intrinsics
         public static bool EqualsAll<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -823,7 +854,8 @@ namespace System.Runtime.Intrinsics
         public static bool EqualsAny<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -831,7 +863,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Equals<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -839,7 +872,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static uint ExtractMostSignificantBits<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -866,14 +900,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector64<T> GetLower<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<T> GetUpper<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -881,7 +917,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanAll<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -889,7 +926,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanAny<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -897,7 +935,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanOrEqualAll<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -905,7 +944,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanOrEqualAny<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -913,7 +953,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> GreaterThanOrEqual<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -921,7 +962,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> GreaterThan<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -929,7 +971,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanAll<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -937,7 +980,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanAny<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -945,7 +989,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanOrEqualAll<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -953,7 +998,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanOrEqualAny<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -961,7 +1007,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> LessThanOrEqual<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -969,7 +1016,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> LessThan<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -991,7 +1039,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static unsafe System.Runtime.Intrinsics.Vector128<T> LoadAlignedNonTemporal<T>(
             T* source
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -1006,7 +1055,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> LoadUnsafe<T>(
             ref T source,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1014,7 +1064,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Max<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1022,7 +1073,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Min<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1030,7 +1082,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Multiply<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1038,7 +1091,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Multiply<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             T right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1046,7 +1100,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Multiply<T>(
             T left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1113,14 +1168,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> Negate<T>(
             System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<T> OnesComplement<T>(
             System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1422,7 +1479,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> Sqrt<T>(
             System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1431,7 +1489,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void Store<T>(
             this System.Runtime.Intrinsics.Vector128<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -1440,7 +1499,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void StoreAligned<T>(
             this System.Runtime.Intrinsics.Vector128<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -1449,7 +1509,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void StoreAlignedNonTemporal<T>(
             this System.Runtime.Intrinsics.Vector128<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -1457,7 +1518,8 @@ namespace System.Runtime.Intrinsics
         public static void StoreUnsafe<T>(
             this System.Runtime.Intrinsics.Vector128<T> source,
             ref T destination
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1467,7 +1529,8 @@ namespace System.Runtime.Intrinsics
             this System.Runtime.Intrinsics.Vector128<T> source,
             ref T destination,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1475,12 +1538,14 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Subtract<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
-        public static T Sum<T>(System.Runtime.Intrinsics.Vector128<T> vector) where T : struct
+        public static T Sum<T>(System.Runtime.Intrinsics.Vector128<T> vector)
+            where T : struct
         {
             throw null;
         }
@@ -1493,14 +1558,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector256<T> ToVector256Unsafe<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<T> ToVector256<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1508,7 +1575,8 @@ namespace System.Runtime.Intrinsics
         public static bool TryCopyTo<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector,
             System.Span<T> destination
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1683,7 +1751,8 @@ namespace System.Runtime.Intrinsics
             this System.Runtime.Intrinsics.Vector128<T> vector,
             int index,
             T value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1691,7 +1760,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> WithLower<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector,
             System.Runtime.Intrinsics.Vector64<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1699,7 +1769,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> WithUpper<T>(
             this System.Runtime.Intrinsics.Vector128<T> vector,
             System.Runtime.Intrinsics.Vector64<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1707,14 +1778,16 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector128<T> Xor<T>(
             System.Runtime.Intrinsics.Vector128<T> left,
             System.Runtime.Intrinsics.Vector128<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
     }
 
     public readonly partial struct Vector128<T>
-        : System.IEquatable<System.Runtime.Intrinsics.Vector128<T>> where T : struct
+        : System.IEquatable<System.Runtime.Intrinsics.Vector128<T>>
+        where T : struct
     {
         private readonly int _dummyPrimitive;
         public static System.Runtime.Intrinsics.Vector128<T> AllBitsSet
@@ -1916,7 +1989,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector256<T> Abs<T>(
             System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1924,7 +1998,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Add<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1932,49 +2007,56 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> AndNot<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<System.Byte> AsByte<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<System.Double> AsDouble<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<System.Int16> AsInt16<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<System.Int32> AsInt32<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<System.Int64> AsInt64<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<nint> AsNInt<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1982,7 +2064,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector256<nuint> AsNUInt<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1990,14 +2073,16 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector256<System.SByte> AsSByte<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<System.Single> AsSingle<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2005,7 +2090,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector256<System.UInt16> AsUInt16<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2013,7 +2099,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector256<System.UInt32> AsUInt32<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2021,21 +2108,24 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector256<System.UInt64> AsUInt64<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<T> AsVector256<T>(
             this System.Numerics.Vector<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Numerics.Vector<T> AsVector<T>(
             this System.Runtime.Intrinsics.Vector256<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2052,7 +2142,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> BitwiseAnd<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2060,7 +2151,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> BitwiseOr<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2083,7 +2175,8 @@ namespace System.Runtime.Intrinsics
             System.Runtime.Intrinsics.Vector256<T> condition,
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2151,18 +2244,21 @@ namespace System.Runtime.Intrinsics
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector,
             System.Span<T> destination
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector,
             T[] destination
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector,
             T[] destination,
             int startIndex
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static System.Runtime.Intrinsics.Vector256<System.Byte> Create(byte value)
         {
@@ -2690,7 +2786,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector256<T> Create<T>(
             System.ReadOnlySpan<T> values
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2698,17 +2795,20 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Create<T>(
             System.Runtime.Intrinsics.Vector128<T> lower,
             System.Runtime.Intrinsics.Vector128<T> upper
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
-        public static System.Runtime.Intrinsics.Vector256<T> Create<T>(T value) where T : struct
+        public static System.Runtime.Intrinsics.Vector256<T> Create<T>(T value)
+            where T : struct
         {
             throw null;
         }
 
-        public static System.Runtime.Intrinsics.Vector256<T> Create<T>(T[] values) where T : struct
+        public static System.Runtime.Intrinsics.Vector256<T> Create<T>(T[] values)
+            where T : struct
         {
             throw null;
         }
@@ -2722,7 +2822,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Divide<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2730,7 +2831,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Divide<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             T right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2738,7 +2840,8 @@ namespace System.Runtime.Intrinsics
         public static T Dot<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2746,7 +2849,8 @@ namespace System.Runtime.Intrinsics
         public static bool EqualsAll<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2754,7 +2858,8 @@ namespace System.Runtime.Intrinsics
         public static bool EqualsAny<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2762,7 +2867,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Equals<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2770,7 +2876,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static uint ExtractMostSignificantBits<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2797,14 +2904,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> GetLower<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<T> GetUpper<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2812,7 +2921,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanAll<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2820,7 +2930,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanAny<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2828,7 +2939,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanOrEqualAll<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2836,7 +2948,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanOrEqualAny<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2844,7 +2957,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> GreaterThanOrEqual<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2852,7 +2966,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> GreaterThan<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2860,7 +2975,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanAll<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2868,7 +2984,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanAny<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2876,7 +2993,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanOrEqualAll<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2884,7 +3002,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanOrEqualAny<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2892,7 +3011,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> LessThanOrEqual<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2900,7 +3020,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> LessThan<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2922,7 +3043,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static unsafe System.Runtime.Intrinsics.Vector256<T> LoadAlignedNonTemporal<T>(
             T* source
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -2937,7 +3059,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> LoadUnsafe<T>(
             ref T source,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2945,7 +3068,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Max<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2953,7 +3077,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Min<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2961,7 +3086,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Multiply<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2969,7 +3095,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Multiply<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             T right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -2977,7 +3104,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Multiply<T>(
             T left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3044,14 +3172,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector256<T> Negate<T>(
             System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector256<T> OnesComplement<T>(
             System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3353,7 +3483,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector256<T> Sqrt<T>(
             System.Runtime.Intrinsics.Vector256<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3362,7 +3493,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void Store<T>(
             this System.Runtime.Intrinsics.Vector256<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -3371,7 +3503,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void StoreAligned<T>(
             this System.Runtime.Intrinsics.Vector256<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -3380,7 +3513,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void StoreAlignedNonTemporal<T>(
             this System.Runtime.Intrinsics.Vector256<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -3388,7 +3522,8 @@ namespace System.Runtime.Intrinsics
         public static void StoreUnsafe<T>(
             this System.Runtime.Intrinsics.Vector256<T> source,
             ref T destination
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3398,7 +3533,8 @@ namespace System.Runtime.Intrinsics
             this System.Runtime.Intrinsics.Vector256<T> source,
             ref T destination,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3406,12 +3542,14 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Subtract<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
-        public static T Sum<T>(System.Runtime.Intrinsics.Vector256<T> vector) where T : struct
+        public static T Sum<T>(System.Runtime.Intrinsics.Vector256<T> vector)
+            where T : struct
         {
             throw null;
         }
@@ -3425,7 +3563,8 @@ namespace System.Runtime.Intrinsics
         public static bool TryCopyTo<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector,
             System.Span<T> destination
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3600,7 +3739,8 @@ namespace System.Runtime.Intrinsics
             this System.Runtime.Intrinsics.Vector256<T> vector,
             int index,
             T value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3608,7 +3748,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> WithLower<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector,
             System.Runtime.Intrinsics.Vector128<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3616,7 +3757,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> WithUpper<T>(
             this System.Runtime.Intrinsics.Vector256<T> vector,
             System.Runtime.Intrinsics.Vector128<T> value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3624,14 +3766,16 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector256<T> Xor<T>(
             System.Runtime.Intrinsics.Vector256<T> left,
             System.Runtime.Intrinsics.Vector256<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
     }
 
     public readonly partial struct Vector256<T>
-        : System.IEquatable<System.Runtime.Intrinsics.Vector256<T>> where T : struct
+        : System.IEquatable<System.Runtime.Intrinsics.Vector256<T>>
+        where T : struct
     {
         private readonly int _dummyPrimitive;
         public static System.Runtime.Intrinsics.Vector256<T> AllBitsSet
@@ -3833,7 +3977,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector64<T> Abs<T>(
             System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3841,7 +3986,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Add<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3849,49 +3995,56 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> AndNot<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<System.Byte> AsByte<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<System.Double> AsDouble<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<System.Int16> AsInt16<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<System.Int32> AsInt32<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<System.Int64> AsInt64<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<nint> AsNInt<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3899,7 +4052,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector64<nuint> AsNUInt<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3907,14 +4061,16 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector64<System.SByte> AsSByte<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<System.Single> AsSingle<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3922,7 +4078,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector64<System.UInt16> AsUInt16<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3930,7 +4087,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector64<System.UInt32> AsUInt32<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3938,7 +4096,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static System.Runtime.Intrinsics.Vector64<System.UInt64> AsUInt64<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3955,7 +4114,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> BitwiseAnd<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3963,7 +4123,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> BitwiseOr<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -3986,7 +4147,8 @@ namespace System.Runtime.Intrinsics
             System.Runtime.Intrinsics.Vector64<T> condition,
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4054,18 +4216,21 @@ namespace System.Runtime.Intrinsics
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector,
             System.Span<T> destination
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector,
             T[] destination
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static void CopyTo<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector,
             T[] destination,
             int startIndex
-        ) where T : struct { }
+        )
+            where T : struct { }
 
         public static System.Runtime.Intrinsics.Vector64<System.Byte> Create(byte value)
         {
@@ -4362,12 +4527,14 @@ namespace System.Runtime.Intrinsics
             throw null;
         }
 
-        public static System.Runtime.Intrinsics.Vector64<T> Create<T>(T value) where T : struct
+        public static System.Runtime.Intrinsics.Vector64<T> Create<T>(T value)
+            where T : struct
         {
             throw null;
         }
 
-        public static System.Runtime.Intrinsics.Vector64<T> Create<T>(T[] values) where T : struct
+        public static System.Runtime.Intrinsics.Vector64<T> Create<T>(T[] values)
+            where T : struct
         {
             throw null;
         }
@@ -4381,7 +4548,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Divide<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4389,7 +4557,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Divide<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             T right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4397,7 +4566,8 @@ namespace System.Runtime.Intrinsics
         public static T Dot<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4405,7 +4575,8 @@ namespace System.Runtime.Intrinsics
         public static bool EqualsAll<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4413,7 +4584,8 @@ namespace System.Runtime.Intrinsics
         public static bool EqualsAny<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4421,7 +4593,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Equals<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4429,7 +4602,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static uint ExtractMostSignificantBits<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4457,7 +4631,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanAll<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4465,7 +4640,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanAny<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4473,7 +4649,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanOrEqualAll<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4481,7 +4658,8 @@ namespace System.Runtime.Intrinsics
         public static bool GreaterThanOrEqualAny<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4489,7 +4667,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> GreaterThanOrEqual<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4497,7 +4676,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> GreaterThan<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4505,7 +4685,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanAll<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4513,7 +4694,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanAny<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4521,7 +4703,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanOrEqualAll<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4529,7 +4712,8 @@ namespace System.Runtime.Intrinsics
         public static bool LessThanOrEqualAny<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4537,7 +4721,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> LessThanOrEqual<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4545,7 +4730,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> LessThan<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4567,7 +4753,8 @@ namespace System.Runtime.Intrinsics
         [System.CLSCompliantAttribute(false)]
         public static unsafe System.Runtime.Intrinsics.Vector64<T> LoadAlignedNonTemporal<T>(
             T* source
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -4582,7 +4769,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> LoadUnsafe<T>(
             ref T source,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4590,7 +4778,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Max<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4598,7 +4787,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Min<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4606,7 +4796,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Multiply<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4614,7 +4805,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Multiply<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             T right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4622,7 +4814,8 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Multiply<T>(
             T left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4689,14 +4882,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector64<T> Negate<T>(
             System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector64<T> OnesComplement<T>(
             System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4973,7 +5168,8 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector64<T> Sqrt<T>(
             System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -4982,7 +5178,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void Store<T>(
             this System.Runtime.Intrinsics.Vector64<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -4991,7 +5188,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void StoreAligned<T>(
             this System.Runtime.Intrinsics.Vector64<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -5000,7 +5198,8 @@ namespace System.Runtime.Intrinsics
         public static unsafe void StoreAlignedNonTemporal<T>(
             this System.Runtime.Intrinsics.Vector64<T> source,
             T* destination
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             throw null;
         }
@@ -5008,7 +5207,8 @@ namespace System.Runtime.Intrinsics
         public static void StoreUnsafe<T>(
             this System.Runtime.Intrinsics.Vector64<T> source,
             ref T destination
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -5018,7 +5218,8 @@ namespace System.Runtime.Intrinsics
             this System.Runtime.Intrinsics.Vector64<T> source,
             ref T destination,
             nuint elementOffset
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -5026,12 +5227,14 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Subtract<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
-        public static T Sum<T>(System.Runtime.Intrinsics.Vector64<T> vector) where T : struct
+        public static T Sum<T>(System.Runtime.Intrinsics.Vector64<T> vector)
+            where T : struct
         {
             throw null;
         }
@@ -5044,14 +5247,16 @@ namespace System.Runtime.Intrinsics
 
         public static System.Runtime.Intrinsics.Vector128<T> ToVector128Unsafe<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Runtime.Intrinsics.Vector128<T> ToVector128<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -5059,7 +5264,8 @@ namespace System.Runtime.Intrinsics
         public static bool TryCopyTo<T>(
             this System.Runtime.Intrinsics.Vector64<T> vector,
             System.Span<T> destination
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -5234,7 +5440,8 @@ namespace System.Runtime.Intrinsics
             this System.Runtime.Intrinsics.Vector64<T> vector,
             int index,
             T value
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -5242,14 +5449,16 @@ namespace System.Runtime.Intrinsics
         public static System.Runtime.Intrinsics.Vector64<T> Xor<T>(
             System.Runtime.Intrinsics.Vector64<T> left,
             System.Runtime.Intrinsics.Vector64<T> right
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
     }
 
     public readonly partial struct Vector64<T>
-        : System.IEquatable<System.Runtime.Intrinsics.Vector64<T>> where T : struct
+        : System.IEquatable<System.Runtime.Intrinsics.Vector64<T>>
+        where T : struct
     {
         private readonly int _dummyPrimitive;
         public static System.Runtime.Intrinsics.Vector64<T> AllBitsSet

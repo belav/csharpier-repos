@@ -1196,7 +1196,8 @@ class TestHFAandHVA
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<T> ReturnVectorT<T>() where T : struct
+    static Vector<T> ReturnVectorT<T>()
+        where T : struct
     {
         return new Vector<T>();
     }
@@ -1229,7 +1230,8 @@ class TestHFAandHVA
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<T> ReturnVectorT2<T>(T init) where T : struct
+    static Vector<T> ReturnVectorT2<T>(T init)
+        where T : struct
     {
         var a = new Vector<T>();
         var b = new Vector<T>(init);
@@ -1239,7 +1241,8 @@ class TestHFAandHVA
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static Vector<int> ReturnVectorInt2<T>(Vector<T> left, Vector<T> right) where T : struct
+    static Vector<int> ReturnVectorInt2<T>(Vector<T> left, Vector<T> right)
+        where T : struct
     {
         Vector<int> cond = (Vector<int>)Vector.LessThan(left, right);
         return cond;
@@ -1285,30 +1288,35 @@ class TestHFAandHVA
         return new VectorDoubleWrapper();
     }
 
-    struct VectorTWrapper<T> where T : struct
+    struct VectorTWrapper<T>
+        where T : struct
     {
         Vector<T> f;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static VectorTWrapper<T> ReturnVectorTWrapper<T>() where T : struct
+    static VectorTWrapper<T> ReturnVectorTWrapper<T>()
+        where T : struct
     {
         return new VectorTWrapper<T>();
     }
 
-    struct VectorTWrapperWrapper<T> where T : struct
+    struct VectorTWrapperWrapper<T>
+        where T : struct
     {
         VectorTWrapper<T> f;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static VectorTWrapperWrapper<T> ReturnVectorTWrapperWrapper<T>() where T : struct
+    static VectorTWrapperWrapper<T> ReturnVectorTWrapperWrapper<T>()
+        where T : struct
     {
         return new VectorTWrapperWrapper<T>();
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void TestReturnViaThrowing<T>() where T : struct
+    private static void TestReturnViaThrowing<T>()
+        where T : struct
     {
         Vector<T> vector = Vector<T>.One;
         try

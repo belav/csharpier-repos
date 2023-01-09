@@ -23,7 +23,8 @@ public static class SignalRDependencyInjectionExtensions
     public static ISignalRServerBuilder AddHubOptions<THub>(
         this ISignalRServerBuilder signalrBuilder,
         Action<HubOptions<THub>> configure
-    ) where THub : Hub
+    )
+        where THub : Hub
     {
         if (signalrBuilder == null)
         {

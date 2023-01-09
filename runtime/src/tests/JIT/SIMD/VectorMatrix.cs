@@ -20,7 +20,8 @@ internal partial class VectorTest
     };
 
     // Matrix for test purposes only - no per-dim bounds checking, etc.
-    public struct Matrix<T> where T : struct, IComparable<T>, IEquatable<T>
+    public struct Matrix<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         // data is a flattened matrix.
         private T[] _data;

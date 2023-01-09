@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis
     //                          NOTE: we do store the key in this case
     //                          reference comparison of keys is as cheap as comparing hash codes.
     internal class CachingIdentityFactory<TKey, TValue>
-        : CachingBase<CachingIdentityFactory<TKey, TValue>.Entry> where TKey : class
+        : CachingBase<CachingIdentityFactory<TKey, TValue>.Entry>
+        where TKey : class
     {
         private readonly Func<TKey, TValue> _valueFactory;
         private readonly ObjectPool<CachingIdentityFactory<TKey, TValue>>? _pool;

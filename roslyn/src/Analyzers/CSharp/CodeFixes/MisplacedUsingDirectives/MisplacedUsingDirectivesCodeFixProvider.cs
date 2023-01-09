@@ -438,7 +438,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         private static TSyntaxNode RemoveLeadingBlankLinesFromFirstMember<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var members = GetMembers(node);
             if (members.Count == 0)
@@ -489,7 +490,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
 
         private static TSyntaxNode EnsureLeadingBlankLineBeforeFirstMember<TSyntaxNode>(
             TSyntaxNode node
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var members = GetMembers(node);
             if (members.Count == 0)

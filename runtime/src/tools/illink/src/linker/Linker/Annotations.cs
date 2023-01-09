@@ -665,7 +665,8 @@ namespace Mono.Linker
             return marked_types_with_cctor.Add(type);
         }
 
-        public bool HasLinkerAttribute<T>(IMemberDefinition member) where T : Attribute
+        public bool HasLinkerAttribute<T>(IMemberDefinition member)
+            where T : Attribute
         {
             // Avoid setting up and inserting LinkerAttributesInformation for members without attributes.
             if (!context.CustomAttributes.HasAny(member))
@@ -680,7 +681,8 @@ namespace Mono.Linker
             return linkerAttributeInformation.HasAttribute<T>();
         }
 
-        public IEnumerable<T> GetLinkerAttributes<T>(IMemberDefinition member) where T : Attribute
+        public IEnumerable<T> GetLinkerAttributes<T>(IMemberDefinition member)
+            where T : Attribute
         {
             // Avoid setting up and inserting LinkerAttributesInformation for members without attributes.
             if (!context.CustomAttributes.HasAny(member))
@@ -698,7 +700,8 @@ namespace Mono.Linker
         public bool TryGetLinkerAttribute<T>(
             IMemberDefinition member,
             [NotNullWhen(returnValue: true)] out T? attribute
-        ) where T : Attribute
+        )
+            where T : Attribute
         {
             var attributes = GetLinkerAttributes<T>(member);
             // This should only be called for attribute types which don't allow multiple attributes.

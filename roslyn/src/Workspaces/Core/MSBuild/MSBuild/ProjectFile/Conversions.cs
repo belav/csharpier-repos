@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
         }
 
-        public static TEnum? ToEnum<TEnum>(string? value, bool ignoreCase) where TEnum : struct
+        public static TEnum? ToEnum<TEnum>(string? value, bool ignoreCase)
+            where TEnum : struct
         {
             if (value == null)
             {

@@ -35,7 +35,8 @@ namespace System.Runtime.InteropServices
             /// <typeparam name="T">Desired type.</typeparam>
             /// <param name="dispatchPtr">Pointer supplied to Vtable function entry.</param>
             /// <returns>Instance of type associated with dispatched function call.</returns>
-            public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr) where T : class
+            public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
+                where T : class
             {
                 // See the dispatch section in the runtime for details on the masking below.
                 long DispatchAlignmentThisPtr = sizeof(void*) == 8 ? 64 : 16; // Should be a power of 2.

@@ -6515,7 +6515,8 @@ namespace System.Text.RegularExpressions.Tests
             TimeSpan timeout,
             string? pattern = null,
             RegexOptions options = RegexOptions.None
-        ) where T : Exception
+        )
+            where T : Exception
         {
             if (r == null)
             {

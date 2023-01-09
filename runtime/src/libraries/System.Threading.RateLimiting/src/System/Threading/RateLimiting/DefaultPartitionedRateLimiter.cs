@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 namespace System.Threading.RateLimiting
 {
     internal sealed class DefaultPartitionedRateLimiter<TResource, TKey>
-        : PartitionedRateLimiter<TResource> where TKey : notnull
+        : PartitionedRateLimiter<TResource>
+        where TKey : notnull
     {
         private readonly Func<TResource, RateLimitPartition<TKey>> _partitioner;
         private static TimeSpan _idleTimeLimit = TimeSpan.FromSeconds(10);

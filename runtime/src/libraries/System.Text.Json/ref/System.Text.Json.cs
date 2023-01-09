@@ -4323,7 +4323,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Concurrent.ConcurrentQueue<TElement>
+        )
+            where TCollection : System.Collections.Concurrent.ConcurrentQueue<TElement>
         {
             throw null;
         }
@@ -4334,7 +4335,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Concurrent.ConcurrentStack<TElement>
+        )
+            where TCollection : System.Collections.Concurrent.ConcurrentStack<TElement>
         {
             throw null;
         }
@@ -4359,7 +4361,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.IAsyncEnumerable<TElement>
+        )
+            where TCollection : System.Collections.Generic.IAsyncEnumerable<TElement>
         {
             throw null;
         }
@@ -4370,7 +4373,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.ICollection<TElement>
+        )
+            where TCollection : System.Collections.Generic.ICollection<TElement>
         {
             throw null;
         }
@@ -4378,7 +4382,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static System.Text.Json.Serialization.Metadata.JsonTypeInfo<TCollection> CreateIDictionaryInfo<TCollection>(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.IDictionary
+        )
+            where TCollection : System.Collections.IDictionary
         {
             throw null;
         }
@@ -4400,7 +4405,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static System.Text.Json.Serialization.Metadata.JsonTypeInfo<TCollection> CreateIEnumerableInfo<TCollection>(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.IEnumerable
+        )
+            where TCollection : System.Collections.IEnumerable
         {
             throw null;
         }
@@ -4411,7 +4417,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.IEnumerable<TElement>
+        )
+            where TCollection : System.Collections.Generic.IEnumerable<TElement>
         {
             throw null;
         }
@@ -4419,7 +4426,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static System.Text.Json.Serialization.Metadata.JsonTypeInfo<TCollection> CreateIListInfo<TCollection>(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.IList
+        )
+            where TCollection : System.Collections.IList
         {
             throw null;
         }
@@ -4430,7 +4438,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.IList<TElement>
+        )
+            where TCollection : System.Collections.Generic.IList<TElement>
         {
             throw null;
         }
@@ -4466,7 +4475,8 @@ namespace System.Text.Json.Serialization.Metadata
                 System.Collections.Generic.IEnumerable<TElement>,
                 TCollection
             > createRangeFunc
-        ) where TCollection : System.Collections.Generic.IEnumerable<TElement>
+        )
+            where TCollection : System.Collections.Generic.IEnumerable<TElement>
         {
             throw null;
         }
@@ -4491,7 +4501,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.ISet<TElement>
+        )
+            where TCollection : System.Collections.Generic.ISet<TElement>
         {
             throw null;
         }
@@ -4502,7 +4513,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.List<TElement>
+        )
+            where TCollection : System.Collections.Generic.List<TElement>
         {
             throw null;
         }
@@ -4510,7 +4522,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static System.Text.Json.Serialization.Metadata.JsonTypeInfo<T> CreateObjectInfo<T>(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonObjectInfoValues<T> objectInfo
-        ) where T : notnull
+        )
+            where T : notnull
         {
             throw null;
         }
@@ -4527,7 +4540,8 @@ namespace System.Text.Json.Serialization.Metadata
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo,
             System.Action<TCollection, object?> addFunc
-        ) where TCollection : System.Collections.IEnumerable
+        )
+            where TCollection : System.Collections.IEnumerable
         {
             throw null;
         }
@@ -4538,7 +4552,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.Queue<TElement>
+        )
+            where TCollection : System.Collections.Generic.Queue<TElement>
         {
             throw null;
         }
@@ -4547,7 +4562,8 @@ namespace System.Text.Json.Serialization.Metadata
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo,
             System.Action<TCollection, object?> addFunc
-        ) where TCollection : System.Collections.IEnumerable
+        )
+            where TCollection : System.Collections.IEnumerable
         {
             throw null;
         }
@@ -4558,7 +4574,8 @@ namespace System.Text.Json.Serialization.Metadata
         >(
             System.Text.Json.JsonSerializerOptions options,
             System.Text.Json.Serialization.Metadata.JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : System.Collections.Generic.Stack<TElement>
+        )
+            where TCollection : System.Collections.Generic.Stack<TElement>
         {
             throw null;
         }
@@ -4573,21 +4590,24 @@ namespace System.Text.Json.Serialization.Metadata
 
         public static System.Text.Json.Serialization.JsonConverter<T> GetEnumConverter<T>(
             System.Text.Json.JsonSerializerOptions options
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Text.Json.Serialization.JsonConverter<T?> GetNullableConverter<T>(
             System.Text.Json.JsonSerializerOptions options
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
 
         public static System.Text.Json.Serialization.JsonConverter<T?> GetNullableConverter<T>(
             System.Text.Json.Serialization.Metadata.JsonTypeInfo<T> underlyingTypeInfo
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }

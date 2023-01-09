@@ -846,7 +846,8 @@ namespace System.Text.Json
         public static void AssertThrows<E>(
             Utf8JsonReader json,
             AssertThrowsActionUtf8JsonReader action
-        ) where E : Exception
+        )
+            where E : Exception
         {
             Exception ex;
 
@@ -876,7 +877,8 @@ namespace System.Text.Json
         public static void AssertThrows<E>(
             ref Utf8JsonWriter writer,
             AssertThrowsActionUtf8JsonWriter action
-        ) where E : Exception
+        )
+            where E : Exception
         {
             Exception ex;
 

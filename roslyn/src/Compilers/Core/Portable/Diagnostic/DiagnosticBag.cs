@@ -123,7 +123,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Add multiple diagnostics to the bag.
         /// </summary>
-        public void AddRange<T>(ImmutableArray<T> diagnostics) where T : Diagnostic
+        public void AddRange<T>(ImmutableArray<T> diagnostics)
+            where T : Diagnostic
         {
             if (!diagnostics.IsDefaultOrEmpty)
             {
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis
             return ToReadOnlyAndFree<Diagnostic>();
         }
 
-        public ImmutableArray<TDiagnostic> ToReadOnly<TDiagnostic>() where TDiagnostic : Diagnostic
+        public ImmutableArray<TDiagnostic> ToReadOnly<TDiagnostic>()
+            where TDiagnostic : Diagnostic
         {
             ConcurrentQueue<Diagnostic>? oldBag = _lazyBag;
             return ToReadOnlyCore<TDiagnostic>(oldBag);
@@ -197,7 +199,8 @@ namespace Microsoft.CodeAnalysis
 
         private static ImmutableArray<TDiagnostic> ToReadOnlyCore<TDiagnostic>(
             ConcurrentQueue<Diagnostic>? oldBag
-        ) where TDiagnostic : Diagnostic
+        )
+            where TDiagnostic : Diagnostic
         {
             if (oldBag == null)
             {

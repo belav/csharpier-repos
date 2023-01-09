@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.JsonPatch;
 // including type data in the JsonPatchDocument serialized as JSON (to allow for correct deserialization) - that's
 // not according to RFC 6902, and would thus break cross-platform compatibility.
 [JsonConverter(typeof(TypedJsonPatchDocumentConverter))]
-public class JsonPatchDocument<TModel> : IJsonPatchDocument where TModel : class
+public class JsonPatchDocument<TModel> : IJsonPatchDocument
+    where TModel : class
 {
     public List<Operation<TModel>> Operations { get; private set; }
 

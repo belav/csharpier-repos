@@ -4437,7 +4437,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> arguments,
             BindingDiagnosticBag diagnostics,
             BoundExpression? receiver
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             var result = methodResult.Result;
 

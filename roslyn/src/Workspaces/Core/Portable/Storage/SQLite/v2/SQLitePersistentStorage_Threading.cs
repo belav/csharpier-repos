@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             TArg arg,
             TaskScheduler scheduler,
             CancellationToken cancellationToken
-        ) where TArg : struct
+        )
+            where TArg : struct
         {
             // Get a pooled delegate that can be used to prevent having to alloc a new lambda that calls 'func' while
             // capturing 'arg'.  This is needed as Task.Factory.StartNew has no way to pass extra data around with it
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             Func<TArg, TResult> func,
             TArg arg,
             CancellationToken cancellationToken
-        ) where TArg : struct
+        )
+            where TArg : struct
         {
             // Suppress ExecutionContext flow for asynchronous operations that write to the database. In addition to
             // avoiding ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             Func<TArg, TResult> func,
             TArg arg,
             CancellationToken cancellationToken
-        ) where TArg : struct
+        )
+            where TArg : struct
         {
             // Suppress ExecutionContext flow for asynchronous operations that write to the database. In addition to
             // avoiding ExecutionContext allocations, this clears the LogicalCallContext and avoids the need to clone

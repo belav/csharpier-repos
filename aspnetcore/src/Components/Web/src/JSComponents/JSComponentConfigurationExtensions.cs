@@ -25,7 +25,8 @@ public static class JSComponentConfigurationExtensions
     public static void RegisterForJavaScript<[DynamicallyAccessedMembers(Component)] TComponent>(
         this IJSComponentConfiguration configuration,
         string identifier
-    ) where TComponent : IComponent =>
+    )
+        where TComponent : IComponent =>
         RegisterForJavaScript(configuration, typeof(TComponent), identifier);
 
     /// <summary>
@@ -39,7 +40,8 @@ public static class JSComponentConfigurationExtensions
         this IJSComponentConfiguration configuration,
         string identifier,
         string javaScriptInitializer
-    ) where TComponent : IComponent =>
+    )
+        where TComponent : IComponent =>
         RegisterForJavaScript(configuration, typeof(TComponent), identifier, javaScriptInitializer);
 
     /// <summary>

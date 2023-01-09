@@ -693,7 +693,8 @@ public class QueryParameterValueSupplierTest
 
     private static IEnumerable<(string key, object value)> GetSuppliedParameters<TComponent>(
         string query
-    ) where TComponent : IComponent
+    )
+        where TComponent : IComponent
     {
         var supplier = QueryParameterValueSupplier.ForType(typeof(TComponent));
         using var builder = new RenderTreeBuilder();

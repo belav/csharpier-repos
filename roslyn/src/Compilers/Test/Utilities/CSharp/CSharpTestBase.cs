@@ -1892,7 +1892,8 @@ namespace System.Diagnostics.CodeAnalysis
             string expectedMessage = null,
             bool allowUnsafe = false,
             Verification verify = Verification.Passes
-        ) where T : Exception
+        )
+            where T : Exception
         {
             var comp = CreateCompilation(
                 source,
@@ -1905,7 +1906,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilation comp,
             string expectedMessage = null,
             Verification verify = Verification.Passes
-        ) where T : Exception
+        )
+            where T : Exception
         {
             try
             {
@@ -2023,7 +2025,8 @@ namespace System.Diagnostics.CodeAnalysis
         public Tuple<TNode, SemanticModel> GetBindingNodeAndModel<TNode>(
             CSharpCompilation compilation,
             int treeIndex = 0
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var node = GetBindingNode<TNode>(compilation, treeIndex);
             return new Tuple<TNode, SemanticModel>(
@@ -2035,7 +2038,8 @@ namespace System.Diagnostics.CodeAnalysis
         public Tuple<TNode, SemanticModel> GetBindingNodeAndModel<TNode>(
             Compilation compilation,
             int treeIndex = 0
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return GetBindingNodeAndModel<TNode>((CSharpCompilation)compilation, treeIndex);
         }
@@ -2044,7 +2048,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilation compilation,
             int treeIndex = 0,
             int which = -1
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var nodes = GetBindingNodes<TNode>(compilation, treeIndex, which);
             return new Tuple<IList<TNode>, SemanticModel>(
@@ -2082,7 +2087,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilation compilation,
             int treeIndex = 0,
             int which = -1
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             Assert.True(compilation.SyntaxTrees.Length > treeIndex, "Compilation has enough trees");
             var tree = compilation.SyntaxTrees[treeIndex];
@@ -2127,7 +2133,8 @@ namespace System.Diagnostics.CodeAnalysis
             Compilation compilation,
             int treeIndex = 0,
             int which = -1
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return GetBindingNodes<TNode>((CSharpCompilation)compilation, treeIndex, which);
         }
@@ -2552,7 +2559,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilationOptions compilationOptions = null,
             CSharpParseOptions parseOptions = null,
             bool useLatestFrameworkReferences = false
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var targetFramework = useLatestFrameworkReferences
                 ? TargetFramework.Mscorlib46Extended
@@ -2570,7 +2578,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilation compilation,
             string expectedOperationTree,
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var (actualOperation, syntaxNode) = GetOperationAndSyntaxForTest<TSyntaxNode>(
                 compilation
@@ -2606,7 +2615,8 @@ namespace System.Diagnostics.CodeAnalysis
         protected static void VerifyFlowGraphForTest<TSyntaxNode>(
             CSharpCompilation compilation,
             string expectedFlowGraph
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var tree = compilation.SyntaxTrees[0];
             SyntaxNode syntaxNode = GetSyntaxNodeOfTypeForBinding<TSyntaxNode>(
@@ -2642,7 +2652,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilationOptions compilationOptions = null,
             CSharpParseOptions parseOptions = null,
             bool useLatestFrameworkReferences = false
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var actualOperationTree = GetOperationTreeForTest<TSyntaxNode>(
                 testSrc,
@@ -2658,7 +2669,8 @@ namespace System.Diagnostics.CodeAnalysis
             string expectedOperationTree,
             DiagnosticDescription[] expectedDiagnostics,
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var actualDiagnostics = compilation
                 .GetDiagnostics()
@@ -2675,7 +2687,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilation compilation,
             string expectedFlowGraph,
             DiagnosticDescription[] expectedDiagnostics
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var actualDiagnostics = compilation
                 .GetDiagnostics()
@@ -2693,7 +2706,8 @@ namespace System.Diagnostics.CodeAnalysis
             MetadataReference[] references = null,
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null,
             TargetFramework targetFramework = TargetFramework.Standard
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             VerifyOperationTreeAndDiagnosticsForTest<TSyntaxNode>(
                 testSrc,
                 expectedOperationTree,
@@ -2714,7 +2728,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpParseOptions parseOptions = null,
             MetadataReference[] references = null,
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var compilation = CreateCompilation(
                 testSrc,
@@ -2739,7 +2754,8 @@ namespace System.Diagnostics.CodeAnalysis
             MetadataReference[] references = null,
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null,
             bool useLatestFrameworkReferences = false
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var compilation = CreateCompilation(
                 testSyntaxes,
@@ -2765,7 +2781,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpParseOptions parseOptions = null,
             MetadataReference[] references = null,
             bool useLatestFrameworkReferences = false
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             VerifyFlowGraphAndDiagnosticsForTest<TSyntaxNode>(
                 testSrc,
@@ -2788,7 +2805,8 @@ namespace System.Diagnostics.CodeAnalysis
             CSharpCompilationOptions compilationOptions = null,
             CSharpParseOptions parseOptions = null,
             MetadataReference[] references = null
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var compilation = CreateCompilation(
                 testSrc,
@@ -2814,7 +2832,8 @@ namespace System.Diagnostics.CodeAnalysis
             MetadataReference[] references = null,
             Action<IOperation, Compilation, SyntaxNode> additionalOperationTreeVerifier = null,
             TargetFramework targetFramework = TargetFramework.Standard
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var ilReference = CreateMetadataReferenceFromIlSource(ilSource);
             VerifyOperationTreeAndDiagnosticsForTest<TSyntaxNode>(

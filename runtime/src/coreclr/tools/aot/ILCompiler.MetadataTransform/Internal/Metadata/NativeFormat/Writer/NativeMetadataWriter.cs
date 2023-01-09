@@ -169,12 +169,14 @@ namespace Internal.Metadata.NativeFormat.Writer
             _graph.AddVertex(MetaSourceVertex);
         }
 
-        internal T MapToPooledRecord<T>(T rec) where T : MetadataRecord
+        internal T MapToPooledRecord<T>(T rec)
+            where T : MetadataRecord
         {
             return (T)_recordPool[rec];
         }
 
-        private T GetPooledRecord<T>(T rec) where T : MetadataRecord
+        private T GetPooledRecord<T>(T rec)
+            where T : MetadataRecord
         {
             if (rec == null)
                 return rec;
@@ -193,7 +195,8 @@ namespace Internal.Metadata.NativeFormat.Writer
         }
 
         // Adds a Vertex
-        public T Visit<T>(T rec) where T : MetadataRecord
+        public T Visit<T>(T rec)
+            where T : MetadataRecord
         {
             rec = GetPooledRecord(rec);
 
@@ -568,7 +571,8 @@ namespace Internal.Metadata.NativeFormat.Writer
             IEnumerable<T> arr,
             string sep = ", ",
             bool includeHandleValue = false
-        ) where T : MetadataRecord
+        )
+            where T : MetadataRecord
         {
             return string.Join(sep, arr.Select(v => v.ToString(includeHandleValue)));
         }
@@ -1023,7 +1027,8 @@ namespace Internal.Metadata.NativeFormat.Writer
 
     public static class EnumHelpers
     {
-        public static string FlagsToString<T>(this T value) where T : struct, Enum, IConvertible
+        public static string FlagsToString<T>(this T value)
+            where T : struct, Enum, IConvertible
         {
             var flags = Enum.GetValues<T>()
                 .Where(
@@ -1052,7 +1057,8 @@ namespace Internal.Metadata.NativeFormat.Writer
             return default(T);
         }
 
-        public static T First<T>(this List<T> list) where T : class
+        public static T First<T>(this List<T> list)
+            where T : class
         {
             if (list.Count != 0)
                 return list[0];
@@ -1070,7 +1076,8 @@ namespace Internal.Metadata.NativeFormat.Writer
             return default(T);
         }
 
-        internal static T First<T>(this Dictionary<string, T> dict) where T : class
+        internal static T First<T>(this Dictionary<string, T> dict)
+            where T : class
         {
             if (dict.Count != 0)
                 foreach (var value in dict.Values)

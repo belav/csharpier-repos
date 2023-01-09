@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddHttpMessageHandler<THandler>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder
-        ) where THandler : System.Net.Http.DelegatingHandler
+        )
+            where THandler : System.Net.Http.DelegatingHandler
         {
             throw null;
         }
@@ -42,7 +43,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddTypedClient<TClient>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<System.Net.Http.HttpClient, System.IServiceProvider, TClient> factory
-        ) where TClient : class
+        )
+            where TClient : class
         {
             throw null;
         }
@@ -50,7 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder AddTypedClient<TClient>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder,
             System.Func<System.Net.Http.HttpClient, TClient> factory
-        ) where TClient : class
+        )
+            where TClient : class
         {
             throw null;
         }
@@ -113,7 +116,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.DependencyInjection.IHttpClientBuilder ConfigurePrimaryHttpMessageHandler<THandler>(
             this Microsoft.Extensions.DependencyInjection.IHttpClientBuilder builder
-        ) where THandler : System.Net.Http.HttpMessageHandler
+        )
+            where THandler : System.Net.Http.HttpMessageHandler
         {
             throw null;
         }
@@ -197,7 +201,8 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<System.IServiceProvider, System.Net.Http.HttpClient> configureClient
-        ) where TClient : class
+        )
+            where TClient : class
         {
             throw null;
         }
@@ -210,7 +215,8 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Action<System.Net.Http.HttpClient> configureClient
-        ) where TClient : class
+        )
+            where TClient : class
         {
             throw null;
         }
@@ -235,7 +241,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string name,
             System.Action<System.IServiceProvider, System.Net.Http.HttpClient> configureClient
-        ) where TClient : class
+        )
+            where TClient : class
         {
             throw null;
         }
@@ -249,7 +256,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string name,
             System.Action<System.Net.Http.HttpClient> configureClient
-        ) where TClient : class
+        )
+            where TClient : class
         {
             throw null;
         }

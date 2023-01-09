@@ -22,7 +22,8 @@ public static class MvcWebApplicationBuilderExtensions
         this IWebHostBuilder builder,
         string culture,
         string uiCulture
-    ) where TStartup : class
+    )
+        where TStartup : class
     {
         if (culture == null)
         {

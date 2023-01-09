@@ -20,7 +20,8 @@ namespace System.Runtime.InteropServices.JavaScript
         TypedArrayTypeCode GetTypedArrayType();
     }
 
-    public interface ITypedArray<T, U> where U : struct
+    public interface ITypedArray<T, U>
+        where U : struct
     {
         T Slice();
         T Slice(int begin);

@@ -20,7 +20,8 @@ public static class FunctionalTestsServiceCollectionExtensions
     public static IServiceCollection SetupTestDatabase<TContext>(
         this IServiceCollection services,
         DbConnection connection
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var descriptor = services.SingleOrDefault(
             d => d.ServiceType == typeof(DbContextOptions<TContext>)
@@ -49,7 +50,8 @@ public static class FunctionalTestsServiceCollectionExtensions
     private static DbContextOptions<TContext> DbContextOptionsFactory<TContext>(
         IServiceProvider applicationServiceProvider,
         Action<IServiceProvider, DbContextOptionsBuilder> optionsAction
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var builder = new DbContextOptionsBuilder<TContext>(
             new DbContextOptions<TContext>(new Dictionary<Type, IDbContextOptionsExtension>())

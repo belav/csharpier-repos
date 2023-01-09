@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
     internal abstract class AbstractMethodOrPropertyOrEventSymbolReferenceFinder<TSymbol>
-        : AbstractReferenceFinder<TSymbol> where TSymbol : ISymbol
+        : AbstractReferenceFinder<TSymbol>
+        where TSymbol : ISymbol
     {
         protected static ImmutableArray<IMethodSymbol> GetReferencedAccessorSymbols(
             FindReferencesDocumentState state,

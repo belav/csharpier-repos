@@ -12,7 +12,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
     //
     // Note: The uninitialized state ("qr = default(QueryResult<M>)) is considered a valid state for this object, and represents an empty list of members.
     //
-    internal partial struct QueryResult<M> where M : MemberInfo
+    internal partial struct QueryResult<M>
+        where M : MemberInfo
     {
         public QueryResult(BindingFlags bindingAttr, QueriedMemberList<M> queriedMembers)
         {

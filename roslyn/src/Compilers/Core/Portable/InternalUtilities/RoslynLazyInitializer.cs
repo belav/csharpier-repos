@@ -11,8 +11,8 @@ namespace Roslyn.Utilities
     internal static class RoslynLazyInitializer
     {
         /// <inheritdoc cref="LazyInitializer.EnsureInitialized{T}(ref T)"/>
-        public static T EnsureInitialized<T>([NotNull] ref T? target) where T : class =>
-            LazyInitializer.EnsureInitialized<T>(ref target!);
+        public static T EnsureInitialized<T>([NotNull] ref T? target)
+            where T : class => LazyInitializer.EnsureInitialized<T>(ref target!);
 
         /// <inheritdoc cref="LazyInitializer.EnsureInitialized{T}(ref T, Func{T})"/>
         public static T EnsureInitialized<T>([NotNull] ref T? target, Func<T> valueFactory)

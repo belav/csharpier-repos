@@ -60,7 +60,8 @@ public class AuthenticationOptions
     /// <param name="displayName">The display name for the scheme.</param>
     public void AddScheme<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
-    >(string name, string? displayName) where THandler : IAuthenticationHandler
+    >(string name, string? displayName)
+        where THandler : IAuthenticationHandler
     {
         var state = new AddSchemeState(typeof(THandler));
         AddScheme(

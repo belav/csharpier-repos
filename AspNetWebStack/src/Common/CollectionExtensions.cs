@@ -146,7 +146,8 @@ namespace System.Collections.Generic
             this IList<TInput> list,
             Action<TArg1> errorAction,
             TArg1 errorArg1
-        ) where TMatch : class
+        )
+            where TMatch : class
         {
             Contract.Assert(list != null);
             Contract.Assert(errorAction != null);
@@ -174,7 +175,8 @@ namespace System.Collections.Generic
         /// <summary>
         /// Convert an ICollection to an array, removing null values. Fast path for case where there are no null values.
         /// </summary>
-        public static T[] ToArrayWithoutNulls<T>(this ICollection<T> collection) where T : class
+        public static T[] ToArrayWithoutNulls<T>(this ICollection<T> collection)
+            where T : class
         {
             Contract.Assert(collection != null);
 

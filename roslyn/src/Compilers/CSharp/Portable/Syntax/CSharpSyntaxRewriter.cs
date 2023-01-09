@@ -184,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return list;
         }
 
-        public virtual TNode? VisitListElement<TNode>(TNode? node) where TNode : SyntaxNode
+        public virtual TNode? VisitListElement<TNode>(TNode? node)
+            where TNode : SyntaxNode
         {
             return (TNode?)this.Visit(node);
         }

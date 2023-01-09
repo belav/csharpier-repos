@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
     /// </summary>
     /// <typeparam name="T">Used to distinguish what type of object this ID applies to. This is dropped in serialization, but simply helps
     /// to ensure type safety in the code so we don't cross IDs of different types.</typeparam>
-    internal readonly struct Id<T> : IEquatable<Id<T>>, ISerializableId where T : Element
+    internal readonly struct Id<T> : IEquatable<Id<T>>, ISerializableId
+        where T : Element
     {
         public Id(int id)
         {
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         /// <summary>
         /// Fetches a strongly-typed <see cref="Id{T}"/> for a given element.
         /// </summary>
-        public static Id<T> GetId<T>(this T element) where T : Element
+        public static Id<T> GetId<T>(this T element)
+            where T : Element
         {
             return new Id<T>(element.Id.NumericId);
         }

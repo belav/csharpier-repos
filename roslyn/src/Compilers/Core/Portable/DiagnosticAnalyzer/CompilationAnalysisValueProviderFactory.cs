@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public CompilationAnalysisValueProvider<TKey, TValue> GetValueProvider<TKey, TValue>(
             AnalysisValueProvider<TKey, TValue> analysisSharedStateProvider
-        ) where TKey : class
+        )
+            where TKey : class
         {
             if (_lazySharedStateProviderMap == null)
             {

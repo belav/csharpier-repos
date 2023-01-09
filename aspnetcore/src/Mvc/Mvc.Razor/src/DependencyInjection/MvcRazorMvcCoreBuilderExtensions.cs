@@ -116,7 +116,8 @@ public static class MvcRazorMvcCoreBuilderExtensions
     public static IMvcCoreBuilder InitializeTagHelper<TTagHelper>(
         this IMvcCoreBuilder builder,
         Action<TTagHelper, ViewContext> initialize
-    ) where TTagHelper : ITagHelper
+    )
+        where TTagHelper : ITagHelper
     {
         if (builder == null)
         {

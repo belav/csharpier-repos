@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         private static void TransferTrivia<TSyntaxNode>(
             IList<TSyntaxNode> originalList,
             IList<TSyntaxNode> finalList
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             Debug.Assert(originalList.Count == finalList.Count);
 
@@ -75,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         private static void FixupOriginalFirstNode<TSyntaxNode>(
             IList<TSyntaxNode> originalList,
             IList<TSyntaxNode> finalList
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // Now, find the original node in the final list.
             var originalFirstNode = originalList[0];
@@ -98,7 +100,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
         private static void CopyBanner<TSyntaxNode>(
             IList<TSyntaxNode> originalList,
             IList<TSyntaxNode> finalList
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             // First. Strip any pp directives or banners on the first node.  They
             // have to stay at the top of the list.

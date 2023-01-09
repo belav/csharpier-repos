@@ -30,7 +30,8 @@ namespace Roslyn.Utilities
             TKey key,
             Func<TKey, TArg, TValue> valueFactory,
             TArg factoryArgument
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
 #if NETCOREAPP
             return dictionary.GetOrAdd(key, valueFactory, factoryArgument);

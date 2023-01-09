@@ -59,7 +59,8 @@ namespace Microsoft.TestCommon
             TResult expectedDefaultValue,
             bool allowNull = false,
             TResult roundTripTestValue = null
-        ) where TResult : class
+        )
+            where TResult : class
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -97,7 +98,8 @@ namespace Microsoft.TestCommon
             TResult? maxLegalValue,
             TResult? illegalUpperValue,
             TResult roundTripTestValue
-        ) where TResult : struct
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -153,7 +155,8 @@ namespace Microsoft.TestCommon
             TResult? maxLegalValue,
             TResult? illegalUpperValue,
             TResult roundTripTestValue
-        ) where TResult : struct
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult?> getFunc = (obj) => (TResult?)property.GetValue(obj, index: null);
@@ -224,7 +227,8 @@ namespace Microsoft.TestCommon
             TResult expectedDefaultValue,
             TResult illegalValue,
             TResult roundTripTestValue
-        ) where TResult : struct
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);
@@ -250,7 +254,8 @@ namespace Microsoft.TestCommon
             Expression<Func<T, TResult>> propertyGetter,
             TResult expectedDefaultValue,
             TResult roundTripTestValue
-        ) where TResult : struct
+        )
+            where TResult : struct
         {
             PropertyInfo property = GetPropertyInfo(propertyGetter);
             Func<T, TResult> getFunc = (obj) => (TResult)property.GetValue(obj, index: null);

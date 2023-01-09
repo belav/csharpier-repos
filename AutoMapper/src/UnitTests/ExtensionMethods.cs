@@ -49,7 +49,8 @@ public static class GenericExtensions
 {
     private static int GetValue(this IGeneric<int> _) => 12;
 
-    private static int Count<T>(this IGeneric<T> _) where T : IDisposable => 12;
+    private static int Count<T>(this IGeneric<T> _)
+        where T : IDisposable => 12;
 }
 
 public class When_an_extension_method_is_for_a_base_class : AutoMapperSpecBase

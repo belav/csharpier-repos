@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class NorthwindQueryFixtureBase<TModelCustomizer>
     : SharedStoreFixtureBase<NorthwindContext>,
-        IFilteredQueryFixtureBase where TModelCustomizer : IModelCustomizer, new()
+        IFilteredQueryFixtureBase
+    where TModelCustomizer : IModelCustomizer, new()
 {
     public Func<DbContext> GetContextCreator() => () => CreateContext();
 

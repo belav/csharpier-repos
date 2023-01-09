@@ -307,13 +307,15 @@ namespace System.Collections.Tests
     public static class ValueComparable
     {
         // Convenience method so the compiler can work its type inference magic.
-        public static ValueComparable<T> Create<T>(T value) where T : IComparable<T>
+        public static ValueComparable<T> Create<T>(T value)
+            where T : IComparable<T>
         {
             return new ValueComparable<T>(value);
         }
     }
 
-    public struct ValueComparable<T> : IComparable<ValueComparable<T>> where T : IComparable<T>
+    public struct ValueComparable<T> : IComparable<ValueComparable<T>>
+        where T : IComparable<T>
     {
         public ValueComparable(T value)
         {

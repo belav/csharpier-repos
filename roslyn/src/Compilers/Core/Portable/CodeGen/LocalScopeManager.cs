@@ -268,7 +268,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             protected static ScopeBounds GetLocalScopes<TScopeInfo>(
                 ArrayBuilder<Cci.LocalScope> result,
                 ImmutableArray<TScopeInfo>.Builder scopes
-            ) where TScopeInfo : ScopeInfo
+            )
+                where TScopeInfo : ScopeInfo
             {
                 Debug.Assert(scopes.Count > 0);
 
@@ -296,7 +297,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             protected static ScopeBounds GetHoistedLocalScopes<TScopeInfo>(
                 ArrayBuilder<StateMachineHoistedLocalScope> result,
                 ImmutableArray<TScopeInfo>.Builder scopes
-            ) where TScopeInfo : ScopeInfo
+            )
+                where TScopeInfo : ScopeInfo
             {
                 Debug.Assert(scopes.Count > 0);
 

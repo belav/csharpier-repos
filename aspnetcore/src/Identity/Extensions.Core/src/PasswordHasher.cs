@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Implements the standard Identity password hashing.
 /// </summary>
 /// <typeparam name="TUser">The type used to represent a user.</typeparam>
-public class PasswordHasher<TUser> : IPasswordHasher<TUser> where TUser : class
+public class PasswordHasher<TUser> : IPasswordHasher<TUser>
+    where TUser : class
 {
     /* =======================
      * HASHED PASSWORD FORMATS

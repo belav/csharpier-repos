@@ -508,7 +508,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             IOption2 option,
             string? language,
             TCodeStyleOption newValue
-        ) where TCodeStyleOption : ICodeStyleOption
+        )
+            where TCodeStyleOption : ICodeStyleOption
         {
             var optionService = GetOptionService(workspace.Services);
             var originalOptionSet = new SolutionOptionSet(optionService);

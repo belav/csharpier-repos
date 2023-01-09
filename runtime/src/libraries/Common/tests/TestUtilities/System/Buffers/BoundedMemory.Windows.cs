@@ -12,7 +12,8 @@ namespace System.Buffers
         private static WindowsImplementation<T> AllocateWithoutDataPopulationWindows<T>(
             int elementCount,
             PoisonPagePlacement placement
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             long cb,
                 totalBytesToAllocate;
@@ -75,7 +76,8 @@ namespace System.Buffers
             };
         }
 
-        private sealed class WindowsImplementation<T> : BoundedMemory<T> where T : unmanaged
+        private sealed class WindowsImplementation<T> : BoundedMemory<T>
+            where T : unmanaged
         {
             private readonly VirtualAllocHandle _handle;
             private readonly int _byteOffsetIntoHandle;

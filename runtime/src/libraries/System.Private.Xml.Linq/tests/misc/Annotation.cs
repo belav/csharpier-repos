@@ -466,7 +466,8 @@ namespace System.Xml.Linq.Tests
             return aObject;
         }
 
-        private static void ValidateAnnotations<T>(XObject xo, T[] values) where T : class
+        private static void ValidateAnnotations<T>(XObject xo, T[] values)
+            where T : class
         {
             //
             // use inefficient n^2 algorithm, which is OK for our testing purposes
@@ -511,7 +512,8 @@ namespace System.Xml.Linq.Tests
             }
         }
 
-        private static int CountAnnotations<T>(XObject xo) where T : class
+        private static int CountAnnotations<T>(XObject xo)
+            where T : class
         {
             int count = xo.Annotations(typeof(T)).Count();
             Assert.Equal(count, xo.Annotations<T>().Count());
@@ -533,7 +535,8 @@ namespace System.Xml.Linq.Tests
             xo.RemoveAnnotations(type);
         }
 
-        private static void RemoveAnnotations<T>(XObject xo) where T : class
+        private static void RemoveAnnotations<T>(XObject xo)
+            where T : class
         {
             xo.RemoveAnnotations<T>();
         }

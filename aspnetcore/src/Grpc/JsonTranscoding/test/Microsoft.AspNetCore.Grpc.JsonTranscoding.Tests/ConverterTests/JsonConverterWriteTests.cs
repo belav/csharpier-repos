@@ -462,7 +462,8 @@ public class JsonConverterWriteTests
         TValue value,
         GrpcJsonSettings? settings = null,
         bool? compareRawStrings = null
-    ) where TValue : IMessage
+    )
+        where TValue : IMessage
     {
         var typeRegistery = TypeRegistry.FromFiles(
             HelloRequest.Descriptor.File,

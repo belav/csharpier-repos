@@ -107,7 +107,8 @@ namespace System.Formats.Asn1
             AsnEncodingRules ruleSet,
             out int bytesConsumed,
             Asn1Tag? expectedTag = null
-        ) where TFlagsEnum : Enum
+        )
+            where TFlagsEnum : Enum
         {
             Type tFlagsEnum = typeof(TFlagsEnum);
 

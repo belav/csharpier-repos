@@ -71,7 +71,8 @@ internal static class BufferExtensions
         in this ReadOnlySequence<T> source,
         T value0,
         T value1
-    ) where T : IEquatable<T>
+    )
+        where T : IEquatable<T>
     {
         if (source.IsSingleSegment)
         {
@@ -93,7 +94,8 @@ internal static class BufferExtensions
         in ReadOnlySequence<T> source,
         T value0,
         T value1
-    ) where T : IEquatable<T>
+    )
+        where T : IEquatable<T>
     {
         SequencePosition position = source.Start;
         SequencePosition result = position;

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static partial class ITextViewExtensions
     {
-        private class PerSubjectBufferProperty<TProperty, TTextView> where TTextView : ITextView
+        private class PerSubjectBufferProperty<TProperty, TTextView>
+            where TTextView : ITextView
         {
             private readonly TTextView _textView;
             private readonly Dictionary<

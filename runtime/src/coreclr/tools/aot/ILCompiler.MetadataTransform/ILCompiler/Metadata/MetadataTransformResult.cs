@@ -9,7 +9,8 @@ using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.Metadata
 {
-    public struct MetadataTransformResult<T> where T : struct, IMetadataPolicy
+    public struct MetadataTransformResult<T>
+        where T : struct, IMetadataPolicy
     {
         private Transform<T> _transform;
 

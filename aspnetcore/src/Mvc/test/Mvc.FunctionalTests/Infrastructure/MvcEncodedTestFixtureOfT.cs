@@ -8,7 +8,8 @@ using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class MvcEncodedTestFixture<TStartup> : MvcTestFixture<TStartup> where TStartup : class
+public class MvcEncodedTestFixture<TStartup> : MvcTestFixture<TStartup>
+    where TStartup : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {

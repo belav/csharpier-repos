@@ -167,23 +167,28 @@ public abstract partial class ModelBuilderTest
             return this;
         }
 
-        public abstract TestEntityTypeBuilder<TEntity> Entity<TEntity>() where TEntity : class;
+        public abstract TestEntityTypeBuilder<TEntity> Entity<TEntity>()
+            where TEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> SharedTypeEntity<TEntity>(string name)
             where TEntity : class;
 
-        public abstract TestOwnedEntityTypeBuilder<TEntity> Owned<TEntity>() where TEntity : class;
+        public abstract TestOwnedEntityTypeBuilder<TEntity> Owned<TEntity>()
+            where TEntity : class;
 
         public abstract TestModelBuilder Entity<TEntity>(
             Action<TestEntityTypeBuilder<TEntity>> buildAction
-        ) where TEntity : class;
+        )
+            where TEntity : class;
 
         public abstract TestModelBuilder SharedTypeEntity<TEntity>(
             string name,
             Action<TestEntityTypeBuilder<TEntity>> buildAction
-        ) where TEntity : class;
+        )
+            where TEntity : class;
 
-        public abstract TestModelBuilder Ignore<TEntity>() where TEntity : class;
+        public abstract TestModelBuilder Ignore<TEntity>()
+            where TEntity : class;
 
         public virtual IModel FinalizeModel() => ModelBuilder.FinalizeModel(designTime: true);
 
@@ -199,7 +204,8 @@ public abstract partial class ModelBuilderTest
         ModelBuilder IInfrastructure<ModelBuilder>.Instance => ModelBuilder;
     }
 
-    public abstract class TestEntityTypeBuilder<TEntity> where TEntity : class
+    public abstract class TestEntityTypeBuilder<TEntity>
+        where TEntity : class
     {
         public abstract IMutableEntityType Metadata { get; }
         public abstract TestEntityTypeBuilder<TEntity> HasAnnotation(
@@ -232,11 +238,13 @@ public abstract partial class ModelBuilderTest
 
         public abstract TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TEntity, TNavigation?>> navigationExpression
-        ) where TNavigation : class;
+        )
+            where TNavigation : class;
 
         public abstract TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TEntity, IEnumerable<TNavigation>?>> navigationExpression
-        ) where TNavigation : class;
+        )
+            where TNavigation : class;
 
         public abstract TestEntityTypeBuilder<TEntity> Ignore(
             Expression<Func<TEntity, object?>> propertyExpression
@@ -255,48 +263,57 @@ public abstract partial class ModelBuilderTest
 
         public abstract TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             string navigationName
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             string entityTypeName,
             string navigationName
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             string navigationName,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             string entityTypeName,
             string navigationName,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             string entityTypeName,
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             string entityTypeName,
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
             TRelatedEntity
-        > OwnsMany<TRelatedEntity>(string navigationName) where TRelatedEntity : class;
+        > OwnsMany<TRelatedEntity>(string navigationName)
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
@@ -307,20 +324,23 @@ public abstract partial class ModelBuilderTest
         public abstract TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
             string navigationName,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
             string entityTypeName,
             string navigationName,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
             TRelatedEntity
         > OwnsMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
@@ -328,42 +348,49 @@ public abstract partial class ModelBuilderTest
         > OwnsMany<TRelatedEntity>(
             string entityTypeName,
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> OwnsMany<TRelatedEntity>(
             string entityTypeName,
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestReferenceNavigationBuilder<
             TEntity,
             TRelatedEntity
-        > HasOne<TRelatedEntity>(string? navigationName) where TRelatedEntity : class;
+        > HasOne<TRelatedEntity>(string? navigationName)
+            where TRelatedEntity : class;
 
         public abstract TestReferenceNavigationBuilder<
             TEntity,
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestCollectionNavigationBuilder<
             TEntity,
             TRelatedEntity
-        > HasMany<TRelatedEntity>(string? navigationName) where TRelatedEntity : class;
+        > HasMany<TRelatedEntity>(string? navigationName)
+            where TRelatedEntity : class;
 
         public abstract TestCollectionNavigationBuilder<
             TEntity,
             TRelatedEntity
         > HasMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestEntityTypeBuilder<TEntity> HasQueryFilter(
             Expression<Func<TEntity, bool>> filter
@@ -417,7 +444,8 @@ public abstract partial class ModelBuilderTest
         );
     }
 
-    public abstract class TestOwnedEntityTypeBuilder<TEntity> where TEntity : class { }
+    public abstract class TestOwnedEntityTypeBuilder<TEntity>
+        where TEntity : class { }
 
     public abstract class TestKeyBuilder<TEntity>
     {
@@ -651,14 +679,16 @@ public abstract partial class ModelBuilderTest
             TRelatedEntity
         > HasForeignKey<TDependentEntity>(
             Expression<Func<TDependentEntity, object?>> foreignKeyExpression
-        ) where TDependentEntity : class;
+        )
+            where TDependentEntity : class;
 
         public abstract TestReferenceReferenceBuilder<
             TEntity,
             TRelatedEntity
         > HasPrincipalKey<TPrincipalEntity>(
             Expression<Func<TPrincipalEntity, object?>> keyExpression
-        ) where TPrincipalEntity : class;
+        )
+            where TPrincipalEntity : class;
 
         public abstract TestReferenceReferenceBuilder<
             TEntity,
@@ -694,7 +724,8 @@ public abstract partial class ModelBuilderTest
 
         public abstract TestEntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>(
             string joinEntityName
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
 
         public abstract TestEntityTypeBuilder<TRightEntity> UsingEntity(
             Action<TestEntityTypeBuilder<Dictionary<string, object>>> configureJoinEntityType
@@ -707,12 +738,14 @@ public abstract partial class ModelBuilderTest
 
         public abstract TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
 
         public abstract TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
             string joinEntityName,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
 
         public abstract TestEntityTypeBuilder<Dictionary<string, object>> UsingEntity(
             Func<
@@ -746,7 +779,8 @@ public abstract partial class ModelBuilderTest
                 TestEntityTypeBuilder<TJoinEntity>,
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
 
         public abstract TestEntityTypeBuilder<TJoinEntity> UsingEntity<TJoinEntity>(
             string joinEntityName,
@@ -758,7 +792,8 @@ public abstract partial class ModelBuilderTest
                 TestEntityTypeBuilder<TJoinEntity>,
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
 
         public abstract TestEntityTypeBuilder<TRightEntity> UsingEntity(
             Func<
@@ -795,7 +830,8 @@ public abstract partial class ModelBuilderTest
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
 
         public abstract TestEntityTypeBuilder<TRightEntity> UsingEntity<TJoinEntity>(
             string joinEntityName,
@@ -808,7 +844,8 @@ public abstract partial class ModelBuilderTest
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class;
+        )
+            where TJoinEntity : class;
     }
 
     public abstract class TestOwnershipBuilder<TEntity, TDependentEntity>
@@ -867,11 +904,13 @@ public abstract partial class ModelBuilderTest
 
         public abstract TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TDependentEntity, TNavigation?>> navigationExpression
-        ) where TNavigation : class;
+        )
+            where TNavigation : class;
 
         public abstract TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TDependentEntity, IEnumerable<TNavigation>?>> navigationExpression
-        ) where TNavigation : class;
+        )
+            where TNavigation : class;
 
         public abstract TestOwnedNavigationBuilder<TEntity, TDependentEntity> Ignore(
             string propertyName
@@ -899,7 +938,8 @@ public abstract partial class ModelBuilderTest
             TNewRelatedEntity
         > OwnsOne<TNewRelatedEntity>(
             Expression<Func<TDependentEntity, TNewRelatedEntity?>> navigationExpression
-        ) where TNewRelatedEntity : class;
+        )
+            where TNewRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TDependentEntity,
@@ -907,7 +947,8 @@ public abstract partial class ModelBuilderTest
         > OwnsOne<TNewRelatedEntity>(
             string entityTypeName,
             Expression<Func<TDependentEntity, TNewRelatedEntity?>> navigationExpression
-        ) where TNewRelatedEntity : class;
+        )
+            where TNewRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
@@ -915,7 +956,8 @@ public abstract partial class ModelBuilderTest
         > OwnsOne<TNewRelatedEntity>(
             Expression<Func<TDependentEntity, TNewRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewRelatedEntity>> buildAction
-        ) where TNewRelatedEntity : class;
+        )
+            where TNewRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
@@ -924,7 +966,8 @@ public abstract partial class ModelBuilderTest
             string entityTypeName,
             Expression<Func<TDependentEntity, TNewRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewRelatedEntity>> buildAction
-        ) where TNewRelatedEntity : class;
+        )
+            where TNewRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TDependentEntity,
@@ -933,7 +976,8 @@ public abstract partial class ModelBuilderTest
             Expression<
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression
-        ) where TNewDependentEntity : class;
+        )
+            where TNewDependentEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TDependentEntity,
@@ -943,7 +987,8 @@ public abstract partial class ModelBuilderTest
             Expression<
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression
-        ) where TNewDependentEntity : class;
+        )
+            where TNewDependentEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
@@ -953,7 +998,8 @@ public abstract partial class ModelBuilderTest
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class;
+        )
+            where TNewDependentEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,
@@ -964,14 +1010,16 @@ public abstract partial class ModelBuilderTest
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class;
+        )
+            where TNewDependentEntity : class;
 
         public abstract TestReferenceNavigationBuilder<
             TDependentEntity,
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TDependentEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class;
+        )
+            where TRelatedEntity : class;
 
         public abstract TestOwnedNavigationBuilder<
             TEntity,

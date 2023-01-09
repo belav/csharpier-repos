@@ -3576,7 +3576,8 @@ namespace System.Web.Mvc.Test
 
         // Helper classes
 
-        class TestableDefaultModelBinder<TModel> : DefaultModelBinder where TModel : new()
+        class TestableDefaultModelBinder<TModel> : DefaultModelBinder
+            where TModel : new()
         {
             public TestableDefaultModelBinder()
                 : this(new TModel()) { }

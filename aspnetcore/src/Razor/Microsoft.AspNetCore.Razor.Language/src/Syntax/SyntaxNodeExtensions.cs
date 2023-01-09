@@ -14,7 +14,8 @@ internal static class SyntaxNodeExtensions
     public static TNode WithAnnotations<TNode>(
         this TNode node,
         params SyntaxAnnotation[] annotations
-    ) where TNode : SyntaxNode
+    )
+        where TNode : SyntaxNode
     {
         return (TNode)node.Green.SetAnnotations(annotations).CreateRed(node.Parent, node.Position);
     }
@@ -42,7 +43,8 @@ internal static class SyntaxNodeExtensions
     public static TNode WithDiagnostics<TNode>(
         this TNode node,
         params RazorDiagnostic[] diagnostics
-    ) where TNode : SyntaxNode
+    )
+        where TNode : SyntaxNode
     {
         return (TNode)node.Green.SetDiagnostics(diagnostics).CreateRed(node.Parent, node.Position);
     }
@@ -50,7 +52,8 @@ internal static class SyntaxNodeExtensions
     public static TNode AppendDiagnostic<TNode>(
         this TNode node,
         params RazorDiagnostic[] diagnostics
-    ) where TNode : SyntaxNode
+    )
+        where TNode : SyntaxNode
     {
         var existingDiagnostics = node.GetDiagnostics();
         var allDiagnostics = new RazorDiagnostic[diagnostics.Length + existingDiagnostics.Length];
@@ -142,7 +145,8 @@ internal static class SyntaxNodeExtensions
         this TRoot root,
         IEnumerable<SyntaxNode> nodes,
         Func<SyntaxNode, SyntaxNode, SyntaxNode> computeReplacementNode
-    ) where TRoot : SyntaxNode
+    )
+        where TRoot : SyntaxNode
     {
         return (TRoot)
             root.ReplaceCore(nodes: nodes, computeReplacementNode: computeReplacementNode);
@@ -200,7 +204,8 @@ internal static class SyntaxNodeExtensions
         this TRoot root,
         SyntaxNode oldNode,
         IEnumerable<SyntaxNode> newNodes
-    ) where TRoot : SyntaxNode
+    )
+        where TRoot : SyntaxNode
     {
         return (TRoot)root.ReplaceNodeInListCore(oldNode, newNodes);
     }
@@ -216,7 +221,8 @@ internal static class SyntaxNodeExtensions
         this TRoot root,
         SyntaxNode nodeInList,
         IEnumerable<SyntaxNode> newNodes
-    ) where TRoot : SyntaxNode
+    )
+        where TRoot : SyntaxNode
     {
         return (TRoot)root.InsertNodesInListCore(nodeInList, newNodes, insertBefore: true);
     }
@@ -232,12 +238,14 @@ internal static class SyntaxNodeExtensions
         this TRoot root,
         SyntaxNode nodeInList,
         IEnumerable<SyntaxNode> newNodes
-    ) where TRoot : SyntaxNode
+    )
+        where TRoot : SyntaxNode
     {
         return (TRoot)root.InsertNodesInListCore(nodeInList, newNodes, insertBefore: false);
     }
 
-    public static string GetContent<TNode>(this TNode node) where TNode : SyntaxNode
+    public static string GetContent<TNode>(this TNode node)
+        where TNode : SyntaxNode
     {
         var builder = new StringBuilder();
         foreach (var token in node.DescendantNodesAndSelf())

@@ -3,7 +3,8 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-internal abstract class TestContext<TEntity> : DbContext where TEntity : class
+internal abstract class TestContext<TEntity> : DbContext
+    where TEntity : class
 {
     private static readonly InMemoryDatabaseRoot _dbRoot = new();
 

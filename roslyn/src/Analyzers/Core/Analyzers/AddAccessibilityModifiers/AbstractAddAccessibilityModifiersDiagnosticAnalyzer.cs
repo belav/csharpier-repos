@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
     internal abstract class AbstractAddAccessibilityModifiersDiagnosticAnalyzer<TCompilationUnitSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TCompilationUnitSyntax : SyntaxNode
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        where TCompilationUnitSyntax : SyntaxNode
     {
         protected AbstractAddAccessibilityModifiersDiagnosticAnalyzer()
             : base(

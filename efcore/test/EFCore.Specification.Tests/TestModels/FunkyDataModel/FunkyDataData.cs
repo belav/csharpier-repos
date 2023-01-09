@@ -14,7 +14,8 @@ public class FunkyDataData : ISetSource
         FunkyCustomers = CreateFunkyCustomers();
     }
 
-    public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public virtual IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(FunkyCustomer))
         {

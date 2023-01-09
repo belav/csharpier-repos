@@ -121,8 +121,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions.ContextQuery
                 .InferTypes(semanticModel, position, cancellationToken);
         }
 
-        public TService? GetLanguageService<TService>() where TService : class, ILanguageService =>
-            Document.GetLanguageService<TService>();
+        public TService? GetLanguageService<TService>()
+            where TService : class, ILanguageService => Document.GetLanguageService<TService>();
 
         public TService GetRequiredLanguageService<TService>()
             where TService : class, ILanguageService =>

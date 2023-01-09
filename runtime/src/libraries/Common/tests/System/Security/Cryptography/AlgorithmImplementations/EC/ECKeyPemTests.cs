@@ -8,7 +8,8 @@ using Xunit;
 namespace System.Security.Cryptography.Tests
 {
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
-    public abstract class ECKeyPemTests<TAlg> where TAlg : ECAlgorithm
+    public abstract class ECKeyPemTests<TAlg>
+        where TAlg : ECAlgorithm
     {
         private const string AmbiguousExceptionMarker = "multiple keys";
         private const string EncryptedExceptionMarker = "encrypted key";

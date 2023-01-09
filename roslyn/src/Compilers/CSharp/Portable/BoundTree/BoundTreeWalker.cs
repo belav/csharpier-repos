@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         protected BoundTreeWalker() { }
 
-        public void VisitList<T>(ImmutableArray<T> list) where T : BoundNode
+        public void VisitList<T>(ImmutableArray<T> list)
+            where T : BoundNode
         {
             if (!list.IsDefault)
             {

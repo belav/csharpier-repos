@@ -18,7 +18,8 @@ namespace System.Data
         public static EnumerableRowCollection<TRow> Where<TRow>(
             this TypedTableBase<TRow> source,
             Func<TRow, bool> predicate
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(source);
@@ -31,7 +32,8 @@ namespace System.Data
         public static OrderedEnumerableRowCollection<TRow> OrderBy<TRow, TKey>(
             this TypedTableBase<TRow> source,
             Func<TRow, TKey> keySelector
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(source);
@@ -45,7 +47,8 @@ namespace System.Data
             this TypedTableBase<TRow> source,
             Func<TRow, TKey> keySelector,
             IComparer<TKey> comparer
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(source);
@@ -58,7 +61,8 @@ namespace System.Data
         public static OrderedEnumerableRowCollection<TRow> OrderByDescending<TRow, TKey>(
             this TypedTableBase<TRow> source,
             Func<TRow, TKey> keySelector
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(source);
@@ -72,7 +76,8 @@ namespace System.Data
             this TypedTableBase<TRow> source,
             Func<TRow, TKey> keySelector,
             IComparer<TKey> comparer
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(source);
@@ -87,7 +92,8 @@ namespace System.Data
         public static EnumerableRowCollection<S> Select<TRow, S>(
             this TypedTableBase<TRow> source,
             Func<TRow, S> selector
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             EnumerableRowCollection<TRow> erc = new EnumerableRowCollection<TRow>(source);
@@ -101,7 +107,8 @@ namespace System.Data
         /// <returns>IEnumerable of datarows.</returns>
         public static EnumerableRowCollection<TRow> AsEnumerable<TRow>(
             this TypedTableBase<TRow> source
-        ) where TRow : DataRow
+        )
+            where TRow : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             return new EnumerableRowCollection<TRow>(source as DataTable);

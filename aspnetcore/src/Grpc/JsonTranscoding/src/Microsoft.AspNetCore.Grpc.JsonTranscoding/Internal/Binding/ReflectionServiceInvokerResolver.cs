@@ -24,7 +24,8 @@ internal sealed class ReflectionServiceInvokerResolver<TService> : IServiceInvok
         string verb,
         HttpRule httpRule,
         MethodDescriptor methodDescriptor
-    ) where TDelegate : Delegate
+    )
+        where TDelegate : Delegate
     {
         var handlerMethod = GetMethod(methodName, methodParameters);
 

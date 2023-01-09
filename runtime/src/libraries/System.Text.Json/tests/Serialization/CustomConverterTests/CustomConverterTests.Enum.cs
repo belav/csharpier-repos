@@ -150,7 +150,8 @@ namespace System.Text.Json.Serialization.Tests
             }
         }
 
-        internal class JsonConverterEnumArray<T> : JsonConverter<T> where T : struct, Enum
+        internal class JsonConverterEnumArray<T> : JsonConverter<T>
+            where T : struct, Enum
         {
             public override bool CanConvert(Type type)
             {

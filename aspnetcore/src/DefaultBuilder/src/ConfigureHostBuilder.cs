@@ -147,7 +147,8 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     /// <inheritdoc />
     public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
         IServiceProviderFactory<TContainerBuilder> factory
-    ) where TContainerBuilder : notnull
+    )
+        where TContainerBuilder : notnull
     {
         if (factory is null)
         {
@@ -161,7 +162,8 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     /// <inheritdoc />
     public IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
         Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-    ) where TContainerBuilder : notnull
+    )
+        where TContainerBuilder : notnull
     {
         return UseServiceProviderFactory(factory(_context));
     }
@@ -205,7 +207,8 @@ public sealed class ConfigureHostBuilder : IHostBuilder, ISupportsConfigureWebHo
     }
 
     private sealed class ServiceProviderFactoryAdapter<TContainerBuilder>
-        : IServiceProviderFactory<object> where TContainerBuilder : notnull
+        : IServiceProviderFactory<object>
+        where TContainerBuilder : notnull
     {
         private readonly IServiceProviderFactory<TContainerBuilder> _serviceProviderFactory;
 

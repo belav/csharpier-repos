@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public class NorthwindBulkUpdatesSqliteFixture<TModelCustomizer>
-    : NorthwindBulkUpdatesFixture<TModelCustomizer> where TModelCustomizer : IModelCustomizer, new()
+    : NorthwindBulkUpdatesFixture<TModelCustomizer>
+    where TModelCustomizer : IModelCustomizer, new()
 {
     protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 

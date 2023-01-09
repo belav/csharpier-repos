@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             this CodeRefactoringContext context,
             ImmutableArray<TCodeAction> actions,
             TextSpan? applicableToSpan = null
-        ) where TCodeAction : CodeAction
+        )
+            where TCodeAction : CodeAction
         {
             if (!actions.IsDefault)
             {
@@ -42,13 +43,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
         public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
             this CodeRefactoringContext context
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             TryGetRelevantNodeAsync<TSyntaxNode>(context, allowEmptyNode: false);
 
         public static Task<TSyntaxNode?> TryGetRelevantNodeAsync<TSyntaxNode>(
             this CodeRefactoringContext context,
             bool allowEmptyNode
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             TryGetRelevantNodeAsync<TSyntaxNode>(
                 context.Document,
                 context.Span,
@@ -58,13 +61,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
 
         public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
             this CodeRefactoringContext context
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             GetRelevantNodesAsync<TSyntaxNode>(context, allowEmptyNodes: false);
 
         public static Task<ImmutableArray<TSyntaxNode>> GetRelevantNodesAsync<TSyntaxNode>(
             this CodeRefactoringContext context,
             bool allowEmptyNodes
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             GetRelevantNodesAsync<TSyntaxNode>(
                 context.Document,
                 context.Span,
@@ -76,7 +81,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             this Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             TryGetRelevantNodeAsync<TSyntaxNode>(
                 document,
                 span,
@@ -89,7 +95,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan span,
             bool allowEmptyNode,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var potentialNodes = await GetRelevantNodesAsync<TSyntaxNode>(
                     document,
@@ -105,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             this Document document,
             TextSpan span,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode =>
+        )
+            where TSyntaxNode : SyntaxNode =>
             GetRelevantNodesAsync<TSyntaxNode>(
                 document,
                 span,
@@ -118,7 +126,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
             TextSpan span,
             bool allowEmptyNodes,
             CancellationToken cancellationToken
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var helpers = document.GetRequiredLanguageService<IRefactoringHelpersService>();
             return helpers.GetRelevantNodesAsync<TSyntaxNode>(

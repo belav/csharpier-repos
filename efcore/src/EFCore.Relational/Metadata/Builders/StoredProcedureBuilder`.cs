@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <typeparam name="TEntity">The entity type being configured.</typeparam>
 public class StoredProcedureBuilder<TEntity>
     : StoredProcedureBuilder,
-        IInfrastructure<EntityTypeBuilder<TEntity>> where TEntity : class
+        IInfrastructure<EntityTypeBuilder<TEntity>>
+    where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -69,7 +70,8 @@ public class StoredProcedureBuilder<TEntity>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder<TEntity> HasParameter<TDerivedEntity, TProperty>(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression
-    ) where TDerivedEntity : class, TEntity
+    )
+        where TDerivedEntity : class, TEntity
     {
         Builder.HasParameter(propertyExpression, ConfigurationSource.Explicit);
         return this;
@@ -102,7 +104,8 @@ public class StoredProcedureBuilder<TEntity>
     public virtual StoredProcedureBuilder<TEntity> HasParameter<TDerivedEntity, TProperty>(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
         Action<StoredProcedureParameterBuilder> buildAction
-    ) where TDerivedEntity : class, TEntity
+    )
+        where TDerivedEntity : class, TEntity
     {
         var parameterBuilder = Builder.HasParameter(
             propertyExpression,
@@ -198,7 +201,8 @@ public class StoredProcedureBuilder<TEntity>
     >(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
         Action<StoredProcedureParameterBuilder> buildAction
-    ) where TDerivedEntity : class, TEntity
+    )
+        where TDerivedEntity : class, TEntity
     {
         var parameterBuilder = Builder.HasOriginalValueParameter(
             propertyExpression,
@@ -271,7 +275,8 @@ public class StoredProcedureBuilder<TEntity>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual StoredProcedureBuilder<TEntity> HasResultColumn<TDerivedEntity, TProperty>(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression
-    ) where TDerivedEntity : class, TEntity
+    )
+        where TDerivedEntity : class, TEntity
     {
         Builder.HasResultColumn(propertyExpression, ConfigurationSource.Explicit);
         return this;
@@ -304,7 +309,8 @@ public class StoredProcedureBuilder<TEntity>
     public virtual StoredProcedureBuilder<TEntity> HasResultColumn<TDerivedEntity, TProperty>(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
         Action<StoredProcedureResultColumnBuilder> buildAction
-    ) where TDerivedEntity : class, TEntity
+    )
+        where TDerivedEntity : class, TEntity
     {
         var resultColumnBuilder = Builder.HasResultColumn(
             propertyExpression,

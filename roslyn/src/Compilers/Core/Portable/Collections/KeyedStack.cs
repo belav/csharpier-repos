@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Collections
 {
-    internal class KeyedStack<T, R> where T : notnull
+    internal class KeyedStack<T, R>
+        where T : notnull
     {
         private readonly Dictionary<T, Stack<R>> _dict = new Dictionary<T, Stack<R>>();
 

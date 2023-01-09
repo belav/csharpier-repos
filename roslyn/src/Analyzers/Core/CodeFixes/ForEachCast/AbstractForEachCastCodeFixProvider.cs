@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ForEachCast
 {
     internal abstract class AbstractForEachCastCodeFixProvider<TForEachStatementSyntax>
-        : SyntaxEditorBasedCodeFixProvider where TForEachStatementSyntax : SyntaxNode
+        : SyntaxEditorBasedCodeFixProvider
+        where TForEachStatementSyntax : SyntaxNode
     {
         protected abstract ITypeSymbol GetForEachElementType(
             SemanticModel semanticModel,

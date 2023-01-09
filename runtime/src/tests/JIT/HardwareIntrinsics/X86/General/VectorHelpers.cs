@@ -110,7 +110,8 @@ public partial class Program
         }
     }
 
-    public static Vector128<T> CreateVector128<T>(T value) where T : struct
+    public static Vector128<T> CreateVector128<T>(T value)
+        where T : struct
     {
         if (typeof(T) == typeof(byte))
         {
@@ -158,7 +159,8 @@ public partial class Program
         }
     }
 
-    public static Vector256<T> CreateVector256<T>(T value) where T : struct
+    public static Vector256<T> CreateVector256<T>(T value)
+        where T : struct
     {
         if (typeof(T) == typeof(byte))
         {
@@ -206,7 +208,8 @@ public partial class Program
         }
     }
 
-    public static bool CheckValue<T>(T value, T expectedValue) where T : struct
+    public static bool CheckValue<T>(T value, T expectedValue)
+        where T : struct
     {
         bool returnVal;
         if (typeof(T) == typeof(float))
@@ -250,7 +253,8 @@ public partial class Program
         return returnVal;
     }
 
-    public static T GetValueFromInt<T>(int value) where T : struct
+    public static T GetValueFromInt<T>(int value)
+        where T : struct
     {
         if (typeof(T) == typeof(float))
         {

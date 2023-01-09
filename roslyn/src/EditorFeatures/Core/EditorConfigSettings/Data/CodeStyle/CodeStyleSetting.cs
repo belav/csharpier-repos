@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             OptionSet visualStudioOptions,
             OptionUpdater updater,
             string fileName
-        ) where T : Enum
+        )
+            where T : Enum
         {
             return new EnumCodeStyleSetting<T>(
                 option,
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             OptionSet visualStudioOptions,
             OptionUpdater updater,
             string fileName
-        ) where T : Enum
+        )
+            where T : Enum
         {
             return new PerLanguageEnumCodeStyleSetting<T>(
                 option,

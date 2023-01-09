@@ -19,7 +19,8 @@ namespace Moq
         /// that behave according to the LINQ query specification.
         /// </summary>
         /// <typeparam name="T">The type of the mocked object to query.</typeparam>
-        public IQueryable<T> Of<T>() where T : class
+        public IQueryable<T> Of<T>()
+            where T : class
         {
             return this.Of<T>(this.Behavior);
         }
@@ -30,7 +31,8 @@ namespace Moq
         /// </summary>
         /// <param name="behavior">Behavior of the mocks.</param>
         /// <typeparam name="T">The type of the mocked object to query.</typeparam>
-        public IQueryable<T> Of<T>(MockBehavior behavior) where T : class
+        public IQueryable<T> Of<T>(MockBehavior behavior)
+            where T : class
         {
             return this.CreateMockQuery<T>(behavior);
         }
@@ -41,7 +43,8 @@ namespace Moq
         /// </summary>
         /// <param name="specification">The predicate with the setup expressions.</param>
         /// <typeparam name="T">The type of the mocked object to query.</typeparam>
-        public IQueryable<T> Of<T>(Expression<Func<T, bool>> specification) where T : class
+        public IQueryable<T> Of<T>(Expression<Func<T, bool>> specification)
+            where T : class
         {
             return this.Of<T>(specification, this.Behavior);
         }
@@ -65,7 +68,8 @@ namespace Moq
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public T OneOf<T>() where T : class
+        public T OneOf<T>()
+            where T : class
         {
             return this.OneOf<T>(this.Behavior);
         }
@@ -77,7 +81,8 @@ namespace Moq
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public T OneOf<T>(MockBehavior behavior) where T : class
+        public T OneOf<T>(MockBehavior behavior)
+            where T : class
         {
             return this.CreateMockQuery<T>(behavior).First();
         }
@@ -89,7 +94,8 @@ namespace Moq
         /// <typeparam name="T">The type of the mocked object.</typeparam>
         /// <returns>The mocked object created.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public T OneOf<T>(Expression<Func<T, bool>> specification) where T : class
+        public T OneOf<T>(Expression<Func<T, bool>> specification)
+            where T : class
         {
             return this.OneOf<T>(specification, this.Behavior);
         }
@@ -111,7 +117,8 @@ namespace Moq
         /// <summary>
         /// Creates the mock query with the underlying queryable implementation.
         /// </summary>
-        internal IQueryable<T> CreateMockQuery<T>(MockBehavior behavior) where T : class
+        internal IQueryable<T> CreateMockQuery<T>(MockBehavior behavior)
+            where T : class
         {
             var method = ((Func<MockBehavior, IQueryable<T>>)CreateQueryable<T>).GetMethodInfo();
             return new MockQueryable<T>(
@@ -122,7 +129,8 @@ namespace Moq
         /// <summary>
         /// Wraps the enumerator inside a queryable.
         /// </summary>
-        internal IQueryable<T> CreateQueryable<T>(MockBehavior behavior) where T : class
+        internal IQueryable<T> CreateQueryable<T>(MockBehavior behavior)
+            where T : class
         {
             return this.CreateMocks<T>(behavior).AsQueryable();
         }
@@ -132,7 +140,8 @@ namespace Moq
         /// transform the queryable query into a normal enumerable query.
         /// This method is never used directly by consumers.
         /// </summary>
-        private IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+        private IEnumerable<T> CreateMocks<T>(MockBehavior behavior)
+            where T : class
         {
             do
             {

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
     /// <para/>
     /// Option names are the values from the TOptions enum.
     /// </summary>
-    internal static class EmbeddedLanguageCommentOptions<TOptions> where TOptions : struct, Enum
+    internal static class EmbeddedLanguageCommentOptions<TOptions>
+        where TOptions : struct, Enum
     {
         private static readonly Dictionary<string, TOptions> s_nameToOption = typeof(TOptions)
             .GetTypeInfo()

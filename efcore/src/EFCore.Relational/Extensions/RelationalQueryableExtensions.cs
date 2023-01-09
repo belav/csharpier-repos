@@ -92,7 +92,8 @@ public static class RelationalQueryableExtensions
         this DbSet<TEntity> source,
         [NotParameterized] string sql,
         params object[] parameters
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotEmpty(sql, nameof(sql));
         Check.NotNull(parameters, nameof(parameters));
@@ -130,7 +131,8 @@ public static class RelationalQueryableExtensions
     public static IQueryable<TEntity> FromSqlInterpolated<TEntity>(
         this DbSet<TEntity> source,
         [NotParameterized] FormattableString sql
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(sql, nameof(sql));
         Check.NotEmpty(sql.Format, nameof(source));
@@ -168,7 +170,8 @@ public static class RelationalQueryableExtensions
     public static IQueryable<TEntity> FromSql<TEntity>(
         this DbSet<TEntity> source,
         [NotParameterized] FormattableString sql
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(sql, nameof(sql));
         Check.NotEmpty(sql.Format, nameof(source));

@@ -11,7 +11,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType
         }
 
         [Kept]
-        static void Helper<T>(T arg) where T : IFoo { }
+        static void Helper<T>(T arg)
+            where T : IFoo { }
 
         [Kept]
         interface IFoo

@@ -345,7 +345,8 @@ public class DbContext
     /// <returns>A set for the given entity type.</returns>
     public virtual DbSet<TEntity> Set<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >() where TEntity : class =>
+    >()
+        where TEntity : class =>
         (DbSet<TEntity>)
             ((IDbSetCache)this).GetOrAddSet(DbContextDependencies.SetSource, typeof(TEntity));
 
@@ -368,7 +369,8 @@ public class DbContext
     /// <returns>A set for the given entity type.</returns>
     public virtual DbSet<TEntity> Set<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(string name) where TEntity : class =>
+    >(string name)
+        where TEntity : class =>
         (DbSet<TEntity>)
             ((IDbSetCache)this).GetOrAddSet(DbContextDependencies.SetSource, name, typeof(TEntity));
 
@@ -1169,7 +1171,8 @@ public class DbContext
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <param name="entity">The entity to get the entry for.</param>
     /// <returns>The entry for the given entity.</returns>
-    public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class
+    public virtual EntityEntry<TEntity> Entry<TEntity>(TEntity entity)
+        where TEntity : class
     {
         Check.NotNull(entity, nameof(entity));
         CheckDisposed();
@@ -1276,7 +1279,8 @@ public class DbContext
     ///     The <see cref="EntityEntry{TEntity}" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Add<TEntity>(TEntity entity) where TEntity : class
+    public virtual EntityEntry<TEntity> Add<TEntity>(TEntity entity)
+        where TEntity : class
     {
         CheckDisposed();
 
@@ -1317,7 +1321,8 @@ public class DbContext
     public virtual async ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(
         TEntity entity,
         CancellationToken cancellationToken = default
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         CheckDisposed();
 
@@ -1367,7 +1372,8 @@ public class DbContext
     ///     The <see cref="EntityEntry{TEntity}" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Attach<TEntity>(TEntity entity) where TEntity : class
+    public virtual EntityEntry<TEntity> Attach<TEntity>(TEntity entity)
+        where TEntity : class
     {
         CheckDisposed();
 
@@ -1412,7 +1418,8 @@ public class DbContext
     ///     The <see cref="EntityEntry{TEntity}" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class
+    public virtual EntityEntry<TEntity> Update<TEntity>(TEntity entity)
+        where TEntity : class
     {
         CheckDisposed();
 
@@ -1447,7 +1454,8 @@ public class DbContext
     ///     The <see cref="EntityEntry{TEntity}" /> for the entity. The entry provides
     ///     access to change tracking information and operations for the entity.
     /// </returns>
-    public virtual EntityEntry<TEntity> Remove<TEntity>(TEntity entity) where TEntity : class
+    public virtual EntityEntry<TEntity> Remove<TEntity>(TEntity entity)
+        where TEntity : class
     {
         Check.NotNull(entity, nameof(entity));
         CheckDisposed();
@@ -2174,7 +2182,8 @@ public class DbContext
     /// <returns>The entity found, or <see langword="null" />.</returns>
     public virtual TEntity? Find<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(params object?[]? keyValues) where TEntity : class
+    >(params object?[]? keyValues)
+        where TEntity : class
     {
         CheckDisposed();
 
@@ -2205,7 +2214,8 @@ public class DbContext
     /// <returns>The entity found, or <see langword="null" />.</returns>
     public virtual ValueTask<TEntity?> FindAsync<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(params object?[]? keyValues) where TEntity : class
+    >(params object?[]? keyValues)
+        where TEntity : class
     {
         CheckDisposed();
 
@@ -2238,7 +2248,8 @@ public class DbContext
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public virtual ValueTask<TEntity?> FindAsync<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(object?[]? keyValues, CancellationToken cancellationToken) where TEntity : class
+    >(object?[]? keyValues, CancellationToken cancellationToken)
+        where TEntity : class
     {
         CheckDisposed();
 

@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store containing users' telephone numbers.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserPhoneNumberStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserPhoneNumberStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets the telephone number for the specified <paramref name="user"/>.

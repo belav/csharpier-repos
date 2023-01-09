@@ -895,7 +895,8 @@ namespace System.Xml.XPath
             XNode node,
             string expression,
             IXmlNamespaceResolver? resolver
-        ) where T : class
+        )
+            where T : class
         {
             XPathNavigator navigator = node.CreateNavigator();
             object result = navigator.Evaluate(expression, resolver);

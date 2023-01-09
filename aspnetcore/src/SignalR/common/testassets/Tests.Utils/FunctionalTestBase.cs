@@ -40,7 +40,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public Task<InProcessTestServer<T>> StartServer<T>(
             Func<WriteContext, bool> expectedErrorsFilter = null
-        ) where T : class
+        )
+            where T : class
         {
             var disposable = base.StartVerifiableLog(
                 ResolveExpectedErrorsFilter(expectedErrorsFilter)

@@ -20,7 +20,8 @@ public class CompressionProviderCollection : Collection<ICompressionProvider>
     public void Add<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             TCompressionProvider
-    >() where TCompressionProvider : ICompressionProvider
+    >()
+        where TCompressionProvider : ICompressionProvider
     {
         Add(typeof(TCompressionProvider));
     }

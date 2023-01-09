@@ -44,6 +44,7 @@ namespace Microsoft.CodeAnalysis
 
         public Enumerator<ISymbol> GetEnumerator() => new(this);
 
-        internal Enumerable<TSymbol> OfType<TSymbol>() where TSymbol : ISymbol => new(this);
+        internal Enumerable<TSymbol> OfType<TSymbol>()
+            where TSymbol : ISymbol => new(this);
     }
 }

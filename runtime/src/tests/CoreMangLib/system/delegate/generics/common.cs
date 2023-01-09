@@ -51,7 +51,8 @@ delegate T g3<T, U, V, W>(U u, V v, W w);
 
 //////////////////////////////////////////////////////////////////////
 
-class GenericClass<T> where T : Equality
+class GenericClass<T>
+    where T : Equality
 {
     public long value,
         field2,
@@ -109,14 +110,16 @@ class GenericClass<T> where T : Equality
         return 100;
     }
 
-    public long M8<U>(U u, long l) where U : Equality
+    public long M8<U>(U u, long l)
+        where U : Equality
     {
         if (!u.Equals(l) || value != l)
             throw new Exception();
         return 100;
     }
 
-    public long M9<U>(long l, U u) where U : Equality
+    public long M9<U>(long l, U u)
+        where U : Equality
     {
         if (!u.Equals(l) || value != l)
             throw new Exception();
@@ -170,14 +173,16 @@ class GenericClass<T> where T : Equality
         return 100;
     }
 
-    public static long SM8<U>(U u, long l) where U : Equality
+    public static long SM8<U>(U u, long l)
+        where U : Equality
     {
         if (!u.Equals(l))
             throw new Exception();
         return 100;
     }
 
-    public static long SM9<U>(long l, U u) where U : Equality
+    public static long SM9<U>(long l, U u)
+        where U : Equality
     {
         if (!u.Equals(l))
             throw new Exception();
@@ -185,7 +190,8 @@ class GenericClass<T> where T : Equality
     }
 }
 
-struct GenericStruct<T> where T : Equality
+struct GenericStruct<T>
+    where T : Equality
 {
     public long value,
         field2,
@@ -244,14 +250,16 @@ struct GenericStruct<T> where T : Equality
         return 100;
     }
 
-    public long M8<U>(U u, long l) where U : Equality
+    public long M8<U>(U u, long l)
+        where U : Equality
     {
         if (!u.Equals(l) || value != l)
             throw new Exception();
         return 100;
     }
 
-    public long M9<U>(long l, U u) where U : Equality
+    public long M9<U>(long l, U u)
+        where U : Equality
     {
         if (!u.Equals(l) || value != l)
             throw new Exception();
@@ -305,14 +313,16 @@ struct GenericStruct<T> where T : Equality
         return 100;
     }
 
-    public static long SM8<U>(U u, long l) where U : Equality
+    public static long SM8<U>(U u, long l)
+        where U : Equality
     {
         if (!u.Equals(l))
             throw new Exception();
         return 100;
     }
 
-    public static long SM9<U>(long l, U u) where U : Equality
+    public static long SM9<U>(long l, U u)
+        where U : Equality
     {
         if (!u.Equals(l))
             throw new Exception();

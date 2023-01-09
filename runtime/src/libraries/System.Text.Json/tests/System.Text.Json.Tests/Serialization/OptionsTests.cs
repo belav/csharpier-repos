@@ -139,7 +139,8 @@ namespace System.Text.Json.Serialization.Tests
                 Assert.False(list.IsReadOnly, "List should not be read-only");
             }
 
-            static void TestIListThrowingOperationsWhenMutable<T>(IList<T> list) where T : class
+            static void TestIListThrowingOperationsWhenMutable<T>(IList<T> list)
+                where T : class
             {
                 // Verify collection throws on null adds.
                 Assert.Throws<ArgumentNullException>(() => list.Add(null));

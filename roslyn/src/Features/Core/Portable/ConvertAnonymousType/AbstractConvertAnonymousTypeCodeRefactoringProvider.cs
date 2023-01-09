@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.ConvertAnonymousType
 {
     internal abstract class AbstractConvertAnonymousTypeCodeRefactoringProvider<TAnonymousObjectCreationExpressionSyntax>
-        : CodeRefactoringProvider where TAnonymousObjectCreationExpressionSyntax : SyntaxNode
+        : CodeRefactoringProvider
+        where TAnonymousObjectCreationExpressionSyntax : SyntaxNode
     {
         protected static async Task<(
             TAnonymousObjectCreationExpressionSyntax?,

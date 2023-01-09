@@ -10,7 +10,8 @@ using System.Runtime.CompilerServices;
 namespace System.Text.RegularExpressions.Symbolic
 {
     /// <summary>Represents a set of symbolic regexes that is either a disjunction or a conjunction</summary>
-    internal sealed class SymbolicRegexSet<S> : IEnumerable<SymbolicRegexNode<S>> where S : notnull
+    internal sealed class SymbolicRegexSet<S> : IEnumerable<SymbolicRegexNode<S>>
+        where S : notnull
     {
         internal readonly SymbolicRegexBuilder<S> _builder;
 
@@ -525,7 +526,8 @@ namespace System.Text.RegularExpressions.Symbolic
         internal SymbolicRegexSet<T> Transform<T>(
             SymbolicRegexBuilder<T> builderT,
             Func<S, T> predicateTransformer
-        ) where T : notnull
+        )
+            where T : notnull
         {
             // This function is mutually recursive with the one in SymbolicRegexBuilder, which has stack overflow avoidance
             return SymbolicRegexSet<T>.CreateMulti(

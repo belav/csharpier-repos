@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
 {
     internal abstract class AbstractConsecutiveStatementPlacementDiagnosticAnalyzer<TExecutableStatementSyntax>
-        : AbstractBuiltInCodeStyleDiagnosticAnalyzer where TExecutableStatementSyntax : SyntaxNode
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        where TExecutableStatementSyntax : SyntaxNode
     {
         private readonly ISyntaxFacts _syntaxFacts;
 

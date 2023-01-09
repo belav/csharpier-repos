@@ -5,7 +5,8 @@ using Xunit;
 
 namespace System.Security.Cryptography.Cng.Tests
 {
-    public abstract class CngPkcs8Tests<T> where T : AsymmetricAlgorithm
+    public abstract class CngPkcs8Tests<T>
+        where T : AsymmetricAlgorithm
     {
         protected abstract T CreateKey(out CngKey cngKey);
         protected abstract void VerifyMatch(T exported, T imported);

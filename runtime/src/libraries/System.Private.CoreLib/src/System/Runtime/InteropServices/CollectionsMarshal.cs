@@ -30,7 +30,8 @@ namespace System.Runtime.InteropServices
         public static ref TValue GetValueRefOrNullRef<TKey, TValue>(
             Dictionary<TKey, TValue> dictionary,
             TKey key
-        ) where TKey : notnull => ref dictionary.FindValue(key);
+        )
+            where TKey : notnull => ref dictionary.FindValue(key);
 
         /// <summary>
         /// Gets a ref to a <typeparamref name="TValue"/> in the <see cref="Dictionary{TKey, TValue}"/>, adding a new entry with a default value if it does not exist in the <paramref name="dictionary"/>.
@@ -43,7 +44,8 @@ namespace System.Runtime.InteropServices
             Dictionary<TKey, TValue> dictionary,
             TKey key,
             out bool exists
-        ) where TKey : notnull =>
+        )
+            where TKey : notnull =>
             ref Dictionary<TKey, TValue>.CollectionsMarshalHelper.GetValueRefOrAddDefault(
                 dictionary,
                 key,

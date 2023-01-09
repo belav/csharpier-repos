@@ -66,7 +66,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             TEnum expectedValue,
             string inputHex
-        ) where TEnum : Enum
+        )
+            where TEnum : Enum
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);

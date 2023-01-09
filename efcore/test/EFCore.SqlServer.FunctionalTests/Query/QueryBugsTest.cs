@@ -5354,8 +5354,8 @@ WHERE [p].[Id] = @__id_0
         public MyContext17276(DbContextOptions options)
             : base(options) { }
 
-        public static List<T> List17276<T>(IQueryable<T> query) where T : IRemovable17276 =>
-            query.Where(x => !x.IsRemoved).ToList();
+        public static List<T> List17276<T>(IQueryable<T> query)
+            where T : IRemovable17276 => query.Where(x => !x.IsRemoved).ToList();
 
         public interface IRemovable17276
         {
@@ -5399,7 +5399,8 @@ WHERE [p].[Id] = @__id_0
             int Exists { get; }
         }
 
-        public class Specification17276<T> where T : IHasId17276<int>
+        public class Specification17276<T>
+            where T : IHasId17276<int>
         {
             public Expression<Func<T, bool>> Criteria { get; }
 

@@ -18,7 +18,8 @@ public class GenExceptionSub<T> : GenException<T> { }
 
 public class Gen
 {
-    public void ExceptionTest<Ex, T>(Ex e) where Ex : GenException<T>
+    public void ExceptionTest<Ex, T>(Ex e)
+        where Ex : GenException<T>
     {
         try
         {

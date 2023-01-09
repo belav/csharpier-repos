@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Holds on a <see cref="DocumentId"/> to <see cref="TextDocumentState"/> map and an ordering.
     /// </summary>
-    internal readonly struct TextDocumentStates<TState> where TState : TextDocumentState
+    internal readonly struct TextDocumentStates<TState>
+        where TState : TextDocumentState
     {
         public static readonly TextDocumentStates<TState> Empty =
             new(

@@ -42,7 +42,8 @@ public static class ExceptionHandlerServiceCollectionExtensions
     public static IServiceCollection AddExceptionHandler<TService>(
         this IServiceCollection services,
         Action<ExceptionHandlerOptions, TService> configureOptions
-    ) where TService : class
+    )
+        where TService : class
     {
         if (services == null)
         {

@@ -23,7 +23,8 @@ namespace Moq
         /// that behave according to the LINQ query specification.
         /// </summary>
         /// <typeparam name="T">The type of the mocked object to query.</typeparam>
-        public static IQueryable<T> Of<T>() where T : class
+        public static IQueryable<T> Of<T>()
+            where T : class
         {
             return Mocks.Of<T>(MockBehavior.Default);
         }
@@ -34,7 +35,8 @@ namespace Moq
         /// </summary>
         /// <param name="behavior">Behavior of the mocks.</param>
         /// <typeparam name="T">The type of the mocked object to query.</typeparam>
-        public static IQueryable<T> Of<T>(MockBehavior behavior) where T : class
+        public static IQueryable<T> Of<T>(MockBehavior behavior)
+            where T : class
         {
             return Mocks.CreateMockQuery<T>(behavior);
         }
@@ -45,7 +47,8 @@ namespace Moq
         /// </summary>
         /// <param name="specification">The predicate with the setup expressions.</param>
         /// <typeparam name="T">The type of the mocked object to query.</typeparam>
-        public static IQueryable<T> Of<T>(Expression<Func<T, bool>> specification) where T : class
+        public static IQueryable<T> Of<T>(Expression<Func<T, bool>> specification)
+            where T : class
         {
             return Mocks.Of<T>(specification, MockBehavior.Default);
         }
@@ -60,7 +63,8 @@ namespace Moq
         public static IQueryable<T> Of<T>(
             Expression<Func<T, bool>> specification,
             MockBehavior behavior
-        ) where T : class
+        )
+            where T : class
         {
             return Mocks.CreateMockQuery<T>(behavior).Where(specification);
         }
@@ -72,7 +76,8 @@ namespace Moq
         /// <returns>The mocked object created.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Moved to Mock.Of<T>, as it's a single one, so no reason to be on Mocks.", true)]
-        public static T OneOf<T>() where T : class
+        public static T OneOf<T>()
+            where T : class
         {
             throw new NotSupportedException();
         }
@@ -85,7 +90,8 @@ namespace Moq
         /// <returns>The mocked object created.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete("Moved to Mock.Of<T>, as it's a single one, so no reason to be on Mocks.", true)]
-        public static T OneOf<T>(Expression<Func<T, bool>> specification) where T : class
+        public static T OneOf<T>(Expression<Func<T, bool>> specification)
+            where T : class
         {
             throw new NotSupportedException();
         }
@@ -93,7 +99,8 @@ namespace Moq
         /// <summary>
         /// Creates the mock query with the underlying queryable implementation.
         /// </summary>
-        internal static IQueryable<T> CreateMockQuery<T>(MockBehavior behavior) where T : class
+        internal static IQueryable<T> CreateMockQuery<T>(MockBehavior behavior)
+            where T : class
         {
             var method = ((Func<MockBehavior, IQueryable<T>>)CreateQueryable<T>).GetMethodInfo();
             return new MockQueryable<T>(Expression.Call(method, Expression.Constant(behavior)));
@@ -102,7 +109,8 @@ namespace Moq
         /// <summary>
         /// Wraps the enumerator inside a queryable.
         /// </summary>
-        internal static IQueryable<T> CreateQueryable<T>(MockBehavior behavior) where T : class
+        internal static IQueryable<T> CreateQueryable<T>(MockBehavior behavior)
+            where T : class
         {
             return Mocks.CreateMocks<T>(behavior).AsQueryable();
         }
@@ -112,7 +120,8 @@ namespace Moq
         /// transform the queryable query into a normal enumerable query.
         /// This method is never used directly by consumers.
         /// </summary>
-        private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+        private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior)
+            where T : class
         {
             do
             {

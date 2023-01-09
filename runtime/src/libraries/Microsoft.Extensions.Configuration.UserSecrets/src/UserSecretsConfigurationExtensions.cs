@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Configuration
         /// <returns>The configuration builder.</returns>
         public static IConfigurationBuilder AddUserSecrets<T>(
             this IConfigurationBuilder configuration
-        ) where T : class =>
+        )
+            where T : class =>
             configuration.AddUserSecrets(typeof(T).Assembly, optional: true, reloadOnChange: false);
 
         /// <summary>
@@ -49,7 +50,8 @@ namespace Microsoft.Extensions.Configuration
         public static IConfigurationBuilder AddUserSecrets<T>(
             this IConfigurationBuilder configuration,
             bool optional
-        ) where T : class =>
+        )
+            where T : class =>
             configuration.AddUserSecrets(typeof(T).Assembly, optional, reloadOnChange: false);
 
         /// <summary>
@@ -71,7 +73,8 @@ namespace Microsoft.Extensions.Configuration
             this IConfigurationBuilder configuration,
             bool optional,
             bool reloadOnChange
-        ) where T : class =>
+        )
+            where T : class =>
             configuration.AddUserSecrets(typeof(T).Assembly, optional, reloadOnChange);
 
         /// <summary>

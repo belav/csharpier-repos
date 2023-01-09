@@ -1249,7 +1249,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 ITypeSymbol type,
                 VariableStyle style,
                 HashSet<int> nonNoisySyntaxKindSet
-            ) where T : SyntaxNode
+            )
+                where T : SyntaxNode
             {
                 return symbol switch
                 {

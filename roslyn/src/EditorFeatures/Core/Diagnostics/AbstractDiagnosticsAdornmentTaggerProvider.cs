@@ -16,7 +16,8 @@ using Microsoft.VisualStudio.Text.Tagging;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal abstract class AbstractDiagnosticsAdornmentTaggerProvider<TTag>
-        : AbstractDiagnosticsTaggerProvider<TTag> where TTag : class, ITag
+        : AbstractDiagnosticsTaggerProvider<TTag>
+        where TTag : class, ITag
     {
         protected AbstractDiagnosticsAdornmentTaggerProvider(
             IThreadingContext threadingContext,

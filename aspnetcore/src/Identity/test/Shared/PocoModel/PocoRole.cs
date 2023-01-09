@@ -31,7 +31,8 @@ public class PocoRole : PocoRole<string>
 ///     Represents a Role entity
 /// </summary>
 /// <typeparam name="TKey"></typeparam>
-public class PocoRole<TKey> where TKey : IEquatable<TKey>
+public class PocoRole<TKey>
+    where TKey : IEquatable<TKey>
 {
     /// <summary>
     ///     Constructor

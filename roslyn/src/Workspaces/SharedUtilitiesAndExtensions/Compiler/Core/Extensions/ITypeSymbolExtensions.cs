@@ -502,7 +502,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<T> GetAccessibleMembersInBaseTypes<T>(
             this ITypeSymbol containingType,
             ISymbol within
-        ) where T : class, ISymbol
+        )
+            where T : class, ISymbol
         {
             if (containingType == null)
             {
@@ -518,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static ImmutableArray<T> GetAccessibleMembersInThisAndBaseTypes<T>(
             this ITypeSymbol? containingType,
             ISymbol within
-        ) where T : class, ISymbol
+        )
+            where T : class, ISymbol
         {
             if (containingType == null)
             {
@@ -569,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<T> SelectAccessibleMembers<T>(
             this IEnumerable<ITypeSymbol>? types,
             ISymbol within
-        ) where T : class, ISymbol
+        )
+            where T : class, ISymbol
         {
             if (types == null)
             {
@@ -585,7 +588,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this IEnumerable<ITypeSymbol>? types,
             string memberName,
             ISymbol within
-        ) where T : class, ISymbol
+        )
+            where T : class, ISymbol
         {
             if (types == null)
             {

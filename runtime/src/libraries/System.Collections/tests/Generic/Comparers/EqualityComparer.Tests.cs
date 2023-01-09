@@ -106,7 +106,8 @@ namespace System.Collections.Generic.Tests
         [MemberData(nameof(Int32EnumData))]
         [MemberData(nameof(Int64EnumData))]
         [MemberData(nameof(NonEquatableValueTypeData))]
-        public void NullableEquals<T>(T left, T right, bool expected) where T : struct
+        public void NullableEquals<T>(T left, T right, bool expected)
+            where T : struct
         {
             var comparer = EqualityComparer<T?>.Default;
             IEqualityComparer nonGenericComparer = comparer;
@@ -370,7 +371,8 @@ namespace System.Collections.Generic.Tests
         [MemberData(nameof(Int32EnumHashData))]
         [MemberData(nameof(Int64EnumHashData))]
         [MemberData(nameof(NonEquatableValueTypeHashData))]
-        public void NullableGetHashCode<T>(T value, int expected) where T : struct
+        public void NullableGetHashCode<T>(T value, int expected)
+            where T : struct
         {
             var comparer = EqualityComparer<T?>.Default;
             IEqualityComparer nonGenericComparer = comparer;

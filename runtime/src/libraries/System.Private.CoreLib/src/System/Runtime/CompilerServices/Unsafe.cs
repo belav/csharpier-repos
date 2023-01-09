@@ -64,7 +64,8 @@ namespace System.Runtime.CompilerServices
         [NonVersionable]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         [return: NotNullIfNotNull(nameof(o))]
-        public static T As<T>(object? o) where T : class?
+        public static T As<T>(object? o)
+            where T : class?
         {
             throw new PlatformNotSupportedException();
 
@@ -884,7 +885,8 @@ namespace System.Runtime.CompilerServices
         // CoreCLR:METHOD__UNSAFE__UNBOX
         [NonVersionable]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref T Unbox<T>(object box) where T : struct
+        public static ref T Unbox<T>(object box)
+            where T : struct
         {
             throw new PlatformNotSupportedException();
 

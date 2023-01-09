@@ -44,7 +44,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
             }
         }
 
-        public static void AssertExceptionDeserializationFails<T>() where T : Exception
+        public static void AssertExceptionDeserializationFails<T>()
+            where T : Exception
         {
             AssertExceptionDeserializationFails(typeof(T));
         }

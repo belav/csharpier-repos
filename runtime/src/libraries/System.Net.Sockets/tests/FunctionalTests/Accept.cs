@@ -10,7 +10,8 @@ using Xunit.Sdk;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class Accept<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class Accept<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         public Accept(ITestOutputHelper output)
             : base(output) { }

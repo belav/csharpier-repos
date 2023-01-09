@@ -16,7 +16,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
 {
-    internal class ModelComputation<TModel> where TModel : class
+    internal class ModelComputation<TModel>
+        where TModel : class
     {
         #region Fields that can be accessed from either thread
 

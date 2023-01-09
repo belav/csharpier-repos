@@ -74,7 +74,8 @@ public static class ExpressionExtensions
     public static IReadOnlyList<TMemberInfo>? MatchMemberAccessList<TMemberInfo>(
         this LambdaExpression lambdaExpression,
         Func<Expression, Expression, TMemberInfo?> memberMatcher
-    ) where TMemberInfo : MemberInfo
+    )
+        where TMemberInfo : MemberInfo
     {
         Check.DebugAssert(lambdaExpression.Body != null, "lambdaExpression.Body is null");
         Check.DebugAssert(
@@ -112,7 +113,8 @@ public static class ExpressionExtensions
     public static TMemberInfo? MatchSimpleMemberAccess<TMemberInfo>(
         this Expression parameterExpression,
         Expression memberAccessExpression
-    ) where TMemberInfo : MemberInfo
+    )
+        where TMemberInfo : MemberInfo
     {
         var memberInfos = MatchMemberAccess<TMemberInfo>(
             parameterExpression,
@@ -125,7 +127,8 @@ public static class ExpressionExtensions
     private static IReadOnlyList<TMemberInfo>? MatchMemberAccess<TMemberInfo>(
         this Expression parameterExpression,
         Expression memberAccessExpression
-    ) where TMemberInfo : MemberInfo
+    )
+        where TMemberInfo : MemberInfo
     {
         var memberInfos = new List<TMemberInfo>();
 

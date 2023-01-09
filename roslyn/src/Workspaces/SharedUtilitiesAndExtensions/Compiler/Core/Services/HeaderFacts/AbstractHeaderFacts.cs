@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             SyntaxNode ownerOfHeader,
             SyntaxNodeOrToken lastTokenOrNodeOfHeader,
             ImmutableArray<THoleSyntax> holes
-        ) where THoleSyntax : SyntaxNode
+        )
+            where THoleSyntax : SyntaxNode
         {
             Debug.Assert(ownerOfHeader.FullSpan.Contains(lastTokenOrNodeOfHeader.Span));
 

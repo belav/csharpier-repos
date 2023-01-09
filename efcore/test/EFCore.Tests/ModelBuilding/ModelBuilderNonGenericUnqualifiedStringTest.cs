@@ -74,7 +74,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
     }
 
     private class NonGenericStringTestEntityTypeBuilder<TEntity>
-        : NonGenericTestEntityTypeBuilder<TEntity> where TEntity : class
+        : NonGenericTestEntityTypeBuilder<TEntity>
+        where TEntity : class
     {
         public NonGenericStringTestEntityTypeBuilder(EntityTypeBuilder entityTypeBuilder)
             : base(entityTypeBuilder) { }
@@ -85,7 +86,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
 
         public override TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericStringTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsOne(
                     typeof(TRelatedEntity).Name,
@@ -96,7 +98,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
         public override TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsOne(
                     typeof(TRelatedEntity).Name,
@@ -143,7 +146,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class
+        )
+            where TRelatedEntity : class
         {
             var navigationName = navigationExpression?.GetMemberAccess().GetSimpleMemberName();
 
@@ -159,7 +163,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
             TRelatedEntity
         > HasMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null
-        ) where TRelatedEntity : class
+        )
+            where TRelatedEntity : class
         {
             var navigationName = navigationExpression?.GetMemberAccess().GetSimpleMemberName();
 
@@ -286,7 +291,8 @@ public class ModelBuilderNonGenericUnqualifiedStringTest : ModelBuilderNonGeneri
             TNewDependentEntity
         > HasOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>>? navigationExpression = null
-        ) where TNewDependentEntity : class
+        )
+            where TNewDependentEntity : class
         {
             var navigationName = navigationExpression?.GetMemberAccess().GetSimpleMemberName();
 

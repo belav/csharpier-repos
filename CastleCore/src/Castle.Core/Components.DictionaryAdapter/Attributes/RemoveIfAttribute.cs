@@ -77,7 +77,8 @@ namespace Castle.Components.DictionaryAdapter
             return condition != null && condition.SatisfiedBy(value);
         }
 
-        private static TBase Construct<TBase>(Type type, string paramName) where TBase : class
+        private static TBase Construct<TBase>(Type type, string paramName)
+            where TBase : class
         {
             if (type == null)
             {

@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class QueueOfTConverter<TCollection, TElement>
-        : IEnumerableDefaultConverter<TCollection, TElement> where TCollection : Queue<TElement>
+        : IEnumerableDefaultConverter<TCollection, TElement>
+        where TCollection : Queue<TElement>
     {
         protected override void Add(in TElement value, ref ReadStack state)
         {

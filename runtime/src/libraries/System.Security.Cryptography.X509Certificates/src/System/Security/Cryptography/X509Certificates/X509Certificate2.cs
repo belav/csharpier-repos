@@ -1315,7 +1315,8 @@ namespace System.Security.Cryptography.X509Certificates
             string[] labels,
             Func<TAlg> factory,
             Func<TAlg, X509Certificate2> import
-        ) where TAlg : AsymmetricAlgorithm
+        )
+            where TAlg : AsymmetricAlgorithm
         {
             foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(keyPem))
             {
@@ -1351,7 +1352,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<char> password,
             Func<TAlg> factory,
             Func<TAlg, X509Certificate2> import
-        ) where TAlg : AsymmetricAlgorithm
+        )
+            where TAlg : AsymmetricAlgorithm
         {
             foreach ((ReadOnlySpan<char> contents, PemFields fields) in new PemEnumerator(keyPem))
             {

@@ -756,7 +756,8 @@ namespace System.Net.Sockets.Tests
         public override bool SupportsMultiConnect => false;
     }
 
-    public abstract class SocketTestHelperBase<T> : MemberDatas where T : SocketHelperBase, new()
+    public abstract class SocketTestHelperBase<T> : MemberDatas
+        where T : SocketHelperBase, new()
     {
         private readonly T _socketHelper;
         public readonly ITestOutputHelper _output;

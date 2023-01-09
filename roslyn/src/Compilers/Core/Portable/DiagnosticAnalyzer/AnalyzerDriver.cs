@@ -1885,7 +1885,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<TAnalyzerAction>
         )> MakeActionsByAnalyzer<TAnalyzerAction>(
             in ImmutableArray<TAnalyzerAction> analyzerActions
-        ) where TAnalyzerAction : AnalyzerAction
+        )
+            where TAnalyzerAction : AnalyzerAction
         {
             var builder = ArrayBuilder<(
                 DiagnosticAnalyzer,

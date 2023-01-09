@@ -265,17 +265,20 @@ internal readonly struct RequestContext
 
     public void TraceException(Exception exception) => _logger.LogException(exception);
 
-    public T GetRequiredLspService<T>() where T : class, ILspService
+    public T GetRequiredLspService<T>()
+        where T : class, ILspService
     {
         return _lspServices.GetRequiredService<T>();
     }
 
-    public T GetRequiredService<T>() where T : class
+    public T GetRequiredService<T>()
+        where T : class
     {
         return _lspServices.GetRequiredService<T>();
     }
 
-    public IEnumerable<T> GetRequiredServices<T>() where T : class
+    public IEnumerable<T> GetRequiredServices<T>()
+        where T : class
     {
         return _lspServices.GetRequiredServices<T>();
     }

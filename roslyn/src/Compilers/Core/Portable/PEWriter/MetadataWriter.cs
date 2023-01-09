@@ -2410,7 +2410,8 @@ namespace Microsoft.Cci
         private void AddCustomAttributesToTable<T>(
             IEnumerable<T> parentList,
             Func<T, EntityHandle> getDefinitionHandle
-        ) where T : IReference
+        )
+            where T : IReference
         {
             foreach (var parent in parentList)
             {

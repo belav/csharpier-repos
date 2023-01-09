@@ -16,7 +16,8 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal abstract class AbstractRemoveUnnecessaryImportsDiagnosticAnalyzer<TSyntaxNode>
-        : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer where TSyntaxNode : SyntaxNode
+        : AbstractBuiltInUnnecessaryCodeStyleDiagnosticAnalyzer
+        where TSyntaxNode : SyntaxNode
     {
         // The NotConfigurable custom tag ensures that user can't turn this diagnostic into a warning / error via
         // ruleset editor or solution explorer. Setting messageFormat to empty string ensures that we won't display

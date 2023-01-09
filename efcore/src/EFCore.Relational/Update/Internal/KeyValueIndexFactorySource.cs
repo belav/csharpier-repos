@@ -42,7 +42,8 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal
                     .Invoke(null, new object[] { key })!;
 
         [UsedImplicitly]
-        private static IKeyValueIndexFactory CreateFactory<TKey>(IKey key) where TKey : notnull =>
+        private static IKeyValueIndexFactory CreateFactory<TKey>(IKey key)
+            where TKey : notnull =>
             new KeyValueIndexFactory<TKey>(key.GetPrincipalKeyValueFactory<TKey>());
     }
 }

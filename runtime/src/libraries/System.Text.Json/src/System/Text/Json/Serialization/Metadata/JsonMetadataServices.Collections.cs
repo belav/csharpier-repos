@@ -40,7 +40,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateListInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : List<TElement> =>
+        )
+            where TCollection : List<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -172,7 +173,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
             Func<IEnumerable<TElement>, TCollection> createRangeFunc
-        ) where TCollection : IEnumerable<TElement>
+        )
+            where TCollection : IEnumerable<TElement>
         {
             if (createRangeFunc is null)
             {
@@ -198,7 +200,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateIListInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : IList =>
+        )
+            where TCollection : IList =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -217,7 +220,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateIListInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : IList<TElement> =>
+        )
+            where TCollection : IList<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -236,7 +240,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateISetInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : ISet<TElement> =>
+        )
+            where TCollection : ISet<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -255,7 +260,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateICollectionInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : ICollection<TElement> =>
+        )
+            where TCollection : ICollection<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -274,7 +280,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateStackInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : Stack<TElement> =>
+        )
+            where TCollection : Stack<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -293,7 +300,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateQueueInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : Queue<TElement> =>
+        )
+            where TCollection : Queue<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -312,7 +320,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateConcurrentStackInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : ConcurrentStack<TElement> =>
+        )
+            where TCollection : ConcurrentStack<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -331,7 +340,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateConcurrentQueueInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : ConcurrentQueue<TElement> =>
+        )
+            where TCollection : ConcurrentQueue<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -350,7 +360,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateIEnumerableInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : IEnumerable<TElement> =>
+        )
+            where TCollection : IEnumerable<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -369,7 +380,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateIAsyncEnumerableInfo<TCollection, TElement>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : IAsyncEnumerable<TElement> =>
+        )
+            where TCollection : IAsyncEnumerable<TElement> =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -387,7 +399,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateIDictionaryInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : IDictionary =>
+        )
+            where TCollection : IDictionary =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,
@@ -409,7 +422,8 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
             Action<TCollection, object?> addFunc
-        ) where TCollection : IEnumerable =>
+        )
+            where TCollection : IEnumerable =>
             CreateStackOrQueueInfo(options, collectionInfo, addFunc);
 
 #pragma warning disable CS1574 // XML comment has cref attribute that could not be resolved
@@ -427,14 +441,16 @@ namespace System.Text.Json.Serialization.Metadata
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
             Action<TCollection, object?> addFunc
-        ) where TCollection : IEnumerable =>
+        )
+            where TCollection : IEnumerable =>
             CreateStackOrQueueInfo(options, collectionInfo, addFunc);
 
         private static JsonTypeInfo<TCollection> CreateStackOrQueueInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
             Action<TCollection, object?> addFunc
-        ) where TCollection : IEnumerable
+        )
+            where TCollection : IEnumerable
         {
             if (addFunc is null)
             {
@@ -461,7 +477,8 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateIEnumerableInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo
-        ) where TCollection : IEnumerable =>
+        )
+            where TCollection : IEnumerable =>
             new SourceGenJsonTypeInfo<TCollection>(
                 options,
                 collectionInfo,

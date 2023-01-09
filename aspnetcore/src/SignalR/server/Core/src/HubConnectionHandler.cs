@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.SignalR;
 /// <summary>
 /// Handles incoming connections and implements the SignalR Hub Protocol.
 /// </summary>
-public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
+public class HubConnectionHandler<THub> : ConnectionHandler
+    where THub : Hub
 {
     private readonly HubLifetimeManager<THub> _lifetimeManager;
     private readonly ILoggerFactory _loggerFactory;

@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks
         public static IQueryable<TEntity> ApplyTracking<TEntity>(
             this IQueryable<TEntity> query,
             bool tracking
-        ) where TEntity : class
+        )
+            where TEntity : class
         {
             return tracking ? query : query.AsNoTracking();
         }

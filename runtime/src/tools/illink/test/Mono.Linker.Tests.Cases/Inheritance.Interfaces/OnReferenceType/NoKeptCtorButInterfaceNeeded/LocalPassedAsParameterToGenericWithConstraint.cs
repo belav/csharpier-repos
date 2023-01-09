@@ -11,7 +11,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
         }
 
         [Kept]
-        static void Helper<T>(T f) where T : IFoo { }
+        static void Helper<T>(T f)
+            where T : IFoo { }
 
         [Kept]
         [KeptInterface(typeof(IFoo))]

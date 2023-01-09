@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<TNode> nodes,
             Func<TNode, ImmutableArray<TNode>> successors,
             out ImmutableArray<TNode> result
-        ) where TNode : notnull
+        )
+            where TNode : notnull
         {
             // First, count the predecessors of each node
             PooledDictionary<TNode, int> predecessorCounts = PredecessorCounts(
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis
             IEnumerable<TNode> nodes,
             Func<TNode, ImmutableArray<TNode>> successors,
             out ImmutableArray<TNode> allNodes
-        ) where TNode : notnull
+        )
+            where TNode : notnull
         {
             var predecessorCounts = PooledDictionary<TNode, int>.GetInstance();
             var counted = PooledHashSet<TNode>.GetInstance();

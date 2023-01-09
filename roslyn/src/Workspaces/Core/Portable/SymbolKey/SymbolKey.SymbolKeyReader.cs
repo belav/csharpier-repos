@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal partial struct SymbolKey
     {
-        private abstract class Reader<TStringResult> : IDisposable where TStringResult : class
+        private abstract class Reader<TStringResult> : IDisposable
+            where TStringResult : class
         {
             protected const char OpenParenChar = '(';
             protected const char CloseParenChar = ')';
@@ -502,7 +503,8 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             public PooledArrayBuilder<TSymbol> ReadSymbolKeyArray<TSymbol>(
                 out string? failureReason
-            ) where TSymbol : ISymbol
+            )
+                where TSymbol : ISymbol
             {
                 using var resolutions = ReadArray(_readSymbolKey, out var elementsFailureReason);
                 if (elementsFailureReason != null)

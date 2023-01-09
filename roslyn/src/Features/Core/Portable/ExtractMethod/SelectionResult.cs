@@ -94,13 +94,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public SyntaxToken GetLastTokenInSelection() =>
             SemanticDocument.GetTokenWithAnnotation(LastTokenAnnotation);
 
-        public TNode GetContainingScopeOf<TNode>() where TNode : SyntaxNode
+        public TNode GetContainingScopeOf<TNode>()
+            where TNode : SyntaxNode
         {
             var containingScope = GetContainingScope();
             return containingScope.GetAncestorOrThis<TNode>();
         }
 
-        protected T GetFirstStatement<T>() where T : SyntaxNode
+        protected T GetFirstStatement<T>()
+            where T : SyntaxNode
         {
             Contract.ThrowIfTrue(SelectionInExpression);
 
@@ -108,7 +110,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             return token.GetAncestor<T>();
         }
 
-        protected T GetLastStatement<T>() where T : SyntaxNode
+        protected T GetLastStatement<T>()
+            where T : SyntaxNode
         {
             Contract.ThrowIfTrue(SelectionInExpression);
 

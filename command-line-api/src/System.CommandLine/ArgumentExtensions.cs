@@ -23,7 +23,8 @@ namespace System.CommandLine
         public static TArgument AddCompletions<TArgument>(
             this TArgument argument,
             params string[] values
-        ) where TArgument : Argument
+        )
+            where TArgument : Argument
         {
             argument.Completions.Add(values);
 
@@ -40,7 +41,8 @@ namespace System.CommandLine
         public static TArgument AddCompletions<TArgument>(
             this TArgument argument,
             Func<CompletionContext, IEnumerable<string>> complete
-        ) where TArgument : Argument
+        )
+            where TArgument : Argument
         {
             argument.Completions.Add(complete);
 
@@ -57,7 +59,8 @@ namespace System.CommandLine
         public static TArgument AddCompletions<TArgument>(
             this TArgument argument,
             CompletionDelegate complete
-        ) where TArgument : Argument
+        )
+            where TArgument : Argument
         {
             argument.Completions.Add(complete);
 
@@ -74,7 +77,8 @@ namespace System.CommandLine
         public static TArgument FromAmong<TArgument>(
             this TArgument argument,
             params string[] values
-        ) where TArgument : Argument
+        )
+            where TArgument : Argument
         {
             argument.AllowedValues?.Clear();
             argument.AddAllowedValues(values);

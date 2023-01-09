@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) where TKey : IComparable<TKey>
+        )
+            where TKey : IComparable<TKey>
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -246,7 +247,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected static void KeysTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue?> map,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Assert.Equal(0, map.Keys.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Keys.Count());

@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis
         public static IEnumerable<TNode> GetCurrentNodes<TNode>(
             this SyntaxNode root,
             IEnumerable<TNode> nodes
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (nodes == null)
             {

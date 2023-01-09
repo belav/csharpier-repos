@@ -448,7 +448,8 @@ namespace PartialUniversalGen
         }
     }
 
-    public class WrapperGeneric3<T, U> where T : BaseClass3
+    public class WrapperGeneric3<T, U>
+        where T : BaseClass3
     {
         public T value;
 
@@ -471,7 +472,8 @@ namespace PartialUniversalGen
 
     public class WrapperGeneric4
     {
-        public object WrappedObject<T, U>(T t) where T : BaseClass3
+        public object WrappedObject<T, U>(T t)
+            where T : BaseClass3
         {
             T value = t;
             return value;
@@ -502,7 +504,8 @@ namespace PartialUniversalGen
         }
     }
 
-    public class WrapperGeneric5<T, U> where T : struct
+    public class WrapperGeneric5<T, U>
+        where T : struct
     {
         public T value;
 
@@ -512,7 +515,8 @@ namespace PartialUniversalGen
         }
     }
 
-    public class UseCanonGenericTypeFromUniversalGenericClassType5<T, U> : ITest<T> where T : struct
+    public class UseCanonGenericTypeFromUniversalGenericClassType5<T, U> : ITest<T>
+        where T : struct
     {
         public object TestMethod(T t)
         {
@@ -537,7 +541,8 @@ namespace PartialUniversalGen
         }
     }
 
-    public class WrapperGeneric6<T, U> where T : struct
+    public class WrapperGeneric6<T, U>
+        where T : struct
     {
         public T value;
 
@@ -729,7 +734,8 @@ namespace PartialUniversalGen
 
     public class Test
     {
-        public static void NullableGetHashCode<T>(T value, int expected) where T : struct
+        public static void NullableGetHashCode<T>(T value, int expected)
+            where T : struct
         {
             var comparer = EqualityComparer<T?>.Default;
             IEqualityComparer nonGenericComparer = comparer;

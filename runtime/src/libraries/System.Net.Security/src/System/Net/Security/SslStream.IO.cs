@@ -184,7 +184,8 @@ namespace System.Net.Security
         private async Task ReplyOnReAuthenticationAsync<TIOAdapter>(
             byte[]? buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             try
             {
@@ -300,7 +301,8 @@ namespace System.Net.Security
             bool receiveFirst,
             byte[]? reAuthenticationData,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             ProtocolToken message;
             bool handshakeCompleted = false;
@@ -449,7 +451,8 @@ namespace System.Net.Security
 
         private async ValueTask<ProtocolToken> ReceiveBlobAsync<TIOAdapter>(
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             int frameSize = await EnsureFullTlsFrameAsync<TIOAdapter>(cancellationToken)
                 .ConfigureAwait(false);
@@ -727,7 +730,8 @@ namespace System.Net.Security
         private async ValueTask WriteAsyncChunked<TIOAdapter>(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             do
             {
@@ -741,7 +745,8 @@ namespace System.Net.Security
         private ValueTask WriteSingleChunk<TIOAdapter>(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             byte[] rentedBuffer = ArrayPool<byte>.Shared.Rent(buffer.Length + FrameOverhead);
             byte[] outBuffer = rentedBuffer;
@@ -894,7 +899,8 @@ namespace System.Net.Security
         [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
         private async ValueTask<int> EnsureFullTlsFrameAsync<TIOAdapter>(
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             int frameSize;
             if (HaveFullTlsFrame(out frameSize))
@@ -995,7 +1001,8 @@ namespace System.Net.Security
         private async ValueTask<int> ReadAsyncInternal<TIOAdapter>(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             if (Interlocked.Exchange(ref _nestedRead, 1) == 1)
             {
@@ -1160,7 +1167,8 @@ namespace System.Net.Security
         private async ValueTask WriteAsyncInternal<TIOAdapter>(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             ThrowIfExceptionalOrNotAuthenticatedOrShutdown();
 

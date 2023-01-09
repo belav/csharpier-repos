@@ -20,7 +20,8 @@ public class DependentKeyValueFactoryFactory
     public virtual IDependentKeyValueFactory<TKey> CreateSimple<TKey>(
         IForeignKey foreignKey,
         IPrincipalKeyValueFactory<TKey> principalKeyValueFactory
-    ) where TKey : notnull
+    )
+        where TKey : notnull
     {
         var dependentIsNullable = foreignKey.Properties[0].ClrType.IsNullableType();
         var principalIsNullable = foreignKey.PrincipalKey.Properties[0].ClrType.IsNullableType();

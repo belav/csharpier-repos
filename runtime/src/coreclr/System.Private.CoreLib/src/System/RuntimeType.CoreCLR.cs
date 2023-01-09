@@ -54,7 +54,8 @@ namespace System
         }
 
         // Helper to build lists of MemberInfos. Special cased to avoid allocations for lists of one element.
-        internal struct ListBuilder<T> where T : class
+        internal struct ListBuilder<T>
+            where T : class
         {
             private T[]? _items;
             private T _item;
@@ -203,7 +204,8 @@ namespace System
                 }
             }
 
-            private sealed class MemberInfoCache<T> where T : MemberInfo
+            private sealed class MemberInfoCache<T>
+                where T : MemberInfo
             {
                 #region Private Data Members
 
@@ -1848,7 +1850,8 @@ namespace System
                 MemberListType listType,
                 string? name,
                 CacheType cacheType
-            ) where T : MemberInfo
+            )
+                where T : MemberInfo
             {
                 MemberInfoCache<T> existingCache = GetMemberCache<T>(ref m_cache);
                 return existingCache.GetMemberList(listType, name, cacheType);
@@ -5231,7 +5234,8 @@ namespace System.Reflection
     // Reliable hashtable thread safe for multiple readers and single writer. Note that the reliability goes together with thread
     // safety. Thread safety for multiple readers requires atomic update of the state that also makes the table
     // reliable in the presence of asynchronous exceptions.
-    internal struct CerHashtable<K, V> where K : class
+    internal struct CerHashtable<K, V>
+        where K : class
     {
         private sealed class Table
         {

@@ -138,7 +138,8 @@ public static class SqlServerDbContextOptionsExtensions
     public static DbContextOptionsBuilder<TContext> UseSqlServer<TContext>(
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseSqlServer((DbContextOptionsBuilder)optionsBuilder, sqlServerOptionsAction);
 
@@ -159,7 +160,8 @@ public static class SqlServerDbContextOptionsExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         string? connectionString,
         Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseSqlServer(
                 (DbContextOptionsBuilder)optionsBuilder,
@@ -189,7 +191,8 @@ public static class SqlServerDbContextOptionsExtensions
         this DbContextOptionsBuilder<TContext> optionsBuilder,
         DbConnection connection,
         Action<SqlServerDbContextOptionsBuilder>? sqlServerOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseSqlServer(
                 (DbContextOptionsBuilder)optionsBuilder,

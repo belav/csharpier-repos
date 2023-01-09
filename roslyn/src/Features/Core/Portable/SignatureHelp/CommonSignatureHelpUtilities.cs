@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             Func<TArgumentList, SyntaxToken> getCloseToken,
             Func<TArgumentList, IEnumerable<SyntaxNodeOrToken>> getArgumentsWithSeparators,
             Func<TArgumentList, IEnumerable<string>> getArgumentNames
-        ) where TArgumentList : SyntaxNode
+        )
+            where TArgumentList : SyntaxNode
         {
             if (
                 TryGetCurrentArgumentIndex(
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             Func<TArgumentList, SyntaxToken> getCloseToken,
             Func<TArgumentList, IEnumerable<SyntaxNodeOrToken>> getArgumentsWithSeparators,
             out int index
-        ) where TArgumentList : SyntaxNode
+        )
+            where TArgumentList : SyntaxNode
         {
             index = 0;
             if (position < getOpenToken(argumentList).Span.End)
@@ -90,7 +92,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         internal static TextSpan GetSignatureHelpSpan<TArgumentList>(
             TArgumentList argumentList,
             Func<TArgumentList, SyntaxToken> getCloseToken
-        ) where TArgumentList : SyntaxNode
+        )
+            where TArgumentList : SyntaxNode
         {
             return GetSignatureHelpSpan(argumentList, argumentList.Parent.SpanStart, getCloseToken);
         }
@@ -99,7 +102,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             TArgumentList argumentList,
             int start,
             Func<TArgumentList, SyntaxToken> getCloseToken
-        ) where TArgumentList : SyntaxNode
+        )
+            where TArgumentList : SyntaxNode
         {
             var closeToken = getCloseToken(argumentList);
             if (closeToken.RawKind != 0 && !closeToken.IsMissing)
@@ -130,7 +134,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             Func<TSyntax, SyntaxToken, bool> isArgumentListToken,
             CancellationToken cancellationToken,
             out TSyntax expression
-        ) where TSyntax : SyntaxNode
+        )
+            where TSyntax : SyntaxNode
         {
             var token = root.FindTokenOnLeftOfPosition(position);
             if (triggerReason == SignatureHelpTriggerReason.TypeCharCommand)

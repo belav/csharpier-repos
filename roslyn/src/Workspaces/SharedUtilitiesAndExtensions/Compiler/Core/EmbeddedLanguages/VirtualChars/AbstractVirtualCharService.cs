@@ -257,7 +257,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
             TTextInfo info,
             ImmutableSegmentedList<VirtualChar>.Builder result,
             int offset
-        ) where TTextInfo : struct, ITextInfo<T>
+        )
+            where TTextInfo : struct, ITextInfo<T>
         {
             var ch = info.Get(tokenText, index);
 

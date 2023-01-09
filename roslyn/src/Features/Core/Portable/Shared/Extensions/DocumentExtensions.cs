@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             TNode oldNode,
             TNode newNode,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var root = await document
                 .GetRequiredSyntaxRootAsync(cancellationToken)
@@ -42,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             TNode oldNode,
             TNode newNode,
             CancellationToken cancellationToken
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             return document.ReplaceNode(root, oldNode, newNode);
@@ -53,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxNode root,
             TNode oldNode,
             TNode newNode
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             Debug.Assert(
                 document.GetRequiredSyntaxRootSynchronously(CancellationToken.None) == root

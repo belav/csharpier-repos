@@ -71,7 +71,8 @@ namespace System.Data.Tests
             );
         }
 
-        public class TestTypedTable<T> : TypedTableBase<T> where T : DataRow
+        public class TestTypedTable<T> : TypedTableBase<T>
+            where T : DataRow
         {
             public TestTypedTable()
                 : base() { }

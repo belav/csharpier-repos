@@ -65,7 +65,8 @@ namespace System.Security.AccessControl
         }
     }
 
-    public partial class AccessRule<T> : System.Security.AccessControl.AccessRule where T : struct
+    public partial class AccessRule<T> : System.Security.AccessControl.AccessRule
+        where T : struct
     {
         public AccessRule(
             System.Security.Principal.IdentityReference identity,
@@ -231,7 +232,8 @@ namespace System.Security.AccessControl
         }
     }
 
-    public partial class AuditRule<T> : System.Security.AccessControl.AuditRule where T : struct
+    public partial class AuditRule<T> : System.Security.AccessControl.AuditRule
+        where T : struct
     {
         public AuditRule(
             System.Security.Principal.IdentityReference identity,
@@ -1319,7 +1321,8 @@ namespace System.Security.AccessControl
     }
 
     public abstract partial class ObjectSecurity<T>
-        : System.Security.AccessControl.NativeObjectSecurity where T : struct
+        : System.Security.AccessControl.NativeObjectSecurity
+        where T : struct
     {
         protected ObjectSecurity(
             bool isContainer,
@@ -1772,7 +1775,8 @@ namespace System.Security.Policy
         )]
         public void AddHost(object id) { }
 
-        public void AddHostEvidence<T>(T evidence) where T : System.Security.Policy.EvidenceBase { }
+        public void AddHostEvidence<T>(T evidence)
+            where T : System.Security.Policy.EvidenceBase { }
 
         public void Clear() { }
 
@@ -1791,7 +1795,8 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public T? GetAssemblyEvidence<T>() where T : System.Security.Policy.EvidenceBase
+        public T? GetAssemblyEvidence<T>()
+            where T : System.Security.Policy.EvidenceBase
         {
             throw null;
         }
@@ -1809,7 +1814,8 @@ namespace System.Security.Policy
             throw null;
         }
 
-        public T? GetHostEvidence<T>() where T : System.Security.Policy.EvidenceBase
+        public T? GetHostEvidence<T>()
+            where T : System.Security.Policy.EvidenceBase
         {
             throw null;
         }

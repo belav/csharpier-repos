@@ -31,7 +31,8 @@ namespace GitHub_23861
             TestVectorLessThanAll<double>();
         }
 
-        private static void TestVectorLessThanAll<T>() where T : struct
+        private static void TestVectorLessThanAll<T>()
+            where T : struct
         {
             T[] values1 = new T[Vector<T>.Count];
             for (int g = 0; g < Vector<T>.Count; g++)

@@ -263,7 +263,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
             typebuilder.SetCustomAttribute(customAttributeInfo.Builder);
         }
 
-        public void DefineCustomAttribute<TAttribute>() where TAttribute : Attribute, new()
+        public void DefineCustomAttribute<TAttribute>()
+            where TAttribute : Attribute, new()
         {
             var customAttributeInfo = AttributeUtil.CreateInfo<TAttribute>();
             typebuilder.SetCustomAttribute(customAttributeInfo.Builder);

@@ -304,7 +304,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     ImmutableArray<SymbolKindOrTypeKind>
                 > possibleDeclarationComputer,
                 CancellationToken cancellationToken
-            ) where TSyntaxNode : SyntaxNode
+            )
+                where TSyntaxNode : SyntaxNode
             {
                 if (!IsPossibleTypeToken(token) && !token.IsKind(SyntaxKind.CommaToken))
                 {
@@ -358,7 +359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     ImmutableArray<SymbolKindOrTypeKind>
                 > possibleDeclarationComputer,
                 CancellationToken cancellationToken
-            ) where TSyntaxNode : SyntaxNode
+            )
+                where TSyntaxNode : SyntaxNode
             {
                 if (!IsPossibleTypeToken(token))
                 {

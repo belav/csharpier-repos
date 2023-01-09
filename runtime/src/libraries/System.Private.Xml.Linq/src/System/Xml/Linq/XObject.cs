@@ -182,7 +182,8 @@ namespace System.Xml.Linq
         /// The first matching annotation object, or null if no annotation
         /// is the specified type.
         /// </returns>
-        public T? Annotation<T>() where T : class
+        public T? Annotation<T>()
+            where T : class
         {
             if (annotations != null)
             {
@@ -245,7 +246,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <typeparam name="T">The type of the annotations to retrieve.</typeparam>
         /// <returns>An enumerable collection of annotations for this XObject.</returns>
-        public IEnumerable<T> Annotations<T>() where T : class
+        public IEnumerable<T> Annotations<T>()
+            where T : class
         {
             if (annotations != null)
             {
@@ -317,7 +319,8 @@ namespace System.Xml.Linq
         /// Removes the annotations of the specified type from this <see cref="XObject"/>.
         /// </summary>
         /// <typeparam name="T">The type of annotations to remove.</typeparam>
-        public void RemoveAnnotations<T>() where T : class
+        public void RemoveAnnotations<T>()
+            where T : class
         {
             if (annotations != null)
             {

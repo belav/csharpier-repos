@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this List<T> list,
             Func<T, TArg, T?> transform,
             TArg arg
-        ) where T : class
+        )
+            where T : class
         {
             RoslynDebug.AssertNotNull(list);
             RoslynDebug.AssertNotNull(transform);
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Func<T, TArg, bool> selector,
             TArg arg,
             [NotNullWhen(true)] out T? removedItem
-        ) where T : notnull
+        )
+            where T : notnull
         {
             for (var i = 0; i < list.Count; i++)
             {

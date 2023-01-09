@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// the diagnostics with different UI presentations.
     /// </summary>
     internal abstract partial class AbstractDiagnosticsTaggerProvider<TTag>
-        : AsynchronousTaggerProvider<TTag> where TTag : ITag
+        : AsynchronousTaggerProvider<TTag>
+        where TTag : ITag
     {
         private readonly IDiagnosticService _diagnosticService;
         private readonly IDiagnosticAnalyzerService _analyzerService;

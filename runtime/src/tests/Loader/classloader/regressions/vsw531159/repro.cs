@@ -5,7 +5,8 @@ using System;
 
 public class Gen<U>
 {
-    public void Meth<T>(T t) where T : struct, U { }
+    public void Meth<T>(T t)
+        where T : struct, U { }
 }
 
 public class Test_repro

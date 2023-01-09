@@ -15,7 +15,8 @@ namespace test
         }
     }
 
-    public class MoreConstrained<T> where T : Control
+    public class MoreConstrained<T>
+        where T : Control
     {
         public void test(T param)
         {
@@ -25,7 +26,8 @@ namespace test
         }
     }
 
-    public class LessConstrained<T> where T : class
+    public class LessConstrained<T>
+        where T : class
     {
         public void test<T2>()
         {

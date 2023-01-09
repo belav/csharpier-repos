@@ -355,7 +355,8 @@ namespace System.Collections.Concurrent
             System.Collections.Generic.IReadOnlyDictionary<TKey, TValue>,
             System.Collections.ICollection,
             System.Collections.IDictionary,
-            System.Collections.IEnumerable where TKey : notnull
+            System.Collections.IEnumerable
+        where TKey : notnull
     {
         public ConcurrentDictionary() { }
 

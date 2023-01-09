@@ -11,7 +11,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoKeptC
 
         [Kept]
         [KeptMember(".ctor()")]
-        class Bar<T> where T : IFoo { }
+        class Bar<T>
+            where T : IFoo { }
 
         [Kept]
         [KeptInterface(typeof(IFoo))]

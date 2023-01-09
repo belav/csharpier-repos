@@ -69,7 +69,8 @@ namespace Newtonsoft.Json.Serialization
         private static ReflectionObject? _metadataTypeAttributeReflectionObject;
 #endif
 
-        public static T? GetCachedAttribute<T>(object attributeProvider) where T : Attribute
+        public static T? GetCachedAttribute<T>(object attributeProvider)
+            where T : Attribute
         {
             return CachedAttributeGetter<T>.GetAttribute(attributeProvider);
         }
@@ -386,7 +387,8 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        private static T? GetAttribute<T>(Type type) where T : Attribute
+        private static T? GetAttribute<T>(Type type)
+            where T : Attribute
         {
             T? attribute;
 
@@ -420,7 +422,8 @@ namespace Newtonsoft.Json.Serialization
             return null;
         }
 
-        private static T? GetAttribute<T>(MemberInfo memberInfo) where T : Attribute
+        private static T? GetAttribute<T>(MemberInfo memberInfo)
+            where T : Attribute
         {
             T? attribute;
 
@@ -515,7 +518,8 @@ namespace Newtonsoft.Json.Serialization
         }
 #endif
 
-        public static T? GetAttribute<T>(object provider) where T : Attribute
+        public static T? GetAttribute<T>(object provider)
+            where T : Attribute
         {
             if (provider is Type type)
             {

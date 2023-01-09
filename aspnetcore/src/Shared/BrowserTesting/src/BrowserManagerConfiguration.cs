@@ -224,7 +224,8 @@ public class BrowserManagerConfiguration
             }
         );
 
-    private static T BindValue<T>(IConfiguration configuration, string key) where T : new()
+    private static T BindValue<T>(IConfiguration configuration, string key)
+        where T : new()
     {
         var instance = new T();
         var section = configuration.GetSection(key);

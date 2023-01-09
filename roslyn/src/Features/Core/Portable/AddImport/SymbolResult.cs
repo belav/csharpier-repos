@@ -84,7 +84,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             }
         }
 
-        private readonly struct SymbolResult<T> where T : ISymbol
+        private readonly struct SymbolResult<T>
+            where T : ISymbol
         {
             // The symbol that matched the string being searched for.
             public readonly T Symbol;
@@ -112,8 +113,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 NameNode = nameNode;
             }
 
-            public SymbolResult<T2> WithSymbol<T2>(T2 symbol) where T2 : ISymbol =>
-                new(DesiredName, NameNode, symbol, Weight);
+            public SymbolResult<T2> WithSymbol<T2>(T2 symbol)
+                where T2 : ISymbol => new(DesiredName, NameNode, symbol, Weight);
 
             internal SymbolResult<T> WithDesiredName(string desiredName) =>
                 new(desiredName, NameNode, Symbol, Weight);
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.AddImport
                 TSimpleNameSyntax nameNode,
                 T symbol,
                 double weight
-            ) where T : ISymbol => new(desiredName, nameNode, symbol, weight);
+            )
+                where T : ISymbol => new(desiredName, nameNode, symbol, weight);
         }
     }
 }

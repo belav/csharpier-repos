@@ -128,7 +128,8 @@ public unsafe class SseTests
     byte* pArray2 = null;
 
     // some SRI methods require memory to be aligned to 16bytes boundary (in case of Vector128)
-    static T* AllocateAligned<T>(int elements) where T : unmanaged
+    static T* AllocateAligned<T>(int elements)
+        where T : unmanaged
     {
         IntPtr ptr = Marshal.AllocHGlobal(elements * sizeof(T) + 15);
         return (T*)(16 * (((long)ptr + 15) / 16));
@@ -165,7 +166,8 @@ public unsafe class SseTests
         }
     }
 
-    private bool IsEmpty<T>(T* array) where T : unmanaged
+    private bool IsEmpty<T>(T* array)
+        where T : unmanaged
     {
         for (var i = 0; i < Vector128<T>.Count; i++)
         {
@@ -180,7 +182,8 @@ public unsafe class SseTests
         return true;
     }
 
-    private string PrintArray<T>(T* array) where T : unmanaged
+    private string PrintArray<T>(T* array)
+        where T : unmanaged
     {
         var sb = new StringBuilder();
         sb.Append("<");
@@ -202,7 +205,8 @@ public unsafe class SseTests
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    Vector128<T> GetV128<T>() where T : unmanaged
+    Vector128<T> GetV128<T>()
+        where T : unmanaged
     {
         int randMult = 1;
         int rand0_10 = rand.Next(0, 11);

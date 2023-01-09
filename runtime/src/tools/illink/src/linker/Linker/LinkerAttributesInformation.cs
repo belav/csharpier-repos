@@ -123,13 +123,15 @@ namespace Mono.Linker
             return new LinkerAttributesInformation(cache);
         }
 
-        public bool HasAttribute<T>() where T : Attribute
+        public bool HasAttribute<T>()
+            where T : Attribute
         {
             return _linkerAttributes != null
                 && TryFindAttributeList(_linkerAttributes, typeof(T), out _);
         }
 
-        public IEnumerable<T> GetAttributes<T>() where T : Attribute
+        public IEnumerable<T> GetAttributes<T>()
+            where T : Attribute
         {
             if (_linkerAttributes == null)
                 return Enumerable.Empty<T>();

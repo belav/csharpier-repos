@@ -631,7 +631,8 @@ namespace System.Net.Security
         private async ValueTask<int> ReadAsync<TIOAdapter>(
             Memory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_context is not null);
 
@@ -815,7 +816,8 @@ namespace System.Net.Security
         private async Task WriteAsync<TIOAdapter>(
             ReadOnlyMemory<byte> buffer,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_context is not null);
 
@@ -1134,7 +1136,8 @@ namespace System.Net.Security
         private async Task SendBlobAsync<TIOAdapter>(
             byte[]? message,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             Debug.Assert(_context != null);
 
@@ -1352,7 +1355,8 @@ namespace System.Net.Security
             byte[] message,
             Exception exception,
             CancellationToken cancellationToken
-        ) where TIOAdapter : IReadWriteAdapter
+        )
+            where TIOAdapter : IReadWriteAdapter
         {
             _framer!.WriteHeader.MessageId = FrameHeader.HandshakeErrId;
 

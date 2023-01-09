@@ -128,7 +128,8 @@ namespace System.Xml.Linq
         /// <summary>
         /// Returns an <see cref="IEnumerable"/> of <see cref="XNode"/> over the content of a set of nodes
         /// </summary>
-        public static IEnumerable<XNode> Nodes<T>(this IEnumerable<T?> source) where T : XContainer
+        public static IEnumerable<XNode> Nodes<T>(this IEnumerable<T?> source)
+            where T : XContainer
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -303,7 +304,8 @@ namespace System.Xml.Linq
         /// for each <see cref="XElement"/> in this <see cref="IEnumerable"/> of <see cref="XElement"/>.
         /// in document order
         /// </returns>
-        public static IEnumerable<T> InDocumentOrder<T>(this IEnumerable<T> source) where T : XNode?
+        public static IEnumerable<T> InDocumentOrder<T>(this IEnumerable<T> source)
+            where T : XNode?
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -345,7 +347,8 @@ namespace System.Xml.Linq
         /// T which must be a derived from <see cref="XNode"/>.  Note that this method uses snapshot semantics
         /// (copies the <see cref="XNode"/>s to an array before deleting each).
         /// </summary>
-        public static void Remove<T>(this IEnumerable<T?> source) where T : XNode
+        public static void Remove<T>(this IEnumerable<T?> source)
+            where T : XNode
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -384,7 +387,8 @@ namespace System.Xml.Linq
             IEnumerable<T?> source,
             XName? name,
             bool self
-        ) where T : XNode
+        )
+            where T : XNode
         {
             foreach (XNode? node in source)
             {
@@ -437,7 +441,8 @@ namespace System.Xml.Linq
             IEnumerable<T?> source,
             XName? name,
             bool self
-        ) where T : XContainer
+        )
+            where T : XContainer
         {
             foreach (XContainer? root in source)
             {

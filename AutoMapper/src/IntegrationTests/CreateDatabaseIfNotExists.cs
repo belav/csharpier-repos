@@ -6,7 +6,8 @@ namespace AutoMapper.IntegrationTests;
 public class CreateDatabaseIfNotExists<TContext> : DropCreateDatabaseAlways<TContext>
     where TContext : DbContext, new() { }
 
-public class DropCreateDatabaseAlways<TContext> where TContext : DbContext, new()
+public class DropCreateDatabaseAlways<TContext>
+    where TContext : DbContext, new()
 {
     protected virtual void Seed(TContext context) { }
 

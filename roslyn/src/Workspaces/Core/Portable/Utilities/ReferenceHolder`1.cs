@@ -6,7 +6,8 @@ using System;
 
 namespace Roslyn.Utilities
 {
-    internal readonly struct ReferenceHolder<T> : IEquatable<ReferenceHolder<T>> where T : class?
+    internal readonly struct ReferenceHolder<T> : IEquatable<ReferenceHolder<T>>
+        where T : class?
     {
         private readonly T? _strongReference;
         private readonly WeakReference<T>? _weakReference;

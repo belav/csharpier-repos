@@ -196,7 +196,8 @@ public abstract class TestHelpers
         IModel model,
         EntityState entityState = EntityState.Detached,
         TEntity entity = null
-    ) where TEntity : class, new()
+    )
+        where TEntity : class, new()
     {
         var entry = CreateContextServices(model)
             .GetRequiredService<IStateManager>()
@@ -322,7 +323,8 @@ public abstract class TestHelpers
         Action<TContext> nestedTestOperation1 = null,
         Action<TContext> nestedTestOperation2 = null,
         Action<TContext> nestedTestOperation3 = null
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         using var c = createContext();
         c.Database
@@ -379,7 +381,8 @@ public abstract class TestHelpers
         Func<TContext, Task> nestedTestOperation1 = null,
         Func<TContext, Task> nestedTestOperation2 = null,
         Func<TContext, Task> nestedTestOperation3 = null
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         using var c = createContext();
         await c.Database

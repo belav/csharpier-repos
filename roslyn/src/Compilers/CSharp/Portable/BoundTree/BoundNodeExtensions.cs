@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal static partial class BoundNodeExtensions
     {
         // Return if any node in an array of nodes has errors.
-        public static bool HasErrors<T>(this ImmutableArray<T> nodeArray) where T : BoundNode
+        public static bool HasErrors<T>(this ImmutableArray<T> nodeArray)
+            where T : BoundNode
         {
             if (nodeArray.IsDefault)
                 return false;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
         }
 
-        public static T MakeCompilerGenerated<T>(this T node) where T : BoundNode
+        public static T MakeCompilerGenerated<T>(this T node)
+            where T : BoundNode
         {
             node.WasCompilerGenerated = true;
             return node;
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TArg arg,
             Func<TInterpolatedStringType, TArg, bool> stringCallback,
             Action<BoundBinaryOperator, TArg>? binaryOperatorCallback = null
-        ) where TInterpolatedStringType : BoundInterpolatedStringBase
+        )
+            where TInterpolatedStringType : BoundInterpolatedStringBase
         {
             var stack = ArrayBuilder<BoundBinaryOperator>.GetInstance();
 
@@ -204,7 +207,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TArg arg,
             Func<TInterpolatedStringType, int, TArg, TResult> interpolatedStringFactory,
             Func<BoundBinaryOperator, TResult, TResult, TArg, TResult> binaryOperatorFactory
-        ) where TInterpolatedStringType : BoundInterpolatedStringBase
+        )
+            where TInterpolatedStringType : BoundInterpolatedStringBase
         {
             int i = 0;
 

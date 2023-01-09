@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for managing roles in a persistence store.
 /// </summary>
 /// <typeparam name="TRole">The type encapsulating a role.</typeparam>
-public class RoleManager<TRole> : IDisposable where TRole : class
+public class RoleManager<TRole> : IDisposable
+    where TRole : class
 {
     private bool _disposed;
 

@@ -690,7 +690,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             Document document,
             int position,
             CancellationToken cancellationToken
-        ) where T : BaseArgumentListSyntax
+        )
+            where T : BaseArgumentListSyntax
         {
             // Reorders and removes arguments
             // e.g. P(a, b, c) ==> P(c, a)
@@ -866,7 +867,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             SeparatedSyntaxList<T> list,
             SignatureChange updatedSignature,
             Func<AddedParameter, T> createNewParameterMethod
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             var (parameters, separators) = base.UpdateDeclarationBase<T>(
                 list,

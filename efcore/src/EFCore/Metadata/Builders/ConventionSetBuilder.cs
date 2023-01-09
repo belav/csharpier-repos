@@ -43,7 +43,8 @@ public class ConventionSetBuilder
     /// <param name="conventionFactory">The factory that creates the new convention.</param>
     public virtual void Replace<TImplementation>(
         Func<IServiceProvider, TImplementation> conventionFactory
-    ) where TImplementation : IConvention
+    )
+        where TImplementation : IConvention
     {
         var convention = conventionFactory(_serviceProvider);
         _conventionSet.Replace(convention);
@@ -69,8 +70,8 @@ public class ConventionSetBuilder
     ///     Remove the convention of the given type.
     /// </summary>
     /// <typeparam name="TImplementaion">The type of convention to remove</typeparam>
-    public virtual void Remove<TImplementaion>() where TImplementaion : IConvention =>
-        Remove(typeof(TImplementaion));
+    public virtual void Remove<TImplementaion>()
+        where TImplementaion : IConvention => Remove(typeof(TImplementaion));
 
     #region Hidden System.Object members
 

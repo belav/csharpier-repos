@@ -48,7 +48,8 @@ namespace System.Security.Cryptography
         }
 
         [RequiresUnreferencedCode(CreateFromNameUnreferencedCodeMessage)]
-        internal static T? CreateFromName<T>(string name) where T : class
+        internal static T? CreateFromName<T>(string name)
+            where T : class
         {
             object? o = s_createFromName(name);
             try

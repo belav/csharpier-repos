@@ -95,7 +95,7 @@ namespace Microsoft.Extensions.Logging.Console
         }
 
         /// <inheritdoc />
-        public IDisposable BeginScope<TState>(TState state) where TState : notnull =>
-            ScopeProvider?.Push(state) ?? NullScope.Instance;
+        public IDisposable BeginScope<TState>(TState state)
+            where TState : notnull => ScopeProvider?.Push(state) ?? NullScope.Instance;
     }
 }

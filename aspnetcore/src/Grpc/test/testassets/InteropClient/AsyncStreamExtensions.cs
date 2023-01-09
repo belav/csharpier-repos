@@ -34,7 +34,8 @@ public static class AsyncStreamExtensions
     public static async Task ForEachAsync<T>(
         this IAsyncStreamReader<T> streamReader,
         Func<T, Task> asyncAction
-    ) where T : class
+    )
+        where T : class
     {
         while (await streamReader.MoveNext().ConfigureAwait(false))
         {
@@ -64,7 +65,8 @@ public static class AsyncStreamExtensions
         this IClientStreamWriter<T> streamWriter,
         IEnumerable<T> elements,
         bool complete = true
-    ) where T : class
+    )
+        where T : class
     {
         foreach (var element in elements)
         {
@@ -82,7 +84,8 @@ public static class AsyncStreamExtensions
     public static async Task WriteAllAsync<T>(
         this IServerStreamWriter<T> streamWriter,
         IEnumerable<T> elements
-    ) where T : class
+    )
+        where T : class
     {
         foreach (var element in elements)
         {

@@ -343,7 +343,8 @@ namespace System.Diagnostics.Contracts
         /// Use this form when you want to throw a particular exception.
         /// </remarks>
         [Pure]
-        public static void Requires<TException>(bool condition) where TException : Exception
+        public static void Requires<TException>(bool condition)
+            where TException : Exception
         {
             AssertMustUseRewriter(ContractFailureKind.Precondition, "Requires<TException>");
         }
@@ -414,7 +415,8 @@ namespace System.Diagnostics.Contracts
         /// </remarks>
         [Pure]
         [Conditional("CONTRACTS_FULL")]
-        public static void EnsuresOnThrow<TException>(bool condition) where TException : Exception
+        public static void EnsuresOnThrow<TException>(bool condition)
+            where TException : Exception
         {
             AssertMustUseRewriter(ContractFailureKind.PostconditionOnException, "EnsuresOnThrow");
         }

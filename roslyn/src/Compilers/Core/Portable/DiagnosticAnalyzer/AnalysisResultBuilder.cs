@@ -288,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>
             >? lazyLocalDiagnostics,
             bool dedupeDiagnostics = false
-        ) where TKey : class
+        )
+            where TKey : class
         {
             if (diagnostics.IsEmpty)
             {
@@ -453,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             >? lazyLocalDiagnostics,
             AnalysisScope analysisScope,
             ImmutableArray<Diagnostic>.Builder builder
-        ) where TKey : class
+        )
+            where TKey : class
         {
             if (lazyLocalDiagnostics != null)
             {
@@ -502,7 +504,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             TKey? key,
             ImmutableArray<DiagnosticAnalyzer> analyzers,
             ImmutableArray<Diagnostic>.Builder builder
-        ) where TKey : class
+        )
+            where TKey : class
         {
             Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>? diagnosticsForTree;
             if (
@@ -603,7 +606,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 TKey,
                 Dictionary<DiagnosticAnalyzer, ImmutableArray<Diagnostic>.Builder>
             >? localDiagnosticsOpt
-        ) where TKey : class
+        )
+            where TKey : class
         {
             if (localDiagnosticsOpt == null)
             {

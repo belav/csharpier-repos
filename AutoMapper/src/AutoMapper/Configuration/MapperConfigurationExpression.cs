@@ -18,7 +18,8 @@ public interface IMapperConfigurationExpression : IProfileExpression
     /// Add an existing profile type. Profile will be instantiated and added to the configuration.
     /// </summary>
     /// <typeparam name="TProfile">Profile type</typeparam>
-    void AddProfile<TProfile>() where TProfile : Profile, new();
+    void AddProfile<TProfile>()
+        where TProfile : Profile, new();
 
     /// <summary>
     /// Add an existing profile type. Profile will be instantiated and added to the configuration.
@@ -142,8 +143,8 @@ public class MapperConfigurationExpression : Profile, IGlobalConfigurationExpres
 
     public void AddProfile(Profile profile) => _profiles.Add(profile);
 
-    public void AddProfile<TProfile>() where TProfile : Profile, new() =>
-        AddProfile(new TProfile());
+    public void AddProfile<TProfile>()
+        where TProfile : Profile, new() => AddProfile(new TProfile());
 
     public void AddProfile(Type profileType) =>
         AddProfile((Profile)Activator.CreateInstance(profileType));

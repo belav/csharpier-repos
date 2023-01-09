@@ -37,7 +37,8 @@ namespace Moq
                 sequenceStep = sequenceStep % sequenceLength;
         }
 
-        internal ISetupConditionResult<TMock> For<TMock>(Mock<TMock> mock) where TMock : class
+        internal ISetupConditionResult<TMock> For<TMock>(Mock<TMock> mock)
+            where TMock : class
         {
             var expectationPosition = sequenceLength++;
 
@@ -63,7 +64,8 @@ namespace Moq
         public static ISetupConditionResult<TMock> InSequence<TMock>(
             this Mock<TMock> mock,
             MockSequence sequence
-        ) where TMock : class
+        )
+            where TMock : class
         {
             Guard.NotNull(sequence, nameof(sequence));
 

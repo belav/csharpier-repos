@@ -25,7 +25,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.StaticInterfaceMethods
         }
 
         [Kept]
-        static void CallGetIntStaticUsed<T>() where T : IFooStaticUsed
+        static void CallGetIntStaticUsed<T>()
+            where T : IFooStaticUsed
         {
             T.StaticAbstract();
         }

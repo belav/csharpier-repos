@@ -6,7 +6,8 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.AddParameter
 {
-    internal class RegisterFixData<TArgumentSyntax> where TArgumentSyntax : SyntaxNode
+    internal class RegisterFixData<TArgumentSyntax>
+        where TArgumentSyntax : SyntaxNode
     {
         public RegisterFixData()
             : this(

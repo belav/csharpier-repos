@@ -900,7 +900,8 @@ namespace System.CommandLine.Tests.Binding
             AssertParsedValueIsEmpty((dynamic)argument);
         }
 
-        private void AssertParsedValueIsEmpty<T>(Argument<T> argument) where T : IEnumerable
+        private void AssertParsedValueIsEmpty<T>(Argument<T> argument)
+            where T : IEnumerable
         {
             var result = argument.Parse("");
 

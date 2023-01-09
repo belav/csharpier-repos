@@ -18,7 +18,8 @@ internal class Program
             );
     }
 
-    private static void TestCase0001<T>() where T : struct
+    private static void TestCase0001<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -977,7 +978,8 @@ internal class Program
         }
     } // end of test case 0001
 
-    private static void TestCase0002<T>() where T : struct
+    private static void TestCase0002<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -1936,7 +1938,8 @@ internal class Program
         }
     } // end of test case 0002
 
-    private static void TestCase0003<T>() where T : struct
+    private static void TestCase0003<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -2895,7 +2898,8 @@ internal class Program
         }
     } // end of test case 0003
 
-    private static void TestCase0004<T>() where T : struct
+    private static void TestCase0004<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -3854,7 +3858,8 @@ internal class Program
         }
     } // end of test case 0004
 
-    private static void TestCase0005<T>() where T : struct
+    private static void TestCase0005<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -4813,7 +4818,8 @@ internal class Program
         }
     } // end of test case 0005
 
-    private static void TestCase0006<T>() where T : struct
+    private static void TestCase0006<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -5772,7 +5778,8 @@ internal class Program
         }
     } // end of test case 0006
 
-    private static void TestCase0007<T>() where T : struct
+    private static void TestCase0007<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -6731,7 +6738,8 @@ internal class Program
         }
     } // end of test case 0007
 
-    private static void TestCase0008<T>() where T : struct
+    private static void TestCase0008<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -7690,7 +7698,8 @@ internal class Program
         }
     } // end of test case 0008
 
-    private static void TestCase0009<T>() where T : struct
+    private static void TestCase0009<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -8649,7 +8658,8 @@ internal class Program
         }
     } // end of test case 0009
 
-    private static void TestCase0010<T>() where T : struct
+    private static void TestCase0010<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -9608,7 +9618,8 @@ internal class Program
         }
     } // end of test case 0010
 
-    private static void TestCase0011<T>() where T : struct
+    private static void TestCase0011<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -10567,7 +10578,8 @@ internal class Program
         }
     } // end of test case 0011
 
-    private static void TestCase0012<T>() where T : struct
+    private static void TestCase0012<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -11526,7 +11538,8 @@ internal class Program
         }
     } // end of test case 0012
 
-    private static void TestCase0013<T>() where T : struct
+    private static void TestCase0013<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -12485,7 +12498,8 @@ internal class Program
         }
     } // end of test case 0013
 
-    private static void TestCase0014<T>() where T : struct
+    private static void TestCase0014<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -13444,7 +13458,8 @@ internal class Program
         }
     } // end of test case 0014
 
-    private static void TestCase0015<T>() where T : struct
+    private static void TestCase0015<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -14403,7 +14418,8 @@ internal class Program
         }
     } // end of test case 0015
 
-    private static void TestCase0016<T>() where T : struct
+    private static void TestCase0016<T>()
+        where T : struct
     {
         {
             T v = default(T);
@@ -15362,7 +15378,8 @@ internal class Program
         }
     } // end of test case 0016
 
-    private static void TestCase0017<T>() where T : struct
+    private static void TestCase0017<T>()
+        where T : struct
     {
         {
             T v = default(T);

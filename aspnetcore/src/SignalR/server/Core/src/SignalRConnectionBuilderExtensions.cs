@@ -24,7 +24,8 @@ public static class SignalRConnectionBuilderExtensions
     /// <returns>The same instance of the <see cref="IConnectionBuilder"/> for chaining.</returns>
     public static IConnectionBuilder UseHub<[DynamicallyAccessedMembers(HubAccessibility)] THub>(
         this IConnectionBuilder connectionBuilder
-    ) where THub : Hub
+    )
+        where THub : Hub
     {
         var marker = connectionBuilder.ApplicationServices.GetService(
             typeof(SignalRCoreMarkerService)

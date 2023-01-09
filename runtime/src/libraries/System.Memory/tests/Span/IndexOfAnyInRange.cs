@@ -168,7 +168,8 @@ namespace System.SpanTests
         public int CompareTo(RefType? other) => other is null ? 1 : Value.CompareTo(other.Value);
     }
 
-    public abstract class IndexOfAnyInRangeTests<T> where T : IComparable<T>
+    public abstract class IndexOfAnyInRangeTests<T>
+        where T : IComparable<T>
     {
         protected abstract T Create(int value);
 

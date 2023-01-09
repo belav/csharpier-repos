@@ -56,7 +56,8 @@ namespace System.CommandLine
         public static TOption AddCompletions<TOption>(
             this TOption option,
             Func<CompletionContext, IEnumerable<string>> complete
-        ) where TOption : Option
+        )
+            where TOption : Option
         {
             option.Argument.Completions.Add(complete);
 
@@ -73,7 +74,8 @@ namespace System.CommandLine
         public static TOption AddCompletions<TOption>(
             this TOption option,
             CompletionDelegate complete
-        ) where TOption : Option
+        )
+            where TOption : Option
         {
             option.Argument.Completions.Add(complete);
 

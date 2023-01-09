@@ -28,7 +28,8 @@ public static class SqlServerTestModelBuilderExtensions
     public static RelationalModelBuilderTest.TestTableBuilder<TEntity> IsMemoryOptimized<TEntity>(
         this RelationalModelBuilderTest.TestTableBuilder<TEntity> builder,
         bool memoryOptimized = true
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -74,7 +75,8 @@ public static class SqlServerTestModelBuilderExtensions
     public static RelationalModelBuilderTest.TestTableBuilder<TEntity> IsTemporal<TEntity>(
         this RelationalModelBuilderTest.TestTableBuilder<TEntity> builder,
         bool temporal = true
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -92,7 +94,8 @@ public static class SqlServerTestModelBuilderExtensions
     public static RelationalModelBuilderTest.TestTableBuilder<TEntity> IsTemporal<TEntity>(
         this RelationalModelBuilderTest.TestTableBuilder<TEntity> builder,
         Action<SqlServerModelBuilderTestBase.TestTemporalTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {

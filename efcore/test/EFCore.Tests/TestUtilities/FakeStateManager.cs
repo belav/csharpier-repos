@@ -80,8 +80,8 @@ public class FakeStateManager : IStateManager
 
     public bool SavingChanges => throw new NotImplementedException();
 
-    public IEnumerable<TEntity> GetNonDeletedEntities<TEntity>() where TEntity : class =>
-        throw new NotImplementedException();
+    public IEnumerable<TEntity> GetNonDeletedEntities<TEntity>()
+        where TEntity : class => throw new NotImplementedException();
 
     public IEntityFinder CreateEntityFinder(IEntityType entityType) =>
         throw new NotImplementedException();

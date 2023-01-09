@@ -59,7 +59,8 @@ namespace System.Buffers
             ReadOnlySpan<T> values,
             out Vector128<byte> bitmap,
             out BitVector256 lookup
-        ) where T : struct, IUnsignedNumber<T>
+        )
+            where T : struct, IUnsignedNumber<T>
         {
             Debug.Assert(typeof(T) == typeof(byte) || typeof(T) == typeof(char));
 
@@ -178,7 +179,8 @@ namespace System.Buffers
             int searchSpaceLength,
             ReadOnlySpan<char> asciiValues,
             out int index
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             Debug.Assert(searchSpaceLength >= Vector128<short>.Count);
 
@@ -213,7 +215,8 @@ namespace System.Buffers
             int searchSpaceLength,
             ReadOnlySpan<char> asciiValues,
             out int index
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             Debug.Assert(searchSpaceLength >= Vector128<short>.Count);
 
@@ -598,7 +601,8 @@ namespace System.Buffers
             int searchSpaceLength,
             Vector128<byte> bitmap0,
             Vector128<byte> bitmap1
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             ref byte currentSearchSpace = ref searchSpace;
 
@@ -677,7 +681,8 @@ namespace System.Buffers
             int searchSpaceLength,
             Vector128<byte> bitmap0,
             Vector128<byte> bitmap1
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             ref byte currentSearchSpace = ref Unsafe.Add(ref searchSpace, searchSpaceLength);
 
@@ -848,7 +853,8 @@ namespace System.Buffers
             Vector128<byte> source,
             Vector128<byte> bitmapLookup0,
             Vector128<byte> bitmapLookup1
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             // http://0x80.pl/articles/simd-byte-lookup.html#universal-algorithm
 
@@ -887,7 +893,8 @@ namespace System.Buffers
             ref T searchSpace,
             ref T current,
             Vector128<byte> result
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result);
             int offsetInVector = BitOperations.TrailingZeroCount(mask);
@@ -902,7 +909,8 @@ namespace System.Buffers
             ref T current0,
             ref T current1,
             Vector128<byte> result
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result);
             int offsetInVector = BitOperations.TrailingZeroCount(mask);
@@ -922,7 +930,8 @@ namespace System.Buffers
             ref T searchSpace,
             ref T current,
             Vector128<byte> result
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result) & 0xFFFF;
             int offsetInVector = 31 - BitOperations.LeadingZeroCount(mask);
@@ -935,7 +944,8 @@ namespace System.Buffers
             ref T searchSpace,
             ref T secondVector,
             Vector128<byte> result
-        ) where TNegator : struct, INegator
+        )
+            where TNegator : struct, INegator
         {
             uint mask = TNegator.ExtractMask(result) & 0xFFFF;
             int offsetInVector = 31 - BitOperations.LeadingZeroCount(mask);

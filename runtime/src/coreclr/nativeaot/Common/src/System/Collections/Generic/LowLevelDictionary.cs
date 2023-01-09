@@ -23,7 +23,8 @@ namespace System.Collections.Generic
 #if TYPE_LOADER_IMPLEMENTATION
     [System.Runtime.CompilerServices.ForceDictionaryLookups]
 #endif
-    internal class LowLevelDictionary<TKey, TValue> where TKey : IEquatable<TKey>
+    internal class LowLevelDictionary<TKey, TValue>
+        where TKey : IEquatable<TKey>
     {
         private const int DefaultSize = 17;
 
@@ -291,7 +292,8 @@ namespace System.Collections.Generic
     /// </summary>
     internal sealed class LowLevelDictionaryWithIEnumerable<TKey, TValue>
         : LowLevelDictionary<TKey, TValue>,
-            IEnumerable<KeyValuePair<TKey, TValue>> where TKey : IEquatable<TKey>
+            IEnumerable<KeyValuePair<TKey, TValue>>
+        where TKey : IEquatable<TKey>
     {
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {

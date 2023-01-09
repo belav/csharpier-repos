@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         public static TCommandHandler GetCommandHandler<TCommandHandler>(
             this ExportProvider exportProvider,
             string name
-        ) where TCommandHandler : ICommandHandler
+        )
+            where TCommandHandler : ICommandHandler
         {
             var lazyCommandHandlers = exportProvider.GetExports<
                 ICommandHandler,
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             this ExportProvider exportProvider,
             string name,
             string contentType
-        ) where TCommandHandler : ICommandHandler
+        )
+            where TCommandHandler : ICommandHandler
         {
             var lazyCommandHandlers = exportProvider.GetExports<
                 ICommandHandler,

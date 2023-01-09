@@ -238,7 +238,8 @@ public partial class Program
     }
 }
 
-public class GenericEnumClass<T> where T : Enum
+public class GenericEnumClass<T>
+    where T : Enum
 {
     public T field;
 }

@@ -169,7 +169,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static SmallDictionary<string, TSymbol> BuildMap<TSymbol>(
             ImmutableArray<TSymbol> array
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             Debug.Assert(array.Length > 0);
 

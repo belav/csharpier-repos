@@ -96,7 +96,8 @@ namespace System
         private static EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(
             RuntimeType enumType,
             bool getNames = true
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             return
                 enumType.GenericCache is EnumInfo<TUnderlyingValue> info

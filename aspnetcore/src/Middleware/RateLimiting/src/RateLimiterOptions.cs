@@ -84,7 +84,8 @@ public sealed class RateLimiterOptions
     public RateLimiterOptions AddPolicy<
         TPartitionKey,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TPolicy
-    >(string policyName) where TPolicy : IRateLimiterPolicy<TPartitionKey>
+    >(string policyName)
+        where TPolicy : IRateLimiterPolicy<TPartitionKey>
     {
         ArgumentNullException.ThrowIfNull(policyName);
 

@@ -1645,7 +1645,8 @@ namespace Moq.Tests.Regressions
 
             public interface IFruitPicker
             {
-                TFruit Pick<TFruit>() where TFruit : Fruit;
+                TFruit Pick<TFruit>()
+                    where TFruit : Fruit;
             }
 
             [Fact]
@@ -4211,7 +4212,8 @@ namespace Moq.Tests.Regressions
 
         public interface ISomething<T>
         {
-            void DoSomething<U>() where U : T;
+            void DoSomething<U>()
+                where U : T;
         }
 
         [Fact]
@@ -5007,7 +5009,8 @@ namespace Moq.Tests.Regressions
 
             public interface IMyInterface
             {
-                void DoStuff<TFrom, TTo>() where TTo : TFrom;
+                void DoStuff<TFrom, TTo>()
+                    where TTo : TFrom;
             }
         }
 
@@ -5093,7 +5096,8 @@ namespace Moq.Tests.Regressions
 
             public interface IGeneric
             {
-                object Get<T>() where T : new();
+                object Get<T>()
+                    where T : new();
             }
         }
 
@@ -5208,7 +5212,8 @@ namespace Moq.Tests.Regressions
 
             public interface IRepository
             {
-                T Select<T>(Expression<Func<T, bool>> filter) where T : class;
+                T Select<T>(Expression<Func<T, bool>> filter)
+                    where T : class;
             }
 
             public class User
@@ -5472,7 +5477,8 @@ namespace Moq.Tests.Regressions
 
             public interface ITest
             {
-                void Do<T1, T2>() where T2 : T1;
+                void Do<T1, T2>()
+                    where T2 : T1;
             }
         }
 

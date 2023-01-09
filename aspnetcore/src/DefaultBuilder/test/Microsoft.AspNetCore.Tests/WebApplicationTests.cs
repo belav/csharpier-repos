@@ -210,7 +210,8 @@ public class WebApplicationTests
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
             CancellationToken cancellationToken
-        ) where TContext : notnull
+        )
+            where TContext : notnull
         {
             _startOrder.Add(this);
             return Task.CompletedTask;
@@ -2603,7 +2604,8 @@ public class WebApplicationTests
         public Task StartAsync<TContext>(
             IHttpApplication<TContext> application,
             CancellationToken cancellationToken
-        ) where TContext : notnull
+        )
+            where TContext : notnull
         {
             if (_urls.Count == 0)
             {

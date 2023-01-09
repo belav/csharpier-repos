@@ -13,7 +13,8 @@ namespace System
         public static int BinarySearch<T, TComparable>(
             this ReadOnlySpan<T> span,
             TComparable comparable
-        ) where TComparable : IComparable<T>
+        )
+            where TComparable : IComparable<T>
         {
             if (comparable == null)
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.comparable);
@@ -25,7 +26,8 @@ namespace System
             ref T spanStart,
             int length,
             TComparable comparable
-        ) where TComparable : IComparable<T>
+        )
+            where TComparable : IComparable<T>
         {
             int lo = 0;
             int hi = length - 1;

@@ -1758,7 +1758,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         /// </summary>
         internal static IEnumerable<SyntaxToken> GetDescendantTokensIgnoringSeparators<TSyntaxNode>(
             SeparatedSyntaxList<TSyntaxNode> list
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             foreach (var node in list)
             {

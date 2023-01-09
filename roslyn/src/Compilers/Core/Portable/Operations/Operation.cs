@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis
         public static ImmutableArray<T> SetParentOperation<T>(
             ImmutableArray<T> operations,
             IOperation? parent
-        ) where T : IOperation
+        )
+            where T : IOperation
         {
             // check quick bail out case first
             if (operations.Length == 0)
@@ -218,7 +219,8 @@ namespace Microsoft.CodeAnalysis
         internal static void VerifyParentOperation<T>(
             IOperation? parent,
             ImmutableArray<T> children
-        ) where T : IOperation
+        )
+            where T : IOperation
         {
             Debug.Assert(!children.IsDefault);
             foreach (var child in children)

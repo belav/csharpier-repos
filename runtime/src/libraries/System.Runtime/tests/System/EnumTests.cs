@@ -241,7 +241,8 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_TestData))]
-        public static void Parse<T>(string value, bool ignoreCase, T expected) where T : struct
+        public static void Parse<T>(string value, bool ignoreCase, T expected)
+            where T : struct
         {
             T result;
             if (!ignoreCase)
@@ -597,7 +598,8 @@ namespace System.Tests
             string value,
             bool ignoreCase,
             Type exceptionType
-        ) where T : struct
+        )
+            where T : struct
         {
             object result = null;
             if (!ignoreCase)
@@ -2783,7 +2785,8 @@ namespace System.Tests
             AssertExtensions.Throws<ArgumentException>("enumType", () => Enum.GetValues(enumType));
         }
 
-        private class ClassWithEnumConstraint<T> where T : Enum { }
+        private class ClassWithEnumConstraint<T>
+            where T : Enum { }
 
         [Fact]
         public void EnumConstraint_ThrowsArgumentException()
@@ -4443,7 +4446,8 @@ namespace System.Tests
             string expected,
             bool validateDestinationSpanSizeCheck,
             bool validateExtraSpanSpaceNotFilled
-        ) where TEnum : struct, Enum
+        )
+            where TEnum : struct, Enum
         {
             if (validateDestinationSpanSizeCheck)
             {
@@ -4482,7 +4486,8 @@ namespace System.Tests
             TEnum value,
             ReadOnlySpan<char> format,
             string expected
-        ) where TEnum : struct, Enum
+        )
+            where TEnum : struct, Enum
         {
             Span<char> destination = new char[expected.Length];
 
@@ -4495,7 +4500,8 @@ namespace System.Tests
             TEnum value,
             ReadOnlySpan<char> format,
             string expected
-        ) where TEnum : struct, Enum
+        )
+            where TEnum : struct, Enum
         {
             int oneLessThanExpectedLength = expected.Length - 1;
             Span<char> destination = new char[oneLessThanExpectedLength];
@@ -4509,7 +4515,8 @@ namespace System.Tests
             TEnum value,
             ReadOnlySpan<char> format,
             string expected
-        ) where TEnum : struct, Enum
+        )
+            where TEnum : struct, Enum
         {
             int oneMoreThanExpectedLength = expected.Length + 1;
             Span<char> destination = new char[oneMoreThanExpectedLength];

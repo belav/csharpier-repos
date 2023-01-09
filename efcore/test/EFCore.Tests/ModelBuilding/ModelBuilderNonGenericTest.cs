@@ -233,7 +233,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
     protected class NonGenericTestEntityTypeBuilder<TEntity>
         : TestEntityTypeBuilder<TEntity>,
-            IInfrastructure<EntityTypeBuilder> where TEntity : class
+            IInfrastructure<EntityTypeBuilder>
+        where TEntity : class
     {
         public NonGenericTestEntityTypeBuilder(EntityTypeBuilder entityTypeBuilder)
         {
@@ -318,7 +319,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
         public override TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TEntity, TNavigation?>> navigationExpression
-        ) where TNavigation : class =>
+        )
+            where TNavigation : class =>
             new NonGenericTestNavigationBuilder(
                 EntityTypeBuilder.Navigation(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -327,7 +329,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
         public override TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TEntity, IEnumerable<TNavigation>?>> navigationExpression
-        ) where TNavigation : class =>
+        )
+            where TNavigation : class =>
             new NonGenericTestNavigationBuilder(
                 EntityTypeBuilder.Navigation(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -422,7 +425,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
         public override TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsOne(
                     typeof(TRelatedEntity),
@@ -433,7 +437,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
         public override TestOwnedNavigationBuilder<TEntity, TRelatedEntity> OwnsOne<TRelatedEntity>(
             string entityTypeName,
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.OwnsOne(
                     entityTypeName,
@@ -445,7 +450,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
         public override TestEntityTypeBuilder<TEntity> OwnsOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsOne(
                     typeof(TRelatedEntity),
@@ -461,7 +467,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             string entityTypeName,
             Expression<Func<TEntity, TRelatedEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TEntity, TRelatedEntity>> buildAction
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             Wrap(
                 EntityTypeBuilder.OwnsOne(
                     entityTypeName,
@@ -585,7 +592,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
         public override TestReferenceNavigationBuilder<
             TEntity,
             TRelatedEntity
-        > HasOne<TRelatedEntity>(string? navigationName) where TRelatedEntity : class =>
+        > HasOne<TRelatedEntity>(string? navigationName)
+            where TRelatedEntity : class =>
             new NonGenericTestReferenceNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasOne(navigationName)
             );
@@ -595,7 +603,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             TRelatedEntity
         > HasOne<TRelatedEntity>(
             Expression<Func<TEntity, TRelatedEntity?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericTestReferenceNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasOne(
                     typeof(TRelatedEntity),
@@ -606,7 +615,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
         public override TestCollectionNavigationBuilder<
             TEntity,
             TRelatedEntity
-        > HasMany<TRelatedEntity>(string? navigationName) where TRelatedEntity : class =>
+        > HasMany<TRelatedEntity>(string? navigationName)
+            where TRelatedEntity : class =>
             new NonGenericTestCollectionNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasMany(typeof(TRelatedEntity), navigationName)
             );
@@ -616,7 +626,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             TRelatedEntity
         > HasMany<TRelatedEntity>(
             Expression<Func<TEntity, IEnumerable<TRelatedEntity>?>>? navigationExpression = null
-        ) where TRelatedEntity : class =>
+        )
+            where TRelatedEntity : class =>
             new NonGenericTestCollectionNavigationBuilder<TEntity, TRelatedEntity>(
                 EntityTypeBuilder.HasMany(
                     typeof(TRelatedEntity),
@@ -720,7 +731,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
     protected class NonGenericTestOwnedEntityTypeBuilder<TEntity>
         : TestOwnedEntityTypeBuilder<TEntity>,
-            IInfrastructure<OwnedEntityTypeBuilder> where TEntity : class
+            IInfrastructure<OwnedEntityTypeBuilder>
+        where TEntity : class
     {
         public NonGenericTestOwnedEntityTypeBuilder(OwnedEntityTypeBuilder ownedEntityTypeBuilder)
         {
@@ -1570,7 +1582,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class =>
+        )
+            where TJoinEntity : class =>
             new NonGenericTestEntityTypeBuilder<TRightEntity>(
                 CollectionCollectionBuilder.UsingEntity(
                     typeof(TJoinEntity),
@@ -1600,7 +1613,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
                 TestReferenceCollectionBuilder<TRightEntity, TJoinEntity>
             > configureLeft,
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-        ) where TJoinEntity : class =>
+        )
+            where TJoinEntity : class =>
             new NonGenericTestEntityTypeBuilder<TRightEntity>(
                 CollectionCollectionBuilder.UsingEntity(
                     joinEntityName,
@@ -1760,7 +1774,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
         public override TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TDependentEntity, TNavigation?>> navigationExpression
-        ) where TNavigation : class =>
+        )
+            where TNavigation : class =>
             new NonGenericTestNavigationBuilder(
                 OwnedNavigationBuilder.Navigation(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -1769,7 +1784,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
 
         public override TestNavigationBuilder Navigation<TNavigation>(
             Expression<Func<TDependentEntity, IEnumerable<TNavigation>?>> navigationExpression
-        ) where TNavigation : class =>
+        )
+            where TNavigation : class =>
             new NonGenericTestNavigationBuilder(
                 OwnedNavigationBuilder.Navigation(
                     navigationExpression.GetMemberAccess().GetSimpleMemberName()
@@ -1829,7 +1845,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             TNewDependentEntity
         > OwnsOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.OwnsOne(
                     typeof(TNewDependentEntity),
@@ -1843,7 +1860,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
         > OwnsOne<TNewDependentEntity>(
             string entityTypeName,
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.OwnsOne(
                     entityTypeName,
@@ -1858,7 +1876,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
         > OwnsOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TEntity, TDependentEntity>(
                 OwnedNavigationBuilder.OwnsOne(
                     typeof(TNewDependentEntity),
@@ -1880,7 +1899,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             string entityTypeName,
             Expression<Func<TDependentEntity, TNewDependentEntity?>> navigationExpression,
             Action<TestOwnedNavigationBuilder<TDependentEntity, TNewDependentEntity>> buildAction
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TEntity, TDependentEntity>(
                 OwnedNavigationBuilder.OwnsOne(
                     entityTypeName,
@@ -1903,7 +1923,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Expression<
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.OwnsMany(
                     typeof(TNewDependentEntity),
@@ -1919,7 +1940,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             Expression<
                 Func<TDependentEntity, IEnumerable<TNewDependentEntity>?>
             > navigationExpression
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             Wrap<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.OwnsMany(
                     entityTypeName,
@@ -1969,7 +1991,8 @@ public class ModelBuilderNonGenericTest : ModelBuilderTest
             TNewDependentEntity
         > HasOne<TNewDependentEntity>(
             Expression<Func<TDependentEntity, TNewDependentEntity?>>? navigationExpression = null
-        ) where TNewDependentEntity : class =>
+        )
+            where TNewDependentEntity : class =>
             new NonGenericTestReferenceNavigationBuilder<TDependentEntity, TNewDependentEntity>(
                 OwnedNavigationBuilder.HasOne(
                     typeof(TNewDependentEntity),

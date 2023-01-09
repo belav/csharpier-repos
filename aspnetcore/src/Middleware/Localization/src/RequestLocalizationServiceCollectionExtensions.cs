@@ -42,7 +42,8 @@ public static class RequestLocalizationServiceCollectionExtensions
     public static IServiceCollection AddRequestLocalization<TService>(
         this IServiceCollection services,
         Action<RequestLocalizationOptions, TService> configureOptions
-    ) where TService : class
+    )
+        where TService : class
     {
         if (services == null)
         {

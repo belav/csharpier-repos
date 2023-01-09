@@ -10,7 +10,8 @@ using System.Runtime.Intrinsics.X86;
 
 namespace JIT.HardwareIntrinsics.X86
 {
-    public unsafe struct SimdScalarUnaryOpTest__DataTable<TOp1> : IDisposable where TOp1 : struct
+    public unsafe struct SimdScalarUnaryOpTest__DataTable<TOp1> : IDisposable
+        where TOp1 : struct
     {
         public byte[] inArray;
 

@@ -12,7 +12,8 @@ namespace System
     /// <summary>Defines a mechanism for getting the minimum and maximum value of a type.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface IMinMaxValue<TSelf> where TSelf : IMinMaxValue<TSelf>
+    public interface IMinMaxValue<TSelf>
+        where TSelf : IMinMaxValue<TSelf>
     {
         /// <summary>Gets the minimum value of the current type.</summary>
         static abstract TSelf MinValue { get; }

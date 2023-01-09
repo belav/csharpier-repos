@@ -46,7 +46,8 @@ public class RefY3<T, U, V> { }
 
 public class GenException<T> : Exception { }
 
-public class Gen<Ex> where Ex : Exception
+public class Gen<Ex>
+    where Ex : Exception
 {
     public static void ExceptionTest(Ex e)
     {

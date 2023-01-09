@@ -294,9 +294,11 @@ namespace Mono.Linker.Tests.Cases.RequiresCapability
 
             class TestType { }
 
-            static T MakeNew<T>() where T : new() => new T();
+            static T MakeNew<T>()
+                where T : new() => new T();
 
-            static T MakeNew2<T>() where T : new() => MakeNew<T>();
+            static T MakeNew2<T>()
+                where T : new() => MakeNew<T>();
 
             public static void Test()
             {

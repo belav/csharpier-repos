@@ -15,7 +15,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public abstract class ObservableInstrument<T> : Instrument where T : struct
+    public abstract class ObservableInstrument<T> : Instrument
+        where T : struct
     {
         /// <summary>
         /// Create the metrics observable instrument using the properties meter, name, description, and unit.

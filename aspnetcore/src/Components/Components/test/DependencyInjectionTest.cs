@@ -134,8 +134,8 @@ public class DependencyInjectionTest
         Assert.Same(serviceInstance, instance.PrivateMyService);
     }
 
-    private T InstantiateComponent<T>() where T : IComponent =>
-        (T)_renderer.InstantiateComponent<T>();
+    private T InstantiateComponent<T>()
+        where T : IComponent => (T)_renderer.InstantiateComponent<T>();
 
     class HasPropertiesWithoutInjectAttribute : TestComponent
     {

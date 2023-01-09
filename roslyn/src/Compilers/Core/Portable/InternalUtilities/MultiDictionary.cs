@@ -13,7 +13,8 @@ namespace Roslyn.Utilities
 {
     // Note that this is not threadsafe for concurrent reading and writing.
     internal sealed class MultiDictionary<K, V>
-        : IEnumerable<KeyValuePair<K, MultiDictionary<K, V>.ValueSet>> where K : notnull
+        : IEnumerable<KeyValuePair<K, MultiDictionary<K, V>.ValueSet>>
+        where K : notnull
     {
         public readonly struct ValueSet : IEnumerable<V>
         {

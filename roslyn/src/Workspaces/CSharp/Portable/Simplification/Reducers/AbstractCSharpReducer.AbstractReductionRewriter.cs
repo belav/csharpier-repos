@@ -131,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     CancellationToken,
                     SyntaxNode
                 > simplifier
-            ) where TNode : SyntaxNode
+            )
+                where TNode : SyntaxNode
             {
                 RequireInitialized();
 
@@ -177,7 +178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     CancellationToken,
                     SyntaxNode
                 > simplifier
-            ) where TExpression : SyntaxNode
+            )
+                where TExpression : SyntaxNode
             {
                 var parentNode = GetParentNode(expression);
                 if (parentNode == null)

@@ -4,17 +4,20 @@ using System.Collections.Generic;
 
 class Test
 {
-    static U[] Foo<T, U>(T[] arg) where T : class, U
+    static U[] Foo<T, U>(T[] arg)
+        where T : class, U
     {
         return arg;
     }
 
-    public static IEnumerable<U> Foo2<T, U>(IEnumerable<T> arg) where T : class, U
+    public static IEnumerable<U> Foo2<T, U>(IEnumerable<T> arg)
+        where T : class, U
     {
         return arg;
     }
 
-    static IEnumerable<U[]> Foo3<T, U>(IEnumerable<T[]> arg) where T : class, U
+    static IEnumerable<U[]> Foo3<T, U>(IEnumerable<T[]> arg)
+        where T : class, U
     {
         return arg;
     }

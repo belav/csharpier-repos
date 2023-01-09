@@ -18,7 +18,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
     using System.Collections.Generic;
     using System.Threading;
 
-    public class SingletonDispenser<TKey, TItem> where TItem : class
+    public class SingletonDispenser<TKey, TItem>
+        where TItem : class
     {
         private readonly ReaderWriterLockSlim locker;
         private readonly Dictionary<TKey, object> items;

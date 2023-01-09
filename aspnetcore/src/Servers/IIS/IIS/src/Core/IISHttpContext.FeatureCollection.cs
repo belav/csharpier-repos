@@ -328,12 +328,14 @@ internal partial class IISHttpContext
         set => FastFeatureSet(key, value);
     }
 
-    TFeature? IFeatureCollection.Get<TFeature>() where TFeature : default
+    TFeature? IFeatureCollection.Get<TFeature>()
+        where TFeature : default
     {
         return (TFeature?)FastFeatureGet(typeof(TFeature));
     }
 
-    void IFeatureCollection.Set<TFeature>(TFeature? instance) where TFeature : default
+    void IFeatureCollection.Set<TFeature>(TFeature? instance)
+        where TFeature : default
     {
         FastFeatureSet(typeof(TFeature), instance);
     }

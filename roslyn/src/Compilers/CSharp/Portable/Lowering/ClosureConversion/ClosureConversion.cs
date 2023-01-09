@@ -738,7 +738,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void InsertAndFreePrologue<T>(
             ArrayBuilder<BoundStatement> result,
             ArrayBuilder<T> prologue
-        ) where T : BoundNode
+        )
+            where T : BoundNode
         {
             foreach (var node in prologue)
             {

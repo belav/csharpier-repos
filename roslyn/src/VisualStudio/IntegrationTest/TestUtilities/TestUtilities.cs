@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static void ThrowIfExpectedItemNotFound<TCollection>(
             IEnumerable<TCollection> actual,
             IEnumerable<TCollection> expected
-        ) where TCollection : IEquatable<TCollection>
+        )
+            where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IEnumerable<TCollection> actual,
             IEnumerable<TCollection> expected,
             IEqualityComparer<TCollection> comparer
-        ) where TCollection : IEquatable<TCollection>
+        )
+            where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -85,7 +87,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static void ThrowIfExpectedItemNotFoundInOrder<TCollection>(
             IEnumerable<TCollection> actual,
             IEnumerable<TCollection> expected
-        ) where TCollection : IEquatable<TCollection>
+        )
+            where TCollection : IEquatable<TCollection>
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -122,7 +125,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         public static void ThrowIfUnExpectedItemFound<TCollection>(
             IEnumerable<TCollection> actual,
             IEnumerable<TCollection> unexpected
-        ) where TCollection : notnull
+        )
+            where TCollection : notnull
         {
             var shouldThrow = false;
             var sb = new StringBuilder();
@@ -147,7 +151,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
             IEnumerable<TListItem> expectedList,
             IEnumerable<TListItem> actualList,
             IEqualityComparer<TListItem>? comparer = null
-        ) where TListItem : IEquatable<TListItem>
+        )
+            where TListItem : IEquatable<TListItem>
         {
             if (!expectedList.SequenceEqual(actualList, comparer))
             {

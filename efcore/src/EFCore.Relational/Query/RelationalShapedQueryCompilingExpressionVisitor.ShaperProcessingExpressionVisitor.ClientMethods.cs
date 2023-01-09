@@ -756,7 +756,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             Func<QueryContext, DbDataReader, object[]> parentIdentifier,
             Func<QueryContext, DbDataReader, object[]> outerIdentifier,
             IClrCollectionAccessor? clrCollectionAccessor
-        ) where TCollection : class, ICollection<TElement>
+        )
+            where TCollection : class, ICollection<TElement>
         {
             var collection = clrCollectionAccessor?.Create() ?? new List<TElement>();
 
@@ -921,7 +922,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             SplitQueryResultCoordinator resultCoordinator,
             Func<QueryContext, DbDataReader, object[]> parentIdentifier,
             IClrCollectionAccessor? clrCollectionAccessor
-        ) where TCollection : class, ICollection<TElement>
+        )
+            where TCollection : class, ICollection<TElement>
         {
             var collection = clrCollectionAccessor?.Create() ?? new List<TElement>();
             var parentKey = parentIdentifier(queryContext, parentDataReader);
@@ -1269,7 +1271,8 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
             object[] keyPropertyValues,
             bool nullable,
             Func<QueryContext, object[], JsonElement, TEntity> shaper
-        ) where TEntity : class
+        )
+            where TEntity : class
         {
             if (jsonElement.HasValue && jsonElement.Value.ValueKind != JsonValueKind.Null)
             {

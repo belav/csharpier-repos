@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             private static TExpressionSyntax AddInformationTo<TExpressionSyntax>(
                 TExpressionSyntax syntax,
                 ISymbol symbol
-            ) where TExpressionSyntax : ExpressionSyntax
+            )
+                where TExpressionSyntax : ExpressionSyntax
             {
                 syntax = syntax
                     .WithPrependedLeadingTrivia(SyntaxFactory.ElasticMarker)

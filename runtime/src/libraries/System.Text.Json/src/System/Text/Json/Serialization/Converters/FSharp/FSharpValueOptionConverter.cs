@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
     // Converter for F# struct optional values: https://fsharp.github.io/fsharp-core-docs/reference/fsharp-core-fsharpvalueoption-1.html
     // Serializes `ValueSome(value)` using the format of `value` and `ValueNone` values as `null`.
     internal sealed class FSharpValueOptionConverter<TValueOption, TElement>
-        : JsonConverter<TValueOption> where TValueOption : struct, IEquatable<TValueOption>
+        : JsonConverter<TValueOption>
+        where TValueOption : struct, IEquatable<TValueOption>
     {
         internal override Type? ElementType => typeof(TElement);
 

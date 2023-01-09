@@ -2508,7 +2508,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
         bool withConventions = true
-    ) where T : Exception =>
+    )
+        where T : Exception =>
         TestThrows<T>(b => { }, buildSourceAction, buildTargetAction, withConventions);
 
     protected virtual Task<T> TestThrows<T>(
@@ -2516,7 +2517,8 @@ public abstract class MigrationsTestBase<TFixture> : IClassFixture<TFixture>
         Action<ModelBuilder> buildSourceAction,
         Action<ModelBuilder> buildTargetAction,
         bool withConventions = true
-    ) where T : Exception =>
+    )
+        where T : Exception =>
         Assert.ThrowsAsync<T>(
             () =>
                 Test(

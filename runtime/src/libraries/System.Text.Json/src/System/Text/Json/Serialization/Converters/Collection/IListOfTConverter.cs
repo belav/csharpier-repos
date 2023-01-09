@@ -11,7 +11,8 @@ namespace System.Text.Json.Serialization.Converters
     /// Converter for <cref>System.Collections.Generic.IList{TElement}</cref>.
     /// </summary>
     internal sealed class IListOfTConverter<TCollection, TElement>
-        : IEnumerableDefaultConverter<TCollection, TElement> where TCollection : IList<TElement>
+        : IEnumerableDefaultConverter<TCollection, TElement>
+        where TCollection : IList<TElement>
     {
         protected override void Add(in TElement value, ref ReadStack state)
         {

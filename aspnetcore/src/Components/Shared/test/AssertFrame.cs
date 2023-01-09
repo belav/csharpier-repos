@@ -110,7 +110,8 @@ internal static class AssertFrame
         RenderTreeFrame frame,
         int? subtreeLength = null,
         int? sequence = null
-    ) where T : IComponent
+    )
+        where T : IComponent
     {
         Component(frame, typeof(T).FullName, subtreeLength, sequence);
     }
@@ -136,7 +137,8 @@ internal static class AssertFrame
         int componentId,
         int? subtreeLength = null,
         int? sequence = null
-    ) where T : IComponent
+    )
+        where T : IComponent
     {
         AssertFrame.Component<T>(frame, subtreeLength, sequence);
         Assert.IsType<T>(frame.Component);

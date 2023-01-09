@@ -22,7 +22,8 @@ namespace Microsoft.Web.Mvc
         public static RedirectToRouteResult RedirectToAction<TController>(
             this TController controller,
             Expression<Action<TController>> action
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             return RedirectToAction((Controller)controller, action);
         }
@@ -35,7 +36,8 @@ namespace Microsoft.Web.Mvc
         public static RedirectToRouteResult RedirectToAction<TController>(
             this Controller controller,
             Expression<Action<TController>> action
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             if (controller == null)
             {

@@ -77,22 +77,26 @@ public struct NotEmptyStructGen<T>
     public T Field;
 }
 
-public struct NotEmptyStructConstrainedGen<T> where T : struct
+public struct NotEmptyStructConstrainedGen<T>
+    where T : struct
 {
     public T Field;
 }
 
-public struct NotEmptyStructConstrainedGenA<T> where T : struct
+public struct NotEmptyStructConstrainedGenA<T>
+    where T : struct
 {
     public T[] Field;
 }
 
-public struct NotEmptyStructConstrainedGenQ<T> where T : struct
+public struct NotEmptyStructConstrainedGenQ<T>
+    where T : struct
 {
     public T? Field;
 }
 
-public struct NotEmptyStructConstrainedGenQA<T> where T : struct
+public struct NotEmptyStructConstrainedGenQA<T>
+    where T : struct
 {
     public T?[] Field;
 }
@@ -204,7 +208,8 @@ public struct NotEmptyClassGen<T>
     public T Field;
 }
 
-public struct NotEmptyClassConstrainedGen<T> where T : class
+public struct NotEmptyClassConstrainedGen<T>
+    where T : class
 {
     public T Field;
 }

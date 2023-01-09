@@ -241,7 +241,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             Compilation compilation,
             ProjectId projectId,
             Func<TSymbol, ProjectId, bool, ObjectListItem> listItemCreator
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             var builder = ImmutableArray.CreateBuilder<ObjectListItem>(symbols.Length);
 
@@ -256,7 +257,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
             ProjectId projectId,
             Func<TSymbol, ProjectId, bool, ObjectListItem> listItemCreator,
             ImmutableArray<ObjectListItem>.Builder builder
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             var editorBrowsableInfo = new EditorBrowsableHelpers.EditorBrowsableInfo(compilation);
 

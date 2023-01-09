@@ -88,7 +88,8 @@ internal sealed class StartupLoader
     }
 
     private sealed class ConfigureServicesDelegateBuilder<TContainerBuilder>
-        : ConfigureServicesDelegateBuilder where TContainerBuilder : notnull
+        : ConfigureServicesDelegateBuilder
+        where TContainerBuilder : notnull
     {
         public ConfigureServicesDelegateBuilder(
             IServiceProvider hostingServiceProvider,

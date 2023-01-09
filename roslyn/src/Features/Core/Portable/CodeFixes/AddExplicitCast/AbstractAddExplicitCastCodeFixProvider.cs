@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
 {
     internal abstract partial class AbstractAddExplicitCastCodeFixProvider<TExpressionSyntax>
-        : SyntaxEditorBasedCodeFixProvider where TExpressionSyntax : SyntaxNode
+        : SyntaxEditorBasedCodeFixProvider
+        where TExpressionSyntax : SyntaxNode
     {
         /// <summary>
         /// Give a set of least specific types with a limit, and the part exceeding the limit doesn't show any code fix,

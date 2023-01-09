@@ -16,7 +16,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order1.or
         T Boo();
     }
 
-    public class Variance<S, T, U, V> : iVariance<S, T, U, V> where T : new()
+    public class Variance<S, T, U, V> : iVariance<S, T, U, V>
+        where T : new()
     {
         public T Boo()
         {
@@ -68,7 +69,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order2.or
         T Boo();
     }
 
-    public class Variance<S, T, U, V> : iVariance<S, T, U, V> where T : new()
+    public class Variance<S, T, U, V> : iVariance<S, T, U, V>
+        where T : new()
     {
         public T Boo()
         {

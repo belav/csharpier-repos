@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     [StructLayout(LayoutKind.Auto)]
-    internal readonly struct ModifierInfo<TypeSymbol> where TypeSymbol : class
+    internal readonly struct ModifierInfo<TypeSymbol>
+        where TypeSymbol : class
     {
         internal readonly bool IsOptional;
         internal readonly TypeSymbol Modifier;
@@ -36,13 +37,15 @@ namespace Microsoft.CodeAnalysis
     {
         internal static bool AnyRequired<TypeSymbol>(
             this ImmutableArray<ModifierInfo<TypeSymbol>> modifiers
-        ) where TypeSymbol : class
+        )
+            where TypeSymbol : class
         {
             return !modifiers.IsDefaultOrEmpty && modifiers.Any(static m => !m.IsOptional);
         }
     }
 
-    internal readonly struct FieldInfo<TypeSymbol> where TypeSymbol : class
+    internal readonly struct FieldInfo<TypeSymbol>
+        where TypeSymbol : class
     {
         internal readonly bool IsByRef;
         internal readonly ImmutableArray<ModifierInfo<TypeSymbol>> RefCustomModifiers;
@@ -67,7 +70,8 @@ namespace Microsoft.CodeAnalysis
     }
 
     [StructLayout(LayoutKind.Auto)]
-    internal struct ParamInfo<TypeSymbol> where TypeSymbol : class
+    internal struct ParamInfo<TypeSymbol>
+        where TypeSymbol : class
     {
         internal bool IsByRef;
         internal TypeSymbol Type;
@@ -77,7 +81,8 @@ namespace Microsoft.CodeAnalysis
     }
 
     [StructLayout(LayoutKind.Auto)]
-    internal readonly struct LocalInfo<TypeSymbol> where TypeSymbol : class
+    internal readonly struct LocalInfo<TypeSymbol>
+        where TypeSymbol : class
     {
         internal readonly byte[] SignatureOpt;
         internal readonly TypeSymbol Type;

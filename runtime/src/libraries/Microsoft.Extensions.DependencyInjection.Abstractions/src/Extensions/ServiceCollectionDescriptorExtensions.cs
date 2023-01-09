@@ -168,7 +168,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         /// <param name="collection">The <see cref="IServiceCollection"/>.</param>
         public static void TryAddTransient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-        >(this IServiceCollection collection) where TService : class
+        >(this IServiceCollection collection)
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(collection);
 
@@ -207,7 +208,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddTransient<TService>(
             this IServiceCollection services,
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             services.TryAdd(ServiceDescriptor.Transient(implementationFactory));
         }
@@ -284,7 +286,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         /// <param name="collection">The <see cref="IServiceCollection"/>.</param>
         public static void TryAddScoped<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-        >(this IServiceCollection collection) where TService : class
+        >(this IServiceCollection collection)
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(collection);
 
@@ -323,7 +326,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddScoped<TService>(
             this IServiceCollection services,
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             services.TryAdd(ServiceDescriptor.Scoped(implementationFactory));
         }
@@ -400,7 +404,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         /// <param name="collection">The <see cref="IServiceCollection"/>.</param>
         public static void TryAddSingleton<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-        >(this IServiceCollection collection) where TService : class
+        >(this IServiceCollection collection)
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(collection);
 
@@ -439,7 +444,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddSingleton<TService>(
             this IServiceCollection collection,
             TService instance
-        ) where TService : class
+        )
+            where TService : class
         {
             ThrowHelper.ThrowIfNull(collection);
             ThrowHelper.ThrowIfNull(instance);
@@ -459,7 +465,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddSingleton<TService>(
             this IServiceCollection services,
             Func<IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             services.TryAdd(ServiceDescriptor.Singleton(implementationFactory));
         }

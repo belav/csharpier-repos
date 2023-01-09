@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Configuration
         public static Microsoft.Extensions.Configuration.IConfigurationBuilder Add<TSource>(
             this Microsoft.Extensions.Configuration.IConfigurationBuilder builder,
             System.Action<TSource>? configureSource
-        ) where TSource : Microsoft.Extensions.Configuration.IConfigurationSource, new()
+        )
+            where TSource : Microsoft.Extensions.Configuration.IConfigurationSource, new()
         {
             throw null;
         }

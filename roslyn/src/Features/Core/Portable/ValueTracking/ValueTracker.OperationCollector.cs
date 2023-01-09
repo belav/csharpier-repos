@@ -394,7 +394,8 @@ namespace Microsoft.CodeAnalysis.ValueTracking
             private static bool IsContainedIn<TContainingOperation>(
                 IOperation? operation,
                 [NotNullWhen(returnValue: true)] out TContainingOperation? containingOperation
-            ) where TContainingOperation : IOperation
+            )
+                where TContainingOperation : IOperation
             {
                 while (operation is not null)
                 {

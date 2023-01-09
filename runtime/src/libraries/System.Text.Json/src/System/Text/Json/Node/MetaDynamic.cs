@@ -134,7 +134,8 @@ namespace System.Text.Json.Node
             Expression[] parameters,
             Expression arg0,
             Expression? arg1
-        ) where TBinder : DynamicMetaObjectBinder
+        )
+            where TBinder : DynamicMetaObjectBinder
         {
             if (!ReferenceEquals(parameters, s_noArgs))
                 return arg1 != null
@@ -160,7 +161,8 @@ namespace System.Text.Json.Node
             TBinder binder,
             Expression[] args,
             Fallback<TBinder> fallback
-        ) where TBinder : DynamicMetaObjectBinder
+        )
+            where TBinder : DynamicMetaObjectBinder
         {
             return CallMethodWithResult(method, binder, args, fallback, null);
         }
@@ -175,7 +177,8 @@ namespace System.Text.Json.Node
             Expression[] args,
             Fallback<TBinder> fallback,
             Fallback<TBinder>? fallbackInvoke
-        ) where TBinder : DynamicMetaObjectBinder
+        )
+            where TBinder : DynamicMetaObjectBinder
         {
             //
             // First, call fallback to do default binding
@@ -208,7 +211,8 @@ namespace System.Text.Json.Node
             Expression[] args,
             DynamicMetaObject fallbackResult,
             Fallback<TBinder>? fallbackInvoke
-        ) where TBinder : DynamicMetaObjectBinder
+        )
+            where TBinder : DynamicMetaObjectBinder
         {
             ParameterExpression result = Expression.Parameter(typeof(object), null);
             ParameterExpression callArgs = Expression.Parameter(typeof(object[]), null);
@@ -331,7 +335,8 @@ namespace System.Text.Json.Node
             Expression[] args,
             Expression value,
             Fallback<TBinder> fallback
-        ) where TBinder : DynamicMetaObjectBinder
+        )
+            where TBinder : DynamicMetaObjectBinder
         {
             //
             // First, call fallback to do default binding

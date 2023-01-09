@@ -1352,7 +1352,8 @@ namespace System
             IStructuralComparable,
             IComparable,
             ITupleInternal,
-            ITuple where TRest : notnull
+            ITuple
+        where TRest : notnull
     {
         private readonly T1 m_Item1; // Do not rename (binary serialization)
         private readonly T2 m_Item2; // Do not rename (binary serialization)

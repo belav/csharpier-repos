@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static TInterface? ToSpecificLanguage<TInterface, TMetadata>(
             this IEnumerable<Lazy<TInterface, TMetadata>> services,
             string languageName
-        ) where TMetadata : ILanguageMetadata
+        )
+            where TMetadata : ILanguageMetadata
         {
             return services
                 .Where(s => s.Metadata.Language == languageName)
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static IEnumerable<TInterface> FilterToSpecificLanguage<TInterface, TMetadata>(
             this IEnumerable<Lazy<TInterface, TMetadata>> services,
             string languageName
-        ) where TMetadata : ILanguageMetadata
+        )
+            where TMetadata : ILanguageMetadata
         {
             return services.Where(s => s.Metadata.Language == languageName).Select(s => s.Value);
         }
@@ -38,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<Lazy<TInterface, TMetadata>>
         > ToPerLanguageMap<TInterface, TMetadata>(
             this IEnumerable<Lazy<TInterface, TMetadata>> services
-        ) where TMetadata : ILanguageMetadata
+        )
+            where TMetadata : ILanguageMetadata
         {
             var builder = ImmutableDictionary.CreateBuilder<
                 string,
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ImmutableArray<Lazy<TInterface, TMetadata>>
         > ToPerLanguageMapWithMultipleLanguages<TInterface, TMetadata>(
             this IEnumerable<Lazy<TInterface, TMetadata>> services
-        ) where TMetadata : ILanguagesMetadata
+        )
+            where TMetadata : ILanguagesMetadata
         {
             using var _ = PooledDictionary<
                 string,

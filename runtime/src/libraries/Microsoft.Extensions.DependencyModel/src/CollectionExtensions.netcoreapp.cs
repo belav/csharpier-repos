@@ -10,7 +10,8 @@ namespace System.Collections.Generic
     {
         internal static Dictionary<string, T> LibraryCollectionToDictionary<T>(
             this IReadOnlyList<T> collection
-        ) where T : Library
+        )
+            where T : Library
         {
             // On .NET Core, when a duplicate key is added to a Dictionary, the exception message contains
             // the duplicate key value, so just use ToDictionary.

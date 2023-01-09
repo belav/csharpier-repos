@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase where TTokenizer : Tokenizer
+internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
+    where TTokenizer : Tokenizer
 {
     private readonly SyntaxListPool _pool = new SyntaxListPool();
     private readonly TokenizerView<TTokenizer> _tokenizer;
@@ -658,7 +659,8 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase where TTo
         return GetNodeWithSpanContext(metacode);
     }
 
-    protected TNode GetNodeWithSpanContext<TNode>(TNode node) where TNode : Syntax.GreenNode
+    protected TNode GetNodeWithSpanContext<TNode>(TNode node)
+        where TNode : Syntax.GreenNode
     {
         var spanContext = SpanContext.Build();
         Context.LastAcceptedCharacters = spanContext.EditHandler.AcceptedCharacters;

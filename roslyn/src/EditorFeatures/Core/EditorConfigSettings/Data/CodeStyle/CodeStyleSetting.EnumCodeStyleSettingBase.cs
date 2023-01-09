@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
 {
     internal abstract partial class CodeStyleSetting
     {
-        private abstract class EnumCodeStyleSettingBase<T> : CodeStyleSetting where T : Enum
+        private abstract class EnumCodeStyleSettingBase<T> : CodeStyleSetting
+            where T : Enum
         {
             protected readonly T[] _enumValues;
             private readonly string[] _valueDescriptions;

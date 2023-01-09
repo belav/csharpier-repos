@@ -30,7 +30,8 @@ namespace System.Text.Json.Serialization.Tests
             await Verify<NodeWithNodeProperty>();
             await Verify<NodeWithObjectProperty>();
 
-            async Task Verify<T>() where T : class, new()
+            async Task Verify<T>()
+                where T : class, new()
             {
                 T root = new T();
                 SetNextProperty(typeof(T), root, root);
@@ -54,7 +55,8 @@ namespace System.Text.Json.Serialization.Tests
             await Verify<NodeWithNodeProperty>();
             await Verify<NodeWithObjectProperty>();
 
-            async Task Verify<T>() where T : class, new()
+            async Task Verify<T>()
+                where T : class, new()
             {
                 var node = new T();
                 SetNextProperty(typeof(T), node, node);
@@ -91,7 +93,8 @@ namespace System.Text.Json.Serialization.Tests
             await Verify<ValueNodeWithIValueNodeProperty>();
             await Verify<ValueNodeWithObjectProperty>();
 
-            async Task Verify<T>() where T : new()
+            async Task Verify<T>()
+                where T : new()
             {
                 object root = new T();
                 SetNextProperty(typeof(T), root, root);
@@ -133,7 +136,8 @@ namespace System.Text.Json.Serialization.Tests
             await Verify<ValueNodeWithIValueNodeProperty>();
             await Verify<ValueNodeWithObjectProperty>();
 
-            async Task Verify<T>() where T : new()
+            async Task Verify<T>()
+                where T : new()
             {
                 object node = new T();
                 SetNextProperty(typeof(T), node, node);
@@ -393,7 +397,8 @@ namespace System.Text.Json.Serialization.Tests
             await Verify<Dictionary<string, object>>(expectedPayload: "{}");
             await Verify<List<string>>(expectedPayload: "[]");
 
-            async Task Verify<T>(string expectedPayload) where T : new()
+            async Task Verify<T>(string expectedPayload)
+                where T : new()
             {
                 T value = new();
                 var root = new TreeNode<T> { Left = value, Right = value };

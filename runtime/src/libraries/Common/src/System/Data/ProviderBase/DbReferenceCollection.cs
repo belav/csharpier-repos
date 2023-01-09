@@ -128,7 +128,8 @@ namespace System.Data.ProviderBase
             }
         }
 
-        internal T? FindItem<T>(int tag, Func<T, bool> filterMethod) where T : class
+        internal T? FindItem<T>(int tag, Func<T, bool> filterMethod)
+            where T : class
         {
             bool lockObtained = false;
             try

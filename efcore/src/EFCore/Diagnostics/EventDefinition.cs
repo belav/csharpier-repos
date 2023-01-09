@@ -58,7 +58,8 @@ public class EventDefinition : EventDefinitionBase
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
         Exception? exception = null
-    ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+    )
+        where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)
         {

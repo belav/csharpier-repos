@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
             [NotNullIfNotNull(parameterName: "item"), NotNullWhen(returnValue: true)]
                 ref HashSet<T>? hashSet,
             [NotNullWhen(returnValue: true)] T? item
-        ) where T : class
+        )
+            where T : class
         {
             if (item is null)
             {

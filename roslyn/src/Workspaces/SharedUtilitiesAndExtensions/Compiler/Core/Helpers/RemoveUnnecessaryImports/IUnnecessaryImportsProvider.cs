@@ -8,7 +8,8 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
-    internal interface IUnnecessaryImportsProvider<TSyntaxNode> where TSyntaxNode : SyntaxNode
+    internal interface IUnnecessaryImportsProvider<TSyntaxNode>
+        where TSyntaxNode : SyntaxNode
     {
         ImmutableArray<TSyntaxNode> GetUnnecessaryImports(
             SemanticModel model,

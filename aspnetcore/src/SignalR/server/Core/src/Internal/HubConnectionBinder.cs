@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed class HubConnectionBinder<THub> : IInvocationBinder where THub : Hub
+internal sealed class HubConnectionBinder<THub> : IInvocationBinder
+    where THub : Hub
 {
     private readonly HubDispatcher<THub> _dispatcher;
     private readonly HubConnectionContext _connection;

@@ -374,7 +374,8 @@ namespace System.Net
             SafeDeleteContext securityContext,
             Interop.SspiCli.ContextAttribute contextAttribute,
             ref T attribute
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             Span<T> span = new Span<T>(ref attribute);
             int errorCode = secModule.QueryContextAttributes(
@@ -405,7 +406,8 @@ namespace System.Net
             Type safeHandleType,
             out SafeHandle? sspiHandle,
             ref T attribute
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             Span<T> span = new Span<T>(ref attribute);
             int errorCode = secModule.QueryContextAttributes(

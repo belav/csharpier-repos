@@ -149,7 +149,8 @@ namespace Microsoft.Extensions.Logging
             this ILoggingBuilder builder,
             string name,
             Action<TOptions> configure
-        ) where TOptions : ConsoleFormatterOptions
+        )
+            where TOptions : ConsoleFormatterOptions
         {
             ThrowHelper.ThrowIfNull(configure);
 

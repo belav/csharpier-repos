@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Hosting;
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public abstract class AuthMiddlewareAndFilterTestBase<TStartup>
-    : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+    : IClassFixture<MvcTestFixture<TStartup>>
+    where TStartup : class
 {
     protected AuthMiddlewareAndFilterTestBase(MvcTestFixture<TStartup> fixture)
     {

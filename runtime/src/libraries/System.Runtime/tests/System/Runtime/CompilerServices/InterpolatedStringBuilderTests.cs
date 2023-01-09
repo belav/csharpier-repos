@@ -517,7 +517,8 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal(expected.ToString(), builder.ToStringAndClear());
         }
 
-        private static void AssertModeMatchesType<T>(T tss) where T : IHasToStringState
+        private static void AssertModeMatchesType<T>(T tss)
+            where T : IHasToStringState
         {
             ToStringMode expected =
                 tss is ISpanFormattable

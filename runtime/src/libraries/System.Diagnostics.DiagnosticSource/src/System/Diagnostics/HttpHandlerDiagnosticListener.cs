@@ -814,7 +814,8 @@ namespace System.Diagnostics
         private static Func<TClass, TField> CreateFieldGetter<TClass, TField>(
             string fieldName,
             BindingFlags flags
-        ) where TClass : class
+        )
+            where TClass : class
         {
             FieldInfo field = typeof(TClass).GetField(fieldName, flags);
             if (field != null)

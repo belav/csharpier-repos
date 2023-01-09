@@ -51,7 +51,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         protected async Task<TService> GetComponentModelServiceAsync<TService>(
             CancellationToken cancellationToken
-        ) where TService : class
+        )
+            where TService : class
         {
             var componentModel = await GetRequiredGlobalServiceAsync<
                 SComponentModel,

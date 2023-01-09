@@ -597,7 +597,8 @@ class MonEnterTests
         Assert(tookLock == !exitFailed);
     }
 
-    void ExpectException<T>(Action action) where T : Exception
+    void ExpectException<T>(Action action)
+        where T : Exception
     {
         try
         {

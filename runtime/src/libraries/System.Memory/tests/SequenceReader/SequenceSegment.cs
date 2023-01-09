@@ -9,7 +9,8 @@ using System.Text;
 
 namespace System.Memory.Tests.SequenceReader
 {
-    public class SequenceSegment<T> : ReadOnlySequenceSegment<T> where T : struct
+    public class SequenceSegment<T> : ReadOnlySequenceSegment<T>
+        where T : struct
     {
         private SequenceSegment<T> _next;
 

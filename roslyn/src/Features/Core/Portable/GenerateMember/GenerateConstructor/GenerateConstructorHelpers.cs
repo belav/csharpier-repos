@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             ImmutableArray<IParameterSymbol> parameters,
             ImmutableArray<TExpressionSyntax?> expressions,
             IMethodSymbol constructor
-        ) where TExpressionSyntax : SyntaxNode
+        )
+            where TExpressionSyntax : SyntaxNode
         {
             // Look for constructors in this specified type that are:
             // 1. Accessible.  We obviously need our constructor to be able to call that other constructor.
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             SemanticModel semanticModel,
             IMethodSymbol constructor,
             ImmutableArray<TExpressionSyntax?> expressions
-        ) where TExpressionSyntax : SyntaxNode
+        )
+            where TExpressionSyntax : SyntaxNode
         {
             Debug.Assert(constructor.Parameters.Length == expressions.Length);
 

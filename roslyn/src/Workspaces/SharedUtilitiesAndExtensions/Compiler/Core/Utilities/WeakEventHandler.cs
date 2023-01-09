@@ -17,7 +17,8 @@ namespace Roslyn.Utilities
         public static EventHandler<TArgs> Create<TTarget>(
             TTarget target,
             Action<TTarget, object?, TArgs> invoker
-        ) where TTarget : class
+        )
+            where TTarget : class
         {
             var weakTarget = new WeakReference<TTarget>(target);
 

@@ -45,7 +45,8 @@ namespace Castle.DynamicProxy.Tests
             Assert.AreNotEqual(first.GetType(), second.GetType());
         }
 
-        private object CreateProxyWithHook<THook>() where THook : IProxyGenerationHook, new()
+        private object CreateProxyWithHook<THook>()
+            where THook : IProxyGenerationHook, new()
         {
             return generator.CreateInterfaceProxyWithoutTarget(
                 typeof(IEmpty),

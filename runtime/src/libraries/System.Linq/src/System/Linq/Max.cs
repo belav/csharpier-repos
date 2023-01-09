@@ -15,7 +15,8 @@ namespace System.Linq
         public static long Max(this IEnumerable<long> source) =>
             MinMaxInteger<long, MaxCalc<long>>(source);
 
-        private struct MaxCalc<T> : IMinMaxCalc<T> where T : struct, IBinaryInteger<T>
+        private struct MaxCalc<T> : IMinMaxCalc<T>
+            where T : struct, IBinaryInteger<T>
         {
             public static bool Compare(T left, T right) => left > right;
 
@@ -567,7 +568,8 @@ namespace System.Linq
         private static TResult MaxInteger<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) where TResult : struct, IBinaryInteger<TResult>
+        )
+            where TResult : struct, IBinaryInteger<TResult>
         {
             if (source == null)
             {
@@ -604,7 +606,8 @@ namespace System.Linq
         private static TResult? MaxInteger<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult?> selector
-        ) where TResult : struct, IBinaryInteger<TResult>
+        )
+            where TResult : struct, IBinaryInteger<TResult>
         {
             if (source == null)
             {
@@ -693,7 +696,8 @@ namespace System.Linq
         private static TResult MaxFloat<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult> selector
-        ) where TResult : struct, IFloatingPointIeee754<TResult>
+        )
+            where TResult : struct, IFloatingPointIeee754<TResult>
         {
             if (source == null)
             {
@@ -740,7 +744,8 @@ namespace System.Linq
         private static TResult? MaxFloat<TSource, TResult>(
             this IEnumerable<TSource> source,
             Func<TSource, TResult?> selector
-        ) where TResult : struct, IFloatingPointIeee754<TResult>
+        )
+            where TResult : struct, IFloatingPointIeee754<TResult>
         {
             if (source == null)
             {

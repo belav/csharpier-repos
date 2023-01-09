@@ -40,7 +40,8 @@ public static class OpenApiEndpointConventionBuilderExtensions
     public static TBuilder WithOpenApi<TBuilder>(
         this TBuilder builder,
         Func<OpenApiOperation, OpenApiOperation> configureOperation
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.Finally(
             endpointBuilder =>

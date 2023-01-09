@@ -57,7 +57,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             IServiceProviderFactory<TContainerBuilder> factory
-        ) where TContainerBuilder : notnull;
+        )
+            where TContainerBuilder : notnull;
 
         /// <summary>
         /// Overrides the factory used to create the service provider.
@@ -67,7 +68,8 @@ namespace Microsoft.Extensions.Hosting
         /// <returns>The same instance of the <see cref="IHostBuilder"/> for chaining.</returns>
         IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Func<HostBuilderContext, IServiceProviderFactory<TContainerBuilder>> factory
-        ) where TContainerBuilder : notnull;
+        )
+            where TContainerBuilder : notnull;
 
         /// <summary>
         /// Enables configuring the instantiated dependency container. This can be called multiple times and

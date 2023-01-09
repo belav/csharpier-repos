@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     {
         internal static IList<Lazy<TExtension, TMetadata>> Order<TExtension, TMetadata>(
             IEnumerable<Lazy<TExtension, TMetadata>> extensions
-        ) where TMetadata : OrderableMetadata
+        )
+            where TMetadata : OrderableMetadata
         {
             var graph = GetGraph(extensions);
             return graph.TopologicalSort();
@@ -20,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private static Graph<TExtension, TMetadata> GetGraph<TExtension, TMetadata>(
             IEnumerable<Lazy<TExtension, TMetadata>> extensions
-        ) where TMetadata : OrderableMetadata
+        )
+            where TMetadata : OrderableMetadata
         {
             var list = extensions.ToList();
             var graph = new Graph<TExtension, TMetadata>();
@@ -64,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             /// <exception cref="ArgumentException">A cycle was detected in the extension ordering.</exception>
             internal static void CheckForCycles<TExtension, TMetadata>(
                 IEnumerable<Lazy<TExtension, TMetadata>> extensions
-            ) where TMetadata : OrderableMetadata
+            )
+                where TMetadata : OrderableMetadata
             {
                 var graph = GetGraph(extensions);
                 graph.CheckForCycles();

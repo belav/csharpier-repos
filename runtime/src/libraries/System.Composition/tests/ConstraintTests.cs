@@ -14,19 +14,23 @@ namespace System.Composition.UnitTests
 
         public interface IUnrelatedThings<TC, TP> : IList<TC>, IThing { }
 
-        public interface IInheritedThings<TC, TP> : IList<TC>, IThing where TC : TP { }
+        public interface IInheritedThings<TC, TP> : IList<TC>, IThing
+            where TC : TP { }
 
         public interface ICar : IThing { }
 
         public interface IBook : IThing { }
 
-        public interface IHandler<T> where T : IThing { }
+        public interface IHandler<T>
+            where T : IThing { }
 
         [Export(typeof(IHandler<>))]
-        public class ThingHandler<T> : IHandler<T> where T : IThing { }
+        public class ThingHandler<T> : IHandler<T>
+            where T : IThing { }
 
         [Export(typeof(IHandler<>))]
-        public class BookHandler<T> : IHandler<T> where T : IBook { }
+        public class BookHandler<T> : IHandler<T>
+            where T : IBook { }
 
         [Export(typeof(IInheritedThings<,>))]
         public class InheritedThings<TC, TP> : ObservableCollection<TC>, IInheritedThings<TC, TP>

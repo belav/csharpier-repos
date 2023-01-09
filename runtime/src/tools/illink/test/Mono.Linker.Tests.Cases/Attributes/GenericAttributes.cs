@@ -57,7 +57,8 @@ namespace Mono.Linker.Tests.Cases.Attributes
         class DerivedFromConstraintType : ConstraintType { }
 
         [KeptBaseType(typeof(Attribute))]
-        class ConstrainedGenericAttribute<T> : Attribute where T : ConstraintType
+        class ConstrainedGenericAttribute<T> : Attribute
+            where T : ConstraintType
         {
             [Kept]
             public ConstrainedGenericAttribute() { }

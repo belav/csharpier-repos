@@ -15,7 +15,8 @@ namespace System.Threading.Threads.Tests
             Func<T> createDefault,
             Func<string, T> createWithMessage,
             Func<string, Exception, T> createWithMessageAndException
-        ) where T : Exception
+        )
+            where T : Exception
         {
             var ex = createDefault();
             Assert.False(string.IsNullOrEmpty(ex.Message));

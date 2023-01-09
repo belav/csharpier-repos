@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Logging.Configuration
         public static void RegisterProviderOptions<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions,
             TProvider
-        >(IServiceCollection services) where TOptions : class
+        >(IServiceCollection services)
+            where TOptions : class
         {
             services.TryAddEnumerable(
                 ServiceDescriptor.Singleton<

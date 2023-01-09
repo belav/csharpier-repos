@@ -1335,7 +1335,8 @@ namespace System.Diagnostics
 
 namespace System.Diagnostics.Metrics
 {
-    public sealed class Counter<T> : Instrument<T> where T : struct
+    public sealed class Counter<T> : Instrument<T>
+        where T : struct
     {
         public void Add(T delta)
         {
@@ -1394,7 +1395,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public sealed class UpDownCounter<T> : Instrument<T> where T : struct
+    public sealed class UpDownCounter<T> : Instrument<T>
+        where T : struct
     {
         public void Add(T delta)
         {
@@ -1453,7 +1455,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public sealed class Histogram<T> : Instrument<T> where T : struct
+    public sealed class Histogram<T> : Instrument<T>
+        where T : struct
     {
         internal Histogram(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)
@@ -1552,7 +1555,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public abstract class Instrument<T> : Instrument where T : struct
+    public abstract class Instrument<T> : Instrument
+        where T : struct
     {
         protected Instrument(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)
@@ -1606,7 +1610,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public readonly struct Measurement<T> where T : struct
+    public readonly struct Measurement<T>
+        where T : struct
     {
         public Measurement(T value)
         {
@@ -1663,7 +1668,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1672,7 +1678,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1681,7 +1688,8 @@ namespace System.Diagnostics.Metrics
             string name,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1691,7 +1699,8 @@ namespace System.Diagnostics.Metrics
             Func<T> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1701,7 +1710,8 @@ namespace System.Diagnostics.Metrics
             Func<Measurement<T>> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1711,7 +1721,8 @@ namespace System.Diagnostics.Metrics
             Func<System.Collections.Generic.IEnumerable<Measurement<T>>> observeValues,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1721,7 +1732,8 @@ namespace System.Diagnostics.Metrics
             Func<T> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1731,7 +1743,8 @@ namespace System.Diagnostics.Metrics
             Func<Measurement<T>> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1741,7 +1754,8 @@ namespace System.Diagnostics.Metrics
             Func<System.Collections.Generic.IEnumerable<Measurement<T>>> observeValues,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1751,7 +1765,8 @@ namespace System.Diagnostics.Metrics
             Func<T> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1761,7 +1776,8 @@ namespace System.Diagnostics.Metrics
             Func<Measurement<T>> observeValue,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1771,7 +1787,8 @@ namespace System.Diagnostics.Metrics
             Func<System.Collections.Generic.IEnumerable<Measurement<T>>> observeValues,
             string? unit = null,
             string? description = null
-        ) where T : struct
+        )
+            where T : struct
         {
             throw null;
         }
@@ -1851,7 +1868,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public sealed class ObservableCounter<T> : ObservableInstrument<T> where T : struct
+    public sealed class ObservableCounter<T> : ObservableInstrument<T>
+        where T : struct
     {
         internal ObservableCounter(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)
@@ -1865,7 +1883,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public sealed class ObservableUpDownCounter<T> : ObservableInstrument<T> where T : struct
+    public sealed class ObservableUpDownCounter<T> : ObservableInstrument<T>
+        where T : struct
     {
         internal ObservableUpDownCounter(
             Meter meter,
@@ -1884,7 +1903,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public sealed class ObservableGauge<T> : ObservableInstrument<T> where T : struct
+    public sealed class ObservableGauge<T> : ObservableInstrument<T>
+        where T : struct
     {
         internal ObservableGauge(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)
@@ -1898,7 +1918,8 @@ namespace System.Diagnostics.Metrics
         }
     }
 
-    public abstract class ObservableInstrument<T> : Instrument where T : struct
+    public abstract class ObservableInstrument<T> : Instrument
+        where T : struct
     {
         public override bool IsObservable
         {

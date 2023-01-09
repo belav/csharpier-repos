@@ -277,7 +277,8 @@ public class PageConventionCollection : Collection<IPageConvention>
     /// Removes all <see cref="IPageConvention"/> instances of the specified type.
     /// </summary>
     /// <typeparam name="TPageConvention">The type to remove.</typeparam>
-    public void RemoveType<TPageConvention>() where TPageConvention : IPageConvention
+    public void RemoveType<TPageConvention>()
+        where TPageConvention : IPageConvention
     {
         RemoveType(typeof(TPageConvention));
     }
@@ -329,7 +330,8 @@ public class PageConventionCollection : Collection<IPageConvention>
         }
     }
 
-    private TConvention Add<TConvention>(TConvention convention) where TConvention : IPageConvention
+    private TConvention Add<TConvention>(TConvention convention)
+        where TConvention : IPageConvention
     {
         base.Add(convention);
         return convention;

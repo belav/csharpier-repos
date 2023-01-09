@@ -87,7 +87,8 @@ namespace System.Linq.Parallel.Tests
             Assert.Equal(source.Token, oce.CancellationToken);
         }
 
-        public static T Wrapped<T>(Action action) where T : Exception
+        public static T Wrapped<T>(Action action)
+            where T : Exception
         {
             AggregateException ae = Assert.Throws<AggregateException>(action);
             Assert.All(ae.InnerExceptions, e => Assert.IsType<T>(e));

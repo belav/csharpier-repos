@@ -875,7 +875,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 
             private static ImmutableArray<SymbolResult<T>> OfType<T>(
                 ImmutableArray<SymbolResult<ISymbol>> symbols
-            ) where T : ISymbol
+            )
+                where T : ISymbol
             {
                 return symbols
                     .WhereAsArray(s => s.Symbol is T)

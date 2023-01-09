@@ -1458,7 +1458,8 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1471,7 +1472,8 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1485,7 +1487,8 @@ namespace System.Linq
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1500,7 +1503,8 @@ namespace System.Linq
         public static System.Linq.ILookup<TKey, TSource> ToLookup<TSource, TKey>(
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1509,7 +1513,8 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1518,7 +1523,8 @@ namespace System.Linq
             this System.Linq.ParallelQuery<TSource> source,
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }
@@ -1528,7 +1534,8 @@ namespace System.Linq
             System.Func<TSource, TKey> keySelector,
             System.Func<TSource, TElement> elementSelector,
             System.Collections.Generic.IEqualityComparer<TKey>? comparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             throw null;
         }

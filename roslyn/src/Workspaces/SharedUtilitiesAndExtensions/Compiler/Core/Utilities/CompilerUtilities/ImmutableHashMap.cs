@@ -1165,7 +1165,8 @@ namespace Roslyn.Collections.Immutable
             }
 
             [DebuggerStepThrough]
-            public static T NotNull<T>(T value, string parameterName) where T : class
+            public static T NotNull<T>(T value, string parameterName)
+                where T : class
             {
                 if (value == null)
                 {

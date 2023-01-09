@@ -357,7 +357,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal static ImmutableArray<SyntaxReference> GetDeclaringSyntaxReferenceHelper<TNode>(
             ImmutableArray<Location> locations
-        ) where TNode : CSharpSyntaxNode
+        )
+            where TNode : CSharpSyntaxNode
         {
             if (locations.IsEmpty)
             {
@@ -1336,7 +1337,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<T> types,
             Symbol owner,
             ref HashSet<TypeSymbol> checkedTypes
-        ) where T : TypeSymbol
+        )
+            where T : TypeSymbol
         {
             foreach (var t in types)
             {

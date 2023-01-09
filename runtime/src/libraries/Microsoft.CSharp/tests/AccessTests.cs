@@ -18,7 +18,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         public interface ITestIFace { }
 
-        public interface ITestIFaceCons<out T> where T : ITestIFace { }
+        public interface ITestIFaceCons<out T>
+            where T : ITestIFace { }
 
         private class Container
         {

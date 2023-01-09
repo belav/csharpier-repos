@@ -43,7 +43,8 @@ namespace System
         /// or <see langword="null"/> if no such constant is found.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe string? GetName<TEnum>(TEnum value) where TEnum : struct, Enum
+        public static unsafe string? GetName<TEnum>(TEnum value)
+            where TEnum : struct, Enum
         {
             RuntimeType rt = (RuntimeType)typeof(TEnum);
             Type underlyingType = typeof(TEnum).GetEnumUnderlyingType();
@@ -187,7 +188,8 @@ namespace System
         private static string? GetName<TUnderlyingValue>(
             EnumInfo<TUnderlyingValue> enumInfo,
             TUnderlyingValue value
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue> =>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue> =>
             GetNameInlined(enumInfo, value);
 
         /// <summary>Look up the name for the specified underlying value using the cached <see cref="EnumInfo{TUnderlyingValue}"/> for the associated enum.</summary>
@@ -199,7 +201,8 @@ namespace System
         private static string? GetNameInlined<TUnderlyingValue>(
             EnumInfo<TUnderlyingValue> enumInfo,
             TUnderlyingValue value
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             string[] names = enumInfo.Names;
 
@@ -244,7 +247,8 @@ namespace System
         /// <summary>Retrieves an array of the names of the constants in a specified enumeration type.</summary>
         /// <typeparam name="TEnum">The type of the enumeration.</typeparam>
         /// <returns>A string array of the names of the constants in <typeparamref name="TEnum"/>.</returns>
-        public static string[] GetNames<TEnum>() where TEnum : struct, Enum
+        public static string[] GetNames<TEnum>()
+            where TEnum : struct, Enum
         {
             string[] names;
 
@@ -343,7 +347,8 @@ namespace System
         /// <summary>Retrieves an array of the values of the constants in a specified enumeration type.</summary>
         /// <typeparam name="TEnum">The type of the enumeration.</typeparam>
         /// <returns>An array that contains the values of the constants in <typeparamref name="TEnum"/>.</returns>
-        public static TEnum[] GetValues<TEnum>() where TEnum : struct, Enum
+        public static TEnum[] GetValues<TEnum>()
+            where TEnum : struct, Enum
         {
             Array values = GetValuesAsUnderlyingTypeNoCopy((RuntimeType)typeof(TEnum));
             var result = new TEnum[values.Length];
@@ -375,8 +380,8 @@ namespace System
         /// For example, you might use this method for the <see cref="T:System.Reflection.MetadataLoadContext" /> enumeration or on a platform where run-time code generation is not available.
         /// </remarks>
         /// <returns>An array that contains the values of the underlying type constants in <typeparamref name="TEnum" />.</returns>
-        public static Array GetValuesAsUnderlyingType<TEnum>() where TEnum : struct, Enum =>
-            typeof(TEnum).GetEnumValuesAsUnderlyingType();
+        public static Array GetValuesAsUnderlyingType<TEnum>()
+            where TEnum : struct, Enum => typeof(TEnum).GetEnumValuesAsUnderlyingType();
 
         /// <summary>Retrieves an array of the values of the underlying type constants in a specified enumeration.</summary>
         /// <param name="enumType">An enumeration type.</param>
@@ -577,7 +582,8 @@ namespace System
         /// <param name="value">The value or name of a constant in <typeparamref name="TEnum"/>.</param>
         /// <returns><see langword="true"/> if a given integral value exists in a specified enumeration; <see langword="false"/>, otherwise.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe bool IsDefined<TEnum>(TEnum value) where TEnum : struct, Enum
+        public static unsafe bool IsDefined<TEnum>(TEnum value)
+            where TEnum : struct, Enum
         {
             RuntimeType rt = (RuntimeType)typeof(TEnum);
             Type underlyingType = typeof(TEnum).GetEnumUnderlyingType();
@@ -620,7 +626,8 @@ namespace System
         internal static bool IsDefinedPrimitive<TUnderlyingValue>(
             RuntimeType enumType,
             TUnderlyingValue value
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             EnumInfo<TUnderlyingValue> enumInfo = GetEnumInfo<TUnderlyingValue>(
                 enumType,
@@ -762,8 +769,8 @@ namespace System
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
         /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
-        public static TEnum Parse<TEnum>(string value) where TEnum : struct =>
-            Parse<TEnum>(value, ignoreCase: false);
+        public static TEnum Parse<TEnum>(string value)
+            where TEnum : struct => Parse<TEnum>(value, ignoreCase: false);
 
         /// <summary>Converts the span of chars representation of the name or numeric value of one or more enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.</summary>
         /// <typeparam name="TEnum">An enumeration type.</typeparam>
@@ -771,8 +778,8 @@ namespace System
         /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value is represented by <paramref name="value"/>.</returns>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
         /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
-        public static TEnum Parse<TEnum>(ReadOnlySpan<char> value) where TEnum : struct =>
-            Parse<TEnum>(value, ignoreCase: false);
+        public static TEnum Parse<TEnum>(ReadOnlySpan<char> value)
+            where TEnum : struct => Parse<TEnum>(value, ignoreCase: false);
 
         /// <summary>
         /// Converts the string representation of the name or numeric value of one or more enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.
@@ -785,7 +792,8 @@ namespace System
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
         /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
-        public static TEnum Parse<TEnum>(string value, bool ignoreCase) where TEnum : struct
+        public static TEnum Parse<TEnum>(string value, bool ignoreCase)
+            where TEnum : struct
         {
             if (value is null)
             {
@@ -1149,7 +1157,8 @@ namespace System
             [NotNullWhen(true)] string? value,
             bool ignoreCase,
             out TEnum result
-        ) where TEnum : struct
+        )
+            where TEnum : struct
         {
             if (value is not null)
             {
@@ -1174,7 +1183,8 @@ namespace System
             ReadOnlySpan<char> value,
             bool ignoreCase,
             out TEnum result
-        ) where TEnum : struct => TryParse(value, ignoreCase, throwOnFailure: false, out result);
+        )
+            where TEnum : struct => TryParse(value, ignoreCase, throwOnFailure: false, out result);
 
         /// <summary>Core implementation for all generic {Try}Parse methods.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single call
@@ -1183,7 +1193,8 @@ namespace System
             bool ignoreCase,
             bool throwOnFailure,
             out TEnum result
-        ) where TEnum : struct
+        )
+            where TEnum : struct
         {
             // Validation on the enum type itself.  Failures here are considered non-parsing failures
             // and thus always throw rather than returning false.
@@ -2188,7 +2199,8 @@ namespace System
             ref byte data,
             Span<char> destination,
             out int charsWritten
-        ) where TUnderlyingValue : struct
+        )
+            where TUnderlyingValue : struct
         {
             if (Unsafe.SizeOf<TUnderlyingValue>() * 2 <= destination.Length)
             {
@@ -2616,7 +2628,8 @@ namespace System
             Span<char> destination,
             out int charsWritten,
             [StringSyntax(StringSyntaxAttribute.EnumFormat)] ReadOnlySpan<char> format = default
-        ) where TEnum : struct, Enum
+        )
+            where TEnum : struct, Enum
         {
             RuntimeType rt = (RuntimeType)typeof(TEnum);
             Type underlyingType = typeof(TEnum).GetEnumUnderlyingType();
@@ -3357,7 +3370,8 @@ namespace System
             string[] names,
             TUnderlyingValue[] values,
             out int index
-        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        )
+            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             // Values are sorted, so if the incoming value is 0, we can check to see whether
             // the first entry matches it, in which case we can return its name; otherwise,

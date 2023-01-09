@@ -17,7 +17,8 @@ namespace Roslyn.Utilities
             this IDictionary<K, V> dictionary,
             K key,
             Func<K, V> function
-        ) where K : notnull
+        )
+            where K : notnull
         {
             if (!dictionary.TryGetValue(key, out var value))
             {
@@ -31,7 +32,8 @@ namespace Roslyn.Utilities
         public static TValue? GetValueOrDefault<TKey, TValue>(
             this IDictionary<TKey, TValue> dictionary,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var value))
             {
@@ -46,7 +48,8 @@ namespace Roslyn.Utilities
             this Dictionary<TKey, TValue> dictionary,
             TKey key,
             TValue? defaultValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var value))
             {
@@ -77,7 +80,8 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, ArrayBuilder<TValue>> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (!dictionary.TryGetValue(key, out var builder))
             {
@@ -92,7 +96,8 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, ArrayBuilder<TValue>> dictionary,
             TKey key,
             IEnumerable<TValue> values
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (!dictionary.TryGetValue(key, out var builder))
             {
@@ -108,7 +113,8 @@ namespace Roslyn.Utilities
             TKey key,
             TValue value,
             IEqualityComparer<TValue>? comparer = null
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var set))
             {
@@ -185,7 +191,8 @@ namespace Roslyn.Utilities
             this ImmutableDictionary<TKey, ImmutableHashSet<TValue>> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var collection))
             {
@@ -234,7 +241,8 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, ImmutableHashSet<TValue>> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             MultiRemoveSet(dictionary, key, value);
         }
@@ -243,7 +251,8 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, ImmutableSortedSet<TValue>> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             MultiRemoveSet(dictionary, key, value);
         }
@@ -252,7 +261,8 @@ namespace Roslyn.Utilities
             this IDictionary<TKey, ImmutableArray<TValue>> dictionary,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (dictionary.TryGetValue(key, out var collection))
             {

@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Syntax
 
         public static SeparatedSyntaxList<TNode> ToSeparatedList<TNode>(
             this SyntaxListBuilder? builder
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var listNode = builder?.ToListNode();
             if (listNode is null)

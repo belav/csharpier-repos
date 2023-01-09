@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// <typeparam name="TAuthenticationState">The user state type persisted while the operation is in progress. It must be serializable.</typeparam>
 public partial class RemoteAuthenticatorViewCore<
     [DynamicallyAccessedMembers(JsonSerialized)] TAuthenticationState
-> : ComponentBase where TAuthenticationState : RemoteAuthenticationState
+> : ComponentBase
+    where TAuthenticationState : RemoteAuthenticationState
 {
     private RemoteAuthenticationApplicationPathsOptions? _applicationPaths;
     private string? _action;

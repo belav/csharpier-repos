@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.Logging.Console
     internal sealed class FormatterOptionsMonitor<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             TOptions
-    > : IOptionsMonitor<TOptions> where TOptions : ConsoleFormatterOptions
+    > : IOptionsMonitor<TOptions>
+        where TOptions : ConsoleFormatterOptions
     {
         private TOptions _options;
 

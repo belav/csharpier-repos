@@ -352,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 ImmutableSegmentedDictionary<TKey, TValue>,
                 ImmutableSegmentedDictionary<TKey, TValue>
             > transformer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (transformer is null)
                 throw new ArgumentNullException(nameof(transformer));
@@ -409,7 +410,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 ImmutableSegmentedDictionary<TKey, TValue>
             > transformer,
             TArg transformerArgument
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (transformer is null)
                 throw new ArgumentNullException(nameof(transformer));
@@ -451,7 +453,8 @@ namespace Microsoft.CodeAnalysis.Collections
         public static ImmutableSegmentedDictionary<TKey, TValue> InterlockedExchange<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             ImmutableSegmentedDictionary<TKey, TValue> value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSegmentedDictionary<
                 TKey,
@@ -476,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Collections
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             ImmutableSegmentedDictionary<TKey, TValue> value,
             ImmutableSegmentedDictionary<TKey, TValue> comparand
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSegmentedDictionary<
                 TKey,
@@ -497,7 +501,8 @@ namespace Microsoft.CodeAnalysis.Collections
         public static bool InterlockedInitialize<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             ImmutableSegmentedDictionary<TKey, TValue> value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return InterlockedCompareExchange(
                 ref location,
@@ -512,7 +517,8 @@ namespace Microsoft.CodeAnalysis.Collections
             TKey key,
             Func<TKey, TArg, TValue> valueFactory,
             TArg factoryArgument
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (valueFactory is null)
                 throw new ArgumentNullException(nameof(valueFactory));
@@ -537,7 +543,8 @@ namespace Microsoft.CodeAnalysis.Collections
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
             Func<TKey, TValue> valueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (valueFactory is null)
                 throw new ArgumentNullException(nameof(valueFactory));
@@ -562,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Collections
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var priorCollection = ImmutableSegmentedDictionary<
                 TKey,
@@ -601,7 +609,8 @@ namespace Microsoft.CodeAnalysis.Collections
             TKey key,
             Func<TKey, TValue> addValueFactory,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (addValueFactory is null)
                 throw new ArgumentNullException(nameof(addValueFactory));
@@ -650,7 +659,8 @@ namespace Microsoft.CodeAnalysis.Collections
             TKey key,
             TValue addValue,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (updateValueFactory is null)
                 throw new ArgumentNullException(nameof(updateValueFactory));
@@ -696,7 +706,8 @@ namespace Microsoft.CodeAnalysis.Collections
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var priorCollection = ImmutableSegmentedDictionary<
                 TKey,
@@ -733,7 +744,8 @@ namespace Microsoft.CodeAnalysis.Collections
             TKey key,
             TValue newValue,
             TValue comparisonValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var valueComparer = EqualityComparer<TValue>.Default;
             var priorCollection = ImmutableSegmentedDictionary<
@@ -774,7 +786,8 @@ namespace Microsoft.CodeAnalysis.Collections
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
             [MaybeNullWhen(false)] out TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var priorCollection = ImmutableSegmentedDictionary<
                 TKey,

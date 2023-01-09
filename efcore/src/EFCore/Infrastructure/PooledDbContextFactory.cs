@@ -23,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 /// </remarks>
 public class PooledDbContextFactory<
     [DynamicallyAccessedMembers(DbContext.DynamicallyAccessedMemberTypes)] TContext
-> : IDbContextFactory<TContext> where TContext : DbContext
+> : IDbContextFactory<TContext>
+    where TContext : DbContext
 {
     private readonly IDbContextPool<TContext> _pool;
 

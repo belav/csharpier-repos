@@ -130,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             int blockId,
             LogMessage logMessage,
             CancellationToken cancellationToken
-        ) where T : OperationEvent
+        )
+            where T : OperationEvent
         {
             if (!_pendingScopes.TryRemove(blockId, out var value))
             {

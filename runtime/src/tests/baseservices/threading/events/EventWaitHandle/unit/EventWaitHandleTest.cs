@@ -15,7 +15,8 @@ public class EventWaitHandleTest
         return rv;
     }
 
-    public static bool TryOpenExisting<Expected>(string name) where Expected : Exception
+    public static bool TryOpenExisting<Expected>(string name)
+        where Expected : Exception
     {
         EventWaitHandle ewh;
         return TryOpenExisting<Expected>(name, out ewh);

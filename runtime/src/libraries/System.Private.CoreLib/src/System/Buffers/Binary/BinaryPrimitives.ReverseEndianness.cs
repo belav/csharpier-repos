@@ -309,7 +309,8 @@ namespace System.Buffers.Binary
             }
         }
 
-        private interface IEndiannessReverser<T> where T : struct
+        private interface IEndiannessReverser<T>
+            where T : struct
         {
             static abstract T Reverse(T value);
             static abstract Vector128<T> Reverse(Vector128<T> vector);

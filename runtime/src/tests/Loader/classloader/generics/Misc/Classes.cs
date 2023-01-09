@@ -9,12 +9,14 @@ public class Cls_2 : Cls_1<I3, Cls_2> { }
 
 public interface I1
 {
-    int Foo<T>() where T : I2;
+    int Foo<T>()
+        where T : I2;
 }
 
 public interface I2 : I1
 {
-    new int Foo<T>() where T : Cls_1<I3, Cls_2>;
+    new int Foo<T>()
+        where T : Cls_1<I3, Cls_2>;
 }
 
 public interface I3 : I2

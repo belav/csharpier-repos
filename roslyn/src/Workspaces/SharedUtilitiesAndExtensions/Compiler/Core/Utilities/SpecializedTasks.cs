@@ -28,7 +28,8 @@ namespace Roslyn.Utilities
             "VSTHRD200:Use \"Async\" suffix for async methods",
             Justification = "This is a Task wrapper, not an asynchronous method."
         )]
-        public static Task<T?> AsNullable<T>(this Task<T> task) where T : class => task!;
+        public static Task<T?> AsNullable<T>(this Task<T> task)
+            where T : class => task!;
 
         [SuppressMessage(
             "Style",
@@ -42,7 +43,8 @@ namespace Roslyn.Utilities
             "VSTHRD200:Use \"Async\" suffix for async methods",
             Justification = "This is a Task wrapper, not an asynchronous method."
         )]
-        public static Task<T?> Null<T>() where T : class => Default<T>();
+        public static Task<T?> Null<T>()
+            where T : class => Default<T>();
 
         [SuppressMessage(
             "Style",
@@ -79,8 +81,8 @@ namespace Roslyn.Utilities
             "VSTHRD200:Use \"Async\" suffix for async methods",
             Justification = "This is a Task wrapper, not an asynchronous method."
         )]
-        public static Task<T> FromResult<T>(T t) where T : class =>
-            FromResultCache<T>.FromResult(t);
+        public static Task<T> FromResult<T>(T t)
+            where T : class => FromResultCache<T>.FromResult(t);
 
         [SuppressMessage(
             "Style",
@@ -262,7 +264,8 @@ namespace Roslyn.Utilities
             );
         }
 
-        private static class FromResultCache<T> where T : class
+        private static class FromResultCache<T>
+            where T : class
         {
             private static readonly ConditionalWeakTable<T, Task<T>> s_fromResultCache = new();
             private static readonly ConditionalWeakTable<

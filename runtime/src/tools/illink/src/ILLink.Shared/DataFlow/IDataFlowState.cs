@@ -8,7 +8,8 @@ using System;
 
 namespace ILLink.Shared.DataFlow
 {
-    public sealed class Box<T> where T : struct
+    public sealed class Box<T>
+        where T : struct
     {
         public Box(T value) => Value = value;
 

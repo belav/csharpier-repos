@@ -451,7 +451,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         protected static int? TryGetSelectedIndex<TSymbol>(
             ImmutableArray<TSymbol> candidates,
             ISymbol? currentSymbol
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             if (currentSymbol is TSymbol matched)
             {

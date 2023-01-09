@@ -455,7 +455,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             string header,
             bool logElementCount,
             bool logNullForDefault = false
-        ) where T : IOperation
+        )
+            where T : IOperation
         {
             VisitArrayCommon(list, header, logElementCount, logNullForDefault, o => Visit(o));
         }

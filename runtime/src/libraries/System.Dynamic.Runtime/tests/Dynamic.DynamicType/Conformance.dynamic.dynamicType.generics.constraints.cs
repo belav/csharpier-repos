@@ -13,7 +13,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <Code>
     using System.Collections.Generic;
 
-    public class MyClass<T> where T : List<object>
+    public class MyClass<T>
+        where T : List<object>
     {
         public void Foo()
         {
@@ -53,7 +54,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <Code>
     using System.Collections.Generic;
 
-    public class MyClass<T> where T : List<object>
+    public class MyClass<T>
+        where T : List<object>
     {
         public void Foo()
         {
@@ -111,7 +113,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return rez > 0 ? 1 : 0;
         }
 
-        public static int M3<T, S>(T t, S s) where T : S
+        public static int M3<T, S>(T t, S s)
+            where T : S
         {
             // if (typeof(T) != typeof(int) || typeof(S) != typeof(object)) return 1;
             if (typeof(T) != typeof(int) || typeof(S) != typeof(int))
@@ -119,14 +122,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 0;
         }
 
-        public static int M2<T, S>() where T : struct, S
+        public static int M2<T, S>()
+            where T : struct, S
         {
             if (typeof(T) != typeof(int) || typeof(S) != typeof(object))
                 return 1;
             return 0;
         }
 
-        public static int M1<T, S>() where T : S
+        public static int M1<T, S>()
+            where T : S
         {
             if (typeof(T) != typeof(int) || typeof(S) != typeof(object))
                 return 1;
@@ -164,7 +169,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class C
     {
-        public void NakedGen1<T, U>() where T : U { }
+        public void NakedGen1<T, U>()
+            where T : U { }
     }
 
     public struct Struct { }
@@ -186,7 +192,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Base<T>
     {
-        public virtual void Foo<G>() where G : T, new() { }
+        public virtual void Foo<G>()
+            where G : T, new() { }
     }
 
     public class DerivedNullableOfInt : Base<int?>
@@ -234,7 +241,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Base<T>
     {
-        public virtual IEnumerable<G> Foo<G>() where G : T, new()
+        public virtual IEnumerable<G> Foo<G>()
+            where G : T, new()
         {
             return null;
         }
@@ -278,7 +286,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class Base<T>
     {
-        public virtual int Foo<G>() where G : T, new()
+        public virtual int Foo<G>()
+            where G : T, new()
         {
             return -1;
         }
@@ -322,7 +331,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T> where T : class
+    public class MyClass<T>
+        where T : class
     {
         public void Foo()
         {
@@ -360,7 +370,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T> where T : class
+    public class MyClass<T>
+        where T : class
     {
         public void Foo()
         {
@@ -436,7 +447,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T, U> where T : U
+    public class MyClass<T, U>
+        where T : U
     {
         public void Foo()
         {
@@ -474,7 +486,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T> where T : class
+    public class MyClass<T>
+        where T : class
     {
         public void Foo()
         {
@@ -512,7 +525,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T, U> where T : U
+    public class MyClass<T, U>
+        where T : U
     {
         public void Foo()
         {
@@ -550,7 +564,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T, U> where T : U
+    public class MyClass<T, U>
+        where T : U
     {
         public void Foo()
         {
@@ -588,7 +603,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T> where T : new()
+    public class MyClass<T>
+        where T : new()
     {
         public void Foo()
         {
@@ -626,7 +642,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
     // <Code>
-    public class MyClass<T> where T : new()
+    public class MyClass<T>
+        where T : new()
     {
         public void Foo()
         {
@@ -683,7 +700,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 0;
         }
 
-        public void Bar<T, S>() where T : S { }
+        public void Bar<T, S>()
+            where T : S { }
     }
     // </Code>
 }
@@ -714,7 +732,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return B.Status;
         }
 
-        public void Foo<T, S>() where T : S
+        public void Foo<T, S>()
+            where T : S
         {
             B.Status = 1;
         }
@@ -797,7 +816,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return B.Status;
         }
 
-        public void Foo<T, S>() where T : S // The constraint is important part
+        public void Foo<T, S>()
+            where T : S // The constraint is important part
         {
             B.Status = 0;
         }
@@ -848,7 +868,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return B.Status;
         }
 
-        public void Foo<T, S>() where T : S
+        public void Foo<T, S>()
+            where T : S
         {
             B.Status = 1;
         }
@@ -1454,12 +1475,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return rez;
         }
 
-        public static int Bar1<T, S>(T x, S y) where T : IComparable<S>
+        public static int Bar1<T, S>(T x, S y)
+            where T : IComparable<S>
         {
             return 0;
         }
 
-        public static int Bar2<T, S>(T t, S s) where T : IList<List<S>>
+        public static int Bar2<T, S>(T t, S s)
+            where T : IList<List<S>>
         {
             return 0;
         }
@@ -1471,7 +1494,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
             return 0;
         }
 
-        public static int Bar4<T, U>(T t, IComparable<U> u) where T : IComparable<U>
+        public static int Bar4<T, U>(T t, IComparable<U> u)
+            where T : IComparable<U>
         {
             return 0;
         }
@@ -1479,7 +1503,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.cn
 
     public class C<T>
     {
-        public int Foo<U>(T t, U u) where U : IComparable<T>
+        public int Foo<U>(T t, U u)
+            where U : IComparable<T>
         {
             return 0;
         }

@@ -18,7 +18,8 @@ public class C : I<object>
 
 /* U should be instantiated by a valuetype because we don't want the generic
  * sharing codepath */
-public class G<T, TI, U> where TI : I<T>
+public class G<T, TI, U>
+    where TI : I<T>
 {
     public G(TI i)
     {

@@ -53,7 +53,8 @@ public class LocalView<
         INotifyCollectionChanged,
         INotifyPropertyChanged,
         INotifyPropertyChanging,
-        IListSource where TEntity : class
+        IListSource
+    where TEntity : class
 {
     private ObservableBackedBindingList<TEntity>? _bindingList;
     private ObservableCollection<TEntity>? _observable;

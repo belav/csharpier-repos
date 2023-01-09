@@ -1141,7 +1141,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression receiverOpt,
             ImmutableArray<TypeWithAnnotations> typeArgumentsOpt,
             BindingDiagnosticBag diagnostics
-        ) where TMethodOrPropertySymbol : Symbol
+        )
+            where TMethodOrPropertySymbol : Symbol
         {
             Debug.Assert(overloadResolutionResult.HasAnyApplicableMember);
 
@@ -2706,7 +2707,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static TypeSymbol GetCommonTypeOrReturnType<TMember>(
             ImmutableArray<TMember> members
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             TypeSymbol type = null;
             for (int i = 0, n = members.Length; i < n; i++)

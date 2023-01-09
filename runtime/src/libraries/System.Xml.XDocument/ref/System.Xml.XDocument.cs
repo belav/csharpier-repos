@@ -25,7 +25,8 @@ namespace System.Xml.Linq
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors<T>(
             this System.Collections.Generic.IEnumerable<T?> source
-        ) where T : System.Xml.Linq.XNode
+        )
+            where T : System.Xml.Linq.XNode
         {
             throw null;
         }
@@ -33,7 +34,8 @@ namespace System.Xml.Linq
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Ancestors<T>(
             this System.Collections.Generic.IEnumerable<T?> source,
             System.Xml.Linq.XName? name
-        ) where T : System.Xml.Linq.XNode
+        )
+            where T : System.Xml.Linq.XNode
         {
             throw null;
         }
@@ -62,7 +64,8 @@ namespace System.Xml.Linq
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> DescendantNodes<T>(
             this System.Collections.Generic.IEnumerable<T?> source
-        ) where T : System.Xml.Linq.XContainer
+        )
+            where T : System.Xml.Linq.XContainer
         {
             throw null;
         }
@@ -84,7 +87,8 @@ namespace System.Xml.Linq
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Descendants<T>(
             this System.Collections.Generic.IEnumerable<T?> source
-        ) where T : System.Xml.Linq.XContainer
+        )
+            where T : System.Xml.Linq.XContainer
         {
             throw null;
         }
@@ -92,14 +96,16 @@ namespace System.Xml.Linq
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Descendants<T>(
             this System.Collections.Generic.IEnumerable<T?> source,
             System.Xml.Linq.XName? name
-        ) where T : System.Xml.Linq.XContainer
+        )
+            where T : System.Xml.Linq.XContainer
         {
             throw null;
         }
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Elements<T>(
             this System.Collections.Generic.IEnumerable<T?> source
-        ) where T : System.Xml.Linq.XContainer
+        )
+            where T : System.Xml.Linq.XContainer
         {
             throw null;
         }
@@ -107,21 +113,24 @@ namespace System.Xml.Linq
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> Elements<T>(
             this System.Collections.Generic.IEnumerable<T?> source,
             System.Xml.Linq.XName? name
-        ) where T : System.Xml.Linq.XContainer
+        )
+            where T : System.Xml.Linq.XContainer
         {
             throw null;
         }
 
         public static System.Collections.Generic.IEnumerable<T> InDocumentOrder<T>(
             this System.Collections.Generic.IEnumerable<T> source
-        ) where T : System.Xml.Linq.XNode?
+        )
+            where T : System.Xml.Linq.XNode?
         {
             throw null;
         }
 
         public static System.Collections.Generic.IEnumerable<System.Xml.Linq.XNode> Nodes<T>(
             this System.Collections.Generic.IEnumerable<T?> source
-        ) where T : System.Xml.Linq.XContainer
+        )
+            where T : System.Xml.Linq.XContainer
         {
             throw null;
         }
@@ -1583,19 +1592,22 @@ namespace System.Xml.Linq
             throw null;
         }
 
-        public System.Collections.Generic.IEnumerable<T> Annotations<T>() where T : class
+        public System.Collections.Generic.IEnumerable<T> Annotations<T>()
+            where T : class
         {
             throw null;
         }
 
-        public T? Annotation<T>() where T : class
+        public T? Annotation<T>()
+            where T : class
         {
             throw null;
         }
 
         public void RemoveAnnotations(System.Type type) { }
 
-        public void RemoveAnnotations<T>() where T : class { }
+        public void RemoveAnnotations<T>()
+            where T : class { }
 
         bool System.Xml.IXmlLineInfo.HasLineInfo()
         {

@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) where TResult : default
+        )
+            where TResult : default
         {
             return visitor.VisitNoneOperation(this, argument);
         }
@@ -175,7 +176,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) where TResult : default
+        )
+            where TResult : default
         {
             return visitor.VisitInvalid(this, argument);
         }
@@ -228,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) where TResult : default
+        )
+            where TResult : default
         {
             return visitor.VisitFlowAnonymousFunction(this, argument);
         }
@@ -422,7 +425,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) where TResult : default
+        )
+            where TResult : default
         {
             return visitor.VisitDynamicObjectCreation(this, argument);
         }
@@ -540,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) where TResult : default
+        )
+            where TResult : default
         {
             return visitor.VisitDynamicInvocation(this, argument);
         }
@@ -658,7 +663,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public override TResult? Accept<TArgument, TResult>(
             OperationVisitor<TArgument, TResult> visitor,
             TArgument argument
-        ) where TResult : default
+        )
+            where TResult : default
         {
             return visitor.VisitDynamicIndexerAccess(this, argument);
         }

@@ -15,7 +15,8 @@ namespace System.Numerics
     public readonly struct TotalOrderIeee754Comparer<T>
         : IComparer<T>,
             IEqualityComparer<T>,
-            IEquatable<TotalOrderIeee754Comparer<T>> where T : IFloatingPointIeee754<T>?
+            IEquatable<TotalOrderIeee754Comparer<T>>
+        where T : IFloatingPointIeee754<T>?
     {
         /// <summary>
         /// Compares two numbers with IEEE 754 totalOrder semantic and returns

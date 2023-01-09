@@ -33,7 +33,8 @@ namespace System.Data
         /// <returns>DataTable containing copies of the source DataRows. Properties for the DataTable table will be taken from first DataRow in the source.</returns>
         /// <exception cref="ArgumentNullException">if source is null</exception>
         /// <exception cref="InvalidOperationException">if source is empty</exception>
-        public static DataTable CopyToDataTable<T>(this IEnumerable<T> source) where T : DataRow
+        public static DataTable CopyToDataTable<T>(this IEnumerable<T> source)
+            where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             return LoadTableFromEnumerable(source, table: null, options: null, errorHandler: null);
@@ -46,7 +47,8 @@ namespace System.Data
             this IEnumerable<T> source,
             DataTable table,
             LoadOption options
-        ) where T : DataRow
+        )
+            where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             DataSetUtil.CheckArgumentNull(table, nameof(table));
@@ -77,7 +79,8 @@ namespace System.Data
             DataTable table,
             LoadOption options,
             FillErrorEventHandler? errorHandler
-        ) where T : DataRow
+        )
+            where T : DataRow
         {
             DataSetUtil.CheckArgumentNull(source, nameof(source));
             DataSetUtil.CheckArgumentNull(table, nameof(table));
@@ -89,7 +92,8 @@ namespace System.Data
             DataTable? table,
             LoadOption? options,
             FillErrorEventHandler? errorHandler
-        ) where T : DataRow
+        )
+            where T : DataRow
         {
             if (options.HasValue)
             {

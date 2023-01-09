@@ -2730,7 +2730,8 @@ public static class EntityFrameworkQueryableExtensions
     public static IIncludableQueryable<TEntity, TProperty> Include<TEntity, TProperty>(
         this IQueryable<TEntity> source,
         Expression<Func<TEntity, TProperty>> navigationPropertyPath
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotNull(navigationPropertyPath, nameof(navigationPropertyPath));
 
@@ -2758,7 +2759,8 @@ public static class EntityFrameworkQueryableExtensions
     internal static IIncludableQueryable<TEntity, TProperty> NotQuiteInclude<TEntity, TProperty>(
         this IQueryable<TEntity> source,
         Expression<Func<TEntity, TProperty>> navigationPropertyPath
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
@@ -2824,7 +2826,8 @@ public static class EntityFrameworkQueryableExtensions
     >(
         this IIncludableQueryable<TEntity, IEnumerable<TPreviousProperty>> source,
         Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
@@ -2867,7 +2870,8 @@ public static class EntityFrameworkQueryableExtensions
     >(
         this IIncludableQueryable<TEntity, TPreviousProperty> source,
         Expression<Func<TPreviousProperty, TProperty>> navigationPropertyPath
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         new IncludableQueryable<TEntity, TProperty>(
             source.Provider is EntityQueryProvider
                 ? source.Provider.CreateQuery<TEntity>(
@@ -2948,7 +2952,8 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> Include<TEntity>(
         this IQueryable<TEntity> source,
         [NotParameterized] string navigationPropertyPath
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         Check.NotEmpty(navigationPropertyPath, nameof(navigationPropertyPath));
 
@@ -3107,7 +3112,8 @@ public static class EntityFrameworkQueryableExtensions
     /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
     public static IQueryable<TEntity> AsNoTrackingWithIdentityResolution<TEntity>(
         this IQueryable<TEntity> source
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         source.Provider is EntityQueryProvider
             ? source.Provider.CreateQuery<TEntity>(
                 Expression.Call(
@@ -3185,7 +3191,8 @@ public static class EntityFrameworkQueryableExtensions
     public static IQueryable<TEntity> AsTracking<TEntity>(
         this IQueryable<TEntity> source,
         QueryTrackingBehavior track
-    ) where TEntity : class =>
+    )
+        where TEntity : class =>
         track switch
         {
             QueryTrackingBehavior.TrackAll => source.AsTracking(),
@@ -3370,7 +3377,8 @@ public static class EntityFrameworkQueryableExtensions
         this IQueryable<TSource> source,
         Func<TSource, TKey> keySelector,
         CancellationToken cancellationToken = default
-    ) where TKey : notnull =>
+    )
+        where TKey : notnull =>
         ToDictionaryAsync(source, keySelector, e => e, comparer: null, cancellationToken);
 
     /// <summary>
@@ -3407,7 +3415,8 @@ public static class EntityFrameworkQueryableExtensions
         Func<TSource, TKey> keySelector,
         IEqualityComparer<TKey> comparer,
         CancellationToken cancellationToken = default
-    ) where TKey : notnull =>
+    )
+        where TKey : notnull =>
         ToDictionaryAsync(source, keySelector, e => e, comparer, cancellationToken);
 
     /// <summary>
@@ -3446,7 +3455,8 @@ public static class EntityFrameworkQueryableExtensions
         Func<TSource, TKey> keySelector,
         Func<TSource, TElement> elementSelector,
         CancellationToken cancellationToken = default
-    ) where TKey : notnull =>
+    )
+        where TKey : notnull =>
         ToDictionaryAsync(source, keySelector, elementSelector, comparer: null, cancellationToken);
 
     /// <summary>
@@ -3487,7 +3497,8 @@ public static class EntityFrameworkQueryableExtensions
         Func<TSource, TElement> elementSelector,
         IEqualityComparer<TKey>? comparer,
         CancellationToken cancellationToken = default
-    ) where TKey : notnull
+    )
+        where TKey : notnull
     {
         Check.NotNull(keySelector, nameof(keySelector));
         Check.NotNull(elementSelector, nameof(elementSelector));

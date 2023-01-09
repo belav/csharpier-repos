@@ -15,7 +15,8 @@ namespace System
         private static bool IsNetFramework =>
             RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework");
 
-        public static void Throws<T>(Action action, string expectedMessage) where T : Exception
+        public static void Throws<T>(Action action, string expectedMessage)
+            where T : Exception
         {
             Assert.Equal(expectedMessage, Assert.Throws<T>(action).Message);
         }
@@ -47,7 +48,8 @@ namespace System
             string netCoreParamName,
             string netFxParamName,
             Func<object> testCode
-        ) where T : ArgumentException
+        )
+            where T : ArgumentException
         {
             T exception = Assert.Throws<T>(testCode);
 
@@ -72,7 +74,8 @@ namespace System
             return exception;
         }
 
-        public static T Throws<T>(Action action) where T : Exception
+        public static T Throws<T>(Action action)
+            where T : Exception
         {
             T exception = Assert.Throws<T>(action);
 
@@ -255,7 +258,8 @@ namespace System
             );
         }
 
-        public static void ThrowsIf<T>(bool condition, Action action) where T : Exception
+        public static void ThrowsIf<T>(bool condition, Action action)
+            where T : Exception
         {
             if (condition)
             {
@@ -367,7 +371,8 @@ namespace System
             T actual,
             T lessThanOrEqualTo,
             string userMessage = null
-        ) where T : IComparable
+        )
+            where T : IComparable
         {
             // null, by definition is always less than or equal to
             if (actual == null)
@@ -391,7 +396,8 @@ namespace System
             T actual,
             T greaterThanOrEqualTo,
             string userMessage = null
-        ) where T : IComparable
+        )
+            where T : IComparable
         {
             // null, by definition is always less than or equal to
             if (actual == null)
@@ -430,7 +436,8 @@ namespace System
         /// </summary>
         /// <param name="expected">The array that <paramref name="actual"/> should be equal to.</param>
         /// <param name="actual"></param>
-        public static void Equal<T>(T[] expected, T[] actual) where T : IEquatable<T>
+        public static void Equal<T>(T[] expected, T[] actual)
+            where T : IEquatable<T>
         {
             // Use the SequenceEqual to compare the arrays for better performance. The default Assert.Equal method compares
             // the arrays by boxing each element that is very slow for large arrays.
@@ -585,8 +592,8 @@ namespace System
             where T : IEquatable<T> =>
             SequenceEqual((ReadOnlySpan<T>)expected, (ReadOnlySpan<T>)actual);
 
-        public static void SequenceEqual<T>(T[] expected, T[] actual) where T : IEquatable<T> =>
-            SequenceEqual(expected.AsSpan(), actual.AsSpan());
+        public static void SequenceEqual<T>(T[] expected, T[] actual)
+            where T : IEquatable<T> => SequenceEqual(expected.AsSpan(), actual.AsSpan());
 
         public static void AtLeastOneEquals<T>(T expected1, T expected2, T value)
         {
@@ -620,7 +627,8 @@ namespace System
         public static E AssertThrows<E, T>(
             ReadOnlySpan<T> span,
             AssertThrowsActionReadOnly<T> action
-        ) where E : Exception
+        )
+            where E : Exception
         {
             Exception exception;
 
@@ -675,7 +683,8 @@ namespace System
             string expectedParamName,
             ReadOnlySpan<T> span,
             AssertThrowsActionReadOnly<T> action
-        ) where E : ArgumentException
+        )
+            where E : ArgumentException
         {
             E exception = AssertThrows<E, T>(span, action);
             Assert.Equal(expectedParamName, exception.ParamName);
@@ -686,7 +695,8 @@ namespace System
             string expectedParamName,
             Span<T> span,
             AssertThrowsAction<T> action
-        ) where E : ArgumentException
+        )
+            where E : ArgumentException
         {
             E exception = AssertThrows<E, T>(span, action);
             Assert.Equal(expectedParamName, exception.ParamName);

@@ -10,7 +10,8 @@ using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 namespace System.Security.Cryptography.Cose.Tests
 {
     // Tests that apply to all [Try]Sign overloads using one single signer.
-    public abstract class CoseMessageTests_Sign<T> where T : AsymmetricAlgorithm
+    public abstract class CoseMessageTests_Sign<T>
+        where T : AsymmetricAlgorithm
     {
         internal virtual bool OnlySupportsDetachedContent => false;
         internal CoseAlgorithm DefaultAlgorithm => CoseAlgorithms[CoseAlgorithms.Count - 1];

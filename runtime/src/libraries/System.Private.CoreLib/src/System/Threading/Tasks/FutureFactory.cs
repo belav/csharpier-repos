@@ -1510,7 +1510,8 @@ namespace System.Threading.Tasks
             TArgs args,
             Func<TInstance, TArgs, AsyncCallback, object, IAsyncResult> beginMethod,
             Func<TInstance, IAsyncResult, TResult> endMethod
-        ) where TInstance : class
+        )
+            where TInstance : class
         {
             // Validate arguments, but only with asserts, as this is an internal only implementation.
             Debug.Assert(thisRef != null, "Expected a non-null thisRef");
@@ -1549,7 +1550,8 @@ namespace System.Threading.Tasks
         /// state so that we can avoid unnecessary closure/delegate allocations.
         /// </summary>
         /// <typeparam name="TInstance">Specifies the type of the instance on which the APM implementation lives.</typeparam>
-        private sealed class FromAsyncTrimPromise<TInstance> : Task<TResult> where TInstance : class
+        private sealed class FromAsyncTrimPromise<TInstance> : Task<TResult>
+            where TInstance : class
         {
             /// <summary>A cached delegate used as the callback for the BeginXx method.</summary>
             internal static readonly AsyncCallback s_completeFromAsyncResult =

@@ -62,7 +62,8 @@ namespace Microsoft.Internal
         }
 
         [DebuggerStepThrough]
-        private static void NotNullElements<T>(T[]? values, string parameterName) where T : class
+        private static void NotNullElements<T>(T[]? values, string parameterName)
+            where T : class
         {
             if (values != null)
             {
@@ -121,7 +122,8 @@ namespace Microsoft.Internal
             }
         }
 
-        public static void NotNull<T>(T value, string parameterName) where T : class
+        public static void NotNull<T>(T value, string parameterName)
+            where T : class
         {
             if (value == null)
             {

@@ -41,7 +41,8 @@ namespace System.Reflection
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
                 TProxy
-        >() where TProxy : DispatchProxy
+        >()
+            where TProxy : DispatchProxy
         {
             return (T)
                 DispatchProxyGenerator.CreateProxyInstance(

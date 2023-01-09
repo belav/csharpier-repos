@@ -156,17 +156,20 @@ namespace System.Numerics.Tests
         static bool INumberBase<BinaryNumberDimHelper>.TryConvertToChecked<TOther>(
             BinaryNumberDimHelper value,
             out TOther result
-        ) where TOther : default => throw new NotImplementedException();
+        )
+            where TOther : default => throw new NotImplementedException();
 
         static bool INumberBase<BinaryNumberDimHelper>.TryConvertToSaturating<TOther>(
             BinaryNumberDimHelper value,
             out TOther result
-        ) where TOther : default => throw new NotImplementedException();
+        )
+            where TOther : default => throw new NotImplementedException();
 
         static bool INumberBase<BinaryNumberDimHelper>.TryConvertToTruncating<TOther>(
             BinaryNumberDimHelper value,
             out TOther result
-        ) where TOther : default => throw new NotImplementedException();
+        )
+            where TOther : default => throw new NotImplementedException();
 
         static bool INumberBase<BinaryNumberDimHelper>.TryParse(
             ReadOnlySpan<char> s,

@@ -1,4 +1,5 @@
-public class Grid<CT> where CT : Grid<CT>.GPD.GC, new()
+public class Grid<CT>
+    where CT : Grid<CT>.GPD.GC, new()
 {
     public abstract class GPD
     {

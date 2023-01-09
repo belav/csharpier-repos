@@ -9,7 +9,8 @@ namespace System.Text.Json.Serialization.Converters
 {
     // Converter for F# lists: https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-list-1.html
     internal sealed class FSharpListConverter<TList, TElement>
-        : IEnumerableDefaultConverter<TList, TElement> where TList : IEnumerable<TElement>
+        : IEnumerableDefaultConverter<TList, TElement>
+        where TList : IEnumerable<TElement>
     {
         private readonly Func<IEnumerable<TElement>, TList> _listConstructor;
 

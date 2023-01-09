@@ -2496,7 +2496,8 @@ namespace System.Net.Http.Headers
     public sealed partial class HttpHeaderValueCollection<T>
         : System.Collections.Generic.ICollection<T>,
             System.Collections.Generic.IEnumerable<T>,
-            System.Collections.IEnumerable where T : class
+            System.Collections.IEnumerable
+        where T : class
     {
         internal HttpHeaderValueCollection() { }
 

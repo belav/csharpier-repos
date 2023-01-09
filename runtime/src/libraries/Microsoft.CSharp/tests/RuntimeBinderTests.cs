@@ -192,12 +192,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Equal(0, x.Zero());
         }
 
-        class First<T> where T : First<T>
+        class First<T>
+            where T : First<T>
         {
             public int Zero() => 0;
         }
 
-        class Second<T> : First<T> where T : First<T> { }
+        class Second<T> : First<T>
+            where T : First<T> { }
 
         class Third<T> : Second<Third<T>> { }
 
@@ -237,9 +239,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             }
         }
 
-        public class BuilderBaseEx<T> : BuilderBase<T> where T : BuilderBaseEx<T> { }
+        public class BuilderBaseEx<T> : BuilderBase<T>
+            where T : BuilderBaseEx<T> { }
 
-        public class BuilderBase<T> where T : BuilderBase<T> { }
+        public class BuilderBase<T>
+            where T : BuilderBase<T> { }
 
         [Fact]
         public void CircularOnOwnNested()

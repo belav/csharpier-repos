@@ -108,7 +108,8 @@ namespace System.Threading
 
         [return: NotNullIfNotNull(nameof(location1))]
         [Intrinsic]
-        public static T CompareExchange<T>(ref T location1, T value, T comparand) where T : class?
+        public static T CompareExchange<T>(ref T location1, T value, T comparand)
+            where T : class?
         {
             unsafe
             {

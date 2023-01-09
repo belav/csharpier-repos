@@ -66,7 +66,8 @@ namespace Microsoft.Extensions.Logging
 
         public IExternalScopeProvider? ExternalScopeProvider { get; }
 
-        public IDisposable? CreateScope<TState>(TState state) where TState : notnull
+        public IDisposable? CreateScope<TState>(TState state)
+            where TState : notnull
         {
             if (ExternalScopeProvider != null)
             {

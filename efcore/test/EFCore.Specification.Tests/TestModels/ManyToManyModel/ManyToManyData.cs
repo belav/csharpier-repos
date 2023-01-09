@@ -127,7 +127,8 @@ public class ManyToManyData : ISetSource
             .AddRange(CreateUnidirectionalEntityRootUnidirectionalEntityBranches(context));
     }
 
-    public IQueryable<TEntity> Set<TEntity>() where TEntity : class =>
+    public IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class =>
         typeof(TEntity).Name switch
         {
             nameof(EntityOne) => (IQueryable<TEntity>)_ones.AsQueryable(),
@@ -6371,7 +6372,8 @@ public class ManyToManyData : ISetSource
     private static TEntity CreateInstance<TEntity>(
         DbSet<TEntity> set,
         Action<TEntity, bool> configureEntity
-    ) where TEntity : class, new()
+    )
+        where TEntity : class, new()
     {
         if (set != null)
         {

@@ -216,7 +216,8 @@ public class DynamicGrpcServiceRegistry
             string verb,
             HttpRule httpRule,
             MethodDescriptor methodDescriptor
-        ) where TDelegate : Delegate
+        )
+            where TDelegate : Delegate
         {
             return ((TDelegate)_testDelegate, new List<object>());
         }

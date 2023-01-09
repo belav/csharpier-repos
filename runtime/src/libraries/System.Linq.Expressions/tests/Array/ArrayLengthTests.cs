@@ -856,7 +856,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassRestrictionArrayLengthTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(
                 GenerateGenericWithClassRestrictionArray<Tc>(0),
@@ -874,7 +875,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithClassRestrictionArrayLengthTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Assert.Throws<NullReferenceException>(
                 () =>
@@ -884,7 +886,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
                 GenerateGenericWithClassAndNewRestrictionArray<Tcn>(0),
@@ -902,7 +905,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithClassAndNewRestrictionArrayLengthTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Assert.Throws<NullReferenceException>(
                 () =>
@@ -915,7 +919,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
                 GenerateGenericWithSubClassRestrictionArray<TC>(0),
@@ -933,7 +938,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithSubClassRestrictionArrayLengthTestHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             Assert.Throws<NullReferenceException>(
                 () =>
@@ -946,7 +952,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
                 GenerateGenericWithSubClassAndNewRestrictionArray<TCn>(0),
@@ -964,7 +971,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithSubClassAndNewRestrictionArrayLengthTestHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Assert.Throws<NullReferenceException>(
                 () =>
@@ -977,7 +985,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
                 GenerateGenericWithStructRestrictionArray<Ts>(0),
@@ -995,7 +1004,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithStructRestrictionArrayLengthTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Assert.Throws<NullReferenceException>(
                 () =>
@@ -1425,7 +1435,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static Tc[] GenerateGenericWithClassRestrictionArray<Tc>(int size) where Tc : class
+        private static Tc[] GenerateGenericWithClassRestrictionArray<Tc>(int size)
+            where Tc : class
         {
             Tc[] array = new Tc[] { null, default(Tc) };
             Tc[] result = new Tc[size];
@@ -1450,7 +1461,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static TC[] GenerateGenericWithSubClassRestrictionArray<TC>(int size) where TC : C
+        private static TC[] GenerateGenericWithSubClassRestrictionArray<TC>(int size)
+            where TC : C
         {
             TC[] array = new TC[] { null, default(TC), (TC)new C() };
             TC[] result = new TC[size];
@@ -1819,7 +1831,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithClassRestrictionArrayLengthExpression<Tc>(
             Tc[] array,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Tc[]))),
@@ -1832,7 +1845,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithClassAndNewRestrictionArrayLengthExpression<Tcn>(
             Tcn[] array,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Tcn[]))),
@@ -1845,7 +1859,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithSubClassRestrictionArrayLengthExpression<TC>(
             TC[] array,
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(TC[]))),
@@ -1858,7 +1873,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithSubClassAndNewRestrictionArrayLengthExpression<TCn>(
             TCn[] array,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(TCn[]))),
@@ -1871,7 +1887,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithStructRestrictionArrayLengthExpression<Ts>(
             Ts[] array,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<int>> e = Expression.Lambda<Func<int>>(
                 Expression.ArrayLength(Expression.Constant(array, typeof(Ts[]))),

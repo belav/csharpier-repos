@@ -8,7 +8,8 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class IEnumerableWithAddMethodConverter<TCollection>
-        : IEnumerableDefaultConverter<TCollection, object?> where TCollection : IEnumerable
+        : IEnumerableDefaultConverter<TCollection, object?>
+        where TCollection : IEnumerable
     {
         protected override void Add(in object? value, ref ReadStack state)
         {

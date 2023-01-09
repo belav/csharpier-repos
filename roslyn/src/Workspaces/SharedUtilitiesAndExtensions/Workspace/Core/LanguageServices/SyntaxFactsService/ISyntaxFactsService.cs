@@ -38,6 +38,7 @@ namespace Microsoft.CodeAnalysis.LanguageService
             TContextNode contextNode,
             out SyntaxNode newRoot,
             out TContextNode newContextNode
-        ) where TContextNode : SyntaxNode;
+        )
+            where TContextNode : SyntaxNode;
     }
 }

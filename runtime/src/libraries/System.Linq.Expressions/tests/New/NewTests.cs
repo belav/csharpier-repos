@@ -285,7 +285,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckNewNullableGenericWithStructRestrictionHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts?>> e = Expression.Lambda<Func<Ts?>>(
                 Expression.New(typeof(Ts?)),

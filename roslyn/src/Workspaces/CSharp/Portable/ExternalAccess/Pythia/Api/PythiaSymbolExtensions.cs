@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
             this ImmutableArray<T> symbols,
             bool hideAdvancedMembers,
             Compilation compilation
-        ) where T : ISymbol =>
+        )
+            where T : ISymbol =>
             Shared.Extensions.ISymbolExtensions.FilterToVisibleAndBrowsableSymbols(
                 symbols,
                 hideAdvancedMembers,

@@ -128,7 +128,8 @@ namespace Internal.Runtime
             GCPointerMap map,
             int size,
             int delta
-        ) where T : struct, ITargetBinaryWriter
+        )
+            where T : struct, ITargetBinaryWriter
         {
             Debug.Assert(size >= map.Size);
 

@@ -18,7 +18,8 @@ internal static partial class Interop
             GetEncodedSizeFunc<THandle> getSize,
             EncodeFunc<THandle> encode,
             THandle handle
-        ) where THandle : SafeHandle
+        )
+            where THandle : SafeHandle
         {
             int size = getSize(handle);
 
@@ -50,7 +51,8 @@ internal static partial class Interop
             GetEncodedSizeFunc<THandle> getSize,
             EncodeFunc<THandle> encode,
             THandle handle
-        ) where THandle : SafeHandle
+        )
+            where THandle : SafeHandle
         {
             int size = getSize(handle);
 

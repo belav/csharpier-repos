@@ -97,7 +97,8 @@ public class ExternalLoginModel : PageModel
     ) => throw new NotImplementedException();
 }
 
-internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel where TUser : class
+internal sealed class ExternalLoginModel<TUser> : ExternalLoginModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;

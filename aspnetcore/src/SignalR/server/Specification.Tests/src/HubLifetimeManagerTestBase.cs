@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.SignalR.Specification.Tests;
 /// Base test class for lifetime manager implementations. Nothing specific to scale-out for these tests.
 /// </summary>
 /// <typeparam name="THub">The type of the <see cref="Hub"/>.</typeparam>
-public abstract class HubLifetimeManagerTestsBase<THub> where THub : Hub
+public abstract class HubLifetimeManagerTestsBase<THub>
+    where THub : Hub
 {
     /// <summary>
     /// This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in tests instead.

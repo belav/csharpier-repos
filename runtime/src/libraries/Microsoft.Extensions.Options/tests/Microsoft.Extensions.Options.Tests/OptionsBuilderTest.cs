@@ -671,7 +671,8 @@ namespace Microsoft.Extensions.Options.Tests
                 get => _targets;
             }
 
-            public void Validate<TOptions>(string name) where TOptions : class
+            public void Validate<TOptions>(string name)
+                where TOptions : class
             {
                 if (!_targets.ContainsKey(typeof(TOptions)))
                 {
@@ -680,8 +681,8 @@ namespace Microsoft.Extensions.Options.Tests
                 _targets[typeof(TOptions)].Add(name ?? Options.DefaultName);
             }
 
-            public void Validate<TOptions>() where TOptions : class =>
-                Validate<TOptions>(Options.DefaultName);
+            public void Validate<TOptions>()
+                where TOptions : class => Validate<TOptions>(Options.DefaultName);
         }
 
         public class OptionsStartupValidator : IStartupValidator

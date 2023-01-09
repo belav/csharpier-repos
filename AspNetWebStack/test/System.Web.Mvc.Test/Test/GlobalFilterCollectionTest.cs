@@ -128,7 +128,8 @@ namespace System.Web.Mvc.Test
             Assert.Same(_filterInstance, filter.Instance);
         }
 
-        private static TFilter GetFilterInstance<TFilter>() where TFilter : class
+        private static TFilter GetFilterInstance<TFilter>()
+            where TFilter : class
         {
             return new Mock<TFilter>().Object;
         }

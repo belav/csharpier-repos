@@ -19,7 +19,8 @@ namespace System.Runtime.InteropServices.Marshalling
         MarshalMode.UnmanagedToManagedOut,
         typeof(ExceptionNaNMarshaller<>)
     )]
-    public static class ExceptionNaNMarshaller<T> where T : unmanaged, IFloatingPointIeee754<T>
+    public static class ExceptionNaNMarshaller<T>
+        where T : unmanaged, IFloatingPointIeee754<T>
     {
         /// <summary>
         /// Convert the exception to <see cref="T.NaN"/>.

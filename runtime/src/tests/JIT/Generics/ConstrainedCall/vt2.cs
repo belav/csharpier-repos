@@ -19,7 +19,8 @@ struct MyInt : IncrDecr
     }
 }
 
-class MyCounter<T> where T : IncrDecr
+class MyCounter<T>
+    where T : IncrDecr
 {
     T counter;
     T[] counters = new T[1];

@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis.LanguageService;
 namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 {
     internal abstract class AbstractAddAccessibilityModifiers<TMemberDeclarationSyntax>
-        : IAddAccessibilityModifiers where TMemberDeclarationSyntax : SyntaxNode
+        : IAddAccessibilityModifiers
+        where TMemberDeclarationSyntax : SyntaxNode
     {
         public bool ShouldUpdateAccessibilityModifier(
             IAccessibilityFacts accessibilityFacts,

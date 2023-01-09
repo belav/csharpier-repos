@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 {
-    internal readonly struct MetadataContext<TAssemblyContext> where TAssemblyContext : struct
+    internal readonly struct MetadataContext<TAssemblyContext>
+        where TAssemblyContext : struct
     {
         internal readonly ImmutableArray<MetadataBlock> MetadataBlocks;
         internal readonly ImmutableDictionary<MetadataContextId, TAssemblyContext> AssemblyContexts;

@@ -324,11 +324,13 @@ namespace System.Diagnostics.Tracing
 #else
         private
 #endif
-        sealed class ReferenceTypeHelper<TContainer> : TypeHelper where TContainer : class
+        sealed class ReferenceTypeHelper<TContainer> : TypeHelper
+            where TContainer : class
         {
             private static Func<TContainer, TProperty> GetGetMethod<TProperty>(
                 PropertyInfo property
-            ) where TProperty : struct =>
+            )
+                where TProperty : struct =>
                 property.GetMethod!.CreateDelegate<Func<TContainer, TProperty>>();
 
             public override Func<PropertyValue, PropertyValue> GetPropertyGetter(

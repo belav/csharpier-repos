@@ -14,7 +14,8 @@ public class Help
     public static Object s_object = new object();
 }
 
-public struct Struct<T> where T : Exception
+public struct Struct<T>
+    where T : Exception
 {
     public void StructInstanceFunctionWithFewArgs()
     {

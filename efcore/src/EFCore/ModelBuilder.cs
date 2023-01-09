@@ -148,7 +148,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// <returns>An object that can be used to configure the entity type.</returns>
     public virtual EntityTypeBuilder<TEntity> Entity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >() where TEntity : class =>
+    >()
+        where TEntity : class =>
         new(
             Builder
                 .Entity(typeof(TEntity), ConfigurationSource.Explicit, shouldBeOwned: false)!
@@ -177,7 +178,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// <returns>An object that can be used to configure the entity type.</returns>
     public virtual EntityTypeBuilder<TEntity> SharedTypeEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(string name) where TEntity : class
+    >(string name)
+        where TEntity : class
     {
         Check.NotEmpty(name, nameof(name));
 
@@ -281,7 +283,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// </returns>
     public virtual ModelBuilder Entity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(Action<EntityTypeBuilder<TEntity>> buildAction) where TEntity : class
+    >(Action<EntityTypeBuilder<TEntity>> buildAction)
+        where TEntity : class
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -320,7 +323,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// </returns>
     public virtual ModelBuilder SharedTypeEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(string name, Action<EntityTypeBuilder<TEntity>> buildAction) where TEntity : class
+    >(string name, Action<EntityTypeBuilder<TEntity>> buildAction)
+        where TEntity : class
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -444,7 +448,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// </returns>
     public virtual ModelBuilder Ignore<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >() where TEntity : class => Ignore(typeof(TEntity));
+    >()
+        where TEntity : class => Ignore(typeof(TEntity));
 
     /// <summary>
     ///     Excludes an entity type with given CLR type from the model. This method is typically used to remove types from
@@ -501,7 +506,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// </returns>
     public virtual ModelBuilder ApplyConfiguration<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TEntity
-    >(IEntityTypeConfiguration<TEntity> configuration) where TEntity : class
+    >(IEntityTypeConfiguration<TEntity> configuration)
+        where TEntity : class
     {
         Check.NotNull(configuration, nameof(configuration));
 
@@ -578,7 +584,8 @@ public class ModelBuilder : IInfrastructure<IConventionModelBuilder>
     /// <typeparam name="T">The entity type to be configured.</typeparam>
     public virtual OwnedEntityTypeBuilder<T> Owned<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] T
-    >() where T : class
+    >()
+        where T : class
     {
         Builder.Owned(typeof(T), ConfigurationSource.Explicit);
 

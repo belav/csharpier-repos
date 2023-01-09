@@ -9,7 +9,8 @@ namespace System.ComponentModel.Composition.Hosting
         internal static T GetValueAllowNull<T>(
             this AtomicComposition? atomicComposition,
             T defaultResultAndKey
-        ) where T : class
+        )
+            where T : class
         {
             ArgumentNullException.ThrowIfNull(defaultResultAndKey);
 

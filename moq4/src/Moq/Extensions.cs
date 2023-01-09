@@ -375,7 +375,8 @@ namespace Moq
         public static bool CompareParameterTypesTo<TOtherTypes>(
             this Delegate function,
             TOtherTypes otherTypes
-        ) where TOtherTypes : IReadOnlyList<Type>
+        )
+            where TOtherTypes : IReadOnlyList<Type>
         {
             var method = function.GetMethodInfo();
             if (

@@ -19,7 +19,8 @@ public abstract class FilteredQueryTestBase<TFixture> : QueryTestBase<TFixture>
         bool assertOrder = false,
         int entryCount = 0,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : class =>
+    )
+        where TResult : class =>
         AssertFilteredQuery(
             async,
             query,
@@ -40,7 +41,8 @@ public abstract class FilteredQueryTestBase<TFixture> : QueryTestBase<TFixture>
         bool assertOrder = false,
         int entryCount = 0,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : class =>
+    )
+        where TResult : class =>
         QueryAsserter.AssertQuery(
             actualQuery,
             expectedQuery,
@@ -58,7 +60,8 @@ public abstract class FilteredQueryTestBase<TFixture> : QueryTestBase<TFixture>
         Func<ISetSource, IQueryable<TResult>> query,
         bool assertOrder = false,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : struct =>
+    )
+        where TResult : struct =>
         AssertFilteredQueryScalar(async, query, query, assertOrder, testMethodName);
 
     public Task AssertFilteredQueryScalar<TResult>(
@@ -67,7 +70,8 @@ public abstract class FilteredQueryTestBase<TFixture> : QueryTestBase<TFixture>
         Func<ISetSource, IQueryable<TResult>> expectedQuery,
         bool assertOrder = false,
         [CallerMemberName] string testMethodName = null
-    ) where TResult : struct =>
+    )
+        where TResult : struct =>
         QueryAsserter.AssertQueryScalar(
             actualQuery,
             expectedQuery,

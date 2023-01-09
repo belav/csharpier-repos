@@ -11,7 +11,8 @@ using Xunit.Abstractions;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class SendTo<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class SendTo<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         protected static Socket CreateSocket(
             AddressFamily addressFamily = AddressFamily.InterNetwork

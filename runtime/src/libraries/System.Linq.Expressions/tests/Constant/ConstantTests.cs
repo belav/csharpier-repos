@@ -685,7 +685,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassAndNewRestrictionHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             foreach (TCn value in new TCn[] { null, default(TCn), new TCn(), (TCn)new C() })
             {
@@ -1060,7 +1061,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithClassAndNewRestriction<Tcn>(
             Tcn value,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<Tcn>> e = Expression.Lambda<Func<Tcn>>(
                 Expression.Constant(value, typeof(Tcn)),
@@ -1084,7 +1086,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyGenericWithSubClassAndNewRestriction<TCn>(
             TCn value,
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             Expression<Func<TCn>> e = Expression.Lambda<Func<TCn>>(
                 Expression.Constant(value, typeof(TCn)),

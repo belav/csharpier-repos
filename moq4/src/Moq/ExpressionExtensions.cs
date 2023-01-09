@@ -63,7 +63,8 @@ namespace Moq
 
         internal static TDelegate CompileUsingExpressionCompiler<TDelegate>(
             this Expression<TDelegate> expression
-        ) where TDelegate : Delegate
+        )
+            where TDelegate : Delegate
         {
             // Expression trees are not compiled directly.
             // The indirection via an ExpressionCompiler allows users to plug a different expression compiler.

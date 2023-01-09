@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for hashing passwords.
 /// </summary>
 /// <typeparam name="TUser">The type used to represent a user.</typeparam>
-public interface IPasswordHasher<TUser> where TUser : class
+public interface IPasswordHasher<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Returns a hashed representation of the supplied <paramref name="password"/> for the specified <paramref name="user"/>.

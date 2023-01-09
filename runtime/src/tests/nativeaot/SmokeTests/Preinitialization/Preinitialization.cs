@@ -1119,7 +1119,8 @@ static class Assert
             throw new Exception();
     }
 
-    public static void AreSame<T>(T v1, T v2) where T : class
+    public static void AreSame<T>(T v1, T v2)
+        where T : class
     {
         if (v1 != v2)
             throw new Exception();

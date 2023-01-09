@@ -36,7 +36,8 @@ public static class CosmosDbContextOptionsExtensions
         string accountKey,
         string databaseName,
         Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseCosmos(
                 (DbContextOptionsBuilder)optionsBuilder,
@@ -108,7 +109,8 @@ public static class CosmosDbContextOptionsExtensions
         TokenCredential tokenCredential,
         string databaseName,
         Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseCosmos(
                 (DbContextOptionsBuilder)optionsBuilder,
@@ -178,7 +180,8 @@ public static class CosmosDbContextOptionsExtensions
         string connectionString,
         string databaseName,
         Action<CosmosDbContextOptionsBuilder>? cosmosOptionsAction = null
-    ) where TContext : DbContext =>
+    )
+        where TContext : DbContext =>
         (DbContextOptionsBuilder<TContext>)
             UseCosmos(
                 (DbContextOptionsBuilder)optionsBuilder,

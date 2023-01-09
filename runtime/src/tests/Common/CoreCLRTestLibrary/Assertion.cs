@@ -104,7 +104,8 @@ namespace TestLibrary
             string parameterName,
             Action action,
             string message = null
-        ) where T : ArgumentException
+        )
+            where T : ArgumentException
         {
             T exception = Throws<T>(action, message);
 
@@ -212,7 +213,8 @@ namespace TestLibrary
             Action action,
             string message = "",
             AssertThrowsOptions options = AssertThrowsOptions.None
-        ) where T : Exception
+        )
+            where T : Exception
         {
             Exception exception = RunWithCatch(action);
 
@@ -252,7 +254,8 @@ namespace TestLibrary
             Func<Task> action,
             string message = "",
             AssertThrowsOptions options = AssertThrowsOptions.None
-        ) where T : Exception
+        )
+            where T : Exception
         {
             Exception exception = await RunWithCatchAsync(action);
 
@@ -883,7 +886,8 @@ namespace TestLibrary
 
     public static class ExceptionAssert
     {
-        public static void Throws<T>(String message, Action a) where T : Exception
+        public static void Throws<T>(String message, Action a)
+            where T : Exception
         {
             Assert.Throws<T>(a, message);
         }

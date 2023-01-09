@@ -20,7 +20,8 @@ namespace Microsoft.Web.Mvc
         public static MvcForm BeginForm<TController>(
             this HtmlHelper helper,
             Expression<Action<TController>> action
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             return BeginForm(helper, action, FormMethod.Post, null);
         }
@@ -34,7 +35,8 @@ namespace Microsoft.Web.Mvc
             this HtmlHelper helper,
             Expression<Action<TController>> action,
             FormMethod method
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             return BeginForm(helper, action, method, null);
         }
@@ -49,7 +51,8 @@ namespace Microsoft.Web.Mvc
             Expression<Action<TController>> action,
             FormMethod method,
             object htmlAttributes
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             return BeginForm(
                 helper,
@@ -69,7 +72,8 @@ namespace Microsoft.Web.Mvc
             Expression<Action<TController>> action,
             FormMethod method,
             IDictionary<string, object> htmlAttributes
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             TagBuilder tagBuilder = new TagBuilder("form");
             tagBuilder.MergeAttributes(htmlAttributes);

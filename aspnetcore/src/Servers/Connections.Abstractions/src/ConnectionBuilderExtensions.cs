@@ -22,7 +22,8 @@ public static class ConnectionBuilderExtensions
     public static IConnectionBuilder UseConnectionHandler<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             TConnectionHandler
-    >(this IConnectionBuilder connectionBuilder) where TConnectionHandler : ConnectionHandler
+    >(this IConnectionBuilder connectionBuilder)
+        where TConnectionHandler : ConnectionHandler
     {
         var handler = ActivatorUtilities.GetServiceOrCreateInstance<TConnectionHandler>(
             connectionBuilder.ApplicationServices

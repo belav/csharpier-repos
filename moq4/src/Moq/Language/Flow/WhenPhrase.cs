@@ -6,7 +6,8 @@ using System.Linq.Expressions;
 
 namespace Moq.Language.Flow
 {
-    internal sealed class WhenPhrase<T> : ISetupConditionResult<T> where T : class
+    internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
+        where T : class
     {
         private Mock<T> mock;
         private Condition condition;

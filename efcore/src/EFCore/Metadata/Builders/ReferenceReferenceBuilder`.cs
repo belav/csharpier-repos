@@ -214,7 +214,8 @@ public class ReferenceReferenceBuilder<TEntity, TRelatedEntity> : ReferenceRefer
         TRelatedEntity
     > HasForeignKey<TDependentEntity>(
         Expression<Func<TDependentEntity, object?>> foreignKeyExpression
-    ) where TDependentEntity : class =>
+    )
+        where TDependentEntity : class =>
         new(
             HasForeignKeyBuilder(
                 ResolveEntityType(typeof(TDependentEntity))!,

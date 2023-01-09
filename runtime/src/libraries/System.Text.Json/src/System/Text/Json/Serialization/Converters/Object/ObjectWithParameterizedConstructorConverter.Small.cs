@@ -12,7 +12,8 @@ namespace System.Text.Json.Serialization.Converters
     /// of JSON objects using parameterized constructors.
     /// </summary>
     internal class SmallObjectWithParameterizedConstructorConverter<T, TArg0, TArg1, TArg2, TArg3>
-        : ObjectWithParameterizedConstructorConverter<T> where T : notnull
+        : ObjectWithParameterizedConstructorConverter<T>
+        where T : notnull
     {
         protected override object CreateObject(ref ReadStackFrame frame)
         {

@@ -840,7 +840,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.d
     // <Description> Declaration of OPs with constant values</Description>
     // <Expects status=success></Expects>
     // <Code>
-    public class Parent<T> where T : class
+    public class Parent<T>
+        where T : class
     {
         public int Foo(T t = null)
         {

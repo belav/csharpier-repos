@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectBrowser.Lists
 {
-    internal abstract class SymbolListItem<TSymbol> : SymbolListItem where TSymbol : ISymbol
+    internal abstract class SymbolListItem<TSymbol> : SymbolListItem
+        where TSymbol : ISymbol
     {
         protected SymbolListItem(
             ProjectId projectId,

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         >(
             this IEnumerable<Lazy<TExtension, TMetadata>> extensions,
             params IContentType[] contentTypes
-        ) where TMetadata : IContentTypeMetadata
+        )
+            where TMetadata : IContentTypeMetadata
         {
             return extensions.SelectMatchingExtensions((IEnumerable<IContentType>)contentTypes);
         }
@@ -40,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         >(
             this IEnumerable<Lazy<TExtension, TMetadata>> extensions,
             IEnumerable<IContentType> contentTypes
-        ) where TMetadata : IContentTypeMetadata
+        )
+            where TMetadata : IContentTypeMetadata
         {
             return extensions
                 .Where(h => contentTypes.Any(d => d.MatchesAny(h.Metadata.ContentTypes)))
@@ -50,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static IList<TExtension> SelectMatchingExtensionValues<TExtension, TMetadata>(
             this IEnumerable<Lazy<TExtension, TMetadata>> extensions,
             params IContentType[] contentTypes
-        ) where TMetadata : IContentTypeMetadata
+        )
+            where TMetadata : IContentTypeMetadata
         {
             return extensions.SelectMatchingExtensions(contentTypes).Select(p => p.Value).ToList();
         }
@@ -58,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static Lazy<TExtension, TMetadata> SelectMatchingExtension<TExtension, TMetadata>(
             this IEnumerable<Lazy<TExtension, TMetadata>> extensions,
             params IContentType[] contentTypes
-        ) where TMetadata : IContentTypeMetadata
+        )
+            where TMetadata : IContentTypeMetadata
         {
             return extensions.SelectMatchingExtensions(contentTypes).Single();
         }
@@ -66,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         public static TExtension SelectMatchingExtensionValue<TExtension, TMetadata>(
             this IEnumerable<Lazy<TExtension, TMetadata>> extensions,
             params IContentType[] contentTypes
-        ) where TMetadata : IContentTypeMetadata
+        )
+            where TMetadata : IContentTypeMetadata
         {
             return extensions.SelectMatchingExtension(contentTypes).Value;
         }

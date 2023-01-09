@@ -124,7 +124,8 @@ namespace System.Linq.Expressions
             ReadOnlyCollection<T> expressions,
             char close,
             string separator
-        ) where T : Expression
+        )
+            where T : Expression
         {
             Out(open);
             if (expressions != null)

@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Design;
 ///     for more information and examples.
 /// </remarks>
 /// <typeparam name="TContext">The type of the context.</typeparam>
-public interface IDesignTimeDbContextFactory<out TContext> where TContext : DbContext
+public interface IDesignTimeDbContextFactory<out TContext>
+    where TContext : DbContext
 {
     /// <summary>
     ///     Creates a new instance of a derived context.

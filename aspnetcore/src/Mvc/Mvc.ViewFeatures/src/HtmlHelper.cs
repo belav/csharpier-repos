@@ -430,7 +430,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     }
 
     /// <inheritdoc />
-    public IEnumerable<SelectListItem> GetEnumSelectList<TEnum>() where TEnum : struct
+    public IEnumerable<SelectListItem> GetEnumSelectList<TEnum>()
+        where TEnum : struct
     {
         var type = typeof(TEnum);
         var metadata = MetadataProvider.GetMetadataForType(type);

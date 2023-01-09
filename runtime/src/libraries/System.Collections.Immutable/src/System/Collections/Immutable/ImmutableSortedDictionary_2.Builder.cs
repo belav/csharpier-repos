@@ -10,7 +10,8 @@ namespace System.Collections.Immutable
     /// <content>
     /// Contains the inner <see cref="ImmutableSortedDictionary{TKey, TValue}.Builder"/> class.
     /// </content>
-    public sealed partial class ImmutableSortedDictionary<TKey, TValue> where TKey : notnull
+    public sealed partial class ImmutableSortedDictionary<TKey, TValue>
+        where TKey : notnull
     {
         /// <summary>
         /// A sorted dictionary that mutates with little or no memory allocations,

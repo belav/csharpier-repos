@@ -369,7 +369,8 @@ namespace Newtonsoft.Json.Utilities
         public static TMethod SelectMethod<TMethod>(
             IEnumerable<TMethod> candidates,
             IList<Type> types
-        ) where TMethod : MethodBase
+        )
+            where TMethod : MethodBase
         {
             ValidationUtils.ArgumentNotNull(candidates, nameof(candidates));
             ValidationUtils.ArgumentNotNull(types, nameof(types));

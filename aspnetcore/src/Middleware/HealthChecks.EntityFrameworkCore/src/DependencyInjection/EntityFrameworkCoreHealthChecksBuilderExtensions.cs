@@ -55,7 +55,8 @@ public static class EntityFrameworkCoreHealthChecksBuilderExtensions
         HealthStatus? failureStatus = default,
         IEnumerable<string>? tags = default,
         Func<TContext, CancellationToken, Task<bool>>? customTestQuery = default
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         if (builder == null)
         {

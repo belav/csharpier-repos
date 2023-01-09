@@ -1487,7 +1487,8 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
     public Task Can_round_trip_changes_with_changed_only_notification_entities() =>
         RoundTripChanges<ChangedOnlyBlog>();
 
-    private async Task RoundTripChanges<TBlog>() where TBlog : class, IBlog, new()
+    private async Task RoundTripChanges<TBlog>()
+        where TBlog : class, IBlog, new()
     {
         using var testDatabase = SqlServerTestStore.CreateInitialized(DatabaseName);
         var options = Fixture.CreateOptions(testDatabase);
@@ -1670,7 +1671,8 @@ public class SqlServerEndToEndTest : IClassFixture<SqlServerFixture>
         public byte[] AndChew { get; set; }
     }
 
-    private class BloggingContext<TBlog> : DbContext where TBlog : class, IBlog
+    private class BloggingContext<TBlog> : DbContext
+        where TBlog : class, IBlog
     {
         public BloggingContext(DbContextOptions options)
             : base(options) { }

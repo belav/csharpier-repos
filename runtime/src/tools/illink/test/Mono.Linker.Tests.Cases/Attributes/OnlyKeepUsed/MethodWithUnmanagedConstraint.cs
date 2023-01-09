@@ -20,6 +20,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.OnlyKeepUsed
         /// </summary>
         /// <typeparam name="T"></typeparam>
         [Kept]
-        static void Method<T>() where T : unmanaged { }
+        static void Method<T>()
+            where T : unmanaged { }
     }
 }

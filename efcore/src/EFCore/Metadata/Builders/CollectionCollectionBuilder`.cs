@@ -49,7 +49,8 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the join entity type.</returns>
     public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
-    >() where TJoinEntity : class =>
+    >()
+        where TJoinEntity : class =>
         Using<TJoinEntity>(joinEntityName: null, configureRight: null, configureLeft: null);
 
     /// <summary>
@@ -60,7 +61,8 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the join entity type.</returns>
     public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
-    >(string joinEntityName) where TJoinEntity : class
+    >(string joinEntityName)
+        where TJoinEntity : class
     {
         Check.NotEmpty(joinEntityName, nameof(joinEntityName));
 
@@ -160,7 +162,8 @@ public class CollectionCollectionBuilder<
     /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
     public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
-    >(Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType) where TJoinEntity : class
+    >(Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
+        where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -208,7 +211,8 @@ public class CollectionCollectionBuilder<
             EntityTypeBuilder<TJoinEntity>,
             ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
         > configureLeft
-    ) where TJoinEntity : class
+    )
+        where TJoinEntity : class
     {
         Check.NotNull(configureRight, nameof(configureRight));
         Check.NotNull(configureLeft, nameof(configureLeft));
@@ -236,7 +240,8 @@ public class CollectionCollectionBuilder<
             EntityTypeBuilder<TJoinEntity>,
             ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
         > configureLeft
-    ) where TJoinEntity : class
+    )
+        where TJoinEntity : class
     {
         Check.NotEmpty(joinEntityName, nameof(joinEntityName));
         Check.NotNull(configureRight, nameof(configureRight));
@@ -357,7 +362,8 @@ public class CollectionCollectionBuilder<
             ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
         > configureLeft,
         Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-    ) where TJoinEntity : class
+    )
+        where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -389,7 +395,8 @@ public class CollectionCollectionBuilder<
             ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
         > configureLeft,
         Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType
-    ) where TJoinEntity : class
+    )
+        where TJoinEntity : class
     {
         Check.NotNull(configureJoinEntityType, nameof(configureJoinEntityType));
 
@@ -411,7 +418,8 @@ public class CollectionCollectionBuilder<
             EntityTypeBuilder<TJoinEntity>,
             ReferenceCollectionBuilder<TRightEntity, TJoinEntity>
         >? configureLeft
-    ) where TJoinEntity : class =>
+    )
+        where TJoinEntity : class =>
         new(
             UsingEntity(
                 joinEntityName,

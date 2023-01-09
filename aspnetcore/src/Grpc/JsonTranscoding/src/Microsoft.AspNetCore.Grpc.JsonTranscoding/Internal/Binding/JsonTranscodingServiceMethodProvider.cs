@@ -12,7 +12,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
 internal sealed partial class JsonTranscodingServiceMethodProvider<TService>
-    : IServiceMethodProvider<TService> where TService : class
+    : IServiceMethodProvider<TService>
+    where TService : class
 {
     private readonly ILogger<JsonTranscodingServiceMethodProvider<TService>> _logger;
     private readonly GrpcServiceOptions _globalOptions;

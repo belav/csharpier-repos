@@ -942,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return GetRemappedSymbol(originalSymbol);
         }
 
-        private T GetRemappedSymbol<T>(T originalSymbol) where T : Symbol
+        private T GetRemappedSymbol<T>(T originalSymbol)
+            where T : Symbol
         {
             EnsureNullabilityAnalysisPerformedIfNecessary();
             if (_lazyRemappedSymbols is null)

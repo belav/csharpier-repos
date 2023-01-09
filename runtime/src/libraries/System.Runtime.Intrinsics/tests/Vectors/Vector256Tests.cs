@@ -5981,7 +5981,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void IsSupportedUIntPtr() => TestIsSupported<nuint>();
 
-        private static void TestIsSupported<T>() where T : struct
+        private static void TestIsSupported<T>()
+            where T : struct
         {
             Assert.True(Vector256<T>.IsSupported);
 
@@ -6006,7 +6007,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void IsNotSupportedUInt128() => TestIsNotSupported<UInt128>();
 
-        private static void TestIsNotSupported<T>() where T : struct
+        private static void TestIsNotSupported<T>()
+            where T : struct
         {
             Assert.False(Vector256<T>.IsSupported);
 
@@ -6052,7 +6054,8 @@ namespace System.Runtime.Intrinsics.Tests.Vectors
         [Fact]
         public void GetOneUIntPtr() => TestGetOne<nuint>();
 
-        private static void TestGetOne<T>() where T : struct, INumber<T>
+        private static void TestGetOne<T>()
+            where T : struct, INumber<T>
         {
             Assert.Equal(Vector256<T>.One, Vector256.Create(T.One));
 

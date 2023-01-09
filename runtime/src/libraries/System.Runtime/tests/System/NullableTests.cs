@@ -100,7 +100,8 @@ namespace System.Tests
         [Fact]
         public static void GetValueRefOrDefaultRef_WithValue()
         {
-            static void Test<T>(T before, T after) where T : struct
+            static void Test<T>(T before, T after)
+                where T : struct
             {
                 T? nullable = before;
                 ref readonly T reference = ref Nullable.GetValueRefOrDefaultRef(nullable);
@@ -122,7 +123,8 @@ namespace System.Tests
         [Fact]
         public static void GetValueRefOrDefaultRef_WithDefault()
         {
-            static void Test<T>() where T : struct
+            static void Test<T>()
+                where T : struct
             {
                 T? nullable = null;
                 ref readonly T reference = ref Nullable.GetValueRefOrDefaultRef(nullable);
@@ -140,7 +142,8 @@ namespace System.Tests
         [Fact]
         public static void GetValueRefOrDefaultRef_UnsafeWriteToNullMaintainsExpectedBehavior()
         {
-            static void Test<T>(T after) where T : struct
+            static void Test<T>(T after)
+                where T : struct
             {
                 T? nullable = null;
                 ref readonly T reference = ref Nullable.GetValueRefOrDefaultRef(nullable);

@@ -126,7 +126,8 @@ namespace Microsoft.CodeAnalysis
 
             private SourceGeneratedTextDocumentServiceProvider() { }
 
-            public TService? GetService<TService>() where TService : class, IDocumentService
+            public TService? GetService<TService>()
+                where TService : class, IDocumentService
             {
                 if (
                     SourceGeneratedDocumentOperationService.Instance

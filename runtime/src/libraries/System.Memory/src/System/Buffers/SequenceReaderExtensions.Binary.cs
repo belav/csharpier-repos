@@ -38,7 +38,8 @@ namespace System.Buffers
         private static unsafe bool TryReadMultisegment<T>(
             ref SequenceReader<byte> reader,
             out T value
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             Debug.Assert(reader.UnreadSpan.Length < sizeof(T));
 

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// <typeparam name="TRemoteAuthenticationProviderOptions">The type of the underlying provider options.</typeparam>
 public class RemoteAuthenticationOptions<
     [DynamicallyAccessedMembers(JsonSerialized)] TRemoteAuthenticationProviderOptions
-> where TRemoteAuthenticationProviderOptions : new()
+>
+    where TRemoteAuthenticationProviderOptions : new()
 {
     /// <summary>
     /// Gets or sets the provider options.

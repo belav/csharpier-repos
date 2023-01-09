@@ -155,7 +155,8 @@ public static class RelationalTestModelBuilderExtensions
 
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> UseTpcMappingStrategy<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -172,7 +173,8 @@ public static class RelationalTestModelBuilderExtensions
 
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> UseTphMappingStrategy<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -189,7 +191,8 @@ public static class RelationalTestModelBuilderExtensions
 
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> UseTptMappingStrategy<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -207,7 +210,8 @@ public static class RelationalTestModelBuilderExtensions
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> ToTable<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string? name
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -226,7 +230,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         string? schema
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -244,7 +249,8 @@ public static class RelationalTestModelBuilderExtensions
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> ToTable<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -273,7 +279,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -305,7 +312,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -530,7 +538,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestSplitTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -564,7 +573,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestSplitTableBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -695,7 +705,8 @@ public static class RelationalTestModelBuilderExtensions
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> ToView<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string? name
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -714,7 +725,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string? name,
         string? schema
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -733,7 +745,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestViewBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -765,7 +778,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestViewBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -946,7 +960,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestSplitViewBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -980,7 +995,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestSplitViewBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1112,12 +1128,14 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestTableValuedFunctionBuilder<TEntity>> buildAction
-    ) where TEntity : class => builder;
+    )
+        where TEntity : class => builder;
 
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> UpdateUsingStoredProcedure<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1150,7 +1168,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1186,7 +1205,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1363,7 +1383,8 @@ public static class RelationalTestModelBuilderExtensions
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> InsertUsingStoredProcedure<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1396,7 +1417,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1432,7 +1454,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1609,7 +1632,8 @@ public static class RelationalTestModelBuilderExtensions
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> DeleteUsingStoredProcedure<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1642,7 +1666,8 @@ public static class RelationalTestModelBuilderExtensions
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -1678,7 +1703,8 @@ public static class RelationalTestModelBuilderExtensions
         string name,
         string? schema,
         Action<RelationalModelBuilderTest.TestStoredProcedureBuilder<TEntity>> buildAction
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {

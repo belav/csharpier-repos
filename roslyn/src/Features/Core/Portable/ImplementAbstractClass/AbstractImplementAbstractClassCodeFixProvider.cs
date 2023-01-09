@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.ImplementAbstractClass
 {
     internal abstract class AbstractImplementAbstractClassCodeFixProvider<TClassNode>
-        : CodeFixProvider where TClassNode : SyntaxNode
+        : CodeFixProvider
+        where TClassNode : SyntaxNode
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; }
 

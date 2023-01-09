@@ -40,7 +40,8 @@ public static class RateLimiterEndpointConventionBuilderExtensions
     public static TBuilder RequireRateLimiting<TBuilder, TPartitionKey>(
         this TBuilder builder,
         IRateLimiterPolicy<TPartitionKey> policy
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 

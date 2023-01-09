@@ -647,7 +647,8 @@ internal sealed partial class Http2Connection
     private Task ProcessFrameAsync<TContext>(
         IHttpApplication<TContext> application,
         in ReadOnlySequence<byte> payload
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         // http://httpwg.org/specs/rfc7540.html#rfc.section.5.1.1
         // Streams initiated by a client MUST use odd-numbered stream identifiers; ...
@@ -771,7 +772,8 @@ internal sealed partial class Http2Connection
     private Task ProcessHeadersFrameAsync<TContext>(
         IHttpApplication<TContext> application,
         in ReadOnlySequence<byte> payload
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         if (_currentHeadersStream != null)
         {

@@ -117,7 +117,8 @@ namespace XPathTests.Common
             string testExpression,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) where T : Exception
+        )
+            where T : Exception
         {
             Assert.Throws<T>(
                 () => XPathMatch(kind, xml, testExpression, namespaceManager, startingNodePath)
@@ -169,7 +170,8 @@ namespace XPathTests.Common
             string xml,
             string testExpression,
             string startingNodePath = null
-        ) where T : Exception
+        )
+            where T : Exception
         {
             Assert.Throws<T>(
                 () => XPathObject<string>(kind, xml, testExpression, null, startingNodePath)
@@ -220,7 +222,8 @@ namespace XPathTests.Common
             string testExpression,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) where T : Exception
+        )
+            where T : Exception
         {
             Assert.Throws<T>(
                 () =>
@@ -286,7 +289,8 @@ namespace XPathTests.Common
             string testExpression,
             XmlNamespaceManager namespaceManager = null,
             string startingNodePath = null
-        ) where T : Exception
+        )
+            where T : Exception
         {
             var xPathNavigator = CreateNavigator(kind, xml, startingNodePath, namespaceManager);
 

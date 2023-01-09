@@ -15,7 +15,8 @@ internal static class NonCapturingLazyInitializer
         [NotNull] ref TValue? target,
         TParam param,
         Func<TParam, TValue> valueFactory
-    ) where TValue : class
+    )
+        where TValue : class
     {
         var tmp = Volatile.Read(ref target);
         if (tmp != null)
@@ -37,7 +38,8 @@ internal static class NonCapturingLazyInitializer
         TParam1 param1,
         TParam2 param2,
         Func<TParam1, TParam2, TValue> valueFactory
-    ) where TValue : class
+    )
+        where TValue : class
     {
         var tmp = Volatile.Read(ref target);
         if (tmp != null)
@@ -60,7 +62,8 @@ internal static class NonCapturingLazyInitializer
         TParam2 param2,
         TParam3 param3,
         Func<TParam1, TParam2, TParam3, TValue> valueFactory
-    ) where TValue : class
+    )
+        where TValue : class
     {
         var tmp = Volatile.Read(ref target);
         if (tmp != null)
@@ -82,7 +85,8 @@ internal static class NonCapturingLazyInitializer
         ref bool initialized,
         TParam param,
         Func<TParam, TValue> valueFactory
-    ) where TValue : class?
+    )
+        where TValue : class?
     {
         var alreadyInitialized = Volatile.Read(ref initialized);
         if (alreadyInitialized)
@@ -127,7 +131,8 @@ internal static class NonCapturingLazyInitializer
         [NotNull] ref TValue? target,
         TParam param,
         Action<TParam> valueFactory
-    ) where TValue : class
+    )
+        where TValue : class
     {
         var tmp = Volatile.Read(ref target);
         if (tmp != null)

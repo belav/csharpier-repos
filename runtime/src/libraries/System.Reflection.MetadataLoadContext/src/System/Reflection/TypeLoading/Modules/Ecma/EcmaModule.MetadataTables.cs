@@ -89,7 +89,8 @@ namespace System.Reflection.TypeLoading.Ecma
         }
         private volatile MetadataTable<RoAssembly, EcmaModule>? _lazyAssemblyRefTable;
 
-        private MetadataTable<T, EcmaModule> CreateTable<T>(TableIndex tableIndex) where T : class
+        private MetadataTable<T, EcmaModule> CreateTable<T>(TableIndex tableIndex)
+            where T : class
         {
             return new MetadataTable<T, EcmaModule>(Reader.GetTableRowCount(tableIndex));
         }

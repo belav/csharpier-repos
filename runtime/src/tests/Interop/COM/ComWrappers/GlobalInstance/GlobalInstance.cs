@@ -403,13 +403,15 @@ namespace ComWrappersTests.GlobalInstance
             }
         }
 
-        private delegate int UpdateTestObject<T>(T testObj, int i, out T ret) where T : class;
+        private delegate int UpdateTestObject<T>(T testObj, int i, out T ret)
+            where T : class;
 
         private static void ValidateInterfaceMarshaler<T>(
             UpdateTestObject<T> func,
             bool shouldSucceed,
             Test testObj = null
-        ) where T : class
+        )
+            where T : class
         {
             const int E_NOINTERFACE = unchecked((int)0x80004002);
             int value = 10;

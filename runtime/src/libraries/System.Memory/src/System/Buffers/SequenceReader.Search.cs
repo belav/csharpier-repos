@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers
 {
-    public ref partial struct SequenceReader<T> where T : unmanaged, IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : unmanaged, IEquatable<T>
     {
         /// <summary>
         /// Try to read everything up to the given <paramref name="delimiter"/>.

@@ -21,7 +21,8 @@ class Outer2
 {
     protected int field;
 
-    public class Inner<U> where U : Outer2
+    public class Inner<U>
+        where U : Outer2
     {
         public int Method(U param)
         {
@@ -47,7 +48,8 @@ class Outer4<T>
 {
     protected int field;
 
-    public class Inner<U> where U : Outer4<T>
+    public class Inner<U>
+        where U : Outer4<T>
     {
         public int Method(U param)
         {

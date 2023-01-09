@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             ReportSymbol(typeParameter);
         }
 
-        private void VisitList<TSymbol>(ImmutableArray<TSymbol> symbols) where TSymbol : Symbol
+        private void VisitList<TSymbol>(ImmutableArray<TSymbol> symbols)
+            where TSymbol : Symbol
         {
             foreach (var symbol in symbols)
             {

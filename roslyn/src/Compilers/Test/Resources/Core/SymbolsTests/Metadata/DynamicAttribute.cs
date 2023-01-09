@@ -38,7 +38,8 @@ public class Derived<T>
     : Outer<dynamic>.Inner<
         Outer<dynamic>.Inner<T[], dynamic>.InnerInner<int>[],
         dynamic
-    >.InnerInner<dynamic> where T : Derived<T>
+    >.InnerInner<dynamic>
+    where T : Derived<T>
 {
     public static dynamic field1;
     public static dynamic[] field2;

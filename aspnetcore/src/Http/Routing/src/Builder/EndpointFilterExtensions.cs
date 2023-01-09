@@ -22,7 +22,8 @@ public static class EndpointFilterExtensions
     public static TBuilder AddEndpointFilter<TBuilder>(
         this TBuilder builder,
         IEndpointFilter filter
-    ) where TBuilder : IEndpointConventionBuilder =>
+    )
+        where TBuilder : IEndpointConventionBuilder =>
         builder.AddEndpointFilterFactory(
             (routeHandlerContext, next) => (context) => filter.InvokeAsync(context, next)
         );
@@ -79,7 +80,8 @@ public static class EndpointFilterExtensions
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     public static RouteHandlerBuilder AddEndpointFilter<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
-    >(this RouteHandlerBuilder builder) where TFilterType : IEndpointFilter
+    >(this RouteHandlerBuilder builder)
+        where TFilterType : IEndpointFilter
     {
         // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so you don't have to specify both arguments most the time.
         return builder.AddEndpointFilter<RouteHandlerBuilder, TFilterType>();
@@ -93,7 +95,8 @@ public static class EndpointFilterExtensions
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
     public static RouteGroupBuilder AddEndpointFilter<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
-    >(this RouteGroupBuilder builder) where TFilterType : IEndpointFilter
+    >(this RouteGroupBuilder builder)
+        where TFilterType : IEndpointFilter
     {
         // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so you don't have to specify both arguments most the time.
         return builder.AddEndpointFilter<RouteGroupBuilder, TFilterType>();
@@ -112,7 +115,8 @@ public static class EndpointFilterExtensions
             EndpointFilterDelegate,
             ValueTask<object?>
         > routeHandlerFilter
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         return builder.AddEndpointFilterFactory(
             (routeHandlerContext, next) => (context) => routeHandlerFilter(context, next)
@@ -132,7 +136,8 @@ public static class EndpointFilterExtensions
             EndpointFilterDelegate,
             EndpointFilterDelegate
         > filterFactory
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.Add(endpointBuilder =>
         {

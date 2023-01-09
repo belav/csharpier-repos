@@ -614,7 +614,8 @@ public class OpenIdConnectConfigurationTests
     private async Task TestConfigurationException<T>(
         Action<OpenIdConnectOptions> options,
         Action<T> verifyException
-    ) where T : Exception
+    )
+        where T : Exception
     {
         var exception = await Assert.ThrowsAsync<T>(
             () => BuildTestServer(options).SendAsync(@"https://example.com")

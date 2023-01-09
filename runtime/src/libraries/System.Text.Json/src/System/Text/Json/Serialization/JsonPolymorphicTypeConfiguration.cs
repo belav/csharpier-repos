@@ -279,7 +279,8 @@ namespace System.Text.Json.Serialization
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
         public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>(
             string typeDiscriminator
-        ) where TDerivedType : TBaseType
+        )
+            where TDerivedType : TBaseType
         {
             WithDerivedType(typeof(TDerivedType), typeDiscriminator);
             return this;
@@ -293,7 +294,8 @@ namespace System.Text.Json.Serialization
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
         public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>(
             int typeDiscriminator
-        ) where TDerivedType : TBaseType
+        )
+            where TDerivedType : TBaseType
         {
             WithDerivedType(typeof(TDerivedType), typeDiscriminator);
             return this;

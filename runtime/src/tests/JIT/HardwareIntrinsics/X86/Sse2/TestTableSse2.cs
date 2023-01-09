@@ -169,7 +169,8 @@ namespace IntelHardwareIntrinsicTest.SSE2
         UseConstValue = 0b00000100,
     }
 
-    public unsafe struct TestTableSse2<T> : IDisposable where T : struct
+    public unsafe struct TestTableSse2<T> : IDisposable
+        where T : struct
     {
         private const int _stepSize = 16;
         private int _scalarStepSize;
@@ -3222,7 +3223,8 @@ namespace IntelHardwareIntrinsicTest.SSE2
             string functionName = "",
             string testFuncString = "",
             CheckMethod<T> check = null
-        ) where T : struct
+        )
+            where T : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.outArray.Length; i++)
@@ -3245,7 +3247,8 @@ namespace IntelHardwareIntrinsicTest.SSE2
             string functionName = "",
             string testFuncString = "",
             CheckMethodSpan<T> check = null
-        ) where T : struct
+        )
+            where T : struct
         {
             PrintErrorHeaderTu<T>(functionName, testFuncString);
             for (int i = 0; i < testTable.outArray.Length; i += TestTableSse2<T>.ElementCount)

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.AddImport
 {
     internal abstract partial class AbstractAddImportFeatureService<TSimpleNameSyntax>
         : IAddImportFeatureService,
-            IEqualityComparer<PortableExecutableReference> where TSimpleNameSyntax : SyntaxNode
+            IEqualityComparer<PortableExecutableReference>
+        where TSimpleNameSyntax : SyntaxNode
     {
         protected abstract bool CanAddImport(
             SyntaxNode node,
@@ -731,7 +732,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             ArrayBuilder<Reference> allSymbolReferences,
             ImmutableArray<TReference> proposedReferences,
             int maxResults
-        ) where TReference : Reference
+        )
+            where TReference : Reference
         {
             allSymbolReferences.AddRange(
                 proposedReferences.Take(maxResults - allSymbolReferences.Count)

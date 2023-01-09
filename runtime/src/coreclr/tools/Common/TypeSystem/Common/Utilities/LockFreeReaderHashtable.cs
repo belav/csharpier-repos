@@ -20,7 +20,8 @@ namespace Internal.TypeSystem
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    public abstract class LockFreeReaderHashtable<TKey, TValue> where TValue : class
+    public abstract class LockFreeReaderHashtable<TKey, TValue>
+        where TValue : class
     {
         private const int _initialSize = 16;
         private const int _fillPercentageBeforeResize = 60;

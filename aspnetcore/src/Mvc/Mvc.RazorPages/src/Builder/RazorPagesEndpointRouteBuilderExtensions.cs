@@ -320,7 +320,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
     public static void MapDynamicPageRoute<TTransformer>(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern
-    ) where TTransformer : DynamicRouteValueTransformer
+    )
+        where TTransformer : DynamicRouteValueTransformer
     {
         MapDynamicPageRoute<TTransformer>(endpoints, pattern, state: null);
     }
@@ -347,7 +348,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         object? state
-    ) where TTransformer : DynamicRouteValueTransformer
+    )
+        where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {
@@ -392,7 +394,8 @@ public static class RazorPagesEndpointRouteBuilderExtensions
         [StringSyntax("Route")] string pattern,
         object state,
         int order
-    ) where TTransformer : DynamicRouteValueTransformer
+    )
+        where TTransformer : DynamicRouteValueTransformer
     {
         if (endpoints == null)
         {

@@ -142,7 +142,8 @@ namespace System.Collections.Immutable.Tests
             IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) where TKey : IComparable<TKey>
+        )
+            where TKey : IComparable<TKey>
         {
             Assert.NotNull(map);
             Assert.NotNull(key);

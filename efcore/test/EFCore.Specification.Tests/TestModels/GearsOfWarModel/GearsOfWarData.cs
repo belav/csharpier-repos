@@ -46,7 +46,8 @@ public class GearsOfWarData : ISetSource
         WireUp2(LocustLeaders, Factions);
     }
 
-    public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
+    public virtual IQueryable<TEntity> Set<TEntity>()
+        where TEntity : class
     {
         if (typeof(TEntity) == typeof(City))
         {

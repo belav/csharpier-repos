@@ -848,7 +848,8 @@ public partial class HttpConnectionTests
         private async Task RunInvalidNegotiateResponseTest<TException>(
             string negotiatePayload,
             string expectedExceptionMessage
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
 

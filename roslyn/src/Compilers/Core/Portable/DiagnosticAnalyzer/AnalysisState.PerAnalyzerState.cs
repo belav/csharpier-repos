@@ -353,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             private static void FreeState_NoLock<TAnalyzerStateData>(
                 TAnalyzerStateData? state,
                 ObjectPool<TAnalyzerStateData> pool
-            ) where TAnalyzerStateData : AnalyzerStateData
+            )
+                where TAnalyzerStateData : AnalyzerStateData
             {
                 if (
                     state != null

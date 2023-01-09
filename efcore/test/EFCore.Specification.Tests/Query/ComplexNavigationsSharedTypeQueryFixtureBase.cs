@@ -328,7 +328,8 @@ public abstract class ComplexNavigationsSharedTypeQueryFixtureBase
             _context = context;
         }
 
-        public IQueryable<TEntity> Set<TEntity>() where TEntity : class
+        public IQueryable<TEntity> Set<TEntity>()
+            where TEntity : class
         {
             if (typeof(TEntity) == typeof(Level1))
             {

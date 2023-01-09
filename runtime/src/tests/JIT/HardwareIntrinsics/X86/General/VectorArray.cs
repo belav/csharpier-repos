@@ -16,7 +16,8 @@ namespace IntelHardwareIntrinsicTest.General;
 
 public partial class Program
 {
-    private class Vector128ArrayTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class Vector128ArrayTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         private static void Move(Vector128<T>[] pos, ref Vector128<T> delta)
         {
@@ -62,7 +63,8 @@ public partial class Program
         }
     }
 
-    private class Vector256ArrayTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class Vector256ArrayTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         private static void Move(Vector256<T>[] pos, ref Vector256<T> delta)
         {

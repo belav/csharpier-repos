@@ -36,7 +36,8 @@ namespace System.Buffers
         private static SequencePosition? PositionOfMultiSegment<T>(
             in ReadOnlySequence<T> source,
             T value
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             SequencePosition position = source.Start;
             SequencePosition result = position;

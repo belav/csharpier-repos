@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             this ITextSnapshot snapshot,
             Span span,
             TTag tag
-        ) where TTag : ITag
+        )
+            where TTag : ITag
         {
             return new TagSpan<TTag>(new SnapshotSpan(snapshot, span), tag);
         }

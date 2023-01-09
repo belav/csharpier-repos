@@ -110,7 +110,8 @@ public class Program
 
     public static IHost BuildWebHost(string[] args) => BuildWebHost<Startup>(args);
 
-    public static IHost BuildWebHost<TStartup>(string[] args) where TStartup : class =>
+    public static IHost BuildWebHost<TStartup>(string[] args)
+        where TStartup : class =>
         Host.CreateDefaultBuilder(args)
             .ConfigureLogging(
                 (ctx, lb) =>

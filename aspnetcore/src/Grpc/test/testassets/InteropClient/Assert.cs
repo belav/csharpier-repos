@@ -83,7 +83,8 @@ internal static class Assert
         throw new InvalidOperationException("No exception thrown.");
     }
 
-    public static TException Throws<TException>(Action action) where TException : Exception
+    public static TException Throws<TException>(Action action)
+        where TException : Exception
     {
         try
         {

@@ -52,7 +52,8 @@ public static class OutputCacheConventionBuilderExtensions
     public static TBuilder CacheOutput<TBuilder>(
         this TBuilder builder,
         Action<OutputCachePolicyBuilder> policy
-    ) where TBuilder : IEndpointConventionBuilder => CacheOutput(builder, policy, false);
+    )
+        where TBuilder : IEndpointConventionBuilder => CacheOutput(builder, policy, false);
 
     /// <summary>
     /// Marks an endpoint to be cached using the specified policy builder.
@@ -63,7 +64,8 @@ public static class OutputCacheConventionBuilderExtensions
         this TBuilder builder,
         Action<OutputCachePolicyBuilder> policy,
         bool excludeDefaultPolicy
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         ArgumentNullException.ThrowIfNull(builder);
 

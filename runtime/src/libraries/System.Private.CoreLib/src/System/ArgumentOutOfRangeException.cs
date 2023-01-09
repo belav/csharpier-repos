@@ -170,7 +170,8 @@ namespace System
         public static void ThrowIfZero<T>(
             T value,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : INumberBase<T>
+        )
+            where T : INumberBase<T>
         {
             if (T.IsZero(value))
                 ThrowZero(paramName, value);
@@ -182,7 +183,8 @@ namespace System
         public static void ThrowIfNegative<T>(
             T value,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : INumberBase<T>
+        )
+            where T : INumberBase<T>
         {
             if (T.IsNegative(value))
                 ThrowNegative(paramName, value);
@@ -194,7 +196,8 @@ namespace System
         public static void ThrowIfNegativeOrZero<T>(
             T value,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : INumberBase<T>
+        )
+            where T : INumberBase<T>
         {
             if (T.IsNegative(value) || T.IsZero(value))
                 ThrowNegativeOrZero(paramName, value);
@@ -208,7 +211,8 @@ namespace System
             T value,
             T other,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (value.CompareTo(other) > 0)
                 ThrowGreater(paramName, value, other);
@@ -222,7 +226,8 @@ namespace System
             T value,
             T other,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (value.CompareTo(other) >= 0)
                 ThrowGreaterEqual(paramName, value, other);
@@ -236,7 +241,8 @@ namespace System
             T value,
             T other,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (value.CompareTo(other) < 0)
                 ThrowLess(paramName, value, other);
@@ -250,7 +256,8 @@ namespace System
             T value,
             T other,
             [CallerArgumentExpression(nameof(value))] string? paramName = null
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             if (value.CompareTo(other) <= 0)
                 ThrowLessEqual(paramName, value, other);

@@ -22,7 +22,8 @@ namespace System.Runtime.Caching
 #pragma warning restore CA1822
     }
 
-    internal sealed class GCHandleRef<T> : IDisposable where T : class, IDisposable
+    internal sealed class GCHandleRef<T> : IDisposable
+        where T : class, IDisposable
     {
         private GCHandle _handle;
         private T _t;

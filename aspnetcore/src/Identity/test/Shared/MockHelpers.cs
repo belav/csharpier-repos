@@ -12,7 +12,8 @@ public static class MockHelpers
 {
     public static StringBuilder LogMessage = new StringBuilder();
 
-    public static Mock<UserManager<TUser>> MockUserManager<TUser>() where TUser : class
+    public static Mock<UserManager<TUser>> MockUserManager<TUser>()
+        where TUser : class
     {
         var store = new Mock<IUserStore<TUser>>();
         var mgr = new Mock<UserManager<TUser>>(

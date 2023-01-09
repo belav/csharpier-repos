@@ -30,7 +30,8 @@ using System.Reflection;
 
 namespace Newtonsoft.Json.Tests.TestObjects
 {
-    public class ListOfIds<T> : JsonConverter where T : Bar, new()
+    public class ListOfIds<T> : JsonConverter
+        where T : Bar, new()
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {

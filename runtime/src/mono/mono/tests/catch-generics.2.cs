@@ -1,6 +1,7 @@
 using System;
 
-class Test<T> where T : Exception
+class Test<T>
+    where T : Exception
 {
     public void test_catch()
     {
@@ -16,7 +17,8 @@ public class Program
 {
     delegate void Action();
 
-    static void ExpectedException<T>(Action action) where T : Exception
+    static void ExpectedException<T>(Action action)
+        where T : Exception
     {
         try
         {

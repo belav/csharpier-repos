@@ -7,7 +7,8 @@ namespace System.Numerics
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
     public interface IBinaryInteger<TSelf>
         : IBinaryNumber<TSelf>,
-            IShiftOperators<TSelf, int, TSelf> where TSelf : IBinaryInteger<TSelf>?
+            IShiftOperators<TSelf, int, TSelf>
+        where TSelf : IBinaryInteger<TSelf>?
     {
         /// <summary>Computes the quotient and remainder of two values.</summary>
         /// <param name="left">The value which <paramref name="right" /> divides.</param>

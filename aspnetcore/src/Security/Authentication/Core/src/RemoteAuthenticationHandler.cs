@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <typeparam name="TOptions">The type for the options used to configure the authentication handler.</typeparam>
 public abstract class RemoteAuthenticationHandler<TOptions>
     : AuthenticationHandler<TOptions>,
-        IAuthenticationRequestHandler where TOptions : RemoteAuthenticationOptions, new()
+        IAuthenticationRequestHandler
+    where TOptions : RemoteAuthenticationOptions, new()
 {
     private const string CorrelationProperty = ".xsrf";
     private const string CorrelationMarker = "N";

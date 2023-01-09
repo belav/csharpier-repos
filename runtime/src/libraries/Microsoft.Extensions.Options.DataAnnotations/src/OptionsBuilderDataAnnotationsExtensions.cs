@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     | DynamicallyAccessedMemberTypes.NonPublicProperties
             )]
                 TOptions
-        >(this OptionsBuilder<TOptions> optionsBuilder) where TOptions : class
+        >(this OptionsBuilder<TOptions> optionsBuilder)
+            where TOptions : class
         {
             optionsBuilder.Services.AddSingleton<IValidateOptions<TOptions>>(
                 new DataAnnotationValidateOptions<TOptions>(optionsBuilder.Name)

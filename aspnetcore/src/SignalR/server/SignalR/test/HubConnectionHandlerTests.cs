@@ -6300,7 +6300,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         );
     }
 
-    private class CustomHubActivator<THub> : IHubActivator<THub> where THub : Hub
+    private class CustomHubActivator<THub> : IHubActivator<THub>
+        where THub : Hub
     {
         public int ReleaseCount;
         private readonly IServiceProvider _serviceProvider;

@@ -448,7 +448,8 @@ internal sealed class GenericWebHostBuilder
     private void ConfigureContainerImpl<TContainer>(
         HostBuilderContext context,
         TContainer container
-    ) where TContainer : notnull
+    )
+        where TContainer : notnull
     {
         var instance = context.Properties[_startupKey];
         var builder = (ConfigureContainerBuilder)

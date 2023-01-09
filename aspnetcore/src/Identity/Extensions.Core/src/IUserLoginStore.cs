@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// by Microsoft Account, Facebook etc. to a user account.
 /// </summary>
 /// <typeparam name="TUser">The type that represents a user.</typeparam>
-public interface IUserLoginStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserLoginStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Adds an external <see cref="UserLoginInfo"/> to the specified <paramref name="user"/>.

@@ -530,7 +530,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public override long ReadInt64() => ReadBigEndian<long>();
 
-        private unsafe T ReadBigEndian<T>() where T : struct
+        private unsafe T ReadBigEndian<T>()
+            where T : struct
         {
             Span<byte> data = stackalloc byte[Unsafe.SizeOf<T>()];
             T ret = default;
@@ -559,7 +560,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public override void Write(int val) => WriteBigEndian<int>(val);
 
-        private unsafe void WriteBigEndian<T>(T val) where T : struct
+        private unsafe void WriteBigEndian<T>(T val)
+            where T : struct
         {
             Span<byte> data = stackalloc byte[Unsafe.SizeOf<T>()];
             new Span<byte>(Unsafe.AsPointer(ref val), data.Length).CopyTo(data);
@@ -570,8 +572,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             base.Write(data);
         }
 
-        internal void Write<T>(ElementType type, T value) where T : struct =>
-            Write((byte)type, value);
+        internal void Write<T>(ElementType type, T value)
+            where T : struct => Write((byte)type, value);
 
         private void Write<T1, T2>(T1 type, T2 value)
             where T1 : struct

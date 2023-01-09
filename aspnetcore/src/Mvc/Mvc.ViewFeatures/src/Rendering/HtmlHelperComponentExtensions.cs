@@ -22,7 +22,8 @@ public static class HtmlHelperComponentExtensions
     public static Task<IHtmlContent> RenderComponentAsync<TComponent>(
         this IHtmlHelper htmlHelper,
         RenderMode renderMode
-    ) where TComponent : IComponent =>
+    )
+        where TComponent : IComponent =>
         RenderComponentAsync<TComponent>(htmlHelper, renderMode, parameters: null);
 
     /// <summary>
@@ -37,7 +38,8 @@ public static class HtmlHelperComponentExtensions
         this IHtmlHelper htmlHelper,
         RenderMode renderMode,
         object parameters
-    ) where TComponent : IComponent =>
+    )
+        where TComponent : IComponent =>
         RenderComponentAsync(htmlHelper, typeof(TComponent), renderMode, parameters);
 
     /// <summary>

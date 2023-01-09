@@ -10,7 +10,8 @@ namespace Microsoft.JSInterop.Infrastructure;
 
 internal sealed class DotNetObjectReferenceJsonConverter<
     [DynamicallyAccessedMembers(JSInvokable)] TValue
-> : JsonConverter<DotNetObjectReference<TValue>> where TValue : class
+> : JsonConverter<DotNetObjectReference<TValue>>
+    where TValue : class
 {
     public DotNetObjectReferenceJsonConverter(JSRuntime jsRuntime)
     {

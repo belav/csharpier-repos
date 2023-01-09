@@ -506,7 +506,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             IEnumerable<TImportDefinition> definitions,
             Action<ImportingItem, TImportDefinition, object> useImportValue,
             bool errorIfMissing
-        ) where TImportDefinition : ImportDefinition
+        )
+            where TImportDefinition : ImportDefinition
         {
             var result = CompositionResult.SucceededResult;
 

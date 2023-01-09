@@ -11,7 +11,8 @@ using Microsoft.VisualStudio.Language.Intellisense;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 {
-    internal class SymbolViewModel<T> : AbstractNotifyPropertyChanged where T : ISymbol
+    internal class SymbolViewModel<T> : AbstractNotifyPropertyChanged
+        where T : ISymbol
     {
         private readonly IGlyphService _glyphService;
 

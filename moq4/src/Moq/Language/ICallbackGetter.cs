@@ -15,7 +15,8 @@ namespace Moq.Language
     /// <typeparam name="TMock">Mocked type.</typeparam>
     /// <typeparam name="TProperty">Type of the property.</typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public interface ICallbackGetter<TMock, TProperty> : IFluentInterface where TMock : class
+    public interface ICallbackGetter<TMock, TProperty> : IFluentInterface
+        where TMock : class
     {
         /// <summary>
         /// Specifies a callback to invoke when the property is retrieved.

@@ -2453,7 +2453,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             SyntaxNode newActiveStatement,
             Func<TSyntaxNode, TSyntaxNode, bool> areEquivalent,
             Func<TSyntaxNode, TSyntaxNode, bool>? areSimilar
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var newNodes = GetAncestors(
                 GetEncompassingAncestor(match.NewRoot),
@@ -2540,7 +2541,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ArrayBuilder<RudeEditDiagnostic>? diagnostics,
             Match<SyntaxNode>? match,
             Func<TSyntaxNode, TSyntaxNode, bool> comparer
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             var matchCount = 0;
             var oldIndex = 0;
@@ -2606,7 +2608,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             List<SyntaxNode?> oldNodes,
             int startIndex,
             Func<TSyntaxNode, TSyntaxNode, bool> comparer
-        ) where TSyntaxNode : SyntaxNode
+        )
+            where TSyntaxNode : SyntaxNode
         {
             for (var i = startIndex; i < oldNodes.Count; i++)
             {
@@ -3139,7 +3142,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             ImmutableArray<T> oldTypes,
             ImmutableArray<T> newTypes,
             bool exact
-        ) where T : ITypeSymbol =>
+        )
+            where T : ITypeSymbol =>
             oldTypes.SequenceEqual(newTypes, exact, (x, y, exact) => TypesEquivalent(x, y, exact));
 
         protected static bool ParameterTypesEquivalent(
@@ -8096,7 +8100,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private static void BuildIndex<TKey>(
             Dictionary<TKey, int> index,
             ImmutableArray<TKey> array
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             for (var i = 0; i < array.Length; i++)
             {
@@ -8750,7 +8755,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal static void AddNodes<T>(
             ArrayBuilder<SyntaxNode> nodes,
             SeparatedSyntaxList<T>? list
-        ) where T : SyntaxNode
+        )
+            where T : SyntaxNode
         {
             if (list.HasValue)
             {

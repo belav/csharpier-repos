@@ -377,7 +377,8 @@ namespace Newtonsoft.Json.Tests.Linq
             Assert.AreEqual(0, v2.Annotations<Version>().Count());
         }
 
-        private void AssertCloneCopy<T>(JToken t, T annotation) where T : class
+        private void AssertCloneCopy<T>(JToken t, T annotation)
+            where T : class
         {
             Assert.AreEqual(annotation, t.DeepClone().Annotation<T>());
         }

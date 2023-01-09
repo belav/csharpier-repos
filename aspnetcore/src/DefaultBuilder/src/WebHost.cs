@@ -333,5 +333,6 @@ public static class WebHost
     /// <returns>The initialized <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder CreateDefaultBuilder<
         [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] TStartup
-    >(string[] args) where TStartup : class => CreateDefaultBuilder(args).UseStartup<TStartup>();
+    >(string[] args)
+        where TStartup : class => CreateDefaultBuilder(args).UseStartup<TStartup>();
 }

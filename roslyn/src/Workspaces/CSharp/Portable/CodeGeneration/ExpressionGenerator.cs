@@ -432,7 +432,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             string? formatString,
             bool canUseFieldReference,
             Func<string, T, SyntaxToken> tokenFactory
-        ) where T : IEquatable<T>
+        )
+            where T : IEquatable<T>
         {
             return GenerateLiteralExpression(
                 type,
@@ -457,7 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             Func<T, bool> isNegative,
             Func<T, T> negate,
             string? integerMinValueString
-        ) where T : IEquatable<T>
+        )
+            where T : IEquatable<T>
         {
             if (canUseFieldReference)
             {
@@ -496,7 +498,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
             ITypeSymbol? type,
             T value,
             IEnumerable<KeyValuePair<T, string>> constants
-        ) where T : IEquatable<T>
+        )
+            where T : IEquatable<T>
         {
             foreach (var constant in constants)
             {

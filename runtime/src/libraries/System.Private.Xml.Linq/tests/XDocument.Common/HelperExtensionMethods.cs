@@ -160,7 +160,8 @@ namespace CoreXml.Test.XLinq
             this IEnumerable<T1> first,
             IEnumerable<T2> second,
             IEqualityComparer<T2> comparer
-        ) where T1 : ExpectedValue
+        )
+            where T1 : ExpectedValue
         {
             using (IEnumerator<T1> e1 = first.GetEnumerator())
             using (IEnumerator<T2> e2 = second.GetEnumerator())
@@ -228,28 +229,32 @@ namespace CoreXml.Test.XLinq
             return true;
         }
 
-        private static int compare1<T1>(T1 a, T1 b) where T1 : ExpectedValue
+        private static int compare1<T1>(T1 a, T1 b)
+            where T1 : ExpectedValue
         {
             string namea = (a.Data as XAttribute).Name.LocalName;
             string nameb = (b.Data as XAttribute).Name.LocalName;
             return namea.CompareTo(nameb);
         }
 
-        private static int compare1N<T1>(T1 a, T1 b) where T1 : ExpectedValue
+        private static int compare1N<T1>(T1 a, T1 b)
+            where T1 : ExpectedValue
         {
             string namea = (a.Data as XAttribute).Name.Namespace.NamespaceName;
             string nameb = (b.Data as XAttribute).Name.Namespace.NamespaceName;
             return namea.CompareTo(nameb);
         }
 
-        private static int compare2<T2>(T2 a, T2 b) where T2 : XAttribute
+        private static int compare2<T2>(T2 a, T2 b)
+            where T2 : XAttribute
         {
             string namea = a.Name.LocalName;
             string nameb = b.Name.LocalName;
             return namea.CompareTo(nameb);
         }
 
-        private static int compare2N<T2>(T2 a, T2 b) where T2 : XAttribute
+        private static int compare2N<T2>(T2 a, T2 b)
+            where T2 : XAttribute
         {
             string namea = a.Name.Namespace.NamespaceName;
             string nameb = b.Name.Namespace.NamespaceName;
@@ -292,7 +297,8 @@ namespace CoreXml.Test.XLinq
             this IEnumerable<T1> first,
             IEnumerable<T1> second,
             IEqualityComparer<T1> comparer
-        ) where T1 : XAttribute
+        )
+            where T1 : XAttribute
         {
             if (first.IsEmpty() && (second == null || second.IsEmpty()))
                 return true;
@@ -620,7 +626,8 @@ namespace CoreXml.Test.XLinq
         }
     }
 
-    public class XNodeStructuralEqualityComparer<T> : XNodeBaseEqualityComparer<T> where T : XObject
+    public class XNodeStructuralEqualityComparer<T> : XNodeBaseEqualityComparer<T>
+        where T : XObject
     {
         public override bool CompareContent(XContainer n1, XContainer n2)
         {

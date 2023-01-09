@@ -10,7 +10,8 @@ internal static class InputRenderer
 {
     public static async Task<TComponent> RenderAndGetComponent<TValue, TComponent>(
         TestInputHostComponent<TValue, TComponent> hostComponent
-    ) where TComponent : InputBase<TValue>
+    )
+        where TComponent : InputBase<TValue>
     {
         var testRenderer = new TestRenderer();
         var componentId = testRenderer.AssignRootComponentId(hostComponent);

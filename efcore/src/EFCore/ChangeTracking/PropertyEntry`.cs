@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// </remarks>
 /// <typeparam name="TEntity">The type of the entity the property belongs to.</typeparam>
 /// <typeparam name="TProperty">The type of the property.</typeparam>
-public class PropertyEntry<TEntity, TProperty> : PropertyEntry where TEntity : class
+public class PropertyEntry<TEntity, TProperty> : PropertyEntry
+    where TEntity : class
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

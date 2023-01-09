@@ -19,7 +19,8 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
 
     public class XmlIncludeBehaviorTestCase
     {
-        public abstract class BaseTestCase<TX, TA, TB> : XmlAdapterTestCase where TB : TA
+        public abstract class BaseTestCase<TX, TA, TB> : XmlAdapterTestCase
+            where TB : TA
         {
             protected abstract TA GetX(TX obj);
             protected abstract string GetA(TA obj);

@@ -365,7 +365,8 @@ namespace System.Text.RegularExpressions.Symbolic
             SymbolicRegexNode<TSet> node,
             SymbolicRegexBuilder<TNewSet> builder,
             Func<SymbolicRegexBuilder<TNewSet>, TSet, TNewSet> setTransformer
-        ) where TNewSet : IComparable<TNewSet>, IEquatable<TNewSet>
+        )
+            where TNewSet : IComparable<TNewSet>, IEquatable<TNewSet>
         {
             if (!StackHelper.TryEnsureSufficientExecutionStack())
             {

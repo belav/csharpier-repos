@@ -798,7 +798,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.t
     public delegate void D();
     public delegate void GD<T>();
 
-    public class Parent<T> where T : class
+    public class Parent<T>
+        where T : class
     {
         public int M1(object p1 = null)
         {

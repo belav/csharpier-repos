@@ -332,7 +332,8 @@ namespace System.Runtime.InteropServices.Tests
 
             MarshalAndDestroy(new NonBlittableStruct_Nested { s = { del = null }, b = 0x55, });
 
-            static unsafe void MarshalAndDestroy<T>(T value) where T : struct
+            static unsafe void MarshalAndDestroy<T>(T value)
+                where T : struct
             {
                 int sizeof_T = Marshal.SizeOf<T>();
                 void* ptr = stackalloc byte[sizeof_T];

@@ -243,7 +243,8 @@ namespace System.Net.Http.Headers
             ObjectCollection<T>? x,
             ObjectCollection<T>? y,
             IEqualityComparer<T>? comparer
-        ) where T : class
+        )
+            where T : class
         {
             if (x == null)
             {

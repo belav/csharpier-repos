@@ -10,9 +10,11 @@ public class GenericNode
     public GenericNode() { }
 }
 
-public interface IFactory<TNode> where TNode : GenericNode { }
+public interface IFactory<TNode>
+    where TNode : GenericNode { }
 
-public static class FactoryGenerator<TNode> where TNode : GenericNode
+public static class FactoryGenerator<TNode>
+    where TNode : GenericNode
 {
     public static IFactory<TNode> Instance
     {

@@ -196,7 +196,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
         this RouteHandlerBuilder builder,
         string contentType,
         params string[] additionalContentTypes
-    ) where TRequest : notnull
+    )
+        where TRequest : notnull
     {
         return Accepts(builder, typeof(TRequest), contentType, additionalContentTypes);
     }
@@ -216,7 +217,8 @@ public static class OpenApiRouteHandlerBuilderExtensions
         bool isOptional,
         string contentType,
         params string[] additionalContentTypes
-    ) where TRequest : notnull
+    )
+        where TRequest : notnull
     {
         return Accepts(builder, typeof(TRequest), isOptional, contentType, additionalContentTypes);
     }

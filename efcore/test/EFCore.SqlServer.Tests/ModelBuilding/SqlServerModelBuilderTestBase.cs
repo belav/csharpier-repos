@@ -2521,7 +2521,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
         ) => CreateTestModelBuilder(SqlServerTestHelpers.Instance, configure);
     }
 
-    public abstract class TestTemporalTableBuilder<TEntity> where TEntity : class
+    public abstract class TestTemporalTableBuilder<TEntity>
+        where TEntity : class
     {
         public abstract TestTemporalTableBuilder<TEntity> UseHistoryTable(
             string name,
@@ -2533,7 +2534,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
     public class GenericTestTemporalTableBuilder<TEntity>
         : TestTemporalTableBuilder<TEntity>,
-            IInfrastructure<TemporalTableBuilder<TEntity>> where TEntity : class
+            IInfrastructure<TemporalTableBuilder<TEntity>>
+        where TEntity : class
     {
         public GenericTestTemporalTableBuilder(TemporalTableBuilder<TEntity> temporalTableBuilder)
         {
@@ -2563,7 +2565,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
     public class NonGenericTestTemporalTableBuilder<TEntity>
         : TestTemporalTableBuilder<TEntity>,
-            IInfrastructure<TemporalTableBuilder> where TEntity : class
+            IInfrastructure<TemporalTableBuilder>
+        where TEntity : class
     {
         public NonGenericTestTemporalTableBuilder(TemporalTableBuilder temporalTableBuilder)
         {

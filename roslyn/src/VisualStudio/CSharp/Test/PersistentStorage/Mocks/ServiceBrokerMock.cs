@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices.Mocks
             ServiceRpcDescriptor serviceDescriptor,
             ServiceActivationOptions options = default,
             CancellationToken cancellationToken = default
-        ) where T : class
+        )
+            where T : class
         {
             if (this.BrokeredServices.TryGetValue(serviceDescriptor.Moniker, out var service))
             {

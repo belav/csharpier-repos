@@ -232,7 +232,8 @@ namespace Microsoft.CodeAnalysis
         internal MarshalPseudoCustomAttributeData WithTranslatedTypes<TTypeSymbol, TArg>(
             Func<TTypeSymbol, TArg, TTypeSymbol> translator,
             TArg arg
-        ) where TTypeSymbol : ITypeSymbolInternal
+        )
+            where TTypeSymbol : ITypeSymbolInternal
         {
             if (
                 _marshalType != Cci.Constants.UnmanagedType_SafeArray

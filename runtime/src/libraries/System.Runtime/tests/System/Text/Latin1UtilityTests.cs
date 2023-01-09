@@ -369,7 +369,8 @@ namespace System.Text.Tests
             return Type.GetType("System.Text.Latin1Utility, System.Private.CoreLib");
         }
 
-        private sealed class UnsafeLazyDelegate<TDelegate> where TDelegate : class
+        private sealed class UnsafeLazyDelegate<TDelegate>
+            where TDelegate : class
         {
             private readonly Lazy<TDelegate> _lazyDelegate;
 

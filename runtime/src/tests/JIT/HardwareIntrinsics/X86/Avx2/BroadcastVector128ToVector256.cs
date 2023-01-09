@@ -111,7 +111,8 @@ namespace IntelHardwareIntrinsicTest._Avx2
             Assert.Equal(Pass, testResult);
         }
 
-        public unsafe struct TestTable_Broadcast<T> : IDisposable where T : struct
+        public unsafe struct TestTable_Broadcast<T> : IDisposable
+            where T : struct
         {
             public T[] inArray;
             public T[] outArray;

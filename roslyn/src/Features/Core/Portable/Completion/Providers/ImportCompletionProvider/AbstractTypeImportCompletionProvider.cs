@@ -17,7 +17,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractTypeImportCompletionProvider<AliasDeclarationTypeNode>
-        : AbstractImportCompletionProvider where AliasDeclarationTypeNode : SyntaxNode
+        : AbstractImportCompletionProvider
+        where AliasDeclarationTypeNode : SyntaxNode
     {
         protected override bool ShouldProvideCompletion(
             CompletionContext completionContext,

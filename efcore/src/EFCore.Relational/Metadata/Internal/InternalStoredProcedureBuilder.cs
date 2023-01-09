@@ -209,7 +209,8 @@ public class InternalStoredProcedureBuilder
     public virtual InternalStoredProcedureParameterBuilder? HasParameter<TDerivedEntity, TProperty>(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
         ConfigurationSource configurationSource
-    ) where TDerivedEntity : class =>
+    )
+        where TDerivedEntity : class =>
         HasParameter(propertyExpression.GetMemberAccess().Name, configurationSource);
 
     /// <summary>
@@ -263,7 +264,8 @@ public class InternalStoredProcedureBuilder
     >(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
         ConfigurationSource configurationSource
-    ) where TDerivedEntity : class =>
+    )
+        where TDerivedEntity : class =>
         HasOriginalValueParameter(propertyExpression.GetMemberAccess().Name, configurationSource);
 
     /// <summary>
@@ -313,8 +315,8 @@ public class InternalStoredProcedureBuilder
     public virtual InternalStoredProcedureParameterBuilder? HasRowsAffectedParameter<
         TDerivedEntity,
         TProperty
-    >(ConfigurationSource configurationSource) where TDerivedEntity : class =>
-        HasRowsAffectedParameter(configurationSource);
+    >(ConfigurationSource configurationSource)
+        where TDerivedEntity : class => HasRowsAffectedParameter(configurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -364,7 +366,8 @@ public class InternalStoredProcedureBuilder
     >(
         Expression<Func<TDerivedEntity, TProperty>> propertyExpression,
         ConfigurationSource configurationSource
-    ) where TDerivedEntity : class =>
+    )
+        where TDerivedEntity : class =>
         HasResultColumn(propertyExpression.GetMemberAccess().Name, configurationSource);
 
     /// <summary>
@@ -414,8 +417,8 @@ public class InternalStoredProcedureBuilder
     public virtual InternalStoredProcedureResultColumnBuilder? HasRowsAffectedResultColumn<
         TDerivedEntity,
         TProperty
-    >(ConfigurationSource configurationSource) where TDerivedEntity : class =>
-        HasRowsAffectedResultColumn(configurationSource);
+    >(ConfigurationSource configurationSource)
+        where TDerivedEntity : class => HasRowsAffectedResultColumn(configurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

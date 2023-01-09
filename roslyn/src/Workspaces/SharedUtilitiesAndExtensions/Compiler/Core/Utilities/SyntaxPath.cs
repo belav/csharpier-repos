@@ -137,7 +137,8 @@ namespace Roslyn.Utilities
             SyntaxTree syntaxTree,
             CancellationToken cancellationToken,
             [NotNullWhen(true)] out TNode? node
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return TryResolve(syntaxTree.GetRoot(cancellationToken), out node);
         }

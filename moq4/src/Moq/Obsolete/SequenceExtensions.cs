@@ -19,7 +19,8 @@ namespace Moq
         public static ISetupSequentialResult<TResult> SetupSequence<TMock, TResult>(
             this Mock<TMock> mock,
             Expression<Func<TMock, TResult>> expression
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.SetupSequence(expression);
         }
@@ -32,7 +33,8 @@ namespace Moq
         public static ISetupSequentialAction SetupSequence<TMock>(
             this Mock<TMock> mock,
             Expression<Action<TMock>> expression
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.SetupSequence(expression);
         }

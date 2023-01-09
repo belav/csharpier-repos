@@ -20,7 +20,8 @@ class Base<T>
     }
 }
 
-class C<U, T> where U : Base<T>, Interface<T>
+class C<U, T>
+    where U : Base<T>, Interface<T>
 {
     public static void CallFunc(U u)
     {

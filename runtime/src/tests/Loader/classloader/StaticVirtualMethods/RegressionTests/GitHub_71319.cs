@@ -20,9 +20,11 @@ class Fooer<T> : IFoo2<T>
 
 class Program : IFoo<object>
 {
-    static string CallStatic<T, U>() where T : IFoo<U> => T.DoStatic();
+    static string CallStatic<T, U>()
+        where T : IFoo<U> => T.DoStatic();
 
-    static string CallStatic2<T, U>() where T : IFoo2<U> => T.DoStatic();
+    static string CallStatic2<T, U>()
+        where T : IFoo2<U> => T.DoStatic();
 
     static int Main()
     {

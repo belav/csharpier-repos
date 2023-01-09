@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
     public class OptionsFactory<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > : IOptionsFactory<TOptions> where TOptions : class
+    > : IOptionsFactory<TOptions>
+        where TOptions : class
     {
         private readonly IConfigureOptions<TOptions>[] _setups;
         private readonly IPostConfigureOptions<TOptions>[] _postConfigures;

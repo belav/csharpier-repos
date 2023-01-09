@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
             )> kinds,
             out ImmutableDictionary<TSyntaxKind, TSyntaxKind> binaryToAssignmentMap,
             out ImmutableDictionary<TSyntaxKind, TSyntaxKind> assignmentToTokenMap
-        ) where TSyntaxKind : struct
+        )
+            where TSyntaxKind : struct
         {
             var binaryToAssignmentBuilder = ImmutableDictionary.CreateBuilder<
                 TSyntaxKind,

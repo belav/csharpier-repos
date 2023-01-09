@@ -12,7 +12,8 @@ namespace Roslyn.Utilities
     /// <summary>
     /// A <see cref="ValueSource{T}"/> that keeps a weak reference to a value.
     /// </summary>
-    internal sealed class WeakValueSource<T> : ValueSource<Optional<T>> where T : class
+    internal sealed class WeakValueSource<T> : ValueSource<Optional<T>>
+        where T : class
     {
         private readonly WeakReference<T> _weakValue;
 

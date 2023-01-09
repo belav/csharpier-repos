@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization.Converters
     /// <summary>
     /// Implementation of <cref>JsonObjectConverter{T}</cref> for source-generated converters.
     /// </summary>
-    internal sealed class ObjectSourceGenConverter<T> : ObjectDefaultConverter<T> where T : notnull
+    internal sealed class ObjectSourceGenConverter<T> : ObjectDefaultConverter<T>
+        where T : notnull
     {
         internal override bool OnTryRead(
             ref Utf8JsonReader reader,

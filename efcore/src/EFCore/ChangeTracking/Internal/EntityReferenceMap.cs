@@ -411,7 +411,8 @@ public class EntityReferenceMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<TEntity> GetNonDeletedEntities<TEntity>() where TEntity : class
+    public virtual IEnumerable<TEntity> GetNonDeletedEntities<TEntity>()
+        where TEntity : class
     {
         // Perf sensitive
 

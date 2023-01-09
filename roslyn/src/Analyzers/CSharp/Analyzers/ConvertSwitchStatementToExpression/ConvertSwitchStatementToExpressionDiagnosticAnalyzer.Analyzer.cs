@@ -278,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
                 SyntaxKind seed,
                 SyntaxList<T> nodes,
                 Func<SyntaxKind, T, SyntaxKind> func
-            ) where T : SyntaxNode
+            )
+                where T : SyntaxNode
             {
                 var result = seed;
                 foreach (var node in nodes)

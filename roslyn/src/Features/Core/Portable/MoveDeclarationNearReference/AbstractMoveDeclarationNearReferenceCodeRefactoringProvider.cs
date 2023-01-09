@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.MoveDeclarationNearReference
 {
     internal abstract class AbstractMoveDeclarationNearReferenceCodeRefactoringProvider<TLocalDeclaration>
-        : CodeRefactoringProvider where TLocalDeclaration : SyntaxNode
+        : CodeRefactoringProvider
+        where TLocalDeclaration : SyntaxNode
     {
         [ImportingConstructor]
         public AbstractMoveDeclarationNearReferenceCodeRefactoringProvider() { }

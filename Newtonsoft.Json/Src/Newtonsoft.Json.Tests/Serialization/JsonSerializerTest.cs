@@ -7731,7 +7731,8 @@ Path '', line 1, position 1."
             Assert.AreEqual(0, objDeserialized.Age);
         }
 
-        private string Serialize<T>(T obj) where T : class
+        private string Serialize<T>(T obj)
+            where T : class
         {
             var stringWriter = new StringWriter();
             var serializer = new JsonSerializer();
@@ -7744,7 +7745,8 @@ Path '', line 1, position 1."
             return stringWriter.ToString();
         }
 
-        private T Deserialize<T>(string json) where T : class
+        private T Deserialize<T>(string json)
+            where T : class
         {
             var jsonReader = new JsonTextReader(new StringReader(json));
             var serializer = new JsonSerializer();

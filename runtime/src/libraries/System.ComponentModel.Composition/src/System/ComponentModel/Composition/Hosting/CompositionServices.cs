@@ -726,7 +726,8 @@ namespace System.ComponentModel.Composition.Hosting
             EventHandler<TEventArgs> _delegate,
             object? sender,
             TEventArgs e
-        ) where TEventArgs : EventArgs
+        )
+            where TEventArgs : EventArgs
         {
             CompositionResult result = CompositionResult.SucceededResult;
             foreach (EventHandler<TEventArgs> _subscriber in _delegate.GetInvocationList())

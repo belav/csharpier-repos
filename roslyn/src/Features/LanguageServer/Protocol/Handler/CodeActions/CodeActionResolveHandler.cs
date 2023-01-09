@@ -220,7 +220,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Func<DocumentId, T?> getOldDocumentFunc,
                 IDocumentTextDifferencingService? textDiffService,
                 CancellationToken cancellationToken
-            ) where T : TextDocument
+            )
+                where T : TextDocument
             {
                 foreach (var docId in changedDocuments)
                 {

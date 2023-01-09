@@ -182,7 +182,8 @@ public static class ExpressionExtensions
 
     private static TMemberInfo GetInternalMemberAccess<TMemberInfo>(
         this LambdaExpression memberAccessExpression
-    ) where TMemberInfo : MemberInfo
+    )
+        where TMemberInfo : MemberInfo
     {
         Check.DebugAssert(
             memberAccessExpression.Parameters.Count == 1,

@@ -168,7 +168,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         }
     }
 
-    public class MemberClassWithClassConstraint<T> where T : class
+    public class MemberClassWithClassConstraint<T>
+        where T : class
     {
         [ThreadStatic]
         public static int t_status;
@@ -193,7 +194,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         }
     }
 
-    public class MemberClassWithNewConstraint<T> where T : new()
+    public class MemberClassWithNewConstraint<T>
+        where T : new()
     {
         [ThreadStatic]
         public static int t_status;
@@ -208,7 +210,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         }
     }
 
-    public class MemberClassWithAnotherTypeConstraint<T, U> where T : U
+    public class MemberClassWithAnotherTypeConstraint<T, U>
+        where T : U
     {
         public static int Status;
         public U this[dynamic d]
@@ -237,7 +240,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
 
     public interface I { }
 
-    public class MemberClassWithUDClassConstraint<T> where T : C, new()
+    public class MemberClassWithUDClassConstraint<T>
+        where T : C, new()
     {
         public static int Status;
         public C this[T t]
@@ -251,7 +255,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         }
     }
 
-    public class MemberClassWithStructConstraint<T> where T : struct
+    public class MemberClassWithStructConstraint<T>
+        where T : struct
     {
         public static int Status;
         public dynamic this[int x]
@@ -265,7 +270,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.genclas
         }
     }
 
-    public class MemberClassWithInterfaceConstraint<T> where T : I
+    public class MemberClassWithInterfaceConstraint<T>
+        where T : I
     {
         public static int Status;
         public dynamic this[int x, T v]

@@ -5,7 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Runtime.Intrinsics
 {
-    internal static class Scalar<T> where T : struct
+    internal static class Scalar<T>
+        where T : struct
     {
         public static T AllBitsSet
         {

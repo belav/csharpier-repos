@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this OptionsBuilder<TOptions> optionsBuilder,
             IConfiguration config,
             Action<BinderOptions>? configureBinder
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
 
@@ -82,7 +83,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this OptionsBuilder<TOptions> optionsBuilder,
             string configSectionPath,
             Action<BinderOptions>? configureBinder = null
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(optionsBuilder);
             ThrowHelper.ThrowIfNull(configSectionPath);

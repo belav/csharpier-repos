@@ -9,7 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.Internal;
 
-internal struct CopyOnWriteDictionaryHolder<TKey, TValue> where TKey : notnull
+internal struct CopyOnWriteDictionaryHolder<TKey, TValue>
+    where TKey : notnull
 {
     private readonly Dictionary<TKey, TValue> _source;
     private Dictionary<TKey, TValue>? _copy;

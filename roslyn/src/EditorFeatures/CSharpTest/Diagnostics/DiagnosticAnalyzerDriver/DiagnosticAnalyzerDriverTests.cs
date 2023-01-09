@@ -302,7 +302,8 @@ class C
 
         private class ThrowingDoNotCatchDiagnosticAnalyzer<TLanguageKindEnum>
             : ThrowingDiagnosticAnalyzer<TLanguageKindEnum>,
-                IBuiltInAnalyzer where TLanguageKindEnum : struct
+                IBuiltInAnalyzer
+            where TLanguageKindEnum : struct
         {
             public CodeActionRequestPriority RequestPriority => CodeActionRequestPriority.Normal;
 

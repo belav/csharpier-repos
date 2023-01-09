@@ -15,7 +15,8 @@ public static class DbUtil
     public static IServiceCollection ConfigureDbServices<TContext>(
         DbConnection connection,
         IServiceCollection services = null
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         if (services == null)
         {
@@ -37,7 +38,8 @@ public static class DbUtil
     public static TContext Create<TContext>(
         DbConnection connection,
         IServiceCollection services = null
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var serviceProvider = ConfigureDbServices<TContext>(connection, services)
             .BuildServiceProvider();

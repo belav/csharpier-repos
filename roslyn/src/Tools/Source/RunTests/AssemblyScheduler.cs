@@ -239,7 +239,8 @@ namespace RunTests
             ImmutableSortedDictionary<AssemblyInfo, ImmutableArray<TypeInfo>> typeInfos,
             Func<TWeight, bool> isOverLimitFunc,
             Func<TestMethodInfo, TWeight, TWeight> addFunc
-        ) where TWeight : struct
+        )
+            where TWeight : struct
         {
             var workItems = new List<WorkItemInfo>();
 

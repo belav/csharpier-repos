@@ -704,12 +704,14 @@ public class OpenGenerics_With_UntypedMapFrom : AutoMapperSpecBase
 
 public class OpenGenerics_With_UntypedMapFromStructs : AutoMapperSpecBase
 {
-    public class Foo<T> where T : struct
+    public class Foo<T>
+        where T : struct
     {
         public T Value1 { get; set; }
     }
 
-    public class Bar<T> where T : struct
+    public class Bar<T>
+        where T : struct
     {
         public T Value2 { get; set; }
     }

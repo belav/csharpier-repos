@@ -7,7 +7,8 @@ using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Syntax
 {
-    internal struct SeparatedSyntaxListBuilder<TNode> where TNode : SyntaxNode
+    internal struct SeparatedSyntaxListBuilder<TNode>
+        where TNode : SyntaxNode
     {
         private readonly SyntaxListBuilder _builder;
         private bool _expectedSeparator;
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Syntax
             return _builder.ToSeparatedList<TNode>();
         }
 
-        public SeparatedSyntaxList<TDerived> ToList<TDerived>() where TDerived : TNode
+        public SeparatedSyntaxList<TDerived> ToList<TDerived>()
+            where TDerived : TNode
         {
             if (_builder == null)
             {

@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             HashSet<Checksum> searchingChecksumsLeft,
             Dictionary<Checksum, object> result,
             CancellationToken cancellationToken
-        ) where TState : TextDocumentState
+        )
+            where TState : TextDocumentState
         {
             foreach (var (_, state) in documentStates.States)
             {

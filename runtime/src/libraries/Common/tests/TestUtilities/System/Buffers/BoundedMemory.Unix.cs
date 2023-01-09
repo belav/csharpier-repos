@@ -10,7 +10,8 @@ namespace System.Buffers
         private static UnixImplementation<T> AllocateWithoutDataPopulationUnix<T>(
             int elementCount,
             PoisonPagePlacement placement
-        ) where T : unmanaged
+        )
+            where T : unmanaged
         {
             // On non-Windows platforms, we don't yet have support for changing the permissions of individual pages.
             // We'll instead use AllocHGlobal / FreeHGlobal to carve out a r+w section of unmanaged memory.
@@ -18,7 +19,8 @@ namespace System.Buffers
             return new UnixImplementation<T>(elementCount);
         }
 
-        private sealed class UnixImplementation<T> : BoundedMemory<T> where T : unmanaged
+        private sealed class UnixImplementation<T> : BoundedMemory<T>
+            where T : unmanaged
         {
             private readonly AllocHGlobalHandle _handle;
             private readonly int _elementCount;

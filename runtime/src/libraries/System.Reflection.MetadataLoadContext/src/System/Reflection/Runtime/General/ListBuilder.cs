@@ -8,7 +8,8 @@ namespace System.Reflection.Runtime.General
     //
     // Struct-based list builder that's special cased to avoid allocations for lists of one element.
     //
-    internal struct ListBuilder<T> where T : class
+    internal struct ListBuilder<T>
+        where T : class
     {
         public ListBuilder(int capacity)
         {

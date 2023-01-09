@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see> for more information and examples.
 /// </remarks>
-public class DbContextOptions<TContext> : DbContextOptions where TContext : DbContext
+public class DbContextOptions<TContext> : DbContextOptions
+    where TContext : DbContext
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptions{TContext}" /> class. You normally override

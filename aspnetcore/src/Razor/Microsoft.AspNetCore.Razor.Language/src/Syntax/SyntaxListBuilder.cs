@@ -100,7 +100,8 @@ internal class SyntaxListBuilder
         Validate(start, Count);
     }
 
-    public void AddRange<TNode>(SyntaxList<TNode> list) where TNode : SyntaxNode
+    public void AddRange<TNode>(SyntaxList<TNode> list)
+        where TNode : SyntaxNode
     {
         AddRange(list, 0, list.Count);
     }

@@ -6,7 +6,8 @@ using Google.Protobuf.Reflection;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Binding;
 
-internal interface IServiceInvokerResolver<TService> where TService : class
+internal interface IServiceInvokerResolver<TService>
+    where TService : class
 {
     /// <summary>
     /// Creates a service invoker delegate and associated metadata using the service type, method name, and HTTP binding.
@@ -17,5 +18,6 @@ internal interface IServiceInvokerResolver<TService> where TService : class
         string verb,
         HttpRule httpRule,
         MethodDescriptor methodDescriptor
-    ) where TDelegate : Delegate;
+    )
+        where TDelegate : Delegate;
 }

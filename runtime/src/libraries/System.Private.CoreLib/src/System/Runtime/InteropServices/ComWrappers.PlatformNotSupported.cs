@@ -10,7 +10,8 @@ namespace System.Runtime.InteropServices
     {
         public partial struct ComInterfaceDispatch
         {
-            public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr) where T : class
+            public static unsafe T GetInstance<T>(ComInterfaceDispatch* dispatchPtr)
+                where T : class
             {
                 throw new PlatformNotSupportedException();
             }

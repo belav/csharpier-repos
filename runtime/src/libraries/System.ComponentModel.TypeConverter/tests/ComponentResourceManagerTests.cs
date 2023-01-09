@@ -90,7 +90,8 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(AmbiguousWithDifferentDeclaringType_TestData))]
         public void ApplyResources_AmibguousWithDifferentDeclaringTypeInValueType_UsesMostDeclaredProperty<T>(
             T value
-        ) where T : MulticaseSubClass
+        )
+            where T : MulticaseSubClass
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {

@@ -268,7 +268,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddScoped<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -354,7 +355,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSingleton<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -362,7 +364,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddSingleton<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             TService implementationInstance
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -439,7 +442,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static Microsoft.Extensions.DependencyInjection.IServiceCollection AddTransient<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -557,7 +561,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Scoped<TService>(
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -614,14 +619,16 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton<TService>(
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
 
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Singleton<TService>(
             TService implementationInstance
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -675,7 +682,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static Microsoft.Extensions.DependencyInjection.ServiceDescriptor Transient<TService>(
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class
+        )
+            where TService : class
         {
             throw null;
         }
@@ -870,7 +878,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddScoped<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class { }
+        )
+            where TService : class { }
 
         public static void TryAddScoped<
             TService,
@@ -916,12 +925,14 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddSingleton<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class { }
+        )
+            where TService : class { }
 
         public static void TryAddSingleton<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection collection,
             TService instance
-        ) where TService : class { }
+        )
+            where TService : class { }
 
         public static void TryAddSingleton<
             TService,
@@ -967,7 +978,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         public static void TryAddTransient<TService>(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             System.Func<System.IServiceProvider, TService> implementationFactory
-        ) where TService : class { }
+        )
+            where TService : class { }
 
         public static void TryAddTransient<
             TService,

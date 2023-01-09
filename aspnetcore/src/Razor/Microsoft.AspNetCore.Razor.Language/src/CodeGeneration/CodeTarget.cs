@@ -90,5 +90,6 @@ public abstract class CodeTarget
     public abstract TExtension GetExtension<TExtension>()
         where TExtension : class, ICodeTargetExtension;
 
-    public abstract bool HasExtension<TExtension>() where TExtension : class, ICodeTargetExtension;
+    public abstract bool HasExtension<TExtension>()
+        where TExtension : class, ICodeTargetExtension;
 }

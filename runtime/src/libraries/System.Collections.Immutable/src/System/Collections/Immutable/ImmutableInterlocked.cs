@@ -31,7 +31,8 @@ namespace System.Collections.Immutable
         /// <c>false</c> if the location's value remained the same because the last
         /// invocation of <paramref name="transformer"/> returned the existing value.
         /// </returns>
-        public static bool Update<T>(ref T location, Func<T, T> transformer) where T : class?
+        public static bool Update<T>(ref T location, Func<T, T> transformer)
+            where T : class?
         {
             Requires.NotNull(transformer, nameof(transformer));
 
@@ -78,7 +79,8 @@ namespace System.Collections.Immutable
             ref T location,
             Func<T, TArg, T> transformer,
             TArg transformerArgument
-        ) where T : class?
+        )
+            where T : class?
         {
             Requires.NotNull(transformer, nameof(transformer));
 
@@ -286,7 +288,8 @@ namespace System.Collections.Immutable
             TKey key,
             Func<TKey, TArg, TValue> valueFactory,
             TArg factoryArgument
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(valueFactory, nameof(valueFactory));
 
@@ -319,7 +322,8 @@ namespace System.Collections.Immutable
             ref ImmutableDictionary<TKey, TValue> location,
             TKey key,
             Func<TKey, TValue> valueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(valueFactory, nameof(valueFactory));
 
@@ -349,7 +353,8 @@ namespace System.Collections.Immutable
             ref ImmutableDictionary<TKey, TValue> location,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
@@ -392,7 +397,8 @@ namespace System.Collections.Immutable
             TKey key,
             Func<TKey, TValue> addValueFactory,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(addValueFactory, nameof(addValueFactory));
             Requires.NotNull(updateValueFactory, nameof(updateValueFactory));
@@ -448,7 +454,8 @@ namespace System.Collections.Immutable
             TKey key,
             TValue addValue,
             Func<TKey, TValue, TValue> updateValueFactory
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(updateValueFactory, nameof(updateValueFactory));
 
@@ -501,7 +508,8 @@ namespace System.Collections.Immutable
             ref ImmutableDictionary<TKey, TValue> location,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var priorCollection = Volatile.Read(ref location);
             bool successful;
@@ -542,7 +550,8 @@ namespace System.Collections.Immutable
             TKey key,
             TValue newValue,
             TValue comparisonValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var valueComparer = EqualityComparer<TValue>.Default;
             var priorCollection = Volatile.Read(ref location);
@@ -587,7 +596,8 @@ namespace System.Collections.Immutable
             ref ImmutableDictionary<TKey, TValue> location,
             TKey key,
             [MaybeNullWhen(false)] out TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             var priorCollection = Volatile.Read(ref location);
             bool successful;

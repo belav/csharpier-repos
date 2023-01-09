@@ -373,7 +373,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
             /// <param name="items">The items.</param>
-            public void AddRange<TDerived>(TDerived[] items) where TDerived : T
+            public void AddRange<TDerived>(TDerived[] items)
+                where TDerived : T
             {
                 Requires.NotNull(items, nameof(items));
 
@@ -440,7 +441,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
             /// <param name="items">The items to add at the end of the array.</param>
-            public void AddRange<TDerived>(ReadOnlySpan<TDerived> items) where TDerived : T
+            public void AddRange<TDerived>(ReadOnlySpan<TDerived> items)
+                where TDerived : T
             {
                 int offset = this.Count;
                 this.Count += items.Length;
@@ -457,7 +459,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <typeparam name="TDerived">The type that derives from the type of item already in the array.</typeparam>
             /// <param name="items">The items to add at the end of the array.</param>
-            public void AddRange<TDerived>(ImmutableArray<TDerived> items) where TDerived : T
+            public void AddRange<TDerived>(ImmutableArray<TDerived> items)
+                where TDerived : T
             {
                 if (items.array != null)
                 {
@@ -1086,7 +1089,8 @@ namespace System.Collections.Immutable
             /// <typeparam name="TDerived">The type of source elements.</typeparam>
             /// <param name="items">The source array.</param>
             /// <param name="length">The number of elements to add to this array.</param>
-            private void AddRange<TDerived>(TDerived[] items, int length) where TDerived : T
+            private void AddRange<TDerived>(TDerived[] items, int length)
+                where TDerived : T
             {
                 this.EnsureCapacity(this.Count + length);
 

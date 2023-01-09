@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 namespace Program
 {
-    public class AxControlEventArgs<T> : EventArgs where T : WindowlessControl
+    public class AxControlEventArgs<T> : EventArgs
+        where T : WindowlessControl
     {
         public T Control { get; private set; }
 
@@ -21,7 +22,8 @@ namespace Program
 
     public class AlignPadLayoutPanel : AlignPadLayoutPanel<WindowlessControl> { }
 
-    public class AlignPadLayoutPanel<T> : WindowlessControl where T : WindowlessControl
+    public class AlignPadLayoutPanel<T> : WindowlessControl
+        where T : WindowlessControl
     {
         protected override void OnControlAdded(AxControlEventArgs e)
         {

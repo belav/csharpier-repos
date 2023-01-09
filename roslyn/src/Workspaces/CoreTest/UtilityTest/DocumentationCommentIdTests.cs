@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string expectedId,
             Compilation compilation,
             Func<TSymbol, bool> test
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var symbol = DocumentationCommentId.GetFirstSymbolForDeclarationId(
                 expectedId,
@@ -56,7 +57,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string expectedId,
             Compilation compilation,
             Func<TSymbol, bool> test
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var symbol = CheckDeclarationId(expectedId, compilation, test);
 

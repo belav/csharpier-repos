@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
             return AddIfUsesIsNullable(symbol, symbol.TypeWithAnnotations, inProgress: null);
         }
 
-        private bool VisitList<TSymbol>(ImmutableArray<TSymbol> symbols) where TSymbol : Symbol
+        private bool VisitList<TSymbol>(ImmutableArray<TSymbol> symbols)
+            where TSymbol : Symbol
         {
             bool result = false;
             foreach (var symbol in symbols)

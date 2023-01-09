@@ -22,7 +22,8 @@ public class my
     }
 }
 
-public class test<T> : TopLevel<T> where T : IMember<IMember<T, object>, object> { }
+public class test<T> : TopLevel<T>
+    where T : IMember<IMember<T, object>, object> { }
 
 public interface TopLevel<T> : ISubIface<T, object>
     where T : IMember<IMember<T, object>, object> { }

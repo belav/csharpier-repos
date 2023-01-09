@@ -7,7 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class StackOfTConverter<TCollection, TElement>
-        : IEnumerableDefaultConverter<TCollection, TElement> where TCollection : Stack<TElement>
+        : IEnumerableDefaultConverter<TCollection, TElement>
+        where TCollection : Stack<TElement>
     {
         protected override void Add(in TElement value, ref ReadStack state)
         {

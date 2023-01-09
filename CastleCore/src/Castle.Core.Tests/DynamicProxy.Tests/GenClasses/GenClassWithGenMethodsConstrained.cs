@@ -16,7 +16,8 @@ namespace Castle.DynamicProxy.Tests.GenClasses
 {
     using System;
 
-    public class GenClassWithGenMethodsConstrained<T> where T : new()
+    public class GenClassWithGenMethodsConstrained<T>
+        where T : new()
     {
         private object savedParam;
         private bool invoked;
@@ -31,7 +32,8 @@ namespace Castle.DynamicProxy.Tests.GenClasses
             get { return invoked; }
         }
 
-        public virtual T DoSomething<Z>(Z z) where Z : IComparable
+        public virtual T DoSomething<Z>(Z z)
+            where Z : IComparable
         {
             invoked = true;
 

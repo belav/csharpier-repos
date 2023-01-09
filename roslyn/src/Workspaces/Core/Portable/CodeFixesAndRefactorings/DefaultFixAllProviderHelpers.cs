@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 ImmutableArray<TFixAllContext>,
                 Task<Solution?>
             > fixAllContextsAsync
-        ) where TFixAllContext : IFixAllContext
+        )
+            where TFixAllContext : IFixAllContext
         {
             var solution = fixAllContext.Scope switch
             {
@@ -59,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 ImmutableArray<TFixAllContext>,
                 Task<Solution?>
             > fixAllContextsAsync
-        ) where TFixAllContext : IFixAllContext =>
+        )
+            where TFixAllContext : IFixAllContext =>
             fixAllContextsAsync(fixAllContext, ImmutableArray.Create(fixAllContext));
 
         private static Task<Solution?> GetProjectFixesAsync<TFixAllContext>(
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 ImmutableArray<TFixAllContext>,
                 Task<Solution?>
             > fixAllContextsAsync
-        ) where TFixAllContext : IFixAllContext =>
+        )
+            where TFixAllContext : IFixAllContext =>
             fixAllContextsAsync(
                 fixAllContext,
                 ImmutableArray.Create(
@@ -84,7 +87,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
                 ImmutableArray<TFixAllContext>,
                 Task<Solution?>
             > fixAllContextsAsync
-        ) where TFixAllContext : IFixAllContext
+        )
+            where TFixAllContext : IFixAllContext
         {
             var solution = fixAllContext.Solution;
             var dependencyGraph = solution.GetProjectDependencyGraph();

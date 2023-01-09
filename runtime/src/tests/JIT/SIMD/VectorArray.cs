@@ -12,7 +12,8 @@ internal partial class VectorTest
     private const int Pass = 100;
     private const int Fail = -1;
 
-    private class VectorArrayTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorArrayTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         private static void Move(Vector<T>[] pos, ref Vector<T> delta)
         {

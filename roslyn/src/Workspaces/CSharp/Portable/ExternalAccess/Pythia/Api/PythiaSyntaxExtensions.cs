@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
         public static bool IsFoundUnder<TParent>(
             this SyntaxNode node,
             Func<TParent, SyntaxNode> childGetter
-        ) where TParent : SyntaxNode =>
+        )
+            where TParent : SyntaxNode =>
             Shared.Extensions.SyntaxNodeExtensions.IsFoundUnder(node, childGetter);
 
         public static SimpleNameSyntax? GetRightmostName(this ExpressionSyntax node) =>

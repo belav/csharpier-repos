@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
 {
-    internal abstract class AbstractLanguageDetector<TOptions> where TOptions : struct, Enum
+    internal abstract class AbstractLanguageDetector<TOptions>
+        where TOptions : struct, Enum
     {
         protected readonly EmbeddedLanguageInfo Info;
 

@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         // contain just 1 candidate.
         private static bool AnyValidResult<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             foreach (var result in results)
             {
@@ -79,7 +80,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static bool SingleValidResult<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             bool oneValid = false;
             foreach (var result in results)
@@ -211,7 +213,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol returnType = null,
             bool isFunctionPointerResolution = false,
             in CallingConventionInfo callingConventionInfo = default
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             var results = result.ResultsBuilder;
 
@@ -260,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static bool OverloadResolutionResultIsValid<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             bool hasDynamicArgument
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // If there were no dynamic arguments then overload resolution succeeds if there is exactly one method
             // that is applicable and not worse than another method.
@@ -309,7 +313,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             bool inferWithDynamic = false,
             bool allowUnexpandedForm = true
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // SPEC: The binding-time processing of a method invocation of the form M(A), where M is a
             // SPEC: method group (possibly including a type-argument-list), and A is an optional
@@ -442,7 +447,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             AnalyzedArguments arguments,
             BoundExpression receiverOpt
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // When the feature 'ImprovedOverloadCandidates' is enabled, we do not include instance members when the receiver
             // is a type, or static members when the receiver is an instance. This does not apply to extension method invocations,
@@ -477,7 +483,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void RemoveStaticInstanceMismatches<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             bool requireStatic
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             for (int f = 0; f < results.Count; ++f)
             {
@@ -492,7 +499,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static void RemoveMethodsNotDeclaredStatic<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // RemoveStaticInstanceMismatches allows methods that do not need a receiver but are not declared static,
             // such as a local function that is not declared static. This eliminates methods that are not actually
@@ -511,7 +519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void RemoveConstraintViolations<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             CompoundUseSiteInfo<AssemblySymbol> template
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // When the feature 'ImprovedOverloadCandidates' is enabled, we do not include methods for which the type arguments
             // violate the constraints of the method's type parameters.
@@ -554,7 +563,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void RemoveCallingConventionMismatches<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             in CallingConventionInfo expectedConvention
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             if (typeof(TMember) != typeof(MethodSymbol))
             {
@@ -792,7 +802,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             RefKind? returnRefKind,
             TypeSymbol returnType,
             bool isFunctionPointerConversion
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // When the feature 'ImprovedOverloadCandidates' is enabled, then a delegate conversion overload resolution
             // rejects candidates that have the wrong return ref kind or return type.
@@ -880,7 +891,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static void ClearContainingTypeMap<TMember>(
             ref Dictionary<NamedTypeSymbol, ArrayBuilder<TMember>> containingTypeMapOpt
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             if ((object)containingTypeMapOpt != null)
             {
@@ -1081,7 +1093,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inferWithDynamic,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
             bool allowUnexpandedForm
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // SPEC VIOLATION:
             //
@@ -1392,7 +1405,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TMember member,
             bool checkOverrideContainingType,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             if (!member.IsVirtual && !member.IsAbstract && !member.IsOverride)
             {
@@ -1426,7 +1440,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<TMember> members,
             TMember member,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             NamedTypeSymbol memberContainingType = member.ContainingType;
             foreach (var otherMember in members)
@@ -1469,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private void RemoveInaccessibleTypeArguments<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             for (int f = 0; f < results.Count; ++f)
             {
@@ -1503,7 +1519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void RemoveLessDerivedMembers<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // 7.6.5.1 Method invocations
             // SPEC: For each method C.F in the set, where C is the type in which the method F is declared,
@@ -1635,7 +1652,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type,
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             for (int f = 0; f < results.Count; ++f)
             {
@@ -1691,7 +1709,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private static void RemoveAllInterfaceMembers<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // Consider the following case:
             //
@@ -1803,7 +1822,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static void ReportUseSiteInfo<TMember>(
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             foreach (MemberResolutionResult<TMember> result in results)
             {
@@ -1818,7 +1838,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             AnalyzedArguments arguments,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             int currentBestIndex = -1;
             for (int index = 0; index < results.Count; index++)
@@ -1891,7 +1912,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<MemberResolutionResult<TMember>> results,
             AnalyzedArguments arguments,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // SPEC: Given the set of applicable candidate function members, the best function member in
             // SPEC: that set is located. Otherwise, the best function member is the one function member
@@ -2088,7 +2110,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MemberResolutionResult<TMember> m2,
             ArrayBuilder<BoundExpression> arguments,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             Debug.Assert(m1.Result.IsValid);
             Debug.Assert(m2.Result.IsValid);
@@ -2134,7 +2157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> arguments,
             bool considerRefKinds,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             Debug.Assert(m1.Result.IsValid);
             Debug.Assert(m2.Result.IsValid);
@@ -2647,7 +2671,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<ParameterSymbol> parameters1,
             MemberResolutionResult<TMember> m2,
             ImmutableArray<ParameterSymbol> parameters2
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             BetterResult valOverInOrRefInterpolatedHandlerPreference = BetterResult.Neither;
 
@@ -2736,7 +2761,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<BoundExpression> arguments,
             out int declaredParameterCount,
             out int parametersUsedIncludingExpansionAndOptional
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             declaredParameterCount = m.Member.GetParameterCount();
 
@@ -3874,7 +3900,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<RefKind> argumentRefKinds,
             bool isMethodGroupConversion,
             bool allowRefOmittedArguments
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             bool discarded;
             return GetEffectiveParametersInNormalForm(
@@ -3898,7 +3925,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool allowRefOmittedArguments,
             Binder binder,
             out bool hasAnyRefOmittedArgument
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             Debug.Assert(argumentRefKinds != null);
 
@@ -4005,7 +4033,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             ArrayBuilder<RefKind> argumentRefKinds,
             bool isMethodGroupConversion,
             bool allowRefOmittedArguments
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             bool discarded;
             return GetEffectiveParametersInExpandedForm(
@@ -4029,7 +4058,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool allowRefOmittedArguments,
             Binder binder,
             out bool hasAnyRefOmittedArgument
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             Debug.Assert(argumentRefKinds != null);
 
@@ -4084,7 +4114,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inferWithDynamic,
             bool completeResults,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // AnalyzeArguments matches arguments to parameter names and positions.
             // For that purpose we use the most derived member.
@@ -4194,7 +4225,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool allowRefOmittedArguments,
             bool completeResults,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             // AnalyzeArguments matches arguments to parameter names and positions.
             // For that purpose we use the most derived member.
@@ -4292,7 +4324,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool inferWithDynamic,
             bool completeResults,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             bool ignoreOpenTypes;
             MethodSymbol method;
@@ -4787,7 +4820,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private static TMember GetConstructedFrom<TMember>(TMember member) where TMember : Symbol
+        private static TMember GetConstructedFrom<TMember>(TMember member)
+            where TMember : Symbol
         {
             switch (member.Kind)
             {

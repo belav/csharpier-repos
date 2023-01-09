@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">Options type.</typeparam>
     public class OptionsMonitor<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > : IOptionsMonitor<TOptions>, IDisposable where TOptions : class
+    > : IOptionsMonitor<TOptions>, IDisposable
+        where TOptions : class
     {
         private readonly IOptionsMonitorCache<TOptions> _cache;
         private readonly IOptionsFactory<TOptions> _factory;

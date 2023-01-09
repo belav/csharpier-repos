@@ -339,7 +339,8 @@ public class ClientHubProxyTests
         );
     }
 
-    internal class EmptyHubLifetimeManager<THub> : HubLifetimeManager<THub> where THub : Hub
+    internal class EmptyHubLifetimeManager<THub> : HubLifetimeManager<THub>
+        where THub : Hub
     {
         public override Task AddToGroupAsync(
             string connectionId,

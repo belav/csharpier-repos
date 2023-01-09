@@ -13,7 +13,8 @@ using Xunit.Sdk;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class SendReceive<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class SendReceive<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
         public SendReceive(ITestOutputHelper output)
             : base(output) { }

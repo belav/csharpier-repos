@@ -32,7 +32,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
         public GenericContainerPOCO() { }
     }
 
-    public class GenericBasePOCO<T> where T : new()
+    public class GenericBasePOCO<T>
+        where T : new()
     {
         public object genericData = new T();
     }
@@ -84,7 +85,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests.More
     }
 
     [DataContract]
-    public class GenericBaseDC<T> where T : new()
+    public class GenericBaseDC<T>
+        where T : new()
     {
         [DataMember]
         public object genericData = new T();

@@ -14,7 +14,8 @@ namespace Roslyn.Utilities
             internal class Set<TUnderlying, T>
                 : Collection<TUnderlying, T>,
                     ISet<T>,
-                    IReadOnlySet<T> where TUnderlying : ISet<T>
+                    IReadOnlySet<T>
+                where TUnderlying : ISet<T>
             {
                 public Set(TUnderlying underlying)
                     : base(underlying) { }

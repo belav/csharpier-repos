@@ -515,8 +515,8 @@ public class EntityFrameworkServicesBuilder
     /// <returns>This builder, such that further calls can be chained.</returns>
     public virtual EntityFrameworkServicesBuilder TryAdd<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TService
-    >(Func<IServiceProvider, TService> factory) where TService : class =>
-        TryAdd(typeof(TService), typeof(TService), factory);
+    >(Func<IServiceProvider, TService> factory)
+        where TService : class => TryAdd(typeof(TService), typeof(TService), factory);
 
     /// <summary>
     ///     Adds a factory for an Entity Framework service only if one has not already been registered.

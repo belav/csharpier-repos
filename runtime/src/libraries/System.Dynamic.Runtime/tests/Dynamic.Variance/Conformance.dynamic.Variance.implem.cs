@@ -16,7 +16,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : Mammal
+    public class Variance<T> : iVariance<T>
+        where T : Mammal
     {
         public T Boo()
         {
@@ -65,7 +66,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.implem.cnstrai
 
     public class P
     {
-        public void Foo<T, S>() where T : S { }
+        public void Foo<T, S>()
+            where T : S { }
 
         [Fact]
         public static void DynamicCSharpRunTest()

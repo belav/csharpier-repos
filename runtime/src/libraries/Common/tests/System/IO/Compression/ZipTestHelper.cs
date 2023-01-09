@@ -107,7 +107,8 @@ namespace System.IO.Compression.Tests
             return totalRead;
         }
 
-        public static bool ArraysEqual<T>(T[] a, T[] b) where T : IComparable<T>
+        public static bool ArraysEqual<T>(T[] a, T[] b)
+            where T : IComparable<T>
         {
             if (a.Length != b.Length)
                 return false;
@@ -119,7 +120,8 @@ namespace System.IO.Compression.Tests
             return true;
         }
 
-        public static bool ArraysEqual<T>(T[] a, T[] b, int length) where T : IComparable<T>
+        public static bool ArraysEqual<T>(T[] a, T[] b, int length)
+            where T : IComparable<T>
         {
             for (int i = 0; i < length; i++)
             {

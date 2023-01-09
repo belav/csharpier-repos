@@ -17,7 +17,8 @@ namespace System.Web.Http.Tracing.Tracers
     // abstract base is used for all MediaTypeFormatters whose read/write methods
     // can be overridden.
     public abstract class ReadWriteMediaTypeFormatterTracerTestBase<TFormatter>
-        : MediaTypeFormatterTracerTestBase<TFormatter> where TFormatter : MediaTypeFormatter
+        : MediaTypeFormatterTracerTestBase<TFormatter>
+        where TFormatter : MediaTypeFormatter
     {
         [Fact]
         public async Task ReadFromStreamAsync_Traces()

@@ -338,7 +338,8 @@ namespace System.Text.Json
                 static bool CompareLists<TValue>(
                     ConfigurationList<TValue> left,
                     ConfigurationList<TValue> right
-                ) where TValue : class?
+                )
+                    where TValue : class?
                 {
                     int n;
                     if ((n = left.Count) != right.Count)

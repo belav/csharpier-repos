@@ -295,7 +295,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
             string comment1,
             string comment2,
             TNode node
-        ) where TNode : SyntaxNode => AddComments(g, new[] { comment1, comment2, }, node);
+        )
+            where TNode : SyntaxNode => AddComments(g, new[] { comment1, comment2, }, node);
 
         protected static TNode AddComments<TNode>(SyntaxGenerator g, string[] comments, TNode node)
             where TNode : SyntaxNode =>

@@ -247,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 T member,
                 Func<Cci.ITypeDefinition, IEnumerable<T>> getMembers,
                 Func<T, T, bool> predicate
-            ) where T : class, Cci.ITypeDefinitionMember
+            )
+                where T : class, Cci.ITypeDefinitionMember
             {
                 // We could cache the members by name (see Matcher.VisitNamedTypeMembers)
                 // but the assumption is this class is only used for types with few members
@@ -963,7 +964,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 ISymbolInternal otherTypeOrNamespace,
                 T sourceMember,
                 Func<T, T, bool> predicate
-            ) where T : Symbol
+            )
+                where T : Symbol
             {
                 Debug.Assert(!string.IsNullOrEmpty(sourceMember.MetadataName));
 

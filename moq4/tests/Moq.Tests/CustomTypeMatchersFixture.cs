@@ -255,13 +255,16 @@ namespace Moq.Tests
 
         public interface IY
         {
-            void Method<TException>() where TException : Exception;
+            void Method<TException>()
+                where TException : Exception;
         }
 
         public interface IZ
         {
-            void DelegateMethod<TDelegate>() where TDelegate : Delegate;
-            void EnumMethod<TEnum>() where TEnum : Enum;
+            void DelegateMethod<TDelegate>()
+                where TDelegate : Delegate;
+            void EnumMethod<TEnum>()
+                where TEnum : Enum;
         }
 
         [TypeMatcher]

@@ -42,16 +42,20 @@ namespace System.Security.Policy
         [Obsolete("Evidence.AddAssembly has been deprecated. Use AddAssemblyEvidence instead.")]
         public void AddAssembly(object id) { }
 
-        public void AddAssemblyEvidence<T>(T evidence) where T : EvidenceBase { }
+        public void AddAssemblyEvidence<T>(T evidence)
+            where T : EvidenceBase { }
 
-        public void AddHostEvidence<T>(T evidence) where T : EvidenceBase { }
+        public void AddHostEvidence<T>(T evidence)
+            where T : EvidenceBase { }
 
-        public T? GetAssemblyEvidence<T>() where T : EvidenceBase
+        public T? GetAssemblyEvidence<T>()
+            where T : EvidenceBase
         {
             return default(T);
         }
 
-        public T? GetHostEvidence<T>() where T : EvidenceBase
+        public T? GetHostEvidence<T>()
+            where T : EvidenceBase
         {
             return default(T);
         }

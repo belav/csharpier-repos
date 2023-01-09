@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.Host
         public static TLanguageService? GetLanguageService<TLanguageService>(
             this HostWorkspaceServices hostWorkspaceServices,
             string languageName
-        ) where TLanguageService : class, ILanguageService =>
+        )
+            where TLanguageService : class, ILanguageService =>
             hostWorkspaceServices
                 ?.GetExtendedLanguageServices(languageName)
                 .GetService<TLanguageService>();
@@ -17,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Host
         public static TLanguageService GetRequiredLanguageService<TLanguageService>(
             this HostWorkspaceServices hostWorkspaceServices,
             string languageName
-        ) where TLanguageService : class, ILanguageService =>
+        )
+            where TLanguageService : class, ILanguageService =>
             hostWorkspaceServices
                 .GetExtendedLanguageServices(languageName)
                 .GetRequiredService<TLanguageService>();

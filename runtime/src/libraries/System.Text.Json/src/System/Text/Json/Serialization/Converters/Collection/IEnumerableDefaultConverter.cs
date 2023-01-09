@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization.Converters
     /// Default base class implementation of <cref>JsonIEnumerableConverter{TCollection, TElement}</cref>.
     /// </summary>
     internal abstract class IEnumerableDefaultConverter<TCollection, TElement>
-        : JsonCollectionConverter<TCollection, TElement> where TCollection : IEnumerable<TElement>
+        : JsonCollectionConverter<TCollection, TElement>
+        where TCollection : IEnumerable<TElement>
     {
         internal override bool CanHaveMetadata => true;
 

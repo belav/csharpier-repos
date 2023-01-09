@@ -93,7 +93,8 @@ namespace System.Security.Cryptography.X509Certificates
             CertificatePal certificatePal,
             Func<CngKey, TAlgorithm> factory,
             CryptImportPublicKeyInfoFlags importFlags = CryptImportPublicKeyInfoFlags.NONE
-        ) where TAlgorithm : ECAlgorithm, new()
+        )
+            where TAlgorithm : ECAlgorithm, new()
         {
             TAlgorithm key;
 

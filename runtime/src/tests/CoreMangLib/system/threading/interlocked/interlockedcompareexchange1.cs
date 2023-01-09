@@ -43,7 +43,8 @@ public class InterlockedCompareExchange1
     }
 
     // CompareExchange of equal strings as T
-    public bool PosTest1<T>() where T : class
+    public bool PosTest1<T>()
+        where T : class
     {
         bool retVal = true;
         T location;
@@ -115,7 +116,8 @@ public class InterlockedCompareExchange1
     }
 
     // CompareExchange of unequal strings as T
-    public bool PosTest2<T>() where T : class
+    public bool PosTest2<T>()
+        where T : class
     {
         bool retVal = true;
         T location;

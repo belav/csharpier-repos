@@ -42,7 +42,8 @@ internal sealed class SpaHostingStartup : IHostingStartup
         )]
         static void ConfigureOptions<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties)] T
-        >(IServiceCollection services, IConfigurationSection section) where T : class
+        >(IServiceCollection services, IConfigurationSection section)
+            where T : class
         {
             services.Configure<T>(section);
         }

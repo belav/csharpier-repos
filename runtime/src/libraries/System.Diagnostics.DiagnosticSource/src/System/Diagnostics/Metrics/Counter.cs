@@ -16,7 +16,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public sealed class Counter<T> : Instrument<T> where T : struct
+    public sealed class Counter<T> : Instrument<T>
+        where T : struct
     {
         internal Counter(Meter meter, string name, string? unit, string? description)
             : base(meter, name, unit, description)

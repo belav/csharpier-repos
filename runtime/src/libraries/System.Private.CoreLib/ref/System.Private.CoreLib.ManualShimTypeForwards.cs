@@ -198,7 +198,8 @@ namespace System.Collections.Generic
 
     public sealed partial class EnumEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T>,
-            System.Runtime.Serialization.ISerializable where T : struct
+            System.Runtime.Serialization.ISerializable
+        where T : struct
     {
         public EnumEqualityComparer() { }
 
@@ -254,7 +255,8 @@ namespace System.Collections.Generic
     }
 
     public sealed partial class GenericEqualityComparer<T>
-        : System.Collections.Generic.EqualityComparer<T> where T : System.IEquatable<T>
+        : System.Collections.Generic.EqualityComparer<T>
+        where T : System.IEquatable<T>
     {
         public GenericEqualityComparer() { }
 
@@ -322,7 +324,8 @@ namespace System.Collections.Generic
 
     public sealed partial class NullableComparer<T>
         : System.Collections.Generic.Comparer<T?>,
-            System.Runtime.Serialization.ISerializable where T : struct
+            System.Runtime.Serialization.ISerializable
+        where T : struct
     {
         public NullableComparer() { }
 
@@ -351,7 +354,8 @@ namespace System.Collections.Generic
 
     public sealed partial class NullableEqualityComparer<T>
         : System.Collections.Generic.EqualityComparer<T?>,
-            System.Runtime.Serialization.ISerializable where T : struct
+            System.Runtime.Serialization.ISerializable
+        where T : struct
     {
         public NullableEqualityComparer() { }
 

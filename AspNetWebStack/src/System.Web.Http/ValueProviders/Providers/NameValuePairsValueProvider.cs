@@ -120,7 +120,8 @@ namespace System.Web.Http.ValueProviders.Providers
         )]
         private static Dictionary<string, object> InitializeValues<T>(
             IEnumerable<KeyValuePair<string, T>> nameValuePairs
-        ) where T : class
+        )
+            where T : class
         {
             // Performance-sensitive.
             // Optimize for the cases of 0 pairs, and for names being unique when present.

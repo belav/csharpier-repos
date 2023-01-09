@@ -58,7 +58,8 @@ internal sealed class PropertySetter
         Action<TTarget, TValue> setter,
         object target,
         object value
-    ) where TTarget : notnull
+    )
+        where TTarget : notnull
     {
         if (value == null)
         {

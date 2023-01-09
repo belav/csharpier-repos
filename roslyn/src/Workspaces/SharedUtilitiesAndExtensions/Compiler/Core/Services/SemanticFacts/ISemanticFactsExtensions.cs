@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             TBinaryExpressionSyntax innerBinary,
             TBinaryExpressionSyntax parentBinary,
             SemanticModel semanticModel
-        ) where TBinaryExpressionSyntax : SyntaxNode
+        )
+            where TBinaryExpressionSyntax : SyntaxNode
         {
             // Now we'll perform a few semantic checks to determine whether removal
             // of the parentheses might break semantics. Note that we'll try and be

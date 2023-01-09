@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.Options
     /// <typeparam name="TOptions">The type of options being requested.</typeparam>
     public interface IOptionsFactory<
         [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] TOptions
-    > where TOptions : class
+    >
+        where TOptions : class
     {
         /// <summary>
         /// Returns a configured <typeparamref name="TOptions"/> instance with the given <paramref name="name"/>.

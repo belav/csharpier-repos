@@ -112,7 +112,8 @@ public static class VectorMgdMgd
         return returnVal;
     }
 
-    public unsafe class HVATests<T> where T : struct
+    public unsafe class HVATests<T>
+        where T : struct
     {
         // An HVA can contain up to 4 vectors, so we'll test structs with up to 5 of them
         // (to ensure that even those that are too large are handled consistently).

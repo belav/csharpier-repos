@@ -308,7 +308,8 @@ namespace System.Reflection.Tests
             );
         }
 
-        private static void TestDoNotWrap<T>(Action<BindingFlags> action) where T : Exception
+        private static void TestDoNotWrap<T>(Action<BindingFlags> action)
+            where T : Exception
         {
             Assert.Throws<T>(() => action(BindingFlags.DoNotWrapExceptions));
             TargetInvocationException tie = Assert.Throws<TargetInvocationException>(

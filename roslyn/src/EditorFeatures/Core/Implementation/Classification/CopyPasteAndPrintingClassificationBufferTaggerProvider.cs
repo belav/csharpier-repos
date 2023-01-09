@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.Classification);
         }
 
-        public IAccurateTagger<T>? CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public IAccurateTagger<T>? CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             this.AssertIsForeground();
 

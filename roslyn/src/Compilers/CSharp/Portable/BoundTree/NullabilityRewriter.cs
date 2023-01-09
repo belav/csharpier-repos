@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return currentBinary!;
         }
 
-        private T GetUpdatedSymbol<T>(BoundNode expr, T sym) where T : Symbol?
+        private T GetUpdatedSymbol<T>(BoundNode expr, T sym)
+            where T : Symbol?
         {
             if (sym is null)
                 return sym;

@@ -46,7 +46,8 @@ public abstract class RazorPageBase
 
     public abstract Task ExecuteAsync();
 
-    public TTagHelper CreateTagHelper<TTagHelper>() where TTagHelper : ITagHelper
+    public TTagHelper CreateTagHelper<TTagHelper>()
+        where TTagHelper : ITagHelper
     {
         throw new NotImplementedException();
     }

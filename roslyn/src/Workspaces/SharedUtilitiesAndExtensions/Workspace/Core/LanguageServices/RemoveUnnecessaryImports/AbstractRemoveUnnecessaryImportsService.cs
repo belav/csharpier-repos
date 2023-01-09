@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal abstract class AbstractRemoveUnnecessaryImportsService<T>
         : IRemoveUnnecessaryImportsService,
-            IEqualityComparer<T> where T : SyntaxNode
+            IEqualityComparer<T>
+        where T : SyntaxNode
     {
         protected abstract IUnnecessaryImportsProvider<T> UnnecessaryImportsProvider { get; }
 

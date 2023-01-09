@@ -12,7 +12,8 @@ namespace System
     /// <summary>Defines a mechanism for parsing a span of characters to a value.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
     [RequiresPreviewFeatures(Number.PreviewFeatureMessage, Url = Number.PreviewFeatureUrl)]
-    public interface ISpanParseable<TSelf> : IParseable<TSelf> where TSelf : ISpanParseable<TSelf>
+    public interface ISpanParseable<TSelf> : IParseable<TSelf>
+        where TSelf : ISpanParseable<TSelf>
     {
         /// <summary>Parses a span of characters into a value.</summary>
         /// <param name="s">The span of characters to parse.</param>

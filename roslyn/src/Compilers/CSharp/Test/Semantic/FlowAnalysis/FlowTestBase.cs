@@ -184,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return analysisDelegate(model, firstStatement, lastStatement);
         }
 
-        protected T GetFirstNode<T>(SyntaxTree tree, int offset) where T : CSharpSyntaxNode
+        protected T GetFirstNode<T>(SyntaxTree tree, int offset)
+            where T : CSharpSyntaxNode
         {
             return GetSyntaxNodeList(tree)
                 .OfType<T>()
@@ -192,12 +193,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 .FirstOrDefault();
         }
 
-        protected T GetLastNode<T>(SyntaxTree tree, int offset) where T : CSharpSyntaxNode
+        protected T GetLastNode<T>(SyntaxTree tree, int offset)
+            where T : CSharpSyntaxNode
         {
             return GetSyntaxNodeList(tree).OfType<T>().Where(n => n.Span.Contains(offset)).Last();
         }
 
-        protected static string GetSymbolNamesJoined<T>(IEnumerable<T> symbols) where T : ISymbol
+        protected static string GetSymbolNamesJoined<T>(IEnumerable<T> symbols)
+            where T : ISymbol
         {
             return symbols.Any() ? string.Join(", ", symbols.Select(symbol => symbol.Name)) : null;
         }

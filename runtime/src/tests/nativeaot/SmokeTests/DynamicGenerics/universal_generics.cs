@@ -515,7 +515,8 @@ namespace UniversalGen
     }
 
     #region Test case taken from a real app (minimal repro for a field layout bug)
-    public class GenBaseType<T> where T : IComparable<T>
+    public class GenBaseType<T>
+        where T : IComparable<T>
     {
         protected String _myString = new String('c', 3);
         protected T _tValue;
@@ -532,7 +533,8 @@ namespace UniversalGen
         }
     }
 
-    public class GenDerivedType<T, U> : GenBaseType<T> where T : IComparable<T>
+    public class GenDerivedType<T, U> : GenBaseType<T>
+        where T : IComparable<T>
     {
         IList _iListObject;
         U _uValue;
@@ -572,7 +574,8 @@ namespace UniversalGen
         }
     }
 
-    public class GenDerivedType_Activator<T> where T : new()
+    public class GenDerivedType_Activator<T>
+        where T : new()
     {
         static List<T> _listToUseAsParam = new List<T>(new T[] { default(T), new T() });
         static TimeSpan _timeSpanToUseAsParam = TimeSpan.FromSeconds(123456.0);
@@ -757,7 +760,8 @@ namespace UniversalGen
         public virtual void nestedTest() { }
     }
 
-    public class UnmanagedByRef<T> : Base where T : struct, IGetValue
+    public class UnmanagedByRef<T> : Base
+        where T : struct, IGetValue
     {
         public T refVal;
 
@@ -944,7 +948,8 @@ namespace UniversalGen
         }
     }
 
-    public class InterlockedClass<T, U> : Base where T : class
+    public class InterlockedClass<T, U> : Base
+        where T : class
     {
         T member = default(T);
 
@@ -5558,7 +5563,8 @@ namespace ActivatorCreateInstance
         }
     }
 
-    public class NEW_Instantiator<T, U> : Base where T : new()
+    public class NEW_Instantiator<T, U> : Base
+        where T : new()
     {
         public override string Func()
         {
@@ -6034,14 +6040,16 @@ namespace IsInstTest
 
     public class TestType
     {
-        public T ActivateObject_IsInstT<T, U>(string id, bool activateTheStruct) where T : class
+        public T ActivateObject_IsInstT<T, U>(string id, bool activateTheStruct)
+            where T : class
         {
             object o = new ObjectActivator().Activate(id, activateTheStruct);
             T t = o as T;
             return t;
         }
 
-        public T ActivateArray_IsInstT<T, U>(string id, bool activateTheStruct) where T : class
+        public T ActivateArray_IsInstT<T, U>(string id, bool activateTheStruct)
+            where T : class
         {
             IObject[] array = new IObject[]
             {
@@ -6248,7 +6256,8 @@ namespace FieldLayoutBugRepro
 
     public abstract class ScheduledItem<TAbsolute>
         : IScheduledItem<TAbsolute>,
-            IComparable<ScheduledItem<TAbsolute>> where TAbsolute : IComparable<TAbsolute>
+            IComparable<ScheduledItem<TAbsolute>>
+        where TAbsolute : IComparable<TAbsolute>
     {
         private readonly string _disposable = new String('c', 3);
         protected readonly TAbsolute _dueTime;

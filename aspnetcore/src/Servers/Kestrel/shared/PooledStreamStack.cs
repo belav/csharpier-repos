@@ -15,7 +15,8 @@ internal interface IPooledStream
 }
 
 // See https://github.com/dotnet/runtime/blob/da9b16f2804e87c9c1ca9dcd9036e7b53e724f5d/src/libraries/System.IO.Pipelines/src/System/IO/Pipelines/BufferSegmentStack.cs
-internal struct PooledStreamStack<TValue> where TValue : class, IPooledStream
+internal struct PooledStreamStack<TValue>
+    where TValue : class, IPooledStream
 {
     // Internal for testing
     internal StreamAsValueType[] _array;

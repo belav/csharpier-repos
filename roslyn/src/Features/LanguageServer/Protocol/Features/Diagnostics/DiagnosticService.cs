@@ -534,7 +534,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Data data,
             Func<Data, T> keyGetter,
             ArrayBuilder<Data> result
-        ) where T : class
+        )
+            where T : class
         {
             if (key == null)
             {
@@ -565,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         [Conditional("DEBUG")]
-        private static void AssertIfNull<T>(T obj) where T : class
+        private static void AssertIfNull<T>(T obj)
+            where T : class
         {
             if (obj == null)
             {

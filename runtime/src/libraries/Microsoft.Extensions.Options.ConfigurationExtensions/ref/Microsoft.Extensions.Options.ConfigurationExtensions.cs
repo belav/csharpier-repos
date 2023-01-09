@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.Options.OptionsBuilder<TOptions> optionsBuilder,
             string configSectionPath,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions>? configureBinder = null
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -42,7 +43,8 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.Options.OptionsBuilder<TOptions> optionsBuilder,
             Microsoft.Extensions.Configuration.IConfiguration config
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -62,7 +64,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.Options.OptionsBuilder<TOptions> optionsBuilder,
             Microsoft.Extensions.Configuration.IConfiguration config,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions>? configureBinder
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -84,7 +87,8 @@ namespace Microsoft.Extensions.DependencyInjection
         >(
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             Microsoft.Extensions.Configuration.IConfiguration config
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -104,7 +108,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             Microsoft.Extensions.Configuration.IConfiguration config,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions>? configureBinder
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -124,7 +129,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this Microsoft.Extensions.DependencyInjection.IServiceCollection services,
             string? name,
             Microsoft.Extensions.Configuration.IConfiguration config
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -145,7 +151,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string? name,
             Microsoft.Extensions.Configuration.IConfiguration config,
             System.Action<Microsoft.Extensions.Configuration.BinderOptions>? configureBinder
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             throw null;
         }
@@ -182,7 +189,8 @@ namespace Microsoft.Extensions.Options
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]
             TOptions
-    > : Microsoft.Extensions.Options.ConfigureOptions<TOptions> where TOptions : class
+    > : Microsoft.Extensions.Options.ConfigureOptions<TOptions>
+        where TOptions : class
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values may require generating dynamic code at runtime."
@@ -201,7 +209,8 @@ namespace Microsoft.Extensions.Options
             System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes.All
         )]
             TOptions
-    > : Microsoft.Extensions.Options.ConfigureNamedOptions<TOptions> where TOptions : class
+    > : Microsoft.Extensions.Options.ConfigureNamedOptions<TOptions>
+        where TOptions : class
     {
         [System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute(
             "Binding strongly typed objects to configuration values may require generating dynamic code at runtime."

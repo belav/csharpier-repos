@@ -152,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             > localDiagnostics,
             ImmutableHashSet<DiagnosticAnalyzer> excludedAnalyzers,
             ImmutableArray<Diagnostic>.Builder builder
-        ) where T : notnull
+        )
+            where T : notnull
         {
             foreach (var diagnosticsByTree in localDiagnostics)
             {

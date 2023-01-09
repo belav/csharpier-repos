@@ -5514,7 +5514,8 @@ namespace System.Tests
         private static void VerifyConvertException<TException>(
             DateTimeOffset inputTime,
             string destinationTimeZoneId
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Assert.ThrowsAny<TException>(
                 () =>
@@ -5528,7 +5529,8 @@ namespace System.Tests
         private static void VerifyConvertException<TException>(
             DateTime inputTime,
             string destinationTimeZoneId
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Assert.ThrowsAny<TException>(
                 () =>
@@ -5543,7 +5545,8 @@ namespace System.Tests
             DateTime inputTime,
             string sourceTimeZoneId,
             string destinationTimeZoneId
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Assert.ThrowsAny<TException>(
                 () =>
@@ -5722,7 +5725,8 @@ namespace System.Tests
         private static void VerifyAmbiguousOffsetsException<TException>(
             TimeZoneInfo tz,
             DateTime dt
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Assert.Throws<TException>(() => tz.GetAmbiguousTimeOffsets(dt));
         }
@@ -5872,7 +5876,8 @@ namespace System.Tests
         private static void VerifyConvertToUtcException<TException>(
             DateTime dateTime,
             TimeZoneInfo sourceTimeZone
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Assert.ThrowsAny<TException>(
                 () => TimeZoneInfo.ConvertTimeToUtc(dateTime, sourceTimeZone)
@@ -5886,7 +5891,8 @@ namespace System.Tests
             string standardDisplayName,
             string daylightDisplayName = null,
             TimeZoneInfo.AdjustmentRule[] adjustmentRules = null
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Assert.ThrowsAny<TException>(() =>
             {

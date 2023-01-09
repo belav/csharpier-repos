@@ -125,7 +125,8 @@ namespace Microsoft.Extensions.Hosting
         public void ConfigureContainer<TContainerBuilder>(
             Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> factory,
             System.Action<TContainerBuilder>? configure = null
-        ) where TContainerBuilder : notnull { }
+        )
+            where TContainerBuilder : notnull { }
     }
 
     public sealed partial class HostApplicationBuilderSettings
@@ -220,7 +221,8 @@ namespace Microsoft.Extensions.Hosting
 
         public Microsoft.Extensions.Hosting.IHostBuilder UseServiceProviderFactory<TContainerBuilder>(
             Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder> factory
-        ) where TContainerBuilder : notnull
+        )
+            where TContainerBuilder : notnull
         {
             throw null;
         }
@@ -230,7 +232,8 @@ namespace Microsoft.Extensions.Hosting
                 Microsoft.Extensions.Hosting.HostBuilderContext,
                 Microsoft.Extensions.DependencyInjection.IServiceProviderFactory<TContainerBuilder>
             > factory
-        ) where TContainerBuilder : notnull
+        )
+            where TContainerBuilder : notnull
         {
             throw null;
         }

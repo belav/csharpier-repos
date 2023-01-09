@@ -38,7 +38,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     public static TBuilder RequireAuthorization<TBuilder>(
         this TBuilder builder,
         params string[] policyNames
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -66,7 +67,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     public static TBuilder RequireAuthorization<TBuilder>(
         this TBuilder builder,
         params IAuthorizeData[] authorizeData
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -96,7 +98,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     public static TBuilder RequireAuthorization<TBuilder>(
         this TBuilder builder,
         AuthorizationPolicy policy
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -122,7 +125,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     public static TBuilder RequireAuthorization<TBuilder>(
         this TBuilder builder,
         Action<AuthorizationPolicyBuilder> configurePolicy
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         if (builder == null)
         {
@@ -173,7 +177,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     private static void RequireAuthorizationCore<TBuilder>(
         TBuilder builder,
         IEnumerable<IAuthorizeData> authorizeData
-    ) where TBuilder : IEndpointConventionBuilder
+    )
+        where TBuilder : IEndpointConventionBuilder
     {
         builder.Add(endpointBuilder =>
         {

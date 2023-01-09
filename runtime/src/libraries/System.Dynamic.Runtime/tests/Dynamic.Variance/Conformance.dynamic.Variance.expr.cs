@@ -16,7 +16,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.gettype01
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -188,7 +189,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is01.is01
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -236,7 +238,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is02.is02
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -358,7 +361,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is05.is05
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -404,7 +408,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is06.is06
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -520,7 +525,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is09.is09
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {
@@ -565,7 +571,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.expr.is10.is10
         T Boo();
     }
 
-    public class Variance<T> : iVariance<T> where T : new()
+    public class Variance<T> : iVariance<T>
+        where T : new()
     {
         public T Boo()
         {

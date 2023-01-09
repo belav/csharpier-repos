@@ -522,7 +522,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             NamedTypeSymbol builderType,
             bool customBuilder,
             out TSymbol symbol
-        ) where TSymbol : Symbol
+        )
+            where TSymbol : Symbol
         {
             if (!member.HasValue)
             {

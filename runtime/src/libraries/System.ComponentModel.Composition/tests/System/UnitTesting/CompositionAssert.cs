@@ -37,7 +37,8 @@ namespace System.UnitTesting
             );
         }
 
-        public static void ThrowsPart<TInner>(Action action) where TInner : Exception
+        public static void ThrowsPart<TInner>(Action action)
+            where TInner : Exception
         {
             ThrowsPart<TInner>(RetryMode.Retry, action);
         }

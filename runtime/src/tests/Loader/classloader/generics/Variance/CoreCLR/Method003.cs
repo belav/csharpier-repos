@@ -16,12 +16,14 @@ public class E : IMinusT<object> { }
 
 public class A5 : Test001PlusT<int>
 {
-    public void method1<M>(IMinusT<int> t) where M : IMinusT<int> { }
+    public void method1<M>(IMinusT<int> t)
+        where M : IMinusT<int> { }
 }
 
 public class A6 : Test002PlusT<string>
 {
-    public string[] method2<M>(IMinusT<string[]> t) where M : IMinusT<string[]>
+    public string[] method2<M>(IMinusT<string[]> t)
+        where M : IMinusT<string[]>
     {
         return new string[10];
     }
@@ -29,7 +31,8 @@ public class A6 : Test002PlusT<string>
 
 public class A7 : Test001MinusT<object>
 {
-    public IMinusT<object[]> method1<M>(object t) where M : IPlusT<object>
+    public IMinusT<object[]> method1<M>(object t)
+        where M : IPlusT<object>
     {
         return (IMinusT<object[]>)new E();
     }

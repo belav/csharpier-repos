@@ -30,7 +30,8 @@ namespace Roslyn.Utilities
         /// unnecessary boxing operations.  Unfortunately, we can't constrain
         /// T to "non-enum", so we'll use a more restrictive constraint.
         /// </summary>
-        internal static int Combine<T>(T newKeyPart, int currentKey) where T : class?
+        internal static int Combine<T>(T newKeyPart, int currentKey)
+            where T : class?
         {
             int hash = unchecked(currentKey * (int)0xA5555529);
 
@@ -74,7 +75,8 @@ namespace Roslyn.Utilities
         internal static int CombineValues<TKey, TValue>(
             ImmutableDictionary<TKey, TValue> values,
             int maxItemsToHash = int.MaxValue
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             if (values == null)
                 return 0;

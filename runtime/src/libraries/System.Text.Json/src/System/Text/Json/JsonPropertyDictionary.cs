@@ -11,7 +11,8 @@ namespace System.Text.Json
     /// Keeps both a List and Dictionary in sync to enable deterministic enumeration ordering of List
     /// and performance benefits of Dictionary once a threshold is hit.
     /// </summary>
-    internal sealed partial class JsonPropertyDictionary<T> where T : class?
+    internal sealed partial class JsonPropertyDictionary<T>
+        where T : class?
     {
         private const int ListToDictionaryThreshold = 9;
 

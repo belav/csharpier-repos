@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.DependencyInjection
         )]
         public static IServiceCollection Configure<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
-        >(this IServiceCollection services, IConfiguration config) where TOptions : class =>
+        >(this IServiceCollection services, IConfiguration config)
+            where TOptions : class =>
             services.Configure<TOptions>(Options.Options.DefaultName, config);
 
         /// <summary>
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             IConfiguration config,
             Action<BinderOptions>? configureBinder
-        ) where TOptions : class =>
+        )
+            where TOptions : class =>
             services.Configure<TOptions>(Options.Options.DefaultName, config, configureBinder);
 
         /// <summary>
@@ -87,7 +89,8 @@ namespace Microsoft.Extensions.DependencyInjection
             string? name,
             IConfiguration config,
             Action<BinderOptions>? configureBinder
-        ) where TOptions : class
+        )
+            where TOptions : class
         {
             ThrowHelper.ThrowIfNull(services);
             ThrowHelper.ThrowIfNull(config);

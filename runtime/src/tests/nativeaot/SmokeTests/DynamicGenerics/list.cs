@@ -17,12 +17,14 @@ public class DynamicListTests
         public int IntValue { get; set; }
     }
 
-    public struct StructWrapper<T> where T : NonGenericBase
+    public struct StructWrapper<T>
+        where T : NonGenericBase
     {
         public T Reference;
     }
 
-    public struct StructWrapperWithEquals<T> where T : NonGenericBase
+    public struct StructWrapperWithEquals<T>
+        where T : NonGenericBase
     {
         public T Reference;
 
@@ -149,7 +151,8 @@ public class DynamicListTests
 
     public static class Producer
     {
-        public static IEnumerable<T> Produce<T>(int count) where T : NonGenericBase, new()
+        public static IEnumerable<T> Produce<T>(int count)
+            where T : NonGenericBase, new()
         {
             for (int i = 0; i < count; i++)
             {
@@ -161,7 +164,8 @@ public class DynamicListTests
 
         public static IEnumerable<StructWrapper<T>> WrapInStructWrapper<T>(
             IEnumerable<T> enumeration
-        ) where T : NonGenericBase
+        )
+            where T : NonGenericBase
         {
             foreach (var e in enumeration)
                 yield return new StructWrapper<T> { Reference = e };
@@ -169,7 +173,8 @@ public class DynamicListTests
 
         public static IEnumerable<StructWrapperWithEquals<T>> WrapInStructWrapperWithEquals<T>(
             IEnumerable<T> enumeration
-        ) where T : NonGenericBase
+        )
+            where T : NonGenericBase
         {
             foreach (var e in enumeration)
                 yield return new StructWrapperWithEquals<T> { Reference = e };
@@ -177,7 +182,8 @@ public class DynamicListTests
 
         public static IEnumerable<EquatableStructWrapper<T>> WrapInEquatableStructWrapper<T>(
             IEnumerable<T> enumeration
-        ) where T : NonGenericBase, IEquatable<T>
+        )
+            where T : NonGenericBase, IEquatable<T>
         {
             foreach (var e in enumeration)
                 yield return new EquatableStructWrapper<T> { Reference = e };
@@ -316,7 +322,8 @@ public class DynamicListTests
         }
     }
 
-    public static class Driver<T> where T : new()
+    public static class Driver<T>
+        where T : new()
     {
         private static ListAccessor<T> accessor = new ListAccessor<T>();
 

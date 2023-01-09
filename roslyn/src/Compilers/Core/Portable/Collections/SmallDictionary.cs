@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
     /// If the size of the dictionary is known at creation and it is likely to contain more than 10 elements,
     /// then regular Dictionary is a better choice.
     /// </summary>
-    internal sealed class SmallDictionary<K, V> : IEnumerable<KeyValuePair<K, V>> where K : notnull
+    internal sealed class SmallDictionary<K, V> : IEnumerable<KeyValuePair<K, V>>
+        where K : notnull
     {
         private AvlNode? _root;
         public readonly IEqualityComparer<K> Comparer;

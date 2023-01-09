@@ -11,7 +11,8 @@ namespace System.Diagnostics.Metrics
     /// <remarks>
     /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
     /// </remarks>
-    public abstract partial class Instrument<T> : Instrument where T : struct
+    public abstract partial class Instrument<T> : Instrument
+        where T : struct
     {
         /// <summary>
         /// Create the metrics instrument using the properties meter, name, description, and unit.

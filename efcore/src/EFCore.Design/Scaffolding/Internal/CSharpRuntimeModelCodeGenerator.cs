@@ -1730,7 +1730,8 @@ public class CSharpRuntimeModelCodeGenerator : ICompiledModelCodeGenerator
         TAnnotatable annotatable,
         Action<TAnnotatable, CSharpRuntimeAnnotationCodeGeneratorParameters> process,
         CSharpRuntimeAnnotationCodeGeneratorParameters parameters
-    ) where TAnnotatable : IAnnotatable
+    )
+        where TAnnotatable : IAnnotatable
     {
         process(
             annotatable,

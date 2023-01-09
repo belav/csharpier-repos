@@ -10,7 +10,8 @@ using System.Text.Encodings.Web;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class EnumConverter<T> : JsonPrimitiveConverter<T> where T : struct, Enum
+    internal sealed class EnumConverter<T> : JsonPrimitiveConverter<T>
+        where T : struct, Enum
     {
         private static readonly TypeCode s_enumTypeCode = Type.GetTypeCode(typeof(T));
 

@@ -16,7 +16,8 @@ public class GenException<T> : Exception { }
 
 public class GenExceptionSub<T> : GenException<T> { }
 
-public struct Gen<Ex, T> where Ex : GenException<T>
+public struct Gen<Ex, T>
+    where Ex : GenException<T>
 {
     public void ExceptionTest(Ex e)
     {

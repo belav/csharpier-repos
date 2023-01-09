@@ -1536,12 +1536,14 @@ namespace Microsoft.CodeAnalysis.Editing
 
         internal abstract SeparatedSyntaxList<TElement> SeparatedList<TElement>(
             SyntaxNodeOrTokenList list
-        ) where TElement : SyntaxNode;
+        )
+            where TElement : SyntaxNode;
 
         internal abstract SeparatedSyntaxList<TElement> SeparatedList<TElement>(
             IEnumerable<TElement> nodes,
             IEnumerable<SyntaxToken> separators
-        ) where TElement : SyntaxNode;
+        )
+            where TElement : SyntaxNode;
 
         internal static SyntaxTokenList Merge(SyntaxTokenList original, SyntaxTokenList newList)
         {
@@ -1573,7 +1575,8 @@ namespace Microsoft.CodeAnalysis.Editing
         protected static SyntaxNode? PreserveTrivia<TNode>(
             TNode? node,
             Func<TNode, SyntaxNode> nodeChanger
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             if (node == null)
             {
@@ -1616,7 +1619,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxNode root,
             TNode original,
             Func<TNode, SyntaxNode> replacer
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return ReplaceWithTrivia(root, original, replacer(original));
         }
@@ -1638,7 +1642,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Creates a new instance of the node with the leading and trailing trivia removed and replaced with elastic markers.
         /// </summary>
         [return: MaybeNull, NotNullIfNotNull("node")]
-        public abstract TNode ClearTrivia<TNode>([MaybeNull] TNode node) where TNode : SyntaxNode;
+        public abstract TNode ClearTrivia<TNode>([MaybeNull] TNode node)
+            where TNode : SyntaxNode;
 
 #pragma warning disable CA1822 // Mark members as static - shipped public API
         protected int IndexOf<T>(IReadOnlyList<T> list, T element)
@@ -1674,7 +1679,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SeparatedSyntaxList<TNode> list,
             int offset,
             int count
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (; count > 0 && offset < list.Count; count--)
             {
@@ -1688,7 +1694,8 @@ namespace Microsoft.CodeAnalysis.Editing
             SyntaxList<TNode> list,
             int offset,
             int count
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             for (; count > 0 && offset < list.Count; count--)
             {

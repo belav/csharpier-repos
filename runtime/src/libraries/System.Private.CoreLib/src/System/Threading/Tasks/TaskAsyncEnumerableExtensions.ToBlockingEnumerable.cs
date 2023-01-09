@@ -84,7 +84,8 @@ namespace System.Threading.Tasks
             }
 
             [UnsupportedOSPlatform("browser")]
-            public void Wait<TAwaiter>(TAwaiter awaiter) where TAwaiter : ICriticalNotifyCompletion
+            public void Wait<TAwaiter>(TAwaiter awaiter)
+                where TAwaiter : ICriticalNotifyCompletion
             {
                 awaiter.UnsafeOnCompleted(_onCompleted);
                 Wait();

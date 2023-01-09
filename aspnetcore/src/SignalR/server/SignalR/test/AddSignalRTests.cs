@@ -300,7 +300,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         }
     }
 
-    public class CustomHubActivator<THub> : IHubActivator<THub> where THub : Hub
+    public class CustomHubActivator<THub> : IHubActivator<THub>
+        where THub : Hub
     {
         public THub Create()
         {
@@ -313,7 +314,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         }
     }
 
-    public class CustomHubContext<THub> : IHubContext<THub> where THub : Hub
+    public class CustomHubContext<THub> : IHubContext<THub>
+        where THub : Hub
     {
         public IHubClients Clients => throw new System.NotImplementedException();
 
@@ -329,7 +331,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public IGroupManager Groups => throw new System.NotImplementedException();
     }
 
-    public class CustomHubLifetimeManager<THub> : HubLifetimeManager<THub> where THub : Hub
+    public class CustomHubLifetimeManager<THub> : HubLifetimeManager<THub>
+        where THub : Hub
     {
         public override Task AddToGroupAsync(
             string connectionId,

@@ -1317,7 +1317,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.conversions
             return TestMethodForReferenceConversionFromStringToObjectInAssignment<object>();
         }
 
-        private static bool TestMethodForReferenceConversionToBaseClassInAssignment<T>() where T : B
+        private static bool TestMethodForReferenceConversionToBaseClassInAssignment<T>()
+            where T : B
         {
             int failcount = 0;
             var origin = new C();

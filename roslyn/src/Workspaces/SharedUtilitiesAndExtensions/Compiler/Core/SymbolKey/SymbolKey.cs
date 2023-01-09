@@ -272,7 +272,8 @@ namespace Microsoft.CodeAnalysis
             PooledArrayBuilder<TSymbol> symbols,
             string reasonIfFailed,
             out string? failureReason
-        ) where TSymbol : class, ISymbol
+        )
+            where TSymbol : class, ISymbol
         {
             if (symbols.Builder.Count == 0)
             {
@@ -294,8 +295,8 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static T? SafeGet<T>(ImmutableArray<T> values, int index) where T : class =>
-            index < values.Length ? values[index] : null;
+        private static T? SafeGet<T>(ImmutableArray<T> values, int index)
+            where T : class => index < values.Length ? values[index] : null;
 
         private static bool Equals(Compilation compilation, string? name1, string? name2) =>
             Equals(compilation.IsCaseSensitive, name1, name2);
@@ -339,7 +340,8 @@ namespace Microsoft.CodeAnalysis
         private static PooledArrayBuilder<TSymbol> GetMembersOfNamedType<TSymbol>(
             SymbolKeyResolution containingTypeResolution,
             string? metadataName
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             var result = PooledArrayBuilder<TSymbol>.GetInstance();
             foreach (var containingType in containingTypeResolution.OfType<INamedTypeSymbol>())

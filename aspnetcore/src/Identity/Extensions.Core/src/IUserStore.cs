@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store which manages user accounts.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserStore<TUser> : IDisposable where TUser : class
+public interface IUserStore<TUser> : IDisposable
+    where TUser : class
 {
     /// <summary>
     /// Gets the user identifier for the specified <paramref name="user"/>.

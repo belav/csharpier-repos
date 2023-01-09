@@ -42,7 +42,8 @@ public class Grid1<TEntity> : MarshalByRefObject
     }
 }
 
-public class Grid2<TEntity> : MarshalByRefObject where TEntity : EntityBase, new()
+public class Grid2<TEntity> : MarshalByRefObject
+    where TEntity : EntityBase, new()
 {
     public int num;
 

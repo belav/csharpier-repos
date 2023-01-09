@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal partial class ExtensionOrderer
     {
-        private class Graph<TExtension, TMetadata> where TMetadata : OrderableMetadata
+        private class Graph<TExtension, TMetadata>
+            where TMetadata : OrderableMetadata
         {
             public readonly Dictionary<
                 Lazy<TExtension, TMetadata>,

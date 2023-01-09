@@ -1245,7 +1245,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 ) => null;
             }
 
-            static void CallStaticGvm<TGvmBase>() where TGvmBase : IGvmBase
+            static void CallStaticGvm<TGvmBase>()
+                where TGvmBase : IGvmBase
             {
                 TGvmBase.AnnotatedStaticGvm<string>(typeof(string));
                 TGvmBase.UnannotatedStaticGvm<string>(typeof(string));

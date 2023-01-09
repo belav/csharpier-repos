@@ -39,7 +39,8 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax;
 /// Rationale:
 ///    If there is no intent for reusing the object, do not use pool - just use "new".
 /// </summary>
-internal class ObjectPool<T> where T : class
+internal class ObjectPool<T>
+    where T : class
 {
     private struct Element
     {

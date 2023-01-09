@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     /// Each of those tests calls a Validation function that calculates the expected result and then
     /// compares it to the actual result of the set operation.
     /// </summary>
-    public abstract class ISet_Generic_Tests<T> : ICollection_Generic_Tests<T> where T : notnull
+    public abstract class ISet_Generic_Tests<T> : ICollection_Generic_Tests<T>
+        where T : notnull
     {
         #region ISet<T> Helper methods
 

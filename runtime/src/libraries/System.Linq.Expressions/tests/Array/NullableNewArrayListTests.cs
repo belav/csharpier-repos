@@ -584,7 +584,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckNullableGenericWithStructRestrictionArrayList<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Ts?[][] array = new Ts?[][]
             {
@@ -1001,7 +1002,8 @@ namespace System.Linq.Expressions.Tests
             Ts?[] val,
             Expression[] exprs,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts?[]>> e = Expression.Lambda<Func<Ts?[]>>(
                 Expression.NewArrayInit(typeof(Ts?), exprs),

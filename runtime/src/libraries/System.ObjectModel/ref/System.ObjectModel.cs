@@ -7,7 +7,8 @@
 namespace System.Collections.ObjectModel
 {
     public abstract partial class KeyedCollection<TKey, TItem>
-        : System.Collections.ObjectModel.Collection<TItem> where TKey : notnull
+        : System.Collections.ObjectModel.Collection<TItem>
+        where TKey : notnull
     {
         protected KeyedCollection() { }
 

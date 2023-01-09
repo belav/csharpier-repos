@@ -205,7 +205,8 @@ namespace System.Web.WebPages
             return CreateInstanceOfType<object>(virtualPath);
         }
 
-        public T CreateInstanceOfType<T>(string virtualPath) where T : class
+        public T CreateInstanceOfType<T>(string virtualPath)
+            where T : class
         {
             if (_isPrecompiled)
             {

@@ -750,7 +750,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassRestrictionCoalesceHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             TC[] array1 = new TC[] { null, default(TC), (TC)new C() };
             TC[] array2 = new TC[] { null, default(TC), (TC)new C() };
@@ -765,7 +766,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassAndNewRestrictionCoalesceHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Tcn[] array1 = new Tcn[] { null, default(Tcn), new Tcn() };
             Tcn[] array2 = new Tcn[] { null, default(Tcn), new Tcn() };
@@ -780,7 +782,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassAndNewRestrictionCoalesceHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             TCn[] array1 = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
             TCn[] array2 = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
@@ -833,7 +836,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionCoalesce_NullableHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Ts?[] array = new Ts?[] { null, default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)

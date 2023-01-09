@@ -171,7 +171,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     public virtual PropertyBuilder HasValueGenerator<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             TGenerator
-    >() where TGenerator : ValueGenerator
+    >()
+        where TGenerator : ValueGenerator
     {
         Builder.HasValueGenerator(typeof(TGenerator), ConfigurationSource.Explicit);
 
@@ -274,7 +275,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasValueGeneratorFactory<
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)] TFactory
-    >() where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
+    >()
+        where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -604,7 +606,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
             TConversion,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
             TComparer
-    >() where TComparer : ValueComparer => HasConversion(typeof(TConversion), typeof(TComparer));
+    >()
+        where TComparer : ValueComparer => HasConversion(typeof(TConversion), typeof(TComparer));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before

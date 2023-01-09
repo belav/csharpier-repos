@@ -227,7 +227,8 @@ namespace System
             int searchSpaceLength,
             ref T value,
             int valueLength
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
@@ -667,7 +668,8 @@ namespace System
             int searchSpaceLength,
             ref T value,
             int valueLength
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
@@ -743,7 +745,8 @@ namespace System
             int searchSpaceLength,
             ref T value,
             int valueLength
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
@@ -989,7 +992,8 @@ namespace System
             T value1,
             T value2,
             int length
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             Debug.Assert(length >= 0);
 
@@ -1108,7 +1112,8 @@ namespace System
             int searchSpaceLength,
             ref T value,
             int valueLength
-        ) where T : IEquatable<T>?
+        )
+            where T : IEquatable<T>?
         {
             Debug.Assert(searchSpaceLength >= 0);
             Debug.Assert(valueLength >= 0);
@@ -1442,7 +1447,8 @@ namespace System
             int firstLength,
             ref T second,
             int secondLength
-        ) where T : IComparable<T>?
+        )
+            where T : IComparable<T>?
         {
             Debug.Assert(firstLength >= 0);
             Debug.Assert(secondLength >= 0);
@@ -1862,7 +1868,8 @@ namespace System
             T value0,
             T value1,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, DontNegate<T>>(ref searchSpace, value0, value1, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1871,7 +1878,8 @@ namespace System
             T value0,
             T value1,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, Negate<T>>(ref searchSpace, value0, value1, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2122,7 +2130,8 @@ namespace System
             T value1,
             T value2,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, DontNegate<T>>(ref searchSpace, value0, value1, value2, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2132,7 +2141,8 @@ namespace System
             T value1,
             T value2,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, Negate<T>>(ref searchSpace, value0, value1, value2, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2451,7 +2461,8 @@ namespace System
             T value2,
             T value3,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, DontNegate<T>>(
                 ref searchSpace,
                 value0,
@@ -2469,7 +2480,8 @@ namespace System
             T value2,
             T value3,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, Negate<T>>(
                 ref searchSpace,
                 value0,
@@ -2699,7 +2711,8 @@ namespace System
             T value3,
             T value4,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, DontNegate<T>>(
                 ref searchSpace,
                 value0,
@@ -2719,7 +2732,8 @@ namespace System
             T value3,
             T value4,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             IndexOfAnyValueType<T, Negate<T>>(
                 ref searchSpace,
                 value0,
@@ -3132,7 +3146,8 @@ namespace System
             T value0,
             T value1,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, DontNegate<T>>(ref searchSpace, value0, value1, length);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -3141,7 +3156,8 @@ namespace System
             T value0,
             T value1,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, Negate<T>>(ref searchSpace, value0, value1, length);
 
         [MethodImpl(MethodImplOptions.AggressiveOptimization)]
@@ -3334,7 +3350,8 @@ namespace System
             T value1,
             T value2,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, DontNegate<T>>(
                 ref searchSpace,
                 value0,
@@ -3350,7 +3367,8 @@ namespace System
             T value1,
             T value2,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, Negate<T>>(ref searchSpace, value0, value1, value2, length);
 
         [MethodImpl(MethodImplOptions.AggressiveOptimization)]
@@ -3608,7 +3626,8 @@ namespace System
             T value2,
             T value3,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, DontNegate<T>>(
                 ref searchSpace,
                 value0,
@@ -3626,7 +3645,8 @@ namespace System
             T value2,
             T value3,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, Negate<T>>(
                 ref searchSpace,
                 value0,
@@ -3828,7 +3848,8 @@ namespace System
             return -1;
         }
 
-        public static void Replace<T>(Span<T> span, T oldValue, T newValue) where T : IEquatable<T>?
+        public static void Replace<T>(Span<T> span, T oldValue, T newValue)
+            where T : IEquatable<T>?
         {
             if (default(T) is not null || oldValue is not null)
             {
@@ -3859,7 +3880,8 @@ namespace System
             T oldValue,
             T newValue,
             nuint length
-        ) where T : struct
+        )
+            where T : struct
         {
             if (!Vector128.IsHardwareAccelerated || length < (uint)Vector128<T>.Count)
             {
@@ -3953,7 +3975,8 @@ namespace System
             T value3,
             T value4,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, DontNegate<T>>(
                 ref searchSpace,
                 value0,
@@ -3973,7 +3996,8 @@ namespace System
             T value3,
             T value4,
             int length
-        ) where T : struct, INumber<T> =>
+        )
+            where T : struct, INumber<T> =>
             LastIndexOfAnyValueType<T, Negate<T>>(
                 ref searchSpace,
                 value0,
@@ -4184,7 +4208,8 @@ namespace System
             ref T searchSpace,
             ref T current,
             Vector128<T> equals
-        ) where T : struct
+        )
+            where T : struct
         {
             uint notEqualsElements = equals.ExtractMostSignificantBits();
             int index = BitOperations.TrailingZeroCount(notEqualsElements);
@@ -4196,7 +4221,8 @@ namespace System
             ref T searchSpace,
             ref T current,
             Vector256<T> equals
-        ) where T : struct
+        )
+            where T : struct
         {
             uint notEqualsElements = equals.ExtractMostSignificantBits();
             int index = BitOperations.TrailingZeroCount(notEqualsElements);
@@ -4204,7 +4230,8 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ComputeLastIndex<T>(nint offset, Vector128<T> equals) where T : struct
+        private static int ComputeLastIndex<T>(nint offset, Vector128<T> equals)
+            where T : struct
         {
             uint notEqualsElements = equals.ExtractMostSignificantBits();
             int index = 31 - BitOperations.LeadingZeroCount(notEqualsElements); // 31 = 32 (bits in Int32) - 1 (indexing from zero)
@@ -4212,21 +4239,24 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static int ComputeLastIndex<T>(nint offset, Vector256<T> equals) where T : struct
+        private static int ComputeLastIndex<T>(nint offset, Vector256<T> equals)
+            where T : struct
         {
             uint notEqualsElements = equals.ExtractMostSignificantBits();
             int index = 31 - BitOperations.LeadingZeroCount(notEqualsElements); // 31 = 32 (bits in Int32) - 1 (indexing from zero)
             return (int)offset + index;
         }
 
-        internal interface INegator<T> where T : struct
+        internal interface INegator<T>
+            where T : struct
         {
             static abstract bool NegateIfNeeded(bool equals);
             static abstract Vector128<T> NegateIfNeeded(Vector128<T> equals);
             static abstract Vector256<T> NegateIfNeeded(Vector256<T> equals);
         }
 
-        internal readonly struct DontNegate<T> : INegator<T> where T : struct
+        internal readonly struct DontNegate<T> : INegator<T>
+            where T : struct
         {
             public static bool NegateIfNeeded(bool equals) => equals;
 
@@ -4235,7 +4265,8 @@ namespace System
             public static Vector256<T> NegateIfNeeded(Vector256<T> equals) => equals;
         }
 
-        internal readonly struct Negate<T> : INegator<T> where T : struct
+        internal readonly struct Negate<T> : INegator<T>
+            where T : struct
         {
             public static bool NegateIfNeeded(bool equals) => !equals;
 
@@ -4249,7 +4280,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             for (int i = 0; i < length; i++)
             {
@@ -4271,7 +4303,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             for (int i = 0; i < length; i++)
             {
@@ -4290,7 +4323,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
+        )
+            where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
             IndexOfAnyInRangeUnsignedNumber<T, DontNegate<T>>(
                 ref searchSpace,
                 lowInclusive,
@@ -4303,7 +4337,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
+        )
+            where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
             IndexOfAnyInRangeUnsignedNumber<T, Negate<T>>(
                 ref searchSpace,
                 lowInclusive,
@@ -4476,7 +4511,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             for (int i = length - 1; i >= 0; i--)
             {
@@ -4498,7 +4534,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : IComparable<T>
+        )
+            where T : IComparable<T>
         {
             for (int i = length - 1; i >= 0; i--)
             {
@@ -4517,7 +4554,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
+        )
+            where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
             LastIndexOfAnyInRangeUnsignedNumber<T, DontNegate<T>>(
                 ref searchSpace,
                 lowInclusive,
@@ -4530,7 +4568,8 @@ namespace System
             T lowInclusive,
             T highInclusive,
             int length
-        ) where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
+        )
+            where T : struct, IUnsignedNumber<T>, IComparisonOperators<T, T, bool> =>
             LastIndexOfAnyInRangeUnsignedNumber<T, Negate<T>>(
                 ref searchSpace,
                 lowInclusive,

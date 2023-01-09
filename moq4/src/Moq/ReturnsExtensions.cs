@@ -27,7 +27,8 @@ namespace Moq
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             TResult value
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.ReturnsAsync(() => value);
         }
@@ -42,7 +43,8 @@ namespace Moq
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             TResult value
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.ReturnsAsync(() => value);
         }
@@ -57,7 +59,8 @@ namespace Moq
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Func<TResult> valueFunction
-        ) where TMock : class
+        )
+            where TMock : class
         {
             if (IsNullResult(valueFunction, typeof(TResult)))
             {
@@ -77,7 +80,8 @@ namespace Moq
         public static IReturnsResult<TMock> ReturnsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Func<TResult> valueFunction
-        ) where TMock : class
+        )
+            where TMock : class
         {
             if (IsNullResult(valueFunction, typeof(TResult)))
             {
@@ -96,7 +100,8 @@ namespace Moq
         public static IReturnsResult<TMock> ThrowsAsync<TMock>(
             this IReturns<TMock, Task> mock,
             Exception exception
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.Returns(() =>
             {
@@ -115,7 +120,8 @@ namespace Moq
         public static IReturnsResult<TMock> ThrowsAsync<TMock>(
             this IReturns<TMock, ValueTask> mock,
             Exception exception
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.Returns(() =>
             {
@@ -135,7 +141,8 @@ namespace Moq
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, Task<TResult>> mock,
             Exception exception
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.Returns(() =>
             {
@@ -155,7 +162,8 @@ namespace Moq
         public static IReturnsResult<TMock> ThrowsAsync<TMock, TResult>(
             this IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return mock.Returns(() =>
             {
@@ -174,7 +182,8 @@ namespace Moq
             this IReturns<TMock, Task<TResult>> mock,
             TResult value,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return DelayedResult(mock, value, delay);
         }
@@ -186,7 +195,8 @@ namespace Moq
             this IReturns<TMock, ValueTask<TResult>> mock,
             TResult value,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return DelayedResult(mock, value, delay);
         }
@@ -199,7 +209,8 @@ namespace Moq
             TResult value,
             TimeSpan minDelay,
             TimeSpan maxDelay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             var delay = GetDelay(minDelay, maxDelay, Random);
 
@@ -214,7 +225,8 @@ namespace Moq
             TResult value,
             TimeSpan minDelay,
             TimeSpan maxDelay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             var delay = GetDelay(minDelay, maxDelay, Random);
 
@@ -231,7 +243,8 @@ namespace Moq
             TimeSpan minDelay,
             TimeSpan maxDelay,
             Random random
-        ) where TMock : class
+        )
+            where TMock : class
         {
             if (random == null)
                 throw new ArgumentNullException(nameof(random));
@@ -251,7 +264,8 @@ namespace Moq
             TimeSpan minDelay,
             TimeSpan maxDelay,
             Random random
-        ) where TMock : class
+        )
+            where TMock : class
         {
             if (random == null)
                 throw new ArgumentNullException(nameof(random));
@@ -268,7 +282,8 @@ namespace Moq
             this IReturns<TMock, Task<TResult>> mock,
             Exception exception,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return DelayedException(mock, exception, delay);
         }
@@ -280,7 +295,8 @@ namespace Moq
             this IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             return DelayedException(mock, exception, delay);
         }
@@ -293,7 +309,8 @@ namespace Moq
             Exception exception,
             TimeSpan minDelay,
             TimeSpan maxDelay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             var delay = GetDelay(minDelay, maxDelay, Random);
 
@@ -308,7 +325,8 @@ namespace Moq
             Exception exception,
             TimeSpan minDelay,
             TimeSpan maxDelay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             var delay = GetDelay(minDelay, maxDelay, Random);
 
@@ -325,7 +343,8 @@ namespace Moq
             TimeSpan minDelay,
             TimeSpan maxDelay,
             Random random
-        ) where TMock : class
+        )
+            where TMock : class
         {
             if (random == null)
                 throw new ArgumentNullException(nameof(random));
@@ -345,7 +364,8 @@ namespace Moq
             TimeSpan minDelay,
             TimeSpan maxDelay,
             Random random
-        ) where TMock : class
+        )
+            where TMock : class
         {
             if (random == null)
                 throw new ArgumentNullException(nameof(random));
@@ -382,7 +402,8 @@ namespace Moq
             IReturns<TMock, Task<TResult>> mock,
             TResult value,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             Guard.Positive(delay);
 
@@ -396,7 +417,8 @@ namespace Moq
             IReturns<TMock, ValueTask<TResult>> mock,
             TResult value,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             Guard.Positive(delay);
 
@@ -410,7 +432,8 @@ namespace Moq
             IReturns<TMock, Task<TResult>> mock,
             Exception exception,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             Guard.Positive(delay);
 
@@ -426,7 +449,8 @@ namespace Moq
             IReturns<TMock, ValueTask<TResult>> mock,
             Exception exception,
             TimeSpan delay
-        ) where TMock : class
+        )
+            where TMock : class
         {
             Guard.Positive(delay);
 

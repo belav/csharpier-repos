@@ -9,7 +9,8 @@ namespace WeakReferenceTest
     {
         static GCHandle[] table = new GCHandle[1024 * 1024];
 
-        public static T Probe<T>(int hc) where T : class
+        public static T Probe<T>(int hc)
+            where T : class
         {
             int index = hc & (table.Length - 1);
             lock (table)
@@ -21,7 +22,8 @@ namespace WeakReferenceTest
             }
         }
 
-        public static T Add<T>(T obj, int hc) where T : class
+        public static T Add<T>(T obj, int hc)
+            where T : class
         {
             int index = hc & (table.Length - 1);
             lock (table)

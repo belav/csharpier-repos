@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
 public abstract class NorthwindBulkUpdatesFixture<TModelCustomizer>
     : NorthwindQueryRelationalFixture<TModelCustomizer>,
-        IBulkUpdatesFixtureBase where TModelCustomizer : IModelCustomizer, new()
+        IBulkUpdatesFixtureBase
+    where TModelCustomizer : IModelCustomizer, new()
 {
     protected override string StoreName => "BulkUpdatesNorthwind";
 

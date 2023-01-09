@@ -119,7 +119,8 @@ namespace System.Runtime.InteropServices
         /// elements in an array.  Must be called before using the SafeBuffer.
         /// </summary>
         [CLSCompliant(false)]
-        public void Initialize<T>(uint numElements) where T : struct
+        public void Initialize<T>(uint numElements)
+            where T : struct
         {
             Initialize(numElements, AlignedSizeOf<T>());
         }
@@ -185,7 +186,8 @@ namespace System.Runtime.InteropServices
         /// may have to consider alignment.</param>
         /// <returns>An instance of T read from memory.</returns>
         [CLSCompliant(false)]
-        public T Read<T>(ulong byteOffset) where T : struct
+        public T Read<T>(ulong byteOffset)
+            where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -219,7 +221,8 @@ namespace System.Runtime.InteropServices
         /// <param name="index">The location in the output array to begin writing to.</param>
         /// <param name="count">The number of value types to read from the input array and to write to the output array.</param>
         [CLSCompliant(false)]
-        public void ReadArray<T>(ulong byteOffset, T[] array, int index, int count) where T : struct
+        public void ReadArray<T>(ulong byteOffset, T[] array, int index, int count)
+            where T : struct
         {
             ArgumentNullException.ThrowIfNull(array);
 
@@ -237,7 +240,8 @@ namespace System.Runtime.InteropServices
         /// <param name="byteOffset">The location from which to start reading.</param>
         /// <param name="buffer">The output span to write to.</param>
         [CLSCompliant(false)]
-        public void ReadSpan<T>(ulong byteOffset, Span<T> buffer) where T : struct
+        public void ReadSpan<T>(ulong byteOffset, Span<T> buffer)
+            where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -275,7 +279,8 @@ namespace System.Runtime.InteropServices
         /// may have to consider alignment.</param>
         /// <param name="value">The value type to write to memory.</param>
         [CLSCompliant(false)]
-        public void Write<T>(ulong byteOffset, T value) where T : struct
+        public void Write<T>(ulong byteOffset, T value)
+            where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -328,7 +333,8 @@ namespace System.Runtime.InteropServices
         /// <param name="byteOffset">The location in memory to write to.</param>
         /// <param name="data">The input span.</param>
         [CLSCompliant(false)]
-        public void WriteSpan<T>(ulong byteOffset, ReadOnlySpan<T> data) where T : struct
+        public void WriteSpan<T>(ulong byteOffset, ReadOnlySpan<T> data)
+            where T : struct
         {
             if (_numBytes == Uninitialized)
                 throw NotInitialized();
@@ -398,7 +404,8 @@ namespace System.Runtime.InteropServices
         /// value that sizeof(T) returns! Since the primary use case is to parse memory mapped files, we cannot change this algorithm as this defines a de-facto serialization format.
         /// Throws if T contains GC references.
         /// </summary>
-        internal static uint AlignedSizeOf<T>() where T : struct
+        internal static uint AlignedSizeOf<T>()
+            where T : struct
         {
             uint size = SizeOf<T>();
             if (size == 1 || size == 2)
@@ -412,7 +419,8 @@ namespace System.Runtime.InteropServices
         /// <summary>
         /// Returns same value as sizeof(T) but throws if T contains GC references.
         /// </summary>
-        internal static uint SizeOf<T>() where T : struct
+        internal static uint SizeOf<T>()
+            where T : struct
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
                 throw new ArgumentException(SR.Argument_NeedStructWithNoRefs);

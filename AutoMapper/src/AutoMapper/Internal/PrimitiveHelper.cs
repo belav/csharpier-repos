@@ -25,8 +25,8 @@ public static class PrimitiveHelper
         return list;
     }
 
-    public static ReadOnlyCollection<T> ToReadOnly<T>(this T item) where T : Expression =>
-        new ReadOnlyCollectionBuilder<T> { item }.ToReadOnlyCollection();
+    public static ReadOnlyCollection<T> ToReadOnly<T>(this T item)
+        where T : Expression => new ReadOnlyCollectionBuilder<T> { item }.ToReadOnlyCollection();
 
     public static IReadOnlyCollection<T> NullCheck<T>(this IReadOnlyCollection<T> source) =>
         source ?? Array.Empty<T>();

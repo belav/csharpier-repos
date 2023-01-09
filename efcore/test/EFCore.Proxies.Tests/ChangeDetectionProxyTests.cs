@@ -339,7 +339,8 @@ public class ChangeDetectionProxyTests
         Assert.True(eventRaised);
     }
 
-    private class ChangeContext<TEntity> : TestContext<TEntity> where TEntity : class
+    private class ChangeContext<TEntity> : TestContext<TEntity>
+        where TEntity : class
     {
         private readonly Action<EntityTypeBuilder<TEntity>> _entityBuilderAction;
 
@@ -367,7 +368,8 @@ public class ChangeDetectionProxyTests
         }
     }
 
-    private class SharedChangeContext<TEntity> : DbContext where TEntity : class
+    private class SharedChangeContext<TEntity> : DbContext
+        where TEntity : class
     {
         private readonly Action<EntityTypeBuilder<TEntity>> _entityBuilderAction;
 

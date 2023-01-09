@@ -82,7 +82,8 @@ internal sealed class HtmlRenderer : Renderer
 
     public Task<ComponentRenderedText> RenderComponentAsync<TComponent>(
         ParameterView initialParameters
-    ) where TComponent : IComponent
+    )
+        where TComponent : IComponent
     {
         return RenderComponentAsync(typeof(TComponent), initialParameters);
     }

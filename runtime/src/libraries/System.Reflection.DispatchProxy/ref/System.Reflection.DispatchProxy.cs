@@ -47,7 +47,8 @@ namespace System.Reflection
                     .PublicParameterlessConstructor
             )]
                 TProxy
-        >() where TProxy : System.Reflection.DispatchProxy
+        >()
+            where TProxy : System.Reflection.DispatchProxy
         {
             throw null;
         }

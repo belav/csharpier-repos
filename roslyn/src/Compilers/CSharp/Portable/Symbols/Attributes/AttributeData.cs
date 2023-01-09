@@ -263,7 +263,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) where T : WellKnownAttributeData, ISecurityAttributeTarget, new()
+        )
+            where T : WellKnownAttributeData, ISecurityAttributeTarget, new()
         {
             Debug.Assert(!this.HasErrors);
             Debug.Assert(arguments.Diagnostics is BindingDiagnosticBag);
@@ -318,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) where T : WellKnownAttributeData, ISkipLocalsInitAttributeTarget, new()
+        )
+            where T : WellKnownAttributeData, ISkipLocalsInitAttributeTarget, new()
         {
             arguments.GetOrCreateData<T>().HasSkipLocalsInitAttribute = true;
             if (!compilation.Options.AllowUnsafe)
@@ -338,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) where T : WellKnownAttributeData, IMemberNotNullAttributeTarget, new()
+        )
+            where T : WellKnownAttributeData, IMemberNotNullAttributeTarget, new()
         {
             var value = arguments.Attribute.CommonConstructorArguments[0];
             if (value.IsNull)
@@ -406,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 CSharpAttributeData,
                 AttributeLocation
             > arguments
-        ) where T : WellKnownAttributeData, IMemberNotNullAttributeTarget, new()
+        )
+            where T : WellKnownAttributeData, IMemberNotNullAttributeTarget, new()
         {
             var value = arguments.Attribute.CommonConstructorArguments[1];
             if (value.IsNull)

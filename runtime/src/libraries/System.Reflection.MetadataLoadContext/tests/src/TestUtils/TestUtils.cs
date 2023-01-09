@@ -46,7 +46,8 @@ namespace System.Reflection.Tests
             public sealed override IList<CustomAttributeNamedArgument> NamedArguments => _cans;
         }
 
-        public static T UnprojectAndInstantiate<T>(this CustomAttributeData cad) where T : Attribute
+        public static T UnprojectAndInstantiate<T>(this CustomAttributeData cad)
+            where T : Attribute
         {
             CustomAttributeData runtimeCad = cad.ProjectBackToRuntime();
             return runtimeCad.Instantiate<T>();

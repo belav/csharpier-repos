@@ -19,7 +19,8 @@ internal partial class VectorTest
         _ => DefaultSeed
     };
 
-    private class VectorCopyToArrayTest<T> where T : struct, IComparable<T>, IEquatable<T>
+    private class VectorCopyToArrayTest<T>
+        where T : struct, IComparable<T>, IEquatable<T>
     {
         public static int VectorCopyToArray(int size, Random random)
         {

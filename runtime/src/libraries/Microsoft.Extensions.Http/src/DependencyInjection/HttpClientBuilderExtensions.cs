@@ -155,7 +155,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddHttpMessageHandler<THandler>(
             this IHttpClientBuilder builder
-        ) where THandler : DelegatingHandler
+        )
+            where THandler : DelegatingHandler
         {
             ThrowHelper.ThrowIfNull(builder);
 
@@ -259,7 +260,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler<THandler>(
             this IHttpClientBuilder builder
-        ) where THandler : HttpMessageHandler
+        )
+            where THandler : HttpMessageHandler
         {
             ThrowHelper.ThrowIfNull(builder);
 
@@ -326,7 +328,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         public static IHttpClientBuilder AddTypedClient<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(this IHttpClientBuilder builder) where TClient : class
+        >(this IHttpClientBuilder builder)
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
 
@@ -335,7 +338,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         internal static IHttpClientBuilder AddTypedClientCore<
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
-        >(this IHttpClientBuilder builder, bool validateSingleType) where TClient : class
+        >(this IHttpClientBuilder builder, bool validateSingleType)
+            where TClient : class
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
@@ -352,7 +356,8 @@ namespace Microsoft.Extensions.DependencyInjection
         private static TClient AddTransientHelper<TClient>(
             IServiceProvider s,
             IHttpClientBuilder builder
-        ) where TClient : class
+        )
+            where TClient : class
         {
             IHttpClientFactory httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
             HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
@@ -469,7 +474,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddTypedClient<TClient>(
             this IHttpClientBuilder builder,
             Func<HttpClient, TClient> factory
-        ) where TClient : class
+        )
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(factory);
@@ -481,7 +487,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IHttpClientBuilder builder,
             Func<HttpClient, TClient> factory,
             bool validateSingleType
-        ) where TClient : class
+        )
+            where TClient : class
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
@@ -520,7 +527,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IHttpClientBuilder AddTypedClient<TClient>(
             this IHttpClientBuilder builder,
             Func<HttpClient, IServiceProvider, TClient> factory
-        ) where TClient : class
+        )
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(factory);
@@ -532,7 +540,8 @@ namespace Microsoft.Extensions.DependencyInjection
             this IHttpClientBuilder builder,
             Func<HttpClient, IServiceProvider, TClient> factory,
             bool validateSingleType
-        ) where TClient : class
+        )
+            where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(factory);

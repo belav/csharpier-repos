@@ -157,7 +157,8 @@ internal sealed class KestrelServerImpl : IServer
     public async Task StartAsync<TContext>(
         IHttpApplication<TContext> application,
         CancellationToken cancellationToken
-    ) where TContext : notnull
+    )
+        where TContext : notnull
     {
         try
         {

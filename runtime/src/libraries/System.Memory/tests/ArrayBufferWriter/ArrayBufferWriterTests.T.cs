@@ -8,7 +8,8 @@ using Xunit;
 
 namespace System.Buffers.Tests
 {
-    public abstract class ArrayBufferWriterTests<T> where T : IEquatable<T>
+    public abstract class ArrayBufferWriterTests<T>
+        where T : IEquatable<T>
     {
         [Fact]
         public void ArrayBufferWriter_Ctor()

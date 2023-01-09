@@ -112,7 +112,8 @@ namespace System.Buffers
         public static System.SequencePosition? PositionOf<T>(
             this in System.Buffers.ReadOnlySequence<T> source,
             T value
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -387,7 +388,8 @@ namespace System.Buffers
         }
     }
 
-    public ref partial struct SequenceReader<T> where T : unmanaged, System.IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : unmanaged, System.IEquatable<T>
     {
         private object _dummy;
         private int _dummyPrimitive;
@@ -933,7 +935,8 @@ namespace System
             this System.ReadOnlySpan<T> span,
             T value,
             TComparer comparer
-        ) where TComparer : System.Collections.Generic.IComparer<T>
+        )
+            where TComparer : System.Collections.Generic.IComparer<T>
         {
             throw null;
         }
@@ -941,7 +944,8 @@ namespace System
         public static int BinarySearch<T, TComparable>(
             this System.ReadOnlySpan<T> span,
             TComparable comparable
-        ) where TComparable : System.IComparable<T>
+        )
+            where TComparable : System.IComparable<T>
         {
             throw null;
         }
@@ -950,7 +954,8 @@ namespace System
             this System.Span<T> span,
             T value,
             TComparer comparer
-        ) where TComparer : System.Collections.Generic.IComparer<T>
+        )
+            where TComparer : System.Collections.Generic.IComparer<T>
         {
             throw null;
         }
@@ -958,7 +963,8 @@ namespace System
         public static int BinarySearch<T, TComparable>(
             this System.Span<T> span,
             TComparable comparable
-        ) where TComparable : System.IComparable<T>
+        )
+            where TComparable : System.IComparable<T>
         {
             throw null;
         }
@@ -1043,7 +1049,8 @@ namespace System
         public static bool EndsWith<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> value
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1099,7 +1106,8 @@ namespace System
         public static int IndexOfAny<T>(
             this System.ReadOnlySpan<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1107,7 +1115,8 @@ namespace System
         public static int IndexOfAny<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1123,7 +1132,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1131,7 +1141,8 @@ namespace System
         public static int IndexOfAny<T>(
             this System.Span<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1171,7 +1182,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1179,7 +1191,8 @@ namespace System
         public static int IndexOfAnyExcept<T>(
             this System.Span<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1187,7 +1200,8 @@ namespace System
         public static int IndexOfAnyExcept<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1209,7 +1223,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1217,7 +1232,8 @@ namespace System
         public static int IndexOfAnyExcept<T>(
             this System.ReadOnlySpan<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1225,7 +1241,8 @@ namespace System
         public static int IndexOfAnyExcept<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1234,7 +1251,8 @@ namespace System
             this System.ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1243,7 +1261,8 @@ namespace System
             this System.Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1276,7 +1295,8 @@ namespace System
             this System.ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1285,7 +1305,8 @@ namespace System
             this System.Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1307,7 +1328,8 @@ namespace System
         public static int LastIndexOfAny<T>(
             this System.ReadOnlySpan<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1315,7 +1337,8 @@ namespace System
         public static int LastIndexOfAny<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1331,7 +1354,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1339,7 +1363,8 @@ namespace System
         public static int LastIndexOfAny<T>(
             this System.Span<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1379,7 +1404,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1387,7 +1413,8 @@ namespace System
         public static int LastIndexOfAnyExcept<T>(
             this System.Span<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1395,7 +1422,8 @@ namespace System
         public static int LastIndexOfAnyExcept<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1410,7 +1438,8 @@ namespace System
             this System.ReadOnlySpan<T> span,
             T value0,
             T value1
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1420,7 +1449,8 @@ namespace System
             T value0,
             T value1,
             T value2
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1428,7 +1458,8 @@ namespace System
         public static int LastIndexOfAnyExcept<T>(
             this System.ReadOnlySpan<T> span,
             System.Buffers.IndexOfAnyValues<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1436,7 +1467,8 @@ namespace System
         public static int LastIndexOfAnyExcept<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> values
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1445,7 +1477,8 @@ namespace System
             this System.ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1454,7 +1487,8 @@ namespace System
             this System.Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1462,7 +1496,8 @@ namespace System
         public static int LastIndexOf<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> value
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1489,7 +1524,8 @@ namespace System
             this System.ReadOnlySpan<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1498,7 +1534,8 @@ namespace System
             this System.Span<T> span,
             T lowInclusive,
             T highInclusive
-        ) where T : System.IComparable<T>
+        )
+            where T : System.IComparable<T>
         {
             throw null;
         }
@@ -1542,7 +1579,8 @@ namespace System
         public static int SequenceCompareTo<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> other
-        ) where T : System.IComparable<T>?
+        )
+            where T : System.IComparable<T>?
         {
             throw null;
         }
@@ -1550,7 +1588,8 @@ namespace System
         public static int SequenceCompareTo<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> other
-        ) where T : System.IComparable<T>?
+        )
+            where T : System.IComparable<T>?
         {
             throw null;
         }
@@ -1558,7 +1597,8 @@ namespace System
         public static bool SequenceEqual<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> other
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1609,7 +1649,8 @@ namespace System
             this System.Span<TKey> keys,
             System.Span<TValue> items,
             TComparer comparer
-        ) where TComparer : System.Collections.Generic.IComparer<TKey>? { }
+        )
+            where TComparer : System.Collections.Generic.IComparer<TKey>? { }
 
         public static int Split(
             this System.ReadOnlySpan<char> source,
@@ -1663,7 +1704,8 @@ namespace System
         public static bool StartsWith<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> value
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1783,7 +1825,8 @@ namespace System
         public static System.Memory<T> TrimEnd<T>(
             this System.Memory<T> memory,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1797,7 +1840,8 @@ namespace System
         public static System.ReadOnlyMemory<T> TrimEnd<T>(
             this System.ReadOnlyMemory<T> memory,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1805,7 +1849,8 @@ namespace System
         public static System.ReadOnlyMemory<T> TrimEnd<T>(
             this System.ReadOnlyMemory<T> memory,
             T trimElement
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1813,7 +1858,8 @@ namespace System
         public static System.ReadOnlySpan<T> TrimEnd<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1821,7 +1867,8 @@ namespace System
         public static System.ReadOnlySpan<T> TrimEnd<T>(
             this System.ReadOnlySpan<T> span,
             T trimElement
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1829,7 +1876,8 @@ namespace System
         public static System.Span<T> TrimEnd<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1879,7 +1927,8 @@ namespace System
         public static System.Memory<T> TrimStart<T>(
             this System.Memory<T> memory,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1893,7 +1942,8 @@ namespace System
         public static System.ReadOnlyMemory<T> TrimStart<T>(
             this System.ReadOnlyMemory<T> memory,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1901,7 +1951,8 @@ namespace System
         public static System.ReadOnlyMemory<T> TrimStart<T>(
             this System.ReadOnlyMemory<T> memory,
             T trimElement
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1909,7 +1960,8 @@ namespace System
         public static System.ReadOnlySpan<T> TrimStart<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1917,7 +1969,8 @@ namespace System
         public static System.ReadOnlySpan<T> TrimStart<T>(
             this System.ReadOnlySpan<T> span,
             T trimElement
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1925,7 +1978,8 @@ namespace System
         public static System.Span<T> TrimStart<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1939,7 +1993,8 @@ namespace System
         public static System.Memory<T> Trim<T>(
             this System.Memory<T> memory,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1953,7 +2008,8 @@ namespace System
         public static System.ReadOnlyMemory<T> Trim<T>(
             this System.ReadOnlyMemory<T> memory,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1961,7 +2017,8 @@ namespace System
         public static System.ReadOnlyMemory<T> Trim<T>(
             this System.ReadOnlyMemory<T> memory,
             T trimElement
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1969,7 +2026,8 @@ namespace System
         public static System.ReadOnlySpan<T> Trim<T>(
             this System.ReadOnlySpan<T> span,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1977,7 +2035,8 @@ namespace System
         public static System.ReadOnlySpan<T> Trim<T>(
             this System.ReadOnlySpan<T> span,
             T trimElement
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -1985,7 +2044,8 @@ namespace System
         public static System.Span<T> Trim<T>(
             this System.Span<T> span,
             System.ReadOnlySpan<T> trimElements
-        ) where T : System.IEquatable<T>?
+        )
+            where T : System.IEquatable<T>?
         {
             throw null;
         }
@@ -3049,7 +3109,8 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static System.Span<byte> AsBytes<T>(System.Span<T> span) where T : struct
+        public static System.Span<byte> AsBytes<T>(System.Span<T> span)
+            where T : struct
         {
             throw null;
         }
@@ -3059,12 +3120,14 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static ref readonly T AsRef<T>(System.ReadOnlySpan<byte> span) where T : struct
+        public static ref readonly T AsRef<T>(System.ReadOnlySpan<byte> span)
+            where T : struct
         {
             throw null;
         }
 
-        public static ref T AsRef<T>(System.Span<byte> span) where T : struct
+        public static ref T AsRef<T>(System.Span<byte> span)
+            where T : struct
         {
             throw null;
         }
@@ -3133,7 +3196,8 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static T Read<T>(System.ReadOnlySpan<byte> source) where T : struct
+        public static T Read<T>(System.ReadOnlySpan<byte> source)
+            where T : struct
         {
             throw null;
         }
@@ -3156,7 +3220,8 @@ namespace System.Runtime.InteropServices
         public static bool TryGetMemoryManager<T, TManager>(
             System.ReadOnlyMemory<T> memory,
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TManager? manager
-        ) where TManager : System.Buffers.MemoryManager<T>
+        )
+            where TManager : System.Buffers.MemoryManager<T>
         {
             throw null;
         }
@@ -3166,7 +3231,8 @@ namespace System.Runtime.InteropServices
             [System.Diagnostics.CodeAnalysis.NotNullWhenAttribute(true)] out TManager? manager,
             out int start,
             out int length
-        ) where TManager : System.Buffers.MemoryManager<T>
+        )
+            where TManager : System.Buffers.MemoryManager<T>
         {
             throw null;
         }
@@ -3187,12 +3253,14 @@ namespace System.Runtime.InteropServices
             throw null;
         }
 
-        public static bool TryWrite<T>(System.Span<byte> destination, ref T value) where T : struct
+        public static bool TryWrite<T>(System.Span<byte> destination, ref T value)
+            where T : struct
         {
             throw null;
         }
 
-        public static void Write<T>(System.Span<byte> destination, ref T value) where T : struct { }
+        public static void Write<T>(System.Span<byte> destination, ref T value)
+            where T : struct { }
     }
 }
 

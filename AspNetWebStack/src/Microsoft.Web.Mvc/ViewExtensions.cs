@@ -32,7 +32,8 @@ namespace Microsoft.Web.Mvc
         public static void RenderAction<TController>(
             this HtmlHelper helper,
             Expression<Action<TController>> action
-        ) where TController : Controller
+        )
+            where TController : Controller
         {
             RouteValueDictionary rvd = ExpressionHelper.GetRouteValuesFromExpression(action);
 

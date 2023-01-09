@@ -518,8 +518,8 @@ namespace System.Text.Json.Serialization.Metadata
             );
 
         [return: NotNullIfNotNull(nameof(method))]
-        private static T? CreateDelegate<T>(DynamicMethod? method) where T : Delegate =>
-            (T?)method?.CreateDelegate(typeof(T));
+        private static T? CreateDelegate<T>(DynamicMethod? method)
+            where T : Delegate => (T?)method?.CreateDelegate(typeof(T));
     }
 }
 #endif

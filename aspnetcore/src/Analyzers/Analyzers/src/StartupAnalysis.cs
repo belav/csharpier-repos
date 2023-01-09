@@ -21,7 +21,8 @@ internal sealed class StartupAnalysis
 
     public StartupSymbols StartupSymbols { get; }
 
-    public T? GetRelatedSingletonAnalysis<T>(INamedTypeSymbol type) where T : class
+    public T? GetRelatedSingletonAnalysis<T>(INamedTypeSymbol type)
+        where T : class
     {
         if (_analysesByType.TryGetValue(type, out var list))
         {
@@ -37,7 +38,8 @@ internal sealed class StartupAnalysis
         return null;
     }
 
-    public ImmutableArray<T> GetRelatedAnalyses<T>(INamedTypeSymbol type) where T : class
+    public ImmutableArray<T> GetRelatedAnalyses<T>(INamedTypeSymbol type)
+        where T : class
     {
         var items = ImmutableArray.CreateBuilder<T>();
         if (_analysesByType.TryGetValue(type, out var list))

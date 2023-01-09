@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class NorthwindQueryRelationalFixture<TModelCustomizer>
-    : NorthwindQueryFixtureBase<TModelCustomizer> where TModelCustomizer : IModelCustomizer, new()
+    : NorthwindQueryFixtureBase<TModelCustomizer>
+    where TModelCustomizer : IModelCustomizer, new()
 {
     public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 

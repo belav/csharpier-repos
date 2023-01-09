@@ -864,7 +864,8 @@ namespace System.Text.Json
         public static TException AssertThrows<TException>(
             ref Utf8JsonReader json,
             AssertThrowsActionUtf8JsonReader action
-        ) where TException : Exception
+        )
+            where TException : Exception
         {
             Exception ex;
 

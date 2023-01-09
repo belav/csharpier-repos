@@ -203,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Remote
             RemoteServiceCallbackId callbackId,
             HostLanguageServices languageServices,
             CancellationToken cancellationToken
-        ) where TCallbackInterface : class, IRemoteOptionsCallback<TOptions>
+        )
+            where TCallbackInterface : class, IRemoteOptionsCallback<TOptions>
         {
             var cache = ImmutableDictionary<string, AsyncLazy<TOptions>>.Empty;
             var lazyOptions = ImmutableInterlocked.GetOrAdd(

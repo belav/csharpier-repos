@@ -19,7 +19,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 public class SqlServerGeometryTypeMapping<TGeometry>
-    : RelationalGeometryTypeMapping<TGeometry, SqlBytes> where TGeometry : Geometry
+    : RelationalGeometryTypeMapping<TGeometry, SqlBytes>
+    where TGeometry : Geometry
 {
     private static readonly MethodInfo _getSqlBytes = typeof(SqlDataReader).GetRuntimeMethod(
         nameof(SqlDataReader.GetSqlBytes),

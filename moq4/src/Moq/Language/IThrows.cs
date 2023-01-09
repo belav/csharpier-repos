@@ -40,7 +40,8 @@ namespace Moq.Language
         ///     .Throws&lt;ArgumentException&gt;();
         /// </code>
         /// </example>
-        IThrowsResult Throws<TException>() where TException : Exception, new();
+        IThrowsResult Throws<TException>()
+            where TException : Exception, new();
 
         /// <summary>
         /// Specifies a function that will calculate the exception to throw when the method is invoked.

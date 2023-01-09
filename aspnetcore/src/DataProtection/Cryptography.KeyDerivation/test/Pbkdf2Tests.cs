@@ -471,7 +471,8 @@ public class Pbkdf2Tests
     private static void RunTest_WithLongPassword_Impl<TProvider>(
         byte[] salt,
         string expectedDerivedKeyBase64
-    ) where TProvider : IPbkdf2Provider, new()
+    )
+        where TProvider : IPbkdf2Provider, new()
     {
         // Arrange
         string password = new String('x', 50000); // 50,000 char password
@@ -497,7 +498,8 @@ public class Pbkdf2Tests
         int iterationCount,
         int numBytesRequested,
         string expectedDerivedKeyAsBase64
-    ) where TProvider : IPbkdf2Provider, new()
+    )
+        where TProvider : IPbkdf2Provider, new()
     {
         byte[] derivedKey = new TProvider().DeriveKey(
             password,

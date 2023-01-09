@@ -36,7 +36,8 @@ namespace System.Runtime.CompilerServices
         public static LabelTarget UpdateLabel { get; } =
             Expression.Label("CallSiteBinder.UpdateLabel");
 
-        private sealed class LambdaSignature<T> where T : class
+        private sealed class LambdaSignature<T>
+            where T : class
         {
             private static LambdaSignature<T>? s_instance;
 
@@ -98,12 +99,14 @@ namespace System.Runtime.CompilerServices
         /// <param name="site">The CallSite the bind is being performed for.</param>
         /// <param name="args">The arguments for the binder.</param>
         /// <returns>A new delegate which replaces the CallSite Target.</returns>
-        public virtual T? BindDelegate<T>(CallSite<T> site, object[] args) where T : class
+        public virtual T? BindDelegate<T>(CallSite<T> site, object[] args)
+            where T : class
         {
             return null;
         }
 
-        internal T BindCore<T>(CallSite<T> site, object[] args) where T : class
+        internal T BindCore<T>(CallSite<T> site, object[] args)
+            where T : class
         {
             //
             // Try to find a precompiled delegate, and return it if found.
@@ -146,7 +149,8 @@ namespace System.Runtime.CompilerServices
         /// </summary>
         /// <typeparam name="T">The type of target being added.</typeparam>
         /// <param name="target">The target delegate to be added to the cache.</param>
-        protected void CacheTarget<T>(T target) where T : class
+        protected void CacheTarget<T>(T target)
+            where T : class
         {
             GetRuleCache<T>().AddRule(target);
         }
@@ -195,7 +199,8 @@ namespace System.Runtime.CompilerServices
             );
         }
 
-        internal RuleCache<T> GetRuleCache<T>() where T : class
+        internal RuleCache<T> GetRuleCache<T>()
+            where T : class
         {
             // make sure we have cache.
             if (Cache == null)

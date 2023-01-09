@@ -1852,7 +1852,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
             WireUp(_ownedPeople, _planets, _stars, _moons, _finks, _bartons);
         }
 
-        public virtual IQueryable<TEntity> Set<TEntity>() where TEntity : class
+        public virtual IQueryable<TEntity> Set<TEntity>()
+            where TEntity : class
         {
             if (typeof(TEntity) == typeof(OwnedPerson))
             {

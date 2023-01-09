@@ -12,7 +12,8 @@ public class Foo<T, U>
     }
 }
 
-public class Bar<T> where T : ICacheable { }
+public class Bar<T>
+    where T : ICacheable { }
 
 public class Test : ICacheable { }
 

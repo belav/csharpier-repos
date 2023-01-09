@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
             string text,
             Func<TNode, bool> predicate,
             bool allowEmptyNodes = false
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             text = GetSelectionAndResultSpans(text, out var selection, out var result);
             var resultNode = await GetNodeForSelectionAsync(
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
             Assert.Equal(result, resultNode.Span);
         }
 
-        protected async Task TestUnderselectedAsync<TNode>(string text) where TNode : SyntaxNode
+        protected async Task TestUnderselectedAsync<TNode>(string text)
+            where TNode : SyntaxNode
         {
             text = GetSelectionSpan(text, out var selection);
             var resultNode = await GetNodeForSelectionAsync<TNode>(
@@ -65,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
             Assert.True(CodeRefactoringHelpers.IsNodeUnderselected(resultNode, selection));
         }
 
-        protected async Task TestNotUnderselectedAsync<TNode>(string text) where TNode : SyntaxNode
+        protected async Task TestNotUnderselectedAsync<TNode>(string text)
+            where TNode : SyntaxNode
         {
             text = GetSelectionAndResultSpans(text, out var selection, out var result);
             var resultNode = await GetNodeForSelectionAsync<TNode>(
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
             string text,
             Func<TNode, bool> predicate,
             bool allowEmptyNodes = false
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             text = GetSelectionSpan(text, out var selection);
 
@@ -160,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RefactoringHelpers
             TextSpan selection,
             Func<TNode, bool> predicate,
             bool allowEmptyNodes = false
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             using var workspaceFixture = GetOrCreateWorkspaceFixture();
 

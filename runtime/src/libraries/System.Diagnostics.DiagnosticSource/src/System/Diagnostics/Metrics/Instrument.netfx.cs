@@ -15,7 +15,8 @@ namespace System.Diagnostics.Metrics
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
     [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public abstract partial class Instrument<T> : Instrument where T : struct
+    public abstract partial class Instrument<T> : Instrument
+        where T : struct
     {
         [ThreadStatic]
         private static KeyValuePair<string, object?>[] ts_tags;

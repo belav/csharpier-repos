@@ -30,7 +30,8 @@ namespace System.Net.Http.Headers
     // - HttpGeneralHeaders:
     //   - Property TransferEncoding: has three values "gzip", "custom", and "chunked"
     //   - Property TransferEncodingChunked: is set to "true".
-    public sealed class HttpHeaderValueCollection<T> : ICollection<T> where T : class
+    public sealed class HttpHeaderValueCollection<T> : ICollection<T>
+        where T : class
     {
         private readonly HeaderDescriptor _descriptor;
         private readonly HttpHeaders _store;

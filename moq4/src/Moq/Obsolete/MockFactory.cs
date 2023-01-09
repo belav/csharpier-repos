@@ -197,7 +197,8 @@ namespace Moq
         /// factory.VerifyAll();
         /// </code>
         /// </example>
-        public Mock<T> Create<T>() where T : class
+        public Mock<T> Create<T>()
+            where T : class
         {
             return CreateMock<T>(defaultBehavior, new object[0]);
         }
@@ -225,7 +226,8 @@ namespace Moq
         /// factory.Verify();
         /// </code>
         /// </example>
-        public Mock<T> Create<T>(params object[] args) where T : class
+        public Mock<T> Create<T>(params object[] args)
+            where T : class
         {
             // "fix" compiler picking this overload instead of
             // the one receiving the mock behavior.
@@ -253,7 +255,8 @@ namespace Moq
         /// var foo = factory.Create&lt;IFoo&gt;(MockBehavior.Loose);
         /// </code>
         /// </example>
-        public Mock<T> Create<T>(MockBehavior behavior) where T : class
+        public Mock<T> Create<T>(MockBehavior behavior)
+            where T : class
         {
             return CreateMock<T>(behavior, new object[0]);
         }
@@ -282,7 +285,8 @@ namespace Moq
         /// var mock = factory.Create&lt;MyBase&gt;(MockBehavior.Strict, "Foo", 25, true);
         /// </code>
         /// </example>
-        public Mock<T> Create<T>(MockBehavior behavior, params object[] args) where T : class
+        public Mock<T> Create<T>(MockBehavior behavior, params object[] args)
+            where T : class
         {
             return CreateMock<T>(behavior, args);
         }
@@ -308,7 +312,8 @@ namespace Moq
         public Mock<T> Create<T>(
             Expression<Func<T>> newExpression,
             MockBehavior behavior = MockBehavior.Default
-        ) where T : class
+        )
+            where T : class
         {
             return Create<T>(
                 behavior,

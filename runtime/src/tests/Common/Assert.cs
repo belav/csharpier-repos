@@ -39,7 +39,8 @@ namespace Xunit
         /// <exception cref="AssertFailedException">
         ///     <see cref="Exception"/> of type <typeparam name="T"/> was not thrown.
         /// </exception>
-        public static T Throws<T>(Action action) where T : Exception
+        public static T Throws<T>(Action action)
+            where T : Exception
         {
             Exception exception = RunWithCatch(action);
 

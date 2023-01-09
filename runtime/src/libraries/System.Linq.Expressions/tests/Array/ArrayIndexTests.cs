@@ -1291,7 +1291,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithClassRestrictionArrayIndexTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             CheckGenericWithClassRestrictionArrayIndex<Tc>(
                 GenerateGenericWithClassRestrictionArray<Tc>(0),
@@ -1309,7 +1310,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithClassRestrictionArrayIndexTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             // null arrays
             CheckExceptionGenericWithClassRestrictionArrayIndex<Tc>(null, -1, useInterpreter);
@@ -1351,7 +1353,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassRestrictionArrayIndexTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : C
+        )
+            where Tc : C
         {
             CheckGenericWithSubClassRestrictionArrayIndex<Tc>(
                 GenerateGenericWithSubClassRestrictionArray<Tc>(0),
@@ -1369,7 +1372,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithSubClassRestrictionArrayIndexTestHelper<Tc>(
             bool useInterpreter
-        ) where Tc : C
+        )
+            where Tc : C
         {
             // null arrays
             CheckExceptionGenericWithSubClassRestrictionArrayIndex<Tc>(null, -1, useInterpreter);
@@ -1411,7 +1415,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithNewClassRestrictionArrayIndexTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(
                 GenerateGenericWithNewClassRestrictionArray<Tcn>(0),
@@ -1429,7 +1434,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithNewClassRestrictionArrayIndexTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             // null arrays
             CheckExceptionGenericWithNewClassRestrictionArrayIndex<Tcn>(null, -1, useInterpreter);
@@ -1471,7 +1477,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithSubClassNewRestrictionArrayIndexTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : C, new()
+        )
+            where Tcn : C, new()
         {
             CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(
                 GenerateGenericWithSubClassNewRestrictionArray<Tcn>(0),
@@ -1489,7 +1496,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithSubClassNewRestrictionArrayIndexTestHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : C, new()
+        )
+            where Tcn : C, new()
         {
             // null arrays
             CheckExceptionGenericWithSubClassNewRestrictionArrayIndex<Tcn>(
@@ -1535,7 +1543,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckGenericWithStructRestrictionArrayIndexTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             CheckGenericWithStructRestrictionArrayIndex<Ts>(
                 GenerateGenericWithStructRestrictionArray<Ts>(0),
@@ -1553,7 +1562,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckExceptionGenericWithStructRestrictionArrayIndexTestHelper<Ts>(
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             // null arrays
             CheckExceptionGenericWithStructRestrictionArrayIndex<Ts>(null, -1, useInterpreter);
@@ -2014,7 +2024,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static Tc[] GenerateGenericWithClassRestrictionArray<Tc>(int size) where Tc : class
+        private static Tc[] GenerateGenericWithClassRestrictionArray<Tc>(int size)
+            where Tc : class
         {
             Tc[] array = new Tc[] { null, default(Tc) };
             Tc[] result = new Tc[size];
@@ -2026,7 +2037,8 @@ namespace System.Linq.Expressions.Tests
             return result;
         }
 
-        private static Tc[] GenerateGenericWithSubClassRestrictionArray<Tc>(int size) where Tc : C
+        private static Tc[] GenerateGenericWithSubClassRestrictionArray<Tc>(int size)
+            where Tc : C
         {
             Tc[] array = new Tc[] { null, default(Tc), (Tc)new C() };
             Tc[] result = new Tc[size];
@@ -2427,7 +2439,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithClassRestrictionArrayIndex<Tc>(
             Tc[] array,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2445,7 +2458,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithSubClassRestrictionArrayIndex<Tc>(
             Tc[] array,
             bool useInterpreter
-        ) where Tc : C
+        )
+            where Tc : C
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2463,7 +2477,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithNewClassRestrictionArrayIndex<Tcn>(
             Tcn[] array,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2481,7 +2496,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithSubClassNewRestrictionArrayIndex<Tcn>(
             Tcn[] array,
             bool useInterpreter
-        ) where Tcn : C, new()
+        )
+            where Tcn : C, new()
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -2499,7 +2515,8 @@ namespace System.Linq.Expressions.Tests
         private static void CheckGenericWithStructRestrictionArrayIndex<Ts>(
             Ts[] array,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             bool success = true;
             for (int i = 0; i < array.Length; i++)
@@ -3028,7 +3045,8 @@ namespace System.Linq.Expressions.Tests
             Tc[] array,
             int index,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<Tc>> e = Expression.Lambda<Func<Tc>>(
                 Expression.ArrayIndex(
@@ -3045,7 +3063,8 @@ namespace System.Linq.Expressions.Tests
             Tc[] array,
             int index,
             bool useInterpreter
-        ) where Tc : C
+        )
+            where Tc : C
         {
             Expression<Func<Tc>> e = Expression.Lambda<Func<Tc>>(
                 Expression.ArrayIndex(
@@ -3062,7 +3081,8 @@ namespace System.Linq.Expressions.Tests
             Tcn[] array,
             int index,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             Expression<Func<Tcn>> e = Expression.Lambda<Func<Tcn>>(
                 Expression.ArrayIndex(
@@ -3079,7 +3099,8 @@ namespace System.Linq.Expressions.Tests
             Tcn[] array,
             int index,
             bool useInterpreter
-        ) where Tcn : C, new()
+        )
+            where Tcn : C, new()
         {
             Expression<Func<Tcn>> e = Expression.Lambda<Func<Tcn>>(
                 Expression.ArrayIndex(
@@ -3096,7 +3117,8 @@ namespace System.Linq.Expressions.Tests
             Ts[] array,
             int index,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             Expression<Func<Ts>> e = Expression.Lambda<Func<Ts>>(
                 Expression.ArrayIndex(
@@ -3601,7 +3623,8 @@ namespace System.Linq.Expressions.Tests
             Tc[] array,
             int index,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -3627,7 +3650,8 @@ namespace System.Linq.Expressions.Tests
             Tc[] array,
             int index,
             bool useInterpreter
-        ) where Tc : C
+        )
+            where Tc : C
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -3653,7 +3677,8 @@ namespace System.Linq.Expressions.Tests
             Tcn[] array,
             int index,
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -3679,7 +3704,8 @@ namespace System.Linq.Expressions.Tests
             Tcn[] array,
             int index,
             bool useInterpreter
-        ) where Tcn : C, new()
+        )
+            where Tcn : C, new()
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(
@@ -3705,7 +3731,8 @@ namespace System.Linq.Expressions.Tests
             Ts[] array,
             int index,
             bool useInterpreter
-        ) where Ts : struct
+        )
+            where Ts : struct
         {
             if (array == null)
                 Assert.Throws<NullReferenceException>(

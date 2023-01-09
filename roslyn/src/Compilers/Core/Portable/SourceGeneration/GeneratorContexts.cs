@@ -226,7 +226,8 @@ namespace Microsoft.CodeAnalysis
                 );
         }
 
-        private static void CheckIsEmpty<T>(T x, string? typeName = null) where T : class?
+        private static void CheckIsEmpty<T>(T x, string? typeName = null)
+            where T : class?
         {
             if (x is object)
             {

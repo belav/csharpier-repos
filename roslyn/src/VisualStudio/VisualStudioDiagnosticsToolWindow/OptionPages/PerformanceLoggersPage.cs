@@ -121,7 +121,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
         private static void SetRoslynLogger<T>(
             ImmutableArray<string> loggerTypeNames,
             Func<T> creator
-        ) where T : ILogger
+        )
+            where T : ILogger
         {
             if (loggerTypeNames.Contains(typeof(T).Name))
             {

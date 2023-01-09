@@ -709,7 +709,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryGenericWithSubClassRestrictionHelper<TC>(
             bool useInterpreter
-        ) where TC : C
+        )
+            where TC : C
         {
             bool[] array1 = new bool[] { false, true };
             TC[] array2 = new TC[] { null, default(TC), (TC)new C() };
@@ -732,7 +733,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryGenericWithClassAndNewRestrictionHelper<Tcn>(
             bool useInterpreter
-        ) where Tcn : class, new()
+        )
+            where Tcn : class, new()
         {
             bool[] array1 = new bool[] { false, true };
             Tcn[] array2 = new Tcn[] { null, default(Tcn), new Tcn() };
@@ -755,7 +757,8 @@ namespace System.Linq.Expressions.Tests
 
         private static void CheckTernaryGenericWithSubClassAndNewRestrictionHelper<TCn>(
             bool useInterpreter
-        ) where TCn : C, new()
+        )
+            where TCn : C, new()
         {
             bool[] array1 = new bool[] { false, true };
             TCn[] array2 = new TCn[] { null, default(TCn), new TCn(), (TCn)new C() };
@@ -1290,7 +1293,8 @@ namespace System.Linq.Expressions.Tests
             Tc a,
             Tc b,
             bool useInterpreter
-        ) where Tc : class
+        )
+            where Tc : class
         {
             Expression<Func<Tc>> e = Expression.Lambda<Func<Tc>>(
                 Expression.Condition(
@@ -1310,7 +1314,8 @@ namespace System.Linq.Expressions.Tests
             TC a,
             TC b,
             bool useInterpreter
-        ) where TC : class
+        )
+            where TC : class
         {
             Expression<Func<TC>> e = Expression.Lambda<Func<TC>>(
                 Expression.Condition(
@@ -1330,7 +1335,8 @@ namespace System.Linq.Expressions.Tests
             Tcn a,
             Tcn b,
             bool useInterpreter
-        ) where Tcn : class
+        )
+            where Tcn : class
         {
             Expression<Func<Tcn>> e = Expression.Lambda<Func<Tcn>>(
                 Expression.Condition(
@@ -1350,7 +1356,8 @@ namespace System.Linq.Expressions.Tests
             TCn a,
             TCn b,
             bool useInterpreter
-        ) where TCn : class
+        )
+            where TCn : class
         {
             Expression<Func<TCn>> e = Expression.Lambda<Func<TCn>>(
                 Expression.Condition(

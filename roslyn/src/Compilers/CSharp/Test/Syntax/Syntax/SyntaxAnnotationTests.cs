@@ -621,7 +621,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             TRoot root,
             SyntaxNodeOrToken oldNodeOrToken,
             SyntaxNodeOrToken newNodeOrToken
-        ) where TRoot : SyntaxNode
+        )
+            where TRoot : SyntaxNode
         {
             if (oldNodeOrToken.IsToken)
             {

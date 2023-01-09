@@ -841,12 +841,14 @@ namespace Newtonsoft.Json.Utilities
             return true;
         }
 
-        public static T? GetAttribute<T>(object attributeProvider) where T : Attribute
+        public static T? GetAttribute<T>(object attributeProvider)
+            where T : Attribute
         {
             return GetAttribute<T>(attributeProvider, true);
         }
 
-        public static T? GetAttribute<T>(object attributeProvider, bool inherit) where T : Attribute
+        public static T? GetAttribute<T>(object attributeProvider, bool inherit)
+            where T : Attribute
         {
             T[] attributes = GetAttributes<T>(attributeProvider, inherit);
 

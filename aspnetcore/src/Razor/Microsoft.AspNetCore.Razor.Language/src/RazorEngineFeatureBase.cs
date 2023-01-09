@@ -25,7 +25,8 @@ public abstract class RazorEngineFeatureBase : IRazorEngineFeature
         }
     }
 
-    protected TFeature GetRequiredFeature<TFeature>() where TFeature : IRazorEngineFeature
+    protected TFeature GetRequiredFeature<TFeature>()
+        where TFeature : IRazorEngineFeature
     {
         if (Engine == null)
         {

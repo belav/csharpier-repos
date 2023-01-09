@@ -68,7 +68,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         }
     }
 
-    internal abstract class XPropertyDescriptor<T, TProperty> : PropertyDescriptor where T : XObject
+    internal abstract class XPropertyDescriptor<T, TProperty> : PropertyDescriptor
+        where T : XObject
     {
         public XPropertyDescriptor(string name)
             : base(name, null) { }
@@ -537,7 +538,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         }
     }
 
-    internal sealed class XDeferredAxis<T> : IEnumerable<T>, IEnumerable where T : XObject
+    internal sealed class XDeferredAxis<T> : IEnumerable<T>, IEnumerable
+        where T : XObject
     {
         private readonly Func<XElement, XName?, IEnumerable<T>> _func;
         internal XElement element;
@@ -585,7 +587,8 @@ namespace MS.Internal.Xml.Linq.ComponentModel
         }
     }
 
-    internal sealed class XDeferredSingleton<T> where T : XObject
+    internal sealed class XDeferredSingleton<T>
+        where T : XObject
     {
         private readonly Func<XElement, XName, T?> _func;
         internal XElement element;

@@ -48,7 +48,8 @@ namespace System.Security.Cryptography.Xml
                 _ => null,
             };
 
-        public static T? CreateFromName<T>(string? name) where T : class
+        public static T? CreateFromName<T>(string? name)
+            where T : class
         {
             if (name == null || name.IndexOfAny(_invalidChars) >= 0)
             {

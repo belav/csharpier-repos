@@ -121,7 +121,8 @@ namespace System
         public static void AssertThrows<E, T>(
             ReadOnlySpan<T> span,
             AssertThrowsActionReadOnly<T> action
-        ) where E : Exception
+        )
+            where E : Exception
         {
             try
             {
@@ -183,7 +184,8 @@ namespace System
         public static void ValidateReferenceType<T>(
             this ReadOnlyMemory<T> memory,
             params T[] expected
-        ) where T : class
+        )
+            where T : class
         {
             T[] bufferArray = memory.ToArray();
             Assert.Equal(memory.Length, expected.Length);
@@ -194,7 +196,8 @@ namespace System
             }
         }
 
-        public static void Validate<T>(Span<byte> span, T value) where T : struct
+        public static void Validate<T>(Span<byte> span, T value)
+            where T : struct
         {
             T read = MemoryMarshal.Read<T>(span);
             Assert.Equal(value, read);

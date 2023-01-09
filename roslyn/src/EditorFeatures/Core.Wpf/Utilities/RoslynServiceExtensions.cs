@@ -32,7 +32,8 @@ namespace Microsoft.VisualStudio.Shell
         /// </summary>
         public static TServiceType GetServiceOnMainThread<TServiceType>(
             this IServiceProvider serviceProvider
-        ) where TServiceType : class =>
+        )
+            where TServiceType : class =>
             serviceProvider.GetServiceOnMainThread<TServiceType, TServiceType>();
 
         /// <summary>
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudio.Shell
         public static TInterface GetService<TService, TInterface>(
             this IServiceProvider serviceProvider,
             JoinableTaskFactory joinableTaskFactory
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             return GetService<TService, TInterface>(
                 serviceProvider,
@@ -83,7 +85,8 @@ namespace Microsoft.VisualStudio.Shell
             this IServiceProvider serviceProvider,
             JoinableTaskFactory joinableTaskFactory,
             bool throwOnFailure
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             Requires.NotNull(serviceProvider, nameof(serviceProvider));
 
@@ -126,7 +129,8 @@ namespace Microsoft.VisualStudio.Shell
         public static Task<TInterface> GetServiceAsync<TService, TInterface>(
             this IAsyncServiceProvider asyncServiceProvider,
             JoinableTaskFactory joinableTaskFactory
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             return GetServiceAsync<TService, TInterface>(
                 asyncServiceProvider,
@@ -155,7 +159,8 @@ namespace Microsoft.VisualStudio.Shell
             this IAsyncServiceProvider asyncServiceProvider,
             JoinableTaskFactory joinableTaskFactory,
             bool throwOnFailure
-        ) where TInterface : class
+        )
+            where TInterface : class
         {
             Requires.NotNull(asyncServiceProvider, nameof(asyncServiceProvider));
             object? service;

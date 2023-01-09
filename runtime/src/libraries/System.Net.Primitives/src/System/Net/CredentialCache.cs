@@ -425,7 +425,8 @@ namespace System.Net
                 internal static bool MoveNext<TKey, TValue>(
                     ref Dictionary<TKey, TValue>.ValueCollection.Enumerator enumerator,
                     out TValue current
-                ) where TKey : notnull
+                )
+                    where TKey : notnull
                 {
                     bool result = enumerator.MoveNext();
                     current = enumerator.Current;

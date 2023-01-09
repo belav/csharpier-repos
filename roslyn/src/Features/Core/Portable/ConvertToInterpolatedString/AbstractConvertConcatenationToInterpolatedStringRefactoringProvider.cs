@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
     ///     $"{a + b} str {d}{e}".
     /// </summary>
     internal abstract class AbstractConvertConcatenationToInterpolatedStringRefactoringProvider<TExpressionSyntax>
-        : CodeRefactoringProvider where TExpressionSyntax : SyntaxNode
+        : CodeRefactoringProvider
+        where TExpressionSyntax : SyntaxNode
     {
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {

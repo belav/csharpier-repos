@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis
         public static TNode WithAdditionalAnnotations<TNode>(
             this TNode node,
             params SyntaxAnnotation[] annotations
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return (TNode)node.WithAdditionalAnnotationsInternal(annotations);
         }
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis
         public static TNode WithAdditionalAnnotations<TNode>(
             this TNode node,
             IEnumerable<SyntaxAnnotation> annotations
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return (TNode)node.WithAdditionalAnnotationsInternal(annotations);
         }
@@ -43,7 +45,8 @@ namespace Microsoft.CodeAnalysis
         public static TNode WithoutAnnotations<TNode>(
             this TNode node,
             params SyntaxAnnotation[] annotations
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return (TNode)node.GetNodeWithoutAnnotations(annotations);
         }
@@ -56,7 +59,8 @@ namespace Microsoft.CodeAnalysis
         public static TNode WithoutAnnotations<TNode>(
             this TNode node,
             IEnumerable<SyntaxAnnotation> annotations
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             return (TNode)node.GetNodeWithoutAnnotations(annotations);
         }

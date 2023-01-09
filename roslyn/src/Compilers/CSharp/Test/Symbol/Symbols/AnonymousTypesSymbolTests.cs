@@ -1168,7 +1168,8 @@ class Query
             );
         }
 
-        private T GetMemberByName<T>(NamedTypeSymbol type, string name) where T : Symbol
+        private T GetMemberByName<T>(NamedTypeSymbol type, string name)
+            where T : Symbol
         {
             foreach (var symbol in type.GetMembers(name))
             {

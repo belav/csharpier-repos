@@ -801,7 +801,8 @@ namespace Microsoft.Interop
                 return LiteralExpression(SyntaxKind.StringLiteralExpression, Literal(str));
             }
 
-            static ExpressionSyntax CreateEnumExpressionSyntax<T>(T value) where T : Enum
+            static ExpressionSyntax CreateEnumExpressionSyntax<T>(T value)
+                where T : Enum
             {
                 return MemberAccessExpression(
                     SyntaxKind.SimpleMemberAccessExpression,

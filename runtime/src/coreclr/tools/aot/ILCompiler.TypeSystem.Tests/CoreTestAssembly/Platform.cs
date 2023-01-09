@@ -67,7 +67,8 @@ namespace System
 
     public abstract class Enum : ValueType { }
 
-    public struct Nullable<T> where T : struct { }
+    public struct Nullable<T>
+        where T : struct { }
 
     public sealed class String { }
 
@@ -201,7 +202,8 @@ namespace System.Runtime.Intrinsics
 {
     [Intrinsic]
     [StructLayout(LayoutKind.Sequential, Size = 16)]
-    public readonly struct Vector128<T> where T : struct
+    public readonly struct Vector128<T>
+        where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         // This also allows the debug view to work https://github.com/dotnet/runtime/issues/9495)

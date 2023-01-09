@@ -34,7 +34,8 @@ namespace System.Web.Mvc
             string typeName,
             string methodName,
             object thisParameter
-        ) where TDelegate : class
+        )
+            where TDelegate : class
         {
             // ensure target type exists
             Type targetType = assembly.GetType(
@@ -53,7 +54,8 @@ namespace System.Web.Mvc
             Type targetType,
             string methodName,
             object thisParameter
-        ) where TDelegate : class
+        )
+            where TDelegate : class
         {
             // ensure target method exists
             ParameterInfo[] delegateParameters = typeof(TDelegate)

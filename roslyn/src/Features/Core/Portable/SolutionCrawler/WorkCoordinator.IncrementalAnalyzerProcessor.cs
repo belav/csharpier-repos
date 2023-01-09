@@ -517,7 +517,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     TData value,
                     Func<TData, CancellationToken, Task<TResult?>> funcAsync,
                     CancellationToken cancellationToken
-                ) where TResult : class
+                )
+                    where TResult : class
                 {
                     try
                     {

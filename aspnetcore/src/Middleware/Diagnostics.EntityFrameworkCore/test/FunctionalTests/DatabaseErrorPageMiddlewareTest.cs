@@ -648,7 +648,8 @@ public class DatabaseErrorPageMiddlewareTest
     private static async Task<IHost> SetupServer<TContext, TMiddleware>(
         SqlTestStore database,
         ILoggerProvider logProvider = null
-    ) where TContext : DbContext
+    )
+        where TContext : DbContext
     {
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>

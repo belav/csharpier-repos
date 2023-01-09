@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace System
 {
     /// <summary>Provides an object wrapper that can transition between strong and weak references to the object.</summary>
-    internal sealed class StrongToWeakReference<T> : WeakReference where T : class
+    internal sealed class StrongToWeakReference<T> : WeakReference
+        where T : class
     {
         private T? _strongRef;
 

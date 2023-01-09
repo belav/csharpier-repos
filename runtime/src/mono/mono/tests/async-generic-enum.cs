@@ -18,7 +18,8 @@ class Tests
     }
 }
 
-public class GenericEnumTest<T> where T : struct
+public class GenericEnumTest<T>
+    where T : struct
 {
     public enum anEnum
     {

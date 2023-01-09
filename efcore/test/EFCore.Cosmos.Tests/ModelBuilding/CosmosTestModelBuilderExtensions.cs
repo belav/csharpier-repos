@@ -11,7 +11,8 @@ public static class CosmosTestModelBuilderExtensions
     >(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         Expression<Func<TEntity, TProperty>> propertyExpression
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {
@@ -30,7 +31,8 @@ public static class CosmosTestModelBuilderExtensions
     public static ModelBuilderTest.TestEntityTypeBuilder<TEntity> HasPartitionKey<TEntity>(
         this ModelBuilderTest.TestEntityTypeBuilder<TEntity> builder,
         string name
-    ) where TEntity : class
+    )
+        where TEntity : class
     {
         switch (builder)
         {

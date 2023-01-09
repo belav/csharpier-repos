@@ -90,7 +90,8 @@ namespace System.Collections.Generic
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
         public static ReadOnlyDictionary<TKey, TValue> AsReadOnly<TKey, TValue>(
             this IDictionary<TKey, TValue> dictionary
-        ) where TKey : notnull => new ReadOnlyDictionary<TKey, TValue>(dictionary);
+        )
+            where TKey : notnull => new ReadOnlyDictionary<TKey, TValue>(dictionary);
 
         /// <summary>Adds the elements of the specified span to the end of the <see cref="List{T}"/>.</summary>
         /// <typeparam name="T">The type of elements in the list.</typeparam>

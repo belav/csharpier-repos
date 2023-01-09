@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
 
             bool IDocumentOperationService.SupportDiagnostics => true;
 
-            TService? IDocumentServiceProvider.GetService<TService>() where TService : class
+            TService? IDocumentServiceProvider.GetService<TService>()
+                where TService : class
             {
                 if (typeof(TService) == typeof(DocumentPropertiesService))
                 {

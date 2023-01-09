@@ -239,7 +239,8 @@ public static class WebHostBuilderExtensions
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder UseStartup<
         [DynamicallyAccessedMembers(StartupLinkerOptions.Accessibility)] TStartup
-    >(this IWebHostBuilder hostBuilder) where TStartup : class
+    >(this IWebHostBuilder hostBuilder)
+        where TStartup : class
     {
         return hostBuilder.UseStartup(typeof(TStartup));
     }

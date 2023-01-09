@@ -740,7 +740,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IBlockOperation? blockStatement,
             SyntaxNode typeDeclaration,
             CancellationToken cancellationToken
-        ) where TSymbol : ISymbol
+        )
+            where TSymbol : ISymbol
         {
             foreach (var (sibling, before) in GetSiblingParameters(parameter))
             {

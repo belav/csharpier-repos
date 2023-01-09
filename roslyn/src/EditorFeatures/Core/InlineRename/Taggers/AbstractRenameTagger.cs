@@ -14,7 +14,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract class AbstractRenameTagger<T> : ITagger<T>, IDisposable where T : ITag
+    internal abstract class AbstractRenameTagger<T> : ITagger<T>, IDisposable
+        where T : ITag
     {
         private readonly ITextBuffer _buffer;
         private readonly InlineRenameService _renameService;

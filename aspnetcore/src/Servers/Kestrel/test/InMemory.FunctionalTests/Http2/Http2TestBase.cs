@@ -1519,7 +1519,8 @@ public class Http2TestBase
         int expectedLastStreamId,
         Http2ErrorCode expectedErrorCode,
         params string[] expectedErrorMessage
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         await WaitForConnectionErrorAsyncDoNotCloseTransport<TException>(
             ignoreNonGoAwayFrames,
@@ -1535,7 +1536,8 @@ public class Http2TestBase
         int expectedLastStreamId,
         Http2ErrorCode expectedErrorCode,
         params string[] expectedErrorMessage
-    ) where TException : Exception
+    )
+        where TException : Exception
     {
         var frame = await ReceiveFrameAsync();
 

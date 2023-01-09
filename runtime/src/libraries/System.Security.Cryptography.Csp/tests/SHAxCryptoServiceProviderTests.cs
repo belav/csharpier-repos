@@ -83,7 +83,8 @@ namespace System.Security.Cryptography.Encryption.SHA1.Tests
             );
         }
 
-        private void Verify<T>(string rawText, string expected) where T : HashAlgorithm, new()
+        private void Verify<T>(string rawText, string expected)
+            where T : HashAlgorithm, new()
         {
             byte[] inputBytes = ByteUtils.AsciiBytes(rawText);
             byte[] expectedBytes = ByteUtils.HexToByteArray(expected);

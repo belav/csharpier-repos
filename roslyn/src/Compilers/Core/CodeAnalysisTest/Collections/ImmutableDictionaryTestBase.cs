@@ -269,7 +269,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             TKey key,
             TValue value1,
             TValue value2
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -300,7 +301,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             TKey key,
             TValue value1,
             TValue value2
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -326,7 +328,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             IImmutableDictionary<TKey, TValue> map,
             TKey key,
             TValue value
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Assert.False(map.Contains(new KeyValuePair<TKey, TValue>(key, value)));
             Assert.False(map.Contains(key, value));
@@ -337,7 +340,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected void RemoveTestHelper<TKey, TValue>(
             IImmutableDictionary<TKey, TValue?> map,
             TKey key
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             // no-op remove
             Assert.True(IsSame(map, map.Remove(key)));
@@ -359,6 +363,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected abstract IEqualityComparer<TValue> GetValueComparer<TKey, TValue>(
             IImmutableDictionary<TKey, TValue> dictionary
-        ) where TKey : notnull;
+        )
+            where TKey : notnull;
     }
 }

@@ -11,7 +11,8 @@ namespace System.CommandLine.Collections
     /// An ordered set containing instances that are unique based on one or more string aliases per instance.
     /// </summary>
     /// <typeparam name="T">The type of the instances contained by the set.</typeparam>
-    public abstract class AliasedSet<T> : IReadOnlyList<T> where T : class
+    public abstract class AliasedSet<T> : IReadOnlyList<T>
+        where T : class
     {
         private protected readonly Dictionary<string, T> ItemsByAlias = new();
 

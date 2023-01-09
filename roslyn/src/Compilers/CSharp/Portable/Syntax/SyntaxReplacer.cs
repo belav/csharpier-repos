@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
             Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
-        ) where TNode : SyntaxNode
+        )
+            where TNode : SyntaxNode
         {
             var replacer = new Replacer<TNode>(
                 nodes,
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        private class Replacer<TNode> : CSharpSyntaxRewriter where TNode : SyntaxNode
+        private class Replacer<TNode> : CSharpSyntaxRewriter
+            where TNode : SyntaxNode
         {
             private readonly Func<TNode, TNode, SyntaxNode>? _computeReplacementNode;
             private readonly Func<SyntaxToken, SyntaxToken, SyntaxToken>? _computeReplacementToken;

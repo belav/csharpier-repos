@@ -16,7 +16,8 @@ using TypeNameFormatter;
 
 namespace Moq.Protected
 {
-    internal class ProtectedMock<T> : IProtectedMock<T> where T : class
+    internal class ProtectedMock<T> : IProtectedMock<T>
+        where T : class
     {
         private Mock<T> mock;
 
@@ -25,7 +26,8 @@ namespace Moq.Protected
             this.mock = mock;
         }
 
-        public IProtectedAsMock<T, TAnalog> As<TAnalog>() where TAnalog : class
+        public IProtectedAsMock<T, TAnalog> As<TAnalog>()
+            where TAnalog : class
         {
             return new ProtectedAsMock<T, TAnalog>(mock);
         }

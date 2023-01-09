@@ -22,7 +22,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides the APIs for managing user in a persistence store.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class UserManager<TUser> : IDisposable where TUser : class
+public class UserManager<TUser> : IDisposable
+    where TUser : class
 {
     /// <summary>
     /// The data protection purpose used for the reset password related methods.

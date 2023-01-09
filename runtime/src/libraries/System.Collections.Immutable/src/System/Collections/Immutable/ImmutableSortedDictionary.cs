@@ -33,7 +33,8 @@ namespace System.Collections.Immutable
         /// <returns>The immutable collection.</returns>
         public static ImmutableSortedDictionary<TKey, TValue> Create<TKey, TValue>(
             IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(keyComparer);
         }
@@ -49,7 +50,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedDictionary<TKey, TValue> Create<TKey, TValue>(
             IComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>.Empty.WithComparers(
                 keyComparer,
@@ -66,7 +68,8 @@ namespace System.Collections.Immutable
         /// <returns>The new immutable collection.</returns>
         public static ImmutableSortedDictionary<TKey, TValue> CreateRange<TKey, TValue>(
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>.Empty.AddRange(items);
         }
@@ -82,7 +85,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedDictionary<TKey, TValue> CreateRange<TKey, TValue>(
             IComparer<TKey>? keyComparer,
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer)
@@ -102,7 +106,8 @@ namespace System.Collections.Immutable
             IComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer,
             IEnumerable<KeyValuePair<TKey, TValue>> items
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ImmutableSortedDictionary<TKey, TValue>.Empty
                 .WithComparers(keyComparer, valueComparer)
@@ -130,7 +135,8 @@ namespace System.Collections.Immutable
         /// <returns>The immutable collection builder.</returns>
         public static ImmutableSortedDictionary<TKey, TValue>.Builder CreateBuilder<TKey, TValue>(
             IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return Create<TKey, TValue>(keyComparer).ToBuilder();
         }
@@ -146,7 +152,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedDictionary<TKey, TValue>.Builder CreateBuilder<TKey, TValue>(
             IComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return Create<TKey, TValue>(keyComparer, valueComparer).ToBuilder();
         }
@@ -173,7 +180,8 @@ namespace System.Collections.Immutable
             Func<TSource, TValue> elementSelector,
             IComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(source, nameof(source));
             Requires.NotNull(keySelector, nameof(keySelector));
@@ -200,7 +208,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<
             TKey,
             TValue
-        >(this ImmutableSortedDictionary<TKey, TValue>.Builder builder) where TKey : notnull
+        >(this ImmutableSortedDictionary<TKey, TValue>.Builder builder)
+            where TKey : notnull
         {
             Requires.NotNull(builder, nameof(builder));
 
@@ -227,7 +236,8 @@ namespace System.Collections.Immutable
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector,
             IComparer<TKey>? keyComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableSortedDictionary(
                 source,
@@ -256,7 +266,8 @@ namespace System.Collections.Immutable
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
             Func<TSource, TValue> elementSelector
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             return ToImmutableSortedDictionary(source, keySelector, elementSelector, null, null);
         }
@@ -277,7 +288,8 @@ namespace System.Collections.Immutable
             this IEnumerable<KeyValuePair<TKey, TValue>> source,
             IComparer<TKey>? keyComparer,
             IEqualityComparer<TValue>? valueComparer
-        ) where TKey : notnull
+        )
+            where TKey : notnull
         {
             Requires.NotNull(source, nameof(source));
 
@@ -319,7 +331,8 @@ namespace System.Collections.Immutable
         public static ImmutableSortedDictionary<TKey, TValue> ToImmutableSortedDictionary<
             TKey,
             TValue
-        >(this IEnumerable<KeyValuePair<TKey, TValue>> source) where TKey : notnull
+        >(this IEnumerable<KeyValuePair<TKey, TValue>> source)
+            where TKey : notnull
         {
             return ToImmutableSortedDictionary(source, null, null);
         }

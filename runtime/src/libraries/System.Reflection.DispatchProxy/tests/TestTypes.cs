@@ -119,7 +119,8 @@ public class TestType_ConcreteClass
     }
 }
 
-class TestType_DipatchProxyGenericConstraint<T> where T : DispatchProxy { }
+class TestType_DipatchProxyGenericConstraint<T>
+    where T : DispatchProxy { }
 
 // Negative -- demonstrates base type that is sealed and should generate exception
 public sealed class Sealed_TestDispatchProxy : DispatchProxy

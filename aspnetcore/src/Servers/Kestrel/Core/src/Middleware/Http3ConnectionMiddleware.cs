@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal
 {
-    internal class Http3ConnectionMiddleware<TContext> where TContext : notnull
+    internal class Http3ConnectionMiddleware<TContext>
+        where TContext : notnull
     {
         private readonly ServiceContext _serviceContext;
         private readonly IHttpApplication<TContext> _application;

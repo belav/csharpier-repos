@@ -758,7 +758,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public TMember? GetTupleMemberSymbolForUnderlyingMember<TMember>(
             TMember? underlyingMemberOpt
-        ) where TMember : Symbol
+        )
+            where TMember : Symbol
         {
             return IsTupleType
                 ? TupleData!.GetTupleMemberSymbolForUnderlyingMember(underlyingMemberOpt)
@@ -1443,7 +1444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             public TMember? GetTupleMemberSymbolForUnderlyingMember<TMember>(
                 TMember? underlyingMemberOpt
-            ) where TMember : Symbol
+            )
+                where TMember : Symbol
             {
                 if (underlyingMemberOpt is null)
                 {

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryImports
 {
     internal abstract class AbstractUnnecessaryImportsProvider<TSyntaxNode>
         : IUnnecessaryImportsProvider<TSyntaxNode>,
-            IEqualityComparer<TSyntaxNode> where TSyntaxNode : SyntaxNode
+            IEqualityComparer<TSyntaxNode>
+        where TSyntaxNode : SyntaxNode
     {
         public abstract ImmutableArray<TSyntaxNode> GetUnnecessaryImports(
             SemanticModel model,

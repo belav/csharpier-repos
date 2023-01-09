@@ -20,12 +20,14 @@ public class F : IMinusT<Base> { }
 
 public class A : Test101PlusT<int>
 {
-    public void method1<M>(IMinusT<int> t) where M : IPlusT<int> { }
+    public void method1<M>(IMinusT<int> t)
+        where M : IPlusT<int> { }
 }
 
 public class A2 : Test102PlusT<string>
 {
-    public string[] method2<M>(IMinusT<string[]> t) where M : IPlusT<string>
+    public string[] method2<M>(IMinusT<string[]> t)
+        where M : IPlusT<string>
     {
         return new string[10];
     }
@@ -33,7 +35,8 @@ public class A2 : Test102PlusT<string>
 
 public class A3 : Test101MinusT<object>
 {
-    public IMinusT<object[]> method1<M>(object t) where M : IMinusT<object>
+    public IMinusT<object[]> method1<M>(object t)
+        where M : IMinusT<object>
     {
         return (IMinusT<object[]>)new E();
     }
@@ -41,7 +44,8 @@ public class A3 : Test101MinusT<object>
 
 public class A4 : Test102MinusT<Base>
 {
-    public IMinusT<Base>[] method2<M>() where M : IMinusT<Base>
+    public IMinusT<Base>[] method2<M>()
+        where M : IMinusT<Base>
     {
         return (IMinusT<Base>[])new F[10];
     }
