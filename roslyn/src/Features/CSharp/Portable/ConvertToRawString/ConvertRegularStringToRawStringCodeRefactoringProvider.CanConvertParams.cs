@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
     {
         private readonly struct CanConvertParams
         {
-            public CanConvertParams(VirtualCharSequence characters, bool canBeSingleLine, bool canBeMultiLineWithoutLeadingWhiteSpaces)
+            public CanConvertParams(
+                VirtualCharSequence characters,
+                bool canBeSingleLine,
+                bool canBeMultiLineWithoutLeadingWhiteSpaces
+            )
             {
                 Characters = characters;
                 CanBeSingleLine = canBeSingleLine;

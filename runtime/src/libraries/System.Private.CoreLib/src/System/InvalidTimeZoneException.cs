@@ -6,25 +6,20 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InvalidTimeZoneException : Exception
     {
-        public InvalidTimeZoneException()
-        {
-        }
+        public InvalidTimeZoneException() { }
 
         public InvalidTimeZoneException(string? message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public InvalidTimeZoneException(string? message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        protected InvalidTimeZoneException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected InvalidTimeZoneException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

@@ -101,7 +101,8 @@ public class JavaScriptTestEncoder : JavaScriptEncoder
         int unicodeScalar,
         char* buffer,
         int bufferLength,
-        out int numberOfCharactersWritten)
+        out int numberOfCharactersWritten
+    )
     {
         if (buffer == null)
         {

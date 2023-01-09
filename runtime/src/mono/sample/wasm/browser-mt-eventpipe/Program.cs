@@ -13,14 +13,14 @@ namespace Sample
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine ("Hello, World!");
+            Console.WriteLine("Hello, World!");
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         [SupportedOSPlatform("browser")] // ask the analyzer to warn if we use APIs not supported on browser-wasm
         public static int TestMeaning()
         {
-            List<int> myList = new List<int>{ 1, 2, 3, 4 };
+            List<int> myList = new List<int> { 1, 2, 3, 4 };
             Console.WriteLine(myList);
 
             Thread t = new Thread(new ThreadStart(ThreadFuncTest));

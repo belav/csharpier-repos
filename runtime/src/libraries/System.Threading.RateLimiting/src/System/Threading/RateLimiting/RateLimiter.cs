@@ -61,7 +61,10 @@ namespace System.Threading.RateLimiting
         /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
         /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public ValueTask<RateLimitLease> AcquireAsync(int permitCount = 1, CancellationToken cancellationToken = default)
+        public ValueTask<RateLimitLease> AcquireAsync(
+            int permitCount = 1,
+            CancellationToken cancellationToken = default
+        )
         {
             if (permitCount < 0)
             {
@@ -70,7 +73,9 @@ namespace System.Threading.RateLimiting
 
             if (cancellationToken.IsCancellationRequested)
             {
-                return new ValueTask<RateLimitLease>(Task.FromCanceled<RateLimitLease>(cancellationToken));
+                return new ValueTask<RateLimitLease>(
+                    Task.FromCanceled<RateLimitLease>(cancellationToken)
+                );
             }
 
             return AcquireAsyncCore(permitCount, cancellationToken);
@@ -82,7 +87,10 @@ namespace System.Threading.RateLimiting
         /// <param name="permitCount">Number of permits to try and acquire.</param>
         /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
         /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
-        protected abstract ValueTask<RateLimitLease> AcquireAsyncCore(int permitCount, CancellationToken cancellationToken);
+        protected abstract ValueTask<RateLimitLease> AcquireAsyncCore(
+            int permitCount,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Dispose method for implementations to write.

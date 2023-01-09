@@ -27,20 +27,22 @@ public class ReflectionTest
 
         return Pass;
     }
-    
+
     public static int TestStaticBases()
     {
         Console.WriteLine("Testing static bases in library code are available..");
         MultiModuleLibrary.ReturnValue = 50;
         MultiModuleLibrary.ThreadStaticInt = 50;
-        
-        MultiModuleLibrary.StaticString = MultiModuleLibrary.ReturnValue.ToString() + MultiModuleLibrary.ThreadStaticInt.ToString();
+
+        MultiModuleLibrary.StaticString =
+            MultiModuleLibrary.ReturnValue.ToString()
+            + MultiModuleLibrary.ThreadStaticInt.ToString();
         if (MultiModuleLibrary.StaticString != "5050")
             return Fail;
-        
+
         if (MultiModuleLibrary.ReturnValue + MultiModuleLibrary.ThreadStaticInt != 100)
             return Fail;
-        
+
         return Pass;
     }
 
@@ -54,9 +56,17 @@ public class ReflectionTest
         if (!MultiModuleLibrary.GenericClass<string>.IsMdArrayOfT(new string[0, 0]))
             return Fail;
 
-        if (!MultiModuleLibrary.GenericClass<MultiModuleLibrary.GenericStruct<string>>.IsArrayOfT(new MultiModuleLibrary.GenericStruct<string>[0]))
+        if (
+            !MultiModuleLibrary.GenericClass<MultiModuleLibrary.GenericStruct<string>>.IsArrayOfT(
+                new MultiModuleLibrary.GenericStruct<string>[0]
+            )
+        )
             return Fail;
-        if (!MultiModuleLibrary.GenericClass<MultiModuleLibrary.GenericStruct<string>>.IsT(new MultiModuleLibrary.GenericStruct<string>()))
+        if (
+            !MultiModuleLibrary.GenericClass<MultiModuleLibrary.GenericStruct<string>>.IsT(
+                new MultiModuleLibrary.GenericStruct<string>()
+            )
+        )
             return Fail;
 
         if (!MultiModuleLibrary.MethodThatUsesGenerics())
@@ -67,7 +77,9 @@ public class ReflectionTest
 
     public static int TestGenericTLS()
     {
-        Console.WriteLine("Testing thread statics on generic types shared between modules are shared properly..");
+        Console.WriteLine(
+            "Testing thread statics on generic types shared between modules are shared properly.."
+        );
 
         if (!MultiModuleLibrary.MethodThatUsesGenericWithTLS())
             return Fail;

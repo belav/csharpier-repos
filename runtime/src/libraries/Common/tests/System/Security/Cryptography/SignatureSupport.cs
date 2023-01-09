@@ -33,7 +33,11 @@ namespace System.Security.Cryptography.Tests
                     case RSA rsa:
                         try
                         {
-                            rsa.SignData(Array.Empty<byte>(), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+                            rsa.SignData(
+                                Array.Empty<byte>(),
+                                HashAlgorithmName.SHA1,
+                                RSASignaturePadding.Pkcs1
+                            );
                             return true;
                         }
                         catch (CryptographicException)
@@ -41,7 +45,9 @@ namespace System.Security.Cryptography.Tests
                             return false;
                         }
                     default:
-                        throw new NotSupportedException($"Algorithm type {algorithm.GetType()} is not supported.");
+                        throw new NotSupportedException(
+                            $"Algorithm type {algorithm.GetType()} is not supported."
+                        );
                 }
 #endif
             }

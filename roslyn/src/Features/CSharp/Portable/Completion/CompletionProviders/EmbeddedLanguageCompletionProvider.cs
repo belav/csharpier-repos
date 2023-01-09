@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EmbeddedLanguageCompletionProvider([ImportMany] IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices) : base(languageServices, LanguageNames.CSharp)
-        {
-        }
+        public EmbeddedLanguageCompletionProvider(
+            [ImportMany]
+                IEnumerable<Lazy<ILanguageService, LanguageServiceMetadata>> languageServices
+        )
+            : base(languageServices, LanguageNames.CSharp) { }
     }
 }

@@ -16,22 +16,41 @@ internal static partial class Interop
             IntPtr ThreadHandle,
             TokenAccessLevels dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bOpenAsSelf,
-            out SafeAccessTokenHandle phThreadToken);
+            out SafeAccessTokenHandle phThreadToken
+        );
 
-        internal static bool OpenThreadToken(TokenAccessLevels desiredAccess, WinSecurityContext openAs, out SafeAccessTokenHandle tokenHandle)
+        internal static bool OpenThreadToken(
+            TokenAccessLevels desiredAccess,
+            WinSecurityContext openAs,
+            out SafeAccessTokenHandle tokenHandle
+        )
         {
             bool openAsSelf = true;
             if (openAs == WinSecurityContext.Thread)
                 openAsSelf = false;
 
-            if (OpenThreadToken(Kernel32.GetCurrentThread(), desiredAccess, openAsSelf, out tokenHandle))
+            if (
+                OpenThreadToken(
+                    Kernel32.GetCurrentThread(),
+                    desiredAccess,
+                    openAsSelf,
+                    out tokenHandle
+                )
+            )
                 return true;
 
             if (openAs == WinSecurityContext.Both)
             {
                 openAsSelf = false;
                 tokenHandle.Dispose();
-                if (OpenThreadToken(Kernel32.GetCurrentThread(), desiredAccess, openAsSelf, out tokenHandle))
+                if (
+                    OpenThreadToken(
+                        Kernel32.GetCurrentThread(),
+                        desiredAccess,
+                        openAsSelf,
+                        out tokenHandle
+                    )
+                )
                     return true;
             }
 

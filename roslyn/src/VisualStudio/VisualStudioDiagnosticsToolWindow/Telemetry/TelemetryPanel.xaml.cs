@@ -105,7 +105,11 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.Telemetry
 
                 RecordIfCodeAction(type, typeDiscovered);
 
-                foreach (var nestedTypeInfo in type.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic))
+                foreach (
+                    var nestedTypeInfo in type.GetNestedTypes(
+                        BindingFlags.Public | BindingFlags.NonPublic
+                    )
+                )
                 {
                     ScanType(nestedTypeInfo, typeDiscovered);
                 }
@@ -149,6 +153,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.Telemetry
             {
                 _action = disposeAction;
             }
+
             public void Dispose()
             {
                 _action?.Invoke();

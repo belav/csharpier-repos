@@ -40,14 +40,18 @@ namespace System
             };
         }
 
-        internal static EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(Type enumType, bool getNames = true)
-            where TUnderlyingValue : struct, INumber<TUnderlyingValue>
+        internal static EnumInfo<TUnderlyingValue> GetEnumInfo<TUnderlyingValue>(
+            Type enumType,
+            bool getNames = true
+        ) where TUnderlyingValue : struct, INumber<TUnderlyingValue>
         {
             Debug.Assert(enumType != null);
             Debug.Assert(enumType is RuntimeType);
             Debug.Assert(enumType.IsEnum);
 
-            return ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo<TUnderlyingValue>(enumType);
+            return ReflectionAugments.ReflectionCoreCallbacks.GetEnumInfo<TUnderlyingValue>(
+                enumType
+            );
         }
 #pragma warning restore
 

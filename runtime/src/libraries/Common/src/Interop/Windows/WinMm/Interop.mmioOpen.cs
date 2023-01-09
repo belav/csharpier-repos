@@ -11,7 +11,11 @@ internal static partial class Interop
         internal const int MMIO_READ = 0x00000000;
         internal const int MMIO_ALLOCBUF = 0x00010000;
 
-        [LibraryImport(Libraries.WinMM, EntryPoint = "mmioOpenW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.WinMM,
+            EntryPoint = "mmioOpenW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial IntPtr mmioOpen(string fileName, IntPtr not_used, int flags);
     }
 }

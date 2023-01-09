@@ -14,9 +14,11 @@ namespace System.Xml.Resolvers
     //
     public partial class XmlPreloadedResolver : XmlResolver
     {
-        public override Task<object> GetEntityAsync(Uri absoluteUri,
-                                             string? role,
-                                             Type? ofObjectToReturn)
+        public override Task<object> GetEntityAsync(
+            Uri absoluteUri,
+            string? role,
+            Type? ofObjectToReturn
+        )
         {
             ArgumentNullException.ThrowIfNull(absoluteUri);
 
@@ -30,7 +32,11 @@ namespace System.Xml.Resolvers
                 throw new XmlException(SR.Format(SR.Xml_CannotResolveUrl, absoluteUri));
             }
 
-            if (ofObjectToReturn == null || ofObjectToReturn == typeof(Stream) || ofObjectToReturn == typeof(object))
+            if (
+                ofObjectToReturn == null
+                || ofObjectToReturn == typeof(Stream)
+                || ofObjectToReturn == typeof(object)
+            )
             {
                 return Task.FromResult<object>(data.AsStream());
             }

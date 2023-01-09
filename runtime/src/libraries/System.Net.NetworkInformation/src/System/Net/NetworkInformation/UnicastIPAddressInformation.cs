@@ -70,11 +70,12 @@ namespace System.Net.NetworkInformation
         internal static IPAddress PrefixLengthToSubnetMask(byte prefixLength, AddressFamily family)
         {
             Debug.Assert((0 <= prefixLength) && (prefixLength <= 126));
-            Debug.Assert((family == AddressFamily.InterNetwork) || (family == AddressFamily.InterNetworkV6));
+            Debug.Assert(
+                (family == AddressFamily.InterNetwork) || (family == AddressFamily.InterNetworkV6)
+            );
 
-            Span<byte> addressBytes = (family == AddressFamily.InterNetwork) ?
-                stackalloc byte[4] :
-                stackalloc byte[16];
+            Span<byte> addressBytes =
+                (family == AddressFamily.InterNetwork) ? stackalloc byte[4] : stackalloc byte[16];
             addressBytes.Clear();
 
             Debug.Assert(prefixLength <= (addressBytes.Length * 8));

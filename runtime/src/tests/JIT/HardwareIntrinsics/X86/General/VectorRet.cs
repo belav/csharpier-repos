@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.General;
+
 public partial class Program
 {
     private static Vector128<float>[] s_v128_array;
@@ -104,8 +105,14 @@ public partial class Program
         float t1 = 3 * ti * ti * t;
         float t2 = 3 * ti * t * t;
         float t3 = t * t * t;
-        Vector128<float> tmp1 = Sse.Add(Sse.Subtract(Vector128.Create(t0), s_v128_0), Sse.Subtract(Vector128.Create(t1), s_v128_1));
-        Vector128<float> tmp2 = Sse.Add(Sse.Subtract(Vector128.Create(t2), s_v128_2), Sse.Subtract(Vector128.Create(t3), s_v128_3));
+        Vector128<float> tmp1 = Sse.Add(
+            Sse.Subtract(Vector128.Create(t0), s_v128_0),
+            Sse.Subtract(Vector128.Create(t1), s_v128_1)
+        );
+        Vector128<float> tmp2 = Sse.Add(
+            Sse.Subtract(Vector128.Create(t2), s_v128_2),
+            Sse.Subtract(Vector128.Create(t3), s_v128_3)
+        );
         return Sse.Add(tmp1, tmp2);
     }
 
@@ -131,8 +138,14 @@ public partial class Program
         int t1 = 3 * ti * ti * t;
         int t2 = 3 * ti * t * t;
         int t3 = t * t * t;
-        Vector128<short> tmp1 = Sse2.Add(Sse2.Subtract(Vector128.Create((short)t0), s_v128i_0), Sse2.Subtract(Vector128.Create((short)t1), s_v128i_1));
-        Vector128<short> tmp2 = Sse2.Add(Sse2.Subtract(Vector128.Create((short)t2), s_v128i_2), Sse2.Subtract(Vector128.Create((short)t3), s_v128i_3));
+        Vector128<short> tmp1 = Sse2.Add(
+            Sse2.Subtract(Vector128.Create((short)t0), s_v128i_0),
+            Sse2.Subtract(Vector128.Create((short)t1), s_v128i_1)
+        );
+        Vector128<short> tmp2 = Sse2.Add(
+            Sse2.Subtract(Vector128.Create((short)t2), s_v128i_2),
+            Sse2.Subtract(Vector128.Create((short)t3), s_v128i_3)
+        );
         return Sse2.Add(tmp1, tmp2);
     }
 
@@ -158,8 +171,14 @@ public partial class Program
         float t1 = 3 * ti * ti * t;
         float t2 = 3 * ti * t * t;
         float t3 = t * t * t;
-        Vector256<float> tmp1 = Avx.Add(Avx.Subtract(Vector256.Create(t0), s_v256_0), Avx.Subtract(Vector256.Create(t1), s_v256_1));
-        Vector256<float> tmp2 = Avx.Add(Avx.Subtract(Vector256.Create(t2), s_v256_2), Avx.Subtract(Vector256.Create(t3), s_v256_3));
+        Vector256<float> tmp1 = Avx.Add(
+            Avx.Subtract(Vector256.Create(t0), s_v256_0),
+            Avx.Subtract(Vector256.Create(t1), s_v256_1)
+        );
+        Vector256<float> tmp2 = Avx.Add(
+            Avx.Subtract(Vector256.Create(t2), s_v256_2),
+            Avx.Subtract(Vector256.Create(t3), s_v256_3)
+        );
         return Avx.Add(tmp1, tmp2);
     }
 
@@ -185,8 +204,14 @@ public partial class Program
         int t1 = 3 * ti * ti * t;
         int t2 = 3 * ti * t * t;
         int t3 = t * t * t;
-        Vector256<byte> tmp1 = Avx2.Add(Avx2.Subtract(Vector256.Create((byte)t0), s_v256i_0), Avx2.Subtract(Vector256.Create((byte)t1), s_v256i_1));
-        Vector256<byte> tmp2 = Avx2.Add(Avx2.Subtract(Vector256.Create((byte)t2), s_v256i_2), Avx2.Subtract(Vector256.Create((byte)t3), s_v256i_3));
+        Vector256<byte> tmp1 = Avx2.Add(
+            Avx2.Subtract(Vector256.Create((byte)t0), s_v256i_0),
+            Avx2.Subtract(Vector256.Create((byte)t1), s_v256i_1)
+        );
+        Vector256<byte> tmp2 = Avx2.Add(
+            Avx2.Subtract(Vector256.Create((byte)t2), s_v256i_2),
+            Avx2.Subtract(Vector256.Create((byte)t3), s_v256i_3)
+        );
         return Avx2.Add(tmp1, tmp2);
     }
 
@@ -249,7 +274,6 @@ public partial class Program
             }
         }
 
-
         Vector128<int> v2 = Vector128.Create((int)5);
         Vector128<int> vres2 = Vector128PlusOne<int>(v2);
 
@@ -291,8 +315,16 @@ public partial class Program
         short* result = stackalloc short[8];
         Sse2.Store(result, vres);
 
-        if ((result[0] != 4) || (result[1] != 5) || (result[2] != 6) || (result[3] != 7) ||
-            (result[4] != 8) || (result[5] != 9) || (result[6] != 10) || (result[7] != 11))
+        if (
+            (result[0] != 4)
+            || (result[1] != 5)
+            || (result[2] != 6)
+            || (result[3] != 7)
+            || (result[4] != 8)
+            || (result[5] != 9)
+            || (result[6] != 10)
+            || (result[7] != 11)
+        )
         {
             Console.WriteLine("Vector128Int16ReturnTest did not return expected value");
             Console.Write("[ ");
@@ -325,7 +357,6 @@ public partial class Program
                 return Fail;
             }
         }
-
 
         Vector256<int> v2 = Vector256.Create((int)5);
         Vector256<int> vres2 = Vector256PlusOne<int>(v2);
@@ -368,8 +399,16 @@ public partial class Program
         int* result = stackalloc int[8];
         Avx.Store(result, vres);
 
-        if ((result[0] != 4) || (result[1] != 5) || (result[2] != 6) || (result[3] != 7) ||
-            (result[4] != 8) || (result[5] != 9) || (result[6] != 10) || (result[7] != 11))
+        if (
+            (result[0] != 4)
+            || (result[1] != 5)
+            || (result[2] != 6)
+            || (result[3] != 7)
+            || (result[4] != 8)
+            || (result[5] != 9)
+            || (result[6] != 10)
+            || (result[7] != 11)
+        )
         {
             Console.WriteLine("Vector256Int32ReturnTest did not return expected value");
             Console.Write("[ ");
@@ -384,7 +423,11 @@ public partial class Program
         return Pass;
     }
 
-    [Xunit.ActiveIssue("https://github.com/dotnet/runtime/issues/75767", typeof(TestLibrary.PlatformDetection), nameof(TestLibrary.PlatformDetection.IsMonoLLVMAOT))]
+    [Xunit.ActiveIssue(
+        "https://github.com/dotnet/runtime/issues/75767",
+        typeof(TestLibrary.PlatformDetection),
+        nameof(TestLibrary.PlatformDetection.IsMonoLLVMAOT)
+    )]
     [Fact]
     public static unsafe void VectorRet()
     {

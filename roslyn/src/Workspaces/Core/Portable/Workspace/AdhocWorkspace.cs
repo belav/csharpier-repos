@@ -19,14 +19,10 @@ namespace Microsoft.CodeAnalysis
     public sealed class AdhocWorkspace : Workspace
     {
         public AdhocWorkspace(HostServices host, string workspaceKind = WorkspaceKind.Custom)
-            : base(host, workspaceKind)
-        {
-        }
+            : base(host, workspaceKind) { }
 
         public AdhocWorkspace()
-            : this(Host.Mef.MefHostServices.DefaultHost)
-        {
-        }
+            : this(Host.Mef.MefHostServices.DefaultHost) { }
 
         public override bool CanApplyChange(ApplyChangesKind feature)
         {
@@ -42,8 +38,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Clears all projects and documents from the workspace.
         /// </summary>
-        public new void ClearSolution()
-            => base.ClearSolution();
+        public new void ClearSolution() => base.ClearSolution();
 
         /// <summary>
         /// Adds an entire solution to the workspace, replacing any existing solution.
@@ -67,7 +62,13 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public Project AddProject(string name, string language)
         {
-            var info = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Create(), name, name, language);
+            var info = ProjectInfo.Create(
+                ProjectId.CreateNewId(),
+                VersionStamp.Create(),
+                name,
+                name,
+                language
+            );
             return this.AddProject(info);
         }
 

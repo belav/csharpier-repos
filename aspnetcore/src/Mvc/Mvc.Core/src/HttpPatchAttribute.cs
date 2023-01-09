@@ -17,9 +17,7 @@ public class HttpPatchAttribute : HttpMethodAttribute
     /// Creates a new <see cref="HttpPatchAttribute"/>.
     /// </summary>
     public HttpPatchAttribute()
-        : base(_supportedMethods)
-    {
-    }
+        : base(_supportedMethods) { }
 
     /// <summary>
     /// Creates a new <see cref="HttpPatchAttribute"/> with the given route template.

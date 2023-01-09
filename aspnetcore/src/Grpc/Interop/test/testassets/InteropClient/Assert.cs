@@ -59,7 +59,8 @@ internal static class Assert
         throw new InvalidOperationException("Failure assert.");
     }
 
-    public static async Task<TException> ThrowsAsync<TException>(Func<Task> action) where TException : Exception
+    public static async Task<TException> ThrowsAsync<TException>(Func<Task> action)
+        where TException : Exception
     {
         try
         {
@@ -72,7 +73,9 @@ internal static class Assert
                 return (TException)ex;
             }
 
-            throw new InvalidOperationException($"Expected ${typeof(TException)} but got ${ex.GetType()}.");
+            throw new InvalidOperationException(
+                $"Expected ${typeof(TException)} but got ${ex.GetType()}."
+            );
         }
 
         throw new InvalidOperationException("No exception thrown.");
@@ -91,7 +94,9 @@ internal static class Assert
                 return (TException)ex;
             }
 
-            throw new InvalidOperationException($"Expected ${typeof(TException)} but got ${ex.GetType()}.");
+            throw new InvalidOperationException(
+                $"Expected ${typeof(TException)} but got ${ex.GetType()}."
+            );
         }
 
         throw new InvalidOperationException("No exception thrown.");
@@ -117,7 +122,9 @@ internal static class CollectionAssert
     {
         if (expected.Count != actual.Count)
         {
-            throw new InvalidOperationException($"Collection lengths differ. {expected.Count} but got {actual.Count}.");
+            throw new InvalidOperationException(
+                $"Collection lengths differ. {expected.Count} but got {actual.Count}."
+            );
         }
 
         for (var i = 0; i < expected.Count; i++)

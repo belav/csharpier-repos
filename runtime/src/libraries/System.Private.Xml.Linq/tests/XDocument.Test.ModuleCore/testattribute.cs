@@ -34,27 +34,25 @@ namespace Microsoft.Test.ModuleCore
         protected string pversion;
 
         //Allows Inheritance (ie: object to determine if ever been set)
-        protected int? ppriority;       //Allows Inheritance
-        protected string ppurpose;      //Allows Inheritance
-        protected bool? pimplemented;   //Allows Inheritance
-        protected string[] powners;     //Allows Inheritance
-        protected string[] pareas;          //Allows Inheritance
-        protected bool? pskipped;       //Allows Inheritance
-        protected bool? perror;         //Allows Inheritance
-        protected bool? pmanual;        //Allows Inheritance
-        protected SecurityFlags? psecurity;     //Allows Inheritance
-        protected string pfiltercriteria;//Allows Inheritance
-        protected string[] planguages;      //Allows Inheritance
-        protected string pxml;          //Allows Inheritance
-        protected int? ptimeout;        //Allows Inheritance
-        protected int? pthreads;        //Allows Inheritance
-        protected int? prepeat;     //Allows Inheritance
-        protected bool? pstress;        //Allows Inheritance
+        protected int? ppriority; //Allows Inheritance
+        protected string ppurpose; //Allows Inheritance
+        protected bool? pimplemented; //Allows Inheritance
+        protected string[] powners; //Allows Inheritance
+        protected string[] pareas; //Allows Inheritance
+        protected bool? pskipped; //Allows Inheritance
+        protected bool? perror; //Allows Inheritance
+        protected bool? pmanual; //Allows Inheritance
+        protected SecurityFlags? psecurity; //Allows Inheritance
+        protected string pfiltercriteria; //Allows Inheritance
+        protected string[] planguages; //Allows Inheritance
+        protected string pxml; //Allows Inheritance
+        protected int? ptimeout; //Allows Inheritance
+        protected int? pthreads; //Allows Inheritance
+        protected int? prepeat; //Allows Inheritance
+        protected bool? pstress; //Allows Inheritance
 
         //Constructors
-        public TestAttribute()
-        {
-        }
+        public TestAttribute() { }
 
         public TestAttribute(string desc)
         {
@@ -451,7 +449,6 @@ namespace Microsoft.Test.ModuleCore
         }
     }
 
-
     ////////////////////////////////////////////////////////////////
     // TestModule (attribute)
     //
@@ -464,19 +461,13 @@ namespace Microsoft.Test.ModuleCore
 
         //Constructors
         public TestModuleAttribute()
-            : base()
-        {
-        }
+            : base() { }
 
         public TestModuleAttribute(string desc)
-            : base(desc)
-        {
-        }
+            : base(desc) { }
 
         public TestModuleAttribute(string desc, params object[] parameters)
-            : base(desc, parameters)
-        {
-        }
+            : base(desc, parameters) { }
 
         [TestProperty(Visible = true)]
         public virtual string Created
@@ -501,21 +492,14 @@ namespace Microsoft.Test.ModuleCore
     {
         //Constructors
         public TestCaseAttribute()
-            : base()
-        {
-        }
+            : base() { }
 
         public TestCaseAttribute(string desc)
-            : base(desc)
-        {
-        }
+            : base(desc) { }
 
         public TestCaseAttribute(string desc, params object[] parameters)
-            : base(desc, parameters)
-        {
-        }
+            : base(desc, parameters) { }
     }
-
 
     ////////////////////////////////////////////////////////////////
     // Variation (attribute)
@@ -527,19 +511,13 @@ namespace Microsoft.Test.ModuleCore
 
         //Constructors
         public VariationAttribute()
-            : base()
-        {
-        }
+            : base() { }
 
         public VariationAttribute(string desc)
-            : base(desc)
-        {
-        }
+            : base(desc) { }
 
         public VariationAttribute(string desc, params object[] parameters)
-            : base(desc, parameters)
-        {
-        }
+            : base(desc, parameters) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -557,9 +535,7 @@ namespace Microsoft.Test.ModuleCore
         protected TestPropertyFlags pflags = TestPropertyFlags.Read;
 
         //Constructors
-        public TestPropertyAttribute()
-        {
-        }
+        public TestPropertyAttribute() { }
 
         public virtual string Name
         {
@@ -654,9 +630,7 @@ namespace Microsoft.Test.ModuleCore
         protected string pfilter;
 
         //Constructors
-        public TestIncludeAttribute()
-        {
-        }
+        public TestIncludeAttribute() { }
 
         public virtual string Name
         {

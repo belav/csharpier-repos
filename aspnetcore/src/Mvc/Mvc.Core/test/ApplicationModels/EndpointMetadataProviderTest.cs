@@ -21,38 +21,69 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 public class EndpointMetadataProviderTest
 {
     [Theory]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithMetadataInValueTaskOfResult))]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithMetadataInValueTaskOfActionResult))]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithMetadataInValueTaskOfResult)
+    )]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithMetadataInValueTaskOfActionResult)
+    )]
     [InlineData(typeof(TestController), nameof(TestController.ActionWithMetadataInTaskOfResult))]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithMetadataInTaskOfActionResult))]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithMetadataInTaskOfActionResult)
+    )]
     [InlineData(typeof(TestController), nameof(TestController.ActionWithMetadataInResult))]
     [InlineData(typeof(TestController), nameof(TestController.ActionWithMetadataInActionResult))]
-    public void DiscoversEndpointMetadata_FromReturnTypeImplementingIEndpointMetadataProvider(Type controllerType, string actionName)
+    public void DiscoversEndpointMetadata_FromReturnTypeImplementingIEndpointMetadataProvider(
+        Type controllerType,
+        string actionName
+    )
     {
-        // Act 
+        // Act
         var endpoint = GetEndpoint(controllerType, actionName);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
     public void DiscoversEndpointMetadata_ForAllSelectors_FromReturnTypeImplementingIEndpointMetadataProvider()
     {
         // Act
-        var endpoints = GetEndpoints(typeof(TestController), nameof(TestController.MultipleSelectorsActionWithMetadataInActionResult));
+        var endpoints = GetEndpoints(
+            typeof(TestController),
+            nameof(TestController.MultipleSelectorsActionWithMetadataInActionResult)
+        );
 
         // Assert
-        Assert.Collection(endpoints,
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }),
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }));
+        Assert.Collection(
+            endpoints,
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+                ),
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+                )
+        );
     }
 
     [Fact]
     public void DiscoversMetadata_FromParametersImplementingIEndpointParameterMetadataProvider()
     {
         // Act
-        var endpoint = GetEndpoint(typeof(TestController), nameof(TestController.ActionWithParameterMetadata));
+        var endpoint = GetEndpoint(
+            typeof(TestController),
+            nameof(TestController.ActionWithParameterMetadata)
+        );
 
         // Assert
         Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" });
@@ -62,56 +93,99 @@ public class EndpointMetadataProviderTest
     public void DiscoversEndpointMetadata_ForAllSelectors_FromParametersImplementingIEndpointParameterMetadataProvider()
     {
         // Act
-        var endpoints = GetEndpoints(typeof(TestController), nameof(TestController.MultipleSelectorsActionWithParameterMetadata));
+        var endpoints = GetEndpoints(
+            typeof(TestController),
+            nameof(TestController.MultipleSelectorsActionWithParameterMetadata)
+        );
 
         // Assert
-        Assert.Collection(endpoints,
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" }),
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" }));
+        Assert.Collection(
+            endpoints,
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is ParameterNameMetadata { Name: "param1" }
+                ),
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is ParameterNameMetadata { Name: "param1" }
+                )
+        );
     }
 
     [Fact]
     public void DiscoversMetadata_FromParametersImplementingIEndpointMetadataProvider()
     {
         // Act
-        var endpoint = GetEndpoint(typeof(TestController), nameof(TestController.ActionWithParameterMetadata));
+        var endpoint = GetEndpoint(
+            typeof(TestController),
+            nameof(TestController.ActionWithParameterMetadata)
+        );
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
     }
 
     [Fact]
     public void DiscoversEndpointMetadata_ForAllSelectors_FromParametersImplementingIEndpointMetadataProvider()
     {
         // Act
-        var endpoints = GetEndpoints(typeof(TestController), nameof(TestController.MultipleSelectorsActionWithParameterMetadata));
+        var endpoints = GetEndpoints(
+            typeof(TestController),
+            nameof(TestController.MultipleSelectorsActionWithParameterMetadata)
+        );
 
         // Assert
-        Assert.Collection(endpoints,
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }),
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }));
+        Assert.Collection(
+            endpoints,
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+                ),
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+                )
+        );
     }
 
     [Fact]
     public void DiscoversMetadata_CorrectOrder()
     {
         // Arrange
-        var dataSource = GetEndpointDataSource(typeof(TestController), nameof(TestController.ActionWithParameterMetadata));
+        var dataSource = GetEndpointDataSource(
+            typeof(TestController),
+            nameof(TestController.ActionWithParameterMetadata)
+        );
         var routeGroupContext = new RouteGroupContext
         {
             Prefix = RoutePatternFactory.Parse("/"),
             Conventions = new Action<EndpointBuilder>[]
             {
-                builder => builder.Metadata.Add(new CustomEndpointMetadata() { Source = MetadataSource.Caller }),
+                builder =>
+                    builder.Metadata.Add(
+                        new CustomEndpointMetadata() { Source = MetadataSource.Caller }
+                    ),
             },
             FinallyConventions = new Action<EndpointBuilder>[]
             {
-                builder => builder.Metadata.Add(new CustomEndpointMetadata() { Source = MetadataSource.Finally }),
+                builder =>
+                    builder.Metadata.Add(
+                        new CustomEndpointMetadata() { Source = MetadataSource.Finally }
+                    ),
             },
         };
 
         // Act
-        var endpoint = Assert.Single(FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext)));
+        var endpoint = Assert.Single(
+            FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext))
+        );
 
         // Assert
         Assert.Collection(
@@ -123,17 +197,36 @@ public class EndpointMetadataProviderTest
             m => Assert.True(m is ControllerActionDescriptor),
             m => Assert.True(m is RouteNameMetadata),
             m => Assert.True(m is SuppressLinkGenerationMetadata),
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Finally }));
+            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Finally })
+        );
     }
 
     [Theory]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithNoAcceptsMetadataInValueTaskOfResult))]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithNoAcceptsMetadataInValueTaskOfActionResult))]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithNoAcceptsMetadataInTaskOfResult))]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithNoAcceptsMetadataInTaskOfActionResult))]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithNoAcceptsMetadataInValueTaskOfResult)
+    )]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithNoAcceptsMetadataInValueTaskOfActionResult)
+    )]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithNoAcceptsMetadataInTaskOfResult)
+    )]
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithNoAcceptsMetadataInTaskOfActionResult)
+    )]
     [InlineData(typeof(TestController), nameof(TestController.ActionWithNoAcceptsMetadataInResult))]
-    [InlineData(typeof(TestController), nameof(TestController.ActionWithNoAcceptsMetadataInActionResult))]
-    public void AllowsRemovalOfMetadata_ByReturnTypeImplementingIEndpointMetadataProvider(Type controllerType, string actionName)
+    [InlineData(
+        typeof(TestController),
+        nameof(TestController.ActionWithNoAcceptsMetadataInActionResult)
+    )]
+    public void AllowsRemovalOfMetadata_ByReturnTypeImplementingIEndpointMetadataProvider(
+        Type controllerType,
+        string actionName
+    )
     {
         // Arrange
         var dataSource = GetEndpointDataSource(controllerType, actionName);
@@ -147,7 +240,9 @@ public class EndpointMetadataProviderTest
         };
 
         // Act
-        var endpoint = Assert.Single(FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext)));
+        var endpoint = Assert.Single(
+            FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext))
+        );
 
         // Assert
         Assert.DoesNotContain(endpoint.Metadata, m => m is IAcceptsMetadata);
@@ -157,7 +252,10 @@ public class EndpointMetadataProviderTest
     public void AllowsRemovalOfMetadata_ByParameterTypeImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var dataSource = GetEndpointDataSource(typeof(TestController), nameof(TestController.ActionWithRemovalFromParameterEndpointMetadata));
+        var dataSource = GetEndpointDataSource(
+            typeof(TestController),
+            nameof(TestController.ActionWithRemovalFromParameterEndpointMetadata)
+        );
         var routeGroupContext = new RouteGroupContext
         {
             Prefix = RoutePatternFactory.Parse("/"),
@@ -168,7 +266,9 @@ public class EndpointMetadataProviderTest
         };
 
         //Act
-        var endpoint = Assert.Single(FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext)));
+        var endpoint = Assert.Single(
+            FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext))
+        );
 
         // Assert
         Assert.DoesNotContain(endpoint.Metadata, m => m is IAcceptsMetadata);
@@ -178,7 +278,10 @@ public class EndpointMetadataProviderTest
     public void AllowsRemovalOfMetadata_ByParameterTypeImplementingIEndpointParameterMetadataProvider()
     {
         // Arrange
-        var dataSource = GetEndpointDataSource(typeof(TestController), nameof(TestController.ActionWithRemovalFromParameterMetadata));
+        var dataSource = GetEndpointDataSource(
+            typeof(TestController),
+            nameof(TestController.ActionWithRemovalFromParameterMetadata)
+        );
         var routeGroupContext = new RouteGroupContext
         {
             Prefix = RoutePatternFactory.Parse("/"),
@@ -189,7 +292,9 @@ public class EndpointMetadataProviderTest
         };
 
         // Act
-        var endpoint = Assert.Single(FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext)));
+        var endpoint = Assert.Single(
+            FilterEndpoints(dataSource.GetGroupedEndpoints(routeGroupContext))
+        );
 
         // Assert
         Assert.DoesNotContain(endpoint.Metadata, m => m is IAcceptsMetadata);
@@ -199,16 +304,32 @@ public class EndpointMetadataProviderTest
     public void CanObserveRoutePattern_ForAllSelectors_FromParameterImplementingIEndpointetadataProvider()
     {
         // Act
-        var endpoints = GetEndpoints(typeof(TestController), nameof(TestController.MultipleSelectorsActionWithRoutePatternMetadata));
+        var endpoints = GetEndpoints(
+            typeof(TestController),
+            nameof(TestController.MultipleSelectorsActionWithRoutePatternMetadata)
+        );
 
         // Assert
-        Assert.Collection(endpoints,
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is RoutePatternMetadata { RoutePattern: "selector1" }),
-            endpoint => Assert.Contains(endpoint.Metadata, m => m is RoutePatternMetadata { RoutePattern: "selector2" }));
+        Assert.Collection(
+            endpoints,
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is RoutePatternMetadata { RoutePattern: "selector1" }
+                ),
+            endpoint =>
+                Assert.Contains(
+                    endpoint.Metadata,
+                    m => m is RoutePatternMetadata { RoutePattern: "selector2" }
+                )
+        );
     }
 
-    private Endpoint GetEndpoint(Type controllerType, string actionName) => Assert.Single(GetEndpoints(controllerType, actionName));
-    private List<Endpoint> GetEndpoints(Type controllerType, string actionName) => FilterEndpoints(GetEndpointDataSource(controllerType, actionName).Endpoints);
+    private Endpoint GetEndpoint(Type controllerType, string actionName) =>
+        Assert.Single(GetEndpoints(controllerType, actionName));
+
+    private List<Endpoint> GetEndpoints(Type controllerType, string actionName) =>
+        FilterEndpoints(GetEndpointDataSource(controllerType, actionName).Endpoints);
 
     // Filter out duplicate endpoints created by AddConventionalLinkGenerationRoute.
     // These are added per route defined by MapControllerRoute rather than per action, so do not have inferred metadata.
@@ -227,7 +348,10 @@ public class EndpointMetadataProviderTest
         return nonLinkGenerationEndpoints;
     }
 
-    private ControllerActionEndpointDataSource GetEndpointDataSource(Type controllerType, string actionName)
+    private ControllerActionEndpointDataSource GetEndpointDataSource(
+        Type controllerType,
+        string actionName
+    )
     {
         // Create ActionDescriptors how we normally would by default for the given controllerType
         var manager = new ApplicationPartManager();
@@ -235,10 +359,14 @@ public class EndpointMetadataProviderTest
         manager.FeatureProviders.Add(new TestFeatureProvider());
 
         var options = Options.Create(new MvcOptions());
-        var modelProvider = new DefaultApplicationModelProvider(options, new EmptyModelMetadataProvider());
+        var modelProvider = new DefaultApplicationModelProvider(
+            options,
+            new EmptyModelMetadataProvider()
+        );
         var controllerActionDescriptorProvider = new ControllerActionDescriptorProvider(
             manager,
-            new ApplicationModelFactory(new[] { modelProvider }, options));
+            new ApplicationModelFactory(new[] { modelProvider }, options)
+        );
 
         var actionDescriptorProviderContext = new ActionDescriptorProviderContext();
         controllerActionDescriptorProvider.OnProvidersExecuting(actionDescriptorProviderContext);
@@ -249,8 +377,7 @@ public class EndpointMetadataProviderTest
 
         foreach (var descriptor in actionDescriptorProviderContext.Results)
         {
-            if (descriptor is ControllerActionDescriptor cad &&
-                cad.MethodInfo.Name == actionName)
+            if (descriptor is ControllerActionDescriptor cad && cad.MethodInfo.Name == actionName)
             {
                 descriptorsWithMatchingActionName.Add(cad);
             }
@@ -267,13 +394,18 @@ public class EndpointMetadataProviderTest
         services.AddRouting();
         var serviceProvider = services.BuildServiceProvider();
 
-        var endpointFactory = new ActionEndpointFactory(serviceProvider.GetRequiredService<RoutePatternTransformer>(), Enumerable.Empty<IRequestDelegateFactory>(), serviceProvider);
+        var endpointFactory = new ActionEndpointFactory(
+            serviceProvider.GetRequiredService<RoutePatternTransformer>(),
+            Enumerable.Empty<IRequestDelegateFactory>(),
+            serviceProvider
+        );
 
         var dataSource = new ControllerActionEndpointDataSource(
             new ControllerActionEndpointDataSourceIdProvider(),
             actions,
             endpointFactory,
-            new OrderedEndpointsSequenceProvider());
+            new OrderedEndpointsSequenceProvider()
+        );
 
         // Add single route for non-attribute-routed actions.
         dataSource.AddRoute("default", "/{controller}/{action}/{id?}", null, null, null);
@@ -281,7 +413,8 @@ public class EndpointMetadataProviderTest
         return dataSource;
     }
 
-    private sealed class MockActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
+    private sealed class MockActionDescriptorCollectionProvider
+        : IActionDescriptorCollectionProvider
     {
         public MockActionDescriptorCollectionProvider(IReadOnlyList<ActionDescriptor> actions)
         {
@@ -295,52 +428,64 @@ public class EndpointMetadataProviderTest
     {
         [Custom]
         public ActionResult ActionWithParameterMetadata(AddsCustomParameterMetadata param1) => null;
-        public ActionResult ActionWithRemovalFromParameterMetadata(RemovesAcceptsParameterMetadata param1) => null;
-        public ActionResult ActionWithRemovalFromParameterEndpointMetadata(RemovesAcceptsParameterEndpointMetadata param1) => null;
+
+        public ActionResult ActionWithRemovalFromParameterMetadata(
+            RemovesAcceptsParameterMetadata param1
+        ) => null;
+
+        public ActionResult ActionWithRemovalFromParameterEndpointMetadata(
+            RemovesAcceptsParameterEndpointMetadata param1
+        ) => null;
 
         [HttpGet("selector1")]
         [HttpGet("selector2")]
-        public ActionResult MultipleSelectorsActionWithParameterMetadata(AddsCustomParameterMetadata param1) => null;
+        public ActionResult MultipleSelectorsActionWithParameterMetadata(
+            AddsCustomParameterMetadata param1
+        ) => null;
 
         [HttpGet("selector1")]
         [HttpGet("selector2")]
-        public ActionResult MultipleSelectorsActionWithRoutePatternMetadata(AddsRoutePatternMetadata param1) => null;
+        public ActionResult MultipleSelectorsActionWithRoutePatternMetadata(
+            AddsRoutePatternMetadata param1
+        ) => null;
 
         public AddsCustomEndpointMetadataResult ActionWithMetadataInResult() => null;
 
-        public ValueTask<AddsCustomEndpointMetadataResult> ActionWithMetadataInValueTaskOfResult()
-            => ValueTask.FromResult<AddsCustomEndpointMetadataResult>(null);
+        public ValueTask<AddsCustomEndpointMetadataResult> ActionWithMetadataInValueTaskOfResult() =>
+            ValueTask.FromResult<AddsCustomEndpointMetadataResult>(null);
 
-        public Task<AddsCustomEndpointMetadataResult> ActionWithMetadataInTaskOfResult()
-            => Task.FromResult<AddsCustomEndpointMetadataResult>(null);
+        public Task<AddsCustomEndpointMetadataResult> ActionWithMetadataInTaskOfResult() =>
+            Task.FromResult<AddsCustomEndpointMetadataResult>(null);
 
         [HttpGet("selector1")]
         [HttpGet("selector2")]
-        public AddsCustomEndpointMetadataActionResult MultipleSelectorsActionWithMetadataInActionResult() => null;
+        public AddsCustomEndpointMetadataActionResult MultipleSelectorsActionWithMetadataInActionResult() =>
+            null;
 
         public AddsCustomEndpointMetadataActionResult ActionWithMetadataInActionResult() => null;
 
-        public ValueTask<AddsCustomEndpointMetadataActionResult> ActionWithMetadataInValueTaskOfActionResult()
-            => ValueTask.FromResult<AddsCustomEndpointMetadataActionResult>(null);
+        public ValueTask<AddsCustomEndpointMetadataActionResult> ActionWithMetadataInValueTaskOfActionResult() =>
+            ValueTask.FromResult<AddsCustomEndpointMetadataActionResult>(null);
 
-        public Task<AddsCustomEndpointMetadataActionResult> ActionWithMetadataInTaskOfActionResult()
-            => Task.FromResult<AddsCustomEndpointMetadataActionResult>(null);
+        public Task<AddsCustomEndpointMetadataActionResult> ActionWithMetadataInTaskOfActionResult() =>
+            Task.FromResult<AddsCustomEndpointMetadataActionResult>(null);
 
         public RemovesAcceptsMetadataResult ActionWithNoAcceptsMetadataInResult() => null;
 
-        public ValueTask<RemovesAcceptsMetadataResult> ActionWithNoAcceptsMetadataInValueTaskOfResult()
-            => ValueTask.FromResult<RemovesAcceptsMetadataResult>(null);
+        public ValueTask<RemovesAcceptsMetadataResult> ActionWithNoAcceptsMetadataInValueTaskOfResult() =>
+            ValueTask.FromResult<RemovesAcceptsMetadataResult>(null);
 
-        public Task<RemovesAcceptsMetadataResult> ActionWithNoAcceptsMetadataInTaskOfResult()
-            => Task.FromResult<RemovesAcceptsMetadataResult>(null);
+        public Task<RemovesAcceptsMetadataResult> ActionWithNoAcceptsMetadataInTaskOfResult() =>
+            Task.FromResult<RemovesAcceptsMetadataResult>(null);
 
-        public RemovesAcceptsMetadataActionResult ActionWithNoAcceptsMetadataInActionResult() => null;
+        public RemovesAcceptsMetadataActionResult ActionWithNoAcceptsMetadataInActionResult() =>
+            null;
 
-        public ValueTask<RemovesAcceptsMetadataActionResult> ActionWithNoAcceptsMetadataInValueTaskOfActionResult()
-            => ValueTask.FromResult<RemovesAcceptsMetadataActionResult>(null);
+        public ValueTask<RemovesAcceptsMetadataActionResult> ActionWithNoAcceptsMetadataInValueTaskOfActionResult() =>
+            ValueTask.FromResult<RemovesAcceptsMetadataActionResult>(null);
 
-        public Task<RemovesAcceptsMetadataActionResult> ActionWithNoAcceptsMetadataInTaskOfActionResult()
-            => Task.FromResult<RemovesAcceptsMetadataActionResult>(null);
+        public Task<RemovesAcceptsMetadataActionResult> ActionWithNoAcceptsMetadataInTaskOfActionResult() =>
+            Task.FromResult<RemovesAcceptsMetadataActionResult>(null);
     }
 
     private class CustomEndpointMetadata
@@ -360,9 +505,7 @@ public class EndpointMetadataProviderTest
         public string RoutePattern { get; init; }
     }
 
-    private class CustomAttribute : Attribute
-    {
-    }
+    private class CustomAttribute : Attribute { }
 
     private enum MetadataSource
     {
@@ -372,7 +515,9 @@ public class EndpointMetadataProviderTest
         Finally
     }
 
-    private class AddsCustomParameterMetadata : IEndpointParameterMetadataProvider, IEndpointMetadataProvider
+    private class AddsCustomParameterMetadata
+        : IEndpointParameterMetadataProvider,
+            IEndpointMetadataProvider
     {
         public static void PopulateMetadata(ParameterInfo parameter, EndpointBuilder builder)
         {
@@ -401,7 +546,9 @@ public class EndpointMetadataProviderTest
         {
             builder.Metadata.Add(new CustomEndpointMetadata { Source = MetadataSource.ReturnType });
         }
-        public Task ExecuteResultAsync(ActionContext context) => throw new NotImplementedException();
+
+        public Task ExecuteResultAsync(ActionContext context) =>
+            throw new NotImplementedException();
     }
 
     private class AddsRoutePatternMetadata : IEndpointMetadataProvider
@@ -413,7 +560,9 @@ public class EndpointMetadataProviderTest
                 return;
             }
 
-            builder.Metadata.Add(new RoutePatternMetadata { RoutePattern = reb.RoutePattern.RawText });
+            builder.Metadata.Add(
+                new RoutePatternMetadata { RoutePattern = reb.RoutePattern.RawText }
+            );
         }
     }
 
@@ -451,7 +600,8 @@ public class EndpointMetadataProviderTest
             }
         }
 
-        public Task ExecuteResultAsync(ActionContext context) => throw new NotImplementedException();
+        public Task ExecuteResultAsync(ActionContext context) =>
+            throw new NotImplementedException();
     }
 
     private class RemovesAcceptsParameterMetadata : IEndpointParameterMetadataProvider

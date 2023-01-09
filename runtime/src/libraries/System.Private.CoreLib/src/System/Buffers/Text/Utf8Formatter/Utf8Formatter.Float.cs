@@ -28,7 +28,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(double value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            double value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             return TryFormatFloatingPoint<double>(value, destination, out bytesWritten, format);
         }
@@ -53,12 +58,22 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(float value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            float value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             return TryFormatFloatingPoint<float>(value, destination, out bytesWritten, format);
         }
 
-        private static bool TryFormatFloatingPoint<T>(T value, Span<byte> destination, out int bytesWritten, StandardFormat format) where T : ISpanFormattable
+        private static bool TryFormatFloatingPoint<T>(
+            T value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format
+        ) where T : ISpanFormattable
         {
             scoped Span<char> formatText = default;
 
@@ -79,7 +94,14 @@ namespace System.Buffers.Text
             scoped ReadOnlySpan<char> utf16Text;
 
             // Try to format into the stack buffer.  If we're successful, we can avoid all allocations.
-            if (value.TryFormat(stackBuffer, out int formattedLength, formatText, CultureInfo.InvariantCulture))
+            if (
+                value.TryFormat(
+                    stackBuffer,
+                    out int formattedLength,
+                    formatText,
+                    CultureInfo.InvariantCulture
+                )
+            )
             {
                 utf16Text = stackBuffer.Slice(0, formattedLength);
             }

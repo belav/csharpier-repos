@@ -14,9 +14,7 @@ public class FormatterCollection<TFormatter> : Collection<TFormatter> where TFor
     /// <summary>
     /// Initializes a new instance of the <see cref="FormatterCollection{TFormatter}"/> class that is empty.
     /// </summary>
-    public FormatterCollection()
-    {
-    }
+    public FormatterCollection() { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="FormatterCollection{TFormatter}"/> class
@@ -24,9 +22,7 @@ public class FormatterCollection<TFormatter> : Collection<TFormatter> where TFor
     /// </summary>
     /// <param name="list">The list that is wrapped by the new collection.</param>
     public FormatterCollection(IList<TFormatter> list)
-        : base(list)
-    {
-    }
+        : base(list) { }
 
     /// <summary>
     /// Removes all formatters of the specified type.

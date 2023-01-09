@@ -9,14 +9,10 @@ namespace Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 internal abstract class SyntaxList : GreenNode
 {
     internal SyntaxList()
-        : base(SyntaxKind.List)
-    {
-    }
+        : base(SyntaxKind.List) { }
 
     internal SyntaxList(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
-        : base(SyntaxKind.List, diagnostics, annotations)
-    {
-    }
+        : base(SyntaxKind.List, diagnostics, annotations) { }
 
     internal override bool IsList => true;
 
@@ -145,7 +141,12 @@ internal abstract class SyntaxList : GreenNode
             _child1 = child1;
         }
 
-        internal WithTwoChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, GreenNode child0, GreenNode child1)
+        internal WithTwoChildren(
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            GreenNode child0,
+            GreenNode child1
+        )
         {
             SlotCount = 2;
             AdjustFlagsAndWidth(child0);
@@ -206,7 +207,13 @@ internal abstract class SyntaxList : GreenNode
             _child2 = child2;
         }
 
-        internal WithThreeChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, GreenNode child0, GreenNode child1, GreenNode child2)
+        internal WithThreeChildren(
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            GreenNode child0,
+            GreenNode child1,
+            GreenNode child2
+        )
             : base(diagnostics, annotations)
         {
             SlotCount = 3;
@@ -266,7 +273,11 @@ internal abstract class SyntaxList : GreenNode
             this.InitializeChildren();
         }
 
-        internal WithManyChildrenBase(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, ArrayElement<GreenNode>[] children)
+        internal WithManyChildrenBase(
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            ArrayElement<GreenNode>[] children
+        )
             : base(diagnostics, annotations)
         {
             this.children = children;
@@ -315,14 +326,14 @@ internal abstract class SyntaxList : GreenNode
     internal sealed class WithManyChildren : WithManyChildrenBase
     {
         internal WithManyChildren(ArrayElement<GreenNode>[] children)
-            : base(children)
-        {
-        }
+            : base(children) { }
 
-        internal WithManyChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, ArrayElement<GreenNode>[] children)
-            : base(diagnostics, annotations, children)
-        {
-        }
+        internal WithManyChildren(
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            ArrayElement<GreenNode>[] children
+        )
+            : base(diagnostics, annotations, children) { }
 
         internal override GreenNode SetDiagnostics(RazorDiagnostic[] errors)
         {
@@ -345,7 +356,12 @@ internal abstract class SyntaxList : GreenNode
             _childOffsets = CalculateOffsets(children);
         }
 
-        internal WithLotsOfChildren(RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations, ArrayElement<GreenNode>[] children, int[] childOffsets)
+        internal WithLotsOfChildren(
+            RazorDiagnostic[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            ArrayElement<GreenNode>[] children,
+            int[] childOffsets
+        )
             : base(diagnostics, annotations, children)
         {
             _childOffsets = childOffsets;

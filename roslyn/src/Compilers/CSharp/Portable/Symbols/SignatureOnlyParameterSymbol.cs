@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             TypeWithAnnotations type,
             ImmutableArray<CustomModifier> refCustomModifiers,
             bool isParams,
-            RefKind refKind)
+            RefKind refKind
+        )
         {
             Debug.Assert((object)type.Type != null);
             Debug.Assert(!refCustomModifiers.IsDefault);
@@ -34,68 +35,150 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _refKind = refKind;
         }
 
-        public override TypeWithAnnotations TypeWithAnnotations { get { return _type; } }
+        public override TypeWithAnnotations TypeWithAnnotations
+        {
+            get { return _type; }
+        }
 
-        public override ImmutableArray<CustomModifier> RefCustomModifiers { get { return _refCustomModifiers; } }
+        public override ImmutableArray<CustomModifier> RefCustomModifiers
+        {
+            get { return _refCustomModifiers; }
+        }
 
-        public override bool IsParams { get { return _isParams; } }
+        public override bool IsParams
+        {
+            get { return _isParams; }
+        }
 
-        public override RefKind RefKind { get { return _refKind; } }
+        public override RefKind RefKind
+        {
+            get { return _refKind; }
+        }
 
-        public override string Name { get { return ""; } }
+        public override string Name
+        {
+            get { return ""; }
+        }
 
-        public override bool IsImplicitlyDeclared { get { return true; } }
+        public override bool IsImplicitlyDeclared
+        {
+            get { return true; }
+        }
 
-        public override bool IsDiscard { get { return false; } }
+        public override bool IsDiscard
+        {
+            get { return false; }
+        }
 
-        internal override DeclarationScope EffectiveScope
-            => ParameterHelpers.IsRefScopedByDefault(this) ? DeclarationScope.RefScoped : DeclarationScope.Unscoped;
+        internal override DeclarationScope EffectiveScope =>
+            ParameterHelpers.IsRefScopedByDefault(this)
+                ? DeclarationScope.RefScoped
+                : DeclarationScope.Unscoped;
 
         internal override bool UseUpdatedEscapeRules => false;
 
         #region Not used by MethodSignatureComparer
 
-        internal override bool IsMetadataIn { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsMetadataIn
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsMetadataOut { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsMetadataOut
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override MarshalPseudoCustomAttributeData MarshallingInformation { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override MarshalPseudoCustomAttributeData MarshallingInformation
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        public override int Ordinal { get { throw ExceptionUtilities.Unreachable(); } }
+        public override int Ordinal
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsMetadataOptional { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsMetadataOptional
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override ConstantValue ExplicitDefaultConstantValue { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override ConstantValue ExplicitDefaultConstantValue
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsIDispatchConstant { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsIDispatchConstant
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsIUnknownConstant { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsIUnknownConstant
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsCallerFilePath { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsCallerFilePath
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsCallerLineNumber { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsCallerLineNumber
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override bool IsCallerMemberName { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override bool IsCallerMemberName
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override int CallerArgumentExpressionParameterIndex { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override int CallerArgumentExpressionParameterIndex
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override FlowAnalysisAnnotations FlowAnalysisAnnotations { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override FlowAnalysisAnnotations FlowAnalysisAnnotations
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override ImmutableHashSet<string> NotNullIfParameterNotNull { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override ImmutableHashSet<string> NotNullIfParameterNotNull
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        public override Symbol ContainingSymbol { get { throw ExceptionUtilities.Unreachable(); } }
+        public override Symbol ContainingSymbol
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        public override ImmutableArray<Location> Locations { get { throw ExceptionUtilities.Unreachable(); } }
+        public override ImmutableArray<Location> Locations
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences { get { throw ExceptionUtilities.Unreachable(); } }
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        public override AssemblySymbol ContainingAssembly { get { throw ExceptionUtilities.Unreachable(); } }
+        public override AssemblySymbol ContainingAssembly
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override ModuleSymbol ContainingModule { get { throw ExceptionUtilities.Unreachable(); } }
+        internal override ModuleSymbol ContainingModule
+        {
+            get { throw ExceptionUtilities.Unreachable(); }
+        }
 
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => throw ExceptionUtilities.Unreachable();
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            throw ExceptionUtilities.Unreachable();
 
-        internal override bool HasInterpolatedStringHandlerArgumentError => throw ExceptionUtilities.Unreachable();
+        internal override bool HasInterpolatedStringHandlerArgumentError =>
+            throw ExceptionUtilities.Unreachable();
 
         #endregion Not used by MethodSignatureComparer
 
@@ -107,12 +190,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             var other = obj as SignatureOnlyParameterSymbol;
-            return other is not null &&
-                TypeSymbol.Equals(_type.Type, other._type.Type, compareKind) &&
-                _type.CustomModifiers.Equals(other._type.CustomModifiers) &&
-                _refCustomModifiers.SequenceEqual(other._refCustomModifiers) &&
-                _isParams == other._isParams &&
-                _refKind == other._refKind;
+            return other is not null
+                && TypeSymbol.Equals(_type.Type, other._type.Type, compareKind)
+                && _type.CustomModifiers.Equals(other._type.CustomModifiers)
+                && _refCustomModifiers.SequenceEqual(other._refCustomModifiers)
+                && _isParams == other._isParams
+                && _refKind == other._refKind;
         }
 
         public override int GetHashCode()
@@ -121,9 +204,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 _type.Type.GetHashCode(),
                 Hash.Combine(
                     Hash.CombineValues(_type.CustomModifiers),
-                    Hash.Combine(
-                        _isParams.GetHashCode(),
-                        _refKind.GetHashCode())));
+                    Hash.Combine(_isParams.GetHashCode(), _refKind.GetHashCode())
+                )
+            );
         }
     }
 }

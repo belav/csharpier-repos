@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             IAsynchronousOperationListener listener,
             IGlobalOperationNotificationService globalOperationNotificationService,
             TimeSpan backOffTimeSpan,
-            CancellationToken shutdownToken)
+            CancellationToken shutdownToken
+        )
             : base(listener, backOffTimeSpan, shutdownToken)
         {
             _globalOperationNotificationService = globalOperationNotificationService;
@@ -33,10 +34,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             _globalOperationNotificationService.Stopped -= OnGlobalOperationStopped;
         }
 
-        private void OnGlobalOperationStarted(object? sender, EventArgs e)
-            => this.SetIsPaused(isPaused: true);
+        private void OnGlobalOperationStarted(object? sender, EventArgs e) =>
+            this.SetIsPaused(isPaused: true);
 
-        private void OnGlobalOperationStopped(object? sender, EventArgs e)
-            => this.SetIsPaused(isPaused: false);
+        private void OnGlobalOperationStopped(object? sender, EventArgs e) =>
+            this.SetIsPaused(isPaused: false);
     }
 }

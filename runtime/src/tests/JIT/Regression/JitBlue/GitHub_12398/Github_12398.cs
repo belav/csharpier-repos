@@ -17,30 +17,36 @@ public class GitHub_12398
     public static int Main()
     {
         int result = 100;
-        if (TestBinary() != 0) {
+        if (TestBinary() != 0)
+        {
             Console.WriteLine("Failed TestBinary");
             result = -1;
         }
 
-        if (TestCompare()) {
+        if (TestCompare())
+        {
             Console.WriteLine("Failed TestCompare");
             result = -1;
         }
 
-        if (TestMul() != 1) {
+        if (TestMul() != 1)
+        {
             Console.WriteLine("Failed TestMul");
             result = -1;
         }
 
-        if (TestMulTypeSize() != 0) {
-            Console.WriteLine ("Failed TestMulTypeSize");
+        if (TestMulTypeSize() != 0)
+        {
+            Console.WriteLine("Failed TestMulTypeSize");
             result = -1;
         }
 
-        if (result == 100) {
+        if (result == 100)
+        {
             Console.WriteLine("PASSED");
         }
-        else {
+        else
+        {
             Console.WriteLine("FAILED");
         }
 
@@ -80,4 +86,3 @@ public class GitHub_12398
         return i;
     }
 }
-

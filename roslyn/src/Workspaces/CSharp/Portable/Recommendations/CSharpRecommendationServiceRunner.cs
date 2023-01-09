@@ -21,18 +21,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Recommendations;
 
 internal partial class CSharpRecommendationService
 {
-    private sealed partial class CSharpRecommendationServiceRunner : AbstractRecommendationServiceRunner
+    private sealed partial class CSharpRecommendationServiceRunner
+        : AbstractRecommendationServiceRunner
     {
         public CSharpRecommendationServiceRunner(
-            CSharpSyntaxContext context, bool filterOutOfScopeLocals, CancellationToken cancellationToken)
-            : base(context, filterOutOfScopeLocals, cancellationToken)
-        {
-        }
+            CSharpSyntaxContext context,
+            bool filterOutOfScopeLocals,
+            CancellationToken cancellationToken
+        )
+            : base(context, filterOutOfScopeLocals, cancellationToken) { }
 
         public override RecommendedSymbols GetRecommendedSymbols()
         {
-            if (_context.IsInNonUserCode ||
-                _context.IsPreProcessorDirectiveContext)
+            if (_context.IsInNonUserCode || _context.IsPreProcessorDirectiveContext)
             {
                 return default;
             }
@@ -43,7 +44,11 @@ internal partial class CSharpRecommendationService
             return GetSymbolsOffOfContainer();
         }
 
-        public override bool TryGetExplicitTypeOfLambdaParameter(SyntaxNode lambdaSyntax, int ordinalInLambda, [NotNullWhen(true)] out ITypeSymbol? explicitLambdaParameterType)
+        public override bool TryGetExplicitTypeOfLambdaParameter(
+            SyntaxNode lambdaSyntax,
+            int ordinalInLambda,
+            [NotNullWhen(true)] out ITypeSymbol? explicitLambdaParameterType
+        )
         {
             if (lambdaSyntax is ParenthesizedLambdaExpressionSyntax parenthesizedLambdaSyntax)
             {
@@ -53,7 +58,9 @@ internal partial class CSharpRecommendationService
                     var parameter = parameters[ordinalInLambda];
                     if (parameter.Type != null)
                     {
-                        explicitLambdaParameterType = _context.SemanticModel.GetTypeInfo(parameter.Type, _cancellationToken).Type;
+                        explicitLambdaParameterType = _context.SemanticModel
+                            .GetTypeInfo(parameter.Type, _cancellationToken)
+                            .Type;
                         return explicitLambdaParameterType != null;
                     }
                 }
@@ -71,9 +78,14 @@ internal partial class CSharpRecommendationService
                 // Script, interactive, or top-level statement
                 return GetSymbolsForGlobalStatementContext();
             }
-            else if (_context.IsAnyExpressionContext ||
-                     _context.IsStatementContext ||
-                     _context.SyntaxTree.IsDefiniteCastTypeContext(_context.Position, _context.LeftToken))
+            else if (
+                _context.IsAnyExpressionContext
+                || _context.IsStatementContext
+                || _context.SyntaxTree.IsDefiniteCastTypeContext(
+                    _context.Position,
+                    _context.LeftToken
+                )
+            )
             {
                 // GitHub #717: With automatic brace completion active, typing '(i' produces "(i)", which gets parsed as
                 // as cast. The user might be trying to type a parenthesized expression, so even though a cast
@@ -94,8 +106,13 @@ internal partial class CSharpRecommendationService
             }
             else if (_context.IsDestructorTypeContext)
             {
-                var symbol = _context.SemanticModel.GetDeclaredSymbol(_context.ContainingTypeOrEnumDeclaration!, _cancellationToken);
-                return symbol == null ? ImmutableArray<ISymbol>.Empty : ImmutableArray.Create<ISymbol>(symbol);
+                var symbol = _context.SemanticModel.GetDeclaredSymbol(
+                    _context.ContainingTypeOrEnumDeclaration!,
+                    _cancellationToken
+                );
+                return symbol == null
+                    ? ImmutableArray<ISymbol>.Empty
+                    : ImmutableArray.Create<ISymbol>(symbol);
             }
             else if (_context.IsNamespaceDeclarationNameContext)
             {
@@ -117,10 +134,14 @@ internal partial class CSharpRecommendationService
                     => GetSymbolsOffOfDereferencedExpression(memberAccess.Expression),
 
                 // This code should be executing only if the cursor is between two dots in a dotdot token.
-                RangeExpressionSyntax rangeExpression => GetSymbolsOffOfExpression(rangeExpression.LeftOperand),
+                RangeExpressionSyntax rangeExpression
+                    => GetSymbolsOffOfExpression(rangeExpression.LeftOperand),
                 QualifiedNameSyntax qualifiedName => GetSymbolsOffOfName(qualifiedName.Left),
                 AliasQualifiedNameSyntax aliasName => GetSymbolsOffOffAlias(aliasName.Alias),
-                MemberBindingExpressionSyntax _ => GetSymbolsOffOfConditionalReceiver(node.GetParentConditionalAccessExpression()!.Expression),
+                MemberBindingExpressionSyntax _
+                    => GetSymbolsOffOfConditionalReceiver(
+                        node.GetParentConditionalAccessExpression()!.Expression
+                    ),
                 _ => default,
             };
         }
@@ -140,9 +161,11 @@ internal partial class CSharpRecommendationService
             // using System;
             // |
 
-            if (token.Kind() == SyntaxKind.SemicolonToken &&
-                token.Parent.IsKind(SyntaxKind.UsingDirective) &&
-                position >= token.Span.End)
+            if (
+                token.Kind() == SyntaxKind.SemicolonToken
+                && token.Parent.IsKind(SyntaxKind.UsingDirective)
+                && position >= token.Span.End
+            )
             {
                 var compUnit = (CompilationUnitSyntax)syntaxTree.GetRoot(_cancellationToken);
                 if (compUnit.Usings.Count > 0 && compUnit.Usings.Last().SemicolonToken == token)
@@ -158,15 +181,17 @@ internal partial class CSharpRecommendationService
 
         private ImmutableArray<ISymbol> GetSymbolsForTypeArgumentOfConstraintClause()
         {
-            var enclosingSymbol = _context.LeftToken.GetRequiredParent()
+            var enclosingSymbol = _context.LeftToken
+                .GetRequiredParent()
                 .AncestorsAndSelf()
                 .Select(n => _context.SemanticModel.GetDeclaredSymbol(n, _cancellationToken))
                 .WhereNotNull()
                 .FirstOrDefault();
 
-            var symbols = enclosingSymbol != null
-                ? enclosingSymbol.GetTypeArguments()
-                : ImmutableArray<ITypeSymbol>.Empty;
+            var symbols =
+                enclosingSymbol != null
+                    ? enclosingSymbol.GetTypeArguments()
+                    : ImmutableArray<ITypeSymbol>.Empty;
 
             return ImmutableArray<ISymbol>.CastUp(symbols);
         }
@@ -177,9 +202,9 @@ internal partial class CSharpRecommendationService
             if (aliasSymbol == null)
                 return default;
 
-            return new RecommendedSymbols(_context.SemanticModel.LookupNamespacesAndTypes(
-                alias.SpanStart,
-                aliasSymbol.Target));
+            return new RecommendedSymbols(
+                _context.SemanticModel.LookupNamespacesAndTypes(alias.SpanStart, aliasSymbol.Target)
+            );
         }
 
         private ImmutableArray<ISymbol> GetSymbolsForLabelContext()
@@ -188,14 +213,19 @@ internal partial class CSharpRecommendationService
 
             // Exclude labels (other than 'default') that come from case switch statements
 
-            return allLabels
-                .WhereAsArray(label => label.DeclaringSyntaxReferences.First().GetSyntax(_cancellationToken)
-                    .Kind() is SyntaxKind.LabeledStatement or SyntaxKind.DefaultSwitchLabel);
+            return allLabels.WhereAsArray(
+                label =>
+                    label.DeclaringSyntaxReferences.First().GetSyntax(_cancellationToken).Kind()
+                        is SyntaxKind.LabeledStatement
+                            or SyntaxKind.DefaultSwitchLabel
+            );
         }
 
         private ImmutableArray<ISymbol> GetSymbolsForTypeOrNamespaceContext()
         {
-            var symbols = _context.SemanticModel.LookupNamespacesAndTypes(_context.LeftToken.SpanStart);
+            var symbols = _context.SemanticModel.LookupNamespacesAndTypes(
+                _context.LeftToken.SpanStart
+            );
 
             if (_context.TargetToken.IsUsingKeywordInUsingDirective())
             {
@@ -218,36 +248,51 @@ internal partial class CSharpRecommendationService
             //     I = 0;
 
             // The problem is that "i I = 0" causes a local to be in scope called "I".  So, later when
-            // we look up symbols, it masks any other 'I's in scope (i.e. if there's a field with that 
+            // we look up symbols, it masks any other 'I's in scope (i.e. if there's a field with that
             // name).  If this is the case, we do not want to filter out inaccessible locals.
             var filterOutOfScopeLocals = _filterOutOfScopeLocals;
             if (filterOutOfScopeLocals)
-                filterOutOfScopeLocals = !_context.LeftToken.GetRequiredParent().IsFoundUnder<LocalDeclarationStatementSyntax>(d => d.Declaration.Type);
+                filterOutOfScopeLocals = !_context.LeftToken
+                    .GetRequiredParent()
+                    .IsFoundUnder<LocalDeclarationStatementSyntax>(d => d.Declaration.Type);
 
-            var symbols = !_context.IsNameOfContext && _context.LeftToken.GetRequiredParent().IsInStaticContext()
-                ? _context.SemanticModel.LookupStaticMembers(_context.LeftToken.SpanStart)
-                : _context.SemanticModel.LookupSymbols(_context.LeftToken.SpanStart);
+            var symbols =
+                !_context.IsNameOfContext
+                && _context.LeftToken.GetRequiredParent().IsInStaticContext()
+                    ? _context.SemanticModel.LookupStaticMembers(_context.LeftToken.SpanStart)
+                    : _context.SemanticModel.LookupSymbols(_context.LeftToken.SpanStart);
 
             // filter our top level locals if we're inside a type declaration.
             if (_context.ContainingTypeDeclaration != null)
-                symbols = symbols.WhereAsArray(s => s.ContainingSymbol.Name != WellKnownMemberNames.TopLevelStatementsEntryPointMethodName);
+                symbols = symbols.WhereAsArray(
+                    s =>
+                        s.ContainingSymbol.Name
+                        != WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
+                );
 
             // Filter out any extension methods that might be imported by a using static directive.
             // But include extension methods declared in the context's type or it's parents
             var contextOuterTypes = ComputeOuterTypes(_context, _cancellationToken);
-            var contextEnclosingNamedType = _context.SemanticModel.GetEnclosingNamedType(_context.Position, _cancellationToken);
+            var contextEnclosingNamedType = _context.SemanticModel.GetEnclosingNamedType(
+                _context.Position,
+                _cancellationToken
+            );
 
-            symbols = symbols.WhereAsArray(symbol =>
-                !symbol.IsExtensionMethod() ||
-                Equals(contextEnclosingNamedType, symbol.ContainingType) ||
-                contextOuterTypes.Any(outerType => outerType.Equals(symbol.ContainingType)));
+            symbols = symbols.WhereAsArray(
+                symbol =>
+                    !symbol.IsExtensionMethod()
+                    || Equals(contextEnclosingNamedType, symbol.ContainingType)
+                    || contextOuterTypes.Any(outerType => outerType.Equals(symbol.ContainingType))
+            );
 
             // The symbols may include local variables that are declared later in the method and
             // should not be included in the completion list, so remove those. Filter them away,
             // unless we're in the debugger, where we show all locals in scope.
             if (filterOutOfScopeLocals)
             {
-                symbols = symbols.WhereAsArray(symbol => !symbol.IsInaccessibleLocal(_context.Position));
+                symbols = symbols.WhereAsArray(
+                    symbol => !symbol.IsInaccessibleLocal(_context.Position)
+                );
             }
 
             return symbols;
@@ -259,8 +304,21 @@ internal partial class CSharpRecommendationService
             if (_context.IsEnumTypeMemberAccessContext)
                 return GetSymbolsOffOfExpression(name);
 
-            if (name.ShouldNameExpressionBeTreatedAsExpressionInsteadOfType(_context.SemanticModel, out var nameBinding, out var container))
-                return GetSymbolsOffOfBoundExpression(name, name, nameBinding, container, unwrapNullable: false, isForDereference: false);
+            if (
+                name.ShouldNameExpressionBeTreatedAsExpressionInsteadOfType(
+                    _context.SemanticModel,
+                    out var nameBinding,
+                    out var container
+                )
+            )
+                return GetSymbolsOffOfBoundExpression(
+                    name,
+                    name,
+                    nameBinding,
+                    container,
+                    unwrapNullable: false,
+                    isForDereference: false
+                );
 
             // We're in a name-only context, since if we were an expression we'd be a
             // MemberAccessExpressionSyntax. Thus, let's do other namespaces and types.
@@ -269,20 +327,28 @@ internal partial class CSharpRecommendationService
                 return default;
 
             if (_context.IsNameOfContext)
-                return new RecommendedSymbols(_context.SemanticModel.LookupSymbols(position: name.SpanStart, container: symbol));
+                return new RecommendedSymbols(
+                    _context.SemanticModel.LookupSymbols(
+                        position: name.SpanStart,
+                        container: symbol
+                    )
+                );
 
             var symbols = _context.SemanticModel.LookupNamespacesAndTypes(
                 position: name.SpanStart,
-                container: symbol);
+                container: symbol
+            );
 
             if (_context.IsNamespaceDeclarationNameContext)
             {
                 var declarationSyntax = name.GetAncestorOrThis<BaseNamespaceDeclarationSyntax>();
-                return new RecommendedSymbols(symbols.WhereAsArray(s => IsNonIntersectingNamespace(s, declarationSyntax)));
+                return new RecommendedSymbols(
+                    symbols.WhereAsArray(s => IsNonIntersectingNamespace(s, declarationSyntax))
+                );
             }
 
             // Filter the types when in a using directive, but not an alias.
-            // 
+            //
             // Cases:
             //    using | -- Show namespaces
             //    using A.| -- Show namespaces
@@ -291,9 +357,11 @@ internal partial class CSharpRecommendationService
             var usingDirective = name.GetAncestorOrThis<UsingDirectiveSyntax>();
             if (usingDirective != null && usingDirective.Alias == null)
             {
-                return new RecommendedSymbols(usingDirective.StaticKeyword.IsKind(SyntaxKind.StaticKeyword)
-                    ? symbols.WhereAsArray(s => !s.IsDelegateType() && !s.IsInterfaceType())
-                    : symbols.WhereAsArray(s => s.IsNamespace()));
+                return new RecommendedSymbols(
+                    usingDirective.StaticKeyword.IsKind(SyntaxKind.StaticKeyword)
+                        ? symbols.WhereAsArray(s => !s.IsDelegateType() && !s.IsInterfaceType())
+                        : symbols.WhereAsArray(s => s.IsNamespace())
+                );
             }
 
             return new RecommendedSymbols(symbols);
@@ -310,51 +378,107 @@ internal partial class CSharpRecommendationService
                 ? awaitExpression.Expression.WalkDownParentheses()
                 : originalExpression.WalkDownParentheses();
 
-            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(expression, _cancellationToken);
+            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
+                expression,
+                _cancellationToken
+            );
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
-            var result = GetSymbolsOffOfBoundExpression(originalExpression, expression, leftHandBinding, container, unwrapNullable: false, isForDereference: false);
+            var result = GetSymbolsOffOfBoundExpression(
+                originalExpression,
+                expression,
+                leftHandBinding,
+                container,
+                unwrapNullable: false,
+                isForDereference: false
+            );
 
             // Check for the Color Color case.
-            if (originalExpression.CanAccessInstanceAndStaticMembersOffOf(_context.SemanticModel, _cancellationToken))
+            if (
+                originalExpression.CanAccessInstanceAndStaticMembersOffOf(
+                    _context.SemanticModel,
+                    _cancellationToken
+                )
+            )
             {
-                var speculativeSymbolInfo = _context.SemanticModel.GetSpeculativeSymbolInfo(expression.SpanStart, expression, SpeculativeBindingOption.BindAsTypeOrNamespace);
+                var speculativeSymbolInfo = _context.SemanticModel.GetSpeculativeSymbolInfo(
+                    expression.SpanStart,
+                    expression,
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                );
 
-                var typeMembers = GetSymbolsOffOfBoundExpression(originalExpression, expression, speculativeSymbolInfo, container, unwrapNullable: false, isForDereference: false);
+                var typeMembers = GetSymbolsOffOfBoundExpression(
+                    originalExpression,
+                    expression,
+                    speculativeSymbolInfo,
+                    container,
+                    unwrapNullable: false,
+                    isForDereference: false
+                );
 
                 result = new RecommendedSymbols(
                     result.NamedSymbols.Concat(typeMembers.NamedSymbols),
-                    result.UnnamedSymbols);
+                    result.UnnamedSymbols
+                );
             }
 
             return result;
         }
 
-        private RecommendedSymbols GetSymbolsOffOfDereferencedExpression(ExpressionSyntax originalExpression)
+        private RecommendedSymbols GetSymbolsOffOfDereferencedExpression(
+            ExpressionSyntax originalExpression
+        )
         {
             var expression = originalExpression.WalkDownParentheses();
-            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(expression, _cancellationToken);
+            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
+                expression,
+                _cancellationToken
+            );
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
-            return GetSymbolsOffOfBoundExpression(originalExpression, expression, leftHandBinding, container, unwrapNullable: false, isForDereference: true);
+            return GetSymbolsOffOfBoundExpression(
+                originalExpression,
+                expression,
+                leftHandBinding,
+                container,
+                unwrapNullable: false,
+                isForDereference: true
+            );
         }
 
-        private RecommendedSymbols GetSymbolsOffOfConditionalReceiver(ExpressionSyntax originalExpression)
+        private RecommendedSymbols GetSymbolsOffOfConditionalReceiver(
+            ExpressionSyntax originalExpression
+        )
         {
             // Given ((T?)t)?.|, the '.' will behave as if the expression was actually ((T)t).|. More plainly,
             // a member access off of a conditional receiver of nullable type binds to the unwrapped nullable
             // type. This is not exposed via the binding information for the LHS, so repeat this work here.
 
             var expression = originalExpression.WalkDownParentheses();
-            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(expression, _cancellationToken);
+            var leftHandBinding = _context.SemanticModel.GetSymbolInfo(
+                expression,
+                _cancellationToken
+            );
             var container = _context.SemanticModel.GetTypeInfo(expression, _cancellationToken).Type;
 
             // If the thing on the left is a type, namespace, or alias, we shouldn't show anything in
             // IntelliSense.
-            if (leftHandBinding.GetBestOrAllSymbols().FirstOrDefault().MatchesKind(SymbolKind.NamedType, SymbolKind.Namespace, SymbolKind.Alias))
+            if (
+                leftHandBinding
+                    .GetBestOrAllSymbols()
+                    .FirstOrDefault()
+                    .MatchesKind(SymbolKind.NamedType, SymbolKind.Namespace, SymbolKind.Alias)
+            )
                 return default;
 
-            return GetSymbolsOffOfBoundExpression(originalExpression, expression, leftHandBinding, container, unwrapNullable: true, isForDereference: false);
+            return GetSymbolsOffOfBoundExpression(
+                originalExpression,
+                expression,
+                leftHandBinding,
+                container,
+                unwrapNullable: true,
+                isForDereference: false
+            );
         }
 
         private RecommendedSymbols GetSymbolsOffOfBoundExpression(
@@ -363,7 +487,8 @@ internal partial class CSharpRecommendationService
             SymbolInfo leftHandBinding,
             ITypeSymbol? containerType,
             bool unwrapNullable,
-            bool isForDereference)
+            bool isForDereference
+        )
         {
             var abstractsOnly = false;
             var excludeInstance = false;
@@ -383,22 +508,34 @@ internal partial class CSharpRecommendationService
 
                 // If the thing on the left is a type, namespace or alias and the original
                 // expression was parenthesized, we shouldn't show anything in IntelliSense.
-                if (originalExpressionKind is SyntaxKind.ParenthesizedExpression &&
-                    symbol.Kind is SymbolKind.NamedType or SymbolKind.Namespace or SymbolKind.Alias)
+                if (
+                    originalExpressionKind is SyntaxKind.ParenthesizedExpression
+                    && symbol.Kind
+                        is SymbolKind.NamedType
+                            or SymbolKind.Namespace
+                            or SymbolKind.Alias
+                )
                 {
                     return default;
                 }
 
                 // If the thing on the left is a method name identifier, we shouldn't show anything.
-                if (symbol.Kind is SymbolKind.Method &&
-                    originalExpressionKind is SyntaxKind.IdentifierName or SyntaxKind.GenericName)
+                if (
+                    symbol.Kind is SymbolKind.Method
+                    && originalExpressionKind is SyntaxKind.IdentifierName or SyntaxKind.GenericName
+                )
                 {
                     return default;
                 }
 
                 // If the thing on the left is an event that can't be used as a field, we shouldn't show anything
-                if (symbol is IEventSymbol ev &&
-                    !_context.SemanticModel.IsEventUsableAsField(originalExpression.SpanStart, ev))
+                if (
+                    symbol is IEventSymbol ev
+                    && !_context.SemanticModel.IsEventUsableAsField(
+                        originalExpression.SpanStart,
+                        ev
+                    )
+                )
                 {
                     return default;
                 }
@@ -406,7 +543,12 @@ internal partial class CSharpRecommendationService
                 if (symbol is IAliasSymbol alias)
                     symbol = alias.Target;
 
-                if (symbol.Kind is SymbolKind.NamedType or SymbolKind.Namespace or SymbolKind.TypeParameter)
+                if (
+                    symbol.Kind
+                    is SymbolKind.NamedType
+                        or SymbolKind.Namespace
+                        or SymbolKind.TypeParameter
+                )
                 {
                     // For named typed, namespaces, and type parameters (potentially constrainted to interface with statics), we flip things around.
                     // We only want statics and not instance members.
@@ -452,8 +594,16 @@ internal partial class CSharpRecommendationService
                 excludeBaseMethodsForRefStructs = false;
             }
 
-            var useBaseReferenceAccessibility = symbol is IParameterSymbol { IsThis: true } p && !p.Type.Equals(containerType);
-            var symbols = GetMemberSymbols(containerSymbol, position: originalExpression.SpanStart, excludeInstance, useBaseReferenceAccessibility, unwrapNullable, isForDereference);
+            var useBaseReferenceAccessibility =
+                symbol is IParameterSymbol { IsThis: true } p && !p.Type.Equals(containerType);
+            var symbols = GetMemberSymbols(
+                containerSymbol,
+                position: originalExpression.SpanStart,
+                excludeInstance,
+                useBaseReferenceAccessibility,
+                unwrapNullable,
+                isForDereference
+            );
 
             // If we're showing instance members, don't include nested types
             var namedSymbols = excludeStatic
@@ -463,16 +613,26 @@ internal partial class CSharpRecommendationService
             //If container type is "ref struct" then we should exclude methods from object and ValueType that are not overriden
             //if recomendations are requested not in nameof context,
             //because calling them produces a compiler error due to unallowed boxing. See https://github.com/dotnet/roslyn/issues/35178
-            if (excludeBaseMethodsForRefStructs && containerType is not null && containerType.IsRefLikeType)
+            if (
+                excludeBaseMethodsForRefStructs
+                && containerType is not null
+                && containerType.IsRefLikeType
+            )
             {
-                namedSymbols = namedSymbols.RemoveAll(s => s.ContainingType.SpecialType is SpecialType.System_Object or SpecialType.System_ValueType);
+                namedSymbols = namedSymbols.RemoveAll(
+                    s =>
+                        s.ContainingType.SpecialType
+                            is SpecialType.System_Object
+                                or SpecialType.System_ValueType
+                );
             }
 
             // if we're dotting off an instance, then add potential operators/indexers/conversions that may be
             // applicable to it as well.
-            var unnamedSymbols = _context.IsNameOfContext || excludeInstance
-                ? default
-                : GetUnnamedSymbols(originalExpression);
+            var unnamedSymbols =
+                _context.IsNameOfContext || excludeInstance
+                    ? default
+                    : GetUnnamedSymbols(originalExpression);
             return new RecommendedSymbols(namedSymbols, unnamedSymbols);
         }
 
@@ -498,20 +658,34 @@ internal partial class CSharpRecommendationService
             return symbols.ToImmutable();
         }
 
-        private ITypeSymbol? GetContainerForUnnamedSymbols(SemanticModel semanticModel, ExpressionSyntax originalExpression)
+        private ITypeSymbol? GetContainerForUnnamedSymbols(
+            SemanticModel semanticModel,
+            ExpressionSyntax originalExpression
+        )
         {
-            return originalExpression.ShouldNameExpressionBeTreatedAsExpressionInsteadOfType(_context.SemanticModel, out _, out var container)
+            return originalExpression.ShouldNameExpressionBeTreatedAsExpressionInsteadOfType(
+                _context.SemanticModel,
+                out _,
+                out var container
+            )
                 ? container
                 : semanticModel.GetTypeInfo(originalExpression, _cancellationToken).Type;
         }
 
         private void AddIndexers(ITypeSymbol container, ArrayBuilder<ISymbol> symbols)
         {
-            var containingType = _context.SemanticModel.GetEnclosingNamedType(_context.Position, _cancellationToken);
+            var containingType = _context.SemanticModel.GetEnclosingNamedType(
+                _context.Position,
+                _cancellationToken
+            );
             if (containingType == null)
                 return;
 
-            foreach (var member in container.RemoveNullableIfPresent().GetAccessibleMembersInThisAndBaseTypes<IPropertySymbol>(containingType))
+            foreach (
+                var member in container
+                    .RemoveNullableIfPresent()
+                    .GetAccessibleMembersInThisAndBaseTypes<IPropertySymbol>(containingType)
+            )
             {
                 if (member.IsIndexer)
                     symbols.Add(member);

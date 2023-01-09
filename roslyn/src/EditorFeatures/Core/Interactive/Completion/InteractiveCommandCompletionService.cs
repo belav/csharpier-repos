@@ -12,28 +12,31 @@ namespace Microsoft.CodeAnalysis.Interactive
 {
     internal sealed class InteractiveCommandCompletionService : CompletionService
     {
-        [ExportLanguageServiceFactory(typeof(CompletionService), InteractiveLanguageNames.InteractiveCommand), Shared]
+        [
+            ExportLanguageServiceFactory(
+                typeof(CompletionService),
+                InteractiveLanguageNames.InteractiveCommand
+            ),
+            Shared
+        ]
         internal sealed class Factory : ILanguageServiceFactory
         {
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory()
-            {
-            }
+            public Factory() { }
 
-            public ILanguageService CreateLanguageService(HostLanguageServices languageServices)
-                => new InteractiveCommandCompletionService(languageServices.LanguageServices.SolutionServices);
+            public ILanguageService CreateLanguageService(HostLanguageServices languageServices) =>
+                new InteractiveCommandCompletionService(
+                    languageServices.LanguageServices.SolutionServices
+                );
         }
 
         private InteractiveCommandCompletionService(SolutionServices services)
-            : base(services)
-        {
-        }
+            : base(services) { }
 
-        public override string Language
-            => InteractiveLanguageNames.InteractiveCommand;
+        public override string Language => InteractiveLanguageNames.InteractiveCommand;
 
-        internal override CompletionRules GetRules(CompletionOptions options)
-            => CompletionRules.Default;
+        internal override CompletionRules GetRules(CompletionOptions options) =>
+            CompletionRules.Default;
     }
 }

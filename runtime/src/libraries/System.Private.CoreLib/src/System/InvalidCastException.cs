@@ -12,7 +12,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InvalidCastException : SystemException
     {
         public InvalidCastException()
@@ -39,8 +41,7 @@ namespace System
             HResult = errorCode;
         }
 
-        protected InvalidCastException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected InvalidCastException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

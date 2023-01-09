@@ -19,38 +19,41 @@ using Xunit;
 
 namespace Test_ehCodeMotion_cs
 {
-public class Program
-{
-    [Fact]
-    public static int TestEntryPoint()
+    public class Program
     {
-        //Console.WriteLine("Main: " + new C().M());
-        if (new C().M()) return 100; else return 101;
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            //Console.WriteLine("Main: " + new C().M());
+            if (new C().M())
+                return 100;
+            else
+                return 101;
+        }
     }
-}
 
-internal class C
-{
-    private object _o;
-
-    public bool M()
+    internal class C
     {
-        bool ret = true;
+        private object _o;
 
-        try
+        public bool M()
         {
-            _o.ToString();
-        }
-        catch (NullReferenceException)
-        {
-            //Console.WriteLine(ret); // Uncommenting this line "fixes" the problem
-            goto Label;
-        }
-        ret = false;
+            bool ret = true;
 
-    Label:
+            try
+            {
+                _o.ToString();
+            }
+            catch (NullReferenceException)
+            {
+                //Console.WriteLine(ret); // Uncommenting this line "fixes" the problem
+                goto Label;
+            }
+            ret = false;
 
-        return ret;
+            Label:
+
+            return ret;
+        }
     }
-}
 }

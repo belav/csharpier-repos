@@ -19,7 +19,15 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(418, enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                418,
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
 
         var result = buffer.Slice(0, length).ToArray();
         var hex = BitConverter.ToString(result);
@@ -36,7 +44,15 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(200, enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                200,
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
 
         var result = buffer.Slice(0, length).ToArray();
         var hex = BitConverter.ToString(result);
@@ -67,7 +83,15 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(statusCode, enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                statusCode,
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
         length -= 2; // Remove prefix
 
         Assert.True(length <= 2, "Indexed header should be encoded into 1 or 2 bytes");
@@ -85,7 +109,14 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
 
         var result = buffer.Slice(2, length - 2).ToArray(); // trim prefix
         var hex = BitConverter.ToString(result);
@@ -104,7 +135,14 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
 
         var result = buffer.Slice(2, length - 2).ToArray(); // trim prefix
         var hex = BitConverter.ToString(result);
@@ -123,7 +161,14 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
 
         var result = buffer.Slice(2, length - 2).ToArray(); // trim prefix
         var hex = BitConverter.ToString(result);
@@ -142,7 +187,14 @@ public class Http3QPackEncoderTests
         var enumerator = new Http3HeadersEnumerator();
         enumerator.Initialize(headers);
 
-        Assert.True(QPackHeaderWriter.BeginEncodeHeaders(enumerator, buffer, ref totalHeaderSize, out var length));
+        Assert.True(
+            QPackHeaderWriter.BeginEncodeHeaders(
+                enumerator,
+                buffer,
+                ref totalHeaderSize,
+                out var length
+            )
+        );
 
         var result = buffer.Slice(2, length - 2).ToArray();
         var hex = BitConverter.ToString(result);

@@ -19,7 +19,12 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
         private int _linesPerOrder;
 
         public void Initialize(
-            int productCount, int customerCount, int ordersPerCustomer, int linesPerOrder, Action<DbContext> seedAction = null)
+            int productCount,
+            int customerCount,
+            int ordersPerCustomer,
+            int linesPerOrder,
+            Action<DbContext> seedAction = null
+        )
         {
             _productCount = productCount;
             _customerCount = customerCount;
@@ -34,7 +39,10 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             _serviceProvider = serviceProvider;
         }
 
-        public abstract OrdersContextBase CreateContext(IServiceProvider serviceProvider = null, bool disableBatching = false);
+        public abstract OrdersContextBase CreateContext(
+            IServiceProvider serviceProvider = null,
+            bool disableBatching = false
+        );
 
         private void EnsureDatabaseCreated(Action<DbContext> seedAction)
         {
@@ -77,7 +85,10 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Models.Orders
             return (_productCount == context.Products.Count())
                 && (_customerCount == context.Customers.Count())
                 && (_customerCount * _ordersPerCustomer == context.Orders.Count())
-                && (_customerCount * _ordersPerCustomer * _linesPerOrder == context.OrderLines.Count());
+                && (
+                    _customerCount * _ordersPerCustomer * _linesPerOrder
+                    == context.OrderLines.Count()
+                );
         }
 
         private void InsertSeedData()

@@ -36,8 +36,7 @@ namespace Internal.Runtime.TypeLoader
     internal class GenericTypeDictionary : GenericDictionary
     {
         public GenericTypeDictionary(GenericDictionaryCell[] cells)
-            : base(cells)
-        { }
+            : base(cells) { }
 
         public override IntPtr Allocate()
         {
@@ -46,7 +45,9 @@ namespace Internal.Runtime.TypeLoader
             if (_cells.Length > 0)
             {
                 // Use checked typecast to int to ensure there aren't any overflows/truncations
-                _addressOfFirstCellSlot = MemoryHelpers.AllocateMemory(checked((int)(_cells.Length * IntPtr.Size)));
+                _addressOfFirstCellSlot = MemoryHelpers.AllocateMemory(
+                    checked((int)(_cells.Length * IntPtr.Size))
+                );
             }
 
             return _addressOfFirstCellSlot;
@@ -56,8 +57,7 @@ namespace Internal.Runtime.TypeLoader
     internal class GenericMethodDictionary : GenericDictionary
     {
         public GenericMethodDictionary(GenericDictionaryCell[] cells)
-            : base(cells)
-        { }
+            : base(cells) { }
 
         public override unsafe IntPtr Allocate()
         {
@@ -66,7 +66,9 @@ namespace Internal.Runtime.TypeLoader
             // Method dictionaries start with a header containing the hash code, which is not part of the native layout.
             // The real first slot is located after the header.
             // Use checked typecast to int to ensure there aren't any overflows/truncations
-            IntPtr dictionaryWithHeader = MemoryHelpers.AllocateMemory(checked((int)((_cells.Length + 1) * IntPtr.Size)));
+            IntPtr dictionaryWithHeader = MemoryHelpers.AllocateMemory(
+                checked((int)((_cells.Length + 1) * IntPtr.Size))
+            );
 
             // Put a magic hash code to indicate dynamically allocated method dictionary for
             // debugging purposes.

@@ -95,7 +95,8 @@ namespace System.Xml.Xsl
         /// </summary>
         public bool IsSubtypeOf(XmlQueryType baseType)
         {
-            XmlQueryType thisPrime, basePrime;
+            XmlQueryType thisPrime,
+                basePrime;
 
             // Check cardinality sub-typing rules
             if (!(Cardinality <= baseType.Cardinality) || (!IsDod && baseType.IsDod))
@@ -190,13 +191,14 @@ namespace System.Xml.Xsl
             // Check early for common case that two prime types are item types
             if (thisPrime.Count == 1)
             {
-                return (thisPrime.TypeCode == thatPrime.TypeCode &&
-                        thisPrime.NameTest == thatPrime.NameTest &&
-                        thisPrime.SchemaType == thatPrime.SchemaType &&
-                        thisPrime.IsStrict == thatPrime.IsStrict &&
-                        thisPrime.IsNotRtf == thatPrime.IsNotRtf);
+                return (
+                    thisPrime.TypeCode == thatPrime.TypeCode
+                    && thisPrime.NameTest == thatPrime.NameTest
+                    && thisPrime.SchemaType == thatPrime.SchemaType
+                    && thisPrime.IsStrict == thatPrime.IsStrict
+                    && thisPrime.IsNotRtf == thatPrime.IsNotRtf
+                );
             }
-
 
             // Check that each item type in this type is equal to some item type in "baseType"
             // (string | int) should be the same type as (int | string)
@@ -206,11 +208,13 @@ namespace System.Xml.Xsl
 
                 foreach (XmlQueryType thatItem in that)
                 {
-                    if (thisItem.TypeCode == thatItem.TypeCode &&
-                        thisItem.NameTest == thatItem.NameTest &&
-                        thisItem.SchemaType == thatItem.SchemaType &&
-                        thisItem.IsStrict == thatItem.IsStrict &&
-                        thisItem.IsNotRtf == thatItem.IsNotRtf)
+                    if (
+                        thisItem.TypeCode == thatItem.TypeCode
+                        && thisItem.NameTest == thatItem.NameTest
+                        && thisItem.SchemaType == thatItem.SchemaType
+                        && thisItem.IsStrict == thatItem.IsStrict
+                        && thisItem.IsNotRtf == thatItem.IsNotRtf
+                    )
                     {
                         // Found match so proceed to next type
                         match = true;
@@ -246,7 +250,6 @@ namespace System.Xml.Xsl
 
             return !left.Equals(right);
         }
-
 
         //-----------------------------------------------
         // Convenience Properties
@@ -311,7 +314,6 @@ namespace System.Xml.Xsl
             get { return (s_typeCodeToFlags[(int)TypeCode] & TypeFlags.IsNumeric) != 0; }
         }
 
-
         //-----------------------------------------------
         // System.Object implementation
         //-----------------------------------------------
@@ -341,7 +343,6 @@ namespace System.Xml.Xsl
 
                 hash = (int)TypeCode;
                 schemaType = SchemaType;
-
                 unchecked
                 {
                     if (schemaType != null)
@@ -465,7 +466,6 @@ namespace System.Xml.Xsl
             return sb.ToString();
         }
 
-
         //-----------------------------------------------
         // Serialization
         //-----------------------------------------------
@@ -484,9 +484,18 @@ namespace System.Xml.Xsl
         /// </summary>
         private bool IsSubtypeOfItemType(XmlQueryType baseType)
         {
-            Debug.Assert(Count == 1 && IsSingleton, "This method should only be called for item types.");
-            Debug.Assert(baseType.Count == 1 && baseType.IsSingleton, "This method should only be called for item types.");
-            Debug.Assert(!IsDod && !baseType.IsDod, "Singleton types may not have DocOrderDistinct property");
+            Debug.Assert(
+                Count == 1 && IsSingleton,
+                "This method should only be called for item types."
+            );
+            Debug.Assert(
+                baseType.Count == 1 && baseType.IsSingleton,
+                "This method should only be called for item types."
+            );
+            Debug.Assert(
+                !IsDod && !baseType.IsDod,
+                "Singleton types may not have DocOrderDistinct property"
+            );
             XmlSchemaType baseSchemaType = baseType.SchemaType;
 
             if (TypeCode != baseType.TypeCode)
@@ -514,9 +523,17 @@ namespace System.Xml.Xsl
             else
             {
                 // Otherwise, check derivation tree
-                return (IsNotRtf || !baseType.IsNotRtf) && NameTest.IsSubsetOf(baseType.NameTest) &&
-                       (baseSchemaType == XmlSchemaComplexType.AnyType || XmlSchemaType.IsDerivedFrom(SchemaType, baseSchemaType, /* except:*/XmlSchemaDerivationMethod.Empty)) &&
-                       (!IsNillable || baseType.IsNillable);
+                return (IsNotRtf || !baseType.IsNotRtf)
+                    && NameTest.IsSubsetOf(baseType.NameTest)
+                    && (
+                        baseSchemaType == XmlSchemaComplexType.AnyType
+                        || XmlSchemaType.IsDerivedFrom(
+                            SchemaType,
+                            baseSchemaType, /* except:*/
+                            XmlSchemaDerivationMethod.Empty
+                        )
+                    )
+                    && (!IsNillable || baseType.IsNillable);
             }
         }
 
@@ -528,7 +545,17 @@ namespace System.Xml.Xsl
             Debug.Assert(this.Count == 1 && this.IsSingleton, "this should be an item");
             Debug.Assert(other.Count == 1 && other.IsSingleton, "other should be an item");
 
-            if (this.TypeCode == other.TypeCode && (this.NodeKinds & (XmlNodeKindFlags.Document | XmlNodeKindFlags.Element | XmlNodeKindFlags.Attribute)) != 0)
+            if (
+                this.TypeCode == other.TypeCode
+                && (
+                    this.NodeKinds
+                    & (
+                        XmlNodeKindFlags.Document
+                        | XmlNodeKindFlags.Element
+                        | XmlNodeKindFlags.Attribute
+                    )
+                ) != 0
+            )
             {
                 if (this.TypeCode == XmlTypeCode.Node)
                     return true;
@@ -537,8 +564,18 @@ namespace System.Xml.Xsl
                 if (!this.NameTest.HasIntersection(other.NameTest))
                     return false;
 
-                if (!XmlSchemaType.IsDerivedFrom(this.SchemaType, other.SchemaType, /* except:*/XmlSchemaDerivationMethod.Empty) &&
-                    !XmlSchemaType.IsDerivedFrom(other.SchemaType, this.SchemaType, /* except:*/XmlSchemaDerivationMethod.Empty))
+                if (
+                    !XmlSchemaType.IsDerivedFrom(
+                        this.SchemaType,
+                        other.SchemaType, /* except:*/
+                        XmlSchemaDerivationMethod.Empty
+                    )
+                    && !XmlSchemaType.IsDerivedFrom(
+                        other.SchemaType,
+                        this.SchemaType, /* except:*/
+                        XmlSchemaDerivationMethod.Empty
+                    )
+                )
                 {
                     return false;
                 }
@@ -573,7 +610,8 @@ namespace System.Xml.Xsl
                         if (!isXQ)
                             goto case XmlTypeCode.Element;
 
-                        s += $"{{(element{NameAndType(true)}?&text?&comment?&processing-instruction?)*}}";
+                        s +=
+                            $"{{(element{NameAndType(true)}?&text?&comment?&processing-instruction?)*}}";
                         break;
 
                     case XmlTypeCode.Element:
@@ -617,7 +655,13 @@ namespace System.Xml.Xsl
             }
             else
             {
-                if (isXQ || (SchemaType != XmlSchemaComplexType.AnyType && SchemaType != DatatypeImplementation.AnySimpleType))
+                if (
+                    isXQ
+                    || (
+                        SchemaType != XmlSchemaComplexType.AnyType
+                        && SchemaType != DatatypeImplementation.AnySimpleType
+                    )
+                )
                     typeName = QNameToString(SchemaType.QualifiedName);
             }
 
@@ -672,178 +716,181 @@ namespace System.Xml.Xsl
         #endregion
 
         #region  TypeCodeToFlags
-        private static readonly TypeFlags[] s_typeCodeToFlags = {
-                /* XmlTypeCode.None                  */ TypeFlags.IsNode | TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Item                  */ TypeFlags.None,
-                /* XmlTypeCode.Node                  */ TypeFlags.IsNode,
-                /* XmlTypeCode.Document              */ TypeFlags.IsNode,
-                /* XmlTypeCode.Element               */ TypeFlags.IsNode,
-                /* XmlTypeCode.Attribute             */ TypeFlags.IsNode,
-                /* XmlTypeCode.Namespace             */ TypeFlags.IsNode,
-                /* XmlTypeCode.ProcessingInstruction */ TypeFlags.IsNode,
-                /* XmlTypeCode.Comment               */ TypeFlags.IsNode,
-                /* XmlTypeCode.Text                  */ TypeFlags.IsNode,
-                /* XmlTypeCode.AnyAtomicType         */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.UntypedAtomic         */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.String                */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Boolean               */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Decimal               */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Float                 */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Double                */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Duration              */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.DateTime              */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Time                  */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Date                  */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.GYearMonth            */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.GYear                 */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.GMonthDay             */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.GDay                  */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.GMonth                */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.HexBinary             */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Base64Binary          */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.AnyUri                */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.QName                 */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Notation              */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.NormalizedString      */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Token                 */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Language              */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.NmToken               */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Name                  */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.NCName                */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Id                    */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Idref                 */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Entity                */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.Integer               */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.NonPositiveInteger    */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.NegativeInteger       */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Long                  */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Int                   */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Short                 */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.Byte                  */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.NonNegativeInteger    */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.UnsignedLong          */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.UnsignedInt           */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.UnsignedShort         */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.UnsignedByte          */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.PositiveInteger       */ TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
-                /* XmlTypeCode.YearMonthDuration     */ TypeFlags.IsAtomicValue,
-                /* XmlTypeCode.DayTimeDuration       */ TypeFlags.IsAtomicValue,
+        private static readonly TypeFlags[] s_typeCodeToFlags =
+        {
+            /* XmlTypeCode.None                  */TypeFlags.IsNode | TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Item                  */TypeFlags.None,
+            /* XmlTypeCode.Node                  */TypeFlags.IsNode,
+            /* XmlTypeCode.Document              */TypeFlags.IsNode,
+            /* XmlTypeCode.Element               */TypeFlags.IsNode,
+            /* XmlTypeCode.Attribute             */TypeFlags.IsNode,
+            /* XmlTypeCode.Namespace             */TypeFlags.IsNode,
+            /* XmlTypeCode.ProcessingInstruction */TypeFlags.IsNode,
+            /* XmlTypeCode.Comment               */TypeFlags.IsNode,
+            /* XmlTypeCode.Text                  */TypeFlags.IsNode,
+            /* XmlTypeCode.AnyAtomicType         */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.UntypedAtomic         */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.String                */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Boolean               */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Decimal               */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Float                 */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Double                */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Duration              */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.DateTime              */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Time                  */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Date                  */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.GYearMonth            */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.GYear                 */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.GMonthDay             */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.GDay                  */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.GMonth                */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.HexBinary             */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Base64Binary          */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.AnyUri                */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.QName                 */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Notation              */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.NormalizedString      */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Token                 */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Language              */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.NmToken               */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Name                  */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.NCName                */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Id                    */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Idref                 */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Entity                */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.Integer               */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.NonPositiveInteger    */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.NegativeInteger       */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Long                  */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Int                   */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Short                 */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.Byte                  */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.NonNegativeInteger    */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.UnsignedLong          */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.UnsignedInt           */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.UnsignedShort         */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.UnsignedByte          */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.PositiveInteger       */TypeFlags.IsAtomicValue | TypeFlags.IsNumeric,
+            /* XmlTypeCode.YearMonthDuration     */TypeFlags.IsAtomicValue,
+            /* XmlTypeCode.DayTimeDuration       */TypeFlags.IsAtomicValue,
         };
 
-        private static readonly XmlTypeCode[] s_baseTypeCodes = {
-            /* None                        */ XmlTypeCode.None,
-            /* Item                        */ XmlTypeCode.Item,
-            /* Node                        */ XmlTypeCode.Item,
-            /* Document                    */ XmlTypeCode.Node,
-            /* Element                     */ XmlTypeCode.Node,
-            /* Attribute                   */ XmlTypeCode.Node,
-            /* Namespace                   */ XmlTypeCode.Node,
-            /* ProcessingInstruction       */ XmlTypeCode.Node,
-            /* Comment                     */ XmlTypeCode.Node,
-            /* Text                        */ XmlTypeCode.Node,
-            /* AnyAtomicType               */ XmlTypeCode.Item,
-            /* UntypedAtomic               */ XmlTypeCode.AnyAtomicType,
-            /* String                      */ XmlTypeCode.AnyAtomicType,
-            /* Boolean                     */ XmlTypeCode.AnyAtomicType,
-            /* Decimal                     */ XmlTypeCode.AnyAtomicType,
-            /* Float                       */ XmlTypeCode.AnyAtomicType,
-            /* Double                      */ XmlTypeCode.AnyAtomicType,
-            /* Duration                    */ XmlTypeCode.AnyAtomicType,
-            /* DateTime                    */ XmlTypeCode.AnyAtomicType,
-            /* Time                        */ XmlTypeCode.AnyAtomicType,
-            /* Date                        */ XmlTypeCode.AnyAtomicType,
-            /* GYearMonth                  */ XmlTypeCode.AnyAtomicType,
-            /* GYear                       */ XmlTypeCode.AnyAtomicType,
-            /* GMonthDay                   */ XmlTypeCode.AnyAtomicType,
-            /* GDay                        */ XmlTypeCode.AnyAtomicType,
-            /* GMonth                      */ XmlTypeCode.AnyAtomicType,
-            /* HexBinary                   */ XmlTypeCode.AnyAtomicType,
-            /* Base64Binary                */ XmlTypeCode.AnyAtomicType,
-            /* AnyUri                      */ XmlTypeCode.AnyAtomicType,
-            /* QName                       */ XmlTypeCode.AnyAtomicType,
-            /* Notation                    */ XmlTypeCode.AnyAtomicType,
-            /* NormalizedString            */ XmlTypeCode.String,
-            /* Token                       */ XmlTypeCode.NormalizedString,
-            /* Language                    */ XmlTypeCode.Token,
-            /* NmToken                     */ XmlTypeCode.Token,
-            /* Name                        */ XmlTypeCode.Token,
-            /* NCName                      */ XmlTypeCode.Name,
-            /* Id                          */ XmlTypeCode.NCName,
-            /* Idref                       */ XmlTypeCode.NCName,
-            /* Entity                      */ XmlTypeCode.NCName,
-            /* Integer                     */ XmlTypeCode.Decimal,
-            /* NonPositiveInteger          */ XmlTypeCode.Integer,
-            /* NegativeInteger             */ XmlTypeCode.NonPositiveInteger,
-            /* Long                        */ XmlTypeCode.Integer,
-            /* Int                         */ XmlTypeCode.Long,
-            /* Short                       */ XmlTypeCode.Int,
-            /* Byte                        */ XmlTypeCode.Short,
-            /* NonNegativeInteger          */ XmlTypeCode.Integer,
-            /* UnsignedLong                */ XmlTypeCode.NonNegativeInteger,
-            /* UnsignedInt                 */ XmlTypeCode.UnsignedLong,
-            /* UnsignedShort               */ XmlTypeCode.UnsignedInt,
-            /* UnsignedByte                */ XmlTypeCode.UnsignedShort,
-            /* PositiveInteger             */ XmlTypeCode.NonNegativeInteger,
-            /* YearMonthDuration           */ XmlTypeCode.Duration,
-            /* DayTimeDuration             */ XmlTypeCode.Duration,
+        private static readonly XmlTypeCode[] s_baseTypeCodes =
+        {
+            /* None                        */XmlTypeCode.None,
+            /* Item                        */XmlTypeCode.Item,
+            /* Node                        */XmlTypeCode.Item,
+            /* Document                    */XmlTypeCode.Node,
+            /* Element                     */XmlTypeCode.Node,
+            /* Attribute                   */XmlTypeCode.Node,
+            /* Namespace                   */XmlTypeCode.Node,
+            /* ProcessingInstruction       */XmlTypeCode.Node,
+            /* Comment                     */XmlTypeCode.Node,
+            /* Text                        */XmlTypeCode.Node,
+            /* AnyAtomicType               */XmlTypeCode.Item,
+            /* UntypedAtomic               */XmlTypeCode.AnyAtomicType,
+            /* String                      */XmlTypeCode.AnyAtomicType,
+            /* Boolean                     */XmlTypeCode.AnyAtomicType,
+            /* Decimal                     */XmlTypeCode.AnyAtomicType,
+            /* Float                       */XmlTypeCode.AnyAtomicType,
+            /* Double                      */XmlTypeCode.AnyAtomicType,
+            /* Duration                    */XmlTypeCode.AnyAtomicType,
+            /* DateTime                    */XmlTypeCode.AnyAtomicType,
+            /* Time                        */XmlTypeCode.AnyAtomicType,
+            /* Date                        */XmlTypeCode.AnyAtomicType,
+            /* GYearMonth                  */XmlTypeCode.AnyAtomicType,
+            /* GYear                       */XmlTypeCode.AnyAtomicType,
+            /* GMonthDay                   */XmlTypeCode.AnyAtomicType,
+            /* GDay                        */XmlTypeCode.AnyAtomicType,
+            /* GMonth                      */XmlTypeCode.AnyAtomicType,
+            /* HexBinary                   */XmlTypeCode.AnyAtomicType,
+            /* Base64Binary                */XmlTypeCode.AnyAtomicType,
+            /* AnyUri                      */XmlTypeCode.AnyAtomicType,
+            /* QName                       */XmlTypeCode.AnyAtomicType,
+            /* Notation                    */XmlTypeCode.AnyAtomicType,
+            /* NormalizedString            */XmlTypeCode.String,
+            /* Token                       */XmlTypeCode.NormalizedString,
+            /* Language                    */XmlTypeCode.Token,
+            /* NmToken                     */XmlTypeCode.Token,
+            /* Name                        */XmlTypeCode.Token,
+            /* NCName                      */XmlTypeCode.Name,
+            /* Id                          */XmlTypeCode.NCName,
+            /* Idref                       */XmlTypeCode.NCName,
+            /* Entity                      */XmlTypeCode.NCName,
+            /* Integer                     */XmlTypeCode.Decimal,
+            /* NonPositiveInteger          */XmlTypeCode.Integer,
+            /* NegativeInteger             */XmlTypeCode.NonPositiveInteger,
+            /* Long                        */XmlTypeCode.Integer,
+            /* Int                         */XmlTypeCode.Long,
+            /* Short                       */XmlTypeCode.Int,
+            /* Byte                        */XmlTypeCode.Short,
+            /* NonNegativeInteger          */XmlTypeCode.Integer,
+            /* UnsignedLong                */XmlTypeCode.NonNegativeInteger,
+            /* UnsignedInt                 */XmlTypeCode.UnsignedLong,
+            /* UnsignedShort               */XmlTypeCode.UnsignedInt,
+            /* UnsignedByte                */XmlTypeCode.UnsignedShort,
+            /* PositiveInteger             */XmlTypeCode.NonNegativeInteger,
+            /* YearMonthDuration           */XmlTypeCode.Duration,
+            /* DayTimeDuration             */XmlTypeCode.Duration,
         };
 
-        private static readonly string[] s_typeNames = {
-            /* None                        */ "none",
-            /* Item                        */ "item",
-            /* Node                        */ "node",
-            /* Document                    */ "document",
-            /* Element                     */ "element",
-            /* Attribute                   */ "attribute",
-            /* Namespace                   */ "namespace",
-            /* ProcessingInstruction       */ "processing-instruction",
-            /* Comment                     */ "comment",
-            /* Text                        */ "text",
-            /* AnyAtomicType               */ "xdt:anyAtomicType",
-            /* UntypedAtomic               */ "xdt:untypedAtomic",
-            /* String                      */ "xs:string",
-            /* Boolean                     */ "xs:boolean",
-            /* Decimal                     */ "xs:decimal",
-            /* Float                       */ "xs:float",
-            /* Double                      */ "xs:double",
-            /* Duration                    */ "xs:duration",
-            /* DateTime                    */ "xs:dateTime",
-            /* Time                        */ "xs:time",
-            /* Date                        */ "xs:date",
-            /* GYearMonth                  */ "xs:gYearMonth",
-            /* GYear                       */ "xs:gYear",
-            /* GMonthDay                   */ "xs:gMonthDay",
-            /* GDay                        */ "xs:gDay",
-            /* GMonth                      */ "xs:gMonth",
-            /* HexBinary                   */ "xs:hexBinary",
-            /* Base64Binary                */ "xs:base64Binary",
-            /* AnyUri                      */ "xs:anyUri",
-            /* QName                       */ "xs:QName",
-            /* Notation                    */ "xs:NOTATION",
-            /* NormalizedString            */ "xs:normalizedString",
-            /* Token                       */ "xs:token",
-            /* Language                    */ "xs:language",
-            /* NmToken                     */ "xs:NMTOKEN",
-            /* Name                        */ "xs:Name",
-            /* NCName                      */ "xs:NCName",
-            /* Id                          */ "xs:ID",
-            /* Idref                       */ "xs:IDREF",
-            /* Entity                      */ "xs:ENTITY",
-            /* Integer                     */ "xs:integer",
-            /* NonPositiveInteger          */ "xs:nonPositiveInteger",
-            /* NegativeInteger             */ "xs:negativeInteger",
-            /* Long                        */ "xs:long",
-            /* Int                         */ "xs:int",
-            /* Short                       */ "xs:short",
-            /* Byte                        */ "xs:byte",
-            /* NonNegativeInteger          */ "xs:nonNegativeInteger",
-            /* UnsignedLong                */ "xs:unsignedLong",
-            /* UnsignedInt                 */ "xs:unsignedInt",
-            /* UnsignedShort               */ "xs:unsignedShort",
-            /* UnsignedByte                */ "xs:unsignedByte",
-            /* PositiveInteger             */ "xs:positiveInteger",
-            /* YearMonthDuration           */ "xdt:yearMonthDuration",
-            /* DayTimeDuration             */ "xdt:dayTimeDuration",
+        private static readonly string[] s_typeNames =
+        {
+            /* None                        */"none",
+            /* Item                        */"item",
+            /* Node                        */"node",
+            /* Document                    */"document",
+            /* Element                     */"element",
+            /* Attribute                   */"attribute",
+            /* Namespace                   */"namespace",
+            /* ProcessingInstruction       */"processing-instruction",
+            /* Comment                     */"comment",
+            /* Text                        */"text",
+            /* AnyAtomicType               */"xdt:anyAtomicType",
+            /* UntypedAtomic               */"xdt:untypedAtomic",
+            /* String                      */"xs:string",
+            /* Boolean                     */"xs:boolean",
+            /* Decimal                     */"xs:decimal",
+            /* Float                       */"xs:float",
+            /* Double                      */"xs:double",
+            /* Duration                    */"xs:duration",
+            /* DateTime                    */"xs:dateTime",
+            /* Time                        */"xs:time",
+            /* Date                        */"xs:date",
+            /* GYearMonth                  */"xs:gYearMonth",
+            /* GYear                       */"xs:gYear",
+            /* GMonthDay                   */"xs:gMonthDay",
+            /* GDay                        */"xs:gDay",
+            /* GMonth                      */"xs:gMonth",
+            /* HexBinary                   */"xs:hexBinary",
+            /* Base64Binary                */"xs:base64Binary",
+            /* AnyUri                      */"xs:anyUri",
+            /* QName                       */"xs:QName",
+            /* Notation                    */"xs:NOTATION",
+            /* NormalizedString            */"xs:normalizedString",
+            /* Token                       */"xs:token",
+            /* Language                    */"xs:language",
+            /* NmToken                     */"xs:NMTOKEN",
+            /* Name                        */"xs:Name",
+            /* NCName                      */"xs:NCName",
+            /* Id                          */"xs:ID",
+            /* Idref                       */"xs:IDREF",
+            /* Entity                      */"xs:ENTITY",
+            /* Integer                     */"xs:integer",
+            /* NonPositiveInteger          */"xs:nonPositiveInteger",
+            /* NegativeInteger             */"xs:negativeInteger",
+            /* Long                        */"xs:long",
+            /* Int                         */"xs:int",
+            /* Short                       */"xs:short",
+            /* Byte                        */"xs:byte",
+            /* NonNegativeInteger          */"xs:nonNegativeInteger",
+            /* UnsignedLong                */"xs:unsignedLong",
+            /* UnsignedInt                 */"xs:unsignedInt",
+            /* UnsignedShort               */"xs:unsignedShort",
+            /* UnsignedByte                */"xs:unsignedByte",
+            /* PositiveInteger             */"xs:positiveInteger",
+            /* YearMonthDuration           */"xdt:yearMonthDuration",
+            /* DayTimeDuration             */"xdt:dayTimeDuration",
         };
 
         private static readonly BitMatrix s_typeCodeDerivation = CreateTypeCodeDerivation();
@@ -900,12 +947,18 @@ namespace System.Xml.Xsl
             {
                 get
                 {
-                    Debug.Assert(index1 < _bits.Length && index2 < _bits.Length, "Index out of range.");
+                    Debug.Assert(
+                        index1 < _bits.Length && index2 < _bits.Length,
+                        "Index out of range."
+                    );
                     return (_bits[index1] & ((ulong)1 << index2)) != 0;
                 }
                 set
                 {
-                    Debug.Assert(index1 < _bits.Length && index2 < _bits.Length, "Index out of range.");
+                    Debug.Assert(
+                        index1 < _bits.Length && index2 < _bits.Length,
+                        "Index out of range."
+                    );
                     if (value)
                     {
                         _bits[index1] |= (ulong)1 << index2;
@@ -922,10 +975,7 @@ namespace System.Xml.Xsl
             /// </summary>
             public bool this[XmlTypeCode index1, XmlTypeCode index2]
             {
-                get
-                {
-                    return this[(int)index1, (int)index2];
-                }
+                get { return this[(int)index1, (int)index2]; }
                 //                set {
                 //                    this[(int)index1, (int)index2] = value;
                 //                }

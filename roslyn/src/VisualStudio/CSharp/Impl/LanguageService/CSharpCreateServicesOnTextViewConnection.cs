@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     [Export(typeof(IWpfTextViewConnectionListener))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
-    internal class CSharpCreateServicesOnTextViewConnection : AbstractCreateServicesOnTextViewConnection
+    internal class CSharpCreateServicesOnTextViewConnection
+        : AbstractCreateServicesOnTextViewConnection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -32,20 +33,32 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
             VisualStudioWorkspace workspace,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
-            : base(workspace, globalOptions, listenerProvider, threadingContext, LanguageNames.CSharp)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(
+                workspace,
+                globalOptions,
+                listenerProvider,
+                threadingContext,
+                LanguageNames.CSharp
+            ) { }
 
         protected override async Task InitializeServiceForOpenedDocumentAsync(Document document)
         {
             // Only pre-populate cache if import completion is enabled
-            if (GlobalOptions.GetOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, LanguageNames.CSharp) != true)
+            if (
+                GlobalOptions.GetOption(
+                    CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces,
+                    LanguageNames.CSharp
+                ) != true
+            )
                 return;
 
             var service = document.GetRequiredLanguageService<ITypeImportCompletionService>();
             service.QueueCacheWarmUpTask(document.Project);
-            await ExtensionMethodImportCompletionHelper.WarmUpCacheAsync(document.Project, CancellationToken.None).ConfigureAwait(false);
+            await ExtensionMethodImportCompletionHelper
+                .WarmUpCacheAsync(document.Project, CancellationToken.None)
+                .ConfigureAwait(false);
         }
     }
 }

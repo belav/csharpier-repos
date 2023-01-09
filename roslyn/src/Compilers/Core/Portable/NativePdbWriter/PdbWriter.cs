@@ -38,15 +38,24 @@ namespace Microsoft.Cci
         private readonly Dictionary<object, string> _qualifiedNameCache;
 
         // in support of determinism
-        private bool IsDeterministic { get => _hashAlgorithmNameOpt.Name != null; }
+        private bool IsDeterministic
+        {
+            get => _hashAlgorithmNameOpt.Name != null;
+        }
 
-        public PdbWriter(string fileName, Func<ISymWriterMetadataProvider, SymUnmanagedWriter> symWriterFactory, HashAlgorithmName hashAlgorithmNameOpt)
+        public PdbWriter(
+            string fileName,
+            Func<ISymWriterMetadataProvider, SymUnmanagedWriter> symWriterFactory,
+            HashAlgorithmName hashAlgorithmNameOpt
+        )
         {
             _fileName = fileName;
             _symWriterFactory = symWriterFactory;
             _hashAlgorithmNameOpt = hashAlgorithmNameOpt;
             _documentIndex = new Dictionary<DebugSourceDocument, int>();
-            _qualifiedNameCache = new Dictionary<object, string>(ReferenceEqualityComparer.Instance);
+            _qualifiedNameCache = new Dictionary<object, string>(
+                ReferenceEqualityComparer.Instance
+            );
         }
 
         public void WriteTo(Stream stream)
@@ -62,34 +71,54 @@ namespace Microsoft.Cci
         private CommonPEModuleBuilder Module => Context.Module;
         private EmitContext Context => _metadataWriter.Context;
 
-        public void SerializeDebugInfo(IMethodBody methodBody, StandaloneSignatureHandle localSignatureHandleOpt, CustomDebugInfoWriter customDebugInfoWriter)
+        public void SerializeDebugInfo(
+            IMethodBody methodBody,
+            StandaloneSignatureHandle localSignatureHandleOpt,
+            CustomDebugInfoWriter customDebugInfoWriter
+        )
         {
             Debug.Assert(_metadataWriter != null);
-            var methodHandle = (MethodDefinitionHandle)_metadataWriter.GetMethodHandle(methodBody.MethodDefinition);
+            var methodHandle = (MethodDefinitionHandle)
+                _metadataWriter.GetMethodHandle(methodBody.MethodDefinition);
 
             // A state machine kickoff method doesn't have sequence points as it only contains generated code.
             // We could avoid emitting debug info for it if the corresponding MoveNext method had no sequence points,
             // but there is no real need for such optimization.
-            // 
+            //
             // Special case a hidden entry point (#line hidden applied) that would otherwise have no debug info.
             // This is to accommodate for a requirement of Windows PDB writer that the entry point method must have some debug information.
             bool isKickoffMethod = methodBody.StateMachineTypeName != null;
-            bool emitAllDebugInfo = isKickoffMethod || !methodBody.SequencePoints.IsEmpty ||
-                methodBody.MethodDefinition == (Context.Module.DebugEntryPoint ?? Context.Module.PEEntryPoint);
+            bool emitAllDebugInfo =
+                isKickoffMethod
+                || !methodBody.SequencePoints.IsEmpty
+                || methodBody.MethodDefinition
+                    == (Context.Module.DebugEntryPoint ?? Context.Module.PEEntryPoint);
 
             var compilationOptions = Context.Module.CommonCompilation.Options;
 
-            // We need to avoid emitting CDI DynamicLocals = 5 and EditAndContinueLocalSlotMap = 6 for files processed by WinMDExp until 
+            // We need to avoid emitting CDI DynamicLocals = 5 and EditAndContinueLocalSlotMap = 6 for files processed by WinMDExp until
             // bug #1067635 is fixed and available in SDK.
-            bool suppressNewCustomDebugInfo = compilationOptions.OutputKind == OutputKind.WindowsRuntimeMetadata;
+            bool suppressNewCustomDebugInfo =
+                compilationOptions.OutputKind == OutputKind.WindowsRuntimeMetadata;
 
             bool emitDynamicAndTupleInfo = emitAllDebugInfo && !suppressNewCustomDebugInfo;
 
             // Emit EnC info for all methods even if they do not have sequence points.
             // The information facilitates reusing lambdas and closures. The reuse is important for runtimes that can't add new members (e.g. Mono).
-            bool emitEncInfo = compilationOptions.EnableEditAndContinue && _metadataWriter.IsFullMetadata && !suppressNewCustomDebugInfo;
+            bool emitEncInfo =
+                compilationOptions.EnableEditAndContinue
+                && _metadataWriter.IsFullMetadata
+                && !suppressNewCustomDebugInfo;
 
-            byte[] blob = customDebugInfoWriter.SerializeMethodDebugInfo(Context, methodBody, methodHandle, emitStateMachineInfo: emitAllDebugInfo, emitEncInfo, emitDynamicAndTupleInfo, out bool emitExternNamespaces);
+            byte[] blob = customDebugInfoWriter.SerializeMethodDebugInfo(
+                Context,
+                methodBody,
+                methodHandle,
+                emitStateMachineInfo: emitAllDebugInfo,
+                emitEncInfo,
+                emitDynamicAndTupleInfo,
+                out bool emitExternNamespaces
+            );
             Debug.Assert(emitAllDebugInfo || !emitExternNamespaces);
 
             if (!emitAllDebugInfo && blob.Length == 0)
@@ -112,11 +141,24 @@ namespace Microsoft.Cci
 
                 if (!isKickoffMethod && methodBody.ImportScope != null)
                 {
-                    if (customDebugInfoWriter.ShouldForwardNamespaceScopes(Context, methodBody, methodHandle, out IMethodDefinition forwardToMethod))
+                    if (
+                        customDebugInfoWriter.ShouldForwardNamespaceScopes(
+                            Context,
+                            methodBody,
+                            methodHandle,
+                            out IMethodDefinition forwardToMethod
+                        )
+                    )
                     {
                         if (forwardToMethod != null)
                         {
-                            UsingNamespace("@" + MetadataTokens.GetToken(_metadataWriter.GetMethodHandle(forwardToMethod)), methodBody.MethodDefinition);
+                            UsingNamespace(
+                                "@"
+                                    + MetadataTokens.GetToken(
+                                        _metadataWriter.GetMethodHandle(forwardToMethod)
+                                    ),
+                                methodBody.MethodDefinition
+                            );
                         }
                         // otherwise, the forwarding is done via custom debug info
                     }
@@ -133,10 +175,13 @@ namespace Microsoft.Cci
                 {
                     _symWriter.SetAsyncInfo(
                         methodToken,
-                        MetadataTokens.GetToken(_metadataWriter.GetMethodHandle(asyncMoveNextInfo.KickoffMethod)),
+                        MetadataTokens.GetToken(
+                            _metadataWriter.GetMethodHandle(asyncMoveNextInfo.KickoffMethod)
+                        ),
                         asyncMoveNextInfo.CatchHandlerOffset,
                         asyncMoveNextInfo.YieldOffsets.AsSpan(),
-                        asyncMoveNextInfo.ResumeOffsets.AsSpan());
+                        asyncMoveNextInfo.ResumeOffsets.AsSpan()
+                    );
                 }
 
                 if (emitExternNamespaces)
@@ -190,7 +235,11 @@ namespace Microsoft.Cci
             {
                 foreach (UsedNamespaceOrType import in scope.GetUsedNamespaces())
                 {
-                    var importString = TryEncodeImport(import, lazyDeclaredExternAliases, isProjectLevel: false);
+                    var importString = TryEncodeImport(
+                        import,
+                        lazyDeclaredExternAliases,
+                        isProjectLevel: false
+                    );
                     if (importString != null)
                     {
                         UsingNamespace(importString, method);
@@ -226,7 +275,10 @@ namespace Microsoft.Cci
                 }
 
                 // VB current namespace -- VB appends the namespace of the container without prefixes
-                UsingNamespace(GetOrCreateSerializedNamespaceName(method.ContainingNamespace), method);
+                UsingNamespace(
+                    GetOrCreateSerializedNamespaceName(method.ContainingNamespace),
+                    method
+                );
             }
         }
 
@@ -234,11 +286,18 @@ namespace Microsoft.Cci
         {
             foreach (AssemblyReferenceAlias alias in Module.GetAssemblyReferenceAliases(Context))
             {
-                UsingNamespace("Z" + alias.Name + " " + alias.Assembly.Identity.GetDisplayName(), Module);
+                UsingNamespace(
+                    "Z" + alias.Name + " " + alias.Assembly.Identity.GetDisplayName(),
+                    Module
+                );
             }
         }
 
-        private string TryEncodeImport(UsedNamespaceOrType import, HashSet<string> declaredExternAliasesOpt, bool isProjectLevel)
+        private string TryEncodeImport(
+            UsedNamespaceOrType import,
+            HashSet<string> declaredExternAliasesOpt,
+            bool isProjectLevel
+        )
         {
             // NOTE: Dev12 has related cases "I" and "O" in EMITTER::ComputeDebugNamespace,
             // but they were probably implementation details that do not affect Roslyn.
@@ -264,7 +323,10 @@ namespace Microsoft.Cci
 
                     if (import.AliasOpt != null)
                     {
-                        return (isProjectLevel ? "@PA:" : "@FA:") + import.AliasOpt + "=" + typeName;
+                        return (isProjectLevel ? "@PA:" : "@FA:")
+                            + import.AliasOpt
+                            + "="
+                            + typeName;
                     }
                     else
                     {
@@ -274,7 +336,9 @@ namespace Microsoft.Cci
 
                 if (import.TargetNamespaceOpt != null)
                 {
-                    string namespaceName = GetOrCreateSerializedNamespaceName(import.TargetNamespaceOpt);
+                    string namespaceName = GetOrCreateSerializedNamespaceName(
+                        import.TargetNamespaceOpt
+                    );
 
                     if (import.AliasOpt == null)
                     {
@@ -282,14 +346,20 @@ namespace Microsoft.Cci
                     }
                     else
                     {
-                        return (isProjectLevel ? "@PA:" : "@FA:") + import.AliasOpt + "=" + namespaceName;
+                        return (isProjectLevel ? "@PA:" : "@FA:")
+                            + import.AliasOpt
+                            + "="
+                            + namespaceName;
                     }
                 }
 
                 Debug.Assert(import.AliasOpt != null);
                 Debug.Assert(import.TargetXmlNamespaceOpt != null);
 
-                return (isProjectLevel ? "@PX:" : "@FX:") + import.AliasOpt + "=" + import.TargetXmlNamespaceOpt;
+                return (isProjectLevel ? "@PX:" : "@FX:")
+                    + import.AliasOpt
+                    + "="
+                    + import.TargetXmlNamespaceOpt;
             }
 
             Debug.Assert(import.TargetXmlNamespaceOpt == null);
@@ -301,26 +371,42 @@ namespace Microsoft.Cci
 
                 string typeName = GetOrCreateSerializedTypeName(import.TargetTypeOpt);
 
-                return (import.AliasOpt != null) ?
-                    "A" + import.AliasOpt + " T" + typeName :
-                    "T" + typeName;
+                return (import.AliasOpt != null)
+                    ? "A" + import.AliasOpt + " T" + typeName
+                    : "T" + typeName;
             }
 
             if (import.TargetNamespaceOpt != null)
             {
-                string namespaceName = GetOrCreateSerializedNamespaceName(import.TargetNamespaceOpt);
+                string namespaceName = GetOrCreateSerializedNamespaceName(
+                    import.TargetNamespaceOpt
+                );
 
                 if (import.AliasOpt != null)
                 {
-                    return (import.TargetAssemblyOpt != null) ?
-                        "A" + import.AliasOpt + " E" + namespaceName + " " + GetAssemblyReferenceAlias(import.TargetAssemblyOpt, declaredExternAliasesOpt) :
-                        "A" + import.AliasOpt + " U" + namespaceName;
+                    return (import.TargetAssemblyOpt != null)
+                        ? "A"
+                            + import.AliasOpt
+                            + " E"
+                            + namespaceName
+                            + " "
+                            + GetAssemblyReferenceAlias(
+                                import.TargetAssemblyOpt,
+                                declaredExternAliasesOpt
+                            )
+                        : "A" + import.AliasOpt + " U" + namespaceName;
                 }
                 else
                 {
-                    return (import.TargetAssemblyOpt != null) ?
-                        "E" + namespaceName + " " + GetAssemblyReferenceAlias(import.TargetAssemblyOpt, declaredExternAliasesOpt) :
-                        "U" + namespaceName;
+                    return (import.TargetAssemblyOpt != null)
+                        ? "E"
+                            + namespaceName
+                            + " "
+                            + GetAssemblyReferenceAlias(
+                                import.TargetAssemblyOpt,
+                                declaredExternAliasesOpt
+                            )
+                        : "U" + namespaceName;
                 }
             }
 
@@ -413,12 +499,17 @@ namespace Microsoft.Cci
             return result.ToStringAndFree();
         }
 
-        private string GetAssemblyReferenceAlias(IAssemblyReference assembly, HashSet<string> declaredExternAliases)
+        private string GetAssemblyReferenceAlias(
+            IAssemblyReference assembly,
+            HashSet<string> declaredExternAliases
+        )
         {
             // no extern alias defined in scope at all -> error in compiler
             Debug.Assert(declaredExternAliases != null);
 
-            var allAliases = _metadataWriter.Context.Module.GetAssemblyReferenceAliases(_metadataWriter.Context);
+            var allAliases = _metadataWriter.Context.Module.GetAssemblyReferenceAliases(
+                _metadataWriter.Context
+            );
             foreach (AssemblyReferenceAlias alias in allAliases)
             {
                 // Multiple aliases may be given to an assembly reference.
@@ -443,7 +534,10 @@ namespace Microsoft.Cci
             throw ExceptionUtilities.Unreachable();
         }
 
-        private void DefineLocalScopes(ImmutableArray<LocalScope> scopes, StandaloneSignatureHandle localSignatureHandleOpt)
+        private void DefineLocalScopes(
+            ImmutableArray<LocalScope> scopes,
+            StandaloneSignatureHandle localSignatureHandleOpt
+        )
         {
             // VB scope ranges are end-inclusive
             bool endInclusive = this.Module.GenerateVisualBasicStylePdb;
@@ -465,7 +559,9 @@ namespace Microsoft.Cci
                     }
 
                     scopeStack.RemoveLast();
-                    _symWriter.CloseScope(endInclusive ? topScope.EndOffset - 1 : topScope.EndOffset);
+                    _symWriter.CloseScope(
+                        endInclusive ? topScope.EndOffset - 1 : topScope.EndOffset
+                    );
                 }
 
                 // Open this scope.
@@ -484,17 +580,23 @@ namespace Microsoft.Cci
             scopeStack.Free();
         }
 
-        private void DefineScopeLocals(LocalScope currentScope, StandaloneSignatureHandle localSignatureHandleOpt)
+        private void DefineScopeLocals(
+            LocalScope currentScope,
+            StandaloneSignatureHandle localSignatureHandleOpt
+        )
         {
             foreach (ILocalDefinition scopeConstant in currentScope.Constants)
             {
-                var signatureHandle = _metadataWriter.SerializeLocalConstantStandAloneSignature(scopeConstant);
+                var signatureHandle = _metadataWriter.SerializeLocalConstantStandAloneSignature(
+                    scopeConstant
+                );
                 if (!_metadataWriter.IsLocalNameTooLong(scopeConstant))
                 {
                     _symWriter.DefineLocalConstant(
                         scopeConstant.Name,
                         scopeConstant.CompileTimeValue.Value,
-                        MetadataTokens.GetToken(signatureHandle));
+                        MetadataTokens.GetToken(signatureHandle)
+                    );
                 }
             }
 
@@ -508,7 +610,10 @@ namespace Microsoft.Cci
                         scopeLocal.SlotIndex,
                         scopeLocal.Name,
                         (int)scopeLocal.PdbAttributes,
-                        localSignatureHandleOpt.IsNil ? 0 : MetadataTokens.GetToken(localSignatureHandleOpt));
+                        localSignatureHandleOpt.IsNil
+                            ? 0
+                            : MetadataTokens.GetToken(localSignatureHandleOpt)
+                    );
                 }
             }
         }
@@ -517,15 +622,21 @@ namespace Microsoft.Cci
         {
             // Do not look for COM registered diasymreader when determinism is needed as it doesn't support it.
             var options =
-                (IsDeterministic ? SymUnmanagedWriterCreationOptions.Deterministic : SymUnmanagedWriterCreationOptions.UseComRegistry) |
-                SymUnmanagedWriterCreationOptions.UseAlternativeLoadPath;
+                (
+                    IsDeterministic
+                        ? SymUnmanagedWriterCreationOptions.Deterministic
+                        : SymUnmanagedWriterCreationOptions.UseComRegistry
+                ) | SymUnmanagedWriterCreationOptions.UseAlternativeLoadPath;
 
             var metadataProvider = new SymWriterMetadataProvider(metadataWriter);
 
             SymUnmanagedWriter symWriter;
             try
             {
-                symWriter = (_symWriterFactory != null) ? _symWriterFactory(metadataProvider) : SymUnmanagedWriterFactory.CreateWriter(metadataProvider, options);
+                symWriter =
+                    (_symWriterFactory != null)
+                        ? _symWriterFactory(metadataProvider)
+                        : SymUnmanagedWriterFactory.CreateWriter(metadataProvider, options);
             }
             catch (DllNotFoundException e)
             {
@@ -533,8 +644,12 @@ namespace Microsoft.Cci
             }
             catch (SymUnmanagedWriterException e) when (e.InnerException is NotSupportedException)
             {
-                var message = IsDeterministic ? CodeAnalysisResources.SymWriterNotDeterministic : CodeAnalysisResources.SymWriterOlderVersionThanRequired;
-                throw new SymUnmanagedWriterException(string.Format(message, e.ImplementationModuleName));
+                var message = IsDeterministic
+                    ? CodeAnalysisResources.SymWriterNotDeterministic
+                    : CodeAnalysisResources.SymWriterOlderVersionThanRequired;
+                throw new SymUnmanagedWriterException(
+                    string.Format(message, e.ImplementationModuleName)
+                );
             }
 
             _metadataWriter = metadataWriter;
@@ -550,7 +665,12 @@ namespace Microsoft.Cci
             {
                 // Calculate hash of the stream content.
                 // Note: all bits of the signature currently stored in the PDB stream were initialized to 1 by InitializeDeterministic.
-                contentId = BlobContentId.FromHash(CryptographicHashProvider.ComputeHash(_hashAlgorithmNameOpt, _symWriter.GetUnderlyingData()));
+                contentId = BlobContentId.FromHash(
+                    CryptographicHashProvider.ComputeHash(
+                        _hashAlgorithmNameOpt,
+                        _symWriter.GetUnderlyingData()
+                    )
+                );
 
                 _symWriter.UpdateSignature(contentId.Guid, contentId.Stamp, age: 1);
             }
@@ -617,7 +737,8 @@ namespace Microsoft.Cci
                 document.DocumentType,
                 algorithmId,
                 checksum,
-                embeddedSource);
+                embeddedSource
+            );
 
             _documentIndex.Add(document, documentIndex);
             return documentIndex;
@@ -675,7 +796,8 @@ namespace Microsoft.Cci
                     sequencePoint.StartLine,
                     sequencePoint.StartColumn,
                     sequencePoint.EndLine,
-                    sequencePoint.EndColumn);
+                    sequencePoint.EndColumn
+                );
             }
 
             _sequencePointsWriter.Flush();
@@ -684,20 +806,26 @@ namespace Microsoft.Cci
         [Conditional("DEBUG")]
         // Used to catch cases where file2definitions contain nonwritable definitions early
         // If left unfixed, such scenarios will lead to crashes if happen in winmdobj projects
-        public void AssertAllDefinitionsHaveTokens(MultiDictionary<DebugSourceDocument, DefinitionWithLocation> file2definitions)
+        public void AssertAllDefinitionsHaveTokens(
+            MultiDictionary<DebugSourceDocument, DefinitionWithLocation> file2definitions
+        )
         {
             foreach (var kvp in file2definitions)
             {
                 foreach (var definition in kvp.Value)
                 {
-                    EntityHandle handle = _metadataWriter.GetDefinitionHandle(definition.Definition);
+                    EntityHandle handle = _metadataWriter.GetDefinitionHandle(
+                        definition.Definition
+                    );
                     Debug.Assert(!handle.IsNil);
                 }
             }
         }
 
         // Note: only used for WinMD
-        public void WriteDefinitionLocations(MultiDictionary<DebugSourceDocument, DefinitionWithLocation> file2definitions)
+        public void WriteDefinitionLocations(
+            MultiDictionary<DebugSourceDocument, DefinitionWithLocation> file2definitions
+        )
         {
             // Only open and close the map if we have any mapping.
             bool open = false;
@@ -712,7 +840,9 @@ namespace Microsoft.Cci
                         open = true;
                     }
 
-                    int token = MetadataTokens.GetToken(_metadataWriter.GetDefinitionHandle(definition.Definition));
+                    int token = MetadataTokens.GetToken(
+                        _metadataWriter.GetDefinitionHandle(definition.Definition)
+                    );
                     Debug.Assert(token != 0);
 
                     _symWriter.MapTokenToSourceSpan(
@@ -721,7 +851,8 @@ namespace Microsoft.Cci
                         definition.StartLine + 1,
                         definition.StartColumn + 1,
                         definition.EndLine + 1,
-                        definition.EndColumn + 1);
+                        definition.EndColumn + 1
+                    );
                 }
             }
 
@@ -750,7 +881,12 @@ namespace Microsoft.Cci
             }
             catch (SymUnmanagedWriterException e) when (e.InnerException is NotSupportedException)
             {
-                throw new SymUnmanagedWriterException(string.Format(CodeAnalysisResources.SymWriterDoesNotSupportSourceLink, e.ImplementationModuleName));
+                throw new SymUnmanagedWriterException(
+                    string.Format(
+                        CodeAnalysisResources.SymWriterDoesNotSupportSourceLink,
+                        e.ImplementationModuleName
+                    )
+                );
             }
         }
 
@@ -761,11 +897,15 @@ namespace Microsoft.Cci
         /// This is done after serializing method debug info to ensure that we embed all requested
         /// text even if there are no corresponding sequence points.
         /// </remarks>
-        public void WriteRemainingDebugDocuments(IReadOnlyDictionary<string, DebugSourceDocument> documents)
+        public void WriteRemainingDebugDocuments(
+            IReadOnlyDictionary<string, DebugSourceDocument> documents
+        )
         {
-            foreach (var kvp in documents
-                .Where(kvp => !_documentIndex.ContainsKey(kvp.Value))
-                .OrderBy(kvp => kvp.Key))
+            foreach (
+                var kvp in documents
+                    .Where(kvp => !_documentIndex.ContainsKey(kvp.Value))
+                    .OrderBy(kvp => kvp.Key)
+            )
             {
                 AddDocumentIndex(kvp.Value);
             }
@@ -774,9 +914,19 @@ namespace Microsoft.Cci
         public void WriteCompilerVersion(string language)
         {
             var compilerAssembly = typeof(Compilation).Assembly;
-            var fileVersion = Version.Parse(compilerAssembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version);
-            var versionString = compilerAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-            _symWriter.AddCompilerInfo((ushort)fileVersion.Major, (ushort)fileVersion.Minor, (ushort)fileVersion.Build, (ushort)fileVersion.Revision, $"{language} - {versionString}");
+            var fileVersion = Version.Parse(
+                compilerAssembly.GetCustomAttribute<AssemblyFileVersionAttribute>().Version
+            );
+            var versionString = compilerAssembly
+                .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                .InformationalVersion;
+            _symWriter.AddCompilerInfo(
+                (ushort)fileVersion.Major,
+                (ushort)fileVersion.Minor,
+                (ushort)fileVersion.Build,
+                (ushort)fileVersion.Revision,
+                $"{language} - {versionString}"
+            );
         }
     }
 }

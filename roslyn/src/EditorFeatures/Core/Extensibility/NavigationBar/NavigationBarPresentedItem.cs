@@ -19,16 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor
             ImmutableArray<TextSpan> spans,
             ImmutableArray<NavigationBarItem> childItems = default,
             bool bolded = false,
-            bool grayed = false)
-            : base(
-                  text,
-                  glyph,
-                  spans,
-                  childItems,
-                  indent: 0,
-                  bolded: bolded,
-                  grayed: grayed)
-        {
-        }
+            bool grayed = false
+        )
+            : base(text, glyph, spans, childItems, indent: 0, bolded: bolded, grayed: grayed) { }
     }
 }

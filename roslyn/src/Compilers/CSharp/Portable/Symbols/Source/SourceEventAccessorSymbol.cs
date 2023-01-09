@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string aliasQualifierOpt,
             bool isAdder,
             bool isIterator,
-            bool isNullableAnalysisEnabled)
+            bool isNullableAnalysisEnabled
+        )
             : base(@event.containingType, syntaxReference, locations, isIterator)
         {
             _event = @event;
@@ -43,11 +44,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                MethodSymbol implementedAccessor = isAdder ? explicitlyImplementedEventOpt.AddMethod : explicitlyImplementedEventOpt.RemoveMethod;
-                string accessorName = (object)implementedAccessor != null ? implementedAccessor.Name : SourceEventSymbol.GetAccessorName(explicitlyImplementedEventOpt.Name, isAdder);
+                MethodSymbol implementedAccessor = isAdder
+                    ? explicitlyImplementedEventOpt.AddMethod
+                    : explicitlyImplementedEventOpt.RemoveMethod;
+                string accessorName =
+                    (object)implementedAccessor != null
+                        ? implementedAccessor.Name
+                        : SourceEventSymbol.GetAccessorName(
+                            explicitlyImplementedEventOpt.Name,
+                            isAdder
+                        );
 
-                name = ExplicitInterfaceHelpers.GetMemberName(accessorName, explicitlyImplementedEventOpt.ContainingType, aliasQualifierOpt);
-                explicitInterfaceImplementations = (object)implementedAccessor == null ? ImmutableArray<MethodSymbol>.Empty : ImmutableArray.Create<MethodSymbol>(implementedAccessor);
+                name = ExplicitInterfaceHelpers.GetMemberName(
+                    accessorName,
+                    explicitlyImplementedEventOpt.ContainingType,
+                    aliasQualifierOpt
+                );
+                explicitInterfaceImplementations =
+                    (object)implementedAccessor == null
+                        ? ImmutableArray<MethodSymbol>.Empty
+                        : ImmutableArray.Create<MethodSymbol>(implementedAccessor);
             }
 
             _explicitInterfaceImplementations = explicitInterfaceImplementations;
@@ -58,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 returnsVoid: false, // until we learn otherwise (in LazyMethodChecks).
                 isExtensionMethod: false,
                 isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-                isMetadataVirtualIgnoringModifiers: @event.IsExplicitInterfaceImplementation && (@event.Modifiers & DeclarationModifiers.Static) == 0);
+                isMetadataVirtualIgnoringModifiers: @event.IsExplicitInterfaceImplementation
+                    && (@event.Modifiers & DeclarationModifiers.Static) == 0
+            );
 
             _name = GetOverriddenAccessorName(@event, isAdder) ?? name;
         }
@@ -78,8 +96,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _explicitInterfaceImplementations; }
         }
 
-        public sealed override bool AreLocalsZeroed
-            => !_event.HasSkipLocalsInitAttribute && base.AreLocalsZeroed;
+        public sealed override bool AreLocalsZeroed =>
+            !_event.HasSkipLocalsInitAttribute && base.AreLocalsZeroed;
 
         public SourceEventSymbol AssociatedEvent
         {
@@ -109,7 +127,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // rather than Interlocked.CompareExchange.
                 if (_event.IsWindowsRuntimeEvent)
                 {
-                    TypeSymbol eventTokenType = compilation.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken);
+                    TypeSymbol eventTokenType = compilation.GetWellKnownType(
+                        WellKnownType.System_Runtime_InteropServices_WindowsRuntime_EventRegistrationToken
+                    );
                     Binder.ReportUseSite(eventTokenType, diagnostics, this.Location);
 
                     if (this.MethodKind == MethodKind.EventAdd)
@@ -119,7 +139,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         // Leave the returns void bit in this.flags false.
                         _lazyReturnType = TypeWithAnnotations.Create(eventTokenType);
 
-                        var parameter = new SynthesizedAccessorValueParameterSymbol(this, _event.TypeWithAnnotations, 0);
+                        var parameter = new SynthesizedAccessorValueParameterSymbol(
+                            this,
+                            _event.TypeWithAnnotations,
+                            0
+                        );
                         _lazyParameters = ImmutableArray.Create<ParameterSymbol>(parameter);
                     }
                     else
@@ -133,7 +157,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         _lazyReturnType = TypeWithAnnotations.Create(voidType);
                         this.SetReturnsVoid(returnsVoid: true);
 
-                        var parameter = new SynthesizedAccessorValueParameterSymbol(this, TypeWithAnnotations.Create(eventTokenType), 0);
+                        var parameter = new SynthesizedAccessorValueParameterSymbol(
+                            this,
+                            TypeWithAnnotations.Create(eventTokenType),
+                            0
+                        );
                         _lazyParameters = ImmutableArray.Create<ParameterSymbol>(parameter);
                     }
                 }
@@ -147,7 +175,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     _lazyReturnType = TypeWithAnnotations.Create(voidType);
                     this.SetReturnsVoid(returnsVoid: true);
 
-                    var parameter = new SynthesizedAccessorValueParameterSymbol(this, _event.TypeWithAnnotations, 0);
+                    var parameter = new SynthesizedAccessorValueParameterSymbol(
+                        this,
+                        _event.TypeWithAnnotations,
+                        0
+                    );
                     _lazyParameters = ImmutableArray.Create<ParameterSymbol>(parameter);
                 }
             }
@@ -206,11 +238,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return ImmutableArray<TypeParameterSymbol>.Empty; }
         }
 
-        public sealed override ImmutableArray<ImmutableArray<TypeWithAnnotations>> GetTypeParameterConstraintTypes()
-            => ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
+        public sealed override ImmutableArray<
+            ImmutableArray<TypeWithAnnotations>
+        > GetTypeParameterConstraintTypes() =>
+            ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
 
-        public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds()
-            => ImmutableArray<TypeParameterConstraintKind>.Empty;
+        public sealed override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() =>
+            ImmutableArray<TypeParameterConstraintKind>.Empty;
 
         internal Location Location
         {
@@ -228,7 +262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // NOTE: What we'd really like to do is ask for the OverriddenMethod of this symbol.
                 // Unfortunately, we can't do that, because it would inspect the signature of this
                 // method, which depends on whether @event is a WinRT event, which depends on
-                // interface implementation, which we can't check during construction of the 
+                // interface implementation, which we can't check during construction of the
                 // member list of the type containing this accessor (infinite recursion).  Instead,
                 // we inline part of the implementation of OverriddenMethod - we look for the
                 // overridden event (which does not depend on WinRT-ness) and then grab the corresponding
@@ -239,7 +273,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // If this accessor is overriding an accessor from metadata, it is possible that
                     // the name of the overridden accessor doesn't follow the C# add_X/remove_X pattern.
                     // We should copy the name so that the runtime will recognize this as an override.
-                    MethodSymbol overriddenAccessor = overriddenEvent.GetOwnOrInheritedAccessor(isAdder);
+                    MethodSymbol overriddenAccessor = overriddenEvent.GetOwnOrInheritedAccessor(
+                        isAdder
+                    );
                     return (object)overriddenAccessor == null ? null : overriddenAccessor.Name;
                 }
             }

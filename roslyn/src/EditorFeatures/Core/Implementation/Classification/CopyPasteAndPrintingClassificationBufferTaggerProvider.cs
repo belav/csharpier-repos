@@ -15,10 +15,10 @@ using Microsoft.VisualStudio.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 {
     /// <summary>
-    /// This is the tagger we use for buffer classification scenarios.  It is only used for 
+    /// This is the tagger we use for buffer classification scenarios.  It is only used for
     /// IAccurateTagger scenarios.  Namely: Copy/Paste and Printing.  We use an 'Accurate' buffer
     /// tagger since these features need to get classification tags for the entire file.
-    /// 
+    ///
     /// i.e. if you're printing, you want semantic classification even for code that's not in view.
     /// The same applies to copy/pasting.
     /// </summary>
@@ -26,17 +26,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     [TagType(typeof(IClassificationTag))]
     [ContentType(ContentTypeNames.CSharpContentType)]
     [ContentType(ContentTypeNames.VisualBasicContentType)]
-    internal partial class CopyPasteAndPrintingClassificationBufferTaggerProvider : ForegroundThreadAffinitizedObject, ITaggerProvider
+    internal partial class CopyPasteAndPrintingClassificationBufferTaggerProvider
+        : ForegroundThreadAffinitizedObject,
+            ITaggerProvider
     {
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly ClassificationTypeMap _typeMap;
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public CopyPasteAndPrintingClassificationBufferTaggerProvider(
             IThreadingContext threadingContext,
             ClassificationTypeMap typeMap,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
             : base(threadingContext)
         {
             _typeMap = typeMap;
@@ -57,7 +64,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             return new Tagger(this, buffer, _asyncListener) as IAccurateTagger<T>;
         }
 
-        ITagger<T>? ITaggerProvider.CreateTagger<T>(ITextBuffer buffer)
-            => CreateTagger<T>(buffer);
+        ITagger<T>? ITaggerProvider.CreateTagger<T>(ITextBuffer buffer) => CreateTagger<T>(buffer);
     }
 }

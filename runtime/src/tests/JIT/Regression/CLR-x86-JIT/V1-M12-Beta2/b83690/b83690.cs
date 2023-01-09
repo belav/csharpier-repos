@@ -3,6 +3,7 @@
 //
 
 using System;
+
 public struct CC
 {
     static sbyte m_su;
@@ -20,6 +21,7 @@ public struct CC
             return 100;
         }
     }
+
     static void Main1()
     {
         bool local4 = true;

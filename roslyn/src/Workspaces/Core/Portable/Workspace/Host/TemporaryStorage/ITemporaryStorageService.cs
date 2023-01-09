@@ -10,8 +10,12 @@ namespace Microsoft.CodeAnalysis.Host
     [Obsolete("API is no longer available")]
     public interface ITemporaryStorageService : IWorkspaceService
     {
-        ITemporaryStreamStorage CreateTemporaryStreamStorage(CancellationToken cancellationToken = default);
-        ITemporaryTextStorage CreateTemporaryTextStorage(CancellationToken cancellationToken = default);
+        ITemporaryStreamStorage CreateTemporaryStreamStorage(
+            CancellationToken cancellationToken = default
+        );
+        ITemporaryTextStorage CreateTemporaryTextStorage(
+            CancellationToken cancellationToken = default
+        );
     }
 
     internal interface ITemporaryStorageServiceInternal : IWorkspaceService

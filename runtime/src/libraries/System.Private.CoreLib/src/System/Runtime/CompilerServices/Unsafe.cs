@@ -575,7 +575,10 @@ namespace System.Runtime.CompilerServices
             typeof(T).ToString(); // Type token used by the actual method body
             throw new PlatformNotSupportedException();
 #else
-            As<byte, T>(ref destination) = value;
+            As<
+                byte,
+                T
+            >(ref destination) = value;
 #endif
 
             // ldarg .0
@@ -795,7 +798,10 @@ namespace System.Runtime.CompilerServices
             typeof(T).ToString();
             throw new PlatformNotSupportedException();
 #else
-            return ref SubtractByteOffset(ref source, (IntPtr)((nint)elementOffset * (nint)sizeof(T)));
+            return ref SubtractByteOffset(
+                ref source,
+                (IntPtr)((nint)elementOffset * (nint)sizeof(T))
+            );
 #endif
 
             // ldarg .0
@@ -878,8 +884,7 @@ namespace System.Runtime.CompilerServices
         // CoreCLR:METHOD__UNSAFE__UNBOX
         [NonVersionable]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref T Unbox<T>(object box)
-            where T : struct
+        public static ref T Unbox<T>(object box) where T : struct
         {
             throw new PlatformNotSupportedException();
 

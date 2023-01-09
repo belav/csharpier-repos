@@ -8,14 +8,23 @@ namespace System.Text.Json.Serialization.Tests
 {
     public static partial class CustomConverterTests
     {
-        private class FailConverter<TException> : JsonConverter<int> where TException: Exception, new()
+        private class FailConverter<TException> : JsonConverter<int>
+            where TException : Exception, new()
         {
-            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new TException();
             }
 
-            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int value,
+                JsonSerializerOptions options
+            )
             {
                 throw new TException();
             }

@@ -25,27 +25,62 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         private static Workspace GetWorkspace(string? projectFilePath = null)
         {
             var projectId = ProjectId.CreateNewId();
-            var workspace = new AdhocWorkspace(VisualStudioTestCompositions.LanguageServices.GetHostServices(), WorkspaceKind.Host);
-            Assert.True(workspace.TryApplyChanges(workspace.CurrentSolution
-                .AddProject(ProjectInfo.Create(projectId, VersionStamp.Create(), "proj1", "proj1.dll", LanguageNames.CSharp, filePath: projectFilePath))
-                .AddDocument(DocumentId.CreateNewId(projectId), "goo.cs", "public class Goo { }")
-                .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
-                .AddAnalyzerReference(projectId, new MockAnalyzerReference())
-                .AddAnalyzerConfigDocument(DocumentId.CreateNewId(projectId), "editorcfg", SourceText.From("config"), filePath: "/a/b")));
+            var workspace = new AdhocWorkspace(
+                VisualStudioTestCompositions.LanguageServices.GetHostServices(),
+                WorkspaceKind.Host
+            );
+            Assert.True(
+                workspace.TryApplyChanges(
+                    workspace.CurrentSolution
+                        .AddProject(
+                            ProjectInfo.Create(
+                                projectId,
+                                VersionStamp.Create(),
+                                "proj1",
+                                "proj1.dll",
+                                LanguageNames.CSharp,
+                                filePath: projectFilePath
+                            )
+                        )
+                        .AddDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "goo.cs",
+                            "public class Goo { }"
+                        )
+                        .AddAdditionalDocument(DocumentId.CreateNewId(projectId), "add.txt", "text")
+                        .AddAnalyzerReference(projectId, new MockAnalyzerReference())
+                        .AddAnalyzerConfigDocument(
+                            DocumentId.CreateNewId(projectId),
+                            "editorcfg",
+                            SourceText.From("config"),
+                            filePath: "/a/b"
+                        )
+                )
+            );
             return workspace;
         }
 
-        private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspace<T>()
-            => GetWorkspace("/a/b/proj1.csproj").Services.GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
+        private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspace<T>() =>
+            GetWorkspace("/a/b/proj1.csproj").Services.GetRequiredService<
+                IWorkspaceSettingsProviderFactory<T>
+            >();
 
-        private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageService<T>(string languageName)
-            => GetWorkspace("/a/b/proj1.csproj").Services.GetLanguageServices(languageName).GetRequiredService<ILanguageSettingsProviderFactory<T>>();
+        private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageService<T>(
+            string languageName
+        ) =>
+            GetWorkspace("/a/b/proj1.csproj").Services
+                .GetLanguageServices(languageName)
+                .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 
-        private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<T>()
-            => GetWorkspace().Services.GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
+        private static IWorkspaceSettingsProviderFactory<T> GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<T>() =>
+            GetWorkspace().Services.GetRequiredService<IWorkspaceSettingsProviderFactory<T>>();
 
-        private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<T>(string languageName)
-            => GetWorkspace().Services.GetLanguageServices(languageName).GetRequiredService<ILanguageSettingsProviderFactory<T>>();
+        private static ILanguageSettingsProviderFactory<T> GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<T>(
+            string languageName
+        ) =>
+            GetWorkspace().Services
+                .GetLanguageServices(languageName)
+                .GetRequiredService<ILanguageSettingsProviderFactory<T>>();
 
         private static ISettingsProvider<T> TestGettingSettingsProviderFromWorkspace<T>()
         {
@@ -57,7 +92,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
 
         private static ISettingsProvider<T> TestGettingSettingsProviderFromLanguageService<T>()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromLanguageService<T>(LanguageNames.CSharp);
+            var settingsProviderFactory = GettingSettingsProviderFactoryFromLanguageService<T>(
+                LanguageNames.CSharp
+            );
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             Assert.NotNull(settingsProvider);
             return settingsProvider;
@@ -92,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingAnalyzerSettingsProviderWorkspaceServiceAsync()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspace<AnalyzerSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspace<AnalyzerSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -108,7 +146,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingCodeStyleSettingProviderWorkspaceServiceAsync()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspace<CodeStyleSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspace<CodeStyleSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -121,19 +160,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
             //
             // We also subtract for this not-yet supported option, tracked by https://github.com/dotnet/roslyn/issues/62937
             // CodeStyleOptions2.ForEachExplicitCastInSource
-            var optionsCount = CodeStyleOptions2.AllOptions.Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2)).Count() - 4;
+            var optionsCount =
+                CodeStyleOptions2.AllOptions
+                    .Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2))
+                    .Count() - 4;
             Assert.Equal(optionsCount, dataSnapShot.Length);
         }
 
         [Fact]
         public void TestGettingNamingStyleSettingProviderWorkspaceServiceAsync()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspace<NamingStyleSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspace<NamingStyleSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
             var dataSnapShot = settingsProvider.GetCurrentDataSnapshot();
-            Assert.Collection(dataSnapShot,
+            Assert.Collection(
+                dataSnapShot,
                 namingStyle1 =>
                 {
                     Assert.Equal(CompilerExtensionsResources.Begins_with_I, namingStyle1.StyleName);
@@ -149,28 +193,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
                 namingStyle3 =>
                 {
                     Assert.Equal(CompilerExtensionsResources.Pascal_Case, namingStyle3.StyleName);
-                    Assert.Equal(CompilerExtensionsResources.Non_Field_Members, namingStyle3.TypeName);
+                    Assert.Equal(
+                        CompilerExtensionsResources.Non_Field_Members,
+                        namingStyle3.TypeName
+                    );
                     Assert.Equal(ReportDiagnostic.Info, namingStyle3.Severity);
-                });
+                }
+            );
         }
 
         [Fact]
         public void TestGettingCodeStyleSettingsProviderLanguageServiceAsync()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromLanguageService<CodeStyleSetting>(LanguageNames.CSharp);
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromLanguageService<CodeStyleSetting>(
+                    LanguageNames.CSharp
+                );
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
             var dataSnapShot = settingsProvider.GetCurrentDataSnapshot();
             // We don't support PreferredModifierOrder yet so we subtract by one
-            var optionsCount = CSharpCodeStyleOptions.AllOptions.Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2)).Count() - 1;
+            var optionsCount =
+                CSharpCodeStyleOptions.AllOptions
+                    .Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2))
+                    .Count() - 1;
             Assert.Equal(optionsCount, dataSnapShot.Length);
         }
 
         [Fact]
         public void TestGettingWhitespaceSettingProviderWorkspaceServiceAsync()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspace<WhitespaceSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspace<WhitespaceSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -188,25 +243,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
 
             AssertEx.SetEqual(
                 expectedOptions.Select(option => option.Name),
-                dataSnapShot.Select(item => item.Key.Option.Name));
+                dataSnapShot.Select(item => item.Key.Option.Name)
+            );
         }
 
         [Fact]
         public void TestGettingWhitespaceSettingProviderLanguageServiceAsync()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromLanguageService<WhitespaceSetting>(LanguageNames.CSharp);
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromLanguageService<WhitespaceSetting>(
+                    LanguageNames.CSharp
+                );
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
             var dataSnapShot = settingsProvider.GetCurrentDataSnapshot();
-            var optionsCount = CSharpFormattingOptions2.AllOptions.Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2)).Count();
+            var optionsCount = CSharpFormattingOptions2.AllOptions
+                .Where(x => x.StorageLocations.Any(y => y is IEditorConfigStorageLocation2))
+                .Count();
             Assert.Equal(optionsCount, dataSnapShot.Length);
         }
 
         [Fact]
         public void TestGettingSettingProviderWithNullProjectPath1()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<WhitespaceSetting>(LanguageNames.CSharp);
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<WhitespaceSetting>(
+                    LanguageNames.CSharp
+                );
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -217,7 +281,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingSettingProviderWithNullProjectPath2()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<WhitespaceSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<WhitespaceSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -228,7 +293,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingSettingProviderWithNullProjectPath3()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<CodeStyleSetting>(LanguageNames.CSharp);
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromLanguageServiceWithNullProjectPath<CodeStyleSetting>(
+                    LanguageNames.CSharp
+                );
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -239,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingSettingProviderWithNullProjectPath4()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<CodeStyleSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<CodeStyleSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -250,7 +319,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingSettingProviderWithNullProjectPath5()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<AnalyzerSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<AnalyzerSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);
@@ -261,7 +331,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
         [Fact]
         public void TestGettingSettingProviderWithNullProjectPath6()
         {
-            var settingsProviderFactory = GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<NamingStyleSetting>();
+            var settingsProviderFactory =
+                GettingSettingsProviderFactoryFromWorkspaceWithNullProjectPath<NamingStyleSetting>();
             var settingsProvider = settingsProviderFactory.GetForFile("/a/b/config");
             var model = new TestViewModel();
             settingsProvider.RegisterViewModel(model);

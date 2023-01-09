@@ -27,42 +27,61 @@ namespace Microsoft.CodeAnalysis.TaskList
         private readonly IGlobalOptionService _globalOptions;
         private readonly SolutionServices _services;
         private readonly IAsynchronousOperationListener _asyncListener;
-        private readonly Action<DocumentId, ImmutableArray<TaskListItem>, ImmutableArray<TaskListItem>> _onTaskListItemsUpdated;
-        private readonly ConcurrentDictionary<DocumentId, ImmutableArray<TaskListItem>> _documentToTaskListItems = new();
+        private readonly Action<
+            DocumentId,
+            ImmutableArray<TaskListItem>,
+            ImmutableArray<TaskListItem>
+        > _onTaskListItemsUpdated;
+        private readonly ConcurrentDictionary<
+            DocumentId,
+            ImmutableArray<TaskListItem>
+        > _documentToTaskListItems = new();
 
         /// <summary>
         /// Queue where we enqueue the information we get from OOP to process in batch in the future.
         /// </summary>
-        private readonly AsyncBatchingWorkQueue<(DocumentId documentId, ImmutableArray<TaskListItem> items)> _workQueue;
+        private readonly AsyncBatchingWorkQueue<(
+            DocumentId documentId,
+            ImmutableArray<TaskListItem> items
+        )> _workQueue;
 
         public TaskListListener(
             IGlobalOptionService globalOptions,
             SolutionServices services,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            Action<DocumentId, ImmutableArray<TaskListItem>, ImmutableArray<TaskListItem>> onTaskListItemsUpdated,
-            CancellationToken disposalToken)
+            Action<
+                DocumentId,
+                ImmutableArray<TaskListItem>,
+                ImmutableArray<TaskListItem>
+            > onTaskListItemsUpdated,
+            CancellationToken disposalToken
+        )
         {
             _globalOptions = globalOptions;
             _services = services;
-            _asyncListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.TaskList);
+            _asyncListener = asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.TaskList
+            );
             _onTaskListItemsUpdated = onTaskListItemsUpdated;
             _disposalToken = disposalToken;
 
-            _workQueue = new AsyncBatchingWorkQueue<(DocumentId documentId, ImmutableArray<TaskListItem> items)>(
-                TimeSpan.FromSeconds(1),
-                ProcessTaskListItemsAsync,
-                _asyncListener,
-                _disposalToken);
+            _workQueue = new AsyncBatchingWorkQueue<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )>(TimeSpan.FromSeconds(1), ProcessTaskListItemsAsync, _asyncListener, _disposalToken);
         }
 
         public void Start()
         {
             // If we're in pull-diagnostics mode, then todo-comments will be handled by LSP.
-            var diagnosticMode = _globalOptions.GetDiagnosticMode(InternalDiagnosticsOptions.NormalDiagnosticMode);
+            var diagnosticMode = _globalOptions.GetDiagnosticMode(
+                InternalDiagnosticsOptions.NormalDiagnosticMode
+            );
             if (diagnosticMode == DiagnosticMode.Pull)
                 return;
 
-            var registrationService = _services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService =
+                _services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new TaskListIncrementalAnalyzerProvider(this);
 
             registrationService.AddAnalyzerProvider(
@@ -70,20 +89,27 @@ namespace Microsoft.CodeAnalysis.TaskList
                 new IncrementalAnalyzerProviderMetadata(
                     nameof(TaskListIncrementalAnalyzerProvider),
                     highPriorityForActiveFile: false,
-                    workspaceKinds: WorkspaceKind.Host));
+                    workspaceKinds: WorkspaceKind.Host
+                )
+            );
         }
 
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public ValueTask ReportTaskListItemsAsync(DocumentId documentId, ImmutableArray<TaskListItem> items, CancellationToken cancellationToken)
+        public ValueTask ReportTaskListItemsAsync(
+            DocumentId documentId,
+            ImmutableArray<TaskListItem> items,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 _workQueue.AddWork((documentId, items));
                 return ValueTaskFactory.CompletedTask;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 // report NFW before returning back to the remote process
                 throw ExceptionUtilities.Unreachable();
@@ -93,20 +119,31 @@ namespace Microsoft.CodeAnalysis.TaskList
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public ValueTask<TaskListOptions> GetOptionsAsync(CancellationToken cancellationToken)
-            => ValueTaskFactory.FromResult(_globalOptions.GetTaskListOptions());
+        public ValueTask<TaskListOptions> GetOptionsAsync(CancellationToken cancellationToken) =>
+            ValueTaskFactory.FromResult(_globalOptions.GetTaskListOptions());
 
         private ValueTask ProcessTaskListItemsAsync(
-            ImmutableSegmentedList<(DocumentId documentId, ImmutableArray<TaskListItem> items)> docAndCommentsArray, CancellationToken cancellationToken)
+            ImmutableSegmentedList<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )> docAndCommentsArray,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using var _1 = ArrayBuilder<(DocumentId documentId, ImmutableArray<TaskListItem> items)>.GetInstance(out var filteredArray);
+            using var _1 = ArrayBuilder<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )>.GetInstance(out var filteredArray);
             AddFilteredItems(docAndCommentsArray, filteredArray);
 
             foreach (var (documentId, newItems) in filteredArray)
             {
-                var oldComments = _documentToTaskListItems.TryGetValue(documentId, out var oldBoxedInfos)
+                var oldComments = _documentToTaskListItems.TryGetValue(
+                    documentId,
+                    out var oldBoxedInfos
+                )
                     ? oldBoxedInfos
                     : ImmutableArray<TaskListItem>.Empty;
 
@@ -130,8 +167,12 @@ namespace Microsoft.CodeAnalysis.TaskList
         }
 
         private static void AddFilteredItems(
-            ImmutableSegmentedList<(DocumentId documentId, ImmutableArray<TaskListItem> items)> array,
-            ArrayBuilder<(DocumentId documentId, ImmutableArray<TaskListItem> items)> filteredArray)
+            ImmutableSegmentedList<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )> array,
+            ArrayBuilder<(DocumentId documentId, ImmutableArray<TaskListItem> items)> filteredArray
+        )
         {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var seenDocumentIds);
 

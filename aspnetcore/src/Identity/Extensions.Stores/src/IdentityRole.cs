@@ -28,7 +28,8 @@ public class IdentityRole : IdentityRole<string>
     /// <remarks>
     /// The Id property is initialized to form a new GUID string value.
     /// </remarks>
-    public IdentityRole(string roleName) : this()
+    public IdentityRole(string roleName)
+        : this()
     {
         Name = roleName;
     }
@@ -49,7 +50,8 @@ public class IdentityRole<TKey> where TKey : IEquatable<TKey>
     /// Initializes a new instance of <see cref="IdentityRole{TKey}"/>.
     /// </summary>
     /// <param name="roleName">The role name.</param>
-    public IdentityRole(string roleName) : this()
+    public IdentityRole(string roleName)
+        : this()
     {
         Name = roleName;
     }

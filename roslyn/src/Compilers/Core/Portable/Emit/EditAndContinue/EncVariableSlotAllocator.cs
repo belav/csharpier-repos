@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Emit
             IReadOnlyDictionary<int, StateMachineState>? stateMachineStateMap,
             StateMachineState? firstUnusedIncreasingStateMachineState,
             StateMachineState? firstUnusedDecreasingStateMachineState,
-            LambdaSyntaxFacts lambdaSyntaxFacts)
+            LambdaSyntaxFacts lambdaSyntaxFacts
+        )
         {
             Debug.Assert(!previousLocals.IsDefault);
 
@@ -105,27 +106,38 @@ namespace Microsoft.CodeAnalysis.Emit
         private int CalculateSyntaxOffsetInPreviousMethod(SyntaxNode node)
         {
             // Note that syntax offset of a syntax node contained in a lambda body is calculated by the containing top-level method,
-            // not by the lambda method. The offset is thus relative to the top-level method body start. We can thus avoid mapping 
-            // the current lambda symbol or body to the corresponding previous lambda symbol or body, which is non-trivial. 
-            return _previousTopLevelMethod.CalculateLocalSyntaxOffset(_lambdaSyntaxFacts.GetDeclaratorPosition(node), node.SyntaxTree);
+            // not by the lambda method. The offset is thus relative to the top-level method body start. We can thus avoid mapping
+            // the current lambda symbol or body to the corresponding previous lambda symbol or body, which is non-trivial.
+            return _previousTopLevelMethod.CalculateLocalSyntaxOffset(
+                _lambdaSyntaxFacts.GetDeclaratorPosition(node),
+                node.SyntaxTree
+            );
         }
 
         public override void AddPreviousLocals(ArrayBuilder<Cci.ILocalDefinition> builder)
         {
-            builder.AddRange(_previousLocals.Select((info, index) =>
-            {
-                RoslynDebug.AssertNotNull(info.Signature);
-                return new SignatureOnlyLocalDefinition(info.Signature, index);
-            }));
+            builder.AddRange(
+                _previousLocals.Select(
+                    (info, index) =>
+                    {
+                        RoslynDebug.AssertNotNull(info.Signature);
+                        return new SignatureOnlyLocalDefinition(info.Signature, index);
+                    }
+                )
+            );
         }
 
-        private bool TryGetPreviousLocalId(SyntaxNode currentDeclarator, LocalDebugId currentId, out LocalDebugId previousId)
+        private bool TryGetPreviousLocalId(
+            SyntaxNode currentDeclarator,
+            LocalDebugId currentId,
+            out LocalDebugId previousId
+        )
         {
             if (_syntaxMap == null)
             {
-                // no syntax map 
-                // => the source of the current method is the same as the source of the previous method 
-                // => relative positions are the same 
+                // no syntax map
+                // => the source of the current method is the same as the source of the previous method
+                // => relative positions are the same
                 // => synthesized ids are the same
                 previousId = currentId;
                 return true;
@@ -152,14 +164,21 @@ namespace Microsoft.CodeAnalysis.Emit
             LocalVariableAttributes pdbAttributes,
             LocalSlotConstraints constraints,
             ImmutableArray<bool> dynamicTransformFlags,
-            ImmutableArray<string> tupleElementNames)
+            ImmutableArray<string> tupleElementNames
+        )
         {
             if (id.IsNone)
             {
                 return null;
             }
 
-            if (!TryGetPreviousLocalId(currentLocalSymbol.GetDeclaratorSyntax(), id, out LocalDebugId previousId))
+            if (
+                !TryGetPreviousLocalId(
+                    currentLocalSymbol.GetDeclaratorSyntax(),
+                    id,
+                    out LocalDebugId previousId
+                )
+            )
             {
                 return null;
             }
@@ -172,7 +191,12 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // TODO (bug #781309): Should report a warning if the type of the local has changed
             // and the previous value will be dropped.
-            var localKey = new EncLocalInfo(new LocalSlotDebugInfo(kind, previousId), previousType, constraints, signature: null);
+            var localKey = new EncLocalInfo(
+                new LocalSlotDebugInfo(kind, previousId),
+                previousType,
+                constraints,
+                signature: null
+            );
 
             if (!_previousLocalSlots.TryGetValue(localKey, out int slot))
             {
@@ -189,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 pdbAttributes,
                 constraints,
                 dynamicTransformFlags,
-                tupleElementNames);
+                tupleElementNames
+            );
         }
 
         public override string? PreviousStateMachineTypeName => _stateMachineTypeName;
@@ -200,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Emit
             SynthesizedLocalKind synthesizedKind,
             LocalDebugId currentId,
             DiagnosticBag diagnostics,
-            out int slotIndex)
+            out int slotIndex
+        )
         {
             // The previous method was not a state machine (it is allowed to change non-state machine to a state machine):
             if (_hoistedLocalSlots == null)
@@ -224,7 +250,10 @@ namespace Microsoft.CodeAnalysis.Emit
 
             // TODO (bug #781309): Should report a warning if the type of the local has changed
             // and the previous value will be dropped.
-            var localKey = new EncHoistedLocalInfo(new LocalSlotDebugInfo(synthesizedKind, previousId), previousType);
+            var localKey = new EncHoistedLocalInfo(
+                new LocalSlotDebugInfo(synthesizedKind, previousId),
+                previousType
+            );
 
             return _hoistedLocalSlots.TryGetValue(localKey, out slotIndex);
         }
@@ -232,7 +261,11 @@ namespace Microsoft.CodeAnalysis.Emit
         public override int PreviousHoistedLocalSlotCount => _hoistedLocalSlotCount;
         public override int PreviousAwaiterSlotCount => _awaiterCount;
 
-        public override bool TryGetPreviousAwaiterSlotIndex(Cci.ITypeReference currentType, DiagnosticBag diagnostics, out int slotIndex)
+        public override bool TryGetPreviousAwaiterSlotIndex(
+            Cci.ITypeReference currentType,
+            DiagnosticBag diagnostics,
+            out int slotIndex
+        )
         {
             // The previous method was not a state machine (it is allowed to change non-state machine to a state machine):
             if (_awaiterMap == null)
@@ -247,11 +280,14 @@ namespace Microsoft.CodeAnalysis.Emit
             return _awaiterMap.TryGetValue(typeRef, out slotIndex);
         }
 
-        private bool TryGetPreviousSyntaxOffset(SyntaxNode currentSyntax, out int previousSyntaxOffset)
+        private bool TryGetPreviousSyntaxOffset(
+            SyntaxNode currentSyntax,
+            out int previousSyntaxOffset
+        )
         {
-            // no syntax map 
-            // => the source of the current method is the same as the source of the previous method 
-            // => relative positions are the same 
+            // no syntax map
+            // => the source of the current method is the same as the source of the previous method
+            // => relative positions are the same
             // => ids are the same
             SyntaxNode? previousSyntax = _syntaxMap?.Invoke(currentSyntax);
             if (previousSyntax == null)
@@ -264,17 +300,21 @@ namespace Microsoft.CodeAnalysis.Emit
             return true;
         }
 
-        private bool TryGetPreviousLambdaSyntaxOffset(SyntaxNode lambdaOrLambdaBodySyntax, bool isLambdaBody, out int previousSyntaxOffset)
+        private bool TryGetPreviousLambdaSyntaxOffset(
+            SyntaxNode lambdaOrLambdaBodySyntax,
+            bool isLambdaBody,
+            out int previousSyntaxOffset
+        )
         {
-            // Syntax map contains mapping for lambdas, but not their bodies. 
+            // Syntax map contains mapping for lambdas, but not their bodies.
             // Map the lambda first and then determine the corresponding body.
             var currentLambdaSyntax = isLambdaBody
                 ? _lambdaSyntaxFacts.GetLambda(lambdaOrLambdaBodySyntax)
                 : lambdaOrLambdaBodySyntax;
 
-            // no syntax map 
-            // => the source of the current method is the same as the source of the previous method 
-            // => relative positions are the same 
+            // no syntax map
+            // => the source of the current method is the same as the source of the previous method
+            // => relative positions are the same
             // => ids are the same
             SyntaxNode? previousLambdaSyntax = _syntaxMap?.Invoke(currentLambdaSyntax);
             if (previousLambdaSyntax == null)
@@ -286,7 +326,10 @@ namespace Microsoft.CodeAnalysis.Emit
             SyntaxNode? previousSyntax;
             if (isLambdaBody)
             {
-                previousSyntax = _lambdaSyntaxFacts.TryGetCorrespondingLambdaBody(previousLambdaSyntax, lambdaOrLambdaBodySyntax);
+                previousSyntax = _lambdaSyntaxFacts.TryGetCorrespondingLambdaBody(
+                    previousLambdaSyntax,
+                    lambdaOrLambdaBodySyntax
+                );
                 if (previousSyntax == null)
                 {
                     previousSyntaxOffset = 0;
@@ -304,9 +347,11 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public override bool TryGetPreviousClosure(SyntaxNode scopeSyntax, out DebugId closureId)
         {
-            if (_closureMap != null &&
-                TryGetPreviousSyntaxOffset(scopeSyntax, out int syntaxOffset) &&
-                _closureMap.TryGetValue(syntaxOffset, out closureId))
+            if (
+                _closureMap != null
+                && TryGetPreviousSyntaxOffset(scopeSyntax, out int syntaxOffset)
+                && _closureMap.TryGetValue(syntaxOffset, out closureId)
+            )
             {
                 return true;
             }
@@ -315,11 +360,21 @@ namespace Microsoft.CodeAnalysis.Emit
             return false;
         }
 
-        public override bool TryGetPreviousLambda(SyntaxNode lambdaOrLambdaBodySyntax, bool isLambdaBody, out DebugId lambdaId)
+        public override bool TryGetPreviousLambda(
+            SyntaxNode lambdaOrLambdaBodySyntax,
+            bool isLambdaBody,
+            out DebugId lambdaId
+        )
         {
-            if (_lambdaMap != null &&
-                TryGetPreviousLambdaSyntaxOffset(lambdaOrLambdaBodySyntax, isLambdaBody, out int syntaxOffset) &&
-                _lambdaMap.TryGetValue(syntaxOffset, out var idAndClosureOrdinal))
+            if (
+                _lambdaMap != null
+                && TryGetPreviousLambdaSyntaxOffset(
+                    lambdaOrLambdaBodySyntax,
+                    isLambdaBody,
+                    out int syntaxOffset
+                )
+                && _lambdaMap.TryGetValue(syntaxOffset, out var idAndClosureOrdinal)
+            )
             {
                 lambdaId = idAndClosureOrdinal.Key;
                 return true;
@@ -329,14 +384,21 @@ namespace Microsoft.CodeAnalysis.Emit
             return false;
         }
 
-        public override StateMachineState? GetFirstUnusedStateMachineState(bool increasing)
-            => increasing ? _firstUnusedIncreasingStateMachineState : _firstUnusedDecreasingStateMachineState;
+        public override StateMachineState? GetFirstUnusedStateMachineState(bool increasing) =>
+            increasing
+                ? _firstUnusedIncreasingStateMachineState
+                : _firstUnusedDecreasingStateMachineState;
 
-        public override bool TryGetPreviousStateMachineState(SyntaxNode syntax, out StateMachineState state)
+        public override bool TryGetPreviousStateMachineState(
+            SyntaxNode syntax,
+            out StateMachineState state
+        )
         {
-            if (_stateMachineStateMap != null &&
-                TryGetPreviousSyntaxOffset(syntax, out int syntaxOffset) &&
-                _stateMachineStateMap.TryGetValue(syntaxOffset, out state))
+            if (
+                _stateMachineStateMap != null
+                && TryGetPreviousSyntaxOffset(syntax, out int syntaxOffset)
+                && _stateMachineStateMap.TryGetValue(syntaxOffset, out state)
+            )
             {
                 return true;
             }

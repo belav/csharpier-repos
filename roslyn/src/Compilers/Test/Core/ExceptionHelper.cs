@@ -13,7 +13,10 @@ namespace Roslyn.Test.Utilities
 {
     internal static class ExceptionHelper
     {
-        internal static string GetMessageFromResult(IEnumerable<Diagnostic> diagnostics, string directory)
+        internal static string GetMessageFromResult(
+            IEnumerable<Diagnostic> diagnostics,
+            string directory
+        )
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine("Emit Failed, binaries saved to: ");
@@ -25,7 +28,11 @@ namespace Roslyn.Test.Utilities
             return sb.ToString();
         }
 
-        internal static string GetMessageFromResult(string output, string exePath, bool isIlVerify = false)
+        internal static string GetMessageFromResult(
+            string output,
+            string exePath,
+            bool isIlVerify = false
+        )
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();
@@ -48,7 +55,11 @@ namespace Roslyn.Test.Utilities
             return sb.ToString();
         }
 
-        internal static string GetMessageFromResult(string expectedOutput, string actualOutput, string exePath)
+        internal static string GetMessageFromResult(
+            string expectedOutput,
+            string actualOutput,
+            string exePath
+        )
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine();

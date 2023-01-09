@@ -92,26 +92,36 @@ namespace Microsoft.CodeAnalysis.Host
         private long _offset;
 
         [Obsolete(MefConstruction.FactoryMethodMessage, error: true)]
-        private TemporaryStorageService(IWorkspaceThreadingService? workspaceThreadingService, ITextFactoryService textFactory)
+        private TemporaryStorageService(
+            IWorkspaceThreadingService? workspaceThreadingService,
+            ITextFactoryService textFactory
+        )
         {
             _workspaceThreadingService = workspaceThreadingService;
             _textFactory = textFactory;
         }
 
-        public ITemporaryTextStorageInternal CreateTemporaryTextStorage()
-            => new TemporaryTextStorage(this);
+        public ITemporaryTextStorageInternal CreateTemporaryTextStorage() =>
+            new TemporaryTextStorage(this);
 
-        public ITemporaryTextStorageInternal AttachTemporaryTextStorage(string storageName, long offset, long size, SourceHashAlgorithm checksumAlgorithm, Encoding? encoding)
-            => new TemporaryTextStorage(this, storageName, offset, size, checksumAlgorithm, encoding);
+        public ITemporaryTextStorageInternal AttachTemporaryTextStorage(
+            string storageName,
+            long offset,
+            long size,
+            SourceHashAlgorithm checksumAlgorithm,
+            Encoding? encoding
+        ) => new TemporaryTextStorage(this, storageName, offset, size, checksumAlgorithm, encoding);
 
-        ITemporaryStreamStorageInternal ITemporaryStorageServiceInternal.CreateTemporaryStreamStorage()
-            => CreateTemporaryStreamStorage();
+        ITemporaryStreamStorageInternal ITemporaryStorageServiceInternal.CreateTemporaryStreamStorage() =>
+            CreateTemporaryStreamStorage();
 
-        internal TemporaryStreamStorage CreateTemporaryStreamStorage()
-            => new(this);
+        internal TemporaryStreamStorage CreateTemporaryStreamStorage() => new(this);
 
-        public ITemporaryStreamStorageInternal AttachTemporaryStreamStorage(string storageName, long offset, long size)
-            => new TemporaryStreamStorage(this, storageName, offset, size);
+        public ITemporaryStreamStorageInternal AttachTemporaryStreamStorage(
+            string storageName,
+            long offset,
+            long size
+        ) => new TemporaryStreamStorage(this, storageName, offset, size);
 
         /// <summary>
         /// Allocate shared storage of a specified size.
@@ -129,7 +139,12 @@ namespace Microsoft.CodeAnalysis.Host
                 // Larger blocks are allocated separately
                 var mapName = CreateUniqueName(size);
                 var storage = MemoryMappedFile.CreateNew(mapName, size);
-                return new MemoryMappedInfo(new ReferenceCountedDisposable<MemoryMappedFile>(storage), mapName, offset: 0, size: size);
+                return new MemoryMappedInfo(
+                    new ReferenceCountedDisposable<MemoryMappedFile>(storage),
+                    mapName,
+                    offset: 0,
+                    size: size
+                );
             }
 
             lock (_gate)
@@ -144,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Host
                     var file = MemoryMappedFile.CreateNew(mapName, MultiFileBlockSize);
 
                     reference = new ReferenceCountedDisposable<MemoryMappedFile>(file);
-                    _weakFileReference = new ReferenceCountedDisposable<MemoryMappedFile>.WeakReference(reference);
+                    _weakFileReference =
+                        new ReferenceCountedDisposable<MemoryMappedFile>.WeakReference(reference);
                     _name = mapName;
                     _fileSize = MultiFileBlockSize;
                     _offset = size;
@@ -160,10 +176,12 @@ namespace Microsoft.CodeAnalysis.Host
             }
         }
 
-        public static string CreateUniqueName(long size)
-            => "Roslyn Temp Storage " + size.ToString() + " " + Guid.NewGuid().ToString("N");
+        public static string CreateUniqueName(long size) =>
+            "Roslyn Temp Storage " + size.ToString() + " " + Guid.NewGuid().ToString("N");
 
-        private sealed class TemporaryTextStorage : ITemporaryTextStorageInternal, ITemporaryTextStorageWithName
+        private sealed class TemporaryTextStorage
+            : ITemporaryTextStorageInternal,
+                ITemporaryTextStorageWithName
         {
             private readonly TemporaryStorageService _service;
             private SourceHashAlgorithm _checksumAlgorithm;
@@ -171,10 +189,16 @@ namespace Microsoft.CodeAnalysis.Host
             private ImmutableArray<byte> _checksum;
             private MemoryMappedInfo? _memoryMappedInfo;
 
-            public TemporaryTextStorage(TemporaryStorageService service)
-                => _service = service;
+            public TemporaryTextStorage(TemporaryStorageService service) => _service = service;
 
-            public TemporaryTextStorage(TemporaryStorageService service, string storageName, long offset, long size, SourceHashAlgorithm checksumAlgorithm, Encoding? encoding)
+            public TemporaryTextStorage(
+                TemporaryStorageService service,
+                string storageName,
+                long offset,
+                long size,
+                SourceHashAlgorithm checksumAlgorithm,
+                Encoding? encoding
+            )
             {
                 _service = service;
                 _checksumAlgorithm = checksumAlgorithm;
@@ -194,7 +218,10 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 if (_checksum.IsDefault)
                 {
-                    ImmutableInterlocked.InterlockedInitialize(ref _checksum, ReadText(CancellationToken.None).GetChecksum());
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref _checksum,
+                        ReadText(CancellationToken.None).GetChecksum()
+                    );
                 }
 
                 return _checksum;
@@ -218,7 +245,12 @@ namespace Microsoft.CodeAnalysis.Host
                     throw new InvalidOperationException();
                 }
 
-                using (Logger.LogBlock(FunctionId.TemporaryStorageServiceFactory_ReadText, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TemporaryStorageServiceFactory_ReadText,
+                        cancellationToken
+                    )
+                )
                 {
                     using var stream = _memoryMappedInfo.CreateReadableStream();
                     using var reader = CreateTextReaderFromTemporaryStorage(stream);
@@ -253,15 +285,22 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 if (_memoryMappedInfo != null)
                 {
-                    throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                    throw new InvalidOperationException(
+                        WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                    );
                 }
 
-                using (Logger.LogBlock(FunctionId.TemporaryStorageServiceFactory_WriteText, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TemporaryStorageServiceFactory_WriteText,
+                        cancellationToken
+                    )
+                )
                 {
                     _checksumAlgorithm = text.ChecksumAlgorithm;
                     _encoding = text.Encoding;
 
-                    // the method we use to get text out of SourceText uses Unicode (2bytes per char). 
+                    // the method we use to get text out of SourceText uses Unicode (2bytes per char).
                     var size = Encoding.Unicode.GetMaxByteCount(text.Length);
                     _memoryMappedInfo = _service.CreateTemporaryStorage(size);
 
@@ -285,7 +324,9 @@ namespace Microsoft.CodeAnalysis.Host
                 WriteText(text, cancellationToken);
             }
 
-            private static unsafe TextReader CreateTextReaderFromTemporaryStorage(UnmanagedMemoryStream stream)
+            private static unsafe TextReader CreateTextReaderFromTemporaryStorage(
+                UnmanagedMemoryStream stream
+            )
             {
                 var src = (char*)stream.PositionPointer;
 
@@ -293,19 +334,28 @@ namespace Microsoft.CodeAnalysis.Host
                 // Skip the BOM when creating the reader
                 Debug.Assert(*src == 0xFEFF);
 
-                return new DirectMemoryAccessStreamReader(src + 1, (int)stream.Length / sizeof(char) - 1);
+                return new DirectMemoryAccessStreamReader(
+                    src + 1,
+                    (int)stream.Length / sizeof(char) - 1
+                );
             }
         }
 
-        internal class TemporaryStreamStorage : ITemporaryStreamStorageInternal, ITemporaryStorageWithName
+        internal class TemporaryStreamStorage
+            : ITemporaryStreamStorageInternal,
+                ITemporaryStorageWithName
         {
             private readonly TemporaryStorageService _service;
             private MemoryMappedInfo? _memoryMappedInfo;
 
-            public TemporaryStreamStorage(TemporaryStorageService service)
-                => _service = service;
+            public TemporaryStreamStorage(TemporaryStorageService service) => _service = service;
 
-            public TemporaryStreamStorage(TemporaryStorageService service, string storageName, long offset, long size)
+            public TemporaryStreamStorage(
+                TemporaryStorageService service,
+                string storageName,
+                long offset,
+                long size
+            )
             {
                 _service = service;
                 _memoryMappedInfo = new MemoryMappedInfo(storageName, offset, size);
@@ -326,8 +376,9 @@ namespace Microsoft.CodeAnalysis.Host
                 _memoryMappedInfo = null;
             }
 
-            Stream ITemporaryStreamStorageInternal.ReadStream(CancellationToken cancellationToken)
-                => ReadStream(cancellationToken);
+            Stream ITemporaryStreamStorageInternal.ReadStream(
+                CancellationToken cancellationToken
+            ) => ReadStream(cancellationToken);
 
             public UnmanagedMemoryStream ReadStream(CancellationToken cancellationToken)
             {
@@ -336,7 +387,12 @@ namespace Microsoft.CodeAnalysis.Host
                     throw new InvalidOperationException();
                 }
 
-                using (Logger.LogBlock(FunctionId.TemporaryStorageServiceFactory_ReadStream, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TemporaryStorageServiceFactory_ReadStream,
+                        cancellationToken
+                    )
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -347,27 +403,48 @@ namespace Microsoft.CodeAnalysis.Host
             public Task<Stream> ReadStreamAsync(CancellationToken cancellationToken = default)
             {
                 // See commentary in ReadTextAsync for why this is implemented this way.
-                return Task.Factory.StartNew<Stream>(() => ReadStream(cancellationToken), cancellationToken, TaskCreationOptions.None, TaskScheduler.Default);
+                return Task.Factory.StartNew<Stream>(
+                    () => ReadStream(cancellationToken),
+                    cancellationToken,
+                    TaskCreationOptions.None,
+                    TaskScheduler.Default
+                );
             }
 
             public void WriteStream(Stream stream, CancellationToken cancellationToken = default)
             {
                 // The Wait() here will not actually block, since with useAsync: false, the
                 // entire operation will already be done when WaitStreamMaybeAsync completes.
-                WriteStreamMaybeAsync(stream, useAsync: false, cancellationToken: cancellationToken).GetAwaiter().GetResult();
+                WriteStreamMaybeAsync(stream, useAsync: false, cancellationToken: cancellationToken)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
-            public Task WriteStreamAsync(Stream stream, CancellationToken cancellationToken = default)
-                => WriteStreamMaybeAsync(stream, useAsync: true, cancellationToken: cancellationToken);
+            public Task WriteStreamAsync(
+                Stream stream,
+                CancellationToken cancellationToken = default
+            ) =>
+                WriteStreamMaybeAsync(stream, useAsync: true, cancellationToken: cancellationToken);
 
-            private async Task WriteStreamMaybeAsync(Stream stream, bool useAsync, CancellationToken cancellationToken)
+            private async Task WriteStreamMaybeAsync(
+                Stream stream,
+                bool useAsync,
+                CancellationToken cancellationToken
+            )
             {
                 if (_memoryMappedInfo != null)
                 {
-                    throw new InvalidOperationException(WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once);
+                    throw new InvalidOperationException(
+                        WorkspacesResources.Temporary_storage_cannot_be_written_more_than_once
+                    );
                 }
 
-                using (Logger.LogBlock(FunctionId.TemporaryStorageServiceFactory_WriteStream, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TemporaryStorageServiceFactory_WriteStream,
+                        cancellationToken
+                    )
+                )
                 {
                     var size = stream.Length;
                     _memoryMappedInfo = _service.CreateTemporaryStorage(size);
@@ -381,7 +458,9 @@ namespace Microsoft.CodeAnalysis.Host
                             int count;
                             if (useAsync)
                             {
-                                count = await stream.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false);
+                                count = await stream
+                                    .ReadAsync(buffer, 0, buffer.Length, cancellationToken)
+                                    .ConfigureAwait(false);
                             }
                             else
                             {

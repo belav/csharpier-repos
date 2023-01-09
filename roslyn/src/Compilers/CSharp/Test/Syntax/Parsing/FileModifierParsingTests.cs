@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
 public class FileModifierParsingTests : ParsingTests
 {
-    public FileModifierParsingTests(ITestOutputHelper output) : base(output) { }
+    public FileModifierParsingTests(ITestOutputHelper output)
+        : base(output) { }
 
     protected override SyntaxTree ParseTree(string text, CSharpParseOptions? options)
     {
@@ -25,12 +26,21 @@ public class FileModifierParsingTests : ParsingTests
         UsingNode(text, options: null, expectedParsingDiagnostics: expectedDiagnostics);
     }
 
-    private new void UsingNode(string text, CSharpParseOptions? options, params DiagnosticDescription[] expectedDiagnostics)
+    private new void UsingNode(
+        string text,
+        CSharpParseOptions? options,
+        params DiagnosticDescription[] expectedDiagnostics
+    )
     {
         UsingNode(text, options, expectedParsingDiagnostics: expectedDiagnostics);
     }
 
-    private void UsingNode(string text, CSharpParseOptions? options = null, DiagnosticDescription[]? expectedParsingDiagnostics = null, DiagnosticDescription[]? expectedBindingDiagnostics = null)
+    private void UsingNode(
+        string text,
+        CSharpParseOptions? options = null,
+        DiagnosticDescription[]? expectedParsingDiagnostics = null,
+        DiagnosticDescription[]? expectedBindingDiagnostics = null
+    )
     {
         options ??= TestOptions.RegularPreview;
         expectedParsingDiagnostics ??= Array.Empty<DiagnosticDescription>();
@@ -51,9 +61,11 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(SyntaxKind.EnumKeyword)]
     public void FileModifier_01(SyntaxKind typeKeyword)
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file {{SyntaxFacts.GetText(typeKeyword)}} C { }
-            """);
+            """
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxFacts.GetBaseTypeDeclarationKind(typeKeyword));
@@ -76,9 +88,11 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(SyntaxKind.RecordKeyword)]
     public void FileModifier_02(SyntaxKind typeKeyword)
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file partial {{SyntaxFacts.GetText(typeKeyword)}} C { }
-            """);
+            """
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxFacts.GetBaseTypeDeclarationKind(typeKeyword));
@@ -98,7 +112,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_02_Enum()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file partial enum C { }
             """,
             expectedBindingDiagnostics: new[]
@@ -106,7 +121,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,19): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                 // file partial enum C { }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "C").WithLocation(1, 19)
-            });
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.EnumDeclaration);
@@ -129,27 +145,35 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(SyntaxKind.InterfaceKeyword)]
     public void FileModifier_03(SyntaxKind typeKeyword)
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             partial file {{SyntaxFacts.GetText(typeKeyword)}} C { }
             """,
             expectedParsingDiagnostics: new[]
             {
                 // (1,14): error CS1002: ; expected
                 // partial file {{SyntaxFacts.GetText(typeKeyword)}} C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, SyntaxFacts.GetText(typeKeyword)).WithLocation(1, 14)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, SyntaxFacts.GetText(typeKeyword))
+                    .WithLocation(1, 14)
             },
             expectedBindingDiagnostics: new[]
             {
                 // (1,1): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
                 // partial file interface C { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial").WithArguments("partial").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(1, 1),
                 // (1,9): warning CS0168: The variable 'file' is declared but never used
                 // partial file interface C { }
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file").WithArguments("file").WithLocation(1, 9),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 9),
                 // (1,14): error CS1002: ; expected
                 // partial file {{SyntaxFacts.GetText(typeKeyword)}} C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, SyntaxFacts.GetText(typeKeyword)).WithLocation(1, 14)
-            });
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, SyntaxFacts.GetText(typeKeyword))
+                    .WithLocation(1, 14)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -185,7 +209,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_04()
     {
-        UsingNode("""
+        UsingNode(
+            """
             partial file record C { }
             """,
             expectedBindingDiagnostics: new DiagnosticDescription[]
@@ -193,7 +218,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                 // partial file record C { }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1)
-            });
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.RecordDeclaration);
@@ -236,7 +262,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_06()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             partial file record struct C { }
             """,
             expectedBindingDiagnostics: new DiagnosticDescription[]
@@ -244,7 +271,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                 // partial file record struct C { }
                 Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1)
-            });
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.RecordStructDeclaration);
@@ -265,7 +293,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_07_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file partial ref struct C { }
             """,
             options: TestOptions.Regular10,
@@ -273,7 +302,9 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,14): error CS1003: Syntax error, ',' expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
+                    .WithArguments(",")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
@@ -282,17 +313,24 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 1),
                 // (1,6): warning CS0168: The variable 'partial' is declared but never used
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "partial").WithArguments("partial").WithLocation(1, 6),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(1, 6),
                 // (1,14): error CS1003: Syntax error, ',' expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
+                    .WithArguments(",")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
-            });
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -328,14 +366,17 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_07()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file partial ref struct C { }
             """,
             expectedParsingDiagnostics: new[]
             {
                 // (1,14): error CS1003: Syntax error, ',' expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
+                    .WithArguments(",")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
@@ -344,17 +385,24 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 1),
                 // (1,6): warning CS0168: The variable 'partial' is declared but never used
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "partial").WithArguments("partial").WithLocation(1, 6),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(1, 6),
                 // (1,14): error CS1003: Syntax error, ',' expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
+                    .WithArguments(",")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -391,14 +439,17 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_08()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             partial file ref struct C { }
             """,
             expectedParsingDiagnostics: new[]
             {
                 // (1,14): error CS1003: Syntax error, ',' expected
                 // partial file ref struct C { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
+                    .WithArguments(",")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // partial file ref struct C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
@@ -407,17 +458,24 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0246: The type or namespace name 'partial' could not be found (are you missing a using directive or an assembly reference?)
                 // partial file ref struct C { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial").WithArguments("partial").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "partial")
+                    .WithArguments("partial")
+                    .WithLocation(1, 1),
                 // (1,9): warning CS0168: The variable 'file' is declared but never used
                 // partial file ref struct C { }
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file").WithArguments("file").WithLocation(1, 9),
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 9),
                 // (1,14): error CS1003: Syntax error, ',' expected
                 // partial file ref struct C { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
+                    .WithArguments(",")
+                    .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // partial file ref struct C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -503,7 +561,8 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(SyntaxKind.EnumKeyword)]
     public void FileModifier_11(SyntaxKind typeKeyword)
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             public file {{SyntaxFacts.GetText(typeKeyword)}} C { }
             """,
             expectedBindingDiagnostics: new[]
@@ -511,7 +570,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,20): error CS9052: File-local type 'C' cannot use accessibility modifiers.
                 // public file {{SyntaxFacts.GetText(typeKeyword)}} C { }
                 Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C")
-            });
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxFacts.GetBaseTypeDeclarationKind(typeKeyword));
@@ -536,7 +596,8 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(SyntaxKind.EnumKeyword)]
     public void FileModifier_12(SyntaxKind typeKeyword)
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file public {{SyntaxFacts.GetText(typeKeyword)}} C { }
             """,
             expectedBindingDiagnostics: new[]
@@ -544,7 +605,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,19): error CS9052: File-local type 'C' cannot use accessibility modifiers.
                 // file public {{SyntaxFacts.GetText(typeKeyword)}} C { }
                 Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C")
-            });
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxFacts.GetBaseTypeDeclarationKind(typeKeyword));
@@ -564,7 +626,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_13()
     {
-        UsingNode("""
+        UsingNode(
+            """
             file class C { }
             """,
             options: TestOptions.Regular10,
@@ -572,8 +635,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,12): error CS8936: Feature 'file types' is not available in C# 10.0. Please use language version 11.0 or greater.
                 // file class C { }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C").WithArguments("file types", "11.0").WithLocation(1, 12)
-            });
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C")
+                    .WithArguments("file types", "11.0")
+                    .WithLocation(1, 12)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -592,9 +658,11 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_14()
     {
-        UsingNode("""
+        UsingNode(
+            """
             file delegate void D();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -622,12 +690,14 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_15()
     {
-        UsingNode("""
+        UsingNode(
+            """
             namespace NS
             {
                 file class C { }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -657,10 +727,12 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_16()
     {
-        UsingNode("""
+        UsingNode(
+            """
             namespace NS;
             file class C { }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -689,7 +761,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_17()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class Outer
             {
                 file class C { }
@@ -699,8 +772,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,16): error CS9054: File-local type 'Outer.C' must be defined in a top level type; 'Outer.C' is a nested type.
                 //     file class C { }
-                Diagnostic(ErrorCode.ERR_FileTypeNested, "C").WithArguments("Outer.C").WithLocation(3, 16)
-            });
+                Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
+                    .WithArguments("Outer.C")
+                    .WithLocation(3, 16)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -727,7 +803,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileModifier_18()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file delegate*<int, void> M();
@@ -740,11 +817,16 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(3, 10),
                 // (3,31): error CS0106: The modifier 'file' is not valid for this item
                 //     file delegate*<int, void> M();
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "M").WithArguments("file").WithLocation(3, 31),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "M")
+                    .WithArguments("file")
+                    .WithLocation(3, 31),
                 // (3,31): error CS0501: 'C.M()' must declare a body because it is not marked abstract, extern, or partial
                 //     file delegate*<int, void> M();
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "M").WithArguments("C.M()").WithLocation(3, 31)
-            });
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "M")
+                    .WithArguments("C.M()")
+                    .WithLocation(3, 31)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -799,7 +881,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileMember_01()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file void M() { }
@@ -809,8 +892,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,15): error CS0106: The modifier 'file' is not valid for this item
                 //     file void M() { }
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "M").WithArguments("file").WithLocation(3, 15)
-            });
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "M")
+                    .WithArguments("file")
+                    .WithLocation(3, 15)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -847,7 +933,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileMember_02()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file int x;
@@ -857,11 +944,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,14): error CS0106: The modifier 'file' is not valid for this item
                 //     file int x;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "x").WithArguments("file").WithLocation(3, 14),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "x")
+                    .WithArguments("file")
+                    .WithLocation(3, 14),
                 // (3,14): warning CS0169: The field 'C.x' is never used
                 //     file int x;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "x").WithArguments("C.x").WithLocation(3, 14)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
+                    .WithArguments("C.x")
+                    .WithLocation(3, 14)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -895,7 +987,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileMember_03()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 file event Action x;
@@ -905,14 +998,21 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,16): error CS0246: The type or namespace name 'Action' could not be found (are you missing a using directive or an assembly reference?)
                 //     file event Action x;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Action").WithArguments("Action").WithLocation(3, 16),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Action")
+                    .WithArguments("Action")
+                    .WithLocation(3, 16),
                 // (3,23): error CS0106: The modifier 'file' is not valid for this item
                 //     file event Action x;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "x").WithArguments("file").WithLocation(3, 23),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "x")
+                    .WithArguments("file")
+                    .WithLocation(3, 23),
                 // (3,23): warning CS0067: The event 'C.x' is never used
                 //     file event Action x;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "x").WithArguments("C.x").WithLocation(3, 23)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "x")
+                    .WithArguments("C.x")
+                    .WithLocation(3, 23)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -954,12 +1054,17 @@ public class FileModifierParsingTests : ParsingTests
             }
             """;
 
-        UsingNode(source, expectedBindingDiagnostics: new[]
-        {
-            // (3,14): error CS0106: The modifier 'file' is not valid for this item
-            //     file int x { get; set; }
-            Diagnostic(ErrorCode.ERR_BadMemberFlag, "x").WithArguments("file").WithLocation(3, 14)
-        });
+        UsingNode(
+            source,
+            expectedBindingDiagnostics: new[]
+            {
+                // (3,14): error CS0106: The modifier 'file' is not valid for this item
+                //     file int x { get; set; }
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "x")
+                    .WithArguments("file")
+                    .WithLocation(3, 14)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -1008,15 +1113,20 @@ public class FileModifierParsingTests : ParsingTests
             }
             """;
 
-        UsingNode(source, expectedBindingDiagnostics: new[]
-        {
-            // (3,21): error CS0106: The modifier 'file' is not valid for this item
-            //     async file void M() { }
-            Diagnostic(ErrorCode.ERR_BadMemberFlag, "M").WithArguments("file").WithLocation(3, 21),
-            // (3,21): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-            //     async file void M() { }
-            Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(3, 21)
-        });
+        UsingNode(
+            source,
+            expectedBindingDiagnostics: new[]
+            {
+                // (3,21): error CS0106: The modifier 'file' is not valid for this item
+                //     async file void M() { }
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "M")
+                    .WithArguments("file")
+                    .WithLocation(3, 21),
+                // (3,21): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                //     async file void M() { }
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(3, 21)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -1054,17 +1164,22 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_01()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 int file;
             }
-            """, expectedBindingDiagnostics: new[]
+            """,
+            expectedBindingDiagnostics: new[]
             {
                 // (3,9): warning CS0169: The field 'C.file' is never used
                 //     int file;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "file").WithArguments("C.file").WithLocation(3, 9)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "file")
+                    .WithArguments("C.file")
+                    .WithLocation(3, 9)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1098,12 +1213,14 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_02()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 int file { get; set; }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1145,7 +1262,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_03()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 event Action file;
@@ -1155,11 +1273,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,11): error CS0246: The type or namespace name 'Action' could not be found (are you missing a using directive or an assembly reference?)
                 //     event Action file;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Action").WithArguments("Action").WithLocation(3, 11),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Action")
+                    .WithArguments("Action")
+                    .WithLocation(3, 11),
                 // (3,18): warning CS0067: The event 'C.file' is never used
                 //     event Action file;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "file").WithArguments("C.file").WithLocation(3, 18)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "file")
+                    .WithArguments("C.file")
+                    .WithLocation(3, 18)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1194,12 +1317,14 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_04()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 void file() { }
             }
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1236,7 +1361,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_05()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file class file { }
             """,
             expectedBindingDiagnostics: new[]
@@ -1244,7 +1370,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,12): error CS9056: Types and aliases cannot be named 'file'.
                 // file class file { }
                 Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 12)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1264,7 +1391,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_06_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 file async;
@@ -1275,11 +1403,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 //     file async;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 5),
                 // (3,10): warning CS0169: The field 'C.async' is never used
                 //     file async;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "async").WithArguments("C.async").WithLocation(3, 10)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "async")
+                    .WithArguments("C.async")
+                    .WithLocation(3, 10)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -1312,7 +1445,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_06()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 file async;
@@ -1320,10 +1454,15 @@ public class FileModifierParsingTests : ParsingTests
             """,
             // (3,15): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
             //     file async;
-            Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(3, 15),
+            Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                .WithArguments(";")
+                .WithLocation(3, 15),
             // (3,15): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
             //     file async;
-            Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(3, 15));
+            Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                .WithArguments(";")
+                .WithLocation(3, 15)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1350,7 +1489,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_07_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 file item;
@@ -1361,11 +1501,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 //     file item;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 5),
                 // (3,10): warning CS0169: The field 'C.item' is never used
                 //     file item;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "item").WithArguments("C.item").WithLocation(3, 10)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "item")
+                    .WithArguments("C.item")
+                    .WithLocation(3, 10)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1399,7 +1544,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_07()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class C
             {
                 file item;
@@ -1409,11 +1555,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,14): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     file item;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(3, 14),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(3, 14),
                 // (3,14): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     file item;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(3, 14)
-            });
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(3, 14)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1440,7 +1591,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MemberNamedFile_08()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             record file { }
             """,
             expectedBindingDiagnostics: new[]
@@ -1448,7 +1600,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,8): error CS9056: Types and aliases cannot be named 'file'.
                 // record file { }
                 Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 8)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1467,7 +1620,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void TypeNamedFile_01()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class file { }
             """,
             expectedBindingDiagnostics: new[]
@@ -1475,7 +1629,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,7): error CS9056: Types and aliases cannot be named 'file'.
                 // class file { }
                 Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 7)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1494,7 +1649,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void TypeNamedFile_01_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class file { }
             """,
             options: TestOptions.Regular10,
@@ -1502,8 +1658,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,7): warning CS8981: The type name 'file' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // class file { }
-                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "file").WithArguments("file").WithLocation(1, 7)
-            });
+                Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 7)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1524,10 +1683,12 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(LanguageVersion.CSharp11)]
     public void TypeNamedFile_02(LanguageVersion languageVersion)
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             class @file { }
             """,
-            options: TestOptions.Regular.WithLanguageVersion(languageVersion));
+            options: TestOptions.Regular.WithLanguageVersion(languageVersion)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1546,13 +1707,15 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_01_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file
             """,
             options: TestOptions.Regular10,
             // (1,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
             // file
-            Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1));
+            Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1571,12 +1734,14 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_01()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file
             """,
             // (1,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
             // file
-            Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1));
+            Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1)
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1595,7 +1760,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_02_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file;
             """,
             options: TestOptions.Regular10,
@@ -1603,11 +1769,14 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0103: The name 'file' does not exist in the current context
                 // file;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "file").WithArguments("file").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 1),
                 // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 // file;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1630,18 +1799,22 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_02()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file;
             """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,1): error CS0103: The name 'file' does not exist in the current context
                 // file;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "file").WithArguments("file").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 1),
                 // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 // file;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1664,7 +1837,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_03_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file namespace NS;
             """,
             options: TestOptions.Regular10,
@@ -1681,8 +1855,10 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1),
                 // (1,16): error CS8956: File-scoped namespace must precede all other members in a file.
                 // file namespace NS;
-                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "NS").WithLocation(1, 16)
-            });
+                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "NS")
+                    .WithLocation(1, 16)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1710,7 +1886,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_03()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file namespace NS;
             """,
             expectedParsingDiagnostics: new[]
@@ -1726,8 +1903,10 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1),
                 // (1,16): error CS8956: File-scoped namespace must precede all other members in a file.
                 // file namespace NS;
-                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "NS").WithLocation(1, 16)
-            });
+                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "NS")
+                    .WithLocation(1, 16)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1755,7 +1934,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_04_CSharp10()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file namespace NS { }
             """,
             options: TestOptions.Regular10,
@@ -1764,7 +1944,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
                 // file namespace NS { }
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1793,7 +1974,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Errors_04()
     {
-        UsingNode($$"""
+        UsingNode(
+            $$"""
             file namespace NS { }
             """,
             expectedParsingDiagnostics: new[]
@@ -1801,7 +1983,8 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,1): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
                 // file namespace NS { }
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 1)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1832,11 +2015,13 @@ public class FileModifierParsingTests : ParsingTests
     {
         const int FileModifiersCount = 100000;
         var manyFileModifiers = string.Join(" ", Enumerable.Repeat("file", FileModifiersCount));
-        UsingNode(manyFileModifiers,
+        UsingNode(
+            manyFileModifiers,
             expectedParsingDiagnostics: new[]
             {
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 499996)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1855,16 +2040,20 @@ public class FileModifierParsingTests : ParsingTests
         }
         EOF();
 
-        UsingNode(manyFileModifiers + " class { }",
+        UsingNode(
+            manyFileModifiers + " class { }",
             expectedParsingDiagnostics: new[]
             {
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 500007)
             },
             expectedBindingDiagnostics: new[]
             {
-                Diagnostic(ErrorCode.ERR_DuplicateModifier, "file").WithArguments("file").WithLocation(1, 6),
+                Diagnostic(ErrorCode.ERR_DuplicateModifier, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 6),
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 500007)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1887,7 +2076,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MethodNamedRecord_01_CSharp8()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record();
@@ -1898,11 +2088,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 //     file record();
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 5),
                 // (3,10): error CS0501: 'C.record()' must declare a body because it is not marked abstract, extern, or partial
                 //     file record();
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "record").WithArguments("C.record()").WithLocation(3, 10)
-            });
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "record")
+                    .WithArguments("C.record()")
+                    .WithLocation(3, 10)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1935,7 +2130,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MethodNamedRecord_01_CSharp11()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record();
@@ -1945,11 +2141,14 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,10): error CS0106: The modifier 'file' is not valid for this item
                 //     file record();
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "record").WithArguments("file").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "record")
+                    .WithArguments("file")
+                    .WithLocation(3, 10),
                 // (3,10): error CS1520: Method must have a return type
                 //     file record();
                 Diagnostic(ErrorCode.ERR_MemberNeedsType, "record").WithLocation(3, 10)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -1979,7 +2178,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MethodNamedRecord_02_CSharp8()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record() { }
@@ -1990,11 +2190,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 //     file record() { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 5),
                 // (3,10): error CS0161: 'C.record()': not all code paths return a value
                 //     file record() { }
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "record").WithArguments("C.record()").WithLocation(3, 10)
-            });
+                Diagnostic(ErrorCode.ERR_ReturnExpected, "record")
+                    .WithArguments("C.record()")
+                    .WithLocation(3, 10)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2031,20 +2236,25 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void MethodNamedRecord_02_CSharp11()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record() { }
             }
-            """, expectedBindingDiagnostics: new[]
+            """,
+            expectedBindingDiagnostics: new[]
             {
                 // (3,10): error CS0106: The modifier 'file' is not valid for this item
                 //     file record() { }
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "record").WithArguments("file").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "record")
+                    .WithArguments("file")
+                    .WithLocation(3, 10),
                 // (3,10): error CS1520: Method must have a return type
                 //     file record() { }
                 Diagnostic(ErrorCode.ERR_MemberNeedsType, "record").WithLocation(3, 10)
-            });
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2078,7 +2288,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_01_CSharp8()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record X();
@@ -2089,14 +2300,21 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
                 //     file record X();
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record").WithArguments("record").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
+                    .WithArguments("record")
+                    .WithLocation(3, 10),
                 // (3,17): error CS0106: The modifier 'file' is not valid for this item
                 //     file record X();
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "X").WithArguments("file").WithLocation(3, 17),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "X")
+                    .WithArguments("file")
+                    .WithLocation(3, 17),
                 // (3,17): error CS0501: 'C.X()' must declare a body because it is not marked abstract, extern, or partial
                 //     file record X();
-                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "X").WithArguments("C.X()").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "X")
+                    .WithArguments("C.X()")
+                    .WithLocation(3, 17)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2130,7 +2348,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_01_CSharp11()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record X();
@@ -2140,8 +2359,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
                 //     file record X();
-                Diagnostic(ErrorCode.ERR_FileTypeNested, "X").WithArguments("C.X").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(3, 17)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2172,7 +2394,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_02_CSharp8()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record X() { }
@@ -2183,14 +2406,21 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
                 //     file record X() { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record").WithArguments("record").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
+                    .WithArguments("record")
+                    .WithLocation(3, 10),
                 // (3,17): error CS0106: The modifier 'file' is not valid for this item
                 //     file record X() { }
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "X").WithArguments("file").WithLocation(3, 17),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "X")
+                    .WithArguments("file")
+                    .WithLocation(3, 17),
                 // (3,17): error CS0161: 'C.X()': not all code paths return a value
                 //     file record X() { }
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "X").WithArguments("C.X()").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.ERR_ReturnExpected, "X")
+                    .WithArguments("C.X()")
+                    .WithLocation(3, 17)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2228,7 +2458,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_02_CSharp11()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record X() { }
@@ -2238,8 +2469,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
                 //     file record X() { }
-                Diagnostic(ErrorCode.ERR_FileTypeNested, "X").WithArguments("C.X").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(3, 17)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2271,24 +2505,33 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_03_CSharp8()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record X;
             }
             """,
-            options: TestOptions.Regular8, expectedBindingDiagnostics: new[]
+            options: TestOptions.Regular8,
+            expectedBindingDiagnostics: new[]
             {
                 // (3,10): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
                 //     file record X;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record").WithArguments("record").WithLocation(3, 10),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
+                    .WithArguments("record")
+                    .WithLocation(3, 10),
                 // (3,17): error CS0106: The modifier 'file' is not valid for this item
                 //     file record X;
-                Diagnostic(ErrorCode.ERR_BadMemberFlag, "X").WithArguments("file").WithLocation(3, 17),
+                Diagnostic(ErrorCode.ERR_BadMemberFlag, "X")
+                    .WithArguments("file")
+                    .WithLocation(3, 17),
                 // (3,17): warning CS0169: The field 'C.X' is never used
                 //     file record X;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "X").WithArguments("C.X").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(3, 17)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2323,7 +2566,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_03_CSharp11()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 file record X;
@@ -2333,8 +2577,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,17): error CS9054: File-local type 'C.X' must be defined in a top level type; 'C.X' is a nested type.
                 //     file record X;
-                Diagnostic(ErrorCode.ERR_FileTypeNested, "X").WithArguments("C.X").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
+                    .WithArguments("C.X")
+                    .WithLocation(3, 17)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2360,9 +2607,11 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void FileRecord_04_CSharp11()
     {
-        UsingNode("""
+        UsingNode(
+            """
             file record X();
-            """);
+            """
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2386,7 +2635,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void LocalVariable_01()
     {
-        UsingNode("""
+        UsingNode(
+            """
             void M()
             {
                 file file;
@@ -2396,14 +2646,21 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,6): warning CS8321: The local function 'M' is declared but never used
                 // void M()
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M").WithArguments("M").WithLocation(1, 6),
+                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                    .WithArguments("M")
+                    .WithLocation(1, 6),
                 // (3,5): error CS0118: 'file' is a variable but is used like a type
                 //     file file;
-                Diagnostic(ErrorCode.ERR_BadSKknown, "file").WithArguments("file", "variable", "type").WithLocation(3, 5),
+                Diagnostic(ErrorCode.ERR_BadSKknown, "file")
+                    .WithArguments("file", "variable", "type")
+                    .WithLocation(3, 5),
                 // (3,10): warning CS0168: The variable 'file' is declared but never used
                 //     file file;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file").WithArguments("file").WithLocation(3, 10)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 10)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -2450,7 +2707,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void LocalVariable_02()
     {
-        UsingNode("""
+        UsingNode(
+            """
             void M()
             {
                 int file;
@@ -2460,11 +2718,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,6): warning CS8321: The local function 'M' is declared but never used
                 // void M()
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M").WithArguments("M").WithLocation(1, 6),
+                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                    .WithArguments("M")
+                    .WithLocation(1, 6),
                 // (3,9): warning CS0168: The variable 'file' is declared but never used
                 //     int file;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file").WithArguments("file").WithLocation(3, 9)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 9)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -2513,7 +2776,8 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(LanguageVersion.CSharp11)]
     public void TopLevelVariable_01(LanguageVersion languageVersion)
     {
-        UsingNode("""
+        UsingNode(
+            """
             file file;
             """,
             options: TestOptions.Regular.WithLanguageVersion(languageVersion),
@@ -2521,11 +2785,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0118: 'file' is a variable but is used like a type
                 // file file;
-                Diagnostic(ErrorCode.ERR_BadSKknown, "file").WithArguments("file", "variable", "type").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_BadSKknown, "file")
+                    .WithArguments("file", "variable", "type")
+                    .WithLocation(1, 1),
                 // (1,6): warning CS0168: The variable 'file' is declared but never used
                 // file file;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file").WithArguments("file").WithLocation(1, 6)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 6)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2557,7 +2826,8 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(LanguageVersion.CSharp11)]
     public void TopLevelVariable_02(LanguageVersion languageVersion)
     {
-        UsingNode("""
+        UsingNode(
+            """
             int file;
             """,
             options: TestOptions.Regular.WithLanguageVersion(languageVersion),
@@ -2565,8 +2835,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,5): warning CS0168: The variable 'file' is declared but never used
                 // int file;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file").WithArguments("file").WithLocation(1, 5)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 5)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -2597,7 +2870,8 @@ public class FileModifierParsingTests : ParsingTests
     [InlineData(LanguageVersion.CSharp11)]
     public void TopLevelVariable_03(LanguageVersion languageVersion)
     {
-        UsingNode("""
+        UsingNode(
+            """
             bool file;
             file = true;
             """,
@@ -2606,8 +2880,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,6): warning CS0219: The variable 'file' is assigned but its value is never used
                 // bool file;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "file").WithArguments("file").WithLocation(1, 6)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 6)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2656,7 +2933,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void Variable_01()
     {
-        UsingNode("""
+        UsingNode(
+            """
             void M()
             {
                 bool file;
@@ -2667,11 +2945,16 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,6): warning CS8321: The local function 'M' is declared but never used
                 // void M()
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M").WithArguments("M").WithLocation(1, 6),
+                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                    .WithArguments("M")
+                    .WithLocation(1, 6),
                 // (3,10): warning CS0219: The variable 'file' is assigned but its value is never used
                 //     bool file;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "file").WithArguments("file").WithLocation(3, 10)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 10)
+            }
+        );
 
         N(SyntaxKind.CompilationUnit);
         {
@@ -2735,7 +3018,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void LambdaReturn()
     {
-        UsingNode("""
+        UsingNode(
+            """
             _ = file () => { };
             """,
             expectedBindingDiagnostics: new[]
@@ -2745,8 +3029,11 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_DiscardTypeInferenceFailed, "_").WithLocation(1, 1),
                 // (1,5): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 // _ = file () => { };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(1, 5)
-            });
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 5)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -2790,21 +3077,29 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void LocalFunctionReturn()
     {
-        UsingNode("""
+        UsingNode(
+            """
             file local() { };
             """,
             expectedBindingDiagnostics: new[]
             {
                 // (1,1): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 // file local() { };
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(1, 1),
                 // (1,6): error CS0161: 'local()': not all code paths return a value
                 // file local() { };
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "local").WithArguments("local()").WithLocation(1, 6),
+                Diagnostic(ErrorCode.ERR_ReturnExpected, "local")
+                    .WithArguments("local()")
+                    .WithLocation(1, 6),
                 // (1,6): warning CS8321: The local function 'local' is declared but never used
                 // file local() { };
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local").WithArguments("local").WithLocation(1, 6)
-            });
+                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")
+                    .WithArguments("local")
+                    .WithLocation(1, 6)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.GlobalStatement);
@@ -2843,7 +3138,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void ParameterModifier()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 void M(file int x) { }
@@ -2856,20 +3152,27 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(3, 17),
                 // (3,17): error CS1003: Syntax error, ',' expected
                 //     void M(file int x) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(3, 17)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
+                    .WithArguments(",")
+                    .WithLocation(3, 17)
             },
             expectedBindingDiagnostics: new[]
             {
                 // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 //     void M(file int x) { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(3, 12),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 12),
                 // (3,17): error CS1001: Identifier expected
                 //     void M(file int x) { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "int").WithLocation(3, 17),
                 // (3,17): error CS1003: Syntax error, ',' expected
                 //     void M(file int x) { }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(3, 17)
-            });
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
+                    .WithArguments(",")
+                    .WithLocation(3, 17)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);
@@ -2922,7 +3225,8 @@ public class FileModifierParsingTests : ParsingTests
     [Fact]
     public void ParameterType()
     {
-        UsingNode("""
+        UsingNode(
+            """
             class C
             {
                 void M(file x) { }
@@ -2932,8 +3236,11 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (3,12): error CS0246: The type or namespace name 'file' could not be found (are you missing a using directive or an assembly reference?)
                 //     void M(file x) { }
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file").WithArguments("file").WithLocation(3, 12)
-            });
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
+                    .WithArguments("file")
+                    .WithLocation(3, 12)
+            }
+        );
         N(SyntaxKind.CompilationUnit);
         {
             N(SyntaxKind.ClassDeclaration);

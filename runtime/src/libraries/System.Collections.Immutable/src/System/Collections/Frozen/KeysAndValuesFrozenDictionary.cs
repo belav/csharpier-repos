@@ -8,14 +8,19 @@ using System.Diagnostics;
 namespace System.Collections.Frozen
 {
     /// <summary>Provides a base class for frozen dictionaries that store their keys and values in dedicated arrays.</summary>
-    internal abstract class KeysAndValuesFrozenDictionary<TKey, TValue> : FrozenDictionary<TKey, TValue>, IDictionary<TKey, TValue>
-        where TKey : notnull
+    internal abstract class KeysAndValuesFrozenDictionary<TKey, TValue>
+        : FrozenDictionary<TKey, TValue>,
+            IDictionary<TKey, TValue> where TKey : notnull
     {
         private protected readonly FrozenHashTable _hashTable;
         private protected readonly TKey[] _keys;
         private protected readonly TValue[] _values;
 
-        protected KeysAndValuesFrozenDictionary(Dictionary<TKey, TValue> source, IEqualityComparer<TKey> comparer) : base(comparer)
+        protected KeysAndValuesFrozenDictionary(
+            Dictionary<TKey, TValue> source,
+            IEqualityComparer<TKey> comparer
+        )
+            : base(comparer)
         {
             Debug.Assert(source.Count != 0);
 
@@ -32,7 +37,8 @@ namespace System.Collections.Frozen
                 {
                     _keys[index] = pair.Key;
                     _values[index] = pair.Value;
-                });
+                }
+            );
         }
 
         /// <inheritdoc />
@@ -42,7 +48,8 @@ namespace System.Collections.Frozen
         private protected sealed override TValue[] ValuesCore => _values;
 
         /// <inheritdoc />
-        private protected sealed override Enumerator GetEnumeratorCore() => new Enumerator(_keys, _values);
+        private protected sealed override Enumerator GetEnumeratorCore() =>
+            new Enumerator(_keys, _values);
 
         /// <inheritdoc />
         private protected sealed override int CountCore => _hashTable.Count;

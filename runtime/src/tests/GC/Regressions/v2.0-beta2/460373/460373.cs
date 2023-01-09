@@ -12,8 +12,7 @@ using System.Runtime.InteropServices;
 
 namespace b424916
 {
-
-    [ StructLayout( LayoutKind.Sequential, CharSet=CharSet.Unicode )]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public class Node
     {
         GCHandle gch1;
@@ -27,39 +26,34 @@ namespace b424916
         GCHandle gch2;
         public Node Next;
 
-	[System.Security.SecuritySafeCritical]
+        [System.Security.SecuritySafeCritical]
         public Node()
         {
-
             pinnedData1 = new byte[10];
             gch1 = GCHandle.Alloc(pinnedData1, GCHandleType.Pinned);
             pinnedData2 = new byte[10];
             gch2 = GCHandle.Alloc(pinnedData2, GCHandleType.Pinned);
 
-            unpinnedData1 = new byte[1024*80];
-            unpinnedData2 = new byte[1024*80];
-            unpinnedData3 = new byte[1024*80];
-            unpinnedData4 = new byte[1024*80];
-            unpinnedData5 = new byte[1024*80];
-
+            unpinnedData1 = new byte[1024 * 80];
+            unpinnedData2 = new byte[1024 * 80];
+            unpinnedData3 = new byte[1024 * 80];
+            unpinnedData4 = new byte[1024 * 80];
+            unpinnedData5 = new byte[1024 * 80];
         }
     }
 
     public class Test
     {
-
         public static int Main()
         {
-
             Node head = new Node();
             Node cur = head;
 
-            for (int i=0; i<1250; i++)
+            for (int i = 0; i < 1250; i++)
             {
                 cur.Next = new Node();
                 cur = cur.Next;
                 GC.KeepAlive(head);
-
             }
 
             return 100;

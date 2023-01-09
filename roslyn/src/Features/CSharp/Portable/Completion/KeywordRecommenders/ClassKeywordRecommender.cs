@@ -12,36 +12,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class ClassKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
-            {
-                SyntaxKind.NewKeyword,
-                SyntaxKind.PublicKeyword,
-                SyntaxKind.ProtectedKeyword,
-                SyntaxKind.InternalKeyword,
-                SyntaxKind.PrivateKeyword,
-                SyntaxKind.AbstractKeyword,
-                SyntaxKind.SealedKeyword,
-                SyntaxKind.StaticKeyword,
-                SyntaxKind.UnsafeKeyword
-            };
+        private static readonly ISet<SyntaxKind> s_validModifiers = new HashSet<SyntaxKind>(
+            SyntaxFacts.EqualityComparer
+        )
+        {
+            SyntaxKind.NewKeyword,
+            SyntaxKind.PublicKeyword,
+            SyntaxKind.ProtectedKeyword,
+            SyntaxKind.InternalKeyword,
+            SyntaxKind.PrivateKeyword,
+            SyntaxKind.AbstractKeyword,
+            SyntaxKind.SealedKeyword,
+            SyntaxKind.StaticKeyword,
+            SyntaxKind.UnsafeKeyword
+        };
 
         public ClassKeywordRecommender()
-            : base(SyntaxKind.ClassKeyword)
-        {
-        }
+            : base(SyntaxKind.ClassKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsGlobalStatementContext ||
-                context.IsTypeDeclarationContext(
+            return context.IsGlobalStatementContext
+                || context.IsTypeDeclarationContext(
                     validModifiers: s_validModifiers,
                     validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
                     canBePartial: true,
-                    cancellationToken: cancellationToken) ||
-                context.LeftToken.GetPreviousTokenIfTouchingWord(position).IsKind(SyntaxKind.RecordKeyword) ||
-                syntaxTree.IsTypeParameterConstraintStartContext(position, context.LeftToken);
+                    cancellationToken: cancellationToken
+                )
+                || context.LeftToken
+                    .GetPreviousTokenIfTouchingWord(position)
+                    .IsKind(SyntaxKind.RecordKeyword)
+                || syntaxTree.IsTypeParameterConstraintStartContext(position, context.LeftToken);
         }
     }
 }

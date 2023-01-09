@@ -11,15 +11,20 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.CSharp.Features.EmbeddedLanguages
 {
-    [ExportEmbeddedLanguageClassifierInternal(
-        PredefinedEmbeddedLanguageClassifierNames.Json, LanguageNames.CSharp, supportsUnannotatedAPIs: true, "Json"), Shared]
+    [
+        ExportEmbeddedLanguageClassifierInternal(
+            PredefinedEmbeddedLanguageClassifierNames.Json,
+            LanguageNames.CSharp,
+            supportsUnannotatedAPIs: true,
+            "Json"
+        ),
+        Shared
+    ]
     internal class CSharpJsonEmbeddedLanguageClassifier : AbstractJsonEmbeddedLanguageClassifier
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpJsonEmbeddedLanguageClassifier()
-            : base(CSharpEmbeddedLanguagesProvider.Info)
-        {
-        }
+            : base(CSharpEmbeddedLanguagesProvider.Info) { }
     }
 }

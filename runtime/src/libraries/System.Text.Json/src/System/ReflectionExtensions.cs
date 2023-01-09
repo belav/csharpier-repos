@@ -40,23 +40,33 @@ namespace System.Text.Json.Reflection
         public static bool IsInSubtypeRelationshipWith(this Type type, Type other) =>
             type.IsAssignableFromInternal(other) || other.IsAssignableFromInternal(type);
 
-        private static bool HasJsonConstructorAttribute(ConstructorInfo constructorInfo)
-            => constructorInfo.GetCustomAttribute<JsonConstructorAttribute>() != null;
+        private static bool HasJsonConstructorAttribute(ConstructorInfo constructorInfo) =>
+            constructorInfo.GetCustomAttribute<JsonConstructorAttribute>() != null;
 
         public static bool HasRequiredMemberAttribute(this ICustomAttributeProvider memberInfo)
         {
             // For compiler related attributes we should only look at full type name rather than trying to do something different for version when attribute was introduced.
             // I.e. library is targeting netstandard2.0 with polyfilled attributes and is being consumed by an app targeting net7.0 or greater.
-            return memberInfo.HasCustomAttributeWithName("System.Runtime.CompilerServices.RequiredMemberAttribute", inherit: true);
+            return memberInfo.HasCustomAttributeWithName(
+                "System.Runtime.CompilerServices.RequiredMemberAttribute",
+                inherit: true
+            );
         }
 
         public static bool HasSetsRequiredMembersAttribute(this ICustomAttributeProvider memberInfo)
         {
             // See comment for HasRequiredMemberAttribute for why we need to always only look at full name
-            return memberInfo.HasCustomAttributeWithName("System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute", inherit: true);
+            return memberInfo.HasCustomAttributeWithName(
+                "System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute",
+                inherit: true
+            );
         }
 
-        private static bool HasCustomAttributeWithName(this ICustomAttributeProvider memberInfo, string fullName, bool inherit)
+        private static bool HasCustomAttributeWithName(
+            this ICustomAttributeProvider memberInfo,
+            string fullName,
+            bool inherit
+        )
         {
             foreach (object attribute in memberInfo.GetCustomAttributes(inherit))
             {
@@ -69,8 +79,10 @@ namespace System.Text.Json.Reflection
             return false;
         }
 
-        public static TAttribute? GetUniqueCustomAttribute<TAttribute>(this MemberInfo memberInfo, bool inherit)
-            where TAttribute : Attribute
+        public static TAttribute? GetUniqueCustomAttribute<TAttribute>(
+            this MemberInfo memberInfo,
+            bool inherit
+        ) where TAttribute : Attribute
         {
             object[] attributes = memberInfo.GetCustomAttributes(typeof(TAttribute), inherit);
 
@@ -84,7 +96,10 @@ namespace System.Text.Json.Reflection
                 return (TAttribute)attributes[0];
             }
 
-            ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateAttribute(typeof(TAttribute), memberInfo);
+            ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateAttribute(
+                typeof(TAttribute),
+                memberInfo
+            );
             return null;
         }
 
@@ -92,11 +107,18 @@ namespace System.Text.Json.Reflection
         /// Polyfill for BindingFlags.DoNotWrapExceptions
         /// </summary>
         public static object? CreateInstanceNoWrapExceptions(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)] this Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.NonPublicConstructors)]
+                this Type type,
             Type[] parameterTypes,
-            object?[] parameters)
+            object?[] parameters
+        )
         {
-            ConstructorInfo ctorInfo = type.GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, null, parameterTypes, null)!;
+            ConstructorInfo ctorInfo = type.GetConstructor(
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                null,
+                parameterTypes,
+                null
+            )!;
 #if NETCOREAPP
             return ctorInfo.Invoke(BindingFlags.DoNotWrapExceptions, null, parameters, null);
 #else

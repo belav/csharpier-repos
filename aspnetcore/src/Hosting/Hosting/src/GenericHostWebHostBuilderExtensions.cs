@@ -18,7 +18,10 @@ public static class GenericHostWebHostBuilderExtensions
     /// <param name="builder">The <see cref="IHostBuilder"/> to add the <see cref="IWebHostBuilder"/> to.</param>
     /// <param name="configure">The delegate that configures the <see cref="IWebHostBuilder"/>.</param>
     /// <returns>The <see cref="IHostBuilder"/>.</returns>
-    public static IHostBuilder ConfigureWebHost(this IHostBuilder builder, Action<IWebHostBuilder> configure)
+    public static IHostBuilder ConfigureWebHost(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure
+    )
     {
         if (configure is null)
         {
@@ -35,7 +38,11 @@ public static class GenericHostWebHostBuilderExtensions
     /// <param name="configure">The delegate that configures the <see cref="IWebHostBuilder"/>.</param>
     /// <param name="configureWebHostBuilder">The delegate that configures the <see cref="WebHostBuilderOptions"/>.</param>
     /// <returns>The <see cref="IHostBuilder"/>.</returns>
-    public static IHostBuilder ConfigureWebHost(this IHostBuilder builder, Action<IWebHostBuilder> configure, Action<WebHostBuilderOptions> configureWebHostBuilder)
+    public static IHostBuilder ConfigureWebHost(
+        this IHostBuilder builder,
+        Action<IWebHostBuilder> configure,
+        Action<WebHostBuilderOptions> configureWebHostBuilder
+    )
     {
         if (configure is null)
         {
@@ -57,7 +64,9 @@ public static class GenericHostWebHostBuilderExtensions
         configureWebHostBuilder(webHostBuilderOptions);
         var webhostBuilder = new GenericWebHostBuilder(builder, webHostBuilderOptions);
         configure(webhostBuilder);
-        builder.ConfigureServices((context, services) => services.AddHostedService<GenericWebHostService>());
+        builder.ConfigureServices(
+            (context, services) => services.AddHostedService<GenericWebHostService>()
+        );
         return builder;
     }
 }

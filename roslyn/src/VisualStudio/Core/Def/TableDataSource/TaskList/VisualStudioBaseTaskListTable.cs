@@ -29,20 +29,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     {
         private readonly TableDataSource _source;
 
-        protected VisualStudioBaseTaskListTable(Workspace workspace, IThreadingContext threadingContext, ITaskListProvider taskProvider, string identifier, ITableManagerProvider provider)
+        protected VisualStudioBaseTaskListTable(
+            Workspace workspace,
+            IThreadingContext threadingContext,
+            ITaskListProvider taskProvider,
+            string identifier,
+            ITableManagerProvider provider
+        )
             : base(workspace, provider, StandardTables.TasksTable)
         {
             _source = new TableDataSource(workspace, threadingContext, taskProvider, identifier);
             AddInitialTableSource(workspace.CurrentSolution, _source);
         }
 
-        internal override ImmutableArray<string> Columns { get; } = ImmutableArray.Create(
-            StandardTableColumnDefinitions.Priority,
-            StandardTableColumnDefinitions.Text,
-            StandardTableColumnDefinitions.ProjectName,
-            StandardTableColumnDefinitions.DocumentName,
-            StandardTableColumnDefinitions.Line,
-            StandardTableColumnDefinitions.Column);
+        internal override ImmutableArray<string> Columns { get; } =
+            ImmutableArray.Create(
+                StandardTableColumnDefinitions.Priority,
+                StandardTableColumnDefinitions.Text,
+                StandardTableColumnDefinitions.ProjectName,
+                StandardTableColumnDefinitions.DocumentName,
+                StandardTableColumnDefinitions.Line,
+                StandardTableColumnDefinitions.Column
+            );
 
         protected override void AddTableSourceIfNecessary(Solution solution)
         {
@@ -64,16 +72,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             this.TableManager.RemoveSource(_source);
         }
 
-        protected override void ShutdownSource()
-            => _source.Shutdown();
+        protected override void ShutdownSource() => _source.Shutdown();
 
-        private class TableDataSource : AbstractRoslynTableDataSource<TaskListTableItem, TaskListUpdatedArgs>
+        private class TableDataSource
+            : AbstractRoslynTableDataSource<TaskListTableItem, TaskListUpdatedArgs>
         {
             private readonly Workspace _workspace;
             private readonly string _identifier;
             private readonly ITaskListProvider _taskProvider;
 
-            public TableDataSource(Workspace workspace, IThreadingContext threadingContext, ITaskListProvider taskProvider, string identifier)
+            public TableDataSource(
+                Workspace workspace,
+                IThreadingContext threadingContext,
+                ITaskListProvider taskProvider,
+                string identifier
+            )
                 : base(workspace, threadingContext)
             {
                 _workspace = workspace;
@@ -83,9 +96,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 _taskProvider.TaskListUpdated += OnTaskListUpdated;
             }
 
-            public override string DisplayName => ServicesVSResources.CSharp_VB_Todo_List_Table_Data_Source;
-            public override string SourceTypeIdentifier => StandardTableDataSources.CommentTableDataSource;
+            public override string DisplayName =>
+                ServicesVSResources.CSharp_VB_Todo_List_Table_Data_Source;
+            public override string SourceTypeIdentifier =>
+                StandardTableDataSources.CommentTableDataSource;
             public override string Identifier => _identifier;
+
             public override object GetItemKey(TaskListUpdatedArgs data) => data.DocumentId;
 
             protected override object GetOrUpdateAggregationKey(TaskListUpdatedArgs data)
@@ -128,14 +144,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return GetDocumentsWithSameFilePath(data.Solution, data.DocumentId);
             }
 
-            public override AbstractTableEntriesSnapshot<TaskListTableItem> CreateSnapshot(AbstractTableEntriesSource<TaskListTableItem> source, int version, ImmutableArray<TaskListTableItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
-                => new TableEntriesSnapshot(ThreadingContext, version, items, trackingPoints);
+            public override AbstractTableEntriesSnapshot<TaskListTableItem> CreateSnapshot(
+                AbstractTableEntriesSource<TaskListTableItem> source,
+                int version,
+                ImmutableArray<TaskListTableItem> items,
+                ImmutableArray<ITrackingPoint> trackingPoints
+            ) => new TableEntriesSnapshot(ThreadingContext, version, items, trackingPoints);
 
-            public override IEqualityComparer<TaskListTableItem> GroupingComparer
-                => TaskListTableItem.GroupingComparer.Instance;
+            public override IEqualityComparer<TaskListTableItem> GroupingComparer =>
+                TaskListTableItem.GroupingComparer.Instance;
 
-            public override IEnumerable<TaskListTableItem> Order(IEnumerable<TaskListTableItem> groupedItems)
-                => groupedItems.OrderBy(d => d.Data.Span.StartLinePosition);
+            public override IEnumerable<TaskListTableItem> Order(
+                IEnumerable<TaskListTableItem> groupedItems
+            ) => groupedItems.OrderBy(d => d.Data.Span.StartLinePosition);
 
             private void OnTaskListUpdated(object sender, TaskListUpdatedArgs e)
             {
@@ -155,7 +176,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 OnDataAddedOrChanged(e);
             }
 
-            public override AbstractTableEntriesSource<TaskListTableItem> CreateTableEntriesSource(object data)
+            public override AbstractTableEntriesSource<TaskListTableItem> CreateTableEntriesSource(
+                object data
+            )
             {
                 var item = (TaskListUpdatedArgs)data;
                 return new TableEntriesSource(this, item.Workspace, item.DocumentId);
@@ -167,7 +190,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 private readonly Workspace _workspace;
                 private readonly DocumentId _documentId;
 
-                public TableEntriesSource(TableDataSource source, Workspace workspace, DocumentId documentId)
+                public TableEntriesSource(
+                    TableDataSource source,
+                    Workspace workspace,
+                    DocumentId documentId
+                )
                 {
                     _source = source;
                     _workspace = workspace;
@@ -178,23 +205,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 public override ImmutableArray<TaskListTableItem> GetItems()
                 {
-                    return _source._taskProvider.GetTaskListItems(_workspace, _documentId, CancellationToken.None)
-                                   .Select(data => TaskListTableItem.Create(_workspace, data))
-                                   .ToImmutableArray();
+                    return _source._taskProvider
+                        .GetTaskListItems(_workspace, _documentId, CancellationToken.None)
+                        .Select(data => TaskListTableItem.Create(_workspace, data))
+                        .ToImmutableArray();
                 }
 
-                public override ImmutableArray<ITrackingPoint> GetTrackingPoints(ImmutableArray<TaskListTableItem> items)
-                    => _workspace.CreateTrackingPoints(_documentId, items);
+                public override ImmutableArray<ITrackingPoint> GetTrackingPoints(
+                    ImmutableArray<TaskListTableItem> items
+                ) => _workspace.CreateTrackingPoints(_documentId, items);
             }
 
-            private sealed class TableEntriesSnapshot : AbstractTableEntriesSnapshot<TaskListTableItem>
+            private sealed class TableEntriesSnapshot
+                : AbstractTableEntriesSnapshot<TaskListTableItem>
             {
-                public TableEntriesSnapshot(IThreadingContext threadingContext, int version, ImmutableArray<TaskListTableItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
-                    : base(threadingContext, version, items, trackingPoints)
-                {
-                }
+                public TableEntriesSnapshot(
+                    IThreadingContext threadingContext,
+                    int version,
+                    ImmutableArray<TaskListTableItem> items,
+                    ImmutableArray<ITrackingPoint> trackingPoints
+                )
+                    : base(threadingContext, version, items, trackingPoints) { }
 
-                public override bool TryGetValue(int index, string columnName, [NotNullWhen(true)] out object? content)
+                public override bool TryGetValue(
+                    int index,
+                    string columnName,
+                    [NotNullWhen(true)] out object? content
+                )
                 {
                     // REVIEW: this method is too-chatty to make async, but otherwise, how one can implement it async?
                     //         also, what is cancellation mechanism?
@@ -215,7 +252,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             content = data.Message;
                             return content != null;
                         case StandardTableKeyNames.DocumentName:
-                            content = data.MappedSpan.HasMappedPath ? data.MappedSpan.Path : data.Span.Path;
+                            content = data.MappedSpan.HasMappedPath
+                                ? data.MappedSpan.Path
+                                : data.Span.Path;
                             return content != null;
                         case StandardTableKeyNames.Line:
                             content = GetLineColumn(item).Line;
@@ -254,11 +293,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         item.Data.Span.StartLinePosition.Line,
                         item.Data.Span.StartLinePosition.Character,
                         item.Data.MappedSpan.StartLinePosition.Line,
-                        item.Data.MappedSpan.StartLinePosition.Character);
+                        item.Data.MappedSpan.StartLinePosition.Character
+                    );
                 }
 
-                public override bool TryNavigateTo(int index, NavigationOptions options, CancellationToken cancellationToken)
-                    => TryNavigateToItem(index, options, cancellationToken);
+                public override bool TryNavigateTo(
+                    int index,
+                    NavigationOptions options,
+                    CancellationToken cancellationToken
+                ) => TryNavigateToItem(index, options, cancellationToken);
             }
         }
     }

@@ -12,29 +12,26 @@ namespace Internal.Cryptography.Pal
     internal sealed class ExportProvider : UnixExportProvider
     {
         internal ExportProvider(ICertificatePalCore singleCertPal)
-            : base(singleCertPal)
-        {
-        }
+            : base(singleCertPal) { }
 
         internal ExportProvider(X509Certificate2Collection certs)
-            : base(certs)
-        {
-        }
+            : base(certs) { }
 
         protected override byte[] ExportPkcs8(
             ICertificatePalCore certificatePal,
-            ReadOnlySpan<char> password)
+            ReadOnlySpan<char> password
+        )
         {
             AsymmetricAlgorithm? alg = null;
-            SafeEvpPKeyHandle? privateKey = ((OpenSslX509CertificateReader)certificatePal).PrivateKeyHandle;
+            SafeEvpPKeyHandle? privateKey = (
+                (OpenSslX509CertificateReader)certificatePal
+            ).PrivateKeyHandle;
 
             try
             {
                 alg = new RSAOpenSsl(privateKey!);
             }
-            catch (CryptographicException)
-            {
-            }
+            catch (CryptographicException) { }
 
             if (alg == null)
             {
@@ -42,9 +39,7 @@ namespace Internal.Cryptography.Pal
                 {
                     alg = new ECDsaOpenSsl(privateKey!);
                 }
-                catch (CryptographicException)
-                {
-                }
+                catch (CryptographicException) { }
             }
 
             if (alg == null)
@@ -53,9 +48,7 @@ namespace Internal.Cryptography.Pal
                 {
                     alg = new DSAOpenSsl(privateKey!);
                 }
-                catch (CryptographicException)
-                {
-                }
+                catch (CryptographicException) { }
             }
 
             Debug.Assert(alg != null);
@@ -88,13 +81,16 @@ namespace Internal.Cryptography.Pal
                     GC.KeepAlive(cert); // ensure cert's safe handle isn't finalized while raw handle is in use
                 }
 
-                using (SafePkcs7Handle pkcs7 = Interop.Crypto.Pkcs7CreateCertificateCollection(certs))
+                using (
+                    SafePkcs7Handle pkcs7 = Interop.Crypto.Pkcs7CreateCertificateCollection(certs)
+                )
                 {
                     Interop.Crypto.CheckValidOpenSslHandle(pkcs7);
                     return Interop.Crypto.OpenSslEncode(
                         handle => Interop.Crypto.GetPkcs7DerSize(handle),
                         (handle, buf) => Interop.Crypto.EncodePkcs7(handle, buf),
-                        pkcs7);
+                        pkcs7
+                    );
                 }
             }
         }

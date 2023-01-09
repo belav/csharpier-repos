@@ -145,10 +145,7 @@ public class AnchorTagHelper : TagHelper
 
             return _routeValues;
         }
-        set
-        {
-            _routeValues = value;
-        }
+        set { _routeValues = value; }
     }
 
     /// <summary>
@@ -175,16 +172,18 @@ public class AnchorTagHelper : TagHelper
         // If "href" is already set, it means the user is attempting to use a normal anchor.
         if (output.Attributes.ContainsName(Href))
         {
-            if (Action != null ||
-                Controller != null ||
-                Area != null ||
-                Page != null ||
-                PageHandler != null ||
-                Route != null ||
-                Protocol != null ||
-                Host != null ||
-                Fragment != null ||
-                (_routeValues != null && _routeValues.Count > 0))
+            if (
+                Action != null
+                || Controller != null
+                || Area != null
+                || Page != null
+                || PageHandler != null
+                || Route != null
+                || Protocol != null
+                || Host != null
+                || Fragment != null
+                || (_routeValues != null && _routeValues.Count > 0)
+            )
             {
                 // User specified an href and one of the bound attributes; can't determine the href attribute.
                 throw new InvalidOperationException(
@@ -200,7 +199,9 @@ public class AnchorTagHelper : TagHelper
                         HostAttributeName,
                         FragmentAttributeName,
                         PageAttributeName,
-                        PageHandlerAttributeName));
+                        PageHandlerAttributeName
+                    )
+                );
             }
 
             return;
@@ -217,7 +218,8 @@ public class AnchorTagHelper : TagHelper
                 Resources.FormatCannotDetermineAttributeFor(Href, "<a>"),
                 RouteAttributeName,
                 ControllerAttributeName + ", " + ActionAttributeName,
-                PageAttributeName + ", " + PageHandlerAttributeName);
+                PageAttributeName + ", " + PageHandlerAttributeName
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -250,7 +252,8 @@ public class AnchorTagHelper : TagHelper
                 hostname: Host,
                 fragment: Fragment,
                 routeValues: routeValues,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
         else if (routeLink)
         {
@@ -262,20 +265,22 @@ public class AnchorTagHelper : TagHelper
                 hostName: Host,
                 fragment: Fragment,
                 routeValues: routeValues,
-                htmlAttributes: null);
+                htmlAttributes: null
+            );
         }
         else
         {
             tagBuilder = Generator.GenerateActionLink(
-               ViewContext,
-               linkText: string.Empty,
-               actionName: Action,
-               controllerName: Controller,
-               protocol: Protocol,
-               hostname: Host,
-               fragment: Fragment,
-               routeValues: routeValues,
-               htmlAttributes: null);
+                ViewContext,
+                linkText: string.Empty,
+                actionName: Action,
+                controllerName: Controller,
+                protocol: Protocol,
+                hostname: Host,
+                fragment: Fragment,
+                routeValues: routeValues,
+                htmlAttributes: null
+            );
         }
 
         output.MergeAttributes(tagBuilder);

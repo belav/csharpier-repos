@@ -11,8 +11,9 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Adds support for SignInAsync
 /// </summary>
-public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticationHandler<TOptions>, IAuthenticationSignInHandler
-    where TOptions : AuthenticationSchemeOptions, new()
+public abstract class SignInAuthenticationHandler<TOptions>
+    : SignOutAuthenticationHandler<TOptions>,
+        IAuthenticationSignInHandler where TOptions : AuthenticationSchemeOptions, new()
 {
     /// <summary>
     /// Initializes a new instance of <see cref="SignInAuthenticationHandler{TOptions}"/>.
@@ -21,8 +22,13 @@ public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticat
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
-    public SignInAuthenticationHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    { }
+    public SignInAuthenticationHandler(
+        IOptionsMonitor<TOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc/>
     public virtual Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
@@ -39,5 +45,8 @@ public abstract class SignInAuthenticationHandler<TOptions> : SignOutAuthenticat
     /// <param name="user"></param>
     /// <param name="properties"></param>
     /// <returns>A Task.</returns>
-    protected abstract Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties);
+    protected abstract Task HandleSignInAsync(
+        ClaimsPrincipal user,
+        AuthenticationProperties? properties
+    );
 }

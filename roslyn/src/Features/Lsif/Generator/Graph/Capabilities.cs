@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             bool typeDefinitionProvider,
             bool documentSymbolProvider,
             bool foldingRangeProvider,
-            bool diagnosticProvider)
+            bool diagnosticProvider
+        )
             : base(label: "capabilities", idFactory)
         {
             HoverProvider = hoverProvider;

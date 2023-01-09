@@ -35,38 +35,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.QuickInfo
         public async Task Brackets_0()
         {
             await TestInMethodAndScriptAsync(
-@"
+                @"
 switch (true)
 {
 }$$
 ",
-@"switch (true)
-{");
+                @"switch (true)
+{"
+            );
         }
 
         [WpfFact]
-        public async Task Brackets_1()
-            => await TestInClassAsync("int Property { get; }$$ ", "int Property {");
+        public async Task Brackets_1() =>
+            await TestInClassAsync("int Property { get; }$$ ", "int Property {");
 
         [WpfFact]
-        public async Task Brackets_2()
-            => await TestInClassAsync("void M()\r\n{ }$$ ", "void M()\r\n{");
+        public async Task Brackets_2() =>
+            await TestInClassAsync("void M()\r\n{ }$$ ", "void M()\r\n{");
 
         [WpfFact]
-        public async Task Brackets_3()
-            => await TestInMethodAndScriptAsync("var a = new int[] { }$$ ", "new int[] {");
+        public async Task Brackets_3() =>
+            await TestInMethodAndScriptAsync("var a = new int[] { }$$ ", "new int[] {");
 
         [WpfFact]
         public async Task Brackets_4()
         {
             await TestInMethodAndScriptAsync(
-@"
+                @"
 if (true)
 {
 }$$
 ",
-@"if (true)
-{");
+                @"if (true)
+{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -74,12 +76,13 @@ if (true)
         public async Task ScopeBrackets_0()
         {
             await TestInMethodAndScriptAsync(
-@"if (true)
+                @"if (true)
             {
                 {
                 }$$
             }",
-            "{");
+                "{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -87,16 +90,17 @@ if (true)
         public async Task ScopeBrackets_1()
         {
             await TestInMethodAndScriptAsync(
-@"while (true)
+                @"while (true)
             {
                 // some
                 // comment
                 {
                 }$$
             }",
-@"// some
+                @"// some
 // comment
-{");
+{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -104,15 +108,16 @@ if (true)
         public async Task ScopeBrackets_2()
         {
             await TestInMethodAndScriptAsync(
-@"do
+                @"do
             {
                 /* comment */
                 {
                 }$$
             }
             while (true);",
-@"/* comment */
-{");
+                @"/* comment */
+{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -120,7 +125,7 @@ if (true)
         public async Task ScopeBrackets_3()
         {
             await TestInMethodAndScriptAsync(
-@"if (true)
+                @"if (true)
             {
             }
             else
@@ -130,9 +135,10 @@ if (true)
                     // comment
                 }$$
             }",
-@"{
+                @"{
     // some
-    // comment");
+    // comment"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -140,14 +146,15 @@ if (true)
         public async Task ScopeBrackets_4()
         {
             await TestInMethodAndScriptAsync(
-@"using (var x = new X())
+                @"using (var x = new X())
             {
                 {
                     /* comment */
                 }$$
             }",
-@"{
-    /* comment */");
+                @"{
+    /* comment */"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -155,15 +162,16 @@ if (true)
         public async Task ScopeBrackets_5()
         {
             await TestInMethodAndScriptAsync(
-@"foreach (var x in xs)
+                @"foreach (var x in xs)
             {
                 // above
                 {
                     /* below */
                 }$$
             }",
-@"// above
-{");
+                @"// above
+{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -171,7 +179,7 @@ if (true)
         public async Task ScopeBrackets_6()
         {
             await TestInMethodAndScriptAsync(
-@"for (;;)
+                @"for (;;)
             {
                 /*************/
 
@@ -181,12 +189,13 @@ if (true)
                 {
                 }$$
             }",
-@"/*************/
+                @"/*************/
 
 // part 1
 
 // part 2
-{");
+{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -194,7 +203,7 @@ if (true)
         public async Task ScopeBrackets_7()
         {
             await TestInMethodAndScriptAsync(
-@"try
+                @"try
             {
                 /*************/
 
@@ -205,12 +214,13 @@ if (true)
                 }$$
             }
             catch { throw; }",
-@"/*************/
+                @"/*************/
 
 // part 1
 
 // part 2
-{");
+{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -218,7 +228,7 @@ if (true)
         public async Task ScopeBrackets_8()
         {
             await TestInMethodAndScriptAsync(
-@"
+                @"
 {
     /*************/
 
@@ -227,12 +237,13 @@ if (true)
     // part 2
 }$$
 ",
-@"{
+                @"{
     /*************/
 
     // part 1
 
-    // part 2");
+    // part 2"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -240,7 +251,7 @@ if (true)
         public async Task ScopeBrackets_9()
         {
             await TestInClassAsync(
-@"int Property
+                @"int Property
 {
     set
     {
@@ -248,7 +259,8 @@ if (true)
         }$$
     }
 }",
-            "{");
+                "{"
+            );
         }
 
         [WorkItem(325, "https://github.com/dotnet/roslyn/issues/325")]
@@ -256,7 +268,7 @@ if (true)
         public async Task ScopeBrackets_10()
         {
             await TestInMethodAndScriptAsync(
-@"switch (true)
+                @"switch (true)
             {
                 default:
                     // comment
@@ -264,17 +276,20 @@ if (true)
                     }$$
                     break;
             }",
-@"// comment
-{");
+                @"// comment
+{"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndShowsStartRegionMessage()
         {
             await TestAsync(
-@"
+                @"
 #region Start
-#end$$region", "#region Start");
+#end$$region",
+                "#region Start"
+            );
         }
 
         [Theory, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
@@ -286,9 +301,11 @@ if (true)
         public async Task RegionEndShowsStartRegionMessageAtDifferentPositions(string endRegion)
         {
             await TestAsync(
-@$"
+                @$"
 #region Start
-{endRegion}", "#region Start");
+{endRegion}",
+                "#region Start"
+            );
         }
 
         [Theory, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
@@ -301,206 +318,243 @@ if (true)
         public async Task RegionEndQuickInfoIsNotOfferedAtDifferentPositions(string endRegion)
         {
             await TestAsync(
-@$"
+                @$"
 #region Start
-{endRegion}", "");
+{endRegion}",
+                ""
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndHasNoQuickinfo_MissingRegionStart_1()
         {
-            await TestAsync(
-@$"#end$$region", "");
+            await TestAsync(@$"#end$$region", "");
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndHasNoQuickinfo_MissingRegionStart_2()
         {
             await TestAsync(
-@$"
+                @$"
 #region Start
 #endregion
-#end$$region", "");
+#end$$region",
+                ""
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndShowsRegionStart_Nesting_1()
         {
             await TestAsync(
-@$"
+                @$"
 #region Start1
 #region Start2
 #endregion
-#end$$region", "#region Start1");
+#end$$region",
+                "#region Start1"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndShowsRegionStart_Nesting_2()
         {
             await TestAsync(
-@$"
+                @$"
 #region Start1
 #region Start2
 #end$$region
-#endregion", "#region Start2");
+#endregion",
+                "#region Start2"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndShowsRegionStart_Blocks_1()
         {
             await TestAsync(
-@$"
+                @$"
 #region Start1
 #end$$region
 #region Start2
-#endregion", "#region Start1");
+#endregion",
+                "#region Start1"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task RegionEndShowsRegionStart_Blocks_2()
         {
             await TestAsync(
-@$"
+                @$"
 #region Start1
 #endregion
 #region Start2
-#end$$region", "#region Start2");
+#end$$region",
+                "#region Start2"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsIfCondition_1()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
-#end$$if", "#if DEBUG");
+#end$$if",
+                "#if DEBUG"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsIfCondition_2()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #else
-#end$$if", "#if DEBUG\r\n#else");
+#end$$if",
+                "#if DEBUG\r\n#else"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsElIfCondition()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #elif RELEASE
-#end$$if", "#if DEBUG\r\n#elif RELEASE");
+#end$$if",
+                "#if DEBUG\r\n#elif RELEASE"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task ElseShowsIfCondition()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #el$$se
-#endif", "#if DEBUG");
+#endif",
+                "#if DEBUG"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task ElseShowsElIfCondition_1()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #elif RELEASE
 #el$$se
-#endif", "#if DEBUG\r\n#elif RELEASE");
+#endif",
+                "#if DEBUG\r\n#elif RELEASE"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task ElseShowsElIfCondition_2()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #elif RELEASE
 #elif DEMO
 #el$$se
-#endif", "#if DEBUG\r\n#elif RELEASE\r\n#elif DEMO");
+#endif",
+                "#if DEBUG\r\n#elif RELEASE\r\n#elif DEMO"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task ElIfShowsIfCondition()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #el$$if RELEASE
-#endif", "#if DEBUG");
+#endif",
+                "#if DEBUG"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsIfNested_1()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #if RELEASE
 #end$$if
-#endif", "#if RELEASE");
+#endif",
+                "#if RELEASE"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsIfNested_2()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #if RELEASE
 #endif
-#end$$if", "#if DEBUG");
+#end$$if",
+                "#if DEBUG"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsIfNested_3()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #elif RELEASE
 #if DEMO
 #end$$if
-#endif", "#if DEMO");
+#endif",
+                "#if DEMO"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfShowsIfNested_4()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #elif RELEASE
 #if DEMO
 #endif
-#end$$if", "#if DEBUG\r\n#elif RELEASE");
+#end$$if",
+                "#if DEBUG\r\n#elif RELEASE"
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfHasNoQuickinfo_MissingIf_1()
         {
             await TestAsync(
-@$"
-#end$$if", "");
+                @$"
+#end$$if",
+                ""
+            );
         }
 
         [Fact, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
         public async Task EndIfHasNoQuickinfo_MissingIf_2()
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 #endif
-#end$$if", "");
+#end$$if",
+                ""
+            );
         }
 
         [Theory, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
@@ -510,10 +564,12 @@ if (true)
         public async Task ElifHasQuickinfoAtDifferentPositions(string elif)
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 {elif}
-#endif", "#if DEBUG");
+#endif",
+                "#if DEBUG"
+            );
         }
 
         [Theory, WorkItem(56507, "https://github.com/dotnet/roslyn/issues/56507")]
@@ -531,22 +587,33 @@ if (true)
         public async Task ElifHasNoQuickinfoAtDifferentPositions(string elif)
         {
             await TestAsync(
-@$"
+                @$"
 #if DEBUG
 {elif}
-#endif", "");
+#endif",
+                ""
+            );
         }
 
-        private static QuickInfoProvider CreateProvider()
-            => new CSharpSyntacticQuickInfoProvider();
+        private static QuickInfoProvider CreateProvider() => new CSharpSyntacticQuickInfoProvider();
 
         protected override async Task AssertNoContentAsync(
             TestWorkspace workspace,
             Document document,
-            int position)
+            int position
+        )
         {
             var provider = CreateProvider();
-            Assert.Null(await provider.GetQuickInfoAsync(new QuickInfoContext(document, position, SymbolDescriptionOptions.Default, CancellationToken.None)));
+            Assert.Null(
+                await provider.GetQuickInfoAsync(
+                    new QuickInfoContext(
+                        document,
+                        position,
+                        SymbolDescriptionOptions.Default,
+                        CancellationToken.None
+                    )
+                )
+            );
         }
 
         protected override async Task AssertContentIsAsync(
@@ -554,22 +621,38 @@ if (true)
             Document document,
             int position,
             string expectedContent,
-            string expectedDocumentationComment = null)
+            string expectedDocumentationComment = null
+        )
         {
             var provider = CreateProvider();
-            var info = await provider.GetQuickInfoAsync(new QuickInfoContext(document, position, SymbolDescriptionOptions.Default, CancellationToken.None));
+            var info = await provider.GetQuickInfoAsync(
+                new QuickInfoContext(
+                    document,
+                    position,
+                    SymbolDescriptionOptions.Default,
+                    CancellationToken.None
+                )
+            );
             Assert.NotNull(info);
             Assert.NotEqual(0, info.RelatedSpans.Length);
 
             var trackingSpan = new Mock<ITrackingSpan>(MockBehavior.Strict);
             var threadingContext = workspace.ExportProvider.GetExportedValue<IThreadingContext>();
-            var operationExecutor = workspace.ExportProvider.GetExportedValue<IUIThreadOperationExecutor>();
-            var streamingPresenter = workspace.ExportProvider.GetExport<IStreamingFindUsagesPresenter>();
+            var operationExecutor =
+                workspace.ExportProvider.GetExportedValue<IUIThreadOperationExecutor>();
+            var streamingPresenter =
+                workspace.ExportProvider.GetExport<IStreamingFindUsagesPresenter>();
             var quickInfoItem = await IntellisenseQuickInfoBuilder.BuildItemAsync(
-                trackingSpan.Object, info, document,
-                ClassificationOptions.Default, threadingContext, operationExecutor,
+                trackingSpan.Object,
+                info,
+                document,
+                ClassificationOptions.Default,
+                threadingContext,
+                operationExecutor,
                 AsynchronousOperationListenerProvider.NullListener,
-                streamingPresenter, CancellationToken.None);
+                streamingPresenter,
+                CancellationToken.None
+            );
             var containerElement = quickInfoItem.Item as ContainerElement;
 
             var textElements = containerElement.Elements.OfType<ClassifiedTextElement>();
@@ -580,28 +663,50 @@ if (true)
             Assert.Equal(expectedContent, actualText);
         }
 
-        protected override Task TestInMethodAsync(string code, string expectedContent, string expectedDocumentationComment = null)
+        protected override Task TestInMethodAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        )
         {
             return TestInClassAsync(
-@"void M()
-{" + code + "}", expectedContent, expectedDocumentationComment);
+                @"void M()
+{"
+                    + code
+                    + "}",
+                expectedContent,
+                expectedDocumentationComment
+            );
         }
 
-        protected override Task TestInClassAsync(string code, string expectedContent, string expectedDocumentationComment = null)
+        protected override Task TestInClassAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        )
         {
             return TestAsync(
-@"class C
-{" + code + "}", expectedContent, expectedDocumentationComment);
+                @"class C
+{"
+                    + code
+                    + "}",
+                expectedContent,
+                expectedDocumentationComment
+            );
         }
 
-        protected override Task TestInScriptAsync(string code, string expectedContent, string expectedDocumentationComment = null)
-            => TestAsync(code, expectedContent, expectedContent, Options.Script);
+        protected override Task TestInScriptAsync(
+            string code,
+            string expectedContent,
+            string expectedDocumentationComment = null
+        ) => TestAsync(code, expectedContent, expectedContent, Options.Script);
 
         protected override async Task TestAsync(
             string code,
             string expectedContent,
             string expectedDocumentationComment = null,
-            CSharpParseOptions parseOptions = null)
+            CSharpParseOptions parseOptions = null
+        )
         {
             using var workspace = TestWorkspace.CreateCSharp(code, parseOptions);
             var testDocument = workspace.Documents.Single();
@@ -614,7 +719,13 @@ if (true)
             }
             else
             {
-                await AssertContentIsAsync(workspace, document, position, expectedContent, expectedDocumentationComment);
+                await AssertContentIsAsync(
+                    workspace,
+                    document,
+                    position,
+                    expectedContent,
+                    expectedDocumentationComment
+                );
             }
         }
     }

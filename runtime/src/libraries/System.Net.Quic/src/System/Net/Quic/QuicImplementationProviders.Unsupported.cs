@@ -9,11 +9,14 @@ namespace System.Net.Quic
     {
         public static Implementations.QuicImplementationProvider Mock => Default;
         public static Implementations.QuicImplementationProvider MsQuic => Default;
-        public static Implementations.QuicImplementationProvider Default { get; } = new UnsupportedQuicImplementationProvider();
+        public static Implementations.QuicImplementationProvider Default { get; } =
+            new UnsupportedQuicImplementationProvider();
 
         private sealed class UnsupportedQuicImplementationProvider : QuicImplementationProvider
         {
-            internal UnsupportedQuicImplementationProvider() : base(false) { }
+            internal UnsupportedQuicImplementationProvider()
+                : base(false) { }
+
             public override bool IsSupported => false;
         }
     }

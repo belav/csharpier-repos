@@ -60,8 +60,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Lsp
             ILspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             DefaultCapabilitiesProvider defaultCapabilitiesProvider,
             IThreadingContext threadingContext,
-            [Import(typeof(SAsyncServiceProvider))] VSShell.IAsyncServiceProvider asyncServiceProvider)
-            : base(csharpVBRequestDispatcherFactory, workspace, diagnosticService, listenerProvider, lspWorkspaceRegistrationService, asyncServiceProvider, threadingContext, ClientName)
+            [Import(typeof(SAsyncServiceProvider))]
+                VSShell.IAsyncServiceProvider asyncServiceProvider
+        )
+            : base(
+                csharpVBRequestDispatcherFactory,
+                workspace,
+                diagnosticService,
+                listenerProvider,
+                lspWorkspaceRegistrationService,
+                asyncServiceProvider,
+                threadingContext,
+                ClientName
+            )
         {
             _defaultCapabilitiesProvider = defaultCapabilitiesProvider;
         }
@@ -70,7 +81,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor.Lsp
         {
             var capabilities = _defaultCapabilitiesProvider.GetCapabilities();
 
-            capabilities.SupportsDiagnosticRequests = this.Workspace.IsPullDiagnostics(InternalDiagnosticsOptions.RazorDiagnosticMode);
+            capabilities.SupportsDiagnosticRequests = this.Workspace.IsPullDiagnostics(
+                InternalDiagnosticsOptions.RazorDiagnosticMode
+            );
 
             // Razor doesn't use workspace symbols, so disable to prevent duplicate results (with LiveshareLanguageClient) in liveshare.
             capabilities.WorkspaceSymbolProvider = false;

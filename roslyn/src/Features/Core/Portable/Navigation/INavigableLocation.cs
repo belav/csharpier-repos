@@ -24,10 +24,13 @@ namespace Microsoft.CodeAnalysis.Navigation
     {
         private readonly Func<NavigationOptions, CancellationToken, Task<bool>> _callback;
 
-        public NavigableLocation(Func<NavigationOptions, CancellationToken, Task<bool>> callback)
-            => _callback = callback;
+        public NavigableLocation(Func<NavigationOptions, CancellationToken, Task<bool>> callback) =>
+            _callback = callback;
 
-        public Task<bool> NavigateToAsync(NavigationOptions options, CancellationToken cancellationToken)
+        public Task<bool> NavigateToAsync(
+            NavigationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             return _callback(options, cancellationToken);
@@ -40,7 +43,10 @@ namespace Microsoft.CodeAnalysis.Navigation
 #pragma warning restore VSTHRD200 // Use "Async" suffix for async methods
             {
                 return Task.FromResult<INavigableLocation?>(
-                    new NavigableLocation((_, _) => value ? SpecializedTasks.True : SpecializedTasks.False));
+                    new NavigableLocation(
+                        (_, _) => value ? SpecializedTasks.True : SpecializedTasks.False
+                    )
+                );
             }
         }
     }

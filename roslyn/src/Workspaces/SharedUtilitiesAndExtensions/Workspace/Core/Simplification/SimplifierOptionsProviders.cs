@@ -13,13 +13,25 @@ namespace Microsoft.CodeAnalysis.Simplification;
 
 internal static partial class SimplifierOptionsProviders
 {
-    internal static async ValueTask<SimplifierOptions> GetSimplifierOptionsAsync(this Document document, ISimplification simplification, SimplifierOptionsProvider fallbackOptionsProvider, CancellationToken cancellationToken)
+    internal static async ValueTask<SimplifierOptions> GetSimplifierOptionsAsync(
+        this Document document,
+        ISimplification simplification,
+        SimplifierOptionsProvider fallbackOptionsProvider,
+        CancellationToken cancellationToken
+    )
     {
 #if CODE_STYLE
-        var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-        return simplification.GetSimplifierOptions(document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree), fallbackOptions: null);
+        var syntaxTree = await document
+            .GetRequiredSyntaxTreeAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return simplification.GetSimplifierOptions(
+            document.Project.AnalyzerOptions.AnalyzerConfigOptionsProvider.GetOptions(syntaxTree),
+            fallbackOptions: null
+        );
 #else
-        return await document.GetSimplifierOptionsAsync(fallbackOptionsProvider, cancellationToken).ConfigureAwait(false);
+        return await document
+            .GetSimplifierOptionsAsync(fallbackOptionsProvider, cancellationToken)
+            .ConfigureAwait(false);
 #endif
     }
 }

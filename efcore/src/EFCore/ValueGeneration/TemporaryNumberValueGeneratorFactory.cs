@@ -47,7 +47,11 @@ public class TemporaryNumberValueGeneratorFactory : ValueGeneratorFactory
 
         throw new ArgumentException(
             CoreStrings.InvalidValueGeneratorFactoryProperty(
-                nameof(TemporaryNumberValueGeneratorFactory), property.Name, property.DeclaringEntityType.DisplayName()));
+                nameof(TemporaryNumberValueGeneratorFactory),
+                property.Name,
+                property.DeclaringEntityType.DisplayName()
+            )
+        );
 
         ValueGenerator? TryCreate()
         {

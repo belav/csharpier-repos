@@ -15,11 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeCleanup
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeCleanerServiceFactory()
-        {
-        }
+        public CSharpCodeCleanerServiceFactory() { }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => new CSharpCodeCleanerService();
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            new CSharpCodeCleanerService();
     }
 }

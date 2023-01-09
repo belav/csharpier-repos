@@ -10,11 +10,11 @@ namespace System.CommandLine.Invocation
         private readonly Func<InvocationContext, Task>? _asyncHandle;
         private readonly Action<InvocationContext>? _syncHandle;
 
-        public AnonymousCommandHandler(Func<InvocationContext, Task> handle)
-            => _asyncHandle = handle ?? throw new ArgumentNullException(nameof(handle));
+        public AnonymousCommandHandler(Func<InvocationContext, Task> handle) =>
+            _asyncHandle = handle ?? throw new ArgumentNullException(nameof(handle));
 
-        public AnonymousCommandHandler(Action<InvocationContext> handle)
-            => _syncHandle = handle ?? throw new ArgumentNullException(nameof(handle));
+        public AnonymousCommandHandler(Action<InvocationContext> handle) =>
+            _syncHandle = handle ?? throw new ArgumentNullException(nameof(handle));
 
         public int Invoke(InvocationContext context)
         {
@@ -27,7 +27,8 @@ namespace System.CommandLine.Invocation
             return SyncUsingAsync(context); // kept in a separate method to avoid JITting
         }
 
-        private int SyncUsingAsync(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+        private int SyncUsingAsync(InvocationContext context) =>
+            InvokeAsync(context).GetAwaiter().GetResult();
 
         public async Task<int> InvokeAsync(InvocationContext context)
         {

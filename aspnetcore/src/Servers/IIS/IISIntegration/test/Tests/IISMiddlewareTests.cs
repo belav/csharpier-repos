@@ -99,10 +99,18 @@ public class IISMiddlewareTests
     [InlineData("/", "/iisintegration", "Shutdown")]
     [InlineData("/pathBase", "/pathBase/iisintegration", "shutdown")]
     [InlineData("/pathBase", "/pathBase/iisintegration", "Shutdown")]
-    public async Task MiddlewareShutsdownGivenANCMShutdown(string pathBase, string requestPath, string shutdownEvent)
+    public async Task MiddlewareShutsdownGivenANCMShutdown(
+        string pathBase,
+        string requestPath,
+        string shutdownEvent
+    )
     {
-        var requestExecuted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var applicationStoppingFired = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestExecuted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var applicationStoppingFired = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -113,8 +121,11 @@ public class IISMiddlewareTests
                     .UseIISIntegration()
                     .Configure(app =>
                     {
-                        var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult());
+                        var appLifetime =
+                            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
+                        );
 
                         app.Run(context =>
                         {
@@ -145,14 +156,14 @@ public class IISMiddlewareTests
         get
         {
             return new TheoryData<HttpMethod>
-                {
-                    HttpMethod.Put,
-                    HttpMethod.Trace,
-                    HttpMethod.Head,
-                    HttpMethod.Get,
-                    HttpMethod.Delete,
-                    HttpMethod.Options
-                };
+            {
+                HttpMethod.Put,
+                HttpMethod.Trace,
+                HttpMethod.Head,
+                HttpMethod.Get,
+                HttpMethod.Delete,
+                HttpMethod.Options
+            };
         }
     }
 
@@ -160,8 +171,12 @@ public class IISMiddlewareTests
     [MemberData(nameof(InvalidShutdownMethods))]
     public async Task MiddlewareIgnoresShutdownGivenWrongMethod(HttpMethod method)
     {
-        var requestExecuted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var applicationStoppingFired = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestExecuted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var applicationStoppingFired = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -172,8 +187,11 @@ public class IISMiddlewareTests
                     .UseIISIntegration()
                     .Configure(app =>
                     {
-                        var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult());
+                        var appLifetime =
+                            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
+                        );
 
                         app.Run(context =>
                         {
@@ -205,8 +223,12 @@ public class IISMiddlewareTests
     [InlineData("/path/iisintegration")]
     public async Task MiddlewareIgnoresShutdownGivenWrongPath(string path)
     {
-        var requestExecuted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var applicationStoppingFired = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestExecuted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var applicationStoppingFired = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -217,8 +239,11 @@ public class IISMiddlewareTests
                     .UseIISIntegration()
                     .Configure(app =>
                     {
-                        var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult());
+                        var appLifetime =
+                            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
+                        );
 
                         app.Run(context =>
                         {
@@ -250,8 +275,12 @@ public class IISMiddlewareTests
     [InlineData(null)]
     public async Task MiddlewareIgnoresShutdownGivenWrongEvent(string shutdownEvent)
     {
-        var requestExecuted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var applicationStoppingFired = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestExecuted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var applicationStoppingFired = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -262,8 +291,11 @@ public class IISMiddlewareTests
                     .UseIISIntegration()
                     .Configure(app =>
                     {
-                        var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
-                        appLifetime.ApplicationStopping.Register(() => applicationStoppingFired.SetResult());
+                        var appLifetime =
+                            app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+                        appLifetime.ApplicationStopping.Register(
+                            () => applicationStoppingFired.SetResult()
+                        );
 
                         app.Run(context =>
                         {
@@ -404,11 +436,17 @@ public class IISMiddlewareTests
                     {
                         app.Run(async context =>
                         {
-                            var auth = context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-                            var windows = await auth.GetSchemeAsync(IISDefaults.AuthenticationScheme);
+                            var auth =
+                                context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                            var windows = await auth.GetSchemeAsync(
+                                IISDefaults.AuthenticationScheme
+                            );
                             Assert.NotNull(windows);
                             Assert.Null(windows.DisplayName);
-                            Assert.Equal("Microsoft.AspNetCore.Server.IISIntegration.AuthenticationHandler", windows.HandlerType.FullName);
+                            Assert.Equal(
+                                "Microsoft.AspNetCore.Server.IISIntegration.AuthenticationHandler",
+                                windows.HandlerType.FullName
+                            );
                             assertsExecuted = true;
                         });
                     })
@@ -446,9 +484,12 @@ public class IISMiddlewareTests
                     {
                         app.Run(async context =>
                         {
-                            var auth = context.RequestServices.GetService<IAuthenticationSchemeProvider>();
+                            var auth =
+                                context.RequestServices.GetService<IAuthenticationSchemeProvider>();
                             Assert.NotNull(auth);
-                            var windowsAuth = await auth.GetSchemeAsync(IISDefaults.AuthenticationScheme);
+                            var windowsAuth = await auth.GetSchemeAsync(
+                                IISDefaults.AuthenticationScheme
+                            );
                             if (forward)
                             {
                                 Assert.NotNull(windowsAuth);

@@ -9,12 +9,19 @@ using Microsoft.CodeAnalysis.LanguageServer;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-[ExportLspServiceFactory(typeof(LspWorkspaceManager), ProtocolConstants.TypeScriptLanguageContract), Shared]
+[
+    ExportLspServiceFactory(
+        typeof(LspWorkspaceManager),
+        ProtocolConstants.TypeScriptLanguageContract
+    ),
+    Shared
+]
 internal class VSTypeScriptLspWorkspaceManagerFactory : LspWorkspaceManagerFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSTypeScriptLspWorkspaceManagerFactory(LspWorkspaceRegistrationService lspWorkspaceRegistrationService) : base(lspWorkspaceRegistrationService)
-    {
-    }
+    public VSTypeScriptLspWorkspaceManagerFactory(
+        LspWorkspaceRegistrationService lspWorkspaceRegistrationService
+    )
+        : base(lspWorkspaceRegistrationService) { }
 }

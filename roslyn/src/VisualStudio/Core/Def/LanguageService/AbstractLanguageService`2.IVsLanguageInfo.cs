@@ -9,9 +9,13 @@ using Microsoft.VisualStudio.TextManager.Interop;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService> : IVsLanguageInfo
+    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService>
+        : IVsLanguageInfo
     {
-        public int GetCodeWindowManager(IVsCodeWindow pCodeWin, out IVsCodeWindowManager ppCodeWinMgr)
+        public int GetCodeWindowManager(
+            IVsCodeWindow pCodeWin,
+            out IVsCodeWindowManager ppCodeWinMgr
+        )
         {
             ppCodeWinMgr = new VsCodeWindowManager((TLanguageService)this, pCodeWin);
 

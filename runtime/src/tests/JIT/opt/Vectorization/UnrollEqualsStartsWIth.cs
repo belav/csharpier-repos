@@ -24,16 +24,10 @@ public class UnrollEqualsStartsWIth
     public static int RunTests(Type type)
     {
         // List of "reference" (unoptimized) tests
-        var refImpl = type
-            .GetMethods()
-            .Where(m => m.Name.StartsWith("Test_ref_"))
-            .ToArray();
+        var refImpl = type.GetMethods().Where(m => m.Name.StartsWith("Test_ref_")).ToArray();
 
         // List of actual tests
-        var tstImpl = type
-            .GetMethods()
-            .Where(m => m.Name.StartsWith("Test_tst_"))
-            .ToArray();
+        var tstImpl = type.GetMethods().Where(m => m.Name.StartsWith("Test_tst_")).ToArray();
 
         string[] testData =
         {
@@ -113,8 +107,13 @@ public class UnrollEqualsStartsWIth
             for (int i = 0; i < refImpl.Length; i++)
             {
                 // Compare states for ref and tst (e.g. both should return the same value and the same exception if any)
-                if (!GetInvokeResult(refImpl[i], testStr).Equals(GetInvokeResult(tstImpl[i], testStr)))
-                    throw new InvalidOperationException($"Different states, type={type}, str={testStr}, mi={tstImpl[i]}");
+                if (
+                    !GetInvokeResult(refImpl[i], testStr)
+                        .Equals(GetInvokeResult(tstImpl[i], testStr))
+                )
+                    throw new InvalidOperationException(
+                        $"Different states, type={type}, str={testStr}, mi={tstImpl[i]}"
+                    );
                 testCasesCount++;
             }
         }
@@ -150,6 +149,8 @@ public class Utils
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static T Var<T>(T t) => t;
 
-    public const MethodImplOptions Opt = MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization;
-    public const MethodImplOptions NoOpt = MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization;
+    public const MethodImplOptions Opt =
+        MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization;
+    public const MethodImplOptions NoOpt =
+        MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization;
 }

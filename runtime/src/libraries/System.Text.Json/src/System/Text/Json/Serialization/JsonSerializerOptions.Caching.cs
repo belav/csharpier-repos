@@ -44,7 +44,12 @@ namespace System.Text.Json
 
             if (JsonTypeInfo.IsInvalidForSerialization(type))
             {
-                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(nameof(type), type, null, null);
+                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(
+                    nameof(type),
+                    type,
+                    null,
+                    null
+                );
             }
 
             return GetTypeInfoInternal(type, resolveIfMutable: true);
@@ -53,7 +58,11 @@ namespace System.Text.Json
         /// <summary>
         /// Same as GetTypeInfo but without validation and additional knobs.
         /// </summary>
-        internal JsonTypeInfo GetTypeInfoInternal(Type type, bool ensureConfigured = true, bool resolveIfMutable = false)
+        internal JsonTypeInfo GetTypeInfoInternal(
+            Type type,
+            bool ensureConfigured = true,
+            bool resolveIfMutable = false
+        )
         {
             JsonTypeInfo? typeInfo = null;
 
@@ -78,7 +87,10 @@ namespace System.Text.Json
             return typeInfo;
         }
 
-        internal bool TryGetTypeInfoCached(Type type, [NotNullWhen(true)] out JsonTypeInfo? typeInfo)
+        internal bool TryGetTypeInfoCached(
+            Type type,
+            [NotNullWhen(true)] out JsonTypeInfo? typeInfo
+        )
         {
             if (_cachingContext == null)
             {
@@ -106,7 +118,10 @@ namespace System.Text.Json
             return jsonTypeInfo;
         }
 
-        internal bool TryGetPolymorphicTypeInfoForRootType(object rootValue, [NotNullWhen(true)] out JsonTypeInfo? polymorphicTypeInfo)
+        internal bool TryGetPolymorphicTypeInfoForRootType(
+            object rootValue,
+            [NotNullWhen(true)] out JsonTypeInfo? polymorphicTypeInfo
+        )
         {
             Debug.Assert(rootValue != null);
 
@@ -165,12 +180,18 @@ namespace System.Text.Json
 
             public JsonSerializerOptions Options { get; }
             public int HashCode { get; }
+
             // Property only accessed by reflection in testing -- do not remove.
             // If changing please ensure that src/ILLink.Descriptors.LibraryBuild.xml is up-to-date.
             public int Count => _jsonTypeInfoCache.Count;
 
-            public JsonTypeInfo? GetOrAddJsonTypeInfo(Type type) => _jsonTypeInfoCache.GetOrAdd(type, Options.GetTypeInfoNoCaching);
-            public bool TryGetJsonTypeInfo(Type type, [NotNullWhen(true)] out JsonTypeInfo? typeInfo) => _jsonTypeInfoCache.TryGetValue(type, out typeInfo);
+            public JsonTypeInfo? GetOrAddJsonTypeInfo(Type type) =>
+                _jsonTypeInfoCache.GetOrAdd(type, Options.GetTypeInfoNoCaching);
+
+            public bool TryGetJsonTypeInfo(
+                Type type,
+                [NotNullWhen(true)] out JsonTypeInfo? typeInfo
+            ) => _jsonTypeInfoCache.TryGetValue(type, out typeInfo);
 
             public void Clear()
             {
@@ -186,17 +207,28 @@ namespace System.Text.Json
         internal static class TrackedCachingContexts
         {
             private const int MaxTrackedContexts = 64;
-            private static readonly WeakReference<CachingContext>?[] s_trackedContexts = new WeakReference<CachingContext>[MaxTrackedContexts];
+            private static readonly WeakReference<CachingContext>?[] s_trackedContexts =
+                new WeakReference<CachingContext>[MaxTrackedContexts];
             private static readonly EqualityComparer s_optionsComparer = new();
 
             public static CachingContext GetOrCreate(JsonSerializerOptions options)
             {
-                Debug.Assert(options.IsReadOnly, "Cannot create caching contexts for mutable JsonSerializerOptions instances");
+                Debug.Assert(
+                    options.IsReadOnly,
+                    "Cannot create caching contexts for mutable JsonSerializerOptions instances"
+                );
                 Debug.Assert(options._typeInfoResolver != null);
 
                 int hashCode = s_optionsComparer.GetHashCode(options);
 
-                if (TryGetContext(options, hashCode, out int firstUnpopulatedIndex, out CachingContext? result))
+                if (
+                    TryGetContext(
+                        options,
+                        hashCode,
+                        out int firstUnpopulatedIndex,
+                        out CachingContext? result
+                    )
+                )
                 {
                     return result;
                 }
@@ -218,7 +250,9 @@ namespace System.Text.Json
                     if (firstUnpopulatedIndex >= 0)
                     {
                         // Cache has capacity -- store the context in the first available index.
-                        ref WeakReference<CachingContext>? weakRef = ref s_trackedContexts[firstUnpopulatedIndex];
+                        ref WeakReference<CachingContext>? weakRef = ref s_trackedContexts[
+                            firstUnpopulatedIndex
+                        ];
 
                         if (weakRef is null)
                         {
@@ -239,7 +273,8 @@ namespace System.Text.Json
                 JsonSerializerOptions options,
                 int hashCode,
                 out int firstUnpopulatedIndex,
-                [NotNullWhen(true)] out CachingContext? result)
+                [NotNullWhen(true)] out CachingContext? result
+            )
             {
                 WeakReference<CachingContext>?[] trackedContexts = s_trackedContexts;
 
@@ -255,7 +290,9 @@ namespace System.Text.Json
                             firstUnpopulatedIndex = i;
                         }
                     }
-                    else if (hashCode == ctx.HashCode && s_optionsComparer.Equals(options, ctx.Options))
+                    else if (
+                        hashCode == ctx.HashCode && s_optionsComparer.Equals(options, ctx.Options)
+                    )
                     {
                         result = ctx;
                         return true;
@@ -278,29 +315,30 @@ namespace System.Text.Json
             {
                 Debug.Assert(left != null && right != null);
 
-                return
-                    left._dictionaryKeyPolicy == right._dictionaryKeyPolicy &&
-                    left._jsonPropertyNamingPolicy == right._jsonPropertyNamingPolicy &&
-                    left._readCommentHandling == right._readCommentHandling &&
-                    left._referenceHandler == right._referenceHandler &&
-                    left._encoder == right._encoder &&
-                    left._defaultIgnoreCondition == right._defaultIgnoreCondition &&
-                    left._numberHandling == right._numberHandling &&
-                    left._unknownTypeHandling == right._unknownTypeHandling &&
-                    left._defaultBufferSize == right._defaultBufferSize &&
-                    left._maxDepth == right._maxDepth &&
-                    left._allowTrailingCommas == right._allowTrailingCommas &&
-                    left._ignoreNullValues == right._ignoreNullValues &&
-                    left._ignoreReadOnlyProperties == right._ignoreReadOnlyProperties &&
-                    left._ignoreReadonlyFields == right._ignoreReadonlyFields &&
-                    left._includeFields == right._includeFields &&
-                    left._propertyNameCaseInsensitive == right._propertyNameCaseInsensitive &&
-                    left._writeIndented == right._writeIndented &&
-                    left._typeInfoResolver == right._typeInfoResolver &&
-                    CompareLists(left._converters, right._converters);
+                return left._dictionaryKeyPolicy == right._dictionaryKeyPolicy
+                    && left._jsonPropertyNamingPolicy == right._jsonPropertyNamingPolicy
+                    && left._readCommentHandling == right._readCommentHandling
+                    && left._referenceHandler == right._referenceHandler
+                    && left._encoder == right._encoder
+                    && left._defaultIgnoreCondition == right._defaultIgnoreCondition
+                    && left._numberHandling == right._numberHandling
+                    && left._unknownTypeHandling == right._unknownTypeHandling
+                    && left._defaultBufferSize == right._defaultBufferSize
+                    && left._maxDepth == right._maxDepth
+                    && left._allowTrailingCommas == right._allowTrailingCommas
+                    && left._ignoreNullValues == right._ignoreNullValues
+                    && left._ignoreReadOnlyProperties == right._ignoreReadOnlyProperties
+                    && left._ignoreReadonlyFields == right._ignoreReadonlyFields
+                    && left._includeFields == right._includeFields
+                    && left._propertyNameCaseInsensitive == right._propertyNameCaseInsensitive
+                    && left._writeIndented == right._writeIndented
+                    && left._typeInfoResolver == right._typeInfoResolver
+                    && CompareLists(left._converters, right._converters);
 
-                static bool CompareLists<TValue>(ConfigurationList<TValue> left, ConfigurationList<TValue> right)
-                    where TValue : class?
+                static bool CompareLists<TValue>(
+                    ConfigurationList<TValue> left,
+                    ConfigurationList<TValue> right
+                ) where TValue : class?
                 {
                     int n;
                     if ((n = left.Count) != right.Count)
@@ -363,7 +401,10 @@ namespace System.Text.Json
                     }
                     else
                     {
-                        Debug.Assert(!typeof(TValue).IsSealed, "Sealed reference types like string should not use this method.");
+                        Debug.Assert(
+                            !typeof(TValue).IsSealed,
+                            "Sealed reference types like string should not use this method."
+                        );
                         hc.Add(RuntimeHelpers.GetHashCode(value));
                     }
                 }
@@ -376,7 +417,9 @@ namespace System.Text.Json
             private struct HashCode
             {
                 private int _hashCode;
+
                 public void Add<T>(T? value) => _hashCode = (_hashCode, value).GetHashCode();
+
                 public int ToHashCode() => _hashCode;
             }
 #endif

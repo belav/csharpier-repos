@@ -28,8 +28,7 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector64DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector64.Size)]
-    public readonly struct Vector64<T> : IEquatable<Vector64<T>>
-        where T : struct
+    public readonly struct Vector64<T> : IEquatable<Vector64<T>> where T : struct
     {
         // This field allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
         internal readonly ulong _00;
@@ -116,10 +115,7 @@ namespace System.Runtime.Intrinsics
 
         internal string DisplayString
         {
-            get
-            {
-                return IsSupported ? ToString() : SR.NotSupported_Type;
-            }
+            get { return IsSupported ? ToString() : SR.NotSupported_Type; }
         }
 
         /// <summary>Gets the element at the specified index.</summary>
@@ -130,10 +126,7 @@ namespace System.Runtime.Intrinsics
         public T this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return this.GetElement(index);
-            }
+            get { return this.GetElement(index); }
         }
 
         /// <summary>Adds two vectors to compute their sum.</summary>
@@ -149,7 +142,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Add(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Add(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -203,7 +199,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Divide(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Divide(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -316,7 +315,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Multiply(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Multiply(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -380,7 +382,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T element = Scalar<T>.ShiftRightArithmetic(value.GetElementUnsafe(index), shiftCount);
+                T element = Scalar<T>.ShiftRightArithmetic(
+                    value.GetElementUnsafe(index),
+                    shiftCount
+                );
                 result.SetElementUnsafe(index, element);
             }
 
@@ -400,7 +405,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Subtract(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Subtract(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -450,7 +458,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="obj">The object to compare with the current instance.</param>
         /// <returns><c>true</c> if <paramref name="obj" /> is a <see cref="Vector64{T}" /> and is equal to the current instance; otherwise, <c>false</c>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is Vector64<T> other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector64<T> other) && Equals(other);
 
         /// <summary>Determines whether the specified <see cref="Vector64{T}" /> is equal to the current instance.</summary>
         /// <param name="other">The <see cref="Vector64{T}" /> to compare with the current instance.</param>
@@ -466,7 +475,9 @@ namespace System.Runtime.Intrinsics
             {
                 if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
                 {
-                    Vector64<T> result = Vector64.Equals(this, other) | ~(Vector64.Equals(this, this) | Vector64.Equals(other, other));
+                    Vector64<T> result =
+                        Vector64.Equals(this, other)
+                        | ~(Vector64.Equals(this, this) | Vector64.Equals(other, other));
                     return result.AsInt32() == Vector64<int>.AllBitsSet;
                 }
                 else
@@ -481,7 +492,12 @@ namespace System.Runtime.Intrinsics
             {
                 for (int index = 0; index < Count; index++)
                 {
-                    if (!Scalar<T>.ObjectEquals(self.GetElementUnsafe(index), other.GetElementUnsafe(index)))
+                    if (
+                        !Scalar<T>.ObjectEquals(
+                            self.GetElementUnsafe(index),
+                            other.GetElementUnsafe(index)
+                        )
+                    )
                     {
                         return false;
                     }
@@ -512,7 +528,10 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => ToString("G", CultureInfo.InvariantCulture);
 
-        private string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        private string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 
@@ -526,7 +545,9 @@ namespace System.Runtime.Intrinsics
             {
                 sb.Append(separator);
                 sb.Append(' ');
-                sb.Append(((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider));
+                sb.Append(
+                    ((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider)
+                );
             }
             sb.Append('>');
 

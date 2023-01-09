@@ -21,7 +21,8 @@ internal sealed class MvcAttributeRouteHandler : IRouter
         IActionInvokerFactory actionInvokerFactory,
         IActionSelector actionSelector,
         DiagnosticListener diagnosticListener,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _actionInvokerFactory = actionInvokerFactory;
         _actionSelector = actionSelector;
@@ -53,7 +54,8 @@ internal sealed class MvcAttributeRouteHandler : IRouter
         {
             var message = Resources.FormatPropertyOfTypeCannotBeNull(
                 nameof(Actions),
-                nameof(MvcAttributeRouteHandler));
+                nameof(MvcAttributeRouteHandler)
+            );
             throw new InvalidOperationException(message);
         }
 
@@ -82,7 +84,9 @@ internal sealed class MvcAttributeRouteHandler : IRouter
             {
                 throw new InvalidOperationException(
                     Resources.FormatActionInvokerFactory_CouldNotCreateInvoker(
-                        actionDescriptor.DisplayName));
+                        actionDescriptor.DisplayName
+                    )
+                );
             }
 
             return invoker.InvokeAsync();

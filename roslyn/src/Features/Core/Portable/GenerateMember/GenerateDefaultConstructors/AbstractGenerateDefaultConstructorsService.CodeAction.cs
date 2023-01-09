@@ -15,18 +15,21 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateDefaultConstructors
             public GenerateDefaultConstructorCodeAction(
                 Document document,
                 State state,
-                IMethodSymbol constructor)
+                IMethodSymbol constructor
+            )
                 : base(document, state, new[] { constructor }, GetDisplayText(state, constructor))
-            {
-            }
+            { }
 
             private static string GetDisplayText(State state, IMethodSymbol constructor)
             {
                 var parameters = constructor.Parameters.Select(p => p.Name);
                 var parameterString = string.Join(", ", parameters);
 
-                return string.Format(FeaturesResources.Generate_constructor_0_1,
-                    state.ClassType.Name, parameterString);
+                return string.Format(
+                    FeaturesResources.Generate_constructor_0_1,
+                    state.ClassType.Name,
+                    parameterString
+                );
             }
         }
     }

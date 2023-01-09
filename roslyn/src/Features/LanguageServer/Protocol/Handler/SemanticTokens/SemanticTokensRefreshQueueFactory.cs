@@ -19,18 +19,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public SemanticTokensRefreshQueueFactory(
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            LspWorkspaceRegistrationService lspWorkspaceRegistrationService)
+            LspWorkspaceRegistrationService lspWorkspaceRegistrationService
+        )
         {
             _asyncListenerProvider = asynchronousOperationListenerProvider;
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
-            var notificationManager = lspServices.GetRequiredService<IClientLanguageServerManager>();
+            var notificationManager =
+                lspServices.GetRequiredService<IClientLanguageServerManager>();
             var lspWorkspaceManager = lspServices.GetRequiredService<LspWorkspaceManager>();
 
-            return new SemanticTokensRefreshQueue(_asyncListenerProvider, _lspWorkspaceRegistrationService, lspWorkspaceManager, notificationManager);
+            return new SemanticTokensRefreshQueue(
+                _asyncListenerProvider,
+                _lspWorkspaceRegistrationService,
+                lspWorkspaceManager,
+                notificationManager
+            );
         }
     }
 }

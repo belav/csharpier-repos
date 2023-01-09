@@ -13,12 +13,7 @@
 
 namespace System.Diagnostics.CodeAnalysis
 {
-    [AttributeUsage(
-     AttributeTargets.All,
-     Inherited = false,
-     AllowMultiple = true
-     )
-    ]
+    [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     [Conditional("CODE_ANALYSIS")]
     public sealed class SuppressMessageAttribute : Attribute
     {

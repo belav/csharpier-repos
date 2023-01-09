@@ -19,25 +19,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
 
         public ManagedKeywordRecommenderTests()
         {
-            this.RecommendKeywordsAsync = (position, context) => Task.FromResult(_recommender.RecommendKeywords(position, context, CancellationToken.None));
+            this.RecommendKeywordsAsync = (position, context) =>
+                Task.FromResult(
+                    _recommender.RecommendKeywords(position, context, CancellationToken.None)
+                );
         }
 
         [Fact]
         public async Task TestInFunctionPointerDeclaration()
         {
             await VerifyKeywordAsync(
-@"class Test {
+                @"class Test {
     unsafe void N() {
-        delegate* $$");
+        delegate* $$"
+            );
         }
 
         [Fact]
         public async Task TestInFunctionPointerDeclarationTouchingAsterisk()
         {
             await VerifyKeywordAsync(
-@"class Test {
+                @"class Test {
     unsafe void N() {
-        delegate*$$");
+        delegate*$$"
+            );
         }
     }
 }

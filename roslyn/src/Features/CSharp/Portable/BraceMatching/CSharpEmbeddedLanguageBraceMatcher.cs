@@ -19,9 +19,14 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceMatching
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpEmbeddedLanguageBraceMatcher(
-            [ImportMany] IEnumerable<Lazy<IEmbeddedLanguageBraceMatcher, EmbeddedLanguageMetadata>> services)
-            : base(LanguageNames.CSharp, CSharpEmbeddedLanguagesProvider.Info, CSharpSyntaxKinds.Instance, services)
-        {
-        }
+            [ImportMany]
+                IEnumerable<Lazy<IEmbeddedLanguageBraceMatcher, EmbeddedLanguageMetadata>> services
+        )
+            : base(
+                LanguageNames.CSharp,
+                CSharpEmbeddedLanguagesProvider.Info,
+                CSharpSyntaxKinds.Instance,
+                services
+            ) { }
     }
 }

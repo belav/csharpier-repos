@@ -23,10 +23,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public int Flags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         }
 
         /// <summary>
@@ -34,10 +31,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public Color[] Entries
         {
-            get
-            {
-                return _entries;
-            }
+            get { return _entries; }
         }
 
         internal ColorPalette(int count)

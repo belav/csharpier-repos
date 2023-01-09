@@ -14,12 +14,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 {
     public class FormattingEngineTests_Venus : CSharpFormattingEngineTestBase
     {
-        public FormattingEngineTests_Venus(ITestOutputHelper output) : base(output) { }
+        public FormattingEngineTests_Venus(ITestOutputHelper output)
+            : base(output) { }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task SimpleOneLineNugget()
         {
-            var code = @"public class Default
+            var code =
+                @"public class Default
 {
     void PreRender()
     {
@@ -30,7 +36,8 @@ int x=1 ;
     }
 }";
 
-            var expected = @"public class Default
+            var expected =
+                @"public class Default
 {
     void PreRender()
     {
@@ -44,10 +51,15 @@ int x=1 ;
             await AssertFormatWithBaseIndentAsync(expected, code, baseIndentation: 7);
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task SimpleMultiLineNugget()
         {
-            var code = @"public class Default
+            var code =
+                @"public class Default
 {
     void PreRender()
     {
@@ -60,7 +72,8 @@ Console.WriteLine(5);}
     }
 }";
 
-            var expected = @"public class Default
+            var expected =
+                @"public class Default
 {
     void PreRender()
     {
@@ -77,10 +90,15 @@ Console.WriteLine(5);}
             await AssertFormatWithBaseIndentAsync(expected, code, baseIndentation: 3);
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task SimpleQueryWithinNugget()
         {
-            var code = @"public class Default
+            var code =
+                @"public class Default
 {
     void PreRender()
     {
@@ -94,7 +112,8 @@ var even =  from     n      in  numbers
     }
 }";
 
-            var expected = @"public class Default
+            var expected =
+                @"public class Default
 {
     void PreRender()
     {
@@ -111,10 +130,15 @@ var even =  from     n      in  numbers
             await AssertFormatWithBaseIndentAsync(expected, code, baseIndentation: 7);
         }
 
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task LambdaExpressionInNugget()
         {
-            var code = @"public class Default
+            var code =
+                @"public class Default
 {
     void PreRender()
     {
@@ -128,7 +152,8 @@ foreach(int i   in source.Where(x  =>  x  > 5))
     }
 }";
 
-            var expected = @"public class Default
+            var expected =
+                @"public class Default
 {
     void PreRender()
     {
@@ -146,10 +171,15 @@ foreach(int i   in source.Where(x  =>  x  > 5))
         }
 
         [WorkItem(576457, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/576457")]
-        [WpfFact, Trait(Traits.Feature, Traits.Features.Formatting), Trait(Traits.Feature, Traits.Features.Venus)]
+        [
+            WpfFact,
+            Trait(Traits.Feature, Traits.Features.Formatting),
+            Trait(Traits.Feature, Traits.Features.Venus)
+        ]
         public async Task StatementLambdaInNugget()
         {
-            var code = @"public class Default
+            var code =
+                @"public class Default
 {
     void PreRender()
     {
@@ -172,7 +202,8 @@ foreach(int i   in source.Where(x  =>  x  > 5))
     }
 }";
 
-            var expected = @"public class Default
+            var expected =
+                @"public class Default
 {
     void PreRender()
     {

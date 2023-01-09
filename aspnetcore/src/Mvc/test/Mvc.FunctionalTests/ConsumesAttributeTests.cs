@@ -6,12 +6,13 @@ using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class ConsumesAttributeTests : ConsumesAttributeTestsBase<BasicWebSite.StartupWithoutEndpointRouting>
+public class ConsumesAttributeTests
+    : ConsumesAttributeTestsBase<BasicWebSite.StartupWithoutEndpointRouting>
 {
-    public ConsumesAttributeTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
-        : base(fixture)
-    {
-    }
+    public ConsumesAttributeTests(
+        MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+    )
+        : base(fixture) { }
 
     [Fact]
     public override async Task HasEndpointMatch()

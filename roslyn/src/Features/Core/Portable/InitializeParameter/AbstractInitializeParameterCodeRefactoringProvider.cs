@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
         TTypeDeclarationSyntax,
         TParameterSyntax,
         TStatementSyntax,
-        TExpressionSyntax> : CodeRefactoringProvider
+        TExpressionSyntax
+    > : CodeRefactoringProvider
         where TTypeDeclarationSyntax : SyntaxNode
         where TParameterSyntax : SyntaxNode
         where TStatementSyntax : SyntaxNode
@@ -44,13 +45,17 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
         protected abstract bool SupportsRecords(ParseOptions options);
         protected abstract bool IsFunctionDeclaration(SyntaxNode node);
-        protected abstract bool IsImplicitConversion(Compilation compilation, ITypeSymbol source, ITypeSymbol destination);
+        protected abstract bool IsImplicitConversion(
+            Compilation compilation,
+            ITypeSymbol source,
+            ITypeSymbol destination
+        );
 
         protected abstract SyntaxNode GetBody(SyntaxNode functionDeclaration);
 
-        protected bool IsRecordDeclaration(SyntaxNode node)
-            => this.SyntaxFacts.SyntaxKinds.RecordDeclaration == node.RawKind ||
-               this.SyntaxFacts.SyntaxKinds.RecordStructDeclaration == node.RawKind;
+        protected bool IsRecordDeclaration(SyntaxNode node) =>
+            this.SyntaxFacts.SyntaxKinds.RecordDeclaration == node.RawKind
+            || this.SyntaxFacts.SyntaxKinds.RecordStructDeclaration == node.RawKind;
 
         protected abstract Task<ImmutableArray<CodeAction>> GetRefactoringsForAllParametersAsync(
             Document document,
@@ -60,7 +65,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             ImmutableArray<SyntaxNode> listOfParameterNodes,
             TextSpan parameterSpan,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         protected abstract Task<ImmutableArray<CodeAction>> GetRefactoringsForSingleParameterAsync(
             Document document,
@@ -70,11 +76,16 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             IMethodSymbol methodSymbol,
             IBlockOperation? blockStatementOpt,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         protected abstract void InsertStatement(
-            SyntaxEditor editor, SyntaxNode functionDeclaration, bool returnsVoid,
-            SyntaxNode? statementToAddAfter, TStatementSyntax statement);
+            SyntaxEditor editor,
+            SyntaxNode functionDeclaration,
+            bool returnsVoid,
+            SyntaxNode? statementToAddAfter,
+            TStatementSyntax statement
+        );
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -83,34 +94,50 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // TODO: One could try to retrieve TParameterList and then filter out parameters that intersect with
             // textSpan and use that as `parameterNodes`, where `selectedParameter` would be the first one.
 
-            var selectedParameter = await context.TryGetRelevantNodeAsync<TParameterSyntax>().ConfigureAwait(false);
+            var selectedParameter = await context
+                .TryGetRelevantNodeAsync<TParameterSyntax>()
+                .ConfigureAwait(false);
             if (selectedParameter == null)
                 return;
 
             var funcOrRecord =
-                selectedParameter.FirstAncestorOrSelf(_isFunctionDeclarationFunc) ??
-                selectedParameter.FirstAncestorOrSelf(_isRecordDeclarationFunc);
+                selectedParameter.FirstAncestorOrSelf(_isFunctionDeclarationFunc)
+                ?? selectedParameter.FirstAncestorOrSelf(_isRecordDeclarationFunc);
             if (funcOrRecord is null)
                 return;
 
-            if (IsRecordDeclaration(funcOrRecord) && !this.SupportsRecords(funcOrRecord.SyntaxTree.Options))
+            if (
+                IsRecordDeclaration(funcOrRecord)
+                && !this.SupportsRecords(funcOrRecord.SyntaxTree.Options)
+            )
                 return;
 
             var generator = SyntaxGenerator.GetGenerator(document);
             var parameterNodes = generator.GetParameters(funcOrRecord);
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
             // we can't just call GetDeclaredSymbol on functionDeclaration because it could an anonymous function,
             // so first we have to get the parameter symbol and then its containing method symbol
-            if (!TryGetParameterSymbol(selectedParameter, semanticModel, out var parameter, cancellationToken))
+            if (
+                !TryGetParameterSymbol(
+                    selectedParameter,
+                    semanticModel,
+                    out var parameter,
+                    cancellationToken
+                )
+            )
                 return;
 
             var methodSymbol = (IMethodSymbol)parameter.ContainingSymbol;
-            if (methodSymbol.IsAbstract ||
-                methodSymbol.IsExtern ||
-                methodSymbol.PartialImplementationPart != null ||
-                methodSymbol.ContainingType.TypeKind == TypeKind.Interface)
+            if (
+                methodSymbol.IsAbstract
+                || methodSymbol.IsExtern
+                || methodSymbol.PartialImplementationPart != null
+                || methodSymbol.ContainingType.TypeKind == TypeKind.Interface
+            )
             {
                 return;
             }
@@ -118,23 +145,53 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // We shouldn't offer a refactoring if the compilation doesn't contain the ArgumentNullException type,
             // as we use it later on in our computations.
             var argumentNullExceptionType = typeof(ArgumentNullException).FullName;
-            if (argumentNullExceptionType is null || semanticModel.Compilation.GetTypeByMetadataName(argumentNullExceptionType) is null)
+            if (
+                argumentNullExceptionType is null
+                || semanticModel.Compilation.GetTypeByMetadataName(argumentNullExceptionType)
+                    is null
+            )
                 return;
 
-            if (CanOfferRefactoring(funcOrRecord, semanticModel, syntaxFacts, cancellationToken, out var blockStatementOpt))
+            if (
+                CanOfferRefactoring(
+                    funcOrRecord,
+                    semanticModel,
+                    syntaxFacts,
+                    cancellationToken,
+                    out var blockStatementOpt
+                )
+            )
             {
-                // Ok.  Looks like the selected parameter could be refactored. Defer to subclass to 
+                // Ok.  Looks like the selected parameter could be refactored. Defer to subclass to
                 // actually determine if there are any viable refactorings here.
                 var refactorings = await GetRefactoringsForSingleParameterAsync(
-                    document, selectedParameter, parameter, funcOrRecord, methodSymbol, blockStatementOpt, context.Options, cancellationToken).ConfigureAwait(false);
+                        document,
+                        selectedParameter,
+                        parameter,
+                        funcOrRecord,
+                        methodSymbol,
+                        blockStatementOpt,
+                        context.Options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 context.RegisterRefactorings(refactorings, context.Span);
             }
 
             // List with parameterNodes that pass all checks
-            using var _ = ArrayBuilder<SyntaxNode>.GetInstance(out var listOfPotentiallyValidParametersNodes);
+            using var _ = ArrayBuilder<SyntaxNode>.GetInstance(
+                out var listOfPotentiallyValidParametersNodes
+            );
             foreach (var parameterNode in parameterNodes)
             {
-                if (!TryGetParameterSymbol(parameterNode, semanticModel, out parameter, cancellationToken))
+                if (
+                    !TryGetParameterSymbol(
+                        parameterNode,
+                        semanticModel,
+                        out parameter,
+                        cancellationToken
+                    )
+                )
                     return;
 
                 // Update the list of valid parameter nodes
@@ -143,11 +200,19 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
 
             if (listOfPotentiallyValidParametersNodes.Count > 1)
             {
-                // Looks like we can offer a refactoring for more than one parameter. Defer to subclass to 
+                // Looks like we can offer a refactoring for more than one parameter. Defer to subclass to
                 // actually determine if there are any viable refactorings here.
                 var refactorings = await GetRefactoringsForAllParametersAsync(
-                    document, funcOrRecord, methodSymbol, blockStatementOpt,
-                    listOfPotentiallyValidParametersNodes.ToImmutable(), selectedParameter.Span, context.Options, cancellationToken).ConfigureAwait(false);
+                        document,
+                        funcOrRecord,
+                        methodSymbol,
+                        blockStatementOpt,
+                        listOfPotentiallyValidParametersNodes.ToImmutable(),
+                        selectedParameter.Span,
+                        context.Options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 context.RegisterRefactorings(refactorings, context.Span);
             }
 
@@ -157,17 +222,23 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
                 SyntaxNode parameterNode,
                 SemanticModel semanticModel,
                 [NotNullWhen(true)] out IParameterSymbol? parameter,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                parameter = (IParameterSymbol?)semanticModel.GetDeclaredSymbol(parameterNode, cancellationToken);
+                parameter = (IParameterSymbol?)
+                    semanticModel.GetDeclaredSymbol(parameterNode, cancellationToken);
 
                 return parameter != null && parameter.Name != "";
             }
         }
 
         protected bool CanOfferRefactoring(
-            SyntaxNode funcOrRecord, SemanticModel semanticModel, ISyntaxFactsService syntaxFacts,
-            CancellationToken cancellationToken, out IBlockOperation? blockStatementOpt)
+            SyntaxNode funcOrRecord,
+            SemanticModel semanticModel,
+            ISyntaxFactsService syntaxFacts,
+            CancellationToken cancellationToken,
+            out IBlockOperation? blockStatementOpt
+        )
         {
             blockStatementOpt = null;
 
@@ -187,8 +258,11 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             // get it via `IAnonymousFunctionOperation.Body` instead of getting it directly from the body syntax.
 
             var operation = semanticModel.GetOperation(
-                syntaxFacts.IsAnonymousFunctionExpression(funcOrRecord) ? funcOrRecord : functionBody,
-                cancellationToken);
+                syntaxFacts.IsAnonymousFunctionExpression(funcOrRecord)
+                    ? funcOrRecord
+                    : functionBody,
+                cancellationToken
+            );
 
             if (operation == null)
             {
@@ -210,12 +284,15 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             return true;
         }
 
-        protected static bool IsParameterReference(IOperation operation, IParameterSymbol parameter)
-        => UnwrapImplicitConversion(operation) is IParameterReferenceOperation parameterReference &&
-           parameter.Equals(parameterReference.Parameter);
+        protected static bool IsParameterReference(
+            IOperation operation,
+            IParameterSymbol parameter
+        ) =>
+            UnwrapImplicitConversion(operation) is IParameterReferenceOperation parameterReference
+            && parameter.Equals(parameterReference.Parameter);
 
-        protected static IOperation UnwrapImplicitConversion(IOperation operation)
-            => operation is IConversionOperation conversion && conversion.IsImplicit
+        protected static IOperation UnwrapImplicitConversion(IOperation operation) =>
+            operation is IConversionOperation conversion && conversion.IsImplicit
                 ? conversion.Operand
                 : operation;
 
@@ -223,7 +300,8 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             SemanticModel semanticModel,
             IOperation condition,
             IParameterSymbol parameter,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             foreach (var child in condition.Syntax.DescendantNodes().OfType<TExpressionSyntax>())
             {
@@ -235,19 +313,31 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             return false;
         }
 
-        protected static bool IsFieldOrPropertyAssignment(IOperation statement, INamedTypeSymbol containingType, [NotNullWhen(true)] out IAssignmentOperation? assignmentExpression)
-            => IsFieldOrPropertyAssignment(statement, containingType, out assignmentExpression, out _);
+        protected static bool IsFieldOrPropertyAssignment(
+            IOperation statement,
+            INamedTypeSymbol containingType,
+            [NotNullWhen(true)] out IAssignmentOperation? assignmentExpression
+        ) =>
+            IsFieldOrPropertyAssignment(statement, containingType, out assignmentExpression, out _);
 
         protected static bool IsFieldOrPropertyAssignment(
-            IOperation statement, INamedTypeSymbol containingType,
+            IOperation statement,
+            INamedTypeSymbol containingType,
             [NotNullWhen(true)] out IAssignmentOperation? assignmentExpression,
-            [NotNullWhen(true)] out ISymbol? fieldOrProperty)
+            [NotNullWhen(true)] out ISymbol? fieldOrProperty
+        )
         {
-            if (statement is IExpressionStatementOperation expressionStatement &&
-                expressionStatement.Operation is IAssignmentOperation assignment)
+            if (
+                statement is IExpressionStatementOperation expressionStatement
+                && expressionStatement.Operation is IAssignmentOperation assignment
+            )
             {
                 assignmentExpression = assignment;
-                return IsFieldOrPropertyReference(assignmentExpression.Target, containingType, out fieldOrProperty);
+                return IsFieldOrPropertyReference(
+                    assignmentExpression.Target,
+                    containingType,
+                    out fieldOrProperty
+                );
             }
 
             fieldOrProperty = null;
@@ -255,18 +345,23 @@ namespace Microsoft.CodeAnalysis.InitializeParameter
             return false;
         }
 
-        protected static bool IsFieldOrPropertyReference(IOperation operation, INamedTypeSymbol containingType)
-            => IsFieldOrPropertyAssignment(operation, containingType, out _);
+        protected static bool IsFieldOrPropertyReference(
+            IOperation operation,
+            INamedTypeSymbol containingType
+        ) => IsFieldOrPropertyAssignment(operation, containingType, out _);
 
         protected static bool IsFieldOrPropertyReference(
-            IOperation? operation, INamedTypeSymbol containingType,
-            [NotNullWhen(true)] out ISymbol? fieldOrProperty)
+            IOperation? operation,
+            INamedTypeSymbol containingType,
+            [NotNullWhen(true)] out ISymbol? fieldOrProperty
+        )
         {
-            if (operation is IMemberReferenceOperation memberReference &&
-                memberReference.Member.ContainingType.Equals(containingType))
+            if (
+                operation is IMemberReferenceOperation memberReference
+                && memberReference.Member.ContainingType.Equals(containingType)
+            )
             {
-                if (memberReference.Member is IFieldSymbol or
-                    IPropertySymbol)
+                if (memberReference.Member is IFieldSymbol or IPropertySymbol)
                 {
                     fieldOrProperty = memberReference.Member;
                     return true;

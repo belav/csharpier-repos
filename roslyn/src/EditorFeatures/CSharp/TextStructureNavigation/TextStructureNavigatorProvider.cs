@@ -26,13 +26,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
         public TextStructureNavigatorProvider(
             ITextStructureNavigatorSelectorService selectorService,
             IContentTypeRegistryService contentTypeService,
-            IUIThreadOperationExecutor uIThreadOperationExecutor)
-            : base(selectorService, contentTypeService, uIThreadOperationExecutor)
-        {
-        }
+            IUIThreadOperationExecutor uIThreadOperationExecutor
+        )
+            : base(selectorService, contentTypeService, uIThreadOperationExecutor) { }
 
-        protected override bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia)
-            => trivia.IsRegularOrDocComment();
+        protected override bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia) =>
+            trivia.IsRegularOrDocComment();
 
         protected override bool IsWithinNaturalLanguage(SyntaxToken token, int position)
         {
@@ -41,7 +40,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
                 case SyntaxKind.StringLiteralToken:
                     // This, in combination with the override of GetExtentOfWordFromToken() below, treats the closing
                     // quote as a separate token.  This maintains behavior with VS2013.
-                    if (position == token.Span.End - 1 && token.Text.EndsWith("\"", StringComparison.Ordinal))
+                    if (
+                        position == token.Span.End - 1
+                        && token.Text.EndsWith("\"", StringComparison.Ordinal)
+                    )
                     {
                         return false;
                     }
@@ -60,15 +62,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
             return false;
         }
 
-        protected override TextExtent GetExtentOfWordFromToken(SyntaxToken token, SnapshotPoint position)
+        protected override TextExtent GetExtentOfWordFromToken(
+            SyntaxToken token,
+            SnapshotPoint position
+        )
         {
-            if (token.Kind() == SyntaxKind.StringLiteralToken && position.Position == token.Span.End - 1 && token.Text.EndsWith("\"", StringComparison.Ordinal))
+            if (
+                token.Kind() == SyntaxKind.StringLiteralToken
+                && position.Position == token.Span.End - 1
+                && token.Text.EndsWith("\"", StringComparison.Ordinal)
+            )
             {
                 // Special case to treat the closing quote of a string literal as a separate token.  This allows the
                 // cursor to stop during word navigation (Ctrl+LeftArrow, etc.) immediately before AND after the
                 // closing quote, just like it did in VS2013 and like it currently does for interpolated strings.
                 var span = new Span(position.Position, 1);
-                return new TextExtent(new SnapshotSpan(position.Snapshot, span), isSignificant: true);
+                return new TextExtent(
+                    new SnapshotSpan(position.Snapshot, span),
+                    isSignificant: true
+                );
             }
             else
             {

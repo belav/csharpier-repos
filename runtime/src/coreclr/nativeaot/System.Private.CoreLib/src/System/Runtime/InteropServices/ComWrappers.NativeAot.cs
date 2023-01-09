@@ -24,15 +24,43 @@ namespace System.Runtime.InteropServices
         private const ulong ComRefCountMask = 0x000000007fffffffUL;
 
         internal static IntPtr DefaultIUnknownVftblPtr { get; } = CreateDefaultIUnknownVftbl();
-        internal static IntPtr DefaultIReferenceTrackerTargetVftblPtr { get; } = CreateDefaultIReferenceTrackerTargetVftbl();
+        internal static IntPtr DefaultIReferenceTrackerTargetVftblPtr { get; } =
+            CreateDefaultIReferenceTrackerTargetVftbl();
 
-        internal static Guid IID_IUnknown = new Guid(0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
-        internal static Guid IID_IReferenceTrackerTarget = new Guid(0x64bd43f8, 0xbfee, 0x4ec4, 0xb7, 0xeb, 0x29, 0x35, 0x15, 0x8d, 0xae, 0x21);
+        internal static Guid IID_IUnknown = new Guid(
+            0x00000000,
+            0x0000,
+            0x0000,
+            0xc0,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x00,
+            0x46
+        );
+        internal static Guid IID_IReferenceTrackerTarget = new Guid(
+            0x64bd43f8,
+            0xbfee,
+            0x4ec4,
+            0xb7,
+            0xeb,
+            0x29,
+            0x35,
+            0x15,
+            0x8d,
+            0xae,
+            0x21
+        );
 
-        private readonly ConditionalWeakTable<object, ManagedObjectWrapperHolder> _ccwTable = new ConditionalWeakTable<object, ManagedObjectWrapperHolder>();
+        private readonly ConditionalWeakTable<object, ManagedObjectWrapperHolder> _ccwTable =
+            new ConditionalWeakTable<object, ManagedObjectWrapperHolder>();
         private readonly Lock _lock = new Lock();
-        private readonly Dictionary<IntPtr, GCHandle> _rcwCache = new Dictionary<IntPtr, GCHandle>();
-        private readonly ConditionalWeakTable<object, NativeObjectWrapper> _rcwTable = new ConditionalWeakTable<object, NativeObjectWrapper>();
+        private readonly Dictionary<IntPtr, GCHandle> _rcwCache =
+            new Dictionary<IntPtr, GCHandle>();
+        private readonly ConditionalWeakTable<object, NativeObjectWrapper> _rcwTable =
+            new ConditionalWeakTable<object, NativeObjectWrapper>();
 
         /// <summary>
         /// ABI for function dispatch of a COM interface.
@@ -51,7 +79,9 @@ namespace System.Runtime.InteropServices
                 return Unsafe.As<T>(RuntimeImports.RhHandleGet(comInstance->Target));
             }
 
-            internal static unsafe ManagedObjectWrapper* ToManagedObjectWrapper(ComInterfaceDispatch* dispatchPtr)
+            internal static unsafe ManagedObjectWrapper* ToManagedObjectWrapper(
+                ComInterfaceDispatch* dispatchPtr
+            )
             {
                 return ((InternalComInterfaceDispatch*)dispatchPtr)->_thisPtr;
             }
@@ -136,8 +166,7 @@ namespace System.Runtime.InteropServices
                 {
                     prev = RefCount;
                     curr = prev - TrackerRefCounter;
-                }
-                while (Interlocked.CompareExchange(ref RefCount, curr, prev) != prev);
+                } while (Interlocked.CompareExchange(ref RefCount, curr, prev) != prev);
 
                 // If we observe the destroy sentinel, then this release
                 // must destroy the wrapper.
@@ -240,7 +269,10 @@ namespace System.Runtime.InteropServices
             private void ResetFlag(CreateComInterfaceFlagsEx flag)
             {
                 int resetMask = ~(int)flag;
-                Interlocked.And(ref Unsafe.As<CreateComInterfaceFlagsEx, int>(ref Flags), resetMask);
+                Interlocked.And(
+                    ref Unsafe.As<CreateComInterfaceFlagsEx, int>(ref Flags),
+                    resetMask
+                );
             }
 
             private static uint GetTrackerCount(ulong c)
@@ -284,7 +316,11 @@ namespace System.Runtime.InteropServices
             private readonly ComWrappers _comWrappers;
             internal GCHandle _proxyHandle;
 
-            public NativeObjectWrapper(IntPtr externalComObject, ComWrappers comWrappers, object comProxy)
+            public NativeObjectWrapper(
+                IntPtr externalComObject,
+                ComWrappers comWrappers,
+                object comProxy
+            )
             {
                 _externalComObject = externalComObject;
                 _comWrappers = comWrappers;
@@ -325,7 +361,10 @@ namespace System.Runtime.InteropServices
         /// this <see cref="ComWrappers" /> instance, the previously created COM interface will be returned.
         /// If not, a new one will be created.
         /// </remarks>
-        public unsafe IntPtr GetOrCreateComInterfaceForObject(object instance, CreateComInterfaceFlags flags)
+        public unsafe IntPtr GetOrCreateComInterfaceForObject(
+            object instance,
+            CreateComInterfaceFlags flags
+        )
         {
             if (instance == null)
                 throw new ArgumentNullException(nameof(instance));
@@ -336,48 +375,70 @@ namespace System.Runtime.InteropServices
                 return ccwValue.ComIp;
             }
 
-            ccwValue = _ccwTable.GetValue(instance, (c) =>
-            {
-                ManagedObjectWrapper* value = CreateCCW(c, flags);
-                return new ManagedObjectWrapperHolder(value);
-            });
+            ccwValue = _ccwTable.GetValue(
+                instance,
+                (c) =>
+                {
+                    ManagedObjectWrapper* value = CreateCCW(c, flags);
+                    return new ManagedObjectWrapperHolder(value);
+                }
+            );
             return ccwValue.ComIp;
         }
 
-        private unsafe ManagedObjectWrapper* CreateCCW(object instance, CreateComInterfaceFlags flags)
+        private unsafe ManagedObjectWrapper* CreateCCW(
+            object instance,
+            CreateComInterfaceFlags flags
+        )
         {
-            ComInterfaceEntry* userDefined = ComputeVtables(instance, flags, out int userDefinedCount);
+            ComInterfaceEntry* userDefined = ComputeVtables(
+                instance,
+                flags,
+                out int userDefinedCount
+            );
 
             // Maximum number of runtime supplied vtables.
             Span<IntPtr> runtimeDefinedVtable = stackalloc IntPtr[4];
             int runtimeDefinedCount = 0;
 
             // Check if the caller will provide the IUnknown table.
-            if ((flags & CreateComInterfaceFlags.CallerDefinedIUnknown) == CreateComInterfaceFlags.None)
+            if (
+                (flags & CreateComInterfaceFlags.CallerDefinedIUnknown)
+                == CreateComInterfaceFlags.None
+            )
             {
                 runtimeDefinedVtable[runtimeDefinedCount++] = DefaultIUnknownVftblPtr;
             }
 
             if ((flags & CreateComInterfaceFlags.TrackerSupport) != 0)
             {
-                runtimeDefinedVtable[runtimeDefinedCount++] = DefaultIReferenceTrackerTargetVftblPtr;
+                runtimeDefinedVtable[runtimeDefinedCount++] =
+                    DefaultIReferenceTrackerTargetVftblPtr;
             }
 
             // Compute size for ManagedObjectWrapper instance.
             int totalDefinedCount = runtimeDefinedCount + userDefinedCount;
 
             // Allocate memory for the ManagedObjectWrapper.
-            IntPtr wrapperMem = (IntPtr)NativeMemory.Alloc(
-                (nuint)sizeof(ManagedObjectWrapper) + (nuint)totalDefinedCount * (nuint)sizeof(InternalComInterfaceDispatch));
+            IntPtr wrapperMem = (IntPtr)
+                NativeMemory.Alloc(
+                    (nuint)sizeof(ManagedObjectWrapper)
+                        + (nuint)totalDefinedCount * (nuint)sizeof(InternalComInterfaceDispatch)
+                );
 
             // Compute the dispatch section offset and ensure it is aligned.
             ManagedObjectWrapper* mow = (ManagedObjectWrapper*)wrapperMem;
 
             // Dispatches follow immediately after ManagedObjectWrapper
-            InternalComInterfaceDispatch* pDispatches = (InternalComInterfaceDispatch*)(wrapperMem + sizeof(ManagedObjectWrapper));
+            InternalComInterfaceDispatch* pDispatches = (InternalComInterfaceDispatch*)(
+                wrapperMem + sizeof(ManagedObjectWrapper)
+            );
             for (int i = 0; i < totalDefinedCount; i++)
             {
-                pDispatches[i].Vtable = (i < userDefinedCount) ? userDefined[i].Vtable : runtimeDefinedVtable[i - userDefinedCount];
+                pDispatches[i].Vtable =
+                    (i < userDefinedCount)
+                        ? userDefined[i].Vtable
+                        : runtimeDefinedVtable[i - userDefinedCount];
                 pDispatches[i]._thisPtr = mow;
             }
 
@@ -401,10 +462,21 @@ namespace System.Runtime.InteropServices
         /// using this <see cref="ComWrappers" /> instance, the previously created object will be returned.
         /// If not, a new one will be created.
         /// </remarks>
-        public object GetOrCreateObjectForComInstance(IntPtr externalComObject, CreateObjectFlags flags)
+        public object GetOrCreateObjectForComInstance(
+            IntPtr externalComObject,
+            CreateObjectFlags flags
+        )
         {
             object? obj;
-            if (!TryGetOrCreateObjectForComInstanceInternal(externalComObject, IntPtr.Zero, flags, null, out obj))
+            if (
+                !TryGetOrCreateObjectForComInstanceInternal(
+                    externalComObject,
+                    IntPtr.Zero,
+                    flags,
+                    null,
+                    out obj
+                )
+            )
                 throw new ArgumentNullException(nameof(externalComObject));
 
             return obj!;
@@ -420,9 +492,18 @@ namespace System.Runtime.InteropServices
         /// <remarks>
         /// If the <paramref name="wrapper"/> instance already has an associated external object a <see cref="System.NotSupportedException"/> will be thrown.
         /// </remarks>
-        public object GetOrRegisterObjectForComInstance(IntPtr externalComObject, CreateObjectFlags flags, object wrapper)
+        public object GetOrRegisterObjectForComInstance(
+            IntPtr externalComObject,
+            CreateObjectFlags flags,
+            object wrapper
+        )
         {
-            return GetOrRegisterObjectForComInstance(externalComObject, flags, wrapper, IntPtr.Zero);
+            return GetOrRegisterObjectForComInstance(
+                externalComObject,
+                flags,
+                wrapper,
+                IntPtr.Zero
+            );
         }
 
         /// <summary>
@@ -441,13 +522,26 @@ namespace System.Runtime.InteropServices
         ///
         /// If the <paramref name="wrapper"/> instance already has an associated external object a <see cref="System.NotSupportedException"/> will be thrown.
         /// </remarks>
-        public object GetOrRegisterObjectForComInstance(IntPtr externalComObject, CreateObjectFlags flags, object wrapper, IntPtr inner)
+        public object GetOrRegisterObjectForComInstance(
+            IntPtr externalComObject,
+            CreateObjectFlags flags,
+            object wrapper,
+            IntPtr inner
+        )
         {
             if (wrapper == null)
                 throw new ArgumentNullException(nameof(wrapper));
 
             object? obj;
-            if (!TryGetOrCreateObjectForComInstanceInternal(externalComObject, inner, flags, wrapper, out obj))
+            if (
+                !TryGetOrCreateObjectForComInstanceInternal(
+                    externalComObject,
+                    inner,
+                    flags,
+                    wrapper,
+                    out obj
+                )
+            )
                 throw new ArgumentNullException(nameof(externalComObject));
 
             return obj!;
@@ -480,7 +574,8 @@ namespace System.Runtime.InteropServices
             IntPtr innerMaybe,
             CreateObjectFlags flags,
             object? wrapperMaybe,
-            out object? retValue)
+            out object? retValue
+        )
         {
             if (externalComObject == IntPtr.Zero)
                 throw new ArgumentNullException(nameof(externalComObject));
@@ -534,7 +629,8 @@ namespace System.Runtime.InteropServices
                     NativeObjectWrapper wrapper = new NativeObjectWrapper(
                         externalComObject,
                         this,
-                        retValue);
+                        retValue
+                    );
                     _rcwTable.Add(retValue, wrapper);
                     _rcwCache.Add(externalComObject, wrapper._proxyHandle);
                 }
@@ -568,9 +664,18 @@ namespace System.Runtime.InteropServices
             if (instance == null)
                 throw new ArgumentNullException(nameof(instance));
 
-            if (null != Interlocked.CompareExchange(ref s_globalInstanceForTrackerSupport, instance, null))
+            if (
+                null
+                != Interlocked.CompareExchange(
+                    ref s_globalInstanceForTrackerSupport,
+                    instance,
+                    null
+                )
+            )
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ResetGlobalComWrappersInstance);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ResetGlobalComWrappersInstance
+                );
             }
         }
 
@@ -593,9 +698,14 @@ namespace System.Runtime.InteropServices
             if (instance == null)
                 throw new ArgumentNullException(nameof(instance));
 
-            if (null != Interlocked.CompareExchange(ref s_globalInstanceForMarshalling, instance, null))
+            if (
+                null
+                != Interlocked.CompareExchange(ref s_globalInstanceForMarshalling, instance, null)
+            )
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ResetGlobalComWrappersInstance);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ResetGlobalComWrappersInstance
+                );
             }
         }
 
@@ -605,9 +715,15 @@ namespace System.Runtime.InteropServices
         /// <param name="fpQueryInterface">Function pointer to QueryInterface.</param>
         /// <param name="fpAddRef">Function pointer to AddRef.</param>
         /// <param name="fpRelease">Function pointer to Release.</param>
-        protected internal static unsafe void GetIUnknownImpl(out IntPtr fpQueryInterface, out IntPtr fpAddRef, out IntPtr fpRelease)
+        protected internal static unsafe void GetIUnknownImpl(
+            out IntPtr fpQueryInterface,
+            out IntPtr fpAddRef,
+            out IntPtr fpRelease
+        )
         {
-            fpQueryInterface = (IntPtr)(delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)&ComWrappers.IUnknown_QueryInterface;
+            fpQueryInterface = (IntPtr)
+                (delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)
+                    &ComWrappers.IUnknown_QueryInterface;
             fpAddRef = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IUnknown_AddRef;
             fpRelease = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IUnknown_Release;
         }
@@ -616,17 +732,24 @@ namespace System.Runtime.InteropServices
         {
             if (s_globalInstanceForMarshalling == null)
             {
-                throw new NotSupportedException(SR.InvalidOperation_ComInteropRequireComWrapperInstance);
+                throw new NotSupportedException(
+                    SR.InvalidOperation_ComInteropRequireComWrapperInstance
+                );
             }
 
-            return s_globalInstanceForMarshalling.GetOrCreateComInterfaceForObject(instance, CreateComInterfaceFlags.None);
+            return s_globalInstanceForMarshalling.GetOrCreateComInterfaceForObject(
+                instance,
+                CreateComInterfaceFlags.None
+            );
         }
 
         internal static unsafe IntPtr ComInterfaceForObject(object instance, Guid targetIID)
         {
             IntPtr unknownPtr = ComInterfaceForObject(instance);
             IntPtr comObjectInterface;
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)unknownPtr);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)unknownPtr
+            );
             int resultCode = wrapper->QueryInterface(in targetIID, out comObjectInterface);
             // We no longer need IUnknownPtr, release reference
             Marshal.Release(unknownPtr);
@@ -642,30 +765,45 @@ namespace System.Runtime.InteropServices
         {
             if (s_globalInstanceForMarshalling == null)
             {
-                throw new NotSupportedException(SR.InvalidOperation_ComInteropRequireComWrapperInstance);
+                throw new NotSupportedException(
+                    SR.InvalidOperation_ComInteropRequireComWrapperInstance
+                );
             }
 
-            return s_globalInstanceForMarshalling.GetOrCreateObjectForComInstance(externalComObject, CreateObjectFlags.Unwrap);
+            return s_globalInstanceForMarshalling.GetOrCreateObjectForComInstance(
+                externalComObject,
+                CreateObjectFlags.Unwrap
+            );
         }
 
         [UnmanagedCallersOnly]
-        internal static unsafe int IUnknown_QueryInterface(IntPtr pThis, Guid* guid, IntPtr* ppObject)
+        internal static unsafe int IUnknown_QueryInterface(
+            IntPtr pThis,
+            Guid* guid,
+            IntPtr* ppObject
+        )
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->QueryInterface(in *guid, out *ppObject);
         }
 
         [UnmanagedCallersOnly]
         internal static unsafe uint IUnknown_AddRef(IntPtr pThis)
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->AddRef();
         }
 
         [UnmanagedCallersOnly]
         internal static unsafe uint IUnknown_Release(IntPtr pThis)
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             uint refcount = wrapper->Release();
             if (refcount == 0)
             {
@@ -676,57 +814,89 @@ namespace System.Runtime.InteropServices
         }
 
         [UnmanagedCallersOnly]
-        internal static unsafe int IReferenceTrackerTarget_QueryInterface(IntPtr pThis, Guid* guid, IntPtr* ppObject)
+        internal static unsafe int IReferenceTrackerTarget_QueryInterface(
+            IntPtr pThis,
+            Guid* guid,
+            IntPtr* ppObject
+        )
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->QueryInterface(in *guid, out *ppObject);
         }
 
         [UnmanagedCallersOnly]
         internal static unsafe uint IReferenceTrackerTarget_AddRefFromReferenceTracker(IntPtr pThis)
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->AddRefFromReferenceTracker();
         }
 
         [UnmanagedCallersOnly]
-        internal static unsafe uint IReferenceTrackerTarget_ReleaseFromReferenceTracker(IntPtr pThis)
+        internal static unsafe uint IReferenceTrackerTarget_ReleaseFromReferenceTracker(
+            IntPtr pThis
+        )
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->ReleaseFromReferenceTracker();
         }
 
         [UnmanagedCallersOnly]
         internal static unsafe uint IReferenceTrackerTarget_Peg(IntPtr pThis)
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->Peg();
         }
 
         [UnmanagedCallersOnly]
         internal static unsafe uint IReferenceTrackerTarget_Unpeg(IntPtr pThis)
         {
-            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper((ComInterfaceDispatch*)pThis);
+            ManagedObjectWrapper* wrapper = ComInterfaceDispatch.ToManagedObjectWrapper(
+                (ComInterfaceDispatch*)pThis
+            );
             return wrapper->Unpeg();
         }
 
         private static unsafe IntPtr CreateDefaultIUnknownVftbl()
         {
-            IntPtr* vftbl = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ComWrappers), 3 * sizeof(IntPtr));
+            IntPtr* vftbl = (IntPtr*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ComWrappers),
+                    3 * sizeof(IntPtr)
+                );
             GetIUnknownImpl(out vftbl[0], out vftbl[1], out vftbl[2]);
             return (IntPtr)vftbl;
         }
 
         private static unsafe IntPtr CreateDefaultIReferenceTrackerTargetVftbl()
         {
-            IntPtr* vftbl = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ComWrappers), 7 * sizeof(IntPtr));
-            vftbl[0] = (IntPtr)(delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)&ComWrappers.IReferenceTrackerTarget_QueryInterface;
+            IntPtr* vftbl = (IntPtr*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ComWrappers),
+                    7 * sizeof(IntPtr)
+                );
+            vftbl[0] = (IntPtr)
+                (delegate* unmanaged<IntPtr, Guid*, IntPtr*, int>)
+                    &ComWrappers.IReferenceTrackerTarget_QueryInterface;
             vftbl[1] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IUnknown_AddRef;
             vftbl[2] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IUnknown_Release;
-            vftbl[3] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IReferenceTrackerTarget_AddRefFromReferenceTracker;
-            vftbl[4] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IReferenceTrackerTarget_ReleaseFromReferenceTracker;
-            vftbl[5] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IReferenceTrackerTarget_Peg;
-            vftbl[6] = (IntPtr)(delegate* unmanaged<IntPtr, uint>)&ComWrappers.IReferenceTrackerTarget_Unpeg;
+            vftbl[3] = (IntPtr)
+                (delegate* unmanaged<IntPtr, uint>)
+                    &ComWrappers.IReferenceTrackerTarget_AddRefFromReferenceTracker;
+            vftbl[4] = (IntPtr)
+                (delegate* unmanaged<IntPtr, uint>)
+                    &ComWrappers.IReferenceTrackerTarget_ReleaseFromReferenceTracker;
+            vftbl[5] = (IntPtr)
+                (delegate* unmanaged<IntPtr, uint>)&ComWrappers.IReferenceTrackerTarget_Peg;
+            vftbl[6] = (IntPtr)
+                (delegate* unmanaged<IntPtr, uint>)&ComWrappers.IReferenceTrackerTarget_Unpeg;
             return (IntPtr)vftbl;
         }
     }

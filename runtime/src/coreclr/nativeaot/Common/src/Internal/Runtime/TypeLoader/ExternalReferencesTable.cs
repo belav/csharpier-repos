@@ -16,7 +16,14 @@ namespace Internal.Runtime.TypeLoader
             byte* pBlob;
             uint cbBlob;
 
-            if (!RuntimeAugments.FindBlob(typeManager, (int)blobId, (IntPtr)(void*)&pBlob, (IntPtr)(void*)&cbBlob))
+            if (
+                !RuntimeAugments.FindBlob(
+                    typeManager,
+                    (int)blobId,
+                    (IntPtr)(void*)&pBlob,
+                    (IntPtr)(void*)&cbBlob
+                )
+            )
             {
                 _elements = IntPtr.Zero;
                 _elementsCount = 0;
@@ -29,7 +36,10 @@ namespace Internal.Runtime.TypeLoader
             return true;
         }
 
-        public bool IsInitialized() { return _elements != IntPtr.Zero; }
+        public bool IsInitialized()
+        {
+            return _elements != IntPtr.Zero;
+        }
 
         /// <summary>
         /// Initialize ExternalReferencesTable using the CommonFixupsTable metadata blob on a given module.

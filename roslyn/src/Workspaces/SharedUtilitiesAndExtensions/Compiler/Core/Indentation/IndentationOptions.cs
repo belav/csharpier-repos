@@ -10,16 +10,23 @@ namespace Microsoft.CodeAnalysis.Indentation
 {
     [DataContract]
     internal readonly record struct IndentationOptions(
-        [property: DataMember(Order = 0)] SyntaxFormattingOptions FormattingOptions)
+        [property: DataMember(Order = 0)] SyntaxFormattingOptions FormattingOptions
+    )
     {
-        [DataMember(Order = 1)] public AutoFormattingOptions AutoFormattingOptions { get; init; } = AutoFormattingOptions.Default;
-        [DataMember(Order = 2)] public FormattingOptions2.IndentStyle IndentStyle { get; init; } = DefaultIndentStyle;
+        [DataMember(Order = 1)]
+        public AutoFormattingOptions AutoFormattingOptions { get; init; } =
+            AutoFormattingOptions.Default;
 
-        public const FormattingOptions2.IndentStyle DefaultIndentStyle = FormattingOptions2.IndentStyle.Smart;
+        [DataMember(Order = 2)]
+        public FormattingOptions2.IndentStyle IndentStyle { get; init; } = DefaultIndentStyle;
+
+        public const FormattingOptions2.IndentStyle DefaultIndentStyle = FormattingOptions2
+            .IndentStyle
+            .Smart;
 
 #if !CODE_STYLE
-        public static IndentationOptions GetDefault(LanguageServices languageServices)
-            => new(SyntaxFormattingOptions.GetDefault(languageServices));
+        public static IndentationOptions GetDefault(LanguageServices languageServices) =>
+            new(SyntaxFormattingOptions.GetDefault(languageServices));
 #endif
     }
 }

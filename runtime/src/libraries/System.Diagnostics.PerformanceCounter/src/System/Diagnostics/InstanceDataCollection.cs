@@ -14,7 +14,9 @@ namespace System.Diagnostics
     /// </summary>
     public class InstanceDataCollection : DictionaryBase
     {
-        [Obsolete("This constructor has been deprecated. Use System.Diagnostics.InstanceDataCollectionCollection.get_Item to get an instance of this collection instead.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use System.Diagnostics.InstanceDataCollectionCollection.get_Item to get an instance of this collection instead."
+        )]
         public InstanceDataCollection(string counterName)
         {
             ArgumentNullException.ThrowIfNull(counterName);
@@ -31,10 +33,7 @@ namespace System.Diagnostics
 
         public ICollection Values
         {
-            get
-            {
-                return Dictionary.Values;
-            }
+            get { return Dictionary.Values; }
         }
 
         public InstanceData this[string instanceName]

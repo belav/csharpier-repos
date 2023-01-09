@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(FindAllReferencesHandler)), Shared]
     [Method(LSP.Methods.TextDocumentReferencesName)]
-    internal class FindAllReferencesHandler : ILspServiceDocumentRequestHandler<LSP.ReferenceParams, LSP.VSInternalReferenceItem[]?>
+    internal class FindAllReferencesHandler
+        : ILspServiceDocumentRequestHandler<LSP.ReferenceParams, LSP.VSInternalReferenceItem[]?>
     {
         private readonly IMetadataAsSourceFileService _metadataAsSourceFileService;
         private readonly IAsynchronousOperationListener _asyncListener;
@@ -39,19 +40,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public FindAllReferencesHandler(
             IMetadataAsSourceFileService metadataAsSourceFileService,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _metadataAsSourceFileService = metadataAsSourceFileService;
-            _asyncListener = asynchronousOperationListenerProvider.GetListener(FeatureAttribute.LanguageServer);
+            _asyncListener = asynchronousOperationListenerProvider.GetListener(
+                FeatureAttribute.LanguageServer
+            );
             _globalOptions = globalOptions;
         }
 
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(ReferenceParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(ReferenceParams request) =>
+            request.TextDocument;
 
-        public async Task<LSP.VSInternalReferenceItem[]?> HandleRequestAsync(ReferenceParams referenceParams, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.VSInternalReferenceItem[]?> HandleRequestAsync(
+            ReferenceParams referenceParams,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var clientCapabilities = context.GetRequiredClientCapabilities();
             Debug.Assert(clientCapabilities.HasVisualStudioLspCapability());
@@ -61,17 +70,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Contract.ThrowIfNull(document);
             Contract.ThrowIfNull(workspace);
 
-            using var progress = BufferedProgress.Create<VSInternalReferenceItem>(referenceParams.PartialResultToken);
+            using var progress = BufferedProgress.Create<VSInternalReferenceItem>(
+                referenceParams.PartialResultToken
+            );
 
             var findUsagesService = document.GetRequiredLanguageService<IFindUsagesLSPService>();
-            var position = await document.GetPositionFromLinePositionAsync(
-                ProtocolConversions.PositionToLinePosition(referenceParams.Position), cancellationToken).ConfigureAwait(false);
+            var position = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(referenceParams.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             var findUsagesContext = new FindUsagesLSPContext(
-                progress, workspace, document, position, _metadataAsSourceFileService, _asyncListener, _globalOptions, cancellationToken);
+                progress,
+                workspace,
+                document,
+                position,
+                _metadataAsSourceFileService,
+                _asyncListener,
+                _globalOptions,
+                cancellationToken
+            );
 
             // Finds the references for the symbol at the specific position in the document, reporting them via streaming to the LSP client.
-            await findUsagesService.FindReferencesAsync(findUsagesContext, document, position, cancellationToken).ConfigureAwait(false);
+            await findUsagesService
+                .FindReferencesAsync(findUsagesContext, document, position, cancellationToken)
+                .ConfigureAwait(false);
             await findUsagesContext.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
 
             return progress.GetValues();

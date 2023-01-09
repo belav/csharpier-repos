@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis
         IEnumerable<INamespaceSymbol> GetNamespaceMembers();
 
         /// <summary>
-        /// Returns whether this namespace is the unnamed, global namespace that is 
+        /// Returns whether this namespace is the unnamed, global namespace that is
         /// at the root of all namespaces.
         /// </summary>
         bool IsGlobalNamespace { get; }

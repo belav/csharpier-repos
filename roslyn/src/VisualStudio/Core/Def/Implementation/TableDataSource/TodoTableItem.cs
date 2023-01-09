@@ -24,7 +24,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             string projectName,
             Guid projectGuid,
             string[] projectNames,
-            Guid[] projectGuids)
+            Guid[] projectGuids
+        )
             : base(workspace, projectName, projectGuid, projectNames, projectGuids)
         {
             Data = data;
@@ -32,24 +33,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         public static TodoTableItem Create(Workspace workspace, TodoCommentData data)
         {
-            GetProjectNameAndGuid(workspace, data.DocumentId.ProjectId, out var projectName, out var projectGuid);
-            return new TodoTableItem(workspace, data, projectName, projectGuid, projectNames: Array.Empty<string>(), projectGuids: Array.Empty<Guid>());
+            GetProjectNameAndGuid(
+                workspace,
+                data.DocumentId.ProjectId,
+                out var projectName,
+                out var projectGuid
+            );
+            return new TodoTableItem(
+                workspace,
+                data,
+                projectName,
+                projectGuid,
+                projectNames: Array.Empty<string>(),
+                projectGuids: Array.Empty<Guid>()
+            );
         }
 
-        public override TableItem WithAggregatedData(string[] projectNames, Guid[] projectGuids)
-            => new TodoTableItem(Workspace, Data, projectName: null, projectGuid: Guid.Empty, projectNames, projectGuids);
+        public override TableItem WithAggregatedData(string[] projectNames, Guid[] projectGuids) =>
+            new TodoTableItem(
+                Workspace,
+                Data,
+                projectName: null,
+                projectGuid: Guid.Empty,
+                projectNames,
+                projectGuids
+            );
 
-        public override DocumentId DocumentId
-            => Data.DocumentId;
+        public override DocumentId DocumentId => Data.DocumentId;
 
-        public override ProjectId ProjectId
-            => Data.DocumentId.ProjectId;
+        public override ProjectId ProjectId => Data.DocumentId.ProjectId;
 
-        public override LinePosition GetOriginalPosition()
-            => new(Data.OriginalLine, Data.OriginalColumn);
+        public override LinePosition GetOriginalPosition() =>
+            new(Data.OriginalLine, Data.OriginalColumn);
 
-        public override string GetOriginalFilePath()
-            => Data.OriginalFilePath;
+        public override string GetOriginalFilePath() => Data.OriginalFilePath;
 
         public override bool EqualsIgnoringLocation(TableItem other)
         {
@@ -65,23 +82,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         /// <summary>
         /// Used to group diagnostics that only differ in the project they come from.
-        /// We want to avoid displaying diagnostic multuple times when it is reported from 
+        /// We want to avoid displaying diagnostic multuple times when it is reported from
         /// multi-targeted projects and/or files linked to multiple projects.
         /// </summary>
-        internal sealed class GroupingComparer : IEqualityComparer<TodoCommentData>, IEqualityComparer<TodoTableItem>
+        internal sealed class GroupingComparer
+            : IEqualityComparer<TodoCommentData>,
+                IEqualityComparer<TodoTableItem>
         {
             public static readonly GroupingComparer Instance = new();
 
             public bool Equals(TodoCommentData left, TodoCommentData right)
             {
                 // We don't need to compare OriginalFilePath since TODO items are only aggregated within a single file.
-                return
-                    left.OriginalLine == right.OriginalLine &&
-                    left.OriginalColumn == right.OriginalColumn;
+                return left.OriginalLine == right.OriginalLine
+                    && left.OriginalColumn == right.OriginalColumn;
             }
 
-            public int GetHashCode(TodoCommentData data)
-                => Hash.Combine(data.OriginalLine, data.OriginalColumn);
+            public int GetHashCode(TodoCommentData data) =>
+                Hash.Combine(data.OriginalLine, data.OriginalColumn);
 
             public bool Equals(TodoTableItem left, TodoTableItem right)
             {
@@ -98,8 +116,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return Equals(left.Data, right.Data);
             }
 
-            public int GetHashCode(TodoTableItem item)
-                => GetHashCode(item.Data);
+            public int GetHashCode(TodoTableItem item) => GetHashCode(item.Data);
         }
     }
 }

@@ -18,13 +18,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicEncapsulateField : AbstractEditorTest
     {
         public BasicEncapsulateField(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(BasicEncapsulateField))
-        {
-        }
+            : base(instanceFactory, nameof(BasicEncapsulateField)) { }
 
         protected override string LanguageName => LanguageNames.VisualBasic;
 
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 Module Module1
         Public $$name As Integer? = 0
     Sub Main()
@@ -46,8 +45,12 @@ End Module";
             dialog.VerifyClosed(encapsulateField.DialogName);
             encapsulateField.Invoke();
             dialog.VerifyOpen(encapsulateField.DialogName, timeout: Helper.HangMitigatingTimeout);
-            dialog.ClickApplyAndWaitForFeature(encapsulateField.DialogName, FeatureAttribute.EncapsulateField);
-            VisualStudio.Editor.Verify.TextContains(@"    Private _name As Integer? = 0
+            dialog.ClickApplyAndWaitForFeature(
+                encapsulateField.DialogName,
+                FeatureAttribute.EncapsulateField
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"    Private _name As Integer? = 0
 
     Public Property Name As Integer?
         Get
@@ -56,7 +59,8 @@ End Module";
         Set(value As Integer?)
             _name = value
         End Set
-    End Property");
+    End Property"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -64,8 +68,13 @@ End Module";
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Encapsulate field: 'name' (and use property)", applyFix: true, blockUntilComplete: true);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'name' (and use property)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Private _name As Integer? = 0
 
@@ -81,7 +90,8 @@ Module Module1
     Sub Main()
         Name = 90
     End Sub
-End Module");
+End Module"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -89,8 +99,13 @@ End Module");
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Encapsulate field: 'name' (but still use field)", applyFix: true, blockUntilComplete: true);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'name' (but still use field)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 Module Module1
     Private _name As Integer? = 0
 
@@ -106,7 +121,8 @@ Module Module1
     Sub Main()
         name = 90
     End Sub
-End Module");
+End Module"
+            );
         }
     }
 }

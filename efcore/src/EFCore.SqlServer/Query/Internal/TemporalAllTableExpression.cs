@@ -22,18 +22,14 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public TemporalAllTableExpression(ITableBase table)
-            : base(table)
-        {
-        }
+            : base(table) { }
 
         private TemporalAllTableExpression(string name, string? schema, string? alias)
-            : base(name, schema, alias)
-        {
-        }
+            : base(name, schema, alias) { }
 
         /// <inheritdoc />
-        public override TableExpressionBase Clone()
-            => new TemporalAllTableExpression(Name, Schema, Alias);
+        public override TableExpressionBase Clone() =>
+            new TemporalAllTableExpression(Name, Schema, Alias);
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)

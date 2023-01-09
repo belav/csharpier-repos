@@ -45,14 +45,18 @@ internal static partial class Interop
         internal static IntPtr EvpSha512() =>
             s_evpSha512 != IntPtr.Zero ? s_evpSha512 : (s_evpSha512 = CryptoNative_EvpSha512());
 
-        internal static IntPtr HashAlgorithmToEvp(string hashAlgorithmId) => hashAlgorithmId switch
-        {
-            nameof(HashAlgorithmName.SHA1) => EvpSha1(),
-            nameof(HashAlgorithmName.SHA256) => EvpSha256(),
-            nameof(HashAlgorithmName.SHA384) => EvpSha384(),
-            nameof(HashAlgorithmName.SHA512) => EvpSha512(),
-            nameof(HashAlgorithmName.MD5) => EvpMd5(),
-            _ => throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId))
-        };
+        internal static IntPtr HashAlgorithmToEvp(string hashAlgorithmId) =>
+            hashAlgorithmId switch
+            {
+                nameof(HashAlgorithmName.SHA1) => EvpSha1(),
+                nameof(HashAlgorithmName.SHA256) => EvpSha256(),
+                nameof(HashAlgorithmName.SHA384) => EvpSha384(),
+                nameof(HashAlgorithmName.SHA512) => EvpSha512(),
+                nameof(HashAlgorithmName.MD5) => EvpMd5(),
+                _
+                    => throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithmId)
+                    )
+            };
     }
 }

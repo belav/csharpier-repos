@@ -19,30 +19,35 @@ namespace Microsoft.CSharp.RuntimeBinder
     internal sealed class DynamicBindingFailedException : Exception
     {
         public DynamicBindingFailedException()
-            : base()
-        {
-        }
+            : base() { }
 
         private DynamicBindingFailedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 
     internal sealed class GetMemberValueBinder : GetMemberBinder
     {
         public GetMemberValueBinder(string name, bool ignoreCase)
-            : base(name, ignoreCase)
-        {
-        }
+            : base(name, ignoreCase) { }
 
-        public override DynamicMetaObject FallbackGetMember(DynamicMetaObject self, DynamicMetaObject onBindingError)
+        public override DynamicMetaObject FallbackGetMember(
+            DynamicMetaObject self,
+            DynamicMetaObject onBindingError
+        )
         {
             if (onBindingError == null)
             {
                 var v = new List<DynamicMetaObject> { self };
-                var error = new DynamicMetaObject(System.Linq.Expressions.Expression.Throw(
-                    System.Linq.Expressions.Expression.Constant(new DynamicBindingFailedException(), typeof(Exception)), typeof(object)), System.Dynamic.BindingRestrictions.Combine(v));
+                var error = new DynamicMetaObject(
+                    System.Linq.Expressions.Expression.Throw(
+                        System.Linq.Expressions.Expression.Constant(
+                            new DynamicBindingFailedException(),
+                            typeof(Exception)
+                        ),
+                        typeof(object)
+                    ),
+                    System.Dynamic.BindingRestrictions.Combine(v)
+                );
                 return error;
             }
             return onBindingError;
@@ -106,7 +111,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
 
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        private static readonly ParameterExpression parameter = Expression.Parameter(typeof(object), "debug");
+        private static readonly ParameterExpression parameter = Expression.Parameter(
+            typeof(object),
+            "debug"
+        );
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public static object TryEvalBinaryOperators<T1, T2>(
@@ -115,7 +123,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpArgumentInfoFlags arg1Flags,
             CSharpArgumentInfoFlags arg2Flags,
             ExpressionType opKind,
-            Type accessibilityContext)
+            Type accessibilityContext
+        )
         {
             CSharpArgumentInfo arg1Info = CSharpArgumentInfo.Create(arg1Flags, null);
             CSharpArgumentInfo arg2Info = CSharpArgumentInfo.Create(arg2Flags, null);
@@ -125,37 +134,61 @@ namespace Microsoft.CSharp.RuntimeBinder
                 false, // isChecked
                 CSharpBinaryOperationFlags.None,
                 accessibilityContext,
-                new CSharpArgumentInfo[] { arg1Info, arg2Info });
+                new CSharpArgumentInfo[] { arg1Info, arg2Info }
+            );
 
             var site = CallSite<Func<CallSite, T1, T2, object>>.Create(binder);
             return site.Target(site, arg1, arg2);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static object TryEvalUnaryOperators<T>(T obj, ExpressionType oper, Type accessibilityContext)
+        public static object TryEvalUnaryOperators<T>(
+            T obj,
+            ExpressionType oper,
+            Type accessibilityContext
+        )
         {
             if (oper == ExpressionType.IsTrue || oper == ExpressionType.IsFalse)
             {
-                var trueFalseSite = CallSite<Func<CallSite, T, bool>>
-                    .Create(new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(oper,
+                var trueFalseSite = CallSite<Func<CallSite, T, bool>>.Create(
+                    new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(
+                        oper,
                         false,
                         accessibilityContext,
-                        new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }));
+                        new CSharpArgumentInfo[]
+                        {
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        }
+                    )
+                );
                 return trueFalseSite.Target(trueFalseSite, obj);
             }
 
-            var site = CallSite<Func<CallSite, T, object>>
-                .Create(new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(oper,
+            var site = CallSite<Func<CallSite, T, object>>.Create(
+                new Microsoft.CSharp.RuntimeBinder.CSharpUnaryOperationBinder(
+                    oper,
                     false,
                     accessibilityContext,
-                    new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }));
+                    new CSharpArgumentInfo[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    }
+                )
+            );
             return site.Target(site, obj);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static K TryEvalCast<T, K>(T obj, Type type, CSharpBinderFlags kind, Type accessibilityContext)
+        public static K TryEvalCast<T, K>(
+            T obj,
+            Type type,
+            CSharpBinderFlags kind,
+            Type accessibilityContext
+        )
         {
-            var site = CallSite<Func<CallSite, T, K>>.Create(Binder.Convert(kind, type, accessibilityContext));
+            var site = CallSite<Func<CallSite, T, K>>.Create(
+                Binder.Convert(kind, type, accessibilityContext)
+            );
             return site.Target(site, obj);
         }
 
@@ -168,10 +201,14 @@ namespace Microsoft.CSharp.RuntimeBinder
             Type[] argTypes,
             CSharpArgumentInfoFlags[] argFlags,
             out Type[] delegateSignatureTypes,
-            out CSharpArgumentInfo[] argInfos)
+            out CSharpArgumentInfo[] argInfos
+        )
         {
             int numberOfArguments = args.Length;
-            Debug.Assert((numberOfArguments == argTypes.Length) && (numberOfArguments == argFlags.Length), "Argument arrays size mismatch.");
+            Debug.Assert(
+                (numberOfArguments == argTypes.Length) && (numberOfArguments == argFlags.Length),
+                "Argument arrays size mismatch."
+            );
 
             delegateSignatureTypes = new Type[numberOfArguments + 2];
             delegateSignatureTypes[0] = typeof(CallSite);
@@ -204,7 +241,11 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <returns>Result of invoking the delegate.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private static object CreateDelegateAndInvoke(Type[] delegateSignatureTypes, CallSiteBinder binder, object[] args)
+        private static object CreateDelegateAndInvoke(
+            Type[] delegateSignatureTypes,
+            CallSiteBinder binder,
+            object[] args
+        )
         {
             Type delegateType = Expression.GetDelegateType(delegateSignatureTypes);
             var site = CallSite.Create(delegateType, binder);
@@ -236,7 +277,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             CSharpArgumentInfoFlags[] argFlags,
             string methodName,
             Type accessibilityContext,
-            Type[] typeArguments)
+            Type[] typeArguments
+        )
         {
             Type[] delegateSignatureTypes;
             CSharpArgumentInfo[] argInfos;
@@ -246,7 +288,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 argTypes,
                 argFlags,
                 out delegateSignatureTypes,
-                out argInfos);
+                out argInfos
+            );
 
             CallSiteBinder binder;
             if (string.IsNullOrEmpty(methodName))
@@ -255,7 +298,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 binder = new CSharpInvokeBinder(
                     CSharpCallFlags.ResultDiscarded,
                     accessibilityContext,
-                    argInfos);
+                    argInfos
+                );
             }
             else
             {
@@ -264,7 +308,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                     methodName,
                     accessibilityContext,
                     typeArguments,
-                    argInfos);
+                    argInfos
+                );
             }
 
             return CreateDelegateAndInvoke(delegateSignatureTypes, binder, methodArgs);
@@ -281,7 +326,12 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="isResultIndexed">Determines if COM binder should return a callable object.</param>
         /// <returns>Result of property invocation.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public static object TryGetMemberValue<T>(T obj, string propName, Type accessibilityContext, bool isResultIndexed)
+        public static object TryGetMemberValue<T>(
+            T obj,
+            string propName,
+            Type accessibilityContext,
+            bool isResultIndexed
+        )
         {
             // In most cases it's ok to use CSharpArgumentInfoFlags.None since target of property call is dynamic.
             // The only possible case when target is not dynamic but we still treat is as dynamic access is when
@@ -292,7 +342,11 @@ namespace Microsoft.CSharp.RuntimeBinder
                 propName,
                 isResultIndexed,
                 accessibilityContext,
-                new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) });
+                new CSharpArgumentInfo[]
+                {
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                }
+            );
 
             var site = CallSite<Func<CallSite, T, object>>.Create(binder);
             return site.Target(site, obj);
@@ -313,7 +367,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             object[] propArgs,
             Type[] argTypes,
             CSharpArgumentInfoFlags[] argFlags,
-            Type accessibilityContext)
+            Type accessibilityContext
+        )
         {
             Type[] delegateSignatureTypes;
             CSharpArgumentInfo[] argInfos;
@@ -323,7 +378,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 argTypes,
                 argFlags,
                 out delegateSignatureTypes,
-                out argInfos);
+                out argInfos
+            );
 
             CallSiteBinder binder = new CSharpGetIndexBinder(accessibilityContext, argInfos);
 
@@ -348,9 +404,13 @@ namespace Microsoft.CSharp.RuntimeBinder
             string propName,
             TValue value,
             CSharpArgumentInfoFlags valueFlags,
-            Type accessibilityContext)
+            Type accessibilityContext
+        )
         {
-            CSharpArgumentInfo targetArgInfo = CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null);
+            CSharpArgumentInfo targetArgInfo = CSharpArgumentInfo.Create(
+                CSharpArgumentInfoFlags.None,
+                null
+            );
             CSharpArgumentInfo valueArgInfo = CSharpArgumentInfo.Create(valueFlags, null);
 
             CSharpSetMemberBinder binder = new CSharpSetMemberBinder(
@@ -358,7 +418,8 @@ namespace Microsoft.CSharp.RuntimeBinder
                 false, // isCompoundAssignment
                 false, // isChecked
                 accessibilityContext,
-                new CSharpArgumentInfo[] { targetArgInfo, valueArgInfo });
+                new CSharpArgumentInfo[] { targetArgInfo, valueArgInfo }
+            );
 
             var site = CallSite<Func<CallSite, TObject, TValue, object>>.Create(binder);
             return site.Target(site, obj, value);
@@ -379,7 +440,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             object[] propArgs,
             Type[] argTypes,
             CSharpArgumentInfoFlags[] argFlags,
-            Type accessibilityContext)
+            Type accessibilityContext
+        )
         {
             Type[] delegateSignatureTypes;
             CSharpArgumentInfo[] argInfos;
@@ -389,9 +451,15 @@ namespace Microsoft.CSharp.RuntimeBinder
                 argTypes,
                 argFlags,
                 out delegateSignatureTypes,
-                out argInfos);
+                out argInfos
+            );
 
-            CallSiteBinder binder = new CSharpSetIndexBinder(/*isCompoundAssignment */ false, /* isChecked */ false, accessibilityContext, argInfos);
+            CallSiteBinder binder = new CSharpSetIndexBinder( /*isCompoundAssignment */
+                false, /* isChecked */
+                false,
+                accessibilityContext,
+                argInfos
+            );
 
             return CreateDelegateAndInvoke(delegateSignatureTypes, binder, propArgs);
         }
@@ -403,7 +471,9 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool ignoreCase = false;
             object value = null;
 
-            var site = CallSite<Func<CallSite, object, object>>.Create(new GetMemberValueBinder(name, ignoreCase));
+            var site = CallSite<Func<CallSite, object, object>>.Create(
+                new GetMemberValueBinder(name, ignoreCase)
+            );
 
             try
             {
@@ -428,7 +498,9 @@ namespace Microsoft.CSharp.RuntimeBinder
 
 #if ENABLECOMBINDER
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        private static readonly Type ComObjectType = Type.GetType("System.__ComObject, System.Private.CoreLib");
+        private static readonly Type ComObjectType = Type.GetType(
+            "System.__ComObject, System.Private.CoreLib"
+        );
 #endif
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -466,24 +538,17 @@ namespace Microsoft.CSharp.RuntimeBinder
         [Serializable]
         internal sealed class DynamicDebugViewEmptyException : Exception
         {
-            public DynamicDebugViewEmptyException()
-            {
-            }
+            public DynamicDebugViewEmptyException() { }
 
             private DynamicDebugViewEmptyException(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+                : base(info, context) { }
 
 #pragma warning disable CA1822
             // This property value is used by the debugger EE as the message
             // displayed when a dynamic object has no members.
             public string Empty
             {
-                get
-                {
-                    return SR.EmptyDynamicView;
-                }
+                get { return SR.EmptyDynamicView; }
             }
 #pragma warning restore CA1822
         }

@@ -34,7 +34,10 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 if (resolver == null)
                 {
-                    throw new ArgumentNullException(nameof(resolvers), SR.CombineOneOfResolversIsNull);
+                    throw new ArgumentNullException(
+                        nameof(resolvers),
+                        SR.CombineOneOfResolversIsNull
+                    );
                 }
             }
 

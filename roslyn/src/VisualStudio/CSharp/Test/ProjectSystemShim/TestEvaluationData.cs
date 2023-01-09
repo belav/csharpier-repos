@@ -22,8 +22,8 @@ internal sealed class TestEvaluationData : EvaluationData
         AssemblyName = assemblyName;
     }
 
-    public override string GetPropertyValue(string name)
-        => name switch
+    public override string GetPropertyValue(string name) =>
+        name switch
         {
             "MSBuildProjectFullPath" => ProjectFilePath,
             "TargetPath" => TargetPath,

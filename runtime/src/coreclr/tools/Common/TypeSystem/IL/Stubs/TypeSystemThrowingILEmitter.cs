@@ -16,7 +16,10 @@ namespace Internal.IL.Stubs
     /// </summary>
     internal static class TypeSystemThrowingILEmitter
     {
-        public static MethodIL EmitIL(MethodDesc methodThatShouldThrow, TypeSystemException exception)
+        public static MethodIL EmitIL(
+            MethodDesc methodThatShouldThrow,
+            TypeSystemException exception
+        )
         {
             TypeSystemContext context = methodThatShouldThrow.Context;
 
@@ -33,7 +36,10 @@ namespace Internal.IL.Stubs
 
                 if (helper.Signature.Length != exception.Arguments.Count + 1)
                 {
-                    helper = context.GetHelperEntryPoint("ThrowHelpers", "ThrowTypeLoadExceptionWithArgument");
+                    helper = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowTypeLoadExceptionWithArgument"
+                    );
                 }
             }
             else if (exceptionType == typeof(TypeSystemException.MissingFieldException))
@@ -55,20 +61,32 @@ namespace Internal.IL.Stubs
                 // arguments "exception" was initialized with.
                 //
 
-                helper = context.GetHelperEntryPoint("ThrowHelpers", "ThrowInvalidProgramException");
+                helper = context.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowInvalidProgramException"
+                );
 
                 if (helper.Signature.Length != exception.Arguments.Count + 1)
                 {
-                    helper = context.GetHelperEntryPoint("ThrowHelpers", "ThrowInvalidProgramExceptionWithArgument");
+                    helper = context.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowInvalidProgramExceptionWithArgument"
+                    );
                 }
             }
             else if (exceptionType == typeof(TypeSystemException.BadImageFormatException))
             {
-                helper = context.GetHelperEntryPoint("ThrowHelpers", "ThrowBadImageFormatException");
+                helper = context.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowBadImageFormatException"
+                );
             }
             else if (exceptionType == typeof(TypeSystemException.MarshalDirectiveException))
             {
-                helper = context.GetHelperEntryPoint("ThrowHelpers", "ThrowMarshalDirectiveException");
+                helper = context.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowMarshalDirectiveException"
+                );
             }
             else
             {

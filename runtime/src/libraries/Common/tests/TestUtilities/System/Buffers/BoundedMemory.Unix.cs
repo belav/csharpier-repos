@@ -7,7 +7,10 @@ namespace System.Buffers
 {
     public static unsafe partial class BoundedMemory
     {
-        private static UnixImplementation<T> AllocateWithoutDataPopulationUnix<T>(int elementCount, PoisonPagePlacement placement) where T : unmanaged
+        private static UnixImplementation<T> AllocateWithoutDataPopulationUnix<T>(
+            int elementCount,
+            PoisonPagePlacement placement
+        ) where T : unmanaged
         {
             // On non-Windows platforms, we don't yet have support for changing the permissions of individual pages.
             // We'll instead use AllocHGlobal / FreeHGlobal to carve out a r+w section of unmanaged memory.
@@ -99,7 +102,9 @@ namespace System.Buffers
                     try
                     {
                         _impl._handle.DangerousAddRef(ref refAdded);
-                        return new MemoryHandle((T*)_impl._handle.DangerousGetHandle() + elementIndex);
+                        return new MemoryHandle(
+                            (T*)_impl._handle.DangerousGetHandle() + elementIndex
+                        );
                     }
                     finally
                     {
@@ -121,9 +126,7 @@ namespace System.Buffers
         {
             // Called by P/Invoke when returning SafeHandles
             private AllocHGlobalHandle()
-                : base(IntPtr.Zero, ownsHandle: true)
-            {
-            }
+                : base(IntPtr.Zero, ownsHandle: true) { }
 
             internal static AllocHGlobalHandle Allocate(nint byteLength)
             {

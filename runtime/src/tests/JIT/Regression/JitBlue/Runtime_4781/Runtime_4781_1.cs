@@ -8,8 +8,8 @@ using System;
 
 class Bar
 {
-    public Bar() 
-    { 
+    public Bar()
+    {
         GC.Collect();
         GC.WaitForPendingFinalizers();
     }
@@ -22,13 +22,12 @@ static class Observer
 
 class Foo : IDisposable
 {
-    
     public Foo(Bar b)
     {
         Console.WriteLine($"new Foo");
     }
 
-    ~Foo() 
+    ~Foo()
     {
         Console.WriteLine($"~Foo");
         Observer.failed = true;

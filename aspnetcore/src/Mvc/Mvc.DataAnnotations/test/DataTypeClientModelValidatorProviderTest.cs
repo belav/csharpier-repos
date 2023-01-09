@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 public class DataTypeClientModelValidatorProviderTest
 {
-    private readonly IModelMetadataProvider _metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
+    private readonly IModelMetadataProvider _metadataProvider =
+        TestModelMetadataProvider.CreateDefaultProvider();
 
     [Theory]
     [InlineData(typeof(float))]
@@ -23,7 +24,10 @@ public class DataTypeClientModelValidatorProviderTest
         var provider = new NumericClientModelValidatorProvider();
         var metadata = _metadataProvider.GetMetadataForType(modelType);
 
-        var providerContext = new ClientValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ClientValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);
@@ -71,7 +75,10 @@ public class DataTypeClientModelValidatorProviderTest
         var provider = new NumericClientModelValidatorProvider();
         var metadata = _metadataProvider.GetMetadataForType(modelType);
 
-        var providerContext = new ClientValidatorProviderContext(metadata, GetValidatorItems(metadata));
+        var providerContext = new ClientValidatorProviderContext(
+            metadata,
+            GetValidatorItems(metadata)
+        );
 
         // Act
         provider.CreateValidators(providerContext);

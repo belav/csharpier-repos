@@ -14,7 +14,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 [RequiresUnreferencedCode(
-    "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+    "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+)]
 public class ObservableBackedBindingList<T> : SortableBindingList<T>
 {
     private bool _addingNewInstance;
@@ -32,15 +33,20 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [RequiresUnreferencedCode(
-        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code.")]
+        "BindingList raises ListChanged events with PropertyDescriptors. PropertyDescriptors require unreferenced code."
+    )]
     public ObservableBackedBindingList(ICollection<T> observableCollection)
         : base(observableCollection.ToList())
     {
         _observableCollection = observableCollection;
 
-        Check.DebugAssert(_observableCollection is INotifyCollectionChanged, "_observableCollection is not INotifyCollectionChanged");
+        Check.DebugAssert(
+            _observableCollection is INotifyCollectionChanged,
+            "_observableCollection is not INotifyCollectionChanged"
+        );
 
-        ((INotifyCollectionChanged)observableCollection).CollectionChanged += ObservableCollectionChanged;
+        ((INotifyCollectionChanged)observableCollection).CollectionChanged +=
+            ObservableCollectionChanged;
     }
 
     /// <summary>
@@ -64,9 +70,7 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
     /// </summary>
     public override void CancelNew(int itemIndex)
     {
-        if (itemIndex >= 0
-            && itemIndex < Count
-            && Equals(base[itemIndex], _addNewInstance))
+        if (itemIndex >= 0 && itemIndex < Count && Equals(base[itemIndex], _addNewInstance))
         {
             _cancelNewInstance = _addNewInstance;
             _addNewInstance = default;
@@ -100,9 +104,7 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
     /// </summary>
     public override void EndNew(int itemIndex)
     {
-        if (itemIndex >= 0
-            && itemIndex < Count
-            && Equals(base[itemIndex], _addNewInstance))
+        if (itemIndex >= 0 && itemIndex < Count && Equals(base[itemIndex], _addNewInstance))
         {
             AddToObservableCollection(_addNewInstance!);
             _addNewInstance = default;
@@ -121,9 +123,7 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
     protected override void InsertItem(int index, T item)
     {
         base.InsertItem(index, item);
-        if (!_addingNewInstance
-            && index >= 0
-            && index <= Count)
+        if (!_addingNewInstance && index >= 0 && index <= Count)
         {
             AddToObservableCollection(item);
         }
@@ -137,9 +137,7 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
     /// </summary>
     protected override void RemoveItem(int index)
     {
-        if (index >= 0
-            && index < Count
-            && Equals(base[index], _cancelNewInstance))
+        if (index >= 0 && index < Count && Equals(base[index], _cancelNewInstance))
         {
             _cancelNewInstance = default;
         }
@@ -162,8 +160,7 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
         var entity = base[index];
         base.SetItem(index, item);
 
-        if (index >= 0
-            && index < Count)
+        if (index >= 0 && index < Count)
         {
             // Check to see if the user is trying to set an item that is currently being added via AddNew
             // If so then the list should not continue the AddNew; but instead add the item
@@ -195,14 +192,15 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
                 // to prevent that.
                 _inCollectionChanged = true;
 
-                if (e.Action
-                    == NotifyCollectionChangedAction.Reset)
+                if (e.Action == NotifyCollectionChangedAction.Reset)
                 {
                     Clear();
                 }
 
-                if (e.Action == NotifyCollectionChangedAction.Remove
-                    || e.Action == NotifyCollectionChangedAction.Replace)
+                if (
+                    e.Action == NotifyCollectionChangedAction.Remove
+                    || e.Action == NotifyCollectionChangedAction.Replace
+                )
                 {
                     foreach (T entity in e.OldItems!)
                     {
@@ -210,8 +208,10 @@ public class ObservableBackedBindingList<T> : SortableBindingList<T>
                     }
                 }
 
-                if (e.Action == NotifyCollectionChangedAction.Add
-                    || e.Action == NotifyCollectionChangedAction.Replace)
+                if (
+                    e.Action == NotifyCollectionChangedAction.Add
+                    || e.Action == NotifyCollectionChangedAction.Replace
+                )
                 {
                     foreach (T entity in e.NewItems!)
                     {

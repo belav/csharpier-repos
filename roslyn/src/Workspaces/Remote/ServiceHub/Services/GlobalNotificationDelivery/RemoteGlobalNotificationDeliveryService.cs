@@ -10,30 +10,35 @@ using Microsoft.CodeAnalysis.Remote.Services;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteGlobalNotificationDeliveryService : BrokeredServiceBase, IRemoteGlobalNotificationDeliveryService
+    internal sealed class RemoteGlobalNotificationDeliveryService
+        : BrokeredServiceBase,
+            IRemoteGlobalNotificationDeliveryService
     {
         internal sealed class Factory : FactoryBase<IRemoteGlobalNotificationDeliveryService>
         {
-            protected override IRemoteGlobalNotificationDeliveryService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteGlobalNotificationDeliveryService(arguments);
+            protected override IRemoteGlobalNotificationDeliveryService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteGlobalNotificationDeliveryService(arguments);
         }
 
         public RemoteGlobalNotificationDeliveryService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         /// <summary>
         /// Remote API.
         /// </summary>
         public ValueTask OnGlobalOperationStartedAsync(CancellationToken cancellationToken)
         {
-            return RunServiceAsync(cancellationToken =>
-            {
-                var globalOperationNotificationService = GetGlobalOperationNotificationService();
-                globalOperationNotificationService?.OnStarted();
-                return default;
-            }, cancellationToken);
+            return RunServiceAsync(
+                cancellationToken =>
+                {
+                    var globalOperationNotificationService =
+                        GetGlobalOperationNotificationService();
+                    globalOperationNotificationService?.OnStarted();
+                    return default;
+                },
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -41,15 +46,20 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         public ValueTask OnGlobalOperationStoppedAsync(CancellationToken cancellationToken)
         {
-            return RunServiceAsync(cancellationToken =>
-            {
-                var globalOperationNotificationService = GetGlobalOperationNotificationService();
-                globalOperationNotificationService?.OnStopped();
-                return default;
-            }, cancellationToken);
+            return RunServiceAsync(
+                cancellationToken =>
+                {
+                    var globalOperationNotificationService =
+                        GetGlobalOperationNotificationService();
+                    globalOperationNotificationService?.OnStopped();
+                    return default;
+                },
+                cancellationToken
+            );
         }
 
-        private RemoteGlobalOperationNotificationService? GetGlobalOperationNotificationService()
-            => GetWorkspace().Services.GetService<IGlobalOperationNotificationService>() as RemoteGlobalOperationNotificationService;
+        private RemoteGlobalOperationNotificationService? GetGlobalOperationNotificationService() =>
+            GetWorkspace().Services.GetService<IGlobalOperationNotificationService>()
+            as RemoteGlobalOperationNotificationService;
     }
 }

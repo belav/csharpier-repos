@@ -9,9 +9,7 @@ namespace Microsoft.AspNetCore.Razor.Language.IntegrationTests;
 public class ExtensibleDirectiveTest : IntegrationTestBase
 {
     public ExtensibleDirectiveTest()
-        : base(generateBaselines: null)
-    {
-    }
+        : base(generateBaselines: null) { }
 
     [Fact]
     public void NamespaceToken()
@@ -21,7 +19,13 @@ public class ExtensibleDirectiveTest : IntegrationTestBase
         {
             builder.ConfigureDocumentClassifier();
 
-            builder.AddDirective(DirectiveDescriptor.CreateDirective("custom", DirectiveKind.SingleLine, b => b.AddNamespaceToken()));
+            builder.AddDirective(
+                DirectiveDescriptor.CreateDirective(
+                    "custom",
+                    DirectiveKind.SingleLine,
+                    b => b.AddNamespaceToken()
+                )
+            );
         });
 
         var projectItem = CreateProjectItemFromFile();

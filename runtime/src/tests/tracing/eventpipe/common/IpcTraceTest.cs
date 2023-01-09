@@ -22,6 +22,7 @@ namespace Tracing.Tests.Common
         public static Logger logger = new Logger();
         private TextWriter _log;
         private Stopwatch _sw;
+
         public Logger(TextWriter log = null)
         {
             _log = log ?? Console.Out;
@@ -32,7 +33,7 @@ namespace Tracing.Tests.Common
         {
             if (!_sw.IsRunning)
                 _sw.Start();
-            _log.WriteLine($"{_sw.Elapsed.TotalSeconds,5:f1}s: {message}");
+            _log.WriteLine($"{_sw.Elapsed.TotalSeconds, 5:f1}s: {message}");
         }
     }
 
@@ -86,9 +87,14 @@ namespace Tracing.Tests.Common
     // to synchronize.
     public sealed class SentinelEventSource : EventSource
     {
-        private SentinelEventSource() {}
+        private SentinelEventSource() { }
+
         public static SentinelEventSource Log = new SentinelEventSource();
-        public void SentinelEvent() { WriteEvent(1, "SentinelEvent"); }
+
+        public void SentinelEvent()
+        {
+            WriteEvent(1, "SentinelEvent");
+        }
     }
 
     public class IpcTraceTest
@@ -131,7 +137,8 @@ namespace Tracing.Tests.Common
             Action eventGeneratingAction,
             List<EventPipeProvider> providers,
             int circularBufferMB,
-            Func<EventPipeEventSource, Func<int>> optionalTraceValidator = null)
+            Func<EventPipeEventSource, Func<int>> optionalTraceValidator = null
+        )
         {
             _eventGeneratingAction = eventGeneratingAction;
             _expectedEventCounts = expectedEventCounts;
@@ -205,14 +212,22 @@ namespace Tracing.Tests.Common
             DiagnosticsClient client = new DiagnosticsClient(processId);
 #if DIAGNOSTICS_RUNTIME
             if (OperatingSystem.IsAndroid())
-                client = new DiagnosticsClient(new IpcEndpointConfig("127.0.0.1:9000", IpcEndpointConfig.TransportType.TcpSocket, IpcEndpointConfig.PortType.Listen));
+                client = new DiagnosticsClient(
+                    new IpcEndpointConfig(
+                        "127.0.0.1:9000",
+                        IpcEndpointConfig.TransportType.TcpSocket,
+                        IpcEndpointConfig.PortType.Listen
+                    )
+                );
 #endif
             var readerTask = new Task(() =>
             {
                 Logger.logger.Log("Connecting to EventPipe...");
                 try
                 {
-                    _eventPipeSession = client.StartEventPipeSession(_testProviders.Concat(_sentinelProviders));
+                    _eventPipeSession = client.StartEventPipeSession(
+                        _testProviders.Concat(_sentinelProviders)
+                    );
                 }
                 catch (DiagnosticsClientException ex)
                 {
@@ -237,19 +252,25 @@ namespace Tracing.Tests.Common
                                         Logger.logger.Log("Saw sentinel event");
                                     sentinelEventReceived.Set();
                                 }
-                                else if (_actualEventCounts.TryGetValue(eventData.ProviderName, out _))
+                                else if (
+                                    _actualEventCounts.TryGetValue(eventData.ProviderName, out _)
+                                )
                                 {
                                     _actualEventCounts[eventData.ProviderName]++;
                                 }
                                 else
                                 {
-                                    Logger.logger.Log($"Saw new provider '{eventData.ProviderName}'");
+                                    Logger.logger.Log(
+                                        $"Saw new provider '{eventData.ProviderName}'"
+                                    );
                                     _actualEventCounts[eventData.ProviderName] = 1;
                                 }
                             }
                             catch (Exception e)
                             {
-                                Logger.logger.Log("Exception in Dynamic.All callback " + e.ToString());
+                                Logger.logger.Log(
+                                    "Exception in Dynamic.All callback " + e.ToString()
+                                );
                             }
                         };
                         Logger.logger.Log("Dynamic.All callback registered");
@@ -268,7 +289,9 @@ namespace Tracing.Tests.Common
                         }
                         catch (Exception)
                         {
-                            Logger.logger.Log($"Exception thrown while reading; dumping culprit stream to disk...");
+                            Logger.logger.Log(
+                                $"Exception thrown while reading; dumping culprit stream to disk..."
+                            );
                             eventPipeStream.DumpStreamToDisk();
                             // rethrow it to fail the test
                             throw;
@@ -279,7 +302,8 @@ namespace Tracing.Tests.Common
                 }
             });
 
-            var waitSentinelEventTask = new Task(() => {
+            var waitSentinelEventTask = new Task(() =>
+            {
                 sentinelEventReceived.WaitOne();
             });
 
@@ -313,7 +337,9 @@ namespace Tracing.Tests.Common
                 {
                     if (!expectedCount.Validate(actualCount))
                     {
-                        return Fail($"Event count mismatch for provider \"{provider}\": expected {expectedCount}, but saw {actualCount}");
+                        return Fail(
+                            $"Event count mismatch for provider \"{provider}\": expected {expectedCount}, but saw {actualCount}"
+                        );
                     }
                 }
                 else
@@ -346,12 +372,27 @@ namespace Tracing.Tests.Common
         {
             if (!OperatingSystem.IsWindows())
             {
-                Func<(IEnumerable<IGrouping<int,FileInfo>>, List<int>)> getPidsAndSockets = () =>
+                Func<(IEnumerable<IGrouping<int, FileInfo>>, List<int>)> getPidsAndSockets = () =>
                 {
-                    IEnumerable<IGrouping<int,FileInfo>> currentIpcs = Directory.GetFiles(Path.GetTempPath(), "dotnet-diagnostic*")
-                        .Select(filename => new { pid = int.Parse(Regex.Match(filename, @"dotnet-diagnostic-(?<pid>\d+)").Groups["pid"].Value), fileInfo = new FileInfo(filename) })
+                    IEnumerable<IGrouping<int, FileInfo>> currentIpcs = Directory
+                        .GetFiles(Path.GetTempPath(), "dotnet-diagnostic*")
+                        .Select(
+                            filename =>
+                                new
+                                {
+                                    pid = int.Parse(
+                                        Regex
+                                            .Match(filename, @"dotnet-diagnostic-(?<pid>\d+)")
+                                            .Groups["pid"].Value
+                                    ),
+                                    fileInfo = new FileInfo(filename)
+                                }
+                        )
                         .GroupBy(fileInfos => fileInfos.pid, fileInfos => fileInfos.fileInfo);
-                    List<int> currentPids = System.Diagnostics.Process.GetProcesses().Select(pid => pid.Id).ToList();
+                    List<int> currentPids = System.Diagnostics.Process
+                        .GetProcesses()
+                        .Select(pid => pid.Id)
+                        .ToList();
                     return (currentIpcs, currentPids);
                 };
 
@@ -363,7 +404,9 @@ namespace Tracing.Tests.Common
                     {
                         foreach (FileInfo fi in ipc)
                         {
-                            Logger.logger.Log($"Attempting to delete the zombied pipe: {fi.FullName}");
+                            Logger.logger.Log(
+                                $"Attempting to delete the zombied pipe: {fi.FullName}"
+                            );
                             fi.Delete();
                             Logger.logger.Log($"Deleted");
                         }
@@ -373,10 +416,13 @@ namespace Tracing.Tests.Common
                         if (ipc.Count() > 1)
                         {
                             // delete zombied pipes except newest which is owned
-                            var duplicates = ipc.OrderBy(fileInfo => fileInfo.CreationTime.Ticks).SkipLast(1);
+                            var duplicates = ipc.OrderBy(fileInfo => fileInfo.CreationTime.Ticks)
+                                .SkipLast(1);
                             foreach (FileInfo fi in duplicates)
                             {
-                                Logger.logger.Log($"Attempting to delete the zombied pipe: {fi.FullName}");
+                                Logger.logger.Log(
+                                    $"Attempting to delete the zombied pipe: {fi.FullName}"
+                                );
                                 fi.Delete();
                             }
                         }
@@ -391,11 +437,18 @@ namespace Tracing.Tests.Common
             Dictionary<string, ExpectedEventCount> expectedEventCounts,
             Action eventGeneratingAction,
             List<EventPipeProvider> providers,
-            int circularBufferMB=1024,
-            Func<EventPipeEventSource, Func<int>> optionalTraceValidator = null)
+            int circularBufferMB = 1024,
+            Func<EventPipeEventSource, Func<int>> optionalTraceValidator = null
+        )
         {
             Logger.logger.Log("==TEST STARTING==");
-            var test = new IpcTraceTest(expectedEventCounts, eventGeneratingAction, providers, circularBufferMB, optionalTraceValidator);
+            var test = new IpcTraceTest(
+                expectedEventCounts,
+                eventGeneratingAction,
+                providers,
+                circularBufferMB,
+                optionalTraceValidator
+            );
             try
             {
                 var ret = test.Validate();

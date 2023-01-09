@@ -34,26 +34,35 @@ namespace System.Security.Cryptography.Hashing.Algorithms.Tests
         };
 
         public HmacSha1Tests()
-            : base(s_testKeys2202, s_testMacs2202)
-        {
-        }
+            : base(s_testKeys2202, s_testMacs2202) { }
 
         protected override int BlockSize => 64;
         protected override int MacSize => 20;
 
         protected override HMAC Create() => new HMACSHA1();
+
         protected override HashAlgorithm CreateHashAlgorithm() => SHA1.Create();
+
         protected override byte[] HashDataOneShot(byte[] key, byte[] source) =>
             HMACSHA1.HashData(key, source);
 
-        protected override byte[] HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source) =>
-            HMACSHA1.HashData(key, source);
+        protected override byte[] HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source
+        ) => HMACSHA1.HashData(key, source);
 
-        protected override int HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination) =>
-            HMACSHA1.HashData(key, source, destination);
+        protected override int HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        ) => HMACSHA1.HashData(key, source, destination);
 
-        protected override bool TryHashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int written) =>
-            HMACSHA1.TryHashData(key, source, destination, out written);
+        protected override bool TryHashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int written
+        ) => HMACSHA1.TryHashData(key, source, destination, out written);
 
         [Fact]
         public void HmacSha1_Byte_Constructors()

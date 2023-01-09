@@ -317,7 +317,7 @@ namespace Newtonsoft.Json.Tests.Linq
             v.AddAnnotation(version);
 
             o["Item1"] = v;
-            
+
             JObject o2 = (JObject)o.DeepClone();
             Assert.AreEqual("string!", o2.Annotation<string>());
             Assert.AreEqual(version, o2.Annotation<Version>());
@@ -441,15 +441,18 @@ namespace Newtonsoft.Json.Tests.Linq
         [Test]
         public void Example()
         {
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
                 'name': 'Bill G',
                 'age': 58,
                 'country': 'United States',
                 'employer': 'Microsoft'
-            }");
+            }"
+            );
 
             o.AddAnnotation(new HashSet<string>());
-            o.PropertyChanged += (sender, args) => o.Annotation<HashSet<string>>().Add(args.PropertyName);
+            o.PropertyChanged += (sender, args) =>
+                o.Annotation<HashSet<string>>().Add(args.PropertyName);
 
             o["age"] = 59;
             o["employer"] = "Bill & Melinda Gates Foundation";

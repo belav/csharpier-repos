@@ -12,6 +12,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp
     [Obsolete]
     internal static class FSharpEditorFeaturesResources
     {
-        public static string You_cannot_rename_this_element => EditorFeaturesResources.You_cannot_rename_this_element;
+        public static string You_cannot_rename_this_element =>
+            EditorFeaturesResources.You_cannot_rename_this_element;
     }
 }

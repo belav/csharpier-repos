@@ -23,10 +23,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     /// <summary>
     /// An <see cref="IOptionPersister"/> that syncs core language settings against the settings that exist for all languages
     /// in Visual Studio and whose backing store is provided by the shell. This includes things like default tab size, tabs vs. spaces, etc.
-    /// 
+    ///
     /// TODO: replace with free-threaded impl: https://github.com/dotnet/roslyn/issues/56815
     /// </summary>
-    internal sealed class LanguageSettingsPersister : ForegroundThreadAffinitizedObject, IVsTextManagerEvents4, IOptionPersister
+    internal sealed class LanguageSettingsPersister
+        : ForegroundThreadAffinitizedObject,
+            IVsTextManagerEvents4,
+            IOptionPersister
     {
         private readonly IVsTextManager4 _textManager;
         private readonly IGlobalOptionService _optionService;
@@ -50,18 +53,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public LanguageSettingsPersister(
             IThreadingContext threadingContext,
             IVsTextManager4 textManager,
-            IGlobalOptionService optionService)
+            IGlobalOptionService optionService
+        )
             : base(threadingContext, assertIsForeground: true)
         {
             _textManager = textManager;
             _optionService = optionService;
 
             // TODO: make this configurable
-            _languageMap = BidirectionalMap<string, Tuple<Guid>>.Empty.Add(LanguageNames.CSharp, Tuple.Create(Guids.CSharpLanguageServiceId))
-                                                               .Add(LanguageNames.VisualBasic, Tuple.Create(Guids.VisualBasicLanguageServiceId))
-                                                               .Add(InternalLanguageNames.TypeScript, Tuple.Create(new Guid("4a0dddb5-7a95-4fbf-97cc-616d07737a77")))
-                                                               .Add("F#", Tuple.Create(new Guid("BC6DD5A5-D4D6-4dab-A00D-A51242DBAF1B")))
-                                                               .Add("Xaml", Tuple.Create(new Guid("CD53C9A1-6BC2-412B-BE36-CC715ED8DD41")));
+            _languageMap = BidirectionalMap<string, Tuple<Guid>>.Empty
+                .Add(LanguageNames.CSharp, Tuple.Create(Guids.CSharpLanguageServiceId))
+                .Add(LanguageNames.VisualBasic, Tuple.Create(Guids.VisualBasicLanguageServiceId))
+                .Add(
+                    InternalLanguageNames.TypeScript,
+                    Tuple.Create(new Guid("4a0dddb5-7a95-4fbf-97cc-616d07737a77"))
+                )
+                .Add("F#", Tuple.Create(new Guid("BC6DD5A5-D4D6-4dab-A00D-A51242DBAF1B")))
+                .Add("Xaml", Tuple.Create(new Guid("CD53C9A1-6BC2-412B-BE36-CC715ED8DD41")));
 
             foreach (var languageGuid in _languageMap.Values)
             {
@@ -69,13 +77,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 languagePreferences[0].guidLang = languageGuid.Item1;
 
                 // The function can potentially fail if that language service isn't installed
-                if (ErrorHandler.Succeeded(_textManager.GetUserPreferences4(pViewPrefs: null, pLangPrefs: languagePreferences, pColorPrefs: null)))
+                if (
+                    ErrorHandler.Succeeded(
+                        _textManager.GetUserPreferences4(
+                            pViewPrefs: null,
+                            pLangPrefs: languagePreferences,
+                            pColorPrefs: null
+                        )
+                    )
+                )
                 {
                     RefreshLanguageSettings(languagePreferences);
                 }
             }
 
-            _textManagerEvents2Sink = ComEventSink.Advise<IVsTextManagerEvents4>(_textManager, this);
+            _textManagerEvents2Sink = ComEventSink.Advise<IVsTextManagerEvents4>(
+                _textManager,
+                this
+            );
         }
 
         private readonly IOption[] _supportedOptions = new IOption[]
@@ -93,7 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         int IVsTextManagerEvents4.OnUserPreferencesChanged4(
             VIEWPREFERENCES3[] viewPrefs,
             LANGPREFERENCES3[] langPrefs,
-            FONTCOLORPREFERENCES2[] colorPrefs)
+            FONTCOLORPREFERENCES2[] colorPrefs
+        )
         {
             if (langPrefs != null)
             {
@@ -166,7 +186,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        private static void SetValueForOption(IOption option, ref LANGPREFERENCES3 languagePreference, object value)
+        private static void SetValueForOption(
+            IOption option,
+            ref LANGPREFERENCES3 languagePreference,
+            object value
+        )
         {
             if (option == FormattingOptions.UseTabs)
             {
@@ -197,7 +221,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
             else if (option == CompletionOptions.Metadata.HideAdvancedMembers)
             {
-                languagePreference.fHideAdvancedAutoListMembers = Convert.ToUInt32((bool)value ? 1 : 0);
+                languagePreference.fHideAdvancedAutoListMembers = Convert.ToUInt32(
+                    (bool)value ? 1 : 0
+                );
             }
             else if (option == CompletionOptions.Metadata.TriggerOnTyping)
             {
@@ -222,7 +248,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             // This particular serializer is a bit strange, since we have to initially read things out on the UI thread.
             // Therefore, we refresh the values in the constructor, meaning that this should never get called for our values.
 
-            Contract.ThrowIfTrue(_supportedOptions.Contains(optionKey.Option) && _languageMap.ContainsKey(optionKey.Language));
+            Contract.ThrowIfTrue(
+                _supportedOptions.Contains(optionKey.Option)
+                    && _languageMap.ContainsKey(optionKey.Language)
+            );
 
             value = null;
             return false;
@@ -242,7 +271,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             var languagePreferences = new LANGPREFERENCES3[1];
             languagePreferences[0].guidLang = languageServiceGuid.Item1;
-            Marshal.ThrowExceptionForHR(_textManager.GetUserPreferences4(null, languagePreferences, null));
+            Marshal.ThrowExceptionForHR(
+                _textManager.GetUserPreferences4(null, languagePreferences, null)
+            );
 
             SetValueForOption(optionKey.Option, ref languagePreferences[0], value);
             _ = SetUserPreferencesMaybeAsync(languagePreferences);
@@ -254,7 +285,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         private async Task SetUserPreferencesMaybeAsync(LANGPREFERENCES3[] languagePreferences)
         {
             await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-            Marshal.ThrowExceptionForHR(_textManager.SetUserPreferences4(pViewPrefs: null, pLangPrefs: languagePreferences, pColorPrefs: null));
+            Marshal.ThrowExceptionForHR(
+                _textManager.SetUserPreferences4(
+                    pViewPrefs: null,
+                    pLangPrefs: languagePreferences,
+                    pColorPrefs: null
+                )
+            );
         }
     }
 }

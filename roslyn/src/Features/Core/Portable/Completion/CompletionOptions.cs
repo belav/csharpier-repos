@@ -31,15 +31,17 @@ namespace Microsoft.CodeAnalysis.Completion
         public bool ShowXmlDocCommentCompletion { get; init; } = true;
         public bool? ShowNewSnippetExperience { get; init; } = null;
         public bool SnippetCompletion { get; init; } = true;
-        public ExpandedCompletionMode ExpandedCompletionBehavior { get; init; } = ExpandedCompletionMode.AllItems;
+        public ExpandedCompletionMode ExpandedCompletionBehavior { get; init; } =
+            ExpandedCompletionMode.AllItems;
         public NamingStylePreferences? NamingStyleFallbackOptions { get; init; } = null;
 
         public static readonly CompletionOptions Default = new();
 
-        public RecommendationServiceOptions ToRecommendationServiceOptions()
-            => new(
+        public RecommendationServiceOptions ToRecommendationServiceOptions() =>
+            new(
                 FilterOutOfScopeLocals: FilterOutOfScopeLocals,
-                HideAdvancedMembers: HideAdvancedMembers);
+                HideAdvancedMembers: HideAdvancedMembers
+            );
 
         /// <summary>
         /// Whether items from unimported namespaces should be included in the completion list.
@@ -48,7 +50,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         public bool ShouldShowItemsFromUnimportedNamespaces()
         {
-            // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user. 
+            // Don't trigger import completion if the option value is "default" and the experiment is disabled for the user.
             return ShowItemsFromUnimportedNamespaces ?? TypeImportCompletion;
         }
 
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Completion
         {
             // Will be removed once semantic snippets will be added to razor.
             var solution = document.Project.Solution;
-            var documentSupportsFeatureService = solution.Services.GetRequiredService<IDocumentSupportsFeatureService>();
+            var documentSupportsFeatureService =
+                solution.Services.GetRequiredService<IDocumentSupportsFeatureService>();
             if (!documentSupportsFeatureService.SupportsSemanticSnippets(document))
             {
                 return false;
@@ -72,7 +75,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 return false;
             }
 
-            // Don't trigger snippet completion if the option value is "default" and the experiment is disabled for the user. 
+            // Don't trigger snippet completion if the option value is "default" and the experiment is disabled for the user.
             return ShowNewSnippetExperience ?? SnippetCompletion;
         }
     }

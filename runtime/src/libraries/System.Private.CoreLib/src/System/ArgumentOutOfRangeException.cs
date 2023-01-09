@@ -20,7 +20,9 @@ namespace System
     // The ArgumentOutOfRangeException is thrown when an argument
     // is outside the legal range for that argument.
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ArgumentOutOfRangeException : ArgumentException
     {
         private readonly object? _actualValue;
@@ -77,7 +79,10 @@ namespace System
                 string s = base.Message;
                 if (_actualValue != null)
                 {
-                    string valueMessage = SR.Format(SR.ArgumentOutOfRange_ActualValue, _actualValue);
+                    string valueMessage = SR.Format(
+                        SR.ArgumentOutOfRange_ActualValue,
+                        _actualValue
+                    );
                     if (s == null)
                         return valueMessage;
                     return s + Environment.NewLineConst + valueMessage;
@@ -92,50 +97,80 @@ namespace System
         [DoesNotReturn]
         private static void ThrowZero<T>(string? paramName, T value)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeNonZero, paramName));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeNonZero, paramName)
+            );
         }
 
         [DoesNotReturn]
         private static void ThrowNegative<T>(string? paramName, T value)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeNonNegative, paramName));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeNonNegative, paramName)
+            );
         }
 
         [DoesNotReturn]
         private static void ThrowNegativeOrZero<T>(string? paramName, T value)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeNonNegativeNonZero, paramName));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeNonNegativeNonZero, paramName)
+            );
         }
 
         [DoesNotReturn]
         private static void ThrowGreater<T>(string? paramName, T value, T other)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeLessOrEqual, paramName, other));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeLessOrEqual, paramName, other)
+            );
         }
 
         [DoesNotReturn]
         private static void ThrowGreaterEqual<T>(string? paramName, T value, T other)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeLess, paramName, other));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeLess, paramName, other)
+            );
         }
 
         [DoesNotReturn]
         private static void ThrowLess<T>(string? paramName, T value, T other)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeGreaterOrEqual, paramName, other));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeGreaterOrEqual, paramName, other)
+            );
         }
 
         [DoesNotReturn]
         private static void ThrowLessEqual<T>(string? paramName, T value, T other)
         {
-            throw new ArgumentOutOfRangeException(paramName, value, SR.Format(SR.ArgumentOutOfRange_Generic_MustBeGreater, paramName, other));
+            throw new ArgumentOutOfRangeException(
+                paramName,
+                value,
+                SR.Format(SR.ArgumentOutOfRange_Generic_MustBeGreater, paramName, other)
+            );
         }
 
         /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if <paramref name="value"/> is zero.</summary>
         /// <param name="value">The argument to validate as non-zero.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfZero<T>(T value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : INumberBase<T>
+        public static void ThrowIfZero<T>(
+            T value,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : INumberBase<T>
         {
             if (T.IsZero(value))
                 ThrowZero(paramName, value);
@@ -144,8 +179,10 @@ namespace System
         /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if <paramref name="value"/> is negative.</summary>
         /// <param name="value">The argument to validate as non-negative.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfNegative<T>(T value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : INumberBase<T>
+        public static void ThrowIfNegative<T>(
+            T value,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : INumberBase<T>
         {
             if (T.IsNegative(value))
                 ThrowNegative(paramName, value);
@@ -154,8 +191,10 @@ namespace System
         /// <summary>Throws an <see cref="ArgumentOutOfRangeException"/> if <paramref name="value"/> is negative or zero.</summary>
         /// <param name="value">The argument to validate as non-zero or non-negative.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfNegativeOrZero<T>(T value, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : INumberBase<T>
+        public static void ThrowIfNegativeOrZero<T>(
+            T value,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : INumberBase<T>
         {
             if (T.IsNegative(value) || T.IsZero(value))
                 ThrowNegativeOrZero(paramName, value);
@@ -165,8 +204,11 @@ namespace System
         /// <param name="value">The argument to validate as less or equal than <paramref name="other"/>.</param>
         /// <param name="other">The value to compare with <paramref name="value"/>.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfGreaterThan<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : IComparable<T>
+        public static void ThrowIfGreaterThan<T>(
+            T value,
+            T other,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : IComparable<T>
         {
             if (value.CompareTo(other) > 0)
                 ThrowGreater(paramName, value, other);
@@ -176,8 +218,11 @@ namespace System
         /// <param name="value">The argument to validate as less than <paramref name="other"/>.</param>
         /// <param name="other">The value to compare with <paramref name="value"/>.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfGreaterThanOrEqual<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : IComparable<T>
+        public static void ThrowIfGreaterThanOrEqual<T>(
+            T value,
+            T other,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : IComparable<T>
         {
             if (value.CompareTo(other) >= 0)
                 ThrowGreaterEqual(paramName, value, other);
@@ -187,8 +232,11 @@ namespace System
         /// <param name="value">The argument to validate as greatar than or equal than <paramref name="other"/>.</param>
         /// <param name="other">The value to compare with <paramref name="value"/>.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfLessThan<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : IComparable<T>
+        public static void ThrowIfLessThan<T>(
+            T value,
+            T other,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : IComparable<T>
         {
             if (value.CompareTo(other) < 0)
                 ThrowLess(paramName, value, other);
@@ -198,8 +246,11 @@ namespace System
         /// <param name="value">The argument to validate as greatar than than <paramref name="other"/>.</param>
         /// <param name="other">The value to compare with <paramref name="value"/>.</param>
         /// <param name="paramName">The name of the parameter with which <paramref name="value"/> corresponds.</param>
-        public static void ThrowIfLessThanOrEqual<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
-            where T : IComparable<T>
+        public static void ThrowIfLessThanOrEqual<T>(
+            T value,
+            T other,
+            [CallerArgumentExpression(nameof(value))] string? paramName = null
+        ) where T : IComparable<T>
         {
             if (value.CompareTo(other) <= 0)
                 ThrowLessEqual(paramName, value, other);

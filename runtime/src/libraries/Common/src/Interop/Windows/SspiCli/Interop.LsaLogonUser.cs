@@ -26,6 +26,6 @@ internal static partial class Interop
             out SafeAccessTokenHandle Token,
             out QUOTA_LIMITS Quotas,
             out int SubStatus
-            );
+        );
     }
 }

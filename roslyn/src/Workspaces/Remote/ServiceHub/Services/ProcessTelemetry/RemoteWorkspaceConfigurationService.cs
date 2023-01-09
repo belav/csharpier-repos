@@ -18,15 +18,13 @@ namespace Microsoft.CodeAnalysis.Host
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteWorkspaceConfigurationService()
-        {
-        }
+        public RemoteWorkspaceConfigurationService() { }
 
         /// <summary>
         /// Returns default values until the options are initialized.
         /// </summary>
-        public WorkspaceConfigurationOptions Options
-            => _options ?? WorkspaceConfigurationOptions.RemoteDefault;
+        public WorkspaceConfigurationOptions Options =>
+            _options ?? WorkspaceConfigurationOptions.RemoteDefault;
 
         public void InitializeOptions(WorkspaceConfigurationOptions options)
         {

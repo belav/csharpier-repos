@@ -11,7 +11,8 @@ public class CompilationFeatureDetectorTest
     public async Task DetectFeaturesAsync_FindsNoFeatures()
     {
         // Arrange
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTest
@@ -32,7 +33,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         var compilation = TestCompilation.Create(source);
         var symbols = new StartupSymbols(compilation);
 
-        var type = (INamedTypeSymbol)compilation.GetSymbolsWithName("StartupWithNoFeatures").Single();
+        var type = (INamedTypeSymbol)
+            compilation.GetSymbolsWithName("StartupWithNoFeatures").Single();
         Assert.True(StartupFacts.IsStartupClass(symbols, type));
 
         // Act
@@ -45,7 +47,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
     [Fact]
     public async Task DetectFeatureAsync_StartupWithMapHub_FindsSignalR()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.SignalR;
 
@@ -80,13 +83,13 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
 
         // Assert
         Assert.Collection(features, f => Assert.Equal(WellKnownFeatures.SignalR, f));
-
     }
 
     [Fact]
     public async Task DetectFeatureAsync_StartupWithMapBlazorHub_FindsSignalR()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Builder;
 
 namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTest
@@ -112,7 +115,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
         var compilation = TestCompilation.Create(source);
         var symbols = new StartupSymbols(compilation);
 
-        var type = (INamedTypeSymbol)compilation.GetSymbolsWithName("StartupWithMapBlazorHub").Single();
+        var type = (INamedTypeSymbol)
+            compilation.GetSymbolsWithName("StartupWithMapBlazorHub").Single();
         Assert.True(StartupFacts.IsStartupClass(symbols, type));
 
         // Act
@@ -120,6 +124,5 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.CompilationFeatureDetectorTes
 
         // Assert
         Assert.Collection(features, f => Assert.Equal(WellKnownFeatures.SignalR, f));
-
     }
 }

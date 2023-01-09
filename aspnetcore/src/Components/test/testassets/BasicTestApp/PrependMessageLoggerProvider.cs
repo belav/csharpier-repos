@@ -49,14 +49,23 @@ internal class PrependMessageLoggerProvider : ILoggerProvider
             _underlyingLogger = underlyingLogger;
         }
 
-        public IDisposable BeginScope<TState>(TState state)
-            => _underlyingLogger.BeginScope(state);
+        public IDisposable BeginScope<TState>(TState state) => _underlyingLogger.BeginScope(state);
 
-        public bool IsEnabled(LogLevel logLevel)
-            => _underlyingLogger.IsEnabled(logLevel);
+        public bool IsEnabled(LogLevel logLevel) => _underlyingLogger.IsEnabled(logLevel);
 
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-            => _underlyingLogger.Log(logLevel, eventId, state, exception,
-                (state, exception) => $"[{_message}] {formatter(state, exception)}");
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) =>
+            _underlyingLogger.Log(
+                logLevel,
+                eventId,
+                state,
+                exception,
+                (state, exception) => $"[{_message}] {formatter(state, exception)}"
+            );
     }
 }

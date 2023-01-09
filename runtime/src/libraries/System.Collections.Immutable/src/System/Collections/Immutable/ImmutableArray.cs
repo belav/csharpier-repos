@@ -272,7 +272,10 @@ namespace System.Collections.Immutable
         /// <see cref="ImmutableArray{T}"/>, where a mapping function needs to be applied to each element from
         /// the source array.
         /// </remarks>
-        public static ImmutableArray<TResult> CreateRange<TSource, TResult>(ImmutableArray<TSource> items, Func<TSource, TResult> selector)
+        public static ImmutableArray<TResult> CreateRange<TSource, TResult>(
+            ImmutableArray<TSource> items,
+            Func<TSource, TResult> selector
+        )
         {
             Requires.NotNull(selector, nameof(selector));
 
@@ -304,7 +307,12 @@ namespace System.Collections.Immutable
         /// <see cref="ImmutableArray{T}"/>, where a mapping function needs to be applied to each element from the source array
         /// included in the resulting array.
         /// </remarks>
-        public static ImmutableArray<TResult> CreateRange<TSource, TResult>(ImmutableArray<TSource> items, int start, int length, Func<TSource, TResult> selector)
+        public static ImmutableArray<TResult> CreateRange<TSource, TResult>(
+            ImmutableArray<TSource> items,
+            int start,
+            int length,
+            Func<TSource, TResult> selector
+        )
         {
             int itemsLength = items.Length;
 
@@ -337,7 +345,11 @@ namespace System.Collections.Immutable
         /// <see cref="ImmutableArray{T}"/>, where a mapping function needs to be applied to each element from
         /// the source array.
         /// </remarks>
-        public static ImmutableArray<TResult> CreateRange<TSource, TArg, TResult>(ImmutableArray<TSource> items, Func<TSource, TArg, TResult> selector, TArg arg)
+        public static ImmutableArray<TResult> CreateRange<TSource, TArg, TResult>(
+            ImmutableArray<TSource> items,
+            Func<TSource, TArg, TResult> selector,
+            TArg arg
+        )
         {
             Requires.NotNull(selector, nameof(selector));
 
@@ -370,7 +382,13 @@ namespace System.Collections.Immutable
         /// <see cref="ImmutableArray{T}"/>, where a mapping function needs to be applied to each element from the source array
         /// included in the resulting array.
         /// </remarks>
-        public static ImmutableArray<TResult> CreateRange<TSource, TArg, TResult>(ImmutableArray<TSource> items, int start, int length, Func<TSource, TArg, TResult> selector, TArg arg)
+        public static ImmutableArray<TResult> CreateRange<TSource, TArg, TResult>(
+            ImmutableArray<TSource> items,
+            int start,
+            int length,
+            Func<TSource, TArg, TResult> selector,
+            TArg arg
+        )
         {
             int itemsLength = items.Length;
 
@@ -419,7 +437,9 @@ namespace System.Collections.Immutable
         /// <typeparam name="TSource">The type of element in the sequence.</typeparam>
         /// <param name="items">The sequence to enumerate.</param>
         /// <returns>An immutable array containing the specified items.</returns>
-        public static ImmutableArray<TSource> ToImmutableArray<TSource>(this IEnumerable<TSource> items)
+        public static ImmutableArray<TSource> ToImmutableArray<TSource>(
+            this IEnumerable<TSource> items
+        )
         {
             if (items is ImmutableArray<TSource>)
             {
@@ -434,7 +454,9 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="builder">The builder to create the immutable array from.</param>
         /// <returns>An immutable array containing the specified items from <paramref name="builder"/>.</returns>
-        public static ImmutableArray<TSource> ToImmutableArray<TSource>(this ImmutableArray<TSource>.Builder builder)
+        public static ImmutableArray<TSource> ToImmutableArray<TSource>(
+            this ImmutableArray<TSource>.Builder builder
+        )
         {
             Requires.NotNull(builder, nameof(builder));
 
@@ -492,7 +514,11 @@ namespace System.Collections.Immutable
         /// the search encounters an element that does not implement the <see cref="IComparable{T}"/>
         /// generic interface.
         /// </exception>
-        public static int BinarySearch<T>(this ImmutableArray<T> array, T value, IComparer<T>? comparer)
+        public static int BinarySearch<T>(
+            this ImmutableArray<T> array,
+            T value,
+            IComparer<T>? comparer
+        )
         {
             return Array.BinarySearch<T>(array.array!, value, comparer);
         }
@@ -526,7 +552,12 @@ namespace System.Collections.Immutable
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="index"/> is less than the lower bound of <paramref name="array"/>. -or- <paramref name="length"/> is less than zero.
         /// </exception>
-        public static int BinarySearch<T>(this ImmutableArray<T> array, int index, int length, T value)
+        public static int BinarySearch<T>(
+            this ImmutableArray<T> array,
+            int index,
+            int length,
+            T value
+        )
         {
             return Array.BinarySearch<T>(array.array!, index, length, value);
         }
@@ -566,7 +597,13 @@ namespace System.Collections.Immutable
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="index"/> is less than the lower bound of <paramref name="array"/>. -or- <paramref name="length"/> is less than zero.
         /// </exception>
-        public static int BinarySearch<T>(this ImmutableArray<T> array, int index, int length, T value, IComparer<T>? comparer)
+        public static int BinarySearch<T>(
+            this ImmutableArray<T> array,
+            int index,
+            int length,
+            T value,
+            IComparer<T>? comparer
+        )
         {
             return Array.BinarySearch<T>(array.array!, index, length, value, comparer);
         }

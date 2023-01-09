@@ -33,7 +33,10 @@ public class JSObjectReference : IJSObjectReference
     }
 
     /// <inheritdoc />
-    public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string identifier, object?[]? args)
+    public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string identifier,
+        object?[]? args
+    )
     {
         ThrowIfDisposed();
 
@@ -41,7 +44,11 @@ public class JSObjectReference : IJSObjectReference
     }
 
     /// <inheritdoc />
-    public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(string identifier, CancellationToken cancellationToken, object?[]? args)
+    public ValueTask<TValue> InvokeAsync<[DynamicallyAccessedMembers(JsonSerialized)] TValue>(
+        string identifier,
+        CancellationToken cancellationToken,
+        object?[]? args
+    )
     {
         ThrowIfDisposed();
 
@@ -55,7 +62,10 @@ public class JSObjectReference : IJSObjectReference
         {
             Disposed = true;
 
-            await _jsRuntime.InvokeVoidAsync("DotNet.jsCallDispatcher.disposeJSObjectReferenceById", Id);
+            await _jsRuntime.InvokeVoidAsync(
+                "DotNet.jsCallDispatcher.disposeJSObjectReferenceById",
+                Id
+            );
         }
     }
 

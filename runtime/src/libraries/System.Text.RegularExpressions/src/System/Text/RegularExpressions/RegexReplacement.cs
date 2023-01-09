@@ -23,8 +23,8 @@ namespace System.Text.RegularExpressions
         public const int WholeString = -4;
 
         private readonly string[] _strings; // table of string constants
-        private readonly int[] _rules;      // negative -> group #, positive -> string #
-        private bool _hasBackreferences;    // true if the replacement has any backreferences; otherwise, false
+        private readonly int[] _rules; // negative -> group #, positive -> string #
+        private bool _hasBackreferences; // true if the replacement has any backreferences; otherwise, false
 
         /// <summary>
         /// Since RegexReplacement shares the same parser as Regex,
@@ -33,11 +33,16 @@ namespace System.Text.RegularExpressions
         /// </summary>
         public RegexReplacement(string rep, RegexNode concat, Hashtable _caps)
         {
-            Debug.Assert(concat.Kind == RegexNodeKind.Concatenate, $"Expected Concatenate, got {concat.Kind}");
+            Debug.Assert(
+                concat.Kind == RegexNodeKind.Concatenate,
+                $"Expected Concatenate, got {concat.Kind}"
+            );
 
             var vsb = new ValueStringBuilder(stackalloc char[256]);
             FourStackStrings stackStrings = default;
-            var strings = new ValueListBuilder<string>(MemoryMarshal.CreateSpan(ref stackStrings.Item1!, 4));
+            var strings = new ValueListBuilder<string>(
+                MemoryMarshal.CreateSpan(ref stackStrings.Item1!, 4)
+            );
             var rules = new ValueListBuilder<int>(stackalloc int[64]);
 
             int childCount = concat.ChildCount();
@@ -107,10 +112,19 @@ namespace System.Text.RegularExpressions
         /// Either returns a weakly cached RegexReplacement helper or creates one and caches it.
         /// </summary>
         /// <returns></returns>
-        public static RegexReplacement GetOrCreate(WeakReference<RegexReplacement?> replRef, string replacement, Hashtable caps,
-            int capsize, Hashtable capnames, RegexOptions roptions)
+        public static RegexReplacement GetOrCreate(
+            WeakReference<RegexReplacement?> replRef,
+            string replacement,
+            Hashtable caps,
+            int capsize,
+            Hashtable capnames,
+            RegexOptions roptions
+        )
         {
-            if (!replRef.TryGetTarget(out RegexReplacement? repl) || !repl.Pattern.Equals(replacement))
+            if (
+                !replRef.TryGetTarget(out RegexReplacement? repl)
+                || !repl.Pattern.Equals(replacement)
+            )
             {
                 repl = RegexParser.ParseReplacement(replacement, roptions, caps, capsize, capnames);
                 replRef.SetTarget(repl);
@@ -132,16 +146,20 @@ namespace System.Text.RegularExpressions
             {
                 // Get the segment to add.
                 ReadOnlyMemory<char> segment =
-                    rule >= 0 ? _strings[rule].AsMemory() : // string lookup
-                    rule < -Specials ? match.GroupToStringImpl(-Specials - 1 - rule) : // group lookup
-                    (-Specials - 1 - rule) switch // special insertion patterns
-                    {
-                        LeftPortion => match.GetLeftSubstring(),
-                        RightPortion => match.GetRightSubstring(),
-                        LastGroup => match.LastGroupToStringImpl(),
-                        WholeString => match.Text.AsMemory(),
-                        _ => default
-                    };
+                    rule >= 0
+                        ? _strings[rule].AsMemory()
+                        : // string lookup
+                        rule < -Specials
+                            ? match.GroupToStringImpl(-Specials - 1 - rule)
+                            : // group lookup
+                            (-Specials - 1 - rule) switch // special insertion patterns
+                            {
+                                LeftPortion => match.GetLeftSubstring(),
+                                RightPortion => match.GetRightSubstring(),
+                                LastGroup => match.LastGroupToStringImpl(),
+                                WholeString => match.Text.AsMemory(),
+                                _ => default
+                            };
 
                 // Add the segment if it's not empty.  A common case for it being empty
                 // is if the developer is using Regex.Replace as a way to implement
@@ -164,16 +182,20 @@ namespace System.Text.RegularExpressions
                 int rule = _rules[i];
 
                 ReadOnlyMemory<char> segment =
-                    rule >= 0 ? _strings[rule].AsMemory() : // string lookup
-                    rule < -Specials ? match.GroupToStringImpl(-Specials - 1 - rule) : // group lookup
-                    (-Specials - 1 - rule) switch // special insertion patterns
-                    {
-                        LeftPortion => match.GetLeftSubstring(),
-                        RightPortion => match.GetRightSubstring(),
-                        LastGroup => match.LastGroupToStringImpl(),
-                        WholeString => match.Text.AsMemory(),
-                        _ => default
-                    };
+                    rule >= 0
+                        ? _strings[rule].AsMemory()
+                        : // string lookup
+                        rule < -Specials
+                            ? match.GroupToStringImpl(-Specials - 1 - rule)
+                            : // group lookup
+                            (-Specials - 1 - rule) switch // special insertion patterns
+                            {
+                                LeftPortion => match.GetLeftSubstring(),
+                                RightPortion => match.GetRightSubstring(),
+                                LastGroup => match.LastGroupToStringImpl(),
+                                WholeString => match.Text.AsMemory(),
+                                _ => default
+                            };
 
                 // Add the segment to the list if it's not empty.  A common case for it being
                 // empty is if the developer is using Regex.Replace as a way to implement
@@ -198,11 +220,17 @@ namespace System.Text.RegularExpressions
         {
             if (count < -1)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.count, ExceptionResource.CountTooSmall);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.count,
+                    ExceptionResource.CountTooSmall
+                );
             }
             if ((uint)startat > (uint)input.Length)
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.startat, ExceptionResource.BeginIndexNotNegative);
+                ThrowHelper.ThrowArgumentOutOfRangeException(
+                    ExceptionArgument.startat,
+                    ExceptionResource.BeginIndexNotNegative
+                );
             }
 
             if (count == 0)
@@ -210,17 +238,43 @@ namespace System.Text.RegularExpressions
                 return input;
             }
 
-            var state = (replacement: this, segments: SegmentStringBuilder.Create(), inputMemory: input.AsMemory(), prevat: 0, count);
+            var state = (
+                replacement: this,
+                segments: SegmentStringBuilder.Create(),
+                inputMemory: input.AsMemory(),
+                prevat: 0,
+                count
+            );
 
             if (!regex.RightToLeft)
             {
-                regex.RunAllMatchesWithCallback(input, startat, ref state, (ref (RegexReplacement thisRef, SegmentStringBuilder segments, ReadOnlyMemory<char> inputMemory, int prevat, int count) state, Match match) =>
-                {
-                    state.segments.Add(state.inputMemory.Slice(state.prevat, match.Index - state.prevat));
-                    state.prevat = match.Index + match.Length;
-                    state.thisRef.ReplacementImpl(ref state.segments, match);
-                    return --state.count != 0;
-                }, _hasBackreferences ? RegexRunnerMode.FullMatchRequired : RegexRunnerMode.BoundsRequired, reuseMatchObject: true);
+                regex.RunAllMatchesWithCallback(
+                    input,
+                    startat,
+                    ref state,
+                    (
+                        ref (
+                            RegexReplacement thisRef,
+                            SegmentStringBuilder segments,
+                            ReadOnlyMemory<char> inputMemory,
+                            int prevat,
+                            int count
+                        ) state,
+                        Match match
+                    ) =>
+                    {
+                        state.segments.Add(
+                            state.inputMemory.Slice(state.prevat, match.Index - state.prevat)
+                        );
+                        state.prevat = match.Index + match.Length;
+                        state.thisRef.ReplacementImpl(ref state.segments, match);
+                        return --state.count != 0;
+                    },
+                    _hasBackreferences
+                        ? RegexRunnerMode.FullMatchRequired
+                        : RegexRunnerMode.BoundsRequired,
+                    reuseMatchObject: true
+                );
 
                 if (state.segments.Count == 0)
                 {
@@ -233,13 +287,36 @@ namespace System.Text.RegularExpressions
             {
                 state.prevat = input.Length;
 
-                regex.RunAllMatchesWithCallback(input, startat, ref state, (ref (RegexReplacement thisRef, SegmentStringBuilder segments, ReadOnlyMemory<char> inputMemory, int prevat, int count) state, Match match) =>
-                {
-                    state.segments.Add(state.inputMemory.Slice(match.Index + match.Length, state.prevat - match.Index - match.Length));
-                    state.prevat = match.Index;
-                    state.thisRef.ReplacementImplRTL(ref state.segments, match);
-                    return --state.count != 0;
-                }, _hasBackreferences ? RegexRunnerMode.FullMatchRequired : RegexRunnerMode.BoundsRequired, reuseMatchObject: true);
+                regex.RunAllMatchesWithCallback(
+                    input,
+                    startat,
+                    ref state,
+                    (
+                        ref (
+                            RegexReplacement thisRef,
+                            SegmentStringBuilder segments,
+                            ReadOnlyMemory<char> inputMemory,
+                            int prevat,
+                            int count
+                        ) state,
+                        Match match
+                    ) =>
+                    {
+                        state.segments.Add(
+                            state.inputMemory.Slice(
+                                match.Index + match.Length,
+                                state.prevat - match.Index - match.Length
+                            )
+                        );
+                        state.prevat = match.Index;
+                        state.thisRef.ReplacementImplRTL(ref state.segments, match);
+                        return --state.count != 0;
+                    },
+                    _hasBackreferences
+                        ? RegexRunnerMode.FullMatchRequired
+                        : RegexRunnerMode.BoundsRequired,
+                    reuseMatchObject: true
+                );
 
                 if (state.segments.Count == 0)
                 {

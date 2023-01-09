@@ -25,12 +25,11 @@ namespace Microsoft.CodeAnalysis.Host
         [property: DataMember(Order = 1)] bool DisableRecoverableTrees = false,
         [property: DataMember(Order = 2)] bool DisableProjectCacheService = false,
         [property: DataMember(Order = 3)] bool EnableOpeningSourceGeneratedFiles = false,
-        [property: DataMember(Order = 4)] bool DisableCloneWhenProducingSkeletonReferences = false)
+        [property: DataMember(Order = 4)] bool DisableCloneWhenProducingSkeletonReferences = false
+    )
     {
         public WorkspaceConfigurationOptions()
-            : this(CacheStorage: StorageDatabase.SQLite)
-        {
-        }
+            : this(CacheStorage: StorageDatabase.SQLite) { }
 
         public static readonly WorkspaceConfigurationOptions Default = new();
 
@@ -38,11 +37,13 @@ namespace Microsoft.CodeAnalysis.Host
         /// These values are such that the correctness of remote services is not affected if these options are changed from defaults
         /// to non-defauls while the services have already been executing.
         /// </summary>
-        public static readonly WorkspaceConfigurationOptions RemoteDefault = new(
-            CacheStorage: StorageDatabase.None,
-            DisableRecoverableTrees: false,
-            DisableProjectCacheService: false,
-            EnableOpeningSourceGeneratedFiles: false,
-            DisableCloneWhenProducingSkeletonReferences: false);
+        public static readonly WorkspaceConfigurationOptions RemoteDefault =
+            new(
+                CacheStorage: StorageDatabase.None,
+                DisableRecoverableTrees: false,
+                DisableProjectCacheService: false,
+                EnableOpeningSourceGeneratedFiles: false,
+                DisableCloneWhenProducingSkeletonReferences: false
+            );
     }
 }

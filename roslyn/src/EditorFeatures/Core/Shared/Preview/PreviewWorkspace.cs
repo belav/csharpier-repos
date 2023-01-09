@@ -15,14 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
     internal class PreviewWorkspace : Workspace
     {
         public PreviewWorkspace()
-        : base(MefHostServices.DefaultHost, WorkspaceKind.Preview)
-        {
-        }
+            : base(MefHostServices.DefaultHost, WorkspaceKind.Preview) { }
 
         public PreviewWorkspace(HostServices hostServices)
-            : base(hostServices, WorkspaceKind.Preview)
-        {
-        }
+            : base(hostServices, WorkspaceKind.Preview) { }
 
         public PreviewWorkspace(Solution solution)
             : base(solution.Workspace.Services.HostServices, WorkspaceKind.Preview)
@@ -30,7 +26,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             var oldSolution = this.CurrentSolution;
             var newSolution = this.SetCurrentSolution(solution);
 
-            this.RaiseWorkspaceChangedEventAsync(WorkspaceChangeKind.SolutionChanged, oldSolution, newSolution);
+            this.RaiseWorkspaceChangedEventAsync(
+                WorkspaceChangeKind.SolutionChanged,
+                oldSolution,
+                newSolution
+            );
         }
 
         public void EnableSolutionCrawler()
@@ -47,10 +47,11 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
         // This method signature is the base method signature which should be used for a client of a workspace to
         // tell the host to open it; in our case we want to open documents directly by passing the known buffer we created
         // for it.
-        [Obsolete("Do not call the base OpenDocument method; instead call the overload that takes a container.", error: true)]
-        public new void OpenDocument(DocumentId documentId, bool activate = true)
-        {
-        }
+        [Obsolete(
+            "Do not call the base OpenDocument method; instead call the overload that takes a container.",
+            error: true
+        )]
+        public new void OpenDocument(DocumentId documentId, bool activate = true) { }
 
         public void OpenDocument(DocumentId documentId, SourceTextContainer textContainer)
         {
@@ -83,7 +84,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             var text = document.GetTextSynchronously(CancellationToken.None);
             var version = document.GetTextVersionSynchronously(CancellationToken.None);
 
-            this.OnDocumentClosed(documentId, TextLoader.From(TextAndVersion.Create(text, version)));
+            this.OnDocumentClosed(
+                documentId,
+                TextLoader.From(TextAndVersion.Create(text, version))
+            );
         }
 
         public override void CloseAdditionalDocument(DocumentId documentId)
@@ -92,7 +96,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             var text = document.GetTextSynchronously(CancellationToken.None);
             var version = document.GetTextVersionSynchronously(CancellationToken.None);
 
-            this.OnAdditionalDocumentClosed(documentId, TextLoader.From(TextAndVersion.Create(text, version)));
+            this.OnAdditionalDocumentClosed(
+                documentId,
+                TextLoader.From(TextAndVersion.Create(text, version))
+            );
         }
 
         public override void CloseAnalyzerConfigDocument(DocumentId documentId)
@@ -101,7 +108,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Preview
             var text = document.GetTextSynchronously(CancellationToken.None);
             var version = document.GetTextVersionSynchronously(CancellationToken.None);
 
-            this.OnAnalyzerConfigDocumentClosed(documentId, TextLoader.From(TextAndVersion.Create(text, version)));
+            this.OnAnalyzerConfigDocumentClosed(
+                documentId,
+                TextLoader.From(TextAndVersion.Create(text, version))
+            );
         }
 
         protected override void Dispose(bool finalize)

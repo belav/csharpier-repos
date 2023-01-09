@@ -30,66 +30,78 @@ namespace Microsoft.CodeAnalysis
         /// as a failure to load the analyzer.</p>
         /// </summary>
         internal static readonly ImmutableHashSet<string> CompilerAssemblySimpleNames =
-           ImmutableHashSet.Create(
-               StringComparer.OrdinalIgnoreCase,
-               "Microsoft.CodeAnalysis",
-               "Microsoft.CodeAnalysis.CSharp",
-               "Microsoft.CodeAnalysis.VisualBasic",
-               "System.Collections",
-               "System.Collections.Concurrent",
-               "System.Collections.Immutable",
-               "System.Console",
-               "System.Diagnostics.Debug",
-               "System.Diagnostics.StackTrace",
-               "System.Diagnostics.Tracing",
-               "System.IO.Compression",
-               "System.IO.FileSystem",
-               "System.Linq",
-               "System.Linq.Expressions",
-               "System.Memory",
-               "System.Reflection.Metadata",
-               "System.Reflection.Primitives",
-               "System.Resources.ResourceManager",
-               "System.Runtime",
-               "System.Runtime.CompilerServices.Unsafe",
-               "System.Runtime.Extensions",
-               "System.Runtime.InteropServices",
-               "System.Runtime.InteropServices.RuntimeInformation",
-               "System.Runtime.Loader",
-               "System.Runtime.Numerics",
-               "System.Runtime.Serialization.Primitives",
-               "System.Security.Cryptography.Algorithms",
-               "System.Security.Cryptography.Primitives",
-               "System.Text.Encoding.CodePages",
-               "System.Text.Encoding.Extensions",
-               "System.Text.RegularExpressions",
-               "System.Threading",
-               "System.Threading.Tasks",
-               "System.Threading.Tasks.Parallel",
-               "System.Threading.Thread",
-               "System.Threading.ThreadPool",
-               "System.Xml.ReaderWriter",
-               "System.Xml.XDocument",
-               "System.Xml.XPath.XDocument");
+            ImmutableHashSet.Create(
+                StringComparer.OrdinalIgnoreCase,
+                "Microsoft.CodeAnalysis",
+                "Microsoft.CodeAnalysis.CSharp",
+                "Microsoft.CodeAnalysis.VisualBasic",
+                "System.Collections",
+                "System.Collections.Concurrent",
+                "System.Collections.Immutable",
+                "System.Console",
+                "System.Diagnostics.Debug",
+                "System.Diagnostics.StackTrace",
+                "System.Diagnostics.Tracing",
+                "System.IO.Compression",
+                "System.IO.FileSystem",
+                "System.Linq",
+                "System.Linq.Expressions",
+                "System.Memory",
+                "System.Reflection.Metadata",
+                "System.Reflection.Primitives",
+                "System.Resources.ResourceManager",
+                "System.Runtime",
+                "System.Runtime.CompilerServices.Unsafe",
+                "System.Runtime.Extensions",
+                "System.Runtime.InteropServices",
+                "System.Runtime.InteropServices.RuntimeInformation",
+                "System.Runtime.Loader",
+                "System.Runtime.Numerics",
+                "System.Runtime.Serialization.Primitives",
+                "System.Security.Cryptography.Algorithms",
+                "System.Security.Cryptography.Primitives",
+                "System.Text.Encoding.CodePages",
+                "System.Text.Encoding.Extensions",
+                "System.Text.RegularExpressions",
+                "System.Threading",
+                "System.Threading.Tasks",
+                "System.Threading.Tasks.Parallel",
+                "System.Threading.Thread",
+                "System.Threading.ThreadPool",
+                "System.Xml.ReaderWriter",
+                "System.Xml.XDocument",
+                "System.Xml.XPath.XDocument"
+            );
 
-        internal virtual ImmutableHashSet<string> AssemblySimpleNamesToBeLoadedInCompilerContext => CompilerAssemblySimpleNames;
+        internal virtual ImmutableHashSet<string> AssemblySimpleNamesToBeLoadedInCompilerContext =>
+            CompilerAssemblySimpleNames;
 
         // This is the context where compiler (and some of its dependencies) are being loaded into, which might be different from AssemblyLoadContext.Default.
-        private static readonly AssemblyLoadContext s_compilerLoadContext = AssemblyLoadContext.GetLoadContext(typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly)!;
+        private static readonly AssemblyLoadContext s_compilerLoadContext =
+            AssemblyLoadContext.GetLoadContext(
+                typeof(DefaultAnalyzerAssemblyLoader).GetTypeInfo().Assembly
+            )!;
 
         private readonly object _guard = new object();
-        private readonly Dictionary<string, DirectoryLoadContext> _loadContextByDirectory = new Dictionary<string, DirectoryLoadContext>(StringComparer.Ordinal);
+        private readonly Dictionary<string, DirectoryLoadContext> _loadContextByDirectory =
+            new Dictionary<string, DirectoryLoadContext>(StringComparer.Ordinal);
 
         protected override Assembly LoadFromPathUncheckedImpl(string fullPath)
         {
             DirectoryLoadContext? loadContext;
 
-            var fullDirectoryPath = Path.GetDirectoryName(fullPath) ?? throw new ArgumentException(message: null, paramName: nameof(fullPath));
+            var fullDirectoryPath =
+                Path.GetDirectoryName(fullPath)
+                ?? throw new ArgumentException(message: null, paramName: nameof(fullPath));
             lock (_guard)
             {
                 if (!_loadContextByDirectory.TryGetValue(fullDirectoryPath, out loadContext))
                 {
-                    loadContext = new DirectoryLoadContext(fullDirectoryPath, this, s_compilerLoadContext);
+                    loadContext = new DirectoryLoadContext(
+                        fullDirectoryPath,
+                        this,
+                        s_compilerLoadContext
+                    );
                     _loadContextByDirectory[fullDirectoryPath] = loadContext;
                 }
             }
@@ -100,7 +112,9 @@ namespace Microsoft.CodeAnalysis
 
         internal static class TestAccessor
         {
-            public static AssemblyLoadContext[] GetOrderedLoadContexts(DefaultAnalyzerAssemblyLoader loader)
+            public static AssemblyLoadContext[] GetOrderedLoadContexts(
+                DefaultAnalyzerAssemblyLoader loader
+            )
             {
                 return loader._loadContextByDirectory.Values.OrderBy(v => v.Directory).ToArray();
             }
@@ -112,7 +126,11 @@ namespace Microsoft.CodeAnalysis
             private readonly DefaultAnalyzerAssemblyLoader _loader;
             private readonly AssemblyLoadContext _compilerLoadContext;
 
-            public DirectoryLoadContext(string directory, DefaultAnalyzerAssemblyLoader loader, AssemblyLoadContext compilerLoadContext)
+            public DirectoryLoadContext(
+                string directory,
+                DefaultAnalyzerAssemblyLoader loader,
+                AssemblyLoadContext compilerLoadContext
+            )
             {
                 Directory = directory;
                 _loader = loader;
@@ -135,7 +153,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     // The analyzer didn't explicitly register this dependency. Most likely the
                     // assembly we're trying to load here is netstandard or a similar framework
-                    // assembly. In this case, we want to load it in compiler's ALC to avoid any 
+                    // assembly. In this case, we want to load it in compiler's ALC to avoid any
                     // potential type mismatch issue. Otherwise, if this is truly an unknown assembly,
                     // we assume both compiler and default ALC will fail to load it.
                     return _compilerLoadContext.LoadFromAssemblyName(assemblyName);
@@ -159,11 +177,19 @@ namespace Microsoft.CodeAnalysis
                     // to hold a lock on the file. This prevents unnecessary shadow copies.
                     var candidateName = AssemblyName.GetAssemblyName(candidatePath);
                     // Checking FullName ensures that version and PublicKeyToken match exactly.
-                    if (candidateName.FullName.Equals(assemblyName.FullName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        candidateName.FullName.Equals(
+                            assemblyName.FullName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return LoadFromAssemblyPath(_loader.GetPathToLoad(candidatePath));
                     }
-                    else if (bestCandidateName is null || bestCandidateName.Version < candidateName.Version)
+                    else if (
+                        bestCandidateName is null
+                        || bestCandidateName.Version < candidateName.Version
+                    )
                     {
                         bestCandidateName = candidateName;
                         bestCandidatePath = candidatePath;

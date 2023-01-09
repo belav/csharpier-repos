@@ -23,9 +23,9 @@ public class Helper
         Console.WriteLine("FAIL: Helper.PublicSecurityCriticalMethod is called!");
     }
 
-	[SecurityCritical]
-	internal static void InternalSecurityCriticalMethod()
-	{
-		Console.WriteLine("FAIL: Helper.InternalSecurityCriticalMethod is called!");
-	}
+    [SecurityCritical]
+    internal static void InternalSecurityCriticalMethod()
+    {
+        Console.WriteLine("FAIL: Helper.InternalSecurityCriticalMethod is called!");
+    }
 }

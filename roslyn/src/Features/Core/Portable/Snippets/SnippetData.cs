@@ -20,7 +20,11 @@ namespace Microsoft.CodeAnalysis.Snippets
         public readonly string SnippetIdentifier;
         public readonly ImmutableArray<string> AdditionalFilterTexts;
 
-        public SnippetData(string description, string snippetIdentifier, ImmutableArray<string> additionalFilterTexts)
+        public SnippetData(
+            string description,
+            string snippetIdentifier,
+            ImmutableArray<string> additionalFilterTexts
+        )
         {
             Description = description;
             SnippetIdentifier = snippetIdentifier;

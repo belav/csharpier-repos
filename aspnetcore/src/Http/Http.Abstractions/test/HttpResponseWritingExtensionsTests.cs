@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text;
@@ -71,14 +71,14 @@ public class HttpResponseWritingExtensionsTests
     public static TheoryData<Encoding> Encodings =>
         new TheoryData<Encoding>
         {
-                        { Encoding.ASCII },
-                        { Encoding.BigEndianUnicode },
-                        { Encoding.Unicode },
-                        { Encoding.UTF32 },
+            { Encoding.ASCII },
+            { Encoding.BigEndianUnicode },
+            { Encoding.Unicode },
+            { Encoding.UTF32 },
 #pragma warning disable CS0618, SYSLIB0001 // Type or member is obsolete
-                        { Encoding.UTF7 },
+            { Encoding.UTF7 },
 #pragma warning restore CS0618, SYSLIB0001 // Type or member is obsolete
-                        { Encoding.UTF8 }
+            { Encoding.UTF8 }
         };
 
     private HttpContext CreateRequest()

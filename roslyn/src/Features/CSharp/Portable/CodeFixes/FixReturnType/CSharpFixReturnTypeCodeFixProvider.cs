@@ -24,20 +24,29 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
     /// <summary>
     /// Helps fix void-returning methods or local functions to return a correct type.
     /// </summary>
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.FixReturnType), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.FixReturnType
+        ),
+        Shared
+    ]
     internal class CSharpFixReturnTypeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         // error CS0127: Since 'M()' returns void, a return keyword must not be followed by an object expression
         // error CS1997: Since 'M()' is an async method that returns 'Task', a return keyword must not be followed by an object expression. Did you intend to return 'Task<T>'?
         // error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create("CS0127", "CS1997", "CS0201");
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create("CS0127", "CS1997", "CS0201");
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public CSharpFixReturnTypeCodeFixProvider()
-            : base(supportsFixAll: false)
-        {
-        }
+            : base(supportsFixAll: false) { }
 
         internal override CodeFixCategory CodeFixCategory => CodeFixCategory.Compile;
 
@@ -47,7 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             var diagnostics = context.Diagnostics;
             var cancellationToken = context.CancellationToken;
 
-            var analyzedTypes = await TryGetOldAndNewReturnTypeAsync(document, diagnostics, cancellationToken).ConfigureAwait(false);
+            var analyzedTypes = await TryGetOldAndNewReturnTypeAsync(
+                    document,
+                    diagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (analyzedTypes == default)
             {
                 return;
@@ -61,22 +75,32 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
             }
 
             context.RegisterCodeFix(
-               new MyCodeAction(c => FixAsync(document, diagnostics.First(), c)),
-               diagnostics);
+                new MyCodeAction(c => FixAsync(document, diagnostics.First(), c)),
+                diagnostics
+            );
 
             return;
 
-            static bool IsVoid(TypeSyntax typeSyntax)
-                => typeSyntax is PredefinedTypeSyntax predefined && predefined.Keyword.IsKind(SyntaxKind.VoidKeyword);
+            static bool IsVoid(TypeSyntax typeSyntax) =>
+                typeSyntax is PredefinedTypeSyntax predefined
+                && predefined.Keyword.IsKind(SyntaxKind.VoidKeyword);
         }
 
-        private static async Task<(TypeSyntax declarationToFix, TypeSyntax fixedDeclaration)> TryGetOldAndNewReturnTypeAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken)
+        private static async Task<(
+            TypeSyntax declarationToFix,
+            TypeSyntax fixedDeclaration
+        )> TryGetOldAndNewReturnTypeAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(diagnostics.Length == 1);
             var location = diagnostics[0].Location;
             var node = location.FindNode(getInnermostNodeForTie: true, cancellationToken);
-            var returnedValue = node is ReturnStatementSyntax returnStatement ? returnStatement.Expression : node;
+            var returnedValue = node is ReturnStatementSyntax returnStatement
+                ? returnStatement.Expression
+                : node;
             if (returnedValue == null)
             {
                 return default;
@@ -88,7 +112,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                 return default;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var returnedType = semanticModel.GetTypeInfo(returnedValue, cancellationToken).Type;
             if (returnedType == null)
             {
@@ -111,25 +137,40 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
                 fixedDeclaration = returnedType.GenerateTypeSyntax();
             }
 
-            fixedDeclaration = fixedDeclaration.WithAdditionalAnnotations(Simplifier.Annotation).WithTriviaFrom(declarationTypeToFix);
+            fixedDeclaration = fixedDeclaration
+                .WithAdditionalAnnotations(Simplifier.Annotation)
+                .WithTriviaFrom(declarationTypeToFix);
 
             return (declarationTypeToFix, fixedDeclaration);
         }
 
-        protected override async Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CancellationToken cancellationToken)
+        protected override async Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
-            var (declarationTypeToFix, fixedDeclaration) =
-                await TryGetOldAndNewReturnTypeAsync(document, diagnostics, cancellationToken).ConfigureAwait(false);
+            var (declarationTypeToFix, fixedDeclaration) = await TryGetOldAndNewReturnTypeAsync(
+                    document,
+                    diagnostics,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             editor.ReplaceNode(declarationTypeToFix, fixedDeclaration);
         }
 
         private static (TypeSyntax type, bool useTask) TryGetDeclarationTypeToFix(SyntaxNode node)
         {
-            return node.GetAncestors().Select(a => TryGetReturnTypeToFix(a)).FirstOrDefault(p => p != default);
+            return node.GetAncestors()
+                .Select(a => TryGetReturnTypeToFix(a))
+                .FirstOrDefault(p => p != default);
 
             // Local functions
-            static (TypeSyntax type, bool useTask) TryGetReturnTypeToFix(SyntaxNode containingMember)
+            static (TypeSyntax type, bool useTask) TryGetReturnTypeToFix(
+                SyntaxNode containingMember
+            )
             {
                 switch (containingMember)
                 {
@@ -157,11 +198,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FixReturnType
         private class MyCodeAction : CodeAction.DocumentChangeAction
         {
             public MyCodeAction(Func<CancellationToken, Task<Document>> createChangedDocument)
-                : base(CSharpFeaturesResources.Fix_return_type,
-                     createChangedDocument,
-                     CSharpFeaturesResources.Fix_return_type)
-            {
-            }
+                : base(
+                    CSharpFeaturesResources.Fix_return_type,
+                    createChangedDocument,
+                    CSharpFeaturesResources.Fix_return_type
+                ) { }
         }
     }
 }

@@ -10,9 +10,7 @@ namespace System.Security.Cryptography.X509Certificates
         private AsymmetricAlgorithm? _privateKey;
 
         public AppleCertificateExporter(ICertificatePalCore cert)
-            : base(cert)
-        {
-        }
+            : base(cert) { }
 
         public AppleCertificateExporter(ICertificatePalCore cert, AsymmetricAlgorithm privateKey)
             : base(cert)
@@ -21,18 +19,20 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public AppleCertificateExporter(X509Certificate2Collection certs)
-            : base(certs)
-        {
-        }
+            : base(certs) { }
 
         protected override byte[] ExportPkcs7()
         {
             throw new CryptographicException(
                 SR.Cryptography_X509_PKCS7_Unsupported,
-                new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported));
+                new PlatformNotSupportedException(SR.Cryptography_X509_PKCS7_Unsupported)
+            );
         }
 
-        protected override byte[] ExportPkcs8(ICertificatePalCore certificatePal, ReadOnlySpan<char> password)
+        protected override byte[] ExportPkcs8(
+            ICertificatePalCore certificatePal,
+            ReadOnlySpan<char> password
+        )
         {
             if (_privateKey != null)
             {
@@ -53,8 +53,11 @@ namespace System.Security.Cryptography.X509Certificates
                     break;
                 case Oids.Dsa:
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownKeyAlgorithm, pal.KeyAlgorithm));
-            };
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownKeyAlgorithm, pal.KeyAlgorithm)
+                    );
+            }
+            ;
 
             using (algorithm)
             {

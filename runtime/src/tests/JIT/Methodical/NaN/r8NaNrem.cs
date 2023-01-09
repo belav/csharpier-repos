@@ -4,13 +4,14 @@
 
 using System;
 using Xunit;
+
 public class r8NaNrem
 {
-
     //user-defined class that overloads operator %
     public class numHolder
     {
         double d_num;
+
         public numHolder(double d_num)
         {
             this.d_num = Convert.ToDouble(d_num);
@@ -25,7 +26,6 @@ public class r8NaNrem
         {
             return a.d_num % b.d_num;
         }
-
     }
 
     static double d_s_test1_op1 = 0.0F;
@@ -96,27 +96,27 @@ public class r8NaNrem
 
         double[] d_arr1d_test1_op1 = { 0, 0.0F };
         double[,] d_arr2d_test1_op1 = { { 0, 0.0F }, { 1, 1 } };
-        double[, ,] d_arr3d_test1_op1 = { { { 0, 0.0F }, { 1, 1 } } };
+        double[,,] d_arr3d_test1_op1 = { { { 0, 0.0F }, { 1, 1 } } };
 
         double[] d_arr1d_test1_op2 = { Double.NaN, 0, 1 };
         double[,] d_arr2d_test1_op2 = { { 0, Double.NaN }, { 1, 1 } };
-        double[, ,] d_arr3d_test1_op2 = { { { 0, Double.NaN }, { 1, 1 } } };
+        double[,,] d_arr3d_test1_op2 = { { { 0, Double.NaN }, { 1, 1 } } };
 
         float[] d_arr1d_test2_op1 = { 0, 0.0F };
         float[,] d_arr2d_test2_op1 = { { 0, 0.0F }, { 1, 1 } };
-        float[, ,] d_arr3d_test2_op1 = { { { 0, 0.0F }, { 1, 1 } } };
+        float[,,] d_arr3d_test2_op1 = { { { 0, 0.0F }, { 1, 1 } } };
 
         float[] d_arr1d_test2_op2 = { 0.0F, 0, 1 };
         float[,] d_arr2d_test2_op2 = { { 0, 0.0F }, { 1, 1 } };
-        float[, ,] d_arr3d_test2_op2 = { { { 0, 0.0F }, { 1, 1 } } };
+        float[,,] d_arr3d_test2_op2 = { { { 0, 0.0F }, { 1, 1 } } };
 
         double[] d_arr1d_test3_op1 = { 0, Double.NegativeInfinity };
         double[,] d_arr2d_test3_op1 = { { 0, Double.NegativeInfinity }, { 1, 1 } };
-        double[, ,] d_arr3d_test3_op1 = { { { 0, Double.NegativeInfinity }, { 1, 1 } } };
+        double[,,] d_arr3d_test3_op1 = { { { 0, Double.NegativeInfinity }, { 1, 1 } } };
 
         double[] d_arr1d_test3_op2 = { 2.1234567890987654321, 0, 1 };
         double[,] d_arr2d_test3_op2 = { { 0, 2.1234567890987654321 }, { 1, 1 } };
-        double[, ,] d_arr3d_test3_op2 = { { { 0, 2.1234567890987654321 }, { 1, 1 } } };
+        double[,,] d_arr3d_test3_op2 = { { { 0, 2.1234567890987654321 }, { 1, 1 } } };
 
         int[,] index = { { 0, 0 }, { 1, 1 } };
 
@@ -238,7 +238,11 @@ public class r8NaNrem
                 Console.WriteLine("Test1_testcase 23 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_test1_f("test1_op1") % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_test1_f("test1_op1") % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test1_testcase 24 failed");
                 passed = false;
@@ -358,7 +362,9 @@ public class r8NaNrem
                 Console.WriteLine("Test1_testcase 47 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr1d_test1_op1[1] % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(d_arr1d_test1_op1[1] % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]])
+            )
             {
                 Console.WriteLine("Test1_testcase 48 failed");
                 passed = false;
@@ -393,12 +399,22 @@ public class r8NaNrem
                 Console.WriteLine("Test1_testcase 54 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr2d_test1_op1[index[0, 1], index[1, 0]] % d_arr2d_test1_op2[index[0, 1], index[1, 0]]))
+            if (
+                !Double.IsNaN(
+                    d_arr2d_test1_op1[index[0, 1], index[1, 0]]
+                        % d_arr2d_test1_op2[index[0, 1], index[1, 0]]
+                )
+            )
             {
                 Console.WriteLine("Test1_testcase 55 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr2d_test1_op1[index[0, 1], index[1, 0]] % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_arr2d_test1_op1[index[0, 1], index[1, 0]]
+                        % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test1_testcase 56 failed");
                 passed = false;
@@ -413,7 +429,11 @@ public class r8NaNrem
                 Console.WriteLine("Test1_testcase 58 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]] % d_test1_f("test1_op2")))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]] % d_test1_f("test1_op2")
+                )
+            )
             {
                 Console.WriteLine("Test1_testcase 59 failed");
                 passed = false;
@@ -428,17 +448,29 @@ public class r8NaNrem
                 Console.WriteLine("Test1_testcase 61 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_test1_op2[0]))
+            if (
+                !Double.IsNaN(d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_test1_op2[0])
+            )
             {
                 Console.WriteLine("Test1_testcase 62 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]] % d_arr2d_test1_op2[index[0, 1], index[1, 0]]))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr2d_test1_op2[index[0, 1], index[1, 0]]
+                )
+            )
             {
                 Console.WriteLine("Test1_testcase 63 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]] % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test1_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr3d_test1_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test1_testcase 64 failed");
                 passed = false;
@@ -563,7 +595,11 @@ public class r8NaNrem
                 Console.WriteLine("Test2_testcase 23 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_test2_f("test2_op1") % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_test2_f("test2_op1") % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test2_testcase 24 failed");
                 passed = false;
@@ -683,7 +719,9 @@ public class r8NaNrem
                 Console.WriteLine("Test2_testcase 47 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr1d_test2_op1[1] % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(d_arr1d_test2_op1[1] % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]])
+            )
             {
                 Console.WriteLine("Test2_testcase 48 failed");
                 passed = false;
@@ -718,12 +756,22 @@ public class r8NaNrem
                 Console.WriteLine("Test2_testcase 54 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr2d_test2_op1[index[0, 1], index[1, 0]] % d_arr2d_test2_op2[index[0, 1], index[1, 0]]))
+            if (
+                !Double.IsNaN(
+                    d_arr2d_test2_op1[index[0, 1], index[1, 0]]
+                        % d_arr2d_test2_op2[index[0, 1], index[1, 0]]
+                )
+            )
             {
                 Console.WriteLine("Test2_testcase 55 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr2d_test2_op1[index[0, 1], index[1, 0]] % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_arr2d_test2_op1[index[0, 1], index[1, 0]]
+                        % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test2_testcase 56 failed");
                 passed = false;
@@ -738,7 +786,11 @@ public class r8NaNrem
                 Console.WriteLine("Test2_testcase 58 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]] % d_test2_f("test2_op2")))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]] % d_test2_f("test2_op2")
+                )
+            )
             {
                 Console.WriteLine("Test2_testcase 59 failed");
                 passed = false;
@@ -753,17 +805,29 @@ public class r8NaNrem
                 Console.WriteLine("Test2_testcase 61 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_test2_op2[0]))
+            if (
+                !Double.IsNaN(d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_test2_op2[0])
+            )
             {
                 Console.WriteLine("Test2_testcase 62 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]] % d_arr2d_test2_op2[index[0, 1], index[1, 0]]))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr2d_test2_op2[index[0, 1], index[1, 0]]
+                )
+            )
             {
                 Console.WriteLine("Test2_testcase 63 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]] % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test2_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr3d_test2_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test2_testcase 64 failed");
                 passed = false;
@@ -888,7 +952,11 @@ public class r8NaNrem
                 Console.WriteLine("Test3_testcase 23 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_test3_f("test3_op1") % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_test3_f("test3_op1") % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test3_testcase 24 failed");
                 passed = false;
@@ -1008,7 +1076,9 @@ public class r8NaNrem
                 Console.WriteLine("Test3_testcase 47 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr1d_test3_op1[1] % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(d_arr1d_test3_op1[1] % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]])
+            )
             {
                 Console.WriteLine("Test3_testcase 48 failed");
                 passed = false;
@@ -1043,12 +1113,22 @@ public class r8NaNrem
                 Console.WriteLine("Test3_testcase 54 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr2d_test3_op1[index[0, 1], index[1, 0]] % d_arr2d_test3_op2[index[0, 1], index[1, 0]]))
+            if (
+                !Double.IsNaN(
+                    d_arr2d_test3_op1[index[0, 1], index[1, 0]]
+                        % d_arr2d_test3_op2[index[0, 1], index[1, 0]]
+                )
+            )
             {
                 Console.WriteLine("Test3_testcase 55 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr2d_test3_op1[index[0, 1], index[1, 0]] % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_arr2d_test3_op1[index[0, 1], index[1, 0]]
+                        % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test3_testcase 56 failed");
                 passed = false;
@@ -1063,7 +1143,11 @@ public class r8NaNrem
                 Console.WriteLine("Test3_testcase 58 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]] % d_test3_f("test3_op2")))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]] % d_test3_f("test3_op2")
+                )
+            )
             {
                 Console.WriteLine("Test3_testcase 59 failed");
                 passed = false;
@@ -1078,17 +1162,29 @@ public class r8NaNrem
                 Console.WriteLine("Test3_testcase 61 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_test3_op2[0]))
+            if (
+                !Double.IsNaN(d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_test3_op2[0])
+            )
             {
                 Console.WriteLine("Test3_testcase 62 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]] % d_arr2d_test3_op2[index[0, 1], index[1, 0]]))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr2d_test3_op2[index[0, 1], index[1, 0]]
+                )
+            )
             {
                 Console.WriteLine("Test3_testcase 63 failed");
                 passed = false;
             }
-            if (!Double.IsNaN(d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]] % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]))
+            if (
+                !Double.IsNaN(
+                    d_arr3d_test3_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr3d_test3_op2[index[0, 0], 0, index[1, 1]]
+                )
+            )
             {
                 Console.WriteLine("Test3_testcase 64 failed");
                 passed = false;

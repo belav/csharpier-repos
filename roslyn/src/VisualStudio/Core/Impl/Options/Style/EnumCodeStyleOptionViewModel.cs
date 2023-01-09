@@ -18,16 +18,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
     /// <summary>
     /// This class represents the view model for a <see cref="CodeStyleOption{T}"/>
     /// that binds to the codestyle options UI.  Note that the T here is expected to be an enum
-    /// type.  
-    /// 
+    /// type.
+    ///
     /// Important.  The order of the previews and preferences provided should match the order
-    /// of enum members of T.  
+    /// of enum members of T.
     /// </summary>
     internal class EnumCodeStyleOptionViewModel<T> : AbstractCodeStyleOptionViewModel
         where T : struct
     {
-        static EnumCodeStyleOptionViewModel()
-            => Contract.ThrowIfFalse(typeof(T).IsEnum);
+        static EnumCodeStyleOptionViewModel() => Contract.ThrowIfFalse(typeof(T).IsEnum);
 
         private readonly ImmutableArray<T> _enumValues;
         private readonly ImmutableArray<string> _previews;
@@ -44,11 +43,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore,
             string groupName,
-            List<CodeStylePreference> preferences)
-            : this((IOption)option, language, description, enumValues, previews, info,
-                   optionStore, groupName, preferences)
-        {
-        }
+            List<CodeStylePreference> preferences
+        )
+            : this(
+                (IOption)option,
+                language,
+                description,
+                enumValues,
+                previews,
+                info,
+                optionStore,
+                groupName,
+                preferences
+            ) { }
 
         public EnumCodeStyleOptionViewModel(
             Option2<CodeStyleOption2<T>> option,
@@ -58,11 +65,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore,
             string groupName,
-            List<CodeStylePreference> preferences)
-            : this(option, language: null, description, enumValues, previews, info,
-                   optionStore, groupName, preferences)
-        {
-        }
+            List<CodeStylePreference> preferences
+        )
+            : this(
+                option,
+                language: null,
+                description,
+                enumValues,
+                previews,
+                info,
+                optionStore,
+                groupName,
+                preferences
+            ) { }
 
         private EnumCodeStyleOptionViewModel(
             IOption option,
@@ -73,7 +88,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             AbstractOptionPreviewViewModel info,
             OptionStore optionStore,
             string groupName,
-            List<CodeStylePreference> preferences)
+            List<CodeStylePreference> preferences
+        )
             : base(option, description, info, groupName, preferences)
         {
             Debug.Assert(preferences.Count == enumValues.Length);
@@ -82,7 +98,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             _enumValues = enumValues.ToImmutableArray();
             _previews = previews.ToImmutableArray();
 
-            var codeStyleOption = (CodeStyleOption<T>)optionStore.GetOption(new OptionKey(option, language));
+            var codeStyleOption =
+                (CodeStyleOption<T>)optionStore.GetOption(new OptionKey(option, language));
 
             var enumIndex = _enumValues.IndexOf(codeStyleOption.Value);
             if (enumIndex < 0 || enumIndex >= Preferences.Count)
@@ -92,8 +109,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             _selectedPreference = Preferences[enumIndex];
 
-            var notificationViewModel = NotificationPreferences.Single(i => i.Notification.Severity == codeStyleOption.Notification.Severity);
-            _selectedNotificationPreference = NotificationPreferences.Single(p => p.Notification.Severity == notificationViewModel.Notification.Severity);
+            var notificationViewModel = NotificationPreferences.Single(
+                i => i.Notification.Severity == codeStyleOption.Notification.Severity
+            );
+            _selectedNotificationPreference = NotificationPreferences.Single(
+                p => p.Notification.Severity == notificationViewModel.Notification.Severity
+            );
 
             NotifyPropertyChanged(nameof(SelectedPreference));
             NotifyPropertyChanged(nameof(SelectedNotificationPreference));
@@ -108,7 +129,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public override CodeStylePreference SelectedPreference
         {
             get => _selectedPreference;
-
             set
             {
                 if (SetProperty(ref _selectedPreference, value))
@@ -118,8 +138,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
                     Info.SetOptionAndUpdatePreview(
                         new CodeStyleOption<T>(
-                            enumValue, _selectedNotificationPreference.Notification),
-                        Option, GetPreview());
+                            enumValue,
+                            _selectedNotificationPreference.Notification
+                        ),
+                        Option,
+                        GetPreview()
+                    );
                 }
             }
         }
@@ -127,7 +151,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         public override NotificationOptionViewModel SelectedNotificationPreference
         {
             get => _selectedNotificationPreference;
-
             set
             {
                 if (SetProperty(ref _selectedNotificationPreference, value))
@@ -137,8 +160,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
                     Info.SetOptionAndUpdatePreview(
                         new CodeStyleOption<T>(
-                            enumValue, _selectedNotificationPreference.Notification),
-                        Option, GetPreview());
+                            enumValue,
+                            _selectedNotificationPreference.Notification
+                        ),
+                        Option,
+                        GetPreview()
+                    );
                 }
             }
         }

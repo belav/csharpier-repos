@@ -31,17 +31,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             public BidirectionalSymbolSet(
                 FindReferencesSearchEngine engine,
                 MetadataUnifyingSymbolHashSet initialSymbols,
-                MetadataUnifyingSymbolHashSet upSymbols)
+                MetadataUnifyingSymbolHashSet upSymbols
+            )
                 : base(engine)
             {
                 _allSymbols.AddRange(initialSymbols);
                 _allSymbols.AddRange(upSymbols);
             }
 
-            public override ImmutableArray<ISymbol> GetAllSymbols()
-                => _allSymbols.ToImmutableArray();
+            public override ImmutableArray<ISymbol> GetAllSymbols() =>
+                _allSymbols.ToImmutableArray();
 
-            public override async Task InheritanceCascadeAsync(Project project, CancellationToken cancellationToken)
+            public override async Task InheritanceCascadeAsync(
+                Project project,
+                CancellationToken cancellationToken
+            )
             {
                 // Start searching using the current set of symbols built up so far.
                 var workQueue = new Stack<ISymbol>();
@@ -56,8 +60,24 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     // For each symbol we're examining try to walk both up and down from it to see if we discover any
                     // new symbols in this project.  As long as we keep finding symbols, we'll keep searching from them
                     // in both directions.
-                    await AddDownSymbolsAsync(this.Engine, current, _allSymbols, workQueue, projects, cancellationToken).ConfigureAwait(false);
-                    await AddUpSymbolsAsync(this.Engine, current, _allSymbols, workQueue, projects, cancellationToken).ConfigureAwait(false);
+                    await AddDownSymbolsAsync(
+                            this.Engine,
+                            current,
+                            _allSymbols,
+                            workQueue,
+                            projects,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    await AddUpSymbolsAsync(
+                            this.Engine,
+                            current,
+                            _allSymbols,
+                            workQueue,
+                            projects,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
         }

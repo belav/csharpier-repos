@@ -18,8 +18,16 @@ namespace Microsoft.TestCommon
             this.testData = testData;
 
             Type[] typeParams = new Type[] { this.Type };
-            this.RegisterTestDataVariation(TestDataVariations.WithNull, OpenNullableType.MakeGenericType(typeParams), GetNullTestData);
-            this.RegisterTestDataVariation(TestDataVariations.AsNullable, OpenNullableType.MakeGenericType(typeParams), GetTestDataAsNullable);
+            this.RegisterTestDataVariation(
+                TestDataVariations.WithNull,
+                OpenNullableType.MakeGenericType(typeParams),
+                GetNullTestData
+            );
+            this.RegisterTestDataVariation(
+                TestDataVariations.AsNullable,
+                OpenNullableType.MakeGenericType(typeParams),
+                GetTestDataAsNullable
+            );
         }
 
         public object GetNullTestData()

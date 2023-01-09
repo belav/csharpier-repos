@@ -25,8 +25,10 @@ namespace System.Net.Http.Formatting
     /// </summary>
     public class XmlMediaTypeFormatter : MediaTypeFormatter
     {
-        private ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<Type, object>();
-        private XmlDictionaryReaderQuotas _readerQuotas = FormattingUtilities.CreateDefaultReaderQuotas();
+        private ConcurrentDictionary<Type, object> _serializerCache =
+            new ConcurrentDictionary<Type, object>();
+        private XmlDictionaryReaderQuotas _readerQuotas =
+            FormattingUtilities.CreateDefaultReaderQuotas();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="XmlMediaTypeFormatter"/> class.
@@ -38,8 +40,16 @@ namespace System.Net.Http.Formatting
             SupportedMediaTypes.Add(MediaTypeConstants.TextXmlMediaType);
 
             // Set default supported character encodings
-            SupportedEncodings.Add(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true));
-            SupportedEncodings.Add(new UnicodeEncoding(bigEndian: false, byteOrderMark: true, throwOnInvalidBytes: true));
+            SupportedEncodings.Add(
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true)
+            );
+            SupportedEncodings.Add(
+                new UnicodeEncoding(
+                    bigEndian: false,
+                    byteOrderMark: true,
+                    throwOnInvalidBytes: true
+                )
+            );
             WriterSettings = new XmlWriterSettings
             {
                 OmitXmlDeclaration = true,
@@ -93,14 +103,8 @@ namespace System.Net.Http.Formatting
         /// </summary>
         public bool Indent
         {
-            get
-            {
-                return WriterSettings.Indent;
-            }
-            set
-            {
-                WriterSettings.Indent = value;
-            }
+            get { return WriterSettings.Indent; }
+            set { WriterSettings.Indent = value; }
         }
 
         /// <summary>
@@ -114,15 +118,16 @@ namespace System.Net.Http.Formatting
         /// </summary>
         public int MaxDepth
         {
-            get
-            {
-                return _readerQuotas.MaxDepth;
-            }
+            get { return _readerQuotas.MaxDepth; }
             set
             {
                 if (value < FormattingUtilities.DefaultMinDepth)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("value", value, FormattingUtilities.DefaultMinDepth);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "value",
+                        value,
+                        FormattingUtilities.DefaultMinDepth
+                    );
                 }
 
                 _readerQuotas.MaxDepth = value;
@@ -147,7 +152,11 @@ namespace System.Net.Http.Formatting
         /// </summary>
         /// <typeparam name="T">The type of object that will be serialized or deserialized with <paramref name="serializer"/>.</typeparam>
         /// <param name="serializer">The <see cref="XmlObjectSerializer"/> instance to use.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The T represents a Type parameter.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "The T represents a Type parameter."
+        )]
         public void SetSerializer<T>(XmlObjectSerializer serializer)
         {
             SetSerializer(typeof(T), serializer);
@@ -170,7 +179,11 @@ namespace System.Net.Http.Formatting
         /// </summary>
         /// <typeparam name="T">The type of object that will be serialized or deserialized with <paramref name="serializer"/>.</typeparam>
         /// <param name="serializer">The <see cref="XmlSerializer"/> instance to use.</param>
-        [SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter", Justification = "The T represents a Type parameter.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "The T represents a Type parameter."
+        )]
         public void SetSerializer<T>(XmlSerializer serializer)
         {
             SetSerializer(typeof(T), serializer);
@@ -255,8 +268,17 @@ namespace System.Net.Http.Formatting
         /// <param name="content">The <see cref="HttpContent"/> for the content being read.</param>
         /// <param name="formatterLogger">The <see cref="IFormatterLogger"/> to log events to.</param>
         /// <returns>A <see cref="Task"/> whose result will be the object instance that has been read.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The caught exception type is reflected into a faulted task.")]
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The caught exception type is reflected into a faulted task."
+        )]
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             if (type == null)
             {
@@ -278,7 +300,12 @@ namespace System.Net.Http.Formatting
             }
         }
 
-        private object ReadFromStream(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        private object ReadFromStream(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             HttpContentHeaders contentHeaders = content == null ? null : content.Headers;
 
@@ -327,7 +354,11 @@ namespace System.Net.Http.Formatting
         /// <param name="type">The type of object to deserialize.</param>
         /// <param name="content">The <see cref="HttpContent"/> for the content being read.</param>
         /// <returns>An instance of <see cref="XmlObjectSerializer"/> or <see cref="XmlSerializer"/> to use for deserializing the object.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "The term deserializer is spelled correctly.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            Justification = "The term deserializer is spelled correctly."
+        )]
         protected internal virtual object GetDeserializer(Type type, HttpContent content)
         {
             return GetSerializerForType(type);
@@ -342,19 +373,39 @@ namespace System.Net.Http.Formatting
         protected internal virtual XmlReader CreateXmlReader(Stream readStream, HttpContent content)
         {
             // Get the character encoding for the content
-            Encoding effectiveEncoding = SelectCharacterEncoding(content == null ? null : content.Headers);
+            Encoding effectiveEncoding = SelectCharacterEncoding(
+                content == null ? null : content.Headers
+            );
 #if NETFX_CORE
             // Force a preamble into the stream, since CreateTextReader in WinRT only supports auto-detecting encoding.
-            return XmlDictionaryReader.CreateTextReader(new ReadOnlyStreamWithEncodingPreamble(readStream, effectiveEncoding), _readerQuotas);
+            return XmlDictionaryReader.CreateTextReader(
+                new ReadOnlyStreamWithEncodingPreamble(readStream, effectiveEncoding),
+                _readerQuotas
+            );
 #else
-            return XmlDictionaryReader.CreateTextReader(new NonClosingDelegatingStream(readStream), effectiveEncoding, _readerQuotas, null);
+            return XmlDictionaryReader.CreateTextReader(
+                new NonClosingDelegatingStream(readStream),
+                effectiveEncoding,
+                _readerQuotas,
+                null
+            );
 #endif
         }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The caught exception type is reflected into a faulted task.")]
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The caught exception type is reflected into a faulted task."
+        )]
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken cancellationToken
+        )
         {
             if (type == null)
             {
@@ -385,16 +436,22 @@ namespace System.Net.Http.Formatting
             bool isRemapped = false;
             if (UseXmlSerializer)
             {
-                isRemapped = MediaTypeFormatter.TryGetDelegatingTypeForIEnumerableGenericOrSame(ref type);
+                isRemapped = MediaTypeFormatter.TryGetDelegatingTypeForIEnumerableGenericOrSame(
+                    ref type
+                );
             }
             else
             {
-                isRemapped = MediaTypeFormatter.TryGetDelegatingTypeForIQueryableGenericOrSame(ref type);
+                isRemapped = MediaTypeFormatter.TryGetDelegatingTypeForIQueryableGenericOrSame(
+                    ref type
+                );
             }
 
             if (isRemapped && value != null)
             {
-                value = MediaTypeFormatter.GetTypeRemappingConstructor(type).Invoke(new object[] { value });
+                value = MediaTypeFormatter
+                    .GetTypeRemappingConstructor(type)
+                    .Invoke(new object[] { value });
             }
 
             object serializer = GetSerializer(type, value, content);
@@ -425,7 +482,11 @@ namespace System.Net.Http.Formatting
         /// <param name="value">The object to serialize.</param>
         /// <param name="content">The <see cref="HttpContent"/> for the content being written.</param>
         /// <returns>An instance of <see cref="XmlObjectSerializer"/> or <see cref="XmlSerializer"/> to use for serializing the object.</returns>
-        protected internal virtual object GetSerializer(Type type, object value, HttpContent content)
+        protected internal virtual object GetSerializer(
+            Type type,
+            object value,
+            HttpContent content
+        )
         {
             return GetSerializerForType(type);
         }
@@ -436,9 +497,14 @@ namespace System.Net.Http.Formatting
         /// <param name="writeStream">The <see cref="Stream"/> to write to.</param>
         /// <param name="content">The <see cref="HttpContent"/> for the content being written.</param>
         /// <returns>The <see cref="XmlWriter"/> to use for writing objects.</returns>
-        protected internal virtual XmlWriter CreateXmlWriter(Stream writeStream, HttpContent content)
+        protected internal virtual XmlWriter CreateXmlWriter(
+            Stream writeStream,
+            HttpContent content
+        )
         {
-            Encoding effectiveEncoding = SelectCharacterEncoding(content != null ? content.Headers : null);
+            Encoding effectiveEncoding = SelectCharacterEncoding(
+                content != null ? content.Headers : null
+            );
             XmlWriterSettings writerSettings = WriterSettings.Clone();
             writerSettings.Encoding = effectiveEncoding;
             return XmlWriter.Create(writeStream, writerSettings);
@@ -500,7 +566,11 @@ namespace System.Net.Http.Formatting
             return GetSerializer(type, value, content);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Since we use an extensible factory method we cannot control the exceptions being thrown")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Since we use an extensible factory method we cannot control the exceptions being thrown"
+        )]
         private object CreateDefaultSerializer(Type type, bool throwOnError)
         {
             Contract.Assert(type != null, "type cannot be null.");
@@ -532,15 +602,24 @@ namespace System.Net.Http.Formatting
             {
                 if (exception != null)
                 {
-                    throw Error.InvalidOperation(exception, Properties.Resources.SerializerCannotSerializeType,
-                                  UseXmlSerializer ? typeof(XmlSerializer).Name : typeof(DataContractSerializer).Name,
-                                  type.Name);
+                    throw Error.InvalidOperation(
+                        exception,
+                        Properties.Resources.SerializerCannotSerializeType,
+                        UseXmlSerializer
+                            ? typeof(XmlSerializer).Name
+                            : typeof(DataContractSerializer).Name,
+                        type.Name
+                    );
                 }
                 else
                 {
-                    throw Error.InvalidOperation(Properties.Resources.SerializerCannotSerializeType,
-                              UseXmlSerializer ? typeof(XmlSerializer).Name : typeof(DataContractSerializer).Name,
-                              type.Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.SerializerCannotSerializeType,
+                        UseXmlSerializer
+                            ? typeof(XmlSerializer).Name
+                            : typeof(DataContractSerializer).Name,
+                        type.Name
+                    );
                 }
             }
 
@@ -594,24 +673,41 @@ namespace System.Net.Http.Formatting
             {
                 // A null serializer indicates the type has already been tested
                 // and found unsupportable.
-                throw Error.InvalidOperation(Properties.Resources.SerializerCannotSerializeType,
-                              UseXmlSerializer ? typeof(XmlSerializer).Name : typeof(DataContractSerializer).Name,
-                              type.Name);
+                throw Error.InvalidOperation(
+                    Properties.Resources.SerializerCannotSerializeType,
+                    UseXmlSerializer
+                        ? typeof(XmlSerializer).Name
+                        : typeof(DataContractSerializer).Name,
+                    type.Name
+                );
             }
 
-            Contract.Assert(serializer is XmlSerializer || serializer is XmlObjectSerializer, "Only XmlSerializer or XmlObjectSerializer are supported.");
+            Contract.Assert(
+                serializer is XmlSerializer || serializer is XmlObjectSerializer,
+                "Only XmlSerializer or XmlObjectSerializer are supported."
+            );
             return serializer;
         }
 
-        private static void ThrowInvalidSerializerException(object serializer, string getSerializerMethodName)
+        private static void ThrowInvalidSerializerException(
+            object serializer,
+            string getSerializerMethodName
+        )
         {
             if (serializer == null)
             {
-                throw Error.InvalidOperation(Properties.Resources.XmlMediaTypeFormatter_NullReturnedSerializer, getSerializerMethodName);
+                throw Error.InvalidOperation(
+                    Properties.Resources.XmlMediaTypeFormatter_NullReturnedSerializer,
+                    getSerializerMethodName
+                );
             }
             else
             {
-                throw Error.InvalidOperation(Properties.Resources.XmlMediaTypeFormatter_InvalidSerializerType, serializer.GetType().Name, getSerializerMethodName);
+                throw Error.InvalidOperation(
+                    Properties.Resources.XmlMediaTypeFormatter_InvalidSerializerType,
+                    serializer.GetType().Name,
+                    getSerializerMethodName
+                );
             }
         }
     }

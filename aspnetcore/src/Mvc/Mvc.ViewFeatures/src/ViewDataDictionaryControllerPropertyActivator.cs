@@ -23,7 +23,9 @@ public class ViewDataDictionaryControllerPropertyActivator : IControllerProperty
     /// Initializes a new instance of <see cref="ViewDataDictionaryControllerPropertyActivator"/>.
     /// </summary>
     /// <param name="modelMetadataProvider">The <see cref="IModelMetadataProvider"/> to use.</param>
-    public ViewDataDictionaryControllerPropertyActivator(IModelMetadataProvider modelMetadataProvider)
+    public ViewDataDictionaryControllerPropertyActivator(
+        IModelMetadataProvider modelMetadataProvider
+    )
     {
         _modelMetadataProvider = modelMetadataProvider;
         _getPropertiesToActivate = GetPropertiesToActivate;
@@ -35,12 +37,14 @@ public class ViewDataDictionaryControllerPropertyActivator : IControllerProperty
         LazyInitializer.EnsureInitialized(
             ref _activateActions,
             ref _initialized,
-            ref _initializeLock);
+            ref _initializeLock
+        );
 
         var controllerType = controller.GetType();
         var propertiesToActivate = _activateActions.GetOrAdd(
             controllerType,
-            _getPropertiesToActivate);
+            _getPropertiesToActivate
+        );
 
         for (var i = 0; i < propertiesToActivate.Length; i++)
         {
@@ -50,15 +54,20 @@ public class ViewDataDictionaryControllerPropertyActivator : IControllerProperty
     }
 
     /// <inheritdoc/>
-    public Action<ControllerContext, object> GetActivatorDelegate(ControllerActionDescriptor actionDescriptor)
+    public Action<ControllerContext, object> GetActivatorDelegate(
+        ControllerActionDescriptor actionDescriptor
+    )
     {
         var controllerType = actionDescriptor.ControllerTypeInfo?.AsType();
         if (controllerType == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(actionDescriptor.ControllerTypeInfo),
-                nameof(actionDescriptor)),
-                nameof(actionDescriptor));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(actionDescriptor.ControllerTypeInfo),
+                    nameof(actionDescriptor)
+                ),
+                nameof(actionDescriptor)
+            );
         }
 
         var propertiesToActivate = GetPropertiesToActivate(controllerType);
@@ -80,15 +89,14 @@ public class ViewDataDictionaryControllerPropertyActivator : IControllerProperty
         var activators = PropertyActivator<ControllerContext>.GetPropertiesToActivate(
             type,
             typeof(ViewDataDictionaryAttribute),
-            p => new PropertyActivator<ControllerContext>(p, GetViewDataDictionary));
+            p => new PropertyActivator<ControllerContext>(p, GetViewDataDictionary)
+        );
 
         return activators;
     }
 
     private ViewDataDictionary GetViewDataDictionary(ControllerContext context)
     {
-        return new ViewDataDictionary(
-            _modelMetadataProvider,
-            context.ModelState);
+        return new ViewDataDictionary(_modelMetadataProvider, context.ModelState);
     }
 }

@@ -41,14 +41,23 @@ namespace R2RTest
 
             if (!options.Exe)
             {
-                PathExtensions.DeleteOutputFolders(options.OutputDirectory.FullName, options.CoreRootDirectory.FullName, runners, recursive: false);
+                PathExtensions.DeleteOutputFolders(
+                    options.OutputDirectory.FullName,
+                    options.CoreRootDirectory.FullName,
+                    runners,
+                    recursive: false
+                );
             }
 
             string nugetOutputFolder = Path.Combine(options.OutputDirectory.FullName, "nuget.out");
             Directory.CreateDirectory(nugetOutputFolder);
 
             var publishedAppFoldersToCompile = new List<BuildFolder>();
-            using (StreamWriter nugetLog = File.CreateText(Path.Combine(nugetOutputFolder, "nugetLog.txt")))
+            using (
+                StreamWriter nugetLog = File.CreateText(
+                    Path.Combine(nugetOutputFolder, "nugetLog.txt")
+                )
+            )
             {
                 foreach (var package in packageList)
                 {
@@ -60,17 +69,25 @@ namespace R2RTest
 
                     Version version = Environment.Version;
                     string targetFramework = $"net{version.Major}.{version.Minor}";
-                    int exitCode = DotnetCli.New(appFolder, $"console -f {targetFramework}", nugetLog);
+                    int exitCode = DotnetCli.New(
+                        appFolder,
+                        $"console -f {targetFramework}",
+                        nugetLog
+                    );
                     if (exitCode != 0)
                     {
-                        nugetLog.WriteLine($"dotnet new console for {package} failed with exit code {exitCode}");
+                        nugetLog.WriteLine(
+                            $"dotnet new console for {package} failed with exit code {exitCode}"
+                        );
                         continue;
                     }
 
                     exitCode = DotnetCli.AddPackage(appFolder, package, nugetLog);
                     if (exitCode != 0)
                     {
-                        nugetLog.WriteLine($"dotnet add package {package} failed with exit code {exitCode}");
+                        nugetLog.WriteLine(
+                            $"dotnet add package {package} failed with exit code {exitCode}"
+                        );
                         continue;
                     }
 
@@ -82,30 +99,50 @@ namespace R2RTest
                     }
 
                     // This is not a reliable way of building the publish folder
-                   
-                    string publishFolder = Path.Combine(appFolder, "artifacts", "Debug", targetFramework, "publish");
+
+                    string publishFolder = Path.Combine(
+                        appFolder,
+                        "artifacts",
+                        "Debug",
+                        targetFramework,
+                        "publish"
+                    );
                     if (!Directory.Exists(publishFolder))
                     {
-                        nugetLog.WriteLine($"Could not find folder {publishFolder} containing the published app.");
+                        nugetLog.WriteLine(
+                            $"Could not find folder {publishFolder} containing the published app."
+                        );
                         continue;
                     }
 
-                    publishedAppFoldersToCompile.Add(BuildFolder.FromDirectory(publishFolder, runners, appFolder, options));
+                    publishedAppFoldersToCompile.Add(
+                        BuildFolder.FromDirectory(publishFolder, runners, appFolder, options)
+                    );
                 }
 
-                BuildFolderSet folderSet = new BuildFolderSet(publishedAppFoldersToCompile, runners, options);
+                BuildFolderSet folderSet = new BuildFolderSet(
+                    publishedAppFoldersToCompile,
+                    runners,
+                    options
+                );
                 bool success = folderSet.Build();
                 folderSet.WriteLogs();
 
                 if (!options.NoCleanup && !options.Exe)
                 {
-                    PathExtensions.DeleteOutputFolders(options.OutputDirectory.FullName, options.CoreRootDirectory.FullName, runners, recursive: false);
+                    PathExtensions.DeleteOutputFolders(
+                        options.OutputDirectory.FullName,
+                        options.CoreRootDirectory.FullName,
+                        runners,
+                        recursive: false
+                    );
                 }
 
                 return success ? 0 : 1;
             }
         }
 
-        private static IList<string> ReadPackageNames(string packageListFile) => File.ReadAllLines(packageListFile);
+        private static IList<string> ReadPackageNames(string packageListFile) =>
+            File.ReadAllLines(packageListFile);
     }
 }

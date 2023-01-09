@@ -47,11 +47,15 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void EnsureContractsShared()
         {
-            CamelCasePropertyNamesContractResolver resolver1 = new CamelCasePropertyNamesContractResolver();
-            var contract1 = (JsonObjectContract)resolver1.ResolveContract(typeof(CamelCasePropertyNamesContractResolverTests));
+            CamelCasePropertyNamesContractResolver resolver1 =
+                new CamelCasePropertyNamesContractResolver();
+            var contract1 = (JsonObjectContract)
+                resolver1.ResolveContract(typeof(CamelCasePropertyNamesContractResolverTests));
 
-            CamelCasePropertyNamesContractResolver resolver2 = new CamelCasePropertyNamesContractResolver();
-            var contract2 = (JsonObjectContract)resolver2.ResolveContract(typeof(CamelCasePropertyNamesContractResolverTests));
+            CamelCasePropertyNamesContractResolver resolver2 =
+                new CamelCasePropertyNamesContractResolver();
+            var contract2 = (JsonObjectContract)
+                resolver2.ResolveContract(typeof(CamelCasePropertyNamesContractResolverTests));
 
             Assert.IsTrue(ReferenceEquals(contract1, contract2));
 
@@ -69,38 +73,52 @@ namespace Newtonsoft.Json.Tests.Serialization
             person.LastModified = new DateTime(2000, 11, 20, 23, 55, 44, DateTimeKind.Utc);
             person.Name = "Name!";
 
-            string json = JsonConvert.SerializeObject(person, Formatting.Indented, new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            string json = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Name!"",
   ""birthDate"": ""2000-11-20T23:55:44Z"",
   ""lastModified"": ""2000-11-20T23:55:44Z""
-}", json);
+}",
+                json
+            );
 
-            Person deserializedPerson = JsonConvert.DeserializeObject<Person>(json, new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            Person deserializedPerson = JsonConvert.DeserializeObject<Person>(
+                json,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }
+            );
 
             Assert.AreEqual(person.BirthDate, deserializedPerson.BirthDate);
             Assert.AreEqual(person.LastModified, deserializedPerson.LastModified);
             Assert.AreEqual(person.Name, deserializedPerson.Name);
 
             json = JsonConvert.SerializeObject(person, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Name"": ""Name!"",
   ""BirthDate"": ""2000-11-20T23:55:44Z"",
   ""LastModified"": ""2000-11-20T23:55:44Z""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void JTokenWriter()
         {
-            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass = new JsonIgnoreAttributeOnClassTestClass();
+            JsonIgnoreAttributeOnClassTestClass ignoreAttributeOnClassTestClass =
+                new JsonIgnoreAttributeOnClassTestClass();
             ignoreAttributeOnClassTestClass.Field = int.MinValue;
 
             JsonSerializer serializer = new JsonSerializer();
@@ -124,33 +142,81 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void MemberSearchFlags()
         {
-            PrivateMembersClass privateMembersClass = new PrivateMembersClass("PrivateString!", "InternalString!");
+            PrivateMembersClass privateMembersClass = new PrivateMembersClass(
+                "PrivateString!",
+                "InternalString!"
+            );
 
-            string json = JsonConvert.SerializeObject(privateMembersClass, Formatting.Indented, new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver { DefaultMembersSearchFlags = BindingFlags.NonPublic | BindingFlags.Instance }
-            });
+            string json = JsonConvert.SerializeObject(
+                privateMembersClass,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver
+                    {
+                        DefaultMembersSearchFlags = BindingFlags.NonPublic | BindingFlags.Instance
+                    }
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""_privateString"": ""PrivateString!"",
   ""i"": 0,
   ""_internalString"": ""InternalString!""
-}", json);
+}",
+                json
+            );
 
-            PrivateMembersClass deserializedPrivateMembersClass = JsonConvert.DeserializeObject<PrivateMembersClass>(@"{
+            PrivateMembersClass deserializedPrivateMembersClass =
+                JsonConvert.DeserializeObject<PrivateMembersClass>(
+                    @"{
   ""_privateString"": ""Private!"",
   ""i"": -2,
   ""_internalString"": ""Internal!""
-}", new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver { DefaultMembersSearchFlags = BindingFlags.NonPublic | BindingFlags.Instance }
-            });
+}",
+                    new JsonSerializerSettings
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver
+                        {
+                            DefaultMembersSearchFlags =
+                                BindingFlags.NonPublic | BindingFlags.Instance
+                        }
+                    }
+                );
 
-            Assert.AreEqual("Private!", ReflectionUtils.GetMemberValue(typeof(PrivateMembersClass).GetField("_privateString", BindingFlags.Instance | BindingFlags.NonPublic), deserializedPrivateMembersClass));
-            Assert.AreEqual("Internal!", ReflectionUtils.GetMemberValue(typeof(PrivateMembersClass).GetField("_internalString", BindingFlags.Instance | BindingFlags.NonPublic), deserializedPrivateMembersClass));
+            Assert.AreEqual(
+                "Private!",
+                ReflectionUtils.GetMemberValue(
+                    typeof(PrivateMembersClass).GetField(
+                        "_privateString",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    ),
+                    deserializedPrivateMembersClass
+                )
+            );
+            Assert.AreEqual(
+                "Internal!",
+                ReflectionUtils.GetMemberValue(
+                    typeof(PrivateMembersClass).GetField(
+                        "_internalString",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    ),
+                    deserializedPrivateMembersClass
+                )
+            );
 
             // readonly
-            Assert.AreEqual(0, ReflectionUtils.GetMemberValue(typeof(PrivateMembersClass).GetField("i", BindingFlags.Instance | BindingFlags.NonPublic), deserializedPrivateMembersClass));
+            Assert.AreEqual(
+                0,
+                ReflectionUtils.GetMemberValue(
+                    typeof(PrivateMembersClass).GetField(
+                        "i",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    ),
+                    deserializedPrivateMembersClass
+                )
+            );
         }
 #pragma warning restore 618
 #endif
@@ -166,12 +232,14 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Sizes = new[] { "Small", "Medium", "Large" }
             };
 
-            string json =
-                JsonConvert.SerializeObject(
-                    product,
-                    Formatting.Indented,
-                    new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() }
-                    );
+            string json = JsonConvert.SerializeObject(
+                product,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                }
+            );
 
             //{
             //  "name": "Widget",
@@ -184,7 +252,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //  ]
             //}
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""name"": ""Widget"",
   ""expiryDate"": ""2010-12-20T18:01:00Z"",
   ""price"": 9.99,
@@ -193,7 +262,9 @@ namespace Newtonsoft.Json.Tests.Serialization
     ""Medium"",
     ""Large""
   ]
-}", json);
+}",
+                json
+            );
         }
 
 #if !(NET35 || NET20 || PORTABLE40)
@@ -204,19 +275,25 @@ namespace Newtonsoft.Json.Tests.Serialization
             o.Text = "Text!";
             o.Integer = int.MaxValue;
 
-            string json = JsonConvert.SerializeObject(o, Formatting.Indented,
+            string json = JsonConvert.SerializeObject(
+                o,
+                Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""explicit"": false,
   ""text"": ""Text!"",
   ""integer"": 2147483647,
   ""int"": 0,
   ""childObject"": null
-}", json);
+}",
+                json
+            );
         }
 #endif
 
@@ -229,16 +306,22 @@ namespace Newtonsoft.Json.Tests.Serialization
                 { "Second", "Value2!" }
             };
 
-            string json = JsonConvert.SerializeObject(values, Formatting.Indented,
+            string json = JsonConvert.SerializeObject(
+                values,
+                Formatting.Indented,
                 new JsonSerializerSettings
                 {
                     ContractResolver = new CamelCasePropertyNamesContractResolver()
-                });
+                }
+            );
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""first"": ""Value1!"",
   ""second"": ""Value2!""
-}", json);
+}",
+                json
+            );
         }
     }
 }

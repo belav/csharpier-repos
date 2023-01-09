@@ -97,19 +97,27 @@ namespace Internal.Runtime.TypeLoader
         internal static CallingConventionConverter_CommonCallingStub_PointerData s_commonStubData;
 
         [DllImport("*", ExactSpelling = true, EntryPoint = "CallingConventionConverter_GetStubs")]
-        private static extern unsafe void CallingConventionConverter_GetStubs(out IntPtr returnVoidStub,
-                                                                      out IntPtr returnIntegerStub,
-                                                                      out IntPtr commonStub
+        private static extern unsafe void CallingConventionConverter_GetStubs(
+            out IntPtr returnVoidStub,
+            out IntPtr returnIntegerStub,
+            out IntPtr commonStub
 #if CALLDESCR_FPARGREGSARERETURNREGS
 #else
-                                                                     , out IntPtr returnFloatingPointReturn4Thunk,
-                                                                       out IntPtr returnFloatingPointReturn8Thunk
+            ,
+            out IntPtr returnFloatingPointReturn4Thunk,
+            out IntPtr returnFloatingPointReturn8Thunk
 #endif
-                                                                     );
+        );
 
 #if TARGET_ARM
-        [DllImport("*", ExactSpelling = true, EntryPoint = "CallingConventionConverter_SpecifyCommonStubData")]
-        private static extern unsafe void CallingConventionConverter_SpecifyCommonStubData(IntPtr commonStubData);
+        [DllImport(
+            "*",
+            ExactSpelling = true,
+            EntryPoint = "CallingConventionConverter_SpecifyCommonStubData"
+        )]
+        private static extern unsafe void CallingConventionConverter_SpecifyCommonStubData(
+            IntPtr commonStubData
+        );
 #endif
 
         private static bool s_callConverterThunk = CallConverterThunk_LazyCctor();
@@ -119,16 +127,25 @@ namespace Internal.Runtime.TypeLoader
 #if TARGET_UNIX
             // TODO
 #else
-            CallingConventionConverter_GetStubs(out ReturnVoidReturnThunk, out ReturnIntegerPointReturnThunk, out CommonInputThunkStub
+            CallingConventionConverter_GetStubs(
+                out ReturnVoidReturnThunk,
+                out ReturnIntegerPointReturnThunk,
+                out CommonInputThunkStub
 #if CALLDESCR_FPARGREGSARERETURNREGS
 #else
-                                               , out ReturnFloatingPointReturn4Thunk, out ReturnFloatingPointReturn8Thunk
+                ,
+                out ReturnFloatingPointReturn4Thunk,
+                out ReturnFloatingPointReturn8Thunk
 #endif
-                                                );
-            s_commonStubData.ManagedCallConverterThunk = (IntPtr)(delegate*<IntPtr, IntPtr, IntPtr>)&CallConversionThunk;
+            );
+            s_commonStubData.ManagedCallConverterThunk = (IntPtr)
+                (delegate* <IntPtr, IntPtr, IntPtr>)&CallConversionThunk;
             s_commonStubData.UniversalThunk = RuntimeAugments.GetUniversalTransitionThunk();
 #if TARGET_ARM
-            fixed (CallingConventionConverter_CommonCallingStub_PointerData* commonStubData = &s_commonStubData)
+            fixed (
+                CallingConventionConverter_CommonCallingStub_PointerData* commonStubData =
+                    &s_commonStubData
+            )
             {
                 CallingConventionConverter_SpecifyCommonStubData((IntPtr)commonStubData);
             }
@@ -183,39 +200,81 @@ namespace Internal.Runtime.TypeLoader
         private const int OpenInstanceThunk = 5;
         private const int ObjectArrayThunk = 6;
 
-
-        public static unsafe IntPtr MakeThunk(ThunkKind thunkKind,
-                                              IntPtr targetPointer,
-                                              IntPtr instantiatingArg,
-                                              bool hasThis, RuntimeTypeHandle[] parameters,
-                                              bool[] byRefParameters,
-                                              bool[] paramsByRefForced)
+        public static unsafe IntPtr MakeThunk(
+            ThunkKind thunkKind,
+            IntPtr targetPointer,
+            IntPtr instantiatingArg,
+            bool hasThis,
+            RuntimeTypeHandle[] parameters,
+            bool[] byRefParameters,
+            bool[] paramsByRefForced
+        )
         {
             // Build thunk data
-            TypeHandle thReturnType = new TypeHandle(GetByRefIndicatorAtIndex(0, byRefParameters), parameters[0]);
+            TypeHandle thReturnType = new TypeHandle(
+                GetByRefIndicatorAtIndex(0, byRefParameters),
+                parameters[0]
+            );
             TypeHandle[] thParameters = null;
             if (parameters.Length > 1)
             {
                 thParameters = new TypeHandle[parameters.Length - 1];
                 for (int i = 1; i < parameters.Length; i++)
                 {
-                    thParameters[i - 1] = new TypeHandle(GetByRefIndicatorAtIndex(i, byRefParameters), parameters[i]);
+                    thParameters[i - 1] = new TypeHandle(
+                        GetByRefIndicatorAtIndex(i, byRefParameters),
+                        parameters[i]
+                    );
                 }
             }
 
-            int callConversionInfo = CallConversionInfo.RegisterCallConversionInfo(thunkKind, targetPointer, instantiatingArg, hasThis, thReturnType, thParameters, paramsByRefForced);
+            int callConversionInfo = CallConversionInfo.RegisterCallConversionInfo(
+                thunkKind,
+                targetPointer,
+                instantiatingArg,
+                hasThis,
+                thReturnType,
+                thParameters,
+                paramsByRefForced
+            );
             return FindExistingOrAllocateThunk(callConversionInfo);
         }
 
-        public static unsafe IntPtr MakeThunk(ThunkKind thunkKind, IntPtr targetPointer, RuntimeSignature methodSignature, IntPtr instantiatingArg, RuntimeTypeHandle[] typeArgs, RuntimeTypeHandle[] methodArgs)
+        public static unsafe IntPtr MakeThunk(
+            ThunkKind thunkKind,
+            IntPtr targetPointer,
+            RuntimeSignature methodSignature,
+            IntPtr instantiatingArg,
+            RuntimeTypeHandle[] typeArgs,
+            RuntimeTypeHandle[] methodArgs
+        )
         {
-            int callConversionInfo = CallConversionInfo.RegisterCallConversionInfo(thunkKind, targetPointer, methodSignature, instantiatingArg, typeArgs, methodArgs);
+            int callConversionInfo = CallConversionInfo.RegisterCallConversionInfo(
+                thunkKind,
+                targetPointer,
+                methodSignature,
+                instantiatingArg,
+                typeArgs,
+                methodArgs
+            );
             return FindExistingOrAllocateThunk(callConversionInfo);
         }
 
-        internal static unsafe IntPtr MakeThunk(ThunkKind thunkKind, IntPtr targetPointer, IntPtr instantiatingArg, ArgIteratorData argIteratorData, bool[] paramsByRefForced)
+        internal static unsafe IntPtr MakeThunk(
+            ThunkKind thunkKind,
+            IntPtr targetPointer,
+            IntPtr instantiatingArg,
+            ArgIteratorData argIteratorData,
+            bool[] paramsByRefForced
+        )
         {
-            int callConversionInfo = CallConversionInfo.RegisterCallConversionInfo(thunkKind, targetPointer, instantiatingArg, argIteratorData, paramsByRefForced);
+            int callConversionInfo = CallConversionInfo.RegisterCallConversionInfo(
+                thunkKind,
+                targetPointer,
+                instantiatingArg,
+                argIteratorData,
+                paramsByRefForced
+            );
             return FindExistingOrAllocateThunk(callConversionInfo);
         }
 
@@ -225,7 +284,10 @@ namespace Internal.Runtime.TypeLoader
 
             lock (s_allocatedThunks)
             {
-                if (callConversionInfo < s_allocatedThunks.Count && s_allocatedThunks[callConversionInfo] != IntPtr.Zero)
+                if (
+                    callConversionInfo < s_allocatedThunks.Count
+                    && s_allocatedThunks[callConversionInfo] != IntPtr.Zero
+                )
                     return s_allocatedThunks[callConversionInfo];
 
                 if (s_thunkPoolHeap == null)
@@ -237,9 +299,17 @@ namespace Internal.Runtime.TypeLoader
                 thunk = RuntimeAugments.AllocateThunk(s_thunkPoolHeap);
                 Debug.Assert(thunk != IntPtr.Zero);
 
-                fixed (CallingConventionConverter_CommonCallingStub_PointerData* commonStubData = &s_commonStubData)
+                fixed (
+                    CallingConventionConverter_CommonCallingStub_PointerData* commonStubData =
+                        &s_commonStubData
+                )
                 {
-                    RuntimeAugments.SetThunkData(s_thunkPoolHeap, thunk, new IntPtr(callConversionInfo), new IntPtr(commonStubData));
+                    RuntimeAugments.SetThunkData(
+                        s_thunkPoolHeap,
+                        thunk,
+                        new IntPtr(callConversionInfo),
+                        new IntPtr(commonStubData)
+                    );
 
                     if (callConversionInfo >= s_allocatedThunks.Count)
                     {
@@ -255,7 +325,8 @@ namespace Internal.Runtime.TypeLoader
 
         public static unsafe IntPtr GetDelegateThunk(Delegate delegateObject, int thunkKind)
         {
-            RuntimeTypeHandle delegateType = RuntimeAugments.GetRuntimeTypeHandleFromObjectReference(delegateObject);
+            RuntimeTypeHandle delegateType =
+                RuntimeAugments.GetRuntimeTypeHandleFromObjectReference(delegateObject);
             Debug.Assert(RuntimeAugments.IsGenericType(delegateType));
 
             RuntimeTypeHandle[] typeArgs;
@@ -263,7 +334,10 @@ namespace Internal.Runtime.TypeLoader
             Debug.Assert(typeArgs != null && typeArgs.Length > 0);
 
             RuntimeSignature invokeMethodSignature;
-            bool gotInvokeMethodSignature = TypeBuilder.TryGetDelegateInvokeMethodSignature(delegateType, out invokeMethodSignature);
+            bool gotInvokeMethodSignature = TypeBuilder.TryGetDelegateInvokeMethodSignature(
+                delegateType,
+                out invokeMethodSignature
+            );
 
             if (!gotInvokeMethodSignature)
             {
@@ -273,25 +347,76 @@ namespace Internal.Runtime.TypeLoader
             switch (thunkKind)
             {
                 case DelegateInvokeThunk:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateDynamicInvokeThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk.ThunkKind.DelegateDynamicInvokeThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 case ObjectArrayThunk:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateObjectArrayThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk.ThunkKind.DelegateObjectArrayThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 case MulticastThunk:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateMulticastThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk.ThunkKind.DelegateMulticastThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 case OpenInstanceThunk:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateInvokeOpenInstanceThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk.ThunkKind.DelegateInvokeOpenInstanceThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 case ClosedInstanceThunkOverGenericMethod:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateInvokeInstanceClosedOverGenericMethodThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk
+                            .ThunkKind
+                            .DelegateInvokeInstanceClosedOverGenericMethodThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 case ClosedStaticThunk:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateInvokeClosedStaticThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk.ThunkKind.DelegateInvokeClosedStaticThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 case OpenStaticThunk:
-                    return CallConverterThunk.MakeThunk(CallConverterThunk.ThunkKind.DelegateInvokeOpenStaticThunk, IntPtr.Zero, invokeMethodSignature, IntPtr.Zero, typeArgs, null);
+                    return CallConverterThunk.MakeThunk(
+                        CallConverterThunk.ThunkKind.DelegateInvokeOpenStaticThunk,
+                        IntPtr.Zero,
+                        invokeMethodSignature,
+                        IntPtr.Zero,
+                        typeArgs,
+                        null
+                    );
 
                 default:
                     Environment.FailFast("Invalid delegate thunk kind");
@@ -299,18 +424,32 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        public static unsafe bool TryGetNonUnboxingFunctionPointerFromUnboxingAndInstantiatingStub(IntPtr potentialStub, RuntimeTypeHandle exactType, out IntPtr nonUnboxingMethod)
+        public static unsafe bool TryGetNonUnboxingFunctionPointerFromUnboxingAndInstantiatingStub(
+            IntPtr potentialStub,
+            RuntimeTypeHandle exactType,
+            out IntPtr nonUnboxingMethod
+        )
         {
             IntPtr callConversionId;
             object thunkPoolHeap = s_thunkPoolHeap;
-            if (thunkPoolHeap == null || !RuntimeAugments.TryGetThunkData(thunkPoolHeap, potentialStub, out callConversionId, out _))
+            if (
+                thunkPoolHeap == null
+                || !RuntimeAugments.TryGetThunkData(
+                    thunkPoolHeap,
+                    potentialStub,
+                    out callConversionId,
+                    out _
+                )
+            )
             {
                 // This isn't a call conversion stub
                 nonUnboxingMethod = IntPtr.Zero;
                 return false;
             }
 
-            CallConversionInfo conversionInfo = CallConversionInfo.GetConverter(callConversionId.ToInt32());
+            CallConversionInfo conversionInfo = CallConversionInfo.GetConverter(
+                callConversionId.ToInt32()
+            );
             if (conversionInfo.IsUnboxingThunk)
             {
                 // In this case the call converter is serving as an unboxing/instantiating stub
@@ -326,7 +465,9 @@ namespace Internal.Runtime.TypeLoader
                 // In this case the call converter is an instantiating stub wrapping an unboxing thunk.
                 // Use the redhawk GetCodeTarget to see through the unboxing stub and get the real underlying method
                 // and the instantiation arg does not need changing.
-                underlyingTargetMethod = RuntimeAugments.GetCodeTarget(conversionInfo.TargetFunctionPointer);
+                underlyingTargetMethod = RuntimeAugments.GetCodeTarget(
+                    conversionInfo.TargetFunctionPointer
+                );
                 newInstantiatingArg = conversionInfo.InstantiatingStubArgument;
             }
             else
@@ -334,8 +475,15 @@ namespace Internal.Runtime.TypeLoader
                 // At this point we've got a standard to generic converter wrapping an unboxing and instantiating
                 // stub. We need to convert that into a fat function pointer directly calling the underlying method
                 // or a calling convention converter instantiating stub wrapping the underlying method
-                IntPtr underlyingUnboxingAndInstantiatingMethod = RuntimeAugments.GetCodeTarget(conversionInfo.TargetFunctionPointer);
-                if (!TypeLoaderEnvironment.TryGetTargetOfUnboxingAndInstantiatingStub(underlyingUnboxingAndInstantiatingMethod, out underlyingTargetMethod))
+                IntPtr underlyingUnboxingAndInstantiatingMethod = RuntimeAugments.GetCodeTarget(
+                    conversionInfo.TargetFunctionPointer
+                );
+                if (
+                    !TypeLoaderEnvironment.TryGetTargetOfUnboxingAndInstantiatingStub(
+                        underlyingUnboxingAndInstantiatingMethod,
+                        out underlyingTargetMethod
+                    )
+                )
                 {
                     // We aren't wrapping an unboxing and instantiating stub. This should never happen
                     throw new NotSupportedException();
@@ -361,34 +509,53 @@ namespace Internal.Runtime.TypeLoader
 
             if (canUseFatFunctionPointerInsteadOfThunk)
             {
-                nonUnboxingMethod = FunctionPointerOps.GetGenericMethodFunctionPointer(underlyingTargetMethod, newInstantiatingArg);
+                nonUnboxingMethod = FunctionPointerOps.GetGenericMethodFunctionPointer(
+                    underlyingTargetMethod,
+                    newInstantiatingArg
+                );
                 return true;
             }
             else
             {
                 // Construct a new StandardToGenericInstantiating thunk around the underlyingTargetMethod
-                nonUnboxingMethod = MakeThunk(ThunkKind.StandardToGenericInstantiating,
-                                 underlyingTargetMethod,
-                                 newInstantiatingArg,
-                                 conversionInfo.ArgIteratorData,
-                                 conversionInfo.CalleeForcedByRefData);
+                nonUnboxingMethod = MakeThunk(
+                    ThunkKind.StandardToGenericInstantiating,
+                    underlyingTargetMethod,
+                    newInstantiatingArg,
+                    conversionInfo.ArgIteratorData,
+                    conversionInfo.CalleeForcedByRefData
+                );
                 return true;
             }
         }
 
-        public static unsafe bool TryGetCallConversionTargetPointerAndInstantiatingArg(IntPtr potentialStub, out IntPtr methodTarget, out IntPtr instantiatingArg)
+        public static unsafe bool TryGetCallConversionTargetPointerAndInstantiatingArg(
+            IntPtr potentialStub,
+            out IntPtr methodTarget,
+            out IntPtr instantiatingArg
+        )
         {
             methodTarget = instantiatingArg = IntPtr.Zero;
 
             IntPtr callConversionId;
             object thunkPoolHeap = s_thunkPoolHeap;
-            if (thunkPoolHeap == null || !RuntimeAugments.TryGetThunkData(thunkPoolHeap, potentialStub, out callConversionId, out _))
+            if (
+                thunkPoolHeap == null
+                || !RuntimeAugments.TryGetThunkData(
+                    thunkPoolHeap,
+                    potentialStub,
+                    out callConversionId,
+                    out _
+                )
+            )
             {
                 // This isn't a call conversion stub
                 return false;
             }
 
-            CallConversionInfo conversionInfo = CallConversionInfo.GetConverter(callConversionId.ToInt32());
+            CallConversionInfo conversionInfo = CallConversionInfo.GetConverter(
+                callConversionId.ToInt32()
+            );
             if (!conversionInfo.HasKnownTargetPointerAndInstantiatingArgument)
                 return false;
 
@@ -406,9 +573,10 @@ namespace Internal.Runtime.TypeLoader
             public void* pSrc;
             public int numStackSlots;
             public uint fpReturnSize;
+
             // Both of the following pointers are always present to reduce the spread of ifdefs in the C++ and ASM definitions of the struct
-            public ArgumentRegisters* pArgumentRegisters;               // Not used by AMD64
-            public FloatArgumentRegisters* pFloatArgumentRegisters;     // Not used by X86
+            public ArgumentRegisters* pArgumentRegisters; // Not used by AMD64
+            public FloatArgumentRegisters* pFloatArgumentRegisters; // Not used by X86
             public void* pTarget;
 
             //
@@ -429,7 +597,10 @@ namespace Internal.Runtime.TypeLoader
             byte* endBytes = (pointer + size);
 
             // handle unaligned bytes at the beginning
-            while (!ArgIterator.IS_ALIGNED(new IntPtr(memBytes), (int)IntPtr.Size) && (memBytes < endBytes))
+            while (
+                !ArgIterator.IS_ALIGNED(new IntPtr(memBytes), (int)IntPtr.Size)
+                && (memBytes < endBytes)
+            )
                 *memBytes++ = (byte)0;
 
             // now write pointer sized pieces
@@ -477,18 +648,31 @@ namespace Internal.Runtime.TypeLoader
 #endif
 
         [DebuggerGuidedStepThroughAttribute]
-        private static unsafe IntPtr CallConversionThunk(IntPtr callerTransitionBlockParam, IntPtr callConversionId)
+        private static unsafe IntPtr CallConversionThunk(
+            IntPtr callerTransitionBlockParam,
+            IntPtr callConversionId
+        )
         {
             CallConversionParameters conversionParams = default(CallConversionParameters);
 
             try
             {
-                conversionParams = new CallConversionParameters(CallConversionInfo.GetConverter(callConversionId.ToInt32()), callerTransitionBlockParam);
+                conversionParams = new CallConversionParameters(
+                    CallConversionInfo.GetConverter(callConversionId.ToInt32()),
+                    callerTransitionBlockParam
+                );
 
 #if CCCONVERTER_TRACE
                 System.Threading.Interlocked.Increment(ref s_numConversionsExecuted);
-                CallingConventionConverterLogger.WriteLine("CallConversionThunk executing... COUNT = " + s_numConversionsExecuted.LowLevelToString());
-                CallingConventionConverterLogger.WriteLine("Executing thunk of type " + conversionParams._conversionInfo.ThunkKindString() + ": ");
+                CallingConventionConverterLogger.WriteLine(
+                    "CallConversionThunk executing... COUNT = "
+                        + s_numConversionsExecuted.LowLevelToString()
+                );
+                CallingConventionConverterLogger.WriteLine(
+                    "Executing thunk of type "
+                        + conversionParams._conversionInfo.ThunkKindString()
+                        + ": "
+                );
 #endif
 
                 if (conversionParams._conversionInfo.IsMulticastDelegate)
@@ -501,12 +685,16 @@ namespace Internal.Runtime.TypeLoader
                     // Create a transition block on the stack.
                     // Note that SizeOfFrameArgumentArray does overflow checks with sufficient margin to prevent overflows here
                     int nStackBytes = conversionParams._calleeArgs.SizeOfFrameArgumentArray();
-                    int dwAllocaSize = TransitionBlock.GetNegSpaceSize() + sizeof(TransitionBlock) + nStackBytes;
+                    int dwAllocaSize =
+                        TransitionBlock.GetNegSpaceSize() + sizeof(TransitionBlock) + nStackBytes;
 
-                    RuntimeAugments.RunFunctionWithConservativelyReportedBuffer(dwAllocaSize, &InvokeTarget, ref conversionParams);
+                    RuntimeAugments.RunFunctionWithConservativelyReportedBuffer(
+                        dwAllocaSize,
+                        &InvokeTarget,
+                        ref conversionParams
+                    );
                     System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
                 }
-
 
                 return conversionParams._invokeReturnValue;
             }
@@ -517,19 +705,28 @@ namespace Internal.Runtime.TypeLoader
         }
 
         [DebuggerGuidedStepThroughAttribute]
-        private static unsafe IntPtr MulticastDelegateInvoke(ref CallConversionParameters conversionParams)
+        private static unsafe IntPtr MulticastDelegateInvoke(
+            ref CallConversionParameters conversionParams
+        )
         {
             // Create a transition block on the stack.
             // Note that SizeOfFrameArgumentArray does overflow checks with sufficient margin to prevent overflows here
             int nStackBytes = conversionParams._calleeArgs.SizeOfFrameArgumentArray();
-            int dwAllocaSize = TransitionBlock.GetNegSpaceSize() + sizeof(TransitionBlock) + nStackBytes;
+            int dwAllocaSize =
+                TransitionBlock.GetNegSpaceSize() + sizeof(TransitionBlock) + nStackBytes;
 
             for (int i = 0; i < conversionParams.MulticastDelegateCallCount; i++)
             {
                 conversionParams.PrepareNextMulticastDelegateCall(i);
-                conversionParams._copyReturnValue = (i == (conversionParams.MulticastDelegateCallCount - 1));
+                conversionParams._copyReturnValue = (
+                    i == (conversionParams.MulticastDelegateCallCount - 1)
+                );
 
-                RuntimeAugments.RunFunctionWithConservativelyReportedBuffer(dwAllocaSize, &InvokeTarget, ref conversionParams);
+                RuntimeAugments.RunFunctionWithConservativelyReportedBuffer(
+                    dwAllocaSize,
+                    &InvokeTarget,
+                    ref conversionParams
+                );
                 System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             }
 
@@ -537,10 +734,14 @@ namespace Internal.Runtime.TypeLoader
         }
 
         [DebuggerGuidedStepThroughAttribute]
-        private static unsafe void InvokeTarget(void* allocatedStackBuffer, ref CallConversionParameters conversionParams)
+        private static unsafe void InvokeTarget(
+            void* allocatedStackBuffer,
+            ref CallConversionParameters conversionParams
+        )
         {
             byte* callerTransitionBlock = conversionParams._callerTransitionBlock;
-            byte* calleeTransitionBlock = ((byte*)allocatedStackBuffer) + TransitionBlock.GetNegSpaceSize();
+            byte* calleeTransitionBlock =
+                ((byte*)allocatedStackBuffer) + TransitionBlock.GetNegSpaceSize();
 
             //
             // Setup some of the special parameters on the output transition block
@@ -550,35 +751,82 @@ namespace Internal.Runtime.TypeLoader
             void* VASigCookie = conversionParams.VarArgSigCookie;
             void* instantiatingStubArgument = (void*)conversionParams.InstantiatingStubArgument;
             {
-                Debug.Assert((thisPointer != null && conversionParams._calleeArgs.HasThis()) || (thisPointer == null && !conversionParams._calleeArgs.HasThis()));
+                Debug.Assert(
+                    (thisPointer != null && conversionParams._calleeArgs.HasThis())
+                        || (thisPointer == null && !conversionParams._calleeArgs.HasThis())
+                );
                 if (thisPointer != null)
                 {
                     *((void**)(calleeTransitionBlock + ArgIterator.GetThisOffset())) = thisPointer;
                 }
 
-                Debug.Assert((callerRetBuffer != null && conversionParams._calleeArgs.HasRetBuffArg()) || (callerRetBuffer == null && !conversionParams._calleeArgs.HasRetBuffArg()));
+                Debug.Assert(
+                    (callerRetBuffer != null && conversionParams._calleeArgs.HasRetBuffArg())
+                        || (
+                            callerRetBuffer == null && !conversionParams._calleeArgs.HasRetBuffArg()
+                        )
+                );
                 if (callerRetBuffer != null)
                 {
-                    *((void**)(calleeTransitionBlock + conversionParams._calleeArgs.GetRetBuffArgOffset())) = callerRetBuffer;
+                    *(
+                        (void**)(
+                            calleeTransitionBlock
+                            + conversionParams._calleeArgs.GetRetBuffArgOffset()
+                        )
+                    ) = callerRetBuffer;
                 }
 
-                Debug.Assert((VASigCookie != null && conversionParams._calleeArgs.IsVarArg()) || (VASigCookie == null && !conversionParams._calleeArgs.IsVarArg()));
+                Debug.Assert(
+                    (VASigCookie != null && conversionParams._calleeArgs.IsVarArg())
+                        || (VASigCookie == null && !conversionParams._calleeArgs.IsVarArg())
+                );
                 if (VASigCookie != null)
                 {
-                    *((void**)(calleeTransitionBlock + conversionParams._calleeArgs.GetVASigCookieOffset())) = VASigCookie;
+                    *(
+                        (void**)(
+                            calleeTransitionBlock
+                            + conversionParams._calleeArgs.GetVASigCookieOffset()
+                        )
+                    ) = VASigCookie;
                 }
 
-                Debug.Assert((instantiatingStubArgument != null && conversionParams._calleeArgs.HasParamType()) || (instantiatingStubArgument == null && !conversionParams._calleeArgs.HasParamType()));
+                Debug.Assert(
+                    (
+                        instantiatingStubArgument != null
+                        && conversionParams._calleeArgs.HasParamType()
+                    )
+                        || (
+                            instantiatingStubArgument == null
+                            && !conversionParams._calleeArgs.HasParamType()
+                        )
+                );
                 if (instantiatingStubArgument != null)
                 {
-                    *((void**)(calleeTransitionBlock + conversionParams._calleeArgs.GetParamTypeArgOffset())) = instantiatingStubArgument;
+                    *(
+                        (void**)(
+                            calleeTransitionBlock
+                            + conversionParams._calleeArgs.GetParamTypeArgOffset()
+                        )
+                    ) = instantiatingStubArgument;
                 }
             }
 #if CCCONVERTER_TRACE
-            if (thisPointer != null) CallingConventionConverterLogger.WriteLine("    ThisPtr  = " + new IntPtr(thisPointer).LowLevelToString());
-            if (callerRetBuffer != null) CallingConventionConverterLogger.WriteLine("    RetBuf   = " + new IntPtr(callerRetBuffer).LowLevelToString());
-            if (VASigCookie != null) CallingConventionConverterLogger.WriteLine("    VASig    = " + new IntPtr(VASigCookie).LowLevelToString());
-            if (instantiatingStubArgument != null) CallingConventionConverterLogger.WriteLine("    InstArg  = " + new IntPtr(instantiatingStubArgument).LowLevelToString());
+            if (thisPointer != null)
+                CallingConventionConverterLogger.WriteLine(
+                    "    ThisPtr  = " + new IntPtr(thisPointer).LowLevelToString()
+                );
+            if (callerRetBuffer != null)
+                CallingConventionConverterLogger.WriteLine(
+                    "    RetBuf   = " + new IntPtr(callerRetBuffer).LowLevelToString()
+                );
+            if (VASigCookie != null)
+                CallingConventionConverterLogger.WriteLine(
+                    "    VASig    = " + new IntPtr(VASigCookie).LowLevelToString()
+                );
+            if (instantiatingStubArgument != null)
+                CallingConventionConverterLogger.WriteLine(
+                    "    InstArg  = " + new IntPtr(instantiatingStubArgument).LowLevelToString()
+                );
 #endif
 
             object[] argumentsAsObjectArray = null;
@@ -621,8 +869,10 @@ namespace Internal.Runtime.TypeLoader
                     // frame (we leave it null otherwise since the worker can perform a useful optimization if it
                     // knows no floating point registers need to be set up).
                     if ((ofsCallee < 0) && (pFloatArgumentRegisters == null))
-                        pFloatArgumentRegisters = (FloatArgumentRegisters*)(calleeTransitionBlock +
-                                                                            TransitionBlock.GetOffsetOfFloatArgumentRegisters());
+                        pFloatArgumentRegisters = (FloatArgumentRegisters*)(
+                            calleeTransitionBlock
+                            + TransitionBlock.GetOffsetOfFloatArgumentRegisters()
+                        );
 #endif
 
                     byte* pDest = calleeTransitionBlock + ofsCallee;
@@ -653,11 +903,13 @@ namespace Internal.Runtime.TypeLoader
                                 ofsCaller = conversionParams._callerArgs.GetNextOffset();
                                 pSrc = callerTransitionBlock + ofsCaller;
                                 stackSizeCaller = conversionParams._callerArgs.GetArgSize();
-                                isCallerArgPassedByRef = conversionParams._callerArgs.IsArgPassedByRef();
+                                isCallerArgPassedByRef =
+                                    conversionParams._callerArgs.IsArgPassedByRef();
                             }
 
                             stackSizeCallee = conversionParams._calleeArgs.GetArgSize();
-                            isCalleeArgPassedByRef = conversionParams._calleeArgs.IsArgPassedByRef();
+                            isCalleeArgPassedByRef =
+                                conversionParams._calleeArgs.IsArgPassedByRef();
                         }
                         else if (conversionParams._conversionInfo.IsAnyDynamicInvokerThunk)
                         {
@@ -670,7 +922,9 @@ namespace Internal.Runtime.TypeLoader
                             InvokeUtils.DynamicInvokeParamLookupType paramLookupType;
 
                             RuntimeTypeHandle argumentRuntimeTypeHandle;
-                            CorElementType argType = conversionParams._calleeArgs.GetArgType(out thArgType);
+                            CorElementType argType = conversionParams._calleeArgs.GetArgType(
+                                out thArgType
+                            );
                             Debug.Assert(!thArgType.IsNull());
 
                             if (argType == CorElementType.ELEMENT_TYPE_BYREF)
@@ -687,51 +941,95 @@ namespace Internal.Runtime.TypeLoader
                                 argumentRuntimeTypeHandle = thArgType.GetRuntimeTypeHandle();
                             }
 
-                            IntPtr argSetupStatePtr = conversionParams.GetArgSetupStateDataPointer();
+                            IntPtr argSetupStatePtr =
+                                conversionParams.GetArgSetupStateDataPointer();
                             object invokeParam = InvokeUtils.DynamicInvokeParamHelperCore(
                                 argSetupStatePtr,
                                 argumentRuntimeTypeHandle,
                                 out paramLookupType,
                                 out index,
-                                argType == CorElementType.ELEMENT_TYPE_BYREF ? InvokeUtils.DynamicInvokeParamType.Ref : InvokeUtils.DynamicInvokeParamType.In);
+                                argType == CorElementType.ELEMENT_TYPE_BYREF
+                                    ? InvokeUtils.DynamicInvokeParamType.Ref
+                                    : InvokeUtils.DynamicInvokeParamType.In
+                            );
 
-                            if (paramLookupType == InvokeUtils.DynamicInvokeParamLookupType.ValuetypeObjectReturned)
+                            if (
+                                paramLookupType
+                                == InvokeUtils.DynamicInvokeParamLookupType.ValuetypeObjectReturned
+                            )
                             {
-                                CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.Target = invokeParam;
-                                argPtr = CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress() + IntPtr.Size;
+                                CallConversionParameters
+                                    .s_pinnedGCHandles
+                                    ._dynamicInvokeArgHandle
+                                    .Target = invokeParam;
+                                argPtr =
+                                    CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress()
+                                    + IntPtr.Size;
                             }
                             else
                             {
-                                Debug.Assert(paramLookupType == InvokeUtils.DynamicInvokeParamLookupType.IndexIntoObjectArrayReturned);
-                                Debug.Assert((invokeParam is object[]) && (uint)index < (uint)((object[])invokeParam).Length);
+                                Debug.Assert(
+                                    paramLookupType
+                                        == InvokeUtils
+                                            .DynamicInvokeParamLookupType
+                                            .IndexIntoObjectArrayReturned
+                                );
+                                Debug.Assert(
+                                    (invokeParam is object[])
+                                        && (uint)index < (uint)((object[])invokeParam).Length
+                                );
 
-                                CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.Target = ((object[])invokeParam)[index];
-                                pinnedResultObject = CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress();
+                                CallConversionParameters
+                                    .s_pinnedGCHandles
+                                    ._dynamicInvokeArgHandle
+                                    .Target = ((object[])invokeParam)[index];
+                                pinnedResultObject =
+                                    CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress();
 
                                 if (conversionParams._calleeArgs.IsArgPassedByRef())
                                 {
                                     // We need to keep track of the array of parameters used by the InvokeUtils infrastructure, so we can copy
                                     // back results of byref parameters
-                                    conversionParams._dynamicInvokeParams = conversionParams._dynamicInvokeParams ?? (object[])invokeParam;
+                                    conversionParams._dynamicInvokeParams =
+                                        conversionParams._dynamicInvokeParams
+                                        ?? (object[])invokeParam;
 
                                     // Use wrappers to pass objects byref (Wrappers can handle both null and non-null input byref parameters)
-                                    conversionParams._dynamicInvokeByRefObjectArgs = conversionParams._dynamicInvokeByRefObjectArgs ?? new DynamicInvokeByRefArgObjectWrapper[conversionParams._dynamicInvokeParams.Length];
+                                    conversionParams._dynamicInvokeByRefObjectArgs =
+                                        conversionParams._dynamicInvokeByRefObjectArgs
+                                        ?? new DynamicInvokeByRefArgObjectWrapper[
+                                            conversionParams._dynamicInvokeParams.Length
+                                        ];
 
                                     // The wrapper objects need to be pinned while we take the address of the byref'd object, and copy it to the callee
                                     // transition block (which is conservatively reported). Once the copy is done, we can safely unpin the wrapper object.
                                     if (pinnedResultObject == IntPtr.Zero)
                                     {
                                         // Input byref parameter has a null value
-                                        conversionParams._dynamicInvokeByRefObjectArgs[index] = new DynamicInvokeByRefArgObjectWrapper();
+                                        conversionParams._dynamicInvokeByRefObjectArgs[index] =
+                                            new DynamicInvokeByRefArgObjectWrapper();
                                     }
                                     else
                                     {
                                         // Input byref parameter has a non-null value
-                                        conversionParams._dynamicInvokeByRefObjectArgs[index] = new DynamicInvokeByRefArgObjectWrapper { _object = conversionParams._dynamicInvokeParams[index] };
+                                        conversionParams._dynamicInvokeByRefObjectArgs[index] =
+                                            new DynamicInvokeByRefArgObjectWrapper
+                                            {
+                                                _object = conversionParams._dynamicInvokeParams[
+                                                    index
+                                                ]
+                                            };
                                     }
 
-                                    CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.Target = conversionParams._dynamicInvokeByRefObjectArgs[index];
-                                    argPtr = CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress() + IntPtr.Size;
+                                    CallConversionParameters
+                                        .s_pinnedGCHandles
+                                        ._dynamicInvokeArgHandle
+                                        .Target = conversionParams._dynamicInvokeByRefObjectArgs[
+                                        index
+                                    ];
+                                    argPtr =
+                                        CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.GetRawTargetAddress()
+                                        + IntPtr.Size;
                                 }
                                 else
                                 {
@@ -748,8 +1046,10 @@ namespace Internal.Runtime.TypeLoader
                                 pSrc = (byte*)argPtr;
                             }
 
-                            stackSizeCaller = stackSizeCallee = conversionParams._calleeArgs.GetArgSize();
-                            isCallerArgPassedByRef = isCalleeArgPassedByRef = conversionParams._calleeArgs.IsArgPassedByRef();
+                            stackSizeCaller = stackSizeCallee =
+                                conversionParams._calleeArgs.GetArgSize();
+                            isCallerArgPassedByRef = isCalleeArgPassedByRef =
+                                conversionParams._calleeArgs.IsArgPassedByRef();
                         }
                         else
                         {
@@ -759,18 +1059,21 @@ namespace Internal.Runtime.TypeLoader
                             stackSizeCallee = conversionParams._calleeArgs.GetArgSize();
                             stackSizeCaller = conversionParams._callerArgs.GetArgSize();
 
-                            isCalleeArgPassedByRef = conversionParams._calleeArgs.IsArgPassedByRef();
-                            isCallerArgPassedByRef = conversionParams._callerArgs.IsArgPassedByRef();
+                            isCalleeArgPassedByRef =
+                                conversionParams._calleeArgs.IsArgPassedByRef();
+                            isCallerArgPassedByRef =
+                                conversionParams._callerArgs.IsArgPassedByRef();
                         }
                     }
                     Debug.Assert(stackSizeCallee == stackSizeCaller);
-
 
                     if (conversionParams._conversionInfo.IsObjectArrayDelegateThunk)
                     {
                         // Box (if needed) and copy arguments to an object array instead of the callee's transition block
 
-                        argumentsAsObjectArray = argumentsAsObjectArray ?? new object[conversionParams._callerArgs.NumFixedArgs()];
+                        argumentsAsObjectArray =
+                            argumentsAsObjectArray
+                            ?? new object[conversionParams._callerArgs.NumFixedArgs()];
 
                         conversionParams._callerArgs.GetArgType(out thArgType);
                         Debug.Assert(!thArgType.IsNull());
@@ -779,17 +1082,25 @@ namespace Internal.Runtime.TypeLoader
                         {
                             Debug.Assert(!isCallerArgPassedByRef);
                             Debug.Assert(conversionParams._callerArgs.GetArgSize() == IntPtr.Size);
-                            argumentsAsObjectArray[arg] = Unsafe.As<IntPtr, object>(ref *(IntPtr*)pSrc);
+                            argumentsAsObjectArray[arg] = Unsafe.As<IntPtr, object>(
+                                ref *(IntPtr*)pSrc
+                            );
                         }
                         else
                         {
                             if (isCallerArgPassedByRef)
                             {
-                                argumentsAsObjectArray[arg] = RuntimeAugments.Box(thArgType.GetRuntimeTypeHandle(), new IntPtr(*((void**)pSrc)));
+                                argumentsAsObjectArray[arg] = RuntimeAugments.Box(
+                                    thArgType.GetRuntimeTypeHandle(),
+                                    new IntPtr(*((void**)pSrc))
+                                );
                             }
                             else
                             {
-                                argumentsAsObjectArray[arg] = RuntimeAugments.Box(thArgType.GetRuntimeTypeHandle(), new IntPtr(pSrc));
+                                argumentsAsObjectArray[arg] = RuntimeAugments.Box(
+                                    thArgType.GetRuntimeTypeHandle(),
+                                    new IntPtr(pSrc)
+                                );
                             }
                         }
                     }
@@ -804,8 +1115,14 @@ namespace Internal.Runtime.TypeLoader
                             }
                             else
                             {
-                                CorElementType argElemType = conversionParams._calleeArgs.GetArgType(out thArgType);
-                                ExtendingCopy_NoWriteBarrier(pSrc, pDest, argElemType, stackSizeCaller);
+                                CorElementType argElemType =
+                                    conversionParams._calleeArgs.GetArgType(out thArgType);
+                                ExtendingCopy_NoWriteBarrier(
+                                    pSrc,
+                                    pDest,
+                                    argElemType,
+                                    stackSizeCaller
+                                );
                             }
                         }
                         else
@@ -821,17 +1138,29 @@ namespace Internal.Runtime.TypeLoader
                             {
                                 // Copy into the destination the data pointed at by the pointer in the source(caller) data.
                                 byte* pRealSrc = *(byte**)pSrc;
-                                CorElementType argElemType = conversionParams._calleeArgs.GetArgType(out thArgType);
-                                ExtendingCopy_NoWriteBarrier(pRealSrc, pDest, argElemType, stackSizeCaller);
+                                CorElementType argElemType =
+                                    conversionParams._calleeArgs.GetArgType(out thArgType);
+                                ExtendingCopy_NoWriteBarrier(
+                                    pRealSrc,
+                                    pDest,
+                                    argElemType,
+                                    stackSizeCaller
+                                );
                             }
                         }
 
 #if CCCONVERTER_TRACE
-                        CallingConventionConverterLogger.WriteLine("    Arg" + arg.LowLevelToString() + " " +
-                            (isCalleeArgPassedByRef ? "ref = " : "    = ") +
-                            new IntPtr(*(void**)pDest).LowLevelToString() +
-                            " - RTTH = " + conversionParams._calleeArgs.GetEETypeDebugName((int)arg) +
-                            " - StackSize = " + stackSizeCallee.LowLevelToString());
+                        CallingConventionConverterLogger.WriteLine(
+                            "    Arg"
+                                + arg.LowLevelToString()
+                                + " "
+                                + (isCalleeArgPassedByRef ? "ref = " : "    = ")
+                                + new IntPtr(*(void**)pDest).LowLevelToString()
+                                + " - RTTH = "
+                                + conversionParams._calleeArgs.GetEETypeDebugName((int)arg)
+                                + " - StackSize = "
+                                + stackSizeCallee.LowLevelToString()
+                        );
 #endif
                     }
 
@@ -839,7 +1168,10 @@ namespace Internal.Runtime.TypeLoader
                     {
                         // The calleeTransitionBlock is GC-protected, so we can now safely unpin the return value of DynamicInvokeParamHelperCore,
                         // since we just copied it to the callee TB.
-                        CallConversionParameters.s_pinnedGCHandles._dynamicInvokeArgHandle.Target = null;
+                        CallConversionParameters
+                            .s_pinnedGCHandles
+                            ._dynamicInvokeArgHandle
+                            .Target = null;
                     }
 
                     arg++;
@@ -856,20 +1188,33 @@ namespace Internal.Runtime.TypeLoader
 
             if (conversionParams._conversionInfo.IsObjectArrayDelegateThunk)
             {
-                Debug.Assert(conversionParams._callerArgs.HasRetBuffArg() == conversionParams._calleeArgs.HasRetBuffArg());
+                Debug.Assert(
+                    conversionParams._callerArgs.HasRetBuffArg()
+                        == conversionParams._calleeArgs.HasRetBuffArg()
+                );
 
-                pinnedResultObject = conversionParams.InvokeObjectArrayDelegate(argumentsAsObjectArray);
+                pinnedResultObject = conversionParams.InvokeObjectArrayDelegate(
+                    argumentsAsObjectArray
+                );
             }
             else
             {
-                if ((TransitionBlock.InvalidOffset != ofsCaller) != conversionParams._conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget &&
-                    !conversionParams._conversionInfo.IsAnyDynamicInvokerThunk)
+                if (
+                    (TransitionBlock.InvalidOffset != ofsCaller)
+                        != conversionParams
+                            ._conversionInfo
+                            .CallerHasExtraParameterWhichIsFunctionTarget
+                    && !conversionParams._conversionInfo.IsAnyDynamicInvokerThunk
+                )
                 {
                     // The condition on the loop above is only verifying that callee has reach the end of its arguments.
                     // Here we check to see that caller has done so as well.
                     Environment.FailFast("Argument mismatch between caller and callee");
                 }
-                if (conversionParams._conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget && !conversionParams._conversionInfo.CalleeMayHaveParamType)
+                if (
+                    conversionParams._conversionInfo.CallerHasExtraParameterWhichIsFunctionTarget
+                    && !conversionParams._conversionInfo.CalleeMayHaveParamType
+                )
                 {
                     int stackSizeCaller = conversionParams._callerArgs.GetArgSize();
                     Debug.Assert(stackSizeCaller == IntPtr.Size);
@@ -884,9 +1229,13 @@ namespace Internal.Runtime.TypeLoader
                 }
 
                 callDescrData.pSrc = calleeTransitionBlock + sizeof(TransitionBlock);
-                callDescrData.numStackSlots = conversionParams._calleeArgs.SizeOfFrameArgumentArray() / ArchitectureConstants.STACK_ELEM_SIZE;
+                callDescrData.numStackSlots =
+                    conversionParams._calleeArgs.SizeOfFrameArgumentArray()
+                    / ArchitectureConstants.STACK_ELEM_SIZE;
 #if CALLDESCR_ARGREGS
-                callDescrData.pArgumentRegisters = (ArgumentRegisters*)(calleeTransitionBlock + TransitionBlock.GetOffsetOfArgumentRegisters());
+                callDescrData.pArgumentRegisters = (ArgumentRegisters*)(
+                    calleeTransitionBlock + TransitionBlock.GetOffsetOfArgumentRegisters()
+                );
 #endif
 #if CALLDESCR_FPARGREGS
                 callDescrData.pFloatArgumentRegisters = pFloatArgumentRegisters;
@@ -895,7 +1244,10 @@ namespace Internal.Runtime.TypeLoader
                 callDescrData.pTarget = (void*)functionPointerToCall;
 
                 ReturnBlock returnBlockForIgnoredData = default(ReturnBlock);
-                if (conversionParams._callerArgs.HasRetBuffArg() == conversionParams._calleeArgs.HasRetBuffArg())
+                if (
+                    conversionParams._callerArgs.HasRetBuffArg()
+                    == conversionParams._calleeArgs.HasRetBuffArg()
+                )
                 {
                     // If there is no return buffer explictly in use, return to a buffer which is conservatively reported
                     // by the universal transition frame.
@@ -903,7 +1255,9 @@ namespace Internal.Runtime.TypeLoader
                     // If there IS a return buffer in use, the function doesn't really return anything in the normal
                     // return value registers, but CallDescrThunk will always copy a pointer sized chunk into the
                     // ret buf. Make that ok by giving it a valid location to stash bits.
-                    callDescrData.pReturnBuffer = (void*)(callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock());
+                    callDescrData.pReturnBuffer = (void*)(
+                        callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock()
+                    );
                 }
                 else if (conversionParams._calleeArgs.HasRetBuffArg())
                 {
@@ -925,7 +1279,9 @@ namespace Internal.Runtime.TypeLoader
                     // a gc reference (or not), and then once the call is complete, copy the value into the return buffer
                     // passed by the caller. (Do not directly use the return buffer provided by the caller, as CallDescrWorker
                     // does not properly use a write barrier, and the actual return buffer provided may be on the GC heap.)
-                    callDescrData.pReturnBuffer = (void*)(callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock());
+                    callDescrData.pReturnBuffer = (void*)(
+                        callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock()
+                    );
                 }
 
                 //////////////////////////////////////////////////////////////
@@ -936,14 +1292,19 @@ namespace Internal.Runtime.TypeLoader
             }
 
             // For dynamic invoke thunks, we need to copy back values of reference type parameters that were passed byref
-            if (conversionParams._conversionInfo.IsAnyDynamicInvokerThunk && conversionParams._dynamicInvokeParams != null)
+            if (
+                conversionParams._conversionInfo.IsAnyDynamicInvokerThunk
+                && conversionParams._dynamicInvokeParams != null
+            )
             {
                 for (int i = 0; i < conversionParams._dynamicInvokeParams.Length; i++)
                 {
                     if (conversionParams._dynamicInvokeByRefObjectArgs[i] == null)
                         continue;
 
-                    object byrefObjectArgValue = conversionParams._dynamicInvokeByRefObjectArgs[i]._object;
+                    object byrefObjectArgValue = conversionParams._dynamicInvokeByRefObjectArgs[
+                        i
+                    ]._object;
                     conversionParams._dynamicInvokeParams[i] = byrefObjectArgValue;
                 }
             }
@@ -957,22 +1318,40 @@ namespace Internal.Runtime.TypeLoader
             // the target method called by the delegate. Use the callee's ArgIterator instead to get the return type info
             if (conversionParams._conversionInfo.IsAnyDynamicInvokerThunk)
             {
-                returnType = conversionParams._calleeArgs.GetReturnType(out thRetType, out forceByRefUnused);
+                returnType = conversionParams._calleeArgs.GetReturnType(
+                    out thRetType,
+                    out forceByRefUnused
+                );
             }
             else
             {
-                returnType = conversionParams._callerArgs.GetReturnType(out thRetType, out forceByRefUnused);
+                returnType = conversionParams._callerArgs.GetReturnType(
+                    out thRetType,
+                    out forceByRefUnused
+                );
             }
             Debug.Assert(!thRetType.IsNull());
             int returnSize = TypeHandle.GetElemSize(returnType, thRetType);
 
             // Unbox result of object array delegate call
-            if (conversionParams._conversionInfo.IsObjectArrayDelegateThunk && thRetType.IsValueType() && pinnedResultObject != IntPtr.Zero)
+            if (
+                conversionParams._conversionInfo.IsObjectArrayDelegateThunk
+                && thRetType.IsValueType()
+                && pinnedResultObject != IntPtr.Zero
+            )
                 pinnedResultObject += IntPtr.Size;
 
             // Process return values
-            if ((conversionParams._callerArgs.HasRetBuffArg() && !conversionParams._calleeArgs.HasRetBuffArg()) ||
-                (conversionParams._callerArgs.HasRetBuffArg() && conversionParams._conversionInfo.IsObjectArrayDelegateThunk))
+            if (
+                (
+                    conversionParams._callerArgs.HasRetBuffArg()
+                    && !conversionParams._calleeArgs.HasRetBuffArg()
+                )
+                || (
+                    conversionParams._callerArgs.HasRetBuffArg()
+                    && conversionParams._conversionInfo.IsObjectArrayDelegateThunk
+                )
+            )
             {
                 // We should never get here for dynamic invoke thunks
                 Debug.Assert(!conversionParams._conversionInfo.IsAnyDynamicInvokerThunk);
@@ -980,10 +1359,19 @@ namespace Internal.Runtime.TypeLoader
                 // The CallDescrWorkerInternal function will have put the return value into the return buffer, as register return values are
                 // extended to the size of a register, we can't just ask the CallDescrWorker to write directly into the return buffer.
                 // Thus we copy only the correct amount of data here to the real target address
-                byte* incomingRetBufPointer = *((byte**)(callerTransitionBlock + conversionParams._callerArgs.GetRetBuffArgOffset()));
+                byte* incomingRetBufPointer = *(
+                    (byte**)(
+                        callerTransitionBlock + conversionParams._callerArgs.GetRetBuffArgOffset()
+                    )
+                );
 
-                void* sourceBuffer = conversionParams._conversionInfo.IsObjectArrayDelegateThunk ? (void*)pinnedResultObject : callDescrData.pReturnBuffer;
-                Debug.Assert(sourceBuffer != null || conversionParams._conversionInfo.IsObjectArrayDelegateThunk);
+                void* sourceBuffer = conversionParams._conversionInfo.IsObjectArrayDelegateThunk
+                    ? (void*)pinnedResultObject
+                    : callDescrData.pReturnBuffer;
+                Debug.Assert(
+                    sourceBuffer != null
+                        || conversionParams._conversionInfo.IsObjectArrayDelegateThunk
+                );
 
                 if (sourceBuffer == null)
                 {
@@ -997,10 +1385,16 @@ namespace Internal.Runtime.TypeLoader
 
                     bool useGCSafeCopy = false;
 
-                    if ((returnType == CorElementType.ELEMENT_TYPE_CLASS) || thRetType.IsValueType())
+                    if (
+                        (returnType == CorElementType.ELEMENT_TYPE_CLASS) || thRetType.IsValueType()
+                    )
                     {
                         // The GC Safe copy assumes that memory pointers are pointer-aligned and copy length is a multiple of pointer-size
-                        if (isPointerAligned(incomingRetBufPointer) && isPointerAligned(sourceBuffer) && (returnSize % sizeof(IntPtr) == 0))
+                        if (
+                            isPointerAligned(incomingRetBufPointer)
+                            && isPointerAligned(sourceBuffer)
+                            && (returnSize % sizeof(IntPtr) == 0)
+                        )
                         {
                             useGCSafeCopy = true;
                         }
@@ -1008,11 +1402,20 @@ namespace Internal.Runtime.TypeLoader
 
                     if (useGCSafeCopy)
                     {
-                        RuntimeAugments.BulkMoveWithWriteBarrier(new IntPtr(incomingRetBufPointer), new IntPtr(sourceBuffer), returnSize);
+                        RuntimeAugments.BulkMoveWithWriteBarrier(
+                            new IntPtr(incomingRetBufPointer),
+                            new IntPtr(sourceBuffer),
+                            returnSize
+                        );
                     }
                     else
                     {
-                        Buffer.MemoryCopy(sourceBuffer, incomingRetBufPointer, returnSize, returnSize);
+                        Buffer.MemoryCopy(
+                            sourceBuffer,
+                            incomingRetBufPointer,
+                            returnSize,
+                            returnSize
+                        );
                     }
                 }
 
@@ -1046,7 +1449,10 @@ namespace Internal.Runtime.TypeLoader
                 //
                 // The simplest case is the one where there is no return value
                 bool dummyBool;
-                if (conversionParams._callerArgs.GetReturnType(out thDummy, out dummyBool) == CorElementType.ELEMENT_TYPE_VOID)
+                if (
+                    conversionParams._callerArgs.GetReturnType(out thDummy, out dummyBool)
+                    == CorElementType.ELEMENT_TYPE_VOID
+                )
                 {
                     conversionParams._invokeReturnValue = ReturnVoidReturnThunk;
                     return;
@@ -1057,7 +1463,10 @@ namespace Internal.Runtime.TypeLoader
 #if TARGET_X86
                 // Except on X86 where the return buffer is returned in the eax register, and looks like an integer return
 #else
-                if (conversionParams._callerArgs.HasRetBuffArg() && conversionParams._calleeArgs.HasRetBuffArg())
+                if (
+                    conversionParams._callerArgs.HasRetBuffArg()
+                    && conversionParams._calleeArgs.HasRetBuffArg()
+                )
                 {
                     Debug.Assert(!conversionParams._conversionInfo.IsObjectArrayDelegateThunk);
                     Debug.Assert(!conversionParams._conversionInfo.IsAnyDynamicInvokerThunk);
@@ -1066,7 +1475,9 @@ namespace Internal.Runtime.TypeLoader
                 }
 #endif
 
-                void* returnValueToCopy = (void*)(callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock());
+                void* returnValueToCopy = (void*)(
+                    callerTransitionBlock + TransitionBlock.GetOffsetOfReturnValuesBlock()
+                );
 
                 if (conversionParams._conversionInfo.IsObjectArrayDelegateThunk)
                 {
@@ -1079,11 +1490,19 @@ namespace Internal.Runtime.TypeLoader
                         if (returnValueToCopy == null)
                         {
                             // object array delegate thunk result is a null object. We'll fill the return buffer with 'returnSize' zeros in that case
-                            memzeroPointer((byte*)(&((TransitionBlock*)callerTransitionBlock)->m_returnBlock), sizeof(ReturnBlock));
+                            memzeroPointer(
+                                (byte*)(&((TransitionBlock*)callerTransitionBlock)->m_returnBlock),
+                                sizeof(ReturnBlock)
+                            );
                         }
                         else
                         {
-                            ExtendingCopy_WriteBarrier(returnValueToCopy, &((TransitionBlock*)callerTransitionBlock)->m_returnBlock, returnType, returnSize);
+                            ExtendingCopy_WriteBarrier(
+                                returnValueToCopy,
+                                &((TransitionBlock*)callerTransitionBlock)->m_returnBlock,
+                                returnType,
+                                returnSize
+                            );
                         }
 #endif
                     }
@@ -1091,12 +1510,20 @@ namespace Internal.Runtime.TypeLoader
                     {
                         returnValueToCopy = (void*)&pinnedResultObject;
 #if TARGET_X86
-                        ((TransitionBlock*)callerTransitionBlock)->m_returnBlock.returnValue = pinnedResultObject;
+                        ((TransitionBlock*)callerTransitionBlock)
+                            ->m_returnBlock
+                            .returnValue = pinnedResultObject;
 #endif
                     }
                 }
-                else if (conversionParams._conversionInfo.IsAnyDynamicInvokerThunk &&
-                    (thRetType.IsValueType() || thRetType.IsPointerType() || returnType == CorElementType.ELEMENT_TYPE_BYREF))
+                else if (
+                    conversionParams._conversionInfo.IsAnyDynamicInvokerThunk
+                    && (
+                        thRetType.IsValueType()
+                        || thRetType.IsPointerType()
+                        || returnType == CorElementType.ELEMENT_TYPE_BYREF
+                    )
+                )
                 {
                     Debug.Assert(returnValueToCopy != null);
 
@@ -1107,8 +1534,13 @@ namespace Internal.Runtime.TypeLoader
                     }
                     else
                     {
-                        if (!conversionParams._callerArgs.HasRetBuffArg() && conversionParams._calleeArgs.HasRetBuffArg())
-                            returnValueToCopy = (void*)(new IntPtr(*((void**)returnValueToCopy)) + IntPtr.Size);
+                        if (
+                            !conversionParams._callerArgs.HasRetBuffArg()
+                            && conversionParams._calleeArgs.HasRetBuffArg()
+                        )
+                            returnValueToCopy = (void*)(
+                                new IntPtr(*((void**)returnValueToCopy)) + IntPtr.Size
+                            );
 
                         if (returnType == CorElementType.ELEMENT_TYPE_BYREF)
                         {
@@ -1116,24 +1548,36 @@ namespace Internal.Runtime.TypeLoader
                             returnValueToCopy = *(void**)returnValueToCopy;
                         }
 
-                        RuntimeTypeHandle returnTypeRuntimeTypeHandle = thRetType.GetRuntimeTypeHandle();
+                        RuntimeTypeHandle returnTypeRuntimeTypeHandle =
+                            thRetType.GetRuntimeTypeHandle();
 
                         // Need to box value type before returning it
                         object returnValue;
-                        if (returnType == CorElementType.ELEMENT_TYPE_BYREF && returnValueToCopy == null)
+                        if (
+                            returnType == CorElementType.ELEMENT_TYPE_BYREF
+                            && returnValueToCopy == null
+                        )
                         {
                             // This is a byref return and dereferencing it would result in a NullReferenceException.
                             // Set the return value to a sentinel that InvokeUtils will recognize.
                             // Can't throw from here or we would wrap this in a TargetInvocationException.
                             returnValue = InvokeUtils.NullByRefValueSentinel;
                         }
-                        else if (RuntimeAugments.IsUnmanagedPointerType(returnTypeRuntimeTypeHandle))
+                        else if (
+                            RuntimeAugments.IsUnmanagedPointerType(returnTypeRuntimeTypeHandle)
+                        )
                         {
-                            returnValue = System.Reflection.Pointer.Box(*(void**)returnValueToCopy, Type.GetTypeFromHandle(returnTypeRuntimeTypeHandle));
+                            returnValue = System.Reflection.Pointer.Box(
+                                *(void**)returnValueToCopy,
+                                Type.GetTypeFromHandle(returnTypeRuntimeTypeHandle)
+                            );
                         }
                         else if (RuntimeAugments.IsValueType(returnTypeRuntimeTypeHandle))
                         {
-                            returnValue = RuntimeAugments.Box(returnTypeRuntimeTypeHandle, new IntPtr(returnValueToCopy));
+                            returnValue = RuntimeAugments.Box(
+                                returnTypeRuntimeTypeHandle,
+                                new IntPtr(returnValueToCopy)
+                            );
                         }
                         else
                         {
@@ -1141,8 +1585,10 @@ namespace Internal.Runtime.TypeLoader
                             Debug.Assert(returnType == CorElementType.ELEMENT_TYPE_BYREF);
                             returnValue = Unsafe.As<byte, object>(ref *(byte*)returnValueToCopy);
                         }
-                        CallConversionParameters.s_pinnedGCHandles._returnObjectHandle.Target = returnValue;
-                        pinnedResultObject = CallConversionParameters.s_pinnedGCHandles._returnObjectHandle.GetRawTargetAddress();
+                        CallConversionParameters.s_pinnedGCHandles._returnObjectHandle.Target =
+                            returnValue;
+                        pinnedResultObject =
+                            CallConversionParameters.s_pinnedGCHandles._returnObjectHandle.GetRawTargetAddress();
                         returnValueToCopy = (void*)&pinnedResultObject;
                     }
                     // Since we've changed the returnValueToCopy here, we need to update the idea of what we are returning
@@ -1151,7 +1597,9 @@ namespace Internal.Runtime.TypeLoader
                     returnSize = TypeHandle.GetElemSize(returnType, thRetType);
 
 #if TARGET_X86
-                    ((TransitionBlock*)callerTransitionBlock)->m_returnBlock.returnValue = pinnedResultObject;
+                    ((TransitionBlock*)callerTransitionBlock)
+                        ->m_returnBlock
+                        .returnValue = pinnedResultObject;
 #endif
                 }
 
@@ -1167,19 +1615,29 @@ namespace Internal.Runtime.TypeLoader
 
 #if CALLDESCR_FPARGREGSARERETURNREGS
                     Debug.Assert(fpReturnSize <= sizeof(FloatArgumentRegisters));
-                    memzeroPointerAligned(callerTransitionBlock + TransitionBlock.GetOffsetOfFloatArgumentRegisters(), sizeof(FloatArgumentRegisters));
+                    memzeroPointerAligned(
+                        callerTransitionBlock + TransitionBlock.GetOffsetOfFloatArgumentRegisters(),
+                        sizeof(FloatArgumentRegisters)
+                    );
                     if (returnValueToCopy == null)
                     {
                         // object array delegate thunk result is a null object. We'll fill the return buffer with 'returnSize' zeros in that case
                         Debug.Assert(conversionParams._conversionInfo.IsObjectArrayDelegateThunk);
-                        memzeroPointer(callerTransitionBlock + TransitionBlock.GetOffsetOfFloatArgumentRegisters(), (int)fpReturnSize);
+                        memzeroPointer(
+                            callerTransitionBlock
+                                + TransitionBlock.GetOffsetOfFloatArgumentRegisters(),
+                            (int)fpReturnSize
+                        );
                     }
                     else
                     {
-                        Buffer.MemoryCopy(returnValueToCopy,
-                                            callerTransitionBlock + TransitionBlock.GetOffsetOfFloatArgumentRegisters(),
-                                            (int)fpReturnSize,
-                                            (int)fpReturnSize);
+                        Buffer.MemoryCopy(
+                            returnValueToCopy,
+                            callerTransitionBlock
+                                + TransitionBlock.GetOffsetOfFloatArgumentRegisters(),
+                            (int)fpReturnSize,
+                            (int)fpReturnSize
+                        );
                     }
                     conversionParams._invokeReturnValue = ReturnVoidReturnThunk;
                     return;
@@ -1191,7 +1649,9 @@ namespace Internal.Runtime.TypeLoader
 
 #if TARGET_X86
                     SetupCallerActualReturnData(callerTransitionBlock);
-                    t_NonArgRegisterReturnSpace = ((TransitionBlock*)callerTransitionBlock)->m_returnBlock;
+                    t_NonArgRegisterReturnSpace = (
+                        (TransitionBlock*)callerTransitionBlock
+                    )->m_returnBlock;
 #elif TARGET_WASM
                     throw new NotImplementedException();
 #else
@@ -1214,7 +1674,9 @@ namespace Internal.Runtime.TypeLoader
 
 #if TARGET_X86
                 SetupCallerActualReturnData(callerTransitionBlock);
-                t_NonArgRegisterReturnSpace = ((TransitionBlock*)callerTransitionBlock)->m_returnBlock;
+                t_NonArgRegisterReturnSpace = (
+                    (TransitionBlock*)callerTransitionBlock
+                )->m_returnBlock;
                 conversionParams._invokeReturnValue = ReturnIntegerPointReturnThunk;
                 return;
 #else
@@ -1222,11 +1684,19 @@ namespace Internal.Runtime.TypeLoader
                 if (returnValueToCopy == null)
                 {
                     // Return result is a null object. We'll fill the return buffer with 'returnSize' zeros in that case
-                    memzeroPointer(callerTransitionBlock + TransitionBlock.GetOffsetOfArgumentRegisters(), returnSize);
+                    memzeroPointer(
+                        callerTransitionBlock + TransitionBlock.GetOffsetOfArgumentRegisters(),
+                        returnSize
+                    );
                 }
                 else
                 {
-                    ExtendingCopy_WriteBarrier(returnValueToCopy, callerTransitionBlock + TransitionBlock.GetOffsetOfArgumentRegisters(), returnType, returnSize);
+                    ExtendingCopy_WriteBarrier(
+                        returnValueToCopy,
+                        callerTransitionBlock + TransitionBlock.GetOffsetOfArgumentRegisters(),
+                        returnType,
+                        returnSize
+                    );
                 }
                 conversionParams._invokeReturnValue = ReturnIntegerPointReturnThunk;
 #endif
@@ -1244,7 +1714,12 @@ namespace Internal.Runtime.TypeLoader
         // unused high bytes of the pointer-sized slot are ignored by the consumer and are allowed to take on any value); however
         // to reduce the need for ever more #ifs in this file, this behavior will not be #if'd away. (Its not wrong, its just unnecessary)
         //
-        private static unsafe void ExtendingCopy_WriteBarrier(void* pSrcVoid, void* pDestVoid, CorElementType type, int typeSize)
+        private static unsafe void ExtendingCopy_WriteBarrier(
+            void* pSrcVoid,
+            void* pDestVoid,
+            CorElementType type,
+            int typeSize
+        )
         {
             byte* pSrc = (byte*)pSrcVoid;
             byte* pDest = (byte*)pDestVoid;
@@ -1253,8 +1728,16 @@ namespace Internal.Runtime.TypeLoader
                 SignExtend(pSrc, pDest, typeSize);
             else if (ZeroExtendType(type))
                 ZeroExtend(pSrc, pDest, typeSize);
-            else if (isPointerAligned(pSrc) && isPointerAligned(pDest) && (typeSize % sizeof(IntPtr) == 0))
-                RuntimeAugments.BulkMoveWithWriteBarrier(new IntPtr(pDest), new IntPtr(pSrc), typeSize);
+            else if (
+                isPointerAligned(pSrc)
+                && isPointerAligned(pDest)
+                && (typeSize % sizeof(IntPtr) == 0)
+            )
+                RuntimeAugments.BulkMoveWithWriteBarrier(
+                    new IntPtr(pDest),
+                    new IntPtr(pSrc),
+                    typeSize
+                );
             else
                 Buffer.MemoryCopy(pSrc, pDest, typeSize, typeSize);
         }
@@ -1270,7 +1753,12 @@ namespace Internal.Runtime.TypeLoader
         // unused high bytes of the pointer-sized slot are ignored by the consumer and are allowed to take on any value); however
         // to reduce the need for ever more #ifs in this file, this behavior will not be #if'd away. (Its not wrong, its just unnecessary)
         //
-        private static unsafe void ExtendingCopy_NoWriteBarrier(void* pSrcVoid, void* pDestVoid, CorElementType type, int typeSize)
+        private static unsafe void ExtendingCopy_NoWriteBarrier(
+            void* pSrcVoid,
+            void* pDestVoid,
+            CorElementType type,
+            int typeSize
+        )
         {
             byte* pSrc = (byte*)pSrcVoid;
             byte* pDest = (byte*)pDestVoid;
@@ -1293,7 +1781,6 @@ namespace Internal.Runtime.TypeLoader
                 case CorElementType.ELEMENT_TYPE_I4:
 #endif
                     return true;
-
             }
 
             return false;
@@ -1311,7 +1798,6 @@ namespace Internal.Runtime.TypeLoader
                 case CorElementType.ELEMENT_TYPE_U4:
 #endif
                     return true;
-
             }
 
             return false;
@@ -1339,7 +1825,9 @@ namespace Internal.Runtime.TypeLoader
                     break;
 #endif
                 default:
-                    Debug.Fail("Should only be called for sizes where sign extension is a meaningful concept");
+                    Debug.Fail(
+                        "Should only be called for sizes where sign extension is a meaningful concept"
+                    );
                     break;
             }
         }
@@ -1366,20 +1854,27 @@ namespace Internal.Runtime.TypeLoader
                     break;
 #endif
                 default:
-                    Debug.Fail("Should only be called for sizes where sign extension is a meaningful concept");
+                    Debug.Fail(
+                        "Should only be called for sizes where sign extension is a meaningful concept"
+                    );
                     break;
             }
         }
 
 #if CALLINGCONVENTION_CALLEE_POPS
-        private static unsafe void SetupCallerPopArgument(byte* callerTransitionBlock, ArgIterator callerArgs)
+        private static unsafe void SetupCallerPopArgument(
+            byte* callerTransitionBlock,
+            ArgIterator callerArgs
+        )
         {
             int argStackPopSize = callerArgs.CbStackPop();
 
 #if TARGET_X86
             // In a callee pops architecture, we must specify how much stack space to pop to reset the frame
             // to the ReturnValue thunk.
-            ((TransitionBlock*)callerTransitionBlock)->m_argumentRegisters.ecx = new IntPtr(argStackPopSize);
+            ((TransitionBlock*)callerTransitionBlock)
+                ->m_argumentRegisters
+                .ecx = new IntPtr(argStackPopSize);
 #else
 #error handling of how callee pop is handled is not yet implemented for this platform
 #endif
@@ -1395,7 +1890,9 @@ namespace Internal.Runtime.TypeLoader
 
             fixed (ReturnBlock* actualReturnDataStructAddress = &t_NonArgRegisterReturnSpace)
             {
-                ((TransitionBlock*)callerTransitionBlock)->m_argumentRegisters.edx = new IntPtr(actualReturnDataStructAddress);
+                ((TransitionBlock*)callerTransitionBlock)->m_argumentRegisters.edx = new IntPtr(
+                    actualReturnDataStructAddress
+                );
             }
         }
 #endif

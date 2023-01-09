@@ -17,7 +17,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Fixed size rolling tracing log. 
+    /// Fixed size rolling tracing log.
     /// </summary>
     /// <remarks>
     /// Recent entries are captured in a memory dump.
@@ -40,10 +40,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 EditAndContinueCapabilities,
             }
 
-            private static readonly StrongBox<EnumType> s_ProjectAnalysisSummary = new(EnumType.ProjectAnalysisSummary);
+            private static readonly StrongBox<EnumType> s_ProjectAnalysisSummary =
+                new(EnumType.ProjectAnalysisSummary);
             private static readonly StrongBox<EnumType> s_RudeEditKind = new(EnumType.RudeEditKind);
-            private static readonly StrongBox<EnumType> s_ModuleUpdateStatus = new(EnumType.ModuleUpdateStatus);
-            private static readonly StrongBox<EnumType> s_EditAndContinueCapabilities = new(EnumType.EditAndContinueCapabilities);
+            private static readonly StrongBox<EnumType> s_ModuleUpdateStatus =
+                new(EnumType.ModuleUpdateStatus);
+            private static readonly StrongBox<EnumType> s_EditAndContinueCapabilities =
+                new(EnumType.EditAndContinueCapabilities);
 
             public readonly object? Object;
             public readonly int Int32;
@@ -70,29 +73,47 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 Tokens = default;
             }
 
-            public object? GetDebuggerDisplay()
-                => (!Tokens.IsDefault) ? string.Join(",", Tokens.Select(token => token.ToString("X8"))) :
-                   (Object is null) ? Int32 :
-                   (Object is StrongBox<EnumType> { Value: var enumType }) ? enumType switch
-                   {
-                       EnumType.ProjectAnalysisSummary => (ProjectAnalysisSummary)Int32,
-                       EnumType.RudeEditKind => (RudeEditKind)Int32,
-                       EnumType.ModuleUpdateStatus => (ModuleUpdateStatus)Int32,
-                       EnumType.EditAndContinueCapabilities => (EditAndContinueCapabilities)Int32,
-                       _ => throw ExceptionUtilities.UnexpectedValue(enumType)
-                   } :
-                   Object;
+            public object? GetDebuggerDisplay() =>
+                (!Tokens.IsDefault)
+                    ? string.Join(",", Tokens.Select(token => token.ToString("X8")))
+                    : (Object is null)
+                        ? Int32
+                        : (Object is StrongBox<EnumType> { Value: var enumType })
+                            ? enumType switch
+                            {
+                                EnumType.ProjectAnalysisSummary => (ProjectAnalysisSummary)Int32,
+                                EnumType.RudeEditKind => (RudeEditKind)Int32,
+                                EnumType.ModuleUpdateStatus => (ModuleUpdateStatus)Int32,
+                                EnumType.EditAndContinueCapabilities
+                                    => (EditAndContinueCapabilities)Int32,
+                                _ => throw ExceptionUtilities.UnexpectedValue(enumType)
+                            }
+                            : Object;
 
             public static implicit operator Arg(string? value) => new(value);
+
             public static implicit operator Arg(int value) => new(value);
+
             public static implicit operator Arg(bool value) => new(value ? "true" : "false");
+
             public static implicit operator Arg(ProjectId value) => new(value.DebugName);
+
             public static implicit operator Arg(DocumentId value) => new(value.DebugName);
+
             public static implicit operator Arg(Diagnostic value) => new(value);
-            public static implicit operator Arg(ProjectAnalysisSummary value) => new((int)value, s_ProjectAnalysisSummary);
-            public static implicit operator Arg(RudeEditKind value) => new((int)value, s_RudeEditKind);
-            public static implicit operator Arg(ModuleUpdateStatus value) => new((int)value, s_ModuleUpdateStatus);
-            public static implicit operator Arg(EditAndContinueCapabilities value) => new((int)value, s_EditAndContinueCapabilities);
+
+            public static implicit operator Arg(ProjectAnalysisSummary value) =>
+                new((int)value, s_ProjectAnalysisSummary);
+
+            public static implicit operator Arg(RudeEditKind value) =>
+                new((int)value, s_RudeEditKind);
+
+            public static implicit operator Arg(ModuleUpdateStatus value) =>
+                new((int)value, s_ModuleUpdateStatus);
+
+            public static implicit operator Arg(EditAndContinueCapabilities value) =>
+                new((int)value, s_EditAndContinueCapabilities);
+
             public static implicit operator Arg(ImmutableArray<int> tokens) => new(tokens);
         }
 
@@ -109,7 +130,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             internal string GetDebuggerDisplay() =>
-                (MessageFormat == null) ? "" : string.Format(MessageFormat, Args?.Select(a => a.GetDebuggerDisplay()).ToArray() ?? Array.Empty<object>());
+                (MessageFormat == null)
+                    ? ""
+                    : string.Format(
+                        MessageFormat,
+                        Args?.Select(a => a.GetDebuggerDisplay()).ToArray() ?? Array.Empty<object>()
+                    );
         }
 
         private readonly Entry[] _log;
@@ -124,8 +150,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _logDirectory = logDirectory;
         }
 
-        public bool FileLoggingEnabled
-            => _logDirectory != null;
+        public bool FileLoggingEnabled => _logDirectory != null;
 
         private void AppendInMemory(Entry entry)
         {
@@ -133,8 +158,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             _log[(index - 1) % _log.Length] = entry;
         }
 
-        private void AppendFileLoggingErrorInMemory(string? path, Exception e)
-            => AppendInMemory(new Entry("Error writing log file '{0}': {1}", new[] { new Arg(path), new Arg(e.Message) }));
+        private void AppendFileLoggingErrorInMemory(string? path, Exception e) =>
+            AppendInMemory(
+                new Entry(
+                    "Error writing log file '{0}': {1}",
+                    new[] { new Arg(path), new Arg(e.Message) }
+                )
+            );
 
         private void AppendToFile(Entry entry)
         {
@@ -162,15 +192,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public void Write(string str)
-            => Write(str, args: null);
+        public void Write(string str) => Write(str, args: null);
 
-        public void Write(string format, params Arg[]? args)
-            => Append(new Entry(format, args));
+        public void Write(string format, params Arg[]? args) => Append(new Entry(format, args));
 
         [Conditional("DEBUG")]
-        public void DebugWrite(string str)
-            => DebugWrite(str, args: null);
+        public void DebugWrite(string str) => DebugWrite(str, args: null);
 
         [Conditional("DEBUG")]
         public void DebugWrite(string format, params Arg[]? args)
@@ -188,7 +215,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             return directory;
         }
 
-        private string MakeSourceFileLogPath(Document document, string suffix, DebuggingSessionId sessionId, int generation)
+        private string MakeSourceFileLogPath(
+            Document document,
+            string suffix,
+            DebuggingSessionId sessionId,
+            int generation
+        )
         {
             Debug.Assert(document.FilePath != null);
             Debug.Assert(document.Project.FilePath != null);
@@ -198,14 +230,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             var extension = PathUtilities.GetExtension(document.FilePath);
             var fileName = PathUtilities.GetFileName(document.FilePath, includeExtension: false);
 
-            var relativeDir = PathUtilities.IsSameDirectoryOrChildOf(documentDir, projectDir) ? PathUtilities.GetRelativePath(projectDir, documentDir) : documentDir;
+            var relativeDir = PathUtilities.IsSameDirectoryOrChildOf(documentDir, projectDir)
+                ? PathUtilities.GetRelativePath(projectDir, documentDir)
+                : documentDir;
             relativeDir = relativeDir.Replace('\\', '_').Replace('/', '_');
 
-            var directory = CreateSessionDirectory(sessionId, Path.Combine(document.Project.Name, relativeDir));
+            var directory = CreateSessionDirectory(
+                sessionId,
+                Path.Combine(document.Project.Name, relativeDir)
+            );
             return Path.Combine(directory, $"{fileName}.{generation}.{suffix}{extension}");
         }
 
-        public void WriteToFile(DebuggingSessionId sessionId, ImmutableArray<byte> bytes, string directory, string fileName)
+        public void WriteToFile(
+            DebuggingSessionId sessionId,
+            ImmutableArray<byte> bytes,
+            string directory,
+            string fileName
+        )
         {
             string? path = null;
             try
@@ -219,13 +261,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public async ValueTask WriteToFileAsync(Func<Stream, CancellationToken, ValueTask> writer, DebuggingSessionId sessionId, string directory, string fileName, CancellationToken cancellationToken)
+        public async ValueTask WriteToFileAsync(
+            Func<Stream, CancellationToken, ValueTask> writer,
+            DebuggingSessionId sessionId,
+            string directory,
+            string fileName,
+            CancellationToken cancellationToken
+        )
         {
             string? path = null;
             try
             {
                 path = Path.Combine(CreateSessionDirectory(sessionId, directory), fileName);
-                using var file = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write | FileShare.Delete);
+                using var file = new FileStream(
+                    path,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Write | FileShare.Delete
+                );
                 await writer(file, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -234,7 +287,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        private async ValueTask WriteDocumentAsync(Document document, string fileNameSuffix, DebuggingSessionId sessionId, int generation, CancellationToken cancellationToken)
+        private async ValueTask WriteDocumentAsync(
+            Document document,
+            string fileNameSuffix,
+            DebuggingSessionId sessionId,
+            int generation,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(document.FilePath != null);
 
@@ -243,7 +302,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             {
                 path = MakeSourceFileLogPath(document, fileNameSuffix, sessionId, generation);
                 var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                using var file = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Write | FileShare.Delete);
+                using var file = new FileStream(
+                    path,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.Write | FileShare.Delete
+                );
                 using var writer = new StreamWriter(file, text.Encoding ?? Encoding.UTF8);
                 text.Write(writer, cancellationToken);
             }
@@ -253,28 +317,46 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
         }
 
-        public async ValueTask WriteDocumentChangeAsync(Document? oldDocument, Document? newDocument, DebuggingSessionId sessionId, int generation, CancellationToken cancellationToken)
+        public async ValueTask WriteDocumentChangeAsync(
+            Document? oldDocument,
+            Document? newDocument,
+            DebuggingSessionId sessionId,
+            int generation,
+            CancellationToken cancellationToken
+        )
         {
             if (oldDocument?.FilePath != null)
             {
-                await WriteDocumentAsync(oldDocument, fileNameSuffix: "old", sessionId, generation, cancellationToken).ConfigureAwait(false);
+                await WriteDocumentAsync(
+                        oldDocument,
+                        fileNameSuffix: "old",
+                        sessionId,
+                        generation,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (newDocument?.FilePath != null)
             {
-                await WriteDocumentAsync(newDocument, fileNameSuffix: "new", sessionId, generation, cancellationToken).ConfigureAwait(false);
+                await WriteDocumentAsync(
+                        newDocument,
+                        fileNameSuffix: "new",
+                        sessionId,
+                        generation,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
         }
 
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly TraceLog _traceLog;
 
-            public TestAccessor(TraceLog traceLog)
-                => _traceLog = traceLog;
+            public TestAccessor(TraceLog traceLog) => _traceLog = traceLog;
 
             internal Entry[] Entries => _traceLog._log;
         }

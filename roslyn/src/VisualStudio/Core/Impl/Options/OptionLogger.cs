@@ -23,11 +23,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 var oldValue = oldOptions.GetOption(optionKey);
                 var currentValue = newOptions.GetOption(optionKey);
 
-                Logger.Log(FunctionId.Run_Environment_Options, Create(optionKey, oldValue, currentValue));
+                Logger.Log(
+                    FunctionId.Run_Environment_Options,
+                    Create(optionKey, oldValue, currentValue)
+                );
             }
         }
 
-        private static KeyValueLogMessage Create(OptionKey optionKey, object oldValue, object currentValue)
+        private static KeyValueLogMessage Create(
+            OptionKey optionKey,
+            object oldValue,
+            object currentValue
+        )
         {
             return KeyValueLogMessage.Create(m =>
             {
@@ -45,7 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return oldString + "->" + newString;
         }
 
-        private static string GetOptionValue(object oldValue)
-            => oldValue == null ? "[null]" : oldValue.ToString();
+        private static string GetOptionValue(object oldValue) =>
+            oldValue == null ? "[null]" : oldValue.ToString();
     }
 }

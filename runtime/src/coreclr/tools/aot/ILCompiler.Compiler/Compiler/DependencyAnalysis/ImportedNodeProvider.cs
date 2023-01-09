@@ -12,11 +12,27 @@ namespace ILCompiler.DependencyAnalysis
     public abstract class ImportedNodeProvider
     {
         public abstract IEETypeNode ImportedEETypeNode(NodeFactory factory, TypeDesc type);
-        public abstract ISortableSymbolNode ImportedGCStaticNode(NodeFactory factory, MetadataType type);
-        public abstract ISortableSymbolNode ImportedNonGCStaticNode(NodeFactory factory, MetadataType type);
-        public abstract ISortableSymbolNode ImportedTypeDictionaryNode(NodeFactory factory, TypeDesc type);
-        public abstract ISortableSymbolNode ImportedMethodDictionaryNode(NodeFactory factory, MethodDesc method);
-        public abstract IMethodNode ImportedMethodCodeNode(NodeFactory factory, MethodDesc method, bool unboxingStub);
+        public abstract ISortableSymbolNode ImportedGCStaticNode(
+            NodeFactory factory,
+            MetadataType type
+        );
+        public abstract ISortableSymbolNode ImportedNonGCStaticNode(
+            NodeFactory factory,
+            MetadataType type
+        );
+        public abstract ISortableSymbolNode ImportedTypeDictionaryNode(
+            NodeFactory factory,
+            TypeDesc type
+        );
+        public abstract ISortableSymbolNode ImportedMethodDictionaryNode(
+            NodeFactory factory,
+            MethodDesc method
+        );
+        public abstract IMethodNode ImportedMethodCodeNode(
+            NodeFactory factory,
+            MethodDesc method,
+            bool unboxingStub
+        );
     }
 
     public class ImportedNodeProviderThrowing : ImportedNodeProvider
@@ -26,27 +42,43 @@ namespace ILCompiler.DependencyAnalysis
             throw new NotSupportedException();
         }
 
-        public override ISortableSymbolNode ImportedGCStaticNode(NodeFactory factory, MetadataType type)
+        public override ISortableSymbolNode ImportedGCStaticNode(
+            NodeFactory factory,
+            MetadataType type
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override ISortableSymbolNode ImportedNonGCStaticNode(NodeFactory factory, MetadataType type)
+        public override ISortableSymbolNode ImportedNonGCStaticNode(
+            NodeFactory factory,
+            MetadataType type
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override ISortableSymbolNode ImportedTypeDictionaryNode(NodeFactory factory, TypeDesc type)
+        public override ISortableSymbolNode ImportedTypeDictionaryNode(
+            NodeFactory factory,
+            TypeDesc type
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override ISortableSymbolNode ImportedMethodDictionaryNode(NodeFactory factory, MethodDesc method)
+        public override ISortableSymbolNode ImportedMethodDictionaryNode(
+            NodeFactory factory,
+            MethodDesc method
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override IMethodNode ImportedMethodCodeNode(NodeFactory factory, MethodDesc method, bool unboxingStub)
+        public override IMethodNode ImportedMethodCodeNode(
+            NodeFactory factory,
+            MethodDesc method,
+            bool unboxingStub
+        )
         {
             throw new NotSupportedException();
         }

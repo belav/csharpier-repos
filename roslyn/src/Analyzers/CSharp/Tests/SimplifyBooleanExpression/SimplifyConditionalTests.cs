@@ -17,21 +17,25 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyBooleanExpression
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsSimplifyConditional)]
-    public partial class SimplifyConditionalTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public partial class SimplifyConditionalTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public SimplifyConditionalTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpSimplifyConditionalDiagnosticAnalyzer(), new SimplifyConditionalCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpSimplifyConditionalDiagnosticAnalyzer(),
+                new SimplifyConditionalCodeFixProvider()
+            );
 
         [Fact]
         public async Task TestSimpleCase()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -44,7 +48,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -56,14 +60,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestSimpleNegatedCase()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -76,7 +81,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -88,14 +93,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMustBeBool1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 
 class C
@@ -107,14 +113,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMustBeBool2()
         {
             await TestMissingAsync(
-@"
+                @"
 using System;
 
 class C
@@ -126,14 +133,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithTrueTrue()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -146,7 +154,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -158,14 +166,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWithFalseFalse()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -178,7 +187,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -190,14 +199,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWhenTrueIsTrueAndWhenFalseIsUnknown()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -210,7 +220,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -222,14 +232,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWhenTrueIsFalseAndWhenFalseIsUnknown()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -242,7 +253,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -254,14 +265,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWhenTrueIsUnknownAndWhenFalseIsTrue()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -274,7 +286,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -286,14 +298,15 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestWhenTrueIsUnknownAndWhenFalseIsFalse()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -306,7 +319,7 @@ class C
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
 }",
-@"
+                @"
 using System;
 
 class C
@@ -318,7 +331,8 @@ class C
 
     private bool X() => throw new NotImplementedException();
     private bool Y() => throw new NotImplementedException();
-}");
+}"
+            );
         }
     }
 }

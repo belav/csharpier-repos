@@ -22,10 +22,12 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         private PinnedSolutionInfo? _solutionInfo;
 
-        protected ServiceHubServiceBase(IServiceProvider serviceProvider, Stream stream, IEnumerable<JsonConverter>? jsonConverters = null)
-            : base(serviceProvider, stream, jsonConverters)
-        {
-        }
+        protected ServiceHubServiceBase(
+            IServiceProvider serviceProvider,
+            Stream stream,
+            IEnumerable<JsonConverter>? jsonConverters = null
+        )
+            : base(serviceProvider, stream, jsonConverters) { }
 
         /// <summary>
         /// Invoked remotely.
@@ -45,7 +47,9 @@ namespace Microsoft.CodeAnalysis.Remote
             return GetSolutionAsync(_solutionInfo, cancellationToken);
         }
 
-        public Task<Solution> GetSolutionAsync(JObject solutionInfo, CancellationToken cancellationToken)
-            => GetSolutionImplAsync(solutionInfo, cancellationToken);
+        public Task<Solution> GetSolutionAsync(
+            JObject solutionInfo,
+            CancellationToken cancellationToken
+        ) => GetSolutionImplAsync(solutionInfo, cancellationToken);
     }
 }

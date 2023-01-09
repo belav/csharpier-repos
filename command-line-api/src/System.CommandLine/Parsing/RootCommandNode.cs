@@ -5,10 +5,7 @@ namespace System.CommandLine.Parsing
 {
     internal class RootCommandNode : CommandNode
     {
-        public RootCommandNode(
-            Token token,
-            ICommand command) : base(token, command, null)
-        {
-        }
+        public RootCommandNode(Token token, ICommand command)
+            : base(token, command, null) { }
     }
 }

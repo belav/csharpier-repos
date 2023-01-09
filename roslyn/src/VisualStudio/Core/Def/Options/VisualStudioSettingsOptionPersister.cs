@@ -43,7 +43,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
         /// <remarks>
         /// We make sure this code is from the UI by asking for all <see cref="IOptionPersister"/> in <see cref="RoslynPackage.InitializeAsync"/>
         /// </remarks>
-        public VisualStudioSettingsOptionPersister(IGlobalOptionService globalOptionService, ISettingsManager? settingsManager)
+        public VisualStudioSettingsOptionPersister(
+            IGlobalOptionService globalOptionService,
+            ISettingsManager? settingsManager
+        )
         {
             Contract.ThrowIfNull(globalOptionService);
 
@@ -60,13 +63,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        private System.Threading.Tasks.Task OnSettingChangedAsync(object sender, PropertyChangedEventArgs args)
+        private System.Threading.Tasks.Task OnSettingChangedAsync(
+            object sender,
+            PropertyChangedEventArgs args
+        )
         {
             List<OptionKey>? optionsToRefresh = null;
 
             lock (_optionsToMonitorForChangesGate)
             {
-                if (_optionsToMonitorForChanges.TryGetValue(args.PropertyName, out var optionsToRefreshInsideLock))
+                if (
+                    _optionsToMonitorForChanges.TryGetValue(
+                        args.PropertyName,
+                        out var optionsToRefreshInsideLock
+                    )
+                )
                 {
                     // Make a copy of the list so we aren't using something that might mutate underneath us.
                     optionsToRefresh = optionsToRefreshInsideLock.ToList();
@@ -92,7 +103,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             return System.Threading.Tasks.Task.CompletedTask;
         }
 
-        private object? GetFirstOrDefaultValue(OptionKey optionKey, IEnumerable<ClientSettingsStorageLocation> storageLocations)
+        private object? GetFirstOrDefaultValue(
+            OptionKey optionKey,
+            IEnumerable<ClientSettingsStorageLocation> storageLocations
+        )
         {
             Contract.ThrowIfNull(_settingManager);
 
@@ -110,13 +124,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
                 RecordObservedValueToWatchForChanges(optionKey, storageKey);
 
-                if (optionKey.Option.Type == typeof(ImmutableArray<string>) &&
-                    _settingManager.TryGetValue(storageKey, out string[] stringArray) == GetValueResult.Success)
+                if (
+                    optionKey.Option.Type == typeof(ImmutableArray<string>)
+                    && _settingManager.TryGetValue(storageKey, out string[] stringArray)
+                        == GetValueResult.Success
+                )
                 {
                     return stringArray.ToImmutableArray();
                 }
 
-                if (_settingManager.TryGetValue(storageKey, out object value) == GetValueResult.Success)
+                if (
+                    _settingManager.TryGetValue(storageKey, out object value)
+                    == GetValueResult.Success
+                )
                 {
                     return value;
                 }
@@ -134,7 +154,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 return false;
             }
 
-            var storageLocations = optionKey.Option.StorageLocations.OfType<ClientSettingsStorageLocation>();
+            var storageLocations =
+                optionKey.Option.StorageLocations.OfType<ClientSettingsStorageLocation>();
             if (!storageLocations.Any())
             {
                 value = null;
@@ -144,7 +165,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             value = GetFirstOrDefaultValue(optionKey, storageLocations);
 
             // VS's ISettingsManager has some quirks around storing enums.  Specifically,
-            // it *can* persist and retrieve enums, but only if you properly call 
+            // it *can* persist and retrieve enums, but only if you properly call
             // GetValueOrDefault<EnumType>.  This is because it actually stores enums just
             // as ints and depends on the type parameter passed in to convert the integral
             // value back to an enum value.  Unfortunately, we call GetValueOrDefault<object>
@@ -170,7 +191,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 {
                     try
                     {
-                        value = NamingStylePreferences.FromXElement(XElement.Parse(serializedValue));
+                        value = NamingStylePreferences.FromXElement(
+                            XElement.Parse(serializedValue)
+                        );
                     }
                     catch (Exception)
                     {
@@ -218,14 +241,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 try
                 {
-                    var fromXElement = type.GetMethod(nameof(CodeStyleOption<object>.FromXElement), BindingFlags.Public | BindingFlags.Static);
+                    var fromXElement = type.GetMethod(
+                        nameof(CodeStyleOption<object>.FromXElement),
+                        BindingFlags.Public | BindingFlags.Static
+                    );
 
-                    value = fromXElement.Invoke(null, new object[] { XElement.Parse(serializedValue) });
+                    value = fromXElement.Invoke(
+                        null,
+                        new object[] { XElement.Parse(serializedValue) }
+                    );
                     return true;
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
 
             value = null;
@@ -237,7 +264,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             // We're about to fetch the value, so make sure that if it changes we'll know about it
             lock (_optionsToMonitorForChangesGate)
             {
-                var optionKeysToMonitor = _optionsToMonitorForChanges.GetOrAdd(storageKey, _ => new List<OptionKey>());
+                var optionKeysToMonitor = _optionsToMonitorForChanges.GetOrAdd(
+                    storageKey,
+                    _ => new List<OptionKey>()
+                );
 
                 if (!optionKeysToMonitor.Contains(optionKey))
                 {
@@ -255,7 +285,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
 
             // Do we roam this at all?
-            var storageLocation = optionKey.Option.StorageLocations.OfType<ClientSettingsStorageLocation>().FirstOrDefault();
+            var storageLocation = optionKey.Option.StorageLocations
+                .OfType<ClientSettingsStorageLocation>()
+                .FirstOrDefault();
             if (storageLocation == null)
             {
                 return false;

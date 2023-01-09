@@ -20,11 +20,13 @@ namespace System.Drawing.Imaging
         /// Pixel data is scalable.
         /// </summary>
         Scalable = 0x0001,
+
         /// <summary>
         /// Pixel data contains alpha information.
         /// </summary>
         HasAlpha = 0x0002,
         HasTranslucent = 0x0004,
+
         /// <summary>
         /// Pixel data is partially scalable, but there are some limitations.
         /// </summary>
@@ -36,10 +38,12 @@ namespace System.Drawing.Imaging
         /// Pixel data uses an RGB color space.
         /// </summary>
         ColorSpaceRgb = 0x0010,
+
         /// <summary>
         /// Pixel data uses a CMYK color space.
         /// </summary>
         ColorSpaceCmyk = 0x0020,
+
         /// <summary>
         /// Pixel data is grayscale.
         /// </summary>

@@ -10,7 +10,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void NormalWork()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 
@@ -24,7 +25,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void ExistingNameWrongNamespace()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 
@@ -37,7 +39,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void WrongNameExistingNamespace()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 
@@ -50,7 +53,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void WrongNameWrongNamespace()
         {
-            var xml = "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
+            var xml =
+                "<elem1 xmlns=\"ns1\" xmlns:bb=\"ns2\" xmlns:cc=\"ns3\" bb:att1=\"foo\" attr=\"some\" cc:att2=\"bar\"></elem1>";
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml(xml);
 

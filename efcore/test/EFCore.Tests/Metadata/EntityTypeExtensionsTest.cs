@@ -20,8 +20,15 @@ public class EntityTypeExtensionsTest
         var principalToDependent = fk.SetPrincipalToDependent(nameof(SelfRef.SelfRefDependent));
 
         Assert.Equal(
-            new IReadOnlyPropertyBase[] { pk.Properties.Single(), fkProp, principalToDependent, dependentToPrincipal },
-            ((IEntityType)entityType).GetPropertiesAndNavigations().ToArray());
+            new IReadOnlyPropertyBase[]
+            {
+                pk.Properties.Single(),
+                fkProp,
+                principalToDependent,
+                dependentToPrincipal
+            },
+            ((IEntityType)entityType).GetPropertiesAndNavigations().ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -30,7 +37,11 @@ public class EntityTypeExtensionsTest
         var entityType = CreateModel().AddEntityType("Customer");
         var idProperty = entityType.AddProperty("id", typeof(int));
         var fkProperty = entityType.AddProperty("fk", typeof(int));
-        var fk = entityType.AddForeignKey(fkProperty, entityType.SetPrimaryKey(idProperty), entityType);
+        var fk = entityType.AddForeignKey(
+            fkProperty,
+            entityType.SetPrimaryKey(idProperty),
+            entityType
+        );
 
         Assert.Same(fk, entityType.GetReferencingForeignKeys().Single());
     }
@@ -92,9 +103,7 @@ public class EntityTypeExtensionsTest
     {
         var entityType = CreateModel().AddEntityType(typeof(A<int>));
 
-        Assert.Equal(
-            "A<int>",
-            entityType.DisplayName());
+        Assert.Equal("A<int>", entityType.DisplayName());
     }
 
     [ConditionalFact]
@@ -102,19 +111,20 @@ public class EntityTypeExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
         var property = entityType.AddProperty("D", typeof(string));
 
-        var derivedType = modelBuilder
-            .Entity<SpecialCustomer>()
-            .Metadata;
+        var derivedType = modelBuilder.Entity<SpecialCustomer>().Metadata;
         derivedType.BaseType = entityType;
 
         Assert.Equal(
             CoreStrings.DiscriminatorPropertyMustBeOnRoot(nameof(SpecialCustomer)),
-            Assert.Throws<InvalidOperationException>(() => derivedType.SetDiscriminatorProperty(property)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => derivedType.SetDiscriminatorProperty(property)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -122,19 +132,20 @@ public class EntityTypeExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
-        var otherType = modelBuilder
-            .Entity<SpecialCustomer>()
-            .Metadata;
+        var otherType = modelBuilder.Entity<SpecialCustomer>().Metadata;
 
         var property = entityType.AddProperty("D", typeof(string));
 
         Assert.Equal(
             CoreStrings.DiscriminatorPropertyNotFound("D", nameof(SpecialCustomer)),
-            Assert.Throws<InvalidOperationException>(() => otherType.SetDiscriminatorProperty(property)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => otherType.SetDiscriminatorProperty(property)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -142,9 +153,7 @@ public class EntityTypeExtensionsTest
     {
         var modelBuilder = new ModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>()
-            .Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         var property = entityType.AddProperty("D", typeof(string));
         entityType.SetDiscriminatorProperty(property);
@@ -160,17 +169,16 @@ public class EntityTypeExtensionsTest
         Assert.Null(entityType.GetDiscriminatorValue());
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 
-    private class A<T>
-    {
-    }
+    private class A<T> { }
 
     private class SelfRef
     {
         public static readonly PropertyInfo IdProperty = typeof(SelfRef).GetProperty("Id");
-        public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty("SelfRefId");
+        public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty(
+            "SelfRefId"
+        );
 
         public int Id { get; set; }
         public SelfRef SelfRefPrincipal { get; set; }
@@ -185,7 +193,5 @@ public class EntityTypeExtensionsTest
         public Guid AlternateId { get; set; }
     }
 
-    private class SpecialCustomer : Customer
-    {
-    }
+    private class SpecialCustomer : Customer { }
 }

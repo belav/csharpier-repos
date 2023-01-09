@@ -111,7 +111,8 @@ namespace System.Formats.Asn1
             {
                 throw new ArgumentException(
                     SR.Argument_NamedBitListRequiresFlagsEnum,
-                    nameof(tEnum));
+                    nameof(tEnum)
+                );
             }
 
             ulong integralValue;
@@ -166,10 +167,7 @@ namespace System.Formats.Asn1
                 int byteLen = (indexOfHighestSetBit / 8) + 1;
                 int unusedBitCount = 7 - (indexOfHighestSetBit % 8);
 
-                WriteBitString(
-                    temp.Slice(0, byteLen),
-                    unusedBitCount,
-                    tag);
+                WriteBitString(temp.Slice(0, byteLen), unusedBitCount, tag);
             }
         }
 

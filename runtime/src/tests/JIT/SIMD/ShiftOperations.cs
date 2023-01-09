@@ -227,7 +227,14 @@ public class Test
             // ushort
             Console.WriteLine();
             Console.WriteLine("### UnitTest: Shrx64bit (ushort) ###############");
-            valUshort = new ushort[] { 0, 8, 0b_1000_0000_0000_0000, 0b_1000_0000_0000_0000, 0b_1111_0001_1000_0010 };
+            valUshort = new ushort[]
+            {
+                0,
+                8,
+                0b_1000_0000_0000_0000,
+                0b_1000_0000_0000_0000,
+                0b_1111_0001_1000_0010
+            };
             shiftBy = new int[] { 1, 1, 15, 18, 40 };
             for (int idx = 0; idx < valUshort.Length; idx++)
             {
@@ -297,7 +304,12 @@ public class Test
         return returnCode;
     }
 
-    private static bool Validate<TValue, TResult>(TValue value, int shiftBy, TResult actual, TResult expected)
+    private static bool Validate<TValue, TResult>(
+        TValue value,
+        int shiftBy,
+        TResult actual,
+        TResult expected
+    )
     {
         Console.Write("(value, shiftBy) ({0},{1}): {2}", value, shiftBy, actual);
         if (EqualityComparer<TResult>.Default.Equals(actual, expected))

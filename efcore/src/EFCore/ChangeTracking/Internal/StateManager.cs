@@ -17,7 +17,10 @@ public class StateManager : IStateManager
 {
     private readonly EntityReferenceMap _entityReferenceMap = new(hasSubMap: true);
 
-    private IDictionary<object, IList<Tuple<INavigationBase, InternalEntityEntry>>>? _referencedUntrackedEntities;
+    private IDictionary<
+        object,
+        IList<Tuple<INavigationBase, InternalEntityEntry>>
+    >? _referencedUntrackedEntities;
     private IIdentityMap? _identityMap0;
     private IIdentityMap? _identityMap1;
     private Dictionary<IKey, IIdentityMap>? _identityMaps;
@@ -52,7 +55,11 @@ public class StateManager : IStateManager
             : null;
         Context = dependencies.CurrentContext.Context;
         EntityFinderFactory = new EntityFinderFactory(
-            dependencies.EntityFinderSource, this, dependencies.SetSource, dependencies.CurrentContext.Context);
+            dependencies.EntityFinderSource,
+            this,
+            dependencies.SetSource,
+            dependencies.CurrentContext.Context
+        );
         EntityMaterializerSource = dependencies.EntityMaterializerSource;
 
         if (dependencies.LoggingOptions.IsSensitiveDataLoggingEnabled)
@@ -63,7 +70,8 @@ public class StateManager : IStateManager
         UpdateLogger = dependencies.UpdateLogger;
         _changeTrackingLogger = dependencies.ChangeTrackingLogger;
 
-        _resolutionInterceptor = dependencies.Interceptors.Aggregate<IIdentityResolutionInterceptor>();
+        _resolutionInterceptor =
+            dependencies.Interceptors.Aggregate<IIdentityResolutionInterceptor>();
     }
 
     /// <summary>
@@ -157,8 +165,7 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IModel Model
-        => _model;
+    public virtual IModel Model => _model;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -182,8 +189,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public IChangeDetector ChangeDetector
-        => _changeDetector ??= Context.GetDependencies().ChangeDetector;
+    public IChangeDetector ChangeDetector =>
+        _changeDetector ??= Context.GetDependencies().ChangeDetector;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -204,16 +211,29 @@ public class StateManager : IStateManager
                     throw new InvalidOperationException(
                         CoreStrings.UntrackedDependentEntity(
                             entity.GetType().ShortDisplayName(),
-                            "." + nameof(EntityEntry.Reference) + "()." + nameof(ReferenceEntry.TargetEntry),
-                            "." + nameof(EntityEntry.Collection) + "()." + nameof(CollectionEntry.FindEntry) + "()"));
+                            "."
+                                + nameof(EntityEntry.Reference)
+                                + "()."
+                                + nameof(ReferenceEntry.TargetEntry),
+                            "."
+                                + nameof(EntityEntry.Collection)
+                                + "()."
+                                + nameof(CollectionEntry.FindEntry)
+                                + "()"
+                        )
+                    );
                 }
 
-                throw new InvalidOperationException(CoreStrings.EntityTypeNotFound(entity.GetType().ShortDisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.EntityTypeNotFound(entity.GetType().ShortDisplayName())
+                );
             }
 
             if (entityType.FindPrimaryKey() == null)
             {
-                throw new InvalidOperationException(CoreStrings.KeylessTypeTracked(entityType.DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.KeylessTypeTracked(entityType.DisplayName())
+                );
             }
 
             entry = new InternalEntityEntry(this, entityType, entity);
@@ -247,7 +267,10 @@ public class StateManager : IStateManager
                 {
                     throw new InvalidOperationException(
                         CoreStrings.TrackingTypeMismatch(
-                            runtimeEntityType.DisplayName(), entityType.DisplayName()));
+                            runtimeEntityType.DisplayName(),
+                            entityType.DisplayName()
+                        )
+                    );
                 }
 
                 entityType = runtimeEntityType;
@@ -255,7 +278,9 @@ public class StateManager : IStateManager
 
             if (entityType.FindPrimaryKey() == null)
             {
-                throw new InvalidOperationException(CoreStrings.KeylessTypeTracked(entityType.DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.KeylessTypeTracked(entityType.DisplayName())
+                );
             }
 
             entry = new InternalEntityEntry(this, entityType, entity);
@@ -272,7 +297,10 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry CreateEntry(IDictionary<string, object?> values, IEntityType entityType)
+    public virtual InternalEntityEntry CreateEntry(
+        IDictionary<string, object?> values,
+        IEntityType entityType
+    )
     {
         var i = 0;
         var valuesArray = new object?[entityType.PropertyCount()];
@@ -285,14 +313,19 @@ public class StateManager : IStateManager
 
             if (property.IsShadowProperty())
             {
-                shadowPropertyValuesArray[property.GetShadowIndex()] = values.TryGetValue(property.Name, out var shadowValue)
+                shadowPropertyValuesArray[property.GetShadowIndex()] = values.TryGetValue(
+                    property.Name,
+                    out var shadowValue
+                )
                     ? shadowValue
                     : property.ClrType.GetDefaultValue();
             }
         }
 
         var valueBuffer = new ValueBuffer(valuesArray);
-        var entity = EntityMaterializerSource.GetMaterializer(entityType)(new MaterializationContext(valueBuffer, Context));
+        var entity = EntityMaterializerSource.GetMaterializer(entityType)(
+            new MaterializationContext(valueBuffer, Context)
+        );
 
         var shadowPropertyValueBuffer = new ValueBuffer(shadowPropertyValuesArray);
         var entry = new InternalEntityEntry(this, entityType, entity, shadowPropertyValueBuffer);
@@ -305,14 +338,18 @@ public class StateManager : IStateManager
     private void UpdateReferenceMaps(
         InternalEntityEntry entry,
         EntityState state,
-        EntityState? oldState)
+        EntityState? oldState
+    )
     {
         var entityType = entry.EntityType;
         if (entityType.HasSharedClrType)
         {
             var mapKey = entry.Entity;
-            foreach (var otherType in _model.FindEntityTypes(entityType.ClrType)
-                         .Where(et => et != entityType && TryGetEntry(mapKey, et) != null))
+            foreach (
+                var otherType in _model
+                    .FindEntityTypes(entityType.ClrType)
+                    .Where(et => et != entityType && TryGetEntry(mapKey, et) != null)
+            )
             {
                 UpdateLogger.DuplicateDependentEntityTypeInstanceWarning(entityType, otherType);
             }
@@ -330,7 +367,8 @@ public class StateManager : IStateManager
     public virtual InternalEntityEntry StartTrackingFromQuery(
         IEntityType baseEntityType,
         object entity,
-        in ValueBuffer valueBuffer)
+        in ValueBuffer valueBuffer
+    )
     {
         var existingEntry = TryGetEntry(entity);
         if (existingEntry != null)
@@ -339,8 +377,8 @@ public class StateManager : IStateManager
         }
 
         var clrType = entity.GetType();
-        var entityType = baseEntityType.HasSharedClrType
-            || baseEntityType.ClrType == clrType
+        var entityType =
+            baseEntityType.HasSharedClrType || baseEntityType.ClrType == clrType
                 ? baseEntityType
                 : _model.FindRuntimeEntityType(clrType)!;
 
@@ -376,8 +414,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry? TryGetEntry(IKey key, IReadOnlyList<object?> keyValues)
-        => FindIdentityMap(key)?.TryGetEntry(keyValues);
+    public virtual InternalEntityEntry? TryGetEntry(IKey key, IReadOnlyList<object?> keyValues) =>
+        FindIdentityMap(key)?.TryGetEntry(keyValues);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -385,8 +423,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry? TryGetEntryTyped<TKey>(IKey key, TKey keyValue)
-        => ((IIdentityMap<TKey>?)FindIdentityMap(key))?.TryGetEntryTyped(keyValue);
+    public virtual InternalEntityEntry? TryGetEntryTyped<TKey>(IKey key, TKey keyValue) =>
+        ((IIdentityMap<TKey>?)FindIdentityMap(key))?.TryGetEntryTyped(keyValue);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -394,8 +432,12 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry? TryGetEntry(IKey key, object?[] keyValues, bool throwOnNullKey, out bool hasNullKey)
-        => GetOrCreateIdentityMap(key).TryGetEntry(keyValues, throwOnNullKey, out hasNullKey);
+    public virtual InternalEntityEntry? TryGetEntry(
+        IKey key,
+        object?[] keyValues,
+        bool throwOnNullKey,
+        out bool hasNullKey
+    ) => GetOrCreateIdentityMap(key).TryGetEntry(keyValues, throwOnNullKey, out hasNullKey);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -403,8 +445,11 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry? TryGetEntry(object entity, bool throwOnNonUniqueness = true)
-        => _entityReferenceMap.TryGet(entity, null, out var entry, throwOnNonUniqueness)
+    public virtual InternalEntityEntry? TryGetEntry(
+        object entity,
+        bool throwOnNonUniqueness = true
+    ) =>
+        _entityReferenceMap.TryGet(entity, null, out var entry, throwOnNonUniqueness)
             ? entry
             : null;
 
@@ -414,12 +459,20 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalEntityEntry? TryGetEntry(object entity, IEntityType entityType, bool throwOnTypeMismatch = true)
-        => _entityReferenceMap.TryGet(entity, entityType, out var entry, throwOnNonUniqueness: false)
+    public virtual InternalEntityEntry? TryGetEntry(
+        object entity,
+        IEntityType entityType,
+        bool throwOnTypeMismatch = true
+    ) =>
+        _entityReferenceMap.TryGet(entity, entityType, out var entry, throwOnNonUniqueness: false)
             ? !entityType.IsAssignableFrom(entry.EntityType)
                 ? throwOnTypeMismatch
                     ? throw new InvalidOperationException(
-                        CoreStrings.TrackingTypeMismatch(entry.EntityType.DisplayName(), entityType.DisplayName()))
+                        CoreStrings.TrackingTypeMismatch(
+                            entry.EntityType.DisplayName(),
+                            entityType.DisplayName()
+                        )
+                    )
                     : null
                 : entry
             : null;
@@ -492,8 +545,7 @@ public class StateManager : IStateManager
 
     private IIdentityMap? FindIdentityMap(IKey? key)
     {
-        if (_identityMap0 == null
-            || key == null)
+        if (_identityMap0 == null || key == null)
         {
             return null;
         }
@@ -513,10 +565,9 @@ public class StateManager : IStateManager
             return _identityMap1;
         }
 
-        return _identityMaps == null
-            || !_identityMaps.TryGetValue(key, out var identityMap)
-                ? null
-                : identityMap;
+        return _identityMaps == null || !_identityMaps.TryGetValue(key, out var identityMap)
+            ? null
+            : identityMap;
     }
 
     /// <summary>
@@ -530,8 +581,15 @@ public class StateManager : IStateManager
         bool modified = false,
         bool deleted = false,
         bool unchanged = false,
-        bool countDeletedSharedIdentity = false)
-        => _entityReferenceMap.GetCountForState(added, modified, deleted, unchanged, countDeletedSharedIdentity);
+        bool countDeletedSharedIdentity = false
+    ) =>
+        _entityReferenceMap.GetCountForState(
+            added,
+            modified,
+            deleted,
+            unchanged,
+            countDeletedSharedIdentity
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -539,8 +597,14 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int Count
-        => GetCountForState(added: true, modified: true, deleted: true, unchanged: true, countDeletedSharedIdentity: true);
+    public virtual int Count =>
+        GetCountForState(
+            added: true,
+            modified: true,
+            deleted: true,
+            unchanged: true,
+            countDeletedSharedIdentity: true
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -553,8 +617,15 @@ public class StateManager : IStateManager
         bool modified = false,
         bool deleted = false,
         bool unchanged = false,
-        bool returnDeletedSharedIdentity = false)
-        => _entityReferenceMap.GetEntriesForState(added, modified, deleted, unchanged, returnDeletedSharedIdentity);
+        bool returnDeletedSharedIdentity = false
+    ) =>
+        _entityReferenceMap.GetEntriesForState(
+            added,
+            modified,
+            deleted,
+            unchanged,
+            returnDeletedSharedIdentity
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -562,8 +633,14 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<InternalEntityEntry> Entries
-        => GetEntriesForState(added: true, modified: true, deleted: true, unchanged: true, returnDeletedSharedIdentity: true);
+    public virtual IEnumerable<InternalEntityEntry> Entries =>
+        GetEntriesForState(
+            added: true,
+            modified: true,
+            deleted: true,
+            unchanged: true,
+            returnDeletedSharedIdentity: true
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -571,9 +648,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<TEntity> GetNonDeletedEntities<TEntity>()
-        where TEntity : class
-        => _entityReferenceMap.GetNonDeletedEntities<TEntity>();
+    public virtual IEnumerable<TEntity> GetNonDeletedEntities<TEntity>() where TEntity : class =>
+        _entityReferenceMap.GetNonDeletedEntities<TEntity>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -587,13 +663,18 @@ public class StateManager : IStateManager
 
         if (entry.StateManager != this)
         {
-            throw new InvalidOperationException(CoreStrings.WrongStateManager(entityType.DisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.WrongStateManager(entityType.DisplayName())
+            );
         }
 
 #if DEBUG
         var existingEntry = TryGetEntry(entry.Entity, entityType);
 
-        Check.DebugAssert(existingEntry == null || existingEntry == entry, "Duplicate InternalEntityEntry");
+        Check.DebugAssert(
+            existingEntry == null || existingEntry == entry,
+            "Duplicate InternalEntityEntry"
+        );
 #endif
 
         foreach (var key in entityType.GetKeys())
@@ -638,7 +719,11 @@ public class StateManager : IStateManager
                     {
                         if (dependentEntry[dependentToPrincipal] == entry.Entity)
                         {
-                            RecordReferencedUntrackedEntity(entry.Entity, dependentToPrincipal, dependentEntry);
+                            RecordReferencedUntrackedEntity(
+                                entry.Entity,
+                                dependentToPrincipal,
+                                dependentEntry
+                            );
                         }
                     }
                 }
@@ -689,13 +774,14 @@ public class StateManager : IStateManager
                 foreach (var serviceProperty in entry.EntityType.GetServiceProperties())
                 {
                     var service = entry[serviceProperty];
-                    if (resetting
-                        && service is IDisposable disposable)
+                    if (resetting && service is IDisposable disposable)
                     {
                         disposable.Dispose();
                     }
-                    else if (!(service is IInjectableService detachable)
-                             || detachable.Detaching(Context, entry.Entity))
+                    else if (
+                        !(service is IInjectableService detachable)
+                        || detachable.Detaching(Context, entry.Entity)
+                    )
                     {
                         entry[serviceProperty] = null;
                     }
@@ -771,8 +857,7 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void BeginAttachGraph()
-        => Dependencies.NavigationFixer.BeginDelayedFixup();
+    public virtual void BeginAttachGraph() => Dependencies.NavigationFixer.BeginDelayedFixup();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -780,8 +865,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void CompleteAttachGraph()
-        => Dependencies.NavigationFixer.CompleteDelayedFixup();
+    public virtual void CompleteAttachGraph() =>
+        Dependencies.NavigationFixer.CompleteDelayedFixup();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -789,8 +874,7 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void AbortAttachGraph()
-        => Dependencies.NavigationFixer.AbortDelayedFixup();
+    public virtual void AbortAttachGraph() => Dependencies.NavigationFixer.AbortDelayedFixup();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -801,10 +885,13 @@ public class StateManager : IStateManager
     public virtual void RecordReferencedUntrackedEntity(
         object referencedEntity,
         INavigationBase navigation,
-        InternalEntityEntry referencedFromEntry)
+        InternalEntityEntry referencedFromEntry
+    )
     {
-        _referencedUntrackedEntities ??=
-            new Dictionary<object, IList<Tuple<INavigationBase, InternalEntityEntry>>>(ReferenceEqualityComparer.Instance);
+        _referencedUntrackedEntities ??= new Dictionary<
+            object,
+            IList<Tuple<INavigationBase, InternalEntityEntry>>
+        >(ReferenceEqualityComparer.Instance);
 
         if (!_referencedUntrackedEntities.TryGetValue(referencedEntity, out var danglers))
         {
@@ -825,10 +912,13 @@ public class StateManager : IStateManager
         object referencedEntity,
         object newReferencedEntity,
         INavigationBase navigation,
-        InternalEntityEntry referencedFromEntry)
+        InternalEntityEntry referencedFromEntry
+    )
     {
-        if (_referencedUntrackedEntities != null
-            && _referencedUntrackedEntities.TryGetValue(referencedEntity, out var danglers))
+        if (
+            _referencedUntrackedEntities != null
+            && _referencedUntrackedEntities.TryGetValue(referencedEntity, out var danglers)
+        )
         {
             _referencedUntrackedEntities.Remove(referencedEntity);
 
@@ -854,7 +944,8 @@ public class StateManager : IStateManager
     public virtual bool ResolveToExistingEntry(
         InternalEntityEntry newEntry,
         INavigationBase? navigation,
-        InternalEntityEntry? referencedFromEntry)
+        InternalEntityEntry? referencedFromEntry
+    )
     {
         if (_resolutionInterceptor != null)
         {
@@ -868,7 +959,8 @@ public class StateManager : IStateManager
                     _resolutionInterceptor.UpdateTrackedInstance(
                         interceptionData,
                         new EntityEntry(existingEntry),
-                        newEntry.Entity);
+                        newEntry.Entity
+                    );
 
                     if (navigation != null)
                     {
@@ -876,7 +968,8 @@ public class StateManager : IStateManager
                             newEntry.Entity,
                             existingEntry.Entity,
                             navigation,
-                            referencedFromEntry!);
+                            referencedFromEntry!
+                        );
 
                         var navigationValue = referencedFromEntry![navigation];
                         if (navigationValue != null && navigation.IsCollection)
@@ -905,10 +998,15 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Tuple<INavigationBase, InternalEntityEntry>> GetRecordedReferrers(object referencedEntity, bool clear)
+    public virtual IEnumerable<Tuple<INavigationBase, InternalEntityEntry>> GetRecordedReferrers(
+        object referencedEntity,
+        bool clear
+    )
     {
-        if (_referencedUntrackedEntities != null
-            && _referencedUntrackedEntities.TryGetValue(referencedEntity, out var danglers))
+        if (
+            _referencedUntrackedEntities != null
+            && _referencedUntrackedEntities.TryGetValue(referencedEntity, out var danglers)
+        )
         {
             if (clear)
             {
@@ -929,11 +1027,12 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual InternalEntityEntry? FindPrincipal(
         InternalEntityEntry dependentEntry,
-        IForeignKey foreignKey)
-        => FilterIncompatiblePrincipal(
+        IForeignKey foreignKey
+    ) =>
+        FilterIncompatiblePrincipal(
             foreignKey,
-            FindIdentityMap(foreignKey.PrincipalKey)
-                ?.TryGetEntry(foreignKey, dependentEntry));
+            FindIdentityMap(foreignKey.PrincipalKey)?.TryGetEntry(foreignKey, dependentEntry)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -943,11 +1042,13 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual InternalEntityEntry? FindPrincipalUsingPreStoreGeneratedValues(
         InternalEntityEntry dependentEntry,
-        IForeignKey foreignKey)
-        => FilterIncompatiblePrincipal(
+        IForeignKey foreignKey
+    ) =>
+        FilterIncompatiblePrincipal(
             foreignKey,
             FindIdentityMap(foreignKey.PrincipalKey)
-                ?.TryGetEntryUsingPreStoreGeneratedValues(foreignKey, dependentEntry));
+                ?.TryGetEntryUsingPreStoreGeneratedValues(foreignKey, dependentEntry)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -957,19 +1058,22 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual InternalEntityEntry? FindPrincipalUsingRelationshipSnapshot(
         InternalEntityEntry dependentEntry,
-        IForeignKey foreignKey)
-        => FilterIncompatiblePrincipal(
+        IForeignKey foreignKey
+    ) =>
+        FilterIncompatiblePrincipal(
             foreignKey,
             FindIdentityMap(foreignKey.PrincipalKey)
-                ?.TryGetEntryUsingRelationshipSnapshot(foreignKey, dependentEntry));
+                ?.TryGetEntryUsingRelationshipSnapshot(foreignKey, dependentEntry)
+        );
 
     private static InternalEntityEntry? FilterIncompatiblePrincipal(
         IForeignKey foreignKey,
-        InternalEntityEntry? principalEntry)
-        => principalEntry != null
-            && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
-                ? principalEntry
-                : null;
+        InternalEntityEntry? principalEntry
+    ) =>
+        principalEntry != null
+        && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
+            ? principalEntry
+            : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1020,10 +1124,13 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual IEnumerable<IUpdateEntry> GetDependents(
         IUpdateEntry principalEntry,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
         var dependentIdentityMap = FindIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey());
-        return dependentIdentityMap != null && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
+        return
+            dependentIdentityMap != null
+            && foreignKey.PrincipalEntityType.IsAssignableFrom(principalEntry.EntityType)
             ? dependentIdentityMap.GetDependentsMap(foreignKey).GetDependents(principalEntry)
             : Enumerable.Empty<IUpdateEntry>();
     }
@@ -1037,9 +1144,7 @@ public class StateManager : IStateManager
     public virtual IEnumerable<InternalEntityEntry> GetEntries(IKey key)
     {
         var identityMap = FindIdentityMap(key);
-        return identityMap == null
-            ? Enumerable.Empty<InternalEntityEntry>()
-            : identityMap.All();
+        return identityMap == null ? Enumerable.Empty<InternalEntityEntry>() : identityMap.All();
     }
 
     /// <summary>
@@ -1050,11 +1155,13 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual IEnumerable<IUpdateEntry> GetDependents(
         IReadOnlyList<object?> keyValues,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
         GetOrCreateIdentityMap(foreignKey.PrincipalKey); // Ensure the identity map is created even if principal not tracked.
         return GetOrCreateIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey()!)
-            .GetDependentsMap(foreignKey).GetDependents(keyValues);
+            .GetDependentsMap(foreignKey)
+            .GetDependents(keyValues);
     }
 
     /// <summary>
@@ -1065,11 +1172,14 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual IEnumerable<IUpdateEntry> GetDependentsUsingRelationshipSnapshot(
         IUpdateEntry principalEntry,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
         var dependentIdentityMap = FindIdentityMap(foreignKey.DeclaringEntityType.FindPrimaryKey());
         return dependentIdentityMap != null
-            ? dependentIdentityMap.GetDependentsMap(foreignKey).GetDependentsUsingRelationshipSnapshot(principalEntry)
+            ? dependentIdentityMap
+                .GetDependentsMap(foreignKey)
+                .GetDependentsUsingRelationshipSnapshot(principalEntry)
             : Enumerable.Empty<IUpdateEntry>();
     }
 
@@ -1081,11 +1191,11 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual IEnumerable<IUpdateEntry>? GetDependentsFromNavigation(
         IUpdateEntry principalEntry,
-        IForeignKey foreignKey)
+        IForeignKey foreignKey
+    )
     {
         var navigation = foreignKey.PrincipalToDependent;
-        if (navigation == null
-            || navigation.IsShadowProperty())
+        if (navigation == null || navigation.IsShadowProperty())
         {
             return null;
         }
@@ -1107,7 +1217,9 @@ public class StateManager : IStateManager
 
         return ((IEnumerable<object>)navigationValue)
             // ReSharper disable once RedundantEnumerableCastCall
-            .Select(v => TryGetEntry(v, foreignKey.DeclaringEntityType)).Where(e => e != null).Cast<IUpdateEntry>();
+            .Select(v => TryGetEntry(v, foreignKey.DeclaringEntityType))
+            .Where(e => e != null)
+            .Cast<IUpdateEntry>();
     }
 
     /// <summary>
@@ -1116,8 +1228,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEntityFinder CreateEntityFinder(IEntityType entityType)
-        => EntityFinderFactory.Create(entityType);
+    public virtual IEntityFinder CreateEntityFinder(IEntityType entityType) =>
+        EntityFinderFactory.Create(entityType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1140,7 +1252,9 @@ public class StateManager : IStateManager
             CascadeChanges(force: false);
         }
 
-        var toSave = new List<IUpdateEntry>(GetCountForState(added: true, modified: true, deleted: true));
+        var toSave = new List<IUpdateEntry>(
+            GetCountForState(added: true, modified: true, deleted: true)
+        );
 
         // Perf sensitive
 
@@ -1189,12 +1303,17 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void CascadeDelete(InternalEntityEntry entry, bool force, IEnumerable<IForeignKey>? foreignKeys = null)
+    public virtual void CascadeDelete(
+        InternalEntityEntry entry,
+        bool force,
+        IEnumerable<IForeignKey>? foreignKeys = null
+    )
     {
         var doCascadeDelete = force || CascadeDeleteTiming != CascadeTiming.Never;
         var principalIsDetached = entry.EntityState == EntityState.Detached;
 
-        var detectChangesEnabled = Context.ChangeTracker.AutoDetectChangesEnabled
+        var detectChangesEnabled =
+            Context.ChangeTracker.AutoDetectChangesEnabled
             && !((IRuntimeModel)Model).SkipDetectChanges;
 
         foreignKeys ??= entry.EntityType.GetReferencingForeignKeys();
@@ -1205,8 +1324,11 @@ public class StateManager : IStateManager
                 continue;
             }
 
-            foreach (InternalEntityEntry dependent in (GetDependentsFromNavigation(entry, fk)
-                         ?? GetDependents(entry, fk)).ToList())
+            foreach (
+                InternalEntityEntry dependent in (
+                    GetDependentsFromNavigation(entry, fk) ?? GetDependents(entry, fk)
+                ).ToList()
+            )
             {
                 if (dependent.SharedIdentityEntry == entry)
                 {
@@ -1218,17 +1340,24 @@ public class StateManager : IStateManager
                     ChangeDetector.DetectChanges(dependent);
                 }
 
-                if (dependent.EntityState != EntityState.Deleted
+                if (
+                    dependent.EntityState != EntityState.Deleted
                     && dependent.EntityState != EntityState.Detached
-                    && (dependent.EntityState == EntityState.Added
-                        || KeysEqual(entry, fk, dependent)))
+                    && (
+                        dependent.EntityState == EntityState.Added
+                        || KeysEqual(entry, fk, dependent)
+                    )
+                )
                 {
-                    if ((fk.DeleteBehavior == DeleteBehavior.Cascade
-                            || fk.DeleteBehavior == DeleteBehavior.ClientCascade)
-                        && doCascadeDelete)
+                    if (
+                        (
+                            fk.DeleteBehavior == DeleteBehavior.Cascade
+                            || fk.DeleteBehavior == DeleteBehavior.ClientCascade
+                        ) && doCascadeDelete
+                    )
                     {
-                        var cascadeState = principalIsDetached
-                            || dependent.EntityState == EntityState.Added
+                        var cascadeState =
+                            principalIsDetached || dependent.EntityState == EntityState.Added
                                 ? EntityState.Detached
                                 : EntityState.Deleted;
 
@@ -1252,12 +1381,21 @@ public class StateManager : IStateManager
                         foreach (var dependentProperty in fkProperties)
                         {
                             dependent.SetProperty(
-                                dependentProperty, null, isMaterialization: false, setModified: true, isCascadeDelete: true);
+                                dependentProperty,
+                                null,
+                                isMaterialization: false,
+                                setModified: true,
+                                isCascadeDelete: true
+                            );
                         }
 
                         if (dependent.HasConceptualNull)
                         {
-                            dependent.HandleConceptualNulls(SensitiveLoggingEnabled, force, isCascadeDelete: true);
+                            dependent.HandleConceptualNulls(
+                                SensitiveLoggingEnabled,
+                                force,
+                                isCascadeDelete: true
+                            );
                         }
                     }
                 }
@@ -1265,17 +1403,24 @@ public class StateManager : IStateManager
         }
     }
 
-    private static bool KeysEqual(InternalEntityEntry entry, IForeignKey fk, InternalEntityEntry dependent)
+    private static bool KeysEqual(
+        InternalEntityEntry entry,
+        IForeignKey fk,
+        InternalEntityEntry dependent
+    )
     {
         for (var i = 0; i < fk.Properties.Count; i++)
         {
             var principalProperty = fk.PrincipalKey.Properties[i];
             var dependentProperty = fk.Properties[i];
 
-            if (!KeyValuesEqual(
+            if (
+                !KeyValuesEqual(
                     principalProperty,
                     entry[principalProperty],
-                    dependent[dependentProperty]))
+                    dependent[dependentProperty]
+                )
+            )
             {
                 return false;
             }
@@ -1284,8 +1429,8 @@ public class StateManager : IStateManager
         return true;
     }
 
-    private static bool KeyValuesEqual(IProperty property, object? value, object? currentValue)
-        => property.GetKeyValueComparer().Equals(currentValue, value);
+    private static bool KeyValuesEqual(IProperty property, object? value, object? currentValue) =>
+        property.GetKeyValueComparer().Equals(currentValue, value);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1317,7 +1462,8 @@ public class StateManager : IStateManager
     /// </summary>
     protected virtual async Task<int> SaveChangesAsync(
         IList<IUpdateEntry> entriesToSave,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         _concurrencyDetector?.EnterCriticalSection();
 
@@ -1325,7 +1471,8 @@ public class StateManager : IStateManager
         {
             EntityFrameworkEventSource.Log.SavingChanges();
 
-            return await _database.SaveChangesAsync(entriesToSave, cancellationToken)
+            return await _database
+                .SaveChangesAsync(entriesToSave, cancellationToken)
                 .ConfigureAwait(false);
         }
         finally
@@ -1340,13 +1487,14 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int SaveChanges(bool acceptAllChangesOnSuccess)
-        => Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
+    public virtual int SaveChanges(bool acceptAllChangesOnSuccess) =>
+        Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
             ? SaveChanges(this, acceptAllChangesOnSuccess)
             : Dependencies.ExecutionStrategy.Execute(
                 (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
                 static (_, t) => SaveChanges(t.StateManager, t.AcceptAllChangesOnSuccess),
-                null);
+                null
+            );
 
     private static int SaveChanges(StateManager stateManager, bool acceptAllChangesOnSuccess)
     {
@@ -1396,19 +1544,27 @@ public class StateManager : IStateManager
     /// </summary>
     public virtual Task<int> SaveChangesAsync(
         bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken = default)
-        => Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
+        CancellationToken cancellationToken = default
+    ) =>
+        Context.Database.AutoTransactionBehavior == AutoTransactionBehavior.Never
             ? SaveChangesAsync(this, acceptAllChangesOnSuccess, cancellationToken)
             : Dependencies.ExecutionStrategy.ExecuteAsync(
                 (StateManager: this, AcceptAllChangesOnSuccess: acceptAllChangesOnSuccess),
-                static (_, t, cancellationToken) => SaveChangesAsync(t.StateManager, t.AcceptAllChangesOnSuccess, cancellationToken),
+                static (_, t, cancellationToken) =>
+                    SaveChangesAsync(
+                        t.StateManager,
+                        t.AcceptAllChangesOnSuccess,
+                        cancellationToken
+                    ),
                 null,
-                cancellationToken);
+                cancellationToken
+            );
 
     private static async Task<int> SaveChangesAsync(
         StateManager stateManager,
         bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         if (stateManager.ChangedCount == 0)
         {
@@ -1424,7 +1580,8 @@ public class StateManager : IStateManager
         try
         {
             stateManager.SavingChanges = true;
-            var result = await stateManager.SaveChangesAsync(entriesToSave, cancellationToken)
+            var result = await stateManager
+                .SaveChangesAsync(entriesToSave, cancellationToken)
                 .ConfigureAwait(acceptAllChangesOnSuccess);
 
             if (acceptAllChangesOnSuccess)
@@ -1455,8 +1612,8 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void AcceptAllChanges()
-        => AcceptAllChanges(this.ToListForState(added: true, modified: true, deleted: true));
+    public virtual void AcceptAllChanges() =>
+        AcceptAllChanges(this.ToListForState(added: true, modified: true, deleted: true));
 
     private static void AcceptAllChanges(IReadOnlyList<IUpdateEntry> changedEntries)
     {
@@ -1477,8 +1634,8 @@ public class StateManager : IStateManager
         EventHandler<EntityTrackingEventArgs>? Tracking,
         EventHandler<EntityTrackedEventArgs>? Tracked,
         EventHandler<EntityStateChangingEventArgs>? StateChanging,
-        EventHandler<EntityStateChangedEventArgs>? StateChanged) CaptureEvents()
-        => (Tracking, Tracked, StateChanging, StateChanged);
+        EventHandler<EntityStateChangedEventArgs>? StateChanged
+    ) CaptureEvents() => (Tracking, Tracked, StateChanging, StateChanged);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1490,7 +1647,8 @@ public class StateManager : IStateManager
         EventHandler<EntityTrackingEventArgs>? tracking,
         EventHandler<EntityTrackedEventArgs>? tracked,
         EventHandler<EntityStateChangingEventArgs>? stateChanging,
-        EventHandler<EntityStateChangedEventArgs>? stateChanged)
+        EventHandler<EntityStateChangedEventArgs>? stateChanged
+    )
     {
         Tracking = tracking;
         Tracked = tracked;
@@ -1512,11 +1670,18 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void OnTracking(InternalEntityEntry internalEntityEntry, EntityState state, bool fromQuery)
+    public virtual void OnTracking(
+        InternalEntityEntry internalEntityEntry,
+        EntityState state,
+        bool fromQuery
+    )
     {
         var @event = Tracking;
 
-        @event?.Invoke(Context.ChangeTracker, new EntityTrackingEventArgs(internalEntityEntry, state, fromQuery));
+        @event?.Invoke(
+            Context.ChangeTracker,
+            new EntityTrackingEventArgs(internalEntityEntry, state, fromQuery)
+        );
     }
 
     /// <summary>
@@ -1546,7 +1711,10 @@ public class StateManager : IStateManager
             _changeTrackingLogger.StartedTracking(internalEntityEntry);
         }
 
-        @event?.Invoke(Context.ChangeTracker, new EntityTrackedEventArgs(internalEntityEntry, fromQuery));
+        @event?.Invoke(
+            Context.ChangeTracker,
+            new EntityTrackedEventArgs(internalEntityEntry, fromQuery)
+        );
     }
 
     /// <summary>
@@ -1563,12 +1731,18 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void OnStateChanging(InternalEntityEntry internalEntityEntry, EntityState newState)
+    public virtual void OnStateChanging(
+        InternalEntityEntry internalEntityEntry,
+        EntityState newState
+    )
     {
         var @event = StateChanging;
         var oldState = internalEntityEntry.EntityState;
 
-        @event?.Invoke(Context.ChangeTracker, new EntityStateChangingEventArgs(internalEntityEntry, oldState, newState));
+        @event?.Invoke(
+            Context.ChangeTracker,
+            new EntityStateChangingEventArgs(internalEntityEntry, oldState, newState)
+        );
     }
 
     /// <summary>
@@ -1585,7 +1759,10 @@ public class StateManager : IStateManager
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void OnStateChanged(InternalEntityEntry internalEntityEntry, EntityState oldState)
+    public virtual void OnStateChanged(
+        InternalEntityEntry internalEntityEntry,
+        EntityState oldState
+    )
     {
         var @event = StateChanged;
         var newState = internalEntityEntry.EntityState;
@@ -1599,6 +1776,9 @@ public class StateManager : IStateManager
             _changeTrackingLogger.StateChanged(internalEntityEntry, oldState, newState);
         }
 
-        @event?.Invoke(Context.ChangeTracker, new EntityStateChangedEventArgs(internalEntityEntry, oldState, newState));
+        @event?.Invoke(
+            Context.ChangeTracker,
+            new EntityStateChangedEventArgs(internalEntityEntry, oldState, newState)
+        );
     }
 }

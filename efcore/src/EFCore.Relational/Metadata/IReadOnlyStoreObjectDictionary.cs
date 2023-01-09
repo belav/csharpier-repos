@@ -7,8 +7,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a lookup based on <see cref="StoreObjectIdentifier" /> keys.
 /// </summary>
 /// <typeparam name="T">The values type.</typeparam>
-public interface IReadOnlyStoreObjectDictionary<out T>
-    where T : class
+public interface IReadOnlyStoreObjectDictionary<out T> where T : class
 {
     /// <summary>
     ///     Gets the value associated with the specified key.

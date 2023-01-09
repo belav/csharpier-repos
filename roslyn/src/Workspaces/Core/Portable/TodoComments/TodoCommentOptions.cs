@@ -9,12 +9,11 @@ namespace Microsoft.CodeAnalysis.TodoComments
 {
     [DataContract]
     internal readonly record struct TodoCommentOptions(
-        [property: DataMember(Order = 0)] string TokenList = "")
+        [property: DataMember(Order = 0)] string TokenList = ""
+    )
     {
         public TodoCommentOptions()
-            : this(TokenList: "")
-        {
-        }
+            : this(TokenList: "") { }
 
         public static readonly TodoCommentOptions Default = new();
     }

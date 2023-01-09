@@ -17,7 +17,11 @@ namespace System.Text
         /// <param name="destination">The destination buffer to which UTF-16 text is written.</param>
         /// <param name="charsWritten">The number of chars actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/></param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        public static unsafe OperationStatus ToUtf16(ReadOnlySpan<byte> source, Span<char> destination, out int charsWritten)
+        public static unsafe OperationStatus ToUtf16(
+            ReadOnlySpan<byte> source,
+            Span<char> destination,
+            out int charsWritten
+        )
         {
             nuint numElementsToConvert;
             OperationStatus statusToReturnOnSuccess;
@@ -36,11 +40,17 @@ namespace System.Text
             fixed (byte* pSource = &MemoryMarshal.GetReference(source))
             fixed (char* pDestination = &MemoryMarshal.GetReference(destination))
             {
-                nuint numElementsActuallyConverted = WidenAsciiToUtf16(pSource, pDestination, numElementsToConvert);
+                nuint numElementsActuallyConverted = WidenAsciiToUtf16(
+                    pSource,
+                    pDestination,
+                    numElementsToConvert
+                );
                 Debug.Assert(numElementsActuallyConverted <= numElementsToConvert);
 
                 charsWritten = (int)numElementsActuallyConverted;
-                return (numElementsToConvert == numElementsActuallyConverted) ? statusToReturnOnSuccess : OperationStatus.InvalidData;
+                return (numElementsToConvert == numElementsActuallyConverted)
+                    ? statusToReturnOnSuccess
+                    : OperationStatus.InvalidData;
             }
         }
 
@@ -52,7 +62,11 @@ namespace System.Text
         /// <param name="destination">The destination buffer to which ASCII text is written.</param>
         /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of chars actually read from <paramref name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        public static unsafe OperationStatus FromUtf16(ReadOnlySpan<char> source, Span<byte> destination, out int bytesWritten)
+        public static unsafe OperationStatus FromUtf16(
+            ReadOnlySpan<char> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             nuint numElementsToConvert;
             OperationStatus statusToReturnOnSuccess;
@@ -71,11 +85,17 @@ namespace System.Text
             fixed (char* pSource = &MemoryMarshal.GetReference(source))
             fixed (byte* pDestination = &MemoryMarshal.GetReference(destination))
             {
-                nuint numElementsActuallyConverted = NarrowUtf16ToAscii(pSource, pDestination, numElementsToConvert);
+                nuint numElementsActuallyConverted = NarrowUtf16ToAscii(
+                    pSource,
+                    pDestination,
+                    numElementsToConvert
+                );
                 Debug.Assert(numElementsActuallyConverted <= numElementsToConvert);
 
                 bytesWritten = (int)numElementsActuallyConverted;
-                return (numElementsToConvert == numElementsActuallyConverted) ? statusToReturnOnSuccess : OperationStatus.InvalidData;
+                return (numElementsToConvert == numElementsActuallyConverted)
+                    ? statusToReturnOnSuccess
+                    : OperationStatus.InvalidData;
             }
         }
     }

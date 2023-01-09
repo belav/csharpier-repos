@@ -11,6 +11,9 @@ namespace Microsoft.CodeAnalysis.SourceGeneratorTelemetry
 {
     internal interface ISourceGeneratorTelemetryCollectorWorkspaceService : IWorkspaceService
     {
-        void CollectRunResult(GeneratorDriverRunResult driverRunResult, GeneratorDriverTimingInfo driverTimingInfo);
+        void CollectRunResult(
+            GeneratorDriverRunResult driverRunResult,
+            GeneratorDriverTimingInfo driverTimingInfo
+        );
     }
 }

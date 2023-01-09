@@ -11,19 +11,22 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteInheritanceMarginService : BrokeredServiceBase, IRemoteInheritanceMarginService
+    internal sealed class RemoteInheritanceMarginService
+        : BrokeredServiceBase,
+            IRemoteInheritanceMarginService
     {
         internal sealed class Factory : FactoryBase<IRemoteInheritanceMarginService>
         {
-            protected override IRemoteInheritanceMarginService CreateService(in ServiceConstructionArguments arguments)
+            protected override IRemoteInheritanceMarginService CreateService(
+                in ServiceConstructionArguments arguments
+            )
             {
                 return new RemoteInheritanceMarginService(arguments);
             }
         }
 
-        public RemoteInheritanceMarginService(in ServiceConstructionArguments arguments) : base(in arguments)
-        {
-        }
+        public RemoteInheritanceMarginService(in ServiceConstructionArguments arguments)
+            : base(in arguments) { }
 
         public ValueTask<ImmutableArray<InheritanceMarginItem>> GetInheritanceMarginItemsAsync(
             Checksum solutionChecksum,
@@ -31,14 +34,33 @@ namespace Microsoft.CodeAnalysis.Remote
             TextSpan spanToSearch,
             bool includeGlobalImports,
             bool frozenPartialSemantics,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(solutionChecksum, async solution =>
-            {
-                var document = await solution.GetRequiredDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
-                var service = document.GetRequiredLanguageService<IInheritanceMarginService>();
-                return await service.GetInheritanceMemberItemsAsync(document, spanToSearch, includeGlobalImports, frozenPartialSemantics, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+            return RunServiceAsync(
+                solutionChecksum,
+                async solution =>
+                {
+                    var document = await solution
+                        .GetRequiredDocumentAsync(
+                            documentId,
+                            includeSourceGenerated: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    var service = document.GetRequiredLanguageService<IInheritanceMarginService>();
+                    return await service
+                        .GetInheritanceMemberItemsAsync(
+                            document,
+                            spanToSearch,
+                            includeGlobalImports,
+                            frozenPartialSemantics,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
     }
 }

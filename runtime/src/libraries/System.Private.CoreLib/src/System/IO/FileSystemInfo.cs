@@ -12,8 +12,8 @@ namespace System.IO
     public abstract partial class FileSystemInfo : MarshalByRefObject, ISerializable
     {
         // FullPath and OriginalPath are documented fields
-        protected string FullPath = null!;          // fully qualified path of the file or directory
-        protected string OriginalPath = null!;      // path passed in by the user
+        protected string FullPath = null!; // fully qualified path of the file or directory
+        protected string OriginalPath = null!; // path passed in by the user
 
         internal string? _name;
 
@@ -44,7 +44,7 @@ namespace System.IO
             get
             {
                 int length = FullPath.Length;
-                for (int i = length; --i >= 0;)
+                for (int i = length; --i >= 0; )
                 {
                     char ch = FullPath[i];
                     if (ch == '.')

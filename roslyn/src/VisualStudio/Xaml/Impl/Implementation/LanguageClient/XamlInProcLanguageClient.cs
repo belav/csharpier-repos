@@ -35,12 +35,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             XamlLspServiceProvider lspServiceProvider,
             IGlobalOptionService globalOptions,
             ILspServiceLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext)
-        {
-        }
+            IThreadingContext threadingContext
+        )
+            : base(lspServiceProvider, globalOptions, lspLoggerFactory, threadingContext) { }
 
-        protected override ImmutableArray<string> SupportedLanguages => ImmutableArray.Create(StringConstants.XamlLanguageName);
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ImmutableArray.Create(StringConstants.XamlLanguageName);
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
@@ -56,7 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
 
         public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.XamlLspServer;
 
-        private bool IsXamlLspIntelliSenseEnabled()
-            => GlobalOptions.GetOption(XamlOptions.EnableLspIntelliSenseFeatureFlag);
+        private bool IsXamlLspIntelliSenseEnabled() =>
+            GlobalOptions.GetOption(XamlOptions.EnableLspIntelliSenseFeatureFlag);
     }
 }

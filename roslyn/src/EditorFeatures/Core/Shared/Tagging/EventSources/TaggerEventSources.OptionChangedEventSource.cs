@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
             private readonly IOption _globalOption;
             private readonly IGlobalOptionService _globalOptions;
 
-            public GlobalOptionChangedEventSource(IGlobalOptionService globalOptions, IOption globalOption)
+            public GlobalOptionChangedEventSource(
+                IGlobalOptionService globalOptions,
+                IOption globalOption
+            )
             {
                 _globalOptions = globalOptions;
                 _globalOption = globalOption;

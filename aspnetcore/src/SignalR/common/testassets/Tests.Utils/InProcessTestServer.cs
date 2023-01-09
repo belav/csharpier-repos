@@ -29,8 +29,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         public abstract ValueTask DisposeAsync();
     }
 
-    public class InProcessTestServer<TStartup> : InProcessTestServer
-        where TStartup : class
+    public class InProcessTestServer<TStartup> : InProcessTestServer where TStartup : class
     {
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger _logger;
@@ -52,16 +51,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
 
         public override string Url => _url;
 
-        public static async Task<InProcessTestServer<TStartup>> StartServer(ILoggerFactory loggerFactory, IDisposable disposable = null)
+        public static async Task<InProcessTestServer<TStartup>> StartServer(
+            ILoggerFactory loggerFactory,
+            IDisposable disposable = null
+        )
         {
             var server = new InProcessTestServer<TStartup>(loggerFactory, disposable);
             await server.StartServerInner();
             return server;
         }
 
-        private InProcessTestServer() : this(loggerFactory: null, null)
-        {
-        }
+        private InProcessTestServer()
+            : this(loggerFactory: null, null) { }
 
         private InProcessTestServer(ILoggerFactory loggerFactory, IDisposable disposable)
         {
@@ -71,8 +72,12 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             if (loggerFactory == null)
             {
                 var testLog = AssemblyTestLog.ForAssembly(typeof(TStartup).Assembly);
-                _logToken = testLog.StartTestLog(null, $"{nameof(InProcessTestServer<TStartup>)}_{typeof(TStartup).Name}",
-                    out _loggerFactory, nameof(InProcessTestServer));
+                _logToken = testLog.StartTestLog(
+                    null,
+                    $"{nameof(InProcessTestServer<TStartup>)}_{typeof(TStartup).Name}",
+                    out _loggerFactory,
+                    nameof(InProcessTestServer)
+                );
             }
             else
             {
@@ -95,14 +100,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 .ConfigureWebHost(webHostBuilder =>
                 {
                     webHostBuilder
-                    .ConfigureLogging(builder => builder
-                    .SetMinimumLevel(LogLevel.Trace)
-                    .AddProvider(new ForwardingLoggerProvider(_loggerFactory)))
-                    .UseStartup(typeof(TStartup))
-                    .UseKestrel()
-                    .UseUrls(url)
-                    .UseContentRoot(Directory.GetCurrentDirectory());
-                }).Build();
+                        .ConfigureLogging(
+                            builder =>
+                                builder
+                                    .SetMinimumLevel(LogLevel.Trace)
+                                    .AddProvider(new ForwardingLoggerProvider(_loggerFactory))
+                        )
+                        .UseStartup(typeof(TStartup))
+                        .UseKestrel()
+                        .UseUrls(url)
+                        .UseContentRoot(Directory.GetCurrentDirectory());
+                })
+                .Build();
 
             _logger.LogInformation("Starting test server...");
             var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
@@ -113,13 +122,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             catch (OperationCanceledException)
             {
                 var logs = _logSinkProvider.GetLogs();
-                throw new TimeoutException($"Timed out waiting for application to start.{Environment.NewLine}Startup Logs:{Environment.NewLine}{RenderLogs(logs)}");
+                throw new TimeoutException(
+                    $"Timed out waiting for application to start.{Environment.NewLine}Startup Logs:{Environment.NewLine}{RenderLogs(logs)}"
+                );
             }
 
             _logger.LogInformation("Test Server started");
 
             // Get the URL from the server
-            _url = _host.Services.GetService<IServer>().Features.Get<IServerAddressesFeature>().Addresses.Single();
+            _url = _host.Services
+                .GetService<IServer>()
+                .Features.Get<IServerAddressesFeature>()
+                .Addresses.Single();
 
             _lifetime = _host.Services.GetRequiredService<IHostApplicationLifetime>();
             _lifetime.ApplicationStopped.Register(() =>
@@ -134,11 +148,18 @@ namespace Microsoft.AspNetCore.SignalR.Tests
             var builder = new StringBuilder();
             foreach (var log in logs)
             {
-                builder.AppendLine($"{log.Timestamp:O} {log.Write.LoggerName} {log.Write.LogLevel}: {log.Write.Formatter(log.Write.State, log.Write.Exception)}");
+                builder.AppendLine(
+                    $"{log.Timestamp:O} {log.Write.LoggerName} {log.Write.LogLevel}: {log.Write.Formatter(log.Write.State, log.Write.Exception)}"
+                );
                 if (log.Write.Exception != null)
                 {
                     var message = log.Write.Exception.ToString();
-                    foreach (var line in message.Split(new[] { Environment.NewLine }, StringSplitOptions.None))
+                    foreach (
+                        var line in message.Split(
+                            new[] { Environment.NewLine },
+                            StringSplitOptions.None
+                        )
+                    )
                     {
                         builder.AppendLine($"| {line}");
                     }
@@ -171,9 +192,7 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 _loggerFactory = loggerFactory;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public ILogger CreateLogger(string categoryName)
             {

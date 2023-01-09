@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task TestTagsChangedForPortionThatChanged()
         {
             var code =
-@"class Program2
+                @"class Program2
 {
     string x = @""/// <summary>$$
 /// </summary>"";
@@ -47,11 +47,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     workspace.GetService<IThreadingContext>(),
                     typeMap: null,
                     workspace.GetService<IGlobalOptionService>(),
-                    AsynchronousOperationListenerProvider.NullProvider),
+                    AsynchronousOperationListenerProvider.NullProvider
+                ),
                 subjectBuffer,
                 AsynchronousOperationListenerProvider.NullListener,
                 typeMap: null,
-                diffTimeout: TimeSpan.MaxValue);
+                diffTimeout: TimeSpan.MaxValue
+            );
 
             // Capture the expected value before the await, in case it changes.
             var expectedLength = subjectBuffer.CurrentSnapshot.Length;
@@ -90,26 +92,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         [WpfFact]
         public async Task TestTagsChangedAfterDelete()
         {
-            var code =
-@"class Goo";
+            var code = @"class Goo";
             using var workspace = TestWorkspace.CreateCSharp(code);
             var document = workspace.Documents.First();
             var subjectBuffer = document.GetTextBuffer();
 
             var checkpoint = new Checkpoint();
 
-            var typeMap = workspace.ExportProvider.GetExportedValue<SyntacticClassificationTypeMap>();
+            var typeMap =
+                workspace.ExportProvider.GetExportedValue<SyntacticClassificationTypeMap>();
 
             var tagComputer = new SyntacticClassificationTaggerProvider.TagComputer(
                 new SyntacticClassificationTaggerProvider(
                     workspace.GetService<IThreadingContext>(),
                     typeMap,
                     workspace.GetService<IGlobalOptionService>(),
-                    AsynchronousOperationListenerProvider.NullProvider),
+                    AsynchronousOperationListenerProvider.NullProvider
+                ),
                 subjectBuffer,
                 AsynchronousOperationListenerProvider.NullListener,
                 typeMap,
-                diffTimeout: TimeSpan.MaxValue);
+                diffTimeout: TimeSpan.MaxValue
+            );
 
             // Capture the expected value before the await, in case it changes.
             var expectedLength = subjectBuffer.CurrentSnapshot.Length;
@@ -132,11 +136,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
             checkpoint = new Checkpoint();
 
             // Now delete the last character.
-            var snapshot = subjectBuffer.Delete(new Span(subjectBuffer.CurrentSnapshot.Length - 1, 1));
+            var snapshot = subjectBuffer.Delete(
+                new Span(subjectBuffer.CurrentSnapshot.Length - 1, 1)
+            );
 
-            // Try to get the tags prior to TagsChanged firing.  This will force us to use the previous 
+            // Try to get the tags prior to TagsChanged firing.  This will force us to use the previous
             // data we've cached to produce the new results.
-            tagComputer.GetTags(new NormalizedSnapshotSpanCollection(subjectBuffer.CurrentSnapshot.GetFullSpan()));
+            tagComputer.GetTags(
+                new NormalizedSnapshotSpanCollection(subjectBuffer.CurrentSnapshot.GetFullSpan())
+            );
 
             expectedLength = snapshot.Length;
 

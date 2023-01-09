@@ -137,8 +137,9 @@ namespace System.Net.Http.Headers
         public IEnumerator<T> GetEnumerator()
         {
             object? storeValue = _store.GetParsedAndInvalidValues(_descriptor);
-            return storeValue is null || storeValue is HttpHeaders.InvalidValue ?
-                ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator() : // use singleton empty array enumerator
+            return storeValue is null || storeValue is HttpHeaders.InvalidValue
+                ? ((IEnumerable<T>)Array.Empty<T>()).GetEnumerator()
+                : // use singleton empty array enumerator
                 Iterate(storeValue);
 
             static IEnumerator<T> Iterate(object storeValue)

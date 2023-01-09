@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.PatternMatching
         public PatternMatchKind Kind { get; }
 
         /// <summary>
-        /// The spans in the original text that were matched.  Only returned if the 
+        /// The spans in the original text that were matched.  Only returned if the
         /// pattern matcher is asked to collect these spans.
         /// </summary>
         public ImmutableArray<TextSpan> MatchedSpans { get; }
@@ -33,17 +33,23 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             PatternMatchKind resultType,
             bool punctuationStripped,
             bool isCaseSensitive,
-            TextSpan? matchedSpan)
-            : this(resultType, punctuationStripped, isCaseSensitive,
-                   matchedSpan == null ? ImmutableArray<TextSpan>.Empty : ImmutableArray.Create(matchedSpan.Value))
-        {
-        }
+            TextSpan? matchedSpan
+        )
+            : this(
+                resultType,
+                punctuationStripped,
+                isCaseSensitive,
+                matchedSpan == null
+                    ? ImmutableArray<TextSpan>.Empty
+                    : ImmutableArray.Create(matchedSpan.Value)
+            ) { }
 
         internal PatternMatch(
             PatternMatchKind resultType,
             bool punctuationStripped,
             bool isCaseSensitive,
-            ImmutableArray<TextSpan> matchedSpans)
+            ImmutableArray<TextSpan> matchedSpans
+        )
             : this()
         {
             this.Kind = resultType;
@@ -52,14 +58,13 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             _punctuationStripped = punctuationStripped;
         }
 
-        public PatternMatch WithMatchedSpans(ImmutableArray<TextSpan> matchedSpans)
-            => new(Kind, _punctuationStripped, IsCaseSensitive, matchedSpans);
+        public PatternMatch WithMatchedSpans(ImmutableArray<TextSpan> matchedSpans) =>
+            new(Kind, _punctuationStripped, IsCaseSensitive, matchedSpans);
 
-        public int CompareTo(PatternMatch other)
-            => CompareTo(other, ignoreCase: false);
+        public int CompareTo(PatternMatch other) => CompareTo(other, ignoreCase: false);
 
-        public int CompareTo(PatternMatch? other, bool ignoreCase)
-            => other.HasValue ? CompareTo(other.Value, ignoreCase) : -1;
+        public int CompareTo(PatternMatch? other, bool ignoreCase) =>
+            other.HasValue ? CompareTo(other.Value, ignoreCase) : -1;
 
         public int CompareTo(PatternMatch other, bool ignoreCase)
         {

@@ -1,16 +1,17 @@
 ﻿using System;
 
-public class Control {}
-public class UserControl : Control {}
+public class Control { }
+
+public class UserControl : Control { }
 
 namespace test
 {
     public class MainPage : UserControl
     {
-        public static void Main ()
+        public static void Main()
         {
             var more = new MoreConstrained<MainPage>();
-            more.test(new MainPage ());
+            more.test(new MainPage());
         }
     }
 
@@ -31,5 +32,4 @@ namespace test
             Console.WriteLine("Less " + typeof(T2));
         }
     }
-
 }

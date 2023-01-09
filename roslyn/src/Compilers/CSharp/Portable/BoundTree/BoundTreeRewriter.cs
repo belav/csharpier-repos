@@ -65,8 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private int _recursionDepth;
 
-        protected BoundTreeRewriterWithStackGuard()
-        { }
+        protected BoundTreeRewriterWithStackGuard() { }
 
         protected BoundTreeRewriterWithStackGuard(int recursionDepth)
         {
@@ -92,20 +91,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             return VisitExpressionWithStackGuard(ref _recursionDepth, node);
         }
 
-        protected sealed override BoundExpression VisitExpressionWithoutStackGuard(BoundExpression node)
+        protected sealed override BoundExpression VisitExpressionWithoutStackGuard(
+            BoundExpression node
+        )
         {
             return (BoundExpression)base.Visit(node);
         }
     }
 
-    internal abstract class BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator : BoundTreeRewriterWithStackGuard
+    internal abstract class BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+        : BoundTreeRewriterWithStackGuard
     {
-        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator()
-        { }
+        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator() { }
 
-        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(int recursionDepth)
-            : base(recursionDepth)
-        { }
+        protected BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator(
+            int recursionDepth
+        )
+            : base(recursionDepth) { }
 
         public sealed override BoundNode? VisitBinaryOperator(BoundBinaryOperator node)
         {
@@ -143,9 +145,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 var right = (BoundExpression?)this.Visit(binary.Right);
                 Debug.Assert(right is { });
                 var type = this.VisitType(binary.Type);
-                left = binary.Update(binary.OperatorKind, binary.Data, binary.ResultKind, left, right, type);
-            }
-            while (stack.Count > 0);
+                left = binary.Update(
+                    binary.OperatorKind,
+                    binary.Data,
+                    binary.ResultKind,
+                    left,
+                    right,
+                    type
+                );
+            } while (stack.Count > 0);
 
             Debug.Assert((object)binary == node);
             stack.Free();

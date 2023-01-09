@@ -28,20 +28,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     {
         private readonly TableDataSource _source;
 
-        protected VisualStudioBaseTodoListTable(Workspace workspace, IThreadingContext threadingContext, ITodoListProvider todoListProvider, string identifier, ITableManagerProvider provider)
+        protected VisualStudioBaseTodoListTable(
+            Workspace workspace,
+            IThreadingContext threadingContext,
+            ITodoListProvider todoListProvider,
+            string identifier,
+            ITableManagerProvider provider
+        )
             : base(workspace, provider, StandardTables.TasksTable)
         {
-            _source = new TableDataSource(workspace, threadingContext, todoListProvider, identifier);
+            _source = new TableDataSource(
+                workspace,
+                threadingContext,
+                todoListProvider,
+                identifier
+            );
             AddInitialTableSource(workspace.CurrentSolution, _source);
         }
 
-        internal override ImmutableArray<string> Columns { get; } = ImmutableArray.Create(
-            StandardTableColumnDefinitions.Priority,
-            StandardTableColumnDefinitions.Text,
-            StandardTableColumnDefinitions.ProjectName,
-            StandardTableColumnDefinitions.DocumentName,
-            StandardTableColumnDefinitions.Line,
-            StandardTableColumnDefinitions.Column);
+        internal override ImmutableArray<string> Columns { get; } =
+            ImmutableArray.Create(
+                StandardTableColumnDefinitions.Priority,
+                StandardTableColumnDefinitions.Text,
+                StandardTableColumnDefinitions.ProjectName,
+                StandardTableColumnDefinitions.DocumentName,
+                StandardTableColumnDefinitions.Line,
+                StandardTableColumnDefinitions.Column
+            );
 
         protected override void AddTableSourceIfNecessary(Solution solution)
         {
@@ -63,16 +76,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             this.TableManager.RemoveSource(_source);
         }
 
-        protected override void ShutdownSource()
-            => _source.Shutdown();
+        protected override void ShutdownSource() => _source.Shutdown();
 
-        private class TableDataSource : AbstractRoslynTableDataSource<TodoTableItem, TodoItemsUpdatedArgs>
+        private class TableDataSource
+            : AbstractRoslynTableDataSource<TodoTableItem, TodoItemsUpdatedArgs>
         {
             private readonly Workspace _workspace;
             private readonly string _identifier;
             private readonly ITodoListProvider _todoListProvider;
 
-            public TableDataSource(Workspace workspace, IThreadingContext threadingContext, ITodoListProvider todoListProvider, string identifier)
+            public TableDataSource(
+                Workspace workspace,
+                IThreadingContext threadingContext,
+                ITodoListProvider todoListProvider,
+                string identifier
+            )
                 : base(workspace, threadingContext)
             {
                 _workspace = workspace;
@@ -82,9 +100,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 _todoListProvider.TodoListUpdated += OnTodoListUpdated;
             }
 
-            public override string DisplayName => ServicesVSResources.CSharp_VB_Todo_List_Table_Data_Source;
-            public override string SourceTypeIdentifier => StandardTableDataSources.CommentTableDataSource;
+            public override string DisplayName =>
+                ServicesVSResources.CSharp_VB_Todo_List_Table_Data_Source;
+            public override string SourceTypeIdentifier =>
+                StandardTableDataSources.CommentTableDataSource;
             public override string Identifier => _identifier;
+
             public override object GetItemKey(TodoItemsUpdatedArgs data) => data.DocumentId;
 
             protected override object GetOrUpdateAggregationKey(TodoItemsUpdatedArgs data)
@@ -113,7 +134,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return key;
             }
 
-            private bool CheckAggregateKey(ImmutableArray<DocumentId> key, TodoItemsUpdatedArgs args)
+            private bool CheckAggregateKey(
+                ImmutableArray<DocumentId> key,
+                TodoItemsUpdatedArgs args
+            )
             {
                 Contract.ThrowIfNull(args.Solution);
                 Contract.ThrowIfNull(args.DocumentId);
@@ -127,16 +151,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return GetDocumentsWithSameFilePath(data.Solution, data.DocumentId);
             }
 
-            public override AbstractTableEntriesSnapshot<TodoTableItem> CreateSnapshot(AbstractTableEntriesSource<TodoTableItem> source, int version, ImmutableArray<TodoTableItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
-                => new TableEntriesSnapshot(ThreadingContext, version, items, trackingPoints);
+            public override AbstractTableEntriesSnapshot<TodoTableItem> CreateSnapshot(
+                AbstractTableEntriesSource<TodoTableItem> source,
+                int version,
+                ImmutableArray<TodoTableItem> items,
+                ImmutableArray<ITrackingPoint> trackingPoints
+            ) => new TableEntriesSnapshot(ThreadingContext, version, items, trackingPoints);
 
-            public override IEqualityComparer<TodoTableItem> GroupingComparer
-                => TodoTableItem.GroupingComparer.Instance;
+            public override IEqualityComparer<TodoTableItem> GroupingComparer =>
+                TodoTableItem.GroupingComparer.Instance;
 
-            public override IEnumerable<TodoTableItem> Order(IEnumerable<TodoTableItem> groupedItems)
+            public override IEnumerable<TodoTableItem> Order(
+                IEnumerable<TodoTableItem> groupedItems
+            )
             {
-                return groupedItems.OrderBy(d => d.Data.OriginalLine)
-                                   .ThenBy(d => d.Data.OriginalColumn);
+                return groupedItems
+                    .OrderBy(d => d.Data.OriginalLine)
+                    .ThenBy(d => d.Data.OriginalColumn);
             }
 
             private void OnTodoListUpdated(object sender, TodoItemsUpdatedArgs e)
@@ -157,7 +188,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 OnDataAddedOrChanged(e);
             }
 
-            public override AbstractTableEntriesSource<TodoTableItem> CreateTableEntriesSource(object data)
+            public override AbstractTableEntriesSource<TodoTableItem> CreateTableEntriesSource(
+                object data
+            )
             {
                 var item = (TodoItemsUpdatedArgs)data;
                 return new TableEntriesSource(this, item.Workspace, item.DocumentId);
@@ -169,7 +202,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 private readonly Workspace _workspace;
                 private readonly DocumentId _documentId;
 
-                public TableEntriesSource(TableDataSource source, Workspace workspace, DocumentId documentId)
+                public TableEntriesSource(
+                    TableDataSource source,
+                    Workspace workspace,
+                    DocumentId documentId
+                )
                 {
                     _source = source;
                     _workspace = workspace;
@@ -180,23 +217,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
                 public override ImmutableArray<TodoTableItem> GetItems()
                 {
-                    return _source._todoListProvider.GetTodoItems(_workspace, _documentId, CancellationToken.None)
-                                   .Select(data => TodoTableItem.Create(_workspace, data))
-                                   .ToImmutableArray();
+                    return _source._todoListProvider
+                        .GetTodoItems(_workspace, _documentId, CancellationToken.None)
+                        .Select(data => TodoTableItem.Create(_workspace, data))
+                        .ToImmutableArray();
                 }
 
-                public override ImmutableArray<ITrackingPoint> GetTrackingPoints(ImmutableArray<TodoTableItem> items)
-                    => _workspace.CreateTrackingPoints(_documentId, items);
+                public override ImmutableArray<ITrackingPoint> GetTrackingPoints(
+                    ImmutableArray<TodoTableItem> items
+                ) => _workspace.CreateTrackingPoints(_documentId, items);
             }
 
             private sealed class TableEntriesSnapshot : AbstractTableEntriesSnapshot<TodoTableItem>
             {
-                public TableEntriesSnapshot(IThreadingContext threadingContext, int version, ImmutableArray<TodoTableItem> items, ImmutableArray<ITrackingPoint> trackingPoints)
-                    : base(threadingContext, version, items, trackingPoints)
-                {
-                }
+                public TableEntriesSnapshot(
+                    IThreadingContext threadingContext,
+                    int version,
+                    ImmutableArray<TodoTableItem> items,
+                    ImmutableArray<ITrackingPoint> trackingPoints
+                )
+                    : base(threadingContext, version, items, trackingPoints) { }
 
-                public override bool TryGetValue(int index, string columnName, [NotNullWhen(true)] out object? content)
+                public override bool TryGetValue(
+                    int index,
+                    string columnName,
+                    [NotNullWhen(true)] out object? content
+                )
                 {
                     // REVIEW: this method is too-chatty to make async, but otherwise, how one can implement it async?
                     //         also, what is cancellation mechanism?
@@ -217,7 +263,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                             content = data.Message;
                             return content != null;
                         case StandardTableKeyNames.DocumentName:
-                            content = DiagnosticDataLocation.GetFilePath(data.OriginalFilePath, data.MappedFilePath);
+                            content = DiagnosticDataLocation.GetFilePath(
+                                data.OriginalFilePath,
+                                data.MappedFilePath
+                            );
                             return content != null;
                         case StandardTableKeyNames.Line:
                             content = GetLineColumn(item).Line;
@@ -257,11 +306,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         item.Data.OriginalLine,
                         item.Data.OriginalColumn,
                         item.Data.MappedLine,
-                        item.Data.MappedColumn);
+                        item.Data.MappedColumn
+                    );
                 }
 
-                public override bool TryNavigateTo(int index, NavigationOptions options, CancellationToken cancellationToken)
-                    => TryNavigateToItem(index, options, cancellationToken);
+                public override bool TryNavigateTo(
+                    int index,
+                    NavigationOptions options,
+                    CancellationToken cancellationToken
+                ) => TryNavigateToItem(index, options, cancellationToken);
             }
         }
     }

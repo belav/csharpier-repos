@@ -16,8 +16,8 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct Int128
         : IBinaryInteger<Int128>,
-          IMinMaxValue<Int128>,
-          ISignedNumber<Int128>
+            IMinMaxValue<Int128>,
+            ISignedNumber<Int128>
     {
         internal const int Size = 16;
 
@@ -108,12 +108,20 @@ namespace System
             return Number.FormatInt128(this, format, null);
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatInt128(this, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
             return Number.TryFormatInt128(this, format, provider, destination, out charsWritten);
         }
@@ -134,7 +142,11 @@ namespace System
         public static Int128 Parse(string s, IFormatProvider? provider)
         {
             ArgumentNullException.ThrowIfNull(s);
-            return Number.ParseInt128(s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            return Number.ParseInt128(
+                s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static Int128 Parse(string s, NumberStyles style, IFormatProvider? provider)
@@ -144,7 +156,11 @@ namespace System
             return Number.ParseInt128(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static Int128 Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static Int128 Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseInt128(s, style, NumberFormatInfo.GetInstance(provider));
@@ -154,7 +170,12 @@ namespace System
         {
             if (s is not null)
             {
-                return Number.TryParseInt128IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+                return Number.TryParseInt128IntegerStyle(
+                        s,
+                        NumberStyles.Integer,
+                        NumberFormatInfo.CurrentInfo,
+                        out result
+                    ) == Number.ParsingStatus.OK;
             }
             else
             {
@@ -165,16 +186,31 @@ namespace System
 
         public static bool TryParse(ReadOnlySpan<char> s, out Int128 result)
         {
-            return Number.TryParseInt128IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt128IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out Int128 result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out Int128 result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
             if (s is not null)
             {
-                return Number.TryParseInt128(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+                return Number.TryParseInt128(
+                        s,
+                        style,
+                        NumberFormatInfo.GetInstance(provider),
+                        out result
+                    ) == Number.ParsingStatus.OK;
             }
             else
             {
@@ -183,10 +219,20 @@ namespace System
             }
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out Int128 result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out Int128 result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            return Number.TryParseInt128(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt128(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         //
@@ -467,7 +513,8 @@ namespace System
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a <see cref="UInt128" />.</returns>
         [CLSCompliant(false)]
-        public static explicit operator UInt128(Int128 value) => new UInt128(value._upper, value._lower);
+        public static explicit operator UInt128(Int128 value) =>
+            new UInt128(value._upper, value._lower);
 
         /// <summary>Explicitly converts a 128-bit signed integer to a <see cref="UInt128" /> value, throwing an overflow exception for any values that fall outside the representable range.</summary>
         /// <param name="value">The value to convert.</param>
@@ -590,7 +637,10 @@ namespace System
                 // into account the significand is now represented as 128-bits.
 
                 ulong bits = BitConverter.DoubleToUInt64Bits(value);
-                Int128 result = new Int128((bits << 12) >> 1 | 0x8000_0000_0000_0000, 0x0000_0000_0000_0000);
+                Int128 result = new Int128(
+                    (bits << 12) >> 1 | 0x8000_0000_0000_0000,
+                    0x0000_0000_0000_0000
+                );
 
                 result >>>= (1023 + 128 - 1 - (int)(bits >> 52));
 
@@ -615,7 +665,8 @@ namespace System
         /// <param name="value">The value to convert.</param>
         /// <returns><paramref name="value" /> converted to a 128-bit signed integer.</returns>
         /// <exception cref="OverflowException"><paramref name="value" /> is not representable by <see cref="Int128" />.</exception>
-        public static explicit operator checked Int128(float value) => checked((Int128)(double)(value));
+        public static explicit operator checked Int128(float value) =>
+            checked((Int128)(double)(value));
 
         //
         // Implicit Conversions To Int128
@@ -768,16 +819,16 @@ namespace System
         }
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
-        public static Int128 PopCount(Int128 value)
-            => ulong.PopCount(value._lower) + ulong.PopCount(value._upper);
+        public static Int128 PopCount(Int128 value) =>
+            ulong.PopCount(value._lower) + ulong.PopCount(value._upper);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        public static Int128 RotateLeft(Int128 value, int rotateAmount)
-            => (value << rotateAmount) | (value >>> (128 - rotateAmount));
+        public static Int128 RotateLeft(Int128 value, int rotateAmount) =>
+            (value << rotateAmount) | (value >>> (128 - rotateAmount));
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        public static Int128 RotateRight(Int128 value, int rotateAmount)
-            => (value >>> rotateAmount) | (value << (128 - rotateAmount));
+        public static Int128 RotateRight(Int128 value, int rotateAmount) =>
+            (value >>> rotateAmount) | (value << (128 - rotateAmount));
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
         public static Int128 TrailingZeroCount(Int128 value)
@@ -790,7 +841,11 @@ namespace System
         }
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TryReadBigEndian(ReadOnlySpan{byte}, bool, out TSelf)" />
-        static bool IBinaryInteger<Int128>.TryReadBigEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int128 value)
+        static bool IBinaryInteger<Int128>.TryReadBigEndian(
+            ReadOnlySpan<byte> source,
+            bool isUnsigned,
+            out Int128 value
+        )
         {
             Int128 result = default;
 
@@ -872,7 +927,11 @@ namespace System
         }
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TryReadLittleEndian(ReadOnlySpan{byte}, bool, out TSelf)" />
-        static bool IBinaryInteger<Int128>.TryReadLittleEndian(ReadOnlySpan<byte> source, bool isUnsigned, out Int128 value)
+        static bool IBinaryInteger<Int128>.TryReadLittleEndian(
+            ReadOnlySpan<byte> source,
+            bool isUnsigned,
+            out Int128 value
+        )
         {
             Int128 result = default;
 
@@ -1004,7 +1063,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TryWriteLittleEndian(Span{byte}, out int)" />
-        bool IBinaryInteger<Int128>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IBinaryInteger<Int128>.TryWriteLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= Size)
             {
@@ -1037,7 +1099,8 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryNumber{TSelf}.AllBitsSet" />
-        static Int128 IBinaryNumber<Int128>.AllBitsSet => new Int128(0xFFFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF);
+        static Int128 IBinaryNumber<Int128>.AllBitsSet =>
+            new Int128(0xFFFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF);
 
         /// <inheritdoc cref="IBinaryNumber{TSelf}.IsPow2(TSelf)" />
         public static bool IsPow2(Int128 value) => (PopCount(value) == 1U) && IsPositive(value);
@@ -1062,13 +1125,16 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        public static Int128 operator &(Int128 left, Int128 right) => new Int128(left._upper & right._upper, left._lower & right._lower);
+        public static Int128 operator &(Int128 left, Int128 right) =>
+            new Int128(left._upper & right._upper, left._lower & right._lower);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        public static Int128 operator |(Int128 left, Int128 right) => new Int128(left._upper | right._upper, left._lower | right._lower);
+        public static Int128 operator |(Int128 left, Int128 right) =>
+            new Int128(left._upper | right._upper, left._lower | right._lower);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        public static Int128 operator ^(Int128 left, Int128 right) => new Int128(left._upper ^ right._upper, left._lower ^ right._lower);
+        public static Int128 operator ^(Int128 left, Int128 right) =>
+            new Int128(left._upper ^ right._upper, left._lower ^ right._lower);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
         public static Int128 operator ~(Int128 value) => new Int128(~value._upper, ~value._lower);
@@ -1177,10 +1243,7 @@ namespace System
                 result = ~result + 1U;
             }
 
-            return new Int128(
-                result.Upper,
-                result.Lower
-            );
+            return new Int128(result.Upper, result.Lower);
         }
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
@@ -1191,10 +1254,12 @@ namespace System
         //
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther, TResult}.op_Equality(TSelf, TOther)" />
-        public static bool operator ==(Int128 left, Int128 right) => (left._lower == right._lower) && (left._upper == right._upper);
+        public static bool operator ==(Int128 left, Int128 right) =>
+            (left._lower == right._lower) && (left._upper == right._upper);
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther, TResult}.op_Inequality(TSelf, TOther)" />
-        public static bool operator !=(Int128 left, Int128 right) => (left._lower != right._lower) || (left._upper != right._upper);
+        public static bool operator !=(Int128 left, Int128 right) =>
+            (left._lower != right._lower) || (left._upper != right._upper);
 
         //
         // IIncrementOperators
@@ -1384,8 +1449,7 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.CreateChecked{TOther}(TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int128 CreateChecked<TOther>(TOther value)
-            where TOther : INumberBase<TOther>
+        public static Int128 CreateChecked<TOther>(TOther value) where TOther : INumberBase<TOther>
         {
             Int128 result;
 
@@ -1393,7 +1457,10 @@ namespace System
             {
                 result = (Int128)(object)value;
             }
-            else if (!TryConvertFromChecked(value, out result) && !TOther.TryConvertToChecked(value, out result))
+            else if (
+                !TryConvertFromChecked(value, out result)
+                && !TOther.TryConvertToChecked(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -1412,7 +1479,10 @@ namespace System
             {
                 result = (Int128)(object)value;
             }
-            else if (!TryConvertFromSaturating(value, out result) && !TOther.TryConvertToSaturating(value, out result))
+            else if (
+                !TryConvertFromSaturating(value, out result)
+                && !TOther.TryConvertToSaturating(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -1431,7 +1501,10 @@ namespace System
             {
                 result = (Int128)(object)value;
             }
-            else if (!TryConvertFromTruncating(value, out result) && !TOther.TryConvertToTruncating(value, out result))
+            else if (
+                !TryConvertFromTruncating(value, out result)
+                && !TOther.TryConvertToTruncating(value, out result)
+            )
             {
                 ThrowHelper.ThrowNotSupportedException();
             }
@@ -1531,7 +1604,8 @@ namespace System
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.MaxMagnitudeNumber(TSelf, TSelf)" />
-        static Int128 INumberBase<Int128>.MaxMagnitudeNumber(Int128 x, Int128 y) => MaxMagnitude(x, y);
+        static Int128 INumberBase<Int128>.MaxMagnitudeNumber(Int128 x, Int128 y) =>
+            MaxMagnitude(x, y);
 
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitude(TSelf, TSelf)" />
         public static Int128 MinMagnitude(Int128 x, Int128 y)
@@ -1574,11 +1648,15 @@ namespace System
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitudeNumber(TSelf, TSelf)" />
-        static Int128 INumberBase<Int128>.MinMagnitudeNumber(Int128 x, Int128 y) => MinMagnitude(x, y);
+        static Int128 INumberBase<Int128>.MinMagnitudeNumber(Int128 x, Int128 y) =>
+            MinMagnitude(x, y);
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromChecked{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<Int128>.TryConvertFromChecked<TOther>(TOther value, out Int128 result) => TryConvertFromChecked(value, out result);
+        static bool INumberBase<Int128>.TryConvertFromChecked<TOther>(
+            TOther value,
+            out Int128 result
+        ) => TryConvertFromChecked(value, out result);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool TryConvertFromChecked<TOther>(TOther value, out Int128 result)
@@ -1650,7 +1728,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<Int128>.TryConvertFromSaturating<TOther>(TOther value, out Int128 result) => TryConvertFromSaturating(value, out result);
+        static bool INumberBase<Int128>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out Int128 result
+        ) => TryConvertFromSaturating(value, out result);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool TryConvertFromSaturating<TOther>(TOther value, out Int128 result)
@@ -1668,15 +1749,23 @@ namespace System
             if (typeof(TOther) == typeof(double))
             {
                 double actualValue = (double)(object)value;
-                result = (actualValue >= +170141183460469231731687303715884105727.0) ? MaxValue :
-                         (actualValue <= -170141183460469231731687303715884105728.0) ? MinValue : (Int128)actualValue;
+                result =
+                    (actualValue >= +170141183460469231731687303715884105727.0)
+                        ? MaxValue
+                        : (actualValue <= -170141183460469231731687303715884105728.0)
+                            ? MinValue
+                            : (Int128)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Half))
             {
                 Half actualValue = (Half)(object)value;
-                result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-                         (actualValue == Half.NegativeInfinity) ? MinValue : (Int128)actualValue;
+                result =
+                    (actualValue == Half.PositiveInfinity)
+                        ? MaxValue
+                        : (actualValue == Half.NegativeInfinity)
+                            ? MinValue
+                            : (Int128)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(short))
@@ -1712,8 +1801,12 @@ namespace System
             else if (typeof(TOther) == typeof(float))
             {
                 float actualValue = (float)(object)value;
-                result = (actualValue >= +170141183460469231731687303715884105727.0f) ? MaxValue :
-                         (actualValue <= -170141183460469231731687303715884105728.0f) ? MinValue : (Int128)actualValue;
+                result =
+                    (actualValue >= +170141183460469231731687303715884105727.0f)
+                        ? MaxValue
+                        : (actualValue <= -170141183460469231731687303715884105728.0f)
+                            ? MinValue
+                            : (Int128)actualValue;
                 return true;
             }
             else
@@ -1725,7 +1818,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<Int128>.TryConvertFromTruncating<TOther>(TOther value, out Int128 result) => TryConvertFromTruncating(value, out result);
+        static bool INumberBase<Int128>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out Int128 result
+        ) => TryConvertFromTruncating(value, out result);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool TryConvertFromTruncating<TOther>(TOther value, out Int128 result)
@@ -1743,15 +1839,23 @@ namespace System
             if (typeof(TOther) == typeof(double))
             {
                 double actualValue = (double)(object)value;
-                result = (actualValue >= +170141183460469231731687303715884105727.0) ? MaxValue :
-                         (actualValue <= -170141183460469231731687303715884105728.0) ? MinValue : (Int128)actualValue;
+                result =
+                    (actualValue >= +170141183460469231731687303715884105727.0)
+                        ? MaxValue
+                        : (actualValue <= -170141183460469231731687303715884105728.0)
+                            ? MinValue
+                            : (Int128)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Half))
             {
                 Half actualValue = (Half)(object)value;
-                result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-                         (actualValue == Half.NegativeInfinity) ? MinValue : (Int128)actualValue;
+                result =
+                    (actualValue == Half.PositiveInfinity)
+                        ? MaxValue
+                        : (actualValue == Half.NegativeInfinity)
+                            ? MinValue
+                            : (Int128)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(short))
@@ -1787,8 +1891,12 @@ namespace System
             else if (typeof(TOther) == typeof(float))
             {
                 float actualValue = (float)(object)value;
-                result = (actualValue >= +170141183460469231731687303715884105727.0f) ? MaxValue :
-                         (actualValue <= -170141183460469231731687303715884105728.0f) ? MinValue : (Int128)actualValue;
+                result =
+                    (actualValue >= +170141183460469231731687303715884105727.0f)
+                        ? MaxValue
+                        : (actualValue <= -170141183460469231731687303715884105728.0f)
+                            ? MinValue
+                            : (Int128)actualValue;
                 return true;
             }
             else
@@ -1800,7 +1908,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<Int128>.TryConvertToChecked<TOther>(Int128 value, [MaybeNullWhen(false)] out TOther result)
+        static bool INumberBase<Int128>.TryConvertToChecked<TOther>(
+            Int128 value,
+            [MaybeNullWhen(false)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1868,7 +1979,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<Int128>.TryConvertToSaturating<TOther>(Int128 value, [MaybeNullWhen(false)] out TOther result)
+        static bool INumberBase<Int128>.TryConvertToSaturating<TOther>(
+            Int128 value,
+            [MaybeNullWhen(false)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1881,36 +1995,56 @@ namespace System
 
             if (typeof(TOther) == typeof(byte))
             {
-                byte actualResult = (value >= byte.MaxValue) ? byte.MaxValue :
-                                    (value <= byte.MinValue) ? byte.MinValue : (byte)value;
+                byte actualResult =
+                    (value >= byte.MaxValue)
+                        ? byte.MaxValue
+                        : (value <= byte.MinValue)
+                            ? byte.MinValue
+                            : (byte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(char))
             {
-                char actualResult = (value >= char.MaxValue) ? char.MaxValue :
-                                    (value <= char.MinValue) ? char.MinValue : (char)value;
+                char actualResult =
+                    (value >= char.MaxValue)
+                        ? char.MaxValue
+                        : (value <= char.MinValue)
+                            ? char.MinValue
+                            : (char)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(decimal))
             {
-                decimal actualResult = (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)) ? decimal.MaxValue :
-                                       (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001)) ? decimal.MinValue : (decimal)value;
+                decimal actualResult =
+                    (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
+                        ? decimal.MaxValue
+                        : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
+                            ? decimal.MinValue
+                            : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
             {
-                ushort actualResult = (value >= ushort.MaxValue) ? ushort.MaxValue :
-                                      (value <= ushort.MinValue) ? ushort.MinValue : (ushort)value;
+                ushort actualResult =
+                    (value >= ushort.MaxValue)
+                        ? ushort.MaxValue
+                        : (value <= ushort.MinValue)
+                            ? ushort.MinValue
+                            : (ushort)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(uint))
             {
-                uint actualResult = (value >= uint.MaxValue) ? uint.MaxValue :
-                                    (value <= uint.MinValue) ? uint.MinValue : (uint)value;
+                uint actualResult =
+                    (value >= uint.MaxValue)
+                        ? uint.MaxValue
+                        : (value <= uint.MinValue)
+                            ? uint.MinValue
+                            : (uint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1928,8 +2062,12 @@ namespace System
             }
             else if (typeof(TOther) == typeof(nuint))
             {
-                nuint actualResult = (value >= nuint.MaxValue) ? nuint.MaxValue :
-                                     (value <= nuint.MinValue) ? nuint.MinValue : (nuint)value;
+                nuint actualResult =
+                    (value >= nuint.MaxValue)
+                        ? nuint.MaxValue
+                        : (value <= nuint.MinValue)
+                            ? nuint.MinValue
+                            : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1942,7 +2080,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<Int128>.TryConvertToTruncating<TOther>(Int128 value, [MaybeNullWhen(false)] out TOther result)
+        static bool INumberBase<Int128>.TryConvertToTruncating<TOther>(
+            Int128 value,
+            [MaybeNullWhen(false)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1967,8 +2108,12 @@ namespace System
             }
             else if (typeof(TOther) == typeof(decimal))
             {
-                decimal actualResult = (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)) ? decimal.MaxValue :
-                                       (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001)) ? decimal.MinValue : (decimal)value;
+                decimal actualResult =
+                    (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
+                        ? decimal.MaxValue
+                        : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
+                            ? decimal.MinValue
+                            : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -2014,7 +2159,11 @@ namespace System
         //
 
         /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Int128 result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out Int128 result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // IShiftOperators
@@ -2126,17 +2275,23 @@ namespace System
         //
 
         /// <inheritdoc cref="ISignedNumber{TSelf}.NegativeOne" />
-        public static Int128 NegativeOne => new Int128(0xFFFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF);
+        public static Int128 NegativeOne =>
+            new Int128(0xFFFF_FFFF_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF);
 
         //
         // ISpanParsable
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static Int128 Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+        public static Int128 Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Integer, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Int128 result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out Int128 result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // ISubtractionOperators

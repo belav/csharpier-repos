@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ToStringTests : AutoMapperSpecBase
 {
     private Dest[] _dests;
@@ -13,20 +14,15 @@ public class ToStringTests : AutoMapperSpecBase
         public string Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Source, Dest>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Source, Dest>();
+        });
 
     protected override void Because_of()
     {
-        var sources = new[]
-        {
-            new Source
-            {
-                Value = 5
-            }
-        }.AsQueryable();
+        var sources = new[] { new Source { Value = 5 } }.AsQueryable();
 
         _dests = sources.ProjectTo<Dest>(Configuration).ToArray();
     }
@@ -52,20 +48,15 @@ public class NullableToStringTests : AutoMapperSpecBase
         public string Value { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Source, Dest>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Source, Dest>();
+        });
 
     protected override void Because_of()
     {
-        var sources = new[]
-        {
-            new Source
-            {
-                Value = 5
-            }
-        }.AsQueryable();
+        var sources = new[] { new Source { Value = 5 } }.AsQueryable();
 
         _dests = sources.ProjectTo<Dest>(Configuration).ToArray();
     }

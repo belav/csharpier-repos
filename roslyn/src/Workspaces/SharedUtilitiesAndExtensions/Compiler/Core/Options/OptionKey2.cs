@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Options
             Debug.Assert(option.IsPerLanguage);
             if (language == null)
             {
-                throw new ArgumentNullException(WorkspacesResources.A_language_name_must_be_specified_for_this_option);
+                throw new ArgumentNullException(
+                    WorkspacesResources.A_language_name_must_be_specified_for_this_option
+                );
             }
 
             this.Option = option ?? throw new ArgumentNullException(nameof(option));
@@ -39,12 +41,11 @@ namespace Microsoft.CodeAnalysis.Options
 
         public override bool Equals(object? obj)
         {
-            return obj is OptionKey2 key &&
-                   Equals(key);
+            return obj is OptionKey2 key && Equals(key);
         }
 
-        public bool Equals(OptionKey2 other)
-            => Option.Equals(other.Option) && Language == other.Language;
+        public bool Equals(OptionKey2 other) =>
+            Option.Equals(other.Option) && Language == other.Language;
 
         public override int GetHashCode()
         {
@@ -65,17 +66,13 @@ namespace Microsoft.CodeAnalysis.Options
                 return "";
             }
 
-            var languageDisplay = Option.IsPerLanguage
-                ? $"({Language}) "
-                : string.Empty;
+            var languageDisplay = Option.IsPerLanguage ? $"({Language}) " : string.Empty;
 
             return languageDisplay + Option.ToString();
         }
 
-        public static bool operator ==(OptionKey2 left, OptionKey2 right)
-            => left.Equals(right);
+        public static bool operator ==(OptionKey2 left, OptionKey2 right) => left.Equals(right);
 
-        public static bool operator !=(OptionKey2 left, OptionKey2 right)
-            => !left.Equals(right);
+        public static bool operator !=(OptionKey2 left, OptionKey2 right) => !left.Equals(right);
     }
 }

@@ -21,26 +21,49 @@ namespace Microsoft.CodeAnalysis;
 /// In exceptional cases such API may be asynchronous as long as it completes synchronously in most common cases and async completion is rare. It is still desirable to improve the design
 /// of such feature to either not be invoked on a UI thread or be entirely synchronous.
 /// </remarks>
-internal readonly record struct ParsedDocument(DocumentId Id, SourceText Text, SyntaxNode Root, HostLanguageServices HostLanguageServices)
+internal readonly record struct ParsedDocument(
+    DocumentId Id,
+    SourceText Text,
+    SyntaxNode Root,
+    HostLanguageServices HostLanguageServices
+)
 {
     public SyntaxTree SyntaxTree => Root.SyntaxTree;
 
     public LanguageServices LanguageServices => HostLanguageServices.LanguageServices;
     public SolutionServices SolutionServices => LanguageServices.SolutionServices;
 
-    public static async ValueTask<ParsedDocument> CreateAsync(Document document, CancellationToken cancellationToken)
+    public static async ValueTask<ParsedDocument> CreateAsync(
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-        return new ParsedDocument(document.Id, text, root, document.Project.GetExtendedLanguageServices());
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
+        return new ParsedDocument(
+            document.Id,
+            text,
+            root,
+            document.Project.GetExtendedLanguageServices()
+        );
     }
 
 #if !CODE_STYLE
-    public static ParsedDocument CreateSynchronously(Document document, CancellationToken cancellationToken)
+    public static ParsedDocument CreateSynchronously(
+        Document document,
+        CancellationToken cancellationToken
+    )
     {
         var text = document.GetTextSynchronously(cancellationToken);
         var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
-        return new ParsedDocument(document.Id, text, root, document.Project.GetExtendedLanguageServices());
+        return new ParsedDocument(
+            document.Id,
+            text,
+            root,
+            document.Project.GetExtendedLanguageServices()
+        );
     }
 #endif
 

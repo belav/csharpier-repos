@@ -10,12 +10,14 @@ namespace Microsoft.CodeAnalysis.PooledObjects
 {
     // Dictionary that can be recycled via an object pool
     // NOTE: these dictionaries always have the default comparer.
-    internal sealed partial class PooledDictionary<K, V> : Dictionary<K, V>
-        where K : notnull
+    internal sealed partial class PooledDictionary<K, V> : Dictionary<K, V> where K : notnull
     {
         private readonly ObjectPool<PooledDictionary<K, V>> _pool;
 
-        private PooledDictionary(ObjectPool<PooledDictionary<K, V>> pool, IEqualityComparer<K> keyComparer)
+        private PooledDictionary(
+            ObjectPool<PooledDictionary<K, V>> pool,
+            IEqualityComparer<K> keyComparer
+        )
             : base(keyComparer)
         {
             _pool = pool;
@@ -28,7 +30,8 @@ namespace Microsoft.CodeAnalysis.PooledObjects
             return result;
         }
 
-        public ImmutableDictionary<K, V> ToImmutableDictionary() => this.ToImmutableDictionary(this.Comparer);
+        public ImmutableDictionary<K, V> ToImmutableDictionary() =>
+            this.ToImmutableDictionary(this.Comparer);
 
         public void Free()
         {
@@ -37,13 +40,20 @@ namespace Microsoft.CodeAnalysis.PooledObjects
         }
 
         // global pool
-        private static readonly ObjectPool<PooledDictionary<K, V>> s_poolInstance = CreatePool(EqualityComparer<K>.Default);
+        private static readonly ObjectPool<PooledDictionary<K, V>> s_poolInstance = CreatePool(
+            EqualityComparer<K>.Default
+        );
 
         // if someone needs to create a pool;
-        public static ObjectPool<PooledDictionary<K, V>> CreatePool(IEqualityComparer<K> keyComparer)
+        public static ObjectPool<PooledDictionary<K, V>> CreatePool(
+            IEqualityComparer<K> keyComparer
+        )
         {
             ObjectPool<PooledDictionary<K, V>>? pool = null;
-            pool = new ObjectPool<PooledDictionary<K, V>>(() => new PooledDictionary<K, V>(pool!, keyComparer), 128);
+            pool = new ObjectPool<PooledDictionary<K, V>>(
+                () => new PooledDictionary<K, V>(pool!, keyComparer),
+                128
+            );
             return pool;
         }
 

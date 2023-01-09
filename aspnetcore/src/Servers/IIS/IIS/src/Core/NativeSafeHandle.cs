@@ -13,7 +13,8 @@ internal sealed class NativeSafeHandle : SafeHandle, IValueTaskSource<object?>
     public override bool IsInvalid => handle == IntPtr.Zero;
     public short Version => _core.Version;
 
-    public NativeSafeHandle(IntPtr handle) : base(IntPtr.Zero, ownsHandle: true)
+    public NativeSafeHandle(IntPtr handle)
+        : base(IntPtr.Zero, ownsHandle: true)
     {
         this.handle = handle;
     }
@@ -41,7 +42,12 @@ internal sealed class NativeSafeHandle : SafeHandle, IValueTaskSource<object?>
         return _core.GetStatus(token);
     }
 
-    public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+    public void OnCompleted(
+        Action<object?> continuation,
+        object? state,
+        short token,
+        ValueTaskSourceOnCompletedFlags flags
+    )
     {
         _core.OnCompleted(continuation, state, token, flags);
     }

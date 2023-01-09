@@ -79,12 +79,14 @@ internal sealed class ForgotPasswordModel<TUser> : ForgotPasswordModel where TUs
                 "/Account/ResetPassword",
                 pageHandler: null,
                 values: new { area = "Identity", code },
-                protocol: Request.Scheme)!;
+                protocol: Request.Scheme
+            )!;
 
             await _emailSender.SendEmailAsync(
                 Input.Email,
                 "Reset Password",
-                $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>."
+            );
 
             return RedirectToPage("./ForgotPasswordConfirmation");
         }

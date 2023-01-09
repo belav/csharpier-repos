@@ -61,53 +61,59 @@ internal class ObjectPool<T> where T : class
     private readonly Factory _factory;
 
 #if DETECT_LEAKS
-        private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers = new ConditionalWeakTable<T, LeakTracker>();
+    private static readonly ConditionalWeakTable<T, LeakTracker> leakTrackers =
+        new ConditionalWeakTable<T, LeakTracker>();
 
-        private class LeakTracker : IDisposable
-        {
-            private volatile bool disposed;
+    private class LeakTracker : IDisposable
+    {
+        private volatile bool disposed;
 
 #if TRACE_LEAKS
             internal volatile System.Diagnostics.StackTrace Trace = null;
 #endif
 
-            public void Dispose()
-            {
-                disposed = true;
-                GC.SuppressFinalize(this);
-            }
+        public void Dispose()
+        {
+            disposed = true;
+            GC.SuppressFinalize(this);
+        }
 
-            private string GetTrace()
-            {
+        private string GetTrace()
+        {
 #if TRACE_LEAKS
                 return Trace == null? "": Trace.ToString();
 #else
-                return "Leak tracing information is disabled. Define TRACE_LEAKS on ObjectPool`1.cs to get more info \n";
+            return "Leak tracing information is disabled. Define TRACE_LEAKS on ObjectPool`1.cs to get more info \n";
 #endif
-            }
+        }
 
-            ~LeakTracker()
+        ~LeakTracker()
+        {
+            if (
+                !this.disposed
+                && !Environment.HasShutdownStarted
+                && !AppDomain.CurrentDomain.IsFinalizingForUnload()
+            )
             {
-                if (!this.disposed &&
-                    !Environment.HasShutdownStarted &&
-                    !AppDomain.CurrentDomain.IsFinalizingForUnload())
-                {
-                    string report = string.Format("Pool detected potential leaking of {0}. \n Location of the leak: \n {1} ",
-                        typeof(T).ToString(),
-                        GetTrace());
+                string report = string.Format(
+                    "Pool detected potential leaking of {0}. \n Location of the leak: \n {1} ",
+                    typeof(T).ToString(),
+                    GetTrace()
+                );
 
-                    // If you are seeing this message it means that object has been allocated from the pool
-                    // and has not been returned back. This is not critical, but turns pool into rather
-                    // inefficient kind of "new".
-                    Debug.WriteLine("TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END");
-                }
+                // If you are seeing this message it means that object has been allocated from the pool
+                // and has not been returned back. This is not critical, but turns pool into rather
+                // inefficient kind of "new".
+                Debug.WriteLine(
+                    "TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END"
+                );
             }
         }
+    }
 #endif
 
     internal ObjectPool(Factory factory)
-        : this(factory, Environment.ProcessorCount * 2)
-    { }
+        : this(factory, Environment.ProcessorCount * 2) { }
 
     internal ObjectPool(Factory factory, int size)
     {
@@ -150,11 +156,11 @@ internal class ObjectPool<T> where T : class
         }
 
         inst = CreateInstance();
-    gotInstance:
+        gotInstance:
 
 #if DETECT_LEAKS
-            var tracker = new LeakTracker();
-            leakTrackers.Add(inst, tracker);
+        var tracker = new LeakTracker();
+        leakTrackers.Add(inst, tracker);
 
 #if TRACE_LEAKS
             var frame = new System.Diagnostics.StackTrace(false);
@@ -204,26 +210,28 @@ internal class ObjectPool<T> where T : class
     internal void ForgetTrackedObject(T old, T replacement = null)
     {
 #if DETECT_LEAKS
-            LeakTracker tracker;
-            if (leakTrackers.TryGetValue(old, out tracker))
-            {
-                tracker.Dispose();
-                leakTrackers.Remove(old);
-            }
-            else
-            {
-                string report = string.Format("Object of type {0} was freed, but was not from pool. \n Callstack: \n {1} ",
-                    typeof(T).ToString(),
-                    new System.Diagnostics.StackTrace(false));
+        LeakTracker tracker;
+        if (leakTrackers.TryGetValue(old, out tracker))
+        {
+            tracker.Dispose();
+            leakTrackers.Remove(old);
+        }
+        else
+        {
+            string report = string.Format(
+                "Object of type {0} was freed, but was not from pool. \n Callstack: \n {1} ",
+                typeof(T).ToString(),
+                new System.Diagnostics.StackTrace(false)
+            );
 
-                Debug.WriteLine("TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END");
-            }
+            Debug.WriteLine("TRACEOBJECTPOOLLEAKS_BEGIN\n" + report + "TRACEOBJECTPOOLLEAKS_END");
+        }
 
-            if (replacement != null)
-            {
-                tracker = new LeakTracker();
-                leakTrackers.Add(replacement, tracker);
-            }
+        if (replacement != null)
+        {
+            tracker = new LeakTracker();
+            leakTrackers.Add(replacement, tracker);
+        }
 #endif
     }
 

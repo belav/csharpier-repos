@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
             }
         }
     }
-    
+
     internal partial class NonStaticNestedClassTestsExtensions<T> where T : ABC
     {
         internal partial class NonStaticNestedMiddleParentClass
@@ -65,5 +65,5 @@ namespace Microsoft.Extensions.Logging.Generators.Tests.TestClasses
 
 namespace NamespaceForABC
 {
-    public class ABC {}
+    public class ABC { }
 }

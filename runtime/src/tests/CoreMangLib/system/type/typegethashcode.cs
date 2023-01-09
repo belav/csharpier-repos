@@ -29,6 +29,7 @@ public class TypeGetHashCode
             return 0;
         }
     }
+
     public bool RunTests()
     {
         bool retVal = true;
@@ -37,6 +38,7 @@ public class TypeGetHashCode
         retVal = PosTest2() && retVal;
         return retVal;
     }
+
     #region PositiveTest
     public bool PosTest1()
     {
@@ -52,7 +54,10 @@ public class TypeGetHashCode
             testClass tc = new testClass(ActualResult);
             if (ActualResult != tc.GetHashCode())
             {
-                TestLibrary.TestFramework.LogError("001", "the ActualResult is not the ExpectResult");
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "the ActualResult is not the ExpectResult"
+                );
                 retVal = false;
             }
         }
@@ -62,8 +67,8 @@ public class TypeGetHashCode
             retVal = false;
         }
         return retVal;
-
     }
+
     public bool PosTest2()
     {
         bool retVal = true;
@@ -81,10 +86,12 @@ public class TypeGetHashCode
             int ActualResult2 = tpB.GetHashCode();
             if (ActualResult != ActualResult2)
             {
-                TestLibrary.TestFramework.LogError("003","the ActualResult is not the ExpectResult");
+                TestLibrary.TestFramework.LogError(
+                    "003",
+                    "the ActualResult is not the ExpectResult"
+                );
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -92,24 +99,24 @@ public class TypeGetHashCode
             retVal = false;
         }
         return retVal;
-
     }
     #endregion
     #region ForTestClass
     public class testClass : Object
     {
         int hashCode;
+
         public testClass(int intA)
         {
             hashCode = intA;
         }
+
         public override int GetHashCode()
         {
             return hashCode;
         }
     }
-    public class Base:Object { }
+
+    public class Base : Object { }
     #endregion
-
 }
-

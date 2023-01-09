@@ -5,175 +5,178 @@ using Mono.Linker.Tests.Cases.Expectations.Metadata;
 
 namespace Mono.Linker.Tests.Cases.DynamicDependencies
 {
-	class DynamicDependencyMethod
-	{
-		public static void Main ()
-		{
-			new B (); // Needed to avoid lazy body marking stubbing
+    class DynamicDependencyMethod
+    {
+        public static void Main()
+        {
+            new B(); // Needed to avoid lazy body marking stubbing
 
-			B.Method ();
-			B.SameContext ();
-			B.Broken ();
-			B.Conditional ();
-		}
+            B.Method();
+            B.SameContext();
+            B.Broken();
+            B.Conditional();
+        }
 
-		[KeptMember (".ctor()")]
-		class B
-		{
-			[Kept]
-			int field;
+        [KeptMember(".ctor()")]
+        class B
+        {
+            [Kept]
+            int field;
 
-			[Kept]
-			void Method2 (out sbyte arg)
-			{
-				arg = 1;
-			}
+            [Kept]
+            void Method2(out sbyte arg)
+            {
+                arg = 1;
+            }
 
-			[Kept]
-			[DynamicDependency ("Dependency1()", typeof (C))]
-			[DynamicDependency ("Dependency2``1(``0[],System.Int32", typeof (C))]
-			[DynamicDependency ("Dependency3", typeof (C))]
-			[DynamicDependency ("RecursiveDependency", typeof (C))]
-			[DynamicDependency ("#ctor()", typeof (C))] // To avoid lazy body marking stubbing
-			[DynamicDependency ("field", typeof (C))]
-			[DynamicDependency ("NextOne(Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Nested@)", typeof (Nested))]
-			[DynamicDependency ("#cctor()", typeof (Nested))]
-			// Dependency on a property itself should be expressed as a dependency on one or both accessor methods
-			[DynamicDependency ("get_Property()", typeof (C))]
-			[DynamicDependency ("get_Property2", typeof (C))]
-			[DynamicDependency ("M``1(Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Complex.S{" +
-				"Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Complex.G{" +
-					"Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Complex.A,``0}}" +
-					"[0:,0:,0:][][][0:,0:]@)", typeof (Complex))]
-			public static void Method ()
-			{
-			}
+            [Kept]
+            [DynamicDependency("Dependency1()", typeof(C))]
+            [DynamicDependency("Dependency2``1(``0[],System.Int32", typeof(C))]
+            [DynamicDependency("Dependency3", typeof(C))]
+            [DynamicDependency("RecursiveDependency", typeof(C))]
+            [DynamicDependency("#ctor()", typeof(C))] // To avoid lazy body marking stubbing
+            [DynamicDependency("field", typeof(C))]
+            [DynamicDependency(
+                "NextOne(Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Nested@)",
+                typeof(Nested)
+            )]
+            [DynamicDependency("#cctor()", typeof(Nested))]
+            // Dependency on a property itself should be expressed as a dependency on one or both accessor methods
+            [DynamicDependency("get_Property()", typeof(C))]
+            [DynamicDependency("get_Property2", typeof(C))]
+            [DynamicDependency(
+                "M``1(Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Complex.S{"
+                    + "Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Complex.G{"
+                    + "Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.Complex.A,``0}}"
+                    + "[0:,0:,0:][][][0:,0:]@)",
+                typeof(Complex)
+            )]
+            public static void Method() { }
 
-			[Kept]
-			[DynamicDependency ("field")]
-			[DynamicDependency ("Method2(System.SByte@)")]
-			public static void SameContext ()
-			{
-			}
+            [Kept]
+            [DynamicDependency("field")]
+            [DynamicDependency("Method2(System.SByte@)")]
+            public static void SameContext() { }
 
-			[Kept]
+            [Kept]
+            [ExpectedWarning(
+                "IL2037",
+                "MissingMethod",
+                "'Mono.Linker.Tests.Cases.DynamicDependencies.C'"
+            )]
+            [DynamicDependency("MissingMethod", typeof(C))]
+            [ExpectedWarning(
+                "IL2037",
+                "Dependency2``1(``0,System.Int32,System.Object)",
+                "'Mono.Linker.Tests.Cases.DynamicDependencies.C'"
+            )]
+            [DynamicDependency("Dependency2``1(``0,System.Int32,System.Object)", typeof(C))]
+            [ExpectedWarning(
+                "IL2037",
+                "''",
+                "'Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.B'"
+            )]
+            [DynamicDependency("")]
+            [ExpectedWarning(
+                "IL2037",
+                "#ctor()",
+                "'Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.NestedStruct'"
+            )]
+            [DynamicDependency("#ctor()", typeof(NestedStruct))]
+            [ExpectedWarning(
+                "IL2037",
+                "#cctor()",
+                "'Mono.Linker.Tests.Cases.DynamicDependencies.C'"
+            )]
+            [DynamicDependency("#cctor()", typeof(C))]
+            [ExpectedWarning("IL2036", "NonExistentType")]
+            [DynamicDependency("method", "NonExistentType", "test")]
+            public static void Broken() { }
 
-			[ExpectedWarning ("IL2037", "MissingMethod", "'Mono.Linker.Tests.Cases.DynamicDependencies.C'")]
-			[DynamicDependency ("MissingMethod", typeof (C))]
+            [Kept]
+            [DynamicDependency("ConditionalTest()", typeof(C), Condition = "don't have it")]
+            public static void Conditional() { }
+        }
 
-			[ExpectedWarning ("IL2037", "Dependency2``1(``0,System.Int32,System.Object)", "'Mono.Linker.Tests.Cases.DynamicDependencies.C'")]
-			[DynamicDependency ("Dependency2``1(``0,System.Int32,System.Object)", typeof (C))]
+        class Nested
+        {
+            [Kept]
+            private static void NextOne(ref Nested arg1) { }
 
-			[ExpectedWarning ("IL2037", "''", "'Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.B'")]
-			[DynamicDependency ("")]
+            [Kept]
+            static Nested() { }
+        }
 
-			[ExpectedWarning ("IL2037", "#ctor()", "'Mono.Linker.Tests.Cases.DynamicDependencies.DynamicDependencyMethod.NestedStruct'")]
-			[DynamicDependency ("#ctor()", typeof (NestedStruct))]
+        class Complex
+        {
+            [Kept]
+            public struct S<T> { }
 
-			[ExpectedWarning ("IL2037", "#cctor()", "'Mono.Linker.Tests.Cases.DynamicDependencies.C'")]
-			[DynamicDependency ("#cctor()", typeof (C))]
+            [Kept]
+            public class A { }
 
-			[ExpectedWarning ("IL2036", "NonExistentType")]
-			[DynamicDependency ("method", "NonExistentType", "test")]
-			public static void Broken ()
-			{
-			}
+            [Kept]
+            public class G<T, U> { }
 
-			[Kept]
-			[DynamicDependency ("ConditionalTest()", typeof (C), Condition = "don't have it")]
-			public static void Conditional ()
-			{
-			}
-		}
+            [Kept]
+            public void M<V>(ref S<G<A, V>>[,][][][,,] a) { }
+        }
 
-		class Nested
-		{
-			[Kept]
-			private static void NextOne (ref Nested arg1)
-			{
-			}
+        struct NestedStruct
+        {
+            public string Name;
 
-			[Kept]
-			static Nested ()
-			{
+            public NestedStruct(string name)
+            {
+                Name = name;
+            }
+        }
+    }
 
-			}
-		}
+    [KeptMember(".ctor()")]
+    class C
+    {
+        [Kept]
+        internal string field;
 
-		class Complex
-		{
-			[Kept]
-			public struct S<T> { }
-			[Kept]
-			public class A { }
-			[Kept]
-			public class G<T, U> { }
+        [Kept]
+        internal void Dependency1() { }
 
-			[Kept]
-			public void M<V> (ref S<G<A, V>>[,][][][,,] a)
-			{
-			}
-		}
+        internal void Dependency1(long arg1) { }
 
-		struct NestedStruct
-		{
-			public string Name;
+        [Kept]
+        internal void Dependency2<T>(T[] arg1, int arg2) { }
 
-			public NestedStruct (string name)
-			{
-				Name = name;
-			}
-		}
-	}
+        [Kept]
+        internal void Dependency3(string str) { }
 
-	[KeptMember (".ctor()")]
-	class C
-	{
-		[Kept]
-		internal string field;
+        [Kept]
+        [DynamicDependency("#ctor", typeof(NestedInC))]
+        internal void RecursiveDependency() { }
 
-		[Kept]
-		internal void Dependency1 ()
-		{
-		}
+        [KeptMember(".ctor()")]
+        class NestedInC { }
 
-		internal void Dependency1 (long arg1)
-		{
-		}
+        [Kept]
+        [KeptBackingField]
+        internal string Property
+        {
+            [Kept]
+            get;
+            set;
+        }
 
-		[Kept]
-		internal void Dependency2<T> (T[] arg1, int arg2)
-		{
-		}
+        [Kept]
+        [KeptBackingField]
+        internal string Property2
+        {
+            [Kept]
+            get;
+            set;
+        }
 
-		[Kept]
-		internal void Dependency3 (string str)
-		{
-		}
-
-		[Kept]
-		[DynamicDependency ("#ctor", typeof (NestedInC))]
-		internal void RecursiveDependency ()
-		{
-		}
-
-		[KeptMember (".ctor()")]
-		class NestedInC
-		{
-		}
-
-		[Kept]
-		[KeptBackingField]
-		internal string Property { [Kept] get; set; }
-
-		[Kept]
-		[KeptBackingField]
-		internal string Property2 { [Kept] get; set; }
-
-		// For now, Condition has no effect: https://github.com/dotnet/linker/issues/1231
-		[Kept]
-		internal void ConditionalTest ()
-		{
-		}
-	}
+        // For now, Condition has no effect: https://github.com/dotnet/linker/issues/1231
+        [Kept]
+        internal void ConditionalTest() { }
+    }
 }

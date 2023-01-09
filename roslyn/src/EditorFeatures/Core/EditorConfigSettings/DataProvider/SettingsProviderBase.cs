@@ -21,8 +21,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 {
-    internal abstract class SettingsProviderBase<TData, TOptionsUpdater, TOption, TValue> : ISettingsProvider<TData>
-        where TOptionsUpdater : ISettingUpdater<TOption, TValue>
+    internal abstract class SettingsProviderBase<TData, TOptionsUpdater, TOption, TValue>
+        : ISettingsProvider<TData> where TOptionsUpdater : ISettingUpdater<TOption, TValue>
     {
         private readonly List<TData> _snapshot = new();
         private static readonly object s_gate = new();
@@ -31,9 +31,16 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
         protected readonly TOptionsUpdater SettingsUpdater;
         protected readonly Workspace Workspace;
 
-        protected abstract void UpdateOptions(AnalyzerConfigOptions editorConfigOptions, OptionSet visualStudioOptions);
+        protected abstract void UpdateOptions(
+            AnalyzerConfigOptions editorConfigOptions,
+            OptionSet visualStudioOptions
+        );
 
-        protected SettingsProviderBase(string fileName, TOptionsUpdater settingsUpdater, Workspace workspace)
+        protected SettingsProviderBase(
+            string fileName,
+            TOptionsUpdater settingsUpdater,
+            Workspace workspace
+        )
         {
             FileName = fileName;
             SettingsUpdater = settingsUpdater;
@@ -52,7 +59,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                 return;
             }
 
-            var configData = project.State.GetAnalyzerOptionsForPath(givenFolder.FullName, CancellationToken.None);
+            var configData = project.State.GetAnalyzerOptionsForPath(
+                givenFolder.FullName,
+                CancellationToken.None
+            );
             var result = project.GetAnalyzerConfigOptions();
             var options = new CombinedAnalyzerConfigOptions(configData.ConfigOptions, result);
             UpdateOptions(options, Workspace.Options);
@@ -65,7 +75,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                 return sourceText;
             }
 
-            var text = await SettingsUpdater.GetChangedEditorConfigAsync(sourceText, default).ConfigureAwait(false);
+            var text = await SettingsUpdater
+                .GetChangedEditorConfigAsync(sourceText, default)
+                .ConfigureAwait(false);
             return text is not null ? text : sourceText;
         }
 
@@ -87,15 +99,18 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
             _viewModel?.NotifyOfUpdate();
         }
 
-        public void RegisterViewModel(ISettingsEditorViewModel viewModel)
-            => _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
+        public void RegisterViewModel(ISettingsEditorViewModel viewModel) =>
+            _viewModel = viewModel ?? throw new ArgumentNullException(nameof(viewModel));
 
         private sealed class CombinedAnalyzerConfigOptions : AnalyzerConfigOptions
         {
             private readonly AnalyzerConfigOptions _workspaceOptions;
             private readonly AnalyzerConfigData? _result;
 
-            public CombinedAnalyzerConfigOptions(AnalyzerConfigOptions workspaceOptions, AnalyzerConfigData? result)
+            public CombinedAnalyzerConfigOptions(
+                AnalyzerConfigOptions workspaceOptions,
+                AnalyzerConfigData? result
+            )
             {
                 _workspaceOptions = workspaceOptions;
                 _result = result;
@@ -121,8 +136,11 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 
                 var diagnosticKey = "dotnet_diagnostic.(?<key>.*).severity";
                 var match = Regex.Match(key, diagnosticKey);
-                if (match.Success && match.Groups["key"].Value is string isolatedKey &&
-                    _result.Value.TreeOptions.TryGetValue(isolatedKey, out var severity))
+                if (
+                    match.Success
+                    && match.Groups["key"].Value is string isolatedKey
+                    && _result.Value.TreeOptions.TryGetValue(isolatedKey, out var severity)
+                )
                 {
                     value = severity.ToEditorConfigString();
                     return true;
@@ -151,8 +169,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
                     foreach (var (key, severity) in _result.Value.TreeOptions)
                     {
                         var diagnosticKey = "dotnet_diagnostic." + key + ".severity";
-                        if (!_workspaceOptions.TryGetValue(diagnosticKey, out _) &&
-                            !_result.Value.AnalyzerOptions.TryGetKey(diagnosticKey, out _))
+                        if (
+                            !_workspaceOptions.TryGetValue(diagnosticKey, out _)
+                            && !_result.Value.AnalyzerOptions.TryGetKey(diagnosticKey, out _)
+                        )
                         {
                             yield return diagnosticKey;
                         }

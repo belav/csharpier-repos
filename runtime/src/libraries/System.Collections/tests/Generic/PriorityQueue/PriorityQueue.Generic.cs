@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 namespace System.Collections.Tests
 {
-    public class PriorityQueue_Generic_Tests_string_string : PriorityQueue_Generic_Tests<string, string>
+    public class PriorityQueue_Generic_Tests_string_string
+        : PriorityQueue_Generic_Tests<string, string>
     {
         protected override (string, string) CreateT(int seed)
         {
@@ -27,17 +28,21 @@ namespace System.Collections.Tests
         protected override (int, int) CreateT(int seed)
         {
             var random = new Random(seed);
-            return (random.Next(),random.Next());
+            return (random.Next(), random.Next());
         }
     }
 
-    public class PriorityQueue_Generic_Tests_string_string_CustomComparer : PriorityQueue_Generic_Tests_string_string
+    public class PriorityQueue_Generic_Tests_string_string_CustomComparer
+        : PriorityQueue_Generic_Tests_string_string
     {
-        protected override IComparer<string> GetPriorityComparer() => StringComparer.InvariantCultureIgnoreCase;
+        protected override IComparer<string> GetPriorityComparer() =>
+            StringComparer.InvariantCultureIgnoreCase;
     }
 
-    public class PriorityQueue_Generic_Tests_int_int_CustomComparer : PriorityQueue_Generic_Tests_int_int
+    public class PriorityQueue_Generic_Tests_int_int_CustomComparer
+        : PriorityQueue_Generic_Tests_int_int
     {
-        protected override IComparer<int> GetPriorityComparer() => Comparer<int>.Create((x, y) => -x.CompareTo(y));
+        protected override IComparer<int> GetPriorityComparer() =>
+            Comparer<int>.Create((x, y) => -x.CompareTo(y));
     }
 }

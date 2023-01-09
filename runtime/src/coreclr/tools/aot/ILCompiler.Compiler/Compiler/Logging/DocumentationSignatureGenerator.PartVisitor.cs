@@ -8,7 +8,6 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.Logging
 {
-
     public sealed partial class DocumentationSignatureGenerator
     {
         /// <summary>
@@ -21,9 +20,7 @@ namespace ILCompiler.Logging
         {
             public static readonly PartVisitor Instance = new PartVisitor();
 
-            private PartVisitor()
-            {
-            }
+            private PartVisitor() { }
 
             public override void AppendName(StringBuilder builder, ArrayType arrayType)
             {
@@ -120,7 +117,10 @@ namespace ILCompiler.Logging
                 // https://github.com/dotnet/roslyn/issues/48363
             }
 
-            public override void AppendName(StringBuilder builder, GenericParameterDesc genericParameter)
+            public override void AppendName(
+                StringBuilder builder,
+                GenericParameterDesc genericParameter
+            )
             {
                 // Is this a type parameter on a type?
                 if (genericParameter.Kind == GenericParameterKind.Method)
@@ -141,10 +141,17 @@ namespace ILCompiler.Logging
                 builder.Append(genericParameter.Index);
             }
 
-            public override void AppendName(StringBuilder builder, SignatureMethodVariable type) => builder.Append("``").Append(type.Index);
-            public override void AppendName(StringBuilder builder, SignatureTypeVariable type) => builder.Append('`').Append(type.Index);
+            public override void AppendName(StringBuilder builder, SignatureMethodVariable type) =>
+                builder.Append("``").Append(type.Index);
 
-            protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+            public override void AppendName(StringBuilder builder, SignatureTypeVariable type) =>
+                builder.Append('`').Append(type.Index);
+
+            protected override void AppendNameForNestedType(
+                StringBuilder sb,
+                DefType nestedType,
+                DefType containingType
+            )
             {
                 AppendName(sb, InstantiateContainingType(nestedType));
                 sb.Append('.');
@@ -159,7 +166,10 @@ namespace ILCompiler.Logging
                 sb.Append(type.Name);
             }
 
-            protected override void AppendNameForInstantiatedType(StringBuilder builder, DefType type)
+            protected override void AppendNameForInstantiatedType(
+                StringBuilder builder,
+                DefType type
+            )
             {
                 int containingArity = 0;
                 DefType containingType = InstantiateContainingType(type);
@@ -181,7 +191,10 @@ namespace ILCompiler.Logging
                 int nestedArity = totalArity - containingArity;
                 string expectedSuffix = $"`{nestedArity}";
                 if (unmangledName.EndsWith(expectedSuffix))
-                    unmangledName = unmangledName.Substring(0, unmangledName.Length - expectedSuffix.Length);
+                    unmangledName = unmangledName.Substring(
+                        0,
+                        unmangledName.Length - expectedSuffix.Length
+                    );
 
                 builder.Append(unmangledName);
 
@@ -229,10 +242,16 @@ namespace ILCompiler.Logging
 
                 // If the type doesn't follow C# scheme where nested types inherit generic parameters from their container type
                 // return the container type as-is.
-                if (!containingType.HasInstantiation || containingType.Instantiation.Length > type.Instantiation.Length)
+                if (
+                    !containingType.HasInstantiation
+                    || containingType.Instantiation.Length > type.Instantiation.Length
+                )
                     return containingType;
 
-                return (DefType)containingType.InstantiateAsOpen().InstantiateSignature(type.Instantiation, default);
+                return (DefType)
+                    containingType
+                        .InstantiateAsOpen()
+                        .InstantiateSignature(type.Instantiation, default);
             }
         }
     }

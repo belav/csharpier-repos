@@ -21,7 +21,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _manifestNode = manifestNode;
         }
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.TextSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.TextSection;
 
         public override bool IsShareable => false;
 
@@ -56,7 +57,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             byte[] manifestAssemblyMvidTable = _manifestNode.GetManifestAssemblyMvidTableData();
-            return new ObjectData(manifestAssemblyMvidTable, Array.Empty<Relocation>(), alignment: 0, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                manifestAssemblyMvidTable,
+                Array.Empty<Relocation>(),
+                alignment: 0,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
     }
 }

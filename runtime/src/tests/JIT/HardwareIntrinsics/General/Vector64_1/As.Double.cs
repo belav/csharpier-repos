@@ -41,7 +41,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 8;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector64<Double>>() / sizeof(Double);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector64<Double>>() / sizeof(Double);
 
         public bool Succeeded { get; set; } = true;
 
@@ -144,77 +145,80 @@ namespace JIT.HardwareIntrinsics.General
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object byteResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsByte))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsByte))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<byte>)(byteResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object doubleResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsDouble))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsDouble))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<double>)(doubleResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object shortResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsInt16))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsInt16))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<short>)(shortResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object intResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsInt32))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsInt32))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<int>)(intResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object longResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsInt64))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsInt64))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<long>)(longResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object sbyteResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsSByte))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsSByte))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<sbyte>)(sbyteResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object floatResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsSingle))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsSingle))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<float>)(floatResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object ushortResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsUInt16))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsUInt16))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<ushort>)(ushortResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object uintResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsUInt32))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsUInt32))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<uint>)(uintResult), value);
 
             value = Vector64.Create(TestLibrary.Generator.GetDouble());
             object ulongResult = typeof(Vector64)
-                                    .GetMethod(nameof(Vector64.AsUInt64))
-                                    .MakeGenericMethod(typeof(Double))
-                                    .Invoke(null, new object[] { value });
+                .GetMethod(nameof(Vector64.AsUInt64))
+                .MakeGenericMethod(typeof(Double))
+                .Invoke(null, new object[] { value });
             ValidateResult((Vector64<ulong>)(ulongResult), value);
         }
 
-        private void ValidateResult<T>(Vector64<T> result, Vector64<Double> value, [CallerMemberName] string method = "")
-            where T : struct
+        private void ValidateResult<T>(
+            Vector64<T> result,
+            Vector64<Double> value,
+            [CallerMemberName] string method = ""
+        ) where T : struct
         {
             Double[] resultElements = new Double[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Double, byte>(ref resultElements[0]), result);
@@ -225,7 +229,12 @@ namespace JIT.HardwareIntrinsics.General
             ValidateResult(resultElements, valueElements, typeof(T), method);
         }
 
-        private void ValidateResult(Double[] resultElements, Double[] valueElements, Type targetType, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Double[] resultElements,
+            Double[] valueElements,
+            Type targetType,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -240,9 +249,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector64<Double>.As{targetType.Name}: {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", valueElements)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector64<Double>.As{targetType.Name}: {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", valueElements)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

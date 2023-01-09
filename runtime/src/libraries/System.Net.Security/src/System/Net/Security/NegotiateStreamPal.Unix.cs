@@ -35,8 +35,11 @@ namespace System.Net.Security
         {
             if (impersonationLevel != TokenImpersonationLevel.Identification)
             {
-                throw new ArgumentOutOfRangeException(nameof(impersonationLevel), impersonationLevel.ToString(),
-                    SR.net_auth_supported_impl_levels);
+                throw new ArgumentOutOfRangeException(
+                    nameof(impersonationLevel),
+                    impersonationLevel.ToString(),
+                    SR.net_auth_supported_impl_levels
+                );
             }
         }
     }

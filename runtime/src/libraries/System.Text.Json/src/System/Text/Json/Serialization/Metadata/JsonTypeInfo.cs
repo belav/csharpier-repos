@@ -19,11 +19,17 @@ namespace System.Text.Json.Serialization.Metadata
     [DebuggerDisplay("{DebuggerDisplay,nq}")]
     public abstract partial class JsonTypeInfo
     {
-        internal const string MetadataFactoryRequiresUnreferencedCode = "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";
+        internal const string MetadataFactoryRequiresUnreferencedCode =
+            "JSON serialization and deserialization might require types that cannot be statically analyzed and might need runtime code generation. Use System.Text.Json source generation for native AOT applications.";
 
         internal const string JsonObjectTypeName = "System.Text.Json.Nodes.JsonObject";
 
-        internal delegate T ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>(TArg0 arg0, TArg1 arg1, TArg2 arg2, TArg3 arg3);
+        internal delegate T ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>(
+            TArg0 arg0,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3
+        );
 
         private JsonPropertyInfoList? _properties;
 
@@ -57,10 +63,7 @@ namespace System.Text.Json.Serialization.Metadata
         public Func<object>? CreateObject
         {
             get => _createObject;
-            set
-            {
-                SetCreateObject(value);
-            }
+            set { SetCreateObject(value); }
         }
 
         private protected abstract void SetCreateObject(Delegate? createObject);
@@ -91,7 +94,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                 if (Kind != JsonTypeInfoKind.Object)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(Kind);
+                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                        Kind
+                    );
                 }
 
                 _onSerializing = value;
@@ -121,7 +126,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                 if (Kind != JsonTypeInfoKind.Object)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(Kind);
+                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                        Kind
+                    );
                 }
 
                 _onSerialized = value;
@@ -151,7 +158,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                 if (Kind != JsonTypeInfoKind.Object)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(Kind);
+                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                        Kind
+                    );
                 }
 
                 _onDeserializing = value;
@@ -181,7 +190,9 @@ namespace System.Text.Json.Serialization.Metadata
 
                 if (Kind != JsonTypeInfoKind.Object)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(Kind);
+                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                        Kind
+                    );
                 }
 
                 _onDeserialized = value;
@@ -243,12 +254,16 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     if (Kind == JsonTypeInfoKind.None)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(Kind);
+                        ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                            Kind
+                        );
                     }
 
                     if (value.DeclaringTypeInfo != null && value.DeclaringTypeInfo != this)
                     {
-                        ThrowHelper.ThrowArgumentException_JsonPolymorphismOptionsAssociatedWithDifferentJsonTypeInfo(nameof(value));
+                        ThrowHelper.ThrowArgumentException_JsonPolymorphismOptionsAssociatedWithDifferentJsonTypeInfo(
+                            nameof(value)
+                        );
                     }
 
                     value.DeclaringTypeInfo = this;
@@ -301,7 +316,10 @@ namespace System.Text.Json.Serialization.Metadata
         {
             if (MetadataSerializationNotSupported)
             {
-                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(Options.TypeInfoResolver, Type);
+                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(
+                    Options.TypeInfoResolver,
+                    Type
+                );
             }
         }
 
@@ -437,7 +455,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Returns a helper class used for computing the default value.
         /// </summary>
-        internal DefaultValueHolder DefaultValueHolder => _defaultValueHolder ??= DefaultValueHolder.CreateHolder(Type);
+        internal DefaultValueHolder DefaultValueHolder =>
+            _defaultValueHolder ??= DefaultValueHolder.CreateHolder(Type);
         private DefaultValueHolder? _defaultValueHolder;
 
         /// <summary>
@@ -473,6 +492,7 @@ namespace System.Text.Json.Serialization.Metadata
             switch (converter.ConverterStrategy)
             {
                 case ConverterStrategy.Dictionary:
+
                     {
                         KeyType = converter.KeyType;
                     }
@@ -482,6 +502,7 @@ namespace System.Text.Json.Serialization.Metadata
                 case ConverterStrategy.Value:
                     break;
                 case ConverterStrategy.None:
+
                     {
                         ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(type);
                     }
@@ -544,7 +565,10 @@ namespace System.Text.Json.Serialization.Metadata
 
         internal void Configure()
         {
-            Debug.Assert(Monitor.IsEntered(_configureLock), "Configure called directly, use EnsureConfigured which locks this method");
+            Debug.Assert(
+                Monitor.IsEntered(_configureLock),
+                "Configure called directly, use EnsureConfigured which locks this method"
+            );
 
             if (!Options.IsReadOnly)
             {
@@ -557,15 +581,21 @@ namespace System.Text.Json.Serialization.Metadata
             CanUseSerializeHandler &= Options.SerializerContext?.CanUseSerializationLogic == true;
 
             JsonConverter converter = Converter;
-            Debug.Assert(PropertyInfoForTypeInfo.EffectiveConverter.ConverterStrategy == Converter.ConverterStrategy,
-                $"ConverterStrategy from PropertyInfoForTypeInfo.EffectiveConverter.ConverterStrategy ({PropertyInfoForTypeInfo.EffectiveConverter.ConverterStrategy}) does not match converter's ({Converter.ConverterStrategy})");
+            Debug.Assert(
+                PropertyInfoForTypeInfo.EffectiveConverter.ConverterStrategy
+                    == Converter.ConverterStrategy,
+                $"ConverterStrategy from PropertyInfoForTypeInfo.EffectiveConverter.ConverterStrategy ({PropertyInfoForTypeInfo.EffectiveConverter.ConverterStrategy}) does not match converter's ({Converter.ConverterStrategy})"
+            );
             if (Kind == JsonTypeInfoKind.Object)
             {
                 InitializePropertyCache();
 
                 if (converter.ConstructorIsParameterized)
                 {
-                    InitializeConstructorParameters(GetParameterInfoValues(), sourceGenMode: Options.SerializerContext != null);
+                    InitializeConstructorParameters(
+                        GetParameterInfoValues(),
+                        sourceGenMode: Options.SerializerContext != null
+                    );
                 }
             }
 
@@ -643,7 +673,11 @@ namespace System.Text.Json.Serialization.Metadata
                 ThrowHelper.ThrowArgumentNullException(nameof(options));
             }
 
-            JsonConverter converter = DefaultJsonTypeInfoResolver.GetConverterForType(typeof(T), options, resolveJsonConverterAttribute: false);
+            JsonConverter converter = DefaultJsonTypeInfoResolver.GetConverterForType(
+                typeof(T),
+                options,
+                resolveJsonConverterAttribute: false
+            );
             return new CustomJsonTypeInfo<T>(converter, options);
         }
 
@@ -681,11 +715,20 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (IsInvalidForSerialization(type))
             {
-                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(nameof(type), type, null, null);
+                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(
+                    nameof(type),
+                    type,
+                    null,
+                    null
+                );
             }
 
             JsonTypeInfo jsonTypeInfo;
-            JsonConverter converter = DefaultJsonTypeInfoResolver.GetConverterForType(type, options, resolveJsonConverterAttribute: false);
+            JsonConverter converter = DefaultJsonTypeInfoResolver.GetConverterForType(
+                type,
+                options,
+                resolveJsonConverterAttribute: false
+            );
 
             if (converter.TypeToConvert == type)
             {
@@ -696,9 +739,15 @@ namespace System.Text.Json.Serialization.Metadata
             else
             {
                 Type jsonTypeInfoType = typeof(CustomJsonTypeInfo<>).MakeGenericType(type);
-                jsonTypeInfo = (JsonTypeInfo)jsonTypeInfoType.CreateInstanceNoWrapExceptions(
-                    parameterTypes: new Type[] { typeof(JsonConverter), typeof(JsonSerializerOptions) },
-                    parameters: new object[] { converter, options })!;
+                jsonTypeInfo = (JsonTypeInfo)
+                    jsonTypeInfoType.CreateInstanceNoWrapExceptions(
+                        parameterTypes: new Type[]
+                        {
+                            typeof(JsonConverter),
+                            typeof(JsonSerializerOptions)
+                        },
+                        parameters: new object[] { converter, options }
+                    )!;
             }
 
             Debug.Assert(jsonTypeInfo.Type == type);
@@ -730,7 +779,12 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (IsInvalidForSerialization(propertyType))
             {
-                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(nameof(propertyType), propertyType, Type, name);
+                ThrowHelper.ThrowArgumentException_CannotSerializeInvalidType(
+                    nameof(propertyType),
+                    propertyType,
+                    Type,
+                    name
+                );
             }
 
             VerifyMutable();
@@ -743,7 +797,10 @@ namespace System.Text.Json.Serialization.Metadata
         [MemberNotNull(nameof(_properties))]
         private void PopulatePropertyList()
         {
-            Debug.Assert(!Monitor.IsEntered(_configureLock), "should not be invoked from Configure");
+            Debug.Assert(
+                !Monitor.IsEntered(_configureLock),
+                "should not be invoked from Configure"
+            );
 
             if (!_isConfigured)
             {
@@ -766,19 +823,48 @@ namespace System.Text.Json.Serialization.Metadata
         internal abstract JsonParameterInfoValues[] GetParameterInfoValues();
 
         // Untyped, root-level serialization methods
-        internal abstract void SerializeAsObject(Utf8JsonWriter writer, object? rootValue, bool isInvokedByPolymorphicConverter = false);
-        internal abstract Task SerializeAsObjectAsync(Stream utf8Json, object? rootValue, CancellationToken cancellationToken, bool isInvokedByPolymorphicConverter = false);
-        internal abstract void SerializeAsObject(Stream utf8Json, object? rootValue, bool isInvokedByPolymorphicConverter = false);
+        internal abstract void SerializeAsObject(
+            Utf8JsonWriter writer,
+            object? rootValue,
+            bool isInvokedByPolymorphicConverter = false
+        );
+        internal abstract Task SerializeAsObjectAsync(
+            Stream utf8Json,
+            object? rootValue,
+            CancellationToken cancellationToken,
+            bool isInvokedByPolymorphicConverter = false
+        );
+        internal abstract void SerializeAsObject(
+            Stream utf8Json,
+            object? rootValue,
+            bool isInvokedByPolymorphicConverter = false
+        );
 
         // Untyped, root-level deserialization methods
-        internal abstract object? DeserializeAsObject(ref Utf8JsonReader reader, ref ReadStack state);
-        internal abstract ValueTask<object?> DeserializeAsObjectAsync(Stream utf8Json, CancellationToken cancellationToken);
+        internal abstract object? DeserializeAsObject(
+            ref Utf8JsonReader reader,
+            ref ReadStack state
+        );
+        internal abstract ValueTask<object?> DeserializeAsObjectAsync(
+            Stream utf8Json,
+            CancellationToken cancellationToken
+        );
         internal abstract object? DeserializeAsObject(Stream utf8Json);
-        internal abstract IAsyncEnumerable<object?> DeserializeAsyncEnumerableAsObject(Stream utf8Json, CancellationToken cancellationToken);
+        internal abstract IAsyncEnumerable<object?> DeserializeAsyncEnumerableAsObject(
+            Stream utf8Json,
+            CancellationToken cancellationToken
+        );
 
-        internal void CacheMember(JsonPropertyInfo jsonPropertyInfo, JsonPropertyDictionary<JsonPropertyInfo> propertyCache, ref Dictionary<string, JsonPropertyInfo>? ignoredMembers)
+        internal void CacheMember(
+            JsonPropertyInfo jsonPropertyInfo,
+            JsonPropertyDictionary<JsonPropertyInfo> propertyCache,
+            ref Dictionary<string, JsonPropertyInfo>? ignoredMembers
+        )
         {
-            Debug.Assert(jsonPropertyInfo.MemberName != null, "MemberName can be null in custom JsonPropertyInfo instances and should never be passed in this method");
+            Debug.Assert(
+                jsonPropertyInfo.MemberName != null,
+                "MemberName can be null in custom JsonPropertyInfo instances and should never be passed in this method"
+            );
             string memberName = jsonPropertyInfo.MemberName;
 
             jsonPropertyInfo.EnsureChildOf(this);
@@ -787,7 +873,10 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 if (ExtensionDataProperty != null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute(Type, typeof(JsonExtensionDataAttribute));
+                    ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute(
+                        Type,
+                        typeof(JsonExtensionDataAttribute)
+                    );
                 }
 
                 ExtensionDataProperty = jsonPropertyInfo;
@@ -812,10 +901,12 @@ namespace System.Text.Json.Serialization.Metadata
                     {
                         ignoreCurrentProperty =
                             // Does the current property have `JsonIgnoreAttribute`?
-                            jsonPropertyInfo.IsIgnored ||
+                            jsonPropertyInfo.IsIgnored
+                            ||
                             // Is the current property hidden by the previously cached property
                             // (with `new` keyword, or by overriding)?
-                            other.MemberName == memberName ||
+                            other.MemberName == memberName
+                            ||
                             // Was a property with the same CLR name ignored? That property hid the current property,
                             // thus, if it was ignored, the current property should be ignored too.
                             ignoredMembers?.ContainsKey(memberName) == true;
@@ -836,7 +927,10 @@ namespace System.Text.Json.Serialization.Metadata
 
                     if (!ignoreCurrentProperty)
                     {
-                        ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(Type, jsonPropertyInfo.Name);
+                        ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(
+                            Type,
+                            jsonPropertyInfo.Name
+                        );
                     }
                 }
             }
@@ -868,7 +962,8 @@ namespace System.Text.Json.Serialization.Metadata
                 Debug.Assert(obj is ParameterLookupKey);
 
                 ParameterLookupKey other = (ParameterLookupKey)obj;
-                return Type == other.Type && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+                return Type == other.Type
+                    && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -909,7 +1004,10 @@ namespace System.Text.Json.Serialization.Metadata
                     {
                         if (ExtensionDataProperty != null)
                         {
-                            ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute(Type, typeof(JsonExtensionDataAttribute));
+                            ThrowHelper.ThrowInvalidOperationException_SerializationDuplicateTypeAttribute(
+                                Type,
+                                typeof(JsonExtensionDataAttribute)
+                            );
                         }
 
                         ExtensionDataProperty = property;
@@ -918,7 +1016,10 @@ namespace System.Text.Json.Serialization.Metadata
 
                     if (!PropertyCache.TryAddValue(property.Name, property))
                     {
-                        ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(Type, property.Name);
+                        ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(
+                            Type,
+                            property.Name
+                        );
                     }
 
                     isOrderSpecified |= property.Order != 0;
@@ -943,7 +1044,9 @@ namespace System.Text.Json.Serialization.Metadata
             }
 
             int numberOfRequiredProperties = 0;
-            foreach (KeyValuePair<string, JsonPropertyInfo> jsonPropertyInfoKv in PropertyCache.List)
+            foreach (
+                KeyValuePair<string, JsonPropertyInfo> jsonPropertyInfoKv in PropertyCache.List
+            )
             {
                 JsonPropertyInfo jsonPropertyInfo = jsonPropertyInfoKv.Value;
 
@@ -959,19 +1062,27 @@ namespace System.Text.Json.Serialization.Metadata
             NumberOfRequiredProperties = numberOfRequiredProperties;
         }
 
-        internal void InitializeConstructorParameters(JsonParameterInfoValues[] jsonParameters, bool sourceGenMode = false)
+        internal void InitializeConstructorParameters(
+            JsonParameterInfoValues[] jsonParameters,
+            bool sourceGenMode = false
+        )
         {
             Debug.Assert(ParameterCache is null);
             Debug.Assert(Kind == JsonTypeInfoKind.Object);
 
-            var parameterCache = new JsonPropertyDictionary<JsonParameterInfo>(Options.PropertyNameCaseInsensitive, jsonParameters.Length);
+            var parameterCache = new JsonPropertyDictionary<JsonParameterInfo>(
+                Options.PropertyNameCaseInsensitive,
+                jsonParameters.Length
+            );
 
             // Cache the lookup from object property name to JsonPropertyInfo using a case-insensitive comparer.
             // Case-insensitive is used to support both camel-cased parameter names and exact matches when C#
             // record types or anonymous types are used.
             // The property name key does not use [JsonPropertyName] or PropertyNamingPolicy since we only bind
             // the parameter name to the object property name and do not use the JSON version of the name here.
-            var nameLookup = new Dictionary<ParameterLookupKey, ParameterLookupValue>(PropertyCache!.Count);
+            var nameLookup = new Dictionary<ParameterLookupKey, ParameterLookupValue>(
+                PropertyCache!.Count
+            );
 
             foreach (KeyValuePair<string, JsonPropertyInfo> kvp in PropertyCache.List)
             {
@@ -992,7 +1103,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             foreach (JsonParameterInfoValues parameterInfo in jsonParameters)
             {
-                ParameterLookupKey paramToCheck = new(parameterInfo.Name, parameterInfo.ParameterType);
+                ParameterLookupKey paramToCheck =
+                    new(parameterInfo.Name, parameterInfo.ParameterType);
 
                 if (nameLookup.TryGetValue(paramToCheck, out ParameterLookupValue? matchingEntry))
                 {
@@ -1003,20 +1115,37 @@ namespace System.Text.Json.Serialization.Metadata
                             Type,
                             parameterInfo.Name!,
                             matchingEntry.JsonPropertyInfo.Name,
-                            matchingEntry.DuplicateName);
+                            matchingEntry.DuplicateName
+                        );
                     }
 
                     Debug.Assert(matchingEntry.JsonPropertyInfo != null);
                     JsonPropertyInfo jsonPropertyInfo = matchingEntry.JsonPropertyInfo;
-                    JsonParameterInfo jsonParameterInfo = CreateConstructorParameter(parameterInfo, jsonPropertyInfo, sourceGenMode, Options);
+                    JsonParameterInfo jsonParameterInfo = CreateConstructorParameter(
+                        parameterInfo,
+                        jsonPropertyInfo,
+                        sourceGenMode,
+                        Options
+                    );
                     parameterCache.Add(jsonPropertyInfo.Name, jsonParameterInfo);
                 }
                 // It is invalid for the extension data property to bind with a constructor argument.
-                else if (ExtensionDataProperty != null &&
-                    StringComparer.OrdinalIgnoreCase.Equals(paramToCheck.Name, ExtensionDataProperty.Name))
+                else if (
+                    ExtensionDataProperty != null
+                    && StringComparer.OrdinalIgnoreCase.Equals(
+                        paramToCheck.Name,
+                        ExtensionDataProperty.Name
+                    )
+                )
                 {
-                    Debug.Assert(ExtensionDataProperty.MemberName != null, "Custom property info cannot be data extension property");
-                    ThrowHelper.ThrowInvalidOperationException_ExtensionDataCannotBindToCtorParam(ExtensionDataProperty.MemberName, ExtensionDataProperty);
+                    Debug.Assert(
+                        ExtensionDataProperty.MemberName != null,
+                        "Custom property info cannot be data extension property"
+                    );
+                    ThrowHelper.ThrowInvalidOperationException_ExtensionDataCannotBindToCtorParam(
+                        ExtensionDataProperty.MemberName,
+                        ExtensionDataProperty
+                    );
                 }
             }
 
@@ -1028,13 +1157,21 @@ namespace System.Text.Json.Serialization.Metadata
         {
             if (IsInvalidForSerialization(type))
             {
-                ThrowHelper.ThrowInvalidOperationException_CannotSerializeInvalidType(type, declaringType: null, memberInfo: null);
+                ThrowHelper.ThrowInvalidOperationException_CannotSerializeInvalidType(
+                    type,
+                    declaringType: null,
+                    memberInfo: null
+                );
             }
         }
 
         internal static bool IsInvalidForSerialization(Type type)
         {
-            return type == typeof(void) || type.IsPointer || type.IsByRef || IsByRefLike(type) || type.ContainsGenericParameters;
+            return type == typeof(void)
+                || type.IsPointer
+                || type.IsByRef
+                || IsByRefLike(type)
+                || type.ContainsGenericParameters;
         }
 
         private static bool IsByRefLike(Type type)
@@ -1051,7 +1188,10 @@ namespace System.Text.Json.Serialization.Metadata
 
             for (int i = 0; i < attributes.Length; i++)
             {
-                if (attributes[i].GetType().FullName == "System.Runtime.CompilerServices.IsByRefLikeAttribute")
+                if (
+                    attributes[i].GetType().FullName
+                    == "System.Runtime.CompilerServices.IsByRefLikeAttribute"
+                )
                 {
                     return true;
                 }
@@ -1063,26 +1203,38 @@ namespace System.Text.Json.Serialization.Metadata
 
         internal static bool IsValidExtensionDataProperty(Type propertyType)
         {
-            return typeof(IDictionary<string, object>).IsAssignableFrom(propertyType) ||
-                typeof(IDictionary<string, JsonElement>).IsAssignableFrom(propertyType) ||
+            return typeof(IDictionary<string, object>).IsAssignableFrom(propertyType)
+                || typeof(IDictionary<string, JsonElement>).IsAssignableFrom(propertyType)
+                ||
                 // Avoid a reference to typeof(JsonNode) to support trimming.
-                (propertyType.FullName == JsonObjectTypeName && ReferenceEquals(propertyType.Assembly, typeof(JsonTypeInfo).Assembly));
+                (
+                    propertyType.FullName == JsonObjectTypeName
+                    && ReferenceEquals(propertyType.Assembly, typeof(JsonTypeInfo).Assembly)
+                );
         }
 
         internal JsonPropertyDictionary<JsonPropertyInfo> CreatePropertyCache(int capacity)
         {
-            return new JsonPropertyDictionary<JsonPropertyInfo>(Options.PropertyNameCaseInsensitive, capacity);
+            return new JsonPropertyDictionary<JsonPropertyInfo>(
+                Options.PropertyNameCaseInsensitive,
+                capacity
+            );
         }
 
         private static JsonParameterInfo CreateConstructorParameter(
             JsonParameterInfoValues parameterInfo,
             JsonPropertyInfo jsonPropertyInfo,
             bool sourceGenMode,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
             if (jsonPropertyInfo.IsIgnored)
             {
-                return JsonParameterInfo.CreateIgnoredParameterPlaceholder(parameterInfo, jsonPropertyInfo, sourceGenMode);
+                return JsonParameterInfo.CreateIgnoredParameterPlaceholder(
+                    parameterInfo,
+                    jsonPropertyInfo,
+                    sourceGenMode
+                );
             }
 
             JsonConverter converter = jsonPropertyInfo.EffectiveConverter;
@@ -1093,7 +1245,10 @@ namespace System.Text.Json.Serialization.Metadata
             return jsonParameterInfo;
         }
 
-        private static JsonTypeInfoKind GetTypeInfoKind(Type type, ConverterStrategy converterStrategy)
+        private static JsonTypeInfoKind GetTypeInfoKind(
+            Type type,
+            ConverterStrategy converterStrategy
+        )
         {
             // System.Object is polymorphic and will not respect Properties
             if (type == typeof(object))
@@ -1125,14 +1280,18 @@ namespace System.Text.Json.Serialization.Metadata
                 _jsonTypeInfo = jsonTypeInfo;
             }
 
-            protected override bool IsImmutable => _jsonTypeInfo.IsConfigured || _jsonTypeInfo.Kind != JsonTypeInfoKind.Object;
+            protected override bool IsImmutable =>
+                _jsonTypeInfo.IsConfigured || _jsonTypeInfo.Kind != JsonTypeInfoKind.Object;
+
             protected override void VerifyMutable()
             {
                 _jsonTypeInfo.VerifyMutable();
 
                 if (_jsonTypeInfo.Kind != JsonTypeInfoKind.Object)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(_jsonTypeInfo.Kind);
+                    ThrowHelper.ThrowInvalidOperationException_JsonTypeInfoOperationNotPossibleForKind(
+                        _jsonTypeInfo.Kind
+                    );
                 }
             }
 

@@ -19,12 +19,8 @@ namespace DefaultNamespace
 
         public static void Mainy()
         {
-            try
-            {
-            }
-            catch (Exception)
-            {
-            }
+            try { }
+            catch (Exception) { }
 
             STRMAP Strmap;
             Strmap = new STRMAP();
@@ -41,6 +37,7 @@ namespace DefaultNamespace
     class STRMAP
     {
         internal static int icFinal = 0;
+
         ~STRMAP()
         {
             STRMAP.icFinal++;

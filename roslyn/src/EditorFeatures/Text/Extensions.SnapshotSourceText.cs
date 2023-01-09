@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         private class SnapshotSourceText : SourceText
         {
-            private static readonly Func<int, int, string> s_textLog = (v1, v2) => string.Format("FullRange : from {0} to {1}", v1, v2);
+            private static readonly Func<int, int, string> s_textLog = (v1, v2) =>
+                string.Format("FullRange : from {0} to {1}", v1, v2);
 
             /// <summary>
             /// The <see cref="ITextImage"/> backing the SourceText instance
@@ -36,7 +37,11 @@ namespace Microsoft.CodeAnalysis.Text
             private readonly Encoding? _encoding;
             private readonly TextBufferContainer? _container;
 
-            private SnapshotSourceText(ITextBufferCloneService? textBufferCloneService, ITextSnapshot editorSnapshot, TextBufferContainer container)
+            private SnapshotSourceText(
+                ITextBufferCloneService? textBufferCloneService,
+                ITextSnapshot editorSnapshot,
+                TextBufferContainer container
+            )
             {
                 Contract.ThrowIfNull(editorSnapshot);
 
@@ -46,7 +51,12 @@ namespace Microsoft.CodeAnalysis.Text
                 _container = container;
             }
 
-            public SnapshotSourceText(ITextBufferCloneService? textBufferCloneService, ITextImage textImage, Encoding? encoding, TextBufferContainer? container)
+            public SnapshotSourceText(
+                ITextBufferCloneService? textBufferCloneService,
+                ITextImage textImage,
+                Encoding? encoding,
+                TextBufferContainer? container
+            )
             {
                 Contract.ThrowIfNull(textImage);
 
@@ -59,15 +69,25 @@ namespace Microsoft.CodeAnalysis.Text
             /// <summary>
             /// A weak map of all Editor ITextSnapshots and their associated SourceText
             /// </summary>
-            private static readonly ConditionalWeakTable<ITextSnapshot, SnapshotSourceText> s_textSnapshotMap = new ConditionalWeakTable<ITextSnapshot, SnapshotSourceText>();
+            private static readonly ConditionalWeakTable<
+                ITextSnapshot,
+                SnapshotSourceText
+            > s_textSnapshotMap = new ConditionalWeakTable<ITextSnapshot, SnapshotSourceText>();
 
             /// <summary>
-            /// Reverse map of roslyn text to editor snapshot. unlike forward map, this doesn't strongly hold onto editor snapshot so that 
+            /// Reverse map of roslyn text to editor snapshot. unlike forward map, this doesn't strongly hold onto editor snapshot so that
             /// we don't leak editor snapshot which should go away once editor is closed. roslyn source's lifetime is not usually tied to view.
             /// </summary>
-            private static readonly ConditionalWeakTable<ITextImage, WeakReference<ITextSnapshot>> s_textImageToEditorSnapshotMap = new ConditionalWeakTable<ITextImage, WeakReference<ITextSnapshot>>();
+            private static readonly ConditionalWeakTable<
+                ITextImage,
+                WeakReference<ITextSnapshot>
+            > s_textImageToEditorSnapshotMap =
+                new ConditionalWeakTable<ITextImage, WeakReference<ITextSnapshot>>();
 
-            public static SourceText From(ITextBufferCloneService? textBufferCloneService, ITextSnapshot editorSnapshot)
+            public static SourceText From(
+                ITextBufferCloneService? textBufferCloneService,
+                ITextSnapshot editorSnapshot
+            )
             {
                 if (editorSnapshot == null)
                 {
@@ -82,7 +102,10 @@ namespace Microsoft.CodeAnalysis.Text
 
                     // Avoid capturing `textBufferCloneServiceOpt` on the fast path
                     var tempTextBufferCloneService = textBufferCloneService;
-                    snapshot = s_textSnapshotMap.GetValue(editorSnapshot, s => new SnapshotSourceText(tempTextBufferCloneService, s, container));
+                    snapshot = s_textSnapshotMap.GetValue(
+                        editorSnapshot,
+                        s => new SnapshotSourceText(tempTextBufferCloneService, s, container)
+                    );
                 }
 
                 return snapshot;
@@ -91,7 +114,11 @@ namespace Microsoft.CodeAnalysis.Text
             /// <summary>
             /// This only exist to break circular dependency on creating buffer. nobody except extension itself should use it
             /// </summary>
-            internal static SourceText From(ITextBufferCloneService? textBufferCloneService, ITextSnapshot editorSnapshot, TextBufferContainer container)
+            internal static SourceText From(
+                ITextBufferCloneService? textBufferCloneService,
+                ITextSnapshot editorSnapshot,
+                TextBufferContainer container
+            )
             {
                 if (editorSnapshot == null)
                 {
@@ -99,7 +126,10 @@ namespace Microsoft.CodeAnalysis.Text
                 }
 
                 Contract.ThrowIfFalse(editorSnapshot.TextBuffer == container.GetTextBuffer());
-                return s_textSnapshotMap.GetValue(editorSnapshot, s => new SnapshotSourceText(textBufferCloneService, s, container));
+                return s_textSnapshotMap.GetValue(
+                    editorSnapshot,
+                    s => new SnapshotSourceText(textBufferCloneService, s, container)
+                );
             }
 
             public override Encoding? Encoding
@@ -107,15 +137,11 @@ namespace Microsoft.CodeAnalysis.Text
                 get { return _encoding; }
             }
 
-            public ITextSnapshot? TryFindEditorSnapshot()
-                => TryFindEditorSnapshot(this.TextImage);
+            public ITextSnapshot? TryFindEditorSnapshot() => TryFindEditorSnapshot(this.TextImage);
 
             public override SourceTextContainer Container
             {
-                get
-                {
-                    return _container ?? base.Container;
-                }
+                get { return _container ?? base.Container; }
             }
 
             public override int Length
@@ -133,15 +159,13 @@ namespace Microsoft.CodeAnalysis.Text
             }
 
             #region Lines
-            protected override TextLineCollection GetLinesCore()
-                => new LineInfo(this);
+            protected override TextLineCollection GetLinesCore() => new LineInfo(this);
 
             private class LineInfo : TextLineCollection
             {
                 private readonly SnapshotSourceText _text;
 
-                public LineInfo(SnapshotSourceText text)
-                    => _text = text;
+                public LineInfo(SnapshotSourceText text) => _text = text;
 
                 public override int Count
                 {
@@ -157,11 +181,11 @@ namespace Microsoft.CodeAnalysis.Text
                     }
                 }
 
-                public override int IndexOf(int position)
-                    => _text.TextImage.GetLineNumberFromPosition(position);
+                public override int IndexOf(int position) =>
+                    _text.TextImage.GetLineNumberFromPosition(position);
 
-                public override TextLine GetLineFromPosition(int position)
-                    => this[this.IndexOf(position)];
+                public override TextLine GetLineFromPosition(int position) =>
+                    this[this.IndexOf(position)];
 
                 public override LinePosition GetLinePosition(int position)
                 {
@@ -171,8 +195,7 @@ namespace Microsoft.CodeAnalysis.Text
             }
             #endregion
 
-            public override string ToString()
-                => this.TextImage.GetText();
+            public override string ToString() => this.TextImage.GetText();
 
             public override string ToString(TextSpan textSpan)
             {
@@ -220,7 +243,8 @@ namespace Microsoft.CodeAnalysis.Text
                     textBufferCloneService: _textBufferCloneService,
                     baseText: this,
                     baseSnapshot: ((ITextSnapshot2)baseSnapshot).TextImage,
-                    currentSnapshot: ((ITextSnapshot2)buffer.CurrentSnapshot).TextImage);
+                    currentSnapshot: ((ITextSnapshot2)buffer.CurrentSnapshot).TextImage
+                );
             }
 
             private static ITextImage RecordReverseMapAndGetImage(ITextSnapshot editorSnapshot)
@@ -236,7 +260,9 @@ namespace Microsoft.CodeAnalysis.Text
                 {
                     // put reverse entry that won't hold onto anything
                     weakReference = s_textImageToEditorSnapshotMap.GetValue(
-                        textImage, _ => new WeakReference<ITextSnapshot>(editorSnapshot));
+                        textImage,
+                        _ => new WeakReference<ITextSnapshot>(editorSnapshot)
+                    );
                 }
 
 #if DEBUG
@@ -249,8 +275,10 @@ namespace Microsoft.CodeAnalysis.Text
 
             private static ITextSnapshot? TryFindEditorSnapshot(ITextImage textImage)
             {
-                if (!s_textImageToEditorSnapshotMap.TryGetValue(textImage, out var weakReference) ||
-                    !weakReference.TryGetTarget(out var editorSnapshot))
+                if (
+                    !s_textImageToEditorSnapshotMap.TryGetValue(textImage, out var weakReference)
+                    || !weakReference.TryGetTarget(out var editorSnapshot)
+                )
                 {
                     return null;
                 }
@@ -263,10 +291,12 @@ namespace Microsoft.CodeAnalysis.Text
             /// </summary>
             internal sealed class ClosedSnapshotSourceText : SnapshotSourceText
             {
-                public ClosedSnapshotSourceText(ITextBufferCloneService? textBufferCloneService, ITextImage textImage, Encoding? encoding)
-                    : base(textBufferCloneService, textImage, encoding, container: null)
-                {
-                }
+                public ClosedSnapshotSourceText(
+                    ITextBufferCloneService? textBufferCloneService,
+                    ITextImage textImage,
+                    Encoding? encoding
+                )
+                    : base(textBufferCloneService, textImage, encoding, container: null) { }
             }
 
             /// <summary>
@@ -277,8 +307,18 @@ namespace Microsoft.CodeAnalysis.Text
                 private readonly SnapshotSourceText _baseText;
                 private readonly ITextImage _baseSnapshot;
 
-                public ChangedSourceText(ITextBufferCloneService? textBufferCloneService, SnapshotSourceText baseText, ITextImage baseSnapshot, ITextImage currentSnapshot)
-                    : base(textBufferCloneService, currentSnapshot, baseText.Encoding, container: null)
+                public ChangedSourceText(
+                    ITextBufferCloneService? textBufferCloneService,
+                    SnapshotSourceText baseText,
+                    ITextImage baseSnapshot,
+                    ITextImage currentSnapshot
+                )
+                    : base(
+                        textBufferCloneService,
+                        currentSnapshot,
+                        baseText.Encoding,
+                        container: null
+                    )
                 {
                     _baseText = baseText;
                     _baseSnapshot = baseSnapshot;
@@ -299,20 +339,30 @@ namespace Microsoft.CodeAnalysis.Text
 
                     if (oldText != _baseText)
                     {
-                        return new[] { new TextChangeRange(new TextSpan(0, oldText.Length), this.Length) };
+                        return new[]
+                        {
+                            new TextChangeRange(new TextSpan(0, oldText.Length), this.Length)
+                        };
                     }
 
                     return GetChangeRanges(_baseSnapshot, _baseSnapshot.Length, this.TextImage);
                 }
             }
 
-            public override void CopyTo(int sourceIndex, char[] destination, int destinationIndex, int count)
-                => this.TextImage.CopyTo(sourceIndex, destination, destinationIndex, count);
+            public override void CopyTo(
+                int sourceIndex,
+                char[] destination,
+                int destinationIndex,
+                int count
+            ) => this.TextImage.CopyTo(sourceIndex, destination, destinationIndex, count);
 
-            public override void Write(TextWriter textWriter, TextSpan span, CancellationToken cancellationToken)
-                => this.TextImage.Write(textWriter, span.ToSpan());
+            public override void Write(
+                TextWriter textWriter,
+                TextSpan span,
+                CancellationToken cancellationToken
+            ) => this.TextImage.Write(textWriter, span.ToSpan());
 
-            #region GetChangeRangesImplementation 
+            #region GetChangeRangesImplementation
 
             public override IReadOnlyList<TextChangeRange> GetChangeRanges(SourceText oldText)
             {
@@ -331,7 +381,11 @@ namespace Microsoft.CodeAnalysis.Text
                 if (this.Container is TextBufferContainer container)
                 {
                     var lastEventArgs = container.LastEventArgs;
-                    if (lastEventArgs != null && lastEventArgs.OldText == oldText && lastEventArgs.NewText == this)
+                    if (
+                        lastEventArgs != null
+                        && lastEventArgs.OldText == oldText
+                        && lastEventArgs.NewText == this
+                    )
                     {
                         return lastEventArgs.Changes;
                     }
@@ -342,15 +396,26 @@ namespace Microsoft.CodeAnalysis.Text
                 return GetChangeRanges(oldSnapshot, oldText.Length, newSnapshot);
             }
 
-            private IReadOnlyList<TextChangeRange> GetChangeRanges(ITextImage? oldImage, int oldTextLength, ITextImage? newImage)
+            private IReadOnlyList<TextChangeRange> GetChangeRanges(
+                ITextImage? oldImage,
+                int oldTextLength,
+                ITextImage? newImage
+            )
             {
-                if (oldImage == null ||
-                    newImage == null ||
-                    oldImage.Version.Identifier != newImage.Version.Identifier)
+                if (
+                    oldImage == null
+                    || newImage == null
+                    || oldImage.Version.Identifier != newImage.Version.Identifier
+                )
                 {
                     // Claim its all changed
-                    Logger.Log(FunctionId.Workspace_SourceText_GetChangeRanges, "Invalid Snapshots");
-                    return ImmutableArray.Create(new TextChangeRange(new TextSpan(0, oldTextLength), this.Length));
+                    Logger.Log(
+                        FunctionId.Workspace_SourceText_GetChangeRanges,
+                        "Invalid Snapshots"
+                    );
+                    return ImmutableArray.Create(
+                        new TextChangeRange(new TextSpan(0, oldTextLength), this.Length)
+                    );
                 }
                 else if (AreSameReiteratedVersion(oldImage, newImage))
                 {
@@ -359,7 +424,11 @@ namespace Microsoft.CodeAnalysis.Text
                 }
                 else
                 {
-                    return GetChangeRanges(oldImage, newImage, forward: oldImage.Version.VersionNumber <= newImage.Version.VersionNumber);
+                    return GetChangeRanges(
+                        oldImage,
+                        newImage,
+                        forward: oldImage.Version.VersionNumber <= newImage.Version.VersionNumber
+                    );
                 }
             }
 
@@ -368,30 +437,49 @@ namespace Microsoft.CodeAnalysis.Text
                 var oldSnapshot = TryFindEditorSnapshot(oldImage);
                 var newSnapshot = TryFindEditorSnapshot(newImage);
 
-                return oldSnapshot != null && newSnapshot != null && oldSnapshot.Version.ReiteratedVersionNumber == newSnapshot.Version.ReiteratedVersionNumber;
+                return oldSnapshot != null
+                    && newSnapshot != null
+                    && oldSnapshot.Version.ReiteratedVersionNumber
+                        == newSnapshot.Version.ReiteratedVersionNumber;
             }
 
-            private static readonly Func<ITextChange, TextChangeRange> s_forwardTextChangeRange = c => CreateTextChangeRange(c, forward: true);
-            private static readonly Func<ITextChange, TextChangeRange> s_backwardTextChangeRange = c => CreateTextChangeRange(c, forward: false);
+            private static readonly Func<ITextChange, TextChangeRange> s_forwardTextChangeRange =
+                c => CreateTextChangeRange(c, forward: true);
+            private static readonly Func<ITextChange, TextChangeRange> s_backwardTextChangeRange =
+                c => CreateTextChangeRange(c, forward: false);
 
-            private static IReadOnlyList<TextChangeRange> GetChangeRanges(ITextImage snapshot1, ITextImage snapshot2, bool forward)
+            private static IReadOnlyList<TextChangeRange> GetChangeRanges(
+                ITextImage snapshot1,
+                ITextImage snapshot2,
+                bool forward
+            )
             {
                 var oldSnapshot = forward ? snapshot1 : snapshot2;
                 var newSnapshot = forward ? snapshot2 : snapshot1;
 
                 INormalizedTextChangeCollection? changes = null;
-                for (var oldVersion = oldSnapshot.Version;
+                for (
+                    var oldVersion = oldSnapshot.Version;
                     oldVersion != newSnapshot.Version;
-                    oldVersion = oldVersion.Next)
+                    oldVersion = oldVersion.Next
+                )
                 {
                     if (oldVersion.Changes.Count != 0)
                     {
                         if (changes != null)
                         {
                             // Oops - more than one "textual" change between these snapshots, bail and try to find smallest changes span
-                            Logger.Log(FunctionId.Workspace_SourceText_GetChangeRanges, s_textLog, snapshot1.Version.VersionNumber, snapshot2.Version.VersionNumber);
+                            Logger.Log(
+                                FunctionId.Workspace_SourceText_GetChangeRanges,
+                                s_textLog,
+                                snapshot1.Version.VersionNumber,
+                                snapshot2.Version.VersionNumber
+                            );
 
-                            return new[] { GetChangeRanges(oldSnapshot.Version, newSnapshot.Version, forward) };
+                            return new[]
+                            {
+                                GetChangeRanges(oldSnapshot.Version, newSnapshot.Version, forward)
+                            };
                         }
                         else
                         {
@@ -406,11 +494,19 @@ namespace Microsoft.CodeAnalysis.Text
                 }
                 else
                 {
-                    return ImmutableArray.CreateRange(changes.Select(forward ? s_forwardTextChangeRange : s_backwardTextChangeRange));
+                    return ImmutableArray.CreateRange(
+                        changes.Select(
+                            forward ? s_forwardTextChangeRange : s_backwardTextChangeRange
+                        )
+                    );
                 }
             }
 
-            private static TextChangeRange GetChangeRanges(ITextImageVersion oldVersion, ITextImageVersion newVersion, bool forward)
+            private static TextChangeRange GetChangeRanges(
+                ITextImageVersion oldVersion,
+                ITextImageVersion newVersion,
+                bool forward
+            )
             {
                 TextChangeRange? range = null;
                 var iterator = GetMultipleVersionTextChanges(oldVersion, newVersion, forward);
@@ -424,11 +520,16 @@ namespace Microsoft.CodeAnalysis.Text
             }
 
             private static IEnumerable<IEnumerable<TextChangeRange>> GetMultipleVersionTextChanges(
-                ITextImageVersion oldVersion, ITextImageVersion newVersion, bool forward)
+                ITextImageVersion oldVersion,
+                ITextImageVersion newVersion,
+                bool forward
+            )
             {
                 for (var version = oldVersion; version != newVersion; version = version.Next)
                 {
-                    yield return version.Changes.Select(forward ? s_forwardTextChangeRange : s_backwardTextChangeRange);
+                    yield return version.Changes.Select(
+                        forward ? s_forwardTextChangeRange : s_backwardTextChangeRange
+                    );
                 }
             }
 
@@ -436,11 +537,17 @@ namespace Microsoft.CodeAnalysis.Text
             {
                 if (forward)
                 {
-                    return new TextChangeRange(new TextSpan(change.OldSpan.Start, change.OldSpan.Length), change.NewLength);
+                    return new TextChangeRange(
+                        new TextSpan(change.OldSpan.Start, change.OldSpan.Length),
+                        change.NewLength
+                    );
                 }
                 else
                 {
-                    return new TextChangeRange(new TextSpan(change.NewSpan.Start, change.NewSpan.Length), change.OldLength);
+                    return new TextChangeRange(
+                        new TextSpan(change.NewSpan.Start, change.NewSpan.Length),
+                        change.OldLength
+                    );
                 }
             }
             #endregion

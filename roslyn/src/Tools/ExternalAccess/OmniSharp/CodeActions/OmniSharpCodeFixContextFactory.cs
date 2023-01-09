@@ -21,16 +21,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
             ImmutableArray<Diagnostic> diagnostics,
             Action<CodeAction, ImmutableArray<Diagnostic>> registerCodeFix,
             OmniSharpCodeActionOptions options,
-            CancellationToken cancellationToken)
-            => new(document, span, diagnostics, registerCodeFix, new DelegatingCodeActionOptionsProvider(options.GetCodeActionOptions), isBlocking: false, cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            new(
+                document,
+                span,
+                diagnostics,
+                registerCodeFix,
+                new DelegatingCodeActionOptionsProvider(options.GetCodeActionOptions),
+                isBlocking: false,
+                cancellationToken
+            );
 
         public static CodeAnalysis.CodeRefactorings.CodeRefactoringContext CreateCodeRefactoringContext(
             Document document,
             TextSpan span,
             Action<CodeAction, TextSpan?> registerRefactoring,
             OmniSharpCodeActionOptions options,
-            CancellationToken cancellationToken)
-            => new(document, span, registerRefactoring, new DelegatingCodeActionOptionsProvider(options.GetCodeActionOptions), isBlocking: false, cancellationToken);
+            CancellationToken cancellationToken
+        ) =>
+            new(
+                document,
+                span,
+                registerRefactoring,
+                new DelegatingCodeActionOptionsProvider(options.GetCodeActionOptions),
+                isBlocking: false,
+                cancellationToken
+            );
 
         public static FixAllContext CreateFixAllContext(
             Document? document,
@@ -42,8 +59,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
             IEnumerable<string> diagnosticIds,
             FixAllContext.DiagnosticProvider fixAllDiagnosticProvider,
             Func<string, OmniSharpCodeActionOptions> optionsProvider,
-            CancellationToken cancellationToken)
-            => new(new FixAllState(
+            CancellationToken cancellationToken
+        ) =>
+            new(
+                new FixAllState(
                     fixAllProvider: NoOpFixAllProvider.Instance,
                     diagnosticSpan,
                     document,
@@ -53,7 +72,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
                     codeActionEquivalenceKey,
                     diagnosticIds,
                     fixAllDiagnosticProvider,
-                    new DelegatingCodeActionOptionsProvider(languageServices => optionsProvider(languageServices.Language).GetCodeActionOptions(languageServices))),
-                  new ProgressTracker(), cancellationToken);
+                    new DelegatingCodeActionOptionsProvider(
+                        languageServices =>
+                            optionsProvider(languageServices.Language)
+                                .GetCodeActionOptions(languageServices)
+                    )
+                ),
+                new ProgressTracker(),
+                cancellationToken
+            );
     }
 }

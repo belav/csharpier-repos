@@ -24,10 +24,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         private readonly IGlobalOptionService _globalOptions;
 
         public DefinitionPeekableItem(
-            Workspace workspace, ProjectId projectId, SymbolKey symbolKey,
+            Workspace workspace,
+            ProjectId projectId,
+            SymbolKey symbolKey,
             IPeekResultFactory peekResultFactory,
             IMetadataAsSourceFileService metadataAsSourceService,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
             : base(peekResultFactory)
         {
             _workspace = workspace;
@@ -39,20 +42,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
 
         public override IEnumerable<IPeekRelationship> Relationships
         {
-            get { return SpecializedCollections.SingletonEnumerable(PredefinedPeekRelationships.Definitions); }
+            get
+            {
+                return SpecializedCollections.SingletonEnumerable(
+                    PredefinedPeekRelationships.Definitions
+                );
+            }
         }
 
-        public override IPeekResultSource GetOrCreateResultSource(string relationshipName)
-            => new ResultSource(this);
+        public override IPeekResultSource GetOrCreateResultSource(string relationshipName) =>
+            new ResultSource(this);
 
         private sealed class ResultSource : IPeekResultSource
         {
             private readonly DefinitionPeekableItem _peekableItem;
 
-            public ResultSource(DefinitionPeekableItem peekableItem)
-                => _peekableItem = peekableItem;
+            public ResultSource(DefinitionPeekableItem peekableItem) =>
+                _peekableItem = peekableItem;
 
-            public void FindResults(string relationshipName, IPeekResultCollection resultCollection, CancellationToken cancellationToken, IFindPeekResultsCallback callback)
+            public void FindResults(
+                string relationshipName,
+                IPeekResultCollection resultCollection,
+                CancellationToken cancellationToken,
+                IFindPeekResultsCallback callback
+            )
             {
                 if (relationshipName != PredefinedPeekRelationships.Definitions.Name)
                 {
@@ -63,12 +76,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 var workspace = _peekableItem._workspace;
                 var solution = workspace.CurrentSolution;
                 var project = solution.GetProject(_peekableItem._projectId);
-                var compilation = project.GetCompilationAsync(cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                var compilation = project
+                    .GetCompilationAsync(cancellationToken)
+                    .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 
-                var symbol = _peekableItem._symbolKey.Resolve(compilation, ignoreAssemblyKey: true, cancellationToken: cancellationToken).Symbol;
+                var symbol = _peekableItem._symbolKey
+                    .Resolve(
+                        compilation,
+                        ignoreAssemblyKey: true,
+                        cancellationToken: cancellationToken
+                    )
+                    .Symbol;
                 if (symbol == null)
                 {
-                    callback.ReportFailure(new Exception(EditorFeaturesResources.No_information_found));
+                    callback.ReportFailure(
+                        new Exception(EditorFeaturesResources.No_information_found)
+                    );
                     return;
                 }
 
@@ -77,12 +100,42 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 if (!sourceLocations.Any())
                 {
                     // It's a symbol from metadata, so we want to go produce it from metadata
-                    var options = _peekableItem._globalOptions.GetMetadataAsSourceOptions(project.Services);
-                    var declarationFile = _peekableItem._metadataAsSourceFileService.GetGeneratedFileAsync(workspace, project, symbol, signaturesOnly: false, options, cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
-                    var peekDisplayInfo = new PeekResultDisplayInfo(declarationFile.DocumentTitle, declarationFile.DocumentTooltip, declarationFile.DocumentTitle, declarationFile.DocumentTooltip);
+                    var options = _peekableItem._globalOptions.GetMetadataAsSourceOptions(
+                        project.Services
+                    );
+                    var declarationFile = _peekableItem._metadataAsSourceFileService
+                        .GetGeneratedFileAsync(
+                            workspace,
+                            project,
+                            symbol,
+                            signaturesOnly: false,
+                            options,
+                            cancellationToken
+                        )
+                        .WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                    var peekDisplayInfo = new PeekResultDisplayInfo(
+                        declarationFile.DocumentTitle,
+                        declarationFile.DocumentTooltip,
+                        declarationFile.DocumentTitle,
+                        declarationFile.DocumentTooltip
+                    );
                     var identifierSpan = declarationFile.IdentifierLocation.GetLineSpan().Span;
-                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(symbol, workspace, declarationFile.IdentifierLocation, cancellationToken);
-                    resultCollection.Add(PeekHelpers.CreateDocumentPeekResult(declarationFile.FilePath, identifierSpan, entityOfInterestSpan, peekDisplayInfo, _peekableItem.PeekResultFactory, isReadOnly: true));
+                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(
+                        symbol,
+                        workspace,
+                        declarationFile.IdentifierLocation,
+                        cancellationToken
+                    );
+                    resultCollection.Add(
+                        PeekHelpers.CreateDocumentPeekResult(
+                            declarationFile.FilePath,
+                            identifierSpan,
+                            entityOfInterestSpan,
+                            peekDisplayInfo,
+                            _peekableItem.PeekResultFactory,
+                            isReadOnly: true
+                        )
+                    );
                 }
 
                 var processedSourceLocations = 0;
@@ -91,9 +144,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
                 {
                     var declarationLocation = declaration.GetMappedLineSpan();
 
-                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(symbol, workspace, declaration, cancellationToken);
-                    resultCollection.Add(PeekHelpers.CreateDocumentPeekResult(declarationLocation.Path, declarationLocation.Span, entityOfInterestSpan, _peekableItem.PeekResultFactory));
-                    callback.ReportProgress(100 * ++processedSourceLocations / sourceLocations.Count);
+                    var entityOfInterestSpan = PeekHelpers.GetEntityOfInterestSpan(
+                        symbol,
+                        workspace,
+                        declaration,
+                        cancellationToken
+                    );
+                    resultCollection.Add(
+                        PeekHelpers.CreateDocumentPeekResult(
+                            declarationLocation.Path,
+                            declarationLocation.Span,
+                            entityOfInterestSpan,
+                            _peekableItem.PeekResultFactory
+                        )
+                    );
+                    callback.ReportProgress(
+                        100 * ++processedSourceLocations / sourceLocations.Count
+                    );
                 }
             }
         }

@@ -14,7 +14,10 @@ namespace System.DirectoryServices
         private readonly NetworkCredential? _parentCredentials;
         private readonly AuthenticationTypes _parentAuthenticationType;
 
-        internal SearchResult(NetworkCredential? parentCredentials, AuthenticationTypes parentAuthenticationType)
+        internal SearchResult(
+            NetworkCredential? parentCredentials,
+            AuthenticationTypes parentAuthenticationType
+        )
         {
             _parentCredentials = parentCredentials;
             _parentAuthenticationType = parentAuthenticationType;
@@ -27,10 +30,22 @@ namespace System.DirectoryServices
         public DirectoryEntry GetDirectoryEntry()
         {
             if (_parentCredentials != null)
-                return new DirectoryEntry(Path, true, _parentCredentials.UserName, _parentCredentials.Password, _parentAuthenticationType);
+                return new DirectoryEntry(
+                    Path,
+                    true,
+                    _parentCredentials.UserName,
+                    _parentCredentials.Password,
+                    _parentAuthenticationType
+                );
             else
             {
-                DirectoryEntry newEntry = new DirectoryEntry(Path, true, null, null, _parentAuthenticationType);
+                DirectoryEntry newEntry = new DirectoryEntry(
+                    Path,
+                    true,
+                    null,
+                    null,
+                    _parentAuthenticationType
+                );
                 return newEntry;
             }
         }

@@ -25,7 +25,9 @@ public class BroadcastBenchmark
     [GlobalSetup]
     public void GlobalSetup()
     {
-        _hubLifetimeManager = new DefaultHubLifetimeManager<Hub>(NullLogger<DefaultHubLifetimeManager<Hub>>.Instance);
+        _hubLifetimeManager = new DefaultHubLifetimeManager<Hub>(
+            NullLogger<DefaultHubLifetimeManager<Hub>>.Instance
+        );
 
         IHubProtocol protocol;
 
@@ -42,15 +44,26 @@ public class BroadcastBenchmark
         for (var i = 0; i < Connections; ++i)
         {
             var pair = DuplexPipe.CreateConnectionPair(options, options);
-            var connection = new DefaultConnectionContext(Guid.NewGuid().ToString(), pair.Application, pair.Transport);
+            var connection = new DefaultConnectionContext(
+                Guid.NewGuid().ToString(),
+                pair.Application,
+                pair.Transport
+            );
             var contextOptions = new HubConnectionContextOptions()
             {
                 KeepAliveInterval = Timeout.InfiniteTimeSpan,
             };
-            var hubConnection = new HubConnectionContext(connection, contextOptions, NullLoggerFactory.Instance);
+            var hubConnection = new HubConnectionContext(
+                connection,
+                contextOptions,
+                NullLoggerFactory.Instance
+            );
             hubConnection.Protocol = protocol;
             _hubLifetimeManager.OnConnectedAsync(hubConnection).GetAwaiter().GetResult();
-            _hubLifetimeManager.AddToGroupAsync(connection.ConnectionId, TestGroupName).GetAwaiter().GetResult();
+            _hubLifetimeManager
+                .AddToGroupAsync(connection.ConnectionId, TestGroupName)
+                .GetAwaiter()
+                .GetResult();
 
             _ = ConsumeAsync(connection.Application);
         }

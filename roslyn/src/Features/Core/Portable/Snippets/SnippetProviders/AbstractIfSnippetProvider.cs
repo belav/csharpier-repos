@@ -26,26 +26,45 @@ namespace Microsoft.CodeAnalysis.Snippets
 
         public override string SnippetDescription => FeaturesResources.if_statement;
 
-        public override ImmutableArray<string> AdditionalFilterTexts { get; } = ImmutableArray.Create("statement");
+        public override ImmutableArray<string> AdditionalFilterTexts { get; } =
+            ImmutableArray.Create("statement");
 
         protected abstract void GetIfStatementCondition(SyntaxNode node, out SyntaxNode condition);
-        protected abstract void GetIfStatementCursorPosition(SourceText text, SyntaxNode node, out int position);
+        protected abstract void GetIfStatementCursorPosition(
+            SourceText text,
+            SyntaxNode node,
+            out int position
+        );
 
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
 
-            var syntaxContext = document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            var syntaxContext = document
+                .GetRequiredLanguageService<ISyntaxContextService>()
+                .CreateContext(document, semanticModel, position, cancellationToken);
             return syntaxContext.IsStatementContext || syntaxContext.IsGlobalStatementContext;
         }
 
-        protected override Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var snippetTextChange = GenerateSnippetTextChange(document, position);
             return Task.FromResult(ImmutableArray.Create(snippetTextChange));
         }
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts)
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        )
         {
             return syntaxFacts.IsIfStatement;
         }
@@ -53,12 +72,22 @@ namespace Microsoft.CodeAnalysis.Snippets
         private static TextChange GenerateSnippetTextChange(Document document, int position)
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var ifStatement = generator.IfStatement(generator.TrueLiteralExpression(), Array.Empty<SyntaxNode>());
+            var ifStatement = generator.IfStatement(
+                generator.TrueLiteralExpression(),
+                Array.Empty<SyntaxNode>()
+            );
 
-            return new TextChange(TextSpan.FromBounds(position, position), ifStatement.ToFullString());
+            return new TextChange(
+                TextSpan.FromBounds(position, position),
+                ifStatement.ToFullString()
+            );
         }
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             GetIfStatementCursorPosition(sourceText, caretTarget, out var cursorPosition);
 
@@ -67,11 +96,20 @@ namespace Microsoft.CodeAnalysis.Snippets
             return cursorPosition;
         }
 
-        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(SyntaxNode node, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
+        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(
+            SyntaxNode node,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SnippetPlaceholder>.GetInstance(out var arrayBuilder);
             GetIfStatementCondition(node, out var condition);
-            arrayBuilder.Add(new SnippetPlaceholder(identifier: condition.ToString(), placeholderPositions: ImmutableArray.Create(condition.SpanStart)));
+            arrayBuilder.Add(
+                new SnippetPlaceholder(
+                    identifier: condition.ToString(),
+                    placeholderPositions: ImmutableArray.Create(condition.SpanStart)
+                )
+            );
 
             return arrayBuilder.ToImmutableArray();
         }

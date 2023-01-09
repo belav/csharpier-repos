@@ -6,9 +6,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 {
     partial class UsingDirectiveSyntax
     {
-        public UsingDirectiveSyntax Update(SyntaxToken usingKeyword, SyntaxToken staticKeyword, NameEqualsSyntax? alias, NameSyntax name, SyntaxToken semicolonToken)
+        public UsingDirectiveSyntax Update(
+            SyntaxToken usingKeyword,
+            SyntaxToken staticKeyword,
+            NameEqualsSyntax? alias,
+            NameSyntax name,
+            SyntaxToken semicolonToken
+        )
         {
-            return Update(globalKeyword: GlobalKeyword, usingKeyword, staticKeyword, alias, name, semicolonToken);
+            return Update(
+                globalKeyword: GlobalKeyword,
+                usingKeyword,
+                staticKeyword,
+                alias,
+                name,
+                semicolonToken
+            );
         }
     }
 }

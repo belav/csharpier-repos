@@ -21,7 +21,10 @@ public class TpcTablesExpression : TableExpressionBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public TpcTablesExpression(
-        string? alias, IEntityType entityType, IReadOnlyList<SelectExpression> subSelectExpressions)
+        string? alias,
+        IEntityType entityType,
+        IReadOnlyList<SelectExpression> subSelectExpressions
+    )
         : base(alias)
     {
         EntityType = entityType;
@@ -38,7 +41,8 @@ public class TpcTablesExpression : TableExpressionBase
         string? alias,
         IEntityType entityType,
         IReadOnlyList<SelectExpression> subSelectExpressions,
-        IEnumerable<IAnnotation>? annotations)
+        IEnumerable<IAnnotation>? annotations
+    )
         : base(alias, annotations)
     {
         EntityType = entityType;
@@ -80,14 +84,27 @@ public class TpcTablesExpression : TableExpressionBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual TpcTablesExpression Prune(IReadOnlyList<string> discriminatorValues, IReadOnlyCollection<string>? referencedColumns)
+    public virtual TpcTablesExpression Prune(
+        IReadOnlyList<string> discriminatorValues,
+        IReadOnlyCollection<string>? referencedColumns
+    )
     {
-        var subSelectExpressions = discriminatorValues.Count == 0
-            ? new List<SelectExpression> { SelectExpressions[0] }
-            : SelectExpressions.Where(se =>
-                discriminatorValues.Contains((string)((SqlConstantExpression)se.Projection[^1].Expression).Value!)).ToList();
+        var subSelectExpressions =
+            discriminatorValues.Count == 0
+                ? new List<SelectExpression> { SelectExpressions[0] }
+                : SelectExpressions
+                    .Where(
+                        se =>
+                            discriminatorValues.Contains(
+                                (string)((SqlConstantExpression)se.Projection[^1].Expression).Value!
+                            )
+                    )
+                    .ToList();
 
-        Check.DebugAssert(subSelectExpressions.Count > 0, "TPC must have at least 1 table selected.");
+        Check.DebugAssert(
+            subSelectExpressions.Count > 0,
+            "TPC must have at least 1 table selected."
+        );
 
         if (referencedColumns != null)
         {
@@ -120,24 +137,26 @@ public class TpcTablesExpression : TableExpressionBase
         expressionPrinter.AppendLine("(");
         using (expressionPrinter.Indent())
         {
-            expressionPrinter.VisitCollection(SelectExpressions, e => e.AppendLine().AppendLine("UNION ALL"));
+            expressionPrinter.VisitCollection(
+                SelectExpressions,
+                e => e.AppendLine().AppendLine("UNION ALL")
+            );
         }
-        expressionPrinter.AppendLine()
-            .AppendLine(") AS " + Alias);
+        expressionPrinter.AppendLine().AppendLine(") AS " + Alias);
         PrintAnnotations(expressionPrinter);
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TpcTablesExpression tpcTablesExpression
-                && Equals(tpcTablesExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TpcTablesExpression tpcTablesExpression && Equals(tpcTablesExpression)
+        );
 
     private bool Equals(TpcTablesExpression tpcTablesExpression)
     {
-        if (!base.Equals(tpcTablesExpression)
-            || EntityType != tpcTablesExpression.EntityType)
+        if (!base.Equals(tpcTablesExpression) || EntityType != tpcTablesExpression.EntityType)
         {
             return false;
         }

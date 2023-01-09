@@ -17,7 +17,14 @@ internal sealed class SeekableTextReader : TextReader, ITextDocument
     private SourceLocation _location;
     private (TextSpan Span, int LineIndex) _cachedLineInfo;
 
-    public SeekableTextReader(string source, string filePath) : this(new StringSourceDocument(source, Encoding.UTF8, new RazorSourceDocumentProperties(filePath, relativePath: null))) { }
+    public SeekableTextReader(string source, string filePath)
+        : this(
+            new StringSourceDocument(
+                source,
+                Encoding.UTF8,
+                new RazorSourceDocumentProperties(filePath, relativePath: null)
+            )
+        ) { }
 
     public SeekableTextReader(RazorSourceDocument source)
     {
@@ -58,7 +65,12 @@ internal sealed class SeekableTextReader : TextReader, ITextDocument
     {
         if (_cachedLineInfo.Span.Contains(_position))
         {
-            _location = new SourceLocation(_filePath, _position, _cachedLineInfo.LineIndex, _position - _cachedLineInfo.Span.Start);
+            _location = new SourceLocation(
+                _filePath,
+                _position,
+                _cachedLineInfo.LineIndex,
+                _position - _cachedLineInfo.Span.Start
+            );
             _current = _sourceDocument[_location.AbsoluteIndex];
 
             return;
@@ -76,7 +88,12 @@ internal sealed class SeekableTextReader : TextReader, ITextDocument
                 if (nextLineSpan.Contains(_position))
                 {
                     _cachedLineInfo = (nextLineSpan, nextLineIndex);
-                    _location = new SourceLocation(_filePath, _position, nextLineIndex, _position - nextLineSpan.Start);
+                    _location = new SourceLocation(
+                        _filePath,
+                        _position,
+                        nextLineIndex,
+                        _position - nextLineSpan.Start
+                    );
                     _current = _sourceDocument[_location.AbsoluteIndex];
 
                     return;
@@ -87,12 +104,20 @@ internal sealed class SeekableTextReader : TextReader, ITextDocument
                 // Try to avoid the GetLocation call by checking if the previous line contains the position
                 var prevLineIndex = _cachedLineInfo.LineIndex - 1;
                 var prevLineLength = _sourceDocument.Lines.GetLineLength(prevLineIndex);
-                var prevLineSpan = new TextSpan(_cachedLineInfo.Span.Start - prevLineLength, prevLineLength);
+                var prevLineSpan = new TextSpan(
+                    _cachedLineInfo.Span.Start - prevLineLength,
+                    prevLineLength
+                );
 
                 if (prevLineSpan.Contains(_position))
                 {
                     _cachedLineInfo = (prevLineSpan, prevLineIndex);
-                    _location = new SourceLocation(_filePath, _position, prevLineIndex, _position - prevLineSpan.Start);
+                    _location = new SourceLocation(
+                        _filePath,
+                        _position,
+                        prevLineIndex,
+                        _position - prevLineSpan.Start
+                    );
                     _current = _sourceDocument[_location.AbsoluteIndex];
 
                     return;
@@ -120,7 +145,12 @@ internal sealed class SeekableTextReader : TextReader, ITextDocument
         }
 
         var lineNumber = _sourceDocument.Lines.Count - 1;
-        _location = new SourceLocation(_filePath, Length, lineNumber, _sourceDocument.Lines.GetLineLength(lineNumber));
+        _location = new SourceLocation(
+            _filePath,
+            Length,
+            lineNumber,
+            _sourceDocument.Lines.GetLineLength(lineNumber)
+        );
 
         _current = -1;
     }

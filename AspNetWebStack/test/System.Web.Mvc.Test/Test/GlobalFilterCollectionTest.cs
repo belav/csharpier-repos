@@ -31,21 +31,25 @@ namespace System.Web.Mvc.Test
         public void AddRejectsNonFilterInstances(object instance)
         {
             // Act + Assert
-            Assert.Throws<InvalidOperationException>(() =>
-            {
-                _collection.Add(instance);
-            }, "The given filter instance must implement one or more of the following filter interfaces: System.Web.Mvc.IAuthorizationFilter, System.Web.Mvc.IActionFilter, System.Web.Mvc.IResultFilter, System.Web.Mvc.IExceptionFilter, System.Web.Mvc.Filters.IAuthenticationFilter.");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    _collection.Add(instance);
+                },
+                "The given filter instance must implement one or more of the following filter interfaces: System.Web.Mvc.IAuthorizationFilter, System.Web.Mvc.IActionFilter, System.Web.Mvc.IResultFilter, System.Web.Mvc.IExceptionFilter, System.Web.Mvc.Filters.IAuthenticationFilter."
+            );
         }
 
         [Fact]
         public void AddAcceptsFilterInstances()
         {
             // Arrange
-            var filters = new object[] {
+            var filters = new object[]
+            {
                 GetFilterInstance<IActionFilter>(),
                 GetFilterInstance<IAuthorizationFilter>(),
                 GetFilterInstance<IResultFilter>(),
-                GetFilterInstance<IExceptionFilter>() 
+                GetFilterInstance<IExceptionFilter>()
             }.ToList();
 
             // Act

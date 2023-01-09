@@ -20,7 +20,8 @@ public class PocoRole : PocoRole<string>
     ///     Constructor
     /// </summary>
     /// <param name="roleName"></param>
-    public PocoRole(string roleName) : this()
+    public PocoRole(string roleName)
+        : this()
     {
         Name = roleName;
     }
@@ -41,7 +42,8 @@ public class PocoRole<TKey> where TKey : IEquatable<TKey>
     ///     Constructor
     /// </summary>
     /// <param name="roleName"></param>
-    public PocoRole(string roleName) : this()
+    public PocoRole(string roleName)
+        : this()
     {
         Name = roleName;
     }
@@ -54,7 +56,8 @@ public class PocoRole<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// Navigation property for claims in the role
     /// </summary>
-    public virtual ICollection<PocoRoleClaim<TKey>> Claims { get; private set; } = new List<PocoRoleClaim<TKey>>();
+    public virtual ICollection<PocoRoleClaim<TKey>> Claims { get; private set; } =
+        new List<PocoRoleClaim<TKey>>();
 
     /// <summary>
     ///     Role name

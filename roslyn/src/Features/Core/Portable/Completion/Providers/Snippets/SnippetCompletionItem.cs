@@ -20,23 +20,26 @@ namespace Microsoft.CodeAnalysis.Completion.Providers.Snippets
             string snippetIdentifier,
             Glyph glyph,
             string inlineDescription,
-            ImmutableArray<string> additionalFilterTexts)
+            ImmutableArray<string> additionalFilterTexts
+        )
         {
             var props = ImmutableDictionary<string, string>.Empty
                 .Add("Position", position.ToString())
                 .Add(SnippetIdentifierKey, snippetIdentifier);
 
-            return CommonCompletionItem.Create(
-                displayText: displayText,
-                displayTextSuffix: displayTextSuffix,
-                glyph: glyph,
-                // Adding a space after the identifier string that way it will always be sorted after the original snippet.
-                sortText: snippetIdentifier + " ",
-                filterText: snippetIdentifier,
-                properties: props,
-                isComplexTextEdit: true,
-                inlineDescription: inlineDescription,
-                rules: CompletionItemRules.Default)
+            return CommonCompletionItem
+                .Create(
+                    displayText: displayText,
+                    displayTextSuffix: displayTextSuffix,
+                    glyph: glyph,
+                    // Adding a space after the identifier string that way it will always be sorted after the original snippet.
+                    sortText: snippetIdentifier + " ",
+                    filterText: snippetIdentifier,
+                    properties: props,
+                    isComplexTextEdit: true,
+                    inlineDescription: inlineDescription,
+                    rules: CompletionItemRules.Default
+                )
                 .WithAdditionalFilterTexts(additionalFilterTexts);
         }
 

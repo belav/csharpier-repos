@@ -10,13 +10,19 @@ using Microsoft.CodeAnalysis.Symbols;
 
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
-    internal sealed class DeletedMethodDefinition : DeletedDefinition<IMethodDefinition>, IMethodDefinition
+    internal sealed class DeletedMethodDefinition
+        : DeletedDefinition<IMethodDefinition>,
+            IMethodDefinition
     {
         private readonly ITypeDefinition _containingTypeDef;
         private readonly ImmutableArray<DeletedParameterDefinition> _parameters;
         private DeletedMethodBody? _body;
 
-        public DeletedMethodDefinition(IMethodDefinition oldMethod, ITypeDefinition containingTypeDef, Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers)
+        public DeletedMethodDefinition(
+            IMethodDefinition oldMethod,
+            ITypeDefinition containingTypeDef,
+            Dictionary<ITypeDefinition, DeletedTypeDefinition> typesUsedByDeletedMembers
+        )
             : base(oldMethod, typesUsedByDeletedMembers)
         {
             _containingTypeDef = containingTypeDef;
@@ -26,10 +32,7 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public IEnumerable<IGenericMethodParameter> GenericParameters
         {
-            get
-            {
-                return WrapGenericMethodParameters(this, OldDefinition.GenericParameters);
-            }
+            get { return WrapGenericMethodParameters(this, OldDefinition.GenericParameters); }
         }
 
         public bool HasDeclarativeSecurity => OldDefinition.HasDeclarativeSecurity;
@@ -58,19 +61,24 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public bool IsVirtual => OldDefinition.IsVirtual;
 
-        public ImmutableArray<IParameterDefinition> Parameters => StaticCast<IParameterDefinition>.From(_parameters);
+        public ImmutableArray<IParameterDefinition> Parameters =>
+            StaticCast<IParameterDefinition>.From(_parameters);
 
         public IPlatformInvokeInformation PlatformInvokeData => OldDefinition.PlatformInvokeData;
 
         public bool RequiresSecurityObject => OldDefinition.RequiresSecurityObject;
 
-        public bool ReturnValueIsMarshalledExplicitly => OldDefinition.ReturnValueIsMarshalledExplicitly;
+        public bool ReturnValueIsMarshalledExplicitly =>
+            OldDefinition.ReturnValueIsMarshalledExplicitly;
 
-        public IMarshallingInformation ReturnValueMarshallingInformation => OldDefinition.ReturnValueMarshallingInformation;
+        public IMarshallingInformation ReturnValueMarshallingInformation =>
+            OldDefinition.ReturnValueMarshallingInformation;
 
-        public ImmutableArray<byte> ReturnValueMarshallingDescriptor => OldDefinition.ReturnValueMarshallingDescriptor;
+        public ImmutableArray<byte> ReturnValueMarshallingDescriptor =>
+            OldDefinition.ReturnValueMarshallingDescriptor;
 
-        public IEnumerable<SecurityAttribute> SecurityAttributes => OldDefinition.SecurityAttributes;
+        public IEnumerable<SecurityAttribute> SecurityAttributes =>
+            OldDefinition.SecurityAttributes;
 
         public INamespace ContainingNamespace => OldDefinition.ContainingNamespace;
 
@@ -84,19 +92,24 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public bool IsGeneric => OldDefinition.IsGeneric;
 
-        public ImmutableArray<IParameterTypeInformation> ExtraParameters => OldDefinition.ExtraParameters;
+        public ImmutableArray<IParameterTypeInformation> ExtraParameters =>
+            OldDefinition.ExtraParameters;
 
-        public IGenericMethodInstanceReference? AsGenericMethodInstanceReference => OldDefinition.AsGenericMethodInstanceReference;
+        public IGenericMethodInstanceReference? AsGenericMethodInstanceReference =>
+            OldDefinition.AsGenericMethodInstanceReference;
 
-        public ISpecializedMethodReference? AsSpecializedMethodReference => OldDefinition.AsSpecializedMethodReference;
+        public ISpecializedMethodReference? AsSpecializedMethodReference =>
+            OldDefinition.AsSpecializedMethodReference;
 
         public CallingConvention CallingConvention => OldDefinition.CallingConvention;
 
         public ushort ParameterCount => (ushort)_parameters.Length;
 
-        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers => OldDefinition.ReturnValueCustomModifiers;
+        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers =>
+            OldDefinition.ReturnValueCustomModifiers;
 
-        public ImmutableArray<ICustomModifier> RefCustomModifiers => OldDefinition.RefCustomModifiers;
+        public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+            OldDefinition.RefCustomModifiers;
 
         public bool ReturnValueIsByRef => OldDefinition.ReturnValueIsByRef;
 

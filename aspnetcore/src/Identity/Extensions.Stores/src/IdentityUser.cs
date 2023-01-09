@@ -29,7 +29,8 @@ public class IdentityUser : IdentityUser<string>
     /// <remarks>
     /// The Id property is initialized to form a new GUID string value.
     /// </remarks>
-    public IdentityUser(string userName) : this()
+    public IdentityUser(string userName)
+        : this()
     {
         UserName = userName;
     }
@@ -50,7 +51,8 @@ public class IdentityUser<TKey> where TKey : IEquatable<TKey>
     /// Initializes a new instance of <see cref="IdentityUser{TKey}"/>.
     /// </summary>
     /// <param name="userName">The user name.</param>
-    public IdentityUser(string userName) : this()
+    public IdentityUser(string userName)
+        : this()
     {
         UserName = userName;
     }
@@ -147,6 +149,5 @@ public class IdentityUser<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// Returns the username for this user.
     /// </summary>
-    public override string ToString()
-        => UserName ?? string.Empty;
+    public override string ToString() => UserName ?? string.Empty;
 }

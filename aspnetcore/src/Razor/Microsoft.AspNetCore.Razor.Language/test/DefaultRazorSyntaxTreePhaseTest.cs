@@ -28,10 +28,7 @@ public class DefaultRazorSyntaxTreePhaseTest
         });
 
         // Assert
-        Assert.Collection(
-            phase.Passes,
-            p => Assert.Same(first, p),
-            p => Assert.Same(second, p));
+        Assert.Collection(phase.Passes, p => Assert.Same(first, p), p => Assert.Same(second, p));
     }
 
     [Fact]
@@ -47,8 +44,9 @@ public class DefaultRazorSyntaxTreePhaseTest
         // Act & Assert
         ExceptionAssert.Throws<InvalidOperationException>(
             () => phase.Execute(codeDocument),
-            $"The '{nameof(DefaultRazorSyntaxTreePhase)}' phase requires a '{nameof(RazorSyntaxTree)}' " +
-            $"provided by the '{nameof(RazorCodeDocument)}'.");
+            $"The '{nameof(DefaultRazorSyntaxTreePhase)}' phase requires a '{nameof(RazorSyntaxTree)}' "
+                + $"provided by the '{nameof(RazorCodeDocument)}'."
+        );
     }
 
     [Fact]
@@ -67,12 +65,16 @@ public class DefaultRazorSyntaxTreePhaseTest
         var firstPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
         firstPass.SetupGet(m => m.Order).Returns(0);
         firstPass.SetupProperty(m => m.Engine);
-        firstPass.Setup(m => m.Execute(codeDocument, originalSyntaxTree)).Returns(firstPassSyntaxTree);
+        firstPass
+            .Setup(m => m.Execute(codeDocument, originalSyntaxTree))
+            .Returns(firstPassSyntaxTree);
 
         var secondPass = new Mock<IRazorSyntaxTreePass>(MockBehavior.Strict);
         secondPass.SetupGet(m => m.Order).Returns(1);
         secondPass.SetupProperty(m => m.Engine);
-        secondPass.Setup(m => m.Execute(codeDocument, firstPassSyntaxTree)).Returns(secondPassSyntaxTree);
+        secondPass
+            .Setup(m => m.Execute(codeDocument, firstPassSyntaxTree))
+            .Returns(secondPassSyntaxTree);
 
         var phase = new DefaultRazorSyntaxTreePhase();
 

@@ -17,7 +17,10 @@ namespace System.Security.Cryptography
             return new EvpHashProvider(hashAlgorithmId);
         }
 
-        internal static HashProvider CreateMacProvider(string hashAlgorithmId, ReadOnlySpan<byte> key)
+        internal static HashProvider CreateMacProvider(
+            string hashAlgorithmId,
+            ReadOnlySpan<byte> key
+        )
         {
             return new HmacHashProvider(hashAlgorithmId, key);
         }
@@ -28,7 +31,8 @@ namespace System.Security.Cryptography
                 string hashAlgorithmId,
                 ReadOnlySpan<byte> key,
                 ReadOnlySpan<byte> source,
-                Span<byte> destination)
+                Span<byte> destination
+            )
             {
                 IntPtr evpType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmId);
                 Debug.Assert(evpType != IntPtr.Zero);
@@ -46,7 +50,11 @@ namespace System.Security.Cryptography
                 return written;
             }
 
-            public static unsafe int HashData(string hashAlgorithmId, ReadOnlySpan<byte> source, Span<byte> destination)
+            public static unsafe int HashData(
+                string hashAlgorithmId,
+                ReadOnlySpan<byte> source,
+                Span<byte> destination
+            )
             {
                 IntPtr evpType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmId);
                 Debug.Assert(evpType != IntPtr.Zero);
@@ -61,7 +69,13 @@ namespace System.Security.Cryptography
                 {
                     const int Success = 1;
                     uint length = (uint)destination.Length;
-                    int ret = Interop.Crypto.EvpDigestOneShot(evpType, pSource, source.Length, pDestination, &length);
+                    int ret = Interop.Crypto.EvpDigestOneShot(
+                        evpType,
+                        pSource,
+                        source.Length,
+                        pDestination,
+                        &length
+                    );
 
                     if (ret != Success)
                     {

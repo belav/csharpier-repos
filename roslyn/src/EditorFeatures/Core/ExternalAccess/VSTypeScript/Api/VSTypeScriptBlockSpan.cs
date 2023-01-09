@@ -19,7 +19,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         public string? Type { get; }
 
         public VSTypeScriptBlockSpan(
-            string? type, bool isCollapsible, TextSpan textSpan, TextSpan hintSpan, string bannerText = Ellipses, bool autoCollapse = false, bool isDefaultCollapsed = false)
+            string? type,
+            bool isCollapsible,
+            TextSpan textSpan,
+            TextSpan hintSpan,
+            string bannerText = Ellipses,
+            bool autoCollapse = false,
+            bool isDefaultCollapsed = false
+        )
         {
             TextSpan = textSpan;
             BannerText = bannerText;

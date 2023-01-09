@@ -9,7 +9,8 @@ namespace System.Data
 
         [Obsolete(
             Obsoletions.SystemDataSerializationFormatBinaryMessage,
-            DiagnosticId = Obsoletions.SystemDataSerializationFormatBinaryDiagId)]
+            DiagnosticId = Obsoletions.SystemDataSerializationFormatBinaryDiagId
+        )]
         Binary = 1
     }
 }

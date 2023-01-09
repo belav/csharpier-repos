@@ -14,21 +14,30 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
     [Method(VSInternalMethods.DocumentPullDiagnosticName)]
-    internal partial class DocumentPullDiagnosticHandler : AbstractDocumentPullDiagnosticHandler<VSInternalDocumentDiagnosticsParams, VSInternalDiagnosticReport, VSInternalDiagnosticReport[]>
+    internal partial class DocumentPullDiagnosticHandler
+        : AbstractDocumentPullDiagnosticHandler<
+            VSInternalDocumentDiagnosticsParams,
+            VSInternalDiagnosticReport,
+            VSInternalDiagnosticReport[]
+        >
     {
         public DocumentPullDiagnosticHandler(
             IDiagnosticAnalyzerService analyzerService,
             EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-            IGlobalOptionService globalOptions)
-            : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(VSInternalDocumentDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.TextDocument;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            VSInternalDocumentDiagnosticsParams diagnosticsParams
+        ) => diagnosticsParams.TextDocument;
 
-        protected override VSInternalDiagnosticReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics, string? resultId)
-            => new VSInternalDiagnosticReport
+        protected override VSInternalDiagnosticReport CreateReport(
+            TextDocumentIdentifier identifier,
+            VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics,
+            string? resultId
+        ) =>
+            new VSInternalDiagnosticReport
             {
                 Diagnostics = diagnostics,
                 ResultId = resultId,
@@ -40,37 +49,58 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 Supersedes = WorkspaceDiagnosticIdentifier,
             };
 
-        protected override VSInternalDiagnosticReport CreateRemovedReport(TextDocumentIdentifier identifier)
-            => CreateReport(identifier, diagnostics: null, resultId: null);
+        protected override VSInternalDiagnosticReport CreateRemovedReport(
+            TextDocumentIdentifier identifier
+        ) => CreateReport(identifier, diagnostics: null, resultId: null);
 
-        protected override VSInternalDiagnosticReport CreateUnchangedReport(TextDocumentIdentifier identifier, string resultId)
-            => CreateReport(identifier, diagnostics: null, resultId);
+        protected override VSInternalDiagnosticReport CreateUnchangedReport(
+            TextDocumentIdentifier identifier,
+            string resultId
+        ) => CreateReport(identifier, diagnostics: null, resultId);
 
-        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(VSInternalDocumentDiagnosticsParams diagnosticsParams)
+        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+            VSInternalDocumentDiagnosticsParams diagnosticsParams
+        )
         {
-            if (diagnosticsParams.PreviousResultId != null && diagnosticsParams.TextDocument != null)
+            if (
+                diagnosticsParams.PreviousResultId != null && diagnosticsParams.TextDocument != null
+            )
             {
-                return ImmutableArray.Create(new PreviousPullResult(diagnosticsParams.PreviousResultId, diagnosticsParams.TextDocument));
+                return ImmutableArray.Create(
+                    new PreviousPullResult(
+                        diagnosticsParams.PreviousResultId,
+                        diagnosticsParams.TextDocument
+                    )
+                );
             }
 
             // The client didn't provide us with a previous result to look for, so we can't lookup anything.
             return null;
         }
 
-        protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
-            => ConvertTags(diagnosticData, potentialDuplicate: false);
+        protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData) =>
+            ConvertTags(diagnosticData, potentialDuplicate: false);
 
-        protected override ValueTask<ImmutableArray<IDiagnosticSource>> GetOrderedDiagnosticSourcesAsync(RequestContext context, CancellationToken cancellationToken)
+        protected override ValueTask<
+            ImmutableArray<IDiagnosticSource>
+        > GetOrderedDiagnosticSourcesAsync(
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             return ValueTaskFactory.FromResult(GetDiagnosticSources(context));
         }
 
-        protected override VSInternalDiagnosticReport[]? CreateReturn(BufferedProgress<VSInternalDiagnosticReport> progress)
+        protected override VSInternalDiagnosticReport[]? CreateReturn(
+            BufferedProgress<VSInternalDiagnosticReport> progress
+        )
         {
             return progress.GetValues();
         }
 
-        internal static ImmutableArray<IDiagnosticSource> GetDiagnosticSources(RequestContext context)
+        internal static ImmutableArray<IDiagnosticSource> GetDiagnosticSources(
+            RequestContext context
+        )
         {
             // For the single document case, that is the only doc we want to process.
             //
@@ -83,13 +113,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             var document = context.Document;
             if (document is null)
             {
-                context.TraceInformation("Ignoring diagnostics request because no document was provided");
+                context.TraceInformation(
+                    "Ignoring diagnostics request because no document was provided"
+                );
                 return ImmutableArray<IDiagnosticSource>.Empty;
             }
 
             if (!context.IsTracking(document.GetURI()))
             {
-                context.TraceWarning($"Ignoring diagnostics request for untracked document: {document.GetURI()}");
+                context.TraceWarning(
+                    $"Ignoring diagnostics request for untracked document: {document.GetURI()}"
+                );
                 return ImmutableArray<IDiagnosticSource>.Empty;
             }
 

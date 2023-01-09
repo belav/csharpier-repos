@@ -31,7 +31,10 @@ public class WorkerTemplateTest : LoggedTest
     }
 
     [ConditionalTheory]
-    [OSSkipCondition(OperatingSystems.Linux, SkipReason = "https://github.com/dotnet/sdk/issues/12831")]
+    [OSSkipCondition(
+        OperatingSystems.Linux,
+        SkipReason = "https://github.com/dotnet/sdk/issues/12831"
+    )]
     [InlineData("C#", null)]
     [InlineData("C#", new string[] { ArgConstants.UseProgramMain })]
     [InlineData("F#", null)]
@@ -40,31 +43,54 @@ public class WorkerTemplateTest : LoggedTest
     {
         var project = await ProjectFactory.CreateProject(Output);
 
-        var createResult = await project.RunDotNetNewAsync("worker", language: language, args: args);
-        Assert.True(0 == createResult.ExitCode, ErrorMessages.GetFailedProcessMessage("create/restore", project, createResult));
+        var createResult = await project.RunDotNetNewAsync(
+            "worker",
+            language: language,
+            args: args
+        );
+        Assert.True(
+            0 == createResult.ExitCode,
+            ErrorMessages.GetFailedProcessMessage("create/restore", project, createResult)
+        );
 
         var publishResult = await project.RunDotNetPublishAsync();
-        Assert.True(0 == publishResult.ExitCode, ErrorMessages.GetFailedProcessMessage("publish", project, publishResult));
+        Assert.True(
+            0 == publishResult.ExitCode,
+            ErrorMessages.GetFailedProcessMessage("publish", project, publishResult)
+        );
 
         // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses Config = Release
         // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by calling build
         // later, while the opposite is not true.
 
         var buildResult = await project.RunDotNetBuildAsync();
-        Assert.True(0 == buildResult.ExitCode, ErrorMessages.GetFailedProcessMessage("build", project, buildResult));
+        Assert.True(
+            0 == buildResult.ExitCode,
+            ErrorMessages.GetFailedProcessMessage("build", project, buildResult)
+        );
 
         using (var aspNetProcess = project.StartBuiltProjectAsync(hasListeningUri: false))
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
         }
 
         using (var aspNetProcess = project.StartPublishedProjectAsync(hasListeningUri: false))
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
         }
     }
 }

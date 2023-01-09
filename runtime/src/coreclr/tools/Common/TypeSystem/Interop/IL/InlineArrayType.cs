@@ -12,154 +12,102 @@ namespace Internal.TypeSystem.Interop
 {
     internal sealed partial class InlineArrayType : MetadataType
     {
-        public MetadataType ElementType
-        {
-            get;
-        }
+        public MetadataType ElementType { get; }
 
-        public uint Length
-        {
-            get;
-        }
+        public uint Length { get; }
 
-        public override ModuleDesc Module
-        {
-            get;
-        }
+        public override ModuleDesc Module { get; }
 
         public override string Name
         {
-            get
-            {
-                return "_InlineArray__" + ElementType.Name + "__"+ Length;
-            }
+            get { return "_InlineArray__" + ElementType.Name + "__" + Length; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "_InlineArray__" + ElementType.DiagnosticName + "__" + Length;
-            }
+            get { return "_InlineArray__" + ElementType.DiagnosticName + "__" + Length; }
         }
 
         public override string Namespace
         {
-            get
-            {
-                return "Internal.CompilerGenerated";
-            }
+            get { return "Internal.CompilerGenerated"; }
         }
 
         public override string DiagnosticNamespace
         {
-            get
-            {
-                return Namespace;
-            }
+            get { return Namespace; }
         }
 
         public override Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         public override PInvokeStringFormat PInvokeStringFormat
         {
-            get
-            {
-                return PInvokeStringFormat.AnsiClass;
-            }
+            get { return PInvokeStringFormat.AnsiClass; }
         }
 
         public override bool IsExplicitLayout
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsSequentialLayout
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsBeforeFieldInit
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override DefType BaseType
         {
-            get
-            {
-                return (DefType)Context.GetWellKnownType(WellKnownType.ValueType);
-            }
+            get { return (DefType)Context.GetWellKnownType(WellKnownType.ValueType); }
         }
 
         public override MetadataType MetadataBaseType
         {
-            get
-            {
-                return (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType);
-            }
+            get { return (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType); }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override DefType ContainingType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override DefType[] ExplicitlyImplementedInterfaces
         {
-            get
-            {
-                return Array.Empty<DefType>();
-            }
+            get { return Array.Empty<DefType>(); }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return ElementType.Context;
-            }
+            get { return ElementType.Context; }
         }
 
         private InteropStateManager _interopStateManager;
         private MethodDesc[] _methods;
         private FieldDesc[] _fields;
 
-        public InlineArrayType(ModuleDesc owningModule, MetadataType elementType, uint length, InteropStateManager interopStateManager)
+        public InlineArrayType(
+            ModuleDesc owningModule,
+            MetadataType elementType,
+            uint length,
+            InteropStateManager interopStateManager
+        )
         {
             Debug.Assert(elementType.IsTypeDefinition);
             Debug.Assert(elementType.IsValueType);
@@ -208,7 +156,9 @@ namespace Internal.TypeSystem.Interop
 
         private void InitializeHashCode()
         {
-            var hashCodeBuilder = new Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder(Namespace);
+            var hashCodeBuilder = new Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder(
+                Namespace
+            );
 
             if (Namespace.Length > 0)
             {
@@ -250,13 +200,15 @@ namespace Internal.TypeSystem.Interop
 
         private void InitializeMethods()
         {
-            MethodDesc[] methods = new MethodDesc[] {
-                    new InlineArrayMethod(this, InlineArrayMethodKind.Getter),
-                    new InlineArrayMethod(this, InlineArrayMethodKind.Setter),
-                };
+            MethodDesc[] methods = new MethodDesc[]
+            {
+                new InlineArrayMethod(this, InlineArrayMethodKind.Getter),
+                new InlineArrayMethod(this, InlineArrayMethodKind.Setter),
+            };
 
             Interlocked.CompareExchange(ref _methods, methods, null);
         }
+
         public override IEnumerable<MethodDesc> GetMethods()
         {
             if (_methods == null)
@@ -278,12 +230,11 @@ namespace Internal.TypeSystem.Interop
         private void InitializeFields()
         {
             // The inline array will inherit alignment from the dummy field
-            FieldDesc[] fields = new FieldDesc[] {
-                new InlineArrayField(this)
-            };
+            FieldDesc[] fields = new FieldDesc[] { new InlineArrayField(this) };
 
             Interlocked.CompareExchange(ref _fields, fields, null);
         }
+
         public override IEnumerable<FieldDesc> GetFields()
         {
             if (_fields == null)
@@ -307,18 +258,12 @@ namespace Internal.TypeSystem.Interop
 
             public override TypeDesc OwningType
             {
-                get
-                {
-                    return _owningType;
-                }
+                get { return _owningType; }
             }
 
             public override TypeSystemContext Context
             {
-                get
-                {
-                    return _owningType.Context;
-                }
+                get { return _owningType.Context; }
             }
 
             public override string Name
@@ -338,10 +283,7 @@ namespace Internal.TypeSystem.Interop
 
             public override string DiagnosticName
             {
-                get
-                {
-                    return Name;
-                }
+                get { return Name; }
             }
 
             public override MethodSignature Signature
@@ -352,17 +294,28 @@ namespace Internal.TypeSystem.Interop
                     {
                         if (_kind == InlineArrayMethodKind.Getter)
                         {
-                            _signature = new MethodSignature(MethodSignatureFlags.None,
-                                     genericParameterCount: 0,
-                                    returnType: _owningType.ElementType,
-                                    parameters: new TypeDesc[] { Context.GetWellKnownType(WellKnownType.Int32) });
+                            _signature = new MethodSignature(
+                                MethodSignatureFlags.None,
+                                genericParameterCount: 0,
+                                returnType: _owningType.ElementType,
+                                parameters: new TypeDesc[]
+                                {
+                                    Context.GetWellKnownType(WellKnownType.Int32)
+                                }
+                            );
                         }
                         else
                         {
-                            _signature = new MethodSignature(MethodSignatureFlags.None,
-                                     genericParameterCount: 0,
-                                    returnType: Context.GetWellKnownType(WellKnownType.Void),
-                                    parameters: new TypeDesc[] { Context.GetWellKnownType(WellKnownType.Int32), _owningType.ElementType });
+                            _signature = new MethodSignature(
+                                MethodSignatureFlags.None,
+                                genericParameterCount: 0,
+                                returnType: Context.GetWellKnownType(WellKnownType.Void),
+                                parameters: new TypeDesc[]
+                                {
+                                    Context.GetWellKnownType(WellKnownType.Int32),
+                                    _owningType.ElementType
+                                }
+                            );
                         }
                     }
                     return _signature;
@@ -425,67 +378,44 @@ namespace Internal.TypeSystem.Interop
 
             public override TypeSystemContext Context
             {
-                get
-                {
-                    return _owningType.Context;
-                }
+                get { return _owningType.Context; }
             }
 
             public override TypeDesc FieldType
             {
-                get
-                {
-                    return _owningType.ElementType;
-                }
+                get { return _owningType.ElementType; }
             }
+
             public override EmbeddedSignatureData[] GetEmbeddedSignatureData() => null;
 
             public override bool HasRva
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsInitOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsLiteral
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsStatic
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsThreadStatic
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override DefType OwningType
             {
-                get
-                {
-                    return _owningType;
-                }
+                get { return _owningType; }
             }
 
             public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -495,10 +425,7 @@ namespace Internal.TypeSystem.Interop
 
             public override string Name
             {
-                get
-                {
-                    return "InlineArrayField";
-                }
+                get { return "InlineArrayField"; }
             }
 
             public InlineArrayField(InlineArrayType owningType)
@@ -513,5 +440,4 @@ namespace Internal.TypeSystem.Interop
         Getter = 0,
         Setter = 1
     }
-
 }

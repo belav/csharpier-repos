@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis
         KeepDirectives = 0x8,
 
         /// <summary>
-        /// Ensure that at least one EndOfLine trivia is kept if one was present 
+        /// Ensure that at least one EndOfLine trivia is kept if one was present
         /// </summary>
         KeepEndOfLine = 0x10,
 

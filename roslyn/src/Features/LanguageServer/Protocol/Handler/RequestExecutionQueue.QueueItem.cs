@@ -85,10 +85,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Guid activityId,
                 ILspLogger logger,
                 RequestTelemetryLogger telemetryLogger,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 // Set the tcs state to cancelled if the token gets cancelled outside of our callback (for example the server shutting down).
-                cancellationToken.Register(() => _completionSource.TrySetCanceled(cancellationToken));
+                cancellationToken.Register(
+                    () => _completionSource.TrySetCanceled(cancellationToken)
+                );
 
                 Metrics = new RequestMetrics(methodName, telemetryLogger);
 
@@ -115,7 +118,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Guid activityId,
                 ILspLogger logger,
                 LspServices lspServices,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var queueItem = new QueueItem<TRequestType, TResponseType>(
                     mutatesSolutionState,
@@ -128,7 +132,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     activityId,
                     logger,
                     lspServices.GetRequiredService<RequestTelemetryLogger>(),
-                    cancellationToken);
+                    cancellationToken
+                );
 
                 return (queueItem, queueItem._completionSource.Task);
             }
@@ -138,7 +143,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             /// representing the task that the client is waiting for, then re-thrown so that
             /// the queue can correctly handle them depending on the type of request.
             /// </summary>
-            public async Task CallbackAsync(RequestContext? context, CancellationToken cancellationToken)
+            public async Task CallbackAsync(
+                RequestContext? context,
+                CancellationToken cancellationToken
+            )
             {
                 // Restore our activity id so that logging/tracking works.
                 Trace.CorrelationManager.ActivityId = ActivityId;
@@ -163,7 +171,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     }
                     else
                     {
-                        result = await _handler.HandleRequestAsync(_request, context.Value, cancellationToken).ConfigureAwait(false);
+                        result = await _handler
+                            .HandleRequestAsync(_request, context.Value, cancellationToken)
+                            .ConfigureAwait(false);
                         this.Metrics.RecordSuccess();
                     }
 

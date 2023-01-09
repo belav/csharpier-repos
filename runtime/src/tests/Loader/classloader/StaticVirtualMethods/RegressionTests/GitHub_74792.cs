@@ -24,18 +24,23 @@ class Program
     }
 }
 
-public interface ILogic{
+public interface ILogic
+{
     abstract static void Run();
 }
 
-public class L1 : ILogic{
-    public static void Run(){
+public class L1 : ILogic
+{
+    public static void Run()
+    {
         Console.WriteLine("L1");
     }
 }
 
-public class L2 : ILogic{
-    public static void Run(){
+public class L2 : ILogic
+{
+    public static void Run()
+    {
         Console.WriteLine("L2");
     }
 }

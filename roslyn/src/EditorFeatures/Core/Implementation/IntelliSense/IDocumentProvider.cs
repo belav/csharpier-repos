@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense
     internal class DocumentProvider : ForegroundThreadAffinitizedObject, IDocumentProvider
     {
         public DocumentProvider(IThreadingContext threadingContext)
-            : base(threadingContext)
-        {
-        }
+            : base(threadingContext) { }
 
         public Document GetDocument(ITextSnapshot snapshot, CancellationToken cancellationToken)
         {

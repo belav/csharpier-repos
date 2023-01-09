@@ -20,17 +20,20 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
 {
     [Trait(Traits.Feature, Traits.Features.BlockCommentEditing)]
-    public sealed class CloseBlockCommentTests : AbstractTypingCommandHandlerTest<TypeCharCommandArgs>
+    public sealed class CloseBlockCommentTests
+        : AbstractTypingCommandHandlerTest<TypeCharCommandArgs>
     {
         [WpfFact]
         public void ClosedRegularlyAfterAsterisk()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      *$$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      */$$
@@ -41,12 +44,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void ClosedAfterAsteriskSpace1()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      * $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      */$$
@@ -57,11 +62,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void ClosedAfterAsteriskSpace2()
         {
-            var code = @"
+            var code =
+                @"
     /*
      * $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      */$$
 ";
@@ -71,10 +78,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void NotClosedAfterSlashAsteriskSpace()
         {
-            var code = @"
+            var code =
+                @"
     /* $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /* /$$
 ";
             Verify(code, expected);
@@ -83,10 +92,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void NotClosedAfterSlashDoubleAsteriskSpace()
         {
-            var code = @"
+            var code =
+                @"
     /** $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /** /$$
 ";
             Verify(code, expected);
@@ -95,12 +106,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void NotClosedAfterSpaceWithoutAsterisk()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
        $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
        /$$
@@ -111,12 +124,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithNonWhitespaceBeforeAsterisk1()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
     ** $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
     ** /$$
@@ -127,12 +142,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithNonWhitespaceBeforeAsterisk2()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
     /* $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
     /* /$$
@@ -143,12 +160,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithNonWhitespaceBeforeAsterisk3()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
 a    * $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
 a    * /$$
@@ -159,12 +178,14 @@ a    * /$$
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithNonWhitespaceAfterCursor1()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      * $$/
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      * /$$/
@@ -175,12 +196,14 @@ a    * /$$
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithNonWhitespaceAfterCursor2()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      * $$*
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      * /$$*
@@ -191,12 +214,14 @@ a    * /$$
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithNonWhitespaceAfterCursor3()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      * $$ a
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      * /$$ a
@@ -208,12 +233,14 @@ a    * /$$
         public void NotClosedAfterAsteriskSpaceWithWhitespaceAfterCursor()
         {
             // Note: There is a single trailing space after the cursor.
-            var code = @"
+            var code =
+                @"
     /*
      *
      * $$ 
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      * /$$ 
@@ -224,12 +251,14 @@ a    * /$$
         [WpfFact]
         public void NotClosedAfterAsteriskDoubleSpace()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      *  $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      *  /$$
@@ -240,12 +269,14 @@ a    * /$$
         [WpfFact]
         public void ClosedAfterAsteriskSpaceWithNothingBeforeAsterisk()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
 * $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
 */$$
@@ -256,12 +287,14 @@ a    * /$$
         [WpfFact]
         public void ClosedAfterAsteriskSpaceWithTabsBeforeAsterisk()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
 <tab><tab>* $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
 <tab><tab>*/$$
@@ -272,32 +305,46 @@ a    * /$$
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceWithOptionOff()
         {
-            var code = @"
+            var code =
+                @"
     /*
      *
      * $$
 ";
-            var expected = @"
+            var expected =
+                @"
     /*
      *
      * /$$
 ";
-            Verify(code, expected, workspace =>
-            {
-                var globalOptions = workspace.GetService<IGlobalOptionService>();
-                globalOptions.SetGlobalOption(new OptionKey(FeatureOnOffOptions.AutoInsertBlockCommentStartString, LanguageNames.CSharp), false);
-            });
+            Verify(
+                code,
+                expected,
+                workspace =>
+                {
+                    var globalOptions = workspace.GetService<IGlobalOptionService>();
+                    globalOptions.SetGlobalOption(
+                        new OptionKey(
+                            FeatureOnOffOptions.AutoInsertBlockCommentStartString,
+                            LanguageNames.CSharp
+                        ),
+                        false
+                    );
+                }
+            );
         }
 
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceOutsideComment()
         {
-            var code = @"
+            var code =
+                @"
    / *
      *
      * $$
 ";
-            var expected = @"
+            var expected =
+                @"
    / *
      *
      * /$$
@@ -308,7 +355,8 @@ a    * /$$
         [WpfFact]
         public void NotClosedAfterAsteriskSpaceInsideString()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     string s = @""
@@ -316,7 +364,8 @@ class C
      *
      * $$
 ";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     string s = @""
@@ -330,10 +379,12 @@ class C
         [WpfFact]
         public void ClosedAfterAsteriskSpaceEndOfFile()
         {
-            var code = @"
+            var code =
+                @"
     /*
      * $$";
-            var expected = @"
+            var expected =
+                @"
     /*
      */$$";
             Verify(code, expected);
@@ -366,13 +417,22 @@ class C
             Verify(code, expected);
         }
 
-        protected override TestWorkspace CreateTestWorkspace(string initialMarkup)
-            => TestWorkspace.CreateCSharp(initialMarkup);
+        protected override TestWorkspace CreateTestWorkspace(string initialMarkup) =>
+            TestWorkspace.CreateCSharp(initialMarkup);
 
-        protected override (TypeCharCommandArgs, string insertionText) CreateCommandArgs(ITextView textView, ITextBuffer textBuffer)
-            => (new TypeCharCommandArgs(textView, textBuffer, '/'), "/");
+        protected override (TypeCharCommandArgs, string insertionText) CreateCommandArgs(
+            ITextView textView,
+            ITextBuffer textBuffer
+        ) => (new TypeCharCommandArgs(textView, textBuffer, '/'), "/");
 
-        internal override ICommandHandler<TypeCharCommandArgs> GetCommandHandler(TestWorkspace workspace)
-            => Assert.IsType<CloseBlockCommentCommandHandler>(workspace.GetService<ICommandHandler>(ContentTypeNames.CSharpContentType, nameof(CloseBlockCommentCommandHandler)));
+        internal override ICommandHandler<TypeCharCommandArgs> GetCommandHandler(
+            TestWorkspace workspace
+        ) =>
+            Assert.IsType<CloseBlockCommentCommandHandler>(
+                workspace.GetService<ICommandHandler>(
+                    ContentTypeNames.CSharpContentType,
+                    nameof(CloseBlockCommentCommandHandler)
+                )
+            );
     }
 }

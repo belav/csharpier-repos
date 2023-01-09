@@ -16,9 +16,7 @@ internal sealed class CreatedAtRouteResult : ObjectResult
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
     public CreatedAtRouteResult(object? routeValues, object? value)
-        : this(routeName: null, routeValues: routeValues, value: value)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues, value: value) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedAtRouteResult"/> class with the values
@@ -27,10 +25,7 @@ internal sealed class CreatedAtRouteResult : ObjectResult
     /// <param name="routeName">The name of the route to use for generating the URL.</param>
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
-    public CreatedAtRouteResult(
-        string? routeName,
-        object? routeValues,
-        object? value)
+    public CreatedAtRouteResult(string? routeName, object? routeValues, object? value)
         : base(value, StatusCodes.Status201Created)
     {
         RouteName = routeName;
@@ -55,7 +50,8 @@ internal sealed class CreatedAtRouteResult : ObjectResult
             context,
             RouteName,
             RouteValues,
-            fragment: FragmentString.Empty);
+            fragment: FragmentString.Empty
+        );
 
         if (string.IsNullOrEmpty(url))
         {

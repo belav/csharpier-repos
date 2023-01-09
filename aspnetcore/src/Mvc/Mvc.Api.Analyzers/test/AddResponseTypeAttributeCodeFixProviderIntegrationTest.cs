@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class AddResponseTypeAttributeCodeFixProviderIntegrationTest
 {
-    private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } = new MvcDiagnosticAnalyzerRunner(new ApiConventionAnalyzer());
+    private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } =
+        new MvcDiagnosticAnalyzerRunner(new ApiConventionAnalyzer());
 
     private CodeFixRunner CodeFixRunner { get; } = new IgnoreCS1701WarningCodeFixRunner();
 
@@ -73,7 +74,8 @@ public class AddResponseTypeAttributeCodeFixProviderIntegrationTest
         var actualOutput = await CodeFixRunner.ApplyCodeFixAsync(
             new AddResponseTypeAttributeCodeFixProvider(),
             project.GetDocument(controllerDocument),
-            diagnostics[0]);
+            diagnostics[0]
+        );
 
         Assert.Equal(expectedOutput, actualOutput, ignoreLineEndingDifferences: true);
     }
@@ -81,14 +83,17 @@ public class AddResponseTypeAttributeCodeFixProviderIntegrationTest
     private Project GetProject(string testMethod)
     {
         var testSource = Read(testMethod + ".Input");
-        return MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource });
+        return MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { testSource }
+        );
     }
 
     private string Read(string fileName)
     {
-        return MvcTestSource.Read(GetType().Name, fileName)
-            .Source
-            .Replace("_INPUT_", "_TEST_")
+        return MvcTestSource
+            .Read(GetType().Name, fileName)
+            .Source.Replace("_INPUT_", "_TEST_")
             .Replace("_OUTPUT_", "_TEST_");
     }
 }

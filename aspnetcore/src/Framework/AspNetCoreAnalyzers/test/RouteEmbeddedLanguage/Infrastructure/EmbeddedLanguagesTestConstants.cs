@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 internal static class EmbeddedLanguagesTestConstants
 {
-    public static readonly string StringSyntaxAttributeCodeCSharp = @"
+    public static readonly string StringSyntaxAttributeCodeCSharp =
+        @"
 namespace System.Diagnostics.CodeAnalysis
 {
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]

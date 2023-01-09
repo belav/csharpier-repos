@@ -10,8 +10,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal abstract class TextReaderWithLength : TextReader
     {
-        public TextReaderWithLength(int length)
-            => Length = length;
+        public TextReaderWithLength(int length) => Length = length;
 
         public int Length { get; }
     }

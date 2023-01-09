@@ -70,7 +70,6 @@ public class RandomTwister64
     }
 }
 
-
 public class Program
 {
     public static int Main()
@@ -94,8 +93,8 @@ public class Program
 
         // NOTE: When I reproed this, I got 100 zeros (0)
         // in the unfixed case, and some double between
-        // 0 and 1 in the fixed case. Actually never saw 
-        // the 0 or the 1, always a double in between. 
+        // 0 and 1 in the fixed case. Actually never saw
+        // the 0 or the 1, always a double in between.
         if (countZero < 2)
         {
             Console.WriteLine("!!!!!!! PASSED !!!!!!!");
@@ -108,4 +107,3 @@ public class Program
         }
     }
 }
-

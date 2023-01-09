@@ -33,7 +33,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionEntityTypeBuilder? HasBaseType(
         IConventionEntityType? baseEntityType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given type can be set as the base type of this entity type.
@@ -59,7 +60,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         Type propertyType,
         string propertyName,
         bool setTypeConfigurationSource = true,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns an object that can be used to configure the property with the given member info.
@@ -80,10 +82,7 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the property can be added.</returns>
-    bool CanHaveProperty(
-        Type? propertyType,
-        string propertyName,
-        bool fromDataAnnotation = false);
+    bool CanHaveProperty(Type? propertyType, string propertyName, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Returns a value indicating whether the given property can be added to this entity type.
@@ -107,7 +106,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionPropertyBuilder? IndexerProperty(
         Type propertyType,
         string propertyName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given indexer property can be added to this entity type.
@@ -119,7 +119,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     bool CanHaveIndexerProperty(
         Type propertyType,
         string propertyName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Creates a property with a name that's different from any existing properties.
@@ -131,7 +132,11 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     An object that can be used to configure the property if it exists on the entity type,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? CreateUniqueProperty(Type propertyType, string basePropertyName, bool required);
+    IConventionPropertyBuilder? CreateUniqueProperty(
+        Type propertyType,
+        string basePropertyName,
+        bool required
+    );
 
     /// <summary>
     ///     Returns the existing properties with the given names or creates them if matching CLR members are found.
@@ -141,7 +146,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>A list of properties if they exist on the entity type, <see langword="null" /> otherwise.</returns>
     IReadOnlyList<IConventionProperty>? GetOrCreateProperties(
         IReadOnlyList<string>? propertyNames,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the existing properties matching the given members or creates them.
@@ -151,13 +157,16 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>A list of properties if they exist on the entity type, <see langword="null" /> otherwise.</returns>
     IReadOnlyList<IConventionProperty>? GetOrCreateProperties(
         IEnumerable<MemberInfo>? memberInfos,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes properties in the given list if they are not part of any metadata object.
     /// </summary>
     /// <param name="properties">The properties to remove.</param>
-    IConventionEntityTypeBuilder RemoveUnusedImplicitProperties(IReadOnlyList<IConventionProperty> properties);
+    IConventionEntityTypeBuilder RemoveUnusedImplicitProperties(
+        IReadOnlyList<IConventionProperty> properties
+    );
 
     /// <summary>
     ///     Returns an object that can be used to configure the service property with the given member info.
@@ -171,7 +180,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionServicePropertyBuilder? ServiceProperty(
         MemberInfo memberInfo,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns an object that can be used to configure the service property with the given member info.
@@ -187,7 +197,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionServicePropertyBuilder? ServiceProperty(
         Type serviceType,
         MemberInfo memberInfo,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given service property can be added to this entity type.
@@ -244,7 +255,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     An object that can be used to configure the primary key if it was set on the entity type,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionKeyBuilder? PrimaryKey(IReadOnlyList<IConventionProperty>? properties, bool fromDataAnnotation = false);
+    IConventionKeyBuilder? PrimaryKey(
+        IReadOnlyList<IConventionProperty>? properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the properties that make up the primary key for this entity type.
@@ -256,7 +270,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     An object that can be used to configure the primary key if it was set on the entity type,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionKeyBuilder? PrimaryKey(IReadOnlyList<string>? propertyNames, bool fromDataAnnotation = false);
+    IConventionKeyBuilder? PrimaryKey(
+        IReadOnlyList<string>? propertyNames,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given properties can be set as the primary key for this entity type.
@@ -272,7 +289,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="properties">The properties that make up the primary key.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given properties can be set as the primary key.</returns>
-    bool CanSetPrimaryKey(IReadOnlyList<IConventionProperty>? properties, bool fromDataAnnotation = false);
+    bool CanSetPrimaryKey(
+        IReadOnlyList<IConventionProperty>? properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Creates an alternate key in the model for this entity type if one does not already exist over the specified
@@ -284,7 +304,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     An object that can be used to configure the key if it exists on the entity type,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionKeyBuilder? HasKey(IReadOnlyList<IConventionProperty> properties, bool fromDataAnnotation = false);
+    IConventionKeyBuilder? HasKey(
+        IReadOnlyList<IConventionProperty> properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes a primary or alternate key from this entity type.
@@ -292,7 +315,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="properties">The properties that make up the key.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The key that was removed.</returns>
-    IConventionEntityTypeBuilder? HasNoKey(IReadOnlyList<IConventionProperty> properties, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasNoKey(
+        IReadOnlyList<IConventionProperty> properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes a primary or alternate key from this entity type.
@@ -343,7 +369,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionIndexBuilder? HasIndex(
         IReadOnlyList<string> propertyNames,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures an index on the specified property names.
@@ -360,7 +387,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionIndexBuilder? HasIndex(
         IReadOnlyList<string> propertyNames,
         string name,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures an index on the specified properties.
@@ -375,7 +403,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionIndexBuilder? HasIndex(
         IReadOnlyList<IConventionProperty> properties,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures an index on the specified properties, with the specified name.
@@ -392,7 +421,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionIndexBuilder? HasIndex(
         IReadOnlyList<IConventionProperty> properties,
         string name,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether and index on the given properties can be added to this entity type.
@@ -411,7 +441,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the index was removed or didn't exist,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionEntityTypeBuilder? HasNoIndex(IReadOnlyList<IConventionProperty> properties, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasNoIndex(
+        IReadOnlyList<IConventionProperty> properties,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes an index from this entity type.
@@ -422,7 +455,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the index was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionEntityTypeBuilder? HasNoIndex(IConventionIndex index, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasNoIndex(
+        IConventionIndex index,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the index can be removed from this entity type.
@@ -440,7 +476,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>An object that can be used to configure the relationship.</returns>
     IConventionForeignKeyBuilder? HasRelationship(
         IConventionEntityType targetEntityType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type with the target as the principal end.
@@ -455,7 +492,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasRelationship(
         IConventionEntityType principalEntityType,
         IReadOnlyList<IConventionProperty> dependentProperties,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type with the target as the principal end.
@@ -470,7 +508,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasRelationship(
         IConventionEntityType principalEntityType,
         IConventionKey principalKey,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type with the target as the principal end.
@@ -487,7 +526,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType principalEntityType,
         IReadOnlyList<IConventionProperty> dependentProperties,
         IConventionKey principalKey,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type.
@@ -506,7 +546,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType targetEntityType,
         string navigationName,
         bool setTargetAsPrincipal = false,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type.
@@ -523,7 +564,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType targetEntityType,
         MemberInfo navigation,
         bool setTargetAsPrincipal = false,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type.
@@ -545,7 +587,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         string navigationName,
         string? inverseNavigationName,
         bool setTargetAsPrincipal = false,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship between this and the target entity type.
@@ -567,7 +610,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         MemberInfo navigation,
         MemberInfo? inverseNavigation,
         bool setTargetAsPrincipal = false,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -579,7 +623,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasOwnership(
         Type targetEntityType,
         string navigationName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -591,7 +636,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasOwnership(
         IConventionEntityType targetEntityType,
         string navigationName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -606,7 +652,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasOwnership(
         Type targetEntityType,
         MemberInfo navigation,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -621,7 +668,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     IConventionForeignKeyBuilder? HasOwnership(
         IConventionEntityType targetEntityType,
         MemberInfo navigation,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -641,7 +689,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         Type targetEntityType,
         string navigationName,
         string? inverseNavigationName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -661,7 +710,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType targetEntityType,
         string navigationName,
         string? inverseNavigationName,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -681,7 +731,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         Type targetEntityType,
         MemberInfo navigation,
         MemberInfo? inverseNavigation,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a relationship where the target entity is owned by (or part of) this entity.
@@ -701,7 +752,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType targetEntityType,
         MemberInfo navigation,
         MemberInfo? inverseNavigation,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes a relationship from this entity type.
@@ -722,7 +774,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IReadOnlyList<IConventionProperty> properties,
         IConventionKey principalKey,
         IConventionEntityType principalEntityType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes a foreign key from this entity type.
@@ -733,7 +786,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the foreign key was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionEntityTypeBuilder? HasNoRelationship(IConventionForeignKey foreignKey, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasNoRelationship(
+        IConventionForeignKey foreignKey,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the foreign key can be removed from this entity type.
@@ -752,7 +808,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the skip navigation was removed,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionEntityTypeBuilder? HasNoSkipNavigation(IConventionSkipNavigation skipNavigation, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasNoSkipNavigation(
+        IConventionSkipNavigation skipNavigation,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the skip navigation can be removed from this entity type.
@@ -760,7 +819,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="skipNavigation">The skip navigation to be removed.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the skip navigation can be removed from this entity type.</returns>
-    bool CanRemoveSkipNavigation(IConventionSkipNavigation skipNavigation, bool fromDataAnnotation = false);
+    bool CanRemoveSkipNavigation(
+        IConventionSkipNavigation skipNavigation,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given navigation can be added to this entity type.
@@ -777,8 +839,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="navigation">The navigation member.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
-    bool CanHaveNavigation(MemberInfo navigation, bool fromDataAnnotation = false)
-        => CanHaveNavigation(navigation.Name, navigation.GetMemberType(), fromDataAnnotation);
+    bool CanHaveNavigation(MemberInfo navigation, bool fromDataAnnotation = false) =>
+        CanHaveNavigation(navigation.Name, navigation.GetMemberType(), fromDataAnnotation);
 
     /// <summary>
     ///     Returns a value indicating whether the given skip navigation can be added to this entity type.
@@ -787,7 +849,11 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="type">The type of the navigation target.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the skip navigation can be added.</returns>
-    bool CanHaveSkipNavigation(string skipNavigationName, Type? type, bool fromDataAnnotation = false);
+    bool CanHaveSkipNavigation(
+        string skipNavigationName,
+        Type? type,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given skip navigation can be added to this entity type.
@@ -795,8 +861,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="navigation">The navigation member.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the skip navigation can be added.</returns>
-    bool CanHaveSkipNavigation(MemberInfo navigation, bool fromDataAnnotation = false)
-        => CanHaveSkipNavigation(navigation.Name, navigation.GetMemberType(), fromDataAnnotation);
+    bool CanHaveSkipNavigation(MemberInfo navigation, bool fromDataAnnotation = false) =>
+        CanHaveSkipNavigation(navigation.Name, navigation.GetMemberType(), fromDataAnnotation);
 
     /// <summary>
     ///     Configures a skip navigation and the inverse between this and the target entity type.
@@ -822,7 +888,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         MemberInfo inverseNavigation,
         bool? collections = null,
         bool? onDependent = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a skip navigation between this and the target entity type.
@@ -843,7 +910,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType targetEntityType,
         bool? collection = null,
         bool? onDependent = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a skip navigation between this and the target entity type.
@@ -864,7 +932,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         IConventionEntityType targetEntityType,
         bool? collection = null,
         bool? onDependent = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures a database trigger when targeting a relational database.
@@ -875,9 +944,7 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="modelName">The name of the trigger.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The same builder instance if the check constraint was configured, <see langword="null" /> otherwise.</returns>
-    IConventionTriggerBuilder? HasTrigger(
-        string modelName,
-        bool fromDataAnnotation = false);
+    IConventionTriggerBuilder? HasTrigger(string modelName, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Returns a value indicating whether the trigger can be configured.
@@ -888,9 +955,7 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="modelName">The name of the trigger.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
-    bool CanHaveTrigger(
-        string modelName,
-        bool fromDataAnnotation = false);
+    bool CanHaveTrigger(string modelName, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Specifies a LINQ predicate expression that will automatically be applied to any queries targeting
@@ -902,7 +967,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the query filter was set,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionEntityTypeBuilder? HasQueryFilter(LambdaExpression? filter, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasQueryFilter(
+        LambdaExpression? filter,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given query filter can be set from the current configuration source.
@@ -921,7 +989,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the query was set, <see langword="null" /> otherwise.
     /// </returns>
     [Obsolete("Use InMemoryEntityTypeBuilderExtensions.ToInMemoryQuery")]
-    IConventionEntityTypeBuilder? HasDefiningQuery(LambdaExpression? query, bool fromDataAnnotation = false);
+    IConventionEntityTypeBuilder? HasDefiningQuery(
+        LambdaExpression? query,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given defining query can be set from the current configuration source.
@@ -947,7 +1018,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionEntityTypeBuilder? HasChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given change tracking strategy can be set from the current configuration source.
@@ -958,7 +1030,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given change tracking strategy can be set.</returns>
-    bool CanSetChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy, bool fromDataAnnotation = false);
+    bool CanSetChangeTrackingStrategy(
+        ChangeTrackingStrategy? changeTrackingStrategy,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for all properties of this entity type.
@@ -975,7 +1050,8 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionEntityTypeBuilder? UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="PropertyAccessMode" /> can be set from the current configuration source.
@@ -986,7 +1062,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the given <see cref="PropertyAccessMode" /> can be set.</returns>
-    bool CanSetPropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+    bool CanSetPropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the discriminator property used to identify which entity type each row in a table represents
@@ -1022,7 +1101,11 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="type">The type of values stored in the discriminator property.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>A builder that allows the discriminator property to be configured.</returns>
-    IConventionDiscriminatorBuilder? HasDiscriminator(string name, Type type, bool fromDataAnnotation = false);
+    IConventionDiscriminatorBuilder? HasDiscriminator(
+        string name,
+        Type type,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the discriminator property used to identify which entity type each row in a table represents
@@ -1031,7 +1114,10 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
     /// <param name="memberInfo">The property mapped to the discriminator property.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>A builder that allows the discriminator property to be configured.</returns>
-    IConventionDiscriminatorBuilder? HasDiscriminator(MemberInfo memberInfo, bool fromDataAnnotation = false);
+    IConventionDiscriminatorBuilder? HasDiscriminator(
+        MemberInfo memberInfo,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the discriminator property from this entity type.
@@ -1099,5 +1185,6 @@ public interface IConventionEntityTypeBuilder : IConventionAnnotatableBuilder
         MemberInfo navigationInfo,
         bool createIfMissing = true,
         bool? targetShouldBeOwned = null,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 }

@@ -10,16 +10,19 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.NamingStyles
 {
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<NamingStyleSetting>)), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IWorkspaceSettingsProviderFactory<NamingStyleSetting>)
+        ),
+        Shared
+    ]
     internal class NamingStyleSettingsWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStyleSettingsWorkspaceServiceFactory()
-        {
-        }
+        public NamingStyleSettingsWorkspaceServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new NamingStyleSettingsProviderFactory(workspaceServices.Workspace);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new NamingStyleSettingsProviderFactory(workspaceServices.Workspace);
     }
 }

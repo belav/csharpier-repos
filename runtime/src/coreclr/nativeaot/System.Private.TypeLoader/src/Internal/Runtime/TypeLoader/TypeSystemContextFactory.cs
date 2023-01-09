@@ -31,22 +31,25 @@ namespace Internal.Runtime.TypeLoader
                     return context;
                 }
             }
-            return new TypeLoaderTypeSystemContext(new TargetDetails(
+            return new TypeLoaderTypeSystemContext(
+                new TargetDetails(
 #if TARGET_ARM
-            TargetArchitecture.ARM,
+                    TargetArchitecture.ARM,
 #elif TARGET_ARM64
-            TargetArchitecture.ARM64,
+                    TargetArchitecture.ARM64,
 #elif TARGET_X86
-            TargetArchitecture.X86,
+                    TargetArchitecture.X86,
 #elif TARGET_AMD64
-            TargetArchitecture.X64,
+                    TargetArchitecture.X64,
 #elif TARGET_WASM
-            TargetArchitecture.Wasm32,
+                    TargetArchitecture.Wasm32,
 #else
 #error Unknown architecture
 #endif
-            TargetOS.Windows,
-            TargetAbi.Unknown));
+                    TargetOS.Windows,
+                    TargetAbi.Unknown
+                )
+            );
         }
 
         public static void Recycle(TypeSystemContext context)

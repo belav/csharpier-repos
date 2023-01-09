@@ -19,22 +19,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration;
 internal static class IncrementalGeneratorInitializationContextExtensions
 {
     public static IncrementalValuesProvider<T> ForAttributeWithSimpleName<T>(
-        this IncrementalGeneratorInitializationContext context, string simpleName)
-        where T : SyntaxNode
+        this IncrementalGeneratorInitializationContext context,
+        string simpleName
+    ) where T : SyntaxNode
     {
-        return context.SyntaxProvider.ForAttributeWithSimpleName(
-            simpleName,
-            (node, _) => node is T).SelectMany((t, _) => t.matches.Cast<T>()).WithTrackingName("result_ForAttribute");
+        return context.SyntaxProvider
+            .ForAttributeWithSimpleName(simpleName, (node, _) => node is T)
+            .SelectMany((t, _) => t.matches.Cast<T>())
+            .WithTrackingName("result_ForAttribute");
     }
 
     public static IncrementalValuesProvider<T> ForAttributeWithMetadataName<T>(
-        this IncrementalGeneratorInitializationContext context, string fullyQualifiedMetadataName)
-        where T : SyntaxNode
+        this IncrementalGeneratorInitializationContext context,
+        string fullyQualifiedMetadataName
+    ) where T : SyntaxNode
     {
         return context.SyntaxProvider.ForAttributeWithMetadataName(
             fullyQualifiedMetadataName,
             (node, _) => node is T,
-            (context, cancellationToken) => (T)context.TargetNode);
+            (context, cancellationToken) => (T)context.TargetNode
+        );
     }
 }
 
@@ -48,7 +52,8 @@ public class GeneratorDriverTests_Attributes_FullyQualifiedName : CSharpTestBase
     [Fact]
     public void FindCorrectAttributeOnTopLevelClass_WhenSearchingForClassDeclaration1()
     {
-        var source = @"
+        var source =
+            @"
 [N1.X]
 class C1 { }
 [N2.X]
@@ -65,22 +70,43 @@ namespace N2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("N1.XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "N1.XAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+                )
+        );
     }
 
     [Theory]
@@ -90,7 +116,8 @@ namespace N2
     [InlineData("N1.x")]
     public void DoNotFindAttributeOnTopLevelClass_WhenSearchingSimpleName1(string name)
     {
-        var source = @"
+        var source =
+            @"
 [N1.X]
 class C1 { }
 [N2.X]
@@ -107,17 +134,30 @@ namespace N2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(name);
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(name);
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
@@ -127,7 +167,8 @@ namespace N2
     [Fact]
     public void FindCorrectAttributeOnTopLevelClass_WhenSearchingForClassDeclaration2()
     {
-        var source = @"
+        var source =
+            @"
 [N1.X]
 class C1 { }
 [N2.X]
@@ -144,22 +185,43 @@ namespace N2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("N2.XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "N2.XAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+                )
+        );
     }
 
     [Theory]
@@ -169,27 +231,49 @@ namespace N2
     [InlineData("System.CLSCompliantAttribute(true)")]
     public void FindAssemblyAttribute1(string attribute)
     {
-        var source = @$"
+        var source =
+            @$"
 using System;
 [assembly: {attribute}]
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is CompilationUnitSyntax c && c.SyntaxTree == compilation.SyntaxTrees.Single()));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is CompilationUnitSyntax c
+                        && c.SyntaxTree == compilation.SyntaxTrees.Single()
+                )
+        );
     }
 
     [Theory]
@@ -199,27 +283,49 @@ using System;
     [InlineData("System.CLSCompliantAttribute(true)")]
     public void FindModuleAttribute1(string attribute)
     {
-        var source = @$"
+        var source =
+            @$"
 using System;
 [module: {attribute}]
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is CompilationUnitSyntax c && c.SyntaxTree == compilation.SyntaxTrees.Single()));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is CompilationUnitSyntax c
+                        && c.SyntaxTree == compilation.SyntaxTrees.Single()
+                )
+        );
     }
 
     [Theory]
@@ -227,26 +333,48 @@ using System;
     [InlineData("class WithoutAttributes { }")]
     public void FindAssemblyAttribute2(string source2)
     {
-        var source1 = @"
+        var source1 =
+            @"
 using System;
 [assembly: CLSCompliant(true)]
 ";
 
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(new[] { source1, source2 }, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            new[] { source1, source2 },
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is CompilationUnitSyntax c && c.SyntaxTree == compilation.SyntaxTrees.First()));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is CompilationUnitSyntax c
+                        && c.SyntaxTree == compilation.SyntaxTrees.First()
+                )
+        );
     }
 
     [Theory]
@@ -254,61 +382,111 @@ using System;
     [InlineData("class WithoutAttributes { }")]
     public void FindAssemblyAttribute3(string source1)
     {
-        var source2 = @"
+        var source2 =
+            @"
 using System;
 [assembly: CLSCompliant(true)]
 ";
 
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(new[] { source1, source2 }, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            new[] { source1, source2 },
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is CompilationUnitSyntax c && c.SyntaxTree == compilation.SyntaxTrees.Last()));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is CompilationUnitSyntax c
+                        && c.SyntaxTree == compilation.SyntaxTrees.Last()
+                )
+        );
     }
 
     [Fact]
     public void FindAssemblyAttribute4()
     {
-        var source1 = @"
+        var source1 =
+            @"
 using System;
 [assembly: CLSCompliant(true)]
 ";
-        var source2 = @"
+        var source2 =
+            @"
 using System;
 [assembly: CLSCompliant(false)]
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(new[] { source1, source2 }, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            new[] { source1, source2 },
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<CompilationUnitSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is CompilationUnitSyntax c && c.SyntaxTree == compilation.SyntaxTrees.First()),
-            step => Assert.True(step.Outputs.Single().Value is CompilationUnitSyntax c && c.SyntaxTree == compilation.SyntaxTrees.Last()));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is CompilationUnitSyntax c
+                        && c.SyntaxTree == compilation.SyntaxTrees.First()
+                ),
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is CompilationUnitSyntax c
+                        && c.SyntaxTree == compilation.SyntaxTrees.Last()
+                )
+        );
     }
 
     [Fact]
     public void FindTopLocalFunctionAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 [CLSCompliant(true)]
@@ -317,28 +495,50 @@ void LocalFunc()
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
+                )
+        );
     }
 
     [Fact]
     public void FindNestedLocalFunctionAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -353,28 +553,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
+                )
+        );
     }
 
     [Fact]
     public void FindNestedLocalFunctionAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -392,28 +614,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<LocalFunctionStatementSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is LocalFunctionStatementSyntax { Identifier.ValueText: "LocalFunc" }
+                )
+        );
     }
 
     [Fact]
     public void FindTypeParameterFunctionAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C<[CLSCompliant(true)] T>
@@ -421,28 +665,49 @@ class C<[CLSCompliant(true)] T>
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<TypeParameterSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<TypeParameterSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }
+                )
+        );
     }
 
     [Fact]
     public void FindMethodAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -454,28 +719,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is MethodDeclarationSyntax { Identifier.ValueText: "M" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is MethodDeclarationSyntax { Identifier.ValueText: "M" }
+                )
+        );
     }
 
     [Fact]
     public void FindMethodReturnAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -487,28 +774,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is MethodDeclarationSyntax { Identifier.ValueText: "M" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is MethodDeclarationSyntax { Identifier.ValueText: "M" }
+                )
+        );
     }
 
     [Fact]
     public void FindPartialMethodAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -519,28 +828,55 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is MethodDeclarationSyntax { Identifier.ValueText: "M", Body: null, ExpressionBody: null }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is MethodDeclarationSyntax
+                        {
+                            Identifier.ValueText: "M",
+                            Body: null,
+                            ExpressionBody: null
+                        }
+                )
+        );
     }
 
     [Fact]
     public void FindPartialMethodAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -551,28 +887,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<MethodDeclarationSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is MethodDeclarationSyntax { Identifier.ValueText: "M", Body: not null }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is MethodDeclarationSyntax { Identifier.ValueText: "M", Body: not null }
+                )
+        );
     }
 
     [Fact]
     public void FindFieldAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -582,28 +940,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
+                )
+        );
     }
 
     [Fact]
     public void FindFieldAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -613,30 +993,57 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.Collection(step.Outputs,
-                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }),
-                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" })));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.Collection(
+                    step.Outputs,
+                    v =>
+                        Assert.True(
+                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
+                        ),
+                    v =>
+                        Assert.True(
+                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" }
+                        )
+                )
+        );
     }
 
     [Fact]
     public void FindEventFieldAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -646,28 +1053,50 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
+                )
+        );
     }
 
     [Fact]
     public void FindEventFieldAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -677,57 +1106,102 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<VariableDeclaratorSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.Collection(step.Outputs,
-                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }),
-                v => Assert.True(v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" })));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.Collection(
+                    step.Outputs,
+                    v =>
+                        Assert.True(
+                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "m" }
+                        ),
+                    v =>
+                        Assert.True(
+                            v.Value is VariableDeclaratorSyntax { Identifier.ValueText: "n" }
+                        )
+                )
+        );
     }
 
     [Fact]
     public void FindParenthesizedLambdaAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 Func<int, int> v = [CLSCompliant(true)] (int i) => i;
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<LambdaExpressionSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<LambdaExpressionSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is LambdaExpressionSyntax));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step => Assert.True(step.Outputs.Single().Value is LambdaExpressionSyntax)
+        );
     }
 
     [Fact]
     public void FindAccessorAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C
@@ -740,28 +1214,53 @@ class C
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<AccessorDeclarationSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<AccessorDeclarationSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is AccessorDeclarationSyntax { RawKind: (int)SyntaxKind.GetAccessorDeclaration }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is AccessorDeclarationSyntax
+                        {
+                            RawKind: (int)SyntaxKind.GetAccessorDeclaration
+                        }
+                )
+        );
     }
 
     [Fact]
     public void FindTypeParameterAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 using System;
 
 class C<[CLSCompliant(true)]T>
@@ -769,28 +1268,49 @@ class C<[CLSCompliant(true)]T>
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<TypeParameterSyntax>("System.CLSCompliantAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<TypeParameterSyntax>(
+                    "System.CLSCompliantAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value is TypeParameterSyntax { Identifier.ValueText: "T" }
+                )
+        );
     }
 
     [Fact]
     public void FindNestedAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 [Outer1.Inner]
 class C1 { }
 [Outer2.Inner]
@@ -806,28 +1326,50 @@ class Outer2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("Outer1+InnerAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "Outer1+InnerAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+                )
+        );
     }
 
     [Fact]
     public void FindNestedAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 [Outer1.Inner]
 class C1 { }
 [Outer2.Inner]
@@ -843,28 +1385,50 @@ class Outer2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("Outer2+InnerAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "Outer2+InnerAttribute"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+                )
+        );
     }
 
     [Fact]
     public void FindNestedGenericAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 [Outer1.Inner<int>]
 class C1 { }
 [Outer2.Inner<int, string>]
@@ -880,28 +1444,50 @@ class Outer2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("Outer1+InnerAttribute`1");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "Outer1+InnerAttribute`1"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+                )
+        );
     }
 
     [Fact]
     public void FindNestedGenericAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 [Outer1.Inner<int>]
 class C1 { }
 [Outer2.Inner<int, string>]
@@ -917,28 +1503,50 @@ class Outer2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("Outer2+InnerAttribute`2");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "Outer2+InnerAttribute`2"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+                )
+        );
     }
 
     [Fact]
     public void DoNotFindNestedGenericAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 [Outer1.Inner<int>]
 class C1 { }
 [Outer2.Inner<int, string>]
@@ -954,17 +1562,32 @@ class Outer2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("Outer1+InnerAttribute`2");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "Outer1+InnerAttribute`2"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
@@ -974,7 +1597,8 @@ class Outer2
     [Fact]
     public void DoNotFindNestedGenericAttribute2()
     {
-        var source = @"
+        var source =
+            @"
 [Outer1.Inner<int>]
 class C1 { }
 [Outer2.Inner<int, string>]
@@ -990,17 +1614,32 @@ class Outer2
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("Outer2+InnerAttribute`1");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "Outer2+InnerAttribute`1"
+                );
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
@@ -1010,81 +1649,136 @@ class Outer2
     [Fact]
     public void FindAttributeOnTopLevelClass_WhenSearchingForClassDeclaration_MultipleAttributeLists1()
     {
-        var source = @"
+        var source =
+            @"
 [X][X]
 class C { }
 
 class XAttribute : System.Attribute { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
         var counter = 0;
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                "XAttribute",
-                (_, _) => true,
-                (ctx, _) =>
-                {
-                    Assert.True(ctx.Attributes.Length == 2);
-                    return (ClassDeclarationSyntax)ctx.TargetNode;
-                });
-            ctx.RegisterSourceOutput(input, (spc, node) => { counter++; });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "XAttribute",
+                    (_, _) => true,
+                    (ctx, _) =>
+                    {
+                        Assert.True(ctx.Attributes.Length == 2);
+                        return (ClassDeclarationSyntax)ctx.TargetNode;
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) =>
+                    {
+                        counter++;
+                    }
+                );
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
         Assert.Equal(1, counter);
     }
 
     [Fact]
     public void FindAttributeOnTopLevelClass_WhenSearchingForClassDeclaration_MultipleAttributeLists1B()
     {
-        var source = @"
+        var source =
+            @"
 [X, X]
 class C { }
 
 class XAttribute : System.Attribute { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
         var counter = 0;
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                "XAttribute",
-                (_, _) => true,
-                (ctx, _) =>
-                {
-                    Assert.True(ctx.Attributes.Length == 2);
-                    return (ClassDeclarationSyntax)ctx.TargetNode;
-                });
-            ctx.RegisterSourceOutput(input, (spc, node) => { counter++; });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "XAttribute",
+                    (_, _) => true,
+                    (ctx, _) =>
+                    {
+                        Assert.True(ctx.Attributes.Length == 2);
+                        return (ClassDeclarationSyntax)ctx.TargetNode;
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) =>
+                    {
+                        counter++;
+                    }
+                );
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
         Assert.Equal(1, counter);
     }
 
     [Fact]
     public void FindAttributeOnTopLevelClass_WhenSearchingForClassDeclaration_MultipleAttributeLists2()
     {
-        var source = @"
+        var source =
+            @"
 [X][Y]
 class C { }
 
@@ -1092,37 +1786,64 @@ class XAttribute : System.Attribute { }
 class YAttribute : System.Attribute { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
         var counter = 0;
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                "XAttribute",
-                (_, _) => true,
-                (ctx, _) =>
-                {
-                    Assert.True(ctx.Attributes.Length == 1);
-                    return (ClassDeclarationSyntax)ctx.TargetNode;
-                });
-            ctx.RegisterSourceOutput(input, (spc, node) => { counter++; });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "XAttribute",
+                    (_, _) => true,
+                    (ctx, _) =>
+                    {
+                        Assert.True(ctx.Attributes.Length == 1);
+                        return (ClassDeclarationSyntax)ctx.TargetNode;
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) =>
+                    {
+                        counter++;
+                    }
+                );
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
         Assert.Equal(1, counter);
     }
 
     [Fact]
     public void FindAttributeOnTopLevelClass_WhenSearchingForClassDeclaration_MultipleAttributeLists2B()
     {
-        var source = @"
+        var source =
+            @"
 [X, Y]
 class C { }
 
@@ -1130,37 +1851,64 @@ class XAttribute : System.Attribute { }
 class YAttribute : System.Attribute { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
         var counter = 0;
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                "XAttribute",
-                (_, _) => true,
-                (ctx, _) =>
-                {
-                    Assert.True(ctx.Attributes.Length == 1);
-                    return (ClassDeclarationSyntax)ctx.TargetNode;
-                });
-            ctx.RegisterSourceOutput(input, (spc, node) => { counter++; });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "XAttribute",
+                    (_, _) => true,
+                    (ctx, _) =>
+                    {
+                        Assert.True(ctx.Attributes.Length == 1);
+                        return (ClassDeclarationSyntax)ctx.TargetNode;
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) =>
+                    {
+                        counter++;
+                    }
+                );
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
         Assert.Equal(1, counter);
     }
 
     [Fact]
     public void FindAttributeOnTopLevelClass_WhenSearchingForClassDeclaration_MultipleAttributeLists3()
     {
-        var source = @"
+        var source =
+            @"
 [Y][X]
 class C { }
 
@@ -1168,37 +1916,64 @@ class XAttribute : System.Attribute { }
 class YAttribute : System.Attribute { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
         var counter = 0;
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                "XAttribute",
-                (_, _) => true,
-                (ctx, _) =>
-                {
-                    Assert.True(ctx.Attributes.Length == 1);
-                    return (ClassDeclarationSyntax)ctx.TargetNode;
-                });
-            ctx.RegisterSourceOutput(input, (spc, node) => { counter++; });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "XAttribute",
+                    (_, _) => true,
+                    (ctx, _) =>
+                    {
+                        Assert.True(ctx.Attributes.Length == 1);
+                        return (ClassDeclarationSyntax)ctx.TargetNode;
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) =>
+                    {
+                        counter++;
+                    }
+                );
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
         Assert.Equal(1, counter);
     }
 
     [Fact]
     public void FindAttributeOnTopLevelClass_WhenSearchingForClassDeclaration_MultipleAttributeLists3B()
     {
-        var source = @"
+        var source =
+            @"
 [Y, X]
 class C { }
 
@@ -1206,30 +1981,56 @@ class XAttribute : System.Attribute { }
 class YAttribute : System.Attribute { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
         var counter = 0;
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
-                "XAttribute",
-                (_, _) => true,
-                (ctx, _) =>
-                {
-                    Assert.True(ctx.Attributes.Length == 1);
-                    return (ClassDeclarationSyntax)ctx.TargetNode;
-                });
-            ctx.RegisterSourceOutput(input, (spc, node) => { counter++; });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.SyntaxProvider.ForAttributeWithMetadataName<ClassDeclarationSyntax>(
+                    "XAttribute",
+                    (_, _) => true,
+                    (ctx, _) =>
+                    {
+                        Assert.True(ctx.Attributes.Length == 1);
+                        return (ClassDeclarationSyntax)ctx.TargetNode;
+                    }
+                );
+                ctx.RegisterSourceOutput(
+                    input,
+                    (spc, node) =>
+                    {
+                        counter++;
+                    }
+                );
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
         Assert.Equal(1, counter);
     }
 
@@ -1242,7 +2043,8 @@ class YAttribute : System.Attribute { }
     [Fact]
     public void RerunOnSameCompilationCachesResultFully()
     {
-        var source = @"
+        var source =
+            @"
 [X]
 class C { }
 
@@ -1251,45 +2053,115 @@ class XAttribute : System.Attribute
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
         // re-run without changes
         driver = driver.RunGenerators(compilation);
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
     }
 
     [Fact]
     public void RerunWithReferencesChange()
     {
-        var source = @"
+        var source =
+            @"
 [X]
 class C { }
 
@@ -1298,45 +2170,115 @@ class XAttribute : System.Attribute
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
         // re-run without changes
         driver = driver.RunGenerators(compilation.RemoveAllReferences());
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Modified, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Modified,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
     }
 
     [Fact]
     public void RerunWithAddedFile1()
     {
-        var source = @"
+        var source =
+            @"
 [X]
 class C { }
 
@@ -1345,199 +2287,489 @@ class XAttribute : System.Attribute
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        driver = driver.RunGenerators(compilation.AddSyntaxTrees(compilation.SyntaxTrees.First().WithChangedText(SourceText.From(""))));
+        driver = driver.RunGenerators(
+            compilation.AddSyntaxTrees(
+                compilation.SyntaxTrees.First().WithChangedText(SourceText.From(""))
+            )
+        );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
-            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason));
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Modified, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
+            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason)
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Modified,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
     }
 
     [Fact]
     public void RerunWithAddedFile2()
     {
-        var source = @"
+        var source =
+            @"
 [X]
 class C { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
         Assert.False(runResult.TrackedSteps.ContainsKey("result_ForAttributeWithMetadataName"));
 
-        driver = driver.RunGenerators(compilation.AddSyntaxTrees(compilation.SyntaxTrees.First().WithChangedText(SourceText.From(@"
+        driver = driver.RunGenerators(
+            compilation.AddSyntaxTrees(
+                compilation.SyntaxTrees
+                    .First()
+                    .WithChangedText(
+                        SourceText.From(
+                            @"
 class XAttribute : System.Attribute
 {
-}"))));
+}"
+                        )
+                    )
+            )
+        );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
-            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason));
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Modified, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Modified, runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
+            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason)
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Modified,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Modified,
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
     }
 
     [Fact]
     public void RerunWithAddedFile_MultipleResults_SameFile1()
     {
-        var source = @"
+        var source =
+            @"
 [X]
 class C1 { }
 [X]
 class C2 { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
         Assert.False(runResult.TrackedSteps.ContainsKey("result_ForAttributeWithMetadataName"));
 
-        driver = driver.RunGenerators(compilation.AddSyntaxTrees(compilation.SyntaxTrees.First().WithChangedText(SourceText.From(@"
+        driver = driver.RunGenerators(
+            compilation.AddSyntaxTrees(
+                compilation.SyntaxTrees
+                    .First()
+                    .WithChangedText(
+                        SourceText.From(
+                            @"
 class XAttribute : System.Attribute
 {
-}"))));
+}"
+                        )
+                    )
+            )
+        );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.Collection(step.Outputs,
-                t => Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }),
-                t => Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" })));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.Collection(
+                    step.Outputs,
+                    t =>
+                        Assert.True(
+                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+                        ),
+                    t =>
+                        Assert.True(
+                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+                        )
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
-            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason));
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs,
-            t => Assert.Equal(IncrementalStepRunReason.Cached, t.Reason));
-        Assert.Equal(IncrementalStepRunReason.Modified, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs,
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
+            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason)
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs,
+            t => Assert.Equal(IncrementalStepRunReason.Cached, t.Reason)
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Modified,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs,
             t => Assert.Equal(IncrementalStepRunReason.Modified, t.Reason),
-            t => Assert.Equal(IncrementalStepRunReason.Modified, t.Reason));
+            t => Assert.Equal(IncrementalStepRunReason.Modified, t.Reason)
+        );
     }
 
     [Fact]
     public void RerunWithAddedFile_MultipleResults_MultipleFile1()
     {
-        var source1 = @"
+        var source1 =
+            @"
 [X]
 class C1 { }
 ";
-        var source2 = @"
+        var source2 =
+            @"
 [X]
 class C2 { }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(new[] { source1, source2 }, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            new[] { source1, source2 },
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
         Assert.False(runResult.TrackedSteps.ContainsKey("result_ForAttributeWithMetadataName"));
 
-        driver = driver.RunGenerators(compilation.AddSyntaxTrees(compilation.SyntaxTrees.First().WithChangedText(SourceText.From(@"
+        driver = driver.RunGenerators(
+            compilation.AddSyntaxTrees(
+                compilation.SyntaxTrees
+                    .First()
+                    .WithChangedText(
+                        SourceText.From(
+                            @"
 class XAttribute : System.Attribute
 {
-}"))));
+}"
+                        )
+                    )
+            )
+        );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.Collection(step.Outputs, t => Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" })),
-            step => Assert.Collection(step.Outputs, t => Assert.True(t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" })));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.Collection(
+                    step.Outputs,
+                    t =>
+                        Assert.True(
+                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C1" }
+                        )
+                ),
+            step =>
+                Assert.Collection(
+                    step.Outputs,
+                    t =>
+                        Assert.True(
+                            t.Value is ClassDeclarationSyntax { Identifier.ValueText: "C2" }
+                        )
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
             o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason),
-            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason));
-        Assert.Collection(runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"],
+            o => Assert.Equal(IncrementalStepRunReason.Unchanged, o.Reason)
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"],
             s => Assert.Equal(IncrementalStepRunReason.Cached, s.Outputs.Single().Reason),
-            s => Assert.Equal(IncrementalStepRunReason.Cached, s.Outputs.Single().Reason));
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeInternal"],
+            s => Assert.Equal(IncrementalStepRunReason.Cached, s.Outputs.Single().Reason)
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeInternal"],
             s => Assert.Equal(IncrementalStepRunReason.Cached, s.Outputs.Single().Reason),
-            s => Assert.Equal(IncrementalStepRunReason.Cached, s.Outputs.Single().Reason));
-        Assert.Collection(runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"],
+            s => Assert.Equal(IncrementalStepRunReason.Cached, s.Outputs.Single().Reason)
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"],
             s => Assert.Equal(IncrementalStepRunReason.Modified, s.Outputs.Single().Reason),
-            s => Assert.Equal(IncrementalStepRunReason.Modified, s.Outputs.Single().Reason));
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            s => Assert.Equal(IncrementalStepRunReason.Modified, s.Outputs.Single().Reason)
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
             s => Assert.Equal(IncrementalStepRunReason.Modified, s.Outputs.Single().Reason),
-            s => Assert.Equal(IncrementalStepRunReason.Modified, s.Outputs.Single().Reason));
+            s => Assert.Equal(IncrementalStepRunReason.Modified, s.Outputs.Single().Reason)
+        );
     }
 
     [Fact]
     public void RerunWithChangedFileThatNowReferencesAttribute1()
     {
-        var source = @"
+        var source =
+            @"
 class C { }
 
 class XAttribute : System.Attribute
@@ -1545,95 +2777,240 @@ class XAttribute : System.Attribute
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(source, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            source,
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
         Assert.Single(compilation.SyntaxTrees);
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
         Assert.False(runResult.TrackedSteps.ContainsKey("result_ForAttributeWithMetadataName"));
 
-        driver = driver.RunGenerators(compilation.ReplaceSyntaxTree(
-            compilation.SyntaxTrees.First(),
-            compilation.SyntaxTrees.First().WithChangedText(SourceText.From(@"
+        driver = driver.RunGenerators(
+            compilation.ReplaceSyntaxTree(
+                compilation.SyntaxTrees.First(),
+                compilation.SyntaxTrees
+                    .First()
+                    .WithChangedText(
+                        SourceText.From(
+                            @"
 [X]
 class C { }
 
 class XAttribute : System.Attribute
 {
 }
-"))));
+"
+                        )
+                    )
+            )
+        );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Modified, runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Modified,
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
     }
 
     [Fact]
     public void RerunWithChangedFileThatNowReferencesAttribute2()
     {
-        var source1 = @"
+        var source1 =
+            @"
 class C { }
 ";
-        var source2 = @"
+        var source2 =
+            @"
 class XAttribute : System.Attribute
 {
 }
 ";
         var parseOptions = TestOptions.RegularPreview;
-        Compilation compilation = CreateCompilation(new[] { source1, source2 }, options: TestOptions.DebugDllThrowing, parseOptions: parseOptions);
+        Compilation compilation = CreateCompilation(
+            new[] { source1, source2 },
+            options: TestOptions.DebugDllThrowing,
+            parseOptions: parseOptions
+        );
 
-        var generator = new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(ctx =>
-        {
-            var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
-            ctx.RegisterSourceOutput(input, (spc, node) => { });
-        }));
+        var generator = new IncrementalGeneratorWrapper(
+            new PipelineCallbackGenerator(ctx =>
+            {
+                var input = ctx.ForAttributeWithMetadataName<ClassDeclarationSyntax>("XAttribute");
+                ctx.RegisterSourceOutput(input, (spc, node) => { });
+            })
+        );
 
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(new ISourceGenerator[] { generator }, parseOptions: parseOptions, driverOptions: new GeneratorDriverOptions(IncrementalGeneratorOutputKind.None, trackIncrementalGeneratorSteps: true));
+        GeneratorDriver driver = CSharpGeneratorDriver.Create(
+            new ISourceGenerator[] { generator },
+            parseOptions: parseOptions,
+            driverOptions: new GeneratorDriverOptions(
+                IncrementalGeneratorOutputKind.None,
+                trackIncrementalGeneratorSteps: true
+            )
+        );
         driver = driver.RunGenerators(compilation);
         var runResult = driver.GetRunResult().Results[0];
 
         Assert.False(runResult.TrackedSteps.ContainsKey("result_ForAttributeWithMetadataName"));
 
-        driver = driver.RunGenerators(compilation.ReplaceSyntaxTree(
-            compilation.SyntaxTrees.First(),
-            compilation.SyntaxTrees.First().WithChangedText(SourceText.From(@"
+        driver = driver.RunGenerators(
+            compilation.ReplaceSyntaxTree(
+                compilation.SyntaxTrees.First(),
+                compilation.SyntaxTrees
+                    .First()
+                    .WithChangedText(
+                        SourceText.From(
+                            @"
 [X]
 class C { }
-"))));
+"
+                        )
+                    )
+            )
+        );
         runResult = driver.GetRunResult().Results[0];
 
-        Assert.Collection(runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
-            step => Assert.True(step.Outputs.Single().Value is ClassDeclarationSyntax { Identifier.ValueText: "C" }));
+        Assert.Collection(
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"],
+            step =>
+                Assert.True(
+                    step.Outputs.Single().Value
+                        is ClassDeclarationSyntax { Identifier.ValueText: "C" }
+                )
+        );
 
-        Assert.False(runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute"));
-        Assert.Equal(IncrementalStepRunReason.Unchanged, runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.Cached, runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Collection(runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
-            o => Assert.Equal(IncrementalStepRunReason.Modified, o.Reason));
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
-        Assert.Equal(IncrementalStepRunReason.New, runResult.TrackedSteps["result_ForAttributeWithMetadataName"].Single().Outputs.Single().Reason);
+        Assert.False(
+            runResult.TrackedSteps.ContainsKey("individualFileGlobalAliases_ForAttribute")
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Unchanged,
+            runResult.TrackedSteps["collectedGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["compilationGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.Cached,
+            runResult.TrackedSteps["allUpGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Collection(
+            runResult.TrackedSteps["compilationUnit_ForAttribute"].Single().Outputs,
+            o => Assert.Equal(IncrementalStepRunReason.Modified, o.Reason)
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["compilationUnitAndGlobalAliases_ForAttribute"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["result_ForAttributeInternal"].Single().Outputs.Single().Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["compilationAndGroupedNodes_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
+        Assert.Equal(
+            IncrementalStepRunReason.New,
+            runResult.TrackedSteps["result_ForAttributeWithMetadataName"]
+                .Single()
+                .Outputs.Single()
+                .Reason
+        );
     }
 
     #endregion

@@ -106,7 +106,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             var safeHandle = new FakeSafeWinHttpHandle(true);
             safeHandle.Dispose();
             Assert.Throws<ObjectDisposedException>(() =>
-                { bool ignore = false; safeHandle.DangerousAddRef(ref ignore); });
+            {
+                bool ignore = false;
+                safeHandle.DangerousAddRef(ref ignore);
+            });
         }
 
         [Fact]

@@ -10,7 +10,6 @@ using System.Linq;
 using TypeOfRepo;
 using System.Runtime.CompilerServices;
 
-
 public class FieldLayoutTests
 {
     public abstract class BaseType<T>
@@ -18,7 +17,7 @@ public class FieldLayoutTests
         public T _field;
         public abstract void SetField(T value);
     }
-    
+
     public class DerivedType<T> : BaseType<T>
     {
         public override void SetField(T value)
@@ -31,10 +30,15 @@ public class FieldLayoutTests
     {
         int AsInt();
     }
+
     public struct StructTypeNotUsedAsANullable : IIntegerable
     {
         public int IntegerValue;
-        public int AsInt() { return IntegerValue; }
+
+        public int AsInt()
+        {
+            return IntegerValue;
+        }
     }
 
     public abstract class NonGenericBaseType
@@ -48,9 +52,20 @@ public class FieldLayoutTests
     {
         public T? _field;
 
-        public override int IntegerifyField() { return _field.Value.AsInt(); }
-        public override object BoxField() { return _field; }
-        public override void SetFieldFromObject(object obj) { _field = (T?)obj; }
+        public override int IntegerifyField()
+        {
+            return _field.Value.AsInt();
+        }
+
+        public override object BoxField()
+        {
+            return _field;
+        }
+
+        public override void SetFieldFromObject(object obj)
+        {
+            _field = (T?)obj;
+        }
     }
 
     [TestMethod]
@@ -58,7 +73,7 @@ public class FieldLayoutTests
     {
         // In this test, the code used for DerivedType<long>.SetField will be universal canon, thus using the runtime
         // calculation of field layout, and the value will then be read by using the compiler definition of field layout
-        // (in the use of bt._field). This allows us to see that variables of type long will be properly aligned on 
+        // (in the use of bt._field). This allows us to see that variables of type long will be properly aligned on
         // x86 platforms (this is a regression test)
         Type derivedType = typeof(DerivedType<>).MakeGenericType(TypeOf.Long);
         BaseType<long> bt = (BaseType<long>)Activator.CreateInstance(derivedType);
@@ -73,7 +88,7 @@ public class FieldLayoutTests
     {
         // In this test, the code used for DerivedType<long>.SetField will be universal canon, thus using the runtime
         // calculation of field layout, and the value will then be read by using the compiler definition of field layout
-        // (in the use of bt._field). This allows us to see that variables of type long will be properly aligned on 
+        // (in the use of bt._field). This allows us to see that variables of type long will be properly aligned on
         // x86 platforms (this is a regression test)
         Type derivedType = typeof(DerivedType<>).MakeGenericType(TypeOf.Int64Enum);
         BaseType<Int64Enum> bt = (BaseType<Int64Enum>)Activator.CreateInstance(derivedType);
@@ -88,12 +103,15 @@ public class FieldLayoutTests
     {
         StructTypeNotUsedAsANullable someStruct = new StructTypeNotUsedAsANullable();
         someStruct.IntegerValue = 0x12345678;
-        
-        Type derivedType = typeof(DerivedTypeNullableThing<>).MakeGenericType(TypeOf.FieldLayout_StructTypeNotUsedAsANullable);
+
+        Type derivedType = typeof(DerivedTypeNullableThing<>).MakeGenericType(
+            TypeOf.FieldLayout_StructTypeNotUsedAsANullable
+        );
         NonGenericBaseType baseType = (NonGenericBaseType)Activator.CreateInstance(derivedType);
         baseType.SetFieldFromObject(someStruct);
         Assert.AreEqual(someStruct.IntegerValue, baseType.IntegerifyField());
-        StructTypeNotUsedAsANullable someStruct2 = (StructTypeNotUsedAsANullable)baseType.BoxField();
+        StructTypeNotUsedAsANullable someStruct2 = (StructTypeNotUsedAsANullable)
+            baseType.BoxField();
         Assert.AreEqual(someStruct.IntegerValue, someStruct2.IntegerValue);
     }
 }

@@ -6,7 +6,7 @@
 public static class CommandExtensions
 {
     private const string _messageForWhenGeneratorIsNotInUse =
-            "This overload should not be called. You should reference the System.CommandLine.Generator package which will generate a more specific overload for your delegate.";
+        "This overload should not be called. You should reference the System.CommandLine.Generator package which will generate a more specific overload for your delegate.";
 
     /// <summary>
     /// Sets a command handler.
@@ -18,9 +18,9 @@ public static class CommandExtensions
     public static void SetHandler<TDelegate>(
         this Command command,
         TDelegate @delegate,
-        params Symbol[] symbols)
+        params Symbol[] symbols
+    )
     {
         throw new InvalidOperationException(_messageForWhenGeneratorIsNotInUse);
     }
 }
-

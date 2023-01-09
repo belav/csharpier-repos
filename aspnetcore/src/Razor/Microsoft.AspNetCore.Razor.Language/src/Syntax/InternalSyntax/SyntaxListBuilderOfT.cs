@@ -8,9 +8,7 @@ internal readonly struct SyntaxListBuilder<TNode> where TNode : GreenNode
     private readonly SyntaxListBuilder _builder;
 
     public SyntaxListBuilder(int size)
-        : this(new SyntaxListBuilder(size))
-    {
-    }
+        : this(new SyntaxListBuilder(size)) { }
 
     public static SyntaxListBuilder<TNode> Create()
     {
@@ -24,31 +22,18 @@ internal readonly struct SyntaxListBuilder<TNode> where TNode : GreenNode
 
     public bool IsNull
     {
-        get
-        {
-            return _builder == null;
-        }
+        get { return _builder == null; }
     }
 
     public int Count
     {
-        get
-        {
-            return _builder.Count;
-        }
+        get { return _builder.Count; }
     }
 
     public TNode this[int index]
     {
-        get
-        {
-            return (TNode)_builder[index];
-        }
-
-        set
-        {
-            _builder[index] = value;
-        }
+        get { return (TNode)_builder[index]; }
+        set { _builder[index] = value; }
     }
 
     public void Clear()

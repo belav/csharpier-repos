@@ -17,38 +17,65 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
     {
         internal static NotSupportedException Create(Type? pertainant)
         {
-            return CreateFromMetadataObject(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant);
+            return CreateFromMetadataObject(
+                SR.Reflection_InsufficientMetadata_EdbNeeded,
+                pertainant
+            );
         }
 
         private static NotSupportedException CreateFromString(string? pertainant)
         {
             if (pertainant == null)
-                return new NotSupportedException(SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>"));
+                return new NotSupportedException(
+                    SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>")
+                );
             else
-                return new NotSupportedException(SR.Format(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant));
+                return new NotSupportedException(
+                    SR.Format(SR.Reflection_InsufficientMetadata_EdbNeeded, pertainant)
+                );
         }
 
-        internal static NotSupportedException CreateMissingArrayTypeException(Type elementType, bool isMultiDim, int rank)
+        internal static NotSupportedException CreateMissingArrayTypeException(
+            Type elementType,
+            bool isMultiDim,
+            int rank
+        )
         {
             Debug.Assert(rank == 1 || isMultiDim);
             string s = CreateArrayTypeStringIfAvailable(elementType, rank);
             return CreateFromString(s);
         }
 
-        internal static NotSupportedException CreateMissingConstructedGenericTypeException(Type genericTypeDefinition, Type[] genericTypeArguments)
+        internal static NotSupportedException CreateMissingConstructedGenericTypeException(
+            Type genericTypeDefinition,
+            Type[] genericTypeArguments
+        )
         {
-            string s = CreateConstructedGenericTypeStringIfAvailable(genericTypeDefinition, genericTypeArguments);
+            string s = CreateConstructedGenericTypeStringIfAvailable(
+                genericTypeDefinition,
+                genericTypeArguments
+            );
             return CreateFromString(s);
         }
 
-        internal static NotSupportedException CreateFromMetadataObject(string resourceId, Type? pertainant)
+        internal static NotSupportedException CreateFromMetadataObject(
+            string resourceId,
+            Type? pertainant
+        )
         {
             if (pertainant == null)
-                return new NotSupportedException(SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>"));
+                return new NotSupportedException(
+                    SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, "<unavailable>")
+                );
 
             string usefulPertainant = pertainant.ToDisplayStringIfAvailable();
             if (usefulPertainant == null)
-                return new NotSupportedException(SR.Format(SR.Reflection_InsufficientMetadata_NoHelpAvailable, pertainant.ToString()));
+                return new NotSupportedException(
+                    SR.Format(
+                        SR.Reflection_InsufficientMetadata_NoHelpAvailable,
+                        pertainant.ToString()
+                    )
+                );
             else
                 return new NotSupportedException(SR.Format(resourceId, usefulPertainant));
         }
@@ -56,7 +83,9 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
         public static string ComputeUsefulPertainantIfPossible(MemberInfo memberInfo)
         {
             {
-                StringBuilder friendlyName = new StringBuilder(memberInfo.DeclaringType.ToDisplayStringIfAvailable());
+                StringBuilder friendlyName = new StringBuilder(
+                    memberInfo.DeclaringType.ToDisplayStringIfAvailable()
+                );
                 friendlyName.Append('.');
                 friendlyName.Append(memberInfo.Name);
                 if (memberInfo is MethodBase method)
@@ -99,7 +128,8 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
 
         internal static string ToDisplayStringIfAvailable(this Type type)
         {
-            RuntimeTypeHandle runtimeTypeHandle = ReflectionCoreExecution.ExecutionDomain.GetTypeHandleIfAvailable(type);
+            RuntimeTypeHandle runtimeTypeHandle =
+                ReflectionCoreExecution.ExecutionDomain.GetTypeHandleIfAvailable(type);
             bool hasRuntimeTypeHandle = !runtimeTypeHandle.Equals(default(RuntimeTypeHandle));
 
             if (type.HasElementType)
@@ -122,7 +152,12 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     return s + (type.IsPointer ? "*" : "&");
                 }
             }
-            else if (((hasRuntimeTypeHandle && RuntimeAugments.IsGenericType(runtimeTypeHandle)) || type.IsConstructedGenericType))
+            else if (
+                (
+                    (hasRuntimeTypeHandle && RuntimeAugments.IsGenericType(runtimeTypeHandle))
+                    || type.IsConstructedGenericType
+                )
+            )
             {
                 Type genericTypeDefinition;
                 Type[] genericTypeArguments;
@@ -131,11 +166,16 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     RuntimeTypeHandle genericTypeDefinitionHandle;
                     RuntimeTypeHandle[] genericTypeArgumentHandles;
 
-                    genericTypeDefinitionHandle = RuntimeAugments.GetGenericInstantiation(runtimeTypeHandle, out genericTypeArgumentHandles);
+                    genericTypeDefinitionHandle = RuntimeAugments.GetGenericInstantiation(
+                        runtimeTypeHandle,
+                        out genericTypeArgumentHandles
+                    );
                     genericTypeDefinition = Type.GetTypeFromHandle(genericTypeDefinitionHandle);
                     genericTypeArguments = new Type[genericTypeArgumentHandles.Length];
                     for (int i = 0; i < genericTypeArguments.Length; i++)
-                        genericTypeArguments[i] = Type.GetTypeFromHandle(genericTypeArgumentHandles[i]);
+                        genericTypeArguments[i] = Type.GetTypeFromHandle(
+                            genericTypeArgumentHandles[i]
+                        );
                 }
                 else
                 {
@@ -143,7 +183,10 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
                     genericTypeArguments = type.GenericTypeArguments;
                 }
 
-                return CreateConstructedGenericTypeStringIfAvailable(genericTypeDefinition, genericTypeArguments);
+                return CreateConstructedGenericTypeStringIfAvailable(
+                    genericTypeDefinition,
+                    genericTypeArguments
+                );
             }
             else if (type.IsGenericParameter)
             {
@@ -152,7 +195,12 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             else if (hasRuntimeTypeHandle)
             {
                 string s;
-                if (!DiagnosticMappingTables.TryGetDiagnosticStringForNamedType(runtimeTypeHandle, out s))
+                if (
+                    !DiagnosticMappingTables.TryGetDiagnosticStringForNamedType(
+                        runtimeTypeHandle,
+                        out s
+                    )
+                )
                     return null;
 
                 return s;
@@ -169,10 +217,13 @@ namespace Internal.Reflection.Execution.PayForPlayExperience
             if (s == null)
                 return null;
 
-            return s + "[" + new string(',', rank - 1) + "]";  // This does not bother to display multidims of rank 1 correctly since we bail on that case in the prior statement.
+            return s + "[" + new string(',', rank - 1) + "]"; // This does not bother to display multidims of rank 1 correctly since we bail on that case in the prior statement.
         }
 
-        private static string CreateConstructedGenericTypeStringIfAvailable(Type genericTypeDefinition, Type[] genericTypeArguments)
+        private static string CreateConstructedGenericTypeStringIfAvailable(
+            Type genericTypeDefinition,
+            Type[] genericTypeArguments
+        )
         {
             string genericTypeDefinitionString = genericTypeDefinition.ToDisplayStringIfAvailable();
 

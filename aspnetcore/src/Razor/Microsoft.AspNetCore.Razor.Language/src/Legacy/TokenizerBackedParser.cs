@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Razor.Language.Syntax.InternalSyntax;
 
 namespace Microsoft.AspNetCore.Razor.Language.Legacy;
 
-internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
-    where TTokenizer : Tokenizer
+internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase where TTokenizer : Tokenizer
 {
     private readonly SyntaxListPool _pool = new SyntaxListPool();
     private readonly TokenizerView<TTokenizer> _tokenizer;
@@ -32,12 +31,17 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
         return IsSpacingToken(token) || token.Kind == SyntaxKind.CSharpComment;
     };
 
-    protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingNewLinesAndComments = (token) =>
+    protected static readonly Func<SyntaxToken, bool> IsSpacingTokenIncludingNewLinesAndComments = (
+        token
+    ) =>
     {
         return IsSpacingTokenIncludingNewLines(token) || token.Kind == SyntaxKind.CSharpComment;
     };
 
-    protected TokenizerBackedParser(LanguageCharacteristics<TTokenizer> language, ParserContext context)
+    protected TokenizerBackedParser(
+        LanguageCharacteristics<TTokenizer> language,
+        ParserContext context
+    )
         : base(context)
     {
         Language = language;
@@ -277,8 +281,10 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
         var tokenFound = false;
         var whitespace = ReadWhile(
             static (token, includeNewLines) =>
-                token.Kind == SyntaxKind.Whitespace || (includeNewLines && token.Kind == SyntaxKind.NewLine),
-            includeNewLines);
+                token.Kind == SyntaxKind.Whitespace
+                || (includeNewLines && token.Kind == SyntaxKind.NewLine),
+            includeNewLines
+        );
         tokenFound = At(kind);
 
         PutCurrentBack();
@@ -298,10 +304,13 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
         return true;
     }
 
-    protected internal IReadOnlyList<SyntaxToken> ReadWhile(Func<SyntaxToken, bool> condition)
-        => ReadWhile(static (token, condition) => condition(token), condition);
+    protected internal IReadOnlyList<SyntaxToken> ReadWhile(Func<SyntaxToken, bool> condition) =>
+        ReadWhile(static (token, condition) => condition(token), condition);
 
-    protected internal IReadOnlyList<SyntaxToken> ReadWhile<TArg>(Func<SyntaxToken, TArg, bool> condition, TArg arg)
+    protected internal IReadOnlyList<SyntaxToken> ReadWhile<TArg>(
+        Func<SyntaxToken, TArg, bool> condition,
+        TArg arg
+    )
     {
         if (!EnsureCurrent() || !condition(CurrentToken, arg))
         {
@@ -313,24 +322,27 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
         {
             result.Add(CurrentToken);
             NextToken();
-        }
-        while (EnsureCurrent() && condition(CurrentToken, arg));
+        } while (EnsureCurrent() && condition(CurrentToken, arg));
 
         return result;
     }
 
     protected bool AtIdentifier(bool allowKeywords)
     {
-        return CurrentToken != null &&
-               (Language.IsIdentifier(CurrentToken) ||
-                (allowKeywords && Language.IsKeyword(CurrentToken)));
+        return CurrentToken != null
+            && (
+                Language.IsIdentifier(CurrentToken)
+                || (allowKeywords && Language.IsKeyword(CurrentToken))
+            );
     }
 
     protected RazorCommentBlockSyntax ParseRazorComment()
     {
-        if (!Language.KnowsTokenType(KnownTokenType.CommentStart) ||
-            !Language.KnowsTokenType(KnownTokenType.CommentStar) ||
-            !Language.KnowsTokenType(KnownTokenType.CommentBody))
+        if (
+            !Language.KnowsTokenType(KnownTokenType.CommentStart)
+            || !Language.KnowsTokenType(KnownTokenType.CommentStar)
+            || !Language.KnowsTokenType(KnownTokenType.CommentBody)
+        )
         {
             throw new InvalidOperationException(Resources.Language_Does_Not_Support_RazorComment);
         }
@@ -352,7 +364,11 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
             if (endStar == null)
             {
                 var diagnostic = RazorDiagnosticFactory.CreateParsing_RazorCommentNotTerminated(
-                    new SourceSpan(start, contentLength: 2 /* @* */));
+                    new SourceSpan(
+                        start,
+                        contentLength: 2 /* @* */
+                    )
+                );
                 endStar = SyntaxFactory.MissingToken(SyntaxKind.RazorCommentStar, diagnostic);
                 Context.ErrorSink.OnError(diagnostic);
             }
@@ -362,15 +378,28 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
                 if (!endStar.IsMissing)
                 {
                     var diagnostic = RazorDiagnosticFactory.CreateParsing_RazorCommentNotTerminated(
-                        new SourceSpan(start, contentLength: 2 /* @* */));
+                        new SourceSpan(
+                            start,
+                            contentLength: 2 /* @* */
+                        )
+                    );
                     Context.ErrorSink.OnError(diagnostic);
-                    endTransition = SyntaxFactory.MissingToken(SyntaxKind.RazorCommentTransition, diagnostic);
+                    endTransition = SyntaxFactory.MissingToken(
+                        SyntaxKind.RazorCommentTransition,
+                        diagnostic
+                    );
                 }
 
                 endTransition = SyntaxFactory.MissingToken(SyntaxKind.RazorCommentTransition);
             }
 
-            commentBlock = SyntaxFactory.RazorCommentBlock(startTransition, startStar, comment, endStar, endTransition);
+            commentBlock = SyntaxFactory.RazorCommentBlock(
+                startTransition,
+                startStar,
+                comment,
+                endStar,
+                endTransition
+            );
 
             // Make sure we generate a marker symbol after a comment if necessary.
             if (!comment.IsMissing || !endStar.IsMissing || !endTransition.IsMissing)
@@ -426,12 +455,19 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
     // We want to avoid array allocations and enumeration where possible, so we use the same technique as string.Format
     protected internal void AcceptWhile(SyntaxKind type1, SyntaxKind type2)
     {
-        AcceptWhile(static (token, arg) => arg.type1 == token.Kind || arg.type2 == token.Kind, (type1, type2));
+        AcceptWhile(
+            static (token, arg) => arg.type1 == token.Kind || arg.type2 == token.Kind,
+            (type1, type2)
+        );
     }
 
     protected internal void AcceptWhile(SyntaxKind type1, SyntaxKind type2, SyntaxKind type3)
     {
-        AcceptWhile(static (token, arg) => arg.type1 == token.Kind || arg.type2 == token.Kind || arg.type3 == token.Kind, (type1, type2, type3));
+        AcceptWhile(
+            static (token, arg) =>
+                arg.type1 == token.Kind || arg.type2 == token.Kind || arg.type3 == token.Kind,
+            (type1, type2, type3)
+        );
     }
 
     protected internal void AcceptWhile(params SyntaxKind[] types)
@@ -447,12 +483,19 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
     // We want to avoid array allocations and enumeration where possible, so we use the same technique as string.Format
     protected internal void AcceptUntil(SyntaxKind type1, SyntaxKind type2)
     {
-        AcceptWhile(static (token, arg) => arg.type1 != token.Kind && arg.type2 != token.Kind, (type1, type2));
+        AcceptWhile(
+            static (token, arg) => arg.type1 != token.Kind && arg.type2 != token.Kind,
+            (type1, type2)
+        );
     }
 
     protected internal void AcceptUntil(SyntaxKind type1, SyntaxKind type2, SyntaxKind type3)
     {
-        AcceptWhile(static (token, arg) => arg.type1 != token.Kind && arg.type2 != token.Kind && arg.type3 != token.Kind, (type1, type2, type3));
+        AcceptWhile(
+            static (token, arg) =>
+                arg.type1 != token.Kind && arg.type2 != token.Kind && arg.type3 != token.Kind,
+            (type1, type2, type3)
+        );
     }
 
     protected internal void AcceptUntil(params SyntaxKind[] types)
@@ -567,7 +610,10 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
 
     protected internal void AcceptMarkerTokenIfNecessary()
     {
-        if (TokenBuilder.Count == 0 && Context.LastAcceptedCharacters != AcceptedCharactersInternal.Any)
+        if (
+            TokenBuilder.Count == 0
+            && Context.LastAcceptedCharacters != AcceptedCharactersInternal.Any
+        )
         {
             Accept(Language.CreateMarkerToken());
         }
@@ -595,7 +641,10 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
         return GetNodeWithSpanContext(SyntaxFactory.MarkupEphemeralTextLiteral(tokens));
     }
 
-    protected RazorMetaCodeSyntax OutputAsMetaCode(SyntaxList<SyntaxToken> tokens, AcceptedCharactersInternal? accepted = null)
+    protected RazorMetaCodeSyntax OutputAsMetaCode(
+        SyntaxList<SyntaxToken> tokens,
+        AcceptedCharactersInternal? accepted = null
+    )
     {
         if (tokens.Count == 0)
         {
@@ -621,15 +670,23 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
 
     protected IDisposable PushSpanContextConfig()
     {
-        return PushSpanContextConfig(newConfig: (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null);
+        return PushSpanContextConfig(
+            newConfig: (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
+        );
     }
 
     protected IDisposable PushSpanContextConfig(Action<SpanContextBuilder> newConfig)
     {
-        return PushSpanContextConfig(newConfig == null ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null : (span, _) => newConfig(span));
+        return PushSpanContextConfig(
+            newConfig == null
+                ? (Action<SpanContextBuilder, Action<SpanContextBuilder>>)null
+                : (span, _) => newConfig(span)
+        );
     }
 
-    protected IDisposable PushSpanContextConfig(Action<SpanContextBuilder, Action<SpanContextBuilder>> newConfig)
+    protected IDisposable PushSpanContextConfig(
+        Action<SpanContextBuilder, Action<SpanContextBuilder>> newConfig
+    )
     {
         var old = SpanContextConfig;
         ConfigureSpanContext(newConfig);
@@ -642,7 +699,9 @@ internal abstract class TokenizerBackedParser<TTokenizer> : ParserBase
         InitializeContext(SpanContext);
     }
 
-    protected void ConfigureSpanContext(Action<SpanContextBuilder, Action<SpanContextBuilder>> config)
+    protected void ConfigureSpanContext(
+        Action<SpanContextBuilder, Action<SpanContextBuilder>> config
+    )
     {
         var prev = SpanContextConfig;
         if (config == null)

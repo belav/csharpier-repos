@@ -21,5 +21,9 @@ public interface IRequestContextFactory<TRequestContext>
     /// <param name="requestParam">The request parameters.</param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    Task<TRequestContext> CreateRequestContextAsync<TRequestParam>(IQueueItem<TRequestContext> queueItem, TRequestParam requestParam, CancellationToken cancellationToken);
+    Task<TRequestContext> CreateRequestContextAsync<TRequestParam>(
+        IQueueItem<TRequestContext> queueItem,
+        TRequestParam requestParam,
+        CancellationToken cancellationToken
+    );
 }
