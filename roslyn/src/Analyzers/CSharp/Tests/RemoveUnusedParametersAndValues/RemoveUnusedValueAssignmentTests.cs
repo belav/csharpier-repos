@@ -31,16 +31,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
         {
         }
 
-        private protected override OptionsCollection PreferNone =>
-            Option(CSharpCodeStyleOptions.UnusedValueAssignment,
+        private protected override OptionsCollection PreferNone
+            => Option(CSharpCodeStyleOptions.UnusedValueAssignment,
                    new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.None));
 
-        private protected override OptionsCollection PreferDiscard =>
-            Option(CSharpCodeStyleOptions.UnusedValueAssignment,
+        private protected override OptionsCollection PreferDiscard
+            => Option(CSharpCodeStyleOptions.UnusedValueAssignment,
                    new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.Suggestion));
 
-        private protected override OptionsCollection PreferUnusedLocal =>
-            Option(CSharpCodeStyleOptions.UnusedValueAssignment,
+        private protected override OptionsCollection PreferUnusedLocal
+            => Option(CSharpCodeStyleOptions.UnusedValueAssignment,
                    new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.UnusedLocalVariable, NotificationOption2.Suggestion));
 
         [Theory, CombinatorialData]
@@ -8845,6 +8845,74 @@ class C
         act();
     }
 }", optionName);
+        }
+
+        [Fact]
+        [WorkItem(64291, "https://github.com/dotnet/roslyn/issues/64291")]
+        public async Task TestImplicitObjectCreationInInitialization()
+        {
+            var source =
+@"class C
+{
+    void M()
+    {
+        C {|IDE0059:c|} = new();
+    }
+}";
+            var fixedSource =
+@"class C
+{
+    void M()
+    {
+        _ = new C();
+    }
+}";
+
+            await new VerifyCS.Test
+            {
+                TestCode = source,
+                FixedCode = fixedSource,
+                Options =
+                {
+                    { CSharpCodeStyleOptions.UnusedValueAssignment, UnusedValuePreference.DiscardVariable },
+                },
+                LanguageVersion = LanguageVersion.CSharp9,
+            }.RunAsync();
+        }
+
+        [Fact]
+        [WorkItem(64291, "https://github.com/dotnet/roslyn/issues/64291")]
+        public async Task TestImplicitObjectCreationInAssignement()
+        {
+            var source =
+@"class C
+{
+    void M(C c)
+    {
+        System.Console.WriteLine(c);
+        {|IDE0059:c|} = new();
+    }
+}";
+            var fixedSource =
+@"class C
+{
+    void M(C c)
+    {
+        System.Console.WriteLine(c);
+        _ = new C();
+    }
+}";
+
+            await new VerifyCS.Test
+            {
+                TestCode = source,
+                FixedCode = fixedSource,
+                Options =
+                {
+                    { CSharpCodeStyleOptions.UnusedValueAssignment, UnusedValuePreference.DiscardVariable },
+                },
+                LanguageVersion = LanguageVersion.CSharp9,
+            }.RunAsync();
         }
     }
 }

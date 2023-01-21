@@ -7,15 +7,15 @@ using System.Composition;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Internal.Log;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
+using Newtonsoft.Json;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 [Method(Methods.InitializeName)]
 internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, InitializeResult>
 {
-    [ImportingConstructor]
-    [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     public InitializeHandler()
     {
     }
@@ -42,6 +42,14 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
 
             var capabilitiesProvider = context.GetRequiredLspService<ICapabilitiesProvider>();
             var serverCapabilities = capabilitiesProvider.GetCapabilities(clientCapabilities);
+
+            // Record a telemetry event indicating what capabilities are being provided by the server.
+            // Useful for figuring out if a particular session is opted into an LSP feature.
+            Logger.Log(FunctionId.LSP_Initialize, KeyValueLogMessage.Create(m =>
+            {
+                m["serverKind"] = context.ServerKind.ToTelemetryString();
+                m["capabilities"] = JsonConvert.SerializeObject(serverCapabilities);
+            }));
 
             return Task.FromResult(new InitializeResult
             {

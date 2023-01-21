@@ -41,8 +41,8 @@ public class RazorLineFormattingOptionsTests
         using var workspace = new AdhocWorkspace(hostServices);
 
         var globalOptions = ((IMefHostExportProvider)hostServices).GetExportedValue<IGlobalOptionService>();
-        globalOptions.SetGlobalOption(new OptionKey(RazorLineFormattingOptionsStorage.UseTabs), true);
-        globalOptions.SetGlobalOption(new OptionKey(RazorLineFormattingOptionsStorage.TabSize), 10);
+        globalOptions.SetGlobalOption(RazorLineFormattingOptionsStorage.UseTabs, true);
+        globalOptions.SetGlobalOption(RazorLineFormattingOptionsStorage.TabSize, 10);
 
         var project = workspace.AddProject("Test", LanguageNames.CSharp);
 
@@ -53,16 +53,16 @@ void F   () {}
        }
 ";
 
+        var sourceText = SourceText.From(source, encoding: null, SourceHashAlgorithms.Default);
         var documentInfo = DocumentInfo.Create(
             DocumentId.CreateNewId(project.Id),
             name: "file.razor.g.cs",
             folders: Array.Empty<string>(),
             sourceCodeKind: SourceCodeKind.Regular,
-            loader: TextLoader.From(TextAndVersion.Create(SourceText.From(source), VersionStamp.Create(), "file.razor.g.cs")),
-            filePath: "file.razor.g.cs",
-            isGenerated: false,
-            designTimeOnly: true,
-            documentServiceProvider: new TestRazorDocumentServiceProvider());
+            loader: TextLoader.From(TextAndVersion.Create(sourceText, VersionStamp.Create(), "file.razor.g.cs")),
+            filePath: "file.razor.g.cs")
+            .WithDesignTimeOnly(true)
+            .WithDocumentServiceProvider(new TestRazorDocumentServiceProvider());
 
         var document = workspace.AddDocument(documentInfo);
 

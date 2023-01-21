@@ -98,7 +98,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     body.Kind == OperationKind.ConstructorBody ||
                     body.Kind == OperationKind.FieldInitializer ||
                     body.Kind == OperationKind.PropertyInitializer ||
-                    body.Kind == OperationKind.ParameterInitializer,
+                    body.Kind == OperationKind.ParameterInitializer ||
+                    body.Kind == OperationKind.Attribute,
                     $"Unexpected root operation kind: {body.Kind}");
                 Debug.Assert(parent == null);
             }
@@ -1396,7 +1397,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             SpillEvalStack();
         }
 
-        [return: NotNullIfNotNull("result")]
+        [return: NotNullIfNotNull(nameof(result))]
         private IOperation? FinishVisitingStatement(IOperation originalOperation, IOperation? result = null)
         {
             Debug.Assert(((Operation)originalOperation).OwningSemanticModel != null, "Not an original node.");
@@ -2168,7 +2169,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                              ITypeSymbolHelpers.IsObjectType(operation.LeftOperand.Type) &&
                              ITypeSymbolHelpers.IsObjectType(operation.RightOperand.Type))
                     {
-                        return VisitObjectBinaryConditionalOperator(operation, captureIdForResult);
+                        return VisitObjectBinaryConditionalOperator(operation);
                     }
                     else if (ITypeSymbolHelpers.IsDynamicType(operation.Type) &&
                              (ITypeSymbolHelpers.IsDynamicType(operation.LeftOperand.Type) ||
@@ -2386,7 +2387,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             }
         }
 
-        private IOperation VisitObjectBinaryConditionalOperator(IBinaryOperation binOp, int? captureIdForResult)
+        private IOperation VisitObjectBinaryConditionalOperator(IBinaryOperation binOp)
         {
             SpillEvalStack();
 
@@ -7591,7 +7592,7 @@ oneMoreTime:
             return Visit(operation, argument: null);
         }
 
-        [return: NotNullIfNotNull("operation")]
+        [return: NotNullIfNotNull(nameof(operation))]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IOperation? VisitRequired(IOperation? operation, int? argument = null)
         {
@@ -7601,7 +7602,7 @@ oneMoreTime:
             return result;
         }
 
-        [return: NotNullIfNotNull("operation")]
+        [return: NotNullIfNotNull(nameof(operation))]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public IOperation? BaseVisitRequired(IOperation? operation, int? argument)
         {
@@ -7823,6 +7824,11 @@ oneMoreTime:
 
                 return set.Count == properties.Count();
             }
+        }
+
+        public override IOperation VisitAttribute(IAttributeOperation operation, int? captureIdForResult)
+        {
+            return new AttributeOperation(Visit(operation.Operation, captureIdForResult)!, semanticModel: null, operation.Syntax, IsImplicit(operation));
         }
     }
 }

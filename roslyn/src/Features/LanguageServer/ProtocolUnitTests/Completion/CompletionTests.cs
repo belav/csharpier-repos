@@ -16,6 +16,7 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler.Completion;
 using Microsoft.CodeAnalysis.Options;
 using Roslyn.Test.Utilities;
 using Xunit;
+using Xunit.Abstractions;
 using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
@@ -36,6 +37,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 }
             }
         };
+
+        public CompletionTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
+        {
+        }
 
         [Fact]
         public async Task TestGetCompletionsAsync_PromotesCommitCharactersToListAsync()
@@ -205,7 +210,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
             var solution = testLspServer.TestWorkspace.CurrentSolution;
 
             // Make sure the unimported types option is on by default.
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(new OptionKey(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, LanguageNames.CSharp), true);
+            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(CompletionOptionsStorage.ShowItemsFromUnimportedNamespaces, LanguageNames.CSharp, true);
 
             var completionParams = CreateCompletionParams(
                 testLspServer.GetLocations("caret").Single(),
@@ -228,8 +233,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
 
             await using var testLspServer = await CreateTestLspServerAsync(markup, s_vsCompletionCapabilities);
 
-            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(
-                new OptionKey(CompletionOptionsStorage.SnippetsBehavior, LanguageNames.CSharp), SnippetsRule.NeverInclude);
+            testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(CompletionOptionsStorage.SnippetsBehavior, LanguageNames.CSharp, SnippetsRule.NeverInclude);
 
             var completionParams = CreateCompletionParams(
                 testLspServer.GetLocations("caret").Single(),
@@ -1285,7 +1289,7 @@ class A
             var globalOptions = testLspServer.TestWorkspace.GetService<IGlobalOptionService>();
             var listMaxSize = 1;
 
-            globalOptions.SetGlobalOption(new OptionKey(LspOptions.MaxCompletionListSize), listMaxSize);
+            globalOptions.SetGlobalOption(LspOptions.MaxCompletionListSize, listMaxSize);
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams).ConfigureAwait(false);
             Assert.True(results.IsIncomplete);

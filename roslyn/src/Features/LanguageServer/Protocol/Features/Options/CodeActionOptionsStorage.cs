@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Immutable;
+using System.Xml.Serialization;
 using Microsoft.CodeAnalysis.CodeCleanup;
 using Microsoft.CodeAnalysis.CodeGeneration;
 using Microsoft.CodeAnalysis.CodeStyle;
@@ -18,14 +19,14 @@ namespace Microsoft.CodeAnalysis.CodeActions
     internal static class CodeActionOptionsStorage
     {
         public static readonly PerLanguageOption2<int> WrappingColumn =
-            new("FormattingOptions", "WrappingColumn", CodeActionOptions.DefaultWrappingColumn);
+            new("FormattingOptions_WrappingColumn", CodeActionOptions.DefaultWrappingColumn);
 
         public static CodeActionOptions GetCodeActionOptions(this IGlobalOptionService globalOptions, LanguageServices languageServices)
-            => new(
-                cleanupOptions: globalOptions.GetCodeCleanupOptions(languageServices),
-                codeGenerationOptions: globalOptions.GetCodeGenerationOptions(languageServices),
-                codeStyleOptions: globalOptions.GetCodeStyleOptions(languageServices))
+            => new()
             {
+                CleanupOptions = globalOptions.GetCodeCleanupOptions(languageServices),
+                CodeGenerationOptions = globalOptions.GetCodeGenerationOptions(languageServices),
+                CodeStyleOptions = globalOptions.GetCodeStyleOptions(languageServices),
                 SearchOptions = globalOptions.GetSymbolSearchOptions(languageServices.Language),
                 ImplementTypeOptions = globalOptions.GetImplementTypeOptions(languageServices.Language),
                 ExtractMethodOptions = globalOptions.GetExtractMethodOptions(languageServices.Language),
@@ -41,8 +42,6 @@ namespace Microsoft.CodeAnalysis.CodeActions
         }
 
         public static readonly PerLanguageOption2<int> ConditionalExpressionWrappingLength = new(
-            "UseConditionalExpressionOptions",
-            "ConditionalExpressionWrappingLength", CodeActionOptions.DefaultConditionalExpressionWrappingLength,
-            storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.ConditionalExpressionWrappingLength"));
+            "UseConditionalExpressionOptions_ConditionalExpressionWrappingLength", CodeActionOptions.DefaultConditionalExpressionWrappingLength);
     }
 }
