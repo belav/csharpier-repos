@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal static class ViewDataDictionaryFactory
 {
-    public static Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary> CreateFactory(Type modelType)
+    public static Func<
+        IModelMetadataProvider,
+        ModelStateDictionary,
+        ViewDataDictionary
+    > CreateFactory(Type modelType)
     {
         if (modelType == null)
         {
@@ -17,19 +21,23 @@ internal static class ViewDataDictionaryFactory
         }
 
         var type = typeof(ViewDataDictionary<>).MakeGenericType(modelType);
-        var constructor = type.GetConstructor(new[] { typeof(IModelMetadataProvider), typeof(ModelStateDictionary) });
+        var constructor = type.GetConstructor(
+            new[] { typeof(IModelMetadataProvider), typeof(ModelStateDictionary) }
+        );
         Debug.Assert(constructor != null);
 
         var parameter1 = Expression.Parameter(typeof(IModelMetadataProvider), "metadataProvider");
         var parameter2 = Expression.Parameter(typeof(ModelStateDictionary), "modelState");
 
-        return
-            Expression.Lambda<Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary>>(
+        return Expression
+            .Lambda<Func<IModelMetadataProvider, ModelStateDictionary, ViewDataDictionary>>(
                 Expression.Convert(
                     Expression.New(constructor, parameter1, parameter2),
-                    typeof(ViewDataDictionary)),
+                    typeof(ViewDataDictionary)
+                ),
                 parameter1,
-                parameter2)
+                parameter2
+            )
             .Compile();
     }
 
@@ -46,12 +54,14 @@ internal static class ViewDataDictionaryFactory
 
         var parameter = Expression.Parameter(typeof(ViewDataDictionary), "viewDataDictionary");
 
-        return
-            Expression.Lambda<Func<ViewDataDictionary, ViewDataDictionary>>(
+        return Expression
+            .Lambda<Func<ViewDataDictionary, ViewDataDictionary>>(
                 Expression.Convert(
                     Expression.New(constructor, parameter),
-                    typeof(ViewDataDictionary)),
-                parameter)
+                    typeof(ViewDataDictionary)
+                ),
+                parameter
+            )
             .Compile();
     }
 }

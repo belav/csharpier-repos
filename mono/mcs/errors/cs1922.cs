@@ -6,13 +6,13 @@ using System;
 
 class Data
 {
-	public int Value;
+    public int Value;
 }
 
 public class Test
 {
-	static void Main ()
-	{
-		var c = new Data { Value = { 0, 1, 2 } };
-	}
+    static void Main()
+    {
+        var c = new Data { Value = { 0, 1, 2 } };
+    }
 }

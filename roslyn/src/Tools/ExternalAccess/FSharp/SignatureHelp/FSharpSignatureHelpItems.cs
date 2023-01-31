@@ -22,28 +22,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
         /// <summary>
         /// The span this session applies to.
-        /// 
+        ///
         /// Navigation outside this span will cause signature help to be dismissed.
         /// </summary>
         public TextSpan ApplicableSpan { get; }
 
         /// <summary>
-        /// Returns the specified argument index that the provided position is at in the current document.  This 
+        /// Returns the specified argument index that the provided position is at in the current document.  This
         /// index may be greater than the number of arguments in the selected <see cref="FSharpSignatureHelpItem"/>.
         /// </summary>
         public int ArgumentIndex { get; }
 
         /// <summary>
-        /// Returns the total number of arguments that have been typed in the current document.  This may be 
+        /// Returns the total number of arguments that have been typed in the current document.  This may be
         /// greater than the ArgumentIndex if there are additional arguments after the provided position.
         /// </summary>
         public int ArgumentCount { get; }
 
         /// <summary>
-        /// Returns the name of specified argument at the current position in the document.  
+        /// Returns the name of specified argument at the current position in the document.
         /// This only applies to languages that allow the user to provide named arguments.
-        /// If no named argument exists at the current position, then null should be returned. 
-        /// 
+        /// If no named argument exists at the current position, then null should be returned.
+        ///
         /// This value is used to determine which documentation comment should be provided for the current
         /// parameter.  Normally this is determined simply by determining the parameter by index.
         /// </summary>
@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
         /// <summary>
         /// The item to select by default.  If this is <see langword="null"/> then the controller will
-        /// pick the first item that has enough arguments to be viable based on what argument 
+        /// pick the first item that has enough arguments to be viable based on what argument
         /// position the user is currently inside of.
         /// </summary>
         public int? SelectedItemIndex { get; }
@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
             int argumentIndex,
             int argumentCount,
             string argumentName,
-            int? selectedItem = null)
+            int? selectedItem = null
+        )
         {
             Contract.ThrowIfNull(items);
             Contract.ThrowIfTrue(items.IsEmpty());
@@ -70,12 +71,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.SignatureHelp
 
             if (argumentIndex < 0)
             {
-                throw new ArgumentException($"{nameof(argumentIndex)} < 0. {argumentIndex} < 0", nameof(argumentIndex));
+                throw new ArgumentException(
+                    $"{nameof(argumentIndex)} < 0. {argumentIndex} < 0",
+                    nameof(argumentIndex)
+                );
             }
 
             if (argumentCount < argumentIndex)
             {
-                throw new ArgumentException($"{nameof(argumentCount)} < {nameof(argumentIndex)}. {argumentCount} < {argumentIndex}", nameof(argumentIndex));
+                throw new ArgumentException(
+                    $"{nameof(argumentCount)} < {nameof(argumentIndex)}. {argumentCount} < {argumentIndex}",
+                    nameof(argumentIndex)
+                );
             }
 
             // Adjust the `selectedItem` index if duplicates are able to be removed.

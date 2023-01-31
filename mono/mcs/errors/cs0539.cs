@@ -1,10 +1,11 @@
 // CS0539: `A.B' in explicit interface declaration is not a member of interface
 // Line:
 
-interface A {
-}
+interface A { }
 
-class X : A {
-	void A.B () {}
-	static void Main () {}
+class X : A
+{
+    void A.B() { }
+
+    static void Main() { }
 }

@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,48 +31,53 @@ using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	[ClassInterface (ClassInterfaceType.AutoDispatch)]
-	[ComVisible (true)]
-	public class VScrollBar : ScrollBar 
-	{		
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [ComVisible(true)]
+    public class VScrollBar : ScrollBar
+    {
 		#region events
-		
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		[Browsable (false)]
-		public new event EventHandler RightToLeftChanged {
-			add { base.RightToLeftChanged += value; }
-			remove { base.RightToLeftChanged -= value; }
-		}
-		
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        public new event EventHandler RightToLeftChanged
+        {
+            add { base.RightToLeftChanged += value; }
+            remove { base.RightToLeftChanged -= value; }
+        }
+
 		#endregion Events
 
-		public VScrollBar()
-		{			
-			vert = true;
-		}
+        public VScrollBar()
+        {
+            vert = true;
+        }
 
-		[EditorBrowsable (EditorBrowsableState.Never)]
-		[Browsable (false)]
-		public override RightToLeft RightToLeft {
-			get { return base.RightToLeft; }
-			set {
-				if (RightToLeft == value)
-					return;
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        [Browsable(false)]
+        public override RightToLeft RightToLeft
+        {
+            get { return base.RightToLeft; }
+            set
+            {
+                if (RightToLeft == value)
+                    return;
 
-				base.RightToLeft = value;
+                base.RightToLeft = value;
 
-				OnRightToLeftChanged (EventArgs.Empty);
-			}
-		}
+                OnRightToLeftChanged(EventArgs.Empty);
+            }
+        }
 
-		protected override Size DefaultSize {
-			get { return ThemeEngine.Current.VScrollBarDefaultSize; }
-		}	
+        protected override Size DefaultSize
+        {
+            get { return ThemeEngine.Current.VScrollBarDefaultSize; }
+        }
 
-		protected override CreateParams CreateParams {
-			get { return base.CreateParams; }
-		}		
-	}
+        protected override CreateParams CreateParams
+        {
+            get { return base.CreateParams; }
+        }
+    }
 }

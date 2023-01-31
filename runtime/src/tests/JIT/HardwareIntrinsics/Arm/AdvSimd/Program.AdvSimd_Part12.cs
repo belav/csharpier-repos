@@ -10,20 +10,34 @@ namespace JIT.HardwareIntrinsics.Arm
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
-                ["ShiftLeftLogicalScalar.Vector64.UInt64.1"] = ShiftLeftLogicalScalar_Vector64_UInt64_1,
-                ["ShiftLeftLogicalWideningLower.Vector64.Byte.1"] = ShiftLeftLogicalWideningLower_Vector64_Byte_1,
-                ["ShiftLeftLogicalWideningLower.Vector64.Int16.1"] = ShiftLeftLogicalWideningLower_Vector64_Int16_1,
-                ["ShiftLeftLogicalWideningLower.Vector64.Int32.1"] = ShiftLeftLogicalWideningLower_Vector64_Int32_1,
-                ["ShiftLeftLogicalWideningLower.Vector64.SByte.1"] = ShiftLeftLogicalWideningLower_Vector64_SByte_1,
-                ["ShiftLeftLogicalWideningLower.Vector64.UInt16.1"] = ShiftLeftLogicalWideningLower_Vector64_UInt16_1,
-                ["ShiftLeftLogicalWideningLower.Vector64.UInt32.1"] = ShiftLeftLogicalWideningLower_Vector64_UInt32_1,
-                ["ShiftLeftLogicalWideningUpper.Vector128.Byte.1"] = ShiftLeftLogicalWideningUpper_Vector128_Byte_1,
-                ["ShiftLeftLogicalWideningUpper.Vector128.Int16.1"] = ShiftLeftLogicalWideningUpper_Vector128_Int16_1,
-                ["ShiftLeftLogicalWideningUpper.Vector128.Int32.1"] = ShiftLeftLogicalWideningUpper_Vector128_Int32_1,
-                ["ShiftLeftLogicalWideningUpper.Vector128.SByte.1"] = ShiftLeftLogicalWideningUpper_Vector128_SByte_1,
-                ["ShiftLeftLogicalWideningUpper.Vector128.UInt16.1"] = ShiftLeftLogicalWideningUpper_Vector128_UInt16_1,
-                ["ShiftLeftLogicalWideningUpper.Vector128.UInt32.1"] = ShiftLeftLogicalWideningUpper_Vector128_UInt32_1,
+            TestList = new Dictionary<string, Action>()
+            {
+                ["ShiftLeftLogicalScalar.Vector64.UInt64.1"] =
+                    ShiftLeftLogicalScalar_Vector64_UInt64_1,
+                ["ShiftLeftLogicalWideningLower.Vector64.Byte.1"] =
+                    ShiftLeftLogicalWideningLower_Vector64_Byte_1,
+                ["ShiftLeftLogicalWideningLower.Vector64.Int16.1"] =
+                    ShiftLeftLogicalWideningLower_Vector64_Int16_1,
+                ["ShiftLeftLogicalWideningLower.Vector64.Int32.1"] =
+                    ShiftLeftLogicalWideningLower_Vector64_Int32_1,
+                ["ShiftLeftLogicalWideningLower.Vector64.SByte.1"] =
+                    ShiftLeftLogicalWideningLower_Vector64_SByte_1,
+                ["ShiftLeftLogicalWideningLower.Vector64.UInt16.1"] =
+                    ShiftLeftLogicalWideningLower_Vector64_UInt16_1,
+                ["ShiftLeftLogicalWideningLower.Vector64.UInt32.1"] =
+                    ShiftLeftLogicalWideningLower_Vector64_UInt32_1,
+                ["ShiftLeftLogicalWideningUpper.Vector128.Byte.1"] =
+                    ShiftLeftLogicalWideningUpper_Vector128_Byte_1,
+                ["ShiftLeftLogicalWideningUpper.Vector128.Int16.1"] =
+                    ShiftLeftLogicalWideningUpper_Vector128_Int16_1,
+                ["ShiftLeftLogicalWideningUpper.Vector128.Int32.1"] =
+                    ShiftLeftLogicalWideningUpper_Vector128_Int32_1,
+                ["ShiftLeftLogicalWideningUpper.Vector128.SByte.1"] =
+                    ShiftLeftLogicalWideningUpper_Vector128_SByte_1,
+                ["ShiftLeftLogicalWideningUpper.Vector128.UInt16.1"] =
+                    ShiftLeftLogicalWideningUpper_Vector128_UInt16_1,
+                ["ShiftLeftLogicalWideningUpper.Vector128.UInt32.1"] =
+                    ShiftLeftLogicalWideningUpper_Vector128_UInt32_1,
                 ["ShiftLogical.Vector64.Byte"] = ShiftLogical_Vector64_Byte,
                 ["ShiftLogical.Vector64.Int16"] = ShiftLogical_Vector64_Int16,
                 ["ShiftLogical.Vector64.Int32"] = ShiftLogical_Vector64_Int32,
@@ -52,24 +66,42 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ShiftLogicalRounded.Vector128.UInt16"] = ShiftLogicalRounded_Vector128_UInt16,
                 ["ShiftLogicalRounded.Vector128.UInt32"] = ShiftLogicalRounded_Vector128_UInt32,
                 ["ShiftLogicalRounded.Vector128.UInt64"] = ShiftLogicalRounded_Vector128_UInt64,
-                ["ShiftLogicalRoundedSaturate.Vector64.Byte"] = ShiftLogicalRoundedSaturate_Vector64_Byte,
-                ["ShiftLogicalRoundedSaturate.Vector64.Int16"] = ShiftLogicalRoundedSaturate_Vector64_Int16,
-                ["ShiftLogicalRoundedSaturate.Vector64.Int32"] = ShiftLogicalRoundedSaturate_Vector64_Int32,
-                ["ShiftLogicalRoundedSaturate.Vector64.SByte"] = ShiftLogicalRoundedSaturate_Vector64_SByte,
-                ["ShiftLogicalRoundedSaturate.Vector64.UInt16"] = ShiftLogicalRoundedSaturate_Vector64_UInt16,
-                ["ShiftLogicalRoundedSaturate.Vector64.UInt32"] = ShiftLogicalRoundedSaturate_Vector64_UInt32,
-                ["ShiftLogicalRoundedSaturate.Vector128.Byte"] = ShiftLogicalRoundedSaturate_Vector128_Byte,
-                ["ShiftLogicalRoundedSaturate.Vector128.Int16"] = ShiftLogicalRoundedSaturate_Vector128_Int16,
-                ["ShiftLogicalRoundedSaturate.Vector128.Int32"] = ShiftLogicalRoundedSaturate_Vector128_Int32,
-                ["ShiftLogicalRoundedSaturate.Vector128.Int64"] = ShiftLogicalRoundedSaturate_Vector128_Int64,
-                ["ShiftLogicalRoundedSaturate.Vector128.SByte"] = ShiftLogicalRoundedSaturate_Vector128_SByte,
-                ["ShiftLogicalRoundedSaturate.Vector128.UInt16"] = ShiftLogicalRoundedSaturate_Vector128_UInt16,
-                ["ShiftLogicalRoundedSaturate.Vector128.UInt32"] = ShiftLogicalRoundedSaturate_Vector128_UInt32,
-                ["ShiftLogicalRoundedSaturate.Vector128.UInt64"] = ShiftLogicalRoundedSaturate_Vector128_UInt64,
-                ["ShiftLogicalRoundedSaturateScalar.Vector64.Int64"] = ShiftLogicalRoundedSaturateScalar_Vector64_Int64,
-                ["ShiftLogicalRoundedSaturateScalar.Vector64.UInt64"] = ShiftLogicalRoundedSaturateScalar_Vector64_UInt64,
-                ["ShiftLogicalRoundedScalar.Vector64.Int64"] = ShiftLogicalRoundedScalar_Vector64_Int64,
-                ["ShiftLogicalRoundedScalar.Vector64.UInt64"] = ShiftLogicalRoundedScalar_Vector64_UInt64,
+                ["ShiftLogicalRoundedSaturate.Vector64.Byte"] =
+                    ShiftLogicalRoundedSaturate_Vector64_Byte,
+                ["ShiftLogicalRoundedSaturate.Vector64.Int16"] =
+                    ShiftLogicalRoundedSaturate_Vector64_Int16,
+                ["ShiftLogicalRoundedSaturate.Vector64.Int32"] =
+                    ShiftLogicalRoundedSaturate_Vector64_Int32,
+                ["ShiftLogicalRoundedSaturate.Vector64.SByte"] =
+                    ShiftLogicalRoundedSaturate_Vector64_SByte,
+                ["ShiftLogicalRoundedSaturate.Vector64.UInt16"] =
+                    ShiftLogicalRoundedSaturate_Vector64_UInt16,
+                ["ShiftLogicalRoundedSaturate.Vector64.UInt32"] =
+                    ShiftLogicalRoundedSaturate_Vector64_UInt32,
+                ["ShiftLogicalRoundedSaturate.Vector128.Byte"] =
+                    ShiftLogicalRoundedSaturate_Vector128_Byte,
+                ["ShiftLogicalRoundedSaturate.Vector128.Int16"] =
+                    ShiftLogicalRoundedSaturate_Vector128_Int16,
+                ["ShiftLogicalRoundedSaturate.Vector128.Int32"] =
+                    ShiftLogicalRoundedSaturate_Vector128_Int32,
+                ["ShiftLogicalRoundedSaturate.Vector128.Int64"] =
+                    ShiftLogicalRoundedSaturate_Vector128_Int64,
+                ["ShiftLogicalRoundedSaturate.Vector128.SByte"] =
+                    ShiftLogicalRoundedSaturate_Vector128_SByte,
+                ["ShiftLogicalRoundedSaturate.Vector128.UInt16"] =
+                    ShiftLogicalRoundedSaturate_Vector128_UInt16,
+                ["ShiftLogicalRoundedSaturate.Vector128.UInt32"] =
+                    ShiftLogicalRoundedSaturate_Vector128_UInt32,
+                ["ShiftLogicalRoundedSaturate.Vector128.UInt64"] =
+                    ShiftLogicalRoundedSaturate_Vector128_UInt64,
+                ["ShiftLogicalRoundedSaturateScalar.Vector64.Int64"] =
+                    ShiftLogicalRoundedSaturateScalar_Vector64_Int64,
+                ["ShiftLogicalRoundedSaturateScalar.Vector64.UInt64"] =
+                    ShiftLogicalRoundedSaturateScalar_Vector64_UInt64,
+                ["ShiftLogicalRoundedScalar.Vector64.Int64"] =
+                    ShiftLogicalRoundedScalar_Vector64_Int64,
+                ["ShiftLogicalRoundedScalar.Vector64.UInt64"] =
+                    ShiftLogicalRoundedScalar_Vector64_UInt64,
                 ["ShiftLogicalSaturate.Vector64.Byte"] = ShiftLogicalSaturate_Vector64_Byte,
                 ["ShiftLogicalSaturate.Vector64.Int16"] = ShiftLogicalSaturate_Vector64_Int16,
                 ["ShiftLogicalSaturate.Vector64.Int32"] = ShiftLogicalSaturate_Vector64_Int32,
@@ -84,8 +116,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ShiftLogicalSaturate.Vector128.UInt16"] = ShiftLogicalSaturate_Vector128_UInt16,
                 ["ShiftLogicalSaturate.Vector128.UInt32"] = ShiftLogicalSaturate_Vector128_UInt32,
                 ["ShiftLogicalSaturate.Vector128.UInt64"] = ShiftLogicalSaturate_Vector128_UInt64,
-                ["ShiftLogicalSaturateScalar.Vector64.Int64"] = ShiftLogicalSaturateScalar_Vector64_Int64,
-                ["ShiftLogicalSaturateScalar.Vector64.UInt64"] = ShiftLogicalSaturateScalar_Vector64_UInt64,
+                ["ShiftLogicalSaturateScalar.Vector64.Int64"] =
+                    ShiftLogicalSaturateScalar_Vector64_Int64,
+                ["ShiftLogicalSaturateScalar.Vector64.UInt64"] =
+                    ShiftLogicalSaturateScalar_Vector64_UInt64,
                 ["ShiftLogicalScalar.Vector64.Int64"] = ShiftLogicalScalar_Vector64_Int64,
                 ["ShiftLogicalScalar.Vector64.UInt64"] = ShiftLogicalScalar_Vector64_UInt64,
                 ["ShiftRightAndInsert.Vector64.Byte"] = ShiftRightAndInsert_Vector64_Byte,
@@ -102,8 +136,10 @@ namespace JIT.HardwareIntrinsics.Arm
                 ["ShiftRightAndInsert.Vector128.UInt16"] = ShiftRightAndInsert_Vector128_UInt16,
                 ["ShiftRightAndInsert.Vector128.UInt32"] = ShiftRightAndInsert_Vector128_UInt32,
                 ["ShiftRightAndInsert.Vector128.UInt64"] = ShiftRightAndInsert_Vector128_UInt64,
-                ["ShiftRightAndInsertScalar.Vector64.Int64"] = ShiftRightAndInsertScalar_Vector64_Int64,
-                ["ShiftRightAndInsertScalar.Vector64.UInt64"] = ShiftRightAndInsertScalar_Vector64_UInt64,
+                ["ShiftRightAndInsertScalar.Vector64.Int64"] =
+                    ShiftRightAndInsertScalar_Vector64_Int64,
+                ["ShiftRightAndInsertScalar.Vector64.UInt64"] =
+                    ShiftRightAndInsertScalar_Vector64_UInt64,
                 ["ShiftRightArithmetic.Vector64.Int16.1"] = ShiftRightArithmetic_Vector64_Int16_1,
                 ["ShiftRightArithmetic.Vector64.Int32.1"] = ShiftRightArithmetic_Vector64_Int32_1,
                 ["ShiftRightArithmetic.Vector64.SByte.1"] = ShiftRightArithmetic_Vector64_SByte_1,

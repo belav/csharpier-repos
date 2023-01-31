@@ -18,7 +18,6 @@ namespace POS_Server.Models
         public string notes { get; set; }
         public string details { get; set; }
 
-
         public string branchName { get; set; }
         public Boolean canDelete { get; set; }
     }

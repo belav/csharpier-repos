@@ -4,14 +4,17 @@ using System;
 
 class A
 {
-	public static int X { get { return 2; } }
+    public static int X
+    {
+        get { return 2; }
+    }
 }
 
 class T
-	{
-	static void Main ()
-	{
-		A T = new A ();
-		System.Console.WriteLine (T.X);
-	}
+{
+    static void Main()
+    {
+        A T = new A();
+        System.Console.WriteLine(T.X);
+    }
 }

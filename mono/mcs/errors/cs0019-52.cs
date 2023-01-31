@@ -3,8 +3,8 @@
 
 class Program
 {
-	static void Main()
-	{
-		object s = null ?? true;
-	}
+    static void Main()
+    {
+        object s = null ?? true;
+    }
 }

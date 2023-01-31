@@ -15,15 +15,15 @@ public class TextTemplatingServiceTest
     public void Service_works()
     {
         var host = new TextTemplatingService(
-            new ServiceCollection()
-                .AddSingleton("Hello, Services!")
-                .BuildServiceProvider());
+            new ServiceCollection().AddSingleton("Hello, Services!").BuildServiceProvider()
+        );
         var callback = new TextTemplatingCallback();
 
         var result = host.ProcessTemplate(
             @"T:\test.tt",
             @"<#@ template hostSpecific=""true"" #><#= ((IServiceProvider)Host).GetService(typeof(string)) #>",
-            callback);
+            callback
+        );
 
         Assert.Empty(callback.Errors);
         Assert.Equal("Hello, Services!", result);
@@ -32,19 +32,11 @@ public class TextTemplatingServiceTest
     [ConditionalFact]
     public void Session_works()
     {
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-            .BuildServiceProvider());
-        host.Session = new TextTemplatingSession
-        {
-            ["Value"] = "Hello, Session!"
-        };
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
+        host.Session = new TextTemplatingSession { ["Value"] = "Hello, Session!" };
         var callback = new TextTemplatingCallback();
 
-        var result = host.ProcessTemplate(
-            @"T:\test.tt",
-            @"<#= Session[""Value""] #>",
-            callback);
+        var result = host.ProcessTemplate(@"T:\test.tt", @"<#= Session[""Value""] #>", callback);
 
         Assert.Empty(callback.Errors);
         Assert.Equal("Hello, Session!", result);
@@ -53,19 +45,15 @@ public class TextTemplatingServiceTest
     [ConditionalFact]
     public void Session_works_with_parameter()
     {
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-            .BuildServiceProvider());
-        host.Session = new TextTemplatingSession
-        {
-            ["Value"] = "Hello, Session!"
-        };
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
+        host.Session = new TextTemplatingSession { ["Value"] = "Hello, Session!" };
         var callback = new TextTemplatingCallback();
 
         var result = host.ProcessTemplate(
             @"T:\test.tt",
             @"<#@ parameter name=""Value"" type=""System.String"" #><#= Value #>",
-            callback);
+            callback
+        );
 
         Assert.Empty(callback.Errors);
         Assert.Equal("Hello, Session!", result);
@@ -75,19 +63,16 @@ public class TextTemplatingServiceTest
     public void Include_works()
     {
         using var dir = new TempDirectory();
-        File.WriteAllText(
-            Path.Combine(dir, "test.ttinclude"),
-            "Hello, Include!");
+        File.WriteAllText(Path.Combine(dir, "test.ttinclude"), "Hello, Include!");
 
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-            .BuildServiceProvider());
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
         var callback = new TextTemplatingCallback();
 
         var result = host.ProcessTemplate(
             Path.Combine(dir, "test.tt"),
             @"<#@ include file=""test.ttinclude"" #>",
-            callback);
+            callback
+        );
 
         Assert.Empty(callback.Errors);
         Assert.Equal("Hello, Include!", result);
@@ -96,15 +81,10 @@ public class TextTemplatingServiceTest
     [ConditionalFact]
     public void Error_works()
     {
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-            .BuildServiceProvider());
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
         var callback = new TextTemplatingCallback();
 
-        host.ProcessTemplate(
-            @"T:\test.tt",
-            @"<# Error(""Hello, Error!""); #>",
-            callback);
+        host.ProcessTemplate(@"T:\test.tt", @"<# Error(""Hello, Error!""); #>", callback);
 
         var error = Assert.Single(callback.Errors.Cast<CompilerError>());
         Assert.Equal("Hello, Error!", error.ErrorText);
@@ -113,16 +93,17 @@ public class TextTemplatingServiceTest
     [ConditionalFact]
     public void Directive_throws_when_processor_unknown()
     {
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-            .BuildServiceProvider());
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
         var callback = new TextTemplatingCallback();
 
         var ex = Assert.Throws<FileNotFoundException>(
-            () => host.ProcessTemplate(
-                @"T:\test.tt",
-                @"<#@ test processor=""TestDirectiveProcessor"" #>",
-                callback));
+            () =>
+                host.ProcessTemplate(
+                    @"T:\test.tt",
+                    @"<#@ test processor=""TestDirectiveProcessor"" #>",
+                    callback
+                )
+        );
 
         Assert.Equal(DesignStrings.UnknownDirectiveProcessor("TestDirectiveProcessor"), ex.Message);
     }
@@ -132,15 +113,14 @@ public class TextTemplatingServiceTest
     {
         using var dir = new TempDirectory();
 
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-                .BuildServiceProvider());
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
         var callback = new TextTemplatingCallback();
 
         var result = host.ProcessTemplate(
             Path.Combine(dir, "test.tt"),
             @"<#@ template hostSpecific=""true"" #><#= Host.ResolvePath(""data.json"") #>",
-            callback);
+            callback
+        );
 
         Assert.Empty(callback.Errors);
         Assert.Equal(Path.Combine(dir, "data.json"), result);
@@ -149,15 +129,14 @@ public class TextTemplatingServiceTest
     [ConditionalFact]
     public void Output_works()
     {
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-                .BuildServiceProvider());
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
         var callback = new TextTemplatingCallback();
 
         host.ProcessTemplate(
             @"T:\test.tt",
             @"<#@ output extension="".txt"" encoding=""us-ascii"" #>",
-            callback);
+            callback
+        );
 
         Assert.Empty(callback.Errors);
         Assert.Equal(".txt", callback.Extension);
@@ -167,15 +146,14 @@ public class TextTemplatingServiceTest
     [ConditionalFact]
     public void Assembly_works()
     {
-        var host = new TextTemplatingService(
-            new ServiceCollection()
-                .BuildServiceProvider());
+        var host = new TextTemplatingService(new ServiceCollection().BuildServiceProvider());
         var callback = new TextTemplatingCallback();
 
         var result = host.ProcessTemplate(
             @"T:\test.tt",
             @"<#@ assembly name=""Microsoft.EntityFrameworkCore"" #><#= nameof(Microsoft.EntityFrameworkCore.DbContext) #>",
-            callback);
+            callback
+        );
 
         Assert.Empty(callback.Errors);
         Assert.Equal("DbContext", result);

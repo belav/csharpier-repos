@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             IAsynchronousOperationListenerProvider listenerProvider,
             ILspLogger logger,
             ImmutableArray<string> supportedLanguages,
-            WellKnownLspServerKinds serverKind)
+            WellKnownLspServerKinds serverKind
+        )
         {
             _capabilitiesProvider = capabilitiesProvider;
             _logger = logger;
@@ -59,21 +60,29 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             _listener = listenerProvider.GetListener(FeatureAttribute.LanguageServer);
 
             // Add services that require base dependencies (jsonrpc) or are more complex to create to the set manually.
-            _lspServices = lspServiceProvider.CreateServices(serverKind, ImmutableArray.Create(
-                CreateLspServiceInstance<ILanguageServerNotificationManager>(new LanguageServerNotificationManager(_jsonRpc)),
-                CreateLspServiceInstance(logger),
-                CreateLspServiceInstance<IClientCapabilitiesProvider>(this)));
-
-            _queue = new RequestExecutionQueue(
-                supportedLanguages,
+            _lspServices = lspServiceProvider.CreateServices(
                 serverKind,
-                _lspServices);
+                ImmutableArray.Create(
+                    CreateLspServiceInstance<ILanguageServerNotificationManager>(
+                        new LanguageServerNotificationManager(_jsonRpc)
+                    ),
+                    CreateLspServiceInstance(logger),
+                    CreateLspServiceInstance<IClientCapabilitiesProvider>(this)
+                )
+            );
+
+            _queue = new RequestExecutionQueue(supportedLanguages, serverKind, _lspServices);
             _queue.RequestServerShutdown += RequestExecutionQueue_Errored;
 
             _requestDispatcher = _lspServices.GetRequiredService<RequestDispatcher>();
 
-            var entryPointMethod = typeof(DelegatingEntryPoint).GetMethod(nameof(DelegatingEntryPoint.EntryPointAsync));
-            Contract.ThrowIfNull(entryPointMethod, $"{typeof(DelegatingEntryPoint).FullName} is missing method {nameof(DelegatingEntryPoint.EntryPointAsync)}");
+            var entryPointMethod = typeof(DelegatingEntryPoint).GetMethod(
+                nameof(DelegatingEntryPoint.EntryPointAsync)
+            );
+            Contract.ThrowIfNull(
+                entryPointMethod,
+                $"{typeof(DelegatingEntryPoint).FullName} is missing method {nameof(DelegatingEntryPoint.EntryPointAsync)}"
+            );
 
             foreach (var metadata in _requestDispatcher.GetRegisteredMethods())
             {
@@ -86,15 +95,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 // StreamJsonRpc to do the deserialization to handle streaming requests using IProgress<T>.
                 var delegatingEntryPoint = new DelegatingEntryPoint(metadata.MethodName, this);
 
-                var genericEntryPointMethod = entryPointMethod.MakeGenericMethod(metadata.RequestType, metadata.ResponseType);
+                var genericEntryPointMethod = entryPointMethod.MakeGenericMethod(
+                    metadata.RequestType,
+                    metadata.ResponseType
+                );
 
-                _jsonRpc.AddLocalRpcMethod(genericEntryPointMethod, delegatingEntryPoint, new JsonRpcMethodAttribute(metadata.MethodName) { UseSingleObjectParameterDeserialization = true });
+                _jsonRpc.AddLocalRpcMethod(
+                    genericEntryPointMethod,
+                    delegatingEntryPoint,
+                    new JsonRpcMethodAttribute(metadata.MethodName)
+                    {
+                        UseSingleObjectParameterDeserialization = true
+                    }
+                );
             }
 
-            static Lazy<ILspService, LspServiceMetadataView> CreateLspServiceInstance<T>(T lspServiceInstance) where T : ILspService
+            static Lazy<ILspService, LspServiceMetadataView> CreateLspServiceInstance<T>(
+                T lspServiceInstance
+            )
+                where T : ILspService
             {
                 return new Lazy<ILspService, LspServiceMetadataView>(
-                    () => lspServiceInstance, new LspServiceMetadataView(typeof(T)));
+                    () => lspServiceInstance,
+                    new LspServiceMetadataView(typeof(T))
+                );
             }
         }
 
@@ -113,22 +137,35 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 _target = target;
             }
 
-            public async Task<TResponseType?> EntryPointAsync<TRequestType, TResponseType>(TRequestType requestType, CancellationToken cancellationToken) where TRequestType : class
+            public async Task<TResponseType?> EntryPointAsync<TRequestType, TResponseType>(
+                TRequestType requestType,
+                CancellationToken cancellationToken
+            )
+                where TRequestType : class
             {
-                Contract.ThrowIfNull(_target._clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
-                var result = await _target._requestDispatcher.ExecuteRequestAsync<TRequestType, TResponseType>(
-                    _method,
-                    requestType,
+                Contract.ThrowIfNull(
                     _target._clientCapabilities,
-                    _target._queue,
-                    cancellationToken).ConfigureAwait(false);
+                    $"{nameof(InitializeAsync)} has not been called."
+                );
+                var result = await _target._requestDispatcher
+                    .ExecuteRequestAsync<TRequestType, TResponseType>(
+                        _method,
+                        requestType,
+                        _target._clientCapabilities,
+                        _target._queue,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 return result;
             }
         }
 
         public ClientCapabilities GetClientCapabilities()
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
+            Contract.ThrowIfNull(
+                _clientCapabilities,
+                $"{nameof(InitializeAsync)} has not been called."
+            );
             return _clientCapabilities;
         }
 
@@ -137,19 +174,27 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         /// capabilities.  The specification assures that the initialize request is sent only once.
         /// </summary>
         [JsonRpcMethod(Methods.InitializeName, UseSingleObjectParameterDeserialization = true)]
-        public Task<InitializeResult> InitializeAsync(InitializeParams initializeParams, CancellationToken cancellationToken)
+        public Task<InitializeResult> InitializeAsync(
+            InitializeParams initializeParams,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 _logger?.TraceStart("Initialize");
 
-                Contract.ThrowIfTrue(_clientCapabilities != null, $"{nameof(InitializeAsync)} called multiple times");
+                Contract.ThrowIfTrue(
+                    _clientCapabilities != null,
+                    $"{nameof(InitializeAsync)} called multiple times"
+                );
                 _clientCapabilities = initializeParams.Capabilities;
 
-                return Task.FromResult(new InitializeResult
-                {
-                    Capabilities = _capabilitiesProvider.GetCapabilities(_clientCapabilities),
-                });
+                return Task.FromResult(
+                    new InitializeResult
+                    {
+                        Capabilities = _capabilitiesProvider.GetCapabilities(_clientCapabilities),
+                    }
+                );
             }
             finally
             {
@@ -229,18 +274,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         /// Specially handle the execute workspace command method as we have to deserialize the request
         /// to figure out which <see cref="AbstractExecuteWorkspaceCommandHandler"/> actually handles it.
         /// </summary>
-        [JsonRpcMethod(Methods.WorkspaceExecuteCommandName, UseSingleObjectParameterDeserialization = true)]
-        public async Task<object?> ExecuteWorkspaceCommandAsync(LSP.ExecuteCommandParams request, CancellationToken cancellationToken)
+        [JsonRpcMethod(
+            Methods.WorkspaceExecuteCommandName,
+            UseSingleObjectParameterDeserialization = true
+        )]
+        public async Task<object?> ExecuteWorkspaceCommandAsync(
+            LSP.ExecuteCommandParams request,
+            CancellationToken cancellationToken
+        )
         {
-            Contract.ThrowIfNull(_clientCapabilities, $"{nameof(InitializeAsync)} has not been called.");
-            var requestMethod = AbstractExecuteWorkspaceCommandHandler.GetRequestNameForCommandName(request.Command);
-
-            var result = await _requestDispatcher.ExecuteRequestAsync<LSP.ExecuteCommandParams, object>(
-                requestMethod,
-                request,
+            Contract.ThrowIfNull(
                 _clientCapabilities,
-                _queue,
-                cancellationToken).ConfigureAwait(false);
+                $"{nameof(InitializeAsync)} has not been called."
+            );
+            var requestMethod = AbstractExecuteWorkspaceCommandHandler.GetRequestNameForCommandName(
+                request.Command
+            );
+
+            var result = await _requestDispatcher
+                .ExecuteRequestAsync<LSP.ExecuteCommandParams, object>(
+                    requestMethod,
+                    request,
+                    _clientCapabilities,
+                    _queue,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result;
         }
 
@@ -255,7 +314,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         private void RequestExecutionQueue_Errored(object? sender, RequestShutdownEventArgs e)
         {
             // log message and shut down
-            _logger?.TraceWarning($"Request queue is requesting shutdown due to error: {e.Message}");
+            _logger?.TraceWarning(
+                $"Request queue is requesting shutdown due to error: {e.Message}"
+            );
 
             var message = new LogMessageParams()
             {
@@ -265,14 +326,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             var asyncToken = _listener.BeginAsyncOperation(nameof(RequestExecutionQueue_Errored));
             _errorShutdownTask = Task.Run(async () =>
-            {
-                _logger?.TraceInformation("Shutting down language server.");
+                {
+                    _logger?.TraceInformation("Shutting down language server.");
 
-                await _jsonRpc.NotifyWithParameterObjectAsync(Methods.WindowLogMessageName, message).ConfigureAwait(false);
+                    await _jsonRpc
+                        .NotifyWithParameterObjectAsync(Methods.WindowLogMessageName, message)
+                        .ConfigureAwait(false);
 
-                ShutdownImpl();
-                ExitImpl();
-            }).CompletesAsyncOperation(asyncToken);
+                    ShutdownImpl();
+                    ExitImpl();
+                })
+                .CompletesAsyncOperation(asyncToken);
         }
 
         /// <summary>
@@ -286,7 +350,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 return;
             }
 
-            _logger?.TraceWarning($"Encountered unexpected jsonrpc disconnect, Reason={e.Reason}, Description={e.Description}, Exception={e.Exception}");
+            _logger?.TraceWarning(
+                $"Encountered unexpected jsonrpc disconnect, Reason={e.Reason}, Description={e.Description}, Exception={e.Exception}"
+            );
 
             ShutdownImpl();
             ExitImpl();
@@ -313,10 +379,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 _server = server;
             }
 
-            public T GetRequiredLspService<T>() where T : class, ILspService => _server._lspServices.GetRequiredService<T>();
+            public T GetRequiredLspService<T>()
+                where T : class, ILspService => _server._lspServices.GetRequiredService<T>();
 
-            internal RequestExecutionQueue.TestAccessor GetQueueAccessor()
-                => _server._queue!.GetTestAccessor();
+            internal RequestExecutionQueue.TestAccessor GetQueueAccessor() =>
+                _server._queue!.GetTestAccessor();
 
             internal JsonRpc GetServerRpc() => _server._jsonRpc;
 

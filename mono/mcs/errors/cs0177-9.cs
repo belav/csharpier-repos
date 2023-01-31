@@ -3,10 +3,11 @@
 
 class Test
 {
-	delegate T Creator<T> ();
+    delegate T Creator<T>();
 
-	static bool TryAction<T> (Creator<T> creator, out T output) where T : struct
-	{
-		return false;
-	}
+    static bool TryAction<T>(Creator<T> creator, out T output)
+        where T : struct
+    {
+        return false;
+    }
 }

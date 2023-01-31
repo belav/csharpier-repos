@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         public VisualStudioErrorReportingService(
             IThreadingContext threadingContext,
             IAsynchronousOperationListenerProvider listenerProvider,
-            SVsServiceProvider serviceProvider)
+            SVsServiceProvider serviceProvider
+        )
         {
             _threadingContext = threadingContext;
             _listener = listenerProvider.GetListener(FeatureAttribute.Workspace);
@@ -38,17 +39,28 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
         public string HostDisplayName => "Visual Studio";
 
-        public void ShowGlobalErrorInfo(string message, TelemetryFeatureName featureName, Exception? exception, params InfoBarUI[] items)
+        public void ShowGlobalErrorInfo(
+            string message,
+            TelemetryFeatureName featureName,
+            Exception? exception,
+            params InfoBarUI[] items
+        )
         {
             var stackTrace = exception is null ? "" : GetFormattedExceptionStack(exception);
             LogGlobalErrorToActivityLog(message, stackTrace);
             _infoBar.ShowInfoBar(message, items);
 
-            Logger.Log(FunctionId.VS_ErrorReportingService_ShowGlobalErrorInfo, KeyValueLogMessage.Create(LogType.UserAction, m =>
-            {
-                m["Message"] = message;
-                m["FeatureName"] = featureName.ToString();
-            }));
+            Logger.Log(
+                FunctionId.VS_ErrorReportingService_ShowGlobalErrorInfo,
+                KeyValueLogMessage.Create(
+                    LogType.UserAction,
+                    m =>
+                    {
+                        m["Message"] = message;
+                        m["FeatureName"] = featureName.ToString();
+                    }
+                )
+            );
         }
 
         public void ShowDetailedErrorInfo(Exception exception)
@@ -57,17 +69,24 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             new DetailedErrorInfoDialog(exception.Message, errorInfo).ShowModal();
         }
 
-        public void ShowFeatureNotAvailableErrorInfo(string message, TelemetryFeatureName featureName, Exception? exception)
+        public void ShowFeatureNotAvailableErrorInfo(
+            string message,
+            TelemetryFeatureName featureName,
+            Exception? exception
+        )
         {
             var infoBarUIs = new List<InfoBarUI>();
 
             if (exception != null)
             {
-                infoBarUIs.Add(new InfoBarUI(
-                    WorkspacesResources.Show_Stack_Trace,
-                    InfoBarUI.UIKind.HyperLink,
-                    () => ShowDetailedErrorInfo(exception),
-                    closeAfterAction: true));
+                infoBarUIs.Add(
+                    new InfoBarUI(
+                        WorkspacesResources.Show_Stack_Trace,
+                        InfoBarUI.UIKind.HyperLink,
+                        () => ShowDetailedErrorInfo(exception),
+                        closeAfterAction: true
+                    )
+                );
             }
 
             ShowGlobalErrorInfo(message, featureName, exception, infoBarUIs.ToArray());
@@ -79,14 +98,21 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             {
                 using var _ = _listener.BeginAsyncOperation(nameof(LogGlobalErrorToActivityLog));
 
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(_threadingContext.DisposalToken);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    _threadingContext.DisposalToken
+                );
 
-                var activityLog = await ((IAsyncServiceProvider)_serviceProvider).GetServiceAsync<SVsActivityLog, IVsActivityLog>(_threadingContext.JoinableTaskFactory).ConfigureAwait(true);
+                var activityLog = await ((IAsyncServiceProvider)_serviceProvider)
+                    .GetServiceAsync<SVsActivityLog, IVsActivityLog>(
+                        _threadingContext.JoinableTaskFactory
+                    )
+                    .ConfigureAwait(true);
 
                 activityLog.LogEntry(
                     (uint)__ACTIVITYLOG_ENTRYTYPE.ALE_ERROR,
                     nameof(VisualStudioErrorReportingService),
-                    string.Join(Environment.NewLine, message, detailedError));
+                    string.Join(Environment.NewLine, message, detailedError)
+                );
             });
         }
     }

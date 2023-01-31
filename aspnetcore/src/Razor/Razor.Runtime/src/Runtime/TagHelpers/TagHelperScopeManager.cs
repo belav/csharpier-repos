@@ -24,7 +24,8 @@ public class TagHelperScopeManager
     /// <param name="endTagHelperWritingScope">A delegate used to end a writing scope in a Razor page.</param>
     public TagHelperScopeManager(
         Action<HtmlEncoder> startTagHelperWritingScope,
-        Func<TagHelperContent> endTagHelperWritingScope)
+        Func<TagHelperContent> endTagHelperWritingScope
+    )
     {
         if (startTagHelperWritingScope == null)
         {
@@ -36,7 +37,10 @@ public class TagHelperScopeManager
             throw new ArgumentNullException(nameof(endTagHelperWritingScope));
         }
 
-        _executionContextPool = new ExecutionContextPool(startTagHelperWritingScope, endTagHelperWritingScope);
+        _executionContextPool = new ExecutionContextPool(
+            startTagHelperWritingScope,
+            endTagHelperWritingScope
+        );
     }
 
     /// <summary>
@@ -51,7 +55,8 @@ public class TagHelperScopeManager
         string tagName,
         TagMode tagMode,
         string uniqueId,
-        Func<Task> executeChildContentAsync)
+        Func<Task> executeChildContentAsync
+    )
     {
         if (tagName == null)
         {
@@ -76,7 +81,8 @@ public class TagHelperScopeManager
         {
             items = new CopyOnWriteDictionary<object, object>(
                 parentExecutionContext.Items,
-                comparer: EqualityComparer<object>.Default);
+                comparer: EqualityComparer<object>.Default
+            );
         }
         else
         {
@@ -88,7 +94,8 @@ public class TagHelperScopeManager
             tagMode,
             items,
             uniqueId,
-            executeChildContentAsync);
+            executeChildContentAsync
+        );
 
         return executionContext;
     }
@@ -106,7 +113,9 @@ public class TagHelperScopeManager
                 Resources.FormatScopeManager_EndCannotBeCalledWithoutACallToBegin(
                     nameof(End),
                     nameof(Begin),
-                    nameof(TagHelperScopeManager)));
+                    nameof(TagHelperScopeManager)
+                )
+            );
         }
 
         _executionContextPool.ReturnCurrent();
@@ -125,21 +134,24 @@ public class TagHelperScopeManager
 
         public ExecutionContextPool(
             Action<HtmlEncoder> startTagHelperWritingScope,
-            Func<TagHelperContent> endTagHelperWritingScope)
+            Func<TagHelperContent> endTagHelperWritingScope
+        )
         {
             _executionContexts = new List<TagHelperExecutionContext>();
             _startTagHelperWritingScope = startTagHelperWritingScope;
             _endTagHelperWritingScope = endTagHelperWritingScope;
         }
 
-        public TagHelperExecutionContext Current => _nextIndex > 0 ? _executionContexts[_nextIndex - 1] : null;
+        public TagHelperExecutionContext Current =>
+            _nextIndex > 0 ? _executionContexts[_nextIndex - 1] : null;
 
         public TagHelperExecutionContext Rent(
             string tagName,
             TagMode tagMode,
             IDictionary<object, object> items,
             string uniqueId,
-            Func<Task> executeChildContentAsync)
+            Func<Task> executeChildContentAsync
+        )
         {
             TagHelperExecutionContext tagHelperExecutionContext;
 
@@ -152,14 +164,21 @@ public class TagHelperScopeManager
                     uniqueId,
                     executeChildContentAsync,
                     _startTagHelperWritingScope,
-                    _endTagHelperWritingScope);
+                    _endTagHelperWritingScope
+                );
 
                 _executionContexts.Add(tagHelperExecutionContext);
             }
             else
             {
                 tagHelperExecutionContext = _executionContexts[_nextIndex];
-                tagHelperExecutionContext.Reinitialize(tagName, tagMode, items, uniqueId, executeChildContentAsync);
+                tagHelperExecutionContext.Reinitialize(
+                    tagName,
+                    tagMode,
+                    items,
+                    uniqueId,
+                    executeChildContentAsync
+                );
             }
 
             _nextIndex++;

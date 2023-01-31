@@ -3,4 +3,4 @@
 
 using S = System;
 
-[assembly: Sa::CLSCompliantAttribute (false)]
+[assembly: Sa::CLSCompliantAttribute(false)]

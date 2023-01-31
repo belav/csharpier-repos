@@ -27,12 +27,14 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         /// Creates an cql block representing the <paramref name="extent"/> (the FROM part).
         /// SELECT is given by <paramref name="slots"/>, WHERE by <paramref name="whereClause"/> and AS by <paramref name="blockAliasNum"/>.
         /// </summary>
-        internal ExtentCqlBlock(EntitySetBase extent,
-                                CellQuery.SelectDistinct selectDistinct,
-                                SlotInfo[] slots,
-                                BoolExpression whereClause,
-                                CqlIdentifiers identifiers,
-                                int blockAliasNum)
+        internal ExtentCqlBlock(
+            EntitySetBase extent,
+            CellQuery.SelectDistinct selectDistinct,
+            SlotInfo[] slots,
+            BoolExpression whereClause,
+            CqlIdentifiers identifiers,
+            int blockAliasNum
+        )
             : base(slots, EmptyChildren, whereClause, identifiers, blockAliasNum)
         {
             m_extent = extent;
@@ -49,7 +51,11 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         #endregion
 
         #region Methods
-        internal override StringBuilder AsEsql(StringBuilder builder, bool isTopLevel, int indentLevel)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            bool isTopLevel,
+            int indentLevel
+        )
         {
             // The SELECT/DISTINCT part.
             StringUtil.IndentNewLine(builder, indentLevel);
@@ -62,7 +68,11 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
 
             // Get the FROM part.
             builder.Append("FROM ");
-            CqlWriter.AppendEscapedQualifiedName(builder, m_extent.EntityContainer.Name, m_extent.Name);
+            CqlWriter.AppendEscapedQualifiedName(
+                builder,
+                m_extent.EntityContainer.Name,
+                m_extent.Name
+            );
             builder.Append(" AS ").Append(m_nodeTableAlias);
 
             // Get the WHERE part only when the expression is not simply TRUE.

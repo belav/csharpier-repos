@@ -3,20 +3,22 @@
 
 class C
 {
-	static void Main ()
-	{
-		bool x = true, y = true, z = true;
+    static void Main()
+    {
+        bool x = true,
+            y = true,
+            z = true;
 
-		int a;
-		if (x ? y : (z || Foo (out a)))
-			System.Console.WriteLine (z);
-		else
-			System.Console.WriteLine (a);
-	}
+        int a;
+        if (x ? y : (z || Foo(out a)))
+            System.Console.WriteLine(z);
+        else
+            System.Console.WriteLine(a);
+    }
 
-	static bool Foo (out int f)
-	{
-		f = 1;
-		return true;
-	}
+    static bool Foo(out int f)
+    {
+        f = 1;
+        return true;
+    }
 }

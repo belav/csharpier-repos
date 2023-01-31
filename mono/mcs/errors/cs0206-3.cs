@@ -3,14 +3,12 @@
 
 class C
 {
-	static void Foo (ref object o)
-	{
-	}
-	
-	public static void Main ()
-	{
-		var v = new { Foo = "Bar" };
-		
-		Foo (ref v.Foo);
-	}
+    static void Foo(ref object o) { }
+
+    public static void Main()
+    {
+        var v = new { Foo = "Bar" };
+
+        Foo(ref v.Foo);
+    }
 }

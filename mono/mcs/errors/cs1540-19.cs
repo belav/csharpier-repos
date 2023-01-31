@@ -5,23 +5,17 @@ using System;
 
 public class AAttribute : Attribute
 {
-	public AAttribute ()
-	{
-	}
+    public AAttribute() { }
 
-	protected AAttribute (int a)
-	{
-	}
+    protected AAttribute(int a) { }
 }
 
-[AAttribute (5)]
+[AAttribute(5)]
 public class BAttribute : AAttribute
 {
-	public BAttribute () : base ()
-	{
-	}
-	
-	public BAttribute (int a) : base (a)
-	{
-	}
+    public BAttribute()
+        : base() { }
+
+    public BAttribute(int a)
+        : base(a) { }
 }

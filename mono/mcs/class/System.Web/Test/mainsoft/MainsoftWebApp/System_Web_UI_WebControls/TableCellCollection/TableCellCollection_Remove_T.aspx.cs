@@ -35,65 +35,63 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableCellCollection_Remove_T
-		: GHTBaseWeb 
-	{
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
+    public class TableCellCollection_Remove_T : GHTBaseWeb
+    {
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
 
-		}
+		#region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
 		#endregion
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
 
-			System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
 
-			//add new cell
-			tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            //add new cell
+            tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
 
-			tbl.Rows[0].Cells[0].Text = "111";
-			tbl.Rows[0].Cells[1].Text = "222";
-			tbl.Rows[0].Cells[2].Text = "333";
-			tbl.Rows[0].Cells[3].Text = "444";
+            tbl.Rows[0].Cells[0].Text = "111";
+            tbl.Rows[0].Cells[1].Text = "222";
+            tbl.Rows[0].Cells[2].Text = "333";
+            tbl.Rows[0].Cells[3].Text = "444";
 
-   
-			try 
-			{
-				base.GHTSubTestBegin("Remove");
-				base.GHTActiveSubTest.Controls.Add(tbl);
-				tbl.Rows[0].Cells.Remove(tbl.Rows[0].Cells[1]);
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            try
+            {
+                base.GHTSubTestBegin("Remove");
+                base.GHTActiveSubTest.Controls.Add(tbl);
+                tbl.Rows[0].Cells.Remove(tbl.Rows[0].Cells[1]);
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
 
-			base.GHTTestEnd();
-		}
-	}
+            base.GHTTestEnd();
+        }
+    }
 }

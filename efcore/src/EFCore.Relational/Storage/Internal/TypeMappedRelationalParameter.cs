@@ -24,7 +24,8 @@ public class TypeMappedRelationalParameter : RelationalParameterBase
         string name,
         RelationalTypeMapping relationalTypeMapping,
         bool? nullable,
-        ParameterDirection direction = ParameterDirection.Input)
+        ParameterDirection direction = ParameterDirection.Input
+    )
         : base(invariantName)
     {
         Name = name;
@@ -61,7 +62,8 @@ public class TypeMappedRelationalParameter : RelationalParameterBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override void AddDbParameter(DbCommand command, object? value)
-        => command.Parameters.Add(
-            RelationalTypeMapping.CreateParameter(command, Name, value, IsNullable, Direction));
+    public override void AddDbParameter(DbCommand command, object? value) =>
+        command.Parameters.Add(
+            RelationalTypeMapping.CreateParameter(command, Name, value, IsNullable, Direction)
+        );
 }

@@ -2,10 +2,10 @@
 // Line: 7
 // Compiler options: -unsafe
 
-public class MainClass {
-        unsafe static void Main () {
-                fixed (int* p) {
-                }
-        }
+public class MainClass
+{
+    unsafe static void Main()
+    {
+        fixed (int* p) { }
+    }
 }
-

@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -reference:CS0619-43-lib.dll
 
-class A {
-	public decimal C = Error.C;
+class A
+{
+    public decimal C = Error.C;
 }

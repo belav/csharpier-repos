@@ -2,25 +2,24 @@
 // Line: 23
 using System;
 
-public class TestClass<T> where T : class
+public class TestClass<T>
+    where T : class
 {
-	static public T meth()
-	{
-		return null;
-	}
+    static public T meth()
+    {
+        return null;
+    }
 
-	static public T Value;
-}			
-	
+    static public T Value;
+}
+
 public class Test
 {
-	public Test()
-	{
-	}
-		
-	static public void Main()
-	{
-		int j = TestClass<int>.Value;
-		Console.WriteLine (j);
-	}
+    public Test() { }
+
+    static public void Main()
+    {
+        int j = TestClass<int>.Value;
+        Console.WriteLine(j);
+    }
 }

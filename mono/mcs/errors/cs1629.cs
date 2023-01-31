@@ -4,10 +4,10 @@
 
 using System.Collections;
 
-class X {
-	static unsafe IEnumerator GetIt ()
-	{
-	    yield return 1;
-	}
-	
+class X
+{
+    static unsafe IEnumerator GetIt()
+    {
+        yield return 1;
+    }
 }

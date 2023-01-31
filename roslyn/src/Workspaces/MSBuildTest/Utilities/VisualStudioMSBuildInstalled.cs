@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
             var latestInstalledInstance = (VisualStudioInstance?)null;
             foreach (var visualStudioInstance in MSBuildLocator.QueryVisualStudioInstances())
             {
-                if (latestInstalledInstance == null || visualStudioInstance.Version > latestInstalledInstance.Version)
+                if (
+                    latestInstalledInstance == null
+                    || visualStudioInstance.Version > latestInstalledInstance.Version
+                )
                 {
                     latestInstalledInstance = visualStudioInstance;
                 }
@@ -32,13 +35,10 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                 s_instance = latestInstalledInstance;
             }
         }
-
 #endif
 
         public VisualStudioMSBuildInstalled()
-            : this(new Version(17, 0))
-        {
-        }
+            : this(new Version(17, 0)) { }
 
         internal VisualStudioMSBuildInstalled(Version minimumVersion)
         {
@@ -49,16 +49,20 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
         public override bool ShouldSkip
 #if NET472_OR_GREATER
-            => s_instance is null || s_instance.Version < _minimumVersion;
+            =>
+            s_instance is null || s_instance.Version < _minimumVersion;
 #else
-            => true;
+            =>
+            true;
 #endif
 
         public override string SkipReason
 #if NET472_OR_GREATER
-            => $"Could not locate Visual Studio with MSBuild {_minimumVersion} or higher installed";
+            =>
+            $"Could not locate Visual Studio with MSBuild {_minimumVersion} or higher installed";
 #else
-            => $"Test runs on .NET Framework only.";
+            =>
+            $"Test runs on .NET Framework only.";
 #endif
     }
 }

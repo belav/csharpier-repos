@@ -15,7 +15,10 @@ namespace System.Reflection.Runtime.TypeInfos
     //
     // The runtime's implementation of TypeInfo's for the "HasElement" subclass of types.
     //
-    internal abstract partial class RuntimeHasElementTypeInfo : RuntimeTypeInfo, IKeyedItem<RuntimeHasElementTypeInfo.UnificationKey>, IRuntimeMemberInfoWithNoMetadataDefinition
+    internal abstract partial class RuntimeHasElementTypeInfo
+        : RuntimeTypeInfo,
+            IKeyedItem<RuntimeHasElementTypeInfo.UnificationKey>,
+            IRuntimeMemberInfoWithNoMetadataDefinition
     {
         protected RuntimeHasElementTypeInfo(UnificationKey key)
             : base()
@@ -25,7 +28,9 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool IsTypeDefinition => false;
         public sealed override bool IsGenericTypeDefinition => false;
+
         protected sealed override bool HasElementTypeImpl() => true;
+
         protected abstract override bool IsArrayImpl();
         public abstract override bool IsSZArray { get; }
         public abstract override bool IsVariableBoundArray { get; }
@@ -46,9 +51,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // PrepareKey() must be idempodent and thread-safe. It may be invoked multiple times and concurrently.
         //
-        public void PrepareKey()
-        {
-        }
+        public void PrepareKey() { }
 
         //
         // Implements IKeyedItem.Key.
@@ -59,34 +62,22 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         public UnificationKey Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
 
         public sealed override Assembly Assembly
         {
-            get
-            {
-                return _key.ElementType.Assembly;
-            }
+            get { return _key.ElementType.Assembly; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
         {
-            get
-            {
-                return Array.Empty<CustomAttributeData>();
-            }
+            get { return Array.Empty<CustomAttributeData>(); }
         }
 
         public sealed override bool ContainsGenericParameters
         {
-            get
-            {
-                return _key.ElementType.ContainsGenericParameters;
-            }
+            get { return _key.ElementType.ContainsGenericParameters; }
         }
 
         public sealed override string FullName
@@ -111,18 +102,12 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override string Namespace
         {
-            get
-            {
-                return _key.ElementType.Namespace;
-            }
+            get { return _key.ElementType.Namespace; }
         }
 
         public sealed override StructLayoutAttribute StructLayoutAttribute
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public sealed override string ToString()
@@ -154,42 +139,27 @@ namespace System.Reflection.Runtime.TypeInfos
 
         internal sealed override Type InternalDeclaringType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public sealed override string Name
         {
-            get
-            {
-                return _key.ElementType.Name + Suffix;
-            }
+            get { return _key.ElementType.Name + Suffix; }
         }
 
         internal sealed override string InternalFullNameOfAssembly
         {
-            get
-            {
-                return _key.ElementType.InternalFullNameOfAssembly;
-            }
+            get { return _key.ElementType.InternalFullNameOfAssembly; }
         }
 
         internal sealed override RuntimeTypeInfo InternalRuntimeElementType
         {
-            get
-            {
-                return _key.ElementType;
-            }
+            get { return _key.ElementType; }
         }
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return _key.TypeHandle;
-            }
+            get { return _key.TypeHandle; }
         }
 
         protected abstract string Suffix { get; }

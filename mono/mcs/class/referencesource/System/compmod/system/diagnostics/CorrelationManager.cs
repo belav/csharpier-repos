@@ -10,25 +10,30 @@ using System.Collections.Specialized;
 using System.Threading;
 using System.Runtime.Remoting.Messaging;
 
-
-namespace System.Diagnostics {
-    public class CorrelationManager {
-        private const string transactionSlotName = "System.Diagnostics.Trace.CorrelationManagerSlot";
+namespace System.Diagnostics
+{
+    public class CorrelationManager
+    {
+        private const string transactionSlotName =
+            "System.Diagnostics.Trace.CorrelationManagerSlot";
         private const string activityIdSlotName = "E2ETrace.ActivityID";
-        
+
         internal CorrelationManager() { }
 
-        public Guid ActivityId {
-            get {
+        public Guid ActivityId
+        {
+            get
+            {
 #if !DISABLE_REMOTING
                 Object id = CallContext.LogicalGetData(activityIdSlotName);
                 if (id != null)
-                    return (Guid) id;
+                    return (Guid)id;
                 else
 #endif
-                    return Guid.Empty;
+                return Guid.Empty;
             }
-            set {
+            set
+            {
 #if !DISABLE_REMOTING
                 CallContext.LogicalSetData(activityIdSlotName, value);
 #endif
@@ -36,13 +41,13 @@ namespace System.Diagnostics {
         }
 
 #if !DISABLE_REMOTING
-        public Stack LogicalOperationStack {
-            get {
-                return GetLogicalOperationStack();
-            }
+        public Stack LogicalOperationStack
+        {
+            get { return GetLogicalOperationStack(); }
         }
-        
-        public void StartLogicalOperation(object operationId) {
+
+        public void StartLogicalOperation(object operationId)
+        {
             if (operationId == null)
                 throw new ArgumentNullException("operationId");
 
@@ -50,18 +55,22 @@ namespace System.Diagnostics {
             idStack.Push(operationId);
         }
 
-        public void StartLogicalOperation() {
+        public void StartLogicalOperation()
+        {
             StartLogicalOperation(Guid.NewGuid());
         }
 
-        public void StopLogicalOperation() {
+        public void StopLogicalOperation()
+        {
             Stack idStack = GetLogicalOperationStack();
             idStack.Pop();
         }
 
-        private Stack GetLogicalOperationStack() {
+        private Stack GetLogicalOperationStack()
+        {
             Stack idStack = CallContext.LogicalGetData(transactionSlotName) as Stack;
-            if (idStack == null) {
+            if (idStack == null)
+            {
                 idStack = new Stack();
                 CallContext.LogicalSetData(transactionSlotName, idStack);
             }
@@ -69,10 +78,14 @@ namespace System.Diagnostics {
             return idStack;
         }
 #else
-        public Stack LogicalOperationStack => throw new PlatformNotSupportedException ();
-        public void StartLogicalOperation (object operationId) => throw new PlatformNotSupportedException ();
-        public void StartLogicalOperation () => throw new PlatformNotSupportedException ();
-        public void StopLogicalOperation () => throw new PlatformNotSupportedException ();
+        public Stack LogicalOperationStack => throw new PlatformNotSupportedException();
+
+        public void StartLogicalOperation(object operationId) =>
+            throw new PlatformNotSupportedException();
+
+        public void StartLogicalOperation() => throw new PlatformNotSupportedException();
+
+        public void StopLogicalOperation() => throw new PlatformNotSupportedException();
 #endif
     }
 }

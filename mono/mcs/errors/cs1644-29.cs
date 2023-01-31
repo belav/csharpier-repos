@@ -2,12 +2,9 @@
 // Line: 5
 // Compiler options: -langversion:ISO-1
 
-class X<V>
-{
-}
+class X<V> { }
 
 class X
 {
-	static void Main ()
-	{ }
+    static void Main() { }
 }

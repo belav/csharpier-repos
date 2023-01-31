@@ -13,8 +13,18 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Styles
         // Scaling percentage. E.g. 122 means 122%.
         public int Scale { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => (double)value * Scale / 100.0;
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => (double)value * Scale / 100.0;
 
-        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
+        public object? ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        ) => null;
     }
 }

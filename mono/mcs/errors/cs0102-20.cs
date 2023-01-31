@@ -3,7 +3,8 @@
 
 class C<get_Foo>
 {
-	string Foo {
-		set { }
-	}
+    string Foo
+    {
+        set { }
+    }
 }

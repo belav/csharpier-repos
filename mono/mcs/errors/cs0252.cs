@@ -4,9 +4,11 @@
 
 using System;
 
-class X {
-	static void Main() {
-		object a = "11";
-		Console.WriteLine(a == "11");
-	}
+class X
+{
+    static void Main()
+    {
+        object a = "11";
+        Console.WriteLine(a == "11");
+    }
 }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,61 +34,61 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class AuthenticationModulesSection : ConfigurationSection
-	{
+    public sealed class AuthenticationModulesSection : ConfigurationSection
+    {
 		#region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty authenticationModulesProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty authenticationModulesProp;
 
 		#endregion // Fields
 
 		#region Constructors
 
-		static AuthenticationModulesSection ()
-		{
-			authenticationModulesProp = new ConfigurationProperty ("", typeof (AuthenticationModuleElementCollection),
-									       null, ConfigurationPropertyOptions.IsDefaultCollection);
-									       
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (authenticationModulesProp);
-		}
+        static AuthenticationModulesSection()
+        {
+            authenticationModulesProp = new ConfigurationProperty(
+                "",
+                typeof(AuthenticationModuleElementCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-		public AuthenticationModulesSection ()
-		{
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(authenticationModulesProp);
+        }
+
+        public AuthenticationModulesSection() { }
 
 		#endregion // Constructors
 
 		#region Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public AuthenticationModuleElementCollection AuthenticationModules {
-			get { return (AuthenticationModuleElementCollection) base [authenticationModulesProp]; }
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public AuthenticationModuleElementCollection AuthenticationModules
+        {
+            get { return (AuthenticationModuleElementCollection)base[authenticationModulesProp]; }
+        }
 
 		#endregion // Properties
 
 		#region Methods
 
-		[MonoTODO]
-		protected override void PostDeserialize ()
-		{
-		}
+        [MonoTODO]
+        protected override void PostDeserialize() { }
 
-		[MonoTODO]
-		protected override void InitializeDefault ()
-		{
-		}
+        [MonoTODO]
+        protected override void InitializeDefault() { }
 
 		#endregion // Methods
-	}
+    }
 }
 
 #endif

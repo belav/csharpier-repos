@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
 
-// Reuse of code from https://github.com/Microsoft/workbooks/blob/master/Agents/Xamarin.Interactive/ProcessControl/Glob.cs 
+// Reuse of code from https://github.com/Microsoft/workbooks/blob/master/Agents/Xamarin.Interactive/ProcessControl/Glob.cs
 namespace Xamarin.ProcessControl
 {
     static class Glob
@@ -28,8 +28,10 @@ namespace Xamarin.ProcessControl
             if (String.IsNullOrEmpty(rootComponent))
                 rootComponent = null;
 
-            return path
-                .Split(new[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries)
+            return path.Split(
+                    new[] { Path.DirectorySeparatorChar },
+                    StringSplitOptions.RemoveEmptyEntries
+                )
                 .Where(part => !String.IsNullOrEmpty(part) && part != ".")
                 .ToArray();
         }
@@ -92,10 +94,16 @@ namespace Xamarin.ProcessControl
                     return new TerminalEnumerator();
 
                 if (patternParts.Length == 0)
-                    throw new ArgumentException("must have at least one element", nameof(patternParts));
+                    throw new ArgumentException(
+                        "must have at least one element",
+                        nameof(patternParts)
+                    );
 
                 if (patternParts[0] == null)
-                    throw new ArgumentException("must not have null elements", nameof(patternParts));
+                    throw new ArgumentException(
+                        "must not have null elements",
+                        nameof(patternParts)
+                    );
 
                 var root = patternParts[0];
                 string[] childParts = null;
@@ -109,8 +117,10 @@ namespace Xamarin.ProcessControl
                 if (root == "**")
                     return new RecursiveDirectoryEnumerator(childParts);
                 else if (root.Contains("**"))
-                    throw new ArgumentException("invalid pattern: '**' can only be an " +
-                        $"entire path component ({root}", nameof(patternParts));
+                    throw new ArgumentException(
+                        "invalid pattern: '**' can only be an " + $"entire path component ({root}",
+                        nameof(patternParts)
+                    );
                 else if (GlobEnumerator.CanHandleWildcards(root))
                     return new GlobEnumerator(root, childParts);
                 else
@@ -131,9 +141,7 @@ namespace Xamarin.ProcessControl
 
         class TerminalEnumerator : PatternEnumerator
         {
-            internal TerminalEnumerator()
-            {
-            }
+            internal TerminalEnumerator() { }
 
             public override IEnumerable<string> Enumerate(string basePath)
             {
@@ -145,7 +153,8 @@ namespace Xamarin.ProcessControl
         {
             readonly string name;
 
-            internal VerbatimEnumerator(string name, string[] childParts) : base(childParts)
+            internal VerbatimEnumerator(string name, string[] childParts)
+                : base(childParts)
             {
                 this.name = name;
             }
@@ -166,14 +175,19 @@ namespace Xamarin.ProcessControl
 
         class RecursiveDirectoryEnumerator : PatternEnumerator
         {
-            internal RecursiveDirectoryEnumerator(string[] childParts) : base(childParts)
-            {
-            }
+            internal RecursiveDirectoryEnumerator(string[] childParts)
+                : base(childParts) { }
 
             static IEnumerable<string> EnumerateDirectories(string basePath)
             {
                 yield return basePath;
-                foreach (var directory in Directory.EnumerateDirectories(basePath, "*", SearchOption.AllDirectories))
+                foreach (
+                    var directory in Directory.EnumerateDirectories(
+                        basePath,
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                )
                     yield return directory;
             }
 
@@ -275,7 +289,8 @@ namespace Xamarin.ProcessControl
 
             readonly Regex pattern;
 
-            internal GlobEnumerator(string pattern, string[] childParts) : base(childParts)
+            internal GlobEnumerator(string pattern, string[] childParts)
+                : base(childParts)
             {
                 this.pattern = GetRegex(pattern);
             }

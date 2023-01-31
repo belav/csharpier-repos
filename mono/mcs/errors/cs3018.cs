@@ -3,13 +3,12 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly: CLSCompliant (true)]
 
-[CLSCompliant (false)]
+[assembly: CLSCompliant(true)]
+
+[CLSCompliant(false)]
 public class NotCompliant
 {
-		[CLSCompliant (true)]
-		public class Compliant
-		{
-		}
+    [CLSCompliant(true)]
+    public class Compliant { }
 }

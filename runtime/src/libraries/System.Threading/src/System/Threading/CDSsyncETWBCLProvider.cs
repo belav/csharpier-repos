@@ -24,9 +24,9 @@ namespace System.Threading
     [EventSource(
         Name = "System.Threading.SynchronizationEventSource",
         Guid = "EC631D38-466B-4290-9306-834971BA0217"
-        //TODO:(TFS455853):Add support for reading localized string in the EventSource il2il transform
-        //,LocalizationResources = "mscorlib"
-        )]
+    //TODO:(TFS455853):Add support for reading localized string in the EventSource il2il transform
+    //,LocalizationResources = "mscorlib"
+    )]
     internal sealed class CdsSyncEtwBCLProvider : EventSource
     {
         /// <summary>
@@ -34,6 +34,7 @@ namespace System.Threading
         /// The CDS Sync Event provider GUID is {EC631D38-466B-4290-9306-834971BA0217}.
         /// </summary>
         public static CdsSyncEtwBCLProvider Log = new CdsSyncEtwBCLProvider();
+
         /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
         private CdsSyncEtwBCLProvider() { }
 
@@ -47,7 +48,6 @@ namespace System.Threading
 
         private const int BARRIER_PHASEFINISHED_ID = 3;
 
-
         //
         // Events below this point are used by the CDS types in System.dll
         //
@@ -57,8 +57,11 @@ namespace System.Threading
         // Barrier Events
         //
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
-                   Justification = "Parameters to this method are primitive and are trimmer safe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:UnrecognizedReflectionPattern",
+            Justification = "Parameters to this method are primitive and are trimmer safe"
+        )]
         [Event(BARRIER_PHASEFINISHED_ID, Level = EventLevel.Verbose, Version = 1)]
         public void Barrier_PhaseFinished(bool currentSense, long phaseNum)
         {

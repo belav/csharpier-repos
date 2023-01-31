@@ -3,13 +3,22 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Regular expression validation attribute
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "We want users to be able to extend this class")]
-    public class RegularExpressionAttribute : ValidationAttribute {
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "We want users to be able to extend this class"
+    )]
+    public class RegularExpressionAttribute : ValidationAttribute
+    {
         /// <summary>
         /// Gets the regular expression pattern to use
         /// </summary>
@@ -19,12 +28,12 @@ namespace System.ComponentModel.DataAnnotations {
         ///     Gets or sets the timeout to use when matching the regular expression pattern (in milliseconds)
         ///     (-1 means never timeout).
         /// </summary>
-        public int MatchTimeoutInMilliseconds { 
-            get {
-                return _matchTimeoutInMilliseconds;
-            }
-            set {               
-                _matchTimeoutInMilliseconds = value; 
+        public int MatchTimeoutInMilliseconds
+        {
+            get { return _matchTimeoutInMilliseconds; }
+            set
+            {
+                _matchTimeoutInMilliseconds = value;
                 _matchTimeoutSet = true;
             }
         }
@@ -39,7 +48,8 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <param name="pattern">The regular expression to use.  It cannot be null.</param>
         public RegularExpressionAttribute(string pattern)
-            : base(() => DataAnnotationsResources.RegexAttribute_ValidationError) {
+            : base(() => DataAnnotationsResources.RegexAttribute_ValidationError)
+        {
             this.Pattern = pattern;
         }
 
@@ -56,14 +66,16 @@ namespace System.ComponentModel.DataAnnotations {
 #else
         internal
 #endif
-        override bool IsValid(object value) {
+        override bool IsValid(object value)
+        {
             this.SetupRegex();
 
             // Convert the value to a string
             string stringValue = Convert.ToString(value, CultureInfo.CurrentCulture);
 
             // Automatically pass if value is null or empty. RequiredAttribute should be used to assert a value is not empty.
-            if (String.IsNullOrEmpty(stringValue)) {
+            if (String.IsNullOrEmpty(stringValue))
+            {
                 return true;
             }
 
@@ -82,12 +94,17 @@ namespace System.ComponentModel.DataAnnotations {
         /// <returns>The localized message to present to the user</returns>
         /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
         /// <exception cref="ArgumentException"> is thrown if the <see cref="Pattern"/> is not a valid regular expression.</exception>
-        public override string FormatErrorMessage(string name) {
+        public override string FormatErrorMessage(string name)
+        {
             this.SetupRegex();
 
-            return String.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, this.Pattern);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                this.Pattern
+            );
         }
-
 
         /// <summary>
         /// Sets up the <see cref="Regex"/> property from the <see cref="Pattern"/> property.
@@ -96,36 +113,48 @@ namespace System.ComponentModel.DataAnnotations {
         /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
         /// <exception cref="ArgumentOutOfRangeException"> thrown if <see cref="MatchTimeoutInMilliseconds" /> is negative (except -1),
         /// zero or greater than approximately 24 days </exception>
-        private void SetupRegex() {
-            if (this.Regex == null) {
-                if (string.IsNullOrEmpty(this.Pattern)) {
-                    throw new InvalidOperationException(DataAnnotationsResources.RegularExpressionAttribute_Empty_Pattern);
+        private void SetupRegex()
+        {
+            if (this.Regex == null)
+            {
+                if (string.IsNullOrEmpty(this.Pattern))
+                {
+                    throw new InvalidOperationException(
+                        DataAnnotationsResources.RegularExpressionAttribute_Empty_Pattern
+                    );
                 }
 
-                if (!_matchTimeoutSet) { 
+                if (!_matchTimeoutSet)
+                {
                     MatchTimeoutInMilliseconds = GetDefaultTimeout();
                 }
 
-                Regex = MatchTimeoutInMilliseconds == -1
-                    ? new Regex(Pattern)
-                    : Regex = new Regex(Pattern, default(RegexOptions), TimeSpan.FromMilliseconds((double)MatchTimeoutInMilliseconds));
+                Regex =
+                    MatchTimeoutInMilliseconds == -1
+                        ? new Regex(Pattern)
+                        : Regex = new Regex(
+                            Pattern,
+                            default(RegexOptions),
+                            TimeSpan.FromMilliseconds((double)MatchTimeoutInMilliseconds)
+                        );
             }
         }
 
         /// <summary>
         /// Returns the default MatchTimeout based on UseLegacyRegExTimeout switch.
         /// </summary>
-        private static int GetDefaultTimeout() {
-#if !MONO            
-            if (LocalAppContextSwitches.UseLegacyRegExTimeout) {
+        private static int GetDefaultTimeout()
+        {
+#if !MONO
+            if (LocalAppContextSwitches.UseLegacyRegExTimeout)
+            {
                 return -1;
             }
-            else 
+            else
 #endif
             {
                 return 2000;
             }
-
         }
     }
 }

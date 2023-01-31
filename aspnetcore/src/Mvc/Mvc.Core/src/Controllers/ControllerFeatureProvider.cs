@@ -15,9 +15,7 @@ public class ControllerFeatureProvider : IApplicationFeatureProvider<ControllerF
     private const string ControllerTypeNameSuffix = "Controller";
 
     /// <inheritdoc />
-    public void PopulateFeature(
-        IEnumerable<ApplicationPart> parts,
-        ControllerFeature feature)
+    public void PopulateFeature(IEnumerable<ApplicationPart> parts, ControllerFeature feature)
     {
         foreach (var part in parts.OfType<IApplicationPartTypeProvider>())
         {
@@ -65,8 +63,10 @@ public class ControllerFeatureProvider : IApplicationFeatureProvider<ControllerF
             return false;
         }
 
-        if (!typeInfo.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase) &&
-            !typeInfo.IsDefined(typeof(ControllerAttribute)))
+        if (
+            !typeInfo.Name.EndsWith(ControllerTypeNameSuffix, StringComparison.OrdinalIgnoreCase)
+            && !typeInfo.IsDefined(typeof(ControllerAttribute))
+        )
         {
             return false;
         }

@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.Contracts
         NoChanges = 1,
 
         /// <summary>
-        /// Rude edits were found. 
+        /// Rude edits were found.
         /// Changes can be applied by restarting the session.
         /// </summary>
         RestartRequired = 2,

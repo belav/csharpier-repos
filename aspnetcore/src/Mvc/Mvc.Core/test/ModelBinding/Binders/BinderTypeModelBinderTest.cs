@@ -29,7 +29,10 @@ public class BinderTypeModelBinderTest
     public async Task BindModel_CallsBindAsync_OnProvidedModelBinder()
     {
         // Arrange
-        var bindingContext = GetBindingContext(typeof(Person), binderType: typeof(NotNullModelBinder));
+        var bindingContext = GetBindingContext(
+            typeof(Person),
+            binderType: typeof(NotNullModelBinder)
+        );
 
         var model = new Person();
         var serviceProvider = new ServiceCollection()
@@ -55,27 +58,29 @@ public class BinderTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(Person), binderType: typeof(Person));
 
-        var expected = $"The type '{typeof(Person).FullName}' must implement " +
-            $"'{typeof(IModelBinder).FullName}' to be used as a model binder.";
+        var expected =
+            $"The type '{typeof(Person).FullName}' must implement "
+            + $"'{typeof(IModelBinder).FullName}' to be used as a model binder.";
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => new BinderTypeModelBinder(typeof(Person)),
             "binderType",
-            expected);
+            expected
+        );
     }
 
-    private static DefaultModelBindingContext GetBindingContext(Type modelType, Type binderType = null)
+    private static DefaultModelBindingContext GetBindingContext(
+        Type modelType,
+        Type binderType = null
+    )
     {
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider.ForType(modelType).BindingDetails(bd => bd.BinderType = binderType);
 
         var bindingContext = new DefaultModelBindingContext
         {
-            ActionContext = new ActionContext()
-            {
-                HttpContext = new DefaultHttpContext(),
-            },
+            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
             ModelMetadata = metadataProvider.GetMetadataForType(modelType),
             ModelName = "someName",
             ValueProvider = Mock.Of<IValueProvider>(),

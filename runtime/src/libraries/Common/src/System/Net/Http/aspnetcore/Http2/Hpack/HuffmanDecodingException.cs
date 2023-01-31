@@ -9,26 +9,26 @@ namespace System.Net.Http.HPack
     [Serializable]
     internal sealed class HuffmanDecodingException : Exception, ISerializable
     {
-        public HuffmanDecodingException()
-        {
-        }
+        public HuffmanDecodingException() { }
 
         public HuffmanDecodingException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         private HuffmanDecodingException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
-        void ISerializable.GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
         }
 
-        public override void GetObjectData(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             base.GetObjectData(serializationInfo, streamingContext);
         }

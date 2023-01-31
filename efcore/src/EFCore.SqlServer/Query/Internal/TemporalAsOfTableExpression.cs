@@ -28,7 +28,12 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
             PointInTime = pointInTime;
         }
 
-        private TemporalAsOfTableExpression(string name, string? schema, string? alias, DateTime pointInTime)
+        private TemporalAsOfTableExpression(
+            string name,
+            string? schema,
+            string? alias,
+            DateTime pointInTime
+        )
             : base(name, schema, alias)
         {
             PointInTime = pointInTime;
@@ -43,8 +48,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         public virtual DateTime PointInTime { get; }
 
         /// <inheritdoc />
-        public override TableExpressionBase Clone()
-            => new TemporalAsOfTableExpression(Name, Schema, Alias, PointInTime);
+        public override TableExpressionBase Clone() =>
+            new TemporalAsOfTableExpression(Name, Schema, Alias, PointInTime);
 
         /// <inheritdoc />
         protected override void Print(ExpressionPrinter expressionPrinter)
@@ -66,7 +71,6 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal
         }
 
         /// <inheritdoc />
-        public override int GetHashCode()
-            => HashCode.Combine(base.GetHashCode(), PointInTime);
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), PointInTime);
     }
 }

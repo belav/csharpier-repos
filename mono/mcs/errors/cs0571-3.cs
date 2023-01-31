@@ -6,10 +6,11 @@
 
 using Test;
 
-public class EntryPoint {
-        public static int Main () {
-		C1 foo = new C2 ();
-                return foo.get_foo ();
-        }
+public class EntryPoint
+{
+    public static int Main()
+    {
+        C1 foo = new C2();
+        return foo.get_foo();
+    }
 }
-

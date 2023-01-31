@@ -16,7 +16,9 @@ public class TestCacheTagHelper : CacheTagHelper
     public TestCacheTagHelper(
         CacheTagHelperMemoryCacheFactory factory,
         HtmlEncoder htmlEncoder,
-        ILoggerFactory loggerFactory) : base(factory, htmlEncoder)
+        ILoggerFactory loggerFactory
+    )
+        : base(factory, htmlEncoder)
     {
         if (loggerFactory == null)
         {
@@ -35,7 +37,9 @@ public class TestCacheTagHelper : CacheTagHelper
         }
         else
         {
-            _logger.LogInformation("Cache entry does NOT exist with key: " + cacheKey.GenerateKey());
+            _logger.LogInformation(
+                "Cache entry does NOT exist with key: " + cacheKey.GenerateKey()
+            );
         }
 
         return base.ProcessAsync(context, output);

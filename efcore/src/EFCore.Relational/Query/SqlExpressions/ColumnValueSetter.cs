@@ -36,17 +36,16 @@ public class ColumnValueSetter
     public virtual SqlExpression Value { get; }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is ColumnValueSetter columnValueSetter
-                && Equals(columnValueSetter));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is ColumnValueSetter columnValueSetter && Equals(columnValueSetter)
+        );
 
-    private bool Equals(ColumnValueSetter columnValueSetter)
-        => Column == columnValueSetter.Column
-            && Value == columnValueSetter.Value;
+    private bool Equals(ColumnValueSetter columnValueSetter) =>
+        Column == columnValueSetter.Column && Value == columnValueSetter.Value;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(Column, Value);
+    public override int GetHashCode() => HashCode.Combine(Column, Value);
 }

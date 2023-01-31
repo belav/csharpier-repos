@@ -21,29 +21,47 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         protected UnitTestingServiceBase(
             IServiceProvider serviceProvider,
             Stream stream,
-            IEnumerable<JsonConverter>? jsonConverters = null) : base(serviceProvider, stream, jsonConverters)
-        {
-        }
+            IEnumerable<JsonConverter>? jsonConverters = null
+        )
+            : base(serviceProvider, stream, jsonConverters) { }
 
-        protected new void StartService()
-            => base.StartService();
+        protected new void StartService() => base.StartService();
 
-        protected Task<Solution> GetSolutionAsync(JObject solutionInfo, CancellationToken cancellationToken)
-            => GetSolutionImplAsync(solutionInfo, cancellationToken);
+        protected Task<Solution> GetSolutionAsync(
+            JObject solutionInfo,
+            CancellationToken cancellationToken
+        ) => GetSolutionImplAsync(solutionInfo, cancellationToken);
 
-        protected new Task<T> RunServiceAsync<T>(Func<Task<T>> callAsync, CancellationToken cancellationToken)
-            => base.RunServiceAsync(callAsync, cancellationToken);
+        protected new Task<T> RunServiceAsync<T>(
+            Func<Task<T>> callAsync,
+            CancellationToken cancellationToken
+        ) => base.RunServiceAsync(callAsync, cancellationToken);
 
-        protected new Task RunServiceAsync(Func<Task> callAsync, CancellationToken cancellationToken)
-            => base.RunServiceAsync(callAsync, cancellationToken);
+        protected new Task RunServiceAsync(
+            Func<Task> callAsync,
+            CancellationToken cancellationToken
+        ) => base.RunServiceAsync(callAsync, cancellationToken);
 
-        protected Task<T> InvokeAsync<T>(string targetName, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
-            => EndPoint.InvokeAsync<T>(targetName, arguments, cancellationToken);
+        protected Task<T> InvokeAsync<T>(
+            string targetName,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        ) => EndPoint.InvokeAsync<T>(targetName, arguments, cancellationToken);
 
-        protected Task InvokeAsync(string targetName, IReadOnlyList<object?> arguments, CancellationToken cancellationToken)
-            => EndPoint.InvokeAsync(targetName, arguments, cancellationToken);
+        protected Task InvokeAsync(
+            string targetName,
+            IReadOnlyList<object?> arguments,
+            CancellationToken cancellationToken
+        ) => EndPoint.InvokeAsync(targetName, arguments, cancellationToken);
 
-        public UnitTestingIncrementalAnalyzerProvider? TryRegisterAnalyzerProvider(string analyzerName, IUnitTestingIncrementalAnalyzerProviderImplementation provider)
-            => UnitTestingIncrementalAnalyzerProvider.TryRegister(GetWorkspace(), analyzerName, provider);
+        public UnitTestingIncrementalAnalyzerProvider? TryRegisterAnalyzerProvider(
+            string analyzerName,
+            IUnitTestingIncrementalAnalyzerProviderImplementation provider
+        ) =>
+            UnitTestingIncrementalAnalyzerProvider.TryRegister(
+                GetWorkspace(),
+                analyzerName,
+                provider
+            );
     }
 }

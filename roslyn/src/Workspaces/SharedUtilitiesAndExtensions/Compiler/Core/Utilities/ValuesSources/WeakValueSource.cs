@@ -17,8 +17,7 @@ namespace Roslyn.Utilities
     {
         private readonly WeakReference<T> _weakValue;
 
-        public WeakValueSource(T value)
-            => _weakValue = new WeakReference<T>(value);
+        public WeakValueSource(T value) => _weakValue = new WeakReference<T>(value);
 
         public override bool TryGetValue(out Optional<T> value)
         {
@@ -42,7 +41,7 @@ namespace Roslyn.Utilities
             return default;
         }
 
-        public override Task<Optional<T>> GetValueAsync(CancellationToken cancellationToken)
-            => Task.FromResult(GetValue(cancellationToken));
+        public override Task<Optional<T>> GetValueAsync(CancellationToken cancellationToken) =>
+            Task.FromResult(GetValue(cancellationToken));
     }
 }

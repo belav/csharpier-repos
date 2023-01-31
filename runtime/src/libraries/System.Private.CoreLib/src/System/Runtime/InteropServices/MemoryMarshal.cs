@@ -37,7 +37,8 @@ namespace System.Runtime.InteropServices
 
             return new Span<byte>(
                 ref Unsafe.As<T, byte>(ref GetReference(span)),
-                checked(span.Length * sizeof(T)));
+                checked(span.Length * sizeof(T))
+            );
         }
 
         /// <summary>
@@ -60,7 +61,8 @@ namespace System.Runtime.InteropServices
 
             return new ReadOnlySpan<byte>(
                 ref Unsafe.As<T, byte>(ref GetReference(span)),
-                checked(span.Length * sizeof(T)));
+                checked(span.Length * sizeof(T))
+            );
         }
 
         /// <summary>Creates a <see cref="Memory{T}"/> from a <see cref="ReadOnlyMemory{T}"/>.</summary>
@@ -93,14 +95,20 @@ namespace System.Runtime.InteropServices
         /// for pinning but must never be dereferenced. This is useful for interop with methods that do not accept null pointers for zero-sized buffers.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe ref T GetNonNullPinnableReference<T>(Span<T> span) => ref (span.Length != 0) ? ref Unsafe.AsRef<T>(in span._reference) : ref Unsafe.AsRef<T>((void*)1);
+        internal static unsafe ref T GetNonNullPinnableReference<T>(Span<T> span) =>
+            ref (span.Length != 0)
+                ? ref Unsafe.AsRef<T>(in span._reference)
+                : ref Unsafe.AsRef<T>((void*)1);
 
         /// <summary>
         /// Returns a reference to the 0th element of the ReadOnlySpan. If the ReadOnlySpan is empty, returns a reference to fake non-null pointer. Such a reference
         /// can be used for pinning but must never be dereferenced. This is useful for interop with methods that do not accept null pointers for zero-sized buffers.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static unsafe ref T GetNonNullPinnableReference<T>(ReadOnlySpan<T> span) => ref (span.Length != 0) ? ref Unsafe.AsRef<T>(in span._reference) : ref Unsafe.AsRef<T>((void*)1);
+        internal static unsafe ref T GetNonNullPinnableReference<T>(ReadOnlySpan<T> span) =>
+            ref (span.Length != 0)
+                ? ref Unsafe.AsRef<T>(in span._reference)
+                : ref Unsafe.AsRef<T>((void*)1);
 #pragma warning restore IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6228
 
         /// <summary>
@@ -153,9 +161,7 @@ namespace System.Runtime.InteropServices
                 toLength = checked((int)toLengthUInt64);
             }
 
-            return new Span<TTo>(
-                ref Unsafe.As<TFrom, TTo>(ref span._reference),
-                toLength);
+            return new Span<TTo>(ref Unsafe.As<TFrom, TTo>(ref span._reference), toLength);
         }
 
         /// <summary>
@@ -210,7 +216,8 @@ namespace System.Runtime.InteropServices
 
             return new ReadOnlySpan<TTo>(
                 ref Unsafe.As<TFrom, TTo>(ref MemoryMarshal.GetReference(span)),
-                toLength);
+                toLength
+            );
         }
 
         /// <summary>
@@ -254,8 +261,7 @@ namespace System.Runtime.InteropServices
         /// <exception cref="ArgumentException">The string is longer than <see cref="int.MaxValue"/>.</exception>
         [CLSCompliant(false)]
         public static unsafe ReadOnlySpan<char> CreateReadOnlySpanFromNullTerminated(char* value) =>
-            value != null ? new ReadOnlySpan<char>(value, string.wcslen(value)) :
-            default;
+            value != null ? new ReadOnlySpan<char>(value, string.wcslen(value)) : default;
 
         /// <summary>Creates a new read-only span for a null-terminated UTF8 string.</summary>
         /// <param name="value">The pointer to the null-terminated string of bytes.</param>
@@ -264,8 +270,7 @@ namespace System.Runtime.InteropServices
         /// <exception cref="ArgumentException">The string is longer than <see cref="int.MaxValue"/>.</exception>
         [CLSCompliant(false)]
         public static unsafe ReadOnlySpan<byte> CreateReadOnlySpanFromNullTerminated(byte* value) =>
-            value != null ? new ReadOnlySpan<byte>(value, string.strlen(value)) :
-            default;
+            value != null ? new ReadOnlySpan<byte>(value, string.strlen(value)) : default;
 
         /// <summary>
         /// Get an array segment from the underlying memory.
@@ -278,9 +283,7 @@ namespace System.Runtime.InteropServices
             // As an optimization, we skip the "is string?" check below if typeof(T) is not char,
             // as Memory<T> / ROM<T> can't possibly contain a string instance in this case.
 
-            if (obj != null && !(
-                (typeof(T) == typeof(char) && obj.GetType() == typeof(string))
-                ))
+            if (obj != null && !((typeof(T) == typeof(char) && obj.GetType() == typeof(string))))
             {
                 if (RuntimeHelpers.ObjectHasComponentSize(obj))
                 {
@@ -291,7 +294,11 @@ namespace System.Runtime.InteropServices
                     // The array may be prepinned, so remove the high bit from the start index in the line below.
                     // The ArraySegment<T> ctor will perform bounds checking on index & length.
 
-                    segment = new ArraySegment<T>(Unsafe.As<T[]>(obj), index & ReadOnlyMemory<T>.RemoveFlagsBitMask, length);
+                    segment = new ArraySegment<T>(
+                        Unsafe.As<T[]>(obj),
+                        index & ReadOnlyMemory<T>.RemoveFlagsBitMask,
+                        length
+                    );
                     return true;
                 }
                 else
@@ -300,9 +307,17 @@ namespace System.Runtime.InteropServices
                     // is MemoryManager<T>. The ArraySegment<T> ctor will perform bounds checking on index & length.
 
                     Debug.Assert(obj is MemoryManager<T>);
-                    if (Unsafe.As<MemoryManager<T>>(obj).TryGetArray(out ArraySegment<T> tempArraySegment))
+                    if (
+                        Unsafe
+                            .As<MemoryManager<T>>(obj)
+                            .TryGetArray(out ArraySegment<T> tempArraySegment)
+                    )
                     {
-                        segment = new ArraySegment<T>(tempArraySegment.Array!, tempArraySegment.Offset + index, length);
+                        segment = new ArraySegment<T>(
+                            tempArraySegment.Array!,
+                            tempArraySegment.Offset + index,
+                            length
+                        );
                         return true;
                     }
                 }
@@ -333,7 +348,10 @@ namespace System.Runtime.InteropServices
         /// <param name="memory">The memory to get the manager for.</param>
         /// <param name="manager">The returned manager of the <see cref="ReadOnlyMemory{T}"/>.</param>
         /// <returns>A <see cref="bool"/> indicating if it was successful.</returns>
-        public static bool TryGetMemoryManager<T, TManager>(ReadOnlyMemory<T> memory, [NotNullWhen(true)] out TManager? manager)
+        public static bool TryGetMemoryManager<T, TManager>(
+            ReadOnlyMemory<T> memory,
+            [NotNullWhen(true)] out TManager? manager
+        )
             where TManager : MemoryManager<T>
         {
             TManager? localManager; // Use register for null comparison rather than byref
@@ -354,8 +372,13 @@ namespace System.Runtime.InteropServices
         /// <param name="start">The offset from the start of the <paramref name="manager" /> that the <paramref name="memory" /> represents.</param>
         /// <param name="length">The length of the <paramref name="manager" /> that the <paramref name="memory" /> represents.</param>
         /// <returns>A <see cref="bool"/> indicating if it was successful.</returns>
-        public static bool TryGetMemoryManager<T, TManager>(ReadOnlyMemory<T> memory, [NotNullWhen(true)] out TManager? manager, out int start, out int length)
-           where TManager : MemoryManager<T>
+        public static bool TryGetMemoryManager<T, TManager>(
+            ReadOnlyMemory<T> memory,
+            [NotNullWhen(true)] out TManager? manager,
+            out int start,
+            out int length
+        )
+            where TManager : MemoryManager<T>
         {
             TManager? localManager; // Use register for null comparison rather than byref
             manager = localManager = memory.GetObjectStartLength(out start, out length) as TManager;
@@ -392,7 +415,12 @@ namespace System.Runtime.InteropServices
         /// <param name="start">The starting location in <paramref name="text"/>.</param>
         /// <param name="length">The number of items in <paramref name="text"/>.</param>
         /// <returns></returns>
-        public static bool TryGetString(ReadOnlyMemory<char> memory, [NotNullWhen(true)] out string? text, out int start, out int length)
+        public static bool TryGetString(
+            ReadOnlyMemory<char> memory,
+            [NotNullWhen(true)] out string? text,
+            out int start,
+            out int length
+        )
         {
             if (memory.GetObjectStartLength(out int offset, out int count) is string s)
             {

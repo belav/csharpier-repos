@@ -20,7 +20,10 @@ public class ExitHandler<TRequestContext> : INotificationHandler<TRequestContext
 
     public bool MutatesSolutionState => true;
 
-    public async Task HandleNotificationAsync(TRequestContext requestContext, CancellationToken cancellationToken)
+    public async Task HandleNotificationAsync(
+        TRequestContext requestContext,
+        CancellationToken cancellationToken
+    )
     {
         await _lifeCycleManager.ExitAsync().ConfigureAwait(false);
     }

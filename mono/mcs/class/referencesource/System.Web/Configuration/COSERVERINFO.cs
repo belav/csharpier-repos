@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Configuration;
     using System.Configuration.Internal;
@@ -24,30 +25,29 @@ namespace System.Web.Configuration {
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COSERVERINFO : IDisposable
     {
-        internal COSERVERINFO(string srvname, IntPtr authinf) {
+        internal COSERVERINFO(string srvname, IntPtr authinf)
+        {
             servername = srvname;
             authinfo = authinf;
         }
 
-        #pragma warning disable 0649
+#pragma warning disable 0649
         internal int reserved1;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string servername;
-        internal IntPtr authinfo;                // COAUTHINFO*
-        #pragma warning disable 0649
+        internal IntPtr authinfo; // COAUTHINFO*
+#pragma warning disable 0649
         internal int reserved2;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         void IDisposable.Dispose()
         {
             authinfo = IntPtr.Zero;
             GC.SuppressFinalize(this);
         }
-        ~COSERVERINFO()
-        {
-        }
-    }
 
+        ~COSERVERINFO() { }
+    }
 
     [StructLayout(LayoutKind.Sequential, Pack = 4, CharSet = CharSet.Unicode)]
     internal class COSERVERINFO_X64 : IDisposable
@@ -64,18 +64,17 @@ namespace System.Web.Configuration {
 #pragma warning restore 0649
         [MarshalAs(UnmanagedType.LPWStr)]
         internal string servername;
-        internal IntPtr authinfo;                // COAUTHINFO*
+        internal IntPtr authinfo; // COAUTHINFO*
 #pragma warning disable 0649
         internal int reserved2;
         internal int padding2;
-        #pragma warning restore 0649
+#pragma warning restore 0649
         void IDisposable.Dispose()
         {
             authinfo = IntPtr.Zero;
             GC.SuppressFinalize(this);
         }
-        ~COSERVERINFO_X64()
-        {
-        }
+
+        ~COSERVERINFO_X64() { }
     }
 }

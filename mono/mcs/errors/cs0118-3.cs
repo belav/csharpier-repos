@@ -4,7 +4,7 @@
 public sealed class Region
 {
     int Value;
-    
+
     [Value(2)]
-    public Region() {}
+    public Region() { }
 }

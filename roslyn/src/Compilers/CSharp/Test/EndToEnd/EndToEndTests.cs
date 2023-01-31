@@ -19,24 +19,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
     public class EndToEndTests : EmitMetadataTestBase
     {
         /// <summary>
-        /// These tests are very sensitive to stack size hence we use a fresh thread to ensure there 
-        /// is a consistent stack size for them to execute in. 
+        /// These tests are very sensitive to stack size hence we use a fresh thread to ensure there
+        /// is a consistent stack size for them to execute in.
         /// </summary>
         /// <param name="action"></param>
         private static void RunInThread(Action action)
         {
             Exception exception = null;
-            var thread = new System.Threading.Thread(() =>
-            {
-                try
+            var thread = new System.Threading.Thread(
+                () =>
                 {
-                    action();
-                }
-                catch (Exception ex)
-                {
-                    exception = ex;
-                }
-            }, 0);
+                    try
+                    {
+                        action();
+                    }
+                    catch (Exception ex)
+                    {
+                        exception = ex;
+                    }
+                },
+                0
+            );
 
             thread.Start();
             thread.Join();
@@ -95,10 +98,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             }
         }
 
-        // This test is a canary attempting to make sure that we don't regress the # of fluent calls that 
-        // the compiler can handle. 
+        // This test is a canary attempting to make sure that we don't regress the # of fluent calls that
+        // the compiler can handle.
         [WorkItem(16669, "https://github.com/dotnet/roslyn/issues/16669")]
-        [ConditionalFact(typeof(WindowsOrLinuxOnly)), WorkItem(34880, "https://github.com/dotnet/roslyn/issues/34880")]
+        [
+            ConditionalFact(typeof(WindowsOrLinuxOnly)),
+            WorkItem(34880, "https://github.com/dotnet/roslyn/issues/34880")
+        ]
         public void OverflowOnFluentCall()
         {
             int numberFluentCalls = (IntPtr.Size, ExecutionConditionUtil.Configuration) switch
@@ -107,7 +113,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release) => 1400, // 1310
                 (8, ExecutionConfiguration.Debug) => 250, // 225,
                 (8, ExecutionConfiguration.Release) => 700, // 620
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             // <path>\xunit.console.exe "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
@@ -125,19 +134,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             {
                 var builder = new StringBuilder();
                 builder.AppendLine(
-        @"class C {
+                    @"class C {
     C M(string x) { return this; }
     void M2() {
         new C()
-");
+"
+                );
                 for (int i = 0; i < depth; i++)
                 {
                     builder.AppendLine(@"            .M(""test"")");
                 }
                 builder.AppendLine(
-                   @"            .M(""test"");
+                    @"            .M(""test"");
     }
-}");
+}"
+                );
 
                 var source = builder.ToString();
                 RunInThread(() =>
@@ -163,7 +174,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 (4, ExecutionConfiguration.Release) => 1290, // 1290
                 (8, ExecutionConfiguration.Debug) => 270, // 170
                 (8, ExecutionConfiguration.Release) => 730, // 730
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             // Un-comment loop below and use above commands to figure out the new limits
@@ -181,7 +195,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             void runDeeplyNestedGenericTest(int nestingLevel)
             {
                 var builder = new StringBuilder();
-                builder.AppendLine(@"
+                builder.AppendLine(
+                    @"
 #pragma warning disable 168 // Unused local
 using System;
 
@@ -189,7 +204,8 @@ public class Test
 {
     public static void Main(string[] args)
     {
-");
+"
+                );
 
                 for (var i = 0; i < nestingLevel; i++)
                 {
@@ -201,10 +217,12 @@ public class Test
                 }
 
                 builder.AppendLine(" local;");
-                builder.AppendLine(@"
+                builder.AppendLine(
+                    @"
         Console.WriteLine(""Pass"");
     }
-}");
+}"
+                );
 
                 for (int i = 0; i < nestingLevel; i++)
                 {
@@ -218,12 +236,19 @@ public class Test
                 var source = builder.ToString();
                 RunInThread(() =>
                 {
-                    var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithConcurrentBuild(false));
+                    var compilation = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugExe.WithConcurrentBuild(false)
+                    );
                     compilation.VerifyDiagnostics();
 
-                    // PEVerify is skipped here as it doesn't scale to this level of nested generics. After 
+                    // PEVerify is skipped here as it doesn't scale to this level of nested generics. After
                     // about 600 levels of nesting it will not return in any reasonable amount of time.
-                    CompileAndVerify(compilation, expectedOutput: "Pass", verify: Verification.Skipped);
+                    CompileAndVerify(
+                        compilation,
+                        expectedOutput: "Pass",
+                        verify: Verification.Skipped
+                    );
                 });
             }
         }
@@ -237,7 +262,10 @@ public class Test
                 (4, ExecutionConfiguration.Release) => 1650,
                 (8, ExecutionConfiguration.Debug) => 200,
                 (8, ExecutionConfiguration.Release) => 780,
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             RunTest(nestingLevel, runTest);
@@ -246,28 +274,34 @@ public class Test
             {
                 var builder = new StringBuilder();
                 builder.AppendLine(
-@"class Program
+                    @"class Program
 {
     static bool F(int i) => true;
     static void Main()
-    {");
+    {"
+                );
                 for (int i = 0; i < nestingLevel; i++)
                 {
                     builder.AppendLine(
-$@"        if (F({i}))
-        {{");
+                        $@"        if (F({i}))
+        {{"
+                    );
                 }
                 for (int i = 0; i < nestingLevel; i++)
                 {
                     builder.AppendLine("        }");
                 }
                 builder.AppendLine(
-@"    }
-}");
+                    @"    }
+}"
+                );
                 var source = builder.ToString();
                 RunInThread(() =>
                 {
-                    var comp = CreateCompilation(source, options: TestOptions.DebugDll.WithConcurrentBuild(false));
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
                     comp.VerifyDiagnostics();
                 });
             }
@@ -283,7 +317,10 @@ $@"        if (F({i}))
                 (4, ExecutionConfiguration.Release) => 1100,
                 (8, ExecutionConfiguration.Debug) => 180,
                 (8, ExecutionConfiguration.Release) => 400,
-                _ => throw new Exception($"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}")
+                _
+                    => throw new Exception(
+                        $"Unexpected configuration {IntPtr.Size * 8}-bit {ExecutionConditionUtil.Configuration}"
+                    )
             };
 
             RunTest(n, runTest);
@@ -300,14 +337,20 @@ $@"        if (F({i}))
                 {
                     int next = (i == n) ? 0 : i + 1;
                     sourceBuilder.AppendLine($"class C{i}<T> where T : C{next}<T> {{ }}");
-                    diagnosticsBuilder.Add(Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "T").WithArguments($"C{i}<T>", $"C{next}<T>", "T", "T"));
+                    diagnosticsBuilder.Add(
+                        Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "T")
+                            .WithArguments($"C{i}<T>", $"C{next}<T>", "T", "T")
+                    );
                 }
                 var source = sourceBuilder.ToString();
                 var diagnostics = diagnosticsBuilder.ToArrayAndFree();
 
                 RunInThread(() =>
                 {
-                    var comp = CreateCompilation(source, options: TestOptions.DebugDll.WithConcurrentBuild(false));
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
                     var type = comp.GetMember<NamedTypeSymbol>("C0");
                     var typeParameter = type.TypeParameters[0];
                     Assert.True(typeParameter.IsReferenceType);

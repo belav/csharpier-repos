@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 // Disabling parallelism for these tests because of flakiness
 [CollectionDefinition(nameof(BootResourceCachingTest), DisableParallelization = true)]
 [Collection(nameof(BootResourceCachingTest))]
-public class BootResourceCachingTest
-    : ServerTestBase<AspNetSiteServerFixture>
+public class BootResourceCachingTest : ServerTestBase<AspNetSiteServerFixture>
 {
     // The cache name is derived from the application's base href value (in this case, '/')
     private const string CacheName = "blazor-resources-/";
@@ -24,7 +23,8 @@ public class BootResourceCachingTest
     public BootResourceCachingTest(
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture, output)
     {
         serverFixture.BuildWebHostMethod = Program.BuildWebHost;
@@ -42,10 +42,22 @@ public class BootResourceCachingTest
         Navigate("/");
         WaitUntilLoaded();
         var initialResourcesRequested = GetAndClearRequestedPaths();
-        Assert.NotEmpty(initialResourcesRequested.Where(path => path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)));
-        Assert.NotEmpty(initialResourcesRequested.Where(path => path.EndsWith("/dotnet.wasm", StringComparison.Ordinal)));
-        Assert.NotEmpty(initialResourcesRequested.Where(path => path.EndsWith(".js", StringComparison.Ordinal)));
-        Assert.NotEmpty(initialResourcesRequested.Where(path => path.EndsWith(".dll", StringComparison.Ordinal)));
+        Assert.NotEmpty(
+            initialResourcesRequested.Where(
+                path => path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)
+            )
+        );
+        Assert.NotEmpty(
+            initialResourcesRequested.Where(
+                path => path.EndsWith("/dotnet.wasm", StringComparison.Ordinal)
+            )
+        );
+        Assert.NotEmpty(
+            initialResourcesRequested.Where(path => path.EndsWith(".js", StringComparison.Ordinal))
+        );
+        Assert.NotEmpty(
+            initialResourcesRequested.Where(path => path.EndsWith(".dll", StringComparison.Ordinal))
+        );
 
         // On subsequent loads, we skip the items referenced from blazor.boot.json
         // which includes .dll files and dotnet.wasm
@@ -54,10 +66,26 @@ public class BootResourceCachingTest
         Navigate("/");
         WaitUntilLoaded();
         var subsequentResourcesRequested = GetAndClearRequestedPaths();
-        Assert.NotEmpty(initialResourcesRequested.Where(path => path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)));
-        Assert.Empty(subsequentResourcesRequested.Where(path => path.EndsWith("/dotnet.wasm", StringComparison.Ordinal)));
-        Assert.NotEmpty(subsequentResourcesRequested.Where(path => path.EndsWith(".js", StringComparison.Ordinal)));
-        Assert.Empty(subsequentResourcesRequested.Where(path => path.EndsWith(".dll", StringComparison.Ordinal)));
+        Assert.NotEmpty(
+            initialResourcesRequested.Where(
+                path => path.EndsWith("/blazor.boot.json", StringComparison.Ordinal)
+            )
+        );
+        Assert.Empty(
+            subsequentResourcesRequested.Where(
+                path => path.EndsWith("/dotnet.wasm", StringComparison.Ordinal)
+            )
+        );
+        Assert.NotEmpty(
+            subsequentResourcesRequested.Where(
+                path => path.EndsWith(".js", StringComparison.Ordinal)
+            )
+        );
+        Assert.Empty(
+            subsequentResourcesRequested.Where(
+                path => path.EndsWith(".dll", StringComparison.Ordinal)
+            )
+        );
     }
 
     [Fact]
@@ -67,9 +95,14 @@ public class BootResourceCachingTest
         Navigate("/");
         WaitUntilLoaded();
         var cacheEntryUrls1 = GetCacheEntryUrls();
-        var cacheEntryForComponentsDll = cacheEntryUrls1.Single(url => url.Contains("/Microsoft.AspNetCore.Components.dll"));
+        var cacheEntryForComponentsDll = cacheEntryUrls1.Single(
+            url => url.Contains("/Microsoft.AspNetCore.Components.dll")
+        );
         var cacheEntryForDotNetWasm = cacheEntryUrls1.Single(url => url.Contains("/dotnet.wasm"));
-        var cacheEntryForDotNetWasmWithChangedHash = cacheEntryForDotNetWasm.Replace(".sha256-", ".sha256-different");
+        var cacheEntryForDotNetWasmWithChangedHash = cacheEntryForDotNetWasm.Replace(
+            ".sha256-",
+            ".sha256-different"
+        );
 
         // Remove some items we do need, and add an item we don't need
         RemoveCacheEntry(cacheEntryForComponentsDll);
@@ -87,10 +120,14 @@ public class BootResourceCachingTest
         Navigate("/");
         WaitUntilLoaded();
         var subsequentResourcesRequested = GetAndClearRequestedPaths();
-        Assert.Collection(subsequentResourcesRequested.Where(url => url.Contains(".dll")),
-            requestedDll => Assert.Contains("/Microsoft.AspNetCore.Components.dll", requestedDll));
-        Assert.Collection(subsequentResourcesRequested.Where(url => url.Contains(".wasm")),
-            requestedDll => Assert.Contains("/dotnet.wasm", requestedDll));
+        Assert.Collection(
+            subsequentResourcesRequested.Where(url => url.Contains(".dll")),
+            requestedDll => Assert.Contains("/Microsoft.AspNetCore.Components.dll", requestedDll)
+        );
+        Assert.Collection(
+            subsequentResourcesRequested.Where(url => url.Contains(".wasm")),
+            requestedDll => Assert.Contains("/dotnet.wasm", requestedDll)
+        );
 
         // We also update the cache (add new items, remove unnecessary items)
         var cacheEntryUrls3 = GetCacheEntryUrls();
@@ -101,7 +138,8 @@ public class BootResourceCachingTest
 
     private IReadOnlyCollection<string> GetCacheEntryUrls()
     {
-        var js = @"
+        var js =
+            @"
                 (async function(cacheName, completedCallback) {
                     const cache = await caches.open(cacheName);
                     const keys = await cache.keys();
@@ -115,7 +153,8 @@ public class BootResourceCachingTest
 
     private void RemoveCacheEntry(string url)
     {
-        var js = @"
+        var js =
+            @"
                 (async function(cacheName, urlToRemove, completedCallback) {
                     const cache = await caches.open(cacheName);
                     await cache.delete(urlToRemove);
@@ -126,7 +165,8 @@ public class BootResourceCachingTest
 
     private void AddCacheEntry(string url, string content)
     {
-        var js = @"
+        var js =
+            @"
                 (async function(cacheName, urlToAdd, contentToAdd, completedCallback) {
                     const cache = await caches.open(cacheName);
                     await cache.put(urlToAdd, new Response(contentToAdd));

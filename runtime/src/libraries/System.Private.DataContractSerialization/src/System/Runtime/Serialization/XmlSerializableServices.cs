@@ -23,7 +23,11 @@ namespace System.Runtime.Serialization
                     {
                         XmlNode? node = doc.ReadNode(xmlReader);
                         if (node == null)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.UnexpectedEndOfFile));
+                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                XmlObjectSerializer.CreateSerializationException(
+                                    SR.UnexpectedEndOfFile
+                                )
+                            );
                         nodeList.Add(node);
                     }
                 } while (xmlReader.MoveToNextAttribute());
@@ -37,7 +41,9 @@ namespace System.Runtime.Serialization
                 {
                     XmlNode? node = doc.ReadNode(xmlReader);
                     if (node == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.UnexpectedEndOfFile));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            XmlObjectSerializer.CreateSerializationException(SR.UnexpectedEndOfFile)
+                        );
                     nodeList.Add(node);
                 }
             }
@@ -46,10 +52,10 @@ namespace System.Runtime.Serialization
 
         private static bool IsValidAttribute(XmlReader xmlReader)
         {
-            return xmlReader.NamespaceURI != Globals.SerializationNamespace &&
-                                   xmlReader.NamespaceURI != Globals.SchemaInstanceNamespace &&
-                                   xmlReader.Prefix != "xmlns" &&
-                                   xmlReader.LocalName != "xmlns";
+            return xmlReader.NamespaceURI != Globals.SerializationNamespace
+                && xmlReader.NamespaceURI != Globals.SchemaInstanceNamespace
+                && xmlReader.Prefix != "xmlns"
+                && xmlReader.LocalName != "xmlns";
         }
 
         public static void WriteNodes(XmlWriter xmlWriter, XmlNode?[]? nodes)
@@ -63,6 +69,7 @@ namespace System.Runtime.Serialization
         }
 
         internal static string AddDefaultSchemaMethodName = "AddDefaultSchema";
+
         public static void AddDefaultSchema(XmlSchemaSet schemas, XmlQualifiedName typeQName)
         {
             ArgumentNullException.ThrowIfNull(schemas);

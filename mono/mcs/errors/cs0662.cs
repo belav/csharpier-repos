@@ -5,5 +5,5 @@ using System.Runtime.InteropServices;
 
 class C
 {
-   void Test(int i1, [Out, Int] ref int i2) {}
+    void Test(int i1, [Out, Int] ref int i2) { }
 }

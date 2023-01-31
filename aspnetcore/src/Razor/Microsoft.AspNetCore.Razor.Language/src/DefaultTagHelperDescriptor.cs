@@ -19,7 +19,8 @@ internal class DefaultTagHelperDescriptor : TagHelperDescriptor
         BoundAttributeDescriptor[] attributeDescriptors,
         AllowedChildTagDescriptor[] allowedChildTags,
         Dictionary<string, string> metadata,
-        RazorDiagnostic[] diagnostics)
+        RazorDiagnostic[] diagnostics
+    )
         : base(kind)
     {
         Name = name;

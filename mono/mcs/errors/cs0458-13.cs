@@ -4,8 +4,8 @@
 
 class C
 {
-	static void Foo()
-	{
-		var res = null << 2;
-	}
+    static void Foo()
+    {
+        var res = null << 2;
+    }
 }

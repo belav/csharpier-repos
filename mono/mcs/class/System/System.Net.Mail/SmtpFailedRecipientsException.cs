@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,69 +31,74 @@
 using System.Collections;
 using System.Runtime.Serialization;
 
-namespace System.Net.Mail {
-	[Serializable]
-	public class SmtpFailedRecipientsException : SmtpFailedRecipientException, ISerializable
-	{
+namespace System.Net.Mail
+{
+    [Serializable]
+    public class SmtpFailedRecipientsException : SmtpFailedRecipientException, ISerializable
+    {
 		#region Fields
 
-		SmtpFailedRecipientException[] innerExceptions;
+        SmtpFailedRecipientException[] innerExceptions;
 
 		#endregion // Fields
 
 		#region Constructors
 
-		public SmtpFailedRecipientsException ()
-		{
-		}
+        public SmtpFailedRecipientsException() { }
 
-		public SmtpFailedRecipientsException (string message) : base (message)
-		{
-		}
+        public SmtpFailedRecipientsException(string message)
+            : base(message) { }
 
-		public SmtpFailedRecipientsException (string message, Exception innerException) : base (message, innerException)
-		{
-		}
+        public SmtpFailedRecipientsException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		public SmtpFailedRecipientsException (string message, SmtpFailedRecipientException[] innerExceptions) : base (message)
-		{
-			this.innerExceptions = innerExceptions;
-		}
+        public SmtpFailedRecipientsException(
+            string message,
+            SmtpFailedRecipientException[] innerExceptions
+        )
+            : base(message)
+        {
+            this.innerExceptions = innerExceptions;
+        }
 
-		protected SmtpFailedRecipientsException (SerializationInfo info, StreamingContext context)
-		: base(info, context)
-		{
-			if (info == null)
-				throw new ArgumentNullException ("info");
-			innerExceptions = (SmtpFailedRecipientException []) info.GetValue ("innerExceptions", typeof (SmtpFailedRecipientException []));
-		}
-		
+        protected SmtpFailedRecipientsException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            if (info == null)
+                throw new ArgumentNullException("info");
+            innerExceptions = (SmtpFailedRecipientException[])
+                info.GetValue("innerExceptions", typeof(SmtpFailedRecipientException[]));
+        }
+
 		#endregion
 
 		#region Properties
 
-		public SmtpFailedRecipientException[] InnerExceptions {
-			get { return innerExceptions; }
-		}
+        public SmtpFailedRecipientException[] InnerExceptions
+        {
+            get { return innerExceptions; }
+        }
 
 		#endregion // Properties
 
 		#region Methods
 
-		public override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			if (serializationInfo == null)
-				throw new ArgumentNullException ("serializationInfo");
-			base.GetObjectData (serializationInfo, streamingContext);
-			serializationInfo.AddValue ("innerExceptions", innerExceptions);
-		}
+        public override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            if (serializationInfo == null)
+                throw new ArgumentNullException("serializationInfo");
+            base.GetObjectData(serializationInfo, streamingContext);
+            serializationInfo.AddValue("innerExceptions", innerExceptions);
+        }
 
-		void ISerializable.GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			GetObjectData (info, context);
-		}
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            GetObjectData(info, context);
+        }
 
 		#endregion // Methods
-	}
+    }
 }
-

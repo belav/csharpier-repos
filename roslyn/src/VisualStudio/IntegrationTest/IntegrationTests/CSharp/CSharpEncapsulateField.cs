@@ -18,13 +18,12 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpEncapsulateField : AbstractEditorTest
     {
         public CSharpEncapsulateField(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpEncapsulateField))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpEncapsulateField)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 namespace myNamespace
 {
     class Program
@@ -50,8 +49,13 @@ namespace myNamespace
             dialog.VerifyClosed(encapsulateField.DialogName);
             encapsulateField.Invoke();
             dialog.VerifyOpen(encapsulateField.DialogName, timeout: Helper.HangMitigatingTimeout);
-            dialog.ClickApplyAndWaitForFeature(encapsulateField.DialogName, FeatureAttribute.EncapsulateField);
-            VisualStudio.Editor.Verify.TextContains("public static int? Param { get => param; set => param = value; }");
+            dialog.ClickApplyAndWaitForFeature(
+                encapsulateField.DialogName,
+                FeatureAttribute.EncapsulateField
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                "public static int? Param { get => param; set => param = value; }"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -59,8 +63,13 @@ namespace myNamespace
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Encapsulate field: 'param' (and use property)", applyFix: true, blockUntilComplete: true);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'param' (and use property)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace myNamespace
 {
     class Program
@@ -74,7 +83,8 @@ namespace myNamespace
             Param = 80;
         }
     }
-}");
+}"
+            );
         }
 
         [WpfFact, Trait(Traits.Feature, Traits.Features.EncapsulateField)]
@@ -82,8 +92,13 @@ namespace myNamespace
         {
             SetUpEditor(TestSource);
             VisualStudio.Editor.InvokeCodeActionList();
-            VisualStudio.Editor.Verify.CodeAction("Encapsulate field: 'param' (but still use field)", applyFix: true, blockUntilComplete: true);
-            VisualStudio.Editor.Verify.TextContains(@"
+            VisualStudio.Editor.Verify.CodeAction(
+                "Encapsulate field: 'param' (but still use field)",
+                applyFix: true,
+                blockUntilComplete: true
+            );
+            VisualStudio.Editor.Verify.TextContains(
+                @"
 namespace myNamespace
 {
     class Program
@@ -97,7 +112,8 @@ namespace myNamespace
             param = 80;
         }
     }
-}");
+}"
+            );
         }
     }
 }

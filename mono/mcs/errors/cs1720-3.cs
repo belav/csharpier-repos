@@ -4,9 +4,9 @@
 
 using System;
 
-public class Tester 
+public class Tester
 {
-    public static void Foo ()
+    public static void Foo()
     {
         Console.WriteLine(default(Tester).ToString());
     }

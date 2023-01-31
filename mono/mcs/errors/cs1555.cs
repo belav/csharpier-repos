@@ -4,7 +4,5 @@
 
 public class MainTest
 {
-	public static void Main (string[] args)
-	{
-	}
+    public static void Main(string[] args) { }
 }

@@ -1,15 +1,18 @@
 public class ClassOne
 {
-	public delegate string ReturnStringDelegate ();
+    public delegate string ReturnStringDelegate();
 
-	public ClassOne (ReturnStringDelegate d)
-	{
-	}
+    public ClassOne(ReturnStringDelegate d) { }
 
-	public ClassOne (string s)
-		: this (new ReturnStringDelegate (delegate () { return s; }))
-	{
-	}
+    public ClassOne(string s)
+        : this(
+            new ReturnStringDelegate(
+                delegate()
+                {
+                    return s;
+                }
+            )
+        ) { }
 
-	public static void Main () { }
+    public static void Main() { }
 }

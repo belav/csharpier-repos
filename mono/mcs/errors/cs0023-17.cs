@@ -5,21 +5,19 @@ using System;
 
 enum Enum
 {
-	Test
+    Test
 }
 
 class A : Attribute
 {
-	public A (object e)
-	{
-	}
+    public A(object e) { }
 }
 
 class C
 {
-	[A (Enum.Test)]
-	int Enum ()
-	{
-		return 0;
-	}
+    [A(Enum.Test)]
+    int Enum()
+    {
+        return 0;
+    }
 }

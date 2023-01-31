@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Import.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,64 +31,69 @@
 using System.Xml.Serialization;
 using System.Web.Services.Configuration;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class Import : DocumentableItem {
-
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class Import : DocumentableItem
+    {
 		#region Fields
 
-		string location;
-		string ns;
-		ServiceDescription serviceDescription;
-		ServiceDescriptionFormatExtensionCollection extensions;
+        string location;
+        string ns;
+        ServiceDescription serviceDescription;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
 		#endregion // Fields
 
 		#region Constructors
-		
-		public Import ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-			location = String.Empty;
-			ns = String.Empty;
-			serviceDescription = null;
-		}
-		
+
+        public Import()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+            location = String.Empty;
+            ns = String.Empty;
+            serviceDescription = null;
+        }
+
 		#endregion // Constructors
 
 		#region Properties
 
-		[XmlAttribute ("location")]
-		public string Location {
-			get { return location; }
-			set { location = value; }
-		}
+        [XmlAttribute("location")]
+        public string Location
+        {
+            get { return location; }
+            set { location = value; }
+        }
 
-		[XmlAttribute ("namespace")]
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
-	
-//		[XmlIgnore]
-		public ServiceDescription ServiceDescription {
-			get { return serviceDescription; }
-		}
+        [XmlAttribute("namespace")]
+        public string Namespace
+        {
+            get { return ns; }
+            set { ns = value; }
+        }
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions { 
-			get { return extensions; }
-		}
+        //		[XmlIgnore]
+        public ServiceDescription ServiceDescription
+        {
+            get { return serviceDescription; }
+        }
+
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
 
 		#endregion // Properties
 
 		#region Methods
 
-		internal void SetParent (ServiceDescription serviceDescription)
-		{
-			this.serviceDescription = serviceDescription;
-		}
+        internal void SetParent(ServiceDescription serviceDescription)
+        {
+            this.serviceDescription = serviceDescription;
+        }
 
 		#endregion
-	}
+    }
 }

@@ -29,20 +29,14 @@ internal class SyntaxListBuilder
 
     public GreenNode this[int index]
     {
-        get
-        {
-            return _nodes[index];
-        }
-
-        set
-        {
-            _nodes[index].Value = value;
-        }
+        get { return _nodes[index]; }
+        set { _nodes[index].Value = value; }
     }
 
     public void Add(GreenNode item)
     {
-        if (item == null) return;
+        if (item == null)
+            return;
 
         if (item.IsList)
         {
@@ -113,12 +107,14 @@ internal class SyntaxListBuilder
         Validate(oldCount, Count);
     }
 
-    public void AddRange<TNode>(SyntaxList<TNode> list) where TNode : GreenNode
+    public void AddRange<TNode>(SyntaxList<TNode> list)
+        where TNode : GreenNode
     {
         this.AddRange(list, 0, list.Count);
     }
 
-    public void AddRange<TNode>(SyntaxList<TNode> list, int offset, int length) where TNode : GreenNode
+    public void AddRange<TNode>(SyntaxList<TNode> list, int offset, int length)
+        where TNode : GreenNode
     {
         AddRange(new SyntaxList<GreenNode>(list.Node), offset, length);
     }
@@ -134,12 +130,15 @@ internal class SyntaxListBuilder
         var currentSize = _nodes.Length;
         var requiredSize = Count + additionalCount;
 
-        if (requiredSize <= currentSize) return;
+        if (requiredSize <= currentSize)
+            return;
 
         var newSize =
-            requiredSize < 8 ? 8 :
-            requiredSize >= (int.MaxValue / 2) ? int.MaxValue :
-            Math.Max(requiredSize, currentSize * 2); // NB: Size will *at least* double.
+            requiredSize < 8
+                ? 8
+                : requiredSize >= (int.MaxValue / 2)
+                    ? int.MaxValue
+                    : Math.Max(requiredSize, currentSize * 2); // NB: Size will *at least* double.
         Debug.Assert(newSize >= requiredSize);
 
         Array.Resize(ref _nodes, newSize);
@@ -193,7 +192,8 @@ internal class SyntaxListBuilder
         return new SyntaxList<GreenNode>(ToListNode());
     }
 
-    public SyntaxList<TNode> ToList<TNode>() where TNode : GreenNode
+    public SyntaxList<TNode> ToList<TNode>()
+        where TNode : GreenNode
     {
         return new SyntaxList<TNode>(ToListNode());
     }

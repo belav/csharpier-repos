@@ -13,6 +13,7 @@ namespace POS_Server.Controllers
     public class MedalAgentController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         // GET api/<controller> get all medals
         [HttpPost]
         [Route("Get")]
@@ -21,7 +22,7 @@ namespace POS_Server.Controllers
             var re = Request;
             var headers = re.Headers;
             string token = "";
-          
+
             if (headers.Contains("APIKey"))
             {
                 token = headers.GetValues("APIKey").First();
@@ -33,63 +34,47 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var medalsList = (from MA in entity.medalAgent
-                                      join M in entity.medals on MA.medalId equals M.medalId into JM
-                                      join A in entity.agents on MA.agentId equals A.agentId into JA
-                                     
-                                   
-                                      join U in entity.users on MA.createUserId equals U.userId into JU
-                                      from JMM in JM.DefaultIfEmpty()
-                                      from JAA in JA.DefaultIfEmpty()
-                                    
-                                     
-                                      from JUU in JU.DefaultIfEmpty()
-
-                                      select new MedalAgentModel()
-                                      {
-                                          id = MA.id,
-                                          medalId = MA.medalId,
-                                          agentId = MA.agentId,
-                                       
-                                          notes = MA.notes,
-                                          isActive = MA.isActive,
-                                          createDate = MA.createDate,
-                                          updateDate = MA.updateDate,
-                                          createUserId = MA.createUserId,
-                                          updateUserId = MA.updateUserId,
-                                          agentName=JAA.name,
-                                          medalName=JMM.name,
-                                        
-                                          createUserName=JUU.username,
-
-                                      }
-             
-
-
-
-                               ) .Select(c => new MedalAgentModel() {
-                 
-                 
-
-                   })
-                   .ToList();
+                    var medalsList = (
+                        from MA in entity.medalAgent
+                        join M in entity.medals on MA.medalId equals M.medalId into JM
+                        join A in entity.agents on MA.agentId equals A.agentId into JA
+                        join U in entity.users on MA.createUserId equals U.userId into JU
+                        from JMM in JM.DefaultIfEmpty()
+                        from JAA in JA.DefaultIfEmpty()
+                        from JUU in JU.DefaultIfEmpty()
+                        select new MedalAgentModel()
+                        {
+                            id = MA.id,
+                            medalId = MA.medalId,
+                            agentId = MA.agentId,
+                            notes = MA.notes,
+                            isActive = MA.isActive,
+                            createDate = MA.createDate,
+                            updateDate = MA.updateDate,
+                            createUserId = MA.createUserId,
+                            updateUserId = MA.updateUserId,
+                            agentName = JAA.name,
+                            medalName = JMM.name,
+                            createUserName = JUU.username,
+                        }
+                    ).Select(c => new MedalAgentModel() { }).ToList();
 
                     /*
-                     * 
-                      id 
-                     medalId 
-                     agentId 
-                      offerId 
-                     couponId  
-                     notes 
-                      isActive 
-                     createDate 
-                       updateDate 
-                     createUserId 
-                     updateUserId 
+                     *
+                      id
+                     medalId
+                     agentId
+                      offerId
+                     couponId
+                     notes
+                      isActive
+                     createDate
+                       updateDate
+                     createUserId
+                     updateUserId
                      * */
                     // can delet or not
-                
+
 
                     if (medalsList == null)
                         return NotFound();
@@ -98,12 +83,10 @@ namespace POS_Server.Controllers
                 }
             }
             //else
-                return NotFound();
+            return NotFound();
         }
 
-
-
-        // GET api/<controller>  Get medal By ID 
+        // GET api/<controller>  Get medal By ID
         [HttpPost]
         [Route("GetByID")]
         public IHttpActionResult GetmedalByID()
@@ -128,22 +111,23 @@ namespace POS_Server.Controllers
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     var medal = entity.medalAgent
-                   .Where(c => c.medalId == cId)
-                   .Select(c => new {
-                       c.id,
-                     c.medalId,
-                     c.agentId,
-                   
-                     c.notes,
-                      c.isActive,
-                     c.createDate,
-                       c.updateDate,
-                     c.createUserId,
-                     c.updateUserId,
-
-
-                   })
-                   .FirstOrDefault();
+                        .Where(c => c.medalId == cId)
+                        .Select(
+                            c =>
+                                new
+                                {
+                                    c.id,
+                                    c.medalId,
+                                    c.agentId,
+                                    c.notes,
+                                    c.isActive,
+                                    c.createDate,
+                                    c.updateDate,
+                                    c.createUserId,
+                                    c.updateUserId,
+                                }
+                        )
+                        .FirstOrDefault();
 
                     if (medal == null)
                         return NotFound();
@@ -155,13 +139,7 @@ namespace POS_Server.Controllers
                 return NotFound();
         }
 
-   
-
-
-
-
-
-        // add or update medal 
+        // add or update medal
         [HttpPost]
         [Route("Save")]
         public bool Save(string medalAgentObj)
@@ -169,19 +147,22 @@ namespace POS_Server.Controllers
             var re = Request;
             var headers = re.Headers;
             string token = "";
-            
+
             if (headers.Contains("APIKey"))
             {
                 token = headers.GetValues("APIKey").First();
             }
             Validation validation = new Validation();
             bool valid = validation.CheckApiKey(token);
-            
+
             if (valid)
             {
                 medalAgentObj = medalAgentObj.Replace("\\", string.Empty);
                 medalAgentObj = medalAgentObj.Trim('"');
-                medalAgent Object = JsonConvert.DeserializeObject<medalAgent>(medalAgentObj, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+                medalAgent Object = JsonConvert.DeserializeObject<medalAgent>(
+                    medalAgentObj,
+                    new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
+                );
                 try
                 {
                     using (incposdbEntities entity = new incposdbEntities())
@@ -189,33 +170,31 @@ namespace POS_Server.Controllers
                         var medalEntity = entity.Set<medalAgent>();
                         if (Object.medalId == 0)
                         {
-
-                            Object.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                            Object.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                            Object.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             Object.updateUserId = Object.createUserId;
                             medalEntity.Add(Object);
-                          //  message = "medal Is Added Successfully";
+                            //  message = "medal Is Added Successfully";
                         }
                         else
                         {
-
-                            var tmpmedal = entity.medalAgent.Where(p => p.medalId == Object.medalId).FirstOrDefault();
+                            var tmpmedal = entity.medalAgent
+                                .Where(p => p.medalId == Object.medalId)
+                                .FirstOrDefault();
 
                             tmpmedal.id = Object.id;
-                     tmpmedal.medalId = Object.medalId;
-                     tmpmedal.agentId = Object.agentId;
-                  
-                     tmpmedal.notes =  Object.notes;
-                  
+                            tmpmedal.medalId = Object.medalId;
+                            tmpmedal.agentId = Object.agentId;
+
+                            tmpmedal.notes = Object.notes;
+
                             tmpmedal.createDate = Object.createDate;
                             tmpmedal.updateDate = Object.updateDate;
                             tmpmedal.createUserId = Object.createUserId;
                             tmpmedal.updateUserId = Object.updateUserId;
                             tmpmedal.isActive = Object.isActive;
-                            tmpmedal.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);// server current date;
+                            tmpmedal.updateDate = coctrlr.AddOffsetTodate(DateTime.Now); // server current date;
                             tmpmedal.updateUserId = Object.updateUserId;
-                            
-
 
                             //message = "medal Is Updated Successfully";
                         }
@@ -223,7 +202,6 @@ namespace POS_Server.Controllers
                     }
                     return true;
                 }
-
                 catch
                 {
                     return false;
@@ -278,7 +256,7 @@ namespace POS_Server.Controllers
 
                             medalObj.isActive = 0;
                             medalObj.updateUserId = userId;
-                            medalObj.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            medalObj.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             entity.SaveChanges();
 
                             return Ok("Offer is Deleted Successfully");
@@ -293,8 +271,6 @@ namespace POS_Server.Controllers
             else
                 return NotFound();
         }
-
-
 
         #region
         [HttpPost]
@@ -323,7 +299,10 @@ namespace POS_Server.Controllers
             bool valid = validation.CheckApiKey(token);
             newagentlist = newagentlist.Replace("\\", string.Empty);
             newagentlist = newagentlist.Trim('"');
-            List<medalAgent> newmagObj = JsonConvert.DeserializeObject<List<medalAgent>>(newagentlist, new JsonSerializerSettings { DateParseHandling = DateParseHandling.None });
+            List<medalAgent> newmagObj = JsonConvert.DeserializeObject<List<medalAgent>>(
+                newagentlist,
+                new JsonSerializerSettings { DateParseHandling = DateParseHandling.None }
+            );
             if (valid)
             {
                 using (incposdbEntities entity = new incposdbEntities())
@@ -341,36 +320,30 @@ namespace POS_Server.Controllers
 
                             if (newrow.createUserId == null || newrow.createUserId == 0)
                             {
-                                newrow.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newrow.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newrow.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newrow.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
 
                                 newrow.createUserId = userId;
                                 newrow.updateUserId = userId;
                             }
                             else
                             {
-                                newrow.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newrow.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newrow.updateUserId = userId;
-
                             }
-
                         }
                         entity.medalAgent.AddRange(newmagObj);
                     }
                     res = entity.SaveChanges();
 
                     return res;
-
                 }
-
             }
             else
             {
                 return -1;
             }
-
         }
         #endregion
-
     }
 }

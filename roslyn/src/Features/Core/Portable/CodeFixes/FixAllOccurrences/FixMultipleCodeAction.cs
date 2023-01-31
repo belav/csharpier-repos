@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public FixMultipleCodeAction(
             IFixAllState fixAllState,
             string title,
-            string computingFixWaitDialogMessage)
+            string computingFixWaitDialogMessage
+        )
             : base(fixAllState, showPreviewChangesDialog: false)
         {
             _title = title;

@@ -11,11 +11,13 @@ namespace Microsoft.EntityFrameworkCore.Proxies.Internal;
 /// </summary>
 public class ProxyBindingInterceptor : IInstantiationBindingInterceptor
 {
-    private static readonly MethodInfo CreateLazyLoadingProxyMethod
-        = typeof(IProxyFactory).GetTypeInfo().GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
+    private static readonly MethodInfo CreateLazyLoadingProxyMethod = typeof(IProxyFactory)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(IProxyFactory.CreateLazyLoadingProxy))!;
 
-    private static readonly MethodInfo CreateProxyMethod
-        = typeof(IProxyFactory).GetTypeInfo().GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
+    private static readonly MethodInfo CreateProxyMethod = typeof(IProxyFactory)
+        .GetTypeInfo()
+        .GetDeclaredMethod(nameof(IProxyFactory.CreateProxy))!;
 
     private readonly IProxyFactory _proxyFactory;
 
@@ -36,14 +38,18 @@ public class ProxyBindingInterceptor : IInstantiationBindingInterceptor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InstantiationBinding ModifyBinding(InstantiationBindingInterceptionData interceptionData, InstantiationBinding binding)
+    public virtual InstantiationBinding ModifyBinding(
+        InstantiationBindingInterceptionData interceptionData,
+        InstantiationBinding binding
+    )
     {
         var entityType = interceptionData.EntityType;
         var proxyType = _proxyFactory.CreateProxyType(entityType);
 
         if ((bool?)entityType.Model[ProxyAnnotationNames.LazyLoading] == true)
         {
-            var serviceProperty = entityType.GetServiceProperties()
+            var serviceProperty = entityType
+                .GetServiceProperties()
                 .First(e => e.ClrType == typeof(ILazyLoader));
 
             return new FactoryMethodBinding(
@@ -53,10 +59,15 @@ public class ProxyBindingInterceptor : IInstantiationBindingInterceptor
                 {
                     new ContextParameterBinding(typeof(DbContext)),
                     new EntityTypeParameterBinding(),
-                    new DependencyInjectionParameterBinding(typeof(ILazyLoader), typeof(ILazyLoader), serviceProperty),
+                    new DependencyInjectionParameterBinding(
+                        typeof(ILazyLoader),
+                        typeof(ILazyLoader),
+                        serviceProperty
+                    ),
                     new ObjectArrayParameterBinding(binding.ParameterBindings)
                 },
-                proxyType);
+                proxyType
+            );
         }
 
         if ((bool?)entityType.Model[ProxyAnnotationNames.ChangeTracking] == true)
@@ -70,7 +81,8 @@ public class ProxyBindingInterceptor : IInstantiationBindingInterceptor
                     new EntityTypeParameterBinding(),
                     new ObjectArrayParameterBinding(binding.ParameterBindings)
                 },
-                proxyType);
+                proxyType
+            );
         }
 
         return binding;

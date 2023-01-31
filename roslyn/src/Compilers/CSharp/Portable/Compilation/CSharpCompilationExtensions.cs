@@ -11,17 +11,24 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         internal static bool IsFeatureEnabled(this CSharpCompilation compilation, MessageID feature)
         {
-            return ((CSharpParseOptions?)compilation.SyntaxTrees.FirstOrDefault()?.Options)?.IsFeatureEnabled(feature) == true;
+            return (
+                    (CSharpParseOptions?)compilation.SyntaxTrees.FirstOrDefault()?.Options
+                )?.IsFeatureEnabled(feature) == true;
         }
 
         internal static bool IsFeatureEnabled(this SyntaxNode? syntax, MessageID feature)
         {
-            return ((CSharpParseOptions?)syntax?.SyntaxTree.Options)?.IsFeatureEnabled(feature) == true;
+            return ((CSharpParseOptions?)syntax?.SyntaxTree.Options)?.IsFeatureEnabled(feature)
+                == true;
         }
 
-        internal static bool ShouldEmitNativeIntegerAttributes(this CSharpCompilation compilation, TypeSymbol type)
+        internal static bool ShouldEmitNativeIntegerAttributes(
+            this CSharpCompilation compilation,
+            TypeSymbol type
+        )
         {
-            return compilation.ShouldEmitNativeIntegerAttributes() && type.ContainsNativeIntegerWrapperType();
+            return compilation.ShouldEmitNativeIntegerAttributes()
+                && type.ContainsNativeIntegerWrapperType();
         }
     }
 }

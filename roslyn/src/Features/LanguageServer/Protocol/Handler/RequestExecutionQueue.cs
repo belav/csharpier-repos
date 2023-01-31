@@ -59,7 +59,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         /// The queue containing the ordered LSP requests along with a combined cancellation token
         /// representing the queue's cancellation token and the individual request cancellation token.
         /// </summary>
-        private readonly AsyncQueue<(IQueueItem queueItem, CancellationToken cancellationToken)> _queue = new();
+        private readonly AsyncQueue<(
+            IQueueItem queueItem,
+            CancellationToken cancellationToken
+        )> _queue = new();
         private readonly CancellationTokenSource _cancelSource = new();
 
         /// <summary>
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public RequestExecutionQueue(
             ImmutableArray<string> supportedLanguages,
             WellKnownLspServerKinds serverKind,
-            LspServices services)
+            LspServices services
+        )
         {
             _supportedLanguages = supportedLanguages;
             _serverKind = serverKind;
@@ -132,7 +136,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             TRequestType request,
             ClientCapabilities clientCapabilities,
             string methodName,
-            CancellationToken requestCancellationToken)
+            CancellationToken requestCancellationToken
+        )
             where TRequestType : class
         {
             // Note: If the queue is not accepting any more items then TryEnqueue below will fail.
@@ -155,12 +160,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 Trace.CorrelationManager.ActivityId,
                 _logger,
                 _lspServices,
-                combinedCancellationToken);
+                combinedCancellationToken
+            );
 
             // Run a continuation to ensure the cts is disposed of.
             // We pass CancellationToken.None as we always want to dispose of the source
             // even when the request is cancelled or the queue is shutting down.
-            _ = resultTask.ContinueWith(_ => combinedTokenSource.Dispose(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            _ = resultTask.ContinueWith(
+                _ => combinedTokenSource.Dispose(),
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
 
             var didEnqueue = _queue.TryEnqueue((item, combinedCancellationToken));
 
@@ -168,7 +179,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             // The queue itself is threadsafe (_queue.TryEnqueue and _queue.Complete use the same lock).
             if (!didEnqueue)
             {
-                return Task.FromException<TResponseType?>(new InvalidOperationException($"{_serverKind.ToUserVisibleString()} was requested to shut down."));
+                return Task.FromException<TResponseType?>(
+                    new InvalidOperationException(
+                        $"{_serverKind.ToUserVisibleString()} was requested to shut down."
+                    )
+                );
             }
 
             return resultTask;
@@ -185,9 +200,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     (IQueueItem work, CancellationToken cancellationToken) queueItem;
                     try
                     {
-                        queueItem = await _queue.DequeueAsync(_cancelSource.Token).ConfigureAwait(false);
+                        queueItem = await _queue
+                            .DequeueAsync(_cancelSource.Token)
+                            .ConfigureAwait(false);
                     }
-                    catch (OperationCanceledException ex) when (ex.CancellationToken == _cancelSource.Token)
+                    catch (OperationCanceledException ex)
+                        when (ex.CancellationToken == _cancelSource.Token)
                     {
                         // The queue's cancellation token was invoked which means we are shutting down the queue.
                         // Exit out of the loop so we stop processing new items.
@@ -202,13 +220,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
                         // Restore our activity id so that logging/tracking works across asynchronous calls.
                         Trace.CorrelationManager.ActivityId = work.ActivityId;
-                        var context = await CreateRequestContextAsync(work, cancellationToken).ConfigureAwait(false);
+                        var context = await CreateRequestContextAsync(work, cancellationToken)
+                            .ConfigureAwait(false);
 
                         if (work.MutatesSolutionState)
                         {
                             // Mutating requests block other requests from starting to ensure an up to date snapshot is used.
                             // Since we're explicitly awaiting exceptions to mutating requests will bubble up here.
-                            await work.CallbackAsync(context, cancellationToken).ConfigureAwait(false);
+                            await work.CallbackAsync(context, cancellationToken)
+                                .ConfigureAwait(false);
                         }
                         else
                         {
@@ -217,10 +237,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                             // via NFW, though these errors don't put us into a bad state as far as the rest of the queue goes.
                             // Furthermore we use Task.Run here to protect ourselves against synchronous execution of work
                             // blocking the request queue for longer periods of time (it enforces parallelizabilty).
-                            _ = Task.Run(() => work.CallbackAsync(context, cancellationToken), cancellationToken).ReportNonFatalErrorAsync();
+                            _ = Task.Run(
+                                    () => work.CallbackAsync(context, cancellationToken),
+                                    cancellationToken
+                                )
+                                .ReportNonFatalErrorAsync();
                         }
                     }
-                    catch (OperationCanceledException ex) when (ex.CancellationToken == queueItem.cancellationToken)
+                    catch (OperationCanceledException ex)
+                        when (ex.CancellationToken == queueItem.cancellationToken)
                     {
                         // Explicitly ignore this exception as cancellation occured as a result of our linked cancellation token.
                         // This means either the queue is shutting down or the request itself was cancelled.
@@ -234,7 +259,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // We encountered an unexpected exception in processing the queue or in a mutating request.
                 // Log it, shutdown the queue, and exit the loop.
                 _logger.TraceException(ex);
-                OnRequestServerShutdown($"Error occurred processing queue in {_serverKind.ToUserVisibleString()}: {ex.Message}.");
+                OnRequestServerShutdown(
+                    $"Error occurred processing queue in {_serverKind.ToUserVisibleString()}: {ex.Message}."
+                );
                 return;
             }
         }
@@ -246,7 +273,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             Shutdown();
         }
 
-        private Task<RequestContext?> CreateRequestContextAsync(IQueueItem queueItem, CancellationToken cancellationToken)
+        private Task<RequestContext?> CreateRequestContextAsync(
+            IQueueItem queueItem,
+            CancellationToken cancellationToken
+        )
         {
             return RequestContext.CreateAsync(
                 queueItem.RequiresLSPSolution,
@@ -257,19 +287,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 _supportedLanguages,
                 _lspServices,
                 queueCancellationToken: this.CancellationToken,
-                requestCancellationToken: cancellationToken);
+                requestCancellationToken: cancellationToken
+            );
         }
 
         #region Test Accessor
-        internal TestAccessor GetTestAccessor()
-            => new(this);
+        internal TestAccessor GetTestAccessor() => new(this);
 
         internal readonly struct TestAccessor
         {
             private readonly RequestExecutionQueue _queue;
 
-            public TestAccessor(RequestExecutionQueue queue)
-                => _queue = queue;
+            public TestAccessor(RequestExecutionQueue queue) => _queue = queue;
 
             public bool IsComplete() => _queue._queue.IsCompleted && _queue._queue.IsEmpty;
 
@@ -287,7 +316,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             {
                 while (!_queue._queue.IsEmpty)
                 {
-                    var (_, cancellationToken) = await _queue._queue.DequeueAsync().ConfigureAwait(false);
+                    var (_, cancellationToken) = await _queue._queue
+                        .DequeueAsync()
+                        .ConfigureAwait(false);
                     if (!cancellationToken.IsCancellationRequested)
                     {
                         return false;

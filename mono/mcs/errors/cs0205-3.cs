@@ -4,19 +4,16 @@
 
 using System;
 
-public class B: A1
+public class B : A1
 {
-	protected override int Foobar  {
-		get {
-			return base.Foobar;
-		}
-	}
+    protected override int Foobar
+    {
+        get { return base.Foobar; }
+    }
 
-	static void Main ()
-	{
-		B b = new B ();
-		if (b.Foobar == 1) {
-		}
-	}
+    static void Main()
+    {
+        B b = new B();
+        if (b.Foobar == 1) { }
+    }
 }
-

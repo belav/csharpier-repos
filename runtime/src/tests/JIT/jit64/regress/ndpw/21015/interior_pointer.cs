@@ -13,16 +13,14 @@ internal struct T
         S = _S;
         SomeOtherString = null;
     }
+
     //
-    //For the testcase to fail, get_TheString must be inlined 
+    //For the testcase to fail, get_TheString must be inlined
     //into bar() which our current heuristics do
     //
     public string TheString
     {
-        get
-        {
-            return (S != null ? S : "<nothing>");
-        }
+        get { return (S != null ? S : "<nothing>"); }
     }
 }
 
@@ -30,7 +28,8 @@ internal class Tester
 {
     public static int Main()
     {
-        T t1, t2;
+        T t1,
+            t2;
 
         t1 = new T();
         t2 = new T("passed.");

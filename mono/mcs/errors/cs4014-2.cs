@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 
 class C
 {
-	static Task Method ()
-	{
-		return Task.FromResult (1);
-	}
-	
-	static void TestAsync ()
-	{
-		Func<Task> a = async () => {
-			await Method ();
-			Method ();
-		};
-	}
+    static Task Method()
+    {
+        return Task.FromResult(1);
+    }
+
+    static void TestAsync()
+    {
+        Func<Task> a = async () =>
+        {
+            await Method();
+            Method();
+        };
+    }
 }

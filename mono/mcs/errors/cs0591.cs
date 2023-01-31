@@ -2,9 +2,7 @@
 // Line: 4
 
 [System.AttributeUsage(0)]
-class ClassMain {
-    
-        public static void Main () {
-        }
+class ClassMain
+{
+    public static void Main() { }
 }
-

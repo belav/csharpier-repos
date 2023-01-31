@@ -5,8 +5,8 @@ using System;
 
 class TestClass
 {
-	public static void Main ()
-	{
-		Console.WriteLine ($"{ Main () }");		
-	}
+    public static void Main()
+    {
+        Console.WriteLine($"{Main()}");
+    }
 }

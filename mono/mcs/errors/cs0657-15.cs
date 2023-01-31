@@ -7,8 +7,9 @@ using System;
 class C
 {
     [property: Obsolete]
-    event ResolveEventHandler field { 
-        add {}
-        remove {}
+    event ResolveEventHandler field
+    {
+        add { }
+        remove { }
     }
 }

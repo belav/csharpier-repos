@@ -3,8 +3,5 @@
 
 using System;
 
-[AttributeUsage (AttributeTargets.All)]
-public class A
-{
-}
-
+[AttributeUsage(AttributeTargets.All)]
+public class A { }

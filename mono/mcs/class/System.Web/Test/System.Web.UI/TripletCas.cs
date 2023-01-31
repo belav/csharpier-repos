@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,46 +34,47 @@ using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TripletCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor0_Deny_Unrestricted()
+        {
+            Triplet t = new Triplet();
+            Assert.IsNull(t.First, "First");
+            Assert.IsNull(t.Second, "Second");
+            Assert.IsNull(t.Third, "Third");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TripletCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
+        {
+            Triplet t = new Triplet(String.Empty, String.Empty);
+            Assert.IsNotNull(t.First, "First");
+            Assert.IsNotNull(t.Second, "Second");
+            Assert.IsNull(t.Third, "Third");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor0_Deny_Unrestricted ()
-		{
-			Triplet t = new Triplet ();
-			Assert.IsNull (t.First, "First");
-			Assert.IsNull (t.Second, "Second");
-			Assert.IsNull (t.Third, "Third");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor3_Deny_Unrestricted()
+        {
+            Triplet t = new Triplet(String.Empty, String.Empty, String.Empty);
+            Assert.IsNotNull(t.First, "First");
+            Assert.IsNotNull(t.Second, "Second");
+            Assert.IsNotNull(t.Third, "Third");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			Triplet t = new Triplet (String.Empty, String.Empty);
-			Assert.IsNotNull (t.First, "First");
-			Assert.IsNotNull (t.Second, "Second");
-			Assert.IsNull (t.Third, "Third");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor3_Deny_Unrestricted ()
-		{
-			Triplet t = new Triplet (String.Empty, String.Empty, String.Empty);
-			Assert.IsNotNull (t.First, "First");
-			Assert.IsNotNull (t.Second, "Second");
-			Assert.IsNotNull (t.Third, "Third");
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (Triplet); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Triplet); }
+        }
+    }
 }

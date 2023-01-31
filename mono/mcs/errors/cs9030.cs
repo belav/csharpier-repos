@@ -5,9 +5,9 @@ using System;
 
 class MainClass
 {
-	public static void Main ()
-	{
-		System.AppDomain a = null;
-		a?.AssemblyLoad += (sender, args) => Console.Write (args);
-	}
+    public static void Main()
+    {
+        System.AppDomain a = null;
+        a?.AssemblyLoad += (sender, args) => Console.Write(args);
+    }
 }

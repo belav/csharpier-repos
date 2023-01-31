@@ -12,38 +12,38 @@ internal static class LegacySyntaxNodeExtensions
 {
     private static readonly SyntaxKind[] TransitionSpanKinds = new SyntaxKind[]
     {
-            SyntaxKind.CSharpTransition,
-            SyntaxKind.MarkupTransition,
+        SyntaxKind.CSharpTransition,
+        SyntaxKind.MarkupTransition,
     };
 
     private static readonly SyntaxKind[] MetaCodeSpanKinds = new SyntaxKind[]
     {
-            SyntaxKind.RazorMetaCode,
+        SyntaxKind.RazorMetaCode,
     };
 
     private static readonly SyntaxKind[] CommentSpanKinds = new SyntaxKind[]
     {
-            SyntaxKind.RazorCommentTransition,
-            SyntaxKind.RazorCommentStar,
-            SyntaxKind.RazorCommentLiteral,
+        SyntaxKind.RazorCommentTransition,
+        SyntaxKind.RazorCommentStar,
+        SyntaxKind.RazorCommentLiteral,
     };
 
     private static readonly SyntaxKind[] CodeSpanKinds = new SyntaxKind[]
     {
-            SyntaxKind.CSharpStatementLiteral,
-            SyntaxKind.CSharpExpressionLiteral,
-            SyntaxKind.CSharpEphemeralTextLiteral,
+        SyntaxKind.CSharpStatementLiteral,
+        SyntaxKind.CSharpExpressionLiteral,
+        SyntaxKind.CSharpEphemeralTextLiteral,
     };
 
     private static readonly SyntaxKind[] MarkupSpanKinds = new SyntaxKind[]
     {
-            SyntaxKind.MarkupTextLiteral,
-            SyntaxKind.MarkupEphemeralTextLiteral,
+        SyntaxKind.MarkupTextLiteral,
+        SyntaxKind.MarkupEphemeralTextLiteral,
     };
 
     private static readonly SyntaxKind[] NoneSpanKinds = new SyntaxKind[]
     {
-            SyntaxKind.UnclassifiedTextLiteral,
+        SyntaxKind.UnclassifiedTextLiteral,
     };
 
     public static SpanContext GetSpanContext(this SyntaxNode node)
@@ -53,7 +53,8 @@ internal static class LegacySyntaxNodeExtensions
         return context is SpanContext ? (SpanContext)context : null;
     }
 
-    public static TNode WithSpanContext<TNode>(this TNode node, SpanContext spanContext) where TNode : SyntaxNode
+    public static TNode WithSpanContext<TNode>(this TNode node, SpanContext spanContext)
+        where TNode : SyntaxNode
     {
         if (node == null)
         {
@@ -82,7 +83,8 @@ internal static class LegacySyntaxNodeExtensions
             }
         }
 
-        var newAnnotationsArray = newAnnotations == null ? new[] { newAnnotation } : newAnnotations.ToArray();
+        var newAnnotationsArray =
+            newAnnotations == null ? new[] { newAnnotation } : newAnnotations.ToArray();
 
         return node.WithAnnotations(newAnnotationsArray);
     }
@@ -212,12 +214,12 @@ internal static class LegacySyntaxNodeExtensions
 
     public static bool IsSpanKind(this SyntaxNode node)
     {
-        return IsTransitionSpanKind(node) ||
-            IsMetaCodeSpanKind(node) ||
-            IsCommentSpanKind(node) ||
-            IsCodeSpanKind(node) ||
-            IsMarkupSpanKind(node) ||
-            IsNoneSpanKind(node);
+        return IsTransitionSpanKind(node)
+            || IsMetaCodeSpanKind(node)
+            || IsCommentSpanKind(node)
+            || IsCodeSpanKind(node)
+            || IsMarkupSpanKind(node)
+            || IsNoneSpanKind(node);
     }
 
     public static IEnumerable<SyntaxNode> FlattenSpans(this SyntaxNode node)
@@ -267,7 +269,9 @@ internal static class LegacySyntaxNodeExtensions
         while (parent != null)
         {
             var flattenedSpans = parent.FlattenSpans();
-            var prevSpan = flattenedSpans.LastOrDefault(n => n.EndPosition <= node.Position && n != node);
+            var prevSpan = flattenedSpans.LastOrDefault(
+                n => n.EndPosition <= node.Position && n != node
+            );
             if (prevSpan != null)
             {
                 return prevSpan;
@@ -290,7 +294,9 @@ internal static class LegacySyntaxNodeExtensions
         while (parent != null)
         {
             var flattenedSpans = parent.FlattenSpans();
-            var nextSpan = flattenedSpans.FirstOrDefault(n => n.Position >= node.EndPosition && n != node);
+            var nextSpan = flattenedSpans.FirstOrDefault(
+                n => n.Position >= node.EndPosition && n != node
+            );
             if (nextSpan != null)
             {
                 return nextSpan;

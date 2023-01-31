@@ -14,20 +14,25 @@ namespace System.Activities.Statements
     using System.Windows.Markup;
 
     [ContentProperty("Exception")]
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotMatchKeywords, Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [Throw])")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotMatchKeywords,
+        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [Throw])"
+    )]
     public sealed class Throw : CodeActivity
     {
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<Exception> Exception
-        {
-            get;
-            set;
-        }
+        public InArgument<Exception> Exception { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument exceptionArgument = new RuntimeArgument("Exception", typeof(Exception), ArgumentDirection.In, true);
+            RuntimeArgument exceptionArgument = new RuntimeArgument(
+                "Exception",
+                typeof(Exception),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Exception, exceptionArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { exceptionArgument });
         }
@@ -38,7 +43,11 @@ namespace System.Activities.Statements
 
             if (exception == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MemberCannotBeNull("Exception", this.GetType().Name, this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.MemberCannotBeNull("Exception", this.GetType().Name, this.DisplayName)
+                    )
+                );
             }
 
             throw FxTrace.Exception.AsError(exception);

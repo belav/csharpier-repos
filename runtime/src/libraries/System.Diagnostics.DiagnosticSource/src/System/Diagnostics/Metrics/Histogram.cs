@@ -14,11 +14,13 @@ namespace System.Diagnostics.Metrics
     /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
     /// </remarks>
 #if ALLOW_PARTIALLY_TRUSTED_CALLERS
-        [System.Security.SecuritySafeCriticalAttribute]
+    [System.Security.SecuritySafeCriticalAttribute]
 #endif
-    public sealed class Histogram<T> : Instrument<T> where T : struct
+    public sealed class Histogram<T> : Instrument<T>
+        where T : struct
     {
-        internal Histogram(Meter meter, string name, string? unit, string? description) : base(meter, name, unit, description)
+        internal Histogram(Meter meter, string name, string? unit, string? description)
+            : base(meter, name, unit, description)
         {
             Publish();
         }
@@ -34,7 +36,8 @@ namespace System.Diagnostics.Metrics
         /// </summary>
         /// <param name="value">The measurement value.</param>
         /// <param name="tag">A key-value pair tag associated with the measurement.</param>
-        public void Record(T value, KeyValuePair<string, object?> tag) => RecordMeasurement(value, tag);
+        public void Record(T value, KeyValuePair<string, object?> tag) =>
+            RecordMeasurement(value, tag);
 
         /// <summary>
         /// Record a measurement value.
@@ -42,7 +45,11 @@ namespace System.Diagnostics.Metrics
         /// <param name="value">The measurement value.</param>
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
         /// <param name="tag2">A second key-value pair tag associated with the measurement.</param>
-        public void Record(T value, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2) => RecordMeasurement(value, tag1, tag2);
+        public void Record(
+            T value,
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2
+        ) => RecordMeasurement(value, tag1, tag2);
 
         /// <summary>
         /// Record a measurement value.
@@ -51,21 +58,28 @@ namespace System.Diagnostics.Metrics
         /// <param name="tag1">A first key-value pair tag associated with the measurement.</param>
         /// <param name="tag2">A second key-value pair tag associated with the measurement.</param>
         /// <param name="tag3">A third key-value pair tag associated with the measurement.</param>
-        public void Record(T value, KeyValuePair<string, object?> tag1, KeyValuePair<string, object?> tag2, KeyValuePair<string, object?> tag3) => RecordMeasurement(value, tag1, tag2, tag3);
+        public void Record(
+            T value,
+            KeyValuePair<string, object?> tag1,
+            KeyValuePair<string, object?> tag2,
+            KeyValuePair<string, object?> tag3
+        ) => RecordMeasurement(value, tag1, tag2, tag3);
 
         /// <summary>
         /// Record a measurement value.
         /// </summary>
         /// <param name="value">The measurement value.</param>
         /// <param name="tags">A span of key-value pair tags associated with the measurement.</param>
-        public void Record(T value, ReadOnlySpan<KeyValuePair<string, object?>> tags) => RecordMeasurement(value, tags);
+        public void Record(T value, ReadOnlySpan<KeyValuePair<string, object?>> tags) =>
+            RecordMeasurement(value, tags);
 
         /// <summary>
         /// Record a measurement value.
         /// </summary>
         /// <param name="value">The measurement value.</param>
         /// <param name="tags">A list of key-value pair tags associated with the measurement.</param>
-        public void Record(T value, params KeyValuePair<string, object?>[] tags) => RecordMeasurement(value, tags.AsSpan());
+        public void Record(T value, params KeyValuePair<string, object?>[] tags) =>
+            RecordMeasurement(value, tags.AsSpan());
 
         /// <summary>
         /// Record a measurement value.

@@ -36,17 +36,17 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
     /// </summary>
     public ModelStateDictionary()
-        : this(DefaultMaxAllowedErrors)
-    {
-    }
+        : this(DefaultMaxAllowedErrors) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
     /// </summary>
     public ModelStateDictionary(int maxAllowedErrors)
-        : this(maxAllowedErrors, maxValidationDepth: DefaultMaxRecursionDepth, maxStateDepth: DefaultMaxRecursionDepth)
-    {
-    }
+        : this(
+            maxAllowedErrors,
+            maxValidationDepth: DefaultMaxRecursionDepth,
+            maxStateDepth: DefaultMaxRecursionDepth
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ModelStateDictionary"/> class.
@@ -57,10 +57,7 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         MaxValidationDepth = maxValidationDepth;
         MaxStateDepth = maxStateDepth;
         var emptySegment = new StringSegment(buffer: string.Empty);
-        _root = new ModelStateNode(subKey: emptySegment)
-        {
-            Key = string.Empty
-        };
+        _root = new ModelStateNode(subKey: emptySegment) { Key = string.Empty };
     }
 
     /// <summary>
@@ -69,9 +66,11 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// </summary>
     /// <param name="dictionary">The <see cref="ModelStateDictionary"/> to copy values from.</param>
     public ModelStateDictionary(ModelStateDictionary dictionary)
-        : this(dictionary?.MaxAllowedErrors ?? DefaultMaxAllowedErrors,
-              dictionary?.MaxValidationDepth ?? DefaultMaxRecursionDepth,
-              dictionary?.MaxStateDepth ?? DefaultMaxRecursionDepth)
+        : this(
+            dictionary?.MaxAllowedErrors ?? DefaultMaxAllowedErrors,
+            dictionary?.MaxValidationDepth ?? DefaultMaxRecursionDepth,
+            dictionary?.MaxStateDepth ?? DefaultMaxRecursionDepth
+        )
     {
         if (dictionary == null)
         {
@@ -104,10 +103,7 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     /// </remarks>
     public int MaxAllowedErrors
     {
-        get
-        {
-            return _maxAllowedErrors;
-        }
+        get { return _maxAllowedErrors; }
         set
         {
             if (value < 0)
@@ -167,7 +163,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     }
 
     /// <inheritdoc />
-    public ModelValidationState ValidationState => GetValidity(_root, currentDepth: 0) ?? ModelValidationState.Valid;
+    public ModelValidationState ValidationState =>
+        GetValidity(_root, currentDepth: 0) ?? ModelValidationState.Valid;
 
     /// <inheritdoc />
     public ModelStateEntry? this[string key]
@@ -221,8 +218,10 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             throw new ArgumentNullException(nameof(exception));
         }
 
-        if ((exception is InputFormatterException || exception is ValueProviderException)
-           && !string.IsNullOrEmpty(exception.Message))
+        if (
+            (exception is InputFormatterException || exception is ValueProviderException)
+            && !string.IsNullOrEmpty(exception.Message)
+        )
         {
             // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
             return TryAddModelError(key, exception.Message);
@@ -327,17 +326,24 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             }
             else if (name == null)
             {
-                errorMessage = messageProvider.NonPropertyAttemptedValueIsInvalidAccessor(entry.AttemptedValue!);
+                errorMessage = messageProvider.NonPropertyAttemptedValueIsInvalidAccessor(
+                    entry.AttemptedValue!
+                );
             }
             else
             {
-                errorMessage = messageProvider.AttemptedValueIsInvalidAccessor(entry.AttemptedValue!, name);
+                errorMessage = messageProvider.AttemptedValueIsInvalidAccessor(
+                    entry.AttemptedValue!,
+                    name
+                );
             }
 
             return TryAddModelError(key, errorMessage);
         }
-        else if ((exception is InputFormatterException || exception is ValueProviderException)
-            && !string.IsNullOrEmpty(exception.Message))
+        else if (
+            (exception is InputFormatterException || exception is ValueProviderException)
+            && !string.IsNullOrEmpty(exception.Message)
+        )
         {
             // InputFormatterException, ValueProviderException is a signal that the message is safe to expose to clients
             return TryAddModelError(key, exception.Message);
@@ -489,7 +495,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         var modelState = GetOrAddNode(key);
         if (modelState.ValidationState == ModelValidationState.Invalid)
         {
-            throw new InvalidOperationException(Resources.Validation_InvalidFieldCannotBeReset_ToSkipped);
+            throw new InvalidOperationException(
+                Resources.Validation_InvalidFieldCannotBeReset_ToSkipped
+            );
         }
 
         Count += !modelState.IsContainerNode ? 0 : 1;
@@ -606,7 +614,6 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
                 {
                     break;
                 }
-
             } while (match.Type != Delimiter.None);
         }
 
@@ -632,13 +639,14 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             {
                 if (MaxStateDepth != null && currentDepth >= MaxStateDepth)
                 {
-                    throw new InvalidOperationException(Resources.FormatModelStateDictionary_MaxModelStateDepth(MaxStateDepth));
+                    throw new InvalidOperationException(
+                        Resources.FormatModelStateDictionary_MaxModelStateDepth(MaxStateDepth)
+                    );
                 }
 
                 var subKey = FindNext(key, ref match);
                 current = current.GetOrAddNode(subKey);
                 currentDepth++;
-
             } while (match.Type != Delimiter.None);
 
             if (current.Key == null)
@@ -673,9 +681,10 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             }
         }
 
-        var keyStart = currentMatch.Type == Delimiter.OpenBracket
-            ? currentMatch.Index - 1
-            : currentMatch.Index;
+        var keyStart =
+            currentMatch.Type == Delimiter.OpenBracket
+                ? currentMatch.Index - 1
+                : currentMatch.Index;
 
         currentMatch.Type = matchType;
         currentMatch.Index = index + 1;
@@ -685,8 +694,7 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
 
     private ModelValidationState? GetValidity(ModelStateNode? node, int currentDepth)
     {
-        if (node == null ||
-            (MaxValidationDepth != null && currentDepth >= MaxValidationDepth))
+        if (node == null || (MaxValidationDepth != null && currentDepth >= MaxValidationDepth))
         {
             return null;
         }
@@ -734,7 +742,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     {
         if (!HasRecordedMaxModelError)
         {
-            var exception = new TooManyModelErrorsException(Resources.ModelStateDictionary_MaxModelStateErrors);
+            var exception = new TooManyModelErrorsException(
+                Resources.ModelStateDictionary_MaxModelStateErrors
+            );
             AddModelErrorCore(string.Empty, exception);
             HasRecordedMaxModelError = true;
         }
@@ -825,8 +835,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     public Enumerator GetEnumerator() => new Enumerator(this, prefix: string.Empty);
 
     /// <inheritdoc />
-    IEnumerator<KeyValuePair<string, ModelStateEntry?>>
-        IEnumerable<KeyValuePair<string, ModelStateEntry?>>.GetEnumerator() => GetEnumerator();
+    IEnumerator<KeyValuePair<string, ModelStateEntry?>> IEnumerable<
+        KeyValuePair<string, ModelStateEntry?>
+    >.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc />
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -1007,8 +1018,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
             return modelStateNode;
         }
 
-        public override ModelStateEntry? GetModelStateForProperty(string propertyName)
-            => GetNode(new StringSegment(propertyName));
+        public override ModelStateEntry? GetModelStateForProperty(string propertyName) =>
+            GetNode(new StringSegment(propertyName));
 
         private int BinarySearch(StringSegment searchKey)
         {
@@ -1029,7 +1040,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
                         searchKey.Buffer,
                         searchKey.Offset,
                         searchKey.Length,
-                        StringComparison.OrdinalIgnoreCase);
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
 
                 if (result == 0)
@@ -1083,8 +1095,9 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         /// <inheritdoc />
         public Enumerator GetEnumerator() => new Enumerator(_dictionary, _prefix);
 
-        IEnumerator<KeyValuePair<string, ModelStateEntry>>
-            IEnumerable<KeyValuePair<string, ModelStateEntry>>.GetEnumerator() => GetEnumerator();
+        IEnumerator<KeyValuePair<string, ModelStateEntry>> IEnumerable<
+            KeyValuePair<string, ModelStateEntry>
+        >.GetEnumerator() => GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
@@ -1131,9 +1144,7 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         object IEnumerator.Current => Current;
 
         /// <inheritdoc />
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         /// <inheritdoc />
         public bool MoveNext()
@@ -1222,7 +1233,8 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         }
 
         /// <inheritdoc />
-        public KeyEnumerator GetEnumerator() => new KeyEnumerator(_dictionary, prefix: string.Empty);
+        public KeyEnumerator GetEnumerator() =>
+            new KeyEnumerator(_dictionary, prefix: string.Empty);
 
         IEnumerator<string> IEnumerable<string>.GetEnumerator() => GetEnumerator();
 
@@ -1297,9 +1309,11 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
         }
 
         /// <inheritdoc />
-        public ValueEnumerator GetEnumerator() => new ValueEnumerator(_dictionary, prefix: string.Empty);
+        public ValueEnumerator GetEnumerator() =>
+            new ValueEnumerator(_dictionary, prefix: string.Empty);
 
-        IEnumerator<ModelStateEntry> IEnumerable<ModelStateEntry>.GetEnumerator() => GetEnumerator();
+        IEnumerator<ModelStateEntry> IEnumerable<ModelStateEntry>.GetEnumerator() =>
+            GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }

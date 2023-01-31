@@ -5,12 +5,11 @@
 using System;
 using System.Diagnostics;
 
-class Class1 
+class Class1
 {
-        public int G {
-            [Conditional("DEBUG")]
-            get {
-                    return 1;
-            }
-	}
+    public int G
+    {
+        [Conditional("DEBUG")]
+        get { return 1; }
+    }
 }

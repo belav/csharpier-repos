@@ -54,7 +54,12 @@ namespace System.Reflection.Emit.Tests
             GetInt = getOnlyInt32;
         }
 
-        public MethodBuilderCustomAttribute(string testString, int testInt32, string getOnlyString, int getOnlyInt32)
+        public MethodBuilderCustomAttribute(
+            string testString,
+            int testInt32,
+            string getOnlyString,
+            int getOnlyInt32
+        )
         {
             TestStringField = testString;
             TestInt = testInt32;
@@ -69,7 +74,10 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
 
             ILGenerator ilgen = method.GetILGenerator();
             ilgen.Emit(OpCodes.Ldc_I4, 100);
@@ -79,11 +87,19 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo constructor = attributeType.GetConstructors()[0];
             FieldInfo field = attributeType.GetField("Field12345");
 
-            CustomAttributeBuilder attribute = new CustomAttributeBuilder(constructor, new object[] { 4 }, new FieldInfo[] { field }, new object[] { "hello" });
+            CustomAttributeBuilder attribute = new CustomAttributeBuilder(
+                constructor,
+                new object[] { 4 },
+                new FieldInfo[] { field },
+                new object[] { "hello" }
+            );
             method.SetCustomAttribute(attribute);
             Type createdType = type.CreateType();
 
-            object[] attributes = createdType.GetMethod("TestMethod").GetCustomAttributes(false).ToArray();
+            object[] attributes = createdType
+                .GetMethod("TestMethod")
+                .GetCustomAttributes(false)
+                .ToArray();
             Assert.Equal(1, attributes.Length);
 
             MethodBuilderCustomIntAttribute obj = (MethodBuilderCustomIntAttribute)attributes[0];
@@ -95,9 +111,15 @@ namespace System.Reflection.Emit.Tests
         public void SetCustomAttribute_CustomAttributeBuilder_NullBuilder_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("method1", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "method1",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () => method.SetCustomAttribute(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "customBuilder",
+                () => method.SetCustomAttribute(null)
+            );
         }
 
         [Fact]
@@ -108,7 +130,10 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
             MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public);
 
-            method.SetCustomAttribute(typeof(MethodBuilderCustomAttribute).GetConstructor(new Type[0]), binaryAttribute);
+            method.SetCustomAttribute(
+                typeof(MethodBuilderCustomAttribute).GetConstructor(new Type[0]),
+                binaryAttribute
+            );
         }
 
         [Fact]
@@ -117,7 +142,10 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
             MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public);
 
-            AssertExtensions.Throws<ArgumentNullException>("con", () => method.SetCustomAttribute(null, new byte[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "con",
+                () => method.SetCustomAttribute(null, new byte[0])
+            );
         }
 
         [Fact]
@@ -126,7 +154,14 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
             MethodBuilder builder = type.DefineMethod("TestMethod", MethodAttributes.Public);
 
-            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () => builder.SetCustomAttribute(typeof(MethodBuilderCustomAttribute).GetConstructor(new Type[0]), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binaryAttribute",
+                () =>
+                    builder.SetCustomAttribute(
+                        typeof(MethodBuilderCustomAttribute).GetConstructor(new Type[0]),
+                        null
+                    )
+            );
         }
     }
 }

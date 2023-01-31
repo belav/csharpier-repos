@@ -8,12 +8,19 @@ namespace System.Buffers.Text
     /// </summary>
     public static partial class Utf8Formatter
     {
-        private static bool TryFormatUInt64X(ulong value, byte precision, bool useLower, Span<byte> destination, out int bytesWritten)
+        private static bool TryFormatUInt64X(
+            ulong value,
+            byte precision,
+            bool useLower,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             int actualDigitCount = FormattingHelpers.CountHexDigits(value);
-            int computedOutputLength = (precision == StandardFormat.NoPrecision)
-                ? actualDigitCount
-                : Math.Max(precision, actualDigitCount);
+            int computedOutputLength =
+                (precision == StandardFormat.NoPrecision)
+                    ? actualDigitCount
+                    : Math.Max(precision, actualDigitCount);
 
             if (destination.Length < computedOutputLength)
             {

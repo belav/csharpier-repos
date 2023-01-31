@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PhoneCallDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -26,11 +26,13 @@ namespace System.Web.UI.Design.MobileControls
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.PhoneCall'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class PhoneCallDesigner : MobileControlDesigner
     {
         private System.Web.UI.MobileControls.PhoneCall _call;
@@ -52,9 +54,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.PhoneCall,
-                         "PhoneCallDesigner.Initialize - Invalid PhoneCall Control");
-            _call = (System.Web.UI.MobileControls.PhoneCall) component;
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.PhoneCall,
+                "PhoneCallDesigner.Initialize - Invalid PhoneCall Control"
+            );
+            _call = (System.Web.UI.MobileControls.PhoneCall)component;
             base.Initialize(component);
         }
 
@@ -83,7 +87,7 @@ namespace System.Web.UI.Design.MobileControls
 
             if (blankText)
             {
-                if (hasControls) 
+                if (hasControls)
                 {
                     children = new Control[_call.Controls.Count];
                     _call.Controls.CopyTo(children, 0);
@@ -100,9 +104,9 @@ namespace System.Web.UI.Design.MobileControls
                 if (blankText)
                 {
                     _call.Text = originalText;
-                    if (hasControls) 
+                    if (hasControls)
                     {
-                        foreach (Control c in children) 
+                        foreach (Control c in children)
                         {
                             _call.Controls.Add(c);
                         }
@@ -112,8 +116,8 @@ namespace System.Web.UI.Design.MobileControls
 
             return tw.ToString();
         }
-        
-        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e) 
+
+        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e)
         {
             if ((e.Member != null) && e.Member.Name.Equals("AlternateUrl"))
             {
@@ -123,7 +127,12 @@ namespace System.Web.UI.Design.MobileControls
                     e.OldValue.ToString()
                 );
 
-                e = new ComponentChangedEventArgs(e.Component, e.Member, e.OldValue, _call.AlternateUrl);
+                e = new ComponentChangedEventArgs(
+                    e.Component,
+                    e.Member,
+                    e.OldValue,
+                    _call.AlternateUrl
+                );
             }
             base.OnComponentChanged(sender, e);
         }

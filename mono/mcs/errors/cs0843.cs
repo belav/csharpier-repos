@@ -5,9 +5,7 @@ using System;
 
 struct S
 {
-	public S (int value)
-	{
-	}
-	
-	public short Short { get; set; }
+    public S(int value) { }
+
+    public short Short { get; set; }
 }

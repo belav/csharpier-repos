@@ -9,24 +9,25 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-	[TestFixture]
-	public class MessageFilterTableTest
-	{
-		[Test]
-		public void TestGetPriority ()
-		{
-			MessageFilterTable<int> table = new MessageFilterTable<int> ();
-			MessageFilter f = new XPathMessageFilter ();
+    [TestFixture]
+    public class MessageFilterTableTest
+    {
+        [Test]
+        public void TestGetPriority()
+        {
+            MessageFilterTable<int> table = new MessageFilterTable<int>();
+            MessageFilter f = new XPathMessageFilter();
 
-			table.Add (f, 0);
+            table.Add(f, 0);
 
-			Console.WriteLine (table.GetPriority (f));
-		}
-		[Test]
-		public void TestAdd ()
-		{
-			Console.WriteLine ();
-		}
-	}
+            Console.WriteLine(table.GetPriority(f));
+        }
+
+        [Test]
+        public void TestAdd()
+        {
+            Console.WriteLine();
+        }
+    }
 }
 #endif

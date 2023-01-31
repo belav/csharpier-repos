@@ -11,7 +11,7 @@ namespace System.Activities.Core.Presentation
     public class LocationChangedEventArgs : EventArgs
     {
         Point newLocation;
-               
+
         public LocationChangedEventArgs(Point newLocation)
         {
             this.newLocation = newLocation;
@@ -19,11 +19,7 @@ namespace System.Activities.Core.Presentation
 
         public Point NewLocation
         {
-            get
-            {
-                return this.newLocation;
-            }
+            get { return this.newLocation; }
         }
     }
-
 }

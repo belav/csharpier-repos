@@ -13,11 +13,15 @@ namespace System.ServiceModel.Configuration
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
 
-    public partial class MexHttpBindingCollectionElement : MexBindingBindingCollectionElement<WSHttpBinding, MexHttpBindingElement>
+    public partial class MexHttpBindingCollectionElement
+        : MexBindingBindingCollectionElement<WSHttpBinding, MexHttpBindingElement>
     {
         internal static MexHttpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (MexHttpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.MexHttpBindingCollectionElementName);
+            return (MexHttpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.MexHttpBindingCollectionElementName
+                );
         }
 
         protected internal override Binding GetDefault()

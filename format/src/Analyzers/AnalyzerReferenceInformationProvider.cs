@@ -13,18 +13,23 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 {
     internal class AnalyzerReferenceInformationProvider : IAnalyzerInformationProvider
     {
-        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies = new(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<string, Assembly> s_namesToAssemblies = new(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies =
+            new(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Assembly> s_namesToAssemblies =
+            new(StringComparer.OrdinalIgnoreCase);
 
         private static readonly object s_guard = new();
 
         public ImmutableDictionary<ProjectId, AnalyzersAndFixers> GetAnalyzersAndFixers(
             Solution solution,
             FormatOptions formatOptions,
-            ILogger logger)
+            ILogger logger
+        )
         {
-            return solution.Projects
-                .ToImmutableDictionary(project => project.Id, GetAnalyzersAndFixers);
+            return solution.Projects.ToImmutableDictionary(
+                project => project.Id,
+                GetAnalyzersAndFixers
+            );
         }
 
         private AnalyzersAndFixers GetAnalyzersAndFixers(Project project)
@@ -37,7 +42,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             return AnalyzerFinderHelpers.LoadAnalyzersAndFixers(analyzerAssemblies);
         }
 
-        private static Assembly? TryLoadAssemblyFrom(string? path, AnalyzerReference analyzerReference)
+        private static Assembly? TryLoadAssemblyFrom(
+            string? path,
+            AnalyzerReference analyzerReference
+        )
         {
             // Since we are not deploying these assemblies we need to ensure the files exist.
             if (path is null || !File.Exists(path))
@@ -60,7 +68,10 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                         // If we have access to the analyzer file reference, we can update our
                         // cache and return the assembly.
                         analyzerAssembly = analyzerFileReference.GetAssembly();
-                        s_namesToAssemblies.TryAdd(analyzerAssembly.GetName().FullName, analyzerAssembly);
+                        s_namesToAssemblies.TryAdd(
+                            analyzerAssembly.GetName().FullName,
+                            analyzerAssembly
+                        );
                     }
                     else
                     {
@@ -78,6 +89,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
             return null;
         }
 
-        public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) => formatOptions.AnalyzerSeverity;
+        public DiagnosticSeverity GetSeverity(FormatOptions formatOptions) =>
+            formatOptions.AnalyzerSeverity;
     }
 }

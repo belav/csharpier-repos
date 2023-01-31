@@ -3,5 +3,5 @@
 
 class X
 {
-	public volatile double d;
+    public volatile double d;
 }

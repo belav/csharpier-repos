@@ -18,9 +18,7 @@ using System.Runtime.InteropServices;
 
 namespace Microsoft.Quic
 {
-    internal partial struct QUIC_HANDLE
-    {
-    }
+    internal partial struct QUIC_HANDLE { }
 
     internal enum QUIC_TLS_PROVIDER
     {
@@ -264,7 +262,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref this, 1)).Anonymous.CertificateHash;
+                return ref MemoryMarshal
+                    .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
+                    .Anonymous.CertificateHash;
             }
         }
 
@@ -272,7 +272,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref this, 1)).Anonymous.CertificateHashStore;
+                return ref MemoryMarshal
+                    .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
+                    .Anonymous.CertificateHashStore;
             }
         }
 
@@ -280,7 +282,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref this, 1)).Anonymous.CertificateContext;
+                return ref MemoryMarshal
+                    .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
+                    .Anonymous.CertificateContext;
             }
         }
 
@@ -288,7 +292,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref this, 1)).Anonymous.CertificateFile;
+                return ref MemoryMarshal
+                    .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
+                    .Anonymous.CertificateFile;
             }
         }
 
@@ -296,7 +302,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref this, 1)).Anonymous.CertificateFileProtected;
+                return ref MemoryMarshal
+                    .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
+                    .Anonymous.CertificateFileProtected;
             }
         }
 
@@ -304,7 +312,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref this, 1)).Anonymous.CertificatePkcs12;
+                return ref MemoryMarshal
+                    .GetReference(MemoryMarshal.CreateSpan(ref this, 1))
+                    .Anonymous.CertificatePkcs12;
             }
         }
 
@@ -461,57 +471,29 @@ namespace Microsoft.Quic
         [NativeTypeName("uint32_t : 1")]
         internal uint VersionNegotiation
         {
-            get
-            {
-                return _bitfield & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~0x1u) | (value & 0x1u);
-            }
+            get { return _bitfield & 0x1u; }
+            set { _bitfield = (_bitfield & ~0x1u) | (value & 0x1u); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint StatelessRetry
         {
-            get
-            {
-                return (_bitfield >> 1) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1);
-            }
+            get { return (_bitfield >> 1) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint ResumptionAttempted
         {
-            get
-            {
-                return (_bitfield >> 2) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2);
-            }
+            get { return (_bitfield >> 2) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint ResumptionSucceeded
         {
-            get
-            {
-                return (_bitfield >> 3) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3);
-            }
+            get { return (_bitfield >> 3) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3); }
         }
 
         [NativeTypeName("uint32_t")]
@@ -636,85 +618,43 @@ namespace Microsoft.Quic
         [NativeTypeName("uint32_t : 1")]
         internal uint VersionNegotiation
         {
-            get
-            {
-                return _bitfield & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~0x1u) | (value & 0x1u);
-            }
+            get { return _bitfield & 0x1u; }
+            set { _bitfield = (_bitfield & ~0x1u) | (value & 0x1u); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint StatelessRetry
         {
-            get
-            {
-                return (_bitfield >> 1) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1);
-            }
+            get { return (_bitfield >> 1) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint ResumptionAttempted
         {
-            get
-            {
-                return (_bitfield >> 2) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2);
-            }
+            get { return (_bitfield >> 2) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint ResumptionSucceeded
         {
-            get
-            {
-                return (_bitfield >> 3) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3);
-            }
+            get { return (_bitfield >> 3) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3); }
         }
 
         [NativeTypeName("uint32_t : 1")]
         internal uint GreaseBitNegotiated
         {
-            get
-            {
-                return (_bitfield >> 4) & 0x1u;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x1u << 4)) | ((value & 0x1u) << 4);
-            }
+            get { return (_bitfield >> 4) & 0x1u; }
+            set { _bitfield = (_bitfield & ~(0x1u << 4)) | ((value & 0x1u) << 4); }
         }
 
         [NativeTypeName("uint32_t : 27")]
         internal uint RESERVED
         {
-            get
-            {
-                return (_bitfield >> 5) & 0x7FFFFFFu;
-            }
-
-            set
-            {
-                _bitfield = (_bitfield & ~(0x7FFFFFFu << 5)) | ((value & 0x7FFFFFFu) << 5);
-            }
+            get { return (_bitfield >> 5) & 0x7FFFFFFu; }
+            set { _bitfield = (_bitfield & ~(0x7FFFFFFu << 5)) | ((value & 0x7FFFFFFu) << 5); }
         }
 
         [NativeTypeName("uint32_t")]
@@ -889,7 +829,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.IsSetFlags, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.IsSetFlags, 1)
+                );
             }
         }
 
@@ -897,7 +839,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.IsSet, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.IsSet, 1)
+                );
             }
         }
 
@@ -919,42 +863,25 @@ namespace Microsoft.Quic
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong RetryMemoryLimit
                 {
-                    get
-                    {
-                        return _bitfield & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~0x1UL) | (value & 0x1UL);
-                    }
+                    get { return _bitfield & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~0x1UL) | (value & 0x1UL); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong LoadBalancingMode
                 {
-                    get
-                    {
-                        return (_bitfield >> 1) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 1)) | ((value & 0x1UL) << 1);
-                    }
+                    get { return (_bitfield >> 1) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 1)) | ((value & 0x1UL) << 1); }
                 }
 
                 [NativeTypeName("uint64_t : 62")]
                 internal ulong RESERVED
                 {
-                    get
-                    {
-                        return (_bitfield >> 2) & 0x3FFFFFFFUL;
-                    }
-
+                    get { return (_bitfield >> 2) & 0x3FFFFFFFUL; }
                     set
                     {
-                        _bitfield = (_bitfield & ~(0x3FFFFFFFUL << 2)) | ((value & 0x3FFFFFFFUL) << 2);
+                        _bitfield =
+                            (_bitfield & ~(0x3FFFFFFFUL << 2)) | ((value & 0x3FFFFFFFUL) << 2);
                     }
                 }
             }
@@ -1043,99 +970,50 @@ namespace Microsoft.Quic
         [NativeTypeName("uint8_t : 1")]
         internal byte SendBufferingEnabled
         {
-            get
-            {
-                return (byte)(_bitfield & 0x1u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u));
-            }
+            get { return (byte)(_bitfield & 0x1u); }
+            set { _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u)); }
         }
 
         [NativeTypeName("uint8_t : 1")]
         internal byte PacingEnabled
         {
-            get
-            {
-                return (byte)((_bitfield >> 1) & 0x1u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1));
-            }
+            get { return (byte)((_bitfield >> 1) & 0x1u); }
+            set { _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1)); }
         }
 
         [NativeTypeName("uint8_t : 1")]
         internal byte MigrationEnabled
         {
-            get
-            {
-                return (byte)((_bitfield >> 2) & 0x1u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2));
-            }
+            get { return (byte)((_bitfield >> 2) & 0x1u); }
+            set { _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2)); }
         }
 
         [NativeTypeName("uint8_t : 1")]
         internal byte DatagramReceiveEnabled
         {
-            get
-            {
-                return (byte)((_bitfield >> 3) & 0x1u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3));
-            }
+            get { return (byte)((_bitfield >> 3) & 0x1u); }
+            set { _bitfield = (byte)((_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3)); }
         }
 
         [NativeTypeName("uint8_t : 2")]
         internal byte ServerResumptionLevel
         {
-            get
-            {
-                return (byte)((_bitfield >> 4) & 0x3u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~(0x3u << 4)) | ((value & 0x3u) << 4));
-            }
+            get { return (byte)((_bitfield >> 4) & 0x3u); }
+            set { _bitfield = (byte)((_bitfield & ~(0x3u << 4)) | ((value & 0x3u) << 4)); }
         }
 
         [NativeTypeName("uint8_t : 1")]
         internal byte GreaseQuicBitEnabled
         {
-            get
-            {
-                return (byte)((_bitfield >> 6) & 0x1u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~(0x1u << 6)) | ((value & 0x1u) << 6));
-            }
+            get { return (byte)((_bitfield >> 6) & 0x1u); }
+            set { _bitfield = (byte)((_bitfield & ~(0x1u << 6)) | ((value & 0x1u) << 6)); }
         }
 
         [NativeTypeName("uint8_t : 1")]
         internal byte RESERVED
         {
-            get
-            {
-                return (byte)((_bitfield >> 7) & 0x1u);
-            }
-
-            set
-            {
-                _bitfield = (byte)((_bitfield & ~(0x1u << 7)) | ((value & 0x1u) << 7));
-            }
+            get { return (byte)((_bitfield >> 7) & 0x1u); }
+            set { _bitfield = (byte)((_bitfield & ~(0x1u << 7)) | ((value & 0x1u) << 7)); }
         }
 
         [NativeTypeName("uint8_t")]
@@ -1151,7 +1029,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.IsSetFlags, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.IsSetFlags, 1)
+                );
             }
         }
 
@@ -1159,7 +1039,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.IsSet, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.IsSet, 1)
+                );
             }
         }
 
@@ -1181,476 +1063,242 @@ namespace Microsoft.Quic
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaxBytesPerKey
                 {
-                    get
-                    {
-                        return _bitfield & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~0x1UL) | (value & 0x1UL);
-                    }
+                    get { return _bitfield & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~0x1UL) | (value & 0x1UL); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong HandshakeIdleTimeoutMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 1) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 1)) | ((value & 0x1UL) << 1);
-                    }
+                    get { return (_bitfield >> 1) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 1)) | ((value & 0x1UL) << 1); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong IdleTimeoutMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 2) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 2)) | ((value & 0x1UL) << 2);
-                    }
+                    get { return (_bitfield >> 2) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 2)) | ((value & 0x1UL) << 2); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MtuDiscoverySearchCompleteTimeoutUs
                 {
-                    get
-                    {
-                        return (_bitfield >> 3) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 3)) | ((value & 0x1UL) << 3);
-                    }
+                    get { return (_bitfield >> 3) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 3)) | ((value & 0x1UL) << 3); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong TlsClientMaxSendBuffer
                 {
-                    get
-                    {
-                        return (_bitfield >> 4) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 4)) | ((value & 0x1UL) << 4);
-                    }
+                    get { return (_bitfield >> 4) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 4)) | ((value & 0x1UL) << 4); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong TlsServerMaxSendBuffer
                 {
-                    get
-                    {
-                        return (_bitfield >> 5) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 5)) | ((value & 0x1UL) << 5);
-                    }
+                    get { return (_bitfield >> 5) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 5)) | ((value & 0x1UL) << 5); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong StreamRecvWindowDefault
                 {
-                    get
-                    {
-                        return (_bitfield >> 6) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 6)) | ((value & 0x1UL) << 6);
-                    }
+                    get { return (_bitfield >> 6) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 6)) | ((value & 0x1UL) << 6); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong StreamRecvBufferDefault
                 {
-                    get
-                    {
-                        return (_bitfield >> 7) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 7)) | ((value & 0x1UL) << 7);
-                    }
+                    get { return (_bitfield >> 7) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 7)) | ((value & 0x1UL) << 7); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong ConnFlowControlWindow
                 {
-                    get
-                    {
-                        return (_bitfield >> 8) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 8)) | ((value & 0x1UL) << 8);
-                    }
+                    get { return (_bitfield >> 8) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 8)) | ((value & 0x1UL) << 8); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaxWorkerQueueDelayUs
                 {
-                    get
-                    {
-                        return (_bitfield >> 9) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 9)) | ((value & 0x1UL) << 9);
-                    }
+                    get { return (_bitfield >> 9) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 9)) | ((value & 0x1UL) << 9); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaxStatelessOperations
                 {
-                    get
-                    {
-                        return (_bitfield >> 10) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 10)) | ((value & 0x1UL) << 10);
-                    }
+                    get { return (_bitfield >> 10) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 10)) | ((value & 0x1UL) << 10); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong InitialWindowPackets
                 {
-                    get
-                    {
-                        return (_bitfield >> 11) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 11)) | ((value & 0x1UL) << 11);
-                    }
+                    get { return (_bitfield >> 11) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 11)) | ((value & 0x1UL) << 11); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong SendIdleTimeoutMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 12) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 12)) | ((value & 0x1UL) << 12);
-                    }
+                    get { return (_bitfield >> 12) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 12)) | ((value & 0x1UL) << 12); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong InitialRttMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 13) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 13)) | ((value & 0x1UL) << 13);
-                    }
+                    get { return (_bitfield >> 13) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 13)) | ((value & 0x1UL) << 13); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaxAckDelayMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 14) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 14)) | ((value & 0x1UL) << 14);
-                    }
+                    get { return (_bitfield >> 14) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 14)) | ((value & 0x1UL) << 14); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong DisconnectTimeoutMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 15) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 15)) | ((value & 0x1UL) << 15);
-                    }
+                    get { return (_bitfield >> 15) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 15)) | ((value & 0x1UL) << 15); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong KeepAliveIntervalMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 16) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 16)) | ((value & 0x1UL) << 16);
-                    }
+                    get { return (_bitfield >> 16) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 16)) | ((value & 0x1UL) << 16); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong CongestionControlAlgorithm
                 {
-                    get
-                    {
-                        return (_bitfield >> 17) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 17)) | ((value & 0x1UL) << 17);
-                    }
+                    get { return (_bitfield >> 17) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 17)) | ((value & 0x1UL) << 17); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong PeerBidiStreamCount
                 {
-                    get
-                    {
-                        return (_bitfield >> 18) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 18)) | ((value & 0x1UL) << 18);
-                    }
+                    get { return (_bitfield >> 18) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 18)) | ((value & 0x1UL) << 18); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong PeerUnidiStreamCount
                 {
-                    get
-                    {
-                        return (_bitfield >> 19) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 19)) | ((value & 0x1UL) << 19);
-                    }
+                    get { return (_bitfield >> 19) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 19)) | ((value & 0x1UL) << 19); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaxBindingStatelessOperations
                 {
-                    get
-                    {
-                        return (_bitfield >> 20) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 20)) | ((value & 0x1UL) << 20);
-                    }
+                    get { return (_bitfield >> 20) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 20)) | ((value & 0x1UL) << 20); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong StatelessOperationExpirationMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 21) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 21)) | ((value & 0x1UL) << 21);
-                    }
+                    get { return (_bitfield >> 21) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 21)) | ((value & 0x1UL) << 21); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MinimumMtu
                 {
-                    get
-                    {
-                        return (_bitfield >> 22) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 22)) | ((value & 0x1UL) << 22);
-                    }
+                    get { return (_bitfield >> 22) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 22)) | ((value & 0x1UL) << 22); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaximumMtu
                 {
-                    get
-                    {
-                        return (_bitfield >> 23) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 23)) | ((value & 0x1UL) << 23);
-                    }
+                    get { return (_bitfield >> 23) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 23)) | ((value & 0x1UL) << 23); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong SendBufferingEnabled
                 {
-                    get
-                    {
-                        return (_bitfield >> 24) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 24)) | ((value & 0x1UL) << 24);
-                    }
+                    get { return (_bitfield >> 24) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 24)) | ((value & 0x1UL) << 24); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong PacingEnabled
                 {
-                    get
-                    {
-                        return (_bitfield >> 25) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 25)) | ((value & 0x1UL) << 25);
-                    }
+                    get { return (_bitfield >> 25) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 25)) | ((value & 0x1UL) << 25); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MigrationEnabled
                 {
-                    get
-                    {
-                        return (_bitfield >> 26) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 26)) | ((value & 0x1UL) << 26);
-                    }
+                    get { return (_bitfield >> 26) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 26)) | ((value & 0x1UL) << 26); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong DatagramReceiveEnabled
                 {
-                    get
-                    {
-                        return (_bitfield >> 27) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 27)) | ((value & 0x1UL) << 27);
-                    }
+                    get { return (_bitfield >> 27) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 27)) | ((value & 0x1UL) << 27); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong ServerResumptionLevel
                 {
-                    get
-                    {
-                        return (_bitfield >> 28) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 28)) | ((value & 0x1UL) << 28);
-                    }
+                    get { return (_bitfield >> 28) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 28)) | ((value & 0x1UL) << 28); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MaxOperationsPerDrain
                 {
-                    get
-                    {
-                        return (_bitfield >> 29) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 29)) | ((value & 0x1UL) << 29);
-                    }
+                    get { return (_bitfield >> 29) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 29)) | ((value & 0x1UL) << 29); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong MtuDiscoveryMissingProbeCount
                 {
-                    get
-                    {
-                        return (_bitfield >> 30) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 30)) | ((value & 0x1UL) << 30);
-                    }
+                    get { return (_bitfield >> 30) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 30)) | ((value & 0x1UL) << 30); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong DestCidUpdateIdleTimeoutMs
                 {
-                    get
-                    {
-                        return (_bitfield >> 31) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 31)) | ((value & 0x1UL) << 31);
-                    }
+                    get { return (_bitfield >> 31) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 31)) | ((value & 0x1UL) << 31); }
                 }
 
                 [NativeTypeName("uint64_t : 1")]
                 internal ulong GreaseQuicBitEnabled
                 {
-                    get
-                    {
-                        return (_bitfield >> 32) & 0x1UL;
-                    }
-
-                    set
-                    {
-                        _bitfield = (_bitfield & ~(0x1UL << 32)) | ((value & 0x1UL) << 32);
-                    }
+                    get { return (_bitfield >> 32) & 0x1UL; }
+                    set { _bitfield = (_bitfield & ~(0x1UL << 32)) | ((value & 0x1UL) << 32); }
                 }
 
                 [NativeTypeName("uint64_t : 31")]
                 internal ulong RESERVED
                 {
-                    get
-                    {
-                        return (_bitfield >> 33) & 0x7FFFFFFFUL;
-                    }
-
+                    get { return (_bitfield >> 33) & 0x7FFFFFFFUL; }
                     set
                     {
-                        _bitfield = (_bitfield & ~(0x7FFFFFFFUL << 33)) | ((value & 0x7FFFFFFFUL) << 33);
+                        _bitfield =
+                            (_bitfield & ~(0x7FFFFFFFUL << 33)) | ((value & 0x7FFFFFFFUL) << 33);
                     }
                 }
             }
@@ -1690,85 +1338,43 @@ namespace Microsoft.Quic
             [NativeTypeName("uint8_t : 1")]
             internal byte ClientRandom
             {
-                get
-                {
-                    return (byte)(_bitfield & 0x1u);
-                }
-
-                set
-                {
-                    _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u));
-                }
+                get { return (byte)(_bitfield & 0x1u); }
+                set { _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u)); }
             }
 
             [NativeTypeName("uint8_t : 1")]
             internal byte ClientEarlyTrafficSecret
             {
-                get
-                {
-                    return (byte)((_bitfield >> 1) & 0x1u);
-                }
-
-                set
-                {
-                    _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1));
-                }
+                get { return (byte)((_bitfield >> 1) & 0x1u); }
+                set { _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1)); }
             }
 
             [NativeTypeName("uint8_t : 1")]
             internal byte ClientHandshakeTrafficSecret
             {
-                get
-                {
-                    return (byte)((_bitfield >> 2) & 0x1u);
-                }
-
-                set
-                {
-                    _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2));
-                }
+                get { return (byte)((_bitfield >> 2) & 0x1u); }
+                set { _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2)); }
             }
 
             [NativeTypeName("uint8_t : 1")]
             internal byte ServerHandshakeTrafficSecret
             {
-                get
-                {
-                    return (byte)((_bitfield >> 3) & 0x1u);
-                }
-
-                set
-                {
-                    _bitfield = (byte)((_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3));
-                }
+                get { return (byte)((_bitfield >> 3) & 0x1u); }
+                set { _bitfield = (byte)((_bitfield & ~(0x1u << 3)) | ((value & 0x1u) << 3)); }
             }
 
             [NativeTypeName("uint8_t : 1")]
             internal byte ClientTrafficSecret0
             {
-                get
-                {
-                    return (byte)((_bitfield >> 4) & 0x1u);
-                }
-
-                set
-                {
-                    _bitfield = (byte)((_bitfield & ~(0x1u << 4)) | ((value & 0x1u) << 4));
-                }
+                get { return (byte)((_bitfield >> 4) & 0x1u); }
+                set { _bitfield = (byte)((_bitfield & ~(0x1u << 4)) | ((value & 0x1u) << 4)); }
             }
 
             [NativeTypeName("uint8_t : 1")]
             internal byte ServerTrafficSecret0
             {
-                get
-                {
-                    return (byte)((_bitfield >> 5) & 0x1u);
-                }
-
-                set
-                {
-                    _bitfield = (byte)((_bitfield & ~(0x1u << 5)) | ((value & 0x1u) << 5));
-                }
+                get { return (byte)((_bitfield >> 5) & 0x1u); }
+                set { _bitfield = (byte)((_bitfield & ~(0x1u << 5)) | ((value & 0x1u) << 5)); }
             }
         }
     }
@@ -1847,7 +1453,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.NEW_CONNECTION, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.NEW_CONNECTION, 1)
+                );
             }
         }
 
@@ -1855,7 +1463,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.STOP_COMPLETE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.STOP_COMPLETE, 1)
+                );
             }
         }
 
@@ -1886,25 +1496,14 @@ namespace Microsoft.Quic
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte AppCloseInProgress
                 {
-                    get
-                    {
-                        return (byte)(_bitfield & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u));
-                    }
+                    get { return (byte)(_bitfield & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 7")]
                 internal byte RESERVED
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 1) & 0x7Fu);
-                    }
-
+                    get { return (byte)((_bitfield >> 1) & 0x7Fu); }
                     set
                     {
                         _bitfield = (byte)((_bitfield & ~(0x7Fu << 1)) | ((value & 0x7Fu) << 1));
@@ -1945,7 +1544,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.CONNECTED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.CONNECTED, 1)
+                );
             }
         }
 
@@ -1953,7 +1554,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_INITIATED_BY_TRANSPORT, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_INITIATED_BY_TRANSPORT, 1)
+                );
             }
         }
 
@@ -1961,7 +1564,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_INITIATED_BY_PEER, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_INITIATED_BY_PEER, 1)
+                );
             }
         }
 
@@ -1969,7 +1574,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_COMPLETE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_COMPLETE, 1)
+                );
             }
         }
 
@@ -1977,7 +1584,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.LOCAL_ADDRESS_CHANGED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.LOCAL_ADDRESS_CHANGED, 1)
+                );
             }
         }
 
@@ -1985,7 +1594,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.PEER_ADDRESS_CHANGED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.PEER_ADDRESS_CHANGED, 1)
+                );
             }
         }
 
@@ -1993,7 +1604,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.PEER_STREAM_STARTED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.PEER_STREAM_STARTED, 1)
+                );
             }
         }
 
@@ -2001,7 +1614,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.STREAMS_AVAILABLE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.STREAMS_AVAILABLE, 1)
+                );
             }
         }
 
@@ -2009,7 +1624,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.IDEAL_PROCESSOR_CHANGED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.IDEAL_PROCESSOR_CHANGED, 1)
+                );
             }
         }
 
@@ -2017,7 +1634,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.DATAGRAM_STATE_CHANGED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.DATAGRAM_STATE_CHANGED, 1)
+                );
             }
         }
 
@@ -2025,7 +1644,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.DATAGRAM_RECEIVED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.DATAGRAM_RECEIVED, 1)
+                );
             }
         }
 
@@ -2033,7 +1654,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.DATAGRAM_SEND_STATE_CHANGED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.DATAGRAM_SEND_STATE_CHANGED, 1)
+                );
             }
         }
 
@@ -2041,7 +1664,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.RESUMED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.RESUMED, 1)
+                );
             }
         }
 
@@ -2049,7 +1674,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.RESUMPTION_TICKET_RECEIVED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.RESUMPTION_TICKET_RECEIVED, 1)
+                );
             }
         }
 
@@ -2057,7 +1684,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.PEER_CERTIFICATE_RECEIVED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.PEER_CERTIFICATE_RECEIVED, 1)
+                );
             }
         }
 
@@ -2158,43 +1787,22 @@ namespace Microsoft.Quic
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte HandshakeCompleted
                 {
-                    get
-                    {
-                        return (byte)(_bitfield & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u));
-                    }
+                    get { return (byte)(_bitfield & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte PeerAcknowledgedShutdown
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 1) & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1));
-                    }
+                    get { return (byte)((_bitfield >> 1) & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte AppCloseInProgress
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 2) & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2));
-                    }
+                    get { return (byte)((_bitfield >> 2) & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2)); }
                 }
             }
 
@@ -2317,7 +1925,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.START_COMPLETE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.START_COMPLETE, 1)
+                );
             }
         }
 
@@ -2325,7 +1935,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.RECEIVE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.RECEIVE, 1)
+                );
             }
         }
 
@@ -2333,7 +1945,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.SEND_COMPLETE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.SEND_COMPLETE, 1)
+                );
             }
         }
 
@@ -2341,7 +1955,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.PEER_SEND_ABORTED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.PEER_SEND_ABORTED, 1)
+                );
             }
         }
 
@@ -2349,7 +1965,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.PEER_RECEIVE_ABORTED, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.PEER_RECEIVE_ABORTED, 1)
+                );
             }
         }
 
@@ -2357,7 +1975,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.SEND_SHUTDOWN_COMPLETE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.SEND_SHUTDOWN_COMPLETE, 1)
+                );
             }
         }
 
@@ -2365,7 +1985,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_COMPLETE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.SHUTDOWN_COMPLETE, 1)
+                );
             }
         }
 
@@ -2373,7 +1995,9 @@ namespace Microsoft.Quic
         {
             get
             {
-                return ref MemoryMarshal.GetReference(MemoryMarshal.CreateSpan(ref Anonymous.IDEAL_SEND_BUFFER_SIZE, 1));
+                return ref MemoryMarshal.GetReference(
+                    MemoryMarshal.CreateSpan(ref Anonymous.IDEAL_SEND_BUFFER_SIZE, 1)
+                );
             }
         }
 
@@ -2425,25 +2049,14 @@ namespace Microsoft.Quic
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte PeerAccepted
                 {
-                    get
-                    {
-                        return (byte)(_bitfield & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u));
-                    }
+                    get { return (byte)(_bitfield & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 7")]
                 internal byte RESERVED
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 1) & 0x7Fu);
-                    }
-
+                    get { return (byte)((_bitfield >> 1) & 0x7Fu); }
                     set
                     {
                         _bitfield = (byte)((_bitfield & ~(0x7Fu << 1)) | ((value & 0x7Fu) << 1));
@@ -2504,53 +2117,28 @@ namespace Microsoft.Quic
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte AppCloseInProgress
                 {
-                    get
-                    {
-                        return (byte)(_bitfield & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u));
-                    }
+                    get { return (byte)(_bitfield & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~0x1u) | (value & 0x1u)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte ConnectionShutdownByApp
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 1) & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1));
-                    }
+                    get { return (byte)((_bitfield >> 1) & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~(0x1u << 1)) | ((value & 0x1u) << 1)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 1")]
                 internal byte ConnectionClosedRemotely
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 2) & 0x1u);
-                    }
-
-                    set
-                    {
-                        _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2));
-                    }
+                    get { return (byte)((_bitfield >> 2) & 0x1u); }
+                    set { _bitfield = (byte)((_bitfield & ~(0x1u << 2)) | ((value & 0x1u) << 2)); }
                 }
 
                 [NativeTypeName("BOOLEAN : 5")]
                 internal byte RESERVED
                 {
-                    get
-                    {
-                        return (byte)((_bitfield >> 3) & 0x1Fu);
-                    }
-
+                    get { return (byte)((_bitfield >> 3) & 0x1Fu); }
                     set
                     {
                         _bitfield = (byte)((_bitfield & ~(0x1Fu << 3)) | ((value & 0x1Fu) << 3));
@@ -2590,55 +2178,112 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, uint, uint*, void*, int> GetParam;
 
         [NativeTypeName("QUIC_REGISTRATION_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_REGISTRATION_CONFIG*, QUIC_HANDLE**, int> RegistrationOpen;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_REGISTRATION_CONFIG*,
+            QUIC_HANDLE**,
+            int> RegistrationOpen;
 
         [NativeTypeName("QUIC_REGISTRATION_CLOSE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> RegistrationClose;
 
         [NativeTypeName("QUIC_REGISTRATION_SHUTDOWN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_CONNECTION_SHUTDOWN_FLAGS, ulong, void> RegistrationShutdown;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_CONNECTION_SHUTDOWN_FLAGS,
+            ulong,
+            void> RegistrationShutdown;
 
         [NativeTypeName("QUIC_CONFIGURATION_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SETTINGS*, uint, void*, QUIC_HANDLE**, int> ConfigurationOpen;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_BUFFER*,
+            uint,
+            QUIC_SETTINGS*,
+            uint,
+            void*,
+            QUIC_HANDLE**,
+            int> ConfigurationOpen;
 
         [NativeTypeName("QUIC_CONFIGURATION_CLOSE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> ConfigurationClose;
 
         [NativeTypeName("QUIC_CONFIGURATION_LOAD_CREDENTIAL_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_CREDENTIAL_CONFIG*, int> ConfigurationLoadCredential;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_CREDENTIAL_CONFIG*,
+            int> ConfigurationLoadCredential;
 
         [NativeTypeName("QUIC_LISTENER_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_LISTENER_EVENT*, int>, void*, QUIC_HANDLE**, int> ListenerOpen;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_LISTENER_EVENT*, int>,
+            void*,
+            QUIC_HANDLE**,
+            int> ListenerOpen;
 
         [NativeTypeName("QUIC_LISTENER_CLOSE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> ListenerClose;
 
         [NativeTypeName("QUIC_LISTENER_START_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QuicAddr*, int> ListenerStart;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_BUFFER*,
+            uint,
+            QuicAddr*,
+            int> ListenerStart;
 
         [NativeTypeName("QUIC_LISTENER_STOP_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> ListenerStop;
 
         [NativeTypeName("QUIC_CONNECTION_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>, void*, QUIC_HANDLE**, int> ConnectionOpen;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_CONNECTION_EVENT*, int>,
+            void*,
+            QUIC_HANDLE**,
+            int> ConnectionOpen;
 
         [NativeTypeName("QUIC_CONNECTION_CLOSE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> ConnectionClose;
 
         [NativeTypeName("QUIC_CONNECTION_SHUTDOWN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_CONNECTION_SHUTDOWN_FLAGS, ulong, void> ConnectionShutdown;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_CONNECTION_SHUTDOWN_FLAGS,
+            ulong,
+            void> ConnectionShutdown;
 
         [NativeTypeName("QUIC_CONNECTION_START_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_HANDLE*, ushort, sbyte*, ushort, int> ConnectionStart;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_HANDLE*,
+            ushort,
+            sbyte*,
+            ushort,
+            int> ConnectionStart;
 
         [NativeTypeName("QUIC_CONNECTION_SET_CONFIGURATION_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_HANDLE*, int> ConnectionSetConfiguration;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_HANDLE*,
+            int> ConnectionSetConfiguration;
 
         [NativeTypeName("QUIC_CONNECTION_SEND_RESUMPTION_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_SEND_RESUMPTION_FLAGS, ushort, byte*, int> ConnectionSendResumptionTicket;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_SEND_RESUMPTION_FLAGS,
+            ushort,
+            byte*,
+            int> ConnectionSendResumptionTicket;
 
         [NativeTypeName("QUIC_STREAM_OPEN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_OPEN_FLAGS, delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>, void*, QUIC_HANDLE**, int> StreamOpen;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_STREAM_OPEN_FLAGS,
+            delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void*, QUIC_STREAM_EVENT*, int>,
+            void*,
+            QUIC_HANDLE**,
+            int> StreamOpen;
 
         [NativeTypeName("QUIC_STREAM_CLOSE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, void> StreamClose;
@@ -2647,10 +2292,20 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_START_FLAGS, int> StreamStart;
 
         [NativeTypeName("QUIC_STREAM_SHUTDOWN_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_STREAM_SHUTDOWN_FLAGS, ulong, int> StreamShutdown;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_STREAM_SHUTDOWN_FLAGS,
+            ulong,
+            int> StreamShutdown;
 
         [NativeTypeName("QUIC_STREAM_SEND_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> StreamSend;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_BUFFER*,
+            uint,
+            QUIC_SEND_FLAGS,
+            void*,
+            int> StreamSend;
 
         [NativeTypeName("QUIC_STREAM_RECEIVE_COMPLETE_FN")]
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, ulong, void> StreamReceiveComplete;
@@ -2659,14 +2314,23 @@ namespace Microsoft.Quic
         internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, byte, int> StreamReceiveSetEnabled;
 
         [NativeTypeName("QUIC_DATAGRAM_SEND_FN")]
-        internal delegate* unmanaged[Cdecl]<QUIC_HANDLE*, QUIC_BUFFER*, uint, QUIC_SEND_FLAGS, void*, int> DatagramSend;
+        internal delegate* unmanaged[Cdecl]<
+            QUIC_HANDLE*,
+            QUIC_BUFFER*,
+            uint,
+            QUIC_SEND_FLAGS,
+            void*,
+            int> DatagramSend;
     }
 
     internal static unsafe partial class MsQuic
     {
         [DllImport("msquic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: NativeTypeName("HRESULT")]
-        internal static extern int MsQuicOpenVersion([NativeTypeName("uint32_t")] uint Version, [NativeTypeName("const void **")] void** QuicApi);
+        internal static extern int MsQuicOpenVersion(
+            [NativeTypeName("uint32_t")] uint Version,
+            [NativeTypeName("const void **")] void** QuicApi
+        );
 
         [DllImport("msquic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         internal static extern void MsQuicClose([NativeTypeName("const void *")] void* QuicApi);
@@ -2752,7 +2416,9 @@ namespace Microsoft.Quic
         [NativeTypeName("#define QUIC_PARAM_CONFIGURATION_VERSION_SETTINGS 0x03000002")]
         internal const uint QUIC_PARAM_CONFIGURATION_VERSION_SETTINGS = 0x03000002;
 
-        [NativeTypeName("#define QUIC_PARAM_CONFIGURATION_SCHANNEL_CREDENTIAL_ATTRIBUTE_W 0x03000003")]
+        [NativeTypeName(
+            "#define QUIC_PARAM_CONFIGURATION_SCHANNEL_CREDENTIAL_ATTRIBUTE_W 0x03000003"
+        )]
         internal const uint QUIC_PARAM_CONFIGURATION_SCHANNEL_CREDENTIAL_ATTRIBUTE_W = 0x03000003;
 
         [NativeTypeName("#define QUIC_PARAM_LISTENER_LOCAL_ADDRESS 0x04000000")]

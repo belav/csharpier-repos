@@ -252,10 +252,7 @@ namespace CodeGenTests
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static void UInt64_AddressExposed(ref ulong value)
-        {
-
-        }
+        static void UInt64_AddressExposed(ref ulong value) { }
 
         static int Main()
         {

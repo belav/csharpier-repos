@@ -30,10 +30,17 @@ namespace Microsoft.Interop
         {
             unsafe
             {
-                return IsBlittableWorker(type, ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default), &IsConsideredBlittableWorker);
+                return IsBlittableWorker(
+                    type,
+                    ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default),
+                    &IsConsideredBlittableWorker
+                );
             }
 
-            static bool IsConsideredBlittableWorker(ITypeSymbol t, ImmutableHashSet<ITypeSymbol> seenTypes)
+            static bool IsConsideredBlittableWorker(
+                ITypeSymbol t,
+                ImmutableHashSet<ITypeSymbol> seenTypes
+            )
             {
                 return t.IsUnmanagedType;
             }
@@ -54,10 +61,17 @@ namespace Microsoft.Interop
         {
             unsafe
             {
-                return IsBlittableWorker(type, ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default), &IsStrictlyBlittableWorker);
+                return IsBlittableWorker(
+                    type,
+                    ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default),
+                    &IsStrictlyBlittableWorker
+                );
             }
 
-            static unsafe bool IsStrictlyBlittableWorker(ITypeSymbol t, ImmutableHashSet<ITypeSymbol> seenTypes)
+            static unsafe bool IsStrictlyBlittableWorker(
+                ITypeSymbol t,
+                ImmutableHashSet<ITypeSymbol> seenTypes
+            )
             {
                 if (t.SpecialType is not SpecialType.None)
                 {
@@ -68,8 +82,10 @@ namespace Microsoft.Interop
                     // If the containing assembly for the type is backed by metadata (non-null),
                     // then the type is not internal and therefore coming from a reference assembly
                     // that we can not confirm is strictly blittable.
-                    if (t.ContainingAssembly is not null
-                        && t.ContainingAssembly.GetMetadata() is not null)
+                    if (
+                        t.ContainingAssembly is not null
+                        && t.ContainingAssembly.GetMetadata() is not null
+                    )
                     {
                         return false;
                     }
@@ -81,7 +97,11 @@ namespace Microsoft.Interop
             }
         }
 
-        private static unsafe bool IsBlittableWorker(this ITypeSymbol type, ImmutableHashSet<ITypeSymbol> seenTypes, delegate*<ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable)
+        private static unsafe bool IsBlittableWorker(
+            this ITypeSymbol type,
+            ImmutableHashSet<ITypeSymbol> seenTypes,
+            delegate* <ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable
+        )
         {
             // Assume that type parameters that can be blittable are blittable.
             // We'll re-evaluate blittability for generic fields of generic types at instantiation time.
@@ -100,7 +120,10 @@ namespace Microsoft.Interop
                 {
                     continue;
                 }
-                else if (attr.AttributeClass.ToDisplayString() == "System.Runtime.InteropServices.NativeMarshallingAttribute")
+                else if (
+                    attr.AttributeClass.ToDisplayString()
+                    == "System.Runtime.InteropServices.NativeMarshallingAttribute"
+                )
                 {
                     // Types marked with NativeMarshallingAttribute require marshalling by definition.
                     return false;
@@ -113,15 +136,23 @@ namespace Microsoft.Interop
         {
             foreach (AttributeData attr in type.GetAttributes())
             {
-                if (attr.AttributeClass.ToDisplayString() == "System.Runtime.InteropServices.StructLayoutAttribute")
+                if (
+                    attr.AttributeClass.ToDisplayString()
+                    == "System.Runtime.InteropServices.StructLayoutAttribute"
+                )
                 {
-                    return attr.ConstructorArguments.Length == 1 && (LayoutKind)(int)attr.ConstructorArguments[0].Value! == LayoutKind.Auto;
+                    return attr.ConstructorArguments.Length == 1
+                        && (LayoutKind)(int)attr.ConstructorArguments[0].Value! == LayoutKind.Auto;
                 }
             }
             return type.IsReferenceType;
         }
 
-        private static unsafe bool HasOnlyBlittableFields(this ITypeSymbol type, ImmutableHashSet<ITypeSymbol> seenTypes, delegate*<ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable)
+        private static unsafe bool HasOnlyBlittableFields(
+            this ITypeSymbol type,
+            ImmutableHashSet<ITypeSymbol> seenTypes,
+            delegate* <ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable
+        )
         {
             if (seenTypes.Contains(type))
             {
@@ -146,26 +177,30 @@ namespace Microsoft.Interop
 
         public static TypeSyntax AsTypeSyntax(this ITypeSymbol type)
         {
-            return SyntaxFactory.ParseTypeName(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+            return SyntaxFactory.ParseTypeName(
+                type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+            );
         }
 
         public static bool IsIntegralType(this SpecialType type)
         {
-            return type is SpecialType.System_SByte
-                or SpecialType.System_Byte
-                or SpecialType.System_Int16
-                or SpecialType.System_UInt16
-                or SpecialType.System_Int32
-                or SpecialType.System_UInt32
-                or SpecialType.System_Int64
-                or SpecialType.System_UInt64
-                or SpecialType.System_IntPtr
-                or SpecialType.System_UIntPtr;
+            return type
+                is SpecialType.System_SByte
+                    or SpecialType.System_Byte
+                    or SpecialType.System_Int16
+                    or SpecialType.System_UInt16
+                    or SpecialType.System_Int32
+                    or SpecialType.System_UInt32
+                    or SpecialType.System_Int64
+                    or SpecialType.System_UInt64
+                    or SpecialType.System_IntPtr
+                    or SpecialType.System_UIntPtr;
         }
 
         public static bool IsAlwaysBlittable(this SpecialType type)
         {
-            return type is SpecialType.System_Void
+            return type
+                is SpecialType.System_Void
                     or SpecialType.System_SByte
                     or SpecialType.System_Byte
                     or SpecialType.System_Int16
@@ -184,7 +219,11 @@ namespace Microsoft.Interop
         {
             return (type, other) switch
             {
-                (INamedTypeSymbol namedType, INamedTypeSymbol namedOther) => SymbolEqualityComparer.Default.Equals(namedType.ConstructedFrom, namedOther.ConstructedFrom),
+                (INamedTypeSymbol namedType, INamedTypeSymbol namedOther)
+                    => SymbolEqualityComparer.Default.Equals(
+                        namedType.ConstructedFrom,
+                        namedOther.ConstructedFrom
+                    ),
                 _ => SymbolEqualityComparer.Default.Equals(type, other)
             };
         }
@@ -197,14 +236,24 @@ namespace Microsoft.Interop
         /// <param name="numOriginalTypeArgumentsSubstituted">How many type parameters from <c><paramref name="unboundConstructedType"/>.ConstructedFrom</c> that needed to be substituted to fill the generic parameter list.</param>
         /// <param name="extraTypeArgumentsInTemplate">How many type parameters from <paramref name="instantiatedTemplateType"/>were unused.</param>
         /// <returns>A fully constructed type based on <c><paramref name="unboundConstructedType"/>.ConstructedFrom</c> with the generic arguments from <paramref name="instantiatedTemplateType"/>.</returns>
-        public static INamedTypeSymbol ResolveUnboundConstructedTypeToConstructedType(this INamedTypeSymbol unboundConstructedType, INamedTypeSymbol instantiatedTemplateType, out int numOriginalTypeArgumentsSubstituted, out int extraTypeArgumentsInTemplate)
+        public static INamedTypeSymbol ResolveUnboundConstructedTypeToConstructedType(
+            this INamedTypeSymbol unboundConstructedType,
+            INamedTypeSymbol instantiatedTemplateType,
+            out int numOriginalTypeArgumentsSubstituted,
+            out int extraTypeArgumentsInTemplate
+        )
         {
-            var (typeArgumentsToSubstitute, nullableAnnotationsToSubstitute) = instantiatedTemplateType.GetAllTypeArgumentsIncludingInContainingTypes();
+            var (typeArgumentsToSubstitute, nullableAnnotationsToSubstitute) =
+                instantiatedTemplateType.GetAllTypeArgumentsIncludingInContainingTypes();
 
             // Build us a list of the type nesting of unboundConstructedType, with the outermost containing type on the top
             // Use OriginalDefinition to get the generic definition for all containing types instead of having to unconstruct the generic at each loop iteration.
             Stack<INamedTypeSymbol> originalNestedTypes = new();
-            for (INamedTypeSymbol originalTypeDefinition = unboundConstructedType.OriginalDefinition; originalTypeDefinition is not null; originalTypeDefinition = originalTypeDefinition.ContainingType)
+            for (
+                INamedTypeSymbol originalTypeDefinition = unboundConstructedType.OriginalDefinition;
+                originalTypeDefinition is not null;
+                originalTypeDefinition = originalTypeDefinition.ContainingType
+            )
             {
                 originalNestedTypes.Push(originalTypeDefinition);
             }
@@ -224,7 +273,9 @@ namespace Microsoft.Interop
                 {
                     // If the type was nested, we need to look it up again on the (possibly constructed generic) containing type.
                     INamedTypeSymbol originalNestedType = originalNestedTypes.Pop();
-                    currentType = currentType.GetTypeMembers(originalNestedType.Name, originalNestedType.Arity).First();
+                    currentType = currentType
+                        .GetTypeMembers(originalNestedType.Name, originalNestedType.Arity)
+                        .First();
                 }
 
                 if (currentType.TypeParameters.Length > 0)
@@ -252,10 +303,23 @@ namespace Microsoft.Interop
                     var arguments = new ITypeSymbol[numArgumentsToInsert];
                     var annotations = new NullableAnnotation[numArgumentsToInsert];
 
-                    int numArgumentsToCopy = Math.Min(numArgumentsToInsert, typeArgumentsToSubstitute.Length - currentArityOffset);
+                    int numArgumentsToCopy = Math.Min(
+                        numArgumentsToInsert,
+                        typeArgumentsToSubstitute.Length - currentArityOffset
+                    );
 
-                    typeArgumentsToSubstitute.CopyTo(currentArityOffset, arguments, 0, numArgumentsToCopy);
-                    nullableAnnotationsToSubstitute.CopyTo(currentArityOffset, annotations, 0, numArgumentsToCopy);
+                    typeArgumentsToSubstitute.CopyTo(
+                        currentArityOffset,
+                        arguments,
+                        0,
+                        numArgumentsToCopy
+                    );
+                    nullableAnnotationsToSubstitute.CopyTo(
+                        currentArityOffset,
+                        annotations,
+                        0,
+                        numArgumentsToCopy
+                    );
                     currentArityOffset += numArgumentsToCopy;
 
                     if (numArgumentsToCopy != numArgumentsToInsert)
@@ -265,12 +329,20 @@ namespace Microsoft.Interop
                         // This value represents how many generic arguments the instantiatedTemplateType type would need to have the same total number of generic parameters as unboundConstructedType,
                         // including accounting for nesting.
                         numOriginalTypeArgumentsSubstituted += numArgumentsToPropogate;
-                        currentType.TypeParameters.CastArray<ITypeSymbol>().CopyTo(currentType.TypeParameters.Length - numArgumentsToPropogate, arguments, numArgumentsToCopy, numArgumentsToPropogate);
+                        currentType.TypeParameters
+                            .CastArray<ITypeSymbol>()
+                            .CopyTo(
+                                currentType.TypeParameters.Length - numArgumentsToPropogate,
+                                arguments,
+                                numArgumentsToCopy,
+                                numArgumentsToPropogate
+                            );
                     }
 
                     currentType = currentType.Construct(
                         ImmutableArray.CreateRange(arguments),
-                        ImmutableArray.CreateRange(annotations));
+                        ImmutableArray.CreateRange(annotations)
+                    );
                 }
             }
             // Record how many type arguments we did not need to use from instantiatedTemplateType to instantiate unboundConstructedType.
@@ -279,19 +351,36 @@ namespace Microsoft.Interop
             return currentType;
         }
 
-        public static (ImmutableArray<ITypeSymbol> TypeArguments, ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations) GetAllTypeArgumentsIncludingInContainingTypes(this INamedTypeSymbol genericType)
+        public static (
+            ImmutableArray<ITypeSymbol> TypeArguments,
+            ImmutableArray<NullableAnnotation> TypeArgumentNullableAnnotations
+        ) GetAllTypeArgumentsIncludingInContainingTypes(this INamedTypeSymbol genericType)
         {
             // Get the type arguments of the passed in type and all containing types
             // with the outermost type on the top of the stack and the innermost type on the bottom of the stack.
-            Stack<(ImmutableArray<ITypeSymbol>, ImmutableArray<NullableAnnotation>)> genericTypesToSubstitute = new();
-            for (INamedTypeSymbol instantiatedType = genericType; instantiatedType is not null; instantiatedType = instantiatedType.ContainingType)
+            Stack<(
+                ImmutableArray<ITypeSymbol>,
+                ImmutableArray<NullableAnnotation>
+            )> genericTypesToSubstitute = new();
+            for (
+                INamedTypeSymbol instantiatedType = genericType;
+                instantiatedType is not null;
+                instantiatedType = instantiatedType.ContainingType
+            )
             {
-                genericTypesToSubstitute.Push((instantiatedType.TypeArguments, instantiatedType.TypeArgumentNullableAnnotations));
+                genericTypesToSubstitute.Push(
+                    (
+                        instantiatedType.TypeArguments,
+                        instantiatedType.TypeArgumentNullableAnnotations
+                    )
+                );
             }
             // Turn our stack of lists of type arguments into one list,
             // going from the first type argument of the outermost type to the last type argument of the innermost type.
-            ImmutableArray<ITypeSymbol>.Builder typeArguments = ImmutableArray.CreateBuilder<ITypeSymbol>();
-            ImmutableArray<NullableAnnotation>.Builder nullableAnnotations = ImmutableArray.CreateBuilder<NullableAnnotation>();
+            ImmutableArray<ITypeSymbol>.Builder typeArguments =
+                ImmutableArray.CreateBuilder<ITypeSymbol>();
+            ImmutableArray<NullableAnnotation>.Builder nullableAnnotations =
+                ImmutableArray.CreateBuilder<NullableAnnotation>();
             while (genericTypesToSubstitute.Count != 0)
             {
                 var (args, annotations) = genericTypesToSubstitute.Pop();

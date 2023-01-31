@@ -31,55 +31,55 @@ using System.Diagnostics;
 
 namespace System.Windows.Forms
 {
-	public struct DataGridCell
-	{
+    public struct DataGridCell
+    {
 		#region	Local Variables
-		private int row;
-		private int column;
+        private int row;
+        private int column;
 		#endregion	// Local Variables
 
 		#region Constructors
-		public DataGridCell (int r,  int c)
-		{
-			row = r;
-			column = c;
-		}
+        public DataGridCell(int r, int c)
+        {
+            row = r;
+            column = c;
+        }
 		#endregion
 
 		#region Public Instance Properties
-		public int ColumnNumber {
-			get { return column; }
-			set { column = value; }
-		}
+        public int ColumnNumber
+        {
+            get { return column; }
+            set { column = value; }
+        }
 
-		public int RowNumber {
-			get { return row; }
-			set { row = value; }
-		}
+        public int RowNumber
+        {
+            get { return row; }
+            set { row = value; }
+        }
 		#endregion	// Public Instance Properties
 
 		#region Public Instance Methods
-		public override bool Equals (object o)
-		{
-			if (!(o is DataGridCell))
-				return false;
+        public override bool Equals(object o)
+        {
+            if (!(o is DataGridCell))
+                return false;
 
-			DataGridCell obj = (DataGridCell) o;
-			return (obj.ColumnNumber == column && obj.RowNumber == row);
+            DataGridCell obj = (DataGridCell)o;
+            return (obj.ColumnNumber == column && obj.RowNumber == row);
+        }
 
-		}
+        public override int GetHashCode()
+        {
+            return row ^ column;
+        }
 
-		public override int GetHashCode ()
-		{
-			return row ^ column;
-		}
-
-		public override string ToString ()
-		{
-			return "DataGridCell {RowNumber = " + row +", ColumnNumber = " + column + "}";
-		}
+        public override string ToString()
+        {
+            return "DataGridCell {RowNumber = " + row + ", ColumnNumber = " + column + "}";
+        }
 
 		#endregion	// Public Instance Methods
-
-	}
+    }
 }

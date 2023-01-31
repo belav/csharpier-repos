@@ -26,7 +26,8 @@ internal abstract partial class SyntaxRewriter : SyntaxVisitor<GreenNode>
         return token;
     }
 
-    public SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list) where TNode : GreenNode
+    public SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list)
+        where TNode : GreenNode
     {
         SyntaxListBuilder alternate = null;
         for (int i = 0, n = list.Count; i < n; i++)

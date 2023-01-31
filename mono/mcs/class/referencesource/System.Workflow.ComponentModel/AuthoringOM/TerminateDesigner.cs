@@ -13,9 +13,7 @@ namespace System.Workflow.ComponentModel.Design
 
     #region Class TerminateDesigner
     [ActivityDesignerTheme(typeof(TerminateDesignerTheme))]
-    internal sealed class TerminateDesigner : ActivityDesigner
-    {
-    }
+    internal sealed class TerminateDesigner : ActivityDesigner { }
     #endregion
 
     #region TerminateDesignerTheme

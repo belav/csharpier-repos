@@ -52,7 +52,12 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             TestClass test = new TestClass();
 
-            test.dictionary = new Dictionary<string, int> { { "Val & asd1", 1 }, { "Val2 & asd1", 3 }, { "Val3 & asd1", 4 } };
+            test.dictionary = new Dictionary<string, int>
+            {
+                { "Val & asd1", 1 },
+                { "Val2 & asd1", 3 },
+                { "Val3 & asd1", 4 }
+            };
 
             test.Address1.Street = "fff Street";
             test.Address1.Entered = DateTime.Now.AddDays(20);
@@ -82,7 +87,9 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
         private string SerializeDataContract(object value)
         {
-            DataContractSerializer dataContractSerializer = new DataContractSerializer(value.GetType());
+            DataContractSerializer dataContractSerializer = new DataContractSerializer(
+                value.GetType()
+            );
 
             MemoryStream ms = new MemoryStream();
             dataContractSerializer.WriteObject(ms, value);
@@ -133,7 +140,9 @@ namespace Newtonsoft.Json.Tests.Benchmarks
 
         public string SerializeDataContractJson(object value)
         {
-            DataContractJsonSerializer dataContractSerializer = new DataContractJsonSerializer(value.GetType());
+            DataContractJsonSerializer dataContractSerializer = new DataContractJsonSerializer(
+                value.GetType()
+            );
 
             MemoryStream ms = new MemoryStream();
             dataContractSerializer.WriteObject(ms, value);
@@ -163,20 +172,35 @@ namespace Newtonsoft.Json.Tests.Benchmarks
         {
             JObject o = new JObject(
                 new JProperty("strings", new JArray(c.strings)),
-                new JProperty("dictionary", new JObject(c.dictionary.Select(d => new JProperty(d.Key, d.Value)))),
+                new JProperty(
+                    "dictionary",
+                    new JObject(c.dictionary.Select(d => new JProperty(d.Key, d.Value)))
+                ),
                 new JProperty("Name", c.Name),
                 new JProperty("Now", c.Now),
                 new JProperty("BigNumber", c.BigNumber),
-                new JProperty("Address1", new JObject(
-                    new JProperty("Street", c.Address1.Street),
-                    new JProperty("Phone", c.Address1.Phone),
-                    new JProperty("Entered", c.Address1.Entered))),
-                new JProperty("Addresses", new JArray(c.Addresses.Select(a =>
+                new JProperty(
+                    "Address1",
                     new JObject(
-                        new JProperty("Street", a.Street),
-                        new JProperty("Phone", a.Phone),
-                        new JProperty("Entered", a.Entered)))))
-                );
+                        new JProperty("Street", c.Address1.Street),
+                        new JProperty("Phone", c.Address1.Phone),
+                        new JProperty("Entered", c.Address1.Entered)
+                    )
+                ),
+                new JProperty(
+                    "Addresses",
+                    new JArray(
+                        c.Addresses.Select(
+                            a =>
+                                new JObject(
+                                    new JProperty("Street", a.Street),
+                                    new JProperty("Phone", a.Phone),
+                                    new JProperty("Entered", a.Entered)
+                                )
+                        )
+                    )
+                )
+            );
 
             return o.ToString(Formatting.None);
         }

@@ -4,10 +4,9 @@
 
 class X
 {
-	public void Foo ()
-	{
-		int x = 1;
-		if (x is object) {
-		}
-	}
+    public void Foo()
+    {
+        int x = 1;
+        if (x is object) { }
+    }
 }

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 bool instanceMemberIsUsed,
                 bool shouldBeReadOnly,
                 bool endOfSelectionReachable,
-                OperationStatus status)
+                OperationStatus status
+            )
             {
                 UseInstanceMember = instanceMemberIsUsed;
                 ShouldBeReadOnly = shouldBeReadOnly;
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                     UseInstanceMember,
                     ShouldBeReadOnly,
                     EndOfSelectionReachable,
-                    Status);
+                    Status
+                );
             }
 
             /// <summary>
@@ -108,7 +110,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 get
                 {
-                    return new ReadOnlyCollection<ITypeParameterSymbol>(_typeParametersInDeclaration);
+                    return new ReadOnlyCollection<ITypeParameterSymbol>(
+                        _typeParametersInDeclaration
+                    );
                 }
             }
 
@@ -116,16 +120,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             {
                 get
                 {
-                    return new ReadOnlyCollection<ITypeParameterSymbol>(_typeParametersInConstraintList);
+                    return new ReadOnlyCollection<ITypeParameterSymbol>(
+                        _typeParametersInConstraintList
+                    );
                 }
             }
 
             public bool HasVariableToUseAsReturnValue
             {
-                get
-                {
-                    return _variableToUseAsReturnValue != null;
-                }
+                get { return _variableToUseAsReturnValue != null; }
             }
 
             public VariableInfo VariableToUseAsReturnValue
@@ -147,35 +150,57 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
 
             public IEnumerable<VariableInfo> MethodParameters
             {
-                get
-                {
-                    return _variables.Where(v => v.UseAsParameter);
-                }
+                get { return _variables.Where(v => v.UseAsParameter); }
             }
 
-            public ImmutableArray<VariableInfo> GetVariablesToSplitOrMoveIntoMethodDefinition(CancellationToken cancellationToken)
+            public ImmutableArray<VariableInfo> GetVariablesToSplitOrMoveIntoMethodDefinition(
+                CancellationToken cancellationToken
+            )
             {
                 return _variables.WhereAsArray(
-                    v => v.GetDeclarationBehavior(cancellationToken) is DeclarationBehavior.SplitIn or
-                         DeclarationBehavior.MoveIn);
+                    v =>
+                        v.GetDeclarationBehavior(cancellationToken)
+                            is DeclarationBehavior.SplitIn
+                                or DeclarationBehavior.MoveIn
+                );
             }
 
-            public IEnumerable<VariableInfo> GetVariablesToMoveIntoMethodDefinition(CancellationToken cancellationToken)
-                => _variables.Where(v => v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.MoveIn);
+            public IEnumerable<VariableInfo> GetVariablesToMoveIntoMethodDefinition(
+                CancellationToken cancellationToken
+            ) =>
+                _variables.Where(
+                    v => v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.MoveIn
+                );
 
-            public IEnumerable<VariableInfo> GetVariablesToMoveOutToCallSite(CancellationToken cancellationToken)
-                => _variables.Where(v => v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.MoveOut);
+            public IEnumerable<VariableInfo> GetVariablesToMoveOutToCallSite(
+                CancellationToken cancellationToken
+            ) =>
+                _variables.Where(
+                    v => v.GetDeclarationBehavior(cancellationToken) == DeclarationBehavior.MoveOut
+                );
 
-            public IEnumerable<VariableInfo> GetVariablesToMoveOutToCallSiteOrDelete(CancellationToken cancellationToken)
+            public IEnumerable<VariableInfo> GetVariablesToMoveOutToCallSiteOrDelete(
+                CancellationToken cancellationToken
+            )
             {
-                return _variables.Where(v => v.GetDeclarationBehavior(cancellationToken) is DeclarationBehavior.MoveOut or
-                                                 DeclarationBehavior.Delete);
+                return _variables.Where(
+                    v =>
+                        v.GetDeclarationBehavior(cancellationToken)
+                            is DeclarationBehavior.MoveOut
+                                or DeclarationBehavior.Delete
+                );
             }
 
-            public IEnumerable<VariableInfo> GetVariablesToSplitOrMoveOutToCallSite(CancellationToken cancellationToken)
+            public IEnumerable<VariableInfo> GetVariablesToSplitOrMoveOutToCallSite(
+                CancellationToken cancellationToken
+            )
             {
-                return _variables.Where(v => v.GetDeclarationBehavior(cancellationToken) is DeclarationBehavior.SplitOut or
-                                                 DeclarationBehavior.MoveOut);
+                return _variables.Where(
+                    v =>
+                        v.GetDeclarationBehavior(cancellationToken)
+                            is DeclarationBehavior.SplitOut
+                                or DeclarationBehavior.MoveOut
+                );
             }
         }
     }

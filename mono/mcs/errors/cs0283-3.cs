@@ -4,5 +4,5 @@
 
 unsafe class Test
 {
-	const int* o = null;
+    const int* o = null;
 }

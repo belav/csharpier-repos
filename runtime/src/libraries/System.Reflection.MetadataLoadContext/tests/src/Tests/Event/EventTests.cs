@@ -17,7 +17,10 @@ namespace System.Reflection.Tests
 
             EventInfo e = t.GetEvent("MyEvent");
             string es = e.ToString();
-            Assert.Equal(typeof(Action<>).Project().MakeGenericType(typeof(int).Project()), e.EventHandlerType);
+            Assert.Equal(
+                typeof(Action<>).Project().MakeGenericType(typeof(int).Project()),
+                e.EventHandlerType
+            );
             Assert.Equal(t.Module, e.Module);
 
             Assert.Equal(dt, e.DeclaringType);

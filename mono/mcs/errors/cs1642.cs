@@ -4,5 +4,5 @@
 
 public unsafe class C
 {
-    private fixed char test_1 [128];
+    private fixed char test_1[128];
 }

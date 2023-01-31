@@ -6,7 +6,7 @@ using System;
 
 namespace TopNS
 {
-	[Flags/** here is also incorrect comment */]
-	enum Enum2 {
-	}
+    [Flags
+    /** here is also incorrect comment */]
+    enum Enum2 { }
 }

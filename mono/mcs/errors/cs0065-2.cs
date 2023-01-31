@@ -3,10 +3,12 @@
 
 using System;
 
-public delegate void EventHandler (object sender, EventArgs e);
+public delegate void EventHandler(object sender, EventArgs e);
 
 public class EventClass<T>
 {
-	event EventHandler handler { add {} }
+    event EventHandler handler
+    {
+        add { }
+    }
 }
-

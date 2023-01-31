@@ -48,9 +48,14 @@ namespace IdeCoreBenchmarks
 
         private void RestoreCompilerSolution()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             _solutionPath = Path.Combine(roslynRoot, @"Roslyn.sln");
-            var restoreOperation = Process.Start("dotnet", $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {_solutionPath}");
+            var restoreOperation = Process.Start(
+                "dotnet",
+                $"restore /p:UseSharedCompilation=false /p:BuildInParallel=false /m:1 /p:Deterministic=true /p:Optimize=true {_solutionPath}"
+            );
             restoreOperation.WaitForExit();
             if (restoreOperation.ExitCode != 0)
                 throw new ArgumentException($"Unable to restore {_solutionPath}");
@@ -60,14 +65,19 @@ namespace IdeCoreBenchmarks
         {
             // QueryVisualStudioInstances returns Visual Studio installations on .NET Framework, and .NET Core SDK
             // installations on .NET Core. We use the one with the most recent version.
-            var msBuildInstance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(x => x.Version).First();
+            var msBuildInstance = MSBuildLocator
+                .QueryVisualStudioInstances()
+                .OrderByDescending(x => x.Version)
+                .First();
 
             MSBuildLocator.RegisterInstance(msBuildInstance);
         }
 
         private void LoadSolution()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
             _solutionPath = Path.Combine(roslynRoot, @"Roslyn.sln");
 
             if (!File.Exists(_solutionPath))
@@ -79,11 +89,14 @@ namespace IdeCoreBenchmarks
                 .Add(typeof(FindReferencesBenchmarks).Assembly);
             var services = MefHostServices.Create(assemblies);
 
-            _workspace = MSBuildWorkspace.Create(new Dictionary<string, string>
+            _workspace = MSBuildWorkspace.Create(
+                new Dictionary<string, string>
                 {
                     // Use the latest language version to force the full set of available analyzers to run on the project.
                     { "LangVersion", "9.0" },
-                }, services);
+                },
+                services
+            );
 
             if (_workspace == null)
                 throw new ArgumentException("Couldn't create workspace");
@@ -92,7 +105,9 @@ namespace IdeCoreBenchmarks
 
             var start = DateTime.Now;
 
-            var solution = _workspace.OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None).Result;
+            var solution = _workspace
+                .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                .Result;
             Console.WriteLine("Finished opening roslyn: " + (DateTime.Now - start));
             var docCount = _workspace.CurrentSolution.Projects.SelectMany(p => p.Documents).Count();
             Console.WriteLine("Doc count: " + docCount);
@@ -129,11 +144,21 @@ namespace IdeCoreBenchmarks
             }
 
             Console.WriteLine("Serial: " + (DateTime.Now - start));
-            Console.WriteLine($"{nameof(DocumentState.TestAccessor.TryReuseSyntaxTree)} - {DocumentState.TestAccessor.TryReuseSyntaxTree}");
-            Console.WriteLine($"{nameof(DocumentState.TestAccessor.CouldReuseBecauseOfEqualPPNames)} - {DocumentState.TestAccessor.CouldReuseBecauseOfEqualPPNames}");
-            Console.WriteLine($"{nameof(DocumentState.TestAccessor.CouldReuseBecauseOfNoDirectives)} - {DocumentState.TestAccessor.CouldReuseBecauseOfNoDirectives}");
-            Console.WriteLine($"{nameof(DocumentState.TestAccessor.CouldReuseBecauseOfNoPPDirectives)} - {DocumentState.TestAccessor.CouldReuseBecauseOfNoPPDirectives}");
-            Console.WriteLine($"{nameof(DocumentState.TestAccessor.CouldNotReuse)} - {DocumentState.TestAccessor.CouldNotReuse}");
+            Console.WriteLine(
+                $"{nameof(DocumentState.TestAccessor.TryReuseSyntaxTree)} - {DocumentState.TestAccessor.TryReuseSyntaxTree}"
+            );
+            Console.WriteLine(
+                $"{nameof(DocumentState.TestAccessor.CouldReuseBecauseOfEqualPPNames)} - {DocumentState.TestAccessor.CouldReuseBecauseOfEqualPPNames}"
+            );
+            Console.WriteLine(
+                $"{nameof(DocumentState.TestAccessor.CouldReuseBecauseOfNoDirectives)} - {DocumentState.TestAccessor.CouldReuseBecauseOfNoDirectives}"
+            );
+            Console.WriteLine(
+                $"{nameof(DocumentState.TestAccessor.CouldReuseBecauseOfNoPPDirectives)} - {DocumentState.TestAccessor.CouldReuseBecauseOfNoPPDirectives}"
+            );
+            Console.WriteLine(
+                $"{nameof(DocumentState.TestAccessor.CouldNotReuse)} - {DocumentState.TestAccessor.CouldNotReuse}"
+            );
 
             for (var i = 0; i < 10; i++)
             {
@@ -174,12 +199,16 @@ namespace IdeCoreBenchmarks
             var start = DateTime.Now;
             foreach (var project in _workspace.CurrentSolution.Projects)
             {
-                var tasks = project.Documents.Select(d => Task.Run(
-                    async () =>
-                    {
-                        // await WalkTree(d);
-                        await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
-                    })).ToList();
+                var tasks = project.Documents
+                    .Select(
+                        d =>
+                            Task.Run(async () =>
+                            {
+                                // await WalkTree(d);
+                                await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
+                            })
+                    )
+                    .ToList();
                 await Task.WhenAll(tasks);
             }
             Console.WriteLine("Project parallel: " + (DateTime.Now - start));
@@ -194,20 +223,30 @@ namespace IdeCoreBenchmarks
             Console.WriteLine("Starting indexing");
 
             var storageService = _workspace.Services.SolutionServices.GetPersistentStorageService();
-            using (var storage = await storageService.GetStorageAsync(SolutionKey.ToSolutionKey(_workspace.CurrentSolution), CancellationToken.None))
+            using (
+                var storage = await storageService.GetStorageAsync(
+                    SolutionKey.ToSolutionKey(_workspace.CurrentSolution),
+                    CancellationToken.None
+                )
+            )
             {
                 Console.WriteLine("Successfully got persistent storage instance");
                 var start = DateTime.Now;
                 var indexTime = TimeSpan.Zero;
-                var tasks = _workspace.CurrentSolution.Projects.SelectMany(p => p.Documents).Select(d => Task.Run(
-                    async () =>
-                    {
-                        var tree = await d.GetSyntaxRootAsync();
-                        var stopwatch = SharedStopwatch.StartNew();
-                        await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
-                        await SyntaxTreeIndex.GetIndexAsync(d, default);
-                        indexTime += stopwatch.Elapsed;
-                    })).ToList();
+                var tasks = _workspace.CurrentSolution.Projects
+                    .SelectMany(p => p.Documents)
+                    .Select(
+                        d =>
+                            Task.Run(async () =>
+                            {
+                                var tree = await d.GetSyntaxRootAsync();
+                                var stopwatch = SharedStopwatch.StartNew();
+                                await TopLevelSyntaxTreeIndex.GetIndexAsync(d, default);
+                                await SyntaxTreeIndex.GetIndexAsync(d, default);
+                                indexTime += stopwatch.Elapsed;
+                            })
+                    )
+                    .ToList();
                 await Task.WhenAll(tasks);
                 Console.WriteLine("Indexing time    : " + indexTime);
                 Console.WriteLine("Solution parallel: " + (DateTime.Now - start));
@@ -223,8 +262,15 @@ namespace IdeCoreBenchmarks
 
             var start = DateTime.Now;
             // Search each project with an independent threadpool task.
-            var searchTasks = _workspace.CurrentSolution.Projects.Select(
-                p => Task.Run(() => SearchAsync(p, priorityDocuments: ImmutableArray<Document>.Empty), CancellationToken.None)).ToArray();
+            var searchTasks = _workspace.CurrentSolution.Projects
+                .Select(
+                    p =>
+                        Task.Run(
+                            () => SearchAsync(p, priorityDocuments: ImmutableArray<Document>.Empty),
+                            CancellationToken.None
+                        )
+                )
+                .ToArray();
 
             var result = await Task.WhenAll(searchTasks).ConfigureAwait(false);
             var sum = result.Sum();
@@ -233,19 +279,28 @@ namespace IdeCoreBenchmarks
             Console.WriteLine("Time to search: " + (DateTime.Now - start));
         }
 
-        private async Task<int> SearchAsync(Project project, ImmutableArray<Document> priorityDocuments)
+        private async Task<int> SearchAsync(
+            Project project,
+            ImmutableArray<Document> priorityDocuments
+        )
         {
             var service = project.Services.GetService<INavigateToSearchService>();
             var results = new List<INavigateToSearchResult>();
             await service.SearchProjectAsync(
-                project, priorityDocuments, "Syntax", service.KindsProvided, activeDocument: null,
+                project,
+                priorityDocuments,
+                "Syntax",
+                service.KindsProvided,
+                activeDocument: null,
                 r =>
                 {
                     lock (results)
                         results.Add(r);
 
                     return Task.CompletedTask;
-                }, CancellationToken.None);
+                },
+                CancellationToken.None
+            );
 
             return results.Count;
         }

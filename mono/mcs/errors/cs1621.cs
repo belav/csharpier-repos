@@ -3,14 +3,15 @@
 
 using System.Collections;
 
-delegate object D ();
+delegate object D();
 
-class C: IEnumerable
+class C : IEnumerable
 {
-   public IEnumerator GetEnumerator ()
-   {
-      D d = delegate {
-		yield return this;
-	  };
-   }
+    public IEnumerator GetEnumerator()
+    {
+        D d = delegate
+        {
+            yield return this;
+        };
+    }
 }

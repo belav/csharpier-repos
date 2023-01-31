@@ -4,13 +4,13 @@ using System.Text;
 
 namespace ExternalAssembly1
 {
-	public class ExternalAssemblyPreStartMethods
-	{
-		public static string Message;
+    public class ExternalAssemblyPreStartMethods
+    {
+        public static string Message;
 
-		public static void PreStartMethod ()
-		{
-			Message = "ExternalAssemblyPreStartMethods.PreStartMethod invoked";
-		}
-	}
+        public static void PreStartMethod()
+        {
+            Message = "ExternalAssemblyPreStartMethods.PreStartMethod invoked";
+        }
+    }
 }

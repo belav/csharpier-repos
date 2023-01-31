@@ -17,7 +17,8 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     // Call back validator. Uses a validation callback to avoid creation of new types
     public delegate void ValidatorCallback(object value);
 }

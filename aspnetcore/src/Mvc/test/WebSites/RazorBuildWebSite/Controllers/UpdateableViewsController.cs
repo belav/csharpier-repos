@@ -10,7 +10,11 @@ public class UpdateableViewsController : Controller
     public IActionResult Index() => View();
 
     [HttpPost]
-    public IActionResult Update([FromServices] UpdateableFileProvider fileProvider, string path, string content)
+    public IActionResult Update(
+        [FromServices] UpdateableFileProvider fileProvider,
+        string path,
+        string content
+    )
     {
         fileProvider.UpdateContent(path, content);
         return Ok();

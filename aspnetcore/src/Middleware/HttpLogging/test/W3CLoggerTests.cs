@@ -22,12 +22,24 @@ public class W3CLoggerTests
         };
         try
         {
-            await using (var logger = Helpers.CreateTestW3CLogger(new OptionsWrapperMonitor<W3CLoggerOptions>(options)))
+            await using (
+                var logger = Helpers.CreateTestW3CLogger(
+                    new OptionsWrapperMonitor<W3CLoggerOptions>(options)
+                )
+            )
             {
                 var elements = new string[W3CLoggingMiddleware._fieldsLength];
                 var additionalHeaders = new string[0];
-                AddToList(elements, W3CLoggingMiddleware._dateIndex, _timestampOne.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture));
-                AddToList(elements, W3CLoggingMiddleware._timeIndex, _timestampOne.ToString("HH:mm:ss", CultureInfo.InvariantCulture));
+                AddToList(
+                    elements,
+                    W3CLoggingMiddleware._dateIndex,
+                    _timestampOne.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)
+                );
+                AddToList(
+                    elements,
+                    W3CLoggingMiddleware._timeIndex,
+                    _timestampOne.ToString("HH:mm:ss", CultureInfo.InvariantCulture)
+                );
 
                 logger.Log(elements, additionalHeaders);
                 await logger.Processor.WaitForWrites(4).DefaultTimeout();
@@ -36,7 +48,10 @@ public class W3CLoggerTests
                 Assert.Equal("#Version: 1.0", lines[0]);
 
                 Assert.StartsWith("#Start-Date: ", lines[1]);
-                var startDate = DateTime.Parse(lines[1].Substring(13), CultureInfo.InvariantCulture);
+                var startDate = DateTime.Parse(
+                    lines[1].Substring(13),
+                    CultureInfo.InvariantCulture
+                );
                 // Assert that the log was written in the last 10 seconds
                 // W3CLogger writes start-time to second precision, so delta could be as low as -0.999...
                 var delta = startDate.Subtract(now).TotalSeconds;
@@ -60,12 +75,17 @@ public class W3CLoggerTests
         var now = DateTime.UtcNow;
         var options = new W3CLoggerOptions()
         {
-            LoggingFields = W3CLoggingFields.UriQuery | W3CLoggingFields.Host | W3CLoggingFields.ProtocolStatus,
+            LoggingFields =
+                W3CLoggingFields.UriQuery | W3CLoggingFields.Host | W3CLoggingFields.ProtocolStatus,
             LogDirectory = path
         };
         try
         {
-            await using (var logger = Helpers.CreateTestW3CLogger(new OptionsWrapperMonitor<W3CLoggerOptions>(options)))
+            await using (
+                var logger = Helpers.CreateTestW3CLogger(
+                    new OptionsWrapperMonitor<W3CLoggerOptions>(options)
+                )
+            )
             {
                 var elements = new string[W3CLoggingMiddleware._fieldsLength];
                 var additionalHeaders = new string[0];
@@ -80,7 +100,10 @@ public class W3CLoggerTests
                 Assert.Equal("#Version: 1.0", lines[0]);
 
                 Assert.StartsWith("#Start-Date: ", lines[1]);
-                var startDate = DateTime.Parse(lines[1].Substring(13), CultureInfo.InvariantCulture);
+                var startDate = DateTime.Parse(
+                    lines[1].Substring(13),
+                    CultureInfo.InvariantCulture
+                );
                 // Assert that the log was written in the last 10 seconds
                 // W3CLogger writes start-time to second precision, so delta could be as low as -0.999...
                 var delta = startDate.Subtract(now).TotalSeconds;

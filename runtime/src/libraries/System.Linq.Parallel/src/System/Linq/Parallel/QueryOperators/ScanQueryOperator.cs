@@ -60,7 +60,11 @@ namespace System.Linq.Parallel
 
             if (_data is IList<TElement> dataAsList)
             {
-                return new ListQueryResults<TElement>(dataAsList, settings.DegreeOfParallelism.GetValueOrDefault(), preferStriping);
+                return new ListQueryResults<TElement>(
+                    dataAsList,
+                    settings.DegreeOfParallelism.GetValueOrDefault(),
+                    preferStriping
+                );
             }
             else
             {
@@ -68,17 +72,18 @@ namespace System.Linq.Parallel
             }
         }
 
-
         //-----------------------------------------------------------------------------------
         // IEnumerable<T> data source represented as QueryResults<T>. Typically, we would not
         // use ScanEnumerableQueryOperatorResults if the data source implements IList<T>.
         //
 
-        internal override IEnumerator<TElement> GetEnumerator(ParallelMergeOptions? mergeOptions, bool suppressOrderPreservation)
+        internal override IEnumerator<TElement> GetEnumerator(
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrderPreservation
+        )
         {
             return _data.GetEnumerator();
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -103,7 +108,6 @@ namespace System.Linq.Parallel
             }
         }
 
-
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
         // a similar sequential operation (i.e., in LINQ to Objects).
@@ -120,18 +124,27 @@ namespace System.Linq.Parallel
 
             private QuerySettings _settings; // Settings collected from the query
 
-            internal ScanEnumerableQueryOperatorResults(IEnumerable<TElement> data, QuerySettings settings)
+            internal ScanEnumerableQueryOperatorResults(
+                IEnumerable<TElement> data,
+                QuerySettings settings
+            )
             {
                 _data = data;
                 _settings = settings;
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TElement> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TElement> recipient
+            )
             {
                 Debug.Assert(_settings.DegreeOfParallelism != null);
                 // Since we are not using _data as an IList, we can pass useStriping = false.
-                PartitionedStream<TElement, int> partitionedStream = ExchangeUtilities.PartitionDataSource(
-                    _data, _settings.DegreeOfParallelism.Value, false);
+                PartitionedStream<TElement, int> partitionedStream =
+                    ExchangeUtilities.PartitionDataSource(
+                        _data,
+                        _settings.DegreeOfParallelism.Value,
+                        false
+                    );
                 recipient.Receive<int>(partitionedStream);
             }
         }

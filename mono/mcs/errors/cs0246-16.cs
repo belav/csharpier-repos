@@ -3,6 +3,5 @@
 
 class A : B
 {
-        public class B
-        { }
+    public class B { }
 }

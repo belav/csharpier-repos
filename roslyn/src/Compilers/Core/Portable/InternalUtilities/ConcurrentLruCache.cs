@@ -27,6 +27,7 @@ namespace Microsoft.CodeAnalysis.InternalUtilities
 
         private readonly Dictionary<K, CacheValue> _cache;
         private readonly LinkedList<K> _nodeList;
+
         // This is a naive course-grained lock, it can probably be optimized
         private readonly object _lockObject = new();
 
@@ -43,7 +44,7 @@ namespace Microsoft.CodeAnalysis.InternalUtilities
 
         /// <summary>
         /// Create cache from an array. The cache capacity will be the size
-        /// of the array. All elements of the array will be added to the 
+        /// of the array. All elements of the array will be added to the
         /// cache. If any duplicate keys are found in the array a
         /// <see cref="ArgumentException"/> will be thrown.
         /// </summary>
@@ -69,8 +70,7 @@ namespace Microsoft.CodeAnalysis.InternalUtilities
                     int index = 0;
                     foreach (K key in _nodeList)
                     {
-                        copy[index++] = new KeyValuePair<K, V>(key,
-                                                               _cache[key].Value);
+                        copy[index++] = new KeyValuePair<K, V>(key, _cache[key].Value);
                     }
                     return copy;
                 }

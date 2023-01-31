@@ -67,9 +67,12 @@ namespace Microsoft.CodeAnalysis.NamingStyles
                         return false;
                     }
 
-                    // found a separator in front of us.  Note: it may be in our suffix portion.  
+                    // found a separator in front of us.  Note: it may be in our suffix portion.
                     // So use the min of the separator position and our end position.
-                    Current = TextSpan.FromBounds(Current.End, Math.Min(_nameSpan.End, nextWordSeparator));
+                    Current = TextSpan.FromBounds(
+                        Current.End,
+                        Math.Min(_nameSpan.End, nextWordSeparator)
+                    );
                     break;
                 }
 

@@ -5,12 +5,10 @@ using System;
 
 class C
 {
-	static void Foo<T> (Func<T> a)
-	{
-	}
-	
-	static void Main ()
-	{
-		Foo (() => Main);
-	}
+    static void Foo<T>(Func<T> a) { }
+
+    static void Main()
+    {
+        Foo(() => Main);
+    }
 }

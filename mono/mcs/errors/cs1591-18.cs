@@ -6,13 +6,11 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// description for class Test
-	/// </summary>
-	public class Test
-	{
-		public struct InternalStruct
-		{
-		}
-	}
+    /// <summary>
+    /// description for class Test
+    /// </summary>
+    public class Test
+    {
+        public struct InternalStruct { }
+    }
 }

@@ -11,12 +11,16 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Formattin
 {
     internal partial class FormattingViewModel
     {
-        internal sealed class SettingsSnapshotFactory : SettingsSnapshotFactoryBase<FormattingSetting, SettingsEntriesSnapshot>
+        internal sealed class SettingsSnapshotFactory
+            : SettingsSnapshotFactoryBase<FormattingSetting, SettingsEntriesSnapshot>
         {
-            public SettingsSnapshotFactory(ISettingsProvider<FormattingSetting> data) : base(data) { }
+            public SettingsSnapshotFactory(ISettingsProvider<FormattingSetting> data)
+                : base(data) { }
 
-            protected override SettingsEntriesSnapshot CreateSnapshot(ImmutableArray<FormattingSetting> data, int currentVersionNumber)
-                => new(data, currentVersionNumber);
+            protected override SettingsEntriesSnapshot CreateSnapshot(
+                ImmutableArray<FormattingSetting> data,
+                int currentVersionNumber
+            ) => new(data, currentVersionNumber);
         }
     }
 }

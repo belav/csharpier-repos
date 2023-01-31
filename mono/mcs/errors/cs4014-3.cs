@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 class C
 {
-	static async Task<int> TestAsync ()
-	{
-		Func<Task> f = null;
-		f ();
-		return await Task.FromResult (2);
-	}
+    static async Task<int> TestAsync()
+    {
+        Func<Task> f = null;
+        f();
+        return await Task.FromResult(2);
+    }
 }

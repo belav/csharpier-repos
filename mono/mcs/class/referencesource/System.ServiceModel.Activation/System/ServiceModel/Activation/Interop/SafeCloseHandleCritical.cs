@@ -11,17 +11,15 @@ namespace System.ServiceModel.Activation.Interop
     using System.Security;
     using Microsoft.Win32.SafeHandles;
 
-    #pragma warning disable 618 // have not moved to the v4 security model yet
+#pragma warning disable 618 // have not moved to the v4 security model yet
     [SecurityCritical(SecurityCriticalScope.Everything)]
-    #pragma warning restore 618
+#pragma warning restore 618
     sealed class SafeCloseHandleCritical : SafeHandleZeroOrMinusOneIsInvalid
     {
         const string KERNEL32 = "kernel32.dll";
 
         SafeCloseHandleCritical()
-            : base(true)
-        {
-        }
+            : base(true) { }
 
         protected override bool ReleaseHandle()
         {

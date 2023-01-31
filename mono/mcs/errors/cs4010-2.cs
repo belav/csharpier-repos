@@ -5,8 +5,8 @@ using System;
 
 class C
 {
-	public static void Main ()
-	{
-		Func<string> a = async delegate { };
-	}
+    public static void Main()
+    {
+        Func<string> a = async delegate { };
+    }
 }

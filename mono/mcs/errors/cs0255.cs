@@ -2,13 +2,14 @@
 // Line: 12
 // Compiler options: -unsafe
 
-unsafe class X {
-
-	static void Main ()
-	{
-		try {
-		} catch {
-			char *ptr = stackalloc char [10];
-		}
-	}
-}	
+unsafe class X
+{
+    static void Main()
+    {
+        try { }
+        catch
+        {
+            char* ptr = stackalloc char[10];
+        }
+    }
+}

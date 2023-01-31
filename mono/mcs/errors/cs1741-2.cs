@@ -3,6 +3,5 @@
 
 interface I
 {
-	void Test (out bool a = true);
+    void Test(out bool a = true);
 }
-

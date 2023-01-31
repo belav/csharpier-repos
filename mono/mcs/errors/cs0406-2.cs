@@ -2,8 +2,8 @@
 // Line: 7
 
 class A { }
+
 interface I { }
 
-class Foo<T> where T : I, A
-{
-}
+class Foo<T>
+    where T : I, A { }

@@ -3,9 +3,11 @@
 // </copyright>
 using System;
 
-namespace System.Runtime.Caching {
+namespace System.Runtime.Caching
+{
     [Flags]
-    public enum DefaultCacheCapabilities {
+    public enum DefaultCacheCapabilities
+    {
         None = 0x0,
         InMemoryProvider = 0x1,
         OutOfProcessProvider = 0x2,

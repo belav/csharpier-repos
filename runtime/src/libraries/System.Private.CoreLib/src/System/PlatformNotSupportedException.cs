@@ -15,7 +15,9 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class PlatformNotSupportedException : NotSupportedException
     {
         public PlatformNotSupportedException()
@@ -36,8 +38,7 @@ namespace System
             HResult = HResults.COR_E_PLATFORMNOTSUPPORTED;
         }
 
-        protected PlatformNotSupportedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected PlatformNotSupportedException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

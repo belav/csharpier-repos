@@ -3,9 +3,7 @@
 
 class C
 {
-	object stuff = stuff;
-	
-	public C (object stuff)
-	{
-	}
+    object stuff = stuff;
+
+    public C(object stuff) { }
 }

@@ -24,7 +24,9 @@ namespace System.Threading.Channels.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task ReadAllAsync_UseMoveNextAsyncAfterCompleted_ReturnsFalse(bool completeWhilePending)
+        public async Task ReadAllAsync_UseMoveNextAsyncAfterCompleted_ReturnsFalse(
+            bool completeWhilePending
+        )
         {
             Channel<int> c = CreateChannel();
             IAsyncEnumerator<int> e = c.Reader.ReadAllAsync().GetAsyncEnumerator();
@@ -109,7 +111,8 @@ namespace System.Threading.Channels.Tests
         {
             Channel<int> c = CreateChannel();
 
-            int producedTotal = 0, consumedTotal = 0;
+            int producedTotal = 0,
+                consumedTotal = 0;
             await Task.WhenAll(
                 Task.Run(async () =>
                 {
@@ -134,7 +137,8 @@ namespace System.Threading.Channels.Tests
                     {
                         await e.DisposeAsync();
                     }
-                }));
+                })
+            );
 
             Assert.Equal(producedTotal, consumedTotal);
         }
@@ -170,7 +174,10 @@ namespace System.Threading.Channels.Tests
         [InlineData(false, true)]
         [InlineData(true, false)]
         [InlineData(true, true)]
-        public void ReadAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(bool sameEnumerable, bool dispose)
+        public void ReadAllAsync_MultipleSingleElementEnumerations_AllItemsEnumerated(
+            bool sameEnumerable,
+            bool dispose
+        )
         {
             Channel<int> c = CreateChannel();
             IAsyncEnumerable<int> enumerable = c.Reader.ReadAllAsync();
@@ -178,7 +185,9 @@ namespace System.Threading.Channels.Tests
             for (int i = 0; i < 10; i++)
             {
                 Assert.True(c.Writer.TryWrite(i));
-                IAsyncEnumerator<int> e = (sameEnumerable ? enumerable : c.Reader.ReadAllAsync()).GetAsyncEnumerator();
+                IAsyncEnumerator<int> e = (
+                    sameEnumerable ? enumerable : c.Reader.ReadAllAsync()
+                ).GetAsyncEnumerator();
                 ValueTask<bool> vt = e.MoveNextAsync();
                 Assert.True(vt.IsCompletedSuccessfully);
                 Assert.True(vt.Result);
@@ -195,7 +204,9 @@ namespace System.Threading.Channels.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task ReadAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(bool sameEnumerable)
+        public async Task ReadAllAsync_DualConcurrentEnumeration_AllItemsEnumerated(
+            bool sameEnumerable
+        )
         {
             if (RequiresSingleReader)
             {
@@ -207,11 +218,15 @@ namespace System.Threading.Channels.Tests
             IAsyncEnumerable<int> enumerable = c.Reader.ReadAllAsync();
 
             IAsyncEnumerator<int> e1 = enumerable.GetAsyncEnumerator();
-            IAsyncEnumerator<int> e2 = (sameEnumerable ? enumerable : c.Reader.ReadAllAsync()).GetAsyncEnumerator();
+            IAsyncEnumerator<int> e2 = (
+                sameEnumerable ? enumerable : c.Reader.ReadAllAsync()
+            ).GetAsyncEnumerator();
             Assert.NotSame(e1, e2);
 
-            ValueTask<bool> vt1, vt2;
-            int producerTotal = 0, consumerTotal = 0;
+            ValueTask<bool> vt1,
+                vt2;
+            int producerTotal = 0,
+                consumerTotal = 0;
             for (int i = 0; i < 10; i++)
             {
                 vt1 = e1.MoveNextAsync();
@@ -255,7 +270,8 @@ namespace System.Threading.Channels.Tests
             ValueTask<bool> vt = e.MoveNextAsync();
             Assert.True(vt.IsCompleted);
             Assert.False(vt.IsCompletedSuccessfully);
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
             Assert.Equal(cts.Token, oce.CancellationToken);
         }
 
@@ -270,7 +286,8 @@ namespace System.Threading.Channels.Tests
             Assert.False(vt.IsCompleted);
 
             cts.Cancel();
-            OperationCanceledException oce = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
+            OperationCanceledException oce =
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await vt);
             Assert.Equal(cts.Token, oce.CancellationToken);
 
             vt = e.MoveNextAsync();

@@ -11,14 +11,36 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
     {
         public string Style_PreferIntrinsicPredefinedTypeKeywordInDeclaration_CodeStyle
         {
-            get { return GetXmlOption(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration); }
-            set { SetXmlOption(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, value); }
+            get
+            {
+                return GetXmlOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration,
+                    value
+                );
+            }
         }
 
         public string Style_PreferIntrinsicPredefinedTypeKeywordInMemberAccess_CodeStyle
         {
-            get { return GetXmlOption(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess); }
-            set { SetXmlOption(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess, value); }
+            get
+            {
+                return GetXmlOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInMemberAccess,
+                    value
+                );
+            }
         }
 
         public string Style_QualifyFieldAccess
@@ -143,14 +165,36 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_PreferPatternMatchingOverAsWithNullCheck
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck); }
-            set { SetXmlOption(CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck, value); }
+            get
+            {
+                return GetXmlOption(
+                    CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CSharpCodeStyleOptions.PreferPatternMatchingOverAsWithNullCheck,
+                    value
+                );
+            }
         }
 
         public string Style_PreferPatternMatchingOverIsWithCastCheck
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck); }
-            set { SetXmlOption(CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck, value); }
+            get
+            {
+                return GetXmlOption(
+                    CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CSharpCodeStyleOptions.PreferPatternMatchingOverIsWithCastCheck,
+                    value
+                );
+            }
         }
 
         public string Style_PreferExpressionBodiedConstructors
@@ -197,8 +241,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_PreferExpressionBodiedLocalFunctions
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions); }
-            set { SetXmlOption(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, value); }
+            get
+            {
+                return GetXmlOption(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions);
+            }
+            set
+            {
+                SetXmlOption(CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, value);
+            }
         }
 
         public string Style_PreferBraces
@@ -227,8 +277,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_PreferIsNullCheckOverReferenceEqualityMethod
         {
-            get { return GetXmlOption(CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod); }
-            set { SetXmlOption(CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod, value); }
+            get
+            {
+                return GetXmlOption(CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod);
+            }
+            set
+            {
+                SetXmlOption(CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod, value);
+            }
         }
 
         public string Style_PreferNullCheckOverTypeCheck
@@ -239,8 +295,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_PreferConditionalExpressionOverAssignment
         {
-            get { return GetXmlOption(CodeStyleOptions2.PreferConditionalExpressionOverAssignment); }
-            set { SetXmlOption(CodeStyleOptions2.PreferConditionalExpressionOverAssignment, value); }
+            get
+            {
+                return GetXmlOption(CodeStyleOptions2.PreferConditionalExpressionOverAssignment);
+            }
+            set
+            {
+                SetXmlOption(CodeStyleOptions2.PreferConditionalExpressionOverAssignment, value);
+            }
         }
 
         public string Style_PreferConditionalExpressionOverReturn
@@ -305,8 +367,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_PreferDeconstructedVariableDeclaration
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration); }
-            set { SetXmlOption(CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration, value); }
+            get
+            {
+                return GetXmlOption(CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration);
+            }
+            set
+            {
+                SetXmlOption(CSharpCodeStyleOptions.PreferDeconstructedVariableDeclaration, value);
+            }
         }
 
         public string Style_PreferIndexOperator
@@ -389,8 +457,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_ImplicitObjectCreationWhenTypeIsApparent
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent); }
-            set { SetXmlOption(CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent, value); }
+            get
+            {
+                return GetXmlOption(
+                    CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CSharpCodeStyleOptions.ImplicitObjectCreationWhenTypeIsApparent,
+                    value
+                );
+            }
         }
 
         public string Style_AllowEmbeddedStatementsOnSameLine
@@ -401,26 +480,65 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
 
         public string Style_AllowBlankLinesBetweenConsecutiveBraces
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces); }
-            set { SetXmlOption(CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, value); }
+            get
+            {
+                return GetXmlOption(CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces);
+            }
+            set
+            {
+                SetXmlOption(CSharpCodeStyleOptions.AllowBlankLinesBetweenConsecutiveBraces, value);
+            }
         }
 
         public string Style_AllowBlankLineAfterColonInConstructorInitializer
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer); }
-            set { SetXmlOption(CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer, value); }
+            get
+            {
+                return GetXmlOption(
+                    CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CSharpCodeStyleOptions.AllowBlankLineAfterColonInConstructorInitializer,
+                    value
+                );
+            }
         }
 
         public string Style_AllowBlankLineAfterTokenInConditionalExpression
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.AllowBlankLineAfterTokenInConditionalExpression); }
-            set { SetXmlOption(CSharpCodeStyleOptions.AllowBlankLineAfterTokenInConditionalExpression, value); }
+            get
+            {
+                return GetXmlOption(
+                    CSharpCodeStyleOptions.AllowBlankLineAfterTokenInConditionalExpression
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CSharpCodeStyleOptions.AllowBlankLineAfterTokenInConditionalExpression,
+                    value
+                );
+            }
         }
 
         public string Style_AllowBlankLineAfterTokenInArrowExpressionClause
         {
-            get { return GetXmlOption(CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause); }
-            set { SetXmlOption(CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause, value); }
+            get
+            {
+                return GetXmlOption(
+                    CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause
+                );
+            }
+            set
+            {
+                SetXmlOption(
+                    CSharpCodeStyleOptions.AllowBlankLineAfterTokenInArrowExpressionClause,
+                    value
+                );
+            }
         }
 
         public string Style_NamespaceDeclarations

@@ -182,8 +182,10 @@ public class CosmosSingletonOptions : ICosmosSingletonOptions
     {
         var cosmosOptions = options.FindExtension<CosmosOptionsExtension>();
 
-        if (cosmosOptions != null
-            && (AccountEndpoint != cosmosOptions.AccountEndpoint
+        if (
+            cosmosOptions != null
+            && (
+                AccountEndpoint != cosmosOptions.AccountEndpoint
                 || AccountKey != cosmosOptions.AccountKey
                 || TokenCredential != cosmosOptions.TokenCredential
                 || ConnectionString != cosmosOptions.ConnectionString
@@ -199,12 +201,15 @@ public class CosmosSingletonOptions : ICosmosSingletonOptions
                 || MaxRequestsPerTcpConnection != cosmosOptions.MaxRequestsPerTcpConnection
                 || EnableContentResponseOnWrite != cosmosOptions.EnableContentResponseOnWrite
                 || HttpClientFactory != cosmosOptions.HttpClientFactory
-            ))
+            )
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.SingletonOptionChanged(
                     nameof(CosmosDbContextOptionsExtensions.UseCosmos),
-                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                )
+            );
         }
     }
 }

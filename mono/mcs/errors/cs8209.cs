@@ -3,8 +3,8 @@
 
 class C
 {
-	public static void Main ()
-	{
-		_ = Main ();
-	}
+    public static void Main()
+    {
+        _ = Main();
+    }
 }

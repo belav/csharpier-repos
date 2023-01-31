@@ -3,14 +3,13 @@
 
 class TestClass
 {
-        delegate void test_delegate (int arg);
+    delegate void test_delegate(int arg);
 
-        [System.Diagnostics.Conditional("DEBUG")]
-        public void Show (int arg) {}
-            
-        public TestClass ()
-        {
-            test_delegate D = new test_delegate (Show);
-        }
+    [System.Diagnostics.Conditional("DEBUG")]
+    public void Show(int arg) { }
+
+    public TestClass()
+    {
+        test_delegate D = new test_delegate(Show);
+    }
 }
-

@@ -3,8 +3,8 @@
 
 class C
 {
-    public void Main ()
+    public void Main()
     {
-		this = null;
+        this = null;
     }
 }

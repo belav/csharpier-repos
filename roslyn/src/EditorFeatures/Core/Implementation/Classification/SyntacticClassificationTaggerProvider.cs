@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
     [ContentType(ContentTypeNames.RoslynContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
     [TagType(typeof(IClassificationTag))]
-    internal partial class SyntacticClassificationTaggerProvider : ForegroundThreadAffinitizedObject, ITaggerProvider
+    internal partial class SyntacticClassificationTaggerProvider
+        : ForegroundThreadAffinitizedObject,
+            ITaggerProvider
     {
         private readonly IAsynchronousOperationListener _listener;
         private readonly SyntacticClassificationTypeMap _typeMap;
@@ -32,12 +34,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
         private readonly ConditionalWeakTable<ITextBuffer, TagComputer> _tagComputers = new();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
         public SyntacticClassificationTaggerProvider(
             IThreadingContext threadingContext,
             SyntacticClassificationTypeMap typeMap,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
             : base(threadingContext, assertIsForeground: false)
         {
             _typeMap = typeMap;
@@ -45,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             _listener = listenerProvider.GetListener(FeatureAttribute.Classification);
         }
 
-        public ITagger<T>? CreateTagger<T>(ITextBuffer buffer) where T : ITag
+        public ITagger<T>? CreateTagger<T>(ITextBuffer buffer)
+            where T : ITag
         {
             this.AssertIsForeground();
             if (!_globalOptions.GetOption(InternalFeatureOnOffOptions.SyntacticColorizer))
@@ -53,7 +61,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
 
             if (!_tagComputers.TryGetValue(buffer, out var tagComputer))
             {
-                tagComputer = new TagComputer(this, (ITextBuffer2)buffer, _listener, _typeMap, TaggerDelay.NearImmediate.ComputeTimeDelay());
+                tagComputer = new TagComputer(
+                    this,
+                    (ITextBuffer2)buffer,
+                    _listener,
+                    _typeMap,
+                    TaggerDelay.NearImmediate.ComputeTimeDelay()
+                );
                 _tagComputers.Add(buffer, tagComputer);
             }
 
@@ -69,7 +83,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Classification
             return null;
         }
 
-        private void DisconnectTagComputer(ITextBuffer buffer)
-            => _tagComputers.Remove(buffer);
+        private void DisconnectTagComputer(ITextBuffer buffer) => _tagComputers.Remove(buffer);
     }
 }

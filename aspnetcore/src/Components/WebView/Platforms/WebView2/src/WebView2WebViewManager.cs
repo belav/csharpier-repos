@@ -32,7 +32,13 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
         /// <param name="dispatcher">A <see cref="Dispatcher"/> instance that can marshal calls to the required thread or sync context.</param>
         /// <param name="fileProvider">Provides static content to the webview.</param>
         /// <param name="hostPageRelativePath">Path to the host page within the <paramref name="fileProvider"/>.</param>
-        public WebView2WebViewManager(IWebView2Wrapper webview, IServiceProvider services, Dispatcher dispatcher, IFileProvider fileProvider, string hostPageRelativePath)
+        public WebView2WebViewManager(
+            IWebView2Wrapper webview,
+            IServiceProvider services,
+            Dispatcher dispatcher,
+            IFileProvider fileProvider,
+            string hostPageRelativePath
+        )
             : base(services, dispatcher, new Uri(AppOrigin), fileProvider, hostPageRelativePath)
         {
             _webview = webview ?? throw new ArgumentNullException(nameof(webview));
@@ -54,8 +60,8 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
         }
 
         /// <inheritdoc />
-        protected override void SendMessage(string message)
-            => _webview.CoreWebView2.PostWebMessageAsString(message);
+        protected override void SendMessage(string message) =>
+            _webview.CoreWebView2.PostWebMessageAsString(message);
 
         private async Task InitializeWebView2()
         {
@@ -63,26 +69,45 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
             await _webview.EnsureCoreWebView2Async(environment);
             ApplyDefaultWebViewSettings();
 
-            _webview.CoreWebView2.AddWebResourceRequestedFilter($"{AppOrigin}*", CoreWebView2WebResourceContext.All);
+            _webview.CoreWebView2.AddWebResourceRequestedFilter(
+                $"{AppOrigin}*",
+                CoreWebView2WebResourceContext.All
+            );
             _webview.CoreWebView2.WebResourceRequested += (sender, eventArgs) =>
             {
                 // Unlike server-side code, we get told exactly why the browser is making the request,
                 // so we can be smarter about fallback. We can ensure that 'fetch' requests never result
                 // in fallback, for example.
                 var allowFallbackOnHostPage =
-                    eventArgs.ResourceContext == CoreWebView2WebResourceContext.Document ||
-                    eventArgs.ResourceContext == CoreWebView2WebResourceContext.Other; // e.g., dev tools requesting page source
+                    eventArgs.ResourceContext == CoreWebView2WebResourceContext.Document
+                    || eventArgs.ResourceContext == CoreWebView2WebResourceContext.Other; // e.g., dev tools requesting page source
 
-                if (TryGetResponseContent(eventArgs.Request.Uri, allowFallbackOnHostPage, out var statusCode, out var statusMessage, out var content, out var headers))
+                if (
+                    TryGetResponseContent(
+                        eventArgs.Request.Uri,
+                        allowFallbackOnHostPage,
+                        out var statusCode,
+                        out var statusMessage,
+                        out var content,
+                        out var headers
+                    )
+                )
                 {
                     var headerString = GetHeaderString(headers);
-                    eventArgs.Response = environment.CreateWebResourceResponse(content, statusCode, statusMessage, headerString);
+                    eventArgs.Response = environment.CreateWebResourceResponse(
+                        content,
+                        statusCode,
+                        statusMessage,
+                        headerString
+                    );
                 }
             };
 
             // The code inside blazor.webview.js is meant to be agnostic to specific webview technologies,
             // so the following is an adaptor from blazor.webview.js conventions to WebView2 APIs
-            await _webview.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(@"
+            await _webview.CoreWebView2
+                .AddScriptToExecuteOnDocumentCreatedAsync(
+                    @"
                 window.external = {
                     sendMessage: message => {
                         window.chrome.webview.postMessage(message);
@@ -91,10 +116,12 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
                         window.chrome.webview.addEventListener('message', e => callback(e.data));
                     }
                 };
-            ").ConfigureAwait(true);
+            "
+                )
+                .ConfigureAwait(true);
 
-            _webview.CoreWebView2.WebMessageReceived += (sender, eventArgs)
-                => MessageReceived(new Uri(eventArgs.Source), eventArgs.TryGetWebMessageAsString());
+            _webview.CoreWebView2.WebMessageReceived += (sender, eventArgs) =>
+                MessageReceived(new Uri(eventArgs.Source), eventArgs.TryGetWebMessageAsString());
         }
 
         private static string GetHeaderString(IDictionary<string, string> headers) =>

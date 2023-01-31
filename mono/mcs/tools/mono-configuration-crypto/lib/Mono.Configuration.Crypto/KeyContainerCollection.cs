@@ -10,170 +10,184 @@ using Mono.Security.Cryptography;
 
 namespace Mono.Configuration.Crypto
 {
-	public class KeyContainerCollection : ICollection <KeyContainer>
-	{
-		bool machineStore;
-		SortedDictionary <string, KeyContainer> containers;
+    public class KeyContainerCollection : ICollection<KeyContainer>
+    {
+        bool machineStore;
+        SortedDictionary<string, KeyContainer> containers;
 
-		SortedDictionary <string, KeyContainer> Containers {
-			get {
-				if (containers == null)
-					containers = new SortedDictionary <string, KeyContainer> ();
-				return containers;
-			}
-		}
+        SortedDictionary<string, KeyContainer> Containers
+        {
+            get
+            {
+                if (containers == null)
+                    containers = new SortedDictionary<string, KeyContainer>();
+                return containers;
+            }
+        }
 
-		public KeyContainer this [string name] {
-			get { return GetContainer (name); }
-		}
-		
-		public KeyContainerCollection (bool machineStore)
-		{
-			string topPath;
+        public KeyContainer this[string name]
+        {
+            get { return GetContainer(name); }
+        }
 
-			if (machineStore)
-				topPath = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.CommonApplicationData), ".mono");
-			else
-				topPath = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.ApplicationData), ".mono");
-			topPath = Path.Combine (topPath, "keypairs");
-			
-			this.machineStore = machineStore;
-			if (Directory.Exists (topPath))
-				LoadKeys (topPath);
-		}
-		
-		public bool Contains (string name)
-		{
-			if (String.IsNullOrEmpty (name) || Count == 0)
-				return false;
+        public KeyContainerCollection(bool machineStore)
+        {
+            string topPath;
 
-			KeyContainer c = GetContainer (name);
-			if (c == null || c.Count == 0)
-				return false;
+            if (machineStore)
+                topPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                    ".mono"
+                );
+            else
+                topPath = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                    ".mono"
+                );
+            topPath = Path.Combine(topPath, "keypairs");
 
-			return true;
-		}
-		
-		public IEnumerator <KeyContainer> GetEnumerator ()
-		{
-			foreach (var de in Containers)
-				yield return de.Value;
-		}
+            this.machineStore = machineStore;
+            if (Directory.Exists(topPath))
+                LoadKeys(topPath);
+        }
 
-		KeyContainer GetContainer (string name)
-		{
-			KeyContainer c;
+        public bool Contains(string name)
+        {
+            if (String.IsNullOrEmpty(name) || Count == 0)
+                return false;
 
-			if (Containers.TryGetValue (name, out c))
-				return c;
+            KeyContainer c = GetContainer(name);
+            if (c == null || c.Count == 0)
+                return false;
 
-			var md5 = MD5.Create ();
-			byte[] result = md5.ComputeHash (Encoding.UTF8.GetBytes (name));
-			string hashed = new Guid (result).ToString ();
+            return true;
+        }
 
-			if (Containers.TryGetValue (hashed, out c))
-				return c;
+        public IEnumerator<KeyContainer> GetEnumerator()
+        {
+            foreach (var de in Containers)
+                yield return de.Value;
+        }
 
-			return null;
-		}
-		
-		void LoadKeys (string path)
-		{
-			string[] files = Directory.GetFiles (path, "*.xml");
-			if (files == null || files.Length == 0)
-				return;
+        KeyContainer GetContainer(string name)
+        {
+            KeyContainer c;
 
-			SortedDictionary <string, KeyContainer> containers = Containers;
-			KeyContainer keyContainer;
-			Key key;
-			string containerName;
-			
-			foreach (string file in files) {
-				key = new Key (file, machineStore);
-				if (!key.IsValid)
-					continue;
+            if (Containers.TryGetValue(name, out c))
+                return c;
 
-				containerName = key.ContainerName;
-				if (!containers.TryGetValue (containerName, out keyContainer)) {
-					keyContainer = new KeyContainer (containerName, machineStore);
-					containers.Add (containerName, keyContainer);
-				}
-				
-				keyContainer.Add (key);
-			}
-		}
-		
+            var md5 = MD5.Create();
+            byte[] result = md5.ComputeHash(Encoding.UTF8.GetBytes(name));
+            string hashed = new Guid(result).ToString();
+
+            if (Containers.TryGetValue(hashed, out c))
+                return c;
+
+            return null;
+        }
+
+        void LoadKeys(string path)
+        {
+            string[] files = Directory.GetFiles(path, "*.xml");
+            if (files == null || files.Length == 0)
+                return;
+
+            SortedDictionary<string, KeyContainer> containers = Containers;
+            KeyContainer keyContainer;
+            Key key;
+            string containerName;
+
+            foreach (string file in files)
+            {
+                key = new Key(file, machineStore);
+                if (!key.IsValid)
+                    continue;
+
+                containerName = key.ContainerName;
+                if (!containers.TryGetValue(containerName, out keyContainer))
+                {
+                    keyContainer = new KeyContainer(containerName, machineStore);
+                    containers.Add(containerName, keyContainer);
+                }
+
+                keyContainer.Add(key);
+            }
+        }
+
 #region IEnumerable
-		IEnumerator <KeyContainer> IEnumerable <KeyContainer>.GetEnumerator ()
-		{
-			return GetEnumerator ();
-		}
+        IEnumerator<KeyContainer> IEnumerable<KeyContainer>.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return GetEnumerator ();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
 #endregion
-		
+
 #region ICollection
-		public int Count {
-			get {
-				if (containers == null)
-					return 0;
+        public int Count
+        {
+            get
+            {
+                if (containers == null)
+                    return 0;
 
-				return containers.Count;
-			}
-		}
+                return containers.Count;
+            }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
-		public void Add (KeyContainer item)
-		{
-			if (item == null)
-				return;
+        public void Add(KeyContainer item)
+        {
+            if (item == null)
+                return;
 
-			SortedDictionary <string, KeyContainer> containers = Containers;
-			string name = item.Name;
-			
-			if (containers.ContainsKey (name))
-				containers [name] = item;
-			else
-				containers.Add (name, item);
-		}
+            SortedDictionary<string, KeyContainer> containers = Containers;
+            string name = item.Name;
 
-		public void Clear ()
-		{
-			if (containers == null)
-				return;
+            if (containers.ContainsKey(name))
+                containers[name] = item;
+            else
+                containers.Add(name, item);
+        }
 
-			containers.Clear ();
-		}
+        public void Clear()
+        {
+            if (containers == null)
+                return;
 
-		public bool Contains (KeyContainer item)
-		{
-			if (Count == 0 || item == null)
-				return false;
+            containers.Clear();
+        }
 
-			return containers.ContainsKey (item.Name);
-		}
+        public bool Contains(KeyContainer item)
+        {
+            if (Count == 0 || item == null)
+                return false;
 
-		public void CopyTo (KeyContainer[] array, int arrayIndex)
-		{
-			if (Count == 0)
-				return;
+            return containers.ContainsKey(item.Name);
+        }
 
-			containers.Values.CopyTo (array, arrayIndex);
-		}
+        public void CopyTo(KeyContainer[] array, int arrayIndex)
+        {
+            if (Count == 0)
+                return;
 
-		public bool Remove (KeyContainer item)
-		{
-			if (Count == 0 || item == null)
-				return false;
+            containers.Values.CopyTo(array, arrayIndex);
+        }
 
-			return containers.Remove (item.Name);
-		}
+        public bool Remove(KeyContainer item)
+        {
+            if (Count == 0 || item == null)
+                return false;
+
+            return containers.Remove(item.Name);
+        }
 #endregion
-	}
+    }
 }

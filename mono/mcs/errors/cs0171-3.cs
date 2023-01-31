@@ -3,16 +3,16 @@
 
 public struct Test
 {
-	internal int x;
+    internal int x;
 
-	public Test (int x)
-	{
-		X = x;
-	}
+    public Test(int x)
+    {
+        X = x;
+    }
 
-	public int X
-	{
-		get { return x; }
-		set { x = value; }
-	}
+    public int X
+    {
+        get { return x; }
+        set { x = value; }
+    }
 }

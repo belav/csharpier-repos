@@ -3,21 +3,27 @@
 
 using System;
 
-class C {
-	public static int test5 ()
-	{
-		int a;
+class C
+{
+    public static int test5()
+    {
+        int a;
 
-		try {
-			Console.WriteLine ("TRY");
-			a = 8;
-		} catch {
-			a = 9;
-		} finally {
-			// CS0165
-			Console.WriteLine (a);
-		}
+        try
+        {
+            Console.WriteLine("TRY");
+            a = 8;
+        }
+        catch
+        {
+            a = 9;
+        }
+        finally
+        {
+            // CS0165
+            Console.WriteLine(a);
+        }
 
-		return a;
-	}
+        return a;
+    }
 }

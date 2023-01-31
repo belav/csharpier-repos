@@ -4,9 +4,8 @@
 
 class AA
 {
-        public AA ()
-        {
-                using (ObsoleteDispose od = ObsoleteDispose.Factory) {
-                }
-        }
+    public AA()
+    {
+        using (ObsoleteDispose od = ObsoleteDispose.Factory) { }
+    }
 }

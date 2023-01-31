@@ -44,7 +44,10 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
     /// <param name="builder">The <see cref="IMvcCoreBuilder" />.</param>
     /// <param name="setupAction">An action to configure the <see cref="MvcRazorRuntimeCompilationOptions"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
-    public static IMvcCoreBuilder AddRazorRuntimeCompilation(this IMvcCoreBuilder builder, Action<MvcRazorRuntimeCompilationOptions> setupAction)
+    public static IMvcCoreBuilder AddRazorRuntimeCompilation(
+        this IMvcCoreBuilder builder,
+        Action<MvcRazorRuntimeCompilationOptions> setupAction
+    )
     {
         if (builder == null)
         {
@@ -65,12 +68,19 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
     internal static void AddServices(IServiceCollection services)
     {
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcRazorRuntimeCompilationOptions>, MvcRazorRuntimeCompilationOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcRazorRuntimeCompilationOptions>,
+                MvcRazorRuntimeCompilationOptionsSetup
+            >()
+        );
 
-        var compilerProvider = services.FirstOrDefault(f =>
-            f.ServiceType == typeof(IViewCompilerProvider) &&
-            f.ImplementationType?.Assembly == typeof(IViewCompilerProvider).Assembly &&
-            f.ImplementationType.FullName == "Microsoft.AspNetCore.Mvc.Razor.Compilation.DefaultViewCompilerProvider");
+        var compilerProvider = services.FirstOrDefault(
+            f =>
+                f.ServiceType == typeof(IViewCompilerProvider)
+                && f.ImplementationType?.Assembly == typeof(IViewCompilerProvider).Assembly
+                && f.ImplementationType.FullName
+                    == "Microsoft.AspNetCore.Mvc.Razor.Compilation.DefaultViewCompilerProvider"
+        );
 
         if (compilerProvider != null)
         {
@@ -80,9 +90,11 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
 
         services.TryAddSingleton<IViewCompilerProvider, RuntimeViewCompilerProvider>();
 
-        var actionDescriptorProvider = services.FirstOrDefault(f =>
-            f.ServiceType == typeof(IActionDescriptorProvider) &&
-            f.ImplementationType == typeof(CompiledPageActionDescriptorProvider));
+        var actionDescriptorProvider = services.FirstOrDefault(
+            f =>
+                f.ServiceType == typeof(IActionDescriptorProvider)
+                && f.ImplementationType == typeof(CompiledPageActionDescriptorProvider)
+        );
 
         if (actionDescriptorProvider != null)
         {
@@ -93,8 +105,11 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
         }
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IActionDescriptorProvider, PageActionDescriptorProvider>());
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<MatcherPolicy, PageLoaderMatcherPolicy>());
+            ServiceDescriptor.Singleton<IActionDescriptorProvider, PageActionDescriptorProvider>()
+        );
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<MatcherPolicy, PageLoaderMatcherPolicy>()
+        );
 
         services.TryAddSingleton<RuntimeCompilationFileProvider>();
         services.TryAddSingleton<RazorReferenceManager>();
@@ -105,20 +120,24 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
         {
             var fileSystem = s.GetRequiredService<RazorProjectFileSystem>();
             var csharpCompiler = s.GetRequiredService<CSharpCompiler>();
-            var projectEngine = RazorProjectEngine.Create(RazorConfiguration.Default, fileSystem, builder =>
-            {
-                RazorExtensions.Register(builder);
+            var projectEngine = RazorProjectEngine.Create(
+                RazorConfiguration.Default,
+                fileSystem,
+                builder =>
+                {
+                    RazorExtensions.Register(builder);
 
-                // Roslyn + TagHelpers infrastructure
-                var referenceManager = s.GetRequiredService<RazorReferenceManager>();
-                builder.Features.Add(new LazyMetadataReferenceFeature(referenceManager));
-                builder.Features.Add(new CompilationTagHelperFeature());
+                    // Roslyn + TagHelpers infrastructure
+                    var referenceManager = s.GetRequiredService<RazorReferenceManager>();
+                    builder.Features.Add(new LazyMetadataReferenceFeature(referenceManager));
+                    builder.Features.Add(new CompilationTagHelperFeature());
 
-                // TagHelperDescriptorProviders (actually do tag helper discovery)
-                builder.Features.Add(new DefaultTagHelperDescriptorProvider());
-                builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
-                builder.SetCSharpLanguageVersion(csharpCompiler.ParseOptions.LanguageVersion);
-            });
+                    // TagHelperDescriptorProviders (actually do tag helper discovery)
+                    builder.Features.Add(new DefaultTagHelperDescriptorProvider());
+                    builder.Features.Add(new ViewComponentTagHelperDescriptorProvider());
+                    builder.SetCSharpLanguageVersion(csharpCompiler.ParseOptions.LanguageVersion);
+                }
+            );
 
             return projectEngine;
         });
@@ -127,9 +146,17 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
         // Razor Pages
         //
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IPageRouteModelProvider, RazorProjectPageRouteModelProvider>());
+            ServiceDescriptor.Singleton<
+                IPageRouteModelProvider,
+                RazorProjectPageRouteModelProvider
+            >()
+        );
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<IActionDescriptorChangeProvider, PageActionDescriptorChangeProvider>());
+            ServiceDescriptor.Singleton<
+                IActionDescriptorChangeProvider,
+                PageActionDescriptorChangeProvider
+            >()
+        );
     }
 }

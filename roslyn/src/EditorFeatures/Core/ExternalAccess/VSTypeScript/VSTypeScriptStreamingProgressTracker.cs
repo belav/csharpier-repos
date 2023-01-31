@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 {
-    internal sealed class VSTypeScriptStreamingProgressTracker : IVSTypeScriptStreamingProgressTracker
+    internal sealed class VSTypeScriptStreamingProgressTracker
+        : IVSTypeScriptStreamingProgressTracker
     {
         private readonly IStreamingProgressTracker _progressTracker;
 
@@ -18,10 +19,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             _progressTracker = progressTracker;
         }
 
-        public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken)
-            => _progressTracker.AddItemsAsync(count, cancellationToken);
+        public ValueTask AddItemsAsync(int count, CancellationToken cancellationToken) =>
+            _progressTracker.AddItemsAsync(count, cancellationToken);
 
-        public ValueTask ItemCompletedAsync(CancellationToken cancellationToken)
-            => _progressTracker.ItemCompletedAsync(cancellationToken);
+        public ValueTask ItemCompletedAsync(CancellationToken cancellationToken) =>
+            _progressTracker.ItemCompletedAsync(cancellationToken);
     }
 }

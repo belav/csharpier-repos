@@ -18,9 +18,7 @@ public class FormMultipartSection
     /// <param name="section">The section from which to create the <see cref="FormMultipartSection"/></param>
     /// <remarks>Reparses the content disposition header</remarks>
     public FormMultipartSection(MultipartSection section)
-        : this(section, section.GetContentDispositionHeader())
-    {
-    }
+        : this(section, section.GetContentDispositionHeader()) { }
 
     /// <summary>
     /// Creates a new instance of the <see cref="FormMultipartSection"/> class
@@ -60,6 +58,6 @@ public class FormMultipartSection
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The form value</returns>
-    public ValueTask<string> GetValueAsync(CancellationToken cancellationToken)
-        => Section.ReadAsStringAsync(cancellationToken);
+    public ValueTask<string> GetValueAsync(CancellationToken cancellationToken) =>
+        Section.ReadAsStringAsync(cancellationToken);
 }

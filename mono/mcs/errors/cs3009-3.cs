@@ -7,17 +7,11 @@
 
 using System;
 
-[assembly:CLSCompliant(true)]
+[assembly: CLSCompliant(true)]
 
 [CLSCompliant(false)]
-public class BaseClass
-{
-}
+public class BaseClass { }
 
-public class AttributesForm : BaseClass
-{
-}
+public class AttributesForm : BaseClass { }
 
-public class AttributesForm_2 : BaseClass
-{
-}
+public class AttributesForm_2 : BaseClass { }

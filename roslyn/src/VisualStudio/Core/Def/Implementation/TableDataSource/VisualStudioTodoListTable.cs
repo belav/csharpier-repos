@@ -15,7 +15,8 @@ using Microsoft.VisualStudio.Shell.TableManager;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     [ExportEventListener(WellKnownEventListeners.TodoListProvider, WorkspaceKind.Host), Shared]
-    internal class VisualStudioTodoListTableWorkspaceEventListener : IEventListener<ITodoListProvider>
+    internal class VisualStudioTodoListTableWorkspaceEventListener
+        : IEventListener<ITodoListProvider>
     {
         internal const string IdentifierString = nameof(VisualStudioTodoListTable);
 
@@ -23,16 +24,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioTodoListTableWorkspaceEventListener(ITableManagerProvider tableManagerProvider)
-            => _tableManagerProvider = tableManagerProvider;
+        public VisualStudioTodoListTableWorkspaceEventListener(
+            ITableManagerProvider tableManagerProvider
+        ) => _tableManagerProvider = tableManagerProvider;
 
-        public void StartListening(Workspace workspace, ITodoListProvider service)
-            => new VisualStudioTodoListTable(workspace, service, _tableManagerProvider);
+        public void StartListening(Workspace workspace, ITodoListProvider service) =>
+            new VisualStudioTodoListTable(workspace, service, _tableManagerProvider);
 
         internal class VisualStudioTodoListTable : VisualStudioBaseTodoListTable
         {
             // internal for testing
-            internal VisualStudioTodoListTable(Workspace workspace, ITodoListProvider todoListProvider, ITableManagerProvider provider)
+            internal VisualStudioTodoListTable(
+                Workspace workspace,
+                ITodoListProvider todoListProvider,
+                ITableManagerProvider provider
+            )
                 : base(workspace, todoListProvider, IdentifierString, provider)
             {
                 ConnectWorkspaceEvents();

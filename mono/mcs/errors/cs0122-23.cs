@@ -6,14 +6,17 @@ using System.Collections;
 
 class C
 {
-	protected string this [int i] { set {} }
+    protected string this[int i]
+    {
+        set { }
+    }
 }
 
 public class D
 {
-	void Foo ()
-	{
-		C c = new C ();
-		c [0] = null;
-	}
+    void Foo()
+    {
+        C c = new C();
+        c[0] = null;
+    }
 }

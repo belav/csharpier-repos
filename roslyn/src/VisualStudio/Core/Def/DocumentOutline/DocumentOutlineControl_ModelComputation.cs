@@ -18,7 +18,7 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
 {
     /// The passing of the data model between the queues starts with _computeDataModelQueue which flows into _filterAndSortDataModelQueue which
-    /// will then flow into _highlightExpandAndPresentItemsQueue. 
+    /// will then flow into _highlightExpandAndPresentItemsQueue.
 
     /// Work is added to the _computeDataModelQueue when the user opens a new code window or makes changes to the text buffer.
     /// Work is added to the _filterAndSortDataModelQueue when the user performs a sort or search operation.
@@ -38,7 +38,10 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         /// <summary>
         /// Makes the LSP document symbol request and creates the data model.
         /// </summary>
-        private async ValueTask<DocumentSymbolDataModel?> ComputeDataModelAsync(ImmutableSegmentedList<bool> _, CancellationToken cancellationToken)
+        private async ValueTask<DocumentSymbolDataModel?> ComputeDataModelAsync(
+            ImmutableSegmentedList<bool> _,
+            CancellationToken cancellationToken
+        )
         {
             // Jump to the UI thread to get the currently active text view. This cancellation token controls the entire DocumentOutlineControl
             // so if we are closed/cancelled on the UI thread, when this jumps back to the UI thread, it will auto-cancel and won't continue
@@ -71,8 +74,14 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // Obtain the LSP response and text snapshot used.
-                var response = await DocumentOutlineHelper.DocumentSymbolsRequestAsync(
-                    textBuffer, _languageServiceBroker, filePath, cancellationToken).ConfigureAwait(false);
+                var response = await DocumentOutlineHelper
+                    .DocumentSymbolsRequestAsync(
+                        textBuffer,
+                        _languageServiceBroker,
+                        filePath,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // If there is no matching LSP server registered the client will return null here - e.g. wrong content type on the buffer, the
                 // server totally failed to start, server doesn't support the right capabilities. For C# we might know it's a bug if we get a null
@@ -84,14 +93,22 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 if (responseBody is null)
                     return null;
 
-                return DocumentOutlineHelper.CreateDocumentSymbolDataModel(responseBody, response.Value.snapshot);
+                return DocumentOutlineHelper.CreateDocumentSymbolDataModel(
+                    responseBody,
+                    response.Value.snapshot
+                );
             }
 
             string? GetFilePath()
             {
                 _threadingContext.ThrowIfNotOnUIThread();
-                if (_editorAdaptersFactoryService.GetBufferAdapter(textBuffer) is IPersistFileFormat persistFileFormat &&
-                    ErrorHandler.Succeeded(persistFileFormat.GetCurFile(out var filePath, out var _)))
+                if (
+                    _editorAdaptersFactoryService.GetBufferAdapter(textBuffer)
+                        is IPersistFileFormat persistFileFormat
+                    && ErrorHandler.Succeeded(
+                        persistFileFormat.GetCurFile(out var filePath, out var _)
+                    )
+                )
                 {
                     return filePath;
                 }
@@ -112,9 +129,14 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         /// <summary>
         /// Filters and sorts the data model.
         /// </summary>
-        private async ValueTask<DocumentSymbolDataModel?> FilterAndSortDataModelAsync(ImmutableSegmentedList<bool> _, CancellationToken cancellationToken)
+        private async ValueTask<DocumentSymbolDataModel?> FilterAndSortDataModelAsync(
+            ImmutableSegmentedList<bool> _,
+            CancellationToken cancellationToken
+        )
         {
-            var model = await _computeDataModelQueue.WaitUntilCurrentBatchCompletesAsync().ConfigureAwait(false);
+            var model = await _computeDataModelQueue
+                .WaitUntilCurrentBatchCompletesAsync()
+                .ConfigureAwait(false);
             if (model is null)
                 return null;
 
@@ -130,9 +152,17 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             var updatedDocumentSymbolData = model.DocumentSymbolData;
 
             if (!string.IsNullOrWhiteSpace(searchQuery))
-                updatedDocumentSymbolData = DocumentOutlineHelper.SearchDocumentSymbolData(updatedDocumentSymbolData, searchQuery, cancellationToken);
+                updatedDocumentSymbolData = DocumentOutlineHelper.SearchDocumentSymbolData(
+                    updatedDocumentSymbolData,
+                    searchQuery,
+                    cancellationToken
+                );
 
-            updatedDocumentSymbolData = DocumentOutlineHelper.SortDocumentSymbolData(updatedDocumentSymbolData, sortOption, cancellationToken);
+            updatedDocumentSymbolData = DocumentOutlineHelper.SortDocumentSymbolData(
+                updatedDocumentSymbolData,
+                sortOption,
+                cancellationToken
+            );
 
             EnqueueHighlightExpandAndPresentItemsTask(ExpansionOption.NoChange);
 
@@ -151,9 +181,14 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         /// <summary>
         /// Highlights the symbol node corresponding to the current caret position in the editor, expands/collapses nodes, then updates the UI.
         /// </summary>
-        private async ValueTask HighlightExpandAndPresentItemsAsync(ImmutableSegmentedList<ExpansionOption> expansionOption, CancellationToken cancellationToken)
+        private async ValueTask HighlightExpandAndPresentItemsAsync(
+            ImmutableSegmentedList<ExpansionOption> expansionOption,
+            CancellationToken cancellationToken
+        )
         {
-            var model = await _filterAndSortDataModelQueue.WaitUntilCurrentBatchCompletesAsync().ConfigureAwait(false);
+            var model = await _filterAndSortDataModelQueue
+                .WaitUntilCurrentBatchCompletesAsync()
+                .ConfigureAwait(false);
             if (model is null)
                 return;
 
@@ -168,12 +203,19 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             if (!caretPoint.HasValue)
                 return;
 
-            var documentSymbolUIItems = DocumentOutlineHelper.GetDocumentSymbolUIItems(model.DocumentSymbolData, _threadingContext);
+            var documentSymbolUIItems = DocumentOutlineHelper.GetDocumentSymbolUIItems(
+                model.DocumentSymbolData,
+                _threadingContext
+            );
 
             // Switch to the threadpool to determine which node to select (if applicable).
             await TaskScheduler.Default;
 
-            var symbolToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(documentSymbolUIItems, model.OriginalSnapshot, caretPoint.Value);
+            var symbolToSelect = DocumentOutlineHelper.GetDocumentNodeToSelect(
+                documentSymbolUIItems,
+                model.OriginalSnapshot,
+                caretPoint.Value
+            );
 
             // Switch to the UI thread to update the view.
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
@@ -181,20 +223,29 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
             // Expand/collapse nodes based on the given Expansion Option.
             var expansion = expansionOption.Last();
             if (expansion is not ExpansionOption.NoChange && SymbolTree.ItemsSource is not null)
-                DocumentOutlineHelper.SetIsExpanded(documentSymbolUIItems, (IEnumerable<DocumentSymbolUIItem>)SymbolTree.ItemsSource, expansion);
+                DocumentOutlineHelper.SetIsExpanded(
+                    documentSymbolUIItems,
+                    (IEnumerable<DocumentSymbolUIItem>)SymbolTree.ItemsSource,
+                    expansion
+                );
 
             // Hightlight the selected node if it exists, otherwise unselect all nodes (required so that the view does not select a node by default).
             if (symbolToSelect is not null)
             {
                 // Expand all ancestors first to ensure the selected node will be visible.
-                DocumentOutlineHelper.ExpandAncestors(documentSymbolUIItems, symbolToSelect.RangeSpan);
+                DocumentOutlineHelper.ExpandAncestors(
+                    documentSymbolUIItems,
+                    symbolToSelect.RangeSpan
+                );
                 symbolToSelect.IsSelected = true;
             }
             else
             {
                 // On Document Outline Control initialization, SymbolTree.ItemsSource is null
                 if (SymbolTree.ItemsSource is not null)
-                    DocumentOutlineHelper.UnselectAll((IEnumerable<DocumentSymbolUIItem>)SymbolTree.ItemsSource);
+                    DocumentOutlineHelper.UnselectAll(
+                        (IEnumerable<DocumentSymbolUIItem>)SymbolTree.ItemsSource
+                    );
             }
 
             SymbolTree.ItemsSource = documentSymbolUIItems;

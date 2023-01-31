@@ -18,9 +18,7 @@ public class TimestampAttributeConvention : PropertyAttributeConventionBase<Time
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public TimestampAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after a property is added to the entity type with an attribute on the associated CLR property or field.
@@ -33,7 +31,8 @@ public class TimestampAttributeConvention : PropertyAttributeConventionBase<Time
         IConventionPropertyBuilder propertyBuilder,
         TimestampAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         propertyBuilder.ValueGenerated(ValueGenerated.OnAddOrUpdate, fromDataAnnotation: true);
         propertyBuilder.IsConcurrencyToken(true, fromDataAnnotation: true);

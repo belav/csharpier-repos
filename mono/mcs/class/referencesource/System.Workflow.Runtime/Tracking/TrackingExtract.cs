@@ -24,19 +24,27 @@ namespace System.Workflow.Runtime.Tracking
     /// Abstract base for classes that extract data
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class TrackingExtract
     {
         public abstract TrackingAnnotationCollection Annotations { get; }
         public abstract string Member { get; set; }
-        internal abstract void GetData(Activity activity, IServiceProvider provider, IList<TrackingDataItem> items);
+        internal abstract void GetData(
+            Activity activity,
+            IServiceProvider provider,
+            IList<TrackingDataItem> items
+        );
     }
 
     /// <summary>
     /// Used to extract data members from a workflow's code separation partial class.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowDataTrackingExtract : TrackingExtract
     {
         #region Private DataMembers
@@ -51,9 +59,8 @@ namespace System.Workflow.Runtime.Tracking
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public WorkflowDataTrackingExtract()
-        {
-        }
+        public WorkflowDataTrackingExtract() { }
+
         /// <summary>
         /// Construct with a Member list.
         /// </summary>
@@ -78,7 +85,11 @@ namespace System.Workflow.Runtime.Tracking
             get { return _annotations; }
         }
 
-        internal override void GetData(Activity activity, IServiceProvider provider, IList<TrackingDataItem> items)
+        internal override void GetData(
+            Activity activity,
+            IServiceProvider provider,
+            IList<TrackingDataItem> items
+        )
         {
             Activity root = ContextActivityUtils.RootContextActivity(activity);
 
@@ -99,11 +110,14 @@ namespace System.Workflow.Runtime.Tracking
 
         #endregion
     }
+
     /// <summary>
     /// Used to extract data members from an activity in a workflow instance.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDataTrackingExtract : TrackingExtract
     {
         #region Private DataMembers
@@ -118,9 +132,8 @@ namespace System.Workflow.Runtime.Tracking
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public ActivityDataTrackingExtract()
-        {
-        }
+        public ActivityDataTrackingExtract() { }
+
         /// <summary>
         /// Construct with a Member list.
         /// </summary>
@@ -145,9 +158,12 @@ namespace System.Workflow.Runtime.Tracking
             get { return _annotations; }
         }
 
-        internal override void GetData(Activity activity, IServiceProvider provider, IList<TrackingDataItem> items)
+        internal override void GetData(
+            Activity activity,
+            IServiceProvider provider,
+            IList<TrackingDataItem> items
+        )
         {
-
             if ((null == _name) || (0 == _name.Trim().Length))
             {
                 //

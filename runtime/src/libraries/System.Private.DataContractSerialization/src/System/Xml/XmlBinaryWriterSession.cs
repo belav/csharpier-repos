@@ -38,7 +38,9 @@ namespace System.Xml
                 if (key != -1)
                 {
                     // If the key is already set, then something is wrong
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.XmlKeyAlreadyExists));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.XmlKeyAlreadyExists)
+                    );
                 }
 
                 key = Add(value.Value);
@@ -98,7 +100,8 @@ namespace System.Xml
             return false;
         }
 
-        private sealed class PriorityDictionary<K, V> where K : class
+        private sealed class PriorityDictionary<K, V>
+            where K : class
         {
             private Dictionary<K, V>? _dictionary;
             private readonly Entry[] _list;

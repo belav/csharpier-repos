@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Adds support for SignOutAsync
 /// </summary>
-public abstract class SignOutAuthenticationHandler<TOptions> : AuthenticationHandler<TOptions>, IAuthenticationSignOutHandler
+public abstract class SignOutAuthenticationHandler<TOptions>
+    : AuthenticationHandler<TOptions>,
+        IAuthenticationSignOutHandler
     where TOptions : AuthenticationSchemeOptions, new()
 {
     /// <summary>
@@ -20,8 +22,13 @@ public abstract class SignOutAuthenticationHandler<TOptions> : AuthenticationHan
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
-    public SignOutAuthenticationHandler(IOptionsMonitor<TOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    { }
+    public SignOutAuthenticationHandler(
+        IOptionsMonitor<TOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc/>
     public virtual Task SignOutAsync(AuthenticationProperties? properties)

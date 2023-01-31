@@ -4,14 +4,12 @@
 
 unsafe public class C
 {
-	S* i;
+    S* i;
 }
 
 public struct S
 {
-	AC ac;
+    AC ac;
 }
 
-abstract class AC
-{
-}
+abstract class AC { }

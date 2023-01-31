@@ -15,7 +15,7 @@ class Test
     private const string RelativePath1Windows = @".\RelativeNative\..\DllImportPath_Relative";
     private const string RelativePath3Windows = @"..\DllImportPathTest\DllImportPath_Relative";
 
-    private const string RelativePath1Unix =  @"./RelativeNative/../libDllImportPath_Relative";
+    private const string RelativePath1Unix = @"./RelativeNative/../libDllImportPath_Relative";
     private const string RelativePath3Unix = @"../DllImportPathTest/libDllImportPath_Relative";
 
     private const string UnicodeFileName = "DllImportPath_Unicode\u2714";
@@ -124,13 +124,17 @@ class Test
         var info = new DirectoryInfo(currentDirectory);
         var subDirectory = info.CreateSubdirectory(PathEnvSubdirectoryName);
 
-        var file = info.EnumerateFiles("*DllImportPath_PathEnv*", SearchOption.TopDirectoryOnly).FirstOrDefault();
+        var file = info.EnumerateFiles("*DllImportPath_PathEnv*", SearchOption.TopDirectoryOnly)
+            .FirstOrDefault();
 
         var newFileLocation = Path.Combine(subDirectory.FullName, file.Name);
 
         file.CopyTo(Path.Combine(subDirectory.FullName, PathEnvFileName + file.Extension), true);
 
-        Environment.SetEnvironmentVariable("PATH", Environment.GetEnvironmentVariable("PATH") + $";{subDirectory.FullName}");
+        Environment.SetEnvironmentVariable(
+            "PATH",
+            Environment.GetEnvironmentVariable("PATH") + $";{subDirectory.FullName}"
+        );
     }
 
     static void TestNativeLibraryProbingOnPathEnv()
@@ -146,10 +150,12 @@ class Test
         var info = new DirectoryInfo(currentDirectory);
 
         var file = info.EnumerateFiles("*DllImportPath_Local*", SearchOption.TopDirectoryOnly)
-                        .FirstOrDefault(localFile =>
-                            localFile.Extension == ".dll"
-                            || localFile.Extension == ".so"
-                            || localFile.Extension == ".dylib");
+            .FirstOrDefault(
+                localFile =>
+                    localFile.Extension == ".dll"
+                    || localFile.Extension == ".so"
+                    || localFile.Extension == ".dylib"
+            );
 
         var unicodeFileLocation = file.FullName.Replace("DllImportPath_Local", UnicodeFileName);
 

@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
     [Trait(Traits.Feature, Traits.Features.BraceMatching)]
     public class CSharpBraceMatcherTests : AbstractBraceMatcherTests
     {
-        protected override TestWorkspace CreateWorkspaceFromCode(string code, ParseOptions options)
-            => TestWorkspace.CreateCSharp(code, options);
+        protected override TestWorkspace CreateWorkspaceFromCode(
+            string code,
+            ParseOptions options
+        ) => TestWorkspace.CreateCSharp(code, options);
 
         [Fact]
         public async Task TestEmptyFile()
@@ -390,8 +392,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString1()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""$${x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x[|}|], {y}""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""$${x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x[|}|], {y}""; }";
 
             await TestAsync(code, expected);
         }
@@ -399,8 +403,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString2()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{$$x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x[|}|], {y}""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{$$x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x[|}|], {y}""; }";
 
             await TestAsync(code, expected);
         }
@@ -408,8 +414,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString3()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x$$}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""[|{|]x}, {y}""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x$$}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""[|{|]x}, {y}""; }";
 
             await TestAsync(code, expected);
         }
@@ -417,8 +425,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString4()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}$$, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""[|{|]x}, {y}""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}$$, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""[|{|]x}, {y}""; }";
 
             await TestAsync(code, expected);
         }
@@ -426,8 +436,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString5()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, $${y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y[|}|]""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, $${y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y[|}|]""; }";
 
             await TestAsync(code, expected);
         }
@@ -435,8 +447,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString6()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {$$y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y[|}|]""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {$$y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y[|}|]""; }";
 
             await TestAsync(code, expected);
         }
@@ -444,8 +458,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString7()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y$$}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, [|{|]y}""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y$$}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, [|{|]y}""; }";
 
             await TestAsync(code, expected);
         }
@@ -453,8 +469,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString8()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y}$$""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, [|{|]y}""; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y}$$""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, [|{|]y}""; }";
 
             await TestAsync(code, expected);
         }
@@ -462,8 +480,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString9()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $$[||]$""{x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y}[|""|]; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $$[||]$""{x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y}[|""|]; }";
 
             await TestAsync(code, expected);
         }
@@ -471,8 +491,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString10()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $[||]$$""{x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y}[|""|]; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $[||]$$""{x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $""{x}, {y}[|""|]; }";
 
             await TestAsync(code, expected);
         }
@@ -480,8 +502,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString11()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $$[||]$@""{x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@""{x}, {y}[|""|]; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $$[||]$@""{x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@""{x}, {y}[|""|]; }";
 
             await TestAsync(code, expected);
         }
@@ -489,8 +513,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString12()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $[||]$$@""{x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@""{x}, {y}[|""|]; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $[||]$$@""{x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@""{x}, {y}[|""|]; }";
 
             await TestAsync(code, expected);
         }
@@ -498,8 +524,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [Fact]
         public async Task TestInterpolatedString13()
         {
-            var code = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@$$""{x}, {y}""; }";
-            var expected = @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@""{x}, {y}[|""|]; }";
+            var code =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@$$""{x}, {y}""; }";
+            var expected =
+                @"public class C { void M() { var x = ""Hello""; var y = ""World""; var s = $@""{x}, {y}[|""|]; }";
 
             await TestAsync(code, expected);
         }
@@ -625,13 +653,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BraceMatching
         [WpfFact]
         public async Task TestConditionalDirectiveWithSingleMatchingDirective()
         {
-            var code = @"
+            var code =
+                @"
 public class C 
 {
 #if$$ CHK 
 #endif
 }";
-            var expected = @"
+            var expected =
+                @"
 public class C 
 {
 #if$$ CHK 
@@ -645,14 +675,16 @@ public class C
         [WpfFact]
         public async Task TestConditionalDirectiveWithTwoMatchingDirectives()
         {
-            var code = @"
+            var code =
+                @"
 public class C 
 {
 #if$$ CHK 
 #else
 #endif
 }";
-            var expected = @"
+            var expected =
+                @"
 public class C 
 {
 #if$$ CHK 
@@ -667,7 +699,8 @@ public class C
         [WpfFact]
         public async Task TestConditionalDirectiveWithAllMatchingDirectives()
         {
-            var code = @"
+            var code =
+                @"
 public class C 
 {
 #if CHK 
@@ -675,7 +708,8 @@ public class C
 #else
 #endif$$
 }";
-            var expected = @"
+            var expected =
+                @"
 public class C 
 {
 [|#if|] CHK 
@@ -691,13 +725,15 @@ public class C
         [WpfFact]
         public async Task TestRegionDirective()
         {
-            var code = @"
+            var code =
+                @"
 public class C 
 {
 $$#region test
 #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class C 
 {
 #region test
@@ -711,7 +747,8 @@ public class C
         [WpfFact]
         public async Task TestInterleavedDirectivesInner()
         {
-            var code = @"
+            var code =
+                @"
 #define CHK
 public class C 
 {
@@ -726,7 +763,8 @@ $$#region test
 #endif
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 #define CHK
 public class C 
 {
@@ -749,7 +787,8 @@ public class C
         [WpfFact]
         public async Task TestInterleavedDirectivesOuter()
         {
-            var code = @"
+            var code =
+                @"
 #define CHK
 public class C 
 {
@@ -764,7 +803,8 @@ public class C
 #endif
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 #define CHK
 public class C 
 {
@@ -787,12 +827,14 @@ public class C
         [WpfFact]
         public async Task TestUnmatchedDirective1()
         {
-            var code = @"
+            var code =
+                @"
 public class C 
 {
 $$#region test
 }";
-            var expected = @"
+            var expected =
+                @"
 public class C 
 {
 #region test
@@ -805,12 +847,14 @@ public class C
         [WpfFact]
         public async Task TestUnmatchedDirective2()
         {
-            var code = @"
+            var code =
+                @"
 #d$$efine CHK
 public class C 
 {
 }";
-            var expected = @"
+            var expected =
+                @"
 #define CHK
 public class C 
 {
@@ -823,7 +867,8 @@ public class C
         [WpfFact]
         public async Task TestUnmatchedConditionalDirective()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -831,7 +876,8 @@ class Program
 
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -847,7 +893,8 @@ class Program
         [WpfFact]
         public async Task TestUnmatchedConditionalDirective2()
         {
-            var code = @"
+            var code =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -855,7 +902,8 @@ class Program
 
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 class Program
 {
     static void Main(string[] args)

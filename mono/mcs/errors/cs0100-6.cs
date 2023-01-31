@@ -3,5 +3,5 @@
 
 class C
 {
-	public extern C (object obj, object obj);
+    public extern C(object obj, object obj);
 }

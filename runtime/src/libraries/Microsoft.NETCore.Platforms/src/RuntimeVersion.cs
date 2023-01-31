@@ -5,11 +5,13 @@ using System;
 
 namespace Microsoft.NETCore.Platforms.BuildTasks
 {
-
     /// <summary>
     /// A Version class that also supports a single integer (major only)
     /// </summary>
-    public sealed class RuntimeVersion : IComparable, IComparable<RuntimeVersion>, IEquatable<RuntimeVersion>
+    public sealed class RuntimeVersion
+        : IComparable,
+            IComparable<RuntimeVersion>,
+            IEquatable<RuntimeVersion>
     {
         private string versionString;
         private Version version;
@@ -49,7 +51,10 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
                 return CompareTo(version);
             }
 
-            throw new ArgumentException($"Cannot compare {nameof(RuntimeVersion)} to object of type {obj.GetType()}.", nameof(obj));
+            throw new ArgumentException(
+                $"Cannot compare {nameof(RuntimeVersion)} to object of type {obj.GetType()}.",
+                nameof(obj)
+            );
         }
 
         public int CompareTo(RuntimeVersion other)
@@ -81,9 +86,11 @@ namespace Microsoft.NETCore.Platforms.BuildTasks
 
         public bool Equals(RuntimeVersion other)
         {
-            return object.ReferenceEquals(other, this) ||
-                (other != null &&
-                versionString.Equals(other.versionString, StringComparison.Ordinal));
+            return object.ReferenceEquals(other, this)
+                || (
+                    other != null
+                    && versionString.Equals(other.versionString, StringComparison.Ordinal)
+                );
         }
 
         public override bool Equals(object obj)

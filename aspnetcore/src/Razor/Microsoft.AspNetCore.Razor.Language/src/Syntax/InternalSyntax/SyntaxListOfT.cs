@@ -22,7 +22,11 @@ internal struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>>
     {
         get
         {
-            return (_node == null) ? 0 : _node.IsList ? _node.SlotCount : 1;
+            return (_node == null)
+                ? 0
+                : _node.IsList
+                    ? _node.SlotCount
+                    : 1;
         }
     }
 
@@ -47,7 +51,9 @@ internal struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>>
             }
             else
             {
-                throw new InvalidOperationException("This program location is thought to be unreachable.");
+                throw new InvalidOperationException(
+                    "This program location is thought to be unreachable."
+                );
             }
         }
     }
@@ -176,10 +182,7 @@ internal struct SyntaxList<TNode> : IEquatable<SyntaxList<TNode>>
 
         public TNode Current
         {
-            get
-            {
-                return _list[_index];
-            }
+            get { return _list[_index]; }
         }
     }
 }

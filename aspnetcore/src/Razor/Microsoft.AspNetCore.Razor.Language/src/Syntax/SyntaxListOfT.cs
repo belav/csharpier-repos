@@ -22,18 +22,14 @@ internal readonly struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<Sy
     /// </summary>
     /// <param name="node">The single element node.</param>
     public SyntaxList(TNode node)
-        : this((SyntaxNode)node)
-    {
-    }
+        : this((SyntaxNode)node) { }
 
     /// <summary>
     /// Creates a list of syntax nodes.
     /// </summary>
     /// <param name="nodes">A sequence of element nodes.</param>
     public SyntaxList(IEnumerable<TNode> nodes)
-        : this(CreateNode(nodes))
-    {
-    }
+        : this(CreateNode(nodes)) { }
 
     private static SyntaxNode CreateNode(IEnumerable<TNode> nodes)
     {
@@ -42,7 +38,10 @@ internal readonly struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<Sy
             return null;
         }
 
-        var builder = (nodes is ICollection<TNode> collection) ? new SyntaxListBuilder<TNode>(collection.Count) : SyntaxListBuilder<TNode>.Create();
+        var builder =
+            (nodes is ICollection<TNode> collection)
+                ? new SyntaxListBuilder<TNode>(collection.Count)
+                : SyntaxListBuilder<TNode>.Create();
 
         foreach (var node in nodes)
         {
@@ -59,10 +58,7 @@ internal readonly struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<Sy
     /// </summary>
     public int Count
     {
-        get
-        {
-            return Node == null ? 0 : (Node.IsList ? Node.SlotCount : 1);
-        }
+        get { return Node == null ? 0 : (Node.IsList ? Node.SlotCount : 1); }
     }
 
     /// <summary>
@@ -541,10 +537,7 @@ internal readonly struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<Sy
 
         public TNode Current
         {
-            get
-            {
-                return (TNode)_list.ItemInternal(_index);
-            }
+            get { return (TNode)_list.ItemInternal(_index); }
         }
 
         public void Reset()
@@ -579,22 +572,14 @@ internal readonly struct SyntaxList<TNode> : IReadOnlyList<TNode>, IEquatable<Sy
 
         public TNode Current
         {
-            get
-            {
-                return _e.Current;
-            }
+            get { return _e.Current; }
         }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return _e.Current;
-            }
+            get { return _e.Current; }
         }
 
         void IEnumerator.Reset()

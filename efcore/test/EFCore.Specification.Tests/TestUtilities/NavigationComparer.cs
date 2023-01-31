@@ -3,7 +3,9 @@
 
 namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
-public class NavigationComparer : IEqualityComparer<IReadOnlyNavigation>, IComparer<IReadOnlyNavigation>
+public class NavigationComparer
+    : IEqualityComparer<IReadOnlyNavigation>,
+        IComparer<IReadOnlyNavigation>
 {
     private readonly bool _compareAnnotations;
 
@@ -12,8 +14,8 @@ public class NavigationComparer : IEqualityComparer<IReadOnlyNavigation>, ICompa
         _compareAnnotations = compareAnnotations;
     }
 
-    public int Compare(IReadOnlyNavigation x, IReadOnlyNavigation y)
-        => StringComparer.Ordinal.Compare(x.Name, y.Name);
+    public int Compare(IReadOnlyNavigation x, IReadOnlyNavigation y) =>
+        StringComparer.Ordinal.Compare(x.Name, y.Name);
 
     public bool Equals(IReadOnlyNavigation x, IReadOnlyNavigation y)
     {
@@ -25,9 +27,12 @@ public class NavigationComparer : IEqualityComparer<IReadOnlyNavigation>, ICompa
         return y == null
             ? false
             : x.Name == y.Name
-            && (!_compareAnnotations || x.GetAnnotations().SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance));
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
     }
 
-    public int GetHashCode(IReadOnlyNavigation obj)
-        => obj.Name.GetHashCode();
+    public int GetHashCode(IReadOnlyNavigation obj) => obj.Name.GetHashCode();
 }

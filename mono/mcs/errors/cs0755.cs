@@ -4,9 +4,7 @@
 
 public static partial class C
 {
-	static partial void Foo (this string eType)
-	{
-	}
-	
-	static partial void Foo (string value);
+    static partial void Foo(this string eType) { }
+
+    static partial void Foo(string value);
 }

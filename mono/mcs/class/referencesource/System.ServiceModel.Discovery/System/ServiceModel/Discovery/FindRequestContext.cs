@@ -19,15 +19,12 @@ namespace System.ServiceModel.Discovery
             this.criteria = criteria;
         }
 
-        public FindCriteria Criteria 
+        public FindCriteria Criteria
         {
-            get
-            {
-                return this.criteria;
-            }
+            get { return this.criteria; }
         }
 
-        public void AddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint) 
+        public void AddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint)
         {
             if (matchingEndpoint == null)
             {
@@ -37,8 +34,6 @@ namespace System.ServiceModel.Discovery
             this.OnAddMatchingEndpoint(matchingEndpoint);
         }
 
-        protected virtual void OnAddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint)
-        {
-        }
+        protected virtual void OnAddMatchingEndpoint(EndpointDiscoveryMetadata matchingEndpoint) { }
     }
 }

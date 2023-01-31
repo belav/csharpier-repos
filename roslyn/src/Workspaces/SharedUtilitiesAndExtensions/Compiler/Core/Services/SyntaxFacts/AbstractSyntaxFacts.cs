@@ -25,18 +25,21 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 {
     internal abstract class AbstractSyntaxFacts
     {
-        private static readonly ObjectPool<Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>> s_stackPool
-            = SharedPools.Default<Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>>();
+        private static readonly ObjectPool<
+            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>
+        > s_stackPool = SharedPools.Default<
+            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)>
+        >();
 
         public abstract ISyntaxKinds SyntaxKinds { get; }
 
         // Matches the following:
         //
-        // (whitespace* newline)+ 
+        // (whitespace* newline)+
         private readonly Matcher<SyntaxTrivia> _oneOrMoreBlankLines;
 
         // Matches the following:
-        // 
+        //
         // (whitespace* (single-comment|multi-comment) whitespace* newline)+ OneOrMoreBlankLines
         private readonly Matcher<SyntaxTrivia> _bannerMatcher;
 
@@ -48,35 +51,50 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         protected AbstractSyntaxFacts()
         {
             var whitespace = Matcher.Repeat(
-                Matcher.Single<SyntaxTrivia>(IsWhitespaceTrivia, "\\b"));
+                Matcher.Single<SyntaxTrivia>(IsWhitespaceTrivia, "\\b")
+            );
             var endOfLine = Matcher.Single<SyntaxTrivia>(IsEndOfLineTrivia, "\\n");
             var singleBlankLine = Matcher.Sequence(whitespace, endOfLine);
 
             var shebangComment = Matcher.Single<SyntaxTrivia>(IsShebangDirectiveTrivia, "#!");
             var singleLineComment = Matcher.Single<SyntaxTrivia>(IsSingleLineCommentTrivia, "//");
             var multiLineComment = Matcher.Single<SyntaxTrivia>(IsMultiLineCommentTrivia, "/**/");
-            var singleLineDocumentationComment = Matcher.Single<SyntaxTrivia>(IsSingleLineDocCommentTrivia, "///");
-            var multiLineDocumentationComment = Matcher.Single<SyntaxTrivia>(IsMultiLineDocCommentTrivia, "/** */");
-            var anyCommentMatcher = Matcher.Choice(shebangComment, singleLineComment, multiLineComment, singleLineDocumentationComment, multiLineDocumentationComment);
+            var singleLineDocumentationComment = Matcher.Single<SyntaxTrivia>(
+                IsSingleLineDocCommentTrivia,
+                "///"
+            );
+            var multiLineDocumentationComment = Matcher.Single<SyntaxTrivia>(
+                IsMultiLineDocCommentTrivia,
+                "/** */"
+            );
+            var anyCommentMatcher = Matcher.Choice(
+                shebangComment,
+                singleLineComment,
+                multiLineComment,
+                singleLineDocumentationComment,
+                multiLineDocumentationComment
+            );
 
-            var commentLine = Matcher.Sequence(whitespace, anyCommentMatcher, whitespace, endOfLine);
+            var commentLine = Matcher.Sequence(
+                whitespace,
+                anyCommentMatcher,
+                whitespace,
+                endOfLine
+            );
 
             _oneOrMoreBlankLines = Matcher.OneOrMore(singleBlankLine);
-            _bannerMatcher =
-                Matcher.Sequence(
-                    Matcher.OneOrMore(commentLine),
-                    _oneOrMoreBlankLines);
-            _fileBannerMatcher =
-                Matcher.Sequence(
-                    Matcher.OneOrMore(commentLine),
-                    Matcher.Repeat(singleBlankLine));
+            _bannerMatcher = Matcher.Sequence(Matcher.OneOrMore(commentLine), _oneOrMoreBlankLines);
+            _fileBannerMatcher = Matcher.Sequence(
+                Matcher.OneOrMore(commentLine),
+                Matcher.Repeat(singleBlankLine)
+            );
         }
 
-        private bool IsWhitespaceTrivia(SyntaxTrivia trivia)
-            => SyntaxKinds.WhitespaceTrivia == trivia.RawKind;
+        private bool IsWhitespaceTrivia(SyntaxTrivia trivia) =>
+            SyntaxKinds.WhitespaceTrivia == trivia.RawKind;
 
-        private bool IsEndOfLineTrivia(SyntaxTrivia trivia)
-            => SyntaxKinds.EndOfLineTrivia == trivia.RawKind;
+        private bool IsEndOfLineTrivia(SyntaxTrivia trivia) =>
+            SyntaxKinds.EndOfLineTrivia == trivia.RawKind;
 
         public abstract bool IsSingleLineCommentTrivia(SyntaxTrivia trivia);
         public abstract bool IsMultiLineCommentTrivia(SyntaxTrivia trivia);
@@ -109,7 +127,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         private bool IsOnSingleLine(
-            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)> stack)
+            Stack<(SyntaxNodeOrToken nodeOrToken, bool leading, bool trailing)> stack
+        )
         {
             while (stack.Count > 0)
             {
@@ -118,7 +137,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 {
                     // If this token isn't on a single line, then the original node definitely
                     // isn't on a single line.
-                    if (!IsOnSingleLine(currentNodeOrToken.AsToken(), currentLeading, currentTrailing))
+                    if (
+                        !IsOnSingleLine(
+                            currentNodeOrToken.AsToken(),
+                            currentLeading,
+                            currentTrailing
+                        )
+                    )
                     {
                         return false;
                     }
@@ -160,15 +185,19 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         private bool IsOnSingleLine(SyntaxToken token, bool leading, bool trailing)
         {
             // If any of our trivia is not on a single line, then we're not on a single line.
-            if (!IsOnSingleLine(token.LeadingTrivia, leading) ||
-                !IsOnSingleLine(token.TrailingTrivia, trailing))
+            if (
+                !IsOnSingleLine(token.LeadingTrivia, leading)
+                || !IsOnSingleLine(token.TrailingTrivia, trailing)
+            )
             {
                 return false;
             }
 
             // Only string literals can span multiple lines.  Only need to check those.
-            if (this.SyntaxKinds.StringLiteralToken == token.RawKind ||
-                this.SyntaxKinds.InterpolatedStringTextToken == token.RawKind)
+            if (
+                this.SyntaxKinds.StringLiteralToken == token.RawKind
+                || this.SyntaxKinds.InterpolatedStringTextToken == token.RawKind
+            )
             {
                 // This allocated.  But we only do it in the string case. For all other tokens
                 // we don't need any allocations.
@@ -219,11 +248,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return true;
         }
 
-        private static bool IsOnSingleLine(string value)
-            => value.GetNumberOfLineBreaks() == 0;
+        private static bool IsOnSingleLine(string value) => value.GetNumberOfLineBreaks() == 0;
 
-        public ImmutableArray<SyntaxTrivia> GetLeadingBlankLines(SyntaxNode node)
-            => GetLeadingBlankLines<SyntaxNode>(node);
+        public ImmutableArray<SyntaxTrivia> GetLeadingBlankLines(SyntaxNode node) =>
+            GetLeadingBlankLines<SyntaxNode>(node);
 
         public ImmutableArray<SyntaxTrivia> GetLeadingBlankLines<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
@@ -239,7 +267,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         public TSyntaxNode GetNodeWithoutLeadingBlankLines<TSyntaxNode>(
-            TSyntaxNode node, out ImmutableArray<SyntaxTrivia> strippedTrivia)
+            TSyntaxNode node,
+            out ImmutableArray<SyntaxTrivia> strippedTrivia
+        )
             where TSyntaxNode : SyntaxNode
         {
             var leadingTriviaToKeep = new List<SyntaxTrivia>(node.GetLeadingTrivia());
@@ -252,7 +282,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return node.WithLeadingTrivia(leadingTriviaToKeep.Skip(index));
         }
 
-        public ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(TSyntaxNode node)
+        public ImmutableArray<SyntaxTrivia> GetLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
+            TSyntaxNode node
+        )
             where TSyntaxNode : SyntaxNode
         {
             GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out var leadingTrivia);
@@ -260,19 +292,22 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
-            TSyntaxNode node)
+            TSyntaxNode node
+        )
             where TSyntaxNode : SyntaxNode
         {
             return GetNodeWithoutLeadingBannerAndPreprocessorDirectives(node, out _);
         }
 
         public TSyntaxNode GetNodeWithoutLeadingBannerAndPreprocessorDirectives<TSyntaxNode>(
-            TSyntaxNode node, out ImmutableArray<SyntaxTrivia> strippedTrivia)
+            TSyntaxNode node,
+            out ImmutableArray<SyntaxTrivia> strippedTrivia
+        )
             where TSyntaxNode : SyntaxNode
         {
             var leadingTrivia = node.GetLeadingTrivia();
 
-            // Rules for stripping trivia: 
+            // Rules for stripping trivia:
             // 1) If there is a pp directive, then it (and all preceding trivia) *must* be stripped.
             //    This rule supersedes all other rules.
             // 2) If there is a doc comment, it cannot be stripped.  Even if there is a doc comment,
@@ -281,7 +316,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             // 3) Single line comments in a group (i.e. with no blank lines between them) belong to
             //    the node *iff* there is no blank line between it and the following trivia.
 
-            List<SyntaxTrivia> leadingTriviaToStrip, leadingTriviaToKeep;
+            List<SyntaxTrivia> leadingTriviaToStrip,
+                leadingTriviaToKeep;
 
             var ppIndex = -1;
             for (var i = leadingTrivia.Count - 1; i >= 0; i--)
@@ -310,11 +346,13 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             var index = 0;
 
             while (
-                _oneOrMoreBlankLines.TryMatch(leadingTriviaToKeep, ref index) ||
-                _bannerMatcher.TryMatch(leadingTriviaToKeep, ref index) ||
-                (node.FullSpan.Start == 0 && _fileBannerMatcher.TryMatch(leadingTriviaToKeep, ref index)))
-            {
-            }
+                _oneOrMoreBlankLines.TryMatch(leadingTriviaToKeep, ref index)
+                || _bannerMatcher.TryMatch(leadingTriviaToKeep, ref index)
+                || (
+                    node.FullSpan.Start == 0
+                    && _fileBannerMatcher.TryMatch(leadingTriviaToKeep, ref index)
+                )
+            ) { }
 
             leadingTriviaToStrip.AddRange(leadingTriviaToKeep.Take(index));
 
@@ -340,7 +378,9 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         }
 
         public bool ContainsInterleavedDirective(
-            ImmutableArray<SyntaxNode> nodes, CancellationToken cancellationToken)
+            ImmutableArray<SyntaxNode> nodes,
+            CancellationToken cancellationToken
+        )
         {
             if (nodes.Length > 0)
             {
@@ -360,11 +400,16 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return false;
         }
 
-        public bool ContainsInterleavedDirective(SyntaxNode node, CancellationToken cancellationToken)
-            => ContainsInterleavedDirective(node.Span, node, cancellationToken);
+        public bool ContainsInterleavedDirective(
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        ) => ContainsInterleavedDirective(node.Span, node, cancellationToken);
 
         public bool ContainsInterleavedDirective(
-            TextSpan span, SyntaxNode node, CancellationToken cancellationToken)
+            TextSpan span,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var token in node.DescendantTokens())
             {
@@ -377,10 +422,22 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return false;
         }
 
-        protected abstract bool ContainsInterleavedDirective(TextSpan span, SyntaxToken token, CancellationToken cancellationToken);
+        protected abstract bool ContainsInterleavedDirective(
+            TextSpan span,
+            SyntaxToken token,
+            CancellationToken cancellationToken
+        );
 
-        public string GetBannerText(SyntaxNode? documentationCommentTriviaSyntax, int bannerLength, CancellationToken cancellationToken)
-            => DocumentationCommentService.GetBannerText(documentationCommentTriviaSyntax, bannerLength, cancellationToken);
+        public string GetBannerText(
+            SyntaxNode? documentationCommentTriviaSyntax,
+            int bannerLength,
+            CancellationToken cancellationToken
+        ) =>
+            DocumentationCommentService.GetBannerText(
+                documentationCommentTriviaSyntax,
+                bannerLength,
+                cancellationToken
+            );
 
         protected abstract IDocumentationCommentService DocumentationCommentService { get; }
 
@@ -403,7 +460,7 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// </summary>
         public bool SpansPreprocessorDirective(IEnumerable<SyntaxToken> tokens)
         {
-            // we want to check all leading trivia of all tokens (except the 
+            // we want to check all leading trivia of all tokens (except the
             // first one), and all trailing trivia of all tokens (except the
             // last one).
 
@@ -424,8 +481,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 {
                     // check the leading trivia of this token, and the trailing trivia
                     // of the previous token.
-                    if (SpansPreprocessorDirective(token.LeadingTrivia) ||
-                        SpansPreprocessorDirective(previousToken.TrailingTrivia))
+                    if (
+                        SpansPreprocessorDirective(token.LeadingTrivia)
+                        || SpansPreprocessorDirective(previousToken.TrailingTrivia)
+                    )
                     {
                         return true;
                     }
@@ -437,25 +496,38 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             return false;
         }
 
-        private bool SpansPreprocessorDirective(SyntaxTriviaList list)
-            => list.Any(t => IsPreprocessorDirective(t));
+        private bool SpansPreprocessorDirective(SyntaxTriviaList list) =>
+            list.Any(t => IsPreprocessorDirective(t));
 
-        public bool IsOnHeader(SyntaxNode root, int position, SyntaxNode ownerOfHeader, SyntaxNodeOrToken lastTokenOrNodeOfHeader)
-            => IsOnHeader(root, position, ownerOfHeader, lastTokenOrNodeOfHeader, ImmutableArray<SyntaxNode>.Empty);
+        public bool IsOnHeader(
+            SyntaxNode root,
+            int position,
+            SyntaxNode ownerOfHeader,
+            SyntaxNodeOrToken lastTokenOrNodeOfHeader
+        ) =>
+            IsOnHeader(
+                root,
+                position,
+                ownerOfHeader,
+                lastTokenOrNodeOfHeader,
+                ImmutableArray<SyntaxNode>.Empty
+            );
 
         public bool IsOnHeader<THoleSyntax>(
             SyntaxNode root,
             int position,
             SyntaxNode ownerOfHeader,
             SyntaxNodeOrToken lastTokenOrNodeOfHeader,
-            ImmutableArray<THoleSyntax> holes)
+            ImmutableArray<THoleSyntax> holes
+        )
             where THoleSyntax : SyntaxNode
         {
             Debug.Assert(ownerOfHeader.FullSpan.Contains(lastTokenOrNodeOfHeader.Span));
 
             var headerSpan = TextSpan.FromBounds(
                 start: GetStartOfNodeExcludingAttributes(root, ownerOfHeader),
-                end: lastTokenOrNodeOfHeader.FullSpan.End);
+                end: lastTokenOrNodeOfHeader.FullSpan.End
+            );
 
             // Is in header check is inclusive, being on the end edge of an header still counts
             if (!headerSpan.IntersectsWith(position))
@@ -463,8 +535,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 return false;
             }
 
-            // Holes are exclusive: 
-            // To be consistent with other 'being on the edge' of Tokens/Nodes a position is 
+            // Holes are exclusive:
+            // To be consistent with other 'being on the edge' of Tokens/Nodes a position is
             // in a hole (not in a header) only if it's inside _inside_ a hole, not only on the edge.
             if (holes.Any(h => h.Span.Contains(position) && position > h.Span.Start))
             {
@@ -478,7 +550,8 @@ namespace Microsoft.CodeAnalysis.LanguageServices
         /// Tries to get an ancestor of a Token on current position or of Token directly to left:
         /// e.g.: tokenWithWantedAncestor[||]tokenWithoutWantedAncestor
         /// </summary>
-        protected TNode? TryGetAncestorForLocation<TNode>(SyntaxNode root, int position) where TNode : SyntaxNode
+        protected TNode? TryGetAncestorForLocation<TNode>(SyntaxNode root, int position)
+            where TNode : SyntaxNode
         {
             var tokenToRightOrIn = root.FindToken(position);
             var nodeToRightOrIn = tokenToRightOrIn.GetAncestor<TNode>();
@@ -488,7 +561,10 @@ namespace Microsoft.CodeAnalysis.LanguageServices
             }
 
             // not at the beginning of a Token -> no (different) token to the left
-            if (tokenToRightOrIn.FullSpan.Start != position && tokenToRightOrIn.RawKind != SyntaxKinds.EndOfFileToken)
+            if (
+                tokenToRightOrIn.FullSpan.Start != position
+                && tokenToRightOrIn.RawKind != SyntaxKinds.EndOfFileToken
+            )
             {
                 return null;
             }
@@ -514,16 +590,23 @@ namespace Microsoft.CodeAnalysis.LanguageServices
 
         public abstract bool IsParameterNameXmlElementSyntax(SyntaxNode node);
 
-        public abstract SyntaxList<SyntaxNode> GetContentFromDocumentationCommentTriviaSyntax(SyntaxTrivia trivia);
+        public abstract SyntaxList<SyntaxNode> GetContentFromDocumentationCommentTriviaSyntax(
+            SyntaxTrivia trivia
+        );
 
-        public bool HasIncompleteParentMember([NotNullWhen(true)] SyntaxNode? node)
-            => node?.Parent?.RawKind == SyntaxKinds.IncompleteMember;
+        public bool HasIncompleteParentMember([NotNullWhen(true)] SyntaxNode? node) =>
+            node?.Parent?.RawKind == SyntaxKinds.IncompleteMember;
 
         public abstract bool CanHaveAccessibility(SyntaxNode declaration);
 
         public abstract Accessibility GetAccessibility(SyntaxNode declaration);
 
-        public abstract void GetAccessibilityAndModifiers(SyntaxTokenList modifierList, out Accessibility accessibility, out DeclarationModifiers modifiers, out bool isDefault);
+        public abstract void GetAccessibilityAndModifiers(
+            SyntaxTokenList modifierList,
+            out Accessibility accessibility,
+            out DeclarationModifiers modifiers,
+            out bool isDefault
+        );
 
         public abstract SyntaxTokenList GetModifierTokens(SyntaxNode declaration);
 

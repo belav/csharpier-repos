@@ -3,13 +3,13 @@
 
 public class A
 {
-        protected class B {}
+    protected class B { }
 
-        public class C
+    public class C
+    {
+        protected class D
         {
-                protected class D
-                {
-                        public B b;
-                }
+            public B b;
         }
+    }
 }

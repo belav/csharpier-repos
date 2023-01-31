@@ -67,7 +67,12 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] {/* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void All_OneFalse_Longrunning(int count, int position)
         {
             All_OneFalse(count, position);
@@ -82,7 +87,12 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] {/* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void All_OneTrue_Longrunning(int count, int position)
         {
             All_OneTrue(count, position);
@@ -91,14 +101,35 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void All_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.All(x => { canceler(); return true; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.All(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
         }
 
         [Fact]
         public static void All_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.All(x => { canceler(); return true; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.All(x => { canceler(); return true; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.All(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.All(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
+            );
         }
 
         [Fact]
@@ -110,14 +141,28 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void All_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).All(x => { throw new DeliberateTestException(); }));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .All(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
+            );
         }
 
         [Fact]
         public static void All_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).All(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<bool>().All(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).All(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<bool>().All(null)
+            );
         }
     }
 }

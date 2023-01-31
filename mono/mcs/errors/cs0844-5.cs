@@ -3,13 +3,14 @@
 
 class C
 {
-	string s {
-		set {}
-	}
+    string s
+    {
+        set { }
+    }
 
-	public void Test ()
-	{
-		s = "x";
-		string s = "a";
-	}
+    public void Test()
+    {
+        s = "x";
+        string s = "a";
+    }
 }

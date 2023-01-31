@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.Emit
         private readonly DefinitionMap _definitionMap;
 
         /// <summary>
-        /// Contains all symbols explicitly updated/added to the source and 
-        /// their containing types and namespaces. 
+        /// Contains all symbols explicitly updated/added to the source and
+        /// their containing types and namespaces.
         /// </summary>
         private readonly IReadOnlyDictionary<ISymbol, SymbolChange> _changes;
 
@@ -41,7 +41,11 @@ namespace Microsoft.CodeAnalysis.Emit
 
         private readonly Func<ISymbol, bool> _isAddedSymbol;
 
-        protected SymbolChanges(DefinitionMap definitionMap, IEnumerable<SemanticEdit> edits, Func<ISymbol, bool> isAddedSymbol)
+        protected SymbolChanges(
+            DefinitionMap definitionMap,
+            IEnumerable<SemanticEdit> edits,
+            Func<ISymbol, bool> isAddedSymbol
+        )
         {
             _definitionMap = definitionMap;
             _isAddedSymbol = isAddedSymbol;
@@ -50,9 +54,15 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public DefinitionMap DefinitionMap => _definitionMap;
 
-        public ImmutableDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> GetAllDeletedMembers()
+        public ImmutableDictionary<
+            ISymbolInternal,
+            ImmutableArray<ISymbolInternal>
+        > GetAllDeletedMembers()
         {
-            var builder = ImmutableDictionary.CreateBuilder<ISymbolInternal, ImmutableArray<ISymbolInternal>>();
+            var builder = ImmutableDictionary.CreateBuilder<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            >();
 
             foreach (var (type, deletedMembers) in _deletedMembers)
             {
@@ -61,16 +71,25 @@ namespace Microsoft.CodeAnalysis.Emit
                     continue;
                 }
 
-                var internalSymbols = GetDeletedMemberInternalSymbols(deletedMembers, includeMethods: true, includeProperties: true, includeEvents: true);
+                var internalSymbols = GetDeletedMemberInternalSymbols(
+                    deletedMembers,
+                    includeMethods: true,
+                    includeProperties: true,
+                    includeEvents: true
+                );
 
                 builder.Add(typeSymbol, internalSymbols);
-
             }
 
             return builder.ToImmutable();
         }
 
-        private ImmutableArray<ISymbolInternal> GetDeletedMemberInternalSymbols(IDefinition containingType, bool includeMethods, bool includeProperties, bool includeEvents)
+        private ImmutableArray<ISymbolInternal> GetDeletedMemberInternalSymbols(
+            IDefinition containingType,
+            bool includeMethods,
+            bool includeProperties,
+            bool includeEvents
+        )
         {
             var containingSymbol = containingType.GetInternalSymbol()?.GetISymbol();
             if (containingSymbol is null)
@@ -83,10 +102,20 @@ namespace Microsoft.CodeAnalysis.Emit
                 return ImmutableArray<ISymbolInternal>.Empty;
             }
 
-            return GetDeletedMemberInternalSymbols(deleted, includeMethods, includeProperties, includeEvents);
+            return GetDeletedMemberInternalSymbols(
+                deleted,
+                includeMethods,
+                includeProperties,
+                includeEvents
+            );
         }
 
-        private ImmutableArray<ISymbolInternal> GetDeletedMemberInternalSymbols(ISet<ISymbol> deletedMembers, bool includeMethods, bool includeProperties, bool includeEvents)
+        private ImmutableArray<ISymbolInternal> GetDeletedMemberInternalSymbols(
+            ISet<ISymbol> deletedMembers,
+            bool includeMethods,
+            bool includeProperties,
+            bool includeEvents
+        )
         {
             var internalSymbols = ArrayBuilder<ISymbolInternal>.GetInstance();
 
@@ -94,9 +123,12 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 if (GetISymbolInternalOrNull(symbol) is { } internalSymbol)
                 {
-                    if (includeProperties &&
-                        symbol is IMethodSymbol { AssociatedSymbol: IPropertySymbol propertySymbol } &&
-                        (propertySymbol.GetMethod is null || propertySymbol.GetMethod == symbol))
+                    if (
+                        includeProperties
+                        && symbol
+                            is IMethodSymbol { AssociatedSymbol: IPropertySymbol propertySymbol }
+                        && (propertySymbol.GetMethod is null || propertySymbol.GetMethod == symbol)
+                    )
                     {
                         var internalPropertySymbol = GetISymbolInternalOrNull(propertySymbol);
                         if (internalPropertySymbol is not null)
@@ -105,9 +137,11 @@ namespace Microsoft.CodeAnalysis.Emit
                         }
                     }
 
-                    if (includeEvents &&
-                        symbol is IMethodSymbol { AssociatedSymbol: IEventSymbol eventSymbol } &&
-                        eventSymbol.AddMethod == symbol)
+                    if (
+                        includeEvents
+                        && symbol is IMethodSymbol { AssociatedSymbol: IEventSymbol eventSymbol }
+                        && eventSymbol.AddMethod == symbol
+                    )
                     {
                         var internalEventSymbol = GetISymbolInternalOrNull(eventSymbol);
                         if (internalEventSymbol is not null)
@@ -116,8 +150,7 @@ namespace Microsoft.CodeAnalysis.Emit
                         }
                     }
 
-                    if (includeMethods &&
-                        symbol is IMethodSymbol)
+                    if (includeMethods && symbol is IMethodSymbol)
                     {
                         internalSymbols.Add(internalSymbol);
                     }
@@ -127,17 +160,33 @@ namespace Microsoft.CodeAnalysis.Emit
             return internalSymbols.ToImmutableAndFree();
         }
 
-        public ImmutableArray<ISymbolInternal> GetDeletedMethods(IDefinition containingType)
-            => GetDeletedMemberInternalSymbols(containingType, includeMethods: true, includeProperties: false, includeEvents: false);
+        public ImmutableArray<ISymbolInternal> GetDeletedMethods(IDefinition containingType) =>
+            GetDeletedMemberInternalSymbols(
+                containingType,
+                includeMethods: true,
+                includeProperties: false,
+                includeEvents: false
+            );
 
-        public ImmutableArray<ISymbolInternal> GetDeletedProperties(IDefinition containingType)
-            => GetDeletedMemberInternalSymbols(containingType, includeMethods: false, includeProperties: true, includeEvents: false);
+        public ImmutableArray<ISymbolInternal> GetDeletedProperties(IDefinition containingType) =>
+            GetDeletedMemberInternalSymbols(
+                containingType,
+                includeMethods: false,
+                includeProperties: true,
+                includeEvents: false
+            );
 
-        public ImmutableArray<ISymbolInternal> GetDeletedEvents(IDefinition containingType)
-            => GetDeletedMemberInternalSymbols(containingType, includeMethods: false, includeProperties: false, includeEvents: true);
+        public ImmutableArray<ISymbolInternal> GetDeletedEvents(IDefinition containingType) =>
+            GetDeletedMemberInternalSymbols(
+                containingType,
+                includeMethods: false,
+                includeProperties: false,
+                includeEvents: true
+            );
 
-        public bool IsReplaced(IDefinition definition, bool checkEnclosingTypes = false)
-            => definition.GetInternalSymbol() is { } internalSymbol && IsReplaced(internalSymbol.GetISymbol(), checkEnclosingTypes);
+        public bool IsReplaced(IDefinition definition, bool checkEnclosingTypes = false) =>
+            definition.GetInternalSymbol() is { } internalSymbol
+            && IsReplaced(internalSymbol.GetISymbol(), checkEnclosingTypes);
 
         public bool IsReplaced(ISymbol symbol, bool checkEnclosingTypes = false)
         {
@@ -162,7 +211,7 @@ namespace Microsoft.CodeAnalysis.Emit
         }
 
         /// <summary>
-        /// True if the symbol is a source symbol added during EnC session. 
+        /// True if the symbol is a source symbol added during EnC session.
         /// The symbol may be declared in any source compilation in the current solution.
         /// </summary>
         public bool IsAdded(ISymbol symbol)
@@ -199,8 +248,7 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
 
                 current = current.ContainingType;
-            }
-            while (current is not null);
+            } while (current is not null);
 
             return true;
         }
@@ -213,7 +261,9 @@ namespace Microsoft.CodeAnalysis.Emit
             {
                 RoslynDebug.Assert(synthesizedSymbol.Method != null);
 
-                var generatorChange = GetChange((IDefinition)synthesizedSymbol.Method.GetCciAdapter());
+                var generatorChange = GetChange(
+                    (IDefinition)synthesizedSymbol.Method.GetCciAdapter()
+                );
                 switch (generatorChange)
                 {
                     case SymbolChange.Updated:
@@ -235,7 +285,7 @@ namespace Microsoft.CodeAnalysis.Emit
 
                         // The existing symbol should be reused when the generator is updated,
                         // not updated since it's form doesn't depend on the content of the generator.
-                        // For example, when an iterator method changes all methods that implement IEnumerable 
+                        // For example, when an iterator method changes all methods that implement IEnumerable
                         // but MoveNext can be reused as they are.
                         if (!synthesizedSymbol.HasMethodBodyDependency)
                         {
@@ -350,24 +400,41 @@ namespace Microsoft.CodeAnalysis.Emit
                     {
                         // If the namespace did not exist in the previous generation, it was added.
                         // Otherwise the namespace may contain changes.
-                        return _definitionMap.NamespaceExists((INamespace)internalSymbol.GetCciAdapter()) ? SymbolChange.ContainsChanges : SymbolChange.Added;
+                        return _definitionMap.NamespaceExists(
+                            (INamespace)internalSymbol.GetCciAdapter()
+                        )
+                            ? SymbolChange.ContainsChanges
+                            : SymbolChange.Added;
                     }
 
                     // If the definition did not exist in the previous generation, it was added.
-                    return DefinitionExistsInPreviousGeneration(internalSymbol) ? SymbolChange.None : SymbolChange.Added;
+                    return DefinitionExistsInPreviousGeneration(internalSymbol)
+                        ? SymbolChange.None
+                        : SymbolChange.Added;
 
                 default:
                     throw ExceptionUtilities.UnexpectedValue(containerChange);
             }
         }
 
-        public SymbolChange GetChangeForPossibleReAddedMember(ITypeDefinitionMember item, Func<ITypeDefinitionMember, bool> definitionExistsInAnyPreviousGeneration)
+        public SymbolChange GetChangeForPossibleReAddedMember(
+            ITypeDefinitionMember item,
+            Func<ITypeDefinitionMember, bool> definitionExistsInAnyPreviousGeneration
+        )
         {
             var change = GetChange(item);
 
-            return fixChangeIfMemberIsReAdded(item, change, definitionExistsInAnyPreviousGeneration);
+            return fixChangeIfMemberIsReAdded(
+                item,
+                change,
+                definitionExistsInAnyPreviousGeneration
+            );
 
-            SymbolChange fixChangeIfMemberIsReAdded(ITypeDefinitionMember item, SymbolChange change, Func<ITypeDefinitionMember, bool> definitionExistsInAnyPreviousGeneration)
+            SymbolChange fixChangeIfMemberIsReAdded(
+                ITypeDefinitionMember item,
+                SymbolChange change,
+                Func<ITypeDefinitionMember, bool> definitionExistsInAnyPreviousGeneration
+            )
             {
                 // If this is a field that is being added, but it's part of a property or event that has been deleted
                 // and is now being re-added, we don't want to add the field twice, so we ignore the change.
@@ -375,11 +442,18 @@ namespace Microsoft.CodeAnalysis.Emit
                 // we don't need to update it at all.
                 // This also makes sure to check that the field itself is being re-added, because it could be
                 // a property that is being re-added as an auto-prop, when it wasn't one before, for example.
-                if (item is IFieldDefinition fieldDefinition &&
-                    GetContainingDefinitionForBackingField(fieldDefinition) is ITypeDefinitionMember containingDef &&
-                    GetChange(containingDef) == SymbolChange.Added &&
-                    definitionExistsInAnyPreviousGeneration(item) &&
-                    fixChangeIfMemberIsReAdded(containingDef, SymbolChange.Added, definitionExistsInAnyPreviousGeneration) == SymbolChange.Updated)
+                if (
+                    item is IFieldDefinition fieldDefinition
+                    && GetContainingDefinitionForBackingField(fieldDefinition)
+                        is ITypeDefinitionMember containingDef
+                    && GetChange(containingDef) == SymbolChange.Added
+                    && definitionExistsInAnyPreviousGeneration(item)
+                    && fixChangeIfMemberIsReAdded(
+                        containingDef,
+                        SymbolChange.Added,
+                        definitionExistsInAnyPreviousGeneration
+                    ) == SymbolChange.Updated
+                )
                 {
                     return SymbolChange.None;
                 }
@@ -388,9 +462,11 @@ namespace Microsoft.CodeAnalysis.Emit
                 // as an update. This supercedes the other checks for edit types etc. because a method could be
                 // deleted in a generation, and then "added" in a subsequent one, but that is an update
                 // even if the previous generation doesn't know about it.
-                if (change == SymbolChange.Added &&
-                    !IsReplaced(item.ContainingTypeDefinition, checkEnclosingTypes: true) &&
-                    definitionExistsInAnyPreviousGeneration(item))
+                if (
+                    change == SymbolChange.Added
+                    && !IsReplaced(item.ContainingTypeDefinition, checkEnclosingTypes: true)
+                    && definitionExistsInAnyPreviousGeneration(item)
+                )
                 {
                     return SymbolChange.Updated;
                 }
@@ -401,11 +477,15 @@ namespace Microsoft.CodeAnalysis.Emit
 
         protected abstract ISymbolInternal? GetISymbolInternalOrNull(ISymbol symbol);
 
-        public IEnumerable<INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(EmitContext context)
+        public IEnumerable<INamespaceTypeDefinition> GetTopLevelSourceTypeDefinitions(
+            EmitContext context
+        )
         {
             foreach (var symbol in _changes.Keys)
             {
-                var namespaceTypeDef = (GetISymbolInternalOrNull(symbol)?.GetCciAdapter() as ITypeDefinition)?.AsNamespaceTypeDefinition(context);
+                var namespaceTypeDef = (
+                    GetISymbolInternalOrNull(symbol)?.GetCciAdapter() as ITypeDefinition
+                )?.AsNamespaceTypeDefinition(context);
                 if (namespaceTypeDef != null)
                 {
                     yield return namespaceTypeDef;
@@ -416,11 +496,16 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <summary>
         /// Calculate the set of changes up to top-level types. The result
         /// will be used as a filter when traversing the module.
-        /// 
-        /// Note that these changes only include user-defined source symbols, not synthesized symbols since those will be 
+        ///
+        /// Note that these changes only include user-defined source symbols, not synthesized symbols since those will be
         /// generated during lowering of the changed user-defined symbols.
         /// </summary>
-        private static void CalculateChanges(IEnumerable<SemanticEdit> edits, out IReadOnlyDictionary<ISymbol, SymbolChange> changes, out ISet<ISymbol> replaceSymbols, out IReadOnlyDictionary<ISymbol, ISet<ISymbol>> deletedMembers)
+        private static void CalculateChanges(
+            IEnumerable<SemanticEdit> edits,
+            out IReadOnlyDictionary<ISymbol, SymbolChange> changes,
+            out ISet<ISymbol> replaceSymbols,
+            out IReadOnlyDictionary<ISymbol, ISet<ISymbol>> deletedMembers
+        )
         {
             var changesBuilder = new Dictionary<ISymbol, SymbolChange>();
             HashSet<ISymbol>? lazyReplaceSymbolsBuilder = null;
@@ -449,11 +534,19 @@ namespace Microsoft.CodeAnalysis.Emit
                     case SemanticEditKind.Delete:
                         // We allow method deletions only at the moment.
                         // For deletions NewSymbol is actually containing symbol
-                        if (edit.OldSymbol is IMethodSymbol && edit.NewSymbol is { } newContainingSymbol)
+                        if (
+                            edit.OldSymbol is IMethodSymbol
+                            && edit.NewSymbol is { } newContainingSymbol
+                        )
                         {
                             Debug.Assert(edit.OldSymbol != null);
                             lazyDeletedMembersBuilder ??= new();
-                            if (!lazyDeletedMembersBuilder.TryGetValue(newContainingSymbol, out var set))
+                            if (
+                                !lazyDeletedMembersBuilder.TryGetValue(
+                                    newContainingSymbol,
+                                    out var set
+                                )
+                            )
                             {
                                 set = new HashSet<ISymbol>();
                                 lazyDeletedMembersBuilder.Add(newContainingSymbol, set);
@@ -463,8 +556,14 @@ namespace Microsoft.CodeAnalysis.Emit
                             // deleted, from the new compilation, in case the deletion is the only change.
                             if (!changesBuilder.ContainsKey(newContainingSymbol))
                             {
-                                changesBuilder.Add(newContainingSymbol, SymbolChange.ContainsChanges);
-                                AddContainingTypesAndNamespaces(changesBuilder, newContainingSymbol);
+                                changesBuilder.Add(
+                                    newContainingSymbol,
+                                    SymbolChange.ContainsChanges
+                                );
+                                AddContainingTypesAndNamespaces(
+                                    changesBuilder,
+                                    newContainingSymbol
+                                );
                             }
                         }
                         continue;
@@ -484,7 +583,10 @@ namespace Microsoft.CodeAnalysis.Emit
 
                     // Partial methods should be implementations, not definitions.
                     Debug.Assert(method.PartialImplementationPart == null);
-                    Debug.Assert((edit.OldSymbol == null) || (((IMethodSymbol)edit.OldSymbol).PartialImplementationPart == null));
+                    Debug.Assert(
+                        (edit.OldSymbol == null)
+                            || (((IMethodSymbol)edit.OldSymbol).PartialImplementationPart == null)
+                    );
 
                     var definitionPart = method.PartialDefinitionPart;
                     if (definitionPart != null)
@@ -498,11 +600,17 @@ namespace Microsoft.CodeAnalysis.Emit
             }
 
             changes = changesBuilder;
-            replaceSymbols = lazyReplaceSymbolsBuilder ?? SpecializedCollections.EmptySet<ISymbol>();
-            deletedMembers = lazyDeletedMembersBuilder ?? SpecializedCollections.EmptyReadOnlyDictionary<ISymbol, ISet<ISymbol>>();
+            replaceSymbols =
+                lazyReplaceSymbolsBuilder ?? SpecializedCollections.EmptySet<ISymbol>();
+            deletedMembers =
+                lazyDeletedMembersBuilder
+                ?? SpecializedCollections.EmptyReadOnlyDictionary<ISymbol, ISet<ISymbol>>();
         }
 
-        private static void AddContainingTypesAndNamespaces(Dictionary<ISymbol, SymbolChange> changes, ISymbol symbol)
+        private static void AddContainingTypesAndNamespaces(
+            Dictionary<ISymbol, SymbolChange> changes,
+            ISymbol symbol
+        )
         {
             while (true)
             {
@@ -512,8 +620,9 @@ namespace Microsoft.CodeAnalysis.Emit
                     return;
                 }
 
-                var change = containingSymbol.Kind is SymbolKind.Property or SymbolKind.Event ?
-                    SymbolChange.Updated : SymbolChange.ContainsChanges;
+                var change = containingSymbol.Kind is SymbolKind.Property or SymbolKind.Event
+                    ? SymbolChange.Updated
+                    : SymbolChange.ContainsChanges;
 
                 changes.Add(containingSymbol, change);
                 symbol = containingSymbol;
@@ -560,6 +669,7 @@ namespace Microsoft.CodeAnalysis.Emit
             switch (symbol.Kind)
             {
                 case SymbolKind.Field:
+
                     {
                         var associated = ((IFieldSymbol)symbol).AssociatedSymbol;
                         if (associated != null)
@@ -570,6 +680,7 @@ namespace Microsoft.CodeAnalysis.Emit
                     break;
 
                 case SymbolKind.Method:
+
                     {
                         var associated = ((IMethodSymbol)symbol).AssociatedSymbol;
                         if (associated != null)
@@ -583,7 +694,9 @@ namespace Microsoft.CodeAnalysis.Emit
             return null;
         }
 
-        internal IDefinition? GetContainingDefinitionForBackingField(IFieldDefinition fieldDefinition)
+        internal IDefinition? GetContainingDefinitionForBackingField(
+            IFieldDefinition fieldDefinition
+        )
         {
             var field = fieldDefinition.GetInternalSymbol()?.GetISymbol();
             if (field is null)

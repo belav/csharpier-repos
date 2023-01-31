@@ -36,24 +36,33 @@ namespace Microsoft.CodeAnalysis.Options
         }
 
         public Option(string feature, string name, T defaultValue)
-            : this(feature ?? throw new ArgumentNullException(nameof(feature)),
-                   name ?? throw new ArgumentNullException(nameof(name)),
-                   OptionGroup.Default,
-                   defaultValue,
-                   storageLocations: ImmutableArray<OptionStorageLocation>.Empty,
-                   storageMapping: null,
-                   isEditorConfigOption: false)
-        {
-        }
+            : this(
+                feature ?? throw new ArgumentNullException(nameof(feature)),
+                name ?? throw new ArgumentNullException(nameof(name)),
+                OptionGroup.Default,
+                defaultValue,
+                storageLocations: ImmutableArray<OptionStorageLocation>.Empty,
+                storageMapping: null,
+                isEditorConfigOption: false
+            ) { }
 
-        public Option(string feature, string name, T defaultValue, params OptionStorageLocation[] storageLocations)
-            : this(feature ?? throw new ArgumentNullException(nameof(feature)),
-                   name ?? throw new ArgumentNullException(nameof(name)),
-                   OptionGroup.Default,
-                   defaultValue,
-                   PublicContract.RequireNonNullItems(storageLocations, nameof(storageLocations)).ToImmutableArray(),
-                   storageMapping: null,
-                   isEditorConfigOption: false)
+        public Option(
+            string feature,
+            string name,
+            T defaultValue,
+            params OptionStorageLocation[] storageLocations
+        )
+            : this(
+                feature ?? throw new ArgumentNullException(nameof(feature)),
+                name ?? throw new ArgumentNullException(nameof(name)),
+                OptionGroup.Default,
+                defaultValue,
+                PublicContract
+                    .RequireNonNullItems(storageLocations, nameof(storageLocations))
+                    .ToImmutableArray(),
+                storageMapping: null,
+                isEditorConfigOption: false
+            )
         {
             // should not be used internally to create options
             Debug.Assert(storageLocations.All(l => l is not IEditorConfigValueSerializer));
@@ -66,12 +75,28 @@ namespace Microsoft.CodeAnalysis.Options
             T defaultValue,
             ImmutableArray<OptionStorageLocation> storageLocations,
             OptionStorageMapping? storageMapping,
-            bool isEditorConfigOption)
-            : this(new OptionDefinition<T>(defaultValue, EditorConfigValueSerializer<T>.Unsupported, group, feature + "_" + name, storageMapping, isEditorConfigOption), feature, name, storageLocations)
-        {
-        }
+            bool isEditorConfigOption
+        )
+            : this(
+                new OptionDefinition<T>(
+                    defaultValue,
+                    EditorConfigValueSerializer<T>.Unsupported,
+                    group,
+                    feature + "_" + name,
+                    storageMapping,
+                    isEditorConfigOption
+                ),
+                feature,
+                name,
+                storageLocations
+            ) { }
 
-        internal Option(OptionDefinition optionDefinition, string feature, string name, ImmutableArray<OptionStorageLocation> storageLocations)
+        internal Option(
+            OptionDefinition optionDefinition,
+            string feature,
+            string name,
+            ImmutableArray<OptionStorageLocation> storageLocations
+        )
         {
             Feature = feature;
             Name = name;
@@ -105,7 +130,6 @@ namespace Microsoft.CodeAnalysis.Options
             return other is not null && this.PublicOptionDefinitionEquals(other);
         }
 
-        public static implicit operator OptionKey(Option<T> option)
-            => new(option);
+        public static implicit operator OptionKey(Option<T> option) => new(option);
     }
 }

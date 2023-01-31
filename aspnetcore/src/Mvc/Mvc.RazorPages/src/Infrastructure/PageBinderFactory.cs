@@ -7,14 +7,19 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure;
 
 internal static class PageBinderFactory
 {
-    internal static readonly Func<PageContext, object, Task> NullPropertyBinder = (context, arguments) => Task.CompletedTask;
-    internal static readonly PageHandlerBinderDelegate NullHandlerBinder = (context, arguments) => Task.CompletedTask;
+    internal static readonly Func<PageContext, object, Task> NullPropertyBinder = (
+        context,
+        arguments
+    ) => Task.CompletedTask;
+    internal static readonly PageHandlerBinderDelegate NullHandlerBinder = (context, arguments) =>
+        Task.CompletedTask;
 
     public static Func<PageContext, object, Task> CreatePropertyBinder(
         ParameterBinder parameterBinder,
         IModelMetadataProvider modelMetadataProvider,
         IModelBinderFactory modelBinderFactory,
-        CompiledPageActionDescriptor actionDescriptor)
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         if (parameterBinder == null)
         {
@@ -38,12 +43,14 @@ internal static class PageBinderFactory
         {
             var property = properties[i];
             var metadata = modelMetadataProvider.GetMetadataForProperty(handlerType, property.Name);
-            var binder = modelBinderFactory.CreateBinder(new ModelBinderFactoryContext
-            {
-                BindingInfo = property.BindingInfo,
-                Metadata = metadata,
-                CacheToken = property,
-            });
+            var binder = modelBinderFactory.CreateBinder(
+                new ModelBinderFactoryContext
+                {
+                    BindingInfo = property.BindingInfo,
+                    Metadata = metadata,
+                    CacheToken = property,
+                }
+            );
 
             propertyBindingInfo[i] = new BinderItem(binder, metadata);
         }
@@ -52,7 +59,10 @@ internal static class PageBinderFactory
 
         async Task Bind(PageContext pageContext, object instance)
         {
-            var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(pageContext, pageContext.ValueProviderFactories);
+            var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+                pageContext,
+                pageContext.ValueProviderFactories
+            );
             if (!success)
             {
                 return;
@@ -70,13 +80,14 @@ internal static class PageBinderFactory
                 }
 
                 var result = await parameterBinder.BindModelAsync(
-                   pageContext,
-                   bindingInfo.ModelBinder,
-                   valueProvider!,
-                   property,
-                   modelMetadata,
-                   value: null,
-                   container: instance);
+                    pageContext,
+                    bindingInfo.ModelBinder,
+                    valueProvider!,
+                    property,
+                    modelMetadata,
+                    value: null,
+                    container: instance
+                );
 
                 if (result.IsModelSet)
                 {
@@ -91,7 +102,8 @@ internal static class PageBinderFactory
         IModelMetadataProvider modelMetadataProvider,
         IModelBinderFactory modelBinderFactory,
         CompiledPageActionDescriptor actionDescriptor,
-        HandlerMethodDescriptor handler)
+        HandlerMethodDescriptor handler
+    )
     {
         if (handler.Parameters == null || handler.Parameters.Count == 0)
         {
@@ -108,7 +120,9 @@ internal static class PageBinderFactory
             {
                 // The default model metadata provider derives from ModelMetadataProvider
                 // and can therefore supply information about attributes applied to parameters.
-                metadata = modelMetadataProviderBase.GetMetadataForParameter(parameter.ParameterInfo);
+                metadata = modelMetadataProviderBase.GetMetadataForParameter(
+                    parameter.ParameterInfo
+                );
             }
             else
             {
@@ -119,12 +133,14 @@ internal static class PageBinderFactory
                 metadata = modelMetadataProvider.GetMetadataForType(parameter.ParameterType);
             }
 
-            var binder = modelBinderFactory.CreateBinder(new ModelBinderFactoryContext
-            {
-                BindingInfo = parameter.BindingInfo,
-                Metadata = metadata,
-                CacheToken = parameter,
-            });
+            var binder = modelBinderFactory.CreateBinder(
+                new ModelBinderFactoryContext
+                {
+                    BindingInfo = parameter.BindingInfo,
+                    Metadata = metadata,
+                    CacheToken = parameter,
+                }
+            );
 
             parameterBindingInfo[i] = new BinderItem(binder, metadata);
         }
@@ -133,7 +149,10 @@ internal static class PageBinderFactory
 
         async Task Bind(PageContext pageContext, IDictionary<string, object?> arguments)
         {
-            var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(pageContext, pageContext.ValueProviderFactories);
+            var (success, valueProvider) = await CompositeValueProvider.TryCreateAsync(
+                pageContext,
+                pageContext.ValueProviderFactories
+            );
             if (!success)
             {
                 return;
@@ -157,7 +176,8 @@ internal static class PageBinderFactory
                     parameter,
                     modelMetadata,
                     value: null,
-                    container: null); // Parameters do not have containers.
+                    container: null
+                ); // Parameters do not have containers.
 
                 if (result.IsModelSet)
                 {

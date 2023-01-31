@@ -24,7 +24,5 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// Cascade to other ends
         /// </summary>
         Cascade,
-
     }
 }
-

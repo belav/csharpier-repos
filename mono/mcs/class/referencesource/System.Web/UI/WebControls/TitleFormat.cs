@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="TitleFormat.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
-    ///    <para> Specifies the name format of the visible 
+    ///    <para> Specifies the name format of the visible
     ///       month for the <see cref='System.Web.UI.WebControls.Calendar'/>
     ///       control.</para>
     /// </devdoc>
-    public enum TitleFormat {
-
+    public enum TitleFormat
+    {
         /// <devdoc>
         ///    <para>The name format of the visible month contains the
         ///       month but not the year. For example, January.</para>

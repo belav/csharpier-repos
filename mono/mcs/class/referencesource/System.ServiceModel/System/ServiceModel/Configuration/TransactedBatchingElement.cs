@@ -35,9 +35,5 @@ namespace System.ServiceModel.Configuration
         {
             get { return typeof(TransactedBatchingBehavior); }
         }
-
     }
 }
-
-
-

@@ -20,7 +20,10 @@ internal readonly struct CookedUrl
     {
         if (_nativeCookedUrl.pFullUrl != null && _nativeCookedUrl.FullUrlLength > 0)
         {
-            return Marshal.PtrToStringUni((IntPtr)_nativeCookedUrl.pFullUrl, _nativeCookedUrl.FullUrlLength / 2);
+            return Marshal.PtrToStringUni(
+                (IntPtr)_nativeCookedUrl.pFullUrl,
+                _nativeCookedUrl.FullUrlLength / 2
+            );
         }
         return null;
     }
@@ -29,7 +32,10 @@ internal readonly struct CookedUrl
     {
         if (_nativeCookedUrl.pHost != null && _nativeCookedUrl.HostLength > 0)
         {
-            return Marshal.PtrToStringUni((IntPtr)_nativeCookedUrl.pHost, _nativeCookedUrl.HostLength / 2);
+            return Marshal.PtrToStringUni(
+                (IntPtr)_nativeCookedUrl.pHost,
+                _nativeCookedUrl.HostLength / 2
+            );
         }
         return null;
     }
@@ -38,7 +44,10 @@ internal readonly struct CookedUrl
     {
         if (_nativeCookedUrl.pAbsPath != null && _nativeCookedUrl.AbsPathLength > 0)
         {
-            return Marshal.PtrToStringUni((IntPtr)_nativeCookedUrl.pAbsPath, _nativeCookedUrl.AbsPathLength / 2);
+            return Marshal.PtrToStringUni(
+                (IntPtr)_nativeCookedUrl.pAbsPath,
+                _nativeCookedUrl.AbsPathLength / 2
+            );
         }
         return null;
     }
@@ -47,7 +56,10 @@ internal readonly struct CookedUrl
     {
         if (_nativeCookedUrl.pQueryString != null && _nativeCookedUrl.QueryStringLength > 0)
         {
-            return Marshal.PtrToStringUni((IntPtr)_nativeCookedUrl.pQueryString, _nativeCookedUrl.QueryStringLength / 2);
+            return Marshal.PtrToStringUni(
+                (IntPtr)_nativeCookedUrl.pQueryString,
+                _nativeCookedUrl.QueryStringLength / 2
+            );
         }
         return null;
     }

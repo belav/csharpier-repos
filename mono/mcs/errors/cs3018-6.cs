@@ -3,10 +3,12 @@
 // Compiler options: -warnaserror -warn:1
 
 using System;
-[assembly:CLSCompliant(true)]
+
+[assembly: CLSCompliant(true)]
 
 [CLSCompliant(false)]
-public interface I {
-        [CLSCompliant(true)]
-        ulong[] Error();
+public interface I
+{
+    [CLSCompliant(true)]
+    ulong[] Error();
 }

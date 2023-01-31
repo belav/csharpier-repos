@@ -3,14 +3,10 @@
 
 namespace Test
 {
-	public class EmptyClass
-	{
-		~EmptyClass ()
-		{
-		}
+    public class EmptyClass
+    {
+        ~EmptyClass() { }
 
-		~EmptyClass ()
-		{
-		}
-	}
+        ~EmptyClass() { }
+    }
 }

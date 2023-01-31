@@ -36,7 +36,10 @@ public class InstanceFactoryTest
         Assert.NotNull(((WithLazyLoader)instance1).LazyLoader);
         Assert.IsType<WithLazyLoader>(instance2);
         Assert.NotSame(instance1, instance2);
-        Assert.NotSame(((WithLazyLoader)instance1).LazyLoader, ((WithLazyLoader)instance2).LazyLoader);
+        Assert.NotSame(
+            ((WithLazyLoader)instance1).LazyLoader,
+            ((WithLazyLoader)instance2).LazyLoader
+        );
     }
 
     [ConditionalFact]
@@ -53,7 +56,10 @@ public class InstanceFactoryTest
         Assert.NotNull(((WithLazyLoaderDelegate)instance1).LazyLoader);
         Assert.IsType<WithLazyLoaderDelegate>(instance2);
         Assert.NotSame(instance1, instance2);
-        Assert.NotSame(((WithLazyLoaderDelegate)instance1).LazyLoader, ((WithLazyLoaderDelegate)instance2).LazyLoader);
+        Assert.NotSame(
+            ((WithLazyLoaderDelegate)instance1).LazyLoader,
+            ((WithLazyLoaderDelegate)instance2).LazyLoader
+        );
     }
 
     [ConditionalFact]
@@ -104,7 +110,10 @@ public class InstanceFactoryTest
         Assert.NotNull(((WithServiceAndWithProperties)instance1).LazyLoader);
         Assert.IsType<WithServiceAndWithProperties>(instance2);
         Assert.NotSame(instance1, instance2);
-        Assert.NotSame(((WithServiceAndWithProperties)instance1).LazyLoader, ((WithServiceAndWithProperties)instance2).LazyLoader);
+        Assert.NotSame(
+            ((WithServiceAndWithProperties)instance1).LazyLoader,
+            ((WithServiceAndWithProperties)instance2).LazyLoader
+        );
     }
 
     [ConditionalFact]
@@ -131,14 +140,14 @@ public class InstanceFactoryTest
 
         Assert.Equal(
             CoreStrings.NoParameterlessConstructor(nameof(WithProperties)),
-            Assert.Throws<InvalidOperationException>(
-                () => entityType.GetInstanceFactory()).Message);
+            Assert.Throws<InvalidOperationException>(() => entityType.GetInstanceFactory()).Message
+        );
     }
 
     private class FactoryContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(FactoryContext))
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider);
 
@@ -157,9 +166,7 @@ public class InstanceFactoryTest
 
     private class Parameterless
     {
-        private Parameterless()
-        {
-        }
+        private Parameterless() { }
 
         public int Id { get; set; }
     }
@@ -177,9 +184,7 @@ public class InstanceFactoryTest
 
     private class ParameterlessAndWithProperties
     {
-        public ParameterlessAndWithProperties()
-        {
-        }
+        public ParameterlessAndWithProperties() { }
 
         public ParameterlessAndWithProperties(int id)
         {

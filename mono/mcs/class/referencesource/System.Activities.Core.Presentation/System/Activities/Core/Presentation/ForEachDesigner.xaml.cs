@@ -43,18 +43,31 @@ namespace System.Activities.Core.Presentation
                 builder.AddCustomAttributes(type, type.GetProperty("Body"), BrowsableAttribute.No);
             }
 
-            builder.AddCustomAttributes(typeof(System.Activities.Statements.ForEach<>), new FeatureAttribute(typeof(UpdatableGenericArgumentsFeature)));
-            builder.AddCustomAttributes(typeof(System.Activities.Statements.ParallelForEach<>), new FeatureAttribute(typeof(UpdatableGenericArgumentsFeature)));
-            builder.AddCustomAttributes(typeof(System.Activities.Core.Presentation.Factories.ForEachWithBodyFactory<>), new DefaultTypeArgumentAttribute(typeof(int)));
-            builder.AddCustomAttributes(typeof(System.Activities.Core.Presentation.Factories.ParallelForEachWithBodyFactory<>), new DefaultTypeArgumentAttribute(typeof(int)));
-         
+            builder.AddCustomAttributes(
+                typeof(System.Activities.Statements.ForEach<>),
+                new FeatureAttribute(typeof(UpdatableGenericArgumentsFeature))
+            );
+            builder.AddCustomAttributes(
+                typeof(System.Activities.Statements.ParallelForEach<>),
+                new FeatureAttribute(typeof(UpdatableGenericArgumentsFeature))
+            );
+            builder.AddCustomAttributes(
+                typeof(System.Activities.Core.Presentation.Factories.ForEachWithBodyFactory<>),
+                new DefaultTypeArgumentAttribute(typeof(int))
+            );
+            builder.AddCustomAttributes(
+                typeof(System.Activities.Core.Presentation.Factories.ParallelForEachWithBodyFactory<>),
+                new DefaultTypeArgumentAttribute(typeof(int))
+            );
         }
 
         void OnValuesBoxLoaded(object sender, RoutedEventArgs e)
         {
             ExpressionTextBox etb = sender as ExpressionTextBox;
             Fx.Assert(null != etb, "sender should not be null!");
-            etb.ExpressionType = typeof(IEnumerable<>).MakeGenericType(this.ModelItem.ItemType.GetGenericArguments());
+            etb.ExpressionType = typeof(IEnumerable<>).MakeGenericType(
+                this.ModelItem.ItemType.GetGenericArguments()
+            );
         }
     }
 }

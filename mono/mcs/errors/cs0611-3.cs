@@ -2,14 +2,12 @@
 // Line: 13
 // Compiler options: -langversion:latest
 
-public ref struct S
-{
-}
+public ref struct S { }
 
 class Test
 {
-	public static void Main ()
-	{
-		var x = new S[0];
-	}
+    public static void Main()
+    {
+        var x = new S[0];
+    }
 }

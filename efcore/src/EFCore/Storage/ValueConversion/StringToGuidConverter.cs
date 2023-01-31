@@ -21,9 +21,7 @@ public class StringToGuidConverter : StringGuidConverter<string, Guid>
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public StringToGuidConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -36,16 +34,16 @@ public class StringToGuidConverter : StringGuidConverter<string, Guid>
     ///     facets for the converted data.
     /// </param>
     public StringToGuidConverter(ConverterMappingHints? mappingHints)
-        : base(
-            ToGuid(),
-            ToString(),
-            DefaultHints.With(mappingHints))
-    {
-    }
+        : base(ToGuid(), ToString(), DefaultHints.With(mappingHints)) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(string), typeof(Guid), i => new StringToGuidConverter(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(string),
+            typeof(Guid),
+            i => new StringToGuidConverter(i.MappingHints),
+            DefaultHints
+        );
 }

@@ -18,7 +18,12 @@ namespace System.Security.Cryptography
         /// Wrap a CNG key
         /// </summary>
 #pragma warning disable SYSLIB0043 // byte[] constructor on ECDiffieHellmanPublicKey is obsolete
-        internal ECDiffieHellmanCngPublicKey(byte[] keyBlob, string? curveName, CngKeyBlobFormat format) : base(keyBlob)
+        internal ECDiffieHellmanCngPublicKey(
+            byte[] keyBlob,
+            string? curveName,
+            CngKeyBlobFormat format
+        )
+            : base(keyBlob)
 #pragma warning restore SYSLIB0043
         {
             _format = format;
@@ -36,13 +41,21 @@ namespace System.Security.Cryptography
             base.Dispose(disposing);
         }
 
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public override string ToXmlString()
         {
             throw new PlatformNotSupportedException();
         }
 
-        [Obsolete(Obsoletions.EccXmlExportImportMessage, DiagnosticId = Obsoletions.EccXmlExportImportDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.EccXmlExportImportMessage,
+            DiagnosticId = Obsoletions.EccXmlExportImportDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static ECDiffieHellmanCngPublicKey FromXmlString(string xml)
         {
             throw new PlatformNotSupportedException();
@@ -53,17 +66,17 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngKeyBlobFormat BlobFormat
         {
-            get
-            {
-                return _format;
-            }
+            get { return _format; }
         }
 
         /// <summary>
         /// Hydrate a public key from a blob
         /// </summary>
         [SupportedOSPlatform("windows")]
-        public static ECDiffieHellmanPublicKey FromByteArray(byte[] publicKeyBlob, CngKeyBlobFormat format)
+        public static ECDiffieHellmanPublicKey FromByteArray(
+            byte[] publicKeyBlob,
+            CngKeyBlobFormat format
+        )
         {
             ArgumentNullException.ThrowIfNull(publicKeyBlob);
             ArgumentNullException.ThrowIfNull(format);
@@ -117,7 +130,11 @@ namespace System.Security.Cryptography
             {
                 ECParameters ecparams = default;
                 byte[] blob = ECCng.ExportFullKeyBlob(key, includePrivateParameters: false);
-                ECCng.ExportPrimeCurveParameters(ref ecparams, blob, includePrivateParameters: false);
+                ECCng.ExportPrimeCurveParameters(
+                    ref ecparams,
+                    blob,
+                    includePrivateParameters: false
+                );
                 return ecparams;
             }
         }
@@ -140,13 +157,24 @@ namespace System.Security.Cryptography
 
                 if (string.IsNullOrEmpty(curveName))
                 {
-                    byte[] fullKeyBlob = ECCng.ExportFullKeyBlob(key, includePrivateParameters: false);
-                    ECCng.ExportPrimeCurveParameters(ref ecparams, fullKeyBlob, includePrivateParameters: false);
+                    byte[] fullKeyBlob = ECCng.ExportFullKeyBlob(
+                        key,
+                        includePrivateParameters: false
+                    );
+                    ECCng.ExportPrimeCurveParameters(
+                        ref ecparams,
+                        fullKeyBlob,
+                        includePrivateParameters: false
+                    );
                 }
                 else
                 {
                     byte[] keyBlob = ECCng.ExportKeyBlob(key, includePrivateParameters: false);
-                    ECCng.ExportNamedCurveParameters(ref ecparams, keyBlob, includePrivateParameters: false);
+                    ECCng.ExportNamedCurveParameters(
+                        ref ecparams,
+                        keyBlob,
+                        includePrivateParameters: false
+                    );
                     ecparams.Curve = ECCurve.CreateFromFriendlyName(curveName);
                 }
 

@@ -25,61 +25,361 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"^$^$^$", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"^^^$$$", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"$^", "", new[] { (0, 0) } };
-                yield return new object[] { engine, @"(?:^$)*", "a\nb\nc", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) } };
-                yield return new object[] { engine, @"(?:$^)*", "a\nb\nc", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?:^$)*",
+                    "a\nb\nc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?:$^)*",
+                    "a\nb\nc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+                };
                 yield return new object[] { engine, @"", "", new[] { (0, 0) } };
-                yield return new object[] { engine, @"", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()*", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()+", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()?", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()()", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()+|z", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"z|()+", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"()+|b", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"b|()+", "abc", new[] { (0, 0), (1, 2), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"|b", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"b|", "abc", new[] { (0, 0), (1, 2), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"|z", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"z|", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"|", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"||", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"||z", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"(?:)|b", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"b|(?:)", "abc", new[] { (0, 0), (1, 2), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"(?:|)", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
-                yield return new object[] { engine, @"(?:|)|z", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()*",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()+",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()?",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()()",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()+|z",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"z|()+",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"()+|b",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"b|()+",
+                    "abc",
+                    new[] { (0, 0), (1, 2), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"|b",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"b|",
+                    "abc",
+                    new[] { (0, 0), (1, 2), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"|z",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"z|",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"|",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"||",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"||z",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?:)|b",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"b|(?:)",
+                    "abc",
+                    new[] { (0, 0), (1, 2), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?:|)",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?:|)|z",
+                    "abc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
                 yield return new object[] { engine, @"a(?:)|b", "abc", new[] { (0, 1), (1, 2) } };
                 yield return new object[] { engine, @"a$", "a", new[] { (0, 1) } };
-                yield return new object[] { engine, @"(?m)^[a-z]+$", "abc\ndef\nxyz", new[] { (0, 3), (4, 7), (8, 11) } };
-                yield return new object[] { engine, @"(?m)^$", "abc\ndef\nxyz", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(?m)^", "abc\ndef\nxyz", new[] { (0, 0), (4, 4), (8, 8) } };
-                yield return new object[] { engine, @"(?m)$", "abc\ndef\nxyz", new[] { (3, 3), (7, 7), (11, 11) } };
-                yield return new object[] { engine, @"(?m)^[a-z]", "abc\ndef\nxyz", new[] { (0, 1), (4, 5), (8, 9) } };
-                yield return new object[] { engine, @"(?m)[a-z]^", "abc\ndef\nxyz", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(?m)[a-z]$", "abc\ndef\nxyz", new[] { (2, 3), (6, 7), (10, 11) } };
-                yield return new object[] { engine, @"(?m)$[a-z]", "abc\ndef\nxyz", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)^[a-z]+$",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 3), (4, 7), (8, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)^$",
+                    "abc\ndef\nxyz",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)^",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 0), (4, 4), (8, 8) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)$",
+                    "abc\ndef\nxyz",
+                    new[] { (3, 3), (7, 7), (11, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)^[a-z]",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 1), (4, 5), (8, 9) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)[a-z]^",
+                    "abc\ndef\nxyz",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)[a-z]$",
+                    "abc\ndef\nxyz",
+                    new[] { (2, 3), (6, 7), (10, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)$[a-z]",
+                    "abc\ndef\nxyz",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"(?m)^$", "", new[] { (0, 0) } };
-                yield return new object[] { engine, @"(?m)(?:^$)*", "a\nb\nc", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) } };
-                yield return new object[] { engine, @"(?m)(?:^|a)+", "a\naaa\n", new[] { (0, 0), (2, 2), (3, 5), (6, 6) } };
-                yield return new object[] { engine, @"(?m)(?:^|a)*", "a\naaa\n", new[] { (0, 0), (1, 1), (2, 2), (3, 5), (5, 5), (6, 6) } };
-                yield return new object[] { engine, @"(?m)(?:^[a-z])+", "abc\ndef\nxyz", new[] { (0, 1), (4, 5), (8, 9) } };
-                yield return new object[] { engine, @"(?m)(?:^[a-z]{3}\n?)+", "abc\ndef\nxyz", new[] { (0, 11) } };
-                yield return new object[] { engine, @"(?m)(?:^[a-z]{3}\n?)*", "abc\ndef\nxyz", new[] { (0, 11), (11, 11) } };
-                yield return new object[] { engine, @"(?m)(?:\n?[a-z]{3}$)+", "abc\ndef\nxyz", new[] { (0, 11) } };
-                yield return new object[] { engine, @"(?m)(?:\n?[a-z]{3}$)*", "abc\ndef\nxyz", new[] { (0, 11), (11, 11) } };
-                yield return new object[] { engine, @"(?m)^*", "\naa\n", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4) } };
-                yield return new object[] { engine, @"(?m)^+", "\naa\n", new[] { (0, 0), (1, 1), (4, 4) } };
-                yield return new object[] { engine, @"(?m)$*", "\naa\n", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4) } };
-                yield return new object[] { engine, @"(?m)$+", "\naa\n", new[] { (0, 0), (3, 3), (4, 4) } };
-                yield return new object[] { engine, @"(?m)(?:$\n)+", "\n\naaa\n\n", new[] { (0, 2), (5, 7) } };
-                yield return new object[] { engine, @"(?m)(?:$\n)*", "\n\naaa\n\n", new[] { (0, 2), (2, 2), (3, 3), (4, 4), (5, 7), (7, 7) } };
-                yield return new object[] { engine, @"(?m)(?:$\n^)+", "\n\naaa\n\n", new[] { (0, 2), (5, 7) } };
-                yield return new object[] { engine, @"(?m)(?:^|$)+", "\n\naaa\n\n", new[] { (0, 0), (1, 1), (2, 2), (5, 5), (6, 6), (7, 7) } };
-                yield return new object[] { engine, @"\b", "a b c", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^$)*",
+                    "a\nb\nc",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^|a)+",
+                    "a\naaa\n",
+                    new[] { (0, 0), (2, 2), (3, 5), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^|a)*",
+                    "a\naaa\n",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 5), (5, 5), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^[a-z])+",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 1), (4, 5), (8, 9) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^[a-z]{3}\n?)+",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^[a-z]{3}\n?)*",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 11), (11, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:\n?[a-z]{3}$)+",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:\n?[a-z]{3}$)*",
+                    "abc\ndef\nxyz",
+                    new[] { (0, 11), (11, 11) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)^*",
+                    "\naa\n",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)^+",
+                    "\naa\n",
+                    new[] { (0, 0), (1, 1), (4, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)$*",
+                    "\naa\n",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)$+",
+                    "\naa\n",
+                    new[] { (0, 0), (3, 3), (4, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:$\n)+",
+                    "\n\naaa\n\n",
+                    new[] { (0, 2), (5, 7) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:$\n)*",
+                    "\n\naaa\n\n",
+                    new[] { (0, 2), (2, 2), (3, 3), (4, 4), (5, 7), (7, 7) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:$\n^)+",
+                    "\n\naaa\n\n",
+                    new[] { (0, 2), (5, 7) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?m)(?:^|$)+",
+                    "\n\naaa\n\n",
+                    new[] { (0, 0), (1, 1), (2, 2), (5, 5), (6, 6), (7, 7) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b",
+                    "a b c",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+                };
                 yield return new object[] { engine, @"^a|b", "ba", new[] { (0, 1) } };
-                yield return new object[] { engine, @"[0-9][0-9][0-9]000", "153.230000\n", new[] { (4, 10) } };
-                yield return new object[] { engine, @"((?i)foo)|Bar", "foo Foo bar Bar", new[] { (0, 3), (4, 7), (12, 15) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"[0-9][0-9][0-9]000",
+                    "153.230000\n",
+                    new[] { (4, 10) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((?i)foo)|Bar",
+                    "foo Foo bar Bar",
+                    new[] { (0, 3), (4, 7), (12, 15) }
+                };
                 yield return new object[] { engine, @"()?01", "z?01", new[] { (2, 4) } };
                 yield return new object[] { engine, @"\b", "", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"\b", "a", new[] { (0, 0), (1, 1) } };
@@ -87,21 +387,63 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"^\b", "ab", new[] { (0, 0) } };
                 yield return new object[] { engine, @"\b$", "ab", new[] { (2, 2) } };
                 yield return new object[] { engine, @"^\b$", "ab", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\bbar\b", "nobar bar foo bar", new[] { (6, 9), (14, 17) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\bbar\b",
+                    "nobar bar foo bar",
+                    new[] { (6, 9), (14, 17) }
+                };
                 yield return new object[] { engine, @"a\b", "faoa x", new[] { (3, 4) } };
                 yield return new object[] { engine, @"\bbar", "bar x", new[] { (0, 3) } };
                 yield return new object[] { engine, @"\bbar", "foo\nbar x", new[] { (4, 7) } };
                 yield return new object[] { engine, @"bar\b", "foobar", new[] { (3, 6) } };
                 yield return new object[] { engine, @"bar\b", "foobar\nxxx", new[] { (3, 6) } };
                 yield return new object[] { engine, @"(foo|bar|[A-Z])\b", "foo", new[] { (0, 3) } };
-                yield return new object[] { engine, @"(foo|bar|[A-Z])\b", "foo\n", new[] { (0, 3) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(foo|bar|[A-Z])\b",
+                    "foo\n",
+                    new[] { (0, 3) }
+                };
                 yield return new object[] { engine, @"\b(foo|bar|[A-Z])", "foo", new[] { (0, 3) } };
                 yield return new object[] { engine, @"\b(foo|bar|[A-Z])\b", "X", new[] { (0, 1) } };
-                yield return new object[] { engine, @"\b(foo|bar|[A-Z])\b", "XY", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\b(foo|bar|[A-Z])\b", "bar", new[] { (0, 3) } };
-                yield return new object[] { engine, @"\b(foo|bar|[A-Z])\b", "foo", new[] { (0, 3) } };
-                yield return new object[] { engine, @"\b(foo|bar|[A-Z])\b", "foo\n", new[] { (0, 3) } };
-                yield return new object[] { engine, @"\b(foo|bar|[A-Z])\b", "ffoo bbar N x", new[] { (10, 11) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b(foo|bar|[A-Z])\b",
+                    "XY",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b(foo|bar|[A-Z])\b",
+                    "bar",
+                    new[] { (0, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b(foo|bar|[A-Z])\b",
+                    "foo",
+                    new[] { (0, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b(foo|bar|[A-Z])\b",
+                    "foo\n",
+                    new[] { (0, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b(foo|bar|[A-Z])\b",
+                    "ffoo bbar N x",
+                    new[] { (10, 11) }
+                };
                 yield return new object[] { engine, @"\b(fo|foo)\b", "fo", new[] { (0, 2) } };
                 yield return new object[] { engine, @"\b(fo|foo)\b", "foo", new[] { (0, 3) } };
                 yield return new object[] { engine, @"\b\b", "", new ValueTuple<int, int>[] { } };
@@ -116,30 +458,144 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"^\b$", "x", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"^\b.$", "x", new[] { (0, 1) } };
                 yield return new object[] { engine, @"^\b.\b$", "x", new[] { (0, 1) } };
-                yield return new object[] { engine, @"^^^^^\b$$$$$", "", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^^^^^\b$$$$$",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"^^^^^\b.$$$$$", "x", new[] { (0, 1) } };
-                yield return new object[] { engine, @"^^^^^\b$$$$$", "x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^^^^^\b\b\b.\b\b\b$$$$$", "x", new[] { (0, 1) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^^^^^\b$$$$$",
+                    "x",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^^^^^\b\b\b.\b\b\b$$$$$",
+                    "x",
+                    new[] { (0, 1) }
+                };
                 yield return new object[] { engine, @"\b.+\b", "$$abc$$", new[] { (2, 5) } };
-                yield return new object[] { engine, @"\b", "a b c", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) } };
-                yield return new object[] { engine, @"\Bfoo\B", "n foo xfoox that", new[] { (7, 10) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\b",
+                    "a b c",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\Bfoo\B",
+                    "n foo xfoox that",
+                    new[] { (7, 10) }
+                };
                 yield return new object[] { engine, @"a\B", "faoa x", new[] { (1, 2) } };
-                yield return new object[] { engine, @"\Bbar", "bar x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\Bbar", "foo\nbar x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"bar\B", "foobar", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"bar\B", "foobar\nxxx", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(foo|bar|[A-Z])\B", "foox", new[] { (0, 3) } };
-                yield return new object[] { engine, @"(foo|bar|[A-Z])\B", "foo\n", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\Bbar",
+                    "bar x",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\Bbar",
+                    "foo\nbar x",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"bar\B",
+                    "foobar",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"bar\B",
+                    "foobar\nxxx",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(foo|bar|[A-Z])\B",
+                    "foox",
+                    new[] { (0, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(foo|bar|[A-Z])\B",
+                    "foo\n",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\B", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"\B", "x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])", "foo", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "xXy", new[] { (1, 2) } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "XY", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "XYZ", new[] { (1, 2) } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "abara", new[] { (1, 4) } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "xfoo_", new[] { (1, 4) } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "xfoo\n", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\B(foo|bar|[A-Z])\B", "foo bar vNX", new[] { (9, 10) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])",
+                    "foo",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "xXy",
+                    new[] { (1, 2) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "XY",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "XYZ",
+                    new[] { (1, 2) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "abara",
+                    new[] { (1, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "xfoo_",
+                    new[] { (1, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "xfoo\n",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\B(foo|bar|[A-Z])\B",
+                    "foo bar vNX",
+                    new[] { (9, 10) }
+                };
                 yield return new object[] { engine, @"\B(fo|foo)\B", "xfoo", new[] { (1, 3) } };
                 yield return new object[] { engine, @"\B(foo|fo)\B", "xfooo", new[] { (1, 4) } };
                 yield return new object[] { engine, @"\B\B", "", new[] { (0, 0) } };
@@ -148,8 +604,20 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"\B$", "x", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"\B$", "y x", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"\B.$", "x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^\B(fo|foo)\B", "fo", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^\B(fo|foo)\B", "foo", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^\B(fo|foo)\B",
+                    "fo",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^\B(fo|foo)\B",
+                    "foo",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"^\B", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"^\B", "x", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"^\B\B", "", new[] { (0, 0) } };
@@ -157,25 +625,79 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"^\B$", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"^\B$", "x", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"^\B.$", "x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^\B.\B$", "x", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^\B.\B$",
+                    "x",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"^^^^^\B$$$$$", "", new[] { (0, 0) } };
-                yield return new object[] { engine, @"^^^^^\B.$$$$$", "x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^^^^^\B$$$$$", "x", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^^^^^\B.$$$$$",
+                    "x",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^^^^^\B$$$$$",
+                    "x",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\bx\b", "\u00ABx", new[] { (1, 2) } };
                 yield return new object[] { engine, @"\bx\b", "x\u00BB", new[] { (0, 1) } };
-                yield return new object[] { engine, @"\bx\b", "\u00E1x\u00DF", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\bx\b",
+                    "\u00E1x\u00DF",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\Bx\B", "\u00E1x\u00DF", new[] { (1, 2) } };
                 yield return new object[] { engine, @" \b", " \u03B4", new[] { (0, 1) } };
-                yield return new object[] { engine, @" \B", " \u03B4", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @" \B",
+                    " \u03B4",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\w+", "a\u03B4", new[] { (0, 2) } };
                 yield return new object[] { engine, @"\d+", "1\u0968\u09699", new[] { (0, 4) } };
                 yield return new object[] { engine, @"[^a]", "\u03B4", new[] { (0, 1) } };
                 yield return new object[] { engine, @"a", "\xFFa", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"a", "a", new[] { (0, 1) } };
-                yield return new object[] { engine, @"[-+]?[0-9]*\.?[0-9]+", "0.1", new[] { (0, 3) } };
-                yield return new object[] { engine, @"[-+]?[0-9]*\.?[0-9]+", "0.1.2", new[] { (0, 3), (3, 5) } };
-                yield return new object[] { engine, @"[-+]?[0-9]*\.?[0-9]+", "a1.2", new[] { (1, 4) } };
-                yield return new object[] { engine, @"^[-+]?[0-9]*\.?[0-9]+$", "1.a", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"[-+]?[0-9]*\.?[0-9]+",
+                    "0.1",
+                    new[] { (0, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"[-+]?[0-9]*\.?[0-9]+",
+                    "0.1.2",
+                    new[] { (0, 3), (3, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"[-+]?[0-9]*\.?[0-9]+",
+                    "a1.2",
+                    new[] { (1, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^[-+]?[0-9]*\.?[0-9]+$",
+                    "1.a",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"[^ac]", "acx", new[] { (2, 3) } };
                 yield return new object[] { engine, @"[^a,]", "a,x", new[] { (2, 3) } };
                 yield return new object[] { engine, @"[^,]", ",,x", new[] { (2, 3) } };
@@ -191,7 +713,13 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"((?:.?)+)=", "a=b", new[] { (0, 2) } };
                 yield return new object[] { engine, @"((?:.*){1,})=", "a=b", new[] { (0, 2) } };
                 yield return new object[] { engine, @"((?:.*){1,2})=", "a=b", new[] { (0, 2) } };
-                yield return new object[] { engine, @"abracadabra$", "abracadabracadabra", new[] { (7, 18) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"abracadabra$",
+                    "abracadabracadabra",
+                    new[] { (7, 18) }
+                };
                 yield return new object[] { engine, @"a...b", "abababbb", new[] { (2, 7) } };
                 yield return new object[] { engine, @"XXXXXX", "..XXXXXX", new[] { (2, 8) } };
                 yield return new object[] { engine, @"\)", "()", new[] { (1, 2) } };
@@ -209,7 +737,13 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"a($)", "aa", new[] { (1, 2) } };
                 yield return new object[] { engine, @"a*(^a)", "aa", new[] { (0, 1) } };
                 yield return new object[] { engine, @"(..)*(...)*", "a", new[] { (0, 0), (1, 1) } };
-                yield return new object[] { engine, @"(..)*(...)*", "abcd", new[] { (0, 4), (4, 4) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(..)*(...)*",
+                    "abcd",
+                    new[] { (0, 4), (4, 4) }
+                };
                 yield return new object[] { engine, @"(ab)c|abc", "abc", new[] { (0, 3) } };
                 yield return new object[] { engine, @"a{0}b", "ab", new[] { (1, 2) } };
                 yield return new object[] { engine, @"a*(a.|aa)", "aaaa", new[] { (0, 4) } };
@@ -219,20 +753,50 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"(a|b)*c|(a|ab)*c", "xc", new[] { (1, 2) } };
                 yield return new object[] { engine, @"a?(ab|ba)ab", "abab", new[] { (0, 4) } };
                 yield return new object[] { engine, @"a?(ac{0}b|ba)ab", "abab", new[] { (0, 4) } };
-                yield return new object[] { engine, @"ab|abab", "abbabab", new[] { (0, 2), (3, 5), (5, 7) } };
-                yield return new object[] { engine, @"aba|bab|bba", "baaabbbaba", new[] { (5, 8) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"ab|abab",
+                    "abbabab",
+                    new[] { (0, 2), (3, 5), (5, 7) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"aba|bab|bba",
+                    "baaabbbaba",
+                    new[] { (5, 8) }
+                };
                 yield return new object[] { engine, @"aba|bab", "baaabbbaba", new[] { (6, 9) } };
                 yield return new object[] { engine, @"ab|a", "xabc", new[] { (1, 3) } };
                 yield return new object[] { engine, @"ab|a", "xxabc", new[] { (2, 4) } };
                 yield return new object[] { engine, @"[^-]", "--a", new[] { (2, 3) } };
                 yield return new object[] { engine, @"[a-]*", "--a", new[] { (0, 3), (3, 3) } };
-                yield return new object[] { engine, @"[a-m-]*", "--amoma--", new[] { (0, 4), (4, 4), (5, 9), (9, 9) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"[a-m-]*",
+                    "--amoma--",
+                    new[] { (0, 4), (4, 4), (5, 9), (9, 9) }
+                };
                 yield return new object[] { engine, @"[\p{Lu}]", "A", new[] { (0, 1) } };
                 yield return new object[] { engine, @"[\p{Ll}]+", "`az{", new[] { (1, 3) } };
                 yield return new object[] { engine, @"[\p{Lu}]+", "@AZ[", new[] { (1, 3) } };
                 yield return new object[] { engine, @"xxx", "xxx", new[] { (0, 3) } };
-                yield return new object[] { engine, @".*", "\u263A\u007F", new[] { (0, 2), (2, 2) } };
-                yield return new object[] { engine, @"a*a*a*a*a*b", "aaaaaaaaab", new[] { (0, 10) } };
+                yield return new object[]
+                {
+                    engine,
+                    @".*",
+                    "\u263A\u007F",
+                    new[] { (0, 2), (2, 2) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"a*a*a*a*a*b",
+                    "aaaaaaaaab",
+                    new[] { (0, 10) }
+                };
                 yield return new object[] { engine, @"^", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"$", "", new[] { (0, 0) } };
                 yield return new object[] { engine, @"^$", "", new[] { (0, 0) } };
@@ -279,7 +843,13 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"(a*|b)*", "-", new[] { (0, 0), (1, 1) } };
                 yield return new object[] { engine, @"(a+|b)*", "ab", new[] { (0, 2), (2, 2) } };
                 yield return new object[] { engine, @"(a+|b)+", "ab", new[] { (0, 2) } };
-                yield return new object[] { engine, @"(a+|b)?", "ab", new[] { (0, 1), (1, 2), (2, 2) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(a+|b)?",
+                    "ab",
+                    new[] { (0, 1), (1, 2), (2, 2) }
+                };
                 yield return new object[] { engine, @"[^ab]*", "cde", new[] { (0, 3), (3, 3) } };
                 yield return new object[] { engine, @"(^)*", "-", new[] { (0, 0), (1, 1) } };
                 yield return new object[] { engine, @"a*", "", new[] { (0, 0) } };
@@ -298,125 +868,496 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[] { engine, @"a([bc]*)c*", "abc", new[] { (0, 3) } };
                 yield return new object[] { engine, @"a[bcd]*dcdcde", "adcdcde", new[] { (0, 7) } };
                 yield return new object[] { engine, @"(ab|a)b*c", "abc", new[] { (0, 3) } };
-                yield return new object[] { engine, @"[A-Za-z_][A-Za-z0-9_]*", "alpha", new[] { (0, 5) } };
-                yield return new object[] { engine, @"^a(bc+|b[eh])g|.h$", "abh", new[] { (1, 3) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"[A-Za-z_][A-Za-z0-9_]*",
+                    "alpha",
+                    new[] { (0, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^a(bc+|b[eh])g|.h$",
+                    "abh",
+                    new[] { (1, 3) }
+                };
                 yield return new object[] { engine, @"abcd", "abcd", new[] { (0, 4) } };
                 yield return new object[] { engine, @"a(bc)d", "abcd", new[] { (0, 4) } };
-                yield return new object[] { engine, "a[\u263A-\u2665]?c", "a\u263bc", new[] { (0, 3) } };
+                yield return new object[]
+                {
+                    engine,
+                    "a[\u263A-\u2665]?c",
+                    "a\u263bc",
+                    new[] { (0, 3) }
+                };
                 yield return new object[] { engine, @"a+(b|c)*d+", "aabcdd", new[] { (0, 6) } };
                 yield return new object[] { engine, @"^.+$", "vivi", new[] { (0, 4) } };
                 yield return new object[] { engine, @"^(.+)$", "vivi", new[] { (0, 4) } };
                 yield return new object[] { engine, @".*(/XXX).*", "/XXX", new[] { (0, 4) } };
                 yield return new object[] { engine, @".*(/000).*", "/000", new[] { (0, 4) } };
-                yield return new object[] { engine, @".*(\\000).*", "\000", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"\\000", "\000", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @".*(\\000).*",
+                    "\000",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\\000",
+                    "\000",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"(a*)*", "a", new[] { (0, 1), (1, 1) } };
                 yield return new object[] { engine, @"(a*)*", "x", new[] { (0, 0), (1, 1) } };
                 yield return new object[] { engine, @"(a*)*", "aaaaaa", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"(a*)*", "aaaaaax", new[] { (0, 6), (6, 6), (7, 7) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(a*)*",
+                    "aaaaaax",
+                    new[] { (0, 6), (6, 6), (7, 7) }
+                };
                 yield return new object[] { engine, @"(a*)+", "a", new[] { (0, 1), (1, 1) } };
                 yield return new object[] { engine, @"(a*)+", "x", new[] { (0, 0), (1, 1) } };
                 yield return new object[] { engine, @"(a*)+", "aaaaaa", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"(a*)+", "aaaaaax", new[] { (0, 6), (6, 6), (7, 7) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(a*)+",
+                    "aaaaaax",
+                    new[] { (0, 6), (6, 6), (7, 7) }
+                };
                 yield return new object[] { engine, @"(a+)*", "a", new[] { (0, 1), (1, 1) } };
                 yield return new object[] { engine, @"(a+)*", "x", new[] { (0, 0), (1, 1) } };
                 yield return new object[] { engine, @"(a+)*", "aaaaaa", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"(a+)*", "aaaaaax", new[] { (0, 6), (6, 6), (7, 7) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(a+)*",
+                    "aaaaaax",
+                    new[] { (0, 6), (6, 6), (7, 7) }
+                };
                 yield return new object[] { engine, @"(a+)+", "a", new[] { (0, 1) } };
                 yield return new object[] { engine, @"(a+)+", "x", new ValueTuple<int, int>[] { } };
                 yield return new object[] { engine, @"(a+)+", "aaaaaa", new[] { (0, 6) } };
                 yield return new object[] { engine, @"(a+)+", "aaaaaax", new[] { (0, 6) } };
                 yield return new object[] { engine, @"([a]*)*", "a", new[] { (0, 1), (1, 1) } };
                 yield return new object[] { engine, @"([a]*)*", "x", new[] { (0, 0), (1, 1) } };
-                yield return new object[] { engine, @"([a]*)*", "aaaaaa", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"([a]*)*", "aaaaaax", new[] { (0, 6), (6, 6), (7, 7) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"([a]*)*",
+                    "aaaaaa",
+                    new[] { (0, 6), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"([a]*)*",
+                    "aaaaaax",
+                    new[] { (0, 6), (6, 6), (7, 7) }
+                };
                 yield return new object[] { engine, @"([a]*)+", "a", new[] { (0, 1), (1, 1) } };
                 yield return new object[] { engine, @"([a]*)+", "x", new[] { (0, 0), (1, 1) } };
-                yield return new object[] { engine, @"([a]*)+", "aaaaaa", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"([a]*)+", "aaaaaax", new[] { (0, 6), (6, 6), (7, 7) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"([a]*)+",
+                    "aaaaaa",
+                    new[] { (0, 6), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"([a]*)+",
+                    "aaaaaax",
+                    new[] { (0, 6), (6, 6), (7, 7) }
+                };
                 yield return new object[] { engine, @"([^b]*)*", "a", new[] { (0, 1), (1, 1) } };
                 yield return new object[] { engine, @"([^b]*)*", "b", new[] { (0, 0), (1, 1) } };
-                yield return new object[] { engine, @"([^b]*)*", "aaaaaa", new[] { (0, 6), (6, 6) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"([^b]*)*",
+                    "aaaaaa",
+                    new[] { (0, 6), (6, 6) }
+                };
                 yield return new object[] { engine, @"([ab]*)*", "a", new[] { (0, 1), (1, 1) } };
-                yield return new object[] { engine, @"([ab]*)*", "aaaaaa", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"([ab]*)*", "ababab", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"([ab]*)*", "bababa", new[] { (0, 6), (6, 6) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"([ab]*)*",
+                    "aaaaaa",
+                    new[] { (0, 6), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"([ab]*)*",
+                    "ababab",
+                    new[] { (0, 6), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"([ab]*)*",
+                    "bababa",
+                    new[] { (0, 6), (6, 6) }
+                };
                 yield return new object[] { engine, @"([ab]*)*", "b", new[] { (0, 1), (1, 1) } };
-                yield return new object[] { engine, @"([ab]*)*", "bbbbbb", new[] { (0, 6), (6, 6) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"([ab]*)*",
+                    "bbbbbb",
+                    new[] { (0, 6), (6, 6) }
+                };
                 yield return new object[] { engine, @"([^a]*)*", "b", new[] { (0, 1), (1, 1) } };
-                yield return new object[] { engine, @"([^a]*)*", "bbbbbb", new[] { (0, 6), (6, 6) } };
-                yield return new object[] { engine, @"([^a]*)*", "aaaaaa", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) } };
-                yield return new object[] { engine, @"([^ab]*)*", "ababab", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) } };
-                yield return new object[] { engine, @"((..)|(.))", "", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.))((..)|(.))", "", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.))((..)|(.))((..)|(.))", "", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.)){1}", "", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.)){2}", "", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.)){3}", "", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"([^a]*)*",
+                    "bbbbbb",
+                    new[] { (0, 6), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"([^a]*)*",
+                    "aaaaaa",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"([^ab]*)*",
+                    "ababab",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.))",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.))((..)|(.))",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.))((..)|(.))((..)|(.))",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.)){1}",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.)){2}",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.)){3}",
+                    "",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"((..)|(.))*", "", new[] { (0, 0) } };
-                yield return new object[] { engine, @"((..)|(.))((..)|(.))", "a", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.))((..)|(.))((..)|(.))", "a", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.)){2}", "a", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.)){3}", "a", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.))((..)|(.))((..)|(.))", "aa", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"((..)|(.)){3}", "aa", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(a|ab|c|bcd){4,}(d*)", "ababcd", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(a|ab|c|bcd){4,10}(d*)", "ababcd", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(ab|a|c|bcd){4,}(d*)", "ababcd", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(ab|a|c|bcd){4,10}(d*)", "ababcd", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.))((..)|(.))",
+                    "a",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.))((..)|(.))((..)|(.))",
+                    "a",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.)){2}",
+                    "a",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.)){3}",
+                    "a",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.))((..)|(.))((..)|(.))",
+                    "aa",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"((..)|(.)){3}",
+                    "aa",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(a|ab|c|bcd){4,}(d*)",
+                    "ababcd",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(a|ab|c|bcd){4,10}(d*)",
+                    "ababcd",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(ab|a|c|bcd){4,}(d*)",
+                    "ababcd",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(ab|a|c|bcd){4,10}(d*)",
+                    "ababcd",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"^abc", "abc", new[] { (0, 3) } };
-                yield return new object[] { engine, @"^abc", "zabc", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"abc", "xxxxxab", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(?i)[^x]", "x", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"(?i)[^x]", "X", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"[[:word:]]", "_", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^abc",
+                    "zabc",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"abc",
+                    "xxxxxab",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?i)[^x]",
+                    "x",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?i)[^x]",
+                    "X",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"[[:word:]]",
+                    "_",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"ab?|$", "az", new[] { (0, 1), (2, 2) } };
-                yield return new object[] { engine, @"^(.*?)(\n|\r\n?|$)", "ab\rcd", new[] { (0, 3) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"^(.*?)(\n|\r\n?|$)",
+                    "ab\rcd",
+                    new[] { (0, 3) }
+                };
                 yield return new object[] { engine, @"z*azb", "azb", new[] { (0, 3) } };
-                yield return new object[] { engine, @"(?i)\p{Ll}+", "\u039B\u0398\u0393\u0394\u03B1", new[] { (0, 5) } };
-                yield return new object[] { engine, @"1|2|3|4|5|6|7|8|9|10|int", "int", new[] { (0, 3) } };
-                yield return new object[] { engine, @"^a[[:^space:]]", "a ", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^a[[:^space:]]", "foo boo a ", new ValueTuple<int, int>[] { } };
-                yield return new object[] { engine, @"^-[a-z]", "r-f", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?i)\p{Ll}+",
+                    "\u039B\u0398\u0393\u0394\u03B1",
+                    new[] { (0, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"1|2|3|4|5|6|7|8|9|10|int",
+                    "int",
+                    new[] { (0, 3) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^a[[:^space:]]",
+                    "a ",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^a[[:^space:]]",
+                    "foo boo a ",
+                    new ValueTuple<int, int>[] { }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"^-[a-z]",
+                    "r-f",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"(ABC|CDA|BC)X", "CDAX", new[] { (0, 4) } };
-                yield return new object[] { engine, @"(aa$)?", "aaz", new[] { (0, 0), (1, 1), (2, 2), (3, 3) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"(aa$)?",
+                    "aaz",
+                    new[] { (0, 0), (1, 1), (2, 2), (3, 3) }
+                };
                 yield return new object[] { engine, @"ab??", "ab", new[] { (0, 1) } };
                 yield return new object[] { engine, @".*abcd", "abcd", new[] { (0, 4) } };
                 yield return new object[] { engine, @".*(?:abcd)+", "abcd", new[] { (0, 4) } };
                 yield return new object[] { engine, @".*(?:abcd)+", "abcdabcd", new[] { (0, 8) } };
                 yield return new object[] { engine, @".*(?:abcd)+", "abcdxabcd", new[] { (0, 9) } };
-                yield return new object[] { engine, @".*x(?:abcd)+", "abcdxabcd", new[] { (0, 9) } };
-                yield return new object[] { engine, @"[^abcd]*x(?:abcd)+", "abcdxabcd", new[] { (4, 9) } };
-                yield return new object[] { engine, @".", "\xD4\xC2\x65\x2B\x0E\xFE", new[] { (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6) } };
-                yield return new object[] { engine, "${2}\u00E4", "\xD4\xC2\x65\x2B\x0E\xFE", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @".*x(?:abcd)+",
+                    "abcdxabcd",
+                    new[] { (0, 9) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"[^abcd]*x(?:abcd)+",
+                    "abcdxabcd",
+                    new[] { (4, 9) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @".",
+                    "\xD4\xC2\x65\x2B\x0E\xFE",
+                    new[] { (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    "${2}\u00E4",
+                    "\xD4\xC2\x65\x2B\x0E\xFE",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, "\u2603", "\u2603", new[] { (0, 1) } };
                 yield return new object[] { engine, "\u2603+", "\u2603", new[] { (0, 1) } };
                 yield return new object[] { engine, "(?i)\u2603+", "\u2603", new[] { (0, 1) } };
                 yield return new object[] { engine, "[\u2603\u2160]+", "\u2603", new[] { (0, 1) } };
                 yield return new object[] { engine, "(?i)\u0394", "\u03B4", new[] { (0, 1) } };
-                yield return new object[] { engine, @"\p{Lu}+", "\u039B\u0398\u0393\u0394\u03B1", new[] { (0, 4) } };
-                yield return new object[] { engine, @"(?i)\p{Lu}+", "\u039B\u0398\u0393\u0394\u03B1", new[] { (0, 5) } };
-                yield return new object[] { engine, @"\p{L}+", "\u039B\u0398\u0393\u0394\u03B1", new[] { (0, 5) } };
-                yield return new object[] { engine, @"\p{Ll}+", "\u039B\u0398\u0393\u0394\u03B1", new[] { (4, 5) } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\p{Lu}+",
+                    "\u039B\u0398\u0393\u0394\u03B1",
+                    new[] { (0, 4) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"(?i)\p{Lu}+",
+                    "\u039B\u0398\u0393\u0394\u03B1",
+                    new[] { (0, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\p{L}+",
+                    "\u039B\u0398\u0393\u0394\u03B1",
+                    new[] { (0, 5) }
+                };
+                yield return new object[]
+                {
+                    engine,
+                    @"\p{Ll}+",
+                    "\u039B\u0398\u0393\u0394\u03B1",
+                    new[] { (4, 5) }
+                };
                 yield return new object[] { engine, @"\w+", "d\u03B4d", new[] { (0, 3) } };
-                yield return new object[] { engine, @"\w+", "\u2961", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\w+",
+                    "\u2961",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\W+", "\u2961", new[] { (0, 1) } };
                 yield return new object[] { engine, @"\d+", "1\u0968\u09699", new[] { (0, 4) } };
-                yield return new object[] { engine, @"\d+", "\u2161", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\d+",
+                    "\u2161",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\D+", "\u2161", new[] { (0, 1) } };
                 yield return new object[] { engine, @"\s+", "\u1680", new[] { (0, 1) } };
-                yield return new object[] { engine, @"\s+", "\u2603", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\s+",
+                    "\u2603",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\S+", "\u2603", new[] { (0, 1) } };
-                yield return new object[] { engine, @"\d\b", "6\u03B4", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\d\b",
+                    "6\u03B4",
+                    new ValueTuple<int, int>[] { }
+                };
                 yield return new object[] { engine, @"\d\b", "6\u1680", new[] { (0, 1) } };
                 yield return new object[] { engine, @"\d\B", "6\u03B4", new[] { (0, 1) } };
-                yield return new object[] { engine, @"\d\B", "6\u1680", new ValueTuple<int, int>[] { } };
+                yield return new object[]
+                {
+                    engine,
+                    @"\d\B",
+                    "6\u1680",
+                    new ValueTuple<int, int>[] { }
+                };
             }
         }
 
         [Theory]
         [MemberData(nameof(MatchStartAndEndPositionsTestData))]
-        public async Task MatchStartAndEndPositions(RegexEngine engine, string pattern, string input, IEnumerable<(int, int)>? matchBoundaries)
+        public async Task MatchStartAndEndPositions(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            IEnumerable<(int, int)>? matchBoundaries
+        )
         {
             Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern);
             Match match = regex.Match(input);

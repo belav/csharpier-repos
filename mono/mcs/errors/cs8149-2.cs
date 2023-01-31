@@ -5,10 +5,10 @@ using System;
 
 class A
 {
-	int p;
-	
-	void Test ()
-	{
-		Action a = () => ref p;
-	}
+    int p;
+
+    void Test()
+    {
+        Action a = () => ref p;
+    }
 }

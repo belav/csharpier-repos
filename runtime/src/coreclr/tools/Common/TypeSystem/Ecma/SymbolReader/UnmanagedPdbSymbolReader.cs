@@ -24,7 +24,10 @@ namespace Internal.TypeSystem.Ecma
     /// </summary>
     public abstract class UnmanagedPdbSymbolReader : PdbSymbolReader
     {
-        public static PdbSymbolReader? TryOpenSymbolReaderForMetadataFile(string metadataFileName, string searchPath)
+        public static PdbSymbolReader? TryOpenSymbolReaderForMetadataFile(
+            string metadataFileName,
+            string searchPath
+        )
         {
             return null;
         }
@@ -35,12 +38,21 @@ namespace Internal.TypeSystem.Ecma
     /// </summary>
     public sealed class UnmanagedPdbSymbolReader : PdbSymbolReader
     {
-        private static int CLRCreateInstance(ref Guid clsid, ref Guid riid, out ClrMetaHostWrapperCache.ClrMetaHostRcw? ppInterface)
+        private static int CLRCreateInstance(
+            ref Guid clsid,
+            ref Guid riid,
+            out ClrMetaHostWrapperCache.ClrMetaHostRcw? ppInterface
+        )
         {
             int hr = CLRCreateInstance(ref clsid, ref riid, out IntPtr ptr);
-            ppInterface = hr == 0
-                ? (ClrMetaHostWrapperCache.ClrMetaHostRcw)ClrMetaHostWrapperCache.Instance.GetOrCreateObjectForComInstance(ptr, CreateObjectFlags.UniqueInstance)
-                : null;
+            ppInterface =
+                hr == 0
+                    ? (ClrMetaHostWrapperCache.ClrMetaHostRcw)
+                        ClrMetaHostWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                            ptr,
+                            CreateObjectFlags.UniqueInstance
+                        )
+                    : null;
             return hr;
 
             [DllImport("mscoree.dll")]
@@ -52,7 +64,11 @@ namespace Internal.TypeSystem.Ecma
             public static readonly Guid IID = new Guid("d332db9e-b9b3-4125-8207-a14884f53216");
 
             [PreserveSig]
-            int GetRuntime(string pwzVersion, ref Guid riid, out CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw? ppRuntime);
+            int GetRuntime(
+                string pwzVersion,
+                ref Guid riid,
+                out CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw? ppRuntime
+            );
 
             // Don't need any other methods.
         }
@@ -60,10 +76,19 @@ namespace Internal.TypeSystem.Ecma
         private sealed class ClrMetaHostWrapperCache : ComWrappers
         {
             public static readonly ClrMetaHostWrapperCache Instance = new ClrMetaHostWrapperCache();
+
             private ClrMetaHostWrapperCache() { }
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
 
@@ -75,7 +100,8 @@ namespace Internal.TypeSystem.Ecma
                 return new ClrMetaHostRcw(hostPtr);
             }
 
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             public sealed unsafe class ClrMetaHostRcw : ICLRMetaHost, IDisposable
             {
@@ -86,10 +112,17 @@ namespace Internal.TypeSystem.Ecma
                 {
                     _inst = inst;
                 }
-                public int GetRuntime(string pwzVersion, ref Guid riid, out CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw? ppRuntime)
+
+                public int GetRuntime(
+                    string pwzVersion,
+                    ref Guid riid,
+                    out CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw? ppRuntime
+                )
                 {
                     // ICLRMetaHost::GetRuntime() is 4th slot (0-based)
-                    var func = (delegate* unmanaged<IntPtr, char*, Guid*, IntPtr*, int>)(*(*(void***)_inst + 3));
+                    var func = (delegate* unmanaged<IntPtr, char*, Guid*, IntPtr*, int>)(
+                        *(*(void***)_inst + 3)
+                    );
                     int hr;
                     IntPtr runtimeInfoPtr;
                     fixed (char* versionPtr = pwzVersion)
@@ -97,9 +130,14 @@ namespace Internal.TypeSystem.Ecma
                     {
                         hr = func(_inst, versionPtr, riidPtr, &runtimeInfoPtr);
                     }
-                    ppRuntime = hr == 0
-                        ? (CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw)CLRRuntimeInfoWrapperCache.Instance.GetOrCreateObjectForComInstance(runtimeInfoPtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    ppRuntime =
+                        hr == 0
+                            ? (CLRRuntimeInfoWrapperCache.ClrRuntimeInfoRcw)
+                                CLRRuntimeInfoWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    runtimeInfoPtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
@@ -126,7 +164,11 @@ namespace Internal.TypeSystem.Ecma
 
         private interface ICLRRuntimeInfo
         {
-            int GetInterface(ref Guid rclsid, ref Guid riid, out MetaDataDispenserWrapperCache.MetaDataDispenserRcw? ppUnk);
+            int GetInterface(
+                ref Guid rclsid,
+                ref Guid riid,
+                out MetaDataDispenserWrapperCache.MetaDataDispenserRcw? ppUnk
+            );
 
             int BindAsLegacyV2Runtime();
 
@@ -135,19 +177,33 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class CLRRuntimeInfoWrapperCache : ComWrappers
         {
-            public static readonly CLRRuntimeInfoWrapperCache Instance = new CLRRuntimeInfoWrapperCache();
+            public static readonly CLRRuntimeInfoWrapperCache Instance =
+                new CLRRuntimeInfoWrapperCache();
+
             private CLRRuntimeInfoWrapperCache() { }
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
 
                 return new ClrRuntimeInfoRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
 
-            public sealed unsafe record ClrRuntimeInfoRcw(IntPtr Inst) : ICLRRuntimeInfo, IDisposable
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
+
+            public sealed unsafe record ClrRuntimeInfoRcw(IntPtr Inst)
+                : ICLRRuntimeInfo,
+                    IDisposable
             {
                 /// <summary>
                 /// List of offsets of methods in the vtable (0-based). First three are from IUnknown.
@@ -160,9 +216,15 @@ namespace Internal.TypeSystem.Ecma
 
                 private bool _disposed;
 
-                public int GetInterface(ref Guid rclsid, ref Guid riid, out MetaDataDispenserWrapperCache.MetaDataDispenserRcw? ppUnk)
+                public int GetInterface(
+                    ref Guid rclsid,
+                    ref Guid riid,
+                    out MetaDataDispenserWrapperCache.MetaDataDispenserRcw? ppUnk
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, Guid*, Guid*, IntPtr*, int>)(*(*(void***)Inst + (int)VtableOffset.GetInterface));
+                    var func = (delegate* unmanaged<IntPtr, Guid*, Guid*, IntPtr*, int>)(
+                        *(*(void***)Inst + (int)VtableOffset.GetInterface)
+                    );
                     IntPtr outPtr;
                     int hr;
                     fixed (Guid* rclsidPtr = &rclsid)
@@ -170,16 +232,23 @@ namespace Internal.TypeSystem.Ecma
                     {
                         hr = func(Inst, rclsidPtr, riidPtr, &outPtr);
                     }
-                    ppUnk = hr == 0
-                        ? (MetaDataDispenserWrapperCache.MetaDataDispenserRcw)MetaDataDispenserWrapperCache.Instance.GetOrCreateObjectForComInstance(outPtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    ppUnk =
+                        hr == 0
+                            ? (MetaDataDispenserWrapperCache.MetaDataDispenserRcw)
+                                MetaDataDispenserWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    outPtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
                 [PreserveSig]
                 public int BindAsLegacyV2Runtime()
                 {
-                    var func = (delegate* unmanaged<IntPtr, int>)(*(*(void***)Inst + (int)VtableOffset.BindAsLegacyV2Runtime));
+                    var func = (delegate* unmanaged<IntPtr, int>)(
+                        *(*(void***)Inst + (int)VtableOffset.BindAsLegacyV2Runtime)
+                    );
                     return func(Inst);
                 }
 
@@ -208,36 +277,62 @@ namespace Internal.TypeSystem.Ecma
 
         private interface IMetaDataDispenser
         {
-            int OpenScope(string szScope, int dwOpenFlags, ref Guid riid, out MetadataImportRcw? punk);
+            int OpenScope(
+                string szScope,
+                int dwOpenFlags,
+                ref Guid riid,
+                out MetadataImportRcw? punk
+            );
 
             // Don't need any other methods.
         }
 
         private sealed class MetaDataDispenserWrapperCache : ComWrappers
         {
-            public static readonly MetaDataDispenserWrapperCache Instance = new MetaDataDispenserWrapperCache();
+            public static readonly MetaDataDispenserWrapperCache Instance =
+                new MetaDataDispenserWrapperCache();
+
             private MetaDataDispenserWrapperCache() { }
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
 
                 return new MetaDataDispenserRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
 
-            public sealed unsafe record MetaDataDispenserRcw(IntPtr Inst) : IMetaDataDispenser, IDisposable
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
+
+            public sealed unsafe record MetaDataDispenserRcw(IntPtr Inst)
+                : IMetaDataDispenser,
+                    IDisposable
             {
                 private bool _disposed;
 
                 /// <remarks>
                 /// <paramref="punk" /> is simply a boxed IntPtr, because we don't need an RCW.
                 /// </remarks>
-                public int OpenScope(string szScope, int dwOpenFlags, ref Guid riid, out MetadataImportRcw? pUnk)
+                public int OpenScope(
+                    string szScope,
+                    int dwOpenFlags,
+                    ref Guid riid,
+                    out MetadataImportRcw? pUnk
+                )
                 {
                     // IMetaDataDispenserRcw::OpenScope is slot 5 (0-based)
-                    var func = (delegate* unmanaged<IntPtr, char*, int, Guid*, IntPtr*, int>)(*(*(void***)Inst + 4));
+                    var func = (delegate* unmanaged<IntPtr, char*, int, Guid*, IntPtr*, int>)(
+                        *(*(void***)Inst + 4)
+                    );
                     IntPtr outPtr;
                     int hr;
                     fixed (char* szScopePtr = szScope)
@@ -272,14 +367,22 @@ namespace Internal.TypeSystem.Ecma
             }
         }
 
-
         private sealed class CoCreateWrapperCache : ComWrappers
         {
             public static readonly CoCreateWrapperCache Instance = new CoCreateWrapperCache();
+
             private CoCreateWrapperCache() { }
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override SymUnmanagedBinderRcw? CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override SymUnmanagedBinderRcw? CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
 
@@ -290,29 +393,54 @@ namespace Internal.TypeSystem.Ecma
                 }
                 return new SymUnmanagedBinderRcw(ppv);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             public sealed unsafe record SymUnmanagedBinderRcw(IntPtr Inst) : ISymUnmanagedBinder
             {
                 private bool _disposed;
 
-                public int GetReaderForFile(MetadataImportRcw metadataImporter, string fileName, string searchPath, out SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw? reader)
+                public int GetReaderForFile(
+                    MetadataImportRcw metadataImporter,
+                    string fileName,
+                    string searchPath,
+                    out SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw? reader
+                )
                 {
                     // ISymUnmanagedBinder::GetReaderForFile is slot 4 (0-based)
-                    var func = (delegate* unmanaged<IntPtr, IntPtr, char*, char*, IntPtr*, int>)(*(*(void***)Inst + 3));
+                    var func = (delegate* unmanaged<IntPtr, IntPtr, char*, char*, IntPtr*, int>)(
+                        *(*(void***)Inst + 3)
+                    );
                     int hr;
                     IntPtr readerPtr;
                     fixed (char* fileNamePtr = fileName)
                     fixed (char* searchPathPtr = searchPath)
                     {
-                        hr = func(Inst, metadataImporter.Ptr, fileNamePtr, searchPathPtr, &readerPtr);
+                        hr = func(
+                            Inst,
+                            metadataImporter.Ptr,
+                            fileNamePtr,
+                            searchPathPtr,
+                            &readerPtr
+                        );
                     }
-                    reader = hr == 0
-                        ? (SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw)SymUnmanagedReaderWrapperCache.Instance.GetOrCreateObjectForComInstance(readerPtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    reader =
+                        hr == 0
+                            ? (SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw)
+                                SymUnmanagedReaderWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    readerPtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
-                public int GetReaderFromStream(object metadataImporter, object stream, out ISymUnmanagedReader reader) => throw new NotImplementedException();
+
+                public int GetReaderFromStream(
+                    object metadataImporter,
+                    object stream,
+                    out ISymUnmanagedReader reader
+                ) => throw new NotImplementedException();
 
                 public void Dispose()
                 {
@@ -349,6 +477,7 @@ namespace Internal.TypeSystem.Ecma
                 DisposeInternal();
                 GC.SuppressFinalize(this);
             }
+
             private void DisposeInternal()
             {
                 if (_disposed)
@@ -356,6 +485,7 @@ namespace Internal.TypeSystem.Ecma
                 Marshal.Release(Ptr);
                 _disposed = true;
             }
+
             ~MetadataImportRcw()
             {
                 DisposeInternal();
@@ -370,23 +500,37 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class SymUnmanagedNamespaceWrapperCache : ComWrappers
         {
-            public static readonly SymUnmanagedNamespaceWrapperCache Instance = new SymUnmanagedNamespaceWrapperCache();
+            public static readonly SymUnmanagedNamespaceWrapperCache Instance =
+                new SymUnmanagedNamespaceWrapperCache();
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object? CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object? CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
                 return new SymUnmanagedNamespaceRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
 
-            public sealed unsafe record SymUnmanagedNamespaceRcw(IntPtr Inst) : ISymUnmanagedNamespace
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
+
+            public sealed unsafe record SymUnmanagedNamespaceRcw(IntPtr Inst)
+                : ISymUnmanagedNamespace
             {
                 private bool _disposed;
 
                 public int GetName(int bufferLength, out int count, char[] name)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, char*, int>)(*(*(void***)Inst + 3));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, char*, int>)(
+                        *(*(void***)Inst + 3)
+                    );
                     fixed (int* countPtr = &count)
                     fixed (char* namePtr = name)
                     {
@@ -394,9 +538,15 @@ namespace Internal.TypeSystem.Ecma
                     }
                 }
 
-                public int GetNamespaces(int bufferLength, out int count, ISymUnmanagedNamespace[] namespaces)
+                public int GetNamespaces(
+                    int bufferLength,
+                    out int count,
+                    ISymUnmanagedNamespace[] namespaces
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(*(*(void***)Inst + 4));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(
+                        *(*(void***)Inst + 4)
+                    );
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -417,7 +567,12 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 for (int i = 0; i < count; i++)
                                 {
-                                    namespaces[i] = (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    namespaces[i] =
+                                        (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)
+                                            Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -426,9 +581,15 @@ namespace Internal.TypeSystem.Ecma
                     return hr;
                 }
 
-                public int GetVariables(int bufferLength, out int count, ISymUnmanagedVariable[] variables)
+                public int GetVariables(
+                    int bufferLength,
+                    out int count,
+                    ISymUnmanagedVariable[] variables
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(*(*(void***)Inst + 5));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(
+                        *(*(void***)Inst + 5)
+                    );
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -449,7 +610,12 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 for (int i = 0; i < count; i++)
                                 {
-                                    variables[i] = (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)SymUnmanagedVariableWrapperCache.Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    variables[i] =
+                                        (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)
+                                            SymUnmanagedVariableWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -483,15 +649,26 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class SymUnmanagedVariableWrapperCache : ComWrappers
         {
-            public static readonly SymUnmanagedVariableWrapperCache Instance = new SymUnmanagedVariableWrapperCache();
+            public static readonly SymUnmanagedVariableWrapperCache Instance =
+                new SymUnmanagedVariableWrapperCache();
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object? CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object? CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
                 return new SymUnmanagedVariableRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             public sealed unsafe record SymUnmanagedVariableRcw(IntPtr Inst) : ISymUnmanagedVariable
             {
@@ -499,7 +676,9 @@ namespace Internal.TypeSystem.Ecma
 
                 public int GetName(int bufferLength, out int count, char[] name)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, char*, int>)(*(*(void***)Inst + 3));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, char*, int>)(
+                        *(*(void***)Inst + 3)
+                    );
                     fixed (int* countPtr = &count)
                     fixed (char* namePtr = name)
                     {
@@ -507,11 +686,14 @@ namespace Internal.TypeSystem.Ecma
                     }
                 }
 
-                public int GetAttributes(out int attributes) => SingleByRefIntWrapper(4, out attributes);
+                public int GetAttributes(out int attributes) =>
+                    SingleByRefIntWrapper(4, out attributes);
 
                 public int GetSignature(int bufferLength, out int count, byte[] signature)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, byte*, int>)(*(*(void***)Inst + 5));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, byte*, int>)(
+                        *(*(void***)Inst + 5)
+                    );
                     fixed (int* countPtr = &count)
                     fixed (byte* signaturePtr = signature)
                     {
@@ -534,7 +716,9 @@ namespace Internal.TypeSystem.Ecma
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 private int SingleByRefIntWrapper(int methodSlot, out int value)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int*, int>)(*(*(void***)Inst + methodSlot));
+                    var func = (delegate* unmanaged<IntPtr, int*, int>)(
+                        *(*(void***)Inst + methodSlot)
+                    );
                     fixed (int* valuePtr = &value)
                     {
                         return func(Inst, valuePtr);
@@ -566,16 +750,26 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class SymUnmanagedScopeWrapperCache : ComWrappers
         {
-            public static readonly SymUnmanagedScopeWrapperCache Instance = new SymUnmanagedScopeWrapperCache();
+            public static readonly SymUnmanagedScopeWrapperCache Instance =
+                new SymUnmanagedScopeWrapperCache();
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object? CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object? CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
                 return new SymUnmanagedScopeRcw(externalComObject);
             }
 
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             public sealed unsafe record SymUnmanagedScopeRcw(IntPtr Inst) : ISymUnmanagedScope
             {
@@ -586,9 +780,14 @@ namespace Internal.TypeSystem.Ecma
                     var func = (delegate* unmanaged<IntPtr, IntPtr*, int>)(*(*(void***)Inst + 3));
                     IntPtr methodPtr;
                     int hr = func(Inst, &methodPtr);
-                    method = hr == 0
-                        ? (SymUnmanagedMethodWrapperCache.SymUnmanagedMethodRcw)SymUnmanagedMethodWrapperCache.Instance.GetOrCreateObjectForComInstance(methodPtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    method =
+                        hr == 0
+                            ? (SymUnmanagedMethodWrapperCache.SymUnmanagedMethodRcw)
+                                SymUnmanagedMethodWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    methodPtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
@@ -597,15 +796,26 @@ namespace Internal.TypeSystem.Ecma
                     var func = (delegate* unmanaged<IntPtr, IntPtr*, int>)(*(*(void***)Inst + 4));
                     IntPtr scopePtr;
                     int hr = func(Inst, &scopePtr);
-                    scope = hr == 0
-                        ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)Instance.GetOrCreateObjectForComInstance(scopePtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    scope =
+                        hr == 0
+                            ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)
+                                Instance.GetOrCreateObjectForComInstance(
+                                    scopePtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
-                public int GetChildren(int bufferLength, out int count, ISymUnmanagedScope[] children)
+                public int GetChildren(
+                    int bufferLength,
+                    out int count,
+                    ISymUnmanagedScope[] children
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(*(*(void***)Inst + 5));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(
+                        *(*(void***)Inst + 5)
+                    );
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -626,7 +836,12 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 for (int i = 0; i < count; i++)
                                 {
-                                    children[i] = (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    children[i] =
+                                        (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)
+                                            Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -644,16 +859,24 @@ namespace Internal.TypeSystem.Ecma
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 private int SingleByRefIntWrapper(int methodSlot, out int value)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int*, int>)(*(*(void***)Inst + methodSlot));
+                    var func = (delegate* unmanaged<IntPtr, int*, int>)(
+                        *(*(void***)Inst + methodSlot)
+                    );
                     fixed (int* valuePtr = &value)
                     {
                         return func(Inst, valuePtr);
                     }
                 }
 
-                public int GetLocals(int bufferLength, out int count, ISymUnmanagedVariable[] locals)
+                public int GetLocals(
+                    int bufferLength,
+                    out int count,
+                    ISymUnmanagedVariable[] locals
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(*(*(void***)Inst + 9));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(
+                        *(*(void***)Inst + 9)
+                    );
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -674,7 +897,12 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 for (int i = 0; i < count; i++)
                                 {
-                                    locals[i] = (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)SymUnmanagedVariableWrapperCache.Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    locals[i] =
+                                        (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)
+                                            SymUnmanagedVariableWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -683,9 +911,15 @@ namespace Internal.TypeSystem.Ecma
                     return hr;
                 }
 
-                public int GetNamespaces(int bufferLength, out int count, ISymUnmanagedNamespace[] namespaces)
+                public int GetNamespaces(
+                    int bufferLength,
+                    out int count,
+                    ISymUnmanagedNamespace[] namespaces
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(*(*(void***)Inst + 10));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(
+                        *(*(void***)Inst + 10)
+                    );
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -706,7 +940,12 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 for (int i = 0; i < count; i++)
                                 {
-                                    namespaces[i] = (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)SymUnmanagedNamespaceWrapperCache.Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    namespaces[i] =
+                                        (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)
+                                            SymUnmanagedNamespaceWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -740,15 +979,26 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class SymUnmanagedDocumentWrapperCache : ComWrappers
         {
-            public static readonly SymUnmanagedDocumentWrapperCache Instance = new SymUnmanagedDocumentWrapperCache();
+            public static readonly SymUnmanagedDocumentWrapperCache Instance =
+                new SymUnmanagedDocumentWrapperCache();
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object? CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object? CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
                 return new SymUnmanagedDocumentRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             public sealed unsafe record SymUnmanagedDocumentRcw(IntPtr Inst) : ISymUnmanagedDocument
             {
@@ -756,7 +1006,9 @@ namespace Internal.TypeSystem.Ecma
 
                 public int GetUrl(int bufferLength, out int count, char[] url)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, char*, int>)(*(*(void***)Inst + 3));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, char*, int>)(
+                        *(*(void***)Inst + 3)
+                    );
                     fixed (int* countPtr = &count)
                     fixed (char* urlPtr = url)
                     {
@@ -767,21 +1019,32 @@ namespace Internal.TypeSystem.Ecma
                 [MethodImpl(MethodImplOptions.AggressiveInlining)]
                 private int SingleByRefGuidWrapper(int methodSolt, ref Guid guid)
                 {
-                    var func = (delegate* unmanaged<IntPtr, Guid*, int>)(*(*(void***)Inst + methodSolt));
+                    var func = (delegate* unmanaged<IntPtr, Guid*, int>)(
+                        *(*(void***)Inst + methodSolt)
+                    );
                     fixed (Guid* guidPtr = &guid)
                     {
                         return func(Inst, guidPtr);
                     }
                 }
 
-                public int GetDocumentType(ref Guid documentType) => SingleByRefGuidWrapper(4, ref documentType);
-                public int GetLanguage(ref Guid language) => SingleByRefGuidWrapper(5, ref language);
-                public int GetLanguageVendor(ref Guid vendor) => SingleByRefGuidWrapper(6, ref vendor);
-                public int GetChecksumAlgorithmId(ref Guid algorithm) => SingleByRefGuidWrapper(7, ref algorithm);
+                public int GetDocumentType(ref Guid documentType) =>
+                    SingleByRefGuidWrapper(4, ref documentType);
+
+                public int GetLanguage(ref Guid language) =>
+                    SingleByRefGuidWrapper(5, ref language);
+
+                public int GetLanguageVendor(ref Guid vendor) =>
+                    SingleByRefGuidWrapper(6, ref vendor);
+
+                public int GetChecksumAlgorithmId(ref Guid algorithm) =>
+                    SingleByRefGuidWrapper(7, ref algorithm);
 
                 public int GetChecksum(int bufferLength, out int count, byte[] checksum)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, byte*, int>)(*(*(void***)Inst + 8));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, byte*, int>)(
+                        *(*(void***)Inst + 8)
+                    );
                     fixed (int* countPtr = &count)
                     fixed (byte* checksumPtr = checksum)
                     {
@@ -816,13 +1079,39 @@ namespace Internal.TypeSystem.Ecma
                     }
                 }
 
-                public int GetSourceRange(int startLine, int startColumn, int endLine, int endColumn, int bufferLength, out int count, byte[] source)
+                public int GetSourceRange(
+                    int startLine,
+                    int startColumn,
+                    int endLine,
+                    int endColumn,
+                    int bufferLength,
+                    out int count,
+                    byte[] source
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int, int, int, int, int*, byte*, int>)(*(*(void***)Inst + 12));
+                    var func = (delegate* unmanaged<
+                        IntPtr,
+                        int,
+                        int,
+                        int,
+                        int,
+                        int,
+                        int*,
+                        byte*,
+                        int>)(*(*(void***)Inst + 12));
                     fixed (int* countPtr = &count)
                     fixed (byte* sourcePtr = source)
                     {
-                        return func(Inst, startLine, startColumn, endLine, endColumn, bufferLength, countPtr, sourcePtr);
+                        return func(
+                            Inst,
+                            startLine,
+                            startColumn,
+                            endLine,
+                            endColumn,
+                            bufferLength,
+                            countPtr,
+                            sourcePtr
+                        );
                     }
                 }
 
@@ -851,15 +1140,26 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class SymUnmanagedMethodWrapperCache : ComWrappers
         {
-            public static readonly SymUnmanagedMethodWrapperCache Instance = new SymUnmanagedMethodWrapperCache();
+            public static readonly SymUnmanagedMethodWrapperCache Instance =
+                new SymUnmanagedMethodWrapperCache();
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object? CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object? CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
                 return new SymUnmanagedMethodRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             public sealed unsafe record SymUnmanagedMethodRcw(IntPtr Inst) : ISymUnmanagedMethod
             {
@@ -888,26 +1188,45 @@ namespace Internal.TypeSystem.Ecma
                     var func = (delegate* unmanaged<IntPtr, IntPtr*, int>)(*(*(void***)Inst + 5));
                     IntPtr scopePtr;
                     int hr = func(Inst, &scopePtr);
-                    scope = hr == 0
-                        ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)SymUnmanagedScopeWrapperCache.Instance.GetOrCreateObjectForComInstance(scopePtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    scope =
+                        hr == 0
+                            ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)
+                                SymUnmanagedScopeWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    scopePtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
                 public int GetScopeFromOffset(int offset, out ISymUnmanagedScope? scope)
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, IntPtr*, int>)(*(*(void***)Inst + 6));
+                    var func = (delegate* unmanaged<IntPtr, int, IntPtr*, int>)(
+                        *(*(void***)Inst + 6)
+                    );
                     IntPtr scopePtr;
                     int hr = func(Inst, offset, &scopePtr);
-                    scope = hr == 0
-                        ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)SymUnmanagedScopeWrapperCache.Instance.GetOrCreateObjectForComInstance(scopePtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    scope =
+                        hr == 0
+                            ? (SymUnmanagedScopeWrapperCache.SymUnmanagedScopeRcw)
+                                SymUnmanagedScopeWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    scopePtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
-                public int GetOffset(ISymUnmanagedDocument document, int line, int column, out int offset)
+                public int GetOffset(
+                    ISymUnmanagedDocument document,
+                    int line,
+                    int column,
+                    out int offset
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, IntPtr, int, int, int*, int>)(*(*(void***)Inst + 7));
+                    var func = (delegate* unmanaged<IntPtr, IntPtr, int, int, int*, int>)(
+                        *(*(void***)Inst + 7)
+                    );
                     var handle = GCHandle.Alloc(document, GCHandleType.Pinned);
                     try
                     {
@@ -922,16 +1241,39 @@ namespace Internal.TypeSystem.Ecma
                     }
                 }
 
-                public int GetRanges(ISymUnmanagedDocument document, int line, int column, int bufferLength, out int count, int[] ranges)
+                public int GetRanges(
+                    ISymUnmanagedDocument document,
+                    int line,
+                    int column,
+                    int bufferLength,
+                    out int count,
+                    int[] ranges
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, IntPtr, int, int, int, int*, int*, int>)(*(*(void***)Inst + 8));
+                    var func = (delegate* unmanaged<
+                        IntPtr,
+                        IntPtr,
+                        int,
+                        int,
+                        int,
+                        int*,
+                        int*,
+                        int>)(*(*(void***)Inst + 8));
                     var handle = GCHandle.Alloc(document, GCHandleType.Pinned);
                     try
                     {
                         fixed (int* countPtr = &count)
                         fixed (int* rangesPtr = ranges)
                         {
-                            return func(Inst, handle.AddrOfPinnedObject(), line, column, bufferLength, countPtr, rangesPtr);
+                            return func(
+                                Inst,
+                                handle.AddrOfPinnedObject(),
+                                line,
+                                column,
+                                bufferLength,
+                                countPtr,
+                                rangesPtr
+                            );
                         }
                     }
                     finally
@@ -940,9 +1282,15 @@ namespace Internal.TypeSystem.Ecma
                     }
                 }
 
-                public int GetParameters(int bufferLength, out int count, ISymUnmanagedVariable[] parameters)
+                public int GetParameters(
+                    int bufferLength,
+                    out int count,
+                    ISymUnmanagedVariable[] parameters
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(*(*(void***)Inst + 9));
+                    var func = (delegate* unmanaged<IntPtr, int, int*, IntPtr*, int>)(
+                        *(*(void***)Inst + 9)
+                    );
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -963,7 +1311,12 @@ namespace Internal.TypeSystem.Ecma
                             {
                                 for (int i = 0; i < count; i++)
                                 {
-                                    parameters[i] = (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)SymUnmanagedVariableWrapperCache.Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    parameters[i] =
+                                        (SymUnmanagedVariableWrapperCache.SymUnmanagedVariableRcw)
+                                            SymUnmanagedVariableWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -977,15 +1330,27 @@ namespace Internal.TypeSystem.Ecma
                     var func = (delegate* unmanaged<IntPtr, IntPtr*, int>)(*(*(void***)Inst + 10));
                     IntPtr namespacePtr;
                     int hr = func(Inst, &namespacePtr);
-                    @namespace = hr == 0
-                        ? (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)SymUnmanagedNamespaceWrapperCache.Instance.GetOrCreateObjectForComInstance(namespacePtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    @namespace =
+                        hr == 0
+                            ? (SymUnmanagedNamespaceWrapperCache.SymUnmanagedNamespaceRcw)
+                                SymUnmanagedNamespaceWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    namespacePtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
-                public int GetSourceStartEnd(ISymUnmanagedDocument[] documents, int[] lines, int[] columns, out bool defined)
+                public int GetSourceStartEnd(
+                    ISymUnmanagedDocument[] documents,
+                    int[] lines,
+                    int[] columns,
+                    out bool defined
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, IntPtr*, int*, int*, bool*, int>)(*(*(void***)Inst + 11));
+                    var func = (delegate* unmanaged<IntPtr, IntPtr*, int*, int*, bool*, int>)(
+                        *(*(void***)Inst + 11)
+                    );
                     var handle = GCHandle.Alloc(documents, GCHandleType.Pinned);
                     try
                     {
@@ -993,7 +1358,13 @@ namespace Internal.TypeSystem.Ecma
                         fixed (int* columnsPtr = columns)
                         fixed (bool* definedPtr = &defined)
                         {
-                            return func(Inst, (IntPtr*)handle.AddrOfPinnedObject(), linesPtr, columnsPtr, definedPtr);
+                            return func(
+                                Inst,
+                                (IntPtr*)handle.AddrOfPinnedObject(),
+                                linesPtr,
+                                columnsPtr,
+                                definedPtr
+                            );
                         }
                     }
                     finally
@@ -1002,9 +1373,28 @@ namespace Internal.TypeSystem.Ecma
                     }
                 }
 
-                public int GetSequencePoints(int bufferLength, out int count, int[] offsets, ISymUnmanagedDocument[] documents, int[] startLines, int[] startColumns, int[] endLines, int[] endColumns)
+                public int GetSequencePoints(
+                    int bufferLength,
+                    out int count,
+                    int[] offsets,
+                    ISymUnmanagedDocument[] documents,
+                    int[] startLines,
+                    int[] startColumns,
+                    int[] endLines,
+                    int[] endColumns
+                )
                 {
-                    var func = (delegate* unmanaged<IntPtr, int, int*, int*, IntPtr*, int*, int*, int*, int*, int>)(*(*(void***)Inst + 12));
+                    var func = (delegate* unmanaged<
+                        IntPtr,
+                        int,
+                        int*,
+                        int*,
+                        IntPtr*,
+                        int*,
+                        int*,
+                        int*,
+                        int*,
+                        int>)(*(*(void***)Inst + 12));
                     int hr;
 
                     fixed (int* countPtr = &count)
@@ -1016,20 +1406,45 @@ namespace Internal.TypeSystem.Ecma
                     {
                         if (documents == null)
                         {
-                            hr = func(Inst, bufferLength, countPtr, offsetsPtr, null, startLinesPtr, startColumnsPtr, endLinesPtr, endColumnsPtr);
+                            hr = func(
+                                Inst,
+                                bufferLength,
+                                countPtr,
+                                offsetsPtr,
+                                null,
+                                startLinesPtr,
+                                startColumnsPtr,
+                                endLinesPtr,
+                                endColumnsPtr
+                            );
                         }
                         else
                         {
                             IntPtr[] intermediate = new IntPtr[documents.Length];
                             fixed (IntPtr* intermediatePtr = intermediate)
                             {
-                                hr = func(Inst, bufferLength, countPtr, offsetsPtr, intermediatePtr, startLinesPtr, startColumnsPtr, endLinesPtr, endColumnsPtr);
+                                hr = func(
+                                    Inst,
+                                    bufferLength,
+                                    countPtr,
+                                    offsetsPtr,
+                                    intermediatePtr,
+                                    startLinesPtr,
+                                    startColumnsPtr,
+                                    endLinesPtr,
+                                    endColumnsPtr
+                                );
                             }
                             if (hr == 0)
                             {
                                 for (int i = 0; i < documents.Length; i++)
                                 {
-                                    documents[i] = (SymUnmanagedDocumentWrapperCache.SymUnmanagedDocumentRcw)SymUnmanagedDocumentWrapperCache.Instance.GetOrCreateObjectForComInstance(intermediate[i], CreateObjectFlags.UniqueInstance);
+                                    documents[i] =
+                                        (SymUnmanagedDocumentWrapperCache.SymUnmanagedDocumentRcw)
+                                            SymUnmanagedDocumentWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                                intermediate[i],
+                                                CreateObjectFlags.UniqueInstance
+                                            );
                                 }
                             }
                         }
@@ -1063,16 +1478,28 @@ namespace Internal.TypeSystem.Ecma
 
         private sealed class SymUnmanagedReaderWrapperCache : ComWrappers
         {
-            public static readonly SymUnmanagedReaderWrapperCache Instance = new SymUnmanagedReaderWrapperCache();
+            public static readonly SymUnmanagedReaderWrapperCache Instance =
+                new SymUnmanagedReaderWrapperCache();
+
             private SymUnmanagedReaderWrapperCache() { }
 
-            protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count) => throw new NotImplementedException();
-            protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flags)
+            protected override unsafe ComInterfaceEntry* ComputeVtables(
+                object obj,
+                CreateComInterfaceFlags flags,
+                out int count
+            ) => throw new NotImplementedException();
+
+            protected override object CreateObject(
+                IntPtr externalComObject,
+                CreateObjectFlags flags
+            )
             {
                 Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
                 return new SymUnmanagedReaderRcw(externalComObject);
             }
-            protected override void ReleaseObjects(IEnumerable objects) => throw new NotImplementedException();
+
+            protected override void ReleaseObjects(IEnumerable objects) =>
+                throw new NotImplementedException();
 
             /// <summary>
             /// Caveat: implements only the few interface methods currently needed for crossgen2.
@@ -1084,12 +1511,19 @@ namespace Internal.TypeSystem.Ecma
                 public unsafe int GetMethod(int methodToken, out ISymUnmanagedMethod? method)
                 {
                     // ISymUnmanagedReader::GetMethod is slot 7 (0-based)
-                    var func = (delegate* unmanaged<IntPtr, int, IntPtr*, int>)(*(*(void***)Inst + 6));
+                    var func = (delegate* unmanaged<IntPtr, int, IntPtr*, int>)(
+                        *(*(void***)Inst + 6)
+                    );
                     IntPtr methodPtr;
                     int hr = func(Inst, methodToken, &methodPtr);
-                    method = hr == 0
-                        ? (SymUnmanagedMethodWrapperCache.SymUnmanagedMethodRcw)SymUnmanagedMethodWrapperCache.Instance.GetOrCreateObjectForComInstance(methodPtr, CreateObjectFlags.UniqueInstance)
-                        : null;
+                    method =
+                        hr == 0
+                            ? (SymUnmanagedMethodWrapperCache.SymUnmanagedMethodRcw)
+                                SymUnmanagedMethodWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                                    methodPtr,
+                                    CreateObjectFlags.UniqueInstance
+                                )
+                            : null;
                     return hr;
                 }
 
@@ -1122,26 +1556,44 @@ namespace Internal.TypeSystem.Ecma
                 MetadataImportRcw importer,
                 string filename,
                 string searchPath,
-                out SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw? symReader);
+                out SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw? symReader
+            );
         }
 
-        private static int CoCreateInstance(ref Guid rclsid, IntPtr pUnkOuter,
-                                           int dwClsContext,
-                                           ref Guid riid,
-                                           out CoCreateWrapperCache.SymUnmanagedBinderRcw? ppv)
+        private static int CoCreateInstance(
+            ref Guid rclsid,
+            IntPtr pUnkOuter,
+            int dwClsContext,
+            ref Guid riid,
+            out CoCreateWrapperCache.SymUnmanagedBinderRcw? ppv
+        )
         {
             Debug.Assert(rclsid == SymBinderIID);
-            int hr = CoCreateInstance(ref rclsid, pUnkOuter, dwClsContext, ref riid, out IntPtr ppvPtr);
-            ppv = hr == 0
-                ? (CoCreateWrapperCache.SymUnmanagedBinderRcw)CoCreateWrapperCache.Instance.GetOrCreateObjectForComInstance(ppvPtr, CreateObjectFlags.UniqueInstance)
-                : null;
+            int hr = CoCreateInstance(
+                ref rclsid,
+                pUnkOuter,
+                dwClsContext,
+                ref riid,
+                out IntPtr ppvPtr
+            );
+            ppv =
+                hr == 0
+                    ? (CoCreateWrapperCache.SymUnmanagedBinderRcw)
+                        CoCreateWrapperCache.Instance.GetOrCreateObjectForComInstance(
+                            ppvPtr,
+                            CreateObjectFlags.UniqueInstance
+                        )
+                    : null;
             return hr;
 
             [DllImport("ole32.dll")]
-            static extern int CoCreateInstance(ref Guid rclsid, IntPtr pUnkOuter,
-                                            int dwClsContext,
-                                            ref Guid riid,
-                                            out IntPtr ppv);
+            static extern int CoCreateInstance(
+                ref Guid rclsid,
+                IntPtr pUnkOuter,
+                int dwClsContext,
+                ref Guid riid,
+                out IntPtr ppv
+            );
         }
 
         private static void ThrowExceptionForHR(int hr)
@@ -1149,7 +1601,19 @@ namespace Internal.TypeSystem.Ecma
             Marshal.ThrowExceptionForHR(hr, new IntPtr(-1));
         }
 
-        private static readonly Guid SymBinderIID = new Guid(0x0a29ff9e, 0x7f9c, 0x4437, 0x8b, 0x11, 0xf4, 0x24, 0x49, 0x1e, 0x39, 0x31);
+        private static readonly Guid SymBinderIID = new Guid(
+            0x0a29ff9e,
+            0x7f9c,
+            0x4437,
+            0x8b,
+            0x11,
+            0xf4,
+            0x24,
+            0x49,
+            0x1e,
+            0x39,
+            0x31
+        );
 
 #pragma warning disable CA1810 // Initialize reference type static fields inline
         static UnmanagedPdbSymbolReader()
@@ -1159,17 +1623,77 @@ namespace Internal.TypeSystem.Ecma
             {
                 try
                 {
-                    Guid IID_IUnknown = new Guid(0x00000000, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
+                    Guid IID_IUnknown = new Guid(
+                        0x00000000,
+                        0x0000,
+                        0x0000,
+                        0xc0,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x00,
+                        0x46
+                    );
 
-                    Guid CLSID_CLRMetaHost = new Guid(0x9280188d, 0x0e8e, 0x4867, 0xb3, 0x0c, 0x7f, 0xa8, 0x38, 0x84, 0xe8, 0xde);
-                    Guid IID_CLRMetaHost = new Guid(0xd332db9e, 0xb9b3, 0x4125, 0x82, 0x07, 0xa1, 0x48, 0x84, 0xf5, 0x32, 0x16);
-                    if (CLRCreateInstance(ref CLSID_CLRMetaHost, ref IID_CLRMetaHost, out var objMetaHost) < 0)
+                    Guid CLSID_CLRMetaHost = new Guid(
+                        0x9280188d,
+                        0x0e8e,
+                        0x4867,
+                        0xb3,
+                        0x0c,
+                        0x7f,
+                        0xa8,
+                        0x38,
+                        0x84,
+                        0xe8,
+                        0xde
+                    );
+                    Guid IID_CLRMetaHost = new Guid(
+                        0xd332db9e,
+                        0xb9b3,
+                        0x4125,
+                        0x82,
+                        0x07,
+                        0xa1,
+                        0x48,
+                        0x84,
+                        0xf5,
+                        0x32,
+                        0x16
+                    );
+                    if (
+                        CLRCreateInstance(
+                            ref CLSID_CLRMetaHost,
+                            ref IID_CLRMetaHost,
+                            out var objMetaHost
+                        ) < 0
+                    )
                         return;
                     Debug.Assert(objMetaHost is not null);
                     using (objMetaHost)
                     {
-                        Guid IID_CLRRuntimeInfo = new Guid(0xbd39d1d2, 0xba2f, 0x486a, 0x89, 0xb0, 0xb4, 0xb0, 0xcb, 0x46, 0x68, 0x91);
-                        if (objMetaHost.GetRuntime("v4.0.30319", ref IID_CLRRuntimeInfo, out var objRuntime) < 0)
+                        Guid IID_CLRRuntimeInfo = new Guid(
+                            0xbd39d1d2,
+                            0xba2f,
+                            0x486a,
+                            0x89,
+                            0xb0,
+                            0xb4,
+                            0xb0,
+                            0xcb,
+                            0x46,
+                            0x68,
+                            0x91
+                        );
+                        if (
+                            objMetaHost.GetRuntime(
+                                "v4.0.30319",
+                                ref IID_CLRRuntimeInfo,
+                                out var objRuntime
+                            ) < 0
+                        )
                             return;
                         Debug.Assert(objRuntime is not null);
                         using (objRuntime)
@@ -1178,51 +1702,101 @@ namespace Internal.TypeSystem.Ecma
                             objRuntime.BindAsLegacyV2Runtime();
 
                             // Create a COM Metadata dispenser
-                            Guid CLSID_CorMetaDataDispenser = new Guid(0xe5cb7a31, 0x7512, 0x11d2, 0x89, 0xce, 0x00, 0x80, 0xc7, 0x92, 0xe5, 0xd8);
-                            if (objRuntime.GetInterface(ref CLSID_CorMetaDataDispenser, ref IID_IUnknown, out var objDispenser) < 0)
+                            Guid CLSID_CorMetaDataDispenser = new Guid(
+                                0xe5cb7a31,
+                                0x7512,
+                                0x11d2,
+                                0x89,
+                                0xce,
+                                0x00,
+                                0x80,
+                                0xc7,
+                                0x92,
+                                0xe5,
+                                0xd8
+                            );
+                            if (
+                                objRuntime.GetInterface(
+                                    ref CLSID_CorMetaDataDispenser,
+                                    ref IID_IUnknown,
+                                    out var objDispenser
+                                ) < 0
+                            )
                                 return;
                             Debug.Assert(objDispenser is not null);
                             s_metadataDispenser = objDispenser;
 
                             // Create a SymBinder
                             Guid CLSID_CorSymBinder = SymBinderIID;
-                            if (CoCreateInstance(ref CLSID_CorSymBinder,
-                                                 IntPtr.Zero, // pUnkOuter
-                                                 1, // CLSCTX_INPROC_SERVER
-                                                 ref IID_IUnknown,
-                                                 out var objBinder) < 0)
+                            if (
+                                CoCreateInstance(
+                                    ref CLSID_CorSymBinder,
+                                    IntPtr.Zero, // pUnkOuter
+                                    1, // CLSCTX_INPROC_SERVER
+                                    ref IID_IUnknown,
+                                    out var objBinder
+                                ) < 0
+                            )
                                 return;
                             Debug.Assert(objBinder is not null);
                             s_symBinder = objBinder;
                         }
                     }
                 }
-                catch
-                {
-                }
+                catch { }
             }
         }
 
         private static readonly MetaDataDispenserWrapperCache.MetaDataDispenserRcw? s_metadataDispenser;
         private static readonly CoCreateWrapperCache.SymUnmanagedBinderRcw? s_symBinder;
 
-        public static PdbSymbolReader? TryOpenSymbolReaderForMetadataFile(string metadataFileName, string searchPath)
+        public static PdbSymbolReader? TryOpenSymbolReaderForMetadataFile(
+            string metadataFileName,
+            string searchPath
+        )
         {
             try
             {
                 if (s_metadataDispenser == null || s_symBinder == null)
                     return null;
 
-                Guid IID_IMetaDataImport = new Guid(0x7dac8207, 0xd3ae, 0x4c75, 0x9b, 0x67, 0x92, 0x80, 0x1a, 0x49, 0x7d, 0x44);
+                Guid IID_IMetaDataImport = new Guid(
+                    0x7dac8207,
+                    0xd3ae,
+                    0x4c75,
+                    0x9b,
+                    0x67,
+                    0x92,
+                    0x80,
+                    0x1a,
+                    0x49,
+                    0x7d,
+                    0x44
+                );
 
                 // Open an metadata importer on the given filename. We'll end up passing this importer straight
                 // through to the Binder.
-                if (s_metadataDispenser.OpenScope(metadataFileName, 0x00000010 /* read only */, ref IID_IMetaDataImport, out var objImporter) < 0)
+                if (
+                    s_metadataDispenser.OpenScope(
+                        metadataFileName,
+                        0x00000010 /* read only */
+                        ,
+                        ref IID_IMetaDataImport,
+                        out var objImporter
+                    ) < 0
+                )
                     return null;
                 Debug.Assert(objImporter is not null);
                 using (objImporter)
                 {
-                    if (s_symBinder.GetReaderForFile(objImporter, metadataFileName, searchPath, out var reader) < 0)
+                    if (
+                        s_symBinder.GetReaderForFile(
+                            objImporter,
+                            metadataFileName,
+                            searchPath,
+                            out var reader
+                        ) < 0
+                    )
                         return null;
                     Debug.Assert(reader is not null);
 
@@ -1237,7 +1811,9 @@ namespace Internal.TypeSystem.Ecma
 
         private readonly SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw _symUnmanagedReader;
 
-        private UnmanagedPdbSymbolReader(SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw symUnmanagedReader)
+        private UnmanagedPdbSymbolReader(
+            SymUnmanagedReaderWrapperCache.SymUnmanagedReaderRcw symUnmanagedReader
+        )
         {
             _symUnmanagedReader = symUnmanagedReader;
         }
@@ -1274,7 +1850,10 @@ namespace Internal.TypeSystem.Ecma
         public override IEnumerable<ILSequencePoint> GetSequencePointsForMethod(int methodToken)
         {
             ISymUnmanagedMethod? symbolMethod;
-            if (_symUnmanagedReader.GetMethod(methodToken, out symbolMethod) < 0 || symbolMethod is null)
+            if (
+                _symUnmanagedReader.GetMethod(methodToken, out symbolMethod) < 0
+                || symbolMethod is null
+            )
                 yield break;
 
             int count;
@@ -1284,7 +1863,18 @@ namespace Internal.TypeSystem.Ecma
             int[] lineNumbers = new int[count];
             int[] ilOffsets = new int[count];
 
-            ThrowExceptionForHR(symbolMethod.GetSequencePoints(count, out count, ilOffsets, docs, lineNumbers, null, null, null));
+            ThrowExceptionForHR(
+                symbolMethod.GetSequencePoints(
+                    count,
+                    out count,
+                    ilOffsets,
+                    docs,
+                    lineNumbers,
+                    null,
+                    null,
+                    null
+                )
+            );
 
             for (int i = 0; i < count; i++)
             {
@@ -1323,7 +1913,13 @@ namespace Internal.TypeSystem.Ecma
                 int attributes;
                 ThrowExceptionForHR(local.GetAttributes(out attributes));
 
-                variables.Add(new ILLocalVariable(slot, new string(nameBuffer, 0, nameLength - 1), (attributes & 0x1) != 0));
+                variables.Add(
+                    new ILLocalVariable(
+                        slot,
+                        new string(nameBuffer, 0, nameLength - 1),
+                        (attributes & 0x1) != 0
+                    )
+                );
             }
 
             int childrenCount;
@@ -1343,10 +1939,15 @@ namespace Internal.TypeSystem.Ecma
         // and names for all of them.  This assumes a CSC-like compiler that doesn't re-use
         // local slots in the same method across scopes.
         //
-        public override IEnumerable<ILLocalVariable>? GetLocalVariableNamesForMethod(int methodToken)
+        public override IEnumerable<ILLocalVariable>? GetLocalVariableNamesForMethod(
+            int methodToken
+        )
         {
             ISymUnmanagedMethod? symbolMethod;
-            if (_symUnmanagedReader.GetMethod(methodToken, out symbolMethod) < 0 || symbolMethod is null)
+            if (
+                _symUnmanagedReader.GetMethod(methodToken, out symbolMethod) < 0
+                || symbolMethod is null
+            )
                 return null;
             Debug.Assert(symbolMethod is not null);
 

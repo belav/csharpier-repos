@@ -101,7 +101,14 @@ namespace System.Data.Common.EntitySql.AST
             Arg3 = arg3;
         }
 
-        internal BuiltInExpr(BuiltInKind kind, string name, Node arg1, Node arg2, Node arg3, Node arg4)
+        internal BuiltInExpr(
+            BuiltInKind kind,
+            string name,
+            Node arg1,
+            Node arg2,
+            Node arg3,
+            Node arg4
+        )
             : this(kind, name)
         {
             ArgCount = 4;

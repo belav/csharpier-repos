@@ -4,9 +4,8 @@
 
 class Test
 {
-        public void Main ()
-        {
-                byte* arr = stackalloc byte [4];
-        }
+    public void Main()
+    {
+        byte* arr = stackalloc byte[4];
+    }
 }
-

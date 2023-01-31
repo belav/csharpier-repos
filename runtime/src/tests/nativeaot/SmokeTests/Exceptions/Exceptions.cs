@@ -229,7 +229,8 @@ public class BringUpTest
         Environment.Exit(Fail);
     }
 
-    static int CatchGenericException<T>(int a, int b) where T : Exception
+    static int CatchGenericException<T>(int a, int b)
+        where T : Exception
     {
         try
         {
@@ -257,4 +258,3 @@ public class BringUpTest
         return true;
     }
 }
-

@@ -4,10 +4,10 @@
 
 public class C
 {
-    public void Test (System.IDisposable arg)
+    public void Test(System.IDisposable arg)
     {
-        using (arg);
-            { }
+        using (arg)
+            ;
+        { }
     }
 }
-

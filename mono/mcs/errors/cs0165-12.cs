@@ -3,26 +3,26 @@
 
 class X
 {
-        static void Main ()
-        {
-                int foo;
+    static void Main()
+    {
+        int foo;
 
-                int i = 0;
-                if (i == 1)
-                        goto e;
+        int i = 0;
+        if (i == 1)
+            goto e;
 
-                goto f;
+        goto f;
 
         b:
-                i += foo;
+        i += foo;
 
         c:
-                goto b;
+        goto b;
 
         e:
-                foo = 5;
+        foo = 5;
 
         f:
-                goto c;
-        }
+        goto c;
+    }
 }

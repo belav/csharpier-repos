@@ -57,8 +57,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
             IsConfigurable = !setting.IsNotConfigurable;
 
             ToolTip = IsConfigurable
-                        ? ServicesVSResources.Severity
-                        : ServicesVSResources.This_rule_is_not_configurable;
+                ? ServicesVSResources.Severity
+                : ServicesVSResources.This_rule_is_not_configurable;
 
             _setting = setting;
         }

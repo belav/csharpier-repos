@@ -4,15 +4,24 @@
 
 public class C
 {
-	public delegate T1 Func<T1, T2> (T2 t);
-	
-   	public static TR Test<TR, TA> (Func<TR, TA> f, Func<TR, TA> f2)
-	{
-		return default (TR);
-	}
-	
-	public static void Main()
-	{
-		int s = Test (delegate (int i) { return 0; }, delegate (int i) { return "a"; });
-	}
+    public delegate T1 Func<T1, T2>(T2 t);
+
+    public static TR Test<TR, TA>(Func<TR, TA> f, Func<TR, TA> f2)
+    {
+        return default(TR);
+    }
+
+    public static void Main()
+    {
+        int s = Test(
+            delegate(int i)
+            {
+                return 0;
+            },
+            delegate(int i)
+            {
+                return "a";
+            }
+        );
+    }
 }

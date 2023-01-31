@@ -3,9 +3,8 @@
 
 public class Test
 {
-	static void Main ()
-	{
-		if (false && bar ()) {
-		}
-	}
+    static void Main()
+    {
+        if (false && bar()) { }
+    }
 }

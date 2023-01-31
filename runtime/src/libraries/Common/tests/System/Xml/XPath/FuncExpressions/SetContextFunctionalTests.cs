@@ -28,7 +28,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var namespaceManager = new XmlNamespaceManager(new NameTable());
 
             namespaceManager.AddNamespace("NSbook", "http://book.htm");
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -40,9 +41,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     HasNameTable = true,
                     Prefix = "NSbook",
                     Value = "\n\t\t\tA Brief History Of Time\n\t\t"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>
@@ -60,7 +68,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var namespaceManager = new XmlNamespaceManager(new NameTable());
 
             namespaceManager.AddNamespace("NSbook", "http://book.htm");
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -72,9 +81,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     HasNameTable = true,
                     Prefix = "NSbook",
                     Value = "\n\t\t\tA Brief History Of Time\n\t\t"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>
@@ -93,7 +109,8 @@ namespace XPathTests.FunctionalTests.Expressions
 
             namespaceManager.AddNamespace("prefix1", "http://prefix1.htm");
             namespaceManager.AddNamespace("prefix2", "http://prefix2.htm");
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -103,9 +120,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     NamespaceURI = "http://prefix2.htm",
                     HasNameTable = true,
                     Prefix = "prefix2"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>
@@ -124,7 +148,13 @@ namespace XPathTests.FunctionalTests.Expressions
 
             namespaceManager.AddNamespace("NSbook", "http://notbook.htm");
             var expected = new XPathResult(0);
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
 
         /// <summary>
@@ -142,7 +172,8 @@ namespace XPathTests.FunctionalTests.Expressions
             var namespaceManager = new XmlNamespaceManager(new NameTable());
 
             namespaceManager.AddNamespace("foo", "http://default.htm");
-            var expected = new XPathResult(0,
+            var expected = new XPathResult(
+                0,
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Element,
@@ -153,9 +184,16 @@ namespace XPathTests.FunctionalTests.Expressions
                     NamespaceURI = "http://default.htm",
                     HasNameTable = true,
                     Value = "\n\t\t\tNewton's Time Machine\n\t\t"
-                });
+                }
+            );
 
-            Utils.XPathNodesetTest(kind, xml, testExpression, expected, namespaceManager: namespaceManager);
+            Utils.XPathNodesetTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                namespaceManager: namespaceManager
+            );
         }
     }
 }

@@ -31,36 +31,32 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {
-	[ComVisible(true)]
-	public class PropertyValueChangedEventArgs : EventArgs
-	{
+    [ComVisible(true)]
+    public class PropertyValueChangedEventArgs : EventArgs
+    {
 		#region	Local Variables
-		private GridItem changed_item;
-		private object old_value;
+        private GridItem changed_item;
+        private object old_value;
 		#endregion	// Local Variables
 
 		#region Constructors
-		public PropertyValueChangedEventArgs ( GridItem changedItem , object oldValue )
-		{
-			changed_item = changedItem;
-			old_value = oldValue;
-		}
+        public PropertyValueChangedEventArgs(GridItem changedItem, object oldValue)
+        {
+            changed_item = changedItem;
+            old_value = oldValue;
+        }
 		#endregion
 
 		#region Public Instance Properties
-		public GridItem ChangedItem
-		{
-			get {
-				return changed_item;
-			}
-		}
+        public GridItem ChangedItem
+        {
+            get { return changed_item; }
+        }
 
-		public object OldValue
-		{
-			get {
-				return old_value;
-			}
-		}
+        public object OldValue
+        {
+            get { return old_value; }
+        }
 		#endregion	// Public Instance Properties
-	}
+    }
 }

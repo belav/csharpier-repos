@@ -3,23 +3,23 @@
 
 class B
 {
-	public struct A
-	{
-	    public int val;
-	}
+    public struct A
+    {
+        public int val;
+    }
 
-	public static readonly A a = new A ();
+    public static readonly A a = new A();
 }
 
 class C
 {
-    static void f (ref int i)
+    static void f(ref int i)
     {
-	i = 44;
+        i = 44;
     }
 
-    static void Main ()
+    static void Main()
     {
-	f (ref B.a.val);
+        f(ref B.a.val);
     }
 }

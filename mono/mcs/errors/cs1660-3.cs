@@ -3,9 +3,10 @@
 
 using System;
 
-class X {
-	static void Main ()
-	{
-		object o = () => true;
-	}
+class X
+{
+    static void Main()
+    {
+        object o = () => true;
+    }
 }

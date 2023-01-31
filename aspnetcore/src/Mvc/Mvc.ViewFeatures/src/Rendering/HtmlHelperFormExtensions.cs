@@ -33,7 +33,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -66,7 +67,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: FormMethod.Post,
             antiforgery: antiforgery,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -94,7 +96,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -117,7 +120,8 @@ public static class HtmlHelperFormExtensions
     public static MvcForm BeginForm(
         this IHtmlHelper htmlHelper,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -130,7 +134,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: null,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -160,7 +165,8 @@ public static class HtmlHelperFormExtensions
         this IHtmlHelper htmlHelper,
         FormMethod method,
         bool? antiforgery,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -173,7 +179,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: antiforgery,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -207,7 +214,8 @@ public static class HtmlHelperFormExtensions
             routeValues: routeValues,
             method: FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -226,7 +234,8 @@ public static class HtmlHelperFormExtensions
     public static MvcForm BeginForm(
         this IHtmlHelper htmlHelper,
         string actionName,
-        string controllerName)
+        string controllerName
+    )
     {
         if (htmlHelper == null)
         {
@@ -239,7 +248,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -266,7 +276,8 @@ public static class HtmlHelperFormExtensions
         this IHtmlHelper htmlHelper,
         string actionName,
         string controllerName,
-        object routeValues)
+        object routeValues
+    )
     {
         if (htmlHelper == null)
         {
@@ -279,7 +290,8 @@ public static class HtmlHelperFormExtensions
             routeValues,
             FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -300,7 +312,8 @@ public static class HtmlHelperFormExtensions
         this IHtmlHelper htmlHelper,
         string actionName,
         string controllerName,
-        FormMethod method)
+        FormMethod method
+    )
     {
         if (htmlHelper == null)
         {
@@ -313,7 +326,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -342,7 +356,8 @@ public static class HtmlHelperFormExtensions
         string actionName,
         string controllerName,
         object routeValues,
-        FormMethod method)
+        FormMethod method
+    )
     {
         if (htmlHelper == null)
         {
@@ -355,7 +370,8 @@ public static class HtmlHelperFormExtensions
             routeValues,
             method,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -382,7 +398,8 @@ public static class HtmlHelperFormExtensions
         string actionName,
         string controllerName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -395,7 +412,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: null,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 
     /// <summary>
@@ -428,7 +446,8 @@ public static class HtmlHelperFormExtensions
             routeValues: routeValues,
             method: FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -454,7 +473,11 @@ public static class HtmlHelperFormExtensions
     /// <remarks>
     /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
     /// </remarks>
-    public static MvcForm BeginRouteForm(this IHtmlHelper htmlHelper, object routeValues, bool? antiforgery)
+    public static MvcForm BeginRouteForm(
+        this IHtmlHelper htmlHelper,
+        object routeValues,
+        bool? antiforgery
+    )
     {
         if (htmlHelper == null)
         {
@@ -466,7 +489,8 @@ public static class HtmlHelperFormExtensions
             routeValues: routeValues,
             method: FormMethod.Post,
             antiforgery: antiforgery,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -493,7 +517,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -513,7 +538,11 @@ public static class HtmlHelperFormExtensions
     /// <remarks>
     /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
     /// </remarks>
-    public static MvcForm BeginRouteForm(this IHtmlHelper htmlHelper, string routeName, bool? antiforgery)
+    public static MvcForm BeginRouteForm(
+        this IHtmlHelper htmlHelper,
+        string routeName,
+        bool? antiforgery
+    )
     {
         if (htmlHelper == null)
         {
@@ -525,7 +554,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: FormMethod.Post,
             antiforgery: antiforgery,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -550,7 +580,8 @@ public static class HtmlHelperFormExtensions
     public static MvcForm BeginRouteForm(
         this IHtmlHelper htmlHelper,
         string routeName,
-        object routeValues)
+        object routeValues
+    )
     {
         if (htmlHelper == null)
         {
@@ -562,7 +593,8 @@ public static class HtmlHelperFormExtensions
             routeValues,
             FormMethod.Post,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -581,7 +613,8 @@ public static class HtmlHelperFormExtensions
     public static MvcForm BeginRouteForm(
         this IHtmlHelper htmlHelper,
         string routeName,
-        FormMethod method)
+        FormMethod method
+    )
     {
         if (htmlHelper == null)
         {
@@ -593,7 +626,8 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -620,7 +654,8 @@ public static class HtmlHelperFormExtensions
         this IHtmlHelper htmlHelper,
         string routeName,
         object routeValues,
-        FormMethod method)
+        FormMethod method
+    )
     {
         if (htmlHelper == null)
         {
@@ -632,7 +667,8 @@ public static class HtmlHelperFormExtensions
             routeValues,
             method,
             antiforgery: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
     }
 
     /// <summary>
@@ -657,7 +693,8 @@ public static class HtmlHelperFormExtensions
         this IHtmlHelper htmlHelper,
         string routeName,
         FormMethod method,
-        object htmlAttributes)
+        object htmlAttributes
+    )
     {
         if (htmlHelper == null)
         {
@@ -669,6 +706,7 @@ public static class HtmlHelperFormExtensions
             routeValues: null,
             method: method,
             antiforgery: null,
-            htmlAttributes: htmlAttributes);
+            htmlAttributes: htmlAttributes
+        );
     }
 }

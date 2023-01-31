@@ -12,49 +12,74 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegSetValueExW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegSetValueExW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
             int dwType,
             byte[]? lpData,
-            int cbData);
+            int cbData
+        );
 
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegSetValueExW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegSetValueExW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
             int dwType,
             char[]? lpData,
-            int cbData);
+            int cbData
+        );
 
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegSetValueExW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegSetValueExW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
             int dwType,
             ref int lpData,
-            int cbData);
+            int cbData
+        );
 
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegSetValueExW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegSetValueExW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
             int dwType,
             ref long lpData,
-            int cbData);
+            int cbData
+        );
 
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegSetValueExW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegSetValueExW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegSetValueEx(
             SafeRegistryHandle hKey,
             string? lpValueName,
             int Reserved,
             int dwType,
             string? lpData,
-            int cbData);
+            int cbData
+        );
     }
 }

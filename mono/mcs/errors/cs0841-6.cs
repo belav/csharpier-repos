@@ -3,18 +3,21 @@
 
 class MainClass
 {
-	public delegate void Fn (MainClass o);
+    public delegate void Fn(MainClass o);
 
-	public static void Call (Fn f)
-	{
-		f(null);
-	}
+    public static void Call(Fn f)
+    {
+        f(null);
+    }
 
-	public static void Main ()
-	{
-		Call (delegate (MainClass o) {
-			n = o;
-			MainClass n = new MainClass ();
-		});
-	}
+    public static void Main()
+    {
+        Call(
+            delegate(MainClass o)
+            {
+                n = o;
+                MainClass n = new MainClass();
+            }
+        );
+    }
 }

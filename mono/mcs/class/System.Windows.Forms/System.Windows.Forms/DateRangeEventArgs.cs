@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,41 +27,42 @@
 using System;
 using System.Drawing;
 
-namespace System.Windows.Forms {
-	public class DateRangeEventArgs : EventArgs {
-		#region local members 
-	
-		DateTime end;
-		DateTime start;	
+namespace System.Windows.Forms
+{
+    public class DateRangeEventArgs : EventArgs
+    {
+		#region local members
 
-		#endregion // local members 
+        DateTime end;
+        DateTime start;
+
+		#endregion // local members
 
 		#region public constructors
 
-		// constructor that receives two dates, uses the lower of the two as start
-		public DateRangeEventArgs (DateTime start, DateTime end) {
-			this.start = start;
-			this.end = end;
-		}
+        // constructor that receives two dates, uses the lower of the two as start
+        public DateRangeEventArgs(DateTime start, DateTime end)
+        {
+            this.start = start;
+            this.end = end;
+        }
 
 		#endregion // public constructors
 
 		#region public properties
 
-		// end date of this range
-		public DateTime End {
-			get {
-				return end;
-			}
-		}
+        // end date of this range
+        public DateTime End
+        {
+            get { return end; }
+        }
 
-		// start date of this range
-		public DateTime Start {
-			get {
-				return start;
-			}
-		}
-		
+        // start date of this range
+        public DateTime Start
+        {
+            get { return start; }
+        }
+
 		#endregion // public properties
-	}
+    }
 }

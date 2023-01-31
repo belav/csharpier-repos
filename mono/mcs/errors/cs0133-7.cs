@@ -3,8 +3,8 @@
 
 class X
 {
-	void Foo ()
-	{
-		const object o = null ?? "";
-	}
+    void Foo()
+    {
+        const object o = null ?? "";
+    }
 }

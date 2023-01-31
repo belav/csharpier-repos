@@ -2,17 +2,18 @@
 // Line: 15
 using System;
 
-class Y {
-	void x () {}
-
+class Y
+{
+    void x() { }
 }
 
-class X {
-	static int Main ()
-	{
-		Y y = new Y ();
+class X
+{
+    static int Main()
+    {
+        Y y = new Y();
 
-		y.x ();
-		return 0;
-	}
+        y.x();
+        return 0;
+    }
 }

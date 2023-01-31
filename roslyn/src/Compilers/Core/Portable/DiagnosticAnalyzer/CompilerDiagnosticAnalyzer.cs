@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             get
             {
-                // DiagnosticAnalyzer.SupportedDiagnostics should be invoked only once per analyzer, 
+                // DiagnosticAnalyzer.SupportedDiagnostics should be invoked only once per analyzer,
                 // so we don't need to store the computed descriptors array into a field.
 
                 var messageProvider = this.MessageProvider;
@@ -38,7 +38,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public sealed override void Initialize(AnalysisContext context)
         {
             context.EnableConcurrentExecution();
-            context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+            context.ConfigureGeneratedCodeAnalysis(
+                GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+            );
 
             context.RegisterCompilationStartAction(c =>
             {

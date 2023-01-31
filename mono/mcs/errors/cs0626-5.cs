@@ -5,9 +5,9 @@
 
 using System;
 
-public delegate void Handler ();
+public delegate void Handler();
 
-class Test {
-	extern event Handler OnFoo;
+class Test
+{
+    extern event Handler OnFoo;
 }
-

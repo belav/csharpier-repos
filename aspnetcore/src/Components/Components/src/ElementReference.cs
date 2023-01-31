@@ -41,12 +41,11 @@ public readonly struct ElementReference
     /// Instantiates a new <see cref="ElementReference"/>.
     /// </summary>
     /// <param name="id">A unique identifier for this <see cref="ElementReference"/>.</param>
-    public ElementReference(string id) : this(id, null)
-    {
-    }
+    public ElementReference(string id)
+        : this(id, null) { }
 
-    internal static ElementReference CreateWithUniqueId(ElementReferenceContext? context)
-        => new ElementReference(CreateUniqueId(), context);
+    internal static ElementReference CreateWithUniqueId(ElementReferenceContext? context) =>
+        new ElementReference(CreateUniqueId(), context);
 
     private static string CreateUniqueId()
     {

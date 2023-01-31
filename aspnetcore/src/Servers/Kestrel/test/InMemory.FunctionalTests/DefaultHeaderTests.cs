@@ -22,13 +22,7 @@ public class DefaultHeaderTests : LoggedTest
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "GET / HTTP/1.0",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "GET / HTTP/1.0", "", "");
 
                 await connection.ReceiveEnd(
                     "HTTP/1.1 200 OK",
@@ -42,7 +36,8 @@ public class DefaultHeaderTests : LoggedTest
                     $"Date: {testContext.DateHeaderValue}",
                     "Server: Kestrel",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }

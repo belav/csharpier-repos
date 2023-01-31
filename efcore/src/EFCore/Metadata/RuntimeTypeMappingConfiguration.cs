@@ -29,7 +29,8 @@ public sealed class RuntimeTypeMappingConfiguration : AnnotatableBase, ITypeMapp
         int? precision,
         int? scale,
         Type? providerClrType,
-        ValueConverter? valueConverter)
+        ValueConverter? valueConverter
+    )
     {
         ClrType = clrType;
 
@@ -68,31 +69,26 @@ public sealed class RuntimeTypeMappingConfiguration : AnnotatableBase, ITypeMapp
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? ITypeMappingConfiguration.GetMaxLength()
-        => (int?)this[CoreAnnotationNames.MaxLength];
+    int? ITypeMappingConfiguration.GetMaxLength() => (int?)this[CoreAnnotationNames.MaxLength];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool? ITypeMappingConfiguration.IsUnicode()
-        => (bool?)this[CoreAnnotationNames.Unicode];
+    bool? ITypeMappingConfiguration.IsUnicode() => (bool?)this[CoreAnnotationNames.Unicode];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? ITypeMappingConfiguration.GetPrecision()
-        => (int?)this[CoreAnnotationNames.Precision];
+    int? ITypeMappingConfiguration.GetPrecision() => (int?)this[CoreAnnotationNames.Precision];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    int? ITypeMappingConfiguration.GetScale()
-        => (int?)this[CoreAnnotationNames.Scale];
+    int? ITypeMappingConfiguration.GetScale() => (int?)this[CoreAnnotationNames.Scale];
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    ValueConverter? ITypeMappingConfiguration.GetValueConverter()
-        => _valueConverter;
+    ValueConverter? ITypeMappingConfiguration.GetValueConverter() => _valueConverter;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    Type? ITypeMappingConfiguration.GetProviderClrType()
-        => (Type?)this[CoreAnnotationNames.ProviderClrType];
+    Type? ITypeMappingConfiguration.GetProviderClrType() =>
+        (Type?)this[CoreAnnotationNames.ProviderClrType];
 }

@@ -3,13 +3,13 @@
 
 class A<T>
 {
-	public class B
-	{
-		public int Foo;
-	}
+    public class B
+    {
+        public int Foo;
+    }
 }
 
 class X
 {
-	string s = nameof (A<>.B);
+    string s = nameof(A<>.B);
 }

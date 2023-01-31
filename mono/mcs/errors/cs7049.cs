@@ -5,10 +5,8 @@ using System;
 using System.Security;
 using System.Security.Permissions;
 
-public class Program {
-
-	[PrincipalPermission ((SecurityAction)100, Name="Poupou")]
-	public virtual void Show (string message)
-	{
-	}
+public class Program
+{
+    [PrincipalPermission((SecurityAction)100, Name = "Poupou")]
+    public virtual void Show(string message) { }
 }

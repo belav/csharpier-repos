@@ -3,10 +3,13 @@
 
 class C
 {
-	delegate void WithOutParam (out string value);
+    delegate void WithOutParam(out string value);
 
-	static void Main() 
-	{
-		WithOutParam o = (string l) => { return; };
-	}
+    static void Main()
+    {
+        WithOutParam o = (string l) =>
+        {
+            return;
+        };
+    }
 }

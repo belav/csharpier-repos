@@ -22,7 +22,14 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             // [includeType: false]
             // Enable Ctrl+Click on tokens with aliased, referenced or declared symbol.
             // If the token has none of those but does have a type (mostly literals), we're not interested
-            var (symbol, span) = await service.GetSymbolAndBoundSpanAsync(document, position, includeType: false, cancellationToken).ConfigureAwait(false);
+            var (symbol, span) = await service
+                .GetSymbolAndBoundSpanAsync(
+                    document,
+                    position,
+                    includeType: false,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (symbol == null)
             {
@@ -30,11 +37,20 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             }
 
             var solution = document.Project.Solution;
-            var definitions = await GoToDefinitionHelpers.GetDefinitionsAsync(symbol, solution, thirdPartyNavigationAllowed: true, cancellationToken).ConfigureAwait(false);
+            var definitions = await GoToDefinitionHelpers
+                .GetDefinitionsAsync(
+                    symbol,
+                    solution,
+                    thirdPartyNavigationAllowed: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             foreach (var definition in definitions)
             {
-                var location = await definition.GetNavigableLocationAsync(solution.Workspace, cancellationToken).ConfigureAwait(false);
+                var location = await definition
+                    .GetNavigableLocationAsync(solution.Workspace, cancellationToken)
+                    .ConfigureAwait(false);
                 if (location != null)
                     context.AddItem(WellKnownSymbolTypes.Definition, definition);
             }

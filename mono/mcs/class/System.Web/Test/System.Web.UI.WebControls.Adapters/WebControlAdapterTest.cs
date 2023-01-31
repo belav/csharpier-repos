@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,128 +39,139 @@ using System.Web.UI.WebControls.Adapters;
 using System.Web.Configuration;
 using MonoTests.SystemWeb.Framework;
 
-
 namespace MonoTests.System.Web.UI.WebControls.Adapters
 {
-	[TestFixture]
-	public class WebControlAdapterTest
-	{
-		MyWebControl c;
-		MyWebControlAdapter a;
-		StringWriter sw;
-		HtmlTextWriter w;
+    [TestFixture]
+    public class WebControlAdapterTest
+    {
+        MyWebControl c;
+        MyWebControlAdapter a;
+        StringWriter sw;
+        HtmlTextWriter w;
 
-		[SetUp]
-		public void SetUp ()
-		{
-			c = new MyWebControl ();
-			a = new MyWebControlAdapter (c);
-			sw = new StringWriter ();
-			w = new HtmlTextWriter (sw);			
-		}
-		
-		[Test]
-		public void RenderBeginTag ()
-		{
-			a.RenderBeginTag (w);
-			Assert.AreEqual ("RenderBeginTag\n", sw.ToString ().Replace ("\r", ""), "RenderBeginTag #1");
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            c = new MyWebControl();
+            a = new MyWebControlAdapter(c);
+            sw = new StringWriter();
+            w = new HtmlTextWriter(sw);
+        }
 
-		[Test]
-		public void RenderContentsTag ()
-		{
-			a.RenderContents (w);
-			Assert.AreEqual ("RenderContents\n", sw.ToString ().Replace ("\r", ""), "RenderContents #1");
-		}
+        [Test]
+        public void RenderBeginTag()
+        {
+            a.RenderBeginTag(w);
+            Assert.AreEqual(
+                "RenderBeginTag\n",
+                sw.ToString().Replace("\r", ""),
+                "RenderBeginTag #1"
+            );
+        }
 
-		[Test]
-		public void RenderEndTag ()
-		{
-			a.RenderEndTag (w);
-			Assert.AreEqual ("RenderEndTag\n", sw.ToString ().Replace ("\r", ""), "RenderEndTag #1");
-		}
+        [Test]
+        public void RenderContentsTag()
+        {
+            a.RenderContents(w);
+            Assert.AreEqual(
+                "RenderContents\n",
+                sw.ToString().Replace("\r", ""),
+                "RenderContents #1"
+            );
+        }
 
-		[Test]
-		public void Render ()
-		{
-			a.Render (w);
-			Assert.AreEqual ("RenderBeginTag\nRenderContents\nRenderEndTag\n", sw.ToString ().Replace ("\r", ""), "Render #1");
-		}
-		
-		[Test]
-		public void Control ()
-		{
-			Assert.AreEqual (c, a.Control, "Control #1");
-		}
-		
-		[Test]
-		public void IsEnabled ()
-		{
-			MyWebControl parent = new MyWebControl ();
-			parent.Controls.Add (c);
-			Assert.IsTrue (a.IsEnabled, "IsEnabled #1");
-			parent.Enabled = false;
-			Assert.IsFalse (a.IsEnabled, "IsEnabled #2");
-			parent.Enabled = true;
-			c.Enabled = false;
-			Assert.IsFalse (a.IsEnabled, "IsEnabled #3");
-		}
-		
+        [Test]
+        public void RenderEndTag()
+        {
+            a.RenderEndTag(w);
+            Assert.AreEqual("RenderEndTag\n", sw.ToString().Replace("\r", ""), "RenderEndTag #1");
+        }
+
+        [Test]
+        public void Render()
+        {
+            a.Render(w);
+            Assert.AreEqual(
+                "RenderBeginTag\nRenderContents\nRenderEndTag\n",
+                sw.ToString().Replace("\r", ""),
+                "Render #1"
+            );
+        }
+
+        [Test]
+        public void Control()
+        {
+            Assert.AreEqual(c, a.Control, "Control #1");
+        }
+
+        [Test]
+        public void IsEnabled()
+        {
+            MyWebControl parent = new MyWebControl();
+            parent.Controls.Add(c);
+            Assert.IsTrue(a.IsEnabled, "IsEnabled #1");
+            parent.Enabled = false;
+            Assert.IsFalse(a.IsEnabled, "IsEnabled #2");
+            parent.Enabled = true;
+            c.Enabled = false;
+            Assert.IsFalse(a.IsEnabled, "IsEnabled #3");
+        }
+
 #region Support classes
-		
-		class MyWebControl : WebControl
-		{			
-			public override void RenderBeginTag (HtmlTextWriter w)
-			{
-				w.WriteLine("RenderBeginTag");
-			}
 
-			protected internal override void RenderContents (HtmlTextWriter w)
-			{
-				w.WriteLine("RenderContents");
-			}
+        class MyWebControl : WebControl
+        {
+            public override void RenderBeginTag(HtmlTextWriter w)
+            {
+                w.WriteLine("RenderBeginTag");
+            }
 
-			public override void RenderEndTag (HtmlTextWriter w)
-			{
-				w.WriteLine("RenderEndTag");
-			}
+            protected internal override void RenderContents(HtmlTextWriter w)
+            {
+                w.WriteLine("RenderContents");
+            }
 
-		}
+            public override void RenderEndTag(HtmlTextWriter w)
+            {
+                w.WriteLine("RenderEndTag");
+            }
+        }
 
-		class MyWebControlAdapter : SystemWebTestShim.WebControlAdapter
-		{
-			internal MyWebControlAdapter (WebControl wc) : base (wc)
-			{
-			}
-			
-			new internal void RenderBeginTag (HtmlTextWriter w)
-			{
-				base.RenderBeginTag(w);
-			}
+        class MyWebControlAdapter : SystemWebTestShim.WebControlAdapter
+        {
+            internal MyWebControlAdapter(WebControl wc)
+                : base(wc) { }
 
-			new internal void RenderContents (HtmlTextWriter w)
-			{
-				base.RenderContents(w);
-			}
+            new internal void RenderBeginTag(HtmlTextWriter w)
+            {
+                base.RenderBeginTag(w);
+            }
 
-			new internal void RenderEndTag (HtmlTextWriter w)
-			{
-				base.RenderEndTag(w);
-			}
+            new internal void RenderContents(HtmlTextWriter w)
+            {
+                base.RenderContents(w);
+            }
 
-			new internal void Render (HtmlTextWriter w)
-			{
-				base.Render(w);
-			}
-			
-			new internal WebControl Control {
-				get { return base.Control; }
-			}
-			
-			new internal bool IsEnabled {
-				get { return base.IsEnabled; }
-			}
-		}
+            new internal void RenderEndTag(HtmlTextWriter w)
+            {
+                base.RenderEndTag(w);
+            }
+
+            new internal void Render(HtmlTextWriter w)
+            {
+                base.Render(w);
+            }
+
+            new internal WebControl Control
+            {
+                get { return base.Control; }
+            }
+
+            new internal bool IsEnabled
+            {
+                get { return base.IsEnabled; }
+            }
+        }
 #endregion
-	}
+    }
 }

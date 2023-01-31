@@ -3,17 +3,18 @@
 // Compiler options: -warnaserror -warn:4
 
 using System;
-class X {
-	E e;
 
-	E Value {
-		get {
-			return e;
-		}
-	}
+class X
+{
+    E e;
+
+    E Value
+    {
+        get { return e; }
+    }
 }
 
 enum E
 {
-	Foo
+    Foo
 }

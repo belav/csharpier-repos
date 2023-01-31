@@ -67,7 +67,8 @@ namespace Newtonsoft.Json.Tests.Documentation
     #region JsonConverterContractResolver
     public class ConverterContractResolver : DefaultContractResolver
     {
-        public new static readonly ConverterContractResolver Instance = new ConverterContractResolver();
+        public new static readonly ConverterContractResolver Instance =
+            new ConverterContractResolver();
 
         protected override JsonContract CreateContract(Type objectType)
         {
@@ -86,18 +87,22 @@ namespace Newtonsoft.Json.Tests.Documentation
 
     public class PersonConverter : JsonConverter
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-        }
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) { }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             JObject o = (JObject)JToken.ReadFrom(reader);
 
-            Person p = new Person
-            {
-                Name = (string)o["Name"]
-            };
+            Person p = new Person { Name = (string)o["Name"] };
 
             return p;
         }
@@ -113,7 +118,8 @@ namespace Newtonsoft.Json.Tests.Documentation
     {
         private static class AppSettings
         {
-            public static readonly IContractResolver SnakeCaseContractResolver = new DefaultContractResolver();
+            public static readonly IContractResolver SnakeCaseContractResolver =
+                new DefaultContractResolver();
         }
 
         [Test]
@@ -123,37 +129,43 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             #region ReuseContractResolver
             // BAD - a new contract resolver is created each time, forcing slow reflection to be used
-            string json1 = JsonConvert.SerializeObject(person, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                ContractResolver = new DefaultContractResolver
+            string json1 = JsonConvert.SerializeObject(
+                person,
+                new JsonSerializerSettings
                 {
-                    NamingStrategy = new SnakeCaseNamingStrategy()
+                    Formatting = Formatting.Indented,
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy()
+                    }
                 }
-            });
+            );
 
             // GOOD - reuse the contract resolver from a shared location
-            string json2 = JsonConvert.SerializeObject(person, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                ContractResolver = AppSettings.SnakeCaseContractResolver
-            });
+            string json2 = JsonConvert.SerializeObject(
+                person,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    ContractResolver = AppSettings.SnakeCaseContractResolver
+                }
+            );
 
             // GOOD - an internal contract resolver is used
-            string json3 = JsonConvert.SerializeObject(person, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            });
+            string json3 = JsonConvert.SerializeObject(
+                person,
+                new JsonSerializerSettings { Formatting = Formatting.Indented }
+            );
             #endregion
         }
 
         [Test]
         public void ConverterContractResolverTest()
         {
-            string json = JsonConvert.SerializeObject(new DateTime(2000, 10, 10, 10, 10, 10, DateTimeKind.Utc), new JsonSerializerSettings
-            {
-                ContractResolver = ConverterContractResolver.Instance
-            });
+            string json = JsonConvert.SerializeObject(
+                new DateTime(2000, 10, 10, 10, 10, 10, DateTimeKind.Utc),
+                new JsonSerializerSettings { ContractResolver = ConverterContractResolver.Instance }
+            );
 
             Console.WriteLine(json);
         }

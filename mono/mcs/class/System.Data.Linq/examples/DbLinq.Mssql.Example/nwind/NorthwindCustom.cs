@@ -14,7 +14,10 @@ namespace nwind
 {
     partial class Northwind
     {
-        public Table<NoStorageCategory> NoStorageCategories { get { return GetTable<NoStorageCategory>(); } }
+        public Table<NoStorageCategory> NoStorageCategories
+        {
+            get { return GetTable<NoStorageCategory>(); }
+        }
     }
 
     [Table(Name = "dbo.Employees")]
@@ -23,7 +26,14 @@ namespace nwind
         private int _EmployeeID;
         private string _LastName;
 
-        [Column(Storage = "_EmployeeID", Name = "EmployeeID", AutoSync = AutoSync.OnInsert, DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Storage = "_EmployeeID",
+            Name = "EmployeeID",
+            AutoSync = AutoSync.OnInsert,
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         public string Identifier
         {
             get { return this._EmployeeID.ToString(); }
@@ -32,17 +42,10 @@ namespace nwind
         [Column(Storage = "_LastName", DbType = "NVarChar(20) NOT NULL", CanBeNull = false)]
         public string LastName
         {
-            get
-            {
-                return this._LastName;
-            }
-            set
-            {
-                this._LastName = value;
-            }
+            get { return this._LastName; }
+            set { this._LastName = value; }
         }
     }
-
 
     [Table(Name = "dbo.Categories")]
     public partial class NoStorageCategory
@@ -52,7 +55,14 @@ namespace nwind
 
         // Tests the Storage without a setter for the property.
         private int _categoryID;
-        [Column(Storage = "_categoryID", AutoSync = AutoSync.OnInsert, DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+
+        [Column(
+            Storage = "_categoryID",
+            AutoSync = AutoSync.OnInsert,
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         public int CategoryID
         {
             get { return _categoryID; }
@@ -60,6 +70,7 @@ namespace nwind
 
         // No "Storage" attribute, this should go through the property.
         private string _categoryName;
+
         [Column(DbType = "NVarChar(15) NOT NULL", CanBeNull = false)]
         public string CategoryName
         {
@@ -76,6 +87,7 @@ namespace nwind
 
         // "Storage" and property, should set the field directly.
         private string _description;
+
         [DebuggerNonUserCode]
         [Column(Storage = "_description", DbType = "NText", UpdateCheck = UpdateCheck.Never)]
         public string Description

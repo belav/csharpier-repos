@@ -21,23 +21,23 @@ public class SqliteLegacyUpdateSqlGenerator : UpdateAndSelectSqlGenerator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqliteLegacyUpdateSqlGenerator(UpdateSqlGeneratorDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Appends a <c>WHERE</c> condition for the identity (i.e. key value) of the given column.
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="columnModification">The column for which the condition is being generated.</param>
-    protected override void AppendIdentityWhereCondition(StringBuilder commandStringBuilder, IColumnModification columnModification)
+    protected override void AppendIdentityWhereCondition(
+        StringBuilder commandStringBuilder,
+        IColumnModification columnModification
+    )
     {
         Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
         Check.NotNull(columnModification, nameof(columnModification));
 
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, "rowid");
-        commandStringBuilder.Append(" = ")
-            .Append("last_insert_rowid()");
+        commandStringBuilder.Append(" = ").Append("last_insert_rowid()");
     }
 
     /// <summary>
@@ -52,7 +52,8 @@ public class SqliteLegacyUpdateSqlGenerator : UpdateAndSelectSqlGenerator
         StringBuilder commandStringBuilder,
         string name,
         string? schema,
-        int commandPosition)
+        int commandPosition
+    )
     {
         Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
         Check.NotEmpty(name, nameof(name));
@@ -70,7 +71,10 @@ public class SqliteLegacyUpdateSqlGenerator : UpdateAndSelectSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="expectedRowsAffected">The expected number of rows affected.</param>
-    protected override void AppendRowsAffectedWhereCondition(StringBuilder commandStringBuilder, int expectedRowsAffected)
+    protected override void AppendRowsAffectedWhereCondition(
+        StringBuilder commandStringBuilder,
+        int expectedRowsAffected
+    )
     {
         Check.NotNull(commandStringBuilder, nameof(commandStringBuilder));
 
@@ -83,6 +87,6 @@ public class SqliteLegacyUpdateSqlGenerator : UpdateAndSelectSqlGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string GenerateNextSequenceValueOperation(string name, string? schema)
-        => throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
+    public override string GenerateNextSequenceValueOperation(string name, string? schema) =>
+        throw new NotSupportedException(SqliteStrings.SequencesNotSupported);
 }

@@ -23,7 +23,7 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CookieContainer cc = new CookieContainer();
             CookieCollection cookieCollection = new CookieCollection();
-            cookieCollection.Add(new Cookie("name3", "value","/",".contoso.com"));
+            cookieCollection.Add(new Cookie("name3", "value", "/", ".contoso.com"));
             cc.Add(cookieCollection);
             Assert.Equal(1, cc.Count);
         }

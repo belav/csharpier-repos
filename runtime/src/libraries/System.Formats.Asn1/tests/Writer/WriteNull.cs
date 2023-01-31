@@ -29,7 +29,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteNull(Asn1Tag.PrimitiveOctetString));
+                () => writer.WriteNull(Asn1Tag.PrimitiveOctetString)
+            );
         }
 
         [Theory]

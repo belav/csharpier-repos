@@ -30,7 +30,8 @@ int failedTests = 0;
 
 foreach (var options in configurations)
 {
-    Console.WriteLine($"""
+    Console.WriteLine(
+        $"""
         gRPC client options:
         --------------------
         ClientType: {options.ClientType}
@@ -44,7 +45,8 @@ foreach (var options in configurations)
         ServiceAccountKeyFile: {options.ServiceAccountKeyFile}
         UseHttp3: {options.UseHttp3}
         ---
-        """);
+        """
+    );
 
     foreach (var testName in InteropClient.TestNames)
     {
@@ -62,7 +64,9 @@ foreach (var options in configurations)
             Log(testName, "STARTED");
             await client.Run();
             Log(testName, "PASSED");
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Log(testName, "FAILED");
             Console.Error.WriteLine(e);
             failedTests++;
@@ -72,20 +76,26 @@ foreach (var options in configurations)
 
 return 42 + failedTests;
 
-void Log(string testName, string status)
-    => Console.WriteLine($"TestCase: {testName} ... {status}");
+void Log(string testName, string status) => Console.WriteLine($"TestCase: {testName} ... {status}");
 
 sealed class InteropClientWrapper
 {
     private readonly InteropClient _interopClient;
 
-    [DynamicDependency(DynamicallyAccessedMemberTypes.All, "Grpc.Testing.TestService.TestServiceClient", "Android.Device_Emulator.gRPC.Test")]
-    [DynamicDependency(DynamicallyAccessedMemberTypes.All, "Grpc.Testing.UnimplementedService.UnimplementedServiceClient", "Android.Device_Emulator.gRPC.Test")]
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.All,
+        "Grpc.Testing.TestService.TestServiceClient",
+        "Android.Device_Emulator.gRPC.Test"
+    )]
+    [DynamicDependency(
+        DynamicallyAccessedMemberTypes.All,
+        "Grpc.Testing.UnimplementedService.UnimplementedServiceClient",
+        "Android.Device_Emulator.gRPC.Test"
+    )]
     public InteropClientWrapper(ClientOptions options)
     {
         _interopClient = new InteropClient(options);
     }
 
-    public Task Run()
-        => _interopClient.Run();
+    public Task Run() => _interopClient.Run();
 }

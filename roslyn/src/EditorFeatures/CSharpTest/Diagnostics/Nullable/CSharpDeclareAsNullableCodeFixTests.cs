@@ -17,23 +17,25 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.DeclareAsNullable
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsDeclareAsNullable)]
-    public class CSharpDeclareAsNullableCodeFixTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class CSharpDeclareAsNullableCodeFixTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public CSharpDeclareAsNullableCodeFixTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpDeclareAsNullableCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpDeclareAsNullableCodeFixProvider());
 
-        private static readonly TestParameters s_nullableFeature = new TestParameters(parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8));
+        private static readonly TestParameters s_nullableFeature = new TestParameters(
+            parseOptions: new CSharpParseOptions(LanguageVersion.CSharp8)
+        );
 
         [Fact]
         public async Task FixAll()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string M()
@@ -48,7 +50,7 @@ class Program
             return null;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string? M()
@@ -62,14 +64,16 @@ class Program
         else
             return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string M()
@@ -77,21 +81,23 @@ class Program
         return [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string? M()
     {
         return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_Async()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static async System.Threading.Tasks.Task<string> M()
@@ -99,21 +105,23 @@ class Program
         return [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static async System.Threading.Tasks.Task<string?> M()
     {
         return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_AsyncLocalFunction()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
@@ -124,7 +132,7 @@ class Program
         }
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
@@ -134,14 +142,16 @@ class Program
             return null;
         }
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_WithTrivia()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static /*before*/ string /*after*/ M()
@@ -149,51 +159,57 @@ class Program
         return [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static /*before*/ string? /*after*/ M()
     {
         return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_ArrowBody()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string M() => [|null|];
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string? M() => null;
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(26639, "https://github.com/dotnet/roslyn/issues/26639")]
         public async Task FixReturnType_LocalFunction_ArrowBody()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
     {
         string local() => [|null|];
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(26639, "https://github.com/dotnet/roslyn/issues/26639")]
         public async Task FixLocalFunctionReturnType()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -204,7 +220,7 @@ class Program
         }
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -214,44 +230,50 @@ class Program
             return null;
         }
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task NoFixAlreadyNullableReturnType()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static string? M()
     {
         return [|null|];
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(26628, "https://github.com/dotnet/roslyn/issues/26628")]
         public async Task FixField()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string x = [|null|];
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? x = null;
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixFieldEqualsNull()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string x;
@@ -260,7 +282,7 @@ class Program
         x = [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? x;
@@ -268,14 +290,16 @@ class Program
     {
         x = null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixPropertyEqualsNull()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string x { get; set; }
@@ -284,7 +308,7 @@ class Program
         x = [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? x { get; set; }
@@ -292,14 +316,16 @@ class Program
     {
         x = null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixLocalDeclaration()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
@@ -307,21 +333,23 @@ class Program
         string x = [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
     {
         string? x = null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixLocalDeclaration_FromAssignment()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
@@ -330,7 +358,7 @@ class Program
         x = [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
@@ -338,14 +366,16 @@ class Program
         string? x = """";
         x = null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task CannotFixMultiLocalDeclaration_FromAssignment()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
@@ -353,14 +383,16 @@ class Program
         string x, y;
         x = [|null|];
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixParameter_FromAssignment()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M(out string x)
@@ -368,21 +400,23 @@ class Program
         x = [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M(out string? x)
     {
         x = null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task CannotFixParameterOfPartialMethod_FromAssignment()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 partial class Program
 {
     partial void M(out string x);
@@ -391,14 +425,16 @@ partial class Program
     {
         x = [|null|];
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task CannotFixParameterOfExtendedPartialMethod_FromAssignment()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 partial class Program
 {
     public partial void M(out string x);
@@ -407,83 +443,95 @@ partial class Program
     {
         x = [|null|];
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixLocalDeclaration_WithVar()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
     {
         var x = [|null|];
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task NoFixMultiDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M()
     {
         string x = [|null|], y = null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(26628, "https://github.com/dotnet/roslyn/issues/26628")]
         public async Task FixPropertyDeclaration()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string x { get; set; } = [|null|];
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? x { get; set; } = null;
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixPropertyDeclaration_WithReturnNull()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string x { get { return [|null|]; } }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? x { get { return null; } }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixPropertyDeclaration_ArrowBody()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string x => [|null|];
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? x => null;
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -492,23 +540,25 @@ class Program
         public async Task FixOptionalParameter()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M(string x = [|null|]) { }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M(string? x = null) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixLocalWithAs()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M(object o)
@@ -516,21 +566,23 @@ class Program
         string x = [|o as string|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static void M(object o)
     {
         string? x = o as string;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_Iterator_Enumerable()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static System.Collections.Generic.IEnumerable<string> M()
@@ -538,21 +590,23 @@ class Program
         yield return [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static System.Collections.Generic.IEnumerable<string?> M()
     {
         yield return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_Iterator_Enumerator()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static System.Collections.Generic.IEnumerator<string> M()
@@ -560,21 +614,23 @@ class Program
         yield return [|null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     static System.Collections.Generic.IEnumerator<string?> M()
     {
         yield return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_IteratorProperty()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     System.Collections.Generic.IEnumerable<string> Property
@@ -585,7 +641,7 @@ class Program
         }
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     System.Collections.Generic.IEnumerable<string?> Property
@@ -595,14 +651,16 @@ class Program
             yield return null;
         }
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixReturnType_Iterator_LocalFunction()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -613,7 +671,7 @@ class Program
         }
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -623,14 +681,16 @@ class Program
             yield return null;
         }
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(39422, "https://github.com/dotnet/roslyn/issues/39422")]
         public async Task FixReturnType_ConditionalOperator_Function()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string Test(bool? value)
@@ -638,21 +698,23 @@ class Program
         return [|value?.ToString()|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? Test(bool? value)
     {
         return value?.ToString();
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(39422, "https://github.com/dotnet/roslyn/issues/39422")]
         public async Task FixAllReturnType_ConditionalOperator_Function()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string field;
@@ -675,7 +737,7 @@ class Program
         return null;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string field;
@@ -697,14 +759,16 @@ class Program
         Property = null;
         return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(39422, "https://github.com/dotnet/roslyn/issues/39422")]
         public async Task FixAllReturnType_Invocation()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string field;
@@ -729,7 +793,7 @@ class Program
         return null;
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? field;
@@ -753,14 +817,16 @@ class Program
         Property = null;
         return null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(39420, "https://github.com/dotnet/roslyn/issues/39420")]
         public async Task FixReturnType_TernaryExpression_Function()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string Test(bool value)
@@ -768,21 +834,23 @@ class Program
         return [|value ? ""text"" : null|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? Test(bool value)
     {
         return value ? ""text"" : null;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(39423, "https://github.com/dotnet/roslyn/issues/39423")]
         public async Task FixReturnType_Default()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string Test()
@@ -790,21 +858,23 @@ class Program
         return [|default|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? Test()
     {
         return default;
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(39423, "https://github.com/dotnet/roslyn/issues/39423")]
         public async Task FixReturnType_DefaultWithNullableType()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string Test()
@@ -812,21 +882,23 @@ class Program
         return [|default(string)|];
     }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string? Test()
     {
         return default(string);
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixInvocation_NamedArgument()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -835,7 +907,7 @@ class Program
     }
     void M2(string x) { }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -843,14 +915,16 @@ class Program
         M2(x: null);
     }
     void M2(string? x) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(44338, "https://github.com/dotnet/roslyn/issues/44338")]
         public async Task NoFixInvocationOfExternalMethod_NamedArgument()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -858,14 +932,16 @@ class Program
         var list = new System.Collections.Generic.List<string>();
         list.Add(item: [|null|]);
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixInvocation_NamedArgument_OutOfOrder()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -874,7 +950,7 @@ class Program
     }
     void M2(int i, string x) { }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -882,14 +958,16 @@ class Program
         M2(x: null, i: 1);
     }
     void M2(int i, string? x) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(44338, "https://github.com/dotnet/roslyn/issues/44338")]
         public async Task NoFixInvocationOfExternalMethod_NamedArgument_OutOfOrder()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -897,14 +975,16 @@ class Program
         var dict = new System.Collections.Generic.Dictionary<string, int>();
         dict.Add(value: 0, key: [|null|]);
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixInvocation_NamedArgument_Partial()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 partial class Program
 {
     void M()
@@ -913,14 +993,16 @@ partial class Program
     }
     partial void M2(string x);
     partial void M2(string x) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixInvocation_PositionArgument()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -929,7 +1011,7 @@ class Program
     }
     void M2(string x) { }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -937,14 +1019,16 @@ class Program
         M2(null);
     }
     void M2(string? x) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(44338, "https://github.com/dotnet/roslyn/issues/44338")]
         public async Task NoFixInvocationOfExternalMethod_PositionArgument()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -952,14 +1036,16 @@ class Program
         var list = new System.Collections.Generic.List<string>();
         list.Add([|null|]);
     }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixInvocation_PositionArgument_SecondPosition()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -968,7 +1054,7 @@ class Program
     }
     void M2(int i, string x) { }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -976,14 +1062,16 @@ class Program
         M2(1, null);
     }
     void M2(int i, string? x) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixInvocation_PositionArgument_Params()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -991,7 +1079,9 @@ class Program
         M2("""", [|null|]);
     }
     void M2(params string[] x) { }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
@@ -999,7 +1089,7 @@ class Program
         {
             // Not supported yet
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     void M()
@@ -1007,63 +1097,69 @@ class Program
         this[[|null|]];
     }
     int this[string x] { get { throw null!; } set { throw null!; } }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact]
         public async Task FixPropertyDeclaration_Unassigned()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
     string [|S|] { get; }
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
     string? S { get; }
 }",
-                parameters: s_nullableFeature);
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(44983, "https://github.com/dotnet/roslyn/issues/44983")]
         public async Task FixFieldDeclaration_Unassigned()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
     private string [|_value|];
 }",
-@"#nullable enable
+                @"#nullable enable
 
 class C
 {
     private string? _value;
 }",
-                parameters: s_nullableFeature);
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(44983, "https://github.com/dotnet/roslyn/issues/44983")]
         public async Task MultipleDeclarator_NoDiagnostic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
     string [|s|], s2 = ""hello"";
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(46354, "https://github.com/dotnet/roslyn/issues/46354")]
         public async Task FixTupleFieldAssignment()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
   static void F1((string, string?) t)
@@ -1072,7 +1168,7 @@ class Program
     t.Item1 = [|null|];
   }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
   static void F1((string?, string?) t)
@@ -1080,14 +1176,16 @@ class Program
     if (t.Item2 == null) return;
     t.Item1 = null;
   }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(46354, "https://github.com/dotnet/roslyn/issues/46354")]
         public async Task FixTupleNamedFieldAssignment()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
   static void F1((string Foo, string? Bar) t)
@@ -1096,7 +1194,7 @@ class Program
     t.Foo = [|null|];
   }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
   static void F1((string? Foo, string? Bar) t)
@@ -1104,14 +1202,16 @@ class Program
     if (t.Bar == null) return;
     t.Foo = null;
   }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
 
         [Fact, WorkItem(46354, "https://github.com/dotnet/roslyn/issues/46354")]
         public async Task FixTupleGenericFieldAssignment()
         {
             await TestInRegularAndScript1Async(
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
   static void F1<T>((T, T?) t) where T : class
@@ -1122,7 +1222,7 @@ class Program
     var (a, b) = t;
   }
 }",
-@"#nullable enable
+                @"#nullable enable
 class Program
 {
   static void F1<T>((T?, T?) t) where T : class
@@ -1132,7 +1232,9 @@ class Program
     
     var (a, b) = t;
   }
-}", parameters: s_nullableFeature);
+}",
+                parameters: s_nullableFeature
+            );
         }
     }
 }

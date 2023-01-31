@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,31 +30,34 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-	[Guid ("D1899240-F9D2-11D2-BDD6-000064657374")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsISimpleEnumerator {
-
+namespace Mono.Mozilla
+{
+    [Guid("D1899240-F9D2-11D2-BDD6-000064657374")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsISimpleEnumerator
+    {
 #region nsISimpleEnumerator
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int hasMoreElements ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int hasMoreElements(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getNext ( out IntPtr ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getNext(out IntPtr ret);
 
 #endregion
-	}
+    }
 
-
-	internal class nsSimpleEnumerator {
-		public static nsISimpleEnumerator GetProxy (Mono.WebBrowser.IWebBrowser control, nsISimpleEnumerator obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsISimpleEnumerator).GUID, obj);
-			return o as nsISimpleEnumerator;
-		}
-	}
+    internal class nsSimpleEnumerator
+    {
+        public static nsISimpleEnumerator GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsISimpleEnumerator obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsISimpleEnumerator).GUID, obj);
+            return o as nsISimpleEnumerator;
+        }
+    }
 }

@@ -53,10 +53,7 @@ namespace System.Runtime.Intrinsics
         {
             [Intrinsic]
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return Vector128<T>.Count * 2;
-            }
+            get { return Vector128<T>.Count * 2; }
         }
 
         /// <summary>Gets <c>true</c> if <typeparamref name="T" /> is supported; otherwise, <c>false</c>.</summary>
@@ -109,10 +106,7 @@ namespace System.Runtime.Intrinsics
 
         internal string DisplayString
         {
-            get
-            {
-                return IsSupported ? ToString() : SR.NotSupported_Type;
-            }
+            get { return IsSupported ? ToString() : SR.NotSupported_Type; }
         }
 
         /// <summary>Gets the element at the specified index.</summary>
@@ -123,10 +117,7 @@ namespace System.Runtime.Intrinsics
         public T this[int index]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return this.GetElement(index);
-            }
+            get { return this.GetElement(index); }
         }
 
         /// <summary>Adds two vectors to compute their sum.</summary>
@@ -138,10 +129,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator +(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower + right._lower,
-                left._upper + right._upper
-            );
+            return Vector256.Create(left._lower + right._lower, left._upper + right._upper);
         }
 
         /// <summary>Computes the bitwise-and of two vectors.</summary>
@@ -153,10 +141,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator &(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower & right._lower,
-                left._upper & right._upper
-            );
+            return Vector256.Create(left._lower & right._lower, left._upper & right._upper);
         }
 
         /// <summary>Computes the bitwise-or of two vectors.</summary>
@@ -168,10 +153,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator |(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower | right._lower,
-                left._upper | right._upper
-            );
+            return Vector256.Create(left._lower | right._lower, left._upper | right._upper);
         }
 
         /// <summary>Divides two vectors to compute their quotient.</summary>
@@ -183,10 +165,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator /(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower / right._lower,
-                left._upper / right._upper
-            );
+            return Vector256.Create(left._lower / right._lower, left._upper / right._upper);
         }
 
         /// <summary>Divides a vector by a scalar to compute the per-element quotient.</summary>
@@ -217,8 +196,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Vector256<T> left, Vector256<T> right)
         {
-            return (left._lower == right._lower)
-                && (left._upper == right._upper);
+            return (left._lower == right._lower) && (left._upper == right._upper);
         }
 
         /// <summary>Computes the exclusive-or of two vectors.</summary>
@@ -230,10 +208,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator ^(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower ^ right._lower,
-                left._upper ^ right._upper
-            );
+            return Vector256.Create(left._lower ^ right._lower, left._upper ^ right._upper);
         }
 
         /// <summary>Compares two vectors to determine if any elements are not equal.</summary>
@@ -245,8 +220,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator !=(Vector256<T> left, Vector256<T> right)
         {
-            return (left._lower != right._lower)
-                || (left._upper != right._upper);
+            return (left._lower != right._lower) || (left._upper != right._upper);
         }
 
         /// <summary>Shifts each element of a vector left by the specified amount.</summary>
@@ -277,10 +251,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator *(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower * right._lower,
-                left._upper * right._upper
-            );
+            return Vector256.Create(left._lower * right._lower, left._upper * right._upper);
         }
 
         /// <summary>Multiplies a vector by a scalar to compute their product.</summary>
@@ -292,10 +263,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator *(Vector256<T> left, T right)
         {
-            return Vector256.Create(
-                left._lower * right,
-                left._upper * right
-            );
+            return Vector256.Create(left._lower * right, left._upper * right);
         }
 
         /// <summary>Multiplies a vector by a scalar to compute their product.</summary>
@@ -315,10 +283,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator ~(Vector256<T> vector)
         {
-            return Vector256.Create(
-                ~vector._lower,
-                ~vector._upper
-            );
+            return Vector256.Create(~vector._lower, ~vector._upper);
         }
 
         /// <summary>Shifts (signed) each element of a vector right by the specified amount.</summary>
@@ -333,7 +298,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T element = Scalar<T>.ShiftRightArithmetic(value.GetElementUnsafe(index), shiftCount);
+                T element = Scalar<T>.ShiftRightArithmetic(
+                    value.GetElementUnsafe(index),
+                    shiftCount
+                );
                 result.SetElementUnsafe(index, element);
             }
 
@@ -349,10 +317,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator -(Vector256<T> left, Vector256<T> right)
         {
-            return Vector256.Create(
-                left._lower - right._lower,
-                left._upper - right._upper
-            );
+            return Vector256.Create(left._lower - right._lower, left._upper - right._upper);
         }
 
         /// <summary>Computes the unary negation of a vector.</summary>
@@ -363,10 +328,7 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector256<T> operator -(Vector256<T> vector)
         {
-            return Vector256.Create(
-                -vector._lower,
-                -vector._upper
-            );
+            return Vector256.Create(-vector._lower, -vector._upper);
         }
 
         /// <summary>Returns a given vector unchanged.</summary>
@@ -404,7 +366,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="obj">The object to compare with the current instance.</param>
         /// <returns><c>true</c> if <paramref name="obj" /> is a <see cref="Vector256{T}" /> and is equal to the current instance; otherwise, <c>false</c>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is Vector256<T> other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector256<T> other) && Equals(other);
 
         /// <summary>Determines whether the specified <see cref="Vector256{T}" /> is equal to the current instance.</summary>
         /// <param name="other">The <see cref="Vector256{T}" /> to compare with the current instance.</param>
@@ -420,7 +383,9 @@ namespace System.Runtime.Intrinsics
             {
                 if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
                 {
-                    Vector256<T> result = Vector256.Equals(this, other) | ~(Vector256.Equals(this, this) | Vector256.Equals(other, other));
+                    Vector256<T> result =
+                        Vector256.Equals(this, other)
+                        | ~(Vector256.Equals(this, this) | Vector256.Equals(other, other));
                     return result.AsInt32() == Vector256<int>.AllBitsSet;
                 }
                 else
@@ -430,8 +395,7 @@ namespace System.Runtime.Intrinsics
             }
             else
             {
-                return _lower.Equals(other._lower)
-                    && _upper.Equals(other._upper);
+                return _lower.Equals(other._lower) && _upper.Equals(other._upper);
             }
         }
 
@@ -457,7 +421,10 @@ namespace System.Runtime.Intrinsics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString() => ToString("G", CultureInfo.InvariantCulture);
 
-        private string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        private string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector256BaseType<T>();
 
@@ -471,7 +438,9 @@ namespace System.Runtime.Intrinsics
             {
                 sb.Append(separator);
                 sb.Append(' ');
-                sb.Append(((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider));
+                sb.Append(
+                    ((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider)
+                );
             }
             sb.Append('>');
 

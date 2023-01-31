@@ -4,9 +4,7 @@
 
 public partial class C
 {
-	partial void Foo (int[] args);
-	
-	partial void Foo (params int[] args)
-	{
-	}
+    partial void Foo(int[] args);
+
+    partial void Foo(params int[] args) { }
 }

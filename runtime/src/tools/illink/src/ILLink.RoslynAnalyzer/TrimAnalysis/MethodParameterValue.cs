@@ -7,25 +7,34 @@ using Microsoft.CodeAnalysis;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-	partial record MethodParameterValue
-	{
-		public MethodParameterValue (IParameterSymbol parameterSymbol)
-			: this (new ParameterProxy (parameterSymbol)) { }
-		public MethodParameterValue (IMethodSymbol methodSymbol, ParameterIndex parameterIndex, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
-			: this (new (new (methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
+    partial record MethodParameterValue
+    {
+        public MethodParameterValue(IParameterSymbol parameterSymbol)
+            : this(new ParameterProxy(parameterSymbol)) { }
 
-		public MethodParameterValue (ParameterProxy parameter)
-			: this (parameter, FlowAnnotations.GetMethodParameterAnnotation (parameter)) { }
+        public MethodParameterValue(
+            IMethodSymbol methodSymbol,
+            ParameterIndex parameterIndex,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
+            : this(new(new(methodSymbol), parameterIndex), dynamicallyAccessedMemberTypes) { }
 
-		public MethodParameterValue (ParameterProxy parameter, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes, bool overrideIsThis = false)
-		{
-			Parameter = parameter;
-			DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;
-			_overrideIsThis = overrideIsThis;
-		}
+        public MethodParameterValue(ParameterProxy parameter)
+            : this(parameter, FlowAnnotations.GetMethodParameterAnnotation(parameter)) { }
 
-		public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
+        public MethodParameterValue(
+            ParameterProxy parameter,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes,
+            bool overrideIsThis = false
+        )
+        {
+            Parameter = parameter;
+            DynamicallyAccessedMemberTypes = dynamicallyAccessedMemberTypes;
+            _overrideIsThis = overrideIsThis;
+        }
 
-		public IMethodSymbol MethodSymbol => Parameter.Method.Method;
-	}
+        public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
+
+        public IMethodSymbol MethodSymbol => Parameter.Method.Method;
+    }
 }

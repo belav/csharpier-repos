@@ -24,9 +24,7 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public Column(string name, string type, Table table)
-        : base(name, type, table)
-    {
-    }
+        : base(name, type, table) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,8 +32,7 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public new virtual Table Table
-        => (Table)base.Table;
+    public new virtual Table Table => (Table)base.Table;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,10 +40,12 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ColumnAccessors Accessors
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _accessors, this, static column =>
-                ColumnAccessorsFactory.Create(column));
+    public virtual ColumnAccessors Accessors =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _accessors,
+            this,
+            static column => ColumnAccessorsFactory.Create(column)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +53,8 @@ public class Column : ColumnBase<ColumnMapping>, IColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
     ITable IColumn.Table

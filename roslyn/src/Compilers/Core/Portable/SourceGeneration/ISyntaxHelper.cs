@@ -34,8 +34,15 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// <paramref name="node"/> must be a compilation unit or namespace block.
         /// </summary>
-        void AddAliases(GreenNode node, ArrayBuilder<(string aliasName, string symbolName)> aliases, bool global);
-        void AddAliases(CompilationOptions options, ArrayBuilder<(string aliasName, string symbolName)> aliases);
+        void AddAliases(
+            GreenNode node,
+            ArrayBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        );
+        void AddAliases(
+            CompilationOptions options,
+            ArrayBuilder<(string aliasName, string symbolName)> aliases
+        );
 
         bool ContainsAttributeList(SyntaxNode root);
         bool ContainsGlobalAliases(SyntaxNode root);
@@ -56,18 +63,27 @@ namespace Microsoft.CodeAnalysis
         public abstract SyntaxNode GetNameOfAttribute(SyntaxNode node);
 
         public abstract bool IsAttributeList(SyntaxNode node);
-        public abstract SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(SyntaxNode node);
+        public abstract SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(
+            SyntaxNode node
+        );
         public abstract void AddAttributeTargets(SyntaxNode node, ArrayBuilder<SyntaxNode> targets);
 
         public abstract bool IsLambdaExpression(SyntaxNode node);
 
-        public abstract void AddAliases(GreenNode node, ArrayBuilder<(string aliasName, string symbolName)> aliases, bool global);
-        public abstract void AddAliases(CompilationOptions options, ArrayBuilder<(string aliasName, string symbolName)> aliases);
+        public abstract void AddAliases(
+            GreenNode node,
+            ArrayBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        );
+        public abstract void AddAliases(
+            CompilationOptions options,
+            ArrayBuilder<(string aliasName, string symbolName)> aliases
+        );
 
         public abstract bool ContainsGlobalAliases(SyntaxNode root);
 
-        public bool ContainsAttributeList(SyntaxNode root)
-            => ContainsAttributeList(root.Green, this.AttributeListKind);
+        public bool ContainsAttributeList(SyntaxNode root) =>
+            ContainsAttributeList(root.Green, this.AttributeListKind);
 
         private static bool ContainsAttributeList(GreenNode node, int attributeListKind)
         {

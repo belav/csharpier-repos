@@ -12,7 +12,9 @@ namespace System.Net.Primitives.Functional.Tests
         {
             Assert.True(IPAddress.Parse("::FFFF:0:0").IsIPv4MappedToIPv6);
             Assert.True(IPAddress.Parse("0:0:0:0:0:FFFF::").IsIPv4MappedToIPv6);
-            Assert.True(IPAddress.Parse("::FFFF:" + IPAddress.Loopback.ToString()).IsIPv4MappedToIPv6);
+            Assert.True(
+                IPAddress.Parse("::FFFF:" + IPAddress.Loopback.ToString()).IsIPv4MappedToIPv6
+            );
             Assert.True(IPAddress.Parse("::FFFF:192.168.1.1").IsIPv4MappedToIPv6);
             Assert.True(IPAddress.Parse("::ffff:192.168.1.1").IsIPv4MappedToIPv6);
 

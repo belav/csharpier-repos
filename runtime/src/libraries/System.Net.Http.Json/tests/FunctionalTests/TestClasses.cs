@@ -24,7 +24,12 @@ namespace System.Net.Http.Json.Functional.Tests
 
         public static Person Create()
         {
-            return new Person { Name = "R. Daneel Olivaw", Age = 19_230, PlaceOfBirth = "Horn\u00ED Doln\u00ED"};
+            return new Person
+            {
+                Name = "R. Daneel Olivaw",
+                Age = 19_230,
+                PlaceOfBirth = "Horn\u00ED Doln\u00ED"
+            };
         }
 
         public string Serialize(JsonSerializerOptions options = null)
@@ -42,17 +47,23 @@ namespace System.Net.Http.Json.Functional.Tests
 
     internal static class JsonOptions
     {
-        public static readonly JsonSerializerOptions DefaultSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
+        public static readonly JsonSerializerOptions DefaultSerializerOptions =
+            new JsonSerializerOptions(JsonSerializerDefaults.Web);
 
-        public static readonly JsonSerializerOptions DefaultSerializerOptions_StrictNumberHandling = new JsonSerializerOptions(DefaultSerializerOptions)
-        {
-            NumberHandling = JsonNumberHandling.Strict
-        };
+        public static readonly JsonSerializerOptions DefaultSerializerOptions_StrictNumberHandling =
+            new JsonSerializerOptions(DefaultSerializerOptions)
+            {
+                NumberHandling = JsonNumberHandling.Strict
+            };
     }
 
     internal class EnsureDefaultOptionsConverter : JsonConverter<EnsureDefaultOptions>
     {
-        public override EnsureDefaultOptions Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override EnsureDefaultOptions Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             AssertDefaultOptions(options);
 
@@ -63,7 +74,11 @@ namespace System.Net.Http.Json.Functional.Tests
             return new EnsureDefaultOptions();
         }
 
-        public override void Write(Utf8JsonWriter writer, EnsureDefaultOptions value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            EnsureDefaultOptions value,
+            JsonSerializerOptions options
+        )
         {
             AssertDefaultOptions(options);
 
@@ -83,7 +98,5 @@ namespace System.Net.Http.Json.Functional.Tests
     internal class EnsureDefaultOptions { }
 
     [JsonSerializable(typeof(Person))]
-    internal sealed partial class JsonContext : JsonSerializerContext
-    {
-    }
+    internal sealed partial class JsonContext : JsonSerializerContext { }
 }

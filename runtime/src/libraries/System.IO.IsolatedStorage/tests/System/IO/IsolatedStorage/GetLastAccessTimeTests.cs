@@ -30,9 +30,7 @@ namespace System.IO.IsolatedStorage
         public void GetLastAccessTime_ThrowsObjectDisposed()
         {
             IsolatedStorageFile isf;
-            using (isf = IsolatedStorageFile.GetUserStoreForAssembly())
-            {
-            }
+            using (isf = IsolatedStorageFile.GetUserStoreForAssembly()) { }
 
             Assert.Throws<ObjectDisposedException>(() => isf.GetLastAccessTime("foo"));
         }
@@ -52,7 +50,11 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentException>("path", null, () => isf.GetLastAccessTime("\0bad"));
+                AssertExtensions.Throws<ArgumentException>(
+                    "path",
+                    null,
+                    () => isf.GetLastAccessTime("\0bad")
+                );
             }
         }
 

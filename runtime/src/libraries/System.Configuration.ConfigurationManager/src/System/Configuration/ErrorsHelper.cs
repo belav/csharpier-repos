@@ -18,7 +18,10 @@ namespace System.Configuration
             return GetErrorCount(errors) > 0;
         }
 
-        internal static void AddError(ref List<ConfigurationException> errors, ConfigurationException e)
+        internal static void AddError(
+            ref List<ConfigurationException> errors,
+            ConfigurationException e
+        )
         {
             Debug.Assert(e != null, "e != null");
 
@@ -26,16 +29,22 @@ namespace System.Configuration
             errors ??= new List<ConfigurationException>();
 
             ConfigurationErrorsException ce = e as ConfigurationErrorsException;
-            if (ce == null) errors.Add(e);
+            if (ce == null)
+                errors.Add(e);
             else
             {
                 ICollection<ConfigurationException> col = ce.ErrorsGeneric;
-                if (col.Count == 1) errors.Add(e);
-                else errors.AddRange(col);
+                if (col.Count == 1)
+                    errors.Add(e);
+                else
+                    errors.AddRange(col);
             }
         }
 
-        internal static void AddErrors(ref List<ConfigurationException> errors, ICollection<ConfigurationException> coll)
+        internal static void AddErrors(
+            ref List<ConfigurationException> errors,
+            ICollection<ConfigurationException> coll
+        )
         {
             if ((coll == null) || (coll.Count == 0))
             {
@@ -43,12 +52,16 @@ namespace System.Configuration
                 return;
             }
 
-            foreach (ConfigurationException e in coll) AddError(ref errors, e);
+            foreach (ConfigurationException e in coll)
+                AddError(ref errors, e);
         }
 
-        internal static ConfigurationErrorsException GetErrorsException(List<ConfigurationException> errors)
+        internal static ConfigurationErrorsException GetErrorsException(
+            List<ConfigurationException> errors
+        )
         {
-            if (errors == null) return null;
+            if (errors == null)
+                return null;
 
             Debug.Assert(errors.Count != 0, "errors.Count != 0");
             return new ConfigurationErrorsException(errors);
@@ -57,7 +70,8 @@ namespace System.Configuration
         internal static void ThrowOnErrors(List<ConfigurationException> errors)
         {
             ConfigurationErrorsException e = GetErrorsException(errors);
-            if (e != null) throw e;
+            if (e != null)
+                throw e;
         }
     }
 }

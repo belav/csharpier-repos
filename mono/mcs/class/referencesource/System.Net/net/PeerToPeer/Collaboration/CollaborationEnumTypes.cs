@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="CollabEnumTypes.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net.PeerToPeer.Collaboration
@@ -49,7 +49,7 @@ namespace System.Net.PeerToPeer.Collaboration
         Deleted,
         Updated
     }
-    
+
     public enum SubscriptionType
     {
         Blocked = 0,

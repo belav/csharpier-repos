@@ -7,9 +7,16 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+
 internal static class Utils
 {
-    public static void DirectoryCopy(string sourceDirName, string destDirName, Func<string, bool>? predicate=null, bool copySubDirs=true, bool silent=false)
+    public static void DirectoryCopy(
+        string sourceDirName,
+        string destDirName,
+        Func<string, bool>? predicate = null,
+        bool copySubDirs = true,
+        bool silent = false
+    )
     {
         // Get the subdirectories for the specified directory.
         DirectoryInfo dir = new DirectoryInfo(sourceDirName);
@@ -17,8 +24,8 @@ internal static class Utils
         if (!dir.Exists)
         {
             throw new DirectoryNotFoundException(
-                "Source directory does not exist or could not be found: "
-                + sourceDirName);
+                "Source directory does not exist or could not be found: " + sourceDirName
+            );
         }
 
         DirectoryInfo[] dirs = dir.GetDirectories();
@@ -34,13 +41,13 @@ internal static class Utils
             if (predicate != null && !predicate(fullPath))
             {
                 // if (!silent)
-                    // e(MessageImportance.Low, $"Skipping {fullPath}");
+                // e(MessageImportance.Low, $"Skipping {fullPath}");
                 continue;
             }
 
             string tempPath = Path.Combine(destDirName, file.Name);
             // if (!silent)
-                // Logger?.LogMessage(MessageImportance.Low, $"Copying {fullPath} to {tempPath}");
+            // Logger?.LogMessage(MessageImportance.Low, $"Copying {fullPath} to {tempPath}");
             file.CopyTo(tempPath, false);
         }
 
@@ -54,5 +61,4 @@ internal static class Utils
             }
         }
     }
-
 }

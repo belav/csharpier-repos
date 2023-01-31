@@ -4,12 +4,10 @@
 
 public class Test
 {
-        public void Foo ()
-        {
-                Foo (null);
-        }
+    public void Foo()
+    {
+        Foo(null);
+    }
 
-        public static unsafe void Foo (int* buf) { }
+    public static unsafe void Foo(int* buf) { }
 }
-
-

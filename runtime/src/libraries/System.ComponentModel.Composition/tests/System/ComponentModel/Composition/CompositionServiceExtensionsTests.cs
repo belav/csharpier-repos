@@ -17,7 +17,10 @@ namespace System.ComponentModel.Composition
             ComposablePart part = PartFactory.Create();
 
             bool importsSatisfiedCalled = false;
-            compositionService.ImportsSatisfied += delegate (object sender, SatisfyImportsEventArgs e)
+            compositionService.ImportsSatisfied += delegate(
+                object sender,
+                SatisfyImportsEventArgs e
+            )
             {
                 Assert.False(importsSatisfiedCalled);
                 Assert.Equal(part, e.Part);
@@ -32,20 +35,26 @@ namespace System.ComponentModel.Composition
         public void SatisfyImports_AttributedOverride_NullAsCompositionService()
         {
             ICompositionService compositionService = null;
-            Assert.Throws<ArgumentNullException>("compositionService", () =>
-            {
-                compositionService.SatisfyImportsOnce(new MockAttributedPart());
-            });
+            Assert.Throws<ArgumentNullException>(
+                "compositionService",
+                () =>
+                {
+                    compositionService.SatisfyImportsOnce(new MockAttributedPart());
+                }
+            );
         }
 
         [Fact]
         public void SatisfyImports_AttributedOverride_NullAsAttributedPart()
         {
             MockCompositionService compositionService = new MockCompositionService();
-            Assert.Throws<ArgumentNullException>("attributedPart", () =>
-            {
-                compositionService.SatisfyImportsOnce((object)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "attributedPart",
+                () =>
+                {
+                    compositionService.SatisfyImportsOnce((object)null);
+                }
+            );
         }
 
         [Fact]
@@ -55,11 +64,17 @@ namespace System.ComponentModel.Composition
             object attributedPart = new MockAttributedPart();
 
             bool importsSatisfiedCalled = false;
-            compositionService.ImportsSatisfied += delegate (object sender, SatisfyImportsEventArgs e)
+            compositionService.ImportsSatisfied += delegate(
+                object sender,
+                SatisfyImportsEventArgs e
+            )
             {
                 Assert.False(importsSatisfiedCalled);
                 Assert.True(e.Part is ReflectionComposablePart);
-                Assert.True(((ReflectionComposablePart)e.Part).Definition.GetPartType() == typeof(MockAttributedPart));
+                Assert.True(
+                    ((ReflectionComposablePart)e.Part).Definition.GetPartType()
+                        == typeof(MockAttributedPart)
+                );
                 importsSatisfiedCalled = true;
             };
 
@@ -71,20 +86,26 @@ namespace System.ComponentModel.Composition
         public void SatisfyImports_AttributedAndBooleanOverride_NullAsCompositionService()
         {
             ICompositionService compositionService = null;
-            Assert.Throws<ArgumentNullException>("compositionService", () =>
-            {
-                compositionService.SatisfyImportsOnce(new MockAttributedPart());
-            });
+            Assert.Throws<ArgumentNullException>(
+                "compositionService",
+                () =>
+                {
+                    compositionService.SatisfyImportsOnce(new MockAttributedPart());
+                }
+            );
         }
 
         [Fact]
         public void SatisfyImports_AttributedAndBooleanOverride_NullAsAttributedPart()
         {
             MockCompositionService compositionService = new MockCompositionService();
-            Assert.Throws<ArgumentNullException>("attributedPart", () =>
-            {
-                compositionService.SatisfyImportsOnce((object)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "attributedPart",
+                () =>
+                {
+                    compositionService.SatisfyImportsOnce((object)null);
+                }
+            );
         }
 
         [Fact]
@@ -94,11 +115,17 @@ namespace System.ComponentModel.Composition
             object attributedPart = new MockAttributedPart();
 
             bool importsSatisfiedCalled = false;
-            compositionService.ImportsSatisfied += delegate (object sender, SatisfyImportsEventArgs e)
+            compositionService.ImportsSatisfied += delegate(
+                object sender,
+                SatisfyImportsEventArgs e
+            )
             {
                 Assert.False(importsSatisfiedCalled);
                 Assert.True(e.Part is ReflectionComposablePart);
-                Assert.True(((ReflectionComposablePart)e.Part).Definition.GetPartType() == typeof(MockAttributedPart));
+                Assert.True(
+                    ((ReflectionComposablePart)e.Part).Definition.GetPartType()
+                        == typeof(MockAttributedPart)
+                );
                 importsSatisfiedCalled = true;
             };
 
@@ -118,9 +145,7 @@ namespace System.ComponentModel.Composition
 
         internal class MockCompositionService : ICompositionService
         {
-            public MockCompositionService()
-            {
-            }
+            public MockCompositionService() { }
 
             public void SatisfyImportsOnce(ComposablePart part)
             {
@@ -135,9 +160,7 @@ namespace System.ComponentModel.Composition
 
         public class MockAttributedPart
         {
-            public MockAttributedPart()
-            {
-            }
+            public MockAttributedPart() { }
         }
     }
 }

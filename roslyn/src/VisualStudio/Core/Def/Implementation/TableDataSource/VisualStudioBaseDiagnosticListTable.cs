@@ -17,24 +17,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
     internal abstract partial class VisualStudioBaseDiagnosticListTable : AbstractTable
     {
-        protected VisualStudioBaseDiagnosticListTable(Workspace workspace, ITableManagerProvider provider)
-            : base(workspace, provider, StandardTables.ErrorsTable)
-        {
-        }
+        protected VisualStudioBaseDiagnosticListTable(
+            Workspace workspace,
+            ITableManagerProvider provider
+        )
+            : base(workspace, provider, StandardTables.ErrorsTable) { }
 
-        internal override ImmutableArray<string> Columns { get; } = ImmutableArray.Create(
-            StandardTableColumnDefinitions.ErrorSeverity,
-            StandardTableColumnDefinitions.ErrorCode,
-            StandardTableColumnDefinitions.Text,
-            StandardTableColumnDefinitions.ErrorCategory,
-            StandardTableColumnDefinitions.ProjectName,
-            StandardTableColumnDefinitions.DocumentName,
-            StandardTableColumnDefinitions.Line,
-            StandardTableColumnDefinitions.Column,
-            StandardTableColumnDefinitions.BuildTool,
-            StandardTableColumnDefinitions.ErrorSource,
-            StandardTableColumnDefinitions.DetailsExpander,
-            StandardTableColumnDefinitions.SuppressionState);
+        internal override ImmutableArray<string> Columns { get; } =
+            ImmutableArray.Create(
+                StandardTableColumnDefinitions.ErrorSeverity,
+                StandardTableColumnDefinitions.ErrorCode,
+                StandardTableColumnDefinitions.Text,
+                StandardTableColumnDefinitions.ErrorCategory,
+                StandardTableColumnDefinitions.ProjectName,
+                StandardTableColumnDefinitions.DocumentName,
+                StandardTableColumnDefinitions.Line,
+                StandardTableColumnDefinitions.Column,
+                StandardTableColumnDefinitions.BuildTool,
+                StandardTableColumnDefinitions.ErrorSource,
+                StandardTableColumnDefinitions.DetailsExpander,
+                StandardTableColumnDefinitions.SuppressionState
+            );
 
         public static __VSERRORCATEGORY GetErrorCategory(DiagnosticSeverity severity)
         {
@@ -48,7 +51,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             };
         }
 
-        protected abstract class DiagnosticTableEntriesSource : AbstractTableEntriesSource<DiagnosticTableItem>
+        protected abstract class DiagnosticTableEntriesSource
+            : AbstractTableEntriesSource<DiagnosticTableItem>
         {
             public abstract string BuildTool { get; }
             public abstract bool SupportSpanTracking { get; }
@@ -61,7 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             public readonly DiagnosticAnalyzer Analyzer;
             public readonly int Kind;
 
-            public AggregatedKey(ImmutableArray<DocumentId> documentIds, DiagnosticAnalyzer analyzer, int kind)
+            public AggregatedKey(
+                ImmutableArray<DocumentId> documentIds,
+                DiagnosticAnalyzer analyzer,
+                int kind
+            )
             {
                 DocumentIds = documentIds;
                 Analyzer = analyzer;
@@ -75,11 +83,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                     return false;
                 }
 
-                return this.DocumentIds == other.DocumentIds && this.Analyzer == other.Analyzer && this.Kind == other.Kind;
+                return this.DocumentIds == other.DocumentIds
+                    && this.Analyzer == other.Analyzer
+                    && this.Kind == other.Kind;
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(Analyzer.GetHashCode(), Hash.Combine(DocumentIds.GetHashCode(), Kind));
+            public override int GetHashCode() =>
+                Hash.Combine(Analyzer.GetHashCode(), Hash.Combine(DocumentIds.GetHashCode(), Kind));
         }
     }
 }

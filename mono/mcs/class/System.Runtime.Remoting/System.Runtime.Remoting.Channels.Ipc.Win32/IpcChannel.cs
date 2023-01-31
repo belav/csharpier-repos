@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -53,7 +53,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         /// <param name="portName">The port name.</param>
         public IpcChannel(string portName)
-	    : this()
+            : this()
         {
             serverChannel = new IpcServerChannel(portName);
         }
@@ -64,10 +64,11 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <param name="properties">The channel properties.</param>
         /// <param name="clientProvider">The client sink provider. It may be <c>null</c>.</param>
         /// <param name="serverProvider">The server sink provider. It may be <c>null</c>.</param>
-        public IpcChannel(IDictionary properties,
+        public IpcChannel(
+            IDictionary properties,
             IClientChannelSinkProvider clientProvider,
             IServerChannelSinkProvider serverProvider
-            )
+        )
         {
             clientChannel = new IpcClientChannel(properties, clientProvider);
             serverChannel = new IpcServerChannel(properties, serverProvider);
@@ -75,7 +76,11 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         #region IChannelSender Members
 
-        public IMessageSink CreateMessageSink(string url, object remoteChannelData, out string objectURI)
+        public IMessageSink CreateMessageSink(
+            string url,
+            object remoteChannelData,
+            out string objectURI
+        )
         {
             return clientChannel.CreateMessageSink(url, remoteChannelData, out objectURI);
         }
@@ -88,8 +93,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         {
             get
             {
-                return serverChannel != null 
-                    ? serverChannel.ChannelName 
+                return serverChannel != null
+                    ? serverChannel.ChannelName
                     : clientChannel.ChannelName;
             }
         }
@@ -99,7 +104,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             get
             {
                 return serverChannel != null
-                    ? serverChannel.ChannelPriority 
+                    ? serverChannel.ChannelPriority
                     : clientChannel.ChannelPriority;
             }
         }
@@ -121,10 +126,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         public object ChannelData
         {
-            get
-            {
-                return serverChannel != null ? serverChannel.ChannelData : null;
-            }
+            get { return serverChannel != null ? serverChannel.ChannelData : null; }
         }
 
         public void StopListening(object data)
@@ -141,4 +143,3 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         #endregion
     }
 }
-

@@ -30,84 +30,91 @@ using System.Collections.Generic;
 
 namespace System.Windows.Forms
 {
-	[ListBindable (false)]
-	public class NumericUpDownAccelerationCollection : MarshalByRefObject, ICollection<NumericUpDownAcceleration>, 
-		IEnumerable<NumericUpDownAcceleration>, IEnumerable
-	{
+    [ListBindable(false)]
+    public class NumericUpDownAccelerationCollection
+        : MarshalByRefObject,
+            ICollection<NumericUpDownAcceleration>,
+            IEnumerable<NumericUpDownAcceleration>,
+            IEnumerable
+    {
 		#region Fields
-		private List<NumericUpDownAcceleration> items;
+        private List<NumericUpDownAcceleration> items;
 		#endregion
 
 		#region Properties
-		public int Count {
-			get { return items.Count; }
-		}
+        public int Count
+        {
+            get { return items.Count; }
+        }
 
-		public bool IsReadOnly {
-			get { return false; }
-		}
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
 
-		public NumericUpDownAcceleration this[int index] {
-			get { return items[index]; }
-		}
+        public NumericUpDownAcceleration this[int index]
+        {
+            get { return items[index]; }
+        }
 		#endregion
 
 		#region Constructor
-		public NumericUpDownAccelerationCollection ()
-		{
-			items = new List<NumericUpDownAcceleration> ();
-		}
+        public NumericUpDownAccelerationCollection()
+        {
+            items = new List<NumericUpDownAcceleration>();
+        }
 		#endregion
 
 		#region Public Methods
-		public void Add (NumericUpDownAcceleration acceleration)
-		{
-			if (acceleration == null)
-				throw new ArgumentNullException ("Acceleration cannot be null");
+        public void Add(NumericUpDownAcceleration acceleration)
+        {
+            if (acceleration == null)
+                throw new ArgumentNullException("Acceleration cannot be null");
 
-			int i = 0;
-			for (; i < items.Count; i++) {
-				if (acceleration.Seconds < items[i].Seconds)
-					break;
-			}
-			items.Insert (i, acceleration);
-		}
+            int i = 0;
+            for (; i < items.Count; i++)
+            {
+                if (acceleration.Seconds < items[i].Seconds)
+                    break;
+            }
+            items.Insert(i, acceleration);
+        }
 
-		public void AddRange (params NumericUpDownAcceleration[] accelerations)
-		{
-			for (int i = 0; i < accelerations.Length; i++)
-				Add (accelerations [i]);
-		}
+        public void AddRange(params NumericUpDownAcceleration[] accelerations)
+        {
+            for (int i = 0; i < accelerations.Length; i++)
+                Add(accelerations[i]);
+        }
 
-		public void Clear ()
-		{
-			items.Clear ();
-		}
+        public void Clear()
+        {
+            items.Clear();
+        }
 
-		public bool Contains (NumericUpDownAcceleration acceleration)
-		{
-			return items.Contains (acceleration);
-		}
+        public bool Contains(NumericUpDownAcceleration acceleration)
+        {
+            return items.Contains(acceleration);
+        }
 
-		public void CopyTo (NumericUpDownAcceleration[] array, int index)
-		{
-			items.CopyTo (array, index);
-		}
+        public void CopyTo(NumericUpDownAcceleration[] array, int index)
+        {
+            items.CopyTo(array, index);
+        }
 
-		public bool Remove (NumericUpDownAcceleration acceleration)
-		{
-			return items.Remove (acceleration);
-		}
+        public bool Remove(NumericUpDownAcceleration acceleration)
+        {
+            return items.Remove(acceleration);
+        }
 
-		IEnumerator<NumericUpDownAcceleration> IEnumerable<NumericUpDownAcceleration>.GetEnumerator ()
-		{
-			return items.GetEnumerator ();
-		}
+        IEnumerator<NumericUpDownAcceleration> IEnumerable<NumericUpDownAcceleration>.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return items.GetEnumerator ();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return items.GetEnumerator();
+        }
 		#endregion
-	}
+    }
 }

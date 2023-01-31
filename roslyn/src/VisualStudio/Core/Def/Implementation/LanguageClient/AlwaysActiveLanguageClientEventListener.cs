@@ -33,11 +33,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
         public AlwaysActiveLanguageClientEventListener(
             AlwaysActivateInProcLanguageClient languageClient,
             Lazy<ILanguageClientBroker> languageClientBroker,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _languageClient = languageClient;
             _languageClientBroker = languageClientBroker;
-            _asynchronousOperationListener = listenerProvider.GetListener(FeatureAttribute.LanguageServer);
+            _asynchronousOperationListener = listenerProvider.GetListener(
+                FeatureAttribute.LanguageServer
+            );
         }
 
         /// <summary>
@@ -52,12 +55,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             // This needs to be done with .Forget() as the LoadAsync (VS LSP client) synchronously stores the result task of OnLoadedAsync.
             // The synchronous execution happens under the sln load threaded wait dialog, so user actions cannot be made in between triggering LoadAsync and storing the result task from OnLoadedAsync.
             // The result task from OnLoadedAsync is waited on before invoking LSP requests to the ILanguageClient.
-            this._languageClientBroker.Value.LoadAsync(new LanguageClientMetadata(new[] { ContentTypeNames.CSharpContentType, ContentTypeNames.VisualBasicContentType }), _languageClient)
-                .CompletesAsyncOperation(token).Forget();
+            this._languageClientBroker.Value
+                .LoadAsync(
+                    new LanguageClientMetadata(
+                        new[]
+                        {
+                            ContentTypeNames.CSharpContentType,
+                            ContentTypeNames.VisualBasicContentType
+                        }
+                    ),
+                    _languageClient
+                )
+                .CompletesAsyncOperation(token)
+                .Forget();
         }
 
         /// <summary>
-        /// The <see cref="ILanguageClientBroker.LoadAsync(ILanguageClientMetadata, ILanguageClient)"/> 
+        /// The <see cref="ILanguageClientBroker.LoadAsync(ILanguageClientMetadata, ILanguageClient)"/>
         /// requires that we pass the <see cref="ILanguageClientMetadata"/> along with the language client instance.
         /// The implementation of <see cref="ILanguageClientMetadata"/> is not public, so have to re-implement.
         /// https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1043922 tracking to remove this.

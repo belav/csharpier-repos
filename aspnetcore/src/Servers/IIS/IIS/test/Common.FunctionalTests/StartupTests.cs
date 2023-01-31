@@ -26,14 +26,18 @@ using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 #else
 
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 // Contains all tests related to Startup, requiring starting ANCM/IIS every time.
@@ -41,11 +45,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 [SkipNonHelix("https://github.com/dotnet/aspnetcore/issues/25107")]
 public class StartupTests : IISFunctionalTestBase
 {
-    public StartupTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public StartupTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
-    private readonly string _dotnetLocation = DotNetCommands.GetDotNetExecutable(RuntimeArchitecture.x64);
+    private readonly string _dotnetLocation = DotNetCommands.GetDotNetExecutable(
+        RuntimeArchitecture.x64
+    );
 
     [ConditionalFact]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
@@ -55,21 +60,39 @@ public class StartupTests : IISFunctionalTestBase
         // Point to dotnet installed in user profile.
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
         deploymentParameters.EnvironmentVariables["DotnetPath"] = _dotnetLocation;
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "%DotnetPath%"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "%DotnetPath%")
+        );
         await StartAsync(deploymentParameters);
     }
 
     [ConditionalTheory]
     [InlineData("bogus", "", @"Executable was not found at '.*?\\bogus.exe")]
-    [InlineData("c:\\random files\\dotnet.exe", "something.dll", @"Could not find dotnet.exe at '.*?\\dotnet.exe'")]
-    [InlineData(".\\dotnet.exe", "something.dll", @"Could not find dotnet.exe at '.*?\\.\\dotnet.exe'")]
+    [InlineData(
+        "c:\\random files\\dotnet.exe",
+        "something.dll",
+        @"Could not find dotnet.exe at '.*?\\dotnet.exe'"
+    )]
+    [InlineData(
+        ".\\dotnet.exe",
+        "something.dll",
+        @"Could not find dotnet.exe at '.*?\\.\\dotnet.exe'"
+    )]
     [InlineData("dotnet.exe", "", @"Application arguments are empty.")]
     [InlineData("dotnet.zip", "", @"Process path 'dotnet.zip' doesn't have '.exe' extension.")]
-    public async Task InvalidProcessPath_ExpectServerError(string path, string arguments, string subError)
+    public async Task InvalidProcessPath_ExpectServerError(
+        string path,
+        string arguments,
+        string subError
+    )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path));
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", arguments));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path)
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", arguments)
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -79,7 +102,11 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.UnableToStart(deploymentResult, subError), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.UnableToStart(deploymentResult, subError),
+            Logger
+        );
         if (DeployerSelector.HasNewShim)
         {
             Assert.Contains("500.0", await response.Content.ReadAsStringAsync());
@@ -95,8 +122,16 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
-        var dotnetLocationWithoutExtension = _dotnetLocation.Substring(0, _dotnetLocation.LastIndexOf(".", StringComparison.Ordinal));
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", dotnetLocationWithoutExtension));
+        var dotnetLocationWithoutExtension = _dotnetLocation.Substring(
+            0,
+            _dotnetLocation.LastIndexOf(".", StringComparison.Ordinal)
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                "processPath",
+                dotnetLocationWithoutExtension
+            )
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -106,8 +141,15 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
-        var dotnetLocationWithoutExtension = _dotnetLocation.Substring(0, _dotnetLocation.LastIndexOf(".", StringComparison.Ordinal)).ToUpperInvariant();
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", dotnetLocationWithoutExtension));
+        var dotnetLocationWithoutExtension = _dotnetLocation
+            .Substring(0, _dotnetLocation.LastIndexOf(".", StringComparison.Ordinal))
+            .ToUpperInvariant();
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection(
+                "processPath",
+                dotnetLocationWithoutExtension
+            )
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -121,14 +163,19 @@ public class StartupTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
         deploymentParameters.EnvironmentVariables["PATH"] = Path.GetDirectoryName(_dotnetLocation);
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", path)
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         await deploymentResult.AssertStarts();
 
         StopServer();
         // Verify that in this scenario where.exe was invoked only once by shim and request handler uses cached value
-        Assert.Equal(1, TestSink.Writes.Count(w => w.Message.Contains("Invoking where.exe to find dotnet.exe")));
+        Assert.Equal(
+            1,
+            TestSink.Writes.Count(w => w.Message.Contains("Invoking where.exe to find dotnet.exe"))
+        );
     }
 
     [ConditionalFact]
@@ -142,17 +189,27 @@ public class StartupTests : IISFunctionalTestBase
 
         // IIS doesn't allow empty PATH
         deploymentParameters.EnvironmentVariables["PATH"] = ".";
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "dotnet"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "dotnet")
+        );
 
         // Key is always in 32bit view
-        using (var localMachine = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32))
+        using (
+            var localMachine = RegistryKey.OpenBaseKey(
+                RegistryHive.LocalMachine,
+                RegistryView.Registry32
+            )
+        )
         {
             var installDir = DotNetCommands.GetDotNetInstallDir(RuntimeArchitecture.x64);
-            using (new TestRegistryKey(
-                localMachine,
-                "SOFTWARE\\dotnet\\Setup\\InstalledVersions\\" + RuntimeArchitecture.x64,
-                "InstallLocation",
-                installDir))
+            using (
+                new TestRegistryKey(
+                    localMachine,
+                    "SOFTWARE\\dotnet\\Setup\\InstalledVersions\\" + RuntimeArchitecture.x64,
+                    "InstallLocation",
+                    installDir
+                )
+            )
             {
                 var deploymentResult = await DeployAsync(deploymentParameters);
                 await deploymentResult.AssertStarts();
@@ -160,7 +217,15 @@ public class StartupTests : IISFunctionalTestBase
                 // Verify that in this scenario dotnet.exe was found using InstallLocation lookup
                 // I would've liked to make a copy of dotnet directory in this test and use it for verification
                 // but dotnet roots are usually very large on dev machines so this test would take disproportionally long time and disk space
-                Assert.Equal(1, TestSink.Writes.Count(w => w.Message.Contains($"Found dotnet.exe in InstallLocation at '{installDir}\\dotnet.exe'")));
+                Assert.Equal(
+                    1,
+                    TestSink.Writes.Count(
+                        w =>
+                            w.Message.Contains(
+                                $"Found dotnet.exe in InstallLocation at '{installDir}\\dotnet.exe'"
+                            )
+                    )
+                );
             }
         }
     }
@@ -172,11 +237,14 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
-        using (new TestRegistryKey(
-            Registry.LocalMachine,
-            "SOFTWARE\\Microsoft\\IIS Extensions\\IIS AspNetCore Module V2\\Parameters",
-            "DisableANCM",
-            1))
+        using (
+            new TestRegistryKey(
+                Registry.LocalMachine,
+                "SOFTWARE\\Microsoft\\IIS Extensions\\IIS AspNetCore Module V2\\Parameters",
+                "DisableANCM",
+                1
+            )
+        )
         {
             var deploymentResult = await DeployAsync(deploymentParameters);
             // Disabling ANCM produces no log files
@@ -188,12 +256,17 @@ public class StartupTests : IISFunctionalTestBase
 
             StopServer();
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, "AspNetCore Module is disabled", Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                "AspNetCore Module is disabled",
+                Logger
+            );
         }
     }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(DeployerSelector.ServerType)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(DeployerSelector.ServerType)
             .WithTfms(Tfm.Default)
             .WithAllApplicationTypes()
             .WithAncmV2InProcess();
@@ -215,14 +288,24 @@ public class StartupTests : IISFunctionalTestBase
         deploymentParameters.TransformArguments((arguments, root) => "");
 
         // We need the right dotnet on the path in IIS
-        deploymentParameters.EnvironmentVariables["PATH"] = Path.GetDirectoryName(DotNetCommands.GetDotNetExecutable(deploymentParameters.RuntimeArchitecture));
+        deploymentParameters.EnvironmentVariables["PATH"] = Path.GetDirectoryName(
+            DotNetCommands.GetDotNetExecutable(deploymentParameters.RuntimeArchitecture)
+        );
 
         // ReferenceTestTasks is workaround for https://github.com/dotnet/sdk/issues/2482
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        Assert.True(File.Exists(Path.Combine(deploymentResult.ContentRoot, "InProcessWebSite.exe")));
+        Assert.True(
+            File.Exists(Path.Combine(deploymentResult.ContentRoot, "InProcessWebSite.exe"))
+        );
         Assert.False(File.Exists(Path.Combine(deploymentResult.ContentRoot, "hostfxr.dll")));
-        Assert.Contains("InProcessWebSite.exe", Helpers.ReadAllTextFromFile(Path.Combine(deploymentResult.ContentRoot, "web.config"), Logger));
+        Assert.Contains(
+            "InProcessWebSite.exe",
+            Helpers.ReadAllTextFromFile(
+                Path.Combine(deploymentResult.ContentRoot, "web.config"),
+                Logger
+            )
+        );
 
         await deploymentResult.AssertStarts();
     }
@@ -239,9 +322,17 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvents(deploymentResult,
-            EventLogHelpers.InProcessFailedToStart(deploymentResult, "CLR worker thread exited prematurely"),
-            EventLogHelpers.InProcessThreadException(deploymentResult, ".*?Application is running inside IIS process but is not configured to use IIS server"));
+        EventLogHelpers.VerifyEventLogEvents(
+            deploymentResult,
+            EventLogHelpers.InProcessFailedToStart(
+                deploymentResult,
+                "CLR worker thread exited prematurely"
+            ),
+            EventLogHelpers.InProcessThreadException(
+                deploymentResult,
+                ".*?Application is running inside IIS process but is not configured to use IIS server"
+            )
+        );
     }
 
     [ConditionalFact]
@@ -257,9 +348,17 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvents(deploymentResult,
-            EventLogHelpers.InProcessFailedToStart(deploymentResult, "CLR worker thread exited prematurely"),
-            EventLogHelpers.InProcessThreadException(deploymentResult, ", exception code = '0xe0434352'"));
+        EventLogHelpers.VerifyEventLogEvents(
+            deploymentResult,
+            EventLogHelpers.InProcessFailedToStart(
+                deploymentResult,
+                "CLR worker thread exited prematurely"
+            ),
+            EventLogHelpers.InProcessThreadException(
+                deploymentResult,
+                ", exception code = '0xe0434352'"
+            )
+        );
     }
 
     [ConditionalFact]
@@ -274,9 +373,14 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvents(deploymentResult,
-            EventLogHelpers.InProcessFailedToStart(deploymentResult, "CLR worker thread exited prematurely"),
-            EventLogHelpers.InProcessThreadExit(deploymentResult, "12"));
+        EventLogHelpers.VerifyEventLogEvents(
+            deploymentResult,
+            EventLogHelpers.InProcessFailedToStart(
+                deploymentResult,
+                "CLR worker thread exited prematurely"
+            ),
+            EventLogHelpers.InProcessThreadExit(deploymentResult, "12")
+        );
     }
 
     [ConditionalFact]
@@ -289,7 +393,8 @@ public class StartupTests : IISFunctionalTestBase
         File.Copy(
             Path.Combine(deploymentResult.ContentRoot, "aspnetcorev2_inprocess.dll"),
             Path.Combine(deploymentResult.ContentRoot, "hostfxr.dll"),
-            true);
+            true
+        );
 
         if (DeployerSelector.HasNewShim)
         {
@@ -300,7 +405,11 @@ public class StartupTests : IISFunctionalTestBase
             await AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult);
         }
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessHostfxrInvalid(deploymentResult), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessHostfxrInvalid(deploymentResult),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -316,21 +425,27 @@ public class StartupTests : IISFunctionalTestBase
         deploymentParameters.ApplicationType = ApplicationType.Standalone;
         deploymentParameters.AddServerConfigAction(element =>
         {
-            element.RequiredElement("system.applicationHost").RequiredElement("applicationPools").RequiredElement("add").SetAttributeValue("enable32BitAppOnWin64", "true");
+            element
+                .RequiredElement("system.applicationHost")
+                .RequiredElement("applicationPools")
+                .RequiredElement("add")
+                .SetAttributeValue("enable32BitAppOnWin64", "true");
         });
 
         // Change ANCM dll to 32 bit
-        deploymentParameters.AddServerConfigAction(
-                        element =>
-                        {
-                            var ancmElement = element
-                                .RequiredElement("system.webServer")
-                                .RequiredElement("globalModules")
-                                .Elements("add")
-                                .FirstOrDefault(e => e.Attribute("name").Value == "AspNetCoreModuleV2");
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            var ancmElement = element
+                .RequiredElement("system.webServer")
+                .RequiredElement("globalModules")
+                .Elements("add")
+                .FirstOrDefault(e => e.Attribute("name").Value == "AspNetCoreModuleV2");
 
-                            ancmElement.SetAttributeValue("image", ancmElement.Attribute("image").Value.Replace("x64", "x86"));
-                        });
+            ancmElement.SetAttributeValue(
+                "image",
+                ancmElement.Attribute("image").Value.Replace("x64", "x86")
+            );
+        });
         var deploymentResult = await DeployAsync(deploymentParameters);
 
         if (DeployerSelector.HasNewShim)
@@ -363,7 +478,11 @@ public class StartupTests : IISFunctionalTestBase
             await AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult);
         }
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessHostfxrUnableToLoad(deploymentResult), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessHostfxrUnableToLoad(deploymentResult),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -382,7 +501,11 @@ public class StartupTests : IISFunctionalTestBase
             await AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult);
         }
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessFailedToFindNativeDependencies(deploymentResult), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessFailedToFindNativeDependencies(deploymentResult),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -407,7 +530,8 @@ public class StartupTests : IISFunctionalTestBase
     public async Task TargedDifferenceSharedFramework_FailedToFindNativeDependenciesErrorInResponse()
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "TRUE";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] =
+            "TRUE";
         var deploymentResult = await DeployAsync(deploymentParameters);
 
         Helpers.ModifyFrameworkVersionInRuntimeConfig(deploymentResult);
@@ -418,7 +542,10 @@ public class StartupTests : IISFunctionalTestBase
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
             var responseContent = await response.Content.ReadAsStringAsync();
             Assert.Contains("500.31", responseContent);
-            Assert.Contains("The framework 'Microsoft.NETCore.App', version '2.9.9'", responseContent);
+            Assert.Contains(
+                "The framework 'Microsoft.NETCore.App', version '2.9.9'",
+                responseContent
+            );
         }
         else
         {
@@ -439,13 +566,21 @@ public class StartupTests : IISFunctionalTestBase
         {
             await AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult, "500.33");
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessFailedToFindRequestHandler(deploymentResult), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.InProcessFailedToFindRequestHandler(deploymentResult),
+                Logger
+            );
         }
         else
         {
             await AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult);
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessFailedToFindRequestHandler(deploymentResult), Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.InProcessFailedToFindRequestHandler(deploymentResult),
+                Logger
+            );
         }
     }
 
@@ -458,10 +593,13 @@ public class StartupTests : IISFunctionalTestBase
         // But can't be certain without another repro.
         using (AppVerifier.Disable(DeployerSelector.ServerType, 0x300))
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
             deploymentParameters.TransformArguments((a, _) => $"{a} Hang");
             deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1"));
+                WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1")
+            );
 
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -471,9 +609,14 @@ public class StartupTests : IISFunctionalTestBase
             // Startup timeout now recycles process.
             deploymentResult.AssertWorkerProcessStop();
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult,
-                EventLogHelpers.InProcessFailedToStart(deploymentResult, "Managed server didn't initialize after 1000 ms."),
-                Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.InProcessFailedToStart(
+                    deploymentResult,
+                    "Managed server didn't initialize after 1000 ms."
+                ),
+                Logger
+            );
 
             if (DeployerSelector.HasNewHandler)
             {
@@ -491,10 +634,13 @@ public class StartupTests : IISFunctionalTestBase
         // But can't be certain without another repro.
         using (AppVerifier.Disable(DeployerSelector.ServerType, 0x300))
         {
-            var deploymentParameters = Fixture.GetBaseDeploymentParameters(Fixture.InProcessTestSite);
+            var deploymentParameters = Fixture.GetBaseDeploymentParameters(
+                Fixture.InProcessTestSite
+            );
             deploymentParameters.TransformArguments((a, _) => $"{a} Hang");
             deploymentParameters.WebConfigActionList.Add(
-                WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1"));
+                WebConfigHelpers.AddOrModifyAspNetCoreSection("startupTimeLimit", "1")
+            );
             deploymentParameters.HandlerSettings["suppressRecycleOnStartupTimeout"] = "true";
             var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -503,9 +649,14 @@ public class StartupTests : IISFunctionalTestBase
 
             StopServer(gracefulShutdown: false);
 
-            EventLogHelpers.VerifyEventLogEvent(deploymentResult,
-                EventLogHelpers.InProcessFailedToStart(deploymentResult, "Managed server didn't initialize after 1000 ms."),
-                Logger);
+            EventLogHelpers.VerifyEventLogEvent(
+                deploymentResult,
+                EventLogHelpers.InProcessFailedToStart(
+                    deploymentResult,
+                    "Managed server didn't initialize after 1000 ms."
+                ),
+                Logger
+            );
 
             if (DeployerSelector.HasNewHandler)
             {
@@ -519,7 +670,9 @@ public class StartupTests : IISFunctionalTestBase
     public async Task CheckInvalidHostingModelParameter()
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("hostingModel", "bogus"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("hostingModel", "bogus")
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -529,13 +682,19 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvents(deploymentResult,
-            EventLogHelpers.ConfigurationLoadError(deploymentResult, "Unknown hosting model 'bogus'. Please specify either hostingModel=\"inprocess\" or hostingModel=\"outofprocess\" in the web.config file.")
-            );
+        EventLogHelpers.VerifyEventLogEvents(
+            deploymentResult,
+            EventLogHelpers.ConfigurationLoadError(
+                deploymentResult,
+                "Unknown hosting model 'bogus'. Please specify either hostingModel=\"inprocess\" or hostingModel=\"outofprocess\" in the web.config file."
+            )
+        );
     }
 
-    private static Dictionary<string, (string, Action<XElement>)> InvalidConfigTransformations = InitInvalidConfigTransformations();
-    public static IEnumerable<object[]> InvalidConfigTransformationsScenarios => InvalidConfigTransformations.ToTheoryData();
+    private static Dictionary<string, (string, Action<XElement>)> InvalidConfigTransformations =
+        InitInvalidConfigTransformations();
+    public static IEnumerable<object[]> InvalidConfigTransformationsScenarios =>
+        InvalidConfigTransformations.ToTheoryData();
 
     [ConditionalTheory]
     [MemberData(nameof(InvalidConfigTransformationsScenarios))]
@@ -553,7 +712,8 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        EventLogHelpers.VerifyEventLogEvents(deploymentResult,
+        EventLogHelpers.VerifyEventLogEvents(
+            deploymentResult,
             EventLogHelpers.ConfigurationLoadError(deploymentResult, expectedError)
         );
     }
@@ -561,26 +721,46 @@ public class StartupTests : IISFunctionalTestBase
     public static Dictionary<string, (string, Action<XElement>)> InitInvalidConfigTransformations()
     {
         var dictionary = new Dictionary<string, (string, Action<XElement>)>();
-        dictionary.Add("Empty process path",
+        dictionary.Add(
+            "Empty process path",
             (
                 "Attribute 'processPath' is required.",
-                element => element.Descendants("aspNetCore").Single().SetAttributeValue("processPath", "")
-            ));
-        dictionary.Add("Unknown hostingModel",
+                element =>
+                    element.Descendants("aspNetCore").Single().SetAttributeValue("processPath", "")
+            )
+        );
+        dictionary.Add(
+            "Unknown hostingModel",
             (
                 "Unknown hosting model 'asdf'.",
-                element => element.Descendants("aspNetCore").Single().SetAttributeValue("hostingModel", "asdf")
-            ));
-        dictionary.Add("environmentVariables with add",
+                element =>
+                    element
+                        .Descendants("aspNetCore")
+                        .Single()
+                        .SetAttributeValue("hostingModel", "asdf")
+            )
+        );
+        dictionary.Add(
+            "environmentVariables with add",
             (
                 "Unable to get required configuration section 'system.webServer/aspNetCore'. Possible reason is web.config authoring error.",
-                element => element.Descendants("aspNetCore").Single().GetOrAdd("environmentVariables").GetOrAdd("add")
-            ));
+                element =>
+                    element
+                        .Descendants("aspNetCore")
+                        .Single()
+                        .GetOrAdd("environmentVariables")
+                        .GetOrAdd("add")
+            )
+        );
         return dictionary;
     }
 
-    private static Dictionary<string, Func<IISDeploymentParameters, string>> PortableConfigTransformations = InitPortableWebConfigTransformations();
-    public static IEnumerable<object[]> PortableConfigTransformationsScenarios => PortableConfigTransformations.ToTheoryData();
+    private static Dictionary<
+        string,
+        Func<IISDeploymentParameters, string>
+    > PortableConfigTransformations = InitPortableWebConfigTransformations();
+    public static IEnumerable<object[]> PortableConfigTransformationsScenarios =>
+        PortableConfigTransformations.ToTheoryData();
 
     [ConditionalTheory]
     [MemberData(nameof(PortableConfigTransformationsScenarios))]
@@ -593,65 +773,98 @@ public class StartupTests : IISFunctionalTestBase
         Assert.Equal(expectedArguments, await result.HttpClient.GetStringAsync("/CommandLineArgs"));
     }
 
-    public static Dictionary<string, Func<IISDeploymentParameters, string>> InitPortableWebConfigTransformations()
+    public static Dictionary<
+        string,
+        Func<IISDeploymentParameters, string>
+    > InitPortableWebConfigTransformations()
     {
         var dictionary = new Dictionary<string, Func<IISDeploymentParameters, string>>();
         var pathWithSpace = "\u03c0 \u2260 3\u00b714";
 
-        dictionary.Add("App in bin subdirectory full path to dll using exec and quotes",
+        dictionary.Add(
+            "App in bin subdirectory full path to dll using exec and quotes",
             parameters =>
             {
                 MoveApplication(parameters, "bin");
-                parameters.TransformArguments((arguments, root) => "exec " + Path.Combine(root, "bin", arguments));
+                parameters.TransformArguments(
+                    (arguments, root) => "exec " + Path.Combine(root, "bin", arguments)
+                );
                 return "";
-            });
+            }
+        );
 
-        dictionary.Add("App in subdirectory with space",
+        dictionary.Add(
+            "App in subdirectory with space",
             parameters =>
             {
                 MoveApplication(parameters, pathWithSpace);
-                parameters.TransformArguments((arguments, root) => Path.Combine(pathWithSpace, arguments));
+                parameters.TransformArguments(
+                    (arguments, root) => Path.Combine(pathWithSpace, arguments)
+                );
                 return "";
-            });
+            }
+        );
 
-        dictionary.Add("App in subdirectory with space and full path to dll",
+        dictionary.Add(
+            "App in subdirectory with space and full path to dll",
             parameters =>
             {
                 MoveApplication(parameters, pathWithSpace);
-                parameters.TransformArguments((arguments, root) => Path.Combine(root, pathWithSpace, arguments));
+                parameters.TransformArguments(
+                    (arguments, root) => Path.Combine(root, pathWithSpace, arguments)
+                );
                 return "";
-            });
+            }
+        );
 
-        dictionary.Add("App in bin subdirectory with space full path to dll using exec and quotes",
+        dictionary.Add(
+            "App in bin subdirectory with space full path to dll using exec and quotes",
             parameters =>
             {
                 MoveApplication(parameters, pathWithSpace);
-                parameters.TransformArguments((arguments, root) => "exec \"" + Path.Combine(root, pathWithSpace, arguments) + "\" extra arguments");
+                parameters.TransformArguments(
+                    (arguments, root) =>
+                        "exec \""
+                        + Path.Combine(root, pathWithSpace, arguments)
+                        + "\" extra arguments"
+                );
                 return "extra|arguments";
-            });
+            }
+        );
 
-        dictionary.Add("App in bin subdirectory and quoted argument",
+        dictionary.Add(
+            "App in bin subdirectory and quoted argument",
             parameters =>
             {
                 MoveApplication(parameters, "bin");
-                parameters.TransformArguments((arguments, root) => Path.Combine("bin", arguments) + " \"extra argument\"");
+                parameters.TransformArguments(
+                    (arguments, root) => Path.Combine("bin", arguments) + " \"extra argument\""
+                );
                 return "extra argument";
-            });
+            }
+        );
 
-        dictionary.Add("App in bin subdirectory full path to dll",
+        dictionary.Add(
+            "App in bin subdirectory full path to dll",
             parameters =>
             {
                 MoveApplication(parameters, "bin");
-                parameters.TransformArguments((arguments, root) => Path.Combine(root, "bin", arguments) + " extra arguments");
+                parameters.TransformArguments(
+                    (arguments, root) => Path.Combine(root, "bin", arguments) + " extra arguments"
+                );
                 return "extra|arguments";
-            });
+            }
+        );
         return dictionary;
     }
 
+    private static Dictionary<
+        string,
+        Func<IISDeploymentParameters, string>
+    > StandaloneConfigTransformations = InitStandaloneConfigTransformations();
 
-    private static Dictionary<string, Func<IISDeploymentParameters, string>> StandaloneConfigTransformations = InitStandaloneConfigTransformations();
-
-    public static IEnumerable<object[]> StandaloneConfigTransformationsScenarios => StandaloneConfigTransformations.ToTheoryData();
+    public static IEnumerable<object[]> StandaloneConfigTransformationsScenarios =>
+        StandaloneConfigTransformations.ToTheoryData();
 
     [ConditionalTheory]
     [MemberData(nameof(StandaloneConfigTransformationsScenarios))]
@@ -665,28 +878,35 @@ public class StartupTests : IISFunctionalTestBase
         Assert.Equal(expectedArguments, await result.HttpClient.GetStringAsync("/CommandLineArgs"));
     }
 
-    public static Dictionary<string, Func<IISDeploymentParameters, string>> InitStandaloneConfigTransformations()
+    public static Dictionary<
+        string,
+        Func<IISDeploymentParameters, string>
+    > InitStandaloneConfigTransformations()
     {
         var dictionary = new Dictionary<string, Func<IISDeploymentParameters, string>>();
         var pathWithSpace = "\u03c0 \u2260 3\u00b714";
 
-        dictionary.Add("App in subdirectory",
+        dictionary.Add(
+            "App in subdirectory",
             parameters =>
             {
                 MoveApplication(parameters, pathWithSpace);
                 parameters.TransformPath((path, root) => Path.Combine(pathWithSpace, path));
                 parameters.TransformArguments((arguments, root) => "\"additional argument\"");
                 return "additional argument";
-            });
+            }
+        );
 
-        dictionary.Add("App in bin subdirectory full path",
+        dictionary.Add(
+            "App in bin subdirectory full path",
             parameters =>
             {
                 MoveApplication(parameters, pathWithSpace);
                 parameters.TransformPath((path, root) => Path.Combine(root, pathWithSpace, path));
                 parameters.TransformArguments((arguments, root) => "additional arguments");
                 return "additional|arguments";
-            });
+            }
+        );
 
         return dictionary;
     }
@@ -700,11 +920,26 @@ public class StartupTests : IISFunctionalTestBase
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
-        Assert.Equal(deploymentResult.ContentRoot, await deploymentResult.HttpClient.GetStringAsync("/ContentRootPath"));
-        Assert.Equal(deploymentResult.ContentRoot + "\\wwwroot", await deploymentResult.HttpClient.GetStringAsync("/WebRootPath"));
-        Assert.Equal(Path.GetDirectoryName(deploymentResult.HostProcess.MainModule.FileName), await deploymentResult.HttpClient.GetStringAsync("/CurrentDirectory"));
-        Assert.Equal(deploymentResult.ContentRoot + "\\", await deploymentResult.HttpClient.GetStringAsync("/BaseDirectory"));
-        Assert.Equal(deploymentResult.ContentRoot + "\\", await deploymentResult.HttpClient.GetStringAsync("/ASPNETCORE_IIS_PHYSICAL_PATH"));
+        Assert.Equal(
+            deploymentResult.ContentRoot,
+            await deploymentResult.HttpClient.GetStringAsync("/ContentRootPath")
+        );
+        Assert.Equal(
+            deploymentResult.ContentRoot + "\\wwwroot",
+            await deploymentResult.HttpClient.GetStringAsync("/WebRootPath")
+        );
+        Assert.Equal(
+            Path.GetDirectoryName(deploymentResult.HostProcess.MainModule.FileName),
+            await deploymentResult.HttpClient.GetStringAsync("/CurrentDirectory")
+        );
+        Assert.Equal(
+            deploymentResult.ContentRoot + "\\",
+            await deploymentResult.HttpClient.GetStringAsync("/BaseDirectory")
+        );
+        Assert.Equal(
+            deploymentResult.ContentRoot + "\\",
+            await deploymentResult.HttpClient.GetStringAsync("/ASPNETCORE_IIS_PHYSICAL_PATH")
+        );
     }
 
     [ConditionalFact]
@@ -714,12 +949,22 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
         deploymentParameters.ApplicationType = ApplicationType.Standalone;
-        deploymentParameters.EnvironmentVariables["ASPNETCORE_STARTUP_SUSPEND_EVENT"] = "ANCM_TestEvent";
+        deploymentParameters.EnvironmentVariables["ASPNETCORE_STARTUP_SUSPEND_EVENT"] =
+            "ANCM_TestEvent";
 
-        var eventPrefix = deploymentParameters.ServerType == ServerType.IISExpress ? "" : "Global\\";
+        var eventPrefix =
+            deploymentParameters.ServerType == ServerType.IISExpress ? "" : "Global\\";
 
-        var startWaitHandle = new EventWaitHandle(false, EventResetMode.ManualReset, eventPrefix + "ANCM_TestEvent");
-        var suspendedWaitHandle = new EventWaitHandle(false, EventResetMode.ManualReset, eventPrefix + "ANCM_TestEvent_suspended");
+        var startWaitHandle = new EventWaitHandle(
+            false,
+            EventResetMode.ManualReset,
+            eventPrefix + "ANCM_TestEvent"
+        );
+        var suspendedWaitHandle = new EventWaitHandle(
+            false,
+            EventResetMode.ManualReset,
+            eventPrefix + "ANCM_TestEvent_suspended"
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -749,7 +994,10 @@ public class StartupTests : IISFunctionalTestBase
     [InlineData("DOTNET_ENVIRONMENT", "deVelopment")]
     [InlineData("ASPNETCORE_DETAILEDERRORS", "1")]
     [InlineData("ASPNETCORE_DETAILEDERRORS", "TRUE")]
-    public async Task ExceptionIsLoggedToEventLogAndPutInResponseWhenDeveloperExceptionPageIsEnabled(string environmentVariable, string value)
+    public async Task ExceptionIsLoggedToEventLogAndPutInResponseWhenDeveloperExceptionPageIsEnabled(
+        string environmentVariable,
+        string value
+    )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
         deploymentParameters.TransformArguments((a, _) => $"{a} Throw");
@@ -780,7 +1028,8 @@ public class StartupTests : IISFunctionalTestBase
 
         // Deployment parameters by default set ASPNETCORE_DETAILEDERRORS to true
         deploymentParameters.EnvironmentVariables.Remove("ASPNETCORE_DETAILEDERRORS");
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] = "TRUE";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_DETAILEDERRORS"] =
+            "TRUE";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var result = await deploymentResult.HttpClient.GetAsync("/");
@@ -800,7 +1049,9 @@ public class StartupTests : IISFunctionalTestBase
     [RequiresNewHandler]
     [InlineData("ThrowInStartup")]
     [InlineData("ThrowInStartupGenericHost")]
-    public async Task ExceptionIsLoggedToEventLogAndPutInResponseDuringHostingStartupProcess(string startupType)
+    public async Task ExceptionIsLoggedToEventLogAndPutInResponseDuringHostingStartupProcess(
+        string startupType
+    )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
         deploymentParameters.TransformArguments((a, _) => $"{a} {startupType}");
@@ -864,7 +1115,6 @@ public class StartupTests : IISFunctionalTestBase
         VerifyDotnetRuntimeEventLog(deploymentResult);
     }
 
-
     [ConditionalFact]
     [RequiresNewHandler]
     public async Task CanAddCustomStartupHook()
@@ -872,7 +1122,8 @@ public class StartupTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
         // Deployment parameters by default set ASPNETCORE_DETAILEDERRORS to true
-        deploymentParameters.WebConfigBasedEnvironmentVariables["DOTNET_STARTUP_HOOKS"] = "InProcessWebSite";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["DOTNET_STARTUP_HOOKS"] =
+            "InProcessWebSite";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var result = await deploymentResult.HttpClient.GetAsync("/StartupHook");
@@ -889,7 +1140,8 @@ public class StartupTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
 
         // Deployment parameters by default set ASPNETCORE_DETAILEDERRORS to true
-        deploymentParameters.WebConfigBasedEnvironmentVariables["DOTNET_STARTUP_HOOKS"] = "InProcessWebSite";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["DOTNET_STARTUP_HOOKS"] =
+            "InProcessWebSite";
         deploymentParameters.HandlerSettings["callStartupHook"] = "false";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
@@ -933,7 +1185,9 @@ public class StartupTests : IISFunctionalTestBase
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
 
         deploymentParameters.EnvironmentVariables["ANCM_LAUNCHER_PATH"] = _dotnetLocation;
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nope"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "nope")
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -947,10 +1201,21 @@ public class StartupTests : IISFunctionalTestBase
     public async Task EnvironmentVariableForLauncherArgsIsPreferred(HostingModel hostingModel)
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
-        using var publishedApp = await deploymentParameters.ApplicationPublisher.Publish(deploymentParameters, LoggerFactory.CreateLogger("test"));
+        using var publishedApp = await deploymentParameters.ApplicationPublisher.Publish(
+            deploymentParameters,
+            LoggerFactory.CreateLogger("test")
+        );
 
-        deploymentParameters.EnvironmentVariables["ANCM_LAUNCHER_ARGS"] = Path.ChangeExtension(Path.Combine(publishedApp.Path, deploymentParameters.ApplicationPublisher.ApplicationPath), ".dll");
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "nope"));
+        deploymentParameters.EnvironmentVariables["ANCM_LAUNCHER_ARGS"] = Path.ChangeExtension(
+            Path.Combine(
+                publishedApp.Path,
+                deploymentParameters.ApplicationPublisher.ApplicationPath
+            ),
+            ".dll"
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "nope")
+        );
 
         await StartAsync(deploymentParameters);
     }
@@ -970,10 +1235,15 @@ public class StartupTests : IISFunctionalTestBase
         if (deploymentParameters.ServerType == ServerType.IISExpress)
         {
             // We can't read stdout logs from IIS as they aren't redirected.
-            Assert.Contains(TestSink.Writes, context => context.Message.Contains("An unhandled exception was thrown by the application."));
+            Assert.Contains(
+                TestSink.Writes,
+                context =>
+                    context.Message.Contains(
+                        "An unhandled exception was thrown by the application."
+                    )
+            );
         }
     }
-
 
     [ConditionalTheory]
     [InlineData("CheckLargeStdErrWrites")]
@@ -997,7 +1267,15 @@ public class StartupTests : IISFunctionalTestBase
         Assert.Contains(TestSink.Writes, context => context.Message.Contains(expectedLogString));
         var expectedEventLogString = new string('a', 30000);
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessThreadExitStdOut(deploymentResult, "12", expectedEventLogString), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessThreadExitStdOut(
+                deploymentResult,
+                "12",
+                expectedEventLogString
+            ),
+            Logger
+        );
     }
 
     [ConditionalTheory]
@@ -1023,7 +1301,15 @@ public class StartupTests : IISFunctionalTestBase
 
         var expectedEventLogString = new string('a', 30000);
 
-        EventLogHelpers.VerifyEventLogEvent(deploymentResult, EventLogHelpers.InProcessThreadExitStdOut(deploymentResult, "12", expectedEventLogString), Logger);
+        EventLogHelpers.VerifyEventLogEvent(
+            deploymentResult,
+            EventLogHelpers.InProcessThreadExitStdOut(
+                deploymentResult,
+                "12",
+                expectedEventLogString
+            ),
+            Logger
+        );
     }
 
     [ConditionalFact]
@@ -1036,7 +1322,10 @@ public class StartupTests : IISFunctionalTestBase
 
         await AssertFailsToStart(deploymentResult);
 
-        Assert.Contains(TestSink.Writes, context => context.Message.Contains("Is Console redirection: True"));
+        Assert.Contains(
+            TestSink.Writes,
+            context => context.Message.Contains("Is Console redirection: True")
+        );
     }
 
     [ConditionalFact]
@@ -1100,7 +1389,8 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
         deploymentParameters.HandlerSettings["handlerVersion"] = "88.93";
-        deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] = "http://example";
+        deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] =
+            "http://example";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var response = await deploymentResult.HttpClient.GetAsync("HelloWorld");
@@ -1123,7 +1413,8 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters();
         deploymentParameters.TransformArguments((a, _) => $"{a} EarlyReturn");
-        deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] = "http://example";
+        deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] =
+            "http://example";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var response = await deploymentResult.HttpClient.GetAsync("HelloWorld");
@@ -1139,88 +1430,119 @@ public class StartupTests : IISFunctionalTestBase
         await AssertLink(response);
     }
 
-
     [ConditionalFact]
     public async Task GetLongEnvironmentVariable_InProcess()
     {
-        var expectedValue = "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative";
-
+        var expectedValue =
+            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative";
 
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.InProcess);
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"] = expectedValue;
+        deploymentParameters.WebConfigBasedEnvironmentVariables[
+            "ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"
+        ] = expectedValue;
 
         Assert.Equal(
             expectedValue,
-            await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"));
+            await GetStringAsync(
+                deploymentParameters,
+                "/GetEnvironmentVariable?name=ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"
+            )
+        );
     }
 
     [ConditionalFact]
     [RequiresNewShim]
     public async Task GetLongEnvironmentVariable_OutOfProcess()
     {
-        var expectedValue = "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative" +
-                            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative";
-
+        var expectedValue =
+            "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative"
+            + "AReallyLongValueThatIsGreaterThan300CharactersToForceResizeInNative";
 
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"] = expectedValue;
+        deploymentParameters.WebConfigBasedEnvironmentVariables[
+            "ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"
+        ] = expectedValue;
 
         Assert.Equal(
             expectedValue,
-            await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"));
+            await GetStringAsync(
+                deploymentParameters,
+                "/GetEnvironmentVariable?name=ASPNETCORE_INPROCESS_TESTING_LONG_VALUE"
+            )
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
-    public Task AuthHeaderEnvironmentVariableRemoved_InProcess() => AuthHeaderEnvironmentVariableRemoved(HostingModel.InProcess);
+    public Task AuthHeaderEnvironmentVariableRemoved_InProcess() =>
+        AuthHeaderEnvironmentVariableRemoved(HostingModel.InProcess);
 
     [ConditionalFact]
-    public Task AuthHeaderEnvironmentVariableRemoved_OutOfProcess() => AuthHeaderEnvironmentVariableRemoved(HostingModel.OutOfProcess);
+    public Task AuthHeaderEnvironmentVariableRemoved_OutOfProcess() =>
+        AuthHeaderEnvironmentVariableRemoved(HostingModel.OutOfProcess);
 
     private async Task AuthHeaderEnvironmentVariableRemoved(HostingModel hostingModel)
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_IIS_HTTPAUTH"] = "shouldberemoved";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_IIS_HTTPAUTH"] =
+            "shouldberemoved";
 
-        Assert.DoesNotContain("shouldberemoved", await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_IIS_HTTPAUTH"));
+        Assert.DoesNotContain(
+            "shouldberemoved",
+            await GetStringAsync(
+                deploymentParameters,
+                "/GetEnvironmentVariable?name=ASPNETCORE_IIS_HTTPAUTH"
+            )
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigOverridesGlobalEnvironmentVariables_InProcess() => WebConfigOverridesGlobalEnvironmentVariables(HostingModel.InProcess);
+    public Task WebConfigOverridesGlobalEnvironmentVariables_InProcess() =>
+        WebConfigOverridesGlobalEnvironmentVariables(HostingModel.InProcess);
 
     [ConditionalFact]
     [RequiresNewShim]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigOverridesGlobalEnvironmentVariables_OutOfProcess() => WebConfigOverridesGlobalEnvironmentVariables(HostingModel.OutOfProcess);
+    public Task WebConfigOverridesGlobalEnvironmentVariables_OutOfProcess() =>
+        WebConfigOverridesGlobalEnvironmentVariables(HostingModel.OutOfProcess);
 
     private async Task WebConfigOverridesGlobalEnvironmentVariables(HostingModel hostingModel)
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
         deploymentParameters.EnvironmentVariables["ASPNETCORE_ENVIRONMENT"] = "Development";
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_ENVIRONMENT"] = "Production";
-        Assert.Equal("Production", await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_ENVIRONMENT"));
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_ENVIRONMENT"] =
+            "Production";
+        Assert.Equal(
+            "Production",
+            await GetStringAsync(
+                deploymentParameters,
+                "/GetEnvironmentVariable?name=ASPNETCORE_ENVIRONMENT"
+            )
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigAppendsHostingStartup_InProcess() => WebConfigAppendsHostingStartup(HostingModel.InProcess);
+    public Task WebConfigAppendsHostingStartup_InProcess() =>
+        WebConfigAppendsHostingStartup(HostingModel.InProcess);
 
     [ConditionalFact]
     [RequiresNewShim]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigAppendsHostingStartup_OutOfProcess() => WebConfigAppendsHostingStartup(HostingModel.OutOfProcess);
+    public Task WebConfigAppendsHostingStartup_OutOfProcess() =>
+        WebConfigAppendsHostingStartup(HostingModel.OutOfProcess);
 
     private async Task WebConfigAppendsHostingStartup(HostingModel hostingModel)
     {
@@ -1228,48 +1550,76 @@ public class StartupTests : IISFunctionalTestBase
         deploymentParameters.EnvironmentVariables["ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"] = "Asm1";
         if (hostingModel == HostingModel.InProcess)
         {
-            Assert.Equal("Asm1", await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"));
+            Assert.Equal(
+                "Asm1",
+                await GetStringAsync(
+                    deploymentParameters,
+                    "/GetEnvironmentVariable?name=ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"
+                )
+            );
         }
         else
         {
-            Assert.Equal("Asm1;Microsoft.AspNetCore.Server.IISIntegration", await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"));
+            Assert.Equal(
+                "Asm1;Microsoft.AspNetCore.Server.IISIntegration",
+                await GetStringAsync(
+                    deploymentParameters,
+                    "/GetEnvironmentVariable?name=ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"
+                )
+            );
         }
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigOverridesHostingStartup_InProcess() => WebConfigOverridesHostingStartup(HostingModel.InProcess);
+    public Task WebConfigOverridesHostingStartup_InProcess() =>
+        WebConfigOverridesHostingStartup(HostingModel.InProcess);
 
     [ConditionalFact]
     [RequiresNewShim]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigOverridesHostingStartup_OutOfProcess() => WebConfigOverridesHostingStartup(HostingModel.OutOfProcess);
+    public Task WebConfigOverridesHostingStartup_OutOfProcess() =>
+        WebConfigOverridesHostingStartup(HostingModel.OutOfProcess);
 
     private async Task WebConfigOverridesHostingStartup(HostingModel hostingModel)
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
         deploymentParameters.EnvironmentVariables["ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"] = "Asm1";
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"] = "Asm2";
-        Assert.Equal("Asm2", await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"));
+        deploymentParameters.WebConfigBasedEnvironmentVariables[
+            "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"
+        ] = "Asm2";
+        Assert.Equal(
+            "Asm2",
+            await GetStringAsync(
+                deploymentParameters,
+                "/GetEnvironmentVariable?name=ASPNETCORE_HOSTINGSTARTUPASSEMBLIES"
+            )
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigExpandsVariables_InProcess() => WebConfigExpandsVariables(HostingModel.InProcess);
+    public Task WebConfigExpandsVariables_InProcess() =>
+        WebConfigExpandsVariables(HostingModel.InProcess);
 
     [ConditionalFact]
     [RequiresNewShim]
     [RequiresIIS(IISCapability.PoolEnvironmentVariables)]
-    public Task WebConfigExpandsVariables_OutOfProcess() => WebConfigExpandsVariables(HostingModel.OutOfProcess);
+    public Task WebConfigExpandsVariables_OutOfProcess() =>
+        WebConfigExpandsVariables(HostingModel.OutOfProcess);
 
     private async Task WebConfigExpandsVariables(HostingModel hostingModel)
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
         deploymentParameters.EnvironmentVariables["TestVariable"] = "World";
-        deploymentParameters.WebConfigBasedEnvironmentVariables["OtherVariable"] = "%TestVariable%;Hello";
-        Assert.Equal("World;Hello", await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=OtherVariable"));
+        deploymentParameters.WebConfigBasedEnvironmentVariables["OtherVariable"] =
+            "%TestVariable%;Hello";
+        Assert.Equal(
+            "World;Hello",
+            await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=OtherVariable")
+        );
     }
 
     [ConditionalTheory]
@@ -1278,15 +1628,26 @@ public class StartupTests : IISFunctionalTestBase
     [RequiresNewShim]
     [InlineData(HostingModel.InProcess)]
     [InlineData(HostingModel.OutOfProcess)]
-    public async Task PreferEnvironmentVariablesOverWebConfigWhenConfigured(HostingModel hostingModel)
+    public async Task PreferEnvironmentVariablesOverWebConfigWhenConfigured(
+        HostingModel hostingModel
+    )
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(hostingModel);
 
         var environment = "Development";
         deploymentParameters.EnvironmentVariables["ANCM_PREFER_ENVIRONMENT_VARIABLES"] = "true";
         deploymentParameters.EnvironmentVariables["ASPNETCORE_ENVIRONMENT"] = environment;
-        deploymentParameters.WebConfigBasedEnvironmentVariables.Add("ASPNETCORE_ENVIRONMENT", "Debug");
-        Assert.Equal(environment, await GetStringAsync(deploymentParameters, "/GetEnvironmentVariable?name=ASPNETCORE_ENVIRONMENT"));
+        deploymentParameters.WebConfigBasedEnvironmentVariables.Add(
+            "ASPNETCORE_ENVIRONMENT",
+            "Debug"
+        );
+        Assert.Equal(
+            environment,
+            await GetStringAsync(
+                deploymentParameters,
+                "/GetEnvironmentVariable?name=ASPNETCORE_ENVIRONMENT"
+            )
+        );
     }
 
     [ConditionalFact]
@@ -1294,7 +1655,8 @@ public class StartupTests : IISFunctionalTestBase
     [RequiresNewShim]
     public async Task ServerAddressesIncludesBaseAddress()
     {
-        var appName = "\u041C\u043E\u0451\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435";
+        var appName =
+            "\u041C\u043E\u0451\u041F\u0440\u0438\u043B\u043E\u0436\u0435\u043D\u0438\u0435";
 
         var port = TestPortHelper.GetNextSSLPort();
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.InProcess);
@@ -1304,13 +1666,21 @@ public class StartupTests : IISFunctionalTestBase
         deploymentParameters.AddServerConfigAction(
             (element, root) =>
             {
-                element.Descendants("site").Single().Element("application").SetAttributeValue("path", "/" + appName);
+                element
+                    .Descendants("site")
+                    .Single()
+                    .Element("application")
+                    .SetAttributeValue("path", "/" + appName);
                 Helpers.CreateEmptyApplication(element, root);
-            });
+            }
+        );
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var client = CreateNonValidatingClient(deploymentResult);
-        Assert.Equal(deploymentParameters.ApplicationBaseUriHint + appName, await client.GetStringAsync($"/{appName}/ServerAddresses"));
+        Assert.Equal(
+            deploymentParameters.ApplicationBaseUriHint + appName,
+            await client.GetStringAsync($"/{appName}/ServerAddresses")
+        );
     }
 
     [ConditionalFact]
@@ -1320,16 +1690,20 @@ public class StartupTests : IISFunctionalTestBase
     {
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
 
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element.Descendants("bindings")
-                    .Single()
-                    .GetOrAdd("binding", "protocol", "https")
-                    .SetAttributeValue("bindingInformation", $":{TestPortHelper.GetNextSSLPort()}:localhost");
-            });
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .Descendants("bindings")
+                .Single()
+                .GetOrAdd("binding", "protocol", "https")
+                .SetAttributeValue(
+                    "bindingInformation",
+                    $":{TestPortHelper.GetNextSSLPort()}:localhost"
+                );
+        });
 
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_ANCM_HTTPS_PORT"] = "123";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ASPNETCORE_ANCM_HTTPS_PORT"] =
+            "123";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var client = CreateNonValidatingClient(deploymentResult);
@@ -1344,21 +1718,21 @@ public class StartupTests : IISFunctionalTestBase
     {
         var port = TestPortHelper.GetNextSSLPort();
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
-        deploymentParameters.WebConfigBasedEnvironmentVariables["ENABLE_HTTPS_REDIRECTION"] = "true";
-        deploymentParameters.ApplicationBaseUriHint = $"http://localhost:{TestPortHelper.GetNextPort()}/";
+        deploymentParameters.WebConfigBasedEnvironmentVariables["ENABLE_HTTPS_REDIRECTION"] =
+            "true";
+        deploymentParameters.ApplicationBaseUriHint =
+            $"http://localhost:{TestPortHelper.GetNextPort()}/";
 
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element.Descendants("bindings")
-                    .Single()
-                    .AddAndGetInnerElement("binding", "protocol", "https")
-                    .SetAttributeValue("bindingInformation", $":{port}:localhost");
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .Descendants("bindings")
+                .Single()
+                .AddAndGetInnerElement("binding", "protocol", "https")
+                .SetAttributeValue("bindingInformation", $":{port}:localhost");
 
-                element.Descendants("access")
-                    .Single()
-                    .SetAttributeValue("sslFlags", "None");
-            });
+            element.Descendants("access").Single().SetAttributeValue("sslFlags", "None");
+        });
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var handler = new HttpClientHandler
@@ -1393,19 +1767,24 @@ public class StartupTests : IISFunctionalTestBase
 
         var deploymentParameters = Fixture.GetBaseDeploymentParameters(HostingModel.OutOfProcess);
 
-        deploymentParameters.AddServerConfigAction(
-            element =>
-            {
-                element.Descendants("bindings")
-                    .Single()
-                    .Add(
-                        new XElement("binding",
-                            new XAttribute("protocol", "https"),
-                            new XAttribute("bindingInformation", $":{sslPort}:localhost")),
-                        new XElement("binding",
-                            new XAttribute("protocol", "https"),
-                            new XAttribute("bindingInformation", $":{anotherSslPort}:localhost")));
-            });
+        deploymentParameters.AddServerConfigAction(element =>
+        {
+            element
+                .Descendants("bindings")
+                .Single()
+                .Add(
+                    new XElement(
+                        "binding",
+                        new XAttribute("protocol", "https"),
+                        new XAttribute("bindingInformation", $":{sslPort}:localhost")
+                    ),
+                    new XElement(
+                        "binding",
+                        new XAttribute("protocol", "https"),
+                        new XAttribute("bindingInformation", $":{anotherSslPort}:localhost")
+                    )
+                );
+        });
 
         var deploymentResult = await DeployAsync(deploymentParameters);
         var client = CreateNonValidatingClient(deploymentResult);
@@ -1432,7 +1811,9 @@ public class StartupTests : IISFunctionalTestBase
     public static int GetNextSSLPort(int avoid = 0)
     {
         var next = 44300;
-        using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        using (
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
+        )
         {
             while (true)
             {
@@ -1477,15 +1858,25 @@ public class StartupTests : IISFunctionalTestBase
 
     private static async Task AssertLink(HttpResponseMessage response)
     {
-        Assert.Contains("<a href=\"http://example\"> <cite> http://example </cite></a> and ", await response.Content.ReadAsStringAsync());
+        Assert.Contains(
+            "<a href=\"http://example\"> <cite> http://example </cite></a> and ",
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
-    private async Task<HttpResponseMessage> DeployAppWithStartupFailure(IISDeploymentParameters deploymentParameters)
+    private async Task<HttpResponseMessage> DeployAppWithStartupFailure(
+        IISDeploymentParameters deploymentParameters
+    )
     {
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "doesnot"));
-        deploymentParameters.WebConfigActionList.Add(WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "start"));
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("processPath", "doesnot")
+        );
+        deploymentParameters.WebConfigActionList.Add(
+            WebConfigHelpers.AddOrModifyAspNetCoreSection("arguments", "start")
+        );
 
-        deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] = "http://example";
+        deploymentParameters.EnvironmentVariables["ANCM_ADDITIONAL_ERROR_PAGE_LINK"] =
+            "http://example";
 
         var deploymentResult = await DeployAsync(deploymentParameters);
 
@@ -1505,13 +1896,18 @@ public class StartupTests : IISFunctionalTestBase
     {
         var entries = GetEventLogsFromDotnetRuntime(deploymentResult);
 
-        var expectedRegex = new Regex("Exception Info: System\\.InvalidOperationException:", RegexOptions.Singleline);
+        var expectedRegex = new Regex(
+            "Exception Info: System\\.InvalidOperationException:",
+            RegexOptions.Singleline
+        );
         var matchedEntries = entries.Where(entry => expectedRegex.IsMatch(entry.Message)).ToArray();
         // There isn't a process ID to filter on here, so there can be duplicate entries from other tests.
         Assert.True(matchedEntries.Length > 0);
     }
 
-    private static IEnumerable<EventLogEntry> GetEventLogsFromDotnetRuntime(IISDeploymentResult deploymentResult)
+    private static IEnumerable<EventLogEntry> GetEventLogsFromDotnetRuntime(
+        IISDeploymentResult deploymentResult
+    )
     {
         var processStartTime = deploymentResult.HostProcess.StartTime.AddSeconds(-5);
         var eventLog = new EventLog("Application");
@@ -1537,31 +1933,36 @@ public class StartupTests : IISFunctionalTestBase
         }
     }
 
-    private static void MoveApplication(
-        IISDeploymentParameters parameters,
-        string subdirectory)
+    private static void MoveApplication(IISDeploymentParameters parameters, string subdirectory)
     {
-        parameters.WebConfigActionList.Add((config, contentRoot) =>
-        {
-            var source = new DirectoryInfo(contentRoot);
-            var subDirectoryPath = source.CreateSubdirectory(subdirectory);
-
-            // Copy everything into a subfolder
-            Helpers.CopyFiles(source, subDirectoryPath, null);
-            // Cleanup files
-            foreach (var fileSystemInfo in source.GetFiles())
+        parameters.WebConfigActionList.Add(
+            (config, contentRoot) =>
             {
-                fileSystemInfo.Delete();
+                var source = new DirectoryInfo(contentRoot);
+                var subDirectoryPath = source.CreateSubdirectory(subdirectory);
+
+                // Copy everything into a subfolder
+                Helpers.CopyFiles(source, subDirectoryPath, null);
+                // Cleanup files
+                foreach (var fileSystemInfo in source.GetFiles())
+                {
+                    fileSystemInfo.Delete();
+                }
             }
-        });
+        );
     }
 
-    private Task AssertSiteFailsToStartWithInProcessStaticContent(IISDeploymentResult deploymentResult)
+    private Task AssertSiteFailsToStartWithInProcessStaticContent(
+        IISDeploymentResult deploymentResult
+    )
     {
         return AssertSiteFailsToStartWithInProcessStaticContent(deploymentResult, "500.0");
     }
 
-    private async Task AssertSiteFailsToStartWithInProcessStaticContent(IISDeploymentResult deploymentResult, string error)
+    private async Task AssertSiteFailsToStartWithInProcessStaticContent(
+        IISDeploymentResult deploymentResult,
+        string error
+    )
     {
         HttpResponseMessage response = null;
 

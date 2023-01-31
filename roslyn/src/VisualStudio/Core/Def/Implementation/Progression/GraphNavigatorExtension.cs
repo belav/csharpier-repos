@@ -21,7 +21,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
-    internal sealed class GraphNavigatorExtension : ForegroundThreadAffinitizedObject, IGraphNavigateToItem
+    internal sealed class GraphNavigatorExtension
+        : ForegroundThreadAffinitizedObject,
+            IGraphNavigateToItem
     {
         private readonly Workspace _workspace;
 
@@ -33,16 +35,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         public void NavigateTo(GraphObject graphObject)
         {
-
             if (graphObject is GraphNode graphNode)
             {
-                var sourceLocation = graphNode.GetValue<SourceLocation>(CodeNodeProperties.SourceLocation);
+                var sourceLocation = graphNode.GetValue<SourceLocation>(
+                    CodeNodeProperties.SourceLocation
+                );
                 if (sourceLocation.FileName == null)
                 {
                     return;
                 }
 
-                var projectId = graphNode.GetValue<ProjectId>(RoslynGraphProperties.ContextProjectId);
+                var projectId = graphNode.GetValue<ProjectId>(
+                    RoslynGraphProperties.ContextProjectId
+                );
                 var symbolId = graphNode.GetValue<SymbolKey?>(RoslynGraphProperties.SymbolId);
 
                 if (projectId != null)
@@ -56,10 +61,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     }
 
                     var document = project.Documents.FirstOrDefault(
-                        d => string.Equals(
-                            d.FilePath,
-                            sourceLocation.FileName.LocalPath,
-                            StringComparison.OrdinalIgnoreCase));
+                        d =>
+                            string.Equals(
+                                d.FilePath,
+                                sourceLocation.FileName.LocalPath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    );
 
                     if (document == null)
                     {
@@ -70,43 +78,73 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     {
                         // If we are already on the UI thread, invoke NavigateOnForegroundThread
                         // directly to preserve any existing NewDocumentStateScope.
-                        NavigateOnForegroundThread(sourceLocation, symbolId, project, document, CancellationToken.None);
+                        NavigateOnForegroundThread(
+                            sourceLocation,
+                            symbolId,
+                            project,
+                            document,
+                            CancellationToken.None
+                        );
                     }
                     else
                     {
                         // Navigation must be performed on the UI thread. If we are invoked from a
                         // background thread then the current NewDocumentStateScope is unrelated to
-                        // this navigation and it is safe to continue on the UI thread 
+                        // this navigation and it is safe to continue on the UI thread
                         // asynchronously.
                         Task.Factory.SafeStartNewFromAsync(
                             async () =>
                             {
                                 await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                                NavigateOnForegroundThread(sourceLocation, symbolId, project, document, CancellationToken.None);
+                                NavigateOnForegroundThread(
+                                    sourceLocation,
+                                    symbolId,
+                                    project,
+                                    document,
+                                    CancellationToken.None
+                                );
                             },
                             CancellationToken.None,
-                            TaskScheduler.Default);
+                            TaskScheduler.Default
+                        );
                     }
                 }
             }
         }
 
         private void NavigateOnForegroundThread(
-            SourceLocation sourceLocation, SymbolKey? symbolId, Project project, Document document, CancellationToken cancellationToken)
+            SourceLocation sourceLocation,
+            SymbolKey? symbolId,
+            Project project,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             AssertIsForeground();
 
             // Notify of navigation so third parties can intercept the navigation
             if (symbolId != null)
             {
-                var symbolNavigationService = _workspace.Services.GetService<ISymbolNavigationService>();
-                var symbol = symbolId.Value.Resolve(project.GetCompilationAsync(cancellationToken).WaitAndGetResult(cancellationToken), cancellationToken: cancellationToken).Symbol;
+                var symbolNavigationService =
+                    _workspace.Services.GetService<ISymbolNavigationService>();
+                var symbol = symbolId.Value
+                    .Resolve(
+                        project
+                            .GetCompilationAsync(cancellationToken)
+                            .WaitAndGetResult(cancellationToken),
+                        cancellationToken: cancellationToken
+                    )
+                    .Symbol;
 
                 // Do not allow third party navigation to types or constructors
-                if (symbol != null &&
-                    symbol is not ITypeSymbol &&
-                    !symbol.IsConstructor() &&
-                    symbolNavigationService.TrySymbolNavigationNotifyAsync(symbol, project, cancellationToken).WaitAndGetResult(cancellationToken))
+                if (
+                    symbol != null
+                    && symbol is not ITypeSymbol
+                    && !symbol.IsConstructor()
+                    && symbolNavigationService
+                        .TrySymbolNavigationNotifyAsync(symbol, project, cancellationToken)
+                        .WaitAndGetResult(cancellationToken)
+                )
                 {
                     return;
                 }
@@ -121,7 +159,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 if (document != null)
                 {
                     var editorWorkspace = document.Project.Solution.Workspace;
-                    var navigationService = editorWorkspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService =
+                        editorWorkspace.Services.GetService<IDocumentNavigationService>();
 
                     // TODO: Get the platform to use and pass us an operation context, or create one ourselves.
                     navigationService.TryNavigateToLineAndOffset(
@@ -129,7 +168,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         document.Id,
                         sourceLocation.StartPosition.Line,
                         sourceLocation.StartPosition.Character,
-                        cancellationToken);
+                        cancellationToken
+                    );
                 }
             }
         }
@@ -138,8 +178,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             if (graphObject is GraphNode graphNode)
             {
-                var sourceLocation = graphNode.GetValue<SourceLocation>(CodeNodeProperties.SourceLocation);
-                var projectId = graphNode.GetValue<ProjectId>(RoslynGraphProperties.ContextProjectId);
+                var sourceLocation = graphNode.GetValue<SourceLocation>(
+                    CodeNodeProperties.SourceLocation
+                );
+                var projectId = graphNode.GetValue<ProjectId>(
+                    RoslynGraphProperties.ContextProjectId
+                );
 
                 if (sourceLocation.IsValid && projectId != null)
                 {

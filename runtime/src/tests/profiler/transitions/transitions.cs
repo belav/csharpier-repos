@@ -10,7 +10,8 @@ namespace Profiler.Tests
     unsafe class Transitions
     {
         static readonly string PInvokeExpectedNameEnvVar = "PInvoke_Transition_Expected_Name";
-        static readonly string ReversePInvokeExpectedNameEnvVar = "ReversePInvoke_Transition_Expected_Name";
+        static readonly string ReversePInvokeExpectedNameEnvVar =
+            "ReversePInvoke_Transition_Expected_Name";
         static readonly Guid TransitionsGuid = new Guid("027AD7BB-578E-4921-B29F-B540363D83EC");
 
         [UnmanagedFunctionPointer(CallingConvention.Winapi)]
@@ -32,8 +33,11 @@ namespace Profiler.Tests
         public static int BlittablePInvokeToBlittableInteropDelegate()
         {
             InteropDelegate del = DoDelegateReversePInvoke;
-            
-            DoPInvoke((delegate* unmanaged<int,int>)Marshal.GetFunctionPointerForDelegate(del), 13);
+
+            DoPInvoke(
+                (delegate* unmanaged<int, int>)Marshal.GetFunctionPointerForDelegate(del),
+                13
+            );
             GC.KeepAlive(del);
 
             return 100;
@@ -42,8 +46,11 @@ namespace Profiler.Tests
         public static int NonBlittablePInvokeToNonBlittableInteropDelegate()
         {
             InteropDelegateNonBlittable del = DoDelegateReversePInvokeNonBlittable;
-            
-            DoPInvokeNonBlitable((delegate* unmanaged<int,int>)Marshal.GetFunctionPointerForDelegate(del), true);
+
+            DoPInvokeNonBlitable(
+                (delegate* unmanaged<int, int>)Marshal.GetFunctionPointerForDelegate(del),
+                true
+            );
             GC.KeepAlive(del);
 
             return 100;
@@ -56,10 +63,13 @@ namespace Profiler.Tests
         }
 
         [DllImport("Profiler")]
-        public static extern void DoPInvoke(delegate* unmanaged<int,int> callback, int i);
+        public static extern void DoPInvoke(delegate* unmanaged<int, int> callback, int i);
 
         [DllImport("Profiler", EntryPoint = nameof(DoPInvoke))]
-        public static extern void DoPInvokeNonBlitable(delegate* unmanaged<int,int> callback, bool i);
+        public static extern void DoPInvokeNonBlitable(
+            delegate* unmanaged<int, int> callback,
+            bool i
+        );
 
         public static int BlittablePInvokeToUnmanagedCallersOnly()
         {
@@ -92,22 +102,46 @@ namespace Profiler.Tests
                 }
             }
 
-            if (!RunProfilerTest(nameof(BlittablePInvokeToUnmanagedCallersOnly), nameof(DoPInvoke), nameof(DoReversePInvoke)))
+            if (
+                !RunProfilerTest(
+                    nameof(BlittablePInvokeToUnmanagedCallersOnly),
+                    nameof(DoPInvoke),
+                    nameof(DoReversePInvoke)
+                )
+            )
             {
                 return 101;
             }
 
-            if (!RunProfilerTest(nameof(BlittablePInvokeToBlittableInteropDelegate), nameof(DoPInvoke), "Invoke"))
+            if (
+                !RunProfilerTest(
+                    nameof(BlittablePInvokeToBlittableInteropDelegate),
+                    nameof(DoPInvoke),
+                    "Invoke"
+                )
+            )
             {
                 return 102;
             }
 
-            if (!RunProfilerTest(nameof(NonBlittablePInvokeToUnmanagedCallersOnly), nameof(DoPInvokeNonBlitable), nameof(DoReversePInvoke)))
+            if (
+                !RunProfilerTest(
+                    nameof(NonBlittablePInvokeToUnmanagedCallersOnly),
+                    nameof(DoPInvokeNonBlitable),
+                    nameof(DoReversePInvoke)
+                )
+            )
             {
                 return 101;
             }
 
-            if (!RunProfilerTest(nameof(NonBlittablePInvokeToNonBlittableInteropDelegate), nameof(DoPInvokeNonBlitable), "Invoke"))
+            if (
+                !RunProfilerTest(
+                    nameof(NonBlittablePInvokeToNonBlittableInteropDelegate),
+                    nameof(DoPInvokeNonBlitable),
+                    "Invoke"
+                )
+            )
             {
                 return 102;
             }
@@ -115,19 +149,25 @@ namespace Profiler.Tests
             return 100;
         }
 
-        private static bool RunProfilerTest(string testName, string pInvokeExpectedName, string reversePInvokeExpectedName)
+        private static bool RunProfilerTest(
+            string testName,
+            string pInvokeExpectedName,
+            string reversePInvokeExpectedName
+        )
         {
             try
             {
-                return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "Transitions",
-                                          profilerClsid: TransitionsGuid,
-                                          profileeArguments: testName,
-                                          envVars: new Dictionary<string, string>
-                                          {
-                                              { PInvokeExpectedNameEnvVar, pInvokeExpectedName },
-                                              { ReversePInvokeExpectedNameEnvVar, reversePInvokeExpectedName },
-                                          }) == 100;
+                return ProfilerTestRunner.Run(
+                        profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                        testName: "Transitions",
+                        profilerClsid: TransitionsGuid,
+                        profileeArguments: testName,
+                        envVars: new Dictionary<string, string>
+                        {
+                            { PInvokeExpectedNameEnvVar, pInvokeExpectedName },
+                            { ReversePInvokeExpectedNameEnvVar, reversePInvokeExpectedName },
+                        }
+                    ) == 100;
             }
             catch (Exception ex)
             {

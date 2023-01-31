@@ -3,8 +3,8 @@
 
 public class C
 {
-	void Test ()
-	{
-		var zCoords = new double[uint.MaxValue] { 0 };
-	}
+    void Test()
+    {
+        var zCoords = new double[uint.MaxValue] { 0 };
+    }
 }

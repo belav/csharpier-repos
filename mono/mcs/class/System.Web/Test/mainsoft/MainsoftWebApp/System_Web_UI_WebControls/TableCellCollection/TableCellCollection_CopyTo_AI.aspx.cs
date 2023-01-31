@@ -35,80 +35,77 @@ using System.Web.UI.HtmlControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableCellCollection_CopyTo_AI
-		: GHTBaseWeb 
-	{
+    public class TableCellCollection_CopyTo_AI : GHTBaseWeb
+    {
 		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
 		#endregion
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
 
-			System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
 
-			//add new cell
-			tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[1].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[1].Cells.Add(new System.Web.UI.WebControls.TableCell());
-			tbl.Rows[0].Cells[0].Text = "111";
-			tbl.Rows[0].Cells[1].Text = "222";
-			tbl.Rows[1].Cells[0].Text = "333";
-			tbl.Rows[1].Cells[1].Text = "444";
+            //add new cell
+            tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[0].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[1].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[1].Cells.Add(new System.Web.UI.WebControls.TableCell());
+            tbl.Rows[0].Cells[0].Text = "111";
+            tbl.Rows[0].Cells[1].Text = "222";
+            tbl.Rows[1].Cells[0].Text = "333";
+            tbl.Rows[1].Cells[1].Text = "444";
 
-			TableCell[] arrCells = new TableCell[5];
+            TableCell[] arrCells = new TableCell[5];
 
+            try
+            {
+                base.GHTSubTestBegin("Copy to");
+                base.GHTActiveSubTest.Controls.Add(tbl);
+                tbl.Rows[0].Cells.CopyTo(arrCells, 1);
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
 
-			try 
-			{
-				base.GHTSubTestBegin("Copy to");
-				base.GHTActiveSubTest.Controls.Add(tbl);
-				tbl.Rows[0].Cells.CopyTo(arrCells, 1);
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            System.Web.UI.WebControls.Table tbl1 = new System.Web.UI.WebControls.Table();
+            tbl1.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            try
+            {
+                base.GHTSubTestBegin("Copy to - check array");
+                base.GHTActiveSubTest.Controls.Add(tbl1);
+                tbl1.Rows[0].Cells.Add((System.Web.UI.WebControls.TableCell)arrCells[1]);
+                tbl1.Rows[0].Cells.Add((System.Web.UI.WebControls.TableCell)arrCells[2]);
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
 
-			System.Web.UI.WebControls.Table tbl1 = new System.Web.UI.WebControls.Table();
-			tbl1.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			try 
-			{
-				base.GHTSubTestBegin("Copy to - check array");
-				base.GHTActiveSubTest.Controls.Add(tbl1);
-				tbl1.Rows[0].Cells.Add( (System.Web.UI.WebControls.TableCell)arrCells[1] );
-				tbl1.Rows[0].Cells.Add( (System.Web.UI.WebControls.TableCell)arrCells[2] );
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
-
-
-			base.GHTTestEnd();
-		}
-	}
+            base.GHTTestEnd();
+        }
+    }
 }

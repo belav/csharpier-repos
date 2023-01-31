@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,41 +33,49 @@ using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class GridViewUpdateEventArgs : CancelEventArgs
-	{
-		int rowIndex;
-		IOrderedDictionary keys;
-		IOrderedDictionary newValues;
-		IOrderedDictionary oldValues;
-		
-		public GridViewUpdateEventArgs (int rowIndex)
-		{
-			this.rowIndex = rowIndex;
-		}
-		
-		internal GridViewUpdateEventArgs (int rowIndex, IOrderedDictionary keys, IOrderedDictionary oldValues, IOrderedDictionary newValues)
-		{
-			this.rowIndex = rowIndex;
-			this.keys = keys;
-			this.newValues = newValues;
-			this.oldValues = oldValues;
-		}
-		
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+    public class GridViewUpdateEventArgs : CancelEventArgs
+    {
+        int rowIndex;
+        IOrderedDictionary keys;
+        IOrderedDictionary newValues;
+        IOrderedDictionary oldValues;
 
-		public IOrderedDictionary Keys {
-			get { return keys; }
-		}
+        public GridViewUpdateEventArgs(int rowIndex)
+        {
+            this.rowIndex = rowIndex;
+        }
 
-		public IOrderedDictionary NewValues {
-			get { return newValues; }
-		}
+        internal GridViewUpdateEventArgs(
+            int rowIndex,
+            IOrderedDictionary keys,
+            IOrderedDictionary oldValues,
+            IOrderedDictionary newValues
+        )
+        {
+            this.rowIndex = rowIndex;
+            this.keys = keys;
+            this.newValues = newValues;
+            this.oldValues = oldValues;
+        }
 
-		public IOrderedDictionary OldValues {
-			get { return oldValues; }
-		}
-	}
+        public int RowIndex
+        {
+            get { return rowIndex; }
+        }
+
+        public IOrderedDictionary Keys
+        {
+            get { return keys; }
+        }
+
+        public IOrderedDictionary NewValues
+        {
+            get { return newValues; }
+        }
+
+        public IOrderedDictionary OldValues
+        {
+            get { return oldValues; }
+        }
+    }
 }
-

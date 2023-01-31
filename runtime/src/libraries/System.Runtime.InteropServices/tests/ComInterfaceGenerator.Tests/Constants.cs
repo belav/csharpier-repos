@@ -5,6 +5,7 @@ namespace ComInterfaceGenerator.Tests
 {
     partial class NativeExportsNE
     {
-        public const string NativeExportsNE_Binary = "Microsoft.Interop.Tests." + nameof(NativeExportsNE);
+        public const string NativeExportsNE_Binary =
+            "Microsoft.Interop.Tests." + nameof(NativeExportsNE);
     }
 }

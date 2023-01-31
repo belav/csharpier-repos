@@ -4,15 +4,13 @@
 
 namespace System
 {
-    public class Console
-    {
-    }
+    public class Console { }
 }
 
 public class C
 {
-    public static void Main ()
+    public static void Main()
     {
-        new System.Console ();
+        new System.Console();
     }
 }

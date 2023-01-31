@@ -1,11 +1,10 @@
 // CS0021: Cannot apply indexing with [] to an expression of type `method group'
-// Line: 
+// Line:
 
 class X
 {
-	public void Foo ()
-	{
-		object baz = Foo [0];
-	}
+    public void Foo()
+    {
+        object baz = Foo[0];
+    }
 }
-

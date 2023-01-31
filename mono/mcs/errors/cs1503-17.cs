@@ -5,27 +5,26 @@ using System;
 
 class X
 {
-	long field;
+    long field;
 
-	static void Main ()
-	{
-		var x = new X ();
-		x.Run ();
-	}
+    static void Main()
+    {
+        var x = new X();
+        x.Run();
+    }
 
-	void Run ()
-	{
-		Test (ref Prop);
-	}
+    void Run()
+    {
+        Test(ref Prop);
+    }
 
-	static int Test (ref int y)
-	{
-		return y;
-	}
+    static int Test(ref int y)
+    {
+        return y;
+    }
 
-	ref long Prop {
-		get {
-			return ref field;
-		}
-	}
+    ref long Prop
+    {
+        get { return ref field; }
+    }
 }

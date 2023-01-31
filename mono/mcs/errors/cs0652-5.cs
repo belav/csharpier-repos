@@ -4,13 +4,12 @@
 
 using System;
 
-public class CS0652 {
-
-	public static void Main () 
-	{
-		char value = 'a';
-		if (value < SByte.MinValue)
-			return;
-	}
+public class CS0652
+{
+    public static void Main()
+    {
+        char value = 'a';
+        if (value < SByte.MinValue)
+            return;
+    }
 }
-

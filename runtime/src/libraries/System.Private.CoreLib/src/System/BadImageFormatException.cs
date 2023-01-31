@@ -16,11 +16,13 @@ using System.Runtime.Serialization;
 namespace System
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public partial class BadImageFormatException : SystemException
     {
-        private readonly string? _fileName;  // The name of the corrupt PE file.
-        private readonly string? _fusionLog;  // fusion log (when applicable)
+        private readonly string? _fileName; // The name of the corrupt PE file.
+        private readonly string? _fusionLog; // fusion log (when applicable)
 
         public BadImageFormatException()
             : base(SR.Arg_BadImageFormatException)
@@ -40,7 +42,8 @@ namespace System
             HResult = HResults.COR_E_BADIMAGEFORMAT;
         }
 
-        public BadImageFormatException(string? message, string? fileName) : base(message)
+        public BadImageFormatException(string? message, string? fileName)
+            : base(message)
         {
             HResult = HResults.COR_E_BADIMAGEFORMAT;
             _fileName = fileName;
@@ -80,8 +83,7 @@ namespace System
         {
             if (_message == null)
             {
-                if ((_fileName == null) &&
-                    (HResult == HResults.COR_E_EXCEPTION))
+                if ((_fileName == null) && (HResult == HResults.COR_E_EXCEPTION))
                     _message = SR.Arg_BadImageFormatException;
                 else
                     _message = FileLoadException.FormatFileLoadExceptionMessage(_fileName, HResult);

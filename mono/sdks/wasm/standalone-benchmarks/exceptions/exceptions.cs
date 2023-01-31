@@ -11,11 +11,7 @@ public partial class Benchmark
         reset();
     }
 
-    public void reset()
-    {
-    }
+    public void reset() { }
 
-    public void runIteration()
-    {
-    }
+    public void runIteration() { }
 }

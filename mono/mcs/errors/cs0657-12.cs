@@ -5,15 +5,13 @@
 using System;
 
 [AttributeUsage(AttributeTargets.All)]
-public class TestAttribute: Attribute
-{
-}
+public class TestAttribute : Attribute { }
 
 class C
 {
-    int Prop {
-        [type:Test]
-        set {
-        }
+    int Prop
+    {
+        [type: Test]
+        set { }
     }
 }

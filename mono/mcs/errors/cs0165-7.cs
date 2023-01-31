@@ -4,15 +4,16 @@ using System;
 
 public class Foo
 {
-	static void Main (string[] args)
-	{
-		int service;
+    static void Main(string[] args)
+    {
+        int service;
 
-		for (int pos = 0; pos < args.Length; pos++) {
-			service = 1;
-			break;
-		}
+        for (int pos = 0; pos < args.Length; pos++)
+        {
+            service = 1;
+            break;
+        }
 
-		Console.WriteLine (service);
-	}
+        Console.WriteLine(service);
+    }
 }

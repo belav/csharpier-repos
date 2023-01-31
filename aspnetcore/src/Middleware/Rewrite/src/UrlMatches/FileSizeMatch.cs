@@ -13,6 +13,8 @@ internal sealed class FileSizeMatch : UrlMatch
     public override MatchResults Evaluate(string input, RewriteContext context)
     {
         var fileInfo = context.StaticFileProvider.GetFileInfo(input);
-        return fileInfo.Exists && fileInfo.Length > 0 ? MatchResults.EmptySuccess : MatchResults.EmptyFailure;
+        return fileInfo.Exists && fileInfo.Length > 0
+            ? MatchResults.EmptySuccess
+            : MatchResults.EmptyFailure;
     }
 }

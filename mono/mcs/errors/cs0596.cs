@@ -2,6 +2,4 @@
 // Line: 4
 
 [System.Runtime.InteropServices.ComImportAttribute]
-class C
-{
-}
+class C { }

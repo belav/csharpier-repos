@@ -93,7 +93,13 @@ namespace System.Threading
             // This also avoids OOM after creating the thread.
             _stopped = new ManualResetEvent(false);
 
-            if (!Interop.Sys.CreateThread((IntPtr)_startHelper!._maxStackSize, &ThreadEntryPoint, (IntPtr)thisThreadHandle))
+            if (
+                !Interop.Sys.CreateThread(
+                    (IntPtr)_startHelper!._maxStackSize,
+                    &ThreadEntryPoint,
+                    (IntPtr)thisThreadHandle
+                )
+            )
             {
                 return false;
             }
@@ -136,9 +142,7 @@ namespace System.Threading
 
         partial void InitializeComOnNewThread();
 
-        internal static void InitializeComForFinalizerThread()
-        {
-        }
+        internal static void InitializeComForFinalizerThread() { }
 
         public void DisableComObjectEagerCleanup() { }
 
@@ -163,7 +167,8 @@ namespace System.Threading
             // sched_getcpu doesn't exist on all platforms. On those it doesn't exist on, the shim
             // returns -1.  As a fallback in that case and to spread the threads across the buckets
             // by default, we use the current managed thread ID as a proxy.
-            if (processorId < 0) processorId = Environment.CurrentManagedThreadId;
+            if (processorId < 0)
+                processorId = Environment.CurrentManagedThreadId;
 
             return processorId;
         }

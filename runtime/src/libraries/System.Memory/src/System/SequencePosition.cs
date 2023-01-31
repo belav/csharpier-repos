@@ -40,17 +40,20 @@ namespace System
         /// Indicates whether the current <see cref="SequencePosition"/> is equal to another <see cref="SequencePosition"/>.
         /// <see cref="SequencePosition"/> equality does not guarantee that they point to the same location in <see cref="System.Buffers.ReadOnlySequence{T}" />
         /// </summary>
-        public bool Equals(SequencePosition other) => _integer == other._integer && object.Equals(this._object, other._object);
+        public bool Equals(SequencePosition other) =>
+            _integer == other._integer && object.Equals(this._object, other._object);
 
         /// <summary>
         /// Indicates whether the current <see cref="SequencePosition"/> is equal to another <see cref="object"/>.
         /// <see cref="SequencePosition"/> equality does not guarantee that they point to the same location in <see cref="System.Buffers.ReadOnlySequence{T}" />
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is SequencePosition other && this.Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is SequencePosition other && this.Equals(other);
 
         /// <inheritdoc />
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public override int GetHashCode() => HashCode.Combine(_object?.GetHashCode() ?? 0, _integer);
+        public override int GetHashCode() =>
+            HashCode.Combine(_object?.GetHashCode() ?? 0, _integer);
     }
 }

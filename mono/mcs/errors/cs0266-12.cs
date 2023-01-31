@@ -3,9 +3,9 @@
 
 class X
 {
-	public static void Main ()
-	{
-		char x = 'A';
-		char b = +x;
-	}
+    public static void Main()
+    {
+        char x = 'A';
+        char b = +x;
+    }
 }

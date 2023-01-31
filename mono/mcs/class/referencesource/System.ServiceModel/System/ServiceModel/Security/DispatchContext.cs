@@ -84,5 +84,5 @@ namespace System.ServiceModel.Security
             get { return trustNamespace; }
             set { trustNamespace = value; }
         }
-    }    
+    }
 }

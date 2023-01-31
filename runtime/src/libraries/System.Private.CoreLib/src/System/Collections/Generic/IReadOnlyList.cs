@@ -9,7 +9,10 @@ namespace System.Collections.Generic
         T this[int index]
         {
 #if MONO
-            [System.Diagnostics.CodeAnalysis.DynamicDependency(nameof(Array.InternalArray__IReadOnlyList_get_Item) + "``1", typeof(Array))]
+            [System.Diagnostics.CodeAnalysis.DynamicDependency(
+                nameof(Array.InternalArray__IReadOnlyList_get_Item) + "``1",
+                typeof(Array)
+            )]
 #endif
             get;
         }

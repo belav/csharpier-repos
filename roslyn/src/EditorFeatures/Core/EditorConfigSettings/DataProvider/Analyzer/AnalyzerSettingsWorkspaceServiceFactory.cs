@@ -11,7 +11,10 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyzer
 {
-    [ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<AnalyzerSetting>)), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IWorkspaceSettingsProviderFactory<AnalyzerSetting>)),
+        Shared
+    ]
     internal class AnalyzerSettingsWorkspaceServiceFactory : IWorkspaceServiceFactory
     {
         private readonly IDiagnosticAnalyzerService _analyzerService;
@@ -23,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
             _analyzerService = analyzerService;
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new AnalyzerSettingsProviderFactory(workspaceServices.Workspace, _analyzerService);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new AnalyzerSettingsProviderFactory(workspaceServices.Workspace, _analyzerService);
     }
 }

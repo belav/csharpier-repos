@@ -19,19 +19,19 @@ namespace System.ServiceModel.ComIntegration
             this.info = info;
         }
 
-        public void Validate(ContractDescription description, ServiceEndpoint endpoint)
-        {
-        }
+        public void Validate(ContractDescription description, ServiceEndpoint endpoint) { }
 
-        public void AddBindingParameters(ContractDescription description,
-                              ServiceEndpoint endpoint,
-                              BindingParameterCollection parameters)
-        {
-        }
+        public void AddBindingParameters(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-        public void ApplyDispatchBehavior(ContractDescription description,
-                                 ServiceEndpoint endpoint,
-                                 DispatchRuntime dispatch)
+        public void ApplyDispatchBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            DispatchRuntime dispatch
+        )
         {
             dispatch.InstanceProvider = new ComPlusInstanceProvider(info);
             dispatch.InstanceContextInitializers.Add(new ComPlusInstanceContextInitializer(info));
@@ -39,16 +39,16 @@ namespace System.ServiceModel.ComIntegration
             foreach (DispatchOperation operation in dispatch.Operations)
             {
                 operation.CallContextInitializers.Add(
-                    new ComPlusThreadInitializer(
-                        description,
-                        operation,
-                        info));
+                    new ComPlusThreadInitializer(description, operation, info)
+                );
             }
         }
 
-        public void ApplyClientBehavior(ContractDescription description,
-                              ServiceEndpoint endpoint,
-                              ClientRuntime proxy)
+        public void ApplyClientBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            ClientRuntime proxy
+        )
         {
             return;
         }

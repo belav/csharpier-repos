@@ -5,16 +5,16 @@ using System;
 
 class C
 {
-	delegate int IntDelegate (int a);
-	
-	static int TestInt (int u)
-	{
-		return 29;
-	}
-	
-	public static void Main ()
-	{
-		var del = new IntDelegate (TestInt);
-		del (b : 7);
-	}
+    delegate int IntDelegate(int a);
+
+    static int TestInt(int u)
+    {
+        return 29;
+    }
+
+    public static void Main()
+    {
+        var del = new IntDelegate(TestInt);
+        del(b: 7);
+    }
 }

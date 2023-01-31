@@ -8,9 +8,7 @@ public class InheritanceRelationshipsContext : PoolableDbContext
     public static readonly string StoreName = "InheritanceRelationships";
 
     public InheritanceRelationshipsContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<BaseCollectionOnBase> BaseCollectionsOnBase { get; set; }
     public DbSet<BaseCollectionOnDerived> BaseCollectionsOnDerived { get; set; }
@@ -29,7 +27,8 @@ public class InheritanceRelationshipsContext : PoolableDbContext
     public static void Seed(InheritanceRelationshipsContext context)
     {
         var baseCollectionsOnBase = InheritanceRelationshipsData.CreateBaseCollectionsOnBase();
-        var baseCollectionsOnDerived = InheritanceRelationshipsData.CreateBaseCollectionsOnDerived();
+        var baseCollectionsOnDerived =
+            InheritanceRelationshipsData.CreateBaseCollectionsOnDerived();
         var baseEntities = InheritanceRelationshipsData.CreateBaseEntities();
         var baseReferencesOnBase = InheritanceRelationshipsData.CreateBaseReferencesOnBase();
         var baseReferencesOnDerived = InheritanceRelationshipsData.CreateBaseReferencesOnDerived();
@@ -53,7 +52,8 @@ public class InheritanceRelationshipsContext : PoolableDbContext
             baseCollectionsOnDerived,
             collectionsOnBase,
             collectionsOnDerived,
-            nestedCollections);
+            nestedCollections
+        );
 
         context.BaseCollectionsOnBase.AddRange(baseCollectionsOnBase);
         context.BaseCollectionsOnDerived.AddRange(baseCollectionsOnDerived);

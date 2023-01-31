@@ -11,21 +11,22 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Host
 {
     /// <summary>
-    /// This class is a <see cref="ValueSource{T}"/> that holds onto a value weakly, 
+    /// This class is a <see cref="ValueSource{T}"/> that holds onto a value weakly,
     /// but can save its value and recover it on demand if needed.
-    /// 
+    ///
     /// The initial value comes from the <see cref="ValueSource{T}"/> specified in the constructor.
     /// Derived types implement SaveAsync and RecoverAsync.
     /// </summary>
-    internal abstract class WeaklyCachedRecoverableValueSource<T> : ValueSource<T> where T : class
+    internal abstract class WeaklyCachedRecoverableValueSource<T> : ValueSource<T>
+        where T : class
     {
         private SemaphoreSlim? _lazyGate; // Lazily created. Access via the Gate property
         private bool _saved;
         private WeakReference<T>? _weakReference;
         private ValueSource<T> _recoverySource;
 
-        public WeaklyCachedRecoverableValueSource(ValueSource<T> initialValue)
-            => _recoverySource = initialValue;
+        public WeaklyCachedRecoverableValueSource(ValueSource<T> initialValue) =>
+            _recoverySource = initialValue;
 
         public WeaklyCachedRecoverableValueSource(WeaklyCachedRecoverableValueSource<T> savedSource)
         {
@@ -58,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Host
         private static Task s_latestTask = Task.CompletedTask;
         private static readonly NonReentrantLock s_taskGuard = new();
 
-        private SemaphoreSlim Gate => LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
+        private SemaphoreSlim Gate =>
+            LazyInitialization.EnsureInitialized(ref _lazyGate, SemaphoreSlimFactory.Instance);
 
 #pragma warning disable CS8610 // Nullability of reference types in type of parameter doesn't match overridden member. (The compiler incorrectly identifies this as a change.)
         public override bool TryGetValue([NotNullWhen(true)] out T? value)
@@ -68,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Host
             // return false for the initial case where weakInstance is set to s_noReference even if
             // value can be retrieved from _recoverySource. so we check both here.
             var weakReference = _weakReference;
-            return weakReference != null && weakReference.TryGetTarget(out value) ||
-                   _recoverySource.TryGetValue(out value);
+            return weakReference != null && weakReference.TryGetTarget(out value)
+                || _recoverySource.TryGetValue(out value);
         }
 
         public override T GetValue(CancellationToken cancellationToken)
@@ -108,7 +110,9 @@ namespace Microsoft.CodeAnalysis.Host
                 {
                     if (_weakReference == null || !_weakReference.TryGetTarget(out instance))
                     {
-                        instance = await _recoverySource.GetValueAsync(cancellationToken).ConfigureAwait(false);
+                        instance = await _recoverySource
+                            .GetValueAsync(cancellationToken)
+                            .ConfigureAwait(false);
                         saveTask = EnsureInstanceIsSavedAsync(instance);
                     }
                 }
@@ -124,20 +128,24 @@ namespace Microsoft.CodeAnalysis.Host
 
         private void ResetRecoverySource(Task saveTask, T instance)
         {
-            saveTask.SafeContinueWith(t =>
-            {
-                using (Gate.DisposableWait(CancellationToken.None))
+            saveTask.SafeContinueWith(
+                t =>
                 {
-                    // Only assume the instance is saved if the saveTask completed successfully. If the save did not
-                    // complete, we can still rely on a constant value source to provide the instance.
-                    _recoverySource = saveTask.Status == TaskStatus.RanToCompletion
-                        ? new AsyncLazy<T>(RecoverAsync, Recover, cacheResult: false)
-                        : new ConstantValueSource<T>(instance);
+                    using (Gate.DisposableWait(CancellationToken.None))
+                    {
+                        // Only assume the instance is saved if the saveTask completed successfully. If the save did not
+                        // complete, we can still rely on a constant value source to provide the instance.
+                        _recoverySource =
+                            saveTask.Status == TaskStatus.RanToCompletion
+                                ? new AsyncLazy<T>(RecoverAsync, Recover, cacheResult: false)
+                                : new ConstantValueSource<T>(instance);
 
-                    // Need to keep instance alive until recovery source is updated.
-                    GC.KeepAlive(instance);
-                }
-            }, TaskScheduler.Default);
+                        // Need to keep instance alive until recovery source is updated.
+                        GC.KeepAlive(instance);
+                    }
+                },
+                TaskScheduler.Default
+            );
         }
 
         private Task? EnsureInstanceIsSavedAsync(T instance)
@@ -157,8 +165,11 @@ namespace Microsoft.CodeAnalysis.Host
                 using (s_taskGuard.DisposableWait())
                 {
                     // force all save tasks to be in sequence so we don't hog all the threads
-                    s_latestTask = s_latestTask.SafeContinueWithFromAsync(t =>
-                         SaveAsync(instance, CancellationToken.None), CancellationToken.None, TaskScheduler.Default);
+                    s_latestTask = s_latestTask.SafeContinueWithFromAsync(
+                        t => SaveAsync(instance, CancellationToken.None),
+                        CancellationToken.None,
+                        TaskScheduler.Default
+                    );
                     return s_latestTask;
                 }
             }

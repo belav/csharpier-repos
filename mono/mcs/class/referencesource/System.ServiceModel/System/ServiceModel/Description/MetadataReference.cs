@@ -14,17 +14,18 @@ namespace System.ServiceModel.Description
     using WsdlNS = System.Web.Services.Description;
     using System.ServiceModel.Channels;
 
-    [XmlRoot(ElementName = MetadataStrings.MetadataExchangeStrings.MetadataReference, Namespace = MetadataStrings.MetadataExchangeStrings.Namespace)]
+    [XmlRoot(
+        ElementName = MetadataStrings.MetadataExchangeStrings.MetadataReference,
+        Namespace = MetadataStrings.MetadataExchangeStrings.Namespace
+    )]
     public class MetadataReference : IXmlSerializable
     {
         EndpointAddress address;
         AddressingVersion addressVersion;
         Collection<XmlAttribute> attributes = new Collection<XmlAttribute>();
         static XmlDocument Document = new XmlDocument();
-        
-        public MetadataReference()
-        {
-        }
+
+        public MetadataReference() { }
 
         public MetadataReference(EndpointAddress address, AddressingVersion addressVersion)
         {
@@ -51,7 +52,10 @@ namespace System.ServiceModel.Description
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            this.address = EndpointAddress.ReadFrom(XmlDictionaryReader.CreateDictionaryReader(reader), out this.addressVersion);
+            this.address = EndpointAddress.ReadFrom(
+                XmlDictionaryReader.CreateDictionaryReader(reader),
+                out this.addressVersion
+            );
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)

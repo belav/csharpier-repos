@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // GacIdentityPermission.cs
-// 
+//
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Security.Permissions
 {
@@ -16,7 +16,15 @@ namespace System.Security.Permissions
 #endif // FEATURE_CAS_POLICY
     using System.Globalization;
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false )]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
 #pragma warning disable 618
@@ -24,18 +32,15 @@ namespace System.Security.Permissions
 #pragma warning restore 618
     {
 #pragma warning disable 618
-        public GacIdentityPermissionAttribute( SecurityAction action )
+        public GacIdentityPermissionAttribute(SecurityAction action)
 #pragma warning restore 618
-            : base( action )
-        {
-        }
+            : base(action) { }
 
         public override IPermission CreatePermission()
         {
             return new GacIdentityPermission();
         }
     }
-
 
     [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
@@ -51,13 +56,13 @@ namespace System.Security.Permissions
         {
             if (state != PermissionState.Unrestricted && state != PermissionState.None)
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidPermissionState"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InvalidPermissionState")
+                );
             }
         }
 
-        public GacIdentityPermission()
-        {
-        }
+        public GacIdentityPermission() { }
 
         //------------------------------------------------------
         //
@@ -76,7 +81,9 @@ namespace System.Security.Permissions
             if (target == null)
                 return false;
             if (!(target is GacIdentityPermission))
-                throw new ArgumentException(Environment.GetResourceString("Argument_WrongType", this.GetType().FullName));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_WrongType", this.GetType().FullName)
+                );
             return true;
         }
 
@@ -85,7 +92,9 @@ namespace System.Security.Permissions
             if (target == null)
                 return null;
             if (!(target is GacIdentityPermission))
-                throw new ArgumentException(Environment.GetResourceString("Argument_WrongType", this.GetType().FullName));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_WrongType", this.GetType().FullName)
+                );
             return this.Copy();
         }
 
@@ -94,14 +103,19 @@ namespace System.Security.Permissions
             if (target == null)
                 return this.Copy();
             if (!(target is GacIdentityPermission))
-                throw new ArgumentException(Environment.GetResourceString("Argument_WrongType", this.GetType().FullName));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_WrongType", this.GetType().FullName)
+                );
             return this.Copy();
         }
 
 #if FEATURE_CAS_POLICY
         public override SecurityElement ToXml()
         {
-            SecurityElement securityElement = CodeAccessPermission.CreatePermissionElement( this, "System.Security.Permissions.GacIdentityPermission" );
+            SecurityElement securityElement = CodeAccessPermission.CreatePermissionElement(
+                this,
+                "System.Security.Permissions.GacIdentityPermission"
+            );
             return securityElement;
         }
 

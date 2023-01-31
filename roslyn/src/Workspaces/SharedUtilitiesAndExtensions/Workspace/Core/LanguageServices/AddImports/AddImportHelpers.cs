@@ -15,15 +15,16 @@ namespace Microsoft.CodeAnalysis.AddImport
             ISyntaxFacts syntaxFacts,
             TRootSyntax root,
             SyntaxList<TImportDirectiveSyntax> existingImports,
-            List<TImportDirectiveSyntax> newImports)
+            List<TImportDirectiveSyntax> newImports
+        )
             where TRootSyntax : SyntaxNode
             where TImportDirectiveSyntax : SyntaxNode
         {
             if (existingImports.Count == 0)
             {
-                // We don't have any existing usings. Move any trivia on the first token 
+                // We don't have any existing usings. Move any trivia on the first token
                 // of the file to the first using.
-                // 
+                //
                 // Don't do this for doc comments, as they belong to the first element
                 // already in the file (like a class) and we don't want it to move to
                 // the using.
@@ -31,13 +32,15 @@ namespace Microsoft.CodeAnalysis.AddImport
 
                 // Remove the leading directives from the first token.
                 var newFirstToken = firstToken.WithLeadingTrivia(
-                    firstToken.LeadingTrivia.Where(t => IsDocCommentOrElastic(syntaxFacts, t)));
+                    firstToken.LeadingTrivia.Where(t => IsDocCommentOrElastic(syntaxFacts, t))
+                );
 
                 root = root.ReplaceToken(firstToken, newFirstToken);
 
                 // Move the leading trivia from the first token to the first using.
                 var newFirstUsing = newImports[0].WithLeadingTrivia(
-                    firstToken.LeadingTrivia.Where(t => !IsDocCommentOrElastic(syntaxFacts, t)));
+                    firstToken.LeadingTrivia.Where(t => !IsDocCommentOrElastic(syntaxFacts, t))
+                );
                 newImports[0] = newFirstUsing;
             }
             else
@@ -49,22 +52,31 @@ namespace Microsoft.CodeAnalysis.AddImport
                     // And move it to the new using.
                     var originalFirstUsingCurrentIndex = newImports.IndexOf(originalFirstUsing);
 
-                    newImports[0] = newImports[0].WithLeadingTrivia(originalFirstUsing.GetLeadingTrivia());
+                    newImports[0] = newImports[0].WithLeadingTrivia(
+                        originalFirstUsing.GetLeadingTrivia()
+                    );
 
                     var trailingTrivia = newImports[0].GetTrailingTrivia();
-                    if (!syntaxFacts.IsEndOfLineTrivia(trailingTrivia.Count == 0 ? default : trailingTrivia[^1]))
+                    if (
+                        !syntaxFacts.IsEndOfLineTrivia(
+                            trailingTrivia.Count == 0 ? default : trailingTrivia[^1]
+                        )
+                    )
                     {
-                        newImports[0] = newImports[0].WithAppendedTrailingTrivia(syntaxFacts.ElasticCarriageReturnLineFeed);
+                        newImports[0] = newImports[0].WithAppendedTrailingTrivia(
+                            syntaxFacts.ElasticCarriageReturnLineFeed
+                        );
                     }
 
-                    newImports[originalFirstUsingCurrentIndex] = originalFirstUsing.WithoutLeadingTrivia();
+                    newImports[originalFirstUsingCurrentIndex] =
+                        originalFirstUsing.WithoutLeadingTrivia();
                 }
             }
 
             return root;
         }
 
-        private static bool IsDocCommentOrElastic(ISyntaxFacts syntaxFacts, SyntaxTrivia t)
-            => syntaxFacts.IsDocumentationComment(t) || syntaxFacts.IsElastic(t);
+        private static bool IsDocCommentOrElastic(ISyntaxFacts syntaxFacts, SyntaxTrivia t) =>
+            syntaxFacts.IsDocumentationComment(t) || syntaxFacts.IsElastic(t);
     }
 }

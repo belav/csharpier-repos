@@ -23,9 +23,15 @@ internal abstract class SyntaxFormattingOptions
     {
         public static readonly CommonOptions Default = new();
 
-        [DataMember] public LineFormattingOptions LineFormatting { get; init; } = LineFormattingOptions.Default;
-        [DataMember] public bool SeparateImportDirectiveGroups { get; init; } = false;
-        [DataMember] public AccessibilityModifiersRequired AccessibilityModifiersRequired { get; init; } = AccessibilityModifiersRequired.ForNonInterfaceMembers;
+        [DataMember]
+        public LineFormattingOptions LineFormatting { get; init; } = LineFormattingOptions.Default;
+
+        [DataMember]
+        public bool SeparateImportDirectiveGroups { get; init; } = false;
+
+        [DataMember]
+        public AccessibilityModifiersRequired AccessibilityModifiersRequired { get; init; } =
+            AccessibilityModifiersRequired.ForNonInterfaceMembers;
     }
 
     [DataMember]
@@ -39,47 +45,85 @@ internal abstract class SyntaxFormattingOptions
     public LineFormattingOptions LineFormatting => Common.LineFormatting;
     public string NewLine => Common.LineFormatting.NewLine;
     public bool SeparateImportDirectiveGroups => Common.SeparateImportDirectiveGroups;
-    public AccessibilityModifiersRequired AccessibilityModifiersRequired => Common.AccessibilityModifiersRequired;
+    public AccessibilityModifiersRequired AccessibilityModifiersRequired =>
+        Common.AccessibilityModifiersRequired;
 
 #if !CODE_STYLE
-    public static SyntaxFormattingOptions GetDefault(LanguageServices languageServices)
-        => languageServices.GetRequiredService<ISyntaxFormattingService>().DefaultOptions;
+    public static SyntaxFormattingOptions GetDefault(LanguageServices languageServices) =>
+        languageServices.GetRequiredService<ISyntaxFormattingService>().DefaultOptions;
 #endif
 }
 
-internal interface SyntaxFormattingOptionsProvider :
+internal interface SyntaxFormattingOptionsProvider
+    :
 #if !CODE_STYLE
     OptionsProvider<SyntaxFormattingOptions>,
 #endif
-    LineFormattingOptionsProvider
-{
-}
+    LineFormattingOptionsProvider { }
 
 internal static partial class SyntaxFormattingOptionsProviders
 {
-    public static SyntaxFormattingOptions.CommonOptions GetCommonSyntaxFormattingOptions(this IOptionsReader options, string language, SyntaxFormattingOptions.CommonOptions? fallbackOptions)
+    public static SyntaxFormattingOptions.CommonOptions GetCommonSyntaxFormattingOptions(
+        this IOptionsReader options,
+        string language,
+        SyntaxFormattingOptions.CommonOptions? fallbackOptions
+    )
     {
         fallbackOptions ??= SyntaxFormattingOptions.CommonOptions.Default;
 
         return new()
         {
-            LineFormatting = options.GetLineFormattingOptions(language, fallbackOptions.LineFormatting),
-            SeparateImportDirectiveGroups = options.GetOption(GenerationOptions.SeparateImportDirectiveGroups, language, fallbackOptions.SeparateImportDirectiveGroups),
-            AccessibilityModifiersRequired = options.GetOptionValue(CodeStyleOptions2.AccessibilityModifiersRequired, language, fallbackOptions.AccessibilityModifiersRequired),
+            LineFormatting = options.GetLineFormattingOptions(
+                language,
+                fallbackOptions.LineFormatting
+            ),
+            SeparateImportDirectiveGroups = options.GetOption(
+                GenerationOptions.SeparateImportDirectiveGroups,
+                language,
+                fallbackOptions.SeparateImportDirectiveGroups
+            ),
+            AccessibilityModifiersRequired = options.GetOptionValue(
+                CodeStyleOptions2.AccessibilityModifiersRequired,
+                language,
+                fallbackOptions.AccessibilityModifiersRequired
+            ),
         };
     }
 
 #if !CODE_STYLE
-    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(this IOptionsReader options, SyntaxFormattingOptions? fallbackOptions, LanguageServices languageServices)
-        => languageServices.GetRequiredService<ISyntaxFormattingService>().GetFormattingOptions(options, fallbackOptions);
+    public static SyntaxFormattingOptions GetSyntaxFormattingOptions(
+        this IOptionsReader options,
+        SyntaxFormattingOptions? fallbackOptions,
+        LanguageServices languageServices
+    ) =>
+        languageServices
+            .GetRequiredService<ISyntaxFormattingService>()
+            .GetFormattingOptions(options, fallbackOptions);
 
-    public static async ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(this Document document, SyntaxFormattingOptions? fallbackOptions, CancellationToken cancellationToken)
+    public static async ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(
+        this Document document,
+        SyntaxFormattingOptions? fallbackOptions,
+        CancellationToken cancellationToken
+    )
     {
-        var configOptions = await document.GetAnalyzerConfigOptionsAsync(cancellationToken).ConfigureAwait(false);
+        var configOptions = await document
+            .GetAnalyzerConfigOptionsAsync(cancellationToken)
+            .ConfigureAwait(false);
         return configOptions.GetSyntaxFormattingOptions(fallbackOptions, document.Project.Services);
     }
 
-    public static async ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(this Document document, SyntaxFormattingOptionsProvider fallbackOptionsProvider, CancellationToken cancellationToken)
-        => await GetSyntaxFormattingOptionsAsync(document, await ((OptionsProvider<SyntaxFormattingOptions>)fallbackOptionsProvider).GetOptionsAsync(document.Project.Services, cancellationToken).ConfigureAwait(false), cancellationToken).ConfigureAwait(false);
+    public static async ValueTask<SyntaxFormattingOptions> GetSyntaxFormattingOptionsAsync(
+        this Document document,
+        SyntaxFormattingOptionsProvider fallbackOptionsProvider,
+        CancellationToken cancellationToken
+    ) =>
+        await GetSyntaxFormattingOptionsAsync(
+                document,
+                await ((OptionsProvider<SyntaxFormattingOptions>)fallbackOptionsProvider)
+                    .GetOptionsAsync(document.Project.Services, cancellationToken)
+                    .ConfigureAwait(false),
+                cancellationToken
+            )
+            .ConfigureAwait(false);
 #endif
 }

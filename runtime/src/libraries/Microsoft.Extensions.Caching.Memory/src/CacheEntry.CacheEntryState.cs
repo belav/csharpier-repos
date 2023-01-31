@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Caching.Memory
             private byte _evictionReason;
             private byte _priority;
 
-            internal CacheEntryState(CacheItemPriority priority) : this() => _priority = (byte)priority;
+            internal CacheEntryState(CacheItemPriority priority)
+                : this() => _priority = (byte)priority;
 
             internal bool IsDisposed
             {
@@ -46,7 +47,8 @@ namespace Microsoft.Extensions.Caching.Memory
                 set => _priority = (byte)value;
             }
 
-            private void SetFlag(Flags option, bool value) => _flags = (byte)(value ? (_flags | (byte)option) : (_flags & ~(byte)option));
+            private void SetFlag(Flags option, bool value) =>
+                _flags = (byte)(value ? (_flags | (byte)option) : (_flags & ~(byte)option));
 
             [Flags]
             private enum Flags : byte

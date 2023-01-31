@@ -15,7 +15,8 @@ namespace System.Text.Json
         private static void WriteCore<TValue>(
             Utf8JsonWriter writer,
             in TValue value,
-            JsonTypeInfo<TValue> jsonTypeInfo)
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo.CanUseSerializeHandler)
             {
@@ -24,7 +25,9 @@ namespace System.Text.Json
                 // we avoid instantiating a WriteStack and a couple of additional virtual calls.
 
                 Debug.Assert(jsonTypeInfo.SerializeHandler != null);
-                Debug.Assert(jsonTypeInfo.Options.SerializerContext?.CanUseSerializationLogic == true);
+                Debug.Assert(
+                    jsonTypeInfo.Options.SerializerContext?.CanUseSerializationLogic == true
+                );
                 Debug.Assert(jsonTypeInfo.Converter is JsonMetadataServicesConverter<TValue>);
 
                 jsonTypeInfo.SerializeHandler(writer, value);
@@ -32,13 +35,26 @@ namespace System.Text.Json
             else
             {
                 WriteStack state = default;
-                JsonTypeInfo polymorphicTypeInfo = ResolvePolymorphicTypeInfo(value, jsonTypeInfo, out state.IsPolymorphicRootValue);
+                JsonTypeInfo polymorphicTypeInfo = ResolvePolymorphicTypeInfo(
+                    value,
+                    jsonTypeInfo,
+                    out state.IsPolymorphicRootValue
+                );
                 state.Initialize(polymorphicTypeInfo);
 
-                bool success =
-                    state.IsPolymorphicRootValue
-                    ? polymorphicTypeInfo.Converter.WriteCoreAsObject(writer, value, jsonTypeInfo.Options, ref state)
-                    : jsonTypeInfo.EffectiveConverter.WriteCore(writer, value, jsonTypeInfo.Options, ref state);
+                bool success = state.IsPolymorphicRootValue
+                    ? polymorphicTypeInfo.Converter.WriteCoreAsObject(
+                        writer,
+                        value,
+                        jsonTypeInfo.Options,
+                        ref state
+                    )
+                    : jsonTypeInfo.EffectiveConverter.WriteCore(
+                        writer,
+                        value,
+                        jsonTypeInfo.Options,
+                        ref state
+                    );
 
                 Debug.Assert(success);
             }
@@ -52,13 +68,23 @@ namespace System.Text.Json
         private static void WriteCoreAsObject(
             Utf8JsonWriter writer,
             object? value,
-            JsonTypeInfo jsonTypeInfo)
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             WriteStack state = default;
-            JsonTypeInfo polymorphicTypeInfo = ResolvePolymorphicTypeInfo(value, jsonTypeInfo, out state.IsPolymorphicRootValue);
+            JsonTypeInfo polymorphicTypeInfo = ResolvePolymorphicTypeInfo(
+                value,
+                jsonTypeInfo,
+                out state.IsPolymorphicRootValue
+            );
             state.Initialize(polymorphicTypeInfo);
 
-            bool success = polymorphicTypeInfo.Converter.WriteCoreAsObject(writer, value, jsonTypeInfo.Options, ref state);
+            bool success = polymorphicTypeInfo.Converter.WriteCoreAsObject(
+                writer,
+                value,
+                jsonTypeInfo.Options,
+                ref state
+            );
             Debug.Assert(success);
             writer.Flush();
         }
@@ -66,32 +92,54 @@ namespace System.Text.Json
         /// <summary>
         /// Streaming root-level serialization helper.
         /// </summary>
-        private static bool WriteCore<TValue>(Utf8JsonWriter writer, in TValue value, JsonTypeInfo jsonTypeInfo, ref WriteStack state)
+        private static bool WriteCore<TValue>(
+            Utf8JsonWriter writer,
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo,
+            ref WriteStack state
+        )
         {
             Debug.Assert(state.SupportContinuation);
 
             bool isFinalBlock;
             if (jsonTypeInfo is JsonTypeInfo<TValue> typedInfo)
             {
-                isFinalBlock = typedInfo.EffectiveConverter.WriteCore(writer, value, jsonTypeInfo.Options, ref state);
+                isFinalBlock = typedInfo.EffectiveConverter.WriteCore(
+                    writer,
+                    value,
+                    jsonTypeInfo.Options,
+                    ref state
+                );
             }
             else
             {
                 // The non-generic API was called.
-                isFinalBlock = jsonTypeInfo.Converter.WriteCoreAsObject(writer, value, jsonTypeInfo.Options, ref state);
+                isFinalBlock = jsonTypeInfo.Converter.WriteCoreAsObject(
+                    writer,
+                    value,
+                    jsonTypeInfo.Options,
+                    ref state
+                );
             }
 
             writer.Flush();
             return isFinalBlock;
         }
 
-        private static JsonTypeInfo ResolvePolymorphicTypeInfo<TValue>(in TValue value, JsonTypeInfo jsonTypeInfo, out bool isPolymorphicType)
+        private static JsonTypeInfo ResolvePolymorphicTypeInfo<TValue>(
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo,
+            out bool isPolymorphicType
+        )
         {
             if (
 #if NETCOREAPP
-                !typeof(TValue).IsValueType &&
+                !typeof(TValue).IsValueType
+                &&
 #endif
-                jsonTypeInfo.Converter.CanBePolymorphic && value is not null)
+                jsonTypeInfo.Converter.CanBePolymorphic
+                && value is not null
+            )
             {
                 Debug.Assert(typeof(TValue) == typeof(object));
 

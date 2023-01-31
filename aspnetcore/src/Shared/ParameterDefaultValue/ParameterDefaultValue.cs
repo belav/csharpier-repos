@@ -31,12 +31,16 @@ internal static partial class ParameterDefaultValue
                 defaultValue = parameter.DefaultValue;
             }
 
-            bool isNullableParameterType = parameter.ParameterType.IsGenericType &&
-                parameter.ParameterType.GetGenericTypeDefinition() == typeof(Nullable<>);
+            bool isNullableParameterType =
+                parameter.ParameterType.IsGenericType
+                && parameter.ParameterType.GetGenericTypeDefinition() == typeof(Nullable<>);
 
             // Workaround for https://github.com/dotnet/runtime/issues/18599
-            if (defaultValue == null && parameter.ParameterType.IsValueType
-                && !isNullableParameterType) // Nullable types should be left null
+            if (
+                defaultValue == null
+                && parameter.ParameterType.IsValueType
+                && !isNullableParameterType
+            ) // Nullable types should be left null
             {
                 defaultValue = CreateValueType(parameter.ParameterType);
             }
@@ -73,7 +77,8 @@ internal static partial class ParameterDefaultValue
         }
     }
 
-    private static object? CreateValueType(Type t) => FormatterServices.GetSafeUninitializedObject(t);
+    private static object? CreateValueType(Type t) =>
+        FormatterServices.GetSafeUninitializedObject(t);
 
 #else
     private static bool CheckHasDefaultValue(ParameterInfo parameter, out bool tryToGetDefaultValue)
@@ -82,8 +87,11 @@ internal static partial class ParameterDefaultValue
         return parameter.HasDefaultValue;
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-        Justification = "CreateValueType is only called on a ValueType. You can always create an instance of a ValueType.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2067:UnrecognizedReflectionPattern",
+        Justification = "CreateValueType is only called on a ValueType. You can always create an instance of a ValueType."
+    )]
     private static object? CreateValueType(Type t) => RuntimeHelpers.GetUninitializedObject(t);
 #endif
 }

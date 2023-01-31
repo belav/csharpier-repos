@@ -10,21 +10,28 @@ namespace Microsoft.CodeAnalysis.Completion
     public abstract partial class CompletionServiceWithProviders
     {
         private class ProjectCompletionProvider
-            : AbstractProjectExtensionProvider<CompletionProvider, ExportCompletionProviderAttribute>
+            : AbstractProjectExtensionProvider<
+                CompletionProvider,
+                ExportCompletionProviderAttribute
+            >
         {
             public ProjectCompletionProvider(AnalyzerReference reference)
-                : base(reference)
-            {
-            }
+                : base(reference) { }
 
-            protected override bool SupportsLanguage(ExportCompletionProviderAttribute exportAttribute, string language)
+            protected override bool SupportsLanguage(
+                ExportCompletionProviderAttribute exportAttribute,
+                string language
+            )
             {
                 return exportAttribute.Language == null
                     || exportAttribute.Language.Length == 0
                     || exportAttribute.Language.Contains(language);
             }
 
-            protected override bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<CompletionProvider> extensions)
+            protected override bool TryGetExtensionsFromReference(
+                AnalyzerReference reference,
+                out ImmutableArray<CompletionProvider> extensions
+            )
             {
                 // check whether the analyzer reference knows how to return completion providers directly.
                 if (reference is ICompletionProviderFactory completionProviderFactory)

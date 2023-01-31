@@ -12,14 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
     {
         private class ConvertValueToParamRewriter : CSharpSyntaxRewriter
         {
-            public static readonly CSharpSyntaxRewriter Instance = new ConvertValueToParamRewriter();
+            public static readonly CSharpSyntaxRewriter Instance =
+                new ConvertValueToParamRewriter();
 
-            private ConvertValueToParamRewriter()
-            {
-            }
+            private ConvertValueToParamRewriter() { }
 
-            private static XmlNameSyntax ConvertToParam(XmlNameSyntax name)
-                => name.ReplaceToken(name.LocalName, SyntaxFactory.Identifier("param"));
+            private static XmlNameSyntax ConvertToParam(XmlNameSyntax name) =>
+                name.ReplaceToken(name.LocalName, SyntaxFactory.Identifier("param"));
 
             public override SyntaxNode VisitXmlElementStartTag(XmlElementStartTagSyntax node)
             {
@@ -30,8 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
                     .AddAttributes(SyntaxFactory.XmlNameAttribute("value"));
             }
 
-            public override SyntaxNode VisitXmlElementEndTag(XmlElementEndTagSyntax node)
-                => IsValueName(node.Name)
+            public override SyntaxNode VisitXmlElementEndTag(XmlElementEndTagSyntax node) =>
+                IsValueName(node.Name)
                     ? node.ReplaceNode(node.Name, ConvertToParam(node.Name))
                     : base.VisitXmlElementEndTag(node);
         }

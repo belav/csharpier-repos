@@ -2,18 +2,17 @@
 // Line : 13
 
 //
-// From bug #59864 
+// From bug #59864
 //
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-public class Foo {
+public class Foo
+{
+    public static void Main()
+    {
+        MethodImplAttributes methodImplAttributes = 0;
 
-	public static void Main ()
-	{
-		MethodImplAttributes methodImplAttributes = 0;
-            
-                if ((methodImplAttributes & MethodImplOptions.Synchronized) == 0) {
-                }
-	}
+        if ((methodImplAttributes & MethodImplOptions.Synchronized) == 0) { }
+    }
 }

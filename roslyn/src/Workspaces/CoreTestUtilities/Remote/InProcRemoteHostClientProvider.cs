@@ -19,35 +19,64 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
 {
     internal sealed class InProcRemoteHostClientProvider : IRemoteHostClientProvider, IDisposable
     {
-        [ExportWorkspaceServiceFactory(typeof(IRemoteHostClientProvider), ServiceLayer.Test), Shared, PartNotDiscoverable]
+        [
+            ExportWorkspaceServiceFactory(typeof(IRemoteHostClientProvider), ServiceLayer.Test),
+            Shared,
+            PartNotDiscoverable
+        ]
         internal sealed class Factory : IWorkspaceServiceFactory
         {
             private readonly RemoteServiceCallbackDispatcherRegistry _callbackDispatchers;
 
             [ImportingConstructor]
             [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-            public Factory([ImportMany] IEnumerable<Lazy<IRemoteServiceCallbackDispatcher, RemoteServiceCallbackDispatcherRegistry.ExportMetadata>> callbackDispatchers)
-                => _callbackDispatchers = new RemoteServiceCallbackDispatcherRegistry(callbackDispatchers);
+            public Factory(
+                [ImportMany]
+                    IEnumerable<
+                    Lazy<
+                        IRemoteServiceCallbackDispatcher,
+                        RemoteServiceCallbackDispatcherRegistry.ExportMetadata
+                    >
+                > callbackDispatchers
+            ) =>
+                _callbackDispatchers = new RemoteServiceCallbackDispatcherRegistry(
+                    callbackDispatchers
+                );
 
-            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-                => new InProcRemoteHostClientProvider(workspaceServices.SolutionServices, _callbackDispatchers);
+            public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+                new InProcRemoteHostClientProvider(
+                    workspaceServices.SolutionServices,
+                    _callbackDispatchers
+                );
         }
 
         private sealed class WorkspaceManager : RemoteWorkspaceManager
         {
-            public WorkspaceManager(Func<RemoteWorkspace, SolutionAssetCache> createAssetStorage, ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences, Type[]? additionalRemoteParts)
-                : base(createAssetStorage, CreateRemoteWorkspace(sharedTestGeneratorReferences, additionalRemoteParts))
-            {
-            }
+            public WorkspaceManager(
+                Func<RemoteWorkspace, SolutionAssetCache> createAssetStorage,
+                ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences,
+                Type[]? additionalRemoteParts
+            )
+                : base(
+                    createAssetStorage,
+                    CreateRemoteWorkspace(sharedTestGeneratorReferences, additionalRemoteParts)
+                ) { }
         }
 
-        private static RemoteWorkspace CreateRemoteWorkspace(ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences, Type[]? additionalRemoteParts)
+        private static RemoteWorkspace CreateRemoteWorkspace(
+            ConcurrentDictionary<Guid, TestGeneratorReference> sharedTestGeneratorReferences,
+            Type[]? additionalRemoteParts
+        )
         {
-            var hostServices = FeaturesTestCompositions.RemoteHost.AddParts(additionalRemoteParts).GetHostServices();
+            var hostServices = FeaturesTestCompositions.RemoteHost
+                .AddParts(additionalRemoteParts)
+                .GetHostServices();
 
             // We want to allow references to source generators to be shared between the "in proc" and "remote" workspaces and
             // MEF compositions, so tell the serializer service to use the same map for this "remote" workspace as the in-proc one.
-            ((IMefHostExportProvider)hostServices).GetExportedValue<TestSerializerService.Factory>().SharedTestGeneratorReferences = sharedTestGeneratorReferences;
+            ((IMefHostExportProvider)hostServices)
+                .GetExportedValue<TestSerializerService.Factory>()
+                .SharedTestGeneratorReferences = sharedTestGeneratorReferences;
             return new RemoteWorkspace(hostServices);
         }
 
@@ -58,23 +87,33 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
         public Type[]? AdditionalRemoteParts { get; set; }
         public TraceListener? TraceListener { get; set; }
 
-        public InProcRemoteHostClientProvider(SolutionServices services, RemoteServiceCallbackDispatcherRegistry callbackDispatchers)
+        public InProcRemoteHostClientProvider(
+            SolutionServices services,
+            RemoteServiceCallbackDispatcherRegistry callbackDispatchers
+        )
         {
             _services = services;
 
-            var testSerializerServiceFactory = services.ExportProvider.GetExportedValue<TestSerializerService.Factory>();
+            var testSerializerServiceFactory =
+                services.ExportProvider.GetExportedValue<TestSerializerService.Factory>();
 
             _lazyManager = new Lazy<WorkspaceManager>(
-                () => new WorkspaceManager(
-                    _ => new SolutionAssetCache(),
-                    testSerializerServiceFactory.SharedTestGeneratorReferences,
-                    AdditionalRemoteParts));
+                () =>
+                    new WorkspaceManager(
+                        _ => new SolutionAssetCache(),
+                        testSerializerServiceFactory.SharedTestGeneratorReferences,
+                        AdditionalRemoteParts
+                    )
+            );
             _lazyClient = new Lazy<RemoteHostClient>(
-                () => InProcRemoteHostClient.Create(
-                    _services,
-                    callbackDispatchers,
-                    TraceListener,
-                    new RemoteHostTestData(_lazyManager.Value, isInProc: true)));
+                () =>
+                    InProcRemoteHostClient.Create(
+                        _services,
+                        callbackDispatchers,
+                        TraceListener,
+                        new RemoteHostTestData(_lazyManager.Value, isInProc: true)
+                    )
+            );
         }
 
         public void Dispose()
@@ -87,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
             }
         }
 
-        public Task<RemoteHostClient?> TryGetRemoteHostClientAsync(CancellationToken cancellationToken)
-            => Task.FromResult<RemoteHostClient?>(_lazyClient.Value);
+        public Task<RemoteHostClient?> TryGetRemoteHostClientAsync(
+            CancellationToken cancellationToken
+        ) => Task.FromResult<RemoteHostClient?>(_lazyClient.Value);
     }
 }

@@ -4,14 +4,11 @@
 
 namespace Testing
 {
-   /// blah
-   public class Test
-   {
-	// warning
-	/// <include file='there-is-no-such-file' path='/foo/bar' />
-	public void Baz (int x)
-	{
-	}
-   }
+    /// blah
+    public class Test
+    {
+        // warning
+        /// <include file='there-is-no-such-file' path='/foo/bar' />
+        public void Baz(int x) { }
+    }
 }
-

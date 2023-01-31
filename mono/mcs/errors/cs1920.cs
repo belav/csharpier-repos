@@ -6,8 +6,8 @@ using System.Collections.Generic;
 
 public class Test
 {
-	static void Main ()
-	{
-		var d = new Dictionary <string, int> { { } };
-	}
+    static void Main()
+    {
+        var d = new Dictionary<string, int> { { } };
+    }
 }

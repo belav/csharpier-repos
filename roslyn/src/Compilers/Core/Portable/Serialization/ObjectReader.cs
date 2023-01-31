@@ -34,7 +34,7 @@ namespace Roslyn.Utilities
     internal sealed partial class ObjectReader : IDisposable
     {
         /// <summary>
-        /// We start the version at something reasonably random.  That way an older file, with 
+        /// We start the version at something reasonably random.  That way an older file, with
         /// some random start-bytes, has little chance of matching our version.  When incrementing
         /// this version, just change VersionByte2.
         /// </summary>
@@ -52,8 +52,8 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Copy of the global binder data that maps from Types to the appropriate reading-function
-        /// for that type.  Types register functions directly with <see cref="ObjectBinder"/>, but 
-        /// that means that <see cref="ObjectBinder"/> is both static and locked.  This gives us 
+        /// for that type.  Types register functions directly with <see cref="ObjectBinder"/>, but
+        /// that means that <see cref="ObjectBinder"/> is both static and locked.  This gives us
         /// local copy we can work with without needing to worry about anyone else mutating.
         /// </summary>
         private readonly ObjectBinderSnapshot _binderSnapshot;
@@ -66,10 +66,7 @@ namespace Roslyn.Utilities
         /// <param name="stream">The stream to read objects from.</param>
         /// <param name="leaveOpen">True to leave the <paramref name="stream"/> open after the <see cref="ObjectWriter"/> is disposed.</param>
         /// <param name="cancellationToken"></param>
-        private ObjectReader(
-            Stream stream,
-            bool leaveOpen,
-            CancellationToken cancellationToken)
+        private ObjectReader(Stream stream, bool leaveOpen, CancellationToken cancellationToken)
         {
             // String serialization assumes both reader and writer to be of the same endianness.
             // It can be adjusted for BigEndian if needed.
@@ -79,7 +76,7 @@ namespace Roslyn.Utilities
             _objectReferenceMap = ReaderReferenceMap<object>.Create();
             _stringReferenceMap = ReaderReferenceMap<string>.Create();
 
-            // Capture a copy of the current static binder state.  That way we don't have to 
+            // Capture a copy of the current static binder state.  That way we don't have to
             // access any locks while we're doing our processing.
             _binderSnapshot = ObjectBinder.GetSnapshot();
 
@@ -94,7 +91,8 @@ namespace Roslyn.Utilities
         public static ObjectReader TryGetReader(
             Stream stream,
             bool leaveOpen = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             if (stream == null)
             {
@@ -103,8 +101,7 @@ namespace Roslyn.Utilities
 
             try
             {
-                if (stream.ReadByte() != VersionByte1 ||
-                    stream.ReadByte() != VersionByte2)
+                if (stream.ReadByte() != VersionByte1 || stream.ReadByte() != VersionByte2)
                 {
                     return null;
                 }
@@ -117,7 +114,9 @@ namespace Roslyn.Utilities
 #if NETCOREAPP
                 ExceptionDispatchInfo.Throw(ex.InnerException);
 #else
-                ExceptionDispatchInfo.Capture(ex.InnerException).Throw();
+                ExceptionDispatchInfo
+                    .Capture(ex.InnerException)
+                    .Throw();
 #endif
             }
 
@@ -133,7 +132,8 @@ namespace Roslyn.Utilities
         public static ObjectReader GetReader(
             Stream stream,
             bool leaveOpen,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var b = stream.ReadByte();
             if (b == -1)
@@ -168,19 +168,32 @@ namespace Roslyn.Utilities
         }
 
         public bool ReadBoolean() => _reader.ReadBoolean();
+
         public byte ReadByte() => _reader.ReadByte();
+
         // read as ushort because BinaryWriter fails on chars that are unicode surrogates
         public char ReadChar() => (char)_reader.ReadUInt16();
+
         public decimal ReadDecimal() => _reader.ReadDecimal();
+
         public double ReadDouble() => _reader.ReadDouble();
+
         public float ReadSingle() => _reader.ReadSingle();
+
         public int ReadInt32() => _reader.ReadInt32();
+
         public long ReadInt64() => _reader.ReadInt64();
+
         public sbyte ReadSByte() => _reader.ReadSByte();
+
         public short ReadInt16() => _reader.ReadInt16();
+
         public uint ReadUInt32() => _reader.ReadUInt32();
+
         public ulong ReadUInt64() => _reader.ReadUInt64();
+
         public ushort ReadUInt16() => _reader.ReadUInt16();
+
         public string ReadString() => ReadStringValue();
 
         public Guid ReadGuid()
@@ -206,7 +219,9 @@ namespace Roslyn.Utilities
 
                 // If we're recursing too deep, move the work to another thread to do so we
                 // don't blow the stack.
-                var task = SerializationThreadPool.RunOnBackgroundThreadAsync(() => ReadValueWorker());
+                var task = SerializationThreadPool.RunOnBackgroundThreadAsync(
+                    () => ReadValueWorker()
+                );
 
                 // We must not proceed until the additional task completes. After returning from a read, the underlying
                 // stream providing access to raw memory will be closed; if this occurs before the separate thread
@@ -233,16 +248,26 @@ namespace Roslyn.Utilities
             var code = (TypeCode)_reader.ReadByte();
             switch (code)
             {
-                case TypeCode.Null: return null;
-                case TypeCode.Boolean_True: return true;
-                case TypeCode.Boolean_False: return false;
-                case TypeCode.Int8: return _reader.ReadSByte();
-                case TypeCode.UInt8: return _reader.ReadByte();
-                case TypeCode.Int16: return _reader.ReadInt16();
-                case TypeCode.UInt16: return _reader.ReadUInt16();
-                case TypeCode.Int32: return _reader.ReadInt32();
-                case TypeCode.Int32_1Byte: return (int)_reader.ReadByte();
-                case TypeCode.Int32_2Bytes: return (int)_reader.ReadUInt16();
+                case TypeCode.Null:
+                    return null;
+                case TypeCode.Boolean_True:
+                    return true;
+                case TypeCode.Boolean_False:
+                    return false;
+                case TypeCode.Int8:
+                    return _reader.ReadSByte();
+                case TypeCode.UInt8:
+                    return _reader.ReadByte();
+                case TypeCode.Int16:
+                    return _reader.ReadInt16();
+                case TypeCode.UInt16:
+                    return _reader.ReadUInt16();
+                case TypeCode.Int32:
+                    return _reader.ReadInt32();
+                case TypeCode.Int32_1Byte:
+                    return (int)_reader.ReadByte();
+                case TypeCode.Int32_2Bytes:
+                    return (int)_reader.ReadUInt16();
                 case TypeCode.Int32_0:
                 case TypeCode.Int32_1:
                 case TypeCode.Int32_2:
@@ -255,9 +280,12 @@ namespace Roslyn.Utilities
                 case TypeCode.Int32_9:
                 case TypeCode.Int32_10:
                     return (int)code - (int)TypeCode.Int32_0;
-                case TypeCode.UInt32: return _reader.ReadUInt32();
-                case TypeCode.UInt32_1Byte: return (uint)_reader.ReadByte();
-                case TypeCode.UInt32_2Bytes: return (uint)_reader.ReadUInt16();
+                case TypeCode.UInt32:
+                    return _reader.ReadUInt32();
+                case TypeCode.UInt32_1Byte:
+                    return (uint)_reader.ReadByte();
+                case TypeCode.UInt32_2Bytes:
+                    return (uint)_reader.ReadUInt16();
                 case TypeCode.UInt32_0:
                 case TypeCode.UInt32_1:
                 case TypeCode.UInt32_2:
@@ -270,11 +298,16 @@ namespace Roslyn.Utilities
                 case TypeCode.UInt32_9:
                 case TypeCode.UInt32_10:
                     return (uint)((int)code - (int)TypeCode.UInt32_0);
-                case TypeCode.Int64: return _reader.ReadInt64();
-                case TypeCode.UInt64: return _reader.ReadUInt64();
-                case TypeCode.Float4: return _reader.ReadSingle();
-                case TypeCode.Float8: return _reader.ReadDouble();
-                case TypeCode.Decimal: return _reader.ReadDecimal();
+                case TypeCode.Int64:
+                    return _reader.ReadInt64();
+                case TypeCode.UInt64:
+                    return _reader.ReadUInt64();
+                case TypeCode.Float4:
+                    return _reader.ReadSingle();
+                case TypeCode.Float8:
+                    return _reader.ReadDouble();
+                case TypeCode.Decimal:
+                    return _reader.ReadDecimal();
                 case TypeCode.Char:
                     // read as ushort because BinaryWriter fails on chars that are unicode surrogates
                     return (char)_reader.ReadUInt16();
@@ -284,11 +317,16 @@ namespace Roslyn.Utilities
                 case TypeCode.StringRef_1Byte:
                 case TypeCode.StringRef_2Bytes:
                     return ReadStringValue(code);
-                case TypeCode.ObjectRef_4Bytes: return _objectReferenceMap.GetValue(_reader.ReadInt32());
-                case TypeCode.ObjectRef_1Byte: return _objectReferenceMap.GetValue(_reader.ReadByte());
-                case TypeCode.ObjectRef_2Bytes: return _objectReferenceMap.GetValue(_reader.ReadUInt16());
-                case TypeCode.Object: return ReadObject();
-                case TypeCode.DateTime: return DateTime.FromBinary(_reader.ReadInt64());
+                case TypeCode.ObjectRef_4Bytes:
+                    return _objectReferenceMap.GetValue(_reader.ReadInt32());
+                case TypeCode.ObjectRef_1Byte:
+                    return _objectReferenceMap.GetValue(_reader.ReadByte());
+                case TypeCode.ObjectRef_2Bytes:
+                    return _objectReferenceMap.GetValue(_reader.ReadUInt16());
+                case TypeCode.Object:
+                    return ReadObject();
+                case TypeCode.DateTime:
+                    return DateTime.FromBinary(_reader.ReadInt64());
                 case TypeCode.Array:
                 case TypeCode.Array_0:
                 case TypeCode.Array_1:
@@ -299,7 +337,8 @@ namespace Roslyn.Utilities
                 case TypeCode.EncodingName:
                     return Encoding.GetEncoding(ReadString());
 
-                case >= TypeCode.FirstWellKnownTextEncoding and <= TypeCode.LastWellKnownTextEncoding:
+                case >= TypeCode.FirstWellKnownTextEncoding
+                and <= TypeCode.LastWellKnownTextEncoding:
                     return ObjectWriter.ToEncodingKind(code).GetEncoding();
 
                 case TypeCode.EncodingCodePage:
@@ -318,14 +357,12 @@ namespace Roslyn.Utilities
         {
             private readonly SegmentedList<T> _values;
 
-            private static readonly ObjectPool<SegmentedList<T>> s_objectListPool
-                = new(() => new SegmentedList<T>(20));
+            private static readonly ObjectPool<SegmentedList<T>> s_objectListPool =
+                new(() => new SegmentedList<T>(20));
 
-            private ReaderReferenceMap(SegmentedList<T> values)
-                => _values = values;
+            private ReaderReferenceMap(SegmentedList<T> values) => _values = values;
 
-            public static ReaderReferenceMap<T> Create()
-                => new(s_objectListPool.Allocate());
+            public static ReaderReferenceMap<T> Create() => new(s_objectListPool.Allocate());
 
             public void Dispose()
             {
@@ -340,14 +377,11 @@ namespace Roslyn.Utilities
                 return id;
             }
 
-            public void AddValue(T value)
-                => _values.Add(value);
+            public void AddValue(T value) => _values.Add(value);
 
-            public void AddValue(int index, T value)
-                => _values[index] = value;
+            public void AddValue(int index, T value) => _values[index] = value;
 
-            public T GetValue(int referenceId)
-                => _values[referenceId];
+            public T GetValue(int referenceId) => _values[referenceId];
         }
 
         internal uint ReadCompressedUInt()
@@ -482,27 +516,49 @@ namespace Roslyn.Utilities
             Debug.Assert(ObjectWriter.s_reverseTypeMap[(int)kind] == type);
 
             // optimizations for supported array type by binary reader
-            if (type == typeof(byte)) { return _reader.ReadBytes(length); }
-            if (type == typeof(char)) { return _reader.ReadChars(length); }
+            if (type == typeof(byte))
+            {
+                return _reader.ReadBytes(length);
+            }
+            if (type == typeof(char))
+            {
+                return _reader.ReadChars(length);
+            }
 
             // optimizations for string where object reader/writer has its own mechanism to
             // reduce duplicated strings
-            if (type == typeof(string)) { return ReadStringArrayElements(CreateArray<string>(length)); }
-            if (type == typeof(bool)) { return ReadBooleanArrayElements(CreateArray<bool>(length)); }
+            if (type == typeof(string))
+            {
+                return ReadStringArrayElements(CreateArray<string>(length));
+            }
+            if (type == typeof(bool))
+            {
+                return ReadBooleanArrayElements(CreateArray<bool>(length));
+            }
 
             // otherwise, read elements directly from underlying binary writer
             switch (kind)
             {
-                case TypeCode.Int8: return ReadInt8ArrayElements(CreateArray<sbyte>(length));
-                case TypeCode.Int16: return ReadInt16ArrayElements(CreateArray<short>(length));
-                case TypeCode.Int32: return ReadInt32ArrayElements(CreateArray<int>(length));
-                case TypeCode.Int64: return ReadInt64ArrayElements(CreateArray<long>(length));
-                case TypeCode.UInt16: return ReadUInt16ArrayElements(CreateArray<ushort>(length));
-                case TypeCode.UInt32: return ReadUInt32ArrayElements(CreateArray<uint>(length));
-                case TypeCode.UInt64: return ReadUInt64ArrayElements(CreateArray<ulong>(length));
-                case TypeCode.Float4: return ReadFloat4ArrayElements(CreateArray<float>(length));
-                case TypeCode.Float8: return ReadFloat8ArrayElements(CreateArray<double>(length));
-                case TypeCode.Decimal: return ReadDecimalArrayElements(CreateArray<decimal>(length));
+                case TypeCode.Int8:
+                    return ReadInt8ArrayElements(CreateArray<sbyte>(length));
+                case TypeCode.Int16:
+                    return ReadInt16ArrayElements(CreateArray<short>(length));
+                case TypeCode.Int32:
+                    return ReadInt32ArrayElements(CreateArray<int>(length));
+                case TypeCode.Int64:
+                    return ReadInt64ArrayElements(CreateArray<long>(length));
+                case TypeCode.UInt16:
+                    return ReadUInt16ArrayElements(CreateArray<ushort>(length));
+                case TypeCode.UInt32:
+                    return ReadUInt32ArrayElements(CreateArray<uint>(length));
+                case TypeCode.UInt64:
+                    return ReadUInt64ArrayElements(CreateArray<ulong>(length));
+                case TypeCode.Float4:
+                    return ReadFloat4ArrayElements(CreateArray<float>(length));
+                case TypeCode.Float8:
+                    return ReadFloat8ArrayElements(CreateArray<double>(length));
+                case TypeCode.Decimal:
+                    return ReadDecimalArrayElements(CreateArray<decimal>(length));
                 default:
                     throw ExceptionUtilities.UnexpectedValue(kind);
             }
@@ -663,8 +719,7 @@ namespace Roslyn.Utilities
             return Type.GetType(ReadString());
         }
 
-        private Type ReadTypeAfterTag()
-            => _binderSnapshot.GetTypeFromId(this.ReadInt32());
+        private Type ReadTypeAfterTag() => _binderSnapshot.GetTypeFromId(this.ReadInt32());
 
         private object ReadObject()
         {
@@ -686,19 +741,33 @@ namespace Roslyn.Utilities
             return instance;
         }
 
-        private static Exception DeserializationReadIncorrectNumberOfValuesException(string typeName)
+        private static Exception DeserializationReadIncorrectNumberOfValuesException(
+            string typeName
+        )
         {
-            throw new InvalidOperationException(String.Format(Resources.Deserialization_reader_for_0_read_incorrect_number_of_values, typeName));
+            throw new InvalidOperationException(
+                String.Format(
+                    Resources.Deserialization_reader_for_0_read_incorrect_number_of_values,
+                    typeName
+                )
+            );
         }
 
         private static Exception NoSerializationTypeException(string typeName)
         {
-            return new InvalidOperationException(string.Format(Resources.The_type_0_is_not_understood_by_the_serialization_binder, typeName));
+            return new InvalidOperationException(
+                string.Format(
+                    Resources.The_type_0_is_not_understood_by_the_serialization_binder,
+                    typeName
+                )
+            );
         }
 
         private static Exception NoSerializationReaderException(string typeName)
         {
-            return new InvalidOperationException(string.Format(Resources.Cannot_serialize_type_0, typeName));
+            return new InvalidOperationException(
+                string.Format(Resources.Cannot_serialize_type_0, typeName)
+            );
         }
     }
 }

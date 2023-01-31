@@ -3,5 +3,5 @@
 
 public struct B
 {
-	protected internal delegate void D ();
+    protected internal delegate void D();
 }

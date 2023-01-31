@@ -37,602 +37,656 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	[ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
-	[ListBindable(false)]
-	public abstract class Menu : Component
-	{
-		internal MenuItemCollection menu_items;
-		internal IntPtr menu_handle = IntPtr.Zero;
-		internal Menu parent_menu = null;
-		System.Drawing.Rectangle rect = new Rectangle ();
-		// UIA Framework Note: Used to keep track of expanded menus
-		internal Control Wnd;
-		internal MenuTracker tracker;
-		private string control_name;
-		private object control_tag;
-		public const int FindHandle = 0;
-		public const int FindShortcut = 1;
+    [ToolboxItemFilter("System.Windows.Forms", ToolboxItemFilterType.Allow)]
+    [ListBindable(false)]
+    public abstract class Menu : Component
+    {
+        internal MenuItemCollection menu_items;
+        internal IntPtr menu_handle = IntPtr.Zero;
+        internal Menu parent_menu = null;
+        System.Drawing.Rectangle rect = new Rectangle();
 
- 		protected Menu (MenuItem[] items)
-		{
-			menu_items = new MenuItemCollection (this);
+        // UIA Framework Note: Used to keep track of expanded menus
+        internal Control Wnd;
+        internal MenuTracker tracker;
+        private string control_name;
+        private object control_tag;
+        public const int FindHandle = 0;
+        public const int FindShortcut = 1;
 
-			if (items != null)
-				menu_items.AddRange (items);
-		}
+        protected Menu(MenuItem[] items)
+        {
+            menu_items = new MenuItemCollection(this);
+
+            if (items != null)
+                menu_items.AddRange(items);
+        }
 
 		#region Public Properties
-		
-		[BrowsableAttribute(false)]
-		[EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
-		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-		public IntPtr Handle {
-			get { return menu_handle; }
-		}
 
-		internal virtual void OnMenuChanged (EventArgs e)
-		{
-			EventHandler eh = (EventHandler)(Events [MenuChangedEvent]);
-			if (eh != null)
-				eh (this, e);
-		}
+        [BrowsableAttribute(false)]
+        [EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public IntPtr Handle
+        {
+            get { return menu_handle; }
+        }
 
-		[BrowsableAttribute(false)]
-		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-		public virtual bool IsParent {
-			get {
-				if (menu_items != null && menu_items.Count > 0)
-					return true;
-				else
-					return false;
-			}
-		}
+        internal virtual void OnMenuChanged(EventArgs e)
+        {
+            EventHandler eh = (EventHandler)(Events[MenuChangedEvent]);
+            if (eh != null)
+                eh(this, e);
+        }
 
-		[BrowsableAttribute(false)]
-		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-		public MenuItem MdiListItem {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        [BrowsableAttribute(false)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public virtual bool IsParent
+        {
+            get
+            {
+                if (menu_items != null && menu_items.Count > 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
-		[BrowsableAttribute(false)]
-		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
-		[MergableProperty(false)]
-		public MenuItemCollection MenuItems {
-			get { return menu_items; }
-		}
-		
-		[BrowsableAttribute(false)]
-		[DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
-		public string Name { 
-			get { return control_name; } 
-			set { control_name = value; }
-		}
+        [BrowsableAttribute(false)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public MenuItem MdiListItem
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[Localizable(false)]
-		[Bindable(true)]
-		[TypeConverter(typeof(StringConverter))]
-		[DefaultValue(null)]
-		[MWFCategory("Data")]
-		public object Tag {
-			get { return control_tag; }
-			set { control_tag = value; }
-		}
+        [BrowsableAttribute(false)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content)]
+        [MergableProperty(false)]
+        public MenuItemCollection MenuItems
+        {
+            get { return menu_items; }
+        }
+
+        [BrowsableAttribute(false)]
+        [DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden)]
+        public string Name
+        {
+            get { return control_name; }
+            set { control_name = value; }
+        }
+
+        [Localizable(false)]
+        [Bindable(true)]
+        [TypeConverter(typeof(StringConverter))]
+        [DefaultValue(null)]
+        [MWFCategory("Data")]
+        public object Tag
+        {
+            get { return control_tag; }
+            set { control_tag = value; }
+        }
 
 		#endregion Public Properties
 
 		#region Internal Properties
 
-		// UIA Framework Note: Used to obtain menu bounds
-		internal Rectangle Rect {
-			get { return rect; }
-		}
+        // UIA Framework Note: Used to obtain menu bounds
+        internal Rectangle Rect
+        {
+            get { return rect; }
+        }
 
-		internal MenuItem SelectedItem  {
-			get {
-				foreach (MenuItem item in MenuItems)
-					if (item.Selected)
-						return item;
+        internal MenuItem SelectedItem
+        {
+            get
+            {
+                foreach (MenuItem item in MenuItems)
+                    if (item.Selected)
+                        return item;
 
-				return null;
-			}
-		}
+                return null;
+            }
+        }
 
-		internal int Height {
-			get { return rect.Height; }
-			set { rect.Height = value; }
-		}
+        internal int Height
+        {
+            get { return rect.Height; }
+            set { rect.Height = value; }
+        }
 
-		internal int Width {
-			get { return rect.Width; }
-			set { rect.Width = value; }
-		}
+        internal int Width
+        {
+            get { return rect.Width; }
+            set { rect.Width = value; }
+        }
 
-		internal int X {
-			get { return rect.X; }
-			set { rect.X = value; }
-		}
+        internal int X
+        {
+            get { return rect.X; }
+            set { rect.X = value; }
+        }
 
-		internal int Y {
-			get { return rect.Y; }
-			set { rect.Y = value; }
-		}
+        internal int Y
+        {
+            get { return rect.Y; }
+            set { rect.Y = value; }
+        }
 
-		internal MenuTracker Tracker {
-			get {
-				Menu top = this;
-				while (top.parent_menu != null)
-					top = top.parent_menu;
-				return top.tracker;
-			}
-		}
+        internal MenuTracker Tracker
+        {
+            get
+            {
+                Menu top = this;
+                while (top.parent_menu != null)
+                    top = top.parent_menu;
+                return top.tracker;
+            }
+        }
 
-		// `IsOpened` is used by UIA API.
-		internal bool IsOpened {
-			get {
-				return Wnd != null && Wnd.Visible;
-			}
-		}
+        // `IsOpened` is used by UIA API.
+        internal bool IsOpened
+        {
+            get { return Wnd != null && Wnd.Visible; }
+        }
 
 		#endregion Private Properties
 
 		#region Public Methods
 
-		protected void CloneMenu (Menu menuSrc)
-		{
-			Dispose (true);
+        protected void CloneMenu(Menu menuSrc)
+        {
+            Dispose(true);
 
-			menu_items = new MenuItemCollection (this);
+            menu_items = new MenuItemCollection(this);
 
-			for (int i = 0; i < menuSrc.MenuItems.Count ; i++)
-				menu_items.Add (menuSrc.MenuItems [i].CloneMenu ());
-		}
+            for (int i = 0; i < menuSrc.MenuItems.Count; i++)
+                menu_items.Add(menuSrc.MenuItems[i].CloneMenu());
+        }
 
-		protected virtual IntPtr CreateMenuHandle ()
-		{
-			return IntPtr.Zero;
-		}
+        protected virtual IntPtr CreateMenuHandle()
+        {
+            return IntPtr.Zero;
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing) {
-				if (menu_items != null) {
-					// MenuItem.Dispose removes the item from the list
-					while (menu_items.Count > 0) {
-						menu_items [0].Dispose ();
-					}
-				}
-				if (menu_handle != IntPtr.Zero) {
-					menu_handle = IntPtr.Zero;
-				}
-			}
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (menu_items != null)
+                {
+                    // MenuItem.Dispose removes the item from the list
+                    while (menu_items.Count > 0)
+                    {
+                        menu_items[0].Dispose();
+                    }
+                }
+                if (menu_handle != IntPtr.Zero)
+                {
+                    menu_handle = IntPtr.Zero;
+                }
+            }
+        }
 
-		// From Microsoft documentation is impossible to guess that 
-		// this method is supossed to do
-		//
-		// update: according to MS documentation, first parameter is on of this
-		// constant values FindHandle or FindShortcut, value depends from what
-		// you what to search, by shortcut or handle. FindHandle and FindShortcut
-		// is a constant fields and was defined for this class.  
-		public MenuItem FindMenuItem (int type, IntPtr value)
-		{
-			return null;
-		}
+        // From Microsoft documentation is impossible to guess that
+        // this method is supossed to do
+        //
+        // update: according to MS documentation, first parameter is on of this
+        // constant values FindHandle or FindShortcut, value depends from what
+        // you what to search, by shortcut or handle. FindHandle and FindShortcut
+        // is a constant fields and was defined for this class.
+        public MenuItem FindMenuItem(int type, IntPtr value)
+        {
+            return null;
+        }
 
-		protected int FindMergePosition (int mergeOrder)
-		{
-			int cnt = MenuItems.Count, cur, pos;
-			
-			for (pos = 0; pos < cnt; ) {
-				cur = (pos + cnt) /2;
-				if (MenuItems[cur].MergeOrder > mergeOrder) {
-					cnt = cur;
-				} else	{
-					pos = cur +1;
-				}
-			}
-			
-			return pos;
-		}
+        protected int FindMergePosition(int mergeOrder)
+        {
+            int cnt = MenuItems.Count,
+                cur,
+                pos;
 
-		public ContextMenu GetContextMenu ()
-		{
-			for (Menu item = this; item != null; item = item.parent_menu) {
-				if (item is ContextMenu) {
-					return (ContextMenu) item;
-				}
-			}
-			
-			return null;
-		}
+            for (pos = 0; pos < cnt; )
+            {
+                cur = (pos + cnt) / 2;
+                if (MenuItems[cur].MergeOrder > mergeOrder)
+                {
+                    cnt = cur;
+                }
+                else
+                {
+                    pos = cur + 1;
+                }
+            }
 
-		public MainMenu GetMainMenu ()
-		{				
-			for (Menu item = this; item != null; item = item.parent_menu) {
-				if (item is MainMenu) {
-					return (MainMenu) item;
-				}				
-			}
-			
-			return null;
-		}
+            return pos;
+        }
 
-		internal virtual void InvalidateItem (MenuItem item)
-		{
-			if (Wnd != null)
-				Wnd.Invalidate (item.bounds);
-		}
+        public ContextMenu GetContextMenu()
+        {
+            for (Menu item = this; item != null; item = item.parent_menu)
+            {
+                if (item is ContextMenu)
+                {
+                    return (ContextMenu)item;
+                }
+            }
 
-		public virtual void MergeMenu (Menu menuSrc)
-		{
-			if (menuSrc == this)
-				throw new ArgumentException ("The menu cannot be merged with itself");
-			
-			if (menuSrc == null)
-				return;
-				
-			for (int i = 0; i < menuSrc.MenuItems.Count; i++) {
-				
-				MenuItem sourceitem = menuSrc.MenuItems[i];
-				
-				switch (sourceitem.MergeType) {
-					case MenuMerge.Remove:	// Item not included
-						break;
-						
-					case MenuMerge.Add:
-					{
-						int pos = FindMergePosition (sourceitem.MergeOrder);						
-						MenuItems.Add (pos, sourceitem.CloneMenu ());
-						break;					
-					}
-					
-					case MenuMerge.Replace:
-					case MenuMerge.MergeItems:
-					{
-						for (int pos = FindMergePosition (sourceitem.MergeOrder-1); pos <= MenuItems.Count; pos++) {
-							
-							if  ((pos >= MenuItems.Count) || (MenuItems[pos].MergeOrder != sourceitem.MergeOrder)) {
-								MenuItems.Add (pos, sourceitem.CloneMenu ());
-								break;
-							}
-							
-							MenuItem mergeitem = MenuItems[pos];
-							
-							if (mergeitem.MergeType != MenuMerge.Add) {
-								if ((sourceitem.MergeType == MenuMerge.MergeItems) && (mergeitem.MergeType == MenuMerge.MergeItems)) {
-									mergeitem.MergeMenu (sourceitem);
-								} else {
-									MenuItems.Remove (sourceitem);
-									MenuItems.Add (pos, sourceitem.CloneMenu ());
-								}
-								break;
-							}
-						}
-						
-						break;
-					}
-					
-					default:
-						break;
-				}			
-			}		
-		}
+            return null;
+        }
 
-		protected internal virtual bool ProcessCmdKey (ref Message msg, Keys keyData)
-		{
-			if (tracker == null)
-				return false;
-			return tracker.ProcessKeys (ref msg, keyData);
-		}
+        public MainMenu GetMainMenu()
+        {
+            for (Menu item = this; item != null; item = item.parent_menu)
+            {
+                if (item is MainMenu)
+                {
+                    return (MainMenu)item;
+                }
+            }
 
-		public override string ToString ()
-		{
-			return base.ToString () + ", Items.Count: " + MenuItems.Count;
-		}
+            return null;
+        }
+
+        internal virtual void InvalidateItem(MenuItem item)
+        {
+            if (Wnd != null)
+                Wnd.Invalidate(item.bounds);
+        }
+
+        public virtual void MergeMenu(Menu menuSrc)
+        {
+            if (menuSrc == this)
+                throw new ArgumentException("The menu cannot be merged with itself");
+
+            if (menuSrc == null)
+                return;
+
+            for (int i = 0; i < menuSrc.MenuItems.Count; i++)
+            {
+                MenuItem sourceitem = menuSrc.MenuItems[i];
+
+                switch (sourceitem.MergeType)
+                {
+                    case MenuMerge.Remove: // Item not included
+                        break;
+
+                    case MenuMerge.Add:
+                    {
+                        int pos = FindMergePosition(sourceitem.MergeOrder);
+                        MenuItems.Add(pos, sourceitem.CloneMenu());
+                        break;
+                    }
+
+                    case MenuMerge.Replace:
+                    case MenuMerge.MergeItems:
+                    {
+                        for (
+                            int pos = FindMergePosition(sourceitem.MergeOrder - 1);
+                            pos <= MenuItems.Count;
+                            pos++
+                        )
+                        {
+                            if (
+                                (pos >= MenuItems.Count)
+                                || (MenuItems[pos].MergeOrder != sourceitem.MergeOrder)
+                            )
+                            {
+                                MenuItems.Add(pos, sourceitem.CloneMenu());
+                                break;
+                            }
+
+                            MenuItem mergeitem = MenuItems[pos];
+
+                            if (mergeitem.MergeType != MenuMerge.Add)
+                            {
+                                if (
+                                    (sourceitem.MergeType == MenuMerge.MergeItems)
+                                    && (mergeitem.MergeType == MenuMerge.MergeItems)
+                                )
+                                {
+                                    mergeitem.MergeMenu(sourceitem);
+                                }
+                                else
+                                {
+                                    MenuItems.Remove(sourceitem);
+                                    MenuItems.Add(pos, sourceitem.CloneMenu());
+                                }
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+
+                    default:
+                        break;
+                }
+            }
+        }
+
+        protected internal virtual bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (tracker == null)
+                return false;
+            return tracker.ProcessKeys(ref msg, keyData);
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + ", Items.Count: " + MenuItems.Count;
+        }
 
 		#endregion Public Methods
-		static object MenuChangedEvent = new object ();
+        static object MenuChangedEvent = new object();
 
-		// UIA Framework Note: Used to track changes in MenuItemCollection
-		internal event EventHandler MenuChanged {
-			add { Events.AddHandler (MenuChangedEvent, value); }
-			remove { Events.RemoveHandler (MenuChangedEvent, value); }
-		}
+        // UIA Framework Note: Used to track changes in MenuItemCollection
+        internal event EventHandler MenuChanged
+        {
+            add { Events.AddHandler(MenuChangedEvent, value); }
+            remove { Events.RemoveHandler(MenuChangedEvent, value); }
+        }
 
-		[ListBindable(false)]
-		public class MenuItemCollection : IList, ICollection, IEnumerable
-		{
-			private Menu owner;
-			private ArrayList items = new ArrayList ();
+        [ListBindable(false)]
+        public class MenuItemCollection : IList, ICollection, IEnumerable
+        {
+            private Menu owner;
+            private ArrayList items = new ArrayList();
 
-			public MenuItemCollection (Menu owner)
-			{
-				this.owner = owner;
-			}
+            public MenuItemCollection(Menu owner)
+            {
+                this.owner = owner;
+            }
 
 			#region Public Properties
 
-			public int Count {
-				get { return items.Count;}
-			}
+            public int Count
+            {
+                get { return items.Count; }
+            }
 
-			public bool IsReadOnly {
-				get { return false; }
-			}
+            public bool IsReadOnly
+            {
+                get { return false; }
+            }
 
-			bool ICollection.IsSynchronized {
-				get { return false;}
-			}
+            bool ICollection.IsSynchronized
+            {
+                get { return false; }
+            }
 
-			object ICollection.SyncRoot {
-				get { return this;}
-			}
+            object ICollection.SyncRoot
+            {
+                get { return this; }
+            }
 
-			bool IList.IsFixedSize {
-				get { return false;}
-			}
+            bool IList.IsFixedSize
+            {
+                get { return false; }
+            }
 
-			public virtual MenuItem this [int index] {
-				get {
-					if (index < 0 || index >= Count)
-						throw new ArgumentOutOfRangeException ("Index of out range");
+            public virtual MenuItem this[int index]
+            {
+                get
+                {
+                    if (index < 0 || index >= Count)
+                        throw new ArgumentOutOfRangeException("Index of out range");
 
-					return (MenuItem) items[index];
-				}
-			}
+                    return (MenuItem)items[index];
+                }
+            }
 
-			public virtual MenuItem this [string key] {
-				get {
-					if (string.IsNullOrEmpty (key))
-						return null;
-						
-					foreach (MenuItem m in items)
-						if (string.Compare (m.Name, key, true) == 0)
-							return m;
-							
-					return null;
-				}
-			}
+            public virtual MenuItem this[string key]
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(key))
+                        return null;
 
-			object IList.this[int index] {
-				get { return items[index]; }
-				set { throw new NotSupportedException (); }
-			}
+                    foreach (MenuItem m in items)
+                        if (string.Compare(m.Name, key, true) == 0)
+                            return m;
+
+                    return null;
+                }
+            }
+
+            object IList.this[int index]
+            {
+                get { return items[index]; }
+                set { throw new NotSupportedException(); }
+            }
 
 			#endregion Public Properties
 
 			#region Public Methods
 
-			public virtual int Add (MenuItem item)
-			{
-				if (item.Parent != null)
-					item.Parent.MenuItems.Remove (item);
-				
-				items.Add (item);
-				item.Index = items.Count - 1;
-				UpdateItem (item);
-				
-				owner.OnMenuChanged (EventArgs.Empty);
-				if (owner.parent_menu != null)
-					owner.parent_menu.OnMenuChanged (EventArgs.Empty);
-				return items.Count - 1;
-			}
+            public virtual int Add(MenuItem item)
+            {
+                if (item.Parent != null)
+                    item.Parent.MenuItems.Remove(item);
 
-			internal void AddNoEvents (MenuItem mi)
-			{
-				if (mi.Parent != null)
-					mi.Parent.MenuItems.Remove (mi);
-				
-				items.Add (mi);
-				mi.Index = items.Count - 1;
-				mi.parent_menu = owner;
-			}
+                items.Add(item);
+                item.Index = items.Count - 1;
+                UpdateItem(item);
 
-			public virtual MenuItem Add (string caption)
-			{
-				MenuItem item = new MenuItem (caption);
-				Add (item);
-				return item;
-			}
+                owner.OnMenuChanged(EventArgs.Empty);
+                if (owner.parent_menu != null)
+                    owner.parent_menu.OnMenuChanged(EventArgs.Empty);
+                return items.Count - 1;
+            }
 
-			public virtual int Add (int index, MenuItem item)
-			{
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ("Index of out range");
+            internal void AddNoEvents(MenuItem mi)
+            {
+                if (mi.Parent != null)
+                    mi.Parent.MenuItems.Remove(mi);
 
-				ArrayList new_items = new ArrayList (Count + 1);
+                items.Add(mi);
+                mi.Index = items.Count - 1;
+                mi.parent_menu = owner;
+            }
 
-				for (int i = 0; i < index; i++)
-					new_items.Add (items[i]);
+            public virtual MenuItem Add(string caption)
+            {
+                MenuItem item = new MenuItem(caption);
+                Add(item);
+                return item;
+            }
 
-				new_items.Add (item);
+            public virtual int Add(int index, MenuItem item)
+            {
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException("Index of out range");
 
-				for (int i = index; i < Count; i++)
-					new_items.Add (items[i]);
+                ArrayList new_items = new ArrayList(Count + 1);
 
-				items = new_items;
-				UpdateItemsIndices ();				
-				UpdateItem (item);
+                for (int i = 0; i < index; i++)
+                    new_items.Add(items[i]);
 
-				return index;
-			}
+                new_items.Add(item);
 
-			private void UpdateItem (MenuItem mi)
-			{
-				mi.parent_menu = owner;
-				owner.OnMenuChanged (EventArgs.Empty);
-				if (owner.parent_menu != null)
-					owner.parent_menu.OnMenuChanged (EventArgs.Empty);
-				if (owner.Tracker != null)
-					owner.Tracker.AddShortcuts (mi);
-			}
+                for (int i = index; i < Count; i++)
+                    new_items.Add(items[i]);
 
-			internal void Insert (int index, MenuItem mi)
-			{
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ("Index of out range");
-				
-				items.Insert (index, mi);
-				
-				UpdateItemsIndices ();
-				UpdateItem (mi);
-			}
+                items = new_items;
+                UpdateItemsIndices();
+                UpdateItem(item);
 
-			public virtual MenuItem Add (string caption, EventHandler onClick)
-			{
-				MenuItem item = new MenuItem (caption, onClick);
-				Add (item);
+                return index;
+            }
 
-				return item;
-			}
+            private void UpdateItem(MenuItem mi)
+            {
+                mi.parent_menu = owner;
+                owner.OnMenuChanged(EventArgs.Empty);
+                if (owner.parent_menu != null)
+                    owner.parent_menu.OnMenuChanged(EventArgs.Empty);
+                if (owner.Tracker != null)
+                    owner.Tracker.AddShortcuts(mi);
+            }
 
-			public virtual MenuItem Add (string caption, MenuItem[] items)
-			{
-				MenuItem item = new MenuItem (caption, items);
-				Add (item);
+            internal void Insert(int index, MenuItem mi)
+            {
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException("Index of out range");
 
-				return item;
-			}
+                items.Insert(index, mi);
 
-			public virtual void AddRange (MenuItem[] items)
-			{
-				if (items == null)
-					throw new ArgumentNullException ("items");
+                UpdateItemsIndices();
+                UpdateItem(mi);
+            }
 
-				foreach (MenuItem mi in items)
-					Add (mi);
-			}
+            public virtual MenuItem Add(string caption, EventHandler onClick)
+            {
+                MenuItem item = new MenuItem(caption, onClick);
+                Add(item);
 
-			public virtual void Clear ()
-			{
-				MenuTracker tracker = owner.Tracker;
-				foreach (MenuItem item in items) {
-					if (tracker != null)
-						tracker.RemoveShortcuts (item);
-					item.parent_menu = null;
-				}
-				items.Clear ();
-				owner.OnMenuChanged (EventArgs.Empty);
-			}
+                return item;
+            }
 
-			public bool Contains (MenuItem value)
-			{
-				return items.Contains (value);
-			}
+            public virtual MenuItem Add(string caption, MenuItem[] items)
+            {
+                MenuItem item = new MenuItem(caption, items);
+                Add(item);
 
-			public virtual bool ContainsKey (string key)
-			{
-				return !(this[key] == null);
-			}
+                return item;
+            }
 
-			public void CopyTo (Array dest, int index)
-			{
-				items.CopyTo (dest, index);
-			}
+            public virtual void AddRange(MenuItem[] items)
+            {
+                if (items == null)
+                    throw new ArgumentNullException("items");
 
-			public MenuItem[] Find (string key, bool searchAllChildren)
-			{
-				if (string.IsNullOrEmpty (key))
-					throw new ArgumentNullException ("key");
-					
-				List<MenuItem> list = new List<MenuItem> ();
-				
-				foreach (MenuItem m in items)
-					if (string.Compare (m.Name, key, true) == 0)
-						list.Add (m);
-				
-				if (searchAllChildren)
-					foreach (MenuItem m in items)
-						list.AddRange (m.MenuItems.Find (key, true));
-						
-				return list.ToArray ();
-			}
+                foreach (MenuItem mi in items)
+                    Add(mi);
+            }
 
-			public IEnumerator GetEnumerator ()
-			{
-				return items.GetEnumerator ();
-			}
+            public virtual void Clear()
+            {
+                MenuTracker tracker = owner.Tracker;
+                foreach (MenuItem item in items)
+                {
+                    if (tracker != null)
+                        tracker.RemoveShortcuts(item);
+                    item.parent_menu = null;
+                }
+                items.Clear();
+                owner.OnMenuChanged(EventArgs.Empty);
+            }
 
-			int IList.Add (object value)
-			{
-				return Add ((MenuItem)value);
-			}
+            public bool Contains(MenuItem value)
+            {
+                return items.Contains(value);
+            }
 
-			bool IList.Contains (object value)
-			{
-				return Contains ((MenuItem)value);
-			}
+            public virtual bool ContainsKey(string key)
+            {
+                return !(this[key] == null);
+            }
 
-			int IList.IndexOf (object value)
-			{
-				return IndexOf ((MenuItem)value);
-			}
+            public void CopyTo(Array dest, int index)
+            {
+                items.CopyTo(dest, index);
+            }
 
-			void IList.Insert (int index, object value)
-			{
-				Insert (index, (MenuItem) value);
-			}
+            public MenuItem[] Find(string key, bool searchAllChildren)
+            {
+                if (string.IsNullOrEmpty(key))
+                    throw new ArgumentNullException("key");
 
-			void IList.Remove (object value)
-			{
-				Remove ((MenuItem) value);
-			}
+                List<MenuItem> list = new List<MenuItem>();
 
-			public int IndexOf (MenuItem value)
-			{
-				return items.IndexOf (value);
-			}
+                foreach (MenuItem m in items)
+                    if (string.Compare(m.Name, key, true) == 0)
+                        list.Add(m);
 
-			public virtual int IndexOfKey (string key)
-			{
-				if (string.IsNullOrEmpty (key))
-					return -1;
-					
-				return IndexOf (this[key]);
-			}
+                if (searchAllChildren)
+                    foreach (MenuItem m in items)
+                        list.AddRange(m.MenuItems.Find(key, true));
 
-			public virtual void Remove (MenuItem item)
-			{
-				RemoveAt (item.Index);
-			}
+                return list.ToArray();
+            }
 
-			public virtual void RemoveAt (int index)
-			{
-				if (index < 0 || index >= Count)
-					throw new ArgumentOutOfRangeException ("Index of out range");
+            public IEnumerator GetEnumerator()
+            {
+                return items.GetEnumerator();
+            }
 
-				MenuItem item = (MenuItem) items [index];
-				MenuTracker tracker = owner.Tracker;
-				if (tracker != null)
-					tracker.RemoveShortcuts (item);
-				item.parent_menu = null;
+            int IList.Add(object value)
+            {
+                return Add((MenuItem)value);
+            }
 
-				items.RemoveAt (index);
+            bool IList.Contains(object value)
+            {
+                return Contains((MenuItem)value);
+            }
 
-				UpdateItemsIndices ();
-				owner.OnMenuChanged (EventArgs.Empty);
-			}
+            int IList.IndexOf(object value)
+            {
+                return IndexOf((MenuItem)value);
+            }
 
-			public virtual void RemoveByKey (string key)
-			{
-				Remove (this[key]);
-			}
+            void IList.Insert(int index, object value)
+            {
+                Insert(index, (MenuItem)value);
+            }
+
+            void IList.Remove(object value)
+            {
+                Remove((MenuItem)value);
+            }
+
+            public int IndexOf(MenuItem value)
+            {
+                return items.IndexOf(value);
+            }
+
+            public virtual int IndexOfKey(string key)
+            {
+                if (string.IsNullOrEmpty(key))
+                    return -1;
+
+                return IndexOf(this[key]);
+            }
+
+            public virtual void Remove(MenuItem item)
+            {
+                RemoveAt(item.Index);
+            }
+
+            public virtual void RemoveAt(int index)
+            {
+                if (index < 0 || index >= Count)
+                    throw new ArgumentOutOfRangeException("Index of out range");
+
+                MenuItem item = (MenuItem)items[index];
+                MenuTracker tracker = owner.Tracker;
+                if (tracker != null)
+                    tracker.RemoveShortcuts(item);
+                item.parent_menu = null;
+
+                items.RemoveAt(index);
+
+                UpdateItemsIndices();
+                owner.OnMenuChanged(EventArgs.Empty);
+            }
+
+            public virtual void RemoveByKey(string key)
+            {
+                Remove(this[key]);
+            }
 
 			#endregion Public Methods
 
 			#region Private Methods
 
-			private void UpdateItemsIndices ()
-			{
-				for (int i = 0; i < Count; i++)	// Recalculate indeces
-					((MenuItem)items[i]).Index = i;
-			}
+            private void UpdateItemsIndices()
+            {
+                for (int i = 0; i < Count; i++) // Recalculate indeces
+                    ((MenuItem)items[i]).Index = i;
+            }
 
 			#endregion Private Methods
-		}
-	}
+        }
+    }
 }
-
-

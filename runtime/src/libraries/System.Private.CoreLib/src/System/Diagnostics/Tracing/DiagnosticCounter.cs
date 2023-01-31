@@ -139,13 +139,15 @@ namespace System.Diagnostics.Tracing
 
             // Otherwise, append it, then append the element we moved to, and then
             // iterate through the remainder of the elements, appending each.
-            StringBuilder sb = new StringBuilder().Append(current.Key).Append(':').Append(current.Value);
+            StringBuilder sb = new StringBuilder()
+                .Append(current.Key)
+                .Append(':')
+                .Append(current.Value);
             do
             {
                 current = enumerator.Current;
                 sb.Append(',').Append(current.Key).Append(':').Append(current.Value);
-            }
-            while (enumerator.MoveNext());
+            } while (enumerator.MoveNext());
 
             // Return the final string.
             return sb.ToString();

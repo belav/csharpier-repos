@@ -3,9 +3,10 @@
 
 using System;
 
-class X {
-	static void Main ()
-	{
-		int o = delegate {};
-	}
+class X
+{
+    static void Main()
+    {
+        int o = delegate { };
+    }
 }

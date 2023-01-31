@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,411 +40,487 @@ using ReqType = System.ServiceModel.Security.Tokens.ServiceModelSecurityTokenReq
 
 namespace System.ServiceModel.Channels.Security
 {
-	internal abstract class MessageSecurityBindingSupport
-	{
-		SecurityTokenManager manager;
-		ChannelProtectionRequirements requirements;
-		SecurityTokenSerializer serializer;
-		SecurityCapabilities element_support;
+    internal abstract class MessageSecurityBindingSupport
+    {
+        SecurityTokenManager manager;
+        ChannelProtectionRequirements requirements;
+        SecurityTokenSerializer serializer;
+        SecurityCapabilities element_support;
 
-		// only filled at prepared state.
-		SecurityTokenAuthenticator authenticator;
-		SecurityTokenResolver auth_token_resolver;
+        // only filled at prepared state.
+        SecurityTokenAuthenticator authenticator;
+        SecurityTokenResolver auth_token_resolver;
 
-		protected MessageSecurityBindingSupport (
-			SecurityCapabilities elementSupport,
-			SecurityTokenManager manager,
-			ChannelProtectionRequirements requirements)
-		{
-			element_support = elementSupport;
-			Initialize (manager, requirements);
-		}
+        protected MessageSecurityBindingSupport(
+            SecurityCapabilities elementSupport,
+            SecurityTokenManager manager,
+            ChannelProtectionRequirements requirements
+        )
+        {
+            element_support = elementSupport;
+            Initialize(manager, requirements);
+        }
 
-		public void Initialize (SecurityTokenManager manager,
-			ChannelProtectionRequirements requirements)
-		{
-			this.manager = manager;
-			if (requirements == null)
-				requirements = new ChannelProtectionRequirements ();
-			this.requirements = requirements;
-		}
+        public void Initialize(
+            SecurityTokenManager manager,
+            ChannelProtectionRequirements requirements
+        )
+        {
+            this.manager = manager;
+            if (requirements == null)
+                requirements = new ChannelProtectionRequirements();
+            this.requirements = requirements;
+        }
 
-		public abstract IDefaultCommunicationTimeouts Timeouts { get; }
+        public abstract IDefaultCommunicationTimeouts Timeouts { get; }
 
-		public ChannelProtectionRequirements ChannelRequirements {
-			get { return requirements; }
-		}
+        public ChannelProtectionRequirements ChannelRequirements
+        {
+            get { return requirements; }
+        }
 
-		public SecurityTokenManager SecurityTokenManager {
-			get { return manager; }
-		}
+        public SecurityTokenManager SecurityTokenManager
+        {
+            get { return manager; }
+        }
 
-		public SecurityTokenSerializer TokenSerializer {
-			get {
-				if (serializer == null)
-					serializer = manager.CreateSecurityTokenSerializer (Element.MessageSecurityVersion.SecurityTokenVersion);
-				return serializer;
-			}
-		}
+        public SecurityTokenSerializer TokenSerializer
+        {
+            get
+            {
+                if (serializer == null)
+                    serializer = manager.CreateSecurityTokenSerializer(
+                        Element.MessageSecurityVersion.SecurityTokenVersion
+                    );
+                return serializer;
+            }
+        }
 
-		public SecurityTokenAuthenticator TokenAuthenticator {
-			get { return authenticator; }
-		}
+        public SecurityTokenAuthenticator TokenAuthenticator
+        {
+            get { return authenticator; }
+        }
 
-		public SecurityTokenResolver OutOfBandTokenResolver {
-			get { return auth_token_resolver; }
-		}
+        public SecurityTokenResolver OutOfBandTokenResolver
+        {
+            get { return auth_token_resolver; }
+        }
 
-		public abstract SecurityToken EncryptionToken { get; }
+        public abstract SecurityToken EncryptionToken { get; }
 
-		public abstract SecurityToken SigningToken { get; }
+        public abstract SecurityToken SigningToken { get; }
 
 		#region element_support
 
-		public SecurityBindingElement Element {
-			get { return element_support.Element; }
-		}
+        public SecurityBindingElement Element
+        {
+            get { return element_support.Element; }
+        }
 
-		public bool AllowSerializedSigningTokenOnReply {
-			get { return element_support.AllowSerializedSigningTokenOnReply; }
-		}
+        public bool AllowSerializedSigningTokenOnReply
+        {
+            get { return element_support.AllowSerializedSigningTokenOnReply; }
+        }
 
-		public MessageProtectionOrder MessageProtectionOrder { 
-			get { return element_support.MessageProtectionOrder; }
-		}
+        public MessageProtectionOrder MessageProtectionOrder
+        {
+            get { return element_support.MessageProtectionOrder; }
+        }
 
-		public SecurityTokenParameters InitiatorParameters { 
-			get { return element_support.InitiatorParameters; }
-		}
+        public SecurityTokenParameters InitiatorParameters
+        {
+            get { return element_support.InitiatorParameters; }
+        }
 
-		public SecurityTokenParameters RecipientParameters { 
-			get { return element_support.RecipientParameters; }
-		}
+        public SecurityTokenParameters RecipientParameters
+        {
+            get { return element_support.RecipientParameters; }
+        }
 
-		public bool RequireSignatureConfirmation {
-			get { return element_support.RequireSignatureConfirmation; }
-		}
+        public bool RequireSignatureConfirmation
+        {
+            get { return element_support.RequireSignatureConfirmation; }
+        }
 
-		public string DefaultSignatureAlgorithm {
-			get { return element_support.DefaultSignatureAlgorithm; }
-		}
+        public string DefaultSignatureAlgorithm
+        {
+            get { return element_support.DefaultSignatureAlgorithm; }
+        }
 
-		public string DefaultKeyWrapAlgorithm {
-			get { return element_support.DefaultKeyWrapAlgorithm; }
-		}
+        public string DefaultKeyWrapAlgorithm
+        {
+            get { return element_support.DefaultKeyWrapAlgorithm; }
+        }
 
 		#endregion
 
-		public SecurityTokenProvider CreateTokenProvider (SecurityTokenRequirement requirement)
-		{
-			return manager.CreateSecurityTokenProvider (requirement);
-		}
+        public SecurityTokenProvider CreateTokenProvider(SecurityTokenRequirement requirement)
+        {
+            return manager.CreateSecurityTokenProvider(requirement);
+        }
 
-		public abstract SecurityTokenAuthenticator CreateTokenAuthenticator (SecurityTokenParameters p, out SecurityTokenResolver resolver);
+        public abstract SecurityTokenAuthenticator CreateTokenAuthenticator(
+            SecurityTokenParameters p,
+            out SecurityTokenResolver resolver
+        );
 
-		protected void PrepareAuthenticator ()
-		{
-			authenticator = CreateTokenAuthenticator (RecipientParameters, out auth_token_resolver);
-		}
+        protected void PrepareAuthenticator()
+        {
+            authenticator = CreateTokenAuthenticator(RecipientParameters, out auth_token_resolver);
+        }
 
-		protected void InitializeRequirement (SecurityTokenParameters p, SecurityTokenRequirement r)
-		{
-			p.CallInitializeSecurityTokenRequirement (r);
+        protected void InitializeRequirement(SecurityTokenParameters p, SecurityTokenRequirement r)
+        {
+            p.CallInitializeSecurityTokenRequirement(r);
 
-			// r.Properties [ChannelParametersCollectionProperty] =
-			// r.Properties [ReqType.EndpointFilterTableProperty] =
-			// r.Properties [ReqType.HttpAuthenticationSchemeProperty] =
-			// r.Properties [ReqType.IsOutOfBandTokenProperty] =
-			// r.Properties [ReqType.IssuerAddressProperty] =
-			// r.Properties [ReqType.MessageDirectionProperty] = 
-			r.Properties [ReqType.MessageSecurityVersionProperty] = Element.MessageSecurityVersion.SecurityTokenVersion;
-			r.Properties [ReqType.SecurityAlgorithmSuiteProperty] = Element.DefaultAlgorithmSuite;
-			r.Properties [ReqType.SecurityBindingElementProperty] = Element;
-			// r.Properties [ReqType.SupportingTokenAttachmentModeProperty] =
-			// r.TransportScheme =
-		}
+            // r.Properties [ChannelParametersCollectionProperty] =
+            // r.Properties [ReqType.EndpointFilterTableProperty] =
+            // r.Properties [ReqType.HttpAuthenticationSchemeProperty] =
+            // r.Properties [ReqType.IsOutOfBandTokenProperty] =
+            // r.Properties [ReqType.IssuerAddressProperty] =
+            // r.Properties [ReqType.MessageDirectionProperty] =
+            r.Properties[ReqType.MessageSecurityVersionProperty] = Element
+                .MessageSecurityVersion
+                .SecurityTokenVersion;
+            r.Properties[ReqType.SecurityAlgorithmSuiteProperty] = Element.DefaultAlgorithmSuite;
+            r.Properties[ReqType.SecurityBindingElementProperty] = Element;
+            // r.Properties [ReqType.SupportingTokenAttachmentModeProperty] =
+            // r.TransportScheme =
+        }
 
-		public void Release ()
-		{
-			ReleaseCore ();
+        public void Release()
+        {
+            ReleaseCore();
 
-			authenticator = null;
-		}
+            authenticator = null;
+        }
 
-		protected abstract void ReleaseCore ();
+        protected abstract void ReleaseCore();
 
-		public SupportingTokenInfoCollection CollectSupportingTokens (string action)
-		{
-			SupportingTokenInfoCollection tokens =
-				new SupportingTokenInfoCollection ();
+        public SupportingTokenInfoCollection CollectSupportingTokens(string action)
+        {
+            SupportingTokenInfoCollection tokens = new SupportingTokenInfoCollection();
 
-			SupportingTokenParameters supp;
+            SupportingTokenParameters supp;
 
-			CollectSupportingTokensCore (tokens, Element.EndpointSupportingTokenParameters, true);
-			if (Element.OperationSupportingTokenParameters.TryGetValue (action, out supp))
-				CollectSupportingTokensCore (tokens, supp, true);
-			CollectSupportingTokensCore (tokens, Element.OptionalEndpointSupportingTokenParameters, false);
-			if (Element.OptionalOperationSupportingTokenParameters.TryGetValue (action, out supp))
-				CollectSupportingTokensCore (tokens, supp, false);
+            CollectSupportingTokensCore(tokens, Element.EndpointSupportingTokenParameters, true);
+            if (Element.OperationSupportingTokenParameters.TryGetValue(action, out supp))
+                CollectSupportingTokensCore(tokens, supp, true);
+            CollectSupportingTokensCore(
+                tokens,
+                Element.OptionalEndpointSupportingTokenParameters,
+                false
+            );
+            if (Element.OptionalOperationSupportingTokenParameters.TryGetValue(action, out supp))
+                CollectSupportingTokensCore(tokens, supp, false);
 
-			return tokens;
-		}
+            return tokens;
+        }
 
-		void CollectSupportingTokensCore (
-			SupportingTokenInfoCollection l,
-			SupportingTokenParameters s,
-			bool required)
-		{
-			foreach (SecurityTokenParameters p in s.Signed)
-				l.Add (new SupportingTokenInfo (GetSigningToken (p), SecurityTokenAttachmentMode.Signed, required));
-			foreach (SecurityTokenParameters p in s.Endorsing)
-				l.Add (new SupportingTokenInfo (GetSigningToken (p), SecurityTokenAttachmentMode.Endorsing, required));
-			foreach (SecurityTokenParameters p in s.SignedEndorsing)
-				l.Add (new SupportingTokenInfo (GetSigningToken (p), SecurityTokenAttachmentMode.SignedEndorsing, required));
-			foreach (SecurityTokenParameters p in s.SignedEncrypted)
-				l.Add (new SupportingTokenInfo (GetSigningToken (p), SecurityTokenAttachmentMode.SignedEncrypted, required));
-		}
+        void CollectSupportingTokensCore(
+            SupportingTokenInfoCollection l,
+            SupportingTokenParameters s,
+            bool required
+        )
+        {
+            foreach (SecurityTokenParameters p in s.Signed)
+                l.Add(
+                    new SupportingTokenInfo(
+                        GetSigningToken(p),
+                        SecurityTokenAttachmentMode.Signed,
+                        required
+                    )
+                );
+            foreach (SecurityTokenParameters p in s.Endorsing)
+                l.Add(
+                    new SupportingTokenInfo(
+                        GetSigningToken(p),
+                        SecurityTokenAttachmentMode.Endorsing,
+                        required
+                    )
+                );
+            foreach (SecurityTokenParameters p in s.SignedEndorsing)
+                l.Add(
+                    new SupportingTokenInfo(
+                        GetSigningToken(p),
+                        SecurityTokenAttachmentMode.SignedEndorsing,
+                        required
+                    )
+                );
+            foreach (SecurityTokenParameters p in s.SignedEncrypted)
+                l.Add(
+                    new SupportingTokenInfo(
+                        GetSigningToken(p),
+                        SecurityTokenAttachmentMode.SignedEncrypted,
+                        required
+                    )
+                );
+        }
 
-		SecurityToken GetSigningToken (SecurityTokenParameters p)
-		{
-			return GetToken (CreateRequirement (), p, SecurityKeyUsage.Signature);
-		}
+        SecurityToken GetSigningToken(SecurityTokenParameters p)
+        {
+            return GetToken(CreateRequirement(), p, SecurityKeyUsage.Signature);
+        }
 
-		SecurityToken GetExchangeToken (SecurityTokenParameters p)
-		{
-			return GetToken (CreateRequirement (), p, SecurityKeyUsage.Exchange);
-		}
+        SecurityToken GetExchangeToken(SecurityTokenParameters p)
+        {
+            return GetToken(CreateRequirement(), p, SecurityKeyUsage.Exchange);
+        }
 
-		public SecurityToken GetToken (SecurityTokenRequirement requirement, SecurityTokenParameters targetParams, SecurityKeyUsage usage)
-		{
-			requirement.KeyUsage = usage;
-			requirement.Properties [ReqType.SecurityBindingElementProperty] = Element;
-			requirement.Properties [ReqType.MessageSecurityVersionProperty] =
-				Element.MessageSecurityVersion.SecurityTokenVersion;
+        public SecurityToken GetToken(
+            SecurityTokenRequirement requirement,
+            SecurityTokenParameters targetParams,
+            SecurityKeyUsage usage
+        )
+        {
+            requirement.KeyUsage = usage;
+            requirement.Properties[ReqType.SecurityBindingElementProperty] = Element;
+            requirement.Properties[ReqType.MessageSecurityVersionProperty] = Element
+                .MessageSecurityVersion
+                .SecurityTokenVersion;
 
-			InitializeRequirement (targetParams, requirement);
+            InitializeRequirement(targetParams, requirement);
 
-			SecurityTokenProvider provider =
-				CreateTokenProvider (requirement);
-			ICommunicationObject obj = provider as ICommunicationObject;
-			try {
-				if (obj != null)
-					obj.Open (Timeouts.OpenTimeout);
-				return provider.GetToken (Timeouts.SendTimeout);
-			} finally {
-				if (obj != null && obj.State == CommunicationState.Opened)
-					obj.Close ();
-			}
-		}
-		
-		public abstract SecurityTokenRequirement CreateRequirement ();
-	}
+            SecurityTokenProvider provider = CreateTokenProvider(requirement);
+            ICommunicationObject obj = provider as ICommunicationObject;
+            try
+            {
+                if (obj != null)
+                    obj.Open(Timeouts.OpenTimeout);
+                return provider.GetToken(Timeouts.SendTimeout);
+            }
+            finally
+            {
+                if (obj != null && obj.State == CommunicationState.Opened)
+                    obj.Close();
+            }
+        }
 
-	internal class InitiatorMessageSecurityBindingSupport : MessageSecurityBindingSupport
-	{
-		ChannelFactoryBase factory;
-		EndpointAddress message_to;
-		SecurityToken encryption_token;
-		SecurityToken signing_token;
+        public abstract SecurityTokenRequirement CreateRequirement();
+    }
 
-		public InitiatorMessageSecurityBindingSupport (
-			SecurityCapabilities elementSupport,
-			SecurityTokenManager manager,
-			ChannelProtectionRequirements requirements)
-			: base (elementSupport, manager, requirements)
-		{
-		}
+    internal class InitiatorMessageSecurityBindingSupport : MessageSecurityBindingSupport
+    {
+        ChannelFactoryBase factory;
+        EndpointAddress message_to;
+        SecurityToken encryption_token;
+        SecurityToken signing_token;
 
-		public override IDefaultCommunicationTimeouts Timeouts {
-			get { return factory; }
-		}
+        public InitiatorMessageSecurityBindingSupport(
+            SecurityCapabilities elementSupport,
+            SecurityTokenManager manager,
+            ChannelProtectionRequirements requirements
+        )
+            : base(elementSupport, manager, requirements) { }
 
-		public void Prepare (ChannelFactoryBase factory, EndpointAddress address)
-		{
-			this.factory = factory;
-			this.message_to = address;
+        public override IDefaultCommunicationTimeouts Timeouts
+        {
+            get { return factory; }
+        }
 
-			PrepareAuthenticator ();
+        public void Prepare(ChannelFactoryBase factory, EndpointAddress address)
+        {
+            this.factory = factory;
+            this.message_to = address;
 
-			// This check is almost extra, though it is needed
-			// to check correct signing token existence.
-			if (EncryptionToken == null)
-				throw new Exception ("INTERNAL ERROR");
-		}
+            PrepareAuthenticator();
 
-		public override SecurityToken EncryptionToken {
-			get {
-				if (encryption_token == null) {
-					SecurityTokenRequirement r = CreateRequirement ();
-					r.Properties [ReqType.MessageDirectionProperty] = MessageDirection.Input;
-					InitializeRequirement (RecipientParameters, r);
-					encryption_token = GetToken (r, RecipientParameters, SecurityKeyUsage.Exchange);
-				}
-				return encryption_token;
-			}
-		}
+            // This check is almost extra, though it is needed
+            // to check correct signing token existence.
+            if (EncryptionToken == null)
+                throw new Exception("INTERNAL ERROR");
+        }
 
-		public override SecurityToken SigningToken {
-			get {
-				if (signing_token == null) {
-					SecurityTokenRequirement r = CreateRequirement ();
-					r.Properties [ReqType.MessageDirectionProperty] = MessageDirection.Input;
-					InitializeRequirement (InitiatorParameters, r);
-					signing_token = GetToken (r, InitiatorParameters, SecurityKeyUsage.Signature);
-				}
-				return signing_token;
-			}
-		}
+        public override SecurityToken EncryptionToken
+        {
+            get
+            {
+                if (encryption_token == null)
+                {
+                    SecurityTokenRequirement r = CreateRequirement();
+                    r.Properties[ReqType.MessageDirectionProperty] = MessageDirection.Input;
+                    InitializeRequirement(RecipientParameters, r);
+                    encryption_token = GetToken(r, RecipientParameters, SecurityKeyUsage.Exchange);
+                }
+                return encryption_token;
+            }
+        }
 
-		protected override void ReleaseCore ()
-		{
-			this.factory = null;
-			this.message_to = null;
+        public override SecurityToken SigningToken
+        {
+            get
+            {
+                if (signing_token == null)
+                {
+                    SecurityTokenRequirement r = CreateRequirement();
+                    r.Properties[ReqType.MessageDirectionProperty] = MessageDirection.Input;
+                    InitializeRequirement(InitiatorParameters, r);
+                    signing_token = GetToken(r, InitiatorParameters, SecurityKeyUsage.Signature);
+                }
+                return signing_token;
+            }
+        }
 
-			IDisposable disposable = signing_token as IDisposable;
-			if (disposable != null)
-				disposable.Dispose ();
-			signing_token = null;
+        protected override void ReleaseCore()
+        {
+            this.factory = null;
+            this.message_to = null;
 
-			disposable = encryption_token as IDisposable;
-			if (disposable != null)
-				disposable.Dispose ();
-			encryption_token = null;
-		}
+            IDisposable disposable = signing_token as IDisposable;
+            if (disposable != null)
+                disposable.Dispose();
+            signing_token = null;
 
-		public override SecurityTokenRequirement CreateRequirement ()
-		{
-			SecurityTokenRequirement r = new InitiatorServiceModelSecurityTokenRequirement ();
-//			r.Properties [ReqType.IssuerAddressProperty] = message_to;
-			r.Properties [ReqType.TargetAddressProperty] = message_to;
-			// FIXME: set Via
-			return r;
-		}
+            disposable = encryption_token as IDisposable;
+            if (disposable != null)
+                disposable.Dispose();
+            encryption_token = null;
+        }
 
-		public override SecurityTokenAuthenticator CreateTokenAuthenticator (SecurityTokenParameters p, out SecurityTokenResolver resolver)
-		{
-			resolver = null;
-			// This check might be almost extra, though it is
-			// needed to check correct signing token existence.
-			//
-			// Not sure if it is limited to this condition, but
-			// Ssl parameters do not support token provider and
-			// still do not fail. X509 parameters do fail.
-			if (!InitiatorParameters.InternalSupportsClientAuthentication)
-				return null;
+        public override SecurityTokenRequirement CreateRequirement()
+        {
+            SecurityTokenRequirement r = new InitiatorServiceModelSecurityTokenRequirement();
+            //			r.Properties [ReqType.IssuerAddressProperty] = message_to;
+            r.Properties[ReqType.TargetAddressProperty] = message_to;
+            // FIXME: set Via
+            return r;
+        }
 
-			SecurityTokenRequirement r = CreateRequirement ();
-			r.Properties [ReqType.MessageDirectionProperty] = MessageDirection.Output;
-			InitializeRequirement (p, r);
-			return SecurityTokenManager.CreateSecurityTokenAuthenticator (r, out resolver);
-		}
-	}
+        public override SecurityTokenAuthenticator CreateTokenAuthenticator(
+            SecurityTokenParameters p,
+            out SecurityTokenResolver resolver
+        )
+        {
+            resolver = null;
+            // This check might be almost extra, though it is
+            // needed to check correct signing token existence.
+            //
+            // Not sure if it is limited to this condition, but
+            // Ssl parameters do not support token provider and
+            // still do not fail. X509 parameters do fail.
+            if (!InitiatorParameters.InternalSupportsClientAuthentication)
+                return null;
 
-	class RecipientMessageSecurityBindingSupport : MessageSecurityBindingSupport
-	{
-		ChannelListenerBase listener;
-		Uri listen_uri;
-		SecurityToken encryption_token;
-		SecurityToken signing_token;
+            SecurityTokenRequirement r = CreateRequirement();
+            r.Properties[ReqType.MessageDirectionProperty] = MessageDirection.Output;
+            InitializeRequirement(p, r);
+            return SecurityTokenManager.CreateSecurityTokenAuthenticator(r, out resolver);
+        }
+    }
 
-		public RecipientMessageSecurityBindingSupport (
-			SecurityCapabilities elementSupport,
-			SecurityTokenManager manager,
-			ChannelProtectionRequirements requirements)
-			: base (elementSupport, manager, requirements)
-		{
-		}
+    class RecipientMessageSecurityBindingSupport : MessageSecurityBindingSupport
+    {
+        ChannelListenerBase listener;
+        Uri listen_uri;
+        SecurityToken encryption_token;
+        SecurityToken signing_token;
 
-		public override IDefaultCommunicationTimeouts Timeouts {
-			get { return listener; }
-		}
+        public RecipientMessageSecurityBindingSupport(
+            SecurityCapabilities elementSupport,
+            SecurityTokenManager manager,
+            ChannelProtectionRequirements requirements
+        )
+            : base(elementSupport, manager, requirements) { }
 
-		// FIXME: this is invoked inconsistently between SecurityReplyChannel and SecurityDuplexSessionChannel on when to do it.
-		public void Prepare (ChannelListenerBase listener, Uri listenUri)
-		{
-			this.listener = listener;
-			this.listen_uri = listenUri;
+        public override IDefaultCommunicationTimeouts Timeouts
+        {
+            get { return listener; }
+        }
 
-			PrepareAuthenticator ();
+        // FIXME: this is invoked inconsistently between SecurityReplyChannel and SecurityDuplexSessionChannel on when to do it.
+        public void Prepare(ChannelListenerBase listener, Uri listenUri)
+        {
+            this.listener = listener;
+            this.listen_uri = listenUri;
 
-			// This check is almost extra, though it is needed
-			// to check correct signing token existence.
-			//
-			// Not sure if it is limited to this condition, but
-			// Ssl parameters do not support token provider and
-			// still do not fail. X509 parameters do fail.
-			//
-			// FIXME: as AsymmetricSecurityBindingElementTest
-			// .ServiceRecipientHasNoKeys() implies, it should be
-			// the recipient's parameters that is used. However
-			// such changes will break some of existing tests...
-			if (InitiatorParameters.InternalHasAsymmetricKey &&
-			    EncryptionToken == null)
-				throw new Exception ("INTERNAL ERROR");
-		}
+            PrepareAuthenticator();
 
-		public override SecurityToken EncryptionToken {
-			get {
-				if (encryption_token == null) {
-					SecurityTokenRequirement r = CreateRequirement ();
-					r.Properties [ReqType.MessageDirectionProperty] = MessageDirection.Output;
-					encryption_token = GetToken (r, InitiatorParameters, SecurityKeyUsage.Exchange);
-				}
-				return encryption_token;
-			}
-		}
+            // This check is almost extra, though it is needed
+            // to check correct signing token existence.
+            //
+            // Not sure if it is limited to this condition, but
+            // Ssl parameters do not support token provider and
+            // still do not fail. X509 parameters do fail.
+            //
+            // FIXME: as AsymmetricSecurityBindingElementTest
+            // .ServiceRecipientHasNoKeys() implies, it should be
+            // the recipient's parameters that is used. However
+            // such changes will break some of existing tests...
+            if (InitiatorParameters.InternalHasAsymmetricKey && EncryptionToken == null)
+                throw new Exception("INTERNAL ERROR");
+        }
 
-		public override SecurityToken SigningToken {
-			get {
-				if (signing_token == null) {
-					SecurityTokenRequirement r = CreateRequirement ();
-					r.Properties [ReqType.MessageDirectionProperty] = MessageDirection.Input;
-					InitializeRequirement (RecipientParameters, r);
-					signing_token = GetToken (r, RecipientParameters, SecurityKeyUsage.Signature);
-				}
-				return signing_token;
-			}
-		}
+        public override SecurityToken EncryptionToken
+        {
+            get
+            {
+                if (encryption_token == null)
+                {
+                    SecurityTokenRequirement r = CreateRequirement();
+                    r.Properties[ReqType.MessageDirectionProperty] = MessageDirection.Output;
+                    encryption_token = GetToken(r, InitiatorParameters, SecurityKeyUsage.Exchange);
+                }
+                return encryption_token;
+            }
+        }
 
-		protected override void ReleaseCore ()
-		{
-			this.listener = null;
+        public override SecurityToken SigningToken
+        {
+            get
+            {
+                if (signing_token == null)
+                {
+                    SecurityTokenRequirement r = CreateRequirement();
+                    r.Properties[ReqType.MessageDirectionProperty] = MessageDirection.Input;
+                    InitializeRequirement(RecipientParameters, r);
+                    signing_token = GetToken(r, RecipientParameters, SecurityKeyUsage.Signature);
+                }
+                return signing_token;
+            }
+        }
 
-			IDisposable disposable = signing_token as IDisposable;
-			if (disposable != null)
-				disposable.Dispose ();
-			signing_token = null;
+        protected override void ReleaseCore()
+        {
+            this.listener = null;
 
-			disposable = encryption_token as IDisposable;
-			if (disposable != null)
-				disposable.Dispose ();
-			encryption_token = null;
-		}
+            IDisposable disposable = signing_token as IDisposable;
+            if (disposable != null)
+                disposable.Dispose();
+            signing_token = null;
 
-		public override SecurityTokenRequirement CreateRequirement ()
-		{
-			SecurityTokenRequirement requirement =
-				new RecipientServiceModelSecurityTokenRequirement ();
-			requirement.Properties [ReqType.ListenUriProperty] = listen_uri;
-			return requirement;
-		}
+            disposable = encryption_token as IDisposable;
+            if (disposable != null)
+                disposable.Dispose();
+            encryption_token = null;
+        }
 
-		public override SecurityTokenAuthenticator CreateTokenAuthenticator (SecurityTokenParameters p, out SecurityTokenResolver resolver)
-		{
-			resolver = null;
-			// This check might be almost extra, though it is
-			// needed to check correct signing token existence.
-			//
-			// Not sure if it is limited to this condition, but
-			// Ssl parameters do not support token provider and
-			// still do not fail. X509 parameters do fail.
-			if (!RecipientParameters.InternalSupportsServerAuthentication)
-				return null;
+        public override SecurityTokenRequirement CreateRequirement()
+        {
+            SecurityTokenRequirement requirement =
+                new RecipientServiceModelSecurityTokenRequirement();
+            requirement.Properties[ReqType.ListenUriProperty] = listen_uri;
+            return requirement;
+        }
 
-			SecurityTokenRequirement r = CreateRequirement ();
-			r.Properties [ReqType.MessageDirectionProperty] = MessageDirection.Input;
-			InitializeRequirement (p, r);
-			return SecurityTokenManager.CreateSecurityTokenAuthenticator (r, out resolver);
-		}
-	}
+        public override SecurityTokenAuthenticator CreateTokenAuthenticator(
+            SecurityTokenParameters p,
+            out SecurityTokenResolver resolver
+        )
+        {
+            resolver = null;
+            // This check might be almost extra, though it is
+            // needed to check correct signing token existence.
+            //
+            // Not sure if it is limited to this condition, but
+            // Ssl parameters do not support token provider and
+            // still do not fail. X509 parameters do fail.
+            if (!RecipientParameters.InternalSupportsServerAuthentication)
+                return null;
+
+            SecurityTokenRequirement r = CreateRequirement();
+            r.Properties[ReqType.MessageDirectionProperty] = MessageDirection.Input;
+            InitializeRequirement(p, r);
+            return SecurityTokenManager.CreateSecurityTokenAuthenticator(r, out resolver);
+        }
+    }
 }

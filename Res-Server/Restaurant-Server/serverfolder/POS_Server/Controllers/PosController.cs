@@ -19,13 +19,13 @@ namespace POS_Server.Controllers
     public class PosController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpGet]
         [Route("checkUri")]
         public string checkUri()
         {
             return "";
         }
-
 
         // GET api/<controller>
         [HttpPost]
@@ -43,25 +43,28 @@ namespace POS_Server.Controllers
             {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var posList = (from p in entity.pos
-                                   join b in entity.branches on p.branchId equals b.branchId into lj
-                                   from x in lj.DefaultIfEmpty()
-                                   select new PosModel() {
-                                       posId = p.posId,
-                                       balance = p.balance,
-                                       branchId = p.branchId,
-                                       code = p.code,
-                                       name = p.name,
-                                       branchName = x.name,
-                                       createDate = p.createDate,
-                                       updateDate = p.updateDate,
-                                       createUserId = p.createUserId,
-                                       updateUserId = p.updateUserId,
-                                       isActive = p.isActive,
-                                      balanceAll=p.balanceAll,
-                                       notes = p.notes,
-                                       branchCode = x.code,
-                                   }).ToList();
+                    var posList = (
+                        from p in entity.pos
+                        join b in entity.branches on p.branchId equals b.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        select new PosModel()
+                        {
+                            posId = p.posId,
+                            balance = p.balance,
+                            branchId = p.branchId,
+                            code = p.code,
+                            name = p.name,
+                            branchName = x.name,
+                            createDate = p.createDate,
+                            updateDate = p.updateDate,
+                            createUserId = p.createUserId,
+                            updateUserId = p.updateUserId,
+                            isActive = p.isActive,
+                            balanceAll = p.balanceAll,
+                            notes = p.notes,
+                            branchCode = x.code,
+                        }
+                    ).ToList();
 
                     if (posList.Count > 0)
                     {
@@ -71,21 +74,27 @@ namespace POS_Server.Controllers
                             if (posList[i].isActive == 1)
                             {
                                 long posId = (long)posList[i].posId;
-                                var cashTransferL = entity.cashTransfer.Where(x => x.posId == posId).Select(b => new { b.cashTransId }).FirstOrDefault();
-                                var posUsersL = entity.posUsers.Where(x => x.posId == posId).Select(x => new { x.posUserId }).FirstOrDefault();
-                               
+                                var cashTransferL = entity.cashTransfer
+                                    .Where(x => x.posId == posId)
+                                    .Select(b => new { b.cashTransId })
+                                    .FirstOrDefault();
+                                var posUsersL = entity.posUsers
+                                    .Where(x => x.posId == posId)
+                                    .Select(x => new { x.posUserId })
+                                    .FirstOrDefault();
+
                                 if ((cashTransferL is null) && (posUsersL is null))
                                     canDelete = true;
                             }
-                           
+
                             posList[i].canDelete = canDelete;
                         }
                     }
                     return TokenManager.GenerateToken(posList);
                 }
             }
-          
         }
+
         // GET api/<controller>
         [HttpPost]
         [Route("GetPosByID")]
@@ -137,37 +146,40 @@ namespace POS_Server.Controllers
                 //    return TokenManager.GenerateToken(pos);
                 //}
             }
-         }
+        }
 
-       public PosModel GetPosByID(long posId)
+        public PosModel GetPosByID(long posId)
         {
             using (incposdbEntities entity = new incposdbEntities())
             {
-                var pos = (from p in entity.pos
-                           where p.posId == posId
-                           join b in entity.branches on p.branchId equals b.branchId into lj
-                           from x in lj.DefaultIfEmpty()
-                           select new PosModel()
-                           {
-                               posId = p.posId,
-                               balance = p.balance,
-                               branchId = p.branchId,
-                               code = p.code,
-                               name = p.name,
-                               branchName = x.name,
-                               createDate = p.createDate,
-                               updateDate = p.updateDate,
-                               createUserId = p.createUserId,
-                               updateUserId = p.updateUserId,
-                               isActive = p.isActive,
-                               balanceAll = p.balanceAll,
-                               notes = p.notes,
-                               branchCode = x.code,
-                               boxState = p.boxState,
-                           }).FirstOrDefault();
-               return pos;
+                var pos = (
+                    from p in entity.pos
+                    where p.posId == posId
+                    join b in entity.branches on p.branchId equals b.branchId into lj
+                    from x in lj.DefaultIfEmpty()
+                    select new PosModel()
+                    {
+                        posId = p.posId,
+                        balance = p.balance,
+                        branchId = p.branchId,
+                        code = p.code,
+                        name = p.name,
+                        branchName = x.name,
+                        createDate = p.createDate,
+                        updateDate = p.updateDate,
+                        createUserId = p.createUserId,
+                        updateUserId = p.updateUserId,
+                        isActive = p.isActive,
+                        balanceAll = p.balanceAll,
+                        notes = p.notes,
+                        branchCode = x.code,
+                        boxState = p.boxState,
+                    }
+                ).FirstOrDefault();
+                return pos;
             }
         }
+
         // add or update pos
         [HttpPost]
         [Route("Save")]
@@ -191,7 +203,10 @@ namespace POS_Server.Controllers
                     {
                         posObject = c.Value.Replace("\\", string.Empty);
                         posObject = posObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<pos>(posObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<pos>(
+                            posObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -223,8 +238,8 @@ namespace POS_Server.Controllers
                             }
                             else
                             {
-                                newObject.createDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                                newObject.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.createDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                                newObject.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                                 newObject.updateUserId = newObject.createUserId;
 
                                 tmpPos = unitEntity.Add(newObject);
@@ -235,12 +250,14 @@ namespace POS_Server.Controllers
                         }
                         else
                         {
-                            tmpPos = entity.pos.Where(p => p.posId == newObject.posId).FirstOrDefault();
+                            tmpPos = entity.pos
+                                .Where(p => p.posId == newObject.posId)
+                                .FirstOrDefault();
                             tmpPos.name = newObject.name;
                             tmpPos.code = newObject.code;
                             tmpPos.branchId = newObject.branchId;
                             tmpPos.notes = newObject.notes;
-                            tmpPos.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                            tmpPos.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                             tmpPos.updateUserId = newObject.updateUserId;
                             tmpPos.isActive = newObject.isActive;
                             tmpPos.balance = newObject.balance;
@@ -291,18 +308,21 @@ namespace POS_Server.Controllers
                     pos.balance += balance;
                     entity.SaveChanges();
 
-                    var posModel = entity.pos.Where(x => x.posId == posId)
-                        .Select(x => new PosModel()
-                        {
-                            balance = x.balance,
-                            branchId = x.branchId,
-                            posId = x.posId
-                        }).FirstOrDefault();
+                    var posModel = entity.pos
+                        .Where(x => x.posId == posId)
+                        .Select(
+                            x =>
+                                new PosModel()
+                                {
+                                    balance = x.balance,
+                                    branchId = x.branchId,
+                                    posId = x.posId
+                                }
+                        )
+                        .FirstOrDefault();
                     return TokenManager.GenerateToken(posModel);
                 }
-
             }
-
         }
 
         [HttpPost]
@@ -318,7 +338,6 @@ namespace POS_Server.Controllers
             }
             else
             {
-
                 string deviceCode = "";
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
@@ -328,20 +347,19 @@ namespace POS_Server.Controllers
                     {
                         deviceCode = c.Value;
                     }
-
                 }
 
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var posSet = entity.posSetting.Where(x => x.posDeviceCode == deviceCode).FirstOrDefault();
+                    var posSet = entity.posSetting
+                        .Where(x => x.posDeviceCode == deviceCode)
+                        .FirstOrDefault();
 
                     PosModel pos = new PosModel();
                     if (posSet != null)
                     {
-
                         long posId = (long)posSet.posId;
                         pos = GetPosByID(posId);
-                        
                     }
                     else
                         pos.branchId = 0;
@@ -399,7 +417,7 @@ namespace POS_Server.Controllers
                     catch
                     {
                         message = "0";
-                    return TokenManager.GenerateToken(message);
+                        return TokenManager.GenerateToken(message);
                     }
                 }
                 else
@@ -410,7 +428,7 @@ namespace POS_Server.Controllers
 
                         posDelete.isActive = 0;
                         posDelete.updateUserId = userId;
-                        posDelete.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
+                        posDelete.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
                         message = entity.SaveChanges().ToString();
                         return TokenManager.GenerateToken(message);
                     }
@@ -450,7 +468,10 @@ namespace POS_Server.Controllers
                     {
                         setObject = c.Value.Replace("\\", string.Empty);
                         setObject = setObject.Trim('"');
-                        newObject = JsonConvert.DeserializeObject<List<setValuesModel>>(setObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        newObject = JsonConvert.DeserializeObject<List<setValuesModel>>(
+                            setObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                     }
                     else if (c.Type == "activationCode")
                     {
@@ -497,10 +518,14 @@ namespace POS_Server.Controllers
                     {
                         pos tmpPos = new pos();
                         var unitEntity = entity.Set<pos>();
-                        var validSerial = entity.posSerials.Where(x => x.posSerial == activationCode).FirstOrDefault();
+                        var validSerial = entity.posSerials
+                            .Where(x => x.posSerial == activationCode)
+                            .FirstOrDefault();
                         if (validSerial != null) // activation code is correct
                         {
-                            var serialExist = entity.posSetting.Where(x => x.posSerialId == validSerial.id).FirstOrDefault();
+                            var serialExist = entity.posSetting
+                                .Where(x => x.posSerialId == validSerial.id)
+                                .FirstOrDefault();
                             if (serialExist == null) // activation code is available
                             {
                                 var pos = entity.pos.Find(1);
@@ -518,13 +543,14 @@ namespace POS_Server.Controllers
                                 entity.posSetting.Add(posSett);
                                 #endregion
                                 #region region settings
-                                List<countriesCodes> objectlist = entity.countriesCodes.Where(x => x.isDefault == 1).ToList();
+                                List<countriesCodes> objectlist = entity.countriesCodes
+                                    .Where(x => x.isDefault == 1)
+                                    .ToList();
                                 if (objectlist.Count > 0)
                                 {
                                     for (int i = 0; i < objectlist.Count; i++)
                                     {
                                         objectlist[i].isDefault = 0;
-
                                     }
                                 }
                                 // set is selected to isdefault=1
@@ -547,14 +573,18 @@ namespace POS_Server.Controllers
                                 #region company info
                                 foreach (setValuesModel v in newObject)
                                 {
-                                    var setId = entity.setting.Where(x => x.name == v.name).Select(x => x.settingId).Single();
-                                    var setValue = entity.setValues.Where(x => x.settingId == setId).FirstOrDefault();
+                                    var setId = entity.setting
+                                        .Where(x => x.name == v.name)
+                                        .Select(x => x.settingId)
+                                        .Single();
+                                    var setValue = entity.setValues
+                                        .Where(x => x.settingId == setId)
+                                        .FirstOrDefault();
                                     setValue.value = v.value;
                                 }
                                 #endregion
                                 entity.SaveChanges();
                                 return TokenManager.GenerateToken(pos.posId.ToString());
-
                             }
                             else
                                 return TokenManager.GenerateToken("-3"); // activation code is unavailable
@@ -569,6 +599,7 @@ namespace POS_Server.Controllers
                 }
             }
         }
+
         [HttpPost]
         [Route("setPosConfiguration")]
         public string setPosConfiguration(string token)
@@ -584,7 +615,7 @@ namespace POS_Server.Controllers
             {
                 string activationCode = "";
                 string deviceCode = "";
-                long posId = 0;               
+                long posId = 0;
 
                 IEnumerable<Claim> claims = TokenManager.getTokenClaims(token);
                 foreach (Claim c in claims)
@@ -600,7 +631,7 @@ namespace POS_Server.Controllers
                     else if (c.Type == "posId")
                     {
                         posId = long.Parse(c.Value);
-                    }  
+                    }
                 }
 
                 try
@@ -610,10 +641,14 @@ namespace POS_Server.Controllers
                     {
                         pos tmpPos = new pos();
                         var unitEntity = entity.Set<pos>();
-                        var validSerial = entity.posSerials.Where(x => x.posSerial == activationCode).FirstOrDefault();
+                        var validSerial = entity.posSerials
+                            .Where(x => x.posSerial == activationCode)
+                            .FirstOrDefault();
                         if (validSerial != null) // activation code is correct
                         {
-                            var serialExist = entity.posSetting.Where(x => x.posSerialId == validSerial.id).FirstOrDefault();
+                            var serialExist = entity.posSetting
+                                .Where(x => x.posSerialId == validSerial.id)
+                                .FirstOrDefault();
                             if (serialExist == null) // activation code is available
                             {
                                 #region add pos settings record
@@ -627,10 +662,9 @@ namespace POS_Server.Controllers
                                 };
                                 entity.posSetting.Add(posSett);
                                 #endregion
-                               
+
                                 entity.SaveChanges();
                                 return TokenManager.GenerateToken(posId.ToString());
-
                             }
                             else
                                 return TokenManager.GenerateToken("-3"); // activation code is unavailable
@@ -658,7 +692,7 @@ namespace POS_Server.Controllers
                 return TokenManager.GenerateToken(strP);
             }
             else
-            {             
+            {
                 using (incposdbEntities entity = new incposdbEntities())
                 {
                     try
@@ -679,7 +713,7 @@ namespace POS_Server.Controllers
 
         [HttpPost]
         [Route("updateBoxState")]
-        public async Task< string> updateBoxState(string token)
+        public async Task<string> updateBoxState(string token)
         {
             token = TokenManager.readToken(HttpContext.Current.Request);
             var strP = TokenManager.GetPrincipal(token);
@@ -719,7 +753,10 @@ namespace POS_Server.Controllers
                     {
                         cashObject = c.Value.Replace("\\", string.Empty);
                         cashObject = cashObject.Trim('"');
-                        cashTransfer = JsonConvert.DeserializeObject<cashTransfer>(cashObject, new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" });
+                        cashTransfer = JsonConvert.DeserializeObject<cashTransfer>(
+                            cashObject,
+                            new IsoDateTimeConverter { DateTimeFormat = "dd/MM/yyyy" }
+                        );
                         break;
                     }
                 }
@@ -731,8 +768,8 @@ namespace POS_Server.Controllers
                     pos.boxState = boxState;
                     pos.isAdminClose = (byte)isAdminClose;
                     pos.updateUserId = userId;
-                    pos.updateDate =  coctrlr.AddOffsetTodate(DateTime.Now);
-                   entity.SaveChanges().ToString();
+                    pos.updateDate = coctrlr.AddOffsetTodate(DateTime.Now);
+                    entity.SaveChanges().ToString();
 
                     await cc.addCashTransfer(cashTransfer);
                     return TokenManager.GenerateToken(pos.balance.ToString());
@@ -763,23 +800,25 @@ namespace POS_Server.Controllers
                 }
                 using (incposdbEntities entity = new incposdbEntities())
                 {
-                    var posList = (from p in entity.pos where p.isActive == 1
-                                   join b in entity.branches on p.branchId equals b.branchId into lj
-                                   from x in lj.DefaultIfEmpty()
-                                   where x.branchId == branchId && !entity.posSetting.Any(m => m.posId == p.posId)
-                                   select new PosModel()
-                                   {
-                                       posId = p.posId,
-                                       name = p.name,  
-                                       branchId = p.branchId,
-                                   }).ToList();
-   
+                    var posList = (
+                        from p in entity.pos
+                        where p.isActive == 1
+                        join b in entity.branches on p.branchId equals b.branchId into lj
+                        from x in lj.DefaultIfEmpty()
+                        where
+                            x.branchId == branchId
+                            && !entity.posSetting.Any(m => m.posId == p.posId)
+                        select new PosModel()
+                        {
+                            posId = p.posId,
+                            name = p.name,
+                            branchId = p.branchId,
+                        }
+                    ).ToList();
+
                     return TokenManager.GenerateToken(posList);
                 }
             }
-
         }
-
-
     }
 }

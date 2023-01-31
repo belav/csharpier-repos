@@ -21,132 +21,532 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal abstract partial class AbstractCodeGenerationService<TCodeGenerationContextInfo> : ICodeGenerationService
+    internal abstract partial class AbstractCodeGenerationService<TCodeGenerationContextInfo>
+        : ICodeGenerationService
         where TCodeGenerationContextInfo : CodeGenerationContextInfo
     {
         private readonly ISymbolDeclarationService _symbolDeclarationService;
 
-        protected AbstractCodeGenerationService(
-            ISymbolDeclarationService symbolDeclarationService)
+        protected AbstractCodeGenerationService(ISymbolDeclarationService symbolDeclarationService)
         {
             _symbolDeclarationService = symbolDeclarationService;
         }
 
         public abstract CodeGenerationOptions DefaultOptions { get; }
-        public abstract CodeGenerationOptions GetCodeGenerationOptions(IOptionsReader options, CodeGenerationOptions? fallbackOptions);
+        public abstract CodeGenerationOptions GetCodeGenerationOptions(
+            IOptionsReader options,
+            CodeGenerationOptions? fallbackOptions
+        );
 
         #region ICodeGenerationService
 
-        public TDeclarationNode AddEvent<TDeclarationNode>(TDeclarationNode destination, IEventSymbol @event, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddEvent(destination, @event, (TCodeGenerationContextInfo)info, GetAvailableInsertionIndices(destination, cancellationToken), cancellationToken), info);
+        public TDeclarationNode AddEvent<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEventSymbol @event,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddEvent(
+                    destination,
+                    @event,
+                    (TCodeGenerationContextInfo)info,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    cancellationToken
+                ),
+                info
+            );
 
-        public TDeclarationNode AddField<TDeclarationNode>(TDeclarationNode destination, IFieldSymbol field, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddField(destination, field, (TCodeGenerationContextInfo)info, GetAvailableInsertionIndices(destination, cancellationToken), cancellationToken), info);
+        public TDeclarationNode AddField<TDeclarationNode>(
+            TDeclarationNode destination,
+            IFieldSymbol field,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddField(
+                    destination,
+                    field,
+                    (TCodeGenerationContextInfo)info,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    cancellationToken
+                ),
+                info
+            );
 
-        public TDeclarationNode AddMethod<TDeclarationNode>(TDeclarationNode destination, IMethodSymbol method, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddMethod(destination, method, (TCodeGenerationContextInfo)info, GetAvailableInsertionIndices(destination, cancellationToken), cancellationToken), info);
+        public TDeclarationNode AddMethod<TDeclarationNode>(
+            TDeclarationNode destination,
+            IMethodSymbol method,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddMethod(
+                    destination,
+                    method,
+                    (TCodeGenerationContextInfo)info,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    cancellationToken
+                ),
+                info
+            );
 
-        public TDeclarationNode AddProperty<TDeclarationNode>(TDeclarationNode destination, IPropertySymbol property, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddProperty(destination, property, (TCodeGenerationContextInfo)info, GetAvailableInsertionIndices(destination, cancellationToken), cancellationToken), info);
+        public TDeclarationNode AddProperty<TDeclarationNode>(
+            TDeclarationNode destination,
+            IPropertySymbol property,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddProperty(
+                    destination,
+                    property,
+                    (TCodeGenerationContextInfo)info,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    cancellationToken
+                ),
+                info
+            );
 
-        public TDeclarationNode AddNamedType<TDeclarationNode>(TDeclarationNode destination, INamedTypeSymbol namedType, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddNamedType(destination, namedType, (TCodeGenerationContextInfo)info, GetAvailableInsertionIndices(destination, cancellationToken), cancellationToken), info);
+        public TDeclarationNode AddNamedType<TDeclarationNode>(
+            TDeclarationNode destination,
+            INamedTypeSymbol namedType,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddNamedType(
+                    destination,
+                    namedType,
+                    (TCodeGenerationContextInfo)info,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    cancellationToken
+                ),
+                info
+            );
 
-        public TDeclarationNode AddNamespace<TDeclarationNode>(TDeclarationNode destination, INamespaceSymbol @namespace, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddNamespace(destination, @namespace, (TCodeGenerationContextInfo)info, GetAvailableInsertionIndices(destination, cancellationToken), cancellationToken), info);
+        public TDeclarationNode AddNamespace<TDeclarationNode>(
+            TDeclarationNode destination,
+            INamespaceSymbol @namespace,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddNamespace(
+                    destination,
+                    @namespace,
+                    (TCodeGenerationContextInfo)info,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    cancellationToken
+                ),
+                info
+            );
 
-        public TDeclarationNode AddMembers<TDeclarationNode>(TDeclarationNode destination, IEnumerable<ISymbol> members, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            where TDeclarationNode : SyntaxNode
-            => WithAnnotations(AddMembers(destination, members, GetAvailableInsertionIndices(destination, cancellationToken), (TCodeGenerationContextInfo)info, cancellationToken), info);
+        public TDeclarationNode AddMembers<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEnumerable<ISymbol> members,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            WithAnnotations(
+                AddMembers(
+                    destination,
+                    members,
+                    GetAvailableInsertionIndices(destination, cancellationToken),
+                    (TCodeGenerationContextInfo)info,
+                    cancellationToken
+                ),
+                info
+            );
 
-        private static TNode WithAnnotations<TNode>(TNode node, CodeGenerationContextInfo info) where TNode : SyntaxNode
+        private static TNode WithAnnotations<TNode>(TNode node, CodeGenerationContextInfo info)
+            where TNode : SyntaxNode
         {
             return info.Context.AddImports
                 ? node.WithAdditionalAnnotations(Simplifier.AddImportsAnnotation)
                 : node;
         }
 
-        public SyntaxNode CreateEventDeclaration(IEventSymbol @event, CodeGenerationDestination destination, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            => CreateEventDeclaration(@event, destination, (TCodeGenerationContextInfo)info, cancellationToken);
+        public SyntaxNode CreateEventDeclaration(
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        ) =>
+            CreateEventDeclaration(
+                @event,
+                destination,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public SyntaxNode CreateFieldDeclaration(IFieldSymbol field, CodeGenerationDestination destination, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            => CreateFieldDeclaration(field, destination, (TCodeGenerationContextInfo)info, cancellationToken);
+        public SyntaxNode CreateFieldDeclaration(
+            IFieldSymbol field,
+            CodeGenerationDestination destination,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        ) =>
+            CreateFieldDeclaration(
+                field,
+                destination,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public SyntaxNode? CreateMethodDeclaration(IMethodSymbol method, CodeGenerationDestination destination, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            => CreateMethodDeclaration(method, destination, (TCodeGenerationContextInfo)info, cancellationToken);
+        public SyntaxNode? CreateMethodDeclaration(
+            IMethodSymbol method,
+            CodeGenerationDestination destination,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        ) =>
+            CreateMethodDeclaration(
+                method,
+                destination,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public SyntaxNode CreatePropertyDeclaration(IPropertySymbol property, CodeGenerationDestination destination, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            => CreatePropertyDeclaration(property, destination, (TCodeGenerationContextInfo)info, cancellationToken);
+        public SyntaxNode CreatePropertyDeclaration(
+            IPropertySymbol property,
+            CodeGenerationDestination destination,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        ) =>
+            CreatePropertyDeclaration(
+                property,
+                destination,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public SyntaxNode CreateNamedTypeDeclaration(INamedTypeSymbol namedType, CodeGenerationDestination destination, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            => CreateNamedTypeDeclaration(namedType, destination, (TCodeGenerationContextInfo)info, cancellationToken);
+        public SyntaxNode CreateNamedTypeDeclaration(
+            INamedTypeSymbol namedType,
+            CodeGenerationDestination destination,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        ) =>
+            CreateNamedTypeDeclaration(
+                namedType,
+                destination,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public SyntaxNode CreateNamespaceDeclaration(INamespaceSymbol @namespace, CodeGenerationDestination destination, CodeGenerationContextInfo info, CancellationToken cancellationToken)
-            => CreateNamespaceDeclaration(@namespace, destination, (TCodeGenerationContextInfo)info, cancellationToken);
+        public SyntaxNode CreateNamespaceDeclaration(
+            INamespaceSymbol @namespace,
+            CodeGenerationDestination destination,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        ) =>
+            CreateNamespaceDeclaration(
+                @namespace,
+                destination,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode AddParameters<TDeclarationNode>(TDeclarationNode destination, IEnumerable<IParameterSymbol> parameters, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => AddParameters(destination, parameters, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode AddParameters<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEnumerable<IParameterSymbol> parameters,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            AddParameters(
+                destination,
+                parameters,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode AddAttributes<TDeclarationNode>(TDeclarationNode destination, IEnumerable<AttributeData> attributes, SyntaxToken? target, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => AddAttributes(destination, attributes, target, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode AddAttributes<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEnumerable<AttributeData> attributes,
+            SyntaxToken? target,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            AddAttributes(
+                destination,
+                attributes,
+                target,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode RemoveAttribute<TDeclarationNode>(TDeclarationNode destination, SyntaxNode attributeToRemove, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => RemoveAttribute(destination, attributeToRemove, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode RemoveAttribute<TDeclarationNode>(
+            TDeclarationNode destination,
+            SyntaxNode attributeToRemove,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            RemoveAttribute(
+                destination,
+                attributeToRemove,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode RemoveAttribute<TDeclarationNode>(TDeclarationNode destination, AttributeData attributeToRemove, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => RemoveAttribute(destination, attributeToRemove, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode RemoveAttribute<TDeclarationNode>(
+            TDeclarationNode destination,
+            AttributeData attributeToRemove,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            RemoveAttribute(
+                destination,
+                attributeToRemove,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode UpdateDeclarationModifiers<TDeclarationNode>(TDeclarationNode declaration, IEnumerable<SyntaxToken> newModifiers, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => UpdateDeclarationModifiers(declaration, newModifiers, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode UpdateDeclarationModifiers<TDeclarationNode>(
+            TDeclarationNode declaration,
+            IEnumerable<SyntaxToken> newModifiers,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            UpdateDeclarationModifiers(
+                declaration,
+                newModifiers,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode UpdateDeclarationAccessibility<TDeclarationNode>(TDeclarationNode declaration, Accessibility newAccessibility, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => UpdateDeclarationAccessibility(declaration, newAccessibility, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode UpdateDeclarationAccessibility<TDeclarationNode>(
+            TDeclarationNode declaration,
+            Accessibility newAccessibility,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            UpdateDeclarationAccessibility(
+                declaration,
+                newAccessibility,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode UpdateDeclarationType<TDeclarationNode>(TDeclarationNode declaration, ITypeSymbol newType, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => UpdateDeclarationType(declaration, newType, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode UpdateDeclarationType<TDeclarationNode>(
+            TDeclarationNode declaration,
+            ITypeSymbol newType,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            UpdateDeclarationType(
+                declaration,
+                newType,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode UpdateDeclarationMembers<TDeclarationNode>(TDeclarationNode declaration, IList<ISymbol> newMembers, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => UpdateDeclarationMembers(declaration, newMembers, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode UpdateDeclarationMembers<TDeclarationNode>(
+            TDeclarationNode declaration,
+            IList<ISymbol> newMembers,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            UpdateDeclarationMembers(
+                declaration,
+                newMembers,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
-        public TDeclarationNode AddStatements<TDeclarationNode>(TDeclarationNode destination, IEnumerable<SyntaxNode> statements, CodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
-            => AddStatements(destination, statements, (TCodeGenerationContextInfo)info, cancellationToken);
+        public TDeclarationNode AddStatements<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEnumerable<SyntaxNode> statements,
+            CodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode =>
+            AddStatements(
+                destination,
+                statements,
+                (TCodeGenerationContextInfo)info,
+                cancellationToken
+            );
 
         #endregion
 
-        protected abstract TDeclarationNode AddEvent<TDeclarationNode>(TDeclarationNode destination, IEventSymbol @event, TCodeGenerationContextInfo info, IList<bool>? availableIndices, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        protected abstract TDeclarationNode AddField<TDeclarationNode>(TDeclarationNode destination, IFieldSymbol field, TCodeGenerationContextInfo info, IList<bool>? availableIndices, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        protected abstract TDeclarationNode AddMethod<TDeclarationNode>(TDeclarationNode destination, IMethodSymbol method, TCodeGenerationContextInfo info, IList<bool>? availableIndices, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        protected abstract TDeclarationNode AddProperty<TDeclarationNode>(TDeclarationNode destination, IPropertySymbol property, TCodeGenerationContextInfo info, IList<bool>? availableIndices, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        protected abstract TDeclarationNode AddNamedType<TDeclarationNode>(TDeclarationNode destination, INamedTypeSymbol namedType, TCodeGenerationContextInfo info, IList<bool>? availableIndices, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        protected abstract TDeclarationNode AddNamespace<TDeclarationNode>(TDeclarationNode destination, INamespaceSymbol @namespace, TCodeGenerationContextInfo info, IList<bool>? availableIndices, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        protected abstract TDeclarationNode AddMembers<TDeclarationNode>(TDeclarationNode destination, IEnumerable<SyntaxNode> members) where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddEvent<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEventSymbol @event,
+            TCodeGenerationContextInfo info,
+            IList<bool>? availableIndices,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddField<TDeclarationNode>(
+            TDeclarationNode destination,
+            IFieldSymbol field,
+            TCodeGenerationContextInfo info,
+            IList<bool>? availableIndices,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddMethod<TDeclarationNode>(
+            TDeclarationNode destination,
+            IMethodSymbol method,
+            TCodeGenerationContextInfo info,
+            IList<bool>? availableIndices,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddProperty<TDeclarationNode>(
+            TDeclarationNode destination,
+            IPropertySymbol property,
+            TCodeGenerationContextInfo info,
+            IList<bool>? availableIndices,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddNamedType<TDeclarationNode>(
+            TDeclarationNode destination,
+            INamedTypeSymbol namedType,
+            TCodeGenerationContextInfo info,
+            IList<bool>? availableIndices,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddNamespace<TDeclarationNode>(
+            TDeclarationNode destination,
+            INamespaceSymbol @namespace,
+            TCodeGenerationContextInfo info,
+            IList<bool>? availableIndices,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        protected abstract TDeclarationNode AddMembers<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEnumerable<SyntaxNode> members
+        )
+            where TDeclarationNode : SyntaxNode;
 
-        public abstract TDeclarationNode AddParameters<TDeclarationNode>(TDeclarationNode destinationMember, IEnumerable<IParameterSymbol> parameters, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode AddAttributes<TDeclarationNode>(TDeclarationNode destination, IEnumerable<AttributeData> attributes, SyntaxToken? target, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode RemoveAttribute<TDeclarationNode>(TDeclarationNode destination, SyntaxNode attributeToRemove, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode RemoveAttribute<TDeclarationNode>(TDeclarationNode destination, AttributeData attributeToRemove, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode AddStatements<TDeclarationNode>(TDeclarationNode destinationMember, IEnumerable<SyntaxNode> statements, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode AddParameters<TDeclarationNode>(
+            TDeclarationNode destinationMember,
+            IEnumerable<IParameterSymbol> parameters,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode AddAttributes<TDeclarationNode>(
+            TDeclarationNode destination,
+            IEnumerable<AttributeData> attributes,
+            SyntaxToken? target,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode RemoveAttribute<TDeclarationNode>(
+            TDeclarationNode destination,
+            SyntaxNode attributeToRemove,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode RemoveAttribute<TDeclarationNode>(
+            TDeclarationNode destination,
+            AttributeData attributeToRemove,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode AddStatements<TDeclarationNode>(
+            TDeclarationNode destinationMember,
+            IEnumerable<SyntaxNode> statements,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
 
-        public abstract TDeclarationNode UpdateDeclarationModifiers<TDeclarationNode>(TDeclarationNode declaration, IEnumerable<SyntaxToken> newModifiers, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode UpdateDeclarationAccessibility<TDeclarationNode>(TDeclarationNode declaration, Accessibility newAccessibility, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode UpdateDeclarationType<TDeclarationNode>(TDeclarationNode declaration, ITypeSymbol newType, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
-        public abstract TDeclarationNode UpdateDeclarationMembers<TDeclarationNode>(TDeclarationNode declaration, IList<ISymbol> newMembers, TCodeGenerationContextInfo info, CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode UpdateDeclarationModifiers<TDeclarationNode>(
+            TDeclarationNode declaration,
+            IEnumerable<SyntaxToken> newModifiers,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode UpdateDeclarationAccessibility<TDeclarationNode>(
+            TDeclarationNode declaration,
+            Accessibility newAccessibility,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode UpdateDeclarationType<TDeclarationNode>(
+            TDeclarationNode declaration,
+            ITypeSymbol newType,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
+        public abstract TDeclarationNode UpdateDeclarationMembers<TDeclarationNode>(
+            TDeclarationNode declaration,
+            IList<ISymbol> newMembers,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode;
 
         public abstract CodeGenerationDestination GetDestination(SyntaxNode node);
-        public abstract SyntaxNode CreateEventDeclaration(IEventSymbol @event, CodeGenerationDestination destination, TCodeGenerationContextInfo info, CancellationToken cancellationToken);
-        public abstract SyntaxNode CreateFieldDeclaration(IFieldSymbol field, CodeGenerationDestination destination, TCodeGenerationContextInfo info, CancellationToken cancellationToken);
+        public abstract SyntaxNode CreateEventDeclaration(
+            IEventSymbol @event,
+            CodeGenerationDestination destination,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        );
+        public abstract SyntaxNode CreateFieldDeclaration(
+            IFieldSymbol field,
+            CodeGenerationDestination destination,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        );
 
         // TODO: Change to not return null (https://github.com/dotnet/roslyn/issues/58243)
-        public abstract SyntaxNode? CreateMethodDeclaration(IMethodSymbol method, CodeGenerationDestination destination, TCodeGenerationContextInfo info, CancellationToken cancellationToken);
+        public abstract SyntaxNode? CreateMethodDeclaration(
+            IMethodSymbol method,
+            CodeGenerationDestination destination,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        );
 
-        public abstract SyntaxNode CreatePropertyDeclaration(IPropertySymbol property, CodeGenerationDestination destination, TCodeGenerationContextInfo info, CancellationToken cancellationToken);
-        public abstract SyntaxNode CreateNamedTypeDeclaration(INamedTypeSymbol namedType, CodeGenerationDestination destination, TCodeGenerationContextInfo info, CancellationToken cancellationToken);
-        public abstract SyntaxNode CreateNamespaceDeclaration(INamespaceSymbol @namespace, CodeGenerationDestination destination, TCodeGenerationContextInfo info, CancellationToken cancellationToken);
+        public abstract SyntaxNode CreatePropertyDeclaration(
+            IPropertySymbol property,
+            CodeGenerationDestination destination,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        );
+        public abstract SyntaxNode CreateNamedTypeDeclaration(
+            INamedTypeSymbol namedType,
+            CodeGenerationDestination destination,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        );
+        public abstract SyntaxNode CreateNamespaceDeclaration(
+            INamespaceSymbol @namespace,
+            CodeGenerationDestination destination,
+            TCodeGenerationContextInfo info,
+            CancellationToken cancellationToken
+        );
 
-        protected static T Cast<T>(object value)
-            => (T)value;
+        protected static T Cast<T>(object value) => (T)value;
 
-        protected static void CheckDeclarationNode<TDeclarationNode>(SyntaxNode destination) where TDeclarationNode : SyntaxNode
+        protected static void CheckDeclarationNode<TDeclarationNode>(SyntaxNode destination)
+            where TDeclarationNode : SyntaxNode
         {
             if (destination == null)
             {
@@ -156,12 +556,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             if (destination is not TDeclarationNode)
             {
                 throw new ArgumentException(
-                    string.Format(WorkspacesResources.Destination_type_must_be_a_0_but_given_one_is_1, typeof(TDeclarationNode).Name, destination.GetType().Name),
-                    nameof(destination));
+                    string.Format(
+                        WorkspacesResources.Destination_type_must_be_a_0_but_given_one_is_1,
+                        typeof(TDeclarationNode).Name,
+                        destination.GetType().Name
+                    ),
+                    nameof(destination)
+                );
             }
         }
 
-        protected static void CheckDeclarationNode<TDeclarationNode1, TDeclarationNode2>(SyntaxNode destination)
+        protected static void CheckDeclarationNode<TDeclarationNode1, TDeclarationNode2>(
+            SyntaxNode destination
+        )
             where TDeclarationNode1 : SyntaxNode
             where TDeclarationNode2 : SyntaxNode
         {
@@ -170,17 +577,25 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 throw new ArgumentNullException(nameof(destination));
             }
 
-            if (destination is not TDeclarationNode1 and
-                not TDeclarationNode2)
+            if (destination is not TDeclarationNode1 and not TDeclarationNode2)
             {
                 throw new ArgumentException(
-                    string.Format(WorkspacesResources.Destination_type_must_be_a_0_or_a_1_but_given_one_is_2,
-                        typeof(TDeclarationNode1).Name, typeof(TDeclarationNode2).Name, destination.GetType().Name),
-                    nameof(destination));
+                    string.Format(
+                        WorkspacesResources.Destination_type_must_be_a_0_or_a_1_but_given_one_is_2,
+                        typeof(TDeclarationNode1).Name,
+                        typeof(TDeclarationNode2).Name,
+                        destination.GetType().Name
+                    ),
+                    nameof(destination)
+                );
             }
         }
 
-        protected static void CheckDeclarationNode<TDeclarationNode1, TDeclarationNode2, TDeclarationNode3>(SyntaxNode destination)
+        protected static void CheckDeclarationNode<
+            TDeclarationNode1,
+            TDeclarationNode2,
+            TDeclarationNode3
+        >(SyntaxNode destination)
             where TDeclarationNode1 : SyntaxNode
             where TDeclarationNode2 : SyntaxNode
             where TDeclarationNode3 : SyntaxNode
@@ -190,54 +605,100 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 throw new ArgumentNullException(nameof(destination));
             }
 
-            if (destination is not TDeclarationNode1 and
-                not TDeclarationNode2 and
-                not TDeclarationNode3)
+            if (
+                destination
+                is not TDeclarationNode1
+                    and not TDeclarationNode2
+                    and not TDeclarationNode3
+            )
             {
                 throw new ArgumentException(
-                    string.Format(WorkspacesResources.Destination_type_must_be_a_0_1_or_2_but_given_one_is_3,
-                        typeof(TDeclarationNode1).Name, typeof(TDeclarationNode2).Name, typeof(TDeclarationNode3).Name, destination.GetType().Name),
-                    nameof(destination));
+                    string.Format(
+                        WorkspacesResources.Destination_type_must_be_a_0_1_or_2_but_given_one_is_3,
+                        typeof(TDeclarationNode1).Name,
+                        typeof(TDeclarationNode2).Name,
+                        typeof(TDeclarationNode3).Name,
+                        destination.GetType().Name
+                    ),
+                    nameof(destination)
+                );
             }
         }
 
-        protected static void CheckDeclarationNode<TDeclarationNode1, TDeclarationNode2, TDeclarationNode3, TDeclarationNode4>(SyntaxNode destination)
+        protected static void CheckDeclarationNode<
+            TDeclarationNode1,
+            TDeclarationNode2,
+            TDeclarationNode3,
+            TDeclarationNode4
+        >(SyntaxNode destination)
             where TDeclarationNode1 : SyntaxNode
             where TDeclarationNode2 : SyntaxNode
             where TDeclarationNode3 : SyntaxNode
             where TDeclarationNode4 : SyntaxNode
         {
-            if (destination is not TDeclarationNode1 and
-                not TDeclarationNode2 and
-                not TDeclarationNode3 and
-                not TDeclarationNode4)
+            if (
+                destination
+                is not TDeclarationNode1
+                    and not TDeclarationNode2
+                    and not TDeclarationNode3
+                    and not TDeclarationNode4
+            )
             {
                 throw new ArgumentException(
-                    string.Format(WorkspacesResources.Destination_type_must_be_a_0_1_2_or_3_but_given_one_is_4,
-                        typeof(TDeclarationNode1).Name, typeof(TDeclarationNode2).Name, typeof(TDeclarationNode3).Name, typeof(TDeclarationNode4).Name, destination.GetType().Name),
-                    nameof(destination));
+                    string.Format(
+                        WorkspacesResources.Destination_type_must_be_a_0_1_2_or_3_but_given_one_is_4,
+                        typeof(TDeclarationNode1).Name,
+                        typeof(TDeclarationNode2).Name,
+                        typeof(TDeclarationNode3).Name,
+                        typeof(TDeclarationNode4).Name,
+                        destination.GetType().Name
+                    ),
+                    nameof(destination)
+                );
             }
         }
 
         private async Task<Document> GetEditAsync(
             CodeGenerationSolutionContext context,
             INamespaceOrTypeSymbol destination,
-            Func<SyntaxNode, TCodeGenerationContextInfo, IList<bool>?, CancellationToken, SyntaxNode> declarationTransform,
-            CancellationToken cancellationToken)
+            Func<
+                SyntaxNode,
+                TCodeGenerationContextInfo,
+                IList<bool>?,
+                CancellationToken,
+                SyntaxNode
+            > declarationTransform,
+            CancellationToken cancellationToken
+        )
         {
-            var (destinationDeclaration, availableIndices) =
-                await FindMostRelevantDeclarationAsync(context.Solution, destination, context.Context.BestLocation, cancellationToken).ConfigureAwait(false);
+            var (destinationDeclaration, availableIndices) = await FindMostRelevantDeclarationAsync(
+                    context.Solution,
+                    destination,
+                    context.Context.BestLocation,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (destinationDeclaration == null)
             {
-                throw new ArgumentException(WorkspacesResources.Could_not_find_location_to_generation_symbol_into);
+                throw new ArgumentException(
+                    WorkspacesResources.Could_not_find_location_to_generation_symbol_into
+                );
             }
 
             var destinationTree = destinationDeclaration.SyntaxTree;
             var oldDocument = context.Solution.GetRequiredDocument(destinationTree);
-            var codeGenOptions = await oldDocument.GetCodeGenerationOptionsAsync(context.FallbackOptions, cancellationToken).ConfigureAwait(false);
-            var info = (TCodeGenerationContextInfo)codeGenOptions.GetInfo(context.Context, destinationDeclaration.SyntaxTree.Options);
-            var transformedDeclaration = declarationTransform(destinationDeclaration, info, availableIndices, cancellationToken);
+            var codeGenOptions = await oldDocument
+                .GetCodeGenerationOptionsAsync(context.FallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var info = (TCodeGenerationContextInfo)
+                codeGenOptions.GetInfo(context.Context, destinationDeclaration.SyntaxTree.Options);
+            var transformedDeclaration = declarationTransform(
+                destinationDeclaration,
+                info,
+                availableIndices,
+                cancellationToken
+            );
 
             var root = await destinationTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             var currentRoot = root.ReplaceNode(destinationDeclaration, transformedDeclaration);
@@ -246,8 +707,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             if (context.Context.AddImports)
             {
-                var addImportsOptions = await newDocument.GetAddImportPlacementOptionsAsync(context.FallbackOptions, cancellationToken).ConfigureAwait(false);
-                newDocument = await ImportAdder.AddImportsFromSymbolAnnotationAsync(newDocument, addImportsOptions, cancellationToken).ConfigureAwait(false);
+                var addImportsOptions = await newDocument
+                    .GetAddImportPlacementOptionsAsync(context.FallbackOptions, cancellationToken)
+                    .ConfigureAwait(false);
+                newDocument = await ImportAdder
+                    .AddImportsFromSymbolAnnotationAsync(
+                        newDocument,
+                        addImportsOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             return newDocument;
@@ -258,7 +727,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<ISymbol> members,
             IList<bool>? availableIndices,
             TCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
             where TDeclarationNode : SyntaxNode
         {
             var membersList = members.ToList();
@@ -269,18 +739,32 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
             // Filter out the members that are implicitly declared.  They're implicit, hence we do
             // not want an explicit declaration. The only exception are fields generated from implicit tuple fields.
-            var filteredMembers = membersList.Where(m => !m.IsImplicitlyDeclared || m.IsTupleField());
+            var filteredMembers = membersList.Where(
+                m => !m.IsImplicitlyDeclared || m.IsTupleField()
+            );
 
             return info.Context.AutoInsertionLocation
-                ? AddMembersToAppropriateLocationInDestination(destination, filteredMembers, availableIndices, info, cancellationToken)
-                : AddMembersToEndOfDestination(destination, filteredMembers, info, cancellationToken);
+                ? AddMembersToAppropriateLocationInDestination(
+                    destination,
+                    filteredMembers,
+                    availableIndices,
+                    info,
+                    cancellationToken
+                )
+                : AddMembersToEndOfDestination(
+                    destination,
+                    filteredMembers,
+                    info,
+                    cancellationToken
+                );
         }
 
         private TDeclarationSyntax AddMembersToEndOfDestination<TDeclarationSyntax>(
             TDeclarationSyntax destination,
             IEnumerable<ISymbol> members,
             TCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
             where TDeclarationSyntax : SyntaxNode
         {
             var newMembers = new List<SyntaxNode>();
@@ -288,7 +772,12 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             foreach (var member in members)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                var newMember = GetNewMember(info, codeGenerationDestination, member, cancellationToken);
+                var newMember = GetNewMember(
+                    info,
+                    codeGenerationDestination,
+                    member,
+                    cancellationToken
+                );
 
                 if (newMember != null)
                 {
@@ -312,7 +801,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             IEnumerable<ISymbol> members,
             IList<bool>? availableIndices,
             TCodeGenerationContextInfo info,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
             where TDeclarationSyntax : SyntaxNode
         {
             var currentDestination = destination;
@@ -320,21 +810,68 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             foreach (var member in members)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                currentDestination = UpdateDestination(availableIndices, info, currentDestination, member, cancellationToken);
+                currentDestination = UpdateDestination(
+                    availableIndices,
+                    info,
+                    currentDestination,
+                    member,
+                    cancellationToken
+                );
             }
 
             return currentDestination;
         }
 
-        private SyntaxNode? GetNewMember(TCodeGenerationContextInfo info, CodeGenerationDestination codeGenerationDestination, ISymbol member, CancellationToken cancellationToken)
-            => member switch
+        private SyntaxNode? GetNewMember(
+            TCodeGenerationContextInfo info,
+            CodeGenerationDestination codeGenerationDestination,
+            ISymbol member,
+            CancellationToken cancellationToken
+        ) =>
+            member switch
             {
-                IEventSymbol @event => CreateEventDeclaration(@event, codeGenerationDestination, info, cancellationToken),
-                IFieldSymbol field => CreateFieldDeclaration(field, codeGenerationDestination, info, cancellationToken),
-                IPropertySymbol property => CreatePropertyDeclaration(property, codeGenerationDestination, info, cancellationToken),
-                IMethodSymbol method => CreateMethodDeclaration(method, codeGenerationDestination, info, cancellationToken),
-                INamedTypeSymbol namedType => CreateNamedTypeDeclaration(namedType, codeGenerationDestination, info, cancellationToken),
-                INamespaceSymbol @namespace => CreateNamespaceDeclaration(@namespace, codeGenerationDestination, info, cancellationToken),
+                IEventSymbol @event
+                    => CreateEventDeclaration(
+                        @event,
+                        codeGenerationDestination,
+                        info,
+                        cancellationToken
+                    ),
+                IFieldSymbol field
+                    => CreateFieldDeclaration(
+                        field,
+                        codeGenerationDestination,
+                        info,
+                        cancellationToken
+                    ),
+                IPropertySymbol property
+                    => CreatePropertyDeclaration(
+                        property,
+                        codeGenerationDestination,
+                        info,
+                        cancellationToken
+                    ),
+                IMethodSymbol method
+                    => CreateMethodDeclaration(
+                        method,
+                        codeGenerationDestination,
+                        info,
+                        cancellationToken
+                    ),
+                INamedTypeSymbol namedType
+                    => CreateNamedTypeDeclaration(
+                        namedType,
+                        codeGenerationDestination,
+                        info,
+                        cancellationToken
+                    ),
+                INamespaceSymbol @namespace
+                    => CreateNamespaceDeclaration(
+                        @namespace,
+                        codeGenerationDestination,
+                        info,
+                        cancellationToken
+                    ),
                 _ => null,
             };
 
@@ -343,16 +880,60 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             TCodeGenerationContextInfo info,
             TDeclarationNode currentDestination,
             ISymbol member,
-            CancellationToken cancellationToken) where TDeclarationNode : SyntaxNode
+            CancellationToken cancellationToken
+        )
+            where TDeclarationNode : SyntaxNode
         {
             return member switch
             {
-                IEventSymbol @event => AddEvent(currentDestination, @event, info, availableIndices, cancellationToken),
-                IFieldSymbol field => AddField(currentDestination, field, info, availableIndices, cancellationToken),
-                IPropertySymbol property => AddProperty(currentDestination, property, info, availableIndices, cancellationToken),
-                IMethodSymbol method => AddMethod(currentDestination, method, info, availableIndices, cancellationToken),
-                INamedTypeSymbol namedType => AddNamedType(currentDestination, namedType, info, availableIndices, cancellationToken),
-                INamespaceSymbol @namespace => AddNamespace(currentDestination, @namespace, info, availableIndices, cancellationToken),
+                IEventSymbol @event
+                    => AddEvent(
+                        currentDestination,
+                        @event,
+                        info,
+                        availableIndices,
+                        cancellationToken
+                    ),
+                IFieldSymbol field
+                    => AddField(
+                        currentDestination,
+                        field,
+                        info,
+                        availableIndices,
+                        cancellationToken
+                    ),
+                IPropertySymbol property
+                    => AddProperty(
+                        currentDestination,
+                        property,
+                        info,
+                        availableIndices,
+                        cancellationToken
+                    ),
+                IMethodSymbol method
+                    => AddMethod(
+                        currentDestination,
+                        method,
+                        info,
+                        availableIndices,
+                        cancellationToken
+                    ),
+                INamedTypeSymbol namedType
+                    => AddNamedType(
+                        currentDestination,
+                        namedType,
+                        info,
+                        availableIndices,
+                        cancellationToken
+                    ),
+                INamespaceSymbol @namespace
+                    => AddNamespace(
+                        currentDestination,
+                        @namespace,
+                        info,
+                        availableIndices,
+                        cancellationToken
+                    ),
                 _ => currentDestination,
             };
         }
@@ -365,90 +946,147 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         protected abstract IComparer<SyntaxNode> GetMemberComparer();
 
-        protected static TCodeGenerationContextInfo CreateContextInfoForMultipleMembers(TCodeGenerationContextInfo info)
+        protected static TCodeGenerationContextInfo CreateContextInfoForMultipleMembers(
+            TCodeGenerationContextInfo info
+        )
         {
             // For now we ignore the afterThisLocation/beforeThisLocation if we're adding
             // multiple members.  In the future it would be nice to appropriately handle this.
             // The difficulty lies with ensuring that we properly understand the position we're
             // inserting into, even as we change the type by adding multiple members.  Not
             // impossible to figure out, but out of scope right now.
-            return (TCodeGenerationContextInfo)info.WithContext(info.Context.With(afterThisLocation: null, beforeThisLocation: null));
+            return (TCodeGenerationContextInfo)
+                info.WithContext(
+                    info.Context.With(afterThisLocation: null, beforeThisLocation: null)
+                );
         }
 
         public virtual Task<Document> AddEventAsync(
-            CodeGenerationSolutionContext context, INamedTypeSymbol destination, IEventSymbol @event, CancellationToken cancellationToken)
+            CodeGenerationSolutionContext context,
+            INamedTypeSymbol destination,
+            IEventSymbol @event,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddEvent(t, @event, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddFieldAsync(CodeGenerationSolutionContext context, INamedTypeSymbol destination, IFieldSymbol field, CancellationToken cancellationToken)
+        public Task<Document> AddFieldAsync(
+            CodeGenerationSolutionContext context,
+            INamedTypeSymbol destination,
+            IFieldSymbol field,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddField(t, field, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddPropertyAsync(CodeGenerationSolutionContext context, INamedTypeSymbol destination, IPropertySymbol property, CancellationToken cancellationToken)
+        public Task<Document> AddPropertyAsync(
+            CodeGenerationSolutionContext context,
+            INamedTypeSymbol destination,
+            IPropertySymbol property,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddProperty(t, property, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddNamedTypeAsync(CodeGenerationSolutionContext context, INamedTypeSymbol destination, INamedTypeSymbol namedType, CancellationToken cancellationToken)
+        public Task<Document> AddNamedTypeAsync(
+            CodeGenerationSolutionContext context,
+            INamedTypeSymbol destination,
+            INamedTypeSymbol namedType,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddNamedType(t, namedType, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddNamedTypeAsync(CodeGenerationSolutionContext context, INamespaceSymbol destination, INamedTypeSymbol namedType, CancellationToken cancellationToken)
+        public Task<Document> AddNamedTypeAsync(
+            CodeGenerationSolutionContext context,
+            INamespaceSymbol destination,
+            INamedTypeSymbol namedType,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddNamedType(t, namedType, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddNamespaceAsync(CodeGenerationSolutionContext context, INamespaceSymbol destination, INamespaceSymbol @namespace, CancellationToken cancellationToken)
+        public Task<Document> AddNamespaceAsync(
+            CodeGenerationSolutionContext context,
+            INamespaceSymbol destination,
+            INamespaceSymbol @namespace,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddNamespace(t, @namespace, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddMethodAsync(CodeGenerationSolutionContext context, INamedTypeSymbol destination, IMethodSymbol method, CancellationToken cancellationToken)
+        public Task<Document> AddMethodAsync(
+            CodeGenerationSolutionContext context,
+            INamedTypeSymbol destination,
+            IMethodSymbol method,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddMethod(t, method, opts, ai, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddMembersAsync(CodeGenerationSolutionContext context, INamedTypeSymbol destination, IEnumerable<ISymbol> members, CancellationToken cancellationToken)
+        public Task<Document> AddMembersAsync(
+            CodeGenerationSolutionContext context,
+            INamedTypeSymbol destination,
+            IEnumerable<ISymbol> members,
+            CancellationToken cancellationToken
+        )
         {
             return GetEditAsync(
                 context,
                 destination,
                 (t, opts, ai, ct) => AddMembers(t, members, ai, opts, ct),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
-        public Task<Document> AddNamespaceOrTypeAsync(CodeGenerationSolutionContext context, INamespaceSymbol destination, INamespaceOrTypeSymbol namespaceOrType, CancellationToken cancellationToken)
+        public Task<Document> AddNamespaceOrTypeAsync(
+            CodeGenerationSolutionContext context,
+            INamespaceSymbol destination,
+            INamespaceOrTypeSymbol namespaceOrType,
+            CancellationToken cancellationToken
+        )
         {
             if (namespaceOrType == null)
             {
@@ -461,25 +1099,39 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             }
             else
             {
-                return AddNamedTypeAsync(context, destination, (INamedTypeSymbol)namespaceOrType, cancellationToken);
+                return AddNamedTypeAsync(
+                    context,
+                    destination,
+                    (INamedTypeSymbol)namespaceOrType,
+                    cancellationToken
+                );
             }
         }
 
-        protected static void CheckLocation(SyntaxNode destinationMember, [NotNull] Location? location)
+        protected static void CheckLocation(
+            SyntaxNode destinationMember,
+            [NotNull] Location? location
+        )
         {
             if (location == null)
             {
-                throw new ArgumentException(WorkspacesResources.No_location_provided_to_add_statements_to);
+                throw new ArgumentException(
+                    WorkspacesResources.No_location_provided_to_add_statements_to
+                );
             }
 
             if (!location.IsInSource)
             {
-                throw new ArgumentException(WorkspacesResources.Destination_location_was_not_in_source);
+                throw new ArgumentException(
+                    WorkspacesResources.Destination_location_was_not_in_source
+                );
             }
 
             if (location.SourceTree != destinationMember.SyntaxTree)
             {
-                throw new ArgumentException(WorkspacesResources.Destination_location_was_from_a_different_tree);
+                throw new ArgumentException(
+                    WorkspacesResources.Destination_location_was_from_a_different_tree
+                );
             }
         }
 
@@ -487,7 +1139,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             SyntaxNode attributeList,
             Func<SyntaxTrivia, bool> isEndOfLineTrivia,
             out int positionOfRemovedNode,
-            out IEnumerable<SyntaxTrivia> triviaOfRemovedNode)
+            out IEnumerable<SyntaxTrivia> triviaOfRemovedNode
+        )
         {
             positionOfRemovedNode = attributeList.FullSpan.Start;
             var leading = attributeList.GetLeadingTrivia();
@@ -507,14 +1160,19 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             SyntaxNode attributeToRemove,
             Func<SyntaxToken, bool> isComma,
             out int positionOfRemovedNode,
-            out IEnumerable<SyntaxTrivia> triviaOfRemovedNode)
+            out IEnumerable<SyntaxTrivia> triviaOfRemovedNode
+        )
         {
             positionOfRemovedNode = attributeToRemove.FullSpan.Start;
             var root = attributeToRemove.SyntaxTree.GetRoot();
             var previousToken = root.FindToken(attributeToRemove.FullSpan.Start - 1);
-            var leading = isComma(previousToken) ? previousToken.LeadingTrivia : attributeToRemove.GetLeadingTrivia();
+            var leading = isComma(previousToken)
+                ? previousToken.LeadingTrivia
+                : attributeToRemove.GetLeadingTrivia();
             var nextToken = root.FindToken(attributeToRemove.FullSpan.End + 1);
-            var trailing = isComma(nextToken) ? nextToken.TrailingTrivia : attributeToRemove.GetTrailingTrivia();
+            var trailing = isComma(nextToken)
+                ? nextToken.TrailingTrivia
+                : attributeToRemove.GetTrailingTrivia();
             triviaOfRemovedNode = leading.Concat(trailing);
         }
 
@@ -524,7 +1182,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             if (trivia.Any())
             {
                 var tokenToInsertTrivia = node.FindToken(position);
-                var tokenWithInsertedTrivia = tokenToInsertTrivia.WithLeadingTrivia(trivia.Concat(tokenToInsertTrivia.LeadingTrivia));
+                var tokenWithInsertedTrivia = tokenToInsertTrivia.WithLeadingTrivia(
+                    trivia.Concat(tokenToInsertTrivia.LeadingTrivia)
+                );
                 return node.ReplaceToken(tokenToInsertTrivia, tokenWithInsertedTrivia);
             }
 
@@ -532,8 +1192,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         }
 
         protected static SyntaxTokenList GetUpdatedDeclarationAccessibilityModifiers(
-            ArrayBuilder<SyntaxToken> newModifierTokens, SyntaxTokenList modifiersList,
-            Func<SyntaxToken, bool> isAccessibilityModifier)
+            ArrayBuilder<SyntaxToken> newModifierTokens,
+            SyntaxTokenList modifiersList,
+            Func<SyntaxToken, bool> isAccessibilityModifier
+        )
         {
             using var _ = ArrayBuilder<SyntaxToken>.GetInstance(out var updatedModifiersList);
             var anyAccessModifierSeen = false;

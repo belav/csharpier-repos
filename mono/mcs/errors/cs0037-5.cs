@@ -3,6 +3,5 @@
 
 class C
 {
-	object [,] i = new int [2,1] { { null }, { 2 } };
+    object[,] i = new int[2, 1] { { null }, { 2 } };
 }
- 

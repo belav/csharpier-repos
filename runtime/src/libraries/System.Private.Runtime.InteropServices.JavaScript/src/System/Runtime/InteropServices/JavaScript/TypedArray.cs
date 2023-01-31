@@ -20,7 +20,8 @@ namespace System.Runtime.InteropServices.JavaScript
         TypedArrayTypeCode GetTypedArrayType();
     }
 
-    public interface ITypedArray<T, U> where U : struct
+    public interface ITypedArray<T, U>
+        where U : struct
     {
         T Slice();
         T Slice(int begin);
@@ -49,34 +50,34 @@ namespace System.Runtime.InteropServices.JavaScript
     /// </summary>
     public abstract class TypedArray<T, U> : CoreObject, ITypedArray, ITypedArray<T, U>
         where U : struct
-        where T: JSObject
+        where T : JSObject
     {
-        protected TypedArray() : base(typeof(T).Name)
-        { }
+        protected TypedArray()
+            : base(typeof(T).Name) { }
 
-        protected TypedArray(int length) : base(typeof(T).Name, length)
-        { }
+        protected TypedArray(int length)
+            : base(typeof(T).Name, length) { }
 
-        protected TypedArray(ArrayBuffer buffer) : base(typeof(T).Name, buffer)
-        { }
+        protected TypedArray(ArrayBuffer buffer)
+            : base(typeof(T).Name, buffer) { }
 
-        protected TypedArray(ArrayBuffer buffer, int byteOffset) : base(typeof(T).Name, buffer, byteOffset)
-        { }
+        protected TypedArray(ArrayBuffer buffer, int byteOffset)
+            : base(typeof(T).Name, buffer, byteOffset) { }
 
-        protected TypedArray(ArrayBuffer buffer, int byteOffset, int length) : base(typeof(T).Name, buffer, byteOffset, length)
-        { }
+        protected TypedArray(ArrayBuffer buffer, int byteOffset, int length)
+            : base(typeof(T).Name, buffer, byteOffset, length) { }
 
-        protected TypedArray(SharedArrayBuffer buffer) : base(typeof(T).Name, buffer)
-        { }
+        protected TypedArray(SharedArrayBuffer buffer)
+            : base(typeof(T).Name, buffer) { }
 
-        protected TypedArray(SharedArrayBuffer buffer, int byteOffset) : base(typeof(T).Name, buffer, byteOffset)
-        { }
+        protected TypedArray(SharedArrayBuffer buffer, int byteOffset)
+            : base(typeof(T).Name, buffer, byteOffset) { }
 
-        protected TypedArray(SharedArrayBuffer buffer, int byteOffset, int length) : base(typeof(T).Name, buffer, byteOffset, length)
-        { }
+        protected TypedArray(SharedArrayBuffer buffer, int byteOffset, int length)
+            : base(typeof(T).Name, buffer, byteOffset, length) { }
 
-        internal TypedArray(IntPtr jsHandle) : base(jsHandle)
-        { }
+        internal TypedArray(IntPtr jsHandle)
+            : base(jsHandle) { }
 
         public TypedArrayTypeCode GetTypedArrayType()
         {
@@ -111,20 +112,29 @@ namespace System.Runtime.InteropServices.JavaScript
         public ArrayBuffer Buffer => (ArrayBuffer)GetObjectProperty("buffer");
 
         public void Fill(U value) => Invoke("fill", value);
+
         public void Fill(U value, int start) => Invoke("fill", value, start);
+
         public void Fill(U value, int start, int end) => Invoke("fill", value, start, end);
 
         public void Set(Array array) => Invoke("set", array);
+
         public void Set(Array array, int offset) => Invoke("set", array, offset);
+
         public void Set(ITypedArray typedArray) => Invoke("set", typedArray);
+
         public void Set(ITypedArray typedArray, int offset) => Invoke("set", typedArray, offset);
 
         public T Slice() => (T)Invoke("slice");
+
         public T Slice(int begin) => (T)Invoke("slice", begin);
+
         public T Slice(int begin, int end) => (T)Invoke("slice", begin, end);
 
         public T SubArray() => (T)Invoke("subarray");
+
         public T SubArray(int begin) => (T)Invoke("subarray", begin);
+
         public T SubArray(int begin, int end) => (T)Invoke("subarray", begin, end);
 
         public U? this[int i]
@@ -149,7 +159,6 @@ namespace System.Runtime.InteropServices.JavaScript
 
                 if (exception != 0)
                     throw new JSException((string)res);
-
             }
         }
 
@@ -177,25 +186,33 @@ namespace System.Runtime.InteropServices.JavaScript
             // source has to be instantiated.
             if (span == null)
             {
-                throw new System.ArgumentException(SR.Format(SR.ArgumentCannotBeNull, nameof(span)));
+                throw new System.ArgumentException(
+                    SR.Format(SR.ArgumentCannotBeNull, nameof(span))
+                );
             }
 
             TypedArrayTypeCode type = (TypedArrayTypeCode)Type.GetTypeCode(typeof(U));
             // Special case for Uint8ClampedArray, a clamped array which represents an array of 8-bit unsigned integers clamped to 0-255;
             if (type == TypedArrayTypeCode.Uint8Array && typeof(T) == typeof(Uint8ClampedArray))
-                type = TypedArrayTypeCode.Uint8ClampedArray;  // This is only passed to the JavaScript side so it knows it will be a Uint8ClampedArray
+                type = TypedArrayTypeCode.Uint8ClampedArray; // This is only passed to the JavaScript side so it knows it will be a Uint8ClampedArray
 
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop.Runtime.TypedArrayFrom((int)ptr, 0, span.Length, Unsafe.SizeOf<U>(), (int)type, out int exception);
+                object res = Interop.Runtime.TypedArrayFrom(
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    (int)type,
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 var r = (T)res;
                 r.ReleaseInFlight();
                 return r;
             }
-
         }
 
         public unsafe int CopyTo(Span<U> span)
@@ -205,7 +222,14 @@ namespace System.Runtime.InteropServices.JavaScript
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop.Runtime.TypedArrayCopyTo(JSHandle, (int)ptr, 0, span.Length, Unsafe.SizeOf<U>(), out int exception);
+                object res = Interop.Runtime.TypedArrayCopyTo(
+                    JSHandle,
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 return (int)res / Unsafe.SizeOf<U>();
@@ -219,13 +243,22 @@ namespace System.Runtime.InteropServices.JavaScript
             // source has to be instantiated.
             if (span == null || span.Length == 0)
             {
-                throw new System.ArgumentException(SR.Format(SR.ArgumentCannotBeNullWithLength, nameof(span)));
+                throw new System.ArgumentException(
+                    SR.Format(SR.ArgumentCannotBeNullWithLength, nameof(span))
+                );
             }
 
             ReadOnlySpan<byte> bytes = MemoryMarshal.AsBytes(span);
             fixed (byte* ptr = bytes)
             {
-                object res = Interop.Runtime.TypedArrayCopyFrom(JSHandle, (int)ptr, 0, span.Length, Unsafe.SizeOf<U>(), out int exception);
+                object res = Interop.Runtime.TypedArrayCopyFrom(
+                    JSHandle,
+                    (int)ptr,
+                    0,
+                    span.Length,
+                    Unsafe.SizeOf<U>(),
+                    out int exception
+                );
                 if (exception != 0)
                     throw new JSException((string)res);
                 return (int)res / Unsafe.SizeOf<U>();

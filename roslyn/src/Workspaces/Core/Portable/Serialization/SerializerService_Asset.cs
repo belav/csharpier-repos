@@ -19,18 +19,35 @@ namespace Microsoft.CodeAnalysis.Serialization
     /// </summary>
     internal partial class SerializerService
     {
-        public void SerializeSourceText(SerializableSourceText text, ObjectWriter writer, SolutionReplicationContext context, CancellationToken cancellationToken)
+        public void SerializeSourceText(
+            SerializableSourceText text,
+            ObjectWriter writer,
+            SolutionReplicationContext context,
+            CancellationToken cancellationToken
+        )
         {
             text.Serialize(writer, context, cancellationToken);
         }
 
-        private SourceText DeserializeSourceText(ObjectReader reader, CancellationToken cancellationToken)
+        private SourceText DeserializeSourceText(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
-            var serializableSourceText = SerializableSourceText.Deserialize(reader, _storageService, _textService, cancellationToken);
+            var serializableSourceText = SerializableSourceText.Deserialize(
+                reader,
+                _storageService,
+                _textService,
+                cancellationToken
+            );
             return serializableSourceText.GetText(cancellationToken);
         }
 
-        public void SerializeCompilationOptions(CompilationOptions options, ObjectWriter writer, CancellationToken cancellationToken)
+        public void SerializeCompilationOptions(
+            CompilationOptions options,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -43,7 +60,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             service.WriteTo(options, writer, cancellationToken);
         }
 
-        private CompilationOptions DeserializeCompilationOptions(ObjectReader reader, CancellationToken cancellationToken)
+        private CompilationOptions DeserializeCompilationOptions(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -64,7 +84,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             service.WriteTo(options, writer);
         }
 
-        private ParseOptions DeserializeParseOptions(ObjectReader reader, CancellationToken cancellationToken)
+        private ParseOptions DeserializeParseOptions(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -74,7 +97,11 @@ namespace Microsoft.CodeAnalysis.Serialization
             return service.ReadParseOptionsFrom(reader, cancellationToken);
         }
 
-        public void SerializeProjectReference(ProjectReference reference, ObjectWriter writer, CancellationToken cancellationToken)
+        public void SerializeProjectReference(
+            ProjectReference reference,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -83,7 +110,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             writer.WriteBoolean(reference.EmbedInteropTypes);
         }
 
-        private static ProjectReference DeserializeProjectReference(ObjectReader reader, CancellationToken cancellationToken)
+        private static ProjectReference DeserializeProjectReference(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -91,28 +121,47 @@ namespace Microsoft.CodeAnalysis.Serialization
             var aliases = reader.ReadArray<string>();
             var embedInteropTypes = reader.ReadBoolean();
 
-            return new ProjectReference(projectId, aliases.ToImmutableArrayOrEmpty(), embedInteropTypes);
+            return new ProjectReference(
+                projectId,
+                aliases.ToImmutableArrayOrEmpty(),
+                embedInteropTypes
+            );
         }
 
-        public void SerializeMetadataReference(MetadataReference reference, ObjectWriter writer, SolutionReplicationContext context, CancellationToken cancellationToken)
+        public void SerializeMetadataReference(
+            MetadataReference reference,
+            ObjectWriter writer,
+            SolutionReplicationContext context,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             WriteMetadataReferenceTo(reference, writer, context, cancellationToken);
         }
 
-        private MetadataReference DeserializeMetadataReference(ObjectReader reader, CancellationToken cancellationToken)
+        private MetadataReference DeserializeMetadataReference(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             return ReadMetadataReferenceFrom(reader, cancellationToken);
         }
 
-        public void SerializeAnalyzerReference(AnalyzerReference reference, ObjectWriter writer, CancellationToken cancellationToken)
+        public void SerializeAnalyzerReference(
+            AnalyzerReference reference,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             WriteAnalyzerReferenceTo(reference, writer, cancellationToken);
         }
 
-        private AnalyzerReference DeserializeAnalyzerReference(ObjectReader reader, CancellationToken cancellationToken)
+        private AnalyzerReference DeserializeAnalyzerReference(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             return ReadAnalyzerReferenceFrom(reader, cancellationToken);

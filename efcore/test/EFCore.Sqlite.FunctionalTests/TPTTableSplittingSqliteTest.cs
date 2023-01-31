@@ -6,10 +6,7 @@ namespace Microsoft.EntityFrameworkCore;
 public class TPTTableSplittingSqliteTest : TPTTableSplittingTestBase
 {
     public TPTTableSplittingSqliteTest(ITestOutputHelper testOutputHelper)
-        : base(testOutputHelper)
-    {
-    }
+        : base(testOutputHelper) { }
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqliteTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 }

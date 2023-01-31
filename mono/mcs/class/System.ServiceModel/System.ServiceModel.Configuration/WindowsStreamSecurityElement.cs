@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -54,37 +54,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class WindowsStreamSecurityElement
-		 : BindingElementExtensionElement
-	{
-		public WindowsStreamSecurityElement () {
-		}
+    public sealed class WindowsStreamSecurityElement : BindingElementExtensionElement
+    {
+        public WindowsStreamSecurityElement() { }
 
+        // Properties
 
-		// Properties
+        public override Type BindingElementType
+        {
+            get { return typeof(WindowsStreamSecurityBindingElement); }
+        }
 
-		public override Type BindingElementType {
-			get { return typeof (WindowsStreamSecurityBindingElement); }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        [ConfigurationProperty(
+            "protectionLevel",
+            DefaultValue = "EncryptAndSign",
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public ProtectionLevel ProtectionLevel
+        {
+            get { return (ProtectionLevel)base["protectionLevel"]; }
+            set { base["protectionLevel"] = value; }
+        }
 
-		[ConfigurationProperty ("protectionLevel",
-			 DefaultValue = "EncryptAndSign",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ProtectionLevel ProtectionLevel {
-			get { return (ProtectionLevel) base ["protectionLevel"]; }
-			set { base ["protectionLevel"] = value; }
-		}
-
-
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
-
-	}
-
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -20,15 +20,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
 {
     public class RunCodeActionsTests : AbstractLanguageServerProtocolTests
     {
-        public RunCodeActionsTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public RunCodeActionsTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [WpfFact(Skip = "https://github.com/dotnet/roslyn/issues/65303")]
         public async Task TestRunCodeActions()
         {
             var markup =
-@"class A
+                @"class A
 {
     class {|caret:|}B
     {
@@ -36,7 +35,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
 }";
 
             var expectedTextForB =
-@"partial class A
+                @"partial class A
 {
     class B
     {
@@ -46,33 +45,40 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             await using var testLspServer = await CreateTestLspServerAsync(markup);
             var caretLocation = testLspServer.GetLocations("caret").Single();
 
-            var commandArgument = new CodeActionResolveData(string.Format(FeaturesResources.Move_type_to_0, "B.cs"), customTags: ImmutableArray<string>.Empty, caretLocation.Range, new LSP.TextDocumentIdentifier
-            {
-                Uri = caretLocation.Uri
-            });
+            var commandArgument = new CodeActionResolveData(
+                string.Format(FeaturesResources.Move_type_to_0, "B.cs"),
+                customTags: ImmutableArray<string>.Empty,
+                caretLocation.Range,
+                new LSP.TextDocumentIdentifier { Uri = caretLocation.Uri }
+            );
 
             var results = await ExecuteRunCodeActionCommandAsync(testLspServer, commandArgument);
 
-            var documentForB = testLspServer.TestWorkspace.CurrentSolution.Projects.Single().Documents.Single(doc => doc.Name.Equals("B.cs", StringComparison.OrdinalIgnoreCase));
+            var documentForB = testLspServer.TestWorkspace.CurrentSolution.Projects
+                .Single()
+                .Documents.Single(
+                    doc => doc.Name.Equals("B.cs", StringComparison.OrdinalIgnoreCase)
+                );
             var textForB = await documentForB.GetTextAsync();
             Assert.Equal(expectedTextForB, textForB.ToString());
         }
 
         private static async Task<bool> ExecuteRunCodeActionCommandAsync(
             TestLspServer testLspServer,
-            CodeActionResolveData codeActionData)
+            CodeActionResolveData codeActionData
+        )
         {
             var command = new LSP.ExecuteCommandParams
             {
                 Command = CodeActionsHandler.RunCodeActionCommandName,
-                Arguments = new object[]
-                {
-                    JToken.FromObject(codeActionData)
-                }
+                Arguments = new object[] { JToken.FromObject(codeActionData) }
             };
 
             var result = await testLspServer.ExecuteRequestAsync<LSP.ExecuteCommandParams, object>(
-                LSP.Methods.WorkspaceExecuteCommandName, command, CancellationToken.None);
+                LSP.Methods.WorkspaceExecuteCommandName,
+                command,
+                CancellationToken.None
+            );
             Contract.ThrowIfNull(result);
             return (bool)result;
         }

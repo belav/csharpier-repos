@@ -6,8 +6,8 @@ using System;
 
 public class Test
 {
-	static void Main ()
-	{
-		var c = new { new Test () };
-	}
+    static void Main()
+    {
+        var c = new { new Test() };
+    }
 }

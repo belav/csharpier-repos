@@ -3,8 +3,7 @@
 
 using System.Runtime.InteropServices;
 
-class Test {
-	void f ([DefaultParameterValue (typeof (object))] object x)
-	{
-	}
+class Test
+{
+    void f([DefaultParameterValue(typeof(object))] object x) { }
 }

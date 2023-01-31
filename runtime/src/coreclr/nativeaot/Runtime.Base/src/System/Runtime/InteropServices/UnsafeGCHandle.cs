@@ -46,7 +46,6 @@ namespace System.Runtime.InteropServices
 #pragma warning restore 8500
 #endif
             }
-
             set
             {
                 Debug.Assert(IsAllocated, "handle isn't initialized");
@@ -57,10 +56,7 @@ namespace System.Runtime.InteropServices
         // Determine whether this handle has been allocated or not.
         public bool IsAllocated
         {
-            get
-            {
-                return _handle != default(IntPtr);
-            }
+            get { return _handle != default(IntPtr); }
         }
     }
 }

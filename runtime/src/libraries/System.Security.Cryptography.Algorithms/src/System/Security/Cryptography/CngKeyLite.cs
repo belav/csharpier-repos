@@ -17,13 +17,13 @@ namespace System.Security.Cryptography
     {
         internal static class KeyPropertyName
         {
-            internal const string Algorithm = "Algorithm Name";                 // NCRYPT_ALGORITHM_PROPERTY
-            internal const string AlgorithmGroup = "Algorithm Group";           // NCRYPT_ALGORITHM_GROUP_PROPERTY
-            internal const string ECCCurveName = "ECCCurveName";                // NCRYPT_ECC_CURVE_NAME
-            internal const string ECCParameters = "ECCParameters";              // BCRYPT_ECC_PARAMETERS
-            internal const string ExportPolicy = "Export Policy";               // NCRYPT_EXPORT_POLICY_PROPERTY
-            internal const string Length = "Length";                            // NCRYPT_LENGTH_PROPERTY
-            internal const string PublicKeyLength = "PublicKeyLength";          // NCRYPT_PUBLIC_KEY_LENGTH (Win10+)
+            internal const string Algorithm = "Algorithm Name"; // NCRYPT_ALGORITHM_PROPERTY
+            internal const string AlgorithmGroup = "Algorithm Group"; // NCRYPT_ALGORITHM_GROUP_PROPERTY
+            internal const string ECCCurveName = "ECCCurveName"; // NCRYPT_ECC_CURVE_NAME
+            internal const string ECCParameters = "ECCParameters"; // BCRYPT_ECC_PARAMETERS
+            internal const string ExportPolicy = "Export Policy"; // NCRYPT_EXPORT_POLICY_PROPERTY
+            internal const string Length = "Length"; // NCRYPT_LENGTH_PROPERTY
+            internal const string PublicKeyLength = "PublicKeyLength"; // NCRYPT_PUBLIC_KEY_LENGTH (Win10+)
         }
 
         private static readonly SafeNCryptProviderHandle s_microsoftSoftwareProviderHandle =
@@ -33,7 +33,8 @@ namespace System.Security.Cryptography
             string blobType,
             ReadOnlySpan<byte> keyBlob,
             bool encrypted = false,
-            ReadOnlySpan<char> password = default)
+            ReadOnlySpan<char> password = default
+        )
         {
             SafeNCryptKeyHandle keyHandle;
             ErrorCode errorCode;
@@ -42,7 +43,8 @@ namespace System.Security.Cryptography
             {
                 using (var stringHandle = new SafeUnicodeStringHandle(password))
                 {
-                    Interop.NCrypt.NCryptBuffer* buffers = stackalloc Interop.NCrypt.NCryptBuffer[1];
+                    Interop.NCrypt.NCryptBuffer* buffers =
+                        stackalloc Interop.NCrypt.NCryptBuffer[1];
 
                     buffers[0] = new Interop.NCrypt.NCryptBuffer
                     {
@@ -71,7 +73,8 @@ namespace System.Security.Cryptography
                         out keyHandle,
                         ref MemoryMarshal.GetReference(keyBlob),
                         keyBlob.Length,
-                        0);
+                        0
+                    );
                 }
             }
             else
@@ -84,7 +87,8 @@ namespace System.Security.Cryptography
                     out keyHandle,
                     ref MemoryMarshal.GetReference(keyBlob),
                     keyBlob.Length,
-                    0);
+                    0
+                );
             }
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -98,11 +102,20 @@ namespace System.Security.Cryptography
             return keyHandle;
         }
 
-        internal static SafeNCryptKeyHandle ImportKeyBlob(string blobType, byte[] keyBlob, string curveName)
+        internal static SafeNCryptKeyHandle ImportKeyBlob(
+            string blobType,
+            byte[] keyBlob,
+            string curveName
+        )
         {
             SafeNCryptKeyHandle keyHandle;
 
-            keyHandle = ECCng.ImportKeyBlob(blobType, keyBlob, curveName, s_microsoftSoftwareProviderHandle);
+            keyHandle = ECCng.ImportKeyBlob(
+                blobType,
+                keyBlob,
+                curveName,
+                s_microsoftSoftwareProviderHandle
+            );
 
             Debug.Assert(keyHandle != null);
 
@@ -124,7 +137,8 @@ namespace System.Security.Cryptography
                 null,
                 0,
                 out numBytesNeeded,
-                0);
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -147,7 +161,8 @@ namespace System.Security.Cryptography
                 ref buffer[0],
                 buffer.Length,
                 out numBytesNeeded,
-                0);
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -169,7 +184,8 @@ namespace System.Security.Cryptography
             SafeNCryptKeyHandle keyHandle,
             string blobType,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (destination.IsEmpty)
             {
@@ -188,7 +204,8 @@ namespace System.Security.Cryptography
                 ref MemoryMarshal.GetReference(empty),
                 empty.Length,
                 out int written,
-                0);
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -215,7 +232,8 @@ namespace System.Security.Cryptography
                 ref MemoryMarshal.GetReference(destination),
                 destination.Length,
                 out written,
-                0);
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -229,7 +247,8 @@ namespace System.Security.Cryptography
         internal static byte[] ExportPkcs8KeyBlob(
             SafeNCryptKeyHandle keyHandle,
             ReadOnlySpan<char> password,
-            int kdfCount)
+            int kdfCount
+        )
         {
             bool ret = ExportPkcs8KeyBlob(
                 true,
@@ -238,7 +257,8 @@ namespace System.Security.Cryptography
                 kdfCount,
                 Span<byte>.Empty,
                 out _,
-                out byte[]? allocated);
+                out byte[]? allocated
+            );
 
             Debug.Assert(ret);
             return allocated!;
@@ -249,7 +269,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             int kdfCount,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return ExportPkcs8KeyBlob(
                 false,
@@ -258,7 +279,8 @@ namespace System.Security.Cryptography
                 kdfCount,
                 destination,
                 out bytesWritten,
-                out _);
+                out _
+            );
         }
 
         // The Windows APIs for OID strings are ASCII-only
@@ -272,16 +294,21 @@ namespace System.Security.Cryptography
             int kdfCount,
             Span<byte> destination,
             out int bytesWritten,
-            out byte[]? allocated)
+            out byte[]? allocated
+        )
         {
             using (SafeUnicodeStringHandle stringHandle = new SafeUnicodeStringHandle(password))
             {
                 fixed (byte* oidPtr = s_pkcs12TripleDesOidBytes)
                 {
-                    Interop.NCrypt.NCryptBuffer* buffers = stackalloc Interop.NCrypt.NCryptBuffer[3];
+                    Interop.NCrypt.NCryptBuffer* buffers =
+                        stackalloc Interop.NCrypt.NCryptBuffer[3];
 
                     Interop.NCrypt.PBE_PARAMS pbeParams = default;
-                    Span<byte> salt = new Span<byte>(pbeParams.rgbSalt, Interop.NCrypt.PBE_PARAMS.RgbSaltSize);
+                    Span<byte> salt = new Span<byte>(
+                        pbeParams.rgbSalt,
+                        Interop.NCrypt.PBE_PARAMS.RgbSaltSize
+                    );
                     RandomNumberGenerator.Fill(salt);
                     pbeParams.Params.cbSalt = salt.Length;
                     pbeParams.Params.iIterations = kdfCount;
@@ -329,7 +356,8 @@ namespace System.Security.Cryptography
                         ref MemoryMarshal.GetReference(empty),
                         0,
                         out int numBytesNeeded,
-                        0);
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -357,7 +385,8 @@ namespace System.Security.Cryptography
                         ref MemoryMarshal.GetReference(destination),
                         destination.Length,
                         out numBytesNeeded,
-                        0);
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -389,7 +418,8 @@ namespace System.Security.Cryptography
                 algorithm,
                 null,
                 0,
-                CngKeyCreationOptions.None);
+                CngKeyCreationOptions.None
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -411,7 +441,10 @@ namespace System.Security.Cryptography
             return keyHandle;
         }
 
-        internal static SafeNCryptKeyHandle GenerateNewExportableKey(string algorithm, string curveName)
+        internal static SafeNCryptKeyHandle GenerateNewExportableKey(
+            string algorithm,
+            string curveName
+        )
         {
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
@@ -422,7 +455,8 @@ namespace System.Security.Cryptography
                 algorithm,
                 null,
                 0,
-                CngKeyCreationOptions.None);
+                CngKeyCreationOptions.None
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -444,7 +478,10 @@ namespace System.Security.Cryptography
             return keyHandle;
         }
 
-        internal static SafeNCryptKeyHandle GenerateNewExportableKey(string algorithm, ref ECCurve explicitCurve)
+        internal static SafeNCryptKeyHandle GenerateNewExportableKey(
+            string algorithm,
+            ref ECCurve explicitCurve
+        )
         {
             // Despite the function being create "persisted" key, since we pass a null name it's
             // actually ephemeral.
@@ -455,7 +492,8 @@ namespace System.Security.Cryptography
                 algorithm,
                 null,
                 0,
-                CngKeyCreationOptions.None);
+                CngKeyCreationOptions.None
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -482,7 +520,6 @@ namespace System.Security.Cryptography
         {
             Debug.Assert(!keyHandle.IsInvalid);
             CngExportPolicies exportPolicy = CngExportPolicies.AllowPlaintextExport;
-
             unsafe
             {
                 ErrorCode errorCode = Interop.NCrypt.NCryptSetProperty(
@@ -490,7 +527,8 @@ namespace System.Security.Cryptography
                     KeyPropertyName.ExportPolicy,
                     &exportPolicy,
                     sizeof(CngExportPolicies),
-                    CngPropertyOptions.Persist);
+                    CngPropertyOptions.Persist
+                );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -509,7 +547,8 @@ namespace System.Security.Cryptography
                     KeyPropertyName.Length,
                     &keySize,
                     sizeof(int),
-                    CngPropertyOptions.Persist);
+                    CngPropertyOptions.Persist
+                );
 
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
                 {
@@ -527,7 +566,8 @@ namespace System.Security.Cryptography
             ErrorCode errorCode = Interop.NCrypt.NCryptGetIntProperty(
                 keyHandle,
                 KeyPropertyName.PublicKeyLength,
-                ref keySize);
+                ref keySize
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -535,7 +575,8 @@ namespace System.Security.Cryptography
                 errorCode = Interop.NCrypt.NCryptGetIntProperty(
                     keyHandle,
                     KeyPropertyName.Length,
-                    ref keySize);
+                    ref keySize
+                );
             }
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -549,7 +590,11 @@ namespace System.Security.Cryptography
         private static SafeNCryptProviderHandle OpenNCryptProvider(string providerName)
         {
             SafeNCryptProviderHandle providerHandle;
-            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(out providerHandle, providerName, 0);
+            ErrorCode errorCode = Interop.NCrypt.NCryptOpenStorageProvider(
+                out providerHandle,
+                providerName,
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -567,13 +612,24 @@ namespace System.Security.Cryptography
         /// null - if property not defined on key.
         /// throws - for any other type of error.
         /// </returns>
-        private static byte[]? GetProperty(SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
+        private static byte[]? GetProperty(
+            SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        )
         {
             Debug.Assert(!ncryptHandle.IsInvalid);
             unsafe
             {
                 int numBytesNeeded;
-                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(ncryptHandle, propertyName, null, 0, out numBytesNeeded, options);
+                ErrorCode errorCode = Interop.NCrypt.NCryptGetProperty(
+                    ncryptHandle,
+                    propertyName,
+                    null,
+                    0,
+                    out numBytesNeeded,
+                    options
+                );
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
                 if (errorCode != ErrorCode.ERROR_SUCCESS)
@@ -582,7 +638,14 @@ namespace System.Security.Cryptography
                 byte[] propertyValue = new byte[numBytesNeeded];
                 fixed (byte* pPropertyValue = propertyValue)
                 {
-                    errorCode = Interop.NCrypt.NCryptGetProperty(ncryptHandle, propertyName, pPropertyValue, propertyValue.Length, out numBytesNeeded, options);
+                    errorCode = Interop.NCrypt.NCryptGetProperty(
+                        ncryptHandle,
+                        propertyName,
+                        pPropertyValue,
+                        propertyValue.Length,
+                        out numBytesNeeded,
+                        options
+                    );
                 }
                 if (errorCode == ErrorCode.NTE_NOT_FOUND)
                     return null;
@@ -598,15 +661,18 @@ namespace System.Security.Cryptography
         /// Retrieve a well-known CNG string property. (Note: .NET Framework compat: this helper likes to return special values rather than throw exceptions for missing
         /// or ill-formatted property values. Only use it for well-known properties that are unlikely to be ill-formatted.)
         /// </summary>
-        internal static string? GetPropertyAsString(SafeNCryptHandle ncryptHandle, string propertyName, CngPropertyOptions options)
+        internal static string? GetPropertyAsString(
+            SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            CngPropertyOptions options
+        )
         {
             Debug.Assert(!ncryptHandle.IsInvalid);
             byte[]? value = GetProperty(ncryptHandle, propertyName, options);
             if (value == null)
-                return null;   // .NET Framework compat: return null if key not present.
+                return null; // .NET Framework compat: return null if key not present.
             if (value.Length == 0)
                 return string.Empty; // .NET Framework compat: return empty if property value is 0-length.
-
             unsafe
             {
                 fixed (byte* pValue = &value[0])
@@ -620,7 +686,11 @@ namespace System.Security.Cryptography
         internal static string? GetCurveName(SafeNCryptHandle ncryptHandle)
         {
             Debug.Assert(!ncryptHandle.IsInvalid);
-            return GetPropertyAsString(ncryptHandle, KeyPropertyName.ECCCurveName, CngPropertyOptions.None);
+            return GetPropertyAsString(
+                ncryptHandle,
+                KeyPropertyName.ECCCurveName,
+                CngPropertyOptions.None
+            );
         }
 
         internal static void SetCurveName(SafeNCryptHandle keyHandle, string curveName)
@@ -628,12 +698,22 @@ namespace System.Security.Cryptography
             unsafe
             {
                 byte[] curveNameBytes = new byte[(curveName.Length + 1) * sizeof(char)]; // +1 to add trailing null
-                System.Text.Encoding.Unicode.GetBytes(curveName, 0, curveName.Length, curveNameBytes, 0);
+                System.Text.Encoding.Unicode.GetBytes(
+                    curveName,
+                    0,
+                    curveName.Length,
+                    curveNameBytes,
+                    0
+                );
                 SetProperty(keyHandle, KeyPropertyName.ECCCurveName, curveNameBytes);
             }
         }
 
-        private static void SetProperty(SafeNCryptHandle ncryptHandle, string propertyName, byte[] value)
+        private static void SetProperty(
+            SafeNCryptHandle ncryptHandle,
+            string propertyName,
+            byte[] value
+        )
         {
             Debug.Assert(!ncryptHandle.IsInvalid);
             unsafe
@@ -645,7 +725,8 @@ namespace System.Security.Cryptography
                         propertyName,
                         pBlob,
                         value.Length,
-                        CngPropertyOptions.None);
+                        CngPropertyOptions.None
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -661,7 +742,7 @@ namespace System.Security.Cryptography
     internal enum CngPropertyOptions : int
     {
         None = 0,
-        Persist = unchecked((int)0x80000000),     //NCRYPT_PERSIST_FLAG (The property should be persisted.)
+        Persist = unchecked((int)0x80000000), //NCRYPT_PERSIST_FLAG (The property should be persisted.)
     }
 
     // Limited version of CngKeyCreationOptions from the Cng contract.
@@ -683,7 +764,7 @@ namespace System.Security.Cryptography
     internal enum CngExportPolicies : int
     {
         None = 0x00000000,
-        AllowPlaintextExport = 0x00000002,      // NCRYPT_ALLOW_PLAINTEXT_EXPORT_FLAG
+        AllowPlaintextExport = 0x00000002, // NCRYPT_ALLOW_PLAINTEXT_EXPORT_FLAG
     }
 }
 
@@ -693,9 +774,7 @@ namespace Microsoft.Win32.SafeHandles
     internal class SafeNCryptHandle : SafeHandle
     {
         public SafeNCryptHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -712,17 +791,11 @@ namespace Microsoft.Win32.SafeHandles
         }
     }
 
-    internal class SafeNCryptKeyHandle : SafeNCryptHandle
-    {
-    }
+    internal class SafeNCryptKeyHandle : SafeNCryptHandle { }
 
-    internal sealed class SafeNCryptProviderHandle : SafeNCryptHandle
-    {
-    }
+    internal sealed class SafeNCryptProviderHandle : SafeNCryptHandle { }
 
-    internal sealed class SafeNCryptSecretHandle : SafeNCryptHandle
-    {
-    }
+    internal sealed class SafeNCryptSecretHandle : SafeNCryptHandle { }
 
 #pragma warning disable CA1419 // TODO https://github.com/dotnet/roslyn-analyzers/issues/5232: not intended for use with P/Invoke
 

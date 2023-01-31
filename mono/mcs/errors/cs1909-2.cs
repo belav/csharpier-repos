@@ -3,6 +3,7 @@
 
 using System.Runtime.InteropServices;
 
-interface ITest {
-	void f ([DefaultParameterValue (typeof (ITest))] System.Type x);
+interface ITest
+{
+    void f([DefaultParameterValue(typeof(ITest))] System.Type x);
 }

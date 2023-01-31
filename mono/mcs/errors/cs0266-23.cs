@@ -3,9 +3,9 @@
 
 class X
 {
-	static void Main ()
-	{
-		object o = true;
-		bool b = (o ?? string.Empty);
-	}
+    static void Main()
+    {
+        object o = true;
+        bool b = (o ?? string.Empty);
+    }
 }

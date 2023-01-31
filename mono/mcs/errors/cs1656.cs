@@ -2,13 +2,13 @@
 // Line: 10
 using System.IO;
 
-class X {
-
-	static void Main ()
-	{
-		using (MemoryStream m = new MemoryStream ()){
-			m = null;
-		}
-	}
+class X
+{
+    static void Main()
+    {
+        using (MemoryStream m = new MemoryStream())
+        {
+            m = null;
+        }
+    }
 }
-	

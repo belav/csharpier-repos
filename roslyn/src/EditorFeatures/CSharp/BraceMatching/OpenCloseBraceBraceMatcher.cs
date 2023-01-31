@@ -15,8 +15,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BraceMatching
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public OpenCloseBraceBraceMatcher()
-            : base(SyntaxKind.OpenBraceToken, SyntaxKind.CloseBraceToken)
-        {
-        }
+            : base(SyntaxKind.OpenBraceToken, SyntaxKind.CloseBraceToken) { }
     }
 }

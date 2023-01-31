@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,36 +30,41 @@ using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace Mono.Mozilla {
-
-	[Guid ("fd91e2e0-1481-11d3-9333-00104ba0fd40")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIRequestObserver {
-
+namespace Mono.Mozilla
+{
+    [Guid("fd91e2e0-1481-11d3-9333-00104ba0fd40")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIRequestObserver
+    {
 #region nsIRequestObserver
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onStartRequest (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onStartRequest(
+            [MarshalAs(UnmanagedType.Interface)] nsIRequest aRequest,
+            IntPtr aContext
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int onStopRequest (
-				[MarshalAs (UnmanagedType.Interface)]   nsIRequest aRequest,
-				   IntPtr aContext,
-				   int aStatusCode);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int onStopRequest(
+            [MarshalAs(UnmanagedType.Interface)] nsIRequest aRequest,
+            IntPtr aContext,
+            int aStatusCode
+        );
 
 #endregion
-	}
+    }
 
-
-	internal class nsRequestObserver {
-		public static nsIRequestObserver GetProxy (Mono.WebBrowser.IWebBrowser control, nsIRequestObserver obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIRequestObserver).GUID, obj);
-			return o as nsIRequestObserver;
-		}
-	}
+    internal class nsRequestObserver
+    {
+        public static nsIRequestObserver GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIRequestObserver obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIRequestObserver).GUID, obj);
+            return o as nsIRequestObserver;
+        }
+    }
 }

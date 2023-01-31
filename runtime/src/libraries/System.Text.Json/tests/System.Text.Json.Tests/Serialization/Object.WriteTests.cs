@@ -31,17 +31,15 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                ITestClass obj = (ITestClass)JsonSerializer.Deserialize(json, testObj.GetType(), options);
+                ITestClass obj = (ITestClass)
+                    JsonSerializer.Deserialize(json, testObj.GetType(), options);
                 obj.Verify();
             }
         }
 
         public static IEnumerable<object[]> WriteSuccessCases
         {
-            get
-            {
-                return TestData.WriteSuccessCases;
-            }
+            get { return TestData.WriteSuccessCases; }
         }
 
         [Fact]
@@ -82,16 +80,27 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteObjectWorks_ReferenceTypeMissingPublicParameterlessConstructor()
         {
-            PublicParameterizedConstructorTestClass parameterless = PublicParameterizedConstructorTestClass.Instance;
+            PublicParameterizedConstructorTestClass parameterless =
+                PublicParameterizedConstructorTestClass.Instance;
             Assert.Equal("{\"Name\":\"42\"}", JsonSerializer.Serialize(parameterless));
 
-            ClassWithInternalParameterlessCtor internalObj = ClassWithInternalParameterlessCtor.Instance;
-            Assert.Equal("{\"Name\":\"InstancePropertyInternal\"}", JsonSerializer.Serialize(internalObj));
+            ClassWithInternalParameterlessCtor internalObj =
+                ClassWithInternalParameterlessCtor.Instance;
+            Assert.Equal(
+                "{\"Name\":\"InstancePropertyInternal\"}",
+                JsonSerializer.Serialize(internalObj)
+            );
 
-            ClassWithPrivateParameterlessCtor privateObj = ClassWithPrivateParameterlessCtor.Instance;
-            Assert.Equal("{\"Name\":\"InstancePropertyPrivate\"}", JsonSerializer.Serialize(privateObj));
+            ClassWithPrivateParameterlessCtor privateObj =
+                ClassWithPrivateParameterlessCtor.Instance;
+            Assert.Equal(
+                "{\"Name\":\"InstancePropertyPrivate\"}",
+                JsonSerializer.Serialize(privateObj)
+            );
 
-            var list = new CollectionWithoutPublicParameterlessCtor(new List<object> { 1, "foo", false });
+            var list = new CollectionWithoutPublicParameterlessCtor(
+                new List<object> { 1, "foo", false }
+            );
             Assert.Equal("[1,\"foo\",false]", JsonSerializer.Serialize(list));
 
             var envelopeList = new List<object>()
@@ -101,7 +110,10 @@ namespace System.Text.Json.Serialization.Tests
                 ConcreteDerivedClassWithNoPublicDefaultCtor.Ok<int>(),
                 ConcreteDerivedClassWithNoPublicDefaultCtor.Ok()
             };
-            Assert.Equal("[{\"ErrorString\":\"oops\",\"Result\":null},{\"Result\":null},{\"Result\":0},{\"ErrorString\":\"ok\",\"Result\":null}]", JsonSerializer.Serialize(envelopeList));
+            Assert.Equal(
+                "[{\"ErrorString\":\"oops\",\"Result\":null},{\"Result\":null},{\"Result\":0},{\"ErrorString\":\"ok\",\"Result\":null}]",
+                JsonSerializer.Serialize(envelopeList)
+            );
         }
 
         [Fact]
@@ -135,7 +147,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             var test = new { Name = "\u6D4B\u8A6611" };
 
-            var options = new JsonSerializerOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            var options = new JsonSerializerOptions
+            {
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            };
             string result = JsonSerializer.Serialize(test, options);
 
             Assert.Equal("{\"name\":\"\u6D4B\u8A6611\"}", result);
@@ -145,7 +161,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void WriteObjectWithNumberHandling()
         {
-            var options = new JsonSerializerOptions { NumberHandling = JsonNumberHandling.AllowReadingFromString };
+            var options = new JsonSerializerOptions
+            {
+                NumberHandling = JsonNumberHandling.AllowReadingFromString
+            };
             JsonSerializer.Serialize(new object(), options);
         }
 
@@ -161,30 +180,31 @@ namespace System.Text.Json.Serialization.Tests
         [OuterLoop]
         public static void SerializeLargeListOfObjects()
         {
-            Dto dto = new()
-            {
-                Prop1 = int.MaxValue,
-                Prop2 = int.MinValue,
-                Prop3 = "AC",
-                Prop4 = 500,
-                Prop5 = int.MaxValue / 2,
-                Prop6 = 250M,
-                Prop7 = 250M,
-                Prop8 = 250M,
-                Prop9 = 250M,
-                Prop10 = 250M,
-                Prop11 = 150M,
-                Prop12 = 150M,
-                Prop13 = DateTimeOffset.MaxValue,
-                Prop14 = DateTimeOffset.MaxValue,
-                Prop15 = DateTimeOffset.MaxValue,
-                Prop16 = DateTimeOffset.MaxValue,
-                Prop17 = 3,
-                Prop18 = DateTime.MaxValue,
-                Prop19 = DateTime.MaxValue,
-                Prop20 = 25000,
-                Prop21 = DateTime.MaxValue
-            };
+            Dto dto =
+                new()
+                {
+                    Prop1 = int.MaxValue,
+                    Prop2 = int.MinValue,
+                    Prop3 = "AC",
+                    Prop4 = 500,
+                    Prop5 = int.MaxValue / 2,
+                    Prop6 = 250M,
+                    Prop7 = 250M,
+                    Prop8 = 250M,
+                    Prop9 = 250M,
+                    Prop10 = 250M,
+                    Prop11 = 150M,
+                    Prop12 = 150M,
+                    Prop13 = DateTimeOffset.MaxValue,
+                    Prop14 = DateTimeOffset.MaxValue,
+                    Prop15 = DateTimeOffset.MaxValue,
+                    Prop16 = DateTimeOffset.MaxValue,
+                    Prop17 = 3,
+                    Prop18 = DateTime.MaxValue,
+                    Prop19 = DateTime.MaxValue,
+                    Prop20 = 25000,
+                    Prop21 = DateTime.MaxValue
+                };
 
             // It takes a little over 4,338,000 items to reach a payload size above the Array.MaxLength value.
             List<Dto> items = Enumerable.Repeat(dto, 4_338_000).ToList();

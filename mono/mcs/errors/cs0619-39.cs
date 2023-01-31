@@ -5,12 +5,11 @@ using System;
 
 class C
 {
-	[Obsolete("ooo", true)]
-	const int ob = 4;
-	
-    public int Prop {
-		get {
-			return ob;
-		}
-	}
+    [Obsolete("ooo", true)]
+    const int ob = 4;
+
+    public int Prop
+    {
+        get { return ob; }
+    }
 }

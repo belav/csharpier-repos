@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseConditionalExpressionForAssignmentDiagnosticAnalyzer,
-        CSharpUseConditionalExpressionForAssignmentCodeFixProvider>;
+        CSharpUseConditionalExpressionForAssignmentCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseConditionalExpression)]
     public partial class UseConditionalExpressionForAssignmentTests
@@ -28,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
         private static async Task TestMissingAsync(
             string testCode,
             LanguageVersion languageVersion = LanguageVersion.CSharp8,
-            OptionsCollection? options = null)
+            OptionsCollection? options = null
+        )
         {
             var test = new VerifyCS.Test
             {
@@ -46,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
             string fixedCode,
             LanguageVersion languageVersion = LanguageVersion.CSharp8,
             OptionsCollection? options = null,
-            string? equivalenceKey = null)
+            string? equivalenceKey = null
+        )
         {
             await new VerifyCS.Test
             {
@@ -58,18 +61,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
             }.RunAsync();
         }
 
-        private static readonly OptionsCollection PreferImplicitTypeAlways = new(LanguageNames.CSharp)
-        {
-            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOptions2.TrueWithSilentEnforcement },
-            { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOptions2.TrueWithSilentEnforcement },
-            { CSharpCodeStyleOptions.VarForBuiltInTypes, CodeStyleOptions2.TrueWithSilentEnforcement },
-        };
+        private static readonly OptionsCollection PreferImplicitTypeAlways =
+            new(LanguageNames.CSharp)
+            {
+                {
+                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                    CodeStyleOptions2.TrueWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.VarElsewhere,
+                    CodeStyleOptions2.TrueWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.VarForBuiltInTypes,
+                    CodeStyleOptions2.TrueWithSilentEnforcement
+                },
+            };
 
         [Fact]
         public async Task TestOnSimpleAssignment()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -84,21 +97,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
     {
         i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestOnSimpleAssignment_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -113,21 +127,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
     {
         i = true ? throw new System.Exception() : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestOnSimpleAssignment_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -142,21 +157,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
     {
         i = true ? 0 : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestNotWithTwoThrows()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -170,14 +186,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestNotOnSimpleAssignment_Throw1_CSharp6()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -191,14 +208,16 @@ class C
             i = 1;
         }
     }
-}", LanguageVersion.CSharp6);
+}",
+                LanguageVersion.CSharp6
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestWithSimpleThrow()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -212,14 +231,15 @@ class C
             i = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnSimpleAssignmentNoBlocks()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -230,21 +250,22 @@ class C
             i = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
     {
         i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnSimpleAssignmentNoBlocks_NotInBlock()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -256,7 +277,7 @@ class C
                 i = 1;
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -264,14 +285,15 @@ class C
         if (true)
             i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestNotOnSimpleAssignmentToDifferentTargets()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i, int j)
@@ -285,14 +307,15 @@ class C
             j = 1;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnAssignmentToUndefinedField()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -307,21 +330,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         this.{|CS1061:i|} = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestOnAssignmentToUndefinedField_Throw()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -336,21 +360,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         this.{|CS1061:i|} = true ? 0 : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnNonUniformTargetSyntax()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     private int i;
@@ -367,7 +392,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     private int i;
@@ -376,14 +401,15 @@ class C
     {
         this.i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnAssignmentToDefinedField()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int i;
@@ -400,7 +426,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -409,14 +435,15 @@ class C
     {
         this.i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnAssignmentToAboveLocalNoInitializer()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -432,21 +459,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestOnAssignmentToAboveLocalNoInitializer_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -462,21 +490,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestOnAssignmentToAboveLocalNoInitializer_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -492,21 +521,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? throw new System.Exception() : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnAssignmentToAboveLocalLiteralInitializer()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -522,21 +552,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestOnAssignmentToAboveLocalDefaultLiteralInitializer()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -552,21 +583,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : 1;
     }
-}", LanguageVersion.Latest);
+}",
+                LanguageVersion.Latest
+            );
         }
 
         [Fact]
         public async Task TestOnAssignmentToAboveLocalDefaultExpressionInitializer()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -582,21 +615,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoNotMergeAssignmentToAboveLocalWithComplexInitializer()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -614,7 +648,7 @@ class C
 
     int Foo() => 0;
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -624,14 +658,15 @@ class C
     }
 
     int Foo() => 0;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoNotMergeAssignmentToAboveLocalIfIntermediaryStatement()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -650,7 +685,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -661,14 +696,15 @@ class C
         Console.WriteLine();
         i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoNotMergeAssignmentToAboveIfLocalUsedInIfCondition()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -686,7 +722,7 @@ class C
 
     bool Bar(int i) => true;
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -696,14 +732,15 @@ class C
     }
 
     bool Bar(int i) => true;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestDoNotMergeAssignmentToAboveIfMultiDecl()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -719,7 +756,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -727,14 +764,15 @@ class C
         int i = 0, j = 0;
         i = true ? 0 : 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestUseImplicitTypeForIntrinsicTypes()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -750,21 +788,29 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var i = true ? 0 : 1;
     }
-}", options: new OptionsCollection(LanguageNames.CSharp) { { CSharpCodeStyleOptions.VarForBuiltInTypes, CodeStyleOptions2.TrueWithSilentEnforcement } });
+}",
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
+                    {
+                        CSharpCodeStyleOptions.VarForBuiltInTypes,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
+            );
         }
 
         [Fact]
         public async Task TestUseImplicitTypeWhereApparent()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -780,21 +826,29 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : 1;
     }
-}", options: new OptionsCollection(LanguageNames.CSharp) { { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOptions2.TrueWithSilentEnforcement } });
+}",
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
+                    {
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
+            );
         }
 
         [Fact]
         public async Task TestUseImplicitTypeWherePossible()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -810,21 +864,29 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         int i = true ? 0 : 1;
     }
-}", options: new OptionsCollection(LanguageNames.CSharp) { { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOptions2.TrueWithSilentEnforcement } });
+}",
+                options: new OptionsCollection(LanguageNames.CSharp)
+                {
+                    {
+                        CSharpCodeStyleOptions.VarElsewhere,
+                        CodeStyleOptions2.TrueWithSilentEnforcement
+                    }
+                }
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutElse()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -834,14 +896,15 @@ class C
             i = 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMissingWithoutElseWithStatementAfterwards()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -853,14 +916,15 @@ class C
 
         i = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestMissingWithoutElseWithThrowStatementAfterwards()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -872,14 +936,15 @@ class C
 
         throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestConversionWithUseVarForAll_CastInsertedToKeepTypeSame()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -896,7 +961,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -904,14 +969,16 @@ class C
         // cast will be necessary, otherwise 'var' would get the type 'string'.
         var o = true ? ""a"" : (object)""b"";
     }
-}", options: PreferImplicitTypeAlways);
+}",
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestConversionWithUseVarForAll_CastInsertedToKeepTypeSame_Throw1_CSharp8()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -927,21 +994,24 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var o = true ? throw new System.Exception() : (object)""b"";
     }
-}", LanguageVersion.CSharp8, PreferImplicitTypeAlways);
+}",
+                LanguageVersion.CSharp8,
+                PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestConversionWithUseVarForAll_CastInsertedToKeepTypeSame_Throw1_CSharp9()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -957,21 +1027,24 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var o = true ? throw new System.Exception() : (object)""b"";
     }
-}", LanguageVersion.CSharp9, options: PreferImplicitTypeAlways);
+}",
+                LanguageVersion.CSharp9,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
         public async Task TestConversionWithUseVarForAll_CastInsertedToKeepTypeSame_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -987,21 +1060,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var o = true ? (object)""a"" : throw new System.Exception();
     }
-}", options: PreferImplicitTypeAlways);
+}",
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
         public async Task TestConversionWithUseVarForAll_CanUseVarBecauseConditionalTypeMatches()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -1017,21 +1092,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var s = true ? ""a"" : null;
     }
-}", options: PreferImplicitTypeAlways);
+}",
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestConversionWithUseVarForAll_CanUseVarBecauseConditionalTypeMatches_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -1047,21 +1124,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var s = true ? throw new System.Exception() : (string)null;
     }
-}", options: PreferImplicitTypeAlways);
+}",
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestConversionWithUseVarForAll_CanUseVarBecauseConditionalTypeMatches_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -1077,21 +1156,23 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var s = true ? ""a"" : throw new System.Exception();
     }
-}", options: PreferImplicitTypeAlways);
+}",
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
         public async Task TestConversionWithUseVarForAll_CanUseVarButRequiresCastOfConditionalBranch_CSharp8()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -1107,21 +1188,24 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var s = true ? null : (string)null;
     }
-}", LanguageVersion.CSharp8, PreferImplicitTypeAlways);
+}",
+                LanguageVersion.CSharp8,
+                PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
         public async Task TestConversionWithUseVarForAll_CanUseVarButRequiresCastOfConditionalBranch_CSharp9()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M()
@@ -1137,21 +1221,24 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M()
     {
         var s = true ? null : (string)null;
     }
-}", LanguageVersion.CSharp9, options: PreferImplicitTypeAlways);
+}",
+                LanguageVersion.CSharp9,
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact]
         public async Task TestKeepTriviaAroundIf()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1167,7 +1254,7 @@ class C
         } // trailing
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1175,14 +1262,15 @@ class C
         // leading
         i = true ? 0 : 1; // trailing
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1207,7 +1295,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1216,14 +1304,15 @@ class C
 
         string s = true ? ""a"" : ""b"";
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLine1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1241,7 +1330,7 @@ class C
 
     int Foo(int x, int y, int z) => 0;
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1253,14 +1342,15 @@ class C
     }
 
     int Foo(int x, int y, int z) => 0;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLine2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1278,7 +1368,7 @@ class C
 
     int Foo(int x, int y, int z) => 0;
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1290,14 +1380,15 @@ class C
     }
 
     int Foo(int x, int y, int z) => 0;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestMultiLine3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1316,7 +1407,7 @@ class C
 
     int Foo(int x, int y, int z) => 0;
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1329,14 +1420,15 @@ class C
     }
 
     int Foo(int x, int y, int z) => 0;
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestElseIfWithBlock()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1354,7 +1446,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1367,14 +1459,15 @@ class C
             i = false ? 1 : 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestElseIfWithBlock_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1392,7 +1485,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1405,14 +1498,15 @@ class C
             i = false ? throw new System.Exception() : 0;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestElseIfWithBlock_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1430,7 +1524,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(int i)
@@ -1443,7 +1537,8 @@ class C
             i = false ? 1 : throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -1451,7 +1546,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M(int i)
@@ -1461,7 +1557,8 @@ class C
         else i = 0;
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M(int i)
@@ -1486,7 +1583,7 @@ class C
         public async Task TestRefAssignment1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(ref int i, ref int j)
@@ -1502,7 +1599,7 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(ref int i, ref int j)
@@ -1510,14 +1607,15 @@ class C
         ref int x = ref i;
         x = ref true ? ref i : ref j;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestRefAssignment1_Throw1()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(ref int i, ref int j)
@@ -1532,14 +1630,15 @@ class C
             x = ref j;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestRefAssignment1_Throw2()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     void M(ref int i, ref int j)
@@ -1554,14 +1653,15 @@ class C
             throw new System.Exception();
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTrueFalse1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(bool i, int j)
@@ -1576,21 +1676,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(bool i, int j)
     {
         i = j == 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestTrueFalse_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(bool i, int j)
@@ -1605,21 +1706,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(bool i, int j)
     {
         i = j == 0 ? true : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestTrueFalse_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(bool i, int j)
@@ -1634,21 +1736,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(bool i, int j)
     {
         i = j == 0 ? throw new System.Exception() : false;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TestTrueFalse2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(bool i, int j)
@@ -1663,21 +1766,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(bool i, int j)
     {
         i = j != 0;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestFalseTrue_Throw1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(bool i, int j)
@@ -1692,21 +1796,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(bool i, int j)
     {
         i = j == 0 ? throw new System.Exception() : true;
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(43291, "https://github.com/dotnet/roslyn/issues/43291")]
         public async Task TestFalseTrue_Throw2()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     void M(bool i, int j)
@@ -1721,21 +1826,22 @@ class C
         }
     }
 }",
-@"
+                @"
 class C
 {
     void M(bool i, int j)
     {
         i = j == 0 ? false : throw new System.Exception();
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(58898, "https://github.com/dotnet/roslyn/issues/58898")]
         public async Task TestRemoveRedundantCast()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -1754,7 +1860,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1763,14 +1869,16 @@ class C
     {
         var id = true ? Guid.NewGuid() : (Guid?)Guid.Empty;
     }
-}", options: PreferImplicitTypeAlways);
+}",
+                options: PreferImplicitTypeAlways
+            );
         }
 
         [Fact, WorkItem(33284, "https://github.com/dotnet/roslyn/issues/33284")]
         public async Task TestConditionalWithLambdas()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -1789,7 +1897,7 @@ class C
         }
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1798,14 +1906,16 @@ class C
     {
         Action<char> write = containsHighBits ? ((char character) => Console.WriteLine(1)) : ((char character) => Console.WriteLine(2));
     }
-}", LanguageVersion.CSharp9);
+}",
+                LanguageVersion.CSharp9
+            );
         }
 
         [Fact, WorkItem(39260, "https://github.com/dotnet/roslyn/issues/39260")]
         public async Task TestTitleWhenSimplifying()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 using System;
 
 class C
@@ -1828,7 +1938,7 @@ class C
         throw new NotImplementedException();
     }
 }",
-@"
+                @"
 using System;
 
 class C
@@ -1842,7 +1952,10 @@ class C
     {
         throw new NotImplementedException();
     }
-}", LanguageVersion.CSharp9, equivalenceKey: nameof(AnalyzersResources.Simplify_check));
+}",
+                LanguageVersion.CSharp9,
+                equivalenceKey: nameof(AnalyzersResources.Simplify_check)
+            );
         }
     }
 }

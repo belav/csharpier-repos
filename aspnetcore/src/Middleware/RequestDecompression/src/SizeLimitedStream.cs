@@ -31,14 +31,8 @@ internal sealed class SizeLimitedStream : Stream
 
     public override long Position
     {
-        get
-        {
-            return _innerStream.Position;
-        }
-        set
-        {
-            _innerStream.Position = value;
-        }
+        get { return _innerStream.Position; }
+        set { _innerStream.Position = value; }
     }
 
     public override void Flush()
@@ -74,12 +68,20 @@ internal sealed class SizeLimitedStream : Stream
         _innerStream.Write(buffer, offset, count);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return ReadAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
     }
 
-    public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override async ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         var bytesRead = await _innerStream.ReadAsync(buffer, cancellationToken);
 

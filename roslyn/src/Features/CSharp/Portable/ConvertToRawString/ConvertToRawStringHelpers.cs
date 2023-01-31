@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
         public static bool CanBeSingleLine(VirtualCharSequence characters)
         {
             // Single line raw strings cannot start/end with quote.
-            if (characters.First().Rune.Value == '"' ||
-                characters.Last().Rune.Value == '"')
+            if (characters.First().Rune.Value == '"' || characters.Last().Rune.Value == '"')
             {
                 return false;
             }
@@ -31,23 +30,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             return true;
         }
 
-        public static bool IsCSharpNewLine(VirtualChar ch)
-            => ch.Rune.Utf16SequenceLength == 1 && SyntaxFacts.IsNewLine((char)ch.Value);
+        public static bool IsCSharpNewLine(VirtualChar ch) =>
+            ch.Rune.Utf16SequenceLength == 1 && SyntaxFacts.IsNewLine((char)ch.Value);
 
-        public static bool IsCSharpWhitespace(VirtualChar ch)
-            => ch.Rune.Utf16SequenceLength == 1 && SyntaxFacts.IsWhitespace((char)ch.Value);
+        public static bool IsCSharpWhitespace(VirtualChar ch) =>
+            ch.Rune.Utf16SequenceLength == 1 && SyntaxFacts.IsWhitespace((char)ch.Value);
 
         public static bool IsCarriageReturnNewLine(VirtualCharSequence characters, int index)
         {
-            return index + 1 < characters.Length &&
-                characters[index].Rune is { Utf16SequenceLength: 1, Value: '\r' } &&
-                characters[index + 1].Rune is { Utf16SequenceLength: 1, Value: '\n' };
+            return index + 1 < characters.Length
+                && characters[index].Rune is { Utf16SequenceLength: 1, Value: '\r' }
+                && characters[index + 1].Rune is { Utf16SequenceLength: 1, Value: '\n' };
         }
 
-        public static bool AllEscapesAreQuotes(VirtualCharSequence sequence)
-            => AllEscapesAre(sequence, static ch => ch.Value == '"');
+        public static bool AllEscapesAreQuotes(VirtualCharSequence sequence) =>
+            AllEscapesAre(sequence, static ch => ch.Value == '"');
 
-        private static bool AllEscapesAre(VirtualCharSequence sequence, Func<VirtualChar, bool> predicate)
+        private static bool AllEscapesAre(
+            VirtualCharSequence sequence,
+            Func<VirtualChar, bool> predicate
+        )
         {
             var hasEscape = false;
 
@@ -108,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
         public static int GetLongestQuoteSequence(VirtualCharSequence characters)
         {
             var longestQuoteSequence = 0;
-            for (int i = 0, n = characters.Length; i < n;)
+            for (int i = 0, n = characters.Length; i < n; )
             {
                 var j = i;
                 while (j < n && characters[j] == '"')

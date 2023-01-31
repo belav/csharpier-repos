@@ -5,4 +5,4 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: TypeForwardedTo(typeof (C.CC))]
+[assembly: TypeForwardedTo(typeof(C.CC))]

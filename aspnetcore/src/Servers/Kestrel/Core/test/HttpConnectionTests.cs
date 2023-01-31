@@ -25,7 +25,8 @@ public class HttpConnectionTests
             serviceContext: new TestServiceContext(),
             connectionContext: mockConnectionContext.Object,
             connectionFeatures: new FeatureCollection(),
-            transport: new DuplexPipe(Mock.Of<PipeReader>(), Mock.Of<PipeWriter>()));
+            transport: new DuplexPipe(Mock.Of<PipeReader>(), Mock.Of<PipeWriter>())
+        );
 
         var httpConnection = new HttpConnection(httpConnectionContext);
 
@@ -41,9 +42,17 @@ public class HttpConnectionTests
 
         httpConnection.OnTimeout(TimeoutReason.WriteDataRate);
 
-        mockConnectionContext
-            .Verify(c => c.Abort(It.Is<ConnectionAbortedException>(ex => ex.Message == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied)),
-                Times.Once);
+        mockConnectionContext.Verify(
+            c =>
+                c.Abort(
+                    It.Is<ConnectionAbortedException>(
+                        ex =>
+                            ex.Message
+                            == CoreStrings.ConnectionTimedBecauseResponseMininumDataRateNotSatisfied
+                    )
+                ),
+            Times.Once
+        );
 
         await aborted.Task.DefaultTimeout();
     }

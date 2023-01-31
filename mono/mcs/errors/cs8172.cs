@@ -3,10 +3,10 @@
 
 class X
 {
-	static int f;
+    static int f;
 
-	public static void Main ()
-	{
-		ref int j = f;
-	}
+    public static void Main()
+    {
+        ref int j = f;
+    }
 }

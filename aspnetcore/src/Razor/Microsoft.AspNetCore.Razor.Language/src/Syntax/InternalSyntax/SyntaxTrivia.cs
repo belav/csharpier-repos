@@ -15,7 +15,12 @@ internal class SyntaxTrivia : GreenNode
         Text = text;
     }
 
-    internal SyntaxTrivia(SyntaxKind kind, string text, RazorDiagnostic[] diagnostics, SyntaxAnnotation[] annotations)
+    internal SyntaxTrivia(
+        SyntaxKind kind,
+        string text,
+        RazorDiagnostic[] diagnostics,
+        SyntaxAnnotation[] annotations
+    )
         : base(kind, text.Length, diagnostics, annotations)
     {
         Text = text;

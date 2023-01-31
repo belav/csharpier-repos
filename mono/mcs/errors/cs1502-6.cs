@@ -3,13 +3,13 @@
 
 public class Test
 {
-	void Foo ()
-	{
-		new Test (new TestMethod (Foo));
-	}
+    void Foo()
+    {
+        new Test(new TestMethod(Foo));
+    }
 
-	public Test (TestMethod2 test) {}
+    public Test(TestMethod2 test) { }
 }
 
-public delegate void TestMethod ();
-public delegate void TestMethod2 (object o);
+public delegate void TestMethod();
+public delegate void TestMethod2(object o);

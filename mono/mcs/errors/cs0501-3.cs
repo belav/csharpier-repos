@@ -3,6 +3,7 @@
 
 class C
 {
-	public static bool operator != (C l, C r);
-	public static bool operator == (C l, C r);
+    public static bool operator !=(C l, C r);
+
+    public static bool operator ==(C l, C r);
 }

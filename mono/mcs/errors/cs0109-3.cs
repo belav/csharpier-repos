@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -warnaserror -warn:4
 
-class BaseClass {
-        public new const bool Val = false;
+class BaseClass
+{
+    public new const bool Val = false;
 }

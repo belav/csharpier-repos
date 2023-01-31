@@ -37,13 +37,9 @@ namespace Microsoft.CodeAnalysis.Options.Providers
     internal sealed class ExportSolutionOptionProviderAttribute : ExportOptionProviderAttribute
     {
         public ExportSolutionOptionProviderAttribute()
-            : this(language: string.Empty)
-        {
-        }
+            : this(language: string.Empty) { }
 
         public ExportSolutionOptionProviderAttribute(string language)
-            : base(language, isGlobal: false)
-        {
-        }
+            : base(language, isGlobal: false) { }
     }
 }

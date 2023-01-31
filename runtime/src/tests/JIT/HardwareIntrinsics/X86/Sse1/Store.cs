@@ -20,12 +20,23 @@ namespace IntelHardwareIntrinsicTest._Sse1
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4]
+                    )
+                )
                 {
                     var vf = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     Sse.Store((float*)(floatTable.outArrayPtr), vf);
 
-                    if (!floatTable.CheckResult((x, y) => BitConverter.SingleToInt32Bits(x) == BitConverter.SingleToInt32Bits(y)))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                                BitConverter.SingleToInt32Bits(x)
+                                == BitConverter.SingleToInt32Bits(y)
+                        )
+                    )
                     {
                         Console.WriteLine("SSE Store failed on float:");
                         foreach (var item in floatTable.outArray)

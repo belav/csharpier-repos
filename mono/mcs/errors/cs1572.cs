@@ -4,9 +4,9 @@
 
 namespace Testing
 {
-	public class Test
-	{
-		/// <param name='mismatch'>mismatch</param>
-		public void Baz (int i) {}
-	}
+    public class Test
+    {
+        /// <param name='mismatch'>mismatch</param>
+        public void Baz(int i) { }
+    }
 }

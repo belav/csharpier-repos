@@ -12,6 +12,7 @@ namespace POS_Server.Controllers
     public class SessionController : ApiController
     {
         CountriesController coctrlr = new CountriesController();
+
         [HttpPost]
         [Route("SetSession")]
         public IHttpActionResult SetSession(long userId)
@@ -19,10 +20,11 @@ namespace POS_Server.Controllers
             HttpContext.Current.Session["userId"] = userId;
             return Ok();
         }
+
         [HttpPost]
         [Route("GetSession")]
         public IHttpActionResult GetSession(string key)
-        {  
+        {
             return Ok(HttpContext.Current.Session[key]);
         }
     }

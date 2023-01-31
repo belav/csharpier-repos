@@ -28,8 +28,10 @@ namespace System.Drawing
 
         public static Brush Desktop => FromSystemColor(SystemColors.Desktop);
 
-        public static Brush GradientActiveCaption => FromSystemColor(SystemColors.GradientActiveCaption);
-        public static Brush GradientInactiveCaption => FromSystemColor(SystemColors.GradientInactiveCaption);
+        public static Brush GradientActiveCaption =>
+            FromSystemColor(SystemColors.GradientActiveCaption);
+        public static Brush GradientInactiveCaption =>
+            FromSystemColor(SystemColors.GradientInactiveCaption);
         public static Brush GrayText => FromSystemColor(SystemColors.GrayText);
 
         public static Brush Highlight => FromSystemColor(SystemColors.Highlight);
@@ -38,7 +40,8 @@ namespace System.Drawing
 
         public static Brush InactiveCaption => FromSystemColor(SystemColors.InactiveCaption);
         public static Brush InactiveBorder => FromSystemColor(SystemColors.InactiveBorder);
-        public static Brush InactiveCaptionText => FromSystemColor(SystemColors.InactiveCaptionText);
+        public static Brush InactiveCaptionText =>
+            FromSystemColor(SystemColors.InactiveCaptionText);
         public static Brush Info => FromSystemColor(SystemColors.Info);
         public static Brush InfoText => FromSystemColor(SystemColors.InfoText);
 
@@ -63,7 +66,11 @@ namespace System.Drawing
             Brush[]? systemBrushes = (Brush[]?)Gdip.ThreadData[s_systemBrushesKey];
             if (systemBrushes == null)
             {
-                systemBrushes = new Brush[(int)KnownColor.WindowText + (int)KnownColor.MenuHighlight - (int)KnownColor.YellowGreen];
+                systemBrushes = new Brush[
+                    (int)KnownColor.WindowText
+                        + (int)KnownColor.MenuHighlight
+                        - (int)KnownColor.YellowGreen
+                ];
                 Gdip.ThreadData[s_systemBrushesKey] = systemBrushes;
             }
             int idx = (int)c.ToKnownColor();
@@ -73,7 +80,10 @@ namespace System.Drawing
             }
             idx--;
 
-            Debug.Assert(idx >= 0 && idx < systemBrushes.Length, "System colors have been added but our system color array has not been expanded.");
+            Debug.Assert(
+                idx >= 0 && idx < systemBrushes.Length,
+                "System colors have been added but our system color array has not been expanded."
+            );
 
             return systemBrushes[idx] ??= new SolidBrush(c, true);
         }

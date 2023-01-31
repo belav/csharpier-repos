@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,18 +31,17 @@
 using System.Collections.ObjectModel;
 using System.Net.Mime;
 
-namespace System.Net.Mail {
-	public sealed class LinkedResourceCollection : Collection<LinkedResource>, IDisposable
-	{
+namespace System.Net.Mail
+{
+    public sealed class LinkedResourceCollection : Collection<LinkedResource>, IDisposable
+    {
 		#region Fields
-		
+
 		#endregion // Fields
 
 		#region Constructors
 
-		internal LinkedResourceCollection ()
-		{
-		}
+        internal LinkedResourceCollection() { }
 
 		#endregion // Constructors
 
@@ -52,37 +51,34 @@ namespace System.Net.Mail {
 
 		#region Methods
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		private void Dispose (bool disposing)
-		{
-		}
+        private void Dispose(bool disposing) { }
 
-		protected override void ClearItems ()
-		{
-			base.ClearItems ();
-		}
+        protected override void ClearItems()
+        {
+            base.ClearItems();
+        }
 
-		protected override void InsertItem (int index, LinkedResource item)
-		{
-			base.InsertItem (index, item);
-		}
+        protected override void InsertItem(int index, LinkedResource item)
+        {
+            base.InsertItem(index, item);
+        }
 
-		protected override void RemoveItem (int index)
-		{
-			base.RemoveItem (index);
-		}
+        protected override void RemoveItem(int index)
+        {
+            base.RemoveItem(index);
+        }
 
-		protected override void SetItem (int index, LinkedResource item)
-		{
-			base.SetItem (index, item);
-		}
+        protected override void SetItem(int index, LinkedResource item)
+        {
+            base.SetItem(index, item);
+        }
 
 		#endregion // Methods
-	}
+    }
 }
-

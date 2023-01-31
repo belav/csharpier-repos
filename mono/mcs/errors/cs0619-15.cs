@@ -2,9 +2,12 @@
 // Line: 9
 
 using System;
+
 public class Test
 {
-	[Obsolete ("Causes an error", true)]
-	public Test () {}
-	public Test (bool flag) : this () {}
+    [Obsolete("Causes an error", true)]
+    public Test() { }
+
+    public Test(bool flag)
+        : this() { }
 }

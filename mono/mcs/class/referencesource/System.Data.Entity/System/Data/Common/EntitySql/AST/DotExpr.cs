@@ -26,7 +26,7 @@ namespace System.Data.Common.EntitySql.AST
         private string[] _names;
 
         /// <summary>
-        /// initializes 
+        /// initializes
         /// </summary>
         internal DotExpr(Node leftExpr, Identifier id)
         {

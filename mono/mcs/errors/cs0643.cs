@@ -3,11 +3,10 @@
 
 using System;
 
-public class A : Attribute {
-	public int x;
-	[A (x = 1, x = 2)]
-	public static void Main ()
-	{
-	}
-}
+public class A : Attribute
+{
+    public int x;
 
+    [A(x = 1, x = 2)]
+    public static void Main() { }
+}

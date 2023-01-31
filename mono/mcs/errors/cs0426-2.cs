@@ -3,12 +3,10 @@
 
 class A
 {
-	class B : N.M
-	{
-	}
+    class B : N.M { }
 }
 
 class N
 {
-	public const string S = "1";
+    public const string S = "1";
 }

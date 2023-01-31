@@ -3,9 +3,9 @@
 
 static class C
 {
-	static void Foo()
-	{
-		const int uu = 1;
-		uu++;
-	}
+    static void Foo()
+    {
+        const int uu = 1;
+        uu++;
+    }
 }

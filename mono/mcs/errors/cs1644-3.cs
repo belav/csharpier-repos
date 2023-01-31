@@ -2,6 +2,7 @@
 // Line: 6
 // Compiler options: -langversion:ISO-1
 
-struct S {
-    fixed long buffer [5];
+struct S
+{
+    fixed long buffer[5];
 }

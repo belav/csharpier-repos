@@ -31,7 +31,10 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionServicePropertyBuilder? HasField(string? fieldName, bool fromDataAnnotation = false);
+    new IConventionServicePropertyBuilder? HasField(
+        string? fieldName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the backing field to use for this property.
@@ -42,7 +45,10 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionServicePropertyBuilder? HasField(FieldInfo? fieldInfo, bool fromDataAnnotation = false);
+    new IConventionServicePropertyBuilder? HasField(
+        FieldInfo? fieldInfo,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="PropertyAccessMode" /> to use for this property.
@@ -55,7 +61,8 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     /// </returns>
     new IConventionServicePropertyBuilder? UsePropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the <see cref="ServiceParameterBinding" /> for this property.
@@ -68,7 +75,8 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     /// </returns>
     IConventionServicePropertyBuilder? HasParameterBinding(
         ServiceParameterBinding? parameterBinding,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ServiceParameterBinding" /> can be set for this property.
@@ -77,5 +85,8 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     /// <param name="parameterBinding">The parameter binding.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the <see cref="ServiceParameterBinding" /> can be set for this property.</returns>
-    bool CanSetParameterBinding(ServiceParameterBinding? parameterBinding, bool fromDataAnnotation = false);
+    bool CanSetParameterBinding(
+        ServiceParameterBinding? parameterBinding,
+        bool fromDataAnnotation = false
+    );
 }

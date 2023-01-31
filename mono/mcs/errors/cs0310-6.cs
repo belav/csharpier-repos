@@ -3,19 +3,12 @@
 
 public class Class1
 {
-	public Class1 (int i) { }
+    public Class1(int i) { }
 }
 
-public class Class2<T>
-{
-}
+public class Class2<T> { }
 
-public class Class3<T> where T : new ()
-{
-}
+public class Class3<T>
+    where T : new() { }
 
-
-class A : Class2<Class3<Class1>>
-{
-}
-
+class A : Class2<Class3<Class1>> { }

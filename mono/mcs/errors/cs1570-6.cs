@@ -6,9 +6,8 @@ using System;
 
 namespace Testing
 {
-	/// <summary>
-	/// comment for delegate type
-	/// </incorrect>
-	public delegate void MyDelegate2 (object o, EventArgs e);
+    /// <summary>
+    /// comment for delegate type
+    /// </incorrect>
+    public delegate void MyDelegate2(object o, EventArgs e);
 }
-

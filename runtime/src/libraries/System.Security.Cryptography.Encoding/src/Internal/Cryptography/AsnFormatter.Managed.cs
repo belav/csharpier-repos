@@ -50,7 +50,11 @@ namespace Internal.Cryptography
 
                 while (collectionReader.HasData)
                 {
-                    GeneralNameAsn.Decode(ref collectionReader, rawData, out GeneralNameAsn generalName);
+                    GeneralNameAsn.Decode(
+                        ref collectionReader,
+                        rawData,
+                        out GeneralNameAsn generalName
+                    );
 
                     if (output.Length != 0)
                     {
@@ -99,7 +103,8 @@ namespace Internal.Cryptography
                         {
                             // Add the colon and dotted-decimal representation of IPv4.
                             output.Append(
-                                $":{ipAddressBytes[0]}.{ipAddressBytes[1]}.{ipAddressBytes[2]}.{ipAddressBytes[3]}");
+                                $":{ipAddressBytes[0]}.{ipAddressBytes[1]}.{ipAddressBytes[2]}.{ipAddressBytes[3]}"
+                            );
                         }
                         else if (ipAddressBytes.Length == 16)
                         {
@@ -109,7 +114,9 @@ namespace Internal.Cryptography
                             // IP Address:2001:DB8:AC10:FE01:0:0:0:0
                             for (int i = 0; i < ipAddressBytes.Length; i += 2)
                             {
-                                output.Append($":{ipAddressBytes[i] << 8 | ipAddressBytes[i + 1]:X}");
+                                output.Append(
+                                    $":{ipAddressBytes[i] << 8 | ipAddressBytes[i + 1]:X}"
+                                );
                             }
                         }
                         else

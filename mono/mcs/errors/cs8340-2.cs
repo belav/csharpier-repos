@@ -2,12 +2,9 @@
 // Line: 6
 // Compiler options: -langversion:latest
 
-readonly partial struct S
-{
-
-}
+readonly partial struct S { }
 
 partial struct S
 {
-	int field;
+    int field;
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,40 +30,68 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.SessionState {
+namespace System.Web.SessionState
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class StateRuntime : IStateRuntime
+    {
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public StateRuntime() { }
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class StateRuntime : IStateRuntime {
+        [MonoTODO("Not implemented")]
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void ProcessRequest(
+            IntPtr tracker,
+            int verb,
+            string uri,
+            int exclusive,
+            int timeout,
+            int lockCookieExists,
+            int lockCookie,
+            int contentLength,
+            IntPtr content
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public StateRuntime ()
-		{
-		}
+        [MonoTODO("Not implemented")]
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public void ProcessRequest(
+            IntPtr tracker,
+            int verb,
+            string uri,
+            int exclusive,
+            int extraFlags,
+            int timeout,
+            int lockCookieExists,
+            int lockCookie,
+            int contentLength,
+            IntPtr content
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO("Not implemented")]
-		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-		public void ProcessRequest (IntPtr tracker, int verb,
-			string uri, int exclusive, int timeout,
-			int lockCookieExists, int lockCookie,
-			int contentLength, IntPtr content)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO("Not implemented")]
-		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-		public void ProcessRequest (IntPtr tracker, int verb, string uri, int exclusive,
-			int extraFlags, int timeout, int lockCookieExists, int lockCookie,
-			int contentLength, IntPtr content)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO("Not implemented")]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-		public void StopProcessing ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO("Not implemented")]
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public void StopProcessing()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

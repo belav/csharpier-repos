@@ -3,14 +3,13 @@
 
 class X
 {
-	int Prop {
-		get {
-			return 1;
-		}
-	}
+    int Prop
+    {
+        get { return 1; }
+    }
 
-	ref int Test ()
-	{
-		return ref Prop;
-	}
+    ref int Test()
+    {
+        return ref Prop;
+    }
 }

@@ -3,17 +3,18 @@
 
 using System.Collections;
 
-class C: IEnumerable
+class C : IEnumerable
 {
-   public IEnumerator GetEnumerator ()
-   {
-	   try {
-	       try {
-		   yield return this;
-	       }
-	       finally {}
-	   }
-	   catch (System.Exception) {
-	   }
-   }
+    public IEnumerator GetEnumerator()
+    {
+        try
+        {
+            try
+            {
+                yield return this;
+            }
+            finally { }
+        }
+        catch (System.Exception) { }
+    }
 }

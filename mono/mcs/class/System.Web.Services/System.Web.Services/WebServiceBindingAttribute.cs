@@ -1,4 +1,4 @@
- // 
+//
 // System.Web.Services.WebServiceBindingAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,78 +28,79 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services {
-	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, AllowMultiple = true, Inherited = true)]
-	public sealed class WebServiceBindingAttribute : Attribute {
-
+namespace System.Web.Services
+{
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface,
+        AllowMultiple = true,
+        Inherited = true
+    )]
+    public sealed class WebServiceBindingAttribute : Attribute
+    {
 		#region Fields
 
-		string location;
-		string name;
-		string ns;
-		
-		bool emitConformanceClaims;
-		
-		WsiProfiles conformsTo;
+        string location;
+        string name;
+        string ns;
+
+        bool emitConformanceClaims;
+
+        WsiProfiles conformsTo;
 
 		#endregion // Fields
 
 		#region Constructors
-		
-		public WebServiceBindingAttribute ()
-			: this (String.Empty, String.Empty, String.Empty)
-		{
-		}
 
-		public WebServiceBindingAttribute (string name)
-			: this (name, String.Empty, String.Empty)
-		{
-		}
+        public WebServiceBindingAttribute()
+            : this(String.Empty, String.Empty, String.Empty) { }
 
-		public WebServiceBindingAttribute (string name, string ns)
-			: this (name, ns, String.Empty)
-		{
-		}
+        public WebServiceBindingAttribute(string name)
+            : this(name, String.Empty, String.Empty) { }
 
-		public WebServiceBindingAttribute (string name, string ns, string location)
-		{
-			this.name = name;
-			this.ns = ns;
-			this.location = location;
-		}
-		
+        public WebServiceBindingAttribute(string name, string ns)
+            : this(name, ns, String.Empty) { }
+
+        public WebServiceBindingAttribute(string name, string ns, string location)
+        {
+            this.name = name;
+            this.ns = ns;
+            this.location = location;
+        }
+
 		#endregion // Constructors
 
 		#region Properties
 
-		public string Location { 	
-			get { return location; }
-			set { location = value; }
-		}
-	
-		public string Name {
-			get { return name; }
-			set { name = value; }
-		}
-	
-		public string Namespace {
-			get { return ns; }
-			set { ns = value; }
-		}
-		
+        public string Location
+        {
+            get { return location; }
+            set { location = value; }
+        }
 
-		public bool EmitConformanceClaims {
-			get { return emitConformanceClaims; }
-			set { emitConformanceClaims = value; }
-		}	
-		
-		public WsiProfiles ConformsTo { 
-			get { return conformsTo; } 
-			set { conformsTo = value; }
-		}
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
 
+        public string Namespace
+        {
+            get { return ns; }
+            set { ns = value; }
+        }
 
+        public bool EmitConformanceClaims
+        {
+            get { return emitConformanceClaims; }
+            set { emitConformanceClaims = value; }
+        }
+
+        public WsiProfiles ConformsTo
+        {
+            get { return conformsTo; }
+            set { conformsTo = value; }
+        }
 
 		#endregion // Properties
-	}
+    }
 }

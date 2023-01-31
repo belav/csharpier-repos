@@ -15,16 +15,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
     /// and then calls into the service to tell it to start analyzing the solution.  At that point we'll get
     /// created and added to the solution crawler.
     /// </remarks>
-    internal sealed class InProcDesignerAttributeIncrementalAnalyzerProvider : IIncrementalAnalyzerProvider
+    internal sealed class InProcDesignerAttributeIncrementalAnalyzerProvider
+        : IIncrementalAnalyzerProvider
     {
         private readonly IDesignerAttributeListener _listener;
 
-        public InProcDesignerAttributeIncrementalAnalyzerProvider(IDesignerAttributeListener listener)
+        public InProcDesignerAttributeIncrementalAnalyzerProvider(
+            IDesignerAttributeListener listener
+        )
         {
             _listener = listener;
         }
 
-        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace)
-            => new InProcDesignerAttributeIncrementalAnalyzer(_listener);
+        public IIncrementalAnalyzer CreateIncrementalAnalyzer(Workspace workspace) =>
+            new InProcDesignerAttributeIncrementalAnalyzer(_listener);
     }
 }

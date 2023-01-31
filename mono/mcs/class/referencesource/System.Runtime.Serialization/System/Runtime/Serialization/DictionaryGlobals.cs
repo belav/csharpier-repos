@@ -6,9 +6,11 @@ namespace System.Runtime.Serialization
     using System;
     using System.Xml;
 
-    [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-        + " data from being modified or leaked to other components in appdomain."
-        + " Changes to static fields could affect serialization/deserialization; should be reviewed.")]
+    [Fx.Tag.SecurityNote(
+        Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+            + " data from being modified or leaked to other components in appdomain."
+            + " Changes to static fields could affect serialization/deserialization; should be reviewed."
+    )]
 #if USE_REFEMIT
     public static class DictionaryGlobals
 #else
@@ -97,7 +99,9 @@ namespace System.Runtime.Serialization
                 RefLocalName = dictionary.Add(Globals.RefLocalName);
                 ArraySizeLocalName = dictionary.Add(Globals.ArraySizeLocalName);
                 EmptyString = dictionary.Add(String.Empty);
-                ISerializableFactoryTypeLocalName = dictionary.Add(Globals.ISerializableFactoryTypeLocalName);
+                ISerializableFactoryTypeLocalName = dictionary.Add(
+                    Globals.ISerializableFactoryTypeLocalName
+                );
 
                 // 10
                 XmlnsNamespace = dictionary.Add(Globals.XmlnsNamespace);
@@ -183,7 +187,5 @@ namespace System.Runtime.Serialization
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperFatal(ex.Message, ex);
             }
         }
-
     }
 }
-

@@ -89,7 +89,8 @@ namespace RabbitMQ.Client
 
         ///<summary>The wrapped byte array, as decoded or as to be
         ///encoded.</summary>
-        public byte[] Bytes {
+        public byte[] Bytes
+        {
             get { return m_bytes; }
             set { m_bytes = value; }
         }
@@ -97,8 +98,7 @@ namespace RabbitMQ.Client
         ///<summary>Constructs an instance with null for its Bytes
         ///property.</summary>
         public BinaryTableValue()
-            : this(null)
-        {}
+            : this(null) { }
 
         ///<summary>Constructs an instance with the passed-in value
         ///for its Bytes property.</summary>

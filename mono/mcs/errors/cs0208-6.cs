@@ -2,11 +2,13 @@
 // Line: 8
 // Compiler options: -unsafe
 
-unsafe struct X {
-	string a;
-	static void Main () {
-		X x;
-		void* y = &x;
-	}
-}
+unsafe struct X
+{
+    string a;
 
+    static void Main()
+    {
+        X x;
+        void* y = &x;
+    }
+}

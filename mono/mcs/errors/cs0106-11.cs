@@ -2,6 +2,4 @@
 // Line: 6
 // Compiler option: -langversion:latest
 
-readonly interface I
-{
-}
+readonly interface I { }

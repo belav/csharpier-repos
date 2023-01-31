@@ -4,7 +4,5 @@
 
 public class C
 {
-	partial void Foo ()
-	{
-	}
+    partial void Foo() { }
 }

@@ -16,7 +16,8 @@ namespace System.Web.Http.ContentNegotiation
         public async Task Response_Contains_ContentType(string contentType)
         {
             // Arrange
-            MediaTypeWithQualityHeaderValue requestContentType = new MediaTypeWithQualityHeaderValue(contentType);
+            MediaTypeWithQualityHeaderValue requestContentType =
+                new MediaTypeWithQualityHeaderValue(contentType);
             MediaTypeHeaderValue responseContentType = null;
 
             // Act

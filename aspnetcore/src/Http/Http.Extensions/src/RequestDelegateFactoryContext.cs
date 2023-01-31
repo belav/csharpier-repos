@@ -48,6 +48,7 @@ internal sealed class RequestDelegateFactoryContext
     public bool ReadForm { get; set; }
     public bool ReadFormFile { get; set; }
     public ParameterInfo? FirstFormRequestBodyParameter { get; set; }
+
     // Properties for constructing and managing filters
     public List<Expression> ContextArgAccess { get; } = new();
     public Expression? MethodCall { get; set; }

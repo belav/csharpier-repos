@@ -3,10 +3,10 @@
 
 class Test
 {
-	static void Main ()
-	{
-		int? i;
-		int? j;
-		int? x = (i = 7) ?? j;
+    static void Main()
+    {
+        int? i;
+        int? j;
+        int? x = (i = 7) ?? j;
     }
 }

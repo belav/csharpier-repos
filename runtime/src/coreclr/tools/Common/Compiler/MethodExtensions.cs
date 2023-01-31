@@ -10,21 +10,28 @@ namespace ILCompiler
     {
         public static string GetRuntimeImportName(this EcmaMethod This)
         {
-            var decoded = This.GetDecodedCustomAttribute("System.Runtime", "RuntimeImportAttribute");
+            var decoded = This.GetDecodedCustomAttribute(
+                "System.Runtime",
+                "RuntimeImportAttribute"
+            );
             if (decoded == null)
                 return null;
 
             var decodedValue = decoded.Value;
 
             if (decodedValue.FixedArguments.Length != 0)
-                return (string)decodedValue.FixedArguments[decodedValue.FixedArguments.Length - 1].Value;
+                return (string)
+                    decodedValue.FixedArguments[decodedValue.FixedArguments.Length - 1].Value;
 
             return null;
         }
 
         public static string GetRuntimeImportDllName(this EcmaMethod This)
         {
-            var decoded = This.GetDecodedCustomAttribute("System.Runtime", "RuntimeImportAttribute");
+            var decoded = This.GetDecodedCustomAttribute(
+                "System.Runtime",
+                "RuntimeImportAttribute"
+            );
             if (decoded == null)
                 return null;
 
@@ -38,7 +45,10 @@ namespace ILCompiler
 
         public static string GetRuntimeExportName(this EcmaMethod This)
         {
-            var decoded = This.GetDecodedCustomAttribute("System.Runtime", "RuntimeExportAttribute");
+            var decoded = This.GetDecodedCustomAttribute(
+                "System.Runtime",
+                "RuntimeExportAttribute"
+            );
             if (decoded == null)
                 return null;
 
@@ -58,7 +68,10 @@ namespace ILCompiler
 
         public static string GetUnmanagedCallersOnlyExportName(this EcmaMethod This)
         {
-            var decoded = This.GetDecodedCustomAttribute("System.Runtime.InteropServices", "UnmanagedCallersOnlyAttribute");
+            var decoded = This.GetDecodedCustomAttribute(
+                "System.Runtime.InteropServices",
+                "UnmanagedCallersOnlyAttribute"
+            );
             if (decoded == null)
                 return null;
 
@@ -105,10 +118,14 @@ namespace ILCompiler
         public static bool NotCallableWithoutOwningEEType(this MethodDesc method)
         {
             TypeDesc owningType = method.OwningType;
-            return !method.Signature.IsStatic && /* Static methods don't have this */
-                !owningType.IsValueType && /* Value type instance methods take a ref to data */
-                !owningType.IsArrayTypeWithoutGenericInterfaces() && /* Type loader can make these at runtime */
-                (owningType is not MetadataType mdType || !mdType.IsModuleType) && /* Compiler parks some instance methods on the <Module> type */
+            return !method.Signature.IsStatic
+                && /* Static methods don't have this */
+                !owningType.IsValueType
+                && /* Value type instance methods take a ref to data */
+                !owningType.IsArrayTypeWithoutGenericInterfaces()
+                && /* Type loader can make these at runtime */
+                (owningType is not MetadataType mdType || !mdType.IsModuleType)
+                && /* Compiler parks some instance methods on the <Module> type */
                 !method.IsSharedByGenericInstantiations; /* Current impl limitation; can be lifted */
         }
     }

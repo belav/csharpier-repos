@@ -4,8 +4,6 @@
 
 using System;
 
-namespace TopNS
-{
-}
+namespace TopNS { }
 
 /// EOF

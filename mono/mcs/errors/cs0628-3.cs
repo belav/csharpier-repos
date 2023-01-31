@@ -4,14 +4,15 @@
 
 using System;
 
-internal sealed class Test {
-	protected string print_argv (string[] argv)
-	{
-		if (argv == null)
-			return "null";
-		else
-			return String.Join (":", argv);
-	}
+internal sealed class Test
+{
+    protected string print_argv(string[] argv)
+    {
+        if (argv == null)
+            return "null";
+        else
+            return String.Join(":", argv);
+    }
 
-	static void Main () { }
+    static void Main() { }
 }

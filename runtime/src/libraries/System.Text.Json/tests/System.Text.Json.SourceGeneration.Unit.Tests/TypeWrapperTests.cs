@@ -19,7 +19,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void MetadataLoadFilePathHandle()
         {
             // Create a MetadataReference from new code.
-            string referencedSource = @"
+            string referencedSource =
+                @"
             namespace ReferencedAssembly
             {
                 public class ReferencedType
@@ -30,7 +31,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             }";
 
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateCompilation(referencedSource);
+            Compilation referencedCompilation = CompilationHelper.CreateCompilation(
+                referencedSource
+            );
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage;
@@ -44,7 +47,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 referencedImage = ms.ToArray();
             }
 
-            string source = @"
+            string source =
+                @"
             using System.Text.Json.Serialization;
             using ReferencedAssembly;
 
@@ -63,18 +67,34 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
             }";
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage)
+            };
 
             // Compilation using the referenced image should fail if out MetadataLoadContext does not handle.
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation newCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation newCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
-            Assert.Empty(generatorDiags.Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error)));
-            Assert.Empty(newCompilation.GetDiagnostics().Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error)));
+            Assert.Empty(
+                generatorDiags.Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error))
+            );
+            Assert.Empty(
+                newCompilation
+                    .GetDiagnostics()
+                    .Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error))
+            );
 
             // Should find both types since compilation above was successful.
             Assert.Equal(2, generator.GetSerializableTypes().Count);
@@ -83,7 +103,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [Fact]
         public void CanGetAttributes()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Text.Json.Serialization;
 
@@ -134,7 +155,11 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation outCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation outCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Check base functionality of found types.
             Dictionary<string, Type> types = generator.GetSerializableTypes();
@@ -144,9 +169,22 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Assert.Equal("HelloWorld.MyType", foundType.FullName);
 
             // Check for ConstructorInfoWrapper attribute usage.
-            (string, string[])[] receivedCtorsWithAttributeNames = foundType.GetConstructors().Select(ctor => (ctor.DeclaringType.FullName, ctor.GetCustomAttributesData().Cast<CustomAttributeData>().Select(attributeData => attributeData.AttributeType.Name).ToArray())).ToArray();
+            (string, string[])[] receivedCtorsWithAttributeNames = foundType
+                .GetConstructors()
+                .Select(
+                    ctor =>
+                        (
+                            ctor.DeclaringType.FullName,
+                            ctor.GetCustomAttributesData()
+                                .Cast<CustomAttributeData>()
+                                .Select(attributeData => attributeData.AttributeType.Name)
+                                .ToArray()
+                        )
+                )
+                .ToArray();
             Assert.Equal(
-                new (string, string[])[] {
+                new (string, string[])[]
+                {
                     ("HelloWorld.MyType", new string[] { }),
                     ("HelloWorld.MyType", new string[] { "JsonConstructorAttribute" })
                 },
@@ -154,7 +192,21 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             );
 
             // Check for MethodInfoWrapper attribute usage.
-            (string, string[])[] receivedMethodsWithAttributeNames = foundType.GetMethods().Select(method => (method.Name, method.GetCustomAttributesData().Cast<CustomAttributeData>().Select(attributeData => attributeData.AttributeType.Name).ToArray())).Where(x => x.Item2.Any()).ToArray();
+            (string, string[])[] receivedMethodsWithAttributeNames = foundType
+                .GetMethods()
+                .Select(
+                    method =>
+                        (
+                            method.Name,
+                            method
+                                .GetCustomAttributesData()
+                                .Cast<CustomAttributeData>()
+                                .Select(attributeData => attributeData.AttributeType.Name)
+                                .ToArray()
+                        )
+                )
+                .Where(x => x.Item2.Any())
+                .ToArray();
             Assert.Equal(
                 new (string, string[])[] { ("MyMethod", new string[] { "ObsoleteAttribute" }) },
                 receivedMethodsWithAttributeNames
@@ -163,9 +215,24 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance;
 
             // Check for FieldInfoWrapper attribute usage.
-            (string, string[])[] receivedFieldsWithAttributeNames = foundType.GetFields(bindingFlags).Select(field => (field.Name, field.GetCustomAttributesData().Cast<CustomAttributeData>().Select(attributeData => attributeData.AttributeType.Name).ToArray())).Where(x => x.Item2.Any()).ToArray();
+            (string, string[])[] receivedFieldsWithAttributeNames = foundType
+                .GetFields(bindingFlags)
+                .Select(
+                    field =>
+                        (
+                            field.Name,
+                            field
+                                .GetCustomAttributesData()
+                                .Cast<CustomAttributeData>()
+                                .Select(attributeData => attributeData.AttributeType.Name)
+                                .ToArray()
+                        )
+                )
+                .Where(x => x.Item2.Any())
+                .ToArray();
             Assert.Equal(
-                new (string, string[])[] {
+                new (string, string[])[]
+                {
                     ("PublicDouble", new string[] { "JsonIncludeAttribute" }),
                     ("PublicChar", new string[] { "JsonPropertyNameAttribute" }),
                 },
@@ -173,9 +240,24 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             );
 
             // Check for PropertyInfoWrapper attribute usage.
-            (string, string[])[] receivedPropertyWithAttributeNames  = foundType.GetProperties(bindingFlags).Select(property => (property.Name, property.GetCustomAttributesData().Cast<CustomAttributeData>().Select(attributeData => attributeData.AttributeType.Name).ToArray())).Where(x => x.Item2.Any()).ToArray();
+            (string, string[])[] receivedPropertyWithAttributeNames = foundType
+                .GetProperties(bindingFlags)
+                .Select(
+                    property =>
+                        (
+                            property.Name,
+                            property
+                                .GetCustomAttributesData()
+                                .Cast<CustomAttributeData>()
+                                .Select(attributeData => attributeData.AttributeType.Name)
+                                .ToArray()
+                        )
+                )
+                .Where(x => x.Item2.Any())
+                .ToArray();
             Assert.Equal(
-                new (string, string[])[] {
+                new (string, string[])[]
+                {
                     ("PublicPropertyInt", new string[] { "JsonPropertyNameAttribute" }),
                     ("PublicPropertyString", new string[] { "JsonExtensionDataAttribute" }),
                 },
@@ -183,16 +265,31 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             );
 
             // Check for MemberInfoWrapper attribute usage.
-            (string, string[])[] receivedMembersWithAttributeNames = foundType.GetMembers().Select(member => (member.Name, member.GetCustomAttributesData().Cast<CustomAttributeData>().Select(attributeData => attributeData.AttributeType.Name).ToArray())).Where(x => x.Item2.Any()).ToArray();
+            (string, string[])[] receivedMembersWithAttributeNames = foundType
+                .GetMembers()
+                .Select(
+                    member =>
+                        (
+                            member.Name,
+                            member
+                                .GetCustomAttributesData()
+                                .Cast<CustomAttributeData>()
+                                .Select(attributeData => attributeData.AttributeType.Name)
+                                .ToArray()
+                        )
+                )
+                .Where(x => x.Item2.Any())
+                .ToArray();
             Assert.Equal(
-                new (string, string[])[] {
+                new (string, string[])[]
+                {
                     ("PublicDouble", new string[] { "JsonIncludeAttribute" }),
                     ("PublicChar", new string[] { "JsonPropertyNameAttribute" }),
-                    ("PrivateDouble", new string[] { "JsonIgnoreAttribute" } ),
+                    ("PrivateDouble", new string[] { "JsonIgnoreAttribute" }),
                     (".ctor", new string[] { "JsonConstructorAttribute" }),
                     ("PublicPropertyInt", new string[] { "JsonPropertyNameAttribute" }),
                     ("PublicPropertyString", new string[] { "JsonExtensionDataAttribute" }),
-                    ("PrivatePropertyInt", new string[] { "JsonIgnoreAttribute" } ),
+                    ("PrivatePropertyInt", new string[] { "JsonIgnoreAttribute" }),
                     ("MyMethod", new string[] { "ObsoleteAttribute" }),
                 },
                 receivedMembersWithAttributeNames
@@ -202,7 +299,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [Fact]
         public void VariousGenericSerializableTypesAreSupported()
         {
-            string source = @"
+            string source =
+                @"
             using System;
             using System.Collections.Generic;
             using System.Text.Json.Serialization;
@@ -239,11 +337,21 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             JsonSourceGenerator generator = new JsonSourceGenerator();
 
-            Compilation outCompilation = CompilationHelper.RunGenerators(compilation, out ImmutableArray<Diagnostic> generatorDiags, generator);
+            Compilation outCompilation = CompilationHelper.RunGenerators(
+                compilation,
+                out ImmutableArray<Diagnostic> generatorDiags,
+                generator
+            );
 
             // Make sure compilation was successful.
-            Assert.Empty(generatorDiags.Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error)));
-            Assert.Empty(outCompilation.GetDiagnostics().Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error)));
+            Assert.Empty(
+                generatorDiags.Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error))
+            );
+            Assert.Empty(
+                outCompilation
+                    .GetDiagnostics()
+                    .Where(diag => diag.Severity.Equals(DiagnosticSeverity.Error))
+            );
 
             Dictionary<string, Type> types = generator.GetSerializableTypes();
             Assert.Equal(4, types.Count);
@@ -252,20 +360,41 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Type originalType = typeof(Dictionary<string, string>);
             Type foundType = types[originalType.FullName];
             Assert.Equal(originalType, foundType, TestComparerForType.Instance);
-            Assert.Equal(originalType.GetGenericArguments(), foundType.GetGenericArguments(), TestComparerForType.Instance);
+            Assert.Equal(
+                originalType.GetGenericArguments(),
+                foundType.GetGenericArguments(),
+                TestComparerForType.Instance
+            );
 
             // Check for generic type definition.
             Type foundGenericTypeDefinition = foundType.GetGenericTypeDefinition();
             Type originalGenericTypeDefinition = originalType.GetGenericTypeDefinition();
-            Assert.Equal(originalGenericTypeDefinition, foundGenericTypeDefinition, TestComparerForType.Instance);
-            Assert.Equal(originalGenericTypeDefinition.GetGenericArguments(), foundGenericTypeDefinition.GetGenericArguments(), TestComparerForType.Instance);
+            Assert.Equal(
+                originalGenericTypeDefinition,
+                foundGenericTypeDefinition,
+                TestComparerForType.Instance
+            );
+            Assert.Equal(
+                originalGenericTypeDefinition.GetGenericArguments(),
+                foundGenericTypeDefinition.GetGenericArguments(),
+                TestComparerForType.Instance
+            );
 
             // Check for nested generic class.
-            foundType = types.Values.Single(t => t.FullName.Contains("MyClass") && t.FullName.Contains("NestedGenericClass"));
+            foundType = types.Values.Single(
+                t => t.FullName.Contains("MyClass") && t.FullName.Contains("NestedGenericClass")
+            );
             Assert.Equal("NestedGenericClass`1", foundType.Name);
-            Assert.Equal($"HelloWorld.MyClass+NestedGenericClass`1[[{typeof(string).AssemblyQualifiedName}]]", foundType.FullName);
+            Assert.Equal(
+                $"HelloWorld.MyClass+NestedGenericClass`1[[{typeof(string).AssemblyQualifiedName}]]",
+                foundType.FullName
+            );
             Assert.True(foundType.IsGenericType);
-            Assert.Equal(new[] { typeof(string) }, foundType.GetGenericArguments(), TestComparerForType.Instance);
+            Assert.Equal(
+                new[] { typeof(string) },
+                foundType.GetGenericArguments(),
+                TestComparerForType.Instance
+            );
 
             // Check for declaring type.
             foundType = foundType.DeclaringType;
@@ -274,18 +403,38 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             Assert.False(foundType.IsGenericType);
 
             // Check for class nested in generic class.
-            foundType = types.Values.Single(t => t.FullName.Contains("MyGenericClass") && t.FullName.Contains("NestedClass"));
+            foundType = types.Values.Single(
+                t => t.FullName.Contains("MyGenericClass") && t.FullName.Contains("NestedClass")
+            );
             Assert.Equal("NestedClass", foundType.Name);
-            Assert.Equal($"HelloWorld.MyGenericClass`1+NestedClass[[{typeof(string).AssemblyQualifiedName}]]", foundType.FullName);
+            Assert.Equal(
+                $"HelloWorld.MyGenericClass`1+NestedClass[[{typeof(string).AssemblyQualifiedName}]]",
+                foundType.FullName
+            );
             Assert.True(foundType.IsGenericType);
-            Assert.Equal(new[] { typeof(string) }, foundType.GetGenericArguments(), TestComparerForType.Instance);
+            Assert.Equal(
+                new[] { typeof(string) },
+                foundType.GetGenericArguments(),
+                TestComparerForType.Instance
+            );
 
             // Check for generic class nested in generic class.
-            foundType = types.Values.Single(t => t.FullName.Contains("MyGenericClass") && t.FullName.Contains("NestedGenericClass"));
+            foundType = types.Values.Single(
+                t =>
+                    t.FullName.Contains("MyGenericClass")
+                    && t.FullName.Contains("NestedGenericClass")
+            );
             Assert.Equal("NestedGenericClass`1", foundType.Name);
-            Assert.Equal($"HelloWorld.MyGenericClass`1+NestedGenericClass`1[[{typeof(string).AssemblyQualifiedName}],[{typeof(int).AssemblyQualifiedName}]]", foundType.FullName);
+            Assert.Equal(
+                $"HelloWorld.MyGenericClass`1+NestedGenericClass`1[[{typeof(string).AssemblyQualifiedName}],[{typeof(int).AssemblyQualifiedName}]]",
+                foundType.FullName
+            );
             Assert.True(foundType.IsGenericType);
-            Assert.Equal(new[] { typeof(string), typeof(int) }, foundType.GetGenericArguments(), TestComparerForType.Instance);
+            Assert.Equal(
+                new[] { typeof(string), typeof(int) },
+                foundType.GetGenericArguments(),
+                TestComparerForType.Instance
+            );
 
             // Check for generic declaring type.
             foundType = foundType.DeclaringType;
@@ -299,21 +448,23 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         sealed class TestComparerForType : EqualityComparer<Type>
         {
             public static TestComparerForType Instance { get; } = new TestComparerForType();
+
             public override bool Equals(Type? x, Type? y)
             {
                 if (x is null || y is null)
                 {
                     return x == y;
                 }
-                return x.Name == y.Name &&
-                    x.FullName == y.FullName &&
-                    x.AssemblyQualifiedName == y.AssemblyQualifiedName &&
-                    Instance.Equals(x.DeclaringType, y.DeclaringType) &&
-                    x.IsGenericType == y.IsGenericType &&
-                    x.IsGenericParameter == y.IsGenericParameter &&
-                    x.IsGenericTypeDefinition == y.IsGenericTypeDefinition &&
-                    x.ContainsGenericParameters == y.ContainsGenericParameters;
+                return x.Name == y.Name
+                    && x.FullName == y.FullName
+                    && x.AssemblyQualifiedName == y.AssemblyQualifiedName
+                    && Instance.Equals(x.DeclaringType, y.DeclaringType)
+                    && x.IsGenericType == y.IsGenericType
+                    && x.IsGenericParameter == y.IsGenericParameter
+                    && x.IsGenericTypeDefinition == y.IsGenericTypeDefinition
+                    && x.ContainsGenericParameters == y.ContainsGenericParameters;
             }
+
             public override int GetHashCode(Type obj) => obj.Name.GetHashCode();
         }
     }

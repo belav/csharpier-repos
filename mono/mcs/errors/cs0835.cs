@@ -5,8 +5,8 @@ using System.Linq.Expressions;
 
 class C
 {
-	public void Foo ()
-	{
-		Expression<string> e = () => "a";
-	}
+    public void Foo()
+    {
+        Expression<string> e = () => "a";
+    }
 }

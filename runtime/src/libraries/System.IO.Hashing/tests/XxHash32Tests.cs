@@ -12,9 +12,7 @@ namespace System.IO.Hashing.Tests
         private static readonly byte[] s_emptyHashValue = new byte[] { 0x02, 0xCC, 0x5D, 0x05 };
 
         public XxHash32Tests()
-            : base(s_emptyHashValue)
-        {
-        }
+            : base(s_emptyHashValue) { }
 
         public static IEnumerable<object[]> TestCases
         {
@@ -31,7 +29,8 @@ namespace System.IO.Hashing.Tests
         }
 
         private const string DotNetHashesThis = ".NET Hashes This!";
-        private const string DotNetHashesThis3 = DotNetHashesThis + DotNetHashesThis + DotNetHashesThis;
+        private const string DotNetHashesThis3 =
+            DotNetHashesThis + DotNetHashesThis + DotNetHashesThis;
         private const string DotNetNCHashing = ".NET now has non-crypto hashing";
         private const string DotNetNCHashing3 = DotNetNCHashing + DotNetNCHashing + DotNetNCHashing;
         private const string SixteenBytes = ".NET Hashes This";
@@ -46,64 +45,66 @@ namespace System.IO.Hashing.Tests
                 new TestCase(
                     "Nobody inspects the spammish repetition",
                     "Nobody inspects the spammish repetition"u8.ToArray(),
-                    "E2293B2F"),
+                    "E2293B2F"
+                ),
                 //https://asecuritysite.com/encryption/xxHash, Example 2
                 new TestCase(
                     "The quick brown fox jumps over the lazy dog",
                     "The quick brown fox jumps over the lazy dog"u8.ToArray(),
-                    "E85EA4DE"),
+                    "E85EA4DE"
+                ),
                 //https://asecuritysite.com/encryption/xxHash, Example 3
                 new TestCase(
                     "The quick brown fox jumps over the lazy dog.",
                     "The quick brown fox jumps over the lazy dog."u8.ToArray(),
-                    "68D039C8"),
-
+                    "68D039C8"
+                ),
                 // Manual exploration to force boundary conditions in code coverage.
                 // Output values produced by existing tools.
 
                 // The "in three pieces" test causes this to build up in the accumulator every time.
-                new TestCase(
-                    "abc",
-                    "abc"u8.ToArray(),
-                    "32D153FF"),
+                new TestCase("abc", "abc"u8.ToArray(), "32D153FF"),
                 // Accumulates every time.
-                new TestCase(
-                    "123456",
-                    "313233343536",
-                    "B7014066"),
+                new TestCase("123456", "313233343536", "B7014066"),
                 // In the 3 pieces test, the third call to Append fills and process the holdback,
                 // then stores the remainder.
                 new TestCase(
                     "12345678901234567890",
                     "3132333435363738393031323334353637383930",
-                    "2D0C3D1B"),
+                    "2D0C3D1B"
+                ),
                 // Same as above, but ends up with a byte that doesn't align to uints.
                 new TestCase(
                     "123456789012345678901",
                     "313233343536373839303132333435363738393031",
-                    "8ED1B04E"),
+                    "8ED1B04E"
+                ),
                 // 17 * 3 bytes long, in the "in three pieces" test each call to Append processes
                 // a lane and holds one byte.
                 new TestCase(
                     $"{DotNetHashesThis} (x3)",
                     Encoding.ASCII.GetBytes(DotNetHashesThis3),
-                    "1FE08A04"),
+                    "1FE08A04"
+                ),
                 // 31 * 3 bytes long.  In the "in three pieces" test the later calls to Append call
                 // into ProcessStripe with unaligned starts.
                 new TestCase(
                     $"{DotNetNCHashing} (x3)",
                     Encoding.ASCII.GetBytes(DotNetNCHashing3),
-                    "65242024"),
+                    "65242024"
+                ),
                 // stripe size
                 new TestCase(
                     $"{SixteenBytes} (x3)",
                     Encoding.ASCII.GetBytes(SixteenBytes3),
-                    "29DA7472"),
+                    "29DA7472"
+                ),
                 // 8 * 3 bytes, filling the holdback buffer exactly on the second Append call.
                 new TestCase(
                     $"{EightBytes} (x3)",
                     Encoding.ASCII.GetBytes(EightBytes3),
-                    "5DF7D6C0"),
+                    "5DF7D6C0"
+                ),
             };
 
         public static IEnumerable<object[]> LargeTestCases
@@ -128,7 +129,8 @@ namespace System.IO.Hashing.Tests
                     "EEEEE... (10GB)",
                     (byte)'E',
                     10L * 1024 * 1024 * 1024, // 10 GB
-                    "22CBC3AA"),
+                    "22CBC3AA"
+                ),
             };
 
         protected override NonCryptographicHashAlgorithm CreateInstance() => new XxHash32();
@@ -140,8 +142,11 @@ namespace System.IO.Hashing.Tests
         protected override int StaticOneShot(ReadOnlySpan<byte> source, Span<byte> destination) =>
             XxHash32.Hash(source, destination);
 
-        protected override bool TryStaticOneShot(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten) =>
-            XxHash32.TryHash(source, destination, out bytesWritten);
+        protected override bool TryStaticOneShot(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        ) => XxHash32.TryHash(source, destination, out bytesWritten);
 
         [Theory]
         [MemberData(nameof(TestCases))]

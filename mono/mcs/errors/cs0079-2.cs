@@ -3,16 +3,18 @@
 
 using System;
 
-public class Foo {
-	EventHandler event2;
+public class Foo
+{
+    EventHandler event2;
 
-	public Foo ()
-	{
-		Event2 = null;
-	}
+    public Foo()
+    {
+        Event2 = null;
+    }
 
-	public event EventHandler Event2 {
-		add { event2 += value; }
-		remove {event2 -= value; }
-	}
+    public event EventHandler Event2
+    {
+        add { event2 += value; }
+        remove { event2 -= value; }
+    }
 }

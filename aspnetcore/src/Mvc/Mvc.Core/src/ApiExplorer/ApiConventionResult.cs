@@ -16,10 +16,13 @@ public sealed class ApiConventionResult
     /// Initializes a new instance of <see cref="ApiConventionResult"/>.
     /// </summary>
     /// <param name="responseMetadataProviders">The sequence of <see cref="IApiResponseMetadataProvider"/> that are associated with the action.</param>
-    public ApiConventionResult(IReadOnlyList<IApiResponseMetadataProvider> responseMetadataProviders)
+    public ApiConventionResult(
+        IReadOnlyList<IApiResponseMetadataProvider> responseMetadataProviders
+    )
     {
-        ResponseMetadataProviders = responseMetadataProviders ??
-            throw new ArgumentNullException(nameof(responseMetadataProviders));
+        ResponseMetadataProviders =
+            responseMetadataProviders
+            ?? throw new ArgumentNullException(nameof(responseMetadataProviders));
     }
 
     /// <summary>
@@ -30,9 +33,12 @@ public sealed class ApiConventionResult
     internal static bool TryGetApiConvention(
         MethodInfo method,
         ApiConventionTypeAttribute[] apiConventionAttributes,
-        [NotNullWhen(true)] out ApiConventionResult? result)
+        [NotNullWhen(true)] out ApiConventionResult? result
+    )
     {
-        var apiConventionMethodAttribute = method.GetCustomAttribute<ApiConventionMethodAttribute>(inherit: true);
+        var apiConventionMethodAttribute = method.GetCustomAttribute<ApiConventionMethodAttribute>(
+            inherit: true
+        );
         var conventionMethod = apiConventionMethodAttribute?.Method;
         if (conventionMethod == null)
         {
@@ -41,7 +47,8 @@ public sealed class ApiConventionResult
 
         if (conventionMethod != null)
         {
-            var metadataProviders = conventionMethod.GetCustomAttributes(inherit: false)
+            var metadataProviders = conventionMethod
+                .GetCustomAttributes(inherit: false)
                 .OfType<IApiResponseMetadataProvider>()
                 .ToArray();
 
@@ -53,11 +60,16 @@ public sealed class ApiConventionResult
         return false;
     }
 
-    private static MethodInfo? GetConventionMethod(MethodInfo method, ApiConventionTypeAttribute[] apiConventionAttributes)
+    private static MethodInfo? GetConventionMethod(
+        MethodInfo method,
+        ApiConventionTypeAttribute[] apiConventionAttributes
+    )
     {
         foreach (var attribute in apiConventionAttributes)
         {
-            var conventionMethods = attribute.ConventionType.GetMethods(BindingFlags.Public | BindingFlags.Static);
+            var conventionMethods = attribute.ConventionType.GetMethods(
+                BindingFlags.Public | BindingFlags.Static
+            );
             foreach (var conventionMethod in conventionMethods)
             {
                 if (ApiConventionMatcher.IsMatch(method, conventionMethod))

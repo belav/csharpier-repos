@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+
 internal class Buffer
 {
     private byte[] _buffer;
@@ -38,7 +39,6 @@ internal class Buffer
     }
 }
 
-
 internal class Test_bug595776
 {
     private static int Main()
@@ -70,5 +70,3 @@ internal class Test_bug595776
         }
     }
 }
-
-

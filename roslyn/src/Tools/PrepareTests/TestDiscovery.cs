@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Threading;
 
 namespace PrepareTests;
+
 internal class TestDiscovery
 {
     public static bool RunDiscovery(string repoRootDirectory, string dotnetPath, bool isUnix)
@@ -26,14 +27,17 @@ internal class TestDiscovery
         var success = true;
         var stopwatch = new Stopwatch();
         stopwatch.Start();
-        Parallel.ForEach(assemblies, assembly =>
-        {
-            var workerPath = assembly.Contains("net472")
-                ? dotnetFrameworkWorker
-                : dotnetCoreWorker;
+        Parallel.ForEach(
+            assemblies,
+            assembly =>
+            {
+                var workerPath = assembly.Contains("net472")
+                    ? dotnetFrameworkWorker
+                    : dotnetCoreWorker;
 
-            success &= RunWorker(dotnetPath, workerPath, assembly);
-        });
+                success &= RunWorker(dotnetPath, workerPath, assembly);
+            }
+        );
         stopwatch.Stop();
 
         Console.WriteLine($"Discovered tests in {stopwatch.Elapsed}");
@@ -43,9 +47,23 @@ internal class TestDiscovery
     static (string dotnetCoreWorker, string dotnetFrameworkWorker) GetWorkers(string binDirectory)
     {
         var testDiscoveryWorkerFolder = Path.Combine(binDirectory, "TestDiscoveryWorker");
-        var configuration = Directory.Exists(Path.Combine(testDiscoveryWorkerFolder, "Debug")) ? "Debug" : "Release";
-        return (Path.Combine(testDiscoveryWorkerFolder, configuration, "net7.0", "TestDiscoveryWorker.dll"),
-                Path.Combine(testDiscoveryWorkerFolder, configuration, "net472", "TestDiscoveryWorker.exe"));
+        var configuration = Directory.Exists(Path.Combine(testDiscoveryWorkerFolder, "Debug"))
+            ? "Debug"
+            : "Release";
+        return (
+            Path.Combine(
+                testDiscoveryWorkerFolder,
+                configuration,
+                "net7.0",
+                "TestDiscoveryWorker.dll"
+            ),
+            Path.Combine(
+                testDiscoveryWorkerFolder,
+                configuration,
+                "net472",
+                "TestDiscoveryWorker.exe"
+            )
+        );
     }
 
     static bool RunWorker(string dotnetPath, string pathToWorker, string pathToAssembly)
@@ -63,7 +81,12 @@ internal class TestDiscovery
             pipeClient.StartInfo.FileName = pathToWorker;
         }
 
-        using (var pipeServer = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
+        using (
+            var pipeServer = new AnonymousPipeServerStream(
+                PipeDirection.Out,
+                HandleInheritability.Inheritable
+            )
+        )
         {
             // Pass the client process a handle to the server.
             arguments.Add(pipeServer.GetClientHandleAsString());
@@ -100,7 +123,9 @@ internal class TestDiscovery
 
     private static List<string> GetAssemblies(string binDirectory, bool isUnix)
     {
-        var unitTestAssemblies = Directory.GetFiles(binDirectory, "*.UnitTests.dll", SearchOption.AllDirectories).Where(ShouldInclude);
+        var unitTestAssemblies = Directory
+            .GetFiles(binDirectory, "*.UnitTests.dll", SearchOption.AllDirectories)
+            .Where(ShouldInclude);
         return unitTestAssemblies.ToList();
 
         bool ShouldInclude(string path)

@@ -3,11 +3,15 @@
 
 using System;
 
-class Global {
-	static void Main() {
-		Console.Write(Test1((decimal?)2));
-	}	
-	static string Test1(int? value) {
-		return "ok";
-	}
+class Global
+{
+    static void Main()
+    {
+        Console.Write(Test1((decimal?)2));
+    }
+
+    static string Test1(int? value)
+    {
+        return "ok";
+    }
 }

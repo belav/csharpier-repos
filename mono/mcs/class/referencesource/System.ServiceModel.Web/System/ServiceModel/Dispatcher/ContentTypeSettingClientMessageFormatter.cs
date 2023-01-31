@@ -22,11 +22,16 @@ namespace System.ServiceModel.Dispatcher
         IClientMessageFormatter innerFormatter;
         string outgoingContentType;
 
-        public ContentTypeSettingClientMessageFormatter(string outgoingContentType, IClientMessageFormatter innerFormatter)
+        public ContentTypeSettingClientMessageFormatter(
+            string outgoingContentType,
+            IClientMessageFormatter innerFormatter
+        )
         {
             if (outgoingContentType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("outgoingContentType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "outgoingContentType"
+                );
             }
             if (innerFormatter == null)
             {
@@ -61,7 +66,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
-            if (OperationContext.Current != null && OperationContext.Current.HasOutgoingMessageProperties)
+            if (
+                OperationContext.Current != null
+                && OperationContext.Current.HasOutgoingMessageProperties
+            )
             {
                 if (string.IsNullOrEmpty(WebOperationContext.Current.OutgoingRequest.ContentType))
                 {
@@ -75,7 +83,7 @@ namespace System.ServiceModel.Dispatcher
                 HttpRequestMessageProperty httpProperty;
                 if (prop != null)
                 {
-                    httpProperty = (HttpRequestMessageProperty) prop;
+                    httpProperty = (HttpRequestMessageProperty)prop;
                 }
                 else
                 {

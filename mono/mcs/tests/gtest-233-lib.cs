@@ -6,13 +6,14 @@ using System.ComponentModel;
 
 public class MyClass<TItem>
 {
-	public MyClass() { }
+    public MyClass() { }
 
-	public event ListChangedEventHandler ListChanged;
-	public void AddListChangedEventHandler (ListChangedEventHandler handler)
-	{
-		ListChanged += handler;
-	}
+    public event ListChangedEventHandler ListChanged;
 
-	protected void OnListChanged (ListChangedEventArgs e)  {}
+    public void AddListChangedEventHandler(ListChangedEventHandler handler)
+    {
+        ListChanged += handler;
+    }
+
+    protected void OnListChanged(ListChangedEventArgs e) { }
 }

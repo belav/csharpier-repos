@@ -3,8 +3,8 @@
 
 class X
 {
-	static void Main ()
-	{
-		const int b = true ? 1 : b;
-	}
+    static void Main()
+    {
+        const int b = true ? 1 : b;
+    }
 }
